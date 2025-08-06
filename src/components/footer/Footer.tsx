@@ -7,7 +7,7 @@ const footerLinks: { href: Route; label: string }[] = [
   // { href: '/kjopsbetingelser', label: 'Kjøpsbetingelser' },
 ];
 
-export function Footer() {
+export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (

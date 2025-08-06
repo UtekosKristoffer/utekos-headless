@@ -2,61 +2,53 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
-import type { MenuItem } from "@/types/shopify";
+import { useReducer, useEffect } from "react";
+import { MenuIcon } from "lucide-react";
 
-// Importer de selvstendige komponentene
-import { HeaderLogo } from "./HeaderLogo";
-import { DesktopNavigation } from "./DesktopNavigation";
-import { MobileMenuPanel } from "./MobileMenuPanel";
-import { SearchDialog } from "./SearchDialog";
-import { CartDrawer } from "@/components/cart/CartDrawer"; // Den nye alt-i-ett-komponenten
-import { Button } from "@/components/ui/button"; // Vi trenger Button for mobilmeny-trigger
-import { MenuIcon } from "lucide-react"; // Ikon for mobilmeny
+import Button from "@/Components/UI/button";
+import menuReducer from "@/Helpers/menuReducer";
+import HeaderLogo from "./HeaderLogo";
+import DesktopNavigation from "./DesktopNavigation";
+import MobileMenuPanel from "./MobileMenuPanel";
+import SearchDialog from "./SearchDialog";
+import CartDrawer from "../Cart/CartDrawer";
 
-export function Header({ menu }: { menu: MenuItem[] }) {
+function Header({ menu }: { menu: MenuItem[] }) {
+  const [state, dispatch] = useReducer(menuReducer, { status: "CLOSED" });
   const pathname = usePathname();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Denne effekten lukker mobilmenyen automatisk når brukeren navigerer til en ny side.
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      setIsMobileMenuOpen(false);
-    }
+    dispatch({ type: "CLOSE_MENU" });
   }, [pathname]);
 
-  // Denne effekten forhindrer scrolling på body når mobilmenyen er åpen.
   useEffect(() => {
-    if (isMobileMenuOpen) {
+    if (state.status === "OPEN") {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
     }
+
     return () => {
-      document.body.style.overflow = "unset"; // Rydder opp når komponenten fjernes
+      document.body.style.overflow = "unset";
     };
-  }, [isMobileMenuOpen]);
+  }, [state.status]);
 
   return (
     <>
       <header className="bg-background sticky top-0 z-50 rounded-b-xl border-b border-white/10 shadow-lg">
         <div className="container mx-auto flex items-center justify-between px-4 py-3 sm:px-8">
           <HeaderLogo />
-
-          {/* Vises kun på store skjermer */}
           <DesktopNavigation menu={menu} />
 
-          {/* Container for alle "handlings-ikoner" */}
           <div className="flex items-center gap-2">
             <SearchDialog />
             <CartDrawer />
 
-            {/* Mobilmeny-triggeren er nå en del av Header, og styrer MobileMenuPanel */}
             <div className="lg:hidden">
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setIsMobileMenuOpen(true)}
+                onClick={() => dispatch({ type: "OPEN_MENU" })}
                 aria-label="Åpne meny"
               >
                 <MenuIcon className="size-6" />
@@ -66,12 +58,19 @@ export function Header({ menu }: { menu: MenuItem[] }) {
         </div>
       </header>
 
-      {/* Selve mobilmeny-panelet, som styres av 'isMobileMenuOpen'-tilstanden */}
       <MobileMenuPanel
         menu={menu}
-        isOpen={isMobileMenuOpen}
-        onOpenChange={setIsMobileMenuOpen}
+        isOpen={state.status === "OPEN"}
+        onOpenChange={(isOpen) => {
+          if (isOpen) {
+            dispatch({ type: "OPEN_MENU" });
+          } else {
+            dispatch({ type: "CLOSE_MENU" });
+          }
+        }}
       />
     </>
   );
 }
+
+export default Header;

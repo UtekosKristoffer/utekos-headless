@@ -1,7 +1,7 @@
 // src/app/actions/search.ts
 "use server";
 
-import { searchProducts } from "@/lib/shopify/queries/searchProducts";
+import searchProducts from "@/Lib/Server/Queries/searchProducts";
 
 export default async function searchAction(formData: FormData) {
   const query = formData.get("query") as string;

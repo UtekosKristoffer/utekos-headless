@@ -4,12 +4,10 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { MenuItem } from "@/types/shopify";
 import type { Route } from "next";
 import type { ComponentRef } from "react";
-import { cn } from "@/lib/utils";
+import cn from "@/Helpers/cn";
 
-// Importer de nye byggeklossene fra Shadcn
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -18,7 +16,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuContent,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
+} from "@/Components/UI/navigation-menu";
 
 function normalizeShopifyUrl(url: string): string {
   try {
@@ -28,7 +26,7 @@ function normalizeShopifyUrl(url: string): string {
   }
 }
 
-export function DesktopNavigation({ menu }: { menu: MenuItem[] }) {
+export default function DesktopNavigation({ menu }: { menu: MenuItem[] }) {
   const pathname = usePathname();
 
   return (

@@ -1,20 +1,20 @@
 // src/app/products/[handle]/page.tsx
 
-import { getProductByHandle } from "@/lib/shopify";
+import getProductByHandle from "@/Lib/Server/Queries/getProductByHandle";
 import { notFound } from "next/navigation";
-import { ProductPageClient } from "@/components/product/ProductPageClient";
+import ProductPageClient from "@/Components/Products/ProductPageClient";
 import type { Metadata } from "next"; // Importer Metadata-typen
 
 type Props = {
   params: { handle: string };
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { handle } = params;
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { handle } = await props.params;
   const product = await getProductByHandle(handle);
 
   if (!product) {
-    return notFound();
+    notFound();
   }
 
   return {
@@ -25,7 +25,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: product.descriptionHtml,
       images: [
         {
-          // --- KORRIGERT LINJE ---
           url: product.media.edges[0]?.node.image.url,
           width: product.media.edges[0]?.node.image.width || 800,
           height: product.media.edges[0]?.node.image.height || 600,
@@ -35,16 +34,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
   };
 }
-// Din eksisterende Server Component
-export default async function ProductPage({ params }: Props) {
-  const { handle } = params;
+
+export default async function ProductPage(props: Props) {
+  const { handle } = await props.params;
   const product = await getProductByHandle(handle);
 
   if (!product) {
     notFound();
   }
-
-  // Du kan fjerne console.log herfra når du er ferdig med debugging
 
   return <ProductPageClient product={product} />;
 }

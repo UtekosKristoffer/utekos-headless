@@ -4,9 +4,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { Route } from "next";
-import type { MenuItem } from "@/types/shopify";
 
-function normalizeShopifyUrl(url: string) {
+function normalizeUrl(url: string) {
   try {
     return new URL(url).pathname;
   } catch (e) {
@@ -27,7 +26,7 @@ export function MobileMenuItem({ item }: { item: MenuItem }) {
     <li>
       <div className="flex items-center justify-between">
         <Link
-          href={normalizeShopifyUrl(item.url) as Route}
+          href={normalizeUrl(item.url) as Route}
           className="flex-grow p-4 text-foreground-on-dark/80"
         >
           {item.title}

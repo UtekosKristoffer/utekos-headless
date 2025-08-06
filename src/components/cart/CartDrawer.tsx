@@ -1,13 +1,7 @@
 // Fil: components/CartDrawer.tsx
 "use client";
 
-import type { Route } from "next";
-import { useTransition } from "react";
-import type { ShopifyCart } from "@/types/shopify";
-import { ShoppingBagIcon } from "lucide-react";
-import { updateItemQuantity, clearCart } from "@/app/actions";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { ShoppingBagIcon, Minus, Plus } from "lucide-react";
 import {
   Drawer,
   DrawerContent,
@@ -15,30 +9,15 @@ import {
   DrawerTitle,
   DrawerDescription,
   DrawerFooter,
-  DrawerClose,
   DrawerTrigger,
-} from "@/components/ui/drawer";
-import { useCart } from "@/components/cart/CartProvider";
-import { Minus, Plus } from "lucide-react";
+} from "@/Components/UI/drawer";
 
-export function CartDrawer() {
-  const { cart } = useCart();
-  const [isPending, startTransition] = useTransition();
+import Button from "@/Components/UI/button";
+import useCartDrawer from "@/Hooks/useCartDrawer";
 
-  const handleQuantityUpdate = (lineId: string, quantity: number) => {
-    startTransition(() => {
-      updateItemQuantity(null, { lineId, quantity });
-    });
-  };
-
-  const handleClearCart = () => {
-    startTransition(() => {
-      clearCart();
-    });
-  };
-
-  const itemCount = cart?.totalQuantity || 0;
-  const isCartEmpty = !cart || cart.lines.edges.length === 0;
+function CartDrawer() {
+  const { cart, itemCount, isCartEmpty, isPending, handleQuantityUpdate } =
+    useCartDrawer();
 
   return (
     <Drawer direction="right">
@@ -72,7 +51,7 @@ export function CartDrawer() {
             className="p-4 overflow-y-auto bg-background"
             style={{ maxHeight: "60vh" }}
           >
-            {!isCartEmpty && (
+            {!isCartEmpty && cart && (
               <ul className="space-y-4">
                 {cart.lines.edges.map(({ node: line }) => {
                   const unitPrice = parseFloat(line.merchandise.price.amount);
@@ -112,9 +91,7 @@ export function CartDrawer() {
                         <Button
                           variant={"outline"}
                           size="icon"
-                          onClick={() =>
-                            handleQuantityUpdate(line.id, line.quantity + 1)
-                          }
+                          onClick={() => (line.id, line.quantity + 1)}
                           disabled={isPending}
                           className="size-6 shrink-0 rounded-full"
                         >
@@ -147,38 +124,11 @@ export function CartDrawer() {
               </ul>
             )}
           </div>
-
-          {/* Footer med oppsummering og knapper */}
-          {!isCartEmpty && (
-            <DrawerFooter className="border-t pt-4">
-              <div className="space-y-3">
-                <div className="flex justify-between text-lg font-semibold">
-                  <span>Subtotal:</span>
-                  <span>
-                    {cart.cost.totalAmount.amount}{" "}
-                    {cart.cost.totalAmount.currencyCode}
-                  </span>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <DrawerClose asChild>
-                    <Button variant={"outline"}>Fortsett å handle</Button>
-                  </DrawerClose>
-                  <Button
-                    onClick={handleClearCart}
-                    disabled={isPending}
-                    variant={"outline"}
-                  >
-                    Tøm kurv
-                  </Button>
-                </div>
-                <Button asChild variant={"outline"}>
-                  <Link href={cart.checkoutUrl as Route}>Gå til kassen</Link>
-                </Button>
-              </div>
-            </DrawerFooter>
-          )}
+          {!isCartEmpty && <DrawerFooter />}
         </div>
       </DrawerContent>
     </Drawer>
   );
 }
+
+export default CartDrawer;

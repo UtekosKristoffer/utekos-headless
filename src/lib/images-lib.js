@@ -1,4 +1,4 @@
-import imageManifest from "@/lib/image-manifest.json";
+import imageManifest from "@/Lib/image-manifest.json";
 
 // Hent ut de kategoriene du trenger
 const blueImgs = imageManifest.Blue;

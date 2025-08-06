@@ -2,21 +2,24 @@
 "use client";
 
 import * as React from "react";
+
+import type { Route } from "next";
+
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useDebounce } from "use-debounce";
 import Link from "next/link";
-import type { Route } from "next";
+import Button from "@/Components/UI/button";
+
+import { SearchIcon, CornerDownLeft } from "lucide-react";
 import { IconArrowRight } from "@tabler/icons-react";
-import { CornerDownLeft, SearchIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/Components/UI/dialog";
 import {
   Command,
   CommandEmpty,
   CommandInput,
   CommandList,
-} from "@/components/ui/command";
+} from "@/Components/UI/command";
 import {
   Sidebar,
   SidebarContent,
@@ -27,12 +30,9 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
+  SidebarProvider, // VIKTIG: Importer Provider
   SidebarSeparator,
-} from "@/components/ui/sidebar";
-import { SearchForm } from "../ui/search-form";
-
-// Import Types
-import type { ShopifyProduct } from "@/types/shopify";
+} from "@/Components/UI/sidebar";
 
 // --- Constants ---
 const SIDEBAR_WIDTH = "36rem";
@@ -50,13 +50,12 @@ const defaultNavData = {
   ],
 };
 
-export function SearchDialog() {
+function SearchDialog() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [debouncedQuery] = useDebounce(query, 300);
   const [results, setResults] = useState<ShopifyProduct[]>([]);
   const router = useRouter();
-
 
   useEffect(() => {
     if (debouncedQuery.length < 2) {
@@ -79,13 +78,11 @@ export function SearchDialog() {
     fetchResults();
   }, [debouncedQuery]);
 
-  // Handles selecting an item from the list
   const handleSelect = (url: string) => {
     router.push(url as Route);
     setOpen(false);
   };
 
-  // Effect to handle keyboard shortcut (Cmd/Ctrl + K)
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === SIDEBAR_KEYBOARD_SHORTCUT && (e.metaKey || e.ctrlKey)) {
@@ -117,89 +114,91 @@ export function SearchDialog() {
         className="p-0 gap-0 overflow-hidden"
         style={{ width: SIDEBAR_WIDTH, maxWidth: "90vw" }}
       >
-        <Sidebar className="h-auto">
-          <SidebarHeader className="p-0 border-b">
-            <Command shouldFilter={false}>
-              <CommandInput
-                placeholder="Skriv for å søke..."
-                value={query}
-                onValueChange={setQuery}
-                className="h-12"
-              />
-            </Command>
-          </SidebarHeader>
+        {/* VIKTIG: SidebarProvider pakker inn alt innholdet */}
+        <SidebarProvider>
+          <Sidebar className="h-auto" collapsible="none">
+            <SidebarHeader className="p-0 border-b">
+              {/* Vi kan ikke bruke <SearchForm/> her hvis den ikke er tilpasset Command */}
+              <Command shouldFilter={false}>
+                <CommandInput
+                  placeholder="Skriv for å søke..."
+                  value={query}
+                  onValueChange={setQuery}
+                  className="h-12"
+                />
+              </Command>
+            </SidebarHeader>
 
-          <SidebarContent className="p-0">
-            <CommandList className="h-[300px] max-h-[300px]">
-              {/* Default view when query is empty */}
-              {!query &&
-                Object.entries(defaultNavData).map(([groupName, items]) => (
-                  <SidebarGroup key={groupName} className="p-2">
-                    <SidebarGroupLabel>{groupName}</SidebarGroupLabel>
+            <SidebarContent className="p-0">
+              <CommandList className="h-[300px] max-h-[300px]">
+                {/* Logikk for å vise default vs. søkeresultater */}
+                {!query ? (
+                  <>
+                    {Object.entries(defaultNavData).map(
+                      ([groupName, items]) => (
+                        <SidebarGroup key={groupName} className="p-2">
+                          <SidebarGroupLabel>{groupName}</SidebarGroupLabel>
+                          <SidebarSeparator className="my-1" />
+                          <SidebarMenu>
+                            {items.map((item) => (
+                              <SidebarMenuItem key={item.title}>
+                                <SidebarMenuButton
+                                  asChild
+                                  className="justify-start"
+                                  onClick={() => handleSelect(item.url)}
+                                >
+                                  <Link href={item.url as Route}>
+                                    <IconArrowRight className="mr-2 size-4" />
+                                    <span>{item.title}</span>
+                                  </Link>
+                                </SidebarMenuButton>
+                              </SidebarMenuItem>
+                            ))}
+                          </SidebarMenu>
+                        </SidebarGroup>
+                      )
+                    )}
+                  </>
+                ) : results.length > 0 ? (
+                  <SidebarGroup className="p-2">
+                    <SidebarGroupLabel>Produkter</SidebarGroupLabel>
                     <SidebarSeparator className="my-1" />
                     <SidebarMenu>
-                      {items.map((item) => (
-                        <SidebarMenuItem key={item.title}>
+                      {results.map((product) => (
+                        <SidebarMenuItem key={product.id}>
                           <SidebarMenuButton
                             asChild
                             className="justify-start"
-                            onClick={() => handleSelect(item.url)}
+                            onClick={() =>
+                              handleSelect(`/products/${product.handle}`)
+                            }
                           >
-                            <a>
+                            <Link href={`/products/${product.handle}` as Route}>
                               <IconArrowRight className="mr-2 size-4" />
-                              <span>{item.title}</span>
-                            </a>
+                              <span>{product.title}</span>
+                            </Link>
                           </SidebarMenuButton>
                         </SidebarMenuItem>
                       ))}
                     </SidebarMenu>
                   </SidebarGroup>
-                ))}
+                ) : (
+                  <CommandEmpty>Ingen resultater funnet.</CommandEmpty>
+                )}
+              </CommandList>
+            </SidebarContent>
 
-              {/* View for empty search results */}
-              {query && results.length === 0 && (
-                <CommandEmpty>Ingen resultater funnet.</CommandEmpty>
-              )}
-
-              {/* View for search results */}
-              {query && results.length > 0 && (
-                <SidebarGroup className="p-2">
-                  <SidebarGroupLabel>Produkter</SidebarGroupLabel>
-                  <SidebarSeparator className="my-1" />
-                  <SidebarMenu>
-                    {results.map((product) => (
-                      <SidebarMenuItem key={product.id}>
-                        <SidebarMenuButton
-                          asChild
-                          className="justify-start"
-                          onClick={() =>
-                            handleSelect(`/products/${product.handle}`)
-                          }
-                        >
-                          <a>
-                            <IconArrowRight className="mr-2 size-4" />
-                            <span>{product.title}</span>
-                          </a>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    ))}
-                  </SidebarMenu>
-                </SidebarGroup>
-              )}
-            </CommandList>
-          </SidebarContent>
-
-          <SidebarFooter className="p-2 border-t">
-            <a
-              href="#"
-              className="flex items-center p-2 rounded-md text-sm text-muted-foreground hover:bg-accent"
-            >
-              <CornerDownLeft className="mr-2 size-4" />
-              <span>Go to Page</span>
-            </a>
-          </SidebarFooter>
-        </Sidebar>
+            <SidebarFooter className="p-2 border-t">
+              <div className="flex items-center p-2 rounded-md text-sm text-muted-foreground">
+                <CornerDownLeft className="mr-2 size-4" />
+                <span>Go to Page</span>
+              </div>
+            </SidebarFooter>
+          </Sidebar>
+        </SidebarProvider>
       </DialogContent>
     </Dialog>
   );
 }
+
+export default SearchDialog;

@@ -1,19 +1,17 @@
 // src/app/layout.tsx
 import localFont from "next/font/local";
 import "../styles/globals.css";
-import { Footer } from "@/components/footer/Footer";
-import { Header } from "@/components/header/Header";
-import { CartProvider } from "@/components/cart/CartProvider";
-import { getCartAction } from "@/app/actions";
+import Footer from "@/Components/Footer/Footer";
+import Header from "@/Components/Header/Header";
+import CartProvider from "@/Components/Cart/CartProvider";
+import getCartFromCookies from "@/Actions/Cart/Helpers/getCartFromCookies";
 import "swiper/css";
 import "swiper/css/navigation";
 import type { ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { getMenu } from "@/lib/shopify";
-import type { MenuItem } from "@/types/shopify";
-import { CartDrawer } from "@/components/cart/CartDrawer";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import getMenu from "@/Lib/Server/Queries/getMenu";
+import CartDrawer from "@/Components/Cart/CartDrawer";
 
 const inter = localFont({
   src: "../assets/fonts/Inter-VariableFont_opsz,wght.ttf",
@@ -73,7 +71,7 @@ export default async function RootLayout({
   readonly children: ReactNode;
 }) {
   const menuItems: MenuItem[] = (await getMenu("header-mega-menu")) || [];
-  const initialCart = await getCartAction();
+  const initialCart = await getCartFromCookies();
   return (
     <html lang="no" className={inter.variable} suppressHydrationWarning>
       <head>
@@ -87,25 +85,18 @@ export default async function RootLayout({
       <body
         className={`${inter.className} flex flex-col min-h-screen antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <CartProvider initialCart={initialCart}>
-            <Header menu={menuItems} />
+        <CartProvider initialCart={initialCart}>
+          <Header menu={menuItems} />
 
-            <main className="flex-grow" role="main">
-              {children}
-            </main>
+          <main className="flex-grow" role="main">
+            {children}
+          </main>
 
-            <Footer />
-            <CartDrawer />
-          </CartProvider>
-          <Analytics />
-          <SpeedInsights />
-        </ThemeProvider>
+          <Footer />
+          <CartDrawer />
+        </CartProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

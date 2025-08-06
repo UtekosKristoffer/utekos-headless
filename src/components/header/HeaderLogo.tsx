@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export function HeaderLogo() {
+export default function HeaderLogo() {
   return (
     <div className="flex items-center">
       <Link href="/" aria-label="Utekos - Til forsiden">

@@ -1,9 +1,11 @@
-import { SettingsDialog } from "@/components/settings-dialog"
+import { SettingsDialog } from "@/Components/settings-dialog";
 
-export default function Page() {
+function Page() {
   return (
     <div className="flex h-svh items-center justify-center">
       <SettingsDialog />
     </div>
-  )
+  );
 }
+
+export default Page;

@@ -1,6 +1,6 @@
 // Fil: src/app/api/search/route.ts
 import { NextResponse } from "next/server";
-import { searchProducts } from "@/lib/shopify";
+import searchProducts from "@/Lib/Server/Queries/searchProducts";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -11,7 +11,6 @@ export async function GET(request: Request) {
   }
 
   try {
-    // Kall din nye, rene funksjon
     const searchResults = await searchProducts(query);
     return NextResponse.json(searchResults);
   } catch (error) {

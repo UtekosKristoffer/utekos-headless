@@ -1,6 +1,6 @@
 // Fil: src/components/header/MobileMenuButton.tsx
 "use client";
-import { Button } from "@/components/ui/button";
+import Button from "@/Components/UI/button";
 import { MenuIcon, XIcon } from "lucide-react";
 
 export function MobileMenuButton({

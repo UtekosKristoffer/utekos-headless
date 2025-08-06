@@ -1,5 +1,4 @@
 "use client";
-import type { MenuItem } from "@/types/shopify";
 import Link from "next/link";
 import type { Route } from "next";
 
@@ -8,10 +7,10 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetTrigger, // Vi trenger denne for å koble til åpne/lukke-logikken
-} from "@/components/ui/sheet";
+  SheetTrigger,
+} from "@/Components/UI/sheet";
 
-function normalizeShopifyUrl(url: string): string {
+function normalizeUrl(url: string): string {
   try {
     return new URL(url).pathname;
   } catch (e) {
@@ -28,7 +27,7 @@ function MobileNavLink({
 }) {
   return (
     <Link
-      href={normalizeShopifyUrl(href) as Route}
+      href={normalizeUrl(href) as Route}
       className="block p-4 text-lg font-medium border-b border-border hover:bg-accent"
     >
       {children}
@@ -36,7 +35,7 @@ function MobileNavLink({
   );
 }
 
-export function MobileMenuPanel({
+function MobileMenuPanel({
   menu,
   isOpen,
   onOpenChange,
@@ -69,3 +68,5 @@ export function MobileMenuPanel({
     </Sheet>
   );
 }
+
+export default MobileMenuPanel;
