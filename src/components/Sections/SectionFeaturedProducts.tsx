@@ -1,9 +1,11 @@
+"use client";
 import ProductCard from "@/Components/Products/ProductCard";
 import Link from "next/link";
 import useProducts from "@/Hooks/useProducts";
 
 export default function FeaturedProducts() {
   const { data: products, isLoading, error } = useProducts();
+
   if (isLoading) return <div>Laster...</div>;
   if (error) return <div>Feil: {error.message}</div>;
 

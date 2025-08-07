@@ -1,19 +1,10 @@
-import { LATEST_API_VERSION } from "@shopify/shopify-api";
 import { createStorefrontApiClient } from "@shopify/storefront-api-client";
-
-if (
-  !process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN ||
-  !process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN
-) {
-  throw new Error(
-    "Shopify store domain and storefront access token are required."
-  );
-}
+import { env } from "@/Lib/Utils/env";
 
 const StoreFrontApiClient = createStorefrontApiClient({
-  storeDomain: process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN,
-  apiVersion: LATEST_API_VERSION,
-  publicAccessToken: process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+  storeDomain: `https://${env.SHOPIFY_STORE_DOMAIN}`,
+  apiVersion: env.SHOPIFY_STOREFRONT_API_VERSION,
+  publicAccessToken: env.SHOPIFY_STOREFRONT_PUBLIC_TOKEN,
 });
 
 export default StoreFrontApiClient;

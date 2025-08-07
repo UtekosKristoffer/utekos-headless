@@ -1,6 +1,6 @@
 // src/app/products/[handle]/page.tsx
 
-import getProductByHandle from "@/Lib/Server/Queries/getProductByHandle";
+import GetProductByHandle from "@/Lib/Server/Queries/getProductByHandle";
 import { notFound } from "next/navigation";
 import ProductPageClient from "@/Components/Products/ProductPageClient";
 import type { Metadata } from "next"; // Importer Metadata-typen
@@ -11,7 +11,7 @@ type Props = {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { handle } = await props.params;
-  const product = await getProductByHandle(handle);
+  const product = await GetProductByHandle(handle);
 
   if (!product) {
     notFound();
@@ -37,7 +37,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function ProductPage(props: Props) {
   const { handle } = await props.params;
-  const product = await getProductByHandle(handle);
+  const product = await GetProductByHandle(handle);
 
   if (!product) {
     notFound();
