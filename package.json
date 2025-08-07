@@ -15,6 +15,7 @@
     "fetch-images": "node scripts/images.js"
   },
   "dependencies": {
+    "@graphql-codegen/import-types-preset": "^3.0.1",
     "@hookform/resolvers": "^5.2.1",
     "@parcel/watcher": "^2.5.1",
     "@radix-ui/react-accordion": "^1.2.11",

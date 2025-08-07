@@ -1,6 +1,6 @@
 // src/app/products/[handle]/page.tsx
 
-import GetProductByHandle from "@/Lib/Server/Queries/getProductByHandle";
+import GetProductByHandle from "@/Lib/Server/Queries/ProductByHandle";
 import { notFound } from "next/navigation";
 import ProductPageClient from "@/Components/Products/ProductPageClient";
 import type { Metadata } from "next"; // Importer Metadata-typen

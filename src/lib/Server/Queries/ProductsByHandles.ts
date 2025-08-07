@@ -1,9 +1,8 @@
-import StoreFrontApiClient from "@/Lib/Clients/StoreFrontApiClient";
+import { graphql } from "@/gql";
 
-const getProducts = async (): Promise<ShopifyProduct[]> => {
-  const { data } = await StoreFrontApiClient.request(`
-    {
-      products(first: 10) {
+const ProductsByHandles = graphql(/* GraphQL */ `
+    query ProductsByHandles($query: String!) {
+      products(first: ${handles.length}, query: $query) {
         edges {
           node {
             id
@@ -19,6 +18,12 @@ const getProducts = async (): Promise<ShopifyProduct[]> => {
                 currencyCode
               }
             }
+            compareAtPriceRange {
+              maxVariantPrice {
+                amount
+                currencyCode
+              }
+            }
             variants(first: 1) {
               edges {
                 node {
@@ -30,8 +35,6 @@ const getProducts = async (): Promise<ShopifyProduct[]> => {
         }
       }
     }
-  `);
-  return data.products.edges.map((e: { node: ShopifyProduct }) => e.node);
-};
+`);
 
-export default getProducts;
+export default ProductsByHandles;

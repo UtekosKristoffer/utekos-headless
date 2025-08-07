@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import getProductsByHandles from "@/Lib/Server/Queries/getProductsByHandles";
+import getProductsByHandles from "@/Lib/Server/Queries/ProductsByHandles";
 import ProductCard from "@/Components/Products/ProductCard";
 import Button from "@/Components/UI/button";
 

@@ -10,26 +10,28 @@ const config: CodegenConfig = {
       preset: "client",
       presetConfig: {
         artifactDirectory: "./src/gql",
+        typesPath: "./src/Types/types.ts",
       },
       plugins: [
         "typescript",
         "typescript-operations",
         {
           "@graphql-codegen/typescript-react-query": {
-            fetcher: "./src/Lib/graphql-fetcher#shopifyFetcher",
-            exposeDocument: true,
-            exposeQueryKeys: true,
-            legacyMode: false,
+            fetcher: {
+              func: "./src/Lib/GraphQLFetcher#shopifyFetcher",
+              exposeDocument: true,
+              exposeQueryKeys: true,
+              legacyMode: false,
+              documentMode: "string",
+            },
           },
         },
       ],
       config: {
-        // Brukes av typescript-* pluginene
-        useTypeImports: true, // gir `import type` for lettere bundle
-        // documentMode: 'string' er default i client preset
+        useTypeImports: true,
+        documentMode: "string",
       },
     },
   },
 };
-
 export default config;

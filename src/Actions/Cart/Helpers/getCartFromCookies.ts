@@ -1,7 +1,7 @@
 // /Actions/Cart/Helpers/getCartFromCookies.ts
 "use server";
 import { cookies } from "next/headers";
-import queryCartWithCache from "@/Lib/Server/Queries/queryCartWithCache";
+import queryCartWithCache from "@/Lib/Server/Queries/QueryCartWithCase";
 
 /**
  * Henter handlekurven fra cookie (cartId), og returnerer Cart-objektet.

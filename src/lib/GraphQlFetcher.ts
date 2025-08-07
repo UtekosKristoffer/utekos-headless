@@ -1,5 +1,5 @@
 import StoreFrontApiClient from "@/Lib/Clients/StoreFrontApiClient";
-import type { DocumentType } from "@/gql";
+import type { TypedDocumentString } from "@/gql/graphql";
 
 export async function shopifyFetcher<
   TData,

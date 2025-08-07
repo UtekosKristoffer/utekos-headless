@@ -10,7 +10,7 @@ import "swiper/css/navigation";
 import type { ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import getMenu from "@/Lib/Server/Queries/getMenu";
+import getMenu from "@/Lib/Server/Queries/GetMenu";
 import CartDrawer from "@/Components/Cart/CartDrawer";
 
 const inter = localFont({

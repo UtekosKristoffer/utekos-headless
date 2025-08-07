@@ -1,14 +1,8 @@
-import shopifyFetch from "../shopifyFetch";
+import { graphql } from "@/gql";
 
-/**
- * Henter en meny fra Shopify basert på dens handle.
- * @param {string} handle - Handle for menyen du vil hente
- * @returns {Promise<MenuItem[] | null>}
- */
 
-async function getMenu(handle: string): Promise<MenuItem[] | null> {
-  const menuQuery = `
-    query getMenu($handle: String!) {
+ export const GetMenu = graphql(/* GraphQL */ `
+  query GetMenu($handle: String!) {
       menu(handle: $handle) {
         items {
           title
@@ -20,21 +14,6 @@ async function getMenu(handle: string): Promise<MenuItem[] | null> {
         }
       }
     }
-  `;
+      
 
-  try {
-    const response = await shopifyFetch({
-      query: menuQuery,
-      variables: { handle },
-    });
-
-    if (!response) return null;
-
-    return response?.data?.menu?.items || [];
-  } catch (error) {
-    console.error("Failed to fetch menu:", error);
-    return null;
-  }
-}
-
-export default getMenu;
+`);

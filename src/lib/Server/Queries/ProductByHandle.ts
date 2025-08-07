@@ -1,8 +1,8 @@
 // src/Lib/Server/Queries/getProductByHandle.ts
 import { graphql } from "@/gql";
 
-const GetProductByHandle = graphql(/* GraphQL */ `
-  query GetProduct($handle: String!) {
+const ProductByHandle = graphql(/* GraphQL */ `
+  query ProductByHandle($handle: String!) {
     product(handle: $handle) {
       id
       title
@@ -113,4 +113,4 @@ const GetProductByHandle = graphql(/* GraphQL */ `
   }
 `);
 
-export default GetProductByHandle;
+export default ProductByHandle;
