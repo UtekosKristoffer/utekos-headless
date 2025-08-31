@@ -1,7 +1,22 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
-
-export default nextConfig;
+  typedRoutes: true,
+  experimental: {
+    reactCompiler: true,
+    cacheComponents: true
+  },
+  ignoreBuildErrors: true,
+  eslint: {
+    ignoreDuringBuilds: true
+  },
+  remotePatterns: [
+    {
+      protocol: 'https',
+      hostname: 'cdn.shopify.com',
+      port: '',
+      pathname: '/**'
+    }
+  ]
+}
+export default nextConfig
