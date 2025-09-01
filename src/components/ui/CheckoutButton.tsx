@@ -2,7 +2,7 @@
 'use client'
 
 import * as React from 'react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/Button'
 
 /**
  * Generates appropriate aria-label for checkout button based on cart state.

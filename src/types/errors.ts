@@ -1,3 +1,8 @@
+import { CartErrorCodeSchema } from '@/db/zod/schemas'
+import { z } from '@/db/zod/zodConfig'
+
+export type CartErrorCodeType = z.infer<typeof CartErrorCodeSchema>
+
 export type ShopifyErrorDetail = {
   message: string
   locations?: { line: number; column: number }[]

@@ -1,3 +1,5 @@
+// Path: src/db/zod/env.ts
+
 import { z } from 'zod'
 
 const envSchema = z.object({

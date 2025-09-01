@@ -1,7 +1,7 @@
 // Path: src/lib/helpers/cart/fetchCart.ts
 import { storefrontClient } from '@/clients/storefrontApiClient'
 import { cartQuery } from '@/lib/queries'
-import { normalizeCart } from '@/lib/helpers/cart/normalizeCart'
+import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
 import { CartNotFoundError } from '@/lib/errors'
 import type { Cart, CartQueryResult } from '@/types'

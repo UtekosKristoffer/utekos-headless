@@ -24,8 +24,8 @@
  * @module lib/actions/createCartMutationOrchestrator
  */
 import { revalidateTag } from 'next/cache'
-import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
-import { normalizeCart } from '@/lib/helpers/cart/normalizeCart'
+import { getCartIdFromCookie } from '@/lib/helpers/cart'
+import { normalizeCart } from '@/lib/helpers/normalizers'
 import { MissingCartIdError } from '@/lib/errors'
 import type { Cart, InputValidator, PerformMutation, MutationInput } from '@/types'
 

@@ -1,7 +1,7 @@
 //Path: src/clients/storefrontApiClient.ts
 
 import { createStorefrontApiClient, type StorefrontApiClient } from '@shopify/storefront-api-client'
-import { SHOPIFY_API_VERSION, SHOPIFY_PUBLIC_TOKEN, SHOPIFY_STORE_DOMAIN } from '@/lib/constants'
+import { SHOPIFY_API_VERSION, SHOPIFY_PUBLIC_TOKEN, SHOPIFY_STORE_DOMAIN } from '@/constants'
 
 export const storefrontClient: StorefrontApiClient = createStorefrontApiClient({
   storeDomain: SHOPIFY_STORE_DOMAIN,

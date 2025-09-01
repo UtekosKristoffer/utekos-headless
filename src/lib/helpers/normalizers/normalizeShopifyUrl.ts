@@ -28,5 +28,3 @@ export function normalizeShopifyUrl(url: string): Route | string {
     return url
   }
 }
-
-export default normalizeShopifyUrl

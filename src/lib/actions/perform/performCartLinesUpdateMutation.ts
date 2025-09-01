@@ -8,7 +8,7 @@
  *   cart, throwing if the API reports errors.  Encapsulating this logic
  *   avoids repeating request structure throughout the codebase.
  *
- * @module lib/actions/perform/performCartLinesUpdateMutation
+ * @module lib/actions/perform
  */
 'use server'
 

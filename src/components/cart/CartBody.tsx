@@ -2,10 +2,10 @@
 import * as React from 'react'
 import type { Cart } from '@/types'
 import { CartLineItem } from '@/components/cart/CartLineItem'
-import { useCartPending } from '@/useHooks/useCartPending'
+import { useCartPending } from '@/useHooks'
 import { CartBodySkeleton } from './CartBodySkeleton'
-import { DrawerDescription } from '@/components/ui/drawer'
-import { Separator } from '@/components/ui/separator'
+import { DrawerDescription } from '@/components/ui/Drawer'
+import { Separator } from '@/components/ui/Separator'
 
 /**
  * Determines if the cart is in an empty state. Pure logic function.

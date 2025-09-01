@@ -2,10 +2,10 @@
 'use client'
 
 import * as React from 'react'
-import { DrawerTrigger } from '@/components/ui/drawer'
-import { Button } from '@/components/ui/button'
+import { DrawerTrigger } from '@/components/ui/Drawer'
+import { Button } from '@/components/ui/Button'
 import { ShoppingBagIcon } from 'lucide-react'
-import { useCartStoreSnapshot } from '@/useHooks/useCartStoreSnapshot'
+import { useCartStoreSnapshot } from '@/useHooks'
 import { cartStore } from '@/lib/state/cartStore'
 
 /**

@@ -2,7 +2,7 @@
 
 'use client'
 
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/Sheet'
 import MobileMenuItem from '@/components/MobileMenuItem'
 
 import type { MenuItem } from '@/types'

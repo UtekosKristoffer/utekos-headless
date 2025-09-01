@@ -2,9 +2,9 @@
 'use client'
 
 import * as React from 'react'
-import { Button } from '@/components/ui/button'
-import { DrawerClose, DrawerHeader, DrawerTitle, DrawerDescription } from '@/components/ui/drawer'
-import { useCartOptimistic } from '@/useHooks/useCartOptimistic'
+import { Button } from '@/components/ui/Button'
+import { DrawerClose, DrawerHeader, DrawerTitle, DrawerDescription } from '@/components/ui/Drawer'
+import { useCartOptimistic } from '@/useHooks'
 import { X } from 'lucide-react'
 
 /**

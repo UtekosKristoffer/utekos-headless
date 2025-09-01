@@ -5,7 +5,7 @@
 import { usePathname } from 'next/navigation'
 import { useReducer, useEffect } from 'react'
 import { MenuIcon } from 'lucide-react'
-import Button from '@/components/ui/button'
+import Button from '@/components/ui/Button'
 import HeaderLogo from '@/components/HeaderLogo'
 import DesktopNavigation from '@/components/DesktopNavigation'
 import { CartDrawer } from '@/components/cart/CartDrawer'

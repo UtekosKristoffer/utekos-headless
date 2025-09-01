@@ -1,6 +1,6 @@
 //Path: src/components/ProductPageAccordion.tsx
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/Accordion'
 import { RichTextRenderer, type RootNode } from '@/components/RichTextRenderer'
 import { safeJsonParse } from '@/lib/utils'
 

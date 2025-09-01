@@ -4,13 +4,12 @@
 import * as React from 'react'
 import Image from 'next/image'
 import { Minus, Plus, X } from 'lucide-react'
-
-import { Button } from '@/components/ui/button'
-import { useCartMutation } from '@/useHooks/useCartMutation'
-import { updateLineQuantityAction } from '@/lib/actions/updateLineQuantityAction'
-import { removeCartLineAction } from '@/lib/actions/removeCartLineAction'
+import { Button } from '@/components/ui/Button'
+import { useCartMutation } from '@/useHooks'
+import { removeCartLineAction, updateLineQuantityAction } from '@/lib/actions'
 import { formatPrice } from '@/lib/utils'
 import { cartStore } from '@/lib/state/cartStore'
+
 import type { CartLine } from '@/types'
 
 /**

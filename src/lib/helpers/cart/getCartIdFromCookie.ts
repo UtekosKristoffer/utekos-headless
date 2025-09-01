@@ -1,7 +1,7 @@
 // Path: src/lib/helpers/getCartIdFromCookie.ts
 
 import { cookies } from 'next/headers'
-import { CART_COOKIE_NAME } from '@/lib/constants'
+import { CART_COOKIE_NAME } from '@/constants'
 
 /**
  * Asynchronously retrieves the cart ID from the designated cart cookie.

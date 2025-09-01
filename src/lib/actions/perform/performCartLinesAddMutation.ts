@@ -8,8 +8,8 @@
  *   It returns the raw cart on success and propagates API errors.  Having a
  *   dedicated helper for this mutation keeps action functions free of
  *   request formatting details.
- *
- * @module lib/actions/perform/performCartLinesAddMutation
+ * 
+ * @module lib/actions/perform
  */
 'use server'
 

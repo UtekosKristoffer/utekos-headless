@@ -3,7 +3,7 @@
 
 import * as React from 'react'
 import { CartBody, CartFooter, CartHeader, CartTrigger } from '@/components/cart'
-import { Drawer, DrawerContent } from '@/components/ui/drawer'
+import { Drawer, DrawerContent } from '@/components/ui/Drawer'
 import { useCartOpen, useCartQuery } from '@/useHooks'
 import { cartStore } from '@/lib/state/cartStore'
 

@@ -11,7 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import type { ActorRefFrom } from 'xstate'
 
-import { AddToCartSchema } from '@/db/zod/cartSchemas'
+import { AddToCartSchema } from '@/db/zod/schemas'
 import type { createCartMutationMachine } from '@/lib/state/createCartMutationMachine'
 import type { ProductVariant, AddToCartFormValues } from '@/types'
 

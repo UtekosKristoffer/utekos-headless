@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sync": "f() { git add . && git commit -m \"$1\" && git push; }; f"
   },
   "dependencies": {
     "@hookform/error-message": "^2.0.1",

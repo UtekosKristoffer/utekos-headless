@@ -1,44 +1,48 @@
 // Path: src/lib/errors/mapThrownErrorToActionResult.ts
-import { isValidationErrorLike } from 'zod-validation-error'
-import { MissingCartIdError } from '@/lib/errors'
-import { isShopifyErrorResponse, formatShopifyErrorResponse } from '@/lib/errors'
-import { CartErrorCode } from '@/lib/constants/errorCodes'
-import type { CartActionsResult } from '@/types'
 
 /**
- * Centralized error mapping that handles all error types consistently.
- * Now leverages the global errorMap for validation errors.
+ * @fileoverview Centralized error mapping that leverages reusable error message utilities.
+ *
+ * This mapper composes error message extraction utilities with CartActionsResult
+ * formatting to provide consistent error responses. By delegating message extraction
+ * to pure utility functions, we achieve better separation of concerns and reusability.
+ */
+
+import { isValidationErrorLike } from 'zod-validation-error'
+import { isShopifyErrorResponse, formatShopifyErrorResponse, extractCartErrorMessage, MissingCartIdError } from '@/lib/errors'
+import { CartErrorCode } from '@/constants'
+
+import type { CartErrorCodeType, CartActionsResult } from '@/types'
+
+/**
+ * Maps any thrown error into a standardized CartActionsResult.
+ *
+ * This function focuses on determining the appropriate error code and delegating
+ * message extraction to specialized utilities. This separation allows the same
+ * error message logic to be reused in different contexts.
  */
 export function mapThrownErrorToActionResult(thrown: unknown): CartActionsResult {
-  // Validation errors (now using global errorMap)
-  if (isValidationErrorLike(thrown)) {
-    return {
-      success: false,
-      message: thrown.toString(), // Dette vil nå bruke den norske errorMap
-      error: CartErrorCode.VALIDATION_ERROR
-    }
-  }
-
-  // Domain-specific errors
-  if (thrown instanceof MissingCartIdError) {
-    return {
-      success: false,
-      message: 'Handlekurven din ble ikke funnet.',
-      error: CartErrorCode.MISSING_CART_ID
-    }
-  }
-
-  // Shopify API errors (also using zod-validation-error)
+  // For Shopify API errors, use the existing formatter which has more complex logic
   if (isShopifyErrorResponse(thrown)) {
     return formatShopifyErrorResponse(thrown)
   }
 
-  // Fallback for unknown errors
-  const message = thrown instanceof Error ? thrown.message : 'En uventet serverfeil oppstod.'
+  // Determine error code based on error type
+  let errorCode: CartErrorCodeType
+  if (isValidationErrorLike(thrown)) {
+    errorCode = CartErrorCode.VALIDATION_ERROR
+  } else if (thrown instanceof MissingCartIdError) {
+    errorCode = CartErrorCode.MISSING_CART_ID
+  } else {
+    errorCode = CartErrorCode.UNEXPECTED_SERVER_ERROR
+  }
+
+  // Use the reusable utility for message extraction
+  const message = extractCartErrorMessage(thrown)
 
   return {
     success: false,
     message,
-    error: CartErrorCode.UNEXPECTED_SERVER_ERROR
+    error: errorCode
   }
 }

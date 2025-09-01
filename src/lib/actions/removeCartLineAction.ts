@@ -16,10 +16,10 @@
  */
 'use server'
 
-import { createCartMutationOrchestrator } from '@/lib/actions/createCartMutationOrchestrator'
 import { mapThrownErrorToActionResult } from '@/lib/errors'
-import { validateRemoveCartLineInput } from '@/db/zod/validate'
-import { performCartLineRemoveMutation } from '@/lib/actions/perform'
+import { validateRemoveCartLineInput } from '@/lib/helpers/validations'
+import { performCartLinesRemoveMutation, createCartMutationOrchestrator } from '@/lib/actions'
+
 import type { CartActionsResult } from '@/types'
 
 /**
@@ -28,7 +28,7 @@ import type { CartActionsResult } from '@/types'
  *
  * @private
  */
-const removeCartLineOrThrow = createCartMutationOrchestrator(validateRemoveCartLineInput, performCartLineRemoveMutation)
+const removeCartLineOrThrow = createCartMutationOrchestrator(validateRemoveCartLineInput, performCartLinesRemoveMutation)
 
 /**
  * Removes a single line item from the cart.

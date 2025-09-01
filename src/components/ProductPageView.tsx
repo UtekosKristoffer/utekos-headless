@@ -10,7 +10,7 @@ import ProductPageAccordion from '@/components/ProductPageAccordion'
 import ColorSelector from './ColorSelector'
 import SizeSelector from '@/components/ui/SizeSelector'
 import dynamic from 'next/dynamic'
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/Breadcrumb'
 
 const ProductGallery = dynamic(() => import('@/components/ui/ProductGallery').then(mod => mod.ProductGallery), {
   ssr: false,

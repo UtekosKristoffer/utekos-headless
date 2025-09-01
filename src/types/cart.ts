@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import type { EventPayloadMap } from '@xstate/store'
 import type { ProductVariant, Money, Image } from '@/types'
-import { AddToCartSchema, UpdateCartSchema, RemoveCartLineSchema, ClearCartLineSchema } from '@/db/zod/cartSchemas'
+import { AddToCartSchema, UpdateCartSchema, RemoveCartLineSchema, ClearCartLineSchema } from '@/db/zod/schemas/cartSchemas'
 export type AddLineEvent = { type: 'ADD_LINES'; input: { merchandiseId: string; quantity: number } }
 export type AddLineInput = {
   merchandiseId: string

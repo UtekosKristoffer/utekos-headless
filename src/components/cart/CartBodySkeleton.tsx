@@ -1,6 +1,6 @@
 // Path: src/components/cart/CartBodySkeleton.tsx
 import * as React from 'react'
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton } from '@/components/ui/Skeleton'
 
 /**
  * Renders a skeleton loader for the cart body.

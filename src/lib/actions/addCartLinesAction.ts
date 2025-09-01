@@ -1,5 +1,7 @@
 // Path: src/lib/actions/addLineAction.ts
 
+'use server'
+
 /**
  * @fileoverview Server action for adding a line item to the shopping cart.
  *
@@ -10,14 +12,12 @@
  *   business logic and error formatting, and makes the code easier for AI
  *   assistants and other tooling to reason about.
  *
- * @module lib/actions/addLineAction
+ * @module lib/actions/addCartLineAction
  */
-'use server'
 
 import { mapThrownErrorToActionResult } from '@/lib/errors'
-import { createCartMutationOrchestrator } from '@/lib/actions/createCartMutationOrchestrator'
-import { validateAddLineInput } from '@/db/zod/validate'
-import { performCartLinesAddMutation } from '@/lib/actions/perform'
+import { validateAddLineInput } from '@/lib/helpers/validations'
+import { performCartLinesAddMutation, createCartMutationOrchestrator } from '@/lib/actions'
 import type { AddToCartFormValues, CartActionsResult } from '@/types'
 
 /**
@@ -44,14 +44,12 @@ const addCartLinesOrThrow = createCartMutationOrchestrator(validateAddLineInput,
  * @returns {Promise<CartActionsResult>} A promise resolving to a success result with the updated cart on success,
  *   or a failure result describing why the operation could not be completed.
  */
-export const addLineAction = async (input: AddToCartFormValues): Promise<CartActionsResult> => {
+export const addCartLinesAction = async (input: AddToCartFormValues): Promise<CartActionsResult> => {
   try {
     const cart = await addCartLinesOrThrow(input)
     return { success: true, message: 'Item added to cart.', cart }
   } catch (thrown: unknown) {
-    console.error('An error occurred in addLineAction:', thrown)
+    console.error('An error occurred in addCartLinesAction:', thrown)
     return mapThrownErrorToActionResult(thrown)
   }
 }
-
-

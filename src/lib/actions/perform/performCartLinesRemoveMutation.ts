@@ -8,7 +8,7 @@
  *   throwing on error.  This helper keeps API concerns out of higher‑level
  *   business logic.
  *
- * @module lib/actions/perform/performCartLinesRemoveMutation
+ * @module lib/actions/perform
  */
 'use server'
 
@@ -24,7 +24,7 @@ import type { CartLinesRemoveResponse, CartResponse } from '@/types'
  * @returns {Promise<CartResponse | null>} The updated cart or null if missing from the response.
  * @throws {Error} Propagates any API errors.
  */
-export const performCartLineRemoveMutation = async (cartId: string, input: { lineId: string }): Promise<CartResponse | null> => {
+export const performCartLinesRemoveMutation = async (cartId: string, input: { lineId: string }): Promise<CartResponse | null> => {
   const { data, errors } = await storefrontClient.request<CartLinesRemoveResponse>(mutationCartLinesRemove, {
     variables: { cartId, lineIds: [input.lineId] }
   })

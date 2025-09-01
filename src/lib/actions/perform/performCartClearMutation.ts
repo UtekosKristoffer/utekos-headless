@@ -9,7 +9,7 @@
  *   are thrown so that higher layers can handle them consistently.  This
  *   separation allows business logic to remain free of API plumbing.
  *
- * @module lib/actions/perform/performCartClearMutation
+ * @module lib/actions/perform
  */
 'use server'
 

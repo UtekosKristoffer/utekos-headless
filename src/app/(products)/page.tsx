@@ -1,4 +1,4 @@
-import getProducts from '@/lib/helpers/products/getProducts'
+import getProducts from '@/lib/helpers/products/fetchProducts'
 import React from 'react'
 export type Props = {}
 

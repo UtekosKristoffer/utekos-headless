@@ -2,8 +2,8 @@
 'use client'
 
 import * as React from 'react'
-import { DrawerFooter } from '@/components/ui/drawer'
-import { useCartPending } from '@/useHooks/useCartPending'
+import { DrawerFooter } from '@/components/ui/Drawer'
+import { useCartPending } from '@/useHooks'
 import { formatPrice } from '@/lib/utils'
 import { CheckoutButton } from '@/components/ui/CheckoutButton'
 import type { Cart } from '@/types'

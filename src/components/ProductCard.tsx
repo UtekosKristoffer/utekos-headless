@@ -3,9 +3,9 @@ import type { Route } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { formatPrice } from '@/lib/utils'
-import Button from '@/components/ui/button'
-import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import Button from '@/components/ui/Button'
+import { AspectRatio } from '@/components/ui/Aspect-ratio'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card'
 import type { Product } from '@/types'
 
 interface ProductCardProps {
