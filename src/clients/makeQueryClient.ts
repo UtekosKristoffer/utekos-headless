@@ -15,5 +15,3 @@ export function makeQueryClient() {
     }
   })
 }
-
-export default makeQueryClient

@@ -13,14 +13,16 @@ import type { ActorRefFrom } from 'xstate'
 
 import { AddToCartSchema } from '@/db/zod/schemas'
 import type { createCartMutationMachine } from '@/lib/state/createCartMutationMachine'
-import type { ProductVariant, AddToCartFormValues } from '@/types'
+import type { AddToCartFormValues, ShopifyProductVariant } from '@/types'
 
 /**
  * A pure function that creates the configuration object for the RHF `useForm` hook.
  * @param {ProductVariant | null} selectedVariant - The initially selected variant.
  * @returns The configuration object for `useForm`.
  */
-export const createAddToCartFormConfig = (selectedVariant: ProductVariant | null) => ({
+export const createAddToCartFormConfig = (
+  selectedVariant: ShopifyProductVariant | null
+) => ({
   resolver: zodResolver(AddToCartSchema),
   defaultValues: {
     variantId: selectedVariant?.id ?? '',
@@ -36,15 +38,17 @@ export const createAddToCartFormConfig = (selectedVariant: ProductVariant | null
  * @param {ActorRefFrom<ReturnType<typeof createCartMutation>>} processRef - A reference to the cart process actor.
  * @returns {function(values: AddToCartFormValues): void} The generated onSubmit event handler.
  */
-export const createAddToCartSubmitHandler = (processRef: ActorRefFrom<ReturnType<typeof createCartMutationMachine>>) => (values: AddToCartFormValues) => {
-  processRef.send({
-    type: 'ADD_LINES',
-    input: {
-      merchandiseId: values.variantId,
-      quantity: values.quantity
-    }
-  })
-}
+export const createAddToCartSubmitHandler =
+  (processRef: ActorRefFrom<ReturnType<typeof createCartMutationMachine>>) =>
+  (values: AddToCartFormValues) => {
+    processRef.send({
+      type: 'ADD_LINES',
+      input: {
+        merchandiseId: values.variantId,
+        quantity: values.quantity
+      }
+    })
+  }
 
 /**
  * A higher-order function (a "decorator") that takes a submission handler
@@ -54,10 +58,17 @@ export const createAddToCartSubmitHandler = (processRef: ActorRefFrom<ReturnType
  * @param {ProductVariant | null} selectedVariant - The variant needed for the toast message.
  * @returns {function(values: AddToCartFormValues): void} The enhanced onSubmit handler with toasting.
  */
-export const withSuccessToast = (submitHandler: (values: AddToCartFormValues) => void, selectedVariant: ProductVariant | null) => (values: AddToCartFormValues) => {
-  submitHandler(values)
-  if (selectedVariant) {
-    toast.success(`${values.quantity} x ${selectedVariant.title} lagt i handlekurv!`)
+export const withSuccessToast =
+  (
+    submitHandler: (values: AddToCartFormValues) => void,
+    selectedVariant: ShopifyProductVariant | null
+  ) =>
+  (values: AddToCartFormValues) => {
+    submitHandler(values)
+    if (selectedVariant) {
+      toast.success(
+        `${values.quantity} x ${selectedVariant.title} lagt i handlekurv!`
+      )
+    }
   }
-}
 // Note: The toast message is in Norwegian to match the locale of the sample store.

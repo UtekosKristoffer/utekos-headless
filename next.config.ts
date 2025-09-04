@@ -4,7 +4,14 @@ const nextConfig: NextConfig = {
   typedRoutes: true,
   experimental: {
     reactCompiler: true,
-    cacheComponents: true
+    cacheComponents: true,
+    optimizePackageImports: [
+      'xstate',
+      '@tanstack/react-query',
+      'swiper',
+      '@shopify/storefront-api-client',
+      '@xstate/store'
+    ]
   },
   ignoreBuildErrors: true,
   eslint: {
@@ -19,4 +26,5 @@ const nextConfig: NextConfig = {
     }
   ]
 }
+
 export default nextConfig

@@ -4,6 +4,7 @@ import { cartQuery } from '@/lib/queries'
 import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
 import { CartNotFoundError } from '@/lib/errors'
+import { unstable_cache } from "next/cache"
 import type { Cart, CartQueryResult } from '@/types'
 
 /**

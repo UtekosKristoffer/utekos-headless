@@ -1,12 +1,33 @@
 import { z } from 'zod'
 import type { EventPayloadMap } from '@xstate/store'
-import type { ProductVariant, Money, Image } from '@/types'
-import { AddToCartSchema, UpdateCartSchema, RemoveCartLineSchema, ClearCartLineSchema } from '@/db/zod/schemas/cartSchemas'
-export type AddLineEvent = { type: 'ADD_LINES'; input: { merchandiseId: string; quantity: number } }
+import type {
+  ShopifyProductVariant,
+  ShopifyPrice,
+  Money,
+  Image,
+  ShopifyImage
+} from '@/types'
+import {
+  AddToCartSchema,
+  UpdateCartSchema,
+  RemoveCartLineSchema,
+  ClearCartLineSchema
+} from '@/db/zod/schemas'
+export type AddLineEvent = {
+  type: 'ADD_LINES'
+  input: { merchandiseId: string; quantity: number }
+}
 export type AddLineInput = {
   merchandiseId: string
   quantity: number
 }
+
+export type AddItemResult = {
+  success: boolean
+  message: string
+  cart?: ShopifyCart | null
+}
+
 export type AddToBagResponse = { cartLinesAdd: { cart: CartResponse } }
 export type AddToCartFormValues = z.infer<typeof AddToCartSchema>
 export type Cart = {
@@ -20,8 +41,14 @@ export type Cart = {
   lines: CartLine[]
 }
 export type CartActions = {
-  addLine(input: { merchandiseId: string; quantity: number }): Promise<CartActionsResult>
-  updateLineQuantity(input: { lineId: string; quantity: number }): Promise<CartActionsResult>
+  addLine(input: {
+    merchandiseId: string
+    quantity: number
+  }): Promise<CartActionsResult>
+  updateLineQuantity(input: {
+    lineId: string
+    quantity: number
+  }): Promise<CartActionsResult>
   removeLine(input: { lineId: string }): Promise<CartActionsResult>
   clearCart(): Promise<CartActionsResult>
 }
@@ -35,16 +62,29 @@ export type CartExtractor<TCart> = (response: CartResponse) => TCart | undefined
 export type CartLine = {
   id: string // This is the ID of the line itself (lineId)
   quantity: number
-  merchandise: ProductVariant
+  merchandise: ShopifyProductVariant
 }
-export type CartLinesRemoveResponse = { cartLinesRemove: { cart: CartResponse } }
-export type CartLinesUpdateResponse = { cartLinesUpdate: { cart: CartResponse } }
+export type CartLinesRemoveResponse = {
+  cartLinesRemove: { cart: CartResponse }
+}
+export type CartLinesUpdateResponse = {
+  cartLinesUpdate: { cart: CartResponse }
+}
 export type CartMutationContext = {
   error?: string | null
 }
-export type CartMutationEvent = AddLineEvent | UpdateLineQuantityEvent | RemoveLineEvent | ClearCartMutationEvent
-export type CartMutationFn<TInput extends CartMutationInput | void = void> = (input: TInput) => Promise<CartActionsResult>
-export type CartMutationInput = AddLineInput | UpdateLineQuantityInput | RemoveLineInput
+export type CartMutationEvent =
+  | AddLineEvent
+  | UpdateLineQuantityEvent
+  | RemoveLineEvent
+  | ClearCartMutationEvent
+export type CartMutationFn<TInput extends CartMutationInput | void = void> = (
+  input: TInput
+) => Promise<CartActionsResult>
+export type CartMutationInput =
+  | AddLineInput
+  | UpdateLineQuantityInput
+  | RemoveLineInput
 export type CartNormalizer<TResponseCart> = (rawCart: TResponseCart) => Cart
 /**
  * Represents the direct data structure returned by the Shopify Storefront API
@@ -92,9 +132,44 @@ export type LastOperation = {
   at: number
   payload?: unknown
 }
-export type MutationInput = { [key: string]: string | number | boolean | undefined | null }
+export type MutationInput = {
+  [key: string]: string | number | boolean | undefined | null
+}
 export type OptimisticLines = { lines: Record<string, number> }
-export type PerformMutation<T extends MutationInput> = (cartId: string, input: T) => Promise<CartResponse | null | undefined>
+export type PerformMutation<T extends MutationInput> = (
+  cartId: string,
+  input: T
+) => Promise<CartResponse | null | undefined>
+
+export type ShopifyCart = {
+  id: string
+  checkoutUrl: string
+  totalQuantity: number
+  cost: {
+    totalAmount: ShopifyPrice
+    subtotalAmount: ShopifyPrice
+  }
+  lines: {
+    edges: {
+      node: ShopifyCartLine
+    }[]
+  }
+}
+
+export type ShopifyCartLine = {
+  id: string
+  quantity: number
+  merchandise: {
+    id: string
+    title: string
+    price: ShopifyPrice
+    product: {
+      title: string
+      handle: string
+      featuredImage: ShopifyImage | null
+    }
+  }
+}
 export type RemoveCartLineInput = z.infer<typeof RemoveCartLineSchema>
 export type RemoveLineEvent = { type: 'REMOVE_LINE'; input: { lineId: string } }
 export type RemoveLineInput = {
@@ -102,7 +177,10 @@ export type RemoveLineInput = {
 }
 export type ShopifyCartLineEdge = CartResponse['lines']['edges'][number]
 export type UpdateCartLineInput = z.infer<typeof UpdateCartSchema>
-export type UpdateLineQuantityEvent = { type: 'UPDATE_LINE'; input: { lineId: string; quantity: number } }
+export type UpdateLineQuantityEvent = {
+  type: 'UPDATE_LINE'
+  input: { lineId: string; quantity: number }
+}
 export type UpdateLineQuantityInput = {
   lineId: string
   quantity: number

@@ -1,5 +1,3 @@
-export type MetaobjectField = { value: string } | null
-
 export type MetaobjectReference = {
   images: MetaobjectField
   subtitle: MetaobjectField
@@ -16,3 +14,7 @@ export type MetaobjectReference = {
   centerToWrist: MetaobjectField
   flatWidth: MetaobjectField
 }
+
+export type MetaobjectField = {
+  value: string
+} | null

@@ -1,4 +1,4 @@
-export { AddToCartForm } from './AddToCart'
+export { AddToCartForm } from './AddToCartController'
 export { CartBody } from './CartBody'
 export { CartFooter } from './CartFooter'
 export { CartHeader } from './CartHeader'

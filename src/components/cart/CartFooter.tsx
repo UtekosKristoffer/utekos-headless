@@ -5,7 +5,7 @@ import * as React from 'react'
 import { DrawerFooter } from '@/components/ui/Drawer'
 import { useCartPending } from '@/useHooks'
 import { formatPrice } from '@/lib/utils'
-import { CheckoutButton } from '@/components/ui/CheckoutButton'
+import { CheckoutButton } from '@/components/jsx/CheckoutButton'
 import type { Cart } from '@/types'
 
 /**

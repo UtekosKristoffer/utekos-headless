@@ -1,13 +1,19 @@
 // Path: src/lib/helpers/normalizers/normalizeProductImage.ts
 
+import type { ShopifyImage } from '@/types'
 /**
  * Normalizes Shopify featuredImage to application Image type with guaranteed altText.
- * @param image - Raw image from Shopify API potentially missing altText
- * @param fallbackTitle - Product title used as altText fallback
- * @returns Image object with guaranteed altText property
+ * @module normalizers/normalizeProductImage
+ * @param image - ShopifyImage or null
+ * @param fallbackTitle - Product title for altText fallback
+ * @returns Normalized ShopifyImage with default values if necessary
  */
-export const normalizeProductImage = (image: { url: string; id: string; altText?: string | null }, fallbackTitle: string) => ({
-  id: image.id,
-  url: image.url,
-  altText: image.altText ?? `Bilde av ${fallbackTitle}`
+export const normalizeProductImage = (
+  image: ShopifyImage | null,
+  fallbackTitle: string
+): ShopifyImage => ({
+  url: image?.url ?? '/placeholder-image.png',
+  altText: image?.altText ?? `Bilde av ${fallbackTitle}`,
+  width: image?.width ?? 1024,
+  height: image?.height ?? 1024
 })

@@ -1,6 +1,7 @@
 import { ProductIdsSchema } from '@/db/zod/schemas/ProductIdsSchema'
+import { ZodError } from 'zod'
 import { fromError } from 'zod-validation-error'
-
+import { fromZodError } from 'zod-validation-error'
 /**
  * Validates product IDs array ensuring all entries are non-empty strings.
  * @param ids - Unknown input to validate as product ID array
@@ -14,3 +15,5 @@ export const validateProductIds = (ids: unknown): string[] => {
   }
   return result.data
 }
+
+

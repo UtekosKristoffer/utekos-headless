@@ -13,7 +13,7 @@
 import React from 'react'
 import renderNode from './renderNode'
 import type { RootNode } from '@/types/interface'
-import type { RenderableNode } from '@/types'
+import type { RenderableNode } from '@/types/nodes'
 
 interface RichTextRendererProps {
   /** The root node of the rich text Abstract Syntax Tree (AST) to be rendered. */
@@ -35,7 +35,11 @@ export function RichTextRenderer({ content }: RichTextRendererProps) {
     return null
   }
 
-  return <>{content.children.map(renderNode as (node: RenderableNode, index: number) => React.ReactNode)}</>
+  return (
+    <>
+      {content.children.map(
+        renderNode as (node: RenderableNode, index: number) => React.ReactNode
+      )}
+    </>
+  )
 }
-
-export default RichTextRenderer

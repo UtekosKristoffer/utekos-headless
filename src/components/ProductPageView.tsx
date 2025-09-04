@@ -1,49 +1,73 @@
 'use client'
 
-import { ProductGrid } from '@/components/ui/ProductGrid'
-import { GalleryColumn } from '@/components/ui/GalleryColumn'
-import { OptionsColumn } from '@/components/ui/OptionsColumn'
-
-import AddToCart from '@/components/cart/AddToCart'
-import Price from '@/components/ui/Price'
+import { AddToCartController } from '@/components/cart/AddToCartController'
+import {
+  Price,
+  SizeSelector,
+  ColorSelector,
+  OptionsColumn,
+  GalleryColumn,
+  ProductGrid
+} from '@/components/jsx'
 import ProductPageAccordion from '@/components/ProductPageAccordion'
-import ColorSelector from './ColorSelector'
-import SizeSelector from '@/components/ui/SizeSelector'
 import dynamic from 'next/dynamic'
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/Breadcrumb'
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator
+} from '@/components/ui/Breadcrumb'
 
-const ProductGallery = dynamic(() => import('@/components/ui/ProductGallery').then(mod => mod.ProductGallery), {
-  ssr: false,
-  loading: () => <div className='relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-surface-raised/40' />
-})
+import type {
+  ShopifyProductVariant,
+  ShopifyProduct
+} from '@/types/products'
+import type { ShopifyMediaImage } from '@/types/media'
 
-import type { ProductVariant, Image, ProductsQueryResponse } from '@/types'
+// Dynamisk import fordi komponenten bruker et tredjepartsbibliotek som ikke støtter SSR
+
+const ProductGallery = dynamic(
+  () =>
+    import('@/components/jsx/ProductGallery').then(mod => mod.ProductGallery),
+  {
+    ssr: false,
+    loading: () => (
+      <div className='relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-surface-raised/40' />
+    )
+  }
+)
 
 type Props = {
-  product: ProductsQueryResponse
-  selectedVariant: ProductVariant
-  allVariants: ProductVariant[]
-  variantImages: Image[]
+  product: ShopifyProduct
+  selectedVariant: ShopifyProductVariant
+  allVariants: ShopifyProductVariant[]
+  variantImages: ShopifyMediaImage[]
   onOptionChange: (optionName: string, value: string) => void
 }
 
-function ProductPageView({ product, selectedVariant, allVariants, variantImages, onOptionChange }: Props) {
-  const { title, descriptionHtml, selectedOrFirstAvailableVariant: productOptions } = product
-  const variantProfile = selectedVariant.metafield.reference
-  const subtitle = variantProfile?.subtitle?.value ?? undefined
-
-  const optionOrder = ['Størrelse', 'Farge'] as const
-  type Ordered = (typeof optionOrder)[number]
-
-  const sortedOptions = (productOptions ?? [])
-    .filter((opt): opt is (typeof productOptions)[number] => {
-      return optionOrder.includes(opt.name as Ordered)
-    })
-    .sort((a, b) => {
-      const ia = optionOrder.indexOf(a.name as Ordered)
-      const ib = optionOrder.indexOf(b.name as Ordered)
-      return ia - ib
-    })
+/**
+ * @module components/ProductPageView
+ * @param ProductPageView Exists to be a "canvas". It is designed to be as simple and reusable as possible.
+ */
+export default function ProductPageView({
+  product,
+  selectedVariant,
+  allVariants,
+  variantImages,
+  onOptionChange
+}: Props) {
+  const { title, descriptionHtml, options } = product
+  const variantProfile = selectedVariant.variantProfile?.reference
+  const subtitle = variantProfile?.subtitle?.value
+  const optionOrder = ['Størrelse', 'Farge']
+  const sortedOptions = options
+    .filter(option => optionOrder.includes(option.name))
+    .sort(
+      (color, size) =>
+        optionOrder.indexOf(color.name) - optionOrder.indexOf(size.name)
+    )
 
   return (
     <main className='container mt-10 mx-auto p-4 md:p-8'>
@@ -58,7 +82,7 @@ function ProductPageView({ product, selectedVariant, allVariants, variantImages,
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>{title}</BreadcrumbPage>
+            <BreadcrumbPage>{product.title}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -67,9 +91,11 @@ function ProductPageView({ product, selectedVariant, allVariants, variantImages,
         <GalleryColumn>
           <div className='mb-8 text-left'>
             <h1 className='text-3xl font-bold md:text-4xl'>{title}</h1>
-            {subtitle ?
-              <p className='mt-2 text-lg text-foreground-on-dark/80'>{subtitle}</p>
-            : null}
+            {subtitle && (
+              <p className='mt-2 text-lg text-foreground-on-dark/80'>
+                {subtitle}
+              </p>
+            )}
           </div>
           <div className='md:sticky md:top-24 h-fit'>
             <div className='mx-auto max-w-xl'>
@@ -81,43 +107,49 @@ function ProductPageView({ product, selectedVariant, allVariants, variantImages,
         </GalleryColumn>
 
         <OptionsColumn>
-          <Price amount={selectedVariant.price.amount} currencyCode={selectedVariant.price.currencyCode} />
+          <Price
+            amount={selectedVariant.price.amount}
+            currencyCode={selectedVariant.price.currencyCode}
+          />
           <section aria-labelledby='product-options'>
             <h2 id='product-options' className='sr-only'>
               Produktvalg
             </h2>
-
             <div className='mt-30 space-y-8'>
-              {sortedOptions.map(opt => {
-                const lower = opt.name.toLowerCase()
-                const selectorProps = {
-                  optionName: opt.name,
-                  values: opt.optionValues.map(v => v.name),
+              {sortedOptions.map(option => {
+                const lower = option.name.toLowerCase()
+                const props = {
+                  optionName: option.name,
+                  values: option.values,
                   variants: allVariants,
                   selectedVariant,
                   onSelect: onOptionChange
-                } as const
+                }
 
-                if (lower === 'størrelse') return <SizeSelector key={opt.name} {...selectorProps} />
-                if (lower === 'farge') return <ColorSelector key={opt.name} {...selectorProps} />
+                if (lower === 'størrelse')
+                  return <SizeSelector key={option.name} {...props} />
+                if (lower === 'farge')
+                  return <ColorSelector key={option.name} {...props} />
                 return null
               })}
             </div>
 
             <div className='mt-8'>
-              <AddToCart variantId={selectedVariant.id} />
+              <AddToCartController selectedVariant={selectedVariant} />
             </div>
 
-            <article aria-label='Produktbeskrivelse' className='prose prose-invert mt-12 max-w-none text-foreground-on-dark/80'>
+            <article
+              aria-label='Produktbeskrivelse'
+              className='prose prose-invert mt-12 max-w-none text-foreground-on-dark/80'
+            >
               <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
             </article>
           </section>
         </OptionsColumn>
       </ProductGrid>
-
-      <ProductPageAccordion variantProfile={variantProfile} />
+      <ProductPageAccordion
+        variantProfile={selectedVariant.variantProfile?.reference}
+      />
     </main>
   )
 }
-
-export default ProductPageView

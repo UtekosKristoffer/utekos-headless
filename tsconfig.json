@@ -27,6 +27,14 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "global.d.ts", ".next/types/**/*.ts", "src/lib/errors"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.graphql",
+    "src/lib/queries/graphql.d.ts",
+    ".next/types/**/*.ts",
+    "src/lib/errors"
+  ],
   "exclude": ["node_modules", "alpha/**/*"]
 }

@@ -1,5 +1,5 @@
 import { fromZodError } from 'zod-validation-error'
-import { RemoveCartLineSchema } from '@/db/zod/schemas'
+import { RemoveCartLineSchema } from '@/db/zod/schemas/RemoveCartLineSchema'
 import type { RemoveCartLineInput } from '@/types/cart'
 
 /**

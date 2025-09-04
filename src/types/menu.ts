@@ -18,3 +18,4 @@ export type ShopifyMenuItem = {
   url: string
   items?: ShopifyMenuItem[] | undefined // Eksplisitt undefined for exactOptionalPropertyTypes
 }
+

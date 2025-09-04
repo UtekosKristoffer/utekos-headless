@@ -1,5 +1,13 @@
-import z from 'zod'
-import type { Money, Image, MetaobjectReference } from '@/types'
+// Path: src/types/products.ts
+import type {
+  Money,
+  Image,
+  MetaobjectReference,
+  ShopifySelectedOption,
+  ShopifyImage,
+  ShopifyPrice,
+  ShopifyMediaConnection
+} from '@/types'
 /**
  * @module types/products
  * @description This module contains TypeScript types related to products, including product details,
@@ -7,44 +15,85 @@ import type { Money, Image, MetaobjectReference } from '@/types'
  * when working with product data throughout the application.
  */
 
-export type Product = {
+export type ShopifyProduct = {
   id: string
   title: string
-  availableForSale: boolean
   handle: string
   descriptionHtml: string
-  featuredImage: {
-    altText: string | null
-    url: string
-    id: string
+  featuredImage: ShopifyImage | null
+  priceRange: {
+    minVariantPrice: ShopifyPrice
   }
+  options: ShopifyOption[]
+  media: ShopifyMediaConnection
+  variants: ShopifyVariantConnection
+}
+
+export type ShopifyOption = {
+  name: string
+  values: string[]
+}
+
+export type ShopifyCollection = {
+  id: string
+  title: string
+  handle: string
+  description: string
+  products: ShopifyProductConnection
+}
+
+export type ShopifyProductConnection = {
+  edges: Array<{
+    node: ShopifyProduct
+  }>
+  pageInfo?: {
+    hasNextPage: boolean
+    hasPreviousPage: boolean
+    startCursor?: string
+    endCursor?: string
+  }
+}
+export type ProductOption = {
+  name: string
+  values: string[]
+}
+
+export type ProductVariantInput = {
+  id: string
+  title: string
+  image: Image | null
+  selectedOptions: {
+    name: string
+    value: string
+  }[]
   price: Money
   metafield?: MetaobjectReference
 }
 
-export type ProductsQueryResponse = {
+export type ProductsQueryResponse = ShopifyProduct
+export type ShopifyProductVariant = {
   id: string
   title: string
   availableForSale: boolean
-  handle: string
-  descriptionHtml: string
-  featuredImage: {
-    url: string
-    id: string
-  }
-  selectedOrFirstAvailableVariant: SelectedOrFirstAvailableVariant
+  selectedOptions: ShopifySelectedOption[]
+  price: ShopifyPrice
+  image: ShopifyImage | null
+  variantProfile: VariantProfileReference | null
+  variantProfileData?: { [key: string]: any }
 }
 
-export type ProductVariant = {
-  id: string
-  title: string
-  image: Image | null
-  price: Money
+export type VariantProfileReference = {
+  reference: MetaobjectReference | null
+}
+
+export type ShopifyVariantEdge = {
+  node: ShopifyProductVariant
 }
 
 export type SelectedOrFirstAvailableVariant = {
   id: string
   title: string
+  product: ShopifyProductVariant
   price: {
     amount: Money
     currencyCode: string
@@ -60,6 +109,6 @@ export type SelectedOrFirstAvailableVariant = {
   metafield?: MetaobjectReference | null
 }
 
-export const ShopifyProductVariant = z.object({ id: z.number().min(5), quantity: z.number().min(1) }).brand<'ShopifyProductVariant'>()
-type ShopifyProductVariant = z.infer<typeof ShopifyProductVariant>
-// src/lib/types.ts eller src/lib/errors.ts
+export type ShopifyVariantConnection = {
+  edges: ShopifyVariantEdge[]
+}

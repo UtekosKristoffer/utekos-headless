@@ -1,6 +1,7 @@
 // Path: src/components/renderNode.tsx
+import type { RenderableNode } from '@/types/nodes'
+;('use client')
 
-'use client'
 /**
  * @fileoverview The workhorse of the rich text rendering system.
  * This module provides a recursive function that traverses a rich text Abstract
@@ -10,7 +11,6 @@
  * @see {module:components/RichTextRenderer} for the entry-point component.
  */
 
-import type { RenderableNode } from '@/types/'
 import React from 'react'
 
 /**
@@ -23,12 +23,17 @@ import React from 'react'
  * @returns {React.ReactNode | null} The corresponding React element for the given
  * node, or `null` for any unhandled node types.
  */
-export const renderNode = (node: RenderableNode, index: number): React.ReactNode => {
+export const renderNode = (
+  node: RenderableNode,
+  index: number
+): React.ReactNode => {
   switch (node.type) {
     case 'paragraph':
       // The type assertion `node.children as RenderableNode[]` is necessary here
       // because TypeScript cannot infer the specific child type within the union.
-      return <p key={index}>{(node.children as RenderableNode[]).map(renderNode)}</p>
+      return (
+        <p key={index}>{(node.children as RenderableNode[]).map(renderNode)}</p>
+      )
 
     case 'list':
       const listItems = (node.children as RenderableNode[]).map(renderNode)
@@ -46,7 +51,11 @@ export const renderNode = (node: RenderableNode, index: number): React.ReactNode
       )
 
     case 'list-item':
-      return <li key={index}>{(node.children as RenderableNode[]).map(renderNode)}</li>
+      return (
+        <li key={index}>
+          {(node.children as RenderableNode[]).map(renderNode)}
+        </li>
+      )
 
     case 'text':
       let textElement: React.ReactNode = node.value

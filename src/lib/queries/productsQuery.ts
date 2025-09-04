@@ -1,15 +1,21 @@
-//Path: src/lib/queries/productsQuery.ts
-export const productsQuery = `
-  query getProducts($first: Int!, $query: String) {
+// Path: src/lib/queries/productsQuery.graphql
+import { gql } from 'graphql-request'
+export const productsQuery = gql`
+  query Products($first: Int!, $query: String) {
     products(first: $first, query: $query) {
       edges {
         cursor
         node {
           id
-          title
           availableForSale
-          handle
           title
+          handle
+          options {
+            name
+            optionValues {
+              name
+            }
+          }
           descriptionHtml
           featuredImage {
             url
@@ -24,7 +30,7 @@ export const productsQuery = `
             }
             selectedOptions {
               name
-              value
+              value    
             }
             compareAtPrice {
               amount
@@ -34,7 +40,6 @@ export const productsQuery = `
               namespace
               key
               reference {
-                __typename
                 ... on Metaobject {
                   images: field(key: "images") {
                     value
@@ -87,5 +92,3 @@ export const productsQuery = `
     }
   }
 `
-
-export default productsQuery
