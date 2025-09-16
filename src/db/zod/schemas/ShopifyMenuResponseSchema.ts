@@ -1,7 +1,7 @@
 // Path: src/db/zod/schemas/ShopifyMenuResponseSchema.ts
 
+import { ShopifyMenuItemSchema } from '@/db/zod/schemas/ShopifyMenuItemSchema'
 import { z } from '@/db/zod/zodConfig'
-import { ShopifyMenuItemSchema } from '@/db/zod/schemas'
 /**
  * Schema for validating Shopify menu item structure.
  * Uses z.lazy() for recursive validation with proper optional handling.
@@ -19,4 +19,6 @@ export const ShopifyMenuResponseSchema = z.object({
     .nullable()
 })
 
-export const ShopifyMenuResponseJSONSchema = z.toJSONSchema(ShopifyMenuResponseSchema)
+export const ShopifyMenuResponseJSONSchema = z.toJSONSchema(
+  ShopifyMenuResponseSchema
+)

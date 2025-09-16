@@ -1,6 +1,6 @@
 // Path: src/lib/errors/MissingCartIdError.ts
 
-import { CartErrorCode } from '@/constants' // Oppdatert import
+import { CartErrorCode } from '@/constants/CartErrorCode' // Oppdatert import
 
 /**
  * A custom domain error for when the cart ID cookie is missing.

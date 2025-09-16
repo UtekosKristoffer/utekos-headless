@@ -5,6 +5,10 @@ import { z } from '@/db/zod/zodConfig'
 /**
  * Schema for clearing cart - expects no arguments.
  */
-export const ClearCartLineSchema = z.unknown().refine(val => val === undefined || (typeof val === 'object' && val !== null && Object.keys(val).length === 0), { error: 'Tøm handlekurv forventer ingen argumenter.' })
+/**
+ * Schema for clearing cart - expects an empty object.
+ * Using z.object({}) ensures that z.infer results in the type `{}`.
+ */
+export const ClearCartLineSchema = z.object({}).strict()
 
 export const ClearCartLineJSONSchema = z.toJSONSchema(ClearCartLineSchema)

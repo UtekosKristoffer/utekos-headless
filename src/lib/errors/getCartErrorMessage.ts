@@ -1,7 +1,6 @@
 // Path: src/lib/errors/getCartErrorMessage.ts
-
-import type { CartActionsResult } from '@/types'
 import { getErrorMessage } from '@/lib/errors/getErrorMessage'
+import type { CartActionsResult } from '@/types/cart'
 
 /**
  * Specialized version for cart operations that includes cart-specific messaging.
@@ -14,7 +13,10 @@ import { getErrorMessage } from '@/lib/errors/getErrorMessage'
  * @param data - Optional cart action result
  * @returns Human-readable cart error message in Norwegian
  */
-export const getCartErrorMessage = (error: Error, data?: CartActionsResult): string => {
+export const getCartErrorMessage = (
+  error: Error,
+  data?: CartActionsResult
+): string => {
   const baseMessage = getErrorMessage(error, data)
 
   // For generic messages, provide cart-specific context

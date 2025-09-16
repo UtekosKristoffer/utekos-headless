@@ -1,7 +1,7 @@
 // Path: src/db/zod/schemas/ShopifyMenuItemSchema.ts
 
 import { z } from '@/db/zod/zodConfig'
-import type { ShopifyMenuItem } from '@/types'
+import type { ShopifyMenuItem } from '@/types/menu'
 
 /**
  * Schema for validating Shopify menu item structure.

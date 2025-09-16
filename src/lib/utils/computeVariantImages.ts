@@ -1,17 +1,18 @@
-import { safeJsonParse } from '@/lib/utils/safeJsonParse'
-import type { ShopifyMediaImage, ShopifyProduct, ShopifyProductVariant } from '@/types/shopify'
+import type { ShopifyImage } from '@/types/media'
+import type { ShopifyProduct, ShopifyProductVariant } from '@/types/products'
 
-export function computeVariantImages(product: ShopifyProduct, variant: ShopifyProductVariant | null): ShopifyMediaImage[] {
-  if (!variant || !product.media) return []
+export function computeVariantImages(
+  product: ShopifyProduct,
+  variant: ShopifyProductVariant | null
+): ShopifyImage[] {
+  // Hent den ferdige bildelisten direkte fra de transformerte dataene.
+  const images = variant?.variantProfileData?.images
 
-  const imagesJson = variant.variantProfile?.reference?.images?.value
-  const gids = safeJsonParse<string[]>(imagesJson, [])
-  const all = product.media.edges.map(e => e.node)
-
-  if (gids.length > 0) {
-    return all.filter(m => gids.includes(m.id))
+  // Sørg for at det er en liste før vi returnerer.
+  if (Array.isArray(images)) {
+    return images
   }
 
-  const fallback = all.find(m => m.image.url === variant.image?.url)
-  return fallback ? [fallback] : []
+  // Reserveløsning hvis noe skulle feile
+  return product.featuredImage ? [product.featuredImage] : []
 }

@@ -1,6 +1,6 @@
 // Path: src/lib/utils/flattenVariants.ts
 
-import type { ShopifyProduct, ShopifyProductVariant } from '@/types'
+import type { ShopifyProduct, ShopifyProductVariant } from '@types'
 
 /**
  * @module utils/flattenVariants

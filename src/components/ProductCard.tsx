@@ -1,10 +1,9 @@
-// Fil: src/Components/Products/ProductCard.tsx
-import type { Route } from 'next'
-import Link from 'next/link'
+// Fil: src/components/ProductCard.tsx
 import Image from 'next/image'
-import { formatPrice } from '@/lib/utils'
-import { Button } from '@/components/ui/Button'
+import Link from 'next/link'
+
 import { AspectRatio } from '@/components/ui/Aspect-ratio'
+import { Button } from '@/components/ui/Button'
 import {
   Card,
   CardContent,
@@ -12,25 +11,28 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/Card'
-import type { ShopifyProduct } from '@/types'
+import { formatPrice } from '@/lib/utils/formatPrice'
+import type { ShopifyProduct } from '@types'
+
+import type { Route } from 'next'
 
 interface ProductCardProps {
   product: ShopifyProduct
 }
 
-async function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product }: ProductCardProps) {
   const price = formatPrice(product.priceRange.minVariantPrice)
-  const productUrl = `/products/${product.handle}` as Route
+  const productUrl = `/produkter/${product.handle}` as Route
   const imageUrl = product.featuredImage?.url || '/placeholder.svg'
   const altText = product.featuredImage?.altText || product.title
 
   return (
     <Link href={productUrl} className='group flex'>
-      <Card className='h-full flex flex-col transition-all duration-200 ease-in-out hover:shadow-lg hover:-translate-y-1 w-full'>
+      <Card className='h-full flex flex-col bg-card-foreground transition-all duration-200 ease-in-out hover:shadow-lg hover:-translate-y-1 w-full'>
         <CardContent className='p-0'>
           <AspectRatio
             ratio={2 / 3}
-            className='w-full overflow-hidden rounded-t-lg bg-surface-raised/40'
+            className='w-full overflow-hidden rounded-t-lg'
           >
             <Image
               src={imageUrl}
@@ -47,7 +49,7 @@ async function ProductCard({ product }: ProductCardProps) {
         </CardHeader>
         <CardFooter className='p-4 pt-0 flex justify-between items-center'>
           <p className='font-semibold'>{price}</p>
-          <Button variant='outline' size='sm'>
+          <Button variant='secondary' size='sm'>
             Se produkt
           </Button>
         </CardFooter>
@@ -55,5 +57,3 @@ async function ProductCard({ product }: ProductCardProps) {
     </Link>
   )
 }
-
-export default ProductCard

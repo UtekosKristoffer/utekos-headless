@@ -1,4 +1,4 @@
-// Path: src/lib/helpers/menu/fetchMenu.ts (renamed from getMenu.ts)
+// Path: src/lib/helpers/menu/fetchMenu.ts
 
 /**
  * @fileoverview Server-side menu fetching with Zod v4 + zod-validation-error integration.
@@ -8,13 +8,15 @@
  * error handling and Norwegian error messages for menu-related operations.
  */
 
+import { menuQuery } from '@/api/graphql/queries/menu/menuQuery'
 import { storefrontClient } from '@/clients/storefrontApiClient'
-import { menuQuery } from '@/lib/queries'
-import { extractErrorMessage, handleShopifyErrors } from '@/lib/errors'
-import { normalizeMenu } from '@/lib/helpers/normalizers'
-import { validateMenuResponse, validateMenuHandle } from '@/lib/helpers/validations'
+import { extractErrorMessage } from '@/lib/errors/extractErrorMessage'
+import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
+import { normalizeMenu } from '@/lib/helpers/normalizers/normalizeMenu'
+import { validateMenuResponse } from '@/lib/helpers/validations/validateMenuResponse'
+import type { MenuItem, MenuQueryResponse } from '@/types/menu'
 
-import type { MenuItem } from '@/types'
+import { validateMenuHandle } from '../validations/validateMenuHandle'
 
 /**
  * Retrieves a navigation menu by handle from the Shopify Storefront API.
@@ -26,10 +28,12 @@ export const fetchMenu = async (handle: string): Promise<MenuItem[]> => {
   try {
     validateMenuHandle(handle)
 
-    const { data, errors } = await storefrontClient.request(menuQuery, {
-      variables: { handle }
-    })
-
+    const { data, errors } = await storefrontClient.request<MenuQueryResponse>(
+      menuQuery,
+      {
+        variables: { handle }
+      }
+    )
     if (errors) {
       handleShopifyErrors(errors)
     }
@@ -49,5 +53,3 @@ export const fetchMenu = async (handle: string): Promise<MenuItem[]> => {
     return []
   }
 }
-
-export default fetchMenu

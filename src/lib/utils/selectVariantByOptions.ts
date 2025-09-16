@@ -1,39 +1,59 @@
-// Path: src/lib/utils/selectVariantByOptions.ts
-
-import type { ShopifyProduct, ShopifyProductVariant } from '@/types/'
-
 /**
+ * @fileoverview Provides functionality to find matching product variants based on option updates.
  * @module utils/selectVariantByOptions
- * @description Selects a product variant based on the current variant and a changed option.
- * @function selectVariantByOptions
- * @param {ShopifyProduct} product - The Shopify product object containing variants.
- * @param {ShopifyProductVariant | null} current - The currently selected variant.
- * @param {string | null} optionName - The name of the option that has changed.
- * @param {string | null} value - The new value for the changed option.
- * @returns {ShopifyProductVariant | null} - The newly selected variant or null if not found.
  */
 
-export function selectVariantByOptions(
-  product: ShopifyProduct,
-  current: ShopifyProductVariant | null,
-  optionName: string | null,
-  value: string | null
-): ShopifyProductVariant | null {
-  const allVariants = product.variants.edges.map(e => e.node)
+import type { ShopifyProductVariant } from '@/types/products'
 
-  if (!optionName || !value) {
-    return allVariants[0] ?? null
-  }
+/**
+ * Represents the input for updating a variant selection
+ */
+type UpdateInput = {
+  current: ShopifyProductVariant
+  optionName: string
+  value: string
+}
 
-  const newOptions = new Map<string, string>()
-  current?.selectedOptions.forEach(opt => newOptions.set(opt.name, opt.value))
-  newOptions.set(optionName, value)
+/**
+ * Builds an options map from the current variant and applies the update
+ */
+const buildNextOptions = (update: UpdateInput): Record<string, string> => {
+  const nextOptions = update.current.selectedOptions.reduce<
+    Record<string, string>
+  >((acc, option) => {
+    acc[option.name] = option.value
+    return acc
+  }, {})
 
-  const newVariant = allVariants.find(variant =>
-    Array.from(newOptions.entries()).every(([key, val]) =>
-      variant.selectedOptions.some(opt => opt.name === key && opt.value === val)
-    )
+  nextOptions[update.optionName] = update.value
+  return nextOptions
+}
+
+/**
+ * Checks if a variant matches the provided options
+ */
+const isMatchingVariant = (
+  variant: ShopifyProductVariant,
+  targetOptions: Record<string, string>
+): boolean =>
+  variant.selectedOptions.every(
+    option => targetOptions[option.name] === option.value
   )
 
-  return newVariant ?? null
+/**
+ * Finds a product variant that matches the updated option selection.
+ *
+ * @param variants - Array of all available product variants
+ * @param update - Object containing current variant and option to update
+ * @returns The matching variant or null if no match found
+ */
+export const selectVariantByOptions = (
+  variants: readonly ShopifyProductVariant[],
+  update: UpdateInput
+): ShopifyProductVariant | null => {
+  const nextOptions = buildNextOptions(update)
+  const match = variants.find(variant =>
+    isMatchingVariant(variant, nextOptions)
+  )
+  return match ?? null
 }

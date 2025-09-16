@@ -24,12 +24,23 @@
  * @module lib/actions/createCartMutationOrchestrator
  */
 import { revalidateTag } from 'next/cache'
-import { getCartIdFromCookie } from '@/lib/helpers/cart'
-import { normalizeCart } from '@/lib/helpers/normalizers'
-import { MissingCartIdError } from '@/lib/errors'
-import type { Cart, InputValidator, PerformMutation, MutationInput } from '@/types'
 
-export function createCartMutationOrchestrator<TInput extends MutationInput>(validateInput: InputValidator<TInput>, performMutation: PerformMutation<TInput>): (input: TInput) => Promise<Cart> {
+import { MissingCartIdError } from '@/lib/errors/MissingCartIdError'
+import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
+import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
+import type {
+  Cart,
+  CartMutationInput,
+  InputValidator,
+  PerformMutation
+} from '@/types/cart'
+
+export function createCartMutationOrchestrator<
+  TInput extends CartMutationInput
+>(
+  validateInput: InputValidator<TInput>,
+  performMutation: PerformMutation<TInput>
+): (_input: TInput) => Promise<Cart> {
   return async (input: TInput): Promise<Cart> => {
     // Validate the shape and semantics of the input before doing anything else.
     validateInput(input)

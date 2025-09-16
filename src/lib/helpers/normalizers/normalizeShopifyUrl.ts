@@ -1,30 +1,30 @@
-// Path: src/lib/utils/normalizeShopifyUrl.ts
+// Path: src/lib/helpers/normalizers/normalizeShopifyUrl.ts
 
 import type { Route } from 'next'
 
 /**
- * @fileoverview Provides a utility function to safely extract the pathname from a full URL.
- * @module lib/utils/normalizeShopifyUrl
+ * Normalizes Shopify URLs to local paths
+ * Returns Route type for Next.js Link compatibility
  */
+export function normalizeShopifyUrl(url: string): Route {
+  // Remove domain and get just the path
+  const urlPath = url.replace(/^https?:\/\/[^\/]+/, '')
 
-/**
- * Safely parses a URL string and returns its pathname. If the URL is invalid,
- * it returns the original string as a fallback.
- * This is useful for cleaning up absolute URLs from Shopify to be used as relative paths.
- *
- * @param {string} url - The full URL string to parse.
- * @returns {string} The pathname part of the URL, or the original string on error.
- * @example
- * normalizeShopifyUrl('https://example.com/products/my-product') // returns '/products/my-product'
- * normalizeShopifyUrl('/some/relative/path') // returns '/some/relative/path'
- */
-export function normalizeShopifyUrl(url: string): Route | string {
-  try {
-    // new URL() requires a base if the URL is relative, but it correctly
-    // parses pathnames from absolute URLs.
-    return new URL(url).pathname as Route
-  } catch {
-    // If new URL() fails (e.g., for an already relative path), return the original string.
-    return url
+  // Map Shopify URLs to your local paths
+  const urlMappings: Record<string, string> = {
+    '/pages/vaske-og-vedlikehold/produktguide':
+      '/footer-routes/kjøpshjelp/produktguide/vask-og-vedlikehold',
+    '/pages/utekos/storrelsesguide':
+      '/footer-routes/kjøpshjelp/storrelsesguide',
+    '/pages/productinfo/teknologi-og-materialer':
+      '/footer-routes/kjøpshjelp/specs',
+    '/pages/kundeservice/kontaktskjema':
+      '/footer-routes/kjøpshjelp/kontakt-oss',
+    '/pages/kontakt-oss': '/footer-routes/kjøpshjelp/kontakt-oss'
+    // Add more mappings as needed
   }
+
+  // Return mapped URL or use the path as-is if no mapping exists
+  // Cast to Route to satisfy Next.js Link type requirements
+  return (urlMappings[urlPath] || urlPath) as Route
 }

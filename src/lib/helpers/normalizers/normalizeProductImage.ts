@@ -1,6 +1,6 @@
 // Path: src/lib/helpers/normalizers/normalizeProductImage.ts
 
-import type { ShopifyImage } from '@/types'
+import type { ShopifyImage } from '@/types/media'
 /**
  * Normalizes Shopify featuredImage to application Image type with guaranteed altText.
  * @module normalizers/normalizeProductImage

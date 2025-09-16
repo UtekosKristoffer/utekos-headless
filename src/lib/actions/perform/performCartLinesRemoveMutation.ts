@@ -12,9 +12,10 @@
  */
 'use server'
 
+import { mutationCartLinesRemove } from '@/api/graphql/mutations/cart'
 import { storefrontClient } from '@/clients/storefrontApiClient'
-import { mutationCartLinesRemove } from '@/lib/mutations'
-import type { CartLinesRemoveResponse, CartResponse } from '@/types'
+import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
+import type { CartLinesRemoveResponse, CartResponse } from '@/types/cart'
 
 /**
  * Removes a single line from the cart via the Storefront API.
@@ -24,10 +25,19 @@ import type { CartLinesRemoveResponse, CartResponse } from '@/types'
  * @returns {Promise<CartResponse | null>} The updated cart or null if missing from the response.
  * @throws {Error} Propagates any API errors.
  */
-export const performCartLinesRemoveMutation = async (cartId: string, input: { lineId: string }): Promise<CartResponse | null> => {
-  const { data, errors } = await storefrontClient.request<CartLinesRemoveResponse>(mutationCartLinesRemove, {
-    variables: { cartId, lineIds: [input.lineId] }
-  })
-  if (errors) throw errors
+export const performCartLinesRemoveMutation = async (
+  cartId: string,
+  input: { lineId: string }
+): Promise<CartResponse | null> => {
+  const { data, errors } =
+    await storefrontClient.request<CartLinesRemoveResponse>(
+      mutationCartLinesRemove,
+      {
+        variables: { cartId, lineIds: [input.lineId] }
+      }
+    )
+  if (errors) {
+    handleShopifyErrors(errors)
+  }
   return data?.cartLinesRemove?.cart ?? null
 }

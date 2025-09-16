@@ -1,52 +1,58 @@
-// Path: src/lib/actions/addLineAction.ts
-
+// Path: src/lib/actions/addCartLinesAction.ts
 'use server'
 
-/**
- * @fileoverview Server action for adding a line item to the shopping cart.
- *
- *   This module defines an asynchronous action that orchestrates the “add line”
- *   mutation by delegating validation, mutation execution and error handling
- *   to specialized helpers.  Keeping the action focused on a single
- *   responsibility helps maintain clear boundaries between validation,
- *   business logic and error formatting, and makes the code easier for AI
- *   assistants and other tooling to reason about.
- *
- * @module lib/actions/addCartLineAction
- */
+import { revalidateTag } from 'next/cache'
 
-import { mapThrownErrorToActionResult } from '@/lib/errors'
-import { validateAddLineInput } from '@/lib/helpers/validations'
-import { performCartLinesAddMutation, createCartMutationOrchestrator } from '@/lib/actions'
-import type { AddToCartFormValues, CartActionsResult } from '@/types'
-
-/**
- * Orchestrated function that validates input and performs the add-lines mutation.
- * This value is not exported; it is used internally by {@link addLineAction}.
- *
- * @private
- * @type {function(AddToCartFormValues): Promise<Cart>}
- */
-const addCartLinesOrThrow = createCartMutationOrchestrator(validateAddLineInput, performCartLinesAddMutation)
+import { performCartCreateMutation } from '@/lib/actions/perform/performCartCreateMutation'
+import { performCartLinesAddMutation } from '@/lib/actions/perform/performCartLinesAddMutation'
+import { mapThrownErrorToActionResult } from '@/lib/errors/mapThrownErrorToActionResult'
+import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
+import { setCartIdInCookie } from '@/lib/helpers/cart/setCartIdInCookie'
+import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
+import { validateAddLineInput } from '@/lib/helpers/validations/validateAddLineInput'
+import type {
+  AddToCartFormValues,
+  CartActionsResult,
+  CartResponse
+} from '@/types/cart'
 
 /**
  * Adds a new line item to the user's cart.
+ * This action uniquely handles cart creation if one does not already exist.
  *
- *   The responsibility of this action is to accept form input, delegate
- *   validation and the underlying API call to helpers, and translate any
- *   thrown errors into a normalized action result using
- *   {@link mapThrownErrorToActionResult}.  By delegating these concerns,
- *   the function remains focused on coordinating a single business
- *   operation: “add this line to the cart.”
- *
- * @param {AddToCartFormValues} input - The values supplied by the client to
- *   add a product variant and quantity.
- * @returns {Promise<CartActionsResult>} A promise resolving to a success result with the updated cart on success,
- *   or a failure result describing why the operation could not be completed.
+ * @param {AddToCartFormValues} input - The values for the product variant and quantity.
+ * @returns {Promise<CartActionsResult>} A promise resolving to a success or failure result.
  */
-export const addCartLinesAction = async (input: AddToCartFormValues): Promise<CartActionsResult> => {
+export const addCartLinesAction = async (
+  input: AddToCartFormValues
+): Promise<CartActionsResult> => {
   try {
-    const cart = await addCartLinesOrThrow(input)
+    // 1. Valider input
+    validateAddLineInput(input)
+
+    // 2. Hent eksisterende cartId fra cookie
+    let cartId = await getCartIdFromCookie()
+    let rawCart: CartResponse | null
+
+    if (cartId) {
+      // 3a. Hvis handlekurv finnes, legg til varer
+      rawCart = await performCartLinesAddMutation(cartId, input)
+    } else {
+      // 3b. Hvis handlekurv IKKE finnes, opprett en ny med varen
+      rawCart = await performCartCreateMutation(input)
+      if (rawCart) {
+        // 4. Lagre den nye ID-en i en cookie
+        await setCartIdInCookie(rawCart.id)
+      }
+    }
+
+    if (!rawCart) {
+      throw new Error('API mutation returned no cart data.')
+    }
+
+    // 5. Normaliser data og returner
+    revalidateTag('cart')
+    const cart = normalizeCart(rawCart)
     return { success: true, message: 'Item added to cart.', cart }
   } catch (thrown: unknown) {
     console.error('An error occurred in addCartLinesAction:', thrown)

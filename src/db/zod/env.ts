@@ -10,14 +10,21 @@ const envSchema = z.object({
 
 const parsedEnv = envSchema.safeParse({
   SHOPIFY_STORE_DOMAIN: process.env.SHOPIFY_STORE_DOMAIN,
-  SHOPIFY_STOREFRONT_API_VERSION: process.env.SHOPIFY_STOREFRONT_API_VERSION ?? '2025-07',
-  SHOPIFY_STOREFRONT_PUBLIC_ACCESS_TOKEN: process.env.SHOPIFY_STOREFRONT_PUBLIC_ACCESS_TOKEN
+  SHOPIFY_STOREFRONT_API_VERSION:
+    process.env.SHOPIFY_STOREFRONT_API_VERSION ?? '2025-07',
+  SHOPIFY_STOREFRONT_PUBLIC_ACCESS_TOKEN:
+    process.env.SHOPIFY_STOREFRONT_PUBLIC_ACCESS_TOKEN
 })
 
 if (!parsedEnv.success) {
   const flattenedErrors = z.flattenError(parsedEnv.error)
-  console.error('❌ Invalid environment variables:', flattenedErrors.fieldErrors)
-  throw new Error('Invalid environment variables. Check the console for details.')
+  console.error(
+    '❌ Invalid environment variables:',
+    flattenedErrors.fieldErrors
+  )
+  throw new Error(
+    'Invalid environment variables. Check the console for details.'
+  )
 }
 
 export const env = parsedEnv.data

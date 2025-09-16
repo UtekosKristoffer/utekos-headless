@@ -1,7 +1,8 @@
 // Path: src/lib/helpers/getCartIdFromCookie.ts
 
 import { cookies } from 'next/headers'
-import { CART_COOKIE_NAME } from '@/constants'
+
+import { CART_COOKIE_NAME } from '@/constants/cookies'
 
 /**
  * Asynchronously retrieves the cart ID from the designated cart cookie.
@@ -17,6 +18,6 @@ export async function getCartIdFromCookie(): Promise<string | null> {
   const cartIdCookie = cookieStore.get(CART_COOKIE_NAME)
 
   // Using an intermediate variable (`cartIdCookie`) makes it easier to debug
-  // by allowing inspection of the entire cookie object before accessing its value.
+  // By allowing inspection of the entire cookie object before accessing its value.
   return cartIdCookie?.value ?? null
 }

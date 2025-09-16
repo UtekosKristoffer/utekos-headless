@@ -16,11 +16,11 @@
  */
 'use server'
 
-import { mapThrownErrorToActionResult } from '@/lib/errors'
-import { validateRemoveCartLineInput } from '@/lib/helpers/validations'
-import { performCartLinesRemoveMutation, createCartMutationOrchestrator } from '@/lib/actions'
-
-import type { CartActionsResult } from '@/types'
+import { createCartMutationOrchestrator } from '@/lib/actions/createCartMutationOrchestrator'
+import { performCartLinesRemoveMutation } from '@/lib/actions/perform/performCartLinesRemoveMutation'
+import { mapThrownErrorToActionResult } from '@/lib/errors/mapThrownErrorToActionResult'
+import { validateRemoveCartLineInput } from '@/lib/helpers/validations/validateRemoveCartLineInput'
+import type { CartActionsResult } from '@/types/cart'
 
 /**
  * Internal orchestrated function for removing a cart line.  This constant
@@ -28,7 +28,10 @@ import type { CartActionsResult } from '@/types'
  *
  * @private
  */
-const removeCartLineOrThrow = createCartMutationOrchestrator(validateRemoveCartLineInput, performCartLinesRemoveMutation)
+const removeCartLineOrThrow = createCartMutationOrchestrator(
+  validateRemoveCartLineInput,
+  performCartLinesRemoveMutation
+)
 
 /**
  * Removes a single line item from the cart.
@@ -43,12 +46,17 @@ const removeCartLineOrThrow = createCartMutationOrchestrator(validateRemoveCartL
  * @returns {Promise<CartActionsResult>} Resolves with the updated cart on success; otherwise includes
  *   error details mapped by {@link mapThrownErrorToActionResult}.
  */
-export const removeCartLineAction = async (input: { lineId: string }): Promise<CartActionsResult> => {
+export const removeCartLineAction = async (input: {
+  lineId: string
+}): Promise<CartActionsResult> => {
   try {
     const cart = await removeCartLineOrThrow(input)
     return { success: true, message: 'Line item removed.', cart }
   } catch (e: unknown) {
-    console.error(`An error occurred in removeCartLineAction for input: ${JSON.stringify(input)}`, e)
+    console.error(
+      `An error occurred in removeCartLineAction for input: ${JSON.stringify(input)}`,
+      e
+    )
     return mapThrownErrorToActionResult(e)
   }
 }

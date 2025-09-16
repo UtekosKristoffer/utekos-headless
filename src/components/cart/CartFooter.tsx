@@ -2,23 +2,29 @@
 'use client'
 
 import * as React from 'react'
-import { DrawerFooter } from '@/components/ui/Drawer'
-import { useCartPending } from '@/useHooks'
-import { formatPrice } from '@/lib/utils'
+
 import { CheckoutButton } from '@/components/jsx/CheckoutButton'
-import type { Cart } from '@/types'
+import { DrawerFooter } from '@/components/ui/Drawer'
+import { useCartPending } from '@/hooks/useCartPending'
+import { formatPrice } from '@/lib/utils/formatPrice'
+import type { Cart } from '@/types/cart'
 
 /**
  * Determines if the cart footer should be rendered.
  * Pure function for clean conditional logic.
  */
-const shouldRenderFooter = (cart: Cart | null | undefined): boolean => Boolean(cart && cart.lines.length > 0)
+const shouldRenderFooter = (cart: Cart | null | undefined): boolean =>
+  Boolean(cart && cart.lines.length > 0)
 
 /**
  * Pure component that renders the subtotal display.
  * Separates presentation logic from main component.
  */
-const SubtotalDisplay = ({ subtotal }: { subtotal: string }): React.JSX.Element => (
+const SubtotalDisplay = ({
+  subtotal
+}: {
+  subtotal: string
+}): React.JSX.Element => (
   <div className='flex justify-between font-semibold'>
     <span>Delsum</span>
     <span>{subtotal}</span>
@@ -33,7 +39,11 @@ const SubtotalDisplay = ({ subtotal }: { subtotal: string }): React.JSX.Element 
  * to pure helper functions and reusable components, following the
  * single responsibility principle.
  */
-export const CartFooter = ({ cart }: { cart: Cart | null | undefined }): React.JSX.Element | null => {
+export const CartFooter = ({
+  cart
+}: {
+  cart: Cart | null | undefined
+}): React.JSX.Element | null => {
   const isPending = useCartPending() > 0
 
   if (!shouldRenderFooter(cart)) {
@@ -45,7 +55,12 @@ export const CartFooter = ({ cart }: { cart: Cart | null | undefined }): React.J
   return (
     <DrawerFooter className='border-t'>
       <SubtotalDisplay subtotal={subtotalFormatted} />
-      <CheckoutButton checkoutUrl={cart!.checkoutUrl} subtotal={subtotalFormatted} isPending={isPending} className='mt-4' />
+      <CheckoutButton
+        checkoutUrl={cart!.checkoutUrl}
+        subtotal={subtotalFormatted}
+        isPending={isPending}
+        className='mt-4'
+      />
     </DrawerFooter>
   )
 }

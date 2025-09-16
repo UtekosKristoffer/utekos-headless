@@ -15,10 +15,10 @@
 'use server'
 
 import { createCartMutationOrchestrator } from '@/lib/actions/createCartMutationOrchestrator'
-import { mapThrownErrorToActionResult } from '@/lib/errors'
-import type { CartActionsResult } from '@/types'
-import { performCartClearMutation } from '@/lib/actions/perform'
-import { validateClearCartInput } from '@/db/zod/validate'
+import { performCartClearMutation } from '@/lib/actions/perform/performCartClearMutation'
+import { mapThrownErrorToActionResult } from '@/lib/errors/mapThrownErrorToActionResult'
+import { validateClearCartInput } from '@/lib/helpers/validations/validateClearCartInput'
+import type { CartActionsResult } from '@/types/cart'
 
 /**
  * Internal orchestrated function for clearing a cart.  It validates the input
@@ -26,7 +26,10 @@ import { validateClearCartInput } from '@/db/zod/validate'
  *
  * @private
  */
-const clearCartOrThrow = createCartMutationOrchestrator(validateClearCartInput, performCartClearMutation)
+const clearCartOrThrow = createCartMutationOrchestrator(
+  validateClearCartInput,
+  performCartClearMutation
+)
 
 /**
  * Clears the current cart of all items.
@@ -44,7 +47,7 @@ export const clearCartAction = async (): Promise<CartActionsResult> => {
     const cart = await clearCartOrThrow({})
     return { success: true, message: 'Cart cleared successfully.', cart }
   } catch (e: unknown) {
-    console.error(`An error occurred in clearCartAction:`, e)
+    console.error('An error occurred in clearCartAction:', e)
     return mapThrownErrorToActionResult(e)
   }
 }

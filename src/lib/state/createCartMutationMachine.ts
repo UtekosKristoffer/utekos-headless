@@ -1,5 +1,4 @@
 // Path: src/lib/state/createCartMutationMachine.ts
-'use client'
 
 /**
  * @fileoverview XState machine for cart mutations with Zod v4 + zod-validation-error integration.
@@ -16,8 +15,14 @@
  */
 
 import { assign, fromPromise, setup, type ErrorActorEvent } from 'xstate'
-import { extractCartErrorMessage } from '@/lib/errors'
-import type { CartMutationContext, CartActions, CartActionsResult, CartMutationEvent } from '@/types'
+
+import { extractCartErrorMessage } from '@/lib/errors/extractCartErrorMessage'
+import type {
+  CartActions,
+  CartActionsResult,
+  CartMutationContext,
+  CartMutationEvent
+} from '@/types/cart'
 
 /**
  * Creates a state machine for handling cart mutations with comprehensive error handling.
@@ -30,30 +35,37 @@ import type { CartMutationContext, CartActions, CartActionsResult, CartMutationE
  * @param revalidateCart - Function to invalidate cached cart data
  * @returns Configured XState machine for cart mutations
  */
-export const createCartMutationMachine = (serverActions: CartActions, revalidateCart: () => void) =>
+export const createCartMutationMachine = (
+  serverActions: CartActions,
+  revalidateCart: () => void
+) =>
   setup({
     types: {
       context: {} as CartMutationContext,
       events: {} as CartMutationEvent
     },
     actors: {
-      cartMutator: fromPromise<CartActionsResult, CartMutationEvent>(async ({ input: event }) => {
-        switch (event.type) {
-          case 'ADD_LINES':
-            return serverActions.addLine(event.input)
-          case 'UPDATE_LINE':
-            return serverActions.updateLineQuantity(event.input)
-          case 'REMOVE_LINE':
-            return serverActions.removeLine(event.input)
-          case 'CLEAR':
-            return serverActions.clearCart()
-          default: {
-            // Type-safe exhaustiveness check ensures all events are handled
-            const exhaustiveCheck: never = event
-            throw new Error(`Unhandled event type: ${String(exhaustiveCheck)}`)
+      cartMutator: fromPromise<CartActionsResult, CartMutationEvent>(
+        async ({ input: event }) => {
+          switch (event.type) {
+            case 'ADD_LINES':
+              return serverActions.addCartLine(event.input)
+            case 'UPDATE_LINE':
+              return serverActions.updateCartLineQuantity(event.input)
+            case 'REMOVE_LINE':
+              return serverActions.removeCartLine(event.input)
+            case 'CLEAR':
+              return serverActions.clearCart()
+            default: {
+              // Type-safe exhaustiveness check ensures all events are handled
+              const exhaustiveCheck: never = event
+              throw new Error(
+                `Unhandled event type: ${String(exhaustiveCheck)}`
+              )
+            }
           }
         }
-      })
+      )
     }
   }).createMachine({
     id: 'CartMutation',
@@ -74,13 +86,13 @@ export const createCartMutationMachine = (serverActions: CartActions, revalidate
             {
               // Handle successful server action response that indicates failure
               guard: ({ event }) => {
-                const result = event.output as CartActionsResult
+                const result = event.output
                 return !result.success
               },
               target: 'idle',
               actions: assign({
                 error: ({ event }) => {
-                  const result = event.output as CartActionsResult
+                  const result = event.output
                   return result.message || 'En uventet feil oppstod'
                 }
               })
@@ -107,7 +119,10 @@ export const createCartMutationMachine = (serverActions: CartActions, revalidate
                   // Otherwise, extract from the raw error using our utilities
                   return extractCartErrorMessage(event.error)
                 } catch (extractionError) {
-                  console.error('Error extracting cart error message:', extractionError)
+                  console.error(
+                    'Error extracting cart error message:',
+                    extractionError
+                  )
                   return 'En uventet feil oppstod under behandling av handlekurven'
                 }
               }

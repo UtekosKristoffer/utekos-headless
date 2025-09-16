@@ -5,7 +5,7 @@ import { z } from '@/db/zod/zodConfig'
 import * as Either from '@/lib/utils/either' // Importer alt som "Either"
 
 export type Endpoint = z.infer<typeof EndpointSchema>
-
+ 
 /**
  * Validerer input og returnerer resultatet som en Either.
  * Siden Zods .parse() er synkron, men vår tryCatch er bygget for å håndtere

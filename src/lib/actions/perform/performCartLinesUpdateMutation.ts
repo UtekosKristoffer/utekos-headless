@@ -11,10 +11,10 @@
  * @module lib/actions/perform
  */
 'use server'
-
+import { mutationCartLinesUpdate } from '@/api/graphql/mutations/cart'
 import { storefrontClient } from '@/clients/storefrontApiClient'
-import { mutationCartLinesUpdate } from '@/lib/mutations'
-import type { CartLinesUpdateResponse, CartResponse } from '@/types'
+import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
+import type { CartLinesUpdateResponse, CartResponse } from '@/types/cart'
 
 /**
  * Updates a cart line's quantity via the Storefront API.
@@ -24,10 +24,22 @@ import type { CartLinesUpdateResponse, CartResponse } from '@/types'
  * @returns {Promise<CartResponse | null>} The updated cart, or null if missing.
  * @throws {Error} Propagates any API errors.
  */
-export const performCartLinesUpdateMutation = async (cartId: string, input: { lineId: string; quantity: number }): Promise<CartResponse | null> => {
-  const { data, errors } = await storefrontClient.request<CartLinesUpdateResponse>(mutationCartLinesUpdate, {
-    variables: { cartId, lines: [{ id: input.lineId, quantity: input.quantity }] }
-  })
-  if (errors) throw errors
+export const performCartLinesUpdateMutation = async (
+  cartId: string,
+  input: { lineId: string; quantity: number }
+): Promise<CartResponse | null> => {
+  const { data, errors } =
+    await storefrontClient.request<CartLinesUpdateResponse>(
+      mutationCartLinesUpdate,
+      {
+        variables: {
+          cartId,
+          lines: [{ id: input.lineId, quantity: input.quantity }]
+        }
+      }
+    )
+  if (errors) {
+    handleShopifyErrors(errors)
+  }
   return data?.cartLinesUpdate?.cart ?? null
 }

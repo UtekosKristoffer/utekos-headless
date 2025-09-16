@@ -1,15 +1,14 @@
 'use client'
 
-import React from 'react'
+import { Button } from '@/components/ui/Button'
 import {
+  FormControl,
+  FormField,
   FormItem,
   FormLabel,
-  FormControl,
-  FormMessage,
-  FormField
+  FormMessage
 } from '@/components/ui/Form'
 import { Input } from '@/components/ui/Input'
-import { Button } from '@/components/ui/Button'
 type AddToCartProps = {
   isPending: boolean
   isDisabled: boolean

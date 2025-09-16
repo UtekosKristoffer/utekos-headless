@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   typedRoutes: true,
   experimental: {
     reactCompiler: true,
-    cacheComponents: true,
+    useCache: true,
     optimizePackageImports: [
       'xstate',
       '@tanstack/react-query',
@@ -13,18 +13,17 @@ const nextConfig: NextConfig = {
       '@xstate/store'
     ]
   },
-  ignoreBuildErrors: true,
   eslint: {
     ignoreDuringBuilds: true
   },
-  remotePatterns: [
-    {
-      protocol: 'https',
-      hostname: 'cdn.shopify.com',
-      port: '',
-      pathname: '/**'
-    }
-  ]
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.shopify.com',
+        pathname: '/**'
+      }
+    ]
+  }
 }
-
 export default nextConfig

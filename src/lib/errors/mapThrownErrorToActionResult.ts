@@ -9,11 +9,15 @@
  */
 
 import { isValidationErrorLike } from 'zod-validation-error'
-import { isShopifyErrorResponse, formatShopifyErrorResponse, extractCartErrorMessage, MissingCartIdError } from '@/lib/errors'
-import { CartErrorCode } from '@/constants'
 
-import type { CartErrorCodeType, CartActionsResult } from '@/types'
+import { CartErrorCode } from '@/constants/CartErrorCode'
+import { isShopifyErrorResponse } from '@/lib/errors/isShopifyErrorResponse'
+import { MissingCartIdError } from '@/lib/errors/MissingCartIdError'
+import type { CartErrorCodeType } from '@/types/api/errors'
+import type { CartActionsResult } from '@/types/cart'
 
+import { extractCartErrorMessage } from './extractCartErrorMessage'
+import { formatShopifyErrorResponse } from './formatShopifyErrorResponse'
 /**
  * Maps any thrown error into a standardized CartActionsResult.
  *
@@ -21,7 +25,9 @@ import type { CartErrorCodeType, CartActionsResult } from '@/types'
  * message extraction to specialized utilities. This separation allows the same
  * error message logic to be reused in different contexts.
  */
-export function mapThrownErrorToActionResult(thrown: unknown): CartActionsResult {
+export function mapThrownErrorToActionResult(
+  thrown: unknown
+): CartActionsResult {
   // For Shopify API errors, use the existing formatter which has more complex logic
   if (isShopifyErrorResponse(thrown)) {
     return formatShopifyErrorResponse(thrown)

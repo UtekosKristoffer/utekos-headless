@@ -13,9 +13,10 @@
  */
 'use server'
 
+import { mutationCartLinesUpdate } from '@/api/graphql/mutations/cart'
 import { storefrontClient } from '@/clients/storefrontApiClient'
-import { mutationCartLinesUpdate } from '@/lib/mutations'
-import type { CartLinesUpdateResponse, CartResponse } from '@/types'
+import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
+import type { CartLinesUpdateResponse, CartResponse } from '@/types/cart'
 
 /**
  * Executes a clear‑cart mutation against the Storefront API.
@@ -24,10 +25,18 @@ import type { CartLinesUpdateResponse, CartResponse } from '@/types'
  * @returns {Promise<CartResponse | null>} The updated cart object on success, or null if the response is missing.
  * @throws {Error} Propagates any errors returned by the API.
  */
-export const performCartClearMutation = async (cartId: string): Promise<CartResponse | null> => {
-  const { data, errors } = await storefrontClient.request<CartLinesUpdateResponse>(mutationCartLinesUpdate, {
-    variables: { cartId, lines: [] } // Sending an empty array clears the cart.
-  })
-  if (errors) throw errors
+export const performCartClearMutation = async (
+  cartId: string
+): Promise<CartResponse | null> => {
+  const { data, errors } =
+    await storefrontClient.request<CartLinesUpdateResponse>(
+      mutationCartLinesUpdate,
+      {
+        variables: { cartId, lines: [] } // Sending an empty array clears the cart.
+      }
+    )
+  if (errors) {
+    handleShopifyErrors(errors)
+  }
   return data?.cartLinesUpdate?.cart ?? null
 }

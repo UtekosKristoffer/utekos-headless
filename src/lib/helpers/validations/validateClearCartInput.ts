@@ -1,7 +1,8 @@
-'use server'
+// Path: src/lib/helpers/validations/validateClearCartInput.ts
 
 import { fromZodError } from 'zod-validation-error'
-import { ClearCartLineSchema } from '@/db/zod/schemas'
+
+import { ClearCartLineSchema } from '@/db/zod/schemas/ClearCartLineSchema'
 import type { ClearCartLineInput } from '@/types/cart'
 
 /**

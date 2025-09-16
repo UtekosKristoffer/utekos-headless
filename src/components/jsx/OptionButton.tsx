@@ -1,4 +1,4 @@
-// src/components/OptionButton.tsx
+// Path: src/components/OptionButton.tsx
 'use client'
 
 import type { ReactNode } from 'react'

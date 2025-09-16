@@ -1,11 +1,11 @@
 // Path: src/lib/errors/menuErrors.ts
 
-import { CartErrorCode } from '@/constants'
+import { CartErrorCode } from '@/constants/CartErrorCode'
 
 /**
  * Custom error for when a menu is not found.
  * Allows for type-safe error handling with instanceof.
- * 
+ *
  * @module lib/errors
  * @public
  * @readonly

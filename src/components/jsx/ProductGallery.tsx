@@ -1,11 +1,18 @@
 'use client'
+
+import 'swiper/css'
+import 'swiper/css/a11y'
+import 'swiper/css/navigation'
+
+import type { ShopifyImage } from '@/types/media'
 import Image from 'next/image'
+import { A11y, Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, A11y } from 'swiper/modules'
-import type { ShopifyMediaImage } from '@/types'
+
+// Oppdater Props-typen til å forvente en liste av ShopifyImage
 type ProductGalleryProps = {
   title: string
-  images: ShopifyMediaImage[]
+  images: ShopifyImage[]
 }
 
 export function ProductGallery({ title, images }: ProductGalleryProps) {
@@ -25,14 +32,14 @@ export function ProductGallery({ title, images }: ProductGalleryProps) {
         className='w-full max-w-sm md:max-w-md lg:max-w-lg mx-auto overflow-hidden rounded-lg'
         aria-label={`Produktbilder for ${title}`}
       >
-        {images.map((mediaImage, index) => (
+        {images.map((image, index) => (
           <SwiperSlide
-            key={mediaImage.id}
+            key={image.id}
             className='aspect-[2/3] flex items-center justify-center mx-auto'
           >
             <Image
-              src={mediaImage.image.url}
-              alt={mediaImage.image.altText || `Bilde av ${title}`}
+              src={image.url}
+              alt={image.altText || `Bilde av ${title}`}
               fill
               sizes='(min-width: 1024px) 24rem, (min-width: 768px) 20rem, 16rem'
               className='object-contain md:max-w-[300px] md:max-h-[450px] mx-auto place-self-center'

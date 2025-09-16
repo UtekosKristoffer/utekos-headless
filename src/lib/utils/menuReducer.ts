@@ -1,11 +1,6 @@
-/**
- * @file src/lib/utils/menuReducer.ts
- * @module utils/menuReducer
- * @function menuReducer
- * @description Reducer function to manage menu state
- */
+// Path: src/lib/utils/menuReducer.ts
 
-import { type State, type Action } from '@/types'
+import type { Action, State } from '@/types/menu'
 
 export function menuReducer(state: State, action: Action): State {
   switch (action.type) {
@@ -17,5 +12,3 @@ export function menuReducer(state: State, action: Action): State {
       return state
   }
 }
-
-export default menuReducer

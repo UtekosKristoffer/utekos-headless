@@ -1,6 +1,6 @@
 // Path: src/lib/errors/InvalidMenuDataError.ts
 
-import { CartErrorCode } from '@/constants'
+import { CartErrorCode } from '@/constants/CartErrorCode'
 
 /**
  * Custom error for invalid menu data.

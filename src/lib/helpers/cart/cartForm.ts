@@ -9,11 +9,13 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
-import type { ActorRefFrom } from 'xstate'
 
-import { AddToCartSchema } from '@/db/zod/schemas'
+import { AddToCartSchema } from '@/db/zod/schemas/AddToCartSchema'
 import type { createCartMutationMachine } from '@/lib/state/createCartMutationMachine'
-import type { AddToCartFormValues, ShopifyProductVariant } from '@/types'
+import type { AddToCartFormValues } from '@/types/cart'
+import type { ShopifyProductVariant } from '@/types/products'
+
+import type { ActorRefFrom } from 'xstate'
 
 /**
  * A pure function that creates the configuration object for the RHF `useForm` hook.
@@ -60,7 +62,7 @@ export const createAddToCartSubmitHandler =
  */
 export const withSuccessToast =
   (
-    submitHandler: (values: AddToCartFormValues) => void,
+    submitHandler: (_values: AddToCartFormValues) => void,
     selectedVariant: ShopifyProductVariant | null
   ) =>
   (values: AddToCartFormValues) => {

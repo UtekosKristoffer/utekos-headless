@@ -9,7 +9,7 @@
  * while maintaining perfect TypeScript integration.
  */
 
-import { CartErrorCodeSchema } from '@/db/zod/schemas'
+import { CartErrorCodeSchema } from '@/db/zod/schemas/CartErrorCodeSchema'
 
 /**
  * Constant object for dot-notation access to error codes.

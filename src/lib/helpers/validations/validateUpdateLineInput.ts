@@ -1,17 +1,16 @@
-'use server'
+// Path: src/lib/helpers/validations/validateUpdateLineInput.ts
 
 import { fromZodError } from 'zod-validation-error'
-import { UpdateCartSchema } from '@/db/zod/schemas'
-import type { UpdateCartLineInput } from '@/types/cart'
 
-/**
- * Validates add-to-cart input using global errorMap for consistent messaging.
- */
+import { UpdateCartSchema } from '@/db/zod/schemas/UpdateCartSchema'
+import type { UpdateCartLineInput } from '@/types/cart'
 
 /**
  * Validates update-line input using global errorMap for consistent messaging.
  */
-export const validateUpdateLineInput = (input: UpdateCartLineInput): void => {
+export const validateUpdateLineInput = async (
+  input: UpdateCartLineInput
+): Promise<void> => {
   const result = UpdateCartSchema.safeParse(input)
   if (!result.success) {
     throw fromZodError(result.error)

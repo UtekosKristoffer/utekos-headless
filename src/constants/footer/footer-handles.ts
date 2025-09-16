@@ -1,0 +1,16 @@
+// Path: src/constants/menu.ts
+
+// Kjøpshjelp
+export const SHOPPING_GUIDE_FOOTER_MENU_HANDLE = 'kj-pshjelp'
+// Kundeservice
+export const CUSTOMER_SERVICE_FOOTER_MENU_HANDLE = 'kundeservice'
+export const ABOUT_US_FOOTER_MENU_HANDLE = 'om-oss'
+export const LEGAL_FOOTER_MENU_HANDLE = 'juridisk'
+export const COMPANY_INFORMATION_FOOTER_MENU_HANDLE = 'footer'
+export const FOOTER_MENUS = [
+  SHOPPING_GUIDE_FOOTER_MENU_HANDLE,
+  CUSTOMER_SERVICE_FOOTER_MENU_HANDLE,
+  ABOUT_US_FOOTER_MENU_HANDLE,
+  LEGAL_FOOTER_MENU_HANDLE,
+  COMPANY_INFORMATION_FOOTER_MENU_HANDLE
+] as const

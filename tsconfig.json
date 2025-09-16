@@ -24,17 +24,22 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@types": ["./types/index.ts"],
+      "@types/*": ["./types/*"]
     }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "eslint.config.mts",
     "**/*.graphql",
     "src/lib/queries/graphql.d.ts",
     ".next/types/**/*.ts",
-    "src/lib/errors"
+    "src/lib/errors",
+    "src/api/types/event",
+    "src/api/types/state"
   ],
   "exclude": ["node_modules", "alpha/**/*"]
 }

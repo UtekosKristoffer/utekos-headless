@@ -10,21 +10,25 @@
  *   steps implied by its name.  This modular approach helps maintain
  *   clarity and facilitates testing and reuse.
  *
- * @module lib/actions/updateLineQuantityAction
+ * @module lib/actions/updateCartLineQuantityAction
  */
 'use server'
 
-import { mapThrownErrorToActionResult } from '@/lib/errors'
-import { performCartLinesUpdateMutation, createCartMutationOrchestrator } from '@/lib/actions'
-import { validateUpdateLineInput } from '@/lib/helpers/validations'
-import type { CartActionsResult } from '@/types'
+import { createCartMutationOrchestrator } from '@/lib/actions/createCartMutationOrchestrator'
+import { performCartLinesUpdateMutation } from '@/lib/actions/perform/performCartLinesUpdateMutation'
+import { mapThrownErrorToActionResult } from '@/lib/errors/mapThrownErrorToActionResult'
+import { validateUpdateLineInput } from '@/lib/helpers/validations/validateUpdateLineInput'
+import type { CartActionsResult } from '@/types/cart'
 
 /**
  * Internal orchestrated function for updating a cart line quantity.
  *
  * @private
  */
-const updateCartLineQuantityOrThrow = createCartMutationOrchestrator(validateUpdateLineInput, performCartLinesUpdateMutation)
+const updateCartLineQuantityOrThrow = createCartMutationOrchestrator(
+  validateUpdateLineInput,
+  performCartLinesUpdateMutation
+)
 
 /**
  * Updates the quantity of an existing line in the cart.
@@ -39,12 +43,18 @@ const updateCartLineQuantityOrThrow = createCartMutationOrchestrator(validateUpd
  * @returns {Promise<CartActionsResult>} Resolves with the updated cart on success; otherwise contains
  *   error details.
  */
-export const updateLineQuantityAction = async (input: { lineId: string; quantity: number }): Promise<CartActionsResult> => {
+export const updateCartLineQuantityAction = async (input: {
+  lineId: string
+  quantity: number
+}): Promise<CartActionsResult> => {
   try {
     const cart = await updateCartLineQuantityOrThrow(input)
     return { success: true, message: 'Cart updated successfully.', cart }
   } catch (e: unknown) {
-    console.error(`An error occurred in updateLineQuantityAction for input: ${JSON.stringify(input)}`, e)
+    console.error(
+      `An error occurred in updateLineQuantityAction for input: ${JSON.stringify(input)}`,
+      e
+    )
     return mapThrownErrorToActionResult(e)
   }
 }

@@ -11,30 +11,8 @@
  * @module lib/helpers/normalizeMenu
  */
 
-import { ShopifyMenuItemSchema } from '@/db/zod/schemas/menuSchemas'
-import { fromError } from 'zod-validation-error'
-import { InvalidMenuDataError } from '@/lib/errors/MenuNotFoundError'
-import type { MenuItem } from '@/types'
-import type { ShopifyMenuItem } from '@/db/zod/schemas/menuSchemas'
-
-/**
- * Validates a single menu item against the Zod schema.
- * Provides early validation to catch malformed menu items.
- *
- * @param item - Raw menu item from Shopify
- * @throws {InvalidMenuDataError} When item structure is invalid
- */
-const validateMenuItem = (item: unknown): ShopifyMenuItem => {
-  const result = ShopifyMenuItemSchema.safeParse(item)
-
-  if (!result.success) {
-    const validationError = fromError(result.error)
-    throw new InvalidMenuDataError(`Invalid menu item structure: ${validationError.toString()}`)
-  }
-
-  return result.data
-}
-
+import { validateMenuItem } from '@/lib/helpers/validations/validateMenuItem'
+import type { MenuItem, ShopifyMenuItem } from '@/types/menu'
 /**
  * Transforms a single validated Shopify menu item into application format.
  * This is a pure transformation function that handles recursive structure.
@@ -45,6 +23,7 @@ const validateMenuItem = (item: unknown): ShopifyMenuItem => {
 const transformMenuItem = (item: ShopifyMenuItem): MenuItem => ({
   title: item.title,
   url: item.url,
+  path: item.path,
   items: item.items ? item.items.map(transformMenuItem) : []
 })
 
@@ -71,6 +50,3 @@ export const normalizeMenu = (items: unknown[]): MenuItem[] => {
 }
 
 export default normalizeMenu
-
-// Re-export the type for backward compatibility
-export type { ShopifyMenuItem } from '@/db/zod/schemas/menuSchemas'

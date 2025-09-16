@@ -5,14 +5,7 @@ applyTo: 'src/**/*.{ts,tsx}'
 Note: More information, guidelines and documentation can be found in the following locale files:
 
 .github/copilot-config.md,
-.github/tanstack-query-v5/copilot-tanstack-guide.md,
-.github/tanstack-query-v5/copilot-tanstack-new-features.md,
-.github/tanstack-query-v5/copilot-tanstack-useQuery.md,
-.github/tanstack-query-v5/copilot-tanstack-QueryClient.md,
-.github/tanstack-query-v5/hooks/copilot-tanstack-query-v5-hooks.md,
-.github/tanstack-query-v5/hooks/examples/copilot-tanstack-prefetching.md,
-.github/tanstack-query-v5/hooks/examples/copilot-tanstack-useQuery.md,
-.github/tanstack-query-v5/hooks/examples/copilot-tanstack-suspense-streaming-examples.md,
+ copilot-tanstack-suspense-streaming-examples.md,
 .github/xstate/copilot-xstate-breaking-changes.md,
 .github/xstate/copilot-@xstate-react.md,
 .github/typescript/copilot-typescript-breaking-changes.md,
@@ -49,7 +42,8 @@ These are the three laws of our architecture. All code must respect them.
 
 1.  **Rendering: Server-First.** Server Components (RSC) are the default for data loading and UI. Client Components (`'use client'`) are used **only** for interactivity.
 2.  **Data Flow: Unidirectional & Server-Driven.** Client interactions trigger Server Actions. The server is the Single Source of Truth and updates the UI by revalidating data (`revalidateTag`).
-3.  **Compiler: Trust the React Compiler.** Write simple, readable code. **Avoid manual memoization** like `useCallback` and `useMemo`.
+3. **Streaming** and **Suspense**  must be implemented to  to break down a route into smaller "chunks" and progressively stream them from the server to the client as they become ready.
+4.  **Compiler: Trust the React Compiler.** Write simple, readable code. **Avoid manual memoization** like `useCallback` and `useMemo`.
 
 ---
 
