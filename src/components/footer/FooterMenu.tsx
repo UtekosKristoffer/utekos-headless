@@ -1,11 +1,12 @@
+// Path: src/components/footer/FooterMenu.tsx
 'use client'
 
+import type { ShopifyFooterMenu } from '@types'
 import clsx from 'clsx'
+import type { Route } from 'next'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-
-import type { ShopifyFooterMenu } from '@types'
 
 export function FooterMenuItem({ item }: { item: ShopifyFooterMenu }) {
   const pathname = usePathname()
@@ -18,7 +19,7 @@ export function FooterMenuItem({ item }: { item: ShopifyFooterMenu }) {
   return (
     <li>
       <Link
-        href={item.path}
+        href={item.path as Route}
         className={clsx(
           'block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300',
           {
