@@ -4,7 +4,7 @@ import 'swiper/css'
 import 'swiper/css/a11y'
 import 'swiper/css/navigation'
 
-import type { SwiperImage } from '@types'
+import type { Image as SwiperImage } from '@types'
 import Image from 'next/image'
 import { A11y, Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
