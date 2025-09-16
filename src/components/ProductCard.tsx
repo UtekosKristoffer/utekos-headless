@@ -1,4 +1,4 @@
-// Fil: src/components/ProductCard.tsx
+// Path: src/components/ProductCard.tsx
 import Image from 'next/image'
 import Link from 'next/link'
 

@@ -1,4 +1,4 @@
-//Path: src/components/ui/button.tsx
+//Path: src/components/ui/Button.tsx
 
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'

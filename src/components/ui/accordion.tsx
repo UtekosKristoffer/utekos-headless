@@ -1,4 +1,4 @@
-//Path: src/components/ui/accordion.tsx
+//Path: src/components/ui/Accordion.tsx
 'use client'
 
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
