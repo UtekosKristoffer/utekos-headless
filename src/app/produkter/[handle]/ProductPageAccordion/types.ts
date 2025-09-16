@@ -1,4 +1,4 @@
 import type { MetaobjectReference } from '@types'
 export type ProductPageAccordionProps = {
-  variantProfile: MetaobjectReference | null | undefined
+  variantProfile: Partial<MetaobjectReference> | null | undefined
 }
