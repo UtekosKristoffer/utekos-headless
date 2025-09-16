@@ -1,13 +1,15 @@
 import { TAGS } from '@/api/constants'
 import { getProductQuery } from '@/api/graphql/queries/products'
 import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
-import type { Product, ShopifyProductOperation } from '@types'
+import type { ShopifyProduct, ShopifyProductOperation } from '@types'
 import {
   unstable_cacheLife as cacheLife,
   unstable_cacheTag as cacheTag
 } from 'next/cache'
 
-export async function getProduct(handle: string): Promise<Product | undefined> {
+export async function getProduct(
+  handle: string
+): Promise<ShopifyProduct | undefined> {
   'use cache'
   cacheTag(TAGS.products)
   cacheLife('days')
