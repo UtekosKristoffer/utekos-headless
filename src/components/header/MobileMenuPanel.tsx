@@ -9,7 +9,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger
-} from '@/components/ui/Sheet'
+} from '@/components/ui/sheet'
 
 import type { MenuItem } from '@types'
 

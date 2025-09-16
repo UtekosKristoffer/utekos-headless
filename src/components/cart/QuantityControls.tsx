@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/ui/button'
 import { Minus, Plus } from 'lucide-react'
 import { getQuantityAriaLabel } from './utils/getQuantityAriaLabel'
 

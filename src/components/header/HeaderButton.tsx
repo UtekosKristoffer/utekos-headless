@@ -6,7 +6,7 @@ import { MenuIcon } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useEffect, useReducer } from 'react'
 
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/ui/button'
 import { menuReducer } from '@/lib/utils/menuReducer'
 export default function HeaderButton() {
   const [state, dispatch] = useReducer(menuReducer, { status: 'CLOSED' })

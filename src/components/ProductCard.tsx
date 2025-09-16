@@ -2,15 +2,15 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { AspectRatio } from '@/components/ui/Aspect-ratio'
-import { Button } from '@/components/ui/Button'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle
-} from '@/components/ui/Card'
+} from '@/components/ui/card'
 import { formatPrice } from '@/lib/utils/formatPrice'
 import type { ShopifyProduct } from '@types'
 

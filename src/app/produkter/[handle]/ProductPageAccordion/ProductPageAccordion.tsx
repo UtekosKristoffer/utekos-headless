@@ -8,7 +8,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger
-} from '@/components/ui/Accordion'
+} from '@/components/ui/accordion'
 import type { ProductPageAccordionProps } from '@types'
 import { renderMetafield } from './helpers/renderMetafield'
 

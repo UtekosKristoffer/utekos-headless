@@ -5,7 +5,7 @@ import { X } from 'lucide-react'
 import Image from 'next/image'
 import * as React from 'react'
 
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/ui/button'
 import { useCartMutation } from '@/hooks/useCartMutation'
 import { performOptimisticQuantityUpdate } from '@/lib/actions/perform/performOptimisticQuantityUpdate'
 import { performOptimisticRemoval } from '@/lib/actions/perform/performOptimisticRemoval'

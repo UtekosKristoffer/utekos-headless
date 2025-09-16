@@ -17,7 +17,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator
-} from '@/components/ui/Breadcrumb'
+} from '@/components/ui/breadcrumb'
 
 import { renderOptionComponent } from '@/app/produkter/[handle]/ProductPageView/helpers/renderOptionComponent'
 import { getSortedOptions } from '@/lib/helpers/async/getSortedOptions'

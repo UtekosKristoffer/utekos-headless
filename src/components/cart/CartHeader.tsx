@@ -4,13 +4,13 @@
 import { X } from 'lucide-react'
 import * as React from 'react'
 
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/ui/button'
 import {
   DrawerClose,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle
-} from '@/components/ui/Drawer'
+} from '@/components/ui/drawer'
 import { useCartOptimistic } from '@/hooks/useCartOptimistic'
 
 /**

@@ -1,6 +1,6 @@
 // Path: src/components/cart/CartBody.tsx
 
-import { DrawerDescription } from '@/components/ui/Drawer'
+import { DrawerDescription } from '@/components/ui/drawer'
 import { useCartPending } from '@/hooks/useCartPending'
 import type { Cart } from '@types'
 

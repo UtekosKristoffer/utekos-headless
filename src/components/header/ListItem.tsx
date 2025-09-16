@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import * as React from 'react'
 
-import { NavigationMenuLink } from '@/components/ui/NavigationMenu'
+import { NavigationMenuLink } from '@/components/ui/navigation-menu'
 import { cn } from '@/lib/utils/className'
 
 import type { Route } from 'next'

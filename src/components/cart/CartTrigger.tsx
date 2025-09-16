@@ -4,8 +4,8 @@
 import { ShoppingBagIcon } from 'lucide-react'
 import * as React from 'react'
 
-import { Button } from '@/components/ui/Button'
-import { DrawerTrigger } from '@/components/ui/Drawer'
+import { Button } from '@/components/ui/button'
+import { DrawerTrigger } from '@/components/ui/drawer'
 import { useCartStoreSnapshot } from '@/hooks/useCartStoreSnapshot'
 import { cartStore } from '@/lib/state/cartStore'
 

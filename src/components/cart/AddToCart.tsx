@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
-import { Form } from '@/components/ui/Form'
+import { Form } from '@/components/ui/form'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import {
   createAddToCartFormConfig,

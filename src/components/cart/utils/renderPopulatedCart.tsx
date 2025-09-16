@@ -1,5 +1,5 @@
 import CartLineItem from '@/components/cart/CartLineItem'
-import { Separator } from '@/components/ui/Separator'
+import { Separator } from '@/components/ui/separator'
 import { Fragment } from 'react'
 
 import type { Cart } from '@types'

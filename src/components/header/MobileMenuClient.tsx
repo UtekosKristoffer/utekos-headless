@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useReducer } from 'react'
 
 import { MobileMenuPanel } from '@/components/header/MobileMenuPanel'
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/ui/button'
 import { menuReducer } from '@/lib/utils/menuReducer'
 import type { MenuItem } from '@types'
 

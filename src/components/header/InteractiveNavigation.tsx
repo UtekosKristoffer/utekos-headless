@@ -10,7 +10,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle
-} from '@/components/ui/NavigationMenu'
+} from '@/components/ui/navigation-menu'
 
 export const InteractiveNavMenu = NavigationMenu
 export const InteractiveNavContent = NavigationMenuContent

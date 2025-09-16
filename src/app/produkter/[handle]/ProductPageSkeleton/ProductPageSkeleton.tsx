@@ -1,7 +1,7 @@
 import { GalleryColumn } from '@/components/jsx/GalleryColumn'
 import { OptionsColumn } from '@/components/jsx/OptionsColumn'
 import { ProductGrid } from '@/components/jsx/ProductGrid'
-import { Skeleton } from '@/components/ui/Skeleton'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export function ProductPageSkeleton() {
   return (

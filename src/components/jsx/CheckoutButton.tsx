@@ -1,13 +1,16 @@
 // Path: src/components/ui/CheckoutButton.tsx
 'use client'
 
+import { Button } from '@/components/ui/button'
 import * as React from 'react'
-import { Button } from '@/components/ui/Button'
 
 /**
  * Generates appropriate aria-label for checkout button based on cart state.
  */
-const getCheckoutAriaLabel = (subtotal: string, isPending: boolean): string => (isPending ? 'Behandler bestilling...' : `Gå til kassen med subtotal ${subtotal}`)
+const getCheckoutAriaLabel = (subtotal: string, isPending: boolean): string =>
+  isPending ?
+    'Behandler bestilling...'
+  : `Gå til kassen med subtotal ${subtotal}`
 
 /**
  * Pure, reusable checkout button component for external checkout navigation.
@@ -26,8 +29,17 @@ export const CheckoutButton = ({
   isPending: boolean
   className?: string
   children?: React.ReactNode
-} & Omit<React.ComponentProps<typeof Button>, 'asChild' | 'disabled' | 'aria-label'>): React.JSX.Element => (
-  <Button asChild className={className} disabled={isPending} aria-label={getCheckoutAriaLabel(subtotal, isPending)} {...props}>
+} & Omit<
+  React.ComponentProps<typeof Button>,
+  'asChild' | 'disabled' | 'aria-label'
+>): React.JSX.Element => (
+  <Button
+    asChild
+    className={className}
+    disabled={isPending}
+    aria-label={getCheckoutAriaLabel(subtotal, isPending)}
+    {...props}
+  >
     <a href={checkoutUrl} aria-disabled={isPending} rel='noopener noreferrer'>
       {children || (isPending ? 'Behandler...' : 'Gå til kassen')}
     </a>

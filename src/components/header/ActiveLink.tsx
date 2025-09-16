@@ -4,7 +4,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { navigationMenuTriggerStyle } from '@/components/ui/NavigationMenu'
+import { navigationMenuTriggerStyle } from '@/components/ui/navigation-menu'
 import { cn } from '@/lib/utils/className'
 
 import type { Route } from 'next'
