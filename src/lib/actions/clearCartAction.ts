@@ -18,7 +18,7 @@ import { createCartMutationOrchestrator } from '@/lib/actions/createCartMutation
 import { performCartClearMutation } from '@/lib/actions/perform/performCartClearMutation'
 import { mapThrownErrorToActionResult } from '@/lib/errors/mapThrownErrorToActionResult'
 import { validateClearCartInput } from '@/lib/helpers/validations/validateClearCartInput'
-import type { CartActionsResult } from '@/types/cart'
+import type { CartActionsResult } from '@types'
 
 /**
  * Internal orchestrated function for clearing a cart.  It validates the input

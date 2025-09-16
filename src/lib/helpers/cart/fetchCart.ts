@@ -5,7 +5,7 @@ import { storefrontClient } from '@/clients/storefrontApiClient'
 import { CartNotFoundError } from '@/lib/errors/CartNotFoundError'
 import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
 import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
-import type { Cart, CartQueryResult } from '@/types/cart'
+import type { Cart, CartQueryResult } from '@types'
 
 /**
  * Fetches cart data from the Shopify Storefront API. This is an impure function

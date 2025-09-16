@@ -1,7 +1,7 @@
 // Path: src/lib/state/createCartMutationActors.ts
 import { fromPromise } from 'xstate'
 
-import type { CartActions } from '@/types/cart'
+import type { CartActions } from '@types'
 
 /**
  * Creates dedicated promise actors for each cart mutation operation.
@@ -12,8 +12,10 @@ export const createCartMutationActors = (actions: CartActions) => ({
     async ({
       input
     }: {
-      input: { merchandiseId: string; quantity: number }
+      // LØSNING: Endret fra 'merchandiseId' til 'variantId' for å matche action-typen
+      input: { variantId: string; quantity: number }
     }) => {
+      // Nå vil 'input' ha riktig form for 'addCartLine'
       return actions.addCartLine(input)
     }
   ),
@@ -23,7 +25,6 @@ export const createCartMutationActors = (actions: CartActions) => ({
       return actions.updateCartLineQuantity(input)
     }
   ),
-
   removeLineActor: fromPromise(
     async ({ input }: { input: { lineId: string } }) => {
       return actions.removeCartLine(input)

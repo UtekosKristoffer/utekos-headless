@@ -1,30 +1,32 @@
 // Path: src/lib/errors/handleShopifyErrors.ts
 
-/**
- * @fileoverview Shopify API error handler using Zod v4 + zod-validation-error.
- * @module lib/errors
- * This handler exists because Shopify's ResponseErrors have inconsistent structure
- * and the application needs to transform them into typed ShopifyApiError instances
- * that integrate with the centralized error mapping system.
- *
- * The Zod validation ensures we only process well-formed error responses and
- * provides user-friendly fallbacks for malformed responses.
- */
-
 import { z } from '@/db/zod/zodConfig'
-import { fromError } from 'zod-validation-error'
 import { ShopifyApiError } from '@/lib/errors/ShopifyApiError'
 import type { ResponseErrors } from '@shopify/graphql-client'
-import type { ShopifyErrorDetail } from '@/types'
+import type { ShopifyErrorDetail } from '@types'
+import { fromError } from 'zod-validation-error'
 
 /**
- * Creates type-safe ShopifyErrorDetail objects that match application types exactly.
- *
- * This factory exists because manual object construction can miss optional properties
- * and violate exactOptionalPropertyTypes compiler settings. The factory ensures
- * perfect type compatibility.
+ * Defines the shape of the input for the error detail factory.
+ * The types now explicitly include `| undefined` to match Zod's `.optional()`
+ * output and satisfy the `exactOptionalPropertyTypes` compiler option.
  */
-const createShopifyErrorDetail = (message: string, locations?: { line: number; column: number }[], path?: (string | number)[], extensions?: Record<string, unknown>): ShopifyErrorDetail => {
+type ShopifyErrorDetailInput = {
+  message: string
+  locations?: { line: number; column: number }[] | undefined
+  path?: (string | number)[] | undefined
+  extensions?: Record<string, unknown> | undefined
+}
+
+/**
+ * Creates type-safe ShopifyErrorDetail objects from a single input object.
+ */
+const createShopifyErrorDetail = ({
+  message,
+  locations,
+  path,
+  extensions
+}: ShopifyErrorDetailInput): ShopifyErrorDetail => {
   const detail: ShopifyErrorDetail = { message }
 
   if (locations !== undefined) detail.locations = locations
@@ -36,10 +38,6 @@ const createShopifyErrorDetail = (message: string, locations?: { line: number; c
 
 /**
  * Parses and validates Shopify client errors into ShopifyApiError instances.
- *
- * Always throws because this function is called only when errors are detected.
- * The throw behavior integrates with the centralized error mapping system
- * that expects specific error types for proper categorization.
  */
 export function handleShopifyErrors(errors: ResponseErrors): never {
   const ResponseSchema = z.object({
@@ -52,25 +50,25 @@ export function handleShopifyErrors(errors: ResponseErrors): never {
 
   if (!result.success) {
     const validationError = fromError(result.error)
-    console.error('Shopify API response validation failed:', validationError.toString())
-
-    throw new ShopifyApiError('Invalid response format from Shopify API', [createShopifyErrorDetail(validationError.toString())])
+    console.error(
+      'Shopify API response validation failed:',
+      validationError.toString()
+    )
+    throw new ShopifyApiError('Invalid response format from Shopify API', [
+      createShopifyErrorDetail({ message: validationError.toString() })
+    ])
   }
 
   const validatedErrors = result.data
-  const topLevelMessage = validatedErrors.message || 'Failed to fetch data from Shopify.'
+  const topLevelMessage =
+    validatedErrors.message || 'Failed to fetch data from Shopify.'
   const formattedGqlErrors: ShopifyErrorDetail[] = []
 
   if (Array.isArray(validatedErrors.graphQLErrors)) {
     const GraphQLErrorSchema = z.object({
       message: z.string(),
       locations: z
-        .array(
-          z.object({
-            line: z.number(),
-            column: z.number()
-          })
-        )
+        .array(z.object({ line: z.number(), column: z.number() }))
         .optional(),
       path: z.array(z.union([z.string(), z.number()])).optional(),
       extensions: z.record(z.string(), z.unknown()).optional()
@@ -80,13 +78,21 @@ export function handleShopifyErrors(errors: ResponseErrors): never {
       const errorResult = GraphQLErrorSchema.safeParse(error)
 
       if (errorResult.success) {
-        const validError = errorResult.data
-        formattedGqlErrors.push(createShopifyErrorDetail(validError.message, validError.locations, validError.path, validError.extensions))
+        // This call will now work perfectly
+        formattedGqlErrors.push(createShopifyErrorDetail(errorResult.data))
       } else {
-        formattedGqlErrors.push(createShopifyErrorDetail('Invalid error format received from Shopify'))
+        formattedGqlErrors.push(
+          createShopifyErrorDetail({
+            message: 'Invalid error format received from Shopify'
+          })
+        )
       }
     }
   }
 
-  throw new ShopifyApiError(topLevelMessage, formattedGqlErrors, validatedErrors.networkStatusCode)
+  throw new ShopifyApiError(
+    topLevelMessage,
+    formattedGqlErrors,
+    validatedErrors.networkStatusCode
+  )
 }

@@ -12,7 +12,7 @@
  */
 
 import { validateMenuItem } from '@/lib/helpers/validations/validateMenuItem'
-import type { MenuItem, ShopifyMenuItem } from '@/types/menu'
+import type { MenuItem, ShopifyMenuItem } from '@types'
 /**
  * Transforms a single validated Shopify menu item into application format.
  * This is a pure transformation function that handles recursive structure.

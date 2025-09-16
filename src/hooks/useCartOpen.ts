@@ -1,11 +1,10 @@
 // Path: src/hooks/useCartOpen.ts
 'use client'
 
+import { cartStore } from '@/lib/state/cartStore'
 import { useSelector } from '@xstate/store/react'
 
-import { cartStore } from '@/lib/state/cartStore'
-import type { CartUserInterfaceContext } from '@/types/cart'
-
+import type { CartUserInterfaceContext } from '@types'
 import type { StoreSnapshot } from '@xstate/store'
 
 /**

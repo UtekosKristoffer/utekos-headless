@@ -7,7 +7,7 @@ import { CheckoutButton } from '@/components/jsx/CheckoutButton'
 import { DrawerFooter } from '@/components/ui/Drawer'
 import { useCartPending } from '@/hooks/useCartPending'
 import { formatPrice } from '@/lib/utils/formatPrice'
-import type { Cart } from '@/types/cart'
+import type { Cart } from '@types'
 
 /**
  * Determines if the cart footer should be rendered.

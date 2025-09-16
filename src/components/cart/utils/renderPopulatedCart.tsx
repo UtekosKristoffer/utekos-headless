@@ -1,7 +1,8 @@
 import CartLineItem from '@/components/cart/CartLineItem'
-import type { Cart } from '@/types/cart'
-import * as React from 'react'
-import { Separator } from '../../ui/Separator'
+import { Separator } from '@/components/ui/Separator'
+import { Fragment } from 'react'
+
+import type { Cart } from '@types'
 /**
  * Renders the populated cart with a list of line items.
  * This is extracted into its own function because the rendering logic is more complex.
@@ -12,10 +13,10 @@ export const renderPopulatedCart = (cart: Cart): React.JSX.Element => (
     <div className='px-4 py-2'>
       <ul className='space-y-0'>
         {cart.lines.map((line, index) => (
-          <React.Fragment key={line.id}>
+          <Fragment key={line.id}>
             <CartLineItem line={line} />
             {index < cart.lines.length - 1 && <Separator className='my-4' />}
-          </React.Fragment>
+          </Fragment>
         ))}
       </ul>
     </div>

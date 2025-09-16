@@ -14,7 +14,7 @@
 import { mutationCartLinesUpdate } from '@/api/graphql/mutations/cart'
 import { storefrontClient } from '@/clients/storefrontApiClient'
 import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
-import type { CartLinesUpdateResponse, CartResponse } from '@/types/cart'
+import type { CartLinesUpdateResponse, CartResponse } from '@types'
 
 /**
  * Updates a cart line's quantity via the Storefront API.

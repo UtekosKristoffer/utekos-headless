@@ -4,10 +4,7 @@
 import { useSelector } from '@xstate/store/react'
 
 import { cartStore } from '@/lib/state/cartStore'
-import type {
-  CartUserInterfaceContext,
-  OptimisticCartLines
-} from '@/types/cart'
+import type { CartUserInterfaceContext, OptimisticCartLines } from '@types'
 
 import type { StoreSnapshot } from '@xstate/store'
 

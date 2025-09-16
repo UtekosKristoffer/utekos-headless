@@ -19,7 +19,7 @@ import type {
   CartActionsResult,
   CartMutationFn,
   CartMutationInput
-} from '@/types/cart'
+} from '@types'
 
 /**
  * A generic React Query hook for performing any cart mutation.
@@ -50,6 +50,7 @@ export const useCartMutation = <TInput extends CartMutationInput>(
         )
       }
     },
+    // eslint-disable-next-line max-params
     onError: (error, variables, context) => {
       const errorMessage = getCartErrorMessage(error)
 

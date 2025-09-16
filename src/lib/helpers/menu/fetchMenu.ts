@@ -13,10 +13,10 @@ import { storefrontClient } from '@/clients/storefrontApiClient'
 import { extractErrorMessage } from '@/lib/errors/extractErrorMessage'
 import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
 import { normalizeMenu } from '@/lib/helpers/normalizers/normalizeMenu'
+import { validateMenuHandle } from '@/lib/helpers/validations/validateMenuHandle'
 import { validateMenuResponse } from '@/lib/helpers/validations/validateMenuResponse'
-import type { MenuItem, MenuQueryResponse } from '@/types/menu'
 
-import { validateMenuHandle } from '../validations/validateMenuHandle'
+import type { MenuItem, MenuQueryResponse } from '@types'
 
 /**
  * Retrieves a navigation menu by handle from the Shopify Storefront API.

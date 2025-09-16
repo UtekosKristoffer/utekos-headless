@@ -7,7 +7,7 @@ import { useEffect, useReducer } from 'react'
 import { MobileMenuPanel } from '@/components/header/MobileMenuPanel'
 import { Button } from '@/components/ui/Button'
 import { menuReducer } from '@/lib/utils/menuReducer'
-import type { MenuItem } from '@/types/menu'
+import type { MenuItem } from '@types'
 
 export function MobileMenuClient({ menu }: { menu: MenuItem[] }) {
   const [state, dispatch] = useReducer(menuReducer, { status: 'CLOSED' })

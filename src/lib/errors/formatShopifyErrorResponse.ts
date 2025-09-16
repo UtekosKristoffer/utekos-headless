@@ -5,9 +5,8 @@
  */
 
 import { CartErrorCode } from '@/constants/CartErrorCode'
-import type { CartActionsResult } from '@/types/cart'
-
 import type { ResponseErrors } from '@shopify/graphql-client'
+import type { CartActionsResult } from '@types'
 
 /**
  * @function formatShopifyErrorResponse

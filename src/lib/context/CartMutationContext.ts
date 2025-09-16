@@ -3,7 +3,7 @@
 import { createActorContext } from '@xstate/react'
 
 import { createCartMutationMachine } from '@/lib/state/createCartMutationMachine'
-import type { CartActions } from '@/types/cart'
+import type { CartActions } from '@types'
 
 /**
  * Represents the instantiated XState machine for cart mutations.

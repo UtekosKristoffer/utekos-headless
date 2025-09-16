@@ -7,9 +7,9 @@
 import { storefrontClient } from '@/clients/storefrontApiClient'
 import { extractErrorMessage } from '@/lib/errors/extractErrorMessage'
 import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
-import type { MenuQueryResponse, ShopifyFooterMenu } from '@/types/menu'
+import type { MenuQueryResponse, ShopifyFooterMenu } from '@types'
 
-import { menuQuery } from '../../queries/menuQuery'
+import { menuQuery } from '@/api/graphql/queries/menu/menuQuery'
 import { normalizeMenu } from '../normalizers/normalizeMenu'
 import { validateMenuHandle } from '../validations/validateMenuHandle'
 import { validateMenuResponse } from '../validations/validateMenuResponse'

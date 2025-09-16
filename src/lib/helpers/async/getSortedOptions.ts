@@ -2,7 +2,7 @@
 
 /* eslint-disable */
 
-import type { ShopifyProduct } from '@/types/products'
+import type { ShopifyProduct } from '@types'
 
 export function getSortedOptions(
   options: ShopifyProduct['options'],

@@ -3,7 +3,7 @@
 import { fromZodError } from 'zod-validation-error'
 
 import { UpdateCartSchema } from '@/db/zod/schemas/UpdateCartSchema'
-import type { UpdateCartLineInput } from '@/types/cart'
+import type { UpdateCartLineInput } from '@types'
 
 /**
  * Validates update-line input using global errorMap for consistent messaging.

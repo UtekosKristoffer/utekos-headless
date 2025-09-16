@@ -20,7 +20,7 @@ import type {
   AddToCartFormValues,
   AddToCartResponse,
   CartResponse
-} from '@/types/cart'
+} from '@types'
 
 /**
  * Adds a line to the cart using the Storefront API.

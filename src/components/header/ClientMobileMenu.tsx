@@ -1,7 +1,7 @@
 // Path: src/components/header/ClientMobileMenu.tsx
 'use client'
 
-import type { MenuItem } from '@/types/menu'
+import type { MenuItem } from '@types'
 import dynamic from 'next/dynamic'
 
 // Den dynamiske importen skjer nå trygt inne i en Client Component

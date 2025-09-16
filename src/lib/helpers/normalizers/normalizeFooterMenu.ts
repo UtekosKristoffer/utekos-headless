@@ -1,6 +1,6 @@
 // Path: src/lib/helpers/normalizeMenu.ts
 
-import type { MenuItem, ShopifyFooterMenu } from '@/types/menu'
+import type { MenuItem, ShopifyFooterMenu } from '@types'
 /**
  * Transforms a single validated Shopify menu item into application format.
  * This is a pure transformation function that handles recursive structure.

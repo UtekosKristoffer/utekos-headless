@@ -10,14 +10,17 @@
 
 import { isValidationErrorLike } from 'zod-validation-error'
 
-import { CartErrorCode } from '@/constants/CartErrorCode'
+import {
+  CartErrorCode,
+  type CartErrorCodeType
+} from '@/constants/CartErrorCode'
 import { isShopifyErrorResponse } from '@/lib/errors/isShopifyErrorResponse'
 import { MissingCartIdError } from '@/lib/errors/MissingCartIdError'
-import type { CartErrorCodeType } from '@/types/api/errors'
-import type { CartActionsResult } from '@/types/cart'
 
 import { extractCartErrorMessage } from './extractCartErrorMessage'
 import { formatShopifyErrorResponse } from './formatShopifyErrorResponse'
+
+import type { CartActionsResult } from '@types'
 /**
  * Maps any thrown error into a standardized CartActionsResult.
  *

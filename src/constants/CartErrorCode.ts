@@ -1,5 +1,5 @@
 // Path: src/lib/constants/CartErrorCode.ts
-
+import { z } from '@/db/zod/zodConfig'
 /**
  * @fileoverview Centralized error codes using Zod v4 enum pattern.
  *
@@ -17,3 +17,5 @@ import { CartErrorCodeSchema } from '@/db/zod/schemas/CartErrorCodeSchema'
  * while maintaining runtime validation capabilities through the schema.
  */
 export const CartErrorCode = CartErrorCodeSchema.enum
+
+export type CartErrorCodeType = z.infer<typeof CartErrorCodeSchema>

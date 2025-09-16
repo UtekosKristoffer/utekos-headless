@@ -1,12 +1,11 @@
 // Path: src/components/header/Header.tsx
 
-import type { MenuItem } from '@/types/menu'
-
 import { CartDrawer } from '@/components/cart/CartDrawer'
 import { ClientDesktopNavigation } from '@/components/header/ClientDesktopNavigation'
 import { HeaderLogo } from '@/components/header/HeaderLogo'
-// Importer den nye bro-komponenten
 import { ClientMobileMenu } from './ClientMobileMenu'
+
+import type { MenuItem } from '@types'
 export default function Header({ menu }: { menu: MenuItem[] }) {
   return (
     <header className='sticky top-0 z-50 border-b border-white/10 bg-background py-3'>

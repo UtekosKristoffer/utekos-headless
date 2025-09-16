@@ -1,7 +1,7 @@
 // Path: src/lib/errors/getErrorMessage.ts
 
+import type { CartActionsResult } from '@types'
 import { isValidationErrorLike } from 'zod-validation-error'
-import type { CartActionsResult } from '@/types'
 
 /**
  * @fileoverview Utilities for extracting user-friendly error messages.
@@ -27,7 +27,10 @@ import type { CartActionsResult } from '@/types'
  * @param data - Optional server action result containing additional context
  * @returns Human-readable error message in Norwegian
  */
-export const getErrorMessage = (error: Error, data?: CartActionsResult): string => {
+export const getErrorMessage = (
+  error: Error,
+  data?: CartActionsResult
+): string => {
   // Validation errors from zod-validation-error already contain Norwegian messages
   if (isValidationErrorLike(error)) {
     return error.toString()

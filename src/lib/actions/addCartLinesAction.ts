@@ -14,7 +14,7 @@ import type {
   AddToCartFormValues,
   CartActionsResult,
   CartResponse
-} from '@/types/cart'
+} from '@types'
 
 /**
  * Adds a new line item to the user's cart.

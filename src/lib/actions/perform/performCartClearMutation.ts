@@ -16,7 +16,7 @@
 import { mutationCartLinesUpdate } from '@/api/graphql/mutations/cart'
 import { storefrontClient } from '@/clients/storefrontApiClient'
 import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
-import type { CartLinesUpdateResponse, CartResponse } from '@/types/cart'
+import type { CartLinesUpdateResponse, CartResponse } from '@types'
 
 /**
  * Executes a clear‑cart mutation against the Storefront API.

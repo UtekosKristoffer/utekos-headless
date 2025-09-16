@@ -1,4 +1,4 @@
-import type { Cart, ShopifyCart } from '@/types/cart'
+import type { Cart, ShopifyCart } from '@types'
 import { removeEdgesAndNodes } from './removeEdgesAndNodes'
 export const reshapeCart = (cart: ShopifyCart): Cart => {
   if (!cart.cost?.totalAmount) {

@@ -12,11 +12,9 @@ import {
   createAddToCartSubmitHandler,
   withSuccessToast
 } from '@/lib/helpers/cart/cartForm'
-import type { AddToCartFormValues } from '@/types/cart'
-import type { ShopifyProductVariant } from '@/types/products'
-
 import { AddToCartButton } from './AddToCartButton'
 
+import type { AddToCartFormValues, ShopifyProductVariant } from '@types'
 /**
  * The primary "smart" component for the Add to Cart form.
  *

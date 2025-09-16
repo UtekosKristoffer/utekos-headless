@@ -7,7 +7,7 @@ import type {
   CartUserInterfaceContext,
   OptimisticCartLines,
   UserInterfaceEventMap
-} from '@/types/cart'
+} from '@types'
 
 /**
  * Removes items with a quantity of 0 from a line object.

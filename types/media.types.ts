@@ -22,3 +22,11 @@ export type Image = {
   width: number
   height: number
 }
+
+export type SwiperImage = {
+  id: string
+  url: string
+  altText: string
+  width: number
+  height: number
+}

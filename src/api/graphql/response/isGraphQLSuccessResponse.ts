@@ -1,6 +1,6 @@
 // Path: src/api/graphql/response/isGraphQLSuccessResponse.ts
 
-import type { GraphQLSuccessResponse } from '@/types/api/graphql'
+import type { GraphQLSuccessResponse } from '@types'
 
 export function isGraphQLSuccessResponse<T>(
   response: unknown

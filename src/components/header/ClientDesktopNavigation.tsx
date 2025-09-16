@@ -1,6 +1,6 @@
 'use client'
 
-import type { MenuItem } from '@/types/menu'
+import type { MenuItem } from '@types'
 import dynamic from 'next/dynamic'
 
 // Importer DesktopNavigation dynamisk med ssr: false

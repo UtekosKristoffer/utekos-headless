@@ -10,7 +10,8 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/Sheet'
-import type { MenuItem } from '@/types/menu'
+
+import type { MenuItem } from '@types'
 
 export function MobileMenuPanel({
   menu = [],

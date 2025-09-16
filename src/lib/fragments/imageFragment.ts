@@ -1,4 +1,4 @@
-export const imageFragment = /* GraphQL */ `
+const imageFragment = /* GraphQL */ `
   fragment image on MediaImage {
     image {
       url

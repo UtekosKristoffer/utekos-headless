@@ -1,6 +1,6 @@
 import imageFragment from './imageFragment'
 import seoFragment from './seoFragment'
-export const productFragment = /* GraphQL */ `
+const productFragment = /* GraphQL */ `
   fragment product on Product {
     id
     title

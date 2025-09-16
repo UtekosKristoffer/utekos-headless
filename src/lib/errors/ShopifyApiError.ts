@@ -1,7 +1,7 @@
 //Path src/lib/errors.ts
 /* eslint-disable */
 
-import type { ShopifyErrorDetail } from '@/types/api/errors'
+import type { ShopifyErrorDetail } from '@types'
 
 export class ShopifyApiError extends Error {
   constructor(

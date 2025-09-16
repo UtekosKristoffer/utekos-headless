@@ -11,8 +11,7 @@ import { fetchMenu } from '@/lib/helpers/menu/fetchMenu'
 
 import { Geist, Geist_Mono as GeistMono } from 'next/font/google'
 
-import type { RootLayoutProps } from '@/api/types/props'
-import type { Cart } from '@/types/cart'
+import type { Cart, RootLayoutProps } from '@types'
 
 import '@/db/zod/zodConfig'
 import './globals.css'

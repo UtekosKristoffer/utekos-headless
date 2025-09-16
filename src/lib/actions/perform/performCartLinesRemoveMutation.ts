@@ -15,7 +15,7 @@
 import { mutationCartLinesRemove } from '@/api/graphql/mutations/cart'
 import { storefrontClient } from '@/clients/storefrontApiClient'
 import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
-import type { CartLinesRemoveResponse, CartResponse } from '@/types/cart'
+import type { CartLinesRemoveResponse, CartResponse } from '@types'
 
 /**
  * Removes a single line from the cart via the Storefront API.

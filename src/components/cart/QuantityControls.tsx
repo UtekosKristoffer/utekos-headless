@@ -1,8 +1,9 @@
 import { Button } from '@/components/ui/Button'
-import type { CartLine } from '@/types/cart'
 import { Minus, Plus } from 'lucide-react'
-import * as React from 'react'
 import { getQuantityAriaLabel } from './utils/getQuantityAriaLabel'
+
+import type { CartLine } from '@types'
+
 const QuantityControls = ({
   line,
   isPending,

@@ -33,7 +33,7 @@ import type {
   CartMutationInput,
   InputValidator,
   PerformMutation
-} from '@/types/cart'
+} from '@types'
 
 export function createCartMutationOrchestrator<
   TInput extends CartMutationInput

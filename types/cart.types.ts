@@ -115,7 +115,7 @@ export type CartMutationContext = {
 }
 
 export type CartMutationEvent =
-  | { type: 'ADD_LINES'; input: { merchandiseId: string; quantity: number } }
+  | { type: 'ADD_LINES'; input: { variantId: string; quantity: number } }
   | { type: 'UPDATE_LINE'; input: UpdateCartLineQuantityInput }
   | { type: 'REMOVE_LINE'; input: RemoveCartLineInput }
   | { type: 'CLEAR' }
@@ -209,3 +209,13 @@ export type UserInterfaceEventMap = {
   OPTIMISTIC_CART_LINES_UPDATE: { delta: Record<string, number> }
   OPTIMISTIC_CART_CLEAR: EventPayloadMap
 }
+
+/**
+ * Defines the function signature for any cart-related server action.
+ * @template TInput The specific input type for the mutation, which must extend CartMutationInput.
+ * @param {TInput} input The payload for the server action.
+ * @returns {Promise<CartActionsResult>} The result from the server action.
+ */
+export type CartMutationFn<TInput extends CartMutationInput> = (
+  input: TInput
+) => Promise<CartActionsResult>

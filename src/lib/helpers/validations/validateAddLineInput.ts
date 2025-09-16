@@ -1,6 +1,6 @@
-import { fromZodError } from 'zod-validation-error'
 import { AddToCartSchema } from '@/db/zod/schemas/AddToCartSchema'
-import type { AddToCartFormValues } from '@/types/cart'
+import type { AddToCartFormValues } from '@types'
+import { fromZodError } from 'zod-validation-error'
 
 export const validateAddLineInput = (input: AddToCartFormValues): void => {
   const result = AddToCartSchema.safeParse(input)

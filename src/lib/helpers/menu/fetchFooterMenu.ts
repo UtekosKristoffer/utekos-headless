@@ -6,15 +6,15 @@
 
 /* eslint-disable max-statements */
 
+import { menuQuery } from '@/api/graphql/queries/menu/menuQuery'
 import { storefrontClient } from '@/clients/storefrontApiClient'
 import { extractErrorMessage } from '@/lib/errors/extractErrorMessage'
 import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
-import type { MenuQueryResponse, ShopifyFooterMenu } from '@/types/menu'
+import { normalizeFooterMenu } from '@/lib/helpers/normalizers/normalizeFooterMenu'
+import { validateMenuHandle } from '@/lib/helpers/validations/validateMenuHandle'
+import { validateMenuResponse } from '@/lib/helpers/validations/validateMenuResponse'
 
-import { menuQuery } from '../../queries/menuQuery'
-import { normalizeFooterMenu } from '../normalizers/normalizeFooterMenu'
-import { validateMenuHandle } from '../validations/validateMenuHandle'
-import { validateMenuResponse } from '../validations/validateMenuResponse'
+import type { MenuQueryResponse, ShopifyFooterMenu } from '@types'
 export const fetchFooterMenu = async (
   handle: string
 ): Promise<ShopifyFooterMenu[]> => {

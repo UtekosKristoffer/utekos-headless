@@ -12,8 +12,7 @@ import { toast } from 'sonner'
 
 import { AddToCartSchema } from '@/db/zod/schemas/AddToCartSchema'
 import type { createCartMutationMachine } from '@/lib/state/createCartMutationMachine'
-import type { AddToCartFormValues } from '@/types/cart'
-import type { ShopifyProductVariant } from '@/types/products'
+import type { AddToCartFormValues, ShopifyProductVariant } from '@types'
 
 import type { ActorRefFrom } from 'xstate'
 

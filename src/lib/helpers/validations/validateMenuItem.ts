@@ -4,7 +4,7 @@ import { fromError } from 'zod-validation-error'
 
 import { ShopifyMenuItemSchema } from '@/db/zod/schemas/ShopifyMenuItemSchema'
 import { InvalidMenuDataError } from '@/lib/errors/InvalidMenuDataError'
-import type { ShopifyMenuItem } from '@/types/menu'
+import type { ShopifyMenuItem } from '@types'
 
 /**
  * Validates a single menu item against the Zod schema.

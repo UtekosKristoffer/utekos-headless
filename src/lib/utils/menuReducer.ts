@@ -1,6 +1,6 @@
 // Path: src/lib/utils/menuReducer.ts
 
-import type { Action, State } from '@/types/menu'
+import type { Action, State } from '@types'
 
 export function menuReducer(state: State, action: Action): State {
   switch (action.type) {

@@ -1,10 +1,9 @@
-import type { ShopifyImage } from '@/types/media'
-import type { ShopifyProduct, ShopifyProductVariant } from '@/types/products'
+import type { Image, ShopifyProduct, ShopifyProductVariant } from '@types'
 
 export function computeVariantImages(
   product: ShopifyProduct,
   variant: ShopifyProductVariant | null
-): ShopifyImage[] {
+): Image[] {
   // Hent den ferdige bildelisten direkte fra de transformerte dataene.
   const images = variant?.variantProfileData?.images
 

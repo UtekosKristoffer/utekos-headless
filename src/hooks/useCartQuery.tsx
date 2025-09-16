@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import { fetchCart } from '@/lib/helpers/cart/fetchCart'
 import { getCartIdClient } from '@/lib/helpers/cart/getCartIdClient'
-import type { Cart } from '@/types/cart'
+import type { Cart } from '@types'
 
 /**
  * @module hooks/useCartQuery

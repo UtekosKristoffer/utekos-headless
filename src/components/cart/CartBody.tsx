@@ -2,9 +2,9 @@
 
 import { DrawerDescription } from '@/components/ui/Drawer'
 import { useCartPending } from '@/hooks/useCartPending'
-import type { Cart } from '@/types/cart'
+import type { Cart } from '@types'
 
-import { CartBodySkeleton } from '../skeletons/CartBodySkeleton'
+import { CartBodySkeleton } from '@/components/skeletons/CartBodySkeleton'
 
 /**
  * Determines if the cart is in an empty state. Pure logic function.

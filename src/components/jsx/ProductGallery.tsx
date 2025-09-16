@@ -1,18 +1,17 @@
 'use client'
+// Cannot find module 'swiper/css' or its corresponding type declarations.
+import 'swiper/modules/a11y.css'
+import 'swiper/modules/navigation.css'
+import 'swiper/modules/swiper.css'
 
-import 'swiper/css'
-import 'swiper/css/a11y'
-import 'swiper/css/navigation'
-
-import type { ShopifyImage } from '@/types/media'
+import type { SwiperImage } from '@types'
 import Image from 'next/image'
 import { A11y, Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-// Oppdater Props-typen til å forvente en liste av ShopifyImage
 type ProductGalleryProps = {
   title: string
-  images: ShopifyImage[]
+  images: SwiperImage[]
 }
 
 export function ProductGallery({ title, images }: ProductGalleryProps) {

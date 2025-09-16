@@ -18,7 +18,7 @@ import { createCartMutationOrchestrator } from '@/lib/actions/createCartMutation
 import { performCartLinesUpdateMutation } from '@/lib/actions/perform/performCartLinesUpdateMutation'
 import { mapThrownErrorToActionResult } from '@/lib/errors/mapThrownErrorToActionResult'
 import { validateUpdateLineInput } from '@/lib/helpers/validations/validateUpdateLineInput'
-import type { CartActionsResult } from '@/types/cart'
+import type { CartActionsResult } from '@types'
 
 /**
  * Internal orchestrated function for updating a cart line quantity.

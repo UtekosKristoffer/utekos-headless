@@ -1,12 +1,14 @@
 //Path: src/components/header/MobileMenuItem.tsx
+
 'use client'
+
 import Link from 'next/link'
 import { useState } from 'react'
 
 import { normalizeShopifyUrl } from '@/lib/helpers/normalizers/normalizeShopifyUrl'
-import type { MenuItem } from '@/types/menu'
-
+import type { MenuItem } from '@types'
 import type { Route } from 'next'
+
 export function MobileMenuItem({ item }: { item: MenuItem }) {
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false)
   const hasSubMenu = item.items && item.items.length > 0

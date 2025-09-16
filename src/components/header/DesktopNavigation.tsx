@@ -8,11 +8,10 @@ import {
   InteractiveNavTrigger
 } from '@/components/header/InteractiveNavigation'
 import { normalizeShopifyUrl } from '@/lib/helpers/normalizers/normalizeShopifyUrl'
-import type { MenuItem } from '@/types/menu'
-
 import { ActiveLink } from './ActiveLink'
 import { ListItem } from './ListItem'
 
+import type { MenuItem } from '@types'
 export const DesktopNavigation = ({ menu = [] }: { menu?: MenuItem[] }) => {
   return (
     <nav aria-label='Hovednavigasjon' className='hidden lg:block'>

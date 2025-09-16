@@ -1,6 +1,6 @@
 // Path: src/lib/errors/getCartErrorMessage.ts
 import { getErrorMessage } from '@/lib/errors/getErrorMessage'
-import type { CartActionsResult } from '@/types/cart'
+import type { CartActionsResult } from '@types'
 
 /**
  * Specialized version for cart operations that includes cart-specific messaging.

@@ -1,5 +1,5 @@
 import { normalizeProductImage } from '@/lib/helpers/normalizers/normalizeProductImage'
-import type { ProductsQueryResponse, ShopifyProduct } from '@/types/products'
+import type { ProductQueryResponse, ShopifyProduct } from '@types'
 /**
  * Transforms raw Shopify product data into normalized application Product format.
  * @param product - Raw product from Shopify GraphQL response
@@ -11,7 +11,7 @@ import type { ProductsQueryResponse, ShopifyProduct } from '@/types/products'
  * @returns Normalized Product for consistent application usage
  */
 export const normalizeProduct = (
-  product: ProductsQueryResponse
+  product: ProductQueryResponse['product']
 ): ShopifyProduct => {
   return {
     // Egenskaper du allerede hadde:
@@ -25,6 +25,7 @@ export const normalizeProduct = (
     featuredImage: normalizeProductImage(product.featuredImage, product.title),
     priceRange: product.priceRange,
     options: product.options,
-    variants: product.variants
+    variants: product.variants,
+    images: product.images
   }
 }

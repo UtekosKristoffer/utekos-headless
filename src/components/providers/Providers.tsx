@@ -8,14 +8,13 @@ import {
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental'
-import * as React from 'react'
 
 import { CartMutationClient } from '@/clients/CartMutationClient'
 import { addCartLinesAction } from '@/lib/actions/addCartLinesAction'
 import { clearCartAction } from '@/lib/actions/clearCartAction'
 import { removeCartLineAction } from '@/lib/actions/removeCartLineAction'
 import { updateCartLineQuantityAction } from '@/lib/actions/updateCartLineQuantityAction'
-import type { Cart, CartActions } from '@/types/cart'
+import type { Cart, CartActions } from '@types'
 
 function makeQueryClient() {
   return new QueryClient({

@@ -17,9 +17,8 @@ export type MetaobjectReference = {
 }
 
 export type MetaobjectField = {
-  value: string
-} | null
-
+  value: string | null
+}
 export type RawMetaobject = {
   fields: {
     key: string
@@ -41,6 +40,10 @@ export type RawField = {
   key: string
   value: string | null
   references?: {
-    nodes: any[] // Bruker 'any' for enkelhetens skyld
+    nodes: MetaobjectNode[]
   } | null
+}
+
+export type MetaobjectNode = {
+  image: MetaobjectField['value']
 }

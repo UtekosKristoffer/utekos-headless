@@ -22,7 +22,7 @@ import type {
   CartActionsResult,
   CartMutationContext,
   CartMutationEvent
-} from '@/types/cart'
+} from '@types'
 
 /**
  * Creates a state machine for handling cart mutations with comprehensive error handling.

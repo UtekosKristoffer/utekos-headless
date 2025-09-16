@@ -3,7 +3,7 @@
  * @module utils/selectVariantByOptions
  */
 
-import type { ShopifyProductVariant } from '@/types/products'
+import type { ShopifyProductVariant } from '@types'
 
 /**
  * Represents the input for updating a variant selection
