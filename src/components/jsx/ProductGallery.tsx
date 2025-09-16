@@ -1,8 +1,8 @@
 'use client'
 // Cannot find module 'swiper/css' or its corresponding type declarations.
-import 'swiper/modules/a11y.css'
-import 'swiper/modules/navigation.css'
-import 'swiper/modules/swiper.css'
+import 'swiper/css'
+import 'swiper/css/a11y'
+import 'swiper/css/navigation'
 
 import type { SwiperImage } from '@types'
 import Image from 'next/image'
