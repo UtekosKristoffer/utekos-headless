@@ -3,11 +3,9 @@
 import type { Image as SwiperImage } from '@types'
 import Image from 'next/image'
 import { A11y, Navigation } from 'swiper/modules'
-import 'swiper/modules/a11y.css'
-import 'swiper/modules/navigation.css'
-import 'swiper/modules/swiper.css'
+
 import { Swiper, SwiperSlide } from 'swiper/react'
- 
+
 type ProductGalleryProps = {
   title: string
   images: SwiperImage[]

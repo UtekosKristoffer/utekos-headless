@@ -14,6 +14,7 @@ import { Geist, Geist_Mono as GeistMono } from 'next/font/google'
 import type { Cart, RootLayoutProps } from '@types'
 
 import '@/db/zod/zodConfig'
+import 'swiper/swiper-bundle.css'
 import './globals.css'
 
 const geistSans = Geist({
