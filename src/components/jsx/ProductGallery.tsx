@@ -1,13 +1,13 @@
 'use client'
-// Cannot find module 'swiper/css' or its corresponding type declarations.
+
 import type { Image as SwiperImage } from '@types'
 import Image from 'next/image'
-import 'swiper/css/a11y'
-import 'swiper/css/navigation'
 import { A11y, Navigation } from 'swiper/modules'
+import 'swiper/modules/a11y.css'
+import 'swiper/modules/navigation.css'
+import 'swiper/modules/swiper.css'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/swiper-bundle.min.css'
-
+ 
 type ProductGalleryProps = {
   title: string
   images: SwiperImage[]
