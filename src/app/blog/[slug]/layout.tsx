@@ -4,12 +4,20 @@
  * @see {@link https://nextjs.org/docs/app/getting-started/layouts-and-pages}
  * @returns
  */
-export default function ProductPageLayout(props: LayoutProps<'/products'>) {
+
+type ProductPageLayoutProps = {
+  children: React.ReactNode
+  analytics?: React.ReactNode
+}
+
+export default function ProductPageLayout({
+  children,
+  analytics
+}: ProductPageLayoutProps) {
   return (
     <section>
-      {props.children}
-      {/* If you have app/products/[handle]/@analytics, it appears as a typed slot: */}
-      {/* {props.analytics} */}
+      {children}
+      {analytics}
     </section>
   )
 }
