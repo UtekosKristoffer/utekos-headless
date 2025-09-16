@@ -1,3 +1,8 @@
+import { notFound } from 'next/navigation'
+
+import { getProduct } from '@/api/lib/products/getProduct'
+import type { ShopifyProduct } from '@types'
+
 export async function generateMetadata({
   params
 }: {
@@ -5,7 +10,7 @@ export async function generateMetadata({
 }) {
   const { handle } = await params
   const productId = handle
-  const product: ShopifyProduct | null = await getProductByHandle(productId)
+  const product: ShopifyProduct | undefined = await getProduct(productId)
   if (!product) {
     notFound()
   }
@@ -16,14 +21,7 @@ export async function generateMetadata({
     openGraph: {
       title: product.title,
       description: product.descriptionHtml,
-      images: [
-        {
-          url: product.media.edges[0]?.node.image.url,
-          width: product.media.edges[0]?.node.image.width || 800,
-          height: product.media.edges[0]?.node.image.height || 600,
-          alt: product.title
-        }
-      ]
+      images: product.variants.edges[0]?.node.variantProfile?.reference?.images
     }
   }
 }

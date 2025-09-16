@@ -1,3 +1,4 @@
+// Path: src/api/lib/products/getProduct.ts
 import { TAGS } from '@/api/constants'
 import { getProductQuery } from '@/api/graphql/queries/products'
 import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
