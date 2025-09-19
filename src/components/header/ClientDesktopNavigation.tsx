@@ -12,7 +12,6 @@ const DesktopNavigation = dynamic(
   { ssr: false }
 )
 
-// Dette er en enkel wrapper som kun sender props videre
 export function ClientDesktopNavigation({ menu }: { menu: MenuItem[] }) {
   return <DesktopNavigation menu={menu} />
 }

@@ -1,5 +1,5 @@
-import type { Connection, Image } from '@/api/shopify/types/types'
 import { removeEdgesAndNodes } from '@/lib/utils/removeEdgesAndNodes'
+import type { Connection, Image } from '@types'
 
 export const reshapeImages = (
   images: Connection<Image>,

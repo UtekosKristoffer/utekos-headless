@@ -1,4 +1,4 @@
-// Path: src/lib/helpers/normalizeMenu.ts
+// Path: src/lib/helpers/normalizers/normalizeMenu.ts
 
 import type { MenuItem, ShopifyFooterMenu } from '@types'
 /**
@@ -37,7 +37,7 @@ function transformActionItem(item: MenuItem): ShopifyFooterMenu | null {
     if (phoneNumber) {
       return {
         title: title,
-        path: `tel:${phoneNumber}`
+        url: `tel:${phoneNumber}`
       }
     }
   }
@@ -51,12 +51,10 @@ function transformActionItem(item: MenuItem): ShopifyFooterMenu | null {
     if (email) {
       return {
         title: title,
-        path: `mailto:${email}`
+        url: `mailto:${email}`
       }
     }
   }
-
-  // If we can't parse it, return null to filter it out
   return null
 }
 
@@ -79,7 +77,6 @@ function transformShopifyUrl(url: string): string {
     // Add more mappings as needed
   }
 
-  // Return mapped URL or use the path as-is if no mapping exists
   return urlMappings[urlPath] || urlPath
 }
 
@@ -89,19 +86,17 @@ function transformShopifyUrl(url: string): string {
 export function normalizeFooterMenu(items: MenuItem[]): ShopifyFooterMenu[] {
   return items
     .map(item => {
-      // Check if it's a special action item (phone, email)
       if (isActionItem(item)) {
         return transformActionItem(item)
       }
 
-      // Regular menu item - transform URL to path
       return {
         title: item.title || 'Untitled',
-        path: transformShopifyUrl(item.url || '')
+        url: transformShopifyUrl(item.url || '')
       }
     })
     .filter((item): item is ShopifyFooterMenu => {
-      // Type guard to filter out nulls and ensure all items have path
-      return item !== null && item.path !== ''
+      // Denne type-guarden vil nå fungere korrekt fordi alle objekter har 'url'
+      return item !== null && item.url !== ''
     })
 }

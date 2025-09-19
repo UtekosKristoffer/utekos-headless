@@ -19,7 +19,7 @@ export const footerConfig: FooterSection[] = [
     links: [
       {
         title: 'Kontakt oss',
-        path: '/handlehjelp/kontakt-oss' as Route
+        path: '/kontaktskjema' as Route
       },
       {
         title: 'Produktguide',
@@ -32,10 +32,6 @@ export const footerConfig: FooterSection[] = [
       {
         title: 'Størrelses­guide',
         path: '/handlehjelp/storrelsesguide' as Route
-      },
-      {
-        title: 'Specs',
-        path: '/footer-routes/kjøpshjelp/specs' as Route
       }
     ]
   },
@@ -44,7 +40,7 @@ export const footerConfig: FooterSection[] = [
     links: [
       {
         title: 'Kundeservice',
-        path: '/footer-routes/kundeservice' as Route
+        path: '/kontaktskjema' as Route
       },
       {
         title: 'Tlf: +47 40 21 63 43',
@@ -63,7 +59,7 @@ export const footerConfig: FooterSection[] = [
     links: [
       {
         title: 'Om oss',
-        path: '/about' as Route
+        path: '/om-oss' as Route
       },
       {
         title: 'Vilkår og betingelser',

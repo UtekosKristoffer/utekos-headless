@@ -1,3 +1,4 @@
+// Path: src/lib/utils/formatPrice.ts
 import type { Money } from '@types'
 
 /**

@@ -1,6 +1,6 @@
 // Path: src/hooks/useUpdateURL.ts
 
-import { type ProductState } from '@/api/shopify/types/types'
+import { type ProductState } from '@types'
 import { useRouter } from 'next/navigation'
 
 export function useUpdateURL() {

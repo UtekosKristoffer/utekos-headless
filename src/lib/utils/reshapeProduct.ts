@@ -6,7 +6,7 @@
  * @why Normalize product structure for consistent component consumption
  */
 
-import type { ShopifyProduct } from '@/api/shopify/types/types'
+import type { ShopifyProduct } from '@types'
 
 /**
  * Transform raw Shopify product to normalized format

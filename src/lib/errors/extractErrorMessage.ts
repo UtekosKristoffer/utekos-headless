@@ -12,7 +12,7 @@ export const extractErrorMessage = (thrown: unknown): string => {
   }
 
   if (thrown instanceof MissingCartIdError) {
-    return 'Handlekurven din ble ikke funnet.'
+    return 'Handleposen din ble ikke funnet.'
   }
 
   // For Shopify API errors, we need to extract from the formatted response

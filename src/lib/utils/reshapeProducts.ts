@@ -1,4 +1,4 @@
-import type { ShopifyProduct } from '@/api/shopify/types/types'
+import type { ShopifyProduct } from '@types'
 import { reshapeProduct } from './reshapeProduct'
 
 /**

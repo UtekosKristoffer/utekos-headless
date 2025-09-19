@@ -1,22 +1,22 @@
 // Path: src/app/layout.tsx
-import { Analytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/react'
-
 import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 import Providers from '@/components/providers/Providers'
+import { WelcomeToast } from '@/components/WelcomeToast/WelcomeToast'
 import { getCachedCart } from '@/lib/helpers/cart/getCachedCart'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { fetchMenu } from '@/lib/helpers/menu/fetchMenu'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
+import { Toaster } from 'sonner'
 
 import { Geist, Geist_Mono as GeistMono } from 'next/font/google'
 
-import type { Cart, RootLayoutProps } from '@types'
-
 import '@/db/zod/zodConfig'
+import type { Cart, RootLayoutProps } from '@types'
+import type { Metadata } from 'next'
 import 'swiper/swiper-bundle.css'
 import './globals.css'
-
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin']
@@ -27,35 +27,56 @@ const geistMono = GeistMono({
   subsets: ['latin']
 })
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
-    default: 'Utekos - Premium Friluftsklær',
+    default: 'Utekos - Varme og komfort for gode stunder ute',
     template: '%s | Utekos'
   },
   description:
-    'Utekos tilbyr premium friluftsklær for alle eventyr. Bygget med Next.js og Shopify for optimal ytelse.',
-  keywords: ['friluftsliv', 'utekos', 'friluftsklær', 'outdoor', 'premium'],
+    'Forleng kveldene på hytten, i bobilen eller på terrassen. Utekos lager komfortplagg av høy kvalitet, designet for å holde deg varm slik at du kan nyte de gode øyeblikkene lenger.',
+  keywords: [
+    'utekos',
+    'utekos dun',
+    'dun dress',
+    'utekos dress',
+    'sovepose dress',
+    'holde varmen ute',
+    'hytteliv',
+    'komfortplagg',
+    'bobil',
+    'terrassevarmer',
+    'båtliv',
+    'kvalitetsklær',
+    'forlenge kvelden',
+    'varme klær'
+  ],
   authors: [{ name: 'Utekos' }],
   creator: 'Utekos',
   openGraph: {
     type: 'website',
     locale: 'no_NO',
-    url: '<https://utekos.no>',
+    url: 'https://utekos.no',
     siteName: 'Utekos',
+    title: 'Utekos - Varme og komfort for gode stunder ute',
+    description:
+      'Forleng kveldene på hytta, i bobilen eller på terrassen. Komfortplagg av høy kvalitet som holder deg varm.',
     images: [
       {
-        url: '/og-image.jpg', // Nå vil denne bli til <https://utekos.no/og-image.jpg>
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Utekos - Premium Friluftsklær'
+        alt: 'Personer som koser seg utendørs med varme komfortplagg fra Utekos.'
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@utekos',
-    creator: '@utekos'
+    site: '@ditt_twitter_navn', // Husk å erstatte med deres faktiske Twitter/X-navn
+    creator: '@ditt_twitter_navn',
+    title: 'Utekos - Forleng de gode stundene ute',
+    description:
+      'Ikke la kjølige kvelder stoppe kosen. Våre komfortplagg er skapt for det norske utelivet på hytten, i bobilen eller båten.'
   },
   robots: {
     index: true,
@@ -69,10 +90,9 @@ export const metadata = {
     }
   },
   verification: {
-    google: 'your-google-verification-code'
+    google: 'G2CuMG6i_BKaNpqVN9N_SS2rvFxXWUOwydpZH0hp2NM'
   }
 }
-
 export default async function RootLayout({ children }: RootLayoutProps) {
   const [mainMenu, cartId] = await Promise.all([
     fetchMenu('header-mega-menu'),
@@ -88,7 +108,11 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       >
         <Providers initialCart={initialCart} cartId={cartId}>
           <Header menu={mainMenu} />
-          <main>{children}</main>
+          <main>
+            {children}
+            <Toaster closeButton />
+            <WelcomeToast />
+          </main>
           <Footer />
           <SpeedInsights />
           <Analytics mode='development' />

@@ -2,9 +2,9 @@
 
 import { fromError } from 'zod-validation-error'
 
-import { ShopifyMenuItemSchema } from '@/db/zod/schemas/ShopifyMenuItemSchema'
+import { MenuItemSchema } from '@/db/zod/schemas/MenuItemSchema'
 import { InvalidMenuDataError } from '@/lib/errors/InvalidMenuDataError'
-import type { ShopifyMenuItem } from '@types'
+import type { MenuItem } from '@types'
 
 /**
  * Validates a single menu item against the Zod schema.
@@ -13,8 +13,8 @@ import type { ShopifyMenuItem } from '@types'
  * @param item - Raw menu item from Shopify
  * @throws {InvalidMenuDataError} When item structure is invalid
  */
-export const validateMenuItem = (item: unknown): ShopifyMenuItem => {
-  const result = ShopifyMenuItemSchema.safeParse(item)
+export const validateMenuItem = (item: unknown): MenuItem => {
+  const result = MenuItemSchema.safeParse(item)
 
   if (!result.success) {
     const validationError = fromError(result.error)

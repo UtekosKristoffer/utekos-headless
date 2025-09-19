@@ -7,7 +7,6 @@ export type MenuItem = {
   title: string
   url: string
   items?: MenuItem[] | undefined
-  path: string
 }
 
 export type MenuQueryResponse = {
@@ -21,18 +20,7 @@ export type State = {
   status: 'OPEN' | 'CLOSED'
 }
 
-/**
- * Type definition with properly optional items array.
- * In Zod v4 + exactOptionalPropertyTypes, undefined must be explicit.
- */
-export type ShopifyMenuItem = {
-  title: string
-  url: string
-  items?: ShopifyMenuItem[] | undefined
-  path: string // Eksplisitt undefined for exactOptionalPropertyTypes
-}
-
 export type ShopifyFooterMenu = {
   title: string
-  path: string // Eksplisitt undefined for exactOptionalPropertyTypes
+  url: string
 }

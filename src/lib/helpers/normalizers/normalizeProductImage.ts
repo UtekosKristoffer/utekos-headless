@@ -15,5 +15,6 @@ export const normalizeProductImage = (
   url: image?.url ?? '/placeholder-image.png',
   altText: image?.altText ?? `Bilde av ${fallbackTitle}`,
   width: image?.width ?? 1024,
-  height: image?.height ?? 1024
+  height: image?.height ?? 1024,
+  id: image?.id ?? ''
 })

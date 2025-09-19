@@ -4,12 +4,7 @@ import { UTEKOS_MIKROFIBER_HANDLE } from './microfiber/details'
 import { SPECIAL_EDITION_HANDLE } from './special-edition/details'
 export const UTEKOS_DUN_PUBLIC_URL = 'https://www.utekos.no/products/utekos-dun'
 
-export const handles = [
-  'utekos-dun',
-  'utekos-mikrofiber',
-  'comfyrobe',
-  'utekos-special-edition'
-]
+export const handles = ['utekos-dun', 'utekos-mikrofiber', 'comfyrobe']
 export const FEATURED_PRODUCT_HANDLES = [
   UTEKOS_DUN_HANDLE,
   UTEKOS_MIKROFIBER_HANDLE,
@@ -36,7 +31,7 @@ export const PRODUCT_HANDLE_TO_ID: Record<AllProductHandles, number> = {
 export const PRODUCT_HANDLE_TO_PUBLIC_URL: Record<AllProductHandles, string> = {
   [UTEKOS_DUN_HANDLE]: 'https://www.utekos.no/products/utekos-dun',
   [UTEKOS_MIKROFIBER_HANDLE]:
-    'https://www.utekos.no/products/utekos-mikrofiber',
+    'https://www.utekos.no/produkter/utekos-mikrofiber',
   [COMFYROBE_HANDLE]: 'https://www.utekos.no/products/comfyrobe',
   [SPECIAL_EDITION_HANDLE]:
     'https://www.utekos.no/products/utekos-special-edition'

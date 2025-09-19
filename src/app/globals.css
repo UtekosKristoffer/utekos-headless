@@ -8,6 +8,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-button: var(--button);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -46,8 +47,10 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(0.145 0 0);
+  --header-background: oklch(0.1161 0 0);
+  --background: oklch(0.1161 0 0);
   --foreground: oklch(0.985 0 0);
+  --button: oklch(0.57 0.23507 260.1068);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -81,8 +84,10 @@
 }
 
 .dark {
+  --header-background: oklch(0.1161 0 0);
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
+  --button: oklch(0.57 0.23507 260.1068);
   --card: oklch(0.205 0 0);
   --card-foreground: rgb(17 17 17);
   --popover: oklch(0.205 0 0);
@@ -105,7 +110,7 @@
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.269 0 0);
@@ -120,5 +125,46 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  .phone-input .PhoneInputInput {
+    @apply flex h-12 w-full rounded-none border border-neutral-800 bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .phone-input .PhoneInputCountry {
+    @apply mr-4;
+  }
+
+  .phone-input .PhoneInputCountryIcon {
+    @apply h-6 w-8 rounded-sm;
+  }
+
+  .PhoneInput {
+    @apply flex h-12 w-full items-center rounded-none border border-neutral-800 focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background;
+  }
+  .PhoneInputCountry {
+    @apply flex h-full items-center justify-center border-r border-neutral-800 bg-transparent p-3;
+  }
+
+  .PhoneInputCountry {
+    display: none;
+  }
+
+  .PhoneInputCountryIcon {
+    @apply h-6 w-auto;
+  }
+
+  .PhoneInputInput {
+    @apply h-full w-full flex-1 rounded-none border-none bg-background px-3 text-base placeholder:text-muted-foreground focus:outline-none focus:ring-0;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px theme('colors.background') inset !important;
+    box-shadow: 0 0 0 30px theme('colors.background') inset !important;
+    -webkit-text-fill-color: theme('colors.foreground') !important;
+    caret-color: theme('colors.foreground') !important;
   }
 }

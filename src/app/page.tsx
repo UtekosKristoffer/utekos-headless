@@ -11,14 +11,12 @@ const HomePage = async () => {
   const response = await getProducts()
 
   if (!response.success) {
-    console.error('Failed to fetch products:', response.error)
     return notFound()
   }
 
   const products = response.body
 
   if (products.length === 0) {
-    console.log('No products found')
     return notFound()
   }
 
@@ -27,12 +25,11 @@ const HomePage = async () => {
   )
 
   if (featuredProducts.length === 0) {
-    console.log('No featured products found for handles:', handles)
     return notFound()
   }
 
   return (
-    <main className='container mx-auto px-4'>
+    <main className='container mx-auto px-4 pt-8'>
       <h1 className='text-3xl font-bold mb-8'>Utvalgte produkter</h1>
       <ProductGrid>
         {featuredProducts.map(product => (

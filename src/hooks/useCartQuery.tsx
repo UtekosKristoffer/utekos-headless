@@ -1,21 +1,15 @@
-//Path: src/hooks/useCartQuery.tsx
+// Path: src/hooks/useCartQuery.tsx
+'use client'
 
 import { useQuery } from '@tanstack/react-query'
 
+import { useCartId } from '@/lib/context/CartIdContext' // Ny import!
 import { fetchCart } from '@/lib/helpers/cart/fetchCart'
-import { getCartIdClient } from '@/lib/helpers/cart/getCartIdClient'
 import type { Cart } from '@types'
 
-/**
- * @module hooks/useCartQuery
- * @function useCartQuery
- * @description
- * @param useCartQuery
- * @exports useCartQuery
- */
-
 export const useCartQuery = () => {
-  const cartId = getCartIdClient()
+  // Henter cartId fra konteksten i stedet for localStorage
+  const cartId = useCartId()
 
   return useQuery<Cart | null>({
     queryKey: ['cart', cartId],

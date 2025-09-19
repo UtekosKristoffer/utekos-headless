@@ -1,5 +1,4 @@
-import type { GraphQLErrorResponse } from '@/api/graphql/types/errors'
-import type { GraphQLSuccessResponse } from '@/api/types/graphql'
+import type { GraphQLErrorResponse, GraphQLSuccessResponse } from '@types'
 export function isGraphQLErrorResponse(
   response: unknown
 ): response is GraphQLErrorResponse {

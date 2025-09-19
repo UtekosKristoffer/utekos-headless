@@ -21,10 +21,13 @@ export const normalizeProduct = (
     compareAtPriceRange: product.compareAtPriceRange,
     selectedOrFirstAvailableVariant: product.selectedOrFirstAvailableVariant,
     availableForSale: product.availableForSale,
-    descriptionHtml: product.descriptionHtml,
+    description: product.description,
     featuredImage: normalizeProductImage(product.featuredImage, product.title),
     priceRange: product.priceRange,
     options: product.options,
+    seo: product.seo,
+    vendor: product.vendor,
+    tags: product.tags,
     variants: product.variants,
     images: product.images
   }

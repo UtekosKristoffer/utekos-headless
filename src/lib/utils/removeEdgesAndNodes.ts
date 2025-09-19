@@ -1,4 +1,4 @@
-import type { Connection } from '@/api/shopify/types/types'
+import type { Connection } from '@types'
 
 export const removeEdgesAndNodes = <T>(array: Connection<T>): T[] =>
   array.edges.map(edge => edge?.node)

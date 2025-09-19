@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
+import { SubmitButton } from '@/components/cart/AddToCartButton/SubmitButton'
 import {
   FormControl,
   FormField,
@@ -9,25 +9,12 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-type AddToCartProps = {
-  isPending: boolean
-  isDisabled: boolean
-}
-/**
- * Renders the presentational fields for the AddToCart.
- *
- * This component exists to separate the form's UI (the "what") from its
- * parent's logic and state management (the "how"), adhering to the
- * Separation of Concerns (SoC) principle. It is a "dumb" component that
- * receives its state as props and contains no hooks or business logic.
- *
- * @param {object} props - The component's props.
- * @param {boolean} props.isPending - True if the form submission is in progress, used to show a loading state.
- * @param {boolean} props.isDisabled - True if the form should be disabled (e.g., no product variant is selected).
- * @returns {JSX.Element} The rendered form fields and submit button.
- */
+import type { AddToCartButtonProps } from '@types'
 
-export function AddToCartButton({ isPending, isDisabled }: AddToCartProps) {
+export function AddToCartButton({
+  isPending,
+  isDisabled
+}: AddToCartButtonProps) {
   return (
     <>
       <FormField
@@ -53,13 +40,12 @@ export function AddToCartButton({ isPending, isDisabled }: AddToCartProps) {
                   disabled={isDisabled}
                 />
               </FormControl>
-              <Button
-                type='submit'
-                disabled={isPending || isDisabled}
-                className='flex-1'
-              >
-                {isPending ? 'Adding...' : 'Add to Cart'}
-              </Button>
+              <SubmitButton
+                availableForSale={true}
+                selectedVariantId={field.value}
+                isPending={isPending}
+                isDisabled={isDisabled}
+              />
             </div>
             <FormMessage />
           </FormItem>

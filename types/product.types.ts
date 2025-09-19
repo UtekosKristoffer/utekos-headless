@@ -23,11 +23,20 @@ export type ShopifyProduct = {
   availableForSale: boolean
   images: ShopifyImageConnection
   options: ProductOption[]
-  descriptionHtml: string
+  description: string
   featuredImage: Image | null
+  vendor: string
+  tags: string[]
+  metafield?: Metafield | null
+  variantProfile?: MetaobjectReference | null
+  seo: {
+    title: string | null
+    description: string | null
+  }
   selectedOrFirstAvailableVariant: ShopifyProductVariant
   variants: ProductVariantConnection
 }
+
 export type ShopifyOption = {
   name: string
   values: string[]
@@ -121,6 +130,7 @@ export type ShopifyProductVariant = {
   compareAtPrice: Money | null
   product: ShopifyProduct
   metafield: Metafield | null
+  sku: string | undefined
   variantProfile: VariantProfileReference | null
   variantProfileData?: Partial<MetaobjectReference>
 }

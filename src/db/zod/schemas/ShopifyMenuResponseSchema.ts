@@ -1,6 +1,6 @@
 // Path: src/db/zod/schemas/ShopifyMenuResponseSchema.ts
 
-import { ShopifyMenuItemSchema } from '@/db/zod/schemas/ShopifyMenuItemSchema'
+import { MenuItemSchema } from '@/db/zod/schemas/MenuItemSchema'
 import { z } from '@/db/zod/zodConfig'
 /**
  * Schema for validating Shopify menu item structure.
@@ -14,7 +14,7 @@ import { z } from '@/db/zod/zodConfig'
 export const ShopifyMenuResponseSchema = z.object({
   menu: z
     .object({
-      items: z.array(ShopifyMenuItemSchema).default([])
+      items: z.array(MenuItemSchema).default([])
     })
     .nullable()
 })

@@ -20,7 +20,7 @@ import { createCartMutationOrchestrator } from '@/lib/actions/createCartMutation
 import { performCartLinesRemoveMutation } from '@/lib/actions/perform/performCartLinesRemoveMutation'
 import { mapThrownErrorToActionResult } from '@/lib/errors/mapThrownErrorToActionResult'
 import { validateRemoveCartLineInput } from '@/lib/helpers/validations/validateRemoveCartLineInput'
-import type { CartActionsResult } from '/cart'
+import type { CartActionsResult } from '@types'
 
 /**
  * Internal orchestrated function for removing a cart line.  This constant

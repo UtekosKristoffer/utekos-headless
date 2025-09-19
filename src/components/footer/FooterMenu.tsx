@@ -8,18 +8,32 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
+/**
+ * Extracts path from URL
+ * @why Converts Shopify URLs to Next.js paths for routing
+ */
+const getPathFromUrl = (url: string): string => {
+  try {
+    const urlObj = new URL(url)
+    return urlObj.pathname
+  } catch {
+    return url
+  }
+}
+
 export function FooterMenuItem({ item }: { item: ShopifyFooterMenu }) {
   const pathname = usePathname()
-  const [active, setActive] = useState(pathname === item.path)
+  const path = getPathFromUrl(item.url)
+  const [active, setActive] = useState(pathname === path)
 
   useEffect(() => {
-    setActive(pathname === item.path)
-  }, [pathname, item.path])
+    setActive(pathname === path)
+  }, [pathname, path])
 
   return (
     <li>
       <Link
-        href={item.path as Route}
+        href={path as Route}
         className={clsx(
           'block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300',
           {

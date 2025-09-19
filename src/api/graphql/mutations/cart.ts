@@ -2,7 +2,7 @@
 
 import cartFragment from '@/lib/fragments/cartFragment'
 
-// NY MUTASJON: Denne lager en ny, tom handlekurv
+// NY MUTASJON: Denne lager en ny, tom handlepose
 export const mutationCartCreate = `
   mutation cartCreate($lines: [CartLineInput!]) {
     cartCreate(input: { lines: $lines }) {

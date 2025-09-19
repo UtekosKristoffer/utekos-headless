@@ -17,10 +17,10 @@ export async function generateMetadata({
 
   return {
     title: product.title,
-    description: product.descriptionHtml,
+    description: product.description,
     openGraph: {
       title: product.title,
-      description: product.descriptionHtml,
+      description: product.description,
       images: product.variants.edges[0]?.node.variantProfile?.reference?.images
     }
   }

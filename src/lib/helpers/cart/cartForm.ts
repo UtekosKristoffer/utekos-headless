@@ -45,7 +45,7 @@ export const createAddToCartSubmitHandler =
     processRef.send({
       type: 'ADD_LINES',
       input: {
-        merchandiseId: values.variantId,
+        variantId: values.variantId,
         quantity: values.quantity
       }
     })
@@ -68,7 +68,7 @@ export const withSuccessToast =
     submitHandler(values)
     if (selectedVariant) {
       toast.success(
-        `${values.quantity} x ${selectedVariant.title} lagt i handlekurv!`
+        `${values.quantity} x ${selectedVariant.title} lagt i handleposen din!`
       )
     }
   }

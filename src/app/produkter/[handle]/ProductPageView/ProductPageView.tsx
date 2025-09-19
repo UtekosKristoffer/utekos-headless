@@ -41,7 +41,7 @@ export default function ProductPageView({
   variantImages,
   onOptionChange
 }: ProductPageViewProps) {
-  const { title, descriptionHtml, options } = productData
+  const { title, description, options } = productData
   const variantProfile = selectedVariant.variantProfileData
   const subtitle = variantProfile?.subtitle
   const optionOrder = ['Størrelse', 'Farge']
@@ -124,7 +124,7 @@ export default function ProductPageView({
               aria-label='Produktbeskrivelse'
               className='prose prose-invert mt-12 max-w-none text-foreground-on-dark/80'
             >
-              <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
+              <div dangerouslySetInnerHTML={{ __html: description }} />
             </article>
           </section>
         </OptionsColumn>

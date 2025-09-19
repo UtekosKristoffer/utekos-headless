@@ -9,7 +9,7 @@ export default function Footer() {
   const copyrightName = COMPANY_NAME || SITE_NAME || ''
 
   return (
-    <footer className='bg-background mt-auto border-t border-white/10 py-12'>
+    <footer className='bg-sidebar-foreground mt-auto border-t border-white/10 py-12'>
       <div className='container mx-auto px-4 sm:px-8'>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
           {footerConfig.map(section => (

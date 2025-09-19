@@ -39,20 +39,12 @@ export async function getProducts(
       query: getProductsQuery,
       variables
     })
-
-    console.log('Shopify response:', JSON.stringify(res, null, 2))
-
-    // Check if the response has the expected structure
     if (!res?.body?.data?.products) {
-      console.error('Invalid response structure:', res)
       throw new Error('Invalid response structure from Shopify')
     }
 
     const rawProducts = removeEdgesAndNodes(res.body.data.products)
-    console.log('Raw products count:', rawProducts.length)
-
     const products = reshapeProducts(rawProducts)
-    console.log('Reshaped products count:', products.length)
 
     return {
       success: true,

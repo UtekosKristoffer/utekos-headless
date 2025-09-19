@@ -67,9 +67,6 @@ export const renderNode = (
       return <React.Fragment key={index}>{textElement}</React.Fragment>
 
     default:
-      // In a robust implementation, you might want to log the unhandled node type.
-      // Const unhandled: never = node;
-      // Console.warn('Unhandled node type:', unhandled);
       return null
   }
 }

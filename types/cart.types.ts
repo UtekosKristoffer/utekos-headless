@@ -8,7 +8,10 @@ import type { EventPayloadMap } from '@xstate/store'
 import { z } from 'zod'
 
 import type { Image, Money, ShopifyProduct, ShopifySelectedOption } from '.'
-
+export type AddToCartButtonProps = {
+  isPending: boolean
+  isDisabled: boolean
+}
 export type AddToCartFormValues = z.infer<typeof AddToCartSchema>
 export type UpdateCartLineQuantityInput = z.infer<typeof UpdateCartSchema>
 export type RemoveCartLineInput = z.infer<typeof RemoveCartLineSchema>
@@ -153,9 +156,6 @@ export type LastOperation = {
   at: number
   payload?: unknown
 }
-export type MutationInput = {
-  [key: string]: string | number | boolean | undefined | null
-}
 export type OptimisticCartLines = { lines: Record<string, number> }
 
 export type ShopifyCart = {
@@ -168,25 +168,11 @@ export type ShopifyCart = {
   }
   lines: {
     edges: {
-      node: ShopifyCartLine
+      node: CartLine
     }[]
   }
 }
 
-export type ShopifyCartLine = {
-  id: string
-  quantity: number
-  merchandise: {
-    id: string
-    title: string
-    price: Money
-    product: {
-      title: string
-      handle: string
-      featuredImage: Image | null
-    }
-  }
-}
 export type RemoveCartLineEvent = {
   type: 'REMOVE_LINE'
   input: RemoveCartLineInput

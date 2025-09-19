@@ -1,18 +1,13 @@
-/**
- * Debug version of fetchFooterMenu to help identify the issue
- */
-
-/* eslint-disable max-statements */
-
 import { storefrontClient } from '@/clients/storefrontApiClient'
 import { extractErrorMessage } from '@/lib/errors/extractErrorMessage'
 import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
 import type { MenuQueryResponse, ShopifyFooterMenu } from '@types'
 
 import { menuQuery } from '@/api/graphql/queries/menu/menuQuery'
-import { normalizeMenu } from '../normalizers/normalizeMenu'
-import { validateMenuHandle } from '../validations/validateMenuHandle'
-import { validateMenuResponse } from '../validations/validateMenuResponse'
+import { normalizeMenu } from '@/lib/helpers/normalizers/normalizeMenu'
+import { validateMenuHandle } from '@/lib/helpers/validations/validateMenuHandle'
+import { validateMenuResponse } from '@/lib/helpers/validations/validateMenuResponse'
+
 export const fetchFooterMenu = async (
   handle: string
 ): Promise<ShopifyFooterMenu[]> => {
@@ -30,28 +25,16 @@ export const fetchFooterMenu = async (
       handleShopifyErrors(errors)
     }
 
-    // Debug logging
-    console.log(
-      `Raw Shopify response for menu "${handle}":`,
-      JSON.stringify(data, null, 2)
-    )
-
     const validatedMenu = validateMenuResponse(data, handle)
 
-    // Debug logging before normalization
-    console.log(`Validated menu items for "${handle}":`, validatedMenu.items)
-
+    // Antar at normalizeMenu nå returnerer objekter med { title, url }
     const normalizedMenu: ShopifyFooterMenu[] = normalizeMenu(
       validatedMenu.items
     )
 
-    // Debug logging after normalization
-    console.log(`Normalized menu for "${handle}":`, normalizedMenu)
-
-    // Extra validation - ensure all items have path
     const validMenu = normalizedMenu.filter(item => {
-      if (!item.path) {
-        console.error('Menu item missing path:', item)
+      if (!item.url) {
+        console.warn('Menu item missing url:', item)
         return false
       }
       return true

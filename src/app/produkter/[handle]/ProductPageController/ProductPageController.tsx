@@ -15,7 +15,6 @@ export function ProductPageController({ productData }: ProductControllerProps) {
 
   const selectedVariant: ShopifyProductVariant | null =
     variantState.status === 'selected' ? variantState.variant : null
-  console.log('Valgt variant som sendes til view:', selectedVariant)
   if (!selectedVariant) {
     return <div>Oppdaterer...</div>
   }

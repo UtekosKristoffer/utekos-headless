@@ -21,7 +21,7 @@ export const getCartErrorMessage = (
 
   // For generic messages, provide cart-specific context
   if (baseMessage === 'En uventet feil oppstod under behandling') {
-    return 'En uventet feil oppstod under behandling av handlekurven'
+    return 'En uventet feil oppstod under behandling av handleposen'
   }
 
   return baseMessage

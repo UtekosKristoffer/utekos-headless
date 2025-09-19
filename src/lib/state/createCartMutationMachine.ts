@@ -123,7 +123,7 @@ export const createCartMutationMachine = (
                     'Error extracting cart error message:',
                     extractionError
                   )
-                  return 'En uventet feil oppstod under behandling av handlekurven'
+                  return 'En uventet feil oppstod under behandling av handleposen'
                 }
               }
             })

@@ -1,4 +1,4 @@
-// Path: src/lib/actors/CartMutationContext.ts"
+// Path: src/lib/context/CartMutationContext.ts"
 
 import { createActorContext } from '@xstate/react'
 

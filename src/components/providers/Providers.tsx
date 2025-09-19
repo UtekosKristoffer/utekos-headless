@@ -14,6 +14,7 @@ import { addCartLinesAction } from '@/lib/actions/addCartLinesAction'
 import { clearCartAction } from '@/lib/actions/clearCartAction'
 import { removeCartLineAction } from '@/lib/actions/removeCartLineAction'
 import { updateCartLineQuantityAction } from '@/lib/actions/updateCartLineQuantityAction'
+import { CartIdProvider } from '@/lib/context/CartIdContext'; // VIKTIG: Importer CartIdProvider
 import type { Cart, CartActions } from '@types'
 
 function makeQueryClient() {
@@ -57,12 +58,13 @@ export function Providers({
   queryClient.setQueryData(['cart', cartId], initialCart)
 
   return (
-    // 1. QueryClientProvider MÅ være ytterst
+    // QueryClientProvider må være ytterst
     <QueryClientProvider client={queryClient}>
-      {/* 2. CartMutationClient kan nå trygt bruke useQueryClient() */}
-      <CartMutationClient actions={serverActions}>
-        <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
-      </CartMutationClient>
+      <CartIdProvider value={cartId}>
+        <CartMutationClient actions={serverActions} cartId={cartId}>
+          <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
+        </CartMutationClient>
+      </CartIdProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )

@@ -5,29 +5,14 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
-import { Form } from '@/components/ui/form'
+import { Form } from '@/components/ui/form' // Vi tar denne tilbake!
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
-import {
-  createAddToCartFormConfig,
-  createAddToCartSubmitHandler,
-  withSuccessToast
-} from '@/lib/helpers/cart/cartForm'
+import { createAddToCartSubmitHandler } from '@/lib/helpers/cart/cartForm'
+import { cartStore } from '@/lib/state/cartStore'
 import { AddToCartButton } from './AddToCartButton'
 
 import type { AddToCartFormValues, ShopifyProductVariant } from '@types'
-/**
- * The primary "smart" component for the Add to Cart form.
- *
- * This component acts as the orchestrator for the "add to cart" feature. Its
- * main responsibility is to wire together the global state machine (via XState
- * context), the form state (via `react-hook-form`), and the reusable form
- * logic from our helper files. It handles side-effects and delegates the
- * actual field rendering to the `AddToCartFormFields` presentational component.
- *
- * @param {object} props - The component's props.
- * @param {ProductVariant | null} props.selectedVariant - The currently selected product variant, which is necessary to populate the hidden variantId field.
- * @returns {JSX.Element} The complete, interactive Add to Cart form.
- */
+
 export function AddToCart({
   selectedVariant
 }: {
@@ -40,21 +25,30 @@ export function AddToCart({
   const lastError = CartMutationContext.useSelector(
     state => state.context.error
   )
-  const form = useForm<AddToCartFormValues>(
-    createAddToCartFormConfig(selectedVariant)
-  )
 
-  const baseSubmitHandler = createAddToCartSubmitHandler(cartActor)
-  const onSubmit = withSuccessToast(baseSubmitHandler, selectedVariant)
+  const form = useForm<AddToCartFormValues>({
+    defaultValues: {
+      variantId: selectedVariant?.id || '',
+      quantity: 1
+    }
+  })
 
-  // Effect to sync the selected variant prop with the form's hidden input
+  const handleAddToCart = (values: AddToCartFormValues) => {
+    console.log('SUCCESS: handleAddToCart (onSubmit) blir nå kalt!', { values })
+
+    createAddToCartSubmitHandler(cartActor)(values)
+
+    if (selectedVariant) {
+      toast.success(`${selectedVariant.title} ble lagt i handleposen din.`)
+    }
+
+    cartStore.send({ type: 'OPEN' })
+  }
+
   useEffect(() => {
-    form.setValue('variantId', selectedVariant?.id ?? '', {
-      shouldValidate: true
-    })
-  }, [selectedVariant?.id, form]) // Spesifiser eksakte verdier i stedet for hele objekter
+    form.setValue('variantId', selectedVariant?.id ?? '')
+  }, [selectedVariant?.id, form])
 
-  // Effect to display server errors from the XState machine context
   useEffect(() => {
     if (lastError) {
       toast.error(lastError)
@@ -62,8 +56,12 @@ export function AddToCart({
   }, [lastError])
 
   return (
+    // Vi legger tilbake <Form>-provideren for å fikse 'control'-feilen
     <Form {...form}>
-      <form onSubmit={void form.handleSubmit(onSubmit)} className='space-y-4'>
+      <form
+        onSubmit={form.handleSubmit(handleAddToCart)} // Bruker nå RHF sin handleSubmit
+        className='space-y-4'
+      >
         <AddToCartButton isPending={isPending} isDisabled={!selectedVariant} />
       </form>
     </Form>

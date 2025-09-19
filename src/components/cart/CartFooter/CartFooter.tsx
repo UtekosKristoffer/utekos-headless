@@ -7,29 +7,10 @@ import { CheckoutButton } from '@/components/jsx/CheckoutButton'
 import { DrawerFooter } from '@/components/ui/drawer'
 import { useCartPending } from '@/hooks/useCartPending'
 import { formatPrice } from '@/lib/utils/formatPrice'
+import { SubtotalDisplay } from './SubTotalDisplay'
+import { shouldRenderFooter } from './utils/shouldRenderFooter'
+
 import type { Cart } from '@types'
-
-/**
- * Determines if the cart footer should be rendered.
- * Pure function for clean conditional logic.
- */
-const shouldRenderFooter = (cart: Cart | null | undefined): boolean =>
-  Boolean(cart && cart.lines.length > 0)
-
-/**
- * Pure component that renders the subtotal display.
- * Separates presentation logic from main component.
- */
-const SubtotalDisplay = ({
-  subtotal
-}: {
-  subtotal: string
-}): React.JSX.Element => (
-  <div className='flex justify-between font-semibold'>
-    <span>Delsum</span>
-    <span>{subtotal}</span>
-  </div>
-)
 
 /**
  * Renders the footer of the cart drawer, displaying the subtotal

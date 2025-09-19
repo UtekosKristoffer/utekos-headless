@@ -6,18 +6,41 @@ import { getProducts } from '@/api/lib/products/getProducts'
 import { ProductCard } from '@/components/ProductCard'
 import { handles } from '@/db/data/products/product-info'
 
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Kolleksjon: Komfortplagg for hytteliv & utekos | Utekos',
+  description:
+    'Utforsk hele kolleksjonen av komfortplagg fra Utekos. Våre varme og slitesterke produkter er skapt for å forlenge de gode stundene på hytta, i bobilen eller på kjølige kvelder.',
+  openGraph: {
+    type: 'website',
+    locale: 'no_NO',
+    url: 'https://utekos.no/produkter',
+    siteName: 'Utekos',
+    title: 'Hele kolleksjonen fra Utekos',
+    description:
+      'Varme og komfortable plagg for deg som elsker utelivet på hytta, i bobilen eller båten.',
+    images: [
+      {
+        url: '/og-image.jpg', // Bruker standardbilde for deling, da dette er en samleside
+        width: 1200,
+        height: 630,
+        alt: 'Kolleksjonen av komfortplagg fra Utekos'
+      }
+    ]
+  }
+}
+
 const ProductsPage = async () => {
   const response = await getProducts()
 
   if (!response.success) {
-    console.error('Failed to fetch products:', response.error)
     return notFound()
   }
 
   const products = response.body
 
   if (products.length === 0) {
-    console.log('No products found')
     return notFound()
   }
 
@@ -26,7 +49,6 @@ const ProductsPage = async () => {
   )
 
   if (featuredProducts.length === 0) {
-    console.log('No featured products found for handles:', handles)
     return notFound()
   }
 

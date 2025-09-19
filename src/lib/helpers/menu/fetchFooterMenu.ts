@@ -1,11 +1,5 @@
 // Path: src/lib/helpers/menu/fetchFooterMenu.ts
 
-/**
- * Debug version of fetchFooterMenu to help identify the issue
- */
-
-/* eslint-disable max-statements */
-
 import { menuQuery } from '@/api/graphql/queries/menu/menuQuery'
 import { storefrontClient } from '@/clients/storefrontApiClient'
 import { extractErrorMessage } from '@/lib/errors/extractErrorMessage'
@@ -32,28 +26,14 @@ export const fetchFooterMenu = async (
       handleShopifyErrors(errors)
     }
 
-    // Debug logging
-    console.log(
-      `Raw Shopify response for menu "${handle}":`,
-      JSON.stringify(data, null, 2)
-    )
-
     const validatedMenu = validateMenuResponse(data, handle)
-
-    // Debug logging before normalization
-    console.log(`Validated menu items for "${handle}":`, validatedMenu.items)
 
     const normalizedMenu: ShopifyFooterMenu[] = normalizeFooterMenu(
       validatedMenu.items
     )
 
-    // Debug logging after normalization
-    console.log(`Normalized menu for "${handle}":`, normalizedMenu)
-
-    // Extra validation - ensure all items have path
     const validMenu = normalizedMenu.filter(item => {
-      if (!item.path) {
-        console.error('Menu item missing path:', item)
+      if (!item.url) {
         return false
       }
       return true
