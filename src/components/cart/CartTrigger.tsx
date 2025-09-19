@@ -61,7 +61,7 @@ export function CartTrigger({
         variant='cart'
         className={cn(
           'relative flex h-11 w-11 items-center justify-center rounded-md',
-          'border border-neutral-200 transition-colors',
+          'border border-white/10 transition-colors',
           'dark:border-neutral-700 dark:text-white',
           'p-0',
           className

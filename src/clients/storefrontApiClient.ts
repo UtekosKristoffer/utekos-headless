@@ -14,4 +14,3 @@ export const storefrontClient: StorefrontApiClient = createStorefrontApiClient({
   apiVersion: SHOPIFY_API_VERSION,
   publicAccessToken: SHOPIFY_PUBLIC_TOKEN
 })
-export default storefrontClient

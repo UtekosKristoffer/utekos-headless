@@ -1,13 +1,13 @@
 // Path: src/app/produkter/page.tsx
 
-import { notFound } from 'next/navigation'
-
 import { getProducts } from '@/api/lib/products/getProducts'
+import { ProductGrid } from '@/components/jsx/ProductGrid'
 import { ProductCard } from '@/components/ProductCard'
 import { handles } from '@/db/data/products/product-info'
+import { notFound } from 'next/navigation'
 
 import type { Metadata } from 'next'
-
+import type ProductPage from './[handle]/page'
 export const metadata: Metadata = {
   title: 'Kolleksjon: Komfortplagg for hytteliv & utekos | Utekos',
   description:
@@ -53,13 +53,13 @@ const ProductsPage = async () => {
   }
 
   return (
-    <main className='container mx-auto px-4'>
+    <main className='container mx-auto px-4 pt-8'>
       <h1 className='text-3xl font-bold mb-8'>Utvalgte produkter</h1>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+      <ProductGrid>
         {featuredProducts.map(product => (
           <ProductCard key={product.id} product={product} />
         ))}
-      </div>
+      </ProductGrid>
     </main>
   )
 }

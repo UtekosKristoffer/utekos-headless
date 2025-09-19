@@ -13,10 +13,14 @@ import { Toaster } from 'sonner'
 import { Geist, Geist_Mono as GeistMono } from 'next/font/google'
 
 import '@/db/zod/zodConfig'
-import type { Cart, RootLayoutProps } from '@types'
+import type { Cart } from '@types'
 import type { Metadata } from 'next'
 import 'swiper/swiper-bundle.css'
 import './globals.css'
+type RootLayoutProps = Readonly<{
+  children: React.ReactNode
+}>
+
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin']

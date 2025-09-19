@@ -8,8 +8,8 @@ export function HeaderLogo() {
         <Image
           src='/icon.png'
           alt='Utekos logo'
-          width={40}
-          height={40}
+          width={45}
+          height={45}
           priority
           className='rounded-full border border-white/10'
         />

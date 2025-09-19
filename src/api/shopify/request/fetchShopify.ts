@@ -1,5 +1,7 @@
+// Path: src/api/shopify/request/fetchShopify.ts
+
+import { getShopifyEndpoint, getShopifyToken } from '@/db/config/shopify.config'
 import { isShopifyError } from '@/lib/errors/isShopifyError'
-import { endpoint, key } from '@/lib/shopify'
 
 import type { ExtractVariables } from '@types'
 
@@ -12,12 +14,19 @@ export async function shopifyFetch<T>({
   query: string
   variables?: ExtractVariables<T>
 }): Promise<{ status: number; body: T } | never> {
+  const endpoint = getShopifyEndpoint()
+  const token = getShopifyToken()
+
+  if (!token) {
+    throw new Error('Missing Shopify storefront access token.')
+  }
+
   try {
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Shopify-Storefront-Access-Token': key,
+        'X-Shopify-Storefront-Access-Token': token,
         ...headers
       },
       body: JSON.stringify({

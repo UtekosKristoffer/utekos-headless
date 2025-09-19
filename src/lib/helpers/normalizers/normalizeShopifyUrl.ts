@@ -7,10 +7,11 @@ import type { Route } from 'next'
  * Returns Route type for Next.js Link compatibility
  */
 export function normalizeShopifyUrl(url: string): Route {
-  // Remove domain and get just the path
-  const urlPath = url.replace(/^https?:\/\/[^\/]+/, '')
+  let urlPath = url.replace(/^https?:\/\/[^\/]+/, '')
+  if (urlPath.startsWith('/products/')) {
+    urlPath = urlPath.replace('/products/', '/produkter/')
+  }
 
-  // Map Shopify URLs to your local paths
   const urlMappings: Record<string, string> = {
     '/pages/vaske-og-vedlikehold/produktguide':
       '/footer-routes/kjøpshjelp/produktguide/vask-og-vedlikehold',

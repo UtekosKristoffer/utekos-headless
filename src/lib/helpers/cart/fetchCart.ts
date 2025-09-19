@@ -7,10 +7,6 @@ import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
 import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import type { Cart, CartQueryResult } from '@types'
 
-/**
- * Fetches cart data from the Shopify Storefront API. This is an impure function
- * that performs a network request.
- */
 export const fetchCart = async (cartId: string): Promise<Cart> => {
   const { data, errors } = await storefrontClient.request<CartQueryResult>(
     getCartQuery,

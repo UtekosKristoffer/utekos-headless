@@ -4,20 +4,20 @@ import { ProductPageController } from '@/app/produkter/[handle]/ProductPageContr
 import { ProductPageSkeleton } from '@/app/produkter/[handle]/ProductPageSkeleton/ProductPageSkeleton'
 import { ProductProvider } from '@/components/providers/ProductProvider'
 import { reshapeMetaobject } from '@/lib/utils/reshapeMetaobject'
+import type { Metadata, ResolvingMetadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
-// Path: src/app/produkter/[handle]/page.tsx
-import type { Metadata, ResolvingMetadata } from 'next'
 
-type Props = {
-  params: { handle: string }
+type MetaDataProps = {
+  params: Promise<{ handle: string }>
 }
 
 export async function generateMetadata(
-  { params }: Props,
+  { params }: MetaDataProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const handle = await params.handle
+  const handle = (await params).handle
+
   const product = await getProduct(handle)
 
   if (!product) {
@@ -26,7 +26,6 @@ export async function generateMetadata(
       description: 'Dette produktet er dessverre ikke tilgjengelig.'
     }
   }
-
   const seoTitle = product.seo.title || product.title
   const seoDescription = product.seo.description || product.description
   const imageUrl = product.featuredImage?.url || '/og-image.jpg'

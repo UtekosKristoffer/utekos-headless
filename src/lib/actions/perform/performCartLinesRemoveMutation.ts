@@ -1,15 +1,5 @@
 // Path: src/lib/actions/perform/performCartLinesRemoveMutation.ts
 
-/**
- * @fileoverview Performs the mutation to remove a specific line from the cart.
- *
- *   Accepts a cart identifier and an input object containing the line ID to
- *   remove.  Sends a GraphQL mutation and returns the raw cart on success,
- *   throwing on error.  This helper keeps API concerns out of higher‑level
- *   business logic.
- *
- * @module lib/actions/perform
- */
 'use server'
 
 import { mutationCartLinesRemove } from '@/api/graphql/mutations/cart'

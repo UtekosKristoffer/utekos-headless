@@ -1,7 +1,6 @@
 'use client'
 
 import {
-  CommandDialog,
   CommandEmpty,
   CommandGroup,
   CommandInput,
@@ -10,8 +9,25 @@ import {
 } from '@/components/ui/command'
 import { cn } from '@/lib/utils/className'
 import { SearchIcon } from 'lucide-react'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import * as React from 'react'
+
+const CommandDialog = dynamic(
+  () => import('@/components/ui/command').then(mod => mod.CommandDialog),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className='fixed inset-0 z-50 flex items-start justify-center p-4 pt-[15vh] backdrop-blur-sm'
+        aria-hidden
+      >
+        <div className='flex h-[300px] w-full max-w-2xl animate-pulse flex-col rounded-xl border border-neutral-700 bg-neutral-900/95 shadow-2xl backdrop-blur-sm' />
+      </div>
+    )
+  }
+)
+
 function TablerArrowRight(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg

@@ -5,7 +5,7 @@
  * Centralizes all Shopify-related environment variables and URL construction
  */
 
-const SHOPIFY_API_VERSION = '2025-07' // Or use process.env.SHOPIFY_API_VERSION
+const SHOPIFY_API_VERSION = '2025-07'
 export const shopifyConfig = {
   storeDomain: process.env.SHOPIFY_STORE_DOMAIN,
   storefrontAccessToken: process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN,
@@ -17,8 +17,8 @@ export const shopifyConfig = {
     }
 
     const domain = this.storeDomain
-      .replace(/^https?:\/\//, '') // Remove protocol if present
-      .replace(/\/.*$/, '') // Remove any path if present
+      .replace(/^https?:\/\//, '')
+      .replace(/\/.*$/, '')
 
     return `https://${domain}/api/${this.apiVersion}/graphql.json`
   },
