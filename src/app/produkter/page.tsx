@@ -7,7 +7,6 @@ import { handles } from '@/db/data/products/product-info'
 import { notFound } from 'next/navigation'
 
 import type { Metadata } from 'next'
-import type ProductPage from './[handle]/page'
 export const metadata: Metadata = {
   title: 'Kolleksjon: Komfortplagg for hytteliv & utekos | Utekos',
   description:

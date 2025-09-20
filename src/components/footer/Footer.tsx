@@ -1,8 +1,19 @@
+import { KlarnaLogo } from '@/components/logo/payments/KlarnaLogo'
+import { MastercardLogo } from '@/components/logo/payments/MastercardLogo'
+import { VippsLogo } from '@/components/logo/payments/VippsLogo'
+import { VisaLogo } from '@/components/logo/payments/VisaLogo'
+import { footerConfig } from '@/db/config/footer.config' // Antatt ny plassering for config-filer
 import Link from 'next/link'
 
-import { footerConfig } from '@/db/config/footer.config'
-
 const { COMPANY_NAME, SITE_NAME } = process.env
+
+// Vi definerer logoene i en liste for ren og gjenbrukbar kode
+const paymentLogos = [
+  { name: 'Klarna', Component: KlarnaLogo },
+  { name: 'Vipps', Component: VippsLogo },
+  { name: 'Visa', Component: VisaLogo },
+  { name: 'Mastercard', Component: MastercardLogo }
+]
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -11,7 +22,7 @@ export default function Footer() {
   return (
     <footer className='bg-sidebar-foreground mt-auto border-t border-white/10 py-12'>
       <div className='container mx-auto px-4 sm:px-8'>
-        <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
+        <div className='grid grid-cols-1 gap-8 md:grid-cols-4'>
           {footerConfig.map(section => (
             <div key={section.title}>
               <h3 className='mb-4 text-sm font-semibold text-foreground-on-dark'>
@@ -38,7 +49,21 @@ export default function Footer() {
             </div>
           ))}
         </div>
-        <div className='mt-12 border-t border-white/10 pt-8 text-center'>
+
+        {/* SEKSJON FOR BETALINGSLOGOER */}
+        <div className='mt-12 border-t border-white/10 pt-8'>
+          <div className='flex flex-wrap items-center justify-center gap-x-6 gap-y-4'>
+            {paymentLogos.map(({ name, Component }) => (
+              <Component
+                key={name}
+                className='h-6 w-auto text-foreground/70' // Gir en konsistent høyde og en dus farge
+                aria-label={`${name} betalingsmetode`}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className='mt-8 text-center'>
           <p className='text-xs text-foreground-on-dark/40'>
             &copy; {currentYear} {copyrightName}
             {copyrightName.length > 0 && !copyrightName.endsWith('.') ?

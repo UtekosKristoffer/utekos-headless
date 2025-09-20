@@ -81,7 +81,6 @@ export function ProductCard({ product }: ProductCardProps) {
     e.preventDefault()
     e.stopPropagation()
 
-    // Show toast notification
     toast.success(`${product.title} er lagt i handlepose`, {
       description: `Farge: ${selectedVariant?.colorName || 'Standard'}, Størrelse: ${selectedSize}`,
       duration: 3000

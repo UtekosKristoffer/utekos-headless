@@ -70,5 +70,24 @@ export const footerConfig: FooterSection[] = [
         path: '/personvern' as Route
       }
     ]
+  },
+  // NY SEKSJON STARTER HER
+  {
+    title: 'Frakt og retur',
+    links: [
+      {
+        title: 'Fraktinformasjon',
+        path: '/frakt-og-retur' as Route
+      },
+      {
+        title: 'Retur og bytte',
+        path: '/frakt-og-retur#retur' as Route // Eksempel på ankerlink
+      },
+      {
+        title: 'Spor din ordre',
+        path: '/sporing' as Route
+      }
+    ]
   }
+  // NY SEKSJON SLUTTER HER
 ]
