@@ -19,9 +19,8 @@ export function normalizeShopifyUrl(url: string): Route {
       '/footer-routes/kjøpshjelp/storrelsesguide',
     '/pages/productinfo/teknologi-og-materialer':
       '/footer-routes/kjøpshjelp/specs',
-    '/pages/kundeservice/kontaktskjema':
-      '/footer-routes/kjøpshjelp/kontakt-oss',
-    '/pages/kontakt-oss': '/footer-routes/kjøpshjelp/kontakt-oss'
+    '/pages/kundeservice/kontaktskjema': '/kontaktskjema',
+    '/pages/kontakt-oss': '/kontaktskjema'
     // Add more mappings as needed
   }
 

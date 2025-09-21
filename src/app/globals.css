@@ -168,3 +168,86 @@
     caret-color: theme('colors.foreground') !important;
   }
 }
+@keyframes blob-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  50% {
+    /* Øker skaleringen fra 5% til 15% for en tydeligere "pust" */
+    transform: scale(1.15);
+    /* Justerer formen litt mer for å gjøre bevegelsen synlig */
+    border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+  }
+}
+
+@keyframes blinking-cursor {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes wander {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(4px, -3px);
+  }
+  50% {
+    transform: translate(-3px, 5px);
+  }
+  75% {
+    transform: translate(-5px, -3px);
+  }
+}
+
+@keyframes chip-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+}
+
+@keyframes aurora {
+  from {
+    background-position:
+      50% 50%,
+      50% 50%;
+  }
+  to {
+    background-position:
+      350% 50%,
+      350% 50%;
+  }
+}
+
+.animate-wander {
+  animation: wander 7s infinite ease-in-out;
+}
+
+.animate-chip-pulse {
+  animation: chip-pulse 2.6s infinite ease-in-out;
+}
+
+.animate-blinking-cursor {
+  animation: blinking-cursor 1.2s infinite step-end;
+}
+.animate-blob-pulse {
+  animation: blob-pulse 5s infinite ease-in-out;
+}
+
+.animate-aurora {
+  animation: aurora 20s linear infinite;
+}

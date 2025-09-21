@@ -110,7 +110,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </AspectRatio>
       </CardContent>
 
-      <CardHeader className='flex-grow p-6 pb-4'>
+      <CardHeader className='flex-grow border-t border-neutral-800 p-6 pb-4'>
         <CardTitle className='text-xl font-semibold text-white line-clamp-2 mb-3 text-balance'>
           {product.title}
         </CardTitle>

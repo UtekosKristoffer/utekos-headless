@@ -12,6 +12,7 @@ export type {
 } from '@/components/jsx/SizeSelector/types'
 export type * from './api.types'
 export type * from './cart.types'
+export type * from './chat.types'
 export type * from './context.types'
 export type * from './graphql.types'
 export type * from './media.types'
