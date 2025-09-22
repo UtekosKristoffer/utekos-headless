@@ -3,9 +3,9 @@ import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 import Providers from '@/components/providers/Providers'
 import { WelcomeToast } from '@/components/WelcomeToast/WelcomeToast'
+import { mainMenu } from '@/db/config/menu.config'
 import { getCachedCart } from '@/lib/helpers/cart/getCachedCart'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
-import { fetchMenu } from '@/lib/helpers/menu/fetchMenu'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import { Toaster } from 'sonner'
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     siteName: 'Utekos',
     title: 'Utekos - Varme og komfort for gode stunder ute',
     description:
-      'Forleng kveldene på hytta, i bobilen eller på terrassen. Komfortplagg av høy kvalitet som holder deg varm.',
+      'Forleng kveldene på hytten, i bobilen eller på terrassen. Komfortplagg av høy kvalitet som holder deg varm.',
     images: [
       {
         url: '/og-image.jpg',
@@ -98,19 +98,16 @@ export const metadata: Metadata = {
   }
 }
 export default async function RootLayout({ children }: RootLayoutProps) {
-  const [mainMenu, cartId] = await Promise.all([
-    fetchMenu('header-mega-menu'),
-    getCartIdFromCookie()
-  ])
-
+  const cartId = await getCartIdFromCookie()
   const initialCart: Cart | null = await getCachedCart(cartId)
 
   return (
-    <html lang='en'>
+    <html lang='no'>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers initialCart={initialCart} cartId={cartId}>
+          {/* Headeren bruker nå din lokale meny */}
           <Header menu={mainMenu} />
           <main>
             {children}

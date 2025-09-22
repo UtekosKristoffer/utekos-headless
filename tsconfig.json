@@ -27,7 +27,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@types": ["./types/index.ts"],
-      "@types/*": ["./types/*"]
+      "@types/*": ["./types/*"],
+      "@public/*": ["./public/*"]
     }
   },
   "include": [
@@ -40,7 +41,9 @@
     ".next/types/**/*.ts",
     "src/lib/errors",
     "src/api/types/event",
-    "src/api/types/state"
-, "src/components/WelcomeToast"  ],
+    "src/api/types/state",
+    "src/components/WelcomeToast",
+    "src/db/config"
+  ],
   "exclude": ["node_modules", "alpha/**/*"]
 }

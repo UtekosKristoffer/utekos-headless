@@ -1,6 +1,6 @@
 import { GalleryColumn } from '@/components/jsx/GalleryColumn'
 import { OptionsColumn } from '@/components/jsx/OptionsColumn'
-import { ProductGrid } from '@/components/jsx/ProductGrid'
+import { ProductPageGrid } from '@/components/jsx/ProductPageGrid'
 import { Skeleton } from '@/components/ui/skeleton'
 
 export function ProductPageSkeleton() {
@@ -15,7 +15,7 @@ export function ProductPageSkeleton() {
         <Skeleton className='h-5 w-32' />
       </div>
 
-      <ProductGrid>
+      <ProductPageGrid>
         <GalleryColumn>
           {/* Title and Subtitle Skeleton */}
           <div className='mb-8 text-left'>
@@ -51,7 +51,7 @@ export function ProductPageSkeleton() {
             <Skeleton className='h-4 w-5/6' />
           </div>
         </OptionsColumn>
-      </ProductGrid>
+      </ProductPageGrid>
     </main>
   )
 }

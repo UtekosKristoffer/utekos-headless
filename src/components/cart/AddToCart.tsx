@@ -56,7 +56,6 @@ export function AddToCart({
   }, [lastError])
 
   return (
-    // Vi legger tilbake <Form>-provideren for å fikse 'control'-feilen
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleAddToCart)} // Bruker nå RHF sin handleSubmit

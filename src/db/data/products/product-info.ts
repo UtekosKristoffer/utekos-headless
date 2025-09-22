@@ -2,6 +2,7 @@ import { COMFYROBE_HANDLE } from './comfyrobe/details'
 import { UTEKOS_DUN_HANDLE } from './dawn/info'
 import { UTEKOS_MIKROFIBER_HANDLE } from './microfiber/details'
 import { SPECIAL_EDITION_HANDLE } from './special-edition/details'
+
 export const UTEKOS_DUN_PUBLIC_URL = 'https://www.utekos.no/products/utekos-dun'
 
 export const handles = ['utekos-dun', 'utekos-mikrofiber', 'comfyrobe']

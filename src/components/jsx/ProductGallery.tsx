@@ -14,7 +14,7 @@ type ProductGalleryProps = {
 export function ProductGallery({ title, images }: ProductGalleryProps) {
   if (images.length === 0) {
     return (
-      <div className='relative aspect-video w-full overflow-hidden rounded-lg md:max-h-[600px] bg-surface-raised/40' />
+      <div className='relative aspect-video w-full overflow-hidden rounded-lg md:max-h-[600px] bg-sidebar-foreground' />
     )
   }
 

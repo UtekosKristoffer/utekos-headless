@@ -1,3 +1,5 @@
+// Path: src/app/handlehjelp/storrelsesguide/page.tsx
+
 import {
   Table,
   TableBody,
@@ -10,6 +12,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Ruler } from 'lucide-react'
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import ComfyFrontSkisse from '../../../../public/ComfyFrontSkisse.png'
+import UtekosSkisseStrlLarge from '../../../../public/Utekos_Skisse_Str_L_mettet.svg'
+
 import type { FAQPage, WithContext } from 'schema-dts'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -38,7 +43,6 @@ export const metadata: Metadata = {
   }
 }
 
-// STEG 2: Strukturert Data (JSON-LD) for å vinne på "long-tail" søk
 const jsonLd: WithContext<FAQPage> = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -73,7 +77,6 @@ const jsonLd: WithContext<FAQPage> = {
   ]
 }
 
-// Data-objekter for tabellene
 const comfyrobeData = [
   {
     measurement: 'Total lengde (fra HSP til front)',
@@ -99,8 +102,6 @@ const utekosData = [
   { measurement: 'Senter til ermetupp', m: '85 cm', l: '100 cm' },
   { measurement: 'Flatmål (bunn)', m: '66 cm', l: '75 cm' }
 ]
-
-// STEG 3: Sidekomponenten med optimalisert innhold og design
 export default function SizeGuidePage() {
   return (
     <>
@@ -120,11 +121,11 @@ export default function SizeGuidePage() {
           </p>
         </div>
 
-        <div className='mx-auto mt-10 max-w-3xl rounded-lg bg-sidebar-foreground p-6'>
+        <div className='mx-auto mt-10 max-w-3xl rounded-lg bg-sidebar-foreground p-6 border border-neutral-800'>
           <div className='flex items-start gap-4'>
             <Ruler className='h-8 w-8 flex-shrink-0 text-foreground/80' />
             <div>
-              <h2 className='text-lg font-semibold'>Vårt beste måletips</h2>
+              <h2 className='text-lg font-semibold '>Vårt beste måletips</h2>
               <p className='mt-1 text-foreground/70'>
                 Finn frem et lignende plagg du elsker passformen på. Legg det
                 flatt og mål det. Sammenlign deretter med målene i våre tabeller
@@ -136,20 +137,23 @@ export default function SizeGuidePage() {
 
         <div className='mx-auto mt-12 max-w-6xl'>
           <Tabs defaultValue='comfyrobe' className='w-full'>
-            <TabsList className='grid w-full grid-cols-2 md:grid-cols-3 bg-sidebar-foreground'>
+            <TabsList className='grid w-full grid-cols-2 md:grid-cols-3 bg-sidebar-foreground cursor-pointer border border-neutral-800'>
               <TabsTrigger value='comfyrobe'>Comfyrobe™</TabsTrigger>
               <TabsTrigger value='dun'>Utekos Dun</TabsTrigger>
               <TabsTrigger value='mikrofiber'>Utekos Mikrofiber</TabsTrigger>
             </TabsList>
 
-            <TabsContent value='comfyrobe' className='mt-8'>
+            <TabsContent
+              value='comfyrobe'
+              className='mt-8 border border-neutral-800'
+            >
               <div className='grid gap-8 md:grid-cols-2'>
                 <div className='flex items-center justify-center rounded-lg bg-sidebar-foreground p-4'>
                   <Image
-                    src='/ComfyFrontSkisse.png'
+                    src={ComfyFrontSkisse}
                     alt='Skisse av Comfyrobe med mål'
-                    width={400}
-                    height={600}
+                    width={597}
+                    height={503}
                     className='object-contain'
                   />
                 </div>
@@ -184,9 +188,9 @@ export default function SizeGuidePage() {
               <div className='grid gap-8 md:grid-cols-2'>
                 <div className='flex items-center justify-center rounded-lg bg-sidebar-foreground p-4'>
                   <Image
-                    src='/Utekos_Skisse_Str_L_mettet.svg'
+                    src={UtekosSkisseStrlLarge}
                     alt='Skisse av Utekos Dun med mål'
-                    width={400}
+                    width={410}
                     height={600}
                     className='object-contain'
                   />

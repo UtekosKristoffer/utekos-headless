@@ -8,7 +8,7 @@ import {
   GalleryColumn,
   OptionsColumn,
   Price,
-  ProductGrid
+  ProductPageGrid
 } from '@/components/jsx'
 import {
   Breadcrumb,
@@ -28,7 +28,7 @@ const ProductGallery = dynamic(
     import('@/components/jsx/ProductGallery').then(mod => mod.ProductGallery),
   {
     loading: () => (
-      <div className='relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-surface-raised/40' />
+      <div className='relative aspect-[2/3] w-full overflow-hidden rounded-lg' />
     ),
     ssr: false
   }
@@ -65,7 +65,7 @@ export default function ProductPageView({
         </BreadcrumbList>
       </Breadcrumb>
 
-      <ProductGrid>
+      <ProductPageGrid>
         <GalleryColumn>
           <div className='mb-8 text-left'>
             <h1 className='text-3xl font-bold md:text-4xl'>{title}</h1>
@@ -77,7 +77,7 @@ export default function ProductPageView({
           </div>
           <div className='md:sticky md:top-24 h-fit'>
             <div className='mx-auto max-w-xl'>
-              <div className='aspect-video w-full rounded-2xl bg-surface-raised/20 p-4'>
+              <div className='aspect-video w-full rounded-2xl bg-sidebar-foreground p-4'>
                 <Suspense fallback={<div>Laster produktbilder...</div>}>
                   <ProductGallery
                     title={title}
@@ -128,7 +128,7 @@ export default function ProductPageView({
             </article>
           </section>
         </OptionsColumn>
-      </ProductGrid>
+      </ProductPageGrid>
       <Suspense fallback={<div>Laster produktinfo...</div>}>
         <ProductPageAccordion variantProfile={variantProfile} />
       </Suspense>

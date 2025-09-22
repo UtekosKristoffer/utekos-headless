@@ -11,6 +11,7 @@
     "sync": "f() { git add . && git commit -m \"$1\" && git push; }; f"
   },
   "dependencies": {
+    "@dagrejs/dagre": "^1.1.5",
     "@heroicons/react": "^2.2.0",
     "@hookform/error-message": "^2.0.1",
     "@hookform/resolvers": "^5.2.1",
@@ -37,6 +38,7 @@
     "@vercel/speed-insights": "^1.2.0",
     "@xstate/react": "^6.0.0",
     "@xstate/store": "^3.9.2",
+    "@xyflow/react": "^12.8.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -70,6 +72,7 @@
     "@next/bundle-analyzer": "^15.5.2",
     "@tailwindcss/postcss": "^4",
     "@tanstack/react-query-devtools": "^5.85.9",
+    "@types/dagre": "^0.7.53",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

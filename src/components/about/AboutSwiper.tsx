@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 export function AboutSwiper() {
   return (
-    <div className='rounded-lg border border-neutral-800 bg-[hsl(0,0%,4%,1)] p-4'>
+    <div className='rounded-lg max-w-6xl mx-auto border border-neutral-800 bg-[hsl(0,0%,4%,1)] p-4'>
       <Swiper
         // Installerer nødvendige moduler
         modules={[Navigation, Pagination, Autoplay]}
