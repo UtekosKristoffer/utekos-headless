@@ -1,11 +1,11 @@
 import { AboutSwiper } from '@/components/about/AboutSwiper'
 import { corePhilosophies } from '@/constants/corePhilosophies'
+import AboutUsOG from '@public/norsk-kveld.webp'
 import { ArrowRightIcon } from 'lucide-react'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import UtekosFounder from '../../../public/blue_bag1.webp'
-import AboutUsOG from '../../../public/og-image-om-oss.webp'
 import { PromiseSection } from './Sections/PromiseSection'
 export const metadata: Metadata = {
   title: 'Om Utekos | Vår historie og løfte til deg',
@@ -135,7 +135,8 @@ export default function AboutPage() {
             Et glimt av Utekos
           </h2>
           <p className='mt-4 text-lg leading-8 text-muted-foreground'>
-            Kvalitet og design som tåler elementene.
+            Se hvordan kompromissløs komfort gir liv til dine favorittøyeblikk
+            utendørs.
           </p>
         </div>
         <div className='mt-12'>
