@@ -57,6 +57,15 @@ export const mockArticles: Article[] = [
     date: '15. september 2025'
   },
   {
+    slug: 'bobil-i-hostferien-de-vakreste-rutene-for-a-oppleve-hostfargene',
+    title: 'Bobil i høstferien: De vakreste rutene for å oppleve høstfargene',
+    excerpt:
+      'Opplev Norges spektakulære høstfarger fra første rad. Vi gir deg to forslag til uforglemmelige ruter med bobilen.',
+    imageUrl: '/og-image-bobil-host.webp',
+    category: 'Bobilliv',
+    date: '22. september 2025'
+  },
+  {
     slug: 'varm-og-klar-for-batpussen',
     title: 'Vårpussen av båten: Slik holder du varmen',
     excerpt:

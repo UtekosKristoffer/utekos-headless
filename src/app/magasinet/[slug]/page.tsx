@@ -39,6 +39,12 @@ const articleComponents = {
       '../@articles/den-ultimate-guiden-til-komfortabel-vintercamping'
     ).then(mod => mod.VintercampingArticle)
   ),
+  'bobil-i-hostferien-de-vakreste-rutene-for-a-oppleve-hostfargene': dynamic(
+    () =>
+      import('../@articles/bobil-i-hostferien').then(
+        mod => mod.BobilHostruterArticle
+      )
+  ),
   // Legger til en plassholder for "Båtpuss"-artikkelen for fremtiden
   'varm-og-klar-for-batpussen': dynamic(() =>
     import('../@articles/varm-og-klar-for-batpussen').then(
@@ -47,7 +53,6 @@ const articleComponents = {
   )
 }
 
-// Funksjon for å generere Metadata (mer komplett versjon)
 export async function generateMetadata({
   params
 }: {
