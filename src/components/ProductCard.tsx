@@ -170,7 +170,7 @@ export function ProductCard({ product }: ProductCardProps) {
         <div className='flex justify-between items-center w-full'>
           <div className='flex flex-col'>
             <p className='text-2xl font-bold text-white mb-1'>{price}</p>
-            <p className='text-sm text-white'>Fri frakt over 500 kr</p>
+            <p className='text-sm text-white'>Fri frakt over 999 kr</p>
           </div>
         </div>
 

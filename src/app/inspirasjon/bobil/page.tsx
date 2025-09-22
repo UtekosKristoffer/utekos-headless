@@ -374,7 +374,7 @@ export default function BobilInspirasjonPage() {
 
             <div className='flex items-center gap-2'>
               <Coffee className='h-4 w-4' />
-              <span>Fri frakt over 1000 kr</span>
+              <span>Fri frakt over 999 kr</span>
             </div>
             <div className='flex items-center gap-2'>
               <Compass className='h-4 w-4' />

@@ -152,7 +152,7 @@ export default function InspirasjonLayout({
             </div>
             <div className='flex items-center gap-2'>
               <span className='text-primary'>✓</span>
-              <span>Fri frakt over 1000 kr</span>
+              <span>Fri frakt over 999 kr</span>
             </div>
             <div className='flex items-center gap-2'>
               <span className='text-primary'>✓</span>
