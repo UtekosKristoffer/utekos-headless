@@ -1,5 +1,5 @@
 // Fil: src/components/product/ProductGrid.tsx
-import { ProductCard } from '@/components/ProductCard'
+import { ProductCard } from '@/components/ProductCard/ProductCard'
 import type { ProductGridProps } from '@types'
 
 export function CardGrid({ products }: ProductGridProps) {

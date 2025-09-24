@@ -29,6 +29,13 @@ const cartFragment = /* GraphQL */ `
             ... on ProductVariant {
               id
               title
+              image {
+                url
+                id
+                altText
+                width
+                height
+              }
               availableForSale
               price {
                 amount

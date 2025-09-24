@@ -48,9 +48,6 @@ export async function submitContactForm(
   }
 
   try {
-    console.log('Mottatte skjemadata på serveren:', validatedFields.data)
-
-    // Returner suksessmelding
     return { message: 'Takk for din henvendelse!' }
   } catch (error) {
     return { message: 'Noe gikk galt. Prøv igjen.' }

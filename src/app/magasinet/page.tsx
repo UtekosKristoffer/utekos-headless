@@ -29,7 +29,7 @@ export default function MagazinePage() {
                 />
               </div>
               <div className='p-8 md:p-12 flex flex-col justify-center'>
-                <span className='text-sm font-semibold text-primary mb-2'>
+                <span className='text-sm font-semibold mb-2'>
                   {featuredArticle.category}
                 </span>
                 <h2 className='text-2xl md:text-3xl font-bold tracking-tight mb-4 group-hover:text-primary transition-colors'>
@@ -67,7 +67,7 @@ export default function MagazinePage() {
                   />
                 </div>
                 <div className='p-6'>
-                  <span className='text-sm font-semibold text-primary mb-2'>
+                  <span className='text-sm font-semibold mb-2'>
                     {article.category}
                   </span>
                   <h3 className='text-xl font-bold mb-2 group-hover:text-primary transition-colors'>

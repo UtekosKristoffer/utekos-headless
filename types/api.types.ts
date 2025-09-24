@@ -36,6 +36,22 @@ export type ShopifyCreateCartOperation = ShopifyOperation<{
   cartCreate: { cart: ShopifyCart }
 }>
 
+export type ShopifyDiscountCodesUpdateOperation = ShopifyOperation<
+  {
+    cartDiscountCodesUpdate: {
+      cart: ShopifyCart
+      userErrors?: {
+        field: string
+        message: string
+      }[]
+    }
+  },
+  {
+    cartId: string
+    discountCodes: string[]
+  }
+>
+
 export type ShopifyAddToCartOperation = ShopifyOperation<
   { cartLinesAdd: { cart: ShopifyCart } },
   {

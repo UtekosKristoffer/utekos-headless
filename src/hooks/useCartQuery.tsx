@@ -8,7 +8,7 @@ import { fetchCart } from '@/lib/helpers/cart/fetchCart'
 import type { Cart } from '@types'
 
 export const useCartQuery = () => {
-  // Henter cartId fra konteksten i stedet for localStorage
+
   const cartId = useCartId()
 
   return useQuery<Cart | null>({

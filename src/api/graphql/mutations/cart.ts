@@ -2,7 +2,6 @@
 
 import cartFragment from '@/lib/fragments/cartFragment'
 
-// NY MUTASJON: Denne lager en ny, tom handlepose
 export const mutationCartCreate = `
   mutation cartCreate($lines: [CartLineInput!]) {
     cartCreate(input: { lines: $lines }) {
@@ -39,6 +38,20 @@ export const mutationCartLinesUpdate = `
     cartLinesUpdate(cartId: $cartId, lines: $lines) {
       cart {
         ...cart
+      }
+    }
+  }
+  ${cartFragment}
+`
+export const mutationCartDiscountCodesUpdate = /* GraphQL */ `
+  mutation cartDiscountCodesUpdate($cartId: ID!, $discountCodes: [String!]) {
+    cartDiscountCodesUpdate(cartId: $cartId, discountCodes: $discountCodes) {
+      cart {
+        ...cart
+      }
+      userErrors {
+        field
+        message
       }
     }
   }

@@ -35,7 +35,7 @@ export const VinterklargjoringArticle = () => {
       </div>
 
       <p>
-        Ved å systematisk gå gjennom disse punktene, kan du forlate hytta med
+        Ved å systematisk gå gjennom disse punktene, kan du forlate hytten med
         senkede skuldre, vel vitende om at du har gjort alt du kan for å
         beskytte din investering i fritid og livskvalitet. Den viktigste delen
         av sjekklisten er kanskje den siste: å planlegge for din egen komfort
@@ -49,7 +49,7 @@ export const VinterklargjoringArticle = () => {
             Gjør ankomsten til en glede
           </h3>
           <p className='text-muted-foreground mt-2 mb-6'>
-            Legg igjen en Utekos på hytta. Det er din garanti for øyeblikkelig
+            Legg igjen en Utekos på hytten. Det er din garanti for øyeblikkelig
             komfort og varme, lenge før peisen har rukket å gjøre jobben sin.
             Start hyttekosen i det du går inn døren.
           </p>

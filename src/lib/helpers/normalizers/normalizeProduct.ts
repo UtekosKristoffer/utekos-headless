@@ -18,6 +18,8 @@ export const normalizeProduct = (
     id: product.id,
     title: product.title,
     handle: product.handle,
+    updatedAt: product.updatedAt,
+    relatedProducts: product.relatedProducts,
     compareAtPriceRange: product.compareAtPriceRange,
     selectedOrFirstAvailableVariant: product.selectedOrFirstAvailableVariant,
     availableForSale: product.availableForSale,

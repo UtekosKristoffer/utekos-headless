@@ -1,5 +1,3 @@
-// Path: src/api/lib/products/getProducts.ts
-
 /**
  * @fileoverview Product fetching with Shopify Storefront API integration. Centralized product data fetching with consistent reshaping and caching
  * @module api/lib/products/getProducts
@@ -12,7 +10,7 @@ import { removeEdgesAndNodes } from '@/lib/utils/removeEdgesAndNodes'
 import { reshapeProducts } from '@/lib/utils/reshapeProducts'
 import type {
   GetProductsParams,
-  ProductsQueryResponse,
+  ShopifyProduct,
   ShopifyProductsOperation
 } from '@types'
 import {
@@ -20,15 +18,23 @@ import {
   unstable_cacheTag as cacheTag
 } from 'next/cache'
 
+// Definerer en returtype for konsistens
+export type GetProductsResponse = {
+  success: boolean
+  status: number
+  body?: ShopifyProduct[] // Returnerer en liste med våre formede produkter
+  error?: string
+}
+
 export async function getProducts(
   params: GetProductsParams = {}
-): Promise<ProductsQueryResponse> {
+): Promise<GetProductsResponse> {
   'use cache'
   cacheTag(TAGS.products)
   cacheLife('days')
 
   try {
-    const { query, reverse, sortKey, first = 5 } = params
+    const { query, reverse, sortKey, first = 100 } = params // Økt default for sitemap
 
     const variables: GetProductsParams = { first }
     if (query !== undefined) variables.query = query

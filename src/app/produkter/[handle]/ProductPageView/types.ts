@@ -5,5 +5,6 @@ export type ProductPageViewProps = {
   selectedVariant: ShopifyProductVariant
   allVariants: ShopifyProductVariant[]
   variantImages: Image[]
+  relatedProducts: ShopifyProduct[]
   onOptionChange: (_optionName: string, _value: string) => void
 }

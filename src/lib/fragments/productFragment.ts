@@ -4,7 +4,9 @@ const productFragment = /* GraphQL */ `
   fragment product on Product {
     id
     title
+    tags
     handle
+    updatedAt
     compareAtPriceRange {
       minVariantPrice {
         amount

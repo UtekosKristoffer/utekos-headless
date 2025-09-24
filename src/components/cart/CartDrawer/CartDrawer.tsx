@@ -4,6 +4,7 @@
 import { CartBody } from '@/components/cart/CartBody/CartBody'
 import { CartFooter } from '@/components/cart/CartFooter/CartFooter'
 import { CartHeader } from '@/components/cart/CartHeader/CartHeader'
+import { SmartCartSuggestions } from '@/components/cart/SmartCartSuggestions'
 import {
   Drawer,
   DrawerContent,
@@ -17,7 +18,6 @@ import { Root as VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import dynamic from 'next/dynamic'
 import * as React from 'react'
 import { createDrawerStateHandler } from './utils/createDrawerStateHandler'
-
 const CartTrigger = dynamic(
   () => import('@/components/cart/CartTrigger').then(mod => mod.CartTrigger),
   { ssr: false }
@@ -25,8 +25,14 @@ const CartTrigger = dynamic(
 
 export function CartDrawer(): React.JSX.Element {
   const open = useCartOpen()
+
   const { data: cart } = useCartQuery()
+
   const handleStateChange = createDrawerStateHandler(cartStore)
+
+  const subtotalString = cart?.cost?.subtotalAmount?.amount ?? '0'
+
+  const subtotal = parseFloat(subtotalString)
 
   return (
     <Drawer open={open} onOpenChange={handleStateChange} direction='right'>
@@ -41,6 +47,7 @@ export function CartDrawer(): React.JSX.Element {
 
         <CartHeader />
         <CartBody cart={cart} />
+        <SmartCartSuggestions cart={cart} />
         <CartFooter cart={cart} />
       </DrawerContent>
     </Drawer>

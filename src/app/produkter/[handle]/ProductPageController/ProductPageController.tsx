@@ -5,7 +5,10 @@ import { useVariantState } from '@/hooks/useVariantState'
 import { computeVariantImages } from '@/lib/utils/computeVariantImages'
 import type { ProductControllerProps, ShopifyProductVariant } from '@types'
 
-export function ProductPageController({ productData }: ProductControllerProps) {
+export function ProductPageController({
+  productData,
+  relatedProducts
+}: ProductControllerProps) {
   const { variantState, updateVariant, allVariants } =
     useVariantState(productData)
 
@@ -21,13 +24,14 @@ export function ProductPageController({ productData }: ProductControllerProps) {
 
   const variantImages = computeVariantImages(productData, selectedVariant)
 
-  return (
+return (
     <ProductPageView
       productData={productData}
       selectedVariant={selectedVariant}
       allVariants={allVariants}
       variantImages={variantImages}
       onOptionChange={updateVariant}
+      relatedProducts={relatedProducts} 
     />
   )
 }

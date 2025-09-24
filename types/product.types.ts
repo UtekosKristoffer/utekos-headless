@@ -12,6 +12,7 @@ export type ShopifyProduct = {
   id: string
   title: string
   handle: string
+  updatedAt: string
   compareAtPriceRange: {
     minVariantPrice: Money
     maxVariantPrice: Money
@@ -27,6 +28,7 @@ export type ShopifyProduct = {
   featuredImage: Image | null
   vendor: string
   tags: string[]
+  relatedProducts: ShopifyProduct[]
   metafield?: Metafield | null
   variantProfile?: MetaobjectReference | null
   seo: {
@@ -118,7 +120,16 @@ export type ProductVariantConnection = {
   edges: ProductVariantEdge[]
 }
 
-export type Product = ShopifyProduct
+export type Product = {
+  handle: string
+  updatedAt: string
+  image: {
+    url: string
+    altText: string | null
+    width: number
+    height: number
+  } | null
+}
 
 export type ShopifyProductVariant = {
   id: string
@@ -127,6 +138,7 @@ export type ShopifyProductVariant = {
   currentlyNotInStock: boolean
   selectedOptions: SelectedOption[]
   price: Money
+  image: Image | null
   compareAtPrice: Money | null
   product: ShopifyProduct
   metafield: Metafield | null

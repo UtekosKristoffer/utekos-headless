@@ -39,7 +39,7 @@ export function PersonaCards() {
             </h3>
             <p className='mt-2 text-muted-foreground flex-grow'>
               Du verdsetter den uovertrufne følelsen av premium dun, og bruker
-              din Utekos primært i tørre, kalde omgivelser som på hytta eller på
+              din Utekos primært i tørre, kalde omgivelser som på hytten eller på
               fjellet.
             </p>
             <Button asChild className='mt-6 w-full'>

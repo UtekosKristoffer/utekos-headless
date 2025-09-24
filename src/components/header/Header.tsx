@@ -9,7 +9,7 @@ import { ClientMobileMenu } from './ClientMobileMenu'
 export default function Header({ menu }: { menu: MenuItem[] }) {
   return (
     <header className='sticky top-0 z-50 border-b border-white/10 bg-sidebar-foreground py-3'>
-      <div className='container mx-auto flex items-center justify-between'>
+      <div className='container mx-auto flex items-center justify-between gap-6 px-4 sm:px-6 lg:px-8'>
         <HeaderLogo />
         <ClientDesktopNavigation menu={menu} />
         <div className='flex items-center gap-2'>

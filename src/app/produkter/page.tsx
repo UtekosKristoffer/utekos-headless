@@ -1,23 +1,21 @@
 // Path: src/app/produkter/page.tsx
 
 import { getProducts } from '@/api/lib/products/getProducts'
-import {
-  HelpChooseSection,
-  ProductTestimonial
-} from '@/app/produkter/components/ProductsPageClient'
+import { ComparisonTeaser } from '@/app/handlehjelp/sammenlign-modeller/ComparisonTeaser'
+import { HelpChooseSection } from '@/app/produkter/components/HelpChooseSection'
+import { ProductTestimonial } from '@/app/produkter/components/ProductTestimonial'
 import { ProductGrid } from '@/components/jsx/ProductGrid'
-import { ProductCard } from '@/components/ProductCard'
+import { ProductCard } from '@/components/ProductCard/ProductCard'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { handles } from '@/db/data/products/product-info'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-
 export const metadata: Metadata = {
   title: 'Kolleksjon: Komfortplagg for hytteliv & utekos | Utekos',
   description:
-    'Utforsk hele kolleksjonen av komfortplagg fra Utekos. Våre varme og slitesterke produkter er skapt for å forlenge de gode stundene på hytta, i bobilen eller på kjølige kvelder.',
+    'Utforsk hele kolleksjonen av komfortplagg fra Utekos. Våre varme og slitesterke produkter er skapt for å forlenge de gode stundene på hytten, i bobilen eller på kjølige kvelder.',
   openGraph: {
     type: 'website',
     locale: 'no_NO',
@@ -39,7 +37,8 @@ export const metadata: Metadata = {
 
 const ProductsPage = async () => {
   const response = await getProducts()
-  if (!response.success || response.body.length === 0) return notFound()
+  if (!response.success || !response.body || response.body.length === 0)
+    return notFound()
 
   const products = response.body
   const featuredProducts = products.filter(product =>
@@ -49,7 +48,6 @@ const ProductsPage = async () => {
 
   return (
     <main className='container mx-auto px-4 py-16 sm:py-24'>
-      {/* 1. Målrettet Overskrift */}
       <section className='text-center mb-16'>
         <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>
           Kolleksjonen for kompromissløs komfort
@@ -61,17 +59,18 @@ const ProductsPage = async () => {
         </p>
       </section>
 
-      {/* 2. "Hjelp meg å velge" */}
       <section className='mb-24'>
         <HelpChooseSection />
       </section>
 
-      {/* 3. Sosialt Bevis */}
       <section className='mb-24 max-w-3xl mx-auto'>
         <ProductTestimonial />
       </section>
 
-      {/* 4. Produktgridet (som før, men med en overskrift) */}
+      <section className='mb-24'>
+        <ComparisonTeaser />
+      </section>
+
       <section className='mb-24'>
         <div className='text-center mb-12'>
           <h2 className='text-3xl font-bold tracking-tight'>
@@ -85,7 +84,6 @@ const ProductsPage = async () => {
         </ProductGrid>
       </section>
 
-      {/* 5. Call to Action */}
       <section>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
           <Card className='border-neutral-800 bg-sidebar-foreground'>

@@ -1,4 +1,4 @@
-// Src/lib/data/articles.ts
+// Src/db/data/articles.ts
 
 export interface Article {
   slug: string
@@ -8,8 +8,6 @@ export interface Article {
   category: string
   date: string
 }
-
-// All artikkeldata bor nå her
 export const mockArticles: Article[] = [
   {
     slug: 'balpannen-din-guide-til-den-perfekte-hostkvelden',
@@ -22,7 +20,7 @@ export const mockArticles: Article[] = [
   },
   {
     slug: 'vinterklargjoring-av-hytta-en-sjekkliste-for-livsnyteren',
-    title: 'Vinterklargjøring av hytta: En sjekkliste for livsnyteren',
+    title: 'Vinterklargjøring av hytten: En sjekkliste for livsnyteren',
     excerpt:
       'Gjør vinterstengingen til en del av kosen. Vår visuelle sjekkliste hjelper deg å klargjøre hytta for en trygg vinter og nye minner.',
     imageUrl: '/og-image-hytte-host.webp',
@@ -75,3 +73,64 @@ export const mockArticles: Article[] = [
     date: '12. april 2025'
   }
 ]
+
+/**
+ * Konverterer en norsk datostreng (f.eks. "22. september 2025")
+ * til et standard ISO 8601 format (f.eks. "2025-09-22T00:00:00.000Z").
+ * @param dateString Den norske datostrengen.
+ * @returns En ISO-formatert dato-streng.
+ */
+function parseNorwegianDate(dateString: string): string {
+  const monthMap: { [key: string]: number } = {
+    januar: 0,
+    februar: 1,
+    mars: 2,
+    april: 3,
+    mai: 4,
+    juni: 5,
+    juli: 6,
+    august: 7,
+    september: 8,
+    oktober: 9,
+    november: 10,
+    desember: 11
+  }
+
+  const parts = dateString.replace('.', '').split(' ')
+
+  if (parts.length !== 3 || !parts[0] || !parts[1] || !parts[2]) {
+    console.warn(
+      `Ugyldig datoformat funnet: "${dateString}". Bruker dagens dato som fallback.`
+    )
+    return new Date().toISOString()
+  }
+  const day = parseInt(parts[0], 10)
+  const monthName = parts[1].toLowerCase()
+  const month = monthMap[monthName]
+  const year = parseInt(parts[2], 10)
+
+  if (!isNaN(day) && month !== undefined && !isNaN(year)) {
+    return new Date(Date.UTC(year, month, day)).toISOString()
+  }
+
+  // Returnerer dagens dato som en siste fallback hvis parsing feiler
+  console.warn(
+    `Klarte ikke å parse dato: "${dateString}". Bruker dagens dato som fallback.`
+  )
+  return new Date().toISOString()
+}
+
+/**
+ * EKSPORTERT HOVEDFUNKSJON:
+ * Henter og formaterer alle publiserte magasinartikler.
+ * Dette er den ENESTE funksjonen sitemap.ts trenger å importere.
+ */
+export async function getMagazineArticles(): Promise<
+  { slug: string; updatedAt: string; imageUrl: string }[]
+> {
+  return mockArticles.map(article => ({
+    slug: article.slug,
+    updatedAt: parseNorwegianDate(article.date),
+    imageUrl: article.imageUrl
+  }))
+}

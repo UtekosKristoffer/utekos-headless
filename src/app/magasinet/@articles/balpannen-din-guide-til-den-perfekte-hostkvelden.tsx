@@ -43,7 +43,7 @@ export const BalpanneArticle = () => {
       </p>
 
       <p>
-        Spesielt punktet om **personlig komfort** er lett å overse, men er ofte
+        Spesielt punktet om 'personlig komfort' er lett å overse, men er ofte
         det som avgjør hvor lenge kvelden varer. Et sitteunderlag hjelper, men
         den kalde luften på ryggen vinner som regel til slutt. En personlig
         varmekilde som Utekos løser dette elegant, og lar alle bli sittende i

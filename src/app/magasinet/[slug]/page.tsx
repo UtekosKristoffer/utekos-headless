@@ -19,7 +19,7 @@ const articleComponents = {
       '../@articles/balpannen-din-guide-til-den-perfekte-hostkvelden'
     ).then(mod => mod.BalpanneArticle)
   ),
-  'vinterklargjoring-av-hytta-en-sjekkliste-for-livsnyteren': dynamic(() =>
+  'vinterklargjoring-av-hytten-en-sjekkliste-for-livsnyteren': dynamic(() =>
     import('../@articles/vinterklargjoring-av-hytta').then(
       mod => mod.VinterklargjoringArticle
     )
@@ -29,7 +29,7 @@ const articleComponents = {
       mod => mod.TerrasseArticle
     )
   ),
-  'slik-skaper-du-den-perfekte-stemningen-pa-hytta': dynamic(() =>
+  'slik-skaper-du-den-perfekte-stemningen-pa-hytten': dynamic(() =>
     import(
       '../@articles/slik-skaper-du-den-perfekte-stemningen-pa-hytten'
     ).then(mod => mod.HyttekosArticle)

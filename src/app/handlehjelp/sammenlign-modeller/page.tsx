@@ -9,7 +9,7 @@ import { ThermometerSun, WashingMachine } from 'lucide-react'
 export const metadata: Metadata = {
   title: 'Sammenlign Utekos™ Modeller | Finn den perfekte for deg',
   description:
-    'Utekos Dun™ vs. Utekos Mikrofiber™. Se vår detaljerte guide for å finne ut hvilken modell som er best egnet for ditt bruk – enten det er på hytta, i båten eller med bobilen.',
+    'Utekos Dun™ vs. Utekos Mikrofiber™. Se vår detaljerte guide for å finne ut hvilken modell som er best egnet for ditt bruk – enten det er på hytten, i båten eller med bobilen.',
   keywords: [
     'utekos dun vs mikrofiber',
     'sammenlign utekos',

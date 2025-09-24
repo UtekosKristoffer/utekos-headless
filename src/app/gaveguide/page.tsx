@@ -87,7 +87,7 @@ export default function GaveguidePage() {
                 <blockquote className='text-xl italic text-foreground/90 mb-6'>
                   &quot;Fikk Utekos i 50-årsgave av barna. Helt ærlig den beste
                   gaven jeg har fått på årevis. Den brukes hver eneste helg på
-                  hytta, uansett vær. Anbefales!&quot;
+                  hytten, uansett vær. Anbefales!&quot;
                 </blockquote>
                 <div className='flex items-center justify-center gap-4'>
                   <div className='h-12 w-12 rounded-full bg-sidebar-foreground' />

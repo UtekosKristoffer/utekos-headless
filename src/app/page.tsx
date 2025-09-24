@@ -8,8 +8,9 @@ import { QualitySection } from '@/components/frontpage/QualitySection'
 import { TestimonialConstellation } from '@/components/frontpage/TestimonialConstellation'
 import { ProductGrid } from '@/components/jsx/ProductGrid'
 import { GridCross } from '@/components/legal/GridCross'
-import { ProductCard } from '@/components/ProductCard'
+import { ProductCard } from '@/components/ProductCard/ProductCard'
 import { handles } from '@/db/data/products/product-info'
+import { SpecialOfferSection } from '@/layout/SpecialOfferSection'
 import { ClockIcon, ShieldCheckIcon } from '@heroicons/react/24/outline'
 import { ThermometerIcon } from 'lucide-react'
 import Image from 'next/image'
@@ -24,7 +25,7 @@ const HomePage = async () => {
   }
 
   const products = response.body
-  if (products.length === 0) {
+  if (!products || products.length === 0) {
     return notFound()
   }
 
@@ -42,24 +43,26 @@ const HomePage = async () => {
         {/* Målgrupperettet tittel-seksjon */}
         <div className='mb-4 text-center'>
           <h1 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl mt-6'>
-            Utekos™ - Banebrytende utendørsbekledning
+            Utekos™ - Forleng de gode stundene ute.
           </h1>
-          <p className='mx-auto mt-4 mb-8 max-w-2xl md:max-w-4xl text-lg lg:text-2xl text-muted-foreground'>
+          <p className='mx-auto mt-4 mb-8 max-w-2xl md:max-w-4xl text-lg lg:text-2xl text-foreground/90'>
             Kompromissløs komfort, designet for å holde på varmen når
             øyeblikkene teller.
           </p>
         </div>
 
-        <div className='mb-8 rounded-xl border border-neutral-800 shadow-lg'>
+        <div className='mb-8 rounded-xl border mx-auto border-neutral-800 shadow-lg'>
           <Image
             src={heroImage}
             alt='To personer i Utekos-plagg sitter på en stein i skogen og deler et hyggelig øyeblikk, fullt påkledd for varme og komfort.'
             width={2048}
             height={1363}
-            className=' rounded-lg w-full h-[60vh] xl:h-[80vh] object-cover object-bottom'
+            className=' rounded-lg mx-auto w-full h-[60vh] xl:h-[80vh] object-cover object-bottom'
             priority
           />
         </div>
+
+        <SpecialOfferSection />
 
         <ProductGrid>
           {featuredProducts.map(product => (

@@ -1,5 +1,5 @@
-import { type Node } from '@xyflow/react'
 import { HomeModernIcon as Roof } from '@heroicons/react/24/outline'
+import { type Node } from '@xyflow/react'
 import {
   Armchair,
   Droplets,
@@ -157,7 +157,7 @@ export const initialNodes: Node[] = [
       icon: Plug,
       label: 'Strøm & Oppvarming',
       description:
-        'Skru av alt unødvendig. Sett på en lav vedlikeholdsvarme for å holde hytta tørr.',
+        'Skru av alt unødvendig. Sett på en lav vedlikeholdsvarme for å holde hytten tørr.',
       iconColor: 'text-cyan-400',
       shadowColor: '#22d3ee'
     },

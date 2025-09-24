@@ -118,7 +118,7 @@ export type CartMutationContext = {
 }
 
 export type CartMutationEvent =
-  | { type: 'ADD_LINES'; input: { variantId: string; quantity: number } }
+  | { type: 'ADD_LINES'; input: AddToCartFormValues }
   | { type: 'UPDATE_LINE'; input: UpdateCartLineQuantityInput }
   | { type: 'REMOVE_LINE'; input: RemoveCartLineInput }
   | { type: 'CLEAR' }

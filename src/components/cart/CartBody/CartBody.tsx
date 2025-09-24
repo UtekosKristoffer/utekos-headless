@@ -1,4 +1,3 @@
-// Path: src/components/cart/CartBody.tsx
 'use client'
 
 import { ScrollArea } from '@/components/cart/utils/ScrollArea'
@@ -7,6 +6,7 @@ import { useCartPending } from '@/hooks/useCartPending'
 import type { Cart } from '@types'
 
 import { CartLineItem } from '@/components/cart/CartLineItem'
+import { EmptyCartRecommendations } from '@/components/cart/EmptyCart/EmptyCartRecommendations'
 import { isCartEmpty } from './utils/isCartEmpty'
 
 export const CartBody = ({ cart }: { cart: Cart | null | undefined }) => {
@@ -19,11 +19,9 @@ export const CartBody = ({ cart }: { cart: Cart | null | undefined }) => {
 
   if (isEmpty) {
     return (
-      <div className='flex flex-1 items-center justify-center p-8'>
-        <div className='text-center text-muted-foreground'>
-          <p className='text-base'>Handleposen din er tom</p>
-          <p className='mt-1 text-sm'>Legg til produkter for å komme i gang.</p>
-        </div>
+      <div className='flex flex-1 items-start justify-center p-6'>
+        {/* ERSTATT DEN GAMLE TEKSTEN MED DEN NYE KOMPONENTEN */}
+        <EmptyCartRecommendations />
       </div>
     )
   }

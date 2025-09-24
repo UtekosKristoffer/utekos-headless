@@ -1,22 +1,25 @@
 // Path: src/app/layout.tsx
+import { getProducts } from '@/api/lib/products/getProducts'
 import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 import Providers from '@/components/providers/Providers'
 import { WelcomeToast } from '@/components/WelcomeToast/WelcomeToast'
 import { mainMenu } from '@/db/config/menu.config'
+import { AnnouncementBanner } from '@/layout/AnnouncementBanner'
 import { getCachedCart } from '@/lib/helpers/cart/getCachedCart'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
-import { Toaster } from 'sonner'
-
 import { Geist, Geist_Mono as GeistMono } from 'next/font/google'
+import { Toaster } from 'sonner'
 
 import '@/db/zod/zodConfig'
 import type { Cart } from '@types'
 import type { Metadata } from 'next'
 import 'swiper/swiper-bundle.css'
+import { getAccessoryProducts } from '../api/lib/products/getAccessoryProducts'
 import './globals.css'
+
 type RootLayoutProps = Readonly<{
   children: React.ReactNode
 }>
@@ -76,7 +79,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@ditt_twitter_navn', // Husk å erstatte med deres faktiske Twitter/X-navn
+    site: '@ditt_twitter_navn',
     creator: '@ditt_twitter_navn',
     title: 'Utekos - Forleng de gode stundene ute',
     description:
@@ -97,17 +100,33 @@ export const metadata: Metadata = {
     google: 'G2CuMG6i_BKaNpqVN9N_SS2rvFxXWUOwydpZH0hp2NM'
   }
 }
+
 export default async function RootLayout({ children }: RootLayoutProps) {
   const cartId = await getCartIdFromCookie()
   const initialCart: Cart | null = await getCachedCart(cartId)
+  const recommendedProductsResponse = await getProducts({ first: 4 })
+  const recommendedProducts =
+    recommendedProductsResponse.success ?
+      (recommendedProductsResponse.body ?? [])
+    : []
+  const accessoryProductsResponse = await getAccessoryProducts()
+  const accessoryProducts =
+    accessoryProductsResponse.success ?
+      (accessoryProductsResponse.body ?? [])
+    : []
 
   return (
     <html lang='no'>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers initialCart={initialCart} cartId={cartId}>
-          {/* Headeren bruker nå din lokale meny */}
+        <Providers
+          initialCart={initialCart}
+          cartId={cartId}
+          recommendedProducts={recommendedProducts}
+          accessoryProducts={accessoryProducts}
+        >
+          <AnnouncementBanner />
           <Header menu={mainMenu} />
           <main>
             {children}

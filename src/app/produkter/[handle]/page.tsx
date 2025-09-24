@@ -1,5 +1,6 @@
 // Path: src/app/produkter/[handle]/page.tsx
 import { getProduct } from '@/api/lib/products/getProduct'
+import { getProducts } from '@/api/lib/products/getProducts'
 import { ProductPageController } from '@/app/produkter/[handle]/ProductPageController/ProductPageController'
 import { ProductPageSkeleton } from '@/app/produkter/[handle]/ProductPageSkeleton/ProductPageSkeleton'
 import { ProductProvider } from '@/components/providers/ProductProvider'
@@ -66,9 +67,16 @@ export default async function ProductPage(props: {
   params: Promise<{ handle: string }>
 }) {
   const params = await props.params
-  const product = await getProduct(params.handle)
+  const [product, allProductsResponse] = await Promise.all([
+    getProduct(params.handle),
+    getProducts()
+  ])
 
   if (!product) return notFound()
+  const relatedProducts =
+    allProductsResponse.success && allProductsResponse.body ?
+      allProductsResponse.body.filter(p => p.handle !== params.handle)
+    : []
 
   const productWithTransformedMetafields = {
     ...product,
@@ -108,12 +116,13 @@ export default async function ProductPage(props: {
     <ProductProvider>
       <script
         type='application/ld+json'
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(productJsonLd)
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
       />
       <Suspense fallback={<ProductPageSkeleton />}>
-        <ProductPageController productData={productWithTransformedMetafields} />
+        <ProductPageController
+          productData={productWithTransformedMetafields}
+          relatedProducts={relatedProducts} // <-- SEND DATA VIDERE
+        />
       </Suspense>
     </ProductProvider>
   )

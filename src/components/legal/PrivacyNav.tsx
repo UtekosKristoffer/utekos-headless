@@ -1,17 +1,10 @@
-// Path: src/components/legal/PrivacyNav.tsx
 'use client'
 
 import { cn } from '@/lib/utils/className'
 import { useEffect, useState } from 'react'
 
-type Section = {
-  id: string
-  title: string
-}
-
-type PrivacyNavProps = {
-  sections: Section[]
-}
+type Section = { id: string; title: string }
+type PrivacyNavProps = { sections: Section[] }
 
 export function PrivacyNav({ sections }: PrivacyNavProps) {
   const [activeId, setActiveId] = useState<string>(sections[0]?.id || '')
@@ -20,48 +13,46 @@ export function PrivacyNav({ sections }: PrivacyNavProps) {
     const observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id)
-          }
+          if (entry.isIntersecting) setActiveId(entry.target.id)
         })
       },
-      { rootMargin: '-20% 0px -80% 0px' } // Finner elementet når det er i toppen av skjermen
+      { rootMargin: '-20% 0px -80% 0px' }
     )
 
-    sections.forEach(section => {
-      const element = document.getElementById(section.id)
-      if (element) {
-        observer.observe(element)
-      }
+    sections.forEach(({ id }) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
     })
 
     return () => {
-      sections.forEach(section => {
-        const element = document.getElementById(section.id)
-        if (element) {
-          observer.unobserve(element)
-        }
+      sections.forEach(({ id }) => {
+        const el = document.getElementById(id)
+        if (el) observer.unobserve(el)
       })
     }
   }, [sections])
 
   return (
-    <nav className='sticky top-28 hidden lg:block'>
+    <nav className='sticky top-28 hidden lg:block' aria-label='På denne siden'>
       <h3 className='mb-4 font-semibold text-sm'>På denne siden</h3>
       <ul className='space-y-3'>
-        {sections.map(section => (
-          <li key={section.id}>
-            <a
-              href={`#${section.id}`}
-              className={cn(
-                'block text-sm transition-colors text-foreground/60 hover:text-foreground',
-                activeId === section.id && 'font-medium text-foreground'
-              )}
-            >
-              {section.title}
-            </a>
-          </li>
-        ))}
+        {sections.map(section => {
+          const active = activeId === section.id
+          return (
+            <li key={section.id}>
+              <a
+                href={`#${section.id}`}
+                className={cn(
+                  'block text-sm transition-colors text-foreground/60 hover:text-foreground',
+                  active && 'font-medium text-foreground'
+                )}
+                aria-current={active ? 'location' : undefined}
+              >
+                {section.title}
+              </a>
+            </li>
+          )
+        })}
       </ul>
     </nav>
   )

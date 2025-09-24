@@ -1,6 +1,14 @@
 // Path: src/components/providers/Providers.tsx
 'use client'
 
+import { CartMutationClient } from '@/clients/CartMutationClient'
+import { addCartLinesAction } from '@/lib/actions/addCartLinesAction'
+import { clearCartAction } from '@/lib/actions/clearCartAction'
+import { removeCartLineAction } from '@/lib/actions/removeCartLineAction'
+import { updateCartLineQuantityAction } from '@/lib/actions/updateCartLineQuantityAction'
+import { AccessoryProductsProvider } from '@/lib/context/AccessoryProductsContext'
+import { CartIdProvider } from '@/lib/context/CartIdContext'
+import { RecommendedProductsContext } from '@/lib/context/RecommendedProductsContext'
 import {
   isServer,
   QueryClient,
@@ -8,16 +16,10 @@ import {
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental'
-
-import { CartMutationClient } from '@/clients/CartMutationClient'
-import { addCartLinesAction } from '@/lib/actions/addCartLinesAction'
-import { clearCartAction } from '@/lib/actions/clearCartAction'
-import { removeCartLineAction } from '@/lib/actions/removeCartLineAction'
-import { updateCartLineQuantityAction } from '@/lib/actions/updateCartLineQuantityAction'
-import { CartIdProvider } from '@/lib/context/CartIdContext'; // VIKTIG: Importer CartIdProvider
-import type { Cart, CartActions } from '@types'
+import type { Cart, CartActions, ShopifyProduct } from '@types' // <-- NY: Importer ShopifyProduct
 
 function makeQueryClient() {
+  // ... (funksjonen er uendret)
   return new QueryClient({
     defaultOptions: {
       queries: {
@@ -30,6 +32,7 @@ function makeQueryClient() {
 let browserQueryClient: QueryClient | undefined = undefined
 
 function getQueryClient() {
+  // ... (funksjonen er uendret)
   if (isServer) {
     return makeQueryClient()
   } else {
@@ -39,32 +42,46 @@ function getQueryClient() {
 }
 
 const serverActions: CartActions = {
+  // ... (objektet er uendret)
   addCartLine: addCartLinesAction,
   updateCartLineQuantity: updateCartLineQuantityAction,
   removeCartLine: removeCartLineAction,
   clearCart: clearCartAction
 }
 
-export function Providers({
-  children,
-  initialCart,
-  cartId
-}: {
+// Definer props i et eget interface for bedre lesbarhet
+interface ProvidersProps {
   children: React.ReactNode
   initialCart: Cart | null
   cartId: string | null
-}) {
+  recommendedProducts: ShopifyProduct[]
+  accessoryProducts: ShopifyProduct[]
+}
+
+export function Providers({
+  children,
+  initialCart,
+  cartId,
+  recommendedProducts,
+  accessoryProducts
+}: ProvidersProps) {
   const queryClient = getQueryClient()
   queryClient.setQueryData(['cart', cartId], initialCart)
 
   return (
-    // QueryClientProvider må være ytterst
     <QueryClientProvider client={queryClient}>
-      <CartIdProvider value={cartId}>
-        <CartMutationClient actions={serverActions} cartId={cartId}>
-          <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
-        </CartMutationClient>
-      </CartIdProvider>
+      {/* Pakk de andre providerne inn i den nye her */}
+      <RecommendedProductsContext.Provider value={recommendedProducts}>
+        <AccessoryProductsProvider value={accessoryProducts}>
+          <CartIdProvider value={cartId}>
+            <CartMutationClient actions={serverActions} cartId={cartId}>
+              <ReactQueryStreamedHydration>
+                {children}
+              </ReactQueryStreamedHydration>
+            </CartMutationClient>
+          </CartIdProvider>
+        </AccessoryProductsProvider>
+      </RecommendedProductsContext.Provider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )

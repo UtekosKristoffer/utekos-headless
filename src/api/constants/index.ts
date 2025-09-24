@@ -15,3 +15,5 @@ export const endpoint = `${domain}${SHOPIFY_GRAPHQL_API_ENDPOINT}`
 export const key = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN!
 export const MEGA_MENU_HANDLE = 'header-mega-menu'
 export const HIDDEN_PRODUCT_TAG = 'useNext'
+
+export const FREE_SHIPPING_THRESHOLD = 999

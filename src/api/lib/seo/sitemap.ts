@@ -1,78 +1,100 @@
-import { getProducts } from '@/api/lib/products/getProducts' // Functions to fetch all handles
+// Path: src/api/lib/sitemap.ts
+// Når vi deployer koden, vil Next.js automatisk generere en sitemap.xml-fil på https://utekos.no/sitemap.xml
+// Det siste steget, etter at siden er live, er å sende inn den URL-en til Google Search Console for å sikre at Google indekserer nettstedet ditt effektivt.
+
+import { getProducts } from '@/api/lib/products/getProducts'
+import { getMagazineArticles } from '@/db/data/articles'
 import type { MetadataRoute } from 'next'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://utekos.no'
+  const lastModified = new Date()
 
-  const products = await getProducts() // Returns array of { handle, updatedAt }
-  if (!Array.isArray(products)) {
-    throw new Error('Failed to fetch products')
-  }
-  const productUrls = products.map(product => ({
-    url: `${baseUrl}/produkter/${product.handle}`,
-    lastModified: new Date(product.updatedAt),
-    changeFrequency: 'weekly' as const,
-    priority: 0.9
-  }))
-  /**
-   * @todo Add static URLs for other important pages like home, about, contact, etc.
-   */
-  const staticUrls = [
+  const corePages: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}/`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
+      lastModified,
+      changeFrequency: 'weekly',
       priority: 1.0
     },
     {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.8
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.8
-    },
-    {
       url: `${baseUrl}/produkter`,
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: 'weekly',
       priority: 0.9
-    }
-    // Add more static pages as needed
-  ]
-  // Structured data (JSON-LD) can be added here if needed for SEO purposes
-  const structuredData = [
+    },
     {
-      '@context': 'https://schema.org',
-      '@type': 'Organization',
-      'name': 'Utekos',
-      'url': baseUrl,
-      'logo': `${baseUrl}/logo.png`,
-      'sameAs': [
-        'https://www.facebook.com/utekos',
-        'https://www.instagram.com/utekos'
-        // Add other social profiles
-      ]
+      url: `${baseUrl}/magasinet`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.9
+    },
+    {
+      url: `${baseUrl}/gaveguide`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.9
     }
-    // Add more structured data types as needed
-    // For example, if you have a blog, you might add BlogPosting schema for each post
-    // Or Product schema for featured products
-    // Or WebSite schema for the overall site
-    // Or BreadcrumbList schema for navigation paths
-    // Or LocalBusiness schema if you have a physical location
-    // Or Review schema for customer reviews
-
-    // Example for reviews - this would be populated from a reviews app/metafields
-    // - aggregateRating: {
-    //   '@type': 'AggregateRating',
-    // - ratingValue: '4.8',
-    // - reviewCount: '125'
-    // }
   ]
-  // Fix: Type '{ url: string; lastModified: Date; changeFrequency: string; priority: number; }[]' is not assignable to type 'SitemapFile'.
-  return [...staticUrls, ...productUrls] as MetadataRoute.Sitemap
+
+  const inspirationPages: MetadataRoute.Sitemap = [
+    '/inspirasjon',
+    '/inspirasjon/batliv',
+    '/inspirasjon/bobil',
+    '/inspirasjon/camping',
+    '/inspirasjon/grillkvelden',
+    '/inspirasjon/hytteliv',
+    '/inspirasjon/terrassen'
+  ].map(path => ({
+    url: `${baseUrl}${path}`,
+    lastModified,
+    changeFrequency: 'monthly',
+    priority: 0.7
+  }))
+
+  const utilityPages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/kontaktskjema`,
+      lastModified,
+      changeFrequency: 'yearly',
+      priority: 0.3
+    },
+    {
+      url: `${baseUrl}/personvern`,
+      lastModified,
+      changeFrequency: 'yearly',
+      priority: 0.3
+    }
+  ]
+
+  const productsResponse = await getProducts()
+
+  const productUrls: MetadataRoute.Sitemap =
+    productsResponse.success && productsResponse.body ?
+      productsResponse.body.map(product => ({
+        url: `${baseUrl}/produkter/${product.handle}`,
+        lastModified: new Date(product.updatedAt),
+        changeFrequency: 'weekly',
+        priority: 0.8,
+        images: product.featuredImage ? [product.featuredImage.url] : []
+      }))
+    : []
+
+  const articles = await getMagazineArticles()
+
+  const articleUrls: MetadataRoute.Sitemap = articles.map(article => ({
+    url: `${baseUrl}/magasinet/${article.slug}`,
+    lastModified: new Date(article.updatedAt),
+    changeFrequency: 'monthly',
+    priority: 0.8,
+    images: [article.imageUrl]
+  }))
+
+  return [
+    ...corePages,
+    ...inspirationPages,
+    ...utilityPages,
+    ...productUrls,
+    ...articleUrls
+  ]
 }

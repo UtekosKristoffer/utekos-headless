@@ -46,7 +46,7 @@ export const metadata: Metadata = {
         url: '/og-image-hytte.webp',
         width: 1200,
         height: 630,
-        alt: 'Vennegjeng som koser seg utenfor hytta med Utekos-plagg'
+        alt: 'Vennegjeng som koser seg utenfor hytten med Utekos-plagg'
       }
     ],
     locale: 'no_NO',
@@ -59,7 +59,7 @@ const jsonLd: WithContext<Article> = {
   '@type': 'Article',
   'headline': 'Hytteliv og Utekos: Din guide til den ultimate hytteopplevelsen',
   'description':
-    'En komplett guide til hvordan Utekos-plagg maksimerer komforten og kosen på hytta, uansett sesong. Tips, inspirasjon og ideer for den norske hytteeieren.',
+    'En komplett guide til hvordan Utekos-plagg maksimerer komforten og kosen på hytten, uansett sesong. Tips, inspirasjon og ideer for den norske hytteeieren.',
   'author': {
     '@type': 'Organization',
     'name': 'Utekos'

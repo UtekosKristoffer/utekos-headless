@@ -1,3 +1,6 @@
+// Path: src/components/header/HeaderSearch/HeaderSearch.tsx
+
+/* eslint-disable capitalized-comments */
 'use client'
 
 import {
@@ -12,21 +15,7 @@ import { SearchIcon } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import * as React from 'react'
-
-const CommandDialog = dynamic(
-  () => import('@/components/ui/command').then(mod => mod.CommandDialog),
-  {
-    ssr: false,
-    loading: () => (
-      <div
-        className='fixed inset-0 z-50 flex items-start justify-center p-4 pt-[15vh] backdrop-blur-sm'
-        aria-hidden
-      >
-        <div className='flex h-[300px] w-full max-w-2xl animate-pulse flex-col rounded-xl border border-neutral-700 bg-neutral-900/95 shadow-2xl backdrop-blur-sm' />
-      </div>
-    )
-  }
-)
+import type { Route } from 'next'
 
 function TablerArrowRight(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -47,6 +36,22 @@ function TablerArrowRight(props: React.SVGProps<SVGSVGElement>) {
   )
 }
 
+const CommandDialog = dynamic(
+  () => import('@/components/ui/command').then(mod => mod.CommandDialog),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className='fixed inset-0 z-50 flex items-start justify-center p-4 pt-[15vh] backdrop-blur-sm'
+        aria-hidden
+      >
+        <div className='flex h-[300px] w-full max-w-2xl animate-pulse flex-col rounded-xl border border-neutral-700 bg-neutral-900/95 shadow-2xl backdrop-blur-sm' />
+      </div>
+    )
+  }
+)
+
+
 function useCommandK(open: boolean, setOpen: (v: boolean) => void) {
   React.useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -61,10 +66,112 @@ function useCommandK(open: boolean, setOpen: (v: boolean) => void) {
   }, [open, setOpen])
 }
 
+const navigateToPath = (router: ReturnType<typeof useRouter>, href: string) => {
+  router.push(href as Route)
+}
+
+type SearchItem = {
+  id: string
+  title: string
+  path: string
+  parentId?: string | null
+  keywords?: string[]
+  children?: SearchItem[]
+}
+
+type SearchGroup = {
+  key: string
+  label: string
+  items: SearchItem[]
+}
+
+function ItemRow({
+  item,
+  depth,
+  onSelect
+}: {
+  item: SearchItem
+  depth: number
+  onSelect: (path: string) => void
+}) {
+  // begrenset sett tailwind-klasser for innrykk (unngår dynamiske klassenavn)
+  const paddings = ['pl-0', 'pl-6', 'pl-10', 'pl-14', 'pl-16']
+  const pad = paddings[Math.min(depth, paddings.length - 1)]
+
+  return (
+    <>
+      <CommandItem
+        value={`${item.title} ${item.path} ${(item.keywords || []).join(' ')}`}
+        onSelect={() => onSelect(item.path)}
+        className={cn(
+          'h-9 rounded-md px-3 font-medium',
+          depth > 0 && 'text-neutral-200',
+          depth > 0 && pad
+        )}
+      >
+        <TablerArrowRight className='size-4' />
+        <span className='truncate'>{item.title}</span>
+      </CommandItem>
+
+      {/* vis kun direkte barn som "underlenker" */}
+      {depth === 0
+        && (item.children || []).map(child => (
+          <CommandItem
+            key={child.id}
+            value={`${child.title} ${child.path} ${(child.keywords || []).join(' ')}`}
+            onSelect={() => onSelect(child.path)}
+            className={cn(
+              'h-9 rounded-md px-3',
+              // minimalistisk styling for underlenke-innrykk (dette er eneste CSS-endring)
+              'pl-8 text-sm text-neutral-300'
+            )}
+          >
+            <span aria-hidden className='mr-1'>
+              ↳
+            </span>
+            <span className='truncate'>{child.title}</span>
+          </CommandItem>
+        ))}
+    </>
+  )
+}
+
 export function HeaderSearch({ className }: { className?: string }) {
   const [open, setOpen] = React.useState(false)
   useCommandK(open, setOpen)
   const router = useRouter()
+
+  const [groups, setGroups] = React.useState<SearchGroup[] | null>(null)
+  const [loading, setLoading] = React.useState(false)
+  const [error, setError] = React.useState<string | null>(null)
+
+
+  React.useEffect(() => {
+    let abort = false
+    const load = async () => {
+      if (!open || groups || loading) return
+      setLoading(true)
+      try {
+        const res = await fetch('/api/search-index', { cache: 'no-store' })
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        const data = await res.json()
+        if (!abort) setGroups(data.groups as SearchGroup[])
+      } catch (e: any) {
+        if (!abort) setError(e?.message ?? 'Kunne ikke hente søkeindeks')
+      } finally {
+        if (!abort) setLoading(false)
+      }
+    }
+    load()
+    return () => {
+      abort = true
+    }
+  }, [open, groups, loading])
+
+  const go = (path: string) => {
+    setOpen(false)
+    navigateToPath(router, path)
+  }
 
   return (
     <>
@@ -103,67 +210,26 @@ export function HeaderSearch({ className }: { className?: string }) {
         description='Søk etter produkter eller sider..'
       >
         <CommandInput placeholder='Søk på nettsiden..' />
-
         <CommandList className='no-scrollbar min-h-80 scroll-pt-2 scroll-pb-1.5'>
-          <CommandEmpty>Ingen treff.</CommandEmpty>
+          <CommandEmpty>
+            {error ? 'Feil ved henting av søkeindeks.' : 'Ingen treff.'}
+          </CommandEmpty>
 
-          <CommandGroup heading='Sider'>
-            <CommandItem
-              onSelect={() => {
-                setOpen(false)
-                router.push('/kontaktskjema')
-              }}
-              className='h-9 rounded-md px-3 font-medium'
-            >
-              <TablerArrowRight className='size-4' />
-              Kontakt Oss
-            </CommandItem>
-            <CommandItem
-              onSelect={() => {
-                setOpen(false)
-                router.push('/produkter')
-              }}
-              className='h-9 rounded-md px-3 font-medium'
-            >
-              <TablerArrowRight className='size-4' />
-              Produkter
-            </CommandItem>
-            <CommandItem
-              onSelect={() => {
-                setOpen(false)
-                router.push('/om-oss')
-              }}
-              // <-- FJERN DE OVERFLØDIGE KLASSENE HER
-              className='h-9 rounded-md px-3 font-medium'
-            >
-              <TablerArrowRight className='size-4' />
-              Om Utekos
-            </CommandItem>
-          </CommandGroup>
+          {loading && (
+            <div className='p-3 text-sm opacity-70'>Laster sider…</div>
+          )}
 
-          <CommandGroup heading='Handlehjelp'>
-            <CommandItem
-              onSelect={() => {
-                setOpen(false)
-                router.push('/handlehjelp/vask-og-vedlikehold')
-              }}
-              className='h-9 rounded-md px-3 font-medium'
-            >
-              <TablerArrowRight className='size-4' />
-              Vask og vedlikehold
-            </CommandItem>
-            <CommandItem
-              onSelect={() => {
-                setOpen(false)
-                router.push('/handlehjelp/storrelsesguide')
-              }}
-              className='h-9 rounded-md px-3 font-medium'
-            >
-              <TablerArrowRight className='size-4' />
-              Størrelsesguide
-            </CommandItem>
-          </CommandGroup>
+          {!loading
+            && groups?.map(group => (
+              <CommandGroup key={group.key} heading={group.label}>
+                {group.items.map(item => (
+                  <ItemRow key={item.id} item={item} depth={0} onSelect={go} />
+                ))}
+              </CommandGroup>
+            ))}
         </CommandList>
+
+        {/* footer (uendret) */}
         <div
           aria-hidden
           className={cn(
@@ -173,7 +239,6 @@ export function HeaderSearch({ className }: { className?: string }) {
         >
           <div className='flex items-center gap-2'>
             <span className='inline-flex items-center gap-1'>
-              {/* Slik ser Lucide-ikonet ut */}
               <svg
                 viewBox='0 0 24 24'
                 fill='none'

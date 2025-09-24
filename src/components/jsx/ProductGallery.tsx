@@ -31,14 +31,14 @@ export function ProductGallery({ title, images }: ProductGalleryProps) {
         {images.map((image, index) => (
           <SwiperSlide
             key={image.id}
-            className='aspect-[2/3] flex items-center justify-center mx-auto'
+            className='aspect-[2/3] flex items-center justify-center mx-auto rounded-lg'
           >
             <Image
               src={image.url}
               alt={image.altText || `Bilde av ${title}`}
               fill
               sizes='(min-width: 1024px) 24rem, (min-width: 768px) 20rem, 16rem'
-              className='object-contain md:max-w-[300px] md:max-h-[450px] mx-auto place-self-center'
+              className='object-contain md:max-w-[345px] md:max-h-[518px] mx-auto place-self-center rounded-lg'
               priority={index === 0}
             />
           </SwiperSlide>

@@ -37,7 +37,7 @@ export function BoatingHeroSection() {
       </div>
 
       <h1 className='text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl'>
-        Båtliv uten <span className='text-primary'>frys</span>
+        Båtliv uten <span className='text-primary'>å fryse</span>
       </h1>
 
       <p className='mt-6 text-xl text-muted-foreground max-w-2xl'>
