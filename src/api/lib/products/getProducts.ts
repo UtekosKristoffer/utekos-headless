@@ -15,7 +15,7 @@ export async function fetchProducts(
   params: GetProductsParams = {}
 ): Promise<ShopifyProduct[]> {
   const variables = {
-    first: 6,
+    first: 7,
     ...params
   }
 

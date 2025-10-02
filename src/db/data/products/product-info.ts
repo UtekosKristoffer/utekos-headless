@@ -9,8 +9,9 @@ export const UTEKOS_DUN_PUBLIC_URL = 'https://www.utekos.no/products/utekos-dun'
 export const handles = [
   'utekos-dun',
   'utekos-mikrofiber',
+  'utekos-fiberdun',
   'comfyrobe',
-  'utekos-fiberdun'
+  'utekos-special-edition'
 ]
 export const FEATURED_PRODUCT_HANDLES = [
   UTEKOS_DUN_HANDLE,
