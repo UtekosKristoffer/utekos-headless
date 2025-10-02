@@ -2,39 +2,11 @@
 
 import { z } from '@/db/zod/zodConfig'
 import { ShopifyApiError } from '@/lib/errors/ShopifyApiError'
+import { createShopifyErrorDetail } from '@/lib/errors/createShopifyErrorDetail'
 import type { ResponseErrors } from '@shopify/graphql-client'
-import type { ShopifyErrorDetail } from '@types'
+import type { ShopifyErrorDetail, ShopifyErrorDetailInput } from '@types'
 import { fromError } from 'zod-validation-error'
 
-/**
- * Defines the shape of the input for the error detail factory.
- * The types now explicitly include `| undefined` to match Zod's `.optional()`
- * output and satisfy the `exactOptionalPropertyTypes` compiler option.
- */
-type ShopifyErrorDetailInput = {
-  message: string
-  locations?: { line: number; column: number }[] | undefined
-  path?: (string | number)[] | undefined
-  extensions?: Record<string, unknown> | undefined
-}
-
-/**
- * Creates type-safe ShopifyErrorDetail objects from a single input object.
- */
-const createShopifyErrorDetail = ({
-  message,
-  locations,
-  path,
-  extensions
-}: ShopifyErrorDetailInput): ShopifyErrorDetail => {
-  const detail: ShopifyErrorDetail = { message }
-
-  if (locations !== undefined) detail.locations = locations
-  if (path !== undefined) detail.path = path
-  if (extensions !== undefined) detail.extensions = extensions
-
-  return detail
-}
 
 /**
  * Parses and validates Shopify client errors into ShopifyApiError instances.

@@ -31,12 +31,10 @@ import type { CartActionsResult } from '@types'
 export function mapThrownErrorToActionResult(
   thrown: unknown
 ): CartActionsResult {
-  // For Shopify API errors, use the existing formatter which has more complex logic
   if (isShopifyErrorResponse(thrown)) {
     return formatShopifyErrorResponse(thrown)
   }
 
-  // Determine error code based on error type
   let errorCode: CartErrorCodeType
   if (isValidationErrorLike(thrown)) {
     errorCode = CartErrorCode.VALIDATION_ERROR
@@ -46,7 +44,6 @@ export function mapThrownErrorToActionResult(
     errorCode = CartErrorCode.UNEXPECTED_SERVER_ERROR
   }
 
-  // Use the reusable utility for message extraction
   const message = extractCartErrorMessage(thrown)
 
   return {

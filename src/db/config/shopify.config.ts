@@ -1,4 +1,4 @@
-// Path: src/lib/shopify/config.ts
+// Path: src/db/config/shopify.config.ts
 
 /**
  * Shopify configuration
@@ -43,10 +43,6 @@ export const shopifyConfig = {
 }
 
 export const getShopifyEndpoint = () => shopifyConfig.storefrontApiUrl
+
 export const getShopifyToken = () => shopifyConfig.storefrontAccessToken
 export const validateShopifyConfig = () => shopifyConfig.validate()
-// Example usage:
-// 1: validateShopifyConfig();
-// 2: const endpoint = getShopifyEndpoint();
-// 3: const token = getShopifyToken();
-// Use `endpoint` and `token` in your fetch calls

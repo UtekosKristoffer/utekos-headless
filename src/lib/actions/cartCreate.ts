@@ -9,5 +9,10 @@ export async function createCart(): Promise<Cart> {
     query: mutationCartCreate
   })
 
-  return reshapeCart(res.body.data.cartCreate.cart)
+  if (!res.success) {
+    throw new Error('Failed to create cart', { cause: res.error })
+  }
+
+  // KORRIGERT: Fjernet '.data' fra stien.
+  return reshapeCart(res.body.cartCreate.cart)
 }

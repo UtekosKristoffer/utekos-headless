@@ -1,4 +1,4 @@
-//Path: src/lib/queries/cartQuery.ts
+// Path: src/api/graphql/queries/cart/getCartQuery.ts
 
 import cartFragment from '@/lib/fragments/cartFragment'
 export const getCartQuery = `

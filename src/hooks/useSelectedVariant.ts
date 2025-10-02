@@ -1,4 +1,5 @@
-// Hooks/useSelectedVariant.ts
+// Path: hooks/useSelectedVariant.ts
+
 import type { ShopifyProduct } from '@types'
 import { useSearchParams } from 'next/navigation'
 

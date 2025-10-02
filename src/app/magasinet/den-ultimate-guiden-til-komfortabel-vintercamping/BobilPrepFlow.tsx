@@ -13,9 +13,8 @@ import {
 } from '@xyflow/react'
 import { ALargeSmall, Car, Droplets, Wrench } from 'lucide-react'
 import { memo } from 'react'
-
-// Importerer nødvendig CSS for React Flow
 import '@xyflow/react/dist/style.css'
+// Importerer nødvendig CSS for React Flow
 
 // Custom Node for React Flow, nå med farge på ikon
 const CustomNode = memo(

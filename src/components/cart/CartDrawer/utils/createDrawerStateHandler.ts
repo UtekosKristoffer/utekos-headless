@@ -1,3 +1,5 @@
+// Path: src/components/cart/CartDrawer/utils/createDrawerStateHandler.ts
+
 import { cartStore } from '@/lib/state/cartStore'
 
 export const createDrawerStateHandler =

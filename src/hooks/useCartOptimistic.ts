@@ -1,12 +1,10 @@
 // Path: src/hooks/useCartOptimistic.ts
 'use client'
 
-import { useSelector } from '@xstate/store/react'
-
 import { cartStore } from '@/lib/state/cartStore'
 import type { CartUserInterfaceContext, OptimisticCartLines } from '@types'
-
 import type { StoreSnapshot } from '@xstate/store'
+import { useSelector } from '@xstate/store/react'
 
 /**
  * A selector function to extract the `optimisticCartLines` state from the cart store snapshot.

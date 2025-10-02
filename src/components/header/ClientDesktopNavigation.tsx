@@ -3,7 +3,7 @@
 import type { MenuItem } from '@types'
 import dynamic from 'next/dynamic'
 
-// Importer DesktopNavigation dynamisk med ssr: false
+
 const DesktopNavigation = dynamic(
   () =>
     import('@/components/header/DesktopNavigation').then(

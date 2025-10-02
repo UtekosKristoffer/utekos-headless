@@ -1,0 +1,338 @@
+```css
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@theme {
+  --color-mint-500: oklch(0.72 0.11 178);
+  --ds-background-200: hsla(var(--ds-background-200-value), 1);
+  --color-light-dark-bg: var(--sidebar-foreground);
+  --color-dark-bg: var(--background);
+  --color-button-blue: oklch(0.57 0.23507 260.1068);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-button: var(--button);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --ds-background-200: hsla(var(--ds-background-200-value), 1);
+}
+
+:root {
+  --radius: 0.625rem;
+  --header-background: oklch(0.1161 0 0);
+  --background: oklch(0.1161 0 0);
+  --foreground: oklch(0.985 0 0);
+  --button: oklch(0.57 0.23507 260.1068);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+  --ds-background-200-value: 0, 0%, 0%;
+}
+
+.dark {
+  --header-background: oklch(0.1161 0 0);
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --button: oklch(0.57 0.23507 260.1068);
+  --card: oklch(0.205 0 0);
+  --card-foreground: rgb(17 17 17);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  .PhoneInput {
+    @apply phone-input-root;
+  }
+  .PhoneInputCountry {
+    @apply phone-input-country;
+  }
+  .PhoneInputCountryIcon {
+    @apply phone-input-flag;
+  }
+  .PhoneInputInput {
+    @apply phone-input-field;
+  }
+
+  .phone-input .PhoneInputInput {
+    @apply flex h-12 w-full rounded-none border border-neutral-800 bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .phone-input .PhoneInputCountry {
+    @apply mr-4;
+  }
+
+  .phone-input .PhoneInputCountryIcon {
+    @apply h-6 w-8 rounded-sm;
+  }
+
+  .PhoneInputCountry {
+    @apply flex h-full items-center justify-center border-r border-neutral-800 bg-transparent p-3;
+  }
+
+  .PhoneInputCountry {
+    display: none;
+  }
+
+  .PhoneInputCountryIcon {
+    @apply h-6 w-auto;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px theme('colors.background') inset !important;
+    box-shadow: 0 0 0 30px theme('colors.background') inset !important;
+    -webkit-text-fill-color: theme('colors.foreground') !important;
+    caret-color: theme('colors.foreground') !important;
+  }
+}
+
+@variant hover {
+  &:hover {
+    @apply;
+  }
+}
+
+@variant focus {
+  &:focus {
+    @apply;
+  }
+}
+@variant active {
+  &:active {
+    @apply;
+  }
+}
+@variant focus-within {
+  &:focus-within {
+    @apply;
+  }
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@utility content-auto {
+  content-visibility: auto;
+}
+
+*
+  Definer
+  gjenbrukbare
+  utilities
+  for
+  phone-input-komponenten
+  */
+  @utility
+  phone-input-root {
+  @apply flex h-12 w-full items-center rounded-none border border-neutral-800 focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background;
+}
+@utility phone-input-country {
+  @apply flex h-full items-center justify-center border-r border-neutral-800 bg-transparent p-3;
+}
+@utility phone-input-flag {
+  @apply h-6 w-auto;
+}
+@utility phone-input-field {
+  @apply h-full w-full flex-1 rounded-none border-none bg-background px-3 text-base placeholder:text-muted-foreground focus:outline-none focus:ring-0;
+}
+
+@keyframes blob-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  50% {
+    /* Øker skaleringen fra 5% til 15% for en tydeligere "pust" */
+    transform: scale(1.15);
+    /* Justerer formen litt mer for å gjøre bevegelsen synlig */
+    border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+  }
+}
+
+@keyframes blinking-cursor {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes wander {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(4px, -3px);
+  }
+  50% {
+    transform: translate(-3px, 5px);
+  }
+  75% {
+    transform: translate(-5px, -3px);
+  }
+}
+
+@keyframes chip-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+}
+
+@keyframes aurora {
+  from {
+    background-position:
+      50% 50%,
+      50% 50%;
+  }
+  to {
+    background-position:
+      350% 50%,
+      350% 50%;
+  }
+}
+
+.animate-wander {
+  animation: wander 7s infinite ease-in-out;
+}
+
+.animate-chip-pulse {
+  animation: chip-pulse 2.6s infinite ease-in-out;
+}
+
+.animate-blinking-cursor {
+  animation: blinking-cursor 1.2s infinite step-end;
+}
+.animate-blob-pulse {
+  animation: blob-pulse 5s infinite ease-in-out;
+}
+
+.animate-aurora {
+  animation: aurora 20s linear infinite;
+}
+```
+
+### **`@apply`**
+
+Use the `@apply` directive to inline any existing utility classes into your own
+custom CSS:
+
+```css
+.select2-dropdown {
+  @apply rounded-b-lg shadow-md;
+}
+.select2-search {
+  @apply rounded border border-gray-300;
+}
+.select2-results__group {
+  @apply text-lg font-bold text-gray-900;
+}
+```
+
+This is useful when you need to write custom CSS (like to override the styles in
+a third-party library) but still want to work with your design tokens and use
+the same syntax you’re used to using in your HTML.

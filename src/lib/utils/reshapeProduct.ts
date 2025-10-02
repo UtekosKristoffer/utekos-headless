@@ -1,26 +1,30 @@
-/**
- * @fileoverview Product reshaping utility for Shopify data transformation
- * @module lib/utils/reshapeProduct
- * @why Normalize product structure for consistent component consumption
- */
+import { normalizeProductImage } from '@/lib/helpers/normalizers/normalizeProductImage'
+import type { RawMetaobject, ShopifyProduct } from '@types'
+import { reshapeMetaobject } from './reshapeMetaobject' // Bruk den delte funksjonen
 
-import type { ShopifyProduct } from '@types'
-
-/**
- * Transform raw Shopify product to normalized format
- * @why Ensure consistent product structure across application
- * @param product - Raw Shopify product data
- */
-export const reshapeProduct = (
-  product: ShopifyProduct
-): ShopifyProduct | undefined => {
+export const reshapeProduct = (product: ShopifyProduct): ShopifyProduct => {
   if (!product) {
-    return undefined
+    return product
   }
 
-  const reshaped = {
-    ...product
-  }
+  const normalizedVariants = product.variants.edges.map(edge => {
+    const variant = edge.node
+    if (variant.metafield?.reference) {
+      const newVariant = { ...variant }
+      newVariant.variantProfileData = reshapeMetaobject(
+        (variant.metafield.reference as unknown as RawMetaobject).fields
+      )
+      return { ...edge, node: newVariant }
+    }
+    return edge
+  })
 
-  return reshaped
+  return {
+    ...product,
+    featuredImage: normalizeProductImage(product.featuredImage, product.title),
+    variants: {
+      ...product.variants,
+      edges: normalizedVariants
+    }
+  }
 }

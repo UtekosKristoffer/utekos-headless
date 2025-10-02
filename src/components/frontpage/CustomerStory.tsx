@@ -109,6 +109,7 @@ export function CustomerStory() {
           panOnDrag={false}
           zoomOnScroll={false}
           fitView
+          preventScrolling={false}
           fitViewOptions={{ padding: 0.4 }}
           proOptions={{ hideAttribution: true }}
         >

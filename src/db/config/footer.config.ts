@@ -1,7 +1,6 @@
 // Path: src/config/footer.config.ts
 
 import type { Route } from 'next'
-
 export type FooterLink = {
   title: string
   path: Route
@@ -22,7 +21,7 @@ export const footerConfig: FooterSection[] = [
         path: '/kontaktskjema' as Route
       },
       {
-        title: 'Produktguide',
+        title: 'Teknologi og materialer',
         path: '/handlehjelp/teknologi-materialer' as Route
       },
       {
@@ -71,7 +70,7 @@ export const footerConfig: FooterSection[] = [
       }
     ]
   },
-  // NY SEKSJON STARTER HER
+
   {
     title: 'Frakt og retur',
     links: [
@@ -81,7 +80,7 @@ export const footerConfig: FooterSection[] = [
       },
       {
         title: 'Retur og bytte',
-        path: '/frakt-og-retur#retur' as Route // Eksempel på ankerlink
+        path: '/frakt-og-retur#retur' as Route
       },
       {
         title: 'Spor din ordre',
@@ -89,5 +88,4 @@ export const footerConfig: FooterSection[] = [
       }
     ]
   }
-  // NY SEKSJON SLUTTER HER
 ]

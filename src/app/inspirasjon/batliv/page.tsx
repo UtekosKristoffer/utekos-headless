@@ -90,12 +90,12 @@ export default function BoatingInspirationPage() {
 
       <main>
         {/* Hero Section */}
-        <section className='relative min-h-[70vh] flex items-center'>
+        <div className='relative min-h-[70vh] flex items-center'>
           <div className='absolute inset-0 bg-gradient-to-b from-transparent to-background/50' />
           <div className='container relative mx-auto px-4 py-16'>
             <BoatingHeroSection />
           </div>
-        </section>
+        </div>
 
         {/* Use Cases Section */}
         <section id='bruksomrader' className='py-24 bg-sidebar-foreground'>

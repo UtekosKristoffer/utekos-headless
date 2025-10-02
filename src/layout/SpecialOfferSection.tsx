@@ -24,7 +24,7 @@ export function SpecialOfferSection() {
   const stockPercentage = (remainingStock / totalStock) * 100
 
   return (
-    <section className='w-full py-20 sm:py-24'>
+    <section className='mx-auto md:max-w-7xl max-w-[95%] py-20 sm:py-24'>
       <div className='container mx-auto'>
         <div className='relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/50 p-8 md:p-12'>
           <div

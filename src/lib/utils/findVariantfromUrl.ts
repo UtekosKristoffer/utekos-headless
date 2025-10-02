@@ -1,3 +1,4 @@
+// Path: src/lib/utils/findVariantfromUrl.ts
 import type { ShopifyProductVariant } from '@types'
 
 /**

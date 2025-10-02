@@ -3,6 +3,7 @@ export type MetaobjectReference = {
   images: MetaobjectField
   subtitle: MetaobjectField
   materials: MetaobjectField
+  description: MetaobjectField
   functions: MetaobjectField
   properties: MetaobjectField
   usage: MetaobjectField
@@ -11,6 +12,7 @@ export type MetaobjectReference = {
   colorLabel: MetaobjectField
   backgroundColor: MetaobjectField
   swatchHexcolorForVariant: MetaobjectField
+  swatchHexcolorForUnselectedVariant: MetaobjectField
   length: MetaobjectField
   centerToWrist: MetaobjectField
   flatWidth: MetaobjectField
@@ -31,8 +33,6 @@ export type Metafield = {
   key: string
   reference: RawMetaobject | null
 }
-
-export type MetafieldReference = VariantMetaobject
 
 export type VariantMetaobject = MetaobjectReference | null
 

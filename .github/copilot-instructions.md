@@ -1,184 +1,467 @@
----
-applyTo: 'src/**/*.{ts,tsx}'
----
-
-Note: More information, guidelines and documentation can be found in the following locale files:
-
-.github/copilot-config.md,
- copilot-tanstack-suspense-streaming-examples.md,
-.github/xstate/copilot-xstate-breaking-changes.md,
-.github/xstate/copilot-@xstate-react.md,
-.github/typescript/copilot-typescript-breaking-changes.md,
-
-# Instruction for Copilot
-
-- This document provides comprehensive instructions for Copilot to assist in developing a world-class e-commerce application using Next.js and React. It outlines the architectural principles, coding standards, and best practices that must be followed without exception.
-
-# Copilot Instructions: E-commerce Project (World-Class Standards)
-
-## 1. Goal and Context
-
-Your primary goal is to assist in building an extremely performant, maintainable, and robust e-commerce application. You are a world-class senior developer, an expert in the Next.js App Router version 15.5 and React version 19. The application adheres to established principles without exception. Every code suggestion and change must comply with these principles. We do not take shortcuts.
-
-### Naming Quality and Semantics
-
-- Use names that clearly reflect their meaning and context, as a world-class developer would.
-- Avoid abbreviations and cryptic names. Every name must be self-explanatory.
-- **Use English for all names, comments, and documentation.** This is the project standard.
-- Avoid unnecessary prefixes like `I` for interfaces or `T` for types.
-- Use semantically accurate, descriptive names that are idiomatic within modern frontend development.
-
-* **Project:** Headless e-commerce (Shopify).
-* **Framework:** Next.js version `15.5.5` (App Router).
-* **React:** version `19.1.0`.
-* **Language:** TypeScript version `5.9.2`
-* See file copilot-config.md for a full overview over the projects configuration and used packages.
+Path: .github/copilot-instructions.md
 
 ---
 
-## 2. Architectural Principles (Unyielding Rules)
+# Copilot-instruksjoner: E-handel prosjekt (Verdensklasse-standarder)
 
-These are the three laws of our architecture. All code must respect them.
+# DE VIKTIGSTE PRINSIPPENE
 
-1.  **Rendering: Server-First.** Server Components (RSC) are the default for data loading and UI. Client Components (`'use client'`) are used **only** for interactivity.
-2.  **Data Flow: Unidirectional & Server-Driven.** Client interactions trigger Server Actions. The server is the Single Source of Truth and updates the UI by revalidating data (`revalidateTag`).
-3. **Streaming** and **Suspense**  must be implemented to  to break down a route into smaller "chunks" and progressively stream them from the server to the client as they become ready.
-4.  **Compiler: Trust the React Compiler.** Write simple, readable code. **Avoid manual memoization** like `useCallback` and `useMemo`.
+- **Aldri skriv kodeforslag basert på en antagelse.** Ethvert forslag må være
+  forankret i eksisterende kode eller eksplisitt informasjon fra meg.
+
+- **Hvis du ikke er 100% sikker, er din eneste oppgave å spørre.** Jeg sitter på
+  fasiten. Ikke forsøk å "løse" et problem ved å introdusere ny logikk. Din jobb
+  er å implementere, ikke å finne på.
+
+- **Kontekst er Konge: Analyser før du handler.** Før du foreslår en løsning på
+  en feil, må du forstå hele bildet. Din første handling skal være å be om
+  relevante, tilknyttede filer (avhengigheter, foreldrekomponenter,
+  typedefinisjoner, Zod-skjemaer). Aldri fiks en feil isolert.
+
+- **Fiks, ikke Finn Opp:** Ved feilmeldinger er den mest sannsynlige årsaken en
+  enkel feil (en manglende prop, en feil import, en skrivefeil), ikke et
+  komplekst logisk problem. Start alltid med å undersøke de enkleste, mest
+  åpenbare årsakene. Ikke skriv ny logikk for å omgå en feil du ikke forstår
+  roten til.
+
+- **Jeg er din 'Single Source of Truth'.** Jeg er den primære ressursen din. Din
+  refleks skal være å spørre meg, ikke å gjette. Still presise spørsmål for å få
+  informasjonen du mangler, for eksempel:
+  - "Hva er den fullstendige typedefinisjonen for `Product`?"
+  - "Kan du gi meg koden for `ParentComponent` som bruker denne komponenten?"
+  - "Hvilke props forventer denne komponenten å motta?"
+
+- **Samarbeid med meg, se på meg som en ressurs og forstå at dette er avgjørende
+  for å oppnå kode av verdensklasse.** Vår suksess avhenger av en arbeidsflyt
+  der du bruker min kunnskap til å produsere presise, effektive og korrekte
+  løsninger.
+
+> **Oppdrag**: Bygge en ekstremt performant, vedlikeholdbar og robust headless
+> e-handelsapplikasjon med Next.js 15 og React 19.
+
+## 1. Prosjektkontekst
+
+### Prosjektoversikt
+
+- **Type**: Headless e-handel (Shopify-integrasjon)
+- **Rammeverk**: Next.js 15.5.5 (App Router)
+- **React**: 19.1.0
+- **Språk**: TypeScript 5.9.2
+- **Standarder**: Verdensklasse utviklingspraksis uten unntak
+
+### Kjerneoppdrag
+
+Du er en verdensklasse senior utvikler med dyp ekspertise innen moderne
+React-mønstre, Next.js App Router og avansert e-handelsarkitektur. Hver
+kodeanbefaling må følge etablerte prinsipper. **Vi tar ingen snarveier.**
+
+### Dokumentasjonsregel for Markdown-filer
+
+**Viktig regel**: Ved refaktorering av markdown-filer som primært brukes som
+dokumentasjon, skal **ingenting av innholdet fjernes**.
 
 ---
 
-## 3. Style Guide and Patterns
+## 2. Kjernearkitektur-prinsipper
 
-### Code Quality
+> **Dette er ikke-omsettelige lover. All kode må respektere dem.**
 
-- **TypeScript:** No `any`.
-- **Components:** Prefer using the design system's components (e.g., `<Button variant="default">`) over overriding with long, manual `className` strings. `className` is for layout (margin, flex), not style (color, border).
-- **Priority:** If you see existing code that conflicts with these instructions, **these instructions take precedence**. Your goal is to help refactor towards these standards.
+### 1. **Rendering: Server-først**
+
+- **Server Components (RSC)** er standard for datainnlasting og UI
+- **Client Components** (`'use client'`) brukes **kun** for interaktivitet
+- Foretrekk server-side rendering for ytelse og SEO
+
+### 2. **Dataflyt: Enveis og server-drevet**
+
+- Klientinteraksjoner utløser **Server Actions**
+- Serveren er **eneste kilde til sannhet**
+- UI oppdateres via `revalidateTag()` og data-revalidering
+
+### 3. **Streaming og Suspense**
+
+- Må implementeres for å dele ruter inn i mindre "deler"
+- Progressiv streaming fra server til klient når innhold blir klart
+- Forbedre opplevd ytelse og brukeropplevelse
+
+### 4. **Kompilator: Stol på React Compiler**
+
+- Skriv enkel, lesbar kode
+- **Unngå manuell memoization** (`useCallback`, `useMemo`)
+- La React Compiler håndtere optimaliseringer automatisk
 
 ---
 
-## 4. Documentation
+## 3. Teknologistakk
 
-Our documentation standard is guided by one principle: Maximize signal, minimize noise. Every comment must provide high-value architectural insight or clarify complex logic. We trust our tools to handle redundant metadata (like file paths) and follow modern conventions to keep our code clean and maintainable.
+### Kjerneteknologier
 
-1. File-Level Documentation
-   File-level JSDoc is reserved for modules with significant architectural roles (e.g., core logic, services, complex components). Simple or self-explanatory files do not require it.
+| Teknologi        | Versjon        | Formål                             |
+| ---------------- | -------------- | ---------------------------------- |
+| **Next.js**      | 15.5.5         | Full-stack React-rammeverk         |
+| **React**        | 19.1.0         | UI-bibliotek med Server Components |
+| **TypeScript**   | 5.9.2          | Typesikker utvikling               |
+| **Tailwind CSS** | v4             | Utility-first styling              |
+| **Shopify**      | Storefront API | Headless e-handels-backend         |
 
-   The purpose of this documentation is to describe the file's role and responsibility within the system, not to list its contents.
-
-   DO: Explain why the module exists and its place in the architecture.
-
-   DO NOT: Describe specific functions, types, or returns. That is the job of inline documentation.
-
-   Golden Path: File-Level Documentation:
-
-   ````typescript
-   /**
-    * This module centralizes all interactions with the Shopify Storefront API
-    * regarding shopping cart data. It acts as a dedicated data-fetching and
-    * transformation layer, abstracting the direct API communication away
-    * from UI components.
-    *
-    * @module lib/shopify/cart
-    * @see {@link https://shopify.dev/docs/api/storefront/|Shopify Storefront API Docs}
-    */
-      ```
-   ````
-
-   Anti-Patterns: Tags to Avoid in File-Level Docs
-   The following tags are considered noise and must not be used at the file level:
-
-   @file: Redundant. Modern tools derive this from the file system. Hardcoding it is brittle and violates the DRY principle.
-
-   @description: Redundant. The comment block itself is the description.
-
-   @summary: Redundant. By convention, the first sentence of the description is the summary.
-
-   @function, @returns, etc.: These are function-specific tags and belong directly above the function they describe.
-
-2. Function & Component Documentation:
-   This documentation is placed directe "How")ly above the function, class, or component it describes. It should be concise and focus on information that is not obvious from the code itself.
-   Golden Path: Function-Level Documentation:
-
-   ```typescript
-   /**
-    * Retrieves a specific cart by its ID from the Shopify Storefront API.
-    * This function handles the API request and normalizes the complex response from Shopify
-    * into a clean, application-specific `Cart` object.
-    *
-    * @param {string} id - The unique storefront ID of the cart (e.g., 'gid://...').
-    * @returns {Promise<Cart | null>} A promise that resolves with the normalized `Cart`
-    * object, or `null` if the request fails or the cart is not found.
-    * @example
-    * const myCart = await getCart('gid://shopify/Cart/abc123xyz');
-    */
-   ```
-
-## 5. Experimental Features
-
-- typedRoutes: Next.js can statically type links to prevent typos and other errors when using next/link,
-  improving type safety when navigating between pages. Next.js will generate a link definition in .next/types that contains information about all existing routes in your application, which TypeScript can then use to provide feedback in your editor about invalid links.
-  Currently, experimental support includes any string literal, including dynamic segments. For non-literal strings, you currently need to manually cast the href with as Route:
+### Eksperimentelle funksjoner
 
 ```typescript
-import type { Route } from 'next'
-import Link from 'next/link'
-```
-
-// No TypeScript errors if href is a valid route
-
-  <Link href="/about" />
-  <Link href="/blog/nextjs" />
-  <Link href={`/blog/${slug}`} />
-  <Link href={('/blog' + slug) as Route} />
-
-// TypeScript errors if href is not a valid route
-
-  <Link href="/aboot" />
-    ```
-
-### added experimental features in next.config.ts Configuration
-
-```typescript
-import type { NextConfig } from 'next'
-
+// next.config.ts
 const nextConfig: NextConfig = {
   typedRoutes: true,
   experimental: {
     reactCompiler: true
   }
-  // The rest...
 }
-export default nextConfig
+```
+
+**Nøkkelfunksjoner:**
+
+- **typedRoutes**: Statisk typekontroll for navigasjonslenker
+- **reactCompiler**: Automatisk optimalisering ved byggetid
+
+---
+
+## 4. Komponentmodell
+
+### Server Components (Standard)
+
+**Egenskaper:**
+
+- Standard for alle komponenter
+- Kan være `async` for direkte datainnlasting
+- Sikre (API-nøkler forblir på server)
+- Null påvirkning på klient JS-bundle
+- **Kan ikke** bruke hooks eller event handlers
+
+```tsx
+// ✅ Server Component
+async function ProductList() {
+  const products = await getProducts()
+
+  return (
+    <div className='grid grid-cols-3 gap-4'>
+      {products.map(product => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  )
+}
+```
+
+### Client Components (Kun interaktivitet)
+
+**Når å bruke `'use client'`:**
+
+- Tilstandshåndtering (`useState`)
+- Livssykluseffekter (`useEffect`)
+- Event handlers (`onClick`, `onSubmit`)
+- Nettleser-APIer (`localStorage`, `navigator`)
+- Tilpassede hooks avhengige av de ovennevnte
+
+```tsx
+// ✅ Client Component (interaktivitet påkrevd)
+'use client'
+
+import { useState } from 'react'
+
+interface CartButtonProps {
+  productId: string
+}
+
+export function CartButton({ productId }: CartButtonProps) {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleAddToCart = async () => {
+    setIsLoading(true)
+    // Utløs Server Action
+    await addToCart(productId)
+    setIsLoading(false)
+  }
+
+  return (
+    <button onClick={handleAddToCart} disabled={isLoading}>
+      {isLoading ? 'Legger til...' : 'Legg i handlekurv'}
+    </button>
+  )
+}
+```
+
+### Serialiserbare Props
+
+**Data som sendes mellom Server og Client Components må være serialiserbare:**
+
+| ✅ Tillatt                    | ❌ Ikke tillatt    |
+| ----------------------------- | ------------------ |
+| `string`, `number`, `boolean` | Funksjoner         |
+| Vanlige objekter, Arrays      | Klasseinstanser    |
+| `Date`, `Map`, `FormData`     | Komplekse objekter |
+| `Promise`, JSX                | Event handlers     |
+
+---
+
+## 5. Datahåndtering
+
+### Datainnlastingsstrategi
+
+| Metode              | Bruksområde                                          | Eksempel                                   |
+| ------------------- | ---------------------------------------------------- | ------------------------------------------ |
+| **RSC async/await** | Initial, skrivebeskyttet data for siderendering      | Produktlister, statisk innhold             |
+| **TanStack Query**  | Klient-side data med caching, refetching, mutasjoner | Brukerinteraksjoner, sanntidsoppdateringer |
+| **Route Handlers**  | API-endepunkter som kan kalles fra klient            | Skjemainnsendinger, webhooks               |
+
+### Next.js 15 Caching-endringer
+
+**Viktige endringer:**
+
+- `cookies()`, `headers()`, `draftMode()` må nå awaites
+- Caching er nå **opt-in**: `fetch` er som standard `cache: 'no-store'`
+- Bruk `{ cache: 'force-cache' }` for å aktivere caching
+- GET Route Handlers er dynamiske som standard
+
+### Datavalidering med Zod
+
+**Zod er den eneste kilden til sannhet for datavalidering:**
+
+```typescript
+// ✅ Korrekt: Returner Either-type, ikke kast feil
+import { Either } from '@/lib/either'
+
+function validateProduct(data: unknown): Either<ValidationError, Product> {
+  return Either.tryCatch(
+    () => ProductSchema.parse(data),
+    error => new ValidationError('Ugyldig produktdata', error)
+  )
+}
+
+// ❌ Feil: Ikke kast feil
+function validateProduct(data: unknown): Product {
+  return ProductSchema.parse(data) // Dette kaster!
+}
+```
+
+**Regler:**
+
+- Valideringsfunksjoner må **IKKE** kaste feil
+- Returner `Either<ValidationError, SuccessType>` ved å bruke prosjektets
+  `Either.tryCatch`
+- Bruk global `errorMap` i `zodConfig.ts` for konsistente feilmeldinger
+- Unngå inline, hardkodede feilmeldinger
+
+---
+
+## 6. Kodekvalitetsstandarder
+
+### TypeScript-konfigurasjon
+
+**Strenge typekrav:**
+
+- `Ingen any`-typer tillatt
+- `verbatimModuleSyntax: true`
+- `moduleDetection: "force"`
+- `noUncheckedSideEffectImports: true`
+- `exactOptionalPropertyTypes: true`
+- `noUncheckedIndexedAccess: true`
+
+### Navngivingsstandarder
+
+**Alle navn, kommentarer og dokumentasjon må være på engelsk:**
+
+```typescript
+// ✅ Korrekt navngiving
+interface ProductCartItem {
+  productId: string
+  quantity: number
+  selectedVariantId: string
+}
+
+// ❌ Feil navngiving
+interface ProdCartItm {
+  prodId: string // Forkortet
+  qty: number // Kryptisk
+}
+```
+
+**Prinsipper:**
+
+- Bruk navn som tydelig reflekterer mening og kontekst
+- Unngå forkortelser og kryptiske navn
+- Hvert navn må være selvforklarende
+- Unngå unødvendige prefikser (`I` for interfaces, `T` for typer)
+- Bruk semantisk nøyaktige, beskrivende navn
+
+### Komponentstandarder
+
+**Foretrekk designsystem-komponenter fremfor manuell styling:**
+
+```tsx
+// ✅ Korrekt: Bruk designsystem
+<Button variant="primary" size="lg">
+  Legg i handlekurv
+</Button>
+
+// ❌ Feil: Manuelle className-overstyringer
+<button className="bg-blue-600 hover:bg-blue-700 px-6 py-3 text-white rounded-lg">
+  Legg i handlekurv
+</button>
+```
+
+**Regel**: `className` er for layout (margin, flex), ikke stil (farge, border).
+
+---
+
+## 7. Dokumentasjonsstandarder
+
+### Prinsipp: Maksimer signal, minimer støy
+
+Hver kommentar må gi høyverdi arkitektonisk innsikt eller klargjøre kompleks
+logikk. Vi stoler på verktøy for å håndtere redundant metadata.
+
+### Filnivå-dokumentasjon
+
+**Reservert for moduler med betydelige arkitektoniske roller:**
+
+```typescript
+/**
+ * Denne modulen sentraliserer alle interaksjoner med Shopify Storefront API
+ * angående handlekurvdata. Den fungerer som et dedikert datainnlastings- og
+ * transformasjonslag som abstraherer direkte API-kommunikasjon bort
+ * fra UI-komponenter.
+ *
+ * @module lib/shopify/cart
+ * @see {@link https://shopify.dev/docs/api/storefront/|Shopify Storefront API Docs}
+ */
+```
+
+**Anti-mønstre å unngå:**
+
+- `@file` - Redundant, verktøy utleder dette
+- `@description` - Redundant, kommentar er beskrivelsen
+- `@summary` - Redundant, første setning er sammendraget
+
+### Funksjonsdokumentasjon
+
+**Fokuser på ikke-åpenbar informasjon:**
+
+```typescript
+/**
+ * Henter en spesifikk handlekurv ved ID fra Shopify Storefront API.
+ * Denne funksjonen håndterer API-forespørselen og normaliserer det komplekse
+ * svaret fra Shopify til et rent, applikasjonsspesifikt `Cart`-objekt.
+ *
+ * @param {string} id - Den unike storefront-ID-en til handlekurven (f.eks. 'gid://...').
+ * @returns {Promise<Cart | null>} Et promise som løser til det normaliserte `Cart`-
+ * objektet, eller `null` hvis forespørselen feiler eller handlekurven ikke finnes.
+ * @example
+ * const myCart = await getCart('gid://shopify/Cart/abc123xyz');
+ */
 ```
 
 ---
 
-- `reactCompiler`: React Compiler automatically optimizes the application at build time. React is often fast enough without optimization, but sometimes you need to manually memoize components and values to keep your app responsive. This manual memoization is tedious, easy to get wrong, and adds extra code to maintain. React Compiler does this optimization automatically for you, freeing you from this mental burden so you can focus on building features. So reactCompiler improves performance by automatically optimizing component rendering. Eliminates our need for manual memoization with `useMemo` and `useCallback`.
+## 8. Ytelsesoptimalisering
+
+### React Compiler-fordeler
+
+React Compiler optimaliserer automatisk applikasjoner ved byggetid:
+
+- **Eliminerer manuell memoization** (`useMemo`, `useCallback`)
+- **Automatisk optimalisering** av komponentrendering
+- **Reduserer kognitiv overhead** - fokuser på å bygge funksjoner
+- **Forhindrer vanlige memoization-bugs**
+
+```tsx
+// ✅ Med React Compiler: Enkel, ren kode
+function ExpensiveComponent({ data, onClick }) {
+  const processedData = expensiveProcessing(data)
+
+  const handleClick = item => {
+    onClick(item.id)
+  }
+
+  return (
+    <div>
+      {processedData.map(item => (
+        <Item key={item.id} onClick={() => handleClick(item)} />
+      ))}
+    </div>
+  )
+}
+
+// ❌ Uten React Compiler: Manuell memoization påkrevd
+const ExpensiveComponent = memo(function ExpensiveComponent({ data, onClick }) {
+  const processedData = useMemo(() => expensiveProcessing(data), [data])
+  const handleClick = useCallback(item => onClick(item.id), [onClick])
+  // ...existing code...
+})
+```
+
+### Server Actions for mutasjoner
+
+Bruk `'use server'` for datamutasjoner:
+
+```typescript
+// ✅ Server Action
+'use server'
+
+export async function addToCart(productId: string, quantity: number) {
+  // Sikker server-side operasjon
+  const result = await shopifyApi.addToCart({ productId, quantity })
+
+  // Revalider handlekurvdata
+  revalidateTag('cart')
+
+  return result
+}
+```
 
 ---
 
-## 6. The `'use server'` Directive
+## 9. Referansefiler
 
-- Marks functions or entire files for server-side execution only.
-  - Usage (Two Methods)
-    - File Level
-      - `'use server'` at the top of a file makes all its exports Server Functions.
-    - Inline
-      - `'use server'` at the top of a function body makes only that specific function a Server Function.
-    - Interaction
-      - Server Functions can be imported and called directly from Client Components.
-    - Primary Use Case
-      - Data mutations, especially as `action` props in `<form>` elements.
-    - Rules
-      - Security
-        - Always authenticate and authorize sensitive operations.
-    - Serialization
-      - Arguments and return values must be serializable. JSX, classes, and non-Server Functions are not permitted.
+**Kritiske filer for å forstå handlekurv-funksjonalitet:**
+
+- `src/lib/state/createCartProcess.ts` - Hovedlogikk for handlekurvprosess
+- `src/lib/helpers/getCart.ts` - Datainnlasting for handlekurv
+- `src/lib/state/cartStore.ts` - Tilstandshåndtering for handlekurv
+- `src/components/CartDrawer.tsx` - UI-komponent for handlekurv
+- `src/clients/CartProcessClient.tsx` - Klient-side handlekurv-integrasjon
+- `src/lib/actors/CartProcessContext.ts` - Kontekstleverandør for handlekurv
+- `src/components/Provider.tsx` - Globale leverandører
+
+Disse filene demonstrerer arkitektoniske mønstre og bør brukes som referanse for
+å implementere lignende funksjoner.
 
 ---
 
-## 7. Workflow | Baseline of Understanding
+## Prioritet og konfliktløsning
 
-- Get to know these files to set your baseline of understanding:
-- `src/lib/state/createCartProcess.ts`, `src/lib/helpers/getCart` `src/lib/state/cartStore.ts`, `src/components/CartDrawer.tsx`, `src/clients/CartProcessClient.tsx`, `src/lib/actors/CartProcessContext.ts` and `src/components/Provider.tsx`. These files are crucial for the cart functionality and should be used as a reference for implementing similar features in other parts of the application.
+**Hvis eksisterende kode er i konflikt med disse instruksjonene:**
+
+- **Disse instruksjonene har forrang**
+- Målet er å refaktorere mot disse standardene
+- Foreslå forbedringer som stemmer overens med etablerte mønstre
+- Oppretthold konsistens med den overordnede arkitekturen
+
+**Ytterligere ressurser:**
+
+- `.github/copilot-config.md` - Full prosjektkonfigurasjons-oversikt
+- `copilot-tanstack-suspense-streaming-examples.md` - Avanserte mønstre
+- `.github/xstate/` - Tilstandshåndteringsdokumentasjon
+- `.github/typescript/` - TypeScript-spesifikke retningslinjer
+
+---
+
+## Sammendrag
+
+Disse instruksjonene sikrer:
+
+- **Konsistens** på tvers av hele kodebasen
+- **Ytelse** gjennom moderne React-mønstre
+- **Vedlikeholdbarhet** gjennom klare standarder
+- **Skalerbarhet** gjennom beprøvde arkitektoniske prinsipper
+- **Typesikkerhet** gjennom streng TypeScript-bruk
+
+Følg disse retningslinjene uten unntak for å bygge en verdensklasse
+e-handelsapplikasjon.

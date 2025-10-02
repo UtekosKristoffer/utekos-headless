@@ -13,7 +13,6 @@ const normalizeCartLine = ({ node }: ShopifyCartLineEdge): CartLine => ({
     ...node.merchandise,
     product: {
       ...node.merchandise.product,
-      // Denne er nøkkelen: Vi garanterer at featuredImage ikke er null.
       featuredImage: normalizeProductImage(
         node.merchandise.product.featuredImage,
         node.merchandise.product.title

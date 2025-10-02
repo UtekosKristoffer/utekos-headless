@@ -1,4 +1,4 @@
-// Path: src/lib/constants/CartErrorCode.ts
+// Path: src/constants/CartErrorCode.ts
 import { z } from '@/db/zod/zodConfig'
 /**
  * @fileoverview Centralized error codes using Zod v4 enum pattern.

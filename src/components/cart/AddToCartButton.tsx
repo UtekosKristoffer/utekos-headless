@@ -1,3 +1,4 @@
+// Path: src/components/cart/AddToCartButton.tsx
 'use client'
 
 import { SubmitButton } from '@/components/cart/AddToCartButton/SubmitButton'
@@ -11,10 +12,16 @@ import {
 import { Input } from '@/components/ui/input'
 import type { AddToCartButtonProps } from '@types'
 
+// Utvidet med availableForSale
+interface ExtendedAddToCartButtonProps extends AddToCartButtonProps {
+  availableForSale: boolean
+}
+
 export function AddToCartButton({
   isPending,
-  isDisabled
-}: AddToCartButtonProps) {
+  isDisabled,
+  availableForSale
+}: ExtendedAddToCartButtonProps) {
   return (
     <>
       <FormField
@@ -41,7 +48,7 @@ export function AddToCartButton({
                 />
               </FormControl>
               <SubmitButton
-                availableForSale={true}
+                availableForSale={availableForSale}
                 selectedVariantId={field.value}
                 isPending={isPending}
                 isDisabled={isDisabled}

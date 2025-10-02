@@ -2,7 +2,7 @@
 
 import cartFragment from '@/lib/fragments/cartFragment'
 
-export const mutationCartCreate = `
+export const mutationCartCreate = /* GraphQL */ `
   mutation cartCreate($lines: [CartLineInput!]) {
     cartCreate(input: { lines: $lines }) {
       cart {
@@ -13,7 +13,7 @@ export const mutationCartCreate = `
   ${cartFragment}
 `
 
-export const mutationCartLinesAdd = `
+export const mutationCartLinesAdd = /* GraphQL */ `
   mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
     cartLinesAdd(cartId: $cartId, lines: $lines) {
       cart {
@@ -23,17 +23,17 @@ export const mutationCartLinesAdd = `
   }
   ${cartFragment}
 `
-export const mutationCartLinesRemove = `
+export const mutationCartLinesRemove = /* GraphQL */ `
   mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
     cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
-    cart {
+      cart {
         ...cart
       }
     }
   }
   ${cartFragment}
 `
-export const mutationCartLinesUpdate = `
+export const mutationCartLinesUpdate = /* GraphQL */ `
   mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
     cartLinesUpdate(cartId: $cartId, lines: $lines) {
       cart {

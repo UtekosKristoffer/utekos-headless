@@ -15,7 +15,6 @@ export function SmartCartSuggestions({
 }: {
   cart: Cart | null | undefined
 }) {
-  // STEG 1: Alle hooks kalles ubetinget på toppen
   const recommendedProducts = useRecommendedProducts()
   const accessoryProducts = useAccessoryProducts()
 
@@ -117,7 +116,6 @@ export function SmartCartSuggestions({
       }
     }, [cart, recommendedProducts, accessoryProducts])
 
-  // STEG 3: "Early return"-sjekkene skjer ETTER alle hooks er kalt
   if (!suggestions || suggestions.length === 0) {
     const subtotal = parseFloat(cart?.cost.subtotalAmount.amount ?? '0')
     if (subtotal >= FREE_SHIPPING_THRESHOLD) {

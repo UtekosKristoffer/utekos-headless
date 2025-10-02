@@ -2,22 +2,10 @@ import type { ShopifyProduct } from '@types'
 import { reshapeProduct } from './reshapeProduct'
 
 /**
- * Transform array of products efficiently
- * @why Batch processing with filtering for performance
+ * Transforms an array of raw Shopify products using the reshapeProduct utility.
  */
 export const reshapeProducts = (
   products: ShopifyProduct[]
 ): ShopifyProduct[] => {
-  const reshapedProducts: ShopifyProduct[] = []
-
-  for (const product of products) {
-    if (product) {
-      const reshapedProduct = reshapeProduct(product)
-      if (reshapedProduct) {
-        reshapedProducts.push(reshapedProduct)
-      }
-    }
-  }
-
-  return reshapedProducts
+  return products.map(product => reshapeProduct(product))
 }

@@ -7,11 +7,12 @@ import { UpdateCartSchema } from '@/db/zod/schemas/UpdateCartSchema'
 import type { EventPayloadMap } from '@xstate/store'
 import { z } from 'zod'
 
-import type { Image, Money, ShopifyProduct, ShopifySelectedOption } from '.'
+import type { Image, Money, ShopifyProduct } from '.'
 export type AddToCartButtonProps = {
   isPending: boolean
   isDisabled: boolean
 }
+
 export type AddToCartFormValues = z.infer<typeof AddToCartSchema>
 export type UpdateCartLineQuantityInput = z.infer<typeof UpdateCartSchema>
 export type RemoveCartLineInput = z.infer<typeof RemoveCartLineSchema>
@@ -66,7 +67,7 @@ export type CartResponse = {
           totalAmount: Money
         }
         merchandise: Omit<CartProductVariant, 'product'> & {
-          product: ShopifyProduct // Her er featuredImage `ShopifyImage | null`
+          product: ShopifyProduct
         }
       }
     }[]
@@ -78,30 +79,6 @@ export type CartActionsResult = {
   message: string
   cart?: Cart | null
   error?: string | null
-}
-export type CartItem = {
-  id: string
-  quantity: number
-  cost: {
-    totalAmount: Money
-  }
-  merchandise: {
-    id: string
-    title: string
-    availableForSale: boolean
-    price: Money
-    image: Image | null
-    compareAtPrice: Money | null
-    selectedOptions: ShopifySelectedOption[]
-    product: ShopifyProduct
-  }
-}
-
-export type CartProduct = {
-  id: string
-  handle: string
-  title: string
-  featuredImage: Image
 }
 
 export type CartActions = {
@@ -123,24 +100,11 @@ export type CartMutationEvent =
   | { type: 'REMOVE_LINE'; input: RemoveCartLineInput }
   | { type: 'CLEAR' }
 
-export type AddToCartResponse = { cartLinesAdd: { cart: CartResponse } }
-export type CartLinesRemoveResponse = {
-  cartLinesRemove: { cart: CartResponse }
-}
-export type CartLinesUpdateResponse = {
-  cartLinesUpdate: { cart: CartResponse }
-}
-export type CartQueryResult = { cart: CartResponse }
 export type CartMutationInput =
   | AddToCartFormValues
   | UpdateCartLineQuantityInput
   | RemoveCartLineInput
   | ClearCartLineInput
-export type InputValidator<T extends CartMutationInput> = (input: T) => void
-export type PerformMutation<T extends CartMutationInput> = (
-  cartId: string,
-  input: T
-) => Promise<CartResponse | null | undefined>
 
 export type CartUserInterfaceContext = {
   open: boolean
@@ -148,8 +112,6 @@ export type CartUserInterfaceContext = {
   lastOp?: LastOperation
   optimisticCartLines: OptimisticCartLines
 }
-
-export type ClearCartMutationEvent = { type: 'CLEAR'; input?: never }
 
 export type LastOperation = {
   type: 'add' | 'update' | 'remove' | 'clear'
@@ -173,17 +135,7 @@ export type ShopifyCart = {
   }
 }
 
-export type RemoveCartLineEvent = {
-  type: 'REMOVE_LINE'
-  input: RemoveCartLineInput
-}
-
-export type ShopifyCartLineEdge = CartResponse['lines']['edges'][number]
 export type UpdateCartLineInput = z.infer<typeof UpdateCartSchema>
-export type UpdateCartLineQuantityEvent = {
-  type: 'UPDATE_LINE'
-  input: UpdateCartLineQuantityInput
-}
 
 export type UserInterfaceEventMap = {
   OPEN: EventPayloadMap
@@ -195,13 +147,3 @@ export type UserInterfaceEventMap = {
   OPTIMISTIC_CART_LINES_UPDATE: { delta: Record<string, number> }
   OPTIMISTIC_CART_CLEAR: EventPayloadMap
 }
-
-/**
- * Defines the function signature for any cart-related server action.
- * @template TInput The specific input type for the mutation, which must extend CartMutationInput.
- * @param {TInput} input The payload for the server action.
- * @returns {Promise<CartActionsResult>} The result from the server action.
- */
-export type CartMutationFn<TInput extends CartMutationInput> = (
-  input: TInput
-) => Promise<CartActionsResult>

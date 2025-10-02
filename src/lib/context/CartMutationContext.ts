@@ -1,4 +1,4 @@
-// Path: src/lib/context/CartMutationContext.ts"
+// Path: src/lib/context/CartMutationContext.ts
 
 import { createActorContext } from '@xstate/react'
 
@@ -17,6 +17,7 @@ export type CartMutationMachine = ReturnType<typeof createCartMutationMachine>
  * ensuring that real actions are provided at the application level.
  * @see CartMutationContext.Provider
  */
+
 export const dummyServerActions: CartActions = {
   addCartLine: async () => {
     throw new Error(
@@ -46,20 +47,27 @@ export const dummyServerActions: CartActions = {
  * to send events and subscribe to its state.
  *
  * @example
- *  In your layout or page component:
+ * In your layout or page component:
  * <CartMutationContext.Provider logic={createCartMutationMachine(serverActions, revalidateCart)}>
- *   <YourApp />
+ * <YourApp />
  * </CartMutationContext.Provider>
  *
  * @example
- *  In a client component:
+ * In a client component:
  * const actorRef = CartMutationContext.useActorRef();
  * const state = CartMutationContext.useSelector(state => state);
  * actorRef.send({ type: 'ADD_LINE', ... });
  */
 export const CartMutationContext = createActorContext<CartMutationMachine>(
-  createCartMutationMachine(dummyServerActions, () => {
-    // The placeholder for revalidateCart should also be explicit.
-    // It shouldn't do anything, as it will be provided for real.
-  })
+  createCartMutationMachine(
+    dummyServerActions,
+    () => {
+      // The placeholder for revalidateCart should also be explicit.
+      // It shouldn't do anything, as it will be provided for real.
+    },
+    // STEG 1: Legg til det manglende tredje argumentet.
+    () => {
+      // Placeholder for setCartId. It shouldn't do anything.
+    }
+  )
 )

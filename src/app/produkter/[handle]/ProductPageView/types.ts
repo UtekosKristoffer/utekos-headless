@@ -6,5 +6,6 @@ export type ProductPageViewProps = {
   allVariants: ShopifyProductVariant[]
   variantImages: Image[]
   relatedProducts: ShopifyProduct[]
+  colorHexMap: Map<string, string>
   onOptionChange: (_optionName: string, _value: string) => void
 }

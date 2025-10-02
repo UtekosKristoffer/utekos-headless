@@ -1,4 +1,5 @@
 // Path: src/lib/utils/either.ts
+
 export class Left<L> {
   readonly value: L
 

@@ -1,18 +1,34 @@
-import { isValidPhoneNumber } from 'react-phone-number-input'
-import { z } from 'zod'
+// Path: src/db/zod/schemas/ContactFormSchema.ts
+
+import { z } from '@/db/zod/zodConfig'
+import { PhoneNumberUtil } from 'google-libphonenumber'
+
+const phoneUtil = PhoneNumberUtil.getInstance()
+
 export const ContactFormSchema = z.object({
-  name: z.string().min(2, { message: 'Navn må være minst 2 tegn.' }),
-  email: z.email({ message: 'Ugyldig e-postadresse.' }),
+  name: z.string().min(2),
+  email: z.email(),
   phone: z
     .string()
-    .refine(value => (value ? isValidPhoneNumber(value) : true), {
-      message: 'Ugyldig telefonnummer.'
-    })
-    .optional(),
-  country: z.string().min(1, { message: 'Vennligst velg et land.' }),
+    .optional()
+    .refine(
+      phone => {
+        if (!phone) return true
+        try {
+          const parsedPhone = phoneUtil.parseAndKeepRawInput(phone, 'NO')
+          return phoneUtil.isValidNumber(parsedPhone)
+        } catch (error) {
+          return false
+        }
+      },
+      {
+        message: 'Ugyldig telefonnummer.'
+      }
+    ),
+  country: z.string().min(1),
   orderNumber: z.string().optional(),
-  message: z.string().min(10, { message: 'Meldingen må være minst 10 tegn.' }),
-  privacy: z.boolean().refine(val => val, {
-    message: 'Du må godta personvernreglene.'
+  message: z.string().min(10),
+  privacy: z.boolean().refine(value => value === true, {
+    message: 'Du må godta personvernreglene for å fortsette.'
   })
 })

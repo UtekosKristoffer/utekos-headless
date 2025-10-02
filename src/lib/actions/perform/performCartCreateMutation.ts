@@ -2,29 +2,37 @@
 'use server'
 
 import { mutationCartCreate } from '@/api/graphql/mutations/cart'
-import { storefrontClient } from '@/clients/storefrontApiClient'
-import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
-import type { AddToCartFormValues, CartResponse } from '@types'
+import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
+import { ShopifyApiError } from '@/lib/errors/ShopifyApiError'
+import type {
+  AddToCartFormValues,
+  CartResponse,
+  ShopifyCreateCartOperation
+} from '@types'
 
 /**
- * Performs cart creation mutation against Shopify Storefront API
- * @why Isolates the GraphQL mutation from business logic, following SRP
- * @returns Raw CartResponse from Shopify API, null if cart creation fails
+ * Performs cart creation mutation using the modern shopifyFetch client.
+ *
+ * @param input - The input containing the initial variant and quantity.
+ * @returns The newly created cart on success.
+ * @throws {ShopifyApiError} When API errors occur during the mutation.
  */
 export const performCartCreateMutation = async (
   input: AddToCartFormValues
 ): Promise<CartResponse | null> => {
-  const { data, errors } = await storefrontClient.request<{
-    cartCreate: { cart: CartResponse }
-  }>(mutationCartCreate, {
+  const result = await shopifyFetch<ShopifyCreateCartOperation>({
+    query: mutationCartCreate,
     variables: {
       lines: [{ merchandiseId: input.variantId, quantity: input.quantity }]
     }
   })
 
-  if (errors) {
-    handleShopifyErrors(errors)
+  if (!result.success) {
+    throw new ShopifyApiError(
+      'Failed to create cart in performCartCreateMutation.',
+      result.error.errors
+    )
   }
 
-  return data?.cartCreate?.cart ?? null
+  return result.body.cartCreate.cart ?? null
 }

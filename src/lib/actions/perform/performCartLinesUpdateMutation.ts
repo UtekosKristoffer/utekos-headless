@@ -1,45 +1,44 @@
 // Path: src/lib/actions/perform/performCartLinesUpdateMutation.ts
-
-/**
- * @fileoverview Performs the mutation to update the quantity of a line in the cart.
- *
- *   This helper accepts a cart identifier and an input containing the line ID
- *   and new quantity.  It sends the GraphQL mutation and returns the updated
- *   cart, throwing if the API reports errors.  Encapsulating this logic
- *   avoids repeating request structure throughout the codebase.
- *
- * @module lib/actions/perform
- */
 'use server'
+
 import { mutationCartLinesUpdate } from '@/api/graphql/mutations/cart'
-import { storefrontClient } from '@/clients/storefrontApiClient'
-import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
-import type { CartLinesUpdateResponse, CartResponse } from '@types'
+import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
+import { ShopifyApiError } from '@/lib/errors/ShopifyApiError'
+import type {
+  CartResponse,
+  ShopifyUpdateCartLineQuantityOperation,
+  UpdateCartLineInput
+} from '@types'
 
 /**
- * Updates a cart line's quantity via the Storefront API.
+ * Updates a cart line's quantity using the modern shopifyFetch client.
+ * This function follows the "throw on failure" error handling pattern.
  *
- * @param {string} cartId - The identifier of the cart whose line should be updated.
- * @param {{ lineId: string, quantity: number }} input - The line identifier and the desired quantity.
- * @returns {Promise<CartResponse | null>} The updated cart, or null if missing.
- * @throws {Error} Propagates any API errors.
+ * @param cartId - The identifier of the cart.
+ * @param input - The line identifier and the desired quantity.
+ * @returns The updated cart on success.
+ * @throws {ShopifyApiError} When API errors occur during the mutation.
  */
 export const performCartLinesUpdateMutation = async (
   cartId: string,
-  input: { lineId: string; quantity: number }
+  input: UpdateCartLineInput
 ): Promise<CartResponse | null> => {
-  const { data, errors } =
-    await storefrontClient.request<CartLinesUpdateResponse>(
-      mutationCartLinesUpdate,
-      {
-        variables: {
-          cartId,
-          lines: [{ id: input.lineId, quantity: input.quantity }]
-        }
-      }
+  const lines = [{ id: input.lineId, quantity: input.quantity }]
+
+  const result = await shopifyFetch<ShopifyUpdateCartLineQuantityOperation>({
+    query: mutationCartLinesUpdate,
+    variables: {
+      cartId,
+      lines
+    }
+  })
+
+  if (!result.success) {
+    throw new ShopifyApiError(
+      'Failed to update lines in cart in performCartLinesUpdateMutation.',
+      result.error.errors
     )
-  if (errors) {
-    handleShopifyErrors(errors)
   }
-  return data?.cartLinesUpdate?.cart ?? null
+
+  return result.body.cartLinesUpdate.cart ?? null
 }

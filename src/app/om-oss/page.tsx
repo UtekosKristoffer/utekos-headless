@@ -6,6 +6,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import UtekosFounder from '../../../public/blue_bag1.webp'
+import { FindUsSection } from './Sections/FindUsSection'
 import { PromiseSection } from './Sections/PromiseSection'
 export const metadata: Metadata = {
   title: 'Om Utekos | Vår historie og løfte til deg',
@@ -143,7 +144,7 @@ export default function AboutPage() {
           <AboutSwiper />
         </div>
       </section>
-
+      <FindUsSection />
       {/*  6. CTA-SEKSJON */}
       <section className='py-24 sm:py-32'>
         <div className='container mx-auto max-w-3xl text-center'>

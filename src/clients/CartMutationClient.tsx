@@ -1,39 +1,38 @@
 // Path: src/clients/CartMutationClient.tsx
 'use client'
 
+import { CartMutationContext } from '@/lib/context/CartMutationContext'
+import { createCartMutationMachine } from '@/lib/state/createCartMutationMachine'
+import type { Cart, CartActions } from '@types'
 import { useQueryClient } from '@tanstack/react-query'
 import * as React from 'react'
-
-import { createCartMutationMachine } from '@/lib/state/createCartMutationMachine'
-import type { CartActions } from '@types'
-import { CartMutationContext } from '../lib/context/CartMutationContext'
 
 export function CartMutationClient({
   actions,
   children,
-  cartId
+  setCartId
 }: {
   actions: CartActions
   children: React.ReactNode
   cartId: string | null
+  setCartId: (cartId: string) => void
 }) {
   const queryClient = useQueryClient()
 
-  // LØSNING: Bruk refetchQueries for å tvinge ny fetch
-  const revalidateCart = React.useCallback(() => {
-    if (cartId) {
-      console.log('Refetcher handlekurv-data for ID:', cartId)
-
-      queryClient.invalidateQueries({
-        queryKey: ['cart', cartId],
-        refetchType: 'active' // Tvinger aktiv refetch
-      })
-    }
-  }, [cartId, queryClient])
+  // NY FUNKSJON: Direkte cache-oppdatering
+  const updateCartCache = React.useCallback(
+    (newCart: Cart) => {
+      if (newCart?.id) {
+        queryClient.setQueryData(['cart', newCart.id], newCart)
+      }
+    },
+    [queryClient]
+  )
 
   const cartMutationMachine = React.useMemo(
-    () => createCartMutationMachine(actions, revalidateCart),
-    [actions, revalidateCart]
+    // ENDRET: Sender inn de nye funksjonene
+    () => createCartMutationMachine(actions, updateCartCache, setCartId),
+    [actions, updateCartCache, setCartId]
   )
 
   return (
@@ -42,5 +41,3 @@ export function CartMutationClient({
     </CartMutationContext.Provider>
   )
 }
-
-export { CartMutationContext }

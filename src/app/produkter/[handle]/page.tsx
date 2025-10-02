@@ -1,18 +1,17 @@
 // Path: src/app/produkter/[handle]/page.tsx
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { getProduct } from '@/api/lib/products/getProduct'
-import { getProducts } from '@/api/lib/products/getProducts'
+import { ProductJsonLd } from './ProductJsonLd'
+import { getQueryClient } from '@/api/lib/getQueryClient' // Sørg for at stien er korrekt
+import {
+  allProductsOptions,
+  productOptions
+} from '@/api/lib/products/productOptions'
 import { ProductPageController } from '@/app/produkter/[handle]/ProductPageController/ProductPageController'
-import { ProductPageSkeleton } from '@/app/produkter/[handle]/ProductPageSkeleton/ProductPageSkeleton'
-import { ProductProvider } from '@/components/providers/ProductProvider'
-import { reshapeMetaobject } from '@/lib/utils/reshapeMetaobject'
 import type { Metadata, ResolvingMetadata } from 'next'
-import { notFound } from 'next/navigation'
-import { Suspense } from 'react'
-
 type MetaDataProps = {
   params: Promise<{ handle: string }>
 }
-
 export async function generateMetadata(
   { params }: MetaDataProps,
   parent: ResolvingMetadata
@@ -63,67 +62,23 @@ export async function generateMetadata(
   }
 }
 
-export default async function ProductPage(props: {
+export default async function ProductPage({
+  params
+}: {
   params: Promise<{ handle: string }>
 }) {
-  const params = await props.params
-  const [product, allProductsResponse] = await Promise.all([
-    getProduct(params.handle),
-    getProducts()
-  ])
+  const { handle } = await params
+  const queryClient = getQueryClient()
 
-  if (!product) return notFound()
-  const relatedProducts =
-    allProductsResponse.success && allProductsResponse.body ?
-      allProductsResponse.body.filter(p => p.handle !== params.handle)
-    : []
-
-  const productWithTransformedMetafields = {
-    ...product,
-    variants: {
-      ...product.variants,
-      edges: product.variants.edges.map(edge => ({
-        ...edge,
-        node: {
-          ...edge.node,
-
-          variantProfileData: reshapeMetaobject(
-            edge.node.metafield?.reference?.fields
-          )
-        }
-      }))
-    }
-  }
-
-  const productJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    'name': product.title,
-    'image': product.featuredImage?.url,
-    'offers': {
-      '@type': 'AggregateOffer',
-      'availability':
-        product.availableForSale ?
-          'https://schema.org/InStock'
-        : 'https://schema.org/OutOfStock',
-      'priceCurrency': product.priceRange.minVariantPrice.currencyCode,
-      'highPrice': product.priceRange.maxVariantPrice.amount,
-      'lowPrice': product.priceRange.minVariantPrice.amount
-    }
-  }
+  void queryClient.prefetchQuery(productOptions(handle))
+  void queryClient.prefetchQuery(allProductsOptions())
 
   return (
-    <ProductProvider>
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
-      />
-      <Suspense fallback={<ProductPageSkeleton />}>
-        <ProductPageController
-          productData={productWithTransformedMetafields}
-          relatedProducts={relatedProducts} // <-- SEND DATA VIDERE
-        />
-      </Suspense>
-    </ProductProvider>
+    <>
+      <ProductJsonLd handle={handle} />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <ProductPageController handle={handle} />
+      </HydrationBoundary>
+    </>
   )
 }

@@ -1,3 +1,5 @@
+// Path src/lib/helpers/validations/accessTokenValidator.ts
+
 import { fromError, ValidationError } from 'zod-validation-error'
 
 import { AccessTokenSchema } from '@/db/zod/schemas/AccessTokenSchema'

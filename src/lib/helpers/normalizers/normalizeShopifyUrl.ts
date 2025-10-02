@@ -24,7 +24,5 @@ export function normalizeShopifyUrl(url: string): Route {
     // Add more mappings as needed
   }
 
-  // Return mapped URL or use the path as-is if no mapping exists
-  // Cast to Route to satisfy Next.js Link type requirements
   return (urlMappings[urlPath] || urlPath) as Route
 }

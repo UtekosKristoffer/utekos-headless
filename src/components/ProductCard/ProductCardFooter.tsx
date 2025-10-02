@@ -25,16 +25,16 @@ export function ProductCardFooter({
   onQuickBuy
 }: ProductCardFooterProps) {
   return (
-    <CardFooter className='p-6 pt-0 flex flex-col gap-4 mt-auto'>
-      <div className='flex justify-between items-center w-full'>
+    <CardFooter className='mt-auto flex flex-col gap-4 p-6 pt-0'>
+      <div className='flex w-full items-center justify-between'>
         <p className='text-2xl font-bold text-white'>{price}</p>
       </div>
-      <div className='flex gap-3 w-full'>
+      <div className='grid grid-cols-2 w-full gap-3'>
         <Link href={productUrl} className='flex-1'>
           <Button
-            variant='outline'
+            variant='default'
             size='default'
-            className='w-full border-primary text-white hover:bg-primary font-medium hover:text-primary-foreground transition-all duration-200 bg-transparent'
+            className='border size-full border-neutral-700  text-white hover:bg-primary font-medium hover:text-primary-foreground transition-all duration-200 bg-transparent'
           >
             Se produkt
           </Button>
@@ -43,12 +43,12 @@ export function ProductCardFooter({
           <Button
             onClick={onQuickBuy}
             variant='default'
-            size='sm'
+            size='default'
             disabled={isPending}
-            className='flex-1 bg-button hover:bg-button/90 text-primary-foreground font-medium transition-all duration-200 hover:shadow-lg hover:shadow-primary/25'
+            className='bg-button border border-primary size-full font-medium text-primary-foreground transition-all duration-200 hover:bg-button/90 hover:shadow-lg hover:shadow-primary/25'
           >
             {isPending ?
-              <Loader2 className='h-4 w-4 animate-spin' />
+              <Loader2 className='size-4 animate-spin' />
             : 'Hurtigkjøp'}
           </Button>
         : <ProductCardSoldOut />}

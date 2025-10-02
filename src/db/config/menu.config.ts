@@ -18,9 +18,17 @@ export const mainMenu: MenuItem[] = [
         items: []
       },
       { title: 'Comfyrobe™', url: '/produkter/comfyrobe', items: [] },
-      { title: 'Utekos Lue', url: '/produkter/utekos-lue', items: [] },
-      { title: 'Utekos Buff', url: '/produkter/utekos-buff', items: [] },
-      { title: 'Kompresjonsbag', url: '/produkter/kompresjonsbag', items: [] },
+      {
+        title: 'Utekos Fiberdun™',
+        url: '/produkter/utekos-fiberdun',
+        items: []
+      },
+      { title: 'Utekos Buff™', url: '/produkter/utekos-buff', items: [] },
+      {
+        title: 'Utekos Stapper™',
+        url: '/produkter/utekos-stapper',
+        items: []
+      },
       { title: 'Se alle produkter', url: '/produkter', items: [] }
     ]
   },
@@ -37,7 +45,7 @@ export const mainMenu: MenuItem[] = [
     url: '/inspirasjon',
     items: [
       { title: 'Hytteliv', url: '/inspirasjon/hytteliv', items: [] },
-      { title: 'Bobil & Camping', url: '/inspirasjon/bobil', items: [] },
+      { title: 'Bobil og camping', url: '/inspirasjon/bobil', items: [] },
       { title: 'Båtliv', url: '/inspirasjon/batliv', items: [] },
       { title: 'Terrassen', url: '/inspirasjon/terrassen', items: [] },
       { title: 'Grillkvelden', url: '/inspirasjon/grillkvelden', items: [] }

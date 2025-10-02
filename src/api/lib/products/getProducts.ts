@@ -1,9 +1,5 @@
-/**
- * @fileoverview Product fetching with Shopify Storefront API integration. Centralized product data fetching with consistent reshaping and caching
- * @module api/lib/products/getProducts
- */
-
-import { TAGS } from '@/api/constants'
+// Path: src/api/lib/products/getProducts.ts
+'use server'
 import { getProductsQuery } from '@/api/graphql/queries/products'
 import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
 import { removeEdgesAndNodes } from '@/lib/utils/removeEdgesAndNodes'
@@ -11,58 +7,55 @@ import { reshapeProducts } from '@/lib/utils/reshapeProducts'
 import type {
   GetProductsParams,
   ShopifyProduct,
-  ShopifyProductsOperation
+  ShopifyProductsOperation,
+  GetProductsResponse
 } from '@types'
-import {
-  unstable_cacheLife as cacheLife,
-  unstable_cacheTag as cacheTag
-} from 'next/cache'
 
-// Definerer en returtype for konsistens
-export type GetProductsResponse = {
-  success: boolean
-  status: number
-  body?: ShopifyProduct[] // Returnerer en liste med våre formede produkter
-  error?: string
+export async function fetchProducts(
+  params: GetProductsParams = {}
+): Promise<ShopifyProduct[]> {
+  const variables = {
+    first: 6,
+    ...params
+  }
+
+  const res = await shopifyFetch<ShopifyProductsOperation>({
+    query: getProductsQuery,
+    variables
+  })
+
+  if (!res.success) {
+    throw new Error(
+      res.error.errors[0]?.message ?? 'Failed to fetch products from Shopify.'
+    )
+  }
+
+  if (!res.body.products) {
+    throw new Error('Invalid response structure from Shopify')
+  }
+
+  const rawProducts = removeEdgesAndNodes(res.body.products)
+  return reshapeProducts(rawProducts)
 }
 
 export async function getProducts(
   params: GetProductsParams = {}
 ): Promise<GetProductsResponse> {
-  'use cache'
-  cacheTag(TAGS.products)
-  cacheLife('days')
-
   try {
-    const { query, reverse, sortKey, first = 100 } = params // Økt default for sitemap
-
-    const variables: GetProductsParams = { first }
-    if (query !== undefined) variables.query = query
-    if (reverse !== undefined) variables.reverse = reverse
-    if (sortKey !== undefined) variables.sortKey = sortKey
-
-    const res = await shopifyFetch<ShopifyProductsOperation>({
-      query: getProductsQuery,
-      variables
-    })
-    if (!res?.body?.data?.products) {
-      throw new Error('Invalid response structure from Shopify')
-    }
-
-    const rawProducts = removeEdgesAndNodes(res.body.data.products)
-    const products = reshapeProducts(rawProducts)
-
+    const products = await fetchProducts(params)
     return {
       success: true,
       status: 200,
       body: products
     }
   } catch (error) {
-    console.error('Failed to fetch products:', error)
+    const errorMessage =
+      error instanceof Error ? error.message : 'An unknown error occurred'
+    console.error('getProducts failed:', errorMessage)
     return {
       success: false,
-      status: 500,
-      error: error instanceof Error ? error.message : 'Unknown error occurred'
+      status: 500, // Eller annen relevant feilkode
+      error: errorMessage
     }
   }
 }

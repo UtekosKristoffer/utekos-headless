@@ -1,4 +1,3 @@
-// Path: src/components/ui/phone-input.tsx
 'use client'
 import { cn } from '@/lib/utils/className'
 import type { E164Number } from 'libphonenumber-js/core'
@@ -27,7 +26,7 @@ export const CustomPhoneInput = React.forwardRef<
     <PhoneInput
       international
       defaultCountry='NO'
-      className={cn('phone-input', className)}
+      className={cn(className)}
       value={value || ''}
       onChange={onChange}
       name={name}

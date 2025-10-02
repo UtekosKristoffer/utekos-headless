@@ -1,10 +1,7 @@
 // Path: types/index.ts
-
 export type { ProductPageAccordionProps } from '@/app/produkter/[handle]/ProductPageAccordion/types'
 export type { ProductControllerProps } from '@/app/produkter/[handle]/ProductPageController/types'
 export type { ProductPageViewProps } from '@/app/produkter/[handle]/ProductPageView/types'
-export type { GetProductsResponse } from '@/api/lib/products/getProducts'
-export type { ProductGridProps } from '@/components/jsx/CardGrid/types'
 export type { ColorSelectorProps } from '@/components/jsx/ColorSelector/types'
 export type {
   Dimension,

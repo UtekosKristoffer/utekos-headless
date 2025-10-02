@@ -1,37 +1,49 @@
 'use client'
 
+import { useProductPage } from '@/hooks/useProductPage'
 import ProductPageView from '@/app/produkter/[handle]/ProductPageView/ProductPageView'
-import { useVariantState } from '@/hooks/useVariantState'
-import { computeVariantImages } from '@/lib/utils/computeVariantImages'
-import type { ProductControllerProps, ShopifyProductVariant } from '@types'
+import { ProductPageSkeleton } from '../ProductPageSkeleton/ProductPageSkeleton'
 
-export function ProductPageController({
-  productData,
-  relatedProducts
-}: ProductControllerProps) {
-  const { variantState, updateVariant, allVariants } =
-    useVariantState(productData)
+export function ProductPageController({ handle }: { handle: string }) {
+  const {
+    productData,
+    selectedVariant,
+    allVariants,
+    variantImages,
+    updateVariant,
+    relatedProducts,
+    swatchColorMap,
+    isLoading,
+    isUpdating
+  } = useProductPage(handle)
 
-  if (!productData?.variants?.edges?.length) {
-    return <div>Laster produktdata...</div>
+  if (isLoading) {
+    return (
+      <>
+        <div>Laster produktsiden...</div>
+        <ProductPageSkeleton />
+      </>
+    )
   }
 
-  const selectedVariant: ShopifyProductVariant | null =
-    variantState.status === 'selected' ? variantState.variant : null
-  if (!selectedVariant) {
-    return <div>Oppdaterer...</div>
+  if (isUpdating) {
+    return (
+      <>
+        <div>Oppdaterer...</div>
+        <ProductPageSkeleton />
+      </>
+    )
   }
 
-  const variantImages = computeVariantImages(productData, selectedVariant)
-
-return (
+  return (
     <ProductPageView
-      productData={productData}
-      selectedVariant={selectedVariant}
+      productData={productData!}
+      selectedVariant={selectedVariant!}
       allVariants={allVariants}
       variantImages={variantImages}
       onOptionChange={updateVariant}
-      relatedProducts={relatedProducts} 
+      relatedProducts={relatedProducts}
+      colorHexMap={swatchColorMap}
     />
   )
 }

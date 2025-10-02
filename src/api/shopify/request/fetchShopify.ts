@@ -1,11 +1,15 @@
 // Path: src/api/shopify/request/fetchShopify.ts
 
+import { isGraphQLErrorResponse } from '@/api/graphql/response/isGraphQLErrorResponse'
+import { isGraphQLSuccessResponse } from '@/api/graphql/response/isGraphQLSuccessResponse'
 import { getShopifyEndpoint, getShopifyToken } from '@/db/config/shopify.config'
-import { isShopifyError } from '@/lib/errors/isShopifyError'
+import type {
+  ExtractVariables,
+  ShopifyFetchResult,
+  ShopifyOperation
+} from '@types'
 
-import type { ExtractVariables } from '@types'
-
-export async function shopifyFetch<T>({
+export async function shopifyFetch<T extends ShopifyOperation<any, any>>({
   headers,
   query,
   variables
@@ -13,7 +17,7 @@ export async function shopifyFetch<T>({
   headers?: HeadersInit
   query: string
   variables?: ExtractVariables<T>
-}): Promise<{ status: number; body: T } | never> {
+}): Promise<ShopifyFetchResult<T['data']>> {
   const endpoint = getShopifyEndpoint()
   const token = getShopifyToken()
 
@@ -35,29 +39,26 @@ export async function shopifyFetch<T>({
       })
     })
 
-    const body = await response.json()
+    const body: unknown = await response.json()
 
-    if (body.errors) {
-      throw body.errors[0]
-    }
-
-    return {
-      status: response.status,
-      body
-    }
-  } catch (e) {
-    if (isShopifyError(e)) {
-      throw {
-        cause: e.cause?.toString() || 'unknown',
-        status: e.status || 500,
-        message: e.message,
-        query
+    if (isGraphQLSuccessResponse<T['data']>(body)) {
+      return {
+        success: true,
+        body: body.data
       }
     }
 
-    throw {
-      error: e,
-      query
+    if (isGraphQLErrorResponse(body)) {
+      console.error('Shopify API Error:', JSON.stringify(body.errors, null, 2))
+      return {
+        success: false,
+        error: body
+      }
     }
+
+    throw new Error('Unknown response structure from Shopify API.')
+  } catch (e) {
+    console.error('Fetch operation failed:', e)
+    throw e
   }
 }

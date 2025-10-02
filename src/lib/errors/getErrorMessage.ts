@@ -31,21 +31,17 @@ export const getErrorMessage = (
   error: Error,
   data?: CartActionsResult
 ): string => {
-  // Validation errors from zod-validation-error already contain Norwegian messages
   if (isValidationErrorLike(error)) {
     return error.toString()
   }
 
-  // Server action results contain contextual error messages
   if (data && !data.success && data.message) {
     return data.message
   }
 
-  // Standard Error instances contain developer or API messages
   if (error.message) {
     return error.message
   }
 
-  // Fallback for completely unknown error types
   return 'En uventet feil oppstod under behandling'
 }

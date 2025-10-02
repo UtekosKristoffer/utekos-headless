@@ -15,7 +15,6 @@ interface SpecialOfferCrossSellProps {
 export function SpecialOfferCrossSell({
   currentProductHandle
 }: SpecialOfferCrossSellProps) {
-  // Komponenten returnerer ingenting hvis man allerede er på Special Edition-siden
   if (currentProductHandle === 'utekos-special-edition') {
     return null
   }
@@ -44,7 +43,7 @@ export function SpecialOfferCrossSell({
           {/* Tekst og Knapp */}
           <div className='flex-grow'>
             <h3 className='flex items-center gap-2 font-semibold text-white'>
-              <SparklesIcon className='h-5 w-5 text-sky-400' />
+              <SparklesIcon className='size-5 text-sky-400' />
               Et siste sjanse-kupp!
             </h3>
             <p className='mt-2 text-sm text-neutral-400'>

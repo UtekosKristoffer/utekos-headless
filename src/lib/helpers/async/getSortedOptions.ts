@@ -1,7 +1,5 @@
 // Path: src/lib/helpers/async/getSortedOptions.ts
 
-/* eslint-disable */
-
 import type { ShopifyProduct } from '@types'
 
 export function getSortedOptions(

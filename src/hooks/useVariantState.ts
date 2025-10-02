@@ -1,3 +1,4 @@
+// Path: src/hooks/useVariantState.ts
 import { createVariantReducer } from '@/lib/utils/createVariantReducer'
 import { findVariantFromUrl } from '@/lib/utils/findVariantfromUrl'
 import { flattenVariants } from '@/lib/utils/flattenVariants'
@@ -13,22 +14,27 @@ export function useVariantState(product: ShopifyProduct) {
   })
 
   const allVariants = useMemo(() => flattenVariants(product) || [], [product])
-
   const searchParams = useSearchParams()
+  const variantIdFromUrl = searchParams.get('variant') // ✅ Ekstraher verdien
 
   useEffect(() => {
     if (variantState.status !== 'idle' || !allVariants.length) {
       return
     }
 
-    const variantFromUrl = findVariantFromUrl(searchParams, allVariants)
+    const variantFromUrl =
+      variantIdFromUrl ?
+        allVariants.find(v => v.id === variantIdFromUrl)
+      : undefined
 
     if (variantFromUrl) {
       dispatch({ type: 'syncFromId', id: variantFromUrl.id })
     } else {
-      dispatch({ type: 'syncFromId', id: allVariants[0]?.id ?? null })
+      const firstAvailableVariant = allVariants.find(v => v.availableForSale)
+      const defaultVariant = firstAvailableVariant || allVariants[0]
+      dispatch({ type: 'syncFromId', id: defaultVariant?.id ?? null })
     }
-  }, [variantState.status, allVariants, searchParams, dispatch])
+  }, [variantState.status, allVariants, variantIdFromUrl])
 
   function updateVariant(optionName: string, value: string) {
     dispatch({ type: 'updateFromOptions', optionName, value })

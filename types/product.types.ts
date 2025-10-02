@@ -4,9 +4,26 @@ import type {
   Metafield,
   MetaobjectReference,
   Money,
-  ShopifyImageConnection,
-  ShopifyResponse
+  ShopifyImageConnection
 } from '.'
+
+export interface ProductDescriptionProps {
+  descriptionHtml: string | undefined | null // This is actually a JSON string
+}
+
+export interface ProductCarouselProps {
+  products: ShopifyProduct[]
+}
+
+export interface RelatedProductsProps {
+  products: ShopifyProduct[]
+}
+
+export interface ProductCardProps {
+  product: ShopifyProduct
+  preferredColor?: string
+  colorHexMap: Map<string, string>
+}
 
 export type ShopifyProduct = {
   id: string
@@ -38,60 +55,17 @@ export type ShopifyProduct = {
   selectedOrFirstAvailableVariant: ShopifyProductVariant
   variants: ProductVariantConnection
 }
-
-export type ShopifyOption = {
-  name: string
-  values: string[]
-}
-
-export type ShopifyCollection = {
-  id: string
-  title: string
-  handle: string
-  description: string
-  products: ShopifyProductConnection
-}
-
 export type ShopifySelectedOption = {
   name: string
   value: string
 }
-export type ShopifyProductConnection = {
-  edges: Array<{
-    node: ShopifyProduct
-  }>
-  pageInfo?: {
-    hasNextPage: boolean
-    hasPreviousPage: boolean
-    startCursor?: string
-    endCursor?: string
-  }
-}
+
 export type ProductOption = {
   name: string
   optionValues: {
     name: string
   }[]
 }
-
-export type ProductVariantInput = {
-  id: string
-  title: string
-  image: Image | null
-  selectedOptions: {
-    name: string
-    value: string
-  }[]
-  price: Money
-  compareAtPrice: Money | null
-  metafield?: MetaobjectReference
-}
-
-export type ProductQueryResponse = {
-  product: ShopifyProduct
-}
-
-export type ProductsQueryResponse = ShopifyResponse<ShopifyProduct[]>
 
 type SelectedOption = {
   name: string
@@ -105,30 +79,8 @@ export type ProductVariantEdge = {
   node: ShopifyProductVariant
 }
 
-export type SelectedOrFirstAvailableVariant = {
-  id: string
-  title: string
-  product: ShopifyProductVariant
-  price: Money
-  selectedOptions: ShopifySelectedOption[]
-  compareAtPrice: Money | null
-  availableForSale: boolean
-  metafield?: MetaobjectReference | null
-}
-
 export type ProductVariantConnection = {
   edges: ProductVariantEdge[]
-}
-
-export type Product = {
-  handle: string
-  updatedAt: string
-  image: {
-    url: string
-    altText: string | null
-    width: number
-    height: number
-  } | null
 }
 
 export type ShopifyProductVariant = {
@@ -145,12 +97,4 @@ export type ShopifyProductVariant = {
   sku: string | undefined
   variantProfile: VariantProfileReference | null
   variantProfileData?: Partial<MetaobjectReference>
-}
-
-export type ProductsData = {
-  products: {
-    edges: Array<{
-      node: ShopifyProduct
-    }>
-  }
 }

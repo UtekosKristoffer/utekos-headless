@@ -270,6 +270,7 @@ export function CustomerNetwork() {
           nodesDraggable={false}
           nodesConnectable={false}
           panOnDrag={false}
+          preventScrolling={false}
           zoomOnScroll={false}
           fitView
           fitViewOptions={{

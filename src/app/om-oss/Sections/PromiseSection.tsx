@@ -19,14 +19,12 @@ import '@xyflow/react/dist/style.css'
 import { Handshake } from 'lucide-react'
 import { memo, useCallback } from 'react'
 
-// === Type-definisjoner ===
 type PromiseTitleData = { label: string }
 type PromiseTextData = { text: string }
 type JunctionData = Record<string, never>
 type CustomEdgeData = { color: string }
 type NodeData = PromiseTitleData | PromiseTextData | JunctionData
 
-// === Dagre Layout ===
 const dagreGraph = new dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}))
 
 const getLayoutedElements = (
@@ -62,7 +60,6 @@ const getLayoutedElements = (
   return { nodes, edges }
 }
 
-// === Initiell data ===
 const initialNodesData: Node<NodeData>[] = [
   {
     id: '1',
@@ -108,7 +105,6 @@ const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
   initialEdgesData
 )
 
-// === Node komponenter ===
 const TitleNodeComponent = memo(({ data }: any) => (
   <div className='flex flex-col items-center gap-4 text-center'>
     <h2 className='text-3xl font-bold tracking-tight'>{data.label}</h2>
@@ -139,15 +135,12 @@ const TextNodeComponent = memo(({ data }: any) => (
 ))
 TextNodeComponent.displayName = 'PromiseTextNode'
 
-// === Custom Edge komponent med bølgeeffekt ===
 const CustomEdgeComponent = memo(
   ({ id, sourceX, sourceY, targetX, targetY, data }: any) => {
     const color = data?.color ?? '#b1b1b7'
 
-    // Beregn kontrollpunkter for kurven
     const midY = sourceY + (targetY - sourceY) * 0.5
 
-    // Lager en glatt S-kurve med SVG path - alltid bølgeformet
     const edgePath = `M ${sourceX},${sourceY} 
                     Q ${sourceX},${midY} ${(sourceX + targetX) / 2},${midY}
                     T ${targetX},${targetY}`
@@ -182,7 +175,6 @@ const CustomEdgeComponent = memo(
 )
 CustomEdgeComponent.displayName = 'CustomEdge'
 
-// === Type-objekter ===
 const nodeTypes = {
   promiseTitle: TitleNodeComponent,
   promiseText: TextNodeComponent
@@ -192,7 +184,6 @@ const edgeTypes = {
   customEdge: CustomEdgeComponent
 } as any
 
-// === Hovedkomponent ===
 export function PromiseSection() {
   const [nodes, setNodes] = useNodesState<Node<NodeData>>(layoutedNodes)
   const [edges, setEdges] = useEdgesState<Edge<CustomEdgeData>>(layoutedEdges)

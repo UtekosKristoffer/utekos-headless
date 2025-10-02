@@ -1,42 +1,39 @@
-//Path: src/lib/actions/perform/performCartClearMutation.ts
-
-/**
- * @fileoverview Performs the Storefront API mutation to clear all lines in a cart.
- *
- *   This helper encapsulates the low‑level details of sending a GraphQL mutation
- *   to Shopify.  It accepts a cart identifier, issues the mutation with an
- *   empty lines array and returns the raw cart data.  Errors from the API
- *   are thrown so that higher layers can handle them consistently.  This
- *   separation allows business logic to remain free of API plumbing.
- *
- * @module lib/actions/perform
- */
+// Path: src/lib/actions/perform/performCartClearMutation.ts
 'use server'
 
 import { mutationCartLinesUpdate } from '@/api/graphql/mutations/cart'
-import { storefrontClient } from '@/clients/storefrontApiClient'
-import { handleShopifyErrors } from '@/lib/errors/handleShopifyErrors'
-import type { CartLinesUpdateResponse, CartResponse } from '@types'
+import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
+import { ShopifyApiError } from '@/lib/errors/ShopifyApiError'
+import type {
+  CartResponse,
+  ShopifyUpdateCartLineQuantityOperation
+} from '@types'
 
 /**
- * Executes a clear‑cart mutation against the Storefront API.
+ * Executes a clear-cart mutation using the modern shopifyFetch client.
+ * This function follows the "throw on failure" error handling pattern.
  *
- * @param {string} cartId - The identifier of the cart whose contents should be deleted.
- * @returns {Promise<CartResponse | null>} The updated cart object on success, or null if the response is missing.
- * @throws {Error} Propagates any errors returned by the API.
+ * @param cartId - The identifier of the cart to clear.
+ * @returns The updated (empty) cart on success.
+ * @throws {ShopifyApiError} When API errors occur during the mutation.
  */
 export const performCartClearMutation = async (
   cartId: string
 ): Promise<CartResponse | null> => {
-  const { data, errors } =
-    await storefrontClient.request<CartLinesUpdateResponse>(
-      mutationCartLinesUpdate,
-      {
-        variables: { cartId, lines: [] } // Sending an empty array clears the cart.
-      }
+  const result = await shopifyFetch<ShopifyUpdateCartLineQuantityOperation>({
+    query: mutationCartLinesUpdate,
+    variables: {
+      cartId,
+      lines: []
+    }
+  })
+
+  if (!result.success) {
+    throw new ShopifyApiError(
+      'Failed to clear cart in performCartClearMutation.',
+      result.error.errors
     )
-  if (errors) {
-    handleShopifyErrors(errors)
   }
-  return data?.cartLinesUpdate?.cart ?? null
+
+  return result.body.cartLinesUpdate.cart ?? null
 }

@@ -71,15 +71,22 @@ export function UpsellItem({ product, withDiscountHint }: UpsellItemProps) {
         <div className='flex-grow'>
           <p className='text-sm font-medium'>{product.title}</p>
           <div className='flex items-center gap-2 text-xs text-muted-foreground'>
-            <span className='line-through'>
-              {formatPrice(product.priceRange.minVariantPrice)}
-            </span>
-            <span className='font-bold text-white'>
-              {formatPrice({
-                amount: discountedPrice.toString(),
-                currencyCode: 'NOK'
-              })}
-            </span>
+            {showDiscountHint ?
+              <>
+                <span className='line-through'>
+                  {formatPrice(product.priceRange.minVariantPrice)}
+                </span>
+                <span className='font-bold text-white'>
+                  {formatPrice({
+                    amount: discountedPrice.toString(),
+                    currencyCode: 'NOK'
+                  })}
+                </span>
+              </>
+            : <span className='font-bold text-white'>
+                {formatPrice(product.priceRange.minVariantPrice)}
+              </span>
+            }
           </div>
         </div>
         <Button size='sm' onClick={handleAddToCart} disabled={!selectedVariant}>

@@ -11,7 +11,7 @@ export function HeaderLogo() {
           width={45}
           height={45}
           priority
-          className='rounded-full border border-white/10'
+          className='rounded-full ring ring-white/30'
         />
       </Link>
     </div>

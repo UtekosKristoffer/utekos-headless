@@ -1,13 +1,7 @@
+// Path: src/app/kontaktskjema/SupportForm.tsx
 'use client'
 
 import { SupportPageButton } from '@/app/kontaktskjema/Buttons/SupportPageButton'
-import { zodResolver } from '@hookform/resolvers/zod'
-import dynamic from 'next/dynamic'
-import Link from 'next/link'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
-import { z } from 'zod'
-
 import {
   Form,
   FormControl,
@@ -29,6 +23,17 @@ import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import { countries } from '@/constants/countries'
 import { ContactFormSchema } from '@/db/zod/schemas/ContactFormSchema'
+import {
+  submitContactForm,
+  type ContactFormState
+} from '@/lib/actions/submitContactForm'
+import { zodResolver } from '@hookform/resolvers/zod'
+import dynamic from 'next/dynamic'
+import Link from 'next/link'
+import { useActionState, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import type { z } from 'zod'
 
 const DynamicPhoneInput = dynamic(
   () => import('@/components/ui/phone-input').then(mod => mod.CustomPhoneInput),
@@ -43,28 +48,57 @@ const DynamicPhoneInput = dynamic(
   }
 )
 
+// STEG 1: Definer skjematypen eksplisitt
+type ContactFormData = z.infer<typeof ContactFormSchema>
+
+const initialState: ContactFormState = {
+  message: ''
+}
+
 export function SupportForm() {
-  const form = useForm<z.infer<typeof ContactFormSchema>>({
+  const [state, formAction, isPending] = useActionState(
+    submitContactForm,
+    initialState
+  )
+
+  const form = useForm<ContactFormData>({
     resolver: zodResolver(ContactFormSchema),
     defaultValues: {
       name: '',
       email: '',
       phone: '',
+      country: '',
       orderNumber: '',
       message: '',
       privacy: false
     }
   })
 
-  async function onSubmit(values: z.infer<typeof ContactFormSchema>) {
-    console.log(values)
-    toast.success('Takk for din henvendelse!')
-    form.reset()
-  }
+  useEffect(() => {
+    if (state.message) {
+      if (state.errors) {
+        toast.error('Validering feilet', {
+          description: 'Vennligst sjekk feltene med feilmeldinger.'
+        })
+        Object.entries(state.errors).forEach(([key, value]) => {
+          if (value && value.length > 0) {
+            // STEG 3: Bruk den eksplisitte typen her også
+            form.setError(key as keyof ContactFormData, {
+              type: 'server',
+              message: value[0] ?? 'Det oppstod en ukjent feil.'
+            })
+          }
+        })
+      } else {
+        toast.success(state.message)
+        form.reset()
+      }
+    }
+  }, [state, form])
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
+      <form action={formAction} className='space-y-6'>
         <FormField
           control={form.control}
           name='email'
@@ -210,10 +244,10 @@ export function SupportForm() {
         />
         <SupportPageButton
           type='submit'
-          isBusy={form.formState.isSubmitting}
-          disabled={form.formState.isSubmitting}
+          isBusy={isPending}
+          disabled={isPending}
         >
-          {form.formState.isSubmitting ? 'Sender...' : 'Snakk med Utekos'}
+          {isPending ? 'Sender...' : 'Snakk med Utekos'}
         </SupportPageButton>
       </form>
     </Form>

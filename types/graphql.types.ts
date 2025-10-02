@@ -1,14 +1,5 @@
 // Path: types/graphql.types.ts
 
-export type GraphQLErrorLocation = {
-  line: number
-  column: number
-}
-
-export type GraphQLResponse<T> =
-  | GraphQLErrorResponse
-  | GraphQLSuccessResponse<T>
-
 export type GraphQLError = {
   message: string
   extensions?: {

@@ -1,8 +1,10 @@
+// Path: src/app/produkter/[handle]/ProductPageView/ProductPageView.tsx
+
 'use client'
+
 import { ProductPageAccordion } from '@/app/produkter/[handle]/ProductPageAccordion/ProductPageAccordion'
 import { renderOptionComponent } from '@/app/produkter/[handle]/ProductPageView/helpers/renderOptionComponent'
 import { RelatedProducts } from '@/app/produkter/[handle]/RelatedProducts/RelatedProducts'
-import { SmartRealTimeActivity } from '@/app/produkter/components/SmartRealTimeActivity'
 import { SpecialOfferCrossSell } from '@/app/produkter/components/SpecialOfferCrossSell'
 import { AddToCart } from '@/components/cart/AddToCart'
 import {
@@ -24,7 +26,19 @@ import { getSortedOptions } from '@/lib/helpers/async/getSortedOptions'
 import type { ProductPageViewProps, ShopifyProduct } from '@types'
 import { ShieldAlertIcon } from 'lucide-react'
 import dynamic from 'next/dynamic'
-import { Suspense } from 'react'
+import { ProductDescription } from './ProductDescription'
+
+const SmartRealTimeActivity = dynamic(
+  () =>
+    import('@/app/produkter/components/SmartRealTimeActivity').then(
+      mod => mod.SmartRealTimeActivity
+    ),
+  {
+    ssr: false,
+    loading: () => <div className='h-6' />
+  }
+)
+
 const ProductGallery = dynamic(
   () =>
     import('@/components/jsx/ProductGallery').then(mod => mod.ProductGallery),
@@ -42,16 +56,21 @@ export default function ProductPageView({
   allVariants,
   variantImages,
   onOptionChange,
-  relatedProducts
+  relatedProducts,
+  colorHexMap
 }: ProductPageViewProps) {
-  const { title, description, options } = productData
+  const { title, options } = productData
   const variantProfile = selectedVariant.variantProfileData
   const subtitle = variantProfile?.subtitle
   const optionOrder = ['Størrelse', 'Farge']
   const sortedOptions = getSortedOptions(options, optionOrder)
   const metadata = productMetadata[productData.handle]
+  const productDescriptionHtml = variantProfile?.description?.value as
+    | string
+    | undefined
+
   return (
-    <main className='container mt-10 mx-auto p-4 md:p-8'>
+    <main className='container mx-auto mt-10 p-4 md:p-8'>
       <Breadcrumb className='mb-8'>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -71,28 +90,26 @@ export default function ProductPageView({
       <ProductPageGrid>
         <GalleryColumn>
           <div className='mb-8 text-left'>
-            <h1 className='text-3xl font-bold md:text-4xl'>{title}</h1>
+            <h1 className='text-fluid-headline font-bold'>{title}</h1>
             {subtitle && typeof subtitle === 'string' && (
               <p className='mt-2 text-lg text-foreground-on-dark/80'>
                 {subtitle}
               </p>
             )}
           </div>
-          <div className='md:sticky md:top-24 h-fit'>
+          <div className='h-fit md:sticky md:top-24'>
             <div className='mx-auto max-w-xl'>
-              <div className='aspect-video w-full rounded-2xl bg-sidebar-foreground p-4'>
-                <Suspense fallback={<div>Laster produktbilder...</div>}>
-                  <ProductGallery
-                    title={title}
-                    images={variantImages.map(image => ({
-                      id: image.id,
-                      url: image.url,
-                      altText: image.altText ?? '',
-                      width: image.width ?? 0,
-                      height: image.height ?? 0
-                    }))}
-                  />
-                </Suspense>
+              <div className='aspect-video w-full rounded-2xl border border-neutral-700 bg-sidebar-foreground p-4'>
+                <ProductGallery
+                  title={title}
+                  images={variantImages.map(image => ({
+                    id: image.id,
+                    url: image.url,
+                    altText: image.altText ?? '',
+                    width: image.width ?? 0,
+                    height: image.height ?? 0
+                  }))}
+                />
               </div>
             </div>
           </div>
@@ -104,13 +121,12 @@ export default function ProductPageView({
           />
 
           {productData.handle === 'utekos-special-edition' && (
-            <p className='flex items-center gap-2 text-lg font-bold text-amber-400 mt-4'>
-              <ShieldAlertIcon className='h-5 w-5' />
+            <p className='mt-4 flex items-center gap-2 text-lg font-bold text-amber-400'>
+              <ShieldAlertIcon className='size-5' />
               Kun 11 igjen på lager!
             </p>
           )}
 
-          {/* 2. Viser sanntidsaktivitet for ALLE produkter som er aktivert i config-filen */}
           {metadata?.showActivity && (
             <SmartRealTimeActivity baseViewers={metadata.baseViewers ?? 3} />
           )}
@@ -118,40 +134,33 @@ export default function ProductPageView({
             <h2 id='product-options' className='sr-only'>
               Produktvalg
             </h2>
-            <div className='mt-30 space-y-8'>
+            <div className='mt-30 flex flex-col gap-8'>
               {sortedOptions.map((option: ShopifyProduct['options'][number]) =>
                 renderOptionComponent({
                   option,
                   allVariants,
                   selectedVariant,
-                  onOptionChange
+                  onOptionChange,
+                  colorHexMap,
+                  productHandle: productData.handle // <-- LEGG TIL DENNE LINJEN
                 })
               )}
             </div>
-
             <div className='mt-8'>
-              <Suspense fallback={<div>Laster produktvalg...</div>}>
-                <AddToCart selectedVariant={selectedVariant} />
-              </Suspense>
+              <AddToCart selectedVariant={selectedVariant} />
             </div>
-            <SpecialOfferCrossSell currentProductHandle={productData.handle} />
-            <article
-              aria-label='Produktbeskrivelse'
-              className='prose prose-invert mt-12 max-w-none text-foreground-on-dark/80'
-            >
-              <div dangerouslySetInnerHTML={{ __html: description }} />
-            </article>
+            <ProductDescription descriptionHtml={productDescriptionHtml} />
           </section>
         </OptionsColumn>
       </ProductPageGrid>
-      <Suspense fallback={<div>Laster produktinfo...</div>}>
-        <ProductPageAccordion variantProfile={variantProfile} />
-      </Suspense>
+      <div className='mt-16 sm:mt-24'>
+        <SpecialOfferCrossSell currentProductHandle={productData.handle} />
+      </div>
+
+      <ProductPageAccordion variantProfile={variantProfile} />
 
       {relatedProducts && relatedProducts.length > 0 && (
-        <Suspense fallback={<div>Laster forslag...</div>}>
-          <RelatedProducts products={relatedProducts} />
-        </Suspense>
+        <RelatedProducts products={relatedProducts} />
       )}
     </main>
   )

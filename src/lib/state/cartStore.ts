@@ -19,7 +19,7 @@ const removeZeroQuantityLines = (
     Object.entries(lines).filter(([, quantity]) => quantity > 0)
   )
 }
-
+ 
 export const cartStore = createStore<
   CartUserInterfaceContext,
   UserInterfaceEventMap,

@@ -1,52 +1,37 @@
 // Path: src/lib/actions/clearCartAction.ts
-
-/**
- * @fileoverview Server action for clearing the entire cart.
- *
- *   The clear‑cart operation deletes all lines in the current cart.  It does
- *   not accept any arguments; passing arguments will cause validation to
- *   fail.  This module defines a single action that delegates validation
- *   and API mutation to helpers, focusing the action’s role on coordinating
- *   the high‑level steps.  Encapsulating this logic promotes reuse and
- *   ensures consistent behavior across the application.
- *
- * @module lib/actions/clearCartAction
- */
 'use server'
 
-import { createCartMutationOrchestrator } from '@/lib/actions/createCartMutationOrchestrator'
 import { performCartClearMutation } from '@/lib/actions/perform/performCartClearMutation'
 import { mapThrownErrorToActionResult } from '@/lib/errors/mapThrownErrorToActionResult'
+import { MissingCartIdError } from '@/lib/errors/MissingCartIdError'
+import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
+import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import { validateClearCartInput } from '@/lib/helpers/validations/validateClearCartInput'
 import type { CartActionsResult } from '@types'
 
 /**
- * Internal orchestrated function for clearing a cart.  It validates the input
- * (which should be empty), performs the mutation and returns normalized data.
+ * Orchestrates clearing the current cart of all items.
+ * This server action follows the Single Responsibility and Step-down principles.
  *
- * @private
- */
-const clearCartOrThrow = createCartMutationOrchestrator(
-  validateClearCartInput,
-  performCartClearMutation
-)
-
-/**
- * Clears the current cart of all items.
- *
- *   This action does not take any parameters; passing anything will result in
- *   a validation error.  It returns a success result with the emptied cart or
- *   a failure result detailing the validation or API error.  The separation
- *   allows callers to remain agnostic about the underlying process.
- *
- * @returns {Promise<CartActionsResult>} A promise that resolves to a normalized action result.
+ * @returns A promise that resolves to a normalized action result.
  */
 export const clearCartAction = async (): Promise<CartActionsResult> => {
   try {
-    // Pass an empty object to satisfy the orchestrator’s input type.
-    const cart = await clearCartOrThrow({})
-    return { success: true, message: 'Cart cleared successfully.', cart }
-  } catch (e: unknown) {
+    validateClearCartInput({})
+
+    const cartId = await getCartIdFromCookie()
+    if (!cartId) {
+      throw new MissingCartIdError()
+    }
+    const rawCart = await performCartClearMutation(cartId)
+    if (!rawCart) {
+      throw new Error('Tømming av handlekurv returnerte ingen data.')
+    }
+
+    const cart = normalizeCart(rawCart)
+
+    return { success: true, message: 'Handlekurven er tømt.', cart }
+  } catch (e) {
     console.error('An error occurred in clearCartAction:', e)
     return mapThrownErrorToActionResult(e)
   }

@@ -43,7 +43,8 @@
     "src/api/types/event",
     "src/api/types/state",
     "src/components/WelcomeToast",
-    "src/db/config"
+    "src/db/config",
+    "src/components/ProductCard/ProductCarouseltsx"
   ],
-  "exclude": ["node_modules", "alpha/**/*"]
+  "exclude": ["node_modules", ".github/**/*", "alpha/**/*"]
 }

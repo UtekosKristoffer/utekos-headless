@@ -9,7 +9,6 @@ const nextConfig: NextConfig = {
       'xstate',
       '@tanstack/react-query',
       'swiper',
-      '@shopify/storefront-api-client',
       '@xstate/store'
     ]
   },

@@ -6,16 +6,13 @@ import { isShopifyErrorResponse } from '@/lib/errors/isShopifyErrorResponse'
 import { MissingCartIdError } from '@/lib/errors/MissingCartIdError'
 
 export const extractErrorMessage = (thrown: unknown): string => {
-  // Validation errors from zod-validation-error already contain Norwegian messages
   if (isValidationErrorLike(thrown)) {
     return thrown.toString()
   }
-
   if (thrown instanceof MissingCartIdError) {
-    return 'Handleposen din ble ikke funnet.'
+    return 'Handlingen kan ikke utføres fordi en gyldig handlekurv mangler.'
   }
 
-  // For Shopify API errors, we need to extract from the formatted response
   if (isShopifyErrorResponse(thrown)) {
     return 'En feil oppstod ved kommunikasjon med Shopify.'
   }

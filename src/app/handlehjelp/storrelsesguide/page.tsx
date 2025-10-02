@@ -11,11 +11,11 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Ruler } from 'lucide-react'
 import type { Metadata } from 'next'
+import { jsonLd } from './jsonLd'
 import Image from 'next/image'
 import ComfyFrontSkisse from '../../../../public/ComfyFrontSkisse.png'
 import UtekosSkisseStrlLarge from '../../../../public/Utekos_Skisse_Str_L_mettet.svg'
-
-import type { FAQPage, WithContext } from 'schema-dts'
+import { comfyrobeData, utekosData } from './data'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Størrelsesguide for Utekos | Finn din perfekte passform',
@@ -43,65 +43,6 @@ export const metadata: Metadata = {
   }
 }
 
-const jsonLd: WithContext<FAQPage> = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  'mainEntity': [
-    {
-      '@type': 'Question',
-      'name': 'Hvilken størrelse Utekos-plagg skal jeg velge?',
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text':
-          'Våre plagg er designet for en romslig og komfortabel passform. Vi anbefaler å se på målene for hvert spesifikke produkt i vår størrelsesguide. Et godt tips er å sammenligne målene med et favorittplagg du har hjemme.'
-      }
-    },
-    {
-      '@type': 'Question',
-      'name': 'Hva er forskjellen i størrelse mellom Utekos Dun og Comfyrobe?',
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text':
-          'Comfyrobe har en mer detaljert størrelsesinndeling (XS/S, M/L, L/XL), mens Utekos Dun og Mikrofiber kommer i to hovedstørrelser (Medium og Large) designet for å passe et bredt spekter av kroppsfasonger. Se de nøyaktige målene for hvert produkt på vår størrelsesguide-side.'
-      }
-    },
-    {
-      '@type': 'Question',
-      'name': 'Hvordan måler jeg for å finne riktig størrelse?',
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text':
-          'Legg et lignende plagg du eier flatt på et gulv eller bord. Mål punkter som total lengde, brystbredde og ermelengde, og sammenlign disse med målene i våre tabeller for å finne den beste matchen.'
-      }
-    }
-  ]
-}
-
-const comfyrobeData = [
-  {
-    measurement: 'Total lengde (fra HSP til front)',
-    xs: '97 cm',
-    ml: '105 cm',
-    lxl: '113 cm'
-  },
-  { measurement: 'Glidelåslengde', xs: '85 cm', ml: '90 cm', lxl: '95 cm' },
-  { measurement: 'Bredde over bryst', xs: '65 cm', ml: '71 cm', lxl: '77 cm' },
-  { measurement: 'Ermelengde', xs: '57 cm', ml: '63 cm', lxl: '66 cm' },
-  { measurement: 'Skulderbredde', xs: '53 cm', ml: '62 cm', lxl: '71 cm' },
-  {
-    measurement: 'Mansjettbredde',
-    xs: '14 1/2 cm',
-    ml: '18 cm',
-    lxl: '18 1/2 cm'
-  }
-  // ... fyll inn resten av radene fra bildet
-]
-
-const utekosData = [
-  { measurement: 'Lengde (til hals)', m: '170 cm', l: '200 cm' },
-  { measurement: 'Senter til ermetupp', m: '85 cm', l: '100 cm' },
-  { measurement: 'Flatmål (bunn)', m: '66 cm', l: '75 cm' }
-]
 export default function SizeGuidePage() {
   return (
     <>

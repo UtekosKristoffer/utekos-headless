@@ -1,5 +1,13 @@
+// Path: src/components/cart/AddToCartButton/SubmitButton.tsx
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from '@/components/ui/tooltip'
 import clsx from 'clsx'
 import { PlusIcon } from 'lucide-react'
+
 export function SubmitButton({
   availableForSale,
   selectedVariantId,
@@ -17,9 +25,18 @@ export function SubmitButton({
 
   if (!availableForSale) {
     return (
-      <button disabled className={clsx(buttonClasses, disabledClasses)}>
-        Utsolgt
-      </button>
+      <TooltipProvider delayDuration={100}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button disabled className={clsx(buttonClasses, disabledClasses)}>
+              Utsolgt
+            </button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Denne kombinasjonen er utsolgt. Velg en annen variant.</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     )
   }
 
@@ -33,7 +50,7 @@ export function SubmitButton({
         <div className='absolute left-0 ml-4'>
           <PlusIcon className='h-5' />
         </div>
-        Add To Cart
+        Legg i handleposen
       </button>
     )
   }
@@ -44,13 +61,14 @@ export function SubmitButton({
       disabled={isPending || isDisabled}
       aria-label='Legg i handleposen'
       className={clsx(buttonClasses, {
-        'hover:opacity-90': true
+        'hover:opacity-90': true,
+        [disabledClasses]: isDisabled
       })}
     >
       <div className='absolute left-0 ml-4'>
         <PlusIcon className='h-5' />
       </div>
-      {isPending ? 'Adding...' : 'Legg i handleposen'}
+      {isPending ? 'Legger til...' : 'Legg i handleposen'}
     </button>
   )
 }

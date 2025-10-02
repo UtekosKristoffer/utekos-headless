@@ -1,21 +1,20 @@
-// Path: src/components/ProductCard/ProductVariantSelector.tsx
 'use client'
+
 import { SizeLabel } from '@/components/ProductCard/SizeLabel'
 import type { ShopifyProduct } from '@types'
 import type React from 'react'
 
 interface ProductVariantSelectorProps {
   options: ShopifyProduct['options']
-  colorMap: Record<string, { name: string; code: string }>
   selectedOptions: Record<string, string>
   onOptionChange: React.Dispatch<React.SetStateAction<Record<string, string>>>
+  colorHexMap: Map<string, string>
 }
-
 export function ProductVariantSelector({
   options,
-  colorMap,
   selectedOptions,
-  onOptionChange
+  onOptionChange,
+  colorHexMap
 }: ProductVariantSelectorProps) {
   return (
     <div className='flex flex-col gap-4'>
@@ -25,15 +24,15 @@ export function ProductVariantSelector({
           <div key={option.name}>
             {option.name.toLowerCase() === 'størrelse' ?
               <SizeLabel />
-            : <span className='text-sm text-white mb-2 uppercase tracking-wide font-medium'>
+            : <span className='mb-2 text-sm font-medium uppercase tracking-wide text-white'>
                 {option.name}
               </span>
             }
-            <div className='flex items-center gap-2 mt-2 flex-wrap'>
+            <div className='mt-2 flex flex-wrap items-center gap-2'>
               {option.name.toLowerCase() === 'farge' ?
                 option.optionValues.map(value => {
-                  const colorData = colorMap[value.name]
-                  if (!colorData) return null
+                  const colorCode = colorHexMap.get(value.name)
+                  if (!colorCode) return null
 
                   return (
                     <button
@@ -46,13 +45,15 @@ export function ProductVariantSelector({
                           [option.name]: value.name
                         }))
                       }}
-                      className={`w-6 h-6 rounded-full border-2 transition-all duration-200 hover:scale-110 cursor-pointer ${
+                      className={`btn-variant-swatch hover:scale-110 ${
                         selectedOptions[option.name] === value.name ?
-                          'border-border ring-2 ring-primary/30'
-                        : 'border-primary hover:border-primary/50'
+                          // Selected
+                          'border-border ring-1 ring-border'
+                          // Unselected
+                        : 'border-primary hover:border-primary/50 hover:ring-2 hover:ring-border'
                       }`}
-                      style={{ backgroundColor: colorData.code }}
-                      title={colorData.name}
+                      style={{ backgroundColor: colorCode ?? undefined }}
+                      title={value.name}
                     />
                   )
                 })
@@ -67,10 +68,10 @@ export function ProductVariantSelector({
                         [option.name]: value.name
                       }))
                     }}
-                    className={`px-3 py-1 text-sm border rounded transition-all duration-200 hover:border-white cursor-pointer ${
+                    className={`btn-variant-option hover:border-white ${
                       selectedOptions[option.name] === value.name ?
-                        'border-border bg-primary/10 text-white font-medium'
-                      : 'border-primary text-white'
+                        'border-border font-medium text-white'
+                      : 'border-primary text-white hover:border-primary/50'
                     }`}
                   >
                     {value.name}

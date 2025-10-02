@@ -1,13 +1,11 @@
+// Path: src/app/produkter/%5Bhandle%5D/RelatedProducts/RelatedProducts.tsx
 'use client'
 
 import { ProductCard } from '@/components/ProductCard/ProductCard'
-import type { ShopifyProduct } from '@types'
+import { createColorHexMap } from '@/lib/helpers/shared/createColorHexMap'
+import type { RelatedProductsProps } from '@types'
 import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-
-interface RelatedProductsProps {
-  products: ShopifyProduct[]
-}
 
 export function RelatedProducts({ products }: RelatedProductsProps) {
   if (!products || products.length === 0) {
@@ -40,11 +38,15 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
         }}
         className='!pb-4'
       >
-        {products.map(product => (
-          <SwiperSlide key={product.id} className='flex h-auto'>
-            <ProductCard product={product} />
-          </SwiperSlide>
-        ))}
+        {products.map(product => {
+          const colorHexMap = createColorHexMap(product)
+          return (
+            <SwiperSlide key={product.id} className='flex h-auto'>
+              {/* STEG 3: Send colorHexMap videre som en prop */}
+              <ProductCard product={product} colorHexMap={colorHexMap} />
+            </SwiperSlide>
+          )
+        })}
       </Swiper>
     </section>
   )

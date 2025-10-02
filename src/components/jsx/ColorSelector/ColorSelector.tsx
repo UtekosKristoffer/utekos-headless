@@ -1,3 +1,5 @@
+// Path: src/components/jsx/ColorSelector/ColorSelector.tsx
+
 'use client'
 
 import { OptionButton } from '@/components/jsx/OptionButton'
@@ -8,7 +10,8 @@ export function ColorSelector({
   values,
   variants,
   selectedVariant,
-  onSelect
+  onSelect,
+  colorHexMap
 }: ColorSelectorProps) {
   const selectedSize = selectedVariant.selectedOptions.find(
     opt => opt.name.toLowerCase() === 'størrelse'
@@ -17,11 +20,10 @@ export function ColorSelector({
   return (
     <div className='space-y-3'>
       {values.map(colorValue => {
-        const currentlySelectedVariant = variants.find(variant => {
+        const variantForProperties = variants.find(variant => {
           const hasColor = variant.selectedOptions.some(
             opt => opt.value === colorValue
           )
-
           const hasSize =
             !selectedSize
             || variant.selectedOptions.some(opt => opt.value === selectedSize)
@@ -29,12 +31,11 @@ export function ColorSelector({
         })
 
         const variantProfileRef =
-          currentlySelectedVariant?.variantProfile?.reference
+          variantForProperties?.variantProfile?.reference
 
         const colorLabel = variantProfileRef?.colorLabel?.value || colorValue
         const backgroundColor = variantProfileRef?.backgroundColor?.value
-        const swatchDotColor =
-          variantProfileRef?.swatchHexcolorForVariant?.value
+        const swatchDotColor = colorHexMap.get(colorValue)
 
         const isSelected = selectedVariant.selectedOptions.some(
           opt => opt.value === colorValue
@@ -48,12 +49,16 @@ export function ColorSelector({
           >
             <span className='font-semibold'>{colorLabel}</span>
             <div
-              className='relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-white/10'
-              style={{ background: backgroundColor || 'transparent' }} // Legger til fallback
+              className='color-swatch-container'
+              style={{ '--swatch-bg': backgroundColor } as React.CSSProperties}
             >
               <div
-                className='absolute inset-1 rounded-full border-2 border-orange-500 transition-colors data-[selected=true]:border-white'
-                style={{ backgroundColor: swatchDotColor || 'transparent' }} // Legger til fallback
+                className='color-swatch-dot'
+                style={
+                  {
+                    '--swatch-dot-color': swatchDotColor
+                  } as React.CSSProperties
+                }
                 data-selected={isSelected}
               />
             </div>

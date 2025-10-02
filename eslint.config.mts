@@ -26,7 +26,6 @@ const eslintConfig = [
         'error',
         { capIsNew: false, newIsCap: true, properties: true }
       ],
-      'no-duplicate-imports': 'error',
       'no-self-compare': 'error',
       'no-this-before-super': 'error',
       'no-useless-assignment': 'error',

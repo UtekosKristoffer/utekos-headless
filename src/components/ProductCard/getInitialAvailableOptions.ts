@@ -15,24 +15,7 @@ export function getInitialAvailableOptions(
         variant.selectedOptions.map(opt => [opt.name, opt.value])
       )
     }
-  }
+  } 
 
   return buildFallbackOptions(product.options)
-}
-
-/**
- * ALTERNATIV VERSJON: Med memoization for ekstrem ytelse
- * Bruk denne hvis samme produkt sjekkes flere ganger
- */
-const memoCache = new WeakMap<ShopifyProduct, Record<string, string>>()
-
-export function getInitialAvailableOptionsMemoized(
-  product: ShopifyProduct
-): Record<string, string> {
-  const cached = memoCache.get(product)
-  if (cached) return cached
-
-  const result = getInitialAvailableOptions(product)
-  memoCache.set(product, result)
-  return result
 }

@@ -6,8 +6,8 @@ export type SizeSelectorProps = {
   variants: ShopifyProductVariant[]
   selectedVariant: ShopifyProductVariant
   onSelect: (_optionName: string, _value: string) => void
+  productHandle: string // <-- LEGG TIL DENNE LINJEN
 }
-
 export type Dimension = {
   value: number
   unit: string

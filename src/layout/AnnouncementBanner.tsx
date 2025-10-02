@@ -5,13 +5,23 @@ import { ArrowRightIcon, XIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
-const BANNER_STORAGE_KEY = 'utekos-special-edition-banner-dismissed'
+const BANNER_STORAGE_KEY = 'utekos-special-edition-banner-dismissed-timestamp'
+const BANNER_EXPIRATION_MS = 3 * 24 * 60 * 60 * 1000
+
 export function AnnouncementBanner() {
   const [isDismissed, setIsDismissed] = useState(true)
 
   useEffect(() => {
-    const dismissed = localStorage.getItem(BANNER_STORAGE_KEY)
-    if (dismissed !== 'true') {
+    const dismissedTimestamp = localStorage.getItem(BANNER_STORAGE_KEY)
+
+    if (dismissedTimestamp) {
+      const dismissedTime = parseInt(dismissedTimestamp, 10)
+      const now = Date.now()
+      if (now - dismissedTime > BANNER_EXPIRATION_MS) {
+        setIsDismissed(false)
+        localStorage.removeItem(BANNER_STORAGE_KEY) // Fjern gammel verdi
+      }
+    } else {
       setIsDismissed(false)
     }
   }, [])
@@ -20,7 +30,8 @@ export function AnnouncementBanner() {
     e.preventDefault() // Forhindrer at Link-en aktiveres når man lukker.
     e.stopPropagation()
     setIsDismissed(true)
-    localStorage.setItem(BANNER_STORAGE_KEY, 'true')
+
+    localStorage.setItem(BANNER_STORAGE_KEY, Date.now().toString())
   }
 
   return (
@@ -30,11 +41,11 @@ export function AnnouncementBanner() {
           initial={{ y: '-100%', opacity: 0 }}
           animate={{ y: '0%', opacity: 1 }}
           exit={{ y: '-100%', opacity: 0 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} // En myk, Vercel-inspirert "ease"
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className='relative'
         >
           <Link
-            href='/produkter/utekos-special-edition' // - bg-gradient-to-r from-neutral-900 to-neutral-800
+            href='/produkter/utekos-special-edition'
             className='group block w-full bg-button p-3 text-center text-sm font-medium text-white transition-colors hover:text-neutral-200'
           >
             <span className='mr-2'>

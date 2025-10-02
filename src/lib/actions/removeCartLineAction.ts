@@ -1,60 +1,45 @@
-//Path: src/lib/actions/removeCartLineAction.ts
-
+// Path: src/lib/actions/removeCartLineAction.ts
 'use server'
 
-/**
- * @fileoverview Server action for removing a line item from the cart.
- *
- *   This module exposes a single function that orchestrates removal by
- *   validating the input, executing the API mutation and formatting any
- *   errors.  The action only performs the high‑level steps implied by its
- *   name and relies on helpers for the underlying details.  Isolating these
- *   concerns helps maintain clarity and ensures that AI assistants can
- *   understand the intent and expected outcomes of the code.
- *
- * @module lib/actions/removeCartLineAction
- */
-'use server'
-
-import { createCartMutationOrchestrator } from '@/lib/actions/createCartMutationOrchestrator'
 import { performCartLinesRemoveMutation } from '@/lib/actions/perform/performCartLinesRemoveMutation'
 import { mapThrownErrorToActionResult } from '@/lib/errors/mapThrownErrorToActionResult'
+import { MissingCartIdError } from '@/lib/errors/MissingCartIdError'
+import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
+import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import { validateRemoveCartLineInput } from '@/lib/helpers/validations/validateRemoveCartLineInput'
-import type { CartActionsResult } from '@types'
+import type { CartActionsResult, RemoveCartLineInput } from '@types'
 
 /**
- * Internal orchestrated function for removing a cart line.  This constant
- * composes validation and mutation logic and is not exported.
+ * Orchestrates removing a single line item from the cart.
+ * This server action follows the Single Responsibility and Step-down principles.
  *
- * @private
+ * @param input - An object containing the identifier of the line to remove.
+ * @returns The result of the cart operation.
  */
-const removeCartLineOrThrow = createCartMutationOrchestrator(
-  validateRemoveCartLineInput,
-  performCartLinesRemoveMutation
-)
-
-/**
- * Removes a single line item from the cart.
- *
- *   This action ensures that the line identifier is valid, performs the
- *   underlying mutation and translates any thrown errors into a
- *   standardized {@link CartActionsResult}.  Having a dedicated action
- *   simplifies other parts of the application that call it by hiding the
- *   orchestration details.
- *
- * @param {{ lineId: string }} input - An object containing the identifier of the line to remove.
- * @returns {Promise<CartActionsResult>} Resolves with the updated cart on success; otherwise includes
- *   error details mapped by {@link mapThrownErrorToActionResult}.
- */
-export const removeCartLineAction = async (input: {
-  lineId: string
-}): Promise<CartActionsResult> => {
+export const removeCartLineAction = async (
+  input: RemoveCartLineInput
+): Promise<CartActionsResult> => {
   try {
-    const cart = await removeCartLineOrThrow(input)
-    return { success: true, message: 'Line item removed.', cart }
-  } catch (e: unknown) {
+    validateRemoveCartLineInput(input)
+
+    const cartId = await getCartIdFromCookie()
+    if (!cartId) {
+      throw new MissingCartIdError()
+    }
+
+    const rawCart = await performCartLinesRemoveMutation(cartId, input)
+    if (!rawCart) {
+      throw new Error('Fjerning av vare fra handlekurv returnerte ingen data.')
+    }
+
+    const cart = normalizeCart(rawCart)
+
+    return { success: true, message: 'Vare fjernet fra handlekurv.', cart }
+  } catch (e) {
     console.error(
-      `An error occurred in removeCartLineAction for input: ${JSON.stringify(input)}`,
+      `An error occurred in removeCartLineAction for input: ${JSON.stringify(
+        input
+      )}`,
       e
     )
     return mapThrownErrorToActionResult(e)

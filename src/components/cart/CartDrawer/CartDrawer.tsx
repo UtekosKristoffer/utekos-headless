@@ -25,13 +25,9 @@ const CartTrigger = dynamic(
 
 export function CartDrawer(): React.JSX.Element {
   const open = useCartOpen()
-
   const { data: cart } = useCartQuery()
-
   const handleStateChange = createDrawerStateHandler(cartStore)
-
   const subtotalString = cart?.cost?.subtotalAmount?.amount ?? '0'
-
   const subtotal = parseFloat(subtotalString)
 
   return (

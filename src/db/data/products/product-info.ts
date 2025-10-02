@@ -2,15 +2,22 @@ import { COMFYROBE_HANDLE } from './comfyrobe/details'
 import { UTEKOS_DUN_HANDLE } from './dawn/info'
 import { UTEKOS_MIKROFIBER_HANDLE } from './microfiber/details'
 import { SPECIAL_EDITION_HANDLE } from './special-edition/details'
+import { UTEKOS_FIBERDUN_HANDLE } from './fiberdun/info'
 
 export const UTEKOS_DUN_PUBLIC_URL = 'https://www.utekos.no/products/utekos-dun'
 
-export const handles = ['utekos-dun', 'utekos-mikrofiber', 'comfyrobe']
+export const handles = [
+  'utekos-dun',
+  'utekos-mikrofiber',
+  'comfyrobe',
+  'utekos-fiberdun'
+]
 export const FEATURED_PRODUCT_HANDLES = [
   UTEKOS_DUN_HANDLE,
   UTEKOS_MIKROFIBER_HANDLE,
   COMFYROBE_HANDLE,
-  SPECIAL_EDITION_HANDLE
+  SPECIAL_EDITION_HANDLE,
+  UTEKOS_FIBERDUN_HANDLE
 ]
 export type FeaturedProductHandle = (typeof FEATURED_PRODUCT_HANDLES)[number]
 
@@ -18,7 +25,8 @@ export const ALL_PRODUCT_HANDLES = [
   UTEKOS_DUN_HANDLE,
   UTEKOS_MIKROFIBER_HANDLE,
   COMFYROBE_HANDLE,
-  SPECIAL_EDITION_HANDLE
+  SPECIAL_EDITION_HANDLE,
+  UTEKOS_FIBERDUN_HANDLE
 ] as const
 export type AllProductHandles = (typeof ALL_PRODUCT_HANDLES)[number]
 
@@ -26,7 +34,8 @@ export const PRODUCT_HANDLE_TO_ID: Record<AllProductHandles, number> = {
   [UTEKOS_DUN_HANDLE]: 7710040391928,
   [UTEKOS_MIKROFIBER_HANDLE]: 7710040752376,
   [COMFYROBE_HANDLE]: 7710040391929,
-  [SPECIAL_EDITION_HANDLE]: 7710040391931
+  [SPECIAL_EDITION_HANDLE]: 7710040391931,
+  [UTEKOS_FIBERDUN_HANDLE]: 9240112693496
 }
 
 export const PRODUCT_HANDLE_TO_PUBLIC_URL: Record<AllProductHandles, string> = {
@@ -35,7 +44,8 @@ export const PRODUCT_HANDLE_TO_PUBLIC_URL: Record<AllProductHandles, string> = {
     'https://www.utekos.no/produkter/utekos-mikrofiber',
   [COMFYROBE_HANDLE]: 'https://www.utekos.no/products/comfyrobe',
   [SPECIAL_EDITION_HANDLE]:
-    'https://www.utekos.no/products/utekos-special-edition'
+    'https://www.utekos.no/products/utekos-special-edition',
+  [UTEKOS_FIBERDUN_HANDLE]: 'https://www.utekos.no/products/utekos-fiberdun'
 }
 
 export const PRODUCT_ID_TO_HANDLE: Record<number, AllProductHandles> = {

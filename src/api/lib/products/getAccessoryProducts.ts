@@ -1,14 +1,23 @@
 import { getProducts } from '@/api/lib/products/getProducts'
-import type { GetProductsResponse } from '@types'
+import type { ShopifyProduct } from '@types'
 
+export async function getAccessoryProducts(): Promise<ShopifyProduct[]> {
+  try {
+    const response = await getProducts({
+      first: 5,
+      query: 'tag:"tilbehør"'
+    })
 
-/**
- * Henter en liste med produkter som er tagget som 'tilbehør' i Shopify.
- */
-export async function getAccessoryProducts(): Promise<GetProductsResponse> {
-  // Bruker den eksisterende getProducts-funksjonen med en spesifikk query
-  return getProducts({
-    first: 5, // Antar at det ikke er så mange tilbehørsprodukter
-    query: 'tag:"tilbehør"'
-  })
+    // Sjekk for suksess og returner kun 'body', som er arrayen
+    if (response.success && response.body) {
+      return response.body
+    }
+
+    // Returner en tom array hvis kallet ikke var en suksess
+    return []
+  } catch (error) {
+    console.error('Failed to fetch accessory products:', error)
+    // Returner en tom array ved en uventet feil
+    return []
+  }
 }

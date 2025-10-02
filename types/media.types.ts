@@ -12,10 +12,6 @@ export type ShopifyImageConnection = {
   edges: ShopifyImageEdge[]
 }
 
-export type ShopifyMediaConnection = {
-  edges: ShopifyImageEdge[]
-}
-
 export type Image = {
   id: string
   url: string

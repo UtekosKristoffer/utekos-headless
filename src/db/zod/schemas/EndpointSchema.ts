@@ -1,10 +1,11 @@
+// Path: src/db/zod/schemas/EndpointSchema.ts
+
 import { z } from '@/db/zod/zodConfig'
 
 export const EndpointSchema = z
   .object({
-    url: z.string().url({ message: 'URL er ikke gyldig' }),
+    url: z.string().url({ message: 'URL er ikke gyldig' })
   })
-  .brand<'Endpoint'>();
+  .brand<'Endpoint'>()
 
-  export const EndpointJSONSchema = z.toJSONSchema(EndpointSchema);
-
+export const EndpointJSONSchema = z.toJSONSchema(EndpointSchema)

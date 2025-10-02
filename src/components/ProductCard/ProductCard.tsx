@@ -1,6 +1,6 @@
 // Path: src/components/ProductCard/ProductCard.tsx
-/* eslint-disable no-duplicate-imports */
 'use client'
+
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
@@ -10,23 +10,22 @@ import { formatPrice } from '@/lib/utils/formatPrice'
 import type { ShopifyProduct } from '@types'
 import type { Route } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import type React from 'react'
 import { useEffect, useMemo, useState } from 'react'
 import { toast } from 'sonner'
-import { colorMap } from './colorMap'
 import { getInitialOptionsForProduct } from './getInitialOptionsForProduct'
 import { ProductCardFooter } from './ProductCardFooter'
 import { ProductCardHeader } from './ProductCardHeader'
+
 interface ProductCardProps {
   product: ShopifyProduct
   preferredColor?: string
+  colorHexMap: Map<string, string>
 }
-export function ProductCard({ product }: { product: ShopifyProduct }) {
+
+export function ProductCard({ product, colorHexMap }: ProductCardProps) {
   const [selectedOptions, setSelectedOptions] = useState(() => {
-    console.log(
-      `Initialiserer ${product.handle} med:`,
-      getInitialOptionsForProduct(product)
-    )
     return getInitialOptionsForProduct(product)
   })
 
@@ -109,33 +108,30 @@ export function ProductCard({ product }: { product: ShopifyProduct }) {
   }, [lastError])
 
   return (
-    <Card className='h-full flex flex-col bg-card-foreground border border-border/20 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 w-full overflow-hidden group'>
-      <CardContent className='p-0 relative'>
-        <Badge
-          variant='secondary'
-          className='absolute top-4 left-4 z-10 border border-muted-foreground bg-[#020244] text-white font-medium px-3 py-1 text-xs tracking-wide'
-        >
-          UNISEX
-        </Badge>
-        <AspectRatio
-          ratio={2 / 3}
-          className='w-full overflow-hidden rounded-t-lg'
-        >
-          <Image
-            src={imageUrl}
-            alt={altText}
-            fill
-            className='object-cover transition-transform duration-300 group-hover:scale-105'
-          />
-        </AspectRatio>
+    <Card className='product-card bg-sidebar-foreground group flex h-full flex-col'>
+      <CardContent className='relative p-0'>
+        <Link href={productUrl} aria-label={`Se produkt ${product.title}`}>
+          <AspectRatio
+            ratio={2 / 3}
+            className='w-full overflow-hidden rounded-t-lg'
+          >
+            <Image
+              src={imageUrl}
+              alt={altText}
+              fill
+              className='product-card-image'
+            />
+          </AspectRatio>
+        </Link>
       </CardContent>
 
       <ProductCardHeader
         title={product.title}
         options={product.options}
-        colorMap={colorMap}
+        colorHexMap={colorHexMap}
         selectedOptions={selectedOptions}
         onOptionChange={setSelectedOptions}
+        productUrl={productUrl}
       />
 
       <ProductCardFooter

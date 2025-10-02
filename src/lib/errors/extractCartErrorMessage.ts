@@ -15,12 +15,7 @@ import { extractErrorMessage } from './extractErrorMessage'
  */
 
 export const extractCartErrorMessage = (thrown: unknown): string => {
-  /**
-   * @param baseMessage - Extracted human-readable cart error message in Norwegian
-   */
   const baseMessage = extractErrorMessage(thrown)
-
-  // For generic messages, provide cart-specific context
   if (baseMessage === 'En uventet feil oppstod') {
     return 'En uventet feil oppstod under behandling av handleposen'
   }
