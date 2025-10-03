@@ -1,5 +1,5 @@
 /* eslint-disable quotes */
-// Path: src/components/ui/Button.tsx
+// Path: src/components/ui/button.tsx
 import { cn } from '@/lib/utils/className'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'

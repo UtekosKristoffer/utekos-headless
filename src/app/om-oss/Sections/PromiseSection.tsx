@@ -17,10 +17,10 @@ import {
 } from '@xyflow/react'
 import '@xyflow/react/dist/style.css'
 import { Handshake } from 'lucide-react'
-import { memo, useCallback } from 'react'
+import { memo, useCallback, useState } from 'react'
 
 type PromiseTitleData = { label: string }
-type PromiseTextData = { text: string }
+type PromiseTextData = { text: string; color: string }
 type JunctionData = Record<string, never>
 type CustomEdgeData = { color: string }
 type NodeData = PromiseTitleData | PromiseTextData | JunctionData
@@ -31,16 +31,16 @@ const getLayoutedElements = (
   nodes: Node<NodeData>[],
   edges: Edge<CustomEdgeData>[]
 ): { nodes: Node<NodeData>[]; edges: Edge<CustomEdgeData>[] } => {
-  dagreGraph.setGraph({ rankdir: 'TB', nodesep: 100, ranksep: 80 })
+  dagreGraph.setGraph({ rankdir: 'TB', nodesep: 120, ranksep: 160 })
 
   nodes.forEach(node => {
     const width =
-      node.type === 'promiseTitle' ? 256
-      : node.type === 'promiseText' ? 256
+      node.type === 'promiseTitle' ? 280
+      : node.type === 'promiseText' ? 300
       : 1
     const height =
-      node.type === 'promiseTitle' ? 160
-      : node.type === 'promiseText' ? 150
+      node.type === 'promiseTitle' ? 180
+      : node.type === 'promiseText' ? 180
       : 1
     dagreGraph.setNode(node.id, { width, height })
   })
@@ -48,12 +48,30 @@ const getLayoutedElements = (
 
   dagre.layout(dagreGraph)
 
+  // Finn midtpunktet av tekstboksene
+  const textNodes = nodes.filter(n => n.type === 'promiseText')
+  let minX = Infinity
+  let maxX = -Infinity
+
+  textNodes.forEach(node => {
+    const nodeData = dagreGraph.node(node.id)
+    minX = Math.min(minX, nodeData.x)
+    maxX = Math.max(maxX, nodeData.x)
+  })
+
+  const graphCenterX = (minX + maxX) / 2
+
   nodes.forEach(node => {
     const nodeWithPosition = dagreGraph.node(node.id)
     node.position = {
       x: nodeWithPosition.x - dagreGraph.node(node.id).width / 2,
       y: nodeWithPosition.y - dagreGraph.node(node.id).height / 2
     }
+
+    if (node.type === 'promiseTitle') {
+      node.position.x = graphCenterX - 140 + 50
+    }
+
     return node
   })
 
@@ -71,14 +89,18 @@ const initialNodesData: Node<NodeData>[] = [
     id: '2',
     type: 'promiseText',
     data: {
-      text: 'Vårt løfte er en dypere form for komfort. Nøye utvalgte materialer gir en umiddelbar følelse av varme og velvære, slik at du kan nyte øyeblikket lenger.'
+      text: 'Vårt løfte er en dypere form for komfort. Nøye utvalgte materialer gir en umiddelbar følelse av varme og velvære, slik at du kan nyte øyeblikket lenger.',
+      color: '#60a5fa'
     },
     position: { x: 0, y: 0 }
   },
   {
     id: '3',
     type: 'promiseText',
-    data: { text: 'Se på det som en varig investering i din egen hygge.' },
+    data: {
+      text: 'Se på det som en varig investering i din egen hygge.',
+      color: '#f472b6'
+    },
     position: { x: 0, y: 0 }
   }
 ]
@@ -107,37 +129,75 @@ const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
 
 const TitleNodeComponent = memo(({ data }: any) => (
   <div className='flex flex-col items-center gap-4 text-center'>
-    <h2 className='text-3xl font-bold tracking-tight'>{data.label}</h2>
-    <div className='relative flex h-16 w-16 items-center justify-center rounded-full border border-amber-400/30 bg-amber-400/10 text-amber-400'>
-      <Handshake className='h-8 w-8' />
-      {/* Skygge-effekt under ikonet ved handle-posisjonen */}
-      <div className='absolute -bottom-1 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-amber-400/30 blur-md' />
+    <h2 className='text-4xl font-bold tracking-tight text-foreground'>
+      {data.label}
+    </h2>
+    <div className='relative'>
+      {/* Ambient glow */}
+      <div
+        className='absolute inset-0 rounded-full opacity-40 blur-xl'
+        style={{ background: '#f59e0b' }}
+      />
+      <div className='relative flex h-20 w-20 items-center justify-center rounded-full border-2 border-amber-400/40 bg-amber-400/10 text-amber-400 transition-all duration-300 hover:scale-110 hover:border-amber-400/60'>
+        <Handshake className='h-10 w-10' />
+      </div>
     </div>
     <Handle
       type='source'
       position={Position.Bottom}
       className='!bg-transparent !border-none !w-0 !h-0'
-      style={{ bottom: '30px' }}
+      style={{ bottom: '20px' }}
     />
   </div>
 ))
 TitleNodeComponent.displayName = 'PromiseTitleNode'
 
-const TextNodeComponent = memo(({ data }: any) => (
-  <div className='w-64 rounded-lg bg-sidebar-foreground p-6 text-center text-muted-foreground shadow-lg'>
-    <Handle
-      type='target'
-      position={Position.Top}
-      className='!bg-transparent !border-none !w-0 !h-0'
-    />
-    <p className='text-lg leading-8'>{data.text}</p>
-  </div>
-))
+const TextNodeComponent = memo(({ data }: any) => {
+  const [isHovered, setIsHovered] = useState(false)
+  const glowColor = data.color || '#60a5fa'
+
+  return (
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className='relative w-[300px] rounded-xl border border-neutral-800 bg-sidebar-foreground p-6 text-center shadow-lg transition-all duration-300 hover:border-neutral-700 hover:-translate-y-1 overflow-hidden'
+    >
+      {/* Aurora gradient effect */}
+      <div
+        className='absolute -inset-x-2 -inset-y-12 blur-2xl transition-opacity duration-300'
+        style={{
+          opacity: isHovered ? 0.25 : 0.15,
+          background: `radial-gradient(120% 120% at 50% 0%, transparent 30%, ${glowColor} 100%)`
+        }}
+      />
+
+      <Handle
+        type='target'
+        position={Position.Top}
+        className='!bg-transparent !border-none !w-0 !h-0'
+      />
+      <p className='relative z-10 text-base leading-relaxed text-muted-foreground'>
+        {data.text}
+      </p>
+
+      {/* Subtle border glow on hover */}
+      <div
+        className='absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 pointer-events-none'
+        style={{ opacity: isHovered ? 1 : 0 }}
+      >
+        <div
+          className='absolute inset-0 rounded-xl blur-sm opacity-20'
+          style={{ background: glowColor }}
+        />
+      </div>
+    </div>
+  )
+})
 TextNodeComponent.displayName = 'PromiseTextNode'
 
 const CustomEdgeComponent = memo(
   ({ id, sourceX, sourceY, targetX, targetY, data }: any) => {
-    const color = data?.color ?? '#b1b1b7'
+    const color = data?.color ?? '#60a5fa'
 
     const midY = sourceY + (targetY - sourceY) * 0.5
 
@@ -152,13 +212,14 @@ const CustomEdgeComponent = memo(
           d={edgePath}
           style={{
             stroke: color,
-            strokeWidth: 1.5,
-            fill: 'none'
+            strokeWidth: 2,
+            fill: 'none',
+            opacity: 0.6
           }}
           markerEnd=''
         />
         <EdgeLabelRenderer>
-          {/* Skygge-effekt ved endepunktet */}
+          {/* Glow at endpoint */}
           <div
             style={{
               position: 'absolute',
@@ -166,7 +227,7 @@ const CustomEdgeComponent = memo(
               background: color,
               pointerEvents: 'none'
             }}
-            className='nodrag nopan h-3 w-3 rounded-full opacity-50 blur-md'
+            className='nodrag nopan h-3 w-3 rounded-full opacity-60 blur-md'
           />
         </EdgeLabelRenderer>
       </>
@@ -199,22 +260,44 @@ export function PromiseSection() {
   )
 
   return (
-    <section className='py-24 sm:py-32'>
-      <div className='h-[600px] w-full rounded-lg border border-neutral-800 bg-[hsl(0,0%,4%,1)]'>
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          nodeTypes={nodeTypes}
-          edgeTypes={edgeTypes}
-          fitView
-          proOptions={{ hideAttribution: true }}
-          zoomOnScroll={false}
-          panOnDrag={false}
-          preventScrolling={false}
-          nodesDraggable={false}
+    <section className='relative py-24 sm:py-32 overflow-hidden'>
+      {/* Ambient background glow */}
+      <div className='absolute inset-0 -z-10 opacity-20'>
+        <div
+          className='absolute left-1/3 top-1/4 h-[500px] w-[500px] blur-3xl'
+          style={{
+            background: 'radial-gradient(circle, #60a5fa 0%, transparent 70%)'
+          }}
         />
+        <div
+          className='absolute right-1/3 bottom-1/4 h-[500px] w-[500px] blur-3xl'
+          style={{
+            background: 'radial-gradient(circle, #f472b6 0%, transparent 70%)'
+          }}
+        />
+      </div>
+
+      <div className='container mx-auto max-w-7xl px-4'>
+        <div className='relative h-[700px] w-full rounded-2xl border border-neutral-800 bg-[hsl(0,0%,4%,1)] shadow-2xl overflow-hidden'>
+          {/* Subtle top gradient accent */}
+          <div className='absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-400/50 to-transparent' />
+
+          <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            nodeTypes={nodeTypes}
+            edgeTypes={edgeTypes}
+            fitView
+            fitViewOptions={{ padding: 0.3, minZoom: 0.9, maxZoom: 1 }}
+            proOptions={{ hideAttribution: true }}
+            zoomOnScroll={false}
+            panOnDrag={false}
+            preventScrolling={false}
+            nodesDraggable={false}
+          />
+        </div>
       </div>
     </section>
   )

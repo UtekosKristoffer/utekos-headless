@@ -1,6 +1,6 @@
 // Path: src/app/magasinet/@articles/5-enkle-tips-for-a-forlenge-terrassesongen.tsx
 
-import TerrasseTipsFlow from '@/app/magasinet/5-enkle-tips-for-a-forlenge-terrassesongen/TerrasseTipsFlow'
+import { TerrasseTipsSection } from '@/app/magasinet/5-enkle-tips-for-a-forlenge-terrassesongen/TerrasseTipsSection'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
@@ -11,7 +11,7 @@ import Link from 'next/link'
 
 export const TerrasseArticle = () => {
   return (
-    <article className='prose prose-invert prose-lg max-w-5xl mx-auto'>
+    <article className='prose prose-invert prose-lg max-w-7xl mx-auto'>
       <figure className='!my-12'>
         <Image
           src={TerrasseImage}
@@ -32,7 +32,7 @@ export const TerrasseArticle = () => {
       </p>
 
       <div className='not-prose my-12'>
-        <TerrasseTipsFlow />
+        <TerrasseTipsSection />
       </div>
 
       <p>

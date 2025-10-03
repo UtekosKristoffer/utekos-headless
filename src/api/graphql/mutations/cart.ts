@@ -1,6 +1,6 @@
 // Path: api/graphql/mutations/cart.ts
 
-import cartFragment from '@/lib/fragments/cartFragment'
+import cart from '@/lib/fragments/cartFragment'
 
 export const mutationCartCreate = /* GraphQL */ `
   mutation cartCreate($lines: [CartLineInput!]) {
@@ -10,7 +10,7 @@ export const mutationCartCreate = /* GraphQL */ `
       }
     }
   }
-  ${cartFragment}
+  ${cart}
 `
 
 export const mutationCartLinesAdd = /* GraphQL */ `
@@ -21,7 +21,7 @@ export const mutationCartLinesAdd = /* GraphQL */ `
       }
     }
   }
-  ${cartFragment}
+  ${cart}
 `
 export const mutationCartLinesRemove = /* GraphQL */ `
   mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
@@ -31,7 +31,7 @@ export const mutationCartLinesRemove = /* GraphQL */ `
       }
     }
   }
-  ${cartFragment}
+  ${cart}
 `
 export const mutationCartLinesUpdate = /* GraphQL */ `
   mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
@@ -41,7 +41,7 @@ export const mutationCartLinesUpdate = /* GraphQL */ `
       }
     }
   }
-  ${cartFragment}
+  ${cart}
 `
 export const mutationCartDiscountCodesUpdate = /* GraphQL */ `
   mutation cartDiscountCodesUpdate($cartId: ID!, $discountCodes: [String!]) {
@@ -55,5 +55,5 @@ export const mutationCartDiscountCodesUpdate = /* GraphQL */ `
       }
     }
   }
-  ${cartFragment}
+  ${cart}
 `

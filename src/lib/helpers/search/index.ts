@@ -1,4 +1,5 @@
-import type { SearchGroup, SearchItem } from '@/app/search-index/route'
+// KORRIGERT: Riktig import-sti
+import type { SearchGroup, SearchItem } from '@/app/api/search-index/route'
 
 export type ClientSearchItem = SearchItem
 
@@ -26,8 +27,6 @@ const TITLE_OVERRIDES: Record<string, string> = {
   '/gaveguide': 'Gaveguide'
 }
 
-// === Hjelpere ================================================================
-
 function groupKeyFor(pathname: string): { key: string; label: string } {
   const first = pathname.split('/').filter(Boolean)[0] ?? ''
   switch (first) {
@@ -54,7 +53,7 @@ function deriveTitleFromPath(pathname: string): string {
   if (override) return override
   const parts = pathname.split('/').filter(Boolean)
   if (parts.length === 0) return 'Forsiden'
-  const last = parts[parts.length - 1] ?? '' // <= aldri undefined
+  const last = parts[parts.length - 1] ?? ''
   return toTitleCaseFromSlug(last)
 }
 
@@ -62,10 +61,7 @@ function idFromPath(pathname: string) {
   return pathname === '/' ? 'root' : pathname.replace(/\//g, '__')
 }
 
-// === Indeksbygging ===========================================================
-
 export async function buildSearchIndex(allPaths: string[]) {
-  // Sørg for at alle foreldre finnes
   const normalized = new Set<string>(['/'])
   for (const p of allPaths) {
     const parts = p.split('/').filter(Boolean)
@@ -76,7 +72,6 @@ export async function buildSearchIndex(allPaths: string[]) {
     }
   }
 
-  // Lag noder
   const nodes: SearchTreeNode[] = Array.from(normalized)
     .sort((a, b) => a.localeCompare(b))
     .map(pathname => {
@@ -97,18 +92,18 @@ export async function buildSearchIndex(allPaths: string[]) {
       }
     })
 
-  // Knyt foreldre/barn
   const byId = new Map(nodes.map(n => [n.id, n]))
-  const roots: SearchTreeNode[] = []
+  const rootNodes: SearchTreeNode[] = [] // Vi samler toppnivå-nodene her
+
   for (const n of nodes) {
     if (n.parentId && byId.has(n.parentId)) {
       byId.get(n.parentId)!.children.push(n)
     } else {
-      roots.push(n)
+      // Hvis en node ikke har en gyldig forelder, er den en toppnivå-node
+      rootNodes.push(n)
     }
   }
 
-  // Bygg grupper (toppnivå + forside)
   const groupsMap = new Map<string, SearchGroup>()
   function ensureGroup(pathname: string) {
     const keyLabel = groupKeyFor(pathname)
@@ -122,11 +117,9 @@ export async function buildSearchIndex(allPaths: string[]) {
     return groupsMap.get(keyLabel.key)!
   }
 
-  for (const n of nodes) {
-    if (n.depth === 0 || n.depth === 1) {
-      const g = ensureGroup(n.path)
-      g.items.push(mapNodeToSearchItem(n))
-    }
+  for (const n of rootNodes) {
+    const g = ensureGroup(n.path)
+    g.items.push(mapNodeToSearchItem(n))
   }
 
   const searchGroups = Array.from(groupsMap.values()).map(g => ({
@@ -137,7 +130,6 @@ export async function buildSearchIndex(allPaths: string[]) {
   return { groups: searchGroups }
 }
 
-// Én vei fra intern Node -> klientformat
 function mapNodeToSearchItem(n: SearchTreeNode): SearchItem {
   const directChildren = n.children
     .filter(c => c.depth === n.depth + 1)
@@ -150,7 +142,6 @@ function mapNodeToSearchItem(n: SearchTreeNode): SearchItem {
     path: n.path,
     parentId: n.parentId,
     keywords: n.keywords,
-
     ...(directChildren.length > 0 ? { children: directChildren } : {})
   }
 }

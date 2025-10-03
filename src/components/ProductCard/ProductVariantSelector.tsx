@@ -1,15 +1,8 @@
 'use client'
 
 import { SizeLabel } from '@/components/ProductCard/SizeLabel'
-import type { ShopifyProduct } from '@types'
-import type React from 'react'
+import type { ProductVariantSelectorProps } from '@types'
 
-interface ProductVariantSelectorProps {
-  options: ShopifyProduct['options']
-  selectedOptions: Record<string, string>
-  onOptionChange: React.Dispatch<React.SetStateAction<Record<string, string>>>
-  colorHexMap: Map<string, string>
-}
 export function ProductVariantSelector({
   options,
   selectedOptions,

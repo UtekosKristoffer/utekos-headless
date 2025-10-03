@@ -8,10 +8,7 @@ import {
 } from '@/components/ui/hover-card'
 import { ExternalLink, Ruler } from 'lucide-react'
 import Link from 'next/link'
-
-interface SizeLabelProps {
-  className?: string
-}
+import type { SizeLabelProps } from '@types'
 
 export function SizeLabel({ className = '' }: SizeLabelProps) {
   return (

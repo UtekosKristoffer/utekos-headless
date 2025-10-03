@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { toast } from 'sonner'
 
-export function WelcomeToast() {
+export default function WelcomeToast() {
   useEffect(() => {
     // Ignore if screen height is too small
     if (window.innerHeight < 650) return

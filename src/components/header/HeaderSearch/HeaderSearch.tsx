@@ -1,6 +1,5 @@
 // Path: src/components/header/HeaderSearch/HeaderSearch.tsx
 
-/* eslint-disable capitalized-comments */
 'use client'
 
 import {
@@ -51,7 +50,6 @@ const CommandDialog = dynamic(
   }
 )
 
-
 function useCommandK(open: boolean, setOpen: (v: boolean) => void) {
   React.useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -94,7 +92,6 @@ function ItemRow({
   depth: number
   onSelect: (path: string) => void
 }) {
-  // begrenset sett tailwind-klasser for innrykk (unngår dynamiske klassenavn)
   const paddings = ['pl-0', 'pl-6', 'pl-10', 'pl-14', 'pl-16']
   const pad = paddings[Math.min(depth, paddings.length - 1)]
 
@@ -113,16 +110,16 @@ function ItemRow({
         <span className='truncate'>{item.title}</span>
       </CommandItem>
 
-      {/* vis kun direkte barn som "underlenker" */}
       {depth === 0
         && (item.children || []).map(child => (
           <CommandItem
             key={child.id}
-            value={`${child.title} ${child.path} ${(child.keywords || []).join(' ')}`}
+            value={`${child.title} ${child.path} ${(child.keywords || []).join(
+              ' '
+            )}`}
             onSelect={() => onSelect(child.path)}
             className={cn(
               'h-9 rounded-md px-3',
-              // minimalistisk styling for underlenke-innrykk (dette er eneste CSS-endring)
               'pl-8 text-sm text-neutral-300'
             )}
           >
@@ -145,28 +142,41 @@ export function HeaderSearch({ className }: { className?: string }) {
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
 
-
   React.useEffect(() => {
-    let abort = false
-    const load = async () => {
-      if (!open || groups || loading) return
-      setLoading(true)
-      try {
-        const res = await fetch('/api/search-index', { cache: 'no-store' })
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        const data = await res.json()
-        if (!abort) setGroups(data.groups as SearchGroup[])
-      } catch (e: any) {
-        if (!abort) setError(e?.message ?? 'Kunne ikke hente søkeindeks')
-      } finally {
-        if (!abort) setLoading(false)
+    if (open && !groups) {
+      let isAborted = false
+      const load = async () => {
+        setLoading(true)
+        setError(null)
+        try {
+          const res = await fetch('/api/search-index')
+          if (!res.ok) {
+            throw new Error(
+              `Klarte ikke hente søkeindeks (status: ${res.status})`
+            )
+          }
+          const data = await res.json()
+          if (!isAborted) {
+            setGroups(data.groups as SearchGroup[])
+          }
+        } catch (e: any) {
+          if (!isAborted) {
+            setError(e?.message ?? 'En ukjent feil oppstod')
+          }
+        } finally {
+          if (!isAborted) {
+            setLoading(false)
+          }
+        }
+      }
+
+      load()
+
+      return () => {
+        isAborted = true
       }
     }
-    load()
-    return () => {
-      abort = true
-    }
-  }, [open, groups, loading])
+  }, [open, groups])
 
   const go = (path: string) => {
     setOpen(false)
@@ -195,81 +205,89 @@ export function HeaderSearch({ className }: { className?: string }) {
         </kbd>
       </button>
 
-      <CommandDialog
-        open={open}
-        onOpenChange={setOpen}
-        showCloseButton={false}
-        className={cn(
-          'rounded-xl p-2 pb-11 shadow-2xl max-w-2xl mx-auto',
-          'bg-neutral-900/95 text-neutral-100',
-          'border border-neutral-700 ring-neutral-700 ring-3',
-          'backdrop-blur-sm',
-          className
-        )}
-        title='Søk på nettsiden...'
-        description='Søk etter produkter eller sider..'
-      >
-        <CommandInput placeholder='Søk på nettsiden..' />
-        <CommandList className='no-scrollbar min-h-80 scroll-pt-2 scroll-pb-1.5'>
-          <CommandEmpty>
-            {error ? 'Feil ved henting av søkeindeks.' : 'Ingen treff.'}
-          </CommandEmpty>
-
-          {loading && (
-            <div className='p-3 text-sm opacity-70'>Laster sider…</div>
-          )}
-
-          {!loading
-            && groups?.map(group => (
-              <CommandGroup key={group.key} heading={group.label}>
-                {group.items.map(item => (
-                  <ItemRow key={item.id} item={item} depth={0} onSelect={go} />
-                ))}
-              </CommandGroup>
-            ))}
-        </CommandList>
-
-        {/* footer (uendret) */}
-        <div
-          aria-hidden
+      {/* STEG 1: Pakk inn CommandDialog i en sjekk for 'open'-staten */}
+      {open && (
+        <CommandDialog
+          open={open}
+          onOpenChange={setOpen}
+          showCloseButton={false}
           className={cn(
-            'pointer-events-none absolute inset-x-0 bottom-0 flex h-10 items-center justify-between px-3 text-xs',
-            'bg-neutral-800 border-t border-neutral-700 text-muted-foreground'
+            'mx-auto max-w-2xl rounded-xl p-2 pb-11 shadow-2xl',
+            'bg-neutral-900/95 text-neutral-100',
+            'border border-neutral-700 ring-3 ring-neutral-700',
+            'backdrop-blur-sm',
+            className
           )}
+          title='Søk på nettsiden...'
+          description='Søk etter produkter eller sider..'
         >
-          <div className='flex items-center gap-2'>
-            <span className='inline-flex items-center gap-1'>
-              <svg
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth={2}
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                className='lucide lucide-corner-down-left size-3'
-              >
-                <path d='M20 4v7a4 4 0 0 1-4 4H4'></path>
-                <polyline points='9 10 4 15 9 20'></polyline>
-              </svg>
-              Gå til side
-            </span>
+          <CommandInput placeholder='Søk på nettsiden..' />
+          <CommandList className='no-scrollbar min-h-80 scroll-pt-2 scroll-pb-1.5'>
+            <CommandEmpty>
+              {loading ?
+                'Laster sider...'
+              : error ?
+                'Feil ved henting av søkeindeks.'
+              : 'Ingen treff.'}
+            </CommandEmpty>
+
+            {!loading
+              && !error
+              && groups?.map(group => (
+                <CommandGroup key={group.key} heading={group.label}>
+                  {group.items.map(item => (
+                    <ItemRow
+                      key={item.id}
+                      item={item}
+                      depth={0}
+                      onSelect={go}
+                    />
+                  ))}
+                </CommandGroup>
+              ))}
+          </CommandList>
+
+          <div
+            aria-hidden
+            className={cn(
+              'pointer-events-none absolute inset-x-0 bottom-0 flex h-10 items-center justify-between border-t border-neutral-700 px-3 text-xs',
+              'bg-neutral-800 text-muted-foreground'
+            )}
+          >
+            <div className='flex items-center gap-2'>
+              <span className='inline-flex items-center gap-1'>
+                <svg
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  strokeWidth={2}
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  className='lucide lucide-corner-down-left size-3'
+                >
+                  <path d='M20 4v7a4 4 0 0 1-4 4H4'></path>
+                  <polyline points='9 10 4 15 9 20'></polyline>
+                </svg>
+                Gå til side
+              </span>
+            </div>
+            <div className='hidden items-center gap-2 md:flex'>
+              <span className='flex items-center gap-1'>
+                <kbd className='rounded border border-white/10 bg-black/20 px-1.5 font-mono text-[10px] text-white/70 dark:bg-white/10'>
+                  ↩
+                </kbd>
+                for å velge
+              </span>
+              <span className='flex items-center gap-1'>
+                <kbd className='rounded border border-white/10 bg-black/20 px-1.5 font-mono text-[10px] text-white/70 dark:bg-white/10'>
+                  esc
+                </kbd>
+                for å lukke
+              </span>
+            </div>
           </div>
-          <div className='hidden items-center gap-2 md:flex'>
-            <span className='flex items-center gap-1'>
-              <kbd className='rounded border border-white/10 bg-black/20 px-1.5 font-mono text-[10px] text-white/70 dark:bg-white/10'>
-                ↩
-              </kbd>
-              for å velge
-            </span>
-            <span className='flex items-center gap-1'>
-              <kbd className='rounded border border-white/10 bg-black/20 px-1.5 font-mono text-[10px] text-white/70 dark:bg-white/10'>
-                esc
-              </kbd>
-              for å lukke
-            </span>
-          </div>
-        </div>
-      </CommandDialog>
+        </CommandDialog>
+      )}
     </>
   )
 }

@@ -5,7 +5,7 @@ import type { GraphQLErrorResponse } from './graphql.types'
 import type { DehydratedState } from '@tanstack/react-query'
 import type { ShopifyProduct } from './product.types'
 
-export interface ClientProvidersProps {
+export interface ProvidersProps {
   children: React.ReactNode
   cartId: string | null
   initialCart: Cart | null

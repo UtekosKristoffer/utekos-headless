@@ -1,6 +1,5 @@
-import image from './imageFragment'
 import seo from './seoFragment'
-const productFragment = /* GraphQL */ `
+const product = /* GraphQL */ `
   fragment product on Product {
     id
     title
@@ -92,7 +91,15 @@ const productFragment = /* GraphQL */ `
                   type
                   references(first: 10) {
                     nodes {
-                      ...image
+                      ... on MediaImage {
+                        id
+                        image {
+                          url
+                          altText
+                          width
+                          height
+                        }
+                      }
                     }
                   }
                 }
@@ -106,8 +113,7 @@ const productFragment = /* GraphQL */ `
       ...seo
     }
   }
-  ${image}
   ${seo}
 `
 
-export default productFragment
+export default product

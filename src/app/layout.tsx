@@ -1,41 +1,28 @@
 // Path: src/app/layout.tsx
-
-import { dehydrate } from '@tanstack/react-query'
-import { getQueryClient } from '@/api/lib/getQueryClient'
-import Footer from '@/components/footer/Footer'
-import Header from '@/components/header/Header'
-import ClientProviders from '@/components/providers/ClientProviders'
-import { WelcomeToast } from '@/components/WelcomeToast/WelcomeToast'
+import 'swiper/swiper-bundle.css'
+import './globals.css'
+import '@/db/zod/zodConfig'
+import { geistSans, geistMono } from '@/db/config/font.config'
 import { mainMenu } from '@/db/config/menu.config'
-import { AnnouncementBanner } from '@/layout/AnnouncementBanner'
+
+import { SpeedInsights } from '@vercel/speed-insights/react'
+import { Analytics } from '@vercel/analytics/react'
+import { dehydrate } from '@tanstack/react-query'
+import { Toaster } from 'sonner'
+
 import { getCachedCart } from '@/lib/helpers/cart/getCachedCart'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
-import { Analytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/react'
-import { Geist, Geist_Mono as GeistMono } from 'next/font/google'
-import { Toaster } from 'sonner'
 import { getAccessoryProducts } from '@/api/lib/products/getAccessoryProducts'
 import { getRecommendedProducts } from '@/api/lib/products/getRecommendedProcuts'
-import '@/db/zod/zodConfig'
-import type { Cart, ShopifyProduct } from '@types'
+import { getQueryClient } from '@/api/lib/getQueryClient'
+
+import WelcomeToast from '@/components/WelcomeToast/WelcomeToast'
+import Providers from '@/components/providers/Providers'
+import AnnouncementBanner from '@/layout/AnnouncementBanner'
+import Footer from '@/components/footer/Footer'
+import Header from '@/components/header/Header'
+import type { Cart, RootLayoutProps } from '@types'
 import type { Metadata } from 'next'
-import 'swiper/swiper-bundle.css'
-
-import './globals.css'
-
-type RootLayoutProps = Readonly<{
-  children: React.ReactNode
-}>
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin']
-})
-
-const geistMono = GeistMono({
-  variable: '--font-geist-mono',
-  subsets: ['latin']
-})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -107,10 +94,22 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: RootLayoutProps) {
   const queryClient = getQueryClient()
   const cartId = await getCartIdFromCookie()
-  const initialCart: Cart | null = await getCachedCart(cartId)
-  const recommendedProducts = await getRecommendedProducts()
-  const accessoryProducts = await getAccessoryProducts()
-  queryClient.setQueryData(['cart', cartId], initialCart)
+
+  await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: ['cart', cartId],
+      queryFn: () => getCachedCart(cartId)
+    }),
+    queryClient.prefetchQuery({
+      queryKey: ['products', 'recommended'],
+      queryFn: getRecommendedProducts
+    }),
+    queryClient.prefetchQuery({
+      queryKey: ['products', 'accessory'],
+      queryFn: getAccessoryProducts
+    })
+  ])
+
   const dehydratedState = dehydrate(queryClient)
 
   return (
@@ -118,24 +117,18 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       <body
         className={`bg-background text-foreground ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ClientProviders
-          dehydratedState={dehydratedState}
-          initialCart={initialCart}
-          cartId={cartId}
-          recommendedProducts={recommendedProducts}
-          accessoryProducts={accessoryProducts}
-        >
+        <Providers dehydratedState={dehydratedState} cartId={cartId}>
           <AnnouncementBanner />
           <Header menu={mainMenu} />
           <main>
-            {children}
             <Toaster closeButton />
             <WelcomeToast />
+            {children}
+            <Footer />
           </main>
-          <Footer />
           <SpeedInsights />
           <Analytics mode='development' />
-        </ClientProviders>
+        </Providers>
       </body>
     </html>
   )

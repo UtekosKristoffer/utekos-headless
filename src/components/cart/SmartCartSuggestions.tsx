@@ -1,11 +1,12 @@
 'use client'
 
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { FREE_SHIPPING_THRESHOLD } from '@/api/constants'
+import { getAccessoryProducts } from '@/api/lib/products/getAccessoryProducts'
+import { getRecommendedProducts } from '@/api/lib/products/getRecommendedProcuts'
 import { Progress } from '@/components/ui/progress'
-import { useAccessoryProducts } from '@/lib/context/AccessoryProductsContext'
-import { useRecommendedProducts } from '@/lib/context/RecommendedProductsContext'
 import { formatNOK } from '@/lib/utils/formatters/formatNOK'
-import type { Cart } from '@types'
+import type { Cart, ShopifyProduct } from '@types'
 import { useMemo } from 'react'
 import { FreeShippingConfirmation } from './FreeShippingConfirmation'
 import { UpsellItem } from './UpsellItem'
@@ -15,12 +16,17 @@ export function SmartCartSuggestions({
 }: {
   cart: Cart | null | undefined
 }) {
-  const recommendedProducts = useRecommendedProducts()
-  const accessoryProducts = useAccessoryProducts()
+  const { data: recommendedProducts } = useSuspenseQuery<ShopifyProduct[]>({
+    queryKey: ['products', 'recommended'],
+    queryFn: getRecommendedProducts
+  })
+  const { data: accessoryProducts } = useSuspenseQuery<ShopifyProduct[]>({
+    queryKey: ['products', 'accessory'],
+    queryFn: getAccessoryProducts
+  })
 
   const { title, suggestions, showDiscountHint, showConfirmation } =
     useMemo(() => {
-      // STEG 2: Sjekken for tom handlekurv flyttes INN i useMemo
       if (!cart || cart.totalQuantity === 0) {
         return {
           title: null,
@@ -35,7 +41,6 @@ export function SmartCartSuggestions({
         cart.lines.map(line => line.merchandise.product.id)
       )
 
-      // SCENARIO 2: UNDER FRI FRAKT-GRENSEN
       if (subtotal < FREE_SHIPPING_THRESHOLD) {
         const remainingAmount = FREE_SHIPPING_THRESHOLD - subtotal
         const allPotential = [...accessoryProducts, ...recommendedProducts]
@@ -81,7 +86,6 @@ export function SmartCartSuggestions({
         }
       }
 
-      // SCENARIO 3: OVER FRI FRAKT-GRENSEN
       const accessoriesToShow = accessoryProducts.filter(
         p => !cartLineProductIds.has(p.id)
       )
@@ -99,7 +103,6 @@ export function SmartCartSuggestions({
         }
       }
 
-      // FALLBACK-SCENARIO
       const generalRecommendations = recommendedProducts.filter(
         p => !cartLineProductIds.has(p.id)
       )
@@ -138,7 +141,7 @@ export function SmartCartSuggestions({
             <UpsellItem
               key={product.id}
               product={product}
-              withDiscountHint={showDiscountHint}
+              showDiscountHint={showDiscountHint}
             />
           ))}
         </div>

@@ -2,13 +2,11 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-
-import { useCartId } from '@/lib/context/CartIdContext' // Ny import!
+import { useCartId } from '@/hooks/useCartId'
 import { fetchCart } from '@/lib/helpers/cart/fetchCart'
 import type { Cart } from '@types'
 
 export const useCartQuery = () => {
-
   const cartId = useCartId()
 
   return useQuery<Cart | null>({
@@ -20,5 +18,3 @@ export const useCartQuery = () => {
     enabled: !!cartId
   })
 }
-
-export default useCartQuery

@@ -11,8 +11,6 @@ import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-
-// --- Komponent-kart: Fullført med alle artikler ---
 const articleComponents = {
   'balpannen-din-guide-til-den-perfekte-hostkvelden': dynamic(() =>
     import(
@@ -45,7 +43,6 @@ const articleComponents = {
         mod => mod.BobilHostruterArticle
       )
   ),
-  // Legger til en plassholder for "Båtpuss"-artikkelen for fremtiden
   'varm-og-klar-for-batpussen': dynamic(() =>
     import('../@articles/varm-og-klar-for-batpussen').then(
       mod => mod.BatpussArticle
@@ -58,7 +55,10 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }): Promise<Metadata> {
-  const article = mockArticles.find(p => p.slug === params.slug)
+  // STEG 1: await params før du bruker den
+  const awaitedParams = await params
+  const article = mockArticles.find(p => p.slug === awaitedParams.slug)
+
   if (!article) return { title: 'Artikkel ikke funnet' }
 
   return {
@@ -90,10 +90,15 @@ export async function generateStaticParams() {
   return mockArticles.map(article => ({ slug: article.slug }))
 }
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
-  const article = mockArticles.find(p => p.slug === params.slug)
+export default async function ArticlePage({
+  params
+}: {
+  params: { slug: string }
+}) {
+  const awaitedParams = await params
+  const article = mockArticles.find(p => p.slug === awaitedParams.slug)
   const ArticleComponent =
-    articleComponents[params.slug as keyof typeof articleComponents]
+    articleComponents[awaitedParams.slug as keyof typeof articleComponents]
 
   if (!article || !ArticleComponent) {
     notFound()
@@ -101,7 +106,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
 
   return (
     <div className='container mx-auto px-4'>
-      <div className='max-w-5xl mx-auto'>
+      <div className='mx-auto max-w-5xl'>
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -121,7 +126,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <h1 className='text-4xl md:text-5xl font-bold tracking-tight !mt-8 !mb-4'>
+        <h1 className='!mt-8 !mb-4 text-4xl font-bold tracking-tight md:text-5xl'>
           {article.title}
         </h1>
       </div>

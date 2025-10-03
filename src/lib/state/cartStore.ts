@@ -2,24 +2,9 @@
 'use client'
 
 import { createStore, type EventPayloadMap } from '@xstate/store'
+import { removeZeroQuantityLines } from '@/lib/helpers/cart/removeZeroQuantityLines'
+import type { CartUserInterfaceContext, UserInterfaceEventMap } from '@types'
 
-import type {
-  CartUserInterfaceContext,
-  OptimisticCartLines,
-  UserInterfaceEventMap
-} from '@types'
-
-/**
- * Removes items with a quantity of 0 from a line object.
- */
-const removeZeroQuantityLines = (
-  lines: OptimisticCartLines['lines']
-): OptimisticCartLines['lines'] => {
-  return Object.fromEntries(
-    Object.entries(lines).filter(([, quantity]) => quantity > 0)
-  )
-}
- 
 export const cartStore = createStore<
   CartUserInterfaceContext,
   UserInterfaceEventMap,

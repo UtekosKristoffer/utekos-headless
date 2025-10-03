@@ -7,7 +7,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import { cartStore } from '@/lib/state/cartStore'
 import { formatPrice } from '@/lib/utils/formatPrice'
-import type { ShopifyProduct } from '@types'
+import type { ProductCardProps } from '@types'
 import type { Route } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -17,12 +17,6 @@ import { toast } from 'sonner'
 import { getInitialOptionsForProduct } from './getInitialOptionsForProduct'
 import { ProductCardFooter } from './ProductCardFooter'
 import { ProductCardHeader } from './ProductCardHeader'
-
-interface ProductCardProps {
-  product: ShopifyProduct
-  preferredColor?: string
-  colorHexMap: Map<string, string>
-}
 
 export function ProductCard({ product, colorHexMap }: ProductCardProps) {
   const [selectedOptions, setSelectedOptions] = useState(() => {
@@ -111,6 +105,12 @@ export function ProductCard({ product, colorHexMap }: ProductCardProps) {
     <Card className='product-card bg-sidebar-foreground group flex h-full flex-col'>
       <CardContent className='relative p-0'>
         <Link href={productUrl} aria-label={`Se produkt ${product.title}`}>
+          <Badge
+            variant='secondary'
+            className='absolute left-4 top-4 z-10 border border-muted-foreground bg-[#020244] px-3 py-1 text-xs font-medium tracking-wide text-white'
+          >
+            UNISEX
+          </Badge>
           <AspectRatio
             ratio={2 / 3}
             className='w-full overflow-hidden rounded-t-lg'

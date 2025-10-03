@@ -1,5 +1,3 @@
-// Path: src/app/produkter/[handle]/ProductPageView/ProductPageView.tsx
-
 'use client'
 
 import { ProductPageAccordion } from '@/app/produkter/[handle]/ProductPageAccordion/ProductPageAccordion'
@@ -24,9 +22,10 @@ import {
 import { productMetadata } from '@/db/config/product-metadata.config'
 import { getSortedOptions } from '@/lib/helpers/async/getSortedOptions'
 import type { ProductPageViewProps, ShopifyProduct } from '@types'
-import { ShieldAlertIcon } from 'lucide-react'
+import { ShieldAlert, Sparkles } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { ProductDescription } from './ProductDescription'
+import { motion } from 'framer-motion'
 
 const SmartRealTimeActivity = dynamic(
   () =>
@@ -70,71 +69,151 @@ export default function ProductPageView({
     | undefined
 
   return (
-    <main className='container mx-auto mt-10 p-4 md:p-8'>
-      <Breadcrumb className='mb-8'>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href='/'>Hjem</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href='/products'>Produkter</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>{productData.title}</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+    <main className='relative container mx-auto mt-10 p-4 md:p-8 overflow-hidden'>
+      {/* Ambient background glow */}
+      <div className='absolute inset-0 -z-10 opacity-20'>
+        <div
+          className='absolute left-1/4 top-0 h-[600px] w-[600px] blur-3xl'
+          style={{
+            background: 'radial-gradient(circle, #0ea5e9 0%, transparent 70%)'
+          }}
+        />
+        <div
+          className='absolute right-1/4 bottom-0 h-[600px] w-[600px] blur-3xl'
+          style={{
+            background: 'radial-gradient(circle, #06b6d4 0%, transparent 70%)'
+          }}
+        />
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Breadcrumb className='mb-8'>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href='/'>Hjem</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink href='/products'>Produkter</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{productData.title}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </motion.div>
 
       <ProductPageGrid>
         <GalleryColumn>
-          <div className='mb-8 text-left'>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className='mb-8 text-left'
+          >
+            {productData.handle === 'utekos-special-edition' && (
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-900/20 px-4 py-2">
+                <Sparkles className="h-4 w-4 text-amber-400" />
+                <span className='text-sm font-medium text-amber-400'>Begrenset opplag</span>
+              </div>
+            )}
+            
             <h1 className='text-fluid-headline font-bold'>{title}</h1>
             {subtitle && typeof subtitle === 'string' && (
-              <p className='mt-2 text-lg text-foreground-on-dark/80'>
+              <p className='mt-3 text-lg leading-relaxed text-foreground/80'>
                 {subtitle}
               </p>
             )}
-          </div>
-          <div className='h-fit md:sticky md:top-24'>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className='h-fit md:sticky md:top-24'
+          >
             <div className='mx-auto max-w-xl'>
-              <div className='aspect-video w-full rounded-2xl border border-neutral-700 bg-sidebar-foreground p-4'>
-                <ProductGallery
-                  title={title}
-                  images={variantImages.map(image => ({
-                    id: image.id,
-                    url: image.url,
-                    altText: image.altText ?? '',
-                    width: image.width ?? 0,
-                    height: image.height ?? 0
-                  }))}
+              <div className='group relative w-full rounded-2xl border border-neutral-800 bg-sidebar-foreground p-4 shadow-xl overflow-hidden transition-all duration-300 hover:border-neutral-700'>
+                {/* Subtle glow behind gallery */}
+                <div
+                  className='absolute -inset-2 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-20'
+                  style={{
+                    background: 'linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)'
+                  }}
                 />
+                
+                <div className='relative'>
+                  <ProductGallery
+                    title={title}
+                    images={variantImages.map(image => ({
+                      id: image.id,
+                      url: image.url,
+                      altText: image.altText ?? '',
+                      width: image.width ?? 0,
+                      height: image.height ?? 0
+                    }))}
+                  />
+                </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </GalleryColumn>
+
         <OptionsColumn>
-          <Price
-            amount={selectedVariant.price.amount}
-            currencyCode={selectedVariant.price.currencyCode}
-          />
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <Price
+              amount={selectedVariant.price.amount}
+              currencyCode={selectedVariant.price.currencyCode}
+            />
 
-          {productData.handle === 'utekos-special-edition' && (
-            <p className='mt-4 flex items-center gap-2 text-lg font-bold text-amber-400'>
-              <ShieldAlertIcon className='size-5' />
-              Kun 11 igjen på lager!
-            </p>
-          )}
+            {productData.handle === 'utekos-special-edition' && (
+              <div className='relative mt-4 overflow-hidden rounded-lg border border-amber-400/30 bg-amber-900/10 p-4'>
+                {/* Aurora effect */}
+                <div
+                  className='absolute -inset-x-2 -inset-y-8 opacity-20 blur-2xl'
+                  style={{
+                    background: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, #f59e0b 100%)'
+                  }}
+                />
+                
+                <div className="relative flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-amber-400/40 bg-amber-400/10">
+                    <ShieldAlert className='h-5 w-5 text-amber-400' />
+                  </div>
+                  <div>
+                    <p className='font-semibold text-amber-400'>Kun 11 igjen på lager!</p>
+                    <p className='text-sm text-amber-400/80'>Sikre deg din før det er for sent</p>
+                  </div>
+                </div>
+              </div>
+            )}
 
-          {metadata?.showActivity && (
-            <SmartRealTimeActivity baseViewers={metadata.baseViewers ?? 3} />
-          )}
-          <section aria-labelledby='product-options'>
+            {metadata?.showActivity && (
+              <div className="mt-4">
+                <SmartRealTimeActivity baseViewers={metadata.baseViewers ?? 3} />
+              </div>
+            )}
+          </motion.div>
+
+          <motion.section
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            aria-labelledby='product-options'
+          >
             <h2 id='product-options' className='sr-only'>
               Produktvalg
             </h2>
-            <div className='mt-30 flex flex-col gap-8'>
+            <div className='mt-8 flex flex-col gap-8'>
               {sortedOptions.map((option: ShopifyProduct['options'][number]) =>
                 renderOptionComponent({
                   option,
@@ -142,7 +221,7 @@ export default function ProductPageView({
                   selectedVariant,
                   onOptionChange,
                   colorHexMap,
-                  productHandle: productData.handle // <-- LEGG TIL DENNE LINJEN
+                  productHandle: productData.handle
                 })
               )}
             </div>
@@ -150,9 +229,10 @@ export default function ProductPageView({
               <AddToCart selectedVariant={selectedVariant} />
             </div>
             <ProductDescription descriptionHtml={productDescriptionHtml} />
-          </section>
+          </motion.section>
         </OptionsColumn>
       </ProductPageGrid>
+
       <div className='mt-16 sm:mt-24'>
         <SpecialOfferCrossSell currentProductHandle={productData.handle} />
       </div>

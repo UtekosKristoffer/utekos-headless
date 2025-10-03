@@ -19,7 +19,6 @@ export function CartMutationClient({
 }) {
   const queryClient = useQueryClient()
 
-  // NY FUNKSJON: Direkte cache-oppdatering
   const updateCartCache = React.useCallback(
     (newCart: Cart) => {
       if (newCart?.id) {

@@ -4,18 +4,10 @@
 import { Button } from '@/components/ui/button'
 import { CardFooter } from '@/components/ui/card'
 import { Loader2 } from 'lucide-react'
-import type { Route } from 'next'
+import type { ProductCardFooterProps } from '@types'
 import Link from 'next/link'
 import type React from 'react'
 import { ProductCardSoldOut } from './ProductCardSoldOut'
-
-interface ProductCardFooterProps {
-  price: string
-  productUrl: Route
-  isAvailable: boolean
-  isPending: boolean
-  onQuickBuy: (e: React.MouseEvent) => void
-}
 
 export function ProductCardFooter({
   price,

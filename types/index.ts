@@ -20,3 +20,8 @@ export type * from './node.types'
 export type * from './product.types'
 export type * from './seo.types'
 export type * from './state.types'
+export type * from './layout.types'
+
+export type RootLayoutProps = Readonly<{
+  children: React.ReactNode
+}>

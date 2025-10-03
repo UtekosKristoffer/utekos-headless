@@ -1,12 +1,6 @@
 import React from 'react'
-
+import type { Section } from '@types'
 export const lastUpdated = '11. juni 2025' // Kilde: Personvernserklæring.docx
-
-type Section = {
-  id: string
-  title: string
-  content: React.ReactNode
-}
 
 export const privacySections: Section[] = [
   {
@@ -16,10 +10,10 @@ export const privacySections: Section[] = [
       <>
         <p>
           Utekos driver denne butikken og dette nettstedet, inkludert all
-          relatert informasjon, innhold og verktøy og alle relaterte
-          funksjoner, produkter og tjenester, for å tilby deg, kunden, en
-          tilpasset handleopplevelse («tjenestene»). Utekos drives av Shopify,
-          som lar oss tilby tjenestene til deg.
+          relatert informasjon, innhold og verktøy og alle relaterte funksjoner,
+          produkter og tjenester, for å tilby deg, kunden, en tilpasset
+          handleopplevelse («tjenestene»). Utekos drives av Shopify, som lar oss
+          tilby tjenestene til deg.
         </p>
         <p>
           Denne personvernerklæringen beskriver hvordan vi samler inn, bruker og
@@ -30,9 +24,9 @@ export const privacySections: Section[] = [
           fremlegging av personopplysningene dine.
         </p>
         <p>
-          Les denne personvernerklæringen nøye. Ved å bruke tjenestene, bekrefter
-          du at du har lest erklæringen og forstår hvordan informasjonen din
-          samles inn, brukes og fremlegges som beskrevet.
+          Les denne personvernerklæringen nøye. Ved å bruke tjenestene,
+          bekrefter du at du har lest erklæringen og forstår hvordan
+          informasjonen din samles inn, brukes og fremlegges som beskrevet.
         </p>
       </>
     )
@@ -114,7 +108,10 @@ export const privacySections: Section[] = [
     title: 'Slik bruker vi personopplysningene dine',
     content: (
       <>
-        <p>Avhengig av din interaksjon og hvilke tjenester du bruker, kan vi bruke data til:</p>
+        <p>
+          Avhengig av din interaksjon og hvilke tjenester du bruker, kan vi
+          bruke data til:
+        </p>
         <ul>
           <li>
             <strong>Tilby, tilpasse og forbedre tjenestene:</strong> Inkl. å
@@ -125,8 +122,8 @@ export const privacySections: Section[] = [
           </li>
           <li>
             <strong>Markedsføring og annonsering:</strong> Sende ut kampanjer på
-            e‑post/SMS/post, vise annonser på våre/andres nettsteder, også basert
-            på tidligere aktivitet.
+            e‑post/SMS/post, vise annonser på våre/andres nettsteder, også
+            basert på tidligere aktivitet.
           </li>
           <li>
             <strong>Sikkerhet og svindelforebygging:</strong> Autentisere konto,
@@ -140,7 +137,8 @@ export const privacySections: Section[] = [
           </li>
           <li>
             <strong>Juridiske formål:</strong> Overholde lover/forespørsler fra
-            myndigheter, delta i rettsprosesser og håndheve vilkår/retningslinjer.
+            myndigheter, delta i rettsprosesser og håndheve
+            vilkår/retningslinjer.
           </li>
         </ul>
       </>
@@ -151,7 +149,10 @@ export const privacySections: Section[] = [
     title: 'Slik fremlegger vi personopplysninger',
     content: (
       <>
-        <p>Vi kan dele personopplysninger med tredjeparter til legitime formål i samsvar med denne erklæringen, for eksempel:</p>
+        <p>
+          Vi kan dele personopplysninger med tredjeparter til legitime formål i
+          samsvar med denne erklæringen, for eksempel:
+        </p>
         <ul>
           <li>
             <strong>Med Shopify, forhandlere og leverandører</strong> som
@@ -187,16 +188,20 @@ export const privacySections: Section[] = [
           personopplysninger knyttet til din bruk for å levere og forbedre
           tjenestene. Opplysninger kan overføres til/deles med Shopify og
           tredjeparter i andre land. For avanserte funksjoner kan Shopify bruke
-          personopplysninger innhentet fra din samhandling med vår butikk,
-          andre forhandlere og Shopify.
+          personopplysninger innhentet fra din samhandling med vår butikk, andre
+          forhandlere og Shopify.
         </p>
         <p>
           I slike tilfeller er Shopify behandlingsansvarlig for den aktuelle
-          bruken og svarer på rettighetsforespørsler. Les mer hos Shopify:
-          {' '}
-          <a href='https://privacy.shopify.com/en' target='_blank' rel='noopener noreferrer'>
+          bruken og svarer på rettighetsforespørsler. Les mer hos Shopify:{' '}
+          <a
+            href='https://privacy.shopify.com/en'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
             privacy.shopify.com/en
-          </a>.
+          </a>
+          .
         </p>
       </>
     )
@@ -210,9 +215,9 @@ export const privacySections: Section[] = [
           Tjenestene kan inneholde lenker til tredjepartsnettsteder. Gjennomgå
           deres sikkerhets‑ og personvernregler. Vi er ikke ansvarlige for
           personvern/sikkerhet hos slike aktører, herunder nøyaktighet eller
-          pålitelighet av informasjon. Informasjon du deler i offentlige/halvoffentlige
-          fora kan være synlig for andre. Lenker impliserer ikke støtte utover
-          det som beskrives i tjenestene.
+          pålitelighet av informasjon. Informasjon du deler i
+          offentlige/halvoffentlige fora kan være synlig for andre. Lenker
+          impliserer ikke støtte utover det som beskrives i tjenestene.
         </p>
       </>
     )
@@ -243,8 +248,8 @@ export const privacySections: Section[] = [
           usikre kanaler for sensitiv informasjon.
         </p>
         <p>
-          Oppbevaringstiden avhenger av behov, juridiske krav, tvisteløsning
-          og kontrakter/retningslinjer.
+          Oppbevaringstiden avhenger av behov, juridiske krav, tvisteløsning og
+          kontrakter/retningslinjer.
         </p>
       </>
     )
@@ -254,12 +259,23 @@ export const privacySections: Section[] = [
     title: 'Dine rettigheter og valg',
     content: (
       <>
-        <p>Avhengig av bosted kan du ha følgende rettigheter (ikke absolutte):</p>
+        <p>
+          Avhengig av bosted kan du ha følgende rettigheter (ikke absolutte):
+        </p>
         <ul>
-          <li><strong>Rett til innsyn</strong> i personopplysninger vi lagrer.</li>
-          <li><strong>Rett til sletting</strong> av personopplysninger.</li>
-          <li><strong>Rett til retting</strong> av uriktige opplysninger.</li>
-          <li><strong>Rett til dataportabilitet</strong> (kopi/overføring i visse tilfeller).</li>
+          <li>
+            <strong>Rett til innsyn</strong> i personopplysninger vi lagrer.
+          </li>
+          <li>
+            <strong>Rett til sletting</strong> av personopplysninger.
+          </li>
+          <li>
+            <strong>Rett til retting</strong> av uriktige opplysninger.
+          </li>
+          <li>
+            <strong>Rett til dataportabilitet</strong> (kopi/overføring i visse
+            tilfeller).
+          </li>
         </ul>
         <p>
           <strong>Administrere kommunikasjon:</strong> Avslutt reklame‑epost via
@@ -279,11 +295,15 @@ export const privacySections: Section[] = [
           utøve rettigheter.
         </p>
         <p>
-          Mer om hvordan Shopify bruker personopplysninger og rettigheter:
-          {' '}
-          <a href='https://privacy.shopify.com/en' target='_blank' rel='noopener noreferrer'>
+          Mer om hvordan Shopify bruker personopplysninger og rettigheter:{' '}
+          <a
+            href='https://privacy.shopify.com/en'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
             privacy.shopify.com/en
-          </a>.
+          </a>
+          .
         </p>
       </>
     )
@@ -311,8 +331,8 @@ export const privacySections: Section[] = [
           Vi kan overføre, lagre og behandle personopplysninger utenfor landet
           du bor i. Ved overføring ut av EØS/Storbritannia baserer vi oss på
           anerkjente mekanismer som Europakommisjonens standard
-          personvernbestemmelser (SCC) eller tilsvarende, med mindre mottakerland
-          har tilstrekkelig beskyttelsesnivå.
+          personvernbestemmelser (SCC) eller tilsvarende, med mindre
+          mottakerland har tilstrekkelig beskyttelsesnivå.
         </p>
       </>
     )
@@ -336,20 +356,20 @@ export const privacySections: Section[] = [
     title: 'Kontakt',
     content: (
       <>
-        <p>
-          Spørsmål om personvern eller ønsker du å utøve rettigheter?
-        </p>
+        <p>Spørsmål om personvern eller ønsker du å utøve rettigheter?</p>
         <ul>
           <li>
             <strong>E‑post:</strong>{' '}
             <a href='mailto:info@utekos.no'>info@utekos.no</a>
           </li>
           <li>
-            <strong>Adresse:</strong> Lille Damsgårdsveien 25, 1, Bergen, 5162, NO
+            <strong>Adresse:</strong> Lille Damsgårdsveien 25, 1, Bergen, 5162,
+            NO
           </li>
         </ul>
         <p>
-          I henhold til gjeldende databeskyttelseslover er Utekos behandlingsansvarlig.
+          I henhold til gjeldende databeskyttelseslover er Utekos
+          behandlingsansvarlig.
         </p>
       </>
     )

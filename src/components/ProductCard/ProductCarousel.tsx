@@ -7,8 +7,8 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel'
 import { createColorHexMap } from '@/lib/helpers/shared/createColorHexMap'
-import type { ProductCarouselProps } from '@types'
 import { ProductCard } from './ProductCard'
+import type { ProductCarouselProps } from '@types'
 
 export function ProductCarousel({ products }: ProductCarouselProps) {
   if (!products || products.length === 0) {

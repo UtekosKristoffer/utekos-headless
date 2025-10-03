@@ -7,22 +7,8 @@ import type {
   ShopifyImageConnection
 } from '.'
 
-export interface ProductDescriptionProps {
-  descriptionHtml: string | undefined | null // This is actually a JSON string
-}
-
-export interface ProductCarouselProps {
-  products: ShopifyProduct[]
-}
-
 export interface RelatedProductsProps {
   products: ShopifyProduct[]
-}
-
-export interface ProductCardProps {
-  product: ShopifyProduct
-  preferredColor?: string
-  colorHexMap: Map<string, string>
 }
 
 export type ShopifyProduct = {

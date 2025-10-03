@@ -2,7 +2,6 @@
 
 import { getInitialAvailableOptions } from '@/components/ProductCard/getInitialAvailableOptions'
 import { Button } from '@/components/ui/button'
-import { useAccessoryProducts } from '@/lib/context/AccessoryProductsContext' // <-- NY IMPORT
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import { formatPrice } from '@/lib/utils/formatPrice'
 import type { ShopifyProduct } from '@types'
@@ -12,19 +11,11 @@ import { useMemo } from 'react'
 
 interface UpsellItemProps {
   product: ShopifyProduct
-  withDiscountHint?: boolean
+  showDiscountHint?: boolean
 }
 
-export function UpsellItem({ product, withDiscountHint }: UpsellItemProps) {
+export function UpsellItem({ product, showDiscountHint }: UpsellItemProps) {
   const cartActor = CartMutationContext.useActorRef()
-  const accessoryProducts = useAccessoryProducts()
-
-  const isAccessory = useMemo(
-    () => accessoryProducts.some(p => p.id === product.id),
-    [accessoryProducts, product.id]
-  )
-
-  const showDiscountHint = withDiscountHint && isAccessory
 
   const selectedOptions = useMemo(
     () => getInitialAvailableOptions(product),
@@ -37,8 +28,10 @@ export function UpsellItem({ product, withDiscountHint }: UpsellItemProps) {
       )
     )?.node
   }, [selectedOptions, product.variants.edges])
+
   const originalPrice = parseFloat(product.priceRange.minVariantPrice.amount)
   const discountedPrice = originalPrice * 0.9 // 10% rabatt
+
   const handleAddToCart = () => {
     if (selectedVariant) {
       cartActor.send({

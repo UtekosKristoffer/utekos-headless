@@ -1,4 +1,4 @@
-import BobilHostruterFlow from '@/app/magasinet/bobil-i-hostferien/BobilHostruterFlow'
+import { SectionMagasinetBobilHostferien } from '@/app/magasinet/bobil-i-hostferien/SectionMagasinetBobilHostferien'
 import { RouteDetailsGrid } from '@/app/magasinet/bobil-i-hostferien/RouteDetailsGrid'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -56,7 +56,7 @@ export const BobilHostruterArticle = () => {
       </p>
 
       <div className='not-prose my-12'>
-        <BobilHostruterFlow />
+        <SectionMagasinetBobilHostferien />
       </div>
 
       {/* KORRIGERT: Erstatter den gamle teksten med den nye, visuelle grid-komponenten */}

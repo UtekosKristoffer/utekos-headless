@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 const BANNER_STORAGE_KEY = 'utekos-special-edition-banner-dismissed-timestamp'
 const BANNER_EXPIRATION_MS = 3 * 24 * 60 * 60 * 1000
 
-export function AnnouncementBanner() {
+export default function AnnouncementBanner() {
   const [isDismissed, setIsDismissed] = useState(true)
 
   useEffect(() => {
