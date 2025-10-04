@@ -1,25 +1,24 @@
 // Path: src/app/produkter/page.tsx
-
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
+import { getQueryClient } from '@/api/lib/getQueryClient'
 import { getProducts } from '@/api/lib/products/getProducts'
+
 import { ComparisonTeaser } from '@/app/handlehjelp/sammenlign-modeller/sections/ComparisonTeaser'
 import { HelpChooseSection } from '@/app/produkter/components/HelpChooseSection'
 import { ProductTestimonial } from '@/app/produkter/components/ProductTestimonial'
-import { ProductCarousel } from '@/components/ProductCard/ProductCarousel'
-import { Suspense } from 'react'
-import { handles } from '@/db/data/products/product-info'
-import { notFound } from 'next/navigation'
-import type { Metadata } from 'next'
-
 import { ProductsPageFooter } from '@/app/produkter/components/ProductsPageFooter'
 import { ProductsPageHeader } from '@/app/produkter/components/ProductsPageHeader'
+import { AllProductsCarousel } from '@/components/ProductCard/AllProductsCarousel'
 
-import { ProductGridSkeleton } from '@/components/frontpage/Skeletons/ProductGridSkeleton'
-import { HelpChooseSectionSkeleton } from '@/components/frontpage/Skeletons/HelpChooseSectionSkeleton'
-import { ProductTestimonialSkeleton } from '@/components/frontpage/Skeletons/ProductTestimonialSkeleton'
 import { ComparisonTeaserSkeleton } from '@/components/frontpage/Skeletons/ComparisonTeaserSkeleton'
+import { HelpChooseSectionSkeleton } from '@/components/frontpage/Skeletons/HelpChooseSectionSkeleton'
+import { ProductGridSkeleton } from '@/components/frontpage/Skeletons/ProductGridSkeleton'
+import { ProductTestimonialSkeleton } from '@/components/frontpage/Skeletons/ProductTestimonialSkeleton'
 import { ProductsPageFooterSkeleton } from '@/components/frontpage/Skeletons/ProductsPageFooterSkeleton'
 import { ProductsPageHeaderSkeleton } from '@/components/frontpage/Skeletons/ProductsPageHeaderSkeleton'
-// Wait: import { ProductComparisonSection } from './components/ProductComparisonSection'
+
+import { Suspense } from 'react'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Kolleksjon: Komfortplagg for hytteliv & utekos | Utekos',
@@ -44,16 +43,21 @@ export const metadata: Metadata = {
   }
 }
 
-const ProductsPage = async () => {
-  const response = await getProducts()
-  if (!response.success || !response.body || response.body.length === 0)
-    return notFound()
+const ProductsPage = () => {
+  const queryClient = getQueryClient()
 
-  const products = response.body
-  const featuredProducts = products.filter(product =>
-    handles.includes(product.handle)
-  )
-  if (featuredProducts.length === 0) return notFound()
+  queryClient.prefetchQuery({
+    queryKey: ['products', 'all'],
+    queryFn: async () => {
+      const response = await getProducts()
+      if (!response.success || !response.body) {
+        throw new Error('Failed to fetch products')
+      }
+      return response.body
+    }
+  })
+
+  const dehydratedState = dehydrate(queryClient)
 
   return (
     <main className='container mx-auto px-4 py-16 sm:py-24'>
@@ -79,9 +83,11 @@ const ProductsPage = async () => {
             Hele kolleksjonen
           </h2>
         </div>
-        <Suspense fallback={<ProductGridSkeleton />}>
-          <ProductCarousel products={products} />
-        </Suspense>
+        <HydrationBoundary state={dehydratedState}>
+          <Suspense fallback={<ProductGridSkeleton />}>
+            <AllProductsCarousel />
+          </Suspense>
+        </HydrationBoundary>
       </section>
 
       <Suspense fallback={<ProductsPageFooterSkeleton />}>

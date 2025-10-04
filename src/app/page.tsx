@@ -1,48 +1,38 @@
 // Path: src/app/page.tsx
-
-import { getProducts } from '@/api/lib/products/getProducts'
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
+import { getQueryClient } from '@/api/lib/getQueryClient'
+import { getFeaturedProducts } from '@/api/lib/products/getFeaturedProducts'
 import { HeroSection } from '@/components/frontpage/HeroSection'
 import { MomentsSection } from '@/components/frontpage/MomentsSection'
 import { NewStandardSection } from '@/components/frontpage/NewStandardSection'
 import { PromiseSection } from '@/components/frontpage/PromiseSection'
 import { QualitySection } from '@/components/frontpage/QualitySection'
+import { HeroSectionSkeleton } from '@/components/frontpage/Skeletons/HeroSectionSkeleton'
 import { MomentsSectionSkeleton } from '@/components/frontpage/Skeletons/MomentsSectionSkeleton'
+import { NewProductLaunchSectionSkeleton } from '@/components/frontpage/Skeletons/NewProductLaunchSectionSkeleton'
+import { NewStandardSectionSkeleton } from '@/components/frontpage/Skeletons/NewStandardSectionSkeleton'
+import { ProductGridSkeleton } from '@/components/frontpage/Skeletons/ProductGridSkeleton'
+import { PromiseSectionSkeleton } from '@/components/frontpage/Skeletons/PromiseSectionSkeleton'
 import { QualitySectionSkeleton } from '@/components/frontpage/Skeletons/QualitySectionSkeleton'
+import { SocialProofSectionSkeleton } from '@/components/frontpage/Skeletons/SocialProofSectionSkeleton'
 import { SpecialOfferSectionSkeleton } from '@/components/frontpage/Skeletons/SpecialOfferSectionSkeleton'
 import { TestimonialConstellationSkeleton } from '@/components/frontpage/Skeletons/TesimonialConstellationSkeleton'
+import { NewProductLaunchSection } from '@/components/frontpage/NewProductLaunchSection'
 import { SocialProofSection } from '@/components/frontpage/SocialProofSection'
 import { TestimonialConstellation } from '@/components/frontpage/TestimonialConstellation'
 import { ProductCarousel } from '@/components/ProductCard/ProductCarousel'
-import { ProductGridSkeleton } from '@/components/frontpage/Skeletons//ProductGridSkeleton'
-import { handles } from '@/db/data/products/product-info'
 import { SpecialOfferSection } from '@/layout/SpecialOfferSection'
-import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
-import { HeroSectionSkeleton } from '@/components/frontpage/Skeletons/HeroSectionSkeleton'
-import { NewStandardSectionSkeleton } from '@/components/frontpage/Skeletons/NewStandardSectionSkeleton'
-import { SocialProofSectionSkeleton } from '@/components/frontpage/Skeletons/SocialProofSectionSkeleton'
-import { PromiseSectionSkeleton } from '@/components/frontpage/Skeletons/PromiseSectionSkeleton'
-import { NewProductLaunchSection } from '@/components/frontpage/NewProductLaunchSection'
-import { NewProductLaunchSectionSkeleton } from '@/components/frontpage/Skeletons/NewProductLaunchSectionSkeleton'
-const HomePage = async () => {
-  const response = await getProducts()
 
-  if (!response.success) {
-    return notFound()
-  }
+const HomePage = () => {
+  const queryClient = getQueryClient()
 
-  const products = response.body
-  if (!products || products.length === 0) {
-    return notFound()
-  }
+  queryClient.prefetchQuery({
+    queryKey: ['products', 'featured'],
+    queryFn: getFeaturedProducts
+  })
 
-  const featuredProducts = products.filter(product =>
-    handles.includes(product.handle)
-  )
-
-  if (featuredProducts.length === 0) {
-    return notFound()
-  }
+  const dehydratedState = dehydrate(queryClient)
 
   return (
     <main>
@@ -59,9 +49,11 @@ const HomePage = async () => {
       </Suspense>
 
       <section className='container md:max-w-7xl max-w-[95%] mx-auto py-12 lg:py-16 sm:py-16'>
-        <Suspense fallback={<ProductGridSkeleton />}>
-          <ProductCarousel products={featuredProducts} />
-        </Suspense>
+        <HydrationBoundary state={dehydratedState}>
+          <Suspense fallback={<ProductGridSkeleton />}>
+            <ProductCarousel />
+          </Suspense>
+        </HydrationBoundary>
       </section>
 
       <Suspense fallback={<SocialProofSectionSkeleton />}>

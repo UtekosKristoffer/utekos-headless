@@ -21,7 +21,7 @@ import Providers from '@/components/providers/Providers'
 import AnnouncementBanner from '@/layout/AnnouncementBanner'
 import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
-import type { Cart, RootLayoutProps } from '@types'
+import type { RootLayoutProps, Cart } from '@types'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -121,11 +121,11 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           <AnnouncementBanner />
           <Header menu={mainMenu} />
           <main>
-            <Toaster closeButton />
-            <WelcomeToast />
             {children}
             <Footer />
           </main>
+          <Toaster closeButton />
+          <WelcomeToast />
           <SpeedInsights />
           <Analytics mode='development' />
         </Providers>

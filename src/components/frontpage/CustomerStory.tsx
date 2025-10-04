@@ -11,7 +11,6 @@ import '@xyflow/react/dist/style.css'
 import { Moon, Sun } from 'lucide-react'
 import { memo, useState } from 'react'
 
-// --- En dedikert node-komponent kun for denne historien ---
 interface StoryNodeProps {
   data: {
     icon: React.ComponentType<{ className?: string }>

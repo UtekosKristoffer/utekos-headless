@@ -11,6 +11,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import { cartStore } from '@/lib/state/cartStore'
@@ -102,19 +103,24 @@ export const CartLineItem = ({ line }: CartLineItemProps) => {
       })}
     >
       <Link href={productUrl} onClick={() => cartStore.send({ type: 'CLOSE' })}>
-        <div className='relative h-32 w-24 flex-shrink-0 overflow-hidden rounded-lg border border-neutral-700 bg-background'>
-          {imageUrl ?
-            <Image
-              src={imageUrl}
-              alt={productTitle}
-              fill
-              className='object-cover'
-              sizes='80px'
-            />
-          : <div className='flex size-full items-center justify-center text-gray-400'>
-              <span className='text-xs'>Ingen bilde</span>
-            </div>
-          }
+        <div className='w-24 flex-shrink-0'>
+          <AspectRatio
+            ratio={2 / 3}
+            className='overflow-hidden rounded-lg border border-neutral-700 bg-background'
+          >
+            {imageUrl ?
+              <Image
+                src={imageUrl}
+                alt={productTitle}
+                fill
+                className='object-cover'
+                sizes='96px'
+              />
+            : <div className='flex size-full items-center justify-center text-gray-400'>
+                <span className='text-xs'>Ingen bilde</span>
+              </div>
+            }
+          </AspectRatio>
         </div>
       </Link>
 

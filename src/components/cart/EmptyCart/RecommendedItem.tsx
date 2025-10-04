@@ -1,6 +1,7 @@
 'use client'
 
 import { getInitialAvailableOptions } from '@/components/ProductCard/getInitialAvailableOptions'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import { cartStore } from '@/lib/state/cartStore'
@@ -41,16 +42,21 @@ export function RecommendedItem({ product }: { product: ShopifyProduct }) {
         href={`/produkter/${product.handle}`}
         onClick={() => cartStore.send({ type: 'CLOSE' })}
       >
-        <div className='relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border bg-sidebar-foreground'>
-          {product.featuredImage && (
-            <Image
-              src={product.featuredImage.url}
-              alt={product.featuredImage.altText || product.title}
-              fill
-              className='object-cover'
-              sizes='64px'
-            />
-          )}
+        <div className='w-16 flex-shrink-0'>
+          <AspectRatio
+            ratio={2 / 3}
+            className='overflow-hidden rounded-md border bg-sidebar-foreground'
+          >
+            {product.featuredImage && (
+              <Image
+                src={product.featuredImage.url}
+                alt={product.featuredImage.altText || product.title}
+                fill
+                className='object-cover'
+                sizes='64px'
+              />
+            )}
+          </AspectRatio>
         </div>
       </Link>
       <div className='flex-grow'>

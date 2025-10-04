@@ -21,7 +21,7 @@ export function AnimatedChat() {
   })
 
   return (
-    <div className='flex h-full flex-col justify-center gap-6 p-4'>
+    <div className='flex h-full flex-col mx-auto justify-center gap-6 p-4'>
       <ChatBubble
         side='left'
         {...(isMounted ? animationProps(0.2) : {})}
@@ -30,7 +30,7 @@ export function AnimatedChat() {
             name='Hanne'
             side='left'
             color='#dc2626' // rød
-            className='top-1/2 -right-2 -translate-y-1/2 translate-x-full'
+            className='top-1/2 right-2 md:-right-8 -translate-y-1/2 translate-x-full'
           />
         }
       >
@@ -48,7 +48,7 @@ export function AnimatedChat() {
             name='Thomas'
             side='right'
             color='#2563eb' // blå
-            className='bottom-[-8px] -left-2 -translate-x-full'
+            className='md:bottom-[-8px] bottom-[-14px] md:-left-6 left-5 -translate-x-full'
           />
         }
       >

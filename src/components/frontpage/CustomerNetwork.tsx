@@ -165,7 +165,7 @@ const edgeTypes = {
 }
 
 // Definisjon av noder - perfekt symmetrisk layout
-const layoutSize = 250 // Avstand fra senter til hjørner
+const layoutSize = 220 // Avstand fra senter til hjørner
 const centerX = 225
 const centerY = 225
 
@@ -260,7 +260,7 @@ const initialEdges: Edge[] = [
 
 export function CustomerNetwork() {
   return (
-    <div className='h-full w-full min-h-[450px]'>
+    <div className='h-full md:w-full min-h-[450px]'>
       <ReactFlowProvider>
         <ReactFlow
           nodes={initialNodes}
