@@ -1,6 +1,6 @@
 export function CompareModelsPageHero() {
   return (
-    <header className='py-24 text-center bg-sidebar-foreground border-b border-neutral-800'>
+    <section className='py-24 text-center bg-sidebar-foreground border-b border-neutral-800'>
       <div className='container mx-auto px-4'>
         <h1 className='text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'>
           Hvilken Utekos er du?
@@ -11,6 +11,6 @@ export function CompareModelsPageHero() {
           akkurat dine øyeblikk.
         </p>
       </div>
-    </header>
+    </section>
   )
 }

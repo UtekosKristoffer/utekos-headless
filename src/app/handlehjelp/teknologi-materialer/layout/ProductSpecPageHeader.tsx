@@ -1,6 +1,6 @@
 export function ProductSpecPageHeader() {
   return (
-    <header className='mx-auto max-w-3xl text-center'>
+    <section className='mx-auto max-w-3xl text-center'>
       <h1 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
         Kvalitet i hver fiber
       </h1>
@@ -9,6 +9,6 @@ export function ProductSpecPageHeader() {
         starter med total komfort. Her kan du utforske teknologien som sikrer at
         du kan nyte de gode stundene lenger.
       </p>
-    </header>
+    </section>
   )
 }

@@ -30,11 +30,12 @@ export function AddToCart({
   )
   const baseSubmitHandler = createAddToCartSubmitHandler(cartActor)
   const submitWithToast = withSuccessToast(baseSubmitHandler, selectedVariant)
+
   const handleAddToCart = (values: AddToCartFormValues) => {
     startTransition(() => {
       submitWithToast(values)
+      cartStore.send({ type: 'OPEN' })
     })
-    cartStore.send({ type: 'OPEN' })
   }
 
   useEffect(() => {
@@ -43,6 +44,7 @@ export function AddToCart({
 
   useEffect(() => {
     if (lastError) {
+      // Du kan legge til feilhåndtering her om ønskelig
     }
   }, [lastError])
 

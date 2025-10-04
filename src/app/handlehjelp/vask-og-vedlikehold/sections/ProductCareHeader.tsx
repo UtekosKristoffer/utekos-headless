@@ -1,6 +1,6 @@
 export function ProductCareHeader() {
   return (
-    <header className='mx-auto max-w-3xl text-center'>
+    <section className='mx-auto max-w-3xl text-center'>
       <h1 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
         Ta vare på kosen
       </h1>
@@ -9,6 +9,6 @@ export function ProductCareHeader() {
         vedlikehold sikrer du at ditt Utekos-plagg fortsetter å forlenge de gode
         stundene, år etter år.
       </p>
-    </header>
+    </section>
   )
 }

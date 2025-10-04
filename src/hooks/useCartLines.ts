@@ -5,10 +5,9 @@ import { useQuery } from '@tanstack/react-query'
 import { useCartId } from '@/hooks/useCartId'
 import { fetchCart } from '@/lib/helpers/cart/fetchCart'
 import type { Cart } from '@types'
-import { useMemo } from 'react'
 
-// Stable selector outside component for best performance
-const selectLineIds = (cart: Cart | null): string[] =>
+// En stabil, utenforstående "selector"-funksjon for å hente kun linje-ID-er
+const selectLineIds = (cart: Cart | null) =>
   cart?.lines?.map(line => line.id) ?? []
 
 export const useCartLineIds = () => {
@@ -21,10 +20,6 @@ export const useCartLineIds = () => {
       return fetchCart(cartId)
     },
     enabled: !!cartId,
-    select: selectLineIds,
-    staleTime: 1000 * 60,
-    gcTime: 1000 * 60 * 10,
-    refetchOnWindowFocus: false,
-    structuralSharing: true
+    select: selectLineIds // Bruk selectoren her
   })
 }

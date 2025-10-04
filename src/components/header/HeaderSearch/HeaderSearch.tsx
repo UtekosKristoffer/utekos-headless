@@ -21,8 +21,6 @@ import {
   Suspense
 } from 'react'
 import type { Route } from 'next'
-
-// Memoized SVG component
 const TablerArrowRight = memo((props: React.SVGProps<SVGSVGElement>) => (
   <svg
     viewBox='0 0 24 24'
@@ -243,7 +241,6 @@ export function HeaderSearch({ className }: { className?: string }) {
 
   useCommandK(open, setOpen)
 
-  // Prefetch on interaction, not on mount
   const handlePrefetch = useCallback(() => {
     startTransition(() => {
       prefetch()

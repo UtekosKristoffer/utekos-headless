@@ -7,15 +7,26 @@ import { Loader2 } from 'lucide-react'
 import type { ProductCardFooterProps } from '@types'
 import Link from 'next/link'
 import type React from 'react'
+import { useTransition } from 'react' // Importer useTransition
 import { ProductCardSoldOut } from './ProductCardSoldOut'
 
 export function ProductCardFooter({
   price,
   productUrl,
   isAvailable,
-  isPending,
+  isPending: isMutationPending, // Gi nytt navn for å unngå kollisjon
   onQuickBuy
 }: ProductCardFooterProps) {
+  const [isTransitioning, startTransition] = useTransition()
+
+  const handleQuickBuyClick = (e: React.MouseEvent) => {
+    startTransition(() => {
+      onQuickBuy(e) // Kall den originale funksjonen inne i en transition
+    })
+  }
+
+  const isPending = isTransitioning || isMutationPending
+
   return (
     <CardFooter className='mt-auto flex flex-col gap-4 p-6 pt-0'>
       <div className='flex w-full items-center justify-between'>
@@ -33,7 +44,7 @@ export function ProductCardFooter({
         </Link>
         {isAvailable ?
           <Button
-            onClick={onQuickBuy}
+            onClick={handleQuickBuyClick} // Bruk den nye handleren
             variant='default'
             size='default'
             disabled={isPending}

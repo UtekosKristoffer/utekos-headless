@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export function GaveGuideHero() {
   return (
-    <header className='py-24 text-center bg-sidebar-foreground border-b border-neutral-800'>
+    <section className='py-24 text-center bg-sidebar-foreground border-b border-neutral-800'>
       <div className='container mx-auto px-4'>
         <p className='font-semibold text-primary mb-2'>Gaveguiden</p>
         <h1 className='text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'>
@@ -20,6 +20,6 @@ export function GaveGuideHero() {
           </Button>
         </div>
       </div>
-    </header>
+    </section>
   )
 }

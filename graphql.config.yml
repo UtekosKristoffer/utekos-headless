@@ -1,3 +1,0 @@
-schema: 'schema.graphql'
-documents: '.*/**/*.{graphql, gqlnb, gql, js, ts, jsx, mts, tsx}'
-extensions: ['graphql', 'graphql-tag', 'graphql-config', 'graphql-notebook']
