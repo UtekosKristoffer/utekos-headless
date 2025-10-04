@@ -2,31 +2,12 @@
 
 import { memo } from 'react'
 import { motion } from 'framer-motion'
-import { ImageColumnSkeleton } from './ImageColumnSkeleton'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, CloudRain, Feather, ShieldCheck } from 'lucide-react'
-import { FeatureCardSkeleton } from '../../Skeletons/FeatureCardSkeleton'
 import { AmbientBackgroundGlow } from './AmbientBackgroundGlow'
-const FeatureCard = dynamic(
-  () =>
-    import('@/components/frontpage/components/FeatureCard').then(
-      mod => mod.FeatureCard
-    ),
-  {
-    loading: () => <FeatureCardSkeleton />,
-    ssr: false
-  }
-)
-
-const ImageColumn = dynamic(
-  () => import('./ImageColumn').then(mod => mod.ImageColumn),
-  {
-    loading: () => <ImageColumnSkeleton />,
-    ssr: false
-  }
-)
+import { FeatureCard } from './FeatureCard'
+import { ImageColumn } from './ImageColumn'
 
 const features = [
   {

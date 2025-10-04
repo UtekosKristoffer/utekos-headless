@@ -27,6 +27,7 @@ const MotionContent = dynamic(
     loading: () => <div className='mb-8 text-center' />
   }
 )
+
 export function HeroSection() {
   return (
     <section className='relative container mx-auto px-4 pt-12 pb-2 overflow-hidden'>

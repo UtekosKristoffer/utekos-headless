@@ -1,6 +1,17 @@
 // Path: src/components/cart/CartLineItem.tsx
 'use client'
-
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
+} from '@/components/ui/alert-dialog'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
 import { useCartLine } from '@/hooks/useCartLine'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
@@ -12,97 +23,6 @@ import type { Route } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import dynamic from 'next/dynamic'
-
-const AspectRatio = dynamic(
-  () => import('@/components/ui/aspect-ratio').then(mod => mod.AspectRatio),
-  {
-    ssr: false,
-    loading: () => <div />
-  }
-)
-
-const AlertDialogDescription = dynamic(
-  () =>
-    import('@/components/ui/alert-dialog').then(
-      mod => mod.AlertDialogDescription
-    ),
-  {
-    ssr: false,
-    loading: () => <div />
-  }
-)
-
-const AlertDialogCancel = dynamic(
-  () =>
-    import('@/components/ui/alert-dialog').then(mod => mod.AlertDialogCancel),
-  {
-    ssr: false,
-    loading: () => <div />
-  }
-)
-
-const AlertDialogTitle = dynamic(
-  () =>
-    import('@/components/ui/alert-dialog').then(mod => mod.AlertDialogTitle),
-  {
-    ssr: false,
-    loading: () => <div />
-  }
-)
-
-const AlertDialogFooter = dynamic(
-  () =>
-    import('@/components/ui/alert-dialog').then(mod => mod.AlertDialogFooter),
-  {
-    ssr: false,
-    loading: () => <div />
-  }
-)
-
-const AlertDialog = dynamic(
-  () => import('@/components/ui/alert-dialog').then(mod => mod.AlertDialog),
-  {
-    ssr: false,
-    loading: () => <div />
-  }
-)
-
-const AlertDialogContent = dynamic(
-  () =>
-    import('@/components/ui/alert-dialog').then(mod => mod.AlertDialogContent),
-  {
-    ssr: false,
-    loading: () => <div />
-  }
-)
-
-const AlertDialogHeader = dynamic(
-  () =>
-    import('@/components/ui/alert-dialog').then(mod => mod.AlertDialogHeader),
-  {
-    ssr: false,
-    loading: () => <div />
-  }
-)
-
-const AlertDialogAction = dynamic(
-  () =>
-    import('@/components/ui/alert-dialog').then(mod => mod.AlertDialogAction),
-  {
-    ssr: false,
-    loading: () => <div />
-  }
-)
-
-const AlertDialogTrigger = dynamic(
-  () =>
-    import('@/components/ui/alert-dialog').then(mod => mod.AlertDialogTrigger),
-  {
-    ssr: false,
-    loading: () => <div />
-  }
-)
 
 interface CartLineItemProps {
   lineId: string
@@ -129,12 +49,10 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
     }
   }, [])
 
-  // Steg 2: Nå kan vi trygt returnere tidlig hvis data ikke er klar
   if (!line) {
     return null
   }
 
-  // Steg 3: All logikk og JSX er trygg fordi 'line' garantert eksisterer her
   const handleUpdateQuantity = (newQuantity: number) => {
     setLocalQuantity(newQuantity)
 
