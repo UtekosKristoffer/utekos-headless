@@ -1,11 +1,11 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Flame, Users, Clock } from 'lucide-react'
+import { ArrowRight, Anchor, Waves, Sun } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
-export function GrillHeroSection() {
+export function BoatingHeroSection() {
   return (
     <section className='relative flex min-h-[70vh] items-center overflow-hidden'>
       {/* Ambient background glow with subtle animation */}
@@ -16,29 +16,29 @@ export function GrillHeroSection() {
             opacity: [0.25, 0.3, 0.25]
           }}
           transition={{
-            duration: 8,
+            duration: 10,
             repeat: Infinity,
             ease: 'easeInOut'
           }}
           className='absolute left-1/3 top-1/4 h-[600px] w-[600px] blur-3xl'
           style={{
-            background: 'radial-gradient(circle, #f97316 0%, transparent 70%)'
+            background: 'radial-gradient(circle, #0ea5e9 0%, transparent 70%)'
           }}
         />
         <motion.div
           animate={{
-            scale: [1, 1.15, 1],
-            opacity: [0.2, 0.25, 0.2]
+            scale: [1, 1.12, 1],
+            opacity: [0.2, 0.28, 0.2]
           }}
           transition={{
-            duration: 10,
+            duration: 12,
             repeat: Infinity,
             ease: 'easeInOut',
-            delay: 2
+            delay: 3
           }}
           className='absolute right-1/3 bottom-1/4 h-[600px] w-[600px] blur-3xl'
           style={{
-            background: 'radial-gradient(circle, #ef4444 0%, transparent 70%)'
+            background: 'radial-gradient(circle, #06b6d4 0%, transparent 70%)'
           }}
         />
       </div>
@@ -56,10 +56,19 @@ export function GrillHeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className='mb-6 inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-900/10 px-4 py-2'
+            className='mb-6 flex items-center gap-3 text-sm text-muted-foreground'
           >
-            <Flame className='h-4 w-4 text-orange-400' />
-            <span className='font-medium text-orange-400'>Grillkvelden</span>
+            <Link
+              href='/inspirasjon'
+              className='transition-colors hover:text-foreground'
+            >
+              Inspirasjon
+            </Link>
+            <span>/</span>
+            <span className='inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-900/10 px-3 py-1'>
+              <Anchor className='h-3 w-3 text-sky-400' />
+              <span className='font-medium text-sky-400'>Båtliv</span>
+            </span>
           </motion.div>
 
           <motion.h1
@@ -68,9 +77,9 @@ export function GrillHeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className='text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'
           >
-            Grillkvelden som{' '}
-            <span className='bg-gradient-to-r from-orange-400 to-orange-900/50 bg-clip-text text-transparent'>
-              aldri tar slutt
+            Båtliv uten{' '}
+            <span className='bg-gradient-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent'>
+              å fryse
             </span>
           </motion.h1>
 
@@ -80,8 +89,8 @@ export function GrillHeroSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className='mt-6 max-w-2xl text-xl leading-relaxed text-muted-foreground'
           >
-            Bli verten for de uforglemmelige kveldene, der de gode samtalene og
-            latteren fortsetter lenge etter at den siste pølsen er grillet.
+            Fra den første kaffen i soloppgang til ankerdrammen under stjernene.
+            Opplev en lengre og mer komfortabel båtsesong med varme som varer.
           </motion.p>
 
           <motion.div
@@ -92,12 +101,12 @@ export function GrillHeroSection() {
           >
             <Button asChild size='lg' className='group'>
               <Link href='/produkter'>
-                Bli klar for kvelden
+                Se produkter for båtfolket
                 <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
               </Link>
             </Button>
             <Button variant='outline' size='lg' asChild>
-              <Link href='#bruksomrader'>Se øyeblikkene</Link>
+              <Link href='#bruksomrader'>Utforsk mulighetene</Link>
             </Button>
           </motion.div>
 
@@ -113,16 +122,14 @@ export function GrillHeroSection() {
                 className='absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
                 style={{
                   background:
-                    'radial-gradient(120% 120% at 50% 0%, transparent 30%, #f97316 100%)'
+                    'radial-gradient(120% 120% at 50% 0%, transparent 30%, #0ea5e9 100%)'
                 }}
               />
               <div className='relative'>
-                <Flame className='h-8 w-8 text-orange-400 mb-3' />
-                <p className='font-semibold text-foreground mb-1'>
-                  Ved grillen
-                </p>
+                <Sun className='h-8 w-8 text-amber-400 mb-3' />
+                <p className='font-semibold text-foreground mb-1'>Soloppgang</p>
                 <p className='text-sm text-muted-foreground'>
-                  Hold varmen mens du steker
+                  Nyt morgenkaffeen i cockpiten
                 </p>
               </div>
             </div>
@@ -132,16 +139,16 @@ export function GrillHeroSection() {
                 className='absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
                 style={{
                   background:
-                    'radial-gradient(120% 120% at 50% 0%, transparent 30%, #ef4444 100%)'
+                    'radial-gradient(120% 120% at 50% 0%, transparent 30%, #06b6d4 100%)'
                 }}
               />
               <div className='relative'>
-                <Clock className='h-8 w-8 text-red-400 mb-3' />
+                <Waves className='h-8 w-8 text-blue-800 mb-3' />
                 <p className='font-semibold text-foreground mb-1'>
                   Hele kvelden
                 </p>
                 <p className='text-sm text-muted-foreground'>
-                  La samtalen flyte til langt på natt
+                  Forleng tiden på dekk etter solnedgang
                 </p>
               </div>
             </div>
@@ -151,16 +158,16 @@ export function GrillHeroSection() {
                 className='absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
                 style={{
                   background:
-                    'radial-gradient(120% 120% at 50% 0%, transparent 30%, #fb923c 100%)'
+                    'radial-gradient(120% 120% at 50% 0%, transparent 30%, #22d3ee 100%)'
                 }}
               />
               <div className='relative'>
-                <Users className='h-8 w-8 text-amber-400 mb-3' />
+                <Anchor className='h-8 w-8 text-teal-400 mb-3' />
                 <p className='font-semibold text-foreground mb-1'>
-                  For gjestene
+                  Lengre sesong
                 </p>
                 <p className='text-sm text-muted-foreground'>
-                  Alle sitter komfortabelt utendørs
+                  Nyt båten fra tidlig vår til sen høst
                 </p>
               </div>
             </div>

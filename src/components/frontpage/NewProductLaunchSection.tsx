@@ -112,7 +112,10 @@ function FeatureCard({ feature, delay }: FeatureCardProps) {
 
 export const NewProductLaunchSection = memo(function NewProductLaunchSection() {
   return (
-    <section className='relative mx-auto mt-16 max-w-[95%] overflow-hidden rounded-xl border border-neutral-800 py-16 md:max-w-7xl'>
+    <section
+      id='featured-product'
+      className='relative mx-auto mt-16 max-w-[95%] overflow-hidden rounded-xl border border-neutral-800 py-16 md:max-w-7xl'
+    >
       {/* Ambient background glow */}
       <div className='absolute inset-0 -z-10 overflow-hidden'>
         <div

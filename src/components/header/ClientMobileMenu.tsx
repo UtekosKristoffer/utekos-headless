@@ -3,8 +3,6 @@
 
 import type { MenuItem } from '@types'
 import dynamic from 'next/dynamic'
-
-// Den dynamiske importen skjer nå trygt inne i en Client Component
 const MobileMenu = dynamic(
   () => import('@/components/header/MobileMenu').then(mod => mod.MobileMenu),
   {
@@ -13,7 +11,6 @@ const MobileMenu = dynamic(
   }
 )
 
-// Denne komponenten fungerer som en bro
 export function ClientMobileMenu({ menu }: { menu: MenuItem[] }) {
   return <MobileMenu menu={menu} />
 }

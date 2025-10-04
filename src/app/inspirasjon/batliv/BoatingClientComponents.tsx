@@ -19,62 +19,66 @@ import Link from 'next/link'
 
 export function BoatingHeroSection() {
   return (
-    
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className='max-w-3xl'
-    >
-      <div className='mb-6 flex items-center gap-2 text-sm text-muted-foreground'>
-        <Link
-          href='/inspirasjon'
-          className='hover:text-foreground transition-colors'
+    <section className='relative min-h-[70vh] flex items-center'>
+      <div className='absolute inset-0 bg-gradient-to-b from-transparent to-background/50' />
+      <div className='container relative mx-auto px-4 py-16'>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className='max-w-3xl'
         >
-          Inspirasjon
-        </Link>
-        <span>/</span>
-        <span>Båtliv</span>
-      </div>
+          <div className='mb-6 flex items-center gap-2 text-sm text-muted-foreground'>
+            <Link
+              href='/inspirasjon'
+              className='hover:text-foreground transition-colors'
+            >
+              Inspirasjon
+            </Link>
+            <span>/</span>
+            <span>Båtliv</span>
+          </div>
 
-      <h1 className='text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl'>
-        Båtliv uten <span className='text-primary'>å fryse</span>
-      </h1>
+          <h1 className='text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl'>
+            Båtliv uten <span className='text-primary'>å fryse</span>
+          </h1>
 
-      <p className='mt-6 text-xl text-muted-foreground max-w-2xl'>
-        Fra den første kaffen i soloppgang til ankerdrammen under stjernene.
-        Opplev en lengre og mer komfortabel båtsesong med varme som varer.
-      </p>
-
-      <div className='mt-8 flex flex-wrap gap-4'>
-        <Button asChild size='lg'>
-          <Link href='/produkter'>
-            Se produkter for båtfolket
-            <ArrowRightIcon className='ml-2 h-4 w-4' />
-          </Link>
-        </Button>
-        <Button variant='outline' size='lg' asChild>
-          <Link href='#bruksomrader'>Utforsk mulighetene</Link>
-        </Button>
-      </div>
-
-      <div className='mt-12 flex flex-wrap gap-8'>
-        <div>
-          <p className='text-3xl font-bold text-sky-400'>+6 uker</p>
-          <p className='text-sm text-muted-foreground'>lengre båtsesong</p>
-        </div>
-        <div>
-          <p className='text-3xl font-bold text-green-400'>95%</p>
-          <p className='text-sm text-muted-foreground'>
-            mer komfort om kvelden
+          <p className='mt-6 text-xl text-muted-foreground max-w-2xl'>
+            Fra den første kaffen i soloppgang til ankerdrammen under stjernene.
+            Opplev en lengre og mer komfortabel båtsesong med varme som varer.
           </p>
-        </div>
-        <div>
-          <p className='text-3xl font-bold text-orange-400'>5★</p>
-          <p className='text-sm text-muted-foreground'>fra kystskippere</p>
-        </div>
+
+          <div className='mt-8 flex flex-wrap gap-4'>
+            <Button asChild size='lg'>
+              <Link href='/produkter'>
+                Se produkter for båtfolket
+                <ArrowRightIcon className='ml-2 h-4 w-4' />
+              </Link>
+            </Button>
+            <Button variant='outline' size='lg' asChild>
+              <Link href='#bruksomrader'>Utforsk mulighetene</Link>
+            </Button>
+          </div>
+
+          <div className='mt-12 flex flex-wrap gap-8'>
+            <div>
+              <p className='text-3xl font-bold text-sky-400'>+6 uker</p>
+              <p className='text-sm text-muted-foreground'>lengre båtsesong</p>
+            </div>
+            <div>
+              <p className='text-3xl font-bold text-green-400'>95%</p>
+              <p className='text-sm text-muted-foreground'>
+                mer komfort om kvelden
+              </p>
+            </div>
+            <div>
+              <p className='text-3xl font-bold text-orange-400'>5★</p>
+              <p className='text-sm text-muted-foreground'>fra kystskippere</p>
+            </div>
+          </div>
+        </motion.div>
       </div>
-    </motion.div>
+    </section>
   )
 }
 

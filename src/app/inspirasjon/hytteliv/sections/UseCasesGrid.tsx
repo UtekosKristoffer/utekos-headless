@@ -68,10 +68,10 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                       <useCase.icon className={`size-6 ${useCase.iconColor}`} />
                     </div>
                     <div>
-                      <p className='text-sm text-muted-foreground'>
+                      <p className='text-sm text-primary-foreground'>
                         {useCase.time}
                       </p>
-                      <p className='text-sm font-medium text-primary'>
+                      <p className='text-sm font-medium text-muted-foreground'>
                         {useCase.temperature}
                       </p>
                     </div>

@@ -7,7 +7,7 @@ export function FooterNavigation() {
     <div className='grid grid-cols-1 gap-8 md:grid-cols-4'>
       {footerConfig.map(section => (
         <div key={section.title}>
-          <h3 className='mb-4 text-sm font-semibold text-foreground-on-dark'>
+          <h3 className='mb-4 text-md font-semibold text-foreground-on-dark'>
             {section.title}
           </h3>
           <nav aria-label={`${section.title} navigasjon`}>

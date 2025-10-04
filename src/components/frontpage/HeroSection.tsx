@@ -34,7 +34,7 @@ export function HeroSection() {
         >
           <Award className='h-4 w-4 text-sky-800' />
           <span className='text-sm font-medium text-sky-800'>
-            Optimalisert tiden ute siden 2020
+            Holder deg varm - siden 2020
           </span>
         </motion.div>
 
@@ -69,14 +69,23 @@ export function HeroSection() {
           transition={{ duration: 0.7, delay: 0.7 }}
           className='hidden md:flex justify-center mb-8'
         >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className='flex flex-col items-center gap-2 text-muted-foreground'
+          <button
+            onClick={() => {
+              const section = document.getElementById('featured-product')
+              section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            }}
+            className='group cursor-pointer'
+            aria-label='Scroll til produkter'
           >
-            <span className='text-xs uppercase tracking-wider'>Se mer</span>
-            <ChevronDown className='h-5 w-5' />
-          </motion.div>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              className='flex flex-col items-center gap-2 text-muted-foreground transition-colors group-hover:text-foreground'
+            >
+              <span className='text-xs uppercase tracking-wider'>Se mer</span>
+              <ChevronDown className='h-5 w-5' />
+            </motion.div>
+          </button>
         </motion.div>
       </div>
 
@@ -108,6 +117,49 @@ export function HeroSection() {
             className='rounded-xl mx-auto w-full h-[60vh] xl:h-[80vh] object-cover object-bottom transition-transform duration-700 group-hover:scale-[1.02]'
             priority
           />
+        </div>
+
+        {/* Bottom gradient bar */}
+        <div className='absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-sky-500 via-cyan-400 to-sky-500' />
+      </motion.div>
+
+      {/* Social proof / stats bar */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.9 }}
+        className='max-w-4xl mx-auto'
+      >
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-6 text-center'>
+          <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/30 p-6 backdrop-blur-sm transition-all duration-300 hover:border-neutral-700'>
+            <div className='absolute inset-0 bg-gradient-to-br from-sky-500/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
+            <div className='relative'>
+              <p className='text-3xl font-bold text-foreground'>4.8/5</p>
+              <p className='mt-1 text-sm text-muted-foreground'>
+                Kundevurdering
+              </p>
+            </div>
+          </div>
+
+          <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/30 p-6 backdrop-blur-sm transition-all duration-300 hover:border-neutral-700'>
+            <div className='absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
+            <div className='relative'>
+              <p className='text-3xl font-bold text-foreground'>2000+</p>
+              <p className='mt-1 text-sm text-muted-foreground'>
+                Fornøyde kunder
+              </p>
+            </div>
+          </div>
+
+          <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/30 p-6 backdrop-blur-sm transition-all duration-300 hover:border-neutral-700'>
+            <div className='absolute inset-0 bg-gradient-to-br from-sky-500/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
+            <div className='relative'>
+              <span className='text-3xl font-bold'>🇳🇴</span>
+              <p className='mt-1 text-sm text-muted-foreground'>
+                Skapt for norske forhold
+              </p>
+            </div>
+          </div>
         </div>
       </motion.div>
     </section>

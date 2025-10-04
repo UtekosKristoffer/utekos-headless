@@ -147,20 +147,16 @@ export default function InspirasjonLayout({
         <div className='container mx-auto px-4'>
           <div className='flex flex-wrap justify-center gap-8 text-sm text-muted-foreground'>
             <div className='flex items-center gap-2'>
-              <span className='text-primary'>✓</span>
-              <span>Norsk design</span>
+              <span className='text-primary'>🇳🇴</span>
+              <span>Skapt for norske forhold</span>
             </div>
             <div className='flex items-center gap-2'>
-              <span className='text-primary'>✓</span>
+              <span className='text-sky-800'>✓</span>
               <span>Fri frakt over 999 kr</span>
             </div>
             <div className='flex items-center gap-2'>
-              <span className='text-primary'>✓</span>
-              <span>60 dagers åpent kjøp</span>
-            </div>
-            <div className='flex items-center gap-2'>
-              <span className='text-primary'>✓</span>
-              <span>2 års garanti</span>
+              <span className='text-sky-800'>✓</span>
+              <span>30 dagers åpent kjøp</span>
             </div>
           </div>
         </div>
