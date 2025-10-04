@@ -41,9 +41,8 @@ export function CartDrawer(): React.JSX.Element {
             Oversikt over varer i handleposen og handlingsknapper.
           </DrawerDescription>
         </VisuallyHidden>
-
         <CartHeader />
-        <CartBody cart={deferredCart} />
+        <CartBody />
         <SmartCartSuggestions cart={deferredCart} />
         <CartFooter cart={deferredCart} />
       </DrawerContent>

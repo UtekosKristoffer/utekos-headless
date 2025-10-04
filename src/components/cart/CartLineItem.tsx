@@ -1,3 +1,4 @@
+// Path: src/components/cart/CartLineItem.tsx
 'use client'
 
 import {
@@ -13,11 +14,11 @@ import {
 } from '@/components/ui/alert-dialog'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
+import { useCartLine } from '@/hooks/useCartLine'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import { cartStore } from '@/lib/state/cartStore'
 import { cn } from '@/lib/utils/className'
 import { formatNOK } from '@/lib/utils/formatters/formatNOK'
-import type { CartLine } from '@types'
 import { Minus, Plus, Trash2 } from 'lucide-react'
 import type { Route } from 'next'
 import Image from 'next/image'
@@ -25,21 +26,33 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
 interface CartLineItemProps {
-  line: CartLine
+  lineId: string
 }
 
-export const CartLineItem = ({ line }: CartLineItemProps) => {
+export const CartLineItem = ({ lineId }: CartLineItemProps) => {
+  const line = useCartLine(lineId)
   const cartActor = CartMutationContext.useActorRef()
-  const [localQuantity, setLocalQuantity] = useState(line.quantity)
+  const [localQuantity, setLocalQuantity] = useState(line?.quantity ?? 1)
   const [isDeleting, setIsDeleting] = useState(false)
   const updateTimerRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
-    if (!isDeleting) {
+    if (line && !isDeleting && line.quantity !== localQuantity) {
       setLocalQuantity(line.quantity)
     }
-  }, [line.quantity, isDeleting])
+  }, [line, isDeleting, localQuantity])
 
+  useEffect(() => {
+    return () => {
+      if (updateTimerRef.current) {
+        clearTimeout(updateTimerRef.current)
+      }
+    }
+  }, [])
+
+  if (!line) {
+    return null
+  }
   const handleUpdateQuantity = (newQuantity: number) => {
     setLocalQuantity(newQuantity)
 
@@ -75,14 +88,6 @@ export const CartLineItem = ({ line }: CartLineItemProps) => {
     })
   }
 
-  useEffect(() => {
-    return () => {
-      if (updateTimerRef.current) {
-        clearTimeout(updateTimerRef.current)
-      }
-    }
-  }, [])
-
   const productTitle = line.merchandise.product?.title || 'Produkt'
   const productHandle = line.merchandise.product?.handle
   const productUrl = (
@@ -99,7 +104,7 @@ export const CartLineItem = ({ line }: CartLineItemProps) => {
   return (
     <div
       className={cn('flex gap-4 transition-all duration-200', {
-        'item-deleting': isDeleting
+        'opacity-50 pointer-events-none': isDeleting
       })}
     >
       <Link href={productUrl} onClick={() => cartStore.send({ type: 'CLOSE' })}>
