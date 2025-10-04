@@ -3,55 +3,32 @@
 
 import { Button } from '@/components/ui/button'
 import { DrawerTrigger } from '@/components/ui/drawer'
-import { useCartQuery } from '@/hooks/useCartQuery' // 👈 legg til
+import { useCartQuery } from '@/hooks/useCartQuery'
 import { useCartStoreSnapshot } from '@/hooks/useCartStoreSnapshot'
 import { cn } from '@/lib/utils/className'
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
 import * as React from 'react'
 
-type CartLike = {
-  totalQuantity?: number
-  lines?: Array<{ quantity?: number | null | undefined }> | null | undefined
-}
-
-const sumLinesObject = (lines: Record<string, unknown> | undefined): number => {
+const getOptimisticCount = (
+  lines: Record<string, unknown> | undefined
+): number => {
   if (!lines) return 0
-
-  return (Object.values(lines) as unknown[]).reduce<number>((sum, v) => {
-    if (typeof v === 'number') return sum + v
-
-    if (v && typeof v === 'object') {
-      const o = v as { quantity?: unknown; qty?: unknown }
-      if (typeof o.quantity === 'number') return sum + o.quantity
-      if (typeof o.qty === 'number') return sum + o.qty
-    }
-
-    return sum
+  return Object.values(lines).reduce<number>((sum, line) => {
+    const quantity = (line as { quantity?: unknown })?.quantity
+    return sum + (typeof quantity === 'number' ? quantity : 0)
   }, 0)
 }
 
-const sumCartQuery = (cart: CartLike | null | undefined): number => {
-  if (!cart) return 0
-  if (typeof cart.totalQuantity === 'number') return cart.totalQuantity
-
-  if (Array.isArray(cart.lines)) {
-    return cart.lines.reduce<number>(
-      (s, l) => s + (typeof l?.quantity === 'number' ? l.quantity : 0),
-      0
-    )
-  }
-  return 0
-}
 export function CartTrigger({
   className
 }: {
   className?: string
 }): React.JSX.Element {
   const { optimisticCartLines } = useCartStoreSnapshot().context
-  const { data: cart } = useCartQuery() // 👈 henter “ekte” cart
-  const optimisticCount = sumLinesObject(optimisticCartLines?.lines)
-  const fallbackCount = sumCartQuery(cart)
-  const itemCount = optimisticCount > 0 ? optimisticCount : fallbackCount // 👈 fallback
+  const { data: cart } = useCartQuery()
+  const optimisticCount = getOptimisticCount(optimisticCartLines?.lines)
+  const serverCount = cart?.totalQuantity ?? 0
+  const itemCount = optimisticCount > 0 ? optimisticCount : serverCount
 
   return (
     <DrawerTrigger asChild>
