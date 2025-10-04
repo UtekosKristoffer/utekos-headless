@@ -157,7 +157,7 @@ export const NewProductLaunchSection = memo(function NewProductLaunchSection() {
                         fill
                         className='object-cover transition-transform duration-500 hover:scale-105'
                         sizes='(max-width: 768px) 100vw, 50vw'
-                        priority={index === 0}
+                        fetchPriority='high'
                       />
                     </AspectRatio>
                   </CarouselItem>

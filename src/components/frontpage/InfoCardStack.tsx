@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils/className'
 import { Lock, ShoppingBag } from 'lucide-react'
 import Image from 'next/image'
-import UtekosLogo from '../../../public/icon.png'
+import UtekosLogo from '@public/icon.png'
 
 const TrafficLights = ({
   variant = 'default'

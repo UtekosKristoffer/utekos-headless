@@ -4,7 +4,6 @@ import { Background, Controls, ReactFlow } from '@xyflow/react'
 import { nodeTypes } from '../@constants/CustomNode'
 import { vintercampEdges } from '../@constants/vintercampEdges'
 import { vintercampNodes } from '../@constants/vintercampNodes'
-import '@xyflow/react/dist/style.css'
 export function VintercampFlow() {
   return (
     <div

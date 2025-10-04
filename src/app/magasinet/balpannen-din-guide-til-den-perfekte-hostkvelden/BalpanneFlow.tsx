@@ -1,5 +1,3 @@
-
-
 'use client'
 
 import {
@@ -8,7 +6,7 @@ import {
   ReactFlow,
   ReactFlowProvider
 } from '@xyflow/react'
-import '@xyflow/react/dist/style.css'
+
 import { initialEdges } from './constants/initialEdges'
 import { initialNodes } from './constants/initialNodes'
 import { nodeTypes } from './constants/nodeTypes'

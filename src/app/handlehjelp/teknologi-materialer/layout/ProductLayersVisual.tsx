@@ -47,6 +47,7 @@ export function ProductLayersVisual({ activeTech }: { activeTech: string }) {
             strokeWidth='12'
             strokeLinecap='round'
             fill='none'
+            
             className='stroke-pink-500'
             animate={{
               opacity: activeLayer === 'insulation' ? 1 : 0.2,

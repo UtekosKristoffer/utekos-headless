@@ -119,6 +119,7 @@ export function ProductCard({ product, colorHexMap }: ProductCardProps) {
               src={imageUrl}
               alt={altText}
               fill
+              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
               className='product-card-image'
             />
           </AspectRatio>

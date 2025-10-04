@@ -116,6 +116,7 @@ export function HeroSection() {
             height={1363}
             className='rounded-xl mx-auto w-full h-[60vh] xl:h-[80vh] object-cover object-bottom transition-transform duration-700 group-hover:scale-[1.02]'
             priority
+            fetchPriority='high'
           />
         </div>
 

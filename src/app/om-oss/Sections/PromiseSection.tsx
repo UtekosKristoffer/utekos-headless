@@ -15,7 +15,7 @@ import {
   type OnEdgesChange,
   type OnNodesChange
 } from '@xyflow/react'
-import '@xyflow/react/dist/style.css'
+
 import { Handshake } from 'lucide-react'
 import { memo, useCallback, useState } from 'react'
 

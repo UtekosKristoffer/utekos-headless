@@ -8,7 +8,7 @@ import {
   ReactFlowProvider,
   useReactFlow
 } from '@xyflow/react'
-import '@xyflow/react/dist/style.css'
+
 import { useEffect, useState } from 'react' // Importer useEffect
 import CustomNode from '../balpannen-din-guide-til-den-perfekte-hostkvelden/constants/CustomNode'
 import { initialEdges, initialNodes } from './initialElements'

@@ -10,13 +10,12 @@ import {
   type Node,
   type NodeProps
 } from '@xyflow/react'
-import '@xyflow/react/dist/style.css'
+
 import { Check, Feather, Heart, Moon, type LucideIcon } from 'lucide-react'
 import Image from 'next/image'
 import { memo } from 'react'
-import UtekosLogo from '../../../public/icon.png'
+import UtekosLogo from '@public/icon.png'
 
-// Type-definisjon for benefit nodes
 interface BenefitNodeData {
   icon: LucideIcon
   text: string
@@ -24,12 +23,9 @@ interface BenefitNodeData {
   iconColor: string
 }
 
-// Custom node for benefits
 const BenefitNode = memo(({ data, id }: NodeProps) => {
   const nodeData = data as unknown as BenefitNodeData
   const Icon = nodeData.icon
-
-  // Bestem handle-posisjon basert på node ID
   const isTopNode = id === 'benefit-1' || id === 'benefit-2'
   const handlePosition = isTopNode ? Position.Bottom : Position.Top
 

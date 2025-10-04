@@ -25,6 +25,7 @@ export function PersonaCards() {
                   src='/coffe_utekos.webp'
                   alt='Hyttekos i tørt, kaldt vær med Utekos Dun'
                   fill
+                  sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                   className='object-cover'
                 />
               </div>
@@ -57,6 +58,7 @@ export function PersonaCards() {
                   src='/half-diagonal.webp'
                   alt='Utekos Fiberdun i uforutsigbart vær'
                   fill
+                  sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                   className='object-cover aspect-[2/3]'
                 />
               </div>
@@ -91,6 +93,7 @@ export function PersonaCards() {
                   src='/frontpage-kate-linn.webp'
                   alt='Allsidig, daglig bruk av Utekos Mikrofiber'
                   fill
+                  sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                   className='object-cover'
                 />
               </div>

@@ -7,7 +7,6 @@ import {
   ReactFlow,
   ReactFlowProvider
 } from '@xyflow/react'
-import '@xyflow/react/dist/style.css'
 import { Moon, Sun } from 'lucide-react'
 import { memo, useState } from 'react'
 

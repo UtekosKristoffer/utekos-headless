@@ -1,5 +1,6 @@
 // Path: src/app/layout.tsx
 import 'swiper/swiper-bundle.css'
+import '@xyflow/react/dist/style.css'
 import './globals.css'
 import '@/db/zod/zodConfig'
 import { geistSans, geistMono } from '@/db/config/font.config'

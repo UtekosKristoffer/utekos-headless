@@ -1,7 +1,6 @@
 import { ALargeSmall, Car, Droplets, Wrench } from 'lucide-react'
 
 import { type Node } from '@xyflow/react'
-import '@xyflow/react/dist/style.css'
 
 export const bobilPrepNodes: Node[] = [
   {

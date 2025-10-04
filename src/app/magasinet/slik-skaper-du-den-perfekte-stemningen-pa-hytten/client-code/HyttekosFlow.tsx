@@ -8,7 +8,6 @@ import {
   ReactFlow,
   ReactFlowProvider
 } from '@xyflow/react'
-import '@xyflow/react/dist/style.css' // KRITISK: Må importere React Flow CSS
 import { initialEdges } from '../@constants/initialEdges'
 import { initialNodes } from '../@constants/initialNodes'
 import { nodeTypes } from '../@constants/nodeTypes'

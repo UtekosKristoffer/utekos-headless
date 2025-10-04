@@ -26,6 +26,7 @@ export default function AboutPage() {
             alt='Stemningsfullt bilde av norsk natur i skumringen'
             quality={100}
             fill
+            sizes='100vw'
             className='object-cover'
             priority
           />

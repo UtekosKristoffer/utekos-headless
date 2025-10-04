@@ -10,13 +10,13 @@ import {
   CommandList
 } from '@/components/ui/command'
 import { cn } from '@/lib/utils/className'
-import { useVirtualizer } from '@tanstack/react-virtual'
 import { SearchIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import * as React from 'react'
+import { useDeferredValue } from 'react' // Importer useDeferredValue
 import type { Route } from 'next'
 
-// --- Hjelpe-komponenter og hooks (uendret) ---
+// --- (Alle hjelpefunksjoner, hooks og typer forblir de samme som før) ---
 function TablerArrowRight(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -35,7 +35,6 @@ function TablerArrowRight(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
-
 function useCommandK(open: boolean, setOpen: (v: boolean) => void) {
   React.useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -49,11 +48,9 @@ function useCommandK(open: boolean, setOpen: (v: boolean) => void) {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [open, setOpen])
 }
-
 const navigateToPath = (router: ReturnType<typeof useRouter>, href: string) => {
   router.push(href as Route)
 }
-
 type SearchItem = {
   id: string
   title: string
@@ -62,7 +59,6 @@ type SearchItem = {
   keywords?: string[]
   children?: SearchItem[]
 }
-
 type SearchGroup = {
   key: string
   label: string
@@ -79,7 +75,6 @@ function ItemRow({
 }) {
   const paddings = ['pl-0', 'pl-6', 'pl-10', 'pl-14', 'pl-16']
   const pad = paddings[Math.min(depth, paddings.length - 1)]
-
   return (
     <>
       <CommandItem
@@ -94,7 +89,6 @@ function ItemRow({
         <TablerArrowRight className='size-4' />
         <span className='truncate'>{item.title}</span>
       </CommandItem>
-
       {depth === 0
         && (item.children || []).map(child => (
           <CommandItem
@@ -117,25 +111,20 @@ function ItemRow({
     </>
   )
 }
-
 const useSearchIndex = () => {
   const [groups, setGroups] = React.useState<SearchGroup[] | null>(null)
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
   const hasFetched = React.useRef(false)
-
   const prefetch = React.useCallback(async () => {
-    if (hasFetched.current || loading) {
-      return
-    }
+    if (hasFetched.current || loading) return
     hasFetched.current = true
     setLoading(true)
     setError(null)
     try {
       const res = await fetch('/api/search-index')
-      if (!res.ok) {
+      if (!res.ok)
         throw new Error(`Klarte ikke hente søkeindeks (status: ${res.status})`)
-      }
       const data = await res.json()
       setGroups(data.groups as SearchGroup[])
     } catch (e: any) {
@@ -144,19 +133,14 @@ const useSearchIndex = () => {
       setLoading(false)
     }
   }, [loading])
-
   return { groups, loading, error, prefetch }
 }
-
-// Definerer typene for den flate listen vi skal lage
-type FlatSearchItem =
-  | { type: 'group'; key: string; label: string }
-  | { type: 'item'; key: string; data: SearchItem }
 
 export function HeaderSearch({ className }: { className?: string }) {
   const [open, setOpen] = React.useState(false)
   const router = useRouter()
   const { groups, loading, error, prefetch } = useSearchIndex()
+  const deferredGroups = useDeferredValue(groups) // Lag en utsatt versjon av søkeresultatene
 
   useCommandK(open, setOpen)
 
@@ -165,28 +149,6 @@ export function HeaderSearch({ className }: { className?: string }) {
       prefetch()
     }
   }, [open, prefetch])
-
-  // Steg 1: Flater ut den nestede datastrukturen til en enkelt liste
-  const flatItems = React.useMemo<FlatSearchItem[]>(() => {
-    if (!groups) return []
-    const items: FlatSearchItem[] = []
-    groups.forEach(group => {
-      items.push({ type: 'group', key: group.key, label: group.label })
-      group.items.forEach(item => {
-        items.push({ type: 'item', key: item.id, data: item })
-      })
-    })
-    return items
-  }, [groups])
-
-  // Steg 2: Setter opp virtualiserings-logikken
-  const parentRef = React.useRef<HTMLDivElement>(null)
-  const rowVirtualizer = useVirtualizer({
-    count: flatItems.length,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 36, // Estimert høyde for hver rad (h-9 = 36px)
-    overscan: 5 // Render 5 ekstra elementer for jevnere scrolling
-  })
 
   const go = (path: string) => {
     setOpen(false)
@@ -232,10 +194,7 @@ export function HeaderSearch({ className }: { className?: string }) {
         description='Søk etter produkter eller sider..'
       >
         <CommandInput placeholder='Søk på nettsiden..' />
-        <CommandList
-          ref={parentRef}
-          className='no-scrollbar min-h-80 scroll-pt-2 scroll-pb-1.5'
-        >
+        <CommandList className='no-scrollbar min-h-80 scroll-pt-2 scroll-pb-1.5'>
           <CommandEmpty>
             {loading ?
               'Laster sider...'
@@ -244,32 +203,25 @@ export function HeaderSearch({ className }: { className?: string }) {
             : 'Ingen treff.'}
           </CommandEmpty>
 
-          {rowVirtualizer.getTotalSize() > 0 && (
-            <div
-              className='relative w-full'
-              style={{ height: `${rowVirtualizer.getTotalSize()}px` }}
-            >
-              {rowVirtualizer.getVirtualItems().map(virtualRow => {
-                const item = flatItems[virtualRow.index]!
-                return (
-                  <div
-                    key={item.key}
-                    className='absolute left-0 top-0 w-full'
-                    style={{
-                      height: `${virtualRow.size}px`,
-                      transform: `translateY(${virtualRow.start}px)`
-                    }}
-                  >
-                    {item.type === 'group' ?
-                      <CommandGroup heading={item.label} className='!p-0' />
-                    : <ItemRow item={item.data} depth={0} onSelect={go} />}
-                  </div>
-                )
-              })}
-            </div>
-          )}
+          {!loading
+            && !error
+            && deferredGroups?.map(
+              (
+                group // Bruk den utsatte versjonen her
+              ) => (
+                <CommandGroup key={group.key} heading={group.label}>
+                  {group.items.map(item => (
+                    <ItemRow
+                      key={item.id}
+                      item={item}
+                      depth={0}
+                      onSelect={go}
+                    />
+                  ))}
+                </CommandGroup>
+              )
+            )}
         </CommandList>
-
         <div
           aria-hidden
           className={cn(
