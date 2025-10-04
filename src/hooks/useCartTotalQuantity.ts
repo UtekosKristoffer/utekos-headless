@@ -1,36 +1,10 @@
-// Path: src/hooks/useCartQuery.tsx
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
 import { useCartId } from '@/hooks/useCartId'
 import { fetchCart } from '@/lib/helpers/cart/fetchCart'
 import type { Cart } from '@types'
-import { useMemo, useCallback } from 'react'
-
-export const useCartQuery = () => {
-  const cartId = useCartId()
-
-  // Stabilisert query config
-  const queryConfig = useMemo(
-    () => ({
-      queryKey: ['cart', cartId] as const,
-      queryFn: async () => {
-        if (!cartId) return null
-        return fetchCart(cartId)
-      },
-      enabled: !!cartId,
-      staleTime: 1000 * 60, // 1 minute stale time
-      gcTime: 1000 * 60 * 10, // 10 minutes garbage collection
-      refetchOnWindowFocus: false, // Disable auto-refetch on focus
-      refetchOnMount: false // Don't refetch on mount if data exists
-    }),
-    [cartId]
-  )
-
-  return useQuery<Cart | null>(queryConfig)
-}
-
-// Selective cart total quantity hook
+import { useCallback } from 'react'
 export const useCartTotalQuantity = () => {
   const cartId = useCartId()
 

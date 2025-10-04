@@ -1,17 +1,12 @@
-// Path: src/hooks/useCartLines.ts
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
 import { useCartId } from '@/hooks/useCartId'
 import { fetchCart } from '@/lib/helpers/cart/fetchCart'
 import type { Cart } from '@types'
-import { useMemo } from 'react'
+import { useCallback } from 'react'
 
-// Stable selector outside component for best performance
-const selectLineIds = (cart: Cart | null): string[] =>
-  cart?.lines?.map(line => line.id) ?? []
-
-export const useCartLineIds = () => {
+export const useCartLinesOnly = () => {
   const cartId = useCartId()
 
   return useQuery({
@@ -21,10 +16,9 @@ export const useCartLineIds = () => {
       return fetchCart(cartId)
     },
     enabled: !!cartId,
-    select: selectLineIds,
+    select: useCallback((data: Cart | null) => data?.lines ?? [], []),
     staleTime: 1000 * 60,
     gcTime: 1000 * 60 * 10,
-    refetchOnWindowFocus: false,
-    structuralSharing: true
+    refetchOnWindowFocus: false
   })
 }

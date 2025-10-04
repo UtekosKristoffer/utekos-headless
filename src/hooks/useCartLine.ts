@@ -10,8 +10,8 @@ import { useCallback } from 'react'
 export const useCartLine = (lineId: string): CartLine | undefined => {
   const cartId = useCartId()
 
-  // Bruk useCallback for å lage en stabil select-funksjon som ikke endrer seg på hver render
-  const selectLineById = useCallback(
+  // Stabilized selector function with memoized dependency
+  const selector = useCallback(
     (cart: Cart | null): CartLine | undefined =>
       cart?.lines?.find(line => line.id === lineId),
     [lineId]
@@ -23,8 +23,12 @@ export const useCartLine = (lineId: string): CartLine | undefined => {
       if (!cartId) return null
       return fetchCart(cartId)
     },
-    enabled: !!cartId,
-    select: selectLineById // Bruk den stabile selectoren her
+    enabled: !!cartId && !!lineId,
+    select: selector,
+    staleTime: 1000 * 60,
+    gcTime: 1000 * 60 * 10,
+    refetchOnWindowFocus: false,
+    structuralSharing: true
   })
 
   return line
