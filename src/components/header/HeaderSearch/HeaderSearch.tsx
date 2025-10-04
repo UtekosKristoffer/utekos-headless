@@ -10,6 +10,7 @@ import {
   CommandList
 } from '@/components/ui/command'
 import { cn } from '@/lib/utils/className'
+import { useVirtualizer } from '@tanstack/react-virtual'
 import { SearchIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import * as React from 'react'
@@ -53,7 +54,6 @@ const navigateToPath = (router: ReturnType<typeof useRouter>, href: string) => {
   router.push(href as Route)
 }
 
-// --- Typer (uendret) ---
 type SearchItem = {
   id: string
   title: string
@@ -68,8 +68,6 @@ type SearchGroup = {
   label: string
   items: SearchItem[]
 }
-
-// --- ItemRow (uendret) ---
 function ItemRow({
   item,
   depth,
@@ -120,7 +118,6 @@ function ItemRow({
   )
 }
 
-// --- Ny, gjenbrukbar hook for å hente søkeindeks ---
 const useSearchIndex = () => {
   const [groups, setGroups] = React.useState<SearchGroup[] | null>(null)
   const [loading, setLoading] = React.useState(false)
@@ -151,6 +148,11 @@ const useSearchIndex = () => {
   return { groups, loading, error, prefetch }
 }
 
+// Definerer typene for den flate listen vi skal lage
+type FlatSearchItem =
+  | { type: 'group'; key: string; label: string }
+  | { type: 'item'; key: string; data: SearchItem }
+
 export function HeaderSearch({ className }: { className?: string }) {
   const [open, setOpen] = React.useState(false)
   const router = useRouter()
@@ -158,12 +160,33 @@ export function HeaderSearch({ className }: { className?: string }) {
 
   useCommandK(open, setOpen)
 
-  // Trigger prefetch når dialogen faktisk skal åpnes, hvis det ikke allerede er gjort
   React.useEffect(() => {
     if (open) {
       prefetch()
     }
   }, [open, prefetch])
+
+  // Steg 1: Flater ut den nestede datastrukturen til en enkelt liste
+  const flatItems = React.useMemo<FlatSearchItem[]>(() => {
+    if (!groups) return []
+    const items: FlatSearchItem[] = []
+    groups.forEach(group => {
+      items.push({ type: 'group', key: group.key, label: group.label })
+      group.items.forEach(item => {
+        items.push({ type: 'item', key: item.id, data: item })
+      })
+    })
+    return items
+  }, [groups])
+
+  // Steg 2: Setter opp virtualiserings-logikken
+  const parentRef = React.useRef<HTMLDivElement>(null)
+  const rowVirtualizer = useVirtualizer({
+    count: flatItems.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 36, // Estimert høyde for hver rad (h-9 = 36px)
+    overscan: 5 // Render 5 ekstra elementer for jevnere scrolling
+  })
 
   const go = (path: string) => {
     setOpen(false)
@@ -175,8 +198,8 @@ export function HeaderSearch({ className }: { className?: string }) {
       <button
         type='button'
         onClick={() => setOpen(true)}
-        onMouseEnter={() => prefetch()} // Prefetch på hover!
-        onFocus={() => prefetch()} // Prefetch på focus!
+        onMouseEnter={() => prefetch()}
+        onFocus={() => prefetch()}
         aria-label='Åpne søk (⌘/Ctrl + K)'
         className={cn(
           'group relative hidden h-9 w-[14rem] items-center gap-2 rounded-md border border-white/10 bg-transparent px-3 text-left text-sm text-muted-foreground outline-none transition md:flex',
@@ -209,7 +232,10 @@ export function HeaderSearch({ className }: { className?: string }) {
         description='Søk etter produkter eller sider..'
       >
         <CommandInput placeholder='Søk på nettsiden..' />
-        <CommandList className='no-scrollbar min-h-80 scroll-pt-2 scroll-pb-1.5'>
+        <CommandList
+          ref={parentRef}
+          className='no-scrollbar min-h-80 scroll-pt-2 scroll-pb-1.5'
+        >
           <CommandEmpty>
             {loading ?
               'Laster sider...'
@@ -218,15 +244,30 @@ export function HeaderSearch({ className }: { className?: string }) {
             : 'Ingen treff.'}
           </CommandEmpty>
 
-          {!loading
-            && !error
-            && groups?.map(group => (
-              <CommandGroup key={group.key} heading={group.label}>
-                {group.items.map(item => (
-                  <ItemRow key={item.id} item={item} depth={0} onSelect={go} />
-                ))}
-              </CommandGroup>
-            ))}
+          {rowVirtualizer.getTotalSize() > 0 && (
+            <div
+              className='relative w-full'
+              style={{ height: `${rowVirtualizer.getTotalSize()}px` }}
+            >
+              {rowVirtualizer.getVirtualItems().map(virtualRow => {
+                const item = flatItems[virtualRow.index]!
+                return (
+                  <div
+                    key={item.key}
+                    className='absolute left-0 top-0 w-full'
+                    style={{
+                      height: `${virtualRow.size}px`,
+                      transform: `translateY(${virtualRow.start}px)`
+                    }}
+                  >
+                    {item.type === 'group' ?
+                      <CommandGroup heading={item.label} className='!p-0' />
+                    : <ItemRow item={item.data} depth={0} onSelect={go} />}
+                  </div>
+                )
+              })}
+            </div>
+          )}
         </CommandList>
 
         <div
