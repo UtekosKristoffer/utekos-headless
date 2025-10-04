@@ -3,7 +3,9 @@
 import { Button } from '@/components/ui/button'
 import { cartStore } from '@/lib/state/cartStore'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-export const CartHeader = () => (
+import { memo } from 'react' // Importer memo
+
+const CartHeaderComponent = () => (
   <div className='flex items-center justify-between border-b px-6 py-4'>
     <h2 className='text-lg font-semibold'>Din handlepose</h2>
     <Button
@@ -16,3 +18,5 @@ export const CartHeader = () => (
     </Button>
   </div>
 )
+
+export const CartHeader = memo(CartHeaderComponent) // Eksporter den memoized versjonen

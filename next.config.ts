@@ -3,7 +3,7 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
   typedRoutes: true,
   experimental: {
-    reactCompiler: true,
+    reactCompiler: false,
     useCache: true,
     optimizePackageImports: [
       'framer-motion',

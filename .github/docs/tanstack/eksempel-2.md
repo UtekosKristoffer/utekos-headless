@@ -7,6 +7,8 @@ klare til å vises i nettleseren, slik at ferdig innhold kan vises umiddelbart
 uten å vente på resterende innhold. Dette skjer langs `<Suspense>`-grenser. Hvis
 du oppretter en fil `loading.tsx`, opprettes en `<Suspense>`-grense automatisk.
 
+---
+
 ## Prefetching og React Query
 
 Med prefetching-mønstrene beskrevet ovenfor er **React Query** fullt kompatibel
@@ -20,9 +22,12 @@ klienten. Dette lar deg starte prefetch så tidlig som mulig uten å blokkere en
 hel `<Suspense>`-grense, og streamer data til klienten etter hvert som queryen
 fullføres.
 
-Eksempel: Du kan prefetch innhold som kun er synlig etter brukerinteraksjon,
-eller awaite og rendre første side av en infinite query, men starte prefetch av
-side 2 uten å blokkere rendering.
+> **Eksempel:**  
+> Du kan prefetch innhold som kun er synlig etter brukerinteraksjon, eller
+> awaite og rendre første side av en infinite query, men starte prefetch av side
+> 2 uten å blokkere rendering.
+
+---
 
 ## Konfigurasjon av QueryClient for Pending Queries
 
@@ -75,8 +80,11 @@ export function getQueryClient() {
 }
 ```
 
-> **Merk:** Dette fungerer i Next.js og Server Components fordi React kan
-> serialisere Promises over wire når du sender dem til Client Components.
+> **Merk:**  
+> Dette fungerer i Next.js og Server Components fordi React kan serialisere
+> Promises over wire når du sender dem til Client Components.
+
+---
 
 ## Bruk av HydrationBoundary uten await
 
@@ -124,6 +132,8 @@ fortsatt bli plukket opp korrekt. Men Next.js vil ikke suspendere i det
 tilfellet, og komponenten vil rendre i pending status, noe som også velger bort
 server rendering av innholdet.
 
+---
+
 ## Serialisering av ikke-JSON data
 
 Hvis du bruker ikke-JSON datatyper og serialiserer query-resultater på serveren,
@@ -149,7 +159,7 @@ function makeQueryClient() {
 }
 ```
 
-Eksempel på bruk:
+**Eksempel på bruk:**
 
 ```typescript
 // app/posts/page.tsx
@@ -195,29 +205,29 @@ disse datatypene.
 
 ---
 
-Eksempel
+## Fullt eksempel
 
-getQueryClient.ts
+### getQueryClient.ts
 
+```typescript
 import {
   QueryClient,
   defaultShouldDehydrateQuery,
-  isServer,
+  isServer
 } from '@tanstack/react-query'
 
 function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 60 * 1000,
+        staleTime: 60 * 1000
       },
       dehydrate: {
         // include pending queries in dehydration
-        shouldDehydrateQuery: (query) =>
-          defaultShouldDehydrateQuery(query) ||
-          query.state.status === 'pending',
-      },
-    },
+        shouldDehydrateQuery: query =>
+          defaultShouldDehydrateQuery(query) || query.state.status === 'pending'
+      }
+    }
   })
 }
 
@@ -236,9 +246,11 @@ export function getQueryClient() {
     return browserQueryClient
   }
 }
+```
 
-layout.tsx
+### layout.tsx
 
+```typescript
 import Providers from './providers'
 import type React from 'react'
 import type { Metadata } from 'next'
@@ -261,9 +273,11 @@ export default function RootLayout({
     </html>
   )
 }
+```
 
-page.tsx
+### page.tsx
 
+```typescript
 import React from 'react'
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 import { pokemonOptions } from '@/app/pokemon'
@@ -284,9 +298,11 @@ export default function Home() {
     </main>
   )
 }
+```
 
-pokemonOptions.tsx
+### pokemonOptions.tsx
 
+```tsx
 import { queryOptions } from '@tanstack/react-query'
 
 export const pokemonOptions = queryOptions({
@@ -295,13 +311,13 @@ export const pokemonOptions = queryOptions({
     const response = await fetch('https://pokeapi.co/api/v2/pokemon/25')
 
     return response.json()
-  },
+  }
 })
+```
 
-pokemon-info.tsx
+### pokemon-info.tsx
 
-'use client'
-
+```tsx
 import React from 'react'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { pokemonOptions } from '@/app/pokemon'
@@ -318,11 +334,13 @@ export function PokemonInfo() {
     </div>
   )
 }
+```
 
+### providers.tsx
 
-providers.tsx
+```typescript
 'use client'
-import { QueryClientProvider } from '@tanstack/react-query'
+
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { getQueryClient } from '@/app/get-query-client'
 import type * as React from 'react'
@@ -337,6 +355,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     </QueryClientProvider>
   )
 }
+```
+
+---
 
 > **Oppsummering:**  
 > Med Next.js App Router og TanStack Query kan du effektivt streame data og UI
