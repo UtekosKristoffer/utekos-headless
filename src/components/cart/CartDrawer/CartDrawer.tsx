@@ -28,11 +28,23 @@ export function CartDrawer(): React.JSX.Element {
 
   const baseHandleStateChange = createDrawerStateHandler(cartStore)
 
-  const handleStateChangeWithTransition = (isOpen: boolean) => {
-    startTransition(() => {
-      baseHandleStateChange(isOpen)
-    })
-  }
+  const handleStateChangeWithTransition = React.useCallback(
+    (isOpen: boolean) => {
+      // Bruk requestIdleCallback for å utsette state-endring til browser er idle
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+          startTransition(() => {
+            baseHandleStateChange(isOpen)
+          })
+        })
+      } else {
+        startTransition(() => {
+          baseHandleStateChange(isOpen)
+        })
+      }
+    },
+    [baseHandleStateChange]
+  )
 
   return (
     <Drawer
@@ -40,30 +52,20 @@ export function CartDrawer(): React.JSX.Element {
       onOpenChange={handleStateChangeWithTransition}
       direction='right'
     >
-      <Suspense fallback={null}>
-        <CartTrigger />
-      </Suspense>
+      <CartTrigger />
       <DrawerContent>
         <VisuallyHidden>
-          <Suspense fallback={null}>
-            <DrawerTitle>Handlepose</DrawerTitle>
-          </Suspense>
-          <Suspense fallback={null}>
-            <DrawerDescription>
-              Oversikt over varer i handleposen og handlingsknapper.
-            </DrawerDescription>
-          </Suspense>
+          <DrawerTitle>Handlepose</DrawerTitle>
+          <DrawerDescription>
+            Oversikt over varer i handleposen og handlingsknapper.
+          </DrawerDescription>
         </VisuallyHidden>
         <CartHeader />
         <Suspense fallback={<CartBodySkeleton />}>
           <CartBody />
         </Suspense>
-        <Suspense fallback={null}>
-          <SmartCartSuggestions cart={cart} />
-        </Suspense>
-        <Suspense fallback={null}>
-          <CartFooter cart={cart} />
-        </Suspense>
+        <SmartCartSuggestions cart={cart} />
+        <CartFooter cart={cart} />
       </DrawerContent>
     </Drawer>
   )

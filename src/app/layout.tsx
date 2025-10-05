@@ -4,7 +4,6 @@ import '@xyflow/react/dist/style.css'
 import '@/db/zod/zodConfig'
 import { geistSans, geistMono } from '@/db/config/font.config'
 import { mainMenu } from '@/db/config/menu.config'
-import { Suspense } from 'react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import { Analytics } from '@vercel/analytics/react'
 import { dehydrate } from '@tanstack/react-query'
@@ -20,11 +19,8 @@ import AnnouncementBanner from '@/SpecialOfferSection/AnnouncementBanner'
 import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 
-import { HeaderSkeleton } from '../components/frontpage/Skeletons/HeaderSkeleton'
-
 import type { RootLayoutProps, Cart } from '@types'
 import type { Metadata } from 'next'
-import { FooterSkeleton } from '../components/frontpage/Skeletons/FooterSkeleton'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -110,14 +106,10 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       >
         <Providers dehydratedState={dehydratedState} cartId={cartId}>
           <AnnouncementBanner />
-          <Suspense fallback={<HeaderSkeleton />}>
-            <Header menu={mainMenu} />
-          </Suspense>
+          <Header menu={mainMenu} />
           <main>
             {children}
-            <Suspense fallback={<FooterSkeleton />}>
-              <Footer />
-            </Suspense>
+            <Footer />
           </main>
           <Toaster closeButton />
           <WelcomeToast />

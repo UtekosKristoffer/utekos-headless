@@ -18,7 +18,6 @@ import {
   memo,
   useCallback,
   startTransition,
-  Suspense,
   useState,
   useEffect
 } from 'react'
@@ -224,7 +223,6 @@ export function HeaderSearch({ className }: { className?: string }) {
 
   useCommandK(open, setOpen)
 
-  // Sørger for at dialogen kun rendres på klienten
   useEffect(() => {
     setIsMounted(true)
   }, [])
@@ -305,12 +303,7 @@ export function HeaderSearch({ className }: { className?: string }) {
                 'Feil ved henting av søkeindeks.'
               : 'Ingen treff.'}
             </CommandEmpty>
-            <Suspense fallback={null}>
-              <SearchResults
-                groups={deferredGroups}
-                onSelect={handleNavigate}
-              />
-            </Suspense>
+            <SearchResults groups={deferredGroups} onSelect={handleNavigate} />
           </CommandList>
           <div
             aria-hidden
