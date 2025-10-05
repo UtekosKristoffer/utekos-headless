@@ -15,15 +15,11 @@ import { useCartOpen } from '@/hooks/useCartOpen'
 import { useCartQuery } from '@/hooks/useCartQuery'
 import { cartStore } from '@/lib/state/cartStore'
 import { Root as VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import dynamic from 'next/dynamic'
 import * as React from 'react'
 import { Suspense, useTransition } from 'react' // Importer useDeferredValue
 import { createDrawerStateHandler } from './utils/createDrawerStateHandler'
 import { CartBodySkeleton } from '../../skeletons/CartBodySkeleton'
-const CartTrigger = dynamic(
-  () => import('@/components/cart/CartTrigger').then(mod => mod.CartTrigger),
-  { ssr: false }
-)
+import { CartTrigger } from '@/components/cart/CartTrigger'
 
 export function CartDrawer(): React.JSX.Element {
   const open = useCartOpen()

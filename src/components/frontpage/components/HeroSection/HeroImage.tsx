@@ -33,9 +33,6 @@ export function HeroImage() {
           fetchPriority='high'
         />
       </div>
-
-      {/* Bottom gradient bar */}
-      <div className='absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-sky-500 via-cyan-400 to-sky-500' />
     </motion.div>
   )
 }

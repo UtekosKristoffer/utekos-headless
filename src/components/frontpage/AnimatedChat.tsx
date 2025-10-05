@@ -52,7 +52,7 @@ export function AnimatedChat() {
           />
         }
       >
-        <p>Slapp av, jeg tar med Utekos-dressen min. Den er alt vi trenger.</p>
+        <p>Slapp av, jeg tar med Utekosen min. Den er alt vi trenger.</p>
       </ChatBubble>
 
       <ChatBubble side='left' {...(isMounted ? animationProps(0.6) : {})}>

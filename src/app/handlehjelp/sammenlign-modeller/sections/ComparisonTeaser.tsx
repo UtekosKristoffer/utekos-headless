@@ -33,7 +33,7 @@ export function ComparisonTeaser() {
                   <h3 className='text-lg font-semibold'>Utekos Dun™</h3>
                 </div>
                 <p className='mt-2 text-sm text-muted-foreground'>
-                  Best for **maksimal varme** i tørre, kalde omgivelser som på
+                  Best for maksimal varme i tørre, kalde omgivelser som på
                   hytten.
                 </p>
               </div>
