@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import type { ShopifyProduct } from '@types'
 
-export function useSwatchColorMap(product: ShopifyProduct | null) {
+export function useSwatchColorMap(product: ShopifyProduct | undefined) {
   return useMemo(() => {
     const map = new Map<string, string>()
 

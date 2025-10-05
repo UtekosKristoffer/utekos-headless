@@ -1,15 +1,13 @@
-'use client'
-
+import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { Card, CardContent } from '@/components/ui/card'
-import { motion } from 'framer-motion'
+
 export function ProductTestimonial() {
   return (
-    <section className='mb-24 max-w-3xl mx-auto'>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true, amount: 0.5 }}
+    <section className='mx-auto mb-24 max-w-3xl'>
+      <AnimatedBlock
+        className='will-animate-fade-in-up'
+        delay='0s'
+        threshold={0.5}
       >
         <Card className='border-neutral-800 bg-sidebar-foreground'>
           <CardContent className='p-12 text-center'>
@@ -21,7 +19,7 @@ export function ProductTestimonial() {
             <p className='mt-6 font-semibold'>- Anne, Hytteeier</p>
           </CardContent>
         </Card>
-      </motion.div>
+      </AnimatedBlock>
     </section>
   )
 }

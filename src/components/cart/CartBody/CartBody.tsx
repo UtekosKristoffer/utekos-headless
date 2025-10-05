@@ -2,7 +2,6 @@
 'use client'
 
 import { ScrollArea } from '@/components/cart/utils/ScrollArea'
-import { CartBodySkeleton } from '@/components/skeletons/CartBodySkeleton'
 import { useCartLineIds } from '@/hooks/useCartLines' // Importer den nye hooken
 import { useCartPending } from '@/hooks/useCartPending'
 import { CartLineItem } from '@/components/cart/CartLineItem'
@@ -11,15 +10,9 @@ import { EmptyCartRecommendations } from '@/components/cart/EmptyCart/EmptyCartR
 export const CartBody = () => {
   const isPending = useCartPending() > 0
 
-  // Hent kun listen med ID-er fra den nye, spesifikke hooken
-  const { data: lineIds, isFetching } = useCartLineIds()
+  const { data: lineIds } = useCartLineIds()
 
   const isEmpty = !lineIds || lineIds.length === 0
-
-  // Vis skeleton ved initiell lasting
-  if (isFetching && isEmpty) {
-    return <CartBodySkeleton />
-  }
 
   if (isEmpty && !isPending) {
     return (

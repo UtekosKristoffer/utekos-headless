@@ -1,11 +1,16 @@
-// Path: src/app/produkter/%5Bhandle%5D/RelatedProducts/RelatedProducts.tsx
+// Path: src/app/produkter/[handle]/RelatedProducts/RelatedProducts.tsx
 'use client'
 
 import { ProductCard } from '@/components/ProductCard/ProductCard'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from '@/components/ui/carousel'
 import { createColorHexMap } from '@/lib/helpers/shared/createColorHexMap'
 import type { RelatedProductsProps } from '@types'
-import { Navigation } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
 
 export function RelatedProducts({ products }: RelatedProductsProps) {
   if (!products || products.length === 0) {
@@ -13,41 +18,32 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
   }
 
   return (
-    <section className='container mt-24 mb-16'>
-      <h2 className='text-3xl font-bold text-center mb-8'>
-        Andre har også sett på
+    <section className='container mb-16 mt-24'>
+      <h2 className='mb-8 text-center text-3xl font-bold'>
+        Favoritter blant andre livsnytere
       </h2>
-      <Swiper
-        modules={[Navigation]}
-        navigation
-        spaceBetween={24}
-        slidesPerView={1.5}
-        breakpoints={{
-          768: {
-            slidesPerView: 2.5,
-            spaceBetween: 30
-          },
-          1024: {
-            slidesPerView: 3.5,
-            spaceBetween: 30
-          },
-          1280: {
-            slidesPerView: 4,
-            spaceBetween: 30
-          }
+      <Carousel
+        opts={{
+          align: 'start'
         }}
-        className='!pb-4'
+        className='w-full'
       >
-        {products.map(product => {
-          const colorHexMap = createColorHexMap(product)
-          return (
-            <SwiperSlide key={product.id} className='flex h-auto'>
-              {/* STEG 3: Send colorHexMap videre som en prop */}
-              <ProductCard product={product} colorHexMap={colorHexMap} />
-            </SwiperSlide>
-          )
-        })}
-      </Swiper>
+        <CarouselContent className='-ml-4'>
+          {products.map(product => {
+            const colorHexMap = createColorHexMap(product)
+            return (
+              <CarouselItem
+                key={product.id}
+                className='h-auto pl-4 basis-2/3 sm:basis-1/2 md:basis-1/3 lg:basis-1/4'
+              >
+                <ProductCard product={product} colorHexMap={colorHexMap} />
+              </CarouselItem>
+            )
+          })}
+        </CarouselContent>
+        <CarouselPrevious className='left-2' />
+        <CarouselNext className='right-2' />
+      </Carousel>
     </section>
   )
 }

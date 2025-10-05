@@ -1,14 +1,20 @@
+// Path: src/components/jsx/ProductGallery.tsx
+
 'use client'
 
-import type { Image as SwiperImage } from '@types'
+import type { Image as GalleryImage } from '@types'
 import Image from 'next/image'
-import { A11y, Navigation } from 'swiper/modules'
-
-import { Swiper, SwiperSlide } from 'swiper/react'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from '@/components/ui/carousel'
 
 type ProductGalleryProps = {
   title: string
-  images: SwiperImage[]
+  images: GalleryImage[]
 }
 
 export function ProductGallery({ title, images }: ProductGalleryProps) {
@@ -20,32 +26,30 @@ export function ProductGallery({ title, images }: ProductGalleryProps) {
 
   return (
     <div className='space-y-4'>
-      <Swiper
-        modules={[Navigation, A11y]}
-        spaceBetween={10}
-        navigation
-        loop={images.length > 1}
-        className='w-full max-w-sm md:max-w-md lg:max-w-lg mx-auto overflow-hidden rounded-lg'
+      <Carousel
+        opts={{
+          loop: images.length > 1
+        }}
+        className='mx-auto w-full max-w-sm overflow-hidden rounded-lg md:max-w-md lg:max-w-lg'
         aria-label={`Produktbilder for ${title}`}
       >
-        {images.map((image, index) => (
-          <SwiperSlide
-            key={image.id}
-            className='aspect-[2/3] flex items-center justify-center mx-auto rounded-lg'
-          >
-            <Image
-              src={image.url}
-              alt={image.altText || `Bilde av ${title}`}
-              fill
-              sizes='(min-width: 1024px) 24rem, (min-width: 768px) 20rem, 16rem'
-              className='object-contain md:max-w-[345px] md:max-h-[518px] mx-auto place-self-center rounded-lg'
-              priority={index === 0}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+        <CarouselContent>
+          {images.map((image, index) => (
+            <CarouselItem key={image.url} className='relative aspect-[2/3]'>
+              <Image
+                src={image.url}
+                alt={image.altText || `Bilde av ${title}`}
+                fill
+                sizes='(min-width: 1024px) 24rem, (min-width: 768px) 20rem, 16rem'
+                className='rounded-lg object-contain'
+                priority={index === 0}
+              />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className='left-2' />
+        <CarouselNext className='right-2' />
+      </Carousel>
     </div>
   )
 }
-
-export default ProductGallery

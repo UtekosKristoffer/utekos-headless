@@ -1,8 +1,6 @@
 import { queryOptions } from '@tanstack/react-query'
 import { fetchProducts } from '@/api/lib/products/getProducts'
 import { getProduct } from '@/api/lib/products/getProduct'
-import { endpoint } from '@/api/constants'
-import { getShopifyEndpoint } from '@/db/config/shopify.config'
 export const productOptions = (handle: string) =>
   queryOptions({
     queryKey: ['products', handle],
@@ -21,7 +19,7 @@ export const allProductsOptions = () =>
     queryFn: () => fetchProducts()
   })
 
-  export const featuredProducts = queryOptions({
+export const featuredProducts = queryOptions({
   queryKey: ['featuredProducts'],
   queryFn: async () => {
     const response = await fetch('endpoint')

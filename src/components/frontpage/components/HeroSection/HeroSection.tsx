@@ -1,33 +1,8 @@
 'use client'
 
-import dynamic from 'next/dynamic'
-
-const HeroImage = dynamic(
-  () => import('./HeroImage').then(mod => mod.HeroImage),
-  {
-    ssr: false,
-    loading: () => (
-      <div className='relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-neutral-800 animate-pulse' />
-    )
-  }
-)
-
-const SocialProof = dynamic(
-  () => import('./SocialProof').then(mod => mod.SocialProof),
-  {
-    ssr: false,
-    loading: () => <div className='max-w-4xl mx-auto' />
-  }
-)
-
-const MotionContent = dynamic(
-  () => import('./MotionContent').then(mod => mod.MotionContent),
-  {
-    ssr: false,
-    loading: () => <div className='mb-8 text-center' />
-  }
-)
-
+import { MotionContent } from './MotionContent'
+import { SocialProof } from './SocialProof'
+import { HeroImage } from './HeroImage'
 export function HeroSection() {
   return (
     <section className='relative container mx-auto px-4 pt-12 pb-2 overflow-hidden'>

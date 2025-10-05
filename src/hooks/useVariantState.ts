@@ -1,26 +1,32 @@
-// Path: src/hooks/useVariantState.ts
 import { createVariantReducer } from '@/lib/utils/createVariantReducer'
 import { findVariantFromUrl } from '@/lib/utils/findVariantfromUrl'
 import { flattenVariants } from '@/lib/utils/flattenVariants'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useMemo, useReducer } from 'react'
-
 import type { ShopifyProduct } from '@types'
 
-export function useVariantState(product: ShopifyProduct) {
-  const variantReducer = useMemo(() => createVariantReducer(product), [product])
-  const [variantState, dispatch] = useReducer(variantReducer, {
-    status: 'idle'
-  })
+export function useVariantState(product: ShopifyProduct | undefined) {
+  const variantReducer = useMemo(
+    () => (product ? createVariantReducer(product) : null),
+    [product]
+  )
 
-  const allVariants = useMemo(() => flattenVariants(product) || [], [product])
+  const [variantState, dispatch] = useReducer(
+    variantReducer || (() => ({ status: 'idle' as const })),
+    { status: 'idle' as const }
+  )
+
+  const allVariants = useMemo(() => {
+    if (!product) return []
+    return flattenVariants(product) || []
+  }, [product])
+
   const searchParams = useSearchParams()
-  const variantIdFromUrl = searchParams.get('variant') // ✅ Ekstraher verdien
+  const variantIdFromUrl = searchParams.get('variant')
 
   useEffect(() => {
-    if (variantState.status !== 'idle' || !allVariants.length) {
-      return
-    }
+    if (!product || !variantReducer) return
+    if (variantState.status !== 'idle' || !allVariants.length) return
 
     const variantFromUrl =
       variantIdFromUrl ?
@@ -34,14 +40,24 @@ export function useVariantState(product: ShopifyProduct) {
       const defaultVariant = firstAvailableVariant || allVariants[0]
       dispatch({ type: 'syncFromId', id: defaultVariant?.id ?? null })
     }
-  }, [variantState.status, allVariants, variantIdFromUrl])
+  }, [
+    variantState.status,
+    allVariants,
+    variantIdFromUrl,
+    product,
+    variantReducer
+  ])
 
   function updateVariant(optionName: string, value: string) {
-    dispatch({ type: 'updateFromOptions', optionName, value })
+    if (variantReducer) {
+      dispatch({ type: 'updateFromOptions', optionName, value })
+    }
   }
 
   function syncVariantFromId(id: string | null) {
-    dispatch({ type: 'syncFromId', id })
+    if (variantReducer) {
+      dispatch({ type: 'syncFromId', id })
+    }
   }
 
   return {

@@ -1,7 +1,7 @@
 // Path: src/components/ProductCard/ProductCarousel.tsx
 'use client'
 
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query' // Endret fra useSuspenseQuery
 import { getFeaturedProducts } from '@/api/lib/products/getFeaturedProducts'
 import {
   Carousel,
@@ -14,7 +14,7 @@ import { createColorHexMap } from '@/lib/helpers/shared/createColorHexMap'
 import { ProductCard } from './ProductCard'
 
 export function ProductCarousel() {
-  const { data: products } = useSuspenseQuery({
+  const { data: products } = useQuery({
     queryKey: ['products', 'featured'],
     queryFn: getFeaturedProducts
   })

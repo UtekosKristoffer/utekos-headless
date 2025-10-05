@@ -1,4 +1,4 @@
-// Path: src/components/cart/CartDrawer.tsx
+// Path: src/components/cart/CartDrawer/CartDrawer.tsx
 'use client'
 
 import { CartBody } from '@/components/cart/CartBody/CartBody'
@@ -16,7 +16,7 @@ import { useCartQuery } from '@/hooks/useCartQuery'
 import { cartStore } from '@/lib/state/cartStore'
 import { Root as VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import * as React from 'react'
-import { Suspense, useTransition } from 'react' // Importer useDeferredValue
+import { Suspense, useTransition } from 'react'
 import { createDrawerStateHandler } from './utils/createDrawerStateHandler'
 import { CartBodySkeleton } from '../../skeletons/CartBodySkeleton'
 import { CartTrigger } from '@/components/cart/CartTrigger'

@@ -18,9 +18,12 @@ import {
   memo,
   useCallback,
   startTransition,
-  Suspense
+  Suspense,
+  useState,
+  useEffect
 } from 'react'
 import type { Route } from 'next'
+
 const TablerArrowRight = memo((props: React.SVGProps<SVGSVGElement>) => (
   <svg
     viewBox='0 0 24 24'
@@ -40,7 +43,6 @@ const TablerArrowRight = memo((props: React.SVGProps<SVGSVGElement>) => (
 
 TablerArrowRight.displayName = 'TablerArrowRight'
 
-// Optimized keyboard hook
 function useCommandK(open: boolean, setOpen: (v: boolean) => void) {
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -61,7 +63,6 @@ function useCommandK(open: boolean, setOpen: (v: boolean) => void) {
   }, [handleKeyDown])
 }
 
-// Types
 type SearchItem = {
   id: string
   title: string
@@ -77,7 +78,6 @@ type SearchGroup = {
   items: SearchItem[]
 }
 
-// Memoized ItemRow component
 const ItemRow = memo(
   ({
     item,
@@ -138,7 +138,6 @@ const ItemRow = memo(
 
 ItemRow.displayName = 'ItemRow'
 
-// Optimized search index hook med progressive loading
 const useSearchIndex = () => {
   const [groups, setGroups] = React.useState<SearchGroup[] | null>(null)
   const [loading, setLoading] = React.useState(false)
@@ -148,35 +147,22 @@ const useSearchIndex = () => {
 
   const prefetch = useCallback(async () => {
     if (hasFetched.current || loading) return
-
-    // Cancel any ongoing request
     if (abortControllerRef.current) {
       abortControllerRef.current.abort()
     }
-
     hasFetched.current = true
     setLoading(true)
     setError(null)
-
-    // Create new abort controller
     abortControllerRef.current = new AbortController()
-
     try {
       const res = await fetch('/api/search-index', {
         signal: abortControllerRef.current.signal,
-        // Add cache headers for better performance
-        headers: {
-          'Cache-Control': 'max-age=300' // Cache for 5 minutes
-        }
+        headers: { 'Cache-Control': 'max-age=300' }
       })
-
       if (!res.ok) {
         throw new Error(`Klarte ikke hente søkeindeks (status: ${res.status})`)
       }
-
       const data = await res.json()
-
-      // Update state in transition for non-blocking update
       startTransition(() => {
         setGroups(data.groups as SearchGroup[])
       })
@@ -188,8 +174,6 @@ const useSearchIndex = () => {
       setLoading(false)
     }
   }, [loading])
-
-  // Cleanup on unmount
   React.useEffect(() => {
     return () => {
       if (abortControllerRef.current) {
@@ -197,11 +181,9 @@ const useSearchIndex = () => {
       }
     }
   }, [])
-
   return { groups, loading, error, prefetch }
 }
 
-// Memoized search results component
 const SearchResults = memo(
   ({
     groups,
@@ -234,12 +216,18 @@ const SearchResults = memo(
 SearchResults.displayName = 'SearchResults'
 
 export function HeaderSearch({ className }: { className?: string }) {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
+  const [isMounted, setIsMounted] = useState(false) // NY STATE
   const router = useRouter()
   const { groups, loading, error, prefetch } = useSearchIndex()
   const deferredGroups = useDeferredValue(groups)
 
   useCommandK(open, setOpen)
+
+  // Sørger for at dialogen kun rendres på klienten
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   const handlePrefetch = useCallback(() => {
     startTransition(() => {
@@ -247,14 +235,12 @@ export function HeaderSearch({ className }: { className?: string }) {
     })
   }, [prefetch])
 
-  // Load search index when dialog opens
-  React.useEffect(() => {
+  useEffect(() => {
     if (open) {
       prefetch()
     }
   }, [open, prefetch])
 
-  // Navigation handler
   const handleNavigate = useCallback(
     (path: string) => {
       setOpen(false)
@@ -265,7 +251,6 @@ export function HeaderSearch({ className }: { className?: string }) {
     [router]
   )
 
-  // Memoize button props
   const buttonProps = React.useMemo(
     () => ({
       'type': 'button' as const,
@@ -296,75 +281,78 @@ export function HeaderSearch({ className }: { className?: string }) {
         </kbd>
       </button>
 
-      <CommandDialog
-        open={open}
-        onOpenChange={setOpen}
-        showCloseButton={false}
-        className={cn(
-          'mx-auto max-w-2xl rounded-xl p-2 pb-11 shadow-2xl',
-          'bg-neutral-900/95 text-neutral-100',
-          'border border-neutral-700 ring-3 ring-neutral-700',
-          'backdrop-blur-sm',
-          className
-        )}
-        title='Søk på nettsiden...'
-        description='Søk etter produkter eller sider..'
-      >
-        <CommandInput placeholder='Søk på nettsiden..' autoFocus />
-        <CommandList className='no-scrollbar min-h-80 scroll-pt-2 scroll-pb-1.5'>
-          <CommandEmpty>
-            {loading ?
-              'Laster sider...'
-            : error ?
-              'Feil ved henting av søkeindeks.'
-            : 'Ingen treff.'}
-          </CommandEmpty>
-
-          <Suspense fallback={null}>
-            <SearchResults groups={deferredGroups} onSelect={handleNavigate} />
-          </Suspense>
-        </CommandList>
-
-        <div
-          aria-hidden
+      {isMounted && (
+        <CommandDialog
+          open={open}
+          onOpenChange={setOpen}
+          showCloseButton={false}
           className={cn(
-            'pointer-events-none absolute inset-x-0 bottom-0 flex h-10 items-center justify-between border-t border-neutral-700 px-3 text-xs',
-            'bg-neutral-800 text-muted-foreground'
+            'mx-auto max-w-2xl rounded-xl p-2 pb-11 shadow-2xl',
+            'bg-neutral-900/95 text-neutral-100',
+            'border border-neutral-700 ring-3 ring-neutral-700',
+            'backdrop-blur-sm',
+            className
           )}
+          title='Søk på nettsiden...'
+          description='Søk etter produkter eller sider..'
         >
-          <div className='flex items-center gap-2'>
-            <span className='inline-flex items-center gap-1'>
-              <svg
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth={2}
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                className='lucide lucide-corner-down-left size-3'
-              >
-                <path d='M20 4v7a4 4 0 0 1-4 4H4' />
-                <polyline points='9 10 4 15 9 20' />
-              </svg>
-              Gå til side
-            </span>
+          <CommandInput placeholder='Søk på nettsiden..' autoFocus />
+          <CommandList className='no-scrollbar min-h-80 scroll-pt-2 scroll-pb-1.5'>
+            <CommandEmpty>
+              {loading ?
+                'Laster sider...'
+              : error ?
+                'Feil ved henting av søkeindeks.'
+              : 'Ingen treff.'}
+            </CommandEmpty>
+            <Suspense fallback={null}>
+              <SearchResults
+                groups={deferredGroups}
+                onSelect={handleNavigate}
+              />
+            </Suspense>
+          </CommandList>
+          <div
+            aria-hidden
+            className={cn(
+              'pointer-events-none absolute inset-x-0 bottom-0 flex h-10 items-center justify-between border-t border-neutral-700 px-3 text-xs',
+              'bg-neutral-800 text-muted-foreground'
+            )}
+          >
+            <div className='flex items-center gap-2'>
+              <span className='inline-flex items-center gap-1'>
+                <svg
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  strokeWidth={2}
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  className='lucide lucide-corner-down-left size-3'
+                >
+                  <path d='M20 4v7a4 4 0 0 1-4 4H4' />
+                  <polyline points='9 10 4 15 9 20' />
+                </svg>
+                Gå til side
+              </span>
+            </div>
+            <div className='hidden items-center gap-2 md:flex'>
+              <span className='flex items-center gap-1'>
+                <kbd className='rounded border border-white/10 bg-black/20 px-1.5 font-mono text-[10px] text-white/70 dark:bg-white/10'>
+                  ↓
+                </kbd>
+                for å velge
+              </span>
+              <span className='flex items-center gap-1'>
+                <kbd className='rounded border border-white/10 bg-black/20 px-1.5 font-mono text-[10px] text-white/70 dark:bg-white/10'>
+                  esc
+                </kbd>
+                for å lukke
+              </span>
+            </div>
           </div>
-          <div className='hidden items-center gap-2 md:flex'>
-            <span className='flex items-center gap-1'>
-              <kbd className='rounded border border-white/10 bg-black/20 px-1.5 font-mono text-[10px] text-white/70 dark:bg-white/10'>
-                ↓
-              </kbd>
-              for å velge
-            </span>
-            <span className='flex items-center gap-1'>
-              <kbd className='rounded border border-white/10 bg-black/20 px-1.5 font-mono text-[10px] text-white/70 dark:bg-white/10'>
-                esc
-              </kbd>
-              for å lukke
-            </span>
-          </div>
-        </div>
-      </CommandDialog>
+        </CommandDialog>
+      )}
     </>
   )
 }

@@ -1,14 +1,9 @@
-'use client'
-
-import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { Card, CardContent } from '@/components/ui/card'
-import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { choices } from './choices'
+import { AnimatedBlock } from '@/components/AnimatedBlock'
 
-// Map link colors to glow colors
 const getGlowColor = (linkColor: string) => {
   const colorMap: Record<string, string> = {
     'text-blue-400': '#60a5fa',
@@ -41,65 +36,61 @@ export function HelpChooseSection() {
         />
       </div>
 
-      <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
+      <div className='grid grid-cols-1 gap-6 lg:grid-cols-5'>
         {choices.map((choice, index) => {
           const glowColor = getGlowColor(choice.linkColor)
 
           return (
-            <motion.div
+            <AnimatedBlock
               key={choice.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true, amount: 0.5 }}
+              className='will-animate-fade-in-up h-full'
+              delay={`${index * 0.1}s`}
+              threshold={0.5}
             >
               <Link href={choice.href} className='group block h-full'>
-                <Card className='relative flex flex-col h-full border-neutral-800 bg-sidebar-foreground transition-all duration-300 hover:border-neutral-700 hover:-translate-y-1 overflow-hidden'>
+                <div className='relative flex h-full flex-col overflow-hidden rounded-lg border border-neutral-800 bg-sidebar-foreground shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-neutral-700'>
                   {/* Subtle aurora effect on hover */}
                   <div
-                    className='absolute -inset-x-2 -top-20 h-40 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-20 pointer-events-none'
+                    className='pointer-events-none absolute -inset-x-2 -top-20 h-40 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-20'
                     style={{
                       background: `radial-gradient(120% 120% at 50% 0%, transparent 30%, ${glowColor} 100%)`
                     }}
                   />
 
-                  <AspectRatio
-                    ratio={2 / 3}
-                    className='w-full overflow-hidden rounded-t-lg'
-                  >
+                  <div className='relative w-full overflow-hidden rounded-t-lg aspect-[2/3]'>
                     <Image
                       src={choice.imageUrl}
                       alt={choice.title}
                       fill
                       sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                      className='object-cover transition-transform duration-500 group-hover:scale-105 rounded-t-lg'
+                      className='rounded-t-lg object-cover transition-transform duration-500 group-hover:scale-105'
                     />
-                  </AspectRatio>
+                  </div>
 
-                  <CardContent className='relative p-6 flex-grow flex flex-col'>
-                    <h3 className='text-xl font-semibold text-foreground mb-3'>
+                  <div className='relative flex flex-grow flex-col p-6'>
+                    <h3 className='mb-3 text-xl font-semibold text-foreground'>
                       {choice.title}
                     </h3>
-                    <p className='text-sm text-muted-foreground leading-relaxed flex-grow'>
+                    <p className='flex-grow text-sm leading-relaxed text-muted-foreground'>
                       {choice.description}
                     </p>
 
                     <div
-                      className={`flex items-center gap-2 mt-4 font-semibold text-sm ${choice.linkColor} transition-all duration-300 group-hover:gap-3`}
+                      className={`mt-4 flex items-center gap-2 text-sm font-semibold ${choice.linkColor} transition-all duration-300 group-hover:gap-3`}
                     >
                       <span>Se produkt</span>
                       <ArrowRight className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
                     </div>
-                  </CardContent>
+                  </div>
 
                   {/* Subtle bottom accent line */}
                   <div
                     className='absolute bottom-0 left-0 right-0 h-0.5 opacity-0 transition-opacity duration-300 group-hover:opacity-100'
                     style={{ background: glowColor }}
                   />
-                </Card>
+                </div>
               </Link>
-            </motion.div>
+            </AnimatedBlock>
           )
         })}
       </div>

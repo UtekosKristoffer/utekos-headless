@@ -1,5 +1,4 @@
 // Path: src/app/layout.tsx
-import 'swiper/swiper-bundle.css'
 import './globals.css'
 import '@xyflow/react/dist/style.css'
 import '@/db/zod/zodConfig'
@@ -13,13 +12,11 @@ import { Toaster } from 'sonner'
 
 import { getCachedCart } from '@/lib/helpers/cart/getCachedCart'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
-import { getAccessoryProducts } from '@/api/lib/products/getAccessoryProducts'
-import { getRecommendedProducts } from '@/api/lib/products/getRecommendedProcuts'
-import { getQueryClient } from '@/api/lib/getQueryClient'
+import { QueryClient } from '@tanstack/react-query'
 
 import WelcomeToast from '@/components/WelcomeToast/WelcomeToast'
 import Providers from '@/components/providers/Providers'
-import AnnouncementBanner from '@/layout/AnnouncementBanner'
+import AnnouncementBanner from '@/SpecialOfferSection/AnnouncementBanner'
 import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 
@@ -97,23 +94,12 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  const queryClient = getQueryClient()
+  const queryClient = new QueryClient()
   const cartId = await getCartIdFromCookie()
-
-  await Promise.all([
-    queryClient.prefetchQuery({
-      queryKey: ['cart', cartId],
-      queryFn: () => getCachedCart(cartId)
-    }),
-    queryClient.prefetchQuery({
-      queryKey: ['products', 'recommended'],
-      queryFn: getRecommendedProducts
-    }),
-    queryClient.prefetchQuery({
-      queryKey: ['products', 'accessory'],
-      queryFn: getAccessoryProducts
-    })
-  ])
+  await queryClient.prefetchQuery({
+    queryKey: ['cart', cartId],
+    queryFn: () => getCachedCart(cartId)
+  })
 
   const dehydratedState = dehydrate(queryClient)
 

@@ -1,6 +1,6 @@
 // Path: src/components/header/Header.tsx
 
-import { CartDrawer } from '@/components/cart/CartDrawer/CartDrawer'
+import { Cart } from '@/components/cart/Cart'
 import { ClientDesktopNavigation } from '@/components/header/ClientDesktopNavigation'
 import { HeaderLogo } from '@/components/header/HeaderLogo'
 import { HeaderSearch } from '@/components/header/HeaderSearch/HeaderSearch'
@@ -17,7 +17,7 @@ export default function Header({ menu }: { menu: MenuItem[] }) {
         </Suspense>
         <div className='flex items-center gap-2'>
           <HeaderSearch />
-          <CartDrawer />
+          <Cart />
           <ClientMobileMenu menu={menu} />
         </div>
       </div>

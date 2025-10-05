@@ -2,11 +2,12 @@
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { getProduct } from '@/api/lib/products/getProduct'
 import { ProductJsonLd } from './ProductJsonLd'
-import { getQueryClient } from '@/api/lib/getQueryClient' // Sørg for at stien er korrekt
+import { QueryClient } from '@tanstack/react-query'
 import {
   allProductsOptions,
   productOptions
 } from '@/api/lib/products/productOptions'
+import { notFound } from 'next/navigation'
 import { ProductPageController } from '@/app/produkter/[handle]/ProductPageController/ProductPageController'
 import type { Metadata, ResolvingMetadata } from 'next'
 type MetaDataProps = {
@@ -65,14 +66,22 @@ export async function generateMetadata(
 export default async function ProductPage({
   params
 }: {
-  params: Promise<{ handle: string }>
+  params: { handle: string }
 }) {
-  const { handle } = await params
-  const queryClient = getQueryClient()
+  const { handle } = params
+  const queryClient = new QueryClient()
+  const product = await getProduct(handle)
 
-  void queryClient.prefetchQuery(productOptions(handle))
-  void queryClient.prefetchQuery(allProductsOptions())
+  if (!product) {
+    notFound()
+  }
 
+  await queryClient.prefetchQuery({
+    ...productOptions(handle),
+    queryFn: () => product
+  })
+
+  await queryClient.prefetchQuery(allProductsOptions())
   return (
     <>
       <ProductJsonLd handle={handle} />

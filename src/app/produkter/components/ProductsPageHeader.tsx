@@ -1,11 +1,8 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import { Sparkles } from 'lucide-react'
 
 export function ProductsPageHeader() {
   return (
-    <header className='relative text-center mb-16 overflow-hidden'>
+    <header className='relative mb-16 overflow-hidden text-center'>
       {/* Very subtle ambient glow */}
       <div className='absolute inset-0 -z-10 opacity-30'>
         <div
@@ -16,37 +13,41 @@ export function ProductsPageHeader() {
         />
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className='mb-4 inline-flex items-center gap-2 rounded-full border border-sky-800/30 bg-sky-900/10 px-4 py-2'
+      <div
+        className='animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-sky-800/30 bg-sky-900/10 px-4 py-2'
+        style={{ animationDuration: '0.6s' }}
       >
         <Sparkles className='h-4 w-4 text-sky-800' />
         <span className='text-sm font-medium text-sky-800'>
           Utforsk kolleksjonen
         </span>
-      </motion.div>
+      </div>
 
-      <motion.h1
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className='text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'
+      <h1
+        className='animate-fade-in-up text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'
+        style={
+          {
+            '--animation-delay': '0.1s',
+            'animationDuration': '0.6s'
+          } as React.CSSProperties
+        }
       >
         Kolleksjonen for kompromissløs komfort
-      </motion.h1>
+      </h1>
 
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className='mt-6 max-w-3xl mx-auto text-lg lg:text-xl text-muted-foreground leading-relaxed'
+      <p
+        className='animate-fade-in-up mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground lg:text-xl'
+        style={
+          {
+            '--animation-delay': '0.2s',
+            'animationDuration': '0.6s'
+          } as React.CSSProperties
+        }
       >
         Hvert plagg er skapt for ett formål: å la deg forlenge de gode
         øyeblikkene ute. Utforsk vår kolleksjon og finn den perfekte
         følgesvennen for din utekos.
-      </motion.p>
+      </p>
     </header>
   )
 }

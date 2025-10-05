@@ -13,32 +13,17 @@ export function ProductPageController({ handle }: { handle: string }) {
     updateVariant,
     relatedProducts,
     swatchColorMap,
-    isLoading,
-    isUpdating
+    isLoading
   } = useProductPage(handle)
 
-  if (isLoading) {
-    return (
-      <>
-        <div>Laster produktsiden...</div>
-        <ProductPageSkeleton />
-      </>
-    )
-  }
-
-  if (isUpdating) {
-    return (
-      <>
-        <div>Oppdaterer...</div>
-        <ProductPageSkeleton />
-      </>
-    )
+  if (isLoading || !productData || !selectedVariant) {
+    return <ProductPageSkeleton />
   }
 
   return (
     <ProductPageView
-      productData={productData!}
-      selectedVariant={selectedVariant!}
+      productData={productData}
+      selectedVariant={selectedVariant}
       allVariants={allVariants}
       variantImages={variantImages}
       onOptionChange={updateVariant}

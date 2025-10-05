@@ -1,7 +1,7 @@
 // Path: src/components/ProductCard/AllProductsCarousel.tsx
 'use client'
 
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { getProducts } from '@/api/lib/products/getProducts'
 import {
   Carousel,
@@ -15,7 +15,7 @@ import { ProductCard } from './ProductCard'
 import type { ShopifyProduct } from '@types'
 
 export function AllProductsCarousel() {
-  const { data: products } = useSuspenseQuery({
+  const { data: products } = useQuery({
     queryKey: ['products', 'all'],
     queryFn: async () => {
       const response = await getProducts()

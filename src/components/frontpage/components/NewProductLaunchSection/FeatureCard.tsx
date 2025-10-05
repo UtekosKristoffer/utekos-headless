@@ -1,8 +1,18 @@
 'use client'
 
-import { motion } from 'framer-motion'
-interface Feature {
-  icon: React.ComponentType<{ className?: string }>
+import { cn } from '@/lib/utils/className'
+import { useEffect, useRef, useState } from 'react'
+import { CloudRain, Feather, ShieldCheck } from 'lucide-react'
+
+// Mapper streng-identifikator til den faktiske komponenten
+const iconMap = {
+  'cloud-rain': CloudRain,
+  'feather': Feather,
+  'shield-check': ShieldCheck
+}
+
+export interface Feature {
+  icon: keyof typeof iconMap // Typen er nå en av nøklene i iconMap
   title: string
   description: string
   glowColor: string
@@ -14,26 +24,52 @@ interface FeatureCardProps {
 }
 
 export function FeatureCard({ feature, delay }: FeatureCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null)
+  const [isInView, setIsInView] = useState(false)
+
+  const IconComponent = iconMap[feature.icon] || CloudRain
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry && entry.isIntersecting) {
+          setIsInView(true)
+          observer.unobserve(entry.target)
+        }
+      },
+      { threshold: 0.35 }
+    )
+
+    const currentRef = cardRef.current
+    if (currentRef) {
+      observer.observe(currentRef)
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef)
+      }
+    }
+  }, [])
+
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6, delay }}
-      viewport={{ once: true, amount: 0.5 }}
-      whileHover={{ x: 4, transition: { duration: 0.2 } }}
-      className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-sidebar-foreground p-4 transition-all duration-300'
+    <div
+      ref={cardRef}
+      className={cn(
+        'will-animate-fade-in-left group relative overflow-hidden rounded-lg border border-neutral-800 bg-sidebar-foreground p-4 transition-all duration-300 hover:translate-x-1',
+        isInView && 'is-in-view'
+      )}
+      style={{ '--transition-delay': `${delay}s` } as React.CSSProperties}
     >
-      {/* Aurora gradient effect */}
       <div
         className='absolute -inset-x-2 -inset-y-8 opacity-20 blur-2xl transition-opacity duration-300 group-hover:opacity-30'
         style={{
           background: `radial-gradient(120% 120% at 50% 0%, transparent 30%, ${feature.glowColor} 100%)`
         }}
       />
-
       <div className='relative z-10 flex items-start gap-4'>
         <div className='flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg border border-neutral-700 bg-background transition-all duration-300 group-hover:scale-110 group-hover:border-neutral-600'>
-          <feature.icon className='h-6 w-6 text-sky-800' />
+          <IconComponent className='h-6 w-6 text-sky-800' />
         </div>
         <div className='flex-1'>
           <h4 className='mb-1 font-semibold text-foreground'>
@@ -44,14 +80,12 @@ export function FeatureCard({ feature, delay }: FeatureCardProps) {
           </p>
         </div>
       </div>
-
-      {/* Subtle border glow on hover */}
       <div className='absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
         <div
           className='absolute inset-0 rounded-lg blur-sm opacity-20'
           style={{ background: feature.glowColor }}
         />
       </div>
-    </motion.div>
+    </div>
   )
 }

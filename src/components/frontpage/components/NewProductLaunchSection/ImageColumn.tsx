@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import {
   Carousel,
@@ -10,6 +10,7 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
+import { cn } from '@/lib/utils/className'
 
 const images = [
   {
@@ -26,13 +27,40 @@ const images = [
   }
 ]
 export function ImageColumn() {
+  const columnRef = useRef<HTMLDivElement>(null)
+  const [isInView, setIsInView] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry && entry.isIntersecting) {
+          setIsInView(true)
+          observer.unobserve(entry.target)
+        }
+      },
+      { threshold: 0.3 }
+    )
+
+    const currentRef = columnRef.current
+    if (currentRef) {
+      observer.observe(currentRef)
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef)
+      }
+    }
+  }, [])
+
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -40 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.7 }}
-      viewport={{ once: true, amount: 0.3 }}
-      className='relative w-full'
+    <div
+      ref={columnRef}
+      className={cn(
+        'will-animate-fade-in-left relative w-full',
+        isInView && 'is-in-view'
+      )}
+      style={{ '--transition-delay': '0s' } as React.CSSProperties}
     >
       <div className='relative overflow-hidden rounded-2xl'>
         <Carousel
@@ -60,6 +88,6 @@ export function ImageColumn() {
           <CarouselNext className='right-4 hidden sm:inline-flex' />
         </Carousel>
       </div>
-    </motion.div>
+    </div>
   )
 }

@@ -1,13 +1,7 @@
-import { motion } from 'framer-motion'
 export function SocialProof() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay: 0.9 }}
-      className='max-w-4xl mx-auto'
-    >
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-6 text-center'>
+    <div className='animate-fade-in-up mx-auto max-w-4xl'>
+      <div className='grid grid-cols-1 gap-6 text-center md:grid-cols-3'>
         <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/30 p-6 backdrop-blur-sm transition-all duration-300 hover:border-neutral-700'>
           <div className='absolute inset-0 bg-gradient-to-br from-sky-500/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
           <div className='relative'>
@@ -36,6 +30,6 @@ export function SocialProof() {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }

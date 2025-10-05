@@ -2,9 +2,9 @@ import { useMemo } from 'react'
 import { reshapeMetaobject } from '@/lib/utils/reshapeMetaobject'
 import type { ShopifyProduct } from '@types'
 
-export function useProductWithMetafields(productData: ShopifyProduct) {
+export function useProductWithMetafields(productData: ShopifyProduct | undefined) {
   return useMemo(() => {
-    if (!productData) return productData
+    if (!productData) return undefined
 
     return {
       ...productData,
