@@ -1,27 +1,48 @@
-'use client'
-
 import { cn } from '@/lib/utils/className'
-import { motion } from 'framer-motion'
-import { Anchor, Car, Home, type LucideIcon } from 'lucide-react'
+import { Anchor, Car, Home } from 'lucide-react'
+import { AnimatedBlock } from '@/components/AnimatedBlock'
 
-// Datastruktur for de tre kortene
-const moments = [
+// Hjelper-komponent for å mappe streng til ikon
+const iconMap = {
+  home: Home,
+  car: Car,
+  anchor: Anchor
+}
+type IconName = keyof typeof iconMap
+
+function IconRenderer({
+  name,
+  className
+}: {
+  name: IconName
+  className?: string
+}) {
+  const Icon = iconMap[name]
+  return Icon ? <Icon className={className} /> : null
+}
+
+const moments: {
+  Icon: IconName
+  title: string
+  description: string
+  gradientColor: string
+}[] = [
   {
-    Icon: Home,
+    Icon: 'home',
     title: 'På hytten',
     description:
       'Fra iskald ankomst til umiddelbar varme. Utekos er den perfekte hytteuniformen for de kjølige kveldene på terrassen og den ferske morgenkaffen ute.',
     gradientColor: 'from-blue-500'
   },
   {
-    Icon: Car,
+    Icon: 'car',
     title: 'I bobilen',
     description:
       'Lett å pakke, genial i bruk. Bytt ut store pledd og ekstra jakker med ett plagg som gjør hvert eneste stopp til en varm og komfortabel opplevelse.',
     gradientColor: 'from-pink-500'
   },
   {
-    Icon: Anchor,
+    Icon: 'anchor',
     title: 'I båten',
     description:
       'Nyt solnedgangen fra dekk uten å la den kalde sjøbrisen ødelegge øyeblikket. Den beskytter mot trekk og lar deg forlenge båtkvelden i ren komfort.',
@@ -29,28 +50,20 @@ const moments = [
   }
 ]
 
-// Gjenbrukbar kort-komponent for hvert "øyeblikk"
+// Gjenbrukbar kort-komponent (nå en ren Server Component)
 function MomentCard({
   Icon,
   title,
   description,
-  gradientColor,
-  delay
+  gradientColor
 }: {
-  Icon: LucideIcon
+  Icon: IconName
   title: string
   description: string
   gradientColor: string
-  delay: number
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.5 }}
-      viewport={{ once: true, amount: 0.5 }}
-      className='relative h-full overflow-hidden rounded-xl border border-neutral-800 bg-sidebar-foreground p-8'
-    >
+    <div className='relative h-full overflow-hidden rounded-xl border border-neutral-800 bg-sidebar-foreground p-8'>
       {/* Den animerte "nordlys"-effekten */}
       <div
         className={cn(
@@ -62,19 +75,19 @@ function MomentCard({
 
       <div className='relative z-10 flex h-full flex-col'>
         <div className='flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-700 bg-background'>
-          <Icon className='h-6 w-6 text-foreground' />
+          <IconRenderer name={Icon} className='h-6 w-6 text-foreground' />
         </div>
         <h3 className='mt-6 text-xl font-semibold text-foreground'>{title}</h3>
         <p className='mt-2 text-muted-foreground'>{description}</p>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
-// Hovedkomponenten for hele seksjonen
+// Hovedkomponenten for hele seksjonen (også en Server Component)
 export function MomentsSection() {
   return (
-    <section className='py-16 mx-auto md:max-w-7xl max-w-[95%] sm:py-24'>
+    <section className='mx-auto max-w-[95%] py-16 sm:py-24 md:max-w-7xl'>
       <div className='mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='mb-16 text-center'>
           <h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
@@ -87,7 +100,14 @@ export function MomentsSection() {
         </div>
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-3'>
           {moments.map((moment, i) => (
-            <MomentCard key={moment.title} {...moment} delay={i * 0.2} />
+            <AnimatedBlock
+              key={moment.title}
+              className='will-animate-fade-in-up h-full'
+              delay={`${i * 0.2}s`}
+              threshold={0.5}
+            >
+              <MomentCard {...moment} />
+            </AnimatedBlock>
           ))}
         </div>
       </div>

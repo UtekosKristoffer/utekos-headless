@@ -113,7 +113,7 @@ export default function InspirasjonLayout({
                         className={`h-5 w-5 ${page.iconColor} transition-colors group-hover:text-primary`}
                       />
                     </div>
-                    <h3 className='font-semibold mb-2 group-hover:text-primary transition-colors'>
+                    <h3 className='font-semibold mb-2 group-hover:text-primary-foreground transition-colors'>
                       {page.label}
                     </h3>
                     <p className='text-sm text-muted-foreground'>

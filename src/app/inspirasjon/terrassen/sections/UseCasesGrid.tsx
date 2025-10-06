@@ -1,12 +1,39 @@
-'use client'
-
 import { Card, CardContent } from '@/components/ui/card'
-import { motion } from 'framer-motion'
 import { BookOpen, Coffee, Moon } from 'lucide-react'
-import type { UseCase } from '../types'
+import { AnimatedBlock } from '@/components/AnimatedBlock'
+import { cn } from '@/lib/utils/className'
+
+// --- Typer og hjelpere ---
+const iconMap = {
+  coffee: Coffee,
+  moon: Moon,
+  'book-open': BookOpen
+}
+type IconName = keyof typeof iconMap
+
+function IconRenderer({
+  name,
+  className
+}: {
+  name: IconName
+  className?: string
+}) {
+  const Icon = iconMap[name]
+  return Icon ? <Icon className={cn('size-6', className)} /> : null
+}
+
+type UseCase = {
+  icon: IconName
+  time: string
+  title: string
+  description: string
+  color: string
+  iconColor: string
+}
+
 export const useCasesData: UseCase[] = [
   {
-    icon: Coffee,
+    icon: 'coffee',
     time: 'Morgen',
     title: 'Den første vårkaffen',
     description:
@@ -15,7 +42,7 @@ export const useCasesData: UseCase[] = [
     iconColor: 'text-amber-400'
   },
   {
-    icon: Moon,
+    icon: 'moon',
     time: 'Kveld',
     title: 'Sene sommerkvelder',
     description:
@@ -24,7 +51,7 @@ export const useCasesData: UseCase[] = [
     iconColor: 'text-indigo-400'
   },
   {
-    icon: BookOpen,
+    icon: 'book-open',
     time: 'Ettermiddag',
     title: 'En rolig lesestund',
     description:
@@ -48,21 +75,22 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
         </div>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
           {useCases.map((useCase, index) => (
-            <motion.div
+            <AnimatedBlock
               key={useCase.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
+              className='will-animate-fade-in-up h-full'
+              delay={`${index * 0.1}s`}
             >
-              <Card className='@container relative h-full overflow-hidden border-neutral-800 bg-background group'>
+              <Card className='@container group relative h-full overflow-hidden border-neutral-800 bg-background'>
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${useCase.color} to-transparent opacity-20 transition-opacity group-hover:opacity-30`}
                 />
                 <CardContent className='relative p-8'>
                   <div className='mb-6 flex items-center gap-4'>
                     <div className='flex size-12 items-center justify-center rounded-lg border border-neutral-700 bg-sidebar-foreground'>
-                      <useCase.icon className={`size-6 ${useCase.iconColor}`} />
+                      <IconRenderer
+                        name={useCase.icon}
+                        className={useCase.iconColor}
+                      />
                     </div>
                     <p className='font-medium text-muted-foreground'>
                       {useCase.time}
@@ -74,7 +102,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                   <p className='text-muted-foreground'>{useCase.description}</p>
                 </CardContent>
               </Card>
-            </motion.div>
+            </AnimatedBlock>
           ))}
         </div>
       </div>

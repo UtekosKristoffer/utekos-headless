@@ -4,7 +4,8 @@
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { HydrationBoundary } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { toast } from 'sonner'
 import { getQueryClient } from '@/api/lib/getQueryClient'
 import { CartMutationClient } from '@/clients/CartMutationClient'
 import { serverActions } from '@/constants/serverActions'
@@ -24,6 +25,27 @@ export default function Providers({
 }: ProvidersProps) {
   const queryClient = getQueryClient()
   const [cartId, setCartId] = useState<string | null>(initialCartId)
+
+  useEffect(() => {
+    // Ignorer på små skjermer
+    if (window.innerHeight < 650) return
+
+    if (!document.cookie.includes('welcome-toast=2')) {
+      toast('🛍️ Velkommen til Utekos sin nettbutikk!', {
+        id: 'welcome-toast',
+        duration: Infinity,
+        onDismiss: () => {
+          document.cookie = 'welcome-toast=2; max-age=31536000; path=/'
+        },
+        description: (
+          <>
+            Ikke la kjølige kvelder stoppe deg. Sjekk ut vårt utvalg av
+            komfortplagg!
+          </>
+        )
+      })
+    }
+  }, [])
 
   return (
     <QueryClientProvider client={queryClient}>

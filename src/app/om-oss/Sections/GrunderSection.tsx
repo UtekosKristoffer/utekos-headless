@@ -1,13 +1,11 @@
-'use client'
-
 import Image from 'next/image'
-import UtekosFounder from '@public/blue_bag1.webp'
-import { motion } from 'framer-motion'
+import UtekosFounder from '@public/erling/eh_pointing_star_800.webp'
+import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { Quote } from 'lucide-react'
 
 export function GrunderSection() {
   return (
-    <section className='relative py-24 sm:py-32 overflow-hidden'>
+    <section className='relative overflow-hidden py-24 sm:py-32'>
       {/* Ambient background glow */}
       <div className='absolute inset-0 -z-10 opacity-30'>
         <div
@@ -19,16 +17,14 @@ export function GrunderSection() {
       </div>
 
       <div className='container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8'>
-        <div className='grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start'>
+        <div className='grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16'>
           {/* Founder Image - Smaller, more intimate */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true, amount: 0.5 }}
-            className='lg:col-span-4 flex flex-col items-center lg:items-start'
+          <AnimatedBlock
+            className='flex flex-col items-center will-animate-fade-in-scale lg:col-span-4 lg:items-start'
+            delay='0s'
+            threshold={0.5}
           >
-            <div className='relative group'>
+            <div className='group relative'>
               {/* Glow effect behind image */}
               <div
                 className='absolute -inset-2 opacity-20 blur-xl transition-opacity duration-500 group-hover:opacity-30'
@@ -37,61 +33,56 @@ export function GrunderSection() {
                     'linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)'
                 }}
               />
-
-              <div className='relative w-64 h-80 rounded-2xl overflow-hidden border-2 border-neutral-800 shadow-2xl'>
+              <div className='relative h-70 w-64 overflow-hidden rounded-2xl border-2 border-neutral-800 shadow-2xl'>
                 <Image
                   src={UtekosFounder}
                   alt='Portrett av gründeren av Utekos'
-                  fill
-                  className='object-cover object-top transition-transform duration-500 group-hover:scale-105'
+                  width={800}
+                  height={971}
+                  className='object-cover transition-transform duration-500 group-hover:scale-105'
+                  priority={false}
                 />
               </div>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-              className='mt-6 text-center lg:text-left'
+            <AnimatedBlock
+              className='mt-6 text-center will-animate-fade-in-up lg:text-left'
+              delay='0.15s'
+              threshold={0.3}
             >
               <p className='text-lg font-semibold text-foreground'>
                 Erling Holthe
               </p>
-              <p className='text-sm text-muted-foreground mt-1'>Utekos™</p>
-            </motion.div>
-          </motion.div>
+              <p className='mt-1 text-sm text-muted-foreground'>Utekos™</p>
+            </AnimatedBlock>
+          </AnimatedBlock>
 
           {/* Content - Takes up more space */}
-          <div className='lg:col-span-8 flex flex-col justify-center'>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className='mb-4 inline-flex items-center gap-2 rounded-full border border-sky-800/30 bg-sky-900/10 px-4 py-2 w-fit'
+          <div className='flex flex-col justify-center lg:col-span-8'>
+            <AnimatedBlock
+              className='mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-sky-800/30 bg-sky-900/10 px-4 py-2 will-animate-fade-in-up'
+              delay='0.1s'
+              threshold={0.3}
             >
               <span className='text-sm font-medium text-sky-800'>
                 Vår historie
               </span>
-            </motion.div>
+            </AnimatedBlock>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-              className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl mb-8'
+            <AnimatedBlock
+              className='will-animate-fade-in-up'
+              delay='0.2s'
+              threshold={0.3}
             >
-              Fra idé til virkelighet
-            </motion.h2>
+              <h2 className='mb-8 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl'>
+                Fra idé til virkelighet
+              </h2>
+            </AnimatedBlock>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-              className='space-y-6'
+            <AnimatedBlock
+              className='space-y-6 will-animate-fade-in-up'
+              delay='0.3s'
+              threshold={0.3}
             >
               <p className='text-lg leading-relaxed text-muted-foreground'>
                 Utekos ble født ut av et enkelt, gjenkjennelig problem: de
@@ -111,15 +102,13 @@ export function GrunderSection() {
                 Etter måneder med design, testing og perfeksjonering av
                 materialer her i Norge, ble Utekos en realitet.
               </p>
-            </motion.div>
+            </AnimatedBlock>
 
             {/* Quote callout */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              viewport={{ once: true }}
-              className='relative mt-8 rounded-xl border border-neutral-800 bg-neutral-900/50 p-6 overflow-hidden'
+            <AnimatedBlock
+              className='relative mt-8 overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/50 p-6 will-animate-fade-in-up'
+              delay='0.45s'
+              threshold={0.3}
             >
               {/* Aurora effect */}
               <div
@@ -129,15 +118,17 @@ export function GrunderSection() {
                     'radial-gradient(120% 120% at 50% 0%, transparent 30%, #0ea5e9 100%)'
                 }}
               />
-
               <div className='relative flex gap-4'>
-                <Quote className='h-8 w-8 text-sky-800 flex-shrink-0' />
-                <p className='text-xl font-semibold text-foreground leading-relaxed'>
+                <Quote
+                  aria-hidden='true'
+                  className='h-8 w-8 flex-shrink-0 text-sky-800'
+                />
+                <p className='text-xl font-semibold leading-relaxed text-foreground'>
                   En hyllest til de små, verdifulle øyeblikkene i en travel
                   hverdag.
                 </p>
               </div>
-            </motion.div>
+            </AnimatedBlock>
           </div>
         </div>
       </div>

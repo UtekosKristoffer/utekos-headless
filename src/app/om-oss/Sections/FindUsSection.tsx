@@ -1,4 +1,4 @@
-'use client'
+// Path: src/app/(sections)/FindUsSection.tsx
 
 import {
   Carousel,
@@ -7,91 +7,97 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
-import { motion } from 'framer-motion'
+import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { MapPinIcon } from 'lucide-react'
 import Image from 'next/image'
 
-const upcomingFairs = [
+type PastEvent = {
+  name: string
+  location: string
+  date: string
+  color: string
+}
+
+const pastEvents: PastEvent[] = [
   {
-    name: 'Caravanmessen',
-    location: 'Lillestrøm',
-    date: '12. - 15. september 2026',
-    color: 'text-primary' // Blå
+    name: 'Boligmesse Sotra',
+    location: 'Sotra',
+    date: '21.–23. mars 2025',
+    color: 'text-sky-800'
   },
   {
-    name: 'Bobil & Caravan',
+    name: 'Julestand Laksevåg Senter',
     location: 'Bergen',
-    date: '4. - 6. oktober 2026',
-    color: 'text-fuchsia-400' // Magenta/Lilla
+    date: '18.–22. desember 2022',
+    color: 'text-emerald-400'
   },
   {
-    name: 'Hyttemessen',
-    location: 'Hellerudsletta',
-    date: '18. - 20. april 2027',
-    color: 'text-emerald-400' // Grønn
+    name: 'Ute & Fritid-dager',
+    location: 'Åsane',
+    date: 'Vår 2024',
+    color: 'text-fuchsia-400'
   }
 ]
 
-const fairImages = ['/messe-1.webp', '/messe-2.webp', '/messe-3.webp']
+const fairImages = ['/messe-1.webp', '/messe-2.webp', '/messe-3.webp'] as const
 
 export function FindUsSection() {
   return (
     <section className='py-24 sm:py-32'>
       <div className='container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         <div className='grid grid-cols-1 items-center gap-16 lg:grid-cols-2'>
-          {/* Venstre kolonne: Tekst og invitasjon */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            viewport={{ once: true, amount: 0.3 }}
+          {/* Venstre kolonne: Tekst og gjennomførte besøk */}
+          <AnimatedBlock
+            className='will-animate-fade-in-left'
+            delay='0s'
+            threshold={0.3}
           >
             <h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
-              Møt oss der du er
+              Der du har møtt oss
             </h2>
             <p className='mt-6 text-lg leading-8 text-muted-foreground'>
-              Den beste praten tar vi ansikt til ansikt. Derfor reiser vi land
-              og strand rundt på caravan- og boligmesser for å møte andre
-              livsnytere. Her deler vi historier, får uvurderlige
-              tilbakemeldinger og viser frem komforten du kan føle på.
+              Vi elsker å prate med folk – derfor er vi jevnlig på messer og
+              stands. Her er noen av stedene du kan ha truffet oss, og hvor vi
+              har fått verdifulle innspill fra kunder som faktisk har kjent
+              komforten.
             </p>
             <div className='mt-10 space-y-6'>
-              {upcomingFairs.map(fair => (
-                <div key={fair.name} className='flex gap-4'>
-                  <div className='flex h-10 w-10 ...'>
-                    <MapPinIcon className={`h-5 w-5 ${fair.color}`} />{' '}
+              {pastEvents.map(event => (
+                <div key={`${event.name}-${event.date}`} className='flex gap-4'>
+                  <div className='flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-800 bg-sidebar-foreground'>
+                    <MapPinIcon className={`h-5 w-5 ${event.color}`} />
                   </div>
                   <div>
                     <h3 className='font-semibold text-foreground'>
-                      {fair.name}
+                      {event.name}
                     </h3>
                     <p className='text-muted-foreground'>
-                      {fair.location} – {fair.date}
+                      {event.location} – {event.date}
                     </p>
                   </div>
                 </div>
               ))}
             </div>
-          </motion.div>
+          </AnimatedBlock>
 
-          {/* Høyre kolonne: Bildekarusell */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            viewport={{ once: true, amount: 0.3 }}
+          {/* Høyre kolonne: Bildekarusell fra stands/messer */}
+          <AnimatedBlock
+            className='will-animate-fade-in-right'
+            delay='0.06s'
+            threshold={0.3}
           >
             <Carousel className='rounded-xl border border-neutral-800'>
               <CarouselContent>
                 {fairImages.map((src, index) => (
-                  <CarouselItem key={index}>
+                  <CarouselItem key={src}>
                     <div className='relative aspect-[4/3]'>
                       <Image
                         src={src}
-                        alt={`Bilde fra messe ${index + 1}`}
+                        alt={`Bilde fra stand eller messe ${index + 1}`}
                         fill
-                        className='object-cover rounded-xl'
+                        className='rounded-xl object-cover'
                         sizes='(max-width: 1024px) 90vw, 45vw'
+                        priority={false}
                       />
                     </div>
                   </CarouselItem>
@@ -100,7 +106,7 @@ export function FindUsSection() {
               <CarouselPrevious className='left-4' />
               <CarouselNext className='right-4' />
             </Carousel>
-          </motion.div>
+          </AnimatedBlock>
         </div>
       </div>
     </section>

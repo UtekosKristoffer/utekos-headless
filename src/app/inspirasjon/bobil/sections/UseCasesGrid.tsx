@@ -1,12 +1,9 @@
-'use client'
-
 import { Card, CardContent } from '@/components/ui/card'
-import { motion } from 'framer-motion'
+import { AnimatedBlock } from '@/components/AnimatedBlock'
 import type { UseCase } from '../types'
 import { MoonIcon } from '@heroicons/react/24/outline'
 import { Sunrise, Wind } from 'lucide-react'
-
-export const useCasesData = [
+export const useCasesData: UseCase[] = [
   {
     icon: Sunrise,
     time: 'Morgen',
@@ -37,6 +34,7 @@ export const useCasesData = [
     iconColor: 'text-emerald-500'
   }
 ]
+
 export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
   return (
     <section id='bruksomrader' className='bg-sidebar-foreground py-24'>
@@ -51,13 +49,12 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
           </p>
         </div>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
-          {useCases.map((useCase, index) => (
-            <motion.div
+          {useCases.map((useCase, useCaseIndex) => (
+            <AnimatedBlock
               key={useCase.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
+              className='will-animate-fade-in-up'
+              delay={`${useCaseIndex * 0.1}s`}
+              threshold={0.2}
             >
               <Card className='@container relative h-full overflow-hidden border-neutral-800 bg-background group'>
                 <div
@@ -84,7 +81,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                   <p className='text-muted-foreground'>{useCase.description}</p>
                 </CardContent>
               </Card>
-            </motion.div>
+            </AnimatedBlock>
           ))}
         </div>
       </div>

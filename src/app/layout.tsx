@@ -1,7 +1,5 @@
 // Path: src/app/layout.tsx
 import './globals.css'
-import '@xyflow/react/dist/style.css'
-import '@/db/zod/zodConfig'
 import { geistSans, geistMono } from '@/db/config/font.config'
 import { mainMenu } from '@/db/config/menu.config'
 import { SpeedInsights } from '@vercel/speed-insights/react'
@@ -13,7 +11,6 @@ import { getCachedCart } from '@/lib/helpers/cart/getCachedCart'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { QueryClient } from '@tanstack/react-query'
 
-import WelcomeToast from '@/components/WelcomeToast/WelcomeToast'
 import Providers from '@/components/providers/Providers'
 import AnnouncementBanner from '@/SpecialOfferSection/AnnouncementBanner'
 import Footer from '@/components/footer/Footer'
@@ -112,7 +109,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
             <Footer />
           </main>
           <Toaster closeButton />
-          <WelcomeToast />
           <SpeedInsights />
           <Analytics mode='production' />
         </Providers>

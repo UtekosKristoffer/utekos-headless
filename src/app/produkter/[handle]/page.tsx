@@ -1,4 +1,5 @@
 // Path: src/app/produkter/[handle]/page.tsx
+
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { getProduct } from '@/api/lib/products/getProduct'
 import { ProductJsonLd } from './ProductJsonLd'
@@ -10,14 +11,18 @@ import {
 import { notFound } from 'next/navigation'
 import { ProductPageController } from '@/app/produkter/[handle]/ProductPageController/ProductPageController'
 import type { Metadata, ResolvingMetadata } from 'next'
-type MetaDataProps = {
-  params: Promise<{ handle: string }>
+
+type RouteParamsPromise = Promise<{ handle: string }>
+
+type GenerateMetadataProps = {
+  params: RouteParamsPromise
 }
+
 export async function generateMetadata(
-  { params }: MetaDataProps,
-  parent: ResolvingMetadata
+  { params }: GenerateMetadataProps,
+  _parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const handle = (await params).handle
+  const { handle } = await params
 
   const product = await getProduct(handle)
 
@@ -27,6 +32,7 @@ export async function generateMetadata(
       description: 'Dette produktet er dessverre ikke tilgjengelig.'
     }
   }
+
   const seoTitle = product.seo.title || product.title
   const seoDescription = product.seo.description || product.description
   const imageUrl = product.featuredImage?.url || '/og-image.jpg'
@@ -63,12 +69,15 @@ export async function generateMetadata(
   }
 }
 
+// ---- Page (Next 15: params er en Promise) --------------------------------
+
 export default async function ProductPage({
   params
 }: {
-  params: { handle: string }
+  params: RouteParamsPromise
 }) {
-  const { handle } = params
+  const { handle } = await params
+
   const queryClient = new QueryClient()
   const product = await getProduct(handle)
 
@@ -76,12 +85,13 @@ export default async function ProductPage({
     notFound()
   }
 
+  // Prefetch produktet og liste for hydrering på klient
   await queryClient.prefetchQuery({
     ...productOptions(handle),
     queryFn: () => product
   })
-
   await queryClient.prefetchQuery(allProductsOptions())
+
   return (
     <>
       <ProductJsonLd handle={handle} />

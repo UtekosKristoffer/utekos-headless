@@ -1,5 +1,5 @@
 import BobilPrepFlow from '@/app/magasinet/den-ultimate-guiden-til-komfortabel-vintercamping/BobilPrepFlow'
-import { VintercampFlow } from '@/app/magasinet/den-ultimate-guiden-til-komfortabel-vintercamping/client-code/VinterCampFlow'
+import { VintercampFlow } from '@/app/magasinet/den-ultimate-guiden-til-komfortabel-vintercamping/VinterCampFlow'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { ArrowRightIcon, CheckIcon } from '@heroicons/react/24/outline'

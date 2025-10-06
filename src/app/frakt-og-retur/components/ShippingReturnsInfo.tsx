@@ -1,6 +1,3 @@
-// Path: src/app/frakt-og-retur/components/ShippingReturnsInfo.tsx
-'use client'
-
 import {
   Accordion,
   AccordionContent,
@@ -14,45 +11,21 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-// STEG 1: Importer 'Variants'-typen
-import { motion, type Variants } from 'framer-motion'
 import {
   PackageCheck,
   Clock,
   Mail,
-  Send,
   ShieldCheck,
   Truck,
   Undo2
 } from 'lucide-react'
-
-// STEG 2: Legg til den eksplisitte typen
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2
-    }
-  }
-}
-
-// STEG 3: Legg til typen og endre 'ease'
-const fadeInUp: Variants = {
-  hidden: { y: 20, opacity: 0 },
-  show: { y: 0, opacity: 1, transition: { duration: 0.6, ease: 'easeInOut' } }
-}
+import { AnimatedBlock } from '@/components/AnimatedBlock'
 
 export function ShippingReturnsInfo() {
   return (
-    <motion.div
-      variants={staggerContainer}
-      initial='hidden'
-      animate='show'
-      className='lg:col-span-8'
-    >
+    <section className='lg:col-span-8'>
       <div className='grid gap-8 md:grid-cols-2'>
-        <motion.div variants={fadeInUp}>
+        <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
           <Card className='h-full border-neutral-700 bg-sidebar-foreground'>
             <CardHeader>
               <CardTitle className='flex items-center gap-3'>
@@ -82,9 +55,9 @@ export function ShippingReturnsInfo() {
               </ul>
             </CardContent>
           </Card>
-        </motion.div>
+        </AnimatedBlock>
 
-        <motion.div variants={fadeInUp}>
+        <AnimatedBlock className='will-animate-fade-in-up' delay='0.4s'>
           <Card className='h-full border-neutral-700 bg-sidebar-foreground'>
             <CardHeader>
               <CardTitle className='flex items-center gap-3'>
@@ -114,10 +87,10 @@ export function ShippingReturnsInfo() {
               </ul>
             </CardContent>
           </Card>
-        </motion.div>
+        </AnimatedBlock>
       </div>
 
-      <motion.div variants={fadeInUp} className='mt-12'>
+      <AnimatedBlock className='will-animate-fade-in-up mt-12' delay='0.6s'>
         <h2 className='mb-4 text-2xl font-semibold tracking-tight text-foreground'>
           Slik fungerer returprosessen
         </h2>
@@ -164,7 +137,7 @@ export function ShippingReturnsInfo() {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-      </motion.div>
-    </motion.div>
+      </AnimatedBlock>
+    </section>
   )
 }

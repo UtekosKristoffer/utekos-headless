@@ -7,7 +7,10 @@ import { useCartQuery } from '@/hooks/useCartQuery'
 import { useCartStoreSnapshot } from '@/hooks/useCartStoreSnapshot'
 import { cn } from '@/lib/utils/className'
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
-import * as React from 'react'
+import { useQueryClient } from '@tanstack/react-query'
+import { useCallback } from 'react'
+import { getRecommendedProducts } from '@/api/lib/products/getRecommendedProducts'
+import { getAccessoryProducts } from '@/api/lib/products/getAccessoryProducts'
 
 const getOptimisticCount = (
   lines: Record<string, unknown> | undefined
@@ -26,9 +29,22 @@ export function CartTrigger({
 }): React.JSX.Element {
   const { optimisticCartLines } = useCartStoreSnapshot().context
   const { data: cart } = useCartQuery()
+  const queryClient = useQueryClient()
+
   const optimisticCount = getOptimisticCount(optimisticCartLines?.lines)
   const serverCount = cart?.totalQuantity ?? 0
   const itemCount = optimisticCount > 0 ? optimisticCount : serverCount
+
+  const handlePrefetch = useCallback(() => {
+    queryClient.prefetchQuery({
+      queryKey: ['products', 'recommended'],
+      queryFn: getRecommendedProducts
+    })
+    queryClient.prefetchQuery({
+      queryKey: ['products', 'accessory'],
+      queryFn: getAccessoryProducts
+    })
+  }, [queryClient])
 
   return (
     <DrawerTrigger asChild>
@@ -43,14 +59,15 @@ export function CartTrigger({
           'p-0',
           className
         )}
+        onMouseEnter={handlePrefetch}
       >
-        <ShoppingCartIcon className='h-4 transition-all text-white ease-in-out hover:scale-110' />
+        <ShoppingCartIcon className='h-4 text-white transition-all ease-in-out hover:scale-110' />
 
         {itemCount > 0 && (
           <div
-            className='absolute right-0 top-0 -mr-2 -mt-2 grid h-4 w-4 place-items-center
-                          rounded-sm bg-blue-600 text-[11px] font-medium text-white
-                          pointer-events-none z-10'
+            className='pointer-events-none absolute -right-2 -top-2 z-10 grid h-4 w-4
+                          place-items-center rounded-sm bg-blue-600 text-[11px]
+                          font-medium text-white'
           >
             {itemCount}
           </div>

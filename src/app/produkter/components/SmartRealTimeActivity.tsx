@@ -1,72 +1,100 @@
 'use client'
 
-import { AnimatePresence, motion } from 'framer-motion'
 import { EyeIcon } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-const getRandomInt = (min: number, max: number) =>
+/** Tilfeldig heltall i [min, max] */
+const getRandomIntInclusive = (min: number, max: number): number =>
   Math.floor(Math.random() * (max - min + 1)) + min
 
-function getTimeOfDayFactor(): number {
+function getTimeOfDayMultiplier(): number {
   const hour = new Date().getHours()
-  if (hour >= 1 && hour < 7) return 0.3 // Natt: færre folk
-  if (hour >= 7 && hour < 17) return 0.8 // Dagtid (hverdag): folk er på jobb
-  if (hour >= 17 && hour < 23) return 1.2 // Kveld: peak-tid
+  if (hour >= 1 && hour < 7) return 0.3 // Natt
+  if (hour >= 7 && hour < 17) return 0.8 // Dagtid
+  if (hour >= 17 && hour < 23) return 1.2 // Kveld
   return 0.9 // Sen kveld
 }
-function getDayOfWeekFactor(): number {
-  const day = new Date().getDay() // 0 = Søndag, 6 = Lørdag
-  if (day === 0 || day === 6) return 1.3 // Helg: høyere trafikk
-  if (day === 5) return 1.1 // Fredag
+function getDayOfWeekMultiplier(): number {
+  const day = new Date().getDay() // 0 = søn, 6 = lør
+  if (day === 0 || day === 6) return 1.3 // Helg
+  if (day === 5) return 1.1 // Fre
   return 0.9 // Vanlig ukedag
 }
 
 interface SmartRealTimeActivityProps {
-  baseViewers: number // Et basistall for produktets popularitet
+  /** Basistall for produktets popularitet (kalibreres per produkt) */
+  baseViewers: number
 }
 
+/**
+ * Lettvekts, tilgjengelig “seere nå”-indikator uten Framer Motion.
+ * - Små, tilfeldige oppdateringer over tid.
+ * - Jevn fade/translate med CSS transitions (opacity/transform).
+ * - aria-live="polite" for skjermlesere (lav prioritet).
+ */
 export function SmartRealTimeActivity({
   baseViewers
 }: SmartRealTimeActivityProps) {
-  // Initialiserer med et "smart" tall
-  const [viewers, setViewers] = useState(() => {
+  // Start med et “smart” utgangspunkt basert på tid/dag
+  const [currentViewerCount, setCurrentViewerCount] = useState<number>(() => {
     const smartBase = Math.round(
-      baseViewers * getTimeOfDayFactor() * getDayOfWeekFactor()
+      baseViewers * getTimeOfDayMultiplier() * getDayOfWeekMultiplier()
     )
-    return Math.max(2, smartBase + getRandomInt(-1, 1)) // Sørger for at det aldri er under 2
+    return Math.max(2, smartBase + getRandomIntInclusive(-1, 1))
   })
 
+  // Intervall som oppdaterer tallet sporadisk
   useEffect(() => {
-    // Oppdaterer tallet med lengre, mer tilfeldige intervaller
-    const interval = setInterval(
+    const intervalId = window.setInterval(
       () => {
-        setViewers(prev => {
-          const change = Math.random() > 0.55 ? 1 : -1
-          const newViewers = prev + change
-          return Math.max(2, newViewers) // Holder tallet over 1
-        })
+        setCurrentViewerCount(prev =>
+          Math.max(2, prev + (Math.random() > 0.55 ? 1 : -1))
+        )
       },
-      getRandomInt(8000, 22000)
+      getRandomIntInclusive(8000, 22000)
     )
 
-    return () => clearInterval(interval)
+    return () => window.clearInterval(intervalId)
   }, [])
 
+  /**
+   * Enkel “enter” animasjon på hvert tallskifte:
+   * Vi setter først en "pre" klasse (opacity-0/translate-y-2), og i neste frame
+   * fjerner vi den slik at CSS transition tar oss til opacity-100/translate-y-0.
+   */
+  const [isEntering, setIsEntering] = useState<boolean>(false)
+  const isFirstRenderRef = useRef<boolean>(true)
+
+  useEffect(() => {
+    if (isFirstRenderRef.current) {
+      isFirstRenderRef.current = false
+      return
+    }
+    setIsEntering(true)
+
+    const raf1 = requestAnimationFrame(() => {
+      const raf2 = requestAnimationFrame(() => setIsEntering(false))
+      return () => cancelAnimationFrame(raf2)
+    })
+    return () => cancelAnimationFrame(raf1)
+  }, [currentViewerCount])
+
   return (
-    <AnimatePresence mode='popLayout'>
-      <motion.div
-        key={viewers}
-        initial={{ y: -10, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: 10, opacity: 0 }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
-        // Text-color was: text-sky-400
-        className='flex items-center gap-2 text-sm text-button mt-4'
+    <div
+      aria-live='polite'
+      className='mt-4 flex items-center gap-2 text-sm text-button'
+    >
+      <EyeIcon className='h-4 w-4 text-neutral-400' />
+      <span
+        // Transition på transform+opacity (GPU-vennlig)
+        className={[
+          'font-semibold transform transition-opacity duration-400 ease-out',
+          isEntering ? 'translate-y-2 opacity-0' : 'translate-y-0 opacity-100'
+        ].join(' ')}
       >
-        <EyeIcon className='h-4 w-4 text-neutral-400' />
-        <span className='font-semibold'>{viewers}</span>
-        <span>andre ser på dette produktet akkurat nå</span>
-      </motion.div>
-    </AnimatePresence>
+        {currentViewerCount}
+      </span>
+      <span>andre ser på dette produktet akkurat nå</span>
+    </div>
   )
 }

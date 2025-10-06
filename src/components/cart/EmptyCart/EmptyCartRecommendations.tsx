@@ -1,13 +1,13 @@
 // Path: src/components/cart/EmptyCartRecommendations.tsx
 'use client'
 
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { RecommendedItem } from './RecommendedItem'
 import type { ShopifyProduct } from '@types'
-import { getRecommendedProducts } from '@/api/lib/products/getRecommendedProcuts'
+import { getRecommendedProducts } from '@/api/lib/products/getRecommendedProducts'
 
 export function EmptyCartRecommendations() {
-  const { data: products } = useSuspenseQuery<ShopifyProduct[]>({
+  const { data: products } = useQuery<ShopifyProduct[]>({
     queryKey: ['products', 'recommended'],
     queryFn: getRecommendedProducts
   })

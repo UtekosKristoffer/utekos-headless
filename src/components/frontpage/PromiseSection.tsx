@@ -1,3 +1,5 @@
+// Path: src/components/frontpage/PromiseSection.tsx
+
 import { GridCross } from '@/components/legal/GridCross'
 import { ClockIcon, ShieldCheckIcon } from '@heroicons/react/24/outline'
 import { ThermometerIcon } from 'lucide-react'
@@ -8,7 +10,6 @@ export function PromiseSection() {
   return (
     <section className='py-16 mx-auto max-w-[95%] md:max-w-7xl sm:py-24'>
       <div className='mx-auto px-4 sm:px-6 lg:px-8'>
-        {/* ENDRING 1: Fjernet "items-center" for å la kolonnene få lik høyde (stretch) */}
         <div className='grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16'>
           {/* Venstre kolonne: Bilde */}
           <div className='flex items-center justify-center rounded-xl border border-neutral-800 p-2'>
@@ -38,14 +39,12 @@ export function PromiseSection() {
             />
 
             <div className='relative z-10 flex h-full flex-col justify-center'>
-              {/* ENDRING 2: Korrigert plassering av GridCross */}
               <GridCross className='absolute top-0 right-0 h-8 w-8 -translate-y-1/2 translate-x-1/2' />
 
               <h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
                 Vårt løfte
               </h2>
 
-              {/* ENDRING 3: Mer dynamisk og fargerik inndeling av teksten */}
               <div className='mt-6 space-y-6'>
                 <div className='flex items-start gap-4'>
                   <div className='flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-blue-400'>

@@ -1,9 +1,8 @@
-'use client'
-
 import { Button } from '@/components/ui/button'
 import { ArrowRight, MapPin, Mountain, Sunrise } from 'lucide-react'
-import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { AnimatedBlock } from '@/components/AnimatedBlock'
+import type { Route } from 'next'
 
 export function BobilHeroSection() {
   return (
@@ -27,20 +26,13 @@ export function BobilHeroSection() {
       <div className='absolute inset-0 bg-gradient-to-b from-transparent to-background/50' />
 
       <div className='container relative mx-auto px-4 py-16'>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className='max-w-3xl'
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className='mb-6 flex items-center gap-3 text-sm text-muted-foreground'
+        <div className='max-w-3xl'>
+          <AnimatedBlock
+            className='will-animate-fade-in-up mb-6 flex items-center gap-3 text-sm text-muted-foreground'
+            delay='0.1s'
           >
             <Link
-              href='/inspirasjon'
+              href={'/inspirasjon' as Route}
               className='transition-colors hover:text-foreground'
             >
               Inspirasjon
@@ -50,39 +42,31 @@ export function BobilHeroSection() {
               <MapPin className='h-3 w-3 text-amber-950' />
               <span className='font-medium text-amber-950'>Bobilliv</span>
             </span>
-          </motion.div>
+          </AnimatedBlock>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className='text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'
-          >
-            Bobilliv uten{' '}
-            <span className='bg-gradient-to-r from-amber-950 to-amber-900 bg-clip-text text-transparent'>
-              kompromisser
-            </span>
-          </motion.h1>
+          <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
+            <h1 className='text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'>
+              Bobilliv uten{' '}
+              <span className='bg-gradient-to-r from-amber-950 to-amber-900 bg-clip-text text-transparent'>
+                kompromisser
+              </span>
+            </h1>
+          </AnimatedBlock>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className='mt-6 max-w-2xl text-xl leading-relaxed text-muted-foreground'
-          >
-            Fra den første morgenkaffen til de sene kveldene rundt bordet.
-            Oppdag hvordan Utekos forvandler hver stopp til en destinasjon verdt
-            å huske.
-          </motion.p>
+          <AnimatedBlock className='will-animate-fade-in-up' delay='0.3s'>
+            <p className='mt-6 max-w-2xl text-xl leading-relaxed text-muted-foreground'>
+              Fra den første morgenkaffen til de sene kveldene rundt bordet.
+              Oppdag hvordan Utekos forvandler hver stopp til en destinasjon
+              verdt å huske.
+            </p>
+          </AnimatedBlock>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className='mt-8 flex flex-wrap gap-4'
+          <AnimatedBlock
+            className='will-animate-fade-in-up mt-8 flex flex-wrap gap-4'
+            delay='0.4s'
           >
             <Button asChild size='lg' className='group'>
-              <Link href='/produkter'>
+              <Link href={'/produkter' as Route}>
                 Se produktene
                 <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
               </Link>
@@ -90,26 +74,24 @@ export function BobilHeroSection() {
             <Button variant='outline' size='lg' asChild>
               <Link href='#bruksomrader'>Utforsk mulighetene</Link>
             </Button>
-          </motion.div>
+          </AnimatedBlock>
 
-          {/* Feature highlights instead of fake stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className='mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3'
+          {/* Feature highlights */}
+          <AnimatedBlock
+            className='will-animate-fade-in-up mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3'
+            delay='0.5s'
           >
             <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all hover:border-neutral-700'>
               <div
-                className='absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
+                className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
                 style={{
                   background:
                     'radial-gradient(120% 120% at 50% 0%, transparent 30%, #0ea5e9 100%)'
                 }}
               />
               <div className='relative'>
-                <Sunrise className='h-8 w-8 text-amber-600 mb-3' />
-                <p className='font-semibold text-foreground mb-1'>
+                <Sunrise className='mb-3 h-8 w-8 text-amber-600' />
+                <p className='mb-1 font-semibold text-foreground'>
                   Morgenkaffe
                 </p>
                 <p className='text-sm text-muted-foreground'>
@@ -120,15 +102,15 @@ export function BobilHeroSection() {
 
             <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all hover:border-neutral-700'>
               <div
-                className='absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
+                className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
                 style={{
                   background:
                     'radial-gradient(120% 120% at 50% 0%, transparent 30%, #06b6d4 100%)'
                 }}
               />
               <div className='relative'>
-                <Mountain className='h-8 w-8 text-blue-950 mb-3' />
-                <p className='font-semibold text-foreground mb-1'>Alle stopp</p>
+                <Mountain className='mb-3 h-8 w-8 text-blue-950' />
+                <p className='mb-1 font-semibold text-foreground'>Alle stopp</p>
                 <p className='text-sm text-muted-foreground'>
                   Nyt utsikten i komfort, hvor som helst
                 </p>
@@ -137,15 +119,15 @@ export function BobilHeroSection() {
 
             <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all hover:border-neutral-700'>
               <div
-                className='absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
+                className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
                 style={{
                   background:
                     'radial-gradient(120% 120% at 50% 0%, transparent 30%, #22d3ee 100%)'
                 }}
               />
               <div className='relative'>
-                <MapPin className='h-8 w-8 text-amber-200 mb-3' />
-                <p className='font-semibold text-foreground mb-1'>
+                <MapPin className='mb-3 h-8 w-8 text-amber-200' />
+                <p className='mb-1 font-semibold text-foreground'>
                   Lengre turer
                 </p>
                 <p className='text-sm text-muted-foreground'>
@@ -153,8 +135,8 @@ export function BobilHeroSection() {
                 </p>
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </AnimatedBlock>
+        </div>
       </div>
     </section>
   )

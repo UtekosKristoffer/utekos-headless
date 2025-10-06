@@ -1,17 +1,16 @@
-'use client'
-
 import { Card, CardContent } from '@/components/ui/card'
-import { motion } from 'framer-motion'
-import { MountainSnow, Trees } from 'lucide-react'
+import { AnimatedBlock } from '@/components/AnimatedBlock'
+import { MountainSnow, Trees, type LucideIcon } from 'lucide-react'
 
-// "Ordbok" for å mappe tekst til ikon-komponenter
-const iconMap = {
+type RouteIconName = 'mountainSnow' | 'trees'
+
+const routeIconByName: Record<RouteIconName, LucideIcon> = {
   mountainSnow: MountainSnow,
   trees: Trees
 }
 
 interface RouteElement {
-  icon: keyof typeof iconMap
+  icon: RouteIconName
   title: string
   description: string
   color: string
@@ -20,36 +19,38 @@ interface RouteElement {
 
 export function RouteDetailsGrid({ elements }: { elements: RouteElement[] }) {
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-      {elements.map((element, index) => {
-        const IconComponent = iconMap[element.icon]
-        if (!IconComponent) return null
+    <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
+      {elements.map((routeElement, routeElementIndex) => {
+        const IconComponent = routeIconByName[routeElement.icon]
 
         return (
-          <motion.div
-            key={element.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: true }}
+          <AnimatedBlock
+            key={routeElement.title}
+            className='will-animate-fade-in-up'
+            delay={`${routeElementIndex * 0.1}s`}
+            threshold={0.2}
           >
-            <Card className='relative overflow-hidden border-neutral-800 bg-sidebar-foreground h-full group'>
+            <Card className='group rounded-lg relative h-full overflow-hidden border-neutral-800 bg-sidebar-foreground'>
               <div
-                className={`absolute inset-0 bg-gradient-to-br ${element.color} to-transparent opacity-20 transition-opacity group-hover:opacity-30`}
+                className={`absolute rounded-lg inset-0 bg-gradient-to-br ${routeElement.color} to-transparent opacity-10 transition-opacity group-hover:opacity-30`}
               />
               <CardContent className='relative p-8'>
-                <div className='flex items-center gap-4 mb-6'>
-                  <div className='flex h-12 w-12 items-center justify-center rounded-lg bg-background border border-neutral-700'>
-                    <IconComponent className={`h-6 w-6 ${element.iconColor}`} />
+                <div className='mb-6 flex items-center gap-4'>
+                  <div className='flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-700 bg-background'>
+                    <IconComponent
+                      className={`h-6 w-6 ${routeElement.iconColor}`}
+                    />
                   </div>
                 </div>
-                <h2 className='text-xl font-semibold mb-2 !mt-0'>
-                  {element.title}
+                <h2 className='mb-2 !mt-0 text-xl font-semibold'>
+                  {routeElement.title}
                 </h2>
-                <p className='text-muted-foreground'>{element.description}</p>
+                <p className='text-muted-foreground'>
+                  {routeElement.description}
+                </p>
               </CardContent>
             </Card>
-          </motion.div>
+          </AnimatedBlock>
         )
       })}
     </div>

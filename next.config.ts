@@ -1,15 +1,16 @@
 import type { NextConfig } from 'next'
 
+import nextBundleAnalyzer from '@next/bundle-analyzer'
+const withBundleAnalyzer = nextBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true'
+})
+
 const nextConfig: NextConfig = {
   typedRoutes: true,
   experimental: {
     useCache: true,
     optimizePackageImports: [
-      'framer-motion',
-      '@radix-ui/react-accessible-icon',
-      '@radix-ui/react-accordion',
-      '@radix-ui/react-alert-dialog',
-      '@radix-ui/react-aspect-ratio',
+      'zod',
       '@radix-ui/react-dialog',
       '@radix-ui/react-hover-card',
       '@radix-ui/react-label',
@@ -23,9 +24,7 @@ const nextConfig: NextConfig = {
       '@radix-ui/react-switch',
       '@radix-ui/react-tabs',
       '@radix-ui/react-toast',
-      '@radix-ui/react-tooltip',
-      '@radix-ui/react-visually-hidden',
-      '@xstate/react',
+      'xstate',
       'cmdk',
       'embla-carousel-react',
       'sonner',
@@ -45,4 +44,4 @@ const nextConfig: NextConfig = {
     ]
   }
 }
-export default nextConfig
+export default withBundleAnalyzer(nextConfig)

@@ -1,9 +1,8 @@
-'use client'
-
 import { Card, CardContent } from '@/components/ui/card'
-import { motion } from 'framer-motion'
+import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { MapPinIcon } from 'lucide-react'
 import type { Destination } from '../types'
+
 export const popularAreasData: Destination[] = [
   {
     name: 'Trysil & Hemsedal',
@@ -49,27 +48,30 @@ export function PopularCabinAreasGrid({
           </p>
         </div>
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
-          {destinations.map((dest, index) => (
-            <motion.div
-              key={dest.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
+          {destinations.map((destination, destinationIndex) => (
+            <AnimatedBlock
+              key={destination.name}
+              className='will-animate-fade-in-up'
+              delay={`${destinationIndex * 0.1}s`}
+              threshold={0.2}
             >
               <Card className='border-neutral-800 bg-sidebar-foreground transition-colors hover:bg-sidebar-foreground/80'>
                 <CardContent className='p-6'>
                   <div className='mb-3 flex items-start justify-between'>
-                    <h3 className='text-lg font-semibold'>{dest.name}</h3>
-                    <MapPinIcon className={`size-5 ${dest.color}`} />
+                    <h3 className='text-lg font-semibold'>
+                      {destination.name}
+                    </h3>
+                    <MapPinIcon className={`size-5 ${destination.color}`} />
                   </div>
                   <p className='mb-2 text-sm text-muted-foreground'>
-                    {dest.season}
+                    {destination.season}
                   </p>
-                  <p className='text-sm text-foreground/80'>{dest.highlight}</p>
+                  <p className='text-sm text-foreground/80'>
+                    {destination.highlight}
+                  </p>
                 </CardContent>
               </Card>
-            </motion.div>
+            </AnimatedBlock>
           ))}
         </div>
       </div>

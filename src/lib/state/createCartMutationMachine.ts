@@ -70,7 +70,6 @@ export const createCartMutationMachine = (
               target: 'idle',
               actions: [
                 assign({ error: null }),
-                // NY LOGIKK: Direkte oppdatering av cache og ID
                 ({ event }) => {
                   const newCart = event.output.cart
                   if (newCart?.id) {

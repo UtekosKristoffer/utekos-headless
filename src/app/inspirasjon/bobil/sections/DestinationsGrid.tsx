@@ -1,6 +1,5 @@
-'use client'
 import { Card, CardContent } from '@/components/ui/card'
-import { motion } from 'framer-motion'
+import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { MapPinIcon } from '@heroicons/react/24/outline'
 import type { Destination } from '../types'
 
@@ -21,28 +20,43 @@ export function DestinationsGrid({
             sesongen
           </p>
         </div>
+
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
-          {destinations.map((dest, index) => (
-            <motion.div
-              key={dest.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
+          {destinations.map((destination, destinationIndex) => (
+            <AnimatedBlock
+              key={destination.name}
+              className='will-animate-fade-in-up'
+              delay={`${destinationIndex * 0.1}s`}
+              threshold={0.2}
             >
-              <Card className='border-neutral-800 bg-sidebar-foreground transition-colors hover:bg-sidebar-foreground/80'>
-                <CardContent className='p-6'>
+              <Card
+                className='@container group relative h-full overflow-hidden border-neutral-800 bg-sidebar-foreground transition-colors hover:bg-sidebar-foreground/80 focus-within:ring-1 focus-within:ring-primary/30'
+                tabIndex={-1}
+              >
+                {/* Diskré bakgrunnsforsterker: subtil gradient-overlay som øker litt på hover */}
+                <div className='pointer-events-none absolute inset-0 opacity-15 transition-opacity duration-300 group-hover:opacity-25'>
+                  <div className='absolute inset-0 bg-gradient-to-br from-white/6 via-transparent to-transparent' />
+                </div>
+
+                {/* Svakt indre “glow” ved hover/focus for bedre affordance uten kraftig bevegelse */}
+                <div className='pointer-events-none absolute inset-0 rounded-[inherit] ring-0 transition-[box-shadow] duration-300 group-hover:shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_6px_18px_rgba(0,0,0,0.25)]' />
+
+                <CardContent className='relative p-6'>
                   <div className='mb-3 flex items-start justify-between'>
-                    <h3 className='text-lg font-semibold'>{dest.name}</h3>
-                    <MapPinIcon className={`size-5 ${dest.color}`} />
+                    <h3 className='text-lg font-semibold'>
+                      {destination.name}
+                    </h3>
+                    <MapPinIcon className={`size-5 ${destination.color}`} />
                   </div>
                   <p className='mb-2 text-sm text-muted-foreground'>
-                    {dest.season}
+                    {destination.season}
                   </p>
-                  <p className='text-sm text-foreground/80'>{dest.highlight}</p>
+                  <p className='text-sm text-foreground/80'>
+                    {destination.highlight}
+                  </p>
                 </CardContent>
               </Card>
-            </motion.div>
+            </AnimatedBlock>
           ))}
         </div>
       </div>

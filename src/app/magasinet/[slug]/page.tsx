@@ -6,11 +6,12 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import { mockArticles } from '@/db/data/articles' // Henter fra den sentraliserte filen
+import { mockArticles } from '@/db/data/articles'
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+
 const articleComponents = {
   'balpannen-din-guide-til-den-perfekte-hostkvelden': dynamic(() =>
     import(
@@ -53,32 +54,24 @@ const articleComponents = {
 export async function generateMetadata({
   params
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> {
-  // STEG 1: await params før du bruker den
-  const awaitedParams = await params
-  const article = mockArticles.find(p => p.slug === awaitedParams.slug)
+  const { slug } = await params
+  const article = mockArticles.find(p => p.slug === slug)
 
   if (!article) return { title: 'Artikkel ikke funnet' }
 
   return {
     title: `${article.title} | Utekos-Magasinet`,
     description: article.excerpt,
-    alternates: {
-      canonical: `/magasinet/${article.slug}`
-    },
+    alternates: { canonical: `/magasinet/${article.slug}` },
     openGraph: {
       title: article.title,
       description: article.excerpt,
       url: `/magasinet/${article.slug}`,
       siteName: 'Utekos-Magasinet',
       images: [
-        {
-          url: article.imageUrl,
-          width: 1200,
-          height: 630,
-          alt: article.title
-        }
+        { url: article.imageUrl, width: 1200, height: 630, alt: article.title }
       ],
       locale: 'no_NO',
       type: 'article'
@@ -93,17 +86,16 @@ export async function generateStaticParams() {
 export default async function ArticlePage({
   params
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }) {
-  const awaitedParams = await params
-  const article = mockArticles.find(p => p.slug === awaitedParams.slug)
+  const { slug } = await params
+  const article = mockArticles.find(p => p.slug === slug)
   const ArticleComponent =
-    articleComponents[awaitedParams.slug as keyof typeof articleComponents]
+    articleComponents[slug as keyof typeof articleComponents]
 
   if (!article || !ArticleComponent) {
     notFound()
   }
-
   return (
     <div className='container mx-auto px-4'>
       <div className='mx-auto max-w-5xl'>

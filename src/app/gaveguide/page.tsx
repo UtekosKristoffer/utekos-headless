@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { PersonaGrid } from './GaveGuideClient'
+import { PersonaGrid } from './components/PersonaGrid'
 import { TrustSection } from './components/TrustSection'
 import { SocialProofSection } from './components/SocialProofSection'
 import { GaveGuideHero } from './components/GaveGuideHero'

@@ -1,9 +1,14 @@
-'use client'
-
 import { Card, CardContent } from '@/components/ui/card'
-import { motion } from 'framer-motion'
-import { Flame, Moon, Users } from 'lucide-react'
-import type { UseCase } from '../types'
+import { AnimatedBlock } from '@/components/AnimatedBlock'
+import { Flame, Moon, Users, type LucideIcon } from 'lucide-react'
+export interface UseCase {
+  icon: LucideIcon
+  time: string
+  title: string
+  description: string
+  color: string
+  iconColor: string
+}
 
 export const useCasesData: UseCase[] = [
   {
@@ -48,14 +53,14 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
             komforten.
           </p>
         </div>
+
         <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
-          {useCases.map((useCase, index) => (
-            <motion.div
+          {useCases.map((useCase, caseIndex) => (
+            <AnimatedBlock
               key={useCase.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
+              className='will-animate-fade-in-up'
+              delay={`${caseIndex * 0.1}s`}
+              threshold={0.2}
             >
               <Card className='@container relative h-full overflow-hidden border-neutral-800 bg-background group'>
                 <div
@@ -66,7 +71,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                     <div className='flex size-12 items-center justify-center rounded-lg border border-neutral-700 bg-sidebar-foreground'>
                       <useCase.icon className={`size-6 ${useCase.iconColor}`} />
                     </div>
-                    <p className='font-medium text-muted-foreground'>
+                    <p className='font-medium text-primary-foreground'>
                       {useCase.time}
                     </p>
                   </div>
@@ -76,7 +81,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                   <p className='text-muted-foreground'>{useCase.description}</p>
                 </CardContent>
               </Card>
-            </motion.div>
+            </AnimatedBlock>
           ))}
         </div>
       </div>

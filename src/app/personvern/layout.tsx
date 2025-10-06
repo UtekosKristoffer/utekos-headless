@@ -1,16 +1,13 @@
+// Path: src/app/personvern/layout.tsx
+
+import type { ReactNode } from 'react'
+
 type PrivacyPolicyLayoutProps = {
-  children: React.ReactNode
-  analytics?: React.ReactNode
+  children: ReactNode
 }
 
 export default function PrivacyPolicyLayout({
-  children,
-  analytics
+  children
 }: PrivacyPolicyLayoutProps) {
-  return (
-    <section>
-      {children}
-      {analytics}
-    </section>
-  )
+  return <section>{children}</section>
 }

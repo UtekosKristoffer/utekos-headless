@@ -1,5 +1,4 @@
 // /app/magasinet/layout.tsx
-
 import {
   Breadcrumb,
   BreadcrumbItem,

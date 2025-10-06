@@ -1,7 +1,7 @@
 // Path: src/lib/helpers/cart/createAddToCartSubmitHandler.ts
 
 import type { createCartMutationMachine } from '@/lib/state/createCartMutationMachine'
-import type { AddToCartFormValues, ShopifyProductVariant } from '@types'
+import type { AddToCartFormValues } from '@types'
 import type { ActorRefFrom } from 'xstate'
 
 export const createAddToCartSubmitHandler =

@@ -1,89 +1,84 @@
-'use client'
-
-import dagre from '@dagrejs/dagre'
-import {
-  applyEdgeChanges,
-  applyNodeChanges,
-  EdgeLabelRenderer,
-  Handle,
-  Position,
-  ReactFlow,
-  useEdgesState,
-  useNodesState,
-  type Edge,
-  type Node,
-  type OnEdgesChange,
-  type OnNodesChange
-} from '@xyflow/react'
-
 import { Handshake } from 'lucide-react'
-import { memo, useCallback, useState } from 'react'
 
-type PromiseTitleData = { label: string }
-type PromiseTextData = { text: string; color: string }
-type JunctionData = Record<string, never>
-type CustomEdgeData = { color: string }
-type NodeData = PromiseTitleData | PromiseTextData | JunctionData
-
-const dagreGraph = new dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}))
-
-const getLayoutedElements = (
-  nodes: Node<NodeData>[],
-  edges: Edge<CustomEdgeData>[]
-): { nodes: Node<NodeData>[]; edges: Edge<CustomEdgeData>[] } => {
-  dagreGraph.setGraph({ rankdir: 'TB', nodesep: 120, ranksep: 160 })
-
-  nodes.forEach(node => {
-    const width =
-      node.type === 'promiseTitle' ? 280
-      : node.type === 'promiseText' ? 300
-      : 1
-    const height =
-      node.type === 'promiseTitle' ? 180
-      : node.type === 'promiseText' ? 180
-      : 1
-    dagreGraph.setNode(node.id, { width, height })
-  })
-  edges.forEach(edge => dagreGraph.setEdge(edge.source, edge.target))
-
-  dagre.layout(dagreGraph)
-
-  // Finn midtpunktet av tekstboksene
-  const textNodes = nodes.filter(n => n.type === 'promiseText')
-  let minX = Infinity
-  let maxX = -Infinity
-
-  textNodes.forEach(node => {
-    const nodeData = dagreGraph.node(node.id)
-    minX = Math.min(minX, nodeData.x)
-    maxX = Math.max(maxX, nodeData.x)
-  })
-
-  const graphCenterX = (minX + maxX) / 2
-
-  nodes.forEach(node => {
-    const nodeWithPosition = dagreGraph.node(node.id)
-    node.position = {
-      x: nodeWithPosition.x - dagreGraph.node(node.id).width / 2,
-      y: nodeWithPosition.y - dagreGraph.node(node.id).height / 2
-    }
-
-    if (node.type === 'promiseTitle') {
-      node.position.x = graphCenterX - 140 + 50
-    }
-
-    return node
-  })
-
-  return { nodes, edges }
+// Steg 1: Definer de ulike formene data kan ha
+type TitleNodeData = {
+  label: string
 }
 
-const initialNodesData: Node<NodeData>[] = [
+type TextNodeData = {
+  text: string
+  color: string
+}
+
+// Steg 2: Definer de ulike nodetypene som en "diskriminert union"
+type PromiseNode =
+  | {
+      id: string
+      type: 'promiseTitle'
+      data: TitleNodeData
+      position: { x: number; y: number }
+      width: number
+      height: number
+    }
+  | {
+      id: string
+      type: 'promiseText'
+      data: TextNodeData
+      position: { x: number; y: number }
+      width: number
+      height: number
+    }
+function TitleNode({ data }: { data: { label: string } }) {
+  return (
+    <div className='flex flex-col items-center gap-4 text-center'>
+      <h2 className='text-4xl font-bold tracking-tight text-foreground'>
+        {data.label}
+      </h2>
+      <div className='relative'>
+        <div
+          className='absolute inset-0 rounded-full opacity-40 blur-xl'
+          style={{ background: '#f59e0b' }}
+        />
+        <div className='group relative flex h-20 w-20 items-center justify-center rounded-full border-2 border-amber-400/40 bg-amber-400/10 text-amber-400 transition-all duration-300 hover:scale-110 hover:border-amber-400/60'>
+          <Handshake className='h-10 w-10' />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// TextNode er oppdatert med flexbox for sentrering
+function TextNode({ data }: { data: { text: string; color: string } }) {
+  return (
+    <div className='group relative flex h-full w-full items-center justify-center overflow-hidden rounded-xl border border-neutral-800 bg-sidebar-foreground p-6 text-center shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-neutral-700'>
+      <div
+        className='absolute -inset-x-2 -inset-y-12 blur-2xl transition-opacity duration-300 opacity-15 group-hover:opacity-25'
+        style={{
+          background: `radial-gradient(120% 120% at 50% 0%, transparent 30%, ${data.color} 100%)`
+        }}
+      />
+      <p className='relative z-10 text-base leading-relaxed text-muted-foreground'>
+        {data.text}
+      </p>
+      <div className='pointer-events-none absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
+        <div
+          className='absolute inset-0 rounded-xl blur-sm opacity-20'
+          style={{ background: data.color }}
+        />
+      </div>
+    </div>
+  )
+}
+
+// Steg 3: Bruk den nye union-typen på data-arrayet
+const nodes: PromiseNode[] = [
   {
     id: '1',
     type: 'promiseTitle',
     data: { label: 'Vårt løfte' },
-    position: { x: 0, y: 0 }
+    position: { x: 170, y: 0 },
+    width: 280,
+    height: 180
   },
   {
     id: '2',
@@ -92,7 +87,9 @@ const initialNodesData: Node<NodeData>[] = [
       text: 'Vårt løfte er en dypere form for komfort. Nøye utvalgte materialer gir en umiddelbar følelse av varme og velvære, slik at du kan nyte øyeblikket lenger.',
       color: '#60a5fa'
     },
-    position: { x: 0, y: 0 }
+    position: { x: 0, y: 340 },
+    width: 300,
+    height: 180
   },
   {
     id: '3',
@@ -101,170 +98,24 @@ const initialNodesData: Node<NodeData>[] = [
       text: 'Se på det som en varig investering i din egen hygge.',
       color: '#f472b6'
     },
-    position: { x: 0, y: 0 }
+    position: { x: 320, y: 340 },
+    width: 300,
+    height: 180
   }
 ]
 
-const initialEdgesData: Edge<CustomEdgeData>[] = [
-  {
-    id: 'e1-2',
-    source: '1',
-    target: '2',
-    type: 'customEdge',
-    data: { color: '#60a5fa' }
-  },
-  {
-    id: 'e1-3',
-    source: '1',
-    target: '3',
-    type: 'customEdge',
-    data: { color: '#f472b6' }
-  }
+const edges = [
+  { id: 'e1-2', sourceId: '1', targetId: '2', data: { color: '#60a5fa' } },
+  { id: 'e1-3', sourceId: '1', targetId: '3', data: { color: '#f472b6' } }
 ]
-
-const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
-  initialNodesData,
-  initialEdgesData
-)
-
-const TitleNodeComponent = memo(({ data }: any) => (
-  <div className='flex flex-col items-center gap-4 text-center'>
-    <h2 className='text-4xl font-bold tracking-tight text-foreground'>
-      {data.label}
-    </h2>
-    <div className='relative'>
-      {/* Ambient glow */}
-      <div
-        className='absolute inset-0 rounded-full opacity-40 blur-xl'
-        style={{ background: '#f59e0b' }}
-      />
-      <div className='relative flex h-20 w-20 items-center justify-center rounded-full border-2 border-amber-400/40 bg-amber-400/10 text-amber-400 transition-all duration-300 hover:scale-110 hover:border-amber-400/60'>
-        <Handshake className='h-10 w-10' />
-      </div>
-    </div>
-    <Handle
-      type='source'
-      position={Position.Bottom}
-      className='!bg-transparent !border-none !w-0 !h-0'
-      style={{ bottom: '20px' }}
-    />
-  </div>
-))
-TitleNodeComponent.displayName = 'PromiseTitleNode'
-
-const TextNodeComponent = memo(({ data }: any) => {
-  const [isHovered, setIsHovered] = useState(false)
-  const glowColor = data.color || '#60a5fa'
-
-  return (
-    <div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className='relative w-[300px] rounded-xl border border-neutral-800 bg-sidebar-foreground p-6 text-center shadow-lg transition-all duration-300 hover:border-neutral-700 hover:-translate-y-1 overflow-hidden'
-    >
-      {/* Aurora gradient effect */}
-      <div
-        className='absolute -inset-x-2 -inset-y-12 blur-2xl transition-opacity duration-300'
-        style={{
-          opacity: isHovered ? 0.25 : 0.15,
-          background: `radial-gradient(120% 120% at 50% 0%, transparent 30%, ${glowColor} 100%)`
-        }}
-      />
-
-      <Handle
-        type='target'
-        position={Position.Top}
-        className='!bg-transparent !border-none !w-0 !h-0'
-      />
-      <p className='relative z-10 text-base leading-relaxed text-muted-foreground'>
-        {data.text}
-      </p>
-
-      {/* Subtle border glow on hover */}
-      <div
-        className='absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 pointer-events-none'
-        style={{ opacity: isHovered ? 1 : 0 }}
-      >
-        <div
-          className='absolute inset-0 rounded-xl blur-sm opacity-20'
-          style={{ background: glowColor }}
-        />
-      </div>
-    </div>
-  )
-})
-TextNodeComponent.displayName = 'PromiseTextNode'
-
-const CustomEdgeComponent = memo(
-  ({ id, sourceX, sourceY, targetX, targetY, data }: any) => {
-    const color = data?.color ?? '#60a5fa'
-
-    const midY = sourceY + (targetY - sourceY) * 0.5
-
-    const edgePath = `M ${sourceX},${sourceY} 
-                    Q ${sourceX},${midY} ${(sourceX + targetX) / 2},${midY}
-                    T ${targetX},${targetY}`
-
-    return (
-      <>
-        <path
-          id={id}
-          d={edgePath}
-          style={{
-            stroke: color,
-            strokeWidth: 2,
-            fill: 'none',
-            opacity: 0.6
-          }}
-          markerEnd=''
-        />
-        <EdgeLabelRenderer>
-          {/* Glow at endpoint */}
-          <div
-            style={{
-              position: 'absolute',
-              transform: `translate(-50%, -50%) translate(${targetX}px,${targetY}px)`,
-              background: color,
-              pointerEvents: 'none'
-            }}
-            className='nodrag nopan h-3 w-3 rounded-full opacity-60 blur-md'
-          />
-        </EdgeLabelRenderer>
-      </>
-    )
-  }
-)
-CustomEdgeComponent.displayName = 'CustomEdge'
-
-const nodeTypes = {
-  promiseTitle: TitleNodeComponent,
-  promiseText: TextNodeComponent
-} as any
-
-const edgeTypes = {
-  customEdge: CustomEdgeComponent
-} as any
 
 export function PromiseSection() {
-  const [nodes, setNodes] = useNodesState<Node<NodeData>>(layoutedNodes)
-  const [edges, setEdges] = useEdgesState<Edge<CustomEdgeData>>(layoutedEdges)
-
-  const onNodesChange: OnNodesChange<Node<NodeData>> = useCallback(
-    changes => setNodes(nds => applyNodeChanges(changes, nds)),
-    [setNodes]
-  )
-
-  const onEdgesChange: OnEdgesChange<Edge<CustomEdgeData>> = useCallback(
-    changes => setEdges(eds => applyEdgeChanges(changes, eds)),
-    [setEdges]
-  )
-
   return (
-    <section className='relative py-24 sm:py-32 overflow-hidden'>
-      {/* Ambient background glow */}
+    <section className='relative mx-auto overflow-hidden py-24 sm:py-32'>
+      {/* Bakgrunns-glød */}
       <div className='absolute inset-0 -z-10 opacity-20'>
         <div
-          className='absolute left-1/3 top-1/4 h-[500px] w-[500px] blur-3xl'
+          className='absolute left-1/3 top-1/4 h-[500px] w-[500px] blur-3_xl'
           style={{
             background: 'radial-gradient(circle, #60a5fa 0%, transparent 70%)'
           }}
@@ -278,25 +129,68 @@ export function PromiseSection() {
       </div>
 
       <div className='container mx-auto max-w-7xl px-4'>
-        <div className='relative h-[700px] w-full rounded-2xl border border-neutral-800 bg-[hsl(0,0%,4%,1)] shadow-2xl overflow-hidden'>
-          {/* Subtle top gradient accent */}
+        {/* Ytre container er nå en flexbox for å sentrere innholdet */}
+        <div className='relative flex h-[700px] w-full items-center justify-center overflow-hidden rounded-2xl border border-neutral-800 bg-[hsl(0,0%,4%,1)] p-4 shadow-2xl'>
           <div className='absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-400/50 to-transparent' />
 
-          <ReactFlow
-            nodes={nodes}
-            edges={edges}
-            onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
-            nodeTypes={nodeTypes}
-            edgeTypes={edgeTypes}
-            fitView
-            fitViewOptions={{ padding: 0.3, minZoom: 0.9, maxZoom: 1 }}
-            proOptions={{ hideAttribution: true }}
-            zoomOnScroll={false}
-            panOnDrag={false}
-            preventScrolling={false}
-            nodesDraggable={false}
-          />
+          {/* Indre 'lerret' med fast størrelse for å bevare layouten */}
+          <div className='relative h-[520px] w-[620px]'>
+            {/* SVG for linjer */}
+            <svg className='absolute inset-0 h-full w-full' aria-hidden='true'>
+              <defs>
+                <filter id='glow' x='-50%' y='-50%' width='200%' height='200%'>
+                  <feGaussianBlur stdDeviation='3.5' result='coloredBlur' />
+                </filter>
+              </defs>
+              {edges.map(edge => {
+                const sourceNode = nodes.find(n => n.id === edge.sourceId)!
+                const targetNode = nodes.find(n => n.id === edge.targetId)!
+                const sourceX = sourceNode.position.x + sourceNode.width / 2
+                const sourceY = sourceNode.position.y + 132
+                const targetX = targetNode.position.x + targetNode.width / 2
+                const targetY = targetNode.position.y
+                const midY = sourceY + (targetY - sourceY) * 0.5
+                const pathD = `M ${sourceX},${sourceY} Q ${sourceX},${midY} ${
+                  (sourceX + targetX) / 2
+                },${midY} T ${targetX},${targetY}`
+
+                return (
+                  <g key={edge.id} style={{ opacity: 0.6 }}>
+                    <path
+                      d={pathD}
+                      stroke={edge.data.color}
+                      strokeWidth={2}
+                      fill='none'
+                    />
+                    <circle
+                      cx={targetX}
+                      cy={targetY}
+                      r={10}
+                      fill={edge.data.color}
+                      filter='url(#glow)'
+                    />
+                  </g>
+                )
+              })}
+            </svg>
+
+            {/* Noder */}
+            {nodes.map(node => (
+              <div
+                key={node.id}
+                className='absolute flex items-center justify-center'
+                style={{
+                  left: `${node.position.x}px`,
+                  top: `${node.position.y}px`,
+                  width: `${node.width}px`,
+                  height: `${node.height}px`
+                }}
+              >
+                {node.type === 'promiseTitle' && <TitleNode data={node.data} />}
+                {node.type === 'promiseText' && <TextNode data={node.data} />}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

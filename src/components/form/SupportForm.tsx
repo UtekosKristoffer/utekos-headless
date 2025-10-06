@@ -22,7 +22,7 @@ import {
 import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import { countries } from '@/constants/countries'
-import { ContactFormSchema } from '@/db/zod/schemas/ContactFormSchema'
+import { ClientContactFormSchema } from '@/db/zod/schemas/ContactFormSchema'
 import {
   submitContactForm,
   type ContactFormState
@@ -35,21 +35,8 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import type { z } from 'zod'
 
-const DynamicPhoneInput = dynamic(
-  () => import('@/components/ui/phone-input').then(mod => mod.CustomPhoneInput),
-  {
-    ssr: false,
-    loading: () => (
-      <Input
-        disabled
-        className='h-12 rounded-none border-neutral-800 bg-background'
-      />
-    )
-  }
-)
-
 // STEG 1: Definer skjematypen eksplisitt
-type ContactFormData = z.infer<typeof ContactFormSchema>
+type ContactFormData = z.infer<typeof ClientContactFormSchema>
 
 const initialState: ContactFormState = {
   message: ''
@@ -62,7 +49,7 @@ export function SupportForm() {
   )
 
   const form = useForm<ContactFormData>({
-    resolver: zodResolver(ContactFormSchema),
+    resolver: zodResolver(ClientContactFormSchema),
     defaultValues: {
       name: '',
       email: '',
@@ -82,7 +69,6 @@ export function SupportForm() {
         })
         Object.entries(state.errors).forEach(([key, value]) => {
           if (value && value.length > 0) {
-            // STEG 3: Bruk den eksplisitte typen her også
             form.setError(key as keyof ContactFormData, {
               type: 'server',
               message: value[0] ?? 'Det oppstod en ukjent feil.'
@@ -146,7 +132,13 @@ export function SupportForm() {
                   Telefon (valgfritt)
                 </FormLabel>
                 <FormControl>
-                  <DynamicPhoneInput autoComplete='tel' {...field} />
+                  <Input
+                    type='tel'
+                    placeholder='+47 123 45 678'
+                    autoComplete='tel'
+                    {...field}
+                    className='h-12 rounded-none border-neutral-800 bg-background'
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

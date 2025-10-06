@@ -10,7 +10,11 @@ import type {
   ShopifyProductsOperation,
   GetProductsResponse
 } from '@types'
-
+import { TAGS } from '../../constants'
+import {
+  unstable_cacheTag as cacheTag,
+  unstable_cacheLife as cacheLife
+} from 'next/cache'
 export async function fetchProducts(
   params: GetProductsParams = {}
 ): Promise<ShopifyProduct[]> {
@@ -41,6 +45,9 @@ export async function fetchProducts(
 export async function getProducts(
   params: GetProductsParams = {}
 ): Promise<GetProductsResponse> {
+  'use cache'
+  cacheTag(TAGS.products)
+  cacheLife('days')
   try {
     const products = await fetchProducts(params)
     return {

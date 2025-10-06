@@ -258,7 +258,7 @@ export function HeaderSearch({ className }: { className?: string }) {
       'onTouchStart': handlePrefetch,
       'aria-label': 'Åpne søk (⌘/Ctrl + K)',
       'className': cn(
-        'group relative hidden h-9 w-[14rem] items-center gap-2 rounded-md border border-white/10 bg-transparent px-3 text-left text-sm text-muted-foreground outline-none transition md:flex',
+        'group relative hidden h-9 w-[14rem] items-center gap-2 rounded-md border border-neutral-800 px-3 text-left text-sm text-muted-foreground outline-none transition md:flex',
         'hover:border-white/20 focus-visible:border-white/30',
         className
       )
@@ -269,8 +269,8 @@ export function HeaderSearch({ className }: { className?: string }) {
   return (
     <>
       <button {...buttonProps}>
-        <SearchIcon className='size-4 opacity-60' />
-        <span className='truncate'>Søk i innhold…</span>
+        <SearchIcon className='size-4 opacity-90' />
+        <span className='bg-transparent'>Søk i innhold…</span>
         <kbd
           aria-hidden
           className='pointer-events-none ml-auto inline-flex select-none items-center gap-1 rounded border border-white/10 bg-black/20 px-1.5 font-mono text-[10px] text-white/60 dark:bg-white/10'

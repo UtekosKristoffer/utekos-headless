@@ -1,4 +1,4 @@
-import HyttekosFlow from '@/app/magasinet/slik-skaper-du-den-perfekte-stemningen-pa-hytten/client-code/HyttekosFlow'
+import HyttekosFlow from '@/app/magasinet/slik-skaper-du-den-perfekte-stemningen-pa-hytten/HyttekosFlow'
 import { HyttekosElementsGrid } from '@/app/magasinet/slik-skaper-du-den-perfekte-stemningen-pa-hytten/HyttekosElementsGrid'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'

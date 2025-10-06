@@ -16,9 +16,8 @@ import { useCartQuery } from '@/hooks/useCartQuery'
 import { cartStore } from '@/lib/state/cartStore'
 import { Root as VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import * as React from 'react'
-import { Suspense, useTransition } from 'react'
+import { useTransition } from 'react'
 import { createDrawerStateHandler } from './utils/createDrawerStateHandler'
-import { CartBodySkeleton } from '../../skeletons/CartBodySkeleton'
 import { CartTrigger } from '@/components/cart/CartTrigger'
 
 export function CartDrawer(): React.JSX.Element {
@@ -61,9 +60,7 @@ export function CartDrawer(): React.JSX.Element {
           </DrawerDescription>
         </VisuallyHidden>
         <CartHeader />
-        <Suspense fallback={<CartBodySkeleton />}>
-          <CartBody />
-        </Suspense>
+        <CartBody />
         <SmartCartSuggestions cart={cart} />
         <CartFooter cart={cart} />
       </DrawerContent>

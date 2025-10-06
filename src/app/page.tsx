@@ -12,7 +12,6 @@ import { SocialProofSection } from '@/components/frontpage/SocialProofSection'
 import { TestimonialConstellation } from '@/components/frontpage/TestimonialConstellation'
 import { ProductCarousel } from '@/components/ProductCard/ProductCarousel'
 import { SpecialOfferSection } from '@/SpecialOfferSection/SpecialOfferSection'
-import { Suspense } from 'react'
 
 const HomePage = async () => {
   const queryClient = new QueryClient()
@@ -26,32 +25,17 @@ const HomePage = async () => {
     <main>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <HeroSection />
-
         <NewProductLaunchSection />
-
         <SpecialOfferSection />
-
         <section className='container md:max-w-7xl max-w-[95%] mx-auto py-12 lg:py-16 sm:py-16'>
           <ProductCarousel />
         </section>
-
         <SocialProofSection />
-
         <NewStandardSection />
-
         <TestimonialConstellation />
-
-        <Suspense fallback={null}>
-          <PromiseSection />
-        </Suspense>
-
-        <Suspense fallback={null}>
-          <MomentsSection />
-        </Suspense>
-
-        <Suspense fallback={null}>
-          <QualitySection />
-        </Suspense>
+        <PromiseSection />
+        <MomentsSection />
+        <QualitySection />
       </HydrationBoundary>
     </main>
   )

@@ -123,6 +123,17 @@
   --animate-blinking-cursor: blinking-cursor 1.2s infinite step-end;
   --animate-blob-pulse: blob-pulse 5s infinite ease-in-out;
 
+  @keyframes slideInDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
   @keyframes blob-pulse {
     0%,
     100% {
@@ -171,6 +182,52 @@
       transform: scale(1.02);
       opacity: 1;
     }
+  }
+}
+
+/* === Grill Seasons Section Animations === */
+
+@keyframes grill-seasons-pulse-glow {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes grill-seasons-tab-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Seasons Section Animations === */
+
+@keyframes seasons-pulse-glow {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes seasons-tab-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 /* === Reusable Animations === */
@@ -225,6 +282,365 @@
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+/* === Boat Benefits Section Animations === */
+
+@keyframes boat-benefits-fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideOutUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.animate-slide-in-down {
+  animation: slideInDown 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-slide-out-up {
+  animation: slideOutUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.boat-benefits-header {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.boat-benefits-card {
+  animation: boat-benefits-fade-in-scale 0.4s ease-out both;
+}
+
+/* === Boat Use Cases Section Animations === */
+
+.boat-usecases-header {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.boat-destinations-card {
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+.boat-usecases-card {
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+@keyframes stroke-draw {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+/* === Hytte Seasons Section Animations === */
+
+@keyframes hytte-seasons-pulse-glow {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* === Bobil Seasons Section Animations === */
+
+@keyframes bobil-seasons-pulse-glow {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes bobil-seasons-tab-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bobil-seasons-tip-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.3;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 8s ease-in-out infinite;
+}
+
+.will-animate-scale-y-from-top {
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.5s ease-out;
+  transition-delay: var(--transition-delay, 0s);
+}
+
+.dot-pattern {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    oklch(var(--border) / 0.3) 1px,
+    transparent 0
+  );
+  background-size: 24px 24px;
+}
+
+.bobil-seasons-glow-pulse {
+  animation: bobil-seasons-pulse-glow 8s ease-in-out infinite;
+}
+
+.bobil-seasons-fade-in-delayed {
+  animation: fadeInUp 0.7s ease-out 0.2s both;
+}
+
+.bobil-seasons-tab-trigger {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bobil-seasons-active-glow {
+  position: absolute;
+  inset: -0.5rem -0.5rem -2rem;
+  opacity: 0.25;
+  filter: blur(2rem);
+  transition: opacity 0.3s ease;
+}
+
+.bobil-seasons-tab-content-enter {
+  animation: bobil-seasons-tab-fade-in 0.3s ease-out;
+}
+
+.bobil-seasons-tip-enter {
+  animation: bobil-seasons-tip-fade-in 0.3s ease-out both;
+}
+
+/* === Boat Seasons Section Animations === */
+
+@keyframes boat-seasons-pulse-glow {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes boat-seasons-tab-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.boat-seasons-glow-pulse {
+  animation: boat-seasons-pulse-glow 8s ease-in-out infinite;
+}
+
+.boat-seasons-fade-in-delayed {
+  animation: fadeInUp 0.7s ease-out 0.2s both;
+}
+
+.boat-seasons-tab-trigger {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.boat-seasons-active-glow {
+  position: absolute;
+  inset: -0.5rem -0.5rem -2rem;
+  opacity: 0.25;
+  filter: blur(2rem);
+  transition: opacity 0.3s ease;
+}
+
+.boat-seasons-tab-content-enter {
+  animation: boat-seasons-tab-fade-in 0.3s ease-out;
+}
+
+/* === Boat Hero Section Animations === */
+
+@keyframes boat-hero-pulse-glow-1 {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes boat-hero-pulse-glow-2 {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.28;
+    transform: scale(1.12);
+  }
+}
+
+.boat-hero-glow-1 {
+  animation: boat-hero-pulse-glow-1 10s ease-in-out infinite;
+}
+
+.boat-hero-glow-2 {
+  animation: boat-hero-pulse-glow-2 12s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+.boat-hero-content {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.boat-hero-breadcrumb {
+  animation: fadeInUp 0.5s ease-out 0.1s both;
+}
+
+.boat-hero-title {
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.boat-hero-text {
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+.boat-hero-buttons {
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+.boat-hero-features {
+  animation: fadeInUp 0.6s ease-out 0.5s both;
+}
+
+.boat-hero-feature-glow {
+  transition: opacity 0.3s ease;
+}
+
+@keyframes hytte-seasons-tab-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.grill-seasons-glow-pulse {
+  animation: grill-seasons-pulse-glow 8s ease-in-out infinite;
+}
+
+.grill-seasons-fade-in-delayed {
+  animation: fadeInUp 0.7s ease-out 0.2s both;
+}
+
+.grill-seasons-tab-trigger {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.grill-seasons-active-glow {
+  position: absolute;
+  inset: -0.5rem -0.5rem -2rem;
+  opacity: 0.25;
+  filter: blur(2rem);
+  transition: opacity 0.3s ease;
+}
+
+.grill-seasons-tab-content-enter {
+  animation: grill-seasons-tab-fade-in 0.3s ease-out;
+}
+
+.hytte-seasons-glow-pulse {
+  animation: hytte-seasons-pulse-glow 8s ease-in-out infinite;
+}
+
+.hytte-seasons-fade-in-delayed {
+  animation: fadeInUp 0.7s ease-out 0.2s both;
+}
+
+.hytte-seasons-tab-trigger {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hytte-seasons-active-glow {
+  position: absolute;
+  inset: -0.5rem -0.5rem -2rem;
+  opacity: 0.25;
+  filter: blur(2rem);
+  transition: opacity 0.3s ease;
+}
+
+.hytte-seasons-tab-content-enter {
+  animation: hytte-seasons-tab-fade-in 0.3s ease-out;
+}
+
+.seasons-glow-pulse {
+  animation: seasons-pulse-glow 8s ease-in-out infinite;
+}
+
+.seasons-fade-in-delayed {
+  animation: fadeInUp 0.7s ease-out 0.2s both;
+}
+
+.seasons-tab-trigger {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.seasons-active-glow {
+  position: absolute;
+  inset: -0.5rem -0.5rem -2rem;
+  opacity: 0.25;
+  filter: blur(2rem);
+  transition: opacity 0.3s ease;
+}
+
+.seasons-tab-content-enter {
+  animation: seasons-tab-fade-in 0.3s ease-out;
 }
 
 .will-animate-scale-x {

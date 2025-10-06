@@ -1,15 +1,9 @@
-import {
-  Check,
-  Droplets,
-  Feather,
-  Thermometer,
-  WashingMachine
-} from 'lucide-react'
+// Path: src/app/handlehjelp/sammenlign-modeller/config.ts
 
 export const comparisonData = [
   {
     feature: 'Varme (tørt vær)',
-    icon: Thermometer,
+    icon: 'thermometer', // Endret fra komponent til streng
     dun: 'Uovertruffen',
     mikrofiber: 'Meget god',
     fiberdun: 'Utmerket',
@@ -17,7 +11,7 @@ export const comparisonData = [
   },
   {
     feature: 'Varme (fuktig vær)',
-    icon: Droplets,
+    icon: 'droplets', // Endret fra komponent til streng
     dun: 'God',
     mikrofiber: 'Overlegen',
     fiberdun: 'Overlegen',
@@ -25,7 +19,7 @@ export const comparisonData = [
   },
   {
     feature: 'Vekt',
-    icon: Feather,
+    icon: 'feather', // Endret fra komponent til streng
     dun: 'Ekstra lett (~1000g)',
     mikrofiber: 'Ultralett (~800g)',
     fiberdun: 'Robust (~1300g)',
@@ -33,7 +27,7 @@ export const comparisonData = [
   },
   {
     feature: 'Vedlikehold',
-    icon: WashingMachine,
+    icon: 'washing-machine', // Endret fra komponent til streng
     dun: 'Krever skånsom vask',
     mikrofiber: 'Svært enkel (Maskinvask)',
     fiberdun: 'Svært enkel (Maskinvask)',
@@ -41,7 +35,7 @@ export const comparisonData = [
   },
   {
     feature: 'Isolert hette',
-    icon: Check,
+    icon: 'check', // Endret fra komponent til streng
     dun: true,
     mikrofiber: true,
     fiberdun: true,
@@ -49,7 +43,7 @@ export const comparisonData = [
   },
   {
     feature: 'Fleece-lommer',
-    icon: Check,
+    icon: 'check', // Endret fra komponent til streng
     dun: true,
     mikrofiber: true,
     fiberdun: true,

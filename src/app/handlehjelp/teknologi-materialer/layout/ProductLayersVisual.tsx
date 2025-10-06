@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { cn } from '@/lib/utils/className'
 
 const layerMapping: { [key: string]: 'outer' | 'insulation' | 'inner' } = {
   'Fillpower 650 – Premium varme, minimal vekt': 'insulation',
@@ -29,44 +29,46 @@ export function ProductLayersVisual({ activeTech }: { activeTech: string }) {
           </defs>
 
           {/* Inner Layer */}
-          <motion.path
+          <path
             d='M 50 150 A 100 100 0 0 1 150 50'
             strokeWidth='12'
             strokeLinecap='round'
             fill='none'
-            className='stroke-green-500'
-            animate={{
-              opacity: activeLayer === 'inner' ? 1 : 0.2,
+            className={cn(
+              'stroke-green-500 transition-all duration-500 ease-in-out',
+              activeLayer === 'inner' ? 'opacity-100' : 'opacity-20'
+            )}
+            style={{
               filter: activeLayer === 'inner' ? 'url(#glow)' : 'none'
             }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
           />
           {/* Insulation Layer */}
-          <motion.path
+          <path
             d='M 40 160 A 120 120 0 0 1 160 40'
             strokeWidth='12'
             strokeLinecap='round'
             fill='none'
-            
-            className='stroke-pink-500'
-            animate={{
-              opacity: activeLayer === 'insulation' ? 1 : 0.2,
+            className={cn(
+              'stroke-pink-500 transition-all duration-500 ease-in-out',
+              activeLayer === 'insulation' ? 'opacity-100' : 'opacity-20'
+            )}
+            style={{
               filter: activeLayer === 'insulation' ? 'url(#glow)' : 'none'
             }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
           />
           {/* Outer Layer */}
-          <motion.path
+          <path
             d='M 30 170 A 140 140 0 0 1 170 30'
             strokeWidth='12'
             strokeLinecap='round'
             fill='none'
-            className='stroke-blue-500'
-            animate={{
-              opacity: activeLayer === 'outer' ? 1 : 0.2,
+            className={cn(
+              'stroke-blue-500 transition-all duration-500 ease-in-out',
+              activeLayer === 'outer' ? 'opacity-100' : 'opacity-20'
+            )}
+            style={{
               filter: activeLayer === 'outer' ? 'url(#glow)' : 'none'
             }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
           />
         </svg>
       </div>

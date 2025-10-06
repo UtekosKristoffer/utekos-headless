@@ -1,35 +1,27 @@
-'use client'
-
 import { Card, CardContent } from '@/components/ui/card'
-import { motion } from 'framer-motion'
 import { Package, ThermometerSun, WashingMachine } from 'lucide-react'
-
+import { AnimatedBlock } from '@/components/AnimatedBlock'
 export function DeepDiveSection() {
   return (
-    <section className='py-24 bg-background'>
+    <section className='bg-background py-24'>
       <div className='container mx-auto max-w-4xl px-4'>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, amount: 0.3 }}
-          className='text-center mb-12'
+        <AnimatedBlock
+          className='will-animate-fade-in-up mb-12 text-center'
+          threshold={0.3}
         >
           <h2 className='text-3xl font-bold tracking-tight sm:text-4xl'>
             Hva betyr dette i praksis?
           </h2>
-          <p className='mt-4 max-w-2xl mx-auto text-muted-foreground'>
+          <p className='mx-auto mt-4 max-w-2xl text-muted-foreground'>
             Hver Utekos-modell er designet med en unik styrke. Her dykker vi ned
             i de viktigste forskjellene, slik at du kan finne den perfekte
             matchen for ditt bruk.
           </p>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true, amount: 0.3 }}
-          className='space-y-8'
+        </AnimatedBlock>
+        <AnimatedBlock
+          className='will-animate-fade-in-up space-y-8'
+          delay='0.2s'
+          threshold={0.3}
         >
           {/* Kort 1: Varme & Værforhold */}
           <Card className='relative overflow-hidden border-neutral-800 bg-sidebar-foreground'>
@@ -101,7 +93,7 @@ export function DeepDiveSection() {
               </p>
             </CardContent>
           </Card>
-        </motion.div>
+        </AnimatedBlock>
       </div>
     </section>
   )

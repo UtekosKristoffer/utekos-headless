@@ -1,3 +1,4 @@
+// Path: src/app/produkter/[handle]/ProductPageView/components/ProductPageAccordion.tsx
 'use client'
 
 import {
@@ -14,13 +15,14 @@ import {
   SlidersHorizontal,
   Sparkles,
   WashingMachine,
-  Info
+  Info,
+  type LucideIcon
 } from 'lucide-react'
 import { renderMetafield } from './helpers/renderMetafield'
-import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { AnimatedBlock } from '@/components/AnimatedBlock'
 
-const colorMap: Record<string, string> = {
+/** Map fra tekst-utility → hex-farge for subtile glødeffekter */
+const colorHexByTextClass: Record<string, string> = {
   'text-rose-500': '#F43F5E',
   'text-cyan-400': '#22d3ee',
   'text-amber-400': '#fbbf24',
@@ -29,42 +31,54 @@ const colorMap: Record<string, string> = {
   'text-blue-400': '#60a5fa'
 }
 
-function AccordionSection({ section, index }: { section: any; index: number }) {
-  const [isHovered, setIsHovered] = useState(false)
-  const { id, title, content, Icon, color } = section
-  const glowColor = colorMap[color] || '#60a5fa'
+interface AccordionSectionData {
+  id: string
+  title: string
+  /** Valgfritt felt: med exactOptionalPropertyTypes kan dette kun være string eller utelates helt */
+  content?: string
+  Icon: LucideIcon
+  color: string
+}
+
+/** Hjelper som *utelater* `content` når verdi er null/undefined (påkrevd m/ exactOptionalPropertyTypes). */
+function mapOptionalContent(
+  value: string | null | undefined
+): Partial<Pick<AccordionSectionData, 'content'>> {
+  return value != null ? { content: value } : {}
+}
+
+function ProductDetailsAccordionSection({
+  sectionData,
+  sectionIndex
+}: {
+  sectionData: AccordionSectionData
+  sectionIndex: number
+}) {
+  const { id, title, content, Icon, color } = sectionData
+  const glowHexColor = colorHexByTextClass[color] ?? '#60a5fa'
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true, amount: 0.5 }}
+    <AnimatedBlock
+      key={id}
+      className='will-animate-fade-in-up'
+      delay={`${sectionIndex * 0.1}s`}
+      threshold={0.5}
     >
       <AccordionItem
-        key={id}
         value={id}
-        className='relative overflow-hidden rounded-lg border border-neutral-800 mb-3 transition-all duration-300 hover:border-neutral-700'
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        className='group relative mb-3 overflow-hidden rounded-lg border border-neutral-800 transition-all duration-300 hover:border-neutral-700'
       >
-        {/* Aurora effect */}
+        {/* Bakgrunnsoverlay som skal farge *hele* itemet (header + content) */}
         <div
-          className='absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 data-[state=open]:opacity-20 pointer-events-none'
+          className='pointer-events-none absolute inset-0 z-0 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20 group-data-[state=open]:opacity-20'
           style={{
-            opacity: isHovered ? 0.15 : 0,
-            background: `radial-gradient(120% 120% at 50% 0%, transparent 30%, ${glowColor} 100%)`
+            background: `radial-gradient(120% 120% at 50% 0%, transparent 30%, ${glowHexColor} 100%)`
           }}
         />
 
-        <AccordionTrigger className='relative px-6 py-4 text-foreground/70 transition-colors hover:text-foreground data-[state=open]:text-foreground hover:no-underline'>
+        <AccordionTrigger className='relative z-10 px-6 py-4 text-foreground/70 transition-colors hover:text-foreground data-[state=open]:text-foreground hover:no-underline'>
           <div className='flex items-center gap-4'>
-            <div
-              className='flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-700 bg-background transition-all duration-300 group-hover:scale-110'
-              style={{
-                borderColor: isHovered ? glowColor + '40' : undefined
-              }}
-            >
+            <div className='flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-700 bg-background transition-transform duration-300 group-hover:scale-110'>
               <Icon
                 className={`h-5 w-5 shrink-0 transition-colors ${color}`}
                 aria-hidden='true'
@@ -74,24 +88,21 @@ function AccordionSection({ section, index }: { section: any; index: number }) {
           </div>
         </AccordionTrigger>
 
-        <AccordionContent className='relative px-6 pb-6 prose prose-invert max-w-none text-base leading-relaxed text-foreground/80'>
-          {renderMetafield(content)}
-        </AccordionContent>
+        {typeof content === 'string' && (
+          <AccordionContent className='prose prose-invert relative z-10 max-w-none px-6 pb-6 text-base leading-relaxed text-foreground/80'>
+            {renderMetafield(content)}
+          </AccordionContent>
+        )}
 
-        {/* Subtle border glow on hover */}
-        <div
-          className='absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 pointer-events-none'
-          style={{
-            opacity: isHovered ? 1 : 0
-          }}
-        >
+        {/* Subtil border-glow overlay (ligger over kanten, men under interaksjon pga pointer-events-none) */}
+        <div className='pointer-events-none absolute inset-0 z-10 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-data-[state=open]:opacity-100'>
           <div
             className='absolute inset-0 rounded-lg blur-sm opacity-20'
-            style={{ background: glowColor }}
+            style={{ background: glowHexColor }}
           />
         </div>
       </AccordionItem>
-    </motion.div>
+    </AnimatedBlock>
   )
 }
 
@@ -102,52 +113,56 @@ export function ProductPageAccordion({
     return null
   }
 
-  const sections = [
+  const allSections: AccordionSectionData[] = [
     {
       id: 'materialer',
       title: 'Materialer',
-      content: variantProfile.materials?.value,
+      ...mapOptionalContent(variantProfile.materials?.value),
       Icon: Layers3,
       color: 'text-rose-500'
     },
     {
       id: 'funksjoner',
       title: 'Funksjoner',
-      content: variantProfile.functions?.value,
+      ...mapOptionalContent(variantProfile.functions?.value),
       Icon: SlidersHorizontal,
       color: 'text-cyan-400'
     },
     {
       id: 'egenskaper',
       title: 'Egenskaper',
-      content: variantProfile.properties?.value,
+      ...mapOptionalContent(variantProfile.properties?.value),
       Icon: Sparkles,
       color: 'text-amber-400'
     },
     {
       id: 'bruksomrader',
       title: 'Bruksområder',
-      content: variantProfile.usage?.value,
+      ...mapOptionalContent(variantProfile.usage?.value),
       Icon: Mountain,
       color: 'text-sky-400'
     },
     {
       id: 'passform',
       title: 'Passform',
-      content: variantProfile.sizeFit?.value,
+      ...mapOptionalContent(variantProfile.sizeFit?.value),
       Icon: Ruler,
       color: 'text-violet-400'
     },
     {
       id: 'vaskeanvisning',
       title: 'Vaskeanvisning',
-      content: variantProfile.storageAndMaintenance?.value,
+      ...mapOptionalContent(variantProfile.storageAndMaintenance?.value),
       Icon: WashingMachine,
       color: 'text-blue-400'
     }
   ]
 
-  const sectionsWithContent = sections.filter(section => section.content)
+  // Behold kun seksjoner med faktisk innhold (ikke tom streng).
+  const sectionsWithContent: AccordionSectionData[] = allSections.filter(
+    (s): s is AccordionSectionData =>
+      typeof s.content === 'string' && s.content.trim() !== ''
+  )
 
   if (sectionsWithContent.length === 0) {
     return null
@@ -158,7 +173,7 @@ export function ProductPageAccordion({
       className='relative mt-24 overflow-hidden'
       aria-labelledby='product-details-heading'
     >
-      {/* Subtle ambient background */}
+      {/* Subtil ambient bakgrunn */}
       <div className='absolute inset-0 -z-10 opacity-20'>
         <div
           className='absolute left-1/3 top-0 h-[400px] w-[400px] blur-3xl'
@@ -169,34 +184,36 @@ export function ProductPageAccordion({
       </div>
 
       <div className='mx-auto'>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className='mb-6 inline-flex items-center gap-2 rounded-full border border-button bg-button/10 px-4 py-2'
+        <AnimatedBlock
+          className='mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-button bg-button/10 px-4 py-2 will-animate-fade-in-scale'
+          delay='0s'
+          threshold={0.3}
         >
           <Info className='h-4 w-4 text-button' />
           <span className='text-sm font-medium text-button'>
             Produktdetaljer
           </span>
-        </motion.div>
+        </AnimatedBlock>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ once: true }}
-          id='product-details-heading'
-          className='mb-8 text-2xl font-bold tracking-tight text-foreground sm:text-3xl'
-        ></motion.h2>
+        <AnimatedBlock
+          className='will-animate-fade-in-up'
+          delay='0.08s'
+          threshold={0.3}
+        >
+          <h2
+            id='product-details-heading'
+            className='mb-8 text-2xl font-bold tracking-tight text-foreground sm:text-3xl'
+          >
+            Alt du trenger å vite
+          </h2>
+        </AnimatedBlock>
 
         <Accordion type='single' collapsible className='w-full'>
           {sectionsWithContent.map((section, index) => (
-            <AccordionSection
+            <ProductDetailsAccordionSection
               key={section.id}
-              section={section}
-              index={index}
+              sectionData={section}
+              sectionIndex={index}
             />
           ))}
         </Accordion>

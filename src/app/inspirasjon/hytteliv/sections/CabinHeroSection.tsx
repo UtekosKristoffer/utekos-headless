@@ -1,44 +1,27 @@
-'use client'
-
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Coffee, Mountain, Star } from 'lucide-react'
-import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { AnimatedBlock } from '@/components/AnimatedBlock'
+import type { Route } from 'next'
 
 export function CabinHeroSection() {
   return (
     <section className='relative flex min-h-[70vh] items-center overflow-hidden'>
-      {/* Ambient background glow with subtle animation */}
+      {/* Ambient background glow with CSS animation */}
       <div className='absolute inset-0 -z-10 opacity-25'>
-        <motion.div
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.25, 0.3, 0.25]
-          }}
-          transition={{
-            duration: 9,
-            repeat: Infinity,
-            ease: 'easeInOut'
-          }}
-          className='absolute left-1/3 top-1/4 h-[600px] w-[600px] blur-3xl'
+        <div
+          className='animate-pulse-glow absolute left-1/3 top-1/4 h-[600px] w-[600px] blur-3xl'
           style={{
-            background: 'radial-gradient(circle, #10b981 0%, transparent 70%)'
+            background: 'radial-gradient(circle, #10b981 0%, transparent 70%)',
+            animationDuration: '9s'
           }}
         />
-        <motion.div
-          animate={{
-            scale: [1, 1.12, 1],
-            opacity: [0.2, 0.28, 0.2]
-          }}
-          transition={{
-            duration: 11,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 3
-          }}
-          className='absolute right-1/3 bottom-1/4 h-[600px] w-[600px] blur-3xl'
+        <div
+          className='animate-pulse-glow absolute right-1/3 bottom-1/4 h-[600px] w-[600px] blur-3xl'
           style={{
-            background: 'radial-gradient(circle, #0ea5e9 0%, transparent 70%)'
+            background: 'radial-gradient(circle, #0ea5e9 0%, transparent 70%)',
+            animationDuration: '11s',
+            animationDelay: '3s'
           }}
         />
       </div>
@@ -46,20 +29,13 @@ export function CabinHeroSection() {
       <div className='absolute inset-0 bg-gradient-to-b from-transparent to-background/50' />
 
       <div className='container relative mx-auto px-4 py-16'>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className='max-w-3xl'
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className='mb-6 flex items-center gap-3 text-sm text-muted-foreground'
+        <div className='max-w-3xl'>
+          <AnimatedBlock
+            className='will-animate-fade-in-up mb-6 flex items-center gap-3 text-sm text-muted-foreground'
+            delay='0.1s'
           >
             <Link
-              href='/inspirasjon'
+              href={'/inspirasjon' as Route}
               className='transition-colors hover:text-foreground'
             >
               Inspirasjon
@@ -69,39 +45,31 @@ export function CabinHeroSection() {
               <Mountain className='h-3 w-3 text-emerald-400' />
               <span className='font-medium text-emerald-400'>Hytteliv</span>
             </span>
-          </motion.div>
+          </AnimatedBlock>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className='text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'
-          >
-            Hyttekos -{' '}
-            <span className='bg-gradient-to-r from-slate-500 to-slate-400 bg-clip-text text-transparent'>
-              perfeksjonert
-            </span>
-          </motion.h1>
+          <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
+            <h1 className='text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'>
+              Hyttekos -{' '}
+              <span className='bg-gradient-to-r from-slate-500 to-slate-400 bg-clip-text text-transparent'>
+                perfeksjonert
+              </span>
+            </h1>
+          </AnimatedBlock>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className='mt-6 max-w-2xl text-xl leading-relaxed text-muted-foreground'
-          >
-            Fra den krystallklare morgenluften på terrassen, til de magiske
-            kveldene under stjernene. Gjør hytten til et fristed for komfort,
-            uansett årstid.
-          </motion.p>
+          <AnimatedBlock className='will-animate-fade-in-up' delay='0.3s'>
+            <p className='mt-6 max-w-2xl text-xl leading-relaxed text-muted-foreground'>
+              Fra den krystallklare morgenluften på terrassen, til de magiske
+              kveldene under stjernene. Gjør hytten til et fristed for komfort,
+              uansett årstid.
+            </p>
+          </AnimatedBlock>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className='mt-8 flex flex-wrap gap-4'
+          <AnimatedBlock
+            className='will-animate-fade-in-up mt-8 flex flex-wrap gap-4'
+            delay='0.4s'
           >
             <Button asChild size='lg' className='group'>
-              <Link href='/produkter'>
+              <Link href={'/produkter' as Route}>
                 Finn din Utekos
                 <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
               </Link>
@@ -109,26 +77,23 @@ export function CabinHeroSection() {
             <Button variant='outline' size='lg' asChild>
               <Link href='#bruksomrader'>Se bruksområdene</Link>
             </Button>
-          </motion.div>
+          </AnimatedBlock>
 
-          {/* Feature highlights */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className='mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3'
+          <AnimatedBlock
+            className='will-animate-fade-in-up mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3'
+            delay='0.5s'
           >
             <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all hover:border-neutral-700'>
               <div
-                className='absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
+                className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
                 style={{
                   background:
                     'radial-gradient(120% 120% at 50% 0%, transparent 30%, #10b981 100%)'
                 }}
               />
               <div className='relative'>
-                <Coffee className='h-8 w-8 text-blue-500 mb-3' />
-                <p className='font-semibold text-foreground mb-1'>
+                <Coffee className='mb-3 h-8 w-8 text-blue-500' />
+                <p className='mb-1 font-semibold text-foreground'>
                   Morgenstund
                 </p>
                 <p className='text-sm text-muted-foreground'>
@@ -139,15 +104,15 @@ export function CabinHeroSection() {
 
             <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all hover:border-neutral-700'>
               <div
-                className='absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
+                className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
                 style={{
                   background:
                     'radial-gradient(120% 120% at 50% 0%, transparent 30%, #0ea5e9 100%)'
                 }}
               />
               <div className='relative'>
-                <Mountain className='h-8 w-8 text-green-600 mb-3' />
-                <p className='font-semibold text-foreground mb-1'>Utsikten</p>
+                <Mountain className='mb-3 h-8 w-8 text-green-600' />
+                <p className='mb-1 font-semibold text-foreground'>Utsikten</p>
                 <p className='text-sm text-muted-foreground'>
                   Nyt panoramaet i komfort, hele dagen
                 </p>
@@ -156,15 +121,15 @@ export function CabinHeroSection() {
 
             <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all hover:border-neutral-700'>
               <div
-                className='absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
+                className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
                 style={{
                   background:
                     'radial-gradient(120% 120% at 50% 0%, transparent 30%, #22d3ee 100%)'
                 }}
               />
               <div className='relative'>
-                <Star className='h-8 w-8 text-yellow-400 mb-3' />
-                <p className='font-semibold text-foreground mb-1'>
+                <Star className='mb-3 h-8 w-8 text-yellow-400' />
+                <p className='mb-1 font-semibold text-foreground'>
                   Stjerneklar kveld
                 </p>
                 <p className='text-sm text-muted-foreground'>
@@ -172,8 +137,8 @@ export function CabinHeroSection() {
                 </p>
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </AnimatedBlock>
+        </div>
       </div>
     </section>
   )

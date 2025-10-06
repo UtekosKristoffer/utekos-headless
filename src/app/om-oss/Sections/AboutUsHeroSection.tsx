@@ -1,4 +1,3 @@
-
 import AboutUsOG from '@public/norsk-kveld.webp'
 import Image from 'next/image'
 

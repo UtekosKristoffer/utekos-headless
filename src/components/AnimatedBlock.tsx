@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils/className'
 import type { ReactNode } from 'react'
 
 interface AnimatedBlockProps {
-  children: ReactNode
+  children?: ReactNode // Gjort valgfri med '?'
   className?: string
   delay?: string
   threshold?: number

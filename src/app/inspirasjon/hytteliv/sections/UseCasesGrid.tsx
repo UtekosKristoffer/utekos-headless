@@ -1,9 +1,8 @@
-'use client'
-
 import { Card, CardContent } from '@/components/ui/card'
-import { motion } from 'framer-motion'
+import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { Coffee, HeartHandshake, Moon } from 'lucide-react'
 import type { UseCase } from '../types'
+
 export const useCasesData: UseCase[] = [
   {
     icon: Coffee,
@@ -36,6 +35,7 @@ export const useCasesData: UseCase[] = [
     iconColor: 'text-rose-500'
   }
 ]
+
 export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
   return (
     <section id='bruksomrader' className='bg-sidebar-foreground py-24'>
@@ -50,13 +50,12 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
           </p>
         </div>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
-          {useCases.map((useCase, index) => (
-            <motion.div
+          {useCases.map((useCase, useCaseIndex) => (
+            <AnimatedBlock
               key={useCase.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
+              className='will-animate-fade-in-up'
+              delay={`${useCaseIndex * 0.1}s`}
+              threshold={0.2}
             >
               <Card className='@container relative h-full overflow-hidden border-neutral-800 bg-background group'>
                 <div
@@ -82,7 +81,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                   <p className='text-muted-foreground'>{useCase.description}</p>
                 </CardContent>
               </Card>
-            </motion.div>
+            </AnimatedBlock>
           ))}
         </div>
       </div>

@@ -1,8 +1,8 @@
-'use client'
-
-import { motion } from 'framer-motion'
+import { AnimatedBlock } from '@/components/AnimatedBlock'
+import { Card, CardContent } from '@/components/ui/card'
 import { HeartHandshake, Thermometer, Sparkles, Calendar } from 'lucide-react'
 import type { Benefit } from '../types'
+
 export const benefitsData: Benefit[] = [
   {
     icon: HeartHandshake,
@@ -44,15 +44,14 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
             vellykket kveld.
           </p>
         </div>
+
         <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4'>
-          {benefits.map((benefit, index) => (
-            <motion.div
+          {benefits.map((benefit, benefitIndex) => (
+            <AnimatedBlock
               key={benefit.title}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              viewport={{ once: true }}
-              className='text-center'
+              className='text-center will-animate-fade-in-scale'
+              delay={`${benefitIndex * 0.05}s`}
+              threshold={0.2}
             >
               <div className='mx-auto mb-4 flex size-16 items-center justify-center rounded-full border border-neutral-800 bg-sidebar-foreground'>
                 <benefit.icon className={`size-8 ${benefit.color}`} />
@@ -61,7 +60,7 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
               <p className='text-sm text-muted-foreground'>
                 {benefit.description}
               </p>
-            </motion.div>
+            </AnimatedBlock>
           ))}
         </div>
       </div>

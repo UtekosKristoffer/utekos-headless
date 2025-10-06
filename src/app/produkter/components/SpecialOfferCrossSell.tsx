@@ -1,11 +1,10 @@
 'use client'
 
 import { buttonVariants } from '@/components/ui/button'
-import { motion } from 'framer-motion'
+import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { SparklesIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-
 import specialEditionImage from '@public/special_turkis_doll_widthout.webp'
 
 interface SpecialOfferCrossSellProps {
@@ -20,15 +19,13 @@ export function SpecialOfferCrossSell({
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      viewport={{ once: true, amount: 0.5 }}
-      className='mt-12'
+    <AnimatedBlock
+      className='mt-12 will-animate-fade-in-up'
+      delay='0s'
+      threshold={0.5}
     >
       <div className='relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/30 p-6'>
-        <div className='flex flex-col sm:flex-row sm:items-center gap-6'>
+        <div className='flex flex-col gap-6 sm:flex-row sm:items-center'>
           {/* Bilde */}
           <div className='relative h-24 w-24 flex-shrink-0'>
             <Image
@@ -37,6 +34,7 @@ export function SpecialOfferCrossSell({
               fill
               className='object-contain'
               sizes='96px'
+              priority={false}
             />
           </div>
 
@@ -68,6 +66,6 @@ export function SpecialOfferCrossSell({
           </div>
         </div>
       </div>
-    </motion.div>
+    </AnimatedBlock>
   )
 }

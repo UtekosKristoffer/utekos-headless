@@ -1,173 +1,192 @@
-// Path: src/app/magasinet/den-ultimate-guiden-til-komfortabel-vintercamping/BobilPrepFlow.tsx
-
-'use client'
-
-import {
-  Background,
-  Controls,
-  Handle,
-  Position,
-  ReactFlow,
-  type Edge,
-  type Node
-} from '@xyflow/react'
 import { ALargeSmall, Car, Droplets, Wrench } from 'lucide-react'
-import { memo } from 'react'
 
-// Custom Node for React Flow, nå med farge på ikon
-const CustomNode = memo(
-  ({
-    data
-  }: {
-    data: { icon: any; label: string; description: string; iconColor: string }
-  }) => {
-    const Icon = data.icon
-    return (
-      <div className='bg-background border border-neutral-700 rounded-lg p-4 w-64 shadow-lg'>
-        <Handle
-          type='target'
-          position={Position.Left}
-          className='!bg-neutral-600'
-        />
-        <div className='flex items-center gap-3 mb-2'>
-          <Icon className={`h-5 w-5 ${data.iconColor}`} />
-          <h4 className='font-bold text-foreground text-base'>{data.label}</h4>
-        </div>
-        <p className='text-muted-foreground text-sm'>{data.description}</p>
-        <Handle
-          type='source'
-          position={Position.Right}
-          className='!bg-neutral-600'
-        />
-      </div>
-    )
-  }
-)
-CustomNode.displayName = 'CustomNode'
+// --- Typer og hjelpere ---
+const iconMap = {
+  'a-large-small': ALargeSmall,
+  'wrench': Wrench,
+  'droplets': Droplets,
+  'car': Car
+}
+type IconName = keyof typeof iconMap
 
-const nodeTypes = {
-  custom: CustomNode
+function IconRenderer({
+  name,
+  className
+}: {
+  name: IconName
+  className?: string
+}) {
+  const Icon = iconMap[name]
+  return Icon ? <Icon className={className} /> : null
 }
 
-// Oppdatert med farger for ikonene
-const initialNodes: Node[] = [
+// Definerer de ulike data-formene
+type InputNodeData = { label: string }
+type CustomNodeData = {
+  icon: IconName
+  label: string
+  description: string
+  iconColor: string
+}
+
+// Definerer en "diskriminert union" for nodene
+type FlowNode =
+  | {
+      id: string
+      type: 'input'
+      position: { x: number; y: number }
+      width: number
+      height: number
+      data: InputNodeData
+    }
+  | {
+      id: string
+      type: 'custom'
+      position: { x: number; y: number }
+      width: number
+      height: number
+      data: CustomNodeData
+    }
+
+// --- Node Data (nå med den presise typen) ---
+const nodes: FlowNode[] = [
   {
     id: '1',
-    position: { x: 0, y: 150 },
-    data: { label: 'Bobilen må være klar' },
     type: 'input',
-    style: {
-      background: 'oklch(var(--sidebar-foreground))',
-      color: 'oklch(var(--foreground))',
-      border: '1px solid oklch(var(--border))',
-      width: 180,
-      textAlign: 'center'
-    }
+    position: { x: 0, y: 150 },
+    width: 180,
+    height: 120,
+    data: { label: 'Bobilen må være klar' }
   },
   {
     id: '2',
+    type: 'custom',
     position: { x: 350, y: 0 },
+    width: 256,
+    height: 100,
     data: {
-      icon: ALargeSmall,
+      icon: 'a-large-small',
       label: 'Isolasjon',
       description:
         'Sjekk tetningslister. Bruk isolasjonsmatter i førerhuset for å minimere varmetap.',
       iconColor: 'text-blue-400'
-    },
-    type: 'custom'
+    }
   },
   {
     id: '3',
+    type: 'custom',
     position: { x: 350, y: 110 },
+    width: 256,
+    height: 100,
     data: {
-      icon: Wrench,
+      icon: 'wrench',
       label: 'Varmesystem',
       description:
         'Test Alde/Truma. Sørg for nok propan-gass og åpne alle luftdyser for sirkulasjon.',
       iconColor: 'text-orange-400'
-    },
-    type: 'custom'
+    }
   },
   {
     id: '4',
+    type: 'custom',
     position: { x: 350, y: 220 },
+    width: 256,
+    height: 100,
     data: {
-      icon: Droplets,
+      icon: 'droplets',
       label: 'Vannsystem',
       description:
         'Sikre at tanker/rør er oppvarmet. Bruk frostvæske i gråvannstanken for å unngå is.',
       iconColor: 'text-cyan-400'
-    },
-    type: 'custom'
+    }
   },
   {
     id: '5',
+    type: 'custom',
     position: { x: 350, y: 330 },
+    width: 256,
+    height: 100,
     data: {
-      icon: Car,
+      icon: 'car',
       label: 'Dekk & Kjetting',
       description:
         'Gode vinterdekk er et krav. Ta alltid med kjettinger for sikkerhet på fjellet.',
       iconColor: 'text-green-400'
-    },
-    type: 'custom'
+    }
   }
 ]
 
-// Oppdatert for å fjerne animasjon og legge til unike farger på linjene
-const initialEdges: Edge[] = [
-  {
-    id: 'e1-2',
-    source: '1',
-    target: '2',
-    type: 'smoothstep',
-    style: { stroke: '#60a5fa', strokeWidth: 2 }
-  },
-  {
-    id: 'e1-3',
-    source: '1',
-    target: '3',
-    type: 'smoothstep',
-    style: { stroke: '#fb923c', strokeWidth: 2 }
-  },
-  {
-    id: 'e1-4',
-    source: '1',
-    target: '4',
-    type: 'smoothstep',
-    style: { stroke: '#22d3ee', strokeWidth: 2 }
-  },
-  {
-    id: 'e1-5',
-    source: '1',
-    target: '5',
-    type: 'smoothstep',
-    style: { stroke: '#4ade80', strokeWidth: 2 }
-  }
+const initialEdges = [
+  { id: 'e1-2', source: '1', target: '2', style: { stroke: '#60a5fa' } },
+  { id: 'e1-3', source: '1', target: '3', style: { stroke: '#fb923c' } },
+  { id: 'e1-4', source: '1', target: '4', style: { stroke: '#22d3ee' } },
+  { id: 'e1-5', source: '1', target: '5', style: { stroke: '#4ade80' } }
 ]
 
 export default function BobilPrepFlow() {
   return (
-    <div
-      style={{ height: '450px' }}
-      className='bg-sidebar-foreground rounded-lg'
-    >
-      <ReactFlow
-        nodes={initialNodes}
-        edges={initialEdges}
-        nodeTypes={nodeTypes}
-        fitView
-        nodesDraggable={false}
-        nodesConnectable={false}
-        panOnDrag={false}
-        zoomOnScroll={false}
-      >
-        <Background gap={16} color='oklch(var(--border) / 0.5)' />
-        <Controls
-          showInteractive={false}
-          className='fill-neutral-600 text-neutral-600'
-        />
-      </ReactFlow>
+    <div className='h-[450px] w-full rounded-lg bg-sidebar-foreground dot-pattern'>
+      <svg viewBox='0 0 620 450' className='h-full w-full' aria-hidden='true'>
+        {/* Linjer */}
+        {initialEdges.map(edge => {
+          const sourceNode = nodes.find(n => n.id === edge.source)!
+          const targetNode = nodes.find(n => n.id === edge.target)!
+
+          const sourceX = sourceNode.position.x + sourceNode.width
+          const sourceY = sourceNode.position.y + sourceNode.height / 2
+          const targetX = targetNode.position.x
+          const targetY = targetNode.position.y + targetNode.height / 2
+
+          const pathD = `M ${sourceX},${sourceY} C ${sourceX + 50},${sourceY} ${
+            targetX - 50
+          },${targetY} ${targetX},${targetY}`
+
+          return (
+            <path
+              key={edge.id}
+              d={pathD}
+              fill='none'
+              strokeWidth={2}
+              style={edge.style}
+            />
+          )
+        })}
+
+        {/* Noder */}
+        {nodes.map(node => (
+          <foreignObject
+            key={node.id}
+            x={node.position.x}
+            y={node.position.y}
+            width={node.width}
+            height={node.height}
+          >
+            {node.type === 'input' && (
+              <div className='flex h-full items-center justify-center rounded-md border border-neutral-700 bg-sidebar-foreground p-4 text-center text-foreground'>
+                {node.data.label}
+              </div>
+            )}
+            {node.type === 'custom' && (
+              <div className='flex h-full w-full items-center rounded-lg border border-neutral-700 bg-background p-4 shadow-lg'>
+                <div className='flex items-center gap-3'>
+                  <IconRenderer
+                    name={node.data.icon}
+                    className={`h-5 w-5 ${node.data.iconColor}`}
+                  />
+                  <div>
+                    <h4 className='text-base font-bold text-foreground'>
+                      {node.data.label}
+                    </h4>
+                    <p className='text-sm text-muted-foreground'>
+                      {node.data.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </foreignObject>
+        ))}
+      </svg>
     </div>
   )
 }

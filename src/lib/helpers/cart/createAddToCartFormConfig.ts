@@ -1,5 +1,4 @@
-// Path: src/lib/helpers/cartForm.ts
-
+// Path: src/lib/helpers/cart/createAddToCartFormConfig.ts
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AddToCartSchema } from '@/db/zod/schemas/AddToCartSchema'
 import type { ShopifyProductVariant } from '@types'

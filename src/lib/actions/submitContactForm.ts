@@ -1,7 +1,7 @@
 // Path: src/lib/actions/submitContactForm.ts
 'use server'
 
-import { ContactFormSchema } from '@/db/zod/schemas/ContactFormSchema'
+import { ClientContactFormSchema } from '@/db/zod/schemas/ContactFormSchema'
 import type { z } from 'zod'
 
 export interface ContactFormState {
@@ -15,7 +15,7 @@ export interface ContactFormState {
     message?: string[]
     privacy?: string[]
   }
-  data?: z.infer<typeof ContactFormSchema>
+  data?: z.infer<typeof ClientContactFormSchema>
 }
 
 export async function submitContactForm(
@@ -27,7 +27,7 @@ export async function submitContactForm(
     privacy: formData.get('privacy') === 'on'
   }
 
-  const validatedFields = ContactFormSchema.safeParse(rawFormData)
+  const validatedFields = ClientContactFormSchema.safeParse(rawFormData)
 
   if (!validatedFields.success) {
     return {
