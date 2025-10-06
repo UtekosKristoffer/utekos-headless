@@ -23,7 +23,7 @@ export interface ContactFormState {
 }
 
 const resend = new Resend(process.env.RESEND_API_KEY)
-const CONTACT_TO_EMAIL = 'info@utekos.no'
+const CONTACT_TO_EMAIL = 'kristoffer.hjelmeland@gmail.com'
 
 function coerceEmptyToUndefined<T extends Record<string, any>>(
   obj: T,
