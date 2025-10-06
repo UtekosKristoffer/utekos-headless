@@ -15,7 +15,7 @@ export const ServerContactFormSchema = z.object({
   country: z.string().min(1, { message: 'Land er påkrevd.' }),
   orderNumber: z.string().optional(),
   message: z.string().min(10, { message: 'Melding må være minst 10 tegn.' }),
-  // Må være huket av
+
   privacy: z
     .boolean()
     .refine(v => v === true, { message: 'Du må godta personvernerklæringen.' })

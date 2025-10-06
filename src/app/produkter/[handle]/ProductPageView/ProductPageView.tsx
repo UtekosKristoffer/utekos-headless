@@ -21,7 +21,6 @@ import { getSortedOptions } from '@/lib/helpers/async/getSortedOptions'
 import type { ProductPageViewProps, ShopifyProduct } from '@types'
 import dynamic from 'next/dynamic'
 
-// Utdratt delkomponenter
 import ProductHeader from './ProductHeader'
 import ProductGalleryCard from './ProductGalleryCard'
 import PriceActivityPanel from './PriceActivityPanel'

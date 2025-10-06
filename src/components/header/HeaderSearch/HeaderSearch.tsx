@@ -19,7 +19,8 @@ import {
   useCallback,
   startTransition,
   useState,
-  useEffect
+  useEffect,
+  useRef
 } from 'react'
 import type { Route } from 'next'
 
@@ -47,7 +48,10 @@ function useCommandK(open: boolean, setOpen: (v: boolean) => void) {
     (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault()
-        startTransition(() => setOpen(!open))
+        // Yield to browser for better INP
+        setTimeout(() => {
+          startTransition(() => setOpen(!open))
+        }, 0)
       }
       if (e.key === 'Escape') {
         startTransition(() => setOpen(false))
@@ -143,36 +147,54 @@ const useSearchIndex = () => {
   const [error, setError] = React.useState<string | null>(null)
   const abortControllerRef = React.useRef<AbortController | null>(null)
   const hasFetched = React.useRef(false)
+  const fetchPromiseRef = React.useRef<Promise<void> | null>(null)
 
   const prefetch = useCallback(async () => {
-    if (hasFetched.current || loading) return
+    // Return existing promise hvis allerede i gang
+    if (fetchPromiseRef.current) {
+      return fetchPromiseRef.current
+    }
+
+    if (hasFetched.current) return
+
     if (abortControllerRef.current) {
       abortControllerRef.current.abort()
     }
+
     hasFetched.current = true
     setLoading(true)
     setError(null)
     abortControllerRef.current = new AbortController()
-    try {
-      const res = await fetch('/api/search-index', {
-        signal: abortControllerRef.current.signal,
-        headers: { 'Cache-Control': 'max-age=300' }
-      })
-      if (!res.ok) {
-        throw new Error(`Klarte ikke hente søkeindeks (status: ${res.status})`)
+
+    const fetchPromise = (async () => {
+      try {
+        const res = await fetch('/api/search-index', {
+          signal: abortControllerRef.current!.signal,
+          headers: { 'Cache-Control': 'max-age=300' }
+        })
+        if (!res.ok) {
+          throw new Error(
+            `Klarte ikke hente søkeindeks (status: ${res.status})`
+          )
+        }
+        const data = await res.json()
+        startTransition(() => {
+          setGroups(data.groups as SearchGroup[])
+        })
+      } catch (e: any) {
+        if (e.name !== 'AbortError') {
+          setError(e?.message ?? 'En ukjent feil oppstod')
+        }
+      } finally {
+        setLoading(false)
+        fetchPromiseRef.current = null
       }
-      const data = await res.json()
-      startTransition(() => {
-        setGroups(data.groups as SearchGroup[])
-      })
-    } catch (e: any) {
-      if (e.name !== 'AbortError') {
-        setError(e?.message ?? 'En ukjent feil oppstod')
-      }
-    } finally {
-      setLoading(false)
-    }
-  }, [loading])
+    })()
+
+    fetchPromiseRef.current = fetchPromise
+    return fetchPromise
+  }, [])
+
   React.useEffect(() => {
     return () => {
       if (abortControllerRef.current) {
@@ -180,6 +202,7 @@ const useSearchIndex = () => {
       }
     }
   }, [])
+
   return { groups, loading, error, prefetch }
 }
 
@@ -216,28 +239,48 @@ SearchResults.displayName = 'SearchResults'
 
 export function HeaderSearch({ className }: { className?: string }) {
   const [open, setOpen] = useState(false)
-  const [isMounted, setIsMounted] = useState(false) // NY STATE
   const router = useRouter()
   const { groups, loading, error, prefetch } = useSearchIndex()
   const deferredGroups = useDeferredValue(groups)
+  const prefetchTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   useCommandK(open, setOpen)
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
+  // Aggressive prefetch - start tidligere!
   const handlePrefetch = useCallback(() => {
-    startTransition(() => {
-      prefetch()
-    })
+    // Clear existing timeout
+    if (prefetchTimeoutRef.current) {
+      clearTimeout(prefetchTimeoutRef.current)
+    }
+
+    // Start prefetch med litt delay for å unngå spam
+    prefetchTimeoutRef.current = setTimeout(() => {
+      startTransition(() => {
+        prefetch()
+      })
+    }, 100) // Liten delay for å unngå at hver mousemove trigger fetch
   }, [prefetch])
 
+  // Cleanup timeout on unmount
   useEffect(() => {
-    if (open) {
+    return () => {
+      if (prefetchTimeoutRef.current) {
+        clearTimeout(prefetchTimeoutRef.current)
+      }
+    }
+  }, [])
+
+  // KRITISK: Optimalisert onClick handler
+  const handleOpenDialog = useCallback(() => {
+    // Step 1: Åpne dialog umiddelbart (optimistisk UI)
+    setOpen(true)
+
+    // Step 2: Start prefetch hvis ikke allerede gjort
+    // Dette kjører i bakgrunnen mens dialog åpner
+    if (!groups && !loading) {
       prefetch()
     }
-  }, [open, prefetch])
+  }, [groups, loading, prefetch])
 
   const handleNavigate = useCallback(
     (path: string) => {
@@ -252,7 +295,7 @@ export function HeaderSearch({ className }: { className?: string }) {
   const buttonProps = React.useMemo(
     () => ({
       'type': 'button' as const,
-      'onClick': () => setOpen(true),
+      'onClick': handleOpenDialog, // Optimalisert handler
       'onMouseEnter': handlePrefetch,
       'onFocus': handlePrefetch,
       'onTouchStart': handlePrefetch,
@@ -263,14 +306,14 @@ export function HeaderSearch({ className }: { className?: string }) {
         className
       )
     }),
-    [className, handlePrefetch]
+    [className, handlePrefetch, handleOpenDialog]
   )
 
   return (
     <>
       <button {...buttonProps}>
         <SearchIcon className='size-4 opacity-90' />
-        <span className='bg-transparent'>Søk i innhold…</span>
+        <span>Søk i innhold…</span>
         <kbd
           aria-hidden
           className='pointer-events-none ml-auto inline-flex select-none items-center gap-1 rounded border border-white/10 bg-black/20 px-1.5 font-mono text-[10px] text-white/60 dark:bg-white/10'
@@ -279,73 +322,71 @@ export function HeaderSearch({ className }: { className?: string }) {
         </kbd>
       </button>
 
-      {isMounted && (
-        <CommandDialog
-          open={open}
-          onOpenChange={setOpen}
-          showCloseButton={false}
+      <CommandDialog
+        open={open}
+        onOpenChange={setOpen}
+        showCloseButton={false}
+        className={cn(
+          'mx-auto max-w-2xl rounded-xl p-2 pb-11 shadow-2xl',
+          'bg-neutral-900/95 text-neutral-100',
+          'border border-neutral-700 ring-3 ring-neutral-700',
+          'backdrop-blur-sm',
+          className
+        )}
+        title='Søk på nettsiden...'
+        description='Søk etter produkter eller sider..'
+      >
+        <CommandInput placeholder='Søk på nettsiden..' autoFocus />
+        <CommandList className='no-scrollbar min-h-80 scroll-pt-2 scroll-pb-1.5'>
+          <CommandEmpty>
+            {loading ?
+              'Laster sider...'
+            : error ?
+              'Feil ved henting av søkeindeks.'
+            : 'Ingen treff.'}
+          </CommandEmpty>
+          <SearchResults groups={deferredGroups} onSelect={handleNavigate} />
+        </CommandList>
+        <div
+          aria-hidden
           className={cn(
-            'mx-auto max-w-2xl rounded-xl p-2 pb-11 shadow-2xl',
-            'bg-neutral-900/95 text-neutral-100',
-            'border border-neutral-700 ring-3 ring-neutral-700',
-            'backdrop-blur-sm',
-            className
+            'pointer-events-none absolute inset-x-0 bottom-0 flex h-10 items-center justify-between border-t border-neutral-700 px-3 text-xs',
+            'bg-neutral-800 text-muted-foreground'
           )}
-          title='Søk på nettsiden...'
-          description='Søk etter produkter eller sider..'
         >
-          <CommandInput placeholder='Søk på nettsiden..' autoFocus />
-          <CommandList className='no-scrollbar min-h-80 scroll-pt-2 scroll-pb-1.5'>
-            <CommandEmpty>
-              {loading ?
-                'Laster sider...'
-              : error ?
-                'Feil ved henting av søkeindeks.'
-              : 'Ingen treff.'}
-            </CommandEmpty>
-            <SearchResults groups={deferredGroups} onSelect={handleNavigate} />
-          </CommandList>
-          <div
-            aria-hidden
-            className={cn(
-              'pointer-events-none absolute inset-x-0 bottom-0 flex h-10 items-center justify-between border-t border-neutral-700 px-3 text-xs',
-              'bg-neutral-800 text-muted-foreground'
-            )}
-          >
-            <div className='flex items-center gap-2'>
-              <span className='inline-flex items-center gap-1'>
-                <svg
-                  viewBox='0 0 24 24'
-                  fill='none'
-                  stroke='currentColor'
-                  strokeWidth={2}
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  className='lucide lucide-corner-down-left size-3'
-                >
-                  <path d='M20 4v7a4 4 0 0 1-4 4H4' />
-                  <polyline points='9 10 4 15 9 20' />
-                </svg>
-                Gå til side
-              </span>
-            </div>
-            <div className='hidden items-center gap-2 md:flex'>
-              <span className='flex items-center gap-1'>
-                <kbd className='rounded border border-white/10 bg-black/20 px-1.5 font-mono text-[10px] text-white/70 dark:bg-white/10'>
-                  ↓
-                </kbd>
-                for å velge
-              </span>
-              <span className='flex items-center gap-1'>
-                <kbd className='rounded border border-white/10 bg-black/20 px-1.5 font-mono text-[10px] text-white/70 dark:bg-white/10'>
-                  esc
-                </kbd>
-                for å lukke
-              </span>
-            </div>
+          <div className='flex items-center gap-2'>
+            <span className='inline-flex items-center gap-1'>
+              <svg
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth={2}
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                className='lucide lucide-corner-down-left size-3'
+              >
+                <path d='M20 4v7a4 4 0 0 1-4 4H4' />
+                <polyline points='9 10 4 15 9 20' />
+              </svg>
+              Gå til side
+            </span>
           </div>
-        </CommandDialog>
-      )}
+          <div className='hidden items-center gap-2 md:flex'>
+            <span className='flex items-center gap-1'>
+              <kbd className='rounded border border-white/10 bg-black/20 px-1.5 font-mono text-[10px] text-white/70 dark:bg-white/10'>
+                ↑↓
+              </kbd>
+              for å velge
+            </span>
+            <span className='flex items-center gap-1'>
+              <kbd className='rounded border border-white/10 bg-black/20 px-1.5 font-mono text-[10px] text-white/70 dark:bg-white/10'>
+                esc
+              </kbd>
+              for å lukke
+            </span>
+          </div>
+        </div>
+      </CommandDialog>
     </>
   )
 }

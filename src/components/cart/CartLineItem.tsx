@@ -8,7 +8,6 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialog,
-  AlertDialogTitle,
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
@@ -23,7 +22,7 @@ import type { Route } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-
+import { AlertDialogTitle } from './AlertDialogen'
 interface CartLineItemProps {
   lineId: string
 }
@@ -162,8 +161,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
               <AlertDialogHeader>
                 <AlertDialogTitle>Er du sikker?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  Dette vil fjerne {productTitle} permanent fra handleposen din.
-                  Handlingen kan ikke angres.
+                  Vil du fjerne {productTitle} fra handleposen din?
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>

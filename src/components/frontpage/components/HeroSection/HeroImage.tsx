@@ -14,21 +14,10 @@ export function HeroImage() {
           height={1363}
           sizes='(min-width: 1280px) 1280px, 100vw'
           className='mx-auto w-full rounded-xl h-[60vh] xl:h-[80vh] object-cover object-bottom'
-          // LCP-hints
           priority
           placeholder='blur'
-          quality={70}
         />
       </div>
-
-      <div
-        className='absolute -inset-1 opacity-20 blur-md transition-opacity duration-300 group-hover:opacity-30'
-        style={{
-          background:
-            'linear-gradient(135deg,#0ea5e9 0%,#06b6d4 50%,#0891b2 100%)'
-        }}
-      />
     </div>
   )
 }
-

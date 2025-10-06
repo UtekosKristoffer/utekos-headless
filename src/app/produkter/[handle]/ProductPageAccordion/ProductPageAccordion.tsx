@@ -22,7 +22,6 @@ import {
 import { renderMetafield } from './helpers/renderMetafield'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 
-/** Map fra tekst-utility → hex-farge for subtile glødeffekter */
 const colorHexByTextClass: Record<string, string> = {
   'text-rose-500': '#F43F5E',
   'text-cyan-400': '#22d3ee',
@@ -59,76 +58,63 @@ AccordionContentRenderer.displayName = 'AccordionContentRenderer'
 
 // Optimaliser selve accordion item med memo
 const ProductDetailsAccordionSection = memo(
-  ({
-    sectionData,
-    sectionIndex
-  }: {
-    sectionData: AccordionSectionData
-    sectionIndex: number
-  }) => {
+  ({ sectionData }: { sectionData: AccordionSectionData }) => {
     const { id, title, content, Icon, color } = sectionData
     const glowHexColor = useMemo(
       () => colorHexByTextClass[color] ?? '#60a5fa',
       [color]
     )
 
-    // Pre-beregn styles for å unngå inline beregninger
-    const overlayStyle = useMemo(
-      () => ({
-        background: `radial-gradient(120% 120% at 50% 0%, transparent 30%, ${glowHexColor} 100%)`
-      }),
-      [glowHexColor]
-    )
-
+    // Forenklet border glow - KUN på hover/open
     const borderGlowStyle = useMemo(
       () => ({
-        background: glowHexColor
+        boxShadow: `0 0 20px -5px ${glowHexColor}`
       }),
       [glowHexColor]
     )
 
     return (
-      <AnimatedBlock
-        key={id}
-        className='will-animate-fade-in-up'
-        delay={`${sectionIndex * 0.1}s`}
-        threshold={0.5}
+      <AccordionItem
+        value={id}
+        className='group relative mb-3 overflow-hidden rounded-lg border border-neutral-800 transition-all duration-200 hover:border-neutral-700'
+        style={{
+          // CSS containment for isolering og bedre performance
+          contain: 'layout style paint'
+        }}
       >
-        <AccordionItem
-          value={id}
-          className='group relative mb-3 overflow-hidden rounded-lg border border-neutral-800 transition-all duration-300 hover:border-neutral-700'
-        >
-          {/* Bakgrunnsoverlay - use will-change for bedre performance */}
-          <div
-            className='pointer-events-none absolute inset-0 z-0 opacity-0 blur-2xl transition-opacity duration-300 will-change-opacity group-hover:opacity-20 group-data-[state=open]:opacity-20'
-            style={overlayStyle}
-          />
+        {/* Forenklet bakgrunnsoverlay - fjernet blur! */}
+        <div
+          className='pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-200 group-hover:opacity-10 group-data-[state=open]:opacity-10'
+          style={{
+            background: `linear-gradient(135deg, transparent 60%, ${glowHexColor}22 100%)`
+          }}
+        />
 
-          <AccordionTrigger className='relative z-10 px-6 py-4 text-foreground/70 transition-colors hover:text-foreground data-[state=open]:text-foreground hover:no-underline'>
-            <div className='flex items-center gap-4'>
-              <div className='flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-700 bg-background transition-transform duration-300 will-change-transform group-hover:scale-[1.1]'>
-                <Icon
-                  className={`h-5 w-5 shrink-0 transition-colors ${color}`}
-                  aria-hidden='true'
-                />
-              </div>
-              <span className='text-lg font-semibold'>{title}</span>
-            </div>
-          </AccordionTrigger>
-
-          {typeof content === 'string' && (
-            <AccordionContentRenderer content={content} />
-          )}
-
-          {/* Subtil border-glow overlay */}
-          <div className='pointer-events-none absolute inset-0 z-10 rounded-lg opacity-0 transition-opacity duration-300 will-change-opacity group-hover:opacity-100 group-data-[state=open]:opacity-100'>
+        <AccordionTrigger className='relative z-10 px-6 py-4 text-foreground/70 transition-colors duration-200 hover:text-foreground data-[state=open]:text-foreground hover:no-underline'>
+          <div className='flex items-center gap-4'>
             <div
-              className='absolute inset-0 rounded-lg blur-sm opacity-20'
-              style={borderGlowStyle}
-            />
+              className='flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-700 bg-background transition-transform duration-200 group-hover:scale-105'
+              style={{ transform: 'translateZ(0)' }} // GPU acceleration
+            >
+              <Icon
+                className={`h-5 w-5 shrink-0 transition-colors duration-200 ${color}`}
+                aria-hidden='true'
+              />
+            </div>
+            <span className='text-lg font-semibold'>{title}</span>
           </div>
-        </AccordionItem>
-      </AnimatedBlock>
+        </AccordionTrigger>
+
+        {typeof content === 'string' && (
+          <AccordionContentRenderer content={content} />
+        )}
+
+        {/* Forenklet border-glow - fjernet blur! */}
+        <div
+          className='pointer-events-none absolute inset-0 z-10 rounded-lg opacity-0 transition-opacity duration-200 group-hover:opacity-60 group-data-[state=open]:opacity-60'
+          style={borderGlowStyle}
+        />
+      </AccordionItem>
     )
   }
 )
@@ -239,12 +225,12 @@ export function ProductPageAccordion({
           </h2>
         </AnimatedBlock>
 
+        {/* Fjernet AnimatedBlock wrapper - dette var en stor bottleneck! */}
         <Accordion type='single' collapsible className='w-full'>
-          {sectionsWithContent.map((section, index) => (
+          {sectionsWithContent.map(section => (
             <ProductDetailsAccordionSection
               key={section.id}
               sectionData={section}
-              sectionIndex={index}
             />
           ))}
         </Accordion>

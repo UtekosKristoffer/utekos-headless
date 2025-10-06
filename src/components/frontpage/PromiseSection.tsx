@@ -9,7 +9,7 @@ import KvamskogenPic from '@public/kvamskogen_1.webp'
 export function PromiseSection() {
   return (
     <section className='py-16 mx-auto max-w-[95%] md:max-w-7xl sm:py-24'>
-      <div className='mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='mx-auto'>
         <div className='grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16'>
           {/* Venstre kolonne: Bilde */}
           <div className='flex items-center justify-center rounded-xl border border-neutral-800 p-2'>

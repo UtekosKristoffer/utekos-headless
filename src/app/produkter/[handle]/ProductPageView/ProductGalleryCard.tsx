@@ -27,9 +27,8 @@ export default function ProductGalleryCard({
       delay='0.12s'
       threshold={0.2}
     >
-      <section aria-label={ariaLabel} className='mx-auto max-w-xl'>
-        <div className='group relative w-full overflow-hidden rounded-2xl border border-neutral-800 bg-sidebar-foreground p-4 shadow-xl transition-all duration-300 hover:border-neutral-700'>
-          {/* Subtil glow bak galleriet */}
+      <section aria-label={ariaLabel} className='mx-auto max-w-xl rounded-lg'>
+        <div className='group relative w-full overflow-hidden rounded-2xl p-4 border border-neutral-800 bg-sidebar-foreground shadow-xl transition-all duration-300 hover:border-neutral-700'>
           <div
             className='absolute -inset-2 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-20'
             style={{
