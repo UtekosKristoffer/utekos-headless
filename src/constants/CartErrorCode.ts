@@ -1,21 +1,34 @@
 // Path: src/constants/CartErrorCode.ts
-import { z } from '@/db/zod/zodConfig'
 /**
- * @fileoverview Centralized error codes using Zod v4 enum pattern.
+ * Klient-trygg, tre-shakebar konstant uten Zod-import.
+ * Bruk denne i UI/klientkode. Trengs runtime-validering på klient,
+ * importer egen mini-schema (se kommentar nedenfor).
+ */
+export const CartErrorCode = {
+  VALIDATION_ERROR: 'VALIDATION_ERROR',
+  MISSING_CART_ID: 'MISSING_CART_ID',
+  API_ERROR: 'API_ERROR',
+  UNEXPECTED_SERVER_ERROR: 'UNEXPECTED_SERVER_ERROR'
+} as const
+
+export type CartErrorCodeType =
+  (typeof CartErrorCode)[keyof typeof CartErrorCode]
+
+/** Type guard for evt. løse strenger (letter logging/telemetri i klient). */
+const set = new Set<string>(Object.values(CartErrorCode))
+export function isCartErrorCode(value: unknown): value is CartErrorCodeType {
+  return typeof value === 'string' && set.has(value)
+}
+
+/**
+ * Hvis du trenger KLIENT-runtime-validering:
+ *  Lag src/db/zod/schemas/CartErrorCodeSchema.client.ts som bruker zod/mini:
  *
- * This module consolidates all cart error codes into a single source of truth
- * that provides both runtime validation and compile-time type safety.
- * The Zod enum pattern enables runtime validation of error codes in API responses
- * while maintaining perfect TypeScript integration.
+ *   'use client'
+ *   import { z } from '@/db/zod/zodClient'
+ *   export const CartErrorCodeSchemaClient = z.enum([
+ *     'VALIDATION_ERROR','MISSING_CART_ID','API_ERROR','UNEXPECTED_SERVER_ERROR'
+ *   ])
+ *
+ *  og bruk den der du faktisk må parse på klienten.
  */
-
-import { CartErrorCodeSchema } from '@/db/zod/schemas/CartErrorCodeSchema'
-
-/**
- * Constant object for dot-notation access to error codes.
- * This provides the ergonomic CartErrorCode.VALIDATION_ERROR syntax
- * while maintaining runtime validation capabilities through the schema.
- */
-export const CartErrorCode = CartErrorCodeSchema.enum
-
-export type CartErrorCodeType = z.infer<typeof CartErrorCodeSchema>

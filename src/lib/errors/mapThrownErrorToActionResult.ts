@@ -1,5 +1,3 @@
-// Path: src/lib/errors/mapThrownErrorToActionResult.ts
-
 /**
  * @fileoverview Centralized error mapping that leverages reusable error message utilities.
  *

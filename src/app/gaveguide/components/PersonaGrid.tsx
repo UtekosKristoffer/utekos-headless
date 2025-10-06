@@ -74,7 +74,7 @@ export function PersonaGrid() {
                     alt={persona.title}
                     fill
                     sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                    className='object-cover opacity-20 transition-opacity group-hover:opacity-30'
+                    className='object-cover opacity-40 transition-opacity group-hover:opacity-30'
                     priority={false}
                   />
                   <div className='absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent' />

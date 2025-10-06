@@ -1,7 +1,4 @@
-'use client'
-
 import { buttonVariants } from '@/components/ui/button'
-import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { SparklesIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -14,20 +11,13 @@ interface SpecialOfferCrossSellProps {
 export function SpecialOfferCrossSell({
   currentProductHandle
 }: SpecialOfferCrossSellProps) {
-  if (currentProductHandle === 'utekos-special-edition') {
-    return null
-  }
+  if (currentProductHandle === 'utekos-special-edition') return null
 
   return (
-    <AnimatedBlock
-      className='mt-12 will-animate-fade-in-up'
-      delay='0s'
-      threshold={0.5}
-    >
+    <section className='mt-12' aria-label='Siste sjanse-tilbud'>
       <div className='relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/30 p-6'>
-        <div className='flex flex-col gap-6 sm:flex-row sm:items-center'>
-          {/* Bilde */}
-          <div className='relative h-24 w-24 flex-shrink-0'>
+        <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6'>
+          <div className='relative h-24 w-24 shrink-0'>
             <Image
               src={specialEditionImage}
               alt='Utekos Special Edition'
@@ -35,24 +25,26 @@ export function SpecialOfferCrossSell({
               className='object-contain'
               sizes='96px'
               priority={false}
+              loading='lazy'
+              fetchPriority='low'
+              decoding='async'
+              quality={70}
             />
           </div>
 
-          {/* Tekst og Knapp */}
-          <div className='flex-grow'>
+          <div className='min-w-0 flex-grow'>
             <h3 className='flex items-center gap-2 font-semibold text-white'>
               <SparklesIcon className='size-5 text-sky-400' />
               Et siste sjanse-kupp!
             </h3>
-            <p className='mt-2 text-sm text-neutral-400'>
+            <p className='mt-2 max-w-prose text-sm leading-relaxed text-neutral-400'>
               Legg til vår utgående Special Edition for kun{' '}
               <span className='font-bold text-white'>750,-</span>. Kommer aldri
               tilbake.
             </p>
           </div>
 
-          {/* CTA Knapp */}
-          <div className='flex-shrink-0'>
+          <div className='shrink-0'>
             <Link
               href='/produkter/utekos-special-edition'
               className={buttonVariants({
@@ -66,6 +58,6 @@ export function SpecialOfferCrossSell({
           </div>
         </div>
       </div>
-    </AnimatedBlock>
+    </section>
   )
 }

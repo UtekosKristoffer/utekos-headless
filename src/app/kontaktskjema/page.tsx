@@ -127,24 +127,26 @@ export default function SupportPage() {
                   </ul>
                 </div>
 
-                {/* Statistikk-seksjon */}
                 <div className='border-y border-white/10'>
-                  <div className='grid grid-cols-2'>
-                    <div className='border-r border-white/10 p-8 lg:py-12 lg:px-8'>
+                  <div className='grid grid-cols-1 sm:grid-cols-2'>
+                    <div className='border-r border-white/10 p-6 sm:p-8 lg:py-12 lg:px-8'>
                       <h4 className='flex items-center gap-2 font-semibold'>
                         <Leaf className='h-5 w-5' />
                         En investering i komfort
                       </h4>
-                      <p className='mt-2 text-base text-muted-foreground'>
+                      <p className='mt-2 text-base text-muted-foreground max-w-prose'>
                         Mer enn bare et plagg; det er et verktøy designet for å
                         gi deg utallige timer med varme og velvære.
                       </p>
                     </div>
-                    <div className='py-8 lg:py-12 lg:px-8'>
+
+                    <div className='p-6 sm:p-8 lg:py-12 lg:px-8'>
                       <h4 className='flex items-center gap-2 font-semibold'>
-                        <span>🇳🇴</span> Skapt for norske forhold
+                        <span aria-hidden>🇳🇴</span>
+                        <span className='sr-only'>Norsk</span>
+                        Skapt for norske forhold
                       </h4>
-                      <p className='mt-2 text-base text-muted-foreground'>
+                      <p className='mt-2 text-base text-muted-foreground max-w-prose'>
                         Våre produkter er utviklet for å forlenge de gode
                         stundene utendørs, enten det er på en kjølig sommerkveld
                         på hytten eller en frisk høstdag i båten.
@@ -292,3 +294,5 @@ export default function SupportPage() {
     </>
   )
 }
+
+

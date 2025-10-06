@@ -1,6 +1,7 @@
 // Path: src/app/produkter/[handle]/ProductPageView/components/ProductPageAccordion.tsx
 'use client'
 
+import { memo, useMemo } from 'react'
 import {
   Accordion,
   AccordionContent,
@@ -34,137 +35,167 @@ const colorHexByTextClass: Record<string, string> = {
 interface AccordionSectionData {
   id: string
   title: string
-  /** Valgfritt felt: med exactOptionalPropertyTypes kan dette kun være string eller utelates helt */
   content?: string
   Icon: LucideIcon
   color: string
 }
 
-/** Hjelper som *utelater* `content` når verdi er null/undefined (påkrevd m/ exactOptionalPropertyTypes). */
+/** Hjelper som *utelater* `content` når verdi er null/undefined */
 function mapOptionalContent(
   value: string | null | undefined
 ): Partial<Pick<AccordionSectionData, 'content'>> {
   return value != null ? { content: value } : {}
 }
 
-function ProductDetailsAccordionSection({
-  sectionData,
-  sectionIndex
-}: {
-  sectionData: AccordionSectionData
-  sectionIndex: number
-}) {
-  const { id, title, content, Icon, color } = sectionData
-  const glowHexColor = colorHexByTextClass[color] ?? '#60a5fa'
-
+// Memoize innholdet som rendres for å unngå re-renders
+const AccordionContentRenderer = memo(({ content }: { content: string }) => {
   return (
-    <AnimatedBlock
-      key={id}
-      className='will-animate-fade-in-up'
-      delay={`${sectionIndex * 0.1}s`}
-      threshold={0.5}
-    >
-      <AccordionItem
-        value={id}
-        className='group relative mb-3 overflow-hidden rounded-lg border border-neutral-800 transition-all duration-300 hover:border-neutral-700'
-      >
-        {/* Bakgrunnsoverlay som skal farge *hele* itemet (header + content) */}
-        <div
-          className='pointer-events-none absolute inset-0 z-0 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20 group-data-[state=open]:opacity-20'
-          style={{
-            background: `radial-gradient(120% 120% at 50% 0%, transparent 30%, ${glowHexColor} 100%)`
-          }}
-        />
-
-        <AccordionTrigger className='relative z-10 px-6 py-4 text-foreground/70 transition-colors hover:text-foreground data-[state=open]:text-foreground hover:no-underline'>
-          <div className='flex items-center gap-4'>
-            <div className='flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-700 bg-background transition-transform duration-300 group-hover:scale-110'>
-              <Icon
-                className={`h-5 w-5 shrink-0 transition-colors ${color}`}
-                aria-hidden='true'
-              />
-            </div>
-            <span className='text-lg font-semibold'>{title}</span>
-          </div>
-        </AccordionTrigger>
-
-        {typeof content === 'string' && (
-          <AccordionContent className='prose prose-invert relative z-10 max-w-none px-6 pb-6 text-base leading-relaxed text-foreground/80'>
-            {renderMetafield(content)}
-          </AccordionContent>
-        )}
-
-        {/* Subtil border-glow overlay (ligger over kanten, men under interaksjon pga pointer-events-none) */}
-        <div className='pointer-events-none absolute inset-0 z-10 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-data-[state=open]:opacity-100'>
-          <div
-            className='absolute inset-0 rounded-lg blur-sm opacity-20'
-            style={{ background: glowHexColor }}
-          />
-        </div>
-      </AccordionItem>
-    </AnimatedBlock>
+    <AccordionContent className='prose prose-invert relative z-10 max-w-none px-6 pb-6 text-base leading-relaxed text-foreground/80'>
+      {renderMetafield(content)}
+    </AccordionContent>
   )
-}
+})
+AccordionContentRenderer.displayName = 'AccordionContentRenderer'
+
+// Optimaliser selve accordion item med memo
+const ProductDetailsAccordionSection = memo(
+  ({
+    sectionData,
+    sectionIndex
+  }: {
+    sectionData: AccordionSectionData
+    sectionIndex: number
+  }) => {
+    const { id, title, content, Icon, color } = sectionData
+    const glowHexColor = useMemo(
+      () => colorHexByTextClass[color] ?? '#60a5fa',
+      [color]
+    )
+
+    // Pre-beregn styles for å unngå inline beregninger
+    const overlayStyle = useMemo(
+      () => ({
+        background: `radial-gradient(120% 120% at 50% 0%, transparent 30%, ${glowHexColor} 100%)`
+      }),
+      [glowHexColor]
+    )
+
+    const borderGlowStyle = useMemo(
+      () => ({
+        background: glowHexColor
+      }),
+      [glowHexColor]
+    )
+
+    return (
+      <AnimatedBlock
+        key={id}
+        className='will-animate-fade-in-up'
+        delay={`${sectionIndex * 0.1}s`}
+        threshold={0.5}
+      >
+        <AccordionItem
+          value={id}
+          className='group relative mb-3 overflow-hidden rounded-lg border border-neutral-800 transition-all duration-300 hover:border-neutral-700'
+        >
+          {/* Bakgrunnsoverlay - use will-change for bedre performance */}
+          <div
+            className='pointer-events-none absolute inset-0 z-0 opacity-0 blur-2xl transition-opacity duration-300 will-change-opacity group-hover:opacity-20 group-data-[state=open]:opacity-20'
+            style={overlayStyle}
+          />
+
+          <AccordionTrigger className='relative z-10 px-6 py-4 text-foreground/70 transition-colors hover:text-foreground data-[state=open]:text-foreground hover:no-underline'>
+            <div className='flex items-center gap-4'>
+              <div className='flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-700 bg-background transition-transform duration-300 will-change-transform group-hover:scale-[1.1]'>
+                <Icon
+                  className={`h-5 w-5 shrink-0 transition-colors ${color}`}
+                  aria-hidden='true'
+                />
+              </div>
+              <span className='text-lg font-semibold'>{title}</span>
+            </div>
+          </AccordionTrigger>
+
+          {typeof content === 'string' && (
+            <AccordionContentRenderer content={content} />
+          )}
+
+          {/* Subtil border-glow overlay */}
+          <div className='pointer-events-none absolute inset-0 z-10 rounded-lg opacity-0 transition-opacity duration-300 will-change-opacity group-hover:opacity-100 group-data-[state=open]:opacity-100'>
+            <div
+              className='absolute inset-0 rounded-lg blur-sm opacity-20'
+              style={borderGlowStyle}
+            />
+          </div>
+        </AccordionItem>
+      </AnimatedBlock>
+    )
+  }
+)
+ProductDetailsAccordionSection.displayName = 'ProductDetailsAccordionSection'
 
 export function ProductPageAccordion({
   variantProfile
 }: ProductPageAccordionProps) {
-  if (!variantProfile) {
-    return null
-  }
-
-  const allSections: AccordionSectionData[] = [
-    {
-      id: 'materialer',
-      title: 'Materialer',
-      ...mapOptionalContent(variantProfile.materials?.value),
-      Icon: Layers3,
-      color: 'text-rose-500'
-    },
-    {
-      id: 'funksjoner',
-      title: 'Funksjoner',
-      ...mapOptionalContent(variantProfile.functions?.value),
-      Icon: SlidersHorizontal,
-      color: 'text-cyan-400'
-    },
-    {
-      id: 'egenskaper',
-      title: 'Egenskaper',
-      ...mapOptionalContent(variantProfile.properties?.value),
-      Icon: Sparkles,
-      color: 'text-amber-400'
-    },
-    {
-      id: 'bruksomrader',
-      title: 'Bruksområder',
-      ...mapOptionalContent(variantProfile.usage?.value),
-      Icon: Mountain,
-      color: 'text-sky-400'
-    },
-    {
-      id: 'passform',
-      title: 'Passform',
-      ...mapOptionalContent(variantProfile.sizeFit?.value),
-      Icon: Ruler,
-      color: 'text-violet-400'
-    },
-    {
-      id: 'vaskeanvisning',
-      title: 'Vaskeanvisning',
-      ...mapOptionalContent(variantProfile.storageAndMaintenance?.value),
-      Icon: WashingMachine,
-      color: 'text-blue-400'
+  // Memoize sections array - MÅ være før alle betingede returns!
+  const sectionsWithContent = useMemo(() => {
+    if (!variantProfile) {
+      return []
     }
-  ]
 
-  // Behold kun seksjoner med faktisk innhold (ikke tom streng).
-  const sectionsWithContent: AccordionSectionData[] = allSections.filter(
-    (s): s is AccordionSectionData =>
-      typeof s.content === 'string' && s.content.trim() !== ''
-  )
+    const allSections: AccordionSectionData[] = [
+      {
+        id: 'materialer',
+        title: 'Materialer',
+        ...mapOptionalContent(variantProfile.materials?.value),
+        Icon: Layers3,
+        color: 'text-rose-500'
+      },
+      {
+        id: 'funksjoner',
+        title: 'Funksjoner',
+        ...mapOptionalContent(variantProfile.functions?.value),
+        Icon: SlidersHorizontal,
+        color: 'text-cyan-400'
+      },
+      {
+        id: 'egenskaper',
+        title: 'Egenskaper',
+        ...mapOptionalContent(variantProfile.properties?.value),
+        Icon: Sparkles,
+        color: 'text-amber-400'
+      },
+      {
+        id: 'bruksomrader',
+        title: 'Bruksområder',
+        ...mapOptionalContent(variantProfile.usage?.value),
+        Icon: Mountain,
+        color: 'text-sky-400'
+      },
+      {
+        id: 'passform',
+        title: 'Passform',
+        ...mapOptionalContent(variantProfile.sizeFit?.value),
+        Icon: Ruler,
+        color: 'text-violet-400'
+      },
+      {
+        id: 'vaskeanvisning',
+        title: 'Vaskeanvisning',
+        ...mapOptionalContent(variantProfile.storageAndMaintenance?.value),
+        Icon: WashingMachine,
+        color: 'text-blue-400'
+      }
+    ]
 
-  if (sectionsWithContent.length === 0) {
+    return allSections.filter(
+      (s): s is AccordionSectionData =>
+        typeof s.content === 'string' && s.content.trim() !== ''
+    )
+  }, [variantProfile])
+
+  // Betingede returns ETTER alle hooks
+  if (!variantProfile || sectionsWithContent.length === 0) {
     return null
   }
 

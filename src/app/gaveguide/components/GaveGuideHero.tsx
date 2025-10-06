@@ -5,7 +5,7 @@ export function GaveGuideHero() {
   return (
     <section className='py-24 text-center bg-sidebar-foreground border-b border-neutral-800'>
       <div className='container mx-auto px-4'>
-        <p className='font-semibold text-primary mb-2'>Gaveguiden</p>
+        <p className='font-semibold text-primary-foreground mb-2'>Gaveguiden</p>
         <h1 className='text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'>
           Gaven som varmer. Lenge.
         </h1>

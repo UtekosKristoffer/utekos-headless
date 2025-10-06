@@ -22,24 +22,29 @@ import {
 import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import { countries } from '@/constants/countries'
-import { ClientContactFormSchema } from '@/db/zod/schemas/ContactFormSchema'
+import { ClientContactFormSchema } from '@/db/zod/schemas/ClientContactFormSchema'
 import {
   submitContactForm,
   type ContactFormState
 } from '@/lib/actions/submitContactForm'
 import { zodResolver } from '@hookform/resolvers/zod'
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { useActionState, useEffect } from 'react'
+import { useActionState, useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import type { z } from 'zod'
+import type { z } from '@/db/zod/zodClient'
 
-// STEG 1: Definer skjematypen eksplisitt
 type ContactFormData = z.infer<typeof ClientContactFormSchema>
 
-const initialState: ContactFormState = {
-  message: ''
+const initialState: ContactFormState = { message: '' }
+
+// Viser feilmelding kun når feltet er berørt (touched) eller skjemaet er sendt inn
+function useShouldShowError(form: ReturnType<typeof useForm<ContactFormData>>) {
+  return useMemo(
+    () => (name: keyof ContactFormData) =>
+      form.formState.isSubmitted || !!form.formState.touchedFields[name],
+    [form.formState.isSubmitted, form.formState.touchedFields]
+  )
 }
 
 export function SupportForm() {
@@ -58,27 +63,44 @@ export function SupportForm() {
       orderNumber: '',
       message: '',
       privacy: false
-    }
+    },
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    criteriaMode: 'all'
   })
 
+  const shouldShowError = useShouldShowError(form)
+  const messageValue = form.watch('message') ?? ''
+  const messageChars = messageValue.length
+  const messageMin = 10
+
   useEffect(() => {
-    if (state.message) {
-      if (state.errors) {
-        toast.error('Validering feilet', {
-          description: 'Vennligst sjekk feltene med feilmeldinger.'
-        })
-        Object.entries(state.errors).forEach(([key, value]) => {
-          if (value && value.length > 0) {
-            form.setError(key as keyof ContactFormData, {
-              type: 'server',
-              message: value[0] ?? 'Det oppstod en ukjent feil.'
-            })
-          }
-        })
-      } else {
-        toast.success(state.message)
-        form.reset()
-      }
+    if (!state.message) return
+
+    if (state.errors) {
+      toast.error('Validering feilet', {
+        description: 'Vennligst sjekk feltene med feilmeldinger.'
+      })
+      // Sett server-feil på feltene uten å trigge ny validering
+      Object.entries(state.errors).forEach(([key, value]) => {
+        if (value && value.length > 0) {
+          form.setError(key as keyof ContactFormData, {
+            type: 'server',
+            message: value[0] ?? 'Det oppstod en ukjent feil.'
+          })
+        }
+      })
+    } else {
+      toast.success(state.message)
+      form.reset({
+        name: '',
+        email: '',
+        phone: '',
+        country: '',
+        orderNumber: '',
+        message: '',
+        privacy: false
+      })
     }
   }, [state, form])
 
@@ -99,7 +121,7 @@ export function SupportForm() {
                   className='h-12 rounded-none border-neutral-800 bg-background'
                 />
               </FormControl>
-              <FormMessage />
+              {shouldShowError('email') && <FormMessage />}
             </FormItem>
           )}
         />
@@ -119,7 +141,7 @@ export function SupportForm() {
                     className='h-12 rounded-none border-neutral-800 bg-background'
                   />
                 </FormControl>
-                <FormMessage />
+                {shouldShowError('name') && <FormMessage />}
               </FormItem>
             )}
           />
@@ -140,7 +162,7 @@ export function SupportForm() {
                     className='h-12 rounded-none border-neutral-800 bg-background'
                   />
                 </FormControl>
-                <FormMessage />
+                {shouldShowError('phone') && <FormMessage />}
               </FormItem>
             )}
           />
@@ -152,7 +174,13 @@ export function SupportForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel className='font-medium'>Land</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                // Viktig: kontroller verdien som tom streng istedenfor undefined
+                value={field.value ?? ''}
+                onValueChange={value => {
+                  field.onChange(value)
+                }}
+              >
                 <FormControl>
                   <SelectTrigger className='h-12 w-full rounded-none border-neutral-800 bg-background'>
                     <SelectValue placeholder='Velg ditt land' />
@@ -166,7 +194,7 @@ export function SupportForm() {
                   ))}
                 </SelectContent>
               </Select>
-              <FormMessage />
+              {shouldShowError('country') && <FormMessage />}
             </FormItem>
           )}
         />
@@ -186,7 +214,7 @@ export function SupportForm() {
                   className='h-12 rounded-none border-neutral-800 bg-background'
                 />
               </FormControl>
-              <FormMessage />
+              {shouldShowError('orderNumber') && <FormMessage />}
             </FormItem>
           )}
         />
@@ -206,15 +234,29 @@ export function SupportForm() {
                   className='min-h-[160px] rounded-none border-neutral-800 bg-background'
                 />
               </FormControl>
-              <FormMessage />
+
+              {/* Live tilbakemelding: tegn-teller og minstekrav */}
+              <div className='mt-1 flex items-center justify-between text-xs text-muted-foreground'>
+                <span>
+                  {messageChars < messageMin ?
+                    `Melding må være minst ${messageMin} tegn.`
+                  : 'Ser bra ut ✅'}
+                </span>
+                <span>
+                  {messageChars}/{messageMin} tegn
+                </span>
+              </div>
+
+              {shouldShowError('message') && <FormMessage />}
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name='privacy'
           render={({ field }) => (
-            <FormItem className='flex flex-row items-center justify-between rounded-none border border-neutral-800 p-4'>
+            <FormItem className='flex flex-row items-center justify-between border border-neutral-800 p-4'>
               <div className='flex-1 space-y-0.5 pr-4'>
                 <FormLabel className='text-base'>Personvern</FormLabel>
                 <FormDescription>
@@ -227,19 +269,26 @@ export function SupportForm() {
               </div>
               <FormControl>
                 <Switch
-                  checked={field.value}
+                  checked={!!field.value}
                   onCheckedChange={field.onChange}
                 />
               </FormControl>
             </FormItem>
           )}
         />
+        {shouldShowError('privacy') && (
+          <p className='text-sm text-destructive'>
+            {/* FormMessage funker ikke utenfor FormField, derfor enkel p */}
+            Du må godta personvernerklæringen.
+          </p>
+        )}
+
         <SupportPageButton
           type='submit'
           isBusy={isPending}
           disabled={isPending}
         >
-          {isPending ? 'Sender...' : 'Snakk med Utekos'}
+          {isPending ? 'Sender…' : 'Snakk med Utekos'}
         </SupportPageButton>
       </form>
     </Form>

@@ -1,13 +1,10 @@
 // Path: src/db/zod/schemas/ClearCartLineSchema.ts
-
+import 'server-only'
 import { z } from '@/db/zod/zodConfig'
 
 /**
- * Schema for clearing cart - expects no arguments.
- */
-/**
  * Schema for clearing cart - expects an empty object.
- * Using z.object({}) ensures that z.infer results in the type `{}`.
+ * z.object({}).strict() -> z.infer<typeof ClearCartLineSchema> === {}
  */
 export const ClearCartLineSchema = z.object({}).strict()
 

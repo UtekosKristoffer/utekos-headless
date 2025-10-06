@@ -17,7 +17,7 @@ import type { CartActionsResult } from '@types'
  */
 export const clearCartAction = async (): Promise<CartActionsResult> => {
   try {
-    validateClearCartInput({})
+    await validateClearCartInput({})
 
     const cartId = await getCartIdFromCookie()
     if (!cartId) {

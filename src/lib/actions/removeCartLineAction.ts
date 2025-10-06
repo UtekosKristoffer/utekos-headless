@@ -20,7 +20,7 @@ export const removeCartLineAction = async (
   input: RemoveCartLineInput
 ): Promise<CartActionsResult> => {
   try {
-    validateRemoveCartLineInput(input)
+    await validateRemoveCartLineInput(input)
 
     const cartId = await getCartIdFromCookie()
     if (!cartId) {

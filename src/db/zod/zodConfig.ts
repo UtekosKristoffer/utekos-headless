@@ -4,10 +4,13 @@ import * as z from 'zod'
 import { createErrorMap } from 'zod-validation-error'
 
 /**
- * Global Zod configuration with Norwegian error messages.
- * Ensures all validation errors across the application have
- * consistent, user-friendly messages in Norwegian.
+ * Global Zod-konfigurasjon (SERVER-ONLY)
+ * - Norsk feilkart via zod-validation-error
+ * - “Poisoned” med `server-only` slik at import fra klient feiler ved build
+ * - Bruk denne **kun** i serverkode (route handlers, RSC, server actions)
+ * - For klient: bruk `src/db/zod/zodClient.ts` (Zod Mini)
  */
+
 z.config({
   customError: createErrorMap({
     displayInvalidFormatDetails: true,

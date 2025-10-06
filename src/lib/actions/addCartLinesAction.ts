@@ -16,22 +16,18 @@ import type {
 
 /**
  * Orchestrates the process of adding a line item to a cart.
- * This server action follows the Single Responsibility and Step-down principles by delegating
- * tasks to specialized functions.
- *
- * @param {AddToCartFormValues} input - The validated input for adding an item.
- * @returns {Promise<CartActionsResult>} The result of the cart operation.
+ * Now awaits async server validation to match Next 15 Server Functions.
  */
 export const addCartLinesAction = async (
   input: AddToCartFormValues
 ): Promise<CartActionsResult> => {
   try {
-    validateAddLineInput(input)
+    // 🚩 Viktig: validatorer er async nå – må await'es
+    await validateAddLineInput(input)
 
     const cartId = await getCartIdFromCookie()
 
     let rawCart: CartResponse | null
-
     if (cartId) {
       rawCart = await performCartLinesAddMutation(cartId, input)
     } else {
@@ -46,7 +42,6 @@ export const addCartLinesAction = async (
     }
 
     const cart = normalizeCart(rawCart)
-
     return { success: true, message: 'Vare lagt til.', cart }
   } catch (error) {
     return mapThrownErrorToActionResult(error)
