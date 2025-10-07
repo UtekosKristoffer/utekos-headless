@@ -2,10 +2,16 @@
 'use server'
 import 'server-only'
 
+import { ContactSubmissionEmail } from '@/components/emails/contact-submission-email'
 import {
   ServerContactFormSchema,
   type ServerContactFormData
 } from '@/db/zod/schemas/ServerContactFormSchema'
+import { Resend } from 'resend'
+import { z } from 'zod'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
+const sendToEmail = process.env.CONTACT_FORM_SEND_TO_EMAIL
 
 export interface ContactFormState {
   message: string
@@ -25,32 +31,58 @@ export async function submitContactForm(
   _prevState: ContactFormState,
   formData: FormData
 ): Promise<ContactFormState> {
-  // Normaliser og gjør eksplisitt boolean for privacy
   const rawFormData = {
     ...Object.fromEntries(formData.entries()),
     privacy: formData.get('privacy') === 'on'
   }
+
+  // NYTT: Logg for å se data i terminalen
+  console.log('Mottatt skjemadata på serveren:', rawFormData)
 
   if ('phone' in rawFormData && rawFormData.phone === '')
     delete (rawFormData as Record<string, unknown>).phone
   if ('orderNumber' in rawFormData && rawFormData.orderNumber === '')
     delete (rawFormData as Record<string, unknown>).orderNumber
 
-  // Servervalidering (async i use server-fil)
   const result = await ServerContactFormSchema.safeParseAsync(rawFormData)
 
   if (!result.success) {
+    const flattenedErrors = z.flattenError(result.error)
     return {
       message: 'Validering feilet. Vennligst sjekk feltene og prøv igjen.',
-      errors: result.error.flatten().fieldErrors
+      errors: flattenedErrors.fieldErrors
     }
   }
 
-  // Her gjør du faktisk arbeid (lagre, sende e-post, osv.)
+  if (!sendToEmail) {
+    console.error('CONTACT_FORM_SEND_TO_EMAIL er ikke definert i .env.local')
+    return {
+      message:
+        'Serverkonfigurasjonsfeil. Innsending er midlertidig utilgjengelig.'
+    }
+  }
+
   try {
-    console.log('Skjemadata mottatt på serveren:', result.data)
+    const { data, error } = await resend.emails.send({
+      from: 'Utekos Kontaktskjema <onboarding@resend.dev>',
+      to: sendToEmail,
+      replyTo: result.data.email,
+      subject: `Ny henvendelse fra ${result.data.name}`,
+      react: ContactSubmissionEmail({
+        ...result.data
+      })
+    })
+
+    if (error) {
+      console.error('Resend API Error:', error)
+      return { message: 'Noe gikk galt under sending av e-post. Prøv igjen.' }
+    }
+
     return { message: 'Takk for din henvendelse!', data: result.data }
-  } catch {
-    return { message: 'Noe gikk galt under innsending. Prøv igjen senere.' }
+  } catch (exception) {
+    console.error('Submit Error:', exception)
+    return {
+      message: 'En uventet feil oppstod. Vennligst prøv igjen senere.'
+    }
   }
 }

@@ -174,17 +174,18 @@ export function SupportForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel className='font-medium'>Land</FormLabel>
-              <Select
-                // Viktig: kontroller verdien som tom streng istedenfor undefined
-                value={field.value ?? ''}
-                onValueChange={value => {
-                  field.onChange(value)
-                }}
-              >
+              <Select value={field.value ?? ''} onValueChange={field.onChange}>
                 <FormControl>
-                  <SelectTrigger className='h-12 w-full rounded-none border-neutral-800 bg-background'>
-                    <SelectValue placeholder='Velg ditt land' />
-                  </SelectTrigger>
+                  <div>
+                    <input
+                      type='hidden'
+                      name={field.name}
+                      value={field.value ?? ''}
+                    />
+                    <SelectTrigger className='h-12 w-full rounded-none border-neutral-800 bg-background'>
+                      <SelectValue placeholder='Velg ditt land' />
+                    </SelectTrigger>
+                  </div>
                 </FormControl>
                 <SelectContent className='dark'>
                   {countries.map(country => (
@@ -235,7 +236,6 @@ export function SupportForm() {
                 />
               </FormControl>
 
-              {/* Live tilbakemelding: tegn-teller og minstekrav */}
               <div className='mt-1 flex items-center justify-between text-xs text-muted-foreground'>
                 <span>
                   {messageChars < messageMin ?
@@ -246,7 +246,6 @@ export function SupportForm() {
                   {messageChars}/{messageMin} tegn
                 </span>
               </div>
-
               {shouldShowError('message') && <FormMessage />}
             </FormItem>
           )}
@@ -268,17 +267,24 @@ export function SupportForm() {
                 </FormDescription>
               </div>
               <FormControl>
-                <Switch
-                  checked={!!field.value}
-                  onCheckedChange={field.onChange}
-                />
+                {/* LØSNING: Legg til skjult input for Switch */}
+                <div>
+                  <input
+                    type='hidden'
+                    name={field.name}
+                    value={field.value ? 'on' : ''}
+                  />
+                  <Switch
+                    checked={!!field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </div>
               </FormControl>
             </FormItem>
           )}
         />
         {shouldShowError('privacy') && (
           <p className='text-sm text-destructive'>
-            {/* FormMessage funker ikke utenfor FormField, derfor enkel p */}
             Du må godta personvernerklæringen.
           </p>
         )}

@@ -15,7 +15,6 @@ export function HeroImage() {
           sizes='(min-width: 1280px) 1280px, 100vw'
           className='mx-auto w-full rounded-xl h-[60vh] xl:h-[80vh] object-cover object-bottom'
           priority
-          placeholder='blur'
         />
       </div>
     </div>

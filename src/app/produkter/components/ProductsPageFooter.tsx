@@ -6,10 +6,10 @@ import Link from 'next/link'
 export function ProductsPageFooter() {
   return (
     <section>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 md:mt-2'>
         <Card className='border-neutral-800 bg-sidebar-foreground'>
           <CardContent className='p-8'>
-            <h3 className='text-xl font-semibold'>Usikker på størrelsen?</h3>
+            <h3 className='text-xl font-semibold'>?</h3>
             <p className='mt-2 text-muted-foreground'>
               Se vår størrelsesguide og finn den perfekte passformen for deg.
             </p>
