@@ -1,5 +1,3 @@
-// Path: src/components/header/HeaderSearch/HeaderSearch.tsx
-
 /*eslint-disable react-hooks/exhaustive-deps*/
 
 'use client'
