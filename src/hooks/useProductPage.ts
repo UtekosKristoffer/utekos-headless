@@ -4,25 +4,34 @@ import {
   productOptions
 } from '@/api/lib/products/productOptions'
 import { useVariantState } from '@/hooks/useVariantState'
-import { useProductWithMetafields } from '@/hooks/useProductWithMetafields'
-import { useRelatedProducts } from '@/hooks/useRelatedProducts'
-import { useSwatchColorMap } from '@/hooks/useSwatchColorMap'
-import { useVariantImages } from '@/hooks/useVariantImages'
+import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
+import { getRelatedProducts } from '@/hooks/getRelatedProducts'
+import { createSwatchColorMap } from '@/hooks/createSwatchColorMap'
+import { computeVariantImages } from '@/lib/utils/computeVariantImages'
 import type { ShopifyProductVariant } from '@types'
 
 export function useProductPage(handle: string) {
-  const { data: productData, isLoading } = useQuery(productOptions(handle))
+  const { data: productData, isLoading: isProductLoading } = useQuery(
+    productOptions(handle)
+  )
   const { data: allProducts } = useQuery(allProductsOptions())
 
-  const productWithMetafields = useProductWithMetafields(productData)
+  const productWithMetafields = reshapeProductWithMetafields(productData)
+
   const { variantState, updateVariant, allVariants } = useVariantState(
     productWithMetafields
   )
-  const relatedProducts = useRelatedProducts(allProducts, handle)
-  const swatchColorMap = useSwatchColorMap(productWithMetafields)
+
+  const relatedProducts = getRelatedProducts(allProducts, handle, 4)
+  const swatchColorMap = createSwatchColorMap(productWithMetafields)
+
   const selectedVariant: ShopifyProductVariant | null =
     variantState.status === 'selected' ? variantState.variant : null
-  const variantImages = useVariantImages(productWithMetafields, selectedVariant)
+
+  const variantImages =
+    productWithMetafields ?
+      computeVariantImages(productWithMetafields, selectedVariant)
+    : []
 
   return {
     productData: productWithMetafields,
@@ -32,7 +41,7 @@ export function useProductPage(handle: string) {
     updateVariant,
     relatedProducts,
     swatchColorMap,
-    isLoading: isLoading || !selectedVariant,
-    isUpdating: !selectedVariant && !isLoading
+    isLoading: isProductLoading,
+    isUpdating: !isProductLoading && variantState.status !== 'selected'
   }
 }

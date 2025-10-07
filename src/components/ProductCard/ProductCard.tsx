@@ -12,66 +12,35 @@ import type { Route } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import type React from 'react'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { getInitialOptionsForProduct } from './getInitialOptionsForProduct'
 import { ProductCardFooter } from './ProductCardFooter'
 import { ProductCardHeader } from './ProductCardHeader'
+import { findMatchingVariant } from './findMatchingVariant'
 
 export function ProductCard({ product, colorHexMap }: ProductCardProps) {
-  const [selectedOptions, setSelectedOptions] = useState(() => {
-    return getInitialOptionsForProduct(product)
-  })
+  const [selectedOptions, setSelectedOptions] = useState(() =>
+    getInitialOptionsForProduct(product)
+  )
 
   const cartActor = CartMutationContext.useActorRef()
   const isPending = CartMutationContext.useSelector(state =>
     state.matches('mutating')
   )
 
-  const selectedVariant = useMemo(() => {
-    if (!product.variants.edges?.length || !selectedOptions) {
-      return undefined
-    }
-    for (const edge of product.variants.edges) {
-      const variant = edge.node
-      const options = variant.selectedOptions
-      if (options.length !== Object.keys(selectedOptions).length) continue
-      let allMatch = true
-      for (const opt of options) {
-        if (selectedOptions[opt.name] !== opt.value) {
-          allMatch = false
-          break
-        }
-      }
-      if (allMatch) return variant
-    }
-    return undefined
-  }, [selectedOptions, product.variants.edges])
+  const selectedVariant = findMatchingVariant(product, selectedOptions)
 
-  const derivedValues = useMemo(() => {
-    const fallbackPrice = product.priceRange.minVariantPrice
-    const fallbackImage = product.featuredImage
+  const fallbackPrice = product.priceRange.minVariantPrice
+  const fallbackImage = product.featuredImage
 
-    return {
-      price: formatPrice(selectedVariant?.price ?? fallbackPrice),
-      productUrl: `/produkter/${product.handle}` as Route,
-      imageUrl:
-        selectedVariant?.image?.url ?? fallbackImage?.url ?? '/placeholder.svg',
-      altText:
-        selectedVariant?.image?.altText
-        ?? fallbackImage?.altText
-        ?? product.title,
-      isAvailable: selectedVariant?.availableForSale ?? false
-    }
-  }, [
-    selectedVariant,
-    product.handle,
-    product.priceRange.minVariantPrice,
-    product.featuredImage,
-    product.title
-  ])
-
-  const { price, productUrl, imageUrl, altText, isAvailable } = derivedValues
+  const price = formatPrice(selectedVariant?.price ?? fallbackPrice)
+  const productUrl = `/produkter/${product.handle}` as Route
+  const imageUrl =
+    selectedVariant?.image?.url ?? fallbackImage?.url ?? '/placeholder.svg'
+  const altText =
+    selectedVariant?.image?.altText ?? fallbackImage?.altText ?? product.title
+  const isAvailable = selectedVariant?.availableForSale ?? false
 
   const handleQuickBuy = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -95,6 +64,7 @@ export function ProductCard({ product, colorHexMap }: ProductCardProps) {
   const lastError = CartMutationContext.useSelector(
     state => state.context.error
   )
+
   useEffect(() => {
     if (lastError) {
       toast.error(lastError)

@@ -1,4 +1,7 @@
 // Path: src/components/header/HeaderSearch/HeaderSearch.tsx
+
+/*eslint-disable react-hooks/exhaustive-deps*/
+
 'use client'
 
 import {
@@ -15,8 +18,6 @@ import { useRouter } from 'next/navigation'
 import * as React from 'react'
 import {
   useDeferredValue,
-  memo,
-  useCallback,
   startTransition,
   useState,
   useEffect,
@@ -24,43 +25,39 @@ import {
 } from 'react'
 import type { Route } from 'next'
 
-const TablerArrowRight = memo((props: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    viewBox='0 0 24 24'
-    fill='none'
-    stroke='currentColor'
-    strokeWidth={2}
-    strokeLinecap='round'
-    strokeLinejoin='round'
-    aria-hidden
-    {...props}
-  >
-    <path d='M5 12l14 0' />
-    <path d='M13 18l6 -6' />
-    <path d='M13 6l6 6' />
-  </svg>
-))
-
-TablerArrowRight.displayName = 'TablerArrowRight'
+function TablerArrowRight(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox='0 0 24 24'
+      fill='none'
+      stroke='currentColor'
+      strokeWidth={2}
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      aria-hidden
+      {...props}
+    >
+      <path d='M5 12l14 0' />
+      <path d='M13 18l6 -6' />
+      <path d='M13 6l6 6' />
+    </svg>
+  )
+}
 
 function useCommandK(open: boolean, setOpen: (v: boolean) => void) {
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault()
-        // Yield to browser for better INP
-        setTimeout(() => {
-          startTransition(() => setOpen(!open))
-        }, 0)
-      }
-      if (e.key === 'Escape') {
-        startTransition(() => setOpen(false))
-      }
-    },
-    [open, setOpen]
-  )
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault()
+      setTimeout(() => {
+        startTransition(() => setOpen(!open))
+      }, 0)
+    }
+    if (e.key === 'Escape') {
+      startTransition(() => setOpen(false))
+    }
+  }
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [handleKeyDown])
@@ -81,76 +78,65 @@ type SearchGroup = {
   items: SearchItem[]
 }
 
-const ItemRow = memo(
-  ({
-    item,
-    depth,
-    onSelect
-  }: {
-    item: SearchItem
-    depth: number
-    onSelect: (path: string) => void
-  }) => {
-    const paddings = ['pl-0', 'pl-6', 'pl-10', 'pl-14', 'pl-16']
-    const pad = paddings[Math.min(depth, paddings.length - 1)]
+function ItemRow({
+  item,
+  depth,
+  onSelect
+}: {
+  item: SearchItem
+  depth: number
+  onSelect: (path: string) => void
+}) {
+  const paddings = ['pl-0', 'pl-6', 'pl-10', 'pl-14', 'pl-16']
+  const pad = paddings[Math.min(depth, paddings.length - 1)]
 
-    const handleSelect = useCallback(
-      () => onSelect(item.path),
-      [item.path, onSelect]
-    )
-    const handleChildSelect = useCallback(
-      (path: string) => onSelect(path),
-      [onSelect]
-    )
+  const handleSelect = () => onSelect(item.path)
+  const handleChildSelect = (path: string) => onSelect(path)
 
-    return (
-      <>
-        <CommandItem
-          value={`${item.title} ${item.path} ${(item.keywords || []).join(' ')}`}
-          onSelect={handleSelect}
-          className={cn(
-            'h-9 rounded-md px-3 font-medium',
-            depth > 0 && 'text-neutral-200',
-            depth > 0 && pad
-          )}
-        >
-          <TablerArrowRight className='size-4' />
-          <span className='truncate'>{item.title}</span>
-        </CommandItem>
-        {depth === 0
-          && (item.children || []).map(child => (
-            <CommandItem
-              key={child.id}
-              value={`${child.title} ${child.path} ${(child.keywords || []).join(' ')}`}
-              onSelect={() => handleChildSelect(child.path)}
-              className={cn(
-                'h-9 rounded-md px-3',
-                'pl-8 text-sm text-neutral-300'
-              )}
-            >
-              <span aria-hidden className='mr-1'>
-                ↳
-              </span>
-              <span className='truncate'>{child.title}</span>
-            </CommandItem>
-          ))}
-      </>
-    )
-  }
-)
+  return (
+    <>
+      <CommandItem
+        value={`${item.title} ${item.path} ${(item.keywords || []).join(' ')}`}
+        onSelect={handleSelect}
+        className={cn(
+          'h-9 rounded-md px-3 font-medium',
+          depth > 0 && 'text-neutral-200',
+          depth > 0 && pad
+        )}
+      >
+        <TablerArrowRight className='size-4' />
+        <span className='truncate'>{item.title}</span>
+      </CommandItem>
+      {depth === 0
+        && (item.children || []).map(child => (
+          <CommandItem
+            key={child.id}
+            value={`${child.title} ${child.path} ${(child.keywords || []).join(' ')}`}
+            onSelect={() => handleChildSelect(child.path)}
+            className={cn(
+              'h-9 rounded-md px-3',
+              'pl-8 text-sm text-neutral-300'
+            )}
+          >
+            <span aria-hidden className='mr-1'>
+              ↳
+            </span>
+            <span className='truncate'>{child.title}</span>
+          </CommandItem>
+        ))}
+    </>
+  )
+}
 
-ItemRow.displayName = 'ItemRow'
+function useSearchIndex() {
+  const [groups, setGroups] = useState<SearchGroup[] | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const abortControllerRef = useRef<AbortController | null>(null)
+  const hasFetched = useRef(false)
+  const fetchPromiseRef = useRef<Promise<void> | null>(null)
 
-const useSearchIndex = () => {
-  const [groups, setGroups] = React.useState<SearchGroup[] | null>(null)
-  const [loading, setLoading] = React.useState(false)
-  const [error, setError] = React.useState<string | null>(null)
-  const abortControllerRef = React.useRef<AbortController | null>(null)
-  const hasFetched = React.useRef(false)
-  const fetchPromiseRef = React.useRef<Promise<void> | null>(null)
-
-  const prefetch = useCallback(async () => {
-    // Return existing promise hvis allerede i gang
+  const prefetch = async () => {
     if (fetchPromiseRef.current) {
       return fetchPromiseRef.current
     }
@@ -193,9 +179,9 @@ const useSearchIndex = () => {
 
     fetchPromiseRef.current = fetchPromise
     return fetchPromise
-  }, [])
+  }
 
-  React.useEffect(() => {
+  useEffect(() => {
     return () => {
       if (abortControllerRef.current) {
         abortControllerRef.current.abort()
@@ -206,36 +192,27 @@ const useSearchIndex = () => {
   return { groups, loading, error, prefetch }
 }
 
-const SearchResults = memo(
-  ({
-    groups,
-    onSelect
-  }: {
-    groups: SearchGroup[] | null
-    onSelect: (path: string) => void
-  }) => {
-    if (!groups) return null
+function SearchResults({
+  groups,
+  onSelect
+}: {
+  groups: SearchGroup[] | null
+  onSelect: (path: string) => void
+}) {
+  if (!groups) return null
 
-    return (
-      <>
-        {groups.map(group => (
-          <CommandGroup key={group.key} heading={group.label}>
-            {group.items.map(item => (
-              <ItemRow
-                key={item.id}
-                item={item}
-                depth={0}
-                onSelect={onSelect}
-              />
-            ))}
-          </CommandGroup>
-        ))}
-      </>
-    )
-  }
-)
-
-SearchResults.displayName = 'SearchResults'
+  return (
+    <>
+      {groups.map(group => (
+        <CommandGroup key={group.key} heading={group.label}>
+          {group.items.map(item => (
+            <ItemRow key={item.id} item={item} depth={0} onSelect={onSelect} />
+          ))}
+        </CommandGroup>
+      ))}
+    </>
+  )
+}
 
 export function HeaderSearch({ className }: { className?: string }) {
   const [open, setOpen] = useState(false)
@@ -246,22 +223,17 @@ export function HeaderSearch({ className }: { className?: string }) {
 
   useCommandK(open, setOpen)
 
-  // Aggressive prefetch - start tidligere!
-  const handlePrefetch = useCallback(() => {
-    // Clear existing timeout
+  const handlePrefetch = () => {
     if (prefetchTimeoutRef.current) {
       clearTimeout(prefetchTimeoutRef.current)
     }
-
-    // Start prefetch med litt delay for å unngå spam
     prefetchTimeoutRef.current = setTimeout(() => {
       startTransition(() => {
         prefetch()
       })
-    }, 100) // Liten delay for å unngå at hver mousemove trigger fetch
-  }, [prefetch])
+    }, 100)
+  }
 
-  // Cleanup timeout on unmount
   useEffect(() => {
     return () => {
       if (prefetchTimeoutRef.current) {
@@ -270,44 +242,33 @@ export function HeaderSearch({ className }: { className?: string }) {
     }
   }, [])
 
-  // KRITISK: Optimalisert onClick handler
-  const handleOpenDialog = useCallback(() => {
-    // Step 1: Åpne dialog umiddelbart (optimistisk UI)
+  const handleOpenDialog = () => {
     setOpen(true)
-
-    // Step 2: Start prefetch hvis ikke allerede gjort
-    // Dette kjører i bakgrunnen mens dialog åpner
     if (!groups && !loading) {
       prefetch()
     }
-  }, [groups, loading, prefetch])
+  }
 
-  const handleNavigate = useCallback(
-    (path: string) => {
-      setOpen(false)
-      startTransition(() => {
-        router.push(path as Route)
-      })
-    },
-    [router]
-  )
+  const handleNavigate = (path: string) => {
+    setOpen(false)
+    startTransition(() => {
+      router.push(path as Route)
+    })
+  }
 
-  const buttonProps = React.useMemo(
-    () => ({
-      'type': 'button' as const,
-      'onClick': handleOpenDialog, // Optimalisert handler
-      'onMouseEnter': handlePrefetch,
-      'onFocus': handlePrefetch,
-      'onTouchStart': handlePrefetch,
-      'aria-label': 'Åpne søk (⌘/Ctrl + K)',
-      'className': cn(
-        'group relative hidden h-9 w-[14rem] items-center gap-2 rounded-md border border-neutral-800 px-3 text-left text-sm text-muted-foreground outline-none transition md:flex',
-        'hover:border-white/20 focus-visible:border-white/30',
-        className
-      )
-    }),
-    [className, handlePrefetch, handleOpenDialog]
-  )
+  const buttonProps = {
+    'type': 'button' as const,
+    'onClick': handleOpenDialog,
+    'onMouseEnter': handlePrefetch,
+    'onFocus': handlePrefetch,
+    'onTouchStart': handlePrefetch,
+    'aria-label': 'Åpne søk (⌘/Ctrl + K)',
+    'className': cn(
+      'group relative hidden h-9 w-[14rem] items-center gap-2 rounded-md border border-neutral-800 px-3 text-left text-sm text-muted-foreground outline-none transition md:flex',
+      'hover:border-white/20 focus-visible:border-white/30',
+      className
+    )
+  }
 
   return (
     <>

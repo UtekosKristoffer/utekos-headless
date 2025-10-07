@@ -1,13 +1,13 @@
 'use client'
 
 import { getInitialAvailableOptions } from '@/components/ProductCard/getInitialAvailableOptions'
+import { findMatchingVariant } from '@/components/ProductCard/findMatchingVariant'
 import { Button } from '@/components/ui/button'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import { formatPrice } from '@/lib/utils/formatPrice'
 import type { ShopifyProduct } from '@types'
 import { ArrowRightIcon, PercentIcon } from 'lucide-react'
 import Image from 'next/image'
-import { useMemo } from 'react'
 
 interface UpsellItemProps {
   product: ShopifyProduct
@@ -17,17 +17,8 @@ interface UpsellItemProps {
 export function UpsellItem({ product, showDiscountHint }: UpsellItemProps) {
   const cartActor = CartMutationContext.useActorRef()
 
-  const selectedOptions = useMemo(
-    () => getInitialAvailableOptions(product),
-    [product]
-  )
-  const selectedVariant = useMemo(() => {
-    return product.variants.edges.find(({ node: variant }) =>
-      variant.selectedOptions.every(
-        option => selectedOptions[option.name] === option.value
-      )
-    )?.node
-  }, [selectedOptions, product.variants.edges])
+  const selectedOptions = getInitialAvailableOptions(product)
+  const selectedVariant = findMatchingVariant(product, selectedOptions)
 
   const originalPrice = parseFloat(product.priceRange.minVariantPrice.amount)
   const discountedPrice = originalPrice * 0.9 // 10% rabatt

@@ -1,25 +1,20 @@
+/*eslint-disable react-hooks/exhaustive-deps*/
+
 import { createVariantReducer } from '@/lib/utils/createVariantReducer'
-import { findVariantFromUrl } from '@/lib/utils/findVariantfromUrl'
 import { flattenVariants } from '@/lib/utils/flattenVariants'
 import { useSearchParams } from 'next/navigation'
-import { useEffect, useMemo, useReducer } from 'react'
+import { useEffect, useReducer } from 'react'
 import type { ShopifyProduct } from '@types'
 
 export function useVariantState(product: ShopifyProduct | undefined) {
-  const variantReducer = useMemo(
-    () => (product ? createVariantReducer(product) : null),
-    [product]
-  )
+  const variantReducer = product ? createVariantReducer(product) : null
 
   const [variantState, dispatch] = useReducer(
     variantReducer || (() => ({ status: 'idle' as const })),
     { status: 'idle' as const }
   )
 
-  const allVariants = useMemo(() => {
-    if (!product) return []
-    return flattenVariants(product) || []
-  }, [product])
+  const allVariants = product ? flattenVariants(product) || [] : []
 
   const searchParams = useSearchParams()
   const variantIdFromUrl = searchParams.get('variant')

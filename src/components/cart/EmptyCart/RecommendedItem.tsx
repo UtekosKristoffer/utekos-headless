@@ -1,6 +1,7 @@
 'use client'
 
 import { getInitialAvailableOptions } from '@/components/ProductCard/getInitialAvailableOptions'
+import { findMatchingVariant } from '@/components/ProductCard/findMatchingVariant'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
@@ -9,23 +10,12 @@ import { formatPrice } from '@/lib/utils/formatPrice'
 import type { ShopifyProduct } from '@types'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useMemo } from 'react'
 
 export function RecommendedItem({ product }: { product: ShopifyProduct }) {
   const cartActor = CartMutationContext.useActorRef()
 
-  const selectedOptions = useMemo(
-    () => getInitialAvailableOptions(product),
-    [product]
-  )
-
-  const selectedVariant = useMemo(() => {
-    return product.variants.edges.find(({ node: variant }) =>
-      variant.selectedOptions.every(
-        option => selectedOptions[option.name] === option.value
-      )
-    )?.node
-  }, [selectedOptions, product.variants.edges])
+  const selectedOptions = getInitialAvailableOptions(product)
+  const selectedVariant = findMatchingVariant(product, selectedOptions)
 
   const handleAddToCart = () => {
     if (selectedVariant) {
@@ -37,7 +27,7 @@ export function RecommendedItem({ product }: { product: ShopifyProduct }) {
   }
 
   return (
-    <div className='flex justify-center items-center gap-4'>
+    <div className='flex items-center gap-4'>
       <Link
         href={`/produkter/${product.handle}`}
         onClick={() => cartStore.send({ type: 'CLOSE' })}

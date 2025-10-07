@@ -1,9 +1,7 @@
+// Path: src/components/BenefitCard.tsx
 'use client'
 
-import { memo } from 'react'
 import { Check } from 'lucide-react'
-import { useInView } from '@/hooks/useInView'
-import { cn } from '@/lib/utils/className'
 
 interface Benefit {
   label: string
@@ -16,20 +14,11 @@ interface BenefitCardProps {
   delay: number
 }
 
-export const BenefitCard = memo(function BenefitCard({
-  benefit,
-  delay
-}: BenefitCardProps) {
-  const [ref, isInView] = useInView({ threshold: 0.5 })
-
+export function BenefitCard({ benefit, delay }: BenefitCardProps) {
   return (
     <li
-      ref={ref}
-      className={cn(
-        'will-animate-fade-in-left group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all duration-300 hover:translate-x-1',
-        isInView && 'is-in-view'
-      )}
-      style={{ '--transition-delay': `${delay}s` } as React.CSSProperties}
+      className='animate-fade-in-on-scroll group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all duration-300 hover:translate-x-1'
+      style={{ '--animation-delay': `${delay}s` } as React.CSSProperties}
     >
       {/* Aurora gradient effect */}
       <div
@@ -60,4 +49,4 @@ export const BenefitCard = memo(function BenefitCard({
       </div>
     </li>
   )
-})
+}

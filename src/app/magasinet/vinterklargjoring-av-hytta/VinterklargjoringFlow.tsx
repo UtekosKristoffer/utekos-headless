@@ -11,7 +11,7 @@ import {
   UserCheck,
   Building2
 } from 'lucide-react'
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils/className'
 import { useMediaQuery } from '@/hooks/use-media-query'
 
@@ -42,11 +42,9 @@ function IconRenderer({
 
 // --- Node Data ---
 const initialNodes = [
-  // Kategori-titler
   { id: 'ute', data: { label: 'UTE' }, position: { x: 360, y: 0 } },
   { id: 'inne', data: { label: 'INNE' }, position: { x: 360, y: 250 } },
   { id: 'systemer', data: { label: 'SYSTEMER' }, position: { x: 360, y: 500 } },
-  // Ute-noder
   {
     id: 'tak',
     data: {
@@ -78,7 +76,6 @@ const initialNodes = [
       shadowColor: '#94a3b8'
     }
   },
-  // Inne-noder
   {
     id: 'mus',
     data: {
@@ -109,7 +106,6 @@ const initialNodes = [
       shadowColor: '#f59e0b'
     }
   },
-  // Systemer-noder
   {
     id: 'vann',
     data: {
@@ -149,8 +145,57 @@ const categories = {
   SYSTEMER: ['vann', 'strom', 'personlig-komfort']
 }
 
-// --- Komponenter for visning ---
+// --- Funksjon for å kalkulere desktop layout (kjøres kun én gang) ---
+function calculateDesktopLayout() {
+  const layoutedNodes: any[] = []
+  const edges: any[] = []
+  const ROW_GAP = 250
+  const CARD_HORIZONTAL_GAP = 40
+  const NODE_WIDTH = 280
 
+  Object.keys(categories).forEach((key, rowIndex) => {
+    const categoryKey = key.toLowerCase()
+    const parent = initialNodes.find(n => n.id === categoryKey)!
+    const children = initialNodes.filter(n =>
+      categories[key as keyof typeof categories].includes(n.id)
+    )
+    const rowY = rowIndex * ROW_GAP
+    const childrenCount = children.length
+    const totalRowWidth =
+      childrenCount * NODE_WIDTH + (childrenCount - 1) * CARD_HORIZONTAL_GAP
+    const rowStartX = (1200 - totalRowWidth) / 2
+
+    layoutedNodes.push({
+      ...parent,
+      position: { x: (1200 - NODE_WIDTH) / 2, y: rowY - 80 }
+    })
+
+    children.forEach((child, childIndex) => {
+      layoutedNodes.push({
+        ...child,
+        position: {
+          x: rowStartX + childIndex * (NODE_WIDTH + CARD_HORIZONTAL_GAP),
+          y: rowY
+        }
+      })
+      edges.push({
+        id: `e-${parent.id}-${child.id}`,
+        sourceId: parent.id,
+        targetId: child.id,
+        style: {
+          stroke: child.data.shadowColor,
+          strokeWidth: 2,
+          strokeDasharray: '5 5'
+        }
+      })
+    })
+  })
+  return { nodes: layoutedNodes, edges }
+}
+
+const desktopLayout = calculateDesktopLayout()
+
+// --- Komponenter for visning ---
 function CustomNode({ data }: { data: (typeof initialNodes)[0]['data'] }) {
   if (!data.icon) return null
   return (
@@ -181,18 +226,16 @@ function MobileFlow() {
   const [activeCategory, setActiveCategory] =
     useState<keyof typeof categories>('UTE')
 
-  const visibleNodes = useMemo(() => {
-    const parentNode = initialNodes.find(
-      n => n.id === activeCategory.toLowerCase()
-    )
-    const childNodeIds = categories[activeCategory]
-    const childNodes = initialNodes.filter(n => childNodeIds.includes(n.id))
-    return [parentNode, ...childNodes].filter(Boolean)
-  }, [activeCategory])
+  const parentNode = initialNodes.find(
+    n => n.id === activeCategory.toLowerCase()
+  )
+  const childNodeIds = categories[activeCategory]
+  const childNodes = initialNodes.filter(n => childNodeIds.includes(n.id))
+  const visibleNodes = [parentNode, ...childNodes].filter(Boolean)
 
   return (
     <div className='flex h-full w-full flex-col'>
-      <div className='flex justify-center gap-2 p-4 border-b border-neutral-800'>
+      <div className='flex justify-center gap-2 border-b border-neutral-800 p-4'>
         {(Object.keys(categories) as Array<keyof typeof categories>).map(
           category => (
             <button
@@ -210,9 +253,9 @@ function MobileFlow() {
           )
         )}
       </div>
-      <div className='flex-grow overflow-y-auto p-4 space-y-4'>
+      <div className='flex-grow space-y-4 overflow-y-auto p-4'>
         {visibleNodes.map(node => {
-          if (!node) return null // Korrigering: Sjekk for undefined
+          if (!node) return null
           return (
             <div key={node.id}>
               {(
@@ -220,7 +263,7 @@ function MobileFlow() {
                 || node.id === 'inne'
                 || node.id === 'systemer'
               ) ?
-                <h3 className='text-lg font-semibold text-center py-2'>
+                <h3 className='py-2 text-center text-lg font-semibold'>
                   {node.data.label}
                 </h3>
               : <CustomNode data={node.data} />}
@@ -233,63 +276,21 @@ function MobileFlow() {
 }
 
 function DesktopFlow() {
-  const ROW_GAP = 250
-  const CARD_HORIZONTAL_GAP = 40
   const NODE_WIDTH = 280
-
-  const layoutedElements = useMemo(() => {
-    const layoutedNodes: any[] = []
-    const edges: any[] = []
-
-    Object.keys(categories).forEach((key, rowIndex) => {
-      const categoryKey = key.toLowerCase()
-      const parent = initialNodes.find(n => n.id === categoryKey)!
-      const children = initialNodes.filter(n =>
-        categories[key as keyof typeof categories].includes(n.id)
-      )
-
-      const rowY = rowIndex * ROW_GAP
-      const childrenCount = children.length
-      const totalRowWidth =
-        childrenCount * NODE_WIDTH + (childrenCount - 1) * CARD_HORIZONTAL_GAP
-      const rowStartX = (1200 - totalRowWidth) / 2
-
-      parent.position = { x: (1200 - NODE_WIDTH) / 2, y: rowY - 80 }
-      layoutedNodes.push(parent)
-
-      children.forEach((child, childIndex) => {
-        child.position = {
-          x: rowStartX + childIndex * (NODE_WIDTH + CARD_HORIZONTAL_GAP),
-          y: rowY
-        }
-        layoutedNodes.push(child)
-        edges.push({
-          id: `e-${parent.id}-${child.id}`,
-          source: parent,
-          target: child,
-          style: {
-            stroke: child.data.shadowColor,
-            strokeWidth: 2,
-            strokeDasharray: '5 5'
-          }
-        })
-      })
-    })
-    return { nodes: layoutedNodes, edges }
-  }, [])
-
   return (
-    <div className='relative w-full h-full dot-pattern'>
-      <svg viewBox='0 0 1200 720' className='w-full h-full' aria-hidden='true'>
-        {layoutedElements.edges.map(edge => {
-          const sourceY = edge.source.position.y + 40
-          const sourceX = edge.source.position.x + NODE_WIDTH / 2
-          const targetY = edge.target.position.y
-          const targetX = edge.target.position.x + NODE_WIDTH / 2
+    <div className='dot-pattern relative h-full w-full'>
+      <svg viewBox='0 0 1200 720' className='h-full w-full' aria-hidden='true'>
+        {desktopLayout.edges.map(edge => {
+          const source = desktopLayout.nodes.find(n => n.id === edge.sourceId)!
+          const target = desktopLayout.nodes.find(n => n.id === edge.targetId)!
+          const sourceY = source.position.y + 40
+          const sourceX = source.position.x + NODE_WIDTH / 2
+          const targetY = target.position.y
+          const targetX = target.position.x + NODE_WIDTH / 2
           const pathD = `M ${sourceX},${sourceY} C ${sourceX},${sourceY + 60} ${targetX},${targetY - 60} ${targetX},${targetY}`
           return <path key={edge.id} d={pathD} fill='none' style={edge.style} />
         })}
-        {layoutedElements.nodes.map(node => (
+        {desktopLayout.nodes.map(node => (
           <foreignObject
             key={node.id}
             x={node.position.x}
@@ -317,7 +318,6 @@ export default function VinterklargjoringFlow() {
     setIsClient(true)
   }, [])
 
-  // Forhindrer hydration mismatch
   if (!isClient) {
     return (
       <div className='h-[720px] w-full overflow-hidden rounded-lg border border-neutral-800 bg-background' />

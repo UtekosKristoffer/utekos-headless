@@ -1,25 +1,24 @@
-import { useMemo } from 'react'
 import { reshapeMetaobject } from '@/lib/utils/reshapeMetaobject'
 import type { ShopifyProduct } from '@types'
 
-export function useProductWithMetafields(productData: ShopifyProduct | undefined) {
-  return useMemo(() => {
-    if (!productData) return undefined
+export function reshapeProductWithMetafields(
+  productData: ShopifyProduct | undefined
+) {
+  if (!productData) return undefined
 
-    return {
-      ...productData,
-      variants: {
-        ...productData.variants,
-        edges: productData.variants.edges.map(edge => ({
-          ...edge,
-          node: {
-            ...edge.node,
-            variantProfileData: reshapeMetaobject(
-              edge.node.metafield?.reference?.fields
-            )
-          }
-        }))
-      }
+  return {
+    ...productData,
+    variants: {
+      ...productData.variants,
+      edges: productData.variants.edges.map(edge => ({
+        ...edge,
+        node: {
+          ...edge.node,
+          variantProfileData: reshapeMetaobject(
+            edge.node.metafield?.reference?.fields
+          )
+        }
+      }))
     }
-  }, [productData])
+  }
 }

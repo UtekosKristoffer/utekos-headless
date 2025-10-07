@@ -19,19 +19,16 @@ export function CartMutationClient({
 }) {
   const queryClient = useQueryClient()
 
-  const updateCartCache = React.useCallback(
-    (newCart: Cart) => {
-      if (newCart?.id) {
-        queryClient.setQueryData(['cart', newCart.id], newCart)
-      }
-    },
-    [queryClient]
-  )
+  const updateCartCache = (newCart: Cart) => {
+    if (newCart?.id) {
+      queryClient.setQueryData(['cart', newCart.id], newCart)
+    }
+  }
 
-  const cartMutationMachine = React.useMemo(
-    // ENDRET: Sender inn de nye funksjonene
-    () => createCartMutationMachine(actions, updateCartCache, setCartId),
-    [actions, updateCartCache, setCartId]
+  const cartMutationMachine = createCartMutationMachine(
+    actions,
+    updateCartCache,
+    setCartId
   )
 
   return (

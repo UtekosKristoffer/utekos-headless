@@ -5,63 +5,20 @@ import { useQuery } from '@tanstack/react-query'
 import { useCartId } from '@/hooks/useCartId'
 import { fetchCart } from '@/lib/helpers/cart/fetchCart'
 import type { Cart } from '@types'
-import { useMemo, useCallback } from 'react'
 
 export const useCartQuery = () => {
   const cartId = useCartId()
 
-  // Stabilisert query config
-  const queryConfig = useMemo(
-    () => ({
-      queryKey: ['cart', cartId] as const,
-      queryFn: async () => {
-        if (!cartId) return null
-        return fetchCart(cartId)
-      },
-      enabled: !!cartId,
-      staleTime: 1000 * 60, // 1 minute stale time
-      gcTime: 1000 * 60 * 10, // 10 minutes garbage collection
-      refetchOnWindowFocus: false, // Disable auto-refetch on focus
-      refetchOnMount: false // Don't refetch on mount if data exists
-    }),
-    [cartId]
-  )
-
-  return useQuery<Cart | null>(queryConfig)
-}
-
-// Selective cart total quantity hook
-export const useCartTotalQuantity = () => {
-  const cartId = useCartId()
-
-  return useQuery({
-    queryKey: ['cart', cartId],
+  return useQuery<Cart | null>({
+    queryKey: ['cart', cartId] as const,
     queryFn: async () => {
       if (!cartId) return null
       return fetchCart(cartId)
     },
     enabled: !!cartId,
-    select: useCallback((data: Cart | null) => data?.totalQuantity ?? 0, []),
-    staleTime: 1000 * 60,
-    gcTime: 1000 * 60 * 10,
-    refetchOnWindowFocus: false
-  })
-}
-
-// Selective cart lines hook
-export const useCartLinesOnly = () => {
-  const cartId = useCartId()
-
-  return useQuery({
-    queryKey: ['cart', cartId],
-    queryFn: async () => {
-      if (!cartId) return null
-      return fetchCart(cartId)
-    },
-    enabled: !!cartId,
-    select: useCallback((data: Cart | null) => data?.lines ?? [], []),
-    staleTime: 1000 * 60,
-    gcTime: 1000 * 60 * 10,
-    refetchOnWindowFocus: false
+    staleTime: 1000 * 60, // 1 minute stale time
+    gcTime: 1000 * 60 * 10, // 10 minutes garbage collection
+    refetchOnWindowFocus: false, // Disable auto-refetch on focus
+    refetchOnMount: false // Don't refetch on mount if data exists
   })
 }

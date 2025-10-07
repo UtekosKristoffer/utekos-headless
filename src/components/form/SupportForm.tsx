@@ -29,7 +29,7 @@ import {
 } from '@/lib/actions/submitContactForm'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import { useActionState, useEffect, useMemo } from 'react'
+import { useActionState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import type { z } from '@/db/zod/zodClient'
@@ -37,15 +37,6 @@ import type { z } from '@/db/zod/zodClient'
 type ContactFormData = z.infer<typeof ClientContactFormSchema>
 
 const initialState: ContactFormState = { message: '' }
-
-// Viser feilmelding kun når feltet er berørt (touched) eller skjemaet er sendt inn
-function useShouldShowError(form: ReturnType<typeof useForm<ContactFormData>>) {
-  return useMemo(
-    () => (name: keyof ContactFormData) =>
-      form.formState.isSubmitted || !!form.formState.touchedFields[name],
-    [form.formState.isSubmitted, form.formState.touchedFields]
-  )
-}
 
 export function SupportForm() {
   const [state, formAction, isPending] = useActionState(
@@ -69,7 +60,6 @@ export function SupportForm() {
     criteriaMode: 'all'
   })
 
-  const shouldShowError = useShouldShowError(form)
   const messageValue = form.watch('message') ?? ''
   const messageChars = messageValue.length
   const messageMin = 10
@@ -81,7 +71,6 @@ export function SupportForm() {
       toast.error('Validering feilet', {
         description: 'Vennligst sjekk feltene med feilmeldinger.'
       })
-      // Sett server-feil på feltene uten å trigge ny validering
       Object.entries(state.errors).forEach(([key, value]) => {
         if (value && value.length > 0) {
           form.setError(key as keyof ContactFormData, {
@@ -92,15 +81,7 @@ export function SupportForm() {
       })
     } else {
       toast.success(state.message)
-      form.reset({
-        name: '',
-        email: '',
-        phone: '',
-        country: '',
-        orderNumber: '',
-        message: '',
-        privacy: false
-      })
+      form.reset()
     }
   }, [state, form])
 
@@ -121,7 +102,7 @@ export function SupportForm() {
                   className='h-12 rounded-none border-neutral-800 bg-background'
                 />
               </FormControl>
-              {shouldShowError('email') && <FormMessage />}
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -141,7 +122,7 @@ export function SupportForm() {
                     className='h-12 rounded-none border-neutral-800 bg-background'
                   />
                 </FormControl>
-                {shouldShowError('name') && <FormMessage />}
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -162,7 +143,7 @@ export function SupportForm() {
                     className='h-12 rounded-none border-neutral-800 bg-background'
                   />
                 </FormControl>
-                {shouldShowError('phone') && <FormMessage />}
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -195,7 +176,7 @@ export function SupportForm() {
                   ))}
                 </SelectContent>
               </Select>
-              {shouldShowError('country') && <FormMessage />}
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -215,7 +196,7 @@ export function SupportForm() {
                   className='h-12 rounded-none border-neutral-800 bg-background'
                 />
               </FormControl>
-              {shouldShowError('orderNumber') && <FormMessage />}
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -239,14 +220,14 @@ export function SupportForm() {
               <div className='mt-1 flex items-center justify-between text-xs text-muted-foreground'>
                 <span>
                   {messageChars < messageMin ?
-                    `Melding må være minst ${messageMin} tegn.`
+                    `Må være minst ${messageMin} tegn.`
                   : 'Ser bra ut ✅'}
                 </span>
                 <span>
                   {messageChars}/{messageMin} tegn
                 </span>
               </div>
-              {shouldShowError('message') && <FormMessage />}
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -255,7 +236,7 @@ export function SupportForm() {
           control={form.control}
           name='privacy'
           render={({ field }) => (
-            <FormItem className='flex flex-row items-center justify-between border border-neutral-800 p-4'>
+            <FormItem className='flex flex-row items-center justify-between rounded-none border border-neutral-800 p-4'>
               <div className='flex-1 space-y-0.5 pr-4'>
                 <FormLabel className='text-base'>Personvern</FormLabel>
                 <FormDescription>
@@ -267,7 +248,6 @@ export function SupportForm() {
                 </FormDescription>
               </div>
               <FormControl>
-                {/* LØSNING: Legg til skjult input for Switch */}
                 <div>
                   <input
                     type='hidden'
@@ -280,14 +260,10 @@ export function SupportForm() {
                   />
                 </div>
               </FormControl>
+              <FormMessage className='absolute bottom-[-1.25rem] left-0' />
             </FormItem>
           )}
         />
-        {shouldShowError('privacy') && (
-          <p className='text-sm text-destructive'>
-            Du må godta personvernerklæringen.
-          </p>
-        )}
 
         <SupportPageButton
           type='submit'
