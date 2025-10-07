@@ -35,14 +35,14 @@ export function BoatingHeroSection() {
             </Link>
             <span>/</span>
             <span className='inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-900/10 px-3 py-1'>
-              <Anchor className='h-3 w-3 text-sky-400' />
-              <span className='font-medium text-sky-400'>Båtliv</span>
+              <Anchor className='h-3 w-3 text-sky-800' />
+              <span className='font-medium text-sky-600'>Båtliv</span>
             </span>
           </div>
 
           <h1 className='boat-hero-title text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'>
             Båtliv uten{' '}
-            <span className='bg-gradient-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent'>
+            <span className='bg-gradient-to-r from-sky-800 to-sky-600 bg-clip-text text-transparent'>
               å fryse
             </span>
           </h1>

@@ -24,19 +24,24 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
       </h2>
       <Carousel
         opts={{
-          align: 'start'
+          align: 'start',
+          loop: true
         }}
         className='w-full'
       >
         <CarouselContent className='-ml-4'>
-          {products.map(product => {
+          {products.map((product, index) => {
             const colorHexMap = createColorHexMap(product)
             return (
               <CarouselItem
                 key={product.id}
                 className='h-auto pl-4 basis-2/3 sm:basis-1/2 md:basis-1/3 lg:basis-1/4'
               >
-                <ProductCard product={product} colorHexMap={colorHexMap} />
+                <ProductCard
+                  product={product}
+                  colorHexMap={colorHexMap}
+                  isPriority={index < 4}
+                />
               </CarouselItem>
             )
           })}

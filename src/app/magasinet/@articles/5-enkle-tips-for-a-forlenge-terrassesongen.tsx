@@ -26,9 +26,13 @@ export const TerrasseArticle = () => {
       </figure>
 
       <p>
-        Med noen enkle, men effektive grep, kan du forvandle terrassen din fra
-        en ren sommerdestinasjon til et favorittsted som kan brukes store deler
-        av året. Her er fem nøkkelelementer visualisert for deg:
+        Med noen enkle, men effektive grep kan du forvandle terrassen din fra en
+        ren sommerdestinasjon til et favorittsted som kan brukes store deler av
+        året. Ved å kombinere varme, skjerming, gode materialer og riktig lys
+        skaper du en sone som faktisk inviterer til bruk – også når temperaturen
+        faller. Løsningene er skalerbare for både små og store uteplasser, enkle
+        å sette ut i livet, og tilpasset nordisk klima. Her er fem
+        nøkkelelementer visualisert for deg:
       </p>
 
       <div className='not-prose my-12'>
@@ -41,7 +45,13 @@ export const TerrasseArticle = () => {
         atmosfæren, men den virkelige game-changeren er personlig varme. I
         stedet for å prøve å varme opp all luften rundt deg med en
         terrassevarmer, er det langt mer effektivt og komfortabelt å holde seg
-        selv varm.{' '}
+        selv varm. Med målrettet kroppsnær varme holder du jevn temperatur selv
+        i trekk, bruker mindre energi, og kan sitte lengre uten å flytte deg
+        nærmere flammen. Kombinér derfor lag med ull og skinn, vindskjerming i
+        sittehøyde og en personlig varmekilde som treffer overkropp og hender—så
+        får du umiddelbar, stabil komfort uten overoppheting av omgivelsene.
+        Resultatet er mer tid ute, mindre energisvinn og en terrasse som faktisk
+        leverer på kos hele sesongen.{' '}
       </p>
 
       <Card className='my-12 not-prose text-center bg-gradient-to-br from-primary/20 to-transparent border-neutral-800'>

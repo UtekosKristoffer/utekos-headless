@@ -1,7 +1,5 @@
 // Path: src/components/jsx/ColorSelector/ColorSelector.tsx
 
-'use client'
-
 import { OptionButton } from '@/components/jsx/OptionButton'
 import type { ColorSelectorProps } from '@types'
 

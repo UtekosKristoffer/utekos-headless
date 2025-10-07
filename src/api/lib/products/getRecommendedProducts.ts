@@ -11,7 +11,7 @@ export async function getRecommendedProducts(): Promise<ShopifyProduct[]> {
   cacheTag(TAGS.products)
   cacheLife('days')
   try {
-    const response = await getProducts({ first: 7 })
+    const response = await getProducts({ first: 10 })
 
     if (response.success && response.body) {
       return response.body

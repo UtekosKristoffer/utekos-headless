@@ -13,7 +13,7 @@ export async function getAccessoryProducts(): Promise<ShopifyProduct[]> {
   cacheLife('days')
   try {
     const response = await getProducts({
-      first: 7,
+      first: 10,
       query: 'tag:"tilbehør"'
     })
 

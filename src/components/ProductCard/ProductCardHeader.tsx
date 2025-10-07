@@ -1,6 +1,3 @@
-// Path: src/components/ProductCard/ProductCardHeader.tsx
-'use client'
-
 import { CardHeader, CardTitle } from '@/components/ui/card'
 import type { ProductCardHeaderProps } from '@types'
 import Link from 'next/link'

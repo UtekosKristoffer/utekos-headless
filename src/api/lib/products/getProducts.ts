@@ -6,20 +6,21 @@ import { removeEdgesAndNodes } from '@/lib/utils/removeEdgesAndNodes'
 import { reshapeProducts } from '@/lib/utils/reshapeProducts'
 import type {
   GetProductsParams,
+  GetProductsResponse,
   ShopifyProduct,
-  ShopifyProductsOperation,
-  GetProductsResponse
+  ShopifyProductsOperation
 } from '@types'
-import { TAGS } from '../../constants'
 import {
-  unstable_cacheTag as cacheTag,
-  unstable_cacheLife as cacheLife
+  unstable_cacheLife as cacheLife,
+  unstable_cacheTag as cacheTag
 } from 'next/cache'
+import { TAGS } from '../../constants'
+
 export async function fetchProducts(
   params: GetProductsParams = {}
 ): Promise<ShopifyProduct[]> {
   const variables = {
-    first: 7,
+    first: 12,
     ...params
   }
 

@@ -1,5 +1,4 @@
 // Path: src/components/cart/CartHeader.tsx
-'use client'
 
 import { Button } from '@/components/ui/button'
 import { cartStore } from '@/lib/state/cartStore'

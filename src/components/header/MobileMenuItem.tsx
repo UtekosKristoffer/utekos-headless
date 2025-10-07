@@ -1,5 +1,3 @@
-'use client'
-
 import Link from 'next/link'
 import { normalizeShopifyUrl } from '@/lib/helpers/normalizers/normalizeShopifyUrl'
 import type { MenuItem } from '@types'

@@ -1,5 +1,5 @@
 // Path: src/hooks/useOptimisticCart.ts
-'use client'
+
 
 import { useCartQuery } from '@/hooks/useCartQuery'
 import { useCartStoreSnapshot } from '@/hooks/useCartStoreSnapshot'

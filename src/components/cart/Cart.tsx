@@ -12,7 +12,7 @@ export function Cart() {
   }, [])
 
   if (!isMounted) {
-    return null // Returner ingenting på serveren
+    return null
   }
 
   return <CartDrawer />

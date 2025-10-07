@@ -6,7 +6,7 @@
 
 import { SupportForm } from '@/components/form/SupportForm'
 import { Toaster } from '@/components/ui/sonner'
-import { Flag, HelpCircle, Leaf, Package } from 'lucide-react'
+import { HelpCircle, Leaf, Package } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -220,22 +220,24 @@ export default function SupportPage() {
               <div className='border-t border-white/10'>
                 <div className='grid grid-cols-2'>
                   <div className='border-r border-white/10 p-6'>
-                    <h4 className='flex items-center gap-1.5 text-sm font-semibold'>
-                      <Flag className='h-4 w-4' />
-                      100% Norsk Design
+                    <h4 className='flex items-start gap-1.5 text-xs font-semibold'>
+                      <span aria-hidden>🇳🇴</span>
+                      For norske forhold
                     </h4>
                     <p className='mt-1.5 text-xs text-muted-foreground'>
-                      Alle produkter er designet i Norge, for norske forhold.
+                      Våre produkter er utviklet for å forlenge de gode stundene
+                      utendørs, enten det er på en kjølig sommerkveld på hytten
+                      eller en frisk høstdag i båten.
                     </p>
                   </div>
                   <div className='p-6'>
-                    <h4 className='flex items-center gap-1.5 text-sm font-semibold'>
+                    <h4 className='flex items-start gap-1.5 text-xs font-semibold'>
                       <Leaf className='h-4 w-4' />
-                      Bærekraft i Fokus
+                      Investering i komfort
                     </h4>
                     <p className='mt-1.5 text-xs text-muted-foreground'>
-                      Vi velger materialer som deler vårt engasjement for en
-                      bærekraftig fremtid.
+                      Mer enn bare et plagg; det er et verktøy designet for å gi
+                      deg utallige timer med varme og velvære.
                     </p>
                   </div>
                 </div>
@@ -244,9 +246,9 @@ export default function SupportPage() {
               {/* 4. Sitat */}
               <div className='border-t border-white/10 p-6'>
                 <blockquote className='text-sm italic text-muted-foreground'>
-                  &ldquo;Vårt løfte til deg er enkelt: å levere friluftsklær av
-                  ypperste kvalitet som forbedrer din naturopplevelse, uansett
-                  vær.&rdquo;
+                  &ldquo;Vårt løfte til deg er enkelt: å levere komfortplagg av
+                  ypperste kvalitet som lar deg forlenge de gode stundene
+                  utendørs, uansett vær.&rdquo;
                 </blockquote>
                 <p className='mt-3 text-sm font-semibold'>- Utekos Teamet</p>
               </div>
@@ -294,5 +296,3 @@ export default function SupportPage() {
     </>
   )
 }
-
-

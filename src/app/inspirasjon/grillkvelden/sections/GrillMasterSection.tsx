@@ -1,4 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card'
+import Image from 'next/image' // Importer Image-komponent
 
 export function GrillMasterSection() {
   return (
@@ -19,11 +20,15 @@ export function GrillMasterSection() {
                 grillen!&quot;
               </blockquote>
               <div className='flex items-center justify-center gap-4'>
-                <div className='size-12 rounded-full bg-sidebar-foreground' />
+                <Image
+                  src='/hans-age.webp'
+                  alt='Morten P.'
+                  width={48}
+                  height={48}
+                  className='size-12 rounded-full object-cover'
+                />
                 <div className='text-left'>
-                  <p className='font-semibold'>
-                    Morten &quot;Grill-Morten&quot; P.
-                  </p>
+                  <p className='font-semibold'>Hans Åge</p>
                   <p className='text-sm text-muted-foreground'>
                     Hobby-grillmester og livsnyter
                   </p>

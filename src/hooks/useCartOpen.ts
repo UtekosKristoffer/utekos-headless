@@ -1,6 +1,3 @@
-// Path: src/hooks/useCartOpen.ts
-'use client'
-
 import { cartStore } from '@/lib/state/cartStore'
 import { useSelector } from '@xstate/store/react'
 

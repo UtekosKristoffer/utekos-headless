@@ -1,6 +1,4 @@
 // Path: src/components/ProductCard/ProductCardFooter.tsx
-'use client'
-
 import { Button } from '@/components/ui/button'
 import { CardFooter } from '@/components/ui/card'
 import { Loader2 } from 'lucide-react'

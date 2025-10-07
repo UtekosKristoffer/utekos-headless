@@ -1,6 +1,3 @@
-// Path: src/components/cart/EmptyCartRecommendations.tsx
-'use client'
-
 import { useQuery } from '@tanstack/react-query'
 import { RecommendedItem } from './RecommendedItem'
 import type { ShopifyProduct } from '@types'

@@ -125,7 +125,7 @@ export function CTASection() {
                     clipRule="evenodd"
                   />
                 </svg>
-                <span>30 dagers åpent kjøp</span>
+                <span> Trygg handel med Klarna og Vipps</span>
               </div>
             </AnimatedBlock>
           </div>

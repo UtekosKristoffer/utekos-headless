@@ -1,5 +1,3 @@
-'use client'
-
 import { MobileMenuItem } from '@/components/header/MobileMenuItem'
 import {
   Sheet,

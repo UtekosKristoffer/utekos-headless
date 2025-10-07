@@ -61,6 +61,10 @@ export const footerConfig: FooterSection[] = [
         path: '/om-oss' as Route
       },
       {
+        title: 'Fraktinformasjon',
+        path: '/frakt-og-retur' as Route
+      },
+      {
         title: 'Vilkår og betingelser',
         path: '/vilkar-betingelser' as Route
       },
@@ -70,17 +74,26 @@ export const footerConfig: FooterSection[] = [
       }
     ]
   },
-
   {
-    title: 'Frakt og retur',
+    title: 'Bedriftsinformasjon',
     links: [
       {
-        title: 'Fraktinformasjon',
-        path: '/frakt-og-retur' as Route
+        title: 'Kelc As',
+        path: '/' as Route
       },
       {
-        title: 'Retur og bytte',
-        path: '/frakt-og-retur#retur' as Route
+        title: 'Lille Damsgårdsveien 25',
+        path: 'map:Lille Damsgårdsveien 25' as Route,
+        external: true
+      },
+      {
+        title: '5162, Bergen',
+        path: 'map:Lille Damsgårdsveien 25, 5162, Bergen' as Route,
+        external: true
+      },
+      {
+        title: 'Org.nr 925 820 393',
+        path: '/kontaktskjema' as Route
       }
     ]
   }

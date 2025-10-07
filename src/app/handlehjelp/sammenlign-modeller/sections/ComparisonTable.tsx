@@ -76,7 +76,7 @@ export function ComparisonTable() {
               Utekos Dun™
             </th>
             <th className='border-b border-neutral-800 p-4 text-center font-semibold'>
-              Utekos Fiberdun™
+              Utekos Techdun™
             </th>
             <th className='border-b border-neutral-800 p-4 text-center font-semibold'>
               Utekos Mikrofiber™
@@ -85,7 +85,7 @@ export function ComparisonTable() {
         </thead>
         <tbody>
           {comparisonData.map(
-            ({ feature, icon, dun, mikrofiber, fiberdun, iconColor }) => (
+            ({ feature, icon, dun, mikrofiber, techdun, iconColor }) => (
               <tr key={feature}>
                 <td className='flex items-center gap-3 border-b border-neutral-800 p-4'>
                   <IconRenderer
@@ -98,7 +98,7 @@ export function ComparisonTable() {
                   <TableCellContent value={dun} />
                 </td>
                 <td className='border-b border-neutral-800 p-4 text-center font-medium'>
-                  <TableCellContent value={fiberdun} />
+                  <TableCellContent value={techdun} />
                 </td>
                 <td className='border-b border-neutral-800 p-4 text-center font-medium'>
                   <TableCellContent value={mikrofiber} />

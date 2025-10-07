@@ -1,4 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card'
+import Image from 'next/image' // Importer Image-komponent
 
 export function SocialProof() {
   return (
@@ -18,11 +19,17 @@ export function SocialProof() {
                 uten å pakke oss inn i ti tepper.&quot;
               </blockquote>
               <div className='flex items-center justify-center gap-4'>
-                <div className='size-12 rounded-full bg-sidebar-foreground' />
+                <Image // Bruk Image-komponent her
+                  src='/kristin.webp'
+                  alt='Kristin'
+                  width={48} // Matche size-12 (48px)
+                  height={48} // Matche size-12 (48px)
+                  className='size-12 rounded-full object-cover'
+                />
                 <div className='text-left'>
-                  <p className='font-semibold'>Familien Nordmann</p>
+                  <p className='font-semibold'>Kristin</p>
                   <p className='text-sm text-muted-foreground'>
-                    Eneboligeiere fra Asker
+                    Eneboligeier fra Ulvik
                   </p>
                 </div>
               </div>

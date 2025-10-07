@@ -84,7 +84,6 @@ export function SmartCartSuggestions({
     )
   }
 
-  // Logikk for når fri frakt er oppnådd
   const accessoriesToShow = accessoryProducts.filter(
     p => !cartLineProductIds.has(p.id)
   )

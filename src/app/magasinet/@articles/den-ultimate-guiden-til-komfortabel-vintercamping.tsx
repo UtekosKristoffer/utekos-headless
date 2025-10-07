@@ -1,5 +1,5 @@
-import BobilPrepFlow from '@/app/magasinet/den-ultimate-guiden-til-komfortabel-vintercamping/BobilPrepFlow'
-import { VintercampFlow } from '@/app/magasinet/den-ultimate-guiden-til-komfortabel-vintercamping/VinterCampFlow'
+import BobilPrepFlow from '@/app/magasinet/den-ultimate-guiden-til-komfortabel-vintercamping/Bobil/BobilPrepFlow'
+import { VintercampFlow } from '@/app/magasinet/den-ultimate-guiden-til-komfortabel-vintercamping/VinterCamp/VinterCampFlow'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { ArrowRightIcon, CheckIcon } from '@heroicons/react/24/outline'
@@ -10,7 +10,6 @@ import Link from 'next/link'
 import React from 'react'
 
 export const VintercampingArticle = () => {
-  // Hjelpekomponenten for sjekklisten kan bo inne i artikkel-komponenten
   const ChecklistItem = ({ children }: { children: React.ReactNode }) => {
     return (
       <li className='flex items-start gap-3'>
@@ -21,7 +20,7 @@ export const VintercampingArticle = () => {
   }
 
   return (
-    <article className='prose prose-invert prose-lg max-w-4xl mx-auto'>
+    <article className='prose prose-invert prose-lg md:max-w-7xl mx-auto'>
       <figure className='!my-12'>
         <Image
           src={siteImage}
@@ -50,7 +49,7 @@ export const VintercampingArticle = () => {
       </p>
 
       {/* Section 1: Forberedelser */}
-      <h2 className='flex items-center gap-3'>
+      <h2 className='flex items-center gap-3 mt-5'>
         <Snowflake className='text-cyan-400' />
         Fase 1: Bobilen må være klar
       </h2>

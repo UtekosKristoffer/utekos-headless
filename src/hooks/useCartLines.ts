@@ -1,6 +1,4 @@
 // Path: src/hooks/useCartLines.ts
-'use client'
-
 import { useQuery } from '@tanstack/react-query'
 import { useCartId } from '@/hooks/useCartId'
 import { fetchCart } from '@/lib/helpers/cart/fetchCart'

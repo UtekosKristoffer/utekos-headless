@@ -1,6 +1,3 @@
-// Path: src/components/cart/CartFooter.tsx
-'use client'
-
 import * as React from 'react'
 
 import { CheckoutButton } from '@/components/jsx/CheckoutButton'

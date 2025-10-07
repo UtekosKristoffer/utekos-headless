@@ -1,5 +1,4 @@
 // Path: src/hooks/useCartPending.ts
-'use client'
 
 import { cartStore } from '@/lib/state/cartStore'
 import type { CartUserInterfaceContext } from '@types'

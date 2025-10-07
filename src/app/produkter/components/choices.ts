@@ -19,7 +19,7 @@ export const choices: ProductChoice[] = [
     title: 'For uforutsigbart vær',
     description:
       'En robust og lettstelt favoritt som isolerer selv i fuktig vær. Perfekt for båt, bobil og et aktivt uteliv.',
-    href: '/produkter/utekos-fiberdun' as Route,
+    href: '/produkter/utekos-techdun' as Route,
     imageUrl: '/fiberdun.webp',
     linkColor: 'text-cyan-400'
   },

@@ -21,7 +21,8 @@ export type * from './product.types'
 export type * from './seo.types'
 export type * from './state.types'
 export type * from './layout.types'
-
+export type * from './headersearch.types'
+export type * from './option-component'
 export type RootLayoutProps = Readonly<{
   children: React.ReactNode
 }>

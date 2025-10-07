@@ -14,12 +14,16 @@ import Link from 'next/link'
 import type React from 'react'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
+import { findMatchingVariant } from './findMatchingVariant'
 import { getInitialOptionsForProduct } from './getInitialOptionsForProduct'
 import { ProductCardFooter } from './ProductCardFooter'
 import { ProductCardHeader } from './ProductCardHeader'
-import { findMatchingVariant } from './findMatchingVariant'
 
-export function ProductCard({ product, colorHexMap }: ProductCardProps) {
+export function ProductCard({
+  product,
+  colorHexMap,
+  isPriority = false
+}: ProductCardProps & { isPriority?: boolean }) {
   const [selectedOptions, setSelectedOptions] = useState(() =>
     getInitialOptionsForProduct(product)
   )
@@ -89,8 +93,9 @@ export function ProductCard({ product, colorHexMap }: ProductCardProps) {
               src={imageUrl}
               alt={altText}
               fill
-              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+              sizes='(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw'
               className='product-card-image'
+              priority={isPriority}
             />
           </AspectRatio>
         </Link>

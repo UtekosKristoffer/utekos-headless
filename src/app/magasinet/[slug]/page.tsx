@@ -98,7 +98,7 @@ export default async function ArticlePage({
   }
   return (
     <div className='container mx-auto px-4'>
-      <div className='mx-auto max-w-5xl'>
+      <div className='mx-auto md:max-w-7xl'>
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>

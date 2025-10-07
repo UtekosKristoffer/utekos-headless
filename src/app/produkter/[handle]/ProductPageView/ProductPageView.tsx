@@ -6,7 +6,9 @@ import { renderOptionComponent } from '@/app/produkter/[handle]/ProductPageView/
 import { RelatedProducts } from '@/app/produkter/[handle]/RelatedProducts/RelatedProducts'
 import { SpecialOfferCrossSell } from '@/app/produkter/components/SpecialOfferCrossSell'
 import { AddToCart } from '@/components/cart/AddToCart'
-import { GalleryColumn, OptionsColumn, ProductPageGrid } from '@/components/jsx'
+import { GalleryColumn } from '@/components/jsx/GalleryColumn'
+import { OptionsColumn } from '@/components/jsx/OptionsColumn'
+import { ProductPageGrid } from '@/components/jsx/ProductPageGrid'
 import {
   Breadcrumb,
   BreadcrumbItem,

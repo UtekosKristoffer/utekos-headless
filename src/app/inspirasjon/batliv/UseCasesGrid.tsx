@@ -81,10 +81,10 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                       />
                     </div>
                     <div>
-                      <p className='text-sm text-muted-foreground'>
+                      <p className='text-sm text-muted-foreground-primary'>
                         {useCase.time}
                       </p>
-                      <p className='text-sm font-medium text-primary'>
+                      <p className='text-sm font-medium text-primary-foreground'>
                         {useCase.temperature}
                       </p>
                     </div>

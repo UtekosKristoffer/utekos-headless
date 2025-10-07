@@ -22,7 +22,7 @@ export function useProductPage(handle: string) {
     productWithMetafields
   )
 
-  const relatedProducts = getRelatedProducts(allProducts, handle, 4)
+  const relatedProducts = getRelatedProducts(allProducts, handle, 12)
   const swatchColorMap = createSwatchColorMap(productWithMetafields)
 
   const selectedVariant: ShopifyProductVariant | null =

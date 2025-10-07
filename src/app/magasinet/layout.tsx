@@ -35,7 +35,7 @@ export default function MagazineLayout({ children }: { children: ReactNode }) {
       <section className='border-b border-neutral-800 bg-sidebar-foreground'>
         <div className='container mx-auto px-4 py-12 text-center'>
           <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>
-            Utekos-Magasinet
+            Utekos Magasinet
           </h1>
           <p className='mt-4 text-lg text-muted-foreground max-w-2xl mx-auto'>
             Inspirasjon, tips og historier for deg som verdsetter de gode

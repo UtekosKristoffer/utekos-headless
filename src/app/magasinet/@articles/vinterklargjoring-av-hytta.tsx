@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 export const VinterklargjoringArticle = () => {
   return (
-    <article className='prose prose-invert prose-lg max-w-5xl mx-auto'>
+    <article className='prose prose-invert prose-lg md:max-w-5xl mx-auto'>
       <figure className='!my-12'>
         <Image
           src={AutomnCabin}

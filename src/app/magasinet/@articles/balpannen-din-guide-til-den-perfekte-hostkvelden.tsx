@@ -3,13 +3,13 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import Balpanne from '@public/og-image-balpanne.webp'
-import { Sparkles } from 'lucide-react'
+import { FolderCheck } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export const BalpanneArticle = () => {
   return (
-    <article className='prose prose-invert prose-lg max-w-5xl mx-auto'>
+    <article className='prose prose-invert prose-lg md:max-w-7xl mx-auto'>
       <figure className='!my-12'>
         <Image
           src={Balpanne}
@@ -26,8 +26,11 @@ export const BalpanneArticle = () => {
       <p>
         Men en virkelig vellykket kveld rundt bålpannen handler om mer enn bare
         å tenne et bål. Det handler om å skape en ramme av trygghet, hygge og
-        ikke minst, varig komfort. For å hjelpe deg på veien har vi laget en
-        enkel huskeliste: &quot;De 5 P-ene for Perfekt Bålkos&quot;.
+        ikke minst, varig komfort. Med litt planlegging får dere jevn varme, god
+        flyt og færre avbrytelser gjennom kvelden. For å hjelpe deg på veien har
+        vi laget en enkel huskeliste: &quot;De 5 P-ene for perfekt bålkos&quot;
+        – en rask sjekk som sikrer riktig plassering, riktig utstyr og riktig
+        stemning fra start til slutt.
       </p>
 
       <div className='not-prose my-12'>
@@ -43,11 +46,11 @@ export const BalpanneArticle = () => {
       </p>
 
       <p>
-        Spesielt punktet om 'personlig komfort' er lett å overse, men er ofte
-        det som avgjør hvor lenge kvelden varer. Et sitteunderlag hjelper, men
-        den kalde luften på ryggen vinner som regel til slutt. En personlig
-        varmekilde som Utekos løser dette elegant, og lar alle bli sittende i
-        timevis.
+        Spesielt punktet om &quot;personlig komfort&quot; er lett å overse, men
+        er ofte det som avgjør hvor lenge kvelden varer. Et sitteunderlag
+        hjelper, men den kalde luften på ryggen vinner som regel til slutt. En
+        personlig varmekilde som Utekos løser dette elegant, og lar alle bli
+        sittende i timevis.
       </p>
 
       <Card className='my-12 not-prose text-center bg-gradient-to-br from-primary/20 to-transparent border-neutral-800'>
@@ -70,7 +73,7 @@ export const BalpanneArticle = () => {
       <Card className='my-12 not-prose bg-sidebar-foreground border-neutral-800'>
         <CardContent className='p-8'>
           <h3 className='text-2xl font-bold flex items-center gap-3 mt-0'>
-            <Sparkles className='h-6 w-6 text-yellow-400' />
+            <FolderCheck className='h-6 w-6 text-yellow-400' />
             Konklusjon: Skap minner, ikke bare flammer
           </h3>
           <p className='text-muted-foreground mt-4'>

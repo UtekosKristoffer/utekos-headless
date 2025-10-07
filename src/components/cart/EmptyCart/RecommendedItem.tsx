@@ -1,5 +1,3 @@
-'use client'
-
 import { getInitialAvailableOptions } from '@/components/ProductCard/getInitialAvailableOptions'
 import { findMatchingVariant } from '@/components/ProductCard/findMatchingVariant'
 import { AspectRatio } from '@/components/ui/aspect-ratio'

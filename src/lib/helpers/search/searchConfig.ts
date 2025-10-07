@@ -148,11 +148,11 @@ export const SEARCH_CONFIG: SearchConfigItem[] = [
     group: 'products'
   },
   {
-    id: 'product-utekos-fiberdun',
-    title: 'Utekos Fiberdun™',
-    path: '/produkter/utekos-fiberdun',
+    id: 'product-utekos-techdun',
+    title: 'Utekos TechDun™',
+    path: '/produkter/utekos-techdun',
     keywords: [
-      'fiberdun',
+      'techdun',
       'hybrid',
       'syntetisk dun',
       'varm',

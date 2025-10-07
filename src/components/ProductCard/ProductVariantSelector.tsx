@@ -1,5 +1,3 @@
-'use client'
-
 import { SizeLabel } from '@/components/ProductCard/SizeLabel'
 import type { ProductVariantSelectorProps } from '@types'
 

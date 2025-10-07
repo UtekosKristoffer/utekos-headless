@@ -17,13 +17,13 @@ export function PersonaCards() {
       buttonText: 'Velg Utekos Dun™'
     },
     {
-      href: '/produkter/utekos-fiberdun',
+      href: '/produkter/utekos-techdun',
       imageSrc: '/half-diagonal.webp',
-      imageAlt: 'Utekos Fiberdun i uforutsigbart vær',
+      imageAlt: 'Utekos Techdun i uforutsigbart vær',
       title: 'For den praktiske allrounderen',
       description:
         'Du trenger en robust arbeidshest som presterer i all slags vær – fra fuktige kvelder i båten til uforutsigbare dager med bobilen.',
-      buttonText: 'Velg Utekos Fiberdun™'
+      buttonText: 'Velg Utekos Techdun™'
     },
     {
       href: '/produkter/utekos-mikrofiber',

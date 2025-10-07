@@ -32,7 +32,7 @@ const tips: {
 }[] = [
   {
     Icon: 'layers',
-    title: '1. Tekstiler & Pledd',
+    title: '1. Tekstiler og pledd',
     description:
       'Myke ullpledd, puter og saueskinn isolerer og skaper en umiddelbar følelse av lunhet.',
     glowColor: '#fb923c',
@@ -40,7 +40,7 @@ const tips: {
   },
   {
     Icon: 'lightbulb',
-    title: '2. Riktig Belysning',
+    title: '2. Riktig belysning',
     description:
       'Varme, dempede lyskilder som lysslynger og lykter skaper en intim og trygg atmosfære.',
     glowColor: '#facc15',
@@ -48,7 +48,7 @@ const tips: {
   },
   {
     Icon: 'wind',
-    title: '3. Lun Levegg',
+    title: '3. Lun levegg',
     description:
       'En enkel levegg eller noen store planter kan stoppe den kjølige trekken og skape en lun krok.',
     glowColor: '#22d3ee',
@@ -64,7 +64,7 @@ const tips: {
   },
   {
     Icon: 'coffee',
-    title: '5. Varme Drikker',
+    title: '5. Varme drikker',
     description:
       'En kopp te, kakao eller kaffe varmer fra innsiden og er en essensiell del av kosen.',
     glowColor: '#4ade80',

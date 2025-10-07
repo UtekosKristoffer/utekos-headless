@@ -1,6 +1,4 @@
 // Path: src/components/cart/AddToCartButton.tsx
-'use client'
-
 import { SubmitButton } from '@/components/cart/AddToCartButton/SubmitButton'
 import {
   FormControl,
@@ -12,7 +10,6 @@ import {
 import { Input } from '@/components/ui/input'
 import type { AddToCartButtonProps } from '@types'
 
-// Utvidet med availableForSale
 interface ExtendedAddToCartButtonProps extends AddToCartButtonProps {
   availableForSale: boolean
 }

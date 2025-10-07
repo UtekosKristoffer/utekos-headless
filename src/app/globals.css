@@ -678,20 +678,6 @@
   width: var(--progress-width, 0%);
 }
 
-.animate-fade-in-on-scroll {
-  /* Koble animasjonen til tidslinjen */
-  animation: fade-in-left 1s ease-out both;
-  animation-timeline: --fade-in-timeline;
-
-  /* Definer når animasjonen skal kjøre:
-       Starter når elementet kommer inn i viewporten (entry 0%)
-       og er ferdig når det er 40% synlig (entry 40%) */
-  animation-range: entry 0% entry 40%;
-
-  /* Bruk forsinkelsen som sendes fra komponenten */
-  animation-delay: var(--animation-delay, 0s);
-}
-
 .will-animate-fade-in-scale {
   opacity: 0;
   transform: scale(0.95);
@@ -783,11 +769,6 @@
 }
 
 @custom-variant dark (&:is(.dark *));
-
-@scroll-timeline --fade-in-timeline {
-  source: auto;
-  orientation: block;
-}
 
 @utility item-deleting {
   @apply opacity-50 scale-95;

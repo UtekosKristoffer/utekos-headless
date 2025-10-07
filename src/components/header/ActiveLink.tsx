@@ -1,6 +1,4 @@
 // Path: src/components/header/ActiveLink.tsx
-'use client'
-
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -29,7 +27,7 @@ export function ActiveLink({
       href={href}
       className={cn(
         navigationMenuTriggerStyle(),
-        isActive && 'bg-accent bg-background text-accent-foreground',
+        isActive && 'bg-accent text-accent-foreground',
         className
       )}
       {...props}

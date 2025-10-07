@@ -1,5 +1,4 @@
 // Path: src/components/cart/AddToCart.tsx
-'use client'
 
 import { Form } from '@/components/ui/form'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
@@ -41,10 +40,8 @@ export function AddToCart({
   useEffect(() => {
     form.setValue('variantId', selectedVariant?.id ?? '')
   }, [selectedVariant?.id, form])
-
   useEffect(() => {
     if (lastError) {
-      // Du kan legge til feilhåndtering her om ønskelig
     }
   }, [lastError])
 

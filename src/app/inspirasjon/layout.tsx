@@ -1,5 +1,5 @@
 // /app/inspirasjon/layout.tsx
-
+import { CheckIcon } from '@heroicons/react/24/outline'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,63 +9,21 @@ import {
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
 import { Button } from '@/components/ui/button'
-import { Caravan, Flame, Home, Sailboat, Sofa } from 'lucide-react'
+import { inspirationPages } from './layout/inspirationPages'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import { TrustIndicators } from './layout/sections/TrustIndicators'
 
 interface InspirasjonLayoutProps {
   children: ReactNode
 }
 
-const inspirationPages = [
-  {
-    href: '/inspirasjon/hytteliv' as const,
-    label: 'Hytteliv',
-    description: 'Komfort på hytten året rundt',
-    icon: Home,
-    color: 'from-emerald-500/20',
-    iconColor: 'text-emerald-500'
-  },
-  {
-    href: '/inspirasjon/bobil' as const,
-    label: 'Bobil & Camping',
-    description: 'Forleng campingsesongen',
-    icon: Caravan,
-    color: 'from-blue-500/20',
-    iconColor: 'text-blue-500'
-  },
-  {
-    href: '/inspirasjon/batliv' as const,
-    label: 'Båtliv',
-    description: 'Varme på vannet',
-    icon: Sailboat,
-    color: 'from-cyan-500/20',
-    iconColor: 'text-cyan-400'
-  },
-  {
-    href: '/inspirasjon/terrassen' as const,
-    label: 'Terrassen',
-    description: 'Hjemme best',
-    icon: Sofa,
-    color: 'from-amber-500/20',
-    iconColor: 'text-amber-400'
-  },
-  {
-    href: '/inspirasjon/grillkvelden' as const,
-    label: 'Grillkvelden',
-    description: 'Sosiale stunder',
-    icon: Flame,
-    color: 'from-orange-500/20',
-    iconColor: 'text-orange-500'
-  }
-]
-
 export default function InspirasjonLayout({
   children
 }: InspirasjonLayoutProps) {
   return (
-    <div className='min-h-screen bg-background'>
-      {/* Breadcrumb Section - NÅ OPPDATERT */}
+    <section className='min-h-screen bg-background'>
+      {/* Breadcrumb Section */}
       <section className='border-b border-neutral-800'>
         <div className='container mx-auto px-4 py-6'>
           <Breadcrumb>
@@ -83,8 +41,6 @@ export default function InspirasjonLayout({
           </Breadcrumb>
         </div>
       </section>
-
-      {/* Main Content */}
       {children}
 
       {/* Cross-Navigation Section (uendret) */}
@@ -142,25 +98,7 @@ export default function InspirasjonLayout({
         </div>
       </section>
 
-      {/* Trust Indicators (uendret) */}
-      <section className='py-8 border-t border-neutral-800'>
-        <div className='container mx-auto px-4'>
-          <div className='flex flex-wrap justify-center gap-8 text-sm text-muted-foreground'>
-            <div className='flex items-center gap-2'>
-              <span className='text-primary'>🇳🇴</span>
-              <span>Skapt for norske forhold</span>
-            </div>
-            <div className='flex items-center gap-2'>
-              <span className='text-sky-800'>✓</span>
-              <span>Fri frakt over 999 kr</span>
-            </div>
-            <div className='flex items-center gap-2'>
-              <span className='text-sky-800'>✓</span>
-              <span>30 dagers åpent kjøp</span>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+      <TrustIndicators />
+    </section>
   )
 }

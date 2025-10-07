@@ -1,5 +1,5 @@
 // Path: src/hooks/useCartStoreSnapshot.ts
-'use client'
+
 import { useSyncExternalStore } from 'react'
 
 import { cartStore } from '@/lib/state/cartStore'

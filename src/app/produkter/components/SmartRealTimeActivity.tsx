@@ -25,13 +25,6 @@ interface SmartRealTimeActivityProps {
   /** Basistall for produktets popularitet (kalibreres per produkt) */
   baseViewers: number
 }
-
-/**
- * Lettvekts, tilgjengelig “seere nå”-indikator uten Framer Motion.
- * - Små, tilfeldige oppdateringer over tid.
- * - Jevn fade/translate med CSS transitions (opacity/transform).
- * - aria-live="polite" for skjermlesere (lav prioritet).
- */
 export function SmartRealTimeActivity({
   baseViewers
 }: SmartRealTimeActivityProps) {

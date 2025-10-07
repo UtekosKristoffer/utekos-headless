@@ -1,7 +1,7 @@
 // Path: src/app/produkter/[handle]/ProductPageView/components/PriceActivityPanel.tsx
 'use client'
 
-import { Price } from '@/components/jsx'
+import { Price } from '@/components/jsx/Price'
 import { ShieldAlert } from 'lucide-react'
 import type { ReactNode } from 'react'
 

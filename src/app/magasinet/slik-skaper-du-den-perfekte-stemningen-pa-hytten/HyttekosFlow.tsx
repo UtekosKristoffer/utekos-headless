@@ -1,13 +1,4 @@
-import { Layers, Lightbulb, Music, Thermometer } from 'lucide-react'
-
-// --- Typer og hjelpere (uendret) ---
-const iconMap = {
-  lightbulb: Lightbulb,
-  music: Music,
-  layers: Layers,
-  thermometer: Thermometer
-}
-type IconName = keyof typeof iconMap
+import { nodes, iconMap, edges, type IconName } from './initialElements'
 
 function IconRenderer({
   name,
@@ -20,133 +11,19 @@ function IconRenderer({
   return Icon ? <Icon className={className} /> : null
 }
 
-type NodeData = {
-  icon?: IconName
-  label: string
-  description?: string
-  iconColor?: string
-  shadowColor?: string
-  handlePosition?: 'top' | 'right' | 'bottom' | 'left'
-}
-
-type FlowNode = {
-  id: string
-  type: 'default' | 'custom'
-  position: { x: number; y: number }
-  width: number
-  height: number
-  data: NodeData
-}
-
-// --- Ny, balansert og romslig node-data ---
-const nodes: FlowNode[] = [
-  {
-    id: 'center',
-    type: 'default',
-    position: { x: 310, y: 215 },
-    width: 180,
-    height: 70,
-    data: { label: 'Den Perfekte Hyttekosen' }
-  },
-  {
-    id: 'lys',
-    type: 'custom',
-    position: { x: 290, y: 0 },
-    width: 220,
-    height: 140,
-    data: {
-      icon: 'lightbulb',
-      label: 'Lys',
-      description:
-        'Levende lys, dimmere og lysslynger skaper en lun og innbydende atmosfære.',
-      iconColor: 'text-amber-400',
-      shadowColor: '#facc15',
-      handlePosition: 'bottom'
-    }
-  },
-  {
-    id: 'lyd',
-    type: 'custom',
-    position: { x: 0, y: 180 },
-    width: 220,
-    height: 140,
-    data: {
-      icon: 'music',
-      label: 'Lyd',
-      description:
-        'Knitring fra peisen, en rolig spilleliste eller bare den dype stillheten fra naturen.',
-      iconColor: 'text-violet-400',
-      shadowColor: '#a78bfa',
-      handlePosition: 'right'
-    }
-  },
-  {
-    id: 'tekstur',
-    type: 'custom',
-    position: { x: 580, y: 180 },
-    width: 220,
-    height: 140,
-    data: {
-      icon: 'layers',
-      label: 'Tekstur',
-      description:
-        'Myke ullpledd, saueskinn og grovt treverk. Kontraster som er gode å ta og se på.',
-      iconColor: 'text-orange-400',
-      shadowColor: '#fb923c',
-      handlePosition: 'left'
-    }
-  },
-  {
-    id: 'varme',
-    type: 'custom',
-    position: { x: 290, y: 360 },
-    width: 220,
-    height: 140,
-    data: {
-      icon: 'thermometer',
-      label: 'Varme',
-      description:
-        'Den lune peisvarmen inne, og muligheten til å ta med komforten ut på terrassen.',
-      iconColor: 'text-rose-400',
-      shadowColor: '#f472b6',
-      handlePosition: 'top'
-    }
-  }
-]
-
-const edges = [
-  {
-    id: 'e-c-lys',
-    source: 'center',
-    target: 'lys',
-    style: { stroke: '#facc15' }
-  },
-  {
-    id: 'e-c-lyd',
-    source: 'center',
-    target: 'lyd',
-    style: { stroke: '#a78bfa' }
-  },
-  {
-    id: 'e-c-tekstur',
-    source: 'center',
-    target: 'tekstur',
-    style: { stroke: '#fb923c' }
-  },
-  {
-    id: 'e-c-varme',
-    source: 'center',
-    target: 'varme',
-    style: { stroke: '#f472b6' }
-  }
-]
-
 export default function HyttekosFlow() {
   return (
     <div className='h-auto w-full overflow-hidden rounded-lg border border-neutral-800 bg-background dot-pattern p-4'>
+      <style>{`
+        @keyframes stroke-draw {
+          to {
+            stroke-dashoffset: -20;
+          }
+        }
+      `}</style>
       <svg
-        viewBox='0 0 800 500' // Romsligere viewBox
-        className='h-full w-full'
+        viewBox='0 0 600 550' // Ny, mer kompakt viewBox
+        className='size-full'
         aria-hidden='true'
       >
         {/* Linjer */}
@@ -160,19 +37,23 @@ export default function HyttekosFlow() {
           let targetX = targetNode.position.x + targetNode.width / 2
           let targetY = targetNode.position.y + targetNode.height / 2
 
-          // Kalkulerer nøyaktig kant-posisjon basert på handlePosition
+          // Korrekt kalkulering for kant-posisjon
           switch (targetNode.data.handlePosition) {
             case 'top':
-              targetY = targetNode.position.y + targetNode.height
+              targetY = targetNode.position.y
+              targetX = targetNode.position.x + targetNode.width / 2
               break
             case 'bottom':
-              targetY = targetNode.position.y
+              targetY = targetNode.position.y + targetNode.height
+              targetX = targetNode.position.x + targetNode.width / 2
               break
             case 'left':
-              targetX = targetNode.position.x + targetNode.width
+              targetX = targetNode.position.x
+              targetY = targetNode.position.y + targetNode.height / 2
               break
             case 'right':
-              targetX = targetNode.position.x
+              targetX = targetNode.position.x + targetNode.width
+              targetY = targetNode.position.y + targetNode.height / 2
               break
           }
 

@@ -15,11 +15,11 @@ import { cn } from '@/lib/utils/className'
 const images = [
   {
     src: '/full-diagonal.webp',
-    alt: 'Utekos Fiberdun fullfigur, sett forfra'
+    alt: 'Utekos TechDun fullfigur, sett forfra'
   },
   {
     src: '/back.webp',
-    alt: 'Utekos Fiberdun fullfigur, sett bakfra'
+    alt: 'Utekos TechDun fullfigur, sett bakfra'
   },
   {
     src: '/half-diagonal.webp',

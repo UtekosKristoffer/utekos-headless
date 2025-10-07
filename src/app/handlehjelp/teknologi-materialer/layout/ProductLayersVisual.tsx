@@ -1,5 +1,3 @@
-'use client'
-
 import { cn } from '@/lib/utils/className'
 
 const layerMapping: { [key: string]: 'outer' | 'insulation' | 'inner' } = {

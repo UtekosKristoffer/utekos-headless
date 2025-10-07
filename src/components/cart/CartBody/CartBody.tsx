@@ -1,6 +1,4 @@
 // Path: src/components/cart/CartBody/CartBody.tsx
-'use client'
-
 import { ScrollArea } from '@/components/cart/utils/ScrollArea'
 import { useCartLineIds } from '@/hooks/useCartLines' // Importer den nye hooken
 import { useCartPending } from '@/hooks/useCartPending'
