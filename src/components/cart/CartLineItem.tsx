@@ -129,7 +129,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
         </div>
       </Link>
 
-      <div className='flex flex-1 flex-col'>
+      <div className='flex min-w-0 flex-1 flex-col'>
         <div className='flex justify-between'>
           <div>
             <Link
