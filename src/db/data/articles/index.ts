@@ -68,7 +68,7 @@ export const mockArticles: Article[] = [
     title: 'Vårpussen av båten: Slik holder du varmen',
     excerpt:
       'Vårpussen er et sikkert vårtegn, men kan være en kald fornøyelse. Les våre tips for en mer komfortabel start på båtsesongen.',
-    imageUrl: '/og-image-batliv.webp',
+    imageUrl: '/kate-erling-gress-vann.webp',
     category: 'Båtliv',
     date: '12. april 2025'
   }
