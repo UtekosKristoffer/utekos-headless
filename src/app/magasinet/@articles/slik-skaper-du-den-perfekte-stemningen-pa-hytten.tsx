@@ -69,7 +69,7 @@ export const HyttekosArticle = () => {
         sammen for å påvirke sansene våre.
       </p>
 
-      <h2 className='flex items-center gap-3'>
+      <h2 className='flex items-center mt-2 gap-3'>
         <Sparkles className='text-yellow-400' />
         Hyttekos-formelen
       </h2>

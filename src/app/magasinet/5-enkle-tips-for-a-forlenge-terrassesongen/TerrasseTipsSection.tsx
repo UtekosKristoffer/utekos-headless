@@ -124,7 +124,7 @@ export function TerrasseTipsSection() {
       <div className='mx-auto px-4 sm:px-6 lg:px-8'>
         <AnimatedBlock className='will-animate-fade-in-up mb-16 text-center'>
           <h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
-            5 Enkle Tips for å Forlenge Terrassesongen
+            5 enkle tips for å forlenge terrassesongen
           </h2>
           <p className='mx-auto mt-4 max-w-3xl text-lg text-muted-foreground'>
             Med noen enkle grep kan du nyte terrassen din langt utover sommeren.

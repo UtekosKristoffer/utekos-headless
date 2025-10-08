@@ -80,7 +80,7 @@ export const nodes: FlowNode[] = [
     height: 100,
     data: {
       icon: 'coffee',
-      label: 'Skap Hygge',
+      label: 'Skap hygge',
       description:
         'Bruk lysslynger for stemning og ha alltid varm drikke tilgjengelig på en termos.',
       iconColor: 'text-rose-400'
