@@ -28,6 +28,7 @@ export function CartDrawer(): React.JSX.Element {
 
   const handleStateChangeWithTransition = React.useCallback(
     (isOpen: boolean) => {
+      // Bruk requestIdleCallback for å utsette state-endring til browser er idle
       if ('requestIdleCallback' in window) {
         requestIdleCallback(() => {
           startTransition(() => {
@@ -50,7 +51,7 @@ export function CartDrawer(): React.JSX.Element {
       direction='right'
     >
       <CartTrigger />
-      <DrawerContent className='h-full max-h-full'>
+      <DrawerContent className='h-full max-h-full overflow-hidden'>
         <VisuallyHidden>
           <DrawerTitle>Handlepose</DrawerTitle>
           <DrawerDescription>
@@ -58,17 +59,22 @@ export function CartDrawer(): React.JSX.Element {
           </DrawerDescription>
         </VisuallyHidden>
 
-        <div className='flex h-full flex-col'>
+        {/* Wrapper med riktig flex-struktur for mobil */}
+        <div className='flex flex-col h-full overflow-hidden'>
+          {/* Header - fast høyde */}
           <CartHeader />
 
-          <div className='flex-1 overflow-y-auto'>
+          {/* Scrollbar område - tar tilgjengelig plass */}
+          <div className='flex-1 min-h-0 overflow-hidden'>
             <CartBody />
           </div>
 
-          <div className='border-t'>
+          {/* Suggestions - maks høyde med scroll hvis nødvendig */}
+          <div className='max-h-[35vh] overflow-y-auto'>
             <SmartCartSuggestions cart={cart} />
           </div>
 
+          {/* Footer - fast høyde */}
           <CartFooter cart={cart} />
         </div>
       </DrawerContent>
