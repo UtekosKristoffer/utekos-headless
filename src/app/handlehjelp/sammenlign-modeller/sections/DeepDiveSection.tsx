@@ -37,10 +37,6 @@ export function DeepDiveSection() {
                 <strong>Utekos Dun™</strong> gir den absolutt høyeste varmen i
                 forhold til vekt, og er uovertruffen i tørt, kaldt vær.
                 <br />
-                <strong>Utekos Techdun™</strong> er spesialisten for
-                uforutsigbare forhold; den isolerer overlegent selv om den blir
-                fuktig, og er det tryggeste valget nær kysten eller i båt.
-                <br />
                 <strong>Utekos Mikrofiber™</strong> er en ypperlig allrounder
                 for de tre andre årstidene, og som et lettere lag når kulden
                 ikke er ekstrem.
@@ -66,9 +62,6 @@ export function DeepDiveSection() {
                 letteste plagg, perfekt for daglig bruk hvor lav vekt er en
                 fordel.
                 <br />
-                <strong>Utekos TechDun™</strong> er vårt mest robuste plagg.
-                Det du ofrer i pakkbarhet, vinner du i bekymringsfrihet og
-                ytelse i all slags vær.
               </p>
             </CardContent>
           </Card>
@@ -84,9 +77,8 @@ export function DeepDiveSection() {
                 </h3>
               </div>
               <p className='mt-2 text-muted-foreground'>
-                Både <strong>Utekos TechDun™</strong> og{' '}
-                <strong>Mikrofiber™</strong> er robuste arbeidshester som tåler
-                røff bruk, kan vaskes enkelt i maskin og tørker raskt.
+                <strong>Mikrofiber™</strong> er en arbeidshest som tåler røff
+                bruk, kan vaskes enkelt i maskin og tørker raskt.
                 <br />
                 <strong>Utekos Dun™</strong> krever en mer skånsom vaskeprosess
                 for å bevare dunets unike spenst og varmeevne over tid.
