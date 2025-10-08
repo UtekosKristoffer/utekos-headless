@@ -734,6 +734,10 @@
   animation: bounceSlow 2s ease-in-out infinite;
 }
 
+/* {
+  outline: 1px solid red !important;
+} */
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

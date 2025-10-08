@@ -1,4 +1,4 @@
-// Path: src/components/cart/ScrollArea.tsx
+// Path: src/components/cart/utils/ScrollArea.tsx
 import { cn } from '@/lib/utils/className'
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area'
 import {
@@ -19,12 +19,9 @@ const ScrollArea = forwardRef<
     <ScrollAreaPrimitive.Viewport className='h-full w-full rounded-[inherit]'>
       {children}
     </ScrollAreaPrimitive.Viewport>
-
-    {/* Scrollbar (vertikal som default) */}
     <ScrollAreaPrimitive.Scrollbar>
       <ScrollAreaPrimitive.Thumb />
     </ScrollAreaPrimitive.Scrollbar>
-
     <ScrollAreaPrimitive.Corner />
   </ScrollAreaPrimitive.Root>
 ))
