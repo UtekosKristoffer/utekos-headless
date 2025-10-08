@@ -95,9 +95,6 @@ export function ComparisonTable() {
                   <TableCellContent value={dun} />
                 </td>
                 <td className='border-b border-neutral-800 p-4 text-center font-medium'>
-                  <TableCellContent value={techdun} />
-                </td>
-                <td className='border-b border-neutral-800 p-4 text-center font-medium'>
                   <TableCellContent value={mikrofiber} />
                 </td>
               </tr>

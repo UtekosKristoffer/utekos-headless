@@ -36,7 +36,7 @@ export function HelpChooseSection() {
         />
       </div>
 
-      <div className='grid grid-cols-1 gap-6 lg:grid-cols-5'>
+      <div className='grid grid-cols-1 gap-6 md:grid-cols-4 mx-auto'>
         {choices.map((choice, index) => {
           const glowColor = getGlowColor(choice.linkColor)
 

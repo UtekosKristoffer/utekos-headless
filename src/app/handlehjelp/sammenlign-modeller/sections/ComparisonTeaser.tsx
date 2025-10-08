@@ -21,7 +21,7 @@ export function ComparisonTeaser() {
               unike styrker. Få en rask oversikt her, eller dykk ned i detaljene
               i vår komplette guide.
             </p>
-            <div className='mt-8 grid grid-cols-1 gap-6 text-left md:grid-cols-3'>
+            <div className='mt-8 grid grid-cols-1 gap-6 text-left md:grid-cols-2'>
               {/* Kort for Dun */}
               <div className='rounded-lg border border-neutral-700 bg-background p-6'>
                 <div className='flex items-center gap-3'>
