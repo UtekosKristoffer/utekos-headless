@@ -65,7 +65,7 @@ export function CartDrawer(): React.JSX.Element {
           <CartHeader />
 
           {/* Scrollbar område - tar tilgjengelig plass */}
-          <div className='flex-1 min-h-0 overflow-hidden'>
+          <div className='flex-1 min-h-0 overflow-y-auto'>
             <CartBody />
           </div>
 
