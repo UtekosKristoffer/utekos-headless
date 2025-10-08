@@ -50,8 +50,9 @@ export function UpsellItem({ product, showDiscountHint }: UpsellItemProps) {
             />
           )}
         </div>
-        <div className='flex-grow'>
-          <p className='text-sm font-medium'>{product.title}</p>
+        {/* ENDRING: Lagt til 'min-w-0' for å tillate krymping på smale skjermer */}
+        <div className='flex-grow min-w-0'>
+          <p className='text-sm font-medium truncate'>{product.title}</p>
           <div className='flex items-center gap-2 text-xs text-muted-foreground'>
             {showDiscountHint ?
               <>

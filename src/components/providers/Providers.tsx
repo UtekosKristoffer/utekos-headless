@@ -1,4 +1,3 @@
-// Path: src/components/providers/Providers.tsx
 'use client'
 
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -27,15 +26,18 @@ export default function Providers({
   const [cartId, setCartId] = useState<string | null>(initialCartId)
 
   useEffect(() => {
-    // Ignorer på små skjermer
     if (window.innerHeight < 650) return
-
     if (!document.cookie.includes('welcome-toast=2')) {
       toast('🛍️ Velkommen til Utekos sin nettbutikk!', {
         id: 'welcome-toast',
         duration: Infinity,
         onDismiss: () => {
           document.cookie = 'welcome-toast=2; max-age=31536000; path=/'
+        },
+        // ENDRING: Legger til classNames for å tvinge tekstfargen til å være svart.
+        classNames: {
+          title: 'text-black',
+          description: 'text-black'
         },
         description: (
           <>

@@ -4,7 +4,6 @@
 import { CartBody } from '@/components/cart/CartBody/CartBody'
 import { CartFooter } from '@/components/cart/CartFooter/CartFooter'
 import { CartHeader } from '@/components/cart/CartHeader/CartHeader'
-import { SmartCartSuggestions } from '@/components/cart/SmartCartSuggestions'
 import {
   Drawer,
   DrawerContent,
@@ -29,7 +28,6 @@ export function CartDrawer(): React.JSX.Element {
 
   const handleStateChangeWithTransition = React.useCallback(
     (isOpen: boolean) => {
-      // Bruk requestIdleCallback for å utsette state-endring til browser er idle
       if ('requestIdleCallback' in window) {
         requestIdleCallback(() => {
           startTransition(() => {
@@ -52,7 +50,8 @@ export function CartDrawer(): React.JSX.Element {
       direction='right'
     >
       <CartTrigger />
-      <DrawerContent>
+      {/* ENDRING: Lagt til h-full, flex og flex-col for å etablere layout-strukturen */}
+      <DrawerContent className='h-full flex flex-col'>
         <VisuallyHidden>
           <DrawerTitle>Handlepose</DrawerTitle>
           <DrawerDescription>
@@ -60,8 +59,8 @@ export function CartDrawer(): React.JSX.Element {
           </DrawerDescription>
         </VisuallyHidden>
         <CartHeader />
-        <CartBody />
-        <SmartCartSuggestions cart={cart} />
+        {/* MERK: SmartCartSuggestions er flyttet til CartBody */}
+        <CartBody cart={cart} />
         <CartFooter cart={cart} />
       </DrawerContent>
     </Drawer>

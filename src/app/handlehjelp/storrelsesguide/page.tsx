@@ -76,29 +76,45 @@ export default function SizeGuidePage() {
 
         <div className='mx-auto mt-12 max-w-6xl'>
           <Tabs defaultValue='comfyrobe' className='w-full'>
-            {/* ENDRING 1: Byttet til 'flex' for å håndtere begge scenarioer */}
-            <TabsList className='flex h-auto w-full flex-wrap rounded-lg border border-neutral-800 bg-sidebar-foreground p-1.5 md:flex-nowrap'>
-              {/* ENDRING 2: 'flex-1' gjelder nå kun for medium skjermer og opp (md:) */}
+            {/* --- KUN FOR DESKTOP --- */}
+            <TabsList className='hidden w-full rounded-lg border border-neutral-800 bg-sidebar-foreground md:flex'>
               <TabsTrigger
                 value='comfyrobe'
-                className='md:flex-1 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-all data-[state=active]:bg-neutral-100 data-[state=active]:text-neutral-950 data-[state=active]:shadow-sm'
+                className='w-full rounded-md px-3 py-3 text-sm font-medium text-muted-foreground transition-all data-[state=active]:bg-neutral-100 data-[state=active]:text-neutral-950 data-[state=active]:shadow-sm'
               >
                 Comfyrobe™
               </TabsTrigger>
               <TabsTrigger
                 value='dun'
-                className='md:flex-1 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-all data-[state=active]:bg-neutral-100 data-[state=active]:text-neutral-950 data-[state=active]:shadow-sm'
+                className='w-full rounded-md px-3 py-3 text-sm font-medium text-muted-foreground transition-all data-[state=active]:bg-neutral-100 data-[state=active]:text-neutral-950 data-[state=active]:shadow-sm'
               >
                 Utekos Dun™
               </TabsTrigger>
               <TabsTrigger
                 value='mikrofiber'
-                className='md:flex-1 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-all data-[state=active]:bg-neutral-100 data-[state=active]:text-neutral-950 data-[state=active]:shadow-sm'
+                className='w-full rounded-md px-3 py-3 text-sm font-medium text-muted-foreground transition-all data-[state=active]:bg-neutral-100 data-[state=active]:text-neutral-950 data-[state=active]:shadow-sm'
               >
                 Utekos Mikrofiber™
               </TabsTrigger>
             </TabsList>
 
+            {/* --- KUN FOR MOBIL --- */}
+            <TabsList className='flex w-full rounded-lg border border-neutral-800 bg-sidebar-foreground md:hidden'>
+              <TabsTrigger
+                value='comfyrobe'
+                className='w-full rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground transition-all data-[state=active]:bg-neutral-100 data-[state=active]:text-neutral-950 data-[state=active]:shadow-sm'
+              >
+                Comfyrobe™
+              </TabsTrigger>
+              <TabsTrigger
+                value='dun' // Peker på samme innhold som "Utekos Dun"
+                className='w-full rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground transition-all data-[state=active]:bg-neutral-100 data-[state=active]:text-neutral-950 data-[state=active]:shadow-sm'
+              >
+                Utekos™
+              </TabsTrigger>
+            </TabsList>
+
+            {/* --- INNHOLD (felles for begge) --- */}
             <TabsContent
               value='comfyrobe'
               className='mt-6 overflow-hidden rounded-lg border border-neutral-800'
