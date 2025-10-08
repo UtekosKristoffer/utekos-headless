@@ -51,7 +51,7 @@ export function SpecialOfferContentColumn() {
           'will-animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-sky-500/30 bg-sky-900/20 px-4 py-2',
           badgeInView && 'is-in-view'
         )}
-        style={{ '--transition-delay': '0.2s' } as React.CSSProperties}
+        style={{ '--transition-delay': '0.3s' } as React.CSSProperties}
       >
         <Sparkles className='h-4 w-4 text-sky-400' />
         <span className='text-sm font-semibold text-sky-400'>
@@ -65,7 +65,7 @@ export function SpecialOfferContentColumn() {
           'will-animate-fade-in-up text-balance text-3xl font-bold tracking-tight sm:text-4xl',
           h2InView && 'is-in-view'
         )}
-        style={{ '--transition-delay': '0.3s' } as React.CSSProperties}
+        style={{ '--transition-delay': '0.4s' } as React.CSSProperties}
       >
         En sjelden mulighet
       </h2>
@@ -76,7 +76,7 @@ export function SpecialOfferContentColumn() {
           'will-animate-fade-in-up mt-4 text-lg leading-relaxed text-neutral-400',
           pInView && 'is-in-view'
         )}
-        style={{ '--transition-delay': '0.4s' } as React.CSSProperties}
+        style={{ '--transition-delay': '0.5s' } as React.CSSProperties}
       >
         Vår utgående Special Edition kommer aldri tilbake. Sikre deg en av de
         aller siste til en eksepsjonell pris.
@@ -89,7 +89,7 @@ export function SpecialOfferContentColumn() {
           'will-animate-fade-in-up mt-8',
           stockInView && 'is-in-view'
         )}
-        style={{ '--transition-delay': '0.4.5s' } as React.CSSProperties}
+        style={{ '--transition-delay': '0.5.5s' } as React.CSSProperties}
       >
         <div className='mb-2 flex items-center justify-between'>
           <p className='flex items-center gap-2 text-sm font-medium text-neutral-300'>
@@ -111,7 +111,7 @@ export function SpecialOfferContentColumn() {
             style={
               {
                 '--progress-width': `${stockPercentage}%`,
-                '--transition-delay': '0.5s'
+                '--transition-delay': '0.6s'
               } as React.CSSProperties
             }
           />
@@ -124,7 +124,7 @@ export function SpecialOfferContentColumn() {
           <BenefitCard
             key={benefit.label}
             benefit={benefit}
-            delay={0.5 + idx * 0.1}
+            delay={0.6 + idx * 0.1}
           />
         ))}
       </ul>
