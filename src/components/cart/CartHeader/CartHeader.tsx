@@ -5,7 +5,6 @@ import { cartStore } from '@/lib/state/cartStore'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
 export const CartHeader = () => (
-  // ENDRING: Lagt til flex-shrink-0 for å "låse" høyden
   <div className='flex flex-shrink-0 items-center justify-between border-b px-6 py-4'>
     <h2 className='text-lg font-semibold'>Din handlepose</h2>
     <Button

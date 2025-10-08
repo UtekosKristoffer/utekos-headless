@@ -1,6 +1,4 @@
 // Path: src/components/cart/CartBody/CartBody.tsx
-
-import { ScrollArea } from '@/components/cart/utils/ScrollArea'
 import { useCartLineIds } from '@/hooks/useCartLines'
 import { useCartPending } from '@/hooks/useCartPending'
 import { CartLineItem } from '@/components/cart/CartLineItem'
@@ -8,9 +6,7 @@ import { EmptyCartRecommendations } from '@/components/cart/EmptyCart/EmptyCartR
 
 export const CartBody = () => {
   const isPending = useCartPending() > 0
-
   const { data: lineIds } = useCartLineIds()
-
   const isEmpty = !lineIds || lineIds.length === 0
 
   if (isEmpty && !isPending) {
@@ -22,15 +18,13 @@ export const CartBody = () => {
   }
 
   return (
-    <ScrollArea className='h-full w-full'>
-      <div className='p-6'>
-        {lineIds?.map((lineId, index) => (
-          <div key={lineId}>
-            <CartLineItem lineId={lineId} />
-            {index < lineIds.length - 1 && <div className='my-4 border-b' />}
-          </div>
-        ))}
-      </div>
-    </ScrollArea>
+    <div className='p-6'>
+      {lineIds?.map((lineId, index) => (
+        <div key={lineId}>
+          <CartLineItem lineId={lineId} />
+          {index < lineIds.length - 1 && <div className='my-4 border-b' />}
+        </div>
+      ))}
+    </div>
   )
 }
