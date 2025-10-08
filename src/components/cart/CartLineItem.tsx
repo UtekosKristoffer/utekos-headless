@@ -131,7 +131,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
 
       <div className='flex min-w-0 flex-1 flex-col'>
         <div className='flex justify-between'>
-          <div>
+          <div className='min-w-0'>
             <Link
               href={productUrl}
               onClick={() => cartStore.send({ type: 'CLOSE' })}
@@ -152,7 +152,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
               <Button
                 variant='ghost'
                 size='icon'
-                className='size-6 p-0'
+                className='size-6 flex-shrink-0 p-0'
                 disabled={isDeleting}
               >
                 <Trash2 className='size-4 text-red-500' />
