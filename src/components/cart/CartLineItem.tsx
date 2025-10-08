@@ -147,7 +147,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
             )}
           </div>
 
-          <div className='absolute -right-3 md:right-0 top-0'>
+          <div className='absolute -right-2 md:right-0 top-0'>
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button
@@ -176,8 +176,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
             </AlertDialog>
           </div>
         </div>
-
-        <div className='mt-auto flex items-center md:justify-between justify-around gap-4 md:px-4 pt-2'>
+        <div className='mt-auto flex flex-col items-start gap-2 pt-2 md:flex-row md:items-center md:justify-between md:gap-4'>
           <div className='flex items-center gap-1'>
             <Button
               variant='default'
