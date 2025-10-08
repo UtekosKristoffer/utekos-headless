@@ -9,7 +9,7 @@ import { Card, CardContent } from '@/components/ui/card'
 const seasons = [
   {
     value: 'spring',
-    label: 'Vårpuss',
+    label: 'Vår',
     icon: LifeBuoy,
     iconColor: 'text-blue-400',
     glowColor: '#60a5fa',
@@ -19,7 +19,7 @@ const seasons = [
   },
   {
     value: 'summer',
-    label: 'Sommernetter',
+    label: 'Sommernatt',
     icon: Sun,
     iconColor: 'text-yellow-400',
     glowColor: '#facc15',
@@ -29,7 +29,7 @@ const seasons = [
   },
   {
     value: 'autumn',
-    label: 'Høstturer',
+    label: 'Høst',
     icon: Fish,
     iconColor: 'text-orange-500',
     glowColor: '#f97316',
@@ -39,7 +39,7 @@ const seasons = [
   },
   {
     value: 'winter',
-    label: 'Vinteropplag',
+    label: 'Vinter',
     icon: Anchor,
     iconColor: 'text-slate-400',
     glowColor: '#94a3b8',

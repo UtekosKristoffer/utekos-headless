@@ -40,10 +40,10 @@ export default function Providers({
           description: 'text-black'
         },
         description: (
-          <>
+          <span style={{ color: '#000' }}>
             Ikke la kjølige kvelder stoppe deg. Sjekk ut vårt utvalg av
             komfortplagg!
-          </>
+          </span>
         )
       })
     }
