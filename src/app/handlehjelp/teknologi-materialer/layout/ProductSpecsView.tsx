@@ -1,4 +1,5 @@
 'use client'
+
 import {
   Feather,
   Flame,
@@ -27,45 +28,36 @@ type Technology = {
   readonly iconColor: string
 }
 
-function ScrollSpyBlock({
-  children,
-  onInView,
-  viewportOptions
-}: {
-  children: React.ReactNode
-  onInView: () => void
-  viewportOptions: IntersectionObserverInit
-}) {
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry && entry.isIntersecting) {
-        onInView()
-      }
-    }, viewportOptions)
-
-    const currentRef = ref.current
-    if (currentRef) {
-      observer.observe(currentRef)
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef)
-      }
-    }
-  }, [onInView, viewportOptions])
-
-  return <div ref={ref}>{children}</div>
-}
-
 export function ProductSpecsView({
   technologies
 }: {
   technologies: readonly Technology[]
 }) {
   const [activeTech, setActiveTech] = useState(technologies?.[0]?.title || '')
+  const targetRefs = useRef(new Map<HTMLDivElement, string>())
+
+  useEffect(() => {
+    const callback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const title = targetRefs.current.get(entry.target as HTMLDivElement)
+          if (title) {
+            setActiveTech(title)
+          }
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(callback, {
+      rootMargin: '-40% 0px -40% 0px',
+      threshold: 0.5
+    })
+
+    const targets = Array.from(targetRefs.current.keys())
+    targets.forEach(target => observer.observe(target))
+
+    return () => observer.disconnect()
+  }, [technologies])
 
   return (
     <div className='mt-24 grid grid-cols-1 gap-16 lg:grid-cols-2'>
@@ -77,12 +69,25 @@ export function ProductSpecsView({
           const IconComponent = iconMap[tech.icon]
 
           return (
-            <ScrollSpyBlock
+            <div
               key={tech.title}
-              onInView={() => setActiveTech(tech.title)}
-              viewportOptions={{
-                rootMargin: '-20% 0px -20% 0px',
-                threshold: 0.3
+              ref={node => {
+                const map = targetRefs.current
+                if (node) {
+                  map.set(node, tech.title)
+                } else {
+                  // On unmount, find the key by value and delete.
+                  let keyToDelete: HTMLDivElement | null = null
+                  for (const [key, value] of map.entries()) {
+                    if (value === tech.title) {
+                      keyToDelete = key
+                      break
+                    }
+                  }
+                  if (keyToDelete) {
+                    map.delete(keyToDelete)
+                  }
+                }
               }}
             >
               <div className='relative'>
@@ -106,7 +111,7 @@ export function ProductSpecsView({
                   </div>
                 </div>
               </div>
-            </ScrollSpyBlock>
+            </div>
           )
         })}
       </div>

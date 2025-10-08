@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
+import { Card, CardContent } from '@/components/ui/card'
 import {
   Carousel,
   CarouselContent,
@@ -13,36 +14,34 @@ import {
 // Bytt ut med dine egne bilder og tekster
 const galleryImages = [
   {
-    src: '/kate-erling-gress-vann.webp',
+    src: '/coffe_utekos.webp',
     alt: 'Person i Utekos-plagg nyter morgenkaffen utenfor bobilen med utsikt over en fjord.',
-    title: 'Første rad til stillheten',
-    description:
-      'Den beste plassen er ikke alltid på en benk. Finn deres eget sted ved vannkanten og nyt utsikten sammen.'
+    title: 'Morgenkaffe med utsikt',
+    description: 'Start dagen i ditt eget tempo, omgitt av natur og komfort.'
   },
   {
-    src: '/linn_bonfire.webp',
+    src: '/malin_tjommi.webp',
     alt: 'Et par sitter i campingstoler utenfor bobilen en kjølig kveld, begge kledd i Utekos.',
-    title: 'Selve definisjonen på utekos',
+    title: 'Friheten til å stoppe opp',
     description:
-      'Noen ganger er de enkleste aktivitetene de beste. Nyt forberedelsene og den knitrende lyden i full komfort.'
+      'Et raskt stopp blir en minneverdig pause når komforten er med på turen.'
   },
   {
-    src: '/caitlinn_smooth16-19.webp',
+    src: '/mb_girl_sitting_outside_coffee.webp',
     alt: 'Person som har stoppet bobilen langs en nasjonal turistvei og nyter utsikten i et Utekos-plagg.',
-    title: 'Gjør naturen til din sitteplass',
+    title: 'Din personlige varmesone',
     description:
-      'Med Utekos er den beste hvileplassen alltid den du finner selv. Varm og komfortabel, uansett underlag.'
+      'Skap din egen sone av komfort og nyt en rolig stund, uansett hvor du befinner deg.'
   },
   {
-    src: '/utekos-kaffe-jente.webp',
+    src: '/girl-stone-snow.webp',
     alt: 'Person som slapper av med en bok i en campingstol, godt innpakket i Utekos.',
-    title: 'Terrassekos, hele året',
-    description:
-      'Hvem har sagt at terrassen kun er for sommeren? Forleng sesongen og nyt favorittplassen din, uansett temperatur.'
+    title: 'Din egen avslapningssone',
+    description: 'Finn roen og nyt øyeblikket, uansett hvor du parkerer.'
   }
 ]
 
-export function SocialProof() {
+export function InspirationGallerySection() {
   return (
     <section className='py-24'>
       <div className='container mx-auto px-4'>
@@ -51,8 +50,8 @@ export function SocialProof() {
             Utekos i sitt rette element
           </h2>
           <p className='mb-12 max-w-2xl text-lg text-muted-foreground mx-auto'>
-            Fra morgenkaffen på en duggfrisk trapp til sene kvelder rundt
-            bålpannen. La deg inspirere av ekte øyeblikk fra hyttelivet.
+            Fra morgenkaffen i soloppgang til sene kvelder under stjernene. La
+            deg inspirere av ekte øyeblikk fra bobillivet.
           </p>
         </div>
 

@@ -14,8 +14,15 @@ export const comfyrobeData = [
     xs: '14 1/2 cm',
     ml: '18 cm',
     lxl: '18 1/2 cm'
-  }
-  // ... fyll inn resten av radene fra bildet
+  },
+  { measurement: 'Mansjetthøyde', xs: '6 cm', ml: '6 cm', lxl: '6 cm' },
+  { measurement: 'Splitt-høyde', xs: '16 cm', ml: '18 cm', lxl: '20 cm' },
+  { measurement: 'Kragehøyde', xs: '11 cm', ml: '11 cm', lxl: '11 cm' },
+  { measurement: 'Lommehøyde', xs: '18 cm', ml: '20 cm', lxl: '22 cm' },
+  { measurement: 'Hettehøyde', xs: '35 cm', ml: '38 cm', lxl: '40 cm' },
+  { measurement: 'Hettebredde', xs: '27 cm', ml: '30 cm', lxl: '32 cm' },
+  { measurement: 'Underarmsbredde', xs: '19 cm', ml: '21 cm', lxl: '23 cm' },
+  { measurement: 'Ermehull', xs: '32 cm', ml: '35 cm', lxl: '38 cm' }
 ]
 
 export const utekosData = [

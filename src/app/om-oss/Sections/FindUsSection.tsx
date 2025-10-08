@@ -26,15 +26,15 @@ const pastEvents: PastEvent[] = [
     color: 'text-sky-800'
   },
   {
-    name: 'Julestand Laksevåg Senter',
+    name: 'Smien, Laksevåg',
     location: 'Bergen',
-    date: '18.–22. desember 2022',
+    date: '3.–4. desember 2022',
     color: 'text-emerald-400'
   },
   {
-    name: 'Ute & Fritid-dager',
-    location: 'Åsane',
-    date: 'Vår 2024',
+    name: 'Båt- og caravan messe, Sparebanken Møre Arena',
+    location: 'Ålesund',
+    date: '3.-5. mars 2023',
     color: 'text-fuchsia-400'
   }
 ]

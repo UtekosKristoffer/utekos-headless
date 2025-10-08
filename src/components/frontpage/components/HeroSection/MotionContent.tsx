@@ -1,4 +1,5 @@
-import { Award, ChevronDown } from 'lucide-react'
+import { Award } from 'lucide-react'
+import { ChevronDownSection } from './ChevronDown'
 
 export function MotionContent() {
   return (
@@ -38,19 +39,7 @@ export function MotionContent() {
         className='animate-fade-in hidden justify-center md:flex'
         style={{ animationDelay: '0.7s' }}
       >
-        <button
-          onClick={() => {
-            const section = document.getElementById('featured-product')
-            section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-          }}
-          className='group cursor-pointer'
-          aria-label='Scroll til produkter'
-        >
-          <div className='flex flex-col items-center gap-2 text-muted-foreground transition-colors group-hover:text-foreground'>
-            <span className='text-xs uppercase tracking-wider'>Se mer</span>
-            <ChevronDown className='animate-bounce-slow h-5 w-5' />
-          </div>
-        </button>
+        <ChevronDownSection />
       </div>
     </div>
   )

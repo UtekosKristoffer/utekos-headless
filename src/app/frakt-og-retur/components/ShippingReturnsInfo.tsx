@@ -30,7 +30,7 @@ export function ShippingReturnsInfo() {
             <CardHeader>
               <CardTitle className='flex items-center gap-3'>
                 <Truck className='size-7 text-button' />
-                Frakt og Levering
+                Frakt og levering
               </CardTitle>
               <CardDescription>
                 Vi sender til hele Norge, så du kan starte din utekos så raskt
@@ -62,7 +62,7 @@ export function ShippingReturnsInfo() {
             <CardHeader>
               <CardTitle className='flex items-center gap-3'>
                 <Undo2 className='size-7 text-amber-400' />
-                Retur og Angrerett
+                Retur og angrerett
               </CardTitle>
               <CardDescription>
                 Du har 14 dagers angrerett fra dagen du mottar varen.

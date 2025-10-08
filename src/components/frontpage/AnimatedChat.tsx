@@ -30,7 +30,10 @@ export function AnimatedChat() {
             name='Hanne'
             side='left'
             color='#dc2626' // rød
-            className='top-1/2 right-2 md:-right-8 -translate-y-1/2 translate-x-full'
+            // ENDRING: Nye responsive klasser.
+            // Mobil: Plasseres pent på høyre kant av boblen.
+            // Desktop (md:): Bruker den gamle, brede posisjoneringen.
+            className='top-4 right-0 translate-x-1/2 md:top-1/2 md:-right-8 md:-translate-y-1/2 md:translate-x-full'
           />
         }
       >
@@ -48,7 +51,10 @@ export function AnimatedChat() {
             name='Thomas'
             side='right'
             color='#2563eb' // blå
-            className='md:bottom-[-8px] bottom-[-14px] md:-left-6 left-5 -translate-x-full'
+            // ENDRING: Nye responsive klasser.
+            // Mobil: Plasseres pent på venstre kant av boblen.
+            // Desktop (md:): Bruker den gamle, brede posisjoneringen.
+            className='bottom-2 left-0 -translate-x-1/2 md:bottom-[-8px] md:-left-6 md:-translate-x-full'
           />
         }
       >

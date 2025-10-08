@@ -1,4 +1,3 @@
-// Path: src/components/cart/CartLineItem.tsx
 'use client'
 import {
   AlertDialogAction,
@@ -34,11 +33,12 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
   const [isDeleting, setIsDeleting] = useState(false)
   const updateTimerRef = useRef<NodeJS.Timeout | null>(null)
 
+  // KORRIGERT: Fjernet localQuantity fra dependency array
   useEffect(() => {
-    if (line && !isDeleting && line.quantity !== localQuantity) {
+    if (line && !isDeleting) {
       setLocalQuantity(line.quantity)
     }
-  }, [line, isDeleting, localQuantity])
+  }, [line, isDeleting])
 
   useEffect(() => {
     return () => {

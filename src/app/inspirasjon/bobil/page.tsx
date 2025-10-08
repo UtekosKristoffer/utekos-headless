@@ -8,7 +8,7 @@ import { DestinationsGrid } from './sections/DestinationsGrid'
 import { UseCasesGrid, useCasesData } from './sections/UseCasesGrid'
 import { destinationsData } from './data/destinationsData'
 import { SeasonsSection } from './sections/SeasonsSection'
-import { SocialProofSection } from './sections/SocialProofSection'
+import { InspirationGallerySection } from './sections/InspirationGallerySection'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -61,7 +61,7 @@ export default function BobilInspirasjonPage() {
         <BenefitsGrid benefits={benefitsData} />
         <SeasonsSection />
         <DestinationsGrid destinations={destinationsData} />
-        <SocialProofSection />
+        <InspirationGallerySection />
         <CTASection />
       </main>
     </>

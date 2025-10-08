@@ -35,7 +35,7 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
             return (
               <CarouselItem
                 key={product.id}
-                className='h-auto pl-4 basis-2/3 sm:basis-1/2 md:basis-1/3 lg:basis-1/4'
+                className='h-auto pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4'
               >
                 <ProductCard
                   product={product}

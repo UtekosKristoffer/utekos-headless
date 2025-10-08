@@ -8,7 +8,7 @@ export function TrustIndicators() {
           <div className='flex items-center gap-2'>
             {/* Oppdatert farge til text-green-700 */}
             <CheckIcon className='h-4 w-4 text-green-700' />
-            <span>Rask levering (1-3 dager)</span>
+            <span>Rask levering</span>
           </div>
           <div className='flex items-center gap-2'>
             <CheckIcon className='h-4 w-4 text-green-700' />

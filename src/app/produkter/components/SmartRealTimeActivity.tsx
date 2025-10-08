@@ -28,7 +28,6 @@ interface SmartRealTimeActivityProps {
 export function SmartRealTimeActivity({
   baseViewers
 }: SmartRealTimeActivityProps) {
-  // Start med et “smart” utgangspunkt basert på tid/dag
   const [currentViewerCount, setCurrentViewerCount] = useState<number>(() => {
     const smartBase = Math.round(
       baseViewers * getTimeOfDayMultiplier() * getDayOfWeekMultiplier()
@@ -36,7 +35,6 @@ export function SmartRealTimeActivity({
     return Math.max(2, smartBase + getRandomIntInclusive(-1, 1))
   })
 
-  // Intervall som oppdaterer tallet sporadisk
   useEffect(() => {
     const intervalId = window.setInterval(
       () => {

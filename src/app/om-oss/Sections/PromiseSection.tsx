@@ -115,7 +115,7 @@ export function PromiseSection() {
       {/* Bakgrunns-glød */}
       <div className='absolute inset-0 -z-10 opacity-20'>
         <div
-          className='absolute left-1/3 top-1/4 h-[500px] w-[500px] blur-3_xl'
+          className='absolute left-1/3 top-1/4 h-[500px] w-[500px] blur-3xl'
           style={{
             background: 'radial-gradient(circle, #60a5fa 0%, transparent 70%)'
           }}
@@ -129,12 +129,25 @@ export function PromiseSection() {
       </div>
 
       <div className='container mx-auto max-w-7xl px-4'>
-        {/* Ytre container er nå en flexbox for å sentrere innholdet */}
-        <div className='relative flex h-[700px] w-full items-center justify-center overflow-hidden rounded-2xl border border-neutral-800 bg-[hsl(0,0%,4%,1)] p-4 shadow-2xl'>
+        {/*
+         * ENDRING 1:
+         * Flexbox-egenskaper er fjernet. Containeren trenger kun å være 'relative'.
+         * Høyden er fortsatt responsiv for å se bra ut på alle skjermer.
+         */}
+        <div className='relative h-[500px] w-full overflow-hidden rounded-2xl border border-neutral-800 bg-[hsl(0,0%,4%,1)] p-4 shadow-2xl md:h-[650px]'>
           <div className='absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-400/50 to-transparent' />
 
-          {/* Indre 'lerret' med fast størrelse for å bevare layouten */}
-          <div className='relative h-[520px] w-[620px]'>
+          {/*
+           * ENDRING 2 (Kjernen i løsningen):
+           * Lerretet er nå absolutt posisjonert og tvunget til midten FØR det skaleres.
+           * - 'absolute top-1/2 left-1/2': Posisjonerer lerretets øvre venstre hjørne i midten.
+           * - '-translate-x-1/2 -translate-y-1/2': Drar lerretet tilbake med 50% av sin egen bredde og høyde, som gir perfekt sentrering.
+           * - Responsive 'scale-*'-klasser skalerer deretter det allerede sentrerte elementet.
+           */}
+          <div
+            className='absolute top-1/2 left-1/2 h-[520px] w-[620px] -translate-x-1/2 -translate-y-1/2 transition-transform duration-500 scale-[0.55] sm:scale-75 md:scale-100'
+            style={{ transformOrigin: 'center center' }}
+          >
             {/* SVG for linjer */}
             <svg className='absolute inset-0 h-full w-full' aria-hidden='true'>
               <defs>

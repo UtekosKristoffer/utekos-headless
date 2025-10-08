@@ -6,14 +6,14 @@ import type { Metadata } from 'next'
 import { jsonLd } from './ShippingAndReturnsPageHelpers/jsonLd'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
-  title: 'Frakt og Retur | Enkel og trygg handel hos Utekos',
+  title: 'Frakt og retur | Enkel og trygg handel hos Utekos',
   description:
     'Vi tilbyr fri frakt på ordre over 999 kr og en enkel 14-dagers angrerett. Les våre fulle vilkår for en trygg og forutsigbar handleopplevelse.',
   alternates: {
     canonical: '/frakt-og-retur'
   },
   openGraph: {
-    title: 'Frakt og Retur | Enkel og trygg handel hos Utekos',
+    title: 'Frakt og retur | Enkel og trygg handel hos Utekos',
     description:
       'Få svar på alt du lurer på om levering og retur. Handle trygt hos oss.',
     url: '/frakt-og-retur',

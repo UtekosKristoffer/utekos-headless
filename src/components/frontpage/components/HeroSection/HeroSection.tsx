@@ -1,5 +1,3 @@
-'use client'
-
 import { MotionContent } from './MotionContent'
 import { SocialProof } from './SocialProof'
 import { HeroImage } from './HeroImage'
