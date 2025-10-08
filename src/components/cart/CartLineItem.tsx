@@ -130,13 +130,13 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
       </Link>
 
       <div className='flex min-w-0 flex-1 flex-col'>
-        <div className='flex justify-between'>
+        <div className='grid grid-cols-[1fr_auto] items-start gap-2'>
           <div className='min-w-0'>
             <Link
               href={productUrl}
               onClick={() => cartStore.send({ type: 'CLOSE' })}
             >
-              <h3 className='text-sm font-medium hover:underline'>
+              <h3 className='break-words text-sm font-medium hover:underline'>
                 {productTitle}
               </h3>
             </Link>
@@ -152,7 +152,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
               <Button
                 variant='ghost'
                 size='icon'
-                className='size-6 flex-shrink-0 p-0'
+                className='size-6 p-0'
                 disabled={isDeleting}
               >
                 <Trash2 className='size-4 text-red-500' />
