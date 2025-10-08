@@ -175,8 +175,8 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
           </AlertDialog>
         </div>
 
-        <div className='mt-auto flex items-center justify-between pt-2'>
-          <div className='flex items-center gap-2'>
+        <div className='mt-auto flex items-center justify-between gap-4 px-4 pt-2'>
+          <div className='flex items-center gap-1'>
             <Button
               variant='default'
               size='icon'
@@ -186,7 +186,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
             >
               <Minus className='size-3' />
             </Button>
-            <span className='min-w-[2rem] text-center text-sm font-medium tabular-nums transition-all duration-100'>
+            <span className='min-w-[1.75rem] text-center text-sm font-medium tabular-nums transition-all duration-100'>
               {localQuantity}
             </span>
             <Button
@@ -199,7 +199,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
               <Plus className='size-3' />
             </Button>
           </div>
-          <span className='text-sm font-medium tabular-nums'>
+          <span className='whitespace-nowrap text-sm font-medium tabular-nums'>
             {formatNOK(displayPrice)}
           </span>
         </div>
