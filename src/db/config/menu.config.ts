@@ -18,11 +18,11 @@ export const mainMenu: MenuItem[] = [
         items: []
       },
       { title: 'Comfyrobe™', url: '/produkter/comfyrobe', items: [] },
-      {
-        title: 'Utekos TechDun™',
-        url: '/produkter/utekos-techdun',
-        items: []
-      },
+      // {
+      // - title: 'Utekos TechDun™',
+      // - url: '/produkter/utekos-techdun',
+      // - items: []
+      // },
       { title: 'Utekos Buff™', url: '/produkter/utekos-buff', items: [] },
       {
         title: 'Utekos Stapper™',

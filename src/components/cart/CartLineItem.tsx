@@ -1,3 +1,4 @@
+// Path: src/components/cart/CartLineItem/CartLineItem.tsx
 'use client'
 import {
   AlertDialogAction,
@@ -22,6 +23,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { AlertDialogTitle } from './AlertDialogen'
+
 interface CartLineItemProps {
   lineId: string
 }
@@ -197,7 +199,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
               <Plus className='size-3' />
             </Button>
           </div>
-          <span className='text-sm font-medium tabular-nums transition-all duration-200 mr-1'>
+          <span className='text-sm font-medium tabular-nums'>
             {formatNOK(displayPrice)}
           </span>
         </div>
