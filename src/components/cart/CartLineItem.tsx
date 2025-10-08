@@ -130,8 +130,8 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
       </Link>
 
       <div className='flex min-w-0 flex-1 flex-col'>
-        <div className='grid grid-cols-[1fr_auto] items-start gap-2'>
-          <div className='min-w-0'>
+        <div className='relative'>
+          <div className='min-w-0 pr-8'>
             <Link
               href={productUrl}
               onClick={() => cartStore.send({ type: 'CLOSE' })}
@@ -147,32 +147,34 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
             )}
           </div>
 
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button
-                variant='ghost'
-                size='icon'
-                className='size-6 p-0'
-                disabled={isDeleting}
-              >
-                <Trash2 className='size-4 text-red-500' />
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Er du sikker?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  Vil du fjerne {productTitle} fra handleposen din?
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Nei, avbryt</AlertDialogCancel>
-                <AlertDialogAction onClick={handleRemoveLine}>
-                  Ja, fjern produkt
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+          <div className='absolute right-0 top-0'>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  variant='ghost'
+                  size='icon'
+                  className='size-6 p-0'
+                  disabled={isDeleting}
+                >
+                  <Trash2 className='size-4 text-red-500' />
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Er du sikker?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    Vil du fjerne {productTitle} fra handleposen din?
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Nei, avbryt</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleRemoveLine}>
+                    Ja, fjern produkt
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
         </div>
 
         <div className='mt-auto flex items-center justify-between gap-4 px-4 pt-2'>
