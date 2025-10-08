@@ -38,7 +38,9 @@ export function UpsellItem({ product, showDiscountHint }: UpsellItemProps) {
         : 'border-neutral-800 bg-neutral-900/50'
       } p-3`}
     >
-      <div className='flex items-center gap-4'>
+      {/* Mobilvennlig layout med bedre flex-håndtering */}
+      <div className='flex items-start gap-3'>
+        {/* Bilde - fast størrelse */}
         <div className='relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-md'>
           {product.featuredImage && (
             <Image
@@ -50,32 +52,45 @@ export function UpsellItem({ product, showDiscountHint }: UpsellItemProps) {
             />
           )}
         </div>
-        {/* ENDRING: Lagt til 'min-w-0' for å tillate krymping på smale skjermer */}
-        <div className='flex-grow min-w-0'>
-          <p className='text-sm font-medium truncate'>{product.title}</p>
-          <div className='flex items-center gap-2 text-xs text-muted-foreground'>
-            {showDiscountHint ?
-              <>
-                <span className='line-through'>
+
+        {/* Innhold og knapp wrapper - tillater wrapping på mobil */}
+        <div className='flex flex-1 flex-col gap-2 min-w-0'>
+          {/* Produktinfo */}
+          <div className='flex-1'>
+            <p className='text-sm font-medium line-clamp-2'>{product.title}</p>
+            <div className='flex items-center gap-2 text-xs text-muted-foreground mt-1'>
+              {showDiscountHint ?
+                <>
+                  <span className='line-through'>
+                    {formatPrice(product.priceRange.minVariantPrice)}
+                  </span>
+                  <span className='font-bold text-white'>
+                    {formatPrice({
+                      amount: discountedPrice.toString(),
+                      currencyCode: 'NOK'
+                    })}
+                  </span>
+                </>
+              : <span className='font-bold text-white'>
                   {formatPrice(product.priceRange.minVariantPrice)}
                 </span>
-                <span className='font-bold text-white'>
-                  {formatPrice({
-                    amount: discountedPrice.toString(),
-                    currencyCode: 'NOK'
-                  })}
-                </span>
-              </>
-            : <span className='font-bold text-white'>
-                {formatPrice(product.priceRange.minVariantPrice)}
-              </span>
-            }
+              }
+            </div>
           </div>
+
+          {/* Knapp - full bredde på mobil, auto på desktop */}
+          <Button
+            size='sm'
+            onClick={handleAddToCart}
+            disabled={!selectedVariant}
+            className='w-full sm:w-auto sm:self-start'
+          >
+            Legg til <ArrowRightIcon className='ml-2 h-4 w-4' />
+          </Button>
         </div>
-        <Button size='sm' onClick={handleAddToCart} disabled={!selectedVariant}>
-          Legg til <ArrowRightIcon className='ml-2 h-4 w-4' />
-        </Button>
       </div>
+
+      {/* Rabatthint */}
       {showDiscountHint && (
         <div className='flex items-center justify-center text-xs font-semibold text-sky-400 border-t border-sky-500/20 pt-2'>
           <PercentIcon className='h-3 w-3 mr-1.5' />

@@ -51,17 +51,32 @@ export function CartDrawer(): React.JSX.Element {
       direction='right'
     >
       <CartTrigger />
-      <DrawerContent>
+      <DrawerContent className='h-full max-h-full overflow-hidden'>
         <VisuallyHidden>
           <DrawerTitle>Handlepose</DrawerTitle>
           <DrawerDescription>
             Oversikt over varer i handleposen og handlingsknapper.
           </DrawerDescription>
         </VisuallyHidden>
-        <CartHeader />
-        <CartBody />
-        <SmartCartSuggestions cart={cart} />
-        <CartFooter cart={cart} />
+
+        {/* Wrapper med riktig flex-struktur for mobil */}
+        <div className='flex flex-col h-full overflow-hidden'>
+          {/* Header - fast høyde */}
+          <CartHeader />
+
+          {/* Scrollbar område - tar tilgjengelig plass */}
+          <div className='flex-1 min-h-0 overflow-hidden'>
+            <CartBody />
+          </div>
+
+          {/* Suggestions - maks høyde med scroll hvis nødvendig */}
+          <div className='max-h-[40vh] overflow-y-auto'>
+            <SmartCartSuggestions cart={cart} />
+          </div>
+
+          {/* Footer - fast høyde */}
+          <CartFooter cart={cart} />
+        </div>
       </DrawerContent>
     </Drawer>
   )

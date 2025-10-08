@@ -1,7 +1,7 @@
 // Path: src/components/cart/CartBody/CartBody.tsx
 
 import { ScrollArea } from '@/components/cart/utils/ScrollArea'
-import { useCartLineIds } from '@/hooks/useCartLines' // Importer den nye hooken
+import { useCartLineIds } from '@/hooks/useCartLines'
 import { useCartPending } from '@/hooks/useCartPending'
 import { CartLineItem } from '@/components/cart/CartLineItem'
 import { EmptyCartRecommendations } from '@/components/cart/EmptyCart/EmptyCartRecommendations'
@@ -15,14 +15,14 @@ export const CartBody = () => {
 
   if (isEmpty && !isPending) {
     return (
-      <div className='flex flex-1 items-start justify-center p-6'>
+      <div className='flex h-full items-center justify-center p-6'>
         <EmptyCartRecommendations />
       </div>
     )
   }
 
   return (
-    <ScrollArea className='flex-1'>
+    <ScrollArea className='h-full w-full'>
       <div className='p-6'>
         {lineIds?.map((lineId, index) => (
           <div key={lineId}>
