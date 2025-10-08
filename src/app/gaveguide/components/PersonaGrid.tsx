@@ -33,8 +33,8 @@ export const personas: Persona[] = [
     title: 'Til Båteieren',
     description:
       'For de sene kveldene for anker, eller når en uventet bris gjør seg gjeldende på dekk. En favoritt i gjestehavna.',
-    href: '/produkter/utekos-techdun' as Route,
-    imageUrl: '/front-open.webp'
+    href: '/produkter/utekos-dun' as Route,
+    imageUrl: 'utekos-black.webp'
   },
   {
     title: 'Til den som har alt',

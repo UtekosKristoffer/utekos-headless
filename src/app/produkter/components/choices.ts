@@ -15,14 +15,14 @@ export const choices: ProductChoice[] = [
     imageUrl: '/utekos-blue.webp',
     linkColor: 'text-rose-400'
   },
-  {
-    title: 'For uforutsigbart vær',
-    description:
-      'En robust og lettstelt favoritt som isolerer selv i fuktig vær. Perfekt for båt, bobil og et aktivt uteliv.',
-    href: '/produkter/utekos-techdun' as Route,
-    imageUrl: '/fiberdun.webp',
-    linkColor: 'text-cyan-400'
-  },
+  // {
+  // - title: 'For uforutsigbart vær',
+  // - description:
+  // 'En robust og lettstelt favoritt som isolerer selv i fuktig vær. Perfekt for båt, bobil og et aktivt uteliv.',
+  // - href: '/produkter/utekos-techdun' as Route,
+  // -  imageUrl: '/fiberdun.webp',
+  // - linkColor: 'text-cyan-400'
+  // },
   {
     title: 'For allsidig, daglig bruk',
     description:

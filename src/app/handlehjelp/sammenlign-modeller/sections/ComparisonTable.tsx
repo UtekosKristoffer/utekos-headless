@@ -76,9 +76,6 @@ export function ComparisonTable() {
               Utekos Dun™
             </th>
             <th className='border-b border-neutral-800 p-4 text-center font-semibold'>
-              Utekos Techdun™
-            </th>
-            <th className='border-b border-neutral-800 p-4 text-center font-semibold'>
               Utekos Mikrofiber™
             </th>
           </tr>
