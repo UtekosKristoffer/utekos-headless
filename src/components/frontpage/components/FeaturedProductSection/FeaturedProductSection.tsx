@@ -13,7 +13,7 @@ const productUrl = '/produkter/utekos-mikrofiber'
 export function FeaturedProductSection() {
   return (
     <section
-      id='featured-product-mikrofiber'
+      id='featured-product'
       className='relative mx-auto mt-16 max-w-[95%] overflow-hidden rounded-xl border border-neutral-800 py-16 md:max-w-7xl'
     >
       <MikrofiberBackgroundGlow />
@@ -23,12 +23,12 @@ export function FeaturedProductSection() {
 
         <AnimatedBlock
           className='will-animate-fade-in-right flex flex-col items-start'
-          delay='0.2s'
+          delay='0.1s'
           threshold={0.3}
         >
           <AnimatedBlock
             className='will-animate-fade-in-up mb-3 inline-flex items-center gap-2 rounded-full border border-amber-800/30 bg-amber-900/10 px-4 py-1.5'
-            delay='0.3s'
+            delay='0.2s'
             threshold={1}
           >
             <Star className='h-3 w-3 text-amber-500' />
@@ -39,7 +39,7 @@ export function FeaturedProductSection() {
 
           <AnimatedBlock
             className='will-animate-fade-in-up'
-            delay='0.4s'
+            delay='0.3s'
             threshold={1}
           >
             <h2 className='mb-4 text-4xl font-bold leading-tight text-foreground sm:text-5xl'>
@@ -49,7 +49,7 @@ export function FeaturedProductSection() {
 
           <AnimatedBlock
             className='will-animate-fade-in-up'
-            delay='0.5s'
+            delay='0.4s'
             threshold={1}
           >
             <p className='mb-8 max-w-prose text-lg leading-relaxed text-muted-foreground'>
@@ -65,7 +65,7 @@ export function FeaturedProductSection() {
               <FeatureCard
                 key={feature.title}
                 feature={feature}
-                delay={0.6 + idx * 0.1}
+                delay={0.4 + idx * 0.1}
               />
             ))}
           </div>

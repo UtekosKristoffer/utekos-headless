@@ -19,7 +19,7 @@ export function SpecialOfferSection() {
               className='absolute right-1/4 bottom-1/4 h-[600px] w-[600px] opacity-15 blur-3xl'
               style={{
                 background:
-                  'radial-gradient(circle, #0ea5e9 0%, transparent 70%)' // Sky-blå
+                  'radial-gradient(circle, #0ea5e9 0%, transparent 70%)'
               }}
             />
           </div>
