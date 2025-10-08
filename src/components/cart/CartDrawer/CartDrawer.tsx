@@ -70,7 +70,7 @@ export function CartDrawer(): React.JSX.Element {
           </div>
 
           {/* Suggestions - maks høyde med scroll hvis nødvendig */}
-          <div className='max-h-[40vh] overflow-y-auto'>
+          <div className='max-h-[30vh] overflow-y-auto'>
             <SmartCartSuggestions cart={cart} />
           </div>
 

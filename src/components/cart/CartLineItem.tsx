@@ -33,7 +33,6 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
   const [isDeleting, setIsDeleting] = useState(false)
   const updateTimerRef = useRef<NodeJS.Timeout | null>(null)
 
-  // KORRIGERT: Fjernet localQuantity fra dependency array
   useEffect(() => {
     if (line && !isDeleting) {
       setLocalQuantity(line.quantity)
@@ -198,7 +197,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
               <Plus className='size-3' />
             </Button>
           </div>
-          <span className='text-sm font-medium tabular-nums transition-all duration-200'>
+          <span className='text-sm font-medium tabular-nums transition-all duration-200 mr-1'>
             {formatNOK(displayPrice)}
           </span>
         </div>
