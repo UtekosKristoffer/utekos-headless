@@ -52,8 +52,8 @@ export function AnimatedChat() {
       </AnimatedBlock>
 
       {/* --- Siste "usendt" melding --- */}
-      <div className='flex justify-end mt-2'>
-        <div className='relative max-w-[80%] rounded-lg border border-neutral-800 bg-sidebar-foreground py-3 pl-3 pr-5 sm:p-3'>
+      <div className='flex justify-end mt-2 mr-3 sm:mr-0'>
+        <div className='relative max-w-[80%] rounded-lg border border-neutral-800 bg-sidebar-foreground p-3'>
           <div className='flex items-center gap-2'>
             <p className='flex items-center whitespace-nowrap text-base text-foreground/90'>
               <span>Nettopp. Mer plass til vinen 😉</span>
