@@ -38,7 +38,7 @@ export const mockArticles: Article[] = [
   },
   {
     slug: 'slik-skaper-du-den-perfekte-stemningen-pa-hytta',
-    title: 'Slik skaper du den perfekte stemningen på hytta',
+    title: 'Slik skaper du den perfekte stemningen på hytten',
     excerpt:
       'Utover peis og fyr i ovnen, hva er hemmelighetene bak ekte hyttekos? Utforsk våre beste tips for lys, lyd, tekstur og komfort.',
     imageUrl: '/og-image-hytte.webp',

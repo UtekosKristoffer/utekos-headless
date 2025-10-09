@@ -11,7 +11,7 @@ import Link from 'next/link'
 const routeDetailsData = [
   {
     icon: 'mountainSnow' as const,
-    title: 'Rute 1: Fjell & Fjord-ruten',
+    title: 'Rute 1: Fjell- og fjordruten',
     description:
       'Denne klassiske reisen tar deg over mektige fjelloverganger og ned til de verdenskjente fjordene, nå kledd i høstens varme farger. Perfekt for deg som elsker dramatiske kontraster.',
     color: 'from-cyan-500/20',
@@ -19,7 +19,7 @@ const routeDetailsData = [
   },
   {
     icon: 'trees' as const,
-    title: 'Rute 2: Villmark & Kultur-ruten',
+    title: 'Rute 2: Villmark- og kulturruten',
     description:
       'For deg som søker roen og de dype skogene, er denne ruten gjennom Øst-Norge en innertier. Her finner du endeløse veier gjennom fargesprakende skoger, nasjonalparker og historisk kultur.',
     color: 'from-emerald-500/20',
