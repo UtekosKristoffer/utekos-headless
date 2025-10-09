@@ -43,6 +43,15 @@ const nextConfig: NextConfig = {
         pathname: '/**'
       }
     ]
+  },
+  async redirects() {
+    return [
+      {
+        source: '/products/:path*',
+        destination: '/produkter/:path*',
+        permanent: true // Setter opp en 301 (permanent) redirect
+      }
+    ]
   }
 }
 export default withBundleAnalyzer(nextConfig)
