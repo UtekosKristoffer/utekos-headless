@@ -1,5 +1,3 @@
-// Path: src/components/frontpage/AnimatedChat.tsx
-
 'use client'
 
 import { ChatBubble } from '@/components/chat/ChatBubble'
@@ -52,7 +50,7 @@ export function AnimatedChat() {
       </AnimatedBlock>
 
       {/* --- Siste "usendt" melding --- */}
-      <div className='flex justify-end mt-2 mr-3 sm:mr-0'>
+      <div className='flex justify-end mt-2'>
         <div className='relative max-w-[80%] rounded-lg border border-neutral-800 bg-sidebar-foreground p-3'>
           <div className='flex items-center gap-2'>
             <p className='flex items-center whitespace-nowrap text-base text-foreground/90'>
@@ -60,15 +58,16 @@ export function AnimatedChat() {
               <span className='ml-1 inline-block h-4 w-0.5 animate-blinking-cursor bg-foreground' />
             </p>
             <span
-              className='inline-flex size-5 shrink-0 items-center justify-center rounded-md bg-foreground text-background'
+              className='inline-flex size-5 shrink-0 items-center md:justify-center justify-between rounded-md bg-foreground text-background'
               aria-hidden
               title='Send'
             >
-              <SendIcon className='h-3 w-3' />
+              <SendIcon className='h-3 w-3 mx-auto' />
             </span>
           </div>
         </div>
       </div>
+
       {/* --- PEKERE (KUN FOR DESKTOP) --- */}
       <div className='hidden md:block'>
         <NameCursor
