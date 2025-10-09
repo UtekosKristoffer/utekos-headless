@@ -54,7 +54,7 @@ export const metadata: Metadata = {
       'Forleng kveldene på hytten, i bobilen eller på terrassen. Komfortplagg av høy kvalitet som holder deg varm.',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/og-image-produkter.png',
         width: 1200,
         height: 630,
         alt: 'Personer som koser seg utendørs med varme komfortplagg fra Utekos.'

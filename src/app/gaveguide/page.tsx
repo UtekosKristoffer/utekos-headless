@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     siteName: 'Utekos',
     images: [
       {
-        url: '/og-image-gaveguide.webp',
+        url: '/og-image-farsdag.png',
         width: 1200,
         height: 630,
         alt: 'En person som glad pakker opp en Utekos-gave.'
