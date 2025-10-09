@@ -38,7 +38,7 @@ export function UpsellItem({ product, showDiscountHint }: UpsellItemProps) {
         : 'border-neutral-800 bg-neutral-900/50'
       } p-3`}
     >
-      {/* Mobilvennlig layout med bedre flex-håndtering */}
+      {/* Responsiv layout: vertikal på mobil, horisontal på desktop */}
       <div className='flex items-start gap-3'>
         {/* Bilde - fast størrelse */}
         <div className='relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-md'>
@@ -53,10 +53,10 @@ export function UpsellItem({ product, showDiscountHint }: UpsellItemProps) {
           )}
         </div>
 
-        {/* Innhold og knapp wrapper - tillater wrapping på mobil */}
-        <div className='flex flex-1 flex-col gap-2 min-w-0'>
+        {/* Innhold wrapper - endrer layout basert på skjermstørrelse */}
+        <div className='flex flex-1 flex-col gap-2 sm:flex-row sm:items-center sm:justify-between min-w-0'>
           {/* Produktinfo */}
-          <div className='flex-1'>
+          <div className='flex-1 min-w-0'>
             <p className='text-sm font-medium line-clamp-2'>{product.title}</p>
             <div className='flex items-center gap-2 text-xs text-muted-foreground mt-1'>
               {showDiscountHint ?
@@ -78,12 +78,12 @@ export function UpsellItem({ product, showDiscountHint }: UpsellItemProps) {
             </div>
           </div>
 
-          {/* Knapp - full bredde på mobil, auto på desktop */}
+          {/* Knapp - full bredde på mobil, auto bredde til høyre på desktop */}
           <Button
             size='sm'
             onClick={handleAddToCart}
             disabled={!selectedVariant}
-            className='w-full sm:w-auto sm:self-start'
+            className='w-full sm:w-auto sm:flex-shrink-0'
           >
             Legg til <ArrowRightIcon className='ml-2 h-4 w-4' />
           </Button>
