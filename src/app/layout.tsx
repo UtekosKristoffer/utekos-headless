@@ -9,13 +9,16 @@ import { Toaster } from '@/components/ui/sonner'
 import { getCachedCart } from '@/lib/helpers/cart/getCachedCart'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { QueryClient } from '@tanstack/react-query'
+import Script from 'next/script'
+import { Suspense } from 'react'
+import { MetaPixelEvents } from '@/components/analytics/MetaPixelEvents'
 
 import Providers from '@/components/providers/Providers'
 import AnnouncementBanner from '@/SpecialOfferSection/AnnouncementBanner'
 import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 
-import type { RootLayoutProps, Cart } from '@types'
+import type { RootLayoutProps } from '@types'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -94,6 +97,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   })
 
   const dehydratedState = dehydrate(queryClient)
+  const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID
 
   return (
     <html lang='no'>
@@ -111,7 +115,26 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           <SpeedInsights />
           <Analytics mode='production' />
         </Providers>
+        <Suspense fallback={null}>
+          <MetaPixelEvents />
+        </Suspense>
       </body>
+      {pixelId && (
+        <Script id='meta-pixel' strategy='afterInteractive'>
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '${pixelId}');
+            fbq('track', 'PageView');
+          `}
+        </Script>
+      )}
     </html>
   )
 }
