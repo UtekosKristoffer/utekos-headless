@@ -1,3 +1,4 @@
+// Path: src/components/chat/ChatBubble.tsx
 import { cn } from '@/lib/utils/className'
 import type { ReactNode } from 'react'
 
