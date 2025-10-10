@@ -4,7 +4,7 @@ export const mikrofiberFeatures: Feature[] = [
     icon: 'cloud-rain',
     title: 'Presterer i fuktig vær',
     description:
-      'Den syntetiske isolasjonen lar ikke fuktig kveldsluft ødelegge kosen.',
+      'Luméa™ - ytterstoff med vannavvisende overflate og høy slitestyrke som ikke lar fuktig kveldsluft ødelegge kosen.',
     glowColor: '#f97316'
   },
   {

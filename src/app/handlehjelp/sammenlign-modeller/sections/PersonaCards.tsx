@@ -17,13 +17,13 @@ export function PersonaCards() {
       buttonText: 'Velg Utekos Dun™'
     },
     {
-      href: '/produkter/utekos-techdun',
-      imageSrc: '/half-diagonal.webp',
-      imageAlt: 'Utekos Techdun i uforutsigbart vær',
+      href: '/produkter/comfyrobe',
+      imageSrc: '/comfy_rainy.webp',
+      imageAlt: 'Comfyrobe i uforutsigbart vær',
       title: 'For den praktiske allrounderen',
       description:
         'Du trenger en robust arbeidshest som presterer i all slags vær – fra fuktige kvelder i båten til uforutsigbare dager med bobilen.',
-      buttonText: 'Velg Utekos Techdun™'
+      buttonText: 'Velg Comfyrobe™'
     },
     {
       href: '/produkter/utekos-mikrofiber',
@@ -39,7 +39,7 @@ export function PersonaCards() {
   return (
     <section className='py-24'>
       <div className='container mx-auto px-4'>
-        <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
+        <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2'>
           {personas.map((persona, index) => (
             <AnimatedBlock
               key={persona.title}
