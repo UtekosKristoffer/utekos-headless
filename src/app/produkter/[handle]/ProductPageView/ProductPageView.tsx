@@ -140,7 +140,7 @@ export default function ProductPageView({
           />
           <ProductGalleryCard
             galleryContent={
-              <div className='relative overflow-hidden rounded-2xl'>
+              <div className='relative overflow-hidden rounded-2xl isolate'>
                 <ProductGallery
                   title={title}
                   images={variantImages.map(image => ({
