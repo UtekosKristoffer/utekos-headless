@@ -19,7 +19,7 @@ type ProductGalleryProps = {
 
 export function ProductGallery({ title, images }: ProductGalleryProps) {
   if (images.length === 0) {
-    return <div className='relative aspect-video w-full' />
+    return <div className='relative aspect-video rounded-2xl w-full' />
   }
 
   return (
@@ -35,14 +35,14 @@ export function ProductGallery({ title, images }: ProductGalleryProps) {
           {images.map((image, index) => (
             <CarouselItem
               key={image.url}
-              className='relative aspect-[2/3] md:p-8'
+              className='relative rounded-2xl aspect-[2/3] md:p-8'
             >
               <Image
                 src={image.url}
                 alt={image.altText || `Bilde av ${title}`}
                 fill
                 sizes='(min-width: 1024px) 24rem, (min-width: 768px) 20rem, 16rem'
-                className='object-cover md:object-contain'
+                className='object-cover md:object-contain rounded-2xl'
                 priority={index === 0}
               />
             </CarouselItem>
