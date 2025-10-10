@@ -77,7 +77,7 @@ export function FeaturedProductSection() {
           >
             <div className='flex w-full flex-col gap-4 sm:flex-row sm:items-center'>
               <div className='flex items-baseline gap-2'>
-                <p className='text-4xl font-bold text-foreground'>1290,-</p>
+                <p className='text-4xl font-bold text-foreground'>1590,-</p>
                 <span className='text-sm text-muted-foreground'>inkl. mva</span>
               </div>
               <Button asChild size='lg' className='group w-full sm:w-auto'>

@@ -20,7 +20,7 @@ async function getFarsdagProducts(): Promise<Product[]> {
       id: 1,
       name: 'Utekos Mikrofiber',
       href: '/produkter/utekos-mikrofiber',
-      price: '1290,-',
+      price: '1590,-',
       imageSrc: '/black-1080.png',
       imageAlt: 'Klassisk Utekos-plagg i mikrofiber.'
     },
@@ -36,7 +36,7 @@ async function getFarsdagProducts(): Promise<Product[]> {
       id: 3,
       name: 'Comfyrobe',
       href: '/produkter/comfyrobe',
-      price: '990,-',
+      price: '1290,-',
       imageSrc: '/comfy-1080.png',
       imageAlt: 'Comfyrobe.'
     },
