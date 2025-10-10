@@ -28,7 +28,8 @@ const benefits = [
 ]
 
 export function SpecialOfferContentColumn() {
-  const stockPercentage = (remainingStock / totalStock) * 100
+  const precisePercentage = (remainingStock / totalStock) * 100
+  const displayPercentage = Math.round(precisePercentage)
 
   const [containerRef, containerInView] = useInView({ threshold: 0.5 })
   const [badgeRef, badgeInView] = useInView({ threshold: 1 })
@@ -99,7 +100,9 @@ export function SpecialOfferContentColumn() {
             </span>
             Kun {remainingStock} igjen på lager!
           </p>
-          <span className='text-xs text-neutral-500'>{stockPercentage}%</span>
+          <span className='text-xs text-neutral-500'>
+            {displayPercentage}%
+          </span>
         </div>
         <div className='h-2 w-full overflow-hidden rounded-full border border-neutral-700 bg-neutral-800'>
           <div
@@ -110,7 +113,7 @@ export function SpecialOfferContentColumn() {
             )}
             style={
               {
-                '--progress-width': `${stockPercentage}%`,
+                '--progress-width': `${precisePercentage}%`,
                 '--transition-delay': '0.6s'
               } as React.CSSProperties
             }

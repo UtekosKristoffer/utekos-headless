@@ -56,7 +56,7 @@ export default function PriceActivityPanel({
             </div>
             <div>
               <p className='font-semibold text-amber-400'>
-                Kun {limitedStockCount} igjen på lager!
+                Kun 10 igjen på lager!
               </p>
               <p className='text-sm text-amber-400/80'>
                 Sikre deg din før det er for sent
