@@ -2,9 +2,9 @@ import type { Feature } from '@/components/frontpage/components/FeaturedProductS
 export const mikrofiberFeatures: Feature[] = [
   {
     icon: 'cloud-rain',
-    title: 'Presterer i fuktig vær',
+    title: 'Luméa™',
     description:
-      'Luméa™ - ytterstoff med vannavvisende overflate og høy slitestyrke som ikke lar fuktig kveldsluft ødelegge kosen.',
+      'Eksklusivt ytterstoff som er utviklet spesielt for utendørsprodukter. Vannavvisende overflate og høy slitestyrke.',
     glowColor: '#f97316'
   },
   {
@@ -18,7 +18,7 @@ export const mikrofiberFeatures: Feature[] = [
     icon: 'shield-check',
     title: 'Robust og allsidig',
     description:
-      'Bygget for å tåle alt fra gnister fra bålet til krevende fjellturer.',
+      'Bygget for å forlenge hyggen, samtidig som materialet tåler daglig bruk utendørs.',
     glowColor: '#ea580c'
   }
 ]

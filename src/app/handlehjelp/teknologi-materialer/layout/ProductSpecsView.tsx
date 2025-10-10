@@ -3,6 +3,7 @@
 import {
   Feather,
   Flame,
+  Gem, // <--- 1. Importer det nye ikonet
   Layers,
   Shield,
   Thermometer,
@@ -15,6 +16,7 @@ const iconMap = {
   thermometer: Thermometer,
   feather: Feather,
   weight: Weight,
+  gem: Gem, // <--- 2. Legg til det nye ikonet i map'en
   shield: Shield,
   layers: Layers,
   flame: Flame
