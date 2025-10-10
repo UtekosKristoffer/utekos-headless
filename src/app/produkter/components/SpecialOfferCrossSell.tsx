@@ -16,13 +16,13 @@ export function SpecialOfferCrossSell({
   return (
     <section className='mt-12' aria-label='Siste sjanse-tilbud'>
       <div className='relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/30 p-6'>
-        <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6'>
-          <div className='relative h-24 w-24 shrink-0'>
+        <div className='flex flex-col rounded-lg gap-4 sm:flex-row sm:items-center sm:gap-6'>
+          <div className='relative h-24 w-24 rounded-lg shrink-0'>
             <Image
               src={specialEditionImage}
               alt='Utekos Special Edition'
               fill
-              className='object-contain'
+              className='object-contain rounded-lg'
               sizes='96px'
               priority={false}
               loading='lazy'
