@@ -1,3 +1,5 @@
+// Path: src/SpecialOfferSection/SpecialOfferImageSection.tsx
+
 'use client'
 
 import { AspectRatio } from '@/components/ui/aspect-ratio'
@@ -20,7 +22,7 @@ export function SpecialOfferImageSection() {
     <div
       ref={ref}
       className={cn(
-        'will-animate-fade-in-scale relative flex h-auto rounded-2xl items-center justify-center',
+        'will-animate-fade-in-scale relative flex h-auto items-center justify-center',
         isInView && 'is-in-view'
       )}
     >
@@ -28,12 +30,12 @@ export function SpecialOfferImageSection() {
         <CarouselContent>
           <CarouselItem>
             <div className='w-full'>
-              <AspectRatio ratio={2 / 3} className='rounded-2xl bg-transparent'>
+              <AspectRatio ratio={2 / 3} className='bg-transparent'>
                 <Image
                   src={specialEditionImage}
                   alt='Utekos Special Edition'
                   fill
-                  className='rounded-2xl object-contain p-4 transition-transform duration-500 hover:scale-105'
+                  className='object-cover transition-transform duration-500 hover:scale-105'
                   sizes='(max-width: 1024px) 80vw, 40vw'
                   priority
                 />
@@ -41,13 +43,13 @@ export function SpecialOfferImageSection() {
             </div>
           </CarouselItem>
           <CarouselItem>
-            <div className='p-1'>
-              <AspectRatio ratio={2 / 3} className='rounded-2xl'>
+            <div className='w-full'>
+              <AspectRatio ratio={2 / 3} className='bg-transparent'>
                 <Image
                   src='/special_bag.webp'
                   alt='Inkludert Utekos-bag'
                   fill
-                  className='rounded-2xl object-contain p-4 transition-transform duration-500 hover:scale-105'
+                  className='object-cover transition-transform duration-500 hover:scale-105'
                   sizes='(max-width: 1024px) 80vw, 40vw'
                 />
               </AspectRatio>
