@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils/className'
 
 const images = [
   {
-    src: '/utekos-black.webp',
+    src: '/utekos-black/Soveposejakke_Black_1.png',
     alt: 'Utekos Mikrofiber svart modell'
   },
   {
