@@ -140,16 +140,18 @@ export default function ProductPageView({
           />
           <ProductGalleryCard
             galleryContent={
-              <ProductGallery
-                title={title}
-                images={variantImages.map(image => ({
-                  id: image.id,
-                  url: image.url,
-                  altText: image.altText ?? '',
-                  width: image.width ?? 0,
-                  height: image.height ?? 0
-                }))}
-              />
+              <div className='relative overflow-hidden rounded-2xl'>
+                <ProductGallery
+                  title={title}
+                  images={variantImages.map(image => ({
+                    id: image.id,
+                    url: image.url,
+                    altText: image.altText ?? '',
+                    width: image.width ?? 0,
+                    height: image.height ?? 0
+                  }))}
+                />
+              </div>
             }
             enableStickyOnDesktop
             stickyTopClassName='md:top-24'
