@@ -1,5 +1,6 @@
 // Path: src/app/layout.tsx
 import './globals.css'
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
 import { geistSans, geistMono } from '@/db/config/font.config'
 import { mainMenu } from '@/db/config/menu.config'
 import { SpeedInsights } from '@vercel/speed-insights/react'
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
   },
   description:
     'Forleng kveldene på hytten, i bobilen eller på terrassen. Utekos lager komfortplagg av høy kvalitet, designet for å holde deg varm slik at du kan nyte de gode øyeblikkene lenger.',
-    
+
   keywords: [
     'utekos',
     'utekos dun',
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'no_NO',
     url: 'https://utekos.no',
-    
+
     siteName: 'Utekos',
     title: 'Utekos - Varme og komfort for gode stunder ute',
     description:
@@ -103,6 +104,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 
   return (
     <html lang='no'>
+      <GoogleAnalytics gaId='G-FCES3L0M9M' />
+      <GoogleTagManager gtmId='GTM-5TWMJQFP' />
       <body
         className={`bg-background text-foreground ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
