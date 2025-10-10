@@ -28,7 +28,7 @@ export function ProductGallery({ title, images }: ProductGalleryProps) {
         opts={{
           loop: images.length > 1
         }}
-        className='mx-auto w-full max-w-sm md:max-w-md'
+        className='mx-auto w-full max-w-sm overflow-hidden rounded-2xl md:max-w-md'
         aria-label={`Produktbilder for ${title}`}
       >
         <CarouselContent>
