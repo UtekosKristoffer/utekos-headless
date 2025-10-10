@@ -19,18 +19,16 @@ type ProductGalleryProps = {
 
 export function ProductGallery({ title, images }: ProductGalleryProps) {
   if (images.length === 0) {
-    return (
-      <div className='relative aspect-video w-full overflow-hidden rounded-lg md:max-h-[600px]' />
-    )
+    return <div className='relative aspect-video w-full' />
   }
 
   return (
-    <div className='space-y-4'>
+    <div>
       <Carousel
         opts={{
           loop: images.length > 1
         }}
-        className='mx-auto w-full md:p-6 max-w-sm overflow-hidden rounded-lg md:max-w-md'
+        className='mx-auto w-full max-w-sm md:max-w-md'
         aria-label={`Produktbilder for ${title}`}
       >
         <CarouselContent>
@@ -41,7 +39,7 @@ export function ProductGallery({ title, images }: ProductGalleryProps) {
                 alt={image.altText || `Bilde av ${title}`}
                 fill
                 sizes='(min-width: 1024px) 24rem, (min-width: 768px) 20rem, 16rem'
-                className='rounded-lg object-contain'
+                className='object-cover'
                 priority={index === 0}
               />
             </CarouselItem>
