@@ -1,5 +1,4 @@
 // Path: src/app/produkter/[handle]/ProductPageView/components/ProductGalleryCard.tsx
-// Server Component: wrapper rundt bildegalleriet (ren presentasjon + glow/ramme/container)
 
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 
@@ -28,7 +27,7 @@ export default function ProductGalleryCard({
       threshold={0.2}
     >
       <section aria-label={ariaLabel} className='mx-auto max-w-xl rounded-lg'>
-        <div className='group relative w-full overflow-hidden rounded-2xl p-4 border border-neutral-800 bg-sidebar-foreground shadow-xl transition-all duration-300 hover:border-neutral-700'>
+        <div className='group relative w-full overflow-hidden rounded-2xl border border-neutral-800 bg-sidebar-foreground shadow-xl transition-all duration-300 hover:border-neutral-700'>
           <div
             className='absolute -inset-2 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-20'
             style={{
