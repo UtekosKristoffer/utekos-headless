@@ -60,10 +60,10 @@ export function ComfyrobeFeatureSection() {
 
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.5s'>
               <div className='mt-12 flex w-full flex-col items-center gap-4 sm:flex-row'>
-                <p className='text-4xl font-bold text-foreground'>NOK 990,-</p>
+                <p className='text-4xl font-bold text-foreground'>NOK 1290,-</p>
                 <Button asChild size='lg' className='group w-full sm:w-auto'>
                   <Link href='/produkter/comfyrobe'>
-                    Utforsk Comfyrobe
+                    Utforsk Comfyrobe™
                     <Wind className='ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1' />
                   </Link>
                 </Button>
