@@ -28,7 +28,6 @@ export function SpecialOfferCrossSell({
               loading='lazy'
               fetchPriority='low'
               decoding='async'
-              quality={70}
             />
           </div>
 
