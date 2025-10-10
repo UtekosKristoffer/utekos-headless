@@ -2,7 +2,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { SparklesIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import specialEditionImage from '@public/special_turkis_doll_widthout.webp'
+import specialEditionImage from '@public/special/kate.png'
 
 interface SpecialOfferCrossSellProps {
   currentProductHandle: string
