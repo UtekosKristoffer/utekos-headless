@@ -8,7 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
-import specialEditionImage from '@public/special_turkis_doll_widthout.webp'
+import specialEditionImage from '@public/special/kate.jpg'
 import Image from 'next/image'
 import { useInView } from '@/hooks/useInView'
 import { cn } from '@/lib/utils/className'
