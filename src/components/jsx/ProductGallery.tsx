@@ -33,13 +33,16 @@ export function ProductGallery({ title, images }: ProductGalleryProps) {
       >
         <CarouselContent>
           {images.map((image, index) => (
-            <CarouselItem key={image.url} className='relative aspect-[2/3]'>
+            <CarouselItem
+              key={image.url}
+              className='relative aspect-[2/3] md:p-8'
+            >
               <Image
                 src={image.url}
                 alt={image.altText || `Bilde av ${title}`}
                 fill
                 sizes='(min-width: 1024px) 24rem, (min-width: 768px) 20rem, 16rem'
-                className='object-cover'
+                className='object-cover md:object-contain'
                 priority={index === 0}
               />
             </CarouselItem>
