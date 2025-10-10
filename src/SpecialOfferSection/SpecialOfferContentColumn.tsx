@@ -7,7 +7,7 @@ import { useInView } from '@/hooks/useInView'
 import { cn } from '@/lib/utils/className'
 
 const totalStock = 11
-const remainingStock = 11
+const remainingStock = 10
 
 const benefits = [
   {
