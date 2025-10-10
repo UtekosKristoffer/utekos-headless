@@ -23,7 +23,7 @@ export function SpecialOfferSection() {
               }}
             />
           </div>
-          <div className='grid grid-cols-1 relative items-center gap-12 lg:grid-cols-2'>
+          <div className='grid grid-cols-1 relative rounded-2xl items-center gap-12 lg:grid-cols-2'>
             <SpecialOfferImageSection />
             <SpecialOfferContentColumn />
           </div>
