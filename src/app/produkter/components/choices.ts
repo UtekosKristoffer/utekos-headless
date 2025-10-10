@@ -36,7 +36,7 @@ export const choices: ProductChoice[] = [
     description:
       'Vanntett, vindtett og fôret med myk plysj. Holder deg garantert varm og tørr etter isbadet eller på en fuktig dag på campingen.',
     href: '/produkter/comfyrobe' as Route,
-    imageUrl: '/comfyrobe.webp',
+    imageUrl: '/comfyrobe/Jakke_Navy_1.webp',
     linkColor: 'text-amber-400' // Endret farge for bedre distinksjon
   },
   {
