@@ -43,7 +43,7 @@ export const choices: ProductChoice[] = [
     title: 'Tilbehøret som fullfører kosen',
     description:
       'Små detaljer, stor forskjell. Hold varmen med våre buffer, og pakk smart med våre kompresjonsposer.',
-    href: '/produkter' as Route,
+    href: '/produkter/utekos-buff' as Route,
     imageUrl: '/og-image-buff.webp',
     linkColor: 'text-slate-400' // Endret farge for bedre distinksjon
   }
