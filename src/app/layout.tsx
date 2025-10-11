@@ -25,7 +25,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
-    default: 'Utekos - Varme og komfort for gode stunder ute',
+    default: 'Utekos™ - Forleng de gode stundene ute',
     template: '%s | Utekos'
   },
   description:
