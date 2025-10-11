@@ -199,7 +199,10 @@ export default function ProductPageView({
               </div>
 
               <div className='mt-8'>
-                <AddToCart selectedVariant={selectedVariant} />
+                <AddToCart
+                  product={productData}
+                  selectedVariant={selectedVariant}
+                />
               </div>
 
               <ProductDescription descriptionHtml={productDescriptionHtml} />
