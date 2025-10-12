@@ -9,7 +9,6 @@ const nextConfig: NextConfig = {
   typedRoutes: true,
   experimental: {
     reactCompiler: true,
-
     useCache: true,
     optimizePackageImports: [
       'zod',
@@ -65,6 +64,11 @@ const nextConfig: NextConfig = {
       {
         source: '/pages/vask-og-vedlikehold',
         destination: '/handlehjelp/vask-og-vedlikehold',
+        permanent: true
+      },
+      {
+        source: '/pages/hytteliv',
+        destination: '/inspirasjon/hytteliv',
         permanent: true
       }
     ]
