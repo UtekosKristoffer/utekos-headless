@@ -26,7 +26,11 @@ export const comfyrobeData = [
 ]
 
 export const utekosData = [
-  { measurement: 'Lengde (til hals)', m: '170 cm', l: '200 cm' },
-  { measurement: 'Senter til ermetupp', m: '85 cm', l: '100 cm' },
-  { measurement: 'Flatmål (bunn)', m: '66 cm', l: '75 cm' }
+  { measurement: 'Total lengde (nakke til bunn)', m: '170 cm', l: '200 cm' },
+  { measurement: 'Brystvidde (flatmål)', m: '85 cm', l: '100 cm' },
+  { measurement: 'Armlengde (fra senter nakke)', m: '85 cm', l: '100 cm' },
+  { measurement: 'Bredde nederst (flatmål)', m: '66 cm', l: '75 cm' },
+  { measurement: 'Lengde på glidelås (V-hals)', m: '73 cm', l: '85.5 cm' },
+  { measurement: 'Høyde på hette', m: '35 cm', l: '35 cm' },
+  { measurement: 'Høyde på baklomme', m: '42 cm', l: '42 cm' }
 ]
