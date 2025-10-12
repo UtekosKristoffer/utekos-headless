@@ -1,4 +1,5 @@
 // Path: src/app/produkter/page.tsx
+import { ProductListJsonLd } from '@/app/produkter/ProductJsonLd'
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 import { getProducts } from '@/api/lib/products/getProducts'
 import { QueryClient } from '@tanstack/react-query'
@@ -55,46 +56,52 @@ const ProductsPage = async () => {
   })
 
   return (
-    <main className='container mx-auto px-4 py-16 sm:py-24'>
-      <ProductsPageHeader />
-      <HelpChooseSection />
-      <Suspense fallback={<VideoSkeleton />}>
-        <ProductVideoSection />
-      </Suspense>
-      <ProductTestimonial />
-      <ComparisonTeaser />
+    <>
+      <ProductListJsonLd />
+      <main className='container mx-auto px-4 py-16 sm:py-24'>
+        <ProductsPageHeader />
+        <HelpChooseSection />
+        <Suspense fallback={<VideoSkeleton />}>
+          <ProductVideoSection />
+        </Suspense>
+        <ProductTestimonial />
+        <ComparisonTeaser />
 
-      <section className='mb-24'>
-        <div className='relative mb-12 text-center overflow-hidden py-16 md:mb-20'>
-          <div aria-hidden='true' className='absolute inset-0 -z-10 opacity-30'>
+        <section className='mb-24'>
+          <div className='relative mb-12 text-center overflow-hidden py-16 md:mb-20'>
             <div
-              className='absolute left-1/2 top-0 h-[500px] w-[1000px] -translate-x-1/2 blur-3xl'
-              style={{
-                background:
-                  'radial-gradient(circle, #0ea5e9 0%, transparent 70%)'
-              }}
-            />
+              aria-hidden='true'
+              className='absolute inset-0 -z-10 opacity-30'
+            >
+              <div
+                className='absolute left-1/2 top-0 h-[500px] w-[1000px] -translate-x-1/2 blur-3xl'
+                style={{
+                  background:
+                    'radial-gradient(circle, #0ea5e9 0%, transparent 70%)'
+                }}
+              />
+            </div>
+            <h2 className='text-4xl font-bold tracking-tight text-foreground drop-shadow-md md:text-5xl'>
+              Skapt for din Utekos
+            </h2>
+            <p className='mx-auto mt-4 max-w-2xl text-lg text-muted-foreground'>
+              Våre komfortplagg er designet for å holde deg varm, slik at du kan
+              nyte de gode øyeblikkene lenger.
+            </p>
           </div>
-          <h2 className='text-4xl font-bold tracking-tight text-foreground drop-shadow-md md:text-5xl'>
-            Skapt for din Utekos
-          </h2>
-          <p className='mx-auto mt-4 max-w-2xl text-lg text-muted-foreground'>
-            Våre komfortplagg er designet for å holde deg varm, slik at du kan
-            nyte de gode øyeblikkene lenger.
-          </p>
-        </div>
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <Suspense fallback={<ProductGridSkeleton />}>
-            <AllProductsCarousel />
-          </Suspense>
-        </HydrationBoundary>
-      </section>
+          <HydrationBoundary state={dehydrate(queryClient)}>
+            <Suspense fallback={<ProductGridSkeleton />}>
+              <AllProductsCarousel />
+            </Suspense>
+          </HydrationBoundary>
+        </section>
 
-      <MicrofiberFeatureSection />
-      <ComfyrobeFeatureSection />
-      <StapperFeatureSection />
-      <ProductsPageFooter />
-    </main>
+        <MicrofiberFeatureSection />
+        <ComfyrobeFeatureSection />
+        <StapperFeatureSection />
+        <ProductsPageFooter />
+      </main>
+    </>
   )
 }
 

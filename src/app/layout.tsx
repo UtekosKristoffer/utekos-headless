@@ -21,6 +21,7 @@ import Header from '@/components/header/Header'
 
 import type { RootLayoutProps } from '@types'
 import type { Metadata } from 'next'
+import { OrganizationJsonLd } from './OrganizationJsonLd'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -104,6 +105,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 
   return (
     <html lang='no'>
+      <OrganizationJsonLd />
       <GoogleAnalytics gaId='G-FCES3L0M9M' />
       <GoogleTagManager gtmId='GTM-5TWMJQFP' />
       <body
