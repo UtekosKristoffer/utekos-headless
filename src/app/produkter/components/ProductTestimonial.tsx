@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/card'
 
 export function ProductTestimonial() {
   return (
-    <section className='mx-auto mb-24 max-w-3xl'>
+    <section className='mx-auto my-24 max-w-3xl'>
       <AnimatedBlock
         className='will-animate-fade-in-up'
         delay='0s'

@@ -1,6 +1,8 @@
 // Path: src/app/produkter/[handle]/ProductPageView/ProductPageView.tsx
 'use client'
-
+import { Suspense } from 'react'
+import { VideoSkeleton } from '@/app/produkter/components/VideoSkeleton'
+import { ProductVideoSection } from '@/app/produkter/components/ProductVideoSection'
 import { ProductPageAccordion } from '@/app/produkter/[handle]/ProductPageAccordion/ProductPageAccordion'
 import { renderOptionComponent } from '@/app/produkter/[handle]/ProductPageView/helpers/renderOptionComponent'
 import { RelatedProducts } from '@/app/produkter/[handle]/RelatedProducts/RelatedProducts'

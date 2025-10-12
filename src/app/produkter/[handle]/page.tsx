@@ -1,5 +1,7 @@
 // Path: src/app/produkter/[handle]/page.tsx
-
+import { Suspense } from 'react'
+import { VideoSkeleton } from '@/app/produkter/components/VideoSkeleton'
+import { ProductVideoSection } from '@/app/produkter/components/ProductVideoSection'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { getProduct } from '@/api/lib/products/getProduct'
 import { ProductJsonLd } from './ProductJsonLd'
@@ -98,6 +100,9 @@ export default async function ProductPage({
       <HydrationBoundary state={dehydrate(queryClient)}>
         <ProductPageController handle={handle} />
       </HydrationBoundary>
+      <Suspense fallback={<VideoSkeleton />}>
+        <ProductVideoSection />
+      </Suspense>
     </>
   )
 }

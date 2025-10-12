@@ -10,11 +10,12 @@ import { ProductsPageHeader } from '@/app/produkter/components/ProductsPageHeade
 import { AllProductsCarousel } from '@/components/ProductCard/AllProductsCarousel'
 import { ComfyrobeFeatureSection } from '@/app/produkter/components/ComfyrobeSection/ComfyrobeFeatureSection'
 import { ProductGridSkeleton } from '@/components/frontpage/Skeletons/ProductGridSkeleton'
-
+import { VideoSkeleton } from './components/VideoSkeleton'
 import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import { StapperFeatureSection } from './components/StapperFeatureSection'
 import { MicrofiberFeatureSection } from './components/MicrofiberSection/MicrofiberFeatureSection'
+import { ProductVideoSection } from './components/ProductVideoSection'
 
 export const metadata: Metadata = {
   title: 'Kolleksjon: Komfortplagg for hytteliv & utekos | Utekos',
@@ -57,6 +58,9 @@ const ProductsPage = async () => {
     <main className='container mx-auto px-4 py-16 sm:py-24'>
       <ProductsPageHeader />
       <HelpChooseSection />
+      <Suspense fallback={<VideoSkeleton />}>
+        <ProductVideoSection />
+      </Suspense>
       <ProductTestimonial />
       <ComparisonTeaser />
 

@@ -1,4 +1,7 @@
 // Path: src/app/page.tsx
+import { Suspense } from 'react'
+import { VideoSkeleton } from '@/app/produkter/components/VideoSkeleton'
+import { ProductVideoSection } from '@/app/produkter/components/ProductVideoSection'
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 import { QueryClient } from '@tanstack/react-query'
 import { getFeaturedProducts } from '@/api/lib/products/getFeaturedProducts'
@@ -27,6 +30,9 @@ const HomePage = async () => {
         <HeroSection />
         <FeaturedProductSection />
         <SpecialOfferSection />
+        <Suspense fallback={<VideoSkeleton />}>
+          <ProductVideoSection />
+        </Suspense>
         <section className='container md:max-w-7xl max-w-[95%] mx-auto py-12 lg:py-16 sm:py-16'>
           <ProductCarousel />
         </section>
