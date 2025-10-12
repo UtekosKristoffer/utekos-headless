@@ -72,6 +72,7 @@ export type ProductVariantConnection = {
 export type ShopifyProductVariant = {
   id: string
   title: string
+  barcode: string | null
   availableForSale: boolean
   currentlyNotInStock: boolean
   selectedOptions: SelectedOption[]
