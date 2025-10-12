@@ -16,7 +16,7 @@ export function ProductTestimonial() {
               høsten. Kvaliteten er helt fantastisk. Anbefales på det
               varmeste!&quot;
             </blockquote>
-            <p className='mt-6 font-semibold'>- Anne, Hytteeier</p>
+            <p className='mt-6 font-semibold'>- Anne, hytteeier</p>
           </CardContent>
         </Card>
       </AnimatedBlock>

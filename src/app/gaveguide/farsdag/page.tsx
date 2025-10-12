@@ -3,7 +3,7 @@ import { FarsdagProblemSolution } from './sections/FarsdagProblemSolution'
 import { FarsdagBenefits } from './sections/FarsdagBenefits'
 import { FarsdagWhyPerfect } from './sections/FarsdagWhyPerfect'
 import { FarsdagUrgencyCta } from './sections/FarsdagUrgencyCta'
-import { FarsdagProductCarousel } from './sections/FarsdagProductCarousel'
+import { AllProductsCarousel } from '@/components/ProductCard/AllProductsCarousel'
 import { Suspense } from 'react'
 import type { Metadata } from 'next'
 
@@ -54,7 +54,7 @@ export default function FarsdagGaveguidePage() {
       <FarsdagWhyPerfect />
       <FarsdagUrgencyCta />
       <Suspense fallback={<ProductCarouselSkeleton />}>
-        <FarsdagProductCarousel />
+        <AllProductsCarousel />
       </Suspense>
     </main>
   )

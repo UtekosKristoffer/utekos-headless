@@ -1,15 +1,34 @@
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator
+} from '@/components/ui/breadcrumb'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
 export function GaveGuideHero() {
   return (
-    <section className='py-24 text-center bg-sidebar-foreground border-b border-neutral-800'>
+    <section className='border-b border-neutral-800 bg-sidebar-foreground py-24 text-center'>
       <div className='container mx-auto px-4'>
-        <p className='font-semibold text-primary-foreground mb-2'>Gaveguiden</p>
+        <Breadcrumb className='mb-6 flex justify-center'>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href='/'>Hjem</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Gaveguide</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+        <p className='mb-2 font-semibold text-primary-foreground'>Gaveguiden</p>
         <h1 className='text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'>
           Gaven som varmer. Lenge.
         </h1>
-        <p className='mt-6 text-xl text-muted-foreground max-w-2xl mx-auto'>
+        <p className='mx-auto mt-6 max-w-2xl text-xl text-muted-foreground'>
           Gi bort mer enn bare en ting – gi bort komfort, kvalitetstid og
           utallige #utekosøyeblikk. Perfekt for den som har alt, men som
           fortjener det aller beste.
