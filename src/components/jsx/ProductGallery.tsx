@@ -43,7 +43,7 @@ export function ProductGallery({ title, images }: ProductGalleryProps) {
                 fill
                 sizes='(min-width: 1024px) 24rem, (min-width: 768px) 20rem, 16rem'
                 className='object-cover md:object-contain rounded-2xl'
-                priority={index === 0}
+                priority
               />
             </CarouselItem>
           ))}
