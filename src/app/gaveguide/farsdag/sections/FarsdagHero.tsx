@@ -11,9 +11,9 @@ import {
 
 export function FarsdagHero() {
   return (
-    <section className='flex w-full flex-col items-center border-b border-neutral-800 bg-background text-center'>
-      <div className='w-full max-w-4xl px-6 py-20 sm:py-24 lg:px-8'>
-        <Breadcrumb className='mb-6 flex justify-center'>
+    <section className='w-full border-b border-neutral-800 bg-background py-20 text-center sm:py-24'>
+      <div className='container mx-auto px-4'>
+        <Breadcrumb className='mb-6'>
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink href='/'>Hjem</BreadcrumbLink>
@@ -29,8 +29,11 @@ export function FarsdagHero() {
           </BreadcrumbList>
         </Breadcrumb>
         <h1 className='text-balance text-4xl font-bold tracking-tight text-primary-foreground sm:text-5xl lg:text-6xl'>
-          Gi bort mer enn en gave. Gi bort varme på farsdag.
+          Husk farsdag 9. november!
         </h1>
+        <h2 className='text-balance text-4xl mt-3 font-bold tracking-tight text-primary-foreground sm:text-5xl lg:text-6xl'>
+          Gi bort mer enn en gave - gi bort varme.
+        </h2>
         <p className='mt-6 text-balance text-lg leading-8 text-muted-foreground'>
           Til pappaen som har alt, men som fortjener komforten til å forlenge de
           gode stundene ute. Årets farsdagsgave finner du her.

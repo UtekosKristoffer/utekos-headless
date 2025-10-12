@@ -13,7 +13,7 @@ export function GaveGuideHero() {
   return (
     <section className='border-b border-neutral-800 bg-sidebar-foreground py-24 text-center'>
       <div className='container mx-auto px-4'>
-        <Breadcrumb className='mb-6 flex justify-center'>
+        <Breadcrumb className='mb-6'>
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink href='/'>Hjem</BreadcrumbLink>

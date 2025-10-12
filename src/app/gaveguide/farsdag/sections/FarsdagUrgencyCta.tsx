@@ -5,11 +5,10 @@ export function FarsdagUrgencyCta() {
     <section className='flex w-full flex-col items-center bg-sidebar-foreground border-b border-neutral-800'>
       <div className='w-full max-w-4xl px-6 py-16 text-center lg:px-8 sm:py-24'>
         <h2 className='text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl'>
-          Farsdag er søndag 9. november.
+          Ikke la den beste gaven glippe.
         </h2>
         <p className='mx-auto mt-4 max-w-xl text-lg leading-8 text-muted-foreground'>
-          Ikke la den beste gaven glippe. Bestill nå for å være sikker på at du
-          har den i hus i god tid.
+          Bestill nå for å være sikker på at du har den i hus i god tid.
         </p>
         <div className='mt-10'>
           <Link

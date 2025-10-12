@@ -53,9 +53,11 @@ export default function FarsdagGaveguidePage() {
       <FarsdagBenefits />
       <FarsdagWhyPerfect />
       <FarsdagUrgencyCta />
-      <Suspense fallback={<ProductCarouselSkeleton />}>
-        <AllProductsCarousel />
-      </Suspense>
+      <section className='container md:max-w-7xl max-w-[95%] mx-auto py-12 lg:py-16 sm:py-16'>
+        <Suspense fallback={<ProductCarouselSkeleton />}>
+          <AllProductsCarousel />
+        </Suspense>
+      </section>
     </main>
   )
 }
