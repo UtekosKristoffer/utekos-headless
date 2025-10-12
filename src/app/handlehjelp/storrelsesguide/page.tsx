@@ -127,9 +127,6 @@ export default function SizeGuidePage() {
             <h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
               Størrelsesguide for Comfyrobe™
             </h2>
-            <p className='mt-4 text-lg text-foreground/80'>
-              En klassisk passform for badekåpen som startet det hele.
-            </p>
           </div>
 
           <div className='mt-12 max-w-4xl mx-auto text-left space-y-4 text-neutral-300'>
