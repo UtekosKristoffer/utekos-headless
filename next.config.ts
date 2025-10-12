@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
   typedRoutes: true,
   experimental: {
     reactCompiler: true,
+
     useCache: true,
     optimizePackageImports: [
       'zod',
@@ -49,7 +50,22 @@ const nextConfig: NextConfig = {
       {
         source: '/products/:path*',
         destination: '/produkter/:path*',
-        permanent: true // Setter opp en 301 (permanent) redirect
+        permanent: true
+      },
+      {
+        source: '/collections/:path*',
+        destination: '/produkter',
+        permanent: true
+      },
+      {
+        source: '/pages/hva-er-utekos',
+        destination: '/om-oss',
+        permanent: true
+      },
+      {
+        source: '/pages/vask-og-vedlikehold',
+        destination: '/handlehjelp/vask-og-vedlikehold',
+        permanent: true
       }
     ]
   }
