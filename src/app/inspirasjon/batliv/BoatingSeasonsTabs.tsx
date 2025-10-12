@@ -19,7 +19,7 @@ const seasons = [
   },
   {
     value: 'summer',
-    label: 'Sommernatt',
+    label: 'Sommer',
     icon: Sun,
     iconColor: 'text-yellow-400',
     glowColor: '#facc15',

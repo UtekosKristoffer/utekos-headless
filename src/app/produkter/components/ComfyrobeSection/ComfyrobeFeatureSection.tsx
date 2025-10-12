@@ -18,7 +18,7 @@ export function ComfyrobeFeatureSection() {
           <div className='flex flex-col items-start'>
             <AnimatedBlock className='will-animate-fade-in-up'>
               <h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl'>
-                Forleng Utekosen.
+                Forleng utekosen.
                 <br />
                 <span className='text-sky-800'>Uansett Vær.</span>
               </h2>
