@@ -1,7 +1,7 @@
 'use client'
 
 import ComfyRainy from '@public/comfy_rainy.webp'
-import ComfyRobe from '@public/comfyrobe/Jakke_Navy_1.png'
+import ComfyRobe from '@public/comfy-front.png'
 import Image from 'next/image'
 import { useRef } from 'react'
 import Fade from 'embla-carousel-fade'
