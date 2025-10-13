@@ -14,16 +14,20 @@ import { cn } from '@/lib/utils/className'
 
 const images = [
   {
-    src: '/full-diagonal.webp',
+    src: '/fiberdun/techdawn-front.png',
     alt: 'Utekos TechDawn fullfigur, sett forfra'
   },
   {
-    src: '/back.webp',
+    src: '/fiberdun/techdawn-bak.png',
     alt: 'Utekos TechDawn fullfigur, sett bakfra'
   },
   {
-    src: '/half-diagonal.webp',
+    src: '/fiberdun/halv-forside.png',
     alt: 'Nærbilde av det slitesterke og vannavvisende stoffet på jakken'
+  },
+  {
+    src: '/fiberdun/skra-forside.png',
+    alt: 'Utekos TechDawn med hette, sett forfra'
   }
 ]
 export function ImageColumn() {
