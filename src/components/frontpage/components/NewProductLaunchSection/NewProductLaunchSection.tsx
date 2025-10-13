@@ -27,17 +27,16 @@ export function NewProductLaunchSection() {
           threshold={0.3}
         >
           <AnimatedBlock
-            className='will-animate-fade-in-up mb-3 inline-flex items-center gap-2 rounded-full border border-sky-800/30 bg-sky-900/10 px-4 py-1.5'
+            className='will-animate-fade-in-up mb-4 inline-flex items-center gap-3 rounded-full border border-sky-800/30 bg-sky-900/20 px-5 py-2'
             delay='0.3s'
             threshold={1}
           >
-            <span className='relative flex h-2 w-2'>
+            <span className='relative flex h-2.5 w-2.5'>
               <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75'></span>
-              <span className='relative inline-flex h-2 w-2 rounded-full bg-sky-500'></span>
+              <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-sky-500'></span>
             </span>
-            <span className='text-sm font-semibold text-sky-800'>Nyhet</span>
+            <span className='text-base font-semibold text-sky-400'>Nyhet</span>
           </AnimatedBlock>
-
           <AnimatedBlock
             className='will-animate-fade-in-up'
             delay='0.4s'
@@ -77,7 +76,7 @@ export function NewProductLaunchSection() {
           >
             <div className='flex w-full flex-col gap-4 sm:flex-row sm:items-center'>
               <div className='flex items-baseline gap-2'>
-                <p className='text-4xl font-bold text-foreground'>1690,-</p>
+                <p className='text-4xl font-bold text-foreground'>1790,-</p>
                 <span className='text-sm text-muted-foreground'>inkl. mva</span>
               </div>
               <Button asChild size='lg' className='group w-full sm:w-auto'>
