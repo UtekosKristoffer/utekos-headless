@@ -88,7 +88,10 @@ export const metadata: Metadata = {
     }
   },
   verification: {
-    google: 'G2CuMG6i_BKaNpqVN9N_SS2rvFxXWUOwydpZH0hp2NM'
+    google: 'G2CuMG6i_BKaNpqVN9N_SS2rvFxXWUOwydpZH0hp2NM',
+    other: {
+      'facebook-domain-verification': 'xrpchgl0yix27kvh9s677ze48vehjc'
+    }
   }
 }
 
