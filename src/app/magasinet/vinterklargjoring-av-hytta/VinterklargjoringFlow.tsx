@@ -25,12 +25,12 @@ export default function VinterklargjoringFlow() {
 
   if (!isClient) {
     return (
-      <div className='h-[900px] w-full overflow-hidden rounded-lg border border-neutral-800 bg-background' />
+      <div className='md:h-[900px] w-full overflow-hidden rounded-lg border border-neutral-800 bg-background' />
     )
   }
 
   return (
-    <div className='h-[900px] w-full overflow-hidden rounded-lg border border-neutral-800 bg-background'>
+    <div className='md:h-[900px] w-full overflow-hidden rounded-lg border border-neutral-800 bg-background'>
       {isMobile ?
         <MobileFlow />
       : <DesktopFlow />}
