@@ -79,38 +79,12 @@ export function GrunderSection() {
               </h2>
             </AnimatedBlock>
 
+            {/* --- SITATBOKSEN ER FLYTTET HIT MED NYTT INNHOLD --- */}
             <AnimatedBlock
-              className='space-y-6 will-animate-fade-in-up'
+              className='relative mb-8 overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/50 p-6 will-animate-fade-in-up'
               delay='0.3s'
               threshold={0.3}
             >
-              <p className='text-lg leading-relaxed text-muted-foreground'>
-                Utekos ble født ut av et enkelt, gjenkjennelig problem: de
-                utallige gangene en perfekt kveld på terrassen, i båten eller
-                utenfor bobilen ble kuttet kort av kulden. Jeg var lei av stive
-                pledd og upraktiske lag med klær.
-              </p>
-
-              <p className='text-lg leading-relaxed text-muted-foreground'>
-                Tanken var å skape ett enkelt, kompromissløst plagg. Et verktøy
-                for komfort som var så behagelig at du glemte du hadde det på,
-                men så funksjonelt at det lot deg eie øyeblikket, uansett
-                temperatur.
-              </p>
-
-              <p className='text-lg leading-relaxed text-muted-foreground'>
-                Etter måneder med design, testing og perfeksjonering av
-                materialer her i Norge, ble Utekos en realitet.
-              </p>
-            </AnimatedBlock>
-
-            {/* Quote callout */}
-            <AnimatedBlock
-              className='relative mt-8 overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/50 p-6 will-animate-fade-in-up'
-              delay='0.45s'
-              threshold={0.3}
-            >
-              {/* Aurora effect */}
               <div
                 className='absolute -inset-x-2 -inset-y-8 opacity-15 blur-2xl'
                 style={{
@@ -124,11 +98,56 @@ export function GrunderSection() {
                   className='h-8 w-8 flex-shrink-0 text-sky-800'
                 />
                 <p className='text-xl font-semibold leading-relaxed text-foreground'>
-                  En hyllest til de små, verdifulle øyeblikkene i en travel
-                  hverdag.
+                  Jeg var lei av stive pledd og gode øyeblikk som ble kuttet
+                  kort av kulden. Det måtte finnes en bedre måte å holde varmen
+                  på.
                 </p>
               </div>
             </AnimatedBlock>
+
+            <div className='space-y-6'>
+              <AnimatedBlock
+                className='will-animate-fade-in-up'
+                delay='0.4s'
+                threshold={0.3}
+              >
+                <p className='text-lg leading-relaxed text-muted-foreground'>
+                  Jeg har alltid elsket de små, verdifulle øyeblikkene – den
+                  stille kaffekoppen på en kjølig morgen, den gode samtalen
+                  rundt bålpannen, eller roen i båten rett etter at solen har
+                  gått ned. Men frustrasjonen var alltid den samme: lag på lag
+                  med klær som gjorde meg mer til en Michelin-mann enn en
+                  avslappet livsnyter.
+                </p>
+              </AnimatedBlock>
+
+              <AnimatedBlock
+                className='will-animate-fade-in-up'
+                delay='0.5s'
+                threshold={0.3}
+              >
+                <p className='text-lg leading-relaxed text-muted-foreground'>
+                  Jeg lette etter ett enkelt, kompromissløst plagg. Et verktøy
+                  for komfort som var så behagelig at jeg glemte jeg hadde det
+                  på, men så funksjonelt at det lot meg eie øyeblikket. Svaret
+                  fantes ikke. Så jeg bestemte meg for å lage det selv.
+                </p>
+              </AnimatedBlock>
+
+              <AnimatedBlock
+                className='will-animate-fade-in-up'
+                delay='0.6s'
+                threshold={0.3}
+              >
+                <p className='text-lg leading-relaxed text-muted-foreground'>
+                  Det ble en reise som tok måneder – med design, utallige
+                  prototyper, jakt på de rette materialene, og testing i pøsende
+                  bergensregn og på kalde fjelltopper. Resultatet ble Utekos.
+                  Ikke bare et produkt, men en hyllest til de små, verdifulle
+                  øyeblikkene i en travel hverdag.
+                </p>
+              </AnimatedBlock>
+            </div>
           </div>
         </div>
       </div>

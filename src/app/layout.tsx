@@ -108,12 +108,17 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 
   return (
     <html lang='no'>
-      <OrganizationJsonLd />
-      <GoogleAnalytics gaId='G-FCES3L0M9M' />
-      <GoogleTagManager gtmId='GTM-5TWMJQFP' />
+      {/* 'body' MÅ være det direkte barnet til 'html'.
+        Alle scripts og komponenter flyttes INN i body.
+      */}
       <body
         className={`bg-background text-foreground ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Plasser scripts som skal kjøres tidlig, helt øverst i body */}
+        <GoogleAnalytics gaId='G-FCES3L0M9M' />
+        <GoogleTagManager gtmId='GTM-5TWMJQFP' />
+        <OrganizationJsonLd />
+
         <Providers dehydratedState={dehydratedState} cartId={cartId}>
           <AnnouncementBanner />
           <Header menu={mainMenu} />
@@ -125,26 +130,31 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           <SpeedInsights />
           <Analytics mode='production' />
         </Providers>
+
         <Suspense fallback={null}>
           <MetaPixelEvents />
         </Suspense>
+
+        {/* Plasser manuelle scripts som Meta Pixel helt på slutten av body, 
+          men før </body>-taggen lukkes.
+        */}
+        {pixelId && (
+          <Script id='meta-pixel' strategy='afterInteractive'>
+            {`
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src=v;s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script',
+              'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', '${pixelId}');
+              fbq('track', 'PageView');
+            `}
+          </Script>
+        )}
       </body>
-      {pixelId && (
-        <Script id='meta-pixel' strategy='afterInteractive'>
-          {`
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '${pixelId}');
-            fbq('track', 'PageView');
-          `}
-        </Script>
-      )}
     </html>
   )
 }

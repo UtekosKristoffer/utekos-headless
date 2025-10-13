@@ -22,8 +22,8 @@ export async function POST(request: Request) {
           event_name: eventName,
           event_time: Math.floor(Date.now() / 1000),
           action_source: 'website',
-          user_data: userData, // f.eks. { "em": "hash_av_epost", "client_ip_address": "...", "client_user_agent": "..." }
-          custom_data: eventData // f.eks. { "currency": "NOK", "value": "123.45" }
+          user_data: userData,
+          custom_data: eventData
         }
       ]
     }

@@ -12,9 +12,13 @@
     "sync": "f() { git add . && git commit -m \"$1\" && git push; }; f"
   },
   "dependencies": {
+    "ai": "latest",
+    "@ai-sdk/huggingface": "latest",
+    "@ai-sdk/react": "latest",
     "@dagrejs/dagre": "^1.1.5",
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^5.2.1",
+    "@huggingface/inference": "^4.11.1",
     "@next/third-parties": "^15.5.4",
     "@radix-ui/react-accessible-icon": "^1.1.7",
     "@radix-ui/react-accordion": "^1.2.12",

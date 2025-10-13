@@ -46,19 +46,17 @@ export function NewProductLaunchSection() {
               Varmen du kan stole på
             </h2>
           </AnimatedBlock>
-
           <AnimatedBlock
             className='will-animate-fade-in-up'
             delay='0.5s'
             threshold={1}
           >
             <p className='mb-8 max-w-prose text-lg leading-relaxed text-muted-foreground'>
-              Vi introduserer {productName} – et robust og bekymringsfritt plagg
-              skapt for deg som nekter å la kjølige kvelder eller en regnskur
-              avbryte kvalitetstiden utendørs.
+              Vi introduserer {productName} – vår letteste og mest tekniske
+              modell noensinne. Perfekt for deg som stiller de høyeste kravene
+              til komfort og funksjonalitet.
             </p>
           </AnimatedBlock>
-
           <div className='mb-8 w-full space-y-3'>
             {newProductFeatures.map((feature, idx) => (
               <FeatureCard
@@ -68,7 +66,6 @@ export function NewProductLaunchSection() {
               />
             ))}
           </div>
-
           <AnimatedBlock
             className='will-animate-fade-in-up'
             delay='0.9s'

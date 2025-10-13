@@ -84,7 +84,7 @@ const nodes: PromiseNode[] = [
     id: '2',
     type: 'promiseText',
     data: {
-      text: 'Vårt løfte er en dypere form for komfort. Nøye utvalgte materialer gir en umiddelbar følelse av varme og velvære, slik at du kan nyte øyeblikket lenger.',
+      text: 'Vi lover deg ikke bare et produkt, men en følelse. Følelsen av umiddelbar varme og velvære, som lar deg nyte øyeblikket lenger..',
       color: '#60a5fa'
     },
     position: { x: 0, y: 340 },

@@ -15,7 +15,6 @@ import { SocialProofSection } from '@/components/frontpage/SocialProofSection'
 import { TestimonialConstellation } from '@/components/frontpage/TestimonialConstellation'
 import { ProductCarousel } from '@/components/ProductCard/ProductCarousel'
 import { SpecialOfferSection } from '@/SpecialOfferSection/SpecialOfferSection'
-
 const HomePage = async () => {
   const queryClient = new QueryClient()
 

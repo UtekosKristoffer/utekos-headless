@@ -9,7 +9,8 @@ export function PhilosophiesSection() {
             Vår filosofi
           </h2>
           <p className='mx-auto mt-4 max-w-3xl text-lg text-muted-foreground'>
-            Fire prinsipper som ligger i hjertet av alt vi gjør.
+            Denne reisen formet fire ufravikelige prinsipper som ligger i
+            hjertet av alt vi gjør.
           </p>
         </div>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4'>
