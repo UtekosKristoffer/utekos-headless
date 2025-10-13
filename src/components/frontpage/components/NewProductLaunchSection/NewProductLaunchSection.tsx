@@ -7,8 +7,8 @@ import { ImageColumn } from './ImageColumn'
 import { newProductFeatures } from './newProductFeatures'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 
-const productName = 'Utekos TechDun™'
-const productUrl = '/produkter/utekos-techdun'
+const productName = 'Utekos TechDawn™'
+const productUrl = '/produkter/utekos-techdawn'
 
 export function NewProductLaunchSection() {
   return (

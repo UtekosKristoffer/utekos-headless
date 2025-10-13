@@ -147,21 +147,21 @@ export const SEARCH_CONFIG: SearchConfigItem[] = [
     ],
     group: 'products'
   },
-  // {
-  //  - id: 'product-utekos-techdun',
-  //  - title: 'Utekos TechDun™',
-  //  - path: '/produkter/utekos-techdun',
-  //  - keywords: [
-  //     'techdun',
-  //     'hybrid',
-  //     'syntetisk dun',
-  //     'varm',
-  //     'jakke',
-  //     'isolert',
-  //     'mellomting'
-  //   ],
-  // -  group: 'products'
-  // },
+  {
+    id: 'product-utekos-techdawn',
+    title: 'Utekos TechDawn™',
+    path: '/produkter/utekos-techdawn',
+    keywords: [
+      'techdawn',
+      'hybrid',
+      'syntetisk dun',
+      'varm',
+      'jakke',
+      'isolert',
+      'mellomting'
+    ],
+    group: 'products'
+  },
   {
     id: 'product-utekos-special-edition',
     title: 'Utekos Special Edition™',

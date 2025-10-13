@@ -6,7 +6,7 @@ export const comparisonData = [
     icon: 'thermometer', // Endret fra komponent til streng
     dun: 'Uovertruffen',
     mikrofiber: 'Meget god',
-    techdun: 'Utmerket',
+    techdawn: 'Utmerket',
     iconColor: 'text-orange-400'
   },
   {
@@ -14,7 +14,7 @@ export const comparisonData = [
     icon: 'droplets', // Endret fra komponent til streng
     dun: 'God',
     mikrofiber: 'Overlegen',
-    techdun: 'Overlegen',
+    techdawn: 'Overlegen',
     iconColor: 'text-cyan-400'
   },
   {
@@ -22,7 +22,7 @@ export const comparisonData = [
     icon: 'feather', // Endret fra komponent til streng
     dun: 'Ekstra lett (~1000g)',
     mikrofiber: 'Ultralett (~800g)',
-    techdun: 'Robust (~1300g)',
+    techdawn: 'Robust (~1300g)',
     iconColor: 'text-violet-400'
   },
   {
@@ -30,7 +30,7 @@ export const comparisonData = [
     icon: 'washing-machine', // Endret fra komponent til streng
     dun: 'Krever skånsom vask',
     mikrofiber: 'Svært enkel (Maskinvask)',
-    techdun: 'Svært enkel (Maskinvask)',
+    techdawn: 'Svært enkel (Maskinvask)',
     iconColor: 'text-emerald-400'
   },
   {
@@ -38,7 +38,7 @@ export const comparisonData = [
     icon: 'check', // Endret fra komponent til streng
     dun: true,
     mikrofiber: true,
-    techdun: true,
+    techdawn: true,
     iconColor: 'text-muted-foreground'
   },
   {
@@ -46,7 +46,7 @@ export const comparisonData = [
     icon: 'check', // Endret fra komponent til streng
     dun: true,
     mikrofiber: true,
-    techdun: true,
+    techdawn: true,
     iconColor: 'text-muted-foreground'
   }
 ]

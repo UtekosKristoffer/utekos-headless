@@ -17,13 +17,13 @@ export function PersonaCards() {
       buttonText: 'Velg Utekos Dun™'
     },
     {
-      href: '/produkter/comfyrobe',
-      imageSrc: '/comfy_rainy.webp',
-      imageAlt: 'Comfyrobe i uforutsigbart vær',
+      href: '/produkter/utekos-techdawn',
+      imageSrc: '/front-open.webp',
+      imageAlt: 'TechDawn produktbilde åpen',
       title: 'For den praktiske allrounderen',
       description:
         'Du trenger en robust arbeidshest som presterer i all slags vær – fra fuktige kvelder i båten til uforutsigbare dager med bobilen.',
-      buttonText: 'Velg Comfyrobe™'
+      buttonText: 'Velg TechDAwn™'
     },
     {
       href: '/produkter/utekos-mikrofiber',

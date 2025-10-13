@@ -10,7 +10,7 @@ import { MomentsSection } from '@/components/frontpage/MomentsSection'
 import { NewStandardSection } from '@/components/frontpage/NewStandardSection'
 import { PromiseSection } from '@/components/frontpage/PromiseSection'
 import { QualitySection } from '@/components/frontpage/QualitySection'
-import { FeaturedProductSection } from '@/components/frontpage/components/FeaturedProductSection/FeaturedProductSection'
+import { NewProductLaunchSection } from '@/components/frontpage/components/NewProductLaunchSection/NewProductLaunchSection'
 import { SocialProofSection } from '@/components/frontpage/SocialProofSection'
 import { TestimonialConstellation } from '@/components/frontpage/TestimonialConstellation'
 import { ProductCarousel } from '@/components/ProductCard/ProductCarousel'
@@ -28,7 +28,7 @@ const HomePage = async () => {
     <main>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <HeroSection />
-        <FeaturedProductSection />
+        <NewProductLaunchSection />
         <SpecialOfferSection />
         <Suspense fallback={<VideoSkeleton />}>
           <ProductVideoSection />

@@ -30,12 +30,16 @@ export function DeepDiveSection() {
               <div className='mb-4 flex items-center gap-4'>
                 <ThermometerSun className='h-8 w-8 text-cyan-400' />
                 <h3 className='text-xl font-semibold'>
-                  Varme og værforhold: Velg etter klima
+                  Varme & Værforhold: Velg etter klima
                 </h3>
               </div>
               <p className='mt-2 text-muted-foreground'>
                 <strong>Utekos Dun™</strong> gir den absolutt høyeste varmen i
                 forhold til vekt, og er uovertruffen i tørt, kaldt vær.
+                <br />
+                <strong>Utekos Techdun™</strong> er spesialisten for
+                uforutsigbare forhold; den isolerer overlegent selv om den blir
+                fuktig, og er det tryggeste valget nær kysten eller i båt.
                 <br />
                 <strong>Utekos Mikrofiber™</strong> er en ypperlig allrounder
                 for de tre andre årstidene, og som et lettere lag når kulden
@@ -51,7 +55,7 @@ export function DeepDiveSection() {
               <div className='mb-4 flex items-center gap-4'>
                 <Package className='h-8 w-8 text-violet-400' />
                 <h3 className='text-xl font-semibold'>
-                  Vekt og pakkbarhet: For deg som teller gram
+                  Vekt & Pakkbarhet: For deg som teller gram
                 </h3>
               </div>
               <p className='mt-2 text-muted-foreground'>
@@ -62,6 +66,9 @@ export function DeepDiveSection() {
                 letteste plagg, perfekt for daglig bruk hvor lav vekt er en
                 fordel.
                 <br />
+                <strong>Utekos TechDun™</strong> er vårt mest robuste plagg.
+                Det du ofrer i pakkbarhet, vinner du i bekymringsfrihet og
+                ytelse i all slags vær.
               </p>
             </CardContent>
           </Card>
@@ -77,8 +84,9 @@ export function DeepDiveSection() {
                 </h3>
               </div>
               <p className='mt-2 text-muted-foreground'>
-                <strong>Mikrofiber™</strong> er en arbeidshest som tåler røff
-                bruk, kan vaskes enkelt i maskin og tørker raskt.
+                Både <strong>Utekos TechDawn™</strong> og{' '}
+                <strong>Mikrofiber™</strong> er robuste arbeidshester som tåler
+                røff bruk, kan vaskes enkelt i maskin og tørker raskt.
                 <br />
                 <strong>Utekos Dun™</strong> krever en mer skånsom vaskeprosess
                 for å bevare dunets unike spenst og varmeevne over tid.

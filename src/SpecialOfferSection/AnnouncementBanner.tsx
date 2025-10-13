@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils/className'
 
-const BANNER_STORAGE_KEY = 'utekos-special-edition-banner-dismissed-timestamp'
+const BANNER_STORAGE_KEY = 'utekos-techdawn-launch-banner-dismissed-timestamp'
 const BANNER_EXPIRATION_MS = 3 * 24 * 60 * 60 * 1000 // 3 dager
 
 export default function AnnouncementBanner() {
@@ -33,13 +33,12 @@ export default function AnnouncementBanner() {
     e.preventDefault()
     e.stopPropagation()
 
-    setIsExiting(true) // Start exit-animasjonen
+    setIsExiting(true)
     localStorage.setItem(BANNER_STORAGE_KEY, Date.now().toString())
 
-    // Vent til animasjonen er ferdig før komponenten fjernes helt
     setTimeout(() => {
       setShowBanner(false)
-    }, 500) // Matcher varigheten på CSS-animasjonen
+    }, 500)
   }
 
   if (!showBanner) {
@@ -54,14 +53,14 @@ export default function AnnouncementBanner() {
       )}
     >
       <Link
-        href='/produkter/utekos-special-edition'
-        className='group block w-full bg-button p-3 text-center text-sm font-medium text-white transition-colors hover:text-neutral-200'
+        href='/produkter/utekos-techdawn'
+        className='group block w-full bg-sky-800 p-3 text-center text-sm font-medium text-white transition-colors hover:text-neutral-200'
       >
         <span className='mr-2'>
-          <span className='font-semibold'>SISTE SJANSE:</span> Et fåtall igjen
-          av vår utgående Special Edition.
+          <span className='font-semibold'>NYHET:</span> Opplev Utekos TechDawn™
+          - Kompromissløs varme for norske kvelder.
         </span>
-        <span className='font-bold'>Nå kun 750,-</span>
+        <span className='font-bold'>Pris: 1690,-</span>
         <ArrowRightIcon className='ml-2 inline-block size-4 transition-transform group-hover:translate-x-1' />
       </Link>
 

@@ -1,1 +1,1 @@
-export const UTEKOS_TECHDUN_HANDLE = 'utekos-techdun'
+export const UTEKOS_TECHDAWN_HANDLE = 'utekos-techdawn'

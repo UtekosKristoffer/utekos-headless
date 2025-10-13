@@ -23,7 +23,7 @@ const features = [
 
 export function UtekosSizeGuide() {
   return (
-    <div className='text-white bg-black'>
+    <section className='text-white bg-black' id='utekos-size-guide'>
       <div className='container mx-auto px-4 py-16 sm:py-24 text-center'>
         <div className='max-w-4xl mx-auto'>
           <h2 className='text-3xl font-bold tracking-tight sm:text-4xl'>
@@ -163,6 +163,6 @@ export function UtekosSizeGuide() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }

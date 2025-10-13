@@ -34,3 +34,60 @@ export const utekosData = [
   { measurement: 'Høyde på hette', m: '35 cm', l: '35 cm' },
   { measurement: 'Høyde på baklomme', m: '42 cm', l: '42 cm' }
 ]
+
+export const tecDawnData = [
+  {
+    measurement: 'Total lengde (nakke til bunn)',
+    liten: '152 cm',
+    middels: '162 cm',
+    stor: '166 cm'
+  },
+  {
+    measurement: 'Brystvidde',
+    liten: '54 cm',
+    middels: '56 cm',
+    stor: '58 cm'
+  },
+  {
+    measurement: 'Armlengde (fra senter)',
+    liten: '78 cm',
+    middels: '82 cm',
+    stor: '87 cm'
+  },
+  {
+    measurement: 'Armlengde (fra armhule)',
+    liten: '51 cm',
+    middels: '54 cm',
+    stor: '60 cm'
+  },
+  {
+    measurement: 'Lengde på glidelås (omvendt V)',
+    liten: '72 cm',
+    middels: '73 cm',
+    stor: '74 cm'
+  },
+  {
+    measurement: 'Lengde på glidelås (sidelomme)',
+    liten: '13.5 cm',
+    middels: '13.5 cm',
+    stor: '13.5 cm'
+  },
+  {
+    measurement: 'Høyde på hette',
+    liten: '35 cm',
+    middels: '35 cm',
+    stor: '35 cm'
+  },
+  {
+    measurement: 'Høyde på baklomme',
+    liten: '29 cm',
+    middels: '29 cm',
+    stor: '29 cm'
+  },
+  {
+    measurement: 'Mansjetthøyde',
+    liten: '7 cm',
+    middels: '8 cm',
+    stor: '8.5 cm'
+  }
+]

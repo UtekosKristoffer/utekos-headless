@@ -9,8 +9,8 @@ export function ConclusionSection() {
         </h2>
         <p className='mt-4 text-lg text-muted-foreground max-w-2xl mx-auto'>
           Vår anbefaling: For maksimal allsidighet og bekymringsfri bruk i all
-          slags vær, velg Mikrofiber. For den ultimate luksusfølelsen på kalde,
-          tørre dager, velg Dun.
+          slags vær, velg Mikrofiber eller TechDawn. For den ultimate
+          luksusfølelsen på kalde, tørre dager, velg Dun.
         </p>
         <div className='mt-8 flex flex-wrap gap-4 justify-center'>
           <Button asChild size='lg'>

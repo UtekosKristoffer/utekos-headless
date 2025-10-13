@@ -6,10 +6,13 @@ import AutomnCabin from '@public/og-image-hytte-host.webp'
 import { Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-
+import { UteSection } from '@/app/magasinet/vinterklargjoring-av-hytta/UteSection'
+import { InneSection } from '@/app/magasinet/vinterklargjoring-av-hytta/InneSection'
+import { SystemerSection } from '@/app/magasinet/vinterklargjoring-av-hytta/SystemerSection'
 export const VinterklargjoringArticle = () => {
   return (
-    <article className='prose prose-invert prose-lg md:max-w-5xl mx-auto'>
+    // Fjern prose-klassene, siden vi nå styler manuelt
+    <article className='md:max-w-5xl mx-auto'>
       <figure className='!my-12'>
         <Image
           src={AutomnCabin}
@@ -17,24 +20,28 @@ export const VinterklargjoringArticle = () => {
           width={1920}
           height={1080}
           className='rounded-lg'
+          priority
         />
         <figcaption className='text-center text-sm text-muted-foreground mt-2'>
           En velstelt hytte er en trygg hytte.
         </figcaption>
       </figure>
 
-      <p>
+      <p className='text-lg text-muted-foreground'>
         For en livsnyter handler vinterklargjøring om mer enn bare vedlikehold –
         det handler om forberedelse til fremtidig kos. En grundig jobb nå betyr
         en problemfri og umiddelbart hyggelig ankomst når skisesongen starter.
         Vi har brutt ned prosessen i tre oversiktlige hovedområder:
       </p>
 
-      <div className='not-prose my-12'>
+      <div className='my-12'>
         <VinterklargjoringFlow />
       </div>
 
-      <p>
+      <UteSection />
+      <InneSection />
+          <SystemerSection />
+      <p className='text-lg text-muted-foreground mt-8'>
         Ved å systematisk gå gjennom disse punktene, kan du forlate hytten med
         senkede skuldre, vel vitende om at du har gjort alt du kan for å
         beskytte din investering i fritid og livskvalitet. Den viktigste delen
@@ -43,7 +50,7 @@ export const VinterklargjoringArticle = () => {
         øyeblikkelig personlig varme blir den ultimate luksusen.
       </p>
 
-      <Card className='my-12 not-prose text-center bg-gradient-to-br from-primary/20 to-transparent border-neutral-800'>
+      <Card className='my-12 text-center bg-gradient-to-br from-primary/20 to-transparent border-neutral-800'>
         <CardContent className='p-8'>
           <h3 className='text-2xl font-bold mt-0'>
             Gjør ankomsten til en glede
@@ -62,7 +69,7 @@ export const VinterklargjoringArticle = () => {
         </CardContent>
       </Card>
 
-      <Card className='my-12 not-prose bg-sidebar-foreground border-neutral-800'>
+      <Card className='my-12 bg-sidebar-foreground border-neutral-800'>
         <CardContent className='p-8'>
           <h3 className='text-2xl font-bold flex items-center gap-3 mt-0'>
             <Sparkles className='h-6 w-6 text-yellow-400' />
