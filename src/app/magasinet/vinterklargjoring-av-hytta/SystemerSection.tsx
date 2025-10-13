@@ -32,7 +32,7 @@ export const SystemerSection = () => {
         Frostsprengte rør er enhver hytteeiers mareritt. For å unngå dette, må
         alt vann ut av systemet.
       </p>
-      <ul className='list-disc list-inside space-y-2 my-4 text-lg text-muted-foreground'>
+      <ul className='list-disc list-inside space-y-2 my-4 text-lg text-muted-primary-foreground'>
         <li>
           <strong>Steng hovedkranen:</strong> Finn hovedstoppekranen for vann
           inn til hytten og steng den helt.

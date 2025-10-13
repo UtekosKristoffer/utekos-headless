@@ -37,7 +37,7 @@ export const UteSection = () => {
         inn under taksteinen og kan forårsake kostbare lekkasjer. Ta en rask
         visuell inspeksjon av selve taket; se etter sprukne takstein eller
         skader i takpappen. En halvtimes jobb nå er den beste og billigste
-        forsikringen du kan gi hytten di.
+        forsikringen du kan gi din.
       </p>
 
       <h3 className='text-2xl font-semibold mt-8 mb-3'>

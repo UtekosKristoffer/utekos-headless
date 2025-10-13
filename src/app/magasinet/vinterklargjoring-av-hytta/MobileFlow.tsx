@@ -17,7 +17,8 @@ export function MobileFlow() {
   const visibleNodes = [parentNode, ...childNodes].filter(Boolean)
 
   return (
-    <div className='flex h-full w-full flex-col'>
+    // Fjernet 'h-full' fra denne linjen
+    <div className='flex w-full flex-col'>
       <div className='flex justify-center gap-2 border-b border-neutral-800 p-4'>
         {(Object.keys(categories) as Array<keyof typeof categories>).map(
           category => (
@@ -36,7 +37,8 @@ export function MobileFlow() {
           )
         )}
       </div>
-      <div className='flex-grow space-y-4 overflow-y-auto p-4'>
+      {/* Fjernet 'flex-grow' fra denne linjen */}
+      <div className='space-y-4 overflow-y-auto p-4'>
         {visibleNodes.map(node => {
           if (!node) return null
           return (
