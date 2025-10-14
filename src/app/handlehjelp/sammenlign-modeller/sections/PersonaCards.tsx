@@ -23,7 +23,7 @@ export function PersonaCards() {
       title: 'For den praktiske allrounderen',
       description:
         'Du trenger en robust arbeidshest som presterer i all slags vær – fra fuktige kvelder i båten til uforutsigbare dager med bobilen.',
-      buttonText: 'Velg TechDAwn™'
+      buttonText: 'Velg TechDawn™'
     },
     {
       href: '/produkter/utekos-mikrofiber',
