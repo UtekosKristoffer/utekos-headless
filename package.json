@@ -12,7 +12,6 @@
     "sync": "f() { git add . && git commit -m \"$1\" && git push; }; f"
   },
   "dependencies": {
-    "ai": "latest",
     "@ai-sdk/huggingface": "latest",
     "@ai-sdk/react": "latest",
     "@dagrejs/dagre": "^1.1.5",
@@ -49,9 +48,11 @@
     "@vercel/speed-insights": "^1.2.0",
     "@xstate/react": "^6.0.0",
     "@xstate/store": "^3.9.2",
+    "ai": "latest",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "embla-carousel-auto-height": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-fade": "^8.6.0",
     "embla-carousel-react": "^8.6.0",

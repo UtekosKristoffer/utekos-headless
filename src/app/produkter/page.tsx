@@ -17,7 +17,7 @@ import type { Metadata } from 'next'
 import { StapperFeatureSection } from './components/StapperFeatureSection'
 import { MicrofiberFeatureSection } from './components/MicrofiberSection/MicrofiberFeatureSection'
 import { ProductVideoSection } from './components/ProductVideoSection'
-
+import { TechDawnFeatureSection } from './components/TechDawnFeatureSection'
 export const metadata: Metadata = {
   title: 'Kolleksjon: Komfortplagg for hytteliv & utekos | Utekos',
   description:
@@ -63,6 +63,7 @@ const ProductsPage = async () => {
         <HelpChooseSection />
         <Suspense fallback={<VideoSkeleton />}>
           <ProductVideoSection />
+          <TechDawnFeatureSection />
         </Suspense>
         <ProductTestimonial />
         <ComparisonTeaser />
