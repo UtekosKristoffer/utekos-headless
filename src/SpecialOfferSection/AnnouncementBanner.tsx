@@ -60,7 +60,7 @@ export default function AnnouncementBanner() {
           <span className='font-semibold'>NYHET:</span> Opplev Utekos TechDawn™
           - Kompromissløs varme for norske kvelder.
         </span>
-        <span className='font-bold'>Se lanseringstilbud!</span>
+        <span className='font-bold'>Se lanseringstilbudet!</span>
         <ArrowRightIcon className='ml-2 inline-block size-4 transition-transform group-hover:translate-x-1' />
       </Link>
 
