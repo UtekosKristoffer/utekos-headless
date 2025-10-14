@@ -1,11 +1,11 @@
 'use client'
+
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Cloud, Shield, Shapes } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-import { Card, CardContent } from '@/components/ui/card'
 import {
   Carousel,
   CarouselContent,
@@ -71,16 +71,18 @@ export const TechDawnFeatureSection = () => {
                   key={index}
                   className='flex items-center justify-center'
                 >
-                  <Card className='border-none bg-transparent'>
-                    <CardContent className='p-0'>
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        className='rounded-lg object-contain w-full h-auto'
-                        placeholder='blur'
-                      />
-                    </CardContent>
-                  </Card>
+                  {/*
+                    ENDRING: Fjernet Card/CardContent og justert Image-klassen.
+                    'max-w-full' og 'max-h-full' sørger for at bildet aldri blir
+                    større enn "sliden" den befinner seg i. 'object-contain'
+                    garanterer at hele bildet alltid er synlig.
+                  */}
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    className='rounded-lg object-contain max-w-full max-h-full'
+                    placeholder='blur'
+                  />
                 </CarouselItem>
               ))}
             </CarouselContent>
@@ -89,7 +91,6 @@ export const TechDawnFeatureSection = () => {
           </Carousel>
         </AnimatedBlock>
 
-        {/* ENDRINGEN ER HER: lagt til 'px-4' for horisontal padding */}
         <AnimatedBlock
           className='will-animate-fade-in-right flex flex-col items-start px-4'
           delay='0.2s'
