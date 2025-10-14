@@ -6,7 +6,7 @@ export function CompareModelsPageHero() {
           Hvilken Utekos er du?
         </h1>
         <p className='mt-6 text-xl text-muted-foreground max-w-3xl mx-auto'>
-          Begge våre modeller er skapt for kompromissløs komfort, men de har
+          Alle våre modeller er skapt for kompromissløs komfort, men de har
           unike styrker. Denne guiden hjelper deg å finne den som er perfekt for
           akkurat dine øyeblikk.
         </p>
