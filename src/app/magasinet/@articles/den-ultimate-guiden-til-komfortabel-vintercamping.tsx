@@ -13,7 +13,7 @@ import { PakkelisteSection } from '../den-ultimate-guiden-til-komfortabel-vinter
 import { VintercampLivetSection } from '../den-ultimate-guiden-til-komfortabel-vintercamping/VinterCamp/VintercampLivetSection'
 export const VintercampingArticle = () => {
   return (
-    <article className='prose prose-invert prose-lg md:max-w-7xl mx-auto'>
+    <article className='prose prose-invert prose-lg md:max-w-5xl mx-auto'>
       <figure className='!my-12'>
         <Image
           src={siteImage}
