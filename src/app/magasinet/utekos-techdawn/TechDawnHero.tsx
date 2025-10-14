@@ -25,7 +25,7 @@ export function TechDawnHero() {
             <span className='text-yellow-400 text-sm uppercase tracking-widest'>
               Nyhet
             </span>
-            <span className='h-px bg-yellow-400/50 flex-1 max-w-[100px]' />
+            <span className='h-px bg-yellow-400/50 flex-1 max-w-[75px]' />
           </div>
           <h1 className='text-5xl md:text-6xl font-light mb-6 leading-tight'>
             Utekos TechDawn™
