@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Cloud, Shield, Shapes } from 'lucide-react'
+import { ArrowRight, Cloud, Shield, Shapes, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -71,12 +71,6 @@ export const TechDawnFeatureSection = () => {
                   key={index}
                   className='flex items-center justify-center'
                 >
-                  {/*
-                    ENDRING: Fjernet Card/CardContent og justert Image-klassen.
-                    'max-w-full' og 'max-h-full' sørger for at bildet aldri blir
-                    større enn "sliden" den befinner seg i. 'object-contain'
-                    garanterer at hele bildet alltid er synlig.
-                  */}
                   <Image
                     src={image.src}
                     alt={image.alt}
@@ -96,14 +90,28 @@ export const TechDawnFeatureSection = () => {
           delay='0.2s'
           threshold={0.3}
         >
-          <div className='mb-4 inline-flex items-center gap-2 rounded-full border border-sky-800/30 bg-sky-900/20 px-4 py-1.5'>
-            <span className='relative flex h-2.5 w-2.5'>
-              <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75'></span>
-              <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-sky-500'></span>
-            </span>
-            <span className='text-sm font-semibold text-sky-400'>
-              Ny lansering
-            </span>
+          {/* Badges container */}
+          <div className='mb-4 flex flex-wrap gap-2'>
+            {/* Eksisterende "Ny lansering" badge */}
+            <div className='inline-flex items-center gap-2 rounded-full border border-sky-800/30 bg-sky-900/20 px-4 py-1.5'>
+              <span className='relative flex h-2.5 w-2.5'>
+                <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75'></span>
+                <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-sky-500'></span>
+              </span>
+              <span className='text-sm font-semibold text-sky-400'>NYHET</span>
+            </div>
+
+            {/* NY: Lanseringstilbud badge */}
+            <div className='inline-flex items-center gap-2 rounded-full border border-emerald-800/30 bg-emerald-900/20 px-4 py-1.5'>
+              <span className='relative flex h-2.5 w-2.5'>
+                <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75'></span>
+                <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500'></span>
+              </span>
+              <span className='text-sm font-semibold text-emerald-400'>
+                Lanseringstilbud! - Nå til kun 1790,-
+              </span>
+              <div className='h-3.5 w-px bg-emerald-400/30' />
+            </div>
           </div>
 
           <h2 className='mb-4 text-4xl font-bold leading-tight text-foreground sm:text-5xl'>

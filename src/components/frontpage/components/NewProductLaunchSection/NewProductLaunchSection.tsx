@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Sparkles, TrendingDown } from 'lucide-react'
 import { AmbientBackgroundGlow } from './AmbientBackgroundGlow'
 import { FeatureCard } from './FeatureCard'
 import { ImageColumn } from './ImageColumn'
@@ -10,17 +10,17 @@ import { AnimatedBlock } from '@/components/AnimatedBlock'
 const productName = 'Utekos TechDawn™'
 const productUrl = '/produkter/utekos-techdawn'
 
+// Lanseringstilbud konfigurasjon
 const originalPrice = 1990
-const launchPrice = 1790
-const discount = originalPrice - launchPrice
-const discountPct = Math.round((discount / originalPrice) * 100) // 10
+const discountAmount = 200
+const currentPrice = originalPrice - discountAmount
+const discountPercent = 10
 
 export function NewProductLaunchSection() {
   return (
     <section
       id='featured-product'
       className='relative mx-auto mt-16 max-w-[95%] overflow-hidden rounded-xl border border-neutral-800 py-16 md:max-w-7xl'
-      aria-label={`${productName} lansering`}
     >
       <AmbientBackgroundGlow />
 
@@ -32,30 +32,40 @@ export function NewProductLaunchSection() {
           delay='0.2s'
           threshold={0.3}
         >
-          {/* Badges – korte, ryddige piller */}
-          <div className='mb-4 flex flex-wrap items-center gap-3'>
+          {/* Badges container */}
+          <div className='mb-4 flex flex-wrap gap-2'>
+            {/* Eksisterende "Nyhet" badge */}
             <AnimatedBlock
-              className='will-animate-fade-in-up inline-flex items-center gap-3 rounded-full border border-sky-800/30 bg-sky-900/20 px-4 py-1.5'
+              className='will-animate-fade-in-up inline-flex items-center gap-3 rounded-full border border-sky-800/30 bg-sky-900/20 px-5 py-2'
               delay='0.3s'
               threshold={1}
             >
-              <span className='relative flex h-2 w-2'>
+              <span className='relative flex h-2.5 w-2.5'>
                 <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75'></span>
-                <span className='relative inline-flex h-2 w-2 rounded-full bg-sky-500'></span>
+                <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-sky-500'></span>
               </span>
-              <span className='text-sm font-semibold text-sky-400'>Nyhet</span>
+              <span className='text-base font-semibold text-sky-400'>
+                Nyhet
+              </span>
             </AnimatedBlock>
 
+            {/* NY: Lanseringstilbud badge */}
             <AnimatedBlock
-              className='will-animate-fade-in-up inline-flex items-center gap-2 rounded-full border border-emerald-800/40 bg-emerald-900/15 px-4 py-1.5'
+              className='will-animate-fade-in-up inline-flex items-center gap-2.5 rounded-full border border-emerald-800/30 bg-emerald-900/20 px-4 py-2'
               delay='0.35s'
               threshold={1}
             >
-              <span className='text-sm font-semibold text-emerald-300'>
-                Lanseringspris: {launchPrice},-
+              <span className='relative flex h-2.5 w-2.5'>
+                <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75'></span>
+                <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500'></span>
               </span>
-              <span className='text-xs text-emerald-300'>
-                spar {discount},-
+              <span className='text-sm font-semibold text-emerald-400'>
+                Lanseringstilbud
+              </span>
+              <div className='h-3.5 w-px bg-emerald-400/30' />
+              <Sparkles className='h-3.5 w-3.5 text-emerald-400' />
+              <span className='text-sm font-bold text-emerald-400'>
+                {discountPercent}% RABATT
               </span>
             </AnimatedBlock>
           </div>
@@ -69,7 +79,6 @@ export function NewProductLaunchSection() {
               Varmen du kan stole på
             </h2>
           </AnimatedBlock>
-
           <AnimatedBlock
             className='will-animate-fade-in-up'
             delay='0.5s'
@@ -77,12 +86,10 @@ export function NewProductLaunchSection() {
           >
             <p className='mb-8 max-w-prose text-lg leading-relaxed text-muted-foreground'>
               Vi introduserer {productName} – vår mest tekniske og allsidige
-              modell noensinne. Skapt for komfortsøkende livsnytere som vil
-              forlenge kvelden på terrassen, hytta eller ved bobilen – uten å
-              fryse.
+              modell noensinne. Perfekt for deg som stiller de høyeste kravene
+              til komfort og funksjonalitet.
             </p>
           </AnimatedBlock>
-
           <div className='mb-8 w-full space-y-3'>
             {newProductFeatures.map((feature, idx) => (
               <FeatureCard
@@ -93,55 +100,56 @@ export function NewProductLaunchSection() {
             ))}
           </div>
 
-          {/* --- RYDDIG PRISLINJE / CTA-BAR --- */}
+          {/* Oppdatert pris-seksjon med lanseringstilbud */}
           <AnimatedBlock
             className='will-animate-fade-in-up w-full'
             delay='0.9s'
             threshold={1}
           >
-            <section
-              aria-label='Pris og kjøp'
-              className='rounded-xl bg-background/60 backdrop-blur-sm'
-            >
-              {/* Grid som skalerer pent fra mobil til desktop */}
-              <div className='grid items-center gap-4 p-4 sm:p-5 md:grid-cols-[auto,1fr,auto]'>
-                {/* Prisblokk – én visuell enhet */}
-                <div className='flex items-baseline gap-3'>
-                  <p className='text-4xl font-bold tracking-tight text-foreground'>
-                    {launchPrice},-
+            <div className='flex w-full flex-col gap-6'>
+              {/* Pris-visning */}
+              <div className='flex flex-col gap-3'>
+                {/* Original pris med rabatt */}
+                <div className='flex items-center gap-3'>
+                  <span className='text-xl text-muted-foreground/60 line-through decoration-2'>
+                    {originalPrice},-
+                  </span>
+                  <div className='flex items-center gap-2 rounded-full bg-red-500/10 px-3 py-1 ring-1 ring-red-500/20'>
+                    <TrendingDown className='h-3.5 w-3.5 text-red-400' />
+                    <span className='text-sm font-semibold text-red-400'>
+                      −{discountAmount} kr
+                    </span>
+                  </div>
+                </div>
+
+                {/* Nåværende pris med gradient */}
+                <div className='flex flex-wrap items-baseline gap-3'>
+                  <p className='bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-5xl font-bold text-transparent'>
+                    {currentPrice},-
                   </p>
                   <span className='text-sm text-muted-foreground'>
                     inkl. mva
                   </span>
-
-                  <div className='flex items-center gap-2 pl-2'>
-                    <del className='text-base text-muted-foreground/70'>
-                      {originalPrice},-
-                    </del>
-                  </div>
+                  <span className='rounded-full bg-emerald-500/10 px-3 py-1 text-sm font-bold text-emerald-400 ring-1 ring-emerald-500/20'>
+                    Spar {discountPercent}%
+                  </span>
                 </div>
 
-                {/* Finprint / trygghet – midten på desktop, under på mobil */}
-                <p className='text-xs text-muted-foreground md:justify-self-center'>
-                  Rabatt i en begrenset periode.
+                {/* Tilbuds-beskrivelse */}
+                <p className='text-sm text-muted-foreground'>
+                  Begrenset tilbud ved lansering
                 </p>
-
-                {/* Primær-CTA – høyre på desktop, under på mobil */}
-                <div className='md:justify-self-end'>
-                  <Button asChild size='lg' className='group w-full sm:w-auto'>
-                    <Link
-                      href={productUrl}
-                      aria-label={`Kjøp ${productName} til lanseringspris`}
-                    >
-                      Sikre deg lanseringsprisen
-                      <ArrowRight className='ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1' />
-                    </Link>
-                  </Button>
-                </div>
               </div>
-            </section>
+
+              {/* CTA-knapp */}
+              <Button asChild size='lg' className='group w-full sm:w-auto'>
+                <Link href={productUrl}>
+                  Oppdag {productName}
+                  <ArrowRight className='ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1' />
+                </Link>
+              </Button>
+            </div>
           </AnimatedBlock>
-          {/* --- /PRISLINJE --- */}
         </AnimatedBlock>
       </div>
     </section>
