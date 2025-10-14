@@ -51,8 +51,8 @@ export function AllProductsCarousel() {
           )
         })}
       </CarouselContent>
-      <CarouselPrevious className='hidden lg:inline-flex' />
-      <CarouselNext className='hidden lg:inline-flex' />
+      <CarouselPrevious />
+      <CarouselNext />
     </Carousel>
   )
 }
