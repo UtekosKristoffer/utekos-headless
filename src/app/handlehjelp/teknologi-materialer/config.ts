@@ -7,7 +7,6 @@ export type Technology = {
   readonly products: readonly string[]
 }
 
-// Vi definerer en ny type for en gruppe teknologier
 export type TechnologyGroup = {
   readonly groupTitle: string
   readonly technologies: readonly Technology[]

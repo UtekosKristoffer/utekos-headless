@@ -2,7 +2,7 @@ import BobilPrepFlow from '@/app/magasinet/den-ultimate-guiden-til-komfortabel-v
 import { VintercampFlow } from '@/app/magasinet/den-ultimate-guiden-til-komfortabel-vintercamping/VinterCamp/VinterCampFlow'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { ArrowRightIcon, CheckIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import siteImage from '@public/magasinet/vintercamp.png'
 import { Coffee, Snowflake, Sparkles, Thermometer } from 'lucide-react'
 import Image from 'next/image'
