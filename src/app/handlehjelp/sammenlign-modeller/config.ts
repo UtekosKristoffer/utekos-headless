@@ -2,24 +2,35 @@
 
 export const comparisonData = [
   {
+    feature: 'Best for',
+    icon: 'star',
+    dun: 'Maksimal varme i forhold til vekt. Den kompromissløse livsnyteren.',
+    mikrofiber: 'Allsidig bruk og lavest vekt. Den praktiske eventyreren.',
+    techdawn: 'Robust ytelse og moderne komfort. Den tekniske allrounderen.',
+    iconColor: 'text-yellow-400'
+  },
+  {
     feature: 'Varme (tørt vær)',
-    icon: 'thermometer', // Endret fra komponent til streng
-    dun: 'Uovertruffen',
-    mikrofiber: 'Meget god',
-    techdawn: 'Utmerket',
+    icon: 'thermometer',
+    dun: 'Uovertruffen. Ekte andedun gir den høyeste varme-til-vekt ratioen.',
+    mikrofiber: 'Meget god. En solid og pålitelig varme for de fleste forhold.',
+    techdawn:
+      'Utmerket. CloudWeave™ etterligner den lette, høye varmen fra dun.',
     iconColor: 'text-orange-400'
   },
   {
     feature: 'Varme (fuktig vær)',
-    icon: 'droplets', // Endret fra komponent til streng
-    dun: 'God',
-    mikrofiber: 'Overlegen',
-    techdawn: 'Overlegen',
+    icon: 'droplets',
+    dun: 'God, men ekte dun kan miste noe isolasjonsevne om det blir helt gjennomvått.',
+    mikrofiber:
+      'Overlegen. Syntetisk fyll som beholder varmeevnen uansett fuktighet.',
+    techdawn:
+      'Overlegen. CloudWeave™-isolasjonen er designet for å tåle fuktig, norsk klima.',
     iconColor: 'text-cyan-400'
   },
   {
-    feature: 'Vekt',
-    icon: 'feather', // Endret fra komponent til streng
+    feature: 'Vekt (ca.)',
+    icon: 'feather',
     dun: 'Ekstra lett (~1000g)',
     mikrofiber: 'Ultralett (~800g)',
     techdawn: 'Robust (~1300g)',
@@ -27,23 +38,31 @@ export const comparisonData = [
   },
   {
     feature: 'Vedlikehold',
-    icon: 'washing-machine', // Endret fra komponent til streng
-    dun: 'Krever skånsom vask',
-    mikrofiber: 'Svært enkel (Maskinvask)',
-    techdawn: 'Svært enkel (Maskinvask)',
+    icon: 'washing-machine',
+    dun: 'Krever skånsom vask/rens for å bevare spensten i dunen.',
+    mikrofiber: 'Uanstrengt. Kan enkelt vaskes i maskin og tørker raskt.',
+    techdawn: 'Uanstrengt. Kan enkelt vaskes i maskin og tørker raskt.',
     iconColor: 'text-emerald-400'
   },
   {
-    feature: 'Isolert hette',
-    icon: 'check', // Endret fra komponent til streng
-    dun: true,
-    mikrofiber: true,
-    techdawn: true,
-    iconColor: 'text-muted-foreground'
+    feature: 'Isolasjonstype',
+    icon: 'layers',
+    dun: '90% Ekte andedun (650 FP)',
+    mikrofiber: 'Høykvalitets Mikrofiber',
+    techdawn: 'CloudWeave™ (Dun-etterligning)',
+    iconColor: 'text-slate-400'
   },
   {
-    feature: 'Fleece-lommer',
-    icon: 'check', // Endret fra komponent til streng
+    feature: 'Ytterstoff',
+    icon: 'shield',
+    dun: 'Slitesterk Nylon med DWR-belegg',
+    mikrofiber: 'Slitesterk Nylon med DWR-belegg',
+    techdawn: 'Luméa™ (Premium Nylon)',
+    iconColor: 'text-slate-400'
+  },
+  {
+    feature: 'Isolert hette',
+    icon: 'check',
     dun: true,
     mikrofiber: true,
     techdawn: true,
