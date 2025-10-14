@@ -110,7 +110,7 @@ export const TechDawnFeatureSection = () => {
               <span className='text-sm font-semibold text-emerald-400'>
                 Lanseringstilbud! - Nå til kun 1790,-
               </span>
-              <div className='h-3.5 w-px bg-emerald-400/30' />
+              <span> 🎉 </span>
             </div>
           </div>
 
