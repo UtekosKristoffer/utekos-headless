@@ -71,7 +71,7 @@ export default function PrivacyPolicyPage() {
 
         <div className='p-8 sm:p-12 lg:p-16'>
           <header className='text-center'>
-            <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>
+            <h1 className='text-4xl font-bold mx-auto tracking-tight sm:text-5xl'>
               Personvernerklæring
             </h1>
             <p className='mt-4 text-muted-foreground'>
