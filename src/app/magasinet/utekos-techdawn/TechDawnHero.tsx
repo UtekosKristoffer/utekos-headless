@@ -4,13 +4,13 @@ export function TechDawnHero() {
   return (
     <section className='relative w-full h-screen bg-black'>
       {/* Background Image - Constrained Width */}
-      <div className='absolute inset-0 flex justify-center'>
+      <div className='absolute inset-0 flex justify-center mb-4'>
         <div className='relative size-full max-w-7xl'>
           <Image
             src={TechHeroImage}
             alt='Utekos TechDawn på fjelltopp'
             fill
-            className='object-cover object-center'
+            className='object-cover pt-4'
             sizes='(max-width: 1280px) 100vw, 1280px'
             priority
           />

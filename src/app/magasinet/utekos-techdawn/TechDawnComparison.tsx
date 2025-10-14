@@ -1,9 +1,9 @@
 export function TechDawnComparison() {
   return (
-    <section className='bg-gradient-to-b from-gray-900/50 to-black py-20'>
+    <section className='bg-gradient-to-b from-gray-900/50 to-black pt-20'>
       <div className='max-w-6xl mx-auto px-6'>
         <div className='text-center mb-16'>
-          <h2 className='text-3xl font-light mb-4'>
+          <h2 className='text-3xl font-light pt-2 mb-4'>
             Hvilket Utekos-plagg passer deg best?
           </h2>
           <p className='text-gray-400 max-w-2xl mx-auto'>
@@ -97,7 +97,7 @@ export function TechDawnComparison() {
             <span className='text-yellow-400'>Tips:</span> Mange av våre kunder
             har ulike modeller: Utekos Dun™, Utekos Mikrofiber™ eller Utekos
             TechDawn™ for de kaldeste kveldene, og Comfyrobe™ som sin
-            hverdagslige følgevenn!
+            hverdagslige følgesvenn!
           </p>
         </div>
       </div>

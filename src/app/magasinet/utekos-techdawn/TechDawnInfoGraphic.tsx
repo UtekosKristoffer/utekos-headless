@@ -9,7 +9,7 @@ export function TechDawnInfographic() {
   >(null)
 
   return (
-    <section className='py-20 px-6 bg-gradient-to-b from-black via-gray-900/50 to-black'>
+    <section className='mt-12 px-6 bg-gradient-to-b from-black via-gray-900/50 to-black'>
       <div className='max-w-6xl mx-auto'>
         <div className='text-center mb-16'>
           <h2 className='text-3xl font-light mb-4'>

@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export function TechDawnCTA() {
   return (
-    <section className='py-24 px-6'>
+    <section className='pb-24 pt-6 px-6'>
       <div className='max-w-4xl mx-auto text-center'>
         {/* Badge */}
         <div
