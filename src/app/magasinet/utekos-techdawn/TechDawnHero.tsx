@@ -20,7 +20,7 @@ export function TechDawnHero() {
 
       {/* Content */}
       <div className='relative h-full flex flex-col justify-end'>
-        <div className='max-w-4xl mx-auto px-6 pb-50'>
+        <div className='max-w-4xl mx-auto px-6 pb-44 md:pb-50'>
           <div className='flex items-center gap-4 mb-6'>
             <span className='text-yellow-400 text-sm uppercase tracking-widest'>
               Nyhet
