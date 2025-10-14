@@ -114,8 +114,8 @@ export function HelpChooseSection() {
           })}
         </CarouselContent>
         <div className='hidden lg:block'>
-          <CarouselPrevious className='absolute left-[-1.5rem] top-1/2 -translate-y-1/2' />
-          <CarouselNext className='absolute right-[-1.5rem] top-1/2 -translate-y-1/2' />
+          <CarouselPrevious className='absolute top-1/2 -translate-y-1/2 left-2 lg:left-[-1.5rem]' />
+          <CarouselNext className='absolute top-1/2 -translate-y-1/2 right-2 lg:right-[-1.5rem]' />
         </div>
       </Carousel>
     </section>
