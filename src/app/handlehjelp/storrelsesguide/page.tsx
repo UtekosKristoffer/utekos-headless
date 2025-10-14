@@ -34,8 +34,8 @@ export const metadata: Metadata = {
 }
 
 const navigationLinks = [
-  { name: 'Utekos TechDawn™', href: '#tech-dawn-size-guide' },
-  { name: 'Utekos Dun™ og Mikrofiber™', href: '#utekos-size-guide' },
+  { name: 'TechDawn™', href: '#tech-dawn-size-guide' },
+  { name: 'Utekos™', href: '#utekos-size-guide' },
   { name: 'Comfyrobe™', href: '#comfyrobe-size-guide' }
 ]
 
