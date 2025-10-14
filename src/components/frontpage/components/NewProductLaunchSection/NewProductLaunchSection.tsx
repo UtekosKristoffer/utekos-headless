@@ -52,7 +52,7 @@ export function NewProductLaunchSection() {
             threshold={1}
           >
             <p className='mb-8 max-w-prose text-lg leading-relaxed text-muted-foreground'>
-              Vi introduserer {productName} – vår letteste og mest tekniske
+              Vi introduserer {productName} – vår mest tekniske og allsidige
               modell noensinne. Perfekt for deg som stiller de høyeste kravene
               til komfort og funksjonalitet.
             </p>
