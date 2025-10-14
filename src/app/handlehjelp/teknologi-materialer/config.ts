@@ -13,13 +13,12 @@ export type TechnologyGroup = {
   readonly technologies: readonly Technology[]
 }
 
-
 export const technologyGroups: readonly TechnologyGroup[] = [
   {
     groupTitle: 'Utekos TechDawn™',
     technologies: [
       {
-        icon: <Droplet />,
+        icon: 'droplet',
         title: 'Luméa™ – Premium ytterstoff',
         iconColor: 'text-sky-400',
         content:
