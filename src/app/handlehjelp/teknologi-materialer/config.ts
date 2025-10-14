@@ -1,60 +1,57 @@
 // Path: src/app/handlehjelp/teknologi-materialer/config.ts
 
 export const technologies = [
-  {
-    icon: 'thermometer',
-    title: 'Fillpower 650 – Premium varme, minimal vekt',
-    iconColor: 'text-orange-400',
-    content:
-      'Fillpower måler spensten og isolasjonsevnen i dun. 650 regnes som premium kvalitet, og gir en perfekt balanse mellom enestående varme og lav vekt. Dette gjør at plagget enkelt kan komprimeres for tur, samtidig som det gir den lune, omsluttende følelsen du forventer av et høykvalitetsprodukt.',
-    products: ['Utekos Dun']
-  },
-  {
-    icon: 'feather',
-    title: 'Hollow Fiber – Lett og luftig isolasjon',
-    iconColor: 'text-cyan-400',
-    content:
-      'Denne smarte, syntetiske isolasjonen består av fibre med en hul kjerne. Dette fanger mer luft og gir eksepsjonelt god varme i forhold til vekten. Materialet er lett, pustende og tørker raskt – ideelt for det skiftende norske klimaet og aktivt uteliv.',
-    products: ['Utekos Mikrofiber']
-  },
-  {
-    icon: 'weight',
-    title: '140 g/m² – Optimal balanse',
-    iconColor: 'text-slate-400',
-    content:
-      'Vekten på isolasjonen, målt i gram per kvadratmeter, er nøye utvalgt for å gi deg en perfekt balanse. Med 140 g/m² får du rikelig med varme for kjølige kvelder, uten at plagget blir tungt eller begrenser bevegelsesfriheten din.',
-    products: ['Utekos Mikrofiber']
-  },
+  // --- Utekos TechDawn™ ---
   {
     icon: 'gem',
-    title: 'Luméa™ – Eleganse møter slitestyrke',
-    iconColor: 'text-yellow-400',
+    title: 'Luméa™ – Premium Ytterstoff',
+    iconColor: 'text-sky-400',
     content:
-      'Luméa™ er et eksklusivt yttermateriale utviklet for å kombinere et elegant uttrykk med teknisk ytelse. Den glatte, premium finishen er vannavvisende og ekstremt slitesterk, samtidig som den lette vekten sikrer optimal komfort. Stoffet holder formen over tid og gir deg et produkt som ser like bra ut som det presterer.',
-    products: ['Utekos Dun', 'Utekos Mikrofiber']
+      'Vårt mest eksklusive og slitesterke nylonstoff, utviklet spesielt for TechDawn™. Luméa™ har en elegant, matt finish som føles myk, samtidig som den lette og pustende konstruksjonen tåler røff bruk. Det er selve definisjonen på teknisk eleganse.',
+    products: ['Utekos TechDawn™']
+  },
+  {
+    icon: 'cloud',
+    title: 'CloudWeave™ – Innovativ Isolasjon',
+    iconColor: 'text-sky-400',
+    content:
+      'Kjernen i TechDawn™. En avansert, syntetisk isolasjon som etterligner den lette, luftige og luksuriøse følelsen av dun. Den store fordelen er at den, i motsetning til dun, beholder sin fulle isolasjonsevne selv om den blir fuktig.',
+    products: ['Utekos TechDawn™']
+  },
+
+  // --- Utekos Dun™ ---
+  {
+    icon: 'thermometer',
+    title: 'Fillpower 650 Andedun – Uovertruffen Varme',
+    iconColor: 'text-orange-400',
+    content:
+      'Kjernen i vår varmeste modell. Fillpower måler spensten og isolasjonsevnen i dun. 650 regnes som premium kvalitet, og gir en perfekt balanse mellom enestående varme og lav vekt, noe som skaper den unike, omsluttende følelsen av ekte dun.',
+    products: ['Utekos Dun™']
   },
   {
     icon: 'shield',
-    title: 'Shell Fabrix 20D / 380T – Fjærlett og robust beskyttelse',
-    iconColor: 'text-blue-400',
+    title: 'Slitesterk DWR Nylon – Robust Beskyttelse',
+    iconColor: 'text-orange-400',
     content:
-      'Ytterstoffet er din første barriere mot elementene. Vårt tekniske materiale har en tettvevd struktur som gjør det svært vindavvisende, lett og slitesterkt. Den myke finishen gir en premium følelse og gjør plagget enkelt å pakke sammen.',
-    products: ['Utekos Dun', 'Utekos Mikrofiber']
+      'Et lett, men robust ytterstoff med en DWR-behandling (Durable Water Repellent). Dette gjør at stoffet tåler lett regn og snø, og gir et ekstra lag med trygghet rundt bålpannen takket være flammehemmende egenskaper.',
+    products: ['Utekos Dun™']
+  },
+
+  // --- Utekos Mikrofiber™ ---
+  {
+    icon: 'feather',
+    title: 'Hurtigtørkende Mikrofiber – Lett og Praktisk',
+    iconColor: 'text-cyan-400',
+    content:
+      'En lett, slitesterk og praktisk syntetisk isolasjon. Fibrene fanger effektivt luft for å gi god varme, og har den store fordelen at de tørker svært raskt. Ideelt for allsidig bruk i det skiftende norske klimaet.',
+    products: ['Utekos Mikrofiber™']
   },
   {
-    icon: 'layers',
-    title: 'Nylon Taffeta – Silkemyk komfort på innsiden',
+    icon: 'shirt',
+    title: 'Nylon Taffeta – Komfort på Innsiden',
     iconColor: 'text-violet-400',
     content:
-      'Innerstoffet er avgjørende for den totale komfortopplevelsen. Vi bruker Nylon Taffeta fordi det er glatt, lett og føles behagelig mot huden. Det glir lett over andre kleslag og sørger for minimal friksjon når du beveger deg.',
-    products: ['Utekos Dun', 'Utekos Mikrofiber']
-  },
-  {
-    icon: 'flame',
-    title: 'Flammehemmende Nylon med DWR – Trygghet rundt bålpannen',
-    iconColor: 'text-red-400',
-    content:
-      'For oss handler utekos om trygghet. Derfor bruker vi et ytterstoff som kombinerer flammehemmende egenskaper med en DWR-behandling (Durable Water Repellent). Dette gir deg et ekstra sikkerhetsnivå nær åpen ild, samtidig som det beskytter mot lett regn og fukt.',
-    products: ['Utekos Dun']
+      'Innerstoffet er avgjørende for den totale komfortopplevelsen. Vi bruker Nylon Taffeta i alle våre modeller fordi det er glatt, lett og føles behagelig mot huden. Det glir lett over andre kleslag og sørger for minimal friksjon når du beveger deg.',
+    products: ['Utekos Dun™', 'Utekos Mikrofiber™', 'Utekos TechDawn™']
   }
 ] as const
