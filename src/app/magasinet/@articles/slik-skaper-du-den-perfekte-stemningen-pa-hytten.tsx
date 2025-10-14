@@ -1,4 +1,5 @@
 import HyttekosFlow from '@/app/magasinet/slik-skaper-du-den-perfekte-stemningen-pa-hytten/HyttekosFlow'
+import { HyttekosFormelenSection } from '@/app/magasinet/slik-skaper-du-den-perfekte-stemningen-pa-hytten/HyttekosFormelenSection'
 import { HyttekosElementsGrid } from '@/app/magasinet/slik-skaper-du-den-perfekte-stemningen-pa-hytten/HyttekosElementsGrid'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -47,7 +48,7 @@ const hyttekosElementsData = [
 
 export const HyttekosArticle = () => {
   return (
-    <article className='prose prose-invert prose-lg max-w-4xl mx-auto'>
+    <article className='md:max-w-4xl mx-auto'>
       <figure className='!my-12'>
         <Image
           src={HyttePeis}
@@ -55,13 +56,14 @@ export const HyttekosArticle = () => {
           width={1500}
           height={1000}
           className='rounded-lg'
+          priority
         />
         <figcaption className='text-center text-sm text-muted-foreground mt-2'>
           Den etterlengtede roen senker seg på hytten.
         </figcaption>
       </figure>
 
-      <p>
+      <p className='text-lg text-muted-foreground'>
         Ordet &quot;hyttekos&quot; er nesten hellig for oss nordmenn. Det
         fremkaller bilder av snødekte landskap, knitrende peisbål og en dyp
         følelse av ro. Men hva er det egentlig som skaper denne magiske
@@ -69,11 +71,11 @@ export const HyttekosArticle = () => {
         sammen for å påvirke sansene våre.
       </p>
 
-      <h2 className='flex items-center mt-2 gap-3'>
+      <h2 className='flex items-center mt-12 mb-4 gap-3 text-3xl font-bold'>
         <Sparkles className='text-yellow-400' />
         Hyttekos-formelen
       </h2>
-      <Card className='bg-sidebar-foreground border-neutral-800 my-8 not-prose'>
+      <Card className='bg-sidebar-foreground border-neutral-800 my-8'>
         <CardContent className='p-6'>
           <p className='text-muted-foreground mt-0'>
             Den perfekte hyttestemningen er en sum av fire deler. Når du bevisst
@@ -85,10 +87,14 @@ export const HyttekosArticle = () => {
         </CardContent>
       </Card>
 
-      <div className='not-prose my-16'>
+      <div className='my-16'>
         <HyttekosElementsGrid elements={hyttekosElementsData} />
       </div>
-      <Card className='my-12 not-prose text-center bg-gradient-to-br from-primary/20 to-transparent border-neutral-800'>
+
+      {/* Her settes det nye, dype innholdet inn */}
+      <HyttekosFormelenSection />
+
+      <Card className='my-12 text-center bg-gradient-to-br from-primary/20 to-transparent border-neutral-800'>
         <CardContent className='p-8'>
           <h3 className='text-2xl font-bold mt-0'>Forleng peisvarmen</h3>
           <p className='text-muted-foreground mt-2 mb-6'>
@@ -104,7 +110,7 @@ export const HyttekosArticle = () => {
         </CardContent>
       </Card>
 
-      <Card className='my-12 not-prose bg-sidebar-foreground border-neutral-800'>
+      <Card className='my-12 bg-sidebar-foreground border-neutral-800'>
         <CardContent className='p-8'>
           <h3 className='text-2xl font-bold flex items-center gap-3 mt-0'>
             <Sparkles className='h-6 w-6 text-yellow-400' />
