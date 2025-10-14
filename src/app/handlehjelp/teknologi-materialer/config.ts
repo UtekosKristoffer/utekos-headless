@@ -1,8 +1,6 @@
-// Path: src/app/handlehjelp/teknologi-materialer/config.ts
-
-// Vi definerer typen for en enkelt teknologi
+import { Droplet, Cloud } from 'lucide-react'
 export type Technology = {
-  readonly icon: string
+  readonly icon: any
   readonly title: string
   readonly iconColor: string
   readonly content: string
@@ -15,13 +13,13 @@ export type TechnologyGroup = {
   readonly technologies: readonly Technology[]
 }
 
-// Vi bygger dataen basert på den nye gruppestrukturen
+
 export const technologyGroups: readonly TechnologyGroup[] = [
   {
     groupTitle: 'Utekos TechDawn™',
     technologies: [
       {
-        icon: 'gem',
+        icon: <Droplet />,
         title: 'Luméa™ – Premium ytterstoff',
         iconColor: 'text-sky-400',
         content:
