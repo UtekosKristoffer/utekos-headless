@@ -11,23 +11,23 @@ export type TechnologyGroup = {
   readonly groupTitle: string
   readonly technologies: readonly Technology[]
 }
-
 export const technologyGroups: readonly TechnologyGroup[] = [
   {
     groupTitle: 'Utekos TechDawn™',
     technologies: [
       {
-        icon: 'droplet',
-        title: 'Luméa™ – Premium ytterstoff',
-        iconColor: 'text-sky-400',
+        icon: 'gem',
+        title: 'Luméa™',
+        iconColor: 'text-sky-800',
+        // --- HER ER DEN OPPDATERTE TEKSTEN ---
         content:
-          'Vårt mest eksklusive og slitesterke nylonstoff, utviklet spesielt for TechDawn™. Luméa™ har en elegant, matt finish som føles myk, samtidig som den lette og pustende konstruksjonen tåler røff bruk. Det er selve definisjonen på teknisk eleganse.',
+          'Vårt mest eksklusive ytterstoff, utviklet for TechDawn™ for å maksimere komfort og slitestyrke. Den tettvevde, premium nylonkonstruksjonen gir en naturlig vannavvisende egenskap og står imot lett fukt. Hovedfokuset er den eksepsjonelle, myke følelsen og den elegante matte finishen – et materiale valgt for luksuriøs komfort.',
         products: ['Utekos TechDawn™']
       },
       {
         icon: 'cloud',
-        title: 'CloudWeave™ – Innovativ isolasjon',
-        iconColor: 'text-sky-400',
+        title: 'CloudWeave™',
+        iconColor: 'text-sky-800',
         content:
           'Kjernen i TechDawn™. En avansert, syntetisk isolasjon som etterligner den lette, luftige og luksuriøse følelsen av dun. Den store fordelen er at den, i motsetning til dun, beholder sin fulle isolasjonsevne selv om den blir fuktig.',
         products: ['Utekos TechDawn™']

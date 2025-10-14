@@ -30,7 +30,7 @@ const iconMap: { [key: string]: React.ElementType } = {
 }
 
 // Liten, ren sub-komponent for hver teknologi-blokk
-const TechnologyBlock = ({ tech }: { tech: Technology }) => {
+export const TechnologyBlock = ({ tech }: { tech: Technology }) => {
   const IconComponent = iconMap[tech.icon]
   if (!IconComponent) return null
 
