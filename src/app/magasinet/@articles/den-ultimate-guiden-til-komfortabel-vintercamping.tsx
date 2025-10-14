@@ -3,53 +3,46 @@ import { VintercampFlow } from '@/app/magasinet/den-ultimate-guiden-til-komforta
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { ArrowRightIcon, CheckIcon } from '@heroicons/react/24/outline'
-import siteImage from '@public/og-image-bobil.webp'
+import siteImage from '@public/magasinet/vintercamp.png'
 import { Coffee, Snowflake, Sparkles, Thermometer } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-
+import { BobilKlargjoringSection } from '../den-ultimate-guiden-til-komfortabel-vintercamping/Bobil/BobilKlargjoringSection'
+import { PakkelisteSection } from '../den-ultimate-guiden-til-komfortabel-vintercamping/VinterCamp/PakkelisteSection'
+import { VintercampLivetSection } from '../den-ultimate-guiden-til-komfortabel-vintercamping/VinterCamp/VintercampLivetSection'
 export const VintercampingArticle = () => {
-  const ChecklistItem = ({ children }: { children: React.ReactNode }) => {
-    return (
-      <li className='flex items-start gap-3'>
-        <CheckIcon className='h-6 w-6 text-emerald-500 mt-1 flex-shrink-0' />
-        <span>{children}</span>
-      </li>
-    )
-  }
-
   return (
     <article className='prose prose-invert prose-lg md:max-w-7xl mx-auto'>
       <figure className='!my-12'>
         <Image
           src={siteImage}
-          alt='Bobil i et vakkert, snødekt landskap ved solnedgang.'
+          alt='Bobil i et vakkert, snødekt landskap ved solnedgang, med varme lys på innsiden.'
           width={1500}
           height={1000}
           className='rounded-lg'
+          priority
         />
         <figcaption className='text-center text-sm text-muted-foreground mt-2'>
           Stillheten. Lyset. Opplevelsene. Vintercamping er unikt.
         </figcaption>
       </figure>
 
-      {/* Intro Text */}
-      <p>
+      <p className='text-lg text-muted-foreground'>
         Å våkne opp til et landskap dekket av nyfalt snø, med den skarpe, klare
         vinterluften som venter utenfor døren, er en opplevelse få ting kan måle
         seg med. Men for mange bobilentusiaster er tanken på vintercamping
         forbundet med ett stort spørsmål: Hvordan holder man varmen og
         komforten?
       </p>
-      <p>
+      <p className='text-lg text-muted-foreground'>
         Frykt ikke. Vi har samlet alt du trenger å vite – fra de tekniske
         forberedelsene til de små triksene som forvandler en kald tur til en
         uforglemmelig, koselig opplevelse.
       </p>
 
-      {/* Section 1: Forberedelser */}
-      <h2 className='flex items-center gap-3 mt-5'>
+      {/* --- Seksjon 1 --- */}
+      <h2 className='flex items-center gap-3 mt-12'>
         <Snowflake className='text-cyan-400' />
         Fase 1: Bobilen må være klar
       </h2>
@@ -65,80 +58,35 @@ export const VintercampingArticle = () => {
           </div>
         </CardContent>
       </Card>
+      <BobilKlargjoringSection />
 
-      {/* Quote Block */}
-      <Card className='bg-sidebar-foreground border-neutral-800 my-12'>
-        <CardContent className='p-8'>
-          <blockquote className='text-xl italic text-foreground/90 not-prose m-0'>
-            &quot;Den største feilen folk gjør er å undervurdere hvor fort
-            kulden kommer snikende. En godt forberedt bobil er halve jobben for
-            en vellykket tur.&quot;
-          </blockquote>
-        </CardContent>
-      </Card>
-
-      {/* Section 2: Din personlige komfort */}
-      <h2 className='flex items-center gap-3'>
+      {/* --- Seksjon 2 --- */}
+      <h2 className='flex items-center gap-3 mt-16'>
         <Thermometer className='text-orange-400' />
         Fase 2: Pakkelisten for personlig komfort
       </h2>
-      <p>
+      <p className='mt-4 text-lg text-muted-foreground'>
         Når bobilen er klar, er det på tide å tenke på deg selv. Hemmeligheten
         ligger i lag-på-lag-prinsippet og å ha det rette
         &quot;kose-utstyret&quot; tilgjengelig.
       </p>
+      <PakkelisteSection />
 
-      <Card className='bg-sidebar-foreground border-neutral-800 my-12 not-prose'>
-        <CardContent className='p-8'>
-          <h3 className='text-2xl font-bold flex items-center gap-3 mt-0'>
-            <Sparkles className='text-yellow-400' />
-            Sjekkliste for varme og hygge:
-          </h3>
-          <ul className='mt-4 space-y-3'>
-            <ChecklistItem>
-              <strong>Ull innerst:</strong> Ullundertøy er din beste venn. Det
-              isolerer selv om det blir fuktig.
-            </ChecklistItem>
-            <ChecklistItem>
-              <strong>Gode tøfler:</strong> Et kaldt gulv stjeler fort varmen.
-              Et par varme, isolerte tøfler er et must.
-            </ChecklistItem>
-            <ChecklistItem>
-              <strong>Vinterdyne eller sovepose:</strong> Ikke spar på
-              kvaliteten her. En god natts søvn er avgjørende.
-            </ChecklistItem>
-            <ChecklistItem>
-              <strong>Utekos-plagget:</strong> Dette er ditt hemmelige våpen.
-              Perfekt for de kjølige morgenene før varmen har satt seg, for en
-              rask tur ut for å sjekke været, eller for å nyte en kopp kaffe
-              utendørs. Den er designet for nettopp disse øyeblikkene.
-            </ChecklistItem>
-            <ChecklistItem>
-              <strong>Lommelykt/hodelykt:</strong> Vinterdagene er korte. Godt
-              lys er viktig.
-            </ChecklistItem>
-          </ul>
-        </CardContent>
-      </Card>
-
-      {/* Section 3: Livet i leiren */}
-      <h2 className='flex items-center gap-3'>
+      {/* --- Seksjon 3 --- */}
+      <h2 className='flex items-center gap-3 mt-16'>
         <Coffee className='text-amber-400' />
         Fase 3: Livet på vintercampingen
       </h2>
-      <Card className='bg-sidebar-foreground border-neutral-800 my-8 not-prose'>
-        <CardContent className='p-6'>
-          <p className='text-muted-foreground mt-0'>
-            Du er fremme, bobilen er parkert, og landskapet er fantastisk. Slik
-            får du mest ut av oppholdet:
-          </p>
-          <div className='mt-6'>
-            <VintercampFlow />
-          </div>
-        </CardContent>
-      </Card>
+      <p className='mt-4 text-lg text-muted-foreground'>
+        Du er fremme, bobilen er parkert, og landskapet er fantastisk. Slik får
+        du mest ut av oppholdet:
+      </p>
+      <div className='mt-6'>
+        <VintercampFlow />
+      </div>
+      <VintercampLivetSection />
 
-      {/* CTA within article */}
+      {/* --- CTA --- */}
       <Card className='my-12 not-prose text-center bg-gradient-to-br from-primary/20 to-transparent border-neutral-800'>
         <CardContent className='p-8'>
           <h3 className='text-2xl font-bold mt-0'>
@@ -157,7 +105,7 @@ export const VintercampingArticle = () => {
         </CardContent>
       </Card>
 
-      {/* Conclusion Section */}
+      {/* --- Konklusjon --- */}
       <Card className='my-12 not-prose bg-sidebar-foreground border-neutral-800'>
         <CardContent className='p-8'>
           <h3 className='text-2xl font-bold flex items-center gap-3 mt-0'>

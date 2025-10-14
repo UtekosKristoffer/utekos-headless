@@ -14,8 +14,8 @@ export const mockArticles: Article[] = [
     title: 'Bålpannen: Din guide til den perfekte høstkvelden',
     excerpt:
       'Lær de 5 P-ene for perfekt bålkos. Vår komplette guide hjelper deg å skape en uforglemmelig og komfortabel kveld rundt bålpannen.',
-    imageUrl: '/og-image-balpanne.webp',
-    category: 'Tips & Råd',
+    imageUrl: '/magasinet/prikken-over-ien.png',
+    category: 'Tips og råd',
     date: '22. september 2025'
   },
   {
@@ -50,7 +50,7 @@ export const mockArticles: Article[] = [
     title: 'Den ultimate guiden til komfortabel vintercamping',
     excerpt:
       'Vintercamping kan være magisk hvis du er godt forberedt. Vi gir deg sjekklisten du trenger for en varm og uforglemmelig tur med bobilen.',
-    imageUrl: '/og-image-bobil.webp',
+    imageUrl: '/magasinet/vintercamp.png',
     category: 'Bobilliv',
     date: '15. september 2025'
   },
