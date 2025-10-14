@@ -63,7 +63,7 @@ export function NewProductLaunchSection() {
                 Lanseringstilbud
               </span>
               <div className='h-3.5 w-px bg-emerald-400/30' />
-              <Sparkles className='h-3.5 w-3.5 text-emerald-400' />
+              <span> 🎉 </span>
               <span className='text-sm font-bold text-emerald-400'>
                 {discountPercent}% RABATT
               </span>

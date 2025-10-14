@@ -61,6 +61,7 @@ export default function AnnouncementBanner() {
           - Kompromissløs varme for norske kvelder.
         </span>
         <span className='font-bold'>Se lanseringstilbudet!</span>
+        <span> 🎉 </span>
         <ArrowRightIcon className='ml-2 inline-block size-4 transition-transform group-hover:translate-x-1' />
       </Link>
 
