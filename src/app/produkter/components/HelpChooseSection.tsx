@@ -113,10 +113,8 @@ export function HelpChooseSection() {
             )
           })}
         </CarouselContent>
-        <div className='hidden lg:block'>
-          <CarouselPrevious />
-          <CarouselNext />
-        </div>
+        <CarouselPrevious />
+        <CarouselNext />
       </Carousel>
     </section>
   )
