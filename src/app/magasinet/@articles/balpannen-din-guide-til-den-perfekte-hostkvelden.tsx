@@ -6,10 +6,11 @@ import Balpanne from '@public/og-image-balpanne.webp'
 import { FolderCheck } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-
+import { PlasseringOgPreparasjonerSection } from '@/app/magasinet/balpannen-din-guide-til-den-perfekte-hostkvelden/PlasseringOgPreparasjonerSection'
+import { ResterendePunkterSection } from '@/app/magasinet/balpannen-din-guide-til-den-perfekte-hostkvelden/ResterendePunkterSection'
 export const BalpanneArticle = () => {
   return (
-    <article className='prose prose-invert prose-lg md:max-w-7xl mx-auto'>
+    <article className='md:max-w-7xl mx-auto'>
       <figure className='!my-12'>
         <Image
           src={Balpanne}
@@ -17,13 +18,14 @@ export const BalpanneArticle = () => {
           width={1024}
           height={683}
           className='rounded-lg'
+          priority
         />
         <figcaption className='text-center text-sm text-muted-foreground mt-2'>
           Bålpannen er høstens naturlige samlingspunkt.
         </figcaption>
       </figure>
 
-      <p>
+      <p className='text-lg text-muted-foreground'>
         Men en virkelig vellykket kveld rundt bålpannen handler om mer enn bare
         å tenne et bål. Det handler om å skape en ramme av trygghet, hygge og
         ikke minst, varig komfort. Med litt planlegging får dere jevn varme, god
@@ -33,27 +35,14 @@ export const BalpanneArticle = () => {
         stemning fra start til slutt.
       </p>
 
-      <div className='not-prose my-12'>
+      <div className='my-12'>
         <BalpanneFlow />
       </div>
 
-      <p>
-        Når du har kontroll på disse fem punktene, legger du til rette for en
-        kveld der logistikken er usynlig og hyggen kan ta fullt fokus. Det
-        viktigste er å fjerne alt som kan bryte den gode stemningen – enten det
-        er en usikker plassering, mangel på ved, eller gjester som begynner å
-        fryse.
-      </p>
+      <PlasseringOgPreparasjonerSection />
+      <ResterendePunkterSection />
 
-      <p>
-        Spesielt punktet om &quot;personlig komfort&quot; er lett å overse, men
-        er ofte det som avgjør hvor lenge kvelden varer. Et sitteunderlag
-        hjelper, men den kalde luften på ryggen vinner som regel til slutt. En
-        personlig varmekilde som Utekos løser dette elegant, og lar alle bli
-        sittende i timevis.
-      </p>
-
-      <Card className='my-12 not-prose text-center bg-gradient-to-br from-primary/20 to-transparent border-neutral-800'>
+      <Card className='my-12 text-center bg-gradient-to-br from-primary/20 to-transparent border-neutral-800'>
         <CardContent className='p-8'>
           <h3 className='text-2xl font-bold mt-0'>Varm foran, varm bak</h3>
           <p className='text-muted-foreground mt-2 mb-6'>
@@ -70,7 +59,7 @@ export const BalpanneArticle = () => {
         </CardContent>
       </Card>
 
-      <Card className='my-12 not-prose bg-sidebar-foreground border-neutral-800'>
+      <Card className='my-12 bg-sidebar-foreground border-neutral-800'>
         <CardContent className='p-8'>
           <h3 className='text-2xl font-bold flex items-center gap-3 mt-0'>
             <FolderCheck className='h-6 w-6 text-yellow-400' />
