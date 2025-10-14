@@ -21,11 +21,11 @@ export function TechDawnHero() {
       {/* Content */}
       <div className='relative h-full flex flex-col justify-end'>
         <div className='max-w-4xl mx-auto px-6 pb-44 md:pb-50'>
-          <div className='flex items-center gap-4 mb-6'>
+          <div className='flex items-center gap-4 mb-4'>
             <span className='text-yellow-400 text-sm uppercase tracking-widest'>
               Nyhet
             </span>
-            <span className='h-px bg-yellow-400/50 flex-1 max-w-[75px]' />
+            <span className='h-[2px] bg-yellow-400/70 flex-1 max-w-[65px] md:max-w-[100px]' />
           </div>
           <h1 className='text-5xl md:text-6xl font-light mb-6 leading-tight'>
             Utekos TechDawn™
