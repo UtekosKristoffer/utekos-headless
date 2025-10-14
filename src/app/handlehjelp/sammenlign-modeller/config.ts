@@ -12,10 +12,10 @@ export const comparisonData = [
   {
     feature: 'Varme (tørt vær)',
     icon: 'thermometer',
-    dun: 'Uovertruffen. Ekte andedun gir den høyeste varme-til-vekt ratioen.',
+    dun: 'Uovertruffen. Andedun gir den høyeste varme-til-vekt ratioen.',
     mikrofiber: 'Meget god. En solid og pålitelig varme for de fleste forhold.',
     techdawn:
-      'Utmerket. CloudWeave™ etterligner den lette, høye varmen fra dun.',
+      'Utmerket. CloudWeave™ sørger for den lette, høye varmen fra dun.',
     iconColor: 'text-orange-400'
   },
   {
@@ -47,7 +47,7 @@ export const comparisonData = [
   {
     feature: 'Isolasjonstype',
     icon: 'layers',
-    dun: '90% Ekte andedun (650 FP)',
+    dun: '90% andedun (650 FP)',
     mikrofiber: 'Høykvalitets Mikrofiber',
     techdawn: 'CloudWeave™ (Dun-etterligning)',
     iconColor: 'text-slate-400'
@@ -55,8 +55,8 @@ export const comparisonData = [
   {
     feature: 'Ytterstoff',
     icon: 'shield',
-    dun: 'Slitesterk Nylon med DWR-belegg',
-    mikrofiber: 'Slitesterk Nylon med DWR-belegg',
+    dun: 'Slitesterk nylon med DWR-belegg',
+    mikrofiber: 'Slitesterk nylon med DWR-belegg',
     techdawn: 'Luméa™ (Premium Nylon)',
     iconColor: 'text-slate-400'
   },

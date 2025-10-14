@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { jsonLd } from './jsonLd'
 import { ProductSpecsView } from './layout/ProductSpecsView'
-import { technologies } from './config'
+import { technologyGroups } from './config'
 import { ProductSpecPageHeader } from './layout/ProductSpecPageHeader'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -38,7 +38,7 @@ export default function ProductSpecsPage() {
       />
       <main className='container mx-auto px-4 py-12 sm:py-16'>
         <ProductSpecPageHeader />
-        <ProductSpecsView technologies={technologies} />
+        <ProductSpecsView technologyGroups={technologyGroups} />
       </main>
     </>
   )

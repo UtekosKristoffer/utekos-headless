@@ -30,7 +30,7 @@ export function DeepDiveSection() {
               <div className='mb-4 flex items-center gap-4'>
                 <ThermometerSun className='h-8 w-8 text-cyan-400' />
                 <h3 className='text-xl font-semibold'>
-                  Varme & Værforhold: Velg etter klima
+                  Varme og værforhold: Velg etter klima
                 </h3>
               </div>
               <p className='mt-2 text-muted-foreground'>
@@ -55,7 +55,7 @@ export function DeepDiveSection() {
               <div className='mb-4 flex items-center gap-4'>
                 <Package className='h-8 w-8 text-violet-400' />
                 <h3 className='text-xl font-semibold'>
-                  Vekt & Pakkbarhet: For deg som teller gram
+                  Vekt og pakkbarhet: For deg som teller gram
                 </h3>
               </div>
               <p className='mt-2 text-muted-foreground'>
