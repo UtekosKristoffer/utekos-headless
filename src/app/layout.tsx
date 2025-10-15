@@ -1,6 +1,6 @@
 // Path: src/app/layout.tsx
 import './globals.css'
-import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleTagManager } from '@next/third-parties/google'
 import { geistSans, geistMono } from '@/db/config/font.config'
 import { mainMenu } from '@/db/config/menu.config'
 import { SpeedInsights } from '@vercel/speed-insights/react'
@@ -33,8 +33,21 @@ export const metadata: Metadata = {
     'Forleng kveldene på hytten, i bobilen eller på terrassen. Utekos lager komfortplagg av høy kvalitet, designet for å holde deg varm slik at du kan nyte de gode øyeblikkene lenger.',
 
   keywords: [
+    'komfortplagg',
+    'hytteliv',
+    'bobil klær',
+    'båtkos',
+    'dunkåpe',
+    'anorakk',
+    'dunjakke',
+    'utejakke',
+    'ute klær',
+    'regnkåpe',
+    'varmedress',
+    'lang dunjakke',
+    'dun klær',
+    'varmeplagg',
     'utekos',
-    'utekos dun',
     'dun dress',
     'utekos dress',
     'sovepose dress',
@@ -56,9 +69,9 @@ export const metadata: Metadata = {
     url: 'https://utekos.no',
 
     siteName: 'Utekos',
-    title: 'Utekos - Varme og komfort for gode stunder ute',
+    title: 'Utekos - Forleng de gode stundene ute.',
     description:
-      'Forleng kveldene på hytten, i bobilen eller på terrassen. Komfortplagg av høy kvalitet som holder deg varm.',
+      'Kompromissløs komfort, designet for å holde på varmen når øyeblikkene teller.',
     images: [
       {
         url: '/og-image-produkter.png',
@@ -115,7 +128,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         className={`bg-background text-foreground ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* Plasser scripts som skal kjøres tidlig, helt øverst i body */}
-        <GoogleAnalytics gaId='G-FCES3L0M9M' />
         <GoogleTagManager gtmId='GTM-5TWMJQFP' />
         <OrganizationJsonLd />
 
