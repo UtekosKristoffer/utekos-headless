@@ -1,4 +1,3 @@
-// /app/magasinet/layout.tsx
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,6 +8,7 @@ import {
 } from '@/components/ui/breadcrumb'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import { MagazineNewsletterSignup } from '@/components/form/MagazineNewsletterSignUp' // Importer den nye komponenten
 
 export default function MagazineLayout({ children }: { children: ReactNode }) {
   return (
@@ -31,7 +31,6 @@ export default function MagazineLayout({ children }: { children: ReactNode }) {
         </div>
       </section>
 
-      {/* Magazine Header Section (uendret) */}
       <section className='border-b border-neutral-800 bg-sidebar-foreground'>
         <div className='container mx-auto px-4 py-12 text-center'>
           <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>
@@ -45,6 +44,9 @@ export default function MagazineLayout({ children }: { children: ReactNode }) {
       </section>
 
       <main className='py-16 sm:py-24'>{children}</main>
+
+      {/* NY SEKSJON FOR PÅMELDING */}
+      <MagazineNewsletterSignup />
     </div>
   )
 }

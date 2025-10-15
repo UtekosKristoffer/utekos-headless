@@ -55,10 +55,6 @@ export function NewProductLaunchSection() {
               delay='0.35s'
               threshold={1}
             >
-              <span className='relative flex h-2.5 w-2.5'>
-                <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75'></span>
-                <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500'></span>
-              </span>
               <span className='text-sm font-semibold text-emerald-400'>
                 Lanseringstilbud
               </span>
