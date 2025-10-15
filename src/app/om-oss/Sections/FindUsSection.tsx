@@ -39,7 +39,12 @@ const pastEvents: PastEvent[] = [
   }
 ]
 
-const fairImages = ['/messe-1.webp', '/messe-2.webp', '/messe-3.webp'] as const
+const fairImages = [
+  '/messe-1.webp',
+  '/messe-2.webp',
+  '/erling-messe.JPEG',
+  '/messe-3.webp'
+] as const
 
 export function FindUsSection() {
   return (
