@@ -15,7 +15,6 @@ import { useEffect, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { AddToCartButton } from './AddToCartButton'
 
-// Definer fbq på vinduet for TypeScript
 declare global {
   interface Window {
     fbq: (...args: any[]) => void
@@ -42,42 +41,50 @@ export function AddToCart({
   )
   const baseSubmitHandler = createAddToCartSubmitHandler(cartActor)
 
-  // Vi fjerner withSuccessToast for å håndtere det manuelt og få svar tilbake
-  // Slik: const submitWithToast = withSuccessToast(baseSubmitHandler, selectedVariant)
-
-  // ENDRING 2: Oppdater handleAddToCart til å være async og inkludere pixel-logikk
   const handleAddToCart = async (values: AddToCartFormValues) => {
     startTransition(async () => {
       try {
-        // Vi kaller base-handleren direkte for å kunne 'await'-e resultatet
         const result = await baseSubmitHandler(values)
 
-        // Sjekk for suksess. Antar at handleren returnerer et objekt eller kaster en feil.
-        // Tilpass denne logikken basert på hva din baseSubmitHandler faktisk returnerer.
-        // For dette eksempelet antar vi at den ikke kaster feil, men fortsetter.
-
-        // Send sporing til Meta Pixel NÅR produktet er lagt i kurven
+        // Send sporing til Meta Pixel
         if (typeof window.fbq === 'function' && selectedVariant) {
           window.fbq('track', 'AddToCart', {
             content_ids: [selectedVariant.id],
-            content_name: product.title, // Bruker produkt-tittel her
+            content_name: product.title,
             content_type: 'product',
             currency: selectedVariant.price.currencyCode,
             value: parseFloat(selectedVariant.price.amount),
             num_items: values.quantity
           })
         }
+        if (
+          typeof window !== 'undefined'
+          && window.dataLayer
+          && selectedVariant
+        ) {
+          window.dataLayer.push({
+            event: 'add_to_cart', // Dette matcher event-navnet i GTM
+            ecommerce: {
+              currency: selectedVariant.price.currencyCode,
+              value: parseFloat(selectedVariant.price.amount) * values.quantity,
+              items: [
+                {
+                  item_id: selectedVariant.id,
+                  item_name: product.title,
+                  price: parseFloat(selectedVariant.price.amount),
+                  quantity: values.quantity
+                }
+              ]
+            }
+          })
+        }
 
-        // Vis suksess-toast og åpne handlekurven manuelt
-        // Slik: withSuccessToast(() => Promise.resolve(), selectedVariant)() // Kaller toast-funksjonen
         cartStore.send({ type: 'OPEN' })
       } catch (error) {
-        // Håndter eventuelle feil her (f.eks. vis en feilmelding)
         console.error('Failed to add to cart:', error)
       }
     })
   }
-
   useEffect(() => {
     form.setValue('variantId', selectedVariant?.id ?? '')
   }, [selectedVariant?.id, form])
