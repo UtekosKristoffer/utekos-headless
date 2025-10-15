@@ -31,7 +31,20 @@ export const metadata: Metadata = {
   },
   description:
     'Forleng kveldene på hytten, i bobilen eller på terrassen. Utekos lager komfortplagg av høy kvalitet, designet for å holde deg varm slik at du kan nyte de gode øyeblikkene lenger.',
+  alternates: {
+    canonical: 'https://utekos.no'
+  },
 
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/icon.png', type: 'image/png', sizes: '512x512' },
+      { url: '/icon-192.png', type: 'image/png', sizes: '192x192' }
+    ],
+    apple: '/apple-icon.png',
+    shortcut: '/favicon.ico'
+  },
+  manifest: '/manifest.json',
   keywords: [
     'komfortplagg',
     'hytteliv',
@@ -67,11 +80,11 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'no_NO',
     url: 'https://utekos.no',
-
     siteName: 'Utekos',
     title: 'Utekos - Forleng de gode stundene ute.',
     description:
       'Kompromissløs komfort, designet for å holde på varmen når øyeblikkene teller.',
+
     images: [
       {
         url: '/og-image-produkter.png',
@@ -80,14 +93,6 @@ export const metadata: Metadata = {
         alt: 'Personer som koser seg utendørs med varme komfortplagg fra Utekos.'
       }
     ]
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@ditt_twitter_navn',
-    creator: '@ditt_twitter_navn',
-    title: 'Utekos - Forleng de gode stundene ute',
-    description:
-      'Ikke la kjølige kvelder stoppe kosen. Våre komfortplagg er skapt for det norske utelivet på hytten, i bobilen eller båten.'
   },
   robots: {
     index: true,
