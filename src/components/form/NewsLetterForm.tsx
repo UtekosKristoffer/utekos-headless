@@ -32,7 +32,7 @@ export function NewsletterForm() {
     <form
       ref={formRef}
       action={formAction}
-      className='flex w-full max-w-sm items-center space-x-2'
+      className='flex w-full mx-auto max-w-sm items-center space-x-2'
     >
       <Input
         type='email'
