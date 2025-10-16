@@ -1,3 +1,4 @@
+'use client'
 // Path: src/components/ProductCard/ProductCardFooter.tsx
 import { Button } from '@/components/ui/button'
 import { CardFooter } from '@/components/ui/card'

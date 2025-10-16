@@ -25,9 +25,8 @@ import dynamic from 'next/dynamic'
 import ProductHeader from './ProductHeader'
 import ProductGalleryCard from './ProductGalleryCard'
 import PriceActivityPanel from './PriceActivityPanel'
-
-// Delkomponent
 import { ProductDescription } from './ProductDescription'
+import { TrustSignals } from './TrustSignals'
 
 const SmartRealTimeActivity = dynamic(
   () =>
@@ -67,17 +66,14 @@ export default function ProductPageView({
       selectedVariantProfile.subtitle
     : undefined
 
-  // Sorter produktvalg konsekvent
   const optionOrderPreference = ['Størrelse', 'Farge']
   const sortedProductOptions = getSortedOptions(options, optionOrderPreference)
 
-  // Metadata fra konfig
   const currentProductMetadata = productMetadata[productData.handle]
   const productDescriptionHtml =
     (selectedVariantProfile?.description?.value as string | undefined)
     ?? undefined
 
-  // Aktivitets-øy (klient) injiseres bare hvis aktivert i metadata
   const activityNode =
     currentProductMetadata?.showActivity ?
       <SmartRealTimeActivity
@@ -85,7 +81,6 @@ export default function ProductPageView({
       />
     : undefined
 
-  // Lager-varsel for spesialutgave – kan senere komme fra CMS
   const limitedStockCount =
     productData.handle === 'utekos-special-edition' ? 11 : undefined
 
@@ -182,7 +177,6 @@ export default function ProductPageView({
               <h2 id='product-options' className='sr-only'>
                 Produktvalg
               </h2>
-
               <div className='mt-8 flex flex-col gap-8'>
                 {sortedProductOptions.map(
                   (productOption: ShopifyProduct['options'][number]) =>
@@ -196,14 +190,19 @@ export default function ProductPageView({
                     })
                 )}
               </div>
-
+              {/* 👇 NYTT: Trust signals rett før kjøpeknappen */}´
+              <TrustSignals />
               <div className='mt-8'>
                 <AddToCart
                   product={productData}
                   selectedVariant={selectedVariant}
                 />
               </div>
-
+              <AnimatedBlock
+                className='will-animate-fade-in-up'
+                delay='0.22s'
+                threshold={0.2}
+              ></AnimatedBlock>
               <ProductDescription descriptionHtml={productDescriptionHtml} />
             </section>
           </AnimatedBlock>
