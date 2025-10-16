@@ -1,3 +1,6 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import { nodes, iconMap, edges, type IconName } from './initialElements'
 
 function IconRenderer({
@@ -12,6 +15,57 @@ function IconRenderer({
 }
 
 export default function HyttekosFlow() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // Mobil-versjon: Enkel vertikal layout
+  if (isMobile) {
+    return (
+      <div className='space-y-4 p-4'>
+        {/* Senter-node */}
+        <div className='flex items-center justify-center rounded-lg border border-neutral-700 bg-sidebar-foreground p-4 text-center text-sm font-semibold'>
+          Den perfekte hyttekosen
+        </div>
+
+        {/* Custom nodes */}
+        {nodes
+          .filter(n => n.type === 'custom')
+          .map(node => (
+            <div
+              key={node.id}
+              className='relative overflow-hidden rounded-lg border border-neutral-800 bg-sidebar-foreground p-4'
+            >
+              <div
+                className='absolute inset-0 rounded-lg blur-xl opacity-20'
+                style={{ background: node.data.shadowColor }}
+              />
+              <div className='relative z-10'>
+                <div className='mb-3 flex items-center gap-3'>
+                  <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-neutral-700 bg-background'>
+                    <IconRenderer
+                      name={node.data.icon!}
+                      className={`h-5 w-5 ${node.data.iconColor}`}
+                    />
+                  </div>
+                  <h3 className='text-base font-semibold'>{node.data.label}</h3>
+                </div>
+                <p className='text-sm leading-relaxed text-muted-foreground'>
+                  {node.data.description}
+                </p>
+              </div>
+            </div>
+          ))}
+      </div>
+    )
+  }
+
+  // Desktop-versjon: SVG flow
   return (
     <div className='h-auto w-full overflow-hidden rounded-lg border border-neutral-800 bg-background dot-pattern p-4'>
       <style>{`
@@ -22,8 +76,9 @@ export default function HyttekosFlow() {
         }
       `}</style>
       <svg
-        viewBox='0 0 600 550' // Ny, mer kompakt viewBox
+        viewBox='0 0 600 550'
         className='size-full'
+        preserveAspectRatio='xMidYMid meet'
         aria-hidden='true'
       >
         {/* Linjer */}
@@ -37,7 +92,6 @@ export default function HyttekosFlow() {
           let targetX = targetNode.position.x + targetNode.width / 2
           let targetY = targetNode.position.y + targetNode.height / 2
 
-          // Korrekt kalkulering for kant-posisjon
           switch (targetNode.data.handlePosition) {
             case 'top':
               targetY = targetNode.position.y
