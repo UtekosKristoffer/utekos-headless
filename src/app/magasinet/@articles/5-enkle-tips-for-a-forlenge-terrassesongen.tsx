@@ -11,7 +11,7 @@ import Link from 'next/link'
 
 export const TerrasseArticle = () => {
   return (
-    <article className='prose prose-invert prose-lg max-w-7xl mx-auto'>
+    <article className='prose prose-invert prose-lg max-w-4xl mx-auto'>
       <figure className='!my-12'>
         <Image
           src={TerrasseImage}

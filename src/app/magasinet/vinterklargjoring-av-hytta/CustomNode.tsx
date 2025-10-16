@@ -22,9 +22,9 @@ export function CustomNode({
               className={`h-6 w-6 ${data.iconColor}`}
             />
           </div>
-          <h3 className='text-base font-semibold'>{data.label}</h3>
+          <h3 className='text-base md:text-lg font-semibold'>{data.label}</h3>
         </div>
-        <p className='text-sm leading-relaxed text-muted-foreground'>
+        <p className='text-sm md:text-[20px] md:w-full leading-relaxed text-muted-foreground'>
           {data.description}
         </p>
       </div>

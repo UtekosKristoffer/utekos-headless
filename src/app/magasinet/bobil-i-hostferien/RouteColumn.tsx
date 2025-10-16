@@ -30,11 +30,11 @@ export function RouteColumn({
       </AnimatedBlock>
 
       {/* Stops */}
-      <div className='flex flex-col gap-6'>
+      <div className='grid grid-rows-2 gap-6'>
         {route.stops.map((stop, idx) => (
           <AnimatedBlock
             key={stop.label}
-            className='will-animate-fade-in-left'
+            className='will-animate-fade-in-left h-full'
             delay={`${delay + 0.2 + idx * 0.15}s`}
             threshold={0.5}
           >

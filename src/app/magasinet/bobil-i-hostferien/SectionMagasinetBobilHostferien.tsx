@@ -72,7 +72,7 @@ const routes: RouteType[] = [
 
 export function SectionMagasinetBobilHostferien() {
   return (
-    <section className='relative mx-auto max-w-[95%] overflow-hidden py-16 sm:py-24 md:max-w-7xl'>
+    <section className='relative mx-auto max-w-[95%] overflow-hidden py-16 sm:py-24 md:max-w-4xl'>
       {/* Ambient background glow */}
       <div className='absolute inset-0 -z-10 overflow-hidden'>
         <div

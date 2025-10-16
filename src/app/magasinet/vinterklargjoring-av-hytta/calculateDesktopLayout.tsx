@@ -5,10 +5,10 @@ import { categories, initialNodes } from './initialElements'
 export function calculateDesktopLayout() {
   const layoutedNodes: any[] = []
   const edges: any[] = []
-  const ROW_GAP = 300 // Økt fra 250 for å unngå overlapp
-  const CARD_HORIZONTAL_GAP = 40
+  const ROW_GAP = 370 // Økt fra 250 for å unngå overlapp
+  const CARD_HORIZONTAL_GAP = 80
   const NODE_WIDTH = 280
-  const Y_OFFSET = 100
+  const Y_OFFSET = 30
 
   Object.keys(categories).forEach((key, rowIndex) => {
     const categoryKey = key.toLowerCase()
@@ -24,7 +24,7 @@ export function calculateDesktopLayout() {
 
     layoutedNodes.push({
       ...parent,
-      position: { x: (1200 - NODE_WIDTH) / 2, y: rowY - 80 }
+      position: { x: (1200 - NODE_WIDTH) / 2, y: rowY - 120 }
     })
 
     children.forEach((child, childIndex) => {

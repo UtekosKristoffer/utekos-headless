@@ -49,8 +49,8 @@ export function RouteStop({
   delay: number
 }) {
   return (
-    <div className='relative'>
-      <div className='group relative flex items-start gap-4 rounded-xl border border-neutral-800 bg-sidebar-foreground p-6 transition-all duration-300 hover:border-neutral-700'>
+    <div className='relative md:pt-6'>
+      <div className='group relative flex items-center gap-4 rounded-xl border border-neutral-800 bg-sidebar-foreground p-6 transition-all duration-300 hover:border-neutral-700 md:min-h-[200px]'>
         <div
           className='animate-aurora pointer-events-none absolute -inset-x-2 -inset-y-16 opacity-30 blur-2xl transition-opacity duration-300 group-hover:opacity-40'
           style={{

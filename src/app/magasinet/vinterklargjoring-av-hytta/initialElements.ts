@@ -1,3 +1,5 @@
+//Path: src/app/magasinet/vinterklargjoring-av-hytta/initialElements.ts
+
 'use client'
 
 import {

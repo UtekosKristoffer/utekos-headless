@@ -12,7 +12,7 @@ import { SystemerSection } from '@/app/magasinet/vinterklargjoring-av-hytta/Syst
 export const VinterklargjoringArticle = () => {
   return (
     // Fjern prose-klassene, siden vi nå styler manuelt
-    <article className='md:max-w-5xl mx-auto'>
+    <article className='md:max-w-4xl mx-auto'>
       <figure className='!my-12'>
         <Image
           src={AutomnCabin}
@@ -40,7 +40,7 @@ export const VinterklargjoringArticle = () => {
 
       <UteSection />
       <InneSection />
-          <SystemerSection />
+      <SystemerSection />
       <p className='text-lg text-muted-foreground mt-8'>
         Ved å systematisk gå gjennom disse punktene, kan du forlate hytten med
         senkede skuldre, vel vitende om at du har gjort alt du kan for å

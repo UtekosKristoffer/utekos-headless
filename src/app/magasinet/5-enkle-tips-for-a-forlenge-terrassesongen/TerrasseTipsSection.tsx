@@ -120,7 +120,7 @@ function TipCard({
 
 export function TerrasseTipsSection() {
   return (
-    <section className='mx-auto max-w-[95%] py-16 sm:py-24 md:max-w-7xl'>
+    <section className='mx-auto max-w-[95%] py-16 sm:py-24'>
       <div className='mx-auto px-4 sm:px-6 lg:px-8'>
         <AnimatedBlock className='will-animate-fade-in-up mb-16 text-center'>
           <h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
@@ -131,11 +131,13 @@ export function TerrasseTipsSection() {
           </p>
         </AnimatedBlock>
 
-        <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5'>
+        <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-6'>
           {tips.map((tip, i) => (
             <AnimatedBlock
               key={tip.title}
-              className='will-animate-fade-in-up h-full'
+              className={`will-animate-fade-in-up h-full ${
+                i < 3 ? 'lg:col-span-2' : 'lg:col-span-3'
+              }`}
               delay={`${i * 0.15}s`}
               threshold={0.3}
             >

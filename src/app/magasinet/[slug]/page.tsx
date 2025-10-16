@@ -1,3 +1,5 @@
+// Path: src/app/magasinet/[slug]/page.tsx
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -103,7 +105,7 @@ export default async function ArticlePage({
   }
   return (
     <div className='container mx-auto px-4'>
-      <div className='mx-auto md:max-w-7xl'>
+      <div className='mx-auto md:max-w-4xl'>
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>

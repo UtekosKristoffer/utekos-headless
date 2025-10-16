@@ -10,14 +10,14 @@ import { PlasseringOgPreparasjonerSection } from '@/app/magasinet/balpannen-din-
 import { ResterendePunkterSection } from '@/app/magasinet/balpannen-din-guide-til-den-perfekte-hostkvelden/ResterendePunkterSection'
 export const BalpanneArticle = () => {
   return (
-    <article className='md:max-w-7xl mx-auto'>
+    <article className='md:max-w-4xl mx-auto'>
       <figure className='!my-12'>
         <Image
           src={Balpanne}
           alt='Nærbilde av en glødende bålpanne med venner i bakgrunnen.'
           width={1024}
           height={683}
-          className='rounded-lg'
+          className='rounded-lg mx-auto'
           priority
         />
         <figcaption className='text-center text-sm text-muted-foreground mt-2'>

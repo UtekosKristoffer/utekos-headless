@@ -23,7 +23,7 @@ export function DesktopFlow() {
             x={node.position.x}
             y={node.position.y}
             width={NODE_WIDTH}
-            height={180}
+            height={210}
           >
             {node.id === 'ute' || node.id === 'inne' || node.id === 'systemer' ?
               <div className='flex h-12 items-center justify-center rounded-lg border border-neutral-700 bg-sidebar-foreground text-center font-semibold text-foreground'>
