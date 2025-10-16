@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import HyttePeis from '@public/og-image-hytte.webp'
-import { Sparkles } from 'lucide-react'
+import { Sparkles, Compass } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -72,7 +72,7 @@ export const HyttekosArticle = () => {
       </p>
 
       <h2 className='flex items-center mt-12 mb-4 gap-3 text-3xl font-bold'>
-        <Sparkles className='text-yellow-400' />
+        <Compass className='text-amber-800' />
         Hyttekos-formelen
       </h2>
       <Card className='bg-sidebar-foreground border-neutral-800 my-8'>
@@ -90,8 +90,6 @@ export const HyttekosArticle = () => {
       <div className='my-16'>
         <HyttekosElementsGrid elements={hyttekosElementsData} />
       </div>
-
-      {/* Her settes det nye, dype innholdet inn */}
       <HyttekosFormelenSection />
 
       <Card className='my-12 text-center bg-gradient-to-br from-primary/20 to-transparent border-neutral-800'>
@@ -110,8 +108,21 @@ export const HyttekosArticle = () => {
         </CardContent>
       </Card>
 
-      <Card className='my-12 bg-sidebar-foreground border-neutral-800'>
-        <CardContent className='p-8'>
+      <Card className='relative overflow-hidden my-12 bg-sidebar-foreground border-neutral-800'>
+        <div
+          className='absolute inset-0 opacity-5'
+          style={{
+            background:
+              'linear-gradient(135deg, #facc1520 0%, transparent 100%)'
+          }}
+        />
+
+        <div
+          className='absolute inset-0 rounded-lg blur-xl opacity-20'
+          style={{ background: '#facc15' }}
+        />
+
+        <CardContent className='relative z-10 p-8'>
           <h3 className='text-2xl font-bold flex items-center gap-3 mt-0'>
             <Sparkles className='h-6 w-6 text-yellow-400' />
             Konklusjon: Mestring av kunsten

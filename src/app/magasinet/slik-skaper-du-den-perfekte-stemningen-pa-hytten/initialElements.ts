@@ -1,10 +1,12 @@
 import { Layers, Lightbulb, Music, Thermometer } from 'lucide-react'
+
 export const iconMap = {
   lightbulb: Lightbulb,
   music: Music,
   layers: Layers,
   thermometer: Thermometer
 }
+
 export type IconName = keyof typeof iconMap
 
 export type NodeData = {
@@ -25,7 +27,6 @@ export type FlowNode = {
   data: NodeData
 }
 
-// --- Ny, mobilvennlig og balansert node-data ---
 export const nodes: FlowNode[] = [
   {
     id: 'center',
@@ -39,16 +40,16 @@ export const nodes: FlowNode[] = [
     id: 'lys',
     type: 'custom',
     position: { x: 20, y: 150 },
-    width: 260, // Litt bredere for å unngå tekstbryt
-    height: 180, // Økt høyde
+    width: 260,
+    height: 190,
     data: {
       icon: 'lightbulb',
       label: 'Lys',
       description:
-        'Levende lys, dimmere og lysslynger skaper en lun og innbydende atmosfære.',
+        'Levende lys i vinduskarmen, dimmere inne, og lysslynger på terrassen. Lyset som skaper den varme, innbydende stemningen.',
       iconColor: 'text-amber-400',
       shadowColor: '#facc15',
-      handlePosition: 'top' // Alle kobler til toppen nå
+      handlePosition: 'top'
     }
   },
   {
@@ -56,12 +57,12 @@ export const nodes: FlowNode[] = [
     type: 'custom',
     position: { x: 320, y: 150 },
     width: 260,
-    height: 180,
+    height: 190,
     data: {
       icon: 'layers',
       label: 'Tekstur',
       description:
-        'Myke ullpledd, saueskinn og grovt treverk. Kontraster som er gode å ta og se på.',
+        'Det myke ullpleddet over skuldrene, saueskinn i stolene, og det grovstilte tømmeret. Kontraster som er gode både å ta på og se på.',
       iconColor: 'text-orange-400',
       shadowColor: '#fb923c',
       handlePosition: 'top'
@@ -70,14 +71,14 @@ export const nodes: FlowNode[] = [
   {
     id: 'lyd',
     type: 'custom',
-    position: { x: 20, y: 350 },
+    position: { x: 20, y: 360 },
     width: 260,
-    height: 180,
+    height: 190,
     data: {
       icon: 'music',
       label: 'Lyd',
       description:
-        'Knitring fra peisen, en rolig spilleliste eller bare den dype stillheten fra naturen.',
+        'Det lave knitrende fra peisen, en rolig spilleliste i bakgrunnen, eller bare den dype, fredfulle stillheten fra skogen.',
       iconColor: 'text-violet-400',
       shadowColor: '#a78bfa',
       handlePosition: 'top'
@@ -86,14 +87,14 @@ export const nodes: FlowNode[] = [
   {
     id: 'varme',
     type: 'custom',
-    position: { x: 320, y: 350 },
+    position: { x: 320, y: 360 },
     width: 260,
-    height: 180,
+    height: 190,
     data: {
       icon: 'thermometer',
       label: 'Varme',
       description:
-        'Den lune peisvarmen inne, og muligheten til å ta med komforten ut på terrassen.',
+        'Den lune peisvarmen inne som får deg til å slappe helt av. Og muligheten til å ta komforten med deg ut når kvelden blir kjølig.',
       iconColor: 'text-rose-400',
       shadowColor: '#f472b6',
       handlePosition: 'top'

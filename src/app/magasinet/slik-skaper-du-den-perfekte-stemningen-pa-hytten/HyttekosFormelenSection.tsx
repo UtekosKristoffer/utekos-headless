@@ -9,8 +9,8 @@ import UtekosTerrasseBilde from '@public/coffe_utekos.webp'
 
 export const HyttekosFormelenSection = () => {
   return (
-    <div className='mt-16'>
-      <h3 className='text-2xl font-semibold mt-8 mb-3'>1. Kunsten å belyse</h3>
+    <section aria-label='Formelen for hyttekos' className='mt-16'>
+      <h3 className='text-2xl font-semibold mt-8 mb-3'>Kunsten å belyse</h3>
       <figure className='my-8 max-w-5xl mx-auto'>
         <Image
           src={LagdeltLysBilde}
@@ -39,7 +39,7 @@ export const HyttekosFormelenSection = () => {
       </blockquote>
 
       <h3 className='text-2xl font-semibold mt-8 mb-3'>
-        2. Lyden av stillhet (og litt til)
+        Lyden av stillhet (og litt til)
       </h3>
       <figure className='my-8 max-w-5xl mx-auto'>
         <Image
@@ -71,7 +71,7 @@ export const HyttekosFormelenSection = () => {
       </blockquote>
 
       <h3 className='text-2xl font-semibold mt-8 mb-3'>
-        3. Tekstur du kan føle på
+        Tekstur du kan føle på
       </h3>
       <figure className='my-8 max-w-5xl mx-auto'>
         <Image
@@ -100,9 +100,7 @@ export const HyttekosFormelenSection = () => {
         </p>
       </blockquote>
 
-      <h3 className='text-2xl font-semibold mt-8 mb-3'>
-        4. Varme, inne og ute
-      </h3>
+      <h3 className='text-2xl font-semibold mt-8 mb-3'>Varme, inne og ute</h3>
       <figure className='my-8 max-w-5xl mx-auto'>
         <Image
           src={UtekosTerrasseBilde}
@@ -130,6 +128,6 @@ export const HyttekosFormelenSection = () => {
           umiddelbart.
         </p>
       </blockquote>
-    </div>
+    </section>
   )
 }

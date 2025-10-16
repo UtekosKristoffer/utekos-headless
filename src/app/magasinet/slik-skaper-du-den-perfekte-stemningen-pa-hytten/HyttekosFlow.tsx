@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
 import { nodes, iconMap, edges, type IconName } from './initialElements'
 
 function IconRenderer({
@@ -16,6 +17,10 @@ function IconRenderer({
 
 export default function HyttekosFlow() {
   const [isMobile, setIsMobile] = useState(false)
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1
+  })
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768)
@@ -24,27 +29,46 @@ export default function HyttekosFlow() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // Mobil-versjon: Enkel vertikal layout
+  // Mobil-versjon: Enkel vertikal layout med animasjoner
   if (isMobile) {
     return (
-      <div className='space-y-4 p-4'>
+      <div ref={ref} className='space-y-4 p-4'>
         {/* Senter-node */}
-        <div className='flex items-center justify-center rounded-lg border border-neutral-700 bg-sidebar-foreground p-4 text-center text-sm font-semibold'>
+        <div
+          className={`flex items-center justify-center rounded-lg border border-neutral-700 bg-sidebar-foreground p-4 text-center text-sm font-semibold transition-all duration-700 ${
+            inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          }`}
+        >
           Den perfekte hyttekosen
         </div>
 
-        {/* Custom nodes */}
+        {/* Custom nodes med staggered animation */}
         {nodes
           .filter(n => n.type === 'custom')
-          .map(node => (
+          .map((node, index) => (
             <div
               key={node.id}
-              className='relative overflow-hidden rounded-lg border border-neutral-800 bg-sidebar-foreground p-4'
+              className={`relative overflow-hidden rounded-lg border border-neutral-800 bg-sidebar-foreground p-4 transition-all duration-700 ${
+                inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+              style={{
+                transitionDelay: `${(index + 1) * 150}ms`
+              }}
             >
+              {/* Gradient overlay */}
+              <div
+                className='absolute inset-0 opacity-5'
+                style={{
+                  background: `linear-gradient(135deg, ${node.data.shadowColor}20 0%, transparent 100%)`
+                }}
+              />
+
+              {/* Glød-effekt */}
               <div
                 className='absolute inset-0 rounded-lg blur-xl opacity-20'
                 style={{ background: node.data.shadowColor }}
               />
+
               <div className='relative z-10'>
                 <div className='mb-3 flex items-center gap-3'>
                   <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-neutral-700 bg-background'>
@@ -65,9 +89,14 @@ export default function HyttekosFlow() {
     )
   }
 
-  // Desktop-versjon: SVG flow
+  // Desktop-versjon: SVG flow med animasjoner og hover-effekter
   return (
-    <div className='h-auto w-full overflow-hidden rounded-lg border border-neutral-800 bg-background dot-pattern p-4'>
+    <div
+      ref={ref}
+      className={`h-auto w-full overflow-hidden rounded-lg border border-neutral-800 bg-background dot-pattern p-4 transition-all duration-700 ${
+        inView ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+      }`}
+    >
       <style>{`
         @keyframes stroke-draw {
           to {
@@ -76,7 +105,7 @@ export default function HyttekosFlow() {
         }
       `}</style>
       <svg
-        viewBox='0 0 600 550'
+        viewBox='0 0 600 570'
         className='size-full'
         preserveAspectRatio='xMidYMid meet'
         aria-hidden='true'
@@ -138,29 +167,37 @@ export default function HyttekosFlow() {
             height={node.height}
           >
             {node.type === 'default' && (
-              <div className='flex h-full items-center justify-center rounded-lg border border-neutral-700 bg-sidebar-foreground p-3 text-center text-sm font-semibold text-foreground'>
+              <div className='flex h-full items-center justify-center rounded-lg border border-neutral-700 bg-sidebar-foreground p-3 text-center text-xs font-semibold text-foreground'>
                 {node.data.label}
               </div>
             )}
             {node.type === 'custom' && (
-              <div className='relative h-full w-full rounded-lg border border-neutral-800 bg-sidebar-foreground p-5'>
+              <div className='group relative h-full w-full rounded-lg border border-neutral-800 bg-sidebar-foreground p-4 transition-all duration-300 hover:border-neutral-600 hover:shadow-lg cursor-default overflow-hidden'>
+                {/* Gradient overlay */}
                 <div
-                  className='absolute inset-0 rounded-lg blur-xl opacity-20'
+                  className='absolute inset-0 opacity-5'
+                  style={{
+                    background: `linear-gradient(135deg, ${node.data.shadowColor}20 0%, transparent 100%)`
+                  }}
+                />
+
+                {/* Glød-effekt med hover */}
+                <div
+                  className='absolute inset-0 rounded-lg blur-xl opacity-20 transition-opacity duration-300 group-hover:opacity-30'
                   style={{ background: node.data.shadowColor }}
                 />
+
                 <div className='relative z-10'>
-                  <div className='mb-4 flex items-center gap-3'>
-                    <div className='flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-700 bg-background'>
+                  <div className='mb-2 flex items-center gap-2'>
+                    <div className='flex h-9 w-9 items-center justify-center rounded-lg border border-neutral-700 bg-background transition-transform duration-300 group-hover:scale-110'>
                       <IconRenderer
                         name={node.data.icon!}
-                        className={`h-6 w-6 ${node.data.iconColor}`}
+                        className={`h-5 w-5 ${node.data.iconColor} transition-all duration-300`}
                       />
                     </div>
-                    <h3 className='text-base font-semibold'>
-                      {node.data.label}
-                    </h3>
+                    <h3 className='text-sm font-semibold'>{node.data.label}</h3>
                   </div>
-                  <p className='text-sm leading-relaxed text-muted-foreground'>
+                  <p className='text-xs leading-relaxed text-muted-foreground'>
                     {node.data.description}
                   </p>
                 </div>
