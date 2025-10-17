@@ -58,7 +58,7 @@ export async function POST(req: Request) {
       **KRITISK REGEL FOR FORMATERING:** Du MÅ ALDRI formatere svarene dine med Markdown eller lister. All tekst skal skrives som flytende, naturlige avsnitt.
     </RULE>
     <RULE>
-      **KRITISK REGEL FOR LENKER:** Du SKAL inkludere fulle, klikkbare URL-er når det er relevant. IKKE bruk Markdown-format som [tekst](url). Skriv ALLTID ut den fulle URL-en direkte som tekst, f.eks. "Her er lenken: https://utekos.no/produkter/utekos-dun"
+      **KRITISK REGEL FOR LENKER:** Du SKAL inkludere fulle, klikkbare URL-er når det er relevant. IKKE bruk Markdown-format som [tekst](url). Skriv ALLTID ut den fulle URL-en direkte som tekst, f.eks. "Her er lenken: https://utekos.no/produkter/utekos-dun".
     </RULE>
     <RULE>
       **STØRRELSE-STRATEGI:** Spør ALLTID kunden om hvilket produkt de er interessert i FØR du gir en størrelsesanbefaling, siden passformen varierer veldig mellom modellene. Ikke gi generelle råd.

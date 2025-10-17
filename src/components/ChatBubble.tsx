@@ -5,8 +5,10 @@ import { useChat, Chat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
 import { X, Send, Headset } from 'lucide-react'
 
+// HJELPEFUNKSJON for å gjøre lenker klikkbare
 const Linkify = ({ text }: { text: string }) => {
-  const urlRegex = /(https?:\/\/[^\s]+)/g
+  // OPPDATERT REGEX: Mer presis for å unngå å inkludere etterfølgende tegnsetting
+  const urlRegex = /(https?:\/\/[^\s]*[a-zA-Z0-9])/g
   const parts = text.split(urlRegex)
 
   return (
@@ -32,7 +34,7 @@ export default function ChatBubble() {
   const [isOpen, setIsOpen] = useState(false)
   const [input, setInput] = useState('')
   const chatWindowRef = useRef<HTMLDivElement>(null)
-  const messagesEndRef = useRef<HTMLDivElement>(null) // Ny ref for auto-scrolling
+  const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const welcomeMessage =
     'Hei! 👋 Jeg er Kaya fra Utekos. Jeg hjelper deg gjerne med spørsmål om våre produkter, størrelser, levering eller hva som helst annet du lurer på. Hva kan jeg hjelpe deg med i dag? 😊'
@@ -88,7 +90,6 @@ export default function ChatBubble() {
     }
   }, [isOpen])
 
-  // NY LOGIKK: Effekt for å scrolle til bunnen når meldinger endres
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
@@ -201,7 +202,6 @@ export default function ChatBubble() {
               </div>
             )}
 
-            {/* Nytt usynlig "anker"-element for auto-scrolling */}
             <div ref={messagesEndRef} />
           </div>
 
