@@ -37,6 +37,20 @@ export default function ChatBubble() {
 
   const { messages, sendMessage, status, error } = useChat({ chat })
 
+  useEffect(() => {
+    // Sørger for at scrolling er deaktivert på body når chatten er åpen på mobil
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+
+    // Cleanup funksjon for å resette overflow når komponenten unmountes
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [isOpen])
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!input.trim() || status === 'submitted' || status === 'streaming')
@@ -63,7 +77,11 @@ export default function ChatBubble() {
 
       {/* Chat-vindu */}
       {isOpen && (
-        <div className='fixed bottom-6 right-6 w-96 h-[600px] bg-white rounded-lg shadow-2xl flex flex-col z-50 border border-gray-200'>
+        <div
+          className='fixed bottom-0 left-0 right-0 w-full h-[85vh] rounded-t-lg 
+                     sm:bottom-6 sm:right-6 sm:left-auto sm:w-96 sm:h-[600px] sm:rounded-lg 
+                     bg-white shadow-2xl flex flex-col z-50 border border-gray-200'
+        >
           <div className='bg-sky-800 text-white p-4 rounded-t-lg flex justify-between items-center'>
             <div className='flex items-center gap-3'>
               <div className='bg-emerald-700 p-2 rounded-full'>
