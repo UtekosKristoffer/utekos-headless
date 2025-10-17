@@ -1,19 +1,34 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useChat, Chat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
-import { MessageCircle, X, Send } from 'lucide-react'
+import { X, Send, Headset } from 'lucide-react'
+import { toast } from 'sonner'
 
 export default function ChatBubble() {
   const [isOpen, setIsOpen] = useState(false)
   const [input, setInput] = useState('')
 
-  // Opprett Chat instans med DefaultChatTransport fra 'ai' pakken
+  const welcomeMessage =
+    'Hei! 👋 Jeg er Silje fra Utekos. Jeg hjelper deg gjerne med spørsmål om våre produkter, størrelser, levering eller hva som helst annet du lurer på. Hva kan jeg hjelpe deg med i dag? 😊'
+
+  // Opprett Chat instans med velkomstmelding
   const [chat] = useState(
     () =>
       new Chat({
-        messages: [],
+        messages: [
+          {
+            id: 'welcome',
+            role: 'assistant',
+            parts: [
+              {
+                type: 'text',
+                text: welcomeMessage
+              }
+            ]
+          }
+        ],
         transport: new DefaultChatTransport({
           api: '/api/chat'
         })
@@ -35,31 +50,37 @@ export default function ChatBubble() {
 
   return (
     <>
-      {/* Chat-knapp */}
+      {/* Chat-knapp - Med Headset ikon */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className='fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg transition-all duration-200 hover:scale-110 z-50'
-          aria-label='Åpne chat'
+          className='fixed bottom-6 right-6 bg-sky-800 hover:bg-sky-700 text-white rounded-full p-4 shadow-lg transition-all duration-200 hover:scale-110 z-50'
+          aria-label='Chat med Silje'
         >
-          <MessageCircle size={24} />
+          <Headset size={24} />
         </button>
       )}
 
       {/* Chat-vindu */}
       {isOpen && (
         <div className='fixed bottom-6 right-6 w-96 h-[600px] bg-white rounded-lg shadow-2xl flex flex-col z-50 border border-gray-200'>
-          {/* Header */}
-          <div className='bg-blue-600 text-white p-4 rounded-t-lg flex justify-between items-center'>
-            <div>
-              <h3 className='font-semibold text-lg'>Utekos Hjelper</h3>
-              <p className='text-sm text-blue-100'>
-                Hvordan kan jeg hjelpe deg?
-              </p>
+          <div className='bg-sky-800 text-white p-4 rounded-t-lg flex justify-between items-center'>
+            <div className='flex items-center gap-3'>
+              <div className='bg-emerald-700 p-2 rounded-full'>
+                <Headset size={20} />
+              </div>
+
+              <div>
+                <h3 className='font-semibold text-lg'>Silje</h3>
+                <p className='text-sm text-blue-100'>
+                  Utekos kundeservice-chatbot
+                </p>
+              </div>
             </div>
+
             <button
               onClick={() => setIsOpen(false)}
-              className='hover:bg-blue-700 rounded-full p-1 transition-colors'
+              className='hover:bg-sky-700rounded-full p-1 transition-colors'
               aria-label='Lukk chat'
             >
               <X size={20} />
@@ -68,24 +89,19 @@ export default function ChatBubble() {
 
           {/* Meldinger */}
           <div className='flex-1 overflow-y-auto p-4 space-y-4'>
-            {messages.length === 0 && (
-              <div className='text-center text-gray-500 mt-8'>
-                <p>👋 Hei! Jeg er her for å hjelpe deg.</p>
-                <p className='text-sm mt-2'>
-                  Still meg gjerne spørsmål om produkter eller levering!
-                </p>
-              </div>
-            )}
-
             {messages.map(message => (
               <div
                 key={message.id}
-                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={`flex ${
+                  (message.role as string) === 'user' ?
+                    'justify-end'
+                  : 'justify-start'
+                }`}
               >
                 <div
                   className={`max-w-[80%] rounded-lg p-3 ${
-                    message.role === 'user' ?
-                      'bg-blue-600 text-white'
+                    (message.role as string) === 'user' ?
+                      'bg-sky-800 text-white'
                     : 'bg-gray-100 text-gray-800'
                   }`}
                 >
@@ -141,13 +157,13 @@ export default function ChatBubble() {
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 placeholder='Skriv din melding...'
-                className='flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 text-gray-800'
+                className='flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-800 text-gray-800'
                 disabled={isLoading}
               />
               <button
                 type='submit'
                 disabled={isLoading || !input.trim()}
-                className='bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg px-4 py-2 transition-colors'
+                className='bg-sky-700 hover:bg-sky-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg px-4 py-2 transition-colors'
                 aria-label='Send melding'
               >
                 <Send size={20} />

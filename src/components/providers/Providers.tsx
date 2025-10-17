@@ -28,24 +28,27 @@ export default function Providers({
   useEffect(() => {
     if (window.innerHeight < 650) return
     if (!document.cookie.includes('welcome-toast=2')) {
-      toast('🛍️ Velkommen til Utekos sin nettbutikk!', {
-        id: 'welcome-toast',
-        duration: Infinity,
-        onDismiss: () => {
-          document.cookie = 'welcome-toast=2; max-age=31536000; path=/'
-        },
-        // ENDRING: Legger til classNames for å tvinge tekstfargen til å være svart.
-        classNames: {
-          title: 'text-black',
-          description: 'text-black'
-        },
-        description: (
-          <span style={{ color: '#000' }}>
-            Ikke la kjølige kvelder stoppe deg. Sjekk ut vårt utvalg av
-            komfortplagg!
-          </span>
-        )
-      })
+      toast(
+        '🛍️ Velkommen til Utekos sin nettbutikk! Har du spørsmål? Klikk på chat-ikonet nede til høyre',
+        {
+          id: 'welcome-toast',
+          duration: Infinity,
+          onDismiss: () => {
+            document.cookie = 'welcome-toast=2; max-age=31536000; path=/'
+          },
+          // ENDRING: Legger til classNames for å tvinge tekstfargen til å være svart.
+          classNames: {
+            title: 'text-black',
+            description: 'text-black'
+          },
+          description: (
+            <span style={{ color: '#000' }}>
+              Ikke la kjølige kvelder stoppe deg. Sjekk ut vårt utvalg av
+              komfortplagg!
+            </span>
+          )
+        }
+      )
     }
   }, [])
 
