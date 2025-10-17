@@ -159,6 +159,7 @@ export default function ChatBubble() {
                   {message.parts.map((part, i) => {
                     if (part.type === 'text') {
                       return (
+                        // VI BRUKER LINKIFY-FUNKSJONEN HER
                         <p key={i} className='text-sm whitespace-pre-wrap'>
                           <Linkify text={part.text} />
                         </p>
