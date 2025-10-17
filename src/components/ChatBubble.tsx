@@ -5,6 +5,30 @@ import { useChat, Chat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
 import { X, Send, Headset } from 'lucide-react'
 
+// NY HJELPEFUNKSJON for å gjøre lenker klikkbare
+const Linkify = ({ text }: { text: string }) => {
+  const urlRegex = /(https?:\/\/[^\s]+)/g
+  const parts = text.split(urlRegex)
+
+  return (
+    <>
+      {parts.map((part, i) =>
+        urlRegex.test(part) ?
+          <a
+            key={i}
+            href={part}
+            target='_blank'
+            rel='noopener noreferrer'
+            className='text-blue-600 hover:underline'
+          >
+            {part}
+          </a>
+        : <span key={i}>{part}</span>
+      )}
+    </>
+  )
+}
+
 export default function ChatBubble() {
   const [isOpen, setIsOpen] = useState(false)
   const [input, setInput] = useState('')
@@ -13,7 +37,6 @@ export default function ChatBubble() {
   const welcomeMessage =
     'Hei! 👋 Jeg er Kaya fra Utekos. Jeg hjelper deg gjerne med spørsmål om våre produkter, størrelser, levering eller hva som helst annet du lurer på. Hva kan jeg hjelpe deg med i dag? 😊'
 
-  // Opprett Chat instans med velkomstmelding
   const [chat] = useState(
     () =>
       new Chat({
@@ -37,20 +60,17 @@ export default function ChatBubble() {
 
   const { messages, sendMessage, status, error } = useChat({ chat })
 
-  // Effekt for å låse scrolling av bakgrunnen når chatten er åpen
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = 'auto'
     }
-
     return () => {
       document.body.style.overflow = 'auto'
     }
   }, [isOpen])
 
-  // NY LOGIKK: Effekt for å lytte etter klikk utenfor chat-vinduet
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -60,17 +80,13 @@ export default function ChatBubble() {
         setIsOpen(false)
       }
     }
-
-    // Legg til lytteren kun når vinduet er åpent
     if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside)
     }
-
-    // Rydd opp lytteren når komponenten lukkes eller fjernes
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [isOpen]) // Denne effekten er avhengig av 'isOpen'
+  }, [isOpen])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -85,7 +101,6 @@ export default function ChatBubble() {
 
   return (
     <>
-      {/* Chat-knapp - Med Headset ikon */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
@@ -96,10 +111,9 @@ export default function ChatBubble() {
         </button>
       )}
 
-      {/* Chat-vindu */}
       {isOpen && (
         <div
-          ref={chatWindowRef} // Legger til referansen her
+          ref={chatWindowRef}
           className='fixed bottom-0 left-0 right-0 w-full h-[85vh] rounded-t-lg 
                      sm:bottom-6 sm:right-6 sm:left-auto sm:w-96 sm:h-[600px] sm:rounded-lg 
                      bg-white shadow-2xl flex flex-col z-50 border border-gray-200'
@@ -109,7 +123,6 @@ export default function ChatBubble() {
               <div className='bg-emerald-700 p-2 rounded-full'>
                 <Headset size={20} />
               </div>
-
               <div>
                 <h3 className='font-semibold text-lg'>Kaya</h3>
                 <p className='text-sm text-blue-100'>
@@ -117,7 +130,6 @@ export default function ChatBubble() {
                 </p>
               </div>
             </div>
-
             <button
               onClick={() => setIsOpen(false)}
               className='hover:bg-sky-700rounded-full p-1 transition-colors'
@@ -127,7 +139,6 @@ export default function ChatBubble() {
             </button>
           </div>
 
-          {/* Meldinger */}
           <div className='flex-1 overflow-y-auto p-4 space-y-4'>
             {messages.map(message => (
               <div
@@ -149,7 +160,7 @@ export default function ChatBubble() {
                     if (part.type === 'text') {
                       return (
                         <p key={i} className='text-sm whitespace-pre-wrap'>
-                          {part.text}
+                          <Linkify text={part.text} />
                         </p>
                       )
                     }
@@ -186,7 +197,6 @@ export default function ChatBubble() {
             )}
           </div>
 
-          {/* Input-felt */}
           <form
             onSubmit={handleSubmit}
             className='p-4 border-t border-gray-200'
