@@ -146,7 +146,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           <Toaster closeButton />
           <SpeedInsights />
           <Analytics mode='production' />
-          <ChatBubble />
         </Providers>
 
         <Suspense fallback={null}>
