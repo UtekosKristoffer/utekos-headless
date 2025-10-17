@@ -5,7 +5,6 @@ import { useChat, Chat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
 import { X, Send, Headset } from 'lucide-react'
 
-// NY HJELPEFUNKSJON for å gjøre lenker klikkbare
 const Linkify = ({ text }: { text: string }) => {
   const urlRegex = /(https?:\/\/[^\s]+)/g
   const parts = text.split(urlRegex)
@@ -33,6 +32,7 @@ export default function ChatBubble() {
   const [isOpen, setIsOpen] = useState(false)
   const [input, setInput] = useState('')
   const chatWindowRef = useRef<HTMLDivElement>(null)
+  const messagesEndRef = useRef<HTMLDivElement>(null) // Ny ref for auto-scrolling
 
   const welcomeMessage =
     'Hei! 👋 Jeg er Kaya fra Utekos. Jeg hjelper deg gjerne med spørsmål om våre produkter, størrelser, levering eller hva som helst annet du lurer på. Hva kan jeg hjelpe deg med i dag? 😊'
@@ -87,6 +87,11 @@ export default function ChatBubble() {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [isOpen])
+
+  // NY LOGIKK: Effekt for å scrolle til bunnen når meldinger endres
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -159,7 +164,6 @@ export default function ChatBubble() {
                   {message.parts.map((part, i) => {
                     if (part.type === 'text') {
                       return (
-                        // VI BRUKER LINKIFY-FUNKSJONEN HER
                         <p key={i} className='text-sm whitespace-pre-wrap'>
                           <Linkify text={part.text} />
                         </p>
@@ -196,6 +200,9 @@ export default function ChatBubble() {
                 </p>
               </div>
             )}
+
+            {/* Nytt usynlig "anker"-element for auto-scrolling */}
+            <div ref={messagesEndRef} />
           </div>
 
           <form
