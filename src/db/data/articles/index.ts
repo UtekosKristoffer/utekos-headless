@@ -24,7 +24,7 @@ export const mockArticles: Article[] = [
       'Historien og filosofien bak Utekos: En investering i din egen hygge',
     excerpt:
       'Utekos er mer enn bare et klesmerke. Det er en filosofi, en livsstil, og en forpliktelse til å bringe komfort og glede til dine utendørsopplevelser.',
-    imageUrl: '/og-image-utekos.webp',
+    imageUrl: '/magasinet/bat.png',
     category: 'Om Utekos',
     date: '17. oktober 2025'
   },
