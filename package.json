@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@ai-sdk/huggingface": "latest",
+    "@ai-sdk/openai": "^2.0.52",
     "@ai-sdk/react": "latest",
     "@dagrejs/dagre": "^1.1.5",
     "@google-cloud/local-auth": "^3.0.1",
