@@ -39,7 +39,7 @@ export const HeroArticleIntroduction = () => {
             <div className='flex items-center gap-4 text-sm text-muted-foreground'>
               <time dateTime='2025-10-17'>17. oktober 2025</time>
               <span className='h-1 w-1 rounded-full bg-muted-foreground' />
-              <span>8 min lesetid</span>
+              <span>3 min lesetid</span>
             </div>
           </AnimatedBlockTwo>
 
