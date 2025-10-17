@@ -60,7 +60,7 @@ export function FindUsSection() {
             <h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
               Der du har møtt oss
             </h2>
-            <p className='mt-6 text-lg leading-8 text-muted-foreground'>
+            <p className='mt-6 text-lg leading-8 text-access/80'>
               Vi elsker å prate med folk – derfor er vi jevnlig på messer og
               stands. Her er noen av stedene du kan ha truffet oss, og hvor vi
               har fått verdifulle innspill fra kunder som faktisk har kjent

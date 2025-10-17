@@ -78,7 +78,7 @@ function MomentCard({
           <IconRenderer name={Icon} className='h-6 w-6 text-foreground' />
         </div>
         <h3 className='mt-6 text-xl font-semibold text-foreground'>{title}</h3>
-        <p className='mt-2 text-muted-foreground'>{description}</p>
+        <p className='mt-2 text-access/80'>{description}</p>
       </div>
     </div>
   )

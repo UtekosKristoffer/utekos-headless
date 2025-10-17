@@ -25,14 +25,14 @@ export function ComfyrobeFeatureSection() {
             </AnimatedBlock>
 
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s'>
-              <p className='mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground'>
+              <p className='mt-4 max-w-2xl text-lg leading-relaxed text-access/80'>
                 Comfyrobe™ er den ultimate allværskåpen for livsnyteren. Den
                 kombinerer den urokkelige beskyttelsen til en teknisk skalljakke
                 med den komfortable omfavnelsen av din mykeste badekåpe.
               </p>
             </AnimatedBlock>
 
-            <div className='mt-10 w-full space-y-6'>
+            <div className='mt-10 w-full text-access/80 space-y-6'>
               {comfyrobeFeatures.map((feature, index) => (
                 <AnimatedBlock
                   key={feature.title}
@@ -49,7 +49,7 @@ export function ComfyrobeFeatureSection() {
                       <h3 className='font-semibold text-foreground'>
                         {feature.title}
                       </h3>
-                      <p className='mt-1 text-sm text-muted-foreground'>
+                      <p className='mt-1 text-sm text-access/80'>
                         {feature.description}
                       </p>
                     </div>

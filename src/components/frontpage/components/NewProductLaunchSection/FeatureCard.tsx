@@ -75,7 +75,7 @@ export function FeatureCard({ feature, delay }: FeatureCardProps) {
           <h4 className='mb-1 font-semibold text-foreground'>
             {feature.title}
           </h4>
-          <p className='text-sm leading-relaxed text-muted-foreground'>
+          <p className='text-sm leading-relaxed text-access/60'>
             {feature.description}
           </p>
         </div>

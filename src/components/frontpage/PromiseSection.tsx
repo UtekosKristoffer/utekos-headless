@@ -51,8 +51,10 @@ export function PromiseSection() {
                     <ThermometerIcon className='h-5 w-5' />
                   </div>
                   <div>
-                    <h3 className='font-semibold'>Umiddelbar varme</h3>
-                    <p className='mt-1 text-muted-foreground'>
+                    <h3 className='font-semibold md:text-[20px]'>
+                      Umiddelbar varme
+                    </h3>
+                    <p className='mt-1 text-access/70'>
                       Nøye utvalgte materialer gir en umiddelbar følelse av
                       varme og velvære.
                     </p>
@@ -63,8 +65,10 @@ export function PromiseSection() {
                     <ClockIcon className='h-5 w-5' />
                   </div>
                   <div>
-                    <h3 className='font-semibold'>Forlengede øyeblikk</h3>
-                    <p className='mt-1 text-muted-foreground'>
+                    <h3 className='font-semibold md:text-[20px]'>
+                      Forlengede øyeblikk
+                    </h3>
+                    <p className='mt-1 text-access/70'>
                       Designet slik at du kan nyte de gode stundene lenger, uten
                       å tenke på kulden.
                     </p>
@@ -75,8 +79,10 @@ export function PromiseSection() {
                     <ShieldCheckIcon className='h-5 w-5' />
                   </div>
                   <div>
-                    <h3 className='font-semibold'>En varig investering</h3>
-                    <p className='mt-1 text-muted-foreground'>
+                    <h3 className='font-semibold md:text-[20px]'>
+                      En varig investering
+                    </h3>
+                    <p className='mt-1 text-access/70'>
                       Se på det som en slitesterk og varig investering i din
                       egen hygge.
                     </p>

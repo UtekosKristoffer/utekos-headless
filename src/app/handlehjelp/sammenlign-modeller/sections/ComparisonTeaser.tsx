@@ -16,7 +16,7 @@ export function ComparisonTeaser() {
             <h2 className='text-3xl font-bold tracking-tight'>
               Usikker på hvilken Utekos du skal velge?
             </h2>
-            <p className='mx-auto mt-4 max-w-2xl text-muted-foreground'>
+            <p className='mx-auto mt-4 max-w-2xl text-access/80'>
               Våre tre Utekos-modeller gir deg kompromissløs komfort, men har
               unike styrker. Få en rask oversikt her, eller dykk ned i detaljene
               i vår komplette guide.
@@ -28,7 +28,7 @@ export function ComparisonTeaser() {
                   <Feather className='h-6 w-6 text-violet-400' />
                   <h3 className='text-lg font-semibold'>Utekos Dun™</h3>
                 </div>
-                <p className='mt-2 text-sm text-muted-foreground'>
+                <p className='mt-2 text-sm text-access/80'>
                   Best for maksimal varme i tørre, kalde omgivelser som på
                   hytten.
                 </p>
@@ -39,7 +39,7 @@ export function ComparisonTeaser() {
                   <Droplets className='h-6 w-6 text-cyan-400' />
                   <h3 className='text-lg font-semibold'>Utekos FiberDawn™</h3>
                 </div>
-                <p className='mt-2 text-sm text-muted-foreground'>
+                <p className='mt-2 text-sm text-access/80'>
                   Best for uforutsigbart vær og fuktige forhold i båt eller
                   bobil.
                 </p>
@@ -50,7 +50,7 @@ export function ComparisonTeaser() {
                   <Layers className='h-6 w-6 text-emerald-400' />
                   <h3 className='text-lg font-semibold'>Utekos Mikrofiber™</h3>
                 </div>
-                <p className='mt-2 text-sm text-muted-foreground'>
+                <p className='mt-2 text-sm text-access/80'>
                   Best for allsidig, daglig bruk som et lettere og praktisk lag.
                 </p>
               </div>

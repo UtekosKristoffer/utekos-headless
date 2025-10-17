@@ -31,7 +31,7 @@ type PromiseNode =
 function TitleNode({ data }: { data: { label: string } }) {
   return (
     <div className='flex flex-col items-center gap-4 text-center'>
-      <h2 className='text-4xl font-bold tracking-tight text-foreground'>
+      <h2 className='text-4xl font-bold tracking-tight text-access/80'>
         {data.label}
       </h2>
       <div className='relative'>
@@ -57,7 +57,7 @@ function TextNode({ data }: { data: { text: string; color: string } }) {
           background: `radial-gradient(120% 120% at 50% 0%, transparent 30%, ${data.color} 100%)`
         }}
       />
-      <p className='relative z-10 text-base leading-relaxed text-muted-foreground'>
+      <p className='relative z-10 text-base leading-relaxed text-access/80'>
         {data.text}
       </p>
       <div className='pointer-events-none absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100'>

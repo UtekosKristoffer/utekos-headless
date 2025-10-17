@@ -94,7 +94,7 @@ export function AboutCarousel() {
           <p
             ref={pRef}
             className={cn(
-              'will-animate-fade-in-up mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground',
+              'will-animate-fade-in-up mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-access/80',
               pInView && 'is-in-view'
             )}
             style={{ '--transition-delay': '0.2s' } as React.CSSProperties}

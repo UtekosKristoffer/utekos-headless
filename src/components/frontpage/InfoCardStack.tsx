@@ -83,12 +83,12 @@ export function InfoCardStack() {
 
         <div className='relative z-10 flex h-full flex-col'>
           <div className='mt-6 flex items-start gap-3'>
-            <Lock className='h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 text-muted-foreground' />
+            <Lock className='h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 text-access/70' />
             <div>
               <h3 className='text-sm sm:text-base font-semibold text-foreground'>
                 Ditt personvern
               </h3>
-              <p className='mt-1 text-xs sm:text-sm text-muted-foreground'>
+              <p className='mt-1 text-xs sm:text-sm text-access/70'>
                 Vi tar personvern på alvor. Se hvordan vi behandler dine data.
               </p>
             </div>

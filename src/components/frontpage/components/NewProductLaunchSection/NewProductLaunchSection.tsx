@@ -80,13 +80,13 @@ export function NewProductLaunchSection() {
             delay='0.5s'
             threshold={1}
           >
-            <p className='mb-8 max-w-prose text-lg leading-relaxed text-muted-foreground'>
+            <p className='mb-8 max-w-prose text-lg leading-relaxed text-access/80'>
               Vi introduserer {productName} – vår mest tekniske og allsidige
               modell noensinne. Perfekt for deg som stiller de høyeste kravene
               til komfort og funksjonalitet.
             </p>
           </AnimatedBlock>
-          <div className='mb-8 w-full space-y-3'>
+          <div className='mb-8 w-full text-access/80 space-y-3'>
             {newProductFeatures.map((feature, idx) => (
               <FeatureCard
                 key={feature.title}
@@ -107,7 +107,7 @@ export function NewProductLaunchSection() {
               <div className='flex flex-col gap-3'>
                 {/* Original pris med rabatt */}
                 <div className='flex items-center gap-3'>
-                  <span className='text-xl text-muted-foreground/60 line-through decoration-2'>
+                  <span className='text-xl text-access/60 line-through decoration-2'>
                     {originalPrice},-
                   </span>
                   <div className='flex items-center gap-2 rounded-full bg-red-500/10 px-3 py-1 ring-1 ring-red-500/20'>
@@ -123,16 +123,14 @@ export function NewProductLaunchSection() {
                   <p className='bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-5xl font-bold text-transparent'>
                     {currentPrice},-
                   </p>
-                  <span className='text-sm text-muted-foreground'>
-                    inkl. mva
-                  </span>
+                  <span className='text-sm text-access/80'>inkl. mva</span>
                   <span className='rounded-full bg-emerald-500/10 px-3 py-1 text-sm font-bold text-emerald-400 ring-1 ring-emerald-500/20'>
                     Spar {discountPercent}%
                   </span>
                 </div>
 
                 {/* Tilbuds-beskrivelse */}
-                <p className='text-sm text-muted-foreground'>
+                <p className='text-sm text-access/80'>
                   Begrenset tilbud ved lansering
                 </p>
               </div>

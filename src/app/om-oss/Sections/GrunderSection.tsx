@@ -111,7 +111,7 @@ export function GrunderSection() {
                 delay='0.4s'
                 threshold={0.3}
               >
-                <p className='text-lg leading-relaxed text-muted-foreground'>
+                <p className='text-lg leading-relaxed text-access/80'>
                   Jeg har alltid elsket de små, verdifulle øyeblikkene – den
                   stille kaffekoppen på en kjølig morgen, den gode samtalen
                   rundt bålpannen, eller roen i båten rett etter at solen har
@@ -126,7 +126,7 @@ export function GrunderSection() {
                 delay='0.5s'
                 threshold={0.3}
               >
-                <p className='text-lg leading-relaxed text-muted-foreground'>
+                <p className='text-lg leading-relaxed text-access/80'>
                   Jeg lette etter ett enkelt, kompromissløst plagg. Et verktøy
                   for komfort som var så behagelig at jeg glemte jeg hadde det
                   på, men så funksjonelt at det lot meg eie øyeblikket. Svaret
@@ -139,7 +139,7 @@ export function GrunderSection() {
                 delay='0.6s'
                 threshold={0.3}
               >
-                <p className='text-lg leading-relaxed text-muted-foreground'>
+                <p className='text-lg leading-relaxed text-access/80'>
                   Det ble en reise som tok måneder – med design, utallige
                   prototyper, jakt på de rette materialene, og testing i pøsende
                   bergensregn og på kalde fjelltopper. Resultatet ble Utekos.

@@ -8,7 +8,7 @@ export function PhilosophiesSection() {
           <h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
             Vår filosofi
           </h2>
-          <p className='mx-auto mt-4 max-w-3xl text-lg text-muted-foreground'>
+          <p className='mx-auto mt-4 max-w-3xl text-lg text-access/80'>
             Denne reisen formet fire ufravikelige prinsipper som ligger i
             hjertet av alt vi gjør.
           </p>
@@ -27,9 +27,7 @@ export function PhilosophiesSection() {
                   <item.icon className='h-6 w-6 text-foreground' />
                 </div>
                 <h3 className='mt-6 text-xl font-semibold'>{item.title}</h3>
-                <p className='mt-2 text-sm text-muted-foreground'>
-                  {item.text}
-                </p>
+                <p className='mt-2 text-sm text-access/80'>{item.text}</p>
               </div>
             </div>
           ))}

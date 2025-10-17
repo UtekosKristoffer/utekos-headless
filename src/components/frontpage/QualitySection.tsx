@@ -27,7 +27,7 @@ export function QualitySection() {
                 <h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
                   Kvalitet i hver fiber
                 </h2>
-                <p className='mt-4 max-w-xl text-lg text-muted-foreground'>
+                <p className='mt-4 max-w-xl text-lg text-access/80'>
                   Fra den lette spensten i dunet til slitestyrken i hver søm –
                   vi er transparente om materialvalgene som definerer Utekos.
                   Dette er kvalitet du kan føle på, designet for å vare.
@@ -60,7 +60,7 @@ export function QualitySection() {
               <h3 className='mt-4 font-semibold text-foreground'>
                 Premium Isolasjon
               </h3>
-              <p className='mt-1 text-sm text-muted-foreground'>
+              <p className='mt-1 text-sm text-access/70'>
                 Kun sertifisert dun og høykvalitets syntetisk fyll for optimal
                 varme-til-vekt.
               </p>
@@ -82,7 +82,7 @@ export function QualitySection() {
               <h3 className='mt-4 font-semibold text-foreground'>
                 Bygget for å vare
               </h3>
-              <p className='mt-1 text-sm text-muted-foreground'>
+              <p className='mt-1 text-sm text-access/70'>
                 Slitesterke materialer og solide sømmer som tåler aktiv bruk i
                 norske forhold.
               </p>

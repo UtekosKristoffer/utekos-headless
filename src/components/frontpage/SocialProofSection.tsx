@@ -9,7 +9,7 @@ export function SocialProofSection() {
           <h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
             Drevet av ekte opplevelser
           </h2>
-          <p className='mx-auto mt-4 max-w-3xl text-lg text-muted-foreground'>
+          <p className='mx-auto mt-4 max-w-3xl text-lg text-accent/80'>
             Våre beste produktutviklere er kundene våre. Vi lytter, lærer og
             designer for å løse reelle behov – slik at du kan skape flere og
             bedre minner utendørs.

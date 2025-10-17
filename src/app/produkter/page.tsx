@@ -85,7 +85,7 @@ const ProductsPage = async () => {
             <h2 className='text-4xl font-bold tracking-tight text-foreground drop-shadow-md md:text-5xl'>
               Skapt for din Utekos
             </h2>
-            <p className='mx-auto mt-4 max-w-2xl text-lg text-muted-foreground'>
+            <p className='mx-auto mt-4 max-w-2xl text-lg text-access/80'>
               Våre komfortplagg er designet for å holde deg varm, slik at du kan
               nyte de gode øyeblikkene lenger.
             </p>
