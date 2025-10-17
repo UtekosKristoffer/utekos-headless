@@ -4,14 +4,13 @@ import { useState, useEffect } from 'react'
 import { useChat, Chat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
 import { X, Send, Headset } from 'lucide-react'
-import { toast } from 'sonner'
 
 export default function ChatBubble() {
   const [isOpen, setIsOpen] = useState(false)
   const [input, setInput] = useState('')
 
   const welcomeMessage =
-    'Hei! 👋 Jeg er Silje fra Utekos. Jeg hjelper deg gjerne med spørsmål om våre produkter, størrelser, levering eller hva som helst annet du lurer på. Hva kan jeg hjelpe deg med i dag? 😊'
+    'Hei! 👋 Jeg er Kaya fra Utekos. Jeg hjelper deg gjerne med spørsmål om våre produkter, størrelser, levering eller hva som helst annet du lurer på. Hva kan jeg hjelpe deg med i dag? 😊'
 
   // Opprett Chat instans med velkomstmelding
   const [chat] = useState(
@@ -38,14 +37,12 @@ export default function ChatBubble() {
   const { messages, sendMessage, status, error } = useChat({ chat })
 
   useEffect(() => {
-    // Sørger for at scrolling er deaktivert på body når chatten er åpen på mobil
     if (isOpen) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = 'auto'
     }
 
-    // Cleanup funksjon for å resette overflow når komponenten unmountes
     return () => {
       document.body.style.overflow = 'auto'
     }
@@ -69,7 +66,7 @@ export default function ChatBubble() {
         <button
           onClick={() => setIsOpen(true)}
           className='fixed bottom-6 right-6 bg-sky-800 hover:bg-sky-700 text-white rounded-full p-4 shadow-lg transition-all duration-200 hover:scale-110 z-50'
-          aria-label='Chat med Silje'
+          aria-label='Chat med Kaya'
         >
           <Headset size={24} />
         </button>
@@ -89,7 +86,7 @@ export default function ChatBubble() {
               </div>
 
               <div>
-                <h3 className='font-semibold text-lg'>Silje</h3>
+                <h3 className='font-semibold text-lg'>Kaya</h3>
                 <p className='text-sm text-blue-100'>
                   Utekos kundeservice-chatbot
                 </p>
