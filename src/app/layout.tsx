@@ -13,7 +13,7 @@ import { QueryClient } from '@tanstack/react-query'
 import Script from 'next/script'
 import { Suspense } from 'react'
 import { MetaPixelEvents } from '@/components/analytics/MetaPixelEvents'
-
+import ChatBubble from '@/components/ChatBubble'
 import Providers from '@/components/providers/Providers'
 import AnnouncementBanner from '@/SpecialOfferSection/AnnouncementBanner'
 import Footer from '@/components/footer/Footer'
@@ -146,6 +146,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           <Toaster closeButton />
           <SpeedInsights />
           <Analytics mode='production' />
+
         </Providers>
 
         <Suspense fallback={null}>
