@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useChat, Chat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
 import { X, Send, Headset } from 'lucide-react'
@@ -8,6 +8,7 @@ import { X, Send, Headset } from 'lucide-react'
 export default function ChatBubble() {
   const [isOpen, setIsOpen] = useState(false)
   const [input, setInput] = useState('')
+  const chatWindowRef = useRef<HTMLDivElement>(null)
 
   const welcomeMessage =
     'Hei! 👋 Jeg er Kaya fra Utekos. Jeg hjelper deg gjerne med spørsmål om våre produkter, størrelser, levering eller hva som helst annet du lurer på. Hva kan jeg hjelpe deg med i dag? 😊'
@@ -36,6 +37,7 @@ export default function ChatBubble() {
 
   const { messages, sendMessage, status, error } = useChat({ chat })
 
+  // Effekt for å låse scrolling av bakgrunnen når chatten er åpen
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
@@ -47,6 +49,28 @@ export default function ChatBubble() {
       document.body.style.overflow = 'auto'
     }
   }, [isOpen])
+
+  // NY LOGIKK: Effekt for å lytte etter klikk utenfor chat-vinduet
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        chatWindowRef.current
+        && !chatWindowRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false)
+      }
+    }
+
+    // Legg til lytteren kun når vinduet er åpent
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    // Rydd opp lytteren når komponenten lukkes eller fjernes
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen]) // Denne effekten er avhengig av 'isOpen'
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -75,6 +99,7 @@ export default function ChatBubble() {
       {/* Chat-vindu */}
       {isOpen && (
         <div
+          ref={chatWindowRef} // Legger til referansen her
           className='fixed bottom-0 left-0 right-0 w-full h-[85vh] rounded-t-lg 
                      sm:bottom-6 sm:right-6 sm:left-auto sm:w-96 sm:h-[600px] sm:rounded-lg 
                      bg-white shadow-2xl flex flex-col z-50 border border-gray-200'
