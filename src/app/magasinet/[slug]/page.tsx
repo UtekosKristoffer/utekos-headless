@@ -15,6 +15,9 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 const articleComponents = {
+  'hva-er-utekos': dynamic(() =>
+    import('../@articles/hva-er-utekos').then(mod => mod.HvaErUtekosArticle)
+  ),
   'balpannen-din-guide-til-den-perfekte-hostkvelden': dynamic(() =>
     import(
       '../@articles/balpannen-din-guide-til-den-perfekte-hostkvelden'

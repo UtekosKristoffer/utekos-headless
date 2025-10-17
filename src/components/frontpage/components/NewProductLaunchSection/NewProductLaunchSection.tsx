@@ -71,7 +71,7 @@ export function NewProductLaunchSection() {
             delay='0.4s'
             threshold={1}
           >
-            <h2 className='mb-4 text-4xl font-bold leading-tight text-foreground sm:text-5xl'>
+            <h2 className='mb-4 text-4xl font-bold leading-tight text-accent/80  sm:text-5xl'>
               Varmen du kan stole på
             </h2>
           </AnimatedBlock>

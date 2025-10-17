@@ -89,7 +89,7 @@ export function HelpChooseSection() {
                         <h3 className='mb-3 text-xl font-semibold text-foreground'>
                           {choice.title}
                         </h3>
-                        <p className='flex-grow text-sm leading-relaxed text-muted-foreground'>
+                        <p className='flex-grow text-sm leading-relaxed text-access/80'>
                           {choice.description}
                         </p>
 

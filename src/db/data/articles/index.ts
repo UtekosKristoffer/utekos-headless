@@ -19,6 +19,16 @@ export const mockArticles: Article[] = [
     date: '14. oktober 2025'
   },
   {
+    slug: 'hva-er-utekos',
+    title:
+      'Historien og filosofien bak Utekos: En investering i din egen hygge',
+    excerpt:
+      'Utekos er mer enn bare et klesmerke. Det er en filosofi, en livsstil, og en forpliktelse til å bringe komfort og glede til dine utendørsopplevelser.',
+    imageUrl: '/og-image-utekos.webp',
+    category: 'Om Utekos',
+    date: '17. oktober 2025'
+  },
+  {
     slug: 'balpannen-din-guide-til-den-perfekte-hostkvelden',
     title: 'Bålpannen: Din guide til den perfekte høstkvelden',
     excerpt:

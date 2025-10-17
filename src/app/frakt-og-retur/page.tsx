@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     canonical: '/frakt-og-retur'
   },
   openGraph: {
-    title: 'Frakt og retur | Enkel og trygg handel hos Utekos',
+    title: 'Fri frakt | Enkel og trygg handel hos Utekos',
     description:
       'Få svar på alt du lurer på om levering og retur. Handle trygt hos oss.',
     url: '/frakt-og-retur',

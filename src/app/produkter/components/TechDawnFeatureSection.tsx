@@ -117,7 +117,7 @@ export const TechDawnFeatureSection = () => {
             Møt Utekos TechDawn™
           </h2>
 
-          <p className='mb-8 max-w-prose text-lg leading-relaxed text-muted-foreground'>
+          <p className='mb-8 max-w-prose text-lg leading-relaxed text-accent/80'>
             Vi har ikke bare kombinert det beste fra dunens letthet og
             mikrofiberens slitestyrke – vi har utviklet en helt ny kategori av
             personlig komfort. Utekos TechDawn™ er vår mest tekniske og
@@ -129,7 +129,7 @@ export const TechDawnFeatureSection = () => {
             {features.map((feature, index) => (
               <li key={index} className='flex items-start gap-3'>
                 <feature.icon className='h-5 w-5 mt-1 flex-shrink-0 text-sky-400' />
-                <span className='text-muted-foreground'>{feature.text}</span>
+                <span className='text-accent/80 '>{feature.text}</span>
               </li>
             ))}
           </ul>
