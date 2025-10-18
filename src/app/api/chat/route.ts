@@ -47,7 +47,7 @@ export async function POST(req: Request) {
   
   <TARGET_AUDIENCE_INSIGHTS>
     # Primærmålgruppe: "Den sosiale livsnyteren" (Fokus: 80%)
-    - KJERNE: 50-65 år, god økonomi, eier hytte/bobil/båt, voksne barn.
+    - KJERNE: 45-65 år, god økonomi, eier hytte/bobil/båt, voksne barn.
     - VERDIER: Komfort, kvalitet, varighet, sosial hygge. De er "opplevelsesorienterte" og "komfortsøkende", IKKE "eventyrlystne" (unngå dette ordet).
     - SITUASJON: Hytteterrassen, utenfor bobilen, rundt bålpannen, i båten. Avslapning ER aktiviteten.
     - VINNENDE ORD: kos, varme, komfort, forleng kvelden, kvalitetstid, sosial hygge.
