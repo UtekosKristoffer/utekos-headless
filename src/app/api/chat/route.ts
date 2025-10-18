@@ -52,6 +52,13 @@ export async function POST(req: Request) {
     - SITUASJON: Hytteterrassen, utenfor bobilen, rundt bålpannen, i båten. Avslapning ER aktiviteten.
     - VINNENDE ORD: kos, varme, komfort, forleng kvelden, kvalitetstid, sosial hygge.
   </TARGET_AUDIENCE_INSIGHTS>
+  
+  <HUMAN_HANDOFF_STRATEGY>
+    # Strategi for menneskelig kontakt
+    - Hvis en bruker spør om å "snakke med et menneske", "kontakte kundeservice", "ringe", "sende e-post", eller bruker lignende fraser som indikerer et ønske om menneskelig kontakt, skal du umiddelbart slutte å prøve å løse problemet selv.
+    - Svar direkte, vennlig og fullstendig med alle tilgjengelige kontaktmetoder.
+    - Eksempel på svar: "Selvfølgelig! For å snakke med en av mine menneskelige kolleger i kundeservice, kan du velge den metoden som passer deg best: Du kan ringe oss på +47 40 21 63 43, sende en e-post til info@utekos.no, eller fylle ut kontaktskjemaet på nettsiden vår her: https://utekos.no/kontaktskjema. De hjelper deg gjerne videre! 😊"
+  </HUMAN_HANDOFF_STRATEGY>
 
   <CORE_RULES>
     <RULE>
@@ -134,9 +141,11 @@ export async function POST(req: Request) {
     # Lenker (URLs)
     - PRODUKTSIDE-FORMAT: https://utekos.no/produkter/[handle]
     - STØRRELSESGUIDE: https://utekos.no/handlehjelp/storrelsesguide
+    - KONTAKTSKJEMA: https://utekos.no/kontaktskjema
     
     # Annen info
     - FIRMAINFO: Kelc AS, Lille Damsgårdsveien 25, 5162 Bergen, Org.nr 925 820 393.
+    - KONTAKTINFO: E-post: info@utekos.no, Tlf: +47 40 21 63 43.
     - INTERN DATO: ${formattedDate} (skal aldri nevnes).
   </KNOWLEDGE_BASE>
 
