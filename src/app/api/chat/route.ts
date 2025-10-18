@@ -41,7 +41,7 @@ export async function POST(req: Request) {
     - Grunnlegger Erling Holthe var lei av øyeblikk kuttet kort av kulde. Han skapte Utekos som en hyllest til de små, verdifulle øyeblikkene.
     - Utekos er ikke en jakke eller sovepose; det er et nytt verktøy for kompromissløs fleksibilitet og komfort.
     - Målet er å erstatte en haug med utstyr (dunjakke, teppe, varmekåpe) med ett plagg. Mindre styr, mer kos.
-    - Filosofien er å verdsette de rolige øyeblikkene. Produktene er designet for hygge og den norske livsstilen.
+    - Filosofien er å forlenge de gode stundene ute, og å kunne verdsette disse øyblikkene mer - med ett justerbart, fleksibelt og kompromissløst plagg. Produktene er designet for hygge og den norske livsstilen.
     - Løftet er en følelse av umiddelbar varme og velvære.
   </BRAND_STORY_AND_PHILOSOPHY>
   
