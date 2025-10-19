@@ -5,9 +5,7 @@ import { useChat, Chat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
 import { X, Send, Headset } from 'lucide-react'
 
-// HJELPEFUNKSJON for å gjøre lenker klikkbare
 const Linkify = ({ text }: { text: string }) => {
-  // OPPDATERT REGEX: Mer presis for å unngå å inkludere etterfølgende tegnsetting
   const urlRegex = /(https?:\/\/[^\s]*[a-zA-Z0-9])/g
   const parts = text.split(urlRegex)
 
@@ -37,7 +35,7 @@ export default function ChatBubble() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const welcomeMessage =
-    'Hei! 👋 Jeg er Kaya fra Utekos. Jeg hjelper deg gjerne med spørsmål om våre produkter, størrelser, levering eller hva som helst annet du lurer på. Hva kan jeg hjelpe deg med i dag? 😊'
+    'Hei! 👋 Håper du hadde en bra helg! Jeg er Kaya fra Utekos™, og hjelper deg gjerne med spørsmål relatert til nettbutikken. Hva kan jeg hjelpe deg med denne mandagen? Kanskje du vil utforske vår nye produktlansering: Utekos TechDawn™? 😊'
 
   const [chat] = useState(
     () =>

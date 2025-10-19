@@ -36,17 +36,10 @@ export default function Providers({
           onDismiss: () => {
             document.cookie = 'welcome-toast=2; max-age=31536000; path=/'
           },
-          // ENDRING: Legger til classNames for å tvinge tekstfargen til å være svart.
           classNames: {
             title: 'text-black',
             description: 'text-black'
-          },
-          description: (
-            <span style={{ color: '#000' }}>
-              Ikke la kjølige kvelder stoppe deg. Sjekk ut vårt utvalg av
-              komfortplagg!
-            </span>
-          )
+          }
         }
       )
     }
