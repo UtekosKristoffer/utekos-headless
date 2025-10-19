@@ -1,7 +1,19 @@
 import { SpecialOfferImageSection } from './SpecialOfferImageSection'
 import { SpecialOfferContentColumn } from './SpecialOfferContentColumn'
+import { getProduct } from '@/api/lib/products/getProduct'
 
-export function SpecialOfferSection() {
+const INITIAL_STOCK_SPECIAL_EDITION = 11
+
+export async function SpecialOfferSection() {
+  const productHandle = 'utekos-special-edition'
+  const product = await getProduct(productHandle)
+
+  if (!product) {
+    return null
+  }
+
+  const remainingStock = product.totalInventory
+
   return (
     <section className='mx-auto max-w-[95%] py-20 sm:py-24 md:max-w-7xl'>
       <div className='container mx-auto'>
@@ -25,7 +37,10 @@ export function SpecialOfferSection() {
           </div>
           <div className='grid grid-cols-1 relative rounded-2xl items-center gap-12 lg:grid-cols-2'>
             <SpecialOfferImageSection />
-            <SpecialOfferContentColumn />
+            <SpecialOfferContentColumn
+              initialStock={INITIAL_STOCK_SPECIAL_EDITION}
+              remainingStock={remainingStock}
+            />
           </div>
         </div>
       </div>

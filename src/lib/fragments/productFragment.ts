@@ -5,6 +5,7 @@ const product = /* GraphQL */ `
     title
     tags
     handle
+    totalInventory
     updatedAt
     compareAtPriceRange {
       minVariantPrice {

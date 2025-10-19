@@ -120,7 +120,7 @@ export const TechDawnFeatureSection = () => {
           <p className='mb-8 max-w-prose text-lg leading-relaxed text-accent/80'>
             Vi har ikke bare kombinert det beste fra dunens letthet og
             mikrofiberens slitestyrke – vi har utviklet en helt ny kategori av
-            personlig komfort. Utekos TechDawn™ er vår mest tekniske og
+            personlig komfort. Utekos TechDawn™ er vår mest innovative og
             allsidige modell noensinne, skapt for å forlenge de gode stundene
             ute.
           </p>

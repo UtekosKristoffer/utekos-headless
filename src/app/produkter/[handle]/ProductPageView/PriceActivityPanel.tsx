@@ -9,13 +9,10 @@ export interface PriceActivityPanelProps {
   productHandle: string
   priceAmount: string
   currencyCode: string
-  /** Klient-øya for aktivitet, f.eks. <SmartRealTimeActivity baseViewers={...} /> */
   activityNode?: ReactNode
-  /** Lagerantall for varsel. Når utelatt vises ikke varselet. */
   limitedStockCount?: number
 }
 
-// Konfigurasjon for lanseringstilbud
 const LAUNCH_OFFERS = {
   'utekos-techdawn': {
     discountAmount: 200,
@@ -24,10 +21,6 @@ const LAUNCH_OFFERS = {
   }
 } as const
 
-/**
- * Lettvekts panel for pris, lager-varsel og valgfri aktivitetsindikator.
- * Client-markert for å kunne brukes direkte fra en klient-side (ProductPageView).
- */
 export default function PriceActivityPanel({
   productHandle,
   priceAmount,
@@ -36,32 +29,25 @@ export default function PriceActivityPanel({
   limitedStockCount
 }: PriceActivityPanelProps) {
   const shouldShowLimitedStockNotice =
-    productHandle === 'utekos-special-edition'
-    && typeof limitedStockCount === 'number'
-    && Number.isFinite(limitedStockCount)
-    && limitedStockCount > 0
+    typeof limitedStockCount === 'number' && limitedStockCount > 0
 
-  // Sjekk om produktet har lanseringstilbud
+  const isSpecialEdition = productHandle === 'utekos-special-edition'
+
   const launchOffer = LAUNCH_OFFERS[productHandle as keyof typeof LAUNCH_OFFERS]
   const hasLaunchOffer = !!launchOffer
 
-  // Beregn originalprisen hvis det er lanseringstilbud
   const currentPrice = parseFloat(priceAmount)
   const originalPrice =
     hasLaunchOffer ? currentPrice + launchOffer.discountAmount : null
 
   return (
     <section aria-label='Pris og tilgjengelighet' className='space-y-4'>
-      {/* Lanseringstilbud badge */}
       {hasLaunchOffer && (
         <div className='inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-blue-500/20 px-4 py-2 ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 hover:ring-white/20 hover:scale-[1.02]'>
-          {/* Pulserende indikator */}
           <div className='relative flex h-2 w-2'>
             <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75' />
             <span className='relative inline-flex h-2 w-2 rounded-full bg-emerald-500' />
           </div>
-
-          {/* Badge-tekst */}
           <div className='flex items-center gap-2'>
             <span className='text-sm font-semibold text-white'>
               {launchOffer.label}
@@ -71,13 +57,10 @@ export default function PriceActivityPanel({
               {launchOffer.discountPercent}% RABATT
             </span>
           </div>
-
-          {/* Ikon */}
           <Sparkles className='h-4 w-4 text-emerald-400' />
         </div>
       )}
 
-      {/* Original pris (hvis lanseringstilbud) */}
       {hasLaunchOffer && originalPrice && (
         <div className='flex items-center gap-3'>
           <span className='text-lg text-muted-foreground/60 line-through decoration-2'>
@@ -97,7 +80,6 @@ export default function PriceActivityPanel({
         </div>
       )}
 
-      {/* Nåværende pris */}
       <div className='flex items-baseline gap-3'>
         {hasLaunchOffer ?
           <div className='bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent'>
@@ -106,17 +88,14 @@ export default function PriceActivityPanel({
         : <Price amount={priceAmount} currencyCode={currencyCode} />}
       </div>
 
-      {/* Tilbuds-beskrivelse */}
       {hasLaunchOffer && (
         <p className='text-sm text-muted-foreground'>
           Begrenset tilbud ved lansering 🎉
         </p>
       )}
 
-      {/* Eksisterende limited stock notice */}
       {shouldShowLimitedStockNotice && (
         <div className='relative overflow-hidden rounded-lg border border-amber-400/30 bg-amber-900/10 p-4'>
-          {/* Aurora-effekt bak varselet */}
           <div
             className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-20 blur-2xl'
             style={{
@@ -133,9 +112,13 @@ export default function PriceActivityPanel({
               />
             </div>
             <div>
-              <p className='font-semibold text-amber-400'>6 på lager!</p>
+              <p className='font-semibold text-amber-400'>
+                Kun {limitedStockCount} igjen på lager!
+              </p>
               <p className='text-sm text-amber-400/80'>
-                Sikre deg din før det er for sent
+                {isSpecialEdition ?
+                  'Unik utgave - kommer ikke tilbake'
+                : 'Tilgjengelig i Large og Fjellblå'}
               </p>
             </div>
           </div>

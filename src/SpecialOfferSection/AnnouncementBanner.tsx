@@ -57,8 +57,8 @@ export default function AnnouncementBanner() {
         className='group block w-full bg-sky-800 p-3 text-center text-sm font-medium text-white transition-colors hover:text-neutral-200'
       >
         <span className='mr-2'>
-          <span className='font-semibold'>NYHET:</span> Utekos TechDawn™ -
-          Kompromissløs varme for norske kvelder.
+          <span className='font-semibold'>NYHET:</span> Utekos TechDawn™ - Vår
+          mest innovative modell noensinne.
         </span>
         <span className='font-bold'>Se lanseringstilbudet!</span>
         <span> 🎉 </span>

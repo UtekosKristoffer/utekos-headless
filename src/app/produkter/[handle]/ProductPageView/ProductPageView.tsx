@@ -50,6 +50,8 @@ const ProductGallery = dynamic(
   }
 )
 
+const STOCK_THRESHOLD = 31 // Grense for å vise "lavt lager"-melding
+
 export default function ProductPageView({
   productData,
   selectedVariant,
@@ -81,8 +83,9 @@ export default function ProductPageView({
       />
     : undefined
 
+  const quantity = productData.totalInventory ?? 0
   const limitedStockCount =
-    productData.handle === 'utekos-special-edition' ? 11 : undefined
+    quantity > 0 && quantity < STOCK_THRESHOLD ? quantity : undefined
 
   return (
     <main className='relative container mx-auto mt-10 overflow-hidden p-4 md:p-8'>
@@ -190,7 +193,6 @@ export default function ProductPageView({
                     })
                 )}
               </div>
-              {/* 👇 NYTT: Trust signals rett før kjøpeknappen */}´
               <TrustSignals />
               <div className='mt-8'>
                 <AddToCart

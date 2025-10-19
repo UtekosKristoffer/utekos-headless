@@ -15,6 +15,7 @@ export type ShopifyProduct = {
   id: string
   title: string
   handle: string
+  totalInventory: number
   updatedAt: string
   compareAtPriceRange: {
     minVariantPrice: Money

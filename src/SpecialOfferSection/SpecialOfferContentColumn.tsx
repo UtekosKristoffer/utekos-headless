@@ -1,3 +1,4 @@
+// Path: src/components/SpecialOfferSection/SpecialOfferContentColumn.tsx
 'use client'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import Link from 'next/link'
@@ -6,9 +7,7 @@ import { BenefitCard } from './BenefitCard'
 import { useInView } from '@/hooks/useInView'
 import { cn } from '@/lib/utils/className'
 
-const totalStock = 11
-const remainingStock = 6
-
+// Hardkodet data som er spesifikk for dette tilbudet
 const benefits = [
   {
     label: '-53% rabatt',
@@ -27,8 +26,18 @@ const benefits = [
   }
 ]
 
-export function SpecialOfferContentColumn() {
-  const precisePercentage = (remainingStock / totalStock) * 100
+interface SpecialOfferContentColumnProps {
+  initialStock: number
+  remainingStock: number
+}
+
+export function SpecialOfferContentColumn({
+  initialStock,
+  remainingStock
+}: SpecialOfferContentColumnProps) {
+  // Beregninger basert på props
+  const precisePercentage =
+    initialStock > 0 ? (remainingStock / initialStock) * 100 : 0
   const displayPercentage = Math.round(precisePercentage)
 
   const [containerRef, containerInView] = useInView({ threshold: 0.5 })
@@ -98,7 +107,7 @@ export function SpecialOfferContentColumn() {
               <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75'></span>
               <span className='relative inline-flex h-2 w-2 rounded-full bg-sky-500'></span>
             </span>
-            Kun 6 igjen på lager!
+            Kun {remainingStock} igjen på lager!
           </p>
           <span className='text-xs text-neutral-500'>{displayPercentage}%</span>
         </div>
