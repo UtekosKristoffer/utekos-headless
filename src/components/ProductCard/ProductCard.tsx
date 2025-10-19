@@ -19,13 +19,19 @@ import { getInitialOptionsForProduct } from './getInitialOptionsForProduct'
 import { ProductCardFooter } from './ProductCardFooter'
 import { ProductCardHeader } from './ProductCardHeader'
 
+interface ExtendedProductCardProps extends ProductCardProps {
+  isPriority?: boolean
+  initialOptions?: Record<string, string>
+}
+
 export function ProductCard({
   product,
   colorHexMap,
-  isPriority = false
-}: ProductCardProps & { isPriority?: boolean }) {
-  const [selectedOptions, setSelectedOptions] = useState(() =>
-    getInitialOptionsForProduct(product)
+  isPriority = false,
+  initialOptions
+}: ExtendedProductCardProps) {
+  const [selectedOptions, setSelectedOptions] = useState(
+    () => initialOptions ?? getInitialOptionsForProduct(product)
   )
 
   const cartActor = CartMutationContext.useActorRef()
