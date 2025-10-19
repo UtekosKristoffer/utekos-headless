@@ -8,20 +8,20 @@ interface ProductChoice {
 }
 export const choices: ProductChoice[] = [
   {
+    title: 'Vår mest nyeste og mest innovative modell',
+    description:
+      'Optimalisert etter erfaringer og tilbakemeldinger. Gir maksimal komfort og bevegelsesfrihet. Perfekt for hytteliv, bobil og all utekos.',
+    href: '/produkter/utekos-techdawn' as Route,
+    imageUrl: '/fiberdun.webp',
+    linkColor: 'text-sky-800'
+  },
+  {
     title: 'For den ultimate varmen',
     description:
       'Vårt varmeste isolasjonsplagg, fylt med premium dun for maksimal varme på de kaldeste dagene.',
     href: '/produkter/utekos-dun' as Route,
     imageUrl: '/utekos-blue.webp',
     linkColor: 'text-rose-400'
-  },
-  {
-    title: 'For uforutsigbart vær',
-    description:
-      'En robust og lettstelt favoritt som isolerer selv i fuktig vær. Perfekt for båt, bobil og et aktivt uteliv.',
-    href: '/produkter/utekos-techdawn' as Route,
-    imageUrl: '/fiberdun.webp',
-    linkColor: 'text-sky-800'
   },
   {
     title: 'For allsidig, daglig bruk',
