@@ -58,12 +58,12 @@ export const HyttekosArticle = () => {
           className='rounded-lg'
           priority
         />
-        <figcaption className='text-center text-sm text-muted-foreground mt-2'>
+        <figcaption className='text-center text-sm text-access/70 mt-2'>
           Den etterlengtede roen senker seg på hytten.
         </figcaption>
       </figure>
 
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-access/70'>
         Ordet &quot;hyttekos&quot; er nesten hellig for oss nordmenn. Det
         fremkaller bilder av snødekte landskap, knitrende peisbål og en dyp
         følelse av ro. Men hva er det egentlig som skaper denne magiske
@@ -77,7 +77,7 @@ export const HyttekosArticle = () => {
       </h2>
       <Card className='bg-sidebar-foreground border-neutral-800 my-8'>
         <CardContent className='p-6'>
-          <p className='text-muted-foreground mt-0'>
+          <p className='text-access/70 mt-0'>
             Den perfekte hyttestemningen er en sum av fire deler. Når du bevisst
             jobber med alle fire, løfter du opplevelsen til et nytt nivå:
           </p>
@@ -95,7 +95,7 @@ export const HyttekosArticle = () => {
       <Card className='my-12 text-center bg-gradient-to-br from-primary/20 to-transparent border-neutral-800'>
         <CardContent className='p-8'>
           <h3 className='text-2xl font-bold mt-0'>Forleng peisvarmen</h3>
-          <p className='text-muted-foreground mt-2 mb-6'>
+          <p className='text-access/70 mt-2 mb-6'>
             Utekos er designet for å være din personlige komfortsone, slik at du
             kan nyte de magiske øyeblikkene på hytten – både inne og ute.
           </p>
@@ -127,7 +127,7 @@ export const HyttekosArticle = () => {
             <Sparkles className='h-6 w-6 text-yellow-400' />
             Konklusjon: Mestring av kunsten
           </h3>
-          <p className='text-muted-foreground mt-4'>
+          <p className='text-access/70 mt-4'>
             Ved å bevisst tenke på samspillet mellom lys, lyd, tekstur og varme,
             går du fra å bare være på hytten, til å aktivt skape den dype,
             meningsfulle roen som er ekte hyttekos. Det er en kunst, men en

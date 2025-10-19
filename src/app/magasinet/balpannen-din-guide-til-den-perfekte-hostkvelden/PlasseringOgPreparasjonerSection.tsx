@@ -11,7 +11,7 @@ export const PlasseringOgPreparasjonerSection = () => {
       <h2 className='text-3xl font-bold mt-16 mb-4 border-b border-neutral-800 pb-2'>
         De 5 P-ene: Fra planlegging til perfeksjon
       </h2>
-      <p className='text-lg text-muted-foreground mb-8'>
+      <p className='text-lg text-access/70 mb-8'>
         Ved å tenke gjennom disse fem punktene på forhånd, fjerner du all
         logistikk og stress, og lar kvelden handle om det den skal: hygge,
         samvær og gode samtaler.
@@ -28,7 +28,7 @@ export const PlasseringOgPreparasjonerSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-access/70'>
         Å velge riktig sted for bålpannen er det viktigste du gjør for
         sikkerheten og komforten. Underlaget må være stabilt og ikke-brennbart –
         steinheller, grus eller sand er ideelt. Unngå å plassere den direkte på
@@ -44,7 +44,7 @@ export const PlasseringOgPreparasjonerSection = () => {
           <Sparkles className='h-5 w-5 text-yellow-400 flex-shrink-0' />{' '}
           Livsnyter-tipset:
         </h4>
-        <p className='text-muted-foreground !my-0 text-base'>
+        <p className='text-access/70 !my-0 text-base'>
           Legg en dedikert metallplate eller noen steinheller under bålpannen,
           selv om den står på grus. Det forhindrer permanent misfarging av
           underlaget og gjør oppryddingen etterpå mye enklere.
@@ -62,7 +62,7 @@ export const PlasseringOgPreparasjonerSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-access/70'>
         En vellykket bålkveld kjennetegnes av god flyt. Ingenting bryter
         stemningen mer enn å måtte lete etter tørr ved eller en lighter i
         mørket. Ha alt klart <em>før</em> gjestene kommer. Sørg for at du har en

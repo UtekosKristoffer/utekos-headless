@@ -20,7 +20,7 @@ export const ResterendePunkterSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-access/70'>
         God mat og drikke er selve hjertet i en vellykket bålkos. Hemmeligheten
         ligger i forberedelsene. Målet er å kunne nyte kvelden, ikke å stresse
         med matlaging i mørket. Klassikere som pølser på spyd, pinnebrød og
@@ -35,7 +35,7 @@ export const ResterendePunkterSection = () => {
           <Sparkles className='h-5 w-5 text-yellow-400 flex-shrink-0' />{' '}
           Livsnyter-tipset:
         </h4>
-        <p className='text-muted-foreground !my-0 text-base'>
+        <p className='text-access/70 !my-0 text-base'>
           Lag pinnebrøddeigen klar på forhånd og oppbevar den på et Norgesglass
           i en kjølebag. Da holder den seg perfekt, og du slipper alt sølet med
           mel og deig rundt bålpannen.
@@ -53,7 +53,7 @@ export const ResterendePunkterSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-access/70'>
         Du kan ha perfekt ved og verdens beste pølser, men hvis gjestene
         begynner å fryse på ryggen etter en time, dør kvelden ut. Et
         sitteunderlag isolerer nedenfra, men det hjelper lite mot den kalde
@@ -75,7 +75,7 @@ export const ResterendePunkterSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-access/70'>
         Når tryggheten, varmen og maten er på plass, gjenstår bare de små
         detaljene som løfter stemningen fra hyggelig til magisk. En enkel
         lysslynge hengt opp i et nærliggende tre gir et mykt og innbydende lys,

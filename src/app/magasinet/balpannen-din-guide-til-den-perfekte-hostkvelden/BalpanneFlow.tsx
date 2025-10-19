@@ -38,7 +38,7 @@ function CustomNodeCard({ data }: { data: CustomNodeData }) {
           </div>
           <h3 className='text-base font-semibold'>{data.label}</h3>
         </div>
-        <p className='text-sm leading-relaxed text-access/80'>
+        <p className='text-sm leading-relaxed text-access/70'>
           {data.description}
         </p>
       </div>
