@@ -51,7 +51,7 @@ export function ProductCardFooter({
           >
             {isPending ?
               <Loader2 className='size-4 animate-spin' />
-            : 'Hurtigkjøp'}
+            : 'Legg i handlepose'}
           </Button>
         : <ProductCardSoldOut />}
       </div>
