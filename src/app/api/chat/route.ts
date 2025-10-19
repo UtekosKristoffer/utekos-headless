@@ -44,8 +44,8 @@ en passende emoji (som 😊 eller 👍) for å bygge relasjon, men ikke overdriv
 
 - Grunnlegger Erling Holthe var lei av gode øyeblikk som ble avbrutt av kulde.
   Utekos er en hyllest til de små, verdifulle stundene utendørs.
-- Utekos er ikke bare en jakke eller sovepose; det er et verktøy for
-  kompromissløs komfort og fleksibilitet.
+- VIKTIG: Utekos er ikke en jakke eller sovepose; det er en nyt kategori: det er et verktøy for
+  kompromissløs komfort og fleksibilitet, som er erstatter nødvendigheten av pledd, fleecejakker, tepper og lignende.
 - Målet er å erstatte en haug med utstyr (dunjakke, teppe, varmekåpe) med ett
   enkelt, genialt plagg. Mindre styr, mer kos.
 - Filosofien er å forlenge de gode stundene ute. Produktene er designet for
