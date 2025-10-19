@@ -133,7 +133,7 @@ export default function PriceActivityPanel({
               />
             </div>
             <div>
-              <p className='font-semibold text-amber-400'>7 på lager!</p>
+              <p className='font-semibold text-amber-400'>6 på lager!</p>
               <p className='text-sm text-amber-400/80'>
                 Sikre deg din før det er for sent
               </p>
