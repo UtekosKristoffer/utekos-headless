@@ -50,19 +50,18 @@ const nodeData = {
   for: {
     icon: Moon,
     label: 'Før Utekos:',
-    description: 'Kveldene ble alltid for korte.',
+    description: 'Kulden satte en stopper for kosen.',
     iconColor: 'text-red-400',
     glowColor: '#f87171'
   },
   etter: {
-    icon: Sun,
+    icon: Sun, // Representerer varme og en "ny dag" for utekvelder
     label: 'Etter Utekos:',
-    description: 'Nå bestemmer vi når kvelden er over.',
+    description: 'Nå varer de beste øyeblikkene lenger.',
     iconColor: 'text-blue-400',
     glowColor: '#60a5fa'
   }
 }
-
 export function CustomerStory() {
   return (
     <div className='relative flex h-full min-h-[400px] mx-auto w-full md:w-[80%] flex-col items-center justify-center gap-8'>

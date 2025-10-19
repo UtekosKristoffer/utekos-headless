@@ -1,7 +1,7 @@
 import { TestimonialSection } from './TestimonialSection'
 export function TestimonialConstellation() {
   return (
-    <section className='mx-auto max-w-[95%] py-24 sm:py-32 md:max-w-7xl'>
+    <section className='mx-auto py-24 md:mt-6 md:max-w-7xl'>
       <div className='mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='mb-16 text-center'>
           <h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
