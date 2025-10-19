@@ -7,7 +7,7 @@ import { useInView } from '@/hooks/useInView'
 import { cn } from '@/lib/utils/className'
 
 const totalStock = 11
-const remainingStock = 7
+const remainingStock = 6
 
 const benefits = [
   {
@@ -98,7 +98,7 @@ export function SpecialOfferContentColumn() {
               <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75'></span>
               <span className='relative inline-flex h-2 w-2 rounded-full bg-sky-500'></span>
             </span>
-            Kun {remainingStock} igjen på lager!
+            Kun 6 igjen på lager!
           </p>
           <span className='text-xs text-neutral-500'>{displayPercentage}%</span>
         </div>

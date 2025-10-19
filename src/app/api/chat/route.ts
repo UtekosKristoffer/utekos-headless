@@ -199,7 +199,7 @@ gjør Utekos unikt:
 - **PRIS:** 750 kr (53% rabatt, normalt 1490 kr)
 - **NØKKELORD:** Siste sjanse, kun få igjen! Syntetisk isolasjon, 3-i-1
   funksjonalitet. Et kupp så lenge lageret rekker.
-- **LAGERSTATUS:** **Utsolgt i størrelse Medium. Kun 7 igjen totalt.**
+- **LAGERSTATUS:** **Utsolgt i størrelse Medium. Kun 6 igjen totalt.**
 - **FARGE:** Fjellhimmel / Svart
 - **INKLUDERER:** Oppbevaringspose
 
