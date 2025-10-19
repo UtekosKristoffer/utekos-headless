@@ -11,6 +11,7 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel'
 import { createColorHexMap } from '@/lib/helpers/shared/createColorHexMap'
+import { initializeCarouselProducts } from '@/components/ProductCard/initializeCarouselProducts'
 import { ProductCard } from './ProductCard'
 import type { ShopifyProduct } from '@types'
 
@@ -30,6 +31,9 @@ export function AllProductsCarousel() {
     return null
   }
 
+  // Initialiser produkter med unike farger
+  const productOptionsMap = initializeCarouselProducts(products)
+
   return (
     <Carousel
       opts={{
@@ -41,12 +45,18 @@ export function AllProductsCarousel() {
       <CarouselContent className='-ml-8'>
         {products.map((product: ShopifyProduct) => {
           const colorHexMap = createColorHexMap(product)
+          const initialOptions = productOptionsMap.get(product.handle)
+
           return (
             <CarouselItem
               key={product.id}
               className='pl-8 sm:basis-1-2 lg:basis-1/3'
             >
-              <ProductCard product={product} colorHexMap={colorHexMap} />
+              <ProductCard
+                product={product}
+                colorHexMap={colorHexMap}
+                initialOptions={initialOptions ?? {}}
+              />
             </CarouselItem>
           )
         })}

@@ -2,7 +2,6 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { useMemo } from 'react'
 import { getFeaturedProducts } from '@/api/lib/products/getFeaturedProducts'
 import {
   Carousel,
@@ -14,21 +13,19 @@ import {
 import { createColorHexMap } from '@/lib/helpers/shared/createColorHexMap'
 import { initializeCarouselProducts } from './initializeCarouselProducts'
 import { ProductCard } from './ProductCard'
+
 export function ProductCarousel() {
   const { data: products } = useQuery({
     queryKey: ['products', 'featured'],
     queryFn: getFeaturedProducts
   })
 
-  // Initialiser produkter med unike farger
-  const productOptionsMap = useMemo(() => {
-    if (!products || products.length === 0) return new Map()
-    return initializeCarouselProducts(products)
-  }, [products])
-
   if (!products || products.length === 0) {
     return null
   }
+
+  // Initialiser produkter med unike farger
+  const productOptionsMap = initializeCarouselProducts(products)
 
   return (
     <Carousel
@@ -41,7 +38,9 @@ export function ProductCarousel() {
       <CarouselContent className='-ml-8'>
         {products.map(product => {
           const colorHexMap = createColorHexMap(product)
-          const initialOptions = productOptionsMap.get(product.handle)
+          const initialOptions =
+            productOptionsMap.get(product.handle)
+            ?? ({} as Record<string, string>)
 
           return (
             <CarouselItem

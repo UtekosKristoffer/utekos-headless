@@ -10,12 +10,16 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel'
 import { createColorHexMap } from '@/lib/helpers/shared/createColorHexMap'
+import { initializeCarouselProducts } from '@/components/ProductCard/initializeCarouselProducts'
 import type { RelatedProductsProps } from '@types'
 
 export function RelatedProducts({ products }: RelatedProductsProps) {
   if (!products || products.length === 0) {
     return null
   }
+
+  // Initialiser produkter med unike farger
+  const productOptionsMap = initializeCarouselProducts(products)
 
   return (
     <section className='container mb-16 mt-24'>
@@ -32,6 +36,8 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
         <CarouselContent className='-ml-4'>
           {products.map((product, index) => {
             const colorHexMap = createColorHexMap(product)
+            const initialOptions = productOptionsMap.get(product.handle)
+
             return (
               <CarouselItem
                 key={product.id}
@@ -41,6 +47,7 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
                   product={product}
                   colorHexMap={colorHexMap}
                   isPriority={index < 4}
+                  initialOptions={initialOptions ?? {}}
                 />
               </CarouselItem>
             )

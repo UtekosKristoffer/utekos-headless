@@ -1,3 +1,4 @@
+// Path: src/components/ProductCard/initializeCarouselProducts.ts
 import type { ShopifyProduct } from '@types'
 import { FORCED_COLORS } from 'src/constants/forced-colors'
 import { getInitialAvailableOptions } from './getInitialAvailableOptions'
