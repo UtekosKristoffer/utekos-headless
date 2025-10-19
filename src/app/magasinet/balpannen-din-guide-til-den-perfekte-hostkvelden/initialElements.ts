@@ -96,7 +96,7 @@ export const nodes: FlowNode[] = [
     height: 180, // Lagt til høyde
     data: {
       icon: 'user-check' as IconName,
-      label: '4. Personlig Komfort',
+      label: '4. Personlig komfort',
       description:
         'Sitteunderlag er bra, Utekos er best. Holder deg varm fra alle kanter, hele kvelden.',
       iconColor: 'text-rose-400',

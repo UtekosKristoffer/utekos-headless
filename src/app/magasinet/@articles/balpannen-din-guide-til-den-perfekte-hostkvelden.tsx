@@ -2,7 +2,7 @@ import BalpanneFlow from '@/app/magasinet/balpannen-din-guide-til-den-perfekte-h
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
-import Balpanne from '@public/og-image-balpanne.webp'
+import Balpanne from '@public/magasinet/bal2.png'
 import { FolderCheck } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
