@@ -1,6 +1,6 @@
 // Path: src/app/layout.tsx
 import './globals.css'
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
 import { geistSans, geistMono } from '@/db/config/font.config'
 import { mainMenu } from '@/db/config/menu.config'
 import { SpeedInsights } from '@vercel/speed-insights/react'
@@ -133,6 +133,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         className={`bg-background text-foreground ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* Plasser scripts som skal kjøres tidlig, helt øverst i body */}
+        <GoogleAnalytics gaId='G-FCES3L0M9M' />
         <GoogleTagManager gtmId='GTM-5TWMJQFP' />
         <OrganizationJsonLd />
 
