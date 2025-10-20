@@ -35,7 +35,7 @@ export default function ChatBubble() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const welcomeMessage =
-    'Hei! 👋 Håper du hadde en bra helg! Jeg er Kaya fra Utekos™, og hjelper deg gjerne med spørsmål relatert til nettbutikken. Hva kan jeg hjelpe deg med denne mandagen? Kanskje du vil utforske vår nye produktlansering: Utekos TechDawn™? 😊'
+    'Hei! 👋 Jeg er Kaya fra Utekos™, og hjelper deg gjerne med spørsmål relatert til nettbutikken. Hva kan jeg hjelpe deg med idag? 😊'
 
   const [chat] = useState(
     () =>

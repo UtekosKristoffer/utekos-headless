@@ -35,7 +35,7 @@ export function ProductGallery({ title, images }: ProductGalleryProps) {
           {images.map((image, index) => (
             <CarouselItem
               key={image.url}
-              className='relative rounded-2xl aspect-[2/3] md:p-8'
+              className='relative rounded-2xl aspect-[2/3]'
             >
               <Image
                 src={image.url}
