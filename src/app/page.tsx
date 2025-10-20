@@ -1,4 +1,5 @@
 // Path: src/app/page.tsx
+import { FindInStoreSection } from '@/components/frontpage/FindStoreSection'
 import { Suspense } from 'react'
 import { VideoSkeleton } from '@/app/produkter/components/VideoSkeleton'
 import { ProductVideoSection } from '@/app/produkter/components/ProductVideoSection'
@@ -45,6 +46,7 @@ const HomePage = async () => {
         <MomentsSection />
         <QualitySection />
       </HydrationBoundary>
+      <FindInStoreSection />
     </main>
   )
 }

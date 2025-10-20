@@ -6,6 +6,7 @@ import { PromiseSection } from './Sections/PromiseSection'
 import { CTASection } from './Sections/CTASection'
 import { PhilosophiesSection } from './Sections/PhilosophiesSection'
 import { AboutUsHeroSection } from './Sections/AboutUsHeroSection'
+import { FindInStoreSection } from '@/components/frontpage/FindStoreSection'
 export const metadata: Metadata = {
   title: 'Om Utekos | Vår historie og løfte til deg',
   description:
@@ -21,6 +22,7 @@ export default function AboutPage() {
       <PromiseSection />
       <AboutCarousel />
       <FindUsSection />
+          <FindInStoreSection />
       <CTASection />
     </main>
   )
