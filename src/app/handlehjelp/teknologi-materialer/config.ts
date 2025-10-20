@@ -42,7 +42,7 @@ export const technologyGroups: readonly TechnologyGroup[] = [
         title: 'Fillpower 650 Andedun – Uovertruffen varme',
         iconColor: 'text-orange-400',
         content:
-          'Kjernen i vår varmeste modell. Fillpower måler spensten og isolasjonsevnen i dun. 650 regnes som premium kvalitet, og gir en perfekt balanse mellom enestående varme og lav vekt, noe som skaper den unike, omsluttende følelsen av ekte dun.',
+          'Kjernen i vår bestselger. Fillpower måler spensten og isolasjonsevnen i dun. 650 regnes som premium kvalitet, og gir en perfekt balanse mellom enestående varme og lav vekt, noe som skaper den unike, omsluttende følelsen av ekte dun.',
         products: ['Utekos Dun™']
       },
       {

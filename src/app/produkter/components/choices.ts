@@ -8,7 +8,7 @@ interface ProductChoice {
 }
 export const choices: ProductChoice[] = [
   {
-    title: 'Vår mest nyeste og mest innovative modell',
+    title: 'Vår varmeste og mest allsidige modell',
     description:
       'Optimalisert etter erfaringer og tilbakemeldinger. Gir maksimal komfort og bevegelsesfrihet. Perfekt for hytteliv, bobil og all utekos.',
     href: '/produkter/utekos-techdawn' as Route,

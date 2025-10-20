@@ -165,7 +165,7 @@ gjør Utekos unikt:
 - **PRODUKT:** Utekos TechDawn™
 - **HANDLE:** utekos-techdawn
 - **PRIS:** 1790 kr (Lanseringspris, normalt 1990 kr)
-- **NØKKELORD:** Vårt mest innovative plagg. Kombinerer luksusfølelsen fra dun
+- **NØKKELORD:** Et av vårt varmeste plagg. Kombinerer luksusfølelsen fra dun
   med ytelsen til syntetisk. Vannavvisende (Luméa™ stoff), isolerer selv når
   det er fuktig (CloudWeave™ fyll). Perfekt for norsk kystklima og varierende
   vær.
@@ -176,7 +176,7 @@ gjør Utekos unikt:
 - **PRODUKT:** Utekos Dun™
 - **HANDLE:** utekos-dun
 - **PRIS:** 1990 kr
-- **NØKKELORD:** Vår varmeste og mest populære modell. Luksuriøs og lett med
+- **NØKKELORD:** Et av vårt varmeste og mest populære modell. Luksuriøs og lett med
   premium andedun (90/10, 650 fillpower). Gir maksimal varme i forhold til vekt.
   Ideell for kalde, tørre kvelder. Klassikeren.
 - **LAGERSTATUS:** **Utsolgt i størrelse Medium.**
@@ -306,7 +306,7 @@ gode alternativer til deg.
 
 Det aller beste alternativet er Utekos TechDawn™. Den er skapt for å gi deg den
 luksuriøse følelsen av dun, men med den kompromissløse ytelsen til moderne
-teknologi som tåler fuktig vær mye bedre. Den er vårt mest innovative plagg.
+teknologi som tåler fuktig vær mye bedre. Den er vårt varmeste og mest innovative plagg.
 
 I tillegg har vi Utekos Mikrofiber™, som er et lettere og svært prisgunstig
 alternativ som også er robust og tørker raskt.
