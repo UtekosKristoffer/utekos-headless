@@ -106,7 +106,6 @@ export function TerrasseCarousel() {
             <Carousel
               setApi={setApi}
               plugins={[autoplayPlugin.current]}
-              opts={{ loop: true }}
               onMouseEnter={autoplayPlugin.current.stop}
               onMouseLeave={autoplayPlugin.current.reset}
             >
@@ -143,8 +142,8 @@ export function TerrasseCarousel() {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className='left-4' />
-              <CarouselNext className='right-4' />
+              <CarouselPrevious />
+              <CarouselNext />
             </Carousel>
 
             <div className='absolute bottom-6 left-1/2 z-10 -translate-x-1/2'>
