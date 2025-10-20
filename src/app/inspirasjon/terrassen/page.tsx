@@ -9,7 +9,7 @@ import { TerraceIdeasGrid, terraceIdeasData } from './sections/TerraceIdeasGrid'
 import { BenefitsGrid, benefitsData } from './sections/BenefitsGrid'
 import { UseCasesGrid, useCasesData } from './sections/UseCasesGrid'
 import { CTASection } from './sections/CTASection'
-
+import { TerrasseCarousel } from './sections/TerrasseCarousel'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Terrasseliv og Utekos | Gjør uteplassen til ditt favorittrom',
@@ -59,6 +59,7 @@ export default function TerraceInspirationPage() {
         <TerraceHeroSection />
         <UseCasesGrid useCases={useCasesData} />
         <BenefitsGrid benefits={benefitsData} />
+        <TerrasseCarousel />
         <SeasonsSection />
         <TerraceIdeasGrid ideas={terraceIdeasData} />
         <SocialProof />

@@ -4,13 +4,12 @@ import { MapPin } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import IntersportLogo from '@public/logo/Intersport_logo.svg'
-// Google Maps-lenke til Intersport Laksevåg
+
 const INTERSPORT_LAKSEVAG_MAPS_URL =
   'https://www.google.com/maps/place/Intersport+Laksev%C3%A5g/'
-
 export function FindInStoreSection() {
   return (
-    <section className='w-full border-t border-neutral-800 bg-background py-16 sm:py-20'>
+    <section className='w-full border-t border-neutral-800 bg-background py-16 px-4 sm:py-20'>
       <div className='container mx-auto max-w-7xl'>
         <div className='relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/50 px-8 py-12 md:px-12'>
           {/* Ambient Glow */}

@@ -1,6 +1,7 @@
 // Path: src/app/page.tsx
 import { FindInStoreSection } from '@/components/frontpage/FindStoreSection'
 import { Suspense } from 'react'
+import { NewProductInStoreNotice } from '@/components/frontpage/NewProductInStoreNotice'
 import { VideoSkeleton } from '@/app/produkter/components/VideoSkeleton'
 import { ProductVideoSection } from '@/app/produkter/components/ProductVideoSection'
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
@@ -29,6 +30,7 @@ const HomePage = async () => {
       <HydrationBoundary state={dehydrate(queryClient)}>
         <HeroSection />
         <NewProductLaunchSection />
+        <NewProductInStoreNotice />
         <TestimonialConstellation />
         <SpecialOfferSection />
         <Suspense fallback={<VideoSkeleton />}>

@@ -12,7 +12,7 @@ const useCases: UseCase[] = [
     title: 'På terrassen',
     description:
       'Start dagen med kaffe ute, selv når duggen ligger tung. TechDawn™ holder deg varm og komfortabel.',
-    image: '/magasinet/helene-marius.png',
+    image: '/linn-4.png',
     tip: 'Ha alltid TechDawn™ hengende ved terrassedøren'
   },
   {

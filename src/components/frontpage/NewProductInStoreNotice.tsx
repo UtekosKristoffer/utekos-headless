@@ -5,13 +5,12 @@ import Image from 'next/image' // Endret fra Store
 import Link from 'next/link'
 import IntersportLogo from '@public/logo/Intersport_logo.svg'
 
-// Google Maps-lenke til Intersport Laksevåg for enkel navigasjon
 const INTERSPORT_LAKSEVAG_MAPS_URL =
   'https://www.google.com/maps/place/Intersport+Laksev%C3%A5g/'
 
 export function NewProductInStoreNotice() {
   return (
-    <section className='w-full py-12'>
+    <section className='w-full mt-12 py-12 mx-4'>
       <div className='container mx-auto max-w-7xl'>
         <div className='relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/50 p-8'>
           {/* Ambient Glow */}
@@ -38,9 +37,10 @@ export function NewProductInStoreNotice() {
             </h2>
 
             <p className='max-w-5xl text-balance text-lg leading-relaxed text-access/30'>
-              Fra og med onsdag 20.oktober kan du se, prøve og kjenne på vårt
-              splitter nye <strong>Utekos TechDawn™</strong> hos våre gode
-              venner på Intersport Laksevåg. Ta turen innom for å bli en av de første som får oppleve den neste generasjonen av Utekos!
+              Nå kan du se, prøve og kjenne på vårt splitter nye{' '}
+              <strong>Utekos TechDawn™</strong> hos våre gode venner på
+              Intersport Laksevåg. Ta turen innom for å bli en av de første som
+              får oppleve den neste generasjonen av Utekos!
             </p>
 
             <Button asChild size='lg' className='group mt-2'>
