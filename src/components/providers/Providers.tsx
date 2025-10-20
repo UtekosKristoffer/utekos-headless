@@ -25,26 +25,6 @@ export default function Providers({
   const queryClient = getQueryClient()
   const [cartId, setCartId] = useState<string | null>(initialCartId)
 
-  useEffect(() => {
-    if (window.innerHeight < 650) return
-    if (!document.cookie.includes('welcome-toast=2')) {
-      toast(
-        '🛍️ Velkommen til Utekos sin nettbutikk! Har du spørsmål? Klikk på chat-ikonet nede til høyre',
-        {
-          id: 'welcome-toast',
-          duration: Infinity,
-          onDismiss: () => {
-            document.cookie = 'welcome-toast=2; max-age=31536000; path=/'
-          },
-          classNames: {
-            title: 'text-black',
-            description: 'text-black'
-          }
-        }
-      )
-    }
-  }, [])
-
   return (
     <QueryClientProvider client={queryClient}>
       <HydrationBoundary state={dehydratedState}>
