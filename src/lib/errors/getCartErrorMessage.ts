@@ -19,7 +19,7 @@ export const getCartErrorMessage = (
 ): string => {
   const baseMessage = getErrorMessage(error, data)
   if (baseMessage === 'En uventet feil oppstod under behandling') {
-    return 'En uventet feil oppstod under behandling av handleposen'
+    return 'En uventet feil oppstod under behandling av handlekurven'
   }
 
   return baseMessage

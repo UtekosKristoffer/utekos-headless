@@ -50,7 +50,7 @@ export function CartTrigger({
     <DrawerTrigger asChild>
       <Button
         type='button'
-        aria-label={`Åpne handlepose, ${itemCount} ${itemCount === 1 ? 'vare' : 'varer'}`}
+        aria-label={`Åpne handlekurven, ${itemCount} ${itemCount === 1 ? 'vare' : 'varer'}`}
         variant='cart'
         className={cn(
           'relative flex h-11 w-11 items-center justify-center rounded-md',
@@ -74,7 +74,7 @@ export function CartTrigger({
         )}
 
         <span className='sr-only' aria-live='polite'>
-          {itemCount} {itemCount === 1 ? 'vare' : 'varer'} i handleposen
+          {itemCount} {itemCount === 1 ? 'vare' : 'varer'} i handlekurven
         </span>
       </Button>
     </DrawerTrigger>

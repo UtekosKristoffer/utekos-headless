@@ -67,7 +67,7 @@ export function ProductCard({
       type: 'ADD_LINES',
       input: { variantId: selectedVariant.id, quantity: 1 }
     })
-    toast.success(`${selectedVariant.title} er lagt i handleposen`)
+    toast.success(`${selectedVariant.title} er lagt i handlekurven!`)
     cartStore.send({ type: 'OPEN' })
   }
 

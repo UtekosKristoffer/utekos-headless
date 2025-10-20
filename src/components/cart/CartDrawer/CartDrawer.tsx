@@ -53,9 +53,9 @@ export function CartDrawer(): React.JSX.Element {
       <CartTrigger />
       <DrawerContent className='h-full max-h-full overflow-hidden'>
         <VisuallyHidden>
-          <DrawerTitle>Handlepose</DrawerTitle>
+          <DrawerTitle>Handlekurv</DrawerTitle>
           <DrawerDescription>
-            Oversikt over varer i handleposen og handlingsknapper.
+            Oversikt over varer i handlekurven og handlingsknapper.
           </DrawerDescription>
         </VisuallyHidden>
 

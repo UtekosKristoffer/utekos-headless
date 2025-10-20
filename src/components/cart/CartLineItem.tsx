@@ -163,7 +163,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
                 <AlertDialogHeader>
                   <AlertDialogTitle>Er du sikker?</AlertDialogTitle>
                   <AlertDialogDescription>
-                    Vil du fjerne {productTitle} fra handleposen din?
+                    Vil du fjerne {productTitle} fra handlekurven din?
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>

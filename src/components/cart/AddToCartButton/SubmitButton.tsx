@@ -50,7 +50,7 @@ export function SubmitButton({
         <div className='absolute left-0 ml-4'>
           <PlusIcon className='h-5' />
         </div>
-        Legg i handleposen
+        Legg i handlekurv
       </button>
     )
   }
@@ -59,7 +59,7 @@ export function SubmitButton({
     <button
       type='submit'
       disabled={isPending || isDisabled}
-      aria-label='Legg i handleposen'
+      aria-label='Legg i kurv'
       className={clsx(buttonClasses, {
         'hover:opacity-90': true,
         [disabledClasses]: isDisabled
@@ -68,7 +68,7 @@ export function SubmitButton({
       <div className='absolute left-0 ml-4'>
         <PlusIcon className='h-5' />
       </div>
-      {isPending ? 'Legger til...' : 'Legg i handleposen'}
+      {isPending ? 'Legger til...' : 'Legg i kurv'}
     </button>
   )
 }

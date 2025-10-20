@@ -12,7 +12,7 @@ export function EmptyCartRecommendations() {
   if (!products || products.length === 0) {
     return (
       <div className='text-center text-muted-foreground'>
-        <p className='text-base'>Handleposen din er tom</p>
+        <p className='text-base'>Handlekurven din er tom</p>
         <p className='mt-1 text-sm'>Legg til produkter for å komme i gang.</p>
       </div>
     )

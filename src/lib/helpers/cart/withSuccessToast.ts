@@ -10,7 +10,7 @@ export const withSuccessToast =
     submitHandler(values)
     if (selectedVariant) {
       toast.success(
-        `${values.quantity} x ${selectedVariant.title} lagt i handleposen din!`
+        `${values.quantity} x ${selectedVariant.title} lagt i handlekurven din!`
       )
     }
   }
