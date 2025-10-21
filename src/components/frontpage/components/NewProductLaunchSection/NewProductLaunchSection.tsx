@@ -71,7 +71,7 @@ export function NewProductLaunchSection() {
             threshold={1}
           >
             <h2 className='mb-4 text-4xl font-bold leading-tight text-accent/80  sm:text-5xl'>
-              Varmen du kan stole på
+              Nyhet!
             </h2>
           </AnimatedBlock>
           <AnimatedBlock
