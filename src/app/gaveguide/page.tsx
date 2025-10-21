@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { PersonaGrid } from './components/PersonaGrid'
+import { ProductCarousel } from '@/app/gaveguide/components/ProductCardCarousel'
 import { TrustSection } from './components/TrustSection'
 import { SocialProofSection } from './components/SocialProofSection'
 import { GaveGuideHero } from './components/GaveGuideHero'
@@ -42,7 +42,9 @@ export default function GaveguidePage() {
   return (
     <main className='bg-background'>
       <GaveGuideHero />
-      <PersonaGrid />
+      <section className='container md:max-w-7xl mx-auto py-12 lg:py-16 sm:py-16'>
+        <ProductCarousel />
+      </section>
       <SocialProofSection />
       <TrustSection />
     </main>

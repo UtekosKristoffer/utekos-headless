@@ -12,7 +12,7 @@ const productUrl = '/produkter/utekos-techdawn'
 
 // Lanseringstilbud konfigurasjon
 const originalPrice = 1990
-const discountAmount = 200
+const discountAmount = 199
 const currentPrice = originalPrice - discountAmount
 const discountPercent = 10
 
@@ -58,10 +58,9 @@ export function NewProductLaunchSection() {
               <span className='text-sm font-semibold text-emerald-400'>
                 Lanseringstilbud
               </span>
-              <div className='h-3.5 w-px bg-emerald-400/30' />
-              <span> 🎉 </span>
+              <span> 🎉</span>
               <span className='text-sm font-bold text-emerald-400'>
-                {discountPercent}% RABATT
+                Spar 199 kr!
               </span>
             </AnimatedBlock>
           </div>
@@ -82,8 +81,8 @@ export function NewProductLaunchSection() {
           >
             <p className='mb-8 max-w-prose text-lg leading-relaxed text-access/80'>
               Vi introduserer {productName} – vår varmeste og mest allsidige
-              modell. Perfekt for deg som stiller de høyeste kravene
-              til komfort og funksjonalitet.
+              modell. Perfekt for deg som stiller de høyeste kravene til komfort
+              og funksjonalitet.
             </p>
           </AnimatedBlock>
           <div className='mb-8 w-full text-access/80 space-y-3'>
@@ -105,27 +104,14 @@ export function NewProductLaunchSection() {
             <div className='flex w-full flex-col gap-6'>
               {/* Pris-visning */}
               <div className='flex flex-col gap-3'>
-                {/* Original pris med rabatt */}
-                <div className='flex items-center gap-3'>
-                  <span className='text-xl text-access/60 line-through decoration-2'>
-                    {originalPrice},-
-                  </span>
-                  <div className='flex items-center gap-2 rounded-full bg-red-500/10 px-3 py-1 ring-1 ring-red-500/20'>
-                    <TrendingDown className='h-3.5 w-3.5 text-red-400' />
-                    <span className='text-sm font-semibold text-red-400'>
-                      −{discountAmount} kr
-                    </span>
-                  </div>
-                </div>
-
                 {/* Nåværende pris med gradient */}
                 <div className='flex flex-wrap items-baseline gap-3'>
                   <p className='bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-5xl font-bold text-transparent'>
                     {currentPrice},-
                   </p>
                   <span className='text-sm text-access/80'>inkl. mva</span>
-                  <span className='rounded-full bg-emerald-500/10 px-3 py-1 text-sm font-bold text-emerald-400 ring-1 ring-emerald-500/20'>
-                    Spar {discountPercent}%
+                  <span className='rounded-full line-through bg-emerald-500/10 px-3 py-1 text-sm font-bold text-emerald-400 ring-1 ring-emerald-500/20'>
+                    {originalPrice},-
                   </span>
                 </div>
 

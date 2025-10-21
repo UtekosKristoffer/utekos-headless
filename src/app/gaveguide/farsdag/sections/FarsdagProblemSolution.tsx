@@ -7,7 +7,7 @@ export function FarsdagProblemSolution() {
         <h2 className='text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl'>
           Kjenner du deg igjen?
         </h2>
-        <div className='prose prose-lg mx-auto mt-6 text-muted-foreground'>
+        <div className='prose prose-lg mx-auto mt-6 text-access/30'>
           <p>
             Farsdagen nærmer seg, og du leter etter den perfekte gaven til
             mannen som tilsynelatende har alt. Han trenger ikke flere ting, men

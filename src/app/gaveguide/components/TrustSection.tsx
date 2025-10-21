@@ -16,7 +16,7 @@ export function TrustSection() {
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8 text-center'>
             <div className='flex flex-col items-center'>
               <CheckIcon className='h-8 w-8 text-cyan-400 mb-4' />
-              <h3 className='font-semibold mb-2'>60 dagers bytterett</h3>
+              <h3 className='font-semibold mb-2'>14 dagers åpent kjøp</h3>
               <p className='text-sm text-muted-foreground'>
                 Bytt farge eller størrelse uten stress. Vi hjelper deg gjerne.
               </p>
@@ -31,10 +31,9 @@ export function TrustSection() {
             </div>
             <div className='flex flex-col items-center'>
               <CheckIcon className='h-8 w-8 text-amber-400 mb-4' />
-              <h3 className='font-semibold mb-2'>Norsk design og kvalitet</h3>
+              <h3 className='font-semibold mb-2'>Trygg handel</h3>
               <p className='text-sm text-muted-foreground'>
-                En gave som er designet i Norge for norske forhold, og som er
-                laget for å vare.
+                Vil tilbyr betaling med Klarna og Vipps
               </p>
             </div>
           </div>

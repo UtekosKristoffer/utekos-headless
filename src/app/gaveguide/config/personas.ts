@@ -26,7 +26,7 @@ export const personas: Persona[] = [
     description:
       'For de sene kveldene for anker, eller når en uventet bris gjør seg gjeldende på dekk. En favoritt i gjestehavna.',
     href: '/produkter/utekos-dun' as Route, // <--- Her er endringen
-    imageUrl: '/og-image-batliv.webp'
+    imageUrl: '/kateoglinn-redigert.jpg'
   },
   {
     title: 'Til den som har alt',

@@ -33,11 +33,6 @@ export function GaveGuideHero() {
           utallige #utekosøyeblikk. Perfekt for den som har alt, men som
           fortjener det aller beste.
         </p>
-        <div className='mt-8'>
-          <Button asChild size='lg'>
-            <Link href='/produkter'>Se alle produkter</Link>
-          </Button>
-        </div>
       </div>
     </section>
   )

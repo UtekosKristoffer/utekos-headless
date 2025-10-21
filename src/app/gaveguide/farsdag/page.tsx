@@ -6,7 +6,7 @@ import { FarsdagUrgencyCta } from './sections/FarsdagUrgencyCta'
 import { AllProductsCarousel } from '@/components/ProductCard/AllProductsCarousel'
 import { Suspense } from 'react'
 import type { Metadata } from 'next'
-
+import { ProductCarousel } from '@/app/gaveguide/components/ProductCardCarousel'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Farsdagsgave: Gaven som varmer til pappaen som har alt | Utekos',
@@ -52,12 +52,12 @@ export default function FarsdagGaveguidePage() {
       <FarsdagProblemSolution />
       <FarsdagBenefits />
       <FarsdagWhyPerfect />
-      <FarsdagUrgencyCta />
       <section className='container md:max-w-7xl max-w-[95%] mx-auto py-12 lg:py-16 sm:py-16'>
         <Suspense fallback={<ProductCarouselSkeleton />}>
-          <AllProductsCarousel />
+          <ProductCarousel />
         </Suspense>
       </section>
+      <FarsdagUrgencyCta />
     </main>
   )
 }

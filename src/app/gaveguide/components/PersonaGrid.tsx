@@ -54,7 +54,7 @@ export function PersonaGrid() {
             Finn gaven som passer perfekt
           </h2>
           <p className='mx-auto mt-4 max-w-2xl text-lg text-muted-foreground'>
-            Vi har gjort det enkelt for deg. Velg livsstilen som passer best til
+            Vi har gjort det enkelt for deg. Velg Utekosen som passer best til
             den du vil glede.
           </p>
         </div>
