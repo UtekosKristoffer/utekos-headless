@@ -45,21 +45,10 @@ export function NewProductLaunchSection() {
                 <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-sky-500'></span>
               </span>
               <span className='text-base font-semibold text-sky-400'>
-                Nyhet
-              </span>
-            </AnimatedBlock>
-
-            {/* NY: Lanseringstilbud badge */}
-            <AnimatedBlock
-              className='will-animate-fade-in-up inline-flex items-center gap-2.5 rounded-full border border-emerald-800/30 bg-emerald-900/20 px-4 py-2'
-              delay='0.35s'
-              threshold={1}
-            >
-              <span className='text-sm font-semibold text-emerald-400'>
                 Lanseringstilbud
               </span>
-              <span> 🎉</span>
-              <span className='text-sm font-bold text-emerald-400'>
+              <span>🎉</span>
+              <span className='text-sm font-bold text-sky-400'>
                 Spar 199 kr!
               </span>
             </AnimatedBlock>
