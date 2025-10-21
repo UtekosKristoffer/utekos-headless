@@ -99,7 +99,11 @@ export function NewProductLaunchSection() {
                     <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-sky-500'></span>
                   </span>
                   <span className='whitespace-nowrap text-base font-semibold text-sky-400'>
-                    Lansering: Spar 449 kr & få gratis Buff™
+                    Tilbud
+                  </span>
+                  <span>🎉</span>{' '}
+                  <span className='whitespace-nowrap text-base font-semibold text-sky-400'>
+                    Få gratis Utekos Buff™ og spar 449 kr!
                   </span>
                 </AnimatedBlock>
               </div>
