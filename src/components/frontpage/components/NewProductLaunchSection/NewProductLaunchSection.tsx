@@ -12,9 +12,8 @@ const productUrl = '/produkter/utekos-techdawn'
 
 // Lanseringstilbud konfigurasjon
 const originalPrice = 1990
-const discountAmount = 199
+const discountAmount = 200
 const currentPrice = originalPrice - discountAmount
-const discountPercent = 10
 
 export function NewProductLaunchSection() {
   return (
@@ -49,7 +48,7 @@ export function NewProductLaunchSection() {
               </span>
               <span>🎉</span>
               <span className='text-sm font-bold text-sky-400'>
-                Spar 199 kr!
+                Spar 200 kr!
               </span>
             </AnimatedBlock>
           </div>
