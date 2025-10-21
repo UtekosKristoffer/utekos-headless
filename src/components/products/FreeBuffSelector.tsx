@@ -56,7 +56,7 @@ export function FreeBuffSelector({
       {/* Fargevalg */}
       {includeBuff && (
         <div className='space-y-3 pl-8 animate-in fade-in slide-in-from-top-2 duration-300'>
-          <h4 className='text-sm font-semibold text-foreground/80 uppercase tracking-wide'>
+          <h4 className='text-sm font-semibold text-foreground/80 tracking-wide'>
             Velg farge
           </h4>
           <div className='flex flex-wrap gap-3'>
