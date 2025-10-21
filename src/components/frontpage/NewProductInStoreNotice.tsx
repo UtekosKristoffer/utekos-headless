@@ -33,7 +33,7 @@ export function NewProductInStoreNotice() {
             </div>
 
             <h2 className='text-balance text-2xl font-bold tracking-tight text-white sm:text-3xl'>
-              Nyhet på plass hos Intersport Laksevåg!
+              På plass hos Intersport Laksevåg!
             </h2>
 
             <p className='max-w-5xl text-balance text-lg leading-relaxed text-access/30'>
