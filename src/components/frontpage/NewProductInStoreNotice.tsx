@@ -37,7 +37,7 @@ export function NewProductInStoreNotice() {
             </h2>
 
             <p className='max-w-5xl text-balance text-lg leading-relaxed text-access/30'>
-              Nå kan du se, prøve og kjenne på vårt splitter nye{' '}
+              Nå kan du se, prøve og kjenne på vår splitter nye{' '}
               <strong>Utekos TechDawn™</strong> hos våre gode venner på
               Intersport Laksevåg. Ta turen innom for å bli en av de første som
               får oppleve den neste generasjonen av Utekos!
