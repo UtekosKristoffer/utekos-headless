@@ -89,13 +89,15 @@ export function TechDawnLaunchOffer({
             </p>
           </div>
         </div>
-        <FreeBuffSelector
-          buffProduct={buffProduct}
-          includeBuff={includeBuff}
-          onIncludeBuffChange={setIncludeBuff}
-          selectedBuffColor={selectedBuffColor}
-          onBuffColorChange={setSelectedBuffColor}
-        />
+        <div className='flex justify-center'>
+          <FreeBuffSelector
+            buffProduct={buffProduct}
+            includeBuff={includeBuff}
+            onIncludeBuffChange={setIncludeBuff}
+            selectedBuffColor={selectedBuffColor}
+            onBuffColorChange={setSelectedBuffColor}
+          />
+        </div>
       </div>
     </AnimatedBlock>
   )

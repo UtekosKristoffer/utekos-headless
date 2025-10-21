@@ -19,20 +19,20 @@ type ProductGalleryProps = {
 
 export function ProductGallery({ title, images }: ProductGalleryProps) {
   if (images.length === 0) {
-    return <div className='relative aspect-video rounded-2xl w-full' />
+    return <div className='relative w-full rounded-2xl aspect-[2/3]' />
   }
 
   return (
-    <div>
+    <div className='w-full'>
       <Carousel
         opts={{
           loop: images.length > 1
         }}
-        className='mx-auto w-full max-w-sm overflow-hidden rounded-2xl md:max-w-md'
+        className='relative w-full max-w-lg mx-auto rounded-2xl aspect-[2/3] overflow-hidden'
         aria-label={`Produktbilder for ${title}`}
       >
         <CarouselContent>
-          {images.map((image, index) => (
+          {images.map(image => (
             <CarouselItem
               key={image.url}
               className='relative rounded-2xl aspect-[2/3]'
@@ -41,15 +41,20 @@ export function ProductGallery({ title, images }: ProductGalleryProps) {
                 src={image.url}
                 alt={image.altText || `Bilde av ${title}`}
                 fill
-                sizes='(min-width: 1024px) 24rem, (min-width: 768px) 20rem, 16rem'
+                sizes='(min-width: 1024px) 50vw, 100vw'
+                quality={100}
                 className='object-cover md:object-contain rounded-2xl'
                 priority
               />
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className='left-2' />
-        <CarouselNext className='right-2' />
+        {images.length > 1 && (
+          <>
+            <CarouselPrevious className='left-2' />
+            <CarouselNext className='right-2' />
+          </>
+        )}
       </Carousel>
     </div>
   )
