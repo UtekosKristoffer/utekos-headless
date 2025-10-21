@@ -1,8 +1,7 @@
-// Path: src/app/produkter/[handle]/ProductPageView/components/PriceActivityPanel.tsx
 'use client'
 
 import { Price } from '@/components/jsx/Price'
-import { ShieldAlert, Sparkles, TrendingDown } from 'lucide-react'
+import { ShieldAlert } from 'lucide-react'
 import type { ReactNode } from 'react'
 
 export interface PriceActivityPanelProps {
@@ -16,7 +15,6 @@ export interface PriceActivityPanelProps {
 const LAUNCH_OFFERS = {
   'utekos-techdawn': {
     discountAmount: 200,
-    discountPercent: 10,
     label: 'Lanseringstilbud'
   }
 } as const
@@ -43,7 +41,7 @@ export default function PriceActivityPanel({
   return (
     <section aria-label='Pris og tilgjengelighet' className='space-y-4'>
       {hasLaunchOffer && (
-        <div className='inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-blue-500/20 px-4 py-2 ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 hover:ring-white/20 hover:scale-[1.02]'>
+        <div className='inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-blue-500/20 px-4 py-2 ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:ring-white/20'>
           <div className='relative flex h-2 w-2'>
             <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75' />
             <span className='relative inline-flex h-2 w-2 rounded-full bg-emerald-500' />
@@ -54,15 +52,14 @@ export default function PriceActivityPanel({
             </span>
             <div className='h-4 w-px bg-white/20' />
             <span className='text-sm font-bold text-emerald-400'>
-              {launchOffer.discountPercent}% RABATT
+              Spar kr {launchOffer.discountAmount} 🎉
             </span>
           </div>
-          <Sparkles className='h-4 w-4 text-emerald-400' />
         </div>
       )}
 
-      {hasLaunchOffer && originalPrice && (
-        <div className='flex items-center gap-3'>
+      <div className='flex items-baseline gap-3'>
+        {hasLaunchOffer && originalPrice && (
           <span className='text-lg text-muted-foreground/60 line-through decoration-2'>
             {new Intl.NumberFormat('nb-NO', {
               style: 'currency',
@@ -71,16 +68,8 @@ export default function PriceActivityPanel({
               maximumFractionDigits: 2
             }).format(originalPrice)}
           </span>
-          <div className='flex items-center gap-2 rounded-full bg-red-500/10 px-3 py-1 ring-1 ring-red-500/20'>
-            <TrendingDown className='h-3.5 w-3.5 text-red-400' />
-            <span className='text-sm font-semibold text-red-400'>
-              −{launchOffer.discountAmount} kr
-            </span>
-          </div>
-        </div>
-      )}
+        )}
 
-      <div className='flex items-baseline gap-3'>
         {hasLaunchOffer ?
           <div className='bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent'>
             <Price amount={priceAmount} currencyCode={currencyCode} />
@@ -90,7 +79,7 @@ export default function PriceActivityPanel({
 
       {hasLaunchOffer && (
         <p className='text-sm text-muted-foreground'>
-          Begrenset tilbud ved lansering 🎉
+          Begrenset tilbud ved lansering
         </p>
       )}
 
