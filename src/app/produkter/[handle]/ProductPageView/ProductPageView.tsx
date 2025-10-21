@@ -94,7 +94,7 @@ export default function ProductPageView({
     quantity > 0 && quantity < STOCK_THRESHOLD ? quantity : undefined
 
   return (
-    <main className='relative container mx-auto mt-10 overflow-hidden p-4 md:p-8'>
+    <main className='relative container mx-auto mt-10 p-4 md:p-8'>
       <div className='absolute inset-0 -z-10 opacity-20'>
         <div
           className='absolute left-1/4 top-0 h-[600px] w-[600px] blur-3xl'

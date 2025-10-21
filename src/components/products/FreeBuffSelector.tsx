@@ -68,7 +68,7 @@ export function FreeBuffSelector({
                   type='button'
                   onClick={() => onBuffColorChange(color)}
                   className={cn(
-                    'group relative flex flex-1 min-w-[140px] items-center gap-3 rounded-xl border-2 px-4 py-3 transition-all duration-200',
+                    'group relative flex flex-1 min-w-[140px] items-center mx-auto gap-3 rounded-xl border-2 px-4 py-3 transition-all duration-200',
                     'hover:shadow-md active:scale-98',
                     isSelected ?
                       'border-emerald-600 bg-emerald-50/5 shadow-sm'
