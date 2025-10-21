@@ -1,7 +1,7 @@
 // Path: src/components/sections/NewProductInStoreNotice.tsx
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
-import Image from 'next/image' // Endret fra Store
+import Image from 'next/image'
 import Link from 'next/link'
 import IntersportLogo from '@public/logo/Intersport_logo.svg'
 
@@ -10,8 +10,8 @@ const INTERSPORT_LAKSEVAG_MAPS_URL =
 
 export function NewProductInStoreNotice() {
   return (
-    <section className='w-full mt-12 py-12 mx-4'>
-      <div className='container mx-auto max-w-7xl'>
+    <section className='mt-12 w-full py-12'>
+      <div className='container mx-auto max-w-6xl px-4 md:max-w-7xl'>
         <div className='relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/50 p-8'>
           {/* Ambient Glow */}
           <div

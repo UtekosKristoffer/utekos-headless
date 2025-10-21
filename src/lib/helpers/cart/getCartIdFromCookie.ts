@@ -1,3 +1,4 @@
+'use server'
 // Path: src/lib/helpers/getCartIdFromCookie.ts
 
 import { cookies } from 'next/headers'

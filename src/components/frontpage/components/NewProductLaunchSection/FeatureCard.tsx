@@ -2,13 +2,14 @@
 
 import { cn } from '@/lib/utils/className'
 import { useEffect, useRef, useState } from 'react'
-import { CloudRain, Feather, ShieldCheck } from 'lucide-react'
+import { CloudRain, Feather, Gift, ShieldCheck } from 'lucide-react' // Importer Gift
 
 // Mapper streng-identifikator til den faktiske komponenten
 const iconMap = {
   'cloud-rain': CloudRain,
   'feather': Feather,
-  'shield-check': ShieldCheck
+  'shield-check': ShieldCheck,
+  'gift': Gift // Legg til det nye ikonet her
 }
 
 export interface Feature {

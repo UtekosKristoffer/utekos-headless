@@ -1,5 +1,5 @@
-// Path: src/app/produkter/[handle]/ProductPageView/ProductPageView.tsx
 'use client'
+import { useState } from 'react'
 import { ProductPageAccordion } from '@/app/produkter/[handle]/ProductPageAccordion/ProductPageAccordion'
 import { renderOptionComponent } from '@/app/produkter/[handle]/ProductPageView/helpers/renderOptionComponent'
 import { RelatedProducts } from '@/app/produkter/[handle]/RelatedProducts/RelatedProducts'
@@ -28,6 +28,7 @@ import ProductGalleryCard from './ProductGalleryCard'
 import PriceActivityPanel from './PriceActivityPanel'
 import { ProductDescription } from './ProductDescription'
 import { TrustSignals } from './TrustSignals'
+import { TechDawnLaunchOffer } from './TechDawnLaunchOffer'
 
 const SmartRealTimeActivity = dynamic(
   () =>
@@ -51,7 +52,7 @@ const ProductGallery = dynamic(
   }
 )
 
-const STOCK_THRESHOLD = 31 // Grense for å vise "lavt lager"-melding
+const STOCK_THRESHOLD = 31
 
 export default function ProductPageView({
   productData,
@@ -62,6 +63,10 @@ export default function ProductPageView({
   relatedProducts,
   colorHexMap
 }: ProductPageViewProps) {
+  const [additionalLine, setAdditionalLine] = useState<
+    { variantId: string; quantity: number } | undefined
+  >(undefined)
+
   const { title, options } = productData
   const selectedVariantProfile = selectedVariant.variantProfileData
   const productSubtitle =
@@ -90,7 +95,6 @@ export default function ProductPageView({
 
   return (
     <main className='relative container mx-auto mt-10 overflow-hidden p-4 md:p-8'>
-      {/* Ambient background glow */}
       <div className='absolute inset-0 -z-10 opacity-20'>
         <div
           className='absolute left-1/4 top-0 h-[600px] w-[600px] blur-3xl'
@@ -106,7 +110,6 @@ export default function ProductPageView({
         />
       </div>
 
-      {/* Brødsmuler */}
       <AnimatedBlock
         className='will-animate-fade-in-up'
         delay='0s'
@@ -195,10 +198,18 @@ export default function ProductPageView({
                 )}
               </div>
               <TrustSignals />
+
+              {productData.handle === 'utekos-techdawn' && (
+                <TechDawnLaunchOffer
+                  onAdditionalLineChange={setAdditionalLine}
+                />
+              )}
+
               <div className='mt-8'>
                 <AddToCart
                   product={productData}
                   selectedVariant={selectedVariant}
+                  {...(additionalLine && { additionalLine })}
                 />
               </div>
               <AnimatedBlock
