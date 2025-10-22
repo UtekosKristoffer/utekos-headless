@@ -18,6 +18,7 @@ export function SocialProofSection() {
               <div className='flex items-center justify-center gap-4'>
                 <div className='h-12 w-12 overflow-hidden rounded-full'>
                   {' '}
+
                   <Image
                     src={mormor3}
                     alt='Profilbilde av Bjørg H.'

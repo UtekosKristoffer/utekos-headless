@@ -14,7 +14,7 @@ import { ClockIcon, ShieldCheckIcon } from '@heroicons/react/24/outline'
 import { ThermometerIcon } from 'lucide-react'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import KvamskogenPic from '@public/kvamskogen_1.webp'
-import Mormor from '@public/mormor3.webp'
+import Mormor from '@public/kristoffer.png'
 
 const images = [
   {
