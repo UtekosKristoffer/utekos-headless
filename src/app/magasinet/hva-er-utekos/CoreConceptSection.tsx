@@ -19,7 +19,7 @@ const features = [
   {
     id: 2,
     icon: Zap,
-    title: 'Toveis YKK-glidelås',
+    title: 'Toveis YKK®-glidelås',
     description:
       'Bransjens beste for enkel tilgang og presis temperaturregulering.',
     color: 'from-amber-500 to-orange-500'

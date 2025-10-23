@@ -15,7 +15,7 @@ const features = [
   },
   {
     Icon: GitCommitVertical,
-    title: 'Toveis YKK-glidelås',
+    title: 'Toveis YKK®-glidelås',
     description:
       'Åpne nedenfra for full bevegelsesfrihet, eller ovenfra for å slippe ut overskuddsvarme.'
   }

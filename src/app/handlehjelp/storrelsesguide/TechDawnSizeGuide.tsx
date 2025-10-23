@@ -18,7 +18,7 @@ const techDawnFeatures = [
     Icon: GitCommitVertical,
     title: 'Kvalitet i detaljene',
     description:
-      'YKK-glidelåser i verdensklasse holder deg tørr og garanterer langvarig, problemfri bruk.'
+      'YKK®-glidelåser i verdensklasse garanterer langvarig og problemfri bruk.'
   }
 ]
 export function TechDawnSizeGuide() {

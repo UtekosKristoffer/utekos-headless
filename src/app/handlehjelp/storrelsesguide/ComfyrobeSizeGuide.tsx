@@ -38,7 +38,7 @@ const comfyrobeFeatures = [
   },
   {
     Icon: GitCommitVertical,
-    title: 'Toveis YKK-glidelås',
+    title: 'Toveis YKK®-glidelås',
     description:
       'Gir deg full kontroll over ventilasjon og gjør av- og påkledning enkelt, selv når du har hendene fulle.'
   }

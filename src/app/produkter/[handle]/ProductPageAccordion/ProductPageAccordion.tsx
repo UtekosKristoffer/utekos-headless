@@ -79,7 +79,7 @@ function ProductDetailsAccordionSection({
         }}
       />
 
-      <AccordionTrigger className='relative z-10 px-6 py-4 text-foreground/70 transition-colors duration-200 hover:text-foreground data-[state=open]:text-foreground hover:no-underline'>
+      <AccordionTrigger className='relative z-10 px-6 py-4 text-access/70 transition-colors duration-200 hover:text-access data-[state=open]:text-foreground hover:no-underline'>
         <div className='flex items-center gap-4'>
           <div
             className='flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-700 bg-background transition-transform duration-200 group-hover:scale-105'
