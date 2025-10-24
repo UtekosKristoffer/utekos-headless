@@ -52,6 +52,51 @@ export type PurchaseCustomData = {
   order_id?: string
 }
 
+// --- Add to Cart ---
+export type AddToCartContent = {
+  id: string
+  quantity?: number
+  item_price?: number
+}
+
+export type AddToCartInput = {
+  value?: number
+  currency?: string
+  contents: AddToCartContent[]
+  content_type?: 'product' | 'product_group'
+  content_ids?: string[]
+  eventId?: string
+  sourceUrl?: string
+  userData: {
+    fbp?: string
+    fbc?: string
+    client_user_agent?: string
+    client_ip_address?: string
+    external_id?: string
+  }
+  occuredAt?: number
+}
+
+// --- Initiate Checkout ---
+export type InitiateCheckoutInput = {
+  value?: number
+  currency?: string
+  contents?: AddToCartContent[]
+  num_items?: number
+  content_type?: 'product' | 'product_group'
+  content_ids?: string[]
+  eventId?: string
+  sourceUrl?: string
+  userData: {
+    fbp?: string
+    fbc?: string
+    client_user_agent?: string
+    client_ip_address?: string
+    external_id?: string
+  }
+  occuredAt?: number
+}
+
 export type MetaUserData = {
   fbp?: string
   fbc?: string

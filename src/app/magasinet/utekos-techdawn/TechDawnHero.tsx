@@ -31,7 +31,7 @@ export function TechDawnHero() {
             Utekos TechDawn™
           </h1>
           <p className='text-xl text-gray-200 font-light'>
-            Vår varmeste og mes allsidige modell
+            Vår varmeste og mest allsidige modell
           </p>
         </div>
       </div>

@@ -19,7 +19,7 @@ export const comfyrobeFeatures = [
     icon: Move3d,
     title: 'Gjennomtenkt frihet',
     description:
-      'En romslig, unisex passform med splitter i sidene og en smart toveis YKK-glidelås gir deg full bevegelsesfrihet til å nyte øyeblikket.',
+      'En romslig, unisex passform med splitter i sidene og en smart toveis YKK-glidelås® gir deg full bevegelsesfrihet til å nyte øyeblikket.',
     colorClasses: 'text-teal-400 border-teal-400/20 bg-teal-900/20'
   }
 ]

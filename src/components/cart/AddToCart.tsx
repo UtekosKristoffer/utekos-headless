@@ -1,3 +1,4 @@
+// Path: src/components/cart/AddToCart.tsx
 'use client'
 
 import { Form } from '@/components/ui/form'
@@ -16,12 +17,44 @@ import type {
   ShopifyProduct,
   ShopifyProductVariant
 } from '@types'
+
 import { useContext, useEffect, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import type { ActorRef, StateFrom } from 'xstate'
 import { ModalSubmitButton } from './AddToCartButton/ModalSubmitButton'
 import { QuantitySelector } from './QuantitySelector'
+import type { AddToCartInput } from '@types'
+/** Les en cookie trygt lokalt (unngår nye imports). */
+function getCookie(name: string): string | undefined {
+  if (typeof document === 'undefined') return undefined
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop()?.split(';').shift()
+  return undefined
+}
+
+/** Fire-and-forget JSON (sendBeacon når mulig, ellers fetch keepalive). */
+function sendJSON(url: string, data: unknown): void {
+  try {
+    const payload = JSON.stringify(data)
+    if (typeof navigator !== 'undefined' && 'sendBeacon' in navigator) {
+      const ok = navigator.sendBeacon(
+        url,
+        new Blob([payload], { type: 'application/json' })
+      )
+      if (ok) return
+    }
+    void fetch(url, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: payload,
+      keepalive: true
+    })
+  } catch {
+    // stille fail – må aldrig blokkere add-to-cart
+  }
+}
 
 export function AddToCart({
   product,
@@ -70,6 +103,7 @@ export function AddToCart({
   const handleAddToCart = async (values: AddToCartFormValues) => {
     startTransition(async () => {
       try {
+        // 1) Legg til hovedlinje
         await createMutationPromise(
           {
             type: 'ADD_LINES',
@@ -81,6 +115,7 @@ export function AddToCart({
           cartActor
         )
 
+        // 2) Legg til gratis buffer + rabattkode (som før)
         if (additionalLine) {
           await createMutationPromise(
             {
@@ -115,39 +150,109 @@ export function AddToCart({
           }
         }
 
+        // 3) Brukerfeedback (som før)
         const successMessage =
           additionalLine ?
             `${product.title} + gratis Utekos Buff™ er lagt i handlekurven!`
           : `${product.title} er lagt i handlekurven!`
         toast.success(successMessage)
 
-        if (typeof window.fbq === 'function' && selectedVariant) {
-          const fbqData: any = {
-            content_ids: [selectedVariant.id],
-            content_name: product.title,
-            content_type: 'product',
-            currency: selectedVariant.price.currencyCode,
-            value: parseFloat(selectedVariant.price.amount),
-            num_items: values.quantity
-          }
+        // === 4) TRACKING (Pixel + CAPI) – full typesikkerhet og uten 'any' ===
+
+        if (selectedVariant) {
+          // Beregn verdier én gang
+          const basePrice = Number.parseFloat(selectedVariant.price.amount)
+          const currency = selectedVariant.price.currencyCode
+          let totalQty = values.quantity
+          const contents: {
+            id: string
+            quantity?: number
+            item_price?: number
+          }[] = [
+            {
+              id: selectedVariant.id,
+              quantity: values.quantity,
+              item_price: basePrice
+            }
+          ]
+          const contentIds: string[] = [selectedVariant.id]
+          let contentName = product.title
+
           if (additionalLine) {
-            fbqData.content_ids.push(additionalLine.variantId)
-            fbqData.content_name += ' + Utekos Buff™'
-            fbqData.num_items += additionalLine.quantity
+            contents.push({
+              id: additionalLine.variantId,
+              quantity: additionalLine.quantity
+              // pris 0 – du gir den gratis; item_price lar vi stå tom for denne
+            })
+            contentIds.push(additionalLine.variantId)
+            totalQty += additionalLine.quantity
+            contentName += ' + Utekos Buff™'
           }
-          window.fbq('track', 'AddToCart', fbqData)
+
+          const value = basePrice * values.quantity // NB: gratislinjen påvirker ikke value
+
+          // (4a) Pixel AddToCart med eventID for ev. dedupe
+          const eventID = `atc_${selectedVariant.id}_${Date.now()}`
+          if (
+            typeof window !== 'undefined'
+            && typeof window.fbq === 'function'
+          ) {
+            const fbqParams: {
+              contents: { id: string; quantity?: number; item_price?: number }[]
+              content_type: 'product'
+              value?: number
+              currency?: string
+              content_ids?: string[]
+              content_name?: string
+              num_items?: number
+            } = {
+              contents,
+              content_type: 'product',
+              value,
+              currency,
+              content_ids: contentIds,
+              content_name: contentName,
+              num_items: totalQty
+            }
+            window.fbq('track', 'AddToCart', fbqParams, { eventID })
+          }
+
+          // (4b) CAPI AddToCart (server) – fire-and-forget
+          const fbp = getCookie('_fbp')
+          const fbc = getCookie('_fbc')
+          const ua =
+            typeof navigator !== 'undefined' ? navigator.userAgent : undefined
+
+          const capiPayload: AddToCartInput = {
+            value,
+            currency,
+            contents,
+            content_type: 'product',
+            content_ids: contentIds,
+            eventId: eventID, // muliggjør dedupe mot Pixel
+            ...(typeof location !== 'undefined' && {
+              sourceUrl: location.href
+            }),
+            userData: {}
+          }
+          if (fbp) capiPayload.userData.fbp = fbp
+          if (fbc) capiPayload.userData.fbc = fbc
+          if (ua) capiPayload.userData.client_user_agent = ua
+
+          sendJSON('/api/meta/capi/add-to-cart', capiPayload)
         }
 
+        // === 5) GA datalayer (som før) ===
         if (
           typeof window !== 'undefined'
-          && window.dataLayer
+          && (window as unknown as { dataLayer?: unknown[] }).dataLayer
           && selectedVariant
         ) {
           const items = [
             {
               item_id: selectedVariant.id,
               item_name: product.title,
-              price: parseFloat(selectedVariant.price.amount),
+              price: Number.parseFloat(selectedVariant.price.amount),
               quantity: values.quantity
             }
           ]
@@ -159,16 +264,19 @@ export function AddToCart({
               quantity: additionalLine.quantity
             })
           }
-          window.dataLayer.push({
+          ;(window as unknown as { dataLayer: unknown[] }).dataLayer.push({
             event: 'add_to_cart',
             ecommerce: {
               currency: selectedVariant.price.currencyCode,
-              value: parseFloat(selectedVariant.price.amount) * values.quantity,
+              value:
+                Number.parseFloat(selectedVariant.price.amount)
+                * values.quantity,
               items
             }
           })
         }
 
+        // 6) Åpne cart-drawer (som før)
         cartStore.send({ type: 'OPEN' })
       } catch (error) {
         console.error('En kritisk feil skjedde i handlekurv-sekvensen:', error)
