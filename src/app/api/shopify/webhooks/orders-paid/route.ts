@@ -24,7 +24,6 @@ function verifyHmac(req: NextRequest, raw: string): boolean {
     .createHmac('sha256', secret)
     .update(raw, 'utf8')
     .digest('base64')
-  // timingSafeEqual krever lik lengde – ellers kaster den:
   if (header.length !== digest.length) return false
   return crypto.timingSafeEqual(Buffer.from(digest), Buffer.from(header))
 }
