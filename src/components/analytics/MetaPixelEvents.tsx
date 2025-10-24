@@ -1,25 +1,22 @@
 // Path: components/analytics/MetaPixelEvents.tsx
 'use client'
-
 import { usePathname } from 'next/navigation'
-import { useEffect } from 'react'
-
-// Definer fbq på vinduet for TypeScript
-declare global {
-  interface Window {
-    fbq: (...args: any[]) => void
-  }
-}
+import { useEffect, useRef } from 'react'
 
 export function MetaPixelEvents() {
   const pathname = usePathname()
+  const lastPathRef = useRef<string | null>(null)
 
   useEffect(() => {
-    // Sjekk om fbq er lastet inn før vi prøver å bruke den
-    if (typeof window.fbq === 'function') {
-      window.fbq('track', 'PageView')
-    }
-  }, [pathname]) // Utløses hver gang pathname endres
+    if (process.env.NODE_ENV !== 'production') return
+    const fbq = typeof window !== 'undefined' ? window.fbq : undefined
+    if (!fbq) return
 
-  return null // Denne komponenten rendrer ingenting
+    if (lastPathRef.current !== null && lastPathRef.current !== pathname) {
+      fbq('track', 'PageView')
+    }
+    lastPathRef.current = pathname
+  }, [pathname])
+
+  return null
 }

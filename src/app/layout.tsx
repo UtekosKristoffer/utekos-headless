@@ -3,7 +3,6 @@ import './globals.css'
 import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
 import { geistSans, geistMono } from '@/db/config/font.config'
 import { mainMenu } from '@/db/config/menu.config'
-import { SpeedInsights } from '@vercel/speed-insights/react'
 import { Analytics } from '@vercel/analytics/react'
 import { dehydrate } from '@tanstack/react-query'
 import { Toaster } from '@/components/ui/sonner'
@@ -116,6 +115,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: RootLayoutProps) {
   const queryClient = new QueryClient()
   const cartId = await getCartIdFromCookie()
+
   await queryClient.prefetchQuery({
     queryKey: ['cart', cartId],
     queryFn: () => getCachedCart(cartId)
@@ -126,14 +126,43 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 
   return (
     <html lang='no'>
-      {/* 'body' MÅ være det direkte barnet til 'html'.
-        Alle scripts og komponenter flyttes INN i body.
-      */}
+      {pixelId && (
+        <Script id='meta-pixel-base' strategy='afterInteractive'>
+          {`
+            !(function(f,b,e,v,n,t,s){
+              if(f.fbq) return;
+              n = f.fbq = function(){ n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) };
+              if(!f._fbq) f._fbq = n;
+              n.push = n; n.loaded = !0; n.version = '2.0';
+              n.queue = [];
+              t = b.createElement(e); t.async = !0; t.src = v;
+              s = b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t, s);
+            })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+
+            fbq('init', '${pixelId}');
+            fbq('track', 'PageView');
+          `}
+        </Script>
+      )}
+
       <body
         className={`bg-background text-foreground ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* Plasser scripts som skal kjøres tidlig, helt øverst i body */}
-        <GoogleAnalytics gaId='G-FCES3L0M9M' />
+        {/* Noscript fallback: må bruke <img>. Skru av eslint for denne linja. */}
+        {pixelId && (
+          <noscript>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              height={1}
+              width={1}
+              style={{ display: 'none' }}
+              src={`https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1`}
+              alt=''
+            />
+          </noscript>
+        )}
+
         <GoogleTagManager gtmId='GTM-5TWMJQFP' />
         <OrganizationJsonLd />
 
@@ -145,7 +174,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
             <Footer />
           </main>
           <Toaster closeButton />
-          <SpeedInsights />
           <Analytics mode='production' />
           <ChatBubble />
         </Providers>
@@ -153,26 +181,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <Suspense fallback={null}>
           <MetaPixelEvents />
         </Suspense>
-
-        {/* Plasser manuelle scripts som Meta Pixel helt på slutten av body, 
-          men før </body>-taggen lukkes.
-        */}
-        {pixelId && (
-          <Script id='meta-pixel' strategy='afterInteractive'>
-            {`
-              !function(f,b,e,v,n,t,s)
-              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)}(window, document,'script',
-              'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '${pixelId}');
-              fbq('track', 'PageView');
-            `}
-          </Script>
-        )}
       </body>
     </html>
   )
