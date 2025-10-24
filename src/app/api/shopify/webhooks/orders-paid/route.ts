@@ -94,7 +94,10 @@ export async function POST(req: NextRequest) {
   const event_time = Math.floor(
     new Date(order.processed_at ?? order.created_at).getTime() / 1000
   )
-  const eventId = `shopify_order_${order.id ?? order.admin_graphql_api_id}`
+  const webhookGid =
+    order.admin_graphql_api_id
+    ?? (order.id != null ? `gid://shopify/Order/${order.id}` : undefined)
+  const eventId = webhookGid ? `shopify_order_${webhookGid}` : undefined
 
   const event: MetaEvent = {
     event_name: 'Purchase',
@@ -102,8 +105,9 @@ export async function POST(req: NextRequest) {
     action_source: 'website',
     user_data,
     custom_data,
-    event_id: eventId
+    ...(eventId ? { event_id: eventId } : {})
   }
+
   if (attrib?.checkoutUrl) event.event_source_url = attrib.checkoutUrl
 
   // 7) payload (test_event_code på toppnivå når satt)
