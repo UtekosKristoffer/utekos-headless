@@ -1,4 +1,4 @@
-// lib/meta/track.ts
+// Path: lib/meta/track.ts
 
 export type ContentItem = Readonly<{
   id: string
