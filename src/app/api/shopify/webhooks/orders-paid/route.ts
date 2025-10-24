@@ -1,4 +1,4 @@
-// Path: src/app/api/shopify/webhooks/orders-paid/route.ts
+// src/app/api/shopify/webhooks/orders-paid/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import crypto from 'node:crypto'
 import { redisGet, redisDel } from '@/lib/redis'
@@ -75,7 +75,6 @@ export async function POST(req: NextRequest) {
   if (contents.length) custom_data.contents = contents
   custom_data.content_type = 'product'
   custom_data.order_id = order.admin_graphql_api_id
-  // (valgfritt) legg til content_ids for bedre diagnoser
   if (contents.length) custom_data.content_ids = contents.map(c => c.id)
 
   // 5) user_data (kun felt som finnes)
@@ -89,7 +88,40 @@ export async function POST(req: NextRequest) {
   if (attrib?.userData.external_id)
     user_data.external_id = attrib.userData.external_id
 
-  // 6) event (sett event_id ÉN gang og la den matche browser)
+  // --- NY PATCH FOR "SEND TEST" ---
+  const hasAnyId = !!(
+    user_data.fbp
+    || user_data.fbc
+    || user_data.external_id
+    || user_data.em?.length
+    || user_data.ph?.length
+    || user_data.client_ip_address
+  )
+  const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE
+
+  if (!hasAnyId && TEST_EVENT_CODE) {
+    // 1) Minstekrav: ip/ua fra webhook-request
+    const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+    const ua = req.headers.get('user-agent') ?? undefined
+    if (ip) user_data.client_ip_address = ip
+    if (ua) user_data.client_user_agent = ua
+
+    // 2) Bonus for EMQ i test: hash’et e-post hvis den finnes i payload
+    const email = (order as any)?.contact_email as string | undefined
+    if (email) {
+      const norm = email.trim().toLowerCase()
+      if (norm) {
+        const hash = crypto
+          .createHash('sha256')
+          .update(norm, 'utf8')
+          .digest('hex')
+        user_data.em = [hash]
+      }
+    }
+  }
+  // --- SLUTT PÅ PATCH ---
+
+  // 6) event
   const event_time = Math.floor(
     new Date(order.processed_at ?? order.created_at).getTime() / 1000
   )
@@ -109,8 +141,7 @@ export async function POST(req: NextRequest) {
 
   if (attrib?.checkoutUrl) event.event_source_url = attrib.checkoutUrl
 
-  // 7) payload (test_event_code på toppnivå når satt)
-  const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE
+  // 7) payload
   const payload: MetaEventsRequest =
     TEST_EVENT_CODE ?
       { data: [event], test_event_code: TEST_EVENT_CODE }
@@ -139,6 +170,10 @@ export async function POST(req: NextRequest) {
   if (token) await redisDel(`checkout:${token}`)
 
   if (!res.ok) {
+    console.error(
+      '--- META CAPI ERROR RESPONSE ---',
+      JSON.stringify(result, null, 2)
+    )
     return NextResponse.json(
       { error: 'Meta CAPI error', details: result },
       { status: 400 }
