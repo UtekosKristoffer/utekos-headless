@@ -27,7 +27,15 @@ export type OrderPaid = {
   created_at: string
   processed_at?: string | null
   line_items: LineItem[]
+  phone: string | number | null
+  email: string | null
+  customer: any
+  OrderPaid: any
+  total_shipping_price_set?: MoneySet
+  total_tax_set?: MoneySet
+  discount_codes?: { code: string | null }[] | null
 }
+
 export type ContentItem = {
   id: string
   quantity?: number
@@ -52,6 +60,14 @@ export type MetaUserData = {
   external_id?: string
   em?: string[]
   ph?: string[]
+  fn?: string[] // first name
+  ln?: string[] // last name
+  ge?: string[] //
+  db?: string[] // date of birth
+  ct?: string[] // city
+  st?: string[] // state
+  zp?: string[] // zip code
+  country?: string[] // country
 }
 
 export type MetaContentItem = {
@@ -68,6 +84,10 @@ export type MetaPurchaseCustomData = {
   content_type?: 'product' | 'product_group'
   content_ids?: string[]
   order_id?: string
+  shipping?: number | null
+  tax?: number | null
+  coupon?: string | null
+  num_items?: number | null
 }
 
 export type MetaEvent = {

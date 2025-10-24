@@ -16,6 +16,8 @@ import type {
 
 export const runtime = 'nodejs'
 
+/* ----------------------------- Helper Functions ----------------------------- */
+
 function verifyHmac(req: NextRequest, raw: string): boolean {
   const secret = process.env.SHOPIFY_WEBHOOK_SECRET ?? ''
   if (!secret) return false
@@ -34,16 +36,34 @@ function toNumberSafe(s: string | undefined): number | undefined {
   return Number.isFinite(n) ? n : undefined
 }
 
+function hash(input: string): string {
+  return crypto.createHash('sha256').update(input, 'utf8').digest('hex')
+}
+
+function normalizeAndHash(
+  input: string | undefined | null
+): string | undefined {
+  if (!input) return undefined
+  const normalized = input.trim().toLowerCase()
+  return normalized ? hash(normalized) : undefined
+}
+
+function normalizePhone(input: string | undefined | null): string | undefined {
+  if (!input) return undefined
+  const normalized = input.replace(/[^0-9]/g, '')
+  return normalized ? hash(normalized) : undefined
+}
+
 /* ----------------------------- Route ----------------------------- */
 
 export async function POST(req: NextRequest) {
-  // 1) HMAC på rå body
+  // 1) HMAC validation on raw body
   const raw = await req.text()
   if (!verifyHmac(req, raw)) {
     return NextResponse.json({ error: 'Invalid HMAC' }, { status: 401 })
   }
 
-  // 2) Parse
+  // 2) Parse order
   let order: OrderPaid
   try {
     order = JSON.parse(raw) as OrderPaid
@@ -51,12 +71,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  // 3) Finn evt. attrib fra Redis (fbp/fbc/ip/ua/checkoutUrl/eventId mm.)
+  // 3) Retrieve attribution from Redis
   const token = order.token ?? undefined
   const attrib =
     token ? await redisGet<CheckoutAttribution>(`checkout:${token}`) : null
 
-  // 4) custom_data
+  // 4) Build custom_data (Enriched)
   const priceSet = order.total_price_set ?? order.current_total_price_set
   const value = toNumberSafe(priceSet?.shop_money.amount) ?? 0
   const currency = priceSet?.shop_money.currency_code ?? order.currency
@@ -77,18 +97,83 @@ export async function POST(req: NextRequest) {
   custom_data.order_id = order.admin_graphql_api_id
   if (contents.length) custom_data.content_ids = contents.map(c => c.id)
 
-  // 5) user_data (kun felt som finnes)
+  // Enrichment: Add shipping, tax, coupon, num_items
+  const shippingAmount = toNumberSafe(
+    order.total_shipping_price_set?.shop_money.amount
+  )
+  if (typeof shippingAmount === 'number') custom_data.shipping = shippingAmount
+
+  const taxAmount = toNumberSafe(order.total_tax_set?.shop_money.amount)
+  if (typeof taxAmount === 'number') custom_data.tax = taxAmount
+
+  if (Array.isArray(order.discount_codes) && order.discount_codes.length > 0) {
+    const codes = order.discount_codes
+      .map(dc => dc?.code)
+      .filter(Boolean) as string[]
+    if (codes.length > 0) custom_data.coupon = codes.join(',')
+  }
+
+  const totalQty = order.line_items.reduce(
+    (sum, li) => sum + (li.quantity ?? 0),
+    0
+  )
+  if (totalQty > 0) custom_data.num_items = totalQty
+
+  // 5) Build user_data (Enriched for max EMQ)
   const user_data: MetaUserData = {}
+
+  // From Redis (set on client)
   if (attrib?.userData.fbp) user_data.fbp = attrib.userData.fbp
   if (attrib?.userData.fbc) user_data.fbc = attrib.userData.fbc
   if (attrib?.userData.client_user_agent)
     user_data.client_user_agent = attrib.userData.client_user_agent
   if (attrib?.userData.client_ip_address)
     user_data.client_ip_address = attrib.userData.client_ip_address
-  if (attrib?.userData.external_id)
-    user_data.external_id = attrib.userData.external_id
 
-  // --- PATCH FOR "SEND TEST" ---
+  // From Order Payload
+  const phone = order.phone ?? order.customer?.phone
+  const normalizedPhone = normalizePhone(phone)
+  if (normalizedPhone !== undefined) {
+    user_data.ph = [normalizedPhone]
+  }
+
+  const email = order.email ?? order.customer?.email
+  const normalizedEmail = normalizeAndHash(email)
+  if (normalizedEmail !== undefined) {
+    user_data.em = [normalizedEmail]
+  }
+
+  const customerId = order.customer?.admin_graphql_api_id
+  if (customerId) {
+    user_data.external_id = customerId
+  }
+
+  // Enrichment: From Customer object
+  const c = order.customer
+  if (c) {
+    const firstName = normalizeAndHash(c.first_name)
+    if (firstName !== undefined) user_data.fn = [firstName]
+
+    const lastName = normalizeAndHash(c.last_name)
+    if (lastName !== undefined) user_data.ln = [lastName]
+
+    const addr = c.default_address
+    if (addr) {
+      const city = normalizeAndHash(addr.city)
+      if (city !== undefined) user_data.ct = [city]
+
+      const state = normalizeAndHash(addr.province_code)
+      if (state !== undefined) user_data.st = [state]
+
+      const zip = normalizeAndHash(addr.zip)
+      if (zip !== undefined) user_data.zp = [zip]
+
+      const country = normalizeAndHash(addr.country_code)
+      if (country !== undefined) user_data.country = [country]
+    }
+  }
+
+  // PATCH FOR "SEND TEST" - Add contact_email if no identifiers present
   const hasAnyId = !!(
     user_data.fbp
     || user_data.fbc
@@ -100,26 +185,16 @@ export async function POST(req: NextRequest) {
   const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE
 
   if (!hasAnyId && TEST_EVENT_CODE) {
-    const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
-    const ua = req.headers.get('user-agent') ?? undefined
-    if (ip) user_data.client_ip_address = ip
-    if (ua) user_data.client_user_agent = ua
-
-    const email = (order as any)?.contact_email as string | undefined
-    if (email) {
-      const norm = email.trim().toLowerCase()
-      if (norm) {
-        const hash = crypto
-          .createHash('sha256')
-          .update(norm, 'utf8')
-          .digest('hex')
-        user_data.em = [hash]
+    if (!user_data.em) {
+      const contact_email = (order as any)?.contact_email as string | undefined
+      const normalizedContactEmail = normalizeAndHash(contact_email)
+      if (normalizedContactEmail !== undefined) {
+        user_data.em = [normalizedContactEmail]
       }
     }
   }
-  // --- SLUTT PÅ PATCH ---
 
-  // 6) event
+  // 6) Build event
   const event_time = Math.floor(
     new Date(order.processed_at ?? order.created_at).getTime() / 1000
   )
@@ -128,11 +203,6 @@ export async function POST(req: NextRequest) {
     ?? (order.id != null ? `gid://shopify/Order/${order.id}` : undefined)
   const eventId = webhookGid ? `shopify_order_${webhookGid}` : undefined
 
-  // Hent UA og URL for toppnivå-event
-  const client_ua =
-    attrib?.userData.client_user_agent ?? user_data.client_user_agent
-
-  // Bruk order.order_status_url som fallback (perfekt for "Send test")
   const event_url =
     attrib?.checkoutUrl
     ?? (order as any)?.order_status_url
@@ -145,19 +215,16 @@ export async function POST(req: NextRequest) {
     user_data,
     custom_data,
     ...(eventId ? { event_id: eventId } : {}),
-
-    // --- FIKS: Legg til påkrevde felt for 'website' action_source ---
-    ...(client_ua ? { client_user_agent: client_ua } : {}),
     ...(event_url ? { event_source_url: event_url } : {})
   }
 
-  // 7) payload
+  // 7) Build payload
   const payload: MetaEventsRequest =
     TEST_EVENT_CODE ?
       { data: [event], test_event_code: TEST_EVENT_CODE }
     : { data: [event] }
 
-  // 8) kall Graph
+  // 8) Call Meta Graph API
   const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
   const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
   if (!PIXEL_ID || !ACCESS_TOKEN) {
@@ -165,7 +232,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Missing CAPI config' }, { status: 500 })
   }
 
-  console.log('--- CAPI PAYLOAD SENT ---', JSON.stringify(payload, null, 2))
+  console.log(
+    '--- CAPI PAYLOAD SENT (OPTIMIZED) ---',
+    JSON.stringify(payload, null, 2)
+  )
 
   const res = await fetch(
     `https://graph.facebook.com/v24.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`,
@@ -178,7 +248,7 @@ export async function POST(req: NextRequest) {
 
   const result = (await res.json()) as MetaEventsSuccess | MetaGraphError
 
-  // 9) opprydding uansett
+  // 9) Cleanup Redis regardless of outcome
   if (token) await redisDel(`checkout:${token}`)
 
   if (!res.ok) {
@@ -192,5 +262,9 @@ export async function POST(req: NextRequest) {
     )
   }
 
+  console.log(
+    '--- META CAPI SUCCESS RESPONSE ---',
+    JSON.stringify(result, null, 2)
+  )
   return NextResponse.json({ ok: true, result })
 }
