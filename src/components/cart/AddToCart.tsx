@@ -23,12 +23,6 @@ import type { ActorRef, StateFrom } from 'xstate'
 import { ModalSubmitButton } from './AddToCartButton/ModalSubmitButton'
 import { QuantitySelector } from './QuantitySelector'
 
-declare global {
-  interface Window {
-    fbq: (...args: any[]) => void
-  }
-}
-
 export function AddToCart({
   product,
   selectedVariant,

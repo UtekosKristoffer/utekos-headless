@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 export async function GET() {
   try {
     const response = await fetch(
-      `https://${process.env.SHOPIFY_STORE_DOMAIN}/admin/api/2025-07/products.json?limit=250`,
+      `https://${process.env.SHOPIFY_STORE_DOMAIN}/admin/api/2025-10/products.json?limit=250`,
       {
         headers: {
           'X-Shopify-Access-Token': process.env.SHOPIFY_ADMIN_API_TOKEN!,

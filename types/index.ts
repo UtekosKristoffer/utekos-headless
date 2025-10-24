@@ -23,6 +23,7 @@ export type * from './state.types'
 export type * from './layout.types'
 export type * from './headersearch.types'
 export type * from './option-component'
+export type * from './meta.types'
 export type RootLayoutProps = Readonly<{
   children: React.ReactNode
 }>

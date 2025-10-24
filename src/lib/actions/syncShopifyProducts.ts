@@ -2,7 +2,7 @@
 
 export async function syncShopifyToGoogle() {
   const shopifyProducts = await fetch(
-    `https://${process.env.SHOPIFY_STORE_DOMAIN}/admin/api/2025-07/products.json`,
+    `https://${process.env.SHOPIFY_STORE_DOMAIN}/admin/api/2025-10/products.json`,
     {
       headers: {
         'X-Shopify-Access-Token': process.env.SHOPIFY_ADMIN_API_TOKEN!

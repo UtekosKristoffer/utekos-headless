@@ -5,7 +5,7 @@
  * Centralizes all Shopify-related environment variables and URL construction
  */
 
-const SHOPIFY_API_VERSION = '2025-07'
+const SHOPIFY_API_VERSION = '2025-10'
 export const shopifyConfig = {
   storeDomain: process.env.SHOPIFY_STORE_DOMAIN,
   storefrontAccessToken: process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN,

@@ -40,11 +40,12 @@
     "src/lib/queries/graphql.d.ts",
     ".next/types/**/*.ts",
     "src/lib/errors",
+    "types/**/*.d.ts",
     "src/api/types/event",
     "src/api/types/state",
     "src/components/WelcomeToast",
     "src/db/config",
-    "src/components/ProductCard/ProductCarouseltsx"
+    "src/components/ProductCard/ProductCarousel.tsx"
   ],
   "exclude": ["node_modules", ".github/**/*", "alpha/**/*"]
 }
