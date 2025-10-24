@@ -46,7 +46,7 @@ type Body = {
 
 export async function POST(req: NextRequest) {
   const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
-  const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN // Keep naming consistent
+  const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
   if (!PIXEL_ID || !ACCESS_TOKEN) {
     return NextResponse.json(
       { error: 'Missing Meta Pixel configuration' },
