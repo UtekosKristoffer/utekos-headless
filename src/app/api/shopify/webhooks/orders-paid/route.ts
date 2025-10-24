@@ -1,4 +1,4 @@
-// src/app/api/shopify/webhooks/orders-paid/route.ts
+// Path: src/app/api/shopify/webhooks/orders-paid/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import crypto from 'node:crypto'
 import { redisGet, redisDel } from '@/lib/redis'
