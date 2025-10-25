@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils/className'
 
 const images = [
   {
-    src: '/fiberdun/techdown-front.png',
+    src: '/fiberdun/techdawn-front.png',
     alt: 'Utekos TechDown fullfigur, sett forfra'
   },
   {
