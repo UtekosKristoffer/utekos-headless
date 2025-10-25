@@ -11,7 +11,6 @@ export default function SyncProductsPage() {
     setResult(null)
 
     try {
-      // Test med dummy produkter først
       const testProducts = [
         {
           id: 'test-123',
