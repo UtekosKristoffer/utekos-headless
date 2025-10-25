@@ -80,7 +80,7 @@ data)
 
 - Only physical store carrying Utekos products
 - Products available:
-  - Utekos TechDawn™ (300 NOK profit per sale)
+  - Utekos TechDown™ (300 NOK profit per sale)
   - Utekos Mikrofiber™ (100 NOK profit per sale)
   - Utekos Dun™ (100 NOK profit per sale, previously stocked)
 
@@ -126,7 +126,7 @@ Adjustable via drawstrings at waist and bottom hem:
 
 ## Product Line Overview
 
-### Utekos TechDawn™
+### Utekos TechDown™
 
 **Price:** 1,990 NOK  
 **Launch Price:** 1,790 NOK + free buff (249 NOK value)  

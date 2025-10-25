@@ -28,9 +28,9 @@ const articleComponents = {
       mod => mod.VinterklargjoringArticle
     )
   ),
-  'utekos-techdawn-lansering': dynamic(() =>
-    import('../@articles/utekos-techdawn-lansering').then(
-      mod => mod.TechDawnArticle
+  'utekos-techdown-lansering': dynamic(() =>
+    import('../@articles/utekos-techdown-lansering').then(
+      mod => mod.TechDownArticle
     )
   ),
   '5-enkle-tips-for-a-forlenge-terrassesongen': dynamic(() =>

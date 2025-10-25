@@ -3,9 +3,8 @@ import type { Metadata } from 'next'
 import { BackToShopCta } from './BackToShopCta'
 import { ComfyrobeSizeGuide } from './ComfyrobeSizeGuide'
 import { jsonLd } from './jsonLd'
-import { TechDawnSizeGuide } from './TechDawnSizeGuide'
+import { TechDownSizeGuide } from './TechDownSizeGuide'
 import { UtekosSizeGuide } from './UtekosSizeGuide'
-
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Størrelsesguide for Utekos | Finn din perfekte passform',
@@ -34,7 +33,7 @@ export const metadata: Metadata = {
 }
 
 const navigationLinks = [
-  { name: 'TechDawn™', href: '#tech-dawn-size-guide' },
+  { name: 'TechDown™', href: '#tech-down-size-guide' },
   { name: 'Utekos™', href: '#utekos-size-guide' },
   { name: 'Comfyrobe™', href: '#comfyrobe-size-guide' }
 ]
@@ -80,8 +79,8 @@ export default function SizeGuidePage() {
           </div>
         </div>
 
-        <section id='tech-dawn-size-guide' className='scroll-mt-28'>
-          <TechDawnSizeGuide />
+        <section id='tech-down-size-guide' className='scroll-mt-28'>
+          <TechDownSizeGuide />
         </section>
 
         {/* --- SKILLELINJE --- */}

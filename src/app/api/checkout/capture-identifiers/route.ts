@@ -1,7 +1,7 @@
 // app/api/checkout/capture-identifiers/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { redisSet } from '@/lib/redis' // se helper under hvis du ikke allerede har denne
-
+import type { CheckoutAttribution, Body } from '@types'
 export const runtime = 'nodejs'
 
 // Hjelper: trekk ut Shopify checkout-token fra checkoutUrl
@@ -15,33 +15,6 @@ function parseCheckoutToken(checkoutUrl: string): string | undefined {
   } catch {
     return undefined
   }
-}
-
-type Body = {
-  cartId: string
-  checkoutUrl: string
-  userData: {
-    fbp?: string
-    fbc?: string
-    client_user_agent?: string
-    client_ip_address?: string
-    external_id?: string
-  }
-  eventId?: string
-}
-
-type CheckoutAttribution = {
-  cartId: string
-  checkoutUrl: string
-  userData: {
-    fbp?: string
-    fbc?: string
-    client_user_agent?: string
-    client_ip_address?: string
-    external_id?: string
-  }
-  eventId?: string
-  ts: number
 }
 
 export async function POST(req: NextRequest) {
@@ -59,10 +32,8 @@ export async function POST(req: NextRequest) {
       { status: 400 }
     )
 
-  // IP fra proxy-header (kan være undefined)
   const proxiedIp = req.headers.get('x-forwarded-for')?.split(',')?.[0]?.trim()
 
-  // Bygg bare felter som faktisk er definert (unngå undefined på optionals)
   const userData: CheckoutAttribution['userData'] = {}
   if (body.userData.fbp) userData.fbp = body.userData.fbp
   if (body.userData.fbc) userData.fbc = body.userData.fbc
@@ -73,7 +44,6 @@ export async function POST(req: NextRequest) {
   if (body.userData.external_id)
     userData.external_id = body.userData.external_id
 
-  // Ikke inkluder eventId hvis den er undefined (pga exactOptionalPropertyTypes)
   let payload: CheckoutAttribution = {
     cartId: body.cartId,
     checkoutUrl: body.checkoutUrl,

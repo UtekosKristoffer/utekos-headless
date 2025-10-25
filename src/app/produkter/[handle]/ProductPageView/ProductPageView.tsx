@@ -28,7 +28,7 @@ import ProductGalleryCard from './ProductGalleryCard'
 import PriceActivityPanel from './PriceActivityPanel'
 import { ProductDescription } from './ProductDescription'
 import { TrustSignals } from './TrustSignals'
-import { TechDawnLaunchOffer } from './TechDawnLaunchOffer'
+import { TechDownLaunchOffer } from './TechDownLaunchOffer'
 
 const SmartRealTimeActivity = dynamic(
   () =>
@@ -199,8 +199,8 @@ export default function ProductPageView({
               </div>
               <TrustSignals />
 
-              {productData.handle === 'utekos-techdawn' && (
-                <TechDawnLaunchOffer
+              {productData.handle === 'utekos-techdown' && (
+                <TechDownLaunchOffer
                   onAdditionalLineChange={setAdditionalLine}
                 />
               )}

@@ -69,13 +69,13 @@ export function ComparisonTable() {
               Utekos Mikrofiber™
             </th>
             <th className='w-[25%] p-4 text-center font-semibold'>
-              Utekos TechDawn™
+              Utekos TechDown™
             </th>
           </tr>
         </thead>
         <tbody>
           {comparisonData.map(
-            ({ feature, icon, dun, mikrofiber, techdawn, iconColor }) => (
+            ({ feature, icon, dun, mikrofiber, techdown, iconColor }) => (
               <tr key={feature} className='border-b border-neutral-800'>
                 <td className='p-4 align-top'>
                   <div className='flex items-center gap-3'>
@@ -93,7 +93,7 @@ export function ComparisonTable() {
                   <TableCellContent value={mikrofiber} />
                 </td>
                 <td className='p-4 text-center align-top'>
-                  <TableCellContent value={techdawn} />
+                  <TableCellContent value={techdown} />
                 </td>
               </tr>
             )

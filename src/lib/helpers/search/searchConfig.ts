@@ -148,11 +148,11 @@ export const SEARCH_CONFIG: SearchConfigItem[] = [
     group: 'products'
   },
   {
-    id: 'product-utekos-techdawn',
-    title: 'Utekos TechDawn™',
-    path: '/produkter/utekos-techdawn',
+    id: 'product-utekos-techdown',
+    title: 'Utekos TechDown™',
+    path: '/produkter/utekos-techdown',
     keywords: [
-      'techdawn',
+      'techdown',
       'hybrid',
       'syntetisk dun',
       'varm',

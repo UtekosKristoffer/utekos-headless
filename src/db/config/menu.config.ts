@@ -19,8 +19,8 @@ export const mainMenu: MenuItem[] = [
       },
       { title: 'Comfyrobe™', url: '/produkter/comfyrobe', items: [] },
       {
-        title: 'Utekos TechDawn™',
-        url: '/produkter/utekos-techdawn',
+        title: 'Utekos TechDown™',
+        url: '/produkter/utekos-techdown',
         items: []
       },
       { title: 'Utekos Buff™', url: '/produkter/utekos-buff', items: [] },

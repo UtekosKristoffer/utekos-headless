@@ -12,7 +12,7 @@ interface PriceActivityPanelProps {
 
 // Konfigurasjon for lanseringstilbud
 const LAUNCH_OFFERS = {
-  'utekos-techdawn': {
+  'utekos-techdown': {
     discountAmount: 200,
     discountPercent: 10,
     label: 'Lanseringstilbud'

@@ -17,13 +17,13 @@ export function PersonaCards() {
       buttonText: 'Velg Utekos Dun™'
     },
     {
-      href: '/produkter/utekos-techdawn',
+      href: '/produkter/utekos-techdown',
       imageSrc: '/front-open.webp',
-      imageAlt: 'TechDawn produktbilde åpen',
+      imageAlt: 'TechDown produktbilde åpen',
       title: 'For den praktiske allrounderen',
       description:
         'Du trenger en robust arbeidshest som presterer i all slags vær – fra fuktige kvelder i båten til uforutsigbare dager med bobilen.',
-      buttonText: 'Velg TechDawn™'
+      buttonText: 'Velg TechDown™'
     },
     {
       href: '/produkter/utekos-mikrofiber',

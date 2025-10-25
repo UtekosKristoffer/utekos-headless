@@ -10,8 +10,8 @@ export interface Article {
 }
 export const mockArticles: Article[] = [
   {
-    slug: 'utekos-techdawn-lansering',
-    title: 'Utekos TechDawn™ - Plagget som redefinerer personlig komfort.',
+    slug: 'utekos-techdown-lansering',
+    title: 'Utekos TechDown™ - Plagget som redefinerer personlig komfort.',
     excerpt:
       'LANSERING: Det nye plagget som redefinerer personlig komfort. Dunlignende letthet med bekymringsfri ytelse.',
     imageUrl: '/fiberdun/patch.jpg',

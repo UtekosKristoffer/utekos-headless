@@ -1,7 +1,7 @@
-import { tecDawnData } from './data'
+import { tecDownData } from './data'
 import { Scale, StretchHorizontal, GitCommitVertical } from 'lucide-react'
 
-const techDawnFeatures = [
+const techDownFeatures = [
   {
     Icon: Scale,
     title: 'Personlig passform',
@@ -21,16 +21,16 @@ const techDawnFeatures = [
       'YKK®-glidelåser i verdensklasse garanterer langvarig og problemfri bruk.'
   }
 ]
-export function TechDawnSizeGuide() {
+export function TechDownSizeGuide() {
   return (
-    <section className='text-white bg-black' id='tech-dawn-size-guide'>
+    <section className='text-white bg-black' id='tech-down-size-guide'>
       <div className='container mx-auto px-4 py-12 text-center'>
         <div className='max-w-4xl mx-auto'>
           <h2 className='text-3xl font-bold tracking-tight sm:text-4xl'>
-            Utekos TechDawn™ - Presisjon i hver størrelse
+            Utekos TechDown™ - Presisjon i hver størrelse
           </h2>
           <p className='mt-4 text-lg text-neutral-300'>
-            For livsnyteren som verdsetter både funksjon og form, er TechDawn
+            For livsnyteren som verdsetter både funksjon og form, er TechDown
             designet med en mer kroppsnær passform. Dette gir deg suveren
             bevegelsesfrihet og effektiv varme, pakket inn i et nettere design –
             perfekt for et aktivt liv på hytten, i bobilen eller på kjølige
@@ -40,7 +40,7 @@ export function TechDawnSizeGuide() {
 
         <div className='mt-12 max-w-3xl mx-auto text-left space-y-6 text-neutral-300'>
           <p>
-            TechDawn sine størrelser har en mer tradisjonell progresjon for å
+            TechDown sine størrelser har en mer tradisjonell progresjon for å
             sikre at du finner en størrelse som passer perfekt til din
             kroppstype.
           </p>
@@ -88,7 +88,7 @@ export function TechDawnSizeGuide() {
             Gjennomtenkte detaljer for din komfort
           </h3>
           <div className='mt-8 grid grid-cols-1 gap-12 sm:grid-cols-3'>
-            {techDawnFeatures.map(feature => (
+            {techDownFeatures.map(feature => (
               <div
                 key={feature.title}
                 className='flex flex-col items-center gap-4'
@@ -143,7 +143,7 @@ export function TechDawnSizeGuide() {
                     </tr>
                   </thead>
                   <tbody className='divide-y divide-neutral-800'>
-                    {tecDawnData.map(item => (
+                    {tecDownData.map(item => (
                       <tr key={item.measurement}>
                         <td className='whitespace-nowrap py-4 pl-4 pr-3 text-sm text-left font-medium sm:pl-6'>
                           {item.measurement}

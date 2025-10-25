@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils/className'
 
-const BANNER_STORAGE_KEY = 'utekos-techdawn-launch-banner-dismissed-timestamp'
+const BANNER_STORAGE_KEY = 'utekos-techdown-launch-banner-dismissed-timestamp'
 const BANNER_EXPIRATION_MS = 3 * 24 * 60 * 60 * 1000 // 3 dager
 
 export default function AnnouncementBanner() {
@@ -53,11 +53,11 @@ export default function AnnouncementBanner() {
       )}
     >
       <Link
-        href='/produkter/utekos-techdawn'
+        href='/produkter/utekos-techdown'
         className='group block w-full bg-sky-800 p-3 text-center text-sm font-medium text-white transition-colors hover:text-neutral-200'
       >
         <span className='mr-2'>
-          <span className='font-semibold'>NYHET:</span> Utekos TechDawn™ - Vår
+          <span className='font-semibold'>NYHET:</span> Utekos TechDown™ - Vår
           mest innovative modell noensinne.
         </span>
         <span className='font-bold'>Se lanseringstilbudet!</span>

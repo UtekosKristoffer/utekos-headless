@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Cloud, Droplets, Thermometer, Shield } from 'lucide-react'
 
-export function TechDawnInfographic() {
+export function TechDownInfographic() {
   const [activeFeature, setActiveFeature] = useState<
     'cloudweave' | 'lumea' | null
   >(null)
@@ -13,7 +13,7 @@ export function TechDawnInfographic() {
       <div className='max-w-6xl mx-auto'>
         <div className='text-center mb-16'>
           <h2 className='text-3xl font-light mb-4'>
-            Teknologien bak Utekos TechDawn™
+            Teknologien bak Utekos TechDown™
           </h2>
           <p className='text-gray-400'>Klikk på kortene for å lære mer</p>
         </div>

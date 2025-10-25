@@ -6,7 +6,7 @@ interface ProductMetadata {
 export const productMetadata: Record<string, ProductMetadata> = {
   'utekos-dun': { showActivity: true, baseViewers: 7 },
   'utekos-mikrofiber': { showActivity: true, baseViewers: 6 },
-  'utekos-techdawn': { showActivity: true, baseViewers: 9 },
+  'utekos-techdown': { showActivity: true, baseViewers: 9 },
   'comfyrobe': { showActivity: true, baseViewers: 5 },
   'utekos-special-edition': { showActivity: true, baseViewers: 5 },
 

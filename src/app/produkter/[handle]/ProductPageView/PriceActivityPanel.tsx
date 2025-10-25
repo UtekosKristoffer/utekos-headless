@@ -13,7 +13,7 @@ export interface PriceActivityPanelProps {
 }
 
 const LAUNCH_OFFERS = {
-  'utekos-techdawn': {
+  'utekos-techdown': {
     discountAmount: 200,
     label: 'Lanseringstilbud'
   }

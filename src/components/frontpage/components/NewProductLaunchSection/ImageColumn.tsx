@@ -14,12 +14,12 @@ import { cn } from '@/lib/utils/className'
 
 const images = [
   {
-    src: '/fiberdun/techdawn-front.png',
-    alt: 'Utekos TechDawn fullfigur, sett forfra'
+    src: '/fiberdun/techdown-front.png',
+    alt: 'Utekos TechDown fullfigur, sett forfra'
   },
   {
-    src: '/fiberdun/techdawn-bak.png',
-    alt: 'Utekos TechDawn fullfigur, sett bakfra'
+    src: '/fiberdun/techdown-bak.png',
+    alt: 'Utekos TechDown fullfigur, sett bakfra'
   },
   {
     src: '/fiberdun/halv-forside.png',
@@ -27,7 +27,7 @@ const images = [
   },
   {
     src: '/fiberdun/skra-forside.png',
-    alt: 'Utekos TechDawn med hette, sett forfra'
+    alt: 'Utekos TechDown med hette, sett forfra'
   }
 ]
 export function ImageColumn() {

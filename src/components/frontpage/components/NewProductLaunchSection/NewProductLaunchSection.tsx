@@ -11,8 +11,8 @@ import { newProductFeatures } from './newProductFeatures'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { QuickViewModal } from '@/components/products/QuickViewModal'
 
-const productName = 'Utekos TechDawn™'
-const productHandle = 'utekos-techdawn'
+const productName = 'Utekos TechDown™'
+const productHandle = 'utekos-techdown'
 const productUrl = `/produkter/${productHandle}`
 
 const originalPrice = 1990

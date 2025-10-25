@@ -37,7 +37,7 @@ export function ComparisonTeaser() {
               <div className='rounded-lg border border-neutral-700 bg-background p-6'>
                 <div className='flex items-center gap-3'>
                   <Droplets className='h-6 w-6 text-cyan-400' />
-                  <h3 className='text-lg font-semibold'>Utekos FiberDawn™</h3>
+                  <h3 className='text-lg font-semibold'>Utekos TechDown™</h3>
                 </div>
                 <p className='mt-2 text-sm text-access/80'>
                   Best for uforutsigbart vær og fuktige forhold i båt eller

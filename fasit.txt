@@ -1,0 +1,3 @@
+email,phone,fn,ln,ct,st,zip,country,doby,gen,value	
+jane.doe@example.com,15551234567,jane,doe,new york,ny,10001,us,1982,f,2500.50	
+bjorn.larsen@example.no,4712345678,bjørn,larsen,oslo,oslo,0159,no,1979,m,8740	

@@ -15,8 +15,8 @@ import {
 } from '@/components/ui/carousel'
 import AutoHeight from 'embla-carousel-auto-height'
 
-import TechDawnImageFront from '@public/fiberdun/rett.png'
-import TechDawnImagePatch from '@public/fiberdun/patch.jpg'
+import TechDownImageFront from '@public/fiberdun/rett.png'
+import TechDownImagePatch from '@public/fiberdun/patch.jpg'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 
 const features = [
@@ -34,14 +34,14 @@ const features = [
   }
 ]
 const images = [
-  { src: TechDawnImageFront, alt: 'Utekos TechDawn komfortplagg sett forfra.' },
+  { src: TechDownImageFront, alt: 'Utekos TechDown komfortplagg sett forfra.' },
   {
-    src: TechDawnImagePatch,
-    alt: 'Nærbilde av det slitesterke Luméa-stoffet på Utekos TechDawn.'
+    src: TechDownImagePatch,
+    alt: 'Nærbilde av det slitesterke Luméa-stoffet på Utekos TechDown.'
   }
 ]
 
-export const TechDawnFeatureSection = () => {
+export const TechDownFeatureSection = () => {
   const autoHeight = React.useRef(AutoHeight())
 
   return (
@@ -114,13 +114,13 @@ export const TechDawnFeatureSection = () => {
           </div>
 
           <h2 className='mb-4 text-4xl font-bold leading-tight text-foreground sm:text-5xl'>
-            Møt Utekos TechDawn™
+            Møt Utekos TechDown™
           </h2>
 
           <p className='mb-8 max-w-prose text-lg leading-relaxed text-accent/80'>
             Vi har ikke bare kombinert det beste fra dunens letthet og
             mikrofiberens slitestyrke – vi har utviklet en helt ny kategori av
-            personlig komfort. Utekos TechDawn™ er vår varmeste og mest
+            personlig komfort. Utekos TechDown™ er vår varmeste og mest
             allsidige modell, skapt for å forlenge de gode stundene ute.
           </p>
 
@@ -134,8 +134,8 @@ export const TechDawnFeatureSection = () => {
           </ul>
 
           <Button asChild size='lg' className='group'>
-            <Link href='/produkter/utekos-techdawn'>
-              Utforsk TechDawn™
+            <Link href='/produkter/utekos-techdown'>
+              Utforsk TechDown™
               <ArrowRight className='ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1' />
             </Link>
           </Button>

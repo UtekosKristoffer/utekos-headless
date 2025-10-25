@@ -1,4 +1,4 @@
-export function TechDawnComparison() {
+export function TechDownComparison() {
   return (
     <section className='bg-gradient-to-b from-gray-900/50 to-black pt-20'>
       <div className='max-w-6xl mx-auto px-6'>
@@ -54,7 +54,7 @@ export function TechDawnComparison() {
             </div>
           </div>
 
-          {/* Utekos TechDawn */}
+          {/* Utekos TechDown */}
           <div
             className='relative bg-gradient-to-br from-yellow-900/20 to-yellow-900/10 
                         border border-yellow-800/50 rounded-2xl p-8'
@@ -65,7 +65,7 @@ export function TechDawnComparison() {
               </span>
             </div>
 
-            <h3 className='text-2xl font-light mb-4'>Utekos TechDawn™</h3>
+            <h3 className='text-2xl font-light mb-4'>Utekos TechDown™</h3>
 
             <div className='space-y-4 mb-6'>
               <div className='flex items-start gap-3'>
@@ -96,7 +96,7 @@ export function TechDawnComparison() {
           <p className='text-gray-400'>
             <span className='text-yellow-400'>Tips:</span> Mange av våre kunder
             har ulike modeller: Utekos Dun™, Utekos Mikrofiber™ eller Utekos
-            TechDawn™ for de kaldeste kveldene, og Comfyrobe™ som sin
+            TechDown™ for de kaldeste kveldene, og Comfyrobe™ som sin
             hverdagslige følgesvenn!
           </p>
         </div>

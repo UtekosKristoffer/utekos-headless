@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { Sparkles, Maximize2, ChevronsDown, Flame } from 'lucide-react'
 
-const productImage = '/fiberdun/techdawn-front.png'
+const productImage = '/fiberdun/-front.png'
 
 const features = [
   {

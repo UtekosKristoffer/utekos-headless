@@ -6,7 +6,7 @@ export const comparisonData = [
     icon: 'star',
     dun: 'Maksimal varme i forhold til vekt. Den kompromissløse livsnyteren.',
     mikrofiber: 'Allsidig bruk og lavest vekt. Den praktiske eventyreren.',
-    techdawn: 'Robust ytelse og moderne komfort. Den tekniske allrounderen.',
+    techdown: 'Robust ytelse og moderne komfort. Den tekniske allrounderen.',
     iconColor: 'text-yellow-400'
   },
   {
@@ -14,7 +14,7 @@ export const comparisonData = [
     icon: 'thermometer',
     dun: 'Uovertruffen. Andedun gir den høyeste varme-til-vekt ratioen.',
     mikrofiber: 'Meget god. En solid og pålitelig varme for de fleste forhold.',
-    techdawn:
+    techdown:
       'Utmerket. CloudWeave™ sørger for den lette, høye varmen fra dun.',
     iconColor: 'text-orange-400'
   },
@@ -24,7 +24,7 @@ export const comparisonData = [
     dun: 'God, men ekte dun kan miste noe isolasjonsevne om det blir helt gjennomvått.',
     mikrofiber:
       'Overlegen. Syntetisk fyll som beholder varmeevnen uansett fuktighet.',
-    techdawn:
+    techdown:
       'Overlegen. CloudWeave™-isolasjonen er designet for å tåle fuktig, norsk klima.',
     iconColor: 'text-cyan-400'
   },
@@ -33,7 +33,7 @@ export const comparisonData = [
     icon: 'feather',
     dun: 'Ekstra lett (~1000g)',
     mikrofiber: 'Ultralett (~800g)',
-    techdawn: 'Robust (~1300g)',
+    techdown: 'Robust (~1300g)',
     iconColor: 'text-violet-400'
   },
   {
@@ -41,7 +41,7 @@ export const comparisonData = [
     icon: 'washing-machine',
     dun: 'Krever skånsom vask/rens for å bevare spensten i dunen.',
     mikrofiber: 'Uanstrengt. Kan enkelt vaskes i maskin og tørker raskt.',
-    techdawn: 'Uanstrengt. Kan enkelt vaskes i maskin og tørker raskt.',
+    techdown: 'Uanstrengt. Kan enkelt vaskes i maskin og tørker raskt.',
     iconColor: 'text-emerald-400'
   },
   {
@@ -49,7 +49,7 @@ export const comparisonData = [
     icon: 'layers',
     dun: '90% andedun (650 FP)',
     mikrofiber: 'Høykvalitets Mikrofiber',
-    techdawn: 'CloudWeave™ (Dun-etterligning)',
+    techdown: 'CloudWeave™ (Dun-etterligning)',
     iconColor: 'text-slate-400'
   },
   {
@@ -57,7 +57,7 @@ export const comparisonData = [
     icon: 'shield',
     dun: 'Slitesterk nylon med DWR-belegg',
     mikrofiber: 'Slitesterk nylon med DWR-belegg',
-    techdawn: 'Luméa™ (Premium Nylon)',
+    techdown: 'Luméa™ (Premium Nylon)',
     iconColor: 'text-slate-400'
   },
   {
@@ -65,7 +65,7 @@ export const comparisonData = [
     icon: 'check',
     dun: true,
     mikrofiber: true,
-    techdawn: true,
+    techdown: true,
     iconColor: 'text-muted-foreground'
   }
 ]

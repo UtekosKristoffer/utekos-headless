@@ -34,7 +34,7 @@ const features: Feature[] = [
   }
 ]
 
-export function TechDawnFeatures() {
+export function TechDownFeatures() {
   return (
     <>
       <div className='container mx-auto px-4'>

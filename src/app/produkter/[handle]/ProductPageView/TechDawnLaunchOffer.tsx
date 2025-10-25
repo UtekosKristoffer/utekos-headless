@@ -13,13 +13,13 @@ interface AdditionalLine {
   quantity: number
 }
 
-interface TechDawnLaunchOfferProps {
+interface TechDownLaunchOfferProps {
   onAdditionalLineChange: (line: AdditionalLine | undefined) => void
 }
 
-export function TechDawnLaunchOffer({
+export function TechDownLaunchOffer({
   onAdditionalLineChange
-}: TechDawnLaunchOfferProps) {
+}: TechDownLaunchOfferProps) {
   const [buffProduct, setBuffProduct] = useState<ShopifyProduct | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [includeBuff, setIncludeBuff] = useState(true)

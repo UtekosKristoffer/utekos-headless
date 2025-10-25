@@ -1,0 +1,38 @@
+Ja, jeg kan formatere CSV-dataen som en tabell. Her er dataen presentert i kolonner som i Excel:
+
+| email | phone | phone | fn | ln | dob | doby=1982 | age | gen | zip | ct | st | country | k | orders | value |
+|-------|-------|-------|----|----|-----|-----------|-----|-----|-----|----|----|---------|---|--------|-------|
+| trondmarkvard@gmail.com | 4797196013 | | trond markvard | bjertnes | | | | m | 3280 | | tjodalyng | no | 8199 | 4 | 10 |
+| ev-gjerv@hotmail.com | 4745662537 | | eva | gjervan | | 1968 | | f | 6763 | | hornindal | no | 5370 | 1 | 10 |
+| linnhn@me.com | 4746618036 | 4790093807 | linn charlotte | heier | | | | f | 3211 | sandefjord | | no | 1990 | 1 | 5 |
+| post@isolasjonogbyggevarer.no | 4790666646 | 4790257135 | jan inge | pedersen | | 1961 | | m | 4320 | sandnes | | no | 7410 | 4 | 10 |
+| johannes@josvanger.no | 4748083701 | | johannes | josvanger | 14.04.1961 | 1961 | 64 | m | 6873 | marifjøra | | no | 6978 | 1 | 7 |
+| haakon@adoarena.no | 4747607025 | 4740204074 | haakon andree egeberg | johansen | | 1967 | | m | 5210 | | os | no | 6870 | 1 | 7 |
+| marit.aasheim@gmail.com | 4793434210 | | marit sandbakk | aasheim | | | | f | 5258 | bergen | | no | 6580 | 1 | 7 |
+| rolf.nordhaug@gmail.com | 4790891672 | | rolf magne | nordhaug | 25.01.1966 | 1966 | 59 | m | 9455 | | engenes | no | 6580 | 1 | 7 |
+| bjoernba@online.no | 4799471440 | | bjørn | bakke | | | | m | 9414 | harstad | | no | 6580 | 1 | 7 |
+| husebojarle@gmail.com | 4792845522 | | jarle skjelanger | husebø | | 1959 | | m | 5917 | | Rossland | no | 6580 | 1 | 7 |
+| lime@equinor.com | 4792819869 | | viggo mide | tjensvoll | | | | m | 4026 | stavanger | | no | 6580 | 1 | 7 |
+| hr.dorner@gmail.com | 4791657010 | 4795031101 | jane | dorner | | 1963 | | f | 4311 | | hommersåk | no | 6580 | 1 | 6 |
+| johnil3@online.no | 4791581593 | 4791790250 | johnny | nilsen | | | | m | 9307 | finnsnes | | no | 6580 | 1 | 6 |
+| henyheim@broadpark.no | 4746431220 | | helge | nyheim | | 1961 | | m | 5953 | fonnes | | no | 6580 | 1 | 6 |
+| toneolsen69@gmail.com | 4741639505 | | tone | olsen | | | | f | 5578 | nedre vats | | no | 6580 | 2 | 8 |
+| kathrine@sundehandel.no | 4790765577 | | kathrine | sunde | | 1968 | | f | 4043 | hafrsfjord | | no | 6580 | 1 | 7 |
+| v-skauge@live.no | 4747298897 | | vidar | skauge | | | | m | 5281 | | valestrandsfossen | no | 5960 | 2 | 8 |
+| vtlivli@gmail.com | 4791810078 | | veronika | livli | | 1977 | | f | 9300 | finnsnes | | no | 5960 | 1 | 7 |
+| joridohen@gmail.com | 4799163869 | | jorid olga | henriksen | | | | f | 8613 | mo i rana | | no | 4970 | 1 | 7 |
+| heidilapp@gmail.com | 4790092728 | | heidi sanden | lappegård | | 1959 | | f | 8003 | bodø | | no | 4580 | 1 | 7 |
+| tore.planting@gmail.com | 4791321561 | | tore emil | planting | | | | m | 2019 | | skedsmokorset | no | 4580 | 1 | 7 |
+| ingskoge@online.no | 4797628737 | | ingfrid | skogedal | | | | f | 5300 | | kleppestø | no | 4580 | 1 | 7 |
+| tone.skaarvik@gmail.com | 4794819149 | | tone | skårvik | | | | f | 8613 | | mo i rana | no | 4580 | 1 | 7 |
+| arnkaarb@gmail.com | 4797492688 | | arnt kåre | bøe | | | | m | 5260 | | indre arna | no | 4470 | 1 | 7 |
+
+Dataen inneholder 24 rader med kundeinformasjon fra Norge, inkludert e-post, telefon, navn, fødselsinformasjon, lokasjon og bestillingsdata.					
+															
+															
+															
+															
+															
+															
+															
+															

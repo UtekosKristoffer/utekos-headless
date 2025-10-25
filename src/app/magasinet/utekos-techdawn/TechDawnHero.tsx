@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import TechHeroImage from '@public/magasinet/helene.png'
-export function TechDawnHero() {
+export function TechDownHero() {
   return (
     <section className='relative w-full h-screen bg-black'>
       {/* Background Image - Constrained Width */}
@@ -8,7 +8,7 @@ export function TechDawnHero() {
         <div className='relative size-full max-w-7xl'>
           <Image
             src={TechHeroImage}
-            alt='Utekos TechDawn på fjelltopp'
+            alt='Utekos TechDown på fjelltopp'
             fill
             className='object-cover pt-4'
             sizes='(max-width: 1280px) 100vw, 1280px'
@@ -28,7 +28,7 @@ export function TechDawnHero() {
             <span className='h-[2px] bg-yellow-400/70 flex-1 max-w-[65px] md:max-w-[100px]' />
           </div>
           <h1 className='text-5xl md:text-6xl font-light mb-6 leading-tight'>
-            Utekos TechDawn™
+            Utekos TechDown™
           </h1>
           <p className='text-xl text-gray-200 font-light'>
             Vår varmeste og mest allsidige modell

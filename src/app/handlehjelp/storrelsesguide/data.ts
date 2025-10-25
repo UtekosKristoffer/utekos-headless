@@ -35,7 +35,7 @@ export const utekosData = [
   { measurement: 'Høyde på baklomme', m: '42 cm', l: '42 cm' }
 ]
 
-export const tecDawnData = [
+export const tecDownData = [
   {
     measurement: 'Total lengde (nakke til bunn)',
     liten: '152 cm',

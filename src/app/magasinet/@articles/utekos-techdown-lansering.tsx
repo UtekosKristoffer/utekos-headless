@@ -1,22 +1,22 @@
 import Image from 'next/image'
-import { TechDawnHero } from '@/app/magasinet/utekos-techdawn/TechDawnHero'
-import { TechDawnFeatures } from '@/app/magasinet/utekos-techdawn/TechDawnFeatures'
-import { TechDawnComparison } from '@/app/magasinet/utekos-techdawn/TechDawnComparison'
-import { TechDawnInfographic } from '@/app/magasinet/utekos-techdawn/TechDawnInfoGraphic'
-import { TechDawnUseCases } from '@/app/magasinet/utekos-techdawn/TechDawnUseCases'
-import { TechDawnCTA } from '@/app/magasinet/utekos-techdawn/TechDawnCTA'
+import { TechDownHero } from '@/app/magasinet/utekos-techdown/TechDownHero'
+import { TechDownFeatures } from '@/app/magasinet/utekos-techdown/TechDownFeatures'
+import { TechDownComparison } from '@/app/magasinet/utekos-techdown/TechDownComparison'
+import { TechDownInfographic } from '@/app/magasinet/utekos-techdown/TechDownInfoGraphic'
+import { TechDownUseCases } from '@/app/magasinet/utekos-techdown/TechDownUseCases'
+import { TechDownCTA } from '@/app/magasinet/utekos-techdown/TechDownCTA'
 
-export function TechDawnArticle() {
+export function TechDownArticle() {
   return (
     <article className='min-h-screen bg-black text-white'>
       {/* Hero Section */}
-      <TechDawnHero />
+      <TechDownHero />
 
       {/* Intro */}
       <section className='max-w-4xl mx-auto px-6 pt-12'>
         <p className='text-lg text-gray-300 leading-relaxed'>
           I Utekos har vi ett mål: å forlenge de gode stundene ute. Med
-          TechDawn™ introduserer vi en ny dimensjon av komfort – for deg som
+          TechDown™ introduserer vi en ny dimensjon av komfort – for deg som
           vil nyte terrassen, båtturen eller kvelden ved bålet, uansett vær.
         </p>
       </section>
@@ -24,7 +24,7 @@ export function TechDawnArticle() {
       {/* Why Section */}
       <section className='max-w-4xl mx-auto px-6 py-8'>
         <h2 className='text-3xl font-light mb-8'>
-          Hvorfor vi skapte TechDawn™
+          Hvorfor vi skapte TechDown™
         </h2>
         <p className='text-gray-300 leading-relaxed mb-6'>
           Utekos-plaggene våre har gitt tusenvis av nordmenn uforglemmelige
@@ -33,29 +33,29 @@ export function TechDawnArticle() {
           erfaringer har vi finjustert hver detalj.
         </p>
         <p className='text-gray-300 leading-relaxed'>
-          TechDawn™ er resultatet: samme herlige komfort, med ekstra trygghet
+          TechDown™ er resultatet: samme herlige komfort, med ekstra trygghet
           når været skifter. Vi har forbedret passformen, tatt i bruk nye
           materialer og teknologier, og økt allsidigheten. Dette er plagget du
           alltid kan stole på.
         </p>
       </section>
       {/* Features Grid */}
-      <TechDawnFeatures />
+      <TechDownFeatures />
 
       {/* Technology Infographic */}
-      <TechDawnInfographic />
+      <TechDownInfographic />
 
       {/* Use Cases Section */}
-      <TechDawnUseCases />
+      <TechDownUseCases />
 
       {/* Comparison Section */}
-      <TechDawnComparison />
+      <TechDownComparison />
 
       {/* Image Section */}
       <section className='relative w-max-7xl size-full mx-auto mb-0 mt-16'>
         <Image
           src='/magasinet/helene-2.png'
-          alt='TechDawn i bruk på terrassen'
+          alt='TechDown i bruk på terrassen'
           fill
           className='object-cover'
           sizes='100vw'
@@ -77,7 +77,7 @@ export function TechDawnArticle() {
       <section className='max-w-4xl mx-auto px-6 pt-4 pb-16'>
         <h2 className='text-3xl font-light mb-8'>Perfekt for hyttekosen</h2>
         <p className='text-gray-300 leading-relaxed mb-8'>
-          TechDawn™ har selvfølgelig vår anerkjente 3-i-1-funksjon. Fra
+          TechDown™ har selvfølgelig vår anerkjente 3-i-1-funksjon. Fra
           morgenkaffen på terrassen til kveldskosen rundt bålet – ett plagg,
           uendelige muligheter for komfort.
         </p>
@@ -91,14 +91,14 @@ export function TechDawnArticle() {
             </h3>
           </div>
           <p className='text-gray-300'>
-            Hold alltid en TechDawn™ hengende i båten eller bobilen. Den tåler
+            Hold alltid en TechDown™ hengende i båten eller bobilen. Den tåler
             fuktighet bedre og er perfekt når kveldene blir kjølige til sjøs!
           </p>
         </div>
       </section>
 
       {/* CTA Section */}
-      <TechDawnCTA />
+      <TechDownCTA />
     </article>
   )
 }

@@ -13,7 +13,7 @@ export type TechnologyGroup = {
 }
 export const technologyGroups: readonly TechnologyGroup[] = [
   {
-    groupTitle: 'Utekos TechDawn™',
+    groupTitle: 'Utekos TechDown™',
     technologies: [
       {
         icon: 'gem',
@@ -21,16 +21,16 @@ export const technologyGroups: readonly TechnologyGroup[] = [
         iconColor: 'text-sky-800',
         // --- HER ER DEN OPPDATERTE TEKSTEN ---
         content:
-          'Vårt mest eksklusive ytterstoff, utviklet for TechDawn™ for å maksimere komfort og slitestyrke. Den tettvevde, premium nylonkonstruksjonen gir en naturlig vannavvisende egenskap og står imot lett fukt. Hovedfokuset er den eksepsjonelle, myke følelsen og den elegante matte finishen – et materiale valgt for luksuriøs komfort.',
-        products: ['Utekos TechDawn™']
+          'Vårt mest eksklusive ytterstoff, utviklet for TechDown™ for å maksimere komfort og slitestyrke. Den tettvevde, premium nylonkonstruksjonen gir en naturlig vannavvisende egenskap og står imot lett fukt. Hovedfokuset er den eksepsjonelle, myke følelsen og den elegante matte finishen – et materiale valgt for luksuriøs komfort.',
+        products: ['Utekos TechDown™']
       },
       {
         icon: 'cloud',
         title: 'CloudWeave™',
         iconColor: 'text-sky-800',
         content:
-          'Kjernen i TechDawn™. En avansert, syntetisk isolasjon som etterligner den lette, luftige og luksuriøse følelsen av dun. Den store fordelen er at den, i motsetning til dun, beholder sin fulle isolasjonsevne selv om den blir fuktig.',
-        products: ['Utekos TechDawn™']
+          'Kjernen i TechDown™. En avansert, syntetisk isolasjon som etterligner den lette, luftige og luksuriøse følelsen av dun. Den store fordelen er at den, i motsetning til dun, beholder sin fulle isolasjonsevne selv om den blir fuktig.',
+        products: ['Utekos TechDown™']
       }
     ]
   },
@@ -77,7 +77,7 @@ export const technologyGroups: readonly TechnologyGroup[] = [
         iconColor: 'text-violet-400',
         content:
           'Innerstoffet er avgjørende for den totale komfortopplevelsen. Vi bruker Nylon Taffeta i alle våre modeller fordi det er glatt, lett og føles behagelig mot huden. Det glir lett over andre kleslag og sørger for minimal friksjon når du beveger deg.',
-        products: ['Utekos Dun™', 'Utekos Mikrofiber™', 'Utekos TechDawn™']
+        products: ['Utekos Dun™', 'Utekos Mikrofiber™', 'Utekos TechDown™']
       }
     ]
   }

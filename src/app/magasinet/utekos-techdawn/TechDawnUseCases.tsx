@@ -11,34 +11,34 @@ const useCases: UseCase[] = [
   {
     title: 'På terrassen',
     description:
-      'Start dagen med kaffe ute, selv når duggen ligger tung. TechDawn™ holder deg varm og komfortabel.',
+      'Start dagen med kaffe ute, selv når duggen ligger tung. TechDown™ holder deg varm og komfortabel.',
     image: '/linn-4.png',
-    tip: 'Ha alltid TechDawn™ hengende ved terrassedøren'
+    tip: 'Ha alltid TechDown™ hengende ved terrassedøren'
   },
   {
     title: 'Kvelden ved bålet',
     description:
-      'Forleng de gode stundene rundt bålet. Når flammene dør ut, tar TechDawn™ over varmen.',
+      'Forleng de gode stundene rundt bålet. Når flammene dør ut, tar TechDown™ over varmen.',
     image: '/magasinet/utekos-balpanne.png',
     tip: 'Perfekt over ullgenseren når temperaturen faller'
   },
   {
     title: 'Båtturen i skumringen',
     description:
-      'Fuktig sjøluft er ingen match for TechDawn™. Nyt solnedgangen fra dekk uten å fryse.',
+      'Fuktig sjøluft er ingen match for TechDown™. Nyt solnedgangen fra dekk uten å fryse.',
     image: '/magasinet/bat.png',
-    tip: 'Oppbevar en TechDawn™ permanent i båten'
+    tip: 'Oppbevar en TechDown™ permanent i båten'
   },
   {
     title: 'Ankomst til kald hytte',
     description:
-      'Mens peisen varmer opp, holder TechDawn™ deg behagelig varm fra første sekund.',
+      'Mens peisen varmer opp, holder TechDown™ deg behagelig varm fra første sekund.',
     image: '/magasinet/1080-helfront-.png',
     tip: 'Bruk 3-i-1 funksjonen som teppe mens du venter'
   }
 ]
 
-export function TechDawnUseCases() {
+export function TechDownUseCases() {
   return (
     <section className='py-20 bg-gradient-to-b from-black to-gray-900/30'>
       <div className='max-w-6xl mx-auto px-6'>
@@ -47,7 +47,7 @@ export function TechDawnUseCases() {
             Fire øyeblikk, én løsning
           </h2>
           <p className='text-gray-400 max-w-2xl mx-auto'>
-            Fra soloppgang til stjerneklar natt – TechDawn™ følger deg gjennom
+            Fra soloppgang til stjerneklar natt – TechDown™ følger deg gjennom
             dagens beste stunder
           </p>
         </div>
@@ -105,7 +105,7 @@ export function TechDawnUseCases() {
             Klar for bekymringsfri komfort?
           </p>
           <p className='text-gray-500'>
-            TechDawn™ – fordi de beste øyeblikkene fortjener den beste
+            TechDown™ – fordi de beste øyeblikkene fortjener den beste
             komforten
           </p>
         </div>

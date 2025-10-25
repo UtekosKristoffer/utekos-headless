@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export function TechDawnCTA() {
+export function TechDownCTA() {
   return (
     <section className='pb-24 pt-6 px-6'>
       <div className='max-w-4xl mx-auto text-center'>
@@ -22,19 +22,19 @@ export function TechDawnCTA() {
 
         {/* Description */}
         <p className='text-xl text-gray-400 mb-12 max-w-2xl mx-auto'>
-          Utekos TechDawn™ er nå tilgjengelig. Bli med tusenvis av nordmenn som
+          Utekos TechDown™ er nå tilgjengelig. Bli med tusenvis av nordmenn som
           har forlenget utesesongen.
         </p>
 
         {/* CTA Buttons */}
         <div className='flex flex-col sm:flex-row gap-4 justify-center'>
           <Link
-            href='/produkter/utekos-techdawn'
+            href='/produkter/utekos-techdown'
             className='inline-flex items-center justify-center px-8 py-4 
                      bg-white text-black font-medium rounded-lg
                      hover:bg-gray-100 transition-colors duration-200'
           >
-            Utforsk TechDawn™
+            Utforsk TechDown™
             <svg
               className='ml-2 w-5 h-5'
               fill='none'

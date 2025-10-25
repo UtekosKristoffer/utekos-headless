@@ -12,7 +12,6 @@ type CustomData = {
   order_id?: string
 }
 type UserData = {
-  // SHA-256 hashed lists for PII (if present)
   em?: string[]
   ph?: string[]
   fn?: string[]

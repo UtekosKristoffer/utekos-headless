@@ -105,7 +105,7 @@ var 600 000kr.
 
 - Eneste fysiske butikk som selger produktet
 - **Fortjeneste per salg:**
-  - Utekos TechDawn™: 300 kr
+  - Utekos TechDown™: 300 kr
   - Utekos Mikrofiber™: ~100 kr
   - Utekos Dun™: ~100 kr
 
@@ -179,7 +179,7 @@ utendørs.
 
 ## Produktkatalog
 
-### Utekos TechDawn™
+### Utekos TechDown™
 
 | Parameter                           | Verdi                                |
 | ----------------------------------- | ------------------------------------ |
@@ -408,7 +408,7 @@ utendørs.
 
 ---
 
-### Utekos TechDawn™ Materialer
+### Utekos TechDown™ Materialer
 
 | Komponent        | Spesifikasjon                |
 | ---------------- | ---------------------------- |

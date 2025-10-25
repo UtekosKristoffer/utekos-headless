@@ -11,7 +11,7 @@ export const choices: ProductChoice[] = [
     title: 'Vår varmeste og mest allsidige modell',
     description:
       'Optimalisert etter erfaringer og tilbakemeldinger. Gir maksimal komfort og bevegelsesfrihet. Perfekt for hytteliv, bobil og all utekos.',
-    href: '/produkter/utekos-techdawn' as Route,
+    href: '/produkter/utekos-techdown' as Route,
     imageUrl: '/fiberdun.webp',
     linkColor: 'text-sky-800'
   },

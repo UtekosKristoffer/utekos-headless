@@ -8,7 +8,7 @@ import { AnimatedBlockTwo } from './AnimatedBlockTwo'
 import type { Route } from 'next'
 
 const originalImage = '/liten/mikro-liten.png'
-const techdawnImage = '/liten/techdawn-liten.png'
+const techdownImage = '/liten/techdown-liten.png'
 const comfyrobeImage = '/liten/comfy-liten.png'
 
 type Product = {
@@ -39,13 +39,13 @@ const products = [
     featured: true
   },
   {
-    id: 'techdawn',
-    name: 'Utekos TechDawn™',
+    id: 'techdown',
+    name: 'Utekos TechDown™',
     description:
       'Teknisk ytelse møter moderne design. CloudWeave™ isolasjon varmer selv når den er fuktig.',
-    image: techdawnImage,
+    image: techdownImage,
     badge: { text: 'Nyhet', type: 'new' },
-    href: '/products/utekos-techdawn' as Route,
+    href: '/products/utekos-techdown' as Route,
     featured: false
   },
   {
@@ -186,11 +186,11 @@ export const ProductFamilySection = () => {
 
             {/* Grid Products */}
             <div className='grid gap-6 md:grid-cols-2'>
-              {/* TechDawn */}
+              {/* TechDown */}
               <AnimatedBlockTwo className='fade-in-up' delay='300ms'>
                 <div
                   className='group relative h-full overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-800/90 to-zinc-900/90 border border-zinc-700/50 hover:border-zinc-600/50 transition-all duration-500'
-                  onMouseEnter={() => setHoveredProduct('techdawn')}
+                  onMouseEnter={() => setHoveredProduct('techdown')}
                   onMouseLeave={() => setHoveredProduct(null)}
                 >
                   {/* Glow */}

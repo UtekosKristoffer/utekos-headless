@@ -84,7 +84,7 @@ export function DeepDiveSection() {
                 </h3>
               </div>
               <p className='mt-2 text-muted-foreground'>
-                Både <strong>Utekos TechDawn™</strong> og{' '}
+                Både <strong>Utekos TechDown™</strong> og{' '}
                 <strong>Mikrofiber™</strong> er robuste arbeidshester som tåler
                 røff bruk, kan vaskes enkelt i maskin og tørker raskt.
                 <br />

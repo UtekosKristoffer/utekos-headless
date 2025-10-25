@@ -58,7 +58,18 @@ export type AddToCartContent = {
   quantity?: number
   item_price?: number
 }
-
+export type Body = {
+  cartId: string
+  checkoutUrl: string
+  userData: {
+    fbp?: string
+    fbc?: string
+    client_user_agent?: string
+    client_ip_address?: string
+    external_id?: string
+  }
+  eventId?: string
+}
 export type AddToCartInput = {
   value?: number
   currency?: string
