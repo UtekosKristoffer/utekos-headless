@@ -18,7 +18,7 @@ const images = [
     alt: 'Utekos TechDown fullfigur, sett forfra'
   },
   {
-    src: '/fiberdun/techdown-bak.png',
+    src: '/fiberdun/techdawn-bak.png',
     alt: 'Utekos TechDown fullfigur, sett bakfra'
   },
   {
