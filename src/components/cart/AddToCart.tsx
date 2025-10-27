@@ -150,12 +150,14 @@ export function AddToCart({
           }
         }
 
-        // 3) Brukerfeedback (som før)
+        // 3) Brukerfeedback (som før) - Fjernet toast.success
+        /*
         const successMessage =
           additionalLine ?
             `${product.title} + gratis Utekos Buff™ er lagt i handlekurven!`
           : `${product.title} er lagt i handlekurven!`
         toast.success(successMessage)
+        */
 
         // === 4) TRACKING (Pixel + CAPI) – full typesikkerhet og uten 'any' ===
 

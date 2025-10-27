@@ -14,7 +14,7 @@ export interface PriceActivityPanelProps {
 
 const LAUNCH_OFFERS = {
   'utekos-techdown': {
-    discountAmount: 200,
+    discountAmount: 449,
     label: 'Lanseringstilbud'
   }
 } as const
@@ -52,7 +52,7 @@ export default function PriceActivityPanel({
             </span>
             <div className='h-4 w-px bg-white/20' />
             <span className='text-sm font-bold text-emerald-400'>
-              Spar kr {launchOffer.discountAmount} 🎉
+              Spar totalt kr {launchOffer.discountAmount} 🎉
             </span>
           </div>
         </div>
