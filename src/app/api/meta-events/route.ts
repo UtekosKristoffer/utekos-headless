@@ -128,7 +128,7 @@ export async function POST(req: NextRequest) {
 
   const json = await res.json()
   if (!res.ok) {
-    // Bubble up Graph errors for debugging (remove sensitive data if logging)
+
     return NextResponse.json(
       { error: 'Meta CAPI error', details: json },
       { status: 400 }

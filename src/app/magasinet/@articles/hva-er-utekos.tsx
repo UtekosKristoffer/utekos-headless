@@ -1,3 +1,5 @@
+// Path: src/app/magasinet/@articles/hva-er-utekos.tsx
+
 import { HeroArticleIntroduction } from '../hva-er-utekos/HeroArticleIntroduction'
 import { ProductFamilySection } from '../hva-er-utekos/ProductFamilySection'
 import { CoreConceptSection } from '../hva-er-utekos/CoreConceptSection'
