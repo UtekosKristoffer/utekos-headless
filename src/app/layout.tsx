@@ -1,6 +1,6 @@
 // Path: src/app/layout.tsx
 import './globals.css'
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
 import { geistSans, geistMono } from '@/db/config/font.config'
 import { mainMenu } from '@/db/config/menu.config'
 import { Analytics } from '@vercel/analytics/react'
@@ -138,11 +138,11 @@ export default async function RootLayout({ children }: RootLayoutProps) {
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
             
-            // Initialize pixel - NO user data here for automatic advanced matching
+            // Initialize pixel without user data (for automatic advanced matching)
             fbq('init', '${pixelId}');
             
-            // Track initial PageView
-            fbq('track', 'PageView');
+            // VIKTIG: IKKE send PageView her - MetaPixelEvents gjør det med parameters
+            // fbq('track', 'PageView'); // KOMMENTERT UT
           `}
         </Script>
       )}

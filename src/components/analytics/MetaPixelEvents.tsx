@@ -37,13 +37,8 @@ function getPageViewParams(pathname: string) {
   }
 
   // Legg til content_type basert på pathname
-  if (pathname.includes('/product/') || pathname.includes('/produkter/')) {
+  if (pathname.includes('/produkt') || pathname === '/produkter') {
     params.content_type = 'product'
-  } else if (
-    pathname.includes('/category/')
-    || pathname.includes('/produkter')
-  ) {
-    params.content_type = 'product_group'
   } else if (pathname === '/') {
     params.content_type = 'home'
   } else if (pathname.includes('/checkout') || pathname.includes('/kasse')) {
@@ -59,11 +54,6 @@ function getPageViewParams(pathname: string) {
  * Sender PageView til CAPI for redundant setup (per Meta best practices)
  */
 async function sendPageViewToCAPI(pathname: string, eventId: string) {
-  if (process.env.NODE_ENV !== 'production') {
-    console.log('MetaPixel: Skipping CAPI in development')
-    return
-  }
-
   try {
     const params = getPageViewParams(pathname)
 
@@ -81,8 +71,6 @@ async function sendPageViewToCAPI(pathname: string, eventId: string) {
 
     if (!response.ok) {
       console.error('MetaPixel: CAPI error', await response.json())
-    } else {
-      console.log('MetaPixel: PageView sent to CAPI', { pathname, eventId })
     }
   } catch (error) {
     console.error('MetaPixel: Failed to send to CAPI', error)
@@ -100,36 +88,24 @@ export function MetaPixelEvents() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const lastPathRef = useRef<string | null>(null)
-  const initialPageViewSent = useRef(false)
 
-  // Håndter PageView tracking med CAPI redundancy
+  // Håndter PageView tracking med parameters og CAPI redundancy
   useEffect(() => {
-    if (process.env.NODE_ENV !== 'production') return
-
     const fbq = typeof window !== 'undefined' ? window.fbq : undefined
     if (!fbq) return
 
-    // Skip initial PageView - det sendes allerede i layout.tsx
-    if (!initialPageViewSent.current) {
-      initialPageViewSent.current = true
-      lastPathRef.current = pathname
-
-      // Men send til CAPI for redundancy
-      const eventId = generateEventId()
-      sendPageViewToCAPI(pathname, eventId)
-      return
-    }
-
-    // For rute-endringer: send PageView med både Pixel og CAPI
+    // Send PageView for HVER page load (inkludert initial)
     if (lastPathRef.current !== pathname) {
       const params = getPageViewParams(pathname)
       const eventId = generateEventId()
 
-      // Send via browser pixel
+      // Send via browser pixel MED parameters
       fbq('track', 'PageView', params, { eventID: eventId })
 
-      // Send via CAPI for redundancy
-      sendPageViewToCAPI(pathname, eventId)
+      // Send via CAPI for redundancy (kun i production)
+      if (process.env.NODE_ENV === 'production') {
+        sendPageViewToCAPI(pathname, eventId)
+      }
 
       console.log('MetaPixel: PageView tracked', { pathname, params, eventId })
     }
