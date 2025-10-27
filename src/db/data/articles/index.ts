@@ -10,16 +10,6 @@ export interface Article {
 }
 export const mockArticles: Article[] = [
   {
-    slug: 'beredskap-egenomsorg',
-    title:
-      'Fra ulempe til Utekos: Slik bevarer du komforten når det uventede skjer',
-    excerpt:
-      'LANSERING: Det nye plagget som redefinerer personlig komfort. Dunlignende letthet med bekymringsfri ytelse.',
-    imageUrl: '/fiberdun/patch.jpg',
-    category: 'Tips og råd',
-    date: '14. oktober 2025'
-  },
-  {
     slug: 'utekos-techdown-lansering',
     title: 'Utekos TechDown™ - Plagget som redefinerer personlig komfort.',
     excerpt: 'Ditt glemte ess i ermet for å bevare tryggheten og varmen.',

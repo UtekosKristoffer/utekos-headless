@@ -15,11 +15,6 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 const articleComponents = {
-  'beredskap-egenomsorg': dynamic(() =>
-    import('../@articles/beredskap-egenomsorg').then(
-      mod => mod.BeredskapEgenomsorgArticle
-    )
-  ),
   'hva-er-utekos': dynamic(() =>
     import('../@articles/hva-er-utekos').then(mod => mod.HvaErUtekosArticle)
   ),
