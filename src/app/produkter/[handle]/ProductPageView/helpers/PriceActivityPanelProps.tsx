@@ -14,7 +14,7 @@ interface PriceActivityPanelProps {
 
 const LAUNCH_OFFERS = {
   'utekos-techdown': {
-    discountAmount: 200,
+    discountAmount: 449,
     discountPercent: 10,
     label: 'Lanseringstilbud',
     endDate: '2025-11-30' // Valgfritt: sett sluttdato
