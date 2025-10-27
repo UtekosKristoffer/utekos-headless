@@ -23,7 +23,6 @@ function setCookie(name: string, value: string, days: number = 90) {
   const date = new Date()
   date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
   const expires = `expires=${date.toUTCString()}`
-  // Per Meta docs: Use Secure and SameSite=Lax
   document.cookie = `${name}=${value}; ${expires}; path=/; SameSite=Lax; Secure`
 }
 
@@ -51,29 +50,29 @@ function getPageViewParams(pathname: string) {
 }
 
 /**
- * Sender PageView til CAPI for redundant setup (per Meta best practices)
+ * Sender PageView til CAPI for redundant setup
  */
 async function sendPageViewToCAPI(pathname: string, eventId: string) {
   try {
     const params = getPageViewParams(pathname)
-
+    
     const response = await fetch('/api/meta-events', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         eventName: 'PageView',
         eventData: params,
-        eventId: eventId, // For deduplication mot browser pixel
+        eventId: eventId,
         eventSourceUrl: window.location.href,
         eventTime: Math.floor(Date.now() / 1000)
       })
     })
 
     if (!response.ok) {
-      console.error('MetaPixel: CAPI error', await response.json())
+      console.error('MetaPixel CAPI error:', await response.json())
     }
   } catch (error) {
-    console.error('MetaPixel: Failed to send to CAPI', error)
+    console.error('MetaPixel CAPI failed:', error)
   }
 }
 
@@ -87,14 +86,24 @@ function generateEventId(): string {
 export function MetaPixelEvents() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const lastPathRef = useRef<string | null>(null)
+  const lastPathRef = useRef<string>('')
 
-  // Håndter PageView tracking med parameters og CAPI redundancy
+  // Håndter PageView tracking - kjører på HVER pathname change
   useEffect(() => {
-    const fbq = typeof window !== 'undefined' ? window.fbq : undefined
-    if (!fbq) return
+    // Debug logging
+    console.log('MetaPixel useEffect triggered:', {
+      pathname,
+      lastPath: lastPathRef.current,
+      willSend: lastPathRef.current !== pathname
+    })
 
-    // Send PageView for HVER page load (inkludert initial)
+    const fbq = typeof window !== 'undefined' ? window.fbq : undefined
+    if (!fbq) {
+      console.warn('MetaPixel: fbq not available')
+      return
+    }
+
+    // Send PageView kun hvis pathname har endret seg
     if (lastPathRef.current !== pathname) {
       const params = getPageViewParams(pathname)
       const eventId = generateEventId()
@@ -102,16 +111,22 @@ export function MetaPixelEvents() {
       // Send via browser pixel MED parameters
       fbq('track', 'PageView', params, { eventID: eventId })
 
+      console.log('✅ MetaPixel: PageView sent', {
+        pathname,
+        params,
+        eventId,
+        timestamp: new Date().toISOString()
+      })
+
       // Send via CAPI for redundancy (kun i production)
       if (process.env.NODE_ENV === 'production') {
         sendPageViewToCAPI(pathname, eventId)
       }
 
-      console.log('MetaPixel: PageView tracked', { pathname, params, eventId })
+      // Oppdater ref ETTER sending
+      lastPathRef.current = pathname
     }
-
-    lastPathRef.current = pathname
-  }, [pathname])
+  }, [pathname]) // Dependency: pathname
 
   // Håndter _fbc og _fbp cookies per Meta dokumentasjon
   useEffect(() => {
@@ -123,19 +138,17 @@ export function MetaPixelEvents() {
 
       // Kun sett cookie hvis fbclid er ny eller ikke eksisterer
       if (!existingFbc || existingFbclid !== fbclid) {
-        // Format per Meta docs: fb.1.creationTime.fbclid
         const creationTime = Date.now()
         const fbcValue = `fb.1.${creationTime}.${fbclid}`
         setCookie('_fbc', fbcValue, 90)
 
-        console.log('MetaPixel: _fbc cookie set', fbcValue)
+        console.log('MetaPixel: _fbc cookie set:', fbcValue)
       }
     }
 
     // Håndter _fbp (Browser ID) - refresh med 90 dagers utløp
     const fbp = getCookie('_fbp')
     if (fbp) {
-      // Per Meta docs: Refresh cookie på hver visit for å forlenge levetid
       setCookie('_fbp', fbp, 90)
     }
   }, [searchParams])

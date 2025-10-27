@@ -10,7 +10,6 @@ import { getCachedCart } from '@/lib/helpers/cart/getCachedCart'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { QueryClient } from '@tanstack/react-query'
 import Script from 'next/script'
-import { Suspense } from 'react'
 import { MetaPixelEvents } from '@/components/analytics/MetaPixelEvents'
 import ChatBubble from '@/components/ChatBubble'
 import Providers from '@/components/providers/Providers'
@@ -168,6 +167,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <OrganizationJsonLd />
 
         <Providers dehydratedState={dehydratedState} cartId={cartId}>
+          {/* MetaPixelEvents INNE i Providers, UTEN Suspense */}
+          <MetaPixelEvents />
+          
           <AnnouncementBanner />
           <Header menu={mainMenu} />
           <main>
@@ -178,10 +180,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           <Analytics mode='production' />
           <ChatBubble />
         </Providers>
-
-        <Suspense fallback={null}>
-          <MetaPixelEvents />
-        </Suspense>
       </body>
     </html>
   )
