@@ -111,7 +111,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     productsResponse.success && productsResponse.body ?
       productsResponse.body.map(product => ({
         url: `${baseUrl}/produkter/${product.handle}`,
-        // Forenklet logikk: Bruk updatedAt hvis det er en gyldig streng, ellers fallback
         lastModified:
           typeof product.updatedAt === 'string' && product.updatedAt ?
             product.updatedAt

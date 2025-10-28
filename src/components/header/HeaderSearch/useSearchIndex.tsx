@@ -1,3 +1,5 @@
+// Path: src/components/header/HeaderSearch/useSearchIndex.tsx
+
 'use client'
 
 import { CommandGroup } from '@/components/ui/command'

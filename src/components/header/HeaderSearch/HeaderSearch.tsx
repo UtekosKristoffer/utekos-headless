@@ -1,3 +1,4 @@
+// Path: src/components/header/HeaderSearch/HeaderSearch.tsx
 'use client'
 
 import {
@@ -12,7 +13,6 @@ import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 import type { SearchGroup } from '@types'
 import type { Route } from 'next'
 import { useRouter } from 'next/navigation'
-import * as React from 'react'
 import { startTransition, useState, Suspense, useEffect } from 'react' // 1. Importer useEffect
 import { HeaderSearchFooter } from './HeaderSearchFooter'
 import { HeaderSearchInputField } from './HeaderSearchInputField'

@@ -22,7 +22,7 @@ export type SearchGroup = {
 
 export async function GET() {
   'use cache'
-  cacheLife('default') // erstatter revalidate: 300 (5 min stale)
+  cacheLife('default')
 
   try {
     const sitemapEntries = (await sitemap()) as MetadataRoute.Sitemap
@@ -41,10 +41,11 @@ export async function GET() {
 
     const uniquePaths = Array.from(new Set(allPaths))
     const contentPaths = uniquePaths.filter(p => !p.startsWith('/api'))
-    const { groups } = await buildSearchIndex(contentPaths)
+    const { groups } = buildSearchIndex(contentPaths)
     const payload = { groups }
     const plainPayload = JSON.parse(JSON.stringify(payload))
 
+    // Returner det rene objektet
     return NextResponse.json(plainPayload)
   } catch (error) {
     console.error('Failed to build search index:', error)

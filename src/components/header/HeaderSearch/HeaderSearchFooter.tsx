@@ -1,3 +1,4 @@
+// Path: src/components/header/HeaderSearch/HeaderSearchFooter.tsx
 export function HeaderSearchFooter() {
   return (
     <>

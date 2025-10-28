@@ -1,5 +1,8 @@
 // Path: src/lib/helpers/search/index.ts
 import type { SearchGroup, SearchItem } from '@/app/api/search-index/route'
+// Fjern dynamisk import fra her
+// import { mockArticles } from '@/db/data/articles' // <--- Endre til statisk import
+import { mockArticles } from '@/db/data/articles' // <-- Statisk import her
 import { SEARCH_CONFIG, GROUP_LABELS } from './searchConfig'
 export type ClientSearchItem = SearchItem
 
@@ -19,9 +22,11 @@ function normalizeText(text: string): string {
 }
 
 /**
- * Bygger komplett søkeindeks fra statisk config + dynamiske magasinartikler
+ * Bygger komplett søkeindeks fra statisk config + statiske magasinartikler
  */
-export async function buildSearchIndex(_allPaths?: string[]) {
+// Fjern 'async' siden vi ikke bruker 'await import()' lenger
+export function buildSearchIndex(_allPaths?: string[]) {
+  // 1. Start med statisk konfigurasjon
   const staticItems: SearchItem[] = SEARCH_CONFIG.map(item => ({
     id: item.id,
     title: item.title,
@@ -32,11 +37,10 @@ export async function buildSearchIndex(_allPaths?: string[]) {
       ...item.keywords,
       normalizeText(item.title),
       ...item.keywords.map(k => normalizeText(k))
-    ].filter(Boolean) // Fjern eventuelle tomme strenger
+    ].filter(Boolean)
   }))
 
-  const { mockArticles } = await import('@/db/data/articles')
-
+  // 2. Bruk statisk importert mockArticles direkte
   const magazineItems: SearchItem[] = mockArticles.map(article => {
     const slugWords = article.slug.split('-').filter(word => word.length > 2)
     const titleWords = article.title.split(' ').filter(word => word.length > 2)
@@ -49,7 +53,7 @@ export async function buildSearchIndex(_allPaths?: string[]) {
       id: `magazine-${article.slug}`,
       title: article.title,
       path: `/magasinet/${article.slug}`,
-      parentId: null, // Eksplisitt null
+      parentId: null,
       keywords: [
         article.slug,
         article.title,
@@ -58,25 +62,22 @@ export async function buildSearchIndex(_allPaths?: string[]) {
         ...slugWords,
         ...titleWords,
         normalizeText(article.title),
-        normalizeText(article.category ?? ''), // Håndter mulig undefined category
+        normalizeText(article.category ?? ''),
         ...excerptWords.map(w => normalizeText(w)),
         ...slugWords.map(w => normalizeText(w)),
         ...titleWords.map(w => normalizeText(w))
       ]
         .flat()
-        .filter(kw => typeof kw === 'string' && kw.length > 0) // Ekstra sjekk for gyldige keywords
+        .filter(kw => typeof kw === 'string' && kw.length > 0)
     }
   })
 
+  // 3. Kombiner alt og grupper (som før)
   const allItems = [...staticItems, ...magazineItems]
   const groupsMap = new Map<string, SearchGroup>()
 
   Object.entries(GROUP_LABELS).forEach(([key, label]) => {
-    groupsMap.set(key, {
-      key,
-      label,
-      items: []
-    })
+    groupsMap.set(key, { key, label, items: [] })
   })
 
   allItems.forEach(item => {
@@ -101,8 +102,9 @@ export async function buildSearchIndex(_allPaths?: string[]) {
     }
   })
 
+  // 4. Sorter items og tving plain object struktur (som før)
   const groups = Array.from(groupsMap.values())
-    .filter(g => g.items.length > 0) // Kun grupper med innhold
+    .filter(g => g.items.length > 0)
     .map(g => ({
       key: g.key,
       label: g.label,
@@ -112,14 +114,17 @@ export async function buildSearchIndex(_allPaths?: string[]) {
           id: item.id,
           title: item.title,
           path: item.path,
-          parentId: item.parentId, // Skal være null her
-          keywords: Array.isArray(item.keywords) ? [...item.keywords] : [], // Sikre at keywords er en array
-          // IKKE inkluder 'children' hvis det ikke er definert
+          parentId: item.parentId,
+          keywords: Array.isArray(item.keywords) ? [...item.keywords] : [],
           ...(item.children && {
             children: item.children.map(child => ({ ...child }))
-          }) // Sørg for at evt. children også er rene objekter
+          })
         }))
     }))
+
+  console.log(`✅ Search index built: ${allItems.length} total items`)
+  console.log(`   - ${staticItems.length} static items`)
+  console.log(`   - ${magazineItems.length} magazine articles`)
 
   return { groups }
 }
