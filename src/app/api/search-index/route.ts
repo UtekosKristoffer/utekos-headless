@@ -1,9 +1,9 @@
 // Path: src/app/api/search-index/route.ts
+'use cache'
 import sitemap from '@/app/sitemap'
 import { buildSearchIndex } from '@/lib/helpers/search'
 import type { MetadataRoute } from 'next'
 import { NextResponse } from 'next/server'
-import { cacheLife } from 'next/cache'
 
 export type SearchItem = {
   id: string
@@ -21,9 +21,6 @@ export type SearchGroup = {
 }
 
 export async function GET() {
-  'use cache'
-  cacheLife('default')
-
   try {
     const sitemapEntries = (await sitemap()) as MetadataRoute.Sitemap
 
@@ -42,11 +39,41 @@ export async function GET() {
     const uniquePaths = Array.from(new Set(allPaths))
     const contentPaths = uniquePaths.filter(p => !p.startsWith('/api'))
     const { groups } = buildSearchIndex(contentPaths)
-    const payload = { groups }
-    const plainPayload = JSON.parse(JSON.stringify(payload))
 
-    // Returner det rene objektet
-    return NextResponse.json(plainPayload)
+    // Dobbel serialisering for å garantere plain objects
+    const serializedGroups = groups.map(group => ({
+      key: String(group.key),
+      label: String(group.label),
+      items: group.items.map(item => ({
+        id: String(item.id),
+        title: String(item.title),
+        path: String(item.path),
+        parentId: item.parentId ? String(item.parentId) : null,
+        keywords:
+          Array.isArray(item.keywords) ? item.keywords.map(k => String(k)) : [],
+        ...(item.children && {
+          children: item.children.map(child => ({
+            id: String(child.id),
+            title: String(child.title),
+            path: String(child.path),
+            parentId: child.parentId ? String(child.parentId) : null,
+            keywords:
+              Array.isArray(child.keywords) ?
+                child.keywords.map(k => String(k))
+              : []
+          }))
+        })
+      }))
+    }))
+
+    return NextResponse.json(
+      { groups: serializedGroups },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600'
+        }
+      }
+    )
   } catch (error) {
     console.error('Failed to build search index:', error)
     return NextResponse.json(
