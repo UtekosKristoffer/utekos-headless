@@ -13,7 +13,6 @@ import {
 } from 'lucide-react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 
-// Hjelper-komponent for å mappe streng til ikon
 const iconMap = {
   'cloud-drizzle': CloudDrizzle,
   'washing-machine': WashingMachine,

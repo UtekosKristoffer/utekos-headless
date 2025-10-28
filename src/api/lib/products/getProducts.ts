@@ -10,10 +10,7 @@ import type {
   ShopifyProduct,
   ShopifyProductsOperation
 } from '@types'
-import {
-  unstable_cacheLife as cacheLife,
-  unstable_cacheTag as cacheTag
-} from 'next/cache'
+import { cacheLife, cacheTag } from 'next/cache'
 import { TAGS } from '../../constants'
 
 export async function fetchProducts(

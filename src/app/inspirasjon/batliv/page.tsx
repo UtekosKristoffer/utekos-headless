@@ -11,7 +11,7 @@ import {
 } from './PopularDestinations'
 import { BoatSeasonSection } from './BoatSeasonSection'
 import { BoatingHeroSection } from './BoatingHeroSection'
-
+import { Activity } from 'react'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Båtliv og Utekos | Forleng sesongen og kveldene på vannet',
@@ -84,18 +84,24 @@ export default function BoatingInspirationPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main>
-        <BoatingHeroSection />
-
-        <UseCasesGrid useCases={useCasesData} />
-
-        <BenefitsGrid />
-
-        <BoatSeasonSection />
-
-        <SocialProof />
-
-        <PopularDestinations destinations={popularDestinationsData} />
-
+        <Activity>
+          <BoatingHeroSection />
+        </Activity>
+        <Activity>
+          <UseCasesGrid useCases={useCasesData} />
+        </Activity>
+        <Activity>
+          <BenefitsGrid />
+        </Activity>
+        <Activity>
+          <BoatSeasonSection />
+        </Activity>
+        <Activity>
+          <SocialProof />
+        </Activity>
+        <Activity>
+          <PopularDestinations destinations={popularDestinationsData} />
+        </Activity>
         <CTASection />
       </main>
     </>

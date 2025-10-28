@@ -3,10 +3,7 @@
 import { getProductQuery } from '@/api/graphql/queries/products'
 import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
 import { reshapeProduct } from '@/lib/utils/reshapeProduct'
-import {
-  unstable_cacheTag as cacheTag,
-  unstable_cacheLife as cacheLife
-} from 'next/cache'
+import { cacheTag, cacheLife } from 'next/cache'
 import { TAGS } from '@/api/constants'
 import type { ShopifyProduct, ShopifyProductOperation } from '@types'
 

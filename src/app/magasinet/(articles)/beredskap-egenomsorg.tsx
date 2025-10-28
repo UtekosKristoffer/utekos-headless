@@ -1,4 +1,4 @@
-// Path: src/app/magasinet/@articles/beredskap-egenomsorg.tsx
+// Path: src/app/magasinet/(articles)/beredskap-egenomsorg.tsx
 import { HeroBeredskap } from '../beredskap-egenomsorg/HeroBeredskap'
 import { HvorforUtekosSection } from '../beredskap-egenomsorg/HvorforUtekosSection'
 import { ProduktguideBeredskap } from '../beredskap-egenomsorg/ProduktguideBeredskap'
@@ -7,7 +7,7 @@ import { ProfesjonellBrukSection } from '../beredskap-egenomsorg/ProfesjonellBru
 
 export function BeredskapEgenomsorgArticle() {
   return (
-    <main className="md:max-w-4xl mx-auto">
+    <main className='md:max-w-4xl mx-auto'>
       <HeroBeredskap />
       <HvorforUtekosSection />
       <ProduktguideBeredskap />

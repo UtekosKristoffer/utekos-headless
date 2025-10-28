@@ -7,6 +7,7 @@ import { CTASection } from './Sections/CTASection'
 import { PhilosophiesSection } from './Sections/PhilosophiesSection'
 import { AboutUsHeroSection } from './Sections/AboutUsHeroSection'
 import { FindInStoreSection } from '@/components/frontpage/FindStoreSection'
+import { Activity } from 'react'
 export const metadata: Metadata = {
   title: 'Om Utekos | Vår historie og løfte til deg',
   description:
@@ -16,14 +17,30 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main>
-      <AboutUsHeroSection />
-      <GrunderSection />
-      <PhilosophiesSection />
-      <PromiseSection />
-      <AboutCarousel />
-      <FindUsSection />
-          <FindInStoreSection />
-      <CTASection />
+      <Activity>
+        <AboutUsHeroSection />
+      </Activity>
+      <Activity>
+        <GrunderSection />
+      </Activity>
+      <Activity>
+        <PhilosophiesSection />
+      </Activity>
+      <Activity>
+        <PromiseSection />
+      </Activity>
+      <Activity>
+        <AboutCarousel />
+      </Activity>
+      <Activity>
+        <FindUsSection />
+      </Activity>
+      <Activity>
+        <FindInStoreSection />
+      </Activity>
+      <Activity>
+        <CTASection />
+      </Activity>
     </main>
   )
 }

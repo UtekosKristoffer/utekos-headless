@@ -2,10 +2,7 @@
 import { getProducts } from '@/api/lib/products/getProducts'
 import { TAGS } from '@/api/constants'
 import type { ShopifyProduct } from '@types'
-import {
-  unstable_cacheTag as cacheTag,
-  unstable_cacheLife as cacheLife
-} from 'next/cache'
+import { cacheTag, cacheLife } from 'next/cache'
 
 export async function getAccessoryProducts(): Promise<ShopifyProduct[]> {
   'use cache'

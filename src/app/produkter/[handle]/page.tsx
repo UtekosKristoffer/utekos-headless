@@ -1,5 +1,5 @@
 // Path: src/app/produkter/[handle]/page.tsx
-import { Suspense } from 'react'
+import { Suspense, Activity } from 'react'
 import { VideoSkeleton } from '@/app/produkter/components/VideoSkeleton'
 import { ProductVideoSection } from '@/app/produkter/components/ProductVideoSection'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
@@ -13,7 +13,7 @@ import {
 import { notFound } from 'next/navigation'
 import { ProductPageController } from '@/app/produkter/[handle]/ProductPageController/ProductPageController'
 import type { Metadata, ResolvingMetadata } from 'next'
-
+import { connection } from 'next/server'
 type RouteParamsPromise = Promise<{ handle: string }>
 
 type GenerateMetadataProps = {
@@ -71,15 +71,13 @@ export async function generateMetadata(
   }
 }
 
-// ---- Page (Next 15: params er en Promise) --------------------------------
-
 export default async function ProductPage({
   params
 }: {
   params: RouteParamsPromise
 }) {
   const { handle } = await params
-
+  await connection()
   const queryClient = new QueryClient()
   const product = await getProduct(handle)
 
@@ -87,7 +85,6 @@ export default async function ProductPage({
     notFound()
   }
 
-  // Prefetch produktet og liste for hydrering på klient
   await queryClient.prefetchQuery({
     ...productOptions(handle),
     queryFn: () => product
@@ -97,12 +94,16 @@ export default async function ProductPage({
   return (
     <>
       <ProductJsonLd handle={handle} />
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <ProductPageController handle={handle} />
-      </HydrationBoundary>
-      <Suspense fallback={<VideoSkeleton />}>
-        <ProductVideoSection />
-      </Suspense>
+      <Activity>
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <ProductPageController handle={handle} />
+        </HydrationBoundary>
+      </Activity>
+      <Activity>
+        <Suspense fallback={<VideoSkeleton />}>
+          <ProductVideoSection />
+        </Suspense>
+      </Activity>
     </>
   )
 }

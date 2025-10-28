@@ -1,3 +1,4 @@
+// Path: src/components/quick-view/QuickViewModal.tsx
 'use client'
 
 import { getProduct } from '@/api/lib/products/getProduct'
@@ -12,7 +13,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useVariantState } from '@/hooks/useVariantState'
 import type { ShopifyProduct } from '@types'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useEffectEvent } from 'react'
 import { toast } from 'sonner'
 import { VariantSelectors } from './VariantSelectors'
 import { Price } from '../jsx/Price'
@@ -62,6 +63,13 @@ export function QuickViewModal({
     productData ?? undefined
   )
 
+  const handleFetchError = useEffectEvent(() => {
+    toast.error(
+      'Beklager, vi kunne ikke laste produktet. Vennligst prøv igjen.'
+    )
+    onOpenChange(false)
+  })
+
   useEffect(() => {
     async function fetchAllProducts() {
       if (isOpen && !productData) {
@@ -74,17 +82,14 @@ export function QuickViewModal({
           setProductData(mainProduct)
           setBuffProduct(freeBuffProduct)
         } catch (error) {
-          toast.error(
-            'Beklager, vi kunne ikke laste produktet. Vennligst prøv igjen.'
-          )
-          onOpenChange(false)
+          handleFetchError()
         } finally {
           setIsLoading(false)
         }
       }
     }
     fetchAllProducts()
-  }, [isOpen, productHandle, productData, onOpenChange])
+  }, [isOpen, productHandle, productData])
 
   const selectedBuffVariant = buffProduct?.variants.edges.find(edge =>
     edge.node.selectedOptions.some(opt => opt.value === selectedBuffColor)

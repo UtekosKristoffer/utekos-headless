@@ -3,8 +3,7 @@ import sitemap from '@/app/sitemap'
 import { buildSearchIndex } from '@/lib/helpers/search'
 import type { MetadataRoute } from 'next'
 import { NextResponse } from 'next/server'
-
-export const revalidate = 300
+import { cacheLife } from 'next/cache'
 
 export type SearchItem = {
   id: string
@@ -22,6 +21,9 @@ export type SearchGroup = {
 }
 
 export async function GET() {
+  'use cache'
+  cacheLife('default') // erstatter revalidate: 300 (5 min stale)
+
   try {
     const sitemapEntries = (await sitemap()) as MetadataRoute.Sitemap
 

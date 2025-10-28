@@ -12,6 +12,7 @@ import { UseCasesGrid, useCasesData } from './sections/UseCasesGrid'
 import { jsonLd } from './data/jsonLd'
 import { SeasonsSection } from './sections/SeasonsSection'
 import { SocialProof } from './sections/SocialProof'
+import { Activity } from 'react'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Hytteliv og Utekos | Din guide til ultimat hyttekomfort',
@@ -59,13 +60,27 @@ export default function CabinInspirationPage() {
       />
 
       <main>
-        <CabinHeroSection />
-        <UseCasesGrid useCases={useCasesData} />
-        <BenefitsGrid benefits={benefitsData} />
-        <SeasonsSection />
-        <PopularCabinAreasGrid destinations={popularAreasData} />
-        <SocialProof />
-        <CTASection />
+        <Activity>
+          <CabinHeroSection />
+        </Activity>
+        <Activity>
+          <UseCasesGrid useCases={useCasesData} />
+        </Activity>
+        <Activity>
+          <BenefitsGrid benefits={benefitsData} />
+        </Activity>
+        <Activity>
+          <SeasonsSection />
+        </Activity>
+        <Activity>
+          <PopularCabinAreasGrid destinations={popularAreasData} />
+        </Activity>
+        <Activity>
+          <SocialProof />
+        </Activity>
+        <Activity>
+          <CTASection />
+        </Activity>
       </main>
     </>
   )

@@ -3,7 +3,7 @@ import { ProductCarousel } from '@/app/gaveguide/components/ProductCardCarousel'
 import { TrustSection } from './components/TrustSection'
 import { SocialProofSection } from './components/SocialProofSection'
 import { GaveGuideHero } from './components/GaveGuideHero'
-
+import { Activity } from 'react'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Gaveguide: Finn den perfekte gaven til dine nærmeste | Utekos',
@@ -41,12 +41,20 @@ export const metadata: Metadata = {
 export default function GaveguidePage() {
   return (
     <main className='bg-background'>
-      <GaveGuideHero />
-      <section className='container md:max-w-7xl mx-auto py-12 lg:py-16 sm:py-16'>
-        <ProductCarousel />
-      </section>
-      <SocialProofSection />
-      <TrustSection />
+      <Activity>
+        <GaveGuideHero />
+      </Activity>
+      <Activity>
+        <section className='container md:max-w-7xl mx-auto py-12 lg:py-16 sm:py-16'>
+          <ProductCarousel />
+        </section>
+      </Activity>
+      <Activity>
+        <SocialProofSection />
+      </Activity>
+      <Activity>
+        <TrustSection />
+      </Activity>
     </main>
   )
 }

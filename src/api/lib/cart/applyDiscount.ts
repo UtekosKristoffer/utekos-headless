@@ -17,23 +17,19 @@ export async function applyDiscount(cartId: string, discountCode: string) {
     }
   })
 
-  // Steg 1: Sjekk om selve API-kallet var vellykket
   if (!res.success) {
     throw new Error(
       res.error.errors[0]?.message ?? 'Klarte ikke å legge til rabattkode.'
     )
   }
 
-  // Nå er det trygt å aksessere res.body
   const { cart, userErrors } = res.body.cartDiscountCodesUpdate
 
-  // Steg 2: Sjekk for spesifikke feil fra Shopify (f.eks. ugyldig kode)
   if (userErrors?.length) {
     throw new Error(userErrors[0]?.message ?? 'Ugyldig rabattkode.')
   }
 
-  // Sørger for at cachen for handlekurven blir invalidert og oppdatert
-  revalidateTag(TAGS.cart)
+  revalidateTag(TAGS.cart, 'max')
 
   return cart
 }

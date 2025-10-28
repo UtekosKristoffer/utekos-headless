@@ -4,6 +4,7 @@ import { ShippingReturnsHeader } from '@/app/frakt-og-retur/components/ShippingR
 import { ShippingReturnsInfo } from '@/app/frakt-og-retur/components/ShippingReturnsInfo'
 import type { Metadata } from 'next'
 import { jsonLd } from './ShippingAndReturnsPageHelpers/jsonLd'
+import { Activity } from 'react'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Frakt og retur | Enkel og trygg handel hos Utekos',
@@ -39,10 +40,17 @@ export default function ShippingAndReturnsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main className='container mx-auto px-4 py-12 sm:py-16'>
-        <ShippingReturnsHeader />
+        <Activity>
+          <ShippingReturnsHeader />
+        </Activity>
         <div className='mx-auto mt-16 max-w-6xl lg:grid lg:grid-cols-12 lg:gap-12'>
-          <ShippingReturnsInfo />
-          <InfoSidebar />
+          <Activity>
+            {' '}
+            <ShippingReturnsInfo />
+          </Activity>
+          <Activity>
+            <InfoSidebar />
+          </Activity>
         </div>
       </main>
     </>

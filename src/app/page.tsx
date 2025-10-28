@@ -1,6 +1,6 @@
 // Path: src/app/page.tsx
 import { FindInStoreSection } from '@/components/frontpage/FindStoreSection'
-import { Suspense } from 'react'
+import { Suspense, Activity } from 'react'
 import { NewProductInStoreNotice } from '@/components/frontpage/NewProductInStoreNotice'
 import { VideoSkeleton } from '@/app/produkter/components/VideoSkeleton'
 import { ProductVideoSection } from '@/app/produkter/components/ProductVideoSection'
@@ -17,7 +17,12 @@ import { SocialProofSection } from '@/components/frontpage/SocialProofSection'
 import { TestimonialConstellation } from '@/components/frontpage/TestimonialConstellation'
 import { ProductCarousel } from '@/components/ProductCard/ProductCarousel'
 import { SpecialOfferSection } from '@/SpecialOfferSection/SpecialOfferSection'
+import { connection } from 'next/server'
+
 const HomePage = async () => {
+  // Tvinger komponenten til å være dynamisk FØR vi kaller new QueryClient()
+  await connection()
+
   const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({
@@ -28,27 +33,53 @@ const HomePage = async () => {
   return (
     <main>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <HeroSection />
-        <NewProductLaunchSection />
-        <NewProductInStoreNotice />
-        <TestimonialConstellation />
-        <SpecialOfferSection />
-        <Suspense fallback={<VideoSkeleton />}>
-          <ProductVideoSection />
-        </Suspense>
-        <section className='container md:max-w-7xl max-w-[95%] mx-auto py-12 lg:py-16 sm:py-16'>
-          <h1 className='mb-8 md:mb-12 text-center text-3xl font-bold'>
-            Våre kunders favoritter{' '}
-          </h1>
-          <ProductCarousel />
-        </section>
-        <SocialProofSection />
-        <NewStandardSection />
-        <PromiseSection />
-        <MomentsSection />
-        <QualitySection />
+        <Activity>
+          <HeroSection />
+        </Activity>
+        <Activity>
+          <NewProductLaunchSection />
+        </Activity>
+        <Activity>
+          <NewProductInStoreNotice />
+        </Activity>
+        <Activity>
+          <TestimonialConstellation />
+        </Activity>
+        <Activity>
+          <SpecialOfferSection />
+        </Activity>
+        <Activity>
+          <Suspense fallback={<VideoSkeleton />}>
+            <ProductVideoSection />
+          </Suspense>
+        </Activity>
+        <Activity>
+          <section className='container md:max-w-7xl max-w-[95%] mx-auto py-12 lg:py-16 sm:py-16'>
+            <h1 className='mb-8 md:mb-12 text-center text-3xl font-bold'>
+              Våre kunders favoritter{' '}
+            </h1>
+            <ProductCarousel />
+          </section>
+        </Activity>
+        <Activity>
+          <SocialProofSection />
+        </Activity>
+        <Activity>
+          <NewStandardSection />
+        </Activity>
+        <Activity>
+          <PromiseSection />
+        </Activity>
+        <Activity>
+          <MomentsSection />
+        </Activity>
+        <Activity>
+          <QualitySection />
+        </Activity>
       </HydrationBoundary>
-      <FindInStoreSection />
+      <Activity>
+        <FindInStoreSection />
+      </Activity>
     </main>
   )
 }

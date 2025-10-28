@@ -9,7 +9,7 @@ import { UseCasesGrid, useCasesData } from './sections/UseCasesGrid'
 import { destinationsData } from './data/destinationsData'
 import { SeasonsSection } from './sections/SeasonsSection'
 import { InspirationGallerySection } from './sections/InspirationGallerySection'
-
+import { Activity } from 'react'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Bobil og Utekos | Forleng sesongen og øk komforten på turen',
@@ -56,13 +56,27 @@ export default function BobilInspirasjonPage() {
       />
 
       <main>
-        <BobilHeroSection />
-        <UseCasesGrid useCases={useCasesData} />
-        <BenefitsGrid benefits={benefitsData} />
-        <SeasonsSection />
-        <DestinationsGrid destinations={destinationsData} />
-        <InspirationGallerySection />
-        <CTASection />
+        <Activity>
+          <BobilHeroSection />
+        </Activity>
+        <Activity>
+          <UseCasesGrid useCases={useCasesData} />
+        </Activity>
+        <Activity>
+          <BenefitsGrid benefits={benefitsData} />
+        </Activity>
+        <Activity>
+          <SeasonsSection />
+        </Activity>
+        <Activity>
+          <DestinationsGrid destinations={destinationsData} />
+        </Activity>
+        <Activity>
+          <InspirationGallerySection />
+        </Activity>
+        <Activity>
+          <CTASection />
+        </Activity>
       </main>
     </>
   )

@@ -1,10 +1,10 @@
-
 import type { Metadata } from 'next'
 import { PersonaCards } from './sections/PersonaCards'
 import { CompareModelsPageHero } from './sections/CompareModelsPageHero'
 import { ComparisonSection } from './sections/ComparisonSection'
 import { DeepDiveSection } from './sections/DeepDiveSection'
 import { ConclusionSection } from './sections/ConclusionSection'
+import { Activity } from 'react'
 export const metadata: Metadata = {
   title: 'Sammenlign Utekos™ Modeller | Finn den perfekte for deg',
   description:
@@ -37,11 +37,22 @@ export const metadata: Metadata = {
 export default function CompareModelsPage() {
   return (
     <main className='bg-background'>
-      <CompareModelsPageHero />
-      <PersonaCards />
-      <ComparisonSection />
-      <DeepDiveSection />
-      <ConclusionSection />
+      <Activity>
+        <CompareModelsPageHero />
+      </Activity>
+      <Activity>
+        <PersonaCards />
+      </Activity>
+      <Activity>
+        {' '}
+        <ComparisonSection />
+      </Activity>
+      <Activity>
+        <DeepDiveSection />
+      </Activity>
+      <Activity>
+        <ConclusionSection />
+      </Activity>
     </main>
   )
 }

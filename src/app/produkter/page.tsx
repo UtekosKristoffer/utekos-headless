@@ -12,12 +12,14 @@ import { AllProductsCarousel } from '@/components/ProductCard/AllProductsCarouse
 import { ComfyrobeFeatureSection } from '@/app/produkter/components/ComfyrobeSection/ComfyrobeFeatureSection'
 import { ProductGridSkeleton } from '@/components/frontpage/Skeletons/ProductGridSkeleton'
 import { VideoSkeleton } from './components/VideoSkeleton'
-import { Suspense } from 'react'
+import { Suspense, Activity } from 'react'
 import type { Metadata } from 'next'
 import { StapperFeatureSection } from './components/StapperFeatureSection'
 import { MicrofiberFeatureSection } from './components/MicrofiberSection/MicrofiberFeatureSection'
 import { ProductVideoSection } from './components/ProductVideoSection'
 import { TechDownFeatureSection } from './components/TechDownFeatureSection'
+import { connection } from 'next/server'
+
 export const metadata: Metadata = {
   title: 'Kolleksjon: Komfortplagg for hytteliv & utekos | Utekos',
   description:
@@ -42,6 +44,9 @@ export const metadata: Metadata = {
 }
 
 const ProductsPage = async () => {
+  // Tvinger komponenten til å være dynamisk FØR vi kaller new QueryClient()
+  await connection()
+
   const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({
@@ -59,48 +64,68 @@ const ProductsPage = async () => {
     <>
       <ProductListJsonLd />
       <main className='container mx-auto px-4 py-16 sm:py-24'>
-        <ProductsPageHeader />
-        <HelpChooseSection />
-        <Suspense fallback={<VideoSkeleton />}>
-          <ProductVideoSection />
-          <TechDownFeatureSection />
-        </Suspense>
-        <ProductTestimonial />
-        <ComparisonTeaser />
+        <Activity>
+          <ProductsPageHeader />
+        </Activity>
+        <Activity>
+          <HelpChooseSection />
+        </Activity>
+        <Activity>
+          <Suspense fallback={<VideoSkeleton />}>
+            <ProductVideoSection />
+            <TechDownFeatureSection />
+          </Suspense>
+        </Activity>
+        <Activity>
+          <ProductTestimonial />
+        </Activity>
+        <Activity>
+          <ComparisonTeaser />
+        </Activity>
 
-        <section className='mb-24'>
-          <div className='relative mb-12 text-center overflow-hidden py-16 md:mb-20'>
-            <div
-              aria-hidden='true'
-              className='absolute inset-0 -z-10 opacity-30'
-            >
+        <Activity>
+          <section className='mb-24'>
+            <div className='relative mb-12 text-center overflow-hidden py-16 md:mb-20'>
               <div
-                className='absolute left-1/2 top-0 h-[500px] w-[1000px] -translate-x-1/2 blur-3xl'
-                style={{
-                  background:
-                    'radial-gradient(circle, #0ea5e9 0%, transparent 70%)'
-                }}
-              />
+                aria-hidden='true'
+                className='absolute inset-0 -z-10 opacity-30'
+              >
+                <div
+                  className='absolute left-1/2 top-0 h-[500px] w-[1000px] -translate-x-1/2 blur-3xl'
+                  style={{
+                    background:
+                      'radial-gradient(circle, #0ea5e9 0%, transparent 70%)'
+                  }}
+                />
+              </div>
+              <h2 className='text-4xl font-bold tracking-tight text-foreground drop-shadow-md md:text-5xl'>
+                Skapt for din Utekos
+              </h2>
+              <p className='mx-auto mt-4 max-w-2xl text-lg text-access/80'>
+                Våre komfortplagg er designet for å holde deg varm, slik at du
+                kan nyte de gode øyeblikkene lenger.
+              </p>
             </div>
-            <h2 className='text-4xl font-bold tracking-tight text-foreground drop-shadow-md md:text-5xl'>
-              Skapt for din Utekos
-            </h2>
-            <p className='mx-auto mt-4 max-w-2xl text-lg text-access/80'>
-              Våre komfortplagg er designet for å holde deg varm, slik at du kan
-              nyte de gode øyeblikkene lenger.
-            </p>
-          </div>
-          <HydrationBoundary state={dehydrate(queryClient)}>
-            <Suspense fallback={<ProductGridSkeleton />}>
-              <AllProductsCarousel />
-            </Suspense>
-          </HydrationBoundary>
-        </section>
+            <HydrationBoundary state={dehydrate(queryClient)}>
+              <Suspense fallback={<ProductGridSkeleton />}>
+                <AllProductsCarousel />
+              </Suspense>
+            </HydrationBoundary>
+          </section>
+        </Activity>
 
-        <MicrofiberFeatureSection />
-        <ComfyrobeFeatureSection />
-        <StapperFeatureSection />
-        <ProductsPageFooter />
+        <Activity>
+          <MicrofiberFeatureSection />
+        </Activity>
+        <Activity>
+          <ComfyrobeFeatureSection />
+        </Activity>
+        <Activity>
+          <StapperFeatureSection />
+        </Activity>
+        <Activity>
+          <ProductsPageFooter />
+        </Activity>
       </main>
     </>
   )

@@ -1,7 +1,9 @@
+// Path: src/app/handlehjelp/vask-og-vedlikehold/page.tsx
 import type { Metadata } from 'next'
 import { jsonLd } from './jsonLd'
 import { ProductCareHeader } from './sections/ProductCareHeader'
 import { ProductCareBody } from './sections/ProductCareBody'
+import { Activity } from 'react'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -38,8 +40,12 @@ export default function ProductCarePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main className='container mx-auto px-4 py-12 sm:py-16'>
-        <ProductCareHeader />
-        <ProductCareBody />
+        <Activity>
+          <ProductCareHeader />
+        </Activity>
+        <Activity>
+          <ProductCareBody />
+        </Activity>
       </main>
     </>
   )

@@ -1,10 +1,12 @@
+// Path: src/app/produkter/[handle]/ProductPageView/TechDownLaunchOffer.tsx
+
 'use client'
 
 import { getProduct } from '@/api/lib/products/getProduct'
 import { FreeBuffSelector } from '@/components/products/FreeBuffSelector'
 import { Skeleton } from '@/components/ui/skeleton'
 import type { ShopifyProduct } from '@types'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useEffectEvent } from 'react'
 import { Gift } from 'lucide-react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 
@@ -39,9 +41,13 @@ export function TechDownLaunchOffer({
     fetchBuffProduct()
   }, [])
 
+  const onUpdateParent = useEffectEvent((line: AdditionalLine | undefined) => {
+    onAdditionalLineChange(line)
+  })
+
   useEffect(() => {
     if (!includeBuff || !buffProduct) {
-      onAdditionalLineChange(undefined)
+      onUpdateParent(undefined)
       return
     }
 
@@ -50,12 +56,12 @@ export function TechDownLaunchOffer({
     )?.node
 
     if (selectedVariant) {
-      onAdditionalLineChange({
+      onUpdateParent({
         variantId: selectedVariant.id,
         quantity: 1
       })
     }
-  }, [includeBuff, selectedBuffColor, buffProduct, onAdditionalLineChange])
+  }, [includeBuff, selectedBuffColor, buffProduct])
 
   if (isLoading) {
     return (

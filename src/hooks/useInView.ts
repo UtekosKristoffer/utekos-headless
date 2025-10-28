@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+// Path: src/hooks/useInView.ts
+import { useEffect, useRef, useState, useEffectEvent } from 'react'
 
 interface UseInViewOptions {
   threshold?: number
@@ -12,20 +13,19 @@ export function useInView<T extends Element>({
   const [isInView, setIsInView] = useState(false)
   const observerRef = useRef<IntersectionObserver | null>(null)
 
+  const onIntersect = useEffectEvent(([entry]: IntersectionObserverEntry[]) => {
+    if (entry && entry.isIntersecting) {
+      setIsInView(true)
+      if (triggerOnce && observerRef.current) {
+        observerRef.current.unobserve(entry.target)
+      }
+    }
+  })
+
   useEffect(() => {
     if (!ref) return
 
-    observerRef.current = new IntersectionObserver(
-      ([entry]) => {
-        if (entry && entry.isIntersecting) {
-          setIsInView(true)
-          if (triggerOnce && observerRef.current) {
-            observerRef.current.unobserve(entry.target)
-          }
-        }
-      },
-      { threshold }
-    )
+    observerRef.current = new IntersectionObserver(onIntersect, { threshold })
 
     observerRef.current.observe(ref)
 
@@ -34,7 +34,7 @@ export function useInView<T extends Element>({
         observerRef.current.disconnect()
       }
     }
-  }, [ref, threshold, triggerOnce])
+  }, [ref, threshold])
 
   return [setRef, isInView]
 }

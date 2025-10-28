@@ -7,8 +7,9 @@ const withBundleAnalyzer = nextBundleAnalyzer({
 
 const nextConfig: NextConfig = {
   typedRoutes: true,
+  reactCompiler: true,
+  cacheComponents: true,
   experimental: {
-    reactCompiler: true,
     useCache: true,
     optimizePackageImports: [
       'zod',
@@ -31,9 +32,6 @@ const nextConfig: NextConfig = {
       'sonner',
       'vaul'
     ]
-  },
-  eslint: {
-    ignoreDuringBuilds: true
   },
   images: {
     remotePatterns: [

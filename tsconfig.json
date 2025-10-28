@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2024",
-    "lib": ["dom", "dom.iterable", "es2024"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es2024"
+    ],
     "allowJs": false,
     "skipLibCheck": true,
     "strict": true,
@@ -11,7 +15,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
@@ -25,10 +29,18 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@types": ["./types/index.ts"],
-      "@types/*": ["./types/*"],
-      "@public/*": ["./public/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@types": [
+        "./types/index.ts"
+      ],
+      "@types/*": [
+        "./types/*"
+      ],
+      "@public/*": [
+        "./public/*"
+      ]
     }
   },
   "include": [
@@ -45,7 +57,12 @@
     "src/api/types/state",
     "src/components/WelcomeToast",
     "src/db/config",
-    "src/components/ProductCard/ProductCarousel.tsx"
+    "src/components/ProductCard/ProductCarousel.tsx",
+    ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules", ".github/**/*", "alpha/**/*"]
+  "exclude": [
+    "node_modules",
+    ".github/**/*",
+    "alpha/**/*"
+  ]
 }

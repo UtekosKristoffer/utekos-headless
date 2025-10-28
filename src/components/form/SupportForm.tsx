@@ -29,7 +29,7 @@ import {
 } from '@/lib/actions/submitContactForm'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import { useActionState, useEffect } from 'react'
+import { useActionState, useEffect, useEffectEvent } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import type { z } from '@/db/zod/zodClient'
@@ -64,7 +64,7 @@ export function SupportForm() {
   const messageChars = messageValue.length
   const messageMin = 10
 
-  useEffect(() => {
+  const handleStateChange = useEffectEvent(() => {
     if (!state.message) return
 
     if (state.errors) {
@@ -83,7 +83,11 @@ export function SupportForm() {
       toast.success(state.message)
       form.reset()
     }
-  }, [state, form])
+  })
+
+  useEffect(() => {
+    handleStateChange()
+  }, [state])
 
   return (
     <Form {...form}>

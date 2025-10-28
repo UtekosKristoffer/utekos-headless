@@ -10,7 +10,7 @@ import { getCachedCart } from '@/lib/helpers/cart/getCachedCart'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { QueryClient } from '@tanstack/react-query'
 import Script from 'next/script'
-import { Suspense } from 'react'
+import { Suspense, Activity, type ReactNode } from 'react'
 import { MetaPixelEvents } from '@/components/analytics/MetaPixelEvents'
 import ChatBubble from '@/components/ChatBubble'
 import Providers from '@/components/providers/Providers'
@@ -112,9 +112,14 @@ export const metadata: Metadata = {
   }
 }
 
-export default async function RootLayout({ children }: RootLayoutProps) {
+/**
+ * Ny Server Component for å laste dynamiske data (cartId)
+ * og sette opp Providers. Dette flytter "await" UT av RootLayout
+ * og INN i en Suspense-grense. Dette grunnet cacheComponents: true (next.js 16+) i next.config.ts
+ */
+async function CartProviderLoader({ children }: { children: ReactNode }) {
   const queryClient = new QueryClient()
-  const cartId = await getCartIdFromCookie()
+  const cartId = await getCartIdFromCookie() // <-- Dynamisk kall
 
   await queryClient.prefetchQuery({
     queryKey: ['cart', cartId],
@@ -122,6 +127,16 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   })
 
   const dehydratedState = dehydrate(queryClient)
+
+  return (
+    <Providers dehydratedState={dehydratedState} cartId={cartId}>
+      {children}
+    </Providers>
+  )
+}
+
+// RootLayout er nå IKKE async
+export default function RootLayout({ children }: RootLayoutProps) {
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID
 
   return (
@@ -171,18 +186,33 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <GoogleTagManager gtmId='GTM-5TWMJQFP' />
         <OrganizationJsonLd />
 
-        <Providers dehydratedState={dehydratedState} cartId={cartId}>
-          <AnnouncementBanner />
-          <Header menu={mainMenu} />
-          <main>
-            {children}
-            <Footer />
-          </main>
-          <Toaster closeButton />
-          <Analytics mode='production' />
-          <ChatBubble />
-        </Providers>
+        {/* FIX: Alt som er avhengig av cartId (Providers og alt inni) 
+          er flyttet inn i CartProviderLoader, som er pakket i Suspense.
+          Dette løser "Uncached data accessed outside of <Suspense>".
+        */}
+        <Suspense>
+          <CartProviderLoader>
+            <Activity>
+              <AnnouncementBanner />
+            </Activity>
+            <Activity>
+              <Header menu={mainMenu} />
+            </Activity>
+            <main>
+              {children}
+              <Activity>
+                <Footer />
+              </Activity>
+            </main>
+            <Activity>
+              <ChatBubble />
+            </Activity>
+          </CartProviderLoader>
+        </Suspense>
 
+        {/* Disse er uavhengige og kan leve utenfor Suspense-grensen */}
+        <Toaster closeButton />
+        <Analytics mode='production' />
         <Suspense fallback={null}>
           <MetaPixelEvents />
         </Suspense>

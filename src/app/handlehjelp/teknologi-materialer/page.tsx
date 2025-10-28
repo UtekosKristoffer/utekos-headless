@@ -1,8 +1,11 @@
+// Path: src/app/handlehjelp/teknologi-materialer/page.tsx
 import type { Metadata } from 'next'
 import { jsonLd } from './jsonLd'
 import { ProductSpecsView } from './layout/ProductSpecsView'
 import { technologyGroups } from './config'
 import { ProductSpecPageHeader } from './layout/ProductSpecPageHeader'
+import { Activity } from 'react'
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Vår Teknologi | Kvaliteten og komforten bak Utekos',
@@ -37,8 +40,12 @@ export default function ProductSpecsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main className='container mx-auto px-4 py-12 sm:py-16'>
-        <ProductSpecPageHeader />
-        <ProductSpecsView technologyGroups={technologyGroups} />
+        <Activity>
+          <ProductSpecPageHeader />
+        </Activity>
+        <Activity>
+          <ProductSpecsView technologyGroups={technologyGroups} />
+        </Activity>
       </main>
     </>
   )
