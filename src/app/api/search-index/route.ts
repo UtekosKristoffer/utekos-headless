@@ -1,5 +1,5 @@
 // Path: src/app/api/search-index/route.ts
-'use cache'
+
 import sitemap from '@/app/sitemap'
 import { buildSearchIndex } from '@/lib/helpers/search'
 import type { MetadataRoute } from 'next'
@@ -38,36 +38,13 @@ export async function GET() {
 
     const uniquePaths = Array.from(new Set(allPaths))
     const contentPaths = uniquePaths.filter(p => !p.startsWith('/api'))
+
+    // buildSearchIndex returnerer allerede serialiserbare, rene objekter.
+    // Vi trenger ikke serialisere på nytt.
     const { groups } = buildSearchIndex(contentPaths)
 
-    // Dobbel serialisering for å garantere plain objects
-    const serializedGroups = groups.map(group => ({
-      key: String(group.key),
-      label: String(group.label),
-      items: group.items.map(item => ({
-        id: String(item.id),
-        title: String(item.title),
-        path: String(item.path),
-        parentId: item.parentId ? String(item.parentId) : null,
-        keywords:
-          Array.isArray(item.keywords) ? item.keywords.map(k => String(k)) : [],
-        ...(item.children && {
-          children: item.children.map(child => ({
-            id: String(child.id),
-            title: String(child.title),
-            path: String(child.path),
-            parentId: child.parentId ? String(child.parentId) : null,
-            keywords:
-              Array.isArray(child.keywords) ?
-                child.keywords.map(k => String(k))
-              : []
-          }))
-        })
-      }))
-    }))
-
     return NextResponse.json(
-      { groups: serializedGroups },
+      { groups: groups }, // Bruk 'groups' direkte
       {
         headers: {
           'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600'
