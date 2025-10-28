@@ -1,8 +1,6 @@
 // Path: src/lib/helpers/search/index.ts
 import type { SearchGroup, SearchItem } from '@/app/api/search-index/route'
 import { SEARCH_CONFIG, GROUP_LABELS } from './searchConfig'
-import { getMagazineArticles } from '@/db/data/articles'
-
 export type ClientSearchItem = SearchItem
 
 /**
