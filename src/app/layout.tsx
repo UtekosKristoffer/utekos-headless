@@ -9,7 +9,6 @@ import { Toaster } from '@/components/ui/sonner'
 import { getCachedCart } from '@/lib/helpers/cart/getCachedCart'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { QueryClient } from '@tanstack/react-query'
-import Script from 'next/script'
 import { Suspense, Activity, type ReactNode } from 'react'
 import { MetaPixelEvents } from '@/components/analytics/MetaPixelEvents'
 import ChatBubble from '@/components/ChatBubble'
@@ -17,7 +16,6 @@ import Providers from '@/components/providers/Providers'
 import AnnouncementBanner from '@/SpecialOfferSection/AnnouncementBanner'
 import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
-
 import type { RootLayoutProps } from '@types'
 import type { Metadata } from 'next'
 import { OrganizationJsonLd } from './OrganizationJsonLd'
@@ -139,45 +137,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
   return (
     <html lang='no'>
-      {pixelId && (
-        <Script id='meta-pixel-base' strategy='afterInteractive'>
-          {`
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-
-            // Initialize only. Manual advanced matching data can be added here if needed later.
-            fbq('init', '${pixelId}', {});
-
-            // fbq('set', 'autoConfig', true, '${pixelId}'); // <-- FJERNET autoConfig
-            // fbq('track', 'PageView'); // <-- FORTSATT FJERNET
-          `}
-        </Script>
-      )}
-
       <body
         className={`bg-background text-foreground ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* Noscript fallback (uendret, uten &ev=PageView) */}
-        {pixelId && (
-          <noscript>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              height={1}
-              width={1}
-              style={{ display: 'none' }}
-              src={`https://www.facebook.com/tr?id=${pixelId}&noscript=1`}
-              alt=''
-            />
-          </noscript>
-        )}
-
-        {/* Resten av layout som før... */}
         <GoogleTagManager gtmId='GTM-5TWMJQFP' />
         <OrganizationJsonLd />
 

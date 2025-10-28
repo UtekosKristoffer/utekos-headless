@@ -72,8 +72,8 @@ export async function POST(req: NextRequest) {
     },
     {} as Record<string, string>
   )
-  const fbp = cookies['_fbp'] || null // Sett til null hvis undefined
-  const fbc = cookies['_fbc'] || null // Sett til null hvis undefined
+  const fbp = cookies._fbp || null
+  const fbc = cookies._fbc || null
 
   let body: Body
   try {
