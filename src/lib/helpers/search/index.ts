@@ -22,25 +22,22 @@ function normalizeText(text: string): string {
  * Bygger komplett søkeindeks fra statisk config + dynamiske magasinartikler
  */
 export async function buildSearchIndex(_allPaths?: string[]) {
-  // 1. Start med statisk konfigurasjon
   const staticItems: SearchItem[] = SEARCH_CONFIG.map(item => ({
     id: item.id,
     title: item.title,
     path: item.path,
-    parentId: null, // Sørg for at parentId er null eksplisitt hvis det er meningen
+    parentId: null,
     keywords: [
-      item.title, // Inkluder alltid tittel som keyword
+      item.title,
       ...item.keywords,
       normalizeText(item.title),
       ...item.keywords.map(k => normalizeText(k))
     ].filter(Boolean) // Fjern eventuelle tomme strenger
   }))
 
-  // Sørg for at mockArticles bare inneholder serialiserbare data
   const { mockArticles } = await import('@/db/data/articles')
 
   const magazineItems: SearchItem[] = mockArticles.map(article => {
-    // Generer keywords fra slug, title og category
     const slugWords = article.slug.split('-').filter(word => word.length > 2)
     const titleWords = article.title.split(' ').filter(word => word.length > 2)
     const excerptWords = (article.excerpt ?? '')
@@ -72,10 +69,8 @@ export async function buildSearchIndex(_allPaths?: string[]) {
   })
 
   const allItems = [...staticItems, ...magazineItems]
-
   const groupsMap = new Map<string, SearchGroup>()
 
-  // Initialiser alle grupper
   Object.entries(GROUP_LABELS).forEach(([key, label]) => {
     groupsMap.set(key, {
       key,
@@ -84,7 +79,6 @@ export async function buildSearchIndex(_allPaths?: string[]) {
     })
   })
 
-  // Fordel items til grupper
   allItems.forEach(item => {
     let groupKey: string | undefined
     if (item.id.startsWith('product-')) groupKey = 'products'
@@ -107,17 +101,14 @@ export async function buildSearchIndex(_allPaths?: string[]) {
     }
   })
 
-  // 4. Sorter items og *tving* plain object struktur
   const groups = Array.from(groupsMap.values())
     .filter(g => g.items.length > 0) // Kun grupper med innhold
     .map(g => ({
-      // Eksplisitt lag et nytt, rent objekt for gruppen
       key: g.key,
       label: g.label,
       items: g.items
         .sort((a, b) => a.title.localeCompare(b.title, 'no'))
         .map(item => ({
-          // Eksplisitt lag et nytt, rent objekt for hvert item
           id: item.id,
           title: item.title,
           path: item.path,
@@ -130,6 +121,5 @@ export async function buildSearchIndex(_allPaths?: string[]) {
         }))
     }))
 
-  // Returner den manuelt rensede strukturen
   return { groups }
 }

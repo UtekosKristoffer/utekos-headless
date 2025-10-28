@@ -1,69 +1,107 @@
-// Path: src/api/lib/sitemap.ts
-// Når vi deployer koden, vil Next.js automatisk generere en sitemap.xml-fil på https://utekos.no/sitemap.xml
-// Det siste steget, etter at siden er live, er å sende inn den URL-en til Google Search Console for å sikre at Google indekserer nettstedet ditt effektivt.
-
+// Path: src/app/sitemap.ts
 import { getProducts } from '@/api/lib/products/getProducts'
 import { getMagazineArticles } from '@/db/data/articles'
 import type { MetadataRoute } from 'next'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://utekos.no'
-  const lastModified = new Date()
+  const lastModifiedISO = new Date().toISOString() // Fallback dato
 
+  // Definer corePages, inspirationPages, utilityPages som før...
   const corePages: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}/`,
-      lastModified,
+      lastModified: lastModifiedISO,
       changeFrequency: 'weekly',
       priority: 1.0
     },
     {
       url: `${baseUrl}/produkter`,
-      lastModified,
+      lastModified: lastModifiedISO,
       changeFrequency: 'weekly',
       priority: 0.9
     },
     {
       url: `${baseUrl}/magasinet`,
-      lastModified,
+      lastModified: lastModifiedISO,
       changeFrequency: 'weekly',
       priority: 0.9
     },
     {
       url: `${baseUrl}/gaveguide`,
-      lastModified,
+      lastModified: lastModifiedISO,
       changeFrequency: 'weekly',
       priority: 0.9
     }
   ]
 
-  const inspirationPages: MetadataRoute.Sitemap = [
+  const inspirationPaths = [
     '/inspirasjon',
     '/inspirasjon/batliv',
     '/inspirasjon/bobil',
-    '/inspirasjon/camping',
     '/inspirasjon/grillkvelden',
     '/inspirasjon/hytteliv',
     '/inspirasjon/terrassen'
-  ].map(path => ({
-    url: `${baseUrl}${path}`,
-    lastModified,
-    changeFrequency: 'monthly',
-    priority: 0.7
-  }))
+  ]
+  const inspirationPages: MetadataRoute.Sitemap = inspirationPaths.map(
+    path => ({
+      url: `${baseUrl}${path}`,
+      lastModified: lastModifiedISO,
+      changeFrequency: 'monthly',
+      priority: 0.7
+    })
+  )
 
   const utilityPages: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}/kontaktskjema`,
-      lastModified,
+      lastModified: lastModifiedISO,
       changeFrequency: 'yearly',
       priority: 0.3
     },
     {
       url: `${baseUrl}/personvern`,
-      lastModified,
+      lastModified: lastModifiedISO,
       changeFrequency: 'yearly',
       priority: 0.3
+    },
+    {
+      url: `${baseUrl}/frakt-og-retur`,
+      lastModified: lastModifiedISO,
+      changeFrequency: 'yearly',
+      priority: 0.3
+    },
+    // Legg til /om-oss her også for fullstendighet
+    {
+      url: `${baseUrl}/om-oss`,
+      lastModified: lastModifiedISO,
+      changeFrequency: 'monthly',
+      priority: 0.5
+    },
+    // Legg til handlehjelp-sidene
+    {
+      url: `${baseUrl}/handlehjelp/sammenlign-modeller`,
+      lastModified: lastModifiedISO,
+      changeFrequency: 'monthly',
+      priority: 0.6
+    },
+    {
+      url: `${baseUrl}/handlehjelp/storrelsesguide`,
+      lastModified: lastModifiedISO,
+      changeFrequency: 'monthly',
+      priority: 0.6
+    },
+    {
+      url: `${baseUrl}/handlehjelp/teknologi-materialer`,
+      lastModified: lastModifiedISO,
+      changeFrequency: 'monthly',
+      priority: 0.6
+    },
+    {
+      url: `${baseUrl}/handlehjelp/vask-og-vedlikehold`,
+      lastModified: lastModifiedISO,
+      changeFrequency: 'monthly',
+      priority: 0.6
     }
   ]
 
@@ -73,7 +111,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     productsResponse.success && productsResponse.body ?
       productsResponse.body.map(product => ({
         url: `${baseUrl}/produkter/${product.handle}`,
-        lastModified: new Date(product.updatedAt),
+        // Forenklet logikk: Bruk updatedAt hvis det er en gyldig streng, ellers fallback
+        lastModified:
+          typeof product.updatedAt === 'string' && product.updatedAt ?
+            product.updatedAt
+          : lastModifiedISO,
         changeFrequency: 'weekly',
         priority: 0.8,
         images: product.featuredImage ? [product.featuredImage.url] : []
@@ -84,10 +126,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const articleUrls: MetadataRoute.Sitemap = articles.map(article => ({
     url: `${baseUrl}/magasinet/${article.slug}`,
-    lastModified: new Date(article.updatedAt),
+    lastModified: article.updatedAt, // Denne er allerede ISO-streng fra getMagazineArticles
     changeFrequency: 'monthly',
     priority: 0.8,
-    images: [`${baseUrl}${article.imageUrl}`]
+    images:
+      article.imageUrl.startsWith('/') ?
+        [`${baseUrl}${article.imageUrl}`]
+      : [article.imageUrl]
   }))
 
   return [
