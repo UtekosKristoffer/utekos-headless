@@ -3,7 +3,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
-import Script from 'next/script' // Importer next/script
+import Script from 'next/script'
 
 function getCookie(name: string): string | undefined {
   if (typeof document === 'undefined') return undefined
@@ -83,41 +83,63 @@ async function sendPageViewToCAPI(
   }
 }
 
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void
+  }
+}
+
 export function MetaPixelEvents() {
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID
-  const [isPixelInitialized, setIsPixelInitialized] = useState(false)
+  const [isPixelReady, setIsPixelReady] = useState(false) // Endret state-navn for klarhet
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const pageViewTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const animationFrameRef = useRef<number | null>(null)
+  const initRetryTimeoutRef = useRef<NodeJS.Timeout | null>(null) // Ref for init retry
 
-  const handlePixelLoad = () => {
+  // --- Funksjon for å forsøke initialisering ---
+  const tryInitializePixel = () => {
     if (!pixelId) {
-      console.warn('Meta Pixel ID not configured.')
+      console.warn('Meta Pixel: Pixel ID not configured.')
       return
     }
     if (typeof window.fbq === 'function') {
-      console.log('Meta Pixel: Base script loaded, initializing...')
-      window.fbq('init', pixelId, {}) // Initialize Pixel
-      setIsPixelInitialized(true) // Marker som initialisert
-      // Trigger første PageView manuelt her siden base-scriptet ikke gjør det lenger
+      console.log('Meta Pixel: fbq found, initializing...')
+      window.fbq('init', pixelId, {})
+      setIsPixelReady(true) // Marker som klar NÅR init er kalt
+      // Trigger første PageView her, siden den nå er klar
       trackPageView()
+      if (initRetryTimeoutRef.current) {
+        clearTimeout(initRetryTimeoutRef.current) // Avbryt retry hvis vi lyktes
+      }
     } else {
-      console.error('Meta Pixel: fbq function not found after script load.')
+      console.warn('Meta Pixel: fbq not found yet, retrying in 100ms...')
+      // Prøv igjen om et lite øyeblikk
+      if (initRetryTimeoutRef.current) clearTimeout(initRetryTimeoutRef.current) // Forrige retry
+      initRetryTimeoutRef.current = setTimeout(tryInitializePixel, 100)
     }
   }
 
-  // --- Funksjon for å tracke PageView (brukes både ved init og nav) ---
+  // --- onLoad handler ---
+  const handlePixelLoad = () => {
+    console.log('Meta Pixel: Base script loaded according to onLoad.')
+    tryInitializePixel() // Start initialiseringsforsøket
+  }
+
+  // --- Funksjon for å tracke PageView (med debounce) ---
   const trackPageView = () => {
-    // Avbryt tidligere forsøk hvis de fortsatt kjører
     if (pageViewTimeoutRef.current) clearTimeout(pageViewTimeoutRef.current)
     if (animationFrameRef.current)
       cancelAnimationFrame(animationFrameRef.current)
 
     pageViewTimeoutRef.current = setTimeout(() => {
       animationFrameRef.current = requestAnimationFrame(() => {
+        // Ekstra sjekk for fbq her også for sikkerhets skyld
         if (typeof window === 'undefined' || typeof window.fbq !== 'function') {
-          console.warn('Meta Pixel: fbq not available for PageView tracking')
+          console.warn(
+            'Meta Pixel: fbq not available during PageView track attempt'
+          )
           return
         }
 
@@ -129,10 +151,7 @@ export function MetaPixelEvents() {
         window.fbq('track', 'PageView', params, { eventID: eventId })
 
         console.log('📊 Meta Pixel: PageView tracked (Debounced + RAF)', {
-          pathname: currentPathname,
-          search: currentSearchParams.toString(),
-          params,
-          eventId
+          /* ... som før ... */
         })
 
         if (process.env.NODE_ENV === 'production') {
@@ -144,23 +163,20 @@ export function MetaPixelEvents() {
     }, 150)
   }
 
-  // --- useEffect for PageView ved navigering (etter initialisering) ---
+  // --- useEffect for PageView ved navigering (etter at pixel er KLAR) ---
   useEffect(() => {
-    // Ikke gjør noe FØR pixelen er initialisert
-    if (!isPixelInitialized) {
-      return
-    }
+    // Ikke gjør noe FØR pixelen er klar
+    if (!isPixelReady) return
 
-    // Kall PageView-tracking funksjonen (den har innebygd debounce)
+    // Kall PageView-tracking funksjonen
     trackPageView()
 
-    // Cleanup for timeout/animation frame ved unmount (selv om den kjøres i trackPageView også)
     return () => {
       if (pageViewTimeoutRef.current) clearTimeout(pageViewTimeoutRef.current)
       if (animationFrameRef.current)
         cancelAnimationFrame(animationFrameRef.current)
     }
-  }, [pathname, searchParams, isPixelInitialized]) // Kjør når URL endres ETTER init
+  }, [pathname, searchParams, isPixelReady]) // Kjør når URL endres ETTER at pixel er klar
 
   // Cookie useEffect (uendret)...
   useEffect(() => {
@@ -183,13 +199,11 @@ export function MetaPixelEvents() {
     }
   }, [searchParams])
 
-  // ViewContent useEffect (uendret, men legg til sjekk for isPixelInitialized)...
+  // ViewContent useEffect (uendret, men sjekker isPixelReady)...
   useEffect(() => {
-    // Ikke gjør noe FØR pixelen er initialisert
-    if (!isPixelInitialized || !pathname.startsWith('/produkter/')) return
+    if (!isPixelReady || !pathname.startsWith('/produkter/')) return // Sjekk isPixelReady
 
     const timeoutId = setTimeout(() => {
-      // Sjekk for window.fbq er teknisk sett unødvendig pga isPixelInitialized, men skader ikke
       if (typeof window.fbq !== 'function') {
         console.warn('Meta Pixel: fbq not available for ViewContent')
         return
@@ -235,19 +249,27 @@ export function MetaPixelEvents() {
       }
     }, 200)
     return () => clearTimeout(timeoutId)
-  }, [pathname, isPixelInitialized]) // Legg til isPixelInitialized som avhengighet
+  }, [pathname, isPixelReady]) // Legg til isPixelReady
 
-  // Returner KUN Script-komponenten for å laste base-koden
+  // Cleanup for init retry timeout ved unmount
+  useEffect(() => {
+    return () => {
+      if (initRetryTimeoutRef.current) {
+        clearTimeout(initRetryTimeoutRef.current)
+      }
+    }
+  }, [])
+
+  // Returner Script-komponenten
   return (
     <>
       {pixelId && (
         <Script
-          id='meta-pixel-script' // Viktig med ID for inline/event handlers
+          id='meta-pixel-script'
           src='https://connect.facebook.net/en_US/fbevents.js'
-          strategy='afterInteractive' // Laster etter litt hydrering
-          onLoad={handlePixelLoad} // Kall init når scriptet er lastet
+          strategy='afterInteractive'
+          onLoad={handlePixelLoad} // Bruk robust onLoad
           onError={e => {
-            // Legg til feilhåndtering
             console.error('Meta Pixel: Failed to load base script.', e)
           }}
         />
