@@ -5,9 +5,7 @@ import { useEffect, useRef } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 
 // (getCookie, setCookie, generateEventId, getPageViewParams, sendPageViewToCAPI functions remain the same as before)
-/**
- * Henter en spesifikk cookie
- */
+
 function getCookie(name: string): string | undefined {
   if (typeof document === 'undefined') return undefined
   const value = `; ${document.cookie}`
@@ -16,9 +14,6 @@ function getCookie(name: string): string | undefined {
   return undefined
 }
 
-/**
- * Setter en cookie med 90 dagers utløp
- */
 function setCookie(name: string, value: string, days: number = 90) {
   if (typeof document === 'undefined') return
   const date = new Date()
@@ -27,17 +22,11 @@ function setCookie(name: string, value: string, days: number = 90) {
   document.cookie = `${name}=${value}; ${expires}; path=/; SameSite=Lax; Secure`
 }
 
-/**
- * Generer konsistent event ID
- */
 function generateEventId(): string {
   // Bruker en mer robust metode for unik ID innenfor sesjonen
   return `evt_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`
 }
 
-/**
- * Bygg PageView parametere
- */
 function getPageViewParams(
   pathname: string,
   searchParams?: URLSearchParams | null
@@ -51,9 +40,7 @@ function getPageViewParams(
     content_category: pathname.split('/')[1] || 'home'
   }
 
-  // Sett content_type basert på pathname
   if (pathname.startsWith('/produkt')) {
-    // Mer robust sjekk
     params.content_type = 'product'
   } else if (pathname === '/produkter') {
     params.content_type = 'product_group'
@@ -64,11 +51,9 @@ function getPageViewParams(
   } else if (pathname.includes('/cart') || pathname.includes('/handlekurv')) {
     params.content_type = 'cart'
   } else {
-    // Mer generell fallback
     params.content_type = pathname.split('/')[1] || 'page'
   }
 
-  // Legg til search params hvis relevant
   if (searchParams?.get('q')) {
     // Bruk 'q' hvis det er standard søkeparameter
     params.search_string = searchParams.get('q')
@@ -80,9 +65,6 @@ function getPageViewParams(
   return params
 }
 
-/**
- * Send PageView til Meta CAPI
- */
 async function sendPageViewToCAPI(
   pathname: string,
   eventId: string,
@@ -121,7 +103,6 @@ export function MetaPixelEvents() {
   const lastTrackedPath = useRef<string>('')
   const isInitialLoad = useRef(true) // Bruker for å skille første last
 
-  // Track PageView på pathname eller searchParams endringer
   useEffect(() => {
     // Kombiner pathname og search for å fange opp parameterendringer på samme side
     const currentUrl = pathname + (searchParams ? searchParams.toString() : '')
@@ -132,15 +113,12 @@ export function MetaPixelEvents() {
       return
     }
 
-    // --- Viktig FIX: Oppdater lastTrackedPath *før* timeout ---
     lastTrackedPath.current = currentUrl
     const wasInitialLoad = isInitialLoad.current
     if (isInitialLoad.current) {
       isInitialLoad.current = false
     }
-    // -----------------------------------------------------------
 
-    // Bruk en kortere, konsistent delay
     const timeoutId = setTimeout(() => {
       if (typeof window === 'undefined' || typeof window.fbq !== 'function') {
         console.warn('Meta Pixel: fbq not available')
@@ -150,7 +128,6 @@ export function MetaPixelEvents() {
       const eventId = generateEventId()
       const params = getPageViewParams(pathname, searchParams)
 
-      // Track via browser pixel med parametere OG event ID
       window.fbq('track', 'PageView', params, { eventID: eventId })
 
       console.log('📊 Meta Pixel: PageView tracked', {
@@ -161,29 +138,23 @@ export function MetaPixelEvents() {
         isInitial: wasInitialLoad
       })
 
-      // Send til CAPI for redundant setup (kun i produksjon)
       if (process.env.NODE_ENV === 'production') {
-        // Send searchParams objektet direkte
         sendPageViewToCAPI(pathname, eventId, searchParams)
       }
     }, 50) // En liten delay for å la siden stabilisere seg litt
 
-    // Rydd opp timeout hvis komponenten unmountes eller effekten kjører på nytt
     return () => clearTimeout(timeoutId)
   }, [pathname, searchParams]) // Avhengig av både pathname og searchParams
 
   // Håndter Meta cookies (_fbc og _fbp)
   useEffect(() => {
-    // Håndter _fbc fra fbclid parameter
     const fbclid = searchParams?.get('fbclid') // Bruk optional chaining
     if (fbclid) {
       const existingFbc = getCookie('_fbc')
-      // Sjekk formatet før setting: version.subdomainIndex.creationTime.fbclidValue
       const creationTime = Date.now()
       // Antar subdomainIndex = 1 (vanlig for server-side setting uten pixel på subdomene)
       const fbcValue = `fb.1.${creationTime}.${fbclid}`
 
-      // Sett kun hvis den ikke finnes eller fbclid-delen er annerledes
       if (!existingFbc || existingFbc.split('.').pop() !== fbclid) {
         setCookie('_fbc', fbcValue, 90)
         console.log(
@@ -193,36 +164,26 @@ export function MetaPixelEvents() {
       }
     }
 
-    // Sørg for at _fbp cookie eksisterer og fornyes (hvis den finnes)
     const fbp = getCookie('_fbp')
     if (fbp) {
-      // Forny eksisterende _fbp
       setCookie('_fbp', fbp, 90)
     }
-    // Ingen 'else' her - hvis _fbp ikke finnes, MÅ Meta Pixel selv sette den.
-    // Vi kan ikke generere en gyldig _fbp uten Meta's random number.
   }, [searchParams])
 
-  // Track ViewContent for produktsider (denne ser ok ut, men legg til sjekk for fbq)
   useEffect(() => {
-    if (!pathname.startsWith('/produkter/')) return // Mer robust sjekk
+    if (!pathname.startsWith('/produkter/')) return
 
     const timeoutId = setTimeout(() => {
-      // --- Sjekk for window.fbq ---
       if (typeof window === 'undefined' || typeof window.fbq !== 'function') {
         console.warn('Meta Pixel: fbq not available for ViewContent')
         return
       }
-      // -----------------------------
 
-      // Ekstraher produkt-handle (ikke slug hvis det er forskjell)
       const handle = pathname.split('/produkter/')[1]?.split('?')[0] // Fjern query params
       if (!handle) return
 
       const eventId = generateEventId().replace('evt_', 'vc_') // Matcher generateEventId format
 
-      // Hent produkt data for verdi og valuta (ideelt sett fra context/state hvis tilgjengelig)
-      // Fallback:
       const priceElement = document.querySelector('[data-product-price]')
       const price =
         priceElement ?
@@ -250,7 +211,6 @@ export function MetaPixelEvents() {
         eventId
       })
 
-      // Send til CAPI også
       if (process.env.NODE_ENV === 'production') {
         fetch('/api/meta-events', {
           method: 'POST',
