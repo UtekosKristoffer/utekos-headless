@@ -134,7 +134,6 @@ async function CartProviderLoader({ children }: { children: ReactNode }) {
     </Providers>
   )
 }
-
 // RootLayout er nå IKKE async
 export default function RootLayout({ children }: RootLayoutProps) {
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID
@@ -152,16 +151,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-            
+
             // Initialize with empty object for manual advanced matching
             // Will be populated dynamically when user data is available
             fbq('init', '${pixelId}', {});
-            
+
             // Set automatic advanced matching
             fbq('set', 'autoConfig', true, '${pixelId}');
-            
-            // IKKE track PageView her - la MetaPixelEvents håndtere det
-            // fbq('track', 'PageView');
+
+            // fbq('track', 'PageView'); // <-- KOMMENTERT UT / FJERNET
           `}
         </Script>
       )}
@@ -177,7 +175,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               height={1}
               width={1}
               style={{ display: 'none' }}
-              src={`https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1`}
+              src={`https://www.facebook.com/tr?id=${pixelId}&noscript=1`} // <-- Fjernet &ev=PageView
               alt=''
             />
           </noscript>
@@ -186,10 +184,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <GoogleTagManager gtmId='GTM-5TWMJQFP' />
         <OrganizationJsonLd />
 
-        {/* FIX: Alt som er avhengig av cartId (Providers og alt inni) 
-          er flyttet inn i CartProviderLoader, som er pakket i Suspense.
-          Dette løser "Uncached data accessed outside of <Suspense>".
-        */}
         <Suspense>
           <CartProviderLoader>
             <Activity>
@@ -210,7 +204,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </CartProviderLoader>
         </Suspense>
 
-        {/* Disse er uavhengige og kan leve utenfor Suspense-grensen */}
         <Toaster closeButton />
         <Analytics mode='production' />
         <Suspense fallback={null}>

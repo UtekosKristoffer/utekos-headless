@@ -38,9 +38,6 @@ export async function GET() {
 
     const uniquePaths = Array.from(new Set(allPaths))
     const contentPaths = uniquePaths.filter(p => !p.startsWith('/api'))
-
-    // buildSearchIndex returnerer allerede serialiserbare, rene objekter.
-    // Vi trenger ikke serialisere på nytt.
     const { groups } = buildSearchIndex(contentPaths)
 
     return NextResponse.json(
