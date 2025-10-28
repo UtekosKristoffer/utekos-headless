@@ -1,8 +1,12 @@
-// Path: types/fbq.d.ts
+;/ Path: types/bfq.d.ts
 declare global {
   interface Window {
     fbq: {
-      (method: 'init', pixelId: string): void
+      (
+        method: 'init',
+        pixelId: string,
+        userData?: Record<string, unknown>
+      ): void
       (
         method: 'track',
         event: string,
@@ -15,8 +19,13 @@ declare global {
         params?: Record<string, unknown>,
         options?: { eventID?: string }
       ): void
+      // Meta Pixel properties
+      loaded?: boolean
+      version?: string
+      queue?: unknown[]
     }
     _fbq?: Window['fbq']
   }
 }
+
 export {}

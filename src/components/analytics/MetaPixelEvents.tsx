@@ -55,7 +55,7 @@ function getPageViewParams(pathname: string) {
 async function sendPageViewToCAPI(pathname: string, eventId: string) {
   try {
     const params = getPageViewParams(pathname)
-    
+
     const response = await fetch('/api/meta-events', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -83,6 +83,34 @@ function generateEventId(): string {
   return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
 }
 
+/**
+ * Venter på at fbq er fullstendig initialisert
+ */
+function waitForFbq(): Promise<void> {
+  return new Promise(resolve => {
+    // Hvis fbq allerede eksisterer og er lastet
+    if (window.fbq && window.fbq.loaded) {
+      resolve()
+      return
+    }
+
+    // Vent maks 3 sekunder
+    const timeout = setTimeout(() => {
+      console.warn('MetaPixel: fbq timeout - sending anyway')
+      resolve()
+    }, 3000)
+
+    // Poll for fbq
+    const checkFbq = setInterval(() => {
+      if (window.fbq && window.fbq.loaded) {
+        clearInterval(checkFbq)
+        clearTimeout(timeout)
+        resolve()
+      }
+    }, 100)
+  })
+}
+
 export function MetaPixelEvents() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -97,36 +125,39 @@ export function MetaPixelEvents() {
       willSend: lastPathRef.current !== pathname
     })
 
-    const fbq = typeof window !== 'undefined' ? window.fbq : undefined
-    if (!fbq) {
-      console.warn('MetaPixel: fbq not available')
-      return
-    }
-
     // Send PageView kun hvis pathname har endret seg
     if (lastPathRef.current !== pathname) {
       const params = getPageViewParams(pathname)
       const eventId = generateEventId()
 
-      // Send via browser pixel MED parameters
-      fbq('track', 'PageView', params, { eventID: eventId })
+      // Vent på at fbq er klar, deretter send
+      waitForFbq().then(() => {
+        const fbq = window.fbq
+        if (!fbq) {
+          console.warn('MetaPixel: fbq not available after wait')
+          return
+        }
 
-      console.log('✅ MetaPixel: PageView sent', {
-        pathname,
-        params,
-        eventId,
-        timestamp: new Date().toISOString()
+        // Send via browser pixel MED parameters
+        fbq('track', 'PageView', params, { eventID: eventId })
+
+        console.log('✅ MetaPixel: PageView sent', {
+          pathname,
+          params,
+          eventId,
+          timestamp: new Date().toISOString()
+        })
+
+        // Send via CAPI for redundancy (kun i production)
+        if (process.env.NODE_ENV === 'production') {
+          sendPageViewToCAPI(pathname, eventId)
+        }
       })
-
-      // Send via CAPI for redundancy (kun i production)
-      if (process.env.NODE_ENV === 'production') {
-        sendPageViewToCAPI(pathname, eventId)
-      }
 
       // Oppdater ref ETTER sending
       lastPathRef.current = pathname
     }
-  }, [pathname]) // Dependency: pathname
+  }, [pathname])
 
   // Håndter _fbc og _fbp cookies per Meta dokumentasjon
   useEffect(() => {
