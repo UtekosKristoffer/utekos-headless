@@ -134,7 +134,6 @@ async function CartProviderLoader({ children }: { children: ReactNode }) {
     </Providers>
   )
 }
-// RootLayout er nå IKKE async
 export default function RootLayout({ children }: RootLayoutProps) {
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID
 
@@ -152,14 +151,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
 
-            // Initialize with empty object for manual advanced matching
-            // Will be populated dynamically when user data is available
+            // Initialize only. Manual advanced matching data can be added here if needed later.
             fbq('init', '${pixelId}', {});
 
-            // Set automatic advanced matching
-            fbq('set', 'autoConfig', true, '${pixelId}');
-
-            // fbq('track', 'PageView'); // <-- KOMMENTERT UT / FJERNET
+            // fbq('set', 'autoConfig', true, '${pixelId}'); // <-- FJERNET autoConfig
+            // fbq('track', 'PageView'); // <-- FORTSATT FJERNET
           `}
         </Script>
       )}
@@ -167,7 +163,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={`bg-background text-foreground ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* Noscript fallback for Meta Pixel */}
+        {/* Noscript fallback (uendret, uten &ev=PageView) */}
         {pixelId && (
           <noscript>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -175,12 +171,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
               height={1}
               width={1}
               style={{ display: 'none' }}
-              src={`https://www.facebook.com/tr?id=${pixelId}&noscript=1`} // <-- Fjernet &ev=PageView
+              src={`https://www.facebook.com/tr?id=${pixelId}&noscript=1`}
               alt=''
             />
           </noscript>
         )}
 
+        {/* Resten av layout som før... */}
         <GoogleTagManager gtmId='GTM-5TWMJQFP' />
         <OrganizationJsonLd />
 
