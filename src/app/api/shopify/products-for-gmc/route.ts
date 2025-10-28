@@ -3,8 +3,6 @@ import { NextResponse } from 'next/server'
 import { z } from '@/db/zod/zodConfig' // SERVER-ONLY zod (v4) med norsk feilkart
 import { fromError } from 'zod-validation-error'
 
-export const runtime = 'nodejs'
-
 const ImageSchema = z.object({
   src: z.url()
 })

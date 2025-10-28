@@ -1,7 +1,7 @@
+// Path: src/app/api/chat/route.ts
+
 import { streamText, convertToModelMessages } from 'ai'
 import { openai } from '@ai-sdk/openai'
-
-export const runtime = 'nodejs'
 
 export async function POST(req: Request) {
   const apiKey = process.env.OPENAI_API_KEY

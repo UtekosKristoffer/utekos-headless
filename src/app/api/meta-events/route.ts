@@ -127,8 +127,8 @@ export async function POST(req: NextRequest) {
   )
 
   const json = await res.json()
+  console.log('Meta CAPI Response:', json)
   if (!res.ok) {
-
     return NextResponse.json(
       { error: 'Meta CAPI error', details: json },
       { status: 400 }

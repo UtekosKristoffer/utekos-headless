@@ -14,7 +14,6 @@ import type {
   MetaEventsSuccess
 } from '@types'
 
-export const runtime = 'nodejs'
 
 /* ----------------------------- Helper Functions ----------------------------- */
 

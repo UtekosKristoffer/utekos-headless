@@ -2,7 +2,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { redisSet } from '@/lib/redis' // se helper under hvis du ikke allerede har denne
 import type { CheckoutAttribution, Body } from '@types'
-export const runtime = 'nodejs'
 
 // Hjelper: trekk ut Shopify checkout-token fra checkoutUrl
 function parseCheckoutToken(checkoutUrl: string): string | undefined {

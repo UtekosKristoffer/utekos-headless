@@ -14,8 +14,6 @@ import type {
   MetaEventsSuccess
 } from '@types'
 
-export const runtime = 'nodejs'
-
 function verifyHmac(req: NextRequest, raw: string): boolean {
   const secret = process.env.SHOPIFY_WEBHOOK_SECRET ?? ''
   if (!secret) return false
