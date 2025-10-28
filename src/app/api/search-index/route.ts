@@ -39,7 +39,11 @@ export async function GET() {
     const contentPaths = uniquePaths.filter(p => !p.startsWith('/api'))
     const { groups } = await buildSearchIndex(contentPaths)
 
-    return NextResponse.json({ updatedAt: new Date().toISOString(), groups })
+    // Tving JSON-serialiserbar, plain payload for prerender
+    const payload = { updatedAt: new Date().toISOString(), groups }
+    const plain = JSON.parse(JSON.stringify(payload))
+
+    return NextResponse.json(plain)
   } catch (error) {
     console.error('Failed to build search index:', error)
     return NextResponse.json(
