@@ -4,9 +4,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import Script from 'next/script'
-
-// (Helper functions: getCookie, setCookie, generateEventId, getPageViewParams, sendPageViewToCAPI - remain unchanged)
-// ... (lim inn hjelpefunksjonene her) ...
 function getCookie(name: string): string | undefined {
   if (typeof document === 'undefined') return undefined
   const value = `; ${document.cookie}`
@@ -94,7 +91,6 @@ export function MetaPixelEvents() {
   const animationFrameRef = useRef<number | null>(null)
   const initRetryTimeoutRef = useRef<NodeJS.Timeout | null>(null) // Ref for init retry
 
-  // --- Funksjon for å forsøke initialisering ---
   const tryInitializePixel = () => {
     if (!pixelId) {
       console.warn('Meta Pixel: Pixel ID not configured.')
@@ -195,7 +191,6 @@ export function MetaPixelEvents() {
     }
   }, [searchParams])
 
-  // ViewContent useEffect (uendret, men sjekker isPixelReady)...
   useEffect(() => {
     if (!isPixelReady || !pathname.startsWith('/produkter/')) return // Sjekk isPixelReady
 

@@ -9,7 +9,7 @@ import { Toaster } from '@/components/ui/sonner'
 import { getCachedCart } from '@/lib/helpers/cart/getCachedCart'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { QueryClient } from '@tanstack/react-query'
-import { Suspense, Activity, type ReactNode } from 'react'
+import {  Activity, type ReactNode } from 'react'
 import { MetaPixelEvents } from '@/components/analytics/MetaPixelEvents'
 import ChatBubble from '@/components/ChatBubble'
 import Providers from '@/components/providers/Providers'
@@ -142,8 +142,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <GoogleTagManager gtmId='GTM-5TWMJQFP' />
         <OrganizationJsonLd />
-
-        <Suspense>
           <CartProviderLoader>
             <Activity>
               <AnnouncementBanner />
@@ -161,13 +159,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <ChatBubble />
             </Activity>
           </CartProviderLoader>
-        </Suspense>
-
         <Toaster closeButton />
         <Analytics mode='production' />
-        <Suspense fallback={null}>
           <MetaPixelEvents />
-        </Suspense>
       </body>
     </html>
   )
