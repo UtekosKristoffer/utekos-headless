@@ -9,8 +9,6 @@ const getCheckoutAriaLabel = (subtotal: string, isPending: boolean): string =>
   isPending ?
     'Behandler bestilling...'
   : `Gå til kassen med subtotal ${subtotal}`
-
-/** Les en cookie trygt (lokal util) */
 function getCookie(name: string): string | undefined {
   if (typeof document === 'undefined') return undefined
   const value = `; ${document.cookie}`
@@ -43,18 +41,14 @@ function sendJSON(url: string, data: unknown): void {
     // stille fail – må aldri blokkere checkout
   }
 }
-
-/** Generer unik Event ID (lik den i MetaPixelEvents) */
 function generateEventId(): string {
   return `evt_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`
 }
-
 export const CheckoutButton = ({
   checkoutUrl,
   subtotal,
   isPending,
-
-  cartId, // <-- NY PROP
+  cartId,
   className,
   children,
   ...props
@@ -62,72 +56,70 @@ export const CheckoutButton = ({
   checkoutUrl: string
   subtotal: string
   isPending: boolean
-  cartId: string | null | undefined // <-- NY PROP TYPE
+  cartId: string | null | undefined
   className?: string
-  children?: React.ReactNode
+  children?: React.ReactNode // Korrigert type
 } & Omit<
   React.ComponentProps<typeof Button>,
   'asChild' | 'disabled' | 'aria-label'
 >): React.JSX.Element => {
-  const onClick = React.useCallback(
-    (_e: React.MouseEvent<HTMLAnchorElement>) => {
-      if (isPending) return
+  const onClick = (_e: React.MouseEvent<HTMLAnchorElement>) => {
+    console.log('Button Clicked!')
+    if (isPending) return
+    if (!cartId) {
+      console.error('CheckoutButton onClick: Missing cartId!')
+      return
+    }
 
-      try {
-        console.log('CheckoutButton onClick: checkoutUrl =', checkoutUrl) // <-- LOGGING
-        console.log('CheckoutButton onClick: cartId =', cartId) // <-- LOGGING
+    try {
+      console.log('CheckoutButton onClick: checkoutUrl =', checkoutUrl)
+      console.log('CheckoutButton onClick: cartId =', cartId)
 
-        const fbp = getCookie('_fbp')
-        const fbc = getCookie('_fbc')
-        const ua =
-          typeof navigator !== 'undefined' ? navigator.userAgent : undefined
-        const sourceUrl =
-          typeof window !== 'undefined' ? window.location.href : undefined
-        const eventID = generateEventId().replace('evt_', 'ic_')
+      const fbp = getCookie('_fbp')
+      const fbc = getCookie('_fbc')
+      const ua =
+        typeof navigator !== 'undefined' ? navigator.userAgent : undefined
+      const sourceUrl =
+        typeof window !== 'undefined' ? window.location.href : undefined
+      const eventID = generateEventId().replace('evt_', 'ic_')
 
-        // 1) Capture identifiers
-        const captureBody = {
-          cartId: cartId || 'unknown', // <-- BRUK cartId PROP
-          checkoutUrl,
-          eventData: {} as CustomData,
-          eventId: eventID,
-          userData: {} as UserData
-        }
-        if (fbp) captureBody.userData.fbp = fbp
-        if (fbc) captureBody.userData.fbc = fbc
-        if (ua) captureBody.userData.client_user_agent = ua
-
-        console.log(
-          'Sending to /api/checkout/capture-identifiers:',
-          captureBody
-        ) // <-- LOGGING
-        sendJSON('/api/checkout/capture-identifiers', captureBody)
-
-        // 2) Pixel: InitiateCheckout (som før)
-        if (typeof window.fbq === 'function') {
-          window.fbq('track', 'InitiateCheckout', {}, { eventID })
-          console.log('🛒 Meta Pixel: InitiateCheckout tracked', { eventID })
-        }
-
-        // 3) CAPI: InitiateCheckout (via /api/meta-events, som før)
-        const capiPayload = {
-          eventName: 'InitiateCheckout',
-          eventId: eventID,
-          eventSourceUrl: sourceUrl,
-          eventData: {},
-          userData: {} as UserData
-        }
-        if (ua) capiPayload.userData!.client_user_agent = ua
-        sendJSON('/api/meta-events', capiPayload)
-        console.log('🛒 Meta CAPI: InitiateCheckout request sent', {
-          capiPayload
-        })
-      } catch (error) {
-        console.error('Feil under sending av checkout-events:', error)
+      // 1) Capture identifiers
+      const captureBody = {
+        cartId: cartId,
+        checkoutUrl: checkoutUrl,
+        eventId: eventID,
+        userData: {} as UserData
       }
-    },
-    [checkoutUrl, isPending, cartId] // <-- LEGG TIL cartId I AVHENGIGHETER
-  )
+      if (fbp) captureBody.userData.fbp = fbp
+      if (fbc) captureBody.userData.fbc = fbc
+      if (ua) captureBody.userData.client_user_agent = ua
+
+      console.log('Sending to /api/checkout/capture-identifiers:', captureBody)
+      sendJSON('/api/checkout/capture-identifiers', captureBody)
+
+      // 2) Pixel: InitiateCheckout
+      if (typeof window.fbq === 'function') {
+        window.fbq('track', 'InitiateCheckout', {}, { eventID })
+        console.log('🛒 Meta Pixel: InitiateCheckout tracked', { eventID })
+      }
+
+      // 3) CAPI: InitiateCheckout
+      const capiPayload = {
+        eventName: 'InitiateCheckout',
+        eventId: eventID,
+        eventSourceUrl: sourceUrl,
+        eventData: {} as CustomData,
+        userData: {} as UserData
+      }
+      if (ua) capiPayload.userData!.client_user_agent = ua
+      sendJSON('/api/meta-events', capiPayload)
+      console.log('🛒 Meta CAPI: InitiateCheckout request sent', {
+        capiPayload
+      })
+    } catch (error) {
+      console.error('Feil under sending av checkout-events:', error)
+    }
+  } // Slutt på onClick funksjon uten useCallback
 
   return (
     <Button
@@ -139,9 +131,9 @@ export const CheckoutButton = ({
     >
       <a
         href={checkoutUrl}
-        onClick={onClick} // Kjør event-sending FØR navigering starter
+        onClick={onClick}
         aria-disabled={isPending}
-        rel='noopener noreferrer' // Viktig for sikkerhet ved eksterne lenker (som checkout)
+        rel='noopener noreferrer'
       >
         {children || (isPending ? 'Behandler...' : 'Gå til kassen')}
       </a>

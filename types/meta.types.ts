@@ -192,7 +192,7 @@ export type PurchaseInput = {
 
 export type CheckoutAttribution = {
   cartId: string | null
-  checkoutUrl: string
+  checkoutUrl: string | null
   userData: {
     fbp?: string
     fbc?: string
