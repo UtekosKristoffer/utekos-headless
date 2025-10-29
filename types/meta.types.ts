@@ -1,3 +1,4 @@
+export type MoneySet = { shop_money: { amount: string; currency_code: string } }
 export type UserData = {
   fbp?: string
   fbc?: string
@@ -104,17 +105,6 @@ export type OrderPaid = {
   returns: Return[]
   line_item_groups: LineItemGroup[]
 }
-
-export type MoneySet = {
-  shop_money: Money
-  presentment_money: Money
-}
-
-export type Money = {
-  amount: string
-  currency_code: string
-}
-
 export type Address = {
   id?: number
   customer_id?: number
@@ -188,7 +178,6 @@ export type LineItem = {
   variant_title: string | null
   vendor: string | null
   tax_lines: TaxLine[]
-  duties: Duty[]
   discount_allocations: DiscountAllocation[]
 }
 
@@ -198,17 +187,6 @@ export type TaxLine = {
   price_set: MoneySet
   rate: number
 }
-
-export type Duty = {
-  id: string
-  harmonized_system_code: string
-  country_code_of_origin: string
-  shop_money: Money
-  presentment_money: Money
-  tax_lines: TaxLine[]
-  admin_graphql_api_id: string
-}
-
 export type DiscountAllocation = {
   amount: string
   amount_set: MoneySet
