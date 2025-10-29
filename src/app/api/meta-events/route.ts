@@ -57,7 +57,6 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  // --- Hent Server-side Info ---
   const ua = req.headers.get('user-agent')
   const xForwardedFor = req.headers.get('x-forwarded-for')
   const ip =
@@ -134,9 +133,9 @@ export async function POST(req: NextRequest) {
     ...(TEST_EVENT_CODE && { test_event_code: TEST_EVENT_CODE })
   }
 
-  // --- Send til Meta ---
   try {
-    const metaApiUrl = `https://graph.facebook.com/v20.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`
+    const metaApiUrl = `https://graph.facebook.com/v24.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`
+
     const res = await fetch(metaApiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -148,7 +147,6 @@ export async function POST(req: NextRequest) {
       `Meta CAPI Response for ${event_name} (${body.eventId}):`,
       JSON.stringify(json, null, 2)
     )
-
     if (!res.ok) {
       console.error(
         `Meta CAPI request failed for ${event_name} (${body.eventId}): Status ${res.status}`,
@@ -159,7 +157,6 @@ export async function POST(req: NextRequest) {
         { status: res.status }
       )
     }
-
     console.log(`Meta CAPI Success: Sent ${event_name} with ID ${body.eventId}`)
     return NextResponse.json({ success: true, metaResponse: json })
   } catch (fetchError) {

@@ -4,9 +4,7 @@ import { MapPin } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import IntersportLogo from '@public/logo/Intersport_logo.svg'
-
-const INTERSPORT_LAKSEVAG_MAPS_URL =
-  'https://www.google.com/maps/place/Intersport+Laksev%C3%A5g/'
+import { INTERSPORT_LAKSEVAG_MAPS_URL } from '@/constants/maps'
 export function FindInStoreSection() {
   return (
     <section className='w-full border-t border-neutral-800 bg-background py-16 px-4 sm:py-20'>

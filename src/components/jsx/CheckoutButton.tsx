@@ -3,13 +3,14 @@
 
 import * as React from 'react'
 import { Button } from '@/components/ui/button'
-import type { CustomData, UserData } from '@types'
+import type { CustomData, UserData } from '@types' // Assuming these exist
 
 const getCheckoutAriaLabel = (subtotal: string, isPending: boolean): string =>
   isPending ?
     'Behandler bestilling...'
   : `Gå til kassen med subtotal ${subtotal}`
 
+/** Les en cookie trygt (lokal util) */
 function getCookie(name: string): string | undefined {
   if (typeof document === 'undefined') return undefined
   const value = `; ${document.cookie}`
@@ -18,7 +19,6 @@ function getCookie(name: string): string | undefined {
   return undefined
 }
 
-/** Fire-and-forget JSON. Bruker sendBeacon ved navigasjon, ellers fetch(keepalive). */
 function sendJSON(url: string, data: unknown): void {
   try {
     const payload = JSON.stringify(data)
@@ -53,6 +53,8 @@ export const CheckoutButton = ({
   checkoutUrl,
   subtotal,
   isPending,
+
+  cartId, // <-- NY PROP
   className,
   children,
   ...props
@@ -60,6 +62,7 @@ export const CheckoutButton = ({
   checkoutUrl: string
   subtotal: string
   isPending: boolean
+  cartId: string | null | undefined // <-- NY PROP TYPE
   className?: string
   children?: React.ReactNode
 } & Omit<
@@ -71,68 +74,59 @@ export const CheckoutButton = ({
       if (isPending) return
 
       try {
+        console.log('CheckoutButton onClick: checkoutUrl =', checkoutUrl) // <-- LOGGING
+        console.log('CheckoutButton onClick: cartId =', cartId) // <-- LOGGING
+
         const fbp = getCookie('_fbp')
         const fbc = getCookie('_fbc')
         const ua =
           typeof navigator !== 'undefined' ? navigator.userAgent : undefined
         const sourceUrl =
           typeof window !== 'undefined' ? window.location.href : undefined
+        const eventID = generateEventId().replace('evt_', 'ic_')
 
-        // ---- Unik Event ID for InitiateCheckout ----
-        const eventID = generateEventId().replace('evt_', 'ic_') // Bruk prefiks for lesbarhet
-
-        // 1) Capture identifiers til Redis (som før, men legg til eventID?)
-        //    Vurder om cartId *faktisk* er tilgjengelig her. Hvis ikke, må den hentes.
-        const cartIdFromContext = 'unknown' // Hvordan får vi tak i cartId her? Trengs Context eller prop.
+        // 1) Capture identifiers
         const captureBody = {
-          cartId: cartIdFromContext, // <--- MÅ FIKSES HVIS DU BRUKER DENNE
+          cartId: cartId || 'unknown', // <-- BRUK cartId PROP
           checkoutUrl,
-          eventId: eventID, 
-          userData: {} as UserData // Start med tomt objekt, bruk UserData type
+          eventData: {} as CustomData,
+          eventId: eventID,
+          userData: {} as UserData
         }
         if (fbp) captureBody.userData.fbp = fbp
         if (fbc) captureBody.userData.fbc = fbc
         if (ua) captureBody.userData.client_user_agent = ua
-        // La Redis-ruten hente IP
-        sendJSON('/api/checkout/capture-identifiers', captureBody)
-        console.log('📦 Identifier Capture request sent', { captureBody })
 
-        // 2) Pixel: InitiateCheckout (med eventID)
+        console.log(
+          'Sending to /api/checkout/capture-identifiers:',
+          captureBody
+        ) // <-- LOGGING
+        sendJSON('/api/checkout/capture-identifiers', captureBody)
+
+        // 2) Pixel: InitiateCheckout (som før)
         if (typeof window.fbq === 'function') {
-          // Send grunnleggende InitiateCheckout, Meta anbefaler ofte flere params her (value, currency, contents)
-          // Men for enkelhet og dedupe, holder det med eventID foreløpig.
           window.fbq('track', 'InitiateCheckout', {}, { eventID })
           console.log('🛒 Meta Pixel: InitiateCheckout tracked', { eventID })
         }
 
-        // 3) CAPI: InitiateCheckout (via /api/meta-events)
-        const capiPayload: {
-          eventName: string
-          eventId: string
-          eventSourceUrl?: string
-          eventData?: CustomData // Tomt for nå, men kan fylles
-          userData?: UserData
-        } = {
+        // 3) CAPI: InitiateCheckout (via /api/meta-events, som før)
+        const capiPayload = {
           eventName: 'InitiateCheckout',
-          eventId: eventID, // Samme ID som Pixel
-          ...(sourceUrl && { eventSourceUrl: sourceUrl }),
-          eventData: {}, // Kan legge til value/currency/contents hvis tilgjengelig
-          userData: {}
+          eventId: eventID,
+          eventSourceUrl: sourceUrl,
+          eventData: {},
+          userData: {} as UserData
         }
-        // Fyll userData betinget (kun UA fra klient)
         if (ua) capiPayload.userData!.client_user_agent = ua
-
         sendJSON('/api/meta-events', capiPayload)
-
         console.log('🛒 Meta CAPI: InitiateCheckout request sent', {
           capiPayload
         })
       } catch (error) {
         console.error('Feil under sending av checkout-events:', error)
-        // aldri blokkér navigasjon
       }
     },
-    [checkoutUrl, isPending] // Fjern subtotal hvis den ikke brukes i callbacken
+    [checkoutUrl, isPending, cartId] // <-- LEGG TIL cartId I AVHENGIGHETER
   )
 
   return (
