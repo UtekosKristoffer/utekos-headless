@@ -3,17 +3,13 @@
 
 import * as React from 'react'
 import { Button } from '@/components/ui/button'
-import type { InitiateCheckoutInput } from '@types'
+import type { CustomData, UserData } from '@types'
 
-/**
- * Generates appropriate aria-label for checkout button based on cart state.
- */
 const getCheckoutAriaLabel = (subtotal: string, isPending: boolean): string =>
   isPending ?
     'Behandler bestilling...'
   : `Gå til kassen med subtotal ${subtotal}`
 
-/** Les en cookie trygt (lokal util for å unngå nye imports) */
 function getCookie(name: string): string | undefined {
   if (typeof document === 'undefined') return undefined
   const value = `; ${document.cookie}`
@@ -32,6 +28,9 @@ function sendJSON(url: string, data: unknown): void {
         new Blob([payload], { type: 'application/json' })
       )
       if (ok) return
+      console.warn(
+        `navigator.sendBeacon to ${url} failed, falling back to fetch.`
+      )
     }
     void fetch(url, {
       method: 'POST',
@@ -39,9 +38,15 @@ function sendJSON(url: string, data: unknown): void {
       body: payload,
       keepalive: true
     })
-  } catch {
+  } catch (error) {
+    console.error(`Failed to send analytics data to ${url}:`, error)
     // stille fail – må aldri blokkere checkout
   }
+}
+
+/** Generer unik Event ID (lik den i MetaPixelEvents) */
+function generateEventId(): string {
+  return `evt_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`
 }
 
 export const CheckoutButton = ({
@@ -66,58 +71,68 @@ export const CheckoutButton = ({
       if (isPending) return
 
       try {
-        // Les eksisterende cookies du allerede setter i MetaPixelEvents.tsx
         const fbp = getCookie('_fbp')
         const fbc = getCookie('_fbc')
         const ua =
           typeof navigator !== 'undefined' ? navigator.userAgent : undefined
+        const sourceUrl =
+          typeof window !== 'undefined' ? window.location.href : undefined
 
-        // 1) Capture identifiers til Redis (for Purchase-webhooken)
-        const captureBody: {
-          cartId: string
-          checkoutUrl: string
-          userData: {
-            fbp?: string
-            fbc?: string
-            client_user_agent?: string
-            client_ip_address?: string
-            external_id?: string
-          }
-          eventId?: string
-        } = {
-          cartId: 'unknown', // fyll faktisk cartId her hvis du har den i scope
+        // ---- Unik Event ID for InitiateCheckout ----
+        const eventID = generateEventId().replace('evt_', 'ic_') // Bruk prefiks for lesbarhet
+
+        // 1) Capture identifiers til Redis (som før, men legg til eventID?)
+        //    Vurder om cartId *faktisk* er tilgjengelig her. Hvis ikke, må den hentes.
+        const cartIdFromContext = 'unknown' // Hvordan får vi tak i cartId her? Trengs Context eller prop.
+        const captureBody = {
+          cartId: cartIdFromContext, // <--- MÅ FIKSES HVIS DU BRUKER DENNE
           checkoutUrl,
-          userData: {}
+          eventId: eventID, 
+          userData: {} as UserData // Start med tomt objekt, bruk UserData type
         }
         if (fbp) captureBody.userData.fbp = fbp
         if (fbc) captureBody.userData.fbc = fbc
         if (ua) captureBody.userData.client_user_agent = ua
-
+        // La Redis-ruten hente IP
         sendJSON('/api/checkout/capture-identifiers', captureBody)
+        console.log('📦 Identifier Capture request sent', { captureBody })
 
-        // 2) Pixel: InitiateCheckout (lettvekts; det viktige er at eventet finnes for coverage)
-        if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
-          window.fbq('track', 'InitiateCheckout')
+        // 2) Pixel: InitiateCheckout (med eventID)
+        if (typeof window.fbq === 'function') {
+          // Send grunnleggende InitiateCheckout, Meta anbefaler ofte flere params her (value, currency, contents)
+          // Men for enkelhet og dedupe, holder det med eventID foreløpig.
+          window.fbq('track', 'InitiateCheckout', {}, { eventID })
+          console.log('🛒 Meta Pixel: InitiateCheckout tracked', { eventID })
         }
 
-        // 3) CAPI: InitiateCheckout
-        const sourceUrl =
-          typeof location !== 'undefined' ? location.href : undefined
-        const capiPayload: InitiateCheckoutInput = {
-          userData: {},
-          ...(sourceUrl !== undefined && { sourceUrl }),
-          occuredAt: Date.now()
+        // 3) CAPI: InitiateCheckout (via /api/meta-events)
+        const capiPayload: {
+          eventName: string
+          eventId: string
+          eventSourceUrl?: string
+          eventData?: CustomData // Tomt for nå, men kan fylles
+          userData?: UserData
+        } = {
+          eventName: 'InitiateCheckout',
+          eventId: eventID, // Samme ID som Pixel
+          ...(sourceUrl && { eventSourceUrl: sourceUrl }),
+          eventData: {}, // Kan legge til value/currency/contents hvis tilgjengelig
+          userData: {}
         }
-        if (fbp) capiPayload.userData.fbp = fbp
-        if (fbc) capiPayload.userData.fbc = fbc
-        if (ua) capiPayload.userData.client_user_agent = ua
+        // Fyll userData betinget (kun UA fra klient)
+        if (ua) capiPayload.userData!.client_user_agent = ua
 
-        sendJSON('/api/meta/capi/initiated-checkout', capiPayload)
-      } catch {
+        sendJSON('/api/meta-events', capiPayload)
+
+        console.log('🛒 Meta CAPI: InitiateCheckout request sent', {
+          capiPayload
+        })
+      } catch (error) {
+        console.error('Feil under sending av checkout-events:', error)
         // aldri blokkér navigasjon
       }
     },
-    [checkoutUrl, isPending]
+    [checkoutUrl, isPending] // Fjern subtotal hvis den ikke brukes i callbacken
   )
 
   return (
@@ -130,9 +145,9 @@ export const CheckoutButton = ({
     >
       <a
         href={checkoutUrl}
-        onClick={onClick}
+        onClick={onClick} // Kjør event-sending FØR navigering starter
         aria-disabled={isPending}
-        rel='noopener noreferrer'
+        rel='noopener noreferrer' // Viktig for sikkerhet ved eksterne lenker (som checkout)
       >
         {children || (isPending ? 'Behandler...' : 'Gå til kassen')}
       </a>

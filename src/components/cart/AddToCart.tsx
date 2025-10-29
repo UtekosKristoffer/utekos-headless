@@ -26,8 +26,6 @@ import { toast } from 'sonner'
 import type { ActorRef, StateFrom } from 'xstate'
 import { ModalSubmitButton } from './AddToCartButton/ModalSubmitButton'
 import { QuantitySelector } from './QuantitySelector'
-// Fjern import av AddToCartInput hvis den ikke brukes andre steder
-// import type { AddToCartInput } from '@types'
 
 /** Les en cookie trygt lokalt (unngår nye imports). */
 function getCookie(name: string): string | undefined {
@@ -43,16 +41,14 @@ function sendJSON(url: string, data: unknown): void {
   try {
     const payload = JSON.stringify(data)
     if (typeof navigator !== 'undefined' && 'sendBeacon' in navigator) {
-      // Prøv sendBeacon først
       const ok = navigator.sendBeacon(
         url,
         new Blob([payload], { type: 'application/json' })
       )
       if (ok) {
-        // console.log(`Beacon sent successfully to ${url}`);
         return // Suksess med Beacon
       }
-      // Hvis sendBeacon feiler (f.eks. pga. datastørrelse), fall tilbake til fetch
+
       console.warn(
         `navigator.sendBeacon to ${url} failed, falling back to fetch.`
       )
