@@ -78,6 +78,7 @@ export type AddToCartInput = {
   content_ids?: string[]
   eventId?: string
   sourceUrl?: string
+  eventName?: string
   userData: {
     fbp?: string
     fbc?: string
@@ -201,4 +202,14 @@ export type CheckoutAttribution = {
   }
   eventId?: string
   ts: number
+}
+
+export type CustomData = {
+  value?: number
+  currency?: string
+  content_type?: 'product' | 'product_group'
+  content_ids?: string[]
+  contents?: ContentItem[]
+  num_items?: number
+  order_id?: string
 }

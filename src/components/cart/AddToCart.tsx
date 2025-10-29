@@ -15,7 +15,9 @@ import type {
   AddToCartFormValues,
   CartMutationEvent,
   ShopifyProduct,
-  ShopifyProductVariant
+  ShopifyProductVariant,
+  CustomData,
+  UserData
 } from '@types'
 
 import { useContext, useEffect, useTransition } from 'react'
@@ -24,7 +26,9 @@ import { toast } from 'sonner'
 import type { ActorRef, StateFrom } from 'xstate'
 import { ModalSubmitButton } from './AddToCartButton/ModalSubmitButton'
 import { QuantitySelector } from './QuantitySelector'
-import type { AddToCartInput } from '@types'
+// Fjern import av AddToCartInput hvis den ikke brukes andre steder
+// import type { AddToCartInput } from '@types'
+
 /** Les en cookie trygt lokalt (unngår nye imports). */
 function getCookie(name: string): string | undefined {
   if (typeof document === 'undefined') return undefined
@@ -34,25 +38,37 @@ function getCookie(name: string): string | undefined {
   return undefined
 }
 
-/** Fire-and-forget JSON (sendBeacon når mulig, ellers fetch keepalive). */
+/** Send JSON, helst med Beacon API. */
 function sendJSON(url: string, data: unknown): void {
   try {
     const payload = JSON.stringify(data)
     if (typeof navigator !== 'undefined' && 'sendBeacon' in navigator) {
+      // Prøv sendBeacon først
       const ok = navigator.sendBeacon(
         url,
         new Blob([payload], { type: 'application/json' })
       )
-      if (ok) return
+      if (ok) {
+        // console.log(`Beacon sent successfully to ${url}`);
+        return // Suksess med Beacon
+      }
+      // Hvis sendBeacon feiler (f.eks. pga. datastørrelse), fall tilbake til fetch
+      console.warn(
+        `navigator.sendBeacon to ${url} failed, falling back to fetch.`
+      )
     }
+
+    // Fallback til fetch
     void fetch(url, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: payload,
-      keepalive: true
+      keepalive: true // Viktig for å sikre sending ved sidebytte
     })
-  } catch {
-    // stille fail – må aldrig blokkere add-to-cart
+    // console.log(`Fetch (keepalive) sent to ${url}`);
+  } catch (error) {
+    console.error(`Failed to send analytics data to ${url}:`, error)
+    // stille fail – må aldri blokkere add-to-cart
   }
 }
 
@@ -101,21 +117,24 @@ export function AddToCart({
   }
 
   const handleAddToCart = async (values: AddToCartFormValues) => {
+    // Sjekk om selectedVariant faktisk finnes FØR vi starter
+    if (!selectedVariant) {
+      toast.error('Vennligst velg en variant før du legger i handlekurven.')
+      return
+    }
+
     startTransition(async () => {
       try {
-        // 1) Legg til hovedlinje
+        // Legg til hovedproduktet
         await createMutationPromise(
           {
             type: 'ADD_LINES',
-            input: {
-              variantId: values.variantId,
-              quantity: values.quantity
-            }
+            input: { variantId: values.variantId, quantity: values.quantity }
           },
           cartActor
         )
 
-        // 2) Legg til gratis buffer + rabattkode (som før)
+        // Legg til eventuelt tilleggsprodukt (buff)
         if (additionalLine) {
           await createMutationPromise(
             {
@@ -128,172 +147,161 @@ export function AddToCart({
             cartActor
           )
 
+          // Forsøk å legge til rabatt (som før)
           try {
-            let cartId = contextCartId
-            if (!cartId) {
-              cartId = await getCartIdFromCookie()
-            }
+            let cartId = contextCartId || (await getCartIdFromCookie())
             if (cartId) {
               await applyDiscount(cartId, 'GRATISBUFF')
             } else {
               console.warn('Kunne ikke hente cartId for å legge til rabatt.')
             }
-          } catch (error) {
+          } catch (discountError) {
             if (
               !(
-                error instanceof Error
-                && error.message.includes('already applied')
+                discountError instanceof Error
+                && discountError.message.includes('already applied')
               )
             ) {
-              console.error('Kunne ikke legge til rabattkode:', error)
+              console.error('Kunne ikke legge til rabattkode:', discountError)
             }
           }
         }
-
-        // 3) Brukerfeedback (som før) - Fjernet toast.success
-        /*
-        const successMessage =
-          additionalLine ?
-            `${product.title} + gratis Utekos Buff™ er lagt i handlekurven!`
-          : `${product.title} er lagt i handlekurven!`
-        toast.success(successMessage)
-        */
-
-        // === 4) TRACKING (Pixel + CAPI) – full typesikkerhet og uten 'any' ===
-
-        if (selectedVariant) {
-          // Beregn verdier én gang
-          const basePrice = Number.parseFloat(selectedVariant.price.amount)
-          const currency = selectedVariant.price.currencyCode
-          let totalQty = values.quantity
-          const contents: {
-            id: string
-            quantity?: number
-            item_price?: number
-          }[] = [
-            {
-              id: selectedVariant.id,
-              quantity: values.quantity,
-              item_price: basePrice
-            }
-          ]
-          const contentIds: string[] = [selectedVariant.id]
-          let contentName = product.title
-
-          if (additionalLine) {
-            contents.push({
-              id: additionalLine.variantId,
-              quantity: additionalLine.quantity
-              // pris 0 – du gir den gratis; item_price lar vi stå tom for denne
-            })
-            contentIds.push(additionalLine.variantId)
-            totalQty += additionalLine.quantity
-            contentName += ' + Utekos Buff™'
+        const basePrice = Number.parseFloat(selectedVariant.price.amount)
+        const currency = selectedVariant.price.currencyCode
+        let totalQty = values.quantity
+        const contents: CustomData['contents'] = [
+          {
+            id: selectedVariant.id.toString(), // Sørg for at ID er streng
+            quantity: values.quantity,
+            item_price: basePrice
           }
+        ]
+        const contentIds: string[] = [selectedVariant.id.toString()] // Sørg for at ID er streng
+        let contentName = product.title
 
-          const value = basePrice * values.quantity // NB: gratislinjen påvirker ikke value
+        if (additionalLine) {
+          contents.push({
+            id: additionalLine.variantId.toString(), // Sørg for at ID er streng
+            quantity: additionalLine.quantity
+            // item_price kan utelates hvis den er 0/gratis
+          })
+          contentIds.push(additionalLine.variantId.toString()) // Sørg for at ID er streng
+          totalQty += additionalLine.quantity
+          contentName += ' + Utekos Buff™' // Antar buff navnet
+        }
 
-          // (4a) Pixel AddToCart med eventID for ev. dedupe
-          const eventID = `atc_${selectedVariant.id}_${Date.now()}`
-          if (
-            typeof window !== 'undefined'
-            && typeof window.fbq === 'function'
-          ) {
-            const fbqParams: {
-              contents: { id: string; quantity?: number; item_price?: number }[]
-              content_type: 'product'
-              value?: number
-              currency?: string
-              content_ids?: string[]
-              content_name?: string
-              num_items?: number
-            } = {
-              contents,
-              content_type: 'product',
-              value,
-              currency,
-              content_ids: contentIds,
-              content_name: contentName,
-              num_items: totalQty
-            }
-            window.fbq('track', 'AddToCart', fbqParams, { eventID })
+        const value = basePrice * values.quantity // Verdi av hovedproduktet
+
+        // 1. Meta Pixel (Browser)
+        const eventID = `atc_${selectedVariant.id}_${Date.now()}` // Unik ID
+        if (typeof window.fbq === 'function') {
+          const fbqParams = {
+            contents,
+            content_type: 'product' as const, // Bruk 'as const' for streng literal type
+            value,
+            currency,
+            content_ids: contentIds,
+            content_name: contentName,
+            num_items: totalQty
           }
+          window.fbq('track', 'AddToCart', fbqParams, { eventID })
+          console.log('🛒 Meta Pixel: AddToCart tracked', {
+            fbqParams,
+            eventID
+          })
+        }
 
-          // (4b) CAPI AddToCart (server) – fire-and-forget
-          const fbp = getCookie('_fbp')
-          const fbc = getCookie('_fbc')
-          const ua =
-            typeof navigator !== 'undefined' ? navigator.userAgent : undefined
+        // 2. Meta CAPI (Server via API Route)
+        const fbp = getCookie('_fbp')
+        const fbc = getCookie('_fbc')
+        const ua =
+          typeof navigator !== 'undefined' ? navigator.userAgent : undefined
 
-          const capiPayload: AddToCartInput = {
+        // Bygg payload som matcher 'Body' typen i /api/meta-events
+        const capiPayload: {
+          eventName: string
+          eventId: string
+          eventSourceUrl: string
+          eventData?: CustomData // Bruk CustomData typen her
+          userData?: UserData // Bruk UserData typen her
+        } = {
+          eventName: 'AddToCart',
+          eventId: eventID,
+          eventSourceUrl:
+            typeof window !== 'undefined' ? window.location.href : '',
+          eventData: {
             value,
             currency,
             contents,
             content_type: 'product',
             content_ids: contentIds,
-            eventId: eventID, // muliggjør dedupe mot Pixel
-            ...(typeof location !== 'undefined' && {
-              sourceUrl: location.href
-            }),
-            userData: {}
-          }
-          if (fbp) capiPayload.userData.fbp = fbp
-          if (fbc) capiPayload.userData.fbc = fbc
-          if (ua) capiPayload.userData.client_user_agent = ua
-
-          sendJSON('/api/meta/capi/add-to-cart', capiPayload)
+            num_items: totalQty
+          },
+          userData: {} // Start med tomt objekt
         }
 
-        // === 5) GA datalayer (som før) ===
-        if (
-          typeof window !== 'undefined'
-          && (window as unknown as { dataLayer?: unknown[] }).dataLayer
-          && selectedVariant
-        ) {
-          const items = [
+        // Fyll userData betinget
+        if (ua) capiPayload.userData!.client_user_agent = ua
+        // La serveren hente fbp/fbc/ip
+
+        // Send til den generiske CAPI-ruten
+        sendJSON('/api/meta-events', capiPayload)
+        console.log('🛒 Meta CAPI: AddToCart request sent', { capiPayload })
+
+        // 3. Google Analytics GA4
+        if (typeof window.dataLayer !== 'undefined') {
+          const ga4Items = [
             {
-              item_id: selectedVariant.id,
+              item_id: selectedVariant.id.toString(), // Sørg for streng
               item_name: product.title,
-              price: Number.parseFloat(selectedVariant.price.amount),
+              // item_variant: ??? // Prøv å få tak i farge/størrelse? selectedVariant.title?
+              price: basePrice,
               quantity: values.quantity
             }
           ]
           if (additionalLine) {
-            items.push({
-              item_id: additionalLine.variantId,
-              item_name: 'Utekos Buff™',
+            ga4Items.push({
+              item_id: additionalLine.variantId.toString(),
+              item_name: 'Utekos Buff™', // Hent gjerne faktisk navn hvis mulig
               price: 0,
               quantity: additionalLine.quantity
             })
           }
-          ;(window as unknown as { dataLayer: unknown[] }).dataLayer.push({
+          window.dataLayer.push({
             event: 'add_to_cart',
             ecommerce: {
-              currency: selectedVariant.price.currencyCode,
-              value:
-                Number.parseFloat(selectedVariant.price.amount)
-                * values.quantity,
-              items
+              currency: currency,
+              value: value, // Verdi av hovedproduktet
+              items: ga4Items
             }
+          })
+          console.log('🛒 GA4: add_to_cart sent', {
+            items: ga4Items,
+            value,
+            currency
           })
         }
 
-        // 6) Åpne cart-drawer (som før)
+        // Åpne handlekurven til slutt
         cartStore.send({ type: 'OPEN' })
-      } catch (error) {
-        console.error('En kritisk feil skjedde i handlekurv-sekvensen:', error)
-        toast.error('En feil oppstod ved å legge til i handlekurven.')
+      } catch (mutationError) {
+        // Feil under addLines eller applyDiscount
+        console.error('Feil under legg-i-kurv operasjon:', mutationError)
+        toast.error('Kunne ikke legge varen(e) i handlekurven. Prøv igjen.')
       }
     })
   }
 
+  // useEffect for å oppdatere form (uendret)
   useEffect(() => {
     form.setValue('variantId', selectedVariant?.id ?? '')
   }, [selectedVariant?.id, form])
 
+  // useEffect for å logge feil (uendret)
   useEffect(() => {
     if (lastError) {
       console.error('Feil fra handlekurv-maskin:', lastError)
+      // Vurder å vise en toast her også? toast.warning(`Feil: ${lastError}`);
     }
   }, [lastError])
 

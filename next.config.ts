@@ -40,7 +40,8 @@ const nextConfig: NextConfig = {
         hostname: 'cdn.shopify.com',
         pathname: '/**'
       }
-    ]
+    ],
+    qualities: [75, 80, 90, 100]
   },
   async redirects() {
     return [

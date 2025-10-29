@@ -1,3 +1,4 @@
+// Path: src/components/frontpage/components/NewProductLaunchSection/NewProductLaunchSection.tsx
 'use client'
 
 import { useState } from 'react'
