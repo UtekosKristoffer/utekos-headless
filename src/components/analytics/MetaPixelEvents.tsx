@@ -5,8 +5,6 @@ import { useEffect, useRef } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import Script from 'next/script' // Importer next/script
 
-// (Helper functions: getCookie, setCookie, generateEventId, getPageViewParams, sendPageViewToCAPI - remain unchanged)
-// ... (lim inn hjelpefunksjonene her) ...
 function getCookie(name: string): string | undefined {
   if (typeof document === 'undefined') return undefined
   const value = `; ${document.cookie}`
