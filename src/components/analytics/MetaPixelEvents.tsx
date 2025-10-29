@@ -91,9 +91,7 @@ export function MetaPixelEvents() {
   const searchParams = useSearchParams()
   const pageViewTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const animationFrameRef = useRef<number | null>(null)
-  // Fjernet isPixelReady og initRetryTimeoutRef - ikke lenger nødvendig
 
-  // --- Funksjon for å tracke PageView (med debounce) ---
   const trackPageView = () => {
     if (pageViewTimeoutRef.current) clearTimeout(pageViewTimeoutRef.current)
     if (animationFrameRef.current)
@@ -101,7 +99,6 @@ export function MetaPixelEvents() {
 
     pageViewTimeoutRef.current = setTimeout(() => {
       animationFrameRef.current = requestAnimationFrame(() => {
-        // Sjekk om fbq eksisterer (bør den nå!)
         if (typeof window === 'undefined' || typeof window.fbq !== 'function') {
           console.warn(
             'Meta Pixel: fbq not available during PageView track attempt'
@@ -114,7 +111,6 @@ export function MetaPixelEvents() {
         const currentSearchParams = new URLSearchParams(window.location.search)
         const params = getPageViewParams(currentPathname, currentSearchParams)
 
-        // Kall fbq direkte, den vil bli lagt i køen hvis fbevents.js ikke er lastet ennå
         window.fbq('track', 'PageView', params, { eventID: eventId })
 
         console.log('📊 Meta Pixel: PageView tracked (Debounced + RAF)', {
@@ -133,9 +129,7 @@ export function MetaPixelEvents() {
     }, 150)
   }
 
-  // --- useEffect for PageView ved navigering ---
   useEffect(() => {
-    // Kall trackPageView direkte. fbq vil eksistere som en kø-funksjon umiddelbart.
     trackPageView()
 
     return () => {
@@ -167,9 +161,7 @@ export function MetaPixelEvents() {
     }
   }, [searchParams])
 
-  // ViewContent useEffect (uendret, men fjerner isPixelReady)...
   useEffect(() => {
-    // Fjerner sjekk for isPixelReady
     if (!pathname.startsWith('/produkter/')) return
 
     const timeoutId = setTimeout(() => {
@@ -220,13 +212,10 @@ export function MetaPixelEvents() {
     }, 200)
     return () => clearTimeout(timeoutId)
   }, [pathname]) // Fjerner isPixelReady herfra
-
-  // --- Injiser Meta's Base Snippet ---
   if (!pixelId) {
-    return null // Ikke render noe hvis pixel ID mangler
+    return null
   }
 
-  // Definer base snippet som en streng
   const metaPixelBaseCode = `
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?

@@ -40,14 +40,12 @@ type Body = {
   userData?: UserData
   eventId?: string
   eventSourceUrl?: string
-  testEventCode?: string
   eventTime?: number
 }
 
 export async function POST(req: NextRequest) {
   const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
   const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
-  const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE
 
   if (!PIXEL_ID || !ACCESS_TOKEN) {
     console.error('Meta CAPI environment variables not set')
@@ -101,7 +99,6 @@ export async function POST(req: NextRequest) {
     fbp: fbp,
     fbc: fbc,
 
-    // Legg til klient-sendt PII hvis det finnes
     ...(body.userData?.em && { em: body.userData.em }),
     ...(body.userData?.ph && { ph: body.userData.ph }),
     ...(body.userData?.fn && { fn: body.userData.fn }),
@@ -117,7 +114,6 @@ export async function POST(req: NextRequest) {
     })
   }
 
-  // --- Bygg Payload for Meta ---
   const payload: Record<string, any> = {
     data: [
       {
@@ -129,8 +125,7 @@ export async function POST(req: NextRequest) {
         user_data: user_data,
         custom_data: body.eventData ?? {}
       }
-    ],
-    ...(TEST_EVENT_CODE && { test_event_code: TEST_EVENT_CODE })
+    ]
   }
 
   try {
@@ -157,7 +152,6 @@ export async function POST(req: NextRequest) {
         { status: res.status }
       )
     }
-    console.log(`Meta CAPI Success: Sent ${event_name} with ID ${body.eventId}`)
     return NextResponse.json({ success: true, metaResponse: json })
   } catch (fetchError) {
     console.error(

@@ -13,8 +13,6 @@ export async function GET() {
     )
 
     const data = await response.json()
-
-    // Format produkter for Google Merchant Center
     const formattedProducts = data.products.map((product: any) => ({
       id: product.id.toString(),
       title: product.title,

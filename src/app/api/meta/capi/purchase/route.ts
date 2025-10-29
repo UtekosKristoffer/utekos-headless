@@ -14,7 +14,6 @@ import type {
   MetaEventsSuccess
 } from '@types'
 
-
 /* ----------------------------- Helper Functions ----------------------------- */
 
 function verifyHmac(req: NextRequest, raw: string): boolean {
@@ -131,7 +130,8 @@ export async function POST(req: NextRequest) {
 
   // From Order Payload
   const phone = order.phone ?? order.customer?.phone
-  const normalizedPhone = normalizePhone(phone)
+  const phoneString = typeof phone === 'string' ? phone.toString() : phone
+  const normalizedPhone = normalizePhone(phoneString)
   if (normalizedPhone !== undefined) {
     user_data.ph = [normalizedPhone]
   }
@@ -148,15 +148,15 @@ export async function POST(req: NextRequest) {
   }
 
   // Enrichment: From Customer object
-  const c = order.customer
-  if (c) {
-    const firstName = normalizeAndHash(c.first_name)
+  const customer = order.customer
+  if (customer) {
+    const firstName = normalizeAndHash(customer.first_name)
     if (firstName !== undefined) user_data.fn = [firstName]
 
-    const lastName = normalizeAndHash(c.last_name)
+    const lastName = normalizeAndHash(customer.last_name)
     if (lastName !== undefined) user_data.ln = [lastName]
 
-    const addr = c.default_address
+    const addr = customer.default_address
     if (addr) {
       const city = normalizeAndHash(addr.city)
       if (city !== undefined) user_data.ct = [city]
@@ -169,27 +169,6 @@ export async function POST(req: NextRequest) {
 
       const country = normalizeAndHash(addr.country_code)
       if (country !== undefined) user_data.country = [country]
-    }
-  }
-
-  // PATCH FOR "SEND TEST" - Add contact_email if no identifiers present
-  const hasAnyId = !!(
-    user_data.fbp
-    || user_data.fbc
-    || user_data.external_id
-    || user_data.em?.length
-    || user_data.ph?.length
-    || user_data.client_ip_address
-  )
-  const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE
-
-  if (!hasAnyId && TEST_EVENT_CODE) {
-    if (!user_data.em) {
-      const contact_email = (order as any)?.contact_email as string | undefined
-      const normalizedContactEmail = normalizeAndHash(contact_email)
-      if (normalizedContactEmail !== undefined) {
-        user_data.em = [normalizedContactEmail]
-      }
     }
   }
 
@@ -216,12 +195,7 @@ export async function POST(req: NextRequest) {
     ...(eventId ? { event_id: eventId } : {}),
     ...(event_url ? { event_source_url: event_url } : {})
   }
-
-  // 7) Build payload
-  const payload: MetaEventsRequest =
-    TEST_EVENT_CODE ?
-      { data: [event], test_event_code: TEST_EVENT_CODE }
-    : { data: [event] }
+  const payload: MetaEventsRequest = { data: [event] }
 
   // 8) Call Meta Graph API
   const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
@@ -247,7 +221,6 @@ export async function POST(req: NextRequest) {
 
   const result = (await res.json()) as MetaEventsSuccess | MetaGraphError
 
-  // 9) Cleanup Redis regardless of outcome
   if (token) await redisDel(`checkout:${token}`)
 
   if (!res.ok) {
@@ -257,7 +230,7 @@ export async function POST(req: NextRequest) {
     )
     return NextResponse.json(
       { error: 'Meta CAPI error', details: result },
-      { status: 400 }
+      { status: res.status }
     )
   }
 
