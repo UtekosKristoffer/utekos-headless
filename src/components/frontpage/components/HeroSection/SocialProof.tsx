@@ -1,3 +1,7 @@
+// Path: src/components/frontpage/SocialProof.tsx
+import { KlarnaLogo } from '@/components/logo/payments/KlarnaLogo'
+import { VippsLogo } from '@/components/logo/payments/VippsLogo'
+
 export function SocialProof() {
   return (
     <div className='animate-fade-in-up mx-auto max-w-4xl'>
@@ -24,9 +28,10 @@ export function SocialProof() {
           <div className='absolute inset-0 bg-gradient-to-br from-sky-500/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
           <div className='relative'>
             <span className='text-xl font-bold'>Trygg handel</span>
-            <p className='mt-1 text-sm text-muted-foreground'>
-              Vi tilbyr betaling med Klarna og Vipps
-            </p>
+            <div className='mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2'>
+              <VippsLogo className='h-6 w-auto' />
+              <KlarnaLogo className='h-6 w-auto' />
+            </div>
           </div>
         </div>
       </div>

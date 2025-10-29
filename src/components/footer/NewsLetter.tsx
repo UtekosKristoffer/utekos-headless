@@ -1,5 +1,5 @@
+'use client'
 import { NewsletterForm } from '@/components/form/NewsLetterForm'
-
 export function NewsLetter() {
   return (
     <>

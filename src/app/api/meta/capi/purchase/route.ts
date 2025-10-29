@@ -146,8 +146,6 @@ export async function POST(req: NextRequest) {
   if (customerId) {
     user_data.external_id = customerId
   }
-
-  // Enrichment: From Customer object
   const customer = order.customer
   if (customer) {
     const firstName = normalizeAndHash(customer.first_name)
@@ -196,8 +194,6 @@ export async function POST(req: NextRequest) {
     ...(event_url ? { event_source_url: event_url } : {})
   }
   const payload: MetaEventsRequest = { data: [event] }
-
-  // 8) Call Meta Graph API
   const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
   const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
   if (!PIXEL_ID || !ACCESS_TOKEN) {
