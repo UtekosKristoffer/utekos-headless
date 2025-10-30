@@ -4,6 +4,11 @@ import { UTEKOS_MIKROFIBER_HANDLE } from './microfiber/details'
 import { UTEKOS_TECHDOWN_HANDLE } from './fiberdun/info'
 
 export const UTEKOS_DUN_PUBLIC_URL = 'https://www.utekos.no/products/utekos-dun'
+export const BEREDSKAPSPRODUKTER = [
+  'utekos-dun',
+  'utekos-techdown',
+  'utekos-mikrofiber'
+]
 
 export const handles = [
   'utekos-dun',

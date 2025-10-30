@@ -1,17 +1,14 @@
-// Path: src/app/magasinet/beredskap-egenomsorg/BeredskapspakkenSection.tsx
-// FARGEKORRIGERT VERSJON - Fjernet hvit bakgrunn, tilpasset mørkt tema
 import { Archive, Car } from 'lucide-react'
-
+import Link from 'next/link'
 export function BeredskapspakkenSection() {
   return (
-    <section className='py-16 md:py-24 mt-12 bg-sidebar-foreground'>
+    <section className='py-16 mt-12 md:mt-16 bg-sidebar-foreground'>
       <div className='max-w-4xl mx-auto px-6'>
         {/* Header */}
         <div className='text-center mb-12 space-y-4'>
-          <h2 className='text-3xl md:text-4xl font-bold tracking-tight text-balance text-foreground'>
+          <h2 className='text-3xl md:text-4xl -mt-4 font-bold tracking-tight text-balance text-foreground'>
             Slik forenkler Utekos din beredskapspakke
           </h2>
-          <div className='h-1 w-24 bg-gradient-to-r from-sky-500 to-blue-500 rounded-full mx-auto'></div>
         </div>
 
         {/* Intro text - emphasis box */}
@@ -19,20 +16,25 @@ export function BeredskapspakkenSection() {
           <div className='bg-amber-500/10 border-l-4 border-amber-500 p-6 rounded-r-xl backdrop-blur-sm'>
             <p className='text-lg text-foreground leading-relaxed'>
               <strong className='text-amber-400'>DSBs sjekkliste</strong> for
-              egenberedskap nevner "Varme klær og pledd, dyner eller soveposer"
-              som et kritisk punkt. Utfordringen for mange hytte- og bobileiere
-              er at dette tar enormt mye lagringsplass.
+              egenberedskap nevner &rdquo;varme klær, pledd, dyner eller
+              soveposer&rdquo; som kritiske behov. Utekos dekker i stor grad
+              dette. Den trenger heller ikke å bli liggende ubrukt i
+              beredskapslageret. Du får en løsning som også i hverdagen
+              oppgraderer og forlenger gode stunder ute.
             </p>
           </div>
 
           <div className='bg-background/40 backdrop-blur-sm p-6 rounded-xl border border-border'>
-            <p className='text-lg text-muted-foreground leading-relaxed'>
-              I stedet for å pakke tre separate løsninger (pledd, sovepose, varm
-              jakke), gir Utekos deg alle funksjonene i én. Kombinert med en{' '}
-              <span className='font-semibold text-sky-400'>
+            <p className='text-lg text-article-white leading-relaxed'>
+              I stedet for å pakke tre separate løsninger, gir Utekos deg alle
+              funksjonene i én. Kombinert med en{' '}
+              <Link
+                href='/produkter/utekos-stapper'
+                className='font-base text-sky-400'
+              >
                 Utekos Stapper™
-              </span>
-              , som reduserer volumet med over 50 %, blir beredskapslogistikken
+              </Link>
+              , reduseres volumet med over 50 %, og beredskapslogistikken blir
               plutselig mye enklere.
             </p>
           </div>
@@ -43,14 +45,14 @@ export function BeredskapspakkenSection() {
           <PackageCard
             icon={<Car className='h-7 w-7' />}
             title='Pakken for bil og bobil'
-            description='En Utekos (f.eks. TechDawn™ for fukt) i en Stapper™ tar minimalt med plass under setet eller i et bagasjerom. Den er din forsikring mot motorstopp og kalde netter, og alltid klar til bruk uten at du må pakke om.'
+            description='En Utekos i en Stapper™ tar minimalt med plass i et bagasjerom. Den er din forsikring mot motorstopp og kalde netter, og alltid klar til bruk uten at du må pakke om.'
             accentColor='from-sky-500 to-blue-500'
           />
 
           <PackageCard
             icon={<Archive className='h-7 w-7' />}
-            title='Pakken for hjem og hytte'
-            description='Ha én Utekos per familiemedlem lett tilgjengelig sammen med resten av beredskapsutstyret. Den erstatter behovet for et lager av gamle dyner og pledd, og gir alle en personlig varmekilde de kan bevege seg i.'
+            title='Fra koseplagg til kriseverktøy'
+            description='Et pledd er fint for sofakos, men har begrensede egenskaper i krise som varer. Utekos er en oppgradering: en personlig, mobil varmekilde som gir funksjonsevne og trygghet, ikke bare passiv varme.'
             accentColor='from-blue-500 to-indigo-500'
           />
         </div>
@@ -95,7 +97,7 @@ function PackageCard({
         </h3>
 
         {/* Description */}
-        <p className='text-base text-muted-foreground leading-relaxed'>
+        <p className='text-base text-article-white leading-relaxed'>
           {description}
         </p>
 

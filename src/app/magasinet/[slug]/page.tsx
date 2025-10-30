@@ -16,6 +16,11 @@ import { notFound } from 'next/navigation'
 import { Activity } from 'react'
 
 const articleComponents = {
+  'beredskap-egenomsorg': dynamic(() =>
+    import('../(articles)/beredskap-egenomsorg').then(
+      mod => mod.BeredskapEgenomsorgArticle
+    )
+  ),
   'hva-er-utekos': dynamic(() =>
     import('../(articles)/hva-er-utekos').then(mod => mod.HvaErUtekosArticle)
   ),

@@ -1,49 +1,51 @@
-// Path: src/app/magasinet/beredskap-egenomsorg/ProduktguideBeredskap.tsx
-// FARGEKORRIGERT VERSJON - Tilpasset Utekos sitt mørke tema
 import { Home, Car, Archive } from 'lucide-react'
 
 export function ProduktguideBeredskap() {
   return (
-    <section className='mt-12 bg-background py-16 md:py-20'>
+    <section className='bg-background py-16 md:py-20'>
       <div className='max-w-4xl mx-auto px-6'>
         {/* Header med accent */}
         <div className='text-center mb-16 space-y-4'>
-          <h2 className='text-3xl md:text-4xl font-bold tracking-tight text-balance text-foreground'>
-            Beredskap i praksis: Slik løser Utekos scenarioene
+          <h2 className='text-3xl md:text-4xl font-bold tracking-tight text-foreground'>
+            <span className='whitespace-nowrap'>Beredskap i praksis</span>
+            <br />
+            <span className='text-xl md:text-2xl'>
+              - Slik løser Utekos scenarioene
+            </span>
           </h2>
-          <div className='h-1 w-24 bg-gradient-to-r from-sky-500 to-blue-500 rounded-full mx-auto'></div>
         </div>
 
-        {/* Timeline-style scenarios */}
         <div className='relative space-y-12'>
-          {/* Vertikal linje (skjult på mobile) */}
-          <div className='hidden md:block absolute left-8 top-8 bottom-8 w-0.5 bg-gradient-to-b from-sky-500/30 via-sky-500/50 to-sky-500/30'></div>
+          <div className='hidden md:block absolute left-8 top-8 bottom-8 w-0.5 bg-gradient-to-b from-amber-900/30 via-amber-900/50 to-amber-900/30'></div>
 
           <ScenarioCard
             icon={<Home className='h-6 w-6' />}
-            title='Scenario: Strømbrudd på hytta'
+            title='Scenario: Strømbrudd på hytten'
             problem='Strømmen er borte, og du fyrer i peisen eller med gassovn for å holde varmen. Du må hente ved, justere fyringen og bevege deg fritt i et kaldt rom.'
-            solution='3-i-1-funksjonaliteten er laget for nettopp dette. Du kan gå fra full tildekking på sofaen til full mobilitet på sekunder for å hente mer ved – uten å noensinne forlate varmen.'
+            solution='I motsetning til tradisjonelle soveposer kan
+            man bevege seg fritt i en Utekos. Det betyr at du kan utføre
+            oppgaver, hente vann, lage mat eller hjelpe andre uten å måtte ta av
+            deg varmebeskyttelsen.'
             number='01'
-            accentColor='bg-sky-500'
+            accentColor='bg-amber-900'
           />
 
           <ScenarioCard
             icon={<Car className='h-6 w-6' />}
-            title='Scenario: Motorstopp på en kald dag'
-            problem='Du venter på veihjelp i en kald bil. Dette er et vanlig scenario for bobil- og hytteeiere, og spesielt kritisk i en elbil uten strøm til varmeapparatet.'
-            solution='I stedet for et pledd som glir av eller en jakke som ikke varmer beina, gir 3-i-1-plaggene deg full kroppsdekning. Du holder deg varm og funksjonell mens du venter på hjelp.'
+            title='Scenario: Driftsstans'
+            problem='Kjøretøyet har stoppet, og varmekilden er borte. Dette er spesielt kritisk i en elbil med tomt batteri, men like reelt for bobil- og hytteeiere som venter på veihjelp i kulden.'
+            solution='Tar liten plass og er ideell for beredskap i bil, bobil eller båt. Ved å oppbevare én Utekos i bagasjerommet som en del av din egenberedskap på reise, får du en løsning som gir full varme og bevarer funksjonsevnen når du trenger det som mest.'
             number='02'
-            accentColor='bg-blue-500'
+            accentColor='bg-amber-900'
           />
 
           <ScenarioCard
             icon={<Archive className='h-6 w-6' />}
             title='Scenario: Beredskapskassen hjemme'
-            problem='DSB ber oss planlegge for å klare oss selv i flere dager. Det krever mer enn passiv varme; det krever å kunne fungere i en kald bolig.'
-            solution='Utekos lar deg bevare en normal hverdag. Du kan lage mat på primus, lese en bok og sove godt, alt i det samme varme plagget. Det er din mobile varmestasjon.'
+            problem='DSB ber oss planlegge for å klare oss selv i én uke. Det krever mer enn passiv varme; det krever å kunne fungere i en kald bolig.'
+            solution='Kulde passiviserer og isolerer. Utekos er din mobile varmestasjon som lar deg leve, ikke bare overleve. Du bevarer den sosiale varmen, kan bevege deg fritt for å lage mat, og unngår at familien fryser fast i hver sin sofa.'
             number='03'
-            accentColor='bg-indigo-500'
+            accentColor='bg-amber-900'
           />
         </div>
       </div>
@@ -70,14 +72,17 @@ function ScenarioCard({
   return (
     <div className='relative md:pl-24'>
       {/* Number badge - timeline node */}
-      <div className='hidden md:flex absolute left-0 items-center justify-center h-16 w-16 rounded-full bg-sidebar-foreground border-4 border-sky-500/30 shadow-lg shadow-sky-500/20'>
-        <span className='text-2xl font-bold text-sky-400'>{number}</span>
+      <div className='hidden md:flex absolute left-0 items-center justify-center h-16 w-16 rounded-full bg-sidebar-foreground border-4 border-amber-900/30 shadow-lg shadow-amber-900/20'>
+        <span className='text-2xl font-bold text-amber-900'>{number}</span>
       </div>
 
       {/* Card */}
-      <div className='group bg-sidebar-foreground rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:shadow-sky-500/10 transition-all duration-300 border border-border hover:border-sky-500/50'>
-        {/* Icon og title */}
-        <div className='flex items-start gap-4 mb-6'>
+      <div className='group bg-sidebar-foreground rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:shadow-amber-900/10 transition-all duration-300 border hover:border-border border-amber-900/50'>
+        {/* =================================
+          FIKS 1: Stabler på mobil, rad på sm+
+          =================================
+        */}
+        <div className='flex flex-col sm:flex-row sm:items-start gap-4 mb-6'>
           <div
             className={`flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-xl ${accentColor} text-white shadow-md`}
           >
@@ -88,9 +93,12 @@ function ScenarioCard({
           </h3>
         </div>
 
-        {/* Problem section */}
-        <div className='mb-6 pl-16'>
-          <div className='text-sm font-semibold text-sky-400 uppercase tracking-wide mb-2'>
+        {/* =================================
+          FIKS 2: Padding kun på sm+
+          =================================
+        */}
+        <div className='mb-6 sm:pl-16'>
+          <div className='text-sm font-semibold text-amber-900 uppercase tracking-wide mb-2'>
             Utfordringen
           </div>
           <p className='text-base text-muted-foreground leading-relaxed'>
@@ -98,9 +106,12 @@ function ScenarioCard({
           </p>
         </div>
 
-        {/* Solution section - highlighted */}
-        <div className='pl-16 pt-6 border-t border-border'>
-          <div className='text-sm font-semibold text-emerald-400 uppercase tracking-wide mb-2'>
+        {/* =================================
+          FIKS 3: Padding kun på sm+
+          =================================
+        */}
+        <div className='sm:pl-16 pt-6 border-t border-border'>
+          <div className='text-sm font-semibold text-sky-800 uppercase tracking-wide mb-2'>
             ✓ Slik løser Utekos det
           </div>
           <p className='text-base text-foreground leading-relaxed font-medium'>

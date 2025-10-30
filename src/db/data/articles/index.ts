@@ -10,9 +10,19 @@ export interface Article {
 }
 export const mockArticles: Article[] = [
   {
+    slug: 'beredskap-egenomsorg',
+    title: 'Beredskapsuken 2025: Hvordan Utekos oppgraderer din egenberedskap',
+    excerpt: 'Ditt ess i ermet for å bevare tryggheten og varmen.',
+
+    imageUrl: '/utekos-beredskap.png',
+    category: 'Tips og råd',
+    date: '30. oktober 2025'
+  },
+  {
     slug: 'utekos-techdown-lansering',
     title: 'Utekos TechDown™ - Plagget som redefinerer personlig komfort.',
-    excerpt: 'Ditt glemte ess i ermet for å bevare tryggheten og varmen.',
+    excerpt:
+      'LANSERING: Det nye plagget som redefinerer personlig komfort. Dunlignende letthet med bekymringsfri ytelse.',
     imageUrl: '/fiberdun/patch.jpg',
     category: 'Tips og råd',
     date: '27. oktober 2025'

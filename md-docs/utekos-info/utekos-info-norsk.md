@@ -126,12 +126,12 @@ utendørs.
 ---
 
 ## Utekos™-serien: 3-i-1-Funksjonalitet
-
+Her kan man bruke de ulike metodene nevnt under til å justere plagget akkurat slik man vil, og slik det det basser ifm situasjonen og egne behov. Kjernen er snorstrammingen nederst (som man sammen med nedre del av plagget drag opp under seg og fester et passende sted i livet og kan stramme godt - dog vanligfri lengde - Blir seende ut som en parkas. an også dras høyere for å se mer ut som en jakke.  )
 ### Modus 1: Parkas-modus
 
-- Brett nederste del innunder og opp til livet
+- Brett nederste del innunder og opp til høyden du ønsker
 - Stram med innvendig storstramming
-- Egnet for bevegelse over tid
+- Egnet for bevegelse over tid, da nedre del av plagget har god avstand til bakken, slik at man slipper å tråkke på plagget og eventuetl snuble. Det er ikke meningen at man skal gå med plagget når den er i fullengde-modus. Da dekker den hele kroppen, inkl beina, med en tilgjengelig "lomme" (tar hele bredden) nederst på baksiden, som man kan samle beina i - og f.eks sitte på en kald overflate uten å bli kald på beina eller for å simulere en sovepose. 
 
 ### Modus 2: Full kroppslengde
 
@@ -142,7 +142,7 @@ utendørs.
 
 - Storstramming på utsiden ved hoften
 - Enkel justering når man reiser seg (f.eks. til kjøleskap/toalett)
-- Fungerer fra sittende posisjon (terrasse, bobil, hytte)
+- Mest hensiktsmessig ifm med fra sittende posisjon til stående posisjon for å hente noe,eller som nevnt over: liten tur til kjøeskapet eller toalettet. 
 
 ### Tilleggsfunksjoner (Utekos-serien)
 
@@ -152,7 +152,7 @@ utendørs.
 
 - Fra hals til liv
 - Enkel inn/ut-treding
-- Valgfri lufting/varmejustering
+- Valgfri lufting/varmejustering. Gir gode muligheter til å åpne plagget på overdelen (midten) hvis man ønsker å lufte godt.
 
 ---
 
