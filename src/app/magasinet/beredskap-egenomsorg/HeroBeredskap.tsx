@@ -39,8 +39,8 @@ export function HeroBeredskap() {
           - Byttet 'text-article-white' til 'text-muted-foreground' for å skape et visuelt skille mellom ingress og brødtekst.
         */}
       <p className='mt-4 text-lg md:text-xl text-muted-foreground text-balance'>
-        Vi ser på hvorfor funksjonell varme er den glemte nøkkelen til å faktisk
-        kunne hjelpe hverandre.
+        Vi ser på hvorfor funksjonell varme er den glemte nøkkelen til reell
+        trygghet, og en forutsetning for å hjelpe andre.
       </p>
 
       {/*
