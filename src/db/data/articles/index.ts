@@ -15,7 +15,7 @@ export const mockArticles: Article[] = [
       'Beredskapsuken 2025: Hvordan Utekos™ oppgraderer din egenberedskap',
     excerpt: 'Ditt ess i ermet for å bevare tryggheten og varmen.',
 
-    imageUrl: '/utekos-beredskap.png',
+    imageUrl: '/utekos-beredskap-2.png',
     category: 'Tips og råd',
     date: '30. oktober 2025'
   },
