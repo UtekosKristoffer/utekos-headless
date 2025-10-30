@@ -7,7 +7,7 @@ export function BeredskapspakkenSection() {
         {/* Header */}
         <div className='text-center mb-12 space-y-4'>
           <h2 className='text-3xl md:text-4xl -mt-4 font-bold tracking-tight text-balance text-foreground'>
-            Slik forenkler Utekos din beredskapspakke
+            Slik forenkler Utekos™ din beredskapspakke
           </h2>
         </div>
 
@@ -52,7 +52,7 @@ export function BeredskapspakkenSection() {
           <PackageCard
             icon={<Archive className='h-7 w-7' />}
             title='Fra koseplagg til kriseverktøy'
-            description='Et pledd er fint for sofakos, men har begrensede egenskaper i krise som varer. Utekos er en oppgradering: en personlig, mobil varmekilde som gir funksjonsevne og trygghet, ikke bare passiv varme.'
+            description='Et pledd er fint for sofakos, men har begrensede egenskaper i krise som varer. Utekos™ er en oppgradering: en personlig, mobil varmekilde som gir funksjonsevne og trygghet, ikke bare passiv varme.'
             accentColor='from-blue-500 to-indigo-500'
           />
         </div>

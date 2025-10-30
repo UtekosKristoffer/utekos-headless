@@ -11,7 +11,7 @@ export function HeroBeredskap() {
         <div className='relative'>
           <Image
             src={UtekosBeredskap}
-            alt='Utekos i en beredskapssituasjon, illustrerer varme og komfort'
+            alt='Utekos™ i en beredskapssituasjon, illustrerer varme og komfort'
             width={1536}
             height={1024}
             layout='responsive'
@@ -59,13 +59,13 @@ export function HeroBeredskap() {
           beredskap.
         </p>
         <p className='text-base md:text-lg text-article-white leading-relaxed text-balance'>
-          Utekos er i hovedsak designet for å forlenge de gode stundene ute.
+          Utekos™ er i hovedsak designet for å forlenge de gode stundene ute.
           Kjernen i konseptet er de innovative og praktiske 3-i-1-
           justeringsløsningene, som gjør plagget unikt allsidig.
         </p>
         <p className='text-base md:text-lg text-article-white leading-relaxed text-balance'>
-          Det er imidlertid nettopp denne allsidigheten som gjør Utekos til mer
-          enn bare et koseprodukt.
+          Det er imidlertid nettopp denne allsidigheten som gjør Utekos™ til
+          mer enn bare et koseprodukt.
         </p>
         <p className='text-base md:text-lg text-article-white leading-relaxed text-balance'>
           Det er et funksjonelt beredskapselement som svarer på et av våre mest

@@ -11,7 +11,8 @@ export interface Article {
 export const mockArticles: Article[] = [
   {
     slug: 'beredskap-egenomsorg',
-    title: 'Beredskapsuken 2025: Hvordan Utekos oppgraderer din egenberedskap',
+    title:
+      'Beredskapsuken 2025: Hvordan Utekos™ oppgraderer din egenberedskap',
     excerpt: 'Ditt ess i ermet for å bevare tryggheten og varmen.',
 
     imageUrl: '/utekos-beredskap.png',

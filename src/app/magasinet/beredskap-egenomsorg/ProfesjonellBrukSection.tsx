@@ -16,7 +16,7 @@ export function ProfesjonellBrukSection() {
         <div className='mb-10'>
           <p className='text-lg md:text-xl text-article-white leading-relaxed'>
             For kommuner, frivillige organisasjoner, eller bedrifter som
-            håndterer et beredskapslager, er Utekos en langsiktig og økonomisk
+            håndterer et beredskapslager, er Utekos™ en langsiktig og økonomisk
             investering.
           </p>
         </div>
@@ -25,7 +25,7 @@ export function ProfesjonellBrukSection() {
           <FeatureBox
             icon={<RefreshCw className='h-6 w-6' />}
             title='Bygget for gjenbruk'
-            description='Utekos-serien er enkelt å vedlikeholde og kan maskinvaskes skånsomt. Kombinert med YKK®-glidelåser og slitesterke materialer er dette et produkt som er klart for neste gangs bruk.'
+            description='Utekos™-serien er enkelt å vedlikeholde og kan maskinvaskes skånsomt. Kombinert med YKK®-glidelåser og slitesterke materialer er dette et produkt som er klart for neste gangs bruk.'
             accentColor='from-sky-900 to-sky-700'
           />
 
@@ -46,7 +46,7 @@ export function ProfesjonellBrukSection() {
                   Institusjonell kvalitet
                 </span>
                 <span className='block'>
-                  Utekos tilbyr en bærekraftig løsning som reduserer både
+                  Utekos™ tilbyr en bærekraftig løsning som reduserer både
                   kostnader og miljøbelastning over tid, samtidig som den gir
                   bedre komfort og funksjonalitet for sluttbrukeren.
                 </span>
