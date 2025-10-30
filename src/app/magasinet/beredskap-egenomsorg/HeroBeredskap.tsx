@@ -29,7 +29,7 @@ export function HeroBeredskap() {
           - Byttet 'font-medium' -> 'font-bold' for å gi tittelen den tyngden den skal ha.
         */}
       <h2 className='text-3xl md:text-4xl font-bold tracking-tight text-foreground text-balance'>
-        Felles egenberedskap – beredskapsvenn er årets tema.
+        Felles egenberedskap er årets tema.
       </h2>
 
       {/*
