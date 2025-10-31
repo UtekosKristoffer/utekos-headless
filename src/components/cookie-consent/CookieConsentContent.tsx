@@ -38,7 +38,7 @@ function ConsentRadioGroup({
       onValueChange={handleValueChange}
       className='flex flex-col space-y-2'
     >
-      <div className='flex items-center space-x-2'>
+      <div className='hidden items-center space-x-2'>
         {/* FIX: Legger til className for å tvinge synlige farger */}
         <RadioGroupItem
           value='accept'
@@ -115,7 +115,7 @@ export function CookieConsentContent({
     return (
       <>
         <div className='p-6 hidden space-y-6'>
-          <div className='mb-2 bg-sidebar-foreground/5 rounded-lg p-2 flex flex-col items-center text-balance'>
+          <div className='mb-2 hidden bg-sidebar-foreground/5 rounded-lg p-2flex-col items-center text-balance'>
             <Image
               src='/icon.png'
               alt='Utekos logo'
@@ -123,11 +123,11 @@ export function CookieConsentContent({
               height={52}
               className='rounded-full mb-4 !border !border-white/80'
             />
-            <DialogTitle className='text-left self-start flex ml-0'>
+            <DialogTitle className='text-left hidden self-start ml-0'>
               Vi forbedrer opplevelsen din
             </DialogTitle>
             <DialogDescription>
-              <span className='text-sm mt-4 text-foreground-on-dark/60 transition-colors hover:text-foreground-on-dark leading-relaxed block'>
+              <span className='text-sm mt-4 hidden ext-foreground-on-dark/60 transition-colors hover:text-foreground-on-dark leading-relaxed'>
                 Vi bruker informasjonskapsler og andre former for teknologi for
                 å sørge for at nettstedet vårt er sikkert og pålitelig, måle
                 hvordan det presterer, og gi en personlig shoppingopplevelse og
@@ -168,11 +168,11 @@ export function CookieConsentContent({
           alt='Utekos logo'
           width={42}
           height={42}
-          className='rounded-full border border-white/80'
+          className='rounded-full hidden not-[]:border border-white/80'
         />
       </DialogHeader>
-      <ScrollArea hideScrollbar className={'h-[40vh] px-6'}>
-        <DialogTitle className='my-2 mt-4 text-2xl'>
+      <ScrollArea hideScrollbar className={'h-[40vh] hidden px-6'}>
+        <DialogTitle className='my-2 mt-4 hidden text-2xl'>
           Vi forbedrer opplevelsen din
         </DialogTitle>
         <DialogDescription asChild>
@@ -195,7 +195,7 @@ export function CookieConsentContent({
           </div>
         </DialogDescription>
 
-        <div className='py-4 space-y-6'>
+        <div className='py-4 hidden space-y-6'>
           <div>
             <h3 className='font-semibold text-lg mt-2 mb-4 text-foreground'>
               Strengt nødvendig (alltid på)
@@ -282,7 +282,7 @@ export function CookieConsentContent({
         </div>
       </ScrollArea>
 
-      <DialogFooter className='flex-col min-h-[200-px] sm:flex-row gap-2 p-6 border-t bg-background'>
+      <DialogFooter className='flex-col hidden min-h-[200-px] sm:flex-row gap-2 p-6 border-t bg-background'>
         <Button
           variant='secondary'
           className='sm:w-auto bg-transparent text-muted-foreground  hover:text-foreground-on-dark'
