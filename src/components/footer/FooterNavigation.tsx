@@ -1,7 +1,6 @@
 // Path: src/components/footer/FooterNav.tsx
 import { footerConfig } from '@/db/config/footer.config'
 import Link from 'next/link'
-import CookieSettingsButton from '@/components/cookie-consent/CookieSettingsButton'
 
 export function FooterNavigation() {
   return (
@@ -27,15 +26,6 @@ export function FooterNavigation() {
                   </Link>
                 </li>
               ))}
-              {/* --- ENDRING HER --- */}
-              {/* 1. Sjekk etter 'Informasjon' (ikke 'Personvern') */}
-              {/* 2. Pakk knappen inn i <li> */}
-              {section.title === 'Informasjon' && (
-                <li className='pt-2'>
-                  <CookieSettingsButton />
-                </li>
-              )}
-              {/* --- SLUTT ENDRING --- */}
             </ul>
           </nav>
         </div>

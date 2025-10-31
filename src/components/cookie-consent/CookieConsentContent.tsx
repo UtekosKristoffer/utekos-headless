@@ -59,8 +59,6 @@ function ConsentRadioGroup({
     </RadioGroup>
   )
 }
-
-// Dette er det nye innholdet som gjenbrukes
 export function CookieConsentContent({
   setOpen
 }: {
