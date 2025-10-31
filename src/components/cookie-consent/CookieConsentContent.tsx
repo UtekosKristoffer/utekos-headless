@@ -38,7 +38,7 @@ function ConsentRadioGroup({
       onValueChange={handleValueChange}
       className='flex flex-col space-y-2'
     >
-      <div className='hidden items-center space-x-2'>
+      <div className='flex items-center space-x-2'>
         {/* FIX: Legger til className for å tvinge synlige farger */}
         <RadioGroupItem
           value='accept'
@@ -114,8 +114,8 @@ export function CookieConsentContent({
   if (!isDesktop && !showFullView) {
     return (
       <>
-        <div className='p-6 hidden space-y-6'>
-          <div className='mb-2 hidden bg-sidebar-foreground/5 rounded-lg p-2flex-col items-center text-balance'>
+        <div className='p-6 space-y-6'>
+          <div className='mb-2 bg-sidebar-foreground/5 rounded-lg p-2 flex flex-col items-center text-balance'>
             <Image
               src='/icon.png'
               alt='Utekos logo'
@@ -123,11 +123,11 @@ export function CookieConsentContent({
               height={52}
               className='rounded-full mb-4 !border !border-white/80'
             />
-            <DialogTitle className='text-left hidden self-start ml-0'>
+            <DialogTitle className='text-left self-start flex ml-0'>
               Vi forbedrer opplevelsen din
             </DialogTitle>
             <DialogDescription>
-              <span className='text-sm mt-4 hidden ext-foreground-on-dark/60 transition-colors hover:text-foreground-on-dark leading-relaxed'>
+              <span className='text-sm mt-4 text-foreground-on-dark/60 transition-colors hover:text-foreground-on-dark leading-relaxed block'>
                 Vi bruker informasjonskapsler og andre former for teknologi for
                 å sørge for at nettstedet vårt er sikkert og pålitelig, måle
                 hvordan det presterer, og gi en personlig shoppingopplevelse og
@@ -159,24 +159,27 @@ export function CookieConsentContent({
     )
   }
 
-  // Full view (alltid på desktop, eller etter "Tilpass innstillinger" på mobil)
   return (
     <>
-      <DialogHeader className='hidden not-first-of-type:sticky top-0 z-10 flex-col items-center border-b bg-background p-6'>
+      {' '}
+      <DialogHeader className='sticky top-0 z-10 flex flex-col items-center border-b bg-background p-6'>
         <Image
           src='/icon.png'
           alt='Utekos logo'
           width={42}
           height={42}
-          className='rounded-full hidden not-[]:border border-white/80'
+          className='rounded-full border border-white/80'
         />
       </DialogHeader>
-      <ScrollArea hideScrollbar className={'h-[40vh] hidden px-6'}>
-        <DialogTitle className='my-2 mt-4 hidden text-2xl'>
+      <ScrollArea
+        hideScrollbar
+        className={'h-[40vh] w-full overflow-y-auto px-6'}
+      >
+        <DialogTitle className='my-2 mt-4 text-2xl'>
           Vi forbedrer opplevelsen din
         </DialogTitle>
         <DialogDescription asChild>
-          <div className='space-y-2 text-foreground text-lg hidden leading-relaxed pt-2'>
+          <div className='space-y-2 text-foreground text-lg leading-relaxed pt-2'>
             <p>
               Vi bruker informasjonskapsler og andre former for teknologi for å
               sørge for at nettstedet vårt er sikkert og pålitelig, måle hvordan
@@ -195,7 +198,7 @@ export function CookieConsentContent({
           </div>
         </DialogDescription>
 
-        <div className='py-4 hidden space-y-6'>
+        <div className='py-4 space-y-6'>
           <div>
             <h3 className='font-semibold text-lg mt-2 mb-4 text-foreground'>
               Strengt nødvendig (alltid på)
@@ -259,7 +262,6 @@ export function CookieConsentContent({
               updateConsent={updateConsent}
             />
           </div>
-
           <Separator />
 
           {/* 5. Profilbasert personlig tilpasset annonsering */}
@@ -281,11 +283,10 @@ export function CookieConsentContent({
           </div>
         </div>
       </ScrollArea>
-
-      <DialogFooter className='flex-col hidden min-h-[200-px] sm:flex-row gap-2 p-6 border-t bg-background'>
+      <DialogFooter className='flex-col sm:flex-row gap-2 p-6 border-t bg-background'>
         <Button
           variant='secondary'
-          className='sm:w-auto bg-transparent text-muted-foreground  hover:text-foreground-on-dark'
+          className='sm:w-auto bg-transparent text-muted-foreground hover:text-foreground-on-dark'
           onClick={handleRejectNonEssential}
         >
           Avvis alle
@@ -293,7 +294,7 @@ export function CookieConsentContent({
         <div className='sm:flex-grow' />
         {hasChangedSettings && (
           <Button
-            className='sm:w-auto text-muted-foreground bg-transparent'
+            className='sm:w-auto bg-transparent text-muted-foreground'
             variant='secondary'
             size={'lg'}
             onClick={handleSavePreferences}

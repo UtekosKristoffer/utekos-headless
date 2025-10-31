@@ -9,7 +9,6 @@ export default function Footer() {
       <div className='container mx-auto px-4 sm:px-8'>
         <FooterNavigation />
         <ConditionalNewsLetter />
-
         <PaymentMethods />
         <CopyrightNotice />
       </div>

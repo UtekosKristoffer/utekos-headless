@@ -19,8 +19,10 @@ export default function CookieSettingsButton() {
         </Button>
       </DialogTrigger>
       <DialogContent
+        showCloseButton={false}
         className={
-          'hidden sm:max-w-lg max-h-[60vh] p-0 ' + 'bg-background' // Krysset er OK her
+          'sm:max-w-lg items-center !bg-background mx-auto max-h-[60vh]'
+          + '!bg-background' // Krysset er OK her
         }
       >
         <CookieConsentContent setOpen={setOpen} />
