@@ -29,7 +29,7 @@ export default function CookieConsent() {
       <DialogContent
         showCloseButton={false}
         className={
-          'sm:max-w-7 border-neutral-700 border max-h-[70vh] p-0 '
+          'sm:max-w-7 !hidden  border-neutral-700 border max-h-[70vh] p-0 '
           + 'bg-background'
         }
       >
