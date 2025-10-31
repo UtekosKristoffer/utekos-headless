@@ -8,19 +8,17 @@ export default function CookieConsent() {
   const { hasInteracted } = useConsent()
   const [open, setOpen] = useState(false)
 
-  // Viser modalen hvis brukeren ikke har interagert før
   useEffect(() => {
     if (!hasInteracted) {
-      setOpen(true)
+      setOpen(false)
     }
   }, [hasInteracted])
 
-  // Forhindrer lukking av dialogen før et valg er tatt
   const handleOpenChange = (newOpen: boolean) => {
     if (hasInteracted) {
       setOpen(newOpen)
     } else {
-      setOpen(true)
+      setOpen(false)
     }
   }
 
