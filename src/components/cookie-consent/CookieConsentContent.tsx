@@ -114,7 +114,7 @@ export function CookieConsentContent({
   if (!isDesktop && !showFullView) {
     return (
       <>
-        <div className='p-6 space-y-6'>
+        <div className='p-6 hidden space-y-6'>
           <div className='mb-2 bg-sidebar-foreground/5 rounded-lg p-2 flex flex-col items-center text-balance'>
             <Image
               src='/icon.png'
@@ -162,7 +162,7 @@ export function CookieConsentContent({
   // Full view (alltid på desktop, eller etter "Tilpass innstillinger" på mobil)
   return (
     <>
-      <DialogHeader className='sticky top-0 z-10 flex flex-col items-center border-b bg-background p-6'>
+      <DialogHeader className='hidden not-first-of-type:sticky top-0 z-10 flex-col items-center border-b bg-background p-6'>
         <Image
           src='/icon.png'
           alt='Utekos logo'
@@ -176,7 +176,7 @@ export function CookieConsentContent({
           Vi forbedrer opplevelsen din
         </DialogTitle>
         <DialogDescription asChild>
-          <div className='space-y-2 text-foreground text-lg leading-relaxed pt-2'>
+          <div className='space-y-2 text-foreground text-lg hidden leading-relaxed pt-2'>
             <p>
               Vi bruker informasjonskapsler og andre former for teknologi for å
               sørge for at nettstedet vårt er sikkert og pålitelig, måle hvordan
