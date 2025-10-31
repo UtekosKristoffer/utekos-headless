@@ -1,6 +1,6 @@
 // Path: src/app/layout.tsx
 import './globals.css'
-import { GoogleTagManager } from '@next/third-parties/google'
+ // import { GoogleTagManager } from '@next/third-parties/google' // FJERNES
 import { geistSans, geistMono } from '@/db/config/font.config'
 import { mainMenu } from '@/db/config/menu.config'
 import { Analytics } from '@vercel/analytics/react'
@@ -10,7 +10,6 @@ import { getCachedCart } from '@/lib/helpers/cart/getCachedCart'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { QueryClient } from '@tanstack/react-query'
 import { Suspense, Activity, type ReactNode } from 'react'
-import { MetaPixelEvents } from '@/components/analytics/MetaPixelEvents'
 import ChatBubble from '@/components/ChatBubble'
 import Providers from '@/components/providers/Providers'
 import AnnouncementBanner from '@/SpecialOfferSection/AnnouncementBanner'
@@ -19,7 +18,6 @@ import Header from '@/components/header/Header'
 import type { RootLayoutProps } from '@types'
 import type { Metadata } from 'next'
 import { OrganizationJsonLd } from './OrganizationJsonLd'
-
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
@@ -117,7 +115,7 @@ export const metadata: Metadata = {
  */
 async function CartProviderLoader({ children }: { children: ReactNode }) {
   const queryClient = new QueryClient()
-  const cartId = await getCartIdFromCookie() // <-- Dynamisk kall
+  const cartId = await getCartIdFromCookie()
 
   await queryClient.prefetchQuery({
     queryKey: ['cart', cartId],
@@ -133,16 +131,15 @@ async function CartProviderLoader({ children }: { children: ReactNode }) {
   )
 }
 export default function RootLayout({ children }: RootLayoutProps) {
-  const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID
+  // const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID // Trengs ikke her lenger
 
   return (
     <html lang='no'>
       <body
         className={`bg-background text-foreground ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <GoogleTagManager gtmId='GTM-5TWMJQFP' />
+        {/* <GoogleTagManager gtmId='GTM-5TWMJQFP' /> */} {/* FJERNES */}
         <OrganizationJsonLd />
-
         <Suspense>
           <CartProviderLoader>
             <Activity>
@@ -162,12 +159,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </Activity>
           </CartProviderLoader>
         </Suspense>
-
         <Toaster closeButton />
         <Analytics mode='production' />
+        {/*
         <Suspense fallback={null}>
           <MetaPixelEvents />
         </Suspense>
+        */}{' '}
+        {/* FJERNES */}
       </body>
     </html>
   )

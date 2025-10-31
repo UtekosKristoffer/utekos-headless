@@ -1,3 +1,4 @@
+// Path: src/api/constants/index.ts
 export const TAGS = {
   products: 'products',
   cart: 'cart'

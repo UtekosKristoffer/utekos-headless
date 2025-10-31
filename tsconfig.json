@@ -59,7 +59,7 @@
     "src/db/config",
     "src/components/ProductCard/ProductCarousel.tsx",
     ".next/dev/types/**/*.ts"
-  ],
+, "src/components/cookie-consent"  ],
   "exclude": [
     "node_modules",
     ".github/**/*",

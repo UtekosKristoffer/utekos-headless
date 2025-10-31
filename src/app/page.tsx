@@ -20,7 +20,6 @@ import { SpecialOfferSection } from '@/SpecialOfferSection/SpecialOfferSection'
 import { connection } from 'next/server'
 
 const HomePage = async () => {
-  // Tvinger komponenten til å være dynamisk FØR vi kaller new QueryClient()
   await connection()
 
   const queryClient = new QueryClient()

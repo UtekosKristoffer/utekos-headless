@@ -5,11 +5,22 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils/className'
 
+// Definer et interface for å inkludere din nye prop
+interface CustomScrollAreaProps
+  extends React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root> {
+  hideScrollbar?: boolean
+}
+
+// Definer et interface for å inkludere din nye prop
+interface CustomScrollAreaProps
+  extends React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root> {
+  hideScrollbar?: boolean
+}
+
 const ScrollArea = React.forwardRef<
-  // ENDRING: Byttet ut utdatert 'ElementRef' med 'ComponentRef'
   React.ComponentRef<typeof ScrollAreaPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>
->(({ className, children, ...props }, ref) => (
+  CustomScrollAreaProps // Bruk det nye interfacet her
+>(({ className, children, hideScrollbar = false, ...props }, ref) => (
   <ScrollAreaPrimitive.Root
     ref={ref}
     data-slot='scroll-area'
@@ -19,18 +30,21 @@ const ScrollArea = React.forwardRef<
     <ScrollAreaPrimitive.Viewport
       data-slot='scroll-area-viewport'
       className='size-full rounded-[inherit]'
-      style={{ overflowX: 'hidden' }}
     >
       {children}
     </ScrollAreaPrimitive.Viewport>
-    <ScrollBar />
-    <ScrollAreaPrimitive.Corner />
+
+    {/* ENDRING: Render alltid ScrollBar og Corner, 
+      men skjul dem visuelt med 'hidden' (display: none) hvis hideScrollbar er true.
+      Dette sikrer at Radix-logikken for scrolling fortsatt fungerer.
+    */}
+    <ScrollBar className={cn(hideScrollbar && 'hidden')} />
+    <ScrollAreaPrimitive.Corner className={cn(hideScrollbar && 'hidden')} />
   </ScrollAreaPrimitive.Root>
 ))
 ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName
 
 const ScrollBar = React.forwardRef<
-  // ENDRING: Byttet ut utdatert 'ElementRef' med 'ComponentRef'
   React.ComponentRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>,
   React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>
 >(({ className, orientation = 'vertical', ...props }, ref) => (

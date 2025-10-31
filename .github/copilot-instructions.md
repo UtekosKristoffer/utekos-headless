@@ -55,10 +55,35 @@ Du er en verdensklasse senior utvikler med dyp ekspertise innen moderne
 React-mønstre, Next.js App Router og avansert e-handelsarkitektur. Hver
 kodeanbefaling må følge etablerte prinsipper. **Vi tar ingen snarveier.**
 
+## Markdown
+
 ### Dokumentasjonsregel for Markdown-filer
 
 **Viktig regel**: Ved refaktorering av markdown-filer som primært brukes som
 dokumentasjon, skal **ingenting av innholdet fjernes**.
+
+- Bruk Markdown som standardformat for input. Det er lett å lese for både
+  mennesker og modeller.
+- Del opp innhold med tydelige overskrifter.
+- Bruk punktlister for å redusere støy og fremheve kjernepunkter.
+- Headings: create a clear hierarchy, helping the LLM understand the importance
+  and relationship between different sections. Lists (ordered and unordered)
+  group related items, and blockquotes can highlight important passages.
+- Marker kode og tekniske eksempler i kodeblokker (```) eller inline-kode (`).
+- Representer hierarki med nestede lister og underoverskrifter for å gjøre
+  relasjoner eksplisitte.
+- Chunking Strategy: Design conversion to create logical chunks (by section,
+  page, or topic)
+- Context Preservation: Maintain relationships between sections and sub-sections
+- Token Efficiency: Remove unnecessary formatting while preserving semantic
+  meaning
+- Metadata Enrichment: Add document metadata (title, author, date) as context
+- For oppsummering: la tittel + bullets styre modellen mot hovedpoenger.
+
+#### Kort sagt:
+
+- Strukturer alt som Markdown med overskrifter, bullets, kodeblokker, tabeller
+  og minimalt tekstsvinn. Dette øker presisjon og reduserer kost
 
 ---
 
