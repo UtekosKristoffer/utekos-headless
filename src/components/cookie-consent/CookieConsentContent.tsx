@@ -286,8 +286,8 @@ export function CookieConsentContent({
 
       <DialogFooter className='flex-col min-h-[200-px] sm:flex-row gap-2 p-6 border-t bg-background'>
         <Button
-          variant='ghost'
-          className='sm:w-auto text-muted-foreground'
+          variant='secondary'
+          className='sm:w-auto bg-transparent text-muted-foreground  hover:text-foreground-on-dark'
           onClick={handleRejectNonEssential}
         >
           Avvis alle
@@ -295,7 +295,7 @@ export function CookieConsentContent({
         <div className='sm:flex-grow' />
         {hasChangedSettings && (
           <Button
-            className='sm:w-auto'
+            className='sm:w-auto text-muted-foreground bg-transparent'
             variant='secondary'
             size={'lg'}
             onClick={handleSavePreferences}
