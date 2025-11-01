@@ -34,10 +34,6 @@ export default function PriceActivityPanel({
   const launchOffer = LAUNCH_OFFERS[productHandle as keyof typeof LAUNCH_OFFERS]
   const hasLaunchOffer = !!launchOffer
 
-  const currentPrice = parseFloat(priceAmount)
-  const originalPrice =
-    hasLaunchOffer ? currentPrice + launchOffer.discountAmount : null
-
   return (
     <section aria-label='Pris og tilgjengelighet' className='space-y-4'>
       {hasLaunchOffer && (
@@ -59,17 +55,6 @@ export default function PriceActivityPanel({
       )}
 
       <div className='flex items-baseline gap-3'>
-        {hasLaunchOffer && originalPrice && (
-          <span className='text-lg text-muted-foreground/60 line-through decoration-2'>
-            {new Intl.NumberFormat('nb-NO', {
-              style: 'currency',
-              currency: currencyCode,
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
-            }).format(originalPrice)}
-          </span>
-        )}
-
         {hasLaunchOffer ?
           <div className='bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent'>
             <Price amount={priceAmount} currencyCode={currencyCode} />
@@ -83,7 +68,7 @@ export default function PriceActivityPanel({
         </p>
       )}
 
-      {shouldShowLimitedStockNotice && (
+      {isSpecialEdition && shouldShowLimitedStockNotice && (
         <div className='relative overflow-hidden rounded-lg border border-amber-400/30 bg-amber-900/10 p-4'>
           <div
             className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-20 blur-2xl'
@@ -105,9 +90,7 @@ export default function PriceActivityPanel({
                 Kun {limitedStockCount} igjen på lager!
               </p>
               <p className='text-sm text-amber-400/80'>
-                {isSpecialEdition ?
-                  'Unik utgave - kommer ikke tilbake'
-                : 'Tilgjengelig i Large og Fjellblå'}
+                Unik utgave - kommer ikke tilbake
               </p>
             </div>
           </div>

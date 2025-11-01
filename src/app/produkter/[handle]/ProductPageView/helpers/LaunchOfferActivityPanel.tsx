@@ -13,13 +13,13 @@ interface PriceActivityPanelProps {
 // Konfigurasjon for lanseringstilbud
 const LAUNCH_OFFERS = {
   'utekos-techdown': {
-    discountAmount: 449,
+    discountAmount: 249,
     discountPercent: 10,
     label: 'Lanseringstilbud'
   }
 } as const
 
-export default function PriceActivityPanel({
+export default function LaunchPriceActivityPanel({
   productHandle,
   priceAmount,
   currencyCode,
@@ -27,10 +27,6 @@ export default function PriceActivityPanel({
   activityNode
 }: PriceActivityPanelProps) {
   const launchOffer = LAUNCH_OFFERS[productHandle as keyof typeof LAUNCH_OFFERS]
-  const currentPrice = parseFloat(priceAmount)
-
-  const originalPrice =
-    launchOffer ? currentPrice + launchOffer.discountAmount : null
   const hasLaunchOffer = !!launchOffer
 
   return (
@@ -47,33 +43,6 @@ export default function PriceActivityPanel({
 
       {/* Pris-seksjon */}
       <div className='flex flex-col gap-2'>
-        {/* Original pris (gjennomstreket) */}
-        {hasLaunchOffer && originalPrice && (
-          <div className='flex items-center gap-3'>
-            <span className='text-lg text-muted-foreground/60 line-through decoration-2'>
-              {formatPrice(originalPrice.toString(), currencyCode)}
-            </span>
-            <div className='flex items-center gap-2 rounded-full bg-red-500/10 px-3 py-1 ring-1 ring-red-500/20'>
-              <svg
-                className='h-3.5 w-3.5 text-red-400'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M13 7h8m0 0v8m0-8l-8 8-4-4-6 6'
-                />
-              </svg>
-              <span className='text-sm font-semibold text-red-400'>
-                −{launchOffer.discountAmount} kr
-              </span>
-            </div>
-          </div>
-        )}
-
         {/* Nåværende pris */}
         <div className='flex items-baseline gap-3'>
           <h3
