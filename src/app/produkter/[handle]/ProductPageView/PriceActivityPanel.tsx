@@ -68,7 +68,7 @@ export default function PriceActivityPanel({
         </p>
       )}
 
-      {isSpecialEdition && shouldShowLimitedStockNotice && (
+      {shouldShowLimitedStockNotice && (
         <div className='relative overflow-hidden rounded-lg border border-amber-400/30 bg-amber-900/10 p-4'>
           <div
             className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-20 blur-2xl'
@@ -86,12 +86,19 @@ export default function PriceActivityPanel({
               />
             </div>
             <div>
-              <p className='font-semibold text-amber-400'>
-                Kun {limitedStockCount} igjen på lager!
-              </p>
-              <p className='text-sm text-amber-400/80'>
-                Unik utgave - kommer ikke tilbake
-              </p>
+              {isSpecialEdition ?
+                <>
+                  <p className='font-semibold text-amber-400'>
+                    Kun {limitedStockCount} igjen på lager!
+                  </p>
+                  <p className='text-sm text-amber-400/80'>
+                    Unik utgave - kommer ikke tilbake
+                  </p>
+                </>
+              : <p className='font-semibold text-amber-400'>
+                  Få igjen på lager!
+                </p>
+              }
             </div>
           </div>
         </div>
