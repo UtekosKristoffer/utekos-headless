@@ -45,7 +45,6 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // --- Generelle redirects (fra gammel Shopify-struktur) ---
       {
         source: '/products/:path*',
         destination: '/produkter/:path*',
@@ -56,9 +55,6 @@ const nextConfig: NextConfig = {
         destination: '/produkter',
         permanent: true
       },
-
-      // --- Spesifikke redirects (fra gammel `pages`-struktur) ---
-      // Om Oss
       {
         source: '/pages/hva-er-utekos',
         destination: '/om-oss',
@@ -107,11 +103,10 @@ const nextConfig: NextConfig = {
         permanent: true
       },
       {
-        source: '/pages/grillkvelden',
-        destination: '/inspirasjon/grillkvelden',
+        source: '/produkter/utekos-teckdawn',
+        destination: '/produkter/utekos-techdown',
         permanent: true
       },
-      // Catch-all for gammel inspirasjon-struktur
       {
         source: '/pages/inspirasjon/:path*',
         destination: '/inspirasjon',
