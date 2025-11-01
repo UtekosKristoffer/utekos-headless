@@ -22,8 +22,8 @@ export function BeredskapOppsummeringSection() {
               <p className='text-lg text-article-white leading-relaxed mb-6'>
                 DSBs råd om pledd, soveposer og dyner er et godt utgangspunkt
                 for passiv varme. Utekos bygger videre med praktiske egenskaper
-                som øker komfort, funksjonalitet og robusthet, og styrker evnen
-                til å mestre aktuelle beredskapssituasjoner.
+                som øker komfort, funksjonalitet og robusthet. Dette styrker
+                evnen til å mestre aktuelle beredskapssituasjoner.
               </p>
 
               <ul className='space-y-3'>
