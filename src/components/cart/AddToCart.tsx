@@ -19,7 +19,7 @@ import type {
   CustomData,
   UserData
 } from '@types'
-
+import { Activity } from 'react'
 import { useContext, useEffect, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -313,11 +313,13 @@ export function AddToCart({
           <label className='mb-2 block text-sm font-medium'>Antall</label>
           <QuantitySelector />
         </div>
-        <ModalSubmitButton
-          isPending={isPending}
-          isDisabled={!selectedVariant || !isAvailable || isPending}
-          availableForSale={isAvailable}
-        />
+        <Activity>
+          <ModalSubmitButton
+            isPending={isPending}
+            isDisabled={!selectedVariant || !isAvailable || isPending}
+            availableForSale={isAvailable}
+          />
+        </Activity>
       </form>
     </Form>
   )

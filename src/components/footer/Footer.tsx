@@ -13,7 +13,9 @@ export default function Footer() {
         <Activity>
           <ConditionalNewsLetter />
         </Activity>
-        <PaymentMethods />
+        <Activity>
+          <PaymentMethods />
+        </Activity>
         <Activity>
           <CopyrightNotice />
         </Activity>

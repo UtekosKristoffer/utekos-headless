@@ -22,7 +22,7 @@ import { productMetadata } from '@/db/config/product-metadata.config'
 import { getSortedOptions } from '@/lib/helpers/async/getSortedOptions'
 import type { ProductPageViewProps, ShopifyProduct } from '@types'
 import dynamic from 'next/dynamic'
-
+import { Activity } from 'react'
 import ProductHeader from './ProductHeader'
 import ProductGalleryCard from './ProductGalleryCard'
 import PriceActivityPanel from './PriceActivityPanel'
@@ -109,130 +109,152 @@ export default function ProductPageView({
           }}
         />
       </div>
-
-      <AnimatedBlock
-        className='will-animate-fade-in-up'
-        delay='0s'
-        threshold={0.2}
-      >
-        <Breadcrumb className='mb-8'>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href='/'>Hjem</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink href='/products'>Produkter</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>{productData.title}</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-      </AnimatedBlock>
+      <Activity>
+        <AnimatedBlock
+          className='will-animate-fade-in-up'
+          delay='0s'
+          threshold={0.2}
+        >
+          <Breadcrumb className='mb-8'>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href='/'>Hjem</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink href='/products'>Produkter</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>{productData.title}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </AnimatedBlock>
+      </Activity>
 
       <ProductPageGrid>
         <GalleryColumn>
-          <ProductHeader
-            productHandle={productData.handle}
-            productTitle={title}
-            productSubtitle={productSubtitle ?? ''}
-          />
-          <ProductGalleryCard
-            galleryContent={
-              <div className='relative overflow-hidden rounded-2xl isolate'>
-                <ProductGallery
-                  title={title}
-                  images={variantImages.map(image => ({
-                    id: image.id,
-                    url: image.url,
-                    altText: image.altText ?? '',
-                    width: image.width ?? 0,
-                    height: image.height ?? 0
-                  }))}
-                />
-              </div>
-            }
-            enableStickyOnDesktop
-            stickyTopClassName='md:top-24'
-            ariaLabel='Produktgalleri'
-          />
-        </GalleryColumn>
-
-        <OptionsColumn>
-          <AnimatedBlock
-            className='will-animate-fade-in-right'
-            delay='0.1s'
-            threshold={0.2}
-          >
-            <PriceActivityPanel
+          <Activity>
+            <ProductHeader
               productHandle={productData.handle}
-              priceAmount={selectedVariant.price.amount ?? '0'}
-              currencyCode={selectedVariant.price.currencyCode}
-              limitedStockCount={limitedStockCount ?? 0}
-              activityNode={activityNode}
+              productTitle={title}
+              productSubtitle={productSubtitle ?? ''}
             />
-          </AnimatedBlock>
-
-          <AnimatedBlock
-            className='will-animate-fade-in-right'
-            delay='0.16s'
-            threshold={0.2}
-          >
-            <section aria-labelledby='product-options'>
-              <h2 id='product-options' className='sr-only'>
-                Produktvalg
-              </h2>
-              <div className='mt-8 flex flex-col gap-8'>
-                {sortedProductOptions.map(
-                  (productOption: ShopifyProduct['options'][number]) =>
-                    renderOptionComponent({
-                      option: productOption,
-                      allVariants,
-                      selectedVariant,
-                      onOptionChange,
-                      colorHexMap,
-                      productHandle: productData.handle
-                    })
-                )}
-              </div>
-              <TrustSignals />
-
-              {productData.handle === 'utekos-techdown' && (
-                <TechDownLaunchOffer
-                  onAdditionalLineChange={setAdditionalLine}
+          </Activity>
+          <Activity>
+            <ProductGalleryCard
+              galleryContent={
+                <div className='relative overflow-hidden rounded-2xl isolate'>
+                  <Activity>
+                    <ProductGallery
+                      title={title}
+                      images={variantImages.map(image => ({
+                        id: image.id,
+                        url: image.url,
+                        altText: image.altText ?? '',
+                        width: image.width ?? 0,
+                        height: image.height ?? 0
+                      }))}
+                    />
+                  </Activity>
+                </div>
+              }
+              enableStickyOnDesktop
+              stickyTopClassName='md:top-24'
+              ariaLabel='Produktgalleri'
+            />
+          </Activity>
+        </GalleryColumn>
+        <Activity>
+          <OptionsColumn>
+            <AnimatedBlock
+              className='will-animate-fade-in-right'
+              delay='0.1s'
+              threshold={0.2}
+            >
+              <Activity>
+                <PriceActivityPanel
+                  productHandle={productData.handle}
+                  priceAmount={selectedVariant.price.amount ?? '0'}
+                  currencyCode={selectedVariant.price.currencyCode}
+                  limitedStockCount={limitedStockCount ?? 0}
+                  activityNode={activityNode}
                 />
-              )}
+              </Activity>
+            </AnimatedBlock>
 
-              <div className='mt-8'>
-                <AddToCart
-                  product={productData}
-                  selectedVariant={selectedVariant}
-                  {...(additionalLine && { additionalLine })}
-                />
-              </div>
-              <AnimatedBlock
-                className='will-animate-fade-in-up'
-                delay='0.22s'
-                threshold={0.2}
-              ></AnimatedBlock>
-              <ProductDescription descriptionHtml={productDescriptionHtml} />
-            </section>
-          </AnimatedBlock>
-        </OptionsColumn>
+            <AnimatedBlock
+              className='will-animate-fade-in-right'
+              delay='0.16s'
+              threshold={0.2}
+            >
+              <section aria-labelledby='product-options'>
+                <h2 id='product-options' className='sr-only'>
+                  Produktvalg
+                </h2>
+                <div className='mt-8 flex flex-col gap-8'>
+                  {sortedProductOptions.map(
+                    (productOption: ShopifyProduct['options'][number]) =>
+                      renderOptionComponent({
+                        option: productOption,
+                        allVariants,
+                        selectedVariant,
+                        onOptionChange,
+                        colorHexMap,
+                        productHandle: productData.handle
+                      })
+                  )}
+                </div>
+                <Activity>
+                  <TrustSignals />
+                </Activity>
+                <Activity>
+                  {productData.handle === 'utekos-techdown' && (
+                    <TechDownLaunchOffer
+                      onAdditionalLineChange={setAdditionalLine}
+                    />
+                  )}
+                </Activity>
+                <div className='mt-8'>
+                  <Activity>
+                    <AddToCart
+                      product={productData}
+                      selectedVariant={selectedVariant}
+                      {...(additionalLine && { additionalLine })}
+                    />
+                  </Activity>
+                </div>
+                <Activity>
+                  <AnimatedBlock
+                    className='will-animate-fade-in-up'
+                    delay='0.22s'
+                    threshold={0.2}
+                  ></AnimatedBlock>
+                </Activity>
+                <ProductDescription descriptionHtml={productDescriptionHtml} />
+              </section>
+            </AnimatedBlock>
+          </OptionsColumn>
+        </Activity>
       </ProductPageGrid>
 
       <div className='mt-16 sm:mt-24'>
-        <SpecialOfferCrossSell currentProductHandle={productData.handle} />
+        <Activity>
+          <SpecialOfferCrossSell currentProductHandle={productData.handle} />
+        </Activity>
       </div>
-
-      <ProductPageAccordion variantProfile={selectedVariantProfile} />
-
-      {relatedProducts && relatedProducts.length > 0 && (
-        <RelatedProducts products={relatedProducts} />
-      )}
-      <FindInStoreSection />
+      <Activity>
+        <ProductPageAccordion variantProfile={selectedVariantProfile} />
+      </Activity>
+      <Activity>
+        {relatedProducts && relatedProducts.length > 0 && (
+          <RelatedProducts products={relatedProducts} />
+        )}
+      </Activity>
+      <Activity>
+        <FindInStoreSection />
+      </Activity>
     </main>
   )
 }

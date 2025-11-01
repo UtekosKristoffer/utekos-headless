@@ -23,7 +23,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { AlertDialogTitle } from './AlertDialogen'
-
+import { Activity } from 'react'
 interface CartLineItemProps {
   lineId: string
 }
@@ -146,59 +146,68 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
               </p>
             )}
           </div>
-
           <div className='absolute -right-2 md:right-0 top-0'>
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button
-                  variant='ghost'
-                  size='icon'
-                  className='size-6 p-0'
-                  disabled={isDeleting}
-                >
-                  <Trash2 className='size-4 text-red-500' />
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Er du sikker?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    Vil du fjerne {productTitle} fra handlekurven din?
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Nei, avbryt</AlertDialogCancel>
-                  <AlertDialogAction onClick={handleRemoveLine}>
-                    Ja, fjern produkt
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+            <Activity>
+              <AlertDialog>
+                <Activity>
+                  <AlertDialogTrigger asChild>
+                    <Button
+                      variant='ghost'
+                      size='icon'
+                      className='size-6 p-0'
+                      disabled={isDeleting}
+                    >
+                      <Trash2 className='size-4 text-red-500' />
+                    </Button>
+                  </AlertDialogTrigger>
+                </Activity>
+                <Activity>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Er du sikker?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Vil du fjerne {productTitle} fra handlekurven din?
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Nei, avbryt</AlertDialogCancel>
+                      <AlertDialogAction onClick={handleRemoveLine}>
+                        Ja, fjern produkt
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </Activity>
+              </AlertDialog>
+            </Activity>
           </div>
         </div>
         <div className='mt-auto flex flex-col items-start gap-2 pt-2 md:flex-row md:items-center md:justify-between md:gap-4'>
           <div className='flex items-center gap-1'>
-            <Button
-              variant='default'
-              size='icon'
-              className='size-7 rounded-md transition-transform active:scale-90'
-              onClick={() => handleUpdateQuantity(localQuantity - 1)}
-              disabled={localQuantity <= 1 || isDeleting}
-            >
-              <Minus className='size-3' />
-            </Button>
+            <Activity>
+              <Button
+                variant='default'
+                size='icon'
+                className='size-7 rounded-md transition-transform active:scale-90'
+                onClick={() => handleUpdateQuantity(localQuantity - 1)}
+                disabled={localQuantity <= 1 || isDeleting}
+              >
+                <Minus className='size-3' />
+              </Button>
+            </Activity>
             <span className='min-w-[1.75rem] text-center text-sm font-medium tabular-nums transition-all duration-100'>
               {localQuantity}
             </span>
-            <Button
-              variant='default'
-              size='icon'
-              className='size-7 rounded-md transition-transform active:scale-90'
-              onClick={() => handleUpdateQuantity(localQuantity + 1)}
-              disabled={isDeleting || localQuantity >= 99}
-            >
-              <Plus className='size-3' />
-            </Button>
+            <Activity>
+              <Button
+                variant='default'
+                size='icon'
+                className='size-7 rounded-md transition-transform active:scale-90'
+                onClick={() => handleUpdateQuantity(localQuantity + 1)}
+                disabled={isDeleting || localQuantity >= 99}
+              >
+                <Plus className='size-3' />
+              </Button>
+            </Activity>
           </div>
           <span className='whitespace-nowrap text-sm font-medium tabular-nums'>
             {formatNOK(displayPrice)}

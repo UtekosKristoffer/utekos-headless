@@ -19,6 +19,7 @@ import * as React from 'react'
 import { useTransition } from 'react'
 import { createDrawerStateHandler } from './utils/createDrawerStateHandler'
 import { CartTrigger } from '@/components/cart/CartTrigger'
+import { Activity } from 'react'
 
 export function CartDrawer(): React.JSX.Element {
   const open = useCartOpen()
@@ -50,34 +51,43 @@ export function CartDrawer(): React.JSX.Element {
       onOpenChange={handleStateChangeWithTransition}
       direction='right'
     >
-      <CartTrigger />
-      <DrawerContent className='h-full max-h-full overflow-hidden'>
-        <VisuallyHidden>
-          <DrawerTitle>Handlekurv</DrawerTitle>
-          <DrawerDescription>
-            Oversikt over varer i handlekurven og handlingsknapper.
-          </DrawerDescription>
-        </VisuallyHidden>
+      <Activity>
+        <CartTrigger />
+      </Activity>
+      <Activity>
+        <DrawerContent className='h-full max-h-full overflow-hidden'>
+          <VisuallyHidden>
+            <DrawerTitle>Handlekurv</DrawerTitle>
+            <DrawerDescription>
+              Oversikt over varer i handlekurven og handlingsknapper.
+            </DrawerDescription>
+          </VisuallyHidden>
 
-        {/* Wrapper med riktig flex-struktur for mobil */}
-        <div className='flex flex-col h-full overflow-hidden'>
-          {/* Header - fast høyde */}
-          <CartHeader />
+          {/* Wrapper med riktig flex-struktur for mobil */}
+          <div className='flex flex-col h-full overflow-hidden'>
+            {/* Header - fast høyde */}
+            <Activity>
+              <CartHeader />
+            </Activity>
+            <Activity>
+              <div className='flex-1 min-h-0 overflow-y-auto'>
+                <CartBody />
+              </div>
+            </Activity>
+            {/* Suggestions - maks høyde med scroll hvis nødvendig */}
+            <Activity>
+              <div className='max-h-[35vh] overflow-y-auto'>
+                <SmartCartSuggestions cart={cart} />
+              </div>
+            </Activity>
 
-          {/* Scrollbar område - tar tilgjengelig plass */}
-          <div className='flex-1 min-h-0 overflow-y-auto'>
-            <CartBody />
+            {/* Footer - fast høyde */}
+            <Activity>
+              <CartFooter cart={cart} />
+            </Activity>
           </div>
-
-          {/* Suggestions - maks høyde med scroll hvis nødvendig */}
-          <div className='max-h-[35vh] overflow-y-auto'>
-            <SmartCartSuggestions cart={cart} />
-          </div>
-
-          {/* Footer - fast høyde */}
-          <CartFooter cart={cart} />
-        </div>
-      </DrawerContent>
+        </DrawerContent>
+      </Activity>
     </Drawer>
   )
 }

@@ -20,7 +20,7 @@ import {
 } from 'lucide-react'
 import { renderMetafield } from './helpers/renderMetafield'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
-
+import { Activity } from 'react'
 const colorHexByTextClass: Record<string, string> = {
   'text-rose-500': '#F43F5E',
   'text-cyan-400': '#22d3ee',
@@ -192,28 +192,30 @@ export function ProductPageAccordion({
             Produktdetaljer
           </span>
         </AnimatedBlock>
-
-        <AnimatedBlock
-          className='will-animate-fade-in-up'
-          delay='0.08s'
-          threshold={0.3}
-        >
-          <h2
-            id='product-details-heading'
-            className='mb-8 text-2xl font-bold tracking-tight text-foreground sm:text-3xl'
+        <Activity>
+          <AnimatedBlock
+            className='will-animate-fade-in-up'
+            delay='0.08s'
+            threshold={0.3}
           >
-            Alt du trenger å vite
-          </h2>
-        </AnimatedBlock>
-
-        <Accordion type='single' collapsible className='w-full'>
-          {sectionsWithContent.map(section => (
-            <ProductDetailsAccordionSection
-              key={section.id}
-              sectionData={section}
-            />
-          ))}
-        </Accordion>
+            <h2
+              id='product-details-heading'
+              className='mb-8 text-2xl font-bold tracking-tight text-foreground sm:text-3xl'
+            >
+              Alt du trenger å vite
+            </h2>
+          </AnimatedBlock>
+        </Activity>
+        <Activity>
+          <Accordion type='single' collapsible className='w-full'>
+            {sectionsWithContent.map(section => (
+              <ProductDetailsAccordionSection
+                key={section.id}
+                sectionData={section}
+              />
+            ))}
+          </Accordion>
+        </Activity>
       </div>
     </section>
   )

@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import type { AddToCartButtonProps } from '@types'
-
+import { Activity } from 'react'
 interface ExtendedAddToCartButtonProps extends AddToCartButtonProps {
   availableForSale: boolean
 }
@@ -44,12 +44,14 @@ export function AddToCartButton({
                   disabled={isDisabled}
                 />
               </FormControl>
-              <SubmitButton
-                availableForSale={availableForSale}
-                selectedVariantId={field.value}
-                isPending={isPending}
-                isDisabled={isDisabled}
-              />
+              <Activity>
+                <SubmitButton
+                  availableForSale={availableForSale}
+                  selectedVariantId={field.value}
+                  isPending={isPending}
+                  isDisabled={isDisabled}
+                />
+              </Activity>
             </div>
             <FormMessage />
           </FormItem>

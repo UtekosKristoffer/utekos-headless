@@ -9,7 +9,7 @@ import type { ShopifyProduct } from '@types'
 import { useEffect, useState, useEffectEvent } from 'react'
 import { Gift } from 'lucide-react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
-
+import { Activity } from 'react'
 interface AdditionalLine {
   variantId: string
   quantity: number
@@ -61,7 +61,7 @@ export function TechDownLaunchOffer({
         quantity: 1
       })
     }
-  }, [includeBuff, selectedBuffColor, buffProduct])
+  }, [includeBuff, selectedBuffColor, buffProduct, onUpdateParent])
 
   if (isLoading) {
     return (
@@ -96,13 +96,15 @@ export function TechDownLaunchOffer({
           </div>
         </div>
         <div className='flex justify-center'>
-          <FreeBuffSelector
-            buffProduct={buffProduct}
-            includeBuff={includeBuff}
-            onIncludeBuffChange={setIncludeBuff}
-            selectedBuffColor={selectedBuffColor}
-            onBuffColorChange={setSelectedBuffColor}
-          />
+          <Activity>
+            <FreeBuffSelector
+              buffProduct={buffProduct}
+              includeBuff={includeBuff}
+              onIncludeBuffChange={setIncludeBuff}
+              selectedBuffColor={selectedBuffColor}
+              onBuffColorChange={setSelectedBuffColor}
+            />
+          </Activity>
         </div>
       </div>
     </AnimatedBlock>
