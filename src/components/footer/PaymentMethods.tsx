@@ -1,6 +1,5 @@
 // Path: src/components/footer/PaymentMethods.tsx
 import { paymentLogos } from '@/components/footer/paymentsLogos'
-
 export function PaymentMethods() {
   return (
     <div className='mt-12 border-t border-white/10 pt-8'>

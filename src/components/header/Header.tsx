@@ -7,6 +7,7 @@ import { HeaderSearch } from '@/components/header/HeaderSearch/HeaderSearch'
 import type { MenuItem } from '@types'
 import { Suspense } from 'react'
 import { ClientMobileMenu } from './ClientMobileMenu'
+
 export default function Header({ menu }: { menu: MenuItem[] }) {
   return (
     <header className='sticky top-0 z-50 border-b border-white/10 bg-sidebar-foreground py-3'>

@@ -1,7 +1,7 @@
 // Path: src/components/frontpage/SocialProof.tsx
 import { KlarnaLogo } from '@/components/logo/payments/KlarnaLogo'
 import { VippsLogo } from '@/components/logo/payments/VippsLogo'
-
+import { Truck, Smile } from 'lucide-react'
 export function SocialProof() {
   return (
     <div className='animate-fade-in-up mx-auto max-w-4xl'>
@@ -10,7 +10,10 @@ export function SocialProof() {
           <div className='absolute inset-0 bg-gradient-to-br from-sky-500/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
           <div className='relative'>
             <p className='text-xl font-bold text-foreground'>Rask levering</p>
-            <p className='mt-1 text-sm text-muted-foreground'>2-5 dager</p>
+            <p className='mt-1 flex items-center justify-center gap-2 text-sm text-muted-foreground'>
+              <Truck className='h-4 w-4 text-sky-400' />
+              <span>2-5 dager</span>
+            </p>
           </div>
         </div>
 
@@ -18,8 +21,9 @@ export function SocialProof() {
           <div className='absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
           <div className='relative'>
             <p className='text-xl font-bold text-foreground'>2000+</p>
-            <p className='mt-1 text-sm text-muted-foreground'>
-              Fornøyde kunder
+            <p className='mt-1 flex items-center justify-center gap-2 text-sm text-muted-foreground'>
+              <Smile className='h-4 w-4 text-cyan-400' />
+              <span>Fornøyde kunder</span>
             </p>
           </div>
         </div>

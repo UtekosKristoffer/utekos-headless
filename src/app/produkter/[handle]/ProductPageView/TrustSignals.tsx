@@ -60,7 +60,6 @@ export function TrustSignals() {
           </Link>
         </div>
 
-        {/* Nederste rad: Betalingslogoer (footer-style) */}
         <div className='px-6 py-4'>
           <div className='flex items-center justify-center gap-5'>
             <VippsLogo className='h-[18px] w-auto opacity-85 hover:opacity-100 transition-opacity' />
