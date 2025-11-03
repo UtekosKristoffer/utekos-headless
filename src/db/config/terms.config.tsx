@@ -1,5 +1,6 @@
 import React from 'react'
 import type { Section } from '@types'
+import Link from 'next/link'
 
 function PolicyItem({
   title,
@@ -61,7 +62,7 @@ export const termsSections: Section[] = [
   },
   {
     id: '1-nettbutikkens-vilkar',
-    title: 'Seksjon 1 – Nettbutikkens vilkår',
+    title: 'Nettbutikkens vilkår',
     content: (
       <>
         <ul className='space-y-4'>
@@ -87,7 +88,7 @@ export const termsSections: Section[] = [
   },
   {
     id: '2-generelle-betingelser',
-    title: 'Seksjon 2 – Generelle betingelser',
+    title: 'Generelle betingelser',
     content: (
       <>
         <ul className='space-y-4'>
@@ -114,7 +115,7 @@ export const termsSections: Section[] = [
   },
   {
     id: '3-informasjon-noyaktighet',
-    title: 'Seksjon 3 – Nøyaktighet, fullstendighet og aktualitet',
+    title: 'Nøyaktighet, fullstendighet og aktualitet',
     content: (
       <>
         <p>
@@ -132,7 +133,7 @@ export const termsSections: Section[] = [
   },
   {
     id: '4-endringer-og-priser',
-    title: 'Seksjon 4 – Endringer i tjenesten og priser',
+    title: 'Endringer i tjenesten og priser',
     content: (
       <>
         <ul className='space-y-4'>
@@ -150,7 +151,7 @@ export const termsSections: Section[] = [
   },
   {
     id: '5-produkter-tjenester',
-    title: 'Seksjon 5 – Produkter eller tjenester',
+    title: 'Produkter eller tjenester',
     content: (
       <>
         <ul className='space-y-4'>
@@ -178,7 +179,7 @@ export const termsSections: Section[] = [
   },
   {
     id: '6-fakturering-konto',
-    title: 'Seksjon 6 – Fakturering og kontoinformasjon',
+    title: 'Fakturering og kontoinformasjon',
     content: (
       <>
         <p>
@@ -191,13 +192,16 @@ export const termsSections: Section[] = [
           Du skal gi oppdatert, fullstendig og korrekt kjøps- og
           kontoinformasjon og oppdatere e-post og kortdetaljer ved behov.
         </p>
-        <p>Se også vår refusjonspolicy: [LENKE TIL REFUSJONSPOLICY]</p>
+        <p>
+          Se også vår refusjonspolicy:{' '}
+          <Link href='/frakt-og-retur'>Frakt og retur</Link>
+        </p>
       </>
     )
   },
   {
     id: '7-valgfrie-verktoy',
-    title: 'Seksjon 7 – Valgfrie verktøy',
+    title: 'Valgfrie verktøy',
     content: (
       <>
         <p>
@@ -211,7 +215,7 @@ export const termsSections: Section[] = [
   },
   {
     id: '8-tredjepartslenker',
-    title: 'Seksjon 8 – Tredjepartslenker',
+    title: 'Tredjepartslenker',
     content: (
       <>
         <p>
@@ -226,7 +230,7 @@ export const termsSections: Section[] = [
   },
   {
     id: '9-kommentarer-tilbakemeldinger',
-    title: 'Seksjon 9 – Brukerkommentarer, tilbakemeldinger og andre innspill',
+    title: 'Brukerkommentarer, tilbakemeldinger og andre innspill',
     content: (
       <>
         <p>
@@ -247,19 +251,19 @@ export const termsSections: Section[] = [
   },
   {
     id: '10-personopplysninger',
-    title: 'Seksjon 10 – Personopplysninger',
+    title: 'Personopplysninger',
     content: (
       <>
         <p>
           Innsending av personopplysninger reguleres av vår personvernerklæring:
-          [LENKE TIL PERSONVERNERKLÆRING]
+          <Link href='/personvern'>Personvern</Link>
         </p>
       </>
     )
   },
   {
     id: '11-feil-og-uteblivelser',
-    title: 'Seksjon 11 – Feil, unøyaktigheter og utelatelser',
+    title: 'Feil, unøyaktigheter og utelatelser',
     content: (
       <>
         <p>
@@ -278,7 +282,7 @@ export const termsSections: Section[] = [
   },
   {
     id: '12-forbudt-bruk',
-    title: 'Seksjon 12 – Forbudt bruk',
+    title: 'Forbudt bruk',
     content: (
       <>
         <p>
@@ -295,7 +299,7 @@ export const termsSections: Section[] = [
   },
   {
     id: '13-ansvarsfraskrivelse',
-    title: 'Seksjon 13 – Ansvarsfraskrivelse og ansvarsbegrensning',
+    title: 'Ansvarsfraskrivelse og ansvarsbegrensning',
     content: (
       <>
         <p>
@@ -318,7 +322,7 @@ export const termsSections: Section[] = [
   },
   {
     id: '14-skadeslosholdelse',
-    title: 'Seksjon 14 – Skadesløsholdelse',
+    title: 'Skadesløsholdelse',
     content: (
       <>
         <p>
@@ -332,7 +336,7 @@ export const termsSections: Section[] = [
   },
   {
     id: '15-delvis-ugyldighet',
-    title: 'Seksjon 15 – Delvis ugyldighet',
+    title: 'Delvis ugyldighet',
     content: (
       <>
         <p>
@@ -345,7 +349,7 @@ export const termsSections: Section[] = [
   },
   {
     id: '16-oppsigelse',
-    title: 'Seksjon 16 – Oppsigelse',
+    title: 'Oppsigelse',
     content: (
       <>
         <p>
@@ -360,7 +364,7 @@ export const termsSections: Section[] = [
   },
   {
     id: '17-hele-avtalen',
-    title: 'Seksjon 17 – Hele avtalen',
+    title: 'Hele avtalen',
     content: (
       <>
         <p>
@@ -374,7 +378,7 @@ export const termsSections: Section[] = [
   },
   {
     id: '18-lovvalg',
-    title: 'Seksjon 18 – Lovvalg',
+    title: 'Lovvalg',
     content: (
       <>
         <p>Vilkårene reguleres av og tolkes etter norsk lov.</p>
@@ -383,7 +387,7 @@ export const termsSections: Section[] = [
   },
   {
     id: '19-endringer-i-vilkar',
-    title: 'Seksjon 19 – Endringer i vilkårene',
+    title: 'Endringer i vilkårene',
     content: (
       <>
         <p>
@@ -397,10 +401,10 @@ export const termsSections: Section[] = [
   },
   {
     id: '20-kontakt',
-    title: 'Seksjon 20 – Kontaktinformasjon',
+    title: 'Kontaktinformasjon',
     content: (
       <>
-        <p>Spørsmål om vilkårene sendes til erling@utekos.no.</p>
+        <p>Spørsmål om vilkårene sendes til info@utekos.no.</p>
       </>
     )
   }
