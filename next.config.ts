@@ -46,6 +46,16 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/policies/refund-policy',
+        destination: '/frakt-og-retur',
+        permanent: true
+      },
+      {
+        source: '/policies/privacy-policy',
+        destination: '/personvern',
+        permanent: true
+      },
+      {
         source: '/products/:path*',
         destination: '/produkter/:path*',
         permanent: true
@@ -120,6 +130,16 @@ const nextConfig: NextConfig = {
       {
         source: '/pages/camping',
         destination: '/inspirasjon',
+        permanent: true
+      },
+      {
+        source: '/pages/contact',
+        destination: '/kontaktskjema',
+        permanent: true
+      },
+      {
+        source: '/pages/kundeservice',
+        destination: '/kontaktskjema',
         permanent: true
       }
     ]

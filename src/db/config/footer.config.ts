@@ -83,7 +83,7 @@ export const footerConfig: FooterSection[] = [
         external: true
       },
       {
-        title: '5162, Bergen',
+        title: '5162, Laksevåg',
         path: 'map:Lille Damsgårdsveien 25, 5162, Bergen' as Route,
         external: true
       },
