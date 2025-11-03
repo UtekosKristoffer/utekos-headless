@@ -52,10 +52,10 @@ export default function PrivacyPolicyPage() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    'name': 'Personvernerklæring',
-    'url': 'https://utekos.no/personvern',
+    'name': 'Vilkår og betingelser',
+    'url': 'https://utekos.no/vilkar-betingelser',
     'inLanguage': 'nb-NO',
-    'dateModified': '2025-06-11'
+    'dateModified': '2025-11-03'
   }
 
   return (
@@ -71,7 +71,7 @@ export default function PrivacyPolicyPage() {
         <div className='p-8 sm:p-12 lg:p-16'>
           <header className='text-center'>
             <h1 className='text-4xl font-bold mx-auto tracking-tight sm:text-5xl'>
-              Personvernerklæring
+              Vilkår og betingelser
             </h1>
             <p className='mt-4 text-muted-foreground'>
               Sist oppdatert: {lastUpdated}
