@@ -67,6 +67,10 @@ export const footerConfig: FooterSection[] = [
       {
         title: 'Personvern',
         path: '/personvern' as Route
+      },
+      {
+        title: 'Vilkår og betingelser',
+        path: '/vilkar-betingelser' as Route
       }
     ]
   },

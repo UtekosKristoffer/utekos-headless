@@ -14,8 +14,7 @@ function PolicyItem({
     </li>
   )
 }
-export const lastUpdated = '11. juni 2025' // Kilde: Personvernserklæring.docx
-
+export const lastUpdated = '11. juni 2025'
 export const privacySections: Section[] = [
   {
     id: 'introduksjon',

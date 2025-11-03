@@ -32,7 +32,7 @@ export function FooterNavigation() {
                   </Link>
                 </li>
               ))}
-              {section.title === 'Informasjon' && <CookieSettingsButton />}
+              {section.title === 'Kundeservice' && <CookieSettingsButton />}
             </ul>
           </nav>
         </div>
