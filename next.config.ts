@@ -66,7 +66,7 @@ const nextConfig: NextConfig = {
         permanent: true
       },
       {
-        source: 'pages/policies/privacy-policy',
+        source: '/pages/policies/privacy-policy',
         destination: '/personvern',
         permanent: true
       },
