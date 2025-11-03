@@ -61,17 +61,17 @@ const nextConfig: NextConfig = {
         permanent: true
       },
       {
-        source: 'https://kasse.utekos.no/policies/terms-of-service',
+        source: '/pages/policies/terms-of-service',
         destination: '/vilkar-betingelser',
         permanent: true
       },
       {
-        source: 'https://kasse.utekos.no/policies/privacy-policy',
+        source: 'pages/policies/privacy-policy',
         destination: '/personvern',
         permanent: true
       },
       {
-        source: 'https://kasse.utekos.no/policies/refund-policy',
+        source: '/pages/policies/refund-policy',
         destination: '/frakt-og-retur',
         permanent: true
       },
