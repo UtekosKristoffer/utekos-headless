@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Personvernerklæring | Utekos',
   description:
-    'Les hvordan Utekos samler inn, bruker og beskytter dine personopplysninger i samsvar med gjeldende lover. Din trygghet er viktig for oss.',
+    'Les våre vilkår og betingelser for bruk av Utekos-nettstedet og kjøp av produkter. Vi streber etter å gi deg en trygg og pålitelig handleopplevelse',
   alternates: { canonical: '/vilkar-betingelser' },
   openGraph: {
     title: 'Vilkår og betingelser | Utekos',
