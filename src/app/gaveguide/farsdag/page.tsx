@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: 'Utekos',
     images: [
       {
-        url: '/Farsdag2025.png',
+        url: '/Farsdag2025-2.png',
         width: 1200,
         height: 630,
         alt: 'En perfekt farsdagsgave.'
