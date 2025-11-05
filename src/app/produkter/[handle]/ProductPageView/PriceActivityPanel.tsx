@@ -1,7 +1,7 @@
 'use client'
 
 import { Price } from '@/components/jsx/Price'
-import { ShieldAlert } from 'lucide-react'
+import { ShieldAlert, Gift } from 'lucide-react'
 import type { ReactNode } from 'react'
 
 export interface PriceActivityPanelProps {
@@ -33,9 +33,29 @@ export default function PriceActivityPanel({
 
   const launchOffer = LAUNCH_OFFERS[productHandle as keyof typeof LAUNCH_OFFERS]
   const hasLaunchOffer = !!launchOffer
+  const isFarsdagOffer = productHandle === 'utekos-mikrofiber'
+  const hasSpecialOffer = hasLaunchOffer || isFarsdagOffer
 
   return (
     <section aria-label='Pris og tilgjengelighet' className='space-y-4'>
+      {isFarsdagOffer && (
+        <div className='inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-sky-500/20 via-blue-500/20 to-indigo-500/20 px-4 py-2 ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:ring-white/20'>
+          <Gift className='h-4 w-4 text-sky-400' />
+          <div className='flex flex-wrap items-center gap-x-2 gap-y-1'>
+            <span className='text-sm font-semibold text-white'>
+              Farsdagstilbud
+            </span>
+            <div className='hidden h-4 w-px bg-white/20 sm:block' />
+            <span className='text-sm font-bold text-sky-400'>
+              Spar 300,- med koden
+              <code className='ml-1.5 rounded bg-sky-900/50 px-1.5 py-0.5 font-mono'>
+                FARSDAG25
+              </code>
+            </span>
+          </div>
+        </div>
+      )}
+
       {hasLaunchOffer && (
         <div className='inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-blue-500/20 px-4 py-2 ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:ring-white/20'>
           <div className='relative flex h-2 w-2'>
@@ -55,7 +75,7 @@ export default function PriceActivityPanel({
       )}
 
       <div className='flex items-baseline gap-3'>
-        {hasLaunchOffer ?
+        {hasSpecialOffer ?
           <div className='bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent'>
             <Price amount={priceAmount} currencyCode={currencyCode} />
           </div>
@@ -65,6 +85,14 @@ export default function PriceActivityPanel({
       {hasLaunchOffer && (
         <p className='text-sm text-muted-foreground'>
           Begrenset tilbud ved lansering
+        </p>
+      )}
+
+      {isFarsdagOffer && (
+        <p className='text-sm text-muted-foreground'>
+          Du kan bruke rabattkoden{' '}
+          <code className='font-mono text-xs'>FARSDAG25</code> i kassen for å få
+          300kr i avslag.
         </p>
       )}
 

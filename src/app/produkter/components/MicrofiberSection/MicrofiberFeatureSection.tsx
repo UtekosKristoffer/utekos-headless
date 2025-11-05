@@ -177,7 +177,7 @@ export function MicrofiberFeatureSection() {
           className='will-animate-fade-in-up mt-16 flex flex-col items-center gap-6'
           delay='0.6s'
         >
-          <p className='text-4xl font-bold text-foreground'>1 290,00 kr</p>
+          <p className='text-4xl font-bold text-foreground'>1 590,00 kr</p>
           <Button asChild size='lg' className='group w-full sm:w-auto'>
             <Link href='/produkter/utekos-mikrofiber'>
               Velg bekymringsfri varme

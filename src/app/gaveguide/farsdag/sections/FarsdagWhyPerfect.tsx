@@ -1,3 +1,5 @@
+// Path: src/app/gaveguide/farsdag/sections/FarsdagWhyPerfect.tsx
+
 import { CheckCircle2 } from 'lucide-react'
 
 const reasons = [
@@ -21,24 +23,28 @@ const reasons = [
 export function FarsdagWhyPerfect() {
   return (
     <section className='flex w-full flex-col items-center bg-background border-b border-neutral-800'>
-      <div className='w-full max-w-4xl px-6 py-16 text-center lg:px-8 sm:py-24'>
-        <h2 className='text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl'>
+      <div className='w-full max-w-4xl px-6 py-20 sm:py-28'>
+        <h2 className='text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl text-center mb-12'>
           Derfor er Utekos den perfekte farsdagsgaven
         </h2>
-        <div className='mt-12 space-y-10 text-left'>
-          {reasons.map(reason => (
-            <div key={reason.title} className='relative flex'>
-              <div className='flex-shrink-0'>
+
+        <div className='space-y-8'>
+          {reasons.map((reason, index) => (
+            <div
+              key={reason.title}
+              className='flex gap-6 p-6 rounded-lg bg-sidebar-foreground/30 hover:bg-sidebar-foreground/50 transition-colors'
+            >
+              <div className='flex-shrink-0 pt-1'>
                 <CheckCircle2
-                  className='h-6 w-6 text-blue-600'
+                  className='h-6 w-6 text-green-500'
                   aria-hidden='true'
                 />
               </div>
-              <div className='ml-4'>
-                <h3 className='text-lg font-semibold leading-6 text-primary-foreground'>
+              <div className='flex-1'>
+                <h3 className='text-xl font-semibold leading-7 text-primary-foreground mb-2'>
                   {reason.title}
                 </h3>
-                <p className='mt-2 text-base text-muted-foreground'>
+                <p className='text-base leading-relaxed text-muted-foreground'>
                   {reason.description}
                 </p>
               </div>

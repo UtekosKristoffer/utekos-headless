@@ -1,10 +1,9 @@
 'use client'
 
-import { ArrowRightIcon, XIcon } from 'lucide-react'
+import { ArrowRightIcon, XIcon, GiftIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils/className'
-
 const BANNER_STORAGE_KEY = 'utekos-techdown-launch-banner-dismissed-timestamp'
 const BANNER_EXPIRATION_MS = 3 * 24 * 60 * 60 * 1000 // 3 dager
 
@@ -53,16 +52,26 @@ export default function AnnouncementBanner() {
       )}
     >
       <Link
-        href='/produkter/utekos-techdown'
-        className='group block w-full bg-sky-800 p-3 text-center text-sm font-medium text-white transition-colors hover:text-neutral-200'
+        href='/produkter/utekos-mikrofiber'
+        className='group flex w-full flex-wrap items-center justify-center gap-x-1 bg-sky-800 p-3 text-center text-sm font-medium text-white transition-colors hover:text-neutral-200 sm:gap-x-2'
       >
-        <span className='mr-2'>
-          <span className='font-semibold'>NYHET:</span> Utekos TechDown™ - Vår
-          mest innovative modell noensinne.
+        <span className='flex items-center gap-x-1.5'>
+          {' '}
+          {/* Mindre gap her */}
+          <GiftIcon className='inline-block size-4 flex-shrink-0' />
+          <span className='max-sm:hidden'>
+            <span className='font-semibold'>FARSDAGSTILBUD:</span> Gi gaven som
+            varmer. Spar 300,-
+          </span>
+          <span className='sm:hidden'>
+            <span className='font-semibold'>FARSDAG:</span> Spar 300,-!
+          </span>
         </span>
-        <span className='font-bold'>Se lanseringstilbudet!</span>
-        <span> 🎉 </span>
-        <ArrowRightIcon className='ml-2 inline-block size-4 transition-transform group-hover:translate-x-1' />
+
+        <span className='flex items-center gap-1 font-bold underline group-hover:no-underline'>
+          Kjøp gaven her
+          <ArrowRightIcon className='inline-block size-4 transition-transform group-hover:translate-x-1' />
+        </span>
       </Link>
 
       <button

@@ -3,10 +3,8 @@ import { FarsdagProblemSolution } from './sections/FarsdagProblemSolution'
 import { FarsdagBenefits } from './sections/FarsdagBenefits'
 import { FarsdagWhyPerfect } from './sections/FarsdagWhyPerfect'
 import { FarsdagUrgencyCta } from './sections/FarsdagUrgencyCta'
-import { AllProductsCarousel } from '@/components/ProductCard/AllProductsCarousel'
-import { Suspense } from 'react'
+import { MicrofiberFathersDaySection } from '../../produkter/components/MicrofiberSection/MicrofiberFathersDaySection'
 import type { Metadata } from 'next'
-import { ProductCarousel } from '@/app/gaveguide/components/ProductCardCarousel'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Farsdagsgave: Gaven som varmer til pappaen som har alt | Utekos',
@@ -50,13 +48,9 @@ export default function FarsdagGaveguidePage() {
     <main className='flex flex-col items-center'>
       <FarsdagHero />
       <FarsdagProblemSolution />
+      <MicrofiberFathersDaySection />
       <FarsdagBenefits />
       <FarsdagWhyPerfect />
-      <section className='container md:max-w-7xl max-w-[95%] mx-auto py-12 lg:py-16 sm:py-16'>
-        <Suspense fallback={<ProductCarouselSkeleton />}>
-          <ProductCarousel />
-        </Suspense>
-      </section>
       <FarsdagUrgencyCta />
     </main>
   )
