@@ -1,6 +1,6 @@
 // Path: src/components/product/TrustSignals.tsx
 'use client'
-import { RotateCcw, Truck, ShieldCheck } from 'lucide-react'
+import { RotateCcw, Truck, ShieldCheck, Store } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { VippsLogo } from '@/components/logo/payments/VippsLogo'
@@ -114,11 +114,15 @@ export function TrustSignals() {
               Rask levering
             </span>
             <span className='text-xs text-slate-400 mt-0.5 block'>
-              2-5 virkedager
+              2–5 virkedager
+            </span>
+            {/* Ny linje: hent i butikk */}
+            <span className='mt-1 flex items-center gap-1.5 text-[11px] text-slate-300'>
+              <Store className='w-3.5 h-3.5 text-cyan-400' aria-hidden='true' />
+              Kan også hentes i butikk
             </span>
           </div>
         </Link>
-
         <Link
           href='/frakt-og-retur'
           className='flex items-center gap-3 px-5 py-3.5 hover:bg-slate-800/50 transition-colors border-b border-slate-800/50'
