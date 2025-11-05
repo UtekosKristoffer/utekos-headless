@@ -31,10 +31,6 @@ export function FarsdagUrgencyCta() {
             <GiftIcon className='h-5 w-5 transition-transform group-hover:scale-125' />
           </Link>
         </div>
-
-        <p className='mt-8 text-sm text-article-white/80'>
-          ✓ Gratis frakt over 999,- · ✓ Enkel retur · ✓ Hyggelig kundeservice
-        </p>
       </div>
     </section>
   )

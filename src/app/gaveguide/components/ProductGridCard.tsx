@@ -1,7 +1,6 @@
 'use client'
 
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
@@ -106,25 +105,7 @@ export function ProductGridCard({
           : <ProductCardSoldOut />}
         </div>
 
-        <div className='absolute left-3 top-3'>
-          <Badge
-            variant='secondary'
-            className='border border-muted-foreground bg-[#020244] px-3 py-1 text-xs font-medium tracking-wide text-white'
-          >
-            UNISEX
-          </Badge>
-        </div>
-
-        {product.handle === 'utekos-dun' && (
-          <div className='absolute right-3 top-3'>
-            <Badge
-              variant='destructive'
-              className='px-3 py-1 text-xs font-medium uppercase tracking-wide'
-            >
-              Få igjen
-            </Badge>
-          </div>
-        )}
+        <div className='absolute left-3 top-3'></div>
       </div>
 
       <CardContent className='flex-grow p-0 pt-4'>
