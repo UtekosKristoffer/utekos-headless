@@ -3,13 +3,8 @@ import { NextResponse } from 'next/server'
 import { cacheLife } from 'next/cache'
 import { getProductsForFeed } from '@/lib/shopify/feed'
 
-// export const revalidate = 3600; // FJERNET: Ikke kompatibel med cacheComponents
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.dittdomene.no'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.utekos.no'
 const COUNTRY_CODE = 'NO'
-
-// Antar at getProductsForFeed returnerer denne typen
-// Juster denne om nødvendig for å matche TransformedProductNode
 type ProductFeedItem = {
   id: string
   handle: string
@@ -70,8 +65,6 @@ export async function GET() {
       status: 200,
       headers: {
         'Content-Type': 'text/tab-separated-values; charset=utf-8',
-        // Denne Cache-Control-headeren er fin å ha,
-        // men cacheLife styrer Next.js-cachen.
         'Cache-Control': 's-maxage=3600, stale-while-revalidate'
       }
     })
