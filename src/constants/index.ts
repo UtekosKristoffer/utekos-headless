@@ -1,3 +1,0 @@
-export const SHOPIFY_ADMIN_ACCESS_TOKEN = 
-process.env.SHOPIFY_ADMIN_ACCESS_TOKEN!;
-

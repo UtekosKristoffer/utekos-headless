@@ -41,8 +41,6 @@ const GET_ALL_PRODUCTS_FOR_FEED_QUERY = `
   }
 `
 
-// 2. Definer typene for responsen (forenklet)
-// Disse bør matche typene i din 'route.ts'
 type VariantNode = {
   id: string
   title: string
