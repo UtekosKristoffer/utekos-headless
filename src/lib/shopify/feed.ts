@@ -106,7 +106,7 @@ async function shopifyAdminFetch<T extends Record<string, any>>(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Shopify-Access-Token': process.env.SHOPIFY_ADMIN_ACCESS_TOKEN!
+      'X-Shopify-Access-Token': process.env.SHOPIFY_ADMIN_API_TOKEN!
     },
     body: JSON.stringify({ query, variables }),
 
