@@ -8,8 +8,6 @@ const COUNTRY_CODE = 'NO'
 const CURRENCY = 'NOK'
 const BRAND_NAME = 'UteKos' // Sett ditt merkevarenavn
 
-// Et grovt eksempel på typen funksjonen din må returnere
-// Du må utvide denne basert på hva din Shopify-funksjon gir
 type ShopifyProduct = {
   id: string | number // f.eks. 'gid://shopify/Product/12345' ELLER 12345
   handle: string
