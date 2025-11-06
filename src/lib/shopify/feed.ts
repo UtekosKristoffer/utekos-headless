@@ -12,6 +12,7 @@ const GET_ALL_PRODUCTS_FOR_FEED_QUERY = `
           id
           handle
           title
+          totalInventory
           description
           productType
           featuredImage {
@@ -21,14 +22,12 @@ const GET_ALL_PRODUCTS_FOR_FEED_QUERY = `
             edges {
               node {
                 id
+                availableForSale
                 title
                 sku
                 barcode # Dette er GTIN
-                price {
-                  amount
-                  currencyCode
-                }
-                quantityAvailable
+                price 
+                inventoryQuantity
                 image {
                   url
                 }
