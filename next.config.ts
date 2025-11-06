@@ -161,6 +161,11 @@ const nextConfig: NextConfig = {
         source: '/pages/kundeservice',
         destination: '/kontaktskjema',
         permanent: true
+      },
+      {
+        source: '/https://kasse.utekos.no/products/utekos-dun?variant=42903234707704',
+        destination: '/produkter/utekos-dun',
+        permanent: true
       }
     ]
   }
