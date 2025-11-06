@@ -1,5 +1,4 @@
 'use server'
-import { SHOPIFY_STORE_DOMAIN } from 'src/constants'
 
 const GET_ALL_PRODUCTS_FOR_FEED_QUERY = `
   query getAllProductsForFeed($first: Int!, $after: String) {
@@ -98,7 +97,7 @@ type ShopifyResponse = {
   errors?: any[]
 }
 
-// 3. Lag en gjenbrukbar 'shopifyFetch' (hvis du ikke har en)
+const SHOPIFY_STORE_DOMAIN = process.env.SHOPIFY_STORE_DOMAIN!
 async function shopifyAdminFetch<T extends Record<string, any>>(
   query: string,
   variables: Record<string, any> = {}
