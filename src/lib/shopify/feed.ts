@@ -163,11 +163,7 @@ export async function getProductsForFeed(): Promise<TransformedProductNode[]> {
     )
   }
 
-  console.log(`Total
-t antall produkter hentet: ${allProducts.length}`)
-
-  // Nå må vi transformere variantene til en flatere struktur
-  // som 'route.ts' forventer
+  console.log(`Totalt antall produkter hentet: ${allProducts.length}`)
   return allProducts.map(product => ({
     ...product,
     variants: product.variants.edges.map(edge => edge.node)
