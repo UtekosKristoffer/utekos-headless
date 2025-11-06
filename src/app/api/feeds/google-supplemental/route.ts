@@ -3,7 +3,7 @@ import { getProductsForFeed } from '@/lib/shopify/feed'
 
 export const revalidate = 3600 // Cache i 1 time (juster etter behov)
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.utekos.no'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 const COUNTRY_CODE = 'NO'
 const CURRENCY = 'NOK'
 const BRAND_NAME = 'UteKos' // Sett ditt merkevarenavn

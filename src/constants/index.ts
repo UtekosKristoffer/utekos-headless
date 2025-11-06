@@ -1,3 +1,2 @@
-export const SHOPIFY_ADMIN_ACCESS_TOKEN =
-  process.env.SHOPIFY_ADMIN_ACCESS_TOKEN!
+
 export const SHOPIFY_STORE_DOMAIN = process.env.SHOPIFY_STORE_DOMAIN!

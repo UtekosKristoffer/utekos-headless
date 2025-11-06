@@ -1,5 +1,5 @@
 'use server'
-import { SHOPIFY_STORE_DOMAIN, SHOPIFY_ADMIN_ACCESS_TOKEN } from 'src/constants'
+import { SHOPIFY_STORE_DOMAIN } from 'src/constants'
 
 const GET_ALL_PRODUCTS_FOR_FEED_QUERY = `
   query getAllProductsForFeed($first: Int!, $after: String) {
@@ -109,7 +109,7 @@ async function shopifyAdminFetch<T extends Record<string, any>>(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Shopify-Access-Token': SHOPIFY_ADMIN_ACCESS_TOKEN
+      'X-Shopify-Access-Token': process.env.SHOPIFY_ADMIN_ACCESS_TOKEN!
     },
     body: JSON.stringify({ query, variables }),
     cache: 'no-store' // Viktig for ferske data i en feed
