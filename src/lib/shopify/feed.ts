@@ -109,7 +109,8 @@ async function shopifyAdminFetch<T extends Record<string, any>>(
       'X-Shopify-Access-Token': process.env.SHOPIFY_ADMIN_ACCESS_TOKEN!
     },
     body: JSON.stringify({ query, variables }),
-    cache: 'no-store' // Viktig for ferske data i en feed
+
+    next: { revalidate: 3600 }
   })
 
   if (!response.ok) {
