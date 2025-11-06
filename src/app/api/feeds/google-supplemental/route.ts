@@ -3,8 +3,14 @@ import { NextResponse } from 'next/server'
 import { cacheLife } from 'next/cache'
 import { getProductsForFeed } from '@/lib/shopify/feed'
 
+// FORTSETTER Å BRUKE cacheLife, MEN STOPPER PRERENDERING:
+export const dynamic = 'force-dynamic'
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.utekos.no'
 const COUNTRY_CODE = 'NO'
+
+// Antar at getProductsForFeed returnerer denne typen
+// Juster denne om nødvendig for å matche TransformedProductNode
 type ProductFeedItem = {
   id: string
   handle: string
@@ -20,7 +26,7 @@ function getNumericId(gid: string): string {
 }
 
 export async function GET() {
-  // LAGT TIL: Setter cache-tiden ved hjelp av den nye metoden
+  // Setter cache-tiden som før
   cacheLife('hours')
 
   try {
@@ -69,7 +75,19 @@ export async function GET() {
       }
     })
   } catch (error) {
+    let errorMessage = 'Intern serverfeil'
+    if (error instanceof Error) {
+      errorMessage = error.message
+    } else if (typeof error === 'string') {
+      errorMessage = error
+    }
     console.error('Feil ved generering av Google Supplemental Feed:', error)
-    return new NextResponse('Intern serverfeil', { status: 500 })
+    // Returner feilen som en plain object (JSON) for å unngå serialiseringsfeil
+    return new NextResponse(JSON.stringify({ error: errorMessage }), {
+      status: 500,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
   }
 }
