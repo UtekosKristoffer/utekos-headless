@@ -24,7 +24,7 @@ export function CustomNode({
           </div>
           <h3 className='text-base md:text-lg font-semibold'>{data.label}</h3>
         </div>
-        <p className='text-sm md:text-[20px] md:w-full leading-relaxed text-muted-foreground'>
+        <p className='text-sm md:text-[20px] md:w-full leading-relaxed text-article-white/80'>
           {data.description}
         </p>
       </div>

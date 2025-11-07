@@ -11,7 +11,7 @@ export const SystemerSection = () => {
       <h2 className='text-3xl font-bold mt-16 mb-4 border-b border-neutral-800 pb-2'>
         Systemer: Den kritiske nedstengningen
       </h2>
-      <p className='text-lg text-muted-foreground mb-8'>
+      <p className='text-lg text-article-white/80 mb-8'>
         Dette er den tekniske, men absolutt viktigste delen av
         vinterklargjøringen. Feil her kan føre til de dyreste skadene, så ta deg
         god tid og vær systematisk.
@@ -28,11 +28,11 @@ export const SystemerSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white/80'>
         Frostsprengte rør er enhver hytteeiers mareritt. For å unngå dette, må
         alt vann ut av systemet.
       </p>
-      <ul className='list-disc list-inside space-y-2 my-4 text-lg text-muted-primary-foreground'>
+      <ul className='list-disc list-inside space-y-2 my-4 text-lg text-article-white/80'>
         <li>
           <strong>Steng hovedkranen:</strong> Finn hovedstoppekranen for vann
           inn til hytten og steng den helt.
@@ -67,7 +67,7 @@ export const SystemerSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white/80'>
         Reduser brannfare og strømregning med noen enkle grep. Dra ut
         stikkontakten på alle apparater som ikke må ha strøm: TV, kaffetrakter,
         lamper og ladere. Hvis du har mulighet, sett på en lav vedlikeholdsvarme
@@ -86,7 +86,7 @@ export const SystemerSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white/80'>
         Dette er "livsnyterens" siste, og kanskje viktigste, punkt. Etter at alt
         det praktiske er gjort, handler det om å legge til rette for fremtidig
         kos. Tenk på følelsen av å ankomme en iskald hytte midtvinters. I stedet

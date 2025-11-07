@@ -27,8 +27,8 @@ export function MobileFlow() {
               className={cn(
                 'rounded-full px-4 py-2 text-sm font-semibold transition-colors',
                 activeCategory === category ?
-                  'bg-primary text-primary-foreground'
-                : 'bg-muted text-muted-foreground'
+                  'bg-primary text-article-white/80'
+                : 'bg-muted text-article-white/80'
               )}
             >
               {category}

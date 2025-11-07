@@ -12,7 +12,7 @@ export const UteSection = () => {
       <h2 className='text-3xl font-bold mt-16 mb-4 border-b border-neutral-800 pb-2'>
         Ute: Første forsvarslinje mot elementene
       </h2>
-      <p className='text-lg text-muted-foreground mb-8'>
+      <p className='text-lg text-article-white/80 mb-8'>
         Det første du gjør ute legger grunnlaget for en trygg vinter for hytten.
         Vær og vind er krefter man må ha respekt for, og en liten innsats her
         beskytter din investering i fritid og kos.
@@ -29,7 +29,7 @@ export const UteSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white/80'>
         Før vinteren setter inn, ta en grundig sjekk av hyttens tak. En liten
         innsats her kan spare deg for tusenvis av kroner i reparasjoner. Rensk
         takrenner for løv, barnåler og rusk. Tette takrenner kan føre til at
@@ -51,13 +51,13 @@ export const UteSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white/80'>
         Vann som fryser utvider seg med en enorm kraft. En gjenglemt hageslange
         eller en utekran som ikke er tømt, kan føre til frostsprengning som ikke
         bare ødelegger utstyret, men også kan føre til alvorlige vannskader inne
         i veggen når våren kommer. Slik gjør du det riktig:
       </p>
-      <ul className='list-disc list-inside space-y-2 my-4 text-lg text-muted-foreground'>
+      <ul className='list-disc list-inside space-y-2 my-4 text-lg text-article-white/80'>
         <li>Koble fra alle hageslanger.</li>
         <li>
           Tøm slangene helt for vann og lagre dem innendørs eller i en bod.
@@ -82,7 +82,7 @@ export const UteSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white/80'>
         Høstvinden og vinterens fuktighet sliter hardt på alt som står ute. Ved
         å beskytte utemøblene forlenger du levetiden betraktelig og sikrer at de
         er like fine til neste sesong. Start med å ta inn alt av puter, pledd og
@@ -98,7 +98,7 @@ export const UteSection = () => {
           <Sparkles className='h-5 w-5 text-yellow-400 flex-shrink-0' />{' '}
           Livsnyter-tipset:
         </h4>
-        <p className='text-muted-foreground !my-0 text-base'>
+        <p className='text-article-white/80 !my-0 text-base'>
           Samle alle putene i store plastsekker og legg en duftpose (f.eks.
           lavendel) i hver sekk. Da unngår du “kjellerlukt” og blir møtt av en
           frisk og herlig duft når du pakker dem ut til våren!

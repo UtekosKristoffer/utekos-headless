@@ -12,7 +12,7 @@ export const InneSection = () => {
       <h2 className='text-3xl font-bold mt-16 mb-4 border-b border-neutral-800 pb-2'>
         Inne: Sikre verdiene og unngå overraskelser
       </h2>
-      <p className='text-lg text-muted-foreground mb-8'>
+      <p className='text-lg text-article-white/80 mb-8'>
         Når utsiden er sikret, er det på tide å vende blikket innover. Målet her
         er å sørge for at hytten er like frisk og innbydende når du kommer
         tilbake, og at du unngår ubehagelige overraskelser som skadedyr eller
@@ -30,7 +30,7 @@ export const InneSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white/80'>
         En tom og stille hytte er en drøm for mus og andre smågnagere. De er
         ikke bare til sjenanse; de kan gnage på ledninger, møbler og etterlate
         seg ekskrementer. Den viktigste jobben er å fjerne alt av mat. Tøm alle
@@ -44,7 +44,7 @@ export const InneSection = () => {
           <Sparkles className='h-5 w-5 text-yellow-400 flex-shrink-0' />{' '}
           Profftipset:
         </h4>
-        <p className='text-muted-foreground !my-0 text-base'>
+        <p className='text-article-white/80 !my-0 text-base'>
           Mus hater å gnage på stål. Kjøp en pakke med stålull og dytt små biter
           inn i alle sprekker og hull du finner. Det er en billig og ekstremt
           effektiv barriere.
@@ -62,7 +62,7 @@ export const InneSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white/80'>
         Et avslått kjøleskap med lukket dør er en garantert oppskrift på en
         katastrofal ankomst til våren. Tøm kjøleskapet fullstendig – inkludert
         den "evigvarende" ketchupflasken og sennepen. Vask grundig over alle
@@ -84,7 +84,7 @@ export const InneSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white/80'>
         Fuktig og rå høstluft kan trenge inn overalt og skape jordslag i
         sengetøy, puter og håndklær. Den beste løsningen er å pakke alt av
         tekstiler i tette plastkasser eller, enda bedre, vakuumpakking-poser.
