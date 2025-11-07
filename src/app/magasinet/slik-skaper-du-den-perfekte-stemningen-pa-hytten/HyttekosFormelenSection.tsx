@@ -19,7 +19,7 @@ export const HyttekosFormelenSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white/80'>
         God belysning på hytten handler om å fjerne mørket, ikke å eliminere
         det. Glem det sterke, kalde taklyset. Målet er å skape lune soner og et
         mykt, innbydende lys. Tenk i lag: en leselampe ved godstolen, noen
@@ -32,7 +32,7 @@ export const HyttekosFormelenSection = () => {
           <Sparkles className='h-5 w-5 text-yellow-400 flex-shrink-0' />{' '}
           Livsnyter-tipset:
         </h4>
-        <p className='text-muted-foreground !my-0 text-base'>
+        <p className='text-article-white/80 !my-0 text-base'>
           Bruk stearinlys med en diskret duft av skog eller tjære for å
           engasjere enda en sans og forsterke den lune stemningen.
         </p>
@@ -49,7 +49,7 @@ export const HyttekosFormelenSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white/80'>
         Den dype, altoppslukende stillheten på fjellet eller ved sjøen er en
         luksus i seg selv. Men den perfekte lydkulissen kan også være den
         knitrende lyden fra peisen. Dette er hyttens hjerterytme. Unngå å
@@ -81,7 +81,7 @@ export const HyttekosFormelenSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white/80'>
         Hyttekos er en taktil opplevelse. Det handler om kontrastene sansene
         dine møter. Den grove treveggen mot et mykt saueskinn i sofaen. Et tykt,
         tungt ullpledd over et glatt laken. Den varme, rustikke keramikkoppen i
@@ -93,7 +93,7 @@ export const HyttekosFormelenSection = () => {
           <Sparkles className='h-5 w-5 text-yellow-400 flex-shrink-0' />{' '}
           Livsnyter-tipset:
         </h4>
-        <p className='text-muted-foreground !my-0 text-base'>
+        <p className='text-article-white/80 !my-0 text-base'>
           Ha en stor, flettet kurv stående ved peisen, fylt med et utvalg av
           pledd og tykke ullsokker. Det er en innbydende gest som inviterer alle
           til å finne roen og varmen.
@@ -109,7 +109,7 @@ export const HyttekosFormelenSection = () => {
           placeholder='blur'
         />
       </figure>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white/80'>
         Peisvarmen er det udiskutable hjertet i enhver hytte. Men den virkelige
         luksusen oppstår når du kan ta med deg den komfortable varmen videre.
         Enten du skal ut på terrassen for å se på stjernene, eller bare vil
@@ -122,7 +122,7 @@ export const HyttekosFormelenSection = () => {
           <Sparkles className='h-5 w-5 text-yellow-400 flex-shrink-0' />{' '}
           Livsnyter-tipset:
         </h4>
-        <p className='text-muted-foreground !my-0 text-base'>
+        <p className='text-article-white/80 !my-0 text-base'>
           La en Utekos henge klar i gangen. Når du kommer frem til en kald
           hytte, er den det første du tar på deg. Slik starter du kosen
           umiddelbart.

@@ -59,19 +59,19 @@ export const HyttekosArticle = () => {
             className='rounded-lg'
             priority
           />
-          <figcaption className='text-center text-sm text-access/70 mt-2'>
+          <figcaption className='text-center text-sm text-article-white mt-2'>
             Den etterlengtede roen senker seg på hytten.
           </figcaption>
         </figure>
       </Activity>
 
       <Activity>
-        <p className='text-lg text-access/70'>
+        <p className='text-lg text-article-white/80'>
           Ordet &quot;hyttekos&quot; er nesten hellig for oss nordmenn. Det
           fremkaller bilder av snødekte landskap, knitrende peisbål og en dyp
           følelse av ro. Men hva er det egentlig som skaper denne magiske
-          stemningen? Det er en nøye balansert formel av fire elementer som jobber
-          sammen for å påvirke sansene våre.
+          stemningen? Det er en nøye balansert formel av fire elementer som
+          jobber sammen for å påvirke sansene våre.
         </p>
       </Activity>
 
@@ -82,9 +82,10 @@ export const HyttekosArticle = () => {
         </h2>
         <Card className='bg-sidebar-foreground border-neutral-800 my-8'>
           <CardContent className='p-6'>
-            <p className='text-access/70 mt-0'>
-              Den perfekte hyttestemningen er en sum av fire deler. Når du bevisst
-              jobber med alle fire, løfter du opplevelsen til et nytt nivå:
+            <p className='text-article-white/80 mt-0'>
+              Den perfekte hyttestemningen er en sum av fire deler. Når du
+              bevisst jobber med alle fire, løfter du opplevelsen til et nytt
+              nivå:
             </p>
             <div className='mt-6'>
               <HyttekosFlow />
@@ -106,9 +107,9 @@ export const HyttekosArticle = () => {
         <Card className='my-12 text-center bg-gradient-to-br from-primary/20 to-transparent border-neutral-800'>
           <CardContent className='p-8'>
             <h3 className='text-2xl font-bold mt-0'>Forleng peisvarmen</h3>
-            <p className='text-access/70 mt-2 mb-6'>
-              Utekos er designet for å være din personlige komfortsone, slik at du
-              kan nyte de magiske øyeblikkene på hytten – både inne og ute.
+            <p className='text-article-white/80 mt-2 mb-6'>
+              Utekos er designet for å være din personlige komfortsone, slik at
+              du kan nyte de magiske øyeblikkene på hytten – både inne og ute.
             </p>
             <Button asChild>
               <Link href='/produkter'>
@@ -140,11 +141,11 @@ export const HyttekosArticle = () => {
               <Sparkles className='h-6 w-6 text-yellow-400' />
               Konklusjon: Mestring av kunsten
             </h3>
-            <p className='text-access/70 mt-4'>
-              Ved å bevisst tenke på samspillet mellom lys, lyd, tekstur og varme,
-              går du fra å bare være på hytten, til å aktivt skape den dype,
-              meningsfulle roen som er ekte hyttekos. Det er en kunst, men en
-              kunst alle kan mestre.
+            <p className='text-article-white/80 mt-4'>
+              Ved å bevisst tenke på samspillet mellom lys, lyd, tekstur og
+              varme, går du fra å bare være på hytten, til å aktivt skape den
+              dype, meningsfulle roen som er ekte hyttekos. Det er en kunst, men
+              en kunst alle kan mestre.
             </p>
           </CardContent>
         </Card>

@@ -44,7 +44,7 @@ export function HyttekosElementsGrid({
                   </div>
                 </div>
                 <h3 className='mb-2 text-xl font-semibold'>{element.title}</h3>
-                <p className='text-muted-foreground'>{element.description}</p>
+                <p className='text-article-white/80'>{element.description}</p>
               </CardContent>
             </Card>
           </AnimatedBlock>

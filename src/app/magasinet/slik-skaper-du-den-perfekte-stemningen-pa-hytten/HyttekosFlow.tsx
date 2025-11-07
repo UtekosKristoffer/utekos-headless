@@ -79,7 +79,7 @@ export default function HyttekosFlow() {
                   </div>
                   <h3 className='text-base font-semibold'>{node.data.label}</h3>
                 </div>
-                <p className='text-sm leading-relaxed text-muted-foreground'>
+                <p className='text-sm leading-relaxed text-article-white/80'>
                   {node.data.description}
                 </p>
               </div>
@@ -197,7 +197,7 @@ export default function HyttekosFlow() {
                     </div>
                     <h3 className='text-sm font-semibold'>{node.data.label}</h3>
                   </div>
-                  <p className='text-xs leading-relaxed text-muted-foreground'>
+                  <p className='text-xs leading-relaxed text-article-white/80'>
                     {node.data.description}
                   </p>
                 </div>

@@ -1,9 +1,5 @@
 import { NextResponse } from 'next/server'
-// FJERNET: 'use cache'
-// FJERNET: cacheLife
 import { getProductsForFeed } from '@/lib/shopify/feed'
-
-// FJERNET: export const dynamic = 'force-dynamic'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.utekos.no'
 const COUNTRY_CODE = 'NO'
