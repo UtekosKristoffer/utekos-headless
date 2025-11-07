@@ -33,7 +33,7 @@ export const VinterklargjoringArticle = () => {
       </Activity>
 
       <Activity>
-        <p className='text-lg text-muted-foreground'>
+        <p className='text-lg text-article-white/80'>
           For en livsnyter handler vinterklargjøring om mer enn bare vedlikehold
           – det handler om forberedelse til fremtidig kos. En grundig jobb nå
           betyr en problemfri og umiddelbart hyggelig ankomst når skisesongen
@@ -57,7 +57,7 @@ export const VinterklargjoringArticle = () => {
         <SystemerSection />
       </Activity>
       <Activity>
-        <p className='text-lg text-muted-foreground mt-8'>
+        <p className='text-lg text-article-white/80 mt-8'>
           Ved å systematisk gå gjennom disse punktene, kan du forlate hytten med
           senkede skuldre, vel vitende om at du har gjort alt du kan for å
           beskytte din investering i fritid og livskvalitet. Den viktigste delen
@@ -73,7 +73,7 @@ export const VinterklargjoringArticle = () => {
             <h3 className='text-2xl font-bold mt-0'>
               Gjør ankomsten til en glede
             </h3>
-            <p className='text-muted-foreground mt-2 mb-6'>
+            <p className='text-article-white/80 mt-2 mb-6'>
               Legg igjen en Utekos på hytten. Det er din garanti for
               øyeblikkelig komfort og varme, lenge før peisen har rukket å gjøre
               jobben sin. Start hyttekosen i det du går inn døren.
