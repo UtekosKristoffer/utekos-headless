@@ -14,7 +14,6 @@ import { Activity } from 'react'
 
 export const VinterklargjoringArticle = () => {
   return (
-    // Fjern prose-klassene, siden vi nå styler manuelt
     <article className='md:max-w-4xl mx-auto'>
       <Activity>
         <figure className='!my-12'>

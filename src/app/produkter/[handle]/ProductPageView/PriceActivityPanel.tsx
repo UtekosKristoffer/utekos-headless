@@ -1,7 +1,7 @@
 'use client'
 
 import { Price } from '@/components/jsx/Price'
-import { ShieldAlert, Gift } from 'lucide-react'
+import { ShieldAlert } from 'lucide-react'
 import type { ReactNode } from 'react'
 
 export interface PriceActivityPanelProps {
@@ -33,27 +33,9 @@ export default function PriceActivityPanel({
 
   const launchOffer = LAUNCH_OFFERS[productHandle as keyof typeof LAUNCH_OFFERS]
   const hasLaunchOffer = !!launchOffer
-  const isFarsdagOffer = productHandle === 'utekos-mikrofiber'
-  const hasSpecialOffer = hasLaunchOffer || isFarsdagOffer
 
   return (
     <section aria-label='Pris og tilgjengelighet' className='space-y-4'>
-      {isFarsdagOffer && (
-        <div className='inline-flex flex-wrap items-center gap-x-2.5 gap-y-1 rounded-full bg-gradient-to-r from-sky-500/20 via-blue-500/20 to-indigo-500/20 px-4 py-2 ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:ring-white/20'>
-          <Gift className='h-4 w-4 flex-shrink-0 text-sky-400' />
-          <span className='text-sm font-semibold text-white'>
-            Farsdagstilbud
-          </span>
-          <div className='hidden h-4 w-px bg-white/20 sm:block' />
-          <span className='text-sm font-bold text-sky-400'>
-            Spar 300,- med koden
-            <code className='ml-1.5 rounded bg-sky-900/50 px-1.5 py-0.5 font-mono'>
-              FARSDAG25
-            </code>
-          </span>
-        </div>
-      )}
-
       {hasLaunchOffer && (
         <div className='inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-blue-500/20 px-4 py-2 ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:ring-white/20'>
           <div className='relative flex h-2 w-2'>
@@ -73,7 +55,7 @@ export default function PriceActivityPanel({
       )}
 
       <div className='flex items-baseline gap-3'>
-        {hasSpecialOffer ?
+        {hasLaunchOffer ?
           <div className='bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent'>
             <Price amount={priceAmount} currencyCode={currencyCode} />
           </div>
@@ -86,15 +68,7 @@ export default function PriceActivityPanel({
         </p>
       )}
 
-      {isFarsdagOffer && (
-        <p className='text-sm text-muted-foreground'>
-          Du kan bruke rabattkoden{' '}
-          <code className='font-mono text-xs'>FARSDAG25</code> i kassen for å få
-          300kr i avslag. Kan hentes i butikk.
-        </p>
-      )}
-
-      {shouldShowLimitedStockNotice && (
+      {isSpecialEdition && shouldShowLimitedStockNotice && (
         <div className='relative overflow-hidden rounded-lg border border-amber-400/30 bg-amber-900/10 p-4'>
           <div
             className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-20 blur-2xl'
@@ -112,19 +86,12 @@ export default function PriceActivityPanel({
               />
             </div>
             <div>
-              {isSpecialEdition ?
-                <>
-                  <p className='font-semibold text-amber-400'>
-                    Kun {limitedStockCount} igjen på lager!
-                  </p>
-                  <p className='text-sm text-amber-400/80'>
-                    Unik utgave - kommer ikke tilbake
-                  </p>
-                </>
-              : <p className='font-semibold text-amber-400'>
-                  Få igjen på lager!
-                </p>
-              }
+              <p className='font-semibold text-amber-400'>
+                Kun {limitedStockCount} igjen på lager!
+              </p>
+              <p className='text-sm text-amber-400/80'>
+                Unik utgave - kommer ikke tilbake
+              </p>
             </div>
           </div>
         </div>
