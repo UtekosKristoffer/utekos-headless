@@ -58,7 +58,7 @@ export default function AnnouncementBanner() {
       >
         <span className='mr-2'>
           <span className='font-semibold'>NYHET:</span> Utekos TechDown™ - Vår
-          varmeste og mest allsidige modell noensinne.
+          varmeste og mest allsidige modell.
         </span>
         <span className='font-bold'>Se lanseringstilbudet!</span>
         <span> 🎉 </span>
