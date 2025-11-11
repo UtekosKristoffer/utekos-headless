@@ -10,15 +10,6 @@ import type {
   UpdateCartLineInput
 } from '@types'
 
-/**
- * Updates a cart line's quantity using the modern shopifyFetch client.
- * This function follows the "throw on failure" error handling pattern.
- *
- * @param cartId - The identifier of the cart.
- * @param input - The line identifier and the desired quantity.
- * @returns The updated cart on success.
- * @throws {ShopifyApiError} When API errors occur during the mutation.
- */
 export const performCartLinesUpdateMutation = async (
   cartId: string,
   input: UpdateCartLineInput

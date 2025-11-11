@@ -14,10 +14,6 @@ import type {
   CartResponse
 } from '@types'
 
-/**
- * Orchestrates the process of adding a line item to a cart.
- * Now awaits async server validation to match Next 15 Server Functions.
- */
 export const addCartLinesAction = async (
   input: AddToCartFormValues
 ): Promise<CartActionsResult> => {

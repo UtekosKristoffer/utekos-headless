@@ -9,13 +9,6 @@ import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import { validateRemoveCartLineInput } from '@/lib/helpers/validations/validateRemoveCartLineInput'
 import type { CartActionsResult, RemoveCartLineInput } from '@types'
 
-/**
- * Orchestrates removing a single line item from the cart.
- * This server action follows the Single Responsibility and Step-down principles.
- *
- * @param input - An object containing the identifier of the line to remove.
- * @returns The result of the cart operation.
- */
 export const removeCartLineAction = async (
   input: RemoveCartLineInput
 ): Promise<CartActionsResult> => {

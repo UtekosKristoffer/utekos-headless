@@ -9,14 +9,6 @@ import type {
   ShopifyUpdateCartLineQuantityOperation
 } from '@types'
 
-/**
- * Executes a clear-cart mutation using the modern shopifyFetch client.
- * This function follows the "throw on failure" error handling pattern.
- *
- * @param cartId - The identifier of the cart to clear.
- * @returns The updated (empty) cart on success.
- * @throws {ShopifyApiError} When API errors occur during the mutation.
- */
 export const performCartClearMutation = async (
   cartId: string
 ): Promise<CartResponse | null> => {

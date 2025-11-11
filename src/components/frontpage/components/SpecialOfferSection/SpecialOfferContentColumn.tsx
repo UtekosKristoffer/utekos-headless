@@ -7,7 +7,6 @@ import { BenefitCard } from './BenefitCard'
 import { useInView } from '@/hooks/useInView'
 import { cn } from '@/lib/utils/className'
 
-// Hardkodet data som er spesifikk for dette tilbudet
 const benefits = [
   {
     label: '-53% rabatt',

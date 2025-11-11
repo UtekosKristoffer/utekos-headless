@@ -9,12 +9,6 @@ import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import { validateClearCartInput } from '@/lib/helpers/validations/validateClearCartInput'
 import type { CartActionsResult } from '@types'
 
-/**
- * Orchestrates clearing the current cart of all items.
- * This server action follows the Single Responsibility and Step-down principles.
- *
- * @returns A promise that resolves to a normalized action result.
- */
 export const clearCartAction = async (): Promise<CartActionsResult> => {
   try {
     await validateClearCartInput({})

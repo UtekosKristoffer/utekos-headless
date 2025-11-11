@@ -9,13 +9,6 @@ import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import { validateUpdateLineInput } from '@/lib/helpers/validations/validateUpdateLineInput'
 import type { CartActionsResult, UpdateCartLineInput } from '@types'
 
-/**
- * Orchestrates updating the quantity of an existing line item in the cart.
- * This server action follows the Single Responsibility and Step-down principles.
- *
- * @param input - The line to update and the new quantity.
- * @returns The result of the cart operation.
- */
 export const updateCartLineQuantityAction = async (
   input: UpdateCartLineInput
 ): Promise<CartActionsResult> => {

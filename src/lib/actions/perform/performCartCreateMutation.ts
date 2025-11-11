@@ -9,14 +9,6 @@ import type {
   CartResponse,
   ShopifyCreateCartOperation
 } from '@types'
-
-/**
- * Performs cart creation mutation using the modern shopifyFetch client.
- *
- * @param input - The input containing the initial variant and quantity.
- * @returns The newly created cart on success.
- * @throws {ShopifyApiError} When API errors occur during the mutation.
- */
 export const performCartCreateMutation = async (
   input: AddToCartFormValues
 ): Promise<CartResponse | null> => {

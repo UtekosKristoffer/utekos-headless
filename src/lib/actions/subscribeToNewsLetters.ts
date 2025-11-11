@@ -11,9 +11,8 @@ export async function subscribeToNewsletter(
   prevState: ActionState,
   formData: FormData
 ): Promise<ActionState> {
-  const emailSchema = z
-    .string()
-    .email('Vennligst skriv inn en gyldig e-postadresse.')
+  const emailSchema = z.string()
+  z.email('Vennligst skriv inn en gyldig e-postadresse.')
 
   const result = emailSchema.safeParse(formData.get('email'))
 
