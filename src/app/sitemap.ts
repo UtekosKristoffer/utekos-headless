@@ -7,7 +7,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://utekos.no'
   const lastModifiedISO = new Date().toISOString() // Fallback dato
 
-  // Definer corePages, inspirationPages, utilityPages som før...
   const corePages: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}/`,

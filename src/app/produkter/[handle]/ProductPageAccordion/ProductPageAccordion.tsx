@@ -1,12 +1,7 @@
 // Path: src/app/produkter/[handle]/ProductPageView/components/ProductPageAccordion.tsx
 'use client'
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger
-} from '@/components/ui/accordion'
+import { Accordion } from '@/components/ui/accordion'
 import type { ProductPageAccordionProps } from '@types'
 import {
   Layers3,
@@ -18,94 +13,11 @@ import {
   Info,
   type LucideIcon
 } from 'lucide-react'
-import { renderMetafield } from './helpers/renderMetafield'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { Activity } from 'react'
-const colorHexByTextClass: Record<string, string> = {
-  'text-rose-500': '#F43F5E',
-  'text-cyan-400': '#22d3ee',
-  'text-amber-400': '#fbbf24',
-  'text-sky-400': '#38bdf8',
-  'text-violet-400': '#a78bfa',
-  'text-blue-400': '#60a5fa'
-}
-
-interface AccordionSectionData {
-  id: string
-  title: string
-  content?: string
-  Icon: LucideIcon
-  color: string
-}
-
-/** Hjelper som *utelater* `content` når verdi er null/undefined */
-function mapOptionalContent(
-  value: string | null | undefined
-): Partial<Pick<AccordionSectionData, 'content'>> {
-  return value != null ? { content: value } : {}
-}
-
-function AccordionContentRenderer({ content }: { content: string }) {
-  return (
-    <AccordionContent className='prose prose-invert relative z-10 max-w-none px-6 pb-6 text-base leading-relaxed text-foreground/80'>
-      {renderMetafield(content)}
-    </AccordionContent>
-  )
-}
-
-function ProductDetailsAccordionSection({
-  sectionData
-}: {
-  sectionData: AccordionSectionData
-}) {
-  const { id, title, content, Icon, color } = sectionData
-  const glowHexColor = colorHexByTextClass[color] ?? '#60a5fa'
-  const borderGlowStyle = {
-    boxShadow: `0 0 20px -5px ${glowHexColor}`
-  }
-
-  return (
-    <AccordionItem
-      value={id}
-      className='group relative mb-3 overflow-hidden rounded-lg border border-neutral-800 transition-all duration-200 hover:border-neutral-700'
-      style={{
-        contain: 'layout style paint'
-      }}
-    >
-      <div
-        className='pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-200 group-hover:opacity-10 group-data-[state=open]:opacity-10'
-        style={{
-          background: `linear-gradient(135deg, transparent 60%, ${glowHexColor}22 100%)`
-        }}
-      />
-
-      <AccordionTrigger className='relative z-10 px-6 py-4 text-access/70 transition-colors duration-200 hover:text-access data-[state=open]:text-foreground hover:no-underline'>
-        <div className='flex items-center gap-4'>
-          <div
-            className='flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-700 bg-background transition-transform duration-200 group-hover:scale-105'
-            style={{ transform: 'translateZ(0)' }}
-          >
-            <Icon
-              className={`h-5 w-5 shrink-0 transition-colors duration-200 ${color}`}
-              aria-hidden='true'
-            />
-          </div>
-          <span className='text-lg font-semibold'>{title}</span>
-        </div>
-      </AccordionTrigger>
-
-      {typeof content === 'string' && (
-        <AccordionContentRenderer content={content} />
-      )}
-
-      <div
-        className='pointer-events-none absolute inset-0 z-10 rounded-lg opacity-0 transition-opacity duration-200 group-hover:opacity-60 group-data-[state=open]:opacity-60'
-        style={borderGlowStyle}
-      />
-    </AccordionItem>
-  )
-}
-
+import type { AccordionSectionData } from '@types'
+import { mapOptionalContent } from './mapOptionalContent'
+import { ProductDetailsAccordionSection } from './ProductDetailsAccordionSection'
 export function ProductPageAccordion({
   variantProfile
 }: ProductPageAccordionProps) {

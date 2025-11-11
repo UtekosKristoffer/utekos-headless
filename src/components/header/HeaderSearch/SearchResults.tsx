@@ -1,15 +1,17 @@
-import type { SearchGroup, SearchItem } from '@types'
+// Path: src/components/header/HeaderSearch/SearchResults.tsx
+'use client'
+
 import { CommandGroup } from '@/components/ui/command'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { ItemRow } from './ItemRow'
+import { searchIndexQueryOptions } from './searchIndexQueryOption'
 
 export function SearchResults({
-  groups,
   onSelect
 }: {
-  groups: SearchGroup[] | null
   onSelect: (path: string) => void
 }) {
-  if (!groups) return null
+  const { data: groups } = useSuspenseQuery(searchIndexQueryOptions)
 
   return (
     <>

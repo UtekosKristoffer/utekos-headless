@@ -5,7 +5,6 @@ import { toast } from 'sonner'
 
 export default function WelcomeToast() {
   useEffect(() => {
-    // Ignore if screen height is too small
     if (window.innerHeight < 650) return
     if (!document.cookie.includes('welcome-toast=2')) {
       toast('🛍️ Velkommen til Utekos sin nettbutikk!', {

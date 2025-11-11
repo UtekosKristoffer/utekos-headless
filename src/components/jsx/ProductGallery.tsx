@@ -2,7 +2,6 @@
 
 'use client'
 
-import type { Image as GalleryImage } from '@types'
 import Image from 'next/image'
 import {
   Carousel,
@@ -11,11 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
-
-type ProductGalleryProps = {
-  title: string
-  images: GalleryImage[]
-}
+import type { ProductGalleryProps } from '@types'
 
 export function ProductGallery({ title, images }: ProductGalleryProps) {
   if (images.length === 0) {

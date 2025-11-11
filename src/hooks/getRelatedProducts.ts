@@ -1,5 +1,3 @@
-/*eslint-disable max-params*/
-
 import type { ShopifyProduct } from '@types'
 
 export function getRelatedProducts(

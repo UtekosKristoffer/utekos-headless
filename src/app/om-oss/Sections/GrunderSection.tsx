@@ -6,7 +6,6 @@ import { Quote } from 'lucide-react'
 export function GrunderSection() {
   return (
     <section className='relative overflow-hidden py-24 sm:py-32'>
-      {/* Ambient background glow */}
       <div className='absolute inset-0 -z-10 opacity-30'>
         <div
           className='absolute right-1/3 top-1/4 h-[500px] w-[500px] blur-3xl'
@@ -18,14 +17,12 @@ export function GrunderSection() {
 
       <div className='container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8'>
         <div className='grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16'>
-          {/* Founder Image - Smaller, more intimate */}
           <AnimatedBlock
             className='flex flex-col items-center will-animate-fade-in-scale lg:col-span-4 lg:items-start'
             delay='0s'
             threshold={0.5}
           >
             <div className='group relative'>
-              {/* Glow effect behind image */}
               <div
                 className='absolute -inset-2 opacity-20 blur-xl transition-opacity duration-500 group-hover:opacity-30'
                 style={{
@@ -56,8 +53,6 @@ export function GrunderSection() {
               <p className='mt-1 text-sm text-muted-foreground'>Utekos™</p>
             </AnimatedBlock>
           </AnimatedBlock>
-
-          {/* Content - Takes up more space */}
           <div className='flex flex-col justify-center lg:col-span-8'>
             <AnimatedBlock
               className='mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-sky-800/30 bg-sky-900/10 px-4 py-2 will-animate-fade-in-up'
@@ -79,7 +74,6 @@ export function GrunderSection() {
               </h2>
             </AnimatedBlock>
 
-            {/* --- SITATBOKSEN ER FLYTTET HIT MED NYTT INNHOLD --- */}
             <AnimatedBlock
               className='relative mb-8 overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/50 p-6 will-animate-fade-in-up'
               delay='0.3s'

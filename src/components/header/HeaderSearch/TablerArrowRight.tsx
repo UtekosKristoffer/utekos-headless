@@ -1,3 +1,5 @@
+// Path: src/components/header/HeaderSearch/TablerArrowRight.tsx
+
 export function TablerArrowRight(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg

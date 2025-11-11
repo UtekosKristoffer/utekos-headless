@@ -1,11 +1,6 @@
-// Path: src/components/OptionButton.tsx
+// Path: src/components/jsx/OptionButton.tsx
 
-import type { ReactNode } from 'react'
-type OptionButtonProps = {
-  isSelected: boolean
-  onClick: () => void
-  children: ReactNode
-}
+import type { OptionButtonProps } from '@types'
 
 export function OptionButton({
   isSelected,

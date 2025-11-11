@@ -5,19 +5,15 @@
 import { getProduct } from '@/api/lib/products/getProduct'
 import { FreeBuffSelector } from '@/components/products/FreeBuffSelector'
 import { Skeleton } from '@/components/ui/skeleton'
-import type { ShopifyProduct } from '@types'
 import { useEffect, useState, useEffectEvent } from 'react'
 import { Gift } from 'lucide-react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { Activity } from 'react'
-interface AdditionalLine {
-  variantId: string
-  quantity: number
-}
-
-interface TechDownLaunchOfferProps {
-  onAdditionalLineChange: (line: AdditionalLine | undefined) => void
-}
+import type {
+  AdditionalLine,
+  TechDownLaunchOfferProps,
+  ShopifyProduct
+} from '@types'
 
 export function TechDownLaunchOffer({
   onAdditionalLineChange

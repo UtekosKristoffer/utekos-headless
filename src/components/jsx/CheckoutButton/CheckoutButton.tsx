@@ -1,0 +1,95 @@
+// Path: src/components/ui/CheckoutButton.tsx
+'use client'
+
+import * as React from 'react'
+import { Button } from '@/components/ui/button'
+import type { CustomData, UserData } from '@types' // Assuming these exist
+import { getCheckoutAriaLabel } from './getCheckoutAriaLabel'
+import { getCookie } from './getCookie'
+import { sendJSON } from './sendJSON'
+import { generateEventID } from './generateEventID'
+export const CheckoutButton = ({
+  checkoutUrl,
+  subtotal,
+  isPending,
+  cartId,
+  className,
+  children,
+  ...props
+}: {
+  checkoutUrl: string
+  subtotal: string
+  isPending: boolean
+  cartId: string | null | undefined
+  className?: string
+  children?: React.ReactNode // Korrigert type
+} & Omit<
+  React.ComponentProps<typeof Button>,
+  'asChild' | 'disabled' | 'aria-label'
+>): React.JSX.Element => {
+  const onClick = (_e: React.MouseEvent<HTMLAnchorElement>) => {
+    console.log('Button Clicked!')
+    if (isPending) return
+    if (!cartId) {
+      console.error('CheckoutButton onClick: Missing cartId!')
+      return
+    }
+
+    try {
+      const fbp = getCookie('_fbp')
+      const fbc = getCookie('_fbc')
+      const ua =
+        typeof navigator !== 'undefined' ? navigator.userAgent : undefined
+      const sourceUrl =
+        typeof window !== 'undefined' ? window.location.href : undefined
+      const eventID = generateEventID().replace('evt_', 'ic_')
+      const captureBody = {
+        cartId: cartId,
+        checkoutUrl: checkoutUrl,
+        eventId: eventID,
+        userData: {} as UserData
+      }
+      if (fbp) captureBody.userData.fbp = fbp
+      if (fbc) captureBody.userData.fbc = fbc
+      if (ua) captureBody.userData.client_user_agent = ua
+
+      console.log('Sending to /api/checkout/capture-identifiers:', captureBody)
+      sendJSON('/api/checkout/capture-identifiers', captureBody)
+
+      if (typeof window.fbq === 'function') {
+        window.fbq('track', 'InitiateCheckout', {}, { eventID })
+      }
+
+      const capiPayload = {
+        eventName: 'InitiateCheckout',
+        eventId: eventID,
+        eventSourceUrl: sourceUrl,
+        eventData: {} as CustomData,
+        userData: {} as UserData
+      }
+      if (ua) capiPayload.userData!.client_user_agent = ua
+      sendJSON('/api/meta-events', capiPayload)
+    } catch (error) {
+      console.error('Feil under sending av checkout-events:', error)
+    }
+  }
+
+  return (
+    <Button
+      asChild
+      className={className}
+      disabled={isPending}
+      aria-label={getCheckoutAriaLabel(subtotal, isPending)}
+      {...props}
+    >
+      <a
+        href={checkoutUrl}
+        onClick={onClick}
+        aria-disabled={isPending}
+        rel='noopener noreferrer'
+      >
+        {children || (isPending ? 'Behandler...' : 'Gå til kassen')}
+      </a>
+    </Button>
+  )
+}

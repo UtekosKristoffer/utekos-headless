@@ -5,13 +5,8 @@ import type { Route } from 'next'
 import Link from 'next/link'
 
 async function getVideoUrl() {
-  // I en ekte applikasjon vil du hente denne fra Vercel Blob eller en annen tjeneste
-  // const { blobs } = await list({ prefix: 'TensorPix2.mp4', limit: 1 });
-  // return blobs[0].url;
-
-  // For demonstrasjon bruker vi en plassholder
   await new Promise(resolve => setTimeout(resolve, 1500)) // Simulerer nettverksforsinkelse
-  return '/videos/TensorPix2.mp4' // Sørg for at videoen ligger i /public/videos/
+  return '/videos/TensorPix2.mp4'
 }
 
 export async function ProductVideoSection() {
@@ -21,7 +16,6 @@ export async function ProductVideoSection() {
     <section className='bg-neutral-950 py-16 sm:py-24'>
       <div className='container mx-auto px-4'>
         <div className='grid grid-cols-1 items-center gap-x-12 gap-y-16 lg:grid-cols-2'>
-          {/* --- Videospiller --- */}
           <div className='mx-auto max-w-sm w-full'>
             <div className='rounded-3xl border-4 border-neutral-700 bg-black p-2 shadow-2xl shadow-cyan-500/10'>
               <div className='overflow-hidden rounded-[1.25rem]'>
@@ -41,7 +35,6 @@ export async function ProductVideoSection() {
             </div>
           </div>
 
-          {/* --- Tekstinnhold --- */}
           <div className='text-center lg:text-left'>
             <h2 className='text-3xl font-bold tracking-tight sm:text-4xl'>
               Slutt å fryse. Begynn å nyte.

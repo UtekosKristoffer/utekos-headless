@@ -1,7 +1,5 @@
 import { Sparkles } from 'lucide-react'
 import Image from 'next/image'
-
-// Importerer de nye bildene
 import LagdeltLysBilde from '@public/magasinet/lagdelt-lys.png'
 import PeisbalHjerterytmeBilde from '@public/magasinet/peisbal-hjerterytme.png'
 import FysiskKomfortBilde from '@public/magasinet/fysisk-komfort.png'

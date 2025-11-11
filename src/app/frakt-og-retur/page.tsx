@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Frakt og retur | Enkel og trygg handel hos Utekos',
   description:
-    'Vi tilbyr fri frakt på ordre over 999 kr og en enkel 14-dagers angrerett. Les våre fulle vilkår for en trygg og forutsigbar handleopplevelse.',
+    'Vi tilbyr fri frakt på ordre over 999 kr og en enkel 14-dagers fri retur. Les våre fulle vilkår for en trygg og forutsigbar handleopplevelse.',
   alternates: {
     canonical: '/frakt-og-retur'
   },
@@ -45,7 +45,6 @@ export default function ShippingAndReturnsPage() {
         </Activity>
         <div className='mx-auto mt-16 max-w-6xl lg:grid lg:grid-cols-12 lg:gap-12'>
           <Activity>
-            {' '}
             <ShippingReturnsInfo />
           </Activity>
           <Activity>

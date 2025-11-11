@@ -27,12 +27,12 @@ import ProductHeader from './ProductHeader'
 import ProductGalleryCard from './ProductGalleryCard'
 import PriceActivityPanel from './PriceActivityPanel'
 import { ProductDescription } from './ProductDescription'
-import { TrustSignals } from './TrustSignals'
+import { TrustSignals } from './TrustSignals/TrustSignals'
 import { TechDownLaunchOffer } from './TechDownLaunchOffer'
 
 const SmartRealTimeActivity = dynamic(
   () =>
-    import('@/app/produkter/components/SmartRealTimeActivity').then(
+    import('@/app/produkter/components/SmartRealTimeActivity/SmartRealTimeActivity').then(
       mod => mod.SmartRealTimeActivity
     ),
   {

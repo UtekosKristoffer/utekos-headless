@@ -5,48 +5,18 @@ import {
   CommandDialog,
   CommandEmpty,
   CommandInput,
-  CommandList,
-  CommandGroup
+  CommandList
 } from '@/components/ui/command'
 import { cn } from '@/lib/utils/className'
-import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
-import type { SearchGroup } from '@types'
+import { useQueryClient } from '@tanstack/react-query'
 import type { Route } from 'next'
 import { useRouter } from 'next/navigation'
 import { startTransition, useState, Suspense, useEffect } from 'react' // 1. Importer useEffect
 import { HeaderSearchFooter } from './HeaderSearchFooter'
 import { HeaderSearchInputField } from './HeaderSearchInputField'
 import { useCommandK } from './useCommandK'
-import { ItemRow } from './ItemRow'
-
-const searchIndexQueryOptions = {
-  queryKey: ['search-index'],
-  queryFn: async (): Promise<SearchGroup[]> => {
-    const response = await fetch('/api/search-index')
-    if (!response.ok) {
-      throw new Error(`Nettverksrespons var ikke ok: ${response.status}`)
-    }
-    const data = await response.json()
-    return data.groups as SearchGroup[]
-  },
-  staleTime: 1000 * 60 * 5 // 5 minutter
-}
-
-function SearchResults({ onSelect }: { onSelect: (path: string) => void }) {
-  const { data: groups } = useSuspenseQuery(searchIndexQueryOptions)
-
-  return (
-    <>
-      {groups.map(group => (
-        <CommandGroup key={group.key} heading={group.label}>
-          {group.items.map(item => (
-            <ItemRow key={item.id} item={item} depth={0} onSelect={onSelect} />
-          ))}
-        </CommandGroup>
-      ))}
-    </>
-  )
-}
+import { searchIndexQueryOptions } from './searchIndexQueryOption'
+import { SearchResults } from './SearchResults'
 
 export function HeaderSearch({ className }: { className?: string }) {
   const [open, setOpen] = useState(false)
@@ -91,7 +61,6 @@ export function HeaderSearch({ className }: { className?: string }) {
         <HeaderSearchInputField />
       </button>
 
-      {/* 4. Gjengi kun CommandDialog på klienten etter at den er "mounted" */}
       {isMounted && (
         <CommandDialog
           open={open}

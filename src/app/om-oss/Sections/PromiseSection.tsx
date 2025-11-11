@@ -1,6 +1,5 @@
 import { Handshake } from 'lucide-react'
 
-// Steg 1: Definer de ulike formene data kan ha
 type TitleNodeData = {
   label: string
 }
@@ -10,7 +9,6 @@ type TextNodeData = {
   color: string
 }
 
-// Steg 2: Definer de ulike nodetypene som en "diskriminert union"
 type PromiseNode =
   | {
       id: string
@@ -70,7 +68,6 @@ function TextNode({ data }: { data: { text: string; color: string } }) {
   )
 }
 
-// Steg 3: Bruk den nye union-typen på data-arrayet
 const nodes: PromiseNode[] = [
   {
     id: '1',
@@ -129,26 +126,13 @@ export function PromiseSection() {
       </div>
 
       <div className='container mx-auto max-w-7xl px-4'>
-        {/*
-         * ENDRING 1:
-         * Flexbox-egenskaper er fjernet. Containeren trenger kun å være 'relative'.
-         * Høyden er fortsatt responsiv for å se bra ut på alle skjermer.
-         */}
         <div className='relative h-[500px] w-full overflow-hidden rounded-2xl border border-neutral-800 bg-[hsl(0,0%,4%,1)] p-4 shadow-2xl md:h-[650px]'>
           <div className='absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-400/50 to-transparent' />
 
-          {/*
-           * ENDRING 2 (Kjernen i løsningen):
-           * Lerretet er nå absolutt posisjonert og tvunget til midten FØR det skaleres.
-           * - 'absolute top-1/2 left-1/2': Posisjonerer lerretets øvre venstre hjørne i midten.
-           * - '-translate-x-1/2 -translate-y-1/2': Drar lerretet tilbake med 50% av sin egen bredde og høyde, som gir perfekt sentrering.
-           * - Responsive 'scale-*'-klasser skalerer deretter det allerede sentrerte elementet.
-           */}
           <div
             className='absolute top-1/2 left-1/2 h-[520px] w-[620px] -translate-x-1/2 -translate-y-1/2 transition-transform duration-500 scale-[0.55] sm:scale-75 md:scale-100'
             style={{ transformOrigin: 'center center' }}
           >
-            {/* SVG for linjer */}
             <svg className='absolute inset-0 h-full w-full' aria-hidden='true'>
               <defs>
                 <filter id='glow' x='-50%' y='-50%' width='200%' height='200%'>
@@ -187,7 +171,6 @@ export function PromiseSection() {
               })}
             </svg>
 
-            {/* Noder */}
             {nodes.map(node => (
               <div
                 key={node.id}

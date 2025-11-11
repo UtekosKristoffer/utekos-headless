@@ -1,12 +1,5 @@
 // Path: types/index.ts
-export type { ProductPageAccordionProps } from '@/app/produkter/[handle]/ProductPageAccordion/types'
-export type { ProductControllerProps } from '@/app/produkter/[handle]/ProductPageController/types'
 export type { ProductPageViewProps } from '@/app/produkter/[handle]/ProductPageView/types'
-export type { ColorSelectorProps } from '@/components/jsx/ColorSelector/types'
-export type {
-  Dimension,
-  SizeSelectorProps
-} from '@/components/jsx/SizeSelector/types'
 export type * from './api.types'
 export type * from './cart.types'
 export type * from './chat.types'

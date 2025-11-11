@@ -1,4 +1,5 @@
 // Path: src/app/produkter/[handle]/RelatedProducts/RelatedProducts.tsx
+
 'use client'
 
 import { ProductCard } from '@/components/ProductCard/ProductCard'
@@ -18,7 +19,6 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
     return null
   }
 
-  // Initialiser produkter med unike farger
   const productOptionsMap = initializeCarouselProducts(products)
 
   return (

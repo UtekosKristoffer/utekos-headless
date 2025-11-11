@@ -1,5 +1,5 @@
-import { ColorSelector } from '@/components/jsx/ColorSelector/ColorSelector'
-import { SizeSelector } from '@/components/jsx/SizeSelector/SizeSelector'
+import { ColorSelector } from '@/components/jsx/ColorSelector'
+import { SizeSelector } from '@/components/jsx/SizeSelector'
 import type { JSX } from 'react'
 import type { RenderOptionComponentProps } from '@types'
 

@@ -1,6 +1,5 @@
 // Path: src/app/layout.tsx
 import './globals.css'
- // import { GoogleTagManager } from '@next/third-parties/google' // FJERNES
 import { geistSans, geistMono } from '@/db/config/font.config'
 import { mainMenu } from '@/db/config/menu.config'
 import { Analytics } from '@vercel/analytics/react'
@@ -131,14 +130,11 @@ async function CartProviderLoader({ children }: { children: ReactNode }) {
   )
 }
 export default function RootLayout({ children }: RootLayoutProps) {
-  // const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID // Trengs ikke her lenger
-
   return (
     <html lang='no'>
       <body
         className={`bg-background text-foreground ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* <GoogleTagManager gtmId='GTM-5TWMJQFP' /> */} {/* FJERNES */}
         <OrganizationJsonLd />
         <Suspense>
           <CartProviderLoader>
@@ -161,12 +157,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
         </Suspense>
         <Toaster closeButton />
         <Analytics mode='production' />
-        {/*
-        <Suspense fallback={null}>
-          <MetaPixelEvents />
-        </Suspense>
-        */}{' '}
-        {/* FJERNES */}
       </body>
     </html>
   )

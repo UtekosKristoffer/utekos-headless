@@ -3,11 +3,7 @@
 
 import { Button } from '@/components/ui/button'
 import { Minus, Plus } from 'lucide-react'
-
-interface QuantitySelectorProps {
-  value: number
-  onChange: (value: number) => void
-}
+import type { QuantitySelectorProps } from '@types'
 
 export function QuantitySelector({ value, onChange }: QuantitySelectorProps) {
   const handleDecrement = () => {

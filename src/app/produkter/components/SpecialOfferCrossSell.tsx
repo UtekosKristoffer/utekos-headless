@@ -3,10 +3,7 @@ import { SparklesIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import specialEditionImage from '@public/special/kate.jpg'
-
-interface SpecialOfferCrossSellProps {
-  currentProductHandle: string
-}
+import type { SpecialOfferCrossSellProps } from '@types'
 
 export function SpecialOfferCrossSell({
   currentProductHandle

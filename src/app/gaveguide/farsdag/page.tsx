@@ -3,7 +3,7 @@ import { FarsdagProblemSolution } from './sections/FarsdagProblemSolution'
 import { FarsdagBenefits } from './sections/FarsdagBenefits'
 import { FarsdagWhyPerfect } from './sections/FarsdagWhyPerfect'
 import { FarsdagUrgencyCta } from './sections/FarsdagUrgencyCta'
-import { MicrofiberFathersDaySection } from '../../produkter/components/MicrofiberSection/MicrofiberFathersDaySection'
+import { MicrofiberFathersDaySection } from '../../produkter/components/sections/MicrofiberSection/MicrofiberFathersDaySection'
 import type { Metadata } from 'next'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),

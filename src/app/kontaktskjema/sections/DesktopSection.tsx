@@ -5,10 +5,11 @@ import { SupportForm } from '@/components/form/SupportForm'
 export function DesktopSection() {
   return (
     <div className='hidden lg:grid lg:grid-cols-2'>
-      {/* Venstre kolonne - Informasjon */}
       <div className='flex flex-col'>
         <div className='flex-grow p-8 lg:p-12'>
-          <h1 className='text-4xl font-bold tracking-tight'>Snakk med Utekos</h1>
+          <h1 className='text-4xl font-bold tracking-tight'>
+            Snakk med Utekos
+          </h1>
           <p className='mt-4 text-xl text-muted-foreground'>
             Vi er her for å hjelpe deg med alt du måtte lure på.
           </p>
@@ -19,7 +20,8 @@ export function DesktopSection() {
               <div>
                 <h3 className='font-semibold'>Få personlig veiledning</h3>
                 <p className='text-base text-muted-foreground'>
-                  Usikker på hvilket produkt som passer ditt bruk? Vi hjelper deg å velge riktig.
+                  Usikker på hvilket produkt som passer ditt bruk? Vi hjelper
+                  deg å velge riktig.
                 </p>
               </div>
             </li>
@@ -28,7 +30,8 @@ export function DesktopSection() {
               <div>
                 <h3 className='font-semibold'>Hjelp med din bestilling</h3>
                 <p className='text-base text-muted-foreground'>
-                  Spørsmål om en ordre, retur eller reklamasjon? Oppgi gjerne ordrenummer.
+                  Spørsmål om en ordre, retur eller reklamasjon? Oppgi gjerne
+                  ordrenummer.
                 </p>
               </div>
             </li>
@@ -43,8 +46,8 @@ export function DesktopSection() {
                 En investering i komfort
               </h4>
               <p className='mt-2 text-base text-muted-foreground max-w-prose'>
-                Mer enn bare et plagg; det er et verktøy designet for å gi deg utallige timer med
-                varme og velvære.
+                Mer enn bare et plagg; det er et verktøy designet for å gi deg
+                utallige timer med varme og velvære.
               </p>
             </div>
 
@@ -55,24 +58,24 @@ export function DesktopSection() {
                 Skapt for norske forhold
               </h4>
               <p className='mt-2 text-base text-muted-foreground max-w-prose'>
-                Våre produkter er utviklet for å forlenge de gode stundene utendørs, enten det er på
-                en kjølig sommerkveld på hytten eller en frisk høstdag i båten.
+                Våre produkter er utviklet for å forlenge de gode stundene
+                utendørs, enten det er på en kjølig sommerkveld på hytten eller
+                en frisk høstdag i båten.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Sitat-seksjon */}
         <div className='p-8 lg:p-12'>
           <blockquote className='text-lg italic text-muted-foreground'>
-            &ldquo;Vårt løfte til deg er enkelt: å levere komfortplagg av ypperste kvalitet som lar
-            deg forlenge de gode stundene utendørs, uansett vær.&rdquo;
+            &ldquo;Vårt løfte til deg er enkelt: å levere komfortplagg av
+            ypperste kvalitet som lar deg forlenge de gode stundene utendørs,
+            uansett vær.&rdquo;
           </blockquote>
           <p className='mt-4 font-semibold'>- Utekos</p>
         </div>
       </div>
 
-      {/* Høyre kolonne - Skjema */}
       <div className='border-l border-white/10 bg-[oklch(14.5%_0_0)] p-8 lg:p-12'>
         <SupportForm />
       </div>

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { CheckoutButton } from '@/components/jsx/CheckoutButton'
+import { CheckoutButton } from '@/components/jsx/CheckoutButton/CheckoutButton'
 import { DrawerFooter } from '@/components/ui/drawer'
 import { useCartPending } from '@/hooks/useCartPending'
 import { formatPrice } from '@/lib/utils/formatPrice'

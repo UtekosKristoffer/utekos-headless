@@ -24,7 +24,6 @@ export function ProductCarousel() {
     return null
   }
 
-  // Initialiser produkter med unike farger
   const productOptionsMap = initializeCarouselProducts(products)
 
   return (

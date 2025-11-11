@@ -1,9 +1,6 @@
 // Path: src/components/legal/GridCross.tsx
 import { cn } from '@/lib/utils/className'
-
-type GridCrossProps = {
-  className?: string
-}
+import type { GridCrossProps } from '@types'
 
 export function GridCross({ className }: GridCrossProps) {
   return (
