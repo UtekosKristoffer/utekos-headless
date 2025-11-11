@@ -61,7 +61,6 @@ export const CoreConceptSection = () => {
         <div className='absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-amber-500/10 to-transparent blur-3xl rounded-full' />
 
         <div className='relative container mx-auto max-w-4xl px-6 py-20 sm:py-28'>
-          {/* Header */}
           <AnimatedBlockTwo className='fade-in-up mb-16 sm:mb-20' delay='0ms'>
             <div className='text-center space-y-4'>
               <div className='inline-flex items-center gap-3'>
@@ -82,10 +81,8 @@ export const CoreConceptSection = () => {
           </AnimatedBlockTwo>
 
           <div className='grid gap-12 lg:grid-cols-2 lg:gap-16 items-center'>
-            {/* Image - Left */}
             <AnimatedBlockTwo className='fade-in-up' delay='150ms'>
               <div className='relative group'>
-                {/* Glow effect */}
                 <div className='absolute -inset-4 bg-gradient-to-br from-amber-500/20 via-orange-500/10 to-transparent rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700' />
 
                 <div className='relative'>
@@ -101,7 +98,6 @@ export const CoreConceptSection = () => {
                     />
                   </div>
 
-                  {/* Badge */}
                   <div className='absolute right-4 top-4 backdrop-blur-xl bg-zinc-900/90 border border-amber-500/20 rounded-full px-4 py-2 shadow-xl'>
                     <span className='text-sm font-semibold bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent'>
                       3-i-1 design
@@ -110,10 +106,7 @@ export const CoreConceptSection = () => {
                 </div>
               </div>
             </AnimatedBlockTwo>
-
-            {/* Content - Right */}
             <div className='flex flex-col justify-center space-y-8'>
-              {/* Lead text */}
               <AnimatedBlockTwo className='fade-in-up' delay='300ms'>
                 <p className='text-xl sm:text-2xl leading-relaxed text-zinc-300 font-light'>
                   Selve hjertet i Utekos er et design skapt for total
@@ -126,7 +119,6 @@ export const CoreConceptSection = () => {
                 </p>
               </AnimatedBlockTwo>
 
-              {/* Features */}
               <AnimatedBlockTwo className='fade-in-up' delay='450ms'>
                 <div className='space-y-4'>
                   {features.map(feature => {
@@ -140,7 +132,6 @@ export const CoreConceptSection = () => {
                         onMouseEnter={() => setHoveredFeature(feature.id)}
                         onMouseLeave={() => setHoveredFeature(null)}
                       >
-                        {/* Glow on hover */}
                         <div
                           className={`absolute -inset-2 bg-gradient-to-r ${feature.color} opacity-0 group-hover/feature:opacity-10 blur-xl transition-opacity duration-500 rounded-xl`}
                         />
@@ -152,7 +143,6 @@ export const CoreConceptSection = () => {
                             : 'bg-zinc-900/30 border-zinc-700/30 hover:border-zinc-600/50'
                           }`}
                         >
-                          {/* Icon */}
                           <div
                             className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-all duration-300 ${
                               isHovered ?
@@ -167,7 +157,6 @@ export const CoreConceptSection = () => {
                             />
                           </div>
 
-                          {/* Content */}
                           <div className='flex-1 min-w-0'>
                             <p
                               className={`font-semibold mb-1 transition-colors duration-300 ${
@@ -181,7 +170,6 @@ export const CoreConceptSection = () => {
                             </p>
                           </div>
 
-                          {/* Number badge */}
                           <div
                             className={`flex-shrink-0 h-6 w-6 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
                               isHovered ?
@@ -198,7 +186,6 @@ export const CoreConceptSection = () => {
                 </div>
               </AnimatedBlockTwo>
 
-              {/* Quote */}
               <AnimatedBlockTwo className='fade-in-up' delay='600ms'>
                 <div className='relative group/quote'>
                   {/* Subtle glow */}
@@ -209,7 +196,7 @@ export const CoreConceptSection = () => {
                       <div className='text-4xl text-amber-500/30 leading-none font-serif'></div>
                       <p className='text-lg italic text-zinc-300 leading-relaxed flex-1'>
                         "Den ultimate følgesvenn – fra hytteterrassen til kalde
-                        fotballtribuner"
+                        tribuner"
                       </p>
                       <div className='text-4xl text-amber-500/30 leading-none font-serif self-end'></div>
                     </div>

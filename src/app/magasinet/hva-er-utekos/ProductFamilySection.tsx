@@ -82,12 +82,10 @@ export const ProductFamilySection = () => {
       </style>
 
       <section className='relative bg-gradient-to-br from-zinc-900/60 to-zinc-800/40 mb-12 rounded-3xl backdrop-blur-sm border border-zinc-700/50 py-20 sm:py-28 overflow-hidden'>
-        {/* Subtle background decoration */}
         <div className='absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-blue-500/5 to-transparent blur-3xl rounded-full' />
         <div className='absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-500/5 to-transparent blur-3xl rounded-full' />
 
         <div className='relative container mx-auto max-w-4xl px-6'>
-          {/* Header */}
           <AnimatedBlockTwo
             className='fade-in-up text-center mb-16 sm:mb-20'
             delay='0ms'
@@ -113,20 +111,16 @@ export const ProductFamilySection = () => {
             </p>
           </AnimatedBlockTwo>
 
-          {/* Products */}
           <div className='space-y-6'>
-            {/* Featured Product - Original */}
             <AnimatedBlockTwo className='fade-in-up' delay='150ms'>
               <div
                 className='group relative overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-800/90 to-zinc-900/90 border border-zinc-700/50 hover:border-zinc-600/50 transition-all duration-500'
                 onMouseEnter={() => setHoveredProduct('original')}
                 onMouseLeave={() => setHoveredProduct(null)}
               >
-                {/* Glow effect */}
                 <div className='absolute -inset-1 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500' />
 
                 <div className='relative grid md:grid-cols-2'>
-                  {/* Image */}
                   <Link
                     href={products[0].href as Route}
                     className='relative block aspect-[4/3] md:aspect-auto overflow-hidden'
@@ -138,11 +132,9 @@ export const ProductFamilySection = () => {
                       fill
                       sizes='(max-width: 768px) 100vw, 50vw'
                     />
-                    {/* Overlay gradient */}
                     <div className='absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
                   </Link>
 
-                  {/* Badge */}
                   <div className='absolute left-4 top-4 z-10'>
                     <div className='backdrop-blur-xl bg-gradient-to-br from-emerald-500 to-teal-600 px-4 py-1.5 rounded-full border border-white/10 shadow-xl'>
                       <div className='flex items-center gap-2'>
@@ -154,7 +146,6 @@ export const ProductFamilySection = () => {
                     </div>
                   </div>
 
-                  {/* Content */}
                   <div className='p-8 md:p-10 flex flex-col justify-center'>
                     <h3 className='text-2xl lg:text-3xl font-bold text-zinc-100 mb-3'>
                       {products[0].name}
@@ -183,21 +174,16 @@ export const ProductFamilySection = () => {
                 </div>
               </div>
             </AnimatedBlockTwo>
-
-            {/* Grid Products */}
             <div className='grid gap-6 md:grid-cols-2'>
-              {/* TechDown */}
               <AnimatedBlockTwo className='fade-in-up' delay='300ms'>
                 <div
                   className='group relative h-full overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-800/90 to-zinc-900/90 border border-zinc-700/50 hover:border-zinc-600/50 transition-all duration-500'
                   onMouseEnter={() => setHoveredProduct('techdown')}
                   onMouseLeave={() => setHoveredProduct(null)}
                 >
-                  {/* Glow */}
                   <div className='absolute -inset-1 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500' />
 
                   <div className='relative'>
-                    {/* Image */}
                     <Link
                       href={products[1].href as Route}
                       className='relative block aspect-[4/3] overflow-hidden'
@@ -212,7 +198,6 @@ export const ProductFamilySection = () => {
                       <div className='absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
                     </Link>
 
-                    {/* Badge */}
                     <div className='absolute left-4 top-4 z-10'>
                       <div className='backdrop-blur-xl bg-gradient-to-br from-blue-500 to-indigo-600 px-4 py-1.5 rounded-full border border-white/10 shadow-xl'>
                         <div className='flex items-center gap-2'>
@@ -223,8 +208,6 @@ export const ProductFamilySection = () => {
                         </div>
                       </div>
                     </div>
-
-                    {/* Content */}
                     <div className='p-6 lg:p-8'>
                       <h3 className='text-xl lg:text-2xl font-bold text-zinc-100 mb-3'>
                         {products[1].name}
@@ -244,19 +227,15 @@ export const ProductFamilySection = () => {
                   </div>
                 </div>
               </AnimatedBlockTwo>
-
-              {/* Comfyrobe */}
               <AnimatedBlockTwo className='fade-in-up' delay='450ms'>
                 <div
                   className='group relative h-full overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-800/90 to-zinc-900/90 border border-zinc-700/50 hover:border-zinc-600/50 transition-all duration-500'
                   onMouseEnter={() => setHoveredProduct('comfyrobe')}
                   onMouseLeave={() => setHoveredProduct(null)}
                 >
-                  {/* Glow */}
                   <div className='absolute -inset-1 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500' />
 
                   <div className='relative'>
-                    {/* Image */}
                     <Link
                       href={products[2].href as Route}
                       className='relative block aspect-[4/3] overflow-hidden'
@@ -270,8 +249,6 @@ export const ProductFamilySection = () => {
                       />
                       <div className='absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
                     </Link>
-
-                    {/* Content */}
                     <div className='p-6 lg:p-8'>
                       <h3 className='text-xl lg:text-2xl font-bold text-zinc-100 mb-3'>
                         {products[2].name}

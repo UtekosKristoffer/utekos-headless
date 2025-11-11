@@ -278,7 +278,7 @@ gjør Utekos unikt:
 
 # Annen info
 
-- **FIRMAINFO:** Kelc AS, Lille Damsgårdsveien 25, 5162 Bergen, Org.nr 925
+- **FIRMAINFO:** KELC AS, Lille Damsgårdsveien 25, 5162 Bergen, Org.nr 925
   820 393.
 - **KONTAKTINFO:** E-post: info@utekos.no, Tlf: +47 40 21 63 43.
   </KNOWLEDGE_BASE>

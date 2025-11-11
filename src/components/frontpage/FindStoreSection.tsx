@@ -38,7 +38,7 @@ export function FindInStoreSection() {
                 </span>
               </div>
               <h2 className='text-balance text-3xl font-bold tracking-tight text-white sm:text-4xl'>
-                Opplev Utekos™ i fysisk butikk
+                Opplev Utekos i fysisk butikk
               </h2>
               <p className='mt-4 max-w-lg text-balance text-lg leading-relaxed text-access/30'>
                 Lyst til å kjenne på kvaliteten og finne den perfekte

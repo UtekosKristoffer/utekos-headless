@@ -54,6 +54,7 @@ export function CartDrawer(): React.JSX.Element {
       <Activity>
         <CartTrigger />
       </Activity>
+
       <Activity>
         <DrawerContent className='h-full max-h-full overflow-hidden'>
           <VisuallyHidden>
@@ -63,25 +64,23 @@ export function CartDrawer(): React.JSX.Element {
             </DrawerDescription>
           </VisuallyHidden>
 
-          {/* Wrapper med riktig flex-struktur for mobil */}
           <div className='flex flex-col h-full overflow-hidden'>
-            {/* Header - fast høyde */}
             <Activity>
               <CartHeader />
             </Activity>
+
             <Activity>
               <div className='flex-1 min-h-0 overflow-y-auto'>
                 <CartBody />
               </div>
             </Activity>
-            {/* Suggestions - maks høyde med scroll hvis nødvendig */}
+
             <Activity>
               <div className='max-h-[35vh] overflow-y-auto'>
                 <SmartCartSuggestions cart={cart} />
               </div>
             </Activity>
 
-            {/* Footer - fast høyde */}
             <Activity>
               <CartFooter cart={cart} />
             </Activity>

@@ -28,7 +28,7 @@ export function MobileMenuPanel({
         side='left'
         className='w-full max-w-sm p-0 md:hidden bg-neutral-950 border-neutral-800'
       >
-        {/* Ambient background glow */}
+  
         <div className='pointer-events-none absolute inset-0 -z-10 opacity-20'>
           <div
             className='absolute left-0 top-1/4 h-[300px] w-[300px] blur-3xl'
@@ -45,7 +45,6 @@ export function MobileMenuPanel({
         </div>
 
         <SheetHeader className='relative border-b border-neutral-800 p-6'>
-          {/* Gradient accent line */}
           <div className='absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-400/50 to-transparent' />
 
           <div className='mb-2 flex items-center gap-2'>

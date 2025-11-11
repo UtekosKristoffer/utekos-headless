@@ -26,8 +26,8 @@ export const termsSections: Section[] = [
     content: (
       <>
         <p>
-          Dette nettstedet drives av Kelc AS. I hele nettstedet viser «vi»,
-          «oss» og «vår» til Kelc AS. Kelc AS tilbyr dette nettstedet, inkludert
+          Dette nettstedet drives av KELC AS. I hele nettstedet viser «vi»,
+          «oss» og «vår» til KELC AS. KELC AS tilbyr dette nettstedet, inkludert
           all informasjon, verktøy og tjenester som er tilgjengelige her, til
           deg som bruker, under forutsetning av at du aksepterer alle vilkår,
           betingelser, retningslinjer og meldinger som fremgår her.
@@ -310,7 +310,7 @@ export const termsSections: Section[] = [
           eller underforståtte garantier.
         </p>
         <p>
-          Under ingen omstendigheter skal Kelc AS eller våre tilknyttede parter
+          Under ingen omstendigheter skal KELC AS eller våre tilknyttede parter
           være ansvarlige for direkte eller indirekte tap, herunder tapt
           fortjeneste, inntekt, besparelser, data, erstatningskostnader eller
           andre følgeskader, selv om vi er varslet om muligheten. Der lov
@@ -326,7 +326,7 @@ export const termsSections: Section[] = [
     content: (
       <>
         <p>
-          Du samtykker i å holde Kelc AS og tilknyttede parter skadesløse for
+          Du samtykker i å holde KELC AS og tilknyttede parter skadesløse for
           krav fra tredjeparter, inkludert rimelige advokathonorarer, som følge
           av ditt brudd på vilkårene, refererte dokumenter, lov eller
           tredjeparts rettigheter.

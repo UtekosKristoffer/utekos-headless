@@ -20,7 +20,7 @@ import { OrganizationJsonLd } from './OrganizationJsonLd'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
-    default: 'Utekos™ - Forleng de gode stundene ute',
+    default: 'Utekos - Forleng de gode stundene ute',
     template: '%s | Utekos'
   },
   description:
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     locale: 'no_NO',
     url: 'https://utekos.no',
     siteName: 'Utekos',
-    title: 'Utekos™ - Forleng de gode stundene ute.',
+    title: 'Utekos - Forleng de gode stundene ute.',
     description:
       'Kompromissløs komfort, designet for å holde på varmen når øyeblikkene teller.',
 

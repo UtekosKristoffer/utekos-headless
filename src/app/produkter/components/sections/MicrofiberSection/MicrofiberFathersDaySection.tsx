@@ -104,7 +104,6 @@ export function MicrofiberFathersDaySection() {
   return (
     <section className='mx-auto rounded-lg border border-neutral-800 bg-sidebar-foreground mt-12 py-20 sm:py-32 md:mb-24'>
       <div className='container mx-auto max-w-7xl px-4'>
-        {/* Header */}
         <div className='text-center mb-16'>
           <AnimatedBlock className='will-animate-fade-in-up'>
             <h2 className='text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl'>
@@ -120,7 +119,7 @@ export function MicrofiberFathersDaySection() {
           </AnimatedBlock>
         </div>
 
-        {/* Bildekaruseller */}
+    
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 mb-20'>
           <AnimatedBlock className='will-animate-fade-in-left' delay='0.2s'>
             <h3 className='mb-4 text-lg font-semibold text-foreground'>
@@ -136,7 +135,6 @@ export function MicrofiberFathersDaySection() {
           </AnimatedBlock>
         </div>
 
-        {/* Fordeler - Fiksert layout */}
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 mb-20'>
           {fathersDayAdvantages.map((advantage, index) => (
             <AnimatedBlock
@@ -163,7 +161,6 @@ export function MicrofiberFathersDaySection() {
           ))}
         </div>
 
-        {/* Pris og CTA */}
         <AnimatedBlock
           className='will-animate-fade-in-up flex flex-col items-center gap-6'
           delay='0.6s'

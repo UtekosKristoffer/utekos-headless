@@ -33,7 +33,7 @@ export const mainMenu: MenuItem[] = [
     ]
   },
   {
-    title: 'Om Utekos™',
+    title: 'Om Utekos',
     url: '/om-oss',
     items: [
       { title: 'Om Utekos', url: '/om-oss', items: [] },
@@ -54,6 +54,6 @@ export const mainMenu: MenuItem[] = [
   {
     title: 'Magasinet',
     url: '/magasinet',
-    items: [] // Ingen undermeny for magasinet foreløpig
+    items: []
   }
 ]

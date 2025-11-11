@@ -20,10 +20,10 @@ export const ListItem = React.forwardRef<
       <NavigationMenuLink asChild>
         <Link
           ref={ref}
-          href={href} // No need to cast anymore
+          href={href}
           className={cn(
             'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors focus:bg-accent focus:text-accent-foreground',
-            'hover:bg-transparent', // <-- Legg til denne
+            'hover:bg-transparent',
             className
           )}
           {...props}

@@ -4,7 +4,6 @@ export function ProduktguideBeredskap() {
   return (
     <section className='bg-background py-16 md:py-20'>
       <div className='max-w-4xl mx-auto px-6'>
-        {/* Header med accent */}
         <div className='text-center mb-16 space-y-4'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight text-foreground'>
             <span className='whitespace-nowrap'>Beredskap i praksis</span>
@@ -71,17 +70,11 @@ function ScenarioCard({
 }) {
   return (
     <div className='relative md:pl-24'>
-      {/* Number badge - timeline node */}
       <div className='hidden md:flex absolute left-0 items-center justify-center h-16 w-16 rounded-full bg-sidebar-foreground border-4 border-amber-900/30 shadow-lg shadow-amber-900/20'>
         <span className='text-2xl font-bold text-amber-900'>{number}</span>
       </div>
 
-      {/* Card */}
       <div className='group bg-sidebar-foreground rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:shadow-amber-900/10 transition-all duration-300 border hover:border-border border-amber-900/50'>
-        {/* =================================
-          FIKS 1: Stabler på mobil, rad på sm+
-          =================================
-        */}
         <div className='flex flex-col sm:flex-row sm:items-start gap-4 mb-6'>
           <div
             className={`flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-xl ${accentColor} text-white shadow-md`}
@@ -93,10 +86,6 @@ function ScenarioCard({
           </h3>
         </div>
 
-        {/* =================================
-          FIKS 2: Padding kun på sm+
-          =================================
-        */}
         <div className='mb-6 sm:pl-16'>
           <div className='text-sm font-semibold text-amber-900 uppercase tracking-wide mb-2'>
             Utfordringen
@@ -106,10 +95,6 @@ function ScenarioCard({
           </p>
         </div>
 
-        {/* =================================
-          FIKS 3: Padding kun på sm+
-          =================================
-        */}
         <div className='sm:pl-16 pt-6 border-t border-border'>
           <div className='text-sm font-semibold text-sky-800 uppercase tracking-wide mb-2'>
             ✓ Slik løser Utekos det

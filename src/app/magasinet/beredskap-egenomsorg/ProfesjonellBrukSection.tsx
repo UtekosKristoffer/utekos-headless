@@ -5,7 +5,6 @@ export function ProfesjonellBrukSection() {
   return (
     <section className='py-16 md:py-24 bg-background'>
       <div className='max-w-4xl mx-auto px-6'>
-        {/* Header med accent */}
         <div className='mb-12 space-y-4'>
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight text-balance text-foreground'>
             En robust løsning for kommuner og bedrifter
@@ -16,7 +15,7 @@ export function ProfesjonellBrukSection() {
         <div className='mb-10'>
           <p className='text-lg md:text-xl text-article-white leading-relaxed'>
             For kommuner, frivillige organisasjoner, eller bedrifter som
-            håndterer et beredskapslager, er Utekos™ en langsiktig og økonomisk
+            håndterer et beredskapslager, er Utekos en langsiktig og økonomisk
             investering.
           </p>
         </div>
@@ -46,7 +45,7 @@ export function ProfesjonellBrukSection() {
                   Institusjonell kvalitet
                 </span>
                 <span className='block'>
-                  Utekos™ tilbyr en bærekraftig løsning som reduserer både
+                  Utekos tilbyr en bærekraftig løsning som reduserer både
                   kostnader og miljøbelastning over tid, samtidig som den gir
                   bedre komfort og funksjonalitet for sluttbrukeren.
                 </span>
@@ -59,7 +58,6 @@ export function ProfesjonellBrukSection() {
   )
 }
 
-// Feature Box Component - tilpasset mørkt tema
 function FeatureBox({
   icon,
   title,
@@ -73,24 +71,16 @@ function FeatureBox({
 }) {
   return (
     <div className='group relative bg-sidebar-foreground rounded-2xl p-8 shadow-md hover:shadow-xl hover:shadow-sky-500/10 transition-all duration-300 border hover:border-border border-sky-500/50'>
-      {/* Top accent bar */}
       <div
         className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${accentColor} rounded-t-2xl`}
       ></div>
-
-      {/* =================================
-        FIKS 1: Stabler på mobil, rad på sm+
-        =================================
-      */}
       <div className='flex flex-col sm:flex-row items-start gap-6'>
-        {/* Icon */}
         <div
           className={`flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-xl bg-gradient-to-br ${accentColor} text-white shadow-md group-hover:scale-110 transition-transform duration-300`}
         >
           {icon}
         </div>
 
-        {/* Content */}
         <div className='flex-1 pt-1'>
           <h3 className='text-xl font-semibold mb-3 text-foreground'>
             {title}

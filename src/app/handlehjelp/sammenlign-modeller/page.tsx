@@ -6,7 +6,7 @@ import { DeepDiveSection } from './sections/DeepDiveSection'
 import { ConclusionSection } from './sections/ConclusionSection'
 import { Activity } from 'react'
 export const metadata: Metadata = {
-  title: 'Sammenlign Utekos™ Modeller | Finn den perfekte for deg',
+  title: 'Sammenlign Utekos-modeller | Finn den perfekte for deg',
   description:
     'Utekos Dun™ vs. Utekos Mikrofiber™. Se vår detaljerte guide for å finne ut hvilken modell som er best egnet for ditt bruk – enten det er på hytten, i båten eller med bobilen.',
   keywords: [

@@ -46,7 +46,6 @@ export const ProductAnatomySection = () => {
 
   return (
     <section className='relative bg-background py-24 sm:py-32'>
-      {/* Header */}
       <div className='text-center mb-16 sm:mb-20'>
         <h2 className='text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-6'>
           Ikke en jakke. Ikke en sovepose.
@@ -64,10 +63,8 @@ export const ProductAnatomySection = () => {
         </p>
       </div>
 
-      {/* Product Showcase - Desktop */}
       <div className='hidden lg:block mb-20'>
         <div className='grid grid-cols-[1fr_auto_1fr] gap-8 items-start'>
-          {/* Left Features */}
           <div className='space-y-8 pt-12'>
             {features
               .filter(f => f.side === 'left')
@@ -105,7 +102,6 @@ export const ProductAnatomySection = () => {
                           {feature.description}
                         </p>
 
-                        {/* Connection dot */}
                         <div
                           className={`absolute top-1/2 -translate-y-1/2 -right-3 w-2 h-2 rounded-full transition-all duration-300 ${
                             isActive ?
@@ -114,7 +110,6 @@ export const ProductAnatomySection = () => {
                           }`}
                         />
 
-                        {/* Glow effect */}
                         {isActive && (
                           <div className='absolute inset-0 bg-gradient-to-r from-amber-500/10 to-orange-500/10 rounded-xl -z-10 blur-xl' />
                         )}

@@ -59,7 +59,7 @@ export function HvorforUtekosSection() {
             kanskje hadde sett for deg.
           </p>
           <p>
-            Under slike omstendigheter fungerer Utekos™ som ditt ess i ermet.
+            Under slike omstendigheter fungerer Utekos som ditt ess i ermet.
             3-i-1-funksjonaliteten sørger for at du er omsluttet av komfort og
             varme, samtidig som du beholder kontrollen og kan justere den etter
             din unike situasjon. Slik oppgraderer du et passivt utgangspunkt til
@@ -113,7 +113,7 @@ export function HvorforUtekosSection() {
           <FeatureCard
             icon={<Shield className='h-7 w-7' />}
             title='Bevar normaliteten'
-            description='En uke uten vaskemaskin kan være en utfordring for mange. Utekos™ fungerer som ditt ytre, beskyttende lag. Du kan ha enkle, lette klær (som ullundertøy) under, og bevare en følelse av normalitet og velvære lenger.'
+            description='En uke uten vaskemaskin kan være en utfordring for mange. Utekos fungerer som ditt ytre, beskyttende lag. Du kan ha enkle, lette klær (som ullundertøy) under, og bevare en følelse av normalitet og velvære lenger.'
             accentColor='from-sky-600 to-blue-600'
           />
 

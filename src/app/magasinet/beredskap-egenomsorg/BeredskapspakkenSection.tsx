@@ -4,14 +4,14 @@ export function BeredskapspakkenSection() {
   return (
     <section className='py-16 mt-12 md:mt-16 bg-sidebar-foreground'>
       <div className='max-w-4xl mx-auto px-6'>
-        {/* Header */}
+
         <div className='text-center mb-12 space-y-4'>
           <h2 className='text-3xl md:text-4xl -mt-4 font-bold tracking-tight text-balance text-foreground'>
-            Slik forenkler Utekos™ din beredskapspakke
+            Slik forenkler Utekos din beredskapspakke
           </h2>
         </div>
 
-        {/* Intro text - emphasis box */}
+  
         <div className='mb-12 space-y-6'>
           <div className='bg-amber-500/10 border-l-4 border-amber-500 p-6 rounded-r-xl backdrop-blur-sm'>
             <p className='text-lg text-foreground leading-relaxed'>
@@ -40,7 +40,6 @@ export function BeredskapspakkenSection() {
           </div>
         </div>
 
-        {/* Feature cards - modernisert layout */}
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8'>
           <PackageCard
             icon={<Car className='h-7 w-7' />}
@@ -52,7 +51,7 @@ export function BeredskapspakkenSection() {
           <PackageCard
             icon={<Archive className='h-7 w-7' />}
             title='Fra koseplagg til kriseverktøy'
-            description='Et pledd er fint for sofakos, men har begrensede egenskaper i krise som varer. Utekos™ er en oppgradering: en personlig, mobil varmekilde som gir funksjonsevne og trygghet, ikke bare passiv varme.'
+            description='Et pledd er fint for sofakos, men har begrensede egenskaper i krise som varer. Utekos er en oppgradering: en personlig, mobil varmekilde som gir funksjonsevne og trygghet, ikke bare passiv varme.'
             accentColor='from-blue-500 to-indigo-500'
           />
         </div>

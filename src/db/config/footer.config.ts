@@ -78,7 +78,7 @@ export const footerConfig: FooterSection[] = [
     title: 'Bedriftsinformasjon',
     links: [
       {
-        title: 'Kelc As',
+        title: 'KELC AS',
         path: '/' as Route
       },
       {

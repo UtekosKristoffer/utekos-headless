@@ -27,7 +27,7 @@ export function UtekosSizeGuide() {
       <div className='container mx-auto px-4 py-16 sm:py-24 text-center'>
         <div className='max-w-4xl mx-auto'>
           <h2 className='text-3xl font-bold tracking-tight sm:text-4xl'>
-            Utekos™ - En unik tilnærming til passform
+            Utekos - En unik tilnærming til passform
           </h2>
           <p className='mt-4 text-lg text-neutral-300'>
             Mer enn bare en størrelse – en garanti for komfort gjennom suveren

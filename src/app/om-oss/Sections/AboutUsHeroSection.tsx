@@ -18,7 +18,7 @@ export function AboutUsHeroSection() {
       </div>
       <div className='relative z-10 container px-4'>
         <h1 className='text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl'>
-          Utekos™ - Vår historie
+          Utekos - Vår historie
         </h1>
         <p className='mt-6 text-lg max-w-2xl mx-auto leading-8 text-white/80'>
           Drevet av kalde kvelder og et ønske om å aldri la komfort stoppe de

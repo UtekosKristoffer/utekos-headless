@@ -2,10 +2,6 @@
 
 import type { Route } from 'next'
 
-/**
- * Normalizes Shopify URLs to local paths
- * Returns Route type for Next.js Link compatibility
- */
 export function normalizeShopifyUrl(url: string): Route {
   let urlPath = url.replace(/^https?:\/\/[^\/]+/, '')
   if (urlPath.startsWith('/products/')) {
@@ -21,7 +17,6 @@ export function normalizeShopifyUrl(url: string): Route {
       '/footer-routes/kjøpshjelp/specs',
     '/pages/kundeservice/kontaktskjema': '/kontaktskjema',
     '/pages/kontakt-oss': '/kontaktskjema'
-    // Add more mappings as needed
   }
 
   return (urlMappings[urlPath] || urlPath) as Route

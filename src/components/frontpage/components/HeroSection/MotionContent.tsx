@@ -19,7 +19,7 @@ export function MotionContent() {
         className='animate-fade-in-up mt-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl xl:text-7xl'
         style={{ animationDelay: '0.3s' }}
       >
-        <span className='block'>Utekos™</span>
+        <span className='block'>Utekos</span>
         <span className='mt-2 block bg-gradient-to-r from-sky-800 via-cyan-700 to-sky-800 bg-clip-text text-transparent'>
           Forleng de gode stundene ute.
         </span>
