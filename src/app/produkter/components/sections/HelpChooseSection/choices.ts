@@ -18,7 +18,7 @@ export const choices: ProductChoice[] = [
   {
     title: 'For den ultimate varmen',
     description:
-      'Vårt varmeste isolasjonsplagg, fylt med premium dun for maksimal varme på de kaldeste dagene.',
+      'Vårt bestselgende isolasjonsplagg, fylt med kvalitetsdun for funksjonell varme på de kaldeste dagene.',
     href: '/produkter/utekos-dun' as Route,
     imageUrl: '/utekos-blue.webp',
     linkColor: 'text-rose-400'
