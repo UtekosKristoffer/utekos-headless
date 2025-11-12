@@ -50,7 +50,7 @@ export function GrunderSection() {
               <p className='text-lg font-semibold text-foreground'>
                 Erling Holthe
               </p>
-              <p className='mt-1 text-sm text-muted-foreground'>Utekos™</p>
+              <p className='mt-1 text-sm text-muted-foreground'>Utekos</p>
             </AnimatedBlock>
           </AnimatedBlock>
           <div className='flex flex-col justify-center lg:col-span-8'>
