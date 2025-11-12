@@ -11,7 +11,6 @@ export function QuantitySelector() {
   const quantity = watch('quantity')
 
   const updateQuantity = (newQuantity: number) => {
-    // Sørger for at verdien aldri er mindre enn 1 eller NaN
     const validQuantity = Math.max(1, newQuantity || 1)
     setValue('quantity', validQuantity, { shouldValidate: true })
   }

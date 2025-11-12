@@ -484,3 +484,10 @@ export type CustomData = {
   num_items?: number
   order_id?: string
 }
+
+export interface TrackingProps {
+  googleTagManagerId?: string
+  metaPixelId?: string
+  postHogApiKey?: string
+  postHogHost?: string
+}

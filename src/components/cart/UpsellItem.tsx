@@ -3,14 +3,9 @@ import { findMatchingVariant } from '@/components/ProductCard/findMatchingVarian
 import { Button } from '@/components/ui/button'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import { formatPrice } from '@/lib/utils/formatPrice'
-import type { ShopifyProduct } from '@types'
+import type { ShopifyProduct, UpsellItemProps } from '@types'
 import { ArrowRightIcon, PercentIcon } from 'lucide-react'
 import Image from 'next/image'
-
-interface UpsellItemProps {
-  product: ShopifyProduct
-  showDiscountHint?: boolean
-}
 
 export function UpsellItem({ product, showDiscountHint }: UpsellItemProps) {
   const cartActor = CartMutationContext.useActorRef()
@@ -38,9 +33,7 @@ export function UpsellItem({ product, showDiscountHint }: UpsellItemProps) {
         : 'border-neutral-800 bg-neutral-900/50'
       } p-3`}
     >
-      {/* Responsiv layout: vertikal på mobil, horisontal på desktop */}
       <div className='flex items-start gap-3'>
-        {/* Bilde - fast størrelse */}
         <div className='relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-md'>
           {product.featuredImage && (
             <Image
@@ -53,7 +46,6 @@ export function UpsellItem({ product, showDiscountHint }: UpsellItemProps) {
           )}
         </div>
 
-        {/* Innhold wrapper - endrer layout basert på skjermstørrelse */}
         <div className='flex flex-1 flex-col gap-2 sm:flex-row sm:items-center sm:justify-between min-w-0'>
           {/* Produktinfo */}
           <div className='flex-1 min-w-0'>
@@ -78,7 +70,6 @@ export function UpsellItem({ product, showDiscountHint }: UpsellItemProps) {
             </div>
           </div>
 
-          {/* Knapp - full bredde på mobil, auto bredde til høyre på desktop */}
           <Button
             size='sm'
             onClick={handleAddToCart}
@@ -90,7 +81,6 @@ export function UpsellItem({ product, showDiscountHint }: UpsellItemProps) {
         </div>
       </div>
 
-      {/* Rabatthint */}
       {showDiscountHint && (
         <div className='flex items-center justify-center text-xs font-semibold text-sky-400 border-t border-sky-500/20 pt-2'>
           <PercentIcon className='h-3 w-3 mr-1.5' />

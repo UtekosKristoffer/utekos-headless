@@ -13,6 +13,11 @@ export type AddToCartButtonProps = {
   isDisabled: boolean
 }
 
+export interface UpsellItemProps {
+  product: ShopifyProduct
+  showDiscountHint?: boolean
+}
+
 export type AddToCartFormValues = z.infer<typeof AddToCartSchema>
 export type UpdateCartLineQuantityInput = z.infer<typeof UpdateCartSchema>
 export type RemoveCartLineInput = z.infer<typeof RemoveCartLineSchema>

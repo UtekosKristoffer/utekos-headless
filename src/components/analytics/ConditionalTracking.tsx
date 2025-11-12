@@ -3,26 +3,18 @@
 import { useConsent } from '@/components/cookie-consent/useConsent'
 import { GoogleTagManager } from '@next/third-parties/google'
 import Script from 'next/script'
-import { MetaPixelEvents } from './MetaPixelEvents'
-
-interface TrackingProps {
-  googleTagManagerId?: string
-  metaPixelId?: string
-  postHogApiKey?: string
-  postHogHost?: string
-}
-
+import { MetaPixelEvents } from './MetaPixel/MetaPixelEvents'
+import type { TrackingProps } from '@types'
 export function ConditionalTracking({
   googleTagManagerId,
   metaPixelId,
   postHogApiKey,
-  postHogHost = 'https://eu.i.posthog.com' // FIKSET: Korrekt URL
+  postHogHost = 'https://eu.i.posthog.com'
 }: TrackingProps) {
   const { consent } = useConsent()
 
   return (
     <>
-      {/* Kategori: Ytelse og analyse */}
       {consent.analytics && googleTagManagerId && (
         <GoogleTagManager gtmId={googleTagManagerId} />
       )}
@@ -40,7 +32,6 @@ export function ConditionalTracking({
         </Script>
       )}
 
-      {/* Kategori: Personlig annonsering ELLER Profilbasert annonsering */}
       {(consent.marketing || consent.profile_marketing) && metaPixelId && (
         <MetaPixelEvents />
       )}
