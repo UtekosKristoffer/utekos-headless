@@ -12,7 +12,7 @@ export const comparisonData = [
   {
     feature: 'Varme (tørt vær)',
     icon: 'thermometer',
-    dun: 'Uovertruffen. Andedun gir den høyeste varme-til-vekt ratioen.',
+    dun: 'Uovertruffen. Vår kvalitetsdun gir den høyeste varme-til-vekt ratioen.',
     mikrofiber: 'Meget god. En solid og pålitelig varme for de fleste forhold.',
     techdown:
       'Utmerket. CloudWeave™ sørger for den lette, høye varmen fra dun.',
