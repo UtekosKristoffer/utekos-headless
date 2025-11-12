@@ -19,6 +19,7 @@ import { ProductCarousel } from '@/components/ProductCard/ProductCarousel'
 import { SpecialOfferSection } from '@/components/frontpage/components/SpecialOfferSection/SpecialOfferSection'
 import { connection } from 'next/server'
 
+
 const HomePage = async () => {
   await connection()
 

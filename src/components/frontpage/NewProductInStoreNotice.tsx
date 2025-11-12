@@ -4,10 +4,7 @@ import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import IntersportLogo from '@public/logo/Intersport_logo.svg'
-
-const INTERSPORT_LAKSEVAG_MAPS_URL =
-  'https://www.google.com/maps/place/Intersport+Laksev%C3%A5g/'
-
+import { INTERSPORT_LAKSEVAG_MAPS_URL } from '@/constants/maps'
 export function NewProductInStoreNotice() {
   return (
     <section className='mt-12 w-full py-12'>
@@ -46,7 +43,6 @@ export function NewProductInStoreNotice() {
             <Button asChild size='lg' className='group mt-2'>
               <Link href={INTERSPORT_LAKSEVAG_MAPS_URL} target='_blank'>
                 Vis vei til butikken
-                <ArrowRight className='ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
               </Link>
             </Button>
           </div>
