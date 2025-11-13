@@ -1,4 +1,4 @@
-import heroImage from '@public/frontpage-kate-linn.webp'
+import heroImage from '@public/monica-arne-balpanne-1.png'
 import Image from 'next/image'
 
 export function HeroImage() {
@@ -10,8 +10,9 @@ export function HeroImage() {
         <Image
           src={heroImage}
           alt='To personer i Utekos-plagg sitter på en stein i skogen og deler et hyggelig øyeblikk, fullt påkledd for varme og komfort.'
-          width={2048}
-          height={1363}
+          width={1080}
+          height={1080}
+          quality={100}
           sizes='(min-width: 1280px) 1280px, 100vw'
           className='mx-auto w-full rounded-xl h-[60vh] xl:h-[80vh] object-cover object-bottom'
           priority
