@@ -1,4 +1,4 @@
-'use client'
+
 // Path: src/lib/helpers/search/index.ts
 import type { SearchGroup, SearchItem } from '@/app/api/search-index/route'
 import { mockArticles } from '@/db/data/articles' // <-- Statisk import her
