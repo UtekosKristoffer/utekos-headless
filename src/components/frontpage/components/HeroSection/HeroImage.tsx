@@ -14,7 +14,7 @@ export function HeroImage() {
           height={1080}
           quality={100}
           sizes='(min-width: 1280px) 1280px, 100vw'
-          className='mx-auto w-full rounded-xl h-[60vh] xl:h-[80vh] object-cover object-bottom'
+          className='mx-auto w-full rounded-xl object-cover object-bottom'
           priority
         />
       </div>
