@@ -20,3 +20,4 @@ export function HeroImage() {
     </div>
   )
 }
+process.env.SHOPIFY_STORE_DOMAIN

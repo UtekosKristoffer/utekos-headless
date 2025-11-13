@@ -1,7 +1,6 @@
+'use client'
 // Path: src/lib/helpers/search/index.ts
 import type { SearchGroup, SearchItem } from '@/app/api/search-index/route'
-// Fjern dynamisk import fra her
-// import { mockArticles } from '@/db/data/articles' // <--- Endre til statisk import
 import { mockArticles } from '@/db/data/articles' // <-- Statisk import her
 import { SEARCH_CONFIG, GROUP_LABELS } from './searchConfig'
 export type ClientSearchItem = SearchItem
