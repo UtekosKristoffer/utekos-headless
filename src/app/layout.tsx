@@ -17,6 +17,7 @@ import Header from '@/components/header/Header'
 import type { RootLayoutProps } from '@types'
 import type { Metadata } from 'next'
 import { OrganizationJsonLd } from './OrganizationJsonLd'
+import SnapchatPixel from '../components/analytics/Snapchat/SnapchatPixel'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
@@ -157,6 +158,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         </Suspense>
         <Toaster closeButton />
         <Analytics mode='production' />
+        <SnapchatPixel />
       </body>
     </html>
   )

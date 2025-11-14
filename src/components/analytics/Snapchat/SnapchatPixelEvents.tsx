@@ -11,8 +11,6 @@ export function SnapchatPixelEvents() {
   const searchParams = useSearchParams()
   const pageViewTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const animationFrameRef = useRef<number | null>(null)
-
-  // Ref for å hoppe over den første useEffect-kjøringen
   const isInitialLoad = useRef(true)
 
   const trackPageView = () => {
@@ -38,8 +36,6 @@ export function SnapchatPixelEvents() {
           client_deduplication_id: eventId
         })
         animationFrameRef.current = null
-
-        // Send CAPI Event
         if (process.env.NODE_ENV === 'production') {
           fetch('/api/snap-events', {
             method: 'POST',
@@ -58,16 +54,10 @@ export function SnapchatPixelEvents() {
   }
 
   useEffect(() => {
-    // --- FIKS ---
-    // Hopp over den første kjøringen, siden base-skriptet håndterer
-    // den initielle 'PAGE_VIEW'.
     if (isInitialLoad.current) {
       isInitialLoad.current = false
       return
     }
-    // --- SLUTT FIKS ---
-
-    // Spor alle påfølgende klientside-navigasjoner
     trackPageView()
 
     return () => {
