@@ -4,14 +4,16 @@
 import { useEffect, useRef } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import Script from 'next/script'
-import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID' // Antatt sti
-
+import { generateEventID } from '@/components/jsx/CheckoutButton/generateEventID'
 export function SnapchatPixelEvents() {
   const pixelId = process.env.NEXT_PUBLIC_SNAP_PIXEL_ID
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const pageViewTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const animationFrameRef = useRef<number | null>(null)
+
+  // Ref for å hoppe over den første useEffect-kjøringen
+  const isInitialLoad = useRef(true)
 
   const trackPageView = () => {
     if (pageViewTimeoutRef.current) clearTimeout(pageViewTimeoutRef.current)
@@ -31,6 +33,7 @@ export function SnapchatPixelEvents() {
         }
 
         const eventId = generateEventID().replace('evt_', 'spv_')
+        // Merk: Vi kaller kun 'track' her, ikke 'trackSingle'
         window.snaptr('track', 'PAGE_VIEW', {
           client_deduplication_id: eventId
         })
@@ -55,6 +58,16 @@ export function SnapchatPixelEvents() {
   }
 
   useEffect(() => {
+    // --- FIKS ---
+    // Hopp over den første kjøringen, siden base-skriptet håndterer
+    // den initielle 'PAGE_VIEW'.
+    if (isInitialLoad.current) {
+      isInitialLoad.current = false
+      return
+    }
+    // --- SLUTT FIKS ---
+
+    // Spor alle påfølgende klientside-navigasjoner
     trackPageView()
 
     return () => {
@@ -146,6 +159,8 @@ export function SnapchatPixelEvents() {
     snaptr('init', '${pixelId}', {
       'user_email': '__INSERT_USER_EMAIL__'
     });
+
+    snaptr('track', 'PAGE_VIEW');
   `
 
   return (
