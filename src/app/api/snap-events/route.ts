@@ -91,7 +91,7 @@ function normalizePhone(input: string | undefined | null): string | undefined {
 /* ----------------------------- Hoved-rute ----------------------------- */
 
 export async function POST(req: NextRequest) {
-  const PIXEL_ID = process.env.NEXT_PUBLIC_SNAP_PIXEL_ID
+  const PIXEL_ID = '3b3c8f0c-51f8-4b21-bf44-cc5e1121588a'
   const ACCESS_TOKEN = process.env.SNAP_ACCESS_TOKEN
 
   if (!PIXEL_ID || !ACCESS_TOKEN) {
@@ -119,7 +119,6 @@ export async function POST(req: NextRequest) {
   )
   const scid = cookies._scid || null // Snapchats cookie
 
-  // 2. Parse body
   let body: Body
   try {
     body = (await req.json()) as Body
@@ -139,8 +138,6 @@ export async function POST(req: NextRequest) {
 
   const event_name = body.eventName
   const event_time = body.eventTime ?? Math.floor(Date.now() / 1000)
-
-  // 3. Bygg Snap UserData (med hashing)
   const user_data: SnapUserData = {
     client_ip_address: ip,
     user_agent: ua,
@@ -169,8 +166,6 @@ export async function POST(req: NextRequest) {
     if (hashedCountry) user_data.country = hashedCountry
     if (hashedGender) user_data.ge = [hashedGender]
   }
-
-  // 4. Bygg Snap CustomData (transformer fra klient-format)
   const custom_data: SnapCustomData = {
     event_id: body.eventId
   }
@@ -183,7 +178,6 @@ export async function POST(req: NextRequest) {
     if (currency) custom_data.currency = currency
     if (order_id) custom_data.order_id = order_id
 
-    // Transformer 'contents' eller 'content_ids'
     if (content_ids) {
       custom_data.content_ids = content_ids
     } else if (contents) {

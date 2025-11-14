@@ -164,8 +164,6 @@ export function SnapchatPixelEvents() {
     return null
   }
 
-  // Initialiser Snapchat Pixel ALLTID (uavhengig av consent)
-  // Dette er nødvendig for Test Events og kampanjeoppsett
   const snapPixelBaseCode = `
     (function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
     {a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};
@@ -174,12 +172,12 @@ export function SnapchatPixelEvents() {
     u.parentNode.insertBefore(r,u);})(window,document,
     'https://sc-static.net/scevent.min.js');
 
-    snaptr('init', '${pixelId}', {
+    snaptr('init', '3b3c8f0c-51f8-4b21-bf44-cc5e1121588a', {
       'user_email': ''
     });
     
     window._snaptr_loaded = true;
-    console.log('Snapchat Pixel initialized with ID:', '${pixelId}');
+    console.log('Snapchat Pixel initialized with ID:', '3b3c8f0c-51f8-4b21-bf44-cc5e1121588a');
   `
 
   return (
