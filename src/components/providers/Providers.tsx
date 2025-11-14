@@ -1,3 +1,4 @@
+// Path: src/components/providers/Providers.tsx
 'use client'
 
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -50,6 +51,9 @@ export default function Providers({
         })}
         {...(process.env.NEXT_PUBLIC_META_PIXEL_ID && {
           metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID
+        })}
+        {...(process.env.NEXT_PUBLIC_SNAP_PIXEL_ID && {
+          snapPixelId: process.env.NEXT_PUBLIC_SNAP_PIXEL_ID
         })}
         {...(process.env.NEXT_PUBLIC_POSTHOG_KEY && {
           postHogApiKey: process.env.NEXT_PUBLIC_POSTHOG_KEY
