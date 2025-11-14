@@ -7,6 +7,7 @@ import Script from 'next/script'
 import { MetaPixelEvents } from './MetaPixel/MetaPixelEvents'
 import { SnapchatPixelEvents } from './Snapchat/SnapchatPixelEvents'
 import type { TrackingProps } from '@types'
+
 export function ConditionalTracking({
   googleTagManagerId,
   metaPixelId,
@@ -39,9 +40,15 @@ export function ConditionalTracking({
         <MetaPixelEvents />
       )}
 
-      {(consent.marketing || consent.profile_marketing) && snapPixelId && (
-        <SnapchatPixelEvents />
-      )}
+      {/* --- MIDLERTIDIG TEST FOR SNAPCHAT --- */}
+      {/* Vi tvinger innlasting for å se om samtykke-banneret blokkerer Test Events-verktøyet */}
+      {snapPixelId && <SnapchatPixelEvents />}
+
+      {/* // Den originale koden som skal settes tilbake etter test:
+        (consent.marketing || consent.profile_marketing) && snapPixelId && (
+          <SnapchatPixelEvents />
+        )
+      */}
     </>
   )
 }
