@@ -1,18 +1,38 @@
 // app/api/checkout/capture-identifiers/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { redisSet } from '@/lib/redis'
-import type { CheckoutAttribution, UserData } from '@types'
+import type { CheckoutAttribution, UserData } from '@types' // Importer UserData
 
 interface CaptureBody {
-  cartId: string | null | undefined // Endret til å forvente cartId
-  checkoutUrl?: string // Gjør denne valgfri, vi bruker den ikke som nøkkel
+  cartId?: string | null
+  checkoutUrl: string
   eventId?: string
   userData: UserData
 }
 
+function parseCheckoutToken(
+  checkoutUrl: string | undefined
+): string | undefined {
+  if (!checkoutUrl) return undefined // Håndter undefined
+  try {
+    const url = new URL(checkoutUrl)
+    const parts = url.pathname.split('/').filter(Boolean)
+    const checkoutIndex = parts.findIndex(p => p === 'checkouts')
+    if (checkoutIndex !== -1) {
+      const potentialToken = parts[checkoutIndex + 1]
+      if (potentialToken && /^[a-f0-9]{32}$/i.test(potentialToken)) {
+        return potentialToken
+      }
+    }
+    return url.searchParams.get('token') ?? undefined
+  } catch (e) {
+    console.error('Error parsing checkout URL:', e, 'URL:', checkoutUrl)
+    return undefined
+  }
+}
 
 export async function POST(req: NextRequest) {
-  let body: CaptureBody
+  let body: CaptureBody // Bruk den nye typen
   try {
     body = (await req.json()) as CaptureBody
     console.log(
@@ -24,20 +44,18 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  // --- BRUK cartId SOM NØKKEL ---
-  if (!body.cartId) {
-    console.error('Missing cartId in request body for /capture-identifiers')
-    return NextResponse.json({ error: 'Missing cartId' }, { status: 400 })
+  const token = parseCheckoutToken(body.checkoutUrl)
+  if (!token) {
+    console.error('Could not parse checkout token from URL:', body.checkoutUrl)
+    return NextResponse.json(
+      { error: 'Missing or invalid checkout token in checkoutUrl' },
+      { status: 400 }
+    )
   }
-  const cartId = body.cartId
-  // ------------------------------
 
   const proxiedIp = req.headers.get('x-forwarded-for')?.split(',')?.[0]?.trim()
 
-  // Bygg userData objektet trygt (som før)
-  const userDataToSave: UserData = {
-    /* ... som før ... */
-  }
+  const userDataToSave: UserData = {}
   if (body.userData?.fbp) userDataToSave.fbp = body.userData.fbp
   if (body.userData?.fbc) userDataToSave.fbc = body.userData.fbc
   if (body.userData?.client_user_agent)
@@ -47,18 +65,16 @@ export async function POST(req: NextRequest) {
   if (body.userData?.external_id)
     userDataToSave.external_id = body.userData.external_id
 
-  // Bygg payload for Redis
   const payload: CheckoutAttribution = {
-    cartId: cartId, // Bruk den validerte cartId
-    checkoutUrl: body.checkoutUrl ?? null, // Lagre URL for info, men ikke bruk som nøkkel
+    cartId: body.cartId ?? null,
+    checkoutUrl: body.checkoutUrl,
     userData: userDataToSave,
     ts: Date.now(),
     ...(body.eventId && { eventId: body.eventId })
   }
 
   try {
-    // Bruk cartId som (del av) Redis-nøkkel
-    const redisKey = `cart:${cartId}:checkout_attribution` // Mer beskrivende nøkkel
+    const redisKey = `checkout:${token}`
     await redisSet(redisKey, payload, 60 * 60 * 24 * 7) // 7d TTL
     console.log(`Successfully saved data to Redis key: ${redisKey}`)
     return NextResponse.json({ ok: true })
