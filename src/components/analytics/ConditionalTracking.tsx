@@ -40,15 +40,8 @@ export function ConditionalTracking({
         <MetaPixelEvents />
       )}
 
-      {/* --- MIDLERTIDIG TEST FOR SNAPCHAT --- */}
-      {/* Vi tvinger innlasting for å se om samtykke-banneret blokkerer Test Events-verktøyet */}
+      {/* Snapchat Pixel initialiseres alltid når ID finnes, men tracker kun med consent */}
       {snapPixelId && <SnapchatPixelEvents />}
-
-      {/* // Den originale koden som skal settes tilbake etter test:
-        (consent.marketing || consent.profile_marketing) && snapPixelId && (
-          <SnapchatPixelEvents />
-        )
-      */}
     </>
   )
 }

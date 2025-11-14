@@ -1,20 +1,25 @@
 // src/components/analytics/SnapchatPixel/SnapchatPixelEvents.tsx
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useCallback } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import Script from 'next/script'
 import { generateEventID } from '@/components/jsx/CheckoutButton/generateEventID'
+import { useConsent } from '@/components/cookie-consent/useConsent'
 
 export function SnapchatPixelEvents() {
   const pixelId = process.env.NEXT_PUBLIC_SNAP_PIXEL_ID
   const pathname = usePathname()
   const searchParams = useSearchParams()
+  const { consent } = useConsent()
   const pageViewTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const animationFrameRef = useRef<number | null>(null)
-  const isInitialLoad = useRef(true)
+  const hasTrackedInitialPageView = useRef(false)
 
-  const trackPageView = () => {
+  // Sjekk om vi har consent for marketing
+  const canTrack = consent.marketing || consent.profile_marketing
+
+  const trackPageView = useCallback(() => {
     if (pageViewTimeoutRef.current) clearTimeout(pageViewTimeoutRef.current)
     if (animationFrameRef.current)
       cancelAnimationFrame(animationFrameRef.current)
@@ -31,12 +36,23 @@ export function SnapchatPixelEvents() {
           return
         }
 
+        // Kun track hvis vi har consent
+        if (!canTrack) {
+          console.log('Snapchat Pixel: Skipping PageView - no consent')
+          return
+        }
+
         const eventId = generateEventID().replace('evt_', 'spv_')
-        // Merk: Vi kaller kun 'track' her, ikke 'trackSingle'
         window.snaptr('track', 'PAGE_VIEW', {
           client_deduplication_id: eventId
         })
-        animationFrameRef.current = null
+
+        console.log('Snapchat Pixel: PageView tracked', {
+          url: window.location.href,
+          eventId
+        })
+
+        // Send til CAPI
         if (process.env.NODE_ENV === 'production') {
           fetch('/api/snap-events', {
             method: 'POST',
@@ -49,33 +65,45 @@ export function SnapchatPixelEvents() {
             })
           }).catch(err => console.error('Snap PageView CAPI error:', err))
         }
+
+        animationFrameRef.current = null
       })
       pageViewTimeoutRef.current = null
     }, 150)
-  }
+  }, [canTrack])
 
+  // Track PageView ved rute-endringer og consent-endringer
   useEffect(() => {
-    if (isInitialLoad.current) {
-      isInitialLoad.current = false
-      return
+    // Track PageView når pixel er klar og vi har consent
+    if (
+      window._snaptr_loaded
+      && canTrack
+      && !hasTrackedInitialPageView.current
+    ) {
+      trackPageView()
+      hasTrackedInitialPageView.current = true
+    } else if (window._snaptr_loaded && canTrack) {
+      trackPageView()
     }
-    trackPageView()
 
     return () => {
       if (pageViewTimeoutRef.current) clearTimeout(pageViewTimeoutRef.current)
       if (animationFrameRef.current)
         cancelAnimationFrame(animationFrameRef.current)
     }
-  }, [pathname, searchParams])
+  }, [pathname, searchParams, canTrack, trackPageView])
 
+  // ViewContent tracking for produktsider
   useEffect(() => {
     if (!pathname.startsWith('/produkter/')) return
+    if (!canTrack) return
 
     const timeoutId = setTimeout(() => {
       if (typeof window.snaptr !== 'function') {
         console.warn('Snapchat Pixel: snaptr not available for ViewContent')
         return
       }
+
       const handle = pathname.split('/produkter/')[1]?.split('?')[0]
       if (!handle) return
 
@@ -96,20 +124,19 @@ export function SnapchatPixelEvents() {
         price: price,
         currency: currency,
         item_ids: [handle],
-        item_category: 'product'
-      }
-
-      const clientViewContentData = {
-        ...viewContentData,
+        item_category: 'product',
         client_deduplication_id: eventId
       }
 
-      window.snaptr('track', 'VIEW_CONTENT', clientViewContentData)
+      window.snaptr('track', 'VIEW_CONTENT', viewContentData)
+
       console.log('Snapchat Pixel: ViewContent tracked', {
         handle,
-        data: clientViewContentData,
+        data: viewContentData,
         eventId
       })
+
+      // Send til CAPI
       if (process.env.NODE_ENV === 'production') {
         const capiViewContentData = {
           value: price,
@@ -131,12 +158,14 @@ export function SnapchatPixelEvents() {
     }, 200)
 
     return () => clearTimeout(timeoutId)
-  }, [pathname])
+  }, [pathname, canTrack])
 
   if (!pixelId) {
     return null
   }
 
+  // Initialiser Snapchat Pixel ALLTID (uavhengig av consent)
+  // Dette er nødvendig for Test Events og kampanjeoppsett
   const snapPixelBaseCode = `
     (function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
     {a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};
@@ -146,19 +175,18 @@ export function SnapchatPixelEvents() {
     'https://sc-static.net/scevent.min.js');
 
     snaptr('init', '${pixelId}', {
-      'user_email': '__INSERT_USER_EMAIL__'
+      'user_email': ''
     });
-
-    snaptr('track', 'PAGE_VIEW');
+    
+    window._snaptr_loaded = true;
+    console.log('Snapchat Pixel initialized with ID:', '${pixelId}');
   `
 
   return (
-    <>
-      <Script
-        id='snap-pixel-base-inline'
-        strategy='afterInteractive'
-        dangerouslySetInnerHTML={{ __html: snapPixelBaseCode }}
-      />
-    </>
+    <Script
+      id='snap-pixel-base-inline'
+      strategy='afterInteractive'
+      dangerouslySetInnerHTML={{ __html: snapPixelBaseCode }}
+    />
   )
 }

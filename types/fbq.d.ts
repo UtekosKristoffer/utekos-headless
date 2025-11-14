@@ -26,5 +26,14 @@ declare global {
       queue?: unknown[]
     }
     _fbq?: Window['fbq']
+    snaptr: {
+      (method: 'init', pixelId: string, config?: Record<string, any>): void
+      (method: 'track', event: string, params?: Record<string, any>): void
+      handleRequest?: (...args: any[]) => void
+      queue?: any[]
+    }
+    _snaptr_loaded?: boolean
   }
 }
+
+export {}
