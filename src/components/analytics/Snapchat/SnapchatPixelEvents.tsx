@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import Script from 'next/script'
 import { generateEventID } from '@/components/jsx/CheckoutButton/generateEventID'
+
 export function SnapchatPixelEvents() {
   const pixelId = process.env.NEXT_PUBLIC_SNAP_PIXEL_ID
   const pathname = usePathname()
@@ -109,8 +110,6 @@ export function SnapchatPixelEvents() {
         data: clientViewContentData,
         eventId
       })
-
-      // Send CAPI Event
       if (process.env.NODE_ENV === 'production') {
         const capiViewContentData = {
           value: price,
