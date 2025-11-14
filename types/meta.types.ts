@@ -490,4 +490,5 @@ export interface TrackingProps {
   metaPixelId?: string
   postHogApiKey?: string
   postHogHost?: string
+  snapPixelId?: string
 }

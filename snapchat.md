@@ -72,6 +72,161 @@ snaptr('track', 'START_CHECKOUT', {'price': INSERT_PRICE, 'currency':
 'INSERT_GEO_POSTAL_CODE', 'geo_region': 'INSERT_GEO_REGION'})
 ```
 
+## **CAPI Events**
+
+Event Source Setup Select and manage the events you want to track on your
+website. Your Access Token The Access Token is a credential that can be used by
+an application to access an API:
+
+Please contact your organization administrator to access your Conversions API
+token.
+
+1. Make a POST request to send new events using your access token To send new
+   events, make a POST request from this path:
+
+https://tr.snapchat.com/v3/3b3c8f0c-51f8-4b21-bf44-cc5e1121588a/events?access_token=INSERT_ACCESS_TOKEN
+
+2. Send Your Events
+
+## CAPI: ADD TO CART
+
+```ts
+"data": [{
+	"event_name": "ADD_CART",
+	"action_source": "website",
+	"event_source_url": "INSERT_YOUR_WEBSITE",
+	"event_time": INSERT_EPOCH_TIMESTAMP,
+
+	"user_data": {
+	"em": ["INSERT_HASHED_EMAIL_VALUE"],
+	"ph": ["INSERT_HASHED_PHONE_NUMBER_VALUE"],
+	"user_agent": "INSERT_CLIENT_USER_AGENT",
+	"client_ip_address": "INSERT_CLIENT_IP_ADDRESS",
+	"sc_click_id": "INSERT_CLICK_ID",
+	"sc_cookie1": "INSERT_scID",
+	"country": "INSERT_HASHED_COUNTRY",
+	"st": "INSERT_HASHED_STATE",
+	"zp": "INSERT_HASHED_POSTAL_CODE",
+	"fn": ["INSERT_HASHED_FIRST_NAME"],
+	"ln": ["INSERT_HASHED_LAST_NAME"],
+	"ct": "INSERT_HASHED_CITY",
+	"ge": "INSERT_HASHED_GENDER (m/f)",
+	"madid": "INSERT_MOBILE_AD_ID"},
+
+	"custom_data": {
+	"event_id": "INSERT_EVENT_ID",
+	"value": "INSERT_PRICE",
+	"currency": "INSERT_CURRENCY_CODE",
+	"content_ids": ["INSERT_ITEM_ID"],
+	"content_category": ["INSERT_CATEGORY"],
+	"number_items": ["INSERT_QUANTITY_1", "INSERT_QUANTITY_2"]}
+	}]
+```
+
+## CAPI: Page View
+
+```ts
+"data": [{
+	"event_name": "PAGE_VIEW",
+	"action_source": "website",
+	"event_source_url": "INSERT_YOUR_WEBSITE",
+	"event_time": INSERT_EPOCH_TIMESTAMP,
+
+	"user_data": {
+	"em": ["INSERT_HASHED_EMAIL_VALUE"],
+	"ph": ["INSERT_HASHED_PHONE_NUMBER_VALUE"],
+	"user_agent": "INSERT_CLIENT_USER_AGENT",
+	"client_ip_address": "INSERT_CLIENT_IP_ADDRESS",
+	"sc_click_id": "INSERT_CLICK_ID",
+	"sc_cookie1": "INSERT_scID",
+	"country": "INSERT_HASHED_COUNTRY",
+	"st": "INSERT_HASHED_STATE",
+	"zp": "INSERT_HASHED_POSTAL_CODE",
+	"fn": ["INSERT_HASHED_FIRST_NAME"],
+	"ln": ["INSERT_HASHED_LAST_NAME"],
+	"ct": "INSERT_HASHED_CITY",
+	"ge": "INSERT_HASHED_GENDER (m/f)",
+	"madid": "INSERT_MOBILE_AD_ID"},
+
+	"custom_data": {
+	"event_id": "INSERT_EVENT_ID",
+	"content_category": ["INSERT_CATEGORY"],
+	"content_ids": ["INSERT_ITEM_ID"],
+	"currency": "INSERT_CURRENCY_CODE",
+	"value": "INSERT_PRICE"}
+	}]
+```
+
+## CAPI: Purchase
+
+```ts
+"data": [{
+	"event_name": "PURCHASE",
+	"action_source": "website",
+	"event_source_url": "INSERT_YOUR_WEBSITE",
+	"event_time": INSERT_EPOCH_TIMESTAMP,
+
+	"user_data": {
+	"em": ["INSERT_HASHED_EMAIL_VALUE"],
+	"ph": ["INSERT_HASHED_PHONE_NUMBER_VALUE"],
+	"user_agent": "INSERT_CLIENT_USER_AGENT",
+	"client_ip_address": "INSERT_CLIENT_IP_ADDRESS",
+	"sc_click_id": "INSERT_CLICK_ID",
+	"sc_cookie1": "INSERT_scID",
+	"country": "INSERT_HASHED_COUNTRY",
+	"st": "INSERT_HASHED_STATE",
+	"zp": "INSERT_HASHED_POSTAL_CODE",
+	"fn": ["INSERT_HASHED_FIRST_NAME"],
+	"ln": ["INSERT_HASHED_LAST_NAME"],
+	"ct": "INSERT_HASHED_CITY",
+	"ge": "INSERT_HASHED_GENDER (m/f)",
+	"madid": "INSERT_MOBILE_AD_ID"},
+
+	"custom_data": {
+	"event_id": "INSERT_EVENT_ID",
+	"value": "INSERT_PRICE",
+	"currency": "INSERT_CURRENCY_CODE",
+	"content_ids": ["INSERT_ITEM_ID"],
+	"content_category": ["INSERT_CATEGORY"],
+	"number_items": ["INSERT_QUANTITY_1", "INSERT_QUANTITY_2"],
+	"order_id": "INSERT_ORDER_ID"}
+	}]
+```
+
+## CAPI: View Content
+
+```ts
+"data": [{
+	"event_name": "VIEW_CONTENT",
+	"action_source": "website",
+	"event_source_url": "INSERT_YOUR_WEBSITE",
+	"event_time": INSERT_EPOCH_TIMESTAMP,
+
+	"user_data": {
+	"em": ["INSERT_HASHED_EMAIL_VALUE"],
+	"ph": ["INSERT_HASHED_PHONE_NUMBER_VALUE"],
+	"user_agent": "INSERT_CLIENT_USER_AGENT",
+	"client_ip_address": "INSERT_CLIENT_IP_ADDRESS",
+	"sc_click_id": "INSERT_CLICK_ID",
+	"sc_cookie1": "INSERT_scID",
+	"country": "INSERT_HASHED_COUNTRY",
+	"st": "INSERT_HASHED_STATE",
+	"zp": "INSERT_HASHED_POSTAL_CODE",
+	"fn": ["INSERT_HASHED_FIRST_NAME"],
+	"ln": ["INSERT_HASHED_LAST_NAME"],
+	"ct": "INSERT_HASHED_CITY",
+	"ge": "INSERT_HASHED_GENDER (m/f)",
+	"madid": "INSERT_MOBILE_AD_ID"},
+
+	"custom_data": {
+	"event_id": "INSERT_EVENT_ID",
+	"value": "INSERT_PRICE",
+	"currency": "INSERT_CURRENCY_CODE",
+	"content_ids": ["INSERT_ITEM_ID"],
+	"content_category": ["INSERT_CATEGORY"]}
+	}]
+```
+
 ## Meta Pixel In This Project
 
 ```ts
@@ -884,3 +1039,7 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({ ok: true, result })
 }
 ```
+
+## Utekos SnapPixel
+ID: 3b3c8f0c-51f8-4b21-bf44-cc5e1121588a
+SNAPCHAT_PIXEL_API_KEY=eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYXXXXXXXXXXXXXXXXXX.....OSV

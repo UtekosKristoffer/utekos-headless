@@ -153,8 +153,8 @@ export function AddToCart({
           } catch (discountError) {
             if (
               !(
-                discountError instanceof Error
-                && discountError.message.includes('already applied')
+                discountError instanceof Error &&
+                discountError.message.includes('already applied')
               )
             ) {
               console.error('Kunne ikke legge til rabattkode:', discountError)
@@ -276,6 +276,37 @@ export function AddToCart({
             currency
           })
         }
+
+        // 4. Snapchat Pixel (Browser) - NY
+        if (typeof window.snaptr === 'function') {
+          const snapData = {
+            price: value,
+            currency: currency,
+            item_ids: contentIds,
+            item_category: 'product',
+            number_items: totalQty,
+            client_deduplication_id: eventID // For CAPI dedupe
+          }
+          window.snaptr('track', 'ADD_CART', snapData)
+          console.log('🛒 Snap Pixel: ADD_CART tracked', { snapData })
+        }
+
+        // 5. Snapchat CAPI (Server via API Route) - NY
+        const snapCapiPayload = {
+          eventName: 'ADD_CART',
+          eventId: eventID,
+          eventSourceUrl:
+            typeof window !== 'undefined' ? window.location.href : '',
+          eventData: {
+            value: value,
+            currency: currency,
+            contents: contents, // Send 'contents' for å få med quantity
+            num_items: totalQty
+          }
+          // userData blir lagt til av API-ruten (IP, UA, Cookie)
+        }
+        sendJSON('/api/snap-events', snapCapiPayload)
+        console.log('🛒 Snap CAPI: ADD_CART request sent', { snapCapiPayload })
 
         // Åpne handlekurven til slutt
         cartStore.send({ type: 'OPEN' })

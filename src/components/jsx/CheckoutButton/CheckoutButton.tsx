@@ -8,11 +8,16 @@ import { getCheckoutAriaLabel } from './getCheckoutAriaLabel'
 import { getCookie } from './getCookie'
 import { sendJSON } from './sendJSON'
 import { generateEventID } from './generateEventID'
+
 export const CheckoutButton = ({
   checkoutUrl,
   subtotal,
   isPending,
   cartId,
+  subtotalAmount,
+  currency,
+  item_ids,
+  num_items,
   className,
   children,
   ...props
@@ -21,8 +26,12 @@ export const CheckoutButton = ({
   subtotal: string
   isPending: boolean
   cartId: string | null | undefined
+  subtotalAmount: string
+  currency: string
+  item_ids: string[]
+  num_items: number
   className?: string
-  children?: React.ReactNode // Korrigert type
+  children?: React.ReactNode
 } & Omit<
   React.ComponentProps<typeof Button>,
   'asChild' | 'disabled' | 'aria-label'
@@ -69,6 +78,38 @@ export const CheckoutButton = ({
       }
       if (ua) capiPayload.userData!.client_user_agent = ua
       sendJSON('/api/meta-events', capiPayload)
+
+      // --- Snapchat Pixel (Browser) ---
+      if (typeof window.snaptr === 'function') {
+        const snapData = {
+          price: parseFloat(subtotalAmount), // Snap-piksel forventer number
+          currency: currency,
+          item_ids: item_ids,
+          item_category: 'product', // Legger til kategori
+          number_items: num_items,
+          client_deduplication_id: eventID
+        }
+        window.snaptr('track', 'START_CHECKOUT', snapData)
+        console.log('🛒 Snap Pixel: START_CHECKOUT tracked', { snapData })
+      }
+
+      // --- Snapchat CAPI (Server) ---
+      const snapCapiPayload = {
+        eventName: 'START_CHECKOUT',
+        eventId: eventID,
+        eventSourceUrl: sourceUrl,
+        eventData: {
+          value: parseFloat(subtotalAmount), // API-ruten forventer number
+          currency: currency,
+          content_ids: item_ids,
+          num_items: num_items
+        }
+        // userData: {} // Hentes av API-rute
+      }
+      sendJSON('/api/snap-events', snapCapiPayload)
+      console.log('🛒 Snap CAPI: START_CHECKOUT request sent', {
+        snapCapiPayload
+      })
     } catch (error) {
       console.error('Feil under sending av checkout-events:', error)
     }

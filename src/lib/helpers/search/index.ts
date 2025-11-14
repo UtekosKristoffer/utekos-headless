@@ -1,15 +1,10 @@
-
 // Path: src/lib/helpers/search/index.ts
 import type { SearchGroup, SearchItem } from '@/app/api/search-index/route'
-import { mockArticles } from '@/db/data/articles' // <-- Statisk import her
+import { mockArticles } from '@/db/data/articles'
 import { SEARCH_CONFIG, GROUP_LABELS } from './searchConfig'
 export type ClientSearchItem = SearchItem
 
-/**
- * Normaliserer tekst for bedre søk (æøå → aoa)
- */
 function normalizeText(text: string): string {
-  // Din eksisterende normalizeText funksjon...
   return text
     .toLowerCase()
     .normalize('NFD')
@@ -20,12 +15,7 @@ function normalizeText(text: string): string {
     .trim()
 }
 
-/**
- * Bygger komplett søkeindeks fra statisk config + statiske magasinartikler
- */
-// Fjern 'async' siden vi ikke bruker 'await import()' lenger
 export function buildSearchIndex(_allPaths?: string[]) {
-  // 1. Start med statisk konfigurasjon
   const staticItems: SearchItem[] = SEARCH_CONFIG.map(item => ({
     id: item.id,
     title: item.title,
@@ -39,7 +29,6 @@ export function buildSearchIndex(_allPaths?: string[]) {
     ].filter(Boolean)
   }))
 
-  // 2. Bruk statisk importert mockArticles direkte
   const magazineItems: SearchItem[] = mockArticles.map(article => {
     const slugWords = article.slug.split('-').filter(word => word.length > 2)
     const titleWords = article.title.split(' ').filter(word => word.length > 2)
@@ -71,7 +60,6 @@ export function buildSearchIndex(_allPaths?: string[]) {
     }
   })
 
-  // 3. Kombiner alt og grupper (som før)
   const allItems = [...staticItems, ...magazineItems]
   const groupsMap = new Map<string, SearchGroup>()
 
@@ -101,7 +89,6 @@ export function buildSearchIndex(_allPaths?: string[]) {
     }
   })
 
-  // 4. Sorter items og tving plain object struktur (som før)
   const groups = Array.from(groupsMap.values())
     .filter(g => g.items.length > 0)
     .map(g => ({
