@@ -10,10 +10,8 @@ export function ComfyrobeFeatureSection() {
   return (
     <section className='py-16 sm:py-24 md:mb-24 rounded-lg'>
       <div className='container mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 lg:grid-cols-2 lg:gap-16'>
-        {/* Bildekarusell (Klientkomponent) */}
         <ComfyrobeImageCarousel />
 
-        {/* Tekstinnhold (Statisk, med animerte "skall") */}
         <AnimatedBlock className='will-animate-fade-in-right'>
           <div className='flex flex-col items-start'>
             <AnimatedBlock className='will-animate-fade-in-up'>
