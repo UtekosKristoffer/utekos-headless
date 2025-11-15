@@ -24,11 +24,12 @@ export function ComfyrobeImageCarousel() {
       >
         <CarouselContent className='relative aspect-[3/4]'>
           <CarouselItem className='absolute inset-0'>
-            <div className='relative h-full w-full'>
+            <div className='relative size-full'>
               <Image
                 src={ComfyRobe}
-                alt='Person som nyter en kaffekopp på hytta iført en Comfyrobe.'
-                fill
+                alt='Comfyrobe produktbilde.'
+                height={1080}
+                width={1080}
                 className='object-cover'
                 sizes='(max-width: 1024px) 100vw, 50vw'
                 priority
@@ -36,13 +37,15 @@ export function ComfyrobeImageCarousel() {
             </div>
           </CarouselItem>
           <CarouselItem className='absolute inset-0'>
-            <div className='relative h-full w-full'>
+            <div className='relative size-full'>
               <Image
                 src={ComfyRainy}
                 alt='Comfyrobe som tåler regnvær, vist i et norsk kystlandskap.'
-                fill
+                height={1080}
+                width={1080}
                 className='object-cover'
                 sizes='(max-width: 1024px) 100vw, 50vw'
+                quality={100}
               />
             </div>
           </CarouselItem>
