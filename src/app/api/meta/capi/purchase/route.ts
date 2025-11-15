@@ -77,6 +77,9 @@ function getCheckoutKey(order: OrderPaid): string | undefined {
 /* ----------------------------- Route ----------------------------- */
 
 export async function POST(req: NextRequest) {
+  // ✅✅✅ TESTLINJE ✅✅✅
+  console.log('--- TEST: DENNE FILEN ER DEPLOYET v99 ---')
+  // ✅✅✅ SLUTT PÅ TESTLINJE ✅✅✅
   // 1) HMAC validation on raw body
   const raw = await req.text()
   if (!verifyHmac(req, raw)) {
