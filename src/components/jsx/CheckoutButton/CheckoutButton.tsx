@@ -1,9 +1,8 @@
-// Path: src/components/ui/CheckoutButton.tsx
 'use client'
 
 import * as React from 'react'
 import { Button } from '@/components/ui/button'
-import type { CustomData, UserData } from '@types' // Assuming these exist
+import type { CustomData, UserData } from '@types'
 import { getCheckoutAriaLabel } from './getCheckoutAriaLabel'
 import { getCookie } from './getCookie'
 import { sendJSON } from './sendJSON'
@@ -45,6 +44,10 @@ export const CheckoutButton = ({
     }
 
     try {
+      // --- NY LINJE: Logg til Vercel ---
+      // Denne sender en "fire-and-forget"-forespørsel for server-logging
+      sendJSON('/api/log/checkout-start', { cartId })
+
       const fbp = getCookie('_fbp')
       const fbc = getCookie('_fbc')
       const ua =
@@ -79,7 +82,6 @@ export const CheckoutButton = ({
       if (ua) capiPayload.userData!.client_user_agent = ua
       sendJSON('/api/meta-events', capiPayload)
 
-      // --- Snapchat Pixel (Browser) ---
       if (typeof window.snaptr === 'function') {
         const snapData = {
           price: parseFloat(subtotalAmount), // Snap-piksel forventer number
@@ -92,8 +94,6 @@ export const CheckoutButton = ({
         window.snaptr('track', 'START_CHECKOUT', snapData)
         console.log('🛒 Snap Pixel: START_CHECKOUT tracked', { snapData })
       }
-
-      // --- Snapchat CAPI (Server) ---
       const snapCapiPayload = {
         eventName: 'START_CHECKOUT',
         eventId: eventID,
