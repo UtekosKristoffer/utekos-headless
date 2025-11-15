@@ -6,9 +6,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio'
 import {
   Carousel,
   CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious
+  CarouselItem
 } from '@/components/ui/carousel'
 import Image from 'next/image'
 import { useInView } from '@/hooks/useInView'

@@ -34,7 +34,6 @@ export function PromiseSection() {
     <section className='mx-auto max-w-[95%] py-16 sm:py-24 md:max-w-7xl'>
       <div className='mx-auto'>
         <div className='grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16'>
-          {/* Venstre kolonne: Karusell */}
           <div className='flex items-center justify-center rounded-xl border border-neutral-800 p-2'>
             <Carousel
               plugins={[plugin.current]}
@@ -51,7 +50,9 @@ export function PromiseSection() {
                         <Image
                           src={image.src}
                           alt={image.alt}
-                          fill
+                          height={1080}
+                          width={1080}
+                          quality={100}
                           className='object-cover'
                           sizes='(min-width: 1024px) 50vw, 100vw'
                           priority={index === 0}
@@ -63,8 +64,6 @@ export function PromiseSection() {
               </CarouselContent>
             </Carousel>
           </div>
-
-          {/* Høyre kolonne: Tekst */}
           <div className='relative overflow-hidden rounded-xl border border-neutral-800 bg-sidebar-foreground p-8 lg:p-12'>
             <div
               className='absolute inset-0 z-0 opacity-20'
