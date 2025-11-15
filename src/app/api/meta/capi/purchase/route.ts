@@ -13,6 +13,8 @@ import type {
   MetaEventsSuccess
 } from '@types'
 
+/* ----------------------------- Helper Functions ----------------------------- */
+
 function verifyHmac(req: NextRequest, raw: string): boolean {
   const secret = process.env.SHOPIFY_WEBHOOK_SECRET ?? ''
   if (!secret) return false
@@ -68,15 +70,20 @@ function getCheckoutKey(order: OrderPaid): string | undefined {
       console.error('Kunne ikke parse order_status_url:', e)
     }
   }
+  // Fallback til 'order.token' hvis 'key' ikke ble funnet
   return order.token ?? undefined
 }
 
+/* ----------------------------- Route ----------------------------- */
+
 export async function POST(req: NextRequest) {
+  // 1) HMAC validation on raw body
   const raw = await req.text()
   if (!verifyHmac(req, raw)) {
     return NextResponse.json({ error: 'Invalid HMAC' }, { status: 401 })
   }
 
+  // 2) Parse order
   let order: OrderPaid
   try {
     order = JSON.parse(raw) as OrderPaid
@@ -84,12 +91,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
+  // --- ✅ LOGG FOR VERCEL ---
   console.log(
     `✅ KJØP REGISTRERT: Mottatt ordre ${
       order.admin_graphql_api_id ?? order.id
     }. Total: ${order.total_price} ${order.currency}`
   )
+  // ---------------------------
 
+  // 3) Retrieve attribution from Redis (FIKSET LOGIKK)
   const token = getCheckoutKey(order) // Bruker ny hjelpefunksjon
   const redisKey = token ? `checkout:${token}` : undefined
   const attrib = redisKey ? await redisGet<CheckoutAttribution>(redisKey) : null
@@ -100,6 +110,7 @@ export async function POST(req: NextRequest) {
     console.log(`[Webhook] Fant attrib-data i Redis for key: ${redisKey}`)
   }
 
+  // 4) Build custom_data (Enriched)
   const priceSet = order.total_price_set ?? order.current_total_price_set
   const value = toNumberSafe(priceSet?.shop_money.amount) ?? 0
   const currency = priceSet?.shop_money.currency_code ?? order.currency
@@ -120,6 +131,7 @@ export async function POST(req: NextRequest) {
   custom_data.order_id = order.admin_graphql_api_id
   if (contents.length) custom_data.content_ids = contents.map(c => c.id)
 
+  // Enrichment: Add shipping, tax, coupon, num_items
   const shippingAmount = toNumberSafe(
     order.total_shipping_price_set?.shop_money.amount
   )
@@ -141,8 +153,10 @@ export async function POST(req: NextRequest) {
   )
   if (totalQty > 0) custom_data.num_items = totalQty
 
+  // 5) Build user_data (Enriched for max EMQ)
   const user_data: MetaUserData = {}
 
+  // From Redis (set on client)
   if (attrib?.userData.fbp) user_data.fbp = attrib.userData.fbp
   if (attrib?.userData.fbc) user_data.fbc = attrib.userData.fbc
   if (attrib?.userData.client_user_agent)
@@ -150,6 +164,7 @@ export async function POST(req: NextRequest) {
   if (attrib?.userData.client_ip_address)
     user_data.client_ip_address = attrib.userData.client_ip_address
 
+  // From Order Payload
   const phone = order.phone ?? order.customer?.phone
   const phoneString = typeof phone === 'string' ? phone.toString() : phone
   const normalizedPhone = normalizePhone(phoneString)
@@ -191,6 +206,7 @@ export async function POST(req: NextRequest) {
     }
   }
 
+  // 6) Build event
   const event_time = Math.floor(
     new Date(order.processed_at ?? order.created_at).getTime() / 1000
   )
@@ -237,6 +253,7 @@ export async function POST(req: NextRequest) {
 
   const result = (await res.json()) as MetaEventsSuccess | MetaGraphError
 
+  // Slett Redis-nøkkelen (FIKSET LOGIKK)
   if (redisKey) await redisDel(redisKey)
 
   if (!res.ok) {
