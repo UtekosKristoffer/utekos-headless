@@ -49,13 +49,34 @@ function normalizePhone(input: string | undefined | null): string | undefined {
   return normalized ? hash(normalized) : undefined
 }
 
+/**
+ * NY HJELPER: Henter den korrekte 'key'-parameteren fra ordre-URLen.
+ * Dette er tokenen som 'capture-identifiers' bruker for å lagre i Redis.
+ */
+function getCheckoutKey(order: OrderPaid): string | undefined {
+  // Prøv 'order_status_url' først, den inneholder 'key=...'
+  const urlString = (order as any)?.order_status_url
+  if (typeof urlString === 'string') {
+    try {
+      const url = new URL(urlString)
+      const key = url.searchParams.get('key')
+      // Sjekk at 'key' ser ut som en 32-sifret hex-streng
+      if (key && /^[a-f0-9]{32}$/i.test(key)) {
+        return key
+      }
+    } catch (e) {
+      console.error('Kunne ikke parse order_status_url:', e)
+    }
+  }
+  return order.token ?? undefined
+}
+
 export async function POST(req: NextRequest) {
   const raw = await req.text()
   if (!verifyHmac(req, raw)) {
     return NextResponse.json({ error: 'Invalid HMAC' }, { status: 401 })
   }
 
-  // 2) Parse order
   let order: OrderPaid
   try {
     order = JSON.parse(raw) as OrderPaid
@@ -69,9 +90,15 @@ export async function POST(req: NextRequest) {
     }. Total: ${order.total_price} ${order.currency}`
   )
 
-  const token = order.token ?? undefined
-  const attrib =
-    token ? await redisGet<CheckoutAttribution>(`checkout:${token}`) : null
+  const token = getCheckoutKey(order) // Bruker ny hjelpefunksjon
+  const redisKey = token ? `checkout:${token}` : undefined
+  const attrib = redisKey ? await redisGet<CheckoutAttribution>(redisKey) : null
+
+  if (!attrib) {
+    console.warn(`[Webhook] Fant ikke attrib-data i Redis for key: ${redisKey}`)
+  } else {
+    console.log(`[Webhook] Fant attrib-data i Redis for key: ${redisKey}`)
+  }
 
   const priceSet = order.total_price_set ?? order.current_total_price_set
   const value = toNumberSafe(priceSet?.shop_money.amount) ?? 0
@@ -190,7 +217,7 @@ export async function POST(req: NextRequest) {
   const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
   const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
   if (!PIXEL_ID || !ACCESS_TOKEN) {
-    if (token) await redisDel(`checkout:${token}`)
+    if (redisKey) await redisDel(redisKey)
     return NextResponse.json({ error: 'Missing CAPI config' }, { status: 500 })
   }
 
@@ -210,7 +237,7 @@ export async function POST(req: NextRequest) {
 
   const result = (await res.json()) as MetaEventsSuccess | MetaGraphError
 
-  if (token) await redisDel(`checkout:${token}`)
+  if (redisKey) await redisDel(redisKey)
 
   if (!res.ok) {
     console.error(
