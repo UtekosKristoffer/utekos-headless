@@ -1,4 +1,4 @@
-// Path: src/SpecialOfferSection/SpecialOfferImageSection.tsx
+// Path: src/components/ComfyrobeSection/ComfyrobeImageSection.tsx
 
 'use client'
 
@@ -10,12 +10,11 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
-import specialEditionImage from '@public/special/kate.jpg'
 import Image from 'next/image'
 import { useInView } from '@/hooks/useInView'
 import { cn } from '@/lib/utils/className'
-
-export function SpecialOfferImageSection() {
+import ComfyrobeProductImage from '@/public/comfyrobe/monica-arne-comfy.png'
+export function ComfyrobeImageSection() {
   const [ref, isInView] = useInView({ threshold: 0.5 })
 
   return (
@@ -32,8 +31,8 @@ export function SpecialOfferImageSection() {
             <div className='w-full'>
               <AspectRatio ratio={2 / 3} className='bg-transparent'>
                 <Image
-                  src={specialEditionImage}
-                  alt='Utekos Special Edition'
+                  src={ComfyrobeProductImage}
+                  alt='Comfyrobe™ - Vanntett og vindtett robe'
                   fill
                   className='object-cover transition-transform duration-500 hover:scale-105'
                   sizes='(max-width: 1024px) 80vw, 40vw'
@@ -46,8 +45,8 @@ export function SpecialOfferImageSection() {
             <div className='w-full'>
               <AspectRatio ratio={2 / 3} className='bg-transparent'>
                 <Image
-                  src='/special_bag.webp'
-                  alt='Inkludert Utekos-bag'
+                  src='/comfyrobe/comfyrobe-lifestyle.png'
+                  alt='Comfyrobe™ i bruk'
                   fill
                   className='object-cover transition-transform duration-500 hover:scale-105'
                   sizes='(max-width: 1024px) 80vw, 40vw'

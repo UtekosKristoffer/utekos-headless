@@ -1,4 +1,4 @@
-// Path: src/components/BenefitCard.tsx
+// Path: src/components/ComfyrobeSection/BenefitCard.tsx
 'use client'
 
 import { Check } from 'lucide-react'
@@ -29,8 +29,8 @@ export function BenefitCard({ benefit, delay }: BenefitCardProps) {
       />
 
       <div className='relative z-10 flex items-center gap-3'>
-        <div className='flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md border border-neutral-700 bg-neutral-900 transition-all duration-300 group-hover:scale-110 group-hover:border-sky-500/50'>
-          <Check className='h-5 w-5 text-sky-400' />
+        <div className='flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md border border-neutral-700 bg-neutral-900 transition-all duration-300 group-hover:scale-110 group-hover:border-slate-500/50'>
+          <Check className='h-5 w-5 text-slate-400' />
         </div>
         <div className='flex-1 text-sm'>
           <span className='font-semibold text-white'>{benefit.label}</span>
