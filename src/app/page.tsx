@@ -16,9 +16,7 @@ import { NewProductLaunchSection } from '@/components/frontpage/components/NewPr
 import { SocialProofSection } from '@/components/frontpage/SocialProofSection'
 import { TestimonialConstellation } from '@/components/frontpage/TestimonialConstellation'
 import { ProductCarousel } from '@/components/ProductCard/ProductCarousel'
-import { SpecialOfferSection } from '@/components/frontpage/components/SpecialOfferSection/SpecialOfferSection'
 import { connection } from 'next/server'
-
 
 const HomePage = async () => {
   await connection()
@@ -44,9 +42,6 @@ const HomePage = async () => {
         </Activity>
         <Activity>
           <TestimonialConstellation />
-        </Activity>
-        <Activity>
-          <SpecialOfferSection />
         </Activity>
         <Activity>
           <Suspense fallback={<VideoSkeleton />}>

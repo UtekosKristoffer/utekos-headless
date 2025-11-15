@@ -52,7 +52,6 @@ export function SnapchatPixelEvents() {
           eventId
         })
 
-        // Send til CAPI
         if (process.env.NODE_ENV === 'production') {
           fetch('/api/snap-events', {
             method: 'POST',
@@ -93,7 +92,6 @@ export function SnapchatPixelEvents() {
     }
   }, [pathname, searchParams, canTrack, trackPageView])
 
-  // ViewContent tracking for produktsider
   useEffect(() => {
     if (!pathname.startsWith('/produkter/')) return
     if (!canTrack) return
@@ -135,8 +133,6 @@ export function SnapchatPixelEvents() {
         data: viewContentData,
         eventId
       })
-
-      // Send til CAPI
       if (process.env.NODE_ENV === 'production') {
         const capiViewContentData = {
           value: price,

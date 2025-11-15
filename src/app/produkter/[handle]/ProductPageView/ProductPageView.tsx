@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { ProductPageAccordion } from '@/app/produkter/[handle]/ProductPageAccordion/ProductPageAccordion'
 import { renderOptionComponent } from '@/app/produkter/[handle]/ProductPageView/helpers/renderOptionComponent'
 import { RelatedProducts } from '@/app/produkter/[handle]/RelatedProducts/RelatedProducts'
-import { SpecialOfferCrossSell } from '@/app/produkter/components/SpecialOfferCrossSell'
 import { AddToCart } from '@/components/cart/AddToCart'
 import { FindInStoreSection } from '@/components/frontpage/FindStoreSection'
 import { GalleryColumn } from '@/components/jsx/GalleryColumn'
@@ -32,9 +31,9 @@ import { TechDownLaunchOffer } from './TechDownLaunchOffer'
 
 const SmartRealTimeActivity = dynamic(
   () =>
-    import('@/app/produkter/components/SmartRealTimeActivity/SmartRealTimeActivity').then(
-      mod => mod.SmartRealTimeActivity
-    ),
+    import(
+      '@/app/produkter/components/SmartRealTimeActivity/SmartRealTimeActivity'
+    ).then(mod => mod.SmartRealTimeActivity),
   {
     ssr: false,
     loading: () => <div className='h-6' />
@@ -238,12 +237,7 @@ export default function ProductPageView({
           </OptionsColumn>
         </Activity>
       </ProductPageGrid>
-
-      <div className='mt-16 sm:mt-24'>
-        <Activity>
-          <SpecialOfferCrossSell currentProductHandle={productData.handle} />
-        </Activity>
-      </div>
+      <div className='mt-16 sm:mt-24'></div>
       <Activity>
         <ProductPageAccordion variantProfile={selectedVariantProfile} />
       </Activity>
