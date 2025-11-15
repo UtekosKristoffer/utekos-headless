@@ -1,4 +1,3 @@
-// src/app/api/capi/purchase.route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import crypto from 'node:crypto'
 import { redisGet, redisDel } from '@/lib/redis'
@@ -13,8 +12,6 @@ import type {
   MetaGraphError,
   MetaEventsSuccess
 } from '@types'
-
-/* ----------------------------- Helper Functions ----------------------------- */
 
 function verifyHmac(req: NextRequest, raw: string): boolean {
   const secret = process.env.SHOPIFY_WEBHOOK_SECRET ?? ''
@@ -52,10 +49,7 @@ function normalizePhone(input: string | undefined | null): string | undefined {
   return normalized ? hash(normalized) : undefined
 }
 
-/* ----------------------------- Route ----------------------------- */
-
 export async function POST(req: NextRequest) {
-  // 1) HMAC validation on raw body
   const raw = await req.text()
   if (!verifyHmac(req, raw)) {
     return NextResponse.json({ error: 'Invalid HMAC' }, { status: 401 })
@@ -69,12 +63,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  // 3) Retrieve attribution from Redis
+  console.log(
+    `✅ KJØP REGISTRERT: Mottatt ordre ${
+      order.admin_graphql_api_id ?? order.id
+    }. Total: ${order.total_price} ${order.currency}`
+  )
+
   const token = order.token ?? undefined
   const attrib =
     token ? await redisGet<CheckoutAttribution>(`checkout:${token}`) : null
 
-  // 4) Build custom_data (Enriched)
   const priceSet = order.total_price_set ?? order.current_total_price_set
   const value = toNumberSafe(priceSet?.shop_money.amount) ?? 0
   const currency = priceSet?.shop_money.currency_code ?? order.currency
@@ -95,7 +93,6 @@ export async function POST(req: NextRequest) {
   custom_data.order_id = order.admin_graphql_api_id
   if (contents.length) custom_data.content_ids = contents.map(c => c.id)
 
-  // Enrichment: Add shipping, tax, coupon, num_items
   const shippingAmount = toNumberSafe(
     order.total_shipping_price_set?.shop_money.amount
   )
@@ -117,10 +114,8 @@ export async function POST(req: NextRequest) {
   )
   if (totalQty > 0) custom_data.num_items = totalQty
 
-  // 5) Build user_data (Enriched for max EMQ)
   const user_data: MetaUserData = {}
 
-  // From Redis (set on client)
   if (attrib?.userData.fbp) user_data.fbp = attrib.userData.fbp
   if (attrib?.userData.fbc) user_data.fbc = attrib.userData.fbc
   if (attrib?.userData.client_user_agent)
@@ -128,7 +123,6 @@ export async function POST(req: NextRequest) {
   if (attrib?.userData.client_ip_address)
     user_data.client_ip_address = attrib.userData.client_ip_address
 
-  // From Order Payload
   const phone = order.phone ?? order.customer?.phone
   const phoneString = typeof phone === 'string' ? phone.toString() : phone
   const normalizedPhone = normalizePhone(phoneString)
@@ -160,17 +154,16 @@ export async function POST(req: NextRequest) {
       if (city !== undefined) user_data.ct = [city]
 
       const state = normalizeAndHash(addr.province_code)
-      if (state !== undefined) user_data.st = [state]
+      if (state !== undefined) user_data.st = [state] // KORRIGERT
 
       const zip = normalizeAndHash(addr.zip)
       if (zip !== undefined) user_data.zp = [zip]
 
       const country = normalizeAndHash(addr.country_code)
-      if (country !== undefined) user_data.country = [country]
+      if (country !== undefined) user_data.country = [country] // KORRIGERT
     }
   }
 
-  // 6) Build event
   const event_time = Math.floor(
     new Date(order.processed_at ?? order.created_at).getTime() / 1000
   )
