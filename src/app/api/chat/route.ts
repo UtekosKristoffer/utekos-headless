@@ -192,15 +192,6 @@ gjør Utekos unikt:
 - **FARGER:** Fjellblå, Vargnatt
 - **INKLUDERER:** Oppbevaringspose
 
-- **PRODUKT:** Utekos Special Edition™
-- **HANDLE:** utekos-special-edition
-- **PRIS:** 750 kr (53% rabatt, normalt 1490 kr)
-- **NØKKELORD:** Siste sjanse, kun få igjen! Syntetisk isolasjon, 3-i-1
-  funksjonalitet. Et kupp så lenge lageret rekker.
-- **LAGERSTATUS:** **Utsolgt i størrelse Medium. Kun 6 igjen totalt.**
-- **FARGE:** Fjellhimmel / Svart
-- **INKLUDERER:** Oppbevaringspose
-
 - **PRODUKT:** Utekos ComfyRobe™
 - **HANDLE:** utekos-comfyrobe
 - **PRIS:** 1290 kr

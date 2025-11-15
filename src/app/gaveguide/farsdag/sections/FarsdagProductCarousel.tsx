@@ -47,14 +47,6 @@ async function getFarsdagProducts(): Promise<Product[]> {
       price: 'Fra 150,-',
       imageSrc: '/bag-1080.png',
       imageAlt: 'Utekos-tilbehør i matchende farger.'
-    },
-    {
-      id: 5,
-      name: 'Utekos Special Edition™',
-      href: '/produkter/utekos-special-edition',
-      price: '750,-',
-      imageSrc: '/special-1080.png',
-      imageAlt: 'Utekos Special Edition i unike farger.'
     }
   ]
 }

@@ -163,21 +163,6 @@ export const SEARCH_CONFIG: SearchConfigItem[] = [
     group: 'products'
   },
   {
-    id: 'product-utekos-special-edition',
-    title: 'Utekos Special Edition™',
-    path: '/produkter/utekos-special-edition',
-    keywords: [
-      'special edition',
-      'spesial',
-      'limitert',
-      'eksklusiv',
-      'premium',
-      'luksus',
-      'ekstra'
-    ],
-    group: 'products'
-  },
-  {
     id: 'product-utekos-stapper',
     title: 'Utekos Stapper™',
     path: '/produkter/utekos-stapper',
