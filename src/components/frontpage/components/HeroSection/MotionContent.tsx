@@ -30,8 +30,8 @@ export function MotionContent() {
         className='animate-fade-in-up mx-auto mt-6 mb-12 max-w-2xl text-lg leading-relaxed text-foreground/80 md:max-w-4xl lg:text-2xl'
         style={{ animationDelay: '0.5s' }}
       >
-        Kompromissløs komfort, designet for å holde på varmen når øyeblikkene
-        teller.
+        Kompromissløs komfort. Innovativ funksjonalitet. Designet for å holde på
+        varmen når øyeblikkene teller.
       </p>
 
       {/* Scroll indicator */}

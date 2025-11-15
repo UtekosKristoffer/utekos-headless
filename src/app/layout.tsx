@@ -77,8 +77,7 @@ export const metadata: Metadata = {
     siteName: 'Utekos',
     title: 'Utekos - Forleng de gode stundene ute.',
     description:
-      'Kompromissløs komfort, designet for å holde på varmen når øyeblikkene teller.',
-
+      'Kompromissløs komfort. Innovativ funksjonalitet. Designet for å holde på varmen når øyeblikkene teller.',
     images: [
       {
         url: '/og-image-produkter.png',
