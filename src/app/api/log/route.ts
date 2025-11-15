@@ -1,13 +1,10 @@
 import { NextResponse } from 'next/server'
 
-export const dynamic = 'force-dynamic'
-
 export async function POST(request: Request) {
   try {
     const body = await request.json()
     const cartId = body.cartId || 'Ukjent CartID'
 
-    // Denne loggen vil nå dukke opp i Vercel Logs
     console.log(`🛒 KASSE STARTET: Bruker går til kassen. CartID: ${cartId}`)
 
     return NextResponse.json(
