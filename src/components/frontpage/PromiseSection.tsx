@@ -23,7 +23,7 @@ const images = [
   },
   {
     src: Mormor,
-    alt: 'En fornøyd dame som bruker Utekos-produktet i hagen.'
+    alt: 'En fornøyd herre som bruker Utekos-produktet på terrassen.'
   }
 ]
 

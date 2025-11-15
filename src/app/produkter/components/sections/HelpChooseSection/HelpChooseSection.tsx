@@ -15,7 +15,6 @@ import { getGlowColor } from './getGlowColor'
 export function HelpChooseSection() {
   return (
     <section className='relative mb-24 w-full'>
-      {/* Minimal ambient background */}
       <div className='absolute inset-0 -z-10 overflow-hidden opacity-40'>
         <div
           className='absolute left-1/4 top-0 h-[400px] w-[400px] blur-3xl'
@@ -54,7 +53,6 @@ export function HelpChooseSection() {
                 >
                   <Link href={choice.href} className='group block h-full'>
                     <div className='relative flex h-full flex-col overflow-hidden rounded-lg border border-neutral-800 bg-sidebar-foreground shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-neutral-700'>
-                      {/* Subtle aurora effect on hover */}
                       <div
                         className='pointer-events-none absolute -inset-x-2 -top-20 h-40 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-20'
                         style={{
@@ -67,6 +65,7 @@ export function HelpChooseSection() {
                           src={choice.imageUrl}
                           alt={choice.title}
                           fill
+                          quality={100}
                           sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                           className='rounded-t-lg object-cover transition-transform duration-500 group-hover:scale-105'
                         />
