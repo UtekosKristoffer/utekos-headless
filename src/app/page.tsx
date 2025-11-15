@@ -17,6 +17,7 @@ import { SocialProofSection } from '@/components/frontpage/SocialProofSection'
 import { TestimonialConstellation } from '@/components/frontpage/TestimonialConstellation'
 import { ProductCarousel } from '@/components/ProductCard/ProductCarousel'
 import { connection } from 'next/server'
+import { ComfyrobeSection } from '../components/frontpage/components/SpecialOfferSection/ComfyrobeSection'
 
 const HomePage = async () => {
   await connection()
@@ -39,6 +40,9 @@ const HomePage = async () => {
         </Activity>
         <Activity>
           <NewProductInStoreNotice />
+        </Activity>
+        <Activity>
+          <ComfyrobeSection />
         </Activity>
         <Activity>
           <TestimonialConstellation />

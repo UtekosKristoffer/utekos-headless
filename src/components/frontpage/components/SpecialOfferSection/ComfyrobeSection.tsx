@@ -1,12 +1,12 @@
 // Path: src/components/ComfyrobeSection/ComfyrobeSection.tsx
 import { ComfyrobeImageSection } from './ComfyrobeImageSection'
 import { ComfyrobeContentColumn } from './ComfyrobeContentColumn'
+import { Activity } from 'react'
 export async function ComfyrobeSection() {
   return (
     <section className='mx-auto max-w-[95%] py-20 sm:py-24 md:max-w-7xl'>
       <div className='container mx-auto'>
         <div className='relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/50 p-8 md:p-12'>
-          {/* Ambient background glow - navy/slate tones */}
           <div className='absolute inset-0 -z-10 overflow-hidden'>
             <div
               className='absolute left-1/4 top-1/4 h-[600px] w-[600px] opacity-15 blur-3xl'
@@ -24,8 +24,12 @@ export async function ComfyrobeSection() {
             />
           </div>
           <div className='grid grid-cols-1 relative rounded-2xl items-center gap-12 lg:grid-cols-2'>
-            <ComfyrobeImageSection />
-            <ComfyrobeContentColumn />
+            <Activity>
+              <ComfyrobeImageSection />
+            </Activity>
+            <Activity>
+              <ComfyrobeContentColumn />
+            </Activity>
           </div>
         </div>
       </div>

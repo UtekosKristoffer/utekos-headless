@@ -13,7 +13,7 @@ import {
 import Image from 'next/image'
 import { useInView } from '@/hooks/useInView'
 import { cn } from '@/lib/utils/className'
-import ComfyrobeProductImage from '@/public/comfyrobe/monica-arne-comfy.png'
+import ComfyrobeProductImage from '@public/comfyrobe/monica-arne-comfy.png'
 export function ComfyrobeImageSection() {
   const [ref, isInView] = useInView({ threshold: 0.5 })
 
@@ -21,7 +21,7 @@ export function ComfyrobeImageSection() {
     <div
       ref={ref}
       className={cn(
-        'will-animate-fade-in-scale relative flex h-auto items-center justify-center',
+        'will-animate-fade-in-scale relative',
         isInView && 'is-in-view'
       )}
     >
@@ -29,34 +29,21 @@ export function ComfyrobeImageSection() {
         <CarouselContent>
           <CarouselItem>
             <div className='w-full'>
-              <AspectRatio ratio={2 / 3} className='bg-transparent'>
+              <AspectRatio ratio={1 / 1} className='bg-transparent'>
                 <Image
                   src={ComfyrobeProductImage}
                   alt='Comfyrobe™ - Vanntett og vindtett robe'
-                  fill
+                  height={1080}
+                  width={1080}
                   className='object-cover transition-transform duration-500 hover:scale-105'
                   sizes='(max-width: 1024px) 80vw, 40vw'
+                  quality={100}
                   priority
                 />
               </AspectRatio>
             </div>
           </CarouselItem>
-          <CarouselItem>
-            <div className='w-full'>
-              <AspectRatio ratio={2 / 3} className='bg-transparent'>
-                <Image
-                  src='/comfyrobe/comfyrobe-lifestyle.png'
-                  alt='Comfyrobe™ i bruk'
-                  fill
-                  className='object-cover transition-transform duration-500 hover:scale-105'
-                  sizes='(max-width: 1024px) 80vw, 40vw'
-                />
-              </AspectRatio>
-            </div>
-          </CarouselItem>
         </CarouselContent>
-        <CarouselPrevious className='left-4 hidden sm:inline-flex' />
-        <CarouselNext className='right-4 hidden sm:inline-flex' />
       </Carousel>
     </div>
   )

@@ -12,7 +12,7 @@ export const comfyrobeFeatures = [
     icon: ThermometerSnowflake,
     title: 'Kompromissløs komfort',
     description:
-      'Et tykt fôr av syntetisk lammeull (Sherpa Fleece) gir umiddelbar varme og en luksuriøs følelse, perfekt etter et bad eller på en kjølig kveld.',
+      'Et tykt fôr av lammeull (Sherpa Fleece) gir umiddelbar varme og en luksuriøs følelse, perfekt etter et bad eller på en kjølig kveld.',
     colorClasses: 'text-amber-400 border-amber-400/20 bg-amber-900/20'
   },
   {

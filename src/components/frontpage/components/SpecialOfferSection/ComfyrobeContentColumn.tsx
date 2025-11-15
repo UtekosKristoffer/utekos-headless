@@ -14,7 +14,7 @@ const benefits = [
     glowColor: '#475569'
   },
   {
-    label: 'Syntetisk lammeull-fôr',
+    label: 'Lammeull-fôr',
     description: '— Varm og hurtigtørkende',
     glowColor: '#d4c5b9'
   },
@@ -38,7 +38,6 @@ export function ComfyrobeContentColumn() {
       className={cn('will-animate-fade-in-up', containerInView && 'is-in-view')}
       style={{ '--transition-delay': '0.1s' } as React.CSSProperties}
     >
-      {/* Premium Badge */}
       <div
         ref={badgeRef}
         className={cn(
@@ -48,9 +47,7 @@ export function ComfyrobeContentColumn() {
         style={{ '--transition-delay': '0.3s' } as React.CSSProperties}
       >
         <Shield className='h-4 w-4 text-slate-400' />
-        <span className='text-sm font-semibold text-slate-400'>
-          Premium kvalitet
-        </span>
+        <span className='text-sm font-semibold text-slate-400'>Comfyrobe™</span>
       </div>
 
       <h2
