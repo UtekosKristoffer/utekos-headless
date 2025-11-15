@@ -1,4 +1,3 @@
-// app/api/checkout/capture-identifiers/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { redisSet } from '@/lib/redis'
 import type { CheckoutAttribution, UserData } from '@types' // Importer UserData
@@ -10,21 +9,37 @@ interface CaptureBody {
   userData: UserData
 }
 
+/**
+ * Parser ut checkout-tokenen (en 30-tegns alfanumerisk streng) fra
+ * de ulike Shopify URL-formatene.
+ *
+ * Eksempler:
+ * - .../cart/c/hWN5HJ1FX9Yg8O0eSfAtPz1f?key=...
+ * - .../checkouts/cn/hWN5HJ1FX9Yg8O0eSfAtPz1f/nb-no?_r=...
+ */
 function parseCheckoutToken(
   checkoutUrl: string | undefined
 ): string | undefined {
-  if (!checkoutUrl) return undefined // Håndter undefined
+  if (!checkoutUrl) return undefined
+
   try {
-    const url = new URL(checkoutUrl)
-    const parts = url.pathname.split('/').filter(Boolean)
-    const checkoutIndex = parts.findIndex(p => p === 'checkouts')
-    if (checkoutIndex !== -1) {
-      const potentialToken = parts[checkoutIndex + 1]
-      if (potentialToken && /^[a-f0-9]{32}$/i.test(potentialToken)) {
-        return potentialToken
-      }
+    // Regex for å finne en 30-tegns alfanumerisk streng (case-sensitiv)
+    // som er en del av URL-stien.
+    const match = checkoutUrl.match(/\/([a-zA-Z0-9]{30})(?=[/?]|$)/)
+
+    if (match && match[1]) {
+      return match[1]
     }
-    return url.searchParams.get('token') ?? undefined
+
+    // Fallback: Prøv å hente fra 'token' query-parameter (som i den gamle koden)
+    const url = new URL(checkoutUrl)
+    const queryToken = url.searchParams.get('token')
+    if (queryToken) {
+      return queryToken
+    }
+
+    // Hvis ingen av metodene fant noe
+    return undefined
   } catch (e) {
     console.error('Error parsing checkout URL:', e, 'URL:', checkoutUrl)
     return undefined
