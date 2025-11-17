@@ -1,4 +1,3 @@
-// src/app/api/shopify/webhooks/orders-paid/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import crypto from 'node:crypto'
 import { redisGet, redisDel } from '@/lib/redis'
@@ -84,6 +83,31 @@ function toNumberSafe(s: string | undefined | null): number | undefined {
   if (s == null || typeof s !== 'string') return undefined // Sjekk type også
   const n = Number(s)
   return Number.isFinite(n) ? n : undefined
+}
+
+/**
+ * NY HJELPER: Henter den korrekte 'key'-parameteren fra ordre-URLen.
+ * Dette er tokenen som 'capture-identifiers' bruker for å lagre i Redis.
+ */
+function getCheckoutKey(order: OrderPaid): string | undefined {
+  const urlString = (order as any)?.order_status_url
+  if (typeof urlString === 'string') {
+    try {
+      const url = new URL(urlString)
+      const key = url.searchParams.get('key')
+      // Sjekk at 'key' ser ut som en 32-sifret hex-streng
+      if (key && /^[a-f0-9]{32}$/i.test(key)) {
+        return key
+      }
+    } catch (e) {
+      console.error(
+        '[Webhook orders/paid] Could not parse order_status_url:',
+        e
+      )
+    }
+  }
+  // Fallback til 'order.token' hvis 'key' ikke ble funnet
+  return order.token ?? order.cart_token ?? undefined
 }
 
 function buildUserData(
@@ -191,20 +215,24 @@ export async function POST(req: NextRequest) {
     // Returner 400 Bad Request ved feil JSON
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
   }
-  const token = order.token ?? order.cart_token ?? undefined
-  const redisKeyBase =
-    token ?? order.admin_graphql_api_id ?? `orderid_${order.id}`
-  const redisKey = `cart:${redisKeyBase}:checkout_attribution`
+
+  // 3) Hent attribusjon fra Redis (FIKSET LOGIKK)
+  const token = getCheckoutKey(order) // Bruker ny hjelpefunksjon
+  const redisKey = token ? `checkout:${token}` : undefined // Bruker korrekt format
+
   let attrib: CheckoutAttribution | null = null
   try {
-    attrib = await redisGet<CheckoutAttribution>(redisKey)
+    if (redisKey) {
+      attrib = await redisGet<CheckoutAttribution>(redisKey)
+    }
+
     if (attrib) {
       console.log(
         `[Webhook orders/paid] Found attribution data in Redis for key: ${redisKey}`
       )
     } else {
       console.warn(
-        `[Webhook orders/paid] No attribution data found in Redis for key: ${redisKey}`
+        `[Webhook orders/paid] No attribution data found in Redis for key: ${redisKey}. (Fallback: order.token='${order.token}')`
       )
     }
   } catch (redisError) {
