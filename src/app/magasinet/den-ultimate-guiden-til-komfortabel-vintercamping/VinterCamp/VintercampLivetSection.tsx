@@ -30,7 +30,7 @@ export const VintercampLivetSection = () => {
           <Sparkles className='h-5 w-5 text-yellow-400 flex-shrink-0' />{' '}
           Livsnyter-tipset:
         </h4>
-        <p className='text-muted-foreground !my-0 text-base'>
+        <p className='text-article-white !my-0 text-base'>
           Bruk alltid kjøkkenviften når du koker vann eller lager mat, og tørk
           opp vannsøl på badet umiddelbart. Hver dråpe vann du fjerner, er en
           dråpe som ikke ender som is på innsiden av et vindu.
@@ -40,7 +40,7 @@ export const VintercampLivetSection = () => {
       <h3 className='text-2xl font-semibold mt-8 mb-3'>
         Kom deg ut: Nyt det magiske vinterlyset
       </h3>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white'>
         Selve poenget med vintercamping er å oppleve den unike naturen.
         Vinterdagene er korte, og lyset er ofte spektakulært. Ikke la deg fange
         inne i bobilen hele dagen. Kle deg godt og kom deg ut. En kort gåtur i
@@ -53,7 +53,7 @@ export const VintercampLivetSection = () => {
       <h3 className='text-2xl font-semibold mt-8 mb-3'>
         Skap hygge: De små detaljene som teller
       </h3>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white'>
         Når mørket senker seg, er det tid for å skape den gode stemningen inne.
         Dette er "hyttekos-formelen" i praksis. Demp hovedbelysningen og bruk
         flere små lyskilder som lysslynger og LED-stearinlys for å skape en lun
@@ -66,7 +66,7 @@ export const VintercampLivetSection = () => {
           <Sparkles className='h-5 w-5 text-yellow-400 flex-shrink-0' />{' '}
           Livsnyter-tipset:
         </h4>
-        <p className='text-muted-foreground !my-0 text-base'>
+        <p className='text-article-white !my-0 text-base'>
           Pakk med et par gode brettspill eller en bok du har gledet deg til å
           lese. Vinterkveldene er lange, og å koble helt av med analog
           underholdning er en perfekt måte å finne roen og nyte nuet på.
