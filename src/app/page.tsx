@@ -21,14 +21,11 @@ import { ComfyrobeSection } from '../components/frontpage/components/SpecialOffe
 
 const HomePage = async () => {
   await connection()
-
   const queryClient = new QueryClient()
-
   await queryClient.prefetchQuery({
     queryKey: ['products', 'featured'],
     queryFn: getFeaturedProducts
   })
-
   return (
     <main>
       <HydrationBoundary state={dehydrate(queryClient)}>

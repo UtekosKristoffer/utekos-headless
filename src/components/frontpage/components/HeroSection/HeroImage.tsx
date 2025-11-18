@@ -1,7 +1,7 @@
 'use client'
 import heroImage from '@public/linn-kate-kikkert.png'
-import heroImage2 from '@public/kateoglinn-redigert.jpg'
-import heroImage3 from '@public/monica-arne-balpanne-1.png'
+import heroImage2 from '@public/arne-monica-masterpng.webp'
+import heroImage3 from '@public/kate-linn-orginal.webp'
 import Image from 'next/image'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import {
@@ -13,7 +13,7 @@ import Autoplay from 'embla-carousel-autoplay'
 
 export function HeroImage() {
   return (
-    <div className='group relative mx-auto mb-8 max-w-7xl overflow-hidden rounded-2xl border border-neutral-800 shadow-2xl'>
+    <div className='group relative mx-auto mb-8 max-w-7xl md:max-w-6xl overflow-hidden rounded-2xl border border-neutral-800 shadow-2xl'>
       <div className='pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/20 via-transparent to-transparent' />
 
       <Carousel
@@ -70,7 +70,7 @@ export function HeroImage() {
                 fill
                 quality={100}
                 sizes='(min-width: 1280px) 1280px, 100vw'
-                className='object-cover'
+                className='object-cover object-bottom'
               />
             </AspectRatio>
           </CarouselItem>
