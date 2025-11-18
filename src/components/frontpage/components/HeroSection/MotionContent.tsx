@@ -10,11 +10,10 @@ export function MotionContent() {
       >
         <Award className='h-4 w-4 text-sky-800' />
         <span className='text-sm font-medium text-sky-800'>
-          Holder deg varm - siden 2020
+          Funksjonell varme - siden 2020
         </span>
       </div>
 
-      {/* Main headline */}
       <h1
         className='animate-fade-in-up mt-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl xl:text-7xl'
         style={{ animationDelay: '0.3s' }}
@@ -25,7 +24,6 @@ export function MotionContent() {
         </span>
       </h1>
 
-      {/* Subheadline */}
       <p
         className='animate-fade-in-up mx-auto mt-6 mb-12 max-w-2xl text-lg leading-relaxed text-foreground/80 md:max-w-4xl lg:text-2xl'
         style={{ animationDelay: '0.5s' }}

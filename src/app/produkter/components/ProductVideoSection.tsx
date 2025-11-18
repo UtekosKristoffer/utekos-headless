@@ -51,7 +51,7 @@ export async function ProductVideoSection() {
               </div>
               <div className='flex items-center gap-3'>
                 <Layers className='h-5 w-5 text-sky-800 flex-shrink-0' />
-                <span>Allsidig: Jakke, parkas & sovepose</span>
+                <span>Allsidig: Jakke, parkas og sovepose</span>
               </div>
             </div>
             <Button asChild size='lg' className='mt-10 w-full sm:w-auto'>

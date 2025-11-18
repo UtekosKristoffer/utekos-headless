@@ -1,31 +1,32 @@
-// Path: src/components/ComfyrobeSection/ComfyrobeContentColumn.tsx
+// Path: src/components/MikrofiberSection/MikrofiberContentColumn.tsx
 'use client'
-import { ArrowRight, Shield } from 'lucide-react'
+import { ArrowRight, Feather } from 'lucide-react'
 import Link from 'next/link'
 import { buttonVariants } from '@/components/ui/button'
-import { BenefitCard } from './BenefitCard'
+import { BenefitCard } from '@/app/produkter/components/sections/MicrofiberSection/BenefitCard'
 import { useInView } from '@/hooks/useInView'
 import { cn } from '@/lib/utils/className'
 
 const benefits = [
   {
-    label: 'Vanntett og vindtett',
-    description: '— 8000mm vannsøyle og tapede sømmer',
-    glowColor: '#475569'
+    label: '3-i-1 funksjonalitet',
+    description: '— Parkas, oppfestet eller full lengde',
+    glowColor: '#f97316'
   },
   {
-    label: 'Lammeull-fôr',
-    description: '— Varm og hurtigtørkende',
-    glowColor: '#d4c5b9'
+    label: 'Lettvekt og kompakt',
+    description: '— Bare ca. 800g, enkel å pakke',
+    glowColor: '#fb923c'
   },
   {
-    label: 'Toveis YKK®-glidelås',
-    description: '— Enkel av- og påkledning',
-    glowColor: '#64748b'
+    label: 'YKK®-toveisglidelåser',
+    description:
+      '— Bransjens mest anerkjente glidelås sikrer pålitelig og enkel bruk',
+    glowColor: '#fdba74'
   }
 ]
 
-export function ComfyrobeContentColumn() {
+export function MikrofiberContentColumn() {
   const [containerRef, containerInView] = useInView({ threshold: 0.5 })
   const [badgeRef, badgeInView] = useInView({ threshold: 1 })
   const [h2Ref, h2InView] = useInView({ threshold: 1 })
@@ -41,14 +42,14 @@ export function ComfyrobeContentColumn() {
       <div
         ref={badgeRef}
         className={cn(
-          'will-animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-slate-500/30 bg-slate-900/20 px-4 py-2',
+          'will-animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-900/20 px-4 py-2',
           badgeInView && 'is-in-view'
         )}
         style={{ '--transition-delay': '0.3s' } as React.CSSProperties}
       >
-        <Shield className='h-4 w-4 text-slate-400' />
-        <span className='text-sm font-semibold text-slate-400'>
-          Comfyrobe™
+        <Feather className='h-4 w-4 text-orange-400' />
+        <span className='text-sm font-semibold text-orange-400'>
+          Ultralett allsidighet
         </span>
       </div>
 
@@ -60,20 +61,21 @@ export function ComfyrobeContentColumn() {
         )}
         style={{ '--transition-delay': '0.4s' } as React.CSSProperties}
       >
-        Tøff mot været, komfortabel for deg
+        Lettvekt møter varme og allsidighet
       </h2>
 
       <p
         ref={pRef}
         className={cn(
-          'will-animate-fade-in-up mt-4 text-lg leading-relaxed text-neutral-400',
+          'will-animate-fade-in-up mt-4 text-lg leading-relaxed text-neutral-200',
           pInView && 'is-in-view'
         )}
         style={{ '--transition-delay': '0.5s' } as React.CSSProperties}
       >
-        Comfyrobe™ kombinerer funksjon, tidløst design og kompromissløs
-        komfort. Vanntett og vindtett ytterstoff med pustende membran holder deg
-        tørr, mens det tykke sherpa-fôret omslutter deg med varme.
+        Utekos Mikrofiber™ gir deg følelsen av dun med ekstra fordeler.
+        Beholder varmen selv når den blir fuktig og tørker raskt. Ulike
+        snorstramminger sørger for at passformen kan justeres etter behov.
+        Tilgjengelig i fargene Fjellblå og Vargnatt.
       </p>
 
       <ul className='mt-8 space-y-3'>
@@ -85,22 +87,20 @@ export function ComfyrobeContentColumn() {
           />
         ))}
       </ul>
-
-      {/* CTA Button */}
       <div
         ref={ctaRef}
         className={cn('will-animate-fade-in-up', ctaInView && 'is-in-view')}
         style={{ '--transition-delay': '0.9s' } as React.CSSProperties}
       >
         <Link
-          href='/produkter/comfyrobe'
+          href='/produkter/utekos-mikrofiber'
           className={buttonVariants({
             size: 'lg',
             className:
-              'group mt-8 w-full sm:w-auto bg-slate-700 text-white hover:bg-slate-600 shadow-lg shadow-slate-700/20 hover:shadow-slate-600/40 transition-all duration-300'
+              'group mt-8 w-full sm:w-auto bg-orange-600 text-white hover:bg-orange-500 shadow-lg shadow-orange-600/20 hover:shadow-orange-500/40 transition-all duration-300'
           })}
         >
-          Utforsk Comfyrobe™
+          Utforsk Utekos Mikrofiber™
           <ArrowRight className='ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
         </Link>
       </div>

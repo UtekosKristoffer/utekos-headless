@@ -19,7 +19,7 @@ import { MicrofiberFeatureSection } from './components/sections/MicrofiberSectio
 import { ProductVideoSection } from './components/ProductVideoSection'
 import { TechDownFeatureSection } from './components/sections/TechDownFeatureSection/TechDownFeatureSection'
 import { connection } from 'next/server'
-
+import { MikrofiberSection } from './components/sections/MicrofiberSection/MikrofiberSection'
 export const metadata: Metadata = {
   title: 'Kolleksjon: Komfortplagg for hytteliv & utekos | Utekos',
   description:
@@ -113,12 +113,11 @@ const ProductsPage = async () => {
             </HydrationBoundary>
           </section>
         </Activity>
-
-        <Activity>
-          <MicrofiberFeatureSection />
-        </Activity>
         <Activity>
           <ComfyrobeFeatureSection />
+        </Activity>
+        <Activity>
+          <MikrofiberSection />
         </Activity>
         <Activity>
           <StapperFeatureSection />

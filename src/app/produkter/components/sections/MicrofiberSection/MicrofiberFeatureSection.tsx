@@ -18,7 +18,7 @@ export function MicrofiberFeatureSection() {
         </AnimatedBlock>
         <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s'>
           <p className='mx-auto mt-6 max-w-3xl text-lg leading-8 text-access/80'>
-            Velg riktig varme for ditt eventyr. Mens dun er uslåelig på vekt, er
+            Velg riktig varme for ditt bruk. Mens dun er uslåelig på vekt, er
             Utekos Mikrofiber™ den robuste og bekymringsfrie partneren for det
             ustabile norske klimaet.
           </p>

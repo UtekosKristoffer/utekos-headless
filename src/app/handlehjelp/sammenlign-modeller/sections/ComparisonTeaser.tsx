@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button'
 import { ArrowRightIcon, Droplets, Feather, Layers } from 'lucide-react'
 import Link from 'next/link'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
-
 export function ComparisonTeaser() {
   return (
     <section className='mb-24'>
@@ -22,36 +21,33 @@ export function ComparisonTeaser() {
               i vår komplette guide.
             </p>
             <div className='mt-8 grid grid-cols-1 gap-6 text-left md:grid-cols-3'>
-              {/* Kort for Dun */}
               <div className='rounded-lg border border-neutral-700 bg-background p-6'>
                 <div className='flex items-center gap-3'>
                   <Feather className='h-6 w-6 text-violet-400' />
                   <h3 className='text-lg font-semibold'>Utekos Dun™</h3>
                 </div>
                 <p className='mt-2 text-sm text-access/80'>
-                  Best for maksimal varme i tørre, kalde omgivelser som på
-                  hytten.
+                  Kvalitetsdun og innovative løsninger for funksjonell varme.
                 </p>
               </div>
-              {/* Kort for Fiberdun */}
+
               <div className='rounded-lg border border-neutral-700 bg-background p-6'>
                 <div className='flex items-center gap-3'>
                   <Droplets className='h-6 w-6 text-cyan-400' />
                   <h3 className='text-lg font-semibold'>Utekos TechDown™</h3>
                 </div>
                 <p className='mt-2 text-sm text-access/80'>
-                  Best for uforutsigbart vær og fuktige forhold i båt eller
-                  bobil.
+                  Vår varmeste og mest allsidige modell.
                 </p>
               </div>
-              {/* Kort for Mikrofiber */}
               <div className='rounded-lg border border-neutral-700 bg-background p-6'>
                 <div className='flex items-center gap-3'>
                   <Layers className='h-6 w-6 text-emerald-400' />
                   <h3 className='text-lg font-semibold'>Utekos Mikrofiber™</h3>
                 </div>
                 <p className='mt-2 text-sm text-access/80'>
-                  Best for allsidig, daglig bruk som et lettere og praktisk lag.
+                  Det letteste medlemmet i Utekos-serien. Bygget for maksimal
+                  allsidighet.
                 </p>
               </div>
             </div>
