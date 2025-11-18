@@ -18,18 +18,18 @@ export const PakkelisteSection = () => {
       <h3 className='text-2xl font-semibold mt-8 mb-3'>
         Ull innerst: Din personlige termostat
       </h3>
-      <p className='text-lg text-muted-foreground'>
-        Dette er den viktigste regelen. Ullundertøy, spesielt i merinoull, er
-        din desidert beste venn i kulden. I motsetning til bomull, som blir
-        kaldt og farlig når det blir fuktig, har ull den unike egenskapen at det
-        transporterer fukt bort fra huden og fortsetter å isolere selv om du
-        blir svett. Tenk på det som din innerste, smarte termostat.
+      <p className='text-lg text-article-white'>
+        Dette er den viktigste regelen. Ullundertøy er din desidert beste venn i
+        kulden. I motsetning til bomull, som blir kaldt og potensielt farlig når
+        det blir fuktig, har ull den unike egenskapen at det transporterer fukt
+        bort fra huden og fortsetter å isolere selv om du blir svett. Tenk på
+        det som din innerste, smarte termostat.
       </p>
 
       <h3 className='text-2xl font-semibold mt-8 mb-3'>
         Gode tøfler: Luksus for kalde gulv
       </h3>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white'>
         Selv med varmesystemet på fullt, er gulvet i en bobil ofte det kaldeste
         punktet. Kulden fra bakken trekker opp, og kalde føtter sprer seg raskt
         til resten av kroppen. Et par tykke, isolerte tøfler med en solid såle
@@ -40,7 +40,7 @@ export const PakkelisteSection = () => {
       <h3 className='text-2xl font-semibold mt-8 mb-3'>
         Vinterdyne og sovepose: Invester i god søvn
       </h3>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white'>
         En god natts søvn er avgjørende for å kunne nyte de korte, vakre
         vinterdagene. En vanlig sommerdyne er ikke nok når temperaturen kryper
         nedover. Invester i en skikkelig vinterdyne med godt fyll, eller en
@@ -51,7 +51,7 @@ export const PakkelisteSection = () => {
       <h3 className='text-2xl font-semibold mt-8 mb-3'>
         Utekos-plagget: Ditt hemmelige våpen for komfort
       </h3>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white'>
         Dette er plagget som fyller alle de små "hullene" i komforten. Det er
         perfekt for de iskalde morgenene før varmesystemet har fått jobbet seg
         opp, for den raske turen ut for å sjekke været, eller for å kunne sitte
@@ -64,7 +64,7 @@ export const PakkelisteSection = () => {
       <h3 className='text-2xl font-semibold mt-8 mb-3'>
         Godt lys: Forleng de korte vinterdagene
       </h3>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white'>
         Vinterdagene er korte og mørket kommer fort. Å famle rundt på en mørk
         campingplass er unødvendig styr. En god hodelykt er essensielt, da den
         frigjør begge hendene dine til praktiske gjøremål som å koble til strøm
@@ -76,7 +76,7 @@ export const PakkelisteSection = () => {
           <Sparkles className='h-5 w-5 text-yellow-400 flex-shrink-0' />{' '}
           Livsnyter-tipset:
         </h4>
-        <p className='text-muted-foreground !my-0 text-base'>
+        <p className='text-article-white !my-0 text-base'>
           Ha en liten, dedikert lommelykt liggende fast ved sengen. Skulle du
           trenge å stå opp om natten, slipper du å lete i mørket eller vekke
           reisefølget med å slå på det sterke hovedlyset i bobilen.

@@ -15,7 +15,7 @@ export const VintercampLivetSection = () => {
         />
       </figure>
 
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white'>
         Når det er kaldt ute og varmt inne, er kondens uunngåelig. Vi puster og
         lager mat, noe som skaper fuktig luft. Hvis denne fukten ikke luftes ut,
         setter den seg i sengetøy og vegger og kan skape et dårlig inneklima.

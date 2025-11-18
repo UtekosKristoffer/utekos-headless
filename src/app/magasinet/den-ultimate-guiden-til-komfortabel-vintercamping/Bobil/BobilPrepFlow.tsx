@@ -34,9 +34,7 @@ function CustomNodeCard({ node }: { node: FlowNode }) {
           <h4 className='text-base font-bold text-foreground'>
             {node.data.label}
           </h4>
-          <p className='text-sm text-muted-foreground'>
-            {node.data.description}
-          </p>
+          <p className='text-sm text-article-white'>{node.data.description}</p>
         </div>
       </div>
     </div>
@@ -46,7 +44,6 @@ function CustomNodeCard({ node }: { node: FlowNode }) {
 function DesktopLayout() {
   return (
     <svg viewBox='0 0 620 450' className='size-full' aria-hidden='true'>
-      {/* Linjer */}
       {initialEdges.map(edge => {
         const sourceNode = nodes.find(n => n.id === edge.source)!
         const targetNode = nodes.find(n => n.id === edge.target)!
@@ -66,7 +63,6 @@ function DesktopLayout() {
         )
       })}
 
-      {/* Noder */}
       {nodes.map(node => (
         <foreignObject
           key={node.id}

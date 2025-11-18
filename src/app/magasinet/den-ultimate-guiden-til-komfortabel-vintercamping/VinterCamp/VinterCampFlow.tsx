@@ -35,9 +35,7 @@ function CustomNodeCard({ node }: { node: FlowNode }) {
           <h4 className='text-base font-bold text-foreground'>
             {node.data.label}
           </h4>
-          <p className='text-sm text-muted-foreground'>
-            {node.data.description}
-          </p>
+          <p className='text-sm text-article-white'>{node.data.description}</p>
         </div>
       </div>
     </div>

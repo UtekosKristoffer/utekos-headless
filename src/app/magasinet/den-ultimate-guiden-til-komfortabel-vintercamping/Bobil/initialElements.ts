@@ -32,8 +32,6 @@ export type FlowNode =
       height: number
       data: CustomNodeData
     }
-
-// --- Node Data (nå med den presise typen) ---
 export const nodes: FlowNode[] = [
   {
     id: '1',

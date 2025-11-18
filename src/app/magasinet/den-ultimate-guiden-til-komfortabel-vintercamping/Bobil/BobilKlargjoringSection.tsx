@@ -12,14 +12,15 @@ export const BobilKlargjoringSection = () => {
           src={BobilStoppekranBilde}
           alt='Nærbilde av en hånd som stenger hovedstoppekranen i en bobil, et viktig steg i vinterklargjøringen.'
           className='rounded-lg'
+          height={1080}
+          width={1080}
           placeholder='blur'
         />
       </figure>
-
       <h3 className='text-2xl font-semibold mt-8 mb-3'>
         Isolasjon: Hold den dyrebare varmen inne
       </h3>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white'>
         Varmetap er din største fiende om vinteren. De største synderne er
         nesten alltid de store vindusflatene i førerhuset. Gå over alle
         tetningslister i dører og vinduer for å sjekke for sprekker og skader.
@@ -34,7 +35,7 @@ export const BobilKlargjoringSection = () => {
           <Sparkles className='h-5 w-5 text-yellow-400 flex-shrink-0' />{' '}
           Livsnyter-tipset:
         </h4>
-        <p className='text-muted-foreground !my-0 text-base'>
+        <p className='text-article-white !my-0 text-base'>
           Legg et tykt teppe eller en egnet matte på gulvet i førerhuset. Gulvet
           her er ofte dårligere isolert, og en matte stopper effektivt kulden
           fra å trekke opp nedenfra.
@@ -44,7 +45,7 @@ export const BobilKlargjoringSection = () => {
       <h3 className='text-2xl font-semibold mt-8 mb-3'>
         Varmesystem: Bobilens bankende hjerte
       </h3>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white'>
         Et velfungerende varmesystem (som Alde eller Truma) er selve livsnerven
         i en vinterbobil. Før du drar, kjør en full test av systemet hjemme. La
         det gå på høy effekt i minst en time for å bekrefte at det fungerer
@@ -59,7 +60,7 @@ export const BobilKlargjoringSection = () => {
           <Sparkles className='h-5 w-5 text-yellow-400 flex-shrink-0' />{' '}
           Profftipset:
         </h4>
-        <p className='text-muted-foreground !my-0 text-base'>
+        <p className='text-article-white !my-0 text-base'>
           Bruk ren propan, ikke en butan-blanding, på gassflaskene om vinteren.
           Propan fordamper og fungerer helt ned til -42°C, mens butan slutter å
           fungere rundt frysepunktet.
@@ -69,7 +70,7 @@ export const BobilKlargjoringSection = () => {
       <h3 className='text-2xl font-semibold mt-8 mb-3'>
         Vannsystem: Unngå frostsprengte rør og dyre reparasjoner
       </h3>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white'>
         For å kunne bruke vann på vintertur, må systemet holdes frostfritt. De
         fleste moderne bobiler bygget for nordiske forhold har oppvarmede og
         isolerte tanker. Finn ut om din har det. Sørg for at varmen i bodelen
@@ -82,7 +83,7 @@ export const BobilKlargjoringSection = () => {
       <h3 className='text-2xl font-semibold mt-8 mb-3'>
         Dekk og kjetting: Din livsforsikring på veien
       </h3>
-      <p className='text-lg text-muted-foreground'>
+      <p className='text-lg text-article-white'>
         Dette punktet er ikke-diskutabelt. Gode, nordiske vinterdekk med riktig
         mønsterdybde er et lovpålagt krav og din viktigste sikkerhet. Men dekk
         alene er ikke alltid nok på norske fjellveier. Ha alltid med et sett med
@@ -94,7 +95,7 @@ export const BobilKlargjoringSection = () => {
           <Sparkles className='h-5 w-5 text-yellow-400 flex-shrink-0' />{' '}
           Profftipset:
         </h4>
-        <p className='text-muted-foreground !my-0 text-base'>
+        <p className='text-article-white !my-0 text-base'>
           Ikke la første gang du monterer kjettinger være i en snøstorm på en
           mørk fjellovergang. Øv deg hjemme! Legg dem på og ta dem av i
           oppkjørselen en gang, slik at du vet nøyaktig hvordan de fungerer. Det
