@@ -1,7 +1,7 @@
 'use client'
 import heroImage from '@public/linn-kate-kikkert.png'
-import heroImage2 from '@public/arne-monica-masterpng.webp'
-import heroImage3 from '@public/kate-linn-orginal.webp'
+import heroImage3 from '@public/arne-monica-masterpng.webp'
+import heroImage2 from '@public/kate-linn-orginal.webp'
 import Image from 'next/image'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import {
