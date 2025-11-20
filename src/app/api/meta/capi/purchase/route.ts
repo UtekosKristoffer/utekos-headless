@@ -14,7 +14,6 @@ import type {
   MetaGraphError,
   MetaEventsSuccess
 } from '@types'
-
 function verifyHmac(req: NextRequest, raw: string): boolean {
   const secret = process.env.SHOPIFY_WEBHOOK_SECRET ?? ''
   if (!secret) return false
@@ -26,7 +25,6 @@ function verifyHmac(req: NextRequest, raw: string): boolean {
   if (header.length !== digest.length) return false
   return crypto.timingSafeEqual(Buffer.from(digest), Buffer.from(header))
 }
-
 function toNumberSafe(s: string | undefined): number | undefined {
   if (typeof s !== 'string') return undefined
   const n = Number(s)
@@ -52,7 +50,6 @@ function normalizePhone(input: string | undefined | null): string | undefined {
 }
 
 function getCheckoutKey(order: OrderPaid): string | undefined {
-  // Prøv 'order_status_url' først, den inneholder 'key=...'
   const urlString = (order as any)?.order_status_url
   if (typeof urlString === 'string') {
     try {
@@ -86,7 +83,6 @@ export async function POST(req: NextRequest) {
       order.admin_graphql_api_id ?? order.id
     }. Total: ${order.total_price} ${order.currency}`
   )
-  // ---------------------------
 
   const token = getCheckoutKey(order)
   const redisKey = token ? `checkout:${token}` : undefined
@@ -185,7 +181,7 @@ export async function POST(req: NextRequest) {
       if (zip !== undefined) user_data.zp = [zip]
 
       const country = normalizeAndHash(addr.country_code)
-      if (country !== undefined) user_data.country = [country] // KORRIGERT
+      if (country !== undefined) user_data.country = [country]
     }
   }
 

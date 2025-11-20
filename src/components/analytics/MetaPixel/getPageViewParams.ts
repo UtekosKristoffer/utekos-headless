@@ -1,3 +1,4 @@
+// Path: src/components/analytics/MetaPixel/getPageViewParams.ts
 export function getPageViewParams(
   pathname: string,
   searchParams?: URLSearchParams | null

@@ -69,29 +69,34 @@ function verifyHmac(req: NextRequest, raw: string): boolean {
 }
 
 function toNumberSafe(s: string | undefined | null): number | undefined {
-  if (s == null || typeof s !== 'string') return undefined // Sjekk type også
+  if (s == null || typeof s !== 'string') return undefined
   const n = Number(s)
   return Number.isFinite(n) ? n : undefined
 }
 
-function getCheckoutKey(order: OrderPaid): string | undefined {
-  const urlString = (order as any)?.order_status_url
-  if (typeof urlString === 'string') {
-    try {
-      const url = new URL(urlString)
-      const key = url.searchParams.get('key')
-      if (key && /^[a-f0-9]{32}$/i.test(key)) {
-        return key
-      }
-    } catch (e) {
-      console.error(
-        '[Webhook orders/paid] Could not parse order_status_url:',
-        e
-      )
+function getKeyFromUrl(urlString: string | undefined): string | undefined {
+  if (typeof urlString !== 'string') return undefined
+  try {
+    const url = new URL(urlString)
+    const key = url.searchParams.get('key')
+    if (key && /^[a-f0-9]{32}$/i.test(key)) {
+      return key
     }
-  }
+  } catch (e) {}
+  return undefined
+}
 
-  return order.token ?? order.cart_token ?? undefined
+function getCheckoutKey(order: OrderPaid): string | undefined {
+  if (order.cart_token) return order.cart_token
+
+  // 2. Prioritet: token (Kan være samme som cart_token i eldre oppsett)
+  if (order.token) return order.token
+
+  // 3. Fallback: Prøv å parse fra order_status_url (ofte en annen key, men verdt et forsøk)
+  const urlKey = getKeyFromUrl((order as any)?.order_status_url)
+  if (urlKey) return urlKey
+
+  return undefined
 }
 
 function buildUserData(
@@ -100,7 +105,6 @@ function buildUserData(
 ): MetaUserData {
   const userData: MetaUserData = {}
 
-  // Fra Attribusjon (Redis)
   if (attrib?.userData?.fbp) userData.fbp = attrib.userData.fbp
   if (attrib?.userData?.fbc) userData.fbc = attrib.userData.fbc
   if (attrib?.userData?.client_user_agent)
@@ -170,7 +174,6 @@ export async function POST(req: NextRequest) {
     console.error('[Webhook orders/paid] Invalid HMAC')
     return NextResponse.json({ error: 'Invalid HMAC' }, { status: 401 })
   }
-  console.log('[Webhook orders/paid] HMAC verified')
 
   let order: OrderPaid
   try {
@@ -178,9 +181,6 @@ export async function POST(req: NextRequest) {
     if (!order || typeof order !== 'object' || !order.id) {
       throw new Error('Invalid order data received in webhook')
     }
-    console.log(
-      `[Webhook orders/paid] Parsed order ID: ${order.id}, GID: ${order.admin_graphql_api_id}`
-    )
   } catch (e) {
     console.error(
       '[Webhook orders/paid] Failed to parse Shopify webhook body:',
@@ -188,8 +188,15 @@ export async function POST(req: NextRequest) {
     )
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
   }
-  const token = getCheckoutKey(order) // Bruker ny hjelpefunksjon
-  const redisKey = token ? `checkout:${token}` : undefined // Bruker korrekt format
+
+  // Debugging av ID-er for å løse Redis mismatch
+  const urlKey = getKeyFromUrl((order as any)?.order_status_url)
+  console.log(
+    `[Webhook orders/paid] Token Debug: ID=${order.id}, cart_token=${order.cart_token}, token=${order.token}, URL_key=${urlKey}`
+  )
+
+  const token = getCheckoutKey(order)
+  const redisKey = token ? `checkout:${token}` : undefined
 
   let attrib: CheckoutAttribution | null = null
   try {
@@ -203,7 +210,11 @@ export async function POST(req: NextRequest) {
       )
     } else {
       console.warn(
-        `[Webhook orders/paid] No attribution data found in Redis for key: ${redisKey}. (Fallback: order.token='${order.token}')`
+        `[Webhook orders/paid] No attribution data found in Redis for key: ${redisKey}. (Used token source: ${
+          token === order.cart_token ? 'cart_token'
+          : token === order.token ? 'token'
+          : 'url'
+        })`
       )
     }
   } catch (redisError) {
@@ -260,11 +271,13 @@ export async function POST(req: NextRequest) {
     ...(eventId && { event_id: eventId })
   }
 
+  // Bruk attributert URL hvis funnet, ellers fallback
   if (attrib?.checkoutUrl) {
     event.event_source_url = attrib.checkoutUrl
   } else if (order.order_status_url) {
     event.event_source_url = order.order_status_url
   }
+
   const payload: MetaEventsRequest & { test_event_code?: string } = {
     data: [event],
     test_event_code: 'TEST63736'
@@ -287,10 +300,12 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  console.log(
-    '[Webhook orders/paid] Sending CAPI Payload (Purchase - Production):',
-    JSON.stringify(payload, null, 2)
-  )
+  if (process.env.NODE_ENV === 'development') {
+    console.log(
+      '[Webhook orders/paid] Sending CAPI Payload:',
+      JSON.stringify(payload, null, 2)
+    )
+  }
 
   try {
     const res = await fetch(
@@ -328,10 +343,10 @@ export async function POST(req: NextRequest) {
     }
 
     console.log(
-      '[Webhook orders/paid] Meta CAPI Success Response:',
+      '[Webhook orders/paid] Meta CAPI Success:',
       JSON.stringify(result, null, 2)
     )
-    return NextResponse.json({ ok: true, result }) // Returner OK til Shopify
+    return NextResponse.json({ ok: true, result })
   } catch (fetchError) {
     console.error('[Webhook orders/paid] Meta CAPI Fetch Error:', fetchError)
     if (redisKey) {

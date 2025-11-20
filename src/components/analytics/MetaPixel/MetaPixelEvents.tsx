@@ -34,11 +34,17 @@ export function MetaPixelEvents() {
         const currentPathname = window.location.pathname
         const currentSearchParams = new URLSearchParams(window.location.search)
         const params = getPageViewParams(currentPathname, currentSearchParams)
+        const externalId = getCookie('ute_ext_id')
 
         window.fbq('track', 'PageView', params, { eventID: eventId })
 
         if (process.env.NODE_ENV === 'production') {
-          sendPageViewToCAPI(currentPathname, eventId, currentSearchParams)
+          sendPageViewToCAPI(
+            currentPathname,
+            eventId,
+            currentSearchParams,
+            externalId
+          )
         }
         animationFrameRef.current = null
       })
@@ -64,10 +70,6 @@ export function MetaPixelEvents() {
       const fbcValue = `fb.1.${creationTime}.${fbclid}`
       if (!existingFbc || existingFbc.split('.').pop() !== fbclid) {
         setCookie('_fbc', fbcValue, 90)
-        console.log(
-          'Meta Pixel: _fbc cookie set/updated from fbclid:',
-          fbcValue
-        )
       }
     }
     const fbp = getCookie('_fbp')
@@ -81,11 +83,11 @@ export function MetaPixelEvents() {
 
     const timeoutId = setTimeout(() => {
       if (typeof window.fbq !== 'function') {
-        console.warn('Meta Pixel: fbq not available for ViewContent')
         return
       }
       const handle = pathname.split('/produkter/')[1]?.split('?')[0]
       if (!handle) return
+
       const eventId = generateEventID().replace('evt_', 'vc_')
       const priceElement = document.querySelector('[data-product-price]')
       const price =
@@ -97,6 +99,7 @@ export function MetaPixelEvents() {
         currencyElement ?
           currencyElement.getAttribute('data-product-currency') || 'NOK'
         : 'NOK'
+
       const viewContentData = {
         content_ids: [handle],
         content_type: 'product',
@@ -104,13 +107,12 @@ export function MetaPixelEvents() {
         value: price,
         currency: currency
       }
+
       window.fbq('track', 'ViewContent', viewContentData, { eventID: eventId })
-      console.log('Meta Pixel: ViewContent tracked', {
-        handle,
-        data: viewContentData,
-        eventId
-      })
+
       if (process.env.NODE_ENV === 'production') {
+        const externalId = getCookie('ute_ext_id')
+
         fetch('/api/meta-events', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -119,13 +121,17 @@ export function MetaPixelEvents() {
             eventData: viewContentData,
             eventId: eventId,
             eventSourceUrl: window.location.href,
-            eventTime: Math.floor(Date.now() / 1000)
+            eventTime: Math.floor(Date.now() / 1000),
+            userData: {
+              external_id: externalId
+            }
           })
         }).catch(err => console.error('ViewContent CAPI error:', err))
       }
     }, 200)
     return () => clearTimeout(timeoutId)
   }, [pathname])
+
   if (!pixelId) {
     return null
   }
@@ -140,7 +146,27 @@ export function MetaPixelEvents() {
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
 
-    fbq('init', '${pixelId}');
+    (function() {
+      var COOKIE_NAME = 'ute_ext_id';
+      var exId = null;
+      try {
+        var match = document.cookie.match(new RegExp('(?:^|; )' + COOKIE_NAME + '=([^;]*)'));
+        exId = match ? decodeURIComponent(match[1]) : null;
+        
+        if (!exId) {
+          exId = 'ute_' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+          var d = new Date();
+          d.setTime(d.getTime() + (730 * 24 * 60 * 60 * 1000)); // 2 år
+          document.cookie = COOKIE_NAME + '=' + encodeURIComponent(exId) + '; expires=' + d.toUTCString() + '; path=/; SameSite=Lax';
+        }
+      } catch (e) {
+        // Fail silent
+      }
+
+      fbq('init', '${pixelId}', { 
+        external_id: exId 
+      });
+    })();
   `
 
   return (

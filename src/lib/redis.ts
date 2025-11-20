@@ -9,12 +9,10 @@ export async function getRedis(): Promise<RedisClientType> {
   if (!url) throw new Error('Missing REDIS_URL')
 
   _client = createClient({ url })
-  // sørg for at connect kun kalles én gang
   if (!_client.isOpen) await _client.connect()
   return _client
 }
 
-// Små helpers med TTL (EX i sekunder)
 export async function redisSet<T>(key: string, value: T, ttlSeconds?: number) {
   const client = await getRedis()
   const payload = JSON.stringify(value)

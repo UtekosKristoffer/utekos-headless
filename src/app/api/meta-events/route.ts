@@ -1,48 +1,7 @@
 // Path: app/api/meta-events/route.ts
 import { NextRequest, NextResponse } from 'next/server'
-
-type ContentItem = { id: string; quantity: number; item_price?: number }
-type CustomData = {
-  value?: number
-  currency?: string
-  content_type?: 'product' | 'product_group'
-  content_ids?: string[]
-  contents?: ContentItem[]
-  num_items?: number
-  order_id?: string
-}
-type UserData = {
-  em?: string[]
-  ph?: string[]
-  fn?: string[]
-  ln?: string[]
-  ge?: string[]
-  db?: string[]
-  ct?: string[]
-  st?: string[]
-  zp?: string[]
-  country?: string[]
-  client_ip_address?: string | null
-  client_user_agent?: string | null
-  fbc?: string | null
-  fbp?: string | null
-  external_id?: string | undefined
-}
-type Body = {
-  eventName:
-    | 'ViewContent'
-    | 'AddToCart'
-    | 'InitiateCheckout'
-    | 'Purchase'
-    | 'PageView'
-    | string
-  eventData?: CustomData
-  userData?: UserData
-  eventId?: string
-  eventSourceUrl?: string
-  eventTime?: number
-}
-
+import { cookies } from 'next/headers'
+import type { Body, UserData } from './types'
 export async function POST(req: NextRequest) {
   const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
   const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
@@ -60,17 +19,11 @@ export async function POST(req: NextRequest) {
   const ip =
     xForwardedFor ? (xForwardedFor.split(',')[0]?.trim() ?? null) : null
 
-  const cookieHeader = req.headers.get('cookie') ?? ''
-  const cookies = cookieHeader.split('; ').reduce(
-    (acc, current) => {
-      const [name, ...value] = current.split('=')
-      if (name) acc[name.trim()] = value.join('=')
-      return acc
-    },
-    {} as Record<string, string>
-  )
-  const fbp = cookies._fbp || null
-  const fbc = cookies._fbc || null
+  const cookieStore = await cookies()
+
+  const fbp = cookieStore.get('_fbp')?.value || null
+  const fbc = cookieStore.get('_fbc')?.value || null
+  const externalIdFromCookie = cookieStore.get('ute_ext_id')?.value || undefined
 
   let body: Body
   try {
@@ -91,12 +44,14 @@ export async function POST(req: NextRequest) {
 
   const event_name = body.eventName
   const event_time = body.eventTime ?? Math.floor(Date.now() / 1000)
+  const finalExternalId = body.userData?.external_id || externalIdFromCookie
 
   const user_data: UserData = {
     client_ip_address: ip,
     client_user_agent: userAgent,
     fbp: fbp,
     fbc: fbc,
+    external_id: finalExternalId,
 
     ...(body.userData?.em && { em: body.userData.em }),
     ...(body.userData?.ph && { ph: body.userData.ph }),
@@ -107,10 +62,7 @@ export async function POST(req: NextRequest) {
     ...(body.userData?.ct && { ct: body.userData.ct }),
     ...(body.userData?.st && { st: body.userData.st }),
     ...(body.userData?.zp && { zp: body.userData.zp }),
-    ...(body.userData?.country && { country: body.userData.country }),
-    ...(body.userData?.external_id && {
-      external_id: body.userData.external_id
-    })
+    ...(body.userData?.country && { country: body.userData.country })
   }
 
   const payload: Record<string, any> = {
@@ -125,7 +77,6 @@ export async function POST(req: NextRequest) {
         custom_data: body.eventData ?? {}
       }
     ],
-
     test_event_code: 'TEST63736'
   }
 
@@ -139,10 +90,14 @@ export async function POST(req: NextRequest) {
     })
 
     const json = await res.json()
-    console.log(
-      `Meta CAPI Response for ${event_name} (${body.eventId}):`,
-      JSON.stringify(json, null, 2)
-    )
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log(
+        `Meta CAPI Response for ${event_name}:`,
+        JSON.stringify(json, null, 2)
+      )
+    }
+
     if (!res.ok) {
       console.error(
         `Meta CAPI request failed for ${event_name} (${body.eventId}): Status ${res.status}`,

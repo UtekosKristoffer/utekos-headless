@@ -48,10 +48,6 @@ export async function POST(req: NextRequest) {
   let body: CaptureBody
   try {
     body = (await req.json()) as CaptureBody
-    console.log(
-      'Received body in /capture-identifiers:',
-      JSON.stringify(body, null, 2)
-    )
   } catch {
     console.error('Invalid JSON received in /capture-identifiers')
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
@@ -67,16 +63,28 @@ export async function POST(req: NextRequest) {
   }
 
   const proxiedIp = req.headers.get('x-forwarded-for')?.split(',')?.[0]?.trim()
-
+  const userAgent = req.headers.get('user-agent') || undefined
+  const cookieFbp = req.cookies.get('_fbp')?.value
+  const cookieFbc = req.cookies.get('_fbc')?.value
+  const cookieExtId = req.cookies.get('ute_ext_id')?.value
   const userDataToSave: UserData = {}
+
   if (body.userData?.fbp) userDataToSave.fbp = body.userData.fbp
+  else if (cookieFbp) userDataToSave.fbp = cookieFbp
+
   if (body.userData?.fbc) userDataToSave.fbc = body.userData.fbc
-  if (body.userData?.client_user_agent)
-    userDataToSave.client_user_agent = body.userData.client_user_agent
-  const ipToUse = body.userData?.client_ip_address ?? proxiedIp 
-  if (ipToUse) userDataToSave.client_ip_address = ipToUse
+  else if (cookieFbc) userDataToSave.fbc = cookieFbc
+
   if (body.userData?.external_id)
     userDataToSave.external_id = body.userData.external_id
+  else if (cookieExtId) userDataToSave.external_id = cookieExtId
+
+  if (body.userData?.client_user_agent)
+    userDataToSave.client_user_agent = body.userData.client_user_agent
+  else if (userAgent) userDataToSave.client_user_agent = userAgent
+
+  const ipToUse = body.userData?.client_ip_address ?? proxiedIp
+  if (ipToUse) userDataToSave.client_ip_address = ipToUse
 
   const payload: CheckoutAttribution = {
     cartId: body.cartId ?? null,
@@ -89,7 +97,13 @@ export async function POST(req: NextRequest) {
   try {
     const redisKey = `checkout:${token}`
     await redisSet(redisKey, payload, 60 * 60 * 24 * 7) // 7d TTL
-    console.log(`Successfully saved data to Redis key: ${redisKey}`)
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log(
+        `Saved attribution for token ${token} (ExtID: ${userDataToSave.external_id})`
+      )
+    }
+
     return NextResponse.json({ ok: true })
   } catch (redisError) {
     console.error('Error saving data to Redis:', redisError)
