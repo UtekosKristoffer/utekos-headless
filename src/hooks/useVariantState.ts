@@ -15,7 +15,6 @@ export function useVariantState(product: ShopifyProduct | undefined) {
   )
 
   const allVariants = product ? flattenVariants(product) || [] : []
-
   const searchParams = useSearchParams()
   const variantIdFromUrl = searchParams.get('variant')
 

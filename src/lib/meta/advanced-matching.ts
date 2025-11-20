@@ -70,7 +70,6 @@ export function getCachedAdvancedMatching(): Record<string, string> | null {
     return null
   }
 }
-
 export async function trackWithAdvancedMatching(
   eventName: string,
   params?: Record<string, any>
@@ -78,7 +77,6 @@ export async function trackWithAdvancedMatching(
   if (!window.fbq) return
 
   const eventId = `${eventName.toLowerCase()}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-
   window.fbq('track', eventName, params || {}, { eventID: eventId })
 
   if (process.env.NODE_ENV === 'production') {

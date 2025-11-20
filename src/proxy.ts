@@ -16,7 +16,6 @@ export const config = {
   ]
 }
 
-
 export function proxy(request: NextRequest) {
   const response = NextResponse.next()
   const fbclid = request.nextUrl.searchParams.get('fbclid')

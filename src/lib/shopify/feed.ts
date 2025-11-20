@@ -136,7 +136,7 @@ export async function getProductsForFeed(): Promise<TransformedProductNode[]> {
   let allProducts: ProductNode[] = []
   let hasNextPage = true
   let cursor: string | null = null
-  const BATCH_SIZE = 50 // Hent 50 produkter om gangen
+  const BATCH_SIZE = 50
 
   console.log('Starter henting av produkter for Google Feed...')
 

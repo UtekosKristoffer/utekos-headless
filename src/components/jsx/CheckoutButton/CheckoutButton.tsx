@@ -43,7 +43,10 @@ export const CheckoutButton = ({
     }
 
     try {
-      sendJSON('/api/log/checkout-start', { cartId })
+      sendJSON('/api/log', {
+        event: 'Checkout Started',
+        context: { cartId }
+      })
 
       const fbp = getCookie('_fbp')
       const fbc = getCookie('_fbc')
@@ -74,6 +77,7 @@ export const CheckoutButton = ({
       const customData: CustomData = {
         value,
         currency,
+        content_name: 'string',
         content_ids: item_ids,
         content_type: 'product',
         num_items

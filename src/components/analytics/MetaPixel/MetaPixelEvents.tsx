@@ -8,7 +8,7 @@ import { getCookie } from './getCookie'
 import { getPageViewParams } from './getPageViewParams'
 import { sendPageViewToCAPI } from './sendPageViewToCAPI'
 import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
-import type { CustomData, UserData } from '@types'
+import type { UserData } from '@types'
 
 export function MetaPixelEvents() {
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID

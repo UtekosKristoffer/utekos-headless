@@ -4,7 +4,6 @@ export function getPageViewParams(
   searchParams?: URLSearchParams | null
 ) {
   const firstSegment = pathname.split('/')[1] || ''
-
   const params: Record<string, any> = {
     content_name:
       typeof document !== 'undefined' ? document.title
