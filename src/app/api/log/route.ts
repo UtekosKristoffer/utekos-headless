@@ -1,8 +1,8 @@
 // Path: src/app/api/log/route.ts
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse, connection } from 'next/server'
 import { redisPush, redisList, redisTrim } from '@/lib/redis'
 import crypto from 'crypto'
-export const dynamic = 'force-dynamic'
+
 type LogPayload = {
   event: string
   level?: 'info' | 'warn' | 'error'
@@ -14,6 +14,8 @@ type LogPayload = {
 }
 
 export async function GET() {
+  await connection()
+
   try {
     const logs = await redisList('app_logs', 0, 49)
 
