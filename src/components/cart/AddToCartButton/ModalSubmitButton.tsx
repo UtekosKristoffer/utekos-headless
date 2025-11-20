@@ -15,7 +15,6 @@ interface ModalSubmitButtonProps {
   isPending: boolean
   isDisabled: boolean
 }
-
 export function ModalSubmitButton({
   availableForSale,
   isPending,

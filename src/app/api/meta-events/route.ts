@@ -1,12 +1,9 @@
 // Path: app/api/meta-events/route.ts
 import { NextRequest, NextResponse } from 'next/server'
-import { cookies } from 'next/headers'
 import type { Body, UserData } from './types'
 export async function POST(req: NextRequest) {
   const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
   const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
-  const PAGE_ID = process.env.ViewContent
-  const IG_ACCOUNT_ID = process.env.META_IG_ACCOUNT_ID
 
   if (!PIXEL_ID || !ACCESS_TOKEN) {
     console.error('Meta CAPI environment variables not set')
@@ -31,7 +28,6 @@ export async function POST(req: NextRequest) {
   } catch {
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
   }
-
   if (!body.eventName || !body.eventId) {
     return NextResponse.json(
       { error: 'Missing required fields: eventName or eventId' },
@@ -41,17 +37,12 @@ export async function POST(req: NextRequest) {
 
   const event_name = body.eventName
   const event_time = body.eventTime ?? Math.floor(Date.now() / 1000)
-
-  // --- Bygg UserData ---
   const user_data: UserData = {
     client_ip_address: ip,
     client_user_agent: ua,
     fbp: fbp,
     fbc: fbc,
     ...(externalId && { external_id: externalId }),
-    ...(PAGE_ID && { page_id: PAGE_ID }),
-    ...(IG_ACCOUNT_ID && { ig_account_id: IG_ACCOUNT_ID }),
-
     ...(body.userData?.em && { em: body.userData.em }),
     ...(body.userData?.ph && { ph: body.userData.ph }),
     ...(body.userData?.fn && { fn: body.userData.fn }),
@@ -79,13 +70,15 @@ export async function POST(req: NextRequest) {
         custom_data: body.eventData ?? {}
       }
     ]
-    // test_event_code kan legges her midlertidig ved behov
     // test_event_code: 'TEST63736'
   }
 
   try {
     const metaApiUrl = `https://graph.facebook.com/v24.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`
-
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`--- SENDING TO CAPI (${event_name}) ---`)
+      console.dir(payload, { depth: null, colors: true })
+    }
     const res = await fetch(metaApiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

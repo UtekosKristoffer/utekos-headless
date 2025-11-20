@@ -233,13 +233,7 @@ export function AddToCart({
               items: ga4Items
             }
           })
-          console.log('🛒 GA4: add_to_cart sent', {
-            items: ga4Items,
-            value,
-            currency
-          })
         }
-
         cartStore.send({ type: 'OPEN' })
       } catch (mutationError) {
         console.error('Feil under legg-i-kurv operasjon:', mutationError)

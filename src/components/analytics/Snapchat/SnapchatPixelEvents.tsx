@@ -15,8 +15,6 @@ export function SnapchatPixelEvents() {
   const pageViewTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const animationFrameRef = useRef<number | null>(null)
   const hasTrackedInitialPageView = useRef(false)
-
-  // Sjekk om vi har consent for marketing
   const canTrack = consent.marketing || consent.profile_marketing
 
   const trackPageView = useCallback(() => {
@@ -36,7 +34,6 @@ export function SnapchatPixelEvents() {
           return
         }
 
-        // Kun track hvis vi har consent
         if (!canTrack) {
           console.log('Snapchat Pixel: Skipping PageView - no consent')
           return
@@ -71,9 +68,7 @@ export function SnapchatPixelEvents() {
     }, 150)
   }, [canTrack])
 
-  // Track PageView ved rute-endringer og consent-endringer
   useEffect(() => {
-    // Track PageView når pixel er klar og vi har consent
     if (
       window._snaptr_loaded
       && canTrack

@@ -10,10 +10,12 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
+     * - videos (ekskluder video-mappen vår)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'
+    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|videos).*)'
   ]
 }
+
 
 export function proxy(request: NextRequest) {
   const response = NextResponse.next()
@@ -23,6 +25,10 @@ export function proxy(request: NextRequest) {
     return response
   }
 
+  if (process.env.NODE_ENV === 'production') {
+    console.log(`[Proxy] Captured fbclid from URL: ${fbclid}`)
+  }
+
   const existingFbc = request.cookies.get('_fbc')?.value
 
   if (existingFbc) {
@@ -30,6 +36,9 @@ export function proxy(request: NextRequest) {
     const existingFbclid = parts.length > 0 ? parts[parts.length - 1] : null
 
     if (existingFbclid === fbclid) {
+      if (process.env.NODE_ENV === 'production') {
+        console.log('[Proxy] fbclid matches existing cookie. Skipping update.')
+      }
       return response
     }
   }
@@ -39,6 +48,11 @@ export function proxy(request: NextRequest) {
   const creationTime = Date.now()
 
   const formattedFbc = `${version}.${subdomainIndex}.${creationTime}.${fbclid}`
+
+  if (process.env.NODE_ENV === 'production') {
+    console.log(`[Proxy] Setting new _fbc cookie: ${formattedFbc}`)
+  }
+
   response.cookies.set({
     name: '_fbc',
     value: formattedFbc,

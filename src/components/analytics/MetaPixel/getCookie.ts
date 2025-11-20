@@ -1,4 +1,4 @@
-// src/components/analytics/getCookie.ts
+// src/components/analytics/MetaPixel/getCookie.ts
 export function getCookie(name: string): string | undefined {
   if (typeof document === 'undefined') return undefined
   const value = `; ${document.cookie}`

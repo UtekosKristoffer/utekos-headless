@@ -6,6 +6,10 @@ import { buttonVariants } from '@/components/ui/button'
 import { BenefitCard } from './BenefitCard'
 import { useInView } from '@/hooks/useInView'
 import { cn } from '@/lib/utils/className'
+import { generateEventID } from '@/components/jsx/CheckoutButton/generateEventID'
+import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
+import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
+import type { UserData } from '@types'
 
 const benefits = [
   {
@@ -24,6 +28,39 @@ const benefits = [
     glowColor: '#64748b'
   }
 ]
+
+const handleCtaClick = () => {
+  const eventID = generateEventID().replace('evt_', 'click_')
+  const externalId = getCookie('ute_ext_id')
+  const fbc = getCookie('_fbc')
+  const fbp = getCookie('_fbp')
+  const sourceUrl = window.location.href
+
+  const customData = {
+    content_name: 'Comfyrobe Hero Button',
+    destination_url: '/produkter/comfyrobe',
+    location: 'Frontpage Hero Section'
+  }
+
+  if (typeof window.fbq === 'function') {
+    window.fbq('trackCustom', 'HeroInteract', customData, { eventID })
+  }
+
+  const userData: UserData = {}
+  if (externalId) userData.external_id = externalId
+  if (fbc) userData.fbc = fbc
+  if (fbp) userData.fbp = fbp
+
+  const capiPayload = {
+    eventName: 'HeroInteract',
+    eventId: eventID,
+    eventSourceUrl: sourceUrl,
+    eventData: customData,
+    userData
+  }
+
+  sendJSON('/api/meta-events', capiPayload)
+}
 
 export function ComfyrobeContentColumn() {
   const [containerRef, containerInView] = useInView({ threshold: 0.5 })
@@ -86,7 +123,6 @@ export function ComfyrobeContentColumn() {
         ))}
       </ul>
 
-      {/* CTA Button */}
       <div
         ref={ctaRef}
         className={cn('will-animate-fade-in-up', ctaInView && 'is-in-view')}
@@ -94,6 +130,7 @@ export function ComfyrobeContentColumn() {
       >
         <Link
           href='/produkter/comfyrobe'
+          onClick={handleCtaClick}
           className={buttonVariants({
             size: 'lg',
             className:
