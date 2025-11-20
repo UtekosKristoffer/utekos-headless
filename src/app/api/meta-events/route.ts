@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  const ua = req.headers.get('user-agent')
+  const userAgent = req.headers.get('user-agent')
   const xForwardedFor = req.headers.get('x-forwarded-for')
   const ip =
     xForwardedFor ? (xForwardedFor.split(',')[0]?.trim() ?? null) : null
@@ -92,10 +92,9 @@ export async function POST(req: NextRequest) {
   const event_name = body.eventName
   const event_time = body.eventTime ?? Math.floor(Date.now() / 1000)
 
-  // --- Bygg UserData ---
   const user_data: UserData = {
     client_ip_address: ip,
-    client_user_agent: ua,
+    client_user_agent: userAgent,
     fbp: fbp,
     fbc: fbc,
 
@@ -125,7 +124,9 @@ export async function POST(req: NextRequest) {
         user_data: user_data,
         custom_data: body.eventData ?? {}
       }
-    ]
+    ],
+
+    test_event_code: 'TEST63736'
   }
 
   try {

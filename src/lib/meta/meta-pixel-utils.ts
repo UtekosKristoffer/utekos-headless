@@ -1,8 +1,6 @@
 // src/lib/meta-pixel-utils.ts
 'use server'
-/**
- * SHA-256 hashing for manual advanced matching
- */
+
 async function hashValue(value: string): Promise<string> {
   const encoder = new TextEncoder()
   const data = encoder.encode(value.toLowerCase().trim())
@@ -12,8 +10,8 @@ async function hashValue(value: string): Promise<string> {
 }
 
 /**
- * Oppdater Meta Pixel med advanced matching data
- * Kall denne når brukerdata blir tilgjengelig (ved login, checkout, etc.)
+ * TODO: Oppdater Meta Pixel med advanced matching data
+ * Kall denne når brukerdata blir tilgjengelig (ved checkout f.eks)
  *
  * @example
  * // I din checkout eller login komponent:
@@ -49,7 +47,6 @@ export async function setMetaAdvancedMatching(userData: {
   const hashedData: Record<string, string> = {}
 
   try {
-    // Hash brukerdata for manual advanced matching
     if (userData.email) {
       hashedData.em = await hashValue(userData.email)
     }
@@ -60,7 +57,6 @@ export async function setMetaAdvancedMatching(userData: {
       hashedData.ln = await hashValue(userData.lastName)
     }
     if (userData.phone) {
-      // Fjern alle non-digits og hash (for norske nummer, behold landkode)
       const cleanPhone = userData.phone.replace(/\D/g, '')
       hashedData.ph = await hashValue(cleanPhone)
     }
@@ -77,11 +73,9 @@ export async function setMetaAdvancedMatching(userData: {
       hashedData.country = await hashValue(userData.country.toLowerCase())
     }
     if (userData.externalId) {
-      // External ID bør også hashes for sikkerhet
       hashedData.external_id = await hashValue(userData.externalId)
     }
 
-    // Re-initialize pixel med advanced matching data
     if (Object.keys(hashedData).length > 0) {
       window.fbq('init', pixelId, hashedData)
 
@@ -89,8 +83,6 @@ export async function setMetaAdvancedMatching(userData: {
         fields: Object.keys(hashedData),
         timestamp: new Date().toISOString()
       })
-
-      // Lagre i sessionStorage for gjenbruk i samme sesjon
       sessionStorage.setItem('meta_am_data', JSON.stringify(hashedData))
     }
   } catch (error) {
@@ -100,9 +92,6 @@ export async function setMetaAdvancedMatching(userData: {
   return hashedData
 }
 
-/**
- * Hent cached advanced matching data fra sessionStorage
- */
 export function getCachedAdvancedMatchingData(): Record<string, string> | null {
   if (typeof window === 'undefined') return null
 
@@ -114,9 +103,6 @@ export function getCachedAdvancedMatchingData(): Record<string, string> | null {
   }
 }
 
-/**
- * Track standard events med advanced matching
- */
 export async function trackMetaEvent(
   eventName: string,
   params?: Record<string, any>,
@@ -129,10 +115,8 @@ export async function trackMetaEvent(
 
   const eventId = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
 
-  // Track via browser pixel
   window.fbq('track', eventName, params || {}, { eventID: eventId })
 
-  // Send til CAPI med advanced matching data hvis tilgjengelig
   if (process.env.NODE_ENV === 'production') {
     const userData = includeUserData ? getCachedAdvancedMatchingData() : null
 

@@ -5,13 +5,10 @@ import { useConsent } from '@/components/cookie-consent/useConsent'
 import { GoogleTagManager } from '@next/third-parties/google'
 import Script from 'next/script'
 import { MetaPixelEvents } from './MetaPixel/MetaPixelEvents'
-import { SnapchatPixelEvents } from './Snapchat/SnapchatPixelEvents'
 import type { TrackingProps } from '@types'
-
 export function ConditionalTracking({
   googleTagManagerId,
   metaPixelId,
-  snapPixelId,
   postHogApiKey,
   postHogHost = 'https://eu.i.posthog.com'
 }: TrackingProps) {
@@ -39,9 +36,6 @@ export function ConditionalTracking({
       {(consent.marketing || consent.profile_marketing) && metaPixelId && (
         <MetaPixelEvents />
       )}
-
-      {/* Snapchat Pixel initialiseres alltid når ID finnes, men tracker kun med consent */}
-      {snapPixelId && <SnapchatPixelEvents />}
     </>
   )
 }

@@ -14,9 +14,6 @@ type UpdateInput = {
   value: string
 }
 
-/**
- * Builds an options map from the current variant and applies the update
- */
 const buildNextOptions = (update: UpdateInput): Record<string, string> => {
   const nextOptions = update.current.selectedOptions.reduce<
     Record<string, string>
@@ -29,9 +26,6 @@ const buildNextOptions = (update: UpdateInput): Record<string, string> => {
   return nextOptions
 }
 
-/**
- * Checks if a variant matches the provided options
- */
 const isMatchingVariant = (
   variant: ShopifyProductVariant,
   targetOptions: Record<string, string>
@@ -40,13 +34,6 @@ const isMatchingVariant = (
     option => targetOptions[option.name] === option.value
   )
 
-/**
- * Finds a product variant that matches the updated option selection.
- *
- * @param variants - Array of all available product variants
- * @param update - Object containing current variant and option to update
- * @returns The matching variant or null if no match found
- */
 export const selectVariantByOptions = (
   variants: readonly ShopifyProductVariant[],
   update: UpdateInput

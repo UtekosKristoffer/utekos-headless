@@ -1,3 +1,73 @@
+// Path: src/components/providers/Providers.tsx
+'use client'
+
+import { QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { HydrationBoundary } from '@tanstack/react-query'
+import { useState } from 'react'
+import { getQueryClient } from '@/api/lib/getQueryClient'
+import { CartMutationClient } from '@/clients/CartMutationClient'
+import { serverActions } from '@/constants/serverActions'
+import { CartIdProvider } from '@/components/providers/CartIdProvider'
+import type { DehydratedState } from '@tanstack/react-query'
+import { CookieConsentProvider } from '@/components/cookie-consent/CookieConsentProvider'
+import CookieConsent from '@/components/cookie-consent/CookieConsent'
+import { ConditionalTracking } from '../analytics/ConditionalTracking'
+
+interface ProvidersProps {
+  children: React.ReactNode
+  cartId: string | null
+  dehydratedState: DehydratedState
+}
+
+export default function Providers({
+  children,
+  cartId: initialCartId,
+  dehydratedState
+}: ProvidersProps) {
+  const queryClient = getQueryClient()
+  const [cartId, setCartId] = useState<string | null>(initialCartId)
+
+  return (
+    <CookieConsentProvider>
+      <QueryClientProvider client={queryClient}>
+        <HydrationBoundary state={dehydratedState}>
+          <CartIdProvider value={cartId}>
+            <CartMutationClient
+              actions={serverActions}
+              cartId={cartId}
+              setCartId={setCartId}
+            >
+              {children}
+            </CartMutationClient>
+          </CartIdProvider>
+        </HydrationBoundary>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+      <CookieConsent />
+      <ConditionalTracking
+        {...(process.env.NEXT_PUBLIC_GTM_ID && {
+          googleTagManagerId: process.env.NEXT_PUBLIC_GTM_ID
+        })}
+        {...(process.env.NEXT_PUBLIC_META_PIXEL_ID && {
+          metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID
+        })}
+        {...(process.env.NEXT_PUBLIC_SNAP_PIXEL_ID && {
+          snapPixelId: process.env.NEXT_PUBLIC_SNAP_PIXEL_ID
+        })}
+        {...(process.env.NEXT_PUBLIC_POSTHOG_KEY && {
+          postHogApiKey: process.env.NEXT_PUBLIC_POSTHOG_KEY
+        })}
+        {...(process.env.NEXT_PUBLIC_POSTHOG_HOST && {
+          postHogHost: process.env.NEXT_PUBLIC_POSTHOG_HOST
+        })}
+      />
+    </CookieConsentProvider>
+  )
+}
+
+
+
 // src/components/analytics/MetaPixelEvents.tsx
 'use client'
 
@@ -147,9 +217,57 @@ export function MetaPixelEvents() {
     <>
       <Script
         id='meta-pixel-base-inline'
-        strategy='afterInteractive'
+        strategy='afterInteractive' // Viktig for SPA
         dangerouslySetInnerHTML={{ __html: metaPixelBaseCode }}
       />
+    </>
+  )
+}
+
+
+
+// Path: src/components/analytics/ConditionalTracking.tsx
+'use client'
+
+import { useConsent } from '@/components/cookie-consent/useConsent'
+import { GoogleTagManager } from '@next/third-parties/google'
+import Script from 'next/script'
+import { MetaPixelEvents } from './MetaPixel/MetaPixelEvents'
+import { SnapchatPixelEvents } from './Snapchat/SnapchatPixelEvents'
+import type { TrackingProps } from '@types'
+
+export function ConditionalTracking({
+  googleTagManagerId,
+  metaPixelId,
+  snapPixelId,
+  postHogApiKey,
+  postHogHost = 'https://eu.i.posthog.com'
+}: TrackingProps) {
+  const { consent } = useConsent()
+
+  return (
+    <>
+      {consent.analytics && googleTagManagerId && (
+        <GoogleTagManager gtmId={googleTagManagerId} />
+      )}
+
+      {consent.analytics && postHogApiKey && (
+        <Script id='posthog-script' strategy='afterInteractive'>
+          {`
+            !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+            posthog.init('${postHogApiKey}', {
+              api_host: '${postHogHost}',
+              opt_in_capturing: true,
+              capture_pageview: false 
+            })
+          `}
+        </Script>
+      )}
+
+      {(consent.marketing || consent.profile_marketing) && metaPixelId && (
+        <MetaPixelEvents />
+      )}
+      {snapPixelId && <SnapchatPixelEvents />}
     </>
   )
 }

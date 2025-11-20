@@ -1,9 +1,7 @@
 // src/app/api/snap-events/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import crypto from 'node:crypto'
-import type { ContentItem } from '@types' // Gjenbruker Meta-typen
-
-/* ----------------------------- Typer for Snap CAPI ----------------------------- */
+import type { ContentItem } from '@types'
 
 type SnapUserData = {
   em?: string[]
@@ -17,7 +15,7 @@ type SnapUserData = {
   client_ip_address?: string | null
   user_agent?: string | null
   sc_click_id?: string | null
-  sc_cookie1?: string | null // _scid cookie
+  sc_cookie1?: string | null
   ge?: string[]
   madid?: string
 }
@@ -33,11 +31,11 @@ type SnapCustomData = {
 }
 
 type ClientEventData = {
-  value?: number // Kommer som number fra klient
+  value?: number
   currency?: string
   content_ids?: string[]
-  contents?: ContentItem[] // Gjenbruker Meta-typen
-  num_items?: number // Kommer som number fra klient
+  contents?: ContentItem[]
+  num_items?: number
   order_id?: string
 }
 
@@ -68,8 +66,6 @@ type Body = {
   eventTime: number
 }
 
-/* ----------------------------- Hjelpefunksjoner (Hashing) ----------------------------- */
-
 function hash(input: string): string {
   return crypto.createHash('sha256').update(input, 'utf8').digest('hex')
 }
@@ -88,8 +84,6 @@ function normalizePhone(input: string | undefined | null): string | undefined {
   return normalized ? hash(normalized) : undefined
 }
 
-/* ----------------------------- Hoved-rute ----------------------------- */
-
 export async function POST(req: NextRequest) {
   const PIXEL_ID = '3b3c8f0c-51f8-4b21-bf44-cc5e1121588a'
   const ACCESS_TOKEN = process.env.SNAP_ACCESS_TOKEN
@@ -102,7 +96,6 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  // 1. Hent IP, UA og Cookies
   const ua = req.headers.get('user-agent')
   const xForwardedFor = req.headers.get('x-forwarded-for')
   const ip =
@@ -117,7 +110,7 @@ export async function POST(req: NextRequest) {
     },
     {} as Record<string, string>
   )
-  const scid = cookies._scid || null // Snapchats cookie
+  const scid = cookies._scid || null 
 
   let body: Body
   try {
@@ -187,7 +180,6 @@ export async function POST(req: NextRequest) {
       custom_data.content_category = ['product']
     }
 
-    // Transformer 'num_items' eller 'contents'
     if (num_items !== undefined) {
       custom_data.number_items = [num_items.toString()]
     } else if (contents) {
@@ -197,7 +189,6 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // 5. Bygg Snap Payload
   const payload = {
     data: [
       {
@@ -211,7 +202,6 @@ export async function POST(req: NextRequest) {
     ]
   }
 
-  // 6. Send til Snap CAPI
   try {
     const snapApiUrl = `https://tr.snapchat.com/v3/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`
 

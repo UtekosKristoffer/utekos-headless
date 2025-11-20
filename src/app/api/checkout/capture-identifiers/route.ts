@@ -1,6 +1,8 @@
+// Path: src/app/api/checkout/capture-identifiers/route.ts
+
 import { NextRequest, NextResponse } from 'next/server'
 import { redisSet } from '@/lib/redis'
-import type { CheckoutAttribution, UserData } from '@types' // Importer UserData
+import type { CheckoutAttribution, UserData } from '@types'
 
 interface CaptureBody {
   cartId?: string | null
@@ -12,18 +14,15 @@ interface CaptureBody {
 function parseCheckoutToken(
   checkoutUrl: string | undefined
 ): string | undefined {
-  if (!checkoutUrl) return undefined // Håndter undefined
+  if (!checkoutUrl) return undefined
   try {
     const url = new URL(checkoutUrl)
 
-    // FIKS: Prioriter 'key'-parameteret. Det er dette Shopify bruker
-    // i URL-en du sender inn.
     const keyToken = url.searchParams.get('key')
     if (keyToken && /^[a-f0-9]{32}$/i.test(keyToken)) {
       return keyToken
     }
 
-    // Fallback 1: Den gamle logikken for å sjekke stien (f.eks. /checkouts/...)
     const parts = url.pathname.split('/').filter(Boolean)
     const checkoutIndex = parts.findIndex(p => p === 'checkouts')
     if (checkoutIndex !== -1) {
@@ -33,13 +32,11 @@ function parseCheckoutToken(
       }
     }
 
-    // Fallback 2: Den gamle logikken for 'token'-parameteret
     const paramToken = url.searchParams.get('token')
     if (paramToken) {
       return paramToken
     }
 
-    // Hvis ingenting ble funnet
     return undefined
   } catch (e) {
     console.error('Error parsing checkout URL:', e, 'URL:', checkoutUrl)
@@ -48,7 +45,7 @@ function parseCheckoutToken(
 }
 
 export async function POST(req: NextRequest) {
-  let body: CaptureBody // Bruk den nye typen
+  let body: CaptureBody
   try {
     body = (await req.json()) as CaptureBody
     console.log(
@@ -76,7 +73,7 @@ export async function POST(req: NextRequest) {
   if (body.userData?.fbc) userDataToSave.fbc = body.userData.fbc
   if (body.userData?.client_user_agent)
     userDataToSave.client_user_agent = body.userData.client_user_agent
-  const ipToUse = body.userData?.client_ip_address ?? proxiedIp // Fallback til header IP
+  const ipToUse = body.userData?.client_ip_address ?? proxiedIp 
   if (ipToUse) userDataToSave.client_ip_address = ipToUse
   if (body.userData?.external_id)
     userDataToSave.external_id = body.userData.external_id

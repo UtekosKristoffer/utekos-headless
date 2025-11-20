@@ -1,9 +1,10 @@
+// Path: src/app/api/shopify/webhooks/orders-paid/route.ts
+
 import { NextRequest, NextResponse } from 'next/server'
 import crypto from 'node:crypto'
 import { redisGet, redisDel } from '@/lib/redis'
 import type {
-  // Importer typer fra din @types/meta.types.ts
-  OrderPaid, // Sørg for at denne typen matcher Shopify Payload nøyaktig
+  OrderPaid,
   CheckoutAttribution,
   MetaEvent,
   MetaContentItem,
@@ -12,16 +13,8 @@ import type {
   MetaEventsRequest,
   MetaGraphError,
   MetaEventsSuccess
-} from '@types' // Juster import-sti om nødvendig
+} from '@types'
 
-// --- HASHING HELPER (Inkludert her) ---
-/**
- * Normaliserer (trim, lowercase) og hasher en streng med SHA-256.
- * Returnerer undefined hvis input er null, undefined, tom streng, eller kun whitespace.
- * Spesialhåndterer telefonnummer ved å fjerne ikke-numeriske tegn før hashing.
- * @param value Strengen som skal normaliseres og hashes.
- * @returns Den SHA-256 hashede strengen (hex), eller undefined.
- */
 function normalizeAndHash(
   value: string | undefined | null
 ): string | undefined {
@@ -33,8 +26,6 @@ function normalizeAndHash(
     return undefined
   }
 
-  // Spesifikk normalisering for telefonnummer (kun tall)
-  // En enkel sjekk (kan forbedres for internasjonale nr)
   if (/^[\d\s\-()+]+$/.test(trimmedValue)) {
     const digitsOnly = trimmedValue.replace(/\D/g, '')
     if (digitsOnly === '') return undefined
@@ -42,12 +33,10 @@ function normalizeAndHash(
     return crypto.createHash('sha256').update(digitsOnly, 'utf8').digest('hex')
   }
 
-  // Generell normalisering for andre felt (lowercase)
   const normalized = trimmedValue.toLowerCase()
   return crypto.createHash('sha256').update(normalized, 'utf8').digest('hex')
 }
 
-// --- Andre Helper Functions ---
 function verifyHmac(req: NextRequest, raw: string): boolean {
   const secret = process.env.SHOPIFY_WEBHOOK_SECRET ?? ''
   if (!secret) {
@@ -85,17 +74,12 @@ function toNumberSafe(s: string | undefined | null): number | undefined {
   return Number.isFinite(n) ? n : undefined
 }
 
-/**
- * NY HJELPER: Henter den korrekte 'key'-parameteren fra ordre-URLen.
- * Dette er tokenen som 'capture-identifiers' bruker for å lagre i Redis.
- */
 function getCheckoutKey(order: OrderPaid): string | undefined {
   const urlString = (order as any)?.order_status_url
   if (typeof urlString === 'string') {
     try {
       const url = new URL(urlString)
       const key = url.searchParams.get('key')
-      // Sjekk at 'key' ser ut som en 32-sifret hex-streng
       if (key && /^[a-f0-9]{32}$/i.test(key)) {
         return key
       }
@@ -106,7 +90,7 @@ function getCheckoutKey(order: OrderPaid): string | undefined {
       )
     }
   }
-  // Fallback til 'order.token' hvis 'key' ikke ble funnet
+
   return order.token ?? order.cart_token ?? undefined
 }
 
@@ -126,7 +110,6 @@ function buildUserData(
   if (attrib?.userData?.external_id)
     userData.external_id = attrib.userData.external_id
 
-  // Fra Ordre (Hash PII)
   const email = normalizeAndHash(order.contact_email ?? order.customer?.email)
   if (email) userData.em = [email]
 
@@ -161,23 +144,19 @@ function buildUserData(
   const st = normalizeAndHash(billing?.province_code ?? shipping?.province_code)
   if (st) userData.st = [st]
 
-  // Korrigert: Bruk 'zip' fra payload hvis billing/shipping finnes
   const zp = normalizeAndHash(billing?.zip ?? shipping?.zip)
   if (zp) userData.zp = [zp]
 
-  // Korrigert: Bruk 'country_code' fra payload hvis billing/shipping finnes
   const country = normalizeAndHash(
     billing?.country_code ?? shipping?.country_code
   )
   if (country) userData.country = [country]
 
-  // Fjerner tomme arrays/null/undefined
   Object.keys(userData).forEach(key => {
     const K = key as keyof MetaUserData
     if (Array.isArray(userData[K]) && (userData[K] as string[]).length === 0) {
       delete userData[K]
     } else if (userData[K] == null) {
-      // Bruk == for å fange både null og undefined
       delete userData[K]
     }
   })
@@ -185,19 +164,14 @@ function buildUserData(
   return userData
 }
 
-/* ----------------------------- Route ----------------------------- */
-
 export async function POST(req: NextRequest) {
-  // 1) HMAC
   const raw = await req.text()
   if (!verifyHmac(req, raw)) {
     console.error('[Webhook orders/paid] Invalid HMAC')
-    // Returner 401 Unauthorized ved feil HMAC
     return NextResponse.json({ error: 'Invalid HMAC' }, { status: 401 })
   }
   console.log('[Webhook orders/paid] HMAC verified')
 
-  // 2) Parse Order
   let order: OrderPaid
   try {
     order = JSON.parse(raw) as OrderPaid
@@ -212,11 +186,8 @@ export async function POST(req: NextRequest) {
       '[Webhook orders/paid] Failed to parse Shopify webhook body:',
       e
     )
-    // Returner 400 Bad Request ved feil JSON
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
   }
-
-  // 3) Hent attribusjon fra Redis (FIKSET LOGIKK)
   const token = getCheckoutKey(order) // Bruker ny hjelpefunksjon
   const redisKey = token ? `checkout:${token}` : undefined // Bruker korrekt format
 
@@ -242,23 +213,16 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  // 4) Bygg custom_data
   const priceSet = order.total_price_set ?? order.current_total_price_set
-  // Korrigert: Bruk order.total_price som fallback
   const value =
     toNumberSafe(priceSet?.shop_money.amount ?? order.total_price) ?? 0
   const currency = priceSet?.shop_money.currency_code ?? order.currency ?? 'NOK'
-
-  // Anta at 'LineItem' type fra @types har 'price' og 'id' hvis payloaden har det
   const contents: MetaContentItem[] = (order.line_items || [])
     .map((li: any) => {
-      // Bruk any midlertidig hvis LineItem typen mangler felter
-      // Korrigert: Bruk li.id som fallback hvis variant/product ID mangler
       const id =
         (li.variant_id ?? li.product_id ?? li.id)?.toString() ?? 'unknown'
       const item: MetaContentItem = { id }
       if (li.quantity != null) item.quantity = li.quantity
-      // Korrigert: Bruk li.price som fallback
       const itemPrice = toNumberSafe(
         li.price_set?.shop_money.amount ?? li.price
       )
@@ -273,14 +237,11 @@ export async function POST(req: NextRequest) {
     custom_data.content_ids = contents.map(c => c.id)
     custom_data.content_type = 'product'
   }
-  // Korrigert: Bruk order.name som fallback
   custom_data.order_id =
     order.admin_graphql_api_id ?? order.name ?? order.id?.toString()
 
-  // 5) Bygg user_data
   const user_data = buildUserData(order, attrib)
 
-  // 6) Bygg event
   const event_time = Math.floor(
     new Date(order.processed_at ?? order.created_at ?? Date.now()).getTime()
       / 1000
@@ -299,15 +260,16 @@ export async function POST(req: NextRequest) {
     ...(eventId && { event_id: eventId })
   }
 
-  // Korrigert: Bruk order.order_status_url
   if (attrib?.checkoutUrl) {
     event.event_source_url = attrib.checkoutUrl
   } else if (order.order_status_url) {
     event.event_source_url = order.order_status_url
   }
-  const payload: MetaEventsRequest = { data: [event] }
+  const payload: MetaEventsRequest & { test_event_code?: string } = {
+    data: [event],
+    test_event_code: 'TEST63736'
+  }
 
-  // 8) Kall Graph API
   const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
   const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
   if (!PIXEL_ID || !ACCESS_TOKEN) {
@@ -319,7 +281,6 @@ export async function POST(req: NextRequest) {
     console.error(
       '[Webhook orders/paid] Purchase CAPI Error: Missing CAPI config'
     )
-    // Viktig: Returner 200 OK til Shopify for å unngå retry loops
     return NextResponse.json(
       { ok: false, error: 'Internal Server Error - Missing CAPI config' },
       { status: 200 }
@@ -333,7 +294,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const res = await fetch(
-      `https://graph.facebook.com/v24.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`, // Bruker v24.0
+      `https://graph.facebook.com/v24.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`,
       {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
@@ -343,7 +304,6 @@ export async function POST(req: NextRequest) {
 
     const result = (await res.json()) as MetaEventsSuccess | MetaGraphError
 
-    // 9) Opprydding i Redis uansett utfall
     if (redisKey) {
       try {
         await redisDel(redisKey)
@@ -361,7 +321,6 @@ export async function POST(req: NextRequest) {
         `[Webhook orders/paid] Meta CAPI Error Response (Status ${res.status}):`,
         JSON.stringify(result, null, 2)
       )
-      // Returner OK til Shopify, logg feilen
       return NextResponse.json(
         { ok: false, errorDetails: result },
         { status: 200 }
@@ -380,7 +339,6 @@ export async function POST(req: NextRequest) {
         await redisDel(redisKey)
       } catch (e) {}
     }
-    // Returner OK til Shopify
     return NextResponse.json(
       { ok: false, error: 'Failed to connect to Meta CAPI' },
       { status: 200 }

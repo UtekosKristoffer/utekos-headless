@@ -44,8 +44,6 @@ export const CheckoutButton = ({
     }
 
     try {
-      // --- NY LINJE: Logg til Vercel ---
-      // Denne sender en "fire-and-forget"-forespørsel for server-logging
       sendJSON('/api/log/checkout-start', { cartId })
 
       const fbp = getCookie('_fbp')
@@ -84,10 +82,10 @@ export const CheckoutButton = ({
 
       if (typeof window.snaptr === 'function') {
         const snapData = {
-          price: parseFloat(subtotalAmount), // Snap-piksel forventer number
+          price: parseFloat(subtotalAmount),
           currency: currency,
           item_ids: item_ids,
-          item_category: 'product', // Legger til kategori
+          item_category: 'product',
           number_items: num_items,
           client_deduplication_id: eventID
         }
@@ -99,7 +97,7 @@ export const CheckoutButton = ({
         eventId: eventID,
         eventSourceUrl: sourceUrl,
         eventData: {
-          value: parseFloat(subtotalAmount), // API-ruten forventer number
+          value: parseFloat(subtotalAmount),
           currency: currency,
           content_ids: item_ids,
           num_items: num_items

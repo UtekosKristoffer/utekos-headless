@@ -386,16 +386,16 @@ export type MetaUserData = {
   external_id?: string
   em?: string[]
   ph?: string[]
-  fn?: string[] // first name
-  ln?: string[] // last name
-  ge?: string[] //
-  db?: string[] // date of birth
-  ct?: string[] // city
-  st?: string[] // state
-  zp?: string[] // zip code
-  zip?: string[] // zip
-  country_code?: string[] // country code
-  country?: string[] // country
+  fn?: string[]
+  ln?: string[]
+  ge?: string[]
+  db?: string[]
+  ct?: string[]
+  st?: string[]
+  zp?: string[]
+  zip?: string[]
+  country_code?: string[]
+  country?: string[]
 }
 
 export type MetaContentItem = {

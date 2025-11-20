@@ -22,22 +22,19 @@ export const CartFooter = ({
 
   const subtotalFormatted = formatPrice(cart!.cost.subtotalAmount)
   const cartId = cart!.id // Hent ut cartId
-
-  // --- Data for Snap START_CHECKOUT ---
   const subtotalAmount = cart!.cost.subtotalAmount.amount // string
   const currency = cart!.cost.subtotalAmount.currencyCode // string
   const item_ids = cart!.lines.map(line => line.merchandise.id) // string[]
   const num_items = cart!.totalQuantity // number
-  // --- Slutt ---
 
   return (
     <DrawerFooter className='border-t'>
       <SubtotalDisplay subtotal={subtotalFormatted} />
       <CheckoutButton
         checkoutUrl={cart!.checkoutUrl}
-        subtotal={subtotalFormatted} // For aria-label
+        subtotal={subtotalFormatted}
         isPending={isPending}
-        cartId={cartId} // For capture-identifiers
+        cartId={cartId}
         subtotalAmount={subtotalAmount}
         currency={currency}
         item_ids={item_ids}

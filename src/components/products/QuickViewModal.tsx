@@ -2,7 +2,7 @@
 'use client'
 
 import { getProduct } from '@/api/lib/products/getProduct'
-import { AddToCart } from '@/components/cart/AddToCart'
+import { AddToCart } from '@/components/cart/AddToCart/AddToCart'
 import {
   Dialog,
   DialogContent,
