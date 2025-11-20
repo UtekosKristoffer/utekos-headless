@@ -2,7 +2,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { redisPush, redisList, redisTrim } from '@/lib/redis'
 import crypto from 'crypto'
-
+export const dynamic = 'force-dynamic'
 type LogPayload = {
   event: string
   level?: 'info' | 'warn' | 'error'

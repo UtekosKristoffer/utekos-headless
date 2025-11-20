@@ -1,5 +1,7 @@
 // Path: src/app/api/meta-events/route.ts
 import { NextRequest, NextResponse } from 'next/server'
+import { redisPush, redisTrim } from '@/lib/redis'
+import crypto from 'crypto'
 
 type ContentItem = { id: string; quantity: number; item_price?: number }
 type CustomData = {
@@ -114,11 +116,42 @@ export async function POST(req: NextRequest) {
     // test_event_code: 'TEST63736'
   }
 
+  // --- LOGGING TIL REDIS START ---
+  try {
+    const logEntry = {
+      id: crypto.randomUUID(),
+      timestamp: new Date().toISOString(),
+      level: 'INFO',
+      event: `CAPI: ${event_name}`,
+      identity: {
+        ip,
+        fbp: user_data.fbp,
+        fbc: user_data.fbc,
+        externalId: user_data.external_id,
+        userAgent
+      },
+      context: {
+        path: body.eventSourceUrl,
+        eventId: body.eventId
+      },
+      data: body.eventData
+    }
+
+    await redisPush('app_logs', logEntry)
+
+    redisTrim('app_logs', 0, 999).catch(() => {})
+  } catch (e) {
+    console.error('Logging setup failed', e)
+  }
+  // --- LOGGING TIL REDIS SLUTT ---
+
   try {
     const metaApiUrl = `https://graph.facebook.com/v24.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`
 
-    console.log(`--- SENDING TO CAPI (${event_name}) ---`)
-    console.log(JSON.stringify(payload, null, 2))
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`--- SENDING TO CAPI (${event_name}) ---`)
+      console.log(JSON.stringify(payload, null, 2))
+    }
 
     const res = await fetch(metaApiUrl, {
       method: 'POST',
@@ -139,7 +172,9 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    console.log(`Meta CAPI Success for ${event_name}:`, JSON.stringify(json))
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`Meta CAPI Success for ${event_name}:`, JSON.stringify(json))
+    }
 
     return NextResponse.json({ success: true, metaResponse: json })
   } catch (fetchError) {
