@@ -41,7 +41,7 @@ export async function GET() {
     const { groups } = buildSearchIndex(contentPaths)
 
     return NextResponse.json(
-      { groups: groups }, // Bruk 'groups' direkte
+      { groups: groups },
       {
         headers: {
           'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600'
