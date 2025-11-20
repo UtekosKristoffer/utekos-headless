@@ -32,13 +32,11 @@ import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 export function AddToCart({
   product,
   selectedVariant,
-  additionalLine,
-  destination_url
+  additionalLine
 }: {
   product: ShopifyProduct
   selectedVariant: ShopifyProductVariant | null
   additionalLine?: { variantId: string; quantity: number }
-  destination_url: string
 }) {
   const [isTransitioning, startTransition] = useTransition()
   const cartActor = CartMutationContext.useActorRef()
