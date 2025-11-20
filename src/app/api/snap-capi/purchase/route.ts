@@ -3,10 +3,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import crypto from 'node:crypto'
 import { redisGet, redisDel } from '@/lib/redis'
 import type { OrderPaid, CheckoutAttribution } from '@types'
-
-/* ----------------------------- Typer for Snap CAPI ----------------------------- */
-
-// Basert på snapchat-1.md CAPI spec
 type SnapUserData = {
   em?: string[]
   ph?: string[]
@@ -24,7 +20,6 @@ type SnapUserData = {
   madid?: string
 }
 
-// Basert på snapchat-1.md CAPI spec
 type SnapPurchaseCustomData = {
   value: string
   currency: string
@@ -47,8 +42,6 @@ type SnapEvent = {
 type SnapCapiPayload = {
   data: SnapEvent[]
 }
-
-/* ----------------------------- Helper Functions (Identisk med Meta) ----------------------------- */
 
 function verifyHmac(req: NextRequest, raw: string): boolean {
   const secret = process.env.SHOPIFY_WEBHOOK_SECRET ?? ''
@@ -121,7 +114,6 @@ export async function POST(req: NextRequest) {
 
   const order_id = order.admin_graphql_api_id
 
-  // Deduplication ID - må matche browser-event
   const webhookGid =
     order.admin_graphql_api_id
     ?? (order.id != null ? `gid://shopify/Order/${order.id}` : undefined)
@@ -131,23 +123,18 @@ export async function POST(req: NextRequest) {
     value: value.toString(), // Snap CAPI krever string
     currency: currency,
     content_ids: content_ids,
-    content_category: ['product'], // Setter standardkategori
+    content_category: ['product'],
     number_items: number_items, // Snap CAPI krever array av strings
     order_id: order_id,
     ...(eventId ? { event_id: eventId } : {})
   }
-
-  // 5) Build user_data (Snapchat CAPI Spec)
   const user_data: SnapUserData = {}
 
-  // Fra Redis (satt på klient)
-  // Merk: Vi har ikke sc_cookie1 eller sc_click_id i CheckoutAttribution
   if (attrib?.userData.client_user_agent)
     user_data.user_agent = attrib.userData.client_user_agent
   if (attrib?.userData.client_ip_address)
     user_data.client_ip_address = attrib.userData.client_ip_address
 
-  // Fra Order Payload (hashed)
   const phone = order.phone ?? order.customer?.phone
   const phoneString = typeof phone === 'string' ? phone.toString() : phone
   const normalizedPhone = normalizePhone(phoneString)
@@ -185,7 +172,6 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // 6) Build event
   const event_time = Math.floor(
     new Date(order.processed_at ?? order.created_at).getTime() / 1000
   )

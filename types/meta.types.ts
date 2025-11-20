@@ -478,6 +478,7 @@ export type CheckoutAttribution = {
 export type CustomData = {
   value?: number
   currency?: string
+  content_name: string
   content_type?: 'product' | 'product_group'
   content_ids?: string[]
   contents?: ContentItem[]

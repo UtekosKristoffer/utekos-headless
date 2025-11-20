@@ -4,13 +4,18 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, ShoppingBag, Gift } from 'lucide-react'
+import { ArrowRight, Gift } from 'lucide-react'
 import { AmbientBackgroundGlow } from './AmbientBackgroundGlow'
 import { FeatureCard } from './FeatureCard'
 import { ImageColumn } from './ImageColumn'
 import { newProductFeatures } from './newProductFeatures'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { QuickViewModal } from '@/components/products/QuickViewModal'
+import { generateEventID } from '@/components/jsx/CheckoutButton/generateEventID'
+import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
+
+import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
+import type { UserData, CustomData } from '@types'
 
 const productName = 'Utekos TechDown™'
 const productHandle = 'utekos-techdown'
@@ -22,6 +27,78 @@ const currentPrice = originalPrice - discountAmount
 
 export function NewProductLaunchSection() {
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleDiscoverClick = () => {
+    const eventID = generateEventID().replace('evt_', 'click_')
+    const externalId = getCookie('ute_ext_id')
+    const fbc = getCookie('_fbc')
+    const fbp = getCookie('_fbp')
+    const sourceUrl = window.location.href
+
+    const customData: CustomData = {
+      content_name: `Discover ${productName}`,
+      content_ids: [productHandle],
+      content_type: 'product',
+      value: currentPrice,
+      currency: 'NOK'
+    }
+
+    if (typeof window.fbq === 'function') {
+      window.fbq('trackCustom', 'HeroInteract', customData, { eventID })
+    }
+
+    const userData: UserData = {}
+    if (externalId) userData.external_id = externalId
+    if (fbc) userData.fbc = fbc
+    if (fbp) userData.fbp = fbp
+
+    const capiPayload = {
+      eventName: 'HeroInteract',
+      eventId: eventID,
+      eventSourceUrl: sourceUrl,
+      eventData: customData,
+      userData
+    }
+
+    sendJSON('/api/meta-events', capiPayload)
+  }
+
+  const handleQuickViewClick = () => {
+    setIsModalOpen(true)
+
+    const eventID = generateEventID().replace('evt_', 'qv_')
+    const externalId = getCookie('ute_ext_id')
+    const fbc = getCookie('_fbc')
+    const fbp = getCookie('_fbp')
+    const sourceUrl = window.location.href
+
+    const customData: CustomData = {
+      content_name: `QuickView ${productName}`,
+      content_ids: [productHandle],
+      content_type: 'product',
+      value: currentPrice,
+      currency: 'NOK'
+    }
+
+    if (typeof window.fbq === 'function') {
+      window.fbq('trackCustom', 'OpenQuickView', customData, { eventID })
+    }
+
+    const userData: UserData = {}
+    if (externalId) userData.external_id = externalId
+    if (fbc) userData.fbc = fbc
+    if (fbp) userData.fbp = fbp
+
+    const capiPayload = {
+      eventName: 'OpenQuickView',
+      eventId: eventID,
+      eventSourceUrl: sourceUrl,
+      eventData: customData,
+      userData
+    }
+
+    sendJSON('/api/meta-events', capiPayload)
+  }
 
   return (
     <>
@@ -39,7 +116,6 @@ export function NewProductLaunchSection() {
             threshold={0.3}
           >
             <div className='mb-6'>
-              {/* Vises kun på mobil og små skjermer */}
               <div className='flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-3 md:hidden'>
                 <AnimatedBlock
                   className='will-animate-fade-in-up inline-flex items-center gap-2.5 rounded-full border border-sky-800/30 bg-sky-900/20 px-4 py-2'
@@ -88,7 +164,6 @@ export function NewProductLaunchSection() {
                 </AnimatedBlock>
               </div>
 
-              {/* Kombinert "Super-badge" for større skjermer */}
               <div className='hidden md:inline-flex'>
                 <AnimatedBlock
                   className='will-animate-fade-in-up inline-flex items-center gap-3 rounded-full border border-sky-800/30 bg-sky-900/20 px-5 py-2.5'
@@ -163,7 +238,7 @@ export function NewProductLaunchSection() {
 
                 <div className='flex flex-wrap gap-3'>
                   <Button asChild size='lg' className='group flex-1'>
-                    <Link href={productUrl}>
+                    <Link href={productUrl} onClick={handleDiscoverClick}>
                       Oppdag {productName}
                       <ArrowRight className='ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1' />
                     </Link>
@@ -171,7 +246,7 @@ export function NewProductLaunchSection() {
                   <Button
                     size='lg'
                     variant='secondary'
-                    onClick={() => setIsModalOpen(true)}
+                    onClick={handleQuickViewClick}
                     className='group flex-1 bg-button text-access hover:bg-button/80 hover:scale-105 active:scale-95'
                   >
                     Legg i handlekurv

@@ -26,17 +26,19 @@ import { toast } from 'sonner'
 import type { ActorRef, StateFrom } from 'xstate'
 import { ModalSubmitButton } from '../AddToCartButton/ModalSubmitButton'
 import { QuantitySelector } from '../QuantitySelector'
-import { sendJSON } from './sendJson'
-import { getCookie } from './getCookie'
+import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
+import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 
 export function AddToCart({
   product,
   selectedVariant,
-  additionalLine
+  additionalLine,
+  destination_url
 }: {
   product: ShopifyProduct
   selectedVariant: ShopifyProductVariant | null
   additionalLine?: { variantId: string; quantity: number }
+  destination_url: string
 }) {
   const [isTransitioning, startTransition] = useTransition()
   const cartActor = CartMutationContext.useActorRef()
@@ -147,6 +149,7 @@ export function AddToCart({
         const value = basePrice * values.quantity
 
         const eventID = `atc_${selectedVariant.id}_${Date.now()}`
+
         if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
           const fbqParams = {
             contents,
@@ -159,10 +162,13 @@ export function AddToCart({
           }
 
           window.fbq('track', 'AddToCart', fbqParams, { eventID })
-          console.log('🛒 Meta Pixel: AddToCart tracked', {
-            fbqParams,
-            eventID
-          })
+
+          if (process.env.NODE_ENV === 'development') {
+            console.group('🛒 [Meta Pixel] AddToCart Fired')
+            console.log('Event ID:', eventID)
+            console.log('Params:', fbqParams)
+            console.groupEnd()
+          }
         }
 
         const ua =
@@ -184,7 +190,7 @@ export function AddToCart({
             typeof window !== 'undefined' ? window.location.href : '',
           eventData: {
             value,
-            currency,
+            content_name: contentName,
             contents,
             content_type: 'product',
             content_ids: contentIds,
@@ -198,8 +204,14 @@ export function AddToCart({
         if (fbc) capiPayload.userData!.fbc = fbc
         if (externalId) capiPayload.userData!.external_id = externalId
 
+        if (process.env.NODE_ENV === 'development') {
+          console.group('🚀 [Meta CAPI] Sending AddToCart')
+          console.log('Payload:', capiPayload)
+          console.log('Identity Package:', { fbp, fbc, externalId, ua })
+          console.groupEnd()
+        }
+
         sendJSON('/api/meta-events', capiPayload)
-        console.log('🛒 Meta CAPI: AddToCart request sent', { capiPayload })
 
         if (
           typeof window !== 'undefined'
@@ -225,15 +237,24 @@ export function AddToCart({
             })
           }
 
-          window.dataLayer.push({
+          const ga4Data = {
             event: 'add_to_cart',
             ecommerce: {
               currency: currency,
               value: value,
               items: ga4Items
             }
-          })
+          }
+
+          window.dataLayer.push(ga4Data)
+
+          if (process.env.NODE_ENV === 'development') {
+            console.group('📊 [GA4] AddToCart Pushed')
+            console.log('DataLayer Push:', ga4Data)
+            console.groupEnd()
+          }
         }
+
         cartStore.send({ type: 'OPEN' })
       } catch (mutationError) {
         console.error('Feil under legg-i-kurv operasjon:', mutationError)
