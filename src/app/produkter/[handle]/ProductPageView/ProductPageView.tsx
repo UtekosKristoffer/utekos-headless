@@ -175,7 +175,6 @@ export default function ProductPageView({
               threshold={0.2}
             >
               <Activity>
-                {/* HER la vi inn wrapperen med data-attributtene */}
                 <div
                   data-product-price={selectedVariant.price.amount ?? '0'}
                   data-product-currency={selectedVariant.price.currencyCode}
