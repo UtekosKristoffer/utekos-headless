@@ -76,8 +76,7 @@ export async function POST(req: NextRequest) {
         user_data: user_data,
         custom_data: body.eventData ?? {}
       }
-    ],
-    test_event_code: 'TEST63736'
+    ]
   }
 
   try {

@@ -5,21 +5,6 @@ import { buildSearchIndex } from '@/lib/helpers/search'
 import type { MetadataRoute } from 'next'
 import { NextResponse } from 'next/server'
 
-export type SearchItem = {
-  id: string
-  title: string
-  path: string
-  parentId: string | null
-  keywords: string[]
-  children?: SearchItem[]
-}
-
-export type SearchGroup = {
-  key: string
-  label: string
-  items: SearchItem[]
-}
-
 export async function GET() {
   try {
     const sitemapEntries = (await sitemap()) as MetadataRoute.Sitemap

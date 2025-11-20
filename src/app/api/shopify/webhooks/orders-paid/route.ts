@@ -271,7 +271,6 @@ export async function POST(req: NextRequest) {
     ...(eventId && { event_id: eventId })
   }
 
-  // Bruk attributert URL hvis funnet, ellers fallback
   if (attrib?.checkoutUrl) {
     event.event_source_url = attrib.checkoutUrl
   } else if (order.order_status_url) {
@@ -279,8 +278,7 @@ export async function POST(req: NextRequest) {
   }
 
   const payload: MetaEventsRequest & { test_event_code?: string } = {
-    data: [event],
-    test_event_code: 'TEST63736'
+    data: [event]
   }
 
   const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID

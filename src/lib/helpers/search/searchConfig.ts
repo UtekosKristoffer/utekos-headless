@@ -13,7 +13,6 @@ export type SearchConfigItem = {
  * Oppdater denne når du legger til nye sider/produkter
  */
 export const SEARCH_CONFIG: SearchConfigItem[] = [
-  // ========== ANDRE SIDER ==========
   {
     id: 'page-home',
     title: 'Forsiden',
