@@ -11,12 +11,18 @@ interface CaptureBody {
   userData: UserData
 }
 
-function parseCheckoutToken(
-  checkoutUrl: string | undefined
-): string | undefined {
-  if (!checkoutUrl) return undefined
+function getStorageKey(body: CaptureBody): string | undefined {
+  if (body.cartId) {
+    const match = body.cartId.match(/Cart\/([a-zA-Z0-9]+)/)
+    if (match && match[1]) {
+      return match[1]
+    }
+  }
+
+  if (!body.checkoutUrl) return undefined
+
   try {
-    const url = new URL(checkoutUrl)
+    const url = new URL(body.checkoutUrl)
 
     const keyToken = url.searchParams.get('key')
     if (keyToken && /^[a-f0-9]{32}$/i.test(keyToken)) {
@@ -36,12 +42,11 @@ function parseCheckoutToken(
     if (paramToken) {
       return paramToken
     }
-
-    return undefined
   } catch (e) {
-    console.error('Error parsing checkout URL:', e, 'URL:', checkoutUrl)
-    return undefined
+    console.error('Error parsing checkout URL:', e)
   }
+
+  return undefined
 }
 
 export async function POST(req: NextRequest) {
@@ -53,20 +58,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  const token = parseCheckoutToken(body.checkoutUrl)
+  const token = getStorageKey(body)
   if (!token) {
-    console.error('Could not parse checkout token from URL:', body.checkoutUrl)
-    return NextResponse.json(
-      { error: 'Missing or invalid checkout token in checkoutUrl' },
-      { status: 400 }
-    )
+    console.error('Could not parse token from body (cartId or checkoutUrl)')
+    return NextResponse.json({ error: 'Missing valid token' }, { status: 400 })
   }
 
   const proxiedIp = req.headers.get('x-forwarded-for')?.split(',')?.[0]?.trim()
   const userAgent = req.headers.get('user-agent') || undefined
+
   const cookieFbp = req.cookies.get('_fbp')?.value
   const cookieFbc = req.cookies.get('_fbc')?.value
   const cookieExtId = req.cookies.get('ute_ext_id')?.value
+
   const userDataToSave: UserData = {}
 
   if (body.userData?.fbp) userDataToSave.fbp = body.userData.fbp
@@ -96,11 +100,11 @@ export async function POST(req: NextRequest) {
 
   try {
     const redisKey = `checkout:${token}`
-    await redisSet(redisKey, payload, 60 * 60 * 24 * 7) // 7d TTL
+    await redisSet(redisKey, payload, 60 * 60 * 24 * 7)
 
     if (process.env.NODE_ENV === 'development') {
       console.log(
-        `Saved attribution for token ${token} (ExtID: ${userDataToSave.external_id})`
+        `Saved attribution for key ${token} (ExtID: ${userDataToSave.external_id})`
       )
     }
 
