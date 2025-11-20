@@ -36,7 +36,6 @@ export const CheckoutButton = ({
   'asChild' | 'disabled' | 'aria-label'
 >): React.JSX.Element => {
   const onClick = (_e: React.MouseEvent<HTMLAnchorElement>) => {
-    console.log('Button Clicked!')
     if (isPending) return
     if (!cartId) {
       console.error('CheckoutButton onClick: Missing cartId!')
@@ -48,66 +47,62 @@ export const CheckoutButton = ({
 
       const fbp = getCookie('_fbp')
       const fbc = getCookie('_fbc')
+      const extId = getCookie('ute_ext_id')
+
       const ua =
         typeof navigator !== 'undefined' ? navigator.userAgent : undefined
       const sourceUrl =
         typeof window !== 'undefined' ? window.location.href : undefined
+
       const eventID = generateEventID().replace('evt_', 'ic_')
+
       const captureBody = {
-        cartId: cartId,
-        checkoutUrl: checkoutUrl,
+        cartId,
+        checkoutUrl,
         eventId: eventID,
         userData: {} as UserData
       }
+
       if (fbp) captureBody.userData.fbp = fbp
       if (fbc) captureBody.userData.fbc = fbc
+      if (extId) captureBody.userData.external_id = extId
       if (ua) captureBody.userData.client_user_agent = ua
 
-      console.log('Sending to /api/checkout/capture-identifiers:', captureBody)
       sendJSON('/api/checkout/capture-identifiers', captureBody)
+      const value = Number.parseFloat(subtotalAmount || '0') || 0
 
-      if (typeof window.fbq === 'function') {
-        window.fbq('track', 'InitiateCheckout', {}, { eventID })
+      const customData: CustomData = {
+        value,
+        currency,
+        content_ids: item_ids,
+        content_type: 'product',
+        num_items
       }
 
-      const capiPayload = {
+      if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
+        window.fbq('track', 'InitiateCheckout', customData, { eventID })
+      }
+
+      const capiPayload: {
+        eventName: string
+        eventId: string
+        eventSourceUrl?: string
+        eventData?: CustomData
+        userData?: UserData
+      } = {
         eventName: 'InitiateCheckout',
         eventId: eventID,
-        eventSourceUrl: sourceUrl,
-        eventData: {} as CustomData,
-        userData: {} as UserData
+        eventSourceUrl: sourceUrl ?? checkoutUrl,
+        eventData: customData,
+        userData: {}
       }
-      if (ua) capiPayload.userData!.client_user_agent = ua
-      sendJSON('/api/meta-events', capiPayload)
 
-      if (typeof window.snaptr === 'function') {
-        const snapData = {
-          price: parseFloat(subtotalAmount),
-          currency: currency,
-          item_ids: item_ids,
-          item_category: 'product',
-          number_items: num_items,
-          client_deduplication_id: eventID
-        }
-        window.snaptr('track', 'START_CHECKOUT', snapData)
-        console.log('🛒 Snap Pixel: START_CHECKOUT tracked', { snapData })
-      }
-      const snapCapiPayload = {
-        eventName: 'START_CHECKOUT',
-        eventId: eventID,
-        eventSourceUrl: sourceUrl,
-        eventData: {
-          value: parseFloat(subtotalAmount),
-          currency: currency,
-          content_ids: item_ids,
-          num_items: num_items
-        }
-        // userData: {} // Hentes av API-rute
-      }
-      sendJSON('/api/snap-events', snapCapiPayload)
-      console.log('🛒 Snap CAPI: START_CHECKOUT request sent', {
-        snapCapiPayload
-      })
+      if (ua) capiPayload.userData!.client_user_agent = ua
+      if (extId) capiPayload.userData!.external_id = extId
+      if (fbp) capiPayload.userData!.fbp = fbp
+      if (fbc) capiPayload.userData!.fbc = fbc
+
+      sendJSON('/api/meta-events', capiPayload)
     } catch (error) {
       console.error('Feil under sending av checkout-events:', error)
     }

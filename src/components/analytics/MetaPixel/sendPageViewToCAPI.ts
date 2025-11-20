@@ -1,32 +1,63 @@
 // Path: src/components/analytics/sendPageViewToCAPI.ts
 import { getPageViewParams } from './getPageViewParams'
 
+type PageViewPayload = {
+  eventName: 'PageView'
+  eventData: Record<string, unknown>
+  eventId: string
+  eventSourceUrl: string
+  eventTime: number
+  userData?: {
+    external_id?: string
+    fbc?: string
+    fbp?: string
+  }
+}
+
+// eslint-disable-next-line max-params
 export async function sendPageViewToCAPI(
   pathname: string,
   eventId: string,
   searchParams?: URLSearchParams | null,
-  externalId?: string | null
+  externalId?: string | null,
+  fbc?: string | null,
+  fbp?: string | null
 ) {
+  if (typeof window === 'undefined') return
+
   try {
     const params = getPageViewParams(pathname, searchParams)
+
+    const payload: PageViewPayload = {
+      eventName: 'PageView',
+      eventData: params,
+      eventId,
+      eventSourceUrl: window.location.href,
+      eventTime: Math.floor(Date.now() / 1000)
+    }
+
+    const userData: PageViewPayload['userData'] = {}
+    if (externalId) userData.external_id = externalId
+    if (fbc) userData.fbc = fbc
+    if (fbp) userData.fbp = fbp
+    if (Object.keys(userData).length > 0) {
+      payload.userData = userData
+    }
 
     const response = await fetch('/api/meta-events', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        eventName: 'PageView',
-        eventData: params,
-        eventId: eventId,
-        eventSourceUrl: window.location.href,
-        eventTime: Math.floor(Date.now() / 1000),
-        userData: {
-          external_id: externalId
-        }
-      })
+      body: JSON.stringify(payload),
+      keepalive: true // Veldig bra at du har denne!
     })
 
     if (!response.ok) {
-      const error = await response.json()
+      let error: unknown = null
+      try {
+        error = await response.json()
+      } catch {
+        error = response.statusText
+      }
       console.error('Meta CAPI PageView error:', error)
     }
   } catch (error) {

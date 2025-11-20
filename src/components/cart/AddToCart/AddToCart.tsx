@@ -28,6 +28,7 @@ import { ModalSubmitButton } from '../AddToCartButton/ModalSubmitButton'
 import { QuantitySelector } from '../QuantitySelector'
 import { sendJSON } from './sendJson'
 import { getCookie } from './getCookie'
+
 export function AddToCart({
   product,
   selectedVariant,
@@ -101,7 +102,7 @@ export function AddToCart({
           )
 
           try {
-            let cartId = contextCartId || (await getCartIdFromCookie())
+            const cartId = contextCartId || (await getCartIdFromCookie())
             if (cartId) {
               await applyDiscount(cartId, 'GRATISBUFF')
             } else {
@@ -118,9 +119,11 @@ export function AddToCart({
             }
           }
         }
+
         const basePrice = Number.parseFloat(selectedVariant.price.amount)
         const currency = selectedVariant.price.currencyCode
         let totalQty = values.quantity
+
         const contents: CustomData['contents'] = [
           {
             id: selectedVariant.id.toString(),
@@ -144,16 +147,17 @@ export function AddToCart({
         const value = basePrice * values.quantity
 
         const eventID = `atc_${selectedVariant.id}_${Date.now()}`
-        if (typeof window.fbq === 'function') {
+        if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
           const fbqParams = {
             contents,
-            content_type: 'product' as const, // Bruk 'as const' for streng literal type
+            content_type: 'product' as const,
             value,
             currency,
             content_ids: contentIds,
             content_name: contentName,
             num_items: totalQty
           }
+
           window.fbq('track', 'AddToCart', fbqParams, { eventID })
           console.log('🛒 Meta Pixel: AddToCart tracked', {
             fbqParams,
@@ -161,10 +165,11 @@ export function AddToCart({
           })
         }
 
-        const fbp = getCookie('_fbp')
-        const fbc = getCookie('_fbc')
         const ua =
           typeof navigator !== 'undefined' ? navigator.userAgent : undefined
+        const fbp = getCookie('_fbp')
+        const fbc = getCookie('_fbc')
+        const externalId = getCookie('ute_ext_id')
 
         const capiPayload: {
           eventName: string
@@ -189,11 +194,17 @@ export function AddToCart({
         }
 
         if (ua) capiPayload.userData!.client_user_agent = ua
+        if (fbp) capiPayload.userData!.fbp = fbp
+        if (fbc) capiPayload.userData!.fbc = fbc
+        if (externalId) capiPayload.userData!.external_id = externalId
 
         sendJSON('/api/meta-events', capiPayload)
         console.log('🛒 Meta CAPI: AddToCart request sent', { capiPayload })
 
-        if (typeof window.dataLayer !== 'undefined') {
+        if (
+          typeof window !== 'undefined'
+          && typeof window.dataLayer !== 'undefined'
+        ) {
           const ga4Items = [
             {
               item_id: selectedVariant.id.toString(),
@@ -203,6 +214,7 @@ export function AddToCart({
               quantity: values.quantity
             }
           ]
+
           if (additionalLine) {
             ga4Items.push({
               item_id: additionalLine.variantId.toString(),
@@ -212,6 +224,7 @@ export function AddToCart({
               quantity: additionalLine.quantity
             })
           }
+
           window.dataLayer.push({
             event: 'add_to_cart',
             ecommerce: {
@@ -226,35 +239,6 @@ export function AddToCart({
             currency
           })
         }
-
-        if (typeof window.snaptr === 'function') {
-          const snapData = {
-            price: value,
-            currency: currency,
-            item_ids: contentIds,
-            item_category: 'product',
-            number_items: totalQty,
-            client_deduplication_id: eventID
-          }
-          window.snaptr('track', 'ADD_CART', snapData)
-          console.log('🛒 Snap Pixel: ADD_CART tracked', { snapData })
-        }
-
-        const snapCapiPayload = {
-          eventName: 'ADD_CART',
-          eventId: eventID,
-          eventSourceUrl:
-            typeof window !== 'undefined' ? window.location.href : '',
-          eventData: {
-            value: value,
-            currency: currency,
-            contents: contents,
-            num_items: totalQty
-          }
-          // userData blir lagt til av API-ruten (IP, UA, Cookie)
-        }
-        sendJSON('/api/snap-events', snapCapiPayload)
-        console.log('🛒 Snap CAPI: ADD_CART request sent', { snapCapiPayload })
 
         cartStore.send({ type: 'OPEN' })
       } catch (mutationError) {

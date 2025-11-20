@@ -5,6 +5,8 @@ import type { Body, UserData } from './types'
 export async function POST(req: NextRequest) {
   const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
   const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
+  const PAGE_ID = process.env.ViewContent
+  const IG_ACCOUNT_ID = process.env.META_IG_ACCOUNT_ID
 
   if (!PIXEL_ID || !ACCESS_TOKEN) {
     console.error('Meta CAPI environment variables not set')
@@ -14,16 +16,14 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  const userAgent = req.headers.get('user-agent')
+  const ua = req.headers.get('user-agent')
   const xForwardedFor = req.headers.get('x-forwarded-for')
   const ip =
     xForwardedFor ? (xForwardedFor.split(',')[0]?.trim() ?? null) : null
 
-  const cookieStore = await cookies()
-
-  const fbp = cookieStore.get('_fbp')?.value || null
-  const fbc = cookieStore.get('_fbc')?.value || null
-  const externalIdFromCookie = cookieStore.get('ute_ext_id')?.value || undefined
+  const fbp = req.cookies.get('_fbp')?.value ?? null
+  const fbc = req.cookies.get('_fbc')?.value ?? null
+  const externalId = req.cookies.get('ute_ext_id')?.value ?? null
 
   let body: Body
   try {
@@ -32,26 +32,25 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
   }
 
-  if (!body.eventName || !body.eventId || !body.eventSourceUrl) {
+  if (!body.eventName || !body.eventId) {
     return NextResponse.json(
-      {
-        error:
-          'Missing required event fields: eventName, eventId, eventSourceUrl'
-      },
+      { error: 'Missing required fields: eventName or eventId' },
       { status: 400 }
     )
   }
 
   const event_name = body.eventName
   const event_time = body.eventTime ?? Math.floor(Date.now() / 1000)
-  const finalExternalId = body.userData?.external_id || externalIdFromCookie
 
+  // --- Bygg UserData ---
   const user_data: UserData = {
     client_ip_address: ip,
-    client_user_agent: userAgent,
+    client_user_agent: ua,
     fbp: fbp,
     fbc: fbc,
-    external_id: finalExternalId,
+    ...(externalId && { external_id: externalId }),
+    ...(PAGE_ID && { page_id: PAGE_ID }),
+    ...(IG_ACCOUNT_ID && { ig_account_id: IG_ACCOUNT_ID }),
 
     ...(body.userData?.em && { em: body.userData.em }),
     ...(body.userData?.ph && { ph: body.userData.ph }),
@@ -62,7 +61,10 @@ export async function POST(req: NextRequest) {
     ...(body.userData?.ct && { ct: body.userData.ct }),
     ...(body.userData?.st && { st: body.userData.st }),
     ...(body.userData?.zp && { zp: body.userData.zp }),
-    ...(body.userData?.country && { country: body.userData.country })
+    ...(body.userData?.country && { country: body.userData.country }),
+    ...(body.userData?.external_id && {
+      external_id: body.userData.external_id
+    })
   }
 
   const payload: Record<string, any> = {
@@ -77,6 +79,8 @@ export async function POST(req: NextRequest) {
         custom_data: body.eventData ?? {}
       }
     ]
+    // test_event_code kan legges her midlertidig ved behov
+    // test_event_code: 'TEST63736'
   }
 
   try {
@@ -89,18 +93,14 @@ export async function POST(req: NextRequest) {
     })
 
     const json = await res.json()
-
-    if (process.env.NODE_ENV === 'development') {
-      console.log(
-        `Meta CAPI Response for ${event_name}:`,
-        JSON.stringify(json, null, 2)
-      )
-    }
-
+    console.log(
+      `Meta CAPI Response for ${event_name} (${body.eventId}):`,
+      JSON.stringify(json, null, 2)
+    )
     if (!res.ok) {
       console.error(
         `Meta CAPI request failed for ${event_name} (${body.eventId}): Status ${res.status}`,
-        json
+        JSON.stringify(json, null, 2)
       )
       return NextResponse.json(
         { error: 'Failed to send event to Meta CAPI', details: json },

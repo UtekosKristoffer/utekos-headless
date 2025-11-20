@@ -29,7 +29,6 @@ export function CartDrawer(): React.JSX.Element {
 
   const handleStateChangeWithTransition = React.useCallback(
     (isOpen: boolean) => {
-      // Bruk requestIdleCallback for å utsette state-endring til browser er idle
       if ('requestIdleCallback' in window) {
         requestIdleCallback(() => {
           startTransition(() => {
