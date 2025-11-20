@@ -45,9 +45,9 @@ export const CheckoutButton = ({
     try {
       sendJSON('/api/log', {
         event: 'Checkout Started',
+        level: 'info',
         context: { cartId }
       })
-
       const fbp = getCookie('_fbp')
       const fbc = getCookie('_fbc')
       const extId = getCookie('ute_ext_id')
