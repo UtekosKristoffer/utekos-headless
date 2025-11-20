@@ -1,3 +1,4 @@
+// Path: src/app/produkter/[handle]/ProductPageView/ProductPageView.tsx
 'use client'
 import { useState } from 'react'
 import { ProductPageAccordion } from '@/app/produkter/[handle]/ProductPageAccordion/ProductPageAccordion'
@@ -16,6 +17,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { productMetadata } from '@/db/config/product-metadata.config'
 import { getSortedOptions } from '@/lib/helpers/async/getSortedOptions'
@@ -173,13 +175,19 @@ export default function ProductPageView({
               threshold={0.2}
             >
               <Activity>
-                <PriceActivityPanel
-                  productHandle={productData.handle}
-                  priceAmount={selectedVariant.price.amount ?? '0'}
-                  currencyCode={selectedVariant.price.currencyCode}
-                  limitedStockCount={limitedStockCount ?? 0}
-                  activityNode={activityNode}
-                />
+                {/* HER la vi inn wrapperen med data-attributtene */}
+                <div
+                  data-product-price={selectedVariant.price.amount ?? '0'}
+                  data-product-currency={selectedVariant.price.currencyCode}
+                >
+                  <PriceActivityPanel
+                    productHandle={productData.handle}
+                    priceAmount={selectedVariant.price.amount ?? '0'}
+                    currencyCode={selectedVariant.price.currencyCode}
+                    limitedStockCount={limitedStockCount ?? 0}
+                    activityNode={activityNode}
+                  />
+                </div>
               </Activity>
             </AnimatedBlock>
 

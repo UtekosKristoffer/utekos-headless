@@ -5,9 +5,7 @@ import { AnimatedBlock } from '@/components/AnimatedBlock'
 export interface ProductGalleryCardProps {
   galleryContent: React.ReactNode
   enableStickyOnDesktop?: boolean
-  /** CSS-klasse for top-offset når sticky er aktiv. Default: md:top-24 */
   stickyTopClassName?: string
-  /** Valgfri ARIA label for innpakningen; gi meningsfull tekst ved behov. */
   ariaLabel?: string
 }
 

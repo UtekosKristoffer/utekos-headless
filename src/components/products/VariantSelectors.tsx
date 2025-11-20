@@ -25,7 +25,6 @@ export function VariantSelectors({
             selected => selected.name === option.name
           )?.value
 
-          // Hvis det bare er ett valg, vis det uten knapper
           if (option.optionValues.length === 1) {
             return (
               <div key={option.name} className='space-y-2'>
