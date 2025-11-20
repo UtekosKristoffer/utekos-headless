@@ -7,6 +7,8 @@ import { generateEventID } from './generateEventID'
 import { getCookie } from './getCookie'
 import { getPageViewParams } from './getPageViewParams'
 import { sendPageViewToCAPI } from './sendPageViewToCAPI'
+import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
+import type { CustomData, UserData } from '@types'
 
 export function MetaPixelEvents() {
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID
@@ -22,14 +24,39 @@ export function MetaPixelEvents() {
         const externalId = getCookie('ute_ext_id')
         const fbc = getCookie('_fbc')
         const fbp = getCookie('_fbp')
-
         const eventId = generateEventID()
         const currentPathname = window.location.pathname
         const currentSearchParams = new URLSearchParams(window.location.search)
+        const searchQuery = currentSearchParams.get('q')
 
         if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
           const params = getPageViewParams(currentPathname, currentSearchParams)
           window.fbq('track', 'PageView', params, { eventID: eventId })
+
+          if (searchQuery) {
+            const searchEventId = generateEventID().replace('evt_', 'search_')
+            window.fbq(
+              'track',
+              'Search',
+              { search_string: searchQuery },
+              { eventID: searchEventId }
+            )
+
+            if (process.env.NODE_ENV === 'production') {
+              const searchCapiPayload = {
+                eventName: 'Search',
+                eventId: searchEventId,
+                eventSourceUrl: window.location.href,
+                eventData: `{ search_string: ${searchQuery} }`,
+                userData: {
+                  external_id: externalId,
+                  fbc: fbc,
+                  fbp: fbp
+                } as UserData
+              }
+              sendJSON('/api/meta-events', searchCapiPayload)
+            }
+          }
         }
 
         if (process.env.NODE_ENV === 'production') {
@@ -64,9 +91,7 @@ export function MetaPixelEvents() {
       const externalId = getCookie('ute_ext_id')
       const fbc = getCookie('_fbc')
       const fbp = getCookie('_fbp')
-
       const eventId = generateEventID().replace('evt_', 'vc_')
-
       const priceElement = document.querySelector('[data-product-price]')
       const price =
         priceElement ?
