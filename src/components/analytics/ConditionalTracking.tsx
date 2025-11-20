@@ -6,6 +6,7 @@ import { GoogleTagManager } from '@next/third-parties/google'
 import Script from 'next/script'
 import { MetaPixelEvents } from './MetaPixel/MetaPixelEvents'
 import type { TrackingProps } from '@types'
+
 export function ConditionalTracking({
   googleTagManagerId,
   metaPixelId,
@@ -33,9 +34,7 @@ export function ConditionalTracking({
         </Script>
       )}
 
-      {(consent.marketing || consent.profile_marketing) && metaPixelId && (
-        <MetaPixelEvents />
-      )}
+      {metaPixelId && <MetaPixelEvents />}
     </>
   )
 }

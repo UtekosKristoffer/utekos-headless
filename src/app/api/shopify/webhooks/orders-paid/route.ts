@@ -89,10 +89,8 @@ function getKeyFromUrl(urlString: string | undefined): string | undefined {
 function getCheckoutKey(order: OrderPaid): string | undefined {
   if (order.cart_token) return order.cart_token
 
-  // 2. Prioritet: token (Kan være samme som cart_token i eldre oppsett)
   if (order.token) return order.token
 
-  // 3. Fallback: Prøv å parse fra order_status_url (ofte en annen key, men verdt et forsøk)
   const urlKey = getKeyFromUrl((order as any)?.order_status_url)
   if (urlKey) return urlKey
 
