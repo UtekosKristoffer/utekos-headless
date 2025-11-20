@@ -51,7 +51,6 @@ export const CheckoutButton = ({
       const fbp = getCookie('_fbp')
       const fbc = getCookie('_fbc')
       const extId = getCookie('ute_ext_id')
-
       const ua =
         typeof navigator !== 'undefined' ? navigator.userAgent : undefined
       const sourceUrl =

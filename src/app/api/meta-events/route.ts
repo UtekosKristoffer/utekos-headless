@@ -1,6 +1,44 @@
-// Path: app/api/meta-events/route.ts
+// Path: src/app/api/meta-events/route.ts
 import { NextRequest, NextResponse } from 'next/server'
-import type { Body, UserData } from './types'
+
+type ContentItem = { id: string; quantity: number; item_price?: number }
+type CustomData = {
+  value?: number
+  currency?: string
+  content_type?: 'product' | 'product_group'
+  content_ids?: string[]
+  contents?: ContentItem[]
+  num_items?: number
+  order_id?: string
+  search_string?: string
+}
+type UserData = {
+  em?: string[]
+  ph?: string[]
+  fn?: string[]
+  ln?: string[]
+  ge?: string[]
+  db?: string[]
+  ct?: string[]
+  st?: string[]
+  zp?: string[]
+  country?: string[]
+  client_ip_address?: string | null
+  client_user_agent?: string | null
+  fbc?: string | null
+  fbp?: string | null
+  external_id?: string | undefined
+}
+type Body = {
+  eventName: string
+  eventData?: CustomData
+  userData?: UserData
+  eventId?: string
+  eventSourceUrl?: string
+  eventTime?: number
+  action_source?: string
+}
+
 export async function POST(req: NextRequest) {
   const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
   const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
@@ -13,14 +51,14 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  const ua = req.headers.get('user-agent')
+  const userAgent = req.headers.get('user-agent')
   const xForwardedFor = req.headers.get('x-forwarded-for')
   const ip =
     xForwardedFor ? (xForwardedFor.split(',')[0]?.trim() ?? null) : null
 
-  const fbp = req.cookies.get('_fbp')?.value ?? null
-  const fbc = req.cookies.get('_fbc')?.value ?? null
-  const externalId = req.cookies.get('ute_ext_id')?.value ?? null
+  const cookieFbp = req.cookies.get('_fbp')?.value
+  const cookieFbc = req.cookies.get('_fbc')?.value
+  const cookieExtId = req.cookies.get('ute_ext_id')?.value
 
   let body: Body
   try {
@@ -28,21 +66,27 @@ export async function POST(req: NextRequest) {
   } catch {
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
   }
-  if (!body.eventName || !body.eventId) {
+
+  if (!body.eventName || !body.eventId || !body.eventSourceUrl) {
     return NextResponse.json(
-      { error: 'Missing required fields: eventName or eventId' },
+      {
+        error:
+          'Missing required event fields: eventName, eventId, eventSourceUrl'
+      },
       { status: 400 }
     )
   }
 
   const event_name = body.eventName
   const event_time = body.eventTime ?? Math.floor(Date.now() / 1000)
+
   const user_data: UserData = {
     client_ip_address: ip,
-    client_user_agent: ua,
-    fbp: fbp,
-    fbc: fbc,
-    ...(externalId && { external_id: externalId }),
+    client_user_agent: userAgent,
+    fbp: body.userData?.fbp || cookieFbp || null,
+    fbc: body.userData?.fbc || cookieFbc || null,
+    external_id: body.userData?.external_id || cookieExtId || undefined,
+
     ...(body.userData?.em && { em: body.userData.em }),
     ...(body.userData?.ph && { ph: body.userData.ph }),
     ...(body.userData?.fn && { fn: body.userData.fn }),
@@ -52,10 +96,7 @@ export async function POST(req: NextRequest) {
     ...(body.userData?.ct && { ct: body.userData.ct }),
     ...(body.userData?.st && { st: body.userData.st }),
     ...(body.userData?.zp && { zp: body.userData.zp }),
-    ...(body.userData?.country && { country: body.userData.country }),
-    ...(body.userData?.external_id && {
-      external_id: body.userData.external_id
-    })
+    ...(body.userData?.country && { country: body.userData.country })
   }
 
   const payload: Record<string, any> = {
@@ -75,10 +116,10 @@ export async function POST(req: NextRequest) {
 
   try {
     const metaApiUrl = `https://graph.facebook.com/v24.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`--- SENDING TO CAPI (${event_name}) ---`)
-      console.dir(payload, { depth: null, colors: true })
-    }
+
+    console.log(`--- SENDING TO CAPI (${event_name}) ---`)
+    console.log(JSON.stringify(payload, null, 2))
+
     const res = await fetch(metaApiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -86,20 +127,20 @@ export async function POST(req: NextRequest) {
     })
 
     const json = await res.json()
-    console.log(
-      `Meta CAPI Response for ${event_name} (${body.eventId}):`,
-      JSON.stringify(json, null, 2)
-    )
+
     if (!res.ok) {
       console.error(
         `Meta CAPI request failed for ${event_name} (${body.eventId}): Status ${res.status}`,
-        JSON.stringify(json, null, 2)
+        json
       )
       return NextResponse.json(
         { error: 'Failed to send event to Meta CAPI', details: json },
         { status: res.status }
       )
     }
+
+    console.log(`Meta CAPI Success for ${event_name}:`, JSON.stringify(json))
+
     return NextResponse.json({ success: true, metaResponse: json })
   } catch (fetchError) {
     console.error(
