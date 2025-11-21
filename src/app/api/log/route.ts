@@ -39,7 +39,6 @@ export async function POST(req: NextRequest) {
 
     const ip = req.headers.get('x-forwarded-for')?.split(',')[0]
     const userAgent = req.headers.get('user-agent')
-
     const fbp = req.cookies.get('_fbp')?.value
     const fbc = req.cookies.get('_fbc')?.value
     const externalId = req.cookies.get('ute_ext_id')?.value

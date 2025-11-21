@@ -9,7 +9,6 @@ type Props = {
   handle: string
 }
 
-// Shopify -> Schema.org availability
 const mapAvailability = (availableForSale: boolean) =>
   availableForSale ?
     'https://schema.org/InStock'
@@ -61,7 +60,6 @@ export async function ProductJsonLd({ handle }: Props) {
   return (
     <script
       type='application/ld+json'
-      // NB: JSON.stringify dropper automatisk felter som ikke finnes
       dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
     />
   )

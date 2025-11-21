@@ -1,17 +1,10 @@
 // Path: src/proxy.ts
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { createHash } from 'crypto'
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico, sitemap.xml, robots.txt (metadata files)
-     * - videos (ekskluder video-mappen vår)
-     */
     '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|videos).*)'
   ]
 }
@@ -19,48 +12,68 @@ export const config = {
 export function proxy(request: NextRequest) {
   const response = NextResponse.next()
   const fbclid = request.nextUrl.searchParams.get('fbclid')
+  const rawEmail = request.nextUrl.searchParams.get('user_email')
 
-  if (!fbclid) {
-    return response
-  }
+  if (rawEmail) {
+    const hashedEmail = createHash('sha256')
+      .update(rawEmail.trim().toLowerCase())
+      .digest('hex')
 
-  if (process.env.NODE_ENV === 'production') {
-    console.log(`[Proxy] Captured fbclid from URL: ${fbclid}`)
-  }
+    response.cookies.set({
+      name: 'ute_user_hash',
+      value: hashedEmail,
+      path: '/',
+      maxAge: 60 * 60 * 24 * 30,
+      httpOnly: false
+    })
 
-  const existingFbc = request.cookies.get('_fbc')?.value
-
-  if (existingFbc) {
-    const parts = existingFbc.split('.')
-    const existingFbclid = parts.length > 0 ? parts[parts.length - 1] : null
-
-    if (existingFbclid === fbclid) {
-      if (process.env.NODE_ENV === 'production') {
-        console.log('[Proxy] fbclid matches existing cookie. Skipping update.')
-      }
-      return response
+    if (process.env.NODE_ENV === 'production') {
+      console.log('[Proxy] Captured and hashed user_email from URL')
     }
   }
+  if (fbclid) {
+    if (process.env.NODE_ENV === 'production') {
+      console.log(`[Proxy] Captured fbclid from URL: ${fbclid}`)
+    }
 
-  const version = 'fb'
-  const subdomainIndex = 1
-  const creationTime = Date.now()
+    const existingFbc = request.cookies.get('_fbc')?.value
 
-  const formattedFbc = `${version}.${subdomainIndex}.${creationTime}.${fbclid}`
+    let shouldUpdate = true
+    if (existingFbc) {
+      const parts = existingFbc.split('.')
+      const existingFbclid = parts.length > 0 ? parts[parts.length - 1] : null
 
-  if (process.env.NODE_ENV === 'production') {
-    console.log(`[Proxy] Setting new _fbc cookie: ${formattedFbc}`)
+      if (existingFbclid === fbclid) {
+        if (process.env.NODE_ENV === 'production') {
+          console.log(
+            '[Proxy] fbclid matches existing cookie. Skipping update.'
+          )
+        }
+        shouldUpdate = false
+      }
+    }
+
+    if (shouldUpdate) {
+      const version = 'fb'
+      const subdomainIndex = 1
+      const creationTime = Date.now()
+      const formattedFbc = `${version}.${subdomainIndex}.${creationTime}.${fbclid}`
+
+      if (process.env.NODE_ENV === 'production') {
+        console.log(`[Proxy] Setting new _fbc cookie: ${formattedFbc}`)
+      }
+
+      response.cookies.set({
+        name: '_fbc',
+        value: formattedFbc,
+        path: '/',
+        maxAge: 60 * 60 * 24 * 90,
+        sameSite: 'lax',
+        secure: true,
+        httpOnly: false
+      })
+    }
   }
-
-  response.cookies.set({
-    name: '_fbc',
-    value: formattedFbc,
-    path: '/',
-    maxAge: 60 * 60 * 24 * 90,
-    sameSite: 'lax',
-    secure: true,
-    httpOnly: false
-  })
 
   return response
 }

@@ -8,9 +8,8 @@ export function OrganizationJsonLd() {
     'url': 'https://utekos.no',
     'logo': 'https://utekos.no/logo.png', // VIKTIG: Bytt ut med den faktiske stien til logoen din
     'sameAs': [
-
-     'https://www.facebook.com/utekosen',
-       'https://www.instagram.com/utekos.no'
+      'https://www.facebook.com/utekosen',
+      'https://www.instagram.com/utekos.no'
     ]
   }
 
@@ -21,4 +20,3 @@ export function OrganizationJsonLd() {
     />
   )
 }
-

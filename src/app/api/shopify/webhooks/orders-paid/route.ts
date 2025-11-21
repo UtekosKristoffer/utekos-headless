@@ -1,170 +1,22 @@
 // Path: src/app/api/shopify/webhooks/orders-paid/route.ts
 
 import { NextRequest, NextResponse } from 'next/server'
-import crypto from 'node:crypto'
-import { redisGet, redisDel } from '@/lib/redis'
+import { redisGet, redisDel, redisPush, redisTrim } from '@/lib/redis'
+import { verifyHmac } from '@/lib/route-logic/veridyHmac'
+import { buildUserData } from '@/lib/meta/buildUserData'
+import { getCheckoutKey } from '@/lib/utils/getCheckoutKey'
+import { getKeyFromUrl } from '@/lib/utils/getKeyFromUrl'
+import { toNumberSafe } from '@/lib/utils/toNumberSafe'
 import type {
   OrderPaid,
   CheckoutAttribution,
   MetaEvent,
   MetaContentItem,
   MetaPurchaseCustomData,
-  MetaUserData,
   MetaEventsRequest,
   MetaGraphError,
   MetaEventsSuccess
 } from '@types'
-
-function normalizeAndHash(
-  value: string | undefined | null
-): string | undefined {
-  if (value == null || typeof value !== 'string') {
-    return undefined
-  }
-  const trimmedValue = value.trim()
-  if (trimmedValue === '') {
-    return undefined
-  }
-
-  if (/^[\d\s\-()+]+$/.test(trimmedValue)) {
-    const digitsOnly = trimmedValue.replace(/\D/g, '')
-    if (digitsOnly === '') return undefined
-    // Vurder E.164 normalisering her hvis mulig/nødvendig før hash
-    return crypto.createHash('sha256').update(digitsOnly, 'utf8').digest('hex')
-  }
-
-  const normalized = trimmedValue.toLowerCase()
-  return crypto.createHash('sha256').update(normalized, 'utf8').digest('hex')
-}
-
-function verifyHmac(req: NextRequest, raw: string): boolean {
-  const secret = process.env.SHOPIFY_WEBHOOK_SECRET ?? ''
-  if (!secret) {
-    console.error('[HMAC Verify] SHOPIFY_WEBHOOK_SECRET is not set')
-    return false
-  }
-  const header = req.headers.get('x-shopify-hmac-sha256') ?? ''
-  if (!header) {
-    console.error('[HMAC Verify] Missing x-shopify-hmac-sha256 header')
-    return false
-  }
-  const digest = crypto
-    .createHmac('sha256', secret)
-    .update(raw, 'utf8')
-    .digest('base64')
-
-  if (header.length !== digest.length) {
-    console.error('[HMAC Verify] Header length mismatch')
-    return false
-  }
-  try {
-    return crypto.timingSafeEqual(Buffer.from(digest), Buffer.from(header))
-  } catch (error) {
-    console.error(
-      '[HMAC Verify] Error during timingSafeEqual (likely invalid header format):',
-      error
-    )
-    return false
-  }
-}
-
-function toNumberSafe(s: string | undefined | null): number | undefined {
-  if (s == null || typeof s !== 'string') return undefined
-  const n = Number(s)
-  return Number.isFinite(n) ? n : undefined
-}
-
-function getKeyFromUrl(urlString: string | undefined): string | undefined {
-  if (typeof urlString !== 'string') return undefined
-  try {
-    const url = new URL(urlString)
-    const key = url.searchParams.get('key')
-    if (key && /^[a-f0-9]{32}$/i.test(key)) {
-      return key
-    }
-  } catch (e) {}
-  return undefined
-}
-
-function getCheckoutKey(order: OrderPaid): string | undefined {
-  if (order.cart_token) return order.cart_token
-
-  if (order.token) return order.token
-
-  const urlKey = getKeyFromUrl((order as any)?.order_status_url)
-  if (urlKey) return urlKey
-
-  return undefined
-}
-
-function buildUserData(
-  order: OrderPaid,
-  attrib: CheckoutAttribution | null
-): MetaUserData {
-  const userData: MetaUserData = {}
-
-  if (attrib?.userData?.fbp) userData.fbp = attrib.userData.fbp
-  if (attrib?.userData?.fbc) userData.fbc = attrib.userData.fbc
-  if (attrib?.userData?.client_user_agent)
-    userData.client_user_agent = attrib.userData.client_user_agent
-  if (attrib?.userData?.client_ip_address)
-    userData.client_ip_address = attrib.userData.client_ip_address
-  if (attrib?.userData?.external_id)
-    userData.external_id = attrib.userData.external_id
-
-  const email = normalizeAndHash(order.contact_email ?? order.customer?.email)
-  if (email) userData.em = [email]
-
-  const phone = normalizeAndHash(
-    order.customer?.phone
-      ?? order.billing_address?.phone
-      ?? order.shipping_address?.phone
-      ?? (typeof order.phone === 'string' ? order.phone : null)
-  )
-  if (phone) userData.ph = [phone]
-
-  const fn = normalizeAndHash(
-    order.customer?.first_name
-      ?? order.billing_address?.first_name
-      ?? order.shipping_address?.first_name
-  )
-  if (fn) userData.fn = [fn]
-
-  const ln = normalizeAndHash(
-    order.customer?.last_name
-      ?? order.billing_address?.last_name
-      ?? order.shipping_address?.last_name
-  )
-  if (ln) userData.ln = [ln]
-
-  const billing = order.billing_address
-  const shipping = order.shipping_address
-
-  const city = normalizeAndHash(billing?.city ?? shipping?.city)
-  if (city) userData.ct = [city]
-
-  const st = normalizeAndHash(billing?.province_code ?? shipping?.province_code)
-  if (st) userData.st = [st]
-
-  const zp = normalizeAndHash(billing?.zip ?? shipping?.zip)
-  if (zp) userData.zp = [zp]
-
-  const country = normalizeAndHash(
-    billing?.country_code ?? shipping?.country_code
-  )
-  if (country) userData.country = [country]
-
-  Object.keys(userData).forEach(key => {
-    const K = key as keyof MetaUserData
-    if (Array.isArray(userData[K]) && (userData[K] as string[]).length === 0) {
-      delete userData[K]
-    } else if (userData[K] == null) {
-      delete userData[K]
-    }
-  })
-
-  return userData
-}
 
 export async function POST(req: NextRequest) {
   const raw = await req.text()
@@ -187,12 +39,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
   }
 
-  // Debugging av ID-er for å løse Redis mismatch
-  const urlKey = getKeyFromUrl((order as any)?.order_status_url)
+  const orderStatusUrl = (order as OrderPaid & { order_status_url?: string })
+    .order_status_url
+  const urlKey = getKeyFromUrl(orderStatusUrl)
   console.log(
     `[Webhook orders/paid] Token Debug: ID=${order.id}, cart_token=${order.cart_token}, token=${order.token}, URL_key=${urlKey}`
   )
-
   const token = getCheckoutKey(order)
   const redisKey = token ? `checkout:${token}` : undefined
 
@@ -277,6 +129,34 @@ export async function POST(req: NextRequest) {
 
   const payload: MetaEventsRequest & { test_event_code?: string } = {
     data: [event]
+  }
+
+  try {
+    const logEntry = {
+      id: crypto.randomUUID(),
+      timestamp: new Date().toISOString(),
+      level: 'INFO',
+      event: 'CAPI: Purchase (Webhook)',
+      identity: {
+        ip: user_data.client_ip_address,
+        fbp: user_data.fbp,
+        fbc: user_data.fbc,
+        externalId: user_data.external_id,
+        userAgent: user_data.client_user_agent
+      },
+      context: {
+        path: event.event_source_url,
+        eventId: event.event_id,
+        orderId: custom_data.order_id,
+        redisKey: redisKey
+      },
+      data: custom_data
+    }
+
+    await redisPush('app_logs', logEntry)
+    redisTrim('app_logs', 0, 999).catch(() => {})
+  } catch (e) {
+    console.error('[Webhook orders/paid] Logging to dashboard failed', e)
   }
 
   const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
