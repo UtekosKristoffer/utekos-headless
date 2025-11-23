@@ -2,10 +2,9 @@
 import { getProducts } from '@/api/lib/products/getProducts'
 import { getMagazineArticles } from '@/db/data/articles'
 import type { MetadataRoute } from 'next'
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://utekos.no'
-  const lastModifiedISO = new Date().toISOString() // Fallback dato
+  const lastModifiedISO = new Date().toISOString()
 
   const corePages: MetadataRoute.Sitemap = [
     {
@@ -70,14 +69,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'yearly',
       priority: 0.3
     },
-    // Legg til /om-oss her også for fullstendighet
     {
       url: `${baseUrl}/om-oss`,
       lastModified: lastModifiedISO,
       changeFrequency: 'monthly',
       priority: 0.5
     },
-    // Legg til handlehjelp-sidene
     {
       url: `${baseUrl}/handlehjelp/sammenlign-modeller`,
       lastModified: lastModifiedISO,

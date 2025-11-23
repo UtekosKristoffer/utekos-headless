@@ -31,7 +31,7 @@ export async function ProductJsonLd({ handle }: Props) {
     ratingData = {
       '@type': 'AggregateRating',
       'ratingValue': String(product.reviews.rating),
-      'reviewCount': product.reviews.count // Fjerner String()
+      'reviewCount': product.reviews.count
     }
   }
 

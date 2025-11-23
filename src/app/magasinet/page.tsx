@@ -13,7 +13,6 @@ export default function MagazinePage() {
 
   return (
     <div className='container mx-auto px-4'>
-      {/* Featured Article Section */}
       {featuredArticle && (
         <Activity>
           <section className='mb-16'>
@@ -52,7 +51,6 @@ export default function MagazinePage() {
         </Activity>
       )}
 
-      {/* Article Grid Section */}
       <Activity>
         <section>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>

@@ -1,13 +1,12 @@
 // Path: src/app/handlehjelp/teknologi-materialer/page.tsx
 import type { Metadata } from 'next'
-import { jsonLd } from './jsonLd'
+import { TechJsonLd } from './TechJsonLd'
 import { ProductSpecsView } from './layout/ProductSpecsView'
 import { technologyGroups } from './config'
 import { ProductSpecPageHeader } from './layout/ProductSpecPageHeader'
 import { Activity } from 'react'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://utekos.no'),
   title: 'Vår Teknologi | Kvaliteten og komforten bak Utekos',
   description:
     'Oppdag materialene og teknologien som gjør Utekos-plaggene unikt varme, lette og slitesterke. Kvalitet i hver fiber for å forlenge de gode stundene utendørs.',
@@ -21,24 +20,21 @@ export const metadata: Metadata = {
     siteName: 'Utekos',
     images: [
       {
-        url: '/og-image-teknologi.jpg', // Bør være et relevant bilde
+        url: '/og-image-teknologi.jpg',
         width: 1200,
         height: 630,
         alt: 'Nærbilde av materialene brukt i Utekos-produkter.'
       }
     ],
     locale: 'no_NO',
-    type: 'article' // 'article' er mer presist for en slik side
+    type: 'article'
   }
 }
 
 export default function ProductSpecsPage() {
   return (
     <>
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <TechJsonLd />
       <main className='container mx-auto px-4 py-12 sm:py-16'>
         <Activity>
           <ProductSpecPageHeader />

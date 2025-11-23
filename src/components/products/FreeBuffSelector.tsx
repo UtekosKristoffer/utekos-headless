@@ -34,7 +34,6 @@ export function FreeBuffSelector({
 
   return (
     <div className='space-y-5'>
-      {/* Checkbox for å inkludere buff */}
       <div className='flex items-start gap-3'>
         <Checkbox
           id='include-buff'
@@ -53,7 +52,6 @@ export function FreeBuffSelector({
         </Label>
       </div>
 
-      {/* Fargevalg */}
       {includeBuff && (
         <div className='space-y-3 pl-8 animate-in fade-in slide-in-from-top-2 duration-300'>
           <h4 className='text-sm font-semibold text-foreground/80 tracking-wide'>
@@ -76,7 +74,6 @@ export function FreeBuffSelector({
                   )}
                   aria-label={`Velg ${color}`}
                 >
-                  {/* Checkmark for valgt farge */}
                   {isSelected && (
                     <div className='absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600 shadow-sm'>
                       <svg
@@ -94,8 +91,6 @@ export function FreeBuffSelector({
                       </svg>
                     </div>
                   )}
-
-                  {/* Fargebilde */}
                   <div
                     className={cn(
                       'relative h-10 w-10 overflow-hidden rounded-lg ring-2 transition-all',
@@ -109,10 +104,9 @@ export function FreeBuffSelector({
                       alt={`Utekos Buff i fargen ${color}`}
                       fill
                       className='object-cover'
+                      sizes='(max-width: 768px) 100vw, (max-width: 400px) 50vw, 33vw'
                     />
                   </div>
-
-                  {/* Fargenavn */}
                   <span
                     className={cn(
                       'text-sm font-medium transition-colors',

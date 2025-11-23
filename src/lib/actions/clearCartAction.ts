@@ -8,6 +8,7 @@ import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import { validateClearCartInput } from '@/lib/helpers/validations/validateClearCartInput'
 import type { CartActionsResult } from '@types'
+import { updateTag } from 'next/cache' // <--- NY: Import for invalidering
 
 export const clearCartAction = async (): Promise<CartActionsResult> => {
   try {
@@ -17,9 +18,15 @@ export const clearCartAction = async (): Promise<CartActionsResult> => {
     if (!cartId) {
       throw new MissingCartIdError()
     }
+
     const rawCart = await performCartClearMutation(cartId)
     if (!rawCart) {
       throw new Error('Tømming av handlekurv returnerte ingen data.')
+    }
+
+    if (rawCart.id) {
+      updateTag(`cart-${rawCart.id}`)
+      updateTag('cart')
     }
 
     const cart = normalizeCart(rawCart)

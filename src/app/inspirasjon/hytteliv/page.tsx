@@ -9,10 +9,11 @@ import {
   popularAreasData
 } from './sections/PopularCabinAresGrid'
 import { UseCasesGrid, useCasesData } from './sections/UseCasesGrid'
-import { jsonLd } from './data/jsonLd'
 import { SeasonsSection } from './sections/SeasonsSection'
 import { SocialProof } from './sections/SocialProof'
 import { Activity } from 'react'
+import { InspirationJsonLd } from '../InspirationJsonLd'
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Hytteliv og Utekos | Din guide til ultimat hyttekomfort',
@@ -23,11 +24,7 @@ export const metadata: Metadata = {
     'hyttekos',
     'norsk hytte',
     'utekos hytte',
-    'varme hytte',
-    'komfort hyttetur',
-    'hyttetilbehør',
-    'vinterhytte',
-    'peiskos'
+    'vinterhytte'
   ],
   alternates: {
     canonical: '/inspirasjon/hytteliv'
@@ -47,16 +44,20 @@ export const metadata: Metadata = {
       }
     ],
     locale: 'no_NO',
-    type: 'article'
+    type: 'website'
   }
 }
 
 export default function CabinInspirationPage() {
   return (
     <>
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      {/* Ny optimalisert JSON-LD komponent */}
+      <InspirationJsonLd
+        title='Hytteliv og Utekos'
+        description='Oppdag hvordan Utekos forvandler hytteopplevelsen. Inspirasjon for alle sesonger.'
+        url='https://utekos.no/inspirasjon/hytteliv'
+        image='https://utekos.no/og-image-hytte.webp'
+        datePublished='2024-01-01' // Sett gjerne en dato for når innholdet var nytt/oppdatert
       />
 
       <main>

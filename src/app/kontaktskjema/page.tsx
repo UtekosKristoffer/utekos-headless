@@ -12,23 +12,43 @@ import { DesktopSection } from './sections/DesktopSection'
 import { MobileSection } from './sections/MobileSection'
 import { TopGrid } from './sections/TopGrid'
 import { Activity } from 'react'
+import { ContactPageJsonLd } from './ContactPageJsonLd' // Ny import
 
 export const metadata: Metadata = {
-  title: 'Kontakt oss',
+  title: 'Kontakt oss | Kundeservice',
   description:
-    'Kontakt Utekos for hjelp med bestillinger, produktspørsmål eller generelle henvendelser.'
+    'Kontakt Utekos for hjelp med bestillinger, produktspørsmål eller generelle henvendelser. Vi er her for å hjelpe deg.',
+  alternates: {
+    canonical: '/kontaktskjema'
+  },
+  openGraph: {
+    title: 'Kontakt oss | Utekos Kundeservice',
+    description:
+      'Har du spørsmål om våre produkter eller din bestilling? Ta kontakt med oss her.',
+    url: '/kontaktskjema',
+    siteName: 'Utekos',
+    locale: 'no_NO',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image-produkter.png',
+        width: 1200,
+        height: 630,
+        alt: 'Kundeservice Utekos'
+      }
+    ]
+  }
 }
 
 export default function SupportPage() {
   return (
     <>
+      <ContactPageJsonLd />
       <main className='container mx-auto my-32 max-w-[76rem] px-4'>
         <div>
           <Activity>
             <TopGrid />
           </Activity>
-
-          {/* Hovedcontainer */}
           <Activity>
             <div className='relative border border-white/10 bg-background'>
               <Activity>
@@ -48,7 +68,6 @@ export default function SupportPage() {
           </Activity>
         </div>
       </main>
-      {/* Toaster kan ligge utenfor da den ikke er en del av hoved-layouten */}
       <Toaster richColors />
     </>
   )

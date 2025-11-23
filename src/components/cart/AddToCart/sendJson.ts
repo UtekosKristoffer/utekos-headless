@@ -25,6 +25,5 @@ export function sendJSON(url: string, data: unknown): void {
     console.log(`Fetch (keepalive) sent to ${url}`)
   } catch (error) {
     console.error(`Failed to send analytics data to ${url}:`, error)
-    // stille fail – må aldri blokkere add-to-cart
   }
 }

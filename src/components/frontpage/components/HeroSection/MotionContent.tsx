@@ -1,6 +1,5 @@
 import { Award } from 'lucide-react'
 import { ChevronDownSection } from './ChevronDown'
-
 export function MotionContent() {
   return (
     <div className='mb-8 text-center'>
@@ -31,8 +30,6 @@ export function MotionContent() {
         Kompromissløs komfort. Innovativ funksjonalitet. Designet for å holde på
         varmen når øyeblikkene teller.
       </p>
-
-      {/* Scroll indicator */}
       <div
         className='animate-fade-in hidden justify-center md:flex'
         style={{ animationDelay: '0.7s' }}

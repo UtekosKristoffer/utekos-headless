@@ -20,7 +20,7 @@ const eslintConfig = [
       'comma-dangle': ['error', 'never'],
       'dot-notation': 'error',
       'func-name-matching': 'error',
-      'max-params': ['error', 4],
+      'max-params': ['error', 6],
       'new-cap': [
         'error',
         { capIsNew: false, newIsCap: true, properties: true }

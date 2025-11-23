@@ -1,5 +1,4 @@
 // Path: src/lib/state/createCartMutationMachine.ts
-/*eslint-disable max-params*/
 import { assign, fromPromise, setup, type ErrorActorEvent } from 'xstate'
 import { extractCartErrorMessage } from '@/lib/errors/extractCartErrorMessage'
 import type {

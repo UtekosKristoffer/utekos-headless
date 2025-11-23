@@ -10,7 +10,6 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   cacheComponents: true,
   experimental: {
-    useCache: true,
     optimizePackageImports: [
       'zod',
       '@radix-ui/react-dialog',
@@ -128,7 +127,7 @@ const nextConfig: NextConfig = {
         permanent: true
       },
       {
-        source: '/pages/bobilferie/:path*', // Fanger opp alle undersider
+        source: '/pages/bobilferie/:path*',
         destination: '/inspirasjon/bobil',
         permanent: true
       },

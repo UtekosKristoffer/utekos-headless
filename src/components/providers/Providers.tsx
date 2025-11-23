@@ -44,7 +44,9 @@ export default function Providers({
         </HydrationBoundary>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
+
       <CookieConsent />
+
       <ConditionalTracking
         {...(process.env.NEXT_PUBLIC_GTM_ID && {
           googleTagManagerId: process.env.NEXT_PUBLIC_GTM_ID
@@ -65,5 +67,3 @@ export default function Providers({
     </CookieConsentProvider>
   )
 }
-
-

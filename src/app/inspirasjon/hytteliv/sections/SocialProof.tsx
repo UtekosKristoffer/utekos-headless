@@ -10,7 +10,6 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel'
 
-// Bytt ut med dine egne bilder og tekster
 const galleryImages = [
   {
     src: '/kate-erling-gress-vann.webp',

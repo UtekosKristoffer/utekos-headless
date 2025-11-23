@@ -2,14 +2,10 @@
 'use server'
 import 'server-only'
 
-import { AddToCartSchema } from '@/db/zod/schemas/AddToCartSchema' // SERVER-skjema (full Zod)
+import { AddToCartSchema } from '@/db/zod/schemas/AddToCartSchema'
 import type { AddToCartFormValues } from '@types'
 import { fromZodError } from 'zod-validation-error'
 
-/**
- * Server Action-hjelper MÅ være async i Next.js 15.
- * Validerer data og kaster lesbar (norsk) feil ved ugyldig input.
- */
 export async function validateAddLineInput(
   input: AddToCartFormValues
 ): Promise<void> {

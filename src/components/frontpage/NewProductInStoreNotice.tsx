@@ -1,16 +1,15 @@
 // Path: src/components/sections/NewProductInStoreNotice.tsx
 import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import IntersportLogo from '@public/logo/Intersport_logo.svg'
 import { INTERSPORT_LAKSEVAG_MAPS_URL } from '@/constants/maps'
+
 export function NewProductInStoreNotice() {
   return (
     <section className='mt-12 w-full py-12'>
       <div className='container mx-auto max-w-6xl px-4 md:max-w-7xl'>
         <div className='relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/50 p-8'>
-          {/* Ambient Glow */}
           <div
             className='pointer-events-none absolute left-1/2 top-0 -z-10 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 opacity-15 blur-3xl'
             style={{
@@ -25,10 +24,9 @@ export function NewProductInStoreNotice() {
                 alt='Intersport logo'
                 width={100}
                 height={28}
-                className='h-auto'
+                className='h-auto w-full max-w-[100px]'
               />
             </div>
-
             <h2 className='text-balance text-2xl font-bold tracking-tight text-white sm:text-3xl'>
               På plass hos Intersport Laksevåg!
             </h2>

@@ -9,8 +9,6 @@ import { useCallback } from 'react'
 
 export const useCartLine = (lineId: string): CartLine | undefined => {
   const cartId = useCartId()
-
-  // Bruk useCallback for å lage en stabil select-funksjon som ikke endrer seg på hver render
   const selectLineById = useCallback(
     (cart: Cart | null): CartLine | undefined =>
       cart?.lines?.find(line => line.id === lineId),
@@ -24,7 +22,7 @@ export const useCartLine = (lineId: string): CartLine | undefined => {
       return fetchCart(cartId)
     },
     enabled: !!cartId,
-    select: selectLineById // Bruk den stabile selectoren her
+    select: selectLineById
   })
 
   return line

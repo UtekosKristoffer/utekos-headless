@@ -7,7 +7,8 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
+  DialogDescription
 } from '@/components/ui/dialog'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useVariantState } from '@/hooks/useVariantState'
@@ -89,7 +90,7 @@ export function QuickViewModal({
       }
     }
     fetchAllProducts()
-  }, [isOpen, productHandle, productData])
+  }, [isOpen, productHandle, productData, handleFetchError])
 
   const selectedBuffVariant = buffProduct?.variants.edges.find(edge =>
     edge.node.selectedOptions.some(opt => opt.value === selectedBuffColor)
@@ -115,6 +116,9 @@ export function QuickViewModal({
             <DialogTitle className='sr-only'>
               Laster produktinformasjon
             </DialogTitle>
+            <DialogDescription className='sr-only'>
+              Vinduet viser detaljer om valgt produkt.
+            </DialogDescription>
             <ModalSkeleton />
           </div>
         : <>
@@ -123,9 +127,11 @@ export function QuickViewModal({
                 {productData.title}
               </DialogTitle>
               {productData.description && (
-                <p className='text-base text-foreground/70 leading-relaxed max-w-2xl'>
-                  {productData.description}
-                </p>
+                <DialogDescription asChild>
+                  <p className='text-base text-foreground/70 leading-relaxed max-w-2xl'>
+                    {productData.description}
+                  </p>
+                </DialogDescription>
               )}
             </DialogHeader>
 

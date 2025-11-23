@@ -1,14 +1,23 @@
+// Path: src/app/vilkar-betingelser/page.tsx
 import { GridCross } from '@/components/legal/GridCross'
 import { PrivacyNav } from '@/components/legal/PrivacyNav'
 import { lastUpdated, termsSections } from '@/db/config/terms.config'
 import type { Metadata } from 'next'
 import { SectionWrapper } from './SectionWrapper'
+import { TermsPageJsonLd } from './TermsPageJsonLd'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
-  title: 'Personvernerklæring | Utekos',
+  title: 'Vilkår og betingelser | Utekos',
   description:
-    'Les våre vilkår og betingelser for bruk av Utekos-nettstedet og kjøp av produkter. Vi streber etter å gi deg en trygg og pålitelig handleopplevelse',
+    'Les våre vilkår og betingelser for bruk av Utekos-nettstedet og kjøp av produkter. Vi streber etter å gi deg en trygg og pålitelig handleopplevelse.',
+  keywords: [
+    'Salgsbetingelser',
+    'Kjøpsvilkår',
+    'Angrerett',
+    'Reklamasjon',
+    'Utekos vilkår'
+  ],
   alternates: { canonical: '/vilkar-betingelser' },
   openGraph: {
     title: 'Vilkår og betingelser | Utekos',
@@ -29,22 +38,11 @@ export const metadata: Metadata = {
   }
 }
 
-export default function PrivacyPolicyPage() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    'name': 'Vilkår og betingelser',
-    'url': 'https://utekos.no/vilkar-betingelser',
-    'inLanguage': 'nb-NO',
-    'dateModified': '2025-11-03'
-  }
-
+export default function TermsPage() {
   return (
     <main className='container mx-auto my-24 max-w-6xl px-4'>
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <TermsPageJsonLd lastUpdated={lastUpdated} />
+
       <div className='relative border border-white/10 bg-background'>
         <GridCross className='left-0 top-0 -translate-x-1/2 -translate-y-1/2' />
         <GridCross className='right-0 bottom-0 translate-x-1/2 translate-y-1/2' />

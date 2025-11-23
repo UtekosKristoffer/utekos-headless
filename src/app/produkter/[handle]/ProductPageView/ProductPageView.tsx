@@ -5,7 +5,6 @@ import { ProductPageAccordion } from '@/app/produkter/[handle]/ProductPageAccord
 import { renderOptionComponent } from '@/app/produkter/[handle]/ProductPageView/helpers/renderOptionComponent'
 import { RelatedProducts } from '@/app/produkter/[handle]/RelatedProducts/RelatedProducts'
 import { AddToCart } from '@/components/cart/AddToCart/AddToCart'
-import { FindInStoreSection } from '@/components/frontpage/FindStoreSection'
 import { GalleryColumn } from '@/components/jsx/GalleryColumn'
 import { OptionsColumn } from '@/components/jsx/OptionsColumn'
 import { ProductPageGrid } from '@/components/jsx/ProductPageGrid'
@@ -252,9 +251,6 @@ export default function ProductPageView({
         {relatedProducts && relatedProducts.length > 0 && (
           <RelatedProducts products={relatedProducts} />
         )}
-      </Activity>
-      <Activity>
-        <FindInStoreSection />
       </Activity>
     </main>
   )

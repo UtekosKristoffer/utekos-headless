@@ -13,12 +13,12 @@ import type {
   CartActionsResult,
   CartResponse
 } from '@types'
+import { updateTag } from 'next/cache'
 
 export const addCartLinesAction = async (
   input: AddToCartFormValues
 ): Promise<CartActionsResult> => {
   try {
-    // 🚩 Viktig: validatorer er async nå – må await'es
     await validateAddLineInput(input)
 
     const cartId = await getCartIdFromCookie()
@@ -35,6 +35,11 @@ export const addCartLinesAction = async (
 
     if (!rawCart) {
       throw new Error('Klarte ikke å legge produkt i handlekurv.')
+    }
+
+    if (rawCart.id) {
+      updateTag(`cart-${rawCart.id}`)
+      updateTag('cart')
     }
 
     const cart = normalizeCart(rawCart)

@@ -3,11 +3,9 @@ import { ArrowRight, Coffee, Mountain, Star } from 'lucide-react'
 import Link from 'next/link'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import type { Route } from 'next'
-
 export function CabinHeroSection() {
   return (
     <section className='relative flex min-h-[70vh] items-center overflow-hidden'>
-      {/* Ambient background glow with CSS animation */}
       <div className='absolute inset-0 -z-10 opacity-25'>
         <div
           className='animate-pulse-glow absolute left-1/3 top-1/4 h-[600px] w-[600px] blur-3xl'

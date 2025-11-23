@@ -1,9 +1,11 @@
+'use cache'
+
 import { cn } from '@/lib/utils/className'
 import { ArrowRightIcon, Feather, ShieldCheckIcon } from 'lucide-react'
 import Link from 'next/link'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 
-export function QualitySection() {
+export async function QualitySection() {
   const cardClasses =
     'relative overflow-hidden rounded-xl border border-neutral-800 bg-sidebar-foreground p-8'
 

@@ -1,13 +1,22 @@
+// Path: src/app/personvern/page.tsx
 import { GridCross } from '@/components/legal/GridCross'
 import { PrivacyNav } from '@/components/legal/PrivacyNav'
 import { lastUpdated, privacySections } from '@/db/config/privacy.config'
 import type { Metadata } from 'next'
+import { PrivacyPolicyJsonLd } from './PrivacyPolicyJsonLd'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Personvernerklæring | Utekos',
   description:
-    'Les hvordan Utekos samler inn, bruker og beskytter dine personopplysninger i samsvar med gjeldende lover. Din trygghet er viktig for oss.',
+    'Les hvordan Utekos samler inn, bruker og beskytter dine personopplysninger i samsvar med gjeldende lover (GDPR). Din trygghet er viktig for oss.',
+  keywords: [
+    'Personvern',
+    'GDPR',
+    'Personopplysninger',
+    'Sikkerhet',
+    'Utekos vilkår'
+  ],
   alternates: { canonical: '/personvern' },
   openGraph: {
     title: 'Personvernerklæring | Utekos',
@@ -28,7 +37,6 @@ export const metadata: Metadata = {
   }
 }
 
-// Dekor + typografi for seksjoner
 const SectionWrapper = ({
   id,
   title,
@@ -50,21 +58,10 @@ const SectionWrapper = ({
 )
 
 export default function PrivacyPolicyPage() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    'name': 'Personvernerklæring',
-    'url': 'https://utekos.no/personvern',
-    'inLanguage': 'nb-NO',
-    'dateModified': '2025-06-11'
-  }
-
   return (
     <main className='container mx-auto my-24 max-w-6xl px-4'>
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <PrivacyPolicyJsonLd lastUpdated={lastUpdated} />
+
       <div className='relative border border-white/10 bg-background'>
         <GridCross className='left-0 top-0 -translate-x-1/2 -translate-y-1/2' />
         <GridCross className='right-0 bottom-0 translate-x-1/2 translate-y-1/2' />

@@ -8,6 +8,7 @@ import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import { validateUpdateLineInput } from '@/lib/helpers/validations/validateUpdateLineInput'
 import type { CartActionsResult, UpdateCartLineInput } from '@types'
+import { updateTag } from 'next/cache'
 
 export const updateCartLineQuantityAction = async (
   input: UpdateCartLineInput
@@ -19,9 +20,14 @@ export const updateCartLineQuantityAction = async (
     if (!cartId) {
       throw new MissingCartIdError()
     }
+
     const rawCart = await performCartLinesUpdateMutation(cartId, input)
     if (!rawCart) {
       throw new Error('Oppdatering av handlekurv returnerte ingen data.')
+    }
+    if (rawCart.id) {
+      updateTag(`cart-${rawCart.id}`)
+      updateTag('cart')
     }
 
     const cart = normalizeCart(rawCart)

@@ -5,6 +5,7 @@ import { ProductVideoSection } from '@/app/produkter/components/ProductVideoSect
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { getProduct } from '@/api/lib/products/getProduct'
 import { ProductJsonLd } from './ProductJsonLd'
+import { FindInStoreSection } from '@/components/frontpage/FindStoreSection'
 import { QueryClient } from '@tanstack/react-query'
 import {
   allProductsOptions,
@@ -100,6 +101,9 @@ export default async function ProductPage({
         </HydrationBoundary>
       </Activity>
       <Activity>
+        <Activity>
+          <FindInStoreSection />
+        </Activity>
         <Suspense fallback={<VideoSkeleton />}>
           <ProductVideoSection />
         </Suspense>

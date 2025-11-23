@@ -188,6 +188,7 @@ export function AddToCart({
             typeof window !== 'undefined' ? window.location.href : '',
           eventData: {
             value,
+            currency,
             content_name: contentName,
             contents,
             content_type: 'product',
@@ -203,7 +204,7 @@ export function AddToCart({
         if (externalId) capiPayload.userData!.external_id = externalId
 
         if (process.env.NODE_ENV === 'development') {
-          console.group('🚀 [Meta CAPI] Sending AddToCart')
+          console.group('[Meta CAPI] Sending AddToCart')
           console.log('Payload:', capiPayload)
           console.log('Identity Package:', { fbp, fbc, externalId, ua })
           console.groupEnd()

@@ -1,14 +1,13 @@
 // Path: src/app/layout.tsx
 import './globals.css'
 import { geistSans, geistMono } from '@/db/config/font.config'
+import { QueryClient, dehydrate } from '@tanstack/react-query'
+import { Suspense, type ReactNode } from 'react'
 import { mainMenu } from '@/db/config/menu.config'
 import { Analytics } from '@vercel/analytics/react'
-import { dehydrate } from '@tanstack/react-query'
 import { Toaster } from '@/components/ui/sonner'
-import { getCachedCart } from '@/lib/helpers/cart/getCachedCart'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
-import { QueryClient } from '@tanstack/react-query'
-import { Suspense, Activity, type ReactNode } from 'react'
+import { Activity } from 'react'
 import ChatBubble from '@/components/ChatBubble'
 import Providers from '@/components/providers/Providers'
 import AnnouncementBanner from '@/components/frontpage/components/SpecialOfferSection/AnnouncementBanner'
@@ -16,7 +15,9 @@ import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 import type { RootLayoutProps } from '@types'
 import type { Metadata } from 'next'
-import { OrganizationJsonLd } from './OrganizationJsonLd'
+import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
+import { getCachedCart } from '../lib/helpers/cart/getCachedCart'
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
@@ -24,52 +25,27 @@ export const metadata: Metadata = {
     template: '%s | Utekos'
   },
   description:
-    'Forleng kveldene på hytten, i bobilen eller på terrassen. Utekos lager komfortplagg av høy kvalitet, designet for å holde deg varm slik at du kan nyte de gode øyeblikkene lenger.',
+    'Kompromissløs komfort. Innovativ funksjonalitet. Designet for å holde på varmen når øyeblikkene teller..',
   alternates: {
-    canonical: 'https://utekos.no'
+    canonical: '/'
   },
-
-  icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: '32x32' },
-      { url: '/icon.png', type: 'image/png', sizes: '512x512' },
-      { url: '/icon-192.png', type: 'image/png', sizes: '192x192' }
-    ],
-    apple: '/apple-icon.png',
-    shortcut: '/favicon.ico'
-  },
+  applicationName: 'Utekos',
+  category: 'clothing',
   manifest: '/manifest.json',
-  keywords: [
-    'komfortplagg',
-    'hytteliv',
-    'bobil klær',
-    'båtkos',
-    'dunkåpe',
-    'anorakk',
-    'dunjakke',
-    'utejakke',
-    'ute klær',
-    'regnkåpe',
-    'varmedress',
-    'lang dunjakke',
-    'dun klær',
-    'varmeplagg',
-    'utekos',
-    'dun dress',
-    'utekos dress',
-    'sovepose dress',
-    'holde varmen ute',
-    'hytteliv',
-    'komfortplagg',
-    'bobil',
-    'terrassevarmer',
-    'båtliv',
-    'kvalitetsklær',
-    'forlenge kvelden',
-    'varme klær'
-  ],
-  authors: [{ name: 'Utekos' }],
+  keywords: ['Utekos', 'Komfortplagg', 'Varmedress', 'Dunjakke', 'Hytteliv'],
+  authors: [{ name: 'Utekos', url: 'https://utekos.no' }],
   creator: 'Utekos',
+  publisher: 'Utekos',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false
+  },
+  appleWebApp: {
+    capable: true,
+    title: 'Utekos',
+    statusBarStyle: 'default'
+  },
   openGraph: {
     type: 'website',
     locale: 'no_NO',
@@ -107,14 +83,15 @@ export const metadata: Metadata = {
 }
 
 /**
- * Ny Server Component for å laste dynamiske data (cartId)
- * og sette opp Providers. Dette flytter "await" UT av RootLayout
- * og INN i en Suspense-grense. Dette grunnet cacheComponents: true (next.js 16+) i next.config.ts
+ * Server Component som laster data før appen vises.
+ * Dette sikrer at cartId er tilgjengelig for Pixel/Tracking med en gang.
  */
 async function CartProviderLoader({ children }: { children: ReactNode }) {
   const queryClient = new QueryClient()
   const cartId = await getCartIdFromCookie()
 
+  // Prefetch av handlekurv
+  // getCachedCart har 'use cache', går derfor lynraskt.
   await queryClient.prefetchQuery({
     queryKey: ['cart', cartId],
     queryFn: () => getCachedCart(cartId)
@@ -128,32 +105,36 @@ async function CartProviderLoader({ children }: { children: ReactNode }) {
     </Providers>
   )
 }
+
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='no'>
       <body
         className={`bg-background text-foreground ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <OrganizationJsonLd />
+        <OnlineStoreJsonLd />
+
         <Suspense>
           <CartProviderLoader>
             <Activity>
               <AnnouncementBanner />
             </Activity>
-            <Activity>
-              <Header menu={mainMenu} />
-            </Activity>
+
+            <Header menu={mainMenu} />
+
             <main>
               {children}
               <Activity>
                 <Footer />
               </Activity>
             </main>
+
             <Activity>
               <ChatBubble />
             </Activity>
           </CartProviderLoader>
         </Suspense>
+
         <Toaster closeButton />
         <Analytics mode='production' />
       </body>

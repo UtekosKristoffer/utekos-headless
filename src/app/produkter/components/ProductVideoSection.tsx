@@ -1,17 +1,14 @@
-// Path: src/app/produkter/components/ProductVideoSection.tsx
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Sun, Layers, Move } from 'lucide-react'
+import { ArrowRight, Sun, Layers } from 'lucide-react'
 import type { Route } from 'next'
 import Link from 'next/link'
+import { cacheLife } from 'next/cache' // 1. Import cacheLife
 
-async function getVideoUrl() {
-  await new Promise(resolve => setTimeout(resolve, 1500)) // Simulerer nettverksforsinkelse
-  return '/videos/TensorPix2.mp4'
-}
-
+const VIDEO_URL = 'https://utekos.no/videos/TensorPix2.mp4'
+const VIDEO_THUMBNAIL = 'https://utekos.no/linn-kate-kikkert.png'
 export async function ProductVideoSection() {
-  const videoSrc = await getVideoUrl()
-
+  'use cache'
+  cacheLife('days')
   return (
     <section className='bg-neutral-950 py-16 sm:py-24'>
       <div className='container mx-auto px-4'>
@@ -20,15 +17,15 @@ export async function ProductVideoSection() {
             <div className='rounded-3xl border-4 border-neutral-700 bg-black p-2 shadow-2xl shadow-cyan-500/10'>
               <div className='overflow-hidden rounded-[1.25rem]'>
                 <video
-                  key={videoSrc}
                   className='w-full h-full object-cover'
                   loop
                   muted
                   autoPlay
                   playsInline
-                  preload='none'
+                  preload='metadata'
+                  poster={VIDEO_THUMBNAIL}
                 >
-                  <source src={videoSrc} type='video/mp4' />
+                  <source src={VIDEO_URL} type='video/mp4' />
                   Nettleseren din støtter ikke video-elementet.
                 </video>
               </div>

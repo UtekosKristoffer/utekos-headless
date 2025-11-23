@@ -14,6 +14,7 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Activity } from 'react'
+import { ArticleJsonLd } from '../ArticleJsonLd' // Husk å importere denne
 
 const articleComponents = {
   'beredskap-egenomsorg': dynamic(() =>
@@ -77,17 +78,24 @@ export async function generateMetadata({
 
   if (!article) return { title: 'Artikkel ikke funnet' }
 
+  const url = `https://utekos.no/magasinet/${article.slug}`
+
   return {
     title: `${article.title} | Utekos-Magasinet`,
     description: article.excerpt,
-    alternates: { canonical: `/magasinet/${article.slug}` },
+    alternates: { canonical: url },
     openGraph: {
       title: article.title,
       description: article.excerpt,
-      url: `/magasinet/${article.slug}`,
-      siteName: 'Utekos-Magasinet',
+      url: url,
+      siteName: 'Utekos',
       images: [
-        { url: article.imageUrl, width: 1200, height: 630, alt: article.title }
+        {
+          url: article.imageUrl,
+          width: 1200,
+          height: 630,
+          alt: article.title
+        }
       ],
       locale: 'no_NO',
       type: 'article'
@@ -112,8 +120,25 @@ export default async function ArticlePage({
   if (!article || !ArticleComponent) {
     notFound()
   }
+
+  // Henter dato fra mockArticles, eller bruker dagens dato som fallback (BØR FIKSES i dataen)
+  // Google krever en datePublished for articles/blogPosting.
+  const datePublished =
+    'publishedAt' in article ?
+      (article.publishedAt as string)
+    : '2024-01-01T12:00:00+01:00'
+
   return (
     <div className='container mx-auto px-4'>
+      <ArticleJsonLd
+        url={`https://utekos.no/magasinet/${article.slug}`}
+        title={article.title}
+        description={article.excerpt}
+        images={[article.imageUrl]} // Må være full URL
+        datePublished={datePublished}
+        authorName='Utekos'
+      />
+
       <Activity>
         <div className='mx-auto md:max-w-4xl'>
           <Breadcrumb>

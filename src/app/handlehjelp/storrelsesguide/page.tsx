@@ -1,12 +1,11 @@
 // Path: src/app/handlehjelp/storrelsesguide/page.tsx
 import type { Metadata } from 'next'
-import { Activity } from 'react' // Importer Activity
+import { Activity } from 'react'
 import { BackToShopCta } from './BackToShopCta'
 import { ComfyrobeSizeGuide } from './ComfyrobeSizeGuide'
-import { jsonLd } from './jsonLd'
+import { SizeGuideJsonLd } from './SizeGuideJsonLd' // Ny import
 import { TechDownSizeGuide } from './TechDownSizeGuide'
 import { UtekosSizeGuide } from './UtekosSizeGuide'
-
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Størrelsesguide for Utekos | Finn din perfekte passform',
@@ -43,12 +42,8 @@ const navigationLinks = [
 export default function SizeGuidePage() {
   return (
     <>
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <SizeGuideJsonLd />
       <main>
-        {/* --- INTRODUKSJON --- */}
         <Activity>
           <div className='container mx-auto px-4 pt-12 sm:pt-16'>
             <div className='mx-auto max-w-3xl text-center'>
@@ -63,8 +58,6 @@ export default function SizeGuidePage() {
             </div>
           </div>
         </Activity>
-
-        {/* --- PRODUKTNAVIGASJON --- */}
         <Activity>
           <div className='sticky top-0 z-20 my-10 bg-black/60 py-4 backdrop-blur-md sm:my-16'>
             <div className='container mx-auto px-4'>
@@ -92,7 +85,6 @@ export default function SizeGuidePage() {
           </section>
         </Activity>
 
-        {/* --- SKILLELINJE --- */}
         <div className='container mx-auto px-4'>
           <div className='relative my-10 sm:my-24'>
             <div
@@ -110,7 +102,6 @@ export default function SizeGuidePage() {
           </section>
         </Activity>
 
-        {/* --- SKILLELINJE --- */}
         <div className='container mx-auto px-4'>
           <div className='relative sm:my-16'>
             <div

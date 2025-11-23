@@ -1,5 +1,5 @@
 // Path: src/app/produkter/page.tsx
-import { ProductListJsonLd } from '@/app/produkter/ProductJsonLd'
+import { ProductListJsonLd } from './ProductListJsonLd'
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 import { getProducts } from '@/api/lib/products/getProducts'
 import { QueryClient } from '@tanstack/react-query'
@@ -24,6 +24,16 @@ export const metadata: Metadata = {
   title: 'Kolleksjon: Komfortplagg for hytteliv & utekos | Utekos',
   description:
     'Utforsk hele kolleksjonen av komfortplagg fra Utekos. Våre varme og slitesterke produkter er skapt for å forlenge de gode stundene på hytten, i bobilen eller på kjølige kvelder.',
+  keywords: [
+    'Varmedress',
+    'Komfortplagg',
+    'Utekos kolleksjon',
+    'Hytteklær',
+    'Bobiltur'
+  ],
+  alternates: {
+    canonical: '/produkter'
+  },
   openGraph: {
     type: 'website',
     locale: 'no_NO',
@@ -31,7 +41,7 @@ export const metadata: Metadata = {
     siteName: 'Utekos',
     title: 'Hele kolleksjonen fra Utekos',
     description:
-      'Varme og komfortable plagg for deg som elsker utelivet på hytta, i bobilen eller båten.',
+      'Varme og komfortable plagg for deg som elsker utelivet på hytten, i bobilen eller båten.',
     images: [
       {
         url: '/og-image-produkter.png',

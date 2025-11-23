@@ -1,7 +1,9 @@
+'use cache'
+
 import { CustomerNetwork } from '@/components/frontpage/CustomerNetwork'
 import { CustomerStory } from '@/components/frontpage/CustomerStory'
 
-export function SocialProofSection() {
+export async function SocialProofSection() {
   return (
     <section className='mx-auto mb-16 pt-12 sm:py-12'>
       <div className='mx-auto md:max-w-7xl max-w-[95%]'>

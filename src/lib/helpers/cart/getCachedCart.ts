@@ -1,29 +1,29 @@
 // Path: src/lib/helpers/getCachedCart.ts
-import { unstable_cache as cache } from 'next/cache'
+'use server'
 
-import { CartNotFoundError } from '@/lib/errors/CartNotFoundError' // Import the custom error class
+import { CartNotFoundError } from '@/lib/errors/CartNotFoundError'
 import { fetchCart } from '@/lib/helpers/cart/fetchCart'
 import type { Cart } from '@types'
+import { cacheTag, cacheLife } from 'next/cache'
 
-export const getCachedCart = cache(
-  async (cartId: string | null): Promise<Cart | null> => {
-    if (!cartId) {
+export async function getCachedCart(
+  cartId: string | null
+): Promise<Cart | null> {
+  'use cache'
+  cacheLife('seconds')
+  cacheTag('cart', `cart-${cartId}`)
+
+  if (!cartId) {
+    return null
+  }
+
+  try {
+    const cart = await fetchCart(cartId)
+    return cart
+  } catch (error) {
+    if (error instanceof CartNotFoundError) {
       return null
     }
-
-    try {
-      const cart = await fetchCart(cartId)
-      return cart
-    } catch (error) {
-      if (error instanceof CartNotFoundError) {
-        return null
-      }
-
-      throw error
-    }
-  },
-  ['get-cart-by-id'],
-  {
-    tags: ['cart']
+    throw error
   }
-)
+}

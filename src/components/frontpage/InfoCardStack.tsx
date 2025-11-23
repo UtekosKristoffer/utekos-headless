@@ -32,7 +32,6 @@ export function InfoCardStack() {
 
   return (
     <div className='relative h-72 sm:h-80 w-full overflow-visible'>
-      {/* Kort 1: Bakgrunnskortet ("En trygg handel") */}
       <div
         className={cn(
           cardBaseClasses,
@@ -54,19 +53,15 @@ export function InfoCardStack() {
           </div>
         </div>
       </div>
-
-      {/* Kort 2: Forgrunnskortet ("Ditt personvern") */}
       <div
         className={cn(
           cardBaseClasses,
           'bg-neutral-900 overflow-hidden',
           'h-40 sm:h-48 max-w-[280px] sm:max-w-sm',
           'p-4 sm:p-6',
-          // Responsiv posisjonering - mindre offset på mobil
           'top-28 left-12 sm:top-32 sm:left-1/4'
         )}
       >
-        {/* Rutenett-mønster */}
         <div
           className='absolute inset-0 z-0 opacity-20'
           style={{

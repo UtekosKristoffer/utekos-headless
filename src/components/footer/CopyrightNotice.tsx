@@ -2,6 +2,7 @@
 const { COMPANY_NAME, SITE_NAME } = process.env
 
 export function CopyrightNotice() {
+  'use client'
   const currentYear = new Date().getFullYear()
   const copyrightName = COMPANY_NAME || SITE_NAME || ''
   const copyrightText = `${copyrightName}${copyrightName.length > 0 && !copyrightName.endsWith('.') ? '.' : ''}`

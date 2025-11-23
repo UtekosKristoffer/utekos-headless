@@ -8,6 +8,7 @@ import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import { validateRemoveCartLineInput } from '@/lib/helpers/validations/validateRemoveCartLineInput'
 import type { CartActionsResult, RemoveCartLineInput } from '@types'
+import { updateTag } from 'next/cache'
 
 export const removeCartLineAction = async (
   input: RemoveCartLineInput
@@ -23,6 +24,11 @@ export const removeCartLineAction = async (
     const rawCart = await performCartLinesRemoveMutation(cartId, input)
     if (!rawCart) {
       throw new Error('Fjerning av vare fra handlekurv returnerte ingen data.')
+    }
+
+    if (rawCart.id) {
+      updateTag(`cart-${rawCart.id}`)
+      updateTag('cart')
     }
 
     const cart = normalizeCart(rawCart)

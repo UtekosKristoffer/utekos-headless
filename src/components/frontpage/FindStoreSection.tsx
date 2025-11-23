@@ -10,7 +10,6 @@ export function FindInStoreSection() {
     <section className='w-full border-t border-neutral-800 bg-background py-16 px-4 sm:py-20'>
       <div className='container mx-auto max-w-7xl'>
         <div className='relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/50 px-8 py-12 md:px-12'>
-          {/* Ambient Glow */}
           <div
             className='pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 opacity-15 blur-3xl'
             style={{
@@ -18,7 +17,6 @@ export function FindInStoreSection() {
             }}
           />
           <div className='grid grid-cols-1 items-center gap-10 lg:grid-cols-2'>
-            {/* Venstre kolonne: Logo */}
             <div className='flex h-full items-center justify-center rounded-lg bg-white p-8 lg:p-12'>
               <Image
                 src={IntersportLogo}
@@ -29,7 +27,6 @@ export function FindInStoreSection() {
               />
             </div>
 
-            {/* Høyre kolonne: Tekst og CTA */}
             <div className='flex flex-col items-start text-left'>
               <div className='mb-4 flex items-center gap-3 rounded-full border border-red-500/30 bg-red-700 px-4 py-2'>
                 <MapPin className='h-5 w-5 text-access/90' />
