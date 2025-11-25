@@ -93,9 +93,6 @@ export function AddToCart({
           })
         }
 
-        // 2. Prosesser linjene SEKVENSIELT for å unngå race conditions
-        // Vi bruker en løkke med await for å sikre at maskinen er ferdig ('idle')
-        // med første vare før vi sender neste. Dette løser problemet med at varer forsvinner.
         for (const line of linesToProcess) {
           await createMutationPromise(
             {
@@ -106,7 +103,6 @@ export function AddToCart({
           )
         }
 
-        // 3. Påfør rabattkode hvis aktuelt (KUN etter at ALLE varer er trygt lagret)
         if (additionalLine) {
           try {
             const cartId = contextCartId || (await getCartIdFromCookie())
@@ -116,7 +112,6 @@ export function AddToCart({
               console.warn('Kunne ikke hente cartId for å legge til rabatt.')
             }
           } catch (discountError) {
-            // Ignorer "already applied" feil, logg andre
             if (
               !(
                 discountError instanceof Error
@@ -128,7 +123,6 @@ export function AddToCart({
           }
         }
 
-        // --- Tracking Logikk (Sender som én hendelse for ryddig analytics) ---
         const basePrice = Number.parseFloat(selectedVariant.price.amount)
         const currency = selectedVariant.price.currencyCode
         let totalQty = values.quantity
@@ -197,8 +191,6 @@ export function AddToCart({
         }
 
         sendJSON('/api/meta-events', capiPayload)
-
-        // GA4
         if (
           typeof window !== 'undefined'
           && typeof window.dataLayer !== 'undefined'

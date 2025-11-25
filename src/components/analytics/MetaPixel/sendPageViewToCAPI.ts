@@ -1,5 +1,6 @@
 // Path: src/components/analytics/MetaPixel/sendPageViewToCAPI.ts
 import { getPageViewParams } from './getPageViewParams'
+import { getCookie } from './getCookie'
 
 type PageViewPayload = {
   eventName: 'PageView'
@@ -12,6 +13,7 @@ type PageViewPayload = {
     fbc?: string
     fbp?: string
     client_user_agent?: string
+    email_hash?: string
   }
 }
 
@@ -25,7 +27,6 @@ export async function sendPageViewToCAPI(
 ) {
   if (typeof window === 'undefined') return
 
-  // Endring: Tillater sending hvis prod ELLER hvis test-kode er satt
   if (
     process.env.NODE_ENV !== 'production'
     && !process.env.NEXT_PUBLIC_META_TEST_EVENT_CODE
@@ -35,6 +36,7 @@ export async function sendPageViewToCAPI(
 
   try {
     const params = getPageViewParams(pathname, searchParams)
+    const emailHash = getCookie('ute_user_hash')
 
     const payload: PageViewPayload = {
       eventName: 'PageView',
@@ -45,11 +47,15 @@ export async function sendPageViewToCAPI(
     }
 
     const userData: PageViewPayload['userData'] = {}
+
     if (externalId) userData.external_id = externalId
     if (fbc) userData.fbc = fbc
     if (fbp) userData.fbp = fbp
-    if (typeof navigator !== 'undefined')
+    if (emailHash) userData.email_hash = emailHash
+
+    if (typeof navigator !== 'undefined') {
       userData.client_user_agent = navigator.userAgent
+    }
 
     if (Object.keys(userData).length > 0) {
       payload.userData = userData
@@ -63,15 +69,23 @@ export async function sendPageViewToCAPI(
     })
 
     if (!response.ok) {
-      let error: unknown = null
+      const errorText = await response.text()
+      let errorJson
       try {
-        error = await response.json()
+        errorJson = JSON.parse(errorText)
       } catch {
-        error = response.statusText
+        // Hvis parsing feiler, bruk råteksten
+        errorJson = errorText
       }
-      console.error('Meta CAPI PageView error:', error)
+
+      console.error(
+        `[Meta CAPI] PageView Error (${response.status}):`,
+        typeof errorJson === 'object' ?
+          JSON.stringify(errorJson, null, 2)
+        : errorJson
+      )
     }
   } catch (error) {
-    console.error('Meta CAPI PageView failed to send:', error)
+    console.error('[Meta CAPI] PageView network/logic failed:', error)
   }
 }
