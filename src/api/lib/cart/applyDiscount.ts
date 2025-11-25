@@ -9,27 +9,44 @@ import { revalidateTag } from 'next/cache'
 import { TAGS } from '@/api/constants'
 
 export async function applyDiscount(cartId: string, discountCode: string) {
-  const res = await shopifyFetch<ShopifyDiscountCodesUpdateOperation>({
-    query: mutationCartDiscountCodesUpdate,
-    variables: {
-      cartId,
-      discountCodes: [discountCode]
+  if (!cartId) {
+    console.error('[applyDiscount] Mangler cartId')
+    throw new Error('Kan ikke legge til rabatt: Mangler handlekurv-ID.')
+  }
+
+  try {
+    const res = await shopifyFetch<ShopifyDiscountCodesUpdateOperation>({
+      query: mutationCartDiscountCodesUpdate,
+      variables: {
+        cartId,
+        discountCodes: [discountCode]
+      }
+    })
+
+    if (!res.success) {
+      console.error(
+        '[applyDiscount] Shopify Fetch Failed:',
+        JSON.stringify(res.error, null, 2)
+      )
+      throw new Error('Kommunikasjon med Shopify feilet.')
     }
-  })
 
-  if (!res.success) {
-    throw new Error(
-      res.error.errors[0]?.message ?? 'Klarte ikke å legge til rabattkode.'
-    )
+    const { cart, userErrors } = res.body.cartDiscountCodesUpdate
+
+    if (userErrors?.length) {
+      const msg = userErrors[0]?.message ?? 'Ugyldig rabattkode.'
+      console.warn(`[applyDiscount] UserError: ${msg}`)
+      throw new Error(msg)
+    }
+
+    revalidateTag(TAGS.cart, 'max')
+
+    return cart
+  } catch (error) {
+    console.error('[applyDiscount] CRITICAL ERROR:', error)
+
+    const message =
+      error instanceof Error ? error.message : 'En ukjent feil oppstod.'
+    throw new Error(message)
   }
-
-  const { cart, userErrors } = res.body.cartDiscountCodesUpdate
-
-  if (userErrors?.length) {
-    throw new Error(userErrors[0]?.message ?? 'Ugyldig rabattkode.')
-  }
-
-  revalidateTag(TAGS.cart, 'max')
-
-  return cart
 }

@@ -1,4 +1,4 @@
-// Path: src/components/quick-view/QuickViewModal.tsx
+// Path: src/components/products/quick-view/QuickViewModal.tsx
 'use client'
 
 import { getProduct } from '@/api/lib/products/getProduct'
