@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import Script from 'next/script'
-
 import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { setCookie } from '@/components/analytics/MetaPixel/setCookie'
@@ -83,7 +82,6 @@ export function MetaPixelEvents() {
           const fbp = getCookie('_fbp')
           const eventId = generateEventID()
 
-          // Browser Pixel
           if (
             typeof window !== 'undefined'
             && typeof window.fbq === 'function'

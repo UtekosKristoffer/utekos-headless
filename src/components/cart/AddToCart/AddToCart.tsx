@@ -81,26 +81,33 @@ export function AddToCart({
 
     startTransition(async () => {
       try {
-        await createMutationPromise(
-          {
-            type: 'ADD_LINES',
-            input: { variantId: values.variantId, quantity: values.quantity }
-          },
-          cartActor
-        )
+        // 1. Bygg opp listen over varer som skal legges til
+        const linesToProcess = [
+          { variantId: values.variantId, quantity: values.quantity }
+        ]
 
         if (additionalLine) {
+          linesToProcess.push({
+            variantId: additionalLine.variantId,
+            quantity: additionalLine.quantity
+          })
+        }
+
+        // 2. Prosesser linjene SEKVENSIELT for å unngå race conditions
+        // Vi bruker en løkke med await for å sikre at maskinen er ferdig ('idle')
+        // med første vare før vi sender neste. Dette løser problemet med at varer forsvinner.
+        for (const line of linesToProcess) {
           await createMutationPromise(
             {
               type: 'ADD_LINES',
-              input: {
-                variantId: additionalLine.variantId,
-                quantity: additionalLine.quantity
-              }
+              input: { variantId: line.variantId, quantity: line.quantity }
             },
             cartActor
           )
+        }
 
+        // 3. Påfør rabattkode hvis aktuelt (KUN etter at ALLE varer er trygt lagret)
+        if (additionalLine) {
           try {
             const cartId = contextCartId || (await getCartIdFromCookie())
             if (cartId) {
@@ -109,6 +116,7 @@ export function AddToCart({
               console.warn('Kunne ikke hente cartId for å legge til rabatt.')
             }
           } catch (discountError) {
+            // Ignorer "already applied" feil, logg andre
             if (
               !(
                 discountError instanceof Error
@@ -120,6 +128,7 @@ export function AddToCart({
           }
         }
 
+        // --- Tracking Logikk (Sender som én hendelse for ryddig analytics) ---
         const basePrice = Number.parseFloat(selectedVariant.price.amount)
         const currency = selectedVariant.price.currencyCode
         let totalQty = values.quantity
@@ -145,9 +154,7 @@ export function AddToCart({
         }
 
         const value = basePrice * values.quantity
-
         const eventID = `atc_${selectedVariant.id}_${Date.now()}`
-
         if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
           const fbqParams = {
             contents,
@@ -158,15 +165,7 @@ export function AddToCart({
             content_name: contentName,
             num_items: totalQty
           }
-
           window.fbq('track', 'AddToCart', fbqParams, { eventID })
-
-          if (process.env.NODE_ENV === 'development') {
-            console.group('🛒 [Meta Pixel] AddToCart Fired')
-            console.log('Event ID:', eventID)
-            console.log('Params:', fbqParams)
-            console.groupEnd()
-          }
         }
 
         const ua =
@@ -175,13 +174,7 @@ export function AddToCart({
         const fbc = getCookie('_fbc')
         const externalId = getCookie('ute_ext_id')
 
-        const capiPayload: {
-          eventName: string
-          eventId: string
-          eventSourceUrl: string
-          eventData?: CustomData
-          userData?: UserData
-        } = {
+        const capiPayload = {
           eventName: 'AddToCart',
           eventId: eventID,
           eventSourceUrl:
@@ -195,23 +188,17 @@ export function AddToCart({
             content_ids: contentIds,
             num_items: totalQty
           },
-          userData: {}
-        }
-
-        if (ua) capiPayload.userData!.client_user_agent = ua
-        if (fbp) capiPayload.userData!.fbp = fbp
-        if (fbc) capiPayload.userData!.fbc = fbc
-        if (externalId) capiPayload.userData!.external_id = externalId
-
-        if (process.env.NODE_ENV === 'development') {
-          console.group('[Meta CAPI] Sending AddToCart')
-          console.log('Payload:', capiPayload)
-          console.log('Identity Package:', { fbp, fbc, externalId, ua })
-          console.groupEnd()
+          userData: {
+            client_user_agent: ua,
+            fbp: fbp || undefined,
+            fbc: fbc || undefined,
+            external_id: externalId || undefined
+          }
         }
 
         sendJSON('/api/meta-events', capiPayload)
 
+        // GA4
         if (
           typeof window !== 'undefined'
           && typeof window.dataLayer !== 'undefined'
@@ -225,7 +212,6 @@ export function AddToCart({
               quantity: values.quantity
             }
           ]
-
           if (additionalLine) {
             ga4Items.push({
               item_id: additionalLine.variantId.toString(),
@@ -235,23 +221,14 @@ export function AddToCart({
               quantity: additionalLine.quantity
             })
           }
-
-          const ga4Data = {
+          window.dataLayer.push({
             event: 'add_to_cart',
             ecommerce: {
               currency: currency,
               value: value,
               items: ga4Items
             }
-          }
-
-          window.dataLayer.push(ga4Data)
-
-          if (process.env.NODE_ENV === 'development') {
-            console.group('📊 [GA4] AddToCart Pushed')
-            console.log('DataLayer Push:', ga4Data)
-            console.groupEnd()
-          }
+          })
         }
 
         cartStore.send({ type: 'OPEN' })
