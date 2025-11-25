@@ -5,7 +5,7 @@
 import { mutationCartDiscountCodesUpdate } from '@/api/graphql/mutations/cart'
 import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
 import type { ShopifyDiscountCodesUpdateOperation } from '@types'
-import { revalidateTag } from 'next/cache'
+import { updateTag } from 'next/cache'
 import { TAGS } from '@/api/constants'
 
 export async function applyDiscount(cartId: string, discountCode: string) {
@@ -39,7 +39,9 @@ export async function applyDiscount(cartId: string, discountCode: string) {
       throw new Error(msg)
     }
 
-    revalidateTag(TAGS.cart, 'max')
+    // Next.js 16 Endring: Bruk updateTag for umiddelbar oppdatering i Server Actions ("read-your-own-writes")
+    // revalidateTag med 'max' serverer "stale" data, som fører til at varer ser ut til å mangle.
+    updateTag(TAGS.cart)
 
     return cart
   } catch (error) {
