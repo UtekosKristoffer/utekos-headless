@@ -6,7 +6,7 @@ const { ServerEvent, EventRequest, UserData, CustomData, FacebookAdsApi } =
   bizSdk
 
 const PIXEL_ID = process.env.META_PIXEL_ID
-const ACCESS_TOKEN = process.env.META_SYSTEM_USER_TOKEN
+const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
 
 if (!PIXEL_ID) throw new Error('Missing META_PIXEL_ID')
 if (!ACCESS_TOKEN) throw new Error('Missing META_SYSTEM_USER_TOKEN')
