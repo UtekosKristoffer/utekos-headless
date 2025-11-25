@@ -13,7 +13,7 @@ import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { QuickViewModal } from '@/components/products/QuickViewModal'
 import { generateEventID } from '@/components/jsx/CheckoutButton/generateEventID'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
-
+import { Activity } from 'react'
 import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
 import type { UserData, CustomData } from '@types'
 
@@ -257,11 +257,13 @@ export function NewProductLaunchSection() {
           </AnimatedBlock>
         </div>
       </section>
-      <QuickViewModal
-        productHandle={productHandle}
-        isOpen={isModalOpen}
-        onOpenChange={setIsModalOpen}
-      />
+      <Activity>
+        <QuickViewModal
+          productHandle={productHandle}
+          isOpen={isModalOpen}
+          onOpenChange={setIsModalOpen}
+        />
+      </Activity>
     </>
   )
 }
