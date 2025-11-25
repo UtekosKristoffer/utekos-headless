@@ -40,7 +40,7 @@ const nextConfig: NextConfig = {
         pathname: '/**'
       }
     ],
-    qualities: [75, 80, 90, 100]
+    qualities: [75, 80, 90, 95, 100]
   },
   async redirects() {
     return [

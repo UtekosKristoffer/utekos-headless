@@ -1,5 +1,4 @@
 // Path: src/components/jsx/ProductGallery.tsx
-
 'use client'
 
 import Image from 'next/image'
@@ -27,7 +26,7 @@ export function ProductGallery({ title, images }: ProductGalleryProps) {
         aria-label={`Produktbilder for ${title}`}
       >
         <CarouselContent>
-          {images.map(image => (
+          {images.map((image, index) => (
             <CarouselItem
               key={image.url}
               className='relative rounded-2xl aspect-[2/3]'
@@ -37,9 +36,9 @@ export function ProductGallery({ title, images }: ProductGalleryProps) {
                 alt={image.altText || `Bilde av ${title}`}
                 fill
                 sizes='(min-width: 1024px) 50vw, 100vw'
-                quality={100}
+                quality={95}
                 className='object-cover md:object-contain rounded-2xl'
-                priority
+                priority={index === 0}
               />
             </CarouselItem>
           ))}

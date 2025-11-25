@@ -43,7 +43,6 @@ export function buildUserData(
 
   const billing = order.billing_address
   const shipping = order.shipping_address
-
   const city = normalizeAndHash(billing?.city ?? shipping?.city)
   if (city) userData.ct = [city]
 

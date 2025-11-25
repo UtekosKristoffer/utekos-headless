@@ -1,20 +1,19 @@
+// Path: src/hooks/useProductPage.ts
 import { useQuery } from '@tanstack/react-query'
-import {
-  allProductsOptions,
-  productOptions
-} from '@/api/lib/products/productOptions'
+import { productOptions } from '@/api/lib/products/productOptions'
 import { useVariantState } from '@/hooks/useVariantState'
 import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
-import { getRelatedProducts } from '@/hooks/getRelatedProducts'
 import { createSwatchColorMap } from '@/hooks/createSwatchColorMap'
 import { computeVariantImages } from '@/lib/utils/computeVariantImages'
-import type { ShopifyProductVariant } from '@types'
+import type { ShopifyProduct, ShopifyProductVariant } from '@types'
 
-export function useProductPage(handle: string) {
+export function useProductPage(
+  handle: string,
+  initialRelatedProducts: ShopifyProduct[]
+) {
   const { data: productData, isLoading: isProductLoading } = useQuery(
     productOptions(handle)
   )
-  const { data: allProducts } = useQuery(allProductsOptions())
 
   const productWithMetafields = reshapeProductWithMetafields(productData)
 
@@ -22,7 +21,7 @@ export function useProductPage(handle: string) {
     productWithMetafields
   )
 
-  const relatedProducts = getRelatedProducts(allProducts, handle, 12)
+  const relatedProducts = initialRelatedProducts
   const swatchColorMap = createSwatchColorMap(productWithMetafields)
 
   const selectedVariant: ShopifyProductVariant | null =

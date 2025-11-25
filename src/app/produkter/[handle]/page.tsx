@@ -15,6 +15,7 @@ import { notFound } from 'next/navigation'
 import { ProductPageController } from '@/app/produkter/[handle]/ProductPageController/ProductPageController'
 import type { Metadata, ResolvingMetadata } from 'next'
 import { connection } from 'next/server'
+import { getCachedRelatedProducts } from '@/api/lib/products/getCachedRelatedProducts'
 type RouteParamsPromise = Promise<{ handle: string }>
 
 type GenerateMetadataProps = {
@@ -85,6 +86,7 @@ export default async function ProductPage({
   if (!product) {
     notFound()
   }
+  const relatedProducts = await getCachedRelatedProducts(handle)
 
   await queryClient.prefetchQuery({
     ...productOptions(handle),
@@ -97,7 +99,10 @@ export default async function ProductPage({
       <ProductJsonLd handle={handle} />
       <Activity>
         <HydrationBoundary state={dehydrate(queryClient)}>
-          <ProductPageController handle={handle} />
+          <ProductPageController
+            handle={handle}
+            initialRelatedProducts={relatedProducts}
+          />
         </HydrationBoundary>
       </Activity>
       <Activity>
