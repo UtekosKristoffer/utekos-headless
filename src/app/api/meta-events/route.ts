@@ -12,7 +12,44 @@ const {
   FacebookAdsApi
 } = bizSdk
 
-import type { Body, CustomDataInput, UserDataInput } from '../meta-events/types'
+// Definisjon av typer for input body
+type ContentItem = { id: string; quantity: number; item_price?: number }
+type CustomDataInput = {
+  value?: number
+  currency?: string
+  content_type?: 'product' | 'product_group'
+  content_ids?: string[]
+  contents?: ContentItem[]
+  num_items?: number
+  order_id?: string
+  search_string?: string
+}
+type UserDataInput = {
+  em?: string[]
+  ph?: string[]
+  fn?: string[]
+  ln?: string[]
+  ge?: string[]
+  db?: string[]
+  ct?: string[]
+  st?: string[]
+  zp?: string[]
+  country?: string[]
+  client_ip_address?: string | null
+  client_user_agent?: string | null
+  fbc?: string | null
+  fbp?: string | null
+  external_id?: string | undefined
+}
+type Body = {
+  eventName: string
+  eventData?: CustomDataInput
+  userData?: UserDataInput
+  eventId?: string
+  eventSourceUrl?: string
+  eventTime?: number
+  action_source?: string
+}
 
 export async function POST(req: NextRequest) {
   const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
@@ -26,6 +63,7 @@ export async function POST(req: NextRequest) {
     )
   }
 
+  // Init SDK
   FacebookAdsApi.init(ACCESS_TOKEN)
 
   const userAgent = req.headers.get('user-agent')
@@ -54,14 +92,17 @@ export async function POST(req: NextRequest) {
     )
   }
 
+  // --- 1. Bygg UserData via SDK ---
   const userData = new UserData()
 
+  // IP og Agent
   const finalIp = body.userData?.client_ip_address || ip
   if (finalIp) userData.setClientIpAddress(finalIp)
 
   const finalAgent = body.userData?.client_user_agent || userAgent
   if (finalAgent) userData.setClientUserAgent(finalAgent)
 
+  // Cookies
   const fbp = body.userData?.fbp || cookieFbp
   if (fbp) userData.setFbp(fbp)
 
@@ -108,6 +149,7 @@ export async function POST(req: NextRequest) {
     }
   }
 
+  // --- 3. Bygg ServerEvent ---
   const serverEvent = new ServerEvent()
     .setEventName(body.eventName)
     .setEventTime(body.eventTime ?? Math.floor(Date.now() / 1000))
@@ -117,6 +159,7 @@ export async function POST(req: NextRequest) {
     .setUserData(userData)
     .setCustomData(customData)
 
+  // --- 4. Logging til Redis ---
   try {
     const logEntry = {
       id: crypto.randomUUID(),
@@ -143,13 +186,18 @@ export async function POST(req: NextRequest) {
     console.error('Logging setup failed', e)
   }
 
+  // --- 5. Send til Meta via SDK ---
   try {
     const eventRequest = new EventRequest(ACCESS_TOKEN, PIXEL_ID).setEvents([
       serverEvent
     ])
 
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Sending CAPI payload:', JSON.stringify(serverEvent, null, 2))
+    // SJEKKER OM TEST-KODE ER SATT I ENV
+    if (process.env.META_TEST_EVENT_CODE) {
+      eventRequest.setTestEventCode(process.env.META_TEST_EVENT_CODE)
+      console.log(
+        `[CAPI] Sending with Test Code: ${process.env.META_TEST_EVENT_CODE}`
+      )
     }
 
     const response = await eventRequest.execute()
@@ -160,6 +208,7 @@ export async function POST(req: NextRequest) {
       fb_trace_id: response.fbtrace_id
     })
   } catch (err: any) {
+    // Hent detaljer fra SDK error response
     const errorData = err.response?.data || err.response || err.message
 
     console.error(

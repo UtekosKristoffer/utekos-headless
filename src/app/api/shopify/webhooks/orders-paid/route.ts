@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { verifyShopifyWebhook } from '@/lib/shopify/verifyWebhook'
 
+// Vi importerer deler fra SDK direkte
 const bizSdk = require('facebook-nodejs-business-sdk')
 const {
   ServerEvent,
@@ -27,7 +28,6 @@ function safeString(val: any): string | undefined {
 
 function normalizePhone(phone: string | undefined): string | undefined {
   if (!phone) return undefined
-
   return phone.replace(/[^0-9]/g, '')
 }
 
@@ -53,17 +53,23 @@ export async function POST(request: Request) {
 
   console.log(`[Meta CAPI] Processing Order: ${order.id || 'Unknown ID'}`)
 
+  // --- 1. User Data Construction ---
   const userData = new UserData()
+
+  // A. E-POST (Kritisk parameter)
+  // Sjekk både rot-nivå og kunde-objekt
   const email =
     safeString(order.email)
     || safeString(order.contact_email)
     || safeString(order.customer?.email)
   if (email) {
+    // SDK hasher automatisk når du bruker setEmails
     userData.setEmails([email.toLowerCase()])
   } else {
     console.warn('[Meta CAPI] ADVARSEL: Ingen e-post funnet i ordre!')
   }
 
+  // B. TELEFON
   const phone = normalizePhone(
     order.phone
       || order.customer?.phone
@@ -74,6 +80,7 @@ export async function POST(request: Request) {
     userData.setPhones([phone])
   }
 
+  // C. EXTERNAL ID (Viktig for matching)
   const externalId = safeString(order.customer?.id) || safeString(order.user_id)
   if (externalId) {
     userData.setExternalIds([externalId])
@@ -95,15 +102,21 @@ export async function POST(request: Request) {
       safeString(addr.last_name || order.customer?.last_name)
     ])
   }
-  const city = safeString(addr.city)
-  if (city) userData.setCities([city.toLowerCase()])
-  const provinceCode = safeString(addr.province_code)
-  if (provinceCode) userData.setStates([provinceCode.toLowerCase()])
-  const zip = safeString(addr.zip)
-  if (zip) userData.setZips([zip])
-  const countryCode = safeString(addr.country_code)
-  if (countryCode) userData.setCountries([countryCode.toLowerCase()])
+  if (addr.city) {
+    const city = safeString(addr.city)
+    if (city) userData.setCities([city.toLowerCase()])
+  }
+  if (addr.province_code) {
+    const provinceCode = safeString(addr.province_code)
+    if (provinceCode) userData.setStates([provinceCode.toLowerCase()])
+  }
+  if (addr.zip) userData.setZips([safeString(addr.zip)])
+  if (addr.country_code) {
+    const countryCode = safeString(addr.country_code)
+    if (countryCode) userData.setCountries([countryCode.toLowerCase()])
+  }
 
+  // E. TEKNISK DATA
   const clientIp = safeString(order.browser_ip || order.client_ip)
   if (clientIp) userData.setClientIpAddress(clientIp)
 
@@ -112,6 +125,7 @@ export async function POST(request: Request) {
   )
   if (userAgent) userData.setClientUserAgent(userAgent)
 
+  // F. FBP / FBC (Cookies)
   if (order.note_attributes && Array.isArray(order.note_attributes)) {
     const fbpAttr = order.note_attributes.find((a: any) => a.name === '_fbp')
     const fbcAttr = order.note_attributes.find((a: any) => a.name === '_fbc')
@@ -120,15 +134,15 @@ export async function POST(request: Request) {
     if (fbcAttr && fbcAttr.value) userData.setFbc(fbcAttr.value)
   }
 
-  console.log(
-    '[Meta CAPI] Generated UserData:',
-    JSON.stringify(userData, null, 2)
-  )
+  // DEBUG: Se hva vi faktisk har funnet før vi sender
+  // console.log('[Meta CAPI] Generated UserData:', JSON.stringify(userData, null, 2))
 
+  // --- 2. Custom Data & Contents ---
   const contentList: (typeof Content)[] = []
 
   if (order.line_items && Array.isArray(order.line_items)) {
     for (const item of order.line_items) {
+      // Prioriter variant_id, fallback til product_id
       const id = safeString(item.variant_id) || safeString(item.product_id)
       if (!id) continue
 
@@ -148,17 +162,20 @@ export async function POST(request: Request) {
     .setContents(contentList)
     .setContentType('product')
 
+  // Ordre ID for deduplisering hvis samme purchase sendes flere ganger
   if (order.id) {
     customData.setOrderId(safeString(order.id))
   }
 
+  // --- 3. Event Setup ---
+  // Event ID for deduplisering mot Pixel (browser)
   const eventId =
     order.id ? `shopify_order_${order.id}` : `purchase_${Date.now()}`
 
   const event = new ServerEvent()
     .setEventName('Purchase')
     .setEventTime(Math.floor(Date.now() / 1000))
-    .setActionSource('website') // PÅKREVD: 'website' (ikke 'system_generated' e.l.)
+    .setActionSource('website') // PÅKREVD: 'website'
     .setEventId(eventId)
     .setUserData(userData)
     .setCustomData(customData)
@@ -171,10 +188,12 @@ export async function POST(request: Request) {
       event
     ])
 
-    // Hvis dette er en test-ordre eller development, kan du vurdere test_event_code
-    // if (process.env.NODE_ENV === 'development') {
-    //   eventRequest.setTestEventCode('TEST12345') // Hent din kode fra Events Manager -> Test Events
-    // }
+    if (process.env.META_TEST_EVENT_CODE) {
+      eventRequest.setTestEventCode(process.env.META_TEST_EVENT_CODE)
+      console.log(
+        `[CAPI] Sending with Test Code: ${process.env.META_TEST_EVENT_CODE}`
+      )
+    }
 
     const response = await eventRequest.execute()
 
