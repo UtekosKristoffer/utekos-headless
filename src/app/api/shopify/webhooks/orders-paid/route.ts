@@ -1,4 +1,3 @@
-
 import { NextResponse } from 'next/server'
 import { verifyShopifyWebhook } from '@/lib/shopify/verifyWebhook'
 
@@ -124,10 +123,20 @@ export async function POST(request: Request) {
       success: true,
       capi_response: response
     })
-  } catch (err) {
-    console.error('CAPI Purchase error:', err)
+  } catch (err: any) {
+    console.error('CAPI Purchase error FULL DETAILS:', {
+      message: err?.message,
+      status: err?.status,
+      method: err?.method,
+      url: err?.url,
+      fb_error: err?.response?.data?.error ?? null
+    })
+
     return NextResponse.json(
-      { error: 'Meta CAPI purchase failed', details: String(err) },
+      {
+        error: 'Meta CAPI purchase failed',
+        fb_error: err?.response?.data?.error ?? null
+      },
       { status: 500 }
     )
   }
