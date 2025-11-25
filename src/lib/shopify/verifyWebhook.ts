@@ -1,4 +1,3 @@
-// File: src/lib/shopify/verifyWebhook.ts
 import crypto from 'crypto'
 
 /**
