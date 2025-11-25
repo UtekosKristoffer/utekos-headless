@@ -4,6 +4,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { redisSet } from '@/lib/redis'
 import type { CheckoutAttribution, UserData } from '@types'
 
+interface ExtendedUserData extends UserData {
+  email_hash?: string
+}
+
 interface CaptureBody {
   cartId?: string | null
   checkoutUrl: string
@@ -66,12 +70,12 @@ export async function POST(req: NextRequest) {
 
   const proxiedIp = req.headers.get('x-forwarded-for')?.split(',')?.[0]?.trim()
   const userAgent = req.headers.get('user-agent') || undefined
-
   const cookieFbp = req.cookies.get('_fbp')?.value
   const cookieFbc = req.cookies.get('_fbc')?.value
   const cookieExtId = req.cookies.get('ute_ext_id')?.value
+  const cookieUserHash = req.cookies.get('ute_user_hash')?.value
 
-  const userDataToSave: UserData = {}
+  const userDataToSave: ExtendedUserData = {}
 
   if (body.userData?.fbp) userDataToSave.fbp = body.userData.fbp
   else if (cookieFbp) userDataToSave.fbp = cookieFbp
@@ -82,6 +86,11 @@ export async function POST(req: NextRequest) {
   if (body.userData?.external_id)
     userDataToSave.external_id = body.userData.external_id
   else if (cookieExtId) userDataToSave.external_id = cookieExtId
+
+  // Lagre e-post hash hvis tilgjengelig (fra proxy.ts)
+  if (cookieUserHash) {
+    userDataToSave.email_hash = cookieUserHash
+  }
 
   if (body.userData?.client_user_agent)
     userDataToSave.client_user_agent = body.userData.client_user_agent
@@ -100,11 +109,12 @@ export async function POST(req: NextRequest) {
 
   try {
     const redisKey = `checkout:${token}`
+
     await redisSet(redisKey, payload, 60 * 60 * 24 * 7)
 
     if (process.env.NODE_ENV === 'development') {
       console.log(
-        `Saved attribution for key ${token} (ExtID: ${userDataToSave.external_id})`
+        `Saved attribution for key ${token} (ExtID: ${userDataToSave.external_id}, Hash: ${!!userDataToSave.email_hash})`
       )
     }
 

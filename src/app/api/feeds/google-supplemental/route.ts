@@ -19,8 +19,6 @@ function getNumericId(gid: string): string {
 }
 
 export async function GET() {
-  // FJERNET: cacheLife('hours')
-
   try {
     const products: ProductFeedItem[] = await getProductsForFeed()
 

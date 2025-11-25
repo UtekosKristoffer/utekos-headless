@@ -1,7 +1,9 @@
+// Path: src/app/api/shopify/webhooks/order-paid/route.ts
+
 import { NextResponse } from 'next/server'
 import { verifyShopifyWebhook } from '@/lib/shopify/verifyWebhook'
+import { redisGet } from '@/lib/redis'
 
-// Vi importerer deler fra SDK direkte
 const bizSdk = require('facebook-nodejs-business-sdk')
 const {
   ServerEvent,
@@ -19,6 +21,22 @@ if (!PIXEL_ID) throw new Error('Missing NEXT_PUBLIC_META_PIXEL_ID')
 if (!ACCESS_TOKEN) throw new Error('Missing META_ACCESS_TOKEN')
 
 FacebookAdsApi.init(ACCESS_TOKEN)
+
+interface UserDataStored {
+  fbp?: string
+  fbc?: string
+  external_id?: string
+  client_user_agent?: string
+  client_ip_address?: string
+}
+
+interface CheckoutAttribution {
+  cartId: string | null
+  checkoutUrl: string
+  userData: UserDataStored
+  ts: number
+  eventId?: string
+}
 
 function safeString(val: any): string | undefined {
   if (!val) return undefined
@@ -53,23 +71,41 @@ export async function POST(request: Request) {
 
   console.log(`[Meta CAPI] Processing Order: ${order.id || 'Unknown ID'}`)
 
-  // --- 1. User Data Construction ---
+  let redisData: CheckoutAttribution | null = null
+  const cartToken = safeString(order.cart_token)
+  const checkoutToken = safeString(order.checkout_token)
+
+  const possibleKeys = [
+    cartToken ? `checkout:${cartToken}` : null,
+    checkoutToken ? `checkout:${checkoutToken}` : null
+  ].filter(Boolean) as string[]
+
+  for (const key of possibleKeys) {
+    try {
+      const data = (await redisGet(key)) as CheckoutAttribution | null
+      if (data) {
+        redisData = data
+        console.log(`[Meta CAPI] Fant attribusjonsdata i Redis for key: ${key}`)
+        break
+      }
+    } catch (e) {
+      console.error(`[Meta CAPI] Feil ved lesing av Redis for key ${key}:`, e)
+    }
+  }
+
   const userData = new UserData()
 
-  // A. E-POST (Kritisk parameter)
-  // Sjekk både rot-nivå og kunde-objekt
   const email =
     safeString(order.email)
     || safeString(order.contact_email)
     || safeString(order.customer?.email)
+
   if (email) {
-    // SDK hasher automatisk når du bruker setEmails
     userData.setEmails([email.toLowerCase()])
   } else {
     console.warn('[Meta CAPI] ADVARSEL: Ingen e-post funnet i ordre!')
   }
 
-  // B. TELEFON
   const phone = normalizePhone(
     order.phone
       || order.customer?.phone
@@ -80,8 +116,11 @@ export async function POST(request: Request) {
     userData.setPhones([phone])
   }
 
-  // C. EXTERNAL ID (Viktig for matching)
-  const externalId = safeString(order.customer?.id) || safeString(order.user_id)
+  const externalId =
+    safeString(order.customer?.id)
+    || safeString(order.user_id)
+    || redisData?.userData?.external_id
+
   if (externalId) {
     userData.setExternalIds([externalId])
   }
@@ -116,33 +155,36 @@ export async function POST(request: Request) {
     if (countryCode) userData.setCountries([countryCode.toLowerCase()])
   }
 
-  // E. TEKNISK DATA
-  const clientIp = safeString(order.browser_ip || order.client_ip)
+  const clientIp =
+    redisData?.userData?.client_ip_address
+    || safeString(order.browser_ip || order.client_ip)
+
   if (clientIp) userData.setClientIpAddress(clientIp)
 
-  const userAgent = safeString(
-    order.user_agent || order.client_details?.user_agent
-  )
+  const userAgent =
+    redisData?.userData?.client_user_agent
+    || safeString(order.user_agent || order.client_details?.user_agent)
+
   if (userAgent) userData.setClientUserAgent(userAgent)
 
-  // F. FBP / FBC (Cookies)
+  let fbp = redisData?.userData?.fbp
+  let fbc = redisData?.userData?.fbc
+
   if (order.note_attributes && Array.isArray(order.note_attributes)) {
     const fbpAttr = order.note_attributes.find((a: any) => a.name === '_fbp')
     const fbcAttr = order.note_attributes.find((a: any) => a.name === '_fbc')
 
-    if (fbpAttr && fbpAttr.value) userData.setFbp(fbpAttr.value)
-    if (fbcAttr && fbcAttr.value) userData.setFbc(fbcAttr.value)
+    if (fbpAttr && fbpAttr.value) fbp = fbpAttr.value
+    if (fbcAttr && fbcAttr.value) fbc = fbcAttr.value
   }
 
-  // DEBUG: Se hva vi faktisk har funnet før vi sender
-  // console.log('[Meta CAPI] Generated UserData:', JSON.stringify(userData, null, 2))
+  if (fbp) userData.setFbp(fbp)
+  if (fbc) userData.setFbc(fbc)
 
-  // --- 2. Custom Data & Contents ---
   const contentList: (typeof Content)[] = []
 
   if (order.line_items && Array.isArray(order.line_items)) {
     for (const item of order.line_items) {
-      // Prioriter variant_id, fallback til product_id
       const id = safeString(item.variant_id) || safeString(item.product_id)
       if (!id) continue
 
@@ -162,25 +204,26 @@ export async function POST(request: Request) {
     .setContents(contentList)
     .setContentType('product')
 
-  // Ordre ID for deduplisering hvis samme purchase sendes flere ganger
   if (order.id) {
     customData.setOrderId(safeString(order.id))
   }
 
-  // --- 3. Event Setup ---
-  // Event ID for deduplisering mot Pixel (browser)
   const eventId =
-    order.id ? `shopify_order_${order.id}` : `purchase_${Date.now()}`
+    order.id ?
+      `shopify_order_${order.id}`
+    : redisData?.eventId || `purchase_${Date.now()}`
 
   const event = new ServerEvent()
     .setEventName('Purchase')
     .setEventTime(Math.floor(Date.now() / 1000))
-    .setActionSource('website') // PÅKREVD: 'website'
+    .setActionSource('website')
     .setEventId(eventId)
     .setUserData(userData)
     .setCustomData(customData)
     .setEventSourceUrl(
-      safeString(order.order_status_url) || 'https://utekos.no'
+      safeString(order.order_status_url)
+        || redisData?.checkoutUrl
+        || 'https://utekos.no'
     )
 
   try {
@@ -205,7 +248,6 @@ export async function POST(request: Request) {
       fbtrace_id: response.fbtrace_id
     })
   } catch (err: any) {
-    // Detaljert feilhåndtering
     const errorResponse = err.response?.data || {}
     console.error('[Meta CAPI] Failed:', JSON.stringify(errorResponse, null, 2))
 

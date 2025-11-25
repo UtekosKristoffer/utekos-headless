@@ -1,4 +1,4 @@
-// Path: src/components/analytics/sendPageViewToCAPI.ts
+// Path: src/components/analytics/MetaPixel/sendPageViewToCAPI.ts
 import { getPageViewParams } from './getPageViewParams'
 
 type PageViewPayload = {
@@ -11,10 +11,10 @@ type PageViewPayload = {
     external_id?: string
     fbc?: string
     fbp?: string
+    client_user_agent?: string
   }
 }
 
-// eslint-disable-next-line max-params
 export async function sendPageViewToCAPI(
   pathname: string,
   eventId: string,
@@ -24,6 +24,14 @@ export async function sendPageViewToCAPI(
   fbp?: string | null
 ) {
   if (typeof window === 'undefined') return
+
+  // Endring: Tillater sending hvis prod ELLER hvis test-kode er satt
+  if (
+    process.env.NODE_ENV !== 'production'
+    && !process.env.NEXT_PUBLIC_META_TEST_EVENT_CODE
+  ) {
+    return
+  }
 
   try {
     const params = getPageViewParams(pathname, searchParams)
@@ -40,6 +48,9 @@ export async function sendPageViewToCAPI(
     if (externalId) userData.external_id = externalId
     if (fbc) userData.fbc = fbc
     if (fbp) userData.fbp = fbp
+    if (typeof navigator !== 'undefined')
+      userData.client_user_agent = navigator.userAgent
+
     if (Object.keys(userData).length > 0) {
       payload.userData = userData
     }
@@ -48,7 +59,7 @@ export async function sendPageViewToCAPI(
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
-      keepalive: true // Veldig bra at du har denne!
+      keepalive: true
     })
 
     if (!response.ok) {
