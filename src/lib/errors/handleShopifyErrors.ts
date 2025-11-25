@@ -7,10 +7,6 @@ import type { ResponseErrors } from '@shopify/graphql-client'
 import type { ShopifyErrorDetail, ShopifyErrorDetailInput } from '@types'
 import { fromError } from 'zod-validation-error'
 
-
-/**
- * Parses and validates Shopify client errors into ShopifyApiError instances.
- */
 export function handleShopifyErrors(errors: ResponseErrors): never {
   const ResponseSchema = z.object({
     message: z.string().optional(),

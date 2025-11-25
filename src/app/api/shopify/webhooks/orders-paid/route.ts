@@ -1,3 +1,5 @@
+// Path: src/app/api/shopify/webhooks/orders-paid/route.ts
+
 import { NextResponse } from 'next/server'
 import { verifyShopifyWebhook } from '@/lib/shopify/verifyWebhook'
 
