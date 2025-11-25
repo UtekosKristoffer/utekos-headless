@@ -1,22 +1,27 @@
-// Path: src/app/api/shopify/webhooks/orders-paid/route.ts
-
 import { NextResponse } from 'next/server'
 import { verifyShopifyWebhook } from '@/lib/shopify/verifyWebhook'
 
 const bizSdk = require('facebook-nodejs-business-sdk')
-const { ServerEvent, EventRequest, UserData, CustomData, FacebookAdsApi } =
-  bizSdk
+const {
+  ServerEvent,
+  EventRequest,
+  UserData,
+  CustomData,
+  Content,
+  FacebookAdsApi
+} = bizSdk
 
-const PIXEL_ID = process.env.META_PIXEL_ID
+const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID // Merk: Bruker ofte public variabel i Next.js for ID
 const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
 
-if (!PIXEL_ID) throw new Error('Missing META_PIXEL_ID')
-if (!ACCESS_TOKEN) throw new Error('Missing META_SYSTEM_USER_TOKEN')
+if (!PIXEL_ID) throw new Error('Missing NEXT_PUBLIC_META_PIXEL_ID')
+if (!ACCESS_TOKEN) throw new Error('Missing META_ACCESS_TOKEN')
 
 FacebookAdsApi.init(ACCESS_TOKEN)
 
 interface ShopifyLineItem {
   variant_id?: number | string
+  product_id?: number | string
   quantity?: number
   price?: string | number
 }
@@ -25,6 +30,15 @@ interface ShopifyCustomer {
   id?: number | string
   email?: string
   phone?: string
+  first_name?: string
+  last_name?: string
+}
+
+interface ShopifyAddress {
+  city?: string
+  province_code?: string
+  zip?: string
+  country_code?: string
 }
 
 interface ShopifyOrderPaidWebhook {
@@ -33,17 +47,12 @@ interface ShopifyOrderPaidWebhook {
   total_price?: string | number
   line_items?: ShopifyLineItem[]
   customer?: ShopifyCustomer
+  billing_address?: ShopifyAddress
+  shipping_address?: ShopifyAddress
   client_ip?: string
+  browser_ip?: string // Shopify sender noen ganger dette feltet
   user_agent?: string
-  confirmation_url?: string
-  cookies?: {
-    _fbp?: string
-    _fbc?: string
-  }
-}
-
-function safeString(value: string | number | undefined): string {
-  return value !== undefined ? String(value) : ''
+  order_status_url?: string
 }
 
 function safeNumber(value: string | number | undefined): number {
@@ -69,77 +78,132 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
+  // --- 1. User Data Setup ---
   const userData = new UserData()
 
+  // Prioriter browser_ip hvis tilgjengelig, ellers client_ip
+  const ip = order.browser_ip || order.client_ip
+  if (ip) userData.setClientIpAddress(ip)
+  if (order.user_agent) userData.setClientUserAgent(order.user_agent)
+
   if (order.customer?.email) {
+    // SDK hasher automatisk når du bruker setEmails
     userData.setEmails([order.customer.email])
   }
+
   if (order.customer?.phone) {
-    userData.setPhones([order.customer.phone])
+    // Fjern tegn som ikke er tall før sending, selv om SDK gjør noe rensing
+    const phone = order.customer.phone.replace(/[^0-9]/g, '')
+    if (phone) userData.setPhones([phone])
   }
-  if (order.customer?.id !== undefined) {
+
+  if (order.customer?.id) {
     userData.setExternalIds([String(order.customer.id)])
   }
 
-  if (order.cookies?._fbp) userData.setFbp(order.cookies._fbp)
-  if (order.cookies?._fbc) userData.setFbc(order.cookies._fbc)
+  if (order.customer?.first_name)
+    userData.setFirstNames([order.customer.first_name])
+  if (order.customer?.last_name)
+    userData.setLastNames([order.customer.last_name])
 
-  if (order.client_ip) userData.setClientIpAddress(order.client_ip)
-  if (order.user_agent) userData.setClientUserAgent(order.user_agent)
+  const address = order.shipping_address || order.billing_address
+  if (address) {
+    if (address.city) userData.setCities([address.city.toLowerCase()])
+    if (address.province_code)
+      userData.setStates([address.province_code.toLowerCase()])
+    if (address.zip) userData.setZips([address.zip])
+    if (address.country_code)
+      userData.setCountries([address.country_code.toLowerCase()])
+  }
 
-  const contents =
-    order.line_items
-      ?.map(item => {
-        const id = safeString(item.variant_id)
-        if (!id) return null
-        return {
-          id,
-          quantity: safeNumber(item.quantity),
-          item_price: safeNumber(item.price)
-        }
-      })
-      .filter(Boolean) ?? []
+  // Forsøk å hente fbp/fbc fra headers hvis Shopify forwarder dem (sjeldent),
+  // eller hvis du har lagret dem i custom attributes på ordren (anbefalt praksis).
+  // For nå antar vi at de ikke ligger direkte i webhook-roten, da Shopify ikke standard sender cookies her.
+
+  // --- 2. Content / Custom Data Setup ---
+  const contentList: (typeof Content)[] = []
+
+  if (order.line_items) {
+    for (const item of order.line_items) {
+      const id = item.variant_id || item.product_id
+      if (!id) continue
+
+      const content = new Content()
+        .setId(String(id))
+        .setQuantity(safeNumber(item.quantity))
+        .setItemPrice(safeNumber(item.price))
+
+      contentList.push(content)
+    }
+  }
 
   const customData = new CustomData()
     .setCurrency(order.currency ?? 'NOK')
     .setValue(safeNumber(order.total_price))
-    .setContents(contents)
-    .setOrderId(safeString(order.id))
+    .setContents(contentList)
+    .setContentType('product')
+
+  if (order.id) {
+    customData.setOrderId(String(order.id))
+  }
+
+  // --- 3. Event Construction ---
+  // Viktig: action_source er påkrevd.
+  // Viktig: event_id for deduplisering. Må matche det frontend sender.
+  const eventId =
+    order.id ? `shopify_order_${order.id}` : `purchase_${Date.now()}`
+
   const event = new ServerEvent()
     .setEventName('Purchase')
     .setEventTime(Math.floor(Date.now() / 1000))
+    .setActionSource('website') // PÅKREVD felt som manglet
+    .setEventId(eventId) // Kritisk for deduplisering
     .setUserData(userData)
     .setCustomData(customData)
 
-  if (order.confirmation_url) {
-    event.setEventSourceUrl(order.confirmation_url)
+  if (order.order_status_url) {
+    event.setEventSourceUrl(order.order_status_url)
+  } else {
+    event.setEventSourceUrl('https://utekos.no')
   }
 
+  // --- 4. Execution ---
   try {
     const eventRequest = new EventRequest(ACCESS_TOKEN, PIXEL_ID).setEvents([
       event
     ])
+
+    // execute() returnerer et promise med responsen
     const response = await eventRequest.execute()
 
     return NextResponse.json({
       success: true,
-      capi_response: response
+      id: response.events_received,
+      fb_trace_id: response.fbtrace_id
     })
   } catch (err: any) {
-    console.error('CAPI Purchase error FULL DETAILS:', {
-      message: err?.message,
-      status: err?.status,
-      method: err?.method,
-      url: err?.url,
-      fb_error: err?.response?.data?.error ?? null
-    })
+    // Hent ut mest mulig detaljert feilmelding fra SDK/Axios objektet
+    const errorBody = err.response?.data || err.response || err.message
+
+    console.error(
+      'Meta CAPI SDK Error:',
+      JSON.stringify(
+        {
+          message: err.message,
+          status: err.response?.status,
+          details: errorBody
+        },
+        null,
+        2
+      )
+    )
 
     return NextResponse.json(
       {
         error: 'Meta CAPI purchase failed',
-        fb_error: err?.response?.data?.error ?? null
+        details: errorBody
       },
-      { status: 500 }
+      { status: err.response?.status || 500 }
     )
   }
 }
