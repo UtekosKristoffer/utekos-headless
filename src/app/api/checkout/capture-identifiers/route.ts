@@ -86,8 +86,6 @@ export async function POST(req: NextRequest) {
   if (body.userData?.external_id)
     userDataToSave.external_id = body.userData.external_id
   else if (cookieExtId) userDataToSave.external_id = cookieExtId
-
-  // Lagre e-post hash hvis tilgjengelig (fra proxy.ts)
   if (cookieUserHash) {
     userDataToSave.email_hash = cookieUserHash
   }

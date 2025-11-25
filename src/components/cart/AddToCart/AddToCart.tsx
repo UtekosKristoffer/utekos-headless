@@ -17,7 +17,7 @@ import type {
   ShopifyProduct,
   ShopifyProductVariant,
   CustomData,
-  UserData // Nå blir denne brukt!
+  UserData
 } from '@types'
 import { Activity } from 'react'
 import { useContext, useEffect, useTransition } from 'react'
@@ -81,7 +81,6 @@ export function AddToCart({
 
     startTransition(async () => {
       try {
-        // 1. Bygg opp listen over varer som skal legges til
         const linesToProcess = [
           { variantId: values.variantId, quantity: values.quantity }
         ]
@@ -93,7 +92,6 @@ export function AddToCart({
           })
         }
 
-        // 2. Prosesser linjene sekvensielt
         for (const line of linesToProcess) {
           await createMutationPromise(
             {
@@ -104,7 +102,6 @@ export function AddToCart({
           )
         }
 
-        // 3. Påfør rabattkode (med pause for stabilitet)
         if (additionalLine) {
           await new Promise(resolve => setTimeout(resolve, 500))
 
@@ -126,8 +123,6 @@ export function AddToCart({
             }
           }
         }
-
-        // --- Tracking Logikk ---
         const basePrice = Number.parseFloat(selectedVariant.price.amount)
         const currency = selectedVariant.price.currencyCode
         let totalQty = values.quantity
@@ -155,7 +150,6 @@ export function AddToCart({
         const value = basePrice * values.quantity
         const eventID = `atc_${selectedVariant.id}_${Date.now()}`
 
-        // Meta Pixel (Browser)
         if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
           const fbqParams = {
             contents,
@@ -174,7 +168,7 @@ export function AddToCart({
         const fbp = getCookie('_fbp')
         const fbc = getCookie('_fbc')
         const externalId = getCookie('ute_ext_id')
-        const emailHash = getCookie('ute_user_hash') // Hent hashet e-post
+        const emailHash = getCookie('ute_user_hash')
 
         const userData: UserData = {
           ...(ua && { client_user_agent: ua }),
@@ -198,12 +192,11 @@ export function AddToCart({
             content_ids: contentIds,
             num_items: totalQty
           },
-          userData // Send det typede objektet
+          userData
         }
 
         sendJSON('/api/meta-events', capiPayload)
 
-        // GA4
         if (
           typeof window !== 'undefined'
           && typeof window.dataLayer !== 'undefined'

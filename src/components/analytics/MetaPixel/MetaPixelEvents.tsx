@@ -22,10 +22,8 @@ export function MetaPixelEvents() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  // Ref for å holde styr på om vi allerede har initialisert Pixel
   const isInitialized = useRef(false)
 
-  // 1. Initialisering og PageView
   useEffect(() => {
     if (!pixelId) return
 
@@ -44,15 +42,13 @@ export function MetaPixelEvents() {
               fbc: fbc || undefined,
               fbp: fbp || undefined
             })
-            // Marker at vi er ferdige med init, så den ikke kjører på neste sidevisning
+
             isInitialized.current = true
           }
 
-          // 'track' PageView skal derimot kjøres HVER gang (også ved navigering)
           window.fbq('track', 'PageView', {}, { eventID: eventId })
         }
 
-        // Server CAPI kjøres også hver gang
         sendPageViewToCAPI(
           pathname,
           eventId,
