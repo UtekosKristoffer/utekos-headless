@@ -17,7 +17,7 @@ import type {
   ShopifyProduct,
   ShopifyProductVariant,
   CustomData,
-  UserData
+  UserData // Nå blir denne brukt!
 } from '@types'
 import { Activity } from 'react'
 import { useContext, useEffect, useTransition } from 'react'
@@ -93,6 +93,7 @@ export function AddToCart({
           })
         }
 
+        // 2. Prosesser linjene sekvensielt
         for (const line of linesToProcess) {
           await createMutationPromise(
             {
@@ -103,7 +104,10 @@ export function AddToCart({
           )
         }
 
+        // 3. Påfør rabattkode (med pause for stabilitet)
         if (additionalLine) {
+          await new Promise(resolve => setTimeout(resolve, 500))
+
           try {
             const cartId = contextCartId || (await getCartIdFromCookie())
             if (cartId) {
@@ -123,6 +127,7 @@ export function AddToCart({
           }
         }
 
+        // --- Tracking Logikk ---
         const basePrice = Number.parseFloat(selectedVariant.price.amount)
         const currency = selectedVariant.price.currencyCode
         let totalQty = values.quantity
@@ -149,6 +154,8 @@ export function AddToCart({
 
         const value = basePrice * values.quantity
         const eventID = `atc_${selectedVariant.id}_${Date.now()}`
+
+        // Meta Pixel (Browser)
         if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
           const fbqParams = {
             contents,
@@ -167,6 +174,15 @@ export function AddToCart({
         const fbp = getCookie('_fbp')
         const fbc = getCookie('_fbc')
         const externalId = getCookie('ute_ext_id')
+        const emailHash = getCookie('ute_user_hash') // Hent hashet e-post
+
+        const userData: UserData = {
+          ...(ua && { client_user_agent: ua }),
+          ...(fbp && { fbp }),
+          ...(fbc && { fbc }),
+          ...(externalId && { external_id: externalId }),
+          ...(emailHash && { email_hash: emailHash })
+        }
 
         const capiPayload = {
           eventName: 'AddToCart',
@@ -182,15 +198,12 @@ export function AddToCart({
             content_ids: contentIds,
             num_items: totalQty
           },
-          userData: {
-            client_user_agent: ua,
-            fbp: fbp || undefined,
-            fbc: fbc || undefined,
-            external_id: externalId || undefined
-          }
+          userData // Send det typede objektet
         }
 
         sendJSON('/api/meta-events', capiPayload)
+
+        // GA4
         if (
           typeof window !== 'undefined'
           && typeof window.dataLayer !== 'undefined'

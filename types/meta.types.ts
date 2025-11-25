@@ -7,6 +7,7 @@ export type UserData = {
   external_id?: string
   em?: string[] // (hash: SHA-256 lowercased email) – valgfritt, når/om du har det
   ph?: string[] // (hash: SHA-256 phone, E.164)     – valgfritt, når/om du har det
+  email_hash?: string
 }
 
 export type OrderPaid = {
