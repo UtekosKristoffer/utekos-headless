@@ -1,45 +1,18 @@
-// Path: src/app/api/meta-events/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { redisPush, redisTrim } from '@/lib/redis'
 import crypto from 'crypto'
 
-type ContentItem = { id: string; quantity: number; item_price?: number }
-type CustomData = {
-  value?: number
-  currency?: string
-  content_type?: 'product' | 'product_group'
-  content_ids?: string[]
-  contents?: ContentItem[]
-  num_items?: number
-  order_id?: string
-  search_string?: string
-}
-type UserData = {
-  em?: string[]
-  ph?: string[]
-  fn?: string[]
-  ln?: string[]
-  ge?: string[]
-  db?: string[]
-  ct?: string[]
-  st?: string[]
-  zp?: string[]
-  country?: string[]
-  client_ip_address?: string | null
-  client_user_agent?: string | null
-  fbc?: string | null
-  fbp?: string | null
-  external_id?: string | undefined
-}
-type Body = {
-  eventName: string
-  eventData?: CustomData
-  userData?: UserData
-  eventId?: string
-  eventSourceUrl?: string
-  eventTime?: number
-  action_source?: string
-}
+const bizSdk = require('facebook-nodejs-business-sdk')
+const {
+  ServerEvent,
+  EventRequest,
+  UserData,
+  CustomData,
+  Content,
+  FacebookAdsApi
+} = bizSdk
+
+import type { Body, CustomDataInput, UserDataInput } from '../meta-events/types'
 
 export async function POST(req: NextRequest) {
   const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
@@ -52,6 +25,8 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     )
   }
+
+  FacebookAdsApi.init(ACCESS_TOKEN)
 
   const userAgent = req.headers.get('user-agent')
   const xForwardedFor = req.headers.get('x-forwarded-for')
@@ -79,56 +54,81 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  const event_name = body.eventName
-  const event_time = body.eventTime ?? Math.floor(Date.now() / 1000)
+  const userData = new UserData()
 
-  const user_data: UserData = {
-    client_ip_address: ip,
-    client_user_agent: userAgent,
-    fbp: body.userData?.fbp || cookieFbp || null,
-    fbc: body.userData?.fbc || cookieFbc || null,
-    external_id: body.userData?.external_id || cookieExtId || undefined,
+  const finalIp = body.userData?.client_ip_address || ip
+  if (finalIp) userData.setClientIpAddress(finalIp)
 
-    ...(body.userData?.em && { em: body.userData.em }),
-    ...(body.userData?.ph && { ph: body.userData.ph }),
-    ...(body.userData?.fn && { fn: body.userData.fn }),
-    ...(body.userData?.ln && { ln: body.userData.ln }),
-    ...(body.userData?.ge && { ge: body.userData.ge }),
-    ...(body.userData?.db && { db: body.userData.db }),
-    ...(body.userData?.ct && { ct: body.userData.ct }),
-    ...(body.userData?.st && { st: body.userData.st }),
-    ...(body.userData?.zp && { zp: body.userData.zp }),
-    ...(body.userData?.country && { country: body.userData.country })
+  const finalAgent = body.userData?.client_user_agent || userAgent
+  if (finalAgent) userData.setClientUserAgent(finalAgent)
+
+  const fbp = body.userData?.fbp || cookieFbp
+  if (fbp) userData.setFbp(fbp)
+
+  const fbc = body.userData?.fbc || cookieFbc
+  if (fbc) userData.setFbc(fbc)
+
+  const externalId = body.userData?.external_id || cookieExtId
+  if (externalId) userData.setExternalIds([externalId])
+
+  if (body.userData?.em) userData.setEmails(body.userData.em)
+  if (body.userData?.ph) userData.setPhones(body.userData.ph)
+  if (body.userData?.fn) userData.setFirstNames(body.userData.fn)
+  if (body.userData?.ln) userData.setLastNames(body.userData.ln)
+  if (body.userData?.ct) userData.setCities(body.userData.ct)
+  if (body.userData?.st) userData.setStates(body.userData.st)
+  if (body.userData?.zp) userData.setZips(body.userData.zp)
+  if (body.userData?.country) userData.setCountries(body.userData.country)
+  if (body.userData?.ge) userData.setGenders(body.userData.ge)
+  if (body.userData?.db) userData.setDateOfBirths(body.userData.db)
+
+  const customData = new CustomData()
+
+  if (body.eventData) {
+    if (body.eventData.value !== undefined)
+      customData.setValue(body.eventData.value)
+    if (body.eventData.currency) customData.setCurrency(body.eventData.currency)
+    if (body.eventData.content_type)
+      customData.setContentType(body.eventData.content_type)
+    if (body.eventData.content_ids)
+      customData.setContentIds(body.eventData.content_ids)
+    if (body.eventData.search_string)
+      customData.setSearchString(body.eventData.search_string)
+    if (body.eventData.num_items)
+      customData.setNumItems(body.eventData.num_items)
+    if (body.eventData.order_id) customData.setOrderId(body.eventData.order_id)
+
+    if (body.eventData.contents && Array.isArray(body.eventData.contents)) {
+      const contentList: (typeof Content)[] = body.eventData.contents.map(c => {
+        const contentObj = new Content().setId(c.id).setQuantity(c.quantity)
+        if (c.item_price !== undefined) contentObj.setItemPrice(c.item_price)
+        return contentObj
+      })
+      customData.setContents(contentList)
+    }
   }
 
-  const payload: Record<string, any> = {
-    data: [
-      {
-        event_name: event_name,
-        event_time: event_time,
-        event_id: body.eventId,
-        action_source: 'website',
-        event_source_url: body.eventSourceUrl,
-        user_data: user_data,
-        custom_data: body.eventData ?? {}
-      }
-    ]
-    // test_event_code: 'TEST63736'
-  }
+  const serverEvent = new ServerEvent()
+    .setEventName(body.eventName)
+    .setEventTime(body.eventTime ?? Math.floor(Date.now() / 1000))
+    .setEventId(body.eventId)
+    .setEventSourceUrl(body.eventSourceUrl)
+    .setActionSource('website') // Påkrevd felt
+    .setUserData(userData)
+    .setCustomData(customData)
 
-  // --- LOGGING TIL REDIS START ---
   try {
     const logEntry = {
       id: crypto.randomUUID(),
       timestamp: new Date().toISOString(),
       level: 'INFO',
-      event: `CAPI: ${event_name}`,
+      event: `CAPI: ${body.eventName}`,
       identity: {
-        ip,
-        fbp: user_data.fbp,
-        fbc: user_data.fbc,
-        externalId: user_data.external_id,
-        userAgent
+        ip: finalIp,
+        fbp: fbp,
+        fbc: fbc,
+        externalId: externalId,
+        userAgent: finalAgent
       },
       context: {
         path: body.eventSourceUrl,
@@ -138,56 +138,41 @@ export async function POST(req: NextRequest) {
     }
 
     await redisPush('app_logs', logEntry)
-
     redisTrim('app_logs', 0, 999).catch(() => {})
   } catch (e) {
     console.error('Logging setup failed', e)
   }
-  // --- LOGGING TIL REDIS SLUTT ---
 
   try {
-    const metaApiUrl = `https://graph.facebook.com/v24.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`
+    const eventRequest = new EventRequest(ACCESS_TOKEN, PIXEL_ID).setEvents([
+      serverEvent
+    ])
 
     if (process.env.NODE_ENV === 'development') {
-      console.log(`--- SENDING TO CAPI (${event_name}) ---`)
-      console.log(JSON.stringify(payload, null, 2))
+      console.log('Sending CAPI payload:', JSON.stringify(serverEvent, null, 2))
     }
 
-    const res = await fetch(metaApiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+    const response = await eventRequest.execute()
+
+    return NextResponse.json({
+      success: true,
+      id: response.events_received,
+      fb_trace_id: response.fbtrace_id
     })
+  } catch (err: any) {
+    const errorData = err.response?.data || err.response || err.message
 
-    const json = await res.json()
-
-    if (!res.ok) {
-      console.error(
-        `Meta CAPI request failed for ${event_name} (${body.eventId}): Status ${res.status}`,
-        json
-      )
-      return NextResponse.json(
-        { error: 'Failed to send event to Meta CAPI', details: json },
-        { status: res.status }
-      )
-    }
-
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`Meta CAPI Success for ${event_name}:`, JSON.stringify(json))
-    }
-
-    return NextResponse.json({ success: true, metaResponse: json })
-  } catch (fetchError) {
     console.error(
-      `Meta CAPI fetch error for ${event_name} (${body.eventId}):`,
-      fetchError
+      `Meta CAPI request failed for ${body.eventName} (${body.eventId})`,
+      JSON.stringify(errorData, null, 2)
     )
+
     return NextResponse.json(
       {
-        error: 'Failed to connect to Meta CAPI',
-        details: (fetchError as Error).message ?? 'Unknown fetch error'
+        error: 'Failed to send event to Meta CAPI',
+        details: errorData
       },
-      { status: 503 }
+      { status: err.response?.status || 500 }
     )
   }
 }

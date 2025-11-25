@@ -11,7 +11,7 @@ const {
   FacebookAdsApi
 } = bizSdk
 
-const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID // Merk: Bruker ofte public variabel i Next.js for ID
+const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
 const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
 
 if (!PIXEL_ID) throw new Error('Missing NEXT_PUBLIC_META_PIXEL_ID')
@@ -19,44 +19,16 @@ if (!ACCESS_TOKEN) throw new Error('Missing META_ACCESS_TOKEN')
 
 FacebookAdsApi.init(ACCESS_TOKEN)
 
-interface ShopifyLineItem {
-  variant_id?: number | string
-  product_id?: number | string
-  quantity?: number
-  price?: string | number
+function safeString(val: any): string | undefined {
+  if (!val) return undefined
+  const s = String(val).trim()
+  return s.length > 0 ? s : undefined
 }
 
-interface ShopifyCustomer {
-  id?: number | string
-  email?: string
-  phone?: string
-  first_name?: string
-  last_name?: string
-}
+function normalizePhone(phone: string | undefined): string | undefined {
+  if (!phone) return undefined
 
-interface ShopifyAddress {
-  city?: string
-  province_code?: string
-  zip?: string
-  country_code?: string
-}
-
-interface ShopifyOrderPaidWebhook {
-  id?: number | string
-  currency?: string
-  total_price?: string | number
-  line_items?: ShopifyLineItem[]
-  customer?: ShopifyCustomer
-  billing_address?: ShopifyAddress
-  shipping_address?: ShopifyAddress
-  client_ip?: string
-  browser_ip?: string // Shopify sender noen ganger dette feltet
-  user_agent?: string
-  order_status_url?: string
-}
-
-function safeNumber(value: string | number | undefined): number {
-  return value !== undefined ? Number(value) : 0
+  return phone.replace(/[^0-9]/g, '')
 }
 
 export async function POST(request: Request) {
@@ -65,145 +37,165 @@ export async function POST(request: Request) {
 
   const ok = verifyShopifyWebhook(rawBody, hmac)
   if (!ok) {
+    console.error('Webhook signature verification failed')
     return NextResponse.json(
       { error: 'Invalid webhook signature' },
       { status: 401 }
     )
   }
 
-  let order: ShopifyOrderPaidWebhook
+  let order: any
   try {
     order = JSON.parse(rawBody)
   } catch {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  // --- 1. User Data Setup ---
+  console.log(`[Meta CAPI] Processing Order: ${order.id || 'Unknown ID'}`)
+
   const userData = new UserData()
-
-  // Prioriter browser_ip hvis tilgjengelig, ellers client_ip
-  const ip = order.browser_ip || order.client_ip
-  if (ip) userData.setClientIpAddress(ip)
-  if (order.user_agent) userData.setClientUserAgent(order.user_agent)
-
-  if (order.customer?.email) {
-    // SDK hasher automatisk når du bruker setEmails
-    userData.setEmails([order.customer.email])
+  const email =
+    safeString(order.email)
+    || safeString(order.contact_email)
+    || safeString(order.customer?.email)
+  if (email) {
+    userData.setEmails([email.toLowerCase()])
+  } else {
+    console.warn('[Meta CAPI] ADVARSEL: Ingen e-post funnet i ordre!')
   }
 
-  if (order.customer?.phone) {
-    // Fjern tegn som ikke er tall før sending, selv om SDK gjør noe rensing
-    const phone = order.customer.phone.replace(/[^0-9]/g, '')
-    if (phone) userData.setPhones([phone])
+  const phone = normalizePhone(
+    order.phone
+      || order.customer?.phone
+      || order.shipping_address?.phone
+      || order.billing_address?.phone
+  )
+  if (phone) {
+    userData.setPhones([phone])
   }
 
-  if (order.customer?.id) {
-    userData.setExternalIds([String(order.customer.id)])
+  const externalId = safeString(order.customer?.id) || safeString(order.user_id)
+  if (externalId) {
+    userData.setExternalIds([externalId])
   }
 
-  if (order.customer?.first_name)
-    userData.setFirstNames([order.customer.first_name])
-  if (order.customer?.last_name)
-    userData.setLastNames([order.customer.last_name])
+  const addr =
+    order.shipping_address
+    || order.billing_address
+    || order.customer?.default_address
+    || {}
 
-  const address = order.shipping_address || order.billing_address
-  if (address) {
-    if (address.city) userData.setCities([address.city.toLowerCase()])
-    if (address.province_code)
-      userData.setStates([address.province_code.toLowerCase()])
-    if (address.zip) userData.setZips([address.zip])
-    if (address.country_code)
-      userData.setCountries([address.country_code.toLowerCase()])
+  if (addr.first_name || order.customer?.first_name) {
+    userData.setFirstNames([
+      safeString(addr.first_name || order.customer?.first_name)
+    ])
+  }
+  if (addr.last_name || order.customer?.last_name) {
+    userData.setLastNames([
+      safeString(addr.last_name || order.customer?.last_name)
+    ])
+  }
+  const city = safeString(addr.city)
+  if (city) userData.setCities([city.toLowerCase()])
+  const provinceCode = safeString(addr.province_code)
+  if (provinceCode) userData.setStates([provinceCode.toLowerCase()])
+  const zip = safeString(addr.zip)
+  if (zip) userData.setZips([zip])
+  const countryCode = safeString(addr.country_code)
+  if (countryCode) userData.setCountries([countryCode.toLowerCase()])
+
+  const clientIp = safeString(order.browser_ip || order.client_ip)
+  if (clientIp) userData.setClientIpAddress(clientIp)
+
+  const userAgent = safeString(
+    order.user_agent || order.client_details?.user_agent
+  )
+  if (userAgent) userData.setClientUserAgent(userAgent)
+
+  if (order.note_attributes && Array.isArray(order.note_attributes)) {
+    const fbpAttr = order.note_attributes.find((a: any) => a.name === '_fbp')
+    const fbcAttr = order.note_attributes.find((a: any) => a.name === '_fbc')
+
+    if (fbpAttr && fbpAttr.value) userData.setFbp(fbpAttr.value)
+    if (fbcAttr && fbcAttr.value) userData.setFbc(fbcAttr.value)
   }
 
-  // Forsøk å hente fbp/fbc fra headers hvis Shopify forwarder dem (sjeldent),
-  // eller hvis du har lagret dem i custom attributes på ordren (anbefalt praksis).
-  // For nå antar vi at de ikke ligger direkte i webhook-roten, da Shopify ikke standard sender cookies her.
+  console.log(
+    '[Meta CAPI] Generated UserData:',
+    JSON.stringify(userData, null, 2)
+  )
 
-  // --- 2. Content / Custom Data Setup ---
   const contentList: (typeof Content)[] = []
 
-  if (order.line_items) {
+  if (order.line_items && Array.isArray(order.line_items)) {
     for (const item of order.line_items) {
-      const id = item.variant_id || item.product_id
+      const id = safeString(item.variant_id) || safeString(item.product_id)
       if (!id) continue
 
       const content = new Content()
-        .setId(String(id))
-        .setQuantity(safeNumber(item.quantity))
-        .setItemPrice(safeNumber(item.price))
+        .setId(id)
+        .setQuantity(Number(item.quantity || 0))
+        .setItemPrice(Number(item.price || 0))
+        .setTitle(safeString(item.title) || '')
 
       contentList.push(content)
     }
   }
 
   const customData = new CustomData()
-    .setCurrency(order.currency ?? 'NOK')
-    .setValue(safeNumber(order.total_price))
+    .setCurrency(safeString(order.currency) || 'NOK')
+    .setValue(Number(order.total_price || 0))
     .setContents(contentList)
     .setContentType('product')
 
   if (order.id) {
-    customData.setOrderId(String(order.id))
+    customData.setOrderId(safeString(order.id))
   }
 
-  // --- 3. Event Construction ---
-  // Viktig: action_source er påkrevd.
-  // Viktig: event_id for deduplisering. Må matche det frontend sender.
   const eventId =
     order.id ? `shopify_order_${order.id}` : `purchase_${Date.now()}`
 
   const event = new ServerEvent()
     .setEventName('Purchase')
     .setEventTime(Math.floor(Date.now() / 1000))
-    .setActionSource('website') // PÅKREVD felt som manglet
-    .setEventId(eventId) // Kritisk for deduplisering
+    .setActionSource('website') // PÅKREVD: 'website' (ikke 'system_generated' e.l.)
+    .setEventId(eventId)
     .setUserData(userData)
     .setCustomData(customData)
+    .setEventSourceUrl(
+      safeString(order.order_status_url) || 'https://utekos.no'
+    )
 
-  if (order.order_status_url) {
-    event.setEventSourceUrl(order.order_status_url)
-  } else {
-    event.setEventSourceUrl('https://utekos.no')
-  }
-
-  // --- 4. Execution ---
   try {
     const eventRequest = new EventRequest(ACCESS_TOKEN, PIXEL_ID).setEvents([
       event
     ])
 
-    // execute() returnerer et promise med responsen
+    // Hvis dette er en test-ordre eller development, kan du vurdere test_event_code
+    // if (process.env.NODE_ENV === 'development') {
+    //   eventRequest.setTestEventCode('TEST12345') // Hent din kode fra Events Manager -> Test Events
+    // }
+
     const response = await eventRequest.execute()
+
+    console.log('[Meta CAPI] Success:', response)
 
     return NextResponse.json({
       success: true,
-      id: response.events_received,
-      fb_trace_id: response.fbtrace_id
+      events_received: response.events_received,
+      fbtrace_id: response.fbtrace_id
     })
   } catch (err: any) {
-    // Hent ut mest mulig detaljert feilmelding fra SDK/Axios objektet
-    const errorBody = err.response?.data || err.response || err.message
-
-    console.error(
-      'Meta CAPI SDK Error:',
-      JSON.stringify(
-        {
-          message: err.message,
-          status: err.response?.status,
-          details: errorBody
-        },
-        null,
-        2
-      )
-    )
+    // Detaljert feilhåndtering
+    const errorResponse = err.response?.data || {}
+    console.error('[Meta CAPI] Failed:', JSON.stringify(errorResponse, null, 2))
 
     return NextResponse.json(
       {
-        error: 'Meta CAPI purchase failed',
-        details: errorBody
+        error: 'Meta CAPI request failed',
+        details: errorResponse.error || err.message
       },
-      { status: err.response?.status || 500 }
+      { status: 400 }
     )
   }
 }
