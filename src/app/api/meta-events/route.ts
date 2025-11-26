@@ -61,12 +61,6 @@ export async function POST(request: Request) {
       serverEvent
     ])
 
-    if (process.env.NEXT_PUBLIC_META_TEST_EVENT_CODE) {
-      eventRequest.setTestEventCode(
-        process.env.NEXT_PUBLIC_META_TEST_EVENT_CODE
-      )
-    }
-
     await eventRequest.execute()
 
     return NextResponse.json({ success: true })

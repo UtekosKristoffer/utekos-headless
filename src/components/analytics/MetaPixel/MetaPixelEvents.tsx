@@ -35,7 +35,6 @@ export function MetaPixelEvents() {
         const eventId = generateEventID()
 
         if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
-          // HER er rettelsen: Vi kjører kun 'init' hvis det ikke er gjort før
           if (!isInitialized.current) {
             window.fbq('init', pixelId, {
               external_id: externalId,
