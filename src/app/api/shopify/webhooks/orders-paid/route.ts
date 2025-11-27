@@ -55,7 +55,7 @@ export async function POST(request: Request) {
 
   const ok = verifyShopifyWebhook(rawBody, hmac)
   if (!ok) {
-    console.error('Webhook signature verification failed')
+    console.error('[Meta CAPI] Webhook signature verification failed')
     return NextResponse.json(
       { error: 'Invalid webhook signature' },
       { status: 401 }
@@ -66,6 +66,7 @@ export async function POST(request: Request) {
   try {
     order = JSON.parse(rawBody)
   } catch {
+    console.error('[Meta CAPI] Failed to parse JSON body')
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
@@ -75,9 +76,10 @@ export async function POST(request: Request) {
   const cartToken = safeString(order.cart_token)
   const checkoutToken = safeString(order.checkout_token)
 
+  // Sjekker både checkout_token og cart_token i Redis for å maksimere treffsikkerhet
   const possibleKeys = [
-    cartToken ? `checkout:${cartToken}` : null,
-    checkoutToken ? `checkout:${checkoutToken}` : null
+    checkoutToken ? `checkout:${checkoutToken}` : null,
+    cartToken ? `checkout:${cartToken}` : null
   ].filter(Boolean) as string[]
 
   for (const key of possibleKeys) {
@@ -85,16 +87,17 @@ export async function POST(request: Request) {
       const data = (await redisGet(key)) as CheckoutAttribution | null
       if (data) {
         redisData = data
-        console.log(`[Meta CAPI] Fant attribusjonsdata i Redis for key: ${key}`)
+        console.log(`[Meta CAPI] Attribution found in Redis for key: ${key}`)
         break
       }
     } catch (e) {
-      console.error(`[Meta CAPI] Feil ved lesing av Redis for key ${key}:`, e)
+      console.error(`[Meta CAPI] Redis read error for key ${key}:`, e)
     }
   }
 
   const userData = new UserData()
 
+  // 1. Email
   const email =
     safeString(order.email)
     || safeString(order.contact_email)
@@ -103,9 +106,10 @@ export async function POST(request: Request) {
   if (email) {
     userData.setEmails([email.toLowerCase()])
   } else {
-    console.warn('[Meta CAPI] ADVARSEL: Ingen e-post funnet i ordre!')
+    console.warn('[Meta CAPI] WARNING: No email found in order object')
   }
 
+  // 2. Phone
   const phone = normalizePhone(
     order.phone
       || order.customer?.phone
@@ -116,15 +120,17 @@ export async function POST(request: Request) {
     userData.setPhones([phone])
   }
 
+  // 3. External ID
   const externalId =
-    safeString(order.customer?.id)
+    redisData?.userData?.external_id
+    || safeString(order.customer?.id)
     || safeString(order.user_id)
-    || redisData?.userData?.external_id
 
   if (externalId) {
     userData.setExternalIds([externalId])
   }
 
+  // 4. Address Information
   const addr =
     order.shipping_address
     || order.billing_address
@@ -155,6 +161,7 @@ export async function POST(request: Request) {
     if (countryCode) userData.setCountries([countryCode.toLowerCase()])
   }
 
+  // 5. Technical identifiers (IP / User Agent)
   const clientIp =
     redisData?.userData?.client_ip_address
     || safeString(order.browser_ip || order.client_ip)
@@ -167,20 +174,23 @@ export async function POST(request: Request) {
 
   if (userAgent) userData.setClientUserAgent(userAgent)
 
+  // 6. Click Identifiers (fbp / fbc)
   let fbp = redisData?.userData?.fbp
   let fbc = redisData?.userData?.fbc
 
+  // Fallback: Sjekk note_attributes fra Shopify hvis Redis manglet
   if (order.note_attributes && Array.isArray(order.note_attributes)) {
     const fbpAttr = order.note_attributes.find((a: any) => a.name === '_fbp')
     const fbcAttr = order.note_attributes.find((a: any) => a.name === '_fbc')
 
-    if (fbpAttr && fbpAttr.value) fbp = fbpAttr.value
-    if (fbcAttr && fbcAttr.value) fbc = fbcAttr.value
+    if (!fbp && fbpAttr && fbpAttr.value) fbp = fbpAttr.value
+    if (!fbc && fbcAttr && fbcAttr.value) fbc = fbcAttr.value
   }
 
   if (fbp) userData.setFbp(fbp)
   if (fbc) userData.setFbc(fbc)
 
+  // Innhold (Produkter)
   const contentList: (typeof Content)[] = []
 
   if (order.line_items && Array.isArray(order.line_items)) {
@@ -231,16 +241,13 @@ export async function POST(request: Request) {
       event
     ])
 
-    if (process.env.META_TEST_EVENT_CODE) {
-      eventRequest.setTestEventCode(process.env.META_TEST_EVENT_CODE)
-      console.log(
-        `[CAPI] Sending with Test Code: ${process.env.META_TEST_EVENT_CODE}`
-      )
-    }
+    // MERK: Ingen test-event-kode settes her. Dette går live.
 
     const response = await eventRequest.execute()
 
-    console.log('[Meta CAPI] Success:', response)
+    console.log(
+      `[Meta CAPI] Success. Trace ID: ${response.fbtrace_id}, Events Received: ${response.events_received}`
+    )
 
     return NextResponse.json({
       success: true,
@@ -249,14 +256,18 @@ export async function POST(request: Request) {
     })
   } catch (err: any) {
     const errorResponse = err.response?.data || {}
-    console.error('[Meta CAPI] Failed:', JSON.stringify(errorResponse, null, 2))
+    console.error(
+      '[Meta CAPI] Request Failed:',
+      JSON.stringify(errorResponse, null, 2)
+    )
 
+    // Returnerer 200 til Shopify selv ved Meta-feil for å unngå webhook-retry loop
     return NextResponse.json(
       {
         error: 'Meta CAPI request failed',
         details: errorResponse.error || err.message
       },
-      { status: 400 }
+      { status: 200 }
     )
   }
 }

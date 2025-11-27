@@ -62,7 +62,6 @@ export function MetaPixelEvents() {
     return () => clearTimeout(timeoutId)
   }, [pathname, searchParams, pixelId])
 
-  // 2. ViewContent Tracking (Produkter)
   useEffect(() => {
     if (!pathname.startsWith('/produkter/')) return
 
@@ -98,7 +97,6 @@ export function MetaPixelEvents() {
         })
       }
 
-      // CAPI-sending for ViewContent
       const externalId = getCookie('ute_ext_id')
       const emailHash = getCookie('ute_user_hash')
       const fbc = getCookie('_fbc')
