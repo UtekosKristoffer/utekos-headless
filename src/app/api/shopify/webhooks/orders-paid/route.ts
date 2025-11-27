@@ -261,7 +261,6 @@ export async function POST(request: Request) {
       JSON.stringify(errorResponse, null, 2)
     )
 
-    // Returnerer 200 til Shopify selv ved Meta-feil for å unngå webhook-retry loop
     return NextResponse.json(
       {
         error: 'Meta CAPI request failed',
