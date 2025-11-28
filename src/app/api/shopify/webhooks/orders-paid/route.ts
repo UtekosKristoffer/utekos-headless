@@ -2,7 +2,8 @@
 
 import { NextResponse } from 'next/server'
 import { verifyShopifyWebhook } from '@/lib/shopify/verifyWebhook'
-import { redisGet } from '@/lib/redis'
+import { redisGet, redisPush, redisTrim } from '@/lib/redis'
+import crypto from 'crypto'
 
 const bizSdk = require('facebook-nodejs-business-sdk')
 const {
@@ -49,6 +50,42 @@ function normalizePhone(phone: string | undefined): string | undefined {
   return phone.replace(/[^0-9]/g, '')
 }
 
+// Hjelpefunksjon for å logge likt som /api/log/route.ts
+async function logToAppLogs(
+  level: 'INFO' | 'WARN' | 'ERROR',
+  event: string,
+  identity: any,
+  context: any,
+  data: any
+) {
+  try {
+    const logEntry = {
+      id: crypto.randomUUID(),
+      timestamp: new Date().toISOString(),
+      level,
+      event,
+      identity: {
+        ip: identity.ip,
+        fbp: identity.fbp,
+        fbc: identity.fbc,
+        externalId: identity.externalId,
+        userAgent: identity.userAgent
+      },
+      context,
+      data
+    }
+
+    // Print til Vercel/Server log
+    console.log(`[${level}] ${event}`, JSON.stringify(logEntry))
+
+    // Lagre til Redis (samme liste som klient-loggingen)
+    await redisPush('app_logs', logEntry)
+    await redisTrim('app_logs', 0, 999)
+  } catch (e) {
+    console.error('Failed to write to app_logs:', e)
+  }
+}
+
 export async function POST(request: Request) {
   const hmac = request.headers.get('x-shopify-hmac-sha256') ?? ''
   const rawBody = await request.text()
@@ -76,7 +113,6 @@ export async function POST(request: Request) {
   const cartToken = safeString(order.cart_token)
   const checkoutToken = safeString(order.checkout_token)
 
-  // Sjekker både checkout_token og cart_token i Redis for å maksimere treffsikkerhet
   const possibleKeys = [
     checkoutToken ? `checkout:${checkoutToken}` : null,
     cartToken ? `checkout:${cartToken}` : null
@@ -161,7 +197,7 @@ export async function POST(request: Request) {
     if (countryCode) userData.setCountries([countryCode.toLowerCase()])
   }
 
-  // 5. Technical identifiers (IP / User Agent)
+  // 5. Technical identifiers
   const clientIp =
     redisData?.userData?.client_ip_address
     || safeString(order.browser_ip || order.client_ip)
@@ -174,11 +210,10 @@ export async function POST(request: Request) {
 
   if (userAgent) userData.setClientUserAgent(userAgent)
 
-  // 6. Click Identifiers (fbp / fbc)
+  // 6. Click Identifiers
   let fbp = redisData?.userData?.fbp
   let fbc = redisData?.userData?.fbc
 
-  // Fallback: Sjekk note_attributes fra Shopify hvis Redis manglet
   if (order.note_attributes && Array.isArray(order.note_attributes)) {
     const fbpAttr = order.note_attributes.find((a: any) => a.name === '_fbp')
     const fbcAttr = order.note_attributes.find((a: any) => a.name === '_fbc')
@@ -190,7 +225,7 @@ export async function POST(request: Request) {
   if (fbp) userData.setFbp(fbp)
   if (fbc) userData.setFbc(fbc)
 
-  // Innhold (Produkter)
+  // Content
   const contentList: (typeof Content)[] = []
 
   if (order.line_items && Array.isArray(order.line_items)) {
@@ -241,13 +276,31 @@ export async function POST(request: Request) {
       event
     ])
 
-    // MERK: Ingen test-event-kode settes her. Dette går live.
-
     const response = await eventRequest.execute()
 
-    console.log(
-      `[Meta CAPI] Success. Trace ID: ${response.fbtrace_id}, Events Received: ${response.events_received}`
+    // --- NY LOGGING HER ---
+    await logToAppLogs(
+      'INFO',
+      'Purchase Processed (CAPI)',
+      {
+        ip: clientIp,
+        fbp: fbp,
+        fbc: fbc,
+        externalId: externalId,
+        userAgent: userAgent
+      },
+      {
+        orderId: String(order.id),
+        eventId: eventId,
+        checkoutUrl: redisData?.checkoutUrl
+      },
+      {
+        value: Number(order.total_price),
+        currency: safeString(order.currency),
+        fbTraceId: response.fbtrace_id
+      }
     )
+    // ---------------------
 
     return NextResponse.json({
       success: true,
@@ -259,6 +312,15 @@ export async function POST(request: Request) {
     console.error(
       '[Meta CAPI] Request Failed:',
       JSON.stringify(errorResponse, null, 2)
+    )
+
+    // Logg feilen også til Redis
+    await logToAppLogs(
+      'ERROR',
+      'Purchase CAPI Failed',
+      { ip: clientIp, fbp, fbc, externalId, userAgent },
+      { orderId: String(order.id) },
+      { error: errorResponse }
     )
 
     return NextResponse.json(
