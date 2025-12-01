@@ -17,6 +17,7 @@ import type { RootLayoutProps } from '@types'
 import type { Metadata } from 'next'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { getCachedCart } from '../lib/helpers/cart/getCachedCart'
+import { Snowfall } from '@/components/ui/snowfall'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -56,7 +57,7 @@ export const metadata: Metadata = {
       'Kompromissløs komfort. Innovativ funksjonalitet. Designet for å holde på varmen når øyeblikkene teller.',
     images: [
       {
-        url: '/og-image-produkter.png',
+        url: '/linn-kate-kikkert.png',
         width: 1200,
         height: 630,
         alt: 'Personer som koser seg utendørs med varme komfortplagg fra Utekos.'
@@ -112,8 +113,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={`bg-background text-foreground ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Snowfall flakeCount={50} speed={0.3} />
         <OnlineStoreJsonLd />
-
         <Suspense>
           <CartProviderLoader>
             <Activity>

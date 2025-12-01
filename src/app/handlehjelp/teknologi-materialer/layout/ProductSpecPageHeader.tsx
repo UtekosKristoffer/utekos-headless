@@ -1,6 +1,6 @@
 export function ProductSpecPageHeader() {
   return (
-    <section className='mx-auto max-w-3xl text-center'>
+    <section className='mx-auto mt-24 max-w-3xl text-center'>
       <h1 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
         Kvalitet i hver fiber
       </h1>

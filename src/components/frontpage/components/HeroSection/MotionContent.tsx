@@ -1,14 +1,18 @@
+// Path: src/components/frontpage/components/HeroSection/MotionContent.tsx
 import { Award } from 'lucide-react'
 import { ChevronDownSection } from './ChevronDown'
+import { SantaHat } from '@/components/ui/santahat'
+
 export function MotionContent() {
   return (
     <div className='mb-8 text-center'>
+      {/* Endret farge fra sky-800 til red-800/900 for julestemning */}
       <div
-        className='animate-fade-in-down mb-6 inline-flex items-center gap-2 rounded-full border border-sky-800/30 bg-sky-900/10 px-4 py-2'
+        className='animate-fade-in-down mb-6 inline-flex items-center gap-2 rounded-full border border-red-800/30 bg-red-900/10 px-4 py-2'
         style={{ animationDelay: '0.2s' }}
       >
-        <Award className='h-4 w-4 text-sky-800' />
-        <span className='text-sm font-medium text-sky-800'>
+        <Award className='h-4 w-4 text-red-800' />
+        <span className='text-sm font-medium text-red-800'>
           Funksjonell varme - siden 2020
         </span>
       </div>
@@ -17,7 +21,13 @@ export function MotionContent() {
         className='animate-fade-in-up mt-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl xl:text-7xl'
         style={{ animationDelay: '0.3s' }}
       >
-        <span className='block'>Utekos</span>
+        {/* Wrap Utekos i relative for å kunne plassere luen absolutt ift teksten */}
+        <span className='relative inline-block'>
+          Utekos
+          {/* Juster top/left/w/h her for å treffe perfekt på bokstaven */}
+          <SantaHat className='absolute -top-6 -left-4 h-12 w-12 -rotate-12 drop-shadow-lg sm:-top-10 sm:-left-6 sm:h-20 sm:w-20' />
+        </span>
+
         <span className='mt-2 block bg-gradient-to-r from-sky-800 via-cyan-700 to-sky-800 bg-clip-text text-transparent'>
           Forleng de gode stundene ute.
         </span>

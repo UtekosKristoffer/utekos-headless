@@ -39,8 +39,6 @@ export async function applyDiscount(cartId: string, discountCode: string) {
       throw new Error(msg)
     }
 
-    // Next.js 16 Endring: Bruk updateTag for umiddelbar oppdatering i Server Actions ("read-your-own-writes")
-    // revalidateTag med 'max' serverer "stale" data, som fører til at varer ser ut til å mangle.
     updateTag(TAGS.cart)
 
     return cart

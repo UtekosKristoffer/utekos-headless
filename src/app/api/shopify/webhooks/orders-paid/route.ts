@@ -50,7 +50,6 @@ function normalizePhone(phone: string | undefined): string | undefined {
   return phone.replace(/[^0-9]/g, '')
 }
 
-// Hjelpefunksjon for å logge likt som /api/log/route.ts
 async function logToAppLogs(
   level: 'INFO' | 'WARN' | 'ERROR',
   event: string,
@@ -132,8 +131,6 @@ export async function POST(request: Request) {
   }
 
   const userData = new UserData()
-
-  // 1. Email
   const email =
     safeString(order.email)
     || safeString(order.contact_email)
@@ -145,7 +142,6 @@ export async function POST(request: Request) {
     console.warn('[Meta CAPI] WARNING: No email found in order object')
   }
 
-  // 2. Phone
   const phone = normalizePhone(
     order.phone
       || order.customer?.phone
@@ -156,7 +152,6 @@ export async function POST(request: Request) {
     userData.setPhones([phone])
   }
 
-  // 3. External ID
   const externalId =
     redisData?.userData?.external_id
     || safeString(order.customer?.id)
@@ -166,7 +161,6 @@ export async function POST(request: Request) {
     userData.setExternalIds([externalId])
   }
 
-  // 4. Address Information
   const addr =
     order.shipping_address
     || order.billing_address
@@ -227,11 +221,14 @@ export async function POST(request: Request) {
 
   // Content
   const contentList: (typeof Content)[] = []
+  const contentIds: string[] = []
 
   if (order.line_items && Array.isArray(order.line_items)) {
     for (const item of order.line_items) {
       const id = safeString(item.variant_id) || safeString(item.product_id)
       if (!id) continue
+
+      contentIds.push(id)
 
       const content = new Content()
         .setId(id)
@@ -247,12 +244,16 @@ export async function POST(request: Request) {
     .setCurrency(safeString(order.currency) || 'NOK')
     .setValue(Number(order.total_price || 0))
     .setContents(contentList)
+    .setContentIds(contentIds)
     .setContentType('product')
 
   if (order.id) {
     customData.setOrderId(safeString(order.id))
   }
 
+  // FIX: Prioriter order.id for å matche nettleserens (Browser Pixel) logikk.
+  // Nettleseren sender "shopify_order_{id}".
+  // redisData.eventId inneholder ofte "ic_..." (InitiateCheckout) som skaper mismatch.
   const eventId =
     order.id ?
       `shopify_order_${order.id}`

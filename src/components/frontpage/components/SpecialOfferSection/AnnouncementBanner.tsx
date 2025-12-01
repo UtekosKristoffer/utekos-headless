@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowRightIcon, XIcon } from 'lucide-react'
+import { ArrowRightIcon, XIcon, Gift } from 'lucide-react' // La til Gift
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils/className'
@@ -48,27 +48,40 @@ export default function AnnouncementBanner() {
   return (
     <div
       className={cn(
-        'relative animate-slide-in-down',
+        'relative z-40 animate-slide-in-down shadow-md',
         isExiting && 'animate-slide-out-up'
       )}
     >
       <Link
-        href='/produkter/utekos-techdown'
-        className='group block w-full bg-sky-800 p-3 text-center text-sm font-medium text-white transition-colors hover:text-neutral-200'
+        href='/kampanje/julegaver'
+        className='group block w-full bg-gradient-to-r from-red-950 via-red-900 to-red-950 px-8 py-3 text-center text-sm font-medium text-white transition-all hover:bg-red-950'
       >
-        <span className='mr-2'>
-          <span className='font-semibold'>NYHET:</span> Utekos TechDown™ - Vår
-          varmeste og mest allsidige modell.
-        </span>
-        <span className='font-bold'>Se lanseringstilbudet!</span>
-        <span> 🎉 </span>
-        <ArrowRightIcon className='ml-2 inline-block size-4 transition-transform group-hover:translate-x-1' />
+        <div className='flex items-center justify-center gap-2'>
+          <Gift className='h-4 w-4 text-red-200' />
+
+          <span className='mr-1'>
+            <span className='font-bold text-red-100'>JULEGAVETIPS: </span>
+            {/* Kort tekst på mobil, full tekst på desktop */}
+            <span className='inline md:hidden'>Årets varmeste gave.</span>
+            <span className='hidden md:inline'>
+              Gi bort genial funksjonalitet som endrer måten man nyter livet
+              utendørs på!
+            </span>
+          </span>
+
+          <span className='hidden items-center font-bold text-white underline decoration-red-400 underline-offset-4 transition-all group-hover:decoration-white sm:flex'>
+            Sikre deg julegavene
+            <ArrowRightIcon className='ml-1 inline-block size-4 transition-transform group-hover:translate-x-1' />
+          </span>
+
+          <ArrowRightIcon className='inline-block size-4 sm:hidden' />
+        </div>
       </Link>
 
       <button
         onClick={handleDismiss}
         aria-label='Lukk banner'
-        className='absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-1 text-neutral-400 transition-colors hover:bg-neutral-700 hover:text-white'
+        className='absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-2 text-red-200/80 transition-colors hover:bg-red-950/50 hover:text-white'
       >
         <XIcon className='h-4 w-4 cursor-pointer' />
       </button>
