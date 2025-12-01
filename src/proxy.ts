@@ -9,7 +9,37 @@ export const config = {
   ]
 }
 
+const BLOCKED_USER_AGENTS = [
+  'python-httpx',
+  'python-requests',
+  'aiohttp',
+  'scrapy',
+  'curl',
+  'wget'
+]
+
+const SENSITIVE_PATHS_REGEX =
+  /\.(env|git|config|aws|yml|yaml|sql|bak|backup|key|secret)|^\/admin/i
+
 export function proxy(request: NextRequest) {
+  const userAgent = request.headers.get('user-agent')?.toLowerCase() || ''
+  const { pathname } = request.nextUrl
+
+  const isBlockedAgent = BLOCKED_USER_AGENTS.some(agent =>
+    userAgent.includes(agent)
+  )
+
+  if (isBlockedAgent) {
+    return new NextResponse(null, { status: 403, statusText: 'Forbidden' })
+  }
+
+  // 2. SIKKERHET: Blokker tilgang til sensitive filtyper som ikke skal være offentlige
+  // Sjekker om stien inneholder mistenkelige endelser/mønstre, men ignorerer lovlige ruter
+  if (SENSITIVE_PATHS_REGEX.test(pathname)) {
+    return new NextResponse(null, { status: 403, statusText: 'Forbidden' })
+  }
+
+  // 3. EKSISTERENDE LOGIKK (Facebook & Email Hashing)
   const response = NextResponse.next()
   const fbclid = request.nextUrl.searchParams.get('fbclid')
   const rawEmail = request.nextUrl.searchParams.get('user_email')
@@ -31,6 +61,7 @@ export function proxy(request: NextRequest) {
       console.log('[Proxy] Captured and hashed user_email from URL')
     }
   }
+
   if (fbclid) {
     if (process.env.NODE_ENV === 'production') {
       console.log(`[Proxy] Captured fbclid from URL: ${fbclid}`)
