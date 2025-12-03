@@ -38,6 +38,9 @@ export async function syncProductsToMetaCatalog() {
 
   for (const product of products) {
     if (product.status !== 'ACTIVE') continue
+
+    // 1. Hent kategori fra Shopify (Standard Taxonomy)
+    // Fallback til productType hvis kategorien mangler
     const shopifyCategory =
       product.productCategory?.productTaxonomyNode?.fullName
     const googleProductCategory =

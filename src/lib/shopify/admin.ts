@@ -11,7 +11,7 @@ const SHOPIFY_GRAPHQL_URL = `https://${SHOPIFY_STORE_DOMAIN}/admin/api/${API_VER
 export async function getAllProductsForMetaSync() {
   const query = `
     query getAllProducts {
-      products(first: 25) {
+      products(first: 250) {
         edges {
           node {
             id
@@ -35,7 +35,7 @@ export async function getAllProductsForMetaSync() {
               name
               values
             }
-            variants(first: 30) {
+            variants(first: 100) {
               edges {
                 node {
                   id
