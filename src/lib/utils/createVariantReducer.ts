@@ -28,7 +28,7 @@ export function createVariantReducer(product: ShopifyProduct) {
           value: event.value
         })
 
-        return newVariant ? { status: 'selected', variant: newVariant } : state // Returner gammel state ved 'notfound'
+        return newVariant ? { status: 'selected', variant: newVariant } : state
       }
       case 'syncFromId': {
         const all = flattenVariants(product).filter(

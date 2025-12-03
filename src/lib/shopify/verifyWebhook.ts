@@ -1,12 +1,5 @@
 import crypto from 'crypto'
 
-/**
- * Verifiserer Shopify webhooks med HMAC-signatur
- *
- * @param rawBody - rå request body som string (ikke JSON-parset)
- * @param hmacHeader - header: "x-shopify-hmac-sha256"
- * @returns boolean
- */
 export function verifyShopifyWebhook(
   rawBody: string,
   hmacHeader: string

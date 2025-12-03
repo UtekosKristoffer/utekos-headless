@@ -1,3 +1,5 @@
+// Path: src/components/ProductCard/ProductVariantSelector.tsx
+
 import { SizeLabel } from '@/components/ProductCard/SizeLabel'
 import type { ProductVariantSelectorProps } from '@types'
 

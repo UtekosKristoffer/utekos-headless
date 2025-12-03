@@ -1,8 +1,8 @@
-// Path: src/app/produkter/[handle]/ProductPageView/components/ProductPageAccordion.tsx
+// Path: src/app/produkter/[handle]/ProductPageAccordion/ProductDetailsAccordionSection.tsx
 'use client'
 
 import { AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import type { AccordionSectionData, UserData, CustomData } from '@types'
+import type { AccordionSectionData, MetaUserData, CustomData } from '@types'
 import { colorHexByTextClass } from './colorHexByTextClass'
 import { AccordionContentRenderer } from './AccordionContentRenderer'
 import { generateEventID } from '@/components/jsx/CheckoutButton/generateEventID'
@@ -37,7 +37,7 @@ export function ProductDetailsAccordionSection({
       })
     }
 
-    const userData: UserData = {}
+    const userData: MetaUserData = {}
     if (externalId) userData.external_id = externalId
     if (fbc) userData.fbc = fbc
     if (fbp) userData.fbp = fbp
@@ -47,7 +47,7 @@ export function ProductDetailsAccordionSection({
       eventId: eventID,
       eventSourceUrl: sourceUrl,
       eventData: customData,
-      userData
+      userData: userData
     }
 
     sendJSON('/api/meta-events', capiPayload)

@@ -2,16 +2,7 @@
 import { NextRequest, NextResponse, connection } from 'next/server'
 import { redisPush, redisList, redisTrim } from '@/lib/redis'
 import crypto from 'crypto'
-
-type LogPayload = {
-  event: string
-  level?: 'info' | 'warn' | 'error'
-  data?: Record<string, unknown>
-  context?: {
-    cartId?: string
-    path?: string
-  }
-}
+import type { LogPayload } from '@types'
 
 export async function GET() {
   await connection()

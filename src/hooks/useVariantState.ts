@@ -1,12 +1,17 @@
+// Path: src/hooks/useVariantState.ts
+
 /*eslint-disable react-hooks/exhaustive-deps*/
 
 import { createVariantReducer } from '@/lib/utils/createVariantReducer'
 import { flattenVariants } from '@/lib/utils/flattenVariants'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import { useEffect, useReducer } from 'react'
 import type { ShopifyProduct } from '@types'
-
-export function useVariantState(product: ShopifyProduct | undefined) {
+import type { Route } from 'next'
+export function useVariantState(
+  product: ShopifyProduct | undefined,
+  enableUrlSync: boolean = true
+) {
   const variantReducer = product ? createVariantReducer(product) : null
 
   const [variantState, dispatch] = useReducer(
@@ -15,17 +20,22 @@ export function useVariantState(product: ShopifyProduct | undefined) {
   )
 
   const allVariants = product ? flattenVariants(product) || [] : []
+
   const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const router = useRouter()
+
   const variantIdFromUrl = searchParams.get('variant')
 
   useEffect(() => {
     if (!product || !variantReducer) return
     if (variantState.status !== 'idle' || !allVariants.length) return
 
-    const variantFromUrl =
-      variantIdFromUrl ?
-        allVariants.find(v => v.id === variantIdFromUrl)
-      : undefined
+    let variantFromUrl = undefined
+
+    if (enableUrlSync && variantIdFromUrl) {
+      variantFromUrl = allVariants.find(v => v.id === variantIdFromUrl)
+    }
 
     if (variantFromUrl) {
       dispatch({ type: 'syncFromId', id: variantFromUrl.id })
@@ -39,9 +49,27 @@ export function useVariantState(product: ShopifyProduct | undefined) {
     allVariants,
     variantIdFromUrl,
     product,
-    variantReducer
+    variantReducer,
+    enableUrlSync
   ])
 
+  useEffect(() => {
+    if (!enableUrlSync) return
+
+    if (variantState.status === 'selected' && variantState.variant) {
+      const currentId = searchParams.get('variant')
+      const newId = variantState.variant.id
+
+      if (currentId !== newId) {
+        const params = new URLSearchParams(searchParams.toString())
+        params.set('variant', newId)
+
+        const nextUrl = `${pathname}?${params.toString()}` as Route
+
+        router.replace(nextUrl, { scroll: false })
+      }
+    }
+  }, [variantState, pathname, router, searchParams, enableUrlSync])
   function updateVariant(optionName: string, value: string) {
     if (variantReducer) {
       dispatch({ type: 'updateFromOptions', optionName, value })

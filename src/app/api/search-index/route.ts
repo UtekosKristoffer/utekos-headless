@@ -1,3 +1,5 @@
+// Path: src/app/api/search-index/route.ts
+
 import sitemap from '@/app/sitemap'
 import { buildSearchIndex } from '@/lib/helpers/search'
 import type { MetadataRoute } from 'next'

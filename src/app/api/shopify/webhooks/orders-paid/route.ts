@@ -1,91 +1,35 @@
-// Path: src/app/api/shopify/webhooks/order-paid/route.ts
-
+// Path: src/app/api/shopify/webhooks/orders-paid/route.ts
 import { NextResponse } from 'next/server'
 import { verifyShopifyWebhook } from '@/lib/shopify/verifyWebhook'
-import { redisGet, redisPush, redisTrim } from '@/lib/redis'
-import crypto from 'crypto'
-
-const bizSdk = require('facebook-nodejs-business-sdk')
-const {
+import { redisGet } from '@/lib/redis'
+import type { CheckoutAttribution, OrderPaid } from '@types'
+import { safeString } from '@/lib/utils/safeString'
+import { normalizePhone } from '@/lib/utils/normalizePhone'
+import { logToAppLogs } from '@/lib/utils/logToAppLogs'
+import {
+  FacebookAdsApi,
   ServerEvent,
   EventRequest,
   UserData,
   CustomData,
-  Content,
-  FacebookAdsApi
-} = bizSdk
+  Content
+} from 'facebook-nodejs-business-sdk'
 
-const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
 const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
-
-if (!PIXEL_ID) throw new Error('Missing NEXT_PUBLIC_META_PIXEL_ID')
-if (!ACCESS_TOKEN) throw new Error('Missing META_ACCESS_TOKEN')
-
-FacebookAdsApi.init(ACCESS_TOKEN)
-
-interface UserDataStored {
-  fbp?: string
-  fbc?: string
-  external_id?: string
-  client_user_agent?: string
-  client_ip_address?: string
-}
-
-interface CheckoutAttribution {
-  cartId: string | null
-  checkoutUrl: string
-  userData: UserDataStored
-  ts: number
-  eventId?: string
-}
-
-function safeString(val: any): string | undefined {
-  if (!val) return undefined
-  const s = String(val).trim()
-  return s.length > 0 ? s : undefined
-}
-
-function normalizePhone(phone: string | undefined): string | undefined {
-  if (!phone) return undefined
-  return phone.replace(/[^0-9]/g, '')
-}
-
-async function logToAppLogs(
-  level: 'INFO' | 'WARN' | 'ERROR',
-  event: string,
-  identity: any,
-  context: any,
-  data: any
-) {
-  try {
-    const logEntry = {
-      id: crypto.randomUUID(),
-      timestamp: new Date().toISOString(),
-      level,
-      event,
-      identity: {
-        ip: identity.ip,
-        fbp: identity.fbp,
-        fbc: identity.fbc,
-        externalId: identity.externalId,
-        userAgent: identity.userAgent
-      },
-      context,
-      data
-    }
-
-    // Print til Vercel/Server log
-    console.log(`[${level}] ${event}`, JSON.stringify(logEntry))
-
-    // Lagre til Redis (samme liste som klient-loggingen)
-    await redisPush('app_logs', logEntry)
-    await redisTrim('app_logs', 0, 999)
-  } catch (e) {
-    console.error('Failed to write to app_logs:', e)
-  }
-}
+const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
+const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE
 
 export async function POST(request: Request) {
+  if (!ACCESS_TOKEN || !PIXEL_ID) {
+    console.error(
+      '[Meta CAPI] Critical: Missing META_ACCESS_TOKEN or PIXEL_ID.'
+    )
+    return NextResponse.json(
+      { error: 'Server configuration error' },
+      { status: 500 }
+    )
+  }
+
   const hmac = request.headers.get('x-shopify-hmac-sha256') ?? ''
   const rawBody = await request.text()
 
@@ -98,15 +42,20 @@ export async function POST(request: Request) {
     )
   }
 
-  let order: any
+  let order: OrderPaid
   try {
-    order = JSON.parse(rawBody)
+    order = JSON.parse(rawBody) as OrderPaid
   } catch {
     console.error('[Meta CAPI] Failed to parse JSON body')
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  console.log(`[Meta CAPI] Processing Order: ${order.id || 'Unknown ID'}`)
+  const api = FacebookAdsApi.init(ACCESS_TOKEN)
+  if (process.env.NODE_ENV === 'development') {
+    api.setDebug(true)
+  }
+
+  console.log(`[Meta CAPI] Processing Order: ${order.id}`)
 
   let redisData: CheckoutAttribution | null = null
   const cartToken = safeString(order.cart_token)
@@ -131,99 +80,90 @@ export async function POST(request: Request) {
   }
 
   const userData = new UserData()
+
   const email =
     safeString(order.email)
     || safeString(order.contact_email)
     || safeString(order.customer?.email)
-
   if (email) {
-    userData.setEmails([email.toLowerCase()])
-  } else {
-    console.warn('[Meta CAPI] WARNING: No email found in order object')
+    userData.setEmail(email.toLowerCase())
   }
 
   const phone = normalizePhone(
-    order.phone
-      || order.customer?.phone
-      || order.shipping_address?.phone
-      || order.billing_address?.phone
+    safeString(
+      order.phone
+        || order.customer?.phone
+        || order.shipping_address?.phone
+        || order.billing_address?.phone
+    )
   )
   if (phone) {
-    userData.setPhones([phone])
+    userData.setPhone(phone)
   }
 
   const externalId =
     redisData?.userData?.external_id
     || safeString(order.customer?.id)
     || safeString(order.user_id)
-
   if (externalId) {
-    userData.setExternalIds([externalId])
+    userData.setExternalId(externalId)
   }
 
   const addr =
     order.shipping_address
-    || order.billing_address
-    || order.customer?.default_address
-    || {}
+    ?? order.billing_address
+    ?? order.customer?.default_address
 
-  if (addr.first_name || order.customer?.first_name) {
-    userData.setFirstNames([
-      safeString(addr.first_name || order.customer?.first_name)
-    ])
-  }
-  if (addr.last_name || order.customer?.last_name) {
-    userData.setLastNames([
-      safeString(addr.last_name || order.customer?.last_name)
-    ])
-  }
-  if (addr.city) {
+  if (addr) {
+    const firstName = safeString(addr.first_name)
+    if (firstName) userData.setFirstName(firstName)
+
+    const lastName = safeString(addr.last_name)
+    if (lastName) userData.setLastName(lastName)
+
     const city = safeString(addr.city)
-    if (city) userData.setCities([city.toLowerCase()])
-  }
-  if (addr.province_code) {
-    const provinceCode = safeString(addr.province_code)
-    if (provinceCode) userData.setStates([provinceCode.toLowerCase()])
-  }
-  if (addr.zip) userData.setZips([safeString(addr.zip)])
-  if (addr.country_code) {
-    const countryCode = safeString(addr.country_code)
-    if (countryCode) userData.setCountries([countryCode.toLowerCase()])
+    if (city) userData.setCity(city.toLowerCase())
+
+    const state = safeString(addr.province_code)
+    if (state) userData.setState(state.toLowerCase())
+
+    const zip = safeString(addr.zip)
+    if (zip) userData.setZip(zip)
+
+    const country = safeString(addr.country_code)
+    if (country) userData.setCountry(country.toLowerCase())
   }
 
-  // 5. Technical identifiers
   const clientIp =
-    redisData?.userData?.client_ip_address
-    || safeString(order.browser_ip || order.client_ip)
-
+    redisData?.userData?.client_ip_address || safeString(order.browser_ip)
   if (clientIp) userData.setClientIpAddress(clientIp)
 
+  const clientDetails = order.client_details as Record<string, unknown> | null
   const userAgent =
     redisData?.userData?.client_user_agent
-    || safeString(order.user_agent || order.client_details?.user_agent)
-
+    || safeString(clientDetails?.user_agent)
   if (userAgent) userData.setClientUserAgent(userAgent)
 
-  // 6. Click Identifiers
   let fbp = redisData?.userData?.fbp
   let fbc = redisData?.userData?.fbc
 
-  if (order.note_attributes && Array.isArray(order.note_attributes)) {
-    const fbpAttr = order.note_attributes.find((a: any) => a.name === '_fbp')
-    const fbcAttr = order.note_attributes.find((a: any) => a.name === '_fbc')
+  if (!fbp && order.note_attributes && order.note_attributes.length > 0) {
+    const fbpAttr = order.note_attributes.find(a => a.name === '_fbp')
+    if (fbpAttr?.value) fbp = fbpAttr.value
+  }
 
-    if (!fbp && fbpAttr && fbpAttr.value) fbp = fbpAttr.value
-    if (!fbc && fbcAttr && fbcAttr.value) fbc = fbcAttr.value
+  if (!fbc && order.note_attributes && order.note_attributes.length > 0) {
+    const fbcAttr = order.note_attributes.find(a => a.name === '_fbc')
+    if (fbcAttr?.value) fbc = fbcAttr.value
   }
 
   if (fbp) userData.setFbp(fbp)
   if (fbc) userData.setFbc(fbc)
 
-  // Content
-  const contentList: (typeof Content)[] = []
+  const contentList: Content[] = []
   const contentIds: string[] = []
 
-  if (order.line_items && Array.isArray(order.line_items)) {
+  if (order.line_items && order.line_items.length > 0) {
     for (const item of order.line_items) {
       const id = safeString(item.variant_id) || safeString(item.product_id)
       if (!id) continue
@@ -241,25 +181,25 @@ export async function POST(request: Request) {
   }
 
   const customData = new CustomData()
-    .setCurrency(safeString(order.currency) || 'NOK')
-    .setValue(Number(order.total_price || 0))
-    .setContents(contentList)
-    .setContentIds(contentIds)
-    .setContentType('product')
 
-  if (order.id) {
-    customData.setOrderId(safeString(order.id))
+  const currency = safeString(order.currency) || 'NOK'
+  customData.setCurrency(currency)
+
+  const value = Number(order.total_price || 0)
+  customData.setValue(value)
+
+  customData.setContents(contentList)
+  customData.setContentIds(contentIds)
+  customData.setContentType('product')
+
+  const orderIdStr = safeString(order.id)
+  if (orderIdStr) {
+    customData.setOrderId(orderIdStr)
   }
 
-  // FIX: Prioriter order.id for å matche nettleserens (Browser Pixel) logikk.
-  // Nettleseren sender "shopify_order_{id}".
-  // redisData.eventId inneholder ofte "ic_..." (InitiateCheckout) som skaper mismatch.
-  const eventId =
-    order.id ?
-      `shopify_order_${order.id}`
-    : redisData?.eventId || `purchase_${Date.now()}`
+  const eventId = `shopify_order_${order.id}`
 
-  const event = new ServerEvent()
+  const serverEvent = new ServerEvent()
     .setEventName('Purchase')
     .setEventTime(Math.floor(Date.now() / 1000))
     .setActionSource('website')
@@ -274,34 +214,22 @@ export async function POST(request: Request) {
 
   try {
     const eventRequest = new EventRequest(ACCESS_TOKEN, PIXEL_ID).setEvents([
-      event
+      serverEvent
     ])
+
+    if (TEST_EVENT_CODE) {
+      eventRequest.setTestEventCode(TEST_EVENT_CODE)
+    }
 
     const response = await eventRequest.execute()
 
-    // --- NY LOGGING HER ---
     await logToAppLogs(
       'INFO',
       'Purchase Processed (CAPI)',
-      {
-        ip: clientIp,
-        fbp: fbp,
-        fbc: fbc,
-        externalId: externalId,
-        userAgent: userAgent
-      },
-      {
-        orderId: String(order.id),
-        eventId: eventId,
-        checkoutUrl: redisData?.checkoutUrl
-      },
-      {
-        value: Number(order.total_price),
-        currency: safeString(order.currency),
-        fbTraceId: response.fbtrace_id
-      }
+      { ip: clientIp, fbp, fbc, externalId, userAgent },
+      { orderId: String(order.id), eventId },
+      { value: Number(order.total_price), fbTraceId: response.fbtrace_id }
     )
-    // ---------------------
 
     return NextResponse.json({
       success: true,
@@ -315,11 +243,10 @@ export async function POST(request: Request) {
       JSON.stringify(errorResponse, null, 2)
     )
 
-    // Logg feilen også til Redis
     await logToAppLogs(
       'ERROR',
       'Purchase CAPI Failed',
-      { ip: clientIp, fbp, fbc, externalId, userAgent },
+      { ip: clientIp, fbp, fbc },
       { orderId: String(order.id) },
       { error: errorResponse }
     )

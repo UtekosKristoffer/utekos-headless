@@ -1,3 +1,5 @@
+// Path: src/app/gaveguide/page.tsx
+
 import type { Metadata } from 'next'
 import { ProductCarousel } from '@/app/gaveguide/components/ProductCardCarousel'
 import { TrustSection } from './components/TrustSection'

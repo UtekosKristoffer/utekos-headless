@@ -1,3 +1,5 @@
+// Path: src/lib/fragments/productFragment.ts
+
 import seo from './seoFragment'
 const product = /* GraphQL */ `
   fragment product on Product {

@@ -1,4 +1,7 @@
+// Path: src/app/produkter/[handle]/ProductJsonLd.tsx
 import { getProduct } from '@/api/lib/products/getProduct'
+import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
+import { computeVariantImages } from '@/lib/utils/computeVariantImages'
 import type {
   ProductGroup,
   Product as ProductSchema,
@@ -17,8 +20,10 @@ const mapAvailability = (availableForSale: boolean) =>
   : 'https://schema.org/OutOfStock'
 
 export async function ProductJsonLd({ handle }: Props) {
-  const product = await getProduct(handle)
-  if (!product) return null
+  const rawProduct = await getProduct(handle)
+  if (!rawProduct) return null
+
+  const product = reshapeProductWithMetafields(rawProduct) || rawProduct
 
   const priceValidUntil = new Date(
     new Date().setFullYear(new Date().getFullYear() + 1)
@@ -28,7 +33,9 @@ export async function ProductJsonLd({ handle }: Props) {
 
   const variants = product.variants.edges
   const isProductGroup = variants.length > 0
-  const featuredImage = product.featuredImage?.url
+
+  const defaultImages = computeVariantImages(product, null)
+  const featuredImage = defaultImages[0]?.url || product.featuredImage?.url
 
   const merchantReturnPolicy: MerchantReturnPolicy = {
     '@type': 'MerchantReturnPolicy',
@@ -64,13 +71,15 @@ export async function ProductJsonLd({ handle }: Props) {
       'productGroupID': product.id,
       'url': `https://utekos.no/produkter/${product.handle}`,
       'hasVariant': variants.map(({ node: variant }): ProductSchema => {
+        const variantImages = computeVariantImages(product, variant)
+        const variantImage = variantImages[0]?.url || featuredImage
+
         const variantPrice =
           variant.price?.amount ? String(variant.price.amount) : null
-        const variantImage = variant.image?.url || featuredImage
 
         const offer: Offer = {
           '@type': 'Offer',
-          'url': `https://utekos.no/produkter/${product.handle}?variant=${variant.id}`,
+          'url': `https://utekos.no/produkter/${product.handle}?variant=${encodeURIComponent(variant.id)}`,
           'priceCurrency': variant.price?.currencyCode || 'NOK',
           'availability': mapAvailability(variant.availableForSale),
           'priceValidUntil': priceValidUntil,

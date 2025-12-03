@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2024",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "es2024"
-    ],
+    "lib": ["dom", "dom.iterable", "es2024"],
     "allowJs": false,
     "skipLibCheck": true,
     "strict": true,
@@ -29,18 +25,10 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@types": [
-        "./types/index.ts"
-      ],
-      "@types/*": [
-        "./types/*"
-      ],
-      "@public/*": [
-        "./public/*"
-      ]
+      "@/*": ["./src/*"],
+      "@types": ["./types/index.ts"],
+      "@types/*": ["./types/*"],
+      "@public/*": ["./public/*"]
     }
   },
   "include": [
@@ -51,18 +39,15 @@
     "**/*.graphql",
     "src/lib/queries/graphql.d.ts",
     ".next/types/**/*.ts",
-    "src/lib/errors",
     "types/**/*.d.ts",
+    "src/lib/errors",
     "src/api/types/event",
     "src/api/types/state",
     "src/components/WelcomeToast",
     "src/db/config",
     "src/components/ProductCard/ProductCarousel.tsx",
-    ".next/dev/types/**/*.ts"
-, "src/components/cookie-consent"  ],
-  "exclude": [
-    "node_modules",
-    ".github/**/*",
-    "alpha/**/*"
-  ]
+    ".next/dev/types/**/*.ts",
+    "src/components/cookie-consent"
+  ],
+  "exclude": ["node_modules", ".github/**/*", "alpha/**/*", "docs/**/*"]
 }

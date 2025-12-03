@@ -15,7 +15,7 @@ import { generateEventID } from '@/components/jsx/CheckoutButton/generateEventID
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { Activity } from 'react'
 import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
-import type { UserData, CustomData } from '@types'
+import type { MetaUserData, CustomData } from '@types'
 
 const productName = 'Utekos TechDown™'
 const productHandle = 'utekos-techdown'
@@ -47,7 +47,7 @@ export function NewProductLaunchSection() {
       window.fbq('trackCustom', 'HeroInteract', customData, { eventID })
     }
 
-    const userData: UserData = {}
+    const userData: MetaUserData = {}
     if (externalId) userData.external_id = externalId
     if (fbc) userData.fbc = fbc
     if (fbp) userData.fbp = fbp
@@ -84,7 +84,7 @@ export function NewProductLaunchSection() {
       window.fbq('trackCustom', 'OpenQuickView', customData, { eventID })
     }
 
-    const userData: UserData = {}
+    const userData: MetaUserData = {}
     if (externalId) userData.external_id = externalId
     if (fbc) userData.fbc = fbc
     if (fbp) userData.fbp = fbp

@@ -6,7 +6,7 @@ export async function ProductListJsonLd() {
   const response = await getProducts()
 
   if (!response.success || !response.body || response.body.length === 0) {
-    return null
+    return null 
   }
 
   const products = response.body

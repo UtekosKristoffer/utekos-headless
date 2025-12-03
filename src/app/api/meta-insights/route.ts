@@ -1,3 +1,5 @@
+// Path: src/app/api/meta-insights/route.ts
+
 import { NextRequest, NextResponse } from 'next/server'
 
 const bizSdk = require('facebook-nodejs-business-sdk')

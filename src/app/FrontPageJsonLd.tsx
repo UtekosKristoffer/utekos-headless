@@ -1,4 +1,5 @@
 // Path: src/app/FrontPageJsonLd.tsx
+
 import type { WebSite, VideoObject, WithContext } from 'schema-dts'
 import { cacheLife } from 'next/cache' // <--- Import
 export const VIDEO_URL = 'https://utekos.no/videos/TensorPix2.mp4'

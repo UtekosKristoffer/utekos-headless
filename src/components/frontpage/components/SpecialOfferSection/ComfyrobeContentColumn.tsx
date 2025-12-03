@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils/className'
 import { generateEventID } from '@/components/jsx/CheckoutButton/generateEventID'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
-import type { UserData } from '@types'
+import type { MetaUserData } from '@types'
 
 const benefits = [
   {
@@ -46,7 +46,7 @@ const handleCtaClick = () => {
     window.fbq('trackCustom', 'HeroInteract', customData, { eventID })
   }
 
-  const userData: UserData = {}
+  const userData: MetaUserData = {}
   if (externalId) userData.external_id = externalId
   if (fbc) userData.fbc = fbc
   if (fbp) userData.fbp = fbp

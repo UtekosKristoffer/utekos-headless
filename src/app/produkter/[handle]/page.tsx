@@ -16,51 +16,79 @@ import { ProductPageController } from '@/app/produkter/[handle]/ProductPageContr
 import type { Metadata, ResolvingMetadata } from 'next'
 import { connection } from 'next/server'
 import { getCachedRelatedProducts } from '@/api/lib/products/getCachedRelatedProducts'
+import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
+import { flattenVariants } from '@/lib/utils/flattenVariants'
+import { computeVariantImages } from '@/lib/utils/computeVariantImages'
+
 type RouteParamsPromise = Promise<{ handle: string }>
+type SearchParamsPromise = Promise<{
+  [key: string]: string | string[] | undefined
+}>
 
 type GenerateMetadataProps = {
   params: RouteParamsPromise
+  searchParams: SearchParamsPromise
 }
 
 export async function generateMetadata(
-  { params }: GenerateMetadataProps,
+  { params, searchParams }: GenerateMetadataProps,
   _parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { handle } = await params
+  const resolvedSearchParams = await searchParams
+  const variantId = resolvedSearchParams?.variant as string | undefined
 
-  const product = await getProduct(handle)
+  const rawProduct = await getProduct(handle)
 
-  if (!product) {
+  if (!rawProduct) {
     return {
       title: 'Produkt ikke funnet',
       description: 'Dette produktet er dessverre ikke tilgjengelig.'
     }
   }
 
-  const seoTitle = product.seo.title || product.title
+  const product = reshapeProductWithMetafields(rawProduct) || rawProduct
+
+  // 3. Finn aktiv variant basert på URL
+  let activeVariant = null
+  if (variantId) {
+    const allVariants = flattenVariants(product) || []
+    activeVariant = allVariants.find(v => v.id === variantId)
+  }
+
+  const variantImages = computeVariantImages(product, activeVariant ?? null)
+  const displayImage =
+    variantImages[0]?.url || product.featuredImage?.url || '/og-image.jpg'
+
+  const seoTitle =
+    activeVariant?.title ?
+      `${product.title} - ${activeVariant.title}`
+    : product.seo.title || product.title
+
   const seoDescription = product.seo.description || product.description
-  const imageUrl = product.featuredImage?.url || '/og-image.jpg'
+
+  const canonicalUrl = `/produkter/${handle}${activeVariant ? `?variant=${activeVariant.id}` : ''}`
 
   return {
     metadataBase: new URL('https://utekos.no'),
     title: seoTitle,
     description: seoDescription,
     alternates: {
-      canonical: `/produkter/${handle}`
+      canonical: canonicalUrl
     },
     openGraph: {
       type: 'website',
       locale: 'no_NO',
-      url: `/produkter/${handle}`,
+      url: canonicalUrl,
       siteName: 'Utekos',
       title: seoTitle,
       description: seoDescription,
       images: [
         {
-          url: imageUrl,
+          url: displayImage,
           width: 1200,
           height: 630,
-          alt: product.title
+          alt: seoTitle
         }
       ]
     },
@@ -68,7 +96,7 @@ export async function generateMetadata(
       card: 'summary_large_image',
       title: seoTitle,
       description: seoDescription,
-      images: [imageUrl]
+      images: [displayImage]
     }
   }
 }

@@ -1,4 +1,3 @@
-// Path: src/components/cart/AddToCart.tsx
 'use client'
 
 import { Form } from '@/components/ui/form'
@@ -16,18 +15,25 @@ import type {
   CartMutationEvent,
   ShopifyProduct,
   ShopifyProductVariant,
-  CustomData,
-  UserData
+  MetaUserData,
+  MetaEventPayload,
+  MetaContentItem
 } from '@types'
-import { Activity } from 'react'
-import { useContext, useEffect, useTransition } from 'react'
+import { Activity, useContext, useEffect, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import type { ActorRef, StateFrom } from 'xstate'
 import { ModalSubmitButton } from '../AddToCartButton/ModalSubmitButton'
 import { QuantitySelector } from '../QuantitySelector'
 import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
-import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
+
+function getCookie(name: string): string | null {
+  if (typeof document === 'undefined') return null
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop()?.split(';').shift() || null
+  return null
+}
 
 export function AddToCart({
   product,
@@ -81,6 +87,7 @@ export function AddToCart({
 
     startTransition(async () => {
       try {
+        // ... (Cart mutation logic unchanged) ...
         const linesToProcess = [
           { variantId: values.variantId, quantity: values.quantity }
         ]
@@ -102,32 +109,24 @@ export function AddToCart({
           )
         }
 
+        // ... (Discount logic unchanged) ...
         if (additionalLine) {
           await new Promise(resolve => setTimeout(resolve, 500))
-
           try {
             const cartId = contextCartId || (await getCartIdFromCookie())
-            if (cartId) {
-              await applyDiscount(cartId, 'GRATISBUFF')
-            } else {
-              console.warn('Kunne ikke hente cartId for å legge til rabatt.')
-            }
-          } catch (discountError) {
-            if (
-              !(
-                discountError instanceof Error
-                && discountError.message.includes('already applied')
-              )
-            ) {
-              console.error('Kunne ikke legge til rabattkode:', discountError)
-            }
+            if (cartId) await applyDiscount(cartId, 'GRATISBUFF')
+          } catch (e) {
+            console.error(e)
           }
         }
+
+        // --- SPORING ---
         const basePrice = Number.parseFloat(selectedVariant.price.amount)
         const currency = selectedVariant.price.currencyCode
         let totalQty = values.quantity
 
-        const contents: CustomData['contents'] = [
+        // Bruker MetaContentItem typen strengt
+        const contents: MetaContentItem[] = [
           {
             id: selectedVariant.id.toString(),
             quantity: values.quantity,
@@ -140,7 +139,8 @@ export function AddToCart({
         if (additionalLine) {
           contents.push({
             id: additionalLine.variantId.toString(),
-            quantity: additionalLine.quantity
+            quantity: additionalLine.quantity,
+            item_price: 0
           })
           contentIds.push(additionalLine.variantId.toString())
           totalQty += additionalLine.quantity
@@ -150,17 +150,21 @@ export function AddToCart({
         const value = basePrice * values.quantity
         const eventID = `atc_${selectedVariant.id}_${Date.now()}`
 
-        if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
-          const fbqParams = {
-            contents,
-            content_type: 'product' as const,
-            value,
-            currency,
-            content_ids: contentIds,
-            content_name: contentName,
-            num_items: totalQty
-          }
-          window.fbq('track', 'AddToCart', fbqParams, { eventID })
+        if (typeof window !== 'undefined' && window.fbq) {
+          window.fbq(
+            'track',
+            'AddToCart',
+            {
+              content_name: contentName,
+              content_ids: contentIds,
+              content_type: 'product',
+              contents: contents,
+              value: value,
+              currency: currency,
+              num_items: totalQty
+            },
+            { eventID }
+          )
         }
 
         const ua =
@@ -170,19 +174,21 @@ export function AddToCart({
         const externalId = getCookie('ute_ext_id')
         const emailHash = getCookie('ute_user_hash')
 
-        const userData: UserData = {
-          ...(ua && { client_user_agent: ua }),
-          ...(fbp && { fbp }),
-          ...(fbc && { fbc }),
-          ...(externalId && { external_id: externalId }),
-          ...(emailHash && { email_hash: emailHash })
+        const userData: MetaUserData = {
+          client_user_agent: ua,
+          fbp: fbp || undefined,
+          fbc: fbc || undefined,
+          external_id: externalId || undefined,
+          email_hash: emailHash || undefined
         }
 
-        const capiPayload = {
+        const capiPayload: MetaEventPayload = {
           eventName: 'AddToCart',
           eventId: eventID,
           eventSourceUrl:
             typeof window !== 'undefined' ? window.location.href : '',
+          eventTime: Math.floor(Date.now() / 1000),
+          userData,
           eventData: {
             value,
             currency,
@@ -191,16 +197,12 @@ export function AddToCart({
             content_type: 'product',
             content_ids: contentIds,
             num_items: totalQty
-          },
-          userData
+          }
         }
 
         sendJSON('/api/meta-events', capiPayload)
 
-        if (
-          typeof window !== 'undefined'
-          && typeof window.dataLayer !== 'undefined'
-        ) {
+        if (typeof window !== 'undefined' && window.dataLayer) {
           const ga4Items = [
             {
               item_id: selectedVariant.id.toString(),
@@ -210,6 +212,7 @@ export function AddToCart({
               quantity: values.quantity
             }
           ]
+
           if (additionalLine) {
             ga4Items.push({
               item_id: additionalLine.variantId.toString(),
@@ -219,6 +222,7 @@ export function AddToCart({
               quantity: additionalLine.quantity
             })
           }
+
           window.dataLayer.push({
             event: 'add_to_cart',
             ecommerce: {

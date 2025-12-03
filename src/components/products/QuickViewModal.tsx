@@ -59,9 +59,9 @@ export function QuickViewModal({
 
   const [includeBuff, setIncludeBuff] = useState(true)
   const [selectedBuffColor, setSelectedBuffColor] = useState('Fjellblå')
-
   const { variantState, updateVariant } = useVariantState(
-    productData ?? undefined
+    productData ?? undefined,
+    false
   )
 
   const handleFetchError = useEffectEvent(() => {

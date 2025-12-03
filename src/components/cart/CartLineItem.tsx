@@ -24,6 +24,7 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { AlertDialogTitle } from './AlertDialogen'
 import { Activity } from 'react'
+
 interface CartLineItemProps {
   lineId: string
 }
@@ -90,10 +91,14 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
 
   const productTitle = line.merchandise.product?.title || 'Produkt'
   const productHandle = line.merchandise.product?.handle
-  const productUrl = (
-    productHandle ?
-      `/produkter/${productHandle}`
-    : '/') as Route
+
+  const variantId = line.merchandise.id
+  const baseUrl = productHandle ? `/produkter/${productHandle}` : '/'
+  const variantQuery =
+    variantId ? `?variant=${encodeURIComponent(variantId)}` : ''
+
+  const productUrl = `${baseUrl}${variantQuery}` as Route
+
   const variantTitle = line.merchandise.title || ''
   const imageUrl = line.merchandise.image?.url
   const [color, size] = variantTitle.split(' / ')

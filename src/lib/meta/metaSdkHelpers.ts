@@ -1,3 +1,5 @@
+// Path: src/lib/meta/metaSdkHelpers.ts
+
 import * as bizSdk from 'facebook-nodejs-business-sdk'
 export const {
   FacebookAdsApi,

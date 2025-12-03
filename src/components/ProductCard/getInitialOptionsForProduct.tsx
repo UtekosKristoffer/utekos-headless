@@ -1,3 +1,5 @@
+// Path: src/components/ProductCard/getInitialOptionsForProduct.tsx
+
 import { getInitialAvailableOptions } from './getInitialAvailableOptions'
 import type { ShopifyProduct } from '@types'
 import { FORCED_COLORS } from 'src/constants/forced-colors'

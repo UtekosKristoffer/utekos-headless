@@ -1,3 +1,4 @@
+// Path: src/app/magasinet/beredskap-egenomsorg/BeredskapsProductCarousel.tsx
 'use client'
 
 import { useQuery } from '@tanstack/react-query'

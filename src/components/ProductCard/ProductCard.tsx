@@ -45,7 +45,11 @@ export function ProductCard({
   const fallbackImage = product.featuredImage
 
   const price = formatPrice(selectedVariant?.price ?? fallbackPrice)
-  const productUrl = `/produkter/${product.handle}` as Route
+
+  const baseUrl = `/produkter/${product.handle}`
+  const variantQuery =
+    selectedVariant ? `?variant=${encodeURIComponent(selectedVariant.id)}` : ''
+  const productUrl = `${baseUrl}${variantQuery}` as Route
   const imageUrl =
     selectedVariant?.image?.url ?? fallbackImage?.url ?? '/placeholder.svg'
   const altText =

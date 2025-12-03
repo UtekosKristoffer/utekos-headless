@@ -26,6 +26,7 @@ declare global {
       queue?: unknown[]
     }
     _fbq?: Window['fbq']
+    dataLayer: Record<string, any>[]
     snaptr: {
       (method: 'init', pixelId: string, config?: Record<string, any>): void
       (method: 'track', event: string, params?: Record<string, any>): void

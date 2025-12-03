@@ -1,21 +1,7 @@
 // Path: src/components/analytics/MetaPixel/sendPageViewToCAPI.ts
 import { getPageViewParams } from './getPageViewParams'
 import { getCookie } from './getCookie'
-
-type PageViewPayload = {
-  eventName: 'PageView'
-  eventData: Record<string, unknown>
-  eventId: string
-  eventSourceUrl: string
-  eventTime: number
-  userData?: {
-    external_id?: string
-    fbc?: string
-    fbp?: string
-    client_user_agent?: string
-    email_hash?: string
-  }
-}
+import type { MetaEventPayload } from '@types'
 
 export async function sendPageViewToCAPI(
   pathname: string,
@@ -37,28 +23,19 @@ export async function sendPageViewToCAPI(
   try {
     const params = getPageViewParams(pathname, searchParams)
     const emailHash = getCookie('ute_user_hash')
-
-    const payload: PageViewPayload = {
+    const payload: MetaEventPayload = {
       eventName: 'PageView',
-      eventData: params,
       eventId,
       eventSourceUrl: window.location.href,
-      eventTime: Math.floor(Date.now() / 1000)
-    }
-
-    const userData: PageViewPayload['userData'] = {}
-
-    if (externalId) userData.external_id = externalId
-    if (fbc) userData.fbc = fbc
-    if (fbp) userData.fbp = fbp
-    if (emailHash) userData.email_hash = emailHash
-
-    if (typeof navigator !== 'undefined') {
-      userData.client_user_agent = navigator.userAgent
-    }
-
-    if (Object.keys(userData).length > 0) {
-      payload.userData = userData
+      eventTime: Math.floor(Date.now() / 1000),
+      userData: {
+        external_id: externalId || undefined,
+        fbc: fbc || undefined,
+        fbp: fbp || undefined,
+        email_hash: emailHash || undefined,
+        client_user_agent: navigator.userAgent
+      },
+      eventData: params
     }
 
     const response = await fetch('/api/meta-events', {
@@ -74,7 +51,6 @@ export async function sendPageViewToCAPI(
       try {
         errorJson = JSON.parse(errorText)
       } catch {
-        // Hvis parsing feiler, bruk råteksten
         errorJson = errorText
       }
 

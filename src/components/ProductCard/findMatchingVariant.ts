@@ -1,3 +1,5 @@
+// Path: 
+
 import type { ProductCardProps, ShopifyProductVariant } from '@types'
 
 export function findMatchingVariant(
