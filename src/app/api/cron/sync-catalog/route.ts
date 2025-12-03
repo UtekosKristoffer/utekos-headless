@@ -9,11 +9,7 @@ export async function GET(request: NextRequest) {
   const queryKey = searchParams.get('key')
 
   const cronSecret = process.env.CRON_SECRET
-
-  // 1. Sjekk Authorization header (Brukes av Vercel Cron automatisk)
   const isValidHeader = authHeader === `Bearer ${cronSecret}`
-
-  // 2. Sjekk Query Parameter (For manuell kjøring i nettleser)
   const isValidQuery = queryKey === cronSecret
 
   if (!cronSecret || (!isValidHeader && !isValidQuery)) {

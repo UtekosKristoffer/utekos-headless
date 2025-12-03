@@ -16,6 +16,7 @@ export async function getAllProductsForMetaSync() {
           node {
             id
             title
+            handle
             descriptionHtml
             vendor
             productType
