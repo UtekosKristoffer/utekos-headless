@@ -33,13 +33,10 @@ export function proxy(request: NextRequest) {
     return new NextResponse(null, { status: 403, statusText: 'Forbidden' })
   }
 
-  // 2. SIKKERHET: Blokker tilgang til sensitive filtyper som ikke skal være offentlige
-  // Sjekker om stien inneholder mistenkelige endelser/mønstre, men ignorerer lovlige ruter
   if (SENSITIVE_PATHS_REGEX.test(pathname)) {
     return new NextResponse(null, { status: 403, statusText: 'Forbidden' })
   }
 
-  // 3. EKSISTERENDE LOGIKK (Facebook & Email Hashing)
   const response = NextResponse.next()
   const fbclid = request.nextUrl.searchParams.get('fbclid')
   const rawEmail = request.nextUrl.searchParams.get('user_email')

@@ -1,3 +1,5 @@
+// Path: src/app/api/cron/sync-catalog/route.ts
+
 import { NextRequest, NextResponse } from 'next/server'
 import { syncProductsToMetaCatalog } from '@/lib/meta/catalogSync'
 

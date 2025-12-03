@@ -16,6 +16,16 @@ function cleanId(gid: string): string {
   return gid.split('/').pop() || gid
 }
 
+function getOptionValue(
+  options: any[],
+  nameToCheck: string[]
+): string | undefined {
+  const option = options.find((o: any) =>
+    nameToCheck.includes(o.name.toLowerCase())
+  )
+  return option ? option.value : undefined
+}
+
 export async function syncProductsToMetaCatalog() {
   console.log('[Meta Catalog] Starting sync...')
 
@@ -28,40 +38,77 @@ export async function syncProductsToMetaCatalog() {
 
   for (const product of products) {
     if (product.status !== 'ACTIVE') continue
+    const shopifyCategory =
+      product.productCategory?.productTaxonomyNode?.fullName
+    const googleProductCategory =
+      shopifyCategory || product.productType || 'Apparel & Accessories'
 
     for (const variantEdge of product.variants.edges) {
       const variant = variantEdge.node
       const variantId = cleanId(variant.id)
 
       const link = `${WEBSITE_BASE_URL}/produkter/${product.handle}?variant=${variantId}`
-
       const imageUrl = variant.image?.url || product.featuredImage?.url || ''
+
+      const brand = product.vendor || 'Utekos'
+      const mpn = variant.sku || variantId
+      const gtin = variant.barcode
+
+      const color = getOptionValue(variant.selectedOptions, [
+        'color',
+        'colour',
+        'farge',
+        'colour'
+      ])
+      const size = getOptionValue(variant.selectedOptions, [
+        'size',
+        'størrelse',
+        'str'
+      ])
+
+      const ageGroup = 'adult'
+      const gender = 'unisex'
+
+      const payloadData: any = {
+        id: variantId,
+        title: `${product.title} - ${variant.title}`,
+        description:
+          product.descriptionHtml ?
+            product.descriptionHtml.replace(/<[^>]*>?/gm, '').substring(0, 5000)
+          : product.title,
+        availability:
+          variant.inventoryQuantity > 0 ? 'in stock' : 'out of stock',
+        condition: 'new',
+        price: `${variant.price} NOK`,
+        link: link,
+        image_link: imageUrl,
+        brand: brand,
+        item_group_id: cleanId(product.id),
+
+        google_product_category: googleProductCategory,
+        age_group: ageGroup,
+        gender: gender,
+
+        // Formatet Meta krever: "1.5 kg"
+        ...(variant.weight && {
+          shipping_weight: `${variant.weight} ${variant.weightUnit.toLowerCase()}`
+        })
+      }
+
+      if (color) payloadData.color = color
+      if (size) payloadData.size = size
+      if (gtin) payloadData.gtin = gtin
+      if (mpn) payloadData.mpn = mpn
+
+      if (variant.compareAtPrice) {
+        payloadData.sale_price = `${variant.price} NOK`
+        payloadData.price = `${variant.compareAtPrice} NOK`
+      }
 
       batchRequests.push({
         method: 'UPDATE',
         retailer_id: variantId,
-        data: {
-          id: variantId,
-          title: `${product.title} - ${variant.title}`,
-          description:
-            product.descriptionHtml ?
-              product.descriptionHtml
-                .replace(/<[^>]*>?/gm, '')
-                .substring(0, 5000)
-            : product.title,
-          availability:
-            variant.inventoryQuantity > 0 ? 'in stock' : 'out of stock',
-          condition: 'new',
-          price: `${variant.price} NOK`,
-          link: link,
-          image_link: imageUrl,
-          brand: product.vendor || 'Utekos',
-          item_group_id: cleanId(product.id),
-          ...(variant.compareAtPrice && {
-            sale_price: `${variant.price} NOK`,
-            price: `${variant.compareAtPrice} NOK`
-          })
-        }
+        data: payloadData
       })
     }
   }
