@@ -93,15 +93,11 @@ export async function POST(request: Request) {
       if (eventData.content_ids) custom.setContentIds(eventData.content_ids)
 
       if (eventData.contents && Array.isArray(eventData.contents)) {
-        // 'item' utledes automatisk som MetaContentItem fra @types/meta.types.ts
         const contentList = eventData.contents.map(item => {
-          return (
-            new Content()
-              .setId(item.id)
-              .setQuantity(item.quantity)
-              // Endret fra item.item_price til item.price basert på MetaContentItem-definisjonen din
-              .setItemPrice(item.price ?? 0)
-          )
+          return new Content()
+            .setId(item.id)
+            .setQuantity(item.quantity)
+            .setItemPrice(item.item_price ?? 0)
         })
         custom.setContents(contentList)
       }
