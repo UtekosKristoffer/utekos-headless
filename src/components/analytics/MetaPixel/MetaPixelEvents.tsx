@@ -6,7 +6,7 @@ import { usePathname, useSearchParams } from 'next/navigation'
 import Script from 'next/script'
 import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
 import { sendPageViewToCAPI } from '@/components/analytics/MetaPixel/sendPageViewToCAPI'
-import { getCookie } from '@/components/analytics/MetaPixel/getCookie' // Sørg for at denne er robust, se kommentar under
+import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { getOrSetExternalId } from '@/components/analytics/MetaPixel/getOrSetExternalId'
 
 function PixelLogic() {
@@ -14,66 +14,43 @@ function PixelLogic() {
   const searchParams = useSearchParams()
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID
 
-  // Vi bruker en ref for å spore om init er kjørt i denne sesjonen/visningen
+  const lastTrackedPath = useRef<string | null>(null)
   const isInitialized = useRef(false)
 
   useEffect(() => {
     if (!pixelId) return
 
-    // Vi venter littegrann for å sikre at cookies satt av mellomvare/proxy er tilgjengelige
-    // og at hydrering er ferdig.
-    const handlePageView = () => {
-      const currentUrl = window.location.href
+    const currentPathString = pathname + (searchParams?.toString() || '')
 
-      // 1. Hent Advanced Matching parametere fra cookies
-      // Disse settes i proxy.ts eller server-side logikk
+    if (lastTrackedPath.current === currentPathString) {
+      return
+    }
+
+    lastTrackedPath.current = currentPathString
+
+    requestAnimationFrame(() => {
       const externalId = getOrSetExternalId()
       const fbc = getCookie('_fbc')
       const fbp = getCookie('_fbp')
-      const userHash = getCookie('ute_user_hash') // Hashed e-post/tlf fra proxy
-
-      // 2. Generer en unik Event ID for deduplisering (Viktig!)
-      // Denne må være lik for både Pixel og CAPI
+      const userHash = getCookie('ute_user_hash')
       const eventId = generateEventID()
 
-      // 3. Initialiser Pixel KUN hvis det ikke er gjort før
       if (!isInitialized.current && window.fbq) {
-        // Advanced Matching Configuration
-        const advancedMatchingData = {
+        window.fbq('init', pixelId, {
           external_id: externalId || undefined,
           fbc: fbc || undefined,
           fbp: fbp || undefined,
-          // 'em' eller 'ph' forventes her hvis hashet, men Meta støtter ofte
-          // automatisk deteksjon. Hvis ute_user_hash er email, map den til 'em'.
-          // For best practice bør vi vite om det er em eller ph, men sender som em
-          // hvis vi antar det er e-post, eller legger i en generisk beholder hvis Meta støtter det.
-          // I henhold til docs: em: 'hashed_email'
           em: userHash || undefined
-        }
-
-        // Init kalles med Advanced Matching data
-        window.fbq('init', pixelId, advancedMatchingData)
-
+        })
         isInitialized.current = true
-
-        if (process.env.NODE_ENV === 'development') {
-          console.log('[Meta Pixel] Initialized with:', advancedMatchingData)
-        }
       }
 
-      // 4. Send PageView til Browser Pixel
       if (window.fbq) {
         window.fbq('track', 'PageView', {}, { eventID: eventId })
       }
 
-      // 5. Send PageView til Server (CAPI)
-      // Vi sender med samme parametere for å sikre matching på serversiden også
       sendPageViewToCAPI(pathname, eventId, searchParams, externalId, fbc, fbp)
-    }
-
-    // Kjøres ved mount og ved endring av path/search
-    // requestAnimationFrame sikrer at vi ikke blokkerer rendering
-    requestAnimationFrame(handlePageView)
+    })
   }, [pathname, searchParams, pixelId])
 
   return null
@@ -82,16 +59,10 @@ function PixelLogic() {
 export function MetaPixelEvents() {
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID
 
-  if (!pixelId) {
-    console.warn('[Meta Pixel] Pixel ID mangler i miljøvariabler.')
-    return null
-  }
+  if (!pixelId) return null
 
-  /*
-    BASE CODE:
-    Ingen fbq('init') og fbq('track') her.
-    Dette forhindrer at pageview fyres automatisk før vi har kontroll på dataene (Advanced Matching).
-    Alt styres nå av useEffect-en over.
+  /* VIKTIG: Base Code inneholder INGEN fbq('track', 'PageView') eller fbq('init').
+     Dette overlates 100% til PixelLogic-komponenten over.
   */
   const metaPixelBaseCode = `
     !function(f,b,e,v,n,t,s)
@@ -111,9 +82,6 @@ export function MetaPixelEvents() {
         strategy='afterInteractive'
         dangerouslySetInnerHTML={{ __html: metaPixelBaseCode }}
       />
-      {/* Vi wrapper logikken i Suspense fordi useSearchParams brukes. 
-        Dette er krav i Next.js 16 for å unngå de-opt av hele siden til client-side rendering.
-      */}
       <Suspense fallback={null}>
         <PixelLogic />
       </Suspense>
