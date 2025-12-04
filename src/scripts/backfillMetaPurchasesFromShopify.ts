@@ -12,8 +12,6 @@ const bizSdk = require('facebook-nodejs-business-sdk')
 const { ServerEvent, EventRequest, UserData, CustomData, FacebookAdsApi } =
   bizSdk
 
-// --- 1. Env ---
-
 const SHOPIFY_API_VERSION = process.env.SHOPIFY_API_VERSION || '2025-10'
 const SHOPIFY_STORE_DOMAIN = process.env.SHOPIFY_STORE_DOMAIN // f.eks. erling-7921.myshopify.com
 const SHOPIFY_ADMIN_API_TOKEN = process.env.SHOPIFY_ADMIN_API_TOKEN
@@ -279,11 +277,7 @@ async function backfillMetaPurchases(params: { since: Date; until: Date }) {
     // .setFbc(order._fbc)
     // (felt må da inn på NormalizedOrder)
 
-    const customData = new CustomData()
-      .setCurrency(currency)
-      .setValue(value)
-      .setContents(contents)
-      .setOrderId(cleanShopifyId(order.id) || order.id)
+    const customData = new CustomData().setCurrency(currency).setValue(value)
 
     const eventId = `backfill_order_${cleanShopifyId(order.id)}`
 
