@@ -268,7 +268,6 @@ export async function POST(request: Request) {
         fbc: userData.fbc,
         externalId: userData.external_id,
         clientIp: userData.client_ip_address,
-        // Timestamp er kritisk for Offline Events matching
         eventTime: serverEvent.event_time
       }
     )
