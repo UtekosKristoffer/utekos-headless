@@ -1,6 +1,12 @@
 // src/scripts/backfillMetaPurchasesFromShopify.ts
 
 import 'dotenv/config'
+import type {
+  GqlOrderNode,
+  GqlAddress,
+  NormalizedOrder,
+  GqlOrdersResponse
+} from './types'
 
 const bizSdk = require('facebook-nodejs-business-sdk')
 const { ServerEvent, EventRequest, UserData, CustomData, FacebookAdsApi } =
@@ -23,103 +29,9 @@ if (!META_ACCESS_TOKEN) throw new Error('Missing META_ACCESS_TOKEN')
 
 FacebookAdsApi.init(META_ACCESS_TOKEN)
 
-// Representativ URL for order confirmation
 const DEFAULT_EVENT_SOURCE_URL = 'https://kasse.utekos.no/checkouts/thank-you'
 
 const BATCH_SIZE = 100
-
-// --- 2. Typer som matcher GraphQL ---
-
-interface GqlMoney {
-  amount: string
-  currencyCode: string
-}
-
-interface GqlMoneyBag {
-  shopMoney: GqlMoney
-}
-
-interface GqlLineItemNode {
-  id: string
-  quantity: number
-  originalUnitPriceSet?: GqlMoneyBag | null
-  variant?: { id: string | null } | null
-}
-
-interface GqlLineItemsConnection {
-  edges: { node: GqlLineItemNode }[]
-}
-
-interface GqlAddress {
-  firstName?: string | null
-  lastName?: string | null
-  city?: string | null
-  province?: string | null
-  provinceCode?: string | null
-  zip?: string | null
-  countryCode?: string | null
-}
-
-interface GqlCustomer {
-  id?: string | null
-  email?: string | null
-  phone?: string | null
-}
-
-interface GqlOrderNode {
-  id: string
-  name: string
-  createdAt: string
-  processedAt?: string | null
-  currencyCode?: string | null
-  currentTotalPriceSet?: GqlMoneyBag | null
-  customer?: GqlCustomer | null
-  billingAddress?: GqlAddress | null
-  shippingAddress?: GqlAddress | null
-  clientIp?: string | null
-  lineItems: GqlLineItemsConnection
-}
-
-interface GqlOrdersResponse {
-  data?: {
-    orders?: {
-      pageInfo: { hasNextPage: boolean; endCursor?: string | null }
-      edges: { node: GqlOrderNode }[]
-    }
-  }
-  errors?: any
-}
-
-// Normalisert ordreform for CAPI-bygging
-interface NormalizedOrder {
-  id: string
-  createdAt: string
-  processedAt: string
-  totalValue: number
-  currency: string
-  customer: {
-    id?: string
-    email?: string
-    phone?: string
-  }
-  address: {
-    firstName?: string
-    lastName?: string
-    city?: string
-    province?: string
-    provinceCode?: string
-    zip?: string
-    countryCode?: string
-  }
-  clientIp?: string
-  lineItems: {
-    variantId?: string | null
-    quantity: number
-    itemPrice: number
-  }[]
-}
-
-// --- 3. Hjelpefunksjoner ---
 
 function cleanShopifyId(id: string | number | null | undefined): string | null {
   if (!id) return null
@@ -162,20 +74,20 @@ function normalizeOrder(node: GqlOrderNode): NormalizedOrder {
     totalValue: value,
     currency,
     customer: {
-      id: node.customer?.id || undefined,
-      email: node.customer?.email || undefined,
-      phone: node.customer?.phone || undefined
+      ...(node.customer?.id && { id: node.customer.id }),
+      ...(node.customer?.email && { email: node.customer.email }),
+      ...(node.customer?.phone && { phone: node.customer.phone })
     },
     address: {
-      firstName: address.firstName || undefined,
-      lastName: address.lastName || undefined,
-      city: address.city || undefined,
-      province: address.province || undefined,
-      provinceCode: address.provinceCode || undefined,
-      zip: address.zip || undefined,
-      countryCode: address.countryCode || undefined
+      ...(address.firstName && { firstName: address.firstName }),
+      ...(address.lastName && { lastName: address.lastName }),
+      ...(address.city && { city: address.city }),
+      ...(address.province && { province: address.province }),
+      ...(address.provinceCode && { provinceCode: address.provinceCode }),
+      ...(address.zip && { zip: address.zip }),
+      ...(address.countryCode && { countryCode: address.countryCode })
     },
-    clientIp: node.clientIp || undefined,
+    ...(node.clientIp && { clientIp: node.clientIp }),
     lineItems
   }
 }
@@ -315,8 +227,6 @@ async function fetchShopifyOrdersInRange(params: {
 
   return normalized
 }
-
-// --- 5. Bygg og send CAPI-events til Meta ---
 
 async function backfillMetaPurchases(params: { since: Date; until: Date }) {
   const { since, until } = params
