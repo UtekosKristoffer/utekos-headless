@@ -79,6 +79,22 @@ export async function POST(request: Request) {
     }
   }
 
+  await logToAppLogs(
+    'INFO',
+    'Webhook: Order Paid Processing',
+    {
+      orderId: order.id,
+      total: order.total_price,
+      currency: order.currency,
+      attributionFound: !!redisData,
+      redisKeyUsed: redisData ? '***Found***' : 'None' // Forenklet for logg
+    },
+    {
+      cartToken,
+      checkoutToken
+    }
+  )
+
   const userData = new UserData()
 
   const email =
@@ -222,13 +238,39 @@ export async function POST(request: Request) {
     }
 
     const response = await eventRequest.execute()
+    await logToAppLogs(
+      'INFO',
+      'CAPI Purchase Sent',
+      {
+        fbtrace_id: response.fbtrace_id,
+        events_received: response.events_received,
+        orderId: order.id
+      },
+      {
+        fbp: userData.fbp,
+        fbc: userData.fbc,
+        externalId: userData.external_id,
+        clientIp: userData.client_ip_address,
+        eventTime: serverEvent.event_time
+      }
+    )
 
     await logToAppLogs(
       'INFO',
-      'Purchase Processed (CAPI)',
-      { ip: clientIp, fbp, fbc, externalId, userAgent },
-      { orderId: String(order.id), eventId },
-      { value: Number(order.total_price), fbTraceId: response.fbtrace_id }
+      'CAPI Purchase Sent',
+      {
+        fbtrace_id: response.fbtrace_id,
+        events_received: response.events_received,
+        orderId: order.id
+      },
+      {
+        fbp: userData.fbp,
+        fbc: userData.fbc,
+        externalId: userData.external_id,
+        clientIp: userData.client_ip_address,
+        // Timestamp er kritisk for Offline Events matching
+        eventTime: serverEvent.event_time
+      }
     )
 
     return NextResponse.json({
@@ -245,10 +287,13 @@ export async function POST(request: Request) {
 
     await logToAppLogs(
       'ERROR',
-      'Purchase CAPI Failed',
-      { ip: clientIp, fbp, fbc },
-      { orderId: String(order.id) },
-      { error: errorResponse }
+      'CAPI Purchase Failed',
+      {
+        orderId: order.id,
+        error: err.message,
+        details: err.response?.data?.error
+      },
+      {}
     )
 
     return NextResponse.json(

@@ -5,9 +5,17 @@ import { setCookie } from './setCookie'
 
 export function getOrSetExternalId(): string {
   let extId = getCookie('ute_ext_id')
+
   if (!extId) {
-    extId = `user_${Math.random().toString(36).slice(2)}_${Date.now()}`
+    const randomPart =
+      typeof crypto !== 'undefined' && crypto.randomUUID ?
+        crypto.randomUUID()
+      : Math.random().toString(36).slice(2)
+
+    extId = `user_${Date.now()}_${randomPart}`
+
     setCookie('ute_ext_id', extId, 730)
   }
+
   return extId
 }

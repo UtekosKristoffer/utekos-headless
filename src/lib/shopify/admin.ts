@@ -8,6 +8,21 @@ if (!SHOPIFY_ADMIN_API_TOKEN || !SHOPIFY_STORE_DOMAIN) {
 
 const SHOPIFY_GRAPHQL_URL = `https://${SHOPIFY_STORE_DOMAIN}/admin/api/${API_VERSION}/graphql.json`
 
+function mapWeightUnit(unit: string): string {
+  switch (unit) {
+    case 'KILOGRAMS':
+      return 'kg'
+    case 'GRAMS':
+      return 'g'
+    case 'POUNDS':
+      return 'lb'
+    case 'OUNCES':
+      return 'oz'
+    default:
+      return 'kg'
+  }
+}
+
 export async function getAllProductsForMetaSync() {
   const query = `
     query getAllProducts {
@@ -45,8 +60,14 @@ export async function getAllProductsForMetaSync() {
                   price
                   compareAtPrice
                   inventoryQuantity
-                  weight
-                  weightUnit
+                  inventoryItem {
+                    measurement {
+                      weight {
+                        value
+                        unit
+                      }
+                    }
+                  }
                   image {
                     url
                   }
@@ -84,7 +105,26 @@ export async function getAllProductsForMetaSync() {
       throw new Error(`GraphQL Errors: ${JSON.stringify(json.errors)}`)
     }
 
-    return json.data.products.edges.map((edge: any) => edge.node)
+    return json.data.products.edges.map((edge: any) => {
+      const product = edge.node
+      const flatVariants = product.variants.edges.map((vEdge: any) => {
+        const v = vEdge.node
+        const weightData = v.inventoryItem?.measurement?.weight
+
+        return {
+          ...v,
+          weight: weightData?.value || null,
+          weightUnit: weightData?.unit ? mapWeightUnit(weightData.unit) : 'kg'
+        }
+      })
+
+      return {
+        ...product,
+        variants: {
+          edges: flatVariants.map((v: any) => ({ node: v }))
+        }
+      }
+    })
   } catch (error) {
     console.error('[Shopify Admin] Failed to fetch products:', error)
     throw error

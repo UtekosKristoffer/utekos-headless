@@ -120,6 +120,8 @@ export interface MetaEventData {
   content_ids?: string[] | undefined
   contents?: MetaContentItem[] | undefined
   num_items?: number | undefined
+  order_id?: string | undefined
+  search_string?: string | undefined
 }
 
 export type MetaEventType =
@@ -136,6 +138,7 @@ export interface MetaEventPayload {
   eventId: string
   eventSourceUrl: string
   eventTime?: number | undefined
+  actionSource: 'website'
   userData: MetaUserData
   eventData?: MetaEventData | undefined
 }

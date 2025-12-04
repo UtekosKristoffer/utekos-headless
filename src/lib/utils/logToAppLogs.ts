@@ -1,35 +1,41 @@
 // Path: src/lib/utils/logToAppLogs.ts
 import { redisPush, redisTrim } from '@/lib/redis'
 import crypto from 'crypto'
+
+type LogLevel = 'INFO' | 'WARN' | 'ERROR' | 'DEBUG'
+
+/**
+ * Sentralisert logging for både Vercel Console og Redis.
+ * Sikrer at vi har tidsstempel og kontekst for alle hendelser.
+ */
 export async function logToAppLogs(
-  level: 'INFO' | 'WARN' | 'ERROR',
+  level: LogLevel,
   event: string,
-  identity: any,
-  context: any,
-  data: any
+  data?: Record<string, any>,
+  context?: Record<string, any>
 ) {
+  const timestamp = new Date().toISOString()
+  const logId = crypto.randomUUID()
+
+  const logEntry = {
+    id: logId,
+    timestamp,
+    level,
+    event,
+    data: data || {},
+    context: context || {}
+  }
+
+  if (level === 'ERROR') {
+    console.error(JSON.stringify(logEntry))
+  } else {
+    console.log(JSON.stringify(logEntry))
+  }
+
   try {
-    const logEntry = {
-      id: crypto.randomUUID(),
-      timestamp: new Date().toISOString(),
-      level,
-      event,
-      identity: {
-        ip: identity.ip,
-        fbp: identity.fbp,
-        fbc: identity.fbc,
-        externalId: identity.externalId,
-        userAgent: identity.userAgent
-      },
-      context,
-      data
-    }
-
-    console.log(`[${level}] ${event}`, JSON.stringify(logEntry))
-
     await redisPush('app_logs', logEntry)
     await redisTrim('app_logs', 0, 999)
-  } catch (e) {
-    console.error('Failed to write to app_logs:', e)
+  } catch (err) {
+    console.error('Failed to push log to Redis:', err)
   }
 }

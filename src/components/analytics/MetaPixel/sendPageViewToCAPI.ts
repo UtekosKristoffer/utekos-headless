@@ -22,7 +22,9 @@ export async function sendPageViewToCAPI(
 
   try {
     const params = getPageViewParams(pathname, searchParams)
+
     const emailHash = getCookie('ute_user_hash')
+
     const payload: MetaEventPayload = {
       eventName: 'PageView',
       eventId,
@@ -47,21 +49,12 @@ export async function sendPageViewToCAPI(
 
     if (!response.ok) {
       const errorText = await response.text()
-      let errorJson
-      try {
-        errorJson = JSON.parse(errorText)
-      } catch {
-        errorJson = errorText
-      }
-
       console.error(
-        `[Meta CAPI] PageView Error (${response.status}):`,
-        typeof errorJson === 'object' ?
-          JSON.stringify(errorJson, null, 2)
-        : errorJson
+        `[Meta CAPI] PageView Failed (${response.status}):`,
+        errorText.slice(0, 200)
       )
     }
   } catch (error) {
-    console.error('[Meta CAPI] PageView network/logic failed:', error)
+    console.error('[Meta CAPI] Network error:', error)
   }
 }

@@ -5,15 +5,9 @@ import * as React from 'react'
 import { Button } from '@/components/ui/button'
 import type { MetaUserData, MetaEventPayload, CaptureBody } from '@types'
 import { getCheckoutAriaLabel } from './getCheckoutAriaLabel'
-import { generateEventID } from './generateEventID'
-
-function getCookie(name: string): string | null {
-  if (typeof document === 'undefined') return null
-  const value = `; ${document.cookie}`
-  const parts = value.split(`; ${name}=`)
-  if (parts.length === 2) return parts.pop()?.split(';').shift() || null
-  return null
-}
+import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
+import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
+import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 
 export const CheckoutButton = ({
   checkoutUrl,
@@ -50,6 +44,10 @@ export const CheckoutButton = ({
     }
 
     try {
+
+      const cleanItemIds = item_ids.map(id => cleanShopifyId(id) || id)
+
+      // Vi bruker den robuste getCookie som håndterer decoding
       const fbp = getCookie('_fbp')
       const fbc = getCookie('_fbc')
       const extId = getCookie('ute_ext_id')
@@ -57,7 +55,12 @@ export const CheckoutButton = ({
       const ua =
         typeof navigator !== 'undefined' ? navigator.userAgent : undefined
 
-      const eventID = generateEventID().replace('evt_', 'ic_')
+      // Genererer krypto-sikker Event ID (evt_...)
+      // Vi bruker 'ic_' prefix for InitiateCheckout for enkel debugging,
+      // men beholder formatet fra generateEventID
+      const rawEventID = generateEventID()
+      const eventID = rawEventID.replace('evt_', 'ic_')
+
       const value = Number.parseFloat(subtotalAmount || '0') || 0
 
       const userData: MetaUserData = {
@@ -68,6 +71,7 @@ export const CheckoutButton = ({
         client_user_agent: ua
       }
 
+      // 2. Browser Pixel Tracking (Client-Side)
       if (typeof window !== 'undefined' && window.fbq) {
         window.fbq(
           'track',
@@ -75,7 +79,7 @@ export const CheckoutButton = ({
           {
             value,
             currency,
-            content_ids: item_ids,
+            content_ids: cleanItemIds, // Send rensede ID-er
             content_type: 'product',
             num_items
           },
@@ -83,6 +87,8 @@ export const CheckoutButton = ({
         )
       }
 
+      // 3. Capture Identifiers (Redis lagring for Webhook enrichment)
+      // Dette er kritisk for at "Purchase" eventet senere skal kunne dedupliseres
       const captureBody: CaptureBody = {
         cartId,
         checkoutUrl,
@@ -90,6 +96,8 @@ export const CheckoutButton = ({
         userData
       }
 
+      // Vi bruker keepalive: true for å sikre at requesten fullføres
+      // selv om nettleseren redirecter til checkout umiddelbart
       fetch('/api/checkout/capture-identifiers', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -97,17 +105,19 @@ export const CheckoutButton = ({
         keepalive: true
       }).catch(err => console.error('Capture identifiers failed', err))
 
+      // 4. CAPI Tracking (Server-Side)
       const capiPayload: MetaEventPayload = {
         eventName: 'InitiateCheckout',
         eventId: eventID,
         eventSourceUrl:
           typeof window !== 'undefined' ? window.location.href : checkoutUrl,
         eventTime: Math.floor(Date.now() / 1000),
+        actionSource: 'website',
         userData,
         eventData: {
           value,
           currency,
-          content_ids: item_ids,
+          content_ids: cleanItemIds, // Send rensede ID-er
           content_type: 'product',
           num_items
         }

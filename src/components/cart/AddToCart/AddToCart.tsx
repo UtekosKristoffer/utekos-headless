@@ -1,3 +1,4 @@
+// Path: src/components/cart/AddToCart.tsx
 'use client'
 
 import { Form } from '@/components/ui/form'
@@ -26,14 +27,8 @@ import type { ActorRef, StateFrom } from 'xstate'
 import { ModalSubmitButton } from '../AddToCartButton/ModalSubmitButton'
 import { QuantitySelector } from '../QuantitySelector'
 import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
-
-function getCookie(name: string): string | null {
-  if (typeof document === 'undefined') return null
-  const value = `; ${document.cookie}`
-  const parts = value.split(`; ${name}=`)
-  if (parts.length === 2) return parts.pop()?.split(';').shift() || null
-  return null
-}
+import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
+import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 
 export function AddToCart({
   product,
@@ -87,7 +82,6 @@ export function AddToCart({
 
     startTransition(async () => {
       try {
-        // ... (Cart mutation logic unchanged) ...
         const linesToProcess = [
           { variantId: values.variantId, quantity: values.quantity }
         ]
@@ -108,8 +102,6 @@ export function AddToCart({
             cartActor
           )
         }
-
-        // ... (Discount logic unchanged) ...
         if (additionalLine) {
           await new Promise(resolve => setTimeout(resolve, 500))
           try {
@@ -120,35 +112,40 @@ export function AddToCart({
           }
         }
 
-        // --- SPORING ---
+        // 1. Klargjør verdier og ID-er
         const basePrice = Number.parseFloat(selectedVariant.price.amount)
         const currency = selectedVariant.price.currencyCode
         let totalQty = values.quantity
+        const eventID = `atc_${cleanShopifyId(selectedVariant.id)}_${Date.now()}`
 
-        // Bruker MetaContentItem typen strengt
+        // Bruker cleanShopifyId for å sikre match med Katalog og Webhook
+        const mainVariantId =
+          cleanShopifyId(selectedVariant.id) || selectedVariant.id.toString()
+
         const contents: MetaContentItem[] = [
           {
-            id: selectedVariant.id.toString(),
+            id: mainVariantId,
             quantity: values.quantity,
             item_price: basePrice
           }
         ]
-        const contentIds: string[] = [selectedVariant.id.toString()]
+        const contentIds: string[] = [mainVariantId]
         let contentName = product.title
 
         if (additionalLine) {
+          const buffId =
+            cleanShopifyId(additionalLine.variantId) || additionalLine.variantId
           contents.push({
-            id: additionalLine.variantId.toString(),
+            id: buffId,
             quantity: additionalLine.quantity,
             item_price: 0
           })
-          contentIds.push(additionalLine.variantId.toString())
+          contentIds.push(buffId)
           totalQty += additionalLine.quantity
           contentName += ' + Utekos Buff™'
         }
 
         const value = basePrice * values.quantity
-        const eventID = `atc_${selectedVariant.id}_${Date.now()}`
 
         if (typeof window !== 'undefined' && window.fbq) {
           window.fbq(
@@ -167,6 +164,7 @@ export function AddToCart({
           )
         }
 
+        // 3. Server-Side Tracking (CAPI)
         const ua =
           typeof navigator !== 'undefined' ? navigator.userAgent : undefined
         const fbp = getCookie('_fbp')
@@ -188,6 +186,7 @@ export function AddToCart({
           eventSourceUrl:
             typeof window !== 'undefined' ? window.location.href : '',
           eventTime: Math.floor(Date.now() / 1000),
+          actionSource: 'website',
           userData,
           eventData: {
             value,
@@ -200,12 +199,15 @@ export function AddToCart({
           }
         }
 
+        // Sender "fire-and-forget" request til CAPI
         sendJSON('/api/meta-events', capiPayload)
 
+        // 4. Google Analytics 4 (GA4) Tracking
+        // Vi bruker rene ID-er også her for konsistens på tvers av plattformer
         if (typeof window !== 'undefined' && window.dataLayer) {
           const ga4Items = [
             {
-              item_id: selectedVariant.id.toString(),
+              item_id: mainVariantId,
               item_name: product.title,
               item_variant: selectedVariant.title,
               price: basePrice,
@@ -214,8 +216,11 @@ export function AddToCart({
           ]
 
           if (additionalLine) {
+            const buffId =
+              cleanShopifyId(additionalLine.variantId)
+              || additionalLine.variantId
             ga4Items.push({
-              item_id: additionalLine.variantId.toString(),
+              item_id: buffId,
               item_name: product.title,
               item_variant: 'Utekos Buff™',
               price: 0,

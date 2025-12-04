@@ -1,21 +1,15 @@
 // Path: src/app/api/log/route.ts
 import { NextRequest, NextResponse, connection } from 'next/server'
-import { redisPush, redisList, redisTrim } from '@/lib/redis'
-import crypto from 'crypto'
+import { redisList } from '@/lib/redis'
+import { logToAppLogs } from '@/lib/utils/logToAppLogs' // <--- Ny import
 import type { LogPayload } from '@types'
 
 export async function GET() {
   await connection()
-
   try {
     const logs = await redisList('app_logs', 0, 49)
-
-    return NextResponse.json({
-      count: logs.length,
-      logs
-    })
+    return NextResponse.json({ count: logs.length, logs })
   } catch (error) {
-    console.error('Failed to fetch logs:', error)
     return NextResponse.json(
       { error: 'Kunne ikke hente logger' },
       { status: 500 }
@@ -29,40 +23,21 @@ export async function POST(req: NextRequest) {
     const { event, level = 'info', data, context } = body
 
     const ip = req.headers.get('x-forwarded-for')?.split(',')[0]
-    const userAgent = req.headers.get('user-agent')
+    const userAgent = req.headers.get('user-agent') || undefined
     const fbp = req.cookies.get('_fbp')?.value
     const fbc = req.cookies.get('_fbc')?.value
     const externalId = req.cookies.get('ute_ext_id')?.value
 
-    const timestamp = new Date().toISOString()
-
-    const logEntry = {
-      id: crypto.randomUUID(),
-      timestamp,
-      level: level.toUpperCase(),
-      event,
-      identity: {
-        ip,
-        fbp,
-        fbc,
-        externalId,
-        userAgent
-      },
-      context: {
-        ...context,
-        referer: req.headers.get('referer')
-      },
-      data
+    const enrichedContext = {
+      ...context,
+      ip,
+      userAgent,
+      fbp,
+      fbc,
+      externalId,
+      referer: req.headers.get('referer')
     }
-
-    if (process.env.NODE_ENV === 'development') {
-      console.dir(logEntry, { depth: null, colors: true })
-    } else {
-      console.log(`[${level.toUpperCase()}] ${event}`, JSON.stringify(logEntry))
-    }
-
-    await redisPush('app_logs', logEntry)
-    await redisTrim('app_logs', 0, 999)
+    await logToAppLogs(level.toUpperCase() as any, event, data, enrichedContext)
 
     return NextResponse.json({ ok: true })
   } catch (error) {

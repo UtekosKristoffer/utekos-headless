@@ -9,6 +9,8 @@ import {
   CustomData,
   Content
 } from 'facebook-nodejs-business-sdk'
+import { normalize } from '@/lib/meta/normalization'
+import { logToAppLogs } from '@/lib/utils/logToAppLogs' // <--- Ny import
 import type { MetaEventPayload } from '@types'
 
 const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
@@ -17,8 +19,18 @@ const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE
 
 if (!ACCESS_TOKEN || !PIXEL_ID) {
   console.error(
-    '[Meta CAPI] Critical: Missing META_ACCESS_TOKEN or PIXEL_ID env variables.'
+    '[Meta CAPI] Critical: Mangler META_ACCESS_TOKEN eller NEXT_PUBLIC_META_PIXEL_ID env variabler.'
   )
+} else {
+  FacebookAdsApi.init(ACCESS_TOKEN)
+}
+
+function getClientIp(req: Request): string | null {
+  const forwardedFor = req.headers.get('x-forwarded-for')
+  if (forwardedFor) {
+    return forwardedFor.split(',')[0]?.trim() ?? null
+  }
+  return null
 }
 
 export async function POST(request: Request) {
@@ -30,28 +42,29 @@ export async function POST(request: Request) {
   }
 
   let eventName = 'Unknown event'
+  let body: MetaEventPayload | null = null
 
   try {
-    const api = FacebookAdsApi.init(ACCESS_TOKEN)
+    body = (await request.json()) as MetaEventPayload
 
-    if (process.env.NODE_ENV === 'development') {
-      api.setDebug(true)
+    if (!body.eventName || !body.eventId) {
+      return NextResponse.json(
+        { error: 'Missing required parameters: eventName or eventId' },
+        { status: 400 }
+      )
     }
 
-    const body = (await request.json()) as MetaEventPayload
-
-    if (body.eventName) {
-      eventName = body.eventName
-    }
-
-    const { eventId, eventSourceUrl, userData, eventData } = body
+    eventName = body.eventName
+    const {
+      eventId,
+      eventSourceUrl,
+      actionSource = 'website',
+      userData,
+      eventData
+    } = body
 
     const user = new UserData()
-
-    const requestIp = request.headers
-      .get('x-forwarded-for')
-      ?.split(',')[0]
-      ?.trim()
+    const requestIp = getClientIp(request)
     const requestAgent = request.headers.get('user-agent')
 
     const finalIp = userData.client_ip_address || requestIp
@@ -62,25 +75,44 @@ export async function POST(request: Request) {
 
     if (userData.fbp) user.setFbp(userData.fbp)
     if (userData.fbc) user.setFbc(userData.fbc)
-
-    if (userData.external_id) user.setExternalIds([userData.external_id])
+    if (userData.external_id) user.setExternalId(userData.external_id)
 
     if (userData.email) {
-      user.setEmail(userData.email)
+      const normalizedEmail = normalize.email(userData.email)
+      if (normalizedEmail) user.setEmail(normalizedEmail)
     } else if (userData.email_hash) {
       user.setEmails([userData.email_hash])
     }
 
     if (userData.phone) {
-      user.setPhone(userData.phone)
+      const normalizedPhone = normalize.phone(userData.phone)
+      if (normalizedPhone) user.setPhone(normalizedPhone)
     }
 
-    if (userData.first_name) user.setFirstName(userData.first_name)
-    if (userData.last_name) user.setLastName(userData.last_name)
-    if (userData.city) user.setCity(userData.city)
-    if (userData.state) user.setState(userData.state)
-    if (userData.zip) user.setZip(userData.zip)
-    if (userData.country) user.setCountry(userData.country)
+    if (userData.first_name) {
+      const fn = normalize.name(userData.first_name)
+      if (fn) user.setFirstName(fn)
+    }
+    if (userData.last_name) {
+      const ln = normalize.name(userData.last_name)
+      if (ln) user.setLastName(ln)
+    }
+    if (userData.city) {
+      const city = normalize.city(userData.city)
+      if (city) user.setCity(city)
+    }
+    if (userData.state) {
+      const state = normalize.state(userData.state)
+      if (state) user.setState(state)
+    }
+    if (userData.zip) {
+      const zip = normalize.zip(userData.zip)
+      if (zip) user.setZip(zip)
+    }
+    if (userData.country) {
+      const country = normalize.country(userData.country)
+      if (country) user.setCountry(country)
+    }
 
     const custom = new CustomData()
 
@@ -89,15 +121,21 @@ export async function POST(request: Request) {
       if (eventData.currency) custom.setCurrency(eventData.currency)
       if (eventData.content_name) custom.setContentName(eventData.content_name)
       if (eventData.content_type) custom.setContentType(eventData.content_type)
+      if (eventData.search_string)
+        custom.setSearchString(eventData.search_string)
+      if (eventData.num_items) custom.setNumItems(eventData.num_items)
 
-      if (eventData.content_ids) custom.setContentIds(eventData.content_ids)
+      if (eventData.content_ids && Array.isArray(eventData.content_ids)) {
+        custom.setContentIds(eventData.content_ids)
+      }
 
       if (eventData.contents && Array.isArray(eventData.contents)) {
-        const contentList = eventData.contents.map(item => {
+        const contentList = eventData.contents.map((item: any) => {
           return new Content()
             .setId(item.id)
             .setQuantity(item.quantity)
             .setItemPrice(item.item_price ?? 0)
+            .setTitle(item.title || item.content_name || undefined)
         })
         custom.setContents(contentList)
       }
@@ -107,8 +145,8 @@ export async function POST(request: Request) {
       .setEventName(eventName)
       .setEventTime(body.eventTime || Math.floor(Date.now() / 1000))
       .setEventId(eventId)
-      .setEventSourceUrl(eventSourceUrl)
-      .setActionSource('website')
+      .setEventSourceUrl(eventSourceUrl || request.headers.get('referer') || '')
+      .setActionSource(actionSource)
       .setUserData(user)
       .setCustomData(custom)
 
@@ -122,39 +160,57 @@ export async function POST(request: Request) {
 
     const response = await eventRequest.execute()
 
+    // LOGG SUKSESS
+    await logToAppLogs(
+      'INFO',
+      `CAPI Sent: ${eventName}`,
+      {
+        eventId,
+        events_received: response.events_received,
+        fbtrace_id: response.fbtrace_id
+      },
+      {
+        actionSource,
+        hasFbp: !!userData.fbp,
+        hasFbc: !!userData.fbc,
+        hasExtId: !!userData.external_id,
+        hasEmail: !!userData.email || !!userData.email_hash,
+        clientIp: finalIp
+      }
+    )
+
     return NextResponse.json({
       success: true,
       events_received: response.events_received,
       fbtrace_id: response.fbtrace_id
     })
-  } catch (error: unknown) {
-    const errObj = error as {
-      response?: { data?: Record<string, unknown>; status?: number }
-      message?: string
-    }
+  } catch (error: any) {
+    const errorResponse = error.response || {}
+    const errorData = errorResponse.data || {}
 
-    const errorResponse = errObj.response || errObj
-    const errorData = (errObj.response?.data || errorResponse) as Record<
-      string,
-      unknown
-    >
+    await logToAppLogs(
+      'ERROR',
+      `CAPI Failed: ${eventName}`,
+      {
+        error: error.message,
+        details: errorData,
+        type: errorData.error?.type,
+        code: errorData.error?.code
+      },
+      { eventId: body?.eventId }
+    )
 
     console.error(
       `[Meta CAPI] Error for ${eventName}:`,
       JSON.stringify(errorData, null, 2)
     )
 
-    const errorMessage =
-      typeof errorData.error === 'object' && errorData.error !== null ?
-        (errorData.error as { message?: string }).message
-      : errObj.message
-
     return NextResponse.json(
       {
         error: 'Failed to send event to Meta',
-        details: errorMessage || 'Unknown error'
+        details: errorData.error?.message || error.message || 'Unknown error'
       },
-      { status: errObj.response?.status || 500 }
+      { status: errorResponse.status || 500 }
     )
   }
 }
