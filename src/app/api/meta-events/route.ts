@@ -1,6 +1,6 @@
 // Path: src/app/api/meta-events/route.ts
 
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import {
   FacebookAdsApi,
   ServerEvent,
@@ -10,7 +10,7 @@ import {
   Content
 } from 'facebook-nodejs-business-sdk'
 import { normalize } from '@/lib/meta/normalization'
-import { logToAppLogs } from '@/lib/utils/logToAppLogs' // <--- Ny import
+import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 import type { MetaEventPayload } from '@types'
 
 const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
@@ -25,15 +25,22 @@ if (!ACCESS_TOKEN || !PIXEL_ID) {
   FacebookAdsApi.init(ACCESS_TOKEN)
 }
 
-function getClientIp(req: Request): string | null {
+function getClientIp(req: NextRequest): string | null {
+  const reqIp = (req as any).ip
+  if (reqIp) return reqIp as string
+
   const forwardedFor = req.headers.get('x-forwarded-for')
   if (forwardedFor) {
     return forwardedFor.split(',')[0]?.trim() ?? null
   }
+
+  const realIp = req.headers.get('x-real-ip')
+  if (realIp) return realIp.trim()
+
   return null
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   if (!ACCESS_TOKEN || !PIXEL_ID) {
     return NextResponse.json(
       { error: 'Server misconfiguration: Missing Meta credentials' },
@@ -67,6 +74,7 @@ export async function POST(request: Request) {
     const requestIp = getClientIp(request)
     const requestAgent = request.headers.get('user-agent')
 
+    // Prioriter IP fra payload (hvis sendt), ellers bruk deteksjon
     const finalIp = userData.client_ip_address || requestIp
     const finalAgent = userData.client_user_agent || requestAgent
 
