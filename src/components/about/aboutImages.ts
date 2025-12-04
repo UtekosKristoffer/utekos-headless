@@ -1,3 +1,4 @@
+// l
 export const aboutImages = [
   {
     src: '/girl-stone-snow.webp',
