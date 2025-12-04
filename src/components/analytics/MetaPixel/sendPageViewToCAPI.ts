@@ -1,4 +1,5 @@
 // Path: src/components/analytics/MetaPixel/sendPageViewToCAPI.ts
+
 import { getPageViewParams } from './getPageViewParams'
 import { getCookie } from './getCookie'
 import type { MetaEventPayload } from '@types'
@@ -30,6 +31,7 @@ export async function sendPageViewToCAPI(
       eventId,
       eventSourceUrl: window.location.href,
       eventTime: Math.floor(Date.now() / 1000),
+      actionSource: 'website', // <--- PÅKREVD felt lagt til
       userData: {
         external_id: externalId || undefined,
         fbc: fbc || undefined,

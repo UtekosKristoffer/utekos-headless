@@ -61,7 +61,7 @@ const handleCtaClick = () => {
     eventId: eventID,
     eventSourceUrl: sourceUrl,
     eventTime: timestamp,
-    actionSource: 'website', // PÅKREVD
+    actionSource: 'website',
     userData,
     eventData: customData
   }
