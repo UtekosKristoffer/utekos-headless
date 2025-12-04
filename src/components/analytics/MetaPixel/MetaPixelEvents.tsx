@@ -13,7 +13,6 @@ function PixelLogic() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID
-
   const lastTrackedPath = useRef<string | null>(null)
   const isInitialized = useRef(false)
 
