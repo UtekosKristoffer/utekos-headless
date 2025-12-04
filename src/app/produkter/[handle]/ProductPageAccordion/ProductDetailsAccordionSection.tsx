@@ -11,11 +11,14 @@ import { colorHexByTextClass } from './colorHexByTextClass'
 import { AccordionContentRenderer } from './AccordionContentRenderer'
 import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
+import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 
 export function ProductDetailsAccordionSection({
-  sectionData
+  sectionData,
+  currentVariantId
 }: {
   sectionData: AccordionSectionData
+  currentVariantId?: string
 }) {
   const { id, title, content, Icon, color } = sectionData
   const glowHexColor = colorHexByTextClass[color] ?? '#60a5fa'
@@ -24,19 +27,34 @@ export function ProductDetailsAccordionSection({
   }
 
   const handleInteraction = () => {
+    const rawId = currentVariantId ? cleanShopifyId(currentVariantId) : id
+    const contentId = rawId || ''
+    const contentIds = contentId ? [contentId] : []
     const eventID = generateEventID().replace('evt_', 'acc_')
     const timestamp = Math.floor(Date.now() / 1000)
     const sourceUrl = window.location.href
-    const eventData = {
+    const pixelEventData = {
       content_name: title,
-      content_ids: [id],
-      content_type: 'product'
+      content_ids: contentIds,
+      content_type: 'product',
+      accordion_section: id
     }
 
     if (typeof window !== 'undefined' && (window as any).fbq) {
-      ;(window as any).fbq('trackCustom', 'InteractWithAccordion', eventData, {
-        eventID
-      })
+      ;(window as any).fbq(
+        'trackCustom',
+        'InteractWithAccordion',
+        pixelEventData,
+        {
+          eventID
+        }
+      )
+    }
+
+    const capiEventData = {
+      content_name: title,
+      content_ids: contentIds,
+      content_type: 'product' as const
     }
 
     const fbc = getCookie('_fbc')
@@ -58,7 +76,7 @@ export function ProductDetailsAccordionSection({
       eventTime: timestamp,
       actionSource: 'website',
       userData,
-      eventData: eventData // Matcher nå MetaEventPayload
+      eventData: capiEventData
     }
 
     fetch('/api/meta-events', {

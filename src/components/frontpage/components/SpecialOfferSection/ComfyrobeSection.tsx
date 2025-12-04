@@ -2,7 +2,21 @@
 import { ComfyrobeImageSection } from './ComfyrobeImageSection'
 import { ComfyrobeContentColumn } from './ComfyrobeContentColumn'
 import { Activity } from 'react'
+import { getProduct } from '@/api/lib/products/getProduct'
+function getFirstAvailableVariantId(product: any): string {
+  if (!product || !product.variants || !product.variants.edges) return ''
+
+  const availableVariant = product.variants.edges.find(
+    (edge: any) => edge.node.availableForSale
+  )
+  if (availableVariant) {
+    return availableVariant.node.id
+  }
+  return product.variants.edges[0]?.node?.id || ''
+}
 export async function ComfyrobeSection() {
+  const comfyrobeProduct = await getProduct('comfyrobe')
+  const comfyrobeId = getFirstAvailableVariantId(comfyrobeProduct)
   return (
     <section className='mx-auto max-w-[95%] py-20 sm:py-24 md:max-w-7xl'>
       <div className='container mx-auto'>
@@ -28,7 +42,7 @@ export async function ComfyrobeSection() {
               <ComfyrobeImageSection />
             </Activity>
             <Activity>
-              <ComfyrobeContentColumn />
+              <ComfyrobeContentColumn variantId={comfyrobeId} />
             </Activity>
           </div>
         </div>

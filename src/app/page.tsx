@@ -46,12 +46,34 @@ async function FeaturedProductsSection() {
 const HomePage = async () => {
   await connection()
 
+  const queryClient = new QueryClient()
+
+  await queryClient.prefetchQuery({
+    queryKey: ['products', 'featured'],
+    queryFn: getFeaturedProducts
+  })
+
+  const featuredProducts = queryClient.getQueryData([
+    'products',
+    'featured'
+  ]) as any[]
+  const techDownProduct = featuredProducts?.find(
+    product => product.handle === 'utekos-techdown'
+  )
+
+  const techDownId =
+    techDownProduct?.variants?.edges?.find(
+      (edge: any) => edge.node.availableForSale
+    )?.node?.id
+    || techDownProduct?.variants?.edges?.[0]?.node?.id
+    || ''
+
   return (
     <main>
       <HeroSection />
 
       <Activity>
-        <NewProductLaunchSection />
+        <NewProductLaunchSection variantId={techDownId} />
       </Activity>
 
       <Activity>

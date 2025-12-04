@@ -12,21 +12,25 @@ import { newProductFeatures } from './newProductFeatures'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { QuickViewModal } from '@/components/products/QuickViewModal'
 import { Activity } from 'react'
-import type { MetaUserData, MetaEventPayload } from '@types' // Fjernet CustomData import for å unngå forvirring
-
-// VIKTIG: Globale, robuste verktøy
+import type { MetaUserData, MetaEventPayload } from '@types'
 import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
+import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 
 const productName = 'Utekos TechDown™'
 const productHandle = 'utekos-techdown'
 const productUrl = `/produkter/${productHandle}`
-
 const originalPrice = 1990
 const discountAmount = 200
 const currentPrice = originalPrice - discountAmount
 
-export function NewProductLaunchSection() {
+interface NewProductLaunchSectionProps {
+  variantId: string
+}
+
+export function NewProductLaunchSection({
+  variantId
+}: NewProductLaunchSectionProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const getUserData = (): MetaUserData => {
@@ -41,13 +45,14 @@ export function NewProductLaunchSection() {
   }
 
   const handleDiscoverClick = () => {
+    const contentId = cleanShopifyId(variantId) || variantId
     const eventID = generateEventID().replace('evt_', 'click_')
     const sourceUrl = window.location.href
 
     const eventData = {
       content_name: `Discover ${productName}`,
-      content_ids: [productHandle],
-      content_type: 'product', // Endret til 'product' iht Meta standard
+      content_ids: [contentId],
+      content_type: 'product' as const,
       value: currentPrice,
       currency: 'NOK'
     }
@@ -79,25 +84,24 @@ export function NewProductLaunchSection() {
   const handleQuickViewClick = () => {
     setIsModalOpen(true)
 
+    const contentId = cleanShopifyId(variantId) || variantId
     const eventID = generateEventID().replace('evt_', 'qv_')
     const sourceUrl = window.location.href
 
     const eventData = {
       content_name: `QuickView ${productName}`,
-      content_ids: [productHandle],
-      content_type: 'product', // Endret til 'product'
+      content_ids: [contentId],
+      content_type: 'product' as const,
       value: currentPrice,
       currency: 'NOK'
     }
 
-    // Browser Pixel
     if (typeof window !== 'undefined' && (window as any).fbq) {
       ;(window as any).fbq('trackCustom', 'OpenQuickView', eventData, {
         eventID
       })
     }
 
-    // Server-Side CAPI
     const capiPayload: MetaEventPayload = {
       eventName: 'OpenQuickView',
       eventId: eventID,

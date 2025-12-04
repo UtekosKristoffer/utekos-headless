@@ -160,7 +160,6 @@ export async function POST(request: Request) {
 
     const response = await eventRequest.execute()
 
-    // LOGG SUKSESS
     await logToAppLogs(
       'INFO',
       `CAPI Sent: ${eventName}`,

@@ -35,8 +35,9 @@ export function ProductPageController({
   useEffect(() => {
     if (!productData || !selectedVariant) return
 
-    // Unngå å fyre eventet flere ganger for samme variant
+    // Unngå duplikater: Sjekk om ID er endret siden sist
     if (lastTrackedVariant.current === selectedVariant.id) return
+
     lastTrackedVariant.current = selectedVariant.id
 
     const cleanId = cleanShopifyId(selectedVariant.id) || selectedVariant.id
@@ -46,7 +47,7 @@ export function ProductPageController({
 
     const eventData = {
       content_ids: [cleanId],
-      content_type: 'product',
+      content_type: 'product' as const,
       content_name: productData.title,
       value: price,
       currency: currency
@@ -86,7 +87,7 @@ export function ProductPageController({
       body: JSON.stringify(payload),
       keepalive: true
     }).catch(console.error)
-  }, [selectedVariant, productData])
+  }, [productData, selectedVariant])
 
   if (isLoading || !productData || !selectedVariant) {
     return <ProductPageSkeleton />

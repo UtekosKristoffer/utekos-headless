@@ -39,8 +39,6 @@ export async function syncProductsToMetaCatalog() {
   for (const product of products) {
     if (product.status !== 'ACTIVE') continue
 
-    // 1. Hent kategori fra Shopify (Standard Taxonomy)
-    // Fallback til productType hvis kategorien mangler
     const shopifyCategory =
       product.productCategory?.productTaxonomyNode?.fullName
     const googleProductCategory =
@@ -86,13 +84,13 @@ export async function syncProductsToMetaCatalog() {
         link: link,
         image_link: imageUrl,
         brand: brand,
-        item_group_id: cleanId(product.id),
+
+        // Endret etter instruks: item_group_id settes lik variantId for å matche Pixel content_id
+        item_group_id: variantId,
 
         google_product_category: googleProductCategory,
         age_group: ageGroup,
         gender: gender,
-
-        // Formatet Meta krever: "1.5 kg"
         ...(variant.weight && {
           shipping_weight: `${variant.weight} ${variant.weightUnit.toLowerCase()}`
         })
