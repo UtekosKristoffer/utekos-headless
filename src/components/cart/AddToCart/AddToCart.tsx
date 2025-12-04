@@ -199,7 +199,6 @@ export function AddToCart({
           }
         }
 
-        // Sender "fire-and-forget" request til CAPI
         sendJSON('/api/meta-events', capiPayload)
 
         // 4. Google Analytics 4 (GA4) Tracking

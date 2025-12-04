@@ -108,9 +108,5 @@ export function buildSearchIndex(_allPaths?: string[]) {
         }))
     }))
 
-  console.log(`✅ Search index built: ${allItems.length} total items`)
-  console.log(`   - ${staticItems.length} static items`)
-  console.log(`   - ${magazineItems.length} magazine articles`)
-
   return { groups }
 }

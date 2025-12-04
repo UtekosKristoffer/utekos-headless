@@ -1,3 +1,4 @@
+// Path: src/app/produkter/[handle]/ProductPageController/ProductPageController.tsx
 'use client'
 
 import { useProductPage } from '@/hooks/useProductPage'
@@ -5,7 +6,9 @@ import ProductPageView from '@/app/produkter/[handle]/ProductPageView/ProductPag
 import { ProductPageSkeleton } from '../ProductPageSkeleton/ProductPageSkeleton'
 import type { ShopifyProduct, MetaEventPayload, MetaUserData } from '@types'
 import { useEffect, useRef } from 'react'
-import { getCookie } from './getCookie'
+import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
+import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
+import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 
 interface ProductPageControllerProps {
   handle: string
@@ -32,16 +35,17 @@ export function ProductPageController({
   useEffect(() => {
     if (!productData || !selectedVariant) return
 
+    // Unngå å fyre eventet flere ganger for samme variant
     if (lastTrackedVariant.current === selectedVariant.id) return
     lastTrackedVariant.current = selectedVariant.id
 
-    const eventId = `vc_${selectedVariant.id}_${Date.now()}`
+    const cleanId = cleanShopifyId(selectedVariant.id) || selectedVariant.id
     const price = parseFloat(selectedVariant.price.amount)
     const currency = selectedVariant.price.currencyCode
-    const contentId = selectedVariant.id
+    const eventId = generateEventID().replace('evt_', 'vc_')
 
     const eventData = {
-      content_ids: [contentId],
+      content_ids: [cleanId],
       content_type: 'product',
       content_name: productData.title,
       value: price,
@@ -53,7 +57,6 @@ export function ProductPageController({
         eventID: eventId
       })
     }
-
     const fbc = getCookie('_fbc')
     const fbp = getCookie('_fbp')
     const externalId = getCookie('ute_ext_id')
@@ -72,6 +75,7 @@ export function ProductPageController({
       eventId,
       eventSourceUrl: window.location.href,
       eventTime: Math.floor(Date.now() / 1000),
+      actionSource: 'website',
       userData,
       eventData
     }

@@ -6,10 +6,9 @@ import { buttonVariants } from '@/components/ui/button'
 import { BenefitCard } from './BenefitCard'
 import { useInView } from '@/hooks/useInView'
 import { cn } from '@/lib/utils/className'
-import { generateEventID } from '@/components/jsx/CheckoutButton/generateEventID'
+import type { MetaUserData, MetaEventPayload } from '@types'
+import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
-import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
-import type { MetaUserData } from '@types'
 
 const benefits = [
   {
@@ -31,10 +30,8 @@ const benefits = [
 
 const handleCtaClick = () => {
   const eventID = generateEventID().replace('evt_', 'click_')
-  const externalId = getCookie('ute_ext_id')
-  const fbc = getCookie('_fbc')
-  const fbp = getCookie('_fbp')
   const sourceUrl = window.location.href
+  const timestamp = Math.floor(Date.now() / 1000)
 
   const customData = {
     content_name: 'Comfyrobe Hero Button',
@@ -42,24 +39,39 @@ const handleCtaClick = () => {
     location: 'Frontpage Hero Section'
   }
 
-  if (typeof window.fbq === 'function') {
+  if (typeof window !== 'undefined' && window.fbq) {
     window.fbq('trackCustom', 'HeroInteract', customData, { eventID })
   }
 
-  const userData: MetaUserData = {}
-  if (externalId) userData.external_id = externalId
-  if (fbc) userData.fbc = fbc
-  if (fbp) userData.fbp = fbp
+  const fbc = getCookie('_fbc')
+  const fbp = getCookie('_fbp')
+  const externalId = getCookie('ute_ext_id')
+  const emailHash = getCookie('ute_user_hash')
 
-  const capiPayload = {
+  const userData: MetaUserData = {
+    external_id: externalId || undefined,
+    fbc: fbc || undefined,
+    fbp: fbp || undefined,
+    email_hash: emailHash || undefined,
+    client_user_agent: navigator.userAgent
+  }
+
+  const capiPayload: MetaEventPayload = {
     eventName: 'HeroInteract',
     eventId: eventID,
     eventSourceUrl: sourceUrl,
-    eventData: customData,
-    userData
+    eventTime: timestamp,
+    actionSource: 'website', // PÅKREVD
+    userData,
+    eventData: customData
   }
 
-  sendJSON('/api/meta-events', capiPayload)
+  fetch('/api/meta-events', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(capiPayload),
+    keepalive: true
+  }).catch(console.error)
 }
 
 export function ComfyrobeContentColumn() {

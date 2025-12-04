@@ -132,6 +132,7 @@ export type MetaEventType =
   | 'Purchase'
   | 'HeroInteract'
   | 'InteractWithAccordion'
+  | 'OpenQuickView'
 
 export interface MetaEventPayload {
   eventName: MetaEventType

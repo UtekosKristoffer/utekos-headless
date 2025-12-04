@@ -11,11 +11,12 @@ import { ImageColumn } from './ImageColumn'
 import { newProductFeatures } from './newProductFeatures'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { QuickViewModal } from '@/components/products/QuickViewModal'
-import { generateEventID } from '@/components/jsx/CheckoutButton/generateEventID'
-import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { Activity } from 'react'
-import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
-import type { MetaUserData, CustomData } from '@types'
+import type { MetaUserData, MetaEventPayload } from '@types' // Fjernet CustomData import for å unngå forvirring
+
+// VIKTIG: Globale, robuste verktøy
+import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
+import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 
 const productName = 'Utekos TechDown™'
 const productHandle = 'utekos-techdown'
@@ -28,76 +29,91 @@ const currentPrice = originalPrice - discountAmount
 export function NewProductLaunchSection() {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  const getUserData = (): MetaUserData => {
+    return {
+      external_id: getCookie('ute_ext_id') || undefined,
+      fbc: getCookie('_fbc') || undefined,
+      fbp: getCookie('_fbp') || undefined,
+      email_hash: getCookie('ute_user_hash') || undefined,
+      client_user_agent:
+        typeof navigator !== 'undefined' ? navigator.userAgent : undefined
+    }
+  }
+
   const handleDiscoverClick = () => {
     const eventID = generateEventID().replace('evt_', 'click_')
-    const externalId = getCookie('ute_ext_id')
-    const fbc = getCookie('_fbc')
-    const fbp = getCookie('_fbp')
     const sourceUrl = window.location.href
 
-    const customData: CustomData = {
+    const eventData = {
       content_name: `Discover ${productName}`,
       content_ids: [productHandle],
-      content_type: 'product',
+      content_type: 'product', // Endret til 'product' iht Meta standard
       value: currentPrice,
       currency: 'NOK'
     }
 
-    if (typeof window.fbq === 'function') {
-      window.fbq('trackCustom', 'HeroInteract', customData, { eventID })
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      ;(window as any).fbq('trackCustom', 'HeroInteract', eventData, {
+        eventID
+      })
     }
 
-    const userData: MetaUserData = {}
-    if (externalId) userData.external_id = externalId
-    if (fbc) userData.fbc = fbc
-    if (fbp) userData.fbp = fbp
-
-    const capiPayload = {
+    const capiPayload: MetaEventPayload = {
       eventName: 'HeroInteract',
       eventId: eventID,
       eventSourceUrl: sourceUrl,
-      eventData: customData,
-      userData
+      eventTime: Math.floor(Date.now() / 1000),
+      actionSource: 'website',
+      userData: getUserData(),
+      eventData: eventData
     }
 
-    sendJSON('/api/meta-events', capiPayload)
+    fetch('/api/meta-events', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(capiPayload),
+      keepalive: true
+    }).catch(console.error)
   }
 
   const handleQuickViewClick = () => {
     setIsModalOpen(true)
 
     const eventID = generateEventID().replace('evt_', 'qv_')
-    const externalId = getCookie('ute_ext_id')
-    const fbc = getCookie('_fbc')
-    const fbp = getCookie('_fbp')
     const sourceUrl = window.location.href
 
-    const customData: CustomData = {
+    const eventData = {
       content_name: `QuickView ${productName}`,
       content_ids: [productHandle],
-      content_type: 'product',
+      content_type: 'product', // Endret til 'product'
       value: currentPrice,
       currency: 'NOK'
     }
 
-    if (typeof window.fbq === 'function') {
-      window.fbq('trackCustom', 'OpenQuickView', customData, { eventID })
+    // Browser Pixel
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      ;(window as any).fbq('trackCustom', 'OpenQuickView', eventData, {
+        eventID
+      })
     }
 
-    const userData: MetaUserData = {}
-    if (externalId) userData.external_id = externalId
-    if (fbc) userData.fbc = fbc
-    if (fbp) userData.fbp = fbp
-
-    const capiPayload = {
+    // Server-Side CAPI
+    const capiPayload: MetaEventPayload = {
       eventName: 'OpenQuickView',
       eventId: eventID,
       eventSourceUrl: sourceUrl,
-      eventData: customData,
-      userData
+      eventTime: Math.floor(Date.now() / 1000),
+      actionSource: 'website',
+      userData: getUserData(),
+      eventData: eventData
     }
 
-    sendJSON('/api/meta-events', capiPayload)
+    fetch('/api/meta-events', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(capiPayload),
+      keepalive: true
+    }).catch(console.error)
   }
 
   return (

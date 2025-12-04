@@ -2,12 +2,16 @@
 'use client'
 
 import { AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import type { AccordionSectionData, MetaUserData, CustomData } from '@types'
+import type {
+  AccordionSectionData,
+  MetaUserData,
+  MetaEventPayload
+} from '@types'
 import { colorHexByTextClass } from './colorHexByTextClass'
 import { AccordionContentRenderer } from './AccordionContentRenderer'
-import { generateEventID } from '@/components/jsx/CheckoutButton/generateEventID'
+import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
-import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
+
 export function ProductDetailsAccordionSection({
   sectionData
 }: {
@@ -21,36 +25,48 @@ export function ProductDetailsAccordionSection({
 
   const handleInteraction = () => {
     const eventID = generateEventID().replace('evt_', 'acc_')
-    const externalId = getCookie('ute_ext_id')
-    const fbc = getCookie('_fbc')
-    const fbp = getCookie('_fbp')
+    const timestamp = Math.floor(Date.now() / 1000)
     const sourceUrl = window.location.href
-    const customData: CustomData = {
+    const eventData = {
       content_name: title,
       content_ids: [id],
       content_type: 'product'
     }
 
-    if (typeof window.fbq === 'function') {
-      window.fbq('trackCustom', 'InteractWithAccordion', customData, {
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      ;(window as any).fbq('trackCustom', 'InteractWithAccordion', eventData, {
         eventID
       })
     }
 
-    const userData: MetaUserData = {}
-    if (externalId) userData.external_id = externalId
-    if (fbc) userData.fbc = fbc
-    if (fbp) userData.fbp = fbp
+    const fbc = getCookie('_fbc')
+    const fbp = getCookie('_fbp')
+    const externalId = getCookie('ute_ext_id')
+    const emailHash = getCookie('ute_user_hash')
+    const userData: MetaUserData = {
+      external_id: externalId || undefined,
+      fbc: fbc || undefined,
+      fbp: fbp || undefined,
+      email_hash: emailHash || undefined,
+      client_user_agent: navigator.userAgent
+    }
 
-    const capiPayload = {
+    const capiPayload: MetaEventPayload = {
       eventName: 'InteractWithAccordion',
       eventId: eventID,
       eventSourceUrl: sourceUrl,
-      eventData: customData,
-      userData: userData
+      eventTime: timestamp,
+      actionSource: 'website',
+      userData,
+      eventData: eventData // Matcher nå MetaEventPayload
     }
 
-    sendJSON('/api/meta-events', capiPayload)
+    fetch('/api/meta-events', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(capiPayload),
+      keepalive: true
+    }).catch(console.error)
   }
 
   return (

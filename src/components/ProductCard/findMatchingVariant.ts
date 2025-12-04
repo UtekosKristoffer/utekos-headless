@@ -1,4 +1,4 @@
-// Path: 
+// Path: src/components/ProductCard/findMatchingVariant.ts
 
 import type { ProductCardProps, ShopifyProductVariant } from '@types'
 
