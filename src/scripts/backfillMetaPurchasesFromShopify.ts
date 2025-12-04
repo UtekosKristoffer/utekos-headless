@@ -306,6 +306,12 @@ async function backfillMetaPurchases(params: { since: Date; until: Date }) {
       request.setTestEventCode(META_TEST_EVENT_CODE)
     }
 
+    // 👉 Logg det som ville blitt sendt, og returnér
+    console.log(
+      'DRY RUN – ville sendt følgende events til Meta:',
+      JSON.stringify(slice, null, 2)
+    )
+    return
     try {
       const response = await request.execute()
       console.log(
