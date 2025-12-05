@@ -1,3 +1,4 @@
+// Path: src/components/cart/RecommendedItem.tsx
 import { getInitialAvailableOptions } from '@/components/ProductCard/getInitialAvailableOptions'
 import { findMatchingVariant } from '@/components/ProductCard/findMatchingVariant'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
@@ -19,7 +20,8 @@ export function RecommendedItem({ product }: { product: ShopifyProduct }) {
     if (selectedVariant) {
       cartActor.send({
         type: 'ADD_LINES',
-        input: { variantId: selectedVariant.id, quantity: 1 }
+
+        input: [{ variantId: selectedVariant.id, quantity: 1 }]
       })
     }
   }
