@@ -17,7 +17,7 @@ import type { RootLayoutProps } from '@types'
 import type { Metadata } from 'next'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { getCachedCart } from '../lib/helpers/cart/getCachedCart'
-import { Snowfall } from '@/components/ui/snowfall'
+// import { Snowfall } from '@/components/ui/snowfall'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -113,7 +113,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={`bg-background text-foreground ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Snowfall flakeCount={50} speed={0.3} />
         <OnlineStoreJsonLd />
         <Suspense>
           <CartProviderLoader>
