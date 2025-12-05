@@ -20,11 +20,11 @@ export function UpsellItem({ product, showDiscountHint }: UpsellItemProps) {
     if (selectedVariant) {
       cartActor.send({
         type: 'ADD_LINES',
-        input: { variantId: selectedVariant.id, quantity: 1 }
+
+        input: [{ variantId: selectedVariant.id, quantity: 1 }]
       })
     }
   }
-
   return (
     <div
       className={`mt-4 flex flex-col gap-3 rounded-lg border ${

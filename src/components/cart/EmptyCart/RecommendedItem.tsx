@@ -12,7 +12,6 @@ import Link from 'next/link'
 
 export function RecommendedItem({ product }: { product: ShopifyProduct }) {
   const cartActor = CartMutationContext.useActorRef()
-
   const selectedOptions = getInitialAvailableOptions(product)
   const selectedVariant = findMatchingVariant(product, selectedOptions)
 
