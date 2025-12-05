@@ -9,9 +9,12 @@ export const createAddToCartSubmitHandler =
   (values: AddToCartFormValues) => {
     processRef.send({
       type: 'ADD_LINES',
-      input: {
-        variantId: values.variantId,
-        quantity: values.quantity
-      }
+
+      input: [
+        {
+          variantId: values.variantId,
+          quantity: values.quantity
+        }
+      ]
     })
   }
