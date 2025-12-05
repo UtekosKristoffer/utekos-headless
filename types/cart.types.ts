@@ -86,8 +86,15 @@ export type CartActionsResult = {
   error?: string | null
 }
 
+export type CartLineInput = {
+  variantId: string
+  quantity: number
+  discountCode?: string
+}
+
 export type CartActions = {
-  addCartLine(input: AddToCartFormValues): Promise<CartActionsResult>
+  addCartLine(lines: AddToCartFormValues[]): Promise<CartActionsResult>
+
   updateCartLineQuantity(
     input: UpdateCartLineQuantityInput
   ): Promise<CartActionsResult>
@@ -100,7 +107,10 @@ export type CartMutationContext = {
 }
 
 export type CartMutationEvent =
-  | { type: 'ADD_LINES'; input: AddToCartFormValues }
+  | {
+      type: 'ADD_LINES'
+      input: { variantId: string; quantity: number; discountCode?: string }[]
+    }
   | { type: 'UPDATE_LINE'; input: UpdateCartLineQuantityInput }
   | { type: 'REMOVE_LINE'; input: RemoveCartLineInput }
   | { type: 'CLEAR' }

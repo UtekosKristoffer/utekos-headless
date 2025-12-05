@@ -4,27 +4,26 @@
 import { mutationCartLinesAdd } from '@/api/graphql/mutations/cart'
 import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
 import { ShopifyApiError } from '@/lib/errors/ShopifyApiError'
-import type {
-  AddToCartFormValues,
-  CartResponse,
-  ShopifyAddToCartOperation
-} from '@types'
+import type { CartResponse, ShopifyAddToCartOperation } from '@types'
 
 export const performCartLinesAddMutation = async (
   cartId: string,
-  input: AddToCartFormValues
+  lines: { variantId: string; quantity: number }[]
 ): Promise<CartResponse | null> => {
   const result = await shopifyFetch<ShopifyAddToCartOperation>({
     query: mutationCartLinesAdd,
     variables: {
       cartId,
-      lines: [{ merchandiseId: input.variantId, quantity: input.quantity }]
+      lines: lines.map(line => ({
+        merchandiseId: line.variantId,
+        quantity: line.quantity
+      }))
     }
   })
 
   if (!result.success) {
     throw new ShopifyApiError(
-      'Failed to add lines to cart in performCartLinesAddMutation.',
+      'Failed to add lines in performCartLinesAddMutation.',
       result.error.errors
     )
   }

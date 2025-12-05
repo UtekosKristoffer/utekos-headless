@@ -8,33 +8,34 @@ import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { setCartIdInCookie } from '@/lib/helpers/cart/setCartIdInCookie'
 import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import { validateAddLineInput } from '@/lib/helpers/validations/validateAddLineInput'
-import type {
-  AddToCartFormValues,
-  CartActionsResult,
-  CartResponse
-} from '@types'
+import type { CartActionsResult, CartResponse } from '@types'
 import { updateTag } from 'next/cache'
 
+type CartLineInput = {
+  variantId: string
+  quantity: number
+}
+
 export const addCartLinesAction = async (
-  input: AddToCartFormValues
+  lines: CartLineInput[]
 ): Promise<CartActionsResult> => {
   try {
-    await validateAddLineInput(input)
+    await Promise.all(lines.map(line => validateAddLineInput(line)))
 
     const cartId = await getCartIdFromCookie()
 
     let rawCart: CartResponse | null
     if (cartId) {
-      rawCart = await performCartLinesAddMutation(cartId, input)
+      rawCart = await performCartLinesAddMutation(cartId, lines)
     } else {
-      rawCart = await performCartCreateMutation(input)
+      rawCart = await performCartCreateMutation(lines)
       if (rawCart) {
         await setCartIdInCookie(rawCart.id)
       }
     }
 
     if (!rawCart) {
-      throw new Error('Klarte ikke å legge produkt i handlekurv.')
+      throw new Error('Klarte ikke å legge produkt(er) i handlekurv.')
     }
 
     if (rawCart.id) {
@@ -43,7 +44,7 @@ export const addCartLinesAction = async (
     }
 
     const cart = normalizeCart(rawCart)
-    return { success: true, message: 'Vare lagt til.', cart }
+    return { success: true, message: 'Varer lagt til.', cart }
   } catch (error) {
     return mapThrownErrorToActionResult(error)
   }

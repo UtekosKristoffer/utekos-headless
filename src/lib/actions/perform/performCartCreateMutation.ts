@@ -4,18 +4,18 @@
 import { mutationCartCreate } from '@/api/graphql/mutations/cart'
 import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
 import { ShopifyApiError } from '@/lib/errors/ShopifyApiError'
-import type {
-  AddToCartFormValues,
-  CartResponse,
-  ShopifyCreateCartOperation
-} from '@types'
+import type { CartResponse, ShopifyCreateCartOperation } from '@types'
+
 export const performCartCreateMutation = async (
-  input: AddToCartFormValues
+  lines: { variantId: string; quantity: number }[]
 ): Promise<CartResponse | null> => {
   const result = await shopifyFetch<ShopifyCreateCartOperation>({
     query: mutationCartCreate,
     variables: {
-      lines: [{ merchandiseId: input.variantId, quantity: input.quantity }]
+      lines: lines.map(line => ({
+        merchandiseId: line.variantId,
+        quantity: line.quantity
+      }))
     }
   })
 

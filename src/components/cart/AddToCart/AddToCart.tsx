@@ -93,17 +93,16 @@ export function AddToCart({
           })
         }
 
-        for (const line of linesToProcess) {
-          await createMutationPromise(
-            {
-              type: 'ADD_LINES',
-              input: { variantId: line.variantId, quantity: line.quantity }
-            },
-            cartActor
-          )
-        }
+        // ENDRET: Sender alle linjer i én samlet operasjon
+        await createMutationPromise(
+          {
+            type: 'ADD_LINES',
+            input: linesToProcess
+          },
+          cartActor
+        )
+
         if (additionalLine) {
-          await new Promise(resolve => setTimeout(resolve, 500))
           try {
             const cartId = contextCartId || (await getCartIdFromCookie())
             if (cartId) await applyDiscount(cartId, 'GRATISBUFF')
@@ -112,13 +111,11 @@ export function AddToCart({
           }
         }
 
-        // 1. Klargjør verdier og ID-er
         const basePrice = Number.parseFloat(selectedVariant.price.amount)
         const currency = selectedVariant.price.currencyCode
         let totalQty = values.quantity
         const eventID = `atc_${cleanShopifyId(selectedVariant.id)}_${Date.now()}`
 
-        // Bruker cleanShopifyId for å sikre match med Katalog og Webhook
         const mainVariantId =
           cleanShopifyId(selectedVariant.id) || selectedVariant.id.toString()
 
