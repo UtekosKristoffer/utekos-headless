@@ -15,7 +15,6 @@ const { ServerEvent, EventRequest, UserData, CustomData, FacebookAdsApi } =
 const SHOPIFY_API_VERSION = process.env.SHOPIFY_API_VERSION || '2025-10'
 const SHOPIFY_STORE_DOMAIN = process.env.SHOPIFY_STORE_DOMAIN // f.eks. erling-7921.myshopify.com
 const SHOPIFY_ADMIN_API_TOKEN = process.env.SHOPIFY_ADMIN_API_TOKEN
-
 const META_PIXEL_ID = process.env.META_PIXEL_ID
 const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
 const META_TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE // valgfritt
@@ -89,8 +88,6 @@ function normalizeOrder(node: GqlOrderNode): NormalizedOrder {
     lineItems
   }
 }
-
-// --- 4. GraphQL-kall mot Shopify Admin ---
 
 const ORDERS_FOR_META_BACKFILL = `
   query OrdersForMetaBackfill($query: String!, $cursor: String) {
