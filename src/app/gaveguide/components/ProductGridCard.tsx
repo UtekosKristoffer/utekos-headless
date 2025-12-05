@@ -1,3 +1,4 @@
+// Path: src/components/ProductGridCard.tsx
 'use client'
 
 import { AspectRatio } from '@/components/ui/aspect-ratio'
@@ -58,9 +59,10 @@ export function ProductGridCard({
       toast.warning('Denne varianten er dessverre utsolgt.')
       return
     }
+    // ENDRET: Pakket inn input i en array []
     cartActor.send({
       type: 'ADD_LINES',
-      input: { variantId: selectedVariant.id, quantity: 1 }
+      input: [{ variantId: selectedVariant.id, quantity: 1 }]
     })
     toast.success(`${product.title} er lagt i handlekurven!`)
     cartStore.send({ type: 'OPEN' })

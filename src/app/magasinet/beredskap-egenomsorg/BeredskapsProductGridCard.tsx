@@ -60,7 +60,7 @@ export function BeredskapsProductGridCard({
     }
     cartActor.send({
       type: 'ADD_LINES',
-      input: { variantId: selectedVariant.id, quantity: 1 }
+      input: [{ variantId: selectedVariant.id, quantity: 1 }]
     })
     toast.success(`${product.title} er lagt i handlekurven!`)
     cartStore.send({ type: 'OPEN' })
