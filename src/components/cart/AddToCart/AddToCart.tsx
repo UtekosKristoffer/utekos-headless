@@ -93,7 +93,6 @@ export function AddToCart({
           })
         }
 
-        // ENDRET: Sender alle linjer i én samlet operasjon
         await createMutationPromise(
           {
             type: 'ADD_LINES',
