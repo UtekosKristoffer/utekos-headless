@@ -1,4 +1,3 @@
-// Path: src/app/api/shopify/webhooks/orders-paid/route.ts
 import { NextResponse } from 'next/server'
 import { verifyShopifyWebhook } from '@/lib/shopify/verifyWebhook'
 import { redisGet } from '@/lib/redis'
@@ -87,7 +86,7 @@ export async function POST(request: Request) {
       total: order.total_price,
       currency: order.currency,
       attributionFound: !!redisData,
-      redisKeyUsed: redisData ? '***Found***' : 'None' // Forenklet for logg
+      redisKeyUsed: redisData ? '***Found***' : 'None'
     },
     {
       cartToken,
@@ -238,23 +237,6 @@ export async function POST(request: Request) {
     }
 
     const response = await eventRequest.execute()
-    await logToAppLogs(
-      'INFO',
-      'CAPI Purchase Sent',
-      {
-        fbtrace_id: response.fbtrace_id,
-        events_received: response.events_received,
-        orderId: order.id
-      },
-      {
-        fbp: userData.fbp,
-        fbc: userData.fbc,
-        externalId: userData.external_id,
-        clientIp: userData.client_ip_address,
-        eventTime: serverEvent.event_time
-      }
-    )
-
     await logToAppLogs(
       'INFO',
       'CAPI Purchase Sent',

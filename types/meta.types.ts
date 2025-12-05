@@ -65,6 +65,17 @@ export type AddToCartInput = {
   occuredAt?: number | undefined
 }
 
+export type NewUserData = {
+  setFbp: string | undefined
+  setFbc: string | undefined
+  external_id: string | undefined
+  client_user_agent: string | undefined
+  client_ip_address: string | undefined
+  email_hash?: string | undefined
+  setClientIpAddress?: string | undefined
+  setClientUserAgent?: string | undefined
+}
+
 export interface MetaUserData {
   fbp?: string | undefined
   fbc?: string | undefined
@@ -88,6 +99,7 @@ export interface MetaContentItem {
   item_price?: number | undefined
   title?: string | undefined
   delivery_category?: string | undefined
+  content_name?: string | undefined
 }
 export type MetaPurchaseCustomData = {
   currency: string
@@ -160,4 +172,65 @@ export interface TrackingProps {
   postHogApiKey?: string | undefined
   postHogHost?: string | undefined
   snapPixelId?: string | undefined
+}
+
+export interface MetaEventRequestBody {
+  event_name: string
+  event_id: string
+  event_source_url: string
+  custom_data?: Record<string, unknown>
+}
+
+export interface MetaEventResponse {
+  events_received: number
+  messages: string[]
+  fbtrace_id: string
+}
+
+export interface FacebookUserData {
+  setClientIpAddress(ip: string): FacebookUserData
+  setClientUserAgent(ua: string): FacebookUserData
+  setFbc(fbc: string): FacebookUserData
+  setFbp(fbp: string): FacebookUserData
+}
+
+export interface FacebookServerEvent {
+  setEventName(name: string): FacebookServerEvent
+  setEventId(id: string): FacebookServerEvent
+  setEventTime(timestamp: number): FacebookServerEvent
+  setEventSourceUrl(url: string): FacebookServerEvent
+  setActionSource(source: string): FacebookServerEvent
+  setUserData(userData: FacebookUserData): FacebookServerEvent
+  setCustomData(data: Record<string, unknown>): FacebookServerEvent
+}
+
+export interface FacebookEventRequest {
+  setEvents(events: FacebookServerEvent[]): FacebookEventRequest
+  execute(): Promise<MetaEventResponse>
+}
+
+export interface BrowserIdentifiers {
+  clientIp?: string
+  userAgent?: string
+  fbp?: string
+  fbc?: string
+}
+
+export type MetaErrorResponseData = {
+  error?: {
+    message?: string
+    type?: string
+    code?: number
+  }
+  [key: string]: unknown
+}
+
+export type MetaErrorResponse = {
+  data?: MetaErrorResponseData
+  status?: number
+}
+
+export type MetaEventRequestResult = {
+  events_received?: number
+  fbtrace_id?: string
 }

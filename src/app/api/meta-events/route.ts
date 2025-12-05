@@ -1,5 +1,3 @@
-// Path: src/app/api/meta-events/route.ts
-
 import { NextRequest, NextResponse } from 'next/server'
 import {
   FacebookAdsApi,
@@ -11,7 +9,13 @@ import {
 } from 'facebook-nodejs-business-sdk'
 import { normalize } from '@/lib/meta/normalization'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
-import type { MetaEventPayload } from '@types'
+import type {
+  MetaContentItem,
+  MetaEventPayload,
+  MetaErrorResponse,
+  MetaEventRequestResult,
+  MetaErrorResponseData
+} from '@types'
 
 const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
 const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
@@ -26,16 +30,22 @@ if (!ACCESS_TOKEN || !PIXEL_ID) {
 }
 
 function getClientIp(req: NextRequest): string | null {
-  const reqIp = (req as any).ip
-  if (reqIp) return reqIp as string
-
   const forwardedFor = req.headers.get('x-forwarded-for')
   if (forwardedFor) {
-    return forwardedFor.split(',')[0]?.trim() ?? null
+    const candidates = forwardedFor
+      .split(',')
+      .map(ip => ip.trim())
+      .filter(Boolean)
+    const ipv6 = candidates.find(ip => ip.includes(':'))
+    if (ipv6) return ipv6
+    if (candidates.length > 0) return candidates[0] ?? null
   }
 
   const realIp = req.headers.get('x-real-ip')
   if (realIp) return realIp.trim()
+
+  const reqIp = (req as NextRequest & { ip?: string }).ip
+  if (reqIp) return reqIp
 
   return null
 }
@@ -70,55 +80,72 @@ export async function POST(request: NextRequest) {
       eventData
     } = body
 
+    const cookieFbp = request.cookies.get('_fbp')?.value
+    const cookieFbc = request.cookies.get('_fbc')?.value
+    const cookieExtId = request.cookies.get('ute_ext_id')?.value
+    const cookieUserHash = request.cookies.get('ute_user_hash')?.value
+
+    const fbp = userData.fbp || cookieFbp
+    const fbc = userData.fbc || cookieFbc
+    const externalId = userData.external_id || cookieExtId
+    const emailHash = userData.email_hash || cookieUserHash
+
+    const effectiveUserData = {
+      ...userData,
+      fbp,
+      fbc,
+      external_id: externalId,
+      email_hash: emailHash
+    }
+
     const user = new UserData()
     const requestIp = getClientIp(request)
     const requestAgent = request.headers.get('user-agent')
 
-    // Prioriter IP fra payload (hvis sendt), ellers bruk deteksjon
-    const finalIp = userData.client_ip_address || requestIp
-    const finalAgent = userData.client_user_agent || requestAgent
+    const finalIp = effectiveUserData.client_ip_address || requestIp
+    const finalAgent = effectiveUserData.client_user_agent || requestAgent
 
     if (finalIp) user.setClientIpAddress(finalIp)
     if (finalAgent) user.setClientUserAgent(finalAgent)
 
-    if (userData.fbp) user.setFbp(userData.fbp)
-    if (userData.fbc) user.setFbc(userData.fbc)
-    if (userData.external_id) user.setExternalId(userData.external_id)
+    if (fbp) user.setFbp(fbp)
+    if (fbc) user.setFbc(fbc)
+    if (externalId) user.setExternalId(externalId)
 
-    if (userData.email) {
-      const normalizedEmail = normalize.email(userData.email)
+    if (effectiveUserData.email) {
+      const normalizedEmail = normalize.email(effectiveUserData.email)
       if (normalizedEmail) user.setEmail(normalizedEmail)
-    } else if (userData.email_hash) {
-      user.setEmails([userData.email_hash])
+    } else if (emailHash) {
+      user.setEmails([emailHash])
     }
 
-    if (userData.phone) {
-      const normalizedPhone = normalize.phone(userData.phone)
+    if (effectiveUserData.phone) {
+      const normalizedPhone = normalize.phone(effectiveUserData.phone)
       if (normalizedPhone) user.setPhone(normalizedPhone)
     }
 
-    if (userData.first_name) {
-      const fn = normalize.name(userData.first_name)
+    if (effectiveUserData.first_name) {
+      const fn = normalize.name(effectiveUserData.first_name)
       if (fn) user.setFirstName(fn)
     }
-    if (userData.last_name) {
-      const ln = normalize.name(userData.last_name)
+    if (effectiveUserData.last_name) {
+      const ln = normalize.name(effectiveUserData.last_name)
       if (ln) user.setLastName(ln)
     }
-    if (userData.city) {
-      const city = normalize.city(userData.city)
+    if (effectiveUserData.city) {
+      const city = normalize.city(effectiveUserData.city)
       if (city) user.setCity(city)
     }
-    if (userData.state) {
-      const state = normalize.state(userData.state)
+    if (effectiveUserData.state) {
+      const state = normalize.state(effectiveUserData.state)
       if (state) user.setState(state)
     }
-    if (userData.zip) {
-      const zip = normalize.zip(userData.zip)
+    if (effectiveUserData.zip) {
+      const zip = normalize.zip(effectiveUserData.zip)
       if (zip) user.setZip(zip)
     }
-    if (userData.country) {
-      const country = normalize.country(userData.country)
+    if (effectiveUserData.country) {
+      const country = normalize.country(effectiveUserData.country)
       if (country) user.setCountry(country)
     }
 
@@ -137,13 +164,13 @@ export async function POST(request: NextRequest) {
         custom.setContentIds(eventData.content_ids)
       }
 
-      if (eventData.contents && Array.isArray(eventData.contents)) {
-        const contentList = eventData.contents.map((item: any) => {
+      if (isMetaContentArray(eventData.contents)) {
+        const contentList = eventData.contents.map(item => {
           return new Content()
             .setId(item.id)
             .setQuantity(item.quantity)
             .setItemPrice(item.item_price ?? 0)
-            .setTitle(item.title || item.content_name || undefined)
+            .setTitle(item.title || item.content_name || '')
         })
         custom.setContents(contentList)
       }
@@ -166,7 +193,7 @@ export async function POST(request: NextRequest) {
       eventRequest.setTestEventCode(TEST_EVENT_CODE)
     }
 
-    const response = await eventRequest.execute()
+    const response: MetaEventRequestResult = await eventRequest.execute()
 
     await logToAppLogs(
       'INFO',
@@ -178,10 +205,10 @@ export async function POST(request: NextRequest) {
       },
       {
         actionSource,
-        hasFbp: !!userData.fbp,
-        hasFbc: !!userData.fbc,
-        hasExtId: !!userData.external_id,
-        hasEmail: !!userData.email || !!userData.email_hash,
+        hasFbp: !!fbp,
+        hasFbc: !!fbc,
+        hasExtId: !!externalId,
+        hasEmail: !!effectiveUserData.email || !!emailHash,
         clientIp: finalIp
       }
     )
@@ -191,15 +218,15 @@ export async function POST(request: NextRequest) {
       events_received: response.events_received,
       fbtrace_id: response.fbtrace_id
     })
-  } catch (error: any) {
-    const errorResponse = error.response || {}
-    const errorData = errorResponse.data || {}
+  } catch (error: unknown) {
+    const { response: errorResponse, message } = parseMetaError(error)
+    const errorData = errorResponse?.data || {}
 
     await logToAppLogs(
       'ERROR',
       `CAPI Failed: ${eventName}`,
       {
-        error: error.message,
+        error: message,
         details: errorData,
         type: errorData.error?.type,
         code: errorData.error?.code
@@ -215,9 +242,53 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         error: 'Failed to send event to Meta',
-        details: errorData.error?.message || error.message || 'Unknown error'
+        details: errorData.error?.message || message || 'Unknown error'
       },
-      { status: errorResponse.status || 500 }
+      { status: errorResponse?.status || 500 }
     )
   }
+}
+
+function isMetaContentArray(contents: unknown): contents is MetaContentItem[] {
+  return Array.isArray(contents)
+}
+
+function parseMetaError(error: unknown): {
+  response: MetaErrorResponse | null
+  message: string
+} {
+  const message =
+    error instanceof Error ? error.message
+    : typeof (error as { message?: unknown }).message === 'string' ?
+      (error as { message: string }).message
+    : 'Unknown error'
+
+  if (
+    !error
+    || typeof error !== 'object'
+    || !('response' in error)
+    || typeof (error as { response?: unknown }).response !== 'object'
+    || (error as { response?: unknown }).response === null
+  ) {
+    return { response: null, message }
+  }
+
+  const response = (error as { response?: unknown }).response as Record<
+    string,
+    unknown
+  >
+
+  const data =
+    typeof response.data === 'object' && response.data !== null ?
+      (response.data as MetaErrorResponseData)
+    : undefined
+
+  const status =
+    typeof response.status === 'number' ? response.status : undefined
+
+  const responseObj: MetaErrorResponse = {}
+  if (data !== undefined) responseObj.data = data
+  if (status !== undefined) responseObj.status = status
+
+  return { response: responseObj, message }
 }

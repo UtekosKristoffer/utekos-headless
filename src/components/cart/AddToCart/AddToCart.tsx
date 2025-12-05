@@ -164,7 +164,6 @@ export function AddToCart({
           )
         }
 
-        // 3. Server-Side Tracking (CAPI)
         const ua =
           typeof navigator !== 'undefined' ? navigator.userAgent : undefined
         const fbp = getCookie('_fbp')
@@ -201,8 +200,6 @@ export function AddToCart({
 
         sendJSON('/api/meta-events', capiPayload)
 
-        // 4. Google Analytics 4 (GA4) Tracking
-        // Vi bruker rene ID-er også her for konsistens på tvers av plattformer
         if (typeof window !== 'undefined' && window.dataLayer) {
           const ga4Items = [
             {

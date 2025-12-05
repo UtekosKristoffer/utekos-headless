@@ -157,6 +157,12 @@ const nextConfig: NextConfig = {
         permanent: true
       },
       {
+        source:
+          '/checkout.shopify.com/63421546744/policies/26705854712.html?locale=en',
+        destination: '/personvern',
+        permanent: true
+      },
+      {
         source: '/pages/contact',
         destination: '/kontaktskjema',
         permanent: true

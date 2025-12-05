@@ -35,7 +35,6 @@ export function ProductPageController({
   useEffect(() => {
     if (!productData || !selectedVariant) return
 
-    // Unngå duplikater: Sjekk om ID er endret siden sist
     if (lastTrackedVariant.current === selectedVariant.id) return
 
     lastTrackedVariant.current = selectedVariant.id

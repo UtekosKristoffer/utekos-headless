@@ -1,18 +1,28 @@
-// Path: src/app/api/checkout/capture-identifiers/route.ts
-
 import { NextRequest, NextResponse } from 'next/server'
 import { redisSet } from '@/lib/redis'
 import { getStorageKey } from '@/lib/utils/getStorageKey'
-import { normalize } from '@/lib/meta/normalization' // Importerer normalisering
+import { normalize } from '@/lib/meta/normalization'
 import type { CaptureBody, CheckoutAttribution, MetaUserData } from '@types'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 
 function getClientIp(req: NextRequest): string | null {
   const forwardedFor = req.headers.get('x-forwarded-for')
   if (forwardedFor) {
-    const firstIp = forwardedFor.split(',')[0]
-    return firstIp ? firstIp.trim() : null
+    const candidates = forwardedFor
+      .split(',')
+      .map(ip => ip.trim())
+      .filter(Boolean)
+    const ipv6 = candidates.find(ip => ip.includes(':'))
+    if (ipv6) return ipv6
+    if (candidates.length > 0) return candidates[0] ?? null
   }
+
+  const realIp = req.headers.get('x-real-ip')
+  if (realIp) return realIp.trim()
+
+  const reqIp = (req as any).ip
+  if (reqIp) return String(reqIp)
+
   return null
 }
 
@@ -52,6 +62,7 @@ export async function POST(req: NextRequest) {
   if (cookieUserHash) {
     userDataToSave.email_hash = cookieUserHash
   }
+
   if (body.userData?.client_user_agent) {
     userDataToSave.client_user_agent = body.userData.client_user_agent
   } else if (userAgent) {
