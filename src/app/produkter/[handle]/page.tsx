@@ -1,4 +1,3 @@
-// Path: src/app/produkter/[handle]/page.tsx
 import { Suspense, Activity } from 'react'
 import { VideoSkeleton } from '@/app/produkter/components/VideoSkeleton'
 import { ProductVideoSection } from '@/app/produkter/components/ProductVideoSection'
@@ -49,14 +48,13 @@ export async function generateMetadata(
 
   const product = reshapeProductWithMetafields(rawProduct) || rawProduct
 
-  // 3. Finn aktiv variant basert på URL
   let activeVariant = null
   if (variantId) {
     const allVariants = flattenVariants(product) || []
-    activeVariant = allVariants.find(v => v.id === variantId)
+    activeVariant = allVariants.find(v => v.id === variantId) ?? null
   }
 
-  const variantImages = computeVariantImages(product, activeVariant ?? null)
+  const variantImages = computeVariantImages(product, activeVariant)
   const displayImage =
     variantImages[0]?.url || product.featuredImage?.url || '/og-image.jpg'
 
@@ -67,7 +65,41 @@ export async function generateMetadata(
 
   const seoDescription = product.seo.description || product.description
 
-  const canonicalUrl = `/produkter/${handle}${activeVariant ? `?variant=${activeVariant.id}` : ''}`
+  const canonicalUrl = `/produkter/${handle}${
+    activeVariant ? `?variant=${activeVariant.id}` : ''
+  }`
+
+  const selectedVariant =
+    activeVariant ?? product.selectedOrFirstAvailableVariant
+
+  const priceAmount = selectedVariant?.price.amount
+  const currencyCode = selectedVariant?.price.currencyCode
+  const retailerItemId = selectedVariant?.id
+  const itemGroupId = product.id
+  const isOutOfStock =
+    selectedVariant?.availableForSale === false
+    || selectedVariant?.currentlyNotInStock === true
+
+  const other: Record<string, string | number | (string | number)[]> = {}
+
+  if (retailerItemId) {
+    other['product:retailer_item_id'] = retailerItemId
+  }
+
+  if (itemGroupId) {
+    other['product:item_group_id'] = itemGroupId
+  }
+
+  if (priceAmount != null) {
+    other['product:price:amount'] = String(priceAmount)
+  }
+
+  if (currencyCode) {
+    other['product:price:currency'] = currencyCode
+  }
+
+  other['product:availability'] = isOutOfStock ? 'out of stock' : 'in stock'
+  other['product:condition'] = 'new'
 
   return {
     metadataBase: new URL('https://utekos.no'),
@@ -97,7 +129,8 @@ export async function generateMetadata(
       title: seoTitle,
       description: seoDescription,
       images: [displayImage]
-    }
+    },
+    other
   }
 }
 

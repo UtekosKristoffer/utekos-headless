@@ -4,7 +4,7 @@ export function verifyShopifyWebhook(
   rawBody: string,
   hmacHeader: string
 ): boolean {
-  try {
+  try { 
     if (!rawBody || !hmacHeader) return false
 
     const secret = process.env.SHOPIFY_WEBHOOK_SECRET
