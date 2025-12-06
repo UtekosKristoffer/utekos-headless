@@ -17,6 +17,7 @@ import type { RootLayoutProps } from '@types'
 import type { Metadata } from 'next'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { getCachedCart } from '../lib/helpers/cart/getCachedCart'
+import { GoogleTagManager } from '@next/third-parties/google'
 // import { Snowfall } from '@/components/ui/snowfall'
 
 export const metadata: Metadata = {
@@ -114,6 +115,7 @@ async function CartProviderLoader({ children }: { children: ReactNode }) {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='no'>
+      <GoogleTagManager gtmId='GTM-5TWMJQFP' />
       <body
         className={`bg-background text-foreground ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
