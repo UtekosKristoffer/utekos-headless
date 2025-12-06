@@ -3,6 +3,7 @@ import { getProducts } from '@/api/lib/products/getProducts'
 import { cacheLife } from 'next/cache'
 import { NextResponse } from 'next/server'
 
+// Hjelpefunksjoner (Uendret)
 function escapeXml(unsafe: unknown): string {
   if (typeof unsafe !== 'string') return ''
   return unsafe.replace(/[<>&'"]/g, c => {
@@ -31,17 +32,19 @@ function formatPrice(amount: string | number, currencyCode: string): string {
   return `${Number(amount).toFixed(2)} ${currencyCode}`
 }
 
-export async function GET() {
+// 1. Vi lager en EGEN funksjon for å generere XML-strengen.
+// Det er DENNE vi cacher, fordi den returnerer en string (som er lov å cache).
+async function generateFeedXml() {
   'use cache'
   cacheLife('hours')
 
   const baseUrl = 'https://utekos.no'
 
+  // Vi bruker getProducts som vi vet er trygg nå
   const response = await getProducts()
 
   if (!response.success || !response.body) {
-    console.error('Google Feed Error: Failed to fetch products')
-    return new NextResponse('Error generating feed', { status: 500 })
+    throw new Error('Failed to fetch products for feed')
   }
 
   const products = response.body
@@ -58,12 +61,9 @@ export async function GET() {
 
     for (const edge of product.variants.edges) {
       const variant = edge.node
-
       const variantId = variant.id
       const link = `${baseUrl}/produkter/${product.handle}?variant=${encodeURIComponent(variantId)}`
-
       const imageUrl = variant.image?.url || product.featuredImage?.url || ''
-
       const price = formatPrice(
         variant.price.amount,
         variant.price.currencyCode
@@ -86,6 +86,7 @@ export async function GET() {
 
       let color = ''
       let size = ''
+
       variant.selectedOptions.forEach(opt => {
         const name = opt.name.toLowerCase()
         if (name.includes('farge') || name.includes('color'))
@@ -130,7 +131,7 @@ export async function GET() {
     }
   }
 
-  const rss = `<?xml version="1.0" encoding="UTF-8"?>
+  return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
   <channel>
     <title>Utekos Produktfeed</title>
@@ -139,11 +140,22 @@ export async function GET() {
     ${xmlItems.join('')}
   </channel>
 </rss>`
+}
 
-  return new NextResponse(rss, {
-    headers: {
-      'Content-Type': 'application/xml; charset=utf-8',
-      'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=1800'
-    }
-  })
+// 2. Route Handleren er nå IKKE cached direkte, men kaller den cachede funksjonen over.
+export async function GET() {
+  try {
+    const rss = await generateFeedXml()
+
+    return new NextResponse(rss, {
+      headers: {
+        'Content-Type': 'application/xml; charset=utf-8',
+        // Vi beholder disse headerne for Google-botens skyld
+        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=1800'
+      }
+    })
+  } catch (error) {
+    console.error('Google Feed generation failed:', error)
+    return new NextResponse('Error generating feed', { status: 500 })
+  }
 }
