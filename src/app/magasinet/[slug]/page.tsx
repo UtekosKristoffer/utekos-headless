@@ -1,5 +1,3 @@
-// Path: src/app/magasinet/[slug]/page.tsx
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -14,7 +12,7 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Activity } from 'react'
-import { ArticleJsonLd } from '../ArticleJsonLd' // Husk å importere denne
+// ArticleJsonLd importen er fjernet herfra
 
 const articleComponents = {
   'beredskap-egenomsorg': dynamic(() =>
@@ -121,23 +119,9 @@ export default async function ArticlePage({
     notFound()
   }
 
-  // Henter dato fra mockArticles, eller bruker dagens dato som fallback (BØR FIKSES i dataen)
-  // Google krever en datePublished for articles/blogPosting.
-  const datePublished =
-    'publishedAt' in article ?
-      (article.publishedAt as string)
-    : '2024-01-01T12:00:00+01:00'
-
   return (
     <div className='container mx-auto px-4'>
-      <ArticleJsonLd
-        url={`https://utekos.no/magasinet/${article.slug}`}
-        title={article.title}
-        description={article.excerpt}
-        images={[article.imageUrl]} // Må være full URL
-        datePublished={datePublished}
-        authorName='Utekos'
-      />
+      {/* ArticleJsonLd er fjernet herfra fordi den nå ligger i layout.tsx */}
 
       <Activity>
         <div className='mx-auto md:max-w-4xl'>
