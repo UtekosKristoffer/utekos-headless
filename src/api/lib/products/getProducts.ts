@@ -1,5 +1,5 @@
 // Path: src/api/lib/products/getProducts.ts
-'use server'
+
 import { getProductsQuery } from '@/api/graphql/queries/products'
 import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
 import { removeEdgesAndNodes } from '@/lib/utils/removeEdgesAndNodes'

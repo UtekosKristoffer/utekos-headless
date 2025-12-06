@@ -1,5 +1,5 @@
 // Path: src/api/lib/products/getProduct.ts
-'use server'
+
 import { getProductQuery } from '@/api/graphql/queries/products'
 import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
 import { reshapeProduct } from '@/lib/utils/reshapeProduct'

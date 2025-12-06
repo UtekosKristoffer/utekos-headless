@@ -1,4 +1,4 @@
-// import { ProductListJsonLd } from './ProductListJsonLd' // Juster stien om nødvendig
+import { ProductListJsonLd } from '../ProductListJsonLd'
 import type { ReactNode } from 'react'
 
 export default function ProductListLayout({
@@ -8,7 +8,7 @@ export default function ProductListLayout({
 }) {
   return (
     <>
-      {/* <ProductListJsonLd />  <-- Kommenter ut denne midlertidig */}
+      <ProductListJsonLd />
 
       {children}
     </>
