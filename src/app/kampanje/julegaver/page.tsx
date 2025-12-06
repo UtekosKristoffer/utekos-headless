@@ -17,9 +17,32 @@ import { connection } from 'next/server'
 export const metadata: Metadata = {
   title: 'Julegavetips | Utekos',
   description:
-    'Finn de varmeste julegavene hos Utekos. TechDown, Comfyrobe, Dun og Mikrofiber. Utvidet bytterett og rask levering.'
+    'Finn de varmeste julegavene hos Utekos. TechDown, Comfyrobe, Dun og Mikrofiber. Utvidet bytterett og rask levering.',
+  openGraph: {
+    title: 'Gi bort funksjonell varme | Julegavetips fra Utekos', // Litt mer "selgende" tittel for deling
+    description:
+      'Den perfekte gaven til livsnyteren som har alt. Sikre deg høstens store trend med utvidet bytterett frem til 15. januar.',
+    url: 'https://utekos.no/kampanje/julegaver',
+    siteName: 'Utekos',
+    locale: 'nb_NO',
+    type: 'website',
+    images: [
+      {
+        url: '/linn-kate-kikkert.png',
+        width: 1200,
+        height: 630,
+        alt: 'Personer som nyter utelivet med varme klær fra Utekos'
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Julegavetips | Utekos',
+    description:
+      'Finn de varmeste julegavene hos Utekos. TechDown, Comfyrobe, Dun og Mikrofiber.',
+    images: ['/linn-kate-kikkert.png']
+  }
 }
-
 export default async function ChristmasCampaign() {
   await connection()
 

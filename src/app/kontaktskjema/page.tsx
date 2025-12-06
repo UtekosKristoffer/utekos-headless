@@ -1,8 +1,4 @@
 // Path: src/app/kontaktskjema/page.tsx
-/**
- * @fileoverview Kontaktside med Vercel-inspirert grid-system og mobiltilpasning
- * @module kontaktskjema
- */
 
 import { Toaster } from '@/components/ui/sonner'
 import type { Metadata } from 'next'
@@ -12,7 +8,6 @@ import { DesktopSection } from './sections/DesktopSection'
 import { MobileSection } from './sections/MobileSection'
 import { TopGrid } from './sections/TopGrid'
 import { Activity } from 'react'
-import { ContactPageJsonLd } from './ContactPageJsonLd' // Ny import
 
 export const metadata: Metadata = {
   title: 'Kontakt oss | Kundeservice',
@@ -43,8 +38,7 @@ export const metadata: Metadata = {
 export default function SupportPage() {
   return (
     <>
-      <ContactPageJsonLd />
-      <main className='container mx-auto my-32 max-w-[76rem] px-4'>
+      <section className='container mx-auto my-32 max-w-[76rem] px-4'>
         <div>
           <Activity>
             <TopGrid />
@@ -67,7 +61,7 @@ export default function SupportPage() {
             <BottomGrid />
           </Activity>
         </div>
-      </main>
+      </section>
       <Toaster richColors />
     </>
   )

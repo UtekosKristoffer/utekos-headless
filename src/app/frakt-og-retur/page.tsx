@@ -3,7 +3,6 @@ import { InfoSidebar } from '@/app/frakt-og-retur/components/InfoSideBar'
 import { ShippingReturnsHeader } from '@/app/frakt-og-retur/components/ShippingReturnsHeader'
 import { ShippingReturnsInfo } from '@/app/frakt-og-retur/components/ShippingReturnsInfo'
 import type { Metadata } from 'next'
-import { jsonLd } from './ShippingAndReturnsPageHelpers/jsonLd'
 import { Activity } from 'react'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -35,11 +34,7 @@ export const metadata: Metadata = {
 export default function ShippingAndReturnsPage() {
   return (
     <>
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <main className='container mx-auto px-4 py-12 sm:py-16'>
+      <section className='container mx-auto px-4 py-12 sm:py-16'>
         <Activity>
           <ShippingReturnsHeader />
         </Activity>
@@ -51,7 +46,7 @@ export default function ShippingAndReturnsPage() {
             <InfoSidebar />
           </Activity>
         </div>
-      </main>
+      </section>
     </>
   )
 }
