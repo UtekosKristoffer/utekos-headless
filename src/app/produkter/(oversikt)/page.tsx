@@ -10,14 +10,14 @@ import { ProductsPageHeader } from '@/app/produkter/components/ProductsPageHeade
 import { AllProductsCarousel } from '@/components/ProductCard/AllProductsCarousel'
 import { ComfyrobeFeatureSection } from '@/app/produkter/components/sections/ComfyrobeSection/ComfyrobeFeatureSection'
 import { ProductGridSkeleton } from '@/components/frontpage/Skeletons/ProductGridSkeleton'
-import { VideoSkeleton } from './components/VideoSkeleton'
+import { VideoSkeleton } from '../components/VideoSkeleton'
 import { Suspense, Activity } from 'react'
 import type { Metadata } from 'next'
-import { StapperFeatureSection } from './components/sections/StapperFeatureSection/StapperFeatureSection'
-import { ProductVideoSection } from './components/ProductVideoSection'
-import { TechDownFeatureSection } from './components/sections/TechDownFeatureSection/TechDownFeatureSection'
+import { StapperFeatureSection } from '../components/sections/StapperFeatureSection/StapperFeatureSection'
+import { ProductVideoSection } from '../components/ProductVideoSection'
+import { TechDownFeatureSection } from '../components/sections/TechDownFeatureSection/TechDownFeatureSection'
 import { connection } from 'next/server'
-import { MikrofiberSection } from './components/sections/MicrofiberSection/MikrofiberSection'
+import { MikrofiberSection } from '../components/sections/MicrofiberSection/MikrofiberSection'
 
 export const metadata: Metadata = {
   title: 'Kolleksjon: Komfortplagg for hytteliv & utekos | Utekos',
