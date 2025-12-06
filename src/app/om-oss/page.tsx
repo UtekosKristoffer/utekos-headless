@@ -9,7 +9,7 @@ import { PhilosophiesSection } from './Sections/PhilosophiesSection'
 import { AboutUsHeroSection } from './Sections/AboutUsHeroSection'
 import { FindInStoreSection } from '@/components/frontpage/FindStoreSection'
 import { Activity } from 'react'
-import { AboutPageJsonLd } from './Sections/AboutPageJsonLd'
+
 export const metadata: Metadata = {
   title: 'Om Utekos | Vår historie og løfte til deg',
   description:
@@ -38,8 +38,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main>
-      <AboutPageJsonLd />
+    <section>
       <Activity>
         <AboutUsHeroSection />
       </Activity>
@@ -64,6 +63,6 @@ export default function AboutPage() {
       <Activity>
         <CTASection />
       </Activity>
-    </main>
+    </section>
   )
 }

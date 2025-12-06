@@ -51,7 +51,6 @@ export default function MagazineLayout({ children }: { children: ReactNode }) {
 
       <main className='py-16 sm:py-24'>{children}</main>
 
-      {/* NY SEKSJON FOR PÅMELDING */}
       <Activity>
         <MagazineNewsletterSignup />
       </Activity>

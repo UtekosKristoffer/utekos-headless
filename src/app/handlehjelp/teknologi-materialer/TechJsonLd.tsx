@@ -1,6 +1,11 @@
+import { cacheLife, cacheTag } from 'next/cache'
 import type { Article, WithContext } from 'schema-dts'
 
-export function TechJsonLd() {
+export async function TechJsonLd() {
+  'use cache'
+  cacheLife('max')
+  cacheTag('jsonld-tech-materials')
+
   const jsonLd: WithContext<Article> = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -10,9 +15,10 @@ export function TechJsonLd() {
     'image': [
       'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/damentilpederbilde.png?v=1746789037'
     ],
-
     'author': {
-      '@id': 'https://utekos.no/#organization'
+      '@type': 'Organization',
+      'name': 'Utekos',
+      'url': 'https://utekos.no'
     },
     'publisher': {
       '@id': 'https://utekos.no/#organization'
@@ -21,7 +27,6 @@ export function TechJsonLd() {
       '@type': 'WebPage',
       '@id': 'https://utekos.no/handlehjelp/teknologi-materialer'
     },
-
     'datePublished': '2025-10-01T08:00:00+01:00',
     'dateModified': '2025-10-22T08:00:00+01:00'
   }

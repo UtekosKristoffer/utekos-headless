@@ -1,7 +1,6 @@
 // Path: src/app/handlehjelp/teknologi-materialer/page.tsx
 
 import type { Metadata } from 'next'
-import { TechJsonLd } from './TechJsonLd'
 import { ProductSpecsView } from './layout/ProductSpecsView'
 import { technologyGroups } from './config'
 import { ProductSpecPageHeader } from './layout/ProductSpecPageHeader'
@@ -36,9 +35,8 @@ export const metadata: Metadata = {
 export default function ProductSpecsPage() {
   return (
     <>
-      <TechJsonLd />
-      <main className='container mx-auto px-4 py-12 sm:py-16'>
-        <section className='container mx-auto px-4 text-center'>
+      <section className='container mx-auto px-4 py-12 sm:py-16'>
+        <div className='container mx-auto px-4 text-center'>
           <h1 className='text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl'>
             Ett plagg. <br className='hidden sm:block' />
             <span className='bg-gradient-to-r from-sky-800 via-cyan-700 to-sky-800 bg-clip-text text-transparent'>
@@ -51,7 +49,7 @@ export default function ProductSpecsPage() {
             til en elegant parkas. Vi kaller det{' '}
             <strong>3-i-1 funksjonalitet</strong>.
           </p>
-        </section>
+        </div>
 
         {/* --- DE 3 MODUSENE (GRID) --- */}
         <section className='container mx-auto mt-20 px-4'>
@@ -117,7 +115,7 @@ export default function ProductSpecsPage() {
         <Activity>
           <ProductSpecsView technologyGroups={technologyGroups} />
         </Activity>
-      </main>
+      </section>
     </>
   )
 }

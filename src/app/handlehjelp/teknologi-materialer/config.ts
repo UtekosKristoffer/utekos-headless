@@ -19,7 +19,6 @@ export const technologyGroups: readonly TechnologyGroup[] = [
         icon: 'gem',
         title: 'Luméa™',
         iconColor: 'text-sky-800',
-        // --- HER ER DEN OPPDATERTE TEKSTEN ---
         content:
           'Vårt mest eksklusive ytterstoff, utviklet for TechDown™ for å maksimere komfort og slitestyrke. Den tettvevde, premium nylonkonstruksjonen gir en naturlig vannavvisende egenskap og står imot lett fukt. Hovedfokuset er den eksepsjonelle, myke følelsen og den elegante matte finishen – et materiale valgt for luksuriøs komfort.',
         products: ['Utekos TechDown™']

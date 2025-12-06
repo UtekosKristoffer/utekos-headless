@@ -1,7 +1,11 @@
-// Path: src/app/handlehjelp/vask-og-vedlikehold/MaintenanceJsonLd.tsx
+import { cacheLife, cacheTag } from 'next/cache'
 import type { HowTo, WithContext } from 'schema-dts'
 
-export function MaintenanceJsonLd() {
+export async function MaintenanceJsonLd() {
+  'use cache'
+  cacheLife('max')
+  cacheTag('jsonld-maintenance')
+
   const jsonLd: WithContext<HowTo> = {
     '@context': 'https://schema.org',
     '@type': 'HowTo',

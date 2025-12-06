@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import { Activity } from 'react'
 import { BackToShopCta } from './BackToShopCta'
 import { ComfyrobeSizeGuide } from './ComfyrobeSizeGuide'
-import { SizeGuideJsonLd } from './SizeGuideJsonLd' // Ny import
 import { TechDownSizeGuide } from './TechDownSizeGuide'
 import { UtekosSizeGuide } from './UtekosSizeGuide'
 export const metadata: Metadata = {
@@ -42,8 +41,7 @@ const navigationLinks = [
 export default function SizeGuidePage() {
   return (
     <>
-      <SizeGuideJsonLd />
-      <main>
+      <section>
         <Activity>
           <div className='container mx-auto px-4 pt-12 sm:pt-16'>
             <div className='mx-auto max-w-3xl text-center'>
@@ -122,7 +120,7 @@ export default function SizeGuidePage() {
         <Activity>
           <BackToShopCta />
         </Activity>
-      </main>
+      </section>
     </>
   )
 }

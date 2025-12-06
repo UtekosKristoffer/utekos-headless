@@ -1,7 +1,11 @@
-// Path: src/app/om-oss/AboutPageJsonLd.tsx
+import { cacheLife, cacheTag } from 'next/cache'
 import type { AboutPage, WithContext } from 'schema-dts'
 
-export function AboutPageJsonLd() {
+export async function AboutPageJsonLd() {
+  'use cache'
+  cacheLife('max')
+  cacheTag('jsonld-about')
+
   const jsonLd: WithContext<AboutPage> = {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
@@ -21,7 +25,6 @@ export function AboutPageJsonLd() {
       'width': '1200',
       'height': '630'
     },
-
     'lastReviewed': '2025-10-14'
   }
 

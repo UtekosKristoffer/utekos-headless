@@ -1,11 +1,12 @@
-// Path: src/app/vilkar-betingelser/TermsPageJsonLd.tsx
+import { lastUpdated } from '@/db/config/terms.config'
+import { cacheLife, cacheTag } from 'next/cache'
 import type { WebPage, WithContext } from 'schema-dts'
 
-type Props = {
-  lastUpdated: string
-}
+export async function TermsPageJsonLd() {
+  'use cache'
+  cacheLife('max')
+  cacheTag('jsonld-terms')
 
-export function TermsPageJsonLd({ lastUpdated }: Props) {
   const jsonLd: WithContext<WebPage> = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',

@@ -4,7 +4,6 @@ import { PrivacyNav } from '@/components/legal/PrivacyNav'
 import { lastUpdated, termsSections } from '@/db/config/terms.config'
 import type { Metadata } from 'next'
 import { SectionWrapper } from './SectionWrapper'
-import { TermsPageJsonLd } from './TermsPageJsonLd'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -40,9 +39,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <main className='container mx-auto my-24 max-w-6xl px-4'>
-      <TermsPageJsonLd lastUpdated={lastUpdated} />
-
+    <section className='container mx-auto my-24 max-w-6xl px-4'>
       <div className='relative border border-white/10 bg-background'>
         <GridCross className='left-0 top-0 -translate-x-1/2 -translate-y-1/2' />
         <GridCross className='right-0 bottom-0 translate-x-1/2 translate-y-1/2' />
@@ -79,6 +76,6 @@ export default function TermsPage() {
           </div>
         </div>
       </div>
-    </main>
+    </section>
   )
 }

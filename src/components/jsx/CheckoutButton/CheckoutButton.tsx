@@ -44,10 +44,8 @@ export const CheckoutButton = ({
     }
 
     try {
-
       const cleanItemIds = item_ids.map(id => cleanShopifyId(id) || id)
 
-      // Vi bruker den robuste getCookie som håndterer decoding
       const fbp = getCookie('_fbp')
       const fbc = getCookie('_fbc')
       const extId = getCookie('ute_ext_id')
@@ -55,9 +53,6 @@ export const CheckoutButton = ({
       const ua =
         typeof navigator !== 'undefined' ? navigator.userAgent : undefined
 
-      // Genererer krypto-sikker Event ID (evt_...)
-      // Vi bruker 'ic_' prefix for InitiateCheckout for enkel debugging,
-      // men beholder formatet fra generateEventID
       const rawEventID = generateEventID()
       const eventID = rawEventID.replace('evt_', 'ic_')
 
@@ -71,7 +66,6 @@ export const CheckoutButton = ({
         client_user_agent: ua
       }
 
-      // 2. Browser Pixel Tracking (Client-Side)
       if (typeof window !== 'undefined' && window.fbq) {
         window.fbq(
           'track',
@@ -87,8 +81,6 @@ export const CheckoutButton = ({
         )
       }
 
-      // 3. Capture Identifiers (Redis lagring for Webhook enrichment)
-      // Dette er kritisk for at "Purchase" eventet senere skal kunne dedupliseres
       const captureBody: CaptureBody = {
         cartId,
         checkoutUrl,
@@ -96,8 +88,6 @@ export const CheckoutButton = ({
         userData
       }
 
-      // Vi bruker keepalive: true for å sikre at requesten fullføres
-      // selv om nettleseren redirecter til checkout umiddelbart
       fetch('/api/checkout/capture-identifiers', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -105,7 +95,6 @@ export const CheckoutButton = ({
         keepalive: true
       }).catch(err => console.error('Capture identifiers failed', err))
 
-      // 4. CAPI Tracking (Server-Side)
       const capiPayload: MetaEventPayload = {
         eventName: 'InitiateCheckout',
         eventId: eventID,

@@ -1,7 +1,11 @@
-// Path: src/app/handlehjelp/storrelsesguide/SizeGuideJsonLd.tsx
+import { cacheLife, cacheTag } from 'next/cache'
 import type { FAQPage, WithContext } from 'schema-dts'
 
-export function SizeGuideJsonLd() {
+export async function SizeGuideJsonLd() {
+  'use cache'
+  cacheLife('max')
+  cacheTag('jsonld-size-guide')
+
   const jsonLd: WithContext<FAQPage> = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -48,7 +52,6 @@ export function SizeGuideJsonLd() {
     <script
       type='application/ld+json'
       dangerouslySetInnerHTML={{
-        // Sikkerhet: Unicode-erstatning for å hindre XSS, ref Next.js docs
         __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c')
       }}
     />

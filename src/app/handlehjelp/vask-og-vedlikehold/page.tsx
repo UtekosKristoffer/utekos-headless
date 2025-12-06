@@ -1,6 +1,5 @@
 // Path: src/app/handlehjelp/vask-og-vedlikehold/page.tsx
 import type { Metadata } from 'next'
-import { MaintenanceJsonLd } from './MaintenanceJsonLd' // Ny komponent
 import { ProductCareHeader } from './sections/ProductCareHeader'
 import { ProductCareBody } from './sections/ProductCareBody'
 import { Activity } from 'react'
@@ -34,15 +33,14 @@ export const metadata: Metadata = {
 export default function ProductCarePage() {
   return (
     <>
-      <MaintenanceJsonLd />
-      <main className='container mx-auto px-4 py-12 sm:py-16'>
+      <section className='container mx-auto px-4 py-12 sm:py-16'>
         <Activity>
           <ProductCareHeader />
         </Activity>
         <Activity>
           <ProductCareBody />
         </Activity>
-      </main>
+      </section>
     </>
   )
 }
