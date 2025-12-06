@@ -1,8 +1,7 @@
 // Path: src/app/produkter/[handle]/ProductPageView/TechDownLaunchOffer.tsx
 
 'use client'
-
-import { getProduct } from '@/api/lib/products/getProduct'
+import { getProductAction } from '@/api/lib/products/actions'
 import { FreeBuffSelector } from '@/components/products/FreeBuffSelector'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useEffect, useState, useEffectEvent } from 'react'
@@ -26,7 +25,7 @@ export function TechDownLaunchOffer({
   useEffect(() => {
     async function fetchBuffProduct() {
       try {
-        const product = await getProduct('utekos-buff')
+        const product = await getProductAction('utekos-buff')
         setBuffProduct(product)
       } catch (error) {
         console.error('Failed to fetch buff product:', error)

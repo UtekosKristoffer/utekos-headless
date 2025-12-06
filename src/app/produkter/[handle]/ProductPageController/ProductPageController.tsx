@@ -5,7 +5,7 @@ import { useProductPage } from '@/hooks/useProductPage'
 import ProductPageView from '@/app/produkter/[handle]/ProductPageView/ProductPageView'
 import { ProductPageSkeleton } from '../ProductPageSkeleton/ProductPageSkeleton'
 import type { ShopifyProduct } from '@types'
-import { MetaProductView } from '@/components/analytics/MetaPixel/MetaProductView' // <--- Ny import
+import { MetaProductView } from '@/components/analytics/MetaPixel/MetaProductView'
 
 interface ProductPageControllerProps {
   handle: string
