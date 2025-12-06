@@ -1,11 +1,12 @@
-// Path: src/app/personvern/PrivacyPolicyJsonLd.tsx
+import { lastUpdated } from '@/db/config/privacy.config'
+import { cacheLife, cacheTag } from 'next/cache'
 import type { WebPage, WithContext } from 'schema-dts'
 
-type Props = {
-  lastUpdated: string
-}
+export async function PrivacyPolicyJsonLd() {
+  'use cache'
+  cacheLife('max')
+  cacheTag('privacy-policy-jsonld')
 
-export function PrivacyPolicyJsonLd({ lastUpdated }: Props) {
   const jsonLd: WithContext<WebPage> = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
@@ -18,7 +19,6 @@ export function PrivacyPolicyJsonLd({ lastUpdated }: Props) {
     'publisher': {
       '@id': 'https://utekos.no/#organization'
     },
-
     'about': {
       '@type': 'Thing',
       'name': 'Personvern og GDPR'

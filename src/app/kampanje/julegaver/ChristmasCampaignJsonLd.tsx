@@ -1,10 +1,5 @@
 import { cacheLife, cacheTag } from 'next/cache'
-import type {
-  CollectionPage,
-  WithContext,
-  ItemList,
-  ListItem
-} from 'schema-dts'
+import type { CollectionPage, WithContext, ListItem } from 'schema-dts'
 
 export async function ChristmasCampaignJsonLd() {
   'use cache'
@@ -74,8 +69,7 @@ export async function ChristmasCampaignJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     'name': 'Julegavetips | Utekos',
-    'description':
-      'Finn de varmeste julegavene hos Utekos. TechDown, Comfyrobe, Dun og Mikrofiber. Utvidet bytterett og rask levering.',
+    'description': 'Gi bort funksjonell varme | Julegavetips fra Utekos.',
     'url': `${baseUrl}/kampanje/julegaver`,
     'mainEntity': {
       '@type': 'ItemList',

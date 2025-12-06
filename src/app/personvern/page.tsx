@@ -3,7 +3,6 @@ import { GridCross } from '@/components/legal/GridCross'
 import { PrivacyNav } from '@/components/legal/PrivacyNav'
 import { lastUpdated, privacySections } from '@/db/config/privacy.config'
 import type { Metadata } from 'next'
-import { PrivacyPolicyJsonLd } from './PrivacyPolicyJsonLd'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -59,9 +58,7 @@ const SectionWrapper = ({
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className='container mx-auto my-24 max-w-6xl px-4'>
-      <PrivacyPolicyJsonLd lastUpdated={lastUpdated} />
-
+    <section className='container mx-auto my-24 max-w-6xl px-4'>
       <div className='relative border border-white/10 bg-background'>
         <GridCross className='left-0 top-0 -translate-x-1/2 -translate-y-1/2' />
         <GridCross className='right-0 bottom-0 translate-x-1/2 translate-y-1/2' />
@@ -98,6 +95,6 @@ export default function PrivacyPolicyPage() {
           </div>
         </div>
       </div>
-    </main>
+    </section>
   )
 }
