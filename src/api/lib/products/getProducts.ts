@@ -1,5 +1,5 @@
 // Path: src/api/lib/products/getProducts.ts
-'use cache'
+
 import { getProductsQuery } from '@/api/graphql/queries/products'
 import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
 import { removeEdgesAndNodes } from '@/lib/utils/removeEdgesAndNodes'
@@ -13,6 +13,7 @@ import type {
 import { cacheLife, cacheTag } from 'next/cache'
 import { TAGS } from '../../constants'
 
+// Intern hjelpefunksjon (ikke cached, brukes av getProducts)
 export async function fetchProducts(
   params: GetProductsParams = {}
 ): Promise<ShopifyProduct[]> {
@@ -40,11 +41,14 @@ export async function fetchProducts(
   return reshapeProducts(rawProducts)
 }
 
+// Hovedfunksjon - Cached internt på server
 export async function getProducts(
-  params: GetProductsParams = {}
+  params: GetProductsParams = {} // <--- Her fikser vi TypeScript-feilen ved å angi type
 ): Promise<GetProductsResponse> {
+  'use cache'
   cacheTag(TAGS.products)
   cacheLife('days')
+
   try {
     const products = await fetchProducts(params)
     return {
@@ -58,7 +62,7 @@ export async function getProducts(
     console.error('getProducts failed:', errorMessage)
     return {
       success: false,
-      status: 500, // Eller annen relevant feilkode
+      status: 500,
       error: errorMessage
     }
   }
