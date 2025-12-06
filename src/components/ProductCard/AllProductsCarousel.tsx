@@ -2,7 +2,7 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { getProducts } from '@/api/lib/products/getProducts'
+import { getProductsAction } from '@/api/lib/products/actions'
 import {
   Carousel,
   CarouselContent,
@@ -19,7 +19,7 @@ export function AllProductsCarousel() {
   const { data: products } = useQuery({
     queryKey: ['products', 'all'],
     queryFn: async () => {
-      const response = await getProducts()
+      const response = await getProductsAction()
       if (!response.success || !response.body) {
         return []
       }
