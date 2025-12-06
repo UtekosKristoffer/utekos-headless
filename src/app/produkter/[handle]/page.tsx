@@ -3,7 +3,6 @@ import { VideoSkeleton } from '@/app/produkter/components/VideoSkeleton'
 import { ProductVideoSection } from '@/app/produkter/components/ProductVideoSection'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { getProduct } from '@/api/lib/products/getProduct'
-import { ProductJsonLd } from './ProductJsonLd'
 import { FindInStoreSection } from '@/components/frontpage/FindStoreSection'
 import { QueryClient } from '@tanstack/react-query'
 import {
@@ -157,7 +156,6 @@ export default async function ProductPage({
 
   return (
     <>
-      <ProductJsonLd handle={handle} />
       <Activity>
         <HydrationBoundary state={dehydrate(queryClient)}>
           <ProductPageController

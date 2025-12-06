@@ -1,7 +1,12 @@
 // Path: src/app/kontaktskjema/ContactPageJsonLd.tsx
+import { cacheLife, cacheTag } from 'next/cache'
 import type { ContactPage, WithContext } from 'schema-dts'
 
-export function ContactPageJsonLd() {
+export async function ContactPageJsonLd() {
+  'use cache'
+  cacheLife('max')
+  cacheTag('contact-page')
+
   const jsonLd: WithContext<ContactPage> = {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
