@@ -44,11 +44,7 @@ export default function InspirasjonLayout({
           </div>
         </section>
       </Activity>
-
-      {/* Children vil ha sine egne Activity-wrappers fra sin page.tsx */}
-      {children}
-
-      {/* Cross-Navigation Section */}
+      {children}s
       <Activity>
         <section className='bg-sidebar-foreground py-16 border-t border-neutral-800'>
           <div className='container mx-auto px-4'>
@@ -104,7 +100,6 @@ export default function InspirasjonLayout({
           </div>
         </section>
       </Activity>
-
       <Activity>
         <TrustIndicators />
       </Activity>
