@@ -1,4 +1,3 @@
-// Path: src/app/produkter/page.tsx
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 import { getProducts } from '@/api/lib/products/getProducts'
 import { QueryClient } from '@tanstack/react-query'

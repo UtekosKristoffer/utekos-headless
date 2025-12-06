@@ -1,36 +1,24 @@
 // Path: src/app/api/search-index/route.ts
-
-import sitemap from '@/app/sitemap'
 import { buildSearchIndex } from '@/lib/helpers/search'
-import type { MetadataRoute } from 'next'
 import { NextResponse } from 'next/server'
+import { cacheLife } from 'next/cache'
+
+async function getCachedSearchIndex() {
+  'use cache'
+  cacheLife('hours')
+  const { groups } = buildSearchIndex([])
+
+  return groups
+}
 
 export async function GET() {
   try {
-    const sitemapEntries = (await sitemap()) as MetadataRoute.Sitemap
-
-    const allPaths = sitemapEntries
-      .map(entry => {
-        try {
-          const url = new URL(entry.url)
-          return url.pathname || '/'
-        } catch {
-          console.warn(`Ugyldig URL i sitemap: ${entry.url}`)
-          return null
-        }
-      })
-      .filter((path): path is string => path !== null)
-
-    const uniquePaths = Array.from(new Set(allPaths))
-    const contentPaths = uniquePaths.filter(p => !p.startsWith('/api'))
-    const { groups } = buildSearchIndex(contentPaths)
+    const groups = await getCachedSearchIndex()
 
     return NextResponse.json(
-      { groups: groups },
+      { groups },
       {
-        headers: {
-          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600'
-        }
+        status: 200
       }
     )
   } catch (error) {
