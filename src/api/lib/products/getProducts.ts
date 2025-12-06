@@ -1,69 +1,32 @@
 // Path: src/api/lib/products/getProducts.ts
-
+import 'server-only' // <--- LEGG TIL DENNE! Stopper import i Client Components
 import { getProductsQuery } from '@/api/graphql/queries/products'
 import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
 import { removeEdgesAndNodes } from '@/lib/utils/removeEdgesAndNodes'
 import { reshapeProducts } from '@/lib/utils/reshapeProducts'
-import type {
-  GetProductsParams,
-  GetProductsResponse,
-  ShopifyProduct,
-  ShopifyProductsOperation
-} from '@types'
+import type { GetProductsParams, GetProductsResponse, ShopifyProduct, ShopifyProductsOperation } from '@types'
 import { cacheLife, cacheTag } from 'next/cache'
 import { TAGS } from '../../constants'
 
-// Intern hjelpefunksjon (ikke cached, brukes av getProducts)
-export async function fetchProducts(
-  params: GetProductsParams = {}
-): Promise<ShopifyProduct[]> {
-  const variables = {
-    first: 12,
-    ...params
-  }
-
-  const res = await shopifyFetch<ShopifyProductsOperation>({
-    query: getProductsQuery,
-    variables
-  })
-
-  if (!res.success) {
-    throw new Error(
-      res.error.errors[0]?.message ?? 'Failed to fetch products from Shopify.'
-    )
-  }
-
-  if (!res.body.products) {
-    throw new Error('Invalid response structure from Shopify')
-  }
-
-  const rawProducts = removeEdgesAndNodes(res.body.products)
-  return reshapeProducts(rawProducts)
+// Intern hjelpefunksjon
+export async function fetchProducts(params: GetProductsParams = {}): Promise<ShopifyProduct[]> {
+  const variables = { first: 12, ...params }
+  const res = await shopifyFetch<ShopifyProductsOperation>({ query: getProductsQuery, variables })
+  if (!res.success) throw new Error(res.error.errors[0]?.message ?? 'Failed to fetch products')
+  if (!res.body.products) throw new Error('Invalid response structure')
+  return reshapeProducts(removeEdgesAndNodes(res.body.products))
 }
 
-// Hovedfunksjon - Cached internt på server
-export async function getProducts(
-  params: GetProductsParams = {} // <--- Her fikser vi TypeScript-feilen ved å angi type
-): Promise<GetProductsResponse> {
+// Hovedfunksjon (Server Only)
+export async function getProducts(params: GetProductsParams = {}): Promise<GetProductsResponse> {
   'use cache'
   cacheTag(TAGS.products)
   cacheLife('days')
-
+  
   try {
     const products = await fetchProducts(params)
-    return {
-      success: true,
-      status: 200,
-      body: products
-    }
+    return { success: true, status: 200, body: products }
   } catch (error) {
-    const errorMessage =
-      error instanceof Error ? error.message : 'An unknown error occurred'
-    console.error('getProducts failed:', errorMessage)
-    return {
-      success: false,
-      status: 500,
-      error: errorMessage
-    }
+    return { success: false, status: 500, error: error instanceof Error ? error.message : 'Unknown error' }
   }
 }

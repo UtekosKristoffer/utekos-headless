@@ -1,7 +1,7 @@
 // Path: src/components/products/quick-view/QuickViewModal.tsx
 'use client'
 
-import { getProduct } from '@/api/lib/products/getProduct'
+import { getProductAction } from '@/api/lib/products/actions'
 import { AddToCart } from '@/components/cart/AddToCart/AddToCart'
 import {
   Dialog,
@@ -77,8 +77,8 @@ export function QuickViewModal({
         setIsLoading(true)
         try {
           const [mainProduct, freeBuffProduct] = await Promise.all([
-            getProduct(productHandle),
-            getProduct('utekos-buff')
+            getProductAction(productHandle),
+            getProductAction('utekos-buff')
           ])
           setProductData(mainProduct)
           setBuffProduct(freeBuffProduct)
