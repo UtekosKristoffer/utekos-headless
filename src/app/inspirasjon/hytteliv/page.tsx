@@ -12,7 +12,6 @@ import { UseCasesGrid, useCasesData } from './sections/UseCasesGrid'
 import { SeasonsSection } from './sections/SeasonsSection'
 import { SocialProof } from './sections/SocialProof'
 import { Activity } from 'react'
-import { InspirationJsonLd } from '../InspirationJsonLd'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -51,16 +50,10 @@ export const metadata: Metadata = {
 export default function CabinInspirationPage() {
   return (
     <>
-      {/* Ny optimalisert JSON-LD komponent */}
-      <InspirationJsonLd
-        title='Hytteliv og Utekos'
-        description='Oppdag hvordan Utekos forvandler hytteopplevelsen. Inspirasjon for alle sesonger.'
-        url='https://utekos.no/inspirasjon/hytteliv'
-        image='https://utekos.no/og-image-hytte.webp'
-        datePublished='2024-01-01' // Sett gjerne en dato for når innholdet var nytt/oppdatert
-      />
+      {/* JSON-LD er flyttet til layout.tsx for optimal cache/PPR */}
 
-      <main>
+      {/* Endret <main> til <div> for å unngå dobbel main-tag (RootLayout har main) */}
+      <div className='flex flex-col gap-12 pb-20'>
         <Activity>
           <CabinHeroSection />
         </Activity>
@@ -82,7 +75,7 @@ export default function CabinInspirationPage() {
         <Activity>
           <CTASection />
         </Activity>
-      </main>
+      </div>
     </>
   )
 }

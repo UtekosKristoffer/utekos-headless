@@ -9,7 +9,9 @@ const nextConfig: NextConfig = {
   typedRoutes: true,
   reactCompiler: true,
   cacheComponents: true,
+  staticPageGenerationTimeout: 180,
   experimental: {
+    cpus: 1,
     optimizePackageImports: [
       'zod',
       '@radix-ui/react-dialog',
