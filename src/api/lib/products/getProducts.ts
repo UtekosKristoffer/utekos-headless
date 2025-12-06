@@ -1,5 +1,5 @@
 // Path: src/api/lib/products/getProducts.ts
-
+'use cache'
 import { getProductsQuery } from '@/api/graphql/queries/products'
 import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
 import { removeEdgesAndNodes } from '@/lib/utils/removeEdgesAndNodes'
@@ -43,7 +43,6 @@ export async function fetchProducts(
 export async function getProducts(
   params: GetProductsParams = {}
 ): Promise<GetProductsResponse> {
-  'use cache'
   cacheTag(TAGS.products)
   cacheLife('days')
   try {

@@ -1,5 +1,5 @@
 // Path: src/api/lib/products/getProduct.ts
-
+'use cache'
 import { getProductQuery } from '@/api/graphql/queries/products'
 import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
 import { reshapeProduct } from '@/lib/utils/reshapeProduct'
@@ -10,7 +10,6 @@ import type { ShopifyProduct, ShopifyProductOperation } from '@types'
 export async function getProduct(
   handle: string
 ): Promise<ShopifyProduct | null> {
-  'use cache'
   cacheTag(TAGS.products)
   cacheLife('days')
   const res = await shopifyFetch<ShopifyProductOperation>({
