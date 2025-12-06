@@ -26,7 +26,8 @@ export const metadata: Metadata = {
     template: '%s | Utekos'
   },
   description:
-    'Kompromissløs komfort. Innovativ funksjonalitet. Designet for å holde på varmen når øyeblikkene teller..',
+    'Kompromissløs komfort. Innovativ funksjonalitet. Designet for å holde på varmen når øyeblikkene teller.',
+
   alternates: {
     canonical: '/'
   },
@@ -42,6 +43,10 @@ export const metadata: Metadata = {
     address: false,
     telephone: false
   },
+  facebook: {
+    appId: '1154247890253046'
+  },
+
   appleWebApp: {
     capable: true,
     title: 'Utekos',
@@ -82,7 +87,6 @@ export const metadata: Metadata = {
     }
   }
 }
-
 /**
  * Server Component som laster data før appen vises.
  * Dette sikrer at cartId er tilgjengelig for Pixel/Tracking med en gang.
