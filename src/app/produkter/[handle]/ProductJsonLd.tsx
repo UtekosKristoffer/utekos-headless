@@ -2,6 +2,7 @@
 import { getProduct } from '@/api/lib/products/getProduct'
 import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
 import { computeVariantImages } from '@/lib/utils/computeVariantImages'
+import { cacheLife, cacheTag } from 'next/cache'
 import type {
   ProductGroup,
   Product as ProductSchema,
@@ -20,6 +21,10 @@ const mapAvailability = (availableForSale: boolean) =>
   : 'https://schema.org/OutOfStock'
 
 export async function ProductJsonLd({ handle }: Props) {
+  'use cache'
+  cacheLife('max')
+  cacheTag(`product-${handle}`, 'products')
+
   const rawProduct = await getProduct(handle)
   if (!rawProduct) return null
 

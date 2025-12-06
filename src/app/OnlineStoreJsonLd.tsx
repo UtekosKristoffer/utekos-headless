@@ -51,6 +51,7 @@ export async function OnlineStoreJsonLd() {
       'merchantReturnDays': 14,
       'returnMethod': 'https://schema.org/ReturnByMail',
       'returnFees': 'https://schema.org/ReturnFeesCustomerResponsibility',
+      'refundType': 'https://schema.org/FullRefund',
       'url': 'https://utekos.no/frakt-og-retur'
     }
   }

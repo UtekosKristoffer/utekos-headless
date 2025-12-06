@@ -1,37 +1,30 @@
-// Path: src/app/produkter/ProductListJsonLd.tsx
 import { getProducts } from '@/api/lib/products/getProducts'
-import type { CollectionPage, WithContext, ListItem } from 'schema-dts'
+import { cacheLife, cacheTag } from 'next/cache'
+import type { ItemList, WithContext } from 'schema-dts'
 
 export async function ProductListJsonLd() {
-  const response = await getProducts()
+  'use cache'
+  cacheLife('max')
+  cacheTag('product-list', 'products')
 
-  if (!response.success || !response.body || response.body.length === 0) {
-    return null 
+  const response = await getProducts()
+  const products = response.success ? response.body : []
+
+  if (!products || products.length === 0) {
+    return null
   }
 
-  const products = response.body
+  const itemListElement = products.map((product, index) => ({
+    '@type': 'ListItem' as const,
+    'position': index + 1,
+    'url': `https://utekos.no/produkter/${product.handle}`,
+    'name': product.title
+  }))
 
-  const jsonLd: WithContext<CollectionPage> = {
+  const jsonLd: WithContext<ItemList> = {
     '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    'name': 'Kolleksjon: Komfortplagg for hytteliv & utekos',
-    'description':
-      'Utforsk hele kolleksjonen av komfortplagg fra Utekos. Våre varme og slitesterke produkter er skapt for å forlenge de gode stundene.',
-    'url': 'https://utekos.no/produkter',
-    'publisher': {
-      '@id': 'https://utekos.no/#organization'
-    },
-    'mainEntity': {
-      '@type': 'ItemList',
-      'itemListElement': products.map(
-        (product, index): ListItem => ({
-          '@type': 'ListItem',
-          'position': index + 1,
-          'url': `https://utekos.no/produkter/${product.handle}`,
-          'name': product.title
-        })
-      )
-    }
+    '@type': 'ItemList',
+    'itemListElement': itemListElement
   }
 
   return (
