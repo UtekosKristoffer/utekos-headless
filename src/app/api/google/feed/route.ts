@@ -3,7 +3,6 @@ import { getProducts } from '@/api/lib/products/getProducts'
 import { cacheLife } from 'next/cache'
 import { NextResponse } from 'next/server'
 
-// Hjelpefunksjoner (Uendret)
 function escapeXml(unsafe: unknown): string {
   if (typeof unsafe !== 'string') return ''
   return unsafe.replace(/[<>&'"]/g, c => {
@@ -31,16 +30,12 @@ function stripHtml(html: string): string {
 function formatPrice(amount: string | number, currencyCode: string): string {
   return `${Number(amount).toFixed(2)} ${currencyCode}`
 }
-
-// 1. Vi lager en EGEN funksjon for å generere XML-strengen.
-// Det er DENNE vi cacher, fordi den returnerer en string (som er lov å cache).
 async function generateFeedXml() {
   'use cache'
   cacheLife('hours')
 
   const baseUrl = 'https://utekos.no'
 
-  // Vi bruker getProducts som vi vet er trygg nå
   const response = await getProducts()
 
   if (!response.success || !response.body) {
@@ -142,7 +137,6 @@ async function generateFeedXml() {
 </rss>`
 }
 
-// 2. Route Handleren er nå IKKE cached direkte, men kaller den cachede funksjonen over.
 export async function GET() {
   try {
     const rss = await generateFeedXml()
@@ -150,7 +144,6 @@ export async function GET() {
     return new NextResponse(rss, {
       headers: {
         'Content-Type': 'application/xml; charset=utf-8',
-        // Vi beholder disse headerne for Google-botens skyld
         'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=1800'
       }
     })

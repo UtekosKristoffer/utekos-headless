@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
-      allow: '/',
+      allow: ['/', '/api/google/feed'],
       disallow: ['/cart/', '/account/', '/api/']
     },
     sitemap: `${baseUrl}/sitemap.xml`
