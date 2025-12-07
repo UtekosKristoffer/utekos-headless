@@ -1,7 +1,7 @@
-// Path: src/app/produkter/[handle]/ProductJsonLd.tsx
 import { getProduct } from '@/api/lib/products/getProduct'
 import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
 import { computeVariantImages } from '@/lib/utils/computeVariantImages'
+import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { cacheLife, cacheTag } from 'next/cache'
 import type {
   ProductGroup,
@@ -68,12 +68,14 @@ export async function ProductJsonLd({ handle }: Props) {
 
   let jsonLd: WithContext<ProductSchema | ProductGroup>
 
+  const cleanGroupId = cleanShopifyId(product.id)
+
   if (isProductGroup) {
     jsonLd = {
       '@context': 'https://schema.org',
       '@type': 'ProductGroup',
       ...commonData,
-      'productGroupID': product.id,
+      ...(cleanGroupId ? { productGroupID: cleanGroupId } : {}),
       'url': `https://utekos.no/produkter/${product.handle}`,
       'hasVariant': variants.map(({ node: variant }): ProductSchema => {
         const variantImages = computeVariantImages(product, variant)
@@ -81,6 +83,7 @@ export async function ProductJsonLd({ handle }: Props) {
 
         const variantPrice =
           variant.price?.amount ? String(variant.price.amount) : null
+        const cleanVariantId = cleanShopifyId(variant.id)
 
         const offer: Offer = {
           '@type': 'Offer',
@@ -96,6 +99,7 @@ export async function ProductJsonLd({ handle }: Props) {
 
         return {
           '@type': 'Product',
+          ...(cleanVariantId ? { productID: cleanVariantId } : {}),
           'name': `${product.title} - ${variant.title}`,
           ...(variant.title !== 'Default Title' ?
             { description: variant.title }
@@ -110,6 +114,8 @@ export async function ProductJsonLd({ handle }: Props) {
     const firstVariant = variants[0]?.node
     const variantPrice =
       firstVariant?.price?.amount ? String(firstVariant.price.amount) : null
+    const cleanVariantId =
+      firstVariant?.id ? cleanShopifyId(firstVariant.id) : undefined
 
     const offer: Offer = {
       '@type': 'Offer',
@@ -127,6 +133,8 @@ export async function ProductJsonLd({ handle }: Props) {
       '@context': 'https://schema.org',
       '@type': 'Product',
       ...commonData,
+      // FIX 3: Legg kun til productID hvis den finnes
+      ...(cleanVariantId ? { productID: cleanVariantId } : {}),
       ...(firstVariant?.sku ? { sku: firstVariant.sku } : {}),
       'offers': offer
     }

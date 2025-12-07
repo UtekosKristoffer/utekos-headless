@@ -1,5 +1,6 @@
 import { getAllProductsForMetaSync } from '@/lib/shopify/admin'
 import { FacebookAdsApi, ProductCatalog } from 'facebook-nodejs-business-sdk'
+import { cleanShopifyId } from '@/lib/utils/cleanShopifyId' // <--- Bruker felles logikk
 
 const ACCESS_TOKEN =
   process.env.CATALOG_ACCESS_TOKEN || process.env.META_ACCESS_TOKEN
@@ -11,10 +12,6 @@ if (!ACCESS_TOKEN) {
 }
 
 FacebookAdsApi.init(ACCESS_TOKEN)
-
-function cleanId(gid: string): string {
-  return gid.split('/').pop() || gid
-}
 
 function getOptionValue(
   options: any[],
@@ -44,11 +41,17 @@ export async function syncProductsToMetaCatalog() {
     const googleProductCategory =
       shopifyCategory || product.productType || 'Apparel & Accessories'
 
+    const cleanProductId = cleanShopifyId(product.id)
+
     for (const variantEdge of product.variants.edges) {
       const variant = variantEdge.node
-      const variantId = cleanId(variant.id)
 
-      const link = `${WEBSITE_BASE_URL}/produkter/${product.handle}?variant=${variantId}`
+      const variantId = cleanShopifyId(variant.id)
+
+      if (!variantId) continue
+
+      const link = `${WEBSITE_BASE_URL}/produkter/${product.handle}?variant=${encodeURIComponent(variant.id)}`
+
       const imageUrl = variant.image?.url || product.featuredImage?.url || ''
 
       const brand = product.vendor || 'Utekos'
@@ -85,8 +88,8 @@ export async function syncProductsToMetaCatalog() {
         image_link: imageUrl,
         brand: brand,
 
-        // Endret etter instruks: item_group_id settes lik variantId for å matche Pixel content_id
-        item_group_id: variantId,
+        // Dette matcher nå Google Feed-logikken (<g:item_group_id>)
+        item_group_id: cleanProductId,
 
         google_product_category: googleProductCategory,
         age_group: ageGroup,
