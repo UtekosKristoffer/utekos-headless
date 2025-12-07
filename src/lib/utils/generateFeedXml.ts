@@ -33,7 +33,7 @@ export async function generateFeedXml() {
       stripHtml(product.description || product.title)
     )
     const productTitle = escapeXml(product.title)
-    const googleCategory = '2271'
+    const googleCategory = '203'
 
     const cleanGroupId = cleanShopifyId(product.id)
 
