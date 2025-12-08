@@ -105,9 +105,40 @@ export async function getAllProductsForMetaSync() {
       throw new Error(`GraphQL Errors: ${JSON.stringify(json.errors)}`)
     }
 
-    return json.data.products.edges.map((edge: any) => {
+    const EXCLUDED_PRODUCT_IDS = [
+      '9227603149048', // Utekos Buff
+      '7710325899512' // Utekos Stapper
+    ]
+
+    const EXCLUDED_VARIANT_IDS = [
+      '42903234642168',
+      '42903234609400',
+      '42903234674936',
+      '43959919083768'
+    ]
+
+    const filteredEdges = json.data.products.edges.filter((edge: any) => {
+      const nodeId = edge.node.id // F.eks "gid://shopify/Product/9227603149048"
+
+      const isExcludedProduct = EXCLUDED_PRODUCT_IDS.some(id =>
+        nodeId.endsWith(id)
+      )
+
+      return !isExcludedProduct
+    })
+
+    return filteredEdges.map((edge: any) => {
       const product = edge.node
-      const flatVariants = product.variants.edges.map((vEdge: any) => {
+
+      const validVariantEdges = product.variants.edges.filter((vEdge: any) => {
+        const variantId = vEdge.node.id // F.eks "gid://shopify/ProductVariant/42903234642168"
+        const isExcludedVariant = EXCLUDED_VARIANT_IDS.some(id =>
+          variantId.endsWith(id)
+        )
+        return !isExcludedVariant
+      })
+
+      const flatVariants = validVariantEdges.map((vEdge: any) => {
         const v = vEdge.node
         const weightData = v.inventoryItem?.measurement?.weight
 

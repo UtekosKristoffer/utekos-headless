@@ -1,7 +1,8 @@
+// Path: src/lib/meta/catalogSync.ts
+
 import { getAllProductsForMetaSync } from '@/lib/shopify/admin'
 import { FacebookAdsApi, ProductCatalog } from 'facebook-nodejs-business-sdk'
-import { cleanShopifyId } from '@/lib/utils/cleanShopifyId' // <--- Bruker felles logikk
-
+import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 const ACCESS_TOKEN =
   process.env.CATALOG_ACCESS_TOKEN || process.env.META_ACCESS_TOKEN
 const CATALOG_ID = '690208780604782'
