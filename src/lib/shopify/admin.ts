@@ -114,7 +114,9 @@ export async function getAllProductsForMetaSync() {
       '42903234642168',
       '42903234609400',
       '42903234674936',
-      '43959919083768'
+      '43959919083768',
+      '46889965289720',
+      '42903236968696'
     ]
 
     const filteredEdges = json.data.products.edges.filter((edge: any) => {
