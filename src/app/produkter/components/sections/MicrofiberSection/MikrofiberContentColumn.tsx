@@ -1,4 +1,4 @@
-// Path: src/components/MikrofiberSection/MikrofiberContentColumn.tsx
+
 'use client'
 import { ArrowRight, Feather } from 'lucide-react'
 import Link from 'next/link'

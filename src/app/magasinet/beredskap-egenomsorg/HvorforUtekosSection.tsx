@@ -120,7 +120,7 @@ export function HvorforUtekosSection() {
           <FeatureCard
             icon={<Thermometer className='h-7 w-7' />}
             title='Unngå svette-fellen'
-            description='Aktivitet (hente ved, fyre i peisen) skaper varme, men å bli svett er farlig i kulden. Den V-formede glidelåsen lar deg dumpe overskuddsvarme fra brystet på sekunder, slik at du unngår å bli klam – og deretter iskald.'
+            description='Aktivitet (hente ved, fyre i peisen) skaper varme, men å bli svett er farlig i kulden. YKK-glidelåsene med omvendt v-form lar deg dumpe overskuddsvarme fra brystet på sekunder, slik at du unngår å bli klam – og deretter iskald.'
             accentColor='from-blue-600 to-indigo-600'
           />
         </div>
