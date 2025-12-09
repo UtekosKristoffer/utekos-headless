@@ -10,7 +10,6 @@ export function FooterNavigation() {
       <div className='flex justify-center md:justify-start'>
         <CertificationSmall />
       </div>
-      {/* 2. Dynamiske kolonner fra config */}
       {footerConfig.map(section => (
         <div key={section.title}>
           <h3 className='mb-4 text-md font-semibold text-foreground-on-dark'>

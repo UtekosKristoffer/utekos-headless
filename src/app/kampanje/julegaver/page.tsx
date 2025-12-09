@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description:
     'Finn de varmeste julegavene hos Utekos. TechDown, Comfyrobe, Dun og Mikrofiber. Utvidet bytterett og rask levering.',
   openGraph: {
-    title: 'Gi bort funksjonell varme | Julegavetips fra Utekos', // Litt mer "selgende" tittel for deling
+    title: 'Gi bort funksjonell varme | Julegavetips fra Utekos',
     description:
       'Den perfekte gaven til livsnyteren som har alt. Sikre deg høstens store trend med utvidet bytterett frem til 15. januar.',
     url: 'https://utekos.no/kampanje/julegaver',
@@ -53,10 +53,9 @@ export default async function ChristmasCampaign() {
           <div className='inline-flex items-center gap-2 rounded-full border border-red-800/50 bg-red-900/20 px-4 py-1.5 backdrop-blur-sm'>
             <Gift className='h-4 w-4 text-red-200' />
             <span className='text-sm font-medium text-red-100'>
-              Årets julegave 2025
+              Julegaver fra Utekos®
             </span>
           </div>
-
           <h1 className='mt-8 text-4xl font-bold tracking-tight text-foreground sm:text-6xl'>
             <span className='relative inline-block'>
               Gi bort
@@ -66,12 +65,10 @@ export default async function ChristmasCampaign() {
               funksjonell varme
             </span>
           </h1>
-
           <p className='mx-auto mt-6 max-w-2xl text-lg text-article-white'>
             Den perfekte gaven til livsnyteren som har alt – unntatt varmen.
             Sikre deg høstens store trend.
           </p>
-
           <div className='mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row'>
             <Link
               href='#bestselgere'
