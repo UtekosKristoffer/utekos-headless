@@ -102,7 +102,7 @@ export default async function ChristmasCampaign() {
                 </p>
               </div>
             </div>
-            
+
             {/* 2. Bytterett (Beholdes) */}
             <div className='flex flex-col items-center gap-3'>
               <div className='flex h-12 w-12 items-center justify-center rounded-full bg-background ring-1 ring-white/10'>
@@ -288,7 +288,14 @@ export default async function ChristmasCampaign() {
         </div>
       </section>
 
-      <section className='container mx-auto mt-24 px-4'>
+      <section className='container mx-auto mt-24 px-4 mb-6'>
+        <div className='mb-12 text-center'>
+          <h2 className='text-3xl font-bold'>Bor du i Bergen?</h2>
+          <p className='mt-2 text-article-white'>
+            Velg "Lokal levering" i kassen etter at du har fylt inn adressen
+            hvis du ønsker å få julegaven levert på døren
+          </p>
+        </div>
         <div className='grid gap-6 md:grid-cols-3'>
           <Link
             href='/produkter'
