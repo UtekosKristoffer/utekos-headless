@@ -208,6 +208,9 @@ export default async function ChristmasCampaign() {
                 <span className='text-xl font-bold text-foreground'>
                   1 590 kr
                 </span>
+                <span className='text-sm text-article-white line-through'>
+                  2 290 kr
+                </span>
               </div>
               <Link
                 href='/produkter/utekos-mikrofiber'
@@ -242,6 +245,9 @@ export default async function ChristmasCampaign() {
                 <span className='text-xl font-bold text-foreground'>
                   1 990 kr
                 </span>
+                <span className='text-sm text-article-white line-through'>
+                  3 290 kr
+                </span>
               </div>
               <Link
                 href='/produkter/utekos-dun'
@@ -275,6 +281,9 @@ export default async function ChristmasCampaign() {
               <div className='mt-4 flex items-baseline gap-3'>
                 <span className='text-xl font-bold text-foreground'>
                   1 290 kr
+                </span>
+                <span className='text-sm text-article-white line-through'>
+                  1 690 kr
                 </span>
               </div>
               <Link

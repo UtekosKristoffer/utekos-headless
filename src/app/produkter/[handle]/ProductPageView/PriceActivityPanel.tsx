@@ -12,10 +12,31 @@ export interface PriceActivityPanelProps {
   limitedStockCount?: number
 }
 
-const LAUNCH_OFFERS = {
+// Konfigurasjon
+const OFFERS = {
   'utekos-techdown': {
-    discountAmount: 449,
-    label: 'Lanseringstilbud'
+    label: 'Lanseringstilbud',
+    fixedSavings: 449, // Fast sparebeløp
+    originalPrice: null, // null = Ikke vis førpris
+    description: 'Begrenset tilbud ved lansering'
+  },
+  'utekos-dun': {
+    label: 'Tilbud',
+    fixedSavings: null, // null = Regn ut basert på originalPrice
+    originalPrice: 3290, // Vis denne førprisen
+    description: null
+  },
+  'utekos-mikrofiber': {
+    label: 'Tilbud',
+    fixedSavings: null,
+    originalPrice: 2290,
+    description: null
+  },
+  'comfyrobe': {
+    label: 'Tilbud',
+    fixedSavings: null,
+    originalPrice: 1690,
+    description: null
   }
 } as const
 
@@ -31,12 +52,44 @@ export default function PriceActivityPanel({
 
   const isSpecialEdition = productHandle === 'utekos-special-edition'
 
-  const launchOffer = LAUNCH_OFFERS[productHandle as keyof typeof LAUNCH_OFFERS]
-  const hasLaunchOffer = !!launchOffer
+  // Hent konfigurasjon for produktet
+  const currentOffer = OFFERS[productHandle as keyof typeof OFFERS]
+  const hasOffer = !!currentOffer
+
+  // Variabler for utregning
+  let savingsAmount = 0
+  let showBeforePrice = false
+  let originalPriceToDisplay = 0
+
+  if (hasOffer) {
+    // 1. Hvis det er fast sparebeløp (Techdown)
+    if (currentOffer.fixedSavings) {
+      savingsAmount = currentOffer.fixedSavings
+      showBeforePrice = false // Skjuler førpris for techdown
+    }
+    // 2. Hvis det er basert på førpris (Dun, Mikrofiber, Comfyrobe)
+    else if (currentOffer.originalPrice) {
+      // Gjør om nåpris fra tekst til tall
+      const currentPriceNumber = parseFloat(
+        String(priceAmount)
+          .replace(/[^0-9,.]/g, '')
+          .replace(',', '.')
+      )
+
+      if (!isNaN(currentPriceNumber)) {
+        savingsAmount = currentOffer.originalPrice - currentPriceNumber
+        originalPriceToDisplay = currentOffer.originalPrice
+        showBeforePrice = true // Viser førpris for disse
+      }
+    }
+  }
+
+  const showSavings = hasOffer && savingsAmount > 0
 
   return (
     <section aria-label='Pris og tilgjengelighet' className='space-y-4'>
-      {hasLaunchOffer && (
+      {/* --- SPARE-BADGE (Vises for alle med tilbud) --- */}
+      {showSavings && (
         <div className='inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-blue-500/20 px-4 py-2 ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:ring-white/20'>
           <div className='relative flex h-2 w-2'>
             <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75' />
@@ -44,41 +97,53 @@ export default function PriceActivityPanel({
           </div>
           <div className='flex items-center gap-2'>
             <span className='text-sm font-semibold text-white'>
-              {launchOffer.label}
+              {currentOffer.label}
             </span>
             <div className='h-4 w-px bg-white/20' />
             <span className='text-sm font-bold text-emerald-400'>
-              Spar totalt kr {launchOffer.discountAmount} 🎉
+              Spar totalt kr {Math.round(savingsAmount)} 🎉
             </span>
           </div>
         </div>
       )}
 
+      {/* --- PRISVISNING --- */}
       <div className='flex items-baseline gap-3'>
-        {hasLaunchOffer ?
-          <div className='bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent'>
-            <Price amount={priceAmount} currencyCode={currencyCode} />
-          </div>
-        : <Price amount={priceAmount} currencyCode={currencyCode} />}
+        {showSavings ?
+          <>
+            {/* Nå-prisen (alltid farget ved tilbud) */}
+            <div className='bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent'>
+              <Price amount={priceAmount} currencyCode={currencyCode} />
+            </div>
+
+            {/* Før-prisen (Kun for Dun, Mikrofiber, Comfyrobe) */}
+            {showBeforePrice && (
+              <div className='text-lg text-muted-foreground line-through opacity-70'>
+                <Price
+                  amount={String(originalPriceToDisplay)}
+                  currencyCode={currencyCode}
+                />
+              </div>
+            )}
+          </>
+        : /* Ingen tilbud - standard visning */
+          <Price amount={priceAmount} currencyCode={currencyCode} />
+        }
       </div>
 
-      {hasLaunchOffer && (
+      {showSavings && currentOffer.description && (
         <p className='text-sm text-muted-foreground'>
-          Begrenset tilbud ved lansering
+          {currentOffer.description}
         </p>
       )}
 
+      {/* --- SPECIAL EDITION LAGERSTATUS --- */}
       {isSpecialEdition && shouldShowLimitedStockNotice && (
         <div className='relative overflow-hidden rounded-lg border border-amber-400/30 bg-amber-900/10 p-4'>
           <div
-            className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-20 blur-2xl'
-            style={{
-              background:
-                'radial-gradient(120% 120% at 50% 0%, transparent 30%, #f59e0b 100%)'
-            }}
-            aria-hidden='true'
-          />
-          <div className='relative flex items-center gap-3'>
+            className='relative flex items-center gap-3'
+            style={{ zIndex: 10 }}
+          >
             <div className='flex h-10 w-10 items-center justify-center rounded-lg border border-amber-400/40 bg-amber-400/10'>
               <ShieldAlert
                 className='h-5 w-5 text-amber-400'
@@ -94,6 +159,15 @@ export default function PriceActivityPanel({
               </p>
             </div>
           </div>
+          {/* Bakgrunnseffekt */}
+          <div
+            className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-20 blur-2xl'
+            style={{
+              background:
+                'radial-gradient(120% 120% at 50% 0%, transparent 30%, #f59e0b 100%)'
+            }}
+            aria-hidden='true'
+          />
         </div>
       )}
 
