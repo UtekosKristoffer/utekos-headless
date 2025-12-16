@@ -293,7 +293,7 @@ export default async function ChristmasCampaign() {
           <h2 className='text-3xl font-bold'>Bor du i Bergen?</h2>
           <p className='mt-2 text-article-white'>
             Velg "Lokal levering" i kassen etter at du har fylt inn adressen
-            hvis du ønsker å få julegaven levert på døren
+            hvis du ønsker å få julegaven ferdig innpakket levert på døren!
           </p>
         </div>
         <div className='grid gap-6 md:grid-cols-3'>
