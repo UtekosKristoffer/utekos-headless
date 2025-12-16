@@ -199,7 +199,7 @@ export default async function ChristmasCampaign() {
             </div>
 
             <div className='p-6'>
-              <h3 className='text-2xl font-bold'>Utekos Mikrofiber</h3>
+              <h3 className='text-2xl font-bold'>Utekos Mikrofiber™</h3>
               <p className='mt-2 text-article-white'>
                 Lettvekt møter varme og allsidighet. Gir deg følelsen av dun med
                 ekstra fordeler.
@@ -234,7 +234,7 @@ export default async function ChristmasCampaign() {
             </div>
 
             <div className='p-6'>
-              <h3 className='text-2xl font-bold'>Utekos Dun</h3>
+              <h3 className='text-2xl font-bold'>Utekos Dun™</h3>
               <p className='mt-2 text-article-white'>
                 Klassisk dun-kvalitet for de kaldeste dagene.
               </p>
@@ -268,7 +268,7 @@ export default async function ChristmasCampaign() {
             </div>
 
             <div className='p-6'>
-              <h3 className='text-2xl font-bold'>Utekos Comfyrobe</h3>
+              <h3 className='text-2xl font-bold'>Comfyrobe™</h3>
               <p className='mt-2 text-article-white'>
                 Den ultimate skifteroben. Vindtett, vanntett og foret.
               </p>
