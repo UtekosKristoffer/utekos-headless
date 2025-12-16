@@ -140,7 +140,7 @@ export default async function ChristmasCampaign() {
         <div className='mb-12 text-center'>
           <h2 className='text-3xl font-bold'>Våre mest populære gaver</h2>
           <p className='mt-2 text-article-white'>
-            Produktene som garantert blir brukt – året rundt.
+            Produktene som garantert blir brukt – året rundt. Nå med julerabatt!
           </p>
         </div>
 
