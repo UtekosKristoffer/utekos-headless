@@ -98,7 +98,7 @@ export default async function ChristmasCampaign() {
                   Sendes samme dag
                 </h3>
                 <p className='text-sm text-muted-foreground'>
-                  Bestill innen 16. des – vi garanterer levering til jul!
+                  Bestill før 17. des – vi garanterer levering til jul!
                 </p>
               </div>
             </div>
