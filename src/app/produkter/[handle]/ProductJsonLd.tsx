@@ -54,7 +54,7 @@ export async function ProductJsonLd({ handle }: Props) {
     name: product.title,
     brand: {
       '@type': 'Brand',
-      'name': product.vendor || 'Utekos'
+      'name': product.vendor || 'Utekos®'
     },
     ...(product.description ? { description: product.description } : {}),
     ...(featuredImage ? { image: featuredImage } : {})
@@ -78,15 +78,22 @@ export async function ProductJsonLd({ handle }: Props) {
       'hasVariant': variants.map(({ node: variant }): ProductSchema => {
         const variantImages = computeVariantImages(product, variant)
         const variantImage = variantImages[0]?.url || featuredImage
-
         const variantPrice =
           variant.price?.amount ? String(variant.price.amount) : null
         const cleanVariantId = cleanShopifyId(variant.id)
-
+        const originalPrice =
+          variant.compareAtPrice?.amount ?
+            String(variant.compareAtPrice.amount)
+          : null
         const offer: Offer = {
           '@type': 'Offer',
           'url': `https://utekos.no/produkter/${product.handle}?variant=${encodeURIComponent(variant.id)}`,
           'priceCurrency': variant.price?.currencyCode || 'NOK',
+          'priceSpecification': {
+            '@type': 'UnitPriceSpecification',
+            'priceType': 'https://schema.org/ListPrice',
+            'price': originalPrice || ''
+          },
           'availability': mapAvailability(variant.availableForSale),
           'priceValidUntil': priceValidUntil,
           'seller': sellerReference,
@@ -114,13 +121,21 @@ export async function ProductJsonLd({ handle }: Props) {
       firstVariant?.price?.amount ? String(firstVariant.price.amount) : null
     const cleanVariantId =
       firstVariant?.id ? cleanShopifyId(firstVariant.id) : undefined
-
+    const originalPrice =
+      firstVariant?.compareAtPrice?.amount ?
+        String(firstVariant.compareAtPrice.amount)
+      : null
     const offer: Offer = {
       '@type': 'Offer',
       'url': `https://utekos.no/produkter/${product.handle}`,
       'priceCurrency': firstVariant?.price?.currencyCode || 'NOK',
       'availability': mapAvailability(product.availableForSale),
       'priceValidUntil': priceValidUntil,
+      'priceSpecification': {
+        '@type': 'UnitPriceSpecification',
+        'priceType': 'https://schema.org/ListPrice',
+        'price': originalPrice || ''
+      },
       'seller': sellerReference,
       'itemCondition': 'https://schema.org/NewCondition',
       'hasMerchantReturnPolicy': merchantReturnPolicy,
@@ -131,7 +146,6 @@ export async function ProductJsonLd({ handle }: Props) {
       '@context': 'https://schema.org',
       '@type': 'Product',
       ...commonData,
-      // FIX 3: Legg kun til productID hvis den finnes
       ...(cleanVariantId ? { productID: cleanVariantId } : {}),
       ...(firstVariant?.sku ? { sku: firstVariant.sku } : {}),
       'offers': offer

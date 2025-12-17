@@ -16,6 +16,7 @@ export async function ChristmasCampaignJsonLd() {
       url: `${baseUrl}/produkter/utekos-techdown`,
       image: `${baseUrl}/magasinet/techdown-1080.png`,
       price: '1790',
+      originalPrice: '1990',
       description:
         'Vår varmeste mest allsidige modell. Optimalisert etter erfaringer og tilbakemeldinger.'
     },
@@ -25,6 +26,7 @@ export async function ChristmasCampaignJsonLd() {
       url: `${baseUrl}/produkter/utekos-mikrofiber`,
       image: `${baseUrl}/magasinet/dun-front-hvit-bakgrunn-1080.png`,
       price: '1590',
+      originalPrice: '2290',
       description:
         'Lettvekt møter varme og allsidighet. Gir deg følelsen av dun med ekstra fordeler.'
     },
@@ -34,6 +36,7 @@ export async function ChristmasCampaignJsonLd() {
       url: `${baseUrl}/produkter/utekos-dun`,
       image: `${baseUrl}/magasinet/mikro-front-1080.png`,
       price: '1990',
+      originalPrice: '3290',
       description: 'Klassisk dun-kvalitet for de kaldeste dagene.'
     },
     {
@@ -42,6 +45,7 @@ export async function ChristmasCampaignJsonLd() {
       url: `${baseUrl}/produkter/comfyrobe`,
       image: `${baseUrl}/magasinet/comfy-front-u-bakgrunn-1080.png`,
       price: '1290',
+      originalPrice: '1690',
       description: 'Den ultimate skifteroben. Vindtett, vanntett og foret.'
     }
   ]
@@ -60,6 +64,11 @@ export async function ChristmasCampaignJsonLd() {
         '@type': 'Offer',
         'price': product.price,
         'priceCurrency': 'NOK',
+        'priceSpecification': {
+          '@type': 'UnitPriceSpecification',
+          'priceType': 'https://schema.org/ListPrice',
+          'price': product.originalPrice
+        },
         'availability': 'https://schema.org/InStock',
         'url': product.url
       }

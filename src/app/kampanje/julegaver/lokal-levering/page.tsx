@@ -13,11 +13,10 @@ import {
 } from 'lucide-react'
 import { SantaHat } from '@/components/ui/santahat'
 import { connection } from 'next/server'
-import { BergenDeliveryJsonLd } from './BergenDeliveryJsonLd'
 export const metadata: Metadata = {
-  title: 'Få årets varmeste julegave levert hjem – ferdig innpakket! | Utekos',
+  title: 'Få årets varmeste julegave levert hjem – ferdig innpakket!',
   description:
-    'Vi kjører ut bestillinger i Bergen hver dag frem til julaften - helt uten ekstra kostnad.!',
+    'Vi kjører ut bestillinger i Bergen hver dag frem til julaften - helt uten ekstra kostnad!',
   openGraph: {
     title:
       'Vi leverer gaven ferdig innpakket - uten ekstra kostnad. Gjelder alle bestillinger i Bergen helt frem til julaften!',

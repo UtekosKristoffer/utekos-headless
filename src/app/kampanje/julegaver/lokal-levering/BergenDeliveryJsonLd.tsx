@@ -6,9 +6,7 @@ import type {
   WithContext,
   ListItem,
   OfferShippingDetails,
-  MerchantReturnPolicy,
-  ItemAvailability,
-  OfferItemCondition
+  MerchantReturnPolicy
 } from 'schema-dts'
 
 export async function BergenDeliveryJsonLd() {
@@ -85,6 +83,11 @@ export async function BergenDeliveryJsonLd() {
       url: `${baseUrl}/produkter/utekos-techdown`,
       image: `${baseUrl}/magasinet/techdown-1080.png`,
       price: '1790',
+      originalPrice: '1990',
+      ratingValue: '92',
+      bestRating: '100',
+      ratingCount: '24',
+      worstRating: '20',
       description:
         'Vår varmeste mest allsidige modell. Optimalisert etter erfaringer og tilbakemeldinger.'
     },
@@ -94,6 +97,11 @@ export async function BergenDeliveryJsonLd() {
       url: `${baseUrl}/produkter/utekos-mikrofiber`,
       image: `${baseUrl}/magasinet/dun-front-hvit-bakgrunn-1080.png`,
       price: '1590',
+      originalPrice: '2290',
+      ratingValue: '86',
+      bestRating: '100',
+      ratingCount: '14',
+      worstRating: '20',
       description:
         'Lettvekt møter varme og allsidighet. Gir deg følelsen av dun med ekstra fordeler.'
     },
@@ -103,6 +111,11 @@ export async function BergenDeliveryJsonLd() {
       url: `${baseUrl}/produkter/utekos-dun`,
       image: `${baseUrl}/magasinet/mikro-front-1080.png`,
       price: '1990',
+      originalPrice: '3290',
+      ratingValue: '91',
+      bestRating: '100',
+      ratingCount: '34',
+      worstRating: '20',
       description: 'Klassisk dun-kvalitet for de kaldeste dagene.'
     },
     {
@@ -111,6 +124,11 @@ export async function BergenDeliveryJsonLd() {
       url: `${baseUrl}/produkter/comfyrobe`,
       image: `${baseUrl}/magasinet/comfy-front-u-bakgrunn-1080.png`,
       price: '1290',
+      originalPrice: '1690',
+      ratingValue: '95',
+      bestRating: '100',
+      ratingCount: '11',
+      worstRating: '20',
       description: 'Den ultimate skifteroben. Vindtett, vanntett og foret.'
     }
   ]
@@ -127,13 +145,16 @@ export async function BergenDeliveryJsonLd() {
       'url': product.url,
       'offers': {
         '@type': 'Offer',
-        'price': product.price,
+        'price': product.price, // NÅPRIS (1290)
         'priceCurrency': 'NOK',
-        'priceValidUntil': priceValidUntil,
-        'availability': 'https://schema.org/InStock' as ItemAvailability,
-        'itemCondition':
-          'https://schema.org/NewCondition' as OfferItemCondition,
+        'availability': 'https://schema.org/InStock',
         'url': product.url,
+        'priceSpecification': {
+          '@type': 'UnitPriceSpecification',
+          'priceType': 'https://schema.org/ListPrice', // Dette er nøkkelen!
+          'price': product.originalPrice, // FØRPRIS (1690)
+          'priceCurrency': 'NOK'
+        },
         'areaServed': {
           '@type': 'City',
           'name': 'Bergen'
@@ -160,6 +181,24 @@ export async function BergenDeliveryJsonLd() {
       '@type': 'ItemList',
       'itemListElement': itemListElement,
       'numberOfItems': products.length
+    },
+    'aggregateRating': {
+      '@type': 'AggregateRating',
+      'ratingValue':
+        products.reduce((sum, p) => sum + Number(p.ratingValue), 0)
+        / products.length,
+      'ratingCount': products.reduce(
+        (sum, p) => sum + Number(p.ratingCount),
+        0
+      ),
+      'bestRating': products.reduce(
+        (max, p) => Math.max(max, Number(p.bestRating)),
+        0
+      ),
+      'worstRating': products.reduce(
+        (min, p) => Math.min(min, Number(p.worstRating)),
+        Infinity
+      )
     }
   }
 
