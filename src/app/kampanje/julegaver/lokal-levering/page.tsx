@@ -48,7 +48,7 @@ export default async function ChristmasLocalDelivery() {
           <div className='inline-flex items-center gap-2 rounded-full border border-red-800/50 bg-red-900/20 px-4 py-1.5 backdrop-blur-sm'>
             <Gift className='h-4 w-4 text-red-200' />
             <span className='text-sm font-medium text-red-100'>
-              Julegaver fra Utekos®
+              Gi funksjonell varme
             </span>
           </div>
 
