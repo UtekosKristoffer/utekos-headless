@@ -15,28 +15,21 @@ import { SantaHat } from '@/components/ui/santahat'
 import { connection } from 'next/server'
 export const metadata: Metadata = {
   title: 'Få årets varmeste julegave levert hjem – ferdig innpakket!',
+
   description:
-    'Vi kjører ut bestillinger i Bergen hver dag frem til julaften - helt uten ekstra kostnad!',
+    'Årets varmeste julegave! 🎁 Gi bort genial funksjonalitet som revolusjonerer opplevelsen av å være ute. Vi kjører ut bestillinger i Bergen hver dag frem til julaften.',
+
   openGraph: {
-    title:
-      'Vi leverer gaven ferdig innpakket - uten ekstra kostnad. Gjelder alle bestillinger i Bergen helt frem til julaften!',
+    title: 'Få årets varmeste julegave levert hjem – ferdig innpakket!',
+
     description:
-      'Årets varmeste julegave! 🎁 Gi bort genial funksjonalitet som revolusjonerer opplevelsen av å være ute.',
+      'Vi leverer gaven ferdig innpakket – uten ekstra kostnad. Gjelder alle bestillinger i Bergen helt frem til julaften! 🎁',
     url: 'https://utekos.no/kampanje/julegaver/lokal-levering',
     siteName: 'Utekos',
     locale: 'nb_NO',
-    type: 'website',
-    images: [
-      {
-        url: '/linn-kate-kikkert.png',
-        width: 1200,
-        height: 630,
-        alt: 'Personer som nyter utelivet med varme klær fra Utekos'
-      }
-    ]
+    type: 'website'
   }
 }
-
 export default async function ChristmasLocalDelivery() {
   await connection()
   return (

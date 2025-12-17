@@ -1,5 +1,5 @@
 // Path: src/app/kampanje/julegaver/lokal-levering/BergenDeliveryJsonLd.tsx
-
+import type { ShopifyProduct, ShopifyProductVariant } from '@types'
 import { cacheLife, cacheTag } from 'next/cache'
 import type {
   CollectionPage,
@@ -13,10 +13,13 @@ export async function BergenDeliveryJsonLd() {
   'use cache'
   cacheLife('max')
   cacheTag('campaign-bergen-delivery')
-
+  const productVariant: ShopifyProductVariant = {} as ShopifyProductVariant
+  const product: ShopifyProduct = {} as ShopifyProduct
+  const productVendor: ShopifyProduct['vendor'] = product.vendor || 'Utekos®'
   const baseUrl = 'https://utekos.no'
   const currentUrl = `${baseUrl}/kampanje/julegaver/lokal-levering`
-
+  const variantSku: ShopifyProductVariant['sku'] =
+    productVariant.sku || undefined
   const priceValidUntil = new Date(
     new Date().setFullYear(new Date().getFullYear() + 1)
   )
@@ -84,10 +87,13 @@ export async function BergenDeliveryJsonLd() {
       image: `${baseUrl}/magasinet/techdown-1080.png`,
       price: '1790',
       originalPrice: '1990',
+      variantSKU: `${variantSku}`,
       ratingValue: '92',
       bestRating: '100',
       ratingCount: '24',
       worstRating: '20',
+      productId: '9240112693496',
+      content_ids: 46944403849464 | 46944403882232 | 46944403915000,
       description:
         'Vår varmeste mest allsidige modell. Optimalisert etter erfaringer og tilbakemeldinger.'
     },
@@ -98,10 +104,12 @@ export async function BergenDeliveryJsonLd() {
       image: `${baseUrl}/magasinet/dun-front-hvit-bakgrunn-1080.png`,
       price: '1590',
       originalPrice: '2290',
+      variantSKU: `${variantSku}`,
       ratingValue: '86',
       bestRating: '100',
       ratingCount: '14',
       worstRating: '20',
+
       description:
         'Lettvekt møter varme og allsidighet. Gir deg følelsen av dun med ekstra fordeler.'
     },
@@ -112,6 +120,7 @@ export async function BergenDeliveryJsonLd() {
       image: `${baseUrl}/magasinet/mikro-front-1080.png`,
       price: '1990',
       originalPrice: '3290',
+      variantSKU: `${variantSku}`,
       ratingValue: '91',
       bestRating: '100',
       ratingCount: '34',
@@ -125,6 +134,7 @@ export async function BergenDeliveryJsonLd() {
       image: `${baseUrl}/magasinet/comfy-front-u-bakgrunn-1080.png`,
       price: '1290',
       originalPrice: '1690',
+      variantSKU: `${variantSku}`,
       ratingValue: '95',
       bestRating: '100',
       ratingCount: '11',
@@ -143,17 +153,20 @@ export async function BergenDeliveryJsonLd() {
       'description': product.description,
       'image': product.image,
       'url': product.url,
+      'sku': product.variantSKU,
+      'brand': productVendor,
       'offers': {
         '@type': 'Offer',
-        'price': product.price, // NÅPRIS (1290)
+        'price': product.price,
         'priceCurrency': 'NOK',
         'availability': 'https://schema.org/InStock',
         'url': product.url,
         'priceSpecification': {
           '@type': 'UnitPriceSpecification',
-          'priceType': 'https://schema.org/ListPrice', // Dette er nøkkelen!
-          'price': product.originalPrice, // FØRPRIS (1690)
-          'priceCurrency': 'NOK'
+          'priceType': 'https://schema.org/ListPrice',
+          'price': product.originalPrice,
+          'priceCurrency': 'NOK',
+          'priceValidUntil': priceValidUntil
         },
         'areaServed': {
           '@type': 'City',
@@ -161,6 +174,25 @@ export async function BergenDeliveryJsonLd() {
         },
         'hasMerchantReturnPolicy': holidayReturnPolicy,
         'shippingDetails': localShippingDetails
+      },
+      'aggregateRating': {
+        '@type': 'AggregateRating',
+        'ratingValue': (
+          products.reduce((sum, p) => sum + Number(p.ratingValue), 0)
+          / products.length
+        ).toFixed(1),
+        'ratingCount': products.reduce(
+          (sum, p) => sum + Number(p.ratingCount),
+          0
+        ),
+        'bestRating': products.reduce(
+          (max, p) => Math.max(max, Number(p.bestRating)),
+          0
+        ),
+        'worstRating': products.reduce(
+          (min, p) => Math.min(min, Number(p.worstRating)),
+          Infinity
+        )
       }
     }
   }))
@@ -169,9 +201,10 @@ export async function BergenDeliveryJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     'name':
-      'Vi leverer årets varmeste julegave helt hjem til deg – ferdig innpakket | Bergen ',
+      'Få årets varmeste julegave levert hjem – ferdig innpakket! | Bergen',
     'description':
-      'Utekos  kjører ut bestillinger i Bergen hver dag frem til julaften - helt uten ekstra kostnad.',
+      'Årets varmeste julegave! 🎁 Gi bort genial funksjonalitet som revolusjonerer opplevelsen av å være ute. Vi kjører ut bestillinger i Bergen hver dag frem til julaften.',
+
     'url': currentUrl,
     'spatialCoverage': {
       '@type': 'Place',
@@ -181,24 +214,6 @@ export async function BergenDeliveryJsonLd() {
       '@type': 'ItemList',
       'itemListElement': itemListElement,
       'numberOfItems': products.length
-    },
-    'aggregateRating': {
-      '@type': 'AggregateRating',
-      'ratingValue':
-        products.reduce((sum, p) => sum + Number(p.ratingValue), 0)
-        / products.length,
-      'ratingCount': products.reduce(
-        (sum, p) => sum + Number(p.ratingCount),
-        0
-      ),
-      'bestRating': products.reduce(
-        (max, p) => Math.max(max, Number(p.bestRating)),
-        0
-      ),
-      'worstRating': products.reduce(
-        (min, p) => Math.min(min, Number(p.worstRating)),
-        Infinity
-      )
     }
   }
 
