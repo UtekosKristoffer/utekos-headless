@@ -1,4 +1,5 @@
-import { ChristmasCampaignJsonLd } from './ChristmasCampaignJsonLd'
+//Path: src/app/kampanje/julegaver/lokal-levering/layout.tsx
+import { BergenDeliveryJsonLd } from './BergenDeliveryJsonLd'
 import type { ReactNode } from 'react'
 export default function ChristmasCampaignLayout({
   children
@@ -7,7 +8,7 @@ export default function ChristmasCampaignLayout({
 }) {
   return (
     <>
-      <ChristmasCampaignJsonLd />
+      <BergenDeliveryJsonLd />
 
       {children}
     </>

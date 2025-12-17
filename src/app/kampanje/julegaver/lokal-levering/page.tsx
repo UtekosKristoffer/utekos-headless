@@ -8,20 +8,21 @@ import {
   Calendar,
   ShieldCheck,
   Truck,
-  MapPin,
   Car,
   CreditCard
 } from 'lucide-react'
 import { SantaHat } from '@/components/ui/santahat'
 import { connection } from 'next/server'
+import { BergenDeliveryJsonLd } from './BergenDeliveryJsonLd'
 export const metadata: Metadata = {
-  title: 'Julegaveekspressen Bergen | Ferdig innpakket på døren | Utekos',
+  title: 'Få årets varmeste julegave levert hjem – ferdig innpakket! | Utekos',
   description:
-    'Siste liten? Vi redder julen! Bestill julegaver fra Utekos med lokal levering i Bergen. Vi kjører ut ferdig innpakkede gaver helt frem til julaften.',
+    'Vi kjører ut bestillinger i Bergen hver dag frem til julaften - helt uten ekstra kostnad.!',
   openGraph: {
-    title: 'Vi leverer julegavene på døren din i Bergen (Ferdig innpakket!)',
+    title:
+      'Vi leverer gaven ferdig innpakket - uten ekstra kostnad. Gjelder alle bestillinger i Bergen helt frem til julaften!',
     description:
-      'Unngå postkø og stress. Vi kjører ut Utekos-produkter i hele Bergen og omegn helt frem til julaften. Bestill nå!',
+      'Årets varmeste julegave! 🎁 Gi bort genial funksjonalitet som revolusjonerer opplevelsen av å være ute.',
     url: 'https://utekos.no/kampanje/julegaver/lokal-levering',
     siteName: 'Utekos',
     locale: 'nb_NO',
@@ -39,7 +40,6 @@ export const metadata: Metadata = {
 
 export default async function ChristmasLocalDelivery() {
   await connection()
-
   return (
     <div className='bg-background pb-20'>
       <section className='relative overflow-hidden bg-gradient-to-b from-red-950 via-background to-background pt-24 pb-16 text-center md:pt-32'>
@@ -48,7 +48,7 @@ export default async function ChristmasLocalDelivery() {
           <div className='inline-flex items-center gap-2 rounded-full border border-red-800/50 bg-red-900/20 px-4 py-1.5 backdrop-blur-sm'>
             <Gift className='h-4 w-4 text-red-200' />
             <span className='text-sm font-medium text-red-100'>
-              Gi funksjonell varme
+              Gi bort funksjonell varme
             </span>
           </div>
 

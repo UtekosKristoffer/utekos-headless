@@ -1,6 +1,7 @@
+// Path: src/app/kampanje/julegaver/ChristmasCampaignJsonLd.tsx
+
 import { cacheLife, cacheTag } from 'next/cache'
 import type { CollectionPage, WithContext, ListItem } from 'schema-dts'
-
 export async function ChristmasCampaignJsonLd() {
   'use cache'
   cacheLife('max')

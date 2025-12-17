@@ -38,10 +38,8 @@ export async function ProductJsonLd({ handle }: Props) {
 
   const variants = product.variants.edges
   const isProductGroup = variants.length > 0
-
   const defaultImages = computeVariantImages(product, null)
   const featuredImage = defaultImages[0]?.url || product.featuredImage?.url
-
   const merchantReturnPolicy: MerchantReturnPolicy = {
     '@type': 'MerchantReturnPolicy',
     'applicableCountry': 'NO',

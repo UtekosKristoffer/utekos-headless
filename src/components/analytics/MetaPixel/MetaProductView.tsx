@@ -30,7 +30,7 @@ export function MetaProductView({
   useEffect(() => {
     const contentId = cleanShopifyId(selectedVariant.id) || selectedVariant.id
     const eventId = generateEventID()
-    const uniqueKey = `${pathname}-${contentId}` // Unik nøkkel for denne visningen
+    const uniqueKey = `${pathname}-${contentId}`
 
     if (eventFired.current === uniqueKey) return
     eventFired.current = uniqueKey
