@@ -9,11 +9,11 @@ import {
   ShieldCheck,
   Truck,
   MapPin,
-  Car
+  Car,
+  CreditCard
 } from 'lucide-react'
 import { SantaHat } from '@/components/ui/santahat'
 import { connection } from 'next/server'
-
 export const metadata: Metadata = {
   title: 'Julegaveekspressen Bergen | Ferdig innpakket på døren | Utekos',
   description:
@@ -54,17 +54,17 @@ export default async function ChristmasLocalDelivery() {
 
           <h1 className='mt-8 text-4xl font-bold tracking-tight text-foreground sm:text-6xl'>
             <span className='relative inline-block'>
-              Utekos® leverer julen
+              Utekos® leverer julegavene
               <SantaHat className='absolute -left-6 -top-8 h-16 w-16 -rotate-12 drop-shadow-xl md:-left-8 md:-top-10 md:h-20 md:w-20' />
             </span>
             <span className='block bg-gradient-to-r from-red-200 via-white to-red-200 bg-clip-text text-transparent'>
-              helt hjem til deg
+              rett hjem til deg
             </span>
           </h1>
 
           <p className='mx-auto mt-6 max-w-2xl text-lg text-article-white'>
             Er du sent ute? Ingen fare. Vi kjører ut julegaver i Bergen og omegn
-            helt frem til julaften kl 15! <br className='hidden sm:block' />
+            helt frem til julaften! <br className='hidden sm:block' />
           </p>
 
           <div className='mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row'>
@@ -97,27 +97,12 @@ export default async function ChristmasLocalDelivery() {
                   Lokal hjemlevering
                 </h3>
                 <p className='text-sm text-article-white'>
-                  Vi kjører ut julegaver i Bergens-området.
+                  Daglig utkjøring av julegaver i Bergens-området.
                 </p>
               </div>
             </div>
 
-            {/* 2. Innpakning */}
-            <div className='flex flex-col items-center gap-3'>
-              <div className='flex h-12 w-12 items-center justify-center rounded-full bg-background ring-1 ring-white/10'>
-                <Gift className='h-6 w-6 text-red-400' />
-              </div>
-              <div>
-                <h3 className='font-semibold text-foreground'>
-                  Ferdig innpakket
-                </h3>
-                <p className='text-sm  text-article-white'>
-                  Motta gaven klar til å legges rett under treet.
-                </p>
-              </div>
-            </div>
-
-            {/* 3. Bytterett (Viktig trygghet) */}
+            {/* 2. Bytterett (Viktig trygghet) */}
             <div className='flex flex-col items-center gap-3'>
               <div className='flex h-12 w-12 items-center justify-center rounded-full bg-background ring-1 ring-white/10'>
                 <ShieldCheck className='h-6 w-6 text-red-400' />
@@ -128,6 +113,20 @@ export default async function ChristmasLocalDelivery() {
                 </h3>
                 <p className='text-sm text-article-white'>
                   Bytt gaver frem til 15. januar.
+                </p>
+              </div>
+            </div>
+
+            <div className='flex flex-col items-center gap-3'>
+              <div className='flex h-12 w-12 items-center justify-center rounded-full bg-background ring-1 ring-white/10'>
+                <CreditCard className='h-6 w-6 text-red-400' />
+              </div>
+              <div>
+                <h3 className='font-semibold text-foreground'>
+                  Sikker betaling
+                </h3>
+                <p className='text-sm text-article-white'>
+                  Betal trygt med Vipps eller Klarna.
                 </p>
               </div>
             </div>
@@ -169,10 +168,9 @@ export default async function ChristmasLocalDelivery() {
                 Fyll inn adressen din
               </h4>
               <p className='mt-2 text-sm text-article-white'>
-                Viktig: Valget{' '}
-                <strong className='text-red-200'>Lokal levering</strong> dukker
-                opp automatisk <em>etter</em> at du har skrevet inn adressen din
-                i kassen.
+                Valget <strong className='text-red-200'>Lokal levering</strong>{' '}
+                dukker opp automatisk <em>etter</em> at du har skrevet inn
+                adressen din i kassen.
               </p>
             </div>
 
@@ -362,7 +360,13 @@ export default async function ChristmasLocalDelivery() {
             <em>Lokal levering</em> opp? Da kan du lene deg tilbake – vi fikser
             resten!
           </p>
+          {/* Ny linje for henting lagt til her */}
+          <p className='mt-1 text-article-white'>
+            Vi tilbyr også <strong>henting hver dag mellom 08-21</strong> frem
+            til lille julaften.
+          </p>
         </div>
+
         <div className='grid gap-6 md:grid-cols-3'>
           <Link
             href='/handlehjelp/teknologi-materialer'
@@ -376,6 +380,7 @@ export default async function ChristmasLocalDelivery() {
               Lær mer om funksjonaliteten.
             </p>
           </Link>
+
           <Link
             href='/kontaktskjema'
             className='group flex flex-col items-center rounded-xl bg-white/5 p-8 text-center transition-colors hover:bg-white/10'

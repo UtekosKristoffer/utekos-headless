@@ -300,10 +300,12 @@ export default async function ChristmasCampaign() {
       <section className='container mx-auto mt-24 px-4 mb-6'>
         <div className='mb-12 text-center'>
           <h2 className='text-3xl font-bold'>Bor du i Bergen?</h2>
-          <p className='mt-2 text-article-white'>
-            Velg "Lokal levering" i kassen etter at du har fylt inn adressen
-            hvis du ønsker å få julegaven levert på døren!
-          </p>
+           <Link
+                href='/kampanje/julegaver/lokal-levering'
+                className='mt-6 block w-full rounded-lg bg-white/10 py-3 text-center font-semibold text-white transition-colors hover:bg-white/20'
+              >
+                Trykk for å se eksklusivt lokal-tilbud!
+              </Link>
         </div>
         <div className='grid gap-6 md:grid-cols-3'>
           <Link
