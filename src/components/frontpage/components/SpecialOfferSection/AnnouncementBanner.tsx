@@ -4,15 +4,11 @@ import { ArrowRightIcon, XIcon, Gift } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils/className'
-
-// Endret nøkkel for å garantere at folk som lukket forrige banner ser denne
 const BANNER_STORAGE_KEY = 'utekos-local-delivery-bergen-2024'
 const BANNER_EXPIRATION_MS = 3 * 24 * 60 * 60 * 1000 // 3 dager
-
 export default function AnnouncementBanner() {
   const [showBanner, setShowBanner] = useState(false)
   const [isExiting, setIsExiting] = useState(false)
-
   useEffect(() => {
     const dismissedTimestamp = localStorage.getItem(BANNER_STORAGE_KEY)
     if (dismissedTimestamp) {
@@ -64,7 +60,7 @@ export default function AnnouncementBanner() {
             <span className='font-bold text-red-100'>BERGEN: </span>
             {/* Kort tekst på mobil */}
             <span className='inline md:hidden'>
-              Vi leverer på døren hver dag frem til jul! 🎅
+              Vi leverer gaver døren hver dag frem til jul! 🎅
             </span>
             {/* Full tekst på desktop */}
             <span className='hidden md:inline'>

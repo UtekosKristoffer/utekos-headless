@@ -14,16 +14,16 @@ import {
 import { SantaHat } from '@/components/ui/santahat'
 import { connection } from 'next/server'
 export const metadata: Metadata = {
-  title: 'Få årets varmeste julegave levert hjem – ferdig innpakket!',
+  title: 'Få årets varmeste julegave levert hjem – ferdig innpakket 🎁 !',
 
   description:
-    'Årets varmeste julegave! 🎁 Gi bort genial funksjonalitet som revolusjonerer opplevelsen av å være ute. Vi kjører ut bestillinger hver dag frem til julaften.',
+    'Gi bort genial funksjonalitet som revolusjonerer opplevelsen av å være ute. Vi kjører ut bestillinger hver dag frem til julaften.',
 
   openGraph: {
-    title: 'Få årets varmeste julegave levert hjem - ferdig innpakket!',
+    title: 'Få årets varmeste julegave levert hjem – ferdig innpakket 🎁 !',
 
     description:
-      'Årets varmeste julegave! 🎁 Gi bort genial funksjonalitet som revolusjonerer opplevelsen av å være ute. Vi kjører ut bestillinger hver dag frem til julaften.',
+      'Gi bort genial funksjonalitet som revolusjonerer opplevelsen av å være ute. Vi kjører ut bestillinger hver dag frem til julaften.',
     url: 'https://utekos.no/kampanje/julegaver/lokal-levering',
     siteName: 'Utekos',
     locale: 'nb_NO',
