@@ -4,7 +4,8 @@
 import { useEffect, useRef } from 'react'
 import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
-import type { MetaUserData, MetaEventPayload } from '@types' // Antar du har disse typene tilgjengelig basert på koden din
+import { getOrSetExternalId } from '@/components/analytics/MetaPixel/getOrSetExternalId'
+import type { MetaEventPayload } from '@types'
 
 export function CampaignPageTracker() {
   const hasFired = useRef(false)
@@ -12,54 +13,71 @@ export function CampaignPageTracker() {
   useEffect(() => {
     if (hasFired.current) return
     hasFired.current = true
-    const eventID = generateEventID().replace('evt_', 'camp_')
-    const timestamp = Math.floor(Date.now() / 1000)
-    const sourceUrl = window.location.href
+
     const eventName = 'ViewContent'
+    // Generer ID basert på timestamp + random, bytt prefiks for enkel debugging
+    const eventId = generateEventID().replace('evt_', 'camp_')
+
+    // Kampanje-spesifikk data
     const customData = {
-      content_name: 'Utekos Local Delivery Campaign 2025-12-18',
+      content_name: 'Kampanje: Julegaver Lokal Levering',
       content_category: 'Campaign',
       content_type: 'product_group',
-      delivery_category: 'local_delivery_bergen'
+      delivery_category: 'local_delivery_bergen',
+      value: 0, // Sett gjerne en snittverdi her hvis du vil måle ROAS på visninger
+      currency: 'NOK'
     }
 
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      ;(window as any).fbq('track', eventName, customData, { eventID })
+    // --- 1. ROBUST PIXEL HANDLING (Browser) ---
+    const firePixel = () => {
+      if (typeof window !== 'undefined' && window.fbq) {
+        window.fbq('track', eventName, customData, { eventID: eventId })
+        return true
+      }
+      return false
+    }
+    if (!firePixel()) {
+      const intervalId = setInterval(() => {
+        if (firePixel()) {
+          clearInterval(intervalId)
+        }
+      }, 500) // Sjekk hvert halvsekund
+
+      setTimeout(() => clearInterval(intervalId), 5000)
     }
 
-    const fbc = getCookie('_fbc')
-    const fbp = getCookie('_fbp')
-    const externalId = getCookie('ute_ext_id')
-    const emailHash = getCookie('ute_user_hash')
+    requestAnimationFrame(() => {
+      const externalId = getOrSetExternalId()
+      const fbc = getCookie('_fbc')
+      const fbp = getCookie('_fbp')
+      const userHash = getCookie('ute_user_hash')
+      const sourceUrl = window.location.href
+      const timestamp = Math.floor(Date.now() / 1000)
 
-    const userData: MetaUserData = {
-      external_id: externalId || undefined,
-      fbc: fbc || undefined,
-      fbp: fbp || undefined,
-      email_hash: emailHash || undefined,
-      client_user_agent: navigator.userAgent
-      // Legg gjerne til country/city her hvis du har IP-oppslag i API-et ditt,
-      // men nettleser sender dette implisitt.
-    }
+      const payload: MetaEventPayload = {
+        eventName,
+        eventId,
+        eventSourceUrl: sourceUrl,
+        eventTime: timestamp,
+        actionSource: 'website',
+        userData: {
+          external_id: externalId || undefined,
+          fbc: fbc || undefined,
+          fbp: fbp || undefined,
+          email_hash: userHash || undefined,
+          client_user_agent: navigator.userAgent
+        },
+        eventData: customData
+      }
 
-    const capiPayload: MetaEventPayload = {
-      eventName,
-      eventId: eventID,
-      eventSourceUrl: sourceUrl,
-      eventTime: timestamp,
-      actionSource: 'website',
-      userData,
-      eventData: customData // CAPI bruker ofte 'custom_data' feltet for parameters
-    }
-
-    // Send til din eksisterende API route
-    fetch('/api/meta-events', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(capiPayload),
-      keepalive: true
-    }).catch(err => console.error('CAPI Error:', err))
+      fetch('/api/meta-events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(err => console.error('[Campaign Tracker] CAPI failed:', err))
+    })
   }, [])
 
-  return null // Rendrer ingenting visuelt
+  return null
 }
