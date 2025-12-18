@@ -34,7 +34,7 @@ export async function ShippingAndReturnsPageJsonLd() {
         'acceptedAnswer': {
           '@type': 'Answer',
           'text':
-            'For å returnere en vare, send en e-post til info@utekos.no med ditt ordrenummer og informasjon om hvilke produkter det gjelder. Deretter pakker du varen forsvarlig og sender den tilbake til oss. Du er selv ansvarlig for returfrakten.'
+            'For å returnere en vare, send en e-post til kundeservice@utekos.no med ditt ordrenummer og informasjon om hvilke produkter det gjelder. Deretter pakker du varen forsvarlig og sender den tilbake til oss. Du er selv ansvarlig for returfrakten.'
         }
       }
     ]

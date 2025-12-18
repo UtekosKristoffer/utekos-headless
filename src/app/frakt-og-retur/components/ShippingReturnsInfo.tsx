@@ -100,9 +100,12 @@ export function ShippingReturnsInfo() {
             <AccordionContent className='prose prose-invert max-w-none text-foreground/80'>
               <p>
                 Send en e-post til{' '}
-                <a href='mailto:info@utekos.no'>info@utekos.no</a>. For at vi
-                skal kunne hjelpe deg raskt, ber vi deg inkludere fullt navn,
-                adresse, ordrenummer og hvilke produkter returen gjelder.
+                <a href='mailto:kundeservice@utekos.no'>
+                  kundeservice@utekos.no
+                </a>
+                . For at vi skal kunne hjelpe deg raskt, ber vi deg inkludere
+                fullt navn, adresse, ordrenummer og hvilke produkter returen
+                gjelder.
               </p>
             </AccordionContent>
           </AccordionItem>

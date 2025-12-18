@@ -157,8 +157,8 @@ export const termsSections: Section[] = [
         <ul className='space-y-4'>
           <PolicyItem title='Tilgjengelighet og retur'>
             Enkelte produkter/tjenester er kun tilgjengelige på nett og kan ha
-            begrensede antall. Retur/bytte følger vår refusjonspolicy: [LENKE
-            TIL REFUSJONSPOLICY]
+            begrensede antall. Retur/bytte følger vår refusjonspolicy:{' '}
+            <Link href='/frakt-og-retur'>Frakt og retur</Link>
           </PolicyItem>
           <PolicyItem title='Farger og bilder'>
             Vi forsøker å vise farger/bilder nøyaktig, men kan ikke garantere at
@@ -404,7 +404,7 @@ export const termsSections: Section[] = [
     title: 'Kontaktinformasjon',
     content: (
       <>
-        <p>Spørsmål om vilkårene sendes til info@utekos.no.</p>
+        <p>Spørsmål om vilkårene sendes til kundeservice@utekos.no.</p>
       </>
     )
   }

@@ -15,7 +15,7 @@ export async function OnlineStoreJsonLd() {
     'image': 'https://utekos.no/og-image-produkter.png',
     'description': 'Utekos - Forleng den gode stunden ute.',
     'foundingDate': '2020',
-    'email': 'info@utekos.no',
+    'email': 'kundeservice@utekos.no',
     'telephone': '+47 40 21 63 43',
     'vatID': 'NO 925 820 393 MVA',
     'iso6523Code': '0192:925820393',
@@ -35,7 +35,7 @@ export async function OnlineStoreJsonLd() {
       '@type': 'ContactPoint',
       'contactType': 'Customer Service',
       'telephone': '+47 40 21 63 43',
-      'email': 'info@utekos.no',
+      'email': 'kundeservice@utekos.no',
       'areaServed': 'NO',
       'availableLanguage': 'no'
     },

@@ -17,13 +17,13 @@ export const metadata: Metadata = {
   title: 'Få årets varmeste julegave levert hjem – ferdig innpakket!',
 
   description:
-    'Årets varmeste julegave! 🎁 Gi bort genial funksjonalitet som revolusjonerer opplevelsen av å være ute. Vi kjører ut bestillinger i Bergen hver dag frem til julaften.',
+    'Årets varmeste julegave! 🎁 Gi bort genial funksjonalitet som revolusjonerer opplevelsen av å være ute. Vi kjører ut bestillinger hver dag frem til julaften.',
 
   openGraph: {
-    title: 'Få årets varmeste julegave levert hjem – ferdig innpakket!',
+    title: 'Få årets varmeste julegave levert hjem - ferdig innpakket!',
 
     description:
-      'Vi leverer gaven ferdig innpakket – uten ekstra kostnad. Gjelder alle bestillinger i Bergen helt frem til julaften! 🎁',
+      'Årets varmeste julegave! 🎁 Gi bort genial funksjonalitet som revolusjonerer opplevelsen av å være ute. Vi kjører ut bestillinger hver dag frem til julaften.',
     url: 'https://utekos.no/kampanje/julegaver/lokal-levering',
     siteName: 'Utekos',
     locale: 'nb_NO',
@@ -150,9 +150,7 @@ export default async function ChristmasLocalDelivery() {
               </p>
             </div>
 
-            {/* Steg 2 - Den kritiske endringen */}
             <div className='relative flex flex-col items-center text-center'>
-              {/* En liten pil for desktop for å vise flyt, valgfritt */}
               <div className='mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-red-800 text-lg font-bold text-white shadow-lg shadow-red-900/50'>
                 2
               </div>
@@ -166,7 +164,6 @@ export default async function ChristmasLocalDelivery() {
               </p>
             </div>
 
-            {/* Steg 3 - Leveringsinstruksjoner */}
             <div className='flex flex-col items-center text-center'>
               <div className='mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-red-800 text-lg font-bold text-white shadow-lg shadow-red-900/50'>
                 3

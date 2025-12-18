@@ -47,8 +47,8 @@ export const footerConfig: FooterSection[] = [
         external: true
       },
       {
-        title: 'E-post: info@utekos.no',
-        path: 'mailto:info@utekos.no' as Route,
+        title: 'E-post: kundeservice@utekos.no',
+        path: 'mailto:kundeservice@utekos.no' as Route,
         external: true
       }
     ]

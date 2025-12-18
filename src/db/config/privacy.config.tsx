@@ -355,7 +355,7 @@ export const privacySections: Section[] = [
         <p>Spørsmål om personvern eller ønsker du å utøve rettigheter?</p>
         <ul className='space-y-4'>
           <PolicyItem title='E-post'>
-            <a href='mailto:info@utekos.no'>info@utekos.no</a>
+            <a href='mailto:kundeservice@utekos.no'>kundeservice@utekos.no</a>
           </PolicyItem>
           <PolicyItem title='Adresse'>
             Lille Damsgårdsveien 25, 1, 5162 Bergen, Norge
