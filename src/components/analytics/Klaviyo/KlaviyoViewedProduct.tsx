@@ -8,20 +8,12 @@ interface KlaviyoViewedProductProps {
   product: ShopifyProduct
   selectedVariant?: ShopifyProductVariant | null
 }
-
-declare global {
-  interface Window {
-    klaviyo: any[]
-  }
-}
-
 export function KlaviyoViewedProduct({
   product,
   selectedVariant
 }: KlaviyoViewedProductProps) {
   useEffect(() => {
     const klaviyo = (window.klaviyo = window.klaviyo || [])
-
     const item = {
       Title: product.title,
       ItemId: selectedVariant?.id || product.id,
@@ -48,7 +40,7 @@ export function KlaviyoViewedProduct({
         Metadata: item.Metadata
       }
     ])
-  }, [product, selectedVariant]) // Kjøres på nytt når produkt eller variant endres
+  }, [product, selectedVariant])
 
   return null
 }

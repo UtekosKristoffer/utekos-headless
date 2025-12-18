@@ -15,20 +15,17 @@ export function CampaignPageTracker() {
     hasFired.current = true
 
     const eventName = 'ViewContent'
-    // Generer ID basert på timestamp + random, bytt prefiks for enkel debugging
     const eventId = generateEventID().replace('evt_', 'camp_')
 
-    // Kampanje-spesifikk data
     const customData = {
       content_name: 'Kampanje: Julegaver Lokal Levering',
       content_category: 'Campaign',
       content_type: 'product_group',
       delivery_category: 'local_delivery_bergen',
-      value: 0, // Sett gjerne en snittverdi her hvis du vil måle ROAS på visninger
+      value: 0,
       currency: 'NOK'
     }
 
-    // --- 1. ROBUST PIXEL HANDLING (Browser) ---
     const firePixel = () => {
       if (typeof window !== 'undefined' && window.fbq) {
         window.fbq('track', eventName, customData, { eventID: eventId })
