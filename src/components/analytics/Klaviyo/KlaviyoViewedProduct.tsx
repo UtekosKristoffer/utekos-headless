@@ -2,8 +2,6 @@
 
 import { useEffect } from 'react'
 import type { ShopifyProduct, ShopifyProductVariant } from '@types'
-import { ProductVariant } from 'facebook-nodejs-business-sdk'
-import { generateEventID } from '../MetaPixel/generateEventID'
 import { getOrSetExternalId } from '../MetaPixel/getOrSetExternalId'
 
 export function trackViewedProduct(product: ShopifyProduct) {

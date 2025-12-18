@@ -1,12 +1,3 @@
-import type {
-  ProductVariantConnection,
-  ProductVariantEdge,
-  ShopifyProductOperation,
-  ShopifyProductVariant,
-  WeightUnit,
-  ShopifyProduct
-} from '@types'
-
 const SHOPIFY_ADMIN_API_TOKEN = process.env.SHOPIFY_ADMIN_API_TOKEN
 const SHOPIFY_STORE_DOMAIN = process.env.SHOPIFY_STORE_DOMAIN
 const API_VERSION = '2025-10'
@@ -119,47 +110,44 @@ export async function getAllProductsForMetaSync() {
       '7710325899512' // Utekos Stapper
     ]
 
-    const EXCLUDED_VARIANT_IDS = ['42903234642168']
-    const filteredEdges: ProductVariantEdge[] = json.data.products.edges.filter(
-      (edge: ShopifyProduct) => {
-        const nodeId: string = edge.id // F.eks "gid://shopify/Product/9227603149048"
-        const isExcludedProduct = EXCLUDED_PRODUCT_IDS.some(id =>
-          nodeId.endsWith(id)
-        )
+    const EXCLUDED_VARIANT_IDS = ['42903234642168', '42903234609400']
 
-        return !isExcludedProduct
-      }
-    )
+    const filteredEdges = json.data.products.edges.filter((edge: any) => {
+      const nodeId = edge.node.id // F.eks "gid://shopify/Product/9227603149048"
 
-    return filteredEdges.map(edges => {
-      const product = edges.node.product
+      const isExcludedProduct = EXCLUDED_PRODUCT_IDS.some(id =>
+        nodeId.endsWith(id)
+      )
+
+      return !isExcludedProduct
+    })
+
+    return filteredEdges.map((edge: any) => {
+      const product = edge.node
 
       const validVariantEdges = product.variants.edges.filter((vEdge: any) => {
-        const variantId: ShopifyProductVariant = vEdge.node.id // F.eks "gid://shopify/ProductVariant/42903234642168"
-        const isExcludedVariant = EXCLUDED_VARIANT_IDS.some(id => variantId.id)
+        const variantId = vEdge.node.id // F.eks "gid://shopify/ProductVariant/42903234642168"
+        const isExcludedVariant = EXCLUDED_VARIANT_IDS.some(id =>
+          variantId.endsWith(id)
+        )
         return !isExcludedVariant
       })
 
-      const flatVariants: ProductVariantEdge[] = validVariantEdges.map(
-        (variantEdge: ProductVariantEdge) => {
-          const variant = variantEdge.node
-          const weightData: WeightUnit | number =
-            product.weight || variant.weight
-          return {
-            node: {
-              ...variant,
-              weight: weightData?.value || null,
-              weightUnit:
-                weightData?.unit ? mapWeightUnit(weightData.unit) : 'kg'
-            }
-          }
+      const flatVariants = validVariantEdges.map((vEdge: any) => {
+        const v = vEdge.node
+        const weightData = v.inventoryItem?.measurement?.weight
+
+        return {
+          ...v,
+          weight: weightData?.value || null,
+          weightUnit: weightData?.unit ? mapWeightUnit(weightData.unit) : 'kg'
         }
-      )
+      })
 
       return {
         ...product,
         variants: {
-          edges: flatVariants
+          edges: flatVariants.map((v: any) => ({ node: v }))
         }
       }
     })

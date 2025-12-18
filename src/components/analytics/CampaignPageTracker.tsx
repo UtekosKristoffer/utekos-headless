@@ -38,7 +38,7 @@ export function CampaignPageTracker() {
         if (firePixel()) {
           clearInterval(intervalId)
         }
-      }, 500) // Sjekk hvert halvsekund
+      }, 500)
 
       setTimeout(() => clearInterval(intervalId), 5000)
     }

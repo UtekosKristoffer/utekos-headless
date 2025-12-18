@@ -46,14 +46,7 @@ export async function syncProductsToMetaCatalog() {
       const link = `${WEBSITE_BASE_URL}/produkter/${product.handle}?variant=${encodeURIComponent(variant.id)}`
       const imageUrl = variant.image?.url || product.featuredImage?.url || ''
       const brand = product.vendor || 'Utekos'
-      const mpn = variant.sku || variantId
-      const gtin = variant.barcode
-      const color = getOptionValue(variant.selectedOptions, [
-        'color',
-        'colour',
-        'farge',
-        'colour'
-      ])
+      const color = getOptionValue(variant.selectedOptions, ['farge', 'color'])
       const size = getOptionValue(variant.selectedOptions, [
         'size',
         'størrelse',
@@ -81,6 +74,9 @@ export async function syncProductsToMetaCatalog() {
         link: link,
         image_link: imageUrl,
         brand: brand,
+        color: color,
+        size: size,
+        retailer_id: variantId,
         item_group_id: cleanProductId,
         google_product_category: googleProductCategory,
         age_group: ageGroup,
