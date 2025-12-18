@@ -11,7 +11,18 @@ export function KlaviyoViewedProduct({
   selectedVariant?: ShopifyProductVariant | null
 }) {
   useEffect(() => {
-    const _learnq = (window as any)._learnq || []
+    const _learnq = window._learnq || []
+    _learnq.push([
+      'track',
+      'Viewed Product',
+      {
+        Name: product.title,
+        ProductID: product.id,
+        ImageURL: product.featuredImage?.url,
+        URL: window.location.href,
+        Price: selectedVariant?.price?.amount
+      }
+    ])
 
     const item = {
       Name: product.title,
