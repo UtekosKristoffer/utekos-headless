@@ -14,20 +14,34 @@ import {
 import { SantaHat } from '@/components/ui/santahat'
 import { connection } from 'next/server'
 export const metadata: Metadata = {
-  title: 'Få årets varmeste julegave levert hjem – ferdig innpakket 🎁 !',
+  title: 'Årets varmeste julegave levert hjem | Ferdig innpakket 🎁 !',
 
   description:
-    'Gi bort genial funksjonalitet som revolusjonerer opplevelsen av å være ute. Vi kjører ut bestillinger hver dag frem til julaften.',
+    'Finn de varmeste julegavene hos Utekos. TechDown, Comfyrobe, Dun og Mikrofiber. Utvidet bytterett og levering på dagen.',
 
   openGraph: {
     title: 'Få årets varmeste julegave levert hjem – ferdig innpakket 🎁 !',
-
     description:
-      'Gi bort genial funksjonalitet som revolusjonerer opplevelsen av å være ute. Vi kjører ut bestillinger hver dag frem til julaften.',
+      'Den perfekte gaven til livsnyteren som har alt. Gi bort genial funksjonalitet som revolusjonerer opplevelsen av å være ute. Vi kjører ut bestillinger hver dag frem til julaften. Utvidet bytterett frem til 15. januar',
     url: 'https://utekos.no/kampanje/julegaver/lokal-levering',
     siteName: 'Utekos',
     locale: 'nb_NO',
-    type: 'website'
+    type: 'website',
+    images: [
+      {
+        url: '/linn-kate-kikkert.png',
+        width: 1200,
+        height: 630,
+        alt: 'Personer som nyter utelivet med varme klær fra Utekos'
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Julegaver | Utekos',
+    description:
+      'Finn de varmeste julegavene hos Utekos. TechDown, Comfyrobe, Dun og Mikrofiber.',
+    images: ['/linn-kate-kikkert.png']
   }
 }
 export default async function ChristmasLocalDelivery() {
