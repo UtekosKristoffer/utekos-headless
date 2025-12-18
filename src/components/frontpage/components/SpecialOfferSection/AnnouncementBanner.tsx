@@ -60,16 +60,16 @@ export default function AnnouncementBanner() {
             <span className='font-bold text-red-100'>BERGEN: </span>
             {/* Kort tekst på mobil */}
             <span className='inline md:hidden'>
-              Bestill julegavene i dag! Vi leverer helt frem til julaften 🎅
+              Hjemlevering på bestillinger helt frem til julaften 🎅
             </span>
             {/* Full tekst på desktop */}
             <span className='hidden md:inline'>
-              Bestill julegavene i dag! Vi leverer helt frem til julaften. 🎅
+              Hjemlevering på bestillinger helt frem til julaften 🎅
             </span>
           </span>
 
           <span className='hidden items-center font-bold text-white underline decoration-red-400 underline-offset-4 transition-all group-hover:decoration-white sm:flex'>
-            Bestill julegaven her
+            Kjøp julegavene her
             <ArrowRightIcon className='ml-1 inline-block size-4 transition-transform group-hover:translate-x-1' />
           </span>
 
