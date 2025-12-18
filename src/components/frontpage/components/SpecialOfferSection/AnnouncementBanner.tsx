@@ -64,12 +64,12 @@ export default function AnnouncementBanner() {
             </span>
             {/* Full tekst på desktop */}
             <span className='hidden md:inline'>
-              Vi leverer på døren i Bergen hver dag frem til julaften.
+              Vi har hjemlevering av bestillinger helt frem til julaften.
             </span>
           </span>
 
           <span className='hidden items-center font-bold text-white underline decoration-red-400 underline-offset-4 transition-all group-hover:decoration-white sm:flex'>
-            Bestill hjemlevering her
+            Bestill julegaven her
             <ArrowRightIcon className='ml-1 inline-block size-4 transition-transform group-hover:translate-x-1' />
           </span>
 
