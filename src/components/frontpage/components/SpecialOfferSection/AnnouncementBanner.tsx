@@ -57,10 +57,10 @@ export default function AnnouncementBanner() {
           <Gift className='h-4 w-4 text-red-200' />
 
           <span className='mr-1'>
-            <span className='font-bold text-red-100'>BERGEN: </span>
+            <span className='font-bold text-red-100'>Bergen: </span>
             {/* Kort tekst på mobil */}
             <span className='inline md:hidden'>
-              Hjemlevering på bestillinger helt frem til julaften 🎅
+              Hjemlevering på bestillinger helt frem til julaftenn 🎅
             </span>
             {/* Full tekst på desktop */}
             <span className='hidden md:inline'>
