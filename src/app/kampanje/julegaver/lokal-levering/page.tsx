@@ -13,6 +13,7 @@ import {
 } from 'lucide-react'
 import { SantaHat } from '@/components/ui/santahat'
 import { connection } from 'next/server'
+import { CampaignPageTracker } from '@/components/analytics/CampaignPageTracker'
 export const metadata: Metadata = {
   title: 'Årets varmeste julegave levert hjem | Ferdig innpakket 🎁 !',
 
@@ -48,6 +49,7 @@ export default async function ChristmasLocalDelivery() {
   await connection()
   return (
     <div className='bg-background pb-20'>
+      <CampaignPageTracker />
       <section className='relative overflow-hidden bg-gradient-to-b from-red-950 via-background to-background pt-24 pb-16 text-center md:pt-32'>
         <div className='container relative z-10 mx-auto px-4'>
           {/* Badge for lokal tilhørighet */}
