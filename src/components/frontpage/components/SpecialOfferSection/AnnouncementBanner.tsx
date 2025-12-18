@@ -60,11 +60,11 @@ export default function AnnouncementBanner() {
             <span className='font-bold text-red-100'>BERGEN: </span>
             {/* Kort tekst på mobil */}
             <span className='inline md:hidden'>
-              Vi leverer gaver døren hver dag frem til jul! 🎅
+              Julegaver levert på døren – helt frem til julaften! 🎅
             </span>
             {/* Full tekst på desktop */}
             <span className='hidden md:inline'>
-              Vi har hjemlevering av bestillinger helt frem til julaften.
+              Julegaver levert på døren – helt frem til julaften! 🎅
             </span>
           </span>
 

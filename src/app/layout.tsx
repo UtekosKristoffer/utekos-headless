@@ -18,6 +18,7 @@ import type { Metadata } from 'next'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { getCachedCart } from '../lib/helpers/cart/getCachedCart'
 import { GoogleTagManager } from '@next/third-parties/google'
+import Script from 'next/script'
 // import { Snowfall } from '@/components/ui/snowfall'
 
 export const metadata: Metadata = {
@@ -94,8 +95,6 @@ async function CartProviderLoader({ children }: { children: ReactNode }) {
   const queryClient = new QueryClient()
   const cartId = await getCartIdFromCookie()
 
-  // Prefetch av handlekurv
-  // getCachedCart har 'use cache', går derfor lynraskt.
   await queryClient.prefetchQuery({
     queryKey: ['cart', cartId],
     queryFn: () => getCachedCart(cartId)
@@ -138,6 +137,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </Activity>
           </CartProviderLoader>
         </Suspense>
+
+        <Script
+          id='klaviyo-js'
+          strategy='afterInteractive'
+          src='https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=UPBWw8'
+        />
 
         <Toaster closeButton />
         <Analytics mode='production' />
