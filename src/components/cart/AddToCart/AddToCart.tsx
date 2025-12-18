@@ -29,6 +29,7 @@ import { QuantitySelector } from '../QuantitySelector'
 import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
+import { trackAddedToCart } from '@/components/analytics/Klaviyo/KlaviyoViewedProduct'
 
 export function AddToCart({
   product,
@@ -47,7 +48,9 @@ export function AddToCart({
   const lastError = CartMutationContext.useSelector(
     state => state.context.error
   )
-
+  const handleAtc = function () {
+    trackAddedToCart(product)
+  }
   const contextCartId = useContext(CartIdContext)
   const form = useForm<AddToCartFormValues>(
     createAddToCartFormConfig(selectedVariant)
@@ -79,6 +82,8 @@ export function AddToCart({
       toast.error('Vennligst velg en variant før du legger i handlekurven.')
       return
     }
+
+    trackAddedToCart(product)
 
     startTransition(async () => {
       try {
@@ -142,7 +147,7 @@ export function AddToCart({
         }
 
         const value = basePrice * values.quantity
-
+        handleAtc()
         if (typeof window !== 'undefined' && window.fbq) {
           window.fbq(
             'track',
@@ -193,7 +198,6 @@ export function AddToCart({
             num_items: totalQty
           }
         }
-
         sendJSON('/api/meta-events', capiPayload)
 
         if (typeof window !== 'undefined' && window.dataLayer) {

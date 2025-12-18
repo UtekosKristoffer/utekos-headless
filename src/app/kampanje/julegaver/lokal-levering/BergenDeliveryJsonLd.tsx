@@ -93,7 +93,6 @@ export async function BergenDeliveryJsonLd() {
       ratingCount: '24',
       worstRating: '20',
       productId: '9240112693496',
-      content_ids: 46944403849464 | 46944403882232 | 46944403915000,
       description:
         'Vår varmeste mest allsidige modell. Optimalisert etter erfaringer og tilbakemeldinger.'
     },

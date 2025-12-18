@@ -1,4 +1,5 @@
 // Path: types/product.types.ts
+import { string } from 'zod'
 import type {
   Image,
   Metafield,
@@ -41,6 +42,16 @@ export type ShopifyProduct = {
   tags: string[]
   relatedProducts: ShopifyProduct[]
   metafield?: Metafield | null
+  quantityAvailable?: number | null
+  category: {
+    id: string
+    name: string
+    ancestors: {
+      id: string
+      name: string
+      ancestors: string
+    }
+  }
   variantProfile?: MetaobjectReference | null
   seo: {
     title: string | null
@@ -48,6 +59,12 @@ export type ShopifyProduct = {
   }
   selectedOrFirstAvailableVariant: ShopifyProductVariant
   variants: ProductVariantConnection
+  weight: WeightUnit
+}
+
+export type WeightUnit = {
+  unit: string
+  value: number
 }
 export type ShopifySelectedOption = {
   name: string
@@ -92,4 +109,7 @@ export type ShopifyProductVariant = {
   sku: string | undefined
   variantProfile: VariantProfileReference | null
   variantProfileData?: Partial<MetaobjectReference>
+  weight: number | null
+  weightUnit: string
+  quantityAvailable: number | null
 }

@@ -3,11 +3,11 @@
 import { getAllProductsForMetaSync } from '@/lib/shopify/admin'
 import { FacebookAdsApi, ProductCatalog } from 'facebook-nodejs-business-sdk'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
+import type { ShopifyProduct } from '../../../types'
 const ACCESS_TOKEN =
   process.env.CATALOG_ACCESS_TOKEN || process.env.META_ACCESS_TOKEN
 const CATALOG_ID = '690208780604782'
 const WEBSITE_BASE_URL = 'https://utekos.no'
-
 if (!ACCESS_TOKEN) {
   throw new Error('Missing META_ACCESS_TOKEN for Catalog Sync')
 }
@@ -35,30 +35,19 @@ export async function syncProductsToMetaCatalog() {
   const batchRequests: any[] = []
 
   for (const product of products) {
-    if (product.status !== 'ACTIVE') continue
-
-    const shopifyCategory =
-      product.productCategory?.productTaxonomyNode?.fullName
-    const googleProductCategory =
-      shopifyCategory || product.productType || 'Apparel & Accessories'
-
+    if (product.availableForSale !== true) continue
+    product.category.id
+    const googleProductCategory = 203
     const cleanProductId = cleanShopifyId(product.id)
-
     for (const variantEdge of product.variants.edges) {
       const variant = variantEdge.node
-
       const variantId = cleanShopifyId(variant.id)
-
       if (!variantId) continue
-
       const link = `${WEBSITE_BASE_URL}/produkter/${product.handle}?variant=${encodeURIComponent(variant.id)}`
-
       const imageUrl = variant.image?.url || product.featuredImage?.url || ''
-
       const brand = product.vendor || 'Utekos'
       const mpn = variant.sku || variantId
       const gtin = variant.barcode
-
       const color = getOptionValue(variant.selectedOptions, [
         'color',
         'colour',
@@ -74,24 +63,25 @@ export async function syncProductsToMetaCatalog() {
       const ageGroup = 'adult'
       const gender = 'unisex'
 
-      const payloadData: any = {
-        id: variantId,
+      const payloadData = {
+        id: `${product.id}_${variant.id}`,
         title: `${product.title} - ${variant.title}`,
         description:
-          product.descriptionHtml ?
-            product.descriptionHtml.replace(/<[^>]*>?/gm, '').substring(0, 5000)
+          product.description ?
+            product.description.replace(/<[^>]*>?/gm, '').substring(0, 5000)
           : product.title,
         availability:
-          variant.inventoryQuantity > 0 ? 'in stock' : 'out of stock',
+          variant.quantityAvailable && variant.quantityAvailable > 0 ?
+            'in stock'
+          : 'out of stock',
         condition: 'new',
         price: `${variant.price} NOK`,
+        compareAtPrice:
+          variant.compareAtPrice ? `${variant.compareAtPrice} NOK` : undefined,
         link: link,
         image_link: imageUrl,
         brand: brand,
-
-        // Dette matcher nå Google Feed-logikken (<g:item_group_id>)
         item_group_id: cleanProductId,
-
         google_product_category: googleProductCategory,
         age_group: ageGroup,
         gender: gender,
@@ -100,13 +90,7 @@ export async function syncProductsToMetaCatalog() {
         })
       }
 
-      if (color) payloadData.color = color
-      if (size) payloadData.size = size
-      if (gtin) payloadData.gtin = gtin
-      if (mpn) payloadData.mpn = mpn
-
       if (variant.compareAtPrice) {
-        payloadData.sale_price = `${variant.price} NOK`
         payloadData.price = `${variant.compareAtPrice} NOK`
       }
 

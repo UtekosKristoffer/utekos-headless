@@ -97,6 +97,11 @@ export async function generateMetadata(
     other['product:price:currency'] = currencyCode
   }
 
+  if (selectedVariant?.compareAtPrice?.amount) {
+    other['product:variant:compare_at_price'] =
+      selectedVariant.compareAtPrice.amount
+  }
+
   other['product:availability'] = isOutOfStock ? 'out of stock' : 'in stock'
   other['product:condition'] = 'new'
 

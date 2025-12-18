@@ -33,17 +33,15 @@ export async function generateFeedXml() {
       stripHtml(product.description || product.title)
     )
     const productTitle = escapeXml(product.title)
-    const googleCategory = '203'
+    const productId: string | undefined = cleanShopifyId(product.id)
+    const googleCategory = 203
 
     const cleanGroupId = cleanShopifyId(product.id)
 
     for (const edge of product.variants.edges) {
       const variant = edge.node
-
       const variantId = cleanShopifyId(variant.id)
-
       const link = `${baseUrl}/produkter/${product.handle}?variant=${encodeURIComponent(variant.id)}`
-
       const imageUrl = variant.image?.url || product.featuredImage?.url || ''
       const price = formatPrice(
         variant.price.amount,
@@ -81,7 +79,7 @@ export async function generateFeedXml() {
 
       xmlItems.push(`
     <item>
-      <g:id>${escapeXml(variantId)}</g:id> 
+      <g:product_id>${escapeXml(productId)}</g:product_id> 
       <g:title>${productTitle} - ${color} / ${size}</g:title>
       <g:description>${description}</g:description>
       <g:link>${link}</g:link>
@@ -93,7 +91,7 @@ export async function generateFeedXml() {
       ${salePriceLine}
       <g:google_product_category>${googleCategory}</g:google_product_category>
       <g:item_group_id>${escapeXml(cleanGroupId)}</g:item_group_id>
-      
+       
       <g:gender>unisex</g:gender>
       <g:age_group>adult</g:age_group>
       ${color ? `<g:color>${color}</g:color>` : ''}

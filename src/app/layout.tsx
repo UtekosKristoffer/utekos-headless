@@ -19,7 +19,6 @@ import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { getCachedCart } from '../lib/helpers/cart/getCachedCart'
 import { GoogleTagManager } from '@next/third-parties/google'
 import Script from 'next/script'
-// import { Snowfall } from '@/components/ui/snowfall'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -34,9 +33,9 @@ export const metadata: Metadata = {
     canonical: '/'
   },
   applicationName: 'Utekos',
-  category: 'clothing',
+  category: 'Yttertøy',
+  keywords: ['Yttertøy', 'Dun', 'Varmedress', 'Komfortplagg', 'Utekos'],
   manifest: '/manifest.json',
-  keywords: ['Utekos', 'Komfortplagg', 'Varmedress', 'Dunjakke', 'Hytteliv'],
   authors: [{ name: 'Utekos', url: 'https://utekos.no' }],
   creator: 'Utekos',
   publisher: 'Utekos',
@@ -113,6 +112,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='no'>
       <GoogleTagManager gtmId='GTM-5TWMJQFP' />
+      <Script
+        id='klaviyo-js'
+        async
+        type='text/javascript'
+        src='https://static.klaviyo.com/onsite/js/UPBWw8/klaviyo.js'
+      />
       <body
         className={`bg-background text-foreground ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -122,28 +127,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <Activity>
               <AnnouncementBanner />
             </Activity>
-
             <Header menu={mainMenu} />
-
             <main>
               {children}
               <Activity>
                 <Footer />
               </Activity>
             </main>
-
             <Activity>
               <ChatBubble />
             </Activity>
           </CartProviderLoader>
         </Suspense>
-
-        <Script
-          id='klaviyo-js'
-          async
-          type='text/javascript'
-          src='https://static.klaviyo.com/onsite/js/UPBWw8/klaviyo.js'
-        />
         <Toaster closeButton />
         <Analytics mode='production' />
       </body>

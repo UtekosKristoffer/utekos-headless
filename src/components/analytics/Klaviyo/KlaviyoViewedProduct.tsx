@@ -2,48 +2,46 @@
 
 import { useEffect } from 'react'
 import type { ShopifyProduct, ShopifyProductVariant } from '@types'
+import { ProductVariant } from 'facebook-nodejs-business-sdk'
+import { generateEventID } from '../MetaPixel/generateEventID'
+import { getOrSetExternalId } from '../MetaPixel/getOrSetExternalId'
 
-export function KlaviyoViewedProduct({
-  product,
-  selectedVariant
-}: {
-  product: ShopifyProduct
-  selectedVariant?: ShopifyProductVariant | null
-}) {
-  useEffect(() => {
-    if (!window.klaviyo) return
-
-    const item = {
-      ProductName: product.title,
-      ProductID: product.id,
-      SKU: selectedVariant?.sku || product.id,
-      Categories: product.collections?.nodes?.map((c: any) => c.title) || [],
-      ImageURL: selectedVariant?.image?.url || product.featuredImage?.url || '',
-      URL: window.location.origin + window.location.pathname,
+export function trackViewedProduct(product: ShopifyProduct) {
+  let klaviyo = window.klaviyo || []
+  let item = {
+    Name: product.title,
+    ProductID: product.id.substring(product.id.lastIndexOf('/') + 1),
+    ImageURL: product.selectedOrFirstAvailableVariant.image?.url || '',
+    Handle: product.handle,
+    Brand: product.vendor,
+    Price: product.selectedOrFirstAvailableVariant.price.amount,
+    Metadata: {
       Brand: product.vendor,
-      Price:
-        selectedVariant?.price?.amount
-        || product.priceRange.minVariantPrice.amount,
-      CompareAtPrice: selectedVariant?.compareAtPrice?.amount || undefined
+      Price: product.selectedOrFirstAvailableVariant.price.amount,
+      CompareAtPrice: product.selectedOrFirstAvailableVariant.compareAtPrice
     }
+  }
+  klaviyo.track('Viewed Product', item)
+  klaviyo.trackViewedItem(item)
+}
 
-    // Tracker selve visningen for "Browse Abandonment" flows
-    window.klaviyo.track('Viewed Product', item)
-
-    // Populerer "Recently Viewed Items"-tabellen i profilen
-    window.klaviyo.trackViewedItem({
-      Title: item.ProductName,
-      ItemId: item.ProductID,
-      Categories: item.Categories,
-      ImageUrl: item.ImageURL,
-      Url: item.URL,
-      Metadata: {
-        Brand: item.Brand,
-        Price: item.Price,
-        CompareAtPrice: item.CompareAtPrice
-      }
-    })
-  }, [product, selectedVariant])
-
-  return null
+export function trackAddedToCart(product: ShopifyProduct) {
+  let klaviyo = window.klaviyo || []
+  let item = {
+    Name: product.title,
+    ProductID: product.id.substring(product.id.lastIndexOf('/') + 1),
+    ImageURL: product.selectedOrFirstAvailableVariant.image?.url || '',
+    Handle: product.handle,
+    Brand: product.vendor,
+    Price: product.selectedOrFirstAvailableVariant.price.amount,
+    ProductVariantID: product.selectedOrFirstAvailableVariant.id,
+    Value: product.selectedOrFirstAvailableVariant.price.amount,
+    Customer: getOrSetExternalId(),
+    Metadata: {
+      Brand: product.vendor,
+      Price: product.selectedOrFirstAvailableVariant.price.amount,
+      CompareAtPrice: product.selectedOrFirstAvailableVariant.compareAtPrice
+    }
+  }
+  klaviyo.track('Added To Cart', item)
 }

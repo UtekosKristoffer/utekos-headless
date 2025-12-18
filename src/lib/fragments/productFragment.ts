@@ -89,6 +89,9 @@ const product = /* GraphQL */ `
             url
             altText
           }
+          quantityAvailable
+          sku
+          weight
           metafield(namespace: "bridgeFor", key: "VariantHandler") {
             value
             type
