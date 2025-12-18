@@ -1,45 +1,33 @@
-// Path: src/components/analytics/Klaviyo/KlaviyoViewedProduct.tsx
 'use client'
 
 import { useEffect } from 'react'
 import type { ShopifyProduct, ShopifyProductVariant } from '@types'
 
-interface KlaviyoViewedProductProps {
-  product: ShopifyProduct
-  selectedVariant?: ShopifyProductVariant | null
-}
 export function KlaviyoViewedProduct({
   product,
   selectedVariant
-}: KlaviyoViewedProductProps) {
+}: {
+  product: ShopifyProduct
+  selectedVariant?: ShopifyProductVariant | null
+}) {
   useEffect(() => {
-    const klaviyo = (window.klaviyo = window.klaviyo || [])
+    const _learnq = (window as any)._learnq || []
+
     const item = {
-      Title: product.title,
-      ItemId: selectedVariant?.id || product.id,
-      ImageUrl: selectedVariant?.image?.url || product.featuredImage?.url || '',
-      Url: window.location.href,
+      Name: product.title,
+      ProductID: product.id,
+      ImageURL: selectedVariant?.image?.url || product.featuredImage?.url || '',
+      URL: window.location.origin + window.location.pathname,
+      Brand: product.vendor,
+      Price:
+        selectedVariant?.price?.amount
+        || product.priceRange.minVariantPrice.amount,
       Metadata: {
-        Brand: product.vendor,
-        Price:
-          selectedVariant?.price?.amount
-          || product.priceRange.minVariantPrice.amount,
-        CompareAtPrice: selectedVariant?.compareAtPrice?.amount || undefined
+        VariantID: selectedVariant?.id
       }
     }
 
-    klaviyo.push(['track', 'Viewed Product', item])
-
-    klaviyo.push([
-      'trackViewedItem',
-      {
-        Title: item.Title,
-        ItemId: item.ItemId,
-        ImageUrl: item.ImageUrl,
-        Url: item.Url,
-        Metadata: item.Metadata
-      }
-    ])
+    _learnq.push(['track', 'Viewed Product', item])
   }, [product, selectedVariant])
 
   return null
