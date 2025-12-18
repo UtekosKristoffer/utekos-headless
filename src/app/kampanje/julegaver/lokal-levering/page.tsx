@@ -365,8 +365,8 @@ export default async function ChristmasLocalDelivery() {
           </p>
           {/* Ny linje for henting lagt til her */}
           <p className='mt-1 text-article-white'>
-            Vi tilbyr også <strong>henting hver dag mellom 08-21</strong> frem
-            til lille julaften.
+            Vi tilbyr også <strong>henting hver dag mellom kl. 08-21</strong>{' '}
+            frem til lille julaften.
           </p>
         </div>
 
