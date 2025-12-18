@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     description:
       'Kompromissløs komfort. Innovativ funksjonalitet. Designet for å holde på varmen når øyeblikkene teller.',
     images: {
-      url: 'https://utekos.no/kate-linn-kikkert-master.png',
+      url: 'https://utekos.no/og-kate-linn-kikkert-master.png',
       width: 1200,
       height: 630,
       alt: 'Personer som koser seg utendørs med varme komfortplagg fra Utekos.'

@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/og-linn-kate-kikkert.png',
+        url: 'https://utekos.no/og-linn-kate-kikkert.png',
         width: 1200,
         height: 630,
         alt: 'Personer som nyter utelivet med varme klær fra Utekos'
