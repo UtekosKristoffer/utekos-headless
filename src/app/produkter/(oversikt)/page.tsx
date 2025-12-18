@@ -42,7 +42,7 @@ export const metadata: Metadata = {
       'Varme og komfortable plagg for deg som elsker utelivet på hytten, i bobilen eller båten.',
     images: [
       {
-        url: '/og-image-produkter.png',
+        url: 'https://utekos.no/og-image-produkter.png',
         width: 1200,
         height: 630,
         alt: 'Kolleksjonen av komfortplagg fra Utekos'

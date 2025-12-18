@@ -61,14 +61,12 @@ export const metadata: Metadata = {
     title: 'Utekos - Forleng de gode stundene ute.',
     description:
       'Kompromissløs komfort. Innovativ funksjonalitet. Designet for å holde på varmen når øyeblikkene teller.',
-    images: [
-      {
-        url: '/linn-kate-kikkert.png',
-        width: 1200,
-        height: 630,
-        alt: 'Personer som koser seg utendørs med varme komfortplagg fra Utekos.'
-      }
-    ]
+    images: {
+      url: 'https://utekos.no/kate-linn-kikkert-master.png',
+      width: 1200,
+      height: 630,
+      alt: 'Personer som koser seg utendørs med varme komfortplagg fra Utekos.'
+    }
   },
   robots: {
     index: true,

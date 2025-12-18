@@ -15,7 +15,7 @@ import { SantaHat } from '@/components/ui/santahat'
 import { connection } from 'next/server'
 
 export const metadata: Metadata = {
-  title: 'Julegavetips | Utekos',
+  title: 'Julegavetips',
   description:
     'Finn de varmeste julegavene hos Utekos. TechDown, Comfyrobe, Dun og Mikrofiber. Utvidet bytterett og rask levering.',
   openGraph: {
@@ -300,12 +300,12 @@ export default async function ChristmasCampaign() {
       <section className='container mx-auto mt-24 px-4 mb-6'>
         <div className='mb-12 text-center'>
           <h2 className='text-3xl font-bold'>Bor du i Bergen?</h2>
-           <Link
-                href='/kampanje/julegaver/lokal-levering'
-                className='mt-6 block w-full rounded-lg bg-white/10 py-3 text-center font-semibold text-white transition-colors hover:bg-white/20'
-              >
-                Trykk for å se eksklusivt lokal-tilbud!
-              </Link>
+          <Link
+            href='/kampanje/julegaver/lokal-levering'
+            className='mt-6 block w-full rounded-lg bg-white/10 py-3 text-center font-semibold text-white transition-colors hover:bg-white/20'
+          >
+            Trykk for å se eksklusivt lokal-tilbud!
+          </Link>
         </div>
         <div className='grid gap-6 md:grid-cols-3'>
           <Link

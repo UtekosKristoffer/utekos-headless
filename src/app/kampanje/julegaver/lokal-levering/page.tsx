@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     title: 'Julegaver | Utekos',
     description:
       'Finn de varmeste julegavene hos Utekos. TechDown, Comfyrobe, Dun og Mikrofiber.',
-    images: ['https://utekos.no/linn-kate-kikkert.png']
+    images: ['https://utekos.no/linn-kate-kikkert-master.png']
   }
 }
 export default async function ChristmasLocalDelivery() {

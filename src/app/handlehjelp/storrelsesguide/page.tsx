@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     siteName: 'Utekos',
     images: [
       {
-        url: '/og-image-storrelsesguide.webp',
+        url: 'https://utekos.no/og-image-storrelsesguide.webp',
         width: 1200,
         height: 630,
         alt: 'Illustrasjon av måleskjema for Utekos-produkter.'
