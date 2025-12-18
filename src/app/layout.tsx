@@ -140,8 +140,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
         <Script
           id='klaviyo-js'
-          strategy='afterInteractive'
-          src='https://static.klaviyo.com/onsite/js/PUBLIC_API_KEY/klaviyo.j'
+          async
+          type='text/javascript'
+          src='https://static.klaviyo.com/onsite/js/UPBWw8/klaviyo.js'
         />
         <Toaster closeButton />
         <Analytics mode='production' />

@@ -9,6 +9,13 @@ const product = /* GraphQL */ `
     handle
     totalInventory
     updatedAt
+    collections(first: 10) {
+      nodes {
+        id
+        title
+        handle
+      }
+    }
     compareAtPriceRange {
       minVariantPrice {
         amount

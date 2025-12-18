@@ -17,6 +17,13 @@ export type ShopifyProduct = {
   handle: string
   totalInventory: number
   updatedAt: string
+  collections: {
+    nodes: {
+      id: string
+      title: string
+      handle: string
+    }[]
+  }
   compareAtPriceRange: {
     minVariantPrice: Money
     maxVariantPrice: Money

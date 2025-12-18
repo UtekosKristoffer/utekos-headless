@@ -34,6 +34,20 @@ declare global {
       queue?: any[]
     }
     _snaptr_loaded?: boolean
+    klaviyo: {
+      push: (...args: any[]) => void
+      track: (
+        event: string,
+        properties?: Record<string, any>,
+        callback?: Function
+      ) => boolean
+      identify: (
+        properties: Record<string, any>,
+        callback?: Function
+      ) => Record<string, any>
+      trackViewedItem: (item: Record<string, any>, callback?: Function) => void
+    }
+    _learnq: any[]
   }
 }
 

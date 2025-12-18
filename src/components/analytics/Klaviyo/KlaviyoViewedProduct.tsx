@@ -11,34 +11,38 @@ export function KlaviyoViewedProduct({
   selectedVariant?: ShopifyProductVariant | null
 }) {
   useEffect(() => {
-    const _learnq = window._learnq || []
-    _learnq.push([
-      'track',
-      'Viewed Product',
-      {
-        Name: product.title,
-        ProductID: product.id,
-        ImageURL: product.featuredImage?.url,
-        URL: window.location.href,
-        Price: selectedVariant?.price?.amount
-      }
-    ])
+    if (!window.klaviyo) return
 
     const item = {
-      Name: product.title,
+      ProductName: product.title,
       ProductID: product.id,
+      SKU: selectedVariant?.sku || product.id,
+      Categories: product.collections?.nodes?.map((c: any) => c.title) || [],
       ImageURL: selectedVariant?.image?.url || product.featuredImage?.url || '',
       URL: window.location.origin + window.location.pathname,
       Brand: product.vendor,
       Price:
         selectedVariant?.price?.amount
         || product.priceRange.minVariantPrice.amount,
-      Metadata: {
-        VariantID: selectedVariant?.id
-      }
+      CompareAtPrice: selectedVariant?.compareAtPrice?.amount || undefined
     }
 
-    _learnq.push(['track', 'Viewed Product', item])
+    // Tracker selve visningen for "Browse Abandonment" flows
+    window.klaviyo.track('Viewed Product', item)
+
+    // Populerer "Recently Viewed Items"-tabellen i profilen
+    window.klaviyo.trackViewedItem({
+      Title: item.ProductName,
+      ItemId: item.ProductID,
+      Categories: item.Categories,
+      ImageUrl: item.ImageURL,
+      Url: item.URL,
+      Metadata: {
+        Brand: item.Brand,
+        Price: item.Price,
+        CompareAtPrice: item.CompareAtPrice
+      }
+    })
   }, [product, selectedVariant])
 
   return null
