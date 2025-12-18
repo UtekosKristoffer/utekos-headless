@@ -1,11 +1,12 @@
 'use client'
 
-import { ArrowRightIcon, XIcon, Gift } from 'lucide-react' // La til Gift
+import { ArrowRightIcon, XIcon, Gift } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils/className'
 
-const BANNER_STORAGE_KEY = 'utekos-techdown-launch-banner-dismissed-timestamp'
+// Endret nøkkel for å garantere at folk som lukket forrige banner ser denne
+const BANNER_STORAGE_KEY = 'utekos-local-delivery-bergen-2024'
 const BANNER_EXPIRATION_MS = 3 * 24 * 60 * 60 * 1000 // 3 dager
 
 export default function AnnouncementBanner() {
@@ -53,24 +54,26 @@ export default function AnnouncementBanner() {
       )}
     >
       <Link
-        href='/kampanje/julegaver'
+        href='/kampanje/julegaver/lokal-levering'
         className='group block w-full bg-gradient-to-r from-red-950 via-red-900 to-red-950 px-8 py-3 text-center text-sm font-medium text-white transition-all hover:bg-red-950'
       >
         <div className='flex items-center justify-center gap-2'>
           <Gift className='h-4 w-4 text-red-200' />
 
           <span className='mr-1'>
-            <span className='font-bold text-red-100'>JULEGAVETIPS: </span>
-            {/* Kort tekst på mobil, full tekst på desktop */}
-            <span className='inline md:hidden'>Årets varmeste gave.</span>
+            <span className='font-bold text-red-100'>BERGEN: </span>
+            {/* Kort tekst på mobil */}
+            <span className='inline md:hidden'>
+              Vi leverer på døren hver dag frem til jul! 🎅
+            </span>
+            {/* Full tekst på desktop */}
             <span className='hidden md:inline'>
-              Gi bort genial funksjonalitet som endrer måten man nyter livet
-              utendørs på!
+              Vi leverer på døren i Bergen hver dag frem til julaften.
             </span>
           </span>
 
           <span className='hidden items-center font-bold text-white underline decoration-red-400 underline-offset-4 transition-all group-hover:decoration-white sm:flex'>
-            Sikre deg julegavene
+            Bestill hjemlevering her
             <ArrowRightIcon className='ml-1 inline-block size-4 transition-transform group-hover:translate-x-1' />
           </span>
 
