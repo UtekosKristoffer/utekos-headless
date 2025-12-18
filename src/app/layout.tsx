@@ -58,9 +58,9 @@ export const metadata: Metadata = {
     locale: 'no_NO',
     url: 'https://utekos.no',
     siteName: 'Utekos',
-    title: 'Utekos - Forleng de gode stundene ute.',
-    description:
-      'Kompromissløs komfort. Innovativ funksjonalitet. Designet for å holde på varmen når øyeblikkene teller.',
+    title:
+      'Utekos | Vi tilbyr gratis hjemlevering på bestillinger helt frem til julaften 🎅',
+    description: 'Ferdig innpakket - !',
     images: {
       url: 'https://utekos.no/og-kate-linn-kikkert-master.png',
       width: 1200,
