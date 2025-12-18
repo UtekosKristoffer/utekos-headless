@@ -379,7 +379,7 @@ export default async function ChristmasLocalDelivery() {
               <Gift className='h-8 w-8 text-red-400' />
             </div>
             <h3 className='text-lg font-semibold'>Lær mer</h3>
-            <p className='text-sm text-muted-foreground'>
+            <p className='text-sm text-article-white'>
               Lær mer om funksjonaliteten.
             </p>
           </Link>
@@ -392,7 +392,7 @@ export default async function ChristmasLocalDelivery() {
               <Truck className='h-8 w-8 text-blue-400' />
             </div>
             <h3 className='text-lg font-semibold'>Spørsmål om levering?</h3>
-            <p className='text-sm text-muted-foreground'>Ta kontakt med oss.</p>
+            <p className='text-sm text-article-white'>Ta kontakt med oss.</p>
           </Link>
 
           <Link
@@ -403,7 +403,7 @@ export default async function ChristmasLocalDelivery() {
               <Calendar className='h-8 w-8 text-green-400' />
             </div>
             <h3 className='text-lg font-semibold'>Usikker på størrelse?</h3>
-            <p className='text-sm text-muted-foreground'>
+            <p className='text-sm text-article-white'>
               Se vår størrelsesguide og tips.
             </p>
           </Link>

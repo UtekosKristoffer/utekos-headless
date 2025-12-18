@@ -6,6 +6,7 @@ import ProductPageView from '@/app/produkter/[handle]/ProductPageView/ProductPag
 import { ProductPageSkeleton } from '../ProductPageSkeleton/ProductPageSkeleton'
 import type { ShopifyProduct } from '@types'
 import { MetaProductView } from '@/components/analytics/MetaPixel/MetaProductView'
+import { KlaviyoViewedProduct } from '@/components/analytics/Klaviyo/KlaviyoViewedProduct'
 
 interface ProductPageControllerProps {
   handle: string
@@ -34,6 +35,11 @@ export function ProductPageController({
   return (
     <>
       <MetaProductView
+        product={productData}
+        selectedVariant={selectedVariant}
+      />
+
+      <KlaviyoViewedProduct
         product={productData}
         selectedVariant={selectedVariant}
       />
