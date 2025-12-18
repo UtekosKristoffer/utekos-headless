@@ -60,8 +60,8 @@ export async function syncProductsToMetaCatalog() {
         id: `${product.id}_${variant.id}`,
         title: `${product.title} - ${variant.title}`,
         description:
-          product.description ?
-            product.description.replace(/<[^>]*>?/gm, '').substring(0, 5000)
+          product.Htmldescription ?
+            product.Htmldescription.replace(/<[^>]*>?/gm, '').substring(0, 5000)
           : product.title,
         availability:
           variant.quantityAvailable && variant.quantityAvailable > 0 ?
