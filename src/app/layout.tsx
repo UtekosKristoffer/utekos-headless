@@ -112,6 +112,10 @@ async function CartProviderLoader({ children }: { children: ReactNode }) {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='no' className={geistSans.className}>
+      <script
+        async
+        src='https://mm-uxrv.com/js/mm_b5239408-a4a2-45bb-90dc-134244f14153-74228710.js'
+      ></script>
       <GoogleTagManager gtmId='GTM-5TWMJQFP' />
       <body className='bg-background text-foreground antialiased'>
         <OnlineStoreJsonLd />
