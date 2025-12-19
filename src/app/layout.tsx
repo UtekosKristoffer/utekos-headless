@@ -110,7 +110,7 @@ async function CartProviderLoader({ children }: { children: ReactNode }) {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang='no' className={`${geistSans.className} ${geistMono.className}`}>
+    <html lang='no' className={`${geistMono.className} ${geistSans.className}`}>
       <GoogleTagManager gtmId='GTM-5TWMJQFP' />
       <Script
         id='klaviyo-js'

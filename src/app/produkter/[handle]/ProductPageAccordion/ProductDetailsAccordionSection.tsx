@@ -1,6 +1,6 @@
 // Path: src/app/produkter/[handle]/ProductPageAccordion/ProductDetailsAccordionSection.tsx
 'use client'
-
+import { sendGAEvent } from '@next/third-parties/google'
 import { AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import type {
   AccordionSectionData,
@@ -12,7 +12,7 @@ import { AccordionContentRenderer } from './AccordionContentRenderer'
 import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
-
+import { track } from '@vercel/analytics'
 export function ProductDetailsAccordionSection({
   sectionData,
   currentVariantId
@@ -103,7 +103,11 @@ export function ProductDetailsAccordionSection({
       />
 
       <AccordionTrigger
-        onClick={handleInteraction}
+        onClick={() => {
+          handleInteraction()
+          track('ProductPageAccordionInteraction')
+          sendGAEvent('event', 'buttonClicked', { value: 'xyz' })
+        }}
         className='relative z-10 px-6 py-4 text-access/70 transition-colors duration-200 hover:text-access data-[state=open]:text-foreground hover:no-underline'
       >
         <div className='flex items-center gap-4'>
@@ -120,7 +124,7 @@ export function ProductDetailsAccordionSection({
         </div>
       </AccordionTrigger>
 
-      {typeof content === 'string' && (
+      {typeof content === 'string' && content && (
         <AccordionContentRenderer content={content} />
       )}
 

@@ -1,5 +1,4 @@
 'use client'
-
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { HydrationBoundary } from '@tanstack/react-query'
@@ -43,7 +42,6 @@ export default function Providers({
         </HydrationBoundary>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
-
       <CookieConsent />
 
       <ConditionalTracking

@@ -1,7 +1,20 @@
 // Path: types/order-paid.types.ts
 // Based on Shopify Order Paid Webhook payload structure
 
-import type { MoneySet, LineItem, Address, Customer, Refund, TaxLine, DiscountApplication, Fulfillment, Return, ShippingLine, LineItemGroup, PaymentTerms  } from '@types'
+import type {
+  MoneySet,
+  LineItem,
+  Address,
+  Customer,
+  Refund,
+  TaxLine,
+  DiscountApplication,
+  Fulfillment,
+  Return,
+  ShippingLine,
+  LineItemGroup,
+  PaymentTerms
+} from '@types'
 export type OrderPaid = {
   id: number
   admin_graphql_api_id: string
@@ -97,4 +110,11 @@ export type OrderPaid = {
   shipping_lines: ShippingLine[]
   returns: Return[]
   line_item_groups: LineItemGroup[]
+}
+
+export interface MarketingParams {
+  campaign_id?: string
+  source?: string
+  medium?: string
+  [key: string]: string | undefined
 }

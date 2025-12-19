@@ -1,6 +1,6 @@
 // Path: src/components/ProductCard/ProductCard.tsx
 'use client'
-
+import { track } from '@vercel/analytics'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
@@ -67,6 +67,7 @@ export function ProductCard({
       toast.warning('Denne varianten er dessverre utsolgt.')
       return
     }
+    
     cartActor.send({
       type: 'ADD_LINES',
       input: [{ variantId: selectedVariant.id, quantity: 1 }]

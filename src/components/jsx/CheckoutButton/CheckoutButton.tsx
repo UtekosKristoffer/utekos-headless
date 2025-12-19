@@ -1,6 +1,6 @@
 // Path: src/components/jsx/CheckoutButton/CheckoutButton.tsx
 'use client'
-
+import { track } from '@vercel/analytics'
 import * as React from 'react'
 import { Button } from '@/components/ui/button'
 import type { MetaUserData, MetaEventPayload, CaptureBody } from '@types'
@@ -8,7 +8,7 @@ import { getCheckoutAriaLabel } from './getCheckoutAriaLabel'
 import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
-
+import { sendGTMEvent } from '@next/third-parties/google'
 export const CheckoutButton = ({
   checkoutUrl,
   subtotal,
@@ -125,6 +125,24 @@ export const CheckoutButton = ({
 
   return (
     <Button
+      onClick={() => {
+        track('Vercel Analytics', {
+          event: 'CheckoutButtonClick',
+          quantity: num_items | 1,
+          value: subtotalAmount,
+          currency: currency,
+          cart_id: cartId || 'unknown',
+          _fpc: getCookie('_fpc'),
+          external_id: getCookie('ute_ext_id') || 'unknownn',
+          event_name: 'CheckoutButtonClick',
+          event_id: generateEventID()
+        })
+        sendGTMEvent({
+          event: 'slow',
+          value: 'xyz',
+          event_category: 'engagement'
+        })
+      }}
       asChild
       className={className}
       disabled={isPending}

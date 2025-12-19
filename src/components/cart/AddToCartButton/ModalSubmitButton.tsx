@@ -1,7 +1,7 @@
 // Path: src/components/cart/AddToCartButton/ModalSubmitButton.tsx
 
 'use client'
-
+import { track } from '@vercel/analytics'
 import { Button } from '@/components/ui/button'
 import {
   Tooltip,
@@ -39,6 +39,9 @@ export function ModalSubmitButton({
 
   return (
     <Button
+      onClick={() => {
+        track('ModalAddToCart')
+      }}
       type='submit'
       size='lg'
       disabled={isPending || isDisabled}

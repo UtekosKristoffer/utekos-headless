@@ -43,7 +43,7 @@ export function ProductCardFooter({
         </Link>
         {isAvailable ?
           <Button
-            onClick={handleQuickBuyClick} // Bruk den nye handleren
+            onClick={handleQuickBuyClick}
             variant='default'
             size='default'
             disabled={isPending}

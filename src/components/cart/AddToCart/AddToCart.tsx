@@ -29,7 +29,9 @@ import { QuantitySelector } from '../QuantitySelector'
 import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
-import { trackAddedToCart } from '@/components/analytics/Klaviyo/KlaviyoViewedProduct'
+// Pass på at denne importeres riktig fra filen vi lagde tidligere
+import { trackAddedToCart as trackKlaviyoAddToCart } from '@/components/analytics/Klaviyo/KlaviyoViewedProduct'
+import { track } from '@vercel/analytics/react'
 
 export function AddToCart({
   product,
@@ -42,20 +44,20 @@ export function AddToCart({
 }) {
   const [isTransitioning, startTransition] = useTransition()
   const cartActor = CartMutationContext.useActorRef()
+
   const isPendingFromMachine = CartMutationContext.useSelector(state =>
     state.matches('mutating')
   )
   const lastError = CartMutationContext.useSelector(
     state => state.context.error
   )
-  const handleAtc = function () {
-    trackAddedToCart(product)
-  }
+
   const contextCartId = useContext(CartIdContext)
   const form = useForm<AddToCartFormValues>(
     createAddToCartFormConfig(selectedVariant)
   )
 
+  // ... (createMutationPromise er uendret, skjult for lesbarhet) ...
   const createMutationPromise = (
     event: CartMutationEvent,
     actor: ActorRef<StateFrom<CartMutationMachine>, CartMutationEvent>
@@ -67,7 +69,6 @@ export function AddToCart({
           isInitialEmission = false
           return
         }
-
         if (snapshot.matches('idle')) {
           subscription.unsubscribe()
           resolve(snapshot)
@@ -83,14 +84,21 @@ export function AddToCart({
       return
     }
 
-    trackAddedToCart(product)
+    trackKlaviyoAddToCart(product)
+
+    track('AddToCart', {
+      productName: product.title,
+      variantName: selectedVariant.title,
+      price: parseFloat(selectedVariant.price.amount),
+      currency: selectedVariant.price.currencyCode,
+      source: 'pdp_main'
+    })
 
     startTransition(async () => {
       try {
         const linesToProcess = [
           { variantId: values.variantId, quantity: values.quantity }
         ]
-
         if (additionalLine) {
           linesToProcess.push({
             variantId: additionalLine.variantId,
@@ -99,13 +107,11 @@ export function AddToCart({
         }
 
         await createMutationPromise(
-          {
-            type: 'ADD_LINES',
-            input: linesToProcess
-          },
+          { type: 'ADD_LINES', input: linesToProcess },
           cartActor
         )
 
+        // Logikk for gratis buff / rabatt
         if (additionalLine) {
           try {
             const cartId = contextCartId || (await getCartIdFromCookie())
@@ -119,7 +125,6 @@ export function AddToCart({
         const currency = selectedVariant.price.currencyCode
         let totalQty = values.quantity
         const eventID = `atc_${cleanShopifyId(selectedVariant.id)}_${Date.now()}`
-
         const mainVariantId =
           cleanShopifyId(selectedVariant.id) || selectedVariant.id.toString()
 
@@ -147,7 +152,7 @@ export function AddToCart({
         }
 
         const value = basePrice * values.quantity
-        handleAtc()
+
         if (typeof window !== 'undefined' && window.fbq) {
           window.fbq(
             'track',
@@ -167,17 +172,12 @@ export function AddToCart({
 
         const ua =
           typeof navigator !== 'undefined' ? navigator.userAgent : undefined
-        const fbp = getCookie('_fbp')
-        const fbc = getCookie('_fbc')
-        const externalId = getCookie('ute_ext_id')
-        const emailHash = getCookie('ute_user_hash')
-
         const userData: MetaUserData = {
           client_user_agent: ua,
-          fbp: fbp || undefined,
-          fbc: fbc || undefined,
-          external_id: externalId || undefined,
-          email_hash: emailHash || undefined
+          fbp: getCookie('_fbp') || undefined,
+          fbc: getCookie('_fbc') || undefined,
+          external_id: getCookie('ute_ext_id') || undefined,
+          email_hash: getCookie('ute_user_hash') || undefined
         }
 
         const capiPayload: MetaEventPayload = {
@@ -200,6 +200,7 @@ export function AddToCart({
         }
         sendJSON('/api/meta-events', capiPayload)
 
+        // GA4
         if (typeof window !== 'undefined' && window.dataLayer) {
           const ga4Items = [
             {
@@ -226,11 +227,7 @@ export function AddToCart({
 
           window.dataLayer.push({
             event: 'add_to_cart',
-            ecommerce: {
-              currency: currency,
-              value: value,
-              items: ga4Items
-            }
+            ecommerce: { currency: currency, value: value, items: ga4Items }
           })
         }
 
@@ -257,6 +254,7 @@ export function AddToCart({
 
   return (
     <Form {...form}>
+      {/* Fjernet onClick herfra for å unngå feil sporing */}
       <form
         onSubmit={form.handleSubmit(handleAddToCart)}
         className='flex flex-col gap-4'
