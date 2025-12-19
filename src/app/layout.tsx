@@ -18,7 +18,6 @@ import type { Metadata } from 'next'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { getCachedCart } from '../lib/helpers/cart/getCachedCart'
 import { GoogleTagManager } from '@next/third-parties/google'
-import { klaviyoBaseCode } from '../components/analytics/Klaviyo/KlaviyoObject'
 import { ActiveOnSite } from '../components/analytics/Klaviyo/ActiveOnSite'
 import Script from 'next/script'
 export const metadata: Metadata = {
