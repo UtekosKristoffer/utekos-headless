@@ -18,7 +18,8 @@ import type { Metadata } from 'next'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { getCachedCart } from '../lib/helpers/cart/getCachedCart'
 import { GoogleTagManager } from '@next/third-parties/google'
-
+import { KlaviyoBaseObject } from '../components/analytics/Klaviyo/KlaviyoObject'
+import { ActiveOnSite } from '../components/analytics/Klaviyo/ActiveOnSite'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
@@ -113,6 +114,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <GoogleTagManager gtmId='GTM-5TWMJQFP' />
       <body className='bg-background text-foreground antialiased'>
         <OnlineStoreJsonLd />
+        <KlaviyoBaseObject />
+        <ActiveOnSite />
         <Suspense>
           <CartProviderLoader>
             <Activity>
@@ -131,6 +134,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </Activity>
           </CartProviderLoader>
         </Suspense>
+        <KlaviyoBaseObject />
         <Toaster closeButton />
       </body>
     </html>
