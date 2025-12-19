@@ -27,7 +27,7 @@ export function KlaviyoIdentify() {
   return (
     <>
       <Script type='text/javascript' id='klaviyo-identify'>
-        {`klaviyo.push('identify', { 'email': 'marketing@utekos.no' });
+        {`klaviyo.push('identify', { 'email': 'kristoffer@utekos.no' });
         klaviyo.track('Viewed Page', { 'page name': 'Utekos' });`}
       </Script>
     </>
