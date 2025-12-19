@@ -116,7 +116,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body className='bg-background text-foreground antialiased'>
         <OnlineStoreJsonLd />
         <Script strategy='beforeInteractive' src={klaviyoBaseCode} />
-        <ActiveOnSite />
         <Suspense>
           <CartProviderLoader>
             <Activity>
