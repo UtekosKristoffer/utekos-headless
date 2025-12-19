@@ -69,7 +69,7 @@ const HomePage = async () => {
     || ''
 
   return (
-    <main>
+    <section>
       <HeroSection />
 
       <Activity>
@@ -121,7 +121,7 @@ const HomePage = async () => {
       <Activity>
         <FindInStoreSection />
       </Activity>
-    </main>
+    </section>
   )
 }
 
