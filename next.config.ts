@@ -1,10 +1,6 @@
 import type { NextConfig } from 'next'
 
-import nextBundleAnalyzer from '@next/bundle-analyzer'
-const withBundleAnalyzer = nextBundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true'
-})
-
+import { withBotId } from 'botid/next/config'
 const nextConfig: NextConfig = {
   typedRoutes: true,
   reactCompiler: true,
@@ -172,4 +168,4 @@ const nextConfig: NextConfig = {
   }
 }
 
-export default withBundleAnalyzer(nextConfig)
+export default withBotId(nextConfig)

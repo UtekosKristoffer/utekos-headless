@@ -116,6 +116,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         id='klaviyo-js'
         async
         type='text/javascript'
+        strategy='afterInteractive'
         src='https://static.klaviyo.com/onsite/js/UPBWw8/klaviyo.js'
       />
       <body className='bg-background text-foreground antialiased'>
