@@ -1,5 +1,6 @@
 // Path: src/app/produkter/[handle]/ProductPageAccordion/ProductDetailsAccordionSection.tsx
 'use client'
+
 import { sendGAEvent } from '@next/third-parties/google'
 import { AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import type {
@@ -12,7 +13,8 @@ import { AccordionContentRenderer } from './AccordionContentRenderer'
 import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
-import { track } from '@vercel/analytics'
+import { track } from '@vercel/analytics/react'
+
 export function ProductDetailsAccordionSection({
   sectionData,
   currentVariantId
@@ -39,16 +41,10 @@ export function ProductDetailsAccordionSection({
       content_type: 'product',
       accordion_section: id
     }
-
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      ;(window as any).fbq(
-        'trackCustom',
-        'InteractWithAccordion',
-        pixelEventData,
-        {
-          eventID
-        }
-      )
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('trackCustom', 'InteractWithAccordion', pixelEventData, {
+        eventID
+      })
     }
 
     const capiEventData = {
@@ -105,8 +101,12 @@ export function ProductDetailsAccordionSection({
       <AccordionTrigger
         onClick={() => {
           handleInteraction()
-          track('ProductPageAccordionInteraction')
-          sendGAEvent('event', 'buttonClicked', { value: 'xyz' })
+          track('ProductPageAccordionInteraction', {
+            section: title,
+            sectionId: id
+          })
+
+          sendGAEvent('event', 'buttonClicked', { value: title }) // Oppdaterte value til title her også for konsistens
         }}
         className='relative z-10 px-6 py-4 text-access/70 transition-colors duration-200 hover:text-access data-[state=open]:text-foreground hover:no-underline'
       >

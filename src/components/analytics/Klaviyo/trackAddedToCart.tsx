@@ -4,11 +4,13 @@ import { getOrSetExternalId } from '../MetaPixel/getOrSetExternalId'
 import { track } from '@vercel/analytics/react' // Husk /react for klientside tracking
 
 export function trackAddedToCart(product: ShopifyProduct) {
+  // 1. Sikkerhetsventil: Stopp umiddelbart hvis vi er på serveren
   if (typeof window === 'undefined') return
 
   const marketingParams = getMarketingParams()
   const variant = product.selectedOrFirstAvailableVariant
 
+  // Vercel Analytics tracking
   track('Added to Cart', {
     product: product.title,
     productId: product.id,
@@ -37,5 +39,6 @@ export function trackAddedToCart(product: ShopifyProduct) {
     }
   }
 
+  // 2. Send til Klaviyo (Nå trygt pga sjekken øverst + Proxy-oppsettet)
   window.klaviyo.track('Added to Cart', item)
 }
