@@ -3,8 +3,8 @@ export function ActiveOnSite() {
   return (
     <Script
       type='text/javascript'
-      strategy='afterInteractive'
       async
+      strategy='afterInteractive'
       src='https://static.klaviyo.com/onsite/js/UPBWw8/klaviyo.js'
     ></Script>
   )
