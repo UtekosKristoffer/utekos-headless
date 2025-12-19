@@ -22,6 +22,7 @@ import {
   ActiveOnSite,
   KlaviyoObject
 } from '@/components/analytics/Klaviyo/ActiveOnSite'
+import { initScriptLoader } from 'next/script'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
@@ -88,10 +89,12 @@ export const metadata: Metadata = {
     }
   }
 }
+
 /**
  * Server Component som laster data før appen vises.
  * Dette sikrer at cartId er tilgjengelig for Pixel/Tracking med en gang.
  */
+
 async function CartProviderLoader({ children }: { children: ReactNode }) {
   const queryClient = new QueryClient()
   const cartId = await getCartIdFromCookie()
@@ -123,7 +126,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </Activity>
             <Header menu={mainMenu} />
             <main>
-              <KlaviyoObject />
               {children}
               <Analytics mode='production' />
               <Activity>
@@ -137,6 +139,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         </Suspense>
         <Toaster closeButton />
       </body>
+      <KlaviyoObject />
       <ActiveOnSite />
     </html>
   )

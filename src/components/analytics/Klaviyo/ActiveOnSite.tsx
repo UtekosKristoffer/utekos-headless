@@ -13,7 +13,7 @@ export function ActiveOnSite() {
   )
 }
 
-export function KlaviyoObject() {
+export function KlavioObject() {
   return (
     <>
       <Script id='init-klaviyo'>
