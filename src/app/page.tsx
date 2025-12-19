@@ -22,6 +22,7 @@ import { connection } from 'next/server'
 import { ComfyrobeSection } from '../components/frontpage/components/SpecialOfferSection/ComfyrobeSection'
 import { Activity } from 'react'
 import { FeaturedProductsSkeleton } from '@/components/skeletons/FeaturedProductsSkeleton'
+import { KlaviyoObject } from '../components/analytics/Klaviyo/ActiveOnSite'
 
 async function FeaturedProductsSection() {
   const queryClient = new QueryClient()
@@ -69,59 +70,62 @@ const HomePage = async () => {
     || ''
 
   return (
-    <section>
-      <HeroSection />
+    <>
+      <section>
+        <HeroSection />
 
-      <Activity>
-        <NewProductLaunchSection variantId={techDownId} />
-      </Activity>
+        <Activity>
+          <NewProductLaunchSection variantId={techDownId} />
+        </Activity>
 
-      <Activity>
-        <NewProductInStoreNotice />
-      </Activity>
+        <Activity>
+          <NewProductInStoreNotice />
+        </Activity>
 
-      <Activity>
-        <ComfyrobeSection />
-      </Activity>
+        <Activity>
+          <ComfyrobeSection />
+        </Activity>
 
-      <Activity>
-        <TestimonialConstellation />
-      </Activity>
+        <Activity>
+          <TestimonialConstellation />
+        </Activity>
 
-      <Activity>
-        <ProductVideoSection />
-      </Activity>
+        <Activity>
+          <ProductVideoSection />
+        </Activity>
 
-      <Activity>
-        <Suspense fallback={<FeaturedProductsSkeleton />}>
-          <FeaturedProductsSection />
-        </Suspense>
-      </Activity>
+        <Activity>
+          <Suspense fallback={<FeaturedProductsSkeleton />}>
+            <FeaturedProductsSection />
+          </Suspense>
+        </Activity>
 
-      <Activity>
-        <SocialProofSection />
-      </Activity>
+        <Activity>
+          <SocialProofSection />
+        </Activity>
 
-      <Activity>
-        <NewStandardSection />
-      </Activity>
+        <Activity>
+          <NewStandardSection />
+        </Activity>
 
-      <Activity>
-        <CachedPromiseSection />
-      </Activity>
+        <Activity>
+          <CachedPromiseSection />
+        </Activity>
 
-      <Activity>
-        <MomentsSection />
-      </Activity>
+        <Activity>
+          <MomentsSection />
+        </Activity>
 
-      <Activity>
-        <QualitySection />
-      </Activity>
+        <Activity>
+          <QualitySection />
+        </Activity>
 
-      <Activity>
-        <FindInStoreSection />
-      </Activity>
-    </section>
+        <Activity>
+          <FindInStoreSection />
+        </Activity>
+      </section>
+      <KlaviyoObject />
+    </>
   )
 }
 

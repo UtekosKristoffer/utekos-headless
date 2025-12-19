@@ -90,12 +90,9 @@ export default async function ChristmasLocalDelivery() {
           </div>
         </div>
       </section>
-
-      {/* USP Section - Fokusert på Tjenesten */}
       <section className='border-y border-white/5 bg-white/5 py-8'>
         <div className='container mx-auto px-4'>
           <div className='grid gap-8 text-center sm:grid-cols-3'>
-            {/* 1. Lokal Levering */}
             <div className='flex flex-col items-center gap-3'>
               <div className='flex h-12 w-12 items-center justify-center rounded-full bg-background ring-1 ring-white/10'>
                 <Car className='h-6 w-6 text-red-400' />

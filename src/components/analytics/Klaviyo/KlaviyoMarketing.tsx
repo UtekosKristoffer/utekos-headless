@@ -9,6 +9,9 @@ export async function identifyUser(profile: {
   email: string
   first_name?: string
   last_name?: string
+  external_id?: string
+  [key: string]: unknown
+  phone_number?: string
 }) {
   if (typeof window === 'undefined') return
 
