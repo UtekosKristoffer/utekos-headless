@@ -19,6 +19,7 @@ import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { getCachedCart } from '../lib/helpers/cart/getCachedCart'
 import { GoogleTagManager } from '@next/third-parties/google'
 import { ActiveOnSite } from '@/components/analytics/Klaviyo/ActiveOnSite'
+import { ConnectionAiScript } from '@/components/analytics/CustomerAi/Utils'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
@@ -116,6 +117,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         async
         src='https://mm-uxrv.com/js/mm_b5239408-a4a2-45bb-90dc-134244f14153-74228710.js'
       ></script>
+      <ConnectionAiScript />
       <GoogleTagManager gtmId='GTM-5TWMJQFP' />
       <body className='bg-background text-foreground antialiased'>
         <OnlineStoreJsonLd />
