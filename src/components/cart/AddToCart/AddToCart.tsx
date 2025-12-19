@@ -30,8 +30,8 @@ import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 // Pass på at denne importeres riktig fra filen vi lagde tidligere
-import { trackAddedToCart as trackKlaviyoAddToCart } from '@/components/analytics/Klaviyo/KlaviyoViewedProduct'
-import { track } from '@vercel/analytics/react'
+import { trackAddedToCart as trackKlaviyoAddToCart } from '@/components/analytics/Klaviyo/KlaviyoMarketing'
+import { track } from '@vercel/analytics'
 
 export function AddToCart({
   product,

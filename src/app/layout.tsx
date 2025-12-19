@@ -1,6 +1,6 @@
 // Path: src/app/layout.tsx
 import './globals.css'
-import { geistSans, geistMono } from '@/db/config/font.config'
+import { geistSans } from '@/db/config/font.config'
 import { QueryClient, dehydrate } from '@tanstack/react-query'
 import { Suspense, type ReactNode } from 'react'
 import { mainMenu } from '@/db/config/menu.config'
@@ -18,7 +18,6 @@ import type { Metadata } from 'next'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { getCachedCart } from '../lib/helpers/cart/getCachedCart'
 import { GoogleTagManager } from '@next/third-parties/google'
-import Script from 'next/script'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -112,13 +111,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='no' className={geistSans.className}>
       <GoogleTagManager gtmId='GTM-5TWMJQFP' />
-      <Script
-        id='klaviyo-js'
-        async
-        type='text/javascript'
-        strategy='afterInteractive'
-        src='https://static.klaviyo.com/onsite/js/UPBWw8/klaviyo.js'
-      />
       <body className='bg-background text-foreground antialiased'>
         <OnlineStoreJsonLd />
         <Suspense>

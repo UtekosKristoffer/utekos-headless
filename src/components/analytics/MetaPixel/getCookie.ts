@@ -1,10 +1,8 @@
 // src/components/analytics/MetaPixel/getCookie.ts
 export function getCookie(name: string): string | null {
   if (typeof document === 'undefined') return null
-
   const nameEQ = name + '='
   const ca = document.cookie.split(';')
-
   for (let i = 0; i < ca.length; i++) {
     let c = ca[i]
     if (!c) continue
