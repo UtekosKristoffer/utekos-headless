@@ -5,7 +5,20 @@ import type { ShopifyProduct } from '@types'
 import { getOrSetExternalId } from '../MetaPixel/getOrSetExternalId'
 import { track } from '@vercel/analytics/react'
 import type { OrderPaid, MarketingParams } from '@types'
+export async function identifyUser(profile: {
+  email: string
+  first_name?: string
+  last_name?: string
+}) {
+  if (typeof window === 'undefined') return
 
+  try {
+    window.klaviyo.identify(profile)
+    console.log('Klaviyo: User identified')
+  } catch (error) {
+    console.error('Klaviyo: Failed to identify user', error)
+  }
+}
 /**
  * Hjelper: Henter markedsføringsdata fra cookies trygt
  */

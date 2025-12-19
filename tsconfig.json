@@ -48,6 +48,6 @@
     "src/components/ProductCard/ProductCarousel.tsx",
     ".next/dev/types/**/*.ts",
     "src/components/cookie-consent"
-, "src/components/analytics/Klaviyo/getMarketing.ts"  ],
+, "src/components/analytics/Klaviyo/getMarketing.ts", "src/components/analytics/Klaviyo/KlaviyoObject.tsx"  ],
   "exclude": ["node_modules", ".github/**/*", "alpha/**/*", "docs/**/*"]
 }
