@@ -58,9 +58,9 @@ export const metadata: Metadata = {
     locale: 'no_NO',
     url: 'https://utekos.no',
     siteName: 'Utekos',
-    title:
-      'Utekos | Vi tilbyr gratis hjemlevering på bestillinger helt frem til julaften 🎅',
-    description: 'Ferdig innpakket - !',
+    title: 'Utekos - Forleng de gode stundene ute',
+    description:
+      'Vi tilbyr gratis hjemlevering på bestillinger helt frem til julaften - ferdig innpakket 🎅 Bestill før kl. 16 og få julegaven levert samme dag!',
     images: {
       url: 'https://utekos.no/og-kate-linn-kikkert-master.png',
       width: 1200,
@@ -110,7 +110,7 @@ async function CartProviderLoader({ children }: { children: ReactNode }) {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang='no'>
+    <html lang='no' className={`${geistSans.className} ${geistMono.className}`}>
       <GoogleTagManager gtmId='GTM-5TWMJQFP' />
       <Script
         id='klaviyo-js'
@@ -118,9 +118,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         type='text/javascript'
         src='https://static.klaviyo.com/onsite/js/UPBWw8/klaviyo.js'
       />
-      <body
-        className={`bg-background text-foreground ${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className='bg-background text-foreground antialiased'>
         <OnlineStoreJsonLd />
         <Suspense>
           <CartProviderLoader>
@@ -130,6 +128,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <Header menu={mainMenu} />
             <main>
               {children}
+              <Analytics mode='production' />
               <Activity>
                 <Footer />
               </Activity>
@@ -140,7 +139,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </CartProviderLoader>
         </Suspense>
         <Toaster closeButton />
-        <Analytics mode='production' />
       </body>
     </html>
   )
