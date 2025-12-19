@@ -4,13 +4,9 @@ import { getOrSetExternalId } from '../MetaPixel/getOrSetExternalId'
 import { track } from '@vercel/analytics/react' // Husk /react for klientside tracking
 
 export function trackAddedToCart(product: ShopifyProduct) {
-  // 1. Sikkerhetsventil: Stopp umiddelbart hvis vi er på serveren
   if (typeof window === 'undefined') return
-
   const marketingParams = getMarketingParams()
   const variant = product.selectedOrFirstAvailableVariant
-
-  // Vercel Analytics tracking
   track('Added to Cart', {
     product: product.title,
     productId: product.id,
@@ -18,7 +14,6 @@ export function trackAddedToCart(product: ShopifyProduct) {
     quantity: 1,
     price: parseFloat(variant.price.amount)
   })
-
   const item = {
     Name: product.title,
     ProductID: product.id.substring(product.id.lastIndexOf('/') + 1),

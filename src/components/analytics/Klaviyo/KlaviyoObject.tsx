@@ -11,9 +11,10 @@ export function KlaviyoBaseObject() {
 
   return (
     <script
-      type='application/ld+json'
+      id='klaviyo-proxy-init'
+      type='text/javascript'
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(klaviyoObjectBaseCode).replace(/</g, '\\u003c')
+        __html: klaviyoObjectBaseCode // Ingen JSON.stringify!
       }}
     />
   )

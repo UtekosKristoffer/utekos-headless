@@ -1,3 +1,5 @@
+'use client'
+
 import { cacheLife } from 'next/cache'
 import Script from 'next/script'
 export function ActiveOnSite() {
