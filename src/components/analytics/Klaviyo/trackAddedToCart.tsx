@@ -2,7 +2,6 @@ import { getMarketingParams } from './getMarketingParams'
 import type { ShopifyProduct } from '@types'
 import { getOrSetExternalId } from '../MetaPixel/getOrSetExternalId'
 import { track } from '@vercel/analytics/react' // Husk /react for klientside tracking
-
 export function trackAddedToCart(product: ShopifyProduct) {
   if (typeof window === 'undefined') return
   const marketingParams = getMarketingParams()

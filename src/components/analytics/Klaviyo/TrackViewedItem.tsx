@@ -23,7 +23,6 @@ export function trackViewedProduct(product: ShopifyProduct): void {
     }
   }
 
-  // 2. Kall direkte på klaviyo (Proxyen tar imot, ingen sjekk nødvendig)
   window.klaviyo.track('Viewed Product', item) // track-kallet
   window.klaviyo.trackViewedItem(item) // trackViewedItem-kallet
 }

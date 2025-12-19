@@ -9,7 +9,6 @@ import type { MetaEventPayload } from '@types'
 
 export function CampaignPageTracker() {
   const hasFired = useRef(false)
-
   useEffect(() => {
     if (hasFired.current) return
     hasFired.current = true

@@ -1,7 +1,5 @@
-'use client'
-
-import { cacheLife } from 'next/cache'
 import Script from 'next/script'
+import { cacheLife } from 'next/cache'
 export function ActiveOnSite() {
   'use cache'
   cacheLife('max')
@@ -14,3 +12,4 @@ export function ActiveOnSite() {
     ></Script>
   )
 }
+s

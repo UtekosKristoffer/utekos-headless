@@ -14,7 +14,7 @@ export function KlaviyoBaseObject() {
       id='klaviyo-proxy-init'
       type='text/javascript'
       dangerouslySetInnerHTML={{
-        __html: klaviyoObjectBaseCode // Ingen JSON.stringify!
+        __html: klaviyoObjectBaseCode
       }}
     />
   )
