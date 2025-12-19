@@ -114,6 +114,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang='no' className={geistSans.className}>
       <Script
         id='klaviyo-init'
+        type='text/javascript'
         strategy='afterInteractive'
         dangerouslySetInnerHTML={{
           __html: klaviyoInitCode
