@@ -134,7 +134,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </Activity>
           </CartProviderLoader>
         </Suspense>
-        <KlaviyoBaseObject />
+        <ActiveOnSite />
         <Toaster closeButton />
       </body>
     </html>

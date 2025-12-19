@@ -24,10 +24,6 @@ function getMarketingParams(): MarketingParams {
   }
 }
 
-/**
- * Generisk funksjon for å spore hva som helst (tilsvarer trackEvent i klassen din).
- * Nyttig hvis du vil spore 'Newsletter Signup' eller 'Clicked Banner'.
- */
 export function trackCustomEvent(
   eventName: string,
   properties: Record<string, unknown> = {}
@@ -44,6 +40,7 @@ export function trackCustomEvent(
 
   window.klaviyo.track(eventName, payload)
 }
+
 export function trackViewedProduct(product: ShopifyProduct) {
   if (typeof window === 'undefined' || !window.klaviyo) return
 
