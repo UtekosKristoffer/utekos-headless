@@ -17,7 +17,10 @@ import { getCachedRelatedProducts } from '@/api/lib/products/getCachedRelatedPro
 import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
 import { flattenVariants } from '@/lib/utils/flattenVariants'
 import { computeVariantImages } from '@/lib/utils/computeVariantImages'
-import { KlaviyoObject } from '@/components/analytics/Klaviyo/ActiveOnSite'
+import {
+  KlaviyoObject,
+  KlaviyoIdentify
+} from '@/components/analytics/Klaviyo/ActiveOnSite'
 type RouteParamsPromise = Promise<{ handle: string }>
 type SearchParamsPromise = Promise<{
   [key: string]: string | string[] | undefined
@@ -178,6 +181,7 @@ export default async function ProductPage({
         </Suspense>
       </Activity>
       <KlaviyoObject />
+      <KlaviyoIdentify />
     </>
   )
 }

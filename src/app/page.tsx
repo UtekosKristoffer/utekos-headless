@@ -22,7 +22,7 @@ import { connection } from 'next/server'
 import { ComfyrobeSection } from '../components/frontpage/components/SpecialOfferSection/ComfyrobeSection'
 import { Activity } from 'react'
 import { FeaturedProductsSkeleton } from '@/components/skeletons/FeaturedProductsSkeleton'
-import { KlaviyoObject } from '../components/analytics/Klaviyo/ActiveOnSite'
+import { KlaviyoObject, KlaviyoIdentify } from '@/components/analytics/Klaviyo/ActiveOnSite'
 
 async function FeaturedProductsSection() {
   const queryClient = new QueryClient()
@@ -125,6 +125,7 @@ const HomePage = async () => {
         </Activity>
       </section>
       <KlaviyoObject />
+      <KlaviyoIdentify/>
     </>
   )
 }
