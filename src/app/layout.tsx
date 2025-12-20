@@ -20,7 +20,6 @@ import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { getCachedCart } from '../lib/helpers/cart/getCachedCart'
 import { GoogleTagManager } from '@next/third-parties/google'
 import Script from 'next/script'
-import { ConnectionAiScript } from '@/components/analytics/CustomerAi/Utils'
 import { KlaviyoObject } from '../components/analytics/Klaviyo/ActiveOnSite'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -117,6 +116,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang='no' className={geistSans.className}>
       <GoogleTagManager gtmId='GTM-5TWMJQFP' />
       <body className='bg-background text-foreground antialiased'>
+        <ChatBotAgent />
         <OnlineStoreJsonLd />
         <Suspense>
           <CartProviderLoader>
@@ -135,7 +135,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </CartProviderLoader>
         </Suspense>
         <Toaster closeButton />
-        <ChatBotAgent />
         <Script
           async
           type='text/javascript'
