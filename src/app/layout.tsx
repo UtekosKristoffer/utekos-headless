@@ -8,13 +8,14 @@ import { Analytics } from '@vercel/analytics/react'
 import { Toaster } from '@/components/ui/sonner'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { Activity } from 'react'
-import ChatBubble from '@/components/ChatBubble'
+// import ChatBubble from '@/components/ChatBubble'
 import Providers from '@/components/providers/Providers'
 import AnnouncementBanner from '@/components/frontpage/components/SpecialOfferSection/AnnouncementBanner'
 import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 import type { RootLayoutProps } from '@types'
 import type { Metadata } from 'next'
+import { ChatBotAgent } from '@/components/chat/ChatBotAgent/source-code'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { getCachedCart } from '../lib/helpers/cart/getCachedCart'
 import { GoogleTagManager } from '@next/third-parties/google'
@@ -114,11 +115,6 @@ async function CartProviderLoader({ children }: { children: ReactNode }) {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='no' className={geistSans.className}>
-      <script
-        async
-        src='https://mm-uxrv.com/js/mm_b5239408-a4a2-45bb-90dc-134244f14153-74228710.js'
-      ></script>
-      <ConnectionAiScript />
       <GoogleTagManager gtmId='GTM-5TWMJQFP' />
       <body className='bg-background text-foreground antialiased'>
         <OnlineStoreJsonLd />
@@ -136,12 +132,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <Footer />
               </Activity>
             </main>
-            <Activity>
-              <ChatBubble />
-            </Activity>
           </CartProviderLoader>
         </Suspense>
         <Toaster closeButton />
+        <ChatBotAgent />
         <Script
           async
           type='text/javascript'
