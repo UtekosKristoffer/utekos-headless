@@ -8,7 +8,6 @@ import { Analytics } from '@vercel/analytics/react'
 import { Toaster } from '@/components/ui/sonner'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { Activity } from 'react'
-// import ChatBubble from '@/components/ChatBubble'
 import Providers from '@/components/providers/Providers'
 import AnnouncementBanner from '@/components/frontpage/components/SpecialOfferSection/AnnouncementBanner'
 import Footer from '@/components/footer/Footer'
@@ -116,7 +115,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang='no' className={geistSans.className}>
       <GoogleTagManager gtmId='GTM-5TWMJQFP' />
       <body className='bg-background text-foreground antialiased'>
-        <ChatBotAgent />
         <OnlineStoreJsonLd />
         <Suspense>
           <CartProviderLoader>
@@ -128,6 +126,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <KlaviyoObject />
               {children}
               <Analytics mode='production' />
+              <ChatBotAgent />
               <Activity>
                 <Footer />
               </Activity>
