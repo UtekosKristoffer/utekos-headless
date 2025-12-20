@@ -1,7 +1,10 @@
 //Path: src/app/kampanje/julegaver/lokal-levering/layout.tsx
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 import { BergenDeliveryJsonLd } from './BergenDeliveryJsonLd'
 import type { ReactNode } from 'react'
-import { GoogleTagLocalDelivery } from './GoogleTag'
+import { GoogleAdsConversion } from './GoogleAdsConversion'
+import { sendGTMEvent } from '@next/third-parties/google'
 
 export default function BergenDeliveryLayout({
   children
@@ -11,8 +14,9 @@ export default function BergenDeliveryLayout({
   return (
     <>
       <BergenDeliveryJsonLd />
+      <GoogleAnalytics gaId='AW-17819485818' />
       {children}
-      <GoogleTagLocalDelivery />
+      <GoogleAdsConversion />
     </>
   )
 }
