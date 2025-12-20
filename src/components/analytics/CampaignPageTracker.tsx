@@ -6,7 +6,6 @@ import { generateEventID } from '@/components/analytics/MetaPixel/generateEventI
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { getOrSetExternalId } from '@/components/analytics/MetaPixel/getOrSetExternalId'
 import type { MetaEventPayload } from '@types'
-
 export function CampaignPageTracker() {
   const hasFired = useRef(false)
   useEffect(() => {
@@ -49,7 +48,6 @@ export function CampaignPageTracker() {
       const userHash = getCookie('ute_user_hash')
       const sourceUrl = window.location.href
       const timestamp = Math.floor(Date.now() / 1000)
-
       const payload: MetaEventPayload = {
         eventName,
         eventId,
