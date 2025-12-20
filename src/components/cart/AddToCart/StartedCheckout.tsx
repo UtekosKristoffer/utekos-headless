@@ -3,7 +3,7 @@
 
 import Cookies from 'js-cookie'
 import type { ShopifyProduct } from '@types'
-import { getOrSetExternalId } from '../MetaPixel/getOrSetExternalId'
+import { getOrSetExternalId } from '@/components/analytics/MetaPixel/getOrSetExternalId'
 import { track } from '@vercel/analytics/react'
 import type { OrderPaid, MarketingParams } from '@types'
 
