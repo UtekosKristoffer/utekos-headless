@@ -1,6 +1,5 @@
 import { ProductListJsonLd } from '../ProductListJsonLd'
 import type { ReactNode } from 'react'
-import { KlaviyoObject } from '@/components/analytics/Klaviyo/ActiveOnSite'
 export default function ProductListLayout({
   children
 }: {
@@ -11,7 +10,6 @@ export default function ProductListLayout({
       <ProductListJsonLd />
 
       {children}
-      <KlaviyoObject />
     </>
   )
 }

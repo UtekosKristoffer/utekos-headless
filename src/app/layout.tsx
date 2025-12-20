@@ -18,8 +18,9 @@ import type { Metadata } from 'next'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { getCachedCart } from '../lib/helpers/cart/getCachedCart'
 import { GoogleTagManager } from '@next/third-parties/google'
-import { ActiveOnSite } from '@/components/analytics/Klaviyo/ActiveOnSite'
+import Script from 'next/script'
 import { ConnectionAiScript } from '@/components/analytics/CustomerAi/Utils'
+import { KlaviyoObject } from '../components/analytics/Klaviyo/ActiveOnSite'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
@@ -128,6 +129,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </Activity>
             <Header menu={mainMenu} />
             <main>
+              <KlaviyoObject />
               {children}
               <Analytics mode='production' />
               <Activity>
@@ -140,7 +142,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </CartProviderLoader>
         </Suspense>
         <Toaster closeButton />
-        <ActiveOnSite />
+        <Script
+          async
+          type='text/javascript'
+          src='//static.klaviyo.com/onsite/js//klaviyo.js'
+          nonce='true'
+        />
       </body>
     </html>
   )

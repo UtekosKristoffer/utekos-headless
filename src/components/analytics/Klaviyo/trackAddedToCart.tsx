@@ -33,6 +33,5 @@ export function trackAddedToCart(product: ShopifyProduct) {
     }
   }
 
-  // 2. Send til Klaviyo (Nå trygt pga sjekken øverst + Proxy-oppsettet)
   window.klaviyo.track('Added to Cart', item)
 }

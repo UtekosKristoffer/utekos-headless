@@ -1,14 +1,16 @@
 // Path: src/components/jsx/CheckoutButton/CheckoutButton.tsx
 'use client'
-import { track } from '@vercel/analytics'
+
+import { track } from '@vercel/analytics/react'
 import * as React from 'react'
 import { Button } from '@/components/ui/button'
 import type { MetaUserData, MetaEventPayload, CaptureBody } from '@types'
-import { getCheckoutAriaLabel } from './getCheckoutAriaLabel'
+import { getCheckoutAriaLabel } from 'src/components/jsx/CheckoutButton/getCheckoutAriaLabel'
 import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { sendGTMEvent } from '@next/third-parties/google'
+import { trackStartedCheckout } from '@/components/analytics/Klaviyo/KlaviyoMarketing'
 export const CheckoutButton = ({
   checkoutUrl,
   subtotal,
@@ -18,6 +20,7 @@ export const CheckoutButton = ({
   currency,
   item_ids,
   num_items,
+  cartLines, // Ny prop: Kreves for Klaviyo Started Checkout
   className,
   children,
   ...props
@@ -30,6 +33,7 @@ export const CheckoutButton = ({
   currency: string
   item_ids: string[]
   num_items: number
+  cartLines?: any[] // Bør matche din CartLine type. Gjort valgfri for å ikke brekke build umiddelbart.
   className?: string
   children?: React.ReactNode
 } & Omit<
@@ -50,7 +54,8 @@ export const CheckoutButton = ({
       const fbc = getCookie('_fbc')
       const extId = getCookie('ute_ext_id')
       const emailHash = getCookie('ute_user_hash')
-      const ua = typeof navigator !== 'undefined' ? navigator.userAgent : undefined
+      const ua =
+        typeof navigator !== 'undefined' ? navigator.userAgent : undefined
       const rawEventID = generateEventID()
       const eventID = rawEventID.replace('evt_', 'ic_')
       const value = Number.parseFloat(subtotalAmount || '0') || 0
@@ -69,12 +74,17 @@ export const CheckoutButton = ({
           {
             value,
             currency,
-            content_ids: cleanItemIds, // Send rensede ID-er
+            content_ids: cleanItemIds,
             content_type: 'product',
             num_items
           },
           { eventID }
         )
+      }
+
+      // KLAVIYO TRACKING
+      if (cartLines && cartLines.length > 0) {
+        trackStartedCheckout(cartId, cartLines, checkoutUrl, value)
       }
 
       const captureBody: CaptureBody = {
@@ -102,7 +112,7 @@ export const CheckoutButton = ({
         eventData: {
           value,
           currency,
-          content_ids: cleanItemIds, // Send rensede ID-er
+          content_ids: cleanItemIds,
           content_type: 'product',
           num_items
         }
@@ -122,16 +132,12 @@ export const CheckoutButton = ({
   return (
     <Button
       onClick={() => {
-        track('Vercel Analytics', {
-          event: 'CheckoutButtonClick',
+        track('CheckoutButtonClick', {
           quantity: num_items | 1,
-          value: subtotalAmount,
+          value: parseFloat(subtotalAmount),
           currency: currency,
           cart_id: cartId || 'unknown',
-          _fpc: getCookie('_fpc'),
-          external_id: getCookie('ute_ext_id') || 'unknownn',
-          event_name: 'CheckoutButtonClick',
-          event_id: generateEventID()
+          event_name: 'CheckoutButtonClick'
         })
         sendGTMEvent({
           event: 'slow',

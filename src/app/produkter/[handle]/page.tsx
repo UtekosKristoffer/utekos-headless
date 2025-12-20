@@ -18,7 +18,6 @@ import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
 import { flattenVariants } from '@/lib/utils/flattenVariants'
 import { computeVariantImages } from '@/lib/utils/computeVariantImages'
 import {
-  KlaviyoObject,
   KlaviyoIdentify
 } from '@/components/analytics/Klaviyo/ActiveOnSite'
 type RouteParamsPromise = Promise<{ handle: string }>
@@ -180,7 +179,6 @@ export default async function ProductPage({
           <ProductVideoSection />
         </Suspense>
       </Activity>
-      <KlaviyoObject />
       <KlaviyoIdentify />
     </>
   )

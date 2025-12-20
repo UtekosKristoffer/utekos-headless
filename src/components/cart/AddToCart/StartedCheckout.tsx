@@ -110,7 +110,6 @@ export function trackStartedCheckout(
   totalValue: number
 ) {
   if (typeof window === 'undefined' || !window.klaviyo) return
-
   const marketingParams = getMarketingParams()
   const items = lines.map(line => {
     const variant = line.merchandise
@@ -132,6 +131,7 @@ export function trackStartedCheckout(
 
   const itemNames = items.map(i => i.ProductName)
   const categories = [...new Set(items.flatMap(i => i.ProductCategories))]
+
   const payload = {
     $event_id: `${cartId}_${Math.floor(Date.now() / 1000)}`,
     $value: totalValue,

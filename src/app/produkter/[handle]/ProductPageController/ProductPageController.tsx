@@ -30,14 +30,10 @@ export function ProductPageController({
   } = useProductPage(handle, initialRelatedProducts)
 
   useEffect(() => {
-    if (productData && selectedVariant) {
-      trackViewedProduct({
-        ...productData,
-        selectedOrFirstAvailableVariant: selectedVariant
-      })
+    if (productData) {
+      trackViewedProduct(productData)
     }
-  }, [productData, selectedVariant])
-
+  }, [productData])
   if (isLoading || !productData || !selectedVariant) {
     return <ProductPageSkeleton />
   }

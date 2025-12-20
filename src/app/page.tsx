@@ -22,12 +22,8 @@ import { connection } from 'next/server'
 import { ComfyrobeSection } from '../components/frontpage/components/SpecialOfferSection/ComfyrobeSection'
 import { Activity } from 'react'
 import { FeaturedProductsSkeleton } from '@/components/skeletons/FeaturedProductsSkeleton'
-import {
-  KlaviyoObject,
-  KlaviyoIdentify
-} from '@/components/analytics/Klaviyo/ActiveOnSite'
-import { trackViewedProduct } from '@/components/analytics/Klaviyo/TrackViewedItem'
-
+import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
+import { getCachedCart } from '@/lib/helpers/cart/getCachedCart'
 
 async function FeaturedProductsSection() {
   const queryClient = new QueryClient()
@@ -76,8 +72,6 @@ const HomePage = async () => {
 
   return (
     <>
-      <KlaviyoObject />
-      <KlaviyoIdentify />
       <section>
         <HeroSection />
 
@@ -131,10 +125,8 @@ const HomePage = async () => {
           <FindInStoreSection />
         </Activity>
       </section>
-      
     </>
   )
-  
 }
 
 export default HomePage

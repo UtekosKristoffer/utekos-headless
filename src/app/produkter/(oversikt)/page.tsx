@@ -10,14 +10,13 @@ import { AllProductsCarousel } from '@/components/ProductCard/AllProductsCarouse
 import { ComfyrobeFeatureSection } from '@/app/produkter/components/sections/ComfyrobeSection/ComfyrobeFeatureSection'
 import { ProductGridSkeleton } from '@/components/frontpage/Skeletons/ProductGridSkeleton'
 import { VideoSkeleton } from '../components/VideoSkeleton'
-import { Suspense, Activity } from 'react'
+import { Suspense, Activity, useEffectEvent } from 'react'
 import type { Metadata } from 'next'
 import { StapperFeatureSection } from '../components/sections/StapperFeatureSection/StapperFeatureSection'
 import { ProductVideoSection } from '../components/ProductVideoSection'
 import { TechDownFeatureSection } from '../components/sections/TechDownFeatureSection/TechDownFeatureSection'
 import { connection } from 'next/server'
 import { MikrofiberSection } from '../components/sections/MicrofiberSection/MikrofiberSection'
-
 export const metadata: Metadata = {
   title: 'Kolleksjon: Komfortplagg for hytteliv & utekos | Utekos',
   description:
@@ -53,9 +52,7 @@ export const metadata: Metadata = {
 
 const ProductsPage = async () => {
   await connection()
-
   const queryClient = new QueryClient()
-
   await queryClient.prefetchQuery({
     queryKey: ['products', 'all'],
     queryFn: () =>
