@@ -1,3 +1,4 @@
+
 import { Suspense, Activity } from 'react'
 import { VideoSkeleton } from '@/app/produkter/components/VideoSkeleton'
 import { ProductVideoSection } from '@/app/produkter/components/ProductVideoSection'

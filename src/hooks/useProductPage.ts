@@ -1,4 +1,5 @@
 // Path: src/hooks/useProductPage.ts
+'use client'
 import { useQuery } from '@tanstack/react-query'
 import { productOptions } from '@/api/lib/products/productOptions'
 import { useVariantState } from '@/hooks/useVariantState'

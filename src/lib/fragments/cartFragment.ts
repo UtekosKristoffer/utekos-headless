@@ -14,6 +14,14 @@ const cart = /* GraphQL */ `
         amount
         currencyCode
       }
+      totalTaxAmount {
+        amount
+        currencyCode
+      }
+      totalDutyAmount {
+        amount
+        currencyCode
+      }
     }
     lines(first: 20) {
       edges {
