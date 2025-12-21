@@ -23,11 +23,11 @@ import { KlaviyoObject } from '../components/analytics/Klaviyo/ActiveOnSite'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
-    default: 'Utekos - Forleng de gode stundene ute',
+    default: 'Utekos - Skreddersy varmen etter behov',
     template: '%s | Utekos'
   },
   description:
-    'Kompromissløs komfort. Innovativ funksjonalitet. Designet for å holde på varmen når øyeblikkene teller.',
+    'Kompromissløs komfort. Overlegen allsidiget. Juster, form og nyt.',
 
   alternates: {
     canonical: '/'
@@ -58,9 +58,9 @@ export const metadata: Metadata = {
     locale: 'no_NO',
     url: 'https://utekos.no',
     siteName: 'Utekos',
-    title: 'Utekos - Forleng de gode stundene ute',
+    title: 'Utekos® - Skreddersy varmen etter behov',
     description:
-      'Vi tilbyr gratis hjemlevering på bestillinger helt frem til julaften - ferdig innpakket 🎅 Bestill før kl. 16 og få julegaven levert samme dag!',
+      'Kompromissløs komfort. Overlegen allsidiget. Juster, form og nyt.',
     images: {
       url: 'https://utekos.no/og-kate-linn-kikkert-master.png',
       width: 1200,

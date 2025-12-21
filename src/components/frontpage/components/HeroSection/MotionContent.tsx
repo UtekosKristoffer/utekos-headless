@@ -25,7 +25,7 @@ export function MotionContent() {
         </span>
 
         <span className='mt-2 block bg-gradient-to-r from-sky-800 via-cyan-700 to-sky-800 bg-clip-text text-transparent'>
-          Forleng de gode stundene ute.
+          Skreddersy varmen etter behov.
         </span>
       </h1>
 
@@ -33,8 +33,7 @@ export function MotionContent() {
         className='animate-fade-in-up mx-auto mt-6 mb-12 max-w-2xl text-lg leading-relaxed text-foreground/80 md:max-w-4xl lg:text-2xl'
         style={{ animationDelay: '0.5s' }}
       >
-        Kompromissløs komfort. Innovativ funksjonalitet. Designet for å holde på
-        varmen når øyeblikkene teller.
+        Kompromissløs komfort. Overlegen allsidiget. Juster, form og nyt.
       </p>
       <div
         className='animate-fade-in hidden justify-center md:flex'
