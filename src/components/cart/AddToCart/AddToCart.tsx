@@ -94,8 +94,6 @@ export function AddToCart({
             quantity: additionalLine.quantity
           })
         }
-
-        // Steg 1: Legg til varer (returnerer cart med full pris)
         await createMutationPromise(
           { type: 'ADD_LINES', input: linesToProcess },
           cartActor
@@ -114,7 +112,6 @@ export function AddToCart({
             }
           } catch (e) {
             console.error('Feil ved påføring av rabatt:', e)
-            // Vi stopper ikke her, da varen i det minste er lagt i kurven
           }
         }
 

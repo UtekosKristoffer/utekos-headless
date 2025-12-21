@@ -71,8 +71,8 @@ export default async function ChristmasLocalDelivery() {
           </h1>
 
           <p className='mx-auto mt-6 max-w-2xl text-lg text-article-white'>
-            Er du sent ute? Ingen fare. Vi kjører ut julegaver i Bergen og omegn
-            helt frem til julaften! <br className='hidden sm:block' />
+            Klikk og hent eller få levert bestillingen hjem. Vi kjører ut
+            julegaver helt frem til julaften! <br className='hidden sm:block' />
           </p>
 
           <div className='mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row'>
