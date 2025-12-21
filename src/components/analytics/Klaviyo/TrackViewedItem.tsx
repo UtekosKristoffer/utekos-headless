@@ -5,7 +5,6 @@ export function trackViewedProduct(product: ShopifyProduct) {
   let item = {
     Name: product.title,
     ProductID: product.id.substring(product.id.lastIndexOf('/') + 1),
-    ImageURL: product.selectedOrFirstAvailableVariant.image?.url ?? '',
     Handle: product.handle,
     Brand: product.vendor,
     Price: product.selectedOrFirstAvailableVariant.price.amount,
@@ -17,7 +16,6 @@ export function trackViewedProduct(product: ShopifyProduct) {
     }
   }
   klaviyo.track('Viewed Product', item)
-  klaviyo.trackViewedItem(item)
 }
 
 export function trackAddedToCart(product: ShopifyProduct) {

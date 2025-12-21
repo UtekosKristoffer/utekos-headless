@@ -63,7 +63,6 @@ export function trackViewedProduct(product: ShopifyProduct) {
   }
 
   window.klaviyo.track('Viewed Product', item)
-  window.klaviyo.trackViewedItem(item)
 }
 
 export function trackAddedToCart(product: ShopifyProduct) {

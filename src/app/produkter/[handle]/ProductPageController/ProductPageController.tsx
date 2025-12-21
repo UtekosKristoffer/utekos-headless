@@ -6,7 +6,6 @@ import ProductPageView from '@/app/produkter/[handle]/ProductPageView/ProductPag
 import { ProductPageSkeleton } from '../ProductPageSkeleton/ProductPageSkeleton'
 import type { ShopifyProduct } from '@types'
 import { MetaProductView } from '@/components/analytics/MetaPixel/MetaProductView'
-import { trackViewedProduct } from '@/components/analytics/Klaviyo/TrackViewedItem'
 import { useEffect } from 'react'
 
 interface ProductPageControllerProps {
@@ -29,11 +28,6 @@ export function ProductPageController({
     isLoading
   } = useProductPage(handle, initialRelatedProducts)
 
-  useEffect(() => {
-    if (productData) {
-      trackViewedProduct(productData)
-    }
-  }, [productData])
   if (isLoading || !productData || !selectedVariant) {
     return <ProductPageSkeleton />
   }

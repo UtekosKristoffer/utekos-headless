@@ -20,7 +20,6 @@ export function trackViewedProduct(product: ShopifyProduct) {
     }
   }
   klaviyo.track('Viewed Product', item)
-  klaviyo.trackViewedItem(item)
 }
 
 export function trackAddedToCart(product: ShopifyProduct) {
