@@ -11,7 +11,6 @@ export default function BergenDeliveryLayout({
     <>
       <BergenDeliveryJsonLd />
       {children}
-      <GoogleAdsConversion />
     </>
   )
 }
