@@ -30,6 +30,8 @@ import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { getMarketingParams } from '@/components/analytics/Klaviyo/getMarketingParams'
+import { useQueryClient } from '@tanstack/react-query' // Ny import
+
 export function AddToCart({
   product,
   selectedVariant,
@@ -41,6 +43,7 @@ export function AddToCart({
 }) {
   const [isTransitioning, startTransition] = useTransition()
   const cartActor = CartMutationContext.useActorRef()
+  const queryClient = useQueryClient() // Ny hook
 
   const isPendingFromMachine = CartMutationContext.useSelector(state =>
     state.matches('mutating')
@@ -92,17 +95,26 @@ export function AddToCart({
           })
         }
 
+        // Steg 1: Legg til varer (returnerer cart med full pris)
         await createMutationPromise(
           { type: 'ADD_LINES', input: linesToProcess },
           cartActor
         )
 
+        // Steg 2: Påfør rabatt og oppdater cache manuelt
         if (additionalLine) {
           try {
             const cartId = contextCartId || (await getCartIdFromCookie())
-            if (cartId) await applyDiscount(cartId, 'GRATISBUFF')
+            if (cartId) {
+              const updatedCart = await applyDiscount(cartId, 'GRATISBUFF')
+              // VIKTIG: Oppdater React Query cachen med den nye handlekurven (rabattert)
+              if (updatedCart) {
+                queryClient.setQueryData(['cart', cartId], updatedCart)
+              }
+            }
           } catch (e) {
-            console.error(e)
+            console.error('Feil ved påføring av rabatt:', e)
+            // Vi stopper ikke her, da varen i det minste er lagt i kurven
           }
         }
 
@@ -177,7 +189,6 @@ export function AddToCart({
               CampaignID: marketingParams.campaign_id
             }
           }
-
 
           if (additionalLine) {
             const buffId =
@@ -299,7 +310,6 @@ export function AddToCart({
 
   return (
     <Form {...form}>
-      {/* Fjernet onClick herfra for å unngå feil sporing */}
       <form
         onSubmit={form.handleSubmit(handleAddToCart)}
         className='flex flex-col gap-4'
