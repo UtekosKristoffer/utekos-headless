@@ -1,3 +1,4 @@
+// Path: src/lib/fragments/cartFragment.ts
 import product from './productFragment'
 
 const cart = /* GraphQL */ `
@@ -13,6 +14,14 @@ const cart = /* GraphQL */ `
         amount
         currencyCode
       }
+      totalTaxAmount {
+        amount
+        currencyCode
+      }
+      totalDutyAmount {
+        amount
+        currencyCode
+      }
     }
     lines(first: 20) {
       edges {
@@ -21,6 +30,14 @@ const cart = /* GraphQL */ `
           quantity
           cost {
             totalAmount {
+              amount
+              currencyCode
+            }
+            subtotalAmount {
+              amount
+              currencyCode
+            }
+            amountPerQuantity {
               amount
               currencyCode
             }
