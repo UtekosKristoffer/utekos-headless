@@ -23,11 +23,11 @@ import { KlaviyoObject } from '../components/analytics/Klaviyo/ActiveOnSite'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
-    default: 'Utekos - Skreddersy varmen etter behov',
+    default: 'Utekos - Skreddersy varmen etter behov.',
     template: '%s | Utekos'
   },
   description:
-    'Kompromissløs komfort. Overlegen allsidiget. Juster, form og nyt.',
+    'Kompromissløs komfort. Overlegen allsidighet. Juster, form og nyt.',
 
   alternates: {
     canonical: '/'
@@ -58,9 +58,9 @@ export const metadata: Metadata = {
     locale: 'no_NO',
     url: 'https://utekos.no',
     siteName: 'Utekos',
-    title: 'Utekos® - Skreddersy varmen etter behov',
+    title: 'Utekos® - Skreddersy varmen etter behov.',
     description:
-      'Kompromissløs komfort. Overlegen allsidiget. Juster, form og nyt.',
+      'Kompromissløs komfort. Overlegen allsidighet. Juster, form og nyt.',
     images: {
       url: 'https://utekos.no/og-kate-linn-kikkert-master.png',
       width: 1200,
