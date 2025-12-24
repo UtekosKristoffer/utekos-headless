@@ -6,11 +6,11 @@ export function MotionContent() {
   return (
     <div className='mb-8 text-center'>
       <div
-        className='animate-fade-in-down mb-6 inline-flex items-center gap-2 rounded-full border border-red-800/30 bg-red-900/10 px-4 py-2'
+        className='animate-fade-in-down mb-6 inline-flex items-center gap-2 rounded-full border border-sky-800/30 bg-sky-900/10 px-4 py-2'
         style={{ animationDelay: '0.2s' }}
       >
-        <Award className='h-4 w-4 text-red-800' />
-        <span className='text-sm font-medium text-red-800'>
+        <Award className='h-4 w-4 text-sky-400' />
+        <span className='text-sm font-medium text-sky-400'>
           Funksjonell varme - siden 2020
         </span>
       </div>

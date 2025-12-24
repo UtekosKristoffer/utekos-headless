@@ -24,7 +24,7 @@ import { Activity } from 'react'
 import { FeaturedProductsSkeleton } from '@/components/skeletons/FeaturedProductsSkeleton'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { getCachedCart } from '@/lib/helpers/cart/getCachedCart'
-
+import TechTeaserSection from '@/components/frontpage/components/TechTeaserSection'
 async function FeaturedProductsSection() {
   const queryClient = new QueryClient()
 
@@ -77,6 +77,10 @@ const HomePage = async () => {
 
         <Activity>
           <NewProductLaunchSection variantId={techDownId} />
+        </Activity>
+
+        <Activity>
+          <TechTeaserSection />
         </Activity>
 
         <Activity>

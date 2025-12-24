@@ -51,7 +51,7 @@ export const technologyGroups: readonly TechnologyGroup[] = [
     technologies: [
       {
         icon: 'thermometer',
-        title: 'Fillpower 650 – Termisk Effektivitet',
+        title: 'Fillpower 650 – Termisk effektivitet',
         iconColor: 'text-orange-500',
         content:
           'Dun som leverer markedsledende varme-til-vekt-ratio. Med en fillpower på 650 oppnås en optimal balanse mellom isolasjonsevne og pakkevolum. Dette skaper den karakteristiske "omsluttende" følelsen, samtidig som det sikrer maksimal varmebevaring i nordiske temperaturer.',
