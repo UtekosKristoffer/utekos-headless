@@ -23,8 +23,8 @@ import { KlaviyoObject } from '../components/analytics/Klaviyo/ActiveOnSite'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
-    default: 'Utekos - Skreddersy varmen etter behov.',
-    template: '%s | Utekos'
+    default: 'Utekos® - Skreddersy varmen etter behov.',
+    template: '%s | Utekos®'
   },
   description:
     'Kompromissløs komfort. Overlegen allsidighet. Juster, form og nyt.',

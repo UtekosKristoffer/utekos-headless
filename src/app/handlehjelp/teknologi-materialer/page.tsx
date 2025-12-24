@@ -15,14 +15,14 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 export const metadata: Metadata = {
-  title: 'Vår Teknologi | Kvaliteten og komforten bak Utekos',
+  title: 'Vår teknologi og funksjonalitet',
   description:
     'Oppdag materialene og teknologien som gjør Utekos-plaggene unikt varme, lette og slitesterke. Kvalitet i hver fiber for å forlenge de gode stundene utendørs.',
   alternates: {
     canonical: '/handlehjelp/teknologi-materialer'
   },
   openGraph: {
-    title: 'Vår Teknologi | Kvaliteten og komforten bak Utekos',
+    title: 'Teknologi og funksjonalitet',
     description:
       'Lær om de unike materialene og funksjonaliteten som sikrer din komfort.',
     url: '/handlehjelp/teknologi-materialer',

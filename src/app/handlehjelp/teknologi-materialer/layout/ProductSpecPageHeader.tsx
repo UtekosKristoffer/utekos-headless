@@ -6,8 +6,8 @@ export function ProductSpecPageHeader() {
       </h1>
       <p className='mt-4 text-lg text-foreground/80'>
         Vi er kompromissløse i våre materialvalg fordi vi vet at ekte utekos
-        starter med total komfort. Her kan du utforske teknologien som sikrer at
-        du kan nyte de gode stundene lenger.
+        starter med total komfort. Her kan du utforske funksjonaliteten og
+        teknologien som revolusjonerer utendørsopplevelsen.
       </p>
     </section>
   )

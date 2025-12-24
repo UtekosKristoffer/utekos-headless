@@ -176,7 +176,7 @@ gjør Utekos unikt:
 - **HANDLE:** utekos-dun
 - **PRIS:** 1990 kr
 - **NØKKELORD:** Et av vårt varmeste og mest populære modell. Luksuriøs og lett med
-  premium andedun (90/10, 650 fillpower). Gir maksimal varme i forhold til vekt.
+  markedsledende dun (90/10, 650 fillpower). Gir maksimal varme i forhold til vekt.
   Ideell for kalde, tørre kvelder. Klassikeren.
 - **LAGERSTATUS:** **Utsolgt i størrelse Medium.**
 - **FARGER:** Fjellblå, Vargnatt
