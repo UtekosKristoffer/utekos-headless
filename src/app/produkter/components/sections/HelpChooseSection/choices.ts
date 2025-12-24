@@ -12,11 +12,11 @@ export const choices: ProductChoice[] = [
     description:
       'Optimalisert etter erfaringer og tilbakemeldinger. Gir maksimal komfort og bevegelsesfrihet. Perfekt for hytteliv, bobil og all utekos.',
     href: '/produkter/utekos-techdown' as Route,
-    imageUrl: '/fiberdun.webp',
+    imageUrl: '/fiberdun/techdawn-front.png',
     linkColor: 'text-sky-800'
   },
   {
-    title: 'For den ultimate varmen',
+    title: 'Vårt orginale flaggskip',
     description:
       'Vårt bestselgende isolasjonsplagg, fylt med kvalitetsdun for funksjonell varme på de kaldeste dagene.',
     href: '/produkter/utekos-dun' as Route,
@@ -36,7 +36,7 @@ export const choices: ProductChoice[] = [
     description:
       'Vanntett, vindtett og fôret med myk plysj. Holder deg garantert varm og tørr etter isbadet eller på en fuktig dag på campingen.',
     href: '/produkter/comfyrobe' as Route,
-    imageUrl: '/comfyrobe/Jakke_Navy_1.png',
+    imageUrl: '/comfy-front.png',
     linkColor: 'text-sky-800' // Endret farge for bedre distinksjon
   },
   {

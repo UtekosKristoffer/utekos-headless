@@ -18,7 +18,7 @@ export function PersonaCards() {
     },
     {
       href: '/produkter/utekos-techdown',
-      imageSrc: '/front-open.webp',
+      imageSrc: '/og-kate-linn-kikkert-master.png',
       imageAlt: 'TechDown produktbilde åpen',
       title: 'For den praktiske allrounderen',
       description:

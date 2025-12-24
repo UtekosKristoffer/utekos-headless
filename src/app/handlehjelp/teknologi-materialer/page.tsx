@@ -5,8 +5,15 @@ import { ProductSpecsView } from './layout/ProductSpecsView'
 import { technologyGroups } from './config'
 import { ProductSpecPageHeader } from './layout/ProductSpecPageHeader'
 import { Activity } from 'react'
-import { Coffee, Move, Maximize2 } from 'lucide-react'
-
+import {
+  Coffee,
+  Move,
+  Maximize2,
+  BookOpen,
+  ArrowRight,
+  ShoppingBag
+} from 'lucide-react'
+import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Vår Teknologi | Kvaliteten og komforten bak Utekos',
   description:
@@ -16,7 +23,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Vår Teknologi | Kvaliteten og komforten bak Utekos',
-    description: 'Lær om de unike materialene som sikrer din komfort.',
+    description:
+      'Lær om de unike materialene og funksjonaliteten som sikrer din komfort.',
     url: '/handlehjelp/teknologi-materialer',
     siteName: 'Utekos',
     images: [
@@ -115,6 +123,52 @@ export default function ProductSpecsPage() {
         <Activity>
           <ProductSpecsView technologyGroups={technologyGroups} />
         </Activity>
+        {/* --- NY SEKSJON: NAVIGASJON --- */}
+        <section className='mt-24 border-t border-neutral-200 pt-16 dark:border-white/10'>
+          <div className='container mx-auto px-4'>
+            <div className='grid gap-6 md:grid-cols-2'>
+              {/* PRODUKTER */}
+              <Link
+                href='/produkter'
+                className='group relative flex flex-col items-center justify-center rounded-2xl border border-neutral-200 bg-neutral-900 px-6 py-12 text-center transition-all hover:border-sky-200 hover:shadow-lg dark:border-white/10 dark:bg-white/5'
+              >
+                <div className='mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-neutral-800 text-white transition-colors group-hover:bg-sky-900 group-hover:text-sky-200'>
+                  <ShoppingBag className='h-7 w-7' />
+                </div>
+                <h3 className='mb-2 text-2xl font-bold text-foreground'>
+                  Utforsk kolleksjonen
+                </h3>
+                <p className='mb-6 max-w-sm text-article-white'>
+                  Klar for å oppleve varmen? Se vårt utvalg av Utekos-produkter.
+                </p>
+                <span className='inline-flex items-center font-bold text-sky-400 decoration-sky-400 underline-offset-4 group-hover:underline'>
+                  Se alle produkter
+                  <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+                </span>
+              </Link>
+
+              {/* MAGASINET */}
+              <Link
+                href='/magasinet'
+                className='group relative flex flex-col items-center justify-center rounded-2xl border border-neutral-200 bg-neutral-900 px-6 py-12 text-center transition-all hover:border-orange-200 hover:shadow-lg dark:border-white/10 dark:bg-white/5'
+              >
+                <div className='mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-neutral-800 text-white transition-colors group-hover:bg-orange-900 group-hover:text-orange-200'>
+                  <BookOpen className='h-7 w-7' />
+                </div>
+                <h3 className='mb-2 text-2xl font-bold text-foreground'>
+                  Inspirasjon og historier
+                </h3>
+                <p className='mb-6 max-w-sm text-article-white'>
+                  Les mer om Utekos, tips og historier i vårt magasin.
+                </p>
+                <span className='inline-flex items-center font-bold text-orange-400 decoration-orange-400 underline-offset-4 group-hover:underline'>
+                  Les magasinet
+                  <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+                </span>
+              </Link>
+            </div>
+          </div>
+        </section>
       </section>
     </>
   )
