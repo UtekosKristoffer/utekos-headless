@@ -88,27 +88,32 @@ const ProductsPage = async () => {
 
         <Activity>
           <section className='mb-24'>
-            <div className='relative mb-12 text-center overflow-hidden py-16 md:mb-20'>
-              <div
-                aria-hidden='true'
-                className='absolute inset-0 -z-10 opacity-30'
-              >
-                <div
-                  className='absolute left-1/2 top-0 h-[500px] w-[1000px] -translate-x-1/2 blur-3xl'
-                  style={{
-                    background:
-                      'radial-gradient(circle, #0ea5e9 0%, transparent 70%)'
-                  }}
-                />
+            {/* --- NY DESIGNET HEADER SEKSJON --- */}
+            <div className='relative mb-12 w-full overflow-hidden border-y border-white/5 bg-neutral-950 py-20 text-center md:mb-20 md:py-24'>
+              {/* Bakgrunnseffekter */}
+              <div className='absolute inset-0 -z-10'>
+                {/* 1. Teknisk Grid (gir struktur) */}
+                <div className='absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]' />
+
+                {/* 2. Sentrert Glow (Mykere og bredere) */}
+                <div className='absolute left-1/2 top-1/2 h-[400px] w-full max-w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-25'>
+                  <div className='h-full w-full bg-gradient-to-r from-sky-500/10 via-sky-400/20 to-sky-500/10 blur-[80px]' />
+                </div>
               </div>
-              <h2 className='text-4xl font-bold tracking-tight text-foreground drop-shadow-md md:text-5xl'>
-                Skapt for din Utekos
-              </h2>
-              <p className='mx-auto mt-4 max-w-2xl text-lg text-access/80'>
-                Våre komfortplagg er designet for å holde deg varm, slik at du
-                kan nyte de gode øyeblikkene lenger.
-              </p>
+
+              {/* Innhold */}
+              <div className='relative z-10 container mx-auto px-4'>
+                <h2 className='text-balance text-4xl font-bold tracking-tight text-white sm:text-5xl'>
+                  Skapt for din Utekos
+                </h2>
+                <p className='mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-neutral-400'>
+                  Våre komfortplagg er designet for å holde deg varm, slik at du
+                  kan nyte de gode øyeblikkene lenger.
+                </p>
+              </div>
             </div>
+
+            {/* Karusell (Uendret logikk) */}
             <HydrationBoundary state={dehydrate(queryClient)}>
               <Suspense fallback={<ProductGridSkeleton />}>
                 <AllProductsCarousel />
