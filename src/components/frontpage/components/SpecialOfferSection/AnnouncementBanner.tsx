@@ -54,17 +54,20 @@ export default function AnnouncementBanner() {
     >
       <Link
         href='/handlehjelp/teknologi-materialer'
-        className='group block w-full bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 px-8 py-3 text-center text-sm font-medium text-white transition-all hover:bg-slate-950'
+        className='group block w-full bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 py-3 pl-4 pr-12 text-center text-sm font-medium text-white transition-all hover:bg-slate-950 sm:px-8'
       >
         <div className='flex items-center justify-center gap-2'>
-          <Info className='h-4 w-4 text-blue-200' />
+          <Info className='h-4 w-4 shrink-0 text-blue-200' />
 
           <span className='mr-1'>
-            <span className='font-bold text-blue-100'>Info: </span>
-            {/* Kort tekst på mobil */}
-            <span className='inline md:hidden'>
-              Lær om funksjonaliteten og teknologien bak Utekos®
+            {/* "Info:" vises kun på større skjermer (sm og oppover) */}
+            <span className='hidden font-bold text-blue-100 sm:inline'>
+              Info:{' '}
             </span>
+
+            {/* Kort tekst på mobil for å sikre én linje */}
+            <span className='inline md:hidden'>Teknologien bak Utekos®</span>
+
             {/* Full tekst på desktop */}
             <span className='hidden md:inline'>
               Lær om funksjonaliteten og teknologien bak Utekos®
@@ -76,7 +79,7 @@ export default function AnnouncementBanner() {
             <ArrowRightIcon className='ml-1 inline-block size-4 transition-transform group-hover:translate-x-1' />
           </span>
 
-          <ArrowRightIcon className='inline-block size-4 sm:hidden' />
+          <ArrowRightIcon className='ml-1 inline-block size-4 shrink-0 sm:hidden' />
         </div>
       </Link>
 
