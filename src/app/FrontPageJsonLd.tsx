@@ -32,7 +32,7 @@ export async function FrontPageJsonLd() {
     'description':
       'Er du lei av å la kulden ødelegge de gode øyeblikkene ute? Utekos er løsningen som holder deg varm og komfortabel.',
     'thumbnailUrl': [VIDEO_THUMBNAIL],
-    'uploadDate': '2024-01-01T00:00:00+01:00',
+    'uploadDate': '2025-11-01T00:00:00+01:00',
     'duration': 'PT0M30S',
 
     'contentUrl': VIDEO_URL,

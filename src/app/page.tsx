@@ -22,9 +22,38 @@ import { connection } from 'next/server'
 import { ComfyrobeSection } from '../components/frontpage/components/SpecialOfferSection/ComfyrobeSection'
 import { Activity } from 'react'
 import { FeaturedProductsSkeleton } from '@/components/skeletons/FeaturedProductsSkeleton'
-import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
-import { getCachedCart } from '@/lib/helpers/cart/getCachedCart'
 import TechTeaserSection from '@/components/frontpage/components/TechTeaserSection'
+import type { Metadata } from 'next'
+import { FrontPageJsonLd } from './FrontPageJsonLd'
+export const metadata: Metadata = {
+  metadataBase: new URL('https://utekos.no'),
+  title: {
+    default: 'Utekos® - Skreddersy varmen etter behov.',
+    template: '%s | Utekos®'
+  },
+  description:
+    'For kompromissløs komfort og overlegen allsidighet. Med tusenvis av fornøyde livsnytere og gjennomtestede løsninger kan du stole på at Utekos vil forlenge og oppgradere dine utendørsopplevelser. Juster, form og nyt. ',
+
+  alternates: {
+    canonical: '/'
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'no_NO',
+    url: 'https://utekos.no',
+    siteName: 'Utekos',
+    title: 'Utekos® - Skreddersy varmen etter behov.',
+    description:
+      'Kompromissløs komfort. Overlegen allsidighet. Juster, form og nyt.',
+    images: {
+      url: 'https://utekos.no/og-kate-linn-kikkert-master.png',
+      width: 1200,
+      height: 630,
+      alt: 'Personer som koser seg utendørs med varme komfortplagg fra Utekos.'
+    }
+  }
+}
+
 async function FeaturedProductsSection() {
   const queryClient = new QueryClient()
 
@@ -72,6 +101,7 @@ const HomePage = async () => {
 
   return (
     <>
+      <FrontPageJsonLd />
       <section>
         <HeroSection />
 

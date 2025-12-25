@@ -36,6 +36,7 @@ export function MotionContent() {
         Kompromissløs komfort. Overlegen allsidighet. Juster, form og nyt.
       </p>
       <div
+        data-nosnippet
         className='animate-fade-in hidden justify-center md:flex'
         style={{ animationDelay: '0.7s' }}
       >

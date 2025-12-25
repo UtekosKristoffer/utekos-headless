@@ -1,7 +1,6 @@
+// Path: src/components/frontpage/components/HeroSection/HeroImage.tsx
 'use client'
 import heroImage from '@public/linn-kate-kikkert.png'
-// import heroImage3 from '@public/arne-monica-masterpng.webp'
-// import heroImage2 from '@public/kate-linn-orginal.webp'
 import Image from 'next/image'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import {
@@ -9,7 +8,6 @@ import {
   CarouselContent,
   CarouselItem
 } from '@/components/ui/carousel'
-// import Autoplay from 'embla-carousel-autoplay'
 export function HeroImage() {
   return (
     <div className='group relative mx-auto mb-8 max-w-7xl md:max-w-6xl overflow-hidden rounded-2xl border border-neutral-800 shadow-2xl'>
