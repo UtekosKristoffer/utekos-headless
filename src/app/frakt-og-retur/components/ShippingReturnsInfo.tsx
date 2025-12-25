@@ -33,8 +33,8 @@ export function ShippingReturnsInfo() {
                 Frakt og levering
               </CardTitle>
               <CardDescription>
-                Vi sender til hele Norge, så du kan starte din utekos så raskt
-                som mulig.
+                Vi sender alle bestillinger som gjøres før kl 16. samme dag, så
+                du kan starte din utekos så raskt som mulig.
               </CardDescription>
             </CardHeader>
             <CardContent>

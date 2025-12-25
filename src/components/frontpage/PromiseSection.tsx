@@ -14,7 +14,7 @@ import { ClockIcon, ShieldCheckIcon } from '@heroicons/react/24/outline'
 import { ThermometerIcon } from 'lucide-react'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import KvamskogenPic from '@public/kvamskogen_1.webp'
-import Mormor from '@public/kristoffer.png'
+import Kristoffer from '@public/1080/tech-kristoffer-1080.png'
 
 const images = [
   {
@@ -22,7 +22,7 @@ const images = [
     alt: 'Bilde av en gjeng som bruker Utekos-plagg i snørike omgivelser på Kvamskogen.'
   },
   {
-    src: Mormor,
+    src: Kristoffer,
     alt: 'En fornøyd herre som bruker Utekos-produktet på terrassen.'
   }
 ]

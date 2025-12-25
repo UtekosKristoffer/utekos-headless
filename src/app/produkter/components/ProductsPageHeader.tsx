@@ -4,7 +4,7 @@ import { Sparkles } from 'lucide-react'
 
 export function ProductsPageHeader() {
   return (
-    <header className='relative w-full overflow-hidden border-b border-white/5 bg-neutral-950 pt-24 pb-16 md:pt-32 md:pb-24'>
+    <header className='relative w-full overflow-hidden border-b border-white/5 bg-neutral-950 pt-12 pb-8 md:pt-16 md:pb-16 mb-12'>
       {/* --- BAKGRUNNSEFFEKTER --- */}
       <div className='absolute inset-0 -z-10'>
         {/* 1. Teknisk Grid (gir struktur) */}
