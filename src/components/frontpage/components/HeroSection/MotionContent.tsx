@@ -1,7 +1,6 @@
 // Path: src/components/frontpage/components/HeroSection/MotionContent.tsx
 import { Award } from 'lucide-react'
 import { ChevronDownSection } from './ChevronDown'
-import { SantaHat } from '@/components/ui/santahat'
 export function MotionContent() {
   return (
     <div className='mb-8 text-center'>
@@ -19,10 +18,7 @@ export function MotionContent() {
         className='animate-fade-in-up mt-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl xl:text-7xl'
         style={{ animationDelay: '0.3s' }}
       >
-        <span className='relative inline-block'>
-          Utekos®
-          <SantaHat className='absolute -top-6 -left-4 h-12 w-12 -rotate-12 drop-shadow-lg sm:-top-10 sm:-left-6 sm:h-20 sm:w-20' />
-        </span>
+        <span className='relative inline-block'>Utekos®</span>
 
         <span className='mt-2 block bg-gradient-to-r from-sky-800 via-cyan-700 to-sky-800 bg-clip-text text-transparent'>
           Skreddersy varmen etter behov.

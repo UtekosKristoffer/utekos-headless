@@ -10,7 +10,6 @@ import { generateEventID } from '@/components/analytics/MetaPixel/generateEventI
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { sendGTMEvent } from '@next/third-parties/google'
-import { trackStartedCheckout } from '@/components/analytics/Klaviyo/KlaviyoMarketing'
 export const CheckoutButton = ({
   checkoutUrl,
   subtotal,
@@ -20,7 +19,7 @@ export const CheckoutButton = ({
   currency,
   item_ids,
   num_items,
-  cartLines, // Ny prop: Kreves for Klaviyo Started Checkout
+  cartLines,
   className,
   children,
   ...props
@@ -80,11 +79,6 @@ export const CheckoutButton = ({
           },
           { eventID }
         )
-      }
-
-      // KLAVIYO TRACKING
-      if (cartLines && cartLines.length > 0) {
-        trackStartedCheckout(cartId, cartLines, checkoutUrl, value)
       }
 
       const captureBody: CaptureBody = {

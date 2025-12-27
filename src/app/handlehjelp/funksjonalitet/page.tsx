@@ -80,7 +80,7 @@ export default async function FunctionalityPage() {
             <p className='text-muted-foreground'>
               Skal du bevege deg over lengre avstander, gå tur med hunden eller
               slå av en prat med naboen? Ved å brette nedre del av plagget
-              innunder seg og stramme til i livet, forvandles Utekos til en
+              innunder deg og stramme til i livet, forvandles Utekos til en
               stilig parkas. Dette sikrer full bevegelsesfrihet og et elegant
               utseende, samtidig som du beholder den gode varmen.
             </p>

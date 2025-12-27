@@ -39,41 +39,6 @@ declare global {
       queue?: any[]
     }
     _snaptr_loaded?: boolean
-
-    // Klaviyo (New Object & Legacy)
-    // Dokumentasjon: https://developers.klaviyo.com/en/docs/javascript_api
-    klaviyo: {
-      // Core methods
-      push: (...args: any[]) => void
-
-      // Tracking
-      track: (
-        event: string,
-        properties?: Record<string, any>,
-        callback?: Function
-      ) => boolean // Returns Promise/Boolean in new API
-
-      trackViewedItem: (item: Record<string, any>, callback?: Function) => void
-
-      // Identification
-      identify: (
-        properties: Record<string, any>,
-        callback?: Function
-      ) => Record<string, any> // Returns Promise/Object in new API
-
-      isIdentified: (callback?: Function) => boolean
-
-      // Forms
-      openForm: (formId: string, callback?: Function) => void
-
-      // Configuration
-      account: (accountId?: string, callback?: Function) => string
-      cookieDomain: (cookieDomain?: string, callback?: Function) => string
-    }
-
-    // Legacy Klaviyo object (fremdeles brukt internt av proxyen)
-    _learnq: any[]
-    _klOnsite: any[] // Brukes av det nye proxy-scriptet som kø
   }
 }
 

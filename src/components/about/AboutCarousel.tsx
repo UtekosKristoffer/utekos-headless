@@ -1,3 +1,4 @@
+// Path: src/components/about/AboutCarousel.tsx
 'use client'
 
 import Image from 'next/image'
@@ -48,59 +49,61 @@ export function AboutCarousel() {
   }, [api])
 
   return (
-    <section className='relative mx-auto overflow-hidden px-4 py-16 sm:py-32'>
-      {/* Ambient background glow */}
-      <div className='absolute inset-0 -z-10 opacity-25'>
+    <section className='relative mx-auto overflow-hidden px-4 py-16 sm:py-32 bg-[#1F2421] text-[#F4F1EA]'>
+      {/* Ambient background glow - Varm atmosfære */}
+      <div className='absolute inset-0 -z-10 opacity-20'>
         <div
-          className='absolute left-1/4 top-1/4 h-[500px] w-[500px] blur-3xl'
+          className='absolute left-1/4 top-1/4 h-[500px] w-[500px] blur-[100px]'
           style={{
-            background: 'radial-gradient(circle, #0ea5e9 0%, transparent 70%)'
+            background: 'radial-gradient(circle, #E07A5F 0%, transparent 70%)'
           }}
         />
         <div
-          className='absolute right-1/4 bottom-1/4 h-[500px] w-[500px] blur-3xl'
+          className='absolute right-1/4 bottom-1/4 h-[500px] w-[500px] blur-[100px]'
           style={{
-            background: 'radial-gradient(circle, #06b6d4 0%, transparent 70%)'
+            background: 'radial-gradient(circle, #2C2420 0%, transparent 70%)'
           }}
         />
       </div>
 
       <div className='container mx-auto max-w-7xl'>
-        <div className='mb-12 text-center'>
+        <div className='mb-16 text-center'>
+          
+          {/* Badge */}
           <div
             ref={badgeRef}
             className={cn(
-              'will-animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-sky-800/30 bg-sky-900/10 px-4 py-2',
+              'will-animate-fade-in-up mb-6 inline-flex items-center gap-2 rounded-full border border-[#E07A5F]/30 bg-[#E07A5F]/10 px-4 py-1.5',
               badgeInView && 'is-in-view'
             )}
           >
-            <Camera className='h-4 w-4 text-sky-800' />
-            <span className='text-sm font-medium text-sky-800'>
+            <Camera className='h-4 w-4 text-[#E07A5F]' />
+            <span className='text-xs font-bold tracking-[0.15em] uppercase text-[#E07A5F]'>
               Livet med Utekos
             </span>
           </div>
 
+          {/* Overskrift */}
           <h2
             ref={h2Ref}
             className={cn(
-              'will-animate-fade-in-up text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl',
+              'will-animate-fade-in-up text-4xl md:text-5xl font-serif font-medium tracking-tight mb-4',
               h2InView && 'is-in-view'
             )}
             style={{ '--transition-delay': '0.1s' } as React.CSSProperties}
           >
-            Et glimt av Utekos
+            Et glimt av opplevelsen
           </h2>
 
           <p
             ref={pRef}
             className={cn(
-              'will-animate-fade-in-up mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-access/80',
+              'will-animate-fade-in-up mx-auto max-w-2xl text-lg md:text-xl leading-relaxed text-[#F4F1EA]/70 font-light',
               pInView && 'is-in-view'
             )}
             style={{ '--transition-delay': '0.2s' } as React.CSSProperties}
           >
-            Se hvordan kompromissløs komfort gir liv til dine favorittøyeblikk
-            utendørs.
+            Se hvordan kompromissløs komfort gir liv til dine favorittøyeblikk utendørs.
           </p>
         </div>
 
@@ -112,13 +115,16 @@ export function AboutCarousel() {
           )}
           style={{ '--transition-delay': '0.3s' } as React.CSSProperties}
         >
-          <div className='relative mx-auto max-w-6xl overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/50 p-4 shadow-2xl'>
-            <div className='absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-400/50 to-transparent' />
+          {/* Karusell Ramme */}
+          <div className='relative mx-auto max-w-6xl overflow-hidden rounded-sm border border-[#F4F1EA]/5 bg-[#2C2420] p-2 md:p-4 shadow-2xl shadow-black/40'>
+            
+            {/* Dekorativ topp-linje */}
+            <div className='absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-[#E07A5F]/50 to-transparent' />
 
             <Carousel
               setApi={setApi}
               plugins={[autoplayPlugin.current]}
-              opts={{ loop: true }}
+              opts={{ loop: true, align: 'start' }}
               onMouseEnter={autoplayPlugin.current.stop}
               onMouseLeave={autoplayPlugin.current.reset}
             >
@@ -128,41 +134,52 @@ export function AboutCarousel() {
                     key={index}
                     className='md:basis-1/2 lg:basis-1/3'
                   >
-                    <div className='group relative h-[350px] w-full overflow-hidden rounded-xl border border-neutral-800 transition-all duration-300 hover:border-neutral-700'>
+                    <div className='group relative h-[400px] w-full overflow-hidden rounded-sm border border-[#F4F1EA]/5 transition-all duration-500 hover:border-[#E07A5F]/30 bg-[#151515]'>
+                      
+                      {/* Varm Hover Glow */}
                       <div
-                        className='absolute -inset-1 opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-30'
+                        className='absolute -inset-1 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-30'
                         style={{
                           background:
-                            'linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)'
+                            'radial-gradient(circle, #E07A5F 0%, transparent 70%)'
                         }}
                       />
+                      
                       <div className='relative h-full w-full'>
                         <Image
                           src={image.src}
                           alt={image.alt}
                           fill
-                          className='object-cover transition-transform duration-700 group-hover:scale-110'
+                          className='object-cover transition-transform duration-1000 ease-out group-hover:scale-105'
                           sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
                         />
-                        <div className='absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
+                        {/* Subtil gradient i bunn for dybde */}
+                        <div className='absolute inset-0 bg-gradient-to-t from-[#1F2421]/80 via-transparent to-transparent opacity-60' />
                       </div>
                     </div>
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className='left-4' />
-              <CarouselNext className='right-4' />
+              
+              {/* Navigasjonsknapper - Stylet */}
+              <div className='hidden md:block'>
+                <CarouselPrevious className='left-8 bg-[#2C2420]/80 text-[#F4F1EA] border-[#F4F1EA]/10 hover:bg-[#E07A5F] hover:text-white hover:border-[#E07A5F]' />
+                <CarouselNext className='right-8 bg-[#2C2420]/80 text-[#F4F1EA] border-[#F4F1EA]/10 hover:bg-[#E07A5F] hover:text-white hover:border-[#E07A5F]' />
+              </div>
             </Carousel>
 
-            <div className='absolute bottom-6 left-1/2 z-10 -translate-x-1/2'>
-              <div className='flex items-center justify-center gap-2'>
+            {/* Paginering / Dots */}
+            <div className='absolute bottom-8 left-1/2 z-10 -translate-x-1/2'>
+              <div className='flex items-center justify-center gap-3'>
                 {api?.scrollSnapList().map((_, index) => (
                   <button
                     key={index}
                     onClick={() => api.scrollTo(index)}
                     className={cn(
-                      'h-2 w-2 rounded-full transition-all duration-300',
-                      current === index + 1 ? 'w-4 bg-white' : 'bg-white/40'
+                      'h-1.5 rounded-full transition-all duration-300',
+                      current === index + 1 
+                        ? 'w-8 bg-[#E07A5F]' 
+                        : 'w-2 bg-[#F4F1EA]/20 hover:bg-[#F4F1EA]/40'
                     )}
                     aria-label={`Gå til bilde ${index + 1}`}
                   />

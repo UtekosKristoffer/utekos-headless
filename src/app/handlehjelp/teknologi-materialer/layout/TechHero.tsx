@@ -15,7 +15,7 @@ export function TechHero() {
       <div className='relative z-10 container mx-auto px-4'>
         <div className='mx-auto max-w-4xl space-y-8'>
           <div className='inline-flex items-center rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-sky-400 backdrop-blur-md'>
-            Engineered for Comfort
+            SKAPT FOR KOMFORT
           </div>
 
           <h1 className='text-5xl font-bold tracking-tight text-white sm:text-7xl md:text-8xl'>

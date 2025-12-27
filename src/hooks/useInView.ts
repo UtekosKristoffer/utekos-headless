@@ -34,6 +34,7 @@ export function useInView<T extends Element>({
         observerRef.current.disconnect()
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref, threshold])
 
   return [setRef, isInView]

@@ -102,12 +102,14 @@ export default function ProductSpecsPage() {
                 2. Oppjustert modus
               </h3>
               <p className='mb-4 text-xs font-bold uppercase tracking-wider text-orange-500'>
-                Innendørs mobilitet
+                Umiddelbar mobilitet
               </p>
               <p className='text-neutral-400 leading-relaxed text-sm'>
-                Skal du en rask tur på kjøkkenet? Heis opp lengden med snoren i
-                livet for umiddelbar mobilitet uten at plagget subber. Beveg deg
-                trygt uten å miste varmen.
+                Nyter du total omfavnelse av Utekos, men må plutselig en rask
+                tur på kjøkkenet eller svare på telefonen som ringer fra andre
+                siden av huset? Heis opp plagget til ønsket lengde, stram med
+                den utvendige snoren i livet og vær mobil på få sekunder. Beveg
+                deg uten snublefare og subbefritt - uten å miste varmen.
               </p>
             </div>
           </div>

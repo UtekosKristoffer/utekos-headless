@@ -18,8 +18,7 @@ import { ChatBotAgent } from '@/components/chat/ChatBotAgent/source-code'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { getCachedCart } from '../lib/helpers/cart/getCachedCart'
 import { GoogleTagManager } from '@next/third-parties/google'
-import Script from 'next/script'
-import { KlaviyoObject } from '../components/analytics/Klaviyo/ActiveOnSite'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
@@ -112,7 +111,7 @@ async function CartProviderLoader({ children }: { children: ReactNode }) {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang='no' className={geistSans.className}>
+    <html lang='no' className={geistSans.className} suppressHydrationWarning>
       <GoogleTagManager gtmId='GTM-5TWMJQFP' />
       <body className='bg-background text-foreground antialiased'>
         <OnlineStoreJsonLd />
@@ -123,8 +122,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </Activity>
             <Header menu={mainMenu} />
             <main>
-              <KlaviyoObject />
               {children}
+              <SpeedInsights />
               <Analytics mode='production' />
               <ChatBotAgent />
               <Activity>
@@ -134,12 +133,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </CartProviderLoader>
         </Suspense>
         <Toaster closeButton />
-        <Script
-          async
-          type='text/javascript'
-          src='//static.klaviyo.com/onsite/js//klaviyo.js'
-          nonce='true'
-        />
       </body>
     </html>
   )

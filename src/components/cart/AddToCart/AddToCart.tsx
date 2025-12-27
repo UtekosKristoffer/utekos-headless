@@ -29,7 +29,6 @@ import { QuantitySelector } from '../QuantitySelector'
 import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
-import { getMarketingParams } from '@/components/analytics/Klaviyo/getMarketingParams'
 import { useQueryClient } from '@tanstack/react-query' // Ny import
 
 export function AddToCart({
@@ -148,64 +147,6 @@ export function AddToCart({
 
         const value = basePrice * values.quantity
 
-        if (typeof window !== 'undefined' && window.klaviyo) {
-          const marketingParams = getMarketingParams()
-
-          const klaviyoPayload = {
-            $value: value,
-            AddedItemProductName: product.title,
-            AddedItemProductID: mainVariantId,
-            AddedItemSKU: selectedVariant.sku,
-            AddedItemImageURL: selectedVariant.image?.url || '',
-            AddedItemURL: window.location.href,
-            AddedItemPrice: basePrice,
-            AddedItemQuantity: values.quantity,
-            ItemNames: [
-              product.title,
-              ...(additionalLine ? ['Utekos Buff™'] : [])
-            ],
-            Items: [
-              {
-                ProductID: mainVariantId,
-                SKU: selectedVariant.sku,
-                ProductName: product.title,
-                Quantity: values.quantity,
-                ItemPrice: basePrice,
-                RowTotal: value,
-                ProductURL: window.location.href,
-                ImageURL: selectedVariant.image?.url || '',
-                ProductCategories: product.tags // Hvis tilgjengelig
-              }
-            ],
-            Metadata: {
-              Brand: product.vendor,
-              Price: basePrice,
-              CompareAtPrice: selectedVariant.compareAtPrice,
-              Source: marketingParams.source,
-              Medium: marketingParams.medium,
-              CampaignID: marketingParams.campaign_id
-            }
-          }
-
-          if (additionalLine) {
-            const buffId =
-              cleanShopifyId(additionalLine.variantId)
-              || additionalLine.variantId
-            klaviyoPayload.Items.push({
-              ProductID: buffId,
-              SKU: 'BUFF', // Eller riktig SKU
-              ProductName: 'Utekos Buff™',
-              Quantity: additionalLine.quantity,
-              ItemPrice: 0,
-              RowTotal: 0,
-              ProductURL: window.location.href,
-              ImageURL: '', // URL til buff-bilde hvis du har
-              ProductCategories: ['Tilbehør']
-            })
-          }
-
-          window.klaviyo.track('Added to Cart', klaviyoPayload)
-        }
         if (typeof window !== 'undefined' && window.fbq) {
           window.fbq(
             'track',
