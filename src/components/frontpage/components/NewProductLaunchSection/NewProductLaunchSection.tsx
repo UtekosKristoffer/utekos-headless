@@ -139,7 +139,7 @@ export function NewProductLaunchSection({
               <div className='flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-3 md:hidden'>
                 <AnimatedBlock
                   className='will-animate-fade-in-up inline-flex items-center gap-2.5 rounded-full border border-sky-800/30 bg-sky-900/20 px-4 py-2'
-                  delay='0.5s'
+                  delay='0.2s'
                   threshold={1}
                 >
                   <span className='relative flex h-2.5 w-2.5 shrink-0'>
@@ -152,7 +152,7 @@ export function NewProductLaunchSection({
                 </AnimatedBlock>
                 <AnimatedBlock
                   className='will-animate-fade-in-up inline-flex items-center gap-2.5 rounded-full border border-emerald-800/30 bg-emerald-900/20 px-4 py-2'
-                  delay='0.6s'
+                  delay='0.3s'
                   threshold={1}
                 >
                   <Gift className='h-4 w-4 shrink-0 text-emerald-400' />
@@ -162,7 +162,7 @@ export function NewProductLaunchSection({
                 </AnimatedBlock>
                 <AnimatedBlock
                   className='will-animate-fade-in-up inline-flex items-center gap-2 rounded-full border border-amber-800/30 bg-amber-900/20 px-4 py-2'
-                  delay='0.7s'
+                  delay='0.4s'
                   threshold={1}
                 >
                   <svg
@@ -187,7 +187,7 @@ export function NewProductLaunchSection({
               <div className='hidden md:inline-flex'>
                 <AnimatedBlock
                   className='will-animate-fade-in-up inline-flex items-center gap-3 rounded-full border border-sky-800/30 bg-sky-900/20 px-5 py-2.5'
-                  delay='0.5s'
+                  delay='0.4s'
                   threshold={1}
                 >
                   <span className='relative flex h-2.5 w-2.5 shrink-0'>
@@ -216,7 +216,7 @@ export function NewProductLaunchSection({
             </AnimatedBlock>
             <AnimatedBlock
               className='will-animate-fade-in-up'
-              delay='0.5s'
+              delay='0.4s'
               threshold={1}
             >
               <p className='mb-8 max-w-prose text-lg leading-relaxed text-access/80'>
@@ -237,7 +237,7 @@ export function NewProductLaunchSection({
 
             <AnimatedBlock
               className='will-animate-fade-in-up w-full'
-              delay='0.9s'
+              delay='0.5s'
               threshold={1}
             >
               <div className='flex w-full flex-col gap-6'>

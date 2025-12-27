@@ -5,6 +5,4 @@ export async function SectionPurchase() {
   const product = await getProduct('utekos-techdown')
 
   if (!product) return null
-
-  return <PurchaseClient product={product} />
 }
