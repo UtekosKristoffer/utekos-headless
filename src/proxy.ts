@@ -64,11 +64,10 @@ function formatFbcCookie(
   fbclid: string,
   timestamp: number = Date.now()
 ): string {
-  // Format: fb.1.<account_id>.<click_id>
-  // Using timestamp as simplified account identifier
-  return `fb.1.${Math.floor(timestamp / 1000)}.${fbclid}`
+  // Format: fb.1.creationTime.fbclid
+  // Meta forventer tidsstempel i millisekunder
+  return `fb.1.${timestamp}.${fbclid}`
 }
-
 /**
  * Extract marketing parameters (UTM, FBCLID, email, etc.) from URL query string
  * @param searchParams URLSearchParams object
@@ -328,6 +327,7 @@ export const config = {
   ]
 }
 
+
 // Export functions for testing and reuse
 export {
   handleMarketingParams,
@@ -337,3 +337,5 @@ export {
   hashEmail,
   formatFbcCookie
 }
+
+
