@@ -123,7 +123,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <Header menu={mainMenu} />
             <main>
               {children}
-              <SpeedInsights />
               <Analytics mode='production' />
               <ChatBotAgent />
               <Activity>
@@ -132,6 +131,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </main>
           </CartProviderLoader>
         </Suspense>
+        <SpeedInsights />
         <Toaster closeButton />
       </body>
     </html>
