@@ -19,9 +19,7 @@ export function AboutUsHeroSection() {
         <div className='absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-[#1F2421]' />
       </div>
 
-      {/* Innhold */}
       <div className='relative z-10 container px-6 max-w-4xl'>
-        {/* Kicker / Sub-label i Ember Orange */}
         <span className='inline-block text-[#E07A5F] font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-4 animate-in fade-in slide-in-from-bottom-4 duration-1000'>
           Vår Historie
         </span>

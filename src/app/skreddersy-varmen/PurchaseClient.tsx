@@ -234,7 +234,6 @@ export function PurchaseClient({
             <h1 className='font-serif text-4xl lg:text-7xl text-[#2C2420] mb-4 leading-[1.1] tracking-tight'>
               {currentConfig.title}
             </h1>
-            {/* Økt fra text-lg til text-xl og fjernet opacity */}
             <p className='text-xl text-[#2C2420] font-light mb-8'>
               {currentConfig.subtitle}
             </p>
@@ -326,7 +325,6 @@ export function PurchaseClient({
                   </button>
                 ))}
               </div>
-              {/* Økt tekststørrelse og fjernet opacity */}
               <p className='text-sm text-[#2C2420] mt-4'>
                 {selectedModel === 'techdown' ?
                   '*Liten (Kroppsnær), Medium (Allsidig), Stor (Romslig)'
@@ -336,13 +334,12 @@ export function PurchaseClient({
           </div>
         </div>
 
-        {/* Action Area */}
-        <div className='bg-white border-t mx-auto border-[#2C2420]/10 p-6 md:p-12 lg:p-20 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] z-30'>
+        <div className='bg-white border-t border-[#2C2420]/10 p-6 md:p-12 lg:p-20 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] z-30'>
           <div className='flex gap-4 mb-8 h-16'>
             {' '}
             {/* Økt høyde på knapper til 64px (h-16) for bedre treffsikkerhet */}
             {/* Antall */}
-            <div className='flex items-center border border-[#2C2420]/20 rounded-sm bg-white h-full'>
+            <div className='flex mx-auto items-center border border-[#2C2420]/20 rounded-sm bg-white h-full'>
               <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
                 className='w-16 h-full flex items-center justify-center hover:bg-[#2C2420]/5 transition-colors'

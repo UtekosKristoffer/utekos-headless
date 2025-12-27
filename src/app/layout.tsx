@@ -7,7 +7,6 @@ import { mainMenu } from '@/db/config/menu.config'
 import { Analytics } from '@vercel/analytics/react'
 import { Toaster } from '@/components/ui/sonner'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
-import { Activity } from 'react'
 import Providers from '@/components/providers/Providers'
 import AnnouncementBanner from '@/components/frontpage/components/SpecialOfferSection/AnnouncementBanner'
 import Footer from '@/components/footer/Footer'
@@ -117,19 +116,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <OnlineStoreJsonLd />
         <Suspense>
           <CartProviderLoader>
-            <Activity>
-              <AnnouncementBanner />
-            </Activity>
+            <AnnouncementBanner />
             <Header menu={mainMenu} />
             <main>
               {children}
               <SpeedInsights />
               <Analytics mode='production' />
               <ChatBotAgent />
-              <Activity>
-                <Footer />
-              </Activity>
             </main>
+            <Footer />
           </CartProviderLoader>
         </Suspense>
         <Toaster closeButton />

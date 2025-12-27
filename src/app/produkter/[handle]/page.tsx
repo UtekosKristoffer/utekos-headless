@@ -1,5 +1,4 @@
-
-import { Suspense, Activity } from 'react'
+import { Suspense } from 'react'
 import { VideoSkeleton } from '@/app/produkter/components/VideoSkeleton'
 import { ProductVideoSection } from '@/app/produkter/components/ProductVideoSection'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
@@ -18,9 +17,7 @@ import { getCachedRelatedProducts } from '@/api/lib/products/getCachedRelatedPro
 import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
 import { flattenVariants } from '@/lib/utils/flattenVariants'
 import { computeVariantImages } from '@/lib/utils/computeVariantImages'
-import {
-  KlaviyoIdentify
-} from '@/components/analytics/Klaviyo/ActiveOnSite'
+import { KlaviyoIdentify } from '@/components/analytics/Klaviyo/ActiveOnSite'
 type RouteParamsPromise = Promise<{ handle: string }>
 type SearchParamsPromise = Promise<{
   [key: string]: string | string[] | undefined
@@ -146,8 +143,8 @@ export default async function ProductPage({
 }: {
   params: RouteParamsPromise
 }) {
-  const { handle } = await params
   await connection()
+  const { handle } = await params
   const queryClient = new QueryClient()
   const product = await getProduct(handle)
 
@@ -164,23 +161,16 @@ export default async function ProductPage({
 
   return (
     <>
-      <Activity>
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <ProductPageController
-            handle={handle}
-            initialRelatedProducts={relatedProducts}
-          />
-        </HydrationBoundary>
-      </Activity>
-      <Activity>
-        <Activity>
-          <FindInStoreSection />
-        </Activity>
-        <Suspense fallback={<VideoSkeleton />}>
-          <ProductVideoSection />
-        </Suspense>
-      </Activity>
-      <KlaviyoIdentify />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <ProductPageController
+          handle={handle}
+          initialRelatedProducts={relatedProducts}
+        />
+      </HydrationBoundary>
+      <FindInStoreSection />
+      <Suspense fallback={<VideoSkeleton />}>
+        <ProductVideoSection />
+      </Suspense>
     </>
   )
 }

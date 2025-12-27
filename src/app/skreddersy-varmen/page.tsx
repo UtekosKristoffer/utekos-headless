@@ -51,31 +51,18 @@ export default async function LandingPage() {
 
   return (
     <section className='flex min-h-screen flex-col items-center justify-start bg-[#1F2421]'>
-      <Activity>
-        <StickyMobileAction />
-      </Activity>
-      <Activity>
-        <HeroAndEmpathy />
-      </Activity>
-      <Activity>
-        <SectionThreeInOne />
-      </Activity>
-      <Activity>
-        <TechDownSlider />
-      </Activity>
-      <Activity>
-        <SectionSocialProof />
-      </Activity>
-      <Activity>
-        <Suspense fallback={null}>
-          <div id='purchase-section'>
-            <PurchaseClient products={productsMap} />
-          </div>
-        </Suspense>
-      </Activity>
-      <Activity>
-        <PreFooterNavigation />
-      </Activity>
+      <StickyMobileAction />
+      <HeroAndEmpathy />
+      <SectionThreeInOne />
+      <TechDownSlider />
+      <SectionSocialProof />
+      <Suspense fallback={null}>
+        <div id='purchase-section'>
+          <PurchaseClient products={productsMap} />
+        </div>
+      </Suspense>
+
+      <PreFooterNavigation />
     </section>
   )
 }
