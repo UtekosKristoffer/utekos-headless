@@ -63,11 +63,11 @@ export async function LandingPageJsonLd() {
       'offers': {
         '@type': 'Offer',
         'price': product.price,
-        'priceCurrency': 'NOK',
         'priceSpecification': {
           '@type': 'UnitPriceSpecification',
           'priceType': 'https://schema.org/ListPrice',
-          'price': product.originalPrice
+          'price': product.originalPrice,
+          'priceCurrency': 'NOK'
         },
         'availability': 'https://schema.org/InStock',
         'url': product.url
