@@ -1,20 +1,22 @@
 'use client'
-import { ChevronDown } from 'lucide-react'
+import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 
 export function ChevronDownSection() {
   return (
-    <button
-      onClick={() => {
-        const section = document.getElementById('featured-product')
-        section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }}
-      className='group cursor-pointer'
-      aria-label='Scroll til produkter'
+    <Link
+      href='/skreddersy-varmen'
+      className='group cursor-pointer inline-block py-4'
+      aria-label='Gå til skreddersy varmen'
     >
-      <div className='flex flex-col items-center gap-2 text-muted-foreground transition-colors group-hover:text-foreground'>
-        <span className='text-xs uppercase tracking-wider'>Se mer</span>
-        <ChevronDown className='animate-bounce-slow h-5 w-5' />
+      {/* Endret fra flex-col til flex-row (default) for å ha pilen ved siden av teksten */}
+      <div className='flex items-center justify-center gap-2 text-muted-foreground transition-colors group-hover:text-foreground'>
+        <span className='text-xs uppercase tracking-wider font-medium'>
+          Les mer
+        </span>
+        {/* Byttet til ArrowRight og endret animasjon fra bounce til en horisontal nudge */}
+        <ArrowRight className='h-4 w-4 transition-transform group-hover:translate-x-0.5' />
       </div>
-    </button>
+    </Link>
   )
 }
