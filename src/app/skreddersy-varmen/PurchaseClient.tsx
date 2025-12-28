@@ -334,11 +334,9 @@ export function PurchaseClient({
           </div>
         </div>
 
-        <div className='bg-white border-t border-[#2C2420]/10 p-6 md:p-12 lg:p-20 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] z-30'>
+        <div className='bg-white border-t mx-auto border-[#2C2420]/10 p-6 md:p-12 lg:p-20 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] z-30'>
           <div className='flex gap-4 mb-8 h-16'>
             {' '}
-            {/* Økt høyde på knapper til 64px (h-16) for bedre treffsikkerhet */}
-            {/* Antall */}
             <div className='flex mx-auto items-center border border-[#2C2420]/20 rounded-sm bg-white h-full'>
               <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -363,7 +361,7 @@ export function PurchaseClient({
               onClick={handleAddToCart}
               disabled={isPending}
               className={cn(
-                'flex-1 bg-[#E07A5F] hover:bg-[#D06A4F] text-white rounded-sm shadow-xl transition-all active:scale-[0.98] flex flex-row items-center justify-center gap-3 h-full px-6 mr-2 md:mr-0',
+                'flex-1 bg-[#E07A5F] hover:bg-[#D06A4F] text-white rounded-sm shadow-xl transition-all active:scale-[0.98] flex flex-row items-center justify-center gap-3 h-full px-2',
                 isPending && 'opacity-80 cursor-not-allowed'
               )}
             >
