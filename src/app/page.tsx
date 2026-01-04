@@ -28,7 +28,7 @@ import { FrontPageJsonLd } from './FrontPageJsonLd'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
-    default: 'Utekos® - Skreddersy varmen etter behov.',
+    default: 'Utekos® - Skreddersy varmen.',
     template: '%s | Utekos®'
   },
   description:
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     locale: 'no_NO',
     url: 'https://utekos.no',
     siteName: 'Utekos',
-    title: 'Utekos® - Skreddersy varmen etter behov.',
+    title: 'Utekos® - Skreddersy varmen.',
     description:
       'Kompromissløs komfort. Overlegen allsidighet. Juster, form og nyt.',
     images: {

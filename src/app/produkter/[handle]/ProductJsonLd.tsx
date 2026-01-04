@@ -8,7 +8,9 @@ import type {
   Product as ProductSchema,
   WithContext,
   Offer,
-  MerchantReturnPolicy
+  MerchantReturnPolicy,
+  OfferShippingDetails,
+  UnitPriceSpecification
 } from 'schema-dts'
 
 type Props = {
@@ -19,6 +21,39 @@ const mapAvailability = (availableForSale: boolean) =>
   availableForSale ?
     'https://schema.org/InStock'
   : 'https://schema.org/OutOfStock'
+
+const getShippingDetails = (price: string | null): OfferShippingDetails => {
+  const priceValue = price ? parseFloat(price) : 0
+  const shippingCost = priceValue >= 999 ? '0' : '99'
+
+  return {
+    '@type': 'OfferShippingDetails',
+    'shippingRate': {
+      '@type': 'MonetaryAmount',
+      'value': shippingCost,
+      'currency': 'NOK'
+    },
+    'shippingDestination': {
+      '@type': 'DefinedRegion',
+      'addressCountry': 'NO'
+    },
+    'deliveryTime': {
+      '@type': 'ShippingDeliveryTime',
+      'handlingTime': {
+        '@type': 'QuantitativeValue',
+        'minValue': 0,
+        'maxValue': 1,
+        'unitCode': 'DAY'
+      },
+      'transitTime': {
+        '@type': 'QuantitativeValue',
+        'minValue': 1,
+        'maxValue': 4,
+        'unitCode': 'DAY'
+      }
+    }
+  }
+}
 
 export async function ProductJsonLd({ handle }: Props) {
   'use cache'
@@ -47,6 +82,8 @@ export async function ProductJsonLd({ handle }: Props) {
       'https://schema.org/MerchantReturnFiniteReturnWindow',
     'merchantReturnDays': 14,
     'returnMethod': 'https://schema.org/ReturnByMail',
+    'returnFees': 'https://schema.org/FreeReturn',
+    'refundType': 'https://schema.org/FullRefund',
     'url': 'https://utekos.no/frakt-og-retur'
   }
 
@@ -56,7 +93,8 @@ export async function ProductJsonLd({ handle }: Props) {
       '@type': 'Brand',
       'name': product.vendor || 'Utekos®'
     },
-    ...(product.description ? { description: product.description } : {}),
+    // Fallback til tittel hvis beskrivelse mangler
+    description: product.description || product.title,
     ...(featuredImage ? { image: featuredImage } : {})
   } as const
 
@@ -65,7 +103,6 @@ export async function ProductJsonLd({ handle }: Props) {
   } as const
 
   let jsonLd: WithContext<ProductSchema | ProductGroup>
-
   const cleanGroupId = cleanShopifyId(product.id)
 
   if (isProductGroup) {
@@ -85,30 +122,46 @@ export async function ProductJsonLd({ handle }: Props) {
           variant.compareAtPrice?.amount ?
             String(variant.compareAtPrice.amount)
           : null
+
+        const variantDescription =
+          variant.title && variant.title !== 'Default Title' ?
+            `${product.title} - ${variant.title}`
+          : product.description
+
+        // Generer frakt basert på denne variantens pris
+        const shippingDetails = getShippingDetails(variantPrice)
+
+        // Forbered priceSpecification hvis originalPrice finnes
+        const priceSpec: UnitPriceSpecification | undefined =
+          originalPrice ?
+            {
+              '@type': 'UnitPriceSpecification',
+              'priceType': 'https://schema.org/ListPrice',
+              'price': originalPrice,
+              'priceCurrency': variant.price?.currencyCode || 'NOK'
+            }
+          : undefined
+
         const offer: Offer = {
           '@type': 'Offer',
           'url': `https://utekos.no/produkter/${product.handle}?variant=${encodeURIComponent(variant.id)}`,
           'priceCurrency': variant.price?.currencyCode || 'NOK',
-          'priceSpecification': {
-            '@type': 'UnitPriceSpecification',
-            'priceType': 'https://schema.org/ListPrice',
-            'price': originalPrice || ''
-          },
           'availability': mapAvailability(variant.availableForSale),
           'priceValidUntil': priceValidUntil,
           'seller': sellerReference,
           'itemCondition': 'https://schema.org/NewCondition',
           'hasMerchantReturnPolicy': merchantReturnPolicy,
-          ...(variantPrice ? { price: variantPrice } : {})
+          'shippingDetails': shippingDetails,
+          // Bruk spread (...) for å unngå undefined-typefeil
+          ...(variantPrice ? { price: variantPrice } : {}),
+          ...(priceSpec ? { priceSpecification: priceSpec } : {})
         }
 
         return {
           '@type': 'Product',
           ...(cleanVariantId ? { productID: cleanVariantId } : {}),
           'name': `${product.title} - ${variant.title}`,
-          ...(variant.title !== 'Default Title' ?
-            { description: variant.title }
-          : {}),
+          'description': variantDescription || commonData.name,
           ...(variant.sku ? { sku: variant.sku } : {}),
           ...(variantImage ? { image: variantImage } : {}),
           'offers': offer
@@ -125,21 +178,34 @@ export async function ProductJsonLd({ handle }: Props) {
       firstVariant?.compareAtPrice?.amount ?
         String(firstVariant.compareAtPrice.amount)
       : null
+
+    // Generer frakt basert på hovedproduktets pris
+    const shippingDetails = getShippingDetails(variantPrice)
+
+    // Forbered priceSpecification
+    const priceSpec: UnitPriceSpecification | undefined =
+      originalPrice ?
+        {
+          '@type': 'UnitPriceSpecification',
+          'priceType': 'https://schema.org/ListPrice',
+          'price': originalPrice,
+          'priceCurrency': firstVariant?.price?.currencyCode || 'NOK'
+        }
+      : undefined
+
     const offer: Offer = {
       '@type': 'Offer',
       'url': `https://utekos.no/produkter/${product.handle}`,
       'priceCurrency': firstVariant?.price?.currencyCode || 'NOK',
       'availability': mapAvailability(product.availableForSale),
       'priceValidUntil': priceValidUntil,
-      'priceSpecification': {
-        '@type': 'UnitPriceSpecification',
-        'priceType': 'https://schema.org/ListPrice',
-        'price': originalPrice || ''
-      },
       'seller': sellerReference,
       'itemCondition': 'https://schema.org/NewCondition',
       'hasMerchantReturnPolicy': merchantReturnPolicy,
-      ...(variantPrice ? { price: variantPrice } : {})
+      'shippingDetails': shippingDetails,
+      // Bruk spread (...) for å unngå undefined-typefeil
+      ...(variantPrice ? { price: variantPrice } : {}),
+      ...(priceSpec ? { priceSpecification: priceSpec } : {})
     }
 
     jsonLd = {

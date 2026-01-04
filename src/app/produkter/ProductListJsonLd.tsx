@@ -1,6 +1,6 @@
 import { getProducts } from '@/api/lib/products/getProducts'
 import { cacheLife, cacheTag } from 'next/cache'
-import type { ItemList, WithContext } from 'schema-dts'
+import type { ItemList, WithContext, ListItem } from 'schema-dts'
 
 async function fetchWithRetry(retries = 3, delay = 2000) {
   for (let i = 0; i < retries; i++) {
@@ -12,7 +12,6 @@ async function fetchWithRetry(retries = 3, delay = 2000) {
       throw new Error(response.error || 'Empty or failed response')
     } catch (error) {
       if (i === retries - 1) throw error
-
       await new Promise(resolve => setTimeout(resolve, delay))
     }
   }
@@ -33,16 +32,25 @@ export async function ProductListJsonLd() {
     }
     const limitedProducts = products.slice(0, 12)
 
-    const itemListElement = limitedProducts.map((product, index) => ({
-      '@type': 'ListItem' as const,
-      'position': index + 1,
-      'url': `https://utekos.no/produkter/${product.handle}`,
-      'name': product.title
-    }))
+    const itemListElement: ListItem[] = limitedProducts.map(
+      (product, index) => ({
+        '@type': 'ListItem',
+        'position': index + 1,
+        'url': `https://utekos.no/produkter/${product.handle}`,
+        // https://utekos.no/og-kate-linn-kikkert-master.png'
+        'name': product.title,
+        ...(product.featuredImage?.url ?
+          { image: product.featuredImage.url }
+        : {})
+      })
+    )
 
     const jsonLd: WithContext<ItemList> = {
       '@context': 'https://schema.org',
       '@type': 'ItemList',
+      'name': 'Alle produkter fra Utekos', // NYTT: Navn på selve listen
+      'description': 'Skreddersy varmen',
+      'url': 'https://utekos.no/produkter', // NYTT: URL til listen
       'itemListElement': itemListElement
     }
 
@@ -50,6 +58,7 @@ export async function ProductListJsonLd() {
       <script
         type='application/ld+json'
         dangerouslySetInnerHTML={{
+          // Oppdatert escaping for å matche de andre filene (enkel backslash før u)
           __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c')
         }}
       />

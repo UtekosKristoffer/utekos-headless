@@ -1,9 +1,12 @@
 // Path: src/app/OrganizationJsonLd.tsx
+
 import type { OnlineStore, WithContext } from 'schema-dts'
 import { cacheLife } from 'next/cache'
+
 export async function OnlineStoreJsonLd() {
   'use cache'
   cacheLife('max')
+
   const jsonLd: WithContext<OnlineStore> = {
     '@context': 'https://schema.org',
     '@type': 'OnlineStore',
@@ -13,7 +16,7 @@ export async function OnlineStoreJsonLd() {
     'url': 'https://utekos.no',
     'logo': 'https://utekos.no/logo.png',
     'image': 'https://utekos.no/og-image-produkter.png',
-    'description': 'Utekos - Skreddersy varmen etter behov.',
+    'description': 'Utekos - Skreddersy varmen.',
     'foundingDate': '2020',
     'email': 'kundeservice@utekos.no',
     'telephone': '+47 40 21 63 43',
@@ -50,7 +53,7 @@ export async function OnlineStoreJsonLd() {
         'https://schema.org/MerchantReturnFiniteReturnWindow',
       'merchantReturnDays': 14,
       'returnMethod': 'https://schema.org/ReturnByMail',
-      'returnFees': 'https://schema.org/ReturnFeesCustomerResponsibility',
+      'returnFees': 'https://schema.org/FreeReturn', // OPPDATERT: Endret til fri retur
       'refundType': 'https://schema.org/FullRefund',
       'url': 'https://utekos.no/frakt-og-retur'
     }
