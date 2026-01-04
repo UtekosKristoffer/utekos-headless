@@ -21,7 +21,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
-    default: 'Utekos® - Skreddersy varmen etter behov.',
+    default: 'Utekos® - Skreddersy varmen.',
     template: '%s | Utekos®'
   },
   description:
@@ -56,14 +56,14 @@ export const metadata: Metadata = {
     locale: 'no_NO',
     url: 'https://utekos.no',
     siteName: 'Utekos',
-    title: 'Utekos® - Skreddersy varmen etter behov.',
+    title: 'Utekos® - Skreddersy varmen.',
     description:
       'Kompromissløs komfort. Overlegen allsidighet. Juster, form og nyt.',
     images: {
       url: 'https://utekos.no/og-kate-linn-kikkert-master.png',
       width: 1200,
       height: 630,
-      alt: 'Personer som koser seg utendørs med varme komfortplagg fra Utekos.'
+      alt: 'To kvinner som koser seg utendørs på terrassen med varme komfortplagg fra Utekos.'
     }
   },
   robots: {
@@ -110,9 +110,11 @@ async function CartProviderLoader({ children }: { children: ReactNode }) {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang='no' className={geistSans.className} suppressHydrationWarning>
+    <html lang='no'>
       <GoogleTagManager gtmId='GTM-5TWMJQFP' />
-      <body className='bg-background text-foreground antialiased'>
+      <body
+        className={`bg-background text-foreground ${geistSans.className} antialiased`}
+      >
         <OnlineStoreJsonLd />
         <Suspense>
           <CartProviderLoader>
