@@ -73,8 +73,10 @@ export async function ProductJsonLd({ handle }: Props) {
 
   const variants = product.variants.edges
   const isProductGroup = variants.length > 0
+
   const defaultImages = computeVariantImages(product, null)
   const featuredImage = defaultImages[0]?.url || product.featuredImage?.url
+
   const merchantReturnPolicy: MerchantReturnPolicy = {
     '@type': 'MerchantReturnPolicy',
     'applicableCountry': 'NO',
@@ -87,14 +89,20 @@ export async function ProductJsonLd({ handle }: Props) {
     'url': 'https://utekos.no/frakt-og-retur'
   }
 
+  // Sikrer at brand name aldri er tomt
+  const brandName = (product.vendor && product.vendor.trim()) || 'Utekos®'
+
+  // Sikrer at description aldri er tom
+  const mainDescription =
+    (product.description && product.description.trim()) || product.title
+
   const commonData = {
     name: product.title,
     brand: {
       '@type': 'Brand',
-      'name': product.vendor || 'Utekos®'
+      'name': brandName
     },
-    // Fallback til tittel hvis beskrivelse mangler
-    description: product.description || product.title,
+    description: mainDescription,
     ...(featuredImage ? { image: featuredImage } : {})
   } as const
 
@@ -126,12 +134,10 @@ export async function ProductJsonLd({ handle }: Props) {
         const variantDescription =
           variant.title && variant.title !== 'Default Title' ?
             `${product.title} - ${variant.title}`
-          : product.description
+          : mainDescription
 
-        // Generer frakt basert på denne variantens pris
         const shippingDetails = getShippingDetails(variantPrice)
 
-        // Forbered priceSpecification hvis originalPrice finnes
         const priceSpec: UnitPriceSpecification | undefined =
           originalPrice ?
             {
@@ -152,7 +158,6 @@ export async function ProductJsonLd({ handle }: Props) {
           'itemCondition': 'https://schema.org/NewCondition',
           'hasMerchantReturnPolicy': merchantReturnPolicy,
           'shippingDetails': shippingDetails,
-          // Bruk spread (...) for å unngå undefined-typefeil
           ...(variantPrice ? { price: variantPrice } : {}),
           ...(priceSpec ? { priceSpecification: priceSpec } : {})
         }
@@ -161,7 +166,9 @@ export async function ProductJsonLd({ handle }: Props) {
           '@type': 'Product',
           ...(cleanVariantId ? { productID: cleanVariantId } : {}),
           'name': `${product.title} - ${variant.title}`,
-          'description': variantDescription || commonData.name,
+          // NÅ: Sender med både brand og description eksplisitt på varianter
+          'brand': commonData.brand,
+          'description': variantDescription,
           ...(variant.sku ? { sku: variant.sku } : {}),
           ...(variantImage ? { image: variantImage } : {}),
           'offers': offer
@@ -179,10 +186,8 @@ export async function ProductJsonLd({ handle }: Props) {
         String(firstVariant.compareAtPrice.amount)
       : null
 
-    // Generer frakt basert på hovedproduktets pris
     const shippingDetails = getShippingDetails(variantPrice)
 
-    // Forbered priceSpecification
     const priceSpec: UnitPriceSpecification | undefined =
       originalPrice ?
         {
@@ -203,7 +208,6 @@ export async function ProductJsonLd({ handle }: Props) {
       'itemCondition': 'https://schema.org/NewCondition',
       'hasMerchantReturnPolicy': merchantReturnPolicy,
       'shippingDetails': shippingDetails,
-      // Bruk spread (...) for å unngå undefined-typefeil
       ...(variantPrice ? { price: variantPrice } : {}),
       ...(priceSpec ? { priceSpecification: priceSpec } : {})
     }
@@ -211,7 +215,7 @@ export async function ProductJsonLd({ handle }: Props) {
     jsonLd = {
       '@context': 'https://schema.org',
       '@type': 'Product',
-      ...commonData,
+      ...commonData, // Inkluderer brand og description
       ...(cleanVariantId ? { productID: cleanVariantId } : {}),
       ...(firstVariant?.sku ? { sku: firstVariant.sku } : {}),
       'offers': offer
