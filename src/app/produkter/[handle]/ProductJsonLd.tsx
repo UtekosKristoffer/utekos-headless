@@ -166,7 +166,6 @@ export async function ProductJsonLd({ handle }: Props) {
           '@type': 'Product',
           ...(cleanVariantId ? { productID: cleanVariantId } : {}),
           'name': `${product.title} - ${variant.title}`,
-          // NÅ: Sender med både brand og description eksplisitt på varianter
           'brand': commonData.brand,
           'description': variantDescription,
           ...(variant.sku ? { sku: variant.sku } : {}),
