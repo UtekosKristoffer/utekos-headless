@@ -80,7 +80,7 @@ export function ImageColumn() {
                     src={image.src}
                     alt={image.alt}
                     fill
-                    quality={100}
+                    quality={95}
                     className='object-cover transition-transform duration-500 hover:scale-105'
                     sizes='(max-width: 768px) 100vw, 50vw'
                     fetchPriority='high'

@@ -64,8 +64,6 @@ function formatFbcCookie(
   fbclid: string,
   timestamp: number = Date.now()
 ): string {
-  // Format: fb.1.creationTime.fbclid
-  // Meta forventer tidsstempel i millisekunder
   return `fb.1.${timestamp}.${fbclid}`
 }
 /**
@@ -248,7 +246,6 @@ function handleMarketingParams(
     return response
   }
 
-  // Build cookie configurations
   const cookieConfigs = buildCookieConfigs(marketingParams, isSecureConnection)
 
   // Apply cookies to response

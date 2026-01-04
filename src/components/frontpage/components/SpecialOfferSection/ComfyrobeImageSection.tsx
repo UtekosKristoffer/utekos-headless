@@ -35,7 +35,7 @@ export function ComfyrobeImageSection() {
                   width={1080}
                   className='object-cover transition-transform duration-500 hover:scale-105'
                   sizes='(max-width: 1024px) 80vw, 40vw'
-                  quality={100}
+                  quality={95}
                   priority
                 />
               </AspectRatio>

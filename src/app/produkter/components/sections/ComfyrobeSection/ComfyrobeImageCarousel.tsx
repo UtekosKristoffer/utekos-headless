@@ -30,7 +30,7 @@ export function ComfyrobeImageCarousel() {
                 alt='Comfyrobe produktbilde.'
                 height={1080}
                 width={1080}
-                quality={100}
+                quality={95}
                 className='object-cover'
                 sizes='(max-width: 1024px) 100vw, 50vw'
                 priority
@@ -44,7 +44,7 @@ export function ComfyrobeImageCarousel() {
                 alt='Comfyrobe som tåler regnvær, vist i et norsk kystlandskap.'
                 height={1080}
                 width={1080}
-                quality={100}
+                quality={95}
                 className='object-cover'
                 sizes='(max-width: 1024px) 100vw, 50vw'
                 priority

@@ -17,7 +17,6 @@ import { getCachedRelatedProducts } from '@/api/lib/products/getCachedRelatedPro
 import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
 import { flattenVariants } from '@/lib/utils/flattenVariants'
 import { computeVariantImages } from '@/lib/utils/computeVariantImages'
-import { KlaviyoIdentify } from '@/components/analytics/Klaviyo/ActiveOnSite'
 type RouteParamsPromise = Promise<{ handle: string }>
 type SearchParamsPromise = Promise<{
   [key: string]: string | string[] | undefined

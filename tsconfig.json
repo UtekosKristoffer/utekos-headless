@@ -48,7 +48,7 @@
     "src/components/ProductCard/ProductCarousel.tsx",
     ".next/dev/types/**/*.ts",
     "src/components/cookie-consent",
-    "google-tag-manager/custom-pixel.js"
+    "docs/google-tag-manager/custom-pixel.js"
   ],
   "exclude": ["node_modules", ".github/**/*", "alpha/**/*", "docs/**/*"]
 }

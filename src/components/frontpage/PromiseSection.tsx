@@ -52,7 +52,7 @@ export function PromiseSection() {
                           alt={image.alt}
                           height={1080}
                           width={1080}
-                          quality={100}
+                          quality={95}
                           className='object-cover'
                           sizes='(min-width: 1024px) 50vw, 100vw'
                           priority={index === 0}
