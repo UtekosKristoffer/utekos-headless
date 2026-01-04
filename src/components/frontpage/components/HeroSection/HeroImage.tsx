@@ -1,32 +1,37 @@
 // Path: src/components/frontpage/components/HeroSection/HeroImage.tsx
-'use cache'
+'use client'
 import heroImage from '@public/linn-kate-kikkert.png'
 import Image from 'next/image'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-
-export async function HeroImage() {
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem
+} from '@/components/ui/carousel'
+export function HeroImage() {
   return (
-    <div
-      className='relative mx-auto mb-12 max-w-6xl animate-fade-in-up'
-      style={{ animationDelay: '0.4s' }}
-    >
-      <div className='absolute -inset-4 bg-[#E07A5F]/20 blur-2xl rounded-[2rem] -z-10 opacity-50' />
-
-      <div className='relative overflow-hidden rounded-xl border border-[#F4F1EA]/10 shadow-2xl shadow-black/50 bg-[#2C2420]'>
-        <AspectRatio ratio={3 / 2}>
-          <Image
-            src={heroImage}
-            alt='To kvinner i Utekos-plagg sitter på en terassen og nyter ost og vin.'
-            fill
-            quality={95}
-            sizes='(min-width: 1280px) 1280px, 100vw'
-            className='object-cover transition-transform duration-700 hover:scale-105'
-            priority
-          />
-          {/* Gradient overlay i bunn for å blende med SocialProof */}
-          <div className='absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#1F2421]/80 to-transparent' />
-        </AspectRatio>
-      </div>
+    <div className='group relative mx-auto mb-8 max-w-7xl md:max-w-6xl overflow-hidden rounded-2xl border border-neutral-800 shadow-2xl'>
+      <div className='pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/20 via-transparent to-transparent' />
+      <Carousel className='w-full'>
+        <CarouselContent>
+          <CarouselItem>
+            <AspectRatio
+              ratio={3 / 2}
+              className='relative transition-transform duration-300 will-change-transform motion-safe:group-hover:scale-[1.02]'
+            >
+              <Image
+                src={heroImage}
+                alt='To kvinner i Utekos-plagg sitter på en terassen og nyter ost og vin.'
+                fill
+                quality={100}
+                sizes='(min-width: 1280px) 1280px, 100vw'
+                className='object-cover'
+                priority
+              />
+            </AspectRatio>
+          </CarouselItem>
+        </CarouselContent>
+      </Carousel>
     </div>
   )
 }
