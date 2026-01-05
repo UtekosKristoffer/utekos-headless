@@ -14,20 +14,16 @@ import { cn } from '@/lib/utils/className'
 
 const images = [
   {
-    src: '/fiberdun/techdawn-front.png',
+    src: '/1080/techdown.png',
     alt: 'Utekos TechDown fullfigur, sett forfra'
   },
   {
-    src: '/fiberdun/techdawn-bak.png',
+    src: '/1080/utekos-techdown.png',
     alt: 'Utekos TechDown fullfigur, sett bakfra'
   },
   {
-    src: '/fiberdun/halv-forside.png',
+    src: '/1080/tech-halv-1080.png',
     alt: 'Nærbilde av det slitesterke og vannavvisende stoffet på jakken'
-  },
-  {
-    src: '/fiberdun/skra-forside.png',
-    alt: 'Utekos TechDown med hette, sett forfra'
   }
 ]
 export function ImageColumn() {
@@ -75,7 +71,7 @@ export function ImageColumn() {
           <CarouselContent>
             {images.map((image, index) => (
               <CarouselItem key={index}>
-                <AspectRatio ratio={2 / 3}>
+                <AspectRatio ratio={1 / 1}>
                   <Image
                     src={image.src}
                     alt={image.alt}
