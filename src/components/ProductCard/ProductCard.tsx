@@ -107,7 +107,7 @@ export function ProductCard({
           )}
 
           <AspectRatio
-            ratio={2 / 3}
+            ratio={1 / 1}
             className='w-full overflow-hidden rounded-t-lg'
           >
             <Image
