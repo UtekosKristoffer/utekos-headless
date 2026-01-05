@@ -36,7 +36,7 @@ export function ProductGallery({ title, images }: ProductGalleryProps) {
                 alt={image.altText || `Bilde av ${title}`}
                 fill
                 sizes='(min-width: 1024px) 50vw, 100vw'
-                quality={95}
+                quality={100}
                 className='object-cover md:object-contain rounded-2xl'
                 priority={index === 0}
               />
