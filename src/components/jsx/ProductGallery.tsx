@@ -22,14 +22,14 @@ export function ProductGallery({ title, images }: ProductGalleryProps) {
         opts={{
           loop: images.length > 1
         }}
-        className='relative w-full max-w-lg mx-auto rounded-2xl aspect-[2/3] overflow-hidden'
+        className='relative w-full max-w-lg mx-auto rounded-2xl aspect-[1/1] overflow-hidden'
         aria-label={`Produktbilder for ${title}`}
       >
         <CarouselContent>
           {images.map((image, index) => (
             <CarouselItem
               key={image.url}
-              className='relative rounded-2xl aspect-[2/3]'
+              className='relative rounded-2xl aspect-[1/1]'
             >
               <Image
                 src={image.url}

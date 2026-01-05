@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     template: '%s | Utekos®'
   },
   description:
-    'For kompromissløs komfort og overlegen allsidighet. Med tusenvis av fornøyde livsnytere og gjennomtestede løsninger kan du stole på at Utekos vil forlenge og oppgradere dine utendørsopplevelser. Juster, form og nyt. ',
+    'For kompromissløs komfort og overlegen allsidighet. Med tusenvis av fornøyde livsnytere og gjennomtestede løsninger kan du stole på at Utekos vil forlenge og oppgradere dine utendørsopplevelser. Juster, form og nyt.',
   alternates: {
     canonical: '/'
   },
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     siteName: 'Utekos',
     title: 'Utekos® - Skreddersy varmen.',
     description:
-      'Kompromissløs komfort. Overlegen allsidighet. Juster, form og nyt.',
+      'For kompromissløs komfort og overlegen allsidighet. Med tusenvis av fornøyde livsnytere og gjennomtestede løsninger kan du stole på at Utekos vil forlenge og oppgradere dine utendørsopplevelser. Juster, form og nyt.',
     images: {
       url: 'https://utekos.no/og-kate-linn-kikkert-master.png',
       width: 1200,
