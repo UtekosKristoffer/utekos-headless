@@ -1,6 +1,5 @@
 // Path: src/components/ProductCard/ProductCard.tsx
 'use client'
-import { track } from '@vercel/analytics'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
@@ -87,7 +86,7 @@ export function ProductCard({
   }, [lastError])
 
   return (
-    <Card className='product-card bg-sidebar-foreground group flex h-full flex-col'>
+    <Card className='product-card bg-sidebar-foreground group flex h-full flex-col gap-0 overflow-hidden p-0'>
       <CardContent className='relative p-0'>
         <Link
           href={productUrl}
@@ -110,10 +109,7 @@ export function ProductCard({
             </Badge>
           )}
 
-          <AspectRatio
-            ratio={1 / 1}
-            className='w-full overflow-hidden rounded-t-lg'
-          >
+          <AspectRatio ratio={1 / 1} className='w-full overflow-hidden'>
             <Image
               src={imageUrl}
               alt={altText}

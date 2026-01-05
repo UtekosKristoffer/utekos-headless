@@ -1,7 +1,6 @@
 import { CardHeader, CardTitle } from '@/components/ui/card'
 import type { ProductCardHeaderProps } from '@types'
 import Link from 'next/link'
-import type React from 'react'
 import { ProductVariantSelector } from './ProductVariantSelector'
 
 export function ProductCardHeader({
