@@ -1,12 +1,19 @@
 // Path: src/app/FrontPageJsonLd.tsx
+import type {
+  WebSite,
+  VideoObject,
+  WithContext,
+  SiteNavigationElement
+} from 'schema-dts'
+import { cacheLife } from 'next/cache'
 
-import type { WebSite, VideoObject, WithContext } from 'schema-dts'
-import { cacheLife } from 'next/cache' // <--- Import
 export const VIDEO_URL = 'https://utekos.no/videos/TensorPix2.mp4'
 export const VIDEO_THUMBNAIL = 'https://utekos.no/linn-kate-kikkert.png'
+
 export async function FrontPageJsonLd() {
   'use cache'
   cacheLife('days')
+
   const websiteSchema: WithContext<WebSite> = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -25,6 +32,25 @@ export async function FrontPageJsonLd() {
     }
   }
 
+  const navigationSchema: WithContext<SiteNavigationElement> = {
+    '@context': 'https://schema.org',
+    '@type': 'SiteNavigationElement',
+    'name': [
+      'Alle produkter',
+      'Utekos TechDown™',
+      'Utekos Dun™',
+      'Comfyrobe™',
+      'Kontakt oss'
+    ],
+    'url': [
+      'https://utekos.no/produkter',
+      'https://utekos.no/produkter/utekos-techdown',
+      'https://utekos.no/produkter/utekos-dun',
+      'https://utekos.no/produkter/comfyrobe',
+      'https://utekos.no/kontaktskjema'
+    ]
+  }
+
   const videoSchema: WithContext<VideoObject> = {
     '@context': 'https://schema.org',
     '@type': 'VideoObject',
@@ -32,9 +58,8 @@ export async function FrontPageJsonLd() {
     'description':
       'Er du lei av å la kulden ødelegge de gode øyeblikkene ute? Utekos er løsningen som holder deg varm og komfortabel.',
     'thumbnailUrl': [VIDEO_THUMBNAIL],
-    'uploadDate': '2025-11-01T00:00:00+01:00',
+    'uploadDate': '2026-01-04T00:00:00+01:00',
     'duration': 'PT0M30S',
-
     'contentUrl': VIDEO_URL,
     'publisher': {
       '@id': 'https://utekos.no/#organization'
@@ -47,6 +72,12 @@ export async function FrontPageJsonLd() {
         type='application/ld+json'
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(websiteSchema).replace(/</g, '\\u003c')
+        }}
+      />
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(navigationSchema).replace(/</g, '\\u003c')
         }}
       />
       <script
