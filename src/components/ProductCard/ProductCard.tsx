@@ -67,7 +67,7 @@ export function ProductCard({
       toast.warning('Denne varianten er dessverre utsolgt.')
       return
     }
-    
+
     cartActor.send({
       type: 'ADD_LINES',
       input: [{ variantId: selectedVariant.id, quantity: 1 }]
@@ -115,7 +115,7 @@ export function ProductCard({
               alt={altText}
               fill
               sizes='(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw'
-              className='product-card-image'
+              className='object-cover transition-transform duration-300 group-hover:scale-105'
               priority={isPriority}
             />
           </AspectRatio>
