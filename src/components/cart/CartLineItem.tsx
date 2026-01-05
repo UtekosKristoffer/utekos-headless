@@ -115,7 +115,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
       <Link href={productUrl} onClick={() => cartStore.send({ type: 'CLOSE' })}>
         <div className='w-24 flex-shrink-0'>
           <AspectRatio
-            ratio={2 / 3}
+            ratio={1 / 1}
             className='overflow-hidden rounded-lg border border-neutral-700 bg-background'
           >
             {imageUrl ?
