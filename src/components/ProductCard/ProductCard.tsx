@@ -89,7 +89,11 @@ export function ProductCard({
   return (
     <Card className='product-card bg-sidebar-foreground group flex h-full flex-col'>
       <CardContent className='relative p-0'>
-        <Link href={productUrl} aria-label={`Se produkt ${product.title}`}>
+        <Link
+          href={productUrl}
+          aria-label={`Se produkt ${product.title}`}
+          className='block w-full'
+        >
           <Badge
             variant='secondary'
             className='absolute left-4 top-4 z-10 border border-muted-foreground bg-[#020244] px-3 py-1 text-xs font-medium tracking-wide text-white'
