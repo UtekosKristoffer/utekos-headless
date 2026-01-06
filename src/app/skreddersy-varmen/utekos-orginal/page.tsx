@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description:
     'Skreddersy varmen med Utekos®. Oppdag genial funksjonalitet og kompromissløs komfort - for alle dine utendørsopplevelser. Juster, form og nyt.',
   openGraph: {
-    title: 'Skreddersy varmen | Utekos®',
+    title: 'Utekos® - Skreddersy varmen',
     description:
       'Skreddersy varmen med Utekos®. Oppdag genial funksjonalitet og kompromissløs komfort - for alle dine utendørsopplevelser. Juster, form og nyt.',
     url: 'https://utekos.no/skreddersy-varmen/utekos-orginal',
