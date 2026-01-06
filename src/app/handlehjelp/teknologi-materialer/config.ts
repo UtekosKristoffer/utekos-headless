@@ -1,16 +1,3 @@
-import {
-  Droplet,
-  Cloud,
-  Thermometer,
-  Shield,
-  Feather,
-  Layers,
-  Zap,
-  Maximize2,
-  Wind,
-  Sun
-} from 'lucide-react'
-
 export type Technology = {
   readonly icon: any
   readonly title: string

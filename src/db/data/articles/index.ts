@@ -34,7 +34,7 @@ export const mockArticles: Article[] = [
     excerpt:
       'Utekos er mer enn bare et klesmerke. Det er en filosofi, en livsstil, og en forpliktelse til å bringe komfort og glede til dine utendørsopplevelser.',
     imageUrl: '/magasinet/bat.png',
-    category: 'Om Utekos',
+    category: 'Om Utekos®',
     date: '17. oktober 2025'
   },
   {

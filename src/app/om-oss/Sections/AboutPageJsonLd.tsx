@@ -9,9 +9,9 @@ export async function AboutPageJsonLd() {
   const jsonLd: WithContext<AboutPage> = {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
-    'name': 'Om Utekos | Vår historie',
+    'name': 'Om Utekos® | Vår historie',
     'description':
-      'Historien om Utekos, vår filosofi om kompromissløs komfort, og menneskene bak merkevaren.',
+      'Historien om Utekos®, vår filosofi om kompromissløs komfort, og menneskene bak merkevaren.',
     'url': 'https://utekos.no/om-oss',
     'mainEntity': {
       '@id': 'https://utekos.no/#organization'
@@ -21,11 +21,11 @@ export async function AboutPageJsonLd() {
     },
     'primaryImageOfPage': {
       '@type': 'ImageObject',
-      'url': 'https://utekos.no/norsk-kveld.webp',
+      'url': 'https://utekos.no/',
       'width': '1200',
       'height': '630'
     },
-    'lastReviewed': '2025-10-14'
+    'lastReviewed': '2026-01-01'
   }
 
   return (

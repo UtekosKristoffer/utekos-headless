@@ -7,7 +7,6 @@ import { Quote } from 'lucide-react'
 export function GrunderSection() {
   return (
     <section className='relative overflow-hidden py-24 sm:py-32 bg-white'>
-      {/* Bakgrunns-glød (Endret fra blå til varm oransje/amber) */}
       <div className='absolute inset-0 -z-10 opacity-40'>
         <div
           className='absolute right-1/3 top-1/4 h-[500px] w-[500px] blur-3xl'
@@ -19,7 +18,6 @@ export function GrunderSection() {
 
       <div className='container mx-auto max-w-6xl px-6 lg:px-8'>
         <div className='grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16'>
-          {/* BILDE AV GRÜNDER */}
           <AnimatedBlock
             className='flex flex-col items-center will-animate-fade-in-scale lg:col-span-4 lg:items-start'
             delay='0s'
@@ -59,9 +57,7 @@ export function GrunderSection() {
             </AnimatedBlock>
           </AnimatedBlock>
 
-          {/* TEKSTINNHOLD */}
           <div className='flex flex-col justify-center lg:col-span-8'>
-            {/* Badge */}
             <AnimatedBlock
               className='mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-[#E07A5F]/30 bg-[#E07A5F]/5 px-4 py-1.5 will-animate-fade-in-up'
               delay='0.1s'
@@ -81,8 +77,6 @@ export function GrunderSection() {
                 Fra idé til virkelighet
               </h2>
             </AnimatedBlock>
-
-            {/* Sitatboks - Lys og magasin-aktig */}
             <AnimatedBlock
               className='relative mb-10 overflow-hidden rounded-sm border-l-4 border-[#E07A5F] bg-[#F4F1EA] p-8 will-animate-fade-in-up shadow-sm'
               delay='0.3s'

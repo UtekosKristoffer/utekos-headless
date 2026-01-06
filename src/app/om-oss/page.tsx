@@ -9,14 +9,14 @@ import { PhilosophiesSection } from './Sections/PhilosophiesSection'
 import { AboutUsHeroSection } from './Sections/AboutUsHeroSection'
 import { IntersportSection } from './Sections/IntersportSection'
 export const metadata: Metadata = {
-  title: 'Om Utekos | Vår historie og løfte til deg',
+  title: 'Om Utekos® | Vår historie og løfte til deg',
   description:
     'Lær om hvorfor Utekos ble skapt – en historie om å verdsette de små øyeblikkene og et løfte om kompromissløs komfort, designet i Norge for norske forhold.',
   alternates: {
     canonical: '/om-oss'
   },
   openGraph: {
-    title: 'Om Utekos | Norsk design, kompromissløs komfort',
+    title: 'Om Utekos® | Norsk design, kompromissløs komfort',
     description:
       'Fra en enkel idé om å forlenge kvelden, til en hel kolleksjon av varme komfortplagg. Bli kjent med oss.',
     url: '/om-oss',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/og-image-om-oss.jpg',
+        url: '/about-use-hero-gemini.png',
         width: 1200,
         height: 630,
         alt: 'Grunnleggerne av Utekos'

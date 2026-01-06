@@ -5,7 +5,6 @@ import Image from 'next/image'
 export function AboutUsHeroSection() {
   return (
     <section className='relative h-[70vh] flex items-center justify-center text-center text-[#F4F1EA] overflow-hidden bg-[#1F2421]'>
-      {/* Bakgrunnsbilde */}
       <div className='absolute inset-0 z-0'>
         <Image
           src={AboutUsOG}
@@ -25,10 +24,8 @@ export function AboutUsHeroSection() {
         </span>
 
         <h1 className='text-5xl md:text-7xl font-medium tracking-tight mb-8 leading-[1.1] drop-shadow-xl animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200'>
-          Utekos
+          Utekos®
         </h1>
-
-        {/* Brødtekst med økt lesbarhet og følelse */}
         <p className='text-lg md:text-2xl font-light leading-relaxed text-[#F4F1EA]/90 drop-shadow-md max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300'>
           Drevet av kalde kvelder og et løfte om å aldri la været stoppe de gode
           øyeblikkene.

@@ -28,10 +28,10 @@ export const mainMenu: MenuItem[] = [
     ]
   },
   {
-    title: 'Om Utekos',
+    title: 'Om Utekos®',
     url: '/om-oss',
     items: [
-      { title: 'Om Utekos', url: '/om-oss', items: [] },
+      { title: 'Om Utekos®', url: '/om-oss', items: [] },
       { title: 'Kontakt oss', url: '/kontaktskjema', items: [] }
     ]
   },
