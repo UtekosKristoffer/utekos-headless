@@ -138,7 +138,7 @@ export const technologyGroups: readonly TechnologyGroup[] = [
       },
       {
         icon: 'shirt', // Using generalized icon here, assuming 'shirt' or similar fits, or reuse layers
-        title: 'Nylon Taffeta innerfôr',
+        title: 'Taffeta innerfôr',
         iconColor: 'text-violet-500',
         content:
           'Valgt for minimal friksjon og maksimal komfort. Nylon Taffeta-fôret har en silkemyk overflate som glir uanstrengt over andre kleslag, noe som sikrer bevegelsesfrihet uten motstand. Materialet føles behagelig direkte mot huden og bidrar til produktets lave totalvekt.',
