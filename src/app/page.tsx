@@ -153,10 +153,6 @@ const HomePage = async () => {
         <Activity>
           <QualitySection />
         </Activity>
-
-        <Activity>
-          <FindInStoreSection />
-        </Activity>
       </section>
     </>
   )
