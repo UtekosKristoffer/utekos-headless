@@ -1,4 +1,4 @@
-import { Suspense, Activity } from 'react'
+import { Suspense } from 'react'
 import { TechDownSlider } from './TechDownSlider'
 import { SectionThreeInOne } from './SectionThreeInOne'
 import { SectionSocialProof } from './SectionSocialProof'

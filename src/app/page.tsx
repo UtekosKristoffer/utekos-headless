@@ -1,5 +1,4 @@
 // Path: src/app/page.tsx
-import { FindInStoreSection } from '@/components/frontpage/FindStoreSection'
 import { Suspense } from 'react'
 import { NewProductInStoreNotice } from '@/components/frontpage/NewProductInStoreNotice'
 import { ProductVideoSection } from '@/app/produkter/components/ProductVideoSection'
