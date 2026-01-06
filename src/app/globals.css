@@ -194,8 +194,6 @@
   }
 }
 
-/* === Grill Seasons Section Animations === */
-
 @keyframes grill-seasons-pulse-glow {
   0%,
   100% {
@@ -216,8 +214,6 @@
     transform: translateY(0);
   }
 }
-
-/* === Seasons Section Animations === */
 
 @keyframes seasons-pulse-glow {
   0%,
@@ -333,8 +329,6 @@
   animation: boat-benefits-fade-in-scale 0.4s ease-out both;
 }
 
-/* === Boat Use Cases Section Animations === */
-
 .boat-usecases-header {
   animation: fadeInUp 0.6s ease-out;
 }
@@ -368,8 +362,6 @@
   }
 }
 
-/* === Hytte Seasons Section Animations === */
-
 @keyframes hytte-seasons-pulse-glow {
   0%,
   100% {
@@ -379,8 +371,6 @@
     opacity: 0.25;
   }
 }
-
-/* === Bobil Seasons Section Animations === */
 
 @keyframes bobil-seasons-pulse-glow {
   0%,
@@ -474,8 +464,6 @@
   animation: bobil-seasons-tip-fade-in 0.3s ease-out both;
 }
 
-/* === Boat Seasons Section Animations === */
-
 @keyframes boat-seasons-pulse-glow {
   0%,
   100% {
@@ -531,8 +519,6 @@
   flex: 0 0 100%;
   min-width: 0;
 }
-
-/* === Boat Hero Section Animations === */
 
 @keyframes boat-hero-pulse-glow-1 {
   0%,
@@ -752,7 +738,7 @@
   opacity: 1;
   transform: translateX(0);
 }
-/* Base animation classes (without delay) */
+
 .animate-fade-in-down {
   animation: fadeInDown 0.6s ease-out both;
 }
@@ -819,11 +805,7 @@
 }
 
 @utility text-fluid-headline {
-  font-size: clamp(
-    1.875rem,
-    1.5rem + 1.5vw,
-    2.25rem
-  ); /* Fra text-3xl til text-4xl */
+  font-size: clamp(1.875rem, 1.5rem + 1.5vw, 2.25rem);
   line-height: 1.2;
 }
 
@@ -835,7 +817,6 @@
   content-visibility: auto;
 }
 
-/* --- System for ColorSelector --- */
 @utility color-swatch-container {
   @apply relative size-8 shrink-0 overflow-hidden rounded-full border border-white/10;
   background-color: var(--swatch-bg, transparent);
@@ -846,7 +827,6 @@
   background-color: var(--swatch-dot-color, transparent);
 }
 
-/* --- System for ProductCard --- */
 @utility product-card {
   @apply h-full w-full flex-col overflow-hidden transition-all duration-300 ease-in-out hover:shadow-xl border-neutral-700 hover:shadow-primary/5 hover:-translate-y-1;
 }
@@ -863,7 +843,6 @@
   @apply flex-1 font-medium text-primary-foreground transition-all duration-200 hover:bg-button/90 hover:shadow-lg hover:shadow-primary/25;
 }
 
-/* --- System for ProductVariantSelector --- */
 @utility variant-label {
   @apply mb-2 text-sm font-medium uppercase tracking-wide text-white;
 }
@@ -881,7 +860,6 @@
   @apply data-[selected=true]:border-border data-[selected=true]:bg-primary/10 data-[selected=true]:font-medium data-[selected=true]:text-white;
 }
 
-/* --- System for PhoneInput --- */
 @utility phone-input-root {
   @apply flex h-12 w-full items-center rounded-none border border-neutral-800 focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background;
 }

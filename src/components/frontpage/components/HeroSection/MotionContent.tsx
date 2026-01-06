@@ -21,7 +21,7 @@ export function MotionContent() {
         <span className='relative inline-block'>Utekos®</span>
 
         <span className='mt-2 block bg-gradient-to-r from-sky-800 via-cyan-700 to-sky-800 bg-clip-text text-transparent'>
-          Skreddersy varmen.
+          Skreddersy varmen
         </span>
       </h1>
 

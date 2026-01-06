@@ -1,4 +1,5 @@
 // Path: src/app/FrontPageJsonLd.tsx
+
 import type {
   WebSite,
   VideoObject,
