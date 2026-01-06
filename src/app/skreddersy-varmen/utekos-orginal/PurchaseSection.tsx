@@ -94,6 +94,13 @@ export function PurchaseSection() {
     state.matches('mutating')
   )
 
+  const scrollToSizeGuide = () => {
+    const element = document.getElementById('size-guide')
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   const handleAddToCart = async () => {
     const rawId = variantMap[color][size]
     const variantId = `${GID_PREFIX}${rawId}`
@@ -182,13 +189,15 @@ export function PurchaseSection() {
                 </div>
               </div>
 
-              {/* Størrelsevelger */}
               <div className='mb-10'>
                 <div className='flex justify-between items-center mb-3'>
                   <label className='block text-sm font-bold uppercase tracking-wider text-[#2C2420]/60'>
                     Velg Størrelse
                   </label>
-                  <button className='text-xs md:text-sm underline text-[#2C2420]/60 hover:text-[#E07A5F]'>
+                  <button
+                    onClick={scrollToSizeGuide}
+                    className='text-xs md:text-sm underline text-[#2C2420]/60 hover:text-[#E07A5F] transition-colors'
+                  >
                     Usikker på størrelsen?
                   </button>
                 </div>

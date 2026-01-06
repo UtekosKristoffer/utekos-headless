@@ -8,7 +8,7 @@ import {
 
 export function SizeGuideTable() {
   return (
-    <section className='w-full bg-[#1F2421] py-24 border-t border-[#F4F1EA]/5'>
+    <section className='w-full bg-[#1F2421] py-24 border-t border-[#F4F1EA]/5' id='size-guide'>
       <div className='max-w-5xl mx-auto px-6'>
         <div className='text-center mb-12'>
           <h3 className='font-serif text-3xl text-[#F4F1EA] mb-4'>
