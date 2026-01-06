@@ -15,7 +15,6 @@ export function ProductDetailsAccordion() {
         </h3>
 
         <Accordion type='single' collapsible className='w-full'>
-          {/* --- MATERIALER --- */}
           <AccordionItem value='materials'>
             <AccordionTrigger className='text-lg md:text-xl font-serif hover:no-underline hover:text-[#E07A5F]'>
               Materialer
@@ -63,8 +62,6 @@ export function ProductDetailsAccordion() {
               </ul>
             </AccordionContent>
           </AccordionItem>
-
-          {/* --- EGENSKAPER --- */}
           <AccordionItem value='features'>
             <AccordionTrigger className='text-lg md:text-xl font-serif hover:no-underline hover:text-[#E07A5F]'>
               Egenskaper
@@ -114,8 +111,6 @@ export function ProductDetailsAccordion() {
               </ul>
             </AccordionContent>
           </AccordionItem>
-
-          {/* --- BRUKSOMRÅDER --- */}
           <AccordionItem value='usage'>
             <AccordionTrigger className='text-lg md:text-xl font-serif hover:no-underline hover:text-[#E07A5F]'>
               Bruksområder

@@ -8,20 +8,20 @@ import { SizeGuideTable } from './SizeGuideTable'
 import { PurchaseSection } from './PurchaseSection'
 import { ProductDetailsAccordion } from './ProductDetailsAccordion'
 export const metadata: Metadata = {
-  title: 'Skreddersy varmen |',
+  title: 'Skreddersy varmen | Utekos®',
   description:
-    'Skreddersy varmen med Utekos. Oppdag genial funksjonalitet og kompromissløs komfort for dine utendørsopplevelser. Juster, form og nyt.',
+    'Skreddersy varmen med Utekos®. Oppdag genial funksjonalitet og kompromissløs komfort - for alle dine utendørsopplevelser. Juster, form og nyt.',
   openGraph: {
-    title: 'Skreddersy varmen |',
+    title: 'Skreddersy varmen | Utekos®',
     description:
-      'Skreddersy varmen med Utekos. Oppdag genial funksjonalitet og kompromissløs komfort for dine utendørsopplevelser. Juster, form og nyt.',
+      'Skreddersy varmen med Utekos®. Oppdag genial funksjonalitet og kompromissløs komfort - for alle dine utendørsopplevelser. Juster, form og nyt.',
     url: 'https://utekos.no/skreddersy-varmen/utekos-orginal',
     siteName: 'Utekos',
     locale: 'nb_NO',
     type: 'website',
     images: [
       {
-        url: 'https://utekos.no/linn-kate-kikkert.png',
+        url: 'https://utekos.no/1080/aspect-video-kokong-2.png',
         width: 1200,
         height: 630,
         alt: 'Personer som nyter utelivet med varme klær fra Utekos'
