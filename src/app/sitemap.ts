@@ -34,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${baseUrl}/skreddersy-varmen/utekos-orginal`,
       lastModified: lastModifiedISO,
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.9
     }
   ]
