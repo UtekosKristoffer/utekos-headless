@@ -148,11 +148,6 @@ function parseNorwegianDate(dateString: string): string {
   return new Date().toISOString()
 }
 
-/**
- * EKSPORTERT HOVEDFUNKSJON:
- * Henter og formaterer alle publiserte magasinartikler.
- * Dette er den ENESTE funksjonen sitemap.ts trenger å importere.
- */
 export async function getMagazineArticles(): Promise<
   { slug: string; updatedAt: string; imageUrl: string }[]
 > {

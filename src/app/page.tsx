@@ -1,4 +1,3 @@
-// Path: src/app/page.tsx
 import { Suspense } from 'react'
 import { NewProductInStoreNotice } from '@/components/frontpage/NewProductInStoreNotice'
 import { ProductVideoSection } from '@/app/produkter/components/ProductVideoSection'
@@ -17,39 +16,40 @@ import { NewProductLaunchSection } from '@/components/frontpage/components/NewPr
 import { SocialProofSection } from '@/components/frontpage/SocialProofSection'
 import { TestimonialConstellation } from '@/components/frontpage/TestimonialConstellation'
 import { ProductCarousel } from '@/components/ProductCard/ProductCarousel'
-import { connection } from 'next/server'
 import { ComfyrobeSection } from '../components/frontpage/components/SpecialOfferSection/ComfyrobeSection'
 import { Activity } from 'react'
 import { FeaturedProductsSkeleton } from '@/components/skeletons/FeaturedProductsSkeleton'
 import TechTeaserSection from '@/components/frontpage/components/TechTeaserSection'
-import type { Metadata } from 'next'
 import { FrontPageJsonLd } from './FrontPageJsonLd'
-export const metadata: Metadata = {
-  metadataBase: new URL('https://utekos.no'),
-  title: {
-    default: 'Utekos® - Skreddersy varmen.',
-    template: '%s | Utekos®'
-  },
-  description:
-    'For kompromissløs komfort og overlegen allsidighet. Med tusenvis av fornøyde livsnytere og gjennomtestede løsninger kan du stole på at Utekos vil forlenge og oppgradere dine utendørsopplevelser. Juster, form og nyt.',
-  alternates: {
-    canonical: '/'
-  },
-  openGraph: {
-    type: 'website',
-    locale: 'no_NO',
-    url: 'https://utekos.no',
-    siteName: 'Utekos',
-    title: 'Utekos® - Skreddersy varmen.',
-    description:
-      'For kompromissløs komfort og overlegen allsidighet. Med tusenvis av fornøyde livsnytere og gjennomtestede løsninger kan du stole på at Utekos vil forlenge og oppgradere dine utendørsopplevelser. Juster, form og nyt.',
-    images: {
-      url: 'https://utekos.no/og-kate-linn-kikkert-master.png',
-      width: 1200,
-      height: 630,
-      alt: 'Personer som koser seg utendørs med varme komfortplagg fra Utekos.'
-    }
-  }
+
+async function AsyncProductLaunchWrapper() {
+  'use cache'
+
+  const queryClient = new QueryClient()
+  await queryClient.prefetchQuery({
+    queryKey: ['products', 'featured'],
+    queryFn: getFeaturedProducts
+  })
+
+  const featuredProducts = queryClient.getQueryData([
+    'products',
+    'featured'
+  ]) as any[]
+
+  const techDownProduct = featuredProducts?.find(
+    product => product.handle === 'utekos-techdown'
+  )
+
+  const techDownId =
+    techDownProduct?.variants?.edges?.find(
+      (edge: any) => edge.node.availableForSale
+    )?.node?.id
+    || techDownProduct?.variants?.edges?.[0]?.node?.id
+    || ''
+
+  if (!techDownId) return null
+
+  return <NewProductLaunchSection variantId={techDownId} />
 }
 
 async function FeaturedProductsSection() {
@@ -72,39 +72,19 @@ async function FeaturedProductsSection() {
   )
 }
 
-const HomePage = async () => {
-  await connection()
-
-  const queryClient = new QueryClient()
-
-  await queryClient.prefetchQuery({
-    queryKey: ['products', 'featured'],
-    queryFn: getFeaturedProducts
-  })
-
-  const featuredProducts = queryClient.getQueryData([
-    'products',
-    'featured'
-  ]) as any[]
-  const techDownProduct = featuredProducts?.find(
-    product => product.handle === 'utekos-techdown'
-  )
-
-  const techDownId =
-    techDownProduct?.variants?.edges?.find(
-      (edge: any) => edge.node.availableForSale
-    )?.node?.id
-    || techDownProduct?.variants?.edges?.[0]?.node?.id
-    || ''
-
+// Merk: Fjernet 'await connection()' og async data-henting fra roten
+const HomePage = () => {
   return (
     <>
       <FrontPageJsonLd />
       <section>
+        {/* Hero er nå en del av Static Shell og vises umiddelbart */}
         <HeroSection />
 
         <Activity>
-          <NewProductLaunchSection variantId={techDownId} />
+          <Suspense fallback={null}>
+            <AsyncProductLaunchWrapper />
+          </Suspense>
         </Activity>
 
         <Activity>
@@ -138,6 +118,7 @@ const HomePage = async () => {
         </Activity>
 
         <Activity>
+          {/* NewStandardSection bruker allerede 'use cache' internt, så den er trygg */}
           <NewStandardSection />
         </Activity>
 
@@ -150,6 +131,7 @@ const HomePage = async () => {
         </Activity>
 
         <Activity>
+          {/* QualitySection bruker allerede 'use cache' internt */}
           <QualitySection />
         </Activity>
       </section>

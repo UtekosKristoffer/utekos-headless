@@ -10,7 +10,33 @@ import { mockArticles } from '@/db/data/articles'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { articleComponents } from './articleComponents'
+import { Activity } from 'react'
+import { TerrasseArticle } from '../(articles)/5-enkle-tips-for-a-forlenge-terrassesongen'
+import { BalpanneArticle } from '../(articles)/balpannen-din-guide-til-den-perfekte-hostkvelden'
+import { BeredskapEgenomsorgArticle } from '../(articles)/beredskap-egenomsorg'
+import { BobilHostruterArticle } from '../(articles)/bobil-i-hostferien'
+import { VintercampingArticle } from '../(articles)/den-ultimate-guiden-til-komfortabel-vintercamping'
+import { HvaErUtekosArticle } from '../(articles)/hva-er-utekos'
+import { HyttekosArticle } from '../(articles)/slik-skaper-du-den-perfekte-stemningen-pa-hytten'
+import { TechDownArticle } from '../(articles)/utekos-techdown-lansering'
+import { BatpussArticle } from '../(articles)/varm-og-klar-for-batpussen'
+import { VinterklargjoringArticle } from '../(articles)/vinterklargjoring-av-hytta'
+
+export const articleComponents = {
+  'beredskap-egenomsorg': BeredskapEgenomsorgArticle,
+  'hva-er-utekos': HvaErUtekosArticle,
+  'balpannen-din-guide-til-den-perfekte-hostkvelden': BalpanneArticle,
+  'vinterklargjoring-av-hytta-en-sjekkliste-for-livsnyteren':
+    VinterklargjoringArticle,
+  'utekos-techdown-lansering': TechDownArticle,
+  '5-enkle-tips-for-a-forlenge-terrassesongen': TerrasseArticle,
+  'slik-skaper-du-den-perfekte-stemningen-pa-hytta': HyttekosArticle,
+  'den-ultimate-guiden-til-komfortabel-vintercamping': VintercampingArticle,
+  'bobil-i-hostferien-de-vakreste-rutene-for-a-oppleve-hostfargene':
+    BobilHostruterArticle,
+  'varm-og-klar-for-batpussen': BatpussArticle
+}
+
 export async function generateMetadata({
   params
 }: {
