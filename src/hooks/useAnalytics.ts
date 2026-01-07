@@ -1,19 +1,26 @@
-import { useEffectEvent } from 'react' // 1. Ren import, som du sa
-import type { MetaUserData, MetaEventPayload, MetaEventType } from '@types' // 2. Henter riktig type
+import { useEffectEvent } from 'react'
+import type { MetaUserData, MetaEventPayload, MetaEventType } from '@types'
 import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 
+type TrackEventOptions = {
+  eventID?: string
+}
+
 export function useAnalytics() {
-  // 3. Setter typen på eventName til MetaEventType (ikke string)
   const trackEvent = useEffectEvent(
-    (eventName: MetaEventType, data: any = {}) => {
+    (
+      eventName: MetaEventType,
+      data: any = {},
+      options: TrackEventOptions = {}
+    ) => {
       if (typeof window === 'undefined' || !window.fbq) return
 
-      const eventID = generateEventID().replace('evt_', 'track_')
+      const eventID =
+        options.eventID || generateEventID().replace('evt_', 'track_')
+
       const sourceUrl = window.location.href
       const timestamp = Math.floor(Date.now() / 1000)
-
-      // Client-side tracking
       window.fbq('trackCustom', eventName, data, { eventID })
 
       const fbc = getCookie('_fbc')
@@ -30,7 +37,7 @@ export function useAnalytics() {
       }
 
       const capiPayload: MetaEventPayload = {
-        eventName: eventName, // Nå er dette lovlig (begge er MetaEventType)
+        eventName: eventName,
         eventId: eventID,
         eventSourceUrl: sourceUrl,
         eventTime: timestamp,

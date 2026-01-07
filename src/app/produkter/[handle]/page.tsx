@@ -12,11 +12,13 @@ import {
 import { notFound } from 'next/navigation'
 import { ProductPageController } from '@/app/produkter/[handle]/ProductPageController/ProductPageController'
 import type { Metadata, ResolvingMetadata } from 'next'
-import { connection } from 'next/server'
 import { getCachedRelatedProducts } from '@/api/lib/products/getCachedRelatedProducts'
 import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
 import { flattenVariants } from '@/lib/utils/flattenVariants'
 import { computeVariantImages } from '@/lib/utils/computeVariantImages'
+import { ProductPageSkeleton } from './ProductPageSkeleton/ProductPageSkeleton' // Antar denne importen
+import { cacheLife, cacheTag } from 'next/cache' // Viktig import
+
 type RouteParamsPromise = Promise<{ handle: string }>
 type SearchParamsPromise = Promise<{
   [key: string]: string | string[] | undefined
@@ -31,6 +33,7 @@ export async function generateMetadata(
   { params, searchParams }: GenerateMetadataProps,
   _parent: ResolvingMetadata
 ): Promise<Metadata> {
+  // (Din eksisterende kode her...)
   const { handle } = await params
   const resolvedSearchParams = await searchParams
   const variantId = resolvedSearchParams?.variant as string | undefined
@@ -80,26 +83,13 @@ export async function generateMetadata(
 
   const other: Record<string, string | number | (string | number)[]> = {}
 
-  if (retailerItemId) {
-    other['product:retailer_item_id'] = retailerItemId
-  }
-
-  if (itemGroupId) {
-    other['product:item_group_id'] = itemGroupId
-  }
-
-  if (priceAmount != null) {
-    other['product:price:amount'] = String(priceAmount)
-  }
-
-  if (currencyCode) {
-    other['product:price:currency'] = currencyCode
-  }
-
-  if (selectedVariant?.compareAtPrice?.amount) {
+  if (retailerItemId) other['product:retailer_item_id'] = retailerItemId
+  if (itemGroupId) other['product:item_group_id'] = itemGroupId
+  if (priceAmount != null) other['product:price:amount'] = String(priceAmount)
+  if (currencyCode) other['product:price:currency'] = currencyCode
+  if (selectedVariant?.compareAtPrice?.amount)
     other['product:variant:compare_at_price'] =
       selectedVariant.compareAtPrice.amount
-  }
 
   other['product:availability'] = isOutOfStock ? 'out of stock' : 'in stock'
   other['product:condition'] = 'new'
@@ -108,9 +98,7 @@ export async function generateMetadata(
     metadataBase: new URL('https://utekos.no'),
     title: seoTitle,
     description: seoDescription,
-    alternates: {
-      canonical: canonicalUrl
-    },
+    alternates: { canonical: canonicalUrl },
     openGraph: {
       type: 'website',
       locale: 'no_NO',
@@ -118,14 +106,7 @@ export async function generateMetadata(
       siteName: 'Utekos',
       title: seoTitle,
       description: seoDescription,
-      images: [
-        {
-          url: displayImage,
-          width: 1200,
-          height: 630,
-          alt: seoTitle
-        }
-      ]
+      images: [{ url: displayImage, width: 1200, height: 630, alt: seoTitle }]
     },
     twitter: {
       card: 'summary_large_image',
@@ -137,21 +118,19 @@ export async function generateMetadata(
   }
 }
 
-export default async function ProductPage({
-  params
-}: {
-  params: RouteParamsPromise
-}) {
-  await connection()
-  const { handle } = await params
+async function AsyncProductContent({ handle }: { handle: string }) {
+  'use cache'
+  cacheTag(`product-${handle}`, 'products') // Invalideres ved produktoppdatering
+  cacheLife('hours')
+
   const queryClient = new QueryClient()
   const product = await getProduct(handle)
 
   if (!product) {
     notFound()
   }
-  const relatedProducts = await getCachedRelatedProducts(handle)
 
+  const relatedProducts = await getCachedRelatedProducts(handle)
   await queryClient.prefetchQuery({
     ...productOptions(handle),
     queryFn: () => product
@@ -159,14 +138,30 @@ export default async function ProductPage({
   await queryClient.prefetchQuery(allProductsOptions())
 
   return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <ProductPageController
+        handle={handle}
+        initialRelatedProducts={relatedProducts}
+      />
+    </HydrationBoundary>
+  )
+}
+
+export default async function ProductPage({
+  params
+}: {
+  params: RouteParamsPromise
+}) {
+  const { handle } = await params
+
+  return (
     <>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <ProductPageController
-          handle={handle}
-          initialRelatedProducts={relatedProducts}
-        />
-      </HydrationBoundary>
+      <Suspense fallback={<ProductPageSkeleton />}>
+        <AsyncProductContent handle={handle} />
+      </Suspense>
+
       <FindInStoreSection />
+
       <Suspense fallback={<VideoSkeleton />}>
         <ProductVideoSection />
       </Suspense>

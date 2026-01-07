@@ -1,4 +1,3 @@
-// Path: src/app/produkter/[handle]/ProductPageView/ProductPageView.tsx
 'use client'
 import { useState } from 'react'
 import { ProductPageAccordion } from '@/app/produkter/[handle]/ProductPageAccordion/ProductPageAccordion'
@@ -22,7 +21,7 @@ import { productMetadata } from '@/db/config/product-metadata.config'
 import { getSortedOptions } from '@/lib/helpers/async/getSortedOptions'
 import type { ProductPageViewProps, ShopifyProduct } from '@types'
 import dynamic from 'next/dynamic'
-import { Activity } from 'react'
+import { Activity } from 'react' // Import Activity
 import ProductHeader from './ProductHeader'
 import ProductGalleryCard from './ProductGalleryCard'
 import PriceActivityPanel from './PriceActivityPanel'
@@ -30,15 +29,13 @@ import { ProductDescription } from './ProductDescription'
 import { TrustSignals } from './TrustSignals/TrustSignals'
 import { TechDownLaunchOffer } from './TechDownLaunchOffer'
 
+// ... imports av dynamic components ...
 const SmartRealTimeActivity = dynamic(
   () =>
     import(
       '@/app/produkter/components/SmartRealTimeActivity/SmartRealTimeActivity'
     ).then(mod => mod.SmartRealTimeActivity),
-  {
-    ssr: false,
-    loading: () => <div className='h-6' />
-  }
+  { ssr: false, loading: () => <div className='h-6' /> }
 )
 
 const ProductGallery = dynamic(
@@ -95,6 +92,7 @@ export default function ProductPageView({
 
   return (
     <section className='relative container mx-auto mt-10 p-4 md:p-8'>
+      {/* Bakgrunnseffekter - Statisk */}
       <div className='absolute inset-0 -z-10 opacity-20'>
         <div
           className='absolute left-1/4 top-0 h-[600px] w-[600px] blur-3xl'
@@ -109,55 +107,54 @@ export default function ProductPageView({
           }}
         />
       </div>
-      <Activity>
-        <AnimatedBlock
-          className='will-animate-fade-in-up'
-          delay='0s'
-          threshold={0.2}
-        >
-          <Breadcrumb className='mb-8'>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink href='/'>Hjem</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink href='/products'>Produkter</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>{productData.title}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </AnimatedBlock>
-      </Activity>
+
+      {/* Breadcrumb - Statisk: Fjernet Activity */}
+      <AnimatedBlock
+        className='will-animate-fade-in-up'
+        delay='0s'
+        threshold={0.2}
+      >
+        <Breadcrumb className='mb-8'>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href='/'>Hjem</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink href='/products'>Produkter</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{productData.title}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </AnimatedBlock>
 
       <ProductPageGrid>
         <GalleryColumn>
-          <Activity>
-            <ProductHeader
-              productHandle={productData.handle}
-              productTitle={title}
-              productSubtitle={productSubtitle ?? ''}
-            />
-          </Activity>
+          {/* Header - Statisk: Fjernet Activity */}
+          <ProductHeader
+            productHandle={productData.handle}
+            productTitle={title}
+            productSubtitle={productSubtitle ?? ''}
+          />
+
+          {/* Gallery - Interaktivt: Behold Activity for isolert hydrering */}
           <Activity>
             <ProductGalleryCard
               galleryContent={
                 <div className='relative overflow-hidden rounded-2xl isolate'>
-                  <Activity>
-                    <ProductGallery
-                      title={title}
-                      images={variantImages.map(image => ({
-                        id: image.id,
-                        url: image.url,
-                        altText: image.altText ?? '',
-                        width: image.width ?? 0,
-                        height: image.height ?? 0
-                      }))}
-                    />
-                  </Activity>
+                  <ProductGallery
+                    title={title}
+                    images={variantImages.map(image => ({
+                      id: image.id,
+                      url: image.url,
+                      altText: image.altText ?? '',
+                      width: image.width ?? 0,
+                      height: image.height ?? 0
+                    }))}
+                  />
                 </div>
               }
               enableStickyOnDesktop
@@ -166,92 +163,78 @@ export default function ProductPageView({
             />
           </Activity>
         </GalleryColumn>
-        <Activity>
-          <OptionsColumn>
-            <AnimatedBlock
-              className='will-animate-fade-in-right'
-              delay='0.1s'
-              threshold={0.2}
-            >
-              <Activity>
-                <div
-                  data-product-price={selectedVariant.price.amount ?? '0'}
-                  data-product-currency={selectedVariant.price.currencyCode}
-                >
-                  <PriceActivityPanel
-                    productHandle={productData.handle}
-                    priceAmount={selectedVariant.price.amount ?? '0'}
-                    currencyCode={selectedVariant.price.currencyCode}
-                    limitedStockCount={limitedStockCount ?? 0}
-                    activityNode={activityNode}
-                  />
-                </div>
-              </Activity>
-            </AnimatedBlock>
 
-            <AnimatedBlock
-              className='will-animate-fade-in-right'
-              delay='0.16s'
-              threshold={0.2}
+        {/* Options Column - Interaktiv kjerne */}
+        <OptionsColumn>
+          <AnimatedBlock className='will-animate-fade-in-right' delay='0.1s'>
+            {/* Prispanel - Reaktivt */}
+            <div
+              data-product-price={selectedVariant.price.amount ?? '0'}
+              data-product-currency={selectedVariant.price.currencyCode}
             >
-              <section aria-labelledby='product-options'>
-                <h2 id='product-options' className='sr-only'>
-                  Produktvalg
-                </h2>
-                <div className='mt-8 flex flex-col gap-8'>
-                  {sortedProductOptions.map(
-                    (productOption: ShopifyProduct['options'][number]) =>
-                      renderOptionComponent({
-                        option: productOption,
-                        allVariants,
-                        selectedVariant,
-                        onOptionChange,
-                        colorHexMap,
-                        productHandle: productData.handle
-                      })
-                  )}
-                </div>
+              <PriceActivityPanel
+                productHandle={productData.handle}
+                priceAmount={selectedVariant.price.amount ?? '0'}
+                currencyCode={selectedVariant.price.currencyCode}
+                limitedStockCount={limitedStockCount ?? 0}
+                activityNode={activityNode}
+              />
+            </div>
+          </AnimatedBlock>
+
+          <AnimatedBlock className='will-animate-fade-in-right' delay='0.16s'>
+            <section aria-labelledby='product-options'>
+              <h2 id='product-options' className='sr-only'>
+                Produktvalg
+              </h2>
+
+              {/* Selectors - Interaktivt */}
+              <div className='mt-8 flex flex-col gap-8'>
+                {sortedProductOptions.map(
+                  (productOption: ShopifyProduct['options'][number]) =>
+                    renderOptionComponent({
+                      option: productOption,
+                      allVariants,
+                      selectedVariant,
+                      onOptionChange,
+                      colorHexMap,
+                      productHandle: productData.handle
+                    })
+                )}
+              </div>
+
+              {/* Trust Signals - Statisk: Fjernet Activity */}
+              <TrustSignals />
+
+              {/* Launch Offer - Interaktivt */}
+              {productData.handle === 'utekos-techdown' && (
                 <Activity>
-                  <TrustSignals />
+                  <TechDownLaunchOffer
+                    onAdditionalLineChange={setAdditionalLine}
+                  />
                 </Activity>
+              )}
+              <div className='mt-8'>
                 <Activity>
-                  {productData.handle === 'utekos-techdown' && (
-                    <TechDownLaunchOffer
-                      onAdditionalLineChange={setAdditionalLine}
-                    />
-                  )}
+                  <AddToCart
+                    product={productData}
+                    selectedVariant={selectedVariant}
+                    {...(additionalLine && { additionalLine })}
+                  />
                 </Activity>
-                <div className='mt-8'>
-                  <Activity>
-                    <AddToCart
-                      product={productData}
-                      selectedVariant={selectedVariant}
-                      {...(additionalLine && { additionalLine })}
-                    />
-                  </Activity>
-                </div>
-                <Activity>
-                  <AnimatedBlock
-                    className='will-animate-fade-in-up'
-                    delay='0.22s'
-                    threshold={0.2}
-                  ></AnimatedBlock>
-                </Activity>
-                <ProductDescription descriptionHtml={productDescriptionHtml} />
-              </section>
-            </AnimatedBlock>
-          </OptionsColumn>
-        </Activity>
+              </div>
+
+              <ProductDescription descriptionHtml={productDescriptionHtml} />
+            </section>
+          </AnimatedBlock>
+        </OptionsColumn>
       </ProductPageGrid>
+
       <div className='mt-16 sm:mt-24'></div>
-      <Activity>
-        <ProductPageAccordion variantProfile={selectedVariantProfile} />
-      </Activity>
-      <Activity>
-        {relatedProducts && relatedProducts.length > 0 && (
-          <RelatedProducts products={relatedProducts} />
-        )}
-      </Activity>
+      <ProductPageAccordion variantProfile={selectedVariantProfile} />
+      {relatedProducts && relatedProducts.length > 0 && (
+        <RelatedProducts products={relatedProducts} />
+      )}
     </section>
   )
 }

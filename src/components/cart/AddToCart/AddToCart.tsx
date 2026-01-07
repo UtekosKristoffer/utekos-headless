@@ -95,13 +95,11 @@ export function AddToCart({
           cartActor
         )
 
-        // Steg 2: Påfør rabatt og oppdater cache manuelt
         if (additionalLine) {
           try {
             const cartId = contextCartId || (await getCartIdFromCookie())
             if (cartId) {
               const updatedCart = await applyDiscount(cartId, 'GRATISBUFF')
-              // VIKTIG: Oppdater React Query cachen med den nye handlekurven (rabattert)
               if (updatedCart) {
                 queryClient.setQueryData(['cart', cartId], updatedCart)
               }
@@ -117,6 +115,9 @@ export function AddToCart({
 
         const mainVariantId =
           cleanShopifyId(selectedVariant.id) || selectedVariant.id.toString()
+
+        // VIKTIG: Beholder din originale ID-logikk for AddToCart deduplisering
+        const eventID = `atc_${cleanShopifyId(selectedVariant.id)}_${Date.now()}`
 
         const contents: MetaContentItem[] = [
           {
@@ -141,17 +142,25 @@ export function AddToCart({
           totalQty += additionalLine.quantity
           contentName += ' + Utekos Buff™'
         }
-        const value = basePrice * values.quantity
-        trackEvent('AddToCart', {
-          content_name: contentName,
-          content_ids: contentIds,
-          content_type: 'product',
-          contents: contents,
-          value: value,
-          currency: currency,
-          num_items: totalQty
-        })
 
+        const value = basePrice * values.quantity
+
+        // Bruker hooken, men sender med den kritiske eventID-en
+        trackEvent(
+          'AddToCart',
+          {
+            content_name: contentName,
+            content_ids: contentIds,
+            content_type: 'product',
+            contents: contents,
+            value: value,
+            currency: currency,
+            num_items: totalQty
+          },
+          { eventID } // <-- Sender custom ID
+        )
+
+        // GA4 (Beholdes manuell)
         if (typeof window !== 'undefined' && window.dataLayer) {
           const ga4Items = [
             {

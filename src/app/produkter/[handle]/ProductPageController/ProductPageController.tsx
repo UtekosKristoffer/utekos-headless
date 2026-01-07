@@ -6,7 +6,6 @@ import ProductPageView from '@/app/produkter/[handle]/ProductPageView/ProductPag
 import { ProductPageSkeleton } from '../ProductPageSkeleton/ProductPageSkeleton'
 import type { ShopifyProduct } from '@types'
 import { MetaProductView } from '@/components/analytics/MetaPixel/MetaProductView'
-import { useEffect } from 'react'
 
 interface ProductPageControllerProps {
   handle: string
