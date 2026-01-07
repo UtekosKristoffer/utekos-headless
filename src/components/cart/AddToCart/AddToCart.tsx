@@ -1,4 +1,3 @@
-// Path: src/components/cart/AddToCart.tsx
 'use client'
 
 import { Form } from '@/components/ui/form'
@@ -16,20 +15,17 @@ import type {
   CartMutationEvent,
   ShopifyProduct,
   ShopifyProductVariant,
-  MetaUserData,
-  MetaEventPayload,
   MetaContentItem
 } from '@types'
-import { Activity, useContext, useEffect, useTransition } from 'react'
+import { useContext, useEffect, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import type { ActorRef, StateFrom } from 'xstate'
 import { ModalSubmitButton } from '../AddToCartButton/ModalSubmitButton'
 import { QuantitySelector } from '../QuantitySelector'
-import { sendJSON } from '@/components/jsx/CheckoutButton/sendJSON'
-import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
-import { useQueryClient } from '@tanstack/react-query' // Ny import
+import { useQueryClient } from '@tanstack/react-query'
+import { useAnalytics } from '@/hooks/useAnalytics'
 
 export function AddToCart({
   product,
@@ -42,7 +38,8 @@ export function AddToCart({
 }) {
   const [isTransitioning, startTransition] = useTransition()
   const cartActor = CartMutationContext.useActorRef()
-  const queryClient = useQueryClient() // Ny hook
+  const queryClient = useQueryClient()
+  const { trackEvent } = useAnalytics()
 
   const isPendingFromMachine = CartMutationContext.useSelector(state =>
     state.matches('mutating')
@@ -117,7 +114,7 @@ export function AddToCart({
         const basePrice = Number.parseFloat(selectedVariant.price.amount)
         const currency = selectedVariant.price.currencyCode
         let totalQty = values.quantity
-        const eventID = `atc_${cleanShopifyId(selectedVariant.id)}_${Date.now()}`
+
         const mainVariantId =
           cleanShopifyId(selectedVariant.id) || selectedVariant.id.toString()
 
@@ -144,57 +141,17 @@ export function AddToCart({
           totalQty += additionalLine.quantity
           contentName += ' + Utekos Buff™'
         }
-
         const value = basePrice * values.quantity
+        trackEvent('AddToCart', {
+          content_name: contentName,
+          content_ids: contentIds,
+          content_type: 'product',
+          contents: contents,
+          value: value,
+          currency: currency,
+          num_items: totalQty
+        })
 
-        if (typeof window !== 'undefined' && window.fbq) {
-          window.fbq(
-            'track',
-            'AddToCart',
-            {
-              content_name: contentName,
-              content_ids: contentIds,
-              content_type: 'product',
-              contents: contents,
-              value: value,
-              currency: currency,
-              num_items: totalQty
-            },
-            { eventID }
-          )
-        }
-
-        const ua =
-          typeof navigator !== 'undefined' ? navigator.userAgent : undefined
-        const userData: MetaUserData = {
-          client_user_agent: ua,
-          fbp: getCookie('_fbp') || undefined,
-          fbc: getCookie('_fbc') || undefined,
-          external_id: getCookie('ute_ext_id') || undefined,
-          email_hash: getCookie('ute_user_hash') || undefined
-        }
-
-        const capiPayload: MetaEventPayload = {
-          eventName: 'AddToCart',
-          eventId: eventID,
-          eventSourceUrl:
-            typeof window !== 'undefined' ? window.location.href : '',
-          eventTime: Math.floor(Date.now() / 1000),
-          actionSource: 'website',
-          userData,
-          eventData: {
-            value,
-            currency,
-            content_name: contentName,
-            contents,
-            content_type: 'product',
-            content_ids: contentIds,
-            num_items: totalQty
-          }
-        }
-        sendJSON('/api/meta-events', capiPayload)
-
-        // GA4
         if (typeof window !== 'undefined' && window.dataLayer) {
           const ga4Items = [
             {
@@ -248,7 +205,6 @@ export function AddToCart({
 
   return (
     <Form {...form}>
-      {/* Fjernet onClick herfra for å unngå feil sporing */}
       <form
         onSubmit={form.handleSubmit(handleAddToCart)}
         className='flex flex-col gap-4'
@@ -257,13 +213,11 @@ export function AddToCart({
           <label className='mb-2 block text-sm font-medium'>Antall</label>
           <QuantitySelector />
         </div>
-        <Activity>
-          <ModalSubmitButton
-            isPending={isPending}
-            isDisabled={!selectedVariant || !isAvailable || isPending}
-            availableForSale={isAvailable}
-          />
-        </Activity>
+        <ModalSubmitButton
+          isPending={isPending}
+          isDisabled={!selectedVariant || !isAvailable || isPending}
+          availableForSale={isAvailable}
+        />
       </form>
     </Form>
   )

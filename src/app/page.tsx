@@ -21,9 +21,11 @@ import { Activity } from 'react'
 import { FeaturedProductsSkeleton } from '@/components/skeletons/FeaturedProductsSkeleton'
 import TechTeaserSection from '@/components/frontpage/components/TechTeaserSection'
 import { FrontPageJsonLd } from './FrontPageJsonLd'
+import { cacheTag } from 'next/cache'
 
 async function AsyncProductLaunchWrapper() {
   'use cache'
+  cacheTag('products')
 
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
@@ -53,6 +55,9 @@ async function AsyncProductLaunchWrapper() {
 }
 
 async function FeaturedProductsSection() {
+  'use cache'
+  cacheTag('products')
+
   const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({
@@ -85,17 +90,10 @@ const HomePage = () => {
           </Suspense>
         </Activity>
 
-        <Activity>
-          <TechTeaserSection />
-        </Activity>
-
-        <Activity>
-          <NewProductInStoreNotice />
-        </Activity>
-
-        <Activity>
-          <ComfyrobeSection />
-        </Activity>
+        {/* Ingen Activity rundt disse statiske seksjonene for bedre ytelse */}
+        <TechTeaserSection />
+        <NewProductInStoreNotice />
+        <ComfyrobeSection />
 
         <Activity>
           <TestimonialConstellation />
@@ -115,21 +113,10 @@ const HomePage = () => {
           <SocialProofSection />
         </Activity>
 
-        <Activity>
-          <NewStandardSection />
-        </Activity>
-
-        <Activity>
-          <CachedPromiseSection />
-        </Activity>
-
-        <Activity>
-          <MomentsSection />
-        </Activity>
-
-        <Activity>
-          <QualitySection />
-        </Activity>
+        <NewStandardSection />
+        <CachedPromiseSection />
+        <MomentsSection />
+        <QualitySection />
       </section>
     </>
   )
