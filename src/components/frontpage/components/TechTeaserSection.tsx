@@ -1,5 +1,3 @@
-'use client'
-
 import Link from 'next/link'
 import { ArrowRight, Layers, Shield, Thermometer, Zap } from 'lucide-react'
 import type { Route } from 'next'
@@ -8,15 +6,11 @@ export default function TechTeaserSection() {
   return (
     <section className='mt-12 w-full py-12'>
       <div className='container mx-auto max-w-7xl px-4'>
-        {/* Selve boksen - Nå varm brun (#2C2420) for kontrast mot sort bakgrunn */}
         <div className='relative overflow-hidden rounded-sm border border-[#F4F1EA]/10 bg-[#2C2420] p-8 md:p-12 lg:p-16 shadow-2xl'>
-          {/* Bakgrunnseffekt (Varm glød) */}
           <div className='pointer-events-none absolute -left-[10%] top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-[#E07A5F]/10 blur-[100px]' />
 
           <div className='relative grid items-center gap-12 lg:grid-cols-2 lg:gap-16'>
-            {/* --- VENSTRE KOLONNE: TEKST --- */}
             <div className='space-y-8'>
-              {/* Badge - Ember Orange */}
               <div className='inline-flex items-center gap-2 rounded-full border border-[#E07A5F]/30 bg-[#E07A5F]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#E07A5F]'>
                 <Zap className='h-3 w-3' />
                 Innovasjon og materialer
@@ -84,13 +78,10 @@ export default function TechTeaserSection() {
               </div>
             </div>
 
-            {/* --- HØYRE KOLONNE: ABSTRAKT VISUALISERING --- */}
             <div className='relative mx-auto mt-0 h-[320px] w-full max-w-md lg:mt-0 lg:aspect-square lg:h-auto'>
               <div className='relative h-full w-full'>
-                {/* Bakre kort (Dekor) */}
                 <div className='absolute right-[5%] top-[5%] h-3/4 w-3/4 rounded-sm border border-[#F4F1EA]/5 bg-[#1F2421]/60 opacity-60 backdrop-blur-sm transition-transform duration-500 hover:translate-x-2 hover:-translate-y-2 lg:right-0 lg:top-0' />
 
-                {/* Midtre kort (Teknisk grid) */}
                 <div className='absolute bottom-[15%] right-[15%] top-[15%] w-3/4 rounded-sm border border-[#F4F1EA]/10 bg-[#1F2421]/90 p-6 backdrop-blur-md transition-transform duration-500 hover:translate-x-2 hover:-translate-y-2 lg:bottom-8 lg:right-8 lg:top-8'>
                   <div className='grid h-full grid-cols-2 gap-4 opacity-20'>
                     {[...Array(4)].map((_, i) => (
@@ -99,7 +90,6 @@ export default function TechTeaserSection() {
                   </div>
                 </div>
 
-                {/* Fremre kort (Hovedfokus) */}
                 <div className='absolute bottom-0 left-0 h-3/4 w-3/4 overflow-hidden rounded-sm border border-[#E07A5F]/30 bg-gradient-to-br from-[#1F2421] to-[#2C2420] shadow-2xl shadow-[#E07A5F]/10 transition-transform duration-500 hover:-translate-y-2'>
                   <div className='absolute inset-0 bg-[url("https://www.transparenttextures.com/patterns/carbon-fibre.png")] opacity-5 mix-blend-overlay' />
 
@@ -127,7 +117,6 @@ export default function TechTeaserSection() {
                   </div>
                 </div>
 
-                {/* Flytende sirkel (Accent) */}
                 <div className='absolute bottom-0 right-0 flex h-20 w-20 items-center justify-center rounded-full border border-[#F4F1EA]/10 bg-[#1F2421] shadow-xl lg:-bottom-6 lg:-right-6 lg:h-24 lg:w-24'>
                   <div className='text-center'>
                     <span className='block text-lg font-bold text-[#E07A5F] lg:text-xl'>

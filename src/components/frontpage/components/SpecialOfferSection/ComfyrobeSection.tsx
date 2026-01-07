@@ -1,8 +1,8 @@
-// Path: src/components/ComfyrobeSection/ComfyrobeSection.tsx
 import { ComfyrobeImageSection } from './ComfyrobeImageSection'
 import { ComfyrobeContentColumn } from './ComfyrobeContentColumn'
 import { Activity } from 'react'
 import { getProduct } from '@/api/lib/products/getProduct'
+import { cacheLife } from 'next/cache' // Husk import
 function getFirstAvailableVariantId(product: any): string {
   if (!product || !product.variants || !product.variants.edges) return ''
 
@@ -14,9 +14,14 @@ function getFirstAvailableVariantId(product: any): string {
   }
   return product.variants.edges[0]?.node?.id || ''
 }
+
 export async function ComfyrobeSection() {
+  'use cache'
+  cacheLife('days')
+
   const comfyrobeProduct = await getProduct('comfyrobe')
   const comfyrobeId = getFirstAvailableVariantId(comfyrobeProduct)
+
   return (
     <section className='mx-auto max-w-[95%] py-20 sm:py-24 md:max-w-7xl'>
       <div className='container mx-auto'>

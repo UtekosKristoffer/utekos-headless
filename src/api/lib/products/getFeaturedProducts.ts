@@ -1,11 +1,13 @@
+'use cache' // <--- MÅ VÆRE PÅ TOPPEN (File Level Directive)
+import 'server-only'
+
 import { handles } from '@/db/data/products/product-info'
 import { getProducts } from './getProducts'
-import { cacheLife, cacheTag } from 'next/cache' // 1. Importer disse
+import { cacheLife, cacheTag } from 'next/cache'
 
 export async function getFeaturedProducts() {
-  'use cache' // 2. Aktiver caching av resultatet
-  cacheLife('hours') 
-  cacheTag('products') // 4. Tag for å kunne revalidere manuelt ved behov
+  cacheLife('hours')
+  cacheTag('products')
 
   const response = await getProducts()
 

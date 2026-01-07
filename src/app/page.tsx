@@ -78,7 +78,6 @@ const HomePage = () => {
     <>
       <FrontPageJsonLd />
       <section>
-        {/* Hero er nå en del av Static Shell og vises umiddelbart */}
         <HeroSection />
 
         <Activity>
@@ -118,7 +117,6 @@ const HomePage = () => {
         </Activity>
 
         <Activity>
-          {/* NewStandardSection bruker allerede 'use cache' internt, så den er trygg */}
           <NewStandardSection />
         </Activity>
 
