@@ -56,6 +56,8 @@ export function CookieConsentBanner() {
           ad_personalization: settings.marketing ? 'granted' : 'denied'
         }
       })
+      // Sender signal til NewsletterPopup om at valget er tatt
+      window.dispatchEvent(new Event('cookie_consent_saved'))
     }
 
     setIsVisible(false)
@@ -64,13 +66,10 @@ export function CookieConsentBanner() {
   if (!isVisible) return null
 
   return (
-    // 1. BACKDROP: Dekker skjermen usynlig (z-40) for å blokkere klikk bak, men uten å mørklegge alt.
-    // Hvis du vil ha den mørk, legg til "bg-black/20" i klassen under.
     <div
       className='fixed inset-0 z-[99] h-screen w-screen cursor-default'
       aria-hidden='true'
     >
-      {/* 2. SELVE BANNERET: Ligger alltid nederst (bottom-0) */}
       <div className='absolute bottom-0 left-0 right-0 z-[100] border-t border-neutral-800 bg-neutral-950/95 p-4 backdrop-blur-md shadow-2xl animate-in slide-in-from-bottom-10 duration-700 md:p-6'>
         <div className='mx-auto max-w-7xl'>
           {!showDetails ?
@@ -95,24 +94,27 @@ export function CookieConsentBanner() {
                 </p>
               </div>
 
-              <div className='flex flex-col gap-3 sm:flex-row sm:min-w-fit'>
+              {/* Justert knapperad for symmetri */}
+              <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:min-w-fit'>
                 <Button
                   variant='outline'
                   onClick={() => setShowDetails(true)}
-                  className='border-neutral-700 text-white bg-neutral-800 hover:text-white/60'
+                  className='h-11 w-full sm:w-auto border-neutral-700 bg-neutral-800 text-white hover:text-white/60'
                 >
                   Tilpass
                 </Button>
                 <Button
                   variant='outline'
                   onClick={handleDeclineAll}
-                  className='border-neutral-700 text-white bg-neutral-800 hover:text-white/60'
+                  className='h-11 w-full sm:w-auto border-neutral-700 bg-neutral-800 text-white hover:text-white/60'
                 >
                   Avvis
                 </Button>
                 <Button
                   onClick={handleAcceptAll}
-                  className='w-full bg-emerald-600 text-white hover:bg-emerald-700 font-bold py-6'
+                  // Endret fra py-6 til h-11 for å matche de andre knappene perfekt i høyden
+                  // Endret w-full til w-full sm:w-auto for å unngå at den sprenger bredden på desktop
+                  className='h-11 w-full sm:w-auto bg-emerald-600 px-8 font-bold text-white hover:bg-emerald-700'
                 >
                   Godta alle
                 </Button>
