@@ -35,7 +35,6 @@ export function NewsletterPopup() {
   useEffect(() => {
     setIsMounted(true)
 
-    // Ikke vis i kasse/handlekurv
     if (pathname?.includes('/checkouts') || pathname?.includes('/handlekurv'))
       return
 
@@ -147,8 +146,8 @@ export function NewsletterPopup() {
                 Bli en del av varmen
               </DialogTitle>
               <DialogDescription className='text-neutral-400 text-base'>
-                Få eksklusive rabatter, turtips og få vite først om nyheter rett
-                i innboksen.
+                Motta eksklusive rabatter, livsnyter-tips og de ferskeste
+                nyhetene rett i innboksen.
               </DialogDescription>
             </DialogHeader>
 
@@ -169,7 +168,7 @@ export function NewsletterPopup() {
                 Meld meg på
               </Button>
               <p className='text-xs text-neutral-600 text-center mt-4'>
-                Ingen spam. Meld deg av når som helst.
+                Meld deg av når som helst.
               </p>
             </form>
           </div>
