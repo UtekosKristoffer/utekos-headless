@@ -1,15 +1,13 @@
-// Path: src/components/ComfyrobeSection/ComfyrobeContentColumn.tsx
 'use client'
+
 import { ArrowRight, Shield } from 'lucide-react'
 import Link from 'next/link'
 import { buttonVariants } from '@/components/ui/button'
 import { BenefitCard } from './BenefitCard'
 import { useInView } from '@/hooks/useInView'
 import { cn } from '@/lib/utils/className'
-import type { MetaUserData, MetaEventPayload } from '@types'
-import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
-import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
+import { useAnalytics } from '@/hooks/useAnalytics'
 
 const benefits = [
   {
@@ -42,53 +40,19 @@ export function ComfyrobeContentColumn({
   const [pRef, pInView] = useInView({ threshold: 1 })
   const [ctaRef, ctaInView] = useInView({ threshold: 1 })
 
+  const { trackEvent } = useAnalytics()
+
   const handleCtaClick = () => {
     const contentId = cleanShopifyId(variantId) || variantId
-    const eventID = generateEventID().replace('evt_', 'click_')
-    const sourceUrl = window.location.href
-    const timestamp = Math.floor(Date.now() / 1000)
 
-    const eventData = {
+    // Kaller den stabile event-funksjonen (useEffectEvent under panseret)
+    trackEvent('HeroInteract', {
       content_name: 'Comfyrobe Hero Button',
       destination_url: '/produkter/comfyrobe',
       location: 'Frontpage Hero Section',
       content_ids: [contentId],
-      content_type: 'product' as const
-    }
-
-    if (typeof window !== 'undefined' && window.fbq) {
-      window.fbq('trackCustom', 'HeroInteract', eventData, { eventID })
-    }
-
-    const fbc = getCookie('_fbc')
-    const fbp = getCookie('_fbp')
-    const externalId = getCookie('ute_ext_id')
-    const emailHash = getCookie('ute_user_hash')
-
-    const userData: MetaUserData = {
-      external_id: externalId || undefined,
-      fbc: fbc || undefined,
-      fbp: fbp || undefined,
-      email_hash: emailHash || undefined,
-      client_user_agent: navigator.userAgent
-    }
-
-    const capiPayload: MetaEventPayload = {
-      eventName: 'HeroInteract',
-      eventId: eventID,
-      eventSourceUrl: sourceUrl,
-      eventTime: timestamp,
-      actionSource: 'website',
-      userData,
-      eventData: eventData
-    }
-
-    fetch('/api/meta-events', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(capiPayload),
-      keepalive: true
-    }).catch(console.error)
+      content_type: 'product'
+    })
   }
 
   return (

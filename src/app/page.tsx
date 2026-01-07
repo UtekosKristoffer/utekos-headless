@@ -72,7 +72,6 @@ async function FeaturedProductsSection() {
   )
 }
 
-// Merk: Fjernet 'await connection()' og async data-henting fra roten
 const HomePage = () => {
   return (
     <>
@@ -129,7 +128,6 @@ const HomePage = () => {
         </Activity>
 
         <Activity>
-          {/* QualitySection bruker allerede 'use cache' internt */}
           <QualitySection />
         </Activity>
       </section>
