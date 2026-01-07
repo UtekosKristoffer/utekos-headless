@@ -25,7 +25,6 @@ export function CookieConsentBanner() {
     const savedConsent = localStorage.getItem('utekos_cookie_consent')
 
     if (!savedConsent) {
-      // Vent 2 sekunder før banneret vises (behageligere for brukeren)
       const timer = setTimeout(() => setIsVisible(true), 2000)
       return () => clearTimeout(timer)
     }

@@ -20,98 +20,96 @@ export function NewsletterPopup() {
   const [isOpen, setIsOpen] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
   const pathname = usePathname()
-
   const soundPlayedRef = useRef(false)
+
+  // Lydeffekt (som før)
   useEffect(() => {
     if (isOpen && !soundPlayedRef.current) {
-      // Stien til lydfilen din i public-mappen
       const audio = new Audio('/sounds/popup-slam.mp3')
-      audio.volume = 0.4 // Ikke for høyt! Juster mellom 0.1 og 1.0
-
-      // Vi må bruke try/catch fordi nettlesere ofte blokkerer autoplay
-      audio
-        .play()
-        .then(() => {
-          soundPlayedRef.current = true
-        })
-        .catch(error => {
-          // Dette er normalt hvis brukeren ikke har samhandlet med siden ennå.
-          console.log(
-            'Autoplay av lyd ble blokkert av nettleseren (normalt):',
-            error
-          )
-        })
+      audio.volume = 0.4
+      audio.play().catch(() => {}) // Ignorerer feil hvis autoplay blokkeres
+      soundPlayedRef.current = true
     }
   }, [isOpen])
-  // ------------------------
 
   useEffect(() => {
     setIsMounted(true)
 
-    if (pathname?.includes('/checkouts') || pathname?.includes('/handlekurv')) {
+    // Ikke vis i kasse/handlekurv
+    if (pathname?.includes('/checkouts') || pathname?.includes('/handlekurv'))
       return
-    }
 
     const hasSeenPopup = localStorage.getItem('utekos_newsletter_v2')
+    if (hasSeenPopup) return // Har allerede sett den, stopp her.
 
-    if (!hasSeenPopup) {
+    // Funksjon for å starte nedtellingen
+    const startCountdown = () => {
       const timer = setTimeout(() => {
         setIsOpen(true)
-      }, 8000)
-
+      }, 8000) // 8 sekunder
       return () => clearTimeout(timer)
+    }
+
+    // Sjekk om brukeren allerede har tatt stilling til cookies
+    const hasConsent = localStorage.getItem('utekos_cookie_consent')
+
+    if (hasConsent) {
+      return startCountdown()
+    } else {
+      const handleConsentSaved = () => {
+        startCountdown()
+        window.removeEventListener('cookie_consent_saved', handleConsentSaved)
+      }
+
+      window.addEventListener('cookie_consent_saved', handleConsentSaved)
+
+      return () =>
+        window.removeEventListener('cookie_consent_saved', handleConsentSaved)
     }
   }, [pathname])
 
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open)
-    if (!open) {
-      localStorage.setItem('utekos_newsletter_v2', 'true')
-    }
+    if (!open) localStorage.setItem('utekos_newsletter_v2', 'true')
   }
 
   const handleSubmit = async (formData: FormData) => {
     setIsOpen(false)
     localStorage.setItem('utekos_newsletter_v2', 'true')
-
     const result = await subscribeToNewsletter(formData)
-
-    if (result.success) {
-      toast.success(result.message)
-    } else {
-      toast.error(result.message)
-    }
+    if (result.success) toast.success(result.message)
+    else toast.error(result.message)
   }
 
   if (!isMounted) return null
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      {/* HER ER MAGIEN FOR ANIMASJONEN:
-        Vi overstyrer Shadcn sine standard sentrerings-klasser med !important (!).
-        Vi plasserer den 'fixed bottom-4 right-4'.
-        Vi bruker 'slide-in-from-right' og 'slide-in-from-bottom' for "slam"-effekten.
-      */}
       <DialogContent
         className={cn(
           // Base styles
           'fixed z-50 grid w-full gap-0 p-0 border-neutral-800 bg-neutral-950 text-white shadow-2xl overflow-hidden',
-          // Resetting av Shadcn sentrering (viktig!)
-          '!left-auto !top-auto !translate-x-0 !translate-y-0',
-          // Posisjonering i hjørnet
-          'bottom-0 right-0 sm:bottom-6 sm:right-6 sm:rounded-2xl sm:max-w-[800px]',
-          // Animasjoner
-          'duration-500 ease-out', // Litt lengre tid og 'ease-out' for tyngde
+
+          // --- SENTRERING (Standard Modal) ---np run sync 'l'
+          // Shadcn bruker vanligvis left-1/2 top-1/2 translate osv. som standard i sin base-komponent.
+          // Hvis din DialogContent-base mangler dette, kan du legge til:
+          // 'left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]',
+
+          // --- STØRRELSE ---
+          'sm:max-w-[800px] sm:rounded-2xl',
+
+          // --- ANIMASJONER ("SLAM" effekt i midten) ---
+          'duration-500 ease-out', // Litt "tyngde"
           'data-[state=open]:animate-in',
           'data-[state=closed]:animate-out',
-          'data-[state=closed]:fade-out-0',
+
+          // Kommer nedenfra og scaler opp (Slam)
+          'data-[state=open]:slide-in-from-bottom-12', // Starter litt lenger ned
+          'data-[state=open]:zoom-in-90', // Starter litt mindre (90%) og vokser til 100%
           'data-[state=open]:fade-in-0',
-          // "SLAM" effekten: Kommer fra høyre og bunn, og scaler litt opp
-          'data-[state=open]:slide-in-from-right-full',
-          'data-[state=open]:slide-in-from-bottom-1/4',
-          'sm:data-[state=open]:zoom-in-95', // Gir en liten "landings"-effekt på desktop
-          'data-[state=closed]:slide-out-to-right-full',
-          'data-[state=closed]:zoom-out-95'
+
+          'data-[state=closed]:zoom-out-95',
+          'data-[state=closed]:fade-out-0'
         )}
       >
         <button
@@ -123,10 +121,9 @@ export function NewsletterPopup() {
         </button>
 
         <div className='grid grid-cols-1 md:grid-cols-2'>
-          {/* Venstre side: Bilde / Stemning (Vises kun på desktop pga plass i hjørnet) */}
+          {/* Venstre side: Bilde (Kun desktop) */}
           <div className='relative hidden md:flex h-full min-h-[400px] w-full flex-col justify-between bg-neutral-900 p-8'>
             <div className='absolute inset-0 bg-gradient-to-br from-emerald-900/40 to-neutral-900/40 z-0' />
-
             <div className='relative z-10'>
               <div className='inline-flex items-center justify-center rounded-full bg-emerald-500/10 p-3 mb-4'>
                 <Mail className='h-6 w-6 text-emerald-400' />
@@ -135,7 +132,6 @@ export function NewsletterPopup() {
                 Utekos® Club
               </h3>
             </div>
-
             <div className='relative z-10'>
               <p className='text-sm text-neutral-400 leading-relaxed'>
                 "Det finnes ikke dårlig vær, bare dårlige klær... og for få
