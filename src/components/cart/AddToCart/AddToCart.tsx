@@ -108,17 +108,13 @@ export function AddToCart({
             console.error('Feil ved påføring av rabatt:', e)
           }
         }
-
         const basePrice = Number.parseFloat(selectedVariant.price.amount)
         const currency = selectedVariant.price.currencyCode
         let totalQty = values.quantity
 
         const mainVariantId =
           cleanShopifyId(selectedVariant.id) || selectedVariant.id.toString()
-
-        // VIKTIG: Beholder din originale ID-logikk for AddToCart deduplisering
         const eventID = `atc_${cleanShopifyId(selectedVariant.id)}_${Date.now()}`
-
         const contents: MetaContentItem[] = [
           {
             id: mainVariantId,
@@ -144,8 +140,6 @@ export function AddToCart({
         }
 
         const value = basePrice * values.quantity
-
-        // Bruker hooken, men sender med den kritiske eventID-en
         trackEvent(
           'AddToCart',
           {

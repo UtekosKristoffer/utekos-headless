@@ -18,6 +18,8 @@ import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { getCachedCart } from '../lib/helpers/cart/getCachedCart'
 import { GoogleTagManager } from '@next/third-parties/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { NewsletterPopup } from '@/components/NewsletterPopup'
+import { CookieConsentBanner } from '@/components/CookieBanner'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
@@ -127,6 +129,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <ChatBotAgent />
             </main>
             <Footer />
+            <NewsletterPopup />
+            <CookieConsentBanner />
           </CartProviderLoader>
         </Suspense>
         <Toaster closeButton />
