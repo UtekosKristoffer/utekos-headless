@@ -1,27 +1,17 @@
-import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
+import { shopifyAdminFetch } from '@/api/shopify/admin/adminFetch'
 import { customerCreateMutation } from '@/api/graphql/mutations/customerCreate'
+
 type CustomerCreateOperation = {
   data: {
     customerCreate: {
       customer: { id: string; email: string } | null
-      userErrors: { field: string[]; message: string; code: string }[]
-    }
-  }
-  variables: {
-    input: {
-      email: string
-      emailMarketingConsent: {
-        marketingState: 'SUBSCRIBED'
-        marketingOptInLevel: 'SINGLE_OPT_IN' | 'CONFIRMED_OPT_IN'
-      }
-      tags: string[]
+      userErrors: { field: string[]; message: string }[]
     }
   }
 }
 
 export async function createNewsletterSubscriber(email: string) {
-  // Her sender vi inn hele operasjonstypen <CustomerCreateOperation>
-  const response = await shopifyFetch<CustomerCreateOperation>({
+  const response = await shopifyAdminFetch<CustomerCreateOperation>({
     query: customerCreateMutation,
     variables: {
       input: {
@@ -33,15 +23,14 @@ export async function createNewsletterSubscriber(email: string) {
         tags: ['newsletter_popup', 'prospect']
       }
     }
-    // cache: 'no-store' <--- Fjernet denne, da den ikke støttes av typen og er unødvendig for mutasjoner
   })
 
-  if (!response.success || !response.body) {
+  if (response.error || !response.body) {
+    console.error('[Newsletter] Admin Fetch Failed:', response.error)
     return { success: false, error: 'Kunne ikke kontakte Shopify.' }
   }
 
-  // shopifyFetch pakker vanligvis ut 'data', så vi henter customerCreate direkte fra body
-  const { customerCreate } = response.body
+  const { customerCreate } = response.body.data
 
   if (customerCreate.userErrors && customerCreate.userErrors.length > 0) {
     const error = customerCreate.userErrors[0]
@@ -50,10 +39,19 @@ export async function createNewsletterSubscriber(email: string) {
       return { success: false, error: 'Unknown error occurred.' }
     }
 
-    if (error.code === 'TAKEN') {
+    // Admin API har ikke 'code', så vi sjekker meldingen eller feltet
+    const isEmailTaken =
+      error.message.toLowerCase().includes('taken')
+      || error.message.toLowerCase().includes('already exists')
+      || (error.field
+        && error.field.includes('email')
+        && error.message.includes('taken'))
+
+    if (isEmailTaken) {
       return { success: true, status: 'ALREADY_EXISTS' }
     }
 
+    console.error('[Newsletter] User Error:', error.message)
     return { success: false, error: error.message }
   }
 

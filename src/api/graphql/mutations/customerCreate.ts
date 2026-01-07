@@ -11,7 +11,6 @@ export const customerCreateMutation = `
       userErrors {
         field
         message
-        code
       }
     }
   }
