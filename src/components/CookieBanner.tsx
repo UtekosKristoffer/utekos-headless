@@ -25,8 +25,8 @@ export function CookieConsentBanner() {
     const savedConsent = localStorage.getItem('utekos_cookie_consent')
 
     if (!savedConsent) {
-      // Vent 2.5 sekunder før banneret vises (behageligere for brukeren)
-      const timer = setTimeout(() => setIsVisible(true), 2500)
+      // Vent 2 sekunder før banneret vises (behageligere for brukeren)
+      const timer = setTimeout(() => setIsVisible(true), 2000)
       return () => clearTimeout(timer)
     }
   }, [])
@@ -96,33 +96,30 @@ export function CookieConsentBanner() {
                 </p>
               </div>
 
-              {/* Knapperad */}
               <div className='flex flex-col gap-3 sm:flex-row sm:min-w-fit'>
                 <Button
                   variant='outline'
                   onClick={() => setShowDetails(true)}
-                  className='border-neutral-700 text-white hover:bg-neutral-800 hover:text-white'
+                  className='border-neutral-700 text-white bg-neutral-800 hover:text-white/60'
                 >
                   Tilpass
                 </Button>
                 <Button
                   variant='outline'
                   onClick={handleDeclineAll}
-                  className='border-neutral-700 text-white hover:bg-neutral-800 hover:text-white'
+                  className='border-neutral-700 text-white bg-neutral-800 hover:text-white/60'
                 >
                   Avvis
                 </Button>
                 <Button
                   onClick={handleAcceptAll}
-                  // Svart tekst på hvit knapp for maks kontrast og synlighet
-                  className='bg-white text-black hover:bg-neutral-200 font-bold px-8'
+                  className='w-full bg-emerald-600 text-white hover:bg-emerald-700 font-bold py-6'
                 >
                   Godta alle
                 </Button>
               </div>
             </div>
-          : /* --- DETALJVISNING (TILPASS) --- */
-            <div className='space-y-6 animate-in fade-in duration-300'>
+          : <div className='space-y-6 animate-in fade-in duration-300'>
               <div className='space-y-2'>
                 <h3 className='text-lg font-semibold text-white'>
                   Tilpass dine valg

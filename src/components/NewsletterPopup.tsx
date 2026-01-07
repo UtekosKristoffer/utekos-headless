@@ -21,10 +21,7 @@ export function NewsletterPopup() {
   const [isMounted, setIsMounted] = useState(false)
   const pathname = usePathname()
 
-  // Ref for å holde styr på om lyden er spilt (unngår dobbel avspilling i React Strict Mode)
   const soundPlayedRef = useRef(false)
-
-  // --- LYDEFFEKT LOGIKK ---
   useEffect(() => {
     if (isOpen && !soundPlayedRef.current) {
       // Stien til lydfilen din i public-mappen
@@ -58,7 +55,6 @@ export function NewsletterPopup() {
     const hasSeenPopup = localStorage.getItem('utekos_newsletter_v2')
 
     if (!hasSeenPopup) {
-      // TILBAKE TIL 8 SEKUNDER
       const timer = setTimeout(() => {
         setIsOpen(true)
       }, 8000)
