@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { X, Mail } from 'lucide-react'
+import { Mail } from 'lucide-react' // X er fjernet herfra
 import { subscribeToNewsletter } from '@/lib/actions/subscribeToNewsLetter'
 import { toast } from 'sonner'
 import { usePathname } from 'next/navigation'
@@ -22,12 +22,12 @@ export function NewsletterPopup() {
   const pathname = usePathname()
   const soundPlayedRef = useRef(false)
 
-  // Lydeffekt (som før)
+  // Lydeffekt
   useEffect(() => {
     if (isOpen && !soundPlayedRef.current) {
       const audio = new Audio('/sounds/popup-slam.mp3')
       audio.volume = 0.4
-      audio.play().catch(() => {}) // Ignorerer feil hvis autoplay blokkeres
+      audio.play().catch(err => console.log('Lyd blokkert (normalt):', err))
       soundPlayedRef.current = true
     }
   }, [isOpen])
@@ -38,18 +38,17 @@ export function NewsletterPopup() {
     if (pathname?.includes('/checkouts') || pathname?.includes('/handlekurv'))
       return
 
-    const hasSeenPopup = localStorage.getItem('utekos_newsletter_v2')
-    if (hasSeenPopup) return // Har allerede sett den, stopp her.
+    // NY NØKKEL (v5) - så du får testet fixen med en gang
+    const hasSeenPopup = localStorage.getItem('utekos_newsletter_v5')
+    if (hasSeenPopup) return
 
-    // Funksjon for å starte nedtellingen
     const startCountdown = () => {
       const timer = setTimeout(() => {
         setIsOpen(true)
-      }, 8000) // 8 sekunder
+      }, 8000) // Satt tilbake til 8 sekunder
       return () => clearTimeout(timer)
     }
 
-    // Sjekk om brukeren allerede har tatt stilling til cookies
     const hasConsent = localStorage.getItem('utekos_cookie_consent')
 
     if (hasConsent) {
@@ -61,7 +60,6 @@ export function NewsletterPopup() {
       }
 
       window.addEventListener('cookie_consent_saved', handleConsentSaved)
-
       return () =>
         window.removeEventListener('cookie_consent_saved', handleConsentSaved)
     }
@@ -69,12 +67,12 @@ export function NewsletterPopup() {
 
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open)
-    if (!open) localStorage.setItem('utekos_newsletter_v2', 'true')
+    if (!open) localStorage.setItem('utekos_newsletter_v5', 'true')
   }
 
   const handleSubmit = async (formData: FormData) => {
     setIsOpen(false)
-    localStorage.setItem('utekos_newsletter_v2', 'true')
+    localStorage.setItem('utekos_newsletter_v5', 'true')
     const result = await subscribeToNewsletter(formData)
     if (result.success) toast.success(result.message)
     else toast.error(result.message)
@@ -86,41 +84,33 @@ export function NewsletterPopup() {
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogContent
         className={cn(
-          // Base styles
           'fixed z-50 grid w-full gap-0 p-0 border-neutral-800 bg-neutral-950 text-white shadow-2xl overflow-hidden',
 
-          // --- SENTRERING (Standard Modal) ---np run sync 'l'
-          // Shadcn bruker vanligvis left-1/2 top-1/2 translate osv. som standard i sin base-komponent.
-          // Hvis din DialogContent-base mangler dette, kan du legge til:
-          // 'left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]',
+          // Sentrering
+          'left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
 
-          // --- STØRRELSE ---
+          // Størrelse
           'sm:max-w-[800px] sm:rounded-2xl',
 
-          // --- ANIMASJONER ("SLAM" effekt i midten) ---
-          'duration-500 ease-out', // Litt "tyngde"
+          // Animasjoner
+          'duration-500 ease-out',
           'data-[state=open]:animate-in',
           'data-[state=closed]:animate-out',
-
-          // Kommer nedenfra og scaler opp (Slam)
-          'data-[state=open]:slide-in-from-bottom-12', // Starter litt lenger ned
-          'data-[state=open]:zoom-in-90', // Starter litt mindre (90%) og vokser til 100%
+          'data-[state=open]:slide-in-from-bottom-12',
+          'data-[state=open]:zoom-in-90',
           'data-[state=open]:fade-in-0',
-
           'data-[state=closed]:zoom-out-95',
-          'data-[state=closed]:fade-out-0'
+          'data-[state=closed]:fade-out-0',
+
+          // --- CSS FIX FOR STANDARD KRYSSET ---
+          // Styler det innebygde krysset i DialogContent
+          '[&>button]:text-neutral-400 [&>button]:hover:text-white [&>button]:top-4 [&>button]:right-4 [&>button]:h-8 [&>button]:w-8 [&>button]:bg-black/20 [&>button]:rounded-full'
         )}
       >
-        <button
-          onClick={() => handleOpenChange(false)}
-          className='absolute right-4 top-4 z-50 rounded-full bg-black/20 p-2 text-white/70 hover:bg-black/40 hover:text-white transition-colors'
-        >
-          <X className='h-4 w-4' />
-          <span className='sr-only'>Lukk</span>
-        </button>
+        {/* Ingen manuell <button> her lenger - vi stoler på DialogContent sitt innebygde kryss */}
 
         <div className='grid grid-cols-1 md:grid-cols-2'>
-          {/* Venstre side: Bilde (Kun desktop) */}
+          {/* Venstre side: Bilde */}
           <div className='relative hidden md:flex h-full min-h-[400px] w-full flex-col justify-between bg-neutral-900 p-8'>
             <div className='absolute inset-0 bg-gradient-to-br from-emerald-900/40 to-neutral-900/40 z-0' />
             <div className='relative z-10'>
@@ -146,8 +136,8 @@ export function NewsletterPopup() {
                 Bli en del av varmen
               </DialogTitle>
               <DialogDescription className='text-neutral-400 text-base'>
-                Motta eksklusive rabatter, livsnyter-tips og de ferskeste
-                nyhetene rett i innboksen.
+                Få eksklusive rabatter, livsnyter-tips og få vite først om
+                nyheter rett i innboksen.
               </DialogDescription>
             </DialogHeader>
 
