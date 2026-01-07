@@ -1,6 +1,7 @@
 'use server'
 
 import { z } from 'zod'
+import { createNewsletterSubscriber } from '@/api/lib/customers/createNewsletterSubscriber'
 
 const schema = z.object({
   email: z.string().email()
@@ -16,14 +17,15 @@ export async function subscribeToNewsletter(formData: FormData) {
   }
 
   try {
-    // TODO: Koble til Klaviyo, Mailchimp eller Shopify API her
-    // await shopify.customer.create({ email: result.data.email, accepts_marketing: true })
+    const response = await createNewsletterSubscriber(result.data.email)
 
-    // Simulerer en forsinkelse
-    await new Promise(resolve => setTimeout(resolve, 500))
-
+    if (!response.success) {
+      console.error('Newsletter Error:', response.error)
+      return { success: false, message: 'Noe gikk galt. Prøv igjen senere.' }
+    }
     return { success: true, message: 'Takk! Du er nå påmeldt.' }
   } catch (error) {
+    console.error('Newsletter Exception:', error)
     return { success: false, message: 'Noe gikk galt. Prøv igjen senere.' }
   }
 }

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { Switch } from '@/components/ui/switch'
+import type { Route } from 'next'
 
 type ConsentState = {
   necessary: boolean
@@ -86,7 +87,7 @@ export function CookieConsentBanner() {
                   tilpasset markedsføring. Du kan når som helst endre dine
                   preferanser. Les vår{' '}
                   <Link
-                    href='/personvern'
+                    href={'/personvern' as Route}
                     className='text-emerald-400 hover:underline hover:text-emerald-300 transition-colors'
                   >
                     personvernerklæring

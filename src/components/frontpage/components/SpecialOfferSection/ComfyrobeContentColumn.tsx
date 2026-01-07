@@ -8,6 +8,7 @@ import { useInView } from '@/hooks/useInView'
 import { cn } from '@/lib/utils/className'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { useAnalytics } from '@/hooks/useAnalytics'
+import type { Route } from 'next'
 
 const benefits = [
   {
@@ -44,8 +45,6 @@ export function ComfyrobeContentColumn({
 
   const handleCtaClick = () => {
     const contentId = cleanShopifyId(variantId) || variantId
-
-    // Kaller den stabile event-funksjonen (useEffectEvent under panseret)
     trackEvent('HeroInteract', {
       content_name: 'Comfyrobe Hero Button',
       destination_url: '/produkter/comfyrobe',
@@ -115,7 +114,7 @@ export function ComfyrobeContentColumn({
         style={{ '--transition-delay': '0.9s' } as React.CSSProperties}
       >
         <Link
-          href='/produkter/comfyrobe'
+          href={'/produkter/comfyrobe' as Route}
           onClick={handleCtaClick}
           className={buttonVariants({
             size: 'lg',
