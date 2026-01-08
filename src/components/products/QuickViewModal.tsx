@@ -58,7 +58,10 @@ export function QuickViewModal({
   const [isLoading, setIsLoading] = useState(false)
 
   const [includeBuff, setIncludeBuff] = useState(true)
-  const [selectedBuffColor, setSelectedBuffColor] = useState('Fjellblå')
+
+  // Hardkodet til Vargnatt
+  const selectedBuffColor = 'Vargnatt'
+
   const { variantState, updateVariant } = useVariantState(
     productData ?? undefined,
     false
@@ -203,8 +206,6 @@ export function QuickViewModal({
                     buffProduct={buffProduct}
                     includeBuff={includeBuff}
                     onIncludeBuffChange={setIncludeBuff}
-                    selectedBuffColor={selectedBuffColor}
-                    onBuffColorChange={setSelectedBuffColor}
                   />
                 </div>
 

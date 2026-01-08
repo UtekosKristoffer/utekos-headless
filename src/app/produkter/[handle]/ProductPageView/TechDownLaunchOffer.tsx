@@ -20,7 +20,9 @@ export function TechDownLaunchOffer({
   const [buffProduct, setBuffProduct] = useState<ShopifyProduct | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [includeBuff, setIncludeBuff] = useState(true)
-  const [selectedBuffColor, setSelectedBuffColor] = useState('Fjellblå')
+
+  // Hardkodet til Vargnatt siden Fjellblå er utsolgt
+  const selectedBuffColor = 'Vargnatt'
 
   useEffect(() => {
     async function fetchBuffProduct() {
@@ -96,8 +98,6 @@ export function TechDownLaunchOffer({
               buffProduct={buffProduct}
               includeBuff={includeBuff}
               onIncludeBuffChange={setIncludeBuff}
-              selectedBuffColor={selectedBuffColor}
-              onBuffColorChange={setSelectedBuffColor}
             />
           </Activity>
         </div>
