@@ -4,7 +4,6 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { createHash } from 'crypto'
 
-// Configuration for marketing parameters
 const MARKETING_CONFIG = {
   utm_params: [
     'utm_source',
@@ -46,31 +45,17 @@ interface CookieConfig {
   secure: boolean
 }
 
-/**
- * Hash email address using SHA256
- * @param email Email address to hash
- * @returns Hashed email (SHA256)
- */
 function hashEmail(email: string): string {
   return createHash('sha256').update(email.toLowerCase().trim()).digest('hex')
 }
-/**
- * Format Facebook Click ID (_fbc) cookie
- * @param fbclid Facebook Click ID value
- * @param timestamp Optional timestamp for cookie creation
- * @returns Formatted _fbc cookie value
- */
+
 function formatFbcCookie(
   fbclid: string,
   timestamp: number = Date.now()
 ): string {
   return `fb.1.${timestamp}.${fbclid}`
 }
-/**
- * Extract marketing parameters (UTM, FBCLID, email, etc.) from URL query string
- * @param searchParams URLSearchParams object
- * @returns Object containing extracted marketing parameters
- */
+
 function extractMarketingParams(
   searchParams: URLSearchParams
 ): MarketingParams {
@@ -86,7 +71,6 @@ function extractMarketingParams(
     timestamp
   }
 
-  // Extract UTM parameters
   MARKETING_CONFIG.utm_params.forEach(param => {
     const value = searchParams.get(param)
     if (value) {
@@ -95,21 +79,18 @@ function extractMarketingParams(
     }
   })
 
-  // Extract FBCLID parameter
   const fbclid = searchParams.get(MARKETING_CONFIG.fbclid_param)
   if (fbclid) {
     marketing.fbclid = fbclid
     marketing.all[MARKETING_CONFIG.fbclid_param] = fbclid
   }
 
-  // Extract FBC parameter
   const fbc = searchParams.get(MARKETING_CONFIG.fbc_param)
   if (fbc) {
     marketing.fbc = fbc
     marketing.all[MARKETING_CONFIG.fbc_param] = fbc
   }
 
-  // Extract email and hash it
   const email = searchParams.get(MARKETING_CONFIG.email_param)
   if (email) {
     marketing.email = email
@@ -117,7 +98,6 @@ function extractMarketingParams(
     marketing.all.email_hash = marketing.emailHash
   }
 
-  // Extract additional marketing parameters
   MARKETING_CONFIG.additional_params.forEach(param => {
     const value = searchParams.get(param)
     if (value) {
@@ -129,12 +109,6 @@ function extractMarketingParams(
   return marketing
 }
 
-/**
- * Build cookie configuration objects for Set-Cookie headers
- * @param params Marketing parameters to set as cookies
- * @param isSecureConnection Whether connection is secure (HTTPS)
- * @returns Array of cookie configurations
- */
 function buildCookieConfigs(
   params: MarketingParams,
   isSecureConnection: boolean
@@ -163,7 +137,6 @@ function buildCookieConfigs(
   }
   cookies.push(jsonCookie)
 
-  // Create email hash cookie if email was provided
   if (params.emailHash) {
     const emailHashCookie: CookieConfig = {
       name: MARKETING_CONFIG.email_hash_cookie_name,
@@ -179,7 +152,6 @@ function buildCookieConfigs(
     cookies.push(emailHashCookie)
   }
 
-  // Create _fbc cookie if fbclid is provided
   if (params.fbclid) {
     const fbcValue = params.fbc || formatFbcCookie(params.fbclid)
     const fbcCookie: CookieConfig = {
@@ -199,11 +171,6 @@ function buildCookieConfigs(
   return cookies
 }
 
-/**
- * Format cookie configuration into Set-Cookie header string
- * @param config Cookie configuration object
- * @returns Formatted Set-Cookie header string
- */
 function formatCookieHeader(config: CookieConfig): string {
   const parts = [
     `${encodeURIComponent(config.name)}=${encodeURIComponent(config.value)}`,
@@ -223,14 +190,6 @@ function formatCookieHeader(config: CookieConfig): string {
   return parts.join('; ')
 }
 
-/**
- * Main handler for marketing parameters
- * Extracts UTM, FBCLID, email, and other marketing parameters from request,
- * builds cookies (including JSON cookie and hashed email), and applies them to response
- * @param request NextRequest object
- * @param response NextResponse object to modify
- * @returns Updated NextResponse with Set-Cookie headers
- */
 function handleMarketingParams(
   request: NextRequest,
   response: NextResponse
@@ -238,29 +197,31 @@ function handleMarketingParams(
   const url = new URL(request.url)
   const isSecureConnection = url.protocol === 'https:'
 
-  // Extract marketing parameters from URL query string
   const marketingParams = extractMarketingParams(url.searchParams)
 
-  // Only process if marketing parameters are present
   if (Object.keys(marketingParams.all).length === 0) {
     return response
   }
 
+  const existingFbc = request.cookies.get(MARKETING_CONFIG.fbc_cookie_name)
+  if (marketingParams.fbclid && !marketingParams.fbc && existingFbc?.value) {
+    const parts = existingFbc.value.split('.')
+    if (parts.length === 4 && parts[3] === marketingParams.fbclid) {
+      marketingParams.fbc = existingFbc.value
+      marketingParams.all[MARKETING_CONFIG.fbc_param] = existingFbc.value
+    }
+  }
+
   const cookieConfigs = buildCookieConfigs(marketingParams, isSecureConnection)
 
-  // Apply cookies to response
   cookieConfigs.forEach(config => {
     const cookieHeader = formatCookieHeader(config)
     response.headers.append('Set-Cookie', cookieHeader)
   })
-
-  // Add custom header for tracking (optional)
   response.headers.set(
     'X-Marketing-Params-Captured',
     Object.keys(marketingParams.all).join(',')
   )
-
-  // Log marketing params captured (for debugging)
   if (process.env.NODE_ENV === 'development') {
     console.log('[Marketing Params Captured]', {
       utm: marketingParams.utm,
@@ -275,10 +236,6 @@ function handleMarketingParams(
   return response
 }
 
-/**
- * Middleware entry point for Vercel
- * Integrates marketing parameter handling into the proxy logic
- */
 export function proxy(request: NextRequest) {
   const url = new URL(request.url)
   const userAgent = request.headers.get('user-agent')?.toLowerCase() || ''
@@ -294,6 +251,7 @@ export function proxy(request: NextRequest) {
 
   return handleMarketingParams(request, response)
 }
+
 const BLOCKED_USER_AGENTS = [
   'python-httpx',
   'python-requests',
@@ -306,26 +264,12 @@ const BLOCKED_USER_AGENTS = [
 const SENSITIVE_PATHS_REGEX =
   /\.(env|git|config|aws|yml|yaml|sql|bak|backup|key|secret)|^\/admin/i
 
-/**
- * Middleware entry point for Vercel
- * Integrates marketing parameter handling, security checks, and request filtering
- */
-
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
     '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|videos).*)'
   ]
 }
 
-
-// Export functions for testing and reuse
 export {
   handleMarketingParams,
   extractMarketingParams,
@@ -334,5 +278,3 @@ export {
   hashEmail,
   formatFbcCookie
 }
-
-
