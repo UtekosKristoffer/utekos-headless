@@ -46,6 +46,21 @@ export async function OnlineStoreJsonLd() {
       'https://www.facebook.com/utekosen',
       'https://www.instagram.com/utekos.no'
     ],
+    'makesOffer': {
+      '@type': 'Offer',
+      'shippingDetails': {
+        '@type': 'OfferShippingDetails',
+        'shippingDestination': {
+          '@type': 'DefinedRegion',
+          'addressCountry': 'NO'
+        },
+        'shippingRate': {
+          '@type': 'MonetaryAmount',
+          'value': 0,
+          'currency': 'NOK'
+        }
+      }
+    },
     'hasMerchantReturnPolicy': {
       '@type': 'MerchantReturnPolicy',
       'applicableCountry': 'NO',
@@ -53,7 +68,7 @@ export async function OnlineStoreJsonLd() {
         'https://schema.org/MerchantReturnFiniteReturnWindow',
       'merchantReturnDays': 14,
       'returnMethod': 'https://schema.org/ReturnByMail',
-      'returnFees': 'https://schema.org/FreeReturn', // OPPDATERT: Endret til fri retur
+      'returnFees': 'https://schema.org/FreeReturn',
       'refundType': 'https://schema.org/FullRefund',
       'url': 'https://utekos.no/frakt-og-retur'
     }

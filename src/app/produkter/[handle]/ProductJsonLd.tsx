@@ -1,3 +1,5 @@
+// Path: src/app/ProductJsonLd.tsx
+
 import { getProduct } from '@/api/lib/products/getProduct'
 import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
 import { computeVariantImages } from '@/lib/utils/computeVariantImages'
@@ -22,15 +24,12 @@ const mapAvailability = (availableForSale: boolean) =>
     'https://schema.org/InStock'
   : 'https://schema.org/OutOfStock'
 
-const getShippingDetails = (price: string | null): OfferShippingDetails => {
-  const priceValue = price ? parseFloat(price) : 0
-  const shippingCost = priceValue >= 999 ? '0' : '99'
-
+const getShippingDetails = (): OfferShippingDetails => {
   return {
     '@type': 'OfferShippingDetails',
     'shippingRate': {
       '@type': 'MonetaryAmount',
-      'value': shippingCost,
+      'value': 0,
       'currency': 'NOK'
     },
     'shippingDestination': {
@@ -136,7 +135,7 @@ export async function ProductJsonLd({ handle }: Props) {
             `${product.title} - ${variant.title}`
           : mainDescription
 
-        const shippingDetails = getShippingDetails(variantPrice)
+        const shippingDetails = getShippingDetails()
 
         const priceSpec: UnitPriceSpecification | undefined =
           originalPrice ?
@@ -185,7 +184,7 @@ export async function ProductJsonLd({ handle }: Props) {
         String(firstVariant.compareAtPrice.amount)
       : null
 
-    const shippingDetails = getShippingDetails(variantPrice)
+    const shippingDetails = getShippingDetails()
 
     const priceSpec: UnitPriceSpecification | undefined =
       originalPrice ?
