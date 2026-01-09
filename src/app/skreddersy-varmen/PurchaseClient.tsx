@@ -46,7 +46,7 @@ const PRODUCT_VARIANTS = {
     id: 'utekos-dun',
     title: 'Utekos Dun™',
     subtitle: 'Utekos Dun™',
-    price: 1990,
+    price: 2490,
     features: ['Ultralett', 'Maksimal varme', 'Høy kompresjon'],
     colors: [
       { name: 'Fjellblå', hex: '#020244' },

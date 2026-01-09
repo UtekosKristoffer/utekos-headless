@@ -174,7 +174,7 @@ gjør Utekos unikt:
 
 - **PRODUKT:** Utekos Dun™
 - **HANDLE:** utekos-dun
-- **PRIS:** 1990 kr
+- **PRIS:** 2490 kr
 - **NØKKELORD:** Et av vårt varmeste og mest populære modell. Luksuriøs og lett med
   markedsledende dun (90/10, 650 fillpower). Gir maksimal varme i forhold til vekt.
   Ideell for kalde, tørre kvelder. Klassikeren.
