@@ -123,7 +123,7 @@ export function ShippingReturnsInfo() {
             <AccordionTrigger>Steg 3: Send pakken</AccordionTrigger>
             <AccordionContent className='prose prose-invert max-w-none text-foreground/80'>
               <p>
-                Du dekker selv kostnaden for returfrakt. Vi anbefaler å bruke en
+                Vi dekker kostnaden for returfrakt. Vi anbefaler å bruke en
                 sendingsmetode med sporing for din egen sikkerhet.
               </p>
             </AccordionContent>
