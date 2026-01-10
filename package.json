@@ -13,7 +13,6 @@
     "sync": "f() { git add . && git commit -m \"$1\" && git push; }; f"
   },
   "dependencies": {
-    "@ai-sdk/huggingface": "latest",
     "@ai-sdk/openai": "^2.0.52",
     "@ai-sdk/react": "latest",
     "@dagrejs/dagre": "^1.1.5",

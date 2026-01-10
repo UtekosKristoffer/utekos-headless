@@ -1,6 +1,6 @@
 // Path: src/components/frontpage/components/HeroSection/HeroImage.tsx
 'use client'
-import heroImage from '@public/linn-kate-kikkert.png'
+import heroImage from '@public/linn-kate-kikkert.webp'
 import Image from 'next/image'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import {
