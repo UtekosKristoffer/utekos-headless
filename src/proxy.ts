@@ -262,18 +262,25 @@ export async function proxy(request: NextRequest) {
       const ip = request.headers.get('x-forwarded-for') ?? ''
       requestHeaders.set('x-forwarded-for', ip)
 
+      requestHeaders.set('accept-encoding', 'identity')
+      requestHeaders.delete('content-length')
+
       const proxyResponse = await fetch(targetUrl, {
         method: request.method,
         headers: requestHeaders,
         body: request.body,
-        // @ts-expect-error - duplex is required for streaming body
         duplex: 'half'
-      })
+      } as RequestInit)
+
+      const responseHeaders = new Headers(proxyResponse.headers)
+      responseHeaders.delete('content-encoding')
+      responseHeaders.delete('content-length')
+      responseHeaders.delete('transfer-encoding')
 
       const response = new NextResponse(proxyResponse.body, {
         status: proxyResponse.status,
         statusText: proxyResponse.statusText,
-        headers: proxyResponse.headers
+        headers: responseHeaders
       })
 
       return response
