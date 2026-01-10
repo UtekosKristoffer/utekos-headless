@@ -1,4 +1,3 @@
-// Path: src/app/layout.tsx
 import './globals.css'
 import { geistSans } from '@/db/config/font.config'
 import { QueryClient, dehydrate } from '@tanstack/react-query'
@@ -87,11 +86,6 @@ export const metadata: Metadata = {
   }
 }
 
-/**
- * Server Component som laster data før appen vises.
- * Dette sikrer at cartId er tilgjengelig for Pixel/Tracking med en gang.
- */
-
 async function CartProviderLoader({ children }: { children: ReactNode }) {
   const queryClient = new QueryClient()
   const cartId = await getCartIdFromCookie()
@@ -113,7 +107,7 @@ async function CartProviderLoader({ children }: { children: ReactNode }) {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='no'>
-      <GoogleTagManager gtmId='GTM-5TWMJQFP' />
+      <GoogleTagManager gtmId='GTM-5TWMJQFP' gtmScriptUrl='/metrics/gtm.js' />
       <body
         className={`bg-background text-foreground ${geistSans.className} antialiased`}
       >
