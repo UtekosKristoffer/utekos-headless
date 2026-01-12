@@ -3,10 +3,8 @@ import { ArrowRight, Sun, Layers } from 'lucide-react'
 import type { Route } from 'next'
 import Link from 'next/link'
 import { cacheLife } from 'next/cache'
+import { VIDEO_URL, VIDEO_POSTER_URL } from '@/app/FrontPageJsonLd'
 import { ProductVideoPlayer } from './video/ProductVideoPlayer'
-
-const VIDEO_URL = 'https://utekos.no/videos/TensorPix2.mp4'
-const VIDEO_POSTER = 'https://utekos.no/images/video-poster.jpg'
 
 export async function ProductVideoSection() {
   'use cache'
@@ -18,7 +16,7 @@ export async function ProductVideoSection() {
         <div className='grid grid-cols-1 items-center gap-x-12 gap-y-16 lg:grid-cols-2'>
           <div className='mx-auto max-w-sm w-full'>
             <div className='rounded-3xl border-4 border-neutral-700 bg-black p-2 shadow-2xl shadow-cyan-500/10'>
-              <ProductVideoPlayer src={VIDEO_URL} poster={VIDEO_POSTER} />
+              <ProductVideoPlayer src={VIDEO_URL} poster={VIDEO_POSTER_URL} />
             </div>
           </div>
 

@@ -107,7 +107,7 @@ async function CartProviderLoader({ children }: { children: ReactNode }) {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='no'>
-      <GoogleTagManager gtmId='GTM-5TWMJQFP' gtmScriptUrl='/metrics/gtm.js' />
+      <GoogleTagManager gtmId='GTM-5TWMJQFP' />
       <body
         className={`bg-background text-foreground ${geistSans.className} antialiased`}
       >

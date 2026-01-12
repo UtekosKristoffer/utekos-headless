@@ -8,6 +8,7 @@ import { cacheLife } from 'next/cache'
 
 export const VIDEO_URL = 'https://utekos.no/videos/TensorPix2.mp4'
 export const VIDEO_THUMBNAIL_URL = 'https://utekos.no/linn-kate-kikkert.png'
+export const VIDEO_POSTER_URL = 'https://utekos.no/linn-kate-kikkert.png'
 export const VIDEO_EMBED_URL = 'https://utekos.no/video/tensorpix'
 
 export async function FrontPageJsonLd() {
