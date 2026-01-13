@@ -2,8 +2,16 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { createHash } from 'crypto'
 
-const SGTM_ENDPOINT = 'https://sgtm-tracking-351763550388.europe-north1.run.app'
-const TRACKING_PATH = '/metrics'
+// CLEANUP: Fjernet SGTM_ENDPOINT og TRACKING_PATH da vi bruker subdomene-oppsett direkte.
+
+const BLOCKED_USER_AGENTS = [
+  'python-httpx',
+  'python-requests',
+  'aiohttp',
+  'scrapy',
+  'curl',
+  'wget'
+]
 
 const MARKETING_CONFIG = {
   utm_params: [
@@ -239,6 +247,15 @@ function handleMarketingParams(
 }
 
 export async function proxy(request: NextRequest) {
+  const userAgent = request.headers.get('user-agent')?.toLowerCase() || ''
+  const isBlockedAgent = BLOCKED_USER_AGENTS.some(agent =>
+    userAgent.includes(agent)
+  )
+
+  if (isBlockedAgent) {
+    return new NextResponse(null, { status: 403, statusText: 'Forbidden' })
+  }
+
   const url = new URL(request.url)
   const pathname = url.pathname
   const isTargetRoute =
@@ -248,60 +265,9 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next()
   }
 
-  if (pathname.startsWith(TRACKING_PATH)) {
-    try {
-      const targetPath = pathname.replace(TRACKING_PATH, '')
-      const targetUrl = new URL(
-        targetPath + url.search,
-        SGTM_ENDPOINT
-      ).toString()
-
-      const requestHeaders = new Headers(request.headers)
-      requestHeaders.set('host', new URL(SGTM_ENDPOINT).host)
-
-      const ip = request.headers.get('x-forwarded-for') ?? ''
-      requestHeaders.set('x-forwarded-for', ip)
-
-      requestHeaders.set('accept-encoding', 'identity')
-      requestHeaders.delete('content-length')
-
-      const proxyResponse = await fetch(targetUrl, {
-        method: request.method,
-        headers: requestHeaders,
-        body: request.body,
-        duplex: 'half'
-      } as RequestInit)
-
-      const responseHeaders = new Headers(proxyResponse.headers)
-      responseHeaders.delete('content-encoding')
-      responseHeaders.delete('content-length')
-      responseHeaders.delete('transfer-encoding')
-
-      const response = new NextResponse(proxyResponse.body, {
-        status: proxyResponse.status,
-        statusText: proxyResponse.statusText,
-        headers: responseHeaders
-      })
-
-      return response
-    } catch (error) {
-      console.error('[Proxy] sGTM forwarding failed:', error)
-      return NextResponse.next()
-    }
-  }
-
   const response = NextResponse.next()
   return handleMarketingParams(request, response)
 }
-
-const BLOCKED_USER_AGENTS = [
-  'python-httpx',
-  'python-requests',
-  'aiohttp',
-  'scrapy',
-  'curl',
-  'wget'
-]
 
 export const config = {
   matcher: [

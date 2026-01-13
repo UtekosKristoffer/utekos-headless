@@ -1,3 +1,5 @@
+// Path: src/components/analytics/MetaPixel/MetaProductView.tsx
+
 'use client'
 
 import { useEffect, useRef } from 'react'
