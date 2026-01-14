@@ -89,7 +89,6 @@ export function LandingPageAddToCart({
           cartActor
         )
 
-        // Tracking Logic (Meta, GA4) - Kopiert fra din fil
         const basePrice = Number.parseFloat(selectedVariant.price.amount)
         const currency = selectedVariant.price.currencyCode
         const eventID = `atc_${cleanShopifyId(selectedVariant.id)}_${Date.now()}`
@@ -106,7 +105,6 @@ export function LandingPageAddToCart({
         const contentName = product.title
         const value = basePrice * values.quantity
 
-        // Meta Pixel
         if (typeof window !== 'undefined' && window.fbq) {
           window.fbq(
             'track',
@@ -124,7 +122,6 @@ export function LandingPageAddToCart({
           )
         }
 
-        // CAPI
         const ua =
           typeof navigator !== 'undefined' ? navigator.userAgent : undefined
         const userData: MetaUserData = {
@@ -153,7 +150,6 @@ export function LandingPageAddToCart({
           }
         })
 
-        // GA4
         if (typeof window !== 'undefined' && window.dataLayer) {
           window.dataLayer.push({
             event: 'add_to_cart',
@@ -188,11 +184,9 @@ export function LandingPageAddToCart({
   const isAvailable = selectedVariant?.availableForSale ?? false
   const isPending = isTransitioning || isPendingFromMachine
 
-  // --- HER ER ENDRINGEN: Custom UI i stedet for standard UI ---
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleAddToCart)} className={className}>
-        {/* Vi skjuler antall-velgeren for å holde det rent på landingssiden. Default er 1. */}
         <input type='hidden' {...form.register('quantity')} value={1} />
         <input type='hidden' {...form.register('variantId')} />
 
