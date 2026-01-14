@@ -14,6 +14,8 @@ export interface CheckoutAttribution {
   userData: MetaUserData
   ts: number
   eventId?: string | undefined
+  ga_client_id?: string | undefined
+  ga_session_id?: string | undefined
 }
 
 export interface CaptureBody {

@@ -6,6 +6,13 @@ import { getStorageKey } from '@/lib/utils/getStorageKey'
 import { normalize } from '@/lib/meta/normalization'
 import type { CaptureBody, CheckoutAttribution, MetaUserData } from '@types'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
+import {
+  parseGaClientId,
+  parseGaSessionId,
+  findGaSessionCookie
+} from '@/lib/google/parser'
+
+const GA_MEASUREMENT_ID = 'G-FCES3L0M9M'
 
 function getClientIp(req: NextRequest): string | null {
   const forwardedFor = req.headers.get('x-forwarded-for')
@@ -43,10 +50,23 @@ export async function POST(req: NextRequest) {
 
   const requestIp = getClientIp(req)
   const userAgent = req.headers.get('user-agent') || undefined
-  const cookieFbp = req.cookies.get('_fbp')?.value
-  const cookieFbc = req.cookies.get('_fbc')?.value
-  const cookieExtId = req.cookies.get('ute_ext_id')?.value
-  const cookieUserHash = req.cookies.get('ute_user_hash')?.value
+
+  // --- COOKIE EXTRACTION START ---
+  const cookieStore = req.cookies
+
+  // Meta Cookies
+  const cookieFbp = cookieStore.get('_fbp')?.value
+  const cookieFbc = cookieStore.get('_fbc')?.value
+  const cookieExtId = cookieStore.get('ute_ext_id')?.value
+  const cookieUserHash = cookieStore.get('ute_user_hash')?.value
+
+  const gaCookie = cookieStore.get('_ga')?.value
+  const gaClientId = parseGaClientId(gaCookie)
+  const cookieMap = new Map<string, string>()
+  cookieStore.getAll().forEach(c => cookieMap.set(c.name, c.value))
+  const gaSessionCookieVal = findGaSessionCookie(cookieMap, GA_MEASUREMENT_ID)
+  const gaSessionId = parseGaSessionId(gaSessionCookieVal)
+
   const userDataToSave: MetaUserData = {}
 
   if (body.userData?.fbp) userDataToSave.fbp = body.userData.fbp
@@ -92,10 +112,14 @@ export async function POST(req: NextRequest) {
   if (userDataToSave.country)
     userDataToSave.country = normalize.country(userDataToSave.country)
 
+  // Konstruer payload med både Meta og Google data
+  // NB: Sørg for at CheckoutAttribution typen din er oppdatert med ga_ variablene
   const payload: CheckoutAttribution = {
     cartId: body.cartId ?? null,
     checkoutUrl: body.checkoutUrl,
     userData: userDataToSave,
+    ga_client_id: gaClientId || undefined, // NY
+    ga_session_id: gaSessionId || undefined, // NY
     ts: Date.now(),
     ...(body.eventId && { eventId: body.eventId })
   }
@@ -109,7 +133,10 @@ export async function POST(req: NextRequest) {
       fbc: userDataToSave.fbc,
       external_id: userDataToSave.external_id,
       hasEmailHash: !!userDataToSave.email_hash,
-      clientIp: userDataToSave.client_ip_address
+      clientIp: userDataToSave.client_ip_address,
+      // Logger status på Google-id
+      ga_client_id: gaClientId ? 'Captured' : 'Missing',
+      ga_session_id: gaSessionId ? 'Captured' : 'Missing'
     },
     {
       token,

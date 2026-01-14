@@ -1,10 +1,12 @@
 // Path: api/graphql/mutations/cart.ts
-
 import cart from '@/lib/fragments/cartFragment'
 
 export const mutationCartCreate = /* GraphQL */ `
-  mutation cartCreate($lines: [CartLineInput!]) {
-    cartCreate(input: { lines: $lines }) {
+  mutation cartCreate(
+    $lines: [CartLineInput!]
+    $attributes: [AttributeInput!]
+  ) {
+    cartCreate(input: { lines: $lines, attributes: $attributes }) {
       cart {
         ...cart
       }

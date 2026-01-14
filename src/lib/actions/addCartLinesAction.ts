@@ -1,4 +1,3 @@
-// Path: src/lib/actions/addCartLinesAction.ts
 'use server'
 
 import { performCartCreateMutation } from '@/lib/actions/perform/performCartCreateMutation'
@@ -10,6 +9,7 @@ import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import { validateAddLineInput } from '@/lib/helpers/validations/validateAddLineInput'
 import type { CartActionsResult, CartResponse } from '@types'
 import { updateTag } from 'next/cache'
+import { trackServerEvent, type AnalyticsItem } from '@/lib/tracking/server'
 
 type CartLineInput = {
   variantId: string
@@ -44,6 +44,45 @@ export const addCartLinesAction = async (
     }
 
     const cart = normalizeCart(rawCart)
+
+    const trackingItems: AnalyticsItem[] = []
+    let totalValue = 0
+    let currency = 'NOK'
+
+    for (const line of lines) {
+      const addedLine = rawCart.lines.edges.find(
+        (edge: any) => edge.node.merchandise.id === line.variantId
+      )
+
+      if (addedLine) {
+        const merchandise = addedLine.node.merchandise
+        const price = parseFloat(merchandise.price.amount)
+
+        trackingItems.push({
+          item_id: merchandise.id,
+          item_name: merchandise.product.title,
+          item_variant: merchandise.title,
+          item_brand: merchandise.product.vendor,
+          price: price,
+          quantity: line.quantity
+        })
+
+        totalValue += price * line.quantity
+        currency = merchandise.price.currencyCode
+      }
+    }
+
+    if (trackingItems.length > 0) {
+      await trackServerEvent({
+        name: 'add_to_cart',
+        ecommerce: {
+          currency: currency as 'NOK' | 'EUR' | 'USD',
+          value: totalValue,
+          items: trackingItems
+        }
+      })
+    }
+
     return { success: true, message: 'Varer lagt til.', cart }
   } catch (error) {
     return mapThrownErrorToActionResult(error)

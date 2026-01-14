@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { createHash } from 'crypto'
 
-// CLEANUP: Fjernet SGTM_ENDPOINT og TRACKING_PATH da vi bruker subdomene-oppsett direkte.
-
 const BLOCKED_USER_AGENTS = [
   'python-httpx',
   'python-requests',

@@ -4,7 +4,6 @@ interface Attribute {
   key: string
   value: string
 }
-
 export async function getMarketingAttributes(): Promise<Attribute[]> {
   const cookieStore = await cookies()
   const attributes: Attribute[] = []
@@ -24,7 +23,10 @@ export async function getMarketingAttributes(): Promise<Attribute[]> {
   if (gaCookie && typeof gaCookie === 'string') {
     const parts = gaCookie.split('.')
     if (parts.length >= 3) {
-      attributes.push({ key: '_ga_client_id', value: parts.slice(2).join('.') })
+      const clientId = parts.slice(2).join('.')
+      if (clientId) {
+        attributes.push({ key: '_ga_client_id', value: clientId })
+      }
     }
   }
 
@@ -33,8 +35,10 @@ export async function getMarketingAttributes(): Promise<Attribute[]> {
     .find(c => c.name.startsWith('_ga_') && c.name !== '_ga')
   if (sessionCookie && typeof sessionCookie.value === 'string') {
     const parts = sessionCookie.value.split('.')
-    if (parts.length >= 3 && parts[2]) {
-      attributes.push({ key: '_ga_session_id', value: parts[2] })
+    const sessionId = parts[2]
+
+    if (parts.length >= 3 && sessionId) {
+      attributes.push({ key: '_ga_session_id', value: sessionId })
     }
   }
 

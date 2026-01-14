@@ -1,5 +1,3 @@
-// Path: src/app/api/shopify/webhooks/orders-paid/route.ts
-
 import { NextResponse } from 'next/server'
 import { verifyShopifyWebhook } from '@/lib/shopify/verifyWebhook'
 import { redisGet } from '@/lib/redis'
@@ -7,6 +5,7 @@ import type { CheckoutAttribution, OrderPaid } from '@types'
 import { safeString } from '@/lib/utils/safeString'
 import { normalizePhone } from '@/lib/utils/normalizePhone'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
+import { handlePurchaseEvent } from '@/lib/tracking//handlePurchaseEvents'
 import {
   FacebookAdsApi,
   ServerEvent,
@@ -50,6 +49,10 @@ export async function POST(request: Request) {
     console.error('[Meta CAPI] Failed to parse JSON body')
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
+
+  handlePurchaseEvent(order).catch(err =>
+    console.error('[sGTM] Failed to dispatch purchase event:', err)
+  )
 
   const api = FacebookAdsApi.init(ACCESS_TOKEN)
   if (process.env.NODE_ENV === 'development') {

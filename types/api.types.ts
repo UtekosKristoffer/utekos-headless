@@ -72,6 +72,7 @@ export type ShopifyCreateCartOperation = ShopifyOperation<
   { cartCreate: { cart: CartResponse } },
   {
     lines: { merchandiseId: string; quantity: number }[]
+    attributes?: { key: string; value: string }[]
   }
 >
 
