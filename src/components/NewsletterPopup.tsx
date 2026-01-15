@@ -22,7 +22,6 @@ export function NewsletterPopup() {
   const pathname = usePathname()
   const soundPlayedRef = useRef(false)
 
-  // Lydeffekt
   useEffect(() => {
     if (isOpen && !soundPlayedRef.current) {
       const audio = new Audio('/sounds/popup-slam.mp3')
@@ -38,7 +37,6 @@ export function NewsletterPopup() {
     if (pathname?.includes('/checkouts') || pathname?.includes('/handlekurv'))
       return
 
-    // NY NØKKEL (v5) - så du får testet fixen med en gang
     const hasSeenPopup = localStorage.getItem('utekos_newsletter_v5')
     if (hasSeenPopup) return
 
@@ -85,14 +83,8 @@ export function NewsletterPopup() {
       <DialogContent
         className={cn(
           'fixed z-50 grid w-full gap-0 p-0 border-neutral-800 bg-neutral-950 text-white shadow-2xl overflow-hidden',
-
-          // Sentrering
           'left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
-
-          // Størrelse
           'sm:max-w-[800px] sm:rounded-2xl',
-
-          // Animasjoner
           'duration-500 ease-out',
           'data-[state=open]:animate-in',
           'data-[state=closed]:animate-out',
@@ -101,14 +93,9 @@ export function NewsletterPopup() {
           'data-[state=open]:fade-in-0',
           'data-[state=closed]:zoom-out-95',
           'data-[state=closed]:fade-out-0',
-
-          // --- CSS FIX FOR STANDARD KRYSSET ---
-          // Styler det innebygde krysset i DialogContent
           '[&>button]:text-neutral-400 [&>button]:hover:text-white [&>button]:top-4 [&>button]:right-4 [&>button]:h-8 [&>button]:w-8 [&>button]:bg-black/20 [&>button]:rounded-full'
         )}
       >
-        {/* Ingen manuell <button> her lenger - vi stoler på DialogContent sitt innebygde kryss */}
-
         <div className='grid grid-cols-1 md:grid-cols-2'>
           {/* Venstre side: Bilde */}
           <div className='relative hidden md:flex h-full min-h-[400px] w-full flex-col justify-between bg-neutral-900 p-8'>
@@ -129,7 +116,6 @@ export function NewsletterPopup() {
             </div>
           </div>
 
-          {/* Høyre side: Skjema */}
           <div className='flex flex-col justify-center p-8 sm:p-12 bg-neutral-950'>
             <DialogHeader className='text-left mb-6'>
               <DialogTitle className='text-2xl sm:text-3xl font-bold tracking-tight mb-2'>
