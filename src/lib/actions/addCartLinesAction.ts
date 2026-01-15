@@ -7,13 +7,10 @@ import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { setCartIdInCookie } from '@/lib/helpers/cart/setCartIdInCookie'
 import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import { validateAddLineInput } from '@/lib/helpers/validations/validateAddLineInput'
-import type { CartActionsResult, CartResponse } from '@types'
 import { updateTag } from 'next/cache'
-import {
-  trackServerEvent,
-  type AnalyticsItem
-} from '@/lib/tracking/google/trackingServerEvent'
-
+import { trackServerEvent } from '@/lib/tracking/google/trackingServerEvent'
+import type { AnalyticsItem } from '@types'
+import type { CartActionsResult, CartResponse } from '@types'
 type CartLineInput = {
   variantId: string
   quantity: number
