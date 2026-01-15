@@ -5,7 +5,7 @@ import type { CheckoutAttribution, OrderPaid } from '@types'
 import { safeString } from '@/lib/utils/safeString'
 import { normalizePhone } from '@/lib/utils/normalizePhone'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
-import { handlePurchaseEvent } from '@/lib/tracking//handlePurchaseEvents'
+import { handlePurchaseEvent } from '@/lib/tracking/google/handlePurchaseEvents'
 import {
   FacebookAdsApi,
   ServerEvent,

@@ -19,12 +19,9 @@ export async function SocialProofSection() {
         </div>
 
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-2'>
-          {/* Venstre kolonne */}
           <div className='rounded-xl border border-neutral-800 bg-sidebar-foreground p-8'>
             <CustomerNetwork />
           </div>
-
-          {/* Høyre kolonne */}
           <div className='rounded-xl border border-neutral-800 bg-sidebar-foreground p-8'>
             <CustomerStory />
           </div>

@@ -3,7 +3,7 @@
 import { mutationCartCreate } from '@/api/graphql/mutations/cart'
 import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
 import { ShopifyApiError } from '@/lib/errors/ShopifyApiError'
-import { getMarketingAttributes } from '@/lib/tracking/getMarketingAttributes'
+import { getMarketingAttributes } from '@/lib/tracking/google/getMarketingAttributes'
 
 import type { CartResponse, ShopifyCreateCartOperation } from '@types'
 

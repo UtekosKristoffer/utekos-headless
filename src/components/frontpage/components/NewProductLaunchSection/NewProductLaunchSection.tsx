@@ -16,13 +16,13 @@ import type { MetaUserData, MetaEventPayload } from '@types'
 import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
-
-const productName = 'Utekos TechDown™'
-const productHandle = 'utekos-techdown'
-const productUrl = `/produkter/${productHandle}`
-const originalPrice = 1990
-const discountAmount = 200
-const currentPrice = originalPrice - discountAmount
+import {
+  productName,
+  productHandle,
+  productUrl,
+  originalPrice,
+  currentPrice
+} from '@/api/constants'
 
 interface NewProductLaunchSectionProps {
   variantId: string

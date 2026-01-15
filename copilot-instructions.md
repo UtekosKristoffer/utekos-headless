@@ -9,7 +9,7 @@ These comments are meant to guide GitHub Copilot in generating code that adheres
 
 ## Frameworks and Libraries
 
-- The codebase uses Next.js 15 with the App Router, and React 19 with Server Actions as a core feature.
+- The codebase uses Next.js 16 with the App Router, and React 19 with Server Actions as a core feature.
 
 ## Coding Standards
 

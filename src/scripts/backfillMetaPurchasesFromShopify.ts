@@ -6,7 +6,7 @@ import type {
   GqlAddress,
   NormalizedOrder,
   GqlOrdersResponse
-} from './types'
+} from '@types'
 
 const bizSdk = require('facebook-nodejs-business-sdk')
 const { ServerEvent, EventRequest, UserData, CustomData, FacebookAdsApi } =

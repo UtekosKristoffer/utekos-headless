@@ -4,36 +4,13 @@ import { NextRequest, NextResponse } from 'next/server'
 import { redisSet } from '@/lib/redis'
 import { getStorageKey } from '@/lib/utils/getStorageKey'
 import { normalize } from '@/lib/meta/normalization'
-import type { CaptureBody, CheckoutAttribution, MetaUserData } from '@types'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
-import {
-  parseGaClientId,
-  parseGaSessionId,
-  findGaSessionCookie
-} from '@/lib/google/parser'
-
-const GA_MEASUREMENT_ID = 'G-FCES3L0M9M'
-
-function getClientIp(req: NextRequest): string | null {
-  const forwardedFor = req.headers.get('x-forwarded-for')
-  if (forwardedFor) {
-    const candidates = forwardedFor
-      .split(',')
-      .map(ip => ip.trim())
-      .filter(Boolean)
-    const ipv6 = candidates.find(ip => ip.includes(':'))
-    if (ipv6) return ipv6
-    if (candidates.length > 0) return candidates[0] ?? null
-  }
-
-  const realIp = req.headers.get('x-real-ip')
-  if (realIp) return realIp.trim()
-
-  const reqIp = (req as any).ip
-  if (reqIp) return String(reqIp)
-
-  return null
-}
+import { getClientIp } from '@/lib/tracking/user-data/getClientIp'
+import { GA_MEASUREMENT_ID } from '@/api/constants/monitoring'
+import { parseGaClientId } from '@/lib/tracking/google/parseGaClientId'
+import { parseGaSessionId } from '@/lib/tracking/google/parseGaSessionId'
+import { findGaSessionCookie } from '@/lib/tracking/google/findGaSessionCookie'
+import type { CaptureBody, CheckoutAttribution, MetaUserData } from '@types'
 
 export async function POST(req: NextRequest) {
   let body: CaptureBody
@@ -50,23 +27,17 @@ export async function POST(req: NextRequest) {
 
   const requestIp = getClientIp(req)
   const userAgent = req.headers.get('user-agent') || undefined
-
-  // --- COOKIE EXTRACTION START ---
   const cookieStore = req.cookies
-
-  // Meta Cookies
   const cookieFbp = cookieStore.get('_fbp')?.value
   const cookieFbc = cookieStore.get('_fbc')?.value
   const cookieExtId = cookieStore.get('ute_ext_id')?.value
   const cookieUserHash = cookieStore.get('ute_user_hash')?.value
-
   const gaCookie = cookieStore.get('_ga')?.value
   const gaClientId = parseGaClientId(gaCookie)
   const cookieMap = new Map<string, string>()
   cookieStore.getAll().forEach(c => cookieMap.set(c.name, c.value))
   const gaSessionCookieVal = findGaSessionCookie(cookieMap, GA_MEASUREMENT_ID)
   const gaSessionId = parseGaSessionId(gaSessionCookieVal)
-
   const userDataToSave: MetaUserData = {}
 
   if (body.userData?.fbp) userDataToSave.fbp = body.userData.fbp
@@ -112,8 +83,6 @@ export async function POST(req: NextRequest) {
   if (userDataToSave.country)
     userDataToSave.country = normalize.country(userDataToSave.country)
 
-  // Konstruer payload med både Meta og Google data
-  // NB: Sørg for at CheckoutAttribution typen din er oppdatert med ga_ variablene
   const payload: CheckoutAttribution = {
     cartId: body.cartId ?? null,
     checkoutUrl: body.checkoutUrl,
@@ -134,7 +103,6 @@ export async function POST(req: NextRequest) {
       external_id: userDataToSave.external_id,
       hasEmailHash: !!userDataToSave.email_hash,
       clientIp: userDataToSave.client_ip_address,
-      // Logger status på Google-id
       ga_client_id: gaClientId ? 'Captured' : 'Missing',
       ga_session_id: gaSessionId ? 'Captured' : 'Missing'
     },

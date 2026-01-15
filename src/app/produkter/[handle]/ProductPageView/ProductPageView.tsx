@@ -29,7 +29,6 @@ import { ProductDescription } from './ProductDescription'
 import { TrustSignals } from './TrustSignals/TrustSignals'
 import { TechDownLaunchOffer } from './TechDownLaunchOffer'
 
-// ... imports av dynamic components ...
 const SmartRealTimeActivity = dynamic(
   () =>
     import(
@@ -92,7 +91,6 @@ export default function ProductPageView({
 
   return (
     <section className='relative container mx-auto mt-10 p-4 md:p-8'>
-      {/* Bakgrunnseffekter - Statisk */}
       <div className='absolute inset-0 -z-10 opacity-20'>
         <div
           className='absolute left-1/4 top-0 h-[600px] w-[600px] blur-3xl'
@@ -107,8 +105,6 @@ export default function ProductPageView({
           }}
         />
       </div>
-
-      {/* Breadcrumb - Statisk: Fjernet Activity */}
       <AnimatedBlock
         className='will-animate-fade-in-up'
         delay='0s'
@@ -133,14 +129,12 @@ export default function ProductPageView({
 
       <ProductPageGrid>
         <GalleryColumn>
-          {/* Header - Statisk: Fjernet Activity */}
           <ProductHeader
             productHandle={productData.handle}
             productTitle={title}
             productSubtitle={productSubtitle ?? ''}
           />
 
-          {/* Gallery - Interaktivt: Behold Activity for isolert hydrering */}
           <Activity>
             <ProductGalleryCard
               galleryContent={
@@ -163,11 +157,8 @@ export default function ProductPageView({
             />
           </Activity>
         </GalleryColumn>
-
-        {/* Options Column - Interaktiv kjerne */}
         <OptionsColumn>
           <AnimatedBlock className='will-animate-fade-in-right' delay='0.1s'>
-            {/* Prispanel - Reaktivt */}
             <div
               data-product-price={selectedVariant.price.amount ?? '0'}
               data-product-currency={selectedVariant.price.currencyCode}
@@ -187,8 +178,6 @@ export default function ProductPageView({
               <h2 id='product-options' className='sr-only'>
                 Produktvalg
               </h2>
-
-              {/* Selectors - Interaktivt */}
               <div className='mt-8 flex flex-col gap-8'>
                 {sortedProductOptions.map(
                   (productOption: ShopifyProduct['options'][number]) =>
@@ -203,10 +192,8 @@ export default function ProductPageView({
                 )}
               </div>
 
-              {/* Trust Signals - Statisk: Fjernet Activity */}
               <TrustSignals />
 
-              {/* Launch Offer - Interaktivt */}
               {productData.handle === 'utekos-techdown' && (
                 <Activity>
                   <TechDownLaunchOffer

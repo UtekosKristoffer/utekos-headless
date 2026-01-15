@@ -17,3 +17,10 @@ export const key = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN!
 export const HIDDEN_PRODUCT_TAG = 'useNext'
 
 export const FREE_SHIPPING_THRESHOLD = 999
+
+export const productName = 'Utekos TechDown™'
+export const productHandle = 'utekos-techdown'
+export const productUrl = `/produkter/${productHandle}`
+export const originalPrice = 1990
+export const discountAmount = 200
+export const currentPrice = originalPrice - discountAmount

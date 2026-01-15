@@ -1,12 +1,9 @@
 import './globals.css'
 import { geistSans } from '@/db/config/font.config'
-import { QueryClient, dehydrate } from '@tanstack/react-query'
 import { Suspense, type ReactNode } from 'react'
 import { mainMenu } from '@/db/config/menu.config'
 import { Analytics } from '@vercel/analytics/react'
 import { Toaster } from '@/components/ui/sonner'
-import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
-import Providers from '@/components/providers/Providers'
 import AnnouncementBanner from '@/components/frontpage/components/SpecialOfferSection/AnnouncementBanner'
 import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
@@ -14,10 +11,10 @@ import type { RootLayoutProps } from '@types'
 import type { Metadata } from 'next'
 import { ChatBotAgent } from '@/components/chat/ChatBotAgent/source-code'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
-import { getCachedCart } from '../lib/helpers/cart/getCachedCart'
 import { GoogleTagManager } from '@next/third-parties/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { NewsletterPopup } from '@/components/NewsletterPopup'
+import { CartProviderLoader } from '@/components/providers/CartProviderLoader'
 import { CookieConsentBanner } from '@/components/CookieBanner'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -84,24 +81,6 @@ export const metadata: Metadata = {
       'facebook-domain-verification': 'e3q80hk1igl2celczeysvf7y1mltrs'
     }
   }
-}
-
-async function CartProviderLoader({ children }: { children: ReactNode }) {
-  const queryClient = new QueryClient()
-  const cartId = await getCartIdFromCookie()
-
-  await queryClient.prefetchQuery({
-    queryKey: ['cart', cartId],
-    queryFn: () => getCachedCart(cartId)
-  })
-
-  const dehydratedState = dehydrate(queryClient)
-
-  return (
-    <Providers dehydratedState={dehydratedState} cartId={cartId}>
-      {children}
-    </Providers>
-  )
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {

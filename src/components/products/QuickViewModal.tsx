@@ -19,33 +19,12 @@ import { toast } from 'sonner'
 import { VariantSelectors } from './VariantSelectors'
 import { Price } from '../jsx/Price'
 import { FreeBuffSelector } from './FreeBuffSelector'
+import { QuickViewModalSkeleton } from '../skeletons/QuickViewModalSkeleton'
 
 interface QuickViewModalProps {
   productHandle: string
   isOpen: boolean
   onOpenChange: (isOpen: boolean) => void
-}
-
-function ModalSkeleton() {
-  return (
-    <div className='grid grid-cols-1 gap-8 lg:grid-cols-2'>
-      <Skeleton className='aspect-[3/4] w-full rounded-2xl' />
-      <div className='flex flex-col gap-6'>
-        <Skeleton className='h-12 w-3/4' />
-        <Skeleton className='h-8 w-32' />
-        <div className='space-y-4 pt-4'>
-          <Skeleton className='h-5 w-24' />
-          <div className='flex gap-3'>
-            <Skeleton className='h-12 w-28' />
-            <Skeleton className='h-12 w-28' />
-            <Skeleton className='h-12 w-28' />
-          </div>
-        </div>
-        <Skeleton className='h-32 w-full rounded-xl' />
-        <Skeleton className='mt-auto h-14 w-full rounded-full' />
-      </div>
-    </div>
-  )
 }
 
 export function QuickViewModal({
@@ -56,12 +35,8 @@ export function QuickViewModal({
   const [productData, setProductData] = useState<ShopifyProduct | null>(null)
   const [buffProduct, setBuffProduct] = useState<ShopifyProduct | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-
   const [includeBuff, setIncludeBuff] = useState(true)
-
-  // Hardkodet til Vargnatt
   const selectedBuffColor = 'Vargnatt'
-
   const { variantState, updateVariant } = useVariantState(
     productData ?? undefined,
     false
@@ -122,7 +97,7 @@ export function QuickViewModal({
             <DialogDescription className='sr-only'>
               Vinduet viser detaljer om valgt produkt.
             </DialogDescription>
-            <ModalSkeleton />
+            <QuickViewModalSkeleton />
           </div>
         : <>
             <DialogHeader className='space-y-3 pb-6'>

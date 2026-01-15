@@ -33,11 +33,9 @@ export async function generateMetadata(
   { params, searchParams }: GenerateMetadataProps,
   _parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // (Din eksisterende kode her...)
   const { handle } = await params
   const resolvedSearchParams = await searchParams
   const variantId = resolvedSearchParams?.variant as string | undefined
-
   const rawProduct = await getProduct(handle)
 
   if (!rawProduct) {

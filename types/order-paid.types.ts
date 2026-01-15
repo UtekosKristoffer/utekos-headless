@@ -117,4 +117,5 @@ export interface MarketingParams {
   source?: string
   medium?: string
   [key: string]: string | undefined
+  
 }
