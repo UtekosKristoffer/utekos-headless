@@ -4,10 +4,6 @@ import crypto from 'crypto'
 
 type LogLevel = 'INFO' | 'WARN' | 'ERROR' | 'DEBUG'
 
-/**
- * Sentralisert logging for både Vercel Console og Redis.
- * Sikrer at vi har tidsstempel og kontekst for alle hendelser.
- */
 export async function logToAppLogs(
   level: LogLevel,
   event: string,

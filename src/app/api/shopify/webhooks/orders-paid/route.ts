@@ -50,9 +50,22 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  handlePurchaseEvent(order).catch(err =>
-    console.error('[sGTM] Failed to dispatch purchase event:', err)
-  )
+  try {
+    await handlePurchaseEvent(order)
+    await logToAppLogs(
+      'INFO',
+      'sGTM Purchase Dispatch Success',
+      { orderId: order.id, value: order.total_price },
+      { source: 'orders-paid webhook' }
+    )
+  } catch (err: any) {
+    await logToAppLogs(
+      'ERROR',
+      'sGTM Purchase Dispatch Failed',
+      { orderId: order.id, error: err.message },
+      { source: 'orders-paid webhook' }
+    )
+  }
 
   const api = FacebookAdsApi.init(ACCESS_TOKEN)
   if (process.env.NODE_ENV === 'development') {
@@ -100,7 +113,6 @@ export async function POST(request: Request) {
   )
 
   const userData = new UserData()
-
   const email =
     safeString(order.email)
     || safeString(order.contact_email)

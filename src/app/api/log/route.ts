@@ -1,7 +1,7 @@
 // Path: src/app/api/log/route.ts
 import { NextRequest, NextResponse, connection } from 'next/server'
 import { redisList } from '@/lib/redis'
-import { logToAppLogs } from '@/lib/utils/logToAppLogs' // <--- Ny import
+import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 import type { LogPayload } from '@types'
 
 export async function GET() {
