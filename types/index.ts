@@ -21,6 +21,7 @@ export type * from './order-paid.types'
 export type * from './order-paid-related-types'
 export type * from './monitoring.types'
 export type * from './backfill-shopify.types'
+export type * from './user-data.types'
 export type RootLayoutProps = Readonly<{
   children: React.ReactNode
 }>

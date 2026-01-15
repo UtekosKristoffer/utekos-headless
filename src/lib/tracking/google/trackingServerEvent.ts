@@ -11,7 +11,7 @@ const API_SECRET = process.env.NEXT_PUBLIC_GA_API_SECRET
 
 export async function trackServerEvent(
   event: AnalyticsEvent,
-  overrides?: TrackingOverrides // <-- Dette argumentet manglet i definisjonen din
+  overrides?: TrackingOverrides
 ) {
   if (!MEASUREMENT_ID || !API_SECRET || !SGTM_ENDPOINT) {
     return
@@ -22,35 +22,42 @@ export async function trackServerEvent(
     let sessionId: string | undefined
     let fbp: string | undefined
     let fbc: string | undefined
-    let emailHash: string | undefined
     let userAgent = overrides?.userAgent || 'Next.js Server'
+    let userData = overrides?.userData || {}
+    let userProperties = overrides?.userProperties || {}
 
     if (overrides) {
       clientId = overrides.clientId || uuidv4()
       sessionId = overrides.sessionId
       fbp = overrides.fbp
       fbc = overrides.fbc
-      emailHash = overrides.emailHash
     } else {
       const cookieStore = await cookies()
       const gaCookie = cookieStore.get('_ga')?.value
-      clientId = gaCookie ? parseGaCookie(gaCookie) : uuidv4()
+      clientId = gaCookie ? gaCookie.split('.').slice(2).join('.') : uuidv4()
 
       const sessionCookie = cookieStore
         .getAll()
         .find(c => c.name.startsWith('_ga_') && c.name !== '_ga')
-      sessionId =
-        sessionCookie ? parseSessionId(sessionCookie.value) : undefined
+      sessionId = sessionCookie ? sessionCookie.value.split('.')[2] : undefined
 
       fbp = cookieStore.get('_fbp')?.value
       fbc = cookieStore.get('_fbc')?.value
-      emailHash = cookieStore.get('email_hash')?.value
+    }
+
+    const mpUserData = {
+      ...userData,
+      fbc: fbc,
+      fbp: fbp
     }
 
     const payload = {
       client_id: clientId,
-      timestamp_micros: Date.now() * 1000,
+      user_id: overrides?.userId,
+      timestamp_micros: overrides?.timestampMicros || Date.now() * 1000,
       non_personalized_ads: false,
+      user_data: mpUserData,
+      user_properties: userProperties,
       events: [
         {
           name: event.name,
@@ -62,12 +69,7 @@ export async function trackServerEvent(
             debug_mode: process.env.NODE_ENV === 'development' ? 1 : undefined
           }
         }
-      ],
-      user_data: {
-        fbc: fbc,
-        fbp: fbp,
-        sha256_email_address: emailHash
-      }
+      ]
     }
 
     const endpoint = `${SGTM_ENDPOINT}/mp/collect?measurement_id=${MEASUREMENT_ID}&api_secret=${API_SECRET}`
@@ -84,20 +86,4 @@ export async function trackServerEvent(
   } catch (error) {
     console.error('[Tracking] Error:', error)
   }
-}
-
-function parseGaCookie(cookieValue: string): string {
-  const parts = cookieValue.split('.')
-  if (parts.length >= 3) {
-    return parts.slice(2).join('.')
-  }
-  return cookieValue
-}
-
-function parseSessionId(cookieValue: string): string | undefined {
-  const parts = cookieValue.split('.')
-  if (parts.length >= 3) {
-    return parts[2]
-  }
-  return undefined
 }

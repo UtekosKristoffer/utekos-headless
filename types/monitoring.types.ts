@@ -30,6 +30,9 @@ export interface AnalyticsItem {
   index?: number
   coupon?: string
   discount?: number
+  location_id?: string
+  item_list_id?: string
+  item_list_name?: string
 }
 
 export interface AnalyticsEvent {
@@ -43,17 +46,20 @@ export interface AnalyticsEvent {
     shipping?: number
     tax?: number
     items: AnalyticsItem[]
+    customer_type?: 'new' | 'returning'
   }
 }
 
 export interface TrackingOverrides {
   clientId?: string
   sessionId?: string
+  userId?: string
   fbp?: string
   fbc?: string
-  emailHash?: string
+  userData?: any
+  userProperties?: Record<string, any>
   userAgent?: string
   ipOverride?: string
+  timestampMicros?: number
 }
-
 export type Currency = 'NOK' | 'EUR' | 'USD'

@@ -87,7 +87,7 @@ export function SupportForm() {
 
   useEffect(() => {
     handleStateChange()
-  }, [state])
+  }, [state, handleStateChange])
 
   return (
     <Form {...form}>
