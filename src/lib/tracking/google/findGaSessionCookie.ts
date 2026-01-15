@@ -1,4 +1,4 @@
-// Path: src/lib/google/findGaSessionCookie.ts
+// Path: src/lib/tracking/google/findGaSessionCookie.ts
 
 export function findGaSessionCookie(
   cookies: Map<string, string>,
@@ -9,3 +9,5 @@ export function findGaSessionCookie(
 
   return cookies.get(cookieName)
 }
+
+

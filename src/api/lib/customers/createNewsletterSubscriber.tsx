@@ -1,6 +1,5 @@
 import { shopifyAdminFetch } from '@/api/shopify/admin/adminFetch'
 import { customerCreateMutation } from '@/api/graphql/mutations/customerCreate'
-
 type CustomerCreateOperation = {
   data: {
     customerCreate: {

@@ -12,7 +12,6 @@ export async function handlePurchaseEvent(order: any) {
     const sessionId = getAttr('_ga_session_id')
     const fbp = getAttr('_fbp')
     const fbc = getAttr('_fbc')
-
     const customer = order.customer || {}
     const billing = order.billing_address || {}
     const shipping = order.shipping_address || {}

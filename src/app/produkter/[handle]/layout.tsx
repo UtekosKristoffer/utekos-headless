@@ -1,3 +1,5 @@
+// Path: src/app/produkter/[handle]/layout.tsx
+
 import { ProductJsonLd } from './ProductJsonLd'
 import type { ReactNode } from 'react'
 

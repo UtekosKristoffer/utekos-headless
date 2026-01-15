@@ -3,12 +3,6 @@
 
 import { z } from '@/db/zod/zodClient'
 
-/**
- * Klient-skjema (Zod Mini).
- * - Lengde/format via .check(z.minLength/..., z.email, osv.)
- * - Checkbox-krav via .check(z.refine(..., { error }))
- * - Ingen .refine direkte på boolean (Mini bruker .check)
- */
 export const ClientContactFormSchema = z.object({
   name: z
     .string()

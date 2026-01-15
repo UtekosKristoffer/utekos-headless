@@ -89,4 +89,3 @@ export function CartDrawer(): React.JSX.Element {
     </Drawer>
   )
 }
-
