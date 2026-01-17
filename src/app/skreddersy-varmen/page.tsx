@@ -1,3 +1,5 @@
+// Path: src/app/skreddersy-varmen/page.tsx
+
 import { Suspense } from 'react'
 import { TechDownSlider } from './TechDownSlider'
 import { SectionThreeInOne } from './SectionThreeInOne'
@@ -8,6 +10,7 @@ import { getProduct } from '@/api/lib/products/getProduct'
 import { StickyMobileAction } from './StickyMobileAction'
 import { PreFooterNavigation } from './PreFooterNavigation'
 import type { Metadata } from 'next'
+
 export const metadata: Metadata = {
   title: 'Skreddersy varmen | Juster, form og nyt',
   description:
@@ -35,16 +38,18 @@ export const metadata: Metadata = {
 }
 
 export default async function LandingPage() {
-  const [techDown, dun, mikro] = await Promise.all([
+  const [techDown, dun, mikro, buff] = await Promise.all([
     getProduct('utekos-techdown'),
     getProduct('utekos-dun'),
-    getProduct('utekos-mikrofiber')
+    getProduct('utekos-mikrofiber'),
+    getProduct('utekos-buff') // Hent buff-produktet
   ])
 
   const productsMap = {
     'utekos-techdown': techDown,
     'utekos-dun': dun,
-    'utekos-mikrofiber': mikro // Merk: Denne nøkkelen må matche ID-en i PurchaseClient
+    'utekos-mikrofiber': mikro,
+    'utekos-buff': buff // Legg til buff i produkt-map
   }
 
   if (!techDown) return <div>Produktet TechDown ble ikke funnet.</div>
