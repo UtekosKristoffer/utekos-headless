@@ -86,3 +86,17 @@ Always ensure to follow `exactOptionalPropertyTypes: true` and
 - **`route.ts` files in `/Users/Hjelmeland/my-app/src/app/api`** or
   **`src/app/api`**: Important in connection with tracking and other API-related
   logic
+
+## IMPORANT
+
+### MAIN TASK:
+
+Locale the folder GOOGLEANALYTICS/GOOGLECLOUD/CLOUDRUN/APPLICATION-LOAD-BALANCER
+from the project root and always make sure that every file in de folder and all
+subfolders are formatted with structured markdowm format. The file has the
+following path from my laptop:
+/Users/Hjelmeland/my-app/GOOGLEANALYTICS/GOOGLECLOUD/CLOUDRUN/APPLICATION-LOAD-BALANCER:
+
+That is as said: projectroot location. The folder contains official
+documentation, therefore you try to keep as much details as possible, its not
+intended to reduce the amount of text.

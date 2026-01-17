@@ -1,3 +1,5 @@
+// Path: src/app/skreddersy-varmen/InventoryStatus.tsx
+
 import { getProduct } from '@/api/lib/products/getProduct'
 import { StockDisplay } from './StockDisplay' // Importer UI
 

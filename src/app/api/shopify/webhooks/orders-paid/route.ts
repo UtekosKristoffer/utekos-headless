@@ -213,13 +213,10 @@ export async function POST(request: Request) {
   }
 
   const customData = new CustomData()
-
   const currency = safeString(order.currency) || 'NOK'
   customData.setCurrency(currency)
-
   const value = Number(order.total_price || 0)
   customData.setValue(value)
-
   customData.setContents(contentList)
   customData.setContentIds(contentIds)
   customData.setContentType('product')

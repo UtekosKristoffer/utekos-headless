@@ -51,3 +51,4 @@ export async function applyDiscount(cartId: string, discountCode: string) {
     throw new Error(message)
   }
 }
+

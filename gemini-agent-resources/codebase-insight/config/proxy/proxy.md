@@ -1,0 +1,47 @@
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import { hashEmail } from './lib/tracking/hash/hashEmail'
+import { formatFbcCookie } from './lib/tracking/proxy/formatFbcCookie'
+import { extractMarketingParams } from './lib/tracking/proxy/extractMarketingParams'
+import { buildCookieConfigs } from './lib/tracking/proxy/buildCookieConfigs'
+import { formatCookieHeader } from './lib/tracking/proxy/formatCookieHeader'
+import { handleMarketingParams } from './lib/tracking/proxy/handleMarketingParams'
+import { BLOCKED_USER_AGENTS } from '@/api/constants/monitoring'
+
+export async function proxy(request: NextRequest) {
+  const userAgent = request.headers.get('user-agent')?.toLowerCase() || ''
+  const isBlockedAgent = BLOCKED_USER_AGENTS.some(agent =>
+    userAgent.includes(agent)
+  )
+
+  if (isBlockedAgent) {
+    return new NextResponse(null, { status: 403, statusText: 'Forbidden' })
+  }
+
+  const url = new URL(request.url)
+  const pathname = url.pathname
+  const isTargetRoute =
+    !pathname.startsWith('/_next') && !pathname.startsWith('/api/internal')
+
+  if (!isTargetRoute) {
+    return NextResponse.next()
+  }
+
+  const response = NextResponse.next()
+  return handleMarketingParams(request, response)
+}
+
+export const config = {
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|videos).*)'
+  ]
+}
+
+export {
+  handleMarketingParams,
+  extractMarketingParams,
+  buildCookieConfigs,
+  formatCookieHeader,
+  hashEmail,
+  formatFbcCookie
+}
