@@ -1,4 +1,5 @@
 // Path: src/app/kontaktskjema/SupportForm.tsx
+
 'use client'
 
 import { SupportPageButton } from '@/app/kontaktskjema/Buttons/SupportPageButton'
@@ -29,7 +30,8 @@ import {
 } from '@/lib/actions/submitContactForm'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import { useActionState, useEffect, useEffectEvent } from 'react'
+// Fjern useEffectEvent, legg til useRef
+import { useActionState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import type { z } from '@/db/zod/zodClient'
@@ -59,13 +61,13 @@ export function SupportForm() {
     reValidateMode: 'onChange',
     criteriaMode: 'all'
   })
+  const lastStateRef = useRef<ContactFormState | null>(null)
 
-  const messageValue = form.watch('message') ?? ''
-  const messageChars = messageValue.length
-  const messageMin = 10
-
-  const handleStateChange = useEffectEvent(() => {
-    if (!state.message) return
+  useEffect(() => {
+    // Ikke gjør noe hvis tilstanden er den samme som den vi nettopp behandlet
+    if (state === lastStateRef.current || !state.message) {
+      return
+    }
 
     if (state.errors) {
       toast.error('Validering feilet', {
@@ -83,11 +85,13 @@ export function SupportForm() {
       toast.success(state.message)
       form.reset()
     }
-  })
 
-  useEffect(() => {
-    handleStateChange()
-  }, [state, handleStateChange])
+    lastStateRef.current = state
+  }, [state, form])
+
+  const messageValue = form.watch('message') ?? ''
+  const messageChars = messageValue.length
+  const messageMin = 10
 
   return (
     <Form {...form}>
@@ -110,7 +114,6 @@ export function SupportForm() {
             </FormItem>
           )}
         />
-
         <div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
           <FormField
             control={form.control}
@@ -152,7 +155,6 @@ export function SupportForm() {
             )}
           />
         </div>
-
         <FormField
           control={form.control}
           name='country'
@@ -184,7 +186,6 @@ export function SupportForm() {
             </FormItem>
           )}
         />
-
         <FormField
           control={form.control}
           name='orderNumber'
@@ -204,7 +205,6 @@ export function SupportForm() {
             </FormItem>
           )}
         />
-
         <FormField
           control={form.control}
           name='message'
@@ -220,7 +220,6 @@ export function SupportForm() {
                   className='min-h-[160px] rounded-none border-neutral-800 bg-background'
                 />
               </FormControl>
-
               <div className='mt-1 flex items-center justify-between text-xs text-muted-foreground'>
                 <span>
                   {messageChars < messageMin ?
@@ -235,7 +234,6 @@ export function SupportForm() {
             </FormItem>
           )}
         />
-
         <FormField
           control={form.control}
           name='privacy'
@@ -268,7 +266,6 @@ export function SupportForm() {
             </FormItem>
           )}
         />
-
         <SupportPageButton
           type='submit'
           isBusy={isPending}
