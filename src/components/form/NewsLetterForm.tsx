@@ -4,7 +4,7 @@ import { useActionState, useEffect, useRef } from 'react'
 import { subscribeToNewsletter } from '@/lib/actions/subscribeToNewsLetters'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { ArrowRight, Mail } from 'lucide-react' // La til Mail-ikon for litt ekstra stil
+import { ArrowRight, Mail } from 'lucide-react'
 import { toast } from 'sonner'
 
 const initialState = {
@@ -29,10 +29,10 @@ export function NewsletterForm() {
   }, [state])
 
   return (
-    <div className='w-full max-w-sm mx-auto space-y-3'>
-      {/* --- NY TEKST OM RABATT START --- */}
+    <div className='w-full max-w-sm mx-auto space-y-3 text-left'>
+      {/* Informasjon om rabatt */}
       <div className='flex flex-col space-y-1'>
-        <h3 className='font-semibold text-lg flex items-center gap-2'>
+        <h3 className='font-semibold text-lg flex items-center gap-2 text-foreground'>
           <Mail className='w-5 h-5' />
           Få 800kr rabatt på Comfyrobe™
         </h3>
@@ -41,8 +41,8 @@ export function NewsletterForm() {
           din.
         </p>
       </div>
-      {/* --- NY TEKST OM RABATT SLUTT --- */}
 
+      {/* Selve skjemaet (Uten <Form> wrapper som ga feilmelding) */}
       <form
         ref={formRef}
         action={formAction}
@@ -53,7 +53,7 @@ export function NewsletterForm() {
           name='email'
           placeholder='Din e-postadresse...'
           required
-          className='bg-sidebar-foreground border-neutral-700'
+          className='bg-background border-input'
         />
         <Button type='submit' disabled={isPending} className='group shrink-0'>
           {isPending ?
