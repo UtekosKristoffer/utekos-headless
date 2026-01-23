@@ -3,7 +3,16 @@ import { getProductAction } from '@/api/lib/products/actions'
 import { CampaignProductDisplay } from './CampaignProductDisplay'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Droplets, Gift, ShieldCheck, Star, Wind } from 'lucide-react'
+import Link from 'next/link' // NY IMPORT
+import { Button } from '@/components/ui/button' // NY IMPORT
+import {
+  Droplets,
+  Gift,
+  ShieldCheck,
+  Star,
+  Wind,
+  ArrowRight
+} from 'lucide-react' // NY IMPORT (ArrowRight)
 
 export const metadata: Metadata = {
   title: 'Eksklusivt tilbud på Comfyrobe!',
@@ -207,8 +216,21 @@ export default async function CampaignSubscriberPage() {
         </div>
       </section>
 
-      {/* Betingelser */}
-      <section className='border-t border-white/10 mt-16'>
+      <section className='py-24 bg-background'>
+        <div className='container mx-auto px-4 text-center'>
+          <h2 className='text-2xl font-bold mb-8 tracking-tight'>
+            Vil du se flere bilder og detaljer?
+          </h2>
+          <Button asChild size='lg' className='text-lg h-14 px-8 rounded-full'>
+            <Link href={`/produkter/${PRODUCT_HANDLE}`}>
+              Se produktside
+              <ArrowRight className='ml-2 w-5 h-5' />
+            </Link>
+          </Button>
+        </div>
+      </section>
+
+      <section className='border-t border-white/10'>
         <div className='container text-center max-w-3xl mx-auto py-12 text-neutral-500'>
           <h3 className='text-lg font-semibold text-neutral-300 mb-4'>
             Betingelser for tilbudet
