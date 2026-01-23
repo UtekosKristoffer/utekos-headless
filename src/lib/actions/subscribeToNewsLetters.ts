@@ -11,8 +11,10 @@ export async function subscribeToNewsletter(
   prevState: ActionState,
   formData: FormData
 ): Promise<ActionState> {
-  const emailSchema = z.string()
-  z.email('Vennligst skriv inn en gyldig e-postadresse.')
+  // FIKSET: Kjedet sammen string() og email() for korrekt validering
+  const emailSchema = z
+    .string()
+    .email('Vennligst skriv inn en gyldig e-postadresse.')
 
   const result = emailSchema.safeParse(formData.get('email'))
 
@@ -37,13 +39,12 @@ export async function subscribeToNewsletter(
     }
   `
 
-  // --- HER ER DEN ENDELIGE, KORREKTE STRUKTUREN ---
   const variables = {
     input: {
       email: email,
       emailMarketingConsent: {
         marketingState: 'SUBSCRIBED',
-        marketingOptInLevel: 'SINGLE_OPT_IN', // I henhold til beste praksis
+        marketingOptInLevel: 'SINGLE_OPT_IN',
         consentUpdatedAt: new Date().toISOString()
       }
     }
@@ -73,16 +74,16 @@ export async function subscribeToNewsletter(
     }
 
     if (!data.data) {
-      console.error('Unexpected Shopify API response structure:', data)
       return { status: 'error', message: 'Uventet svarformat fra Shopify.' }
     }
 
     const { customerCreate } = data.data
 
+    // Håndter null-respons (kan skje hvis brukeren finnes men kallet var "suksess")
     if (customerCreate === null) {
       return {
         status: 'success',
-        message: 'Takk, du er allerede på listen vår!'
+        message: 'Takk! Sjekk e-posten din for rabattkoden.'
       }
     }
 
@@ -91,7 +92,9 @@ export async function subscribeToNewsletter(
       if (errorMessage?.includes('Email has already been taken')) {
         return {
           status: 'success',
-          message: 'Takk, du er allerede på listen vår!'
+          // Vi sier success selv om de finnes fra før, for å ikke avsløre kundedata,
+          // men endrer teksten litt:
+          message: 'Du står allerede på listen! Sjekk innboksen din.'
         }
       }
       return {
@@ -103,8 +106,8 @@ export async function subscribeToNewsletter(
     if (customerCreate.customer) {
       return {
         status: 'success',
-        message:
-          'Velkommen til familien! Vi gleder oss til å dele mer utekos med deg.'
+        // NY TEKST: Bekrefter at koden kommer på mail
+        message: 'Takk! Rabattkoden på 800kr er på vei til din innboks.'
       }
     }
 

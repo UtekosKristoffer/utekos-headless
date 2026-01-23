@@ -4,7 +4,7 @@ import { useActionState, useEffect, useRef } from 'react'
 import { subscribeToNewsletter } from '@/lib/actions/subscribeToNewsLetters'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Mail } from 'lucide-react' // La til Mail-ikon for litt ekstra stil
 import { toast } from 'sonner'
 
 const initialState = {
@@ -22,34 +22,49 @@ export function NewsletterForm() {
   useEffect(() => {
     if (state.status === 'success') {
       toast.success(state.message)
-      formRef.current?.reset() // Tømmer skjemaet ved suksess
+      formRef.current?.reset()
     } else if (state.status === 'error') {
       toast.error(state.message)
     }
   }, [state])
 
   return (
-    <form
-      ref={formRef}
-      action={formAction}
-      className='flex w-full mx-auto max-w-sm items-center space-x-2'
-    >
-      <Input
-        type='email'
-        name='email'
-        placeholder='Din e-postadresse...'
-        required
-        className='bg-sidebar-foreground border-neutral-700'
-      />
-      <Button type='submit' disabled={isPending} className='group'>
-        {isPending ?
-          'Sender...'
-        : <>
-            Meld meg på
-            <ArrowRight className='ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
-          </>
-        }
-      </Button>
-    </form>
+    <div className='w-full max-w-sm mx-auto space-y-3'>
+      {/* --- NY TEKST OM RABATT START --- */}
+      <div className='flex flex-col space-y-1'>
+        <h3 className='font-semibold text-lg flex items-center gap-2'>
+          <Mail className='w-5 h-5' />
+          Få 800kr rabatt på Comfyrobe™
+        </h3>
+        <p className='text-sm text-muted-foreground'>
+          Meld deg på nyhetsbrevet og motta en eksklusiv rabattkode i innboksen
+          din.
+        </p>
+      </div>
+      {/* --- NY TEKST OM RABATT SLUTT --- */}
+
+      <form
+        ref={formRef}
+        action={formAction}
+        className='flex w-full items-center space-x-2'
+      >
+        <Input
+          type='email'
+          name='email'
+          placeholder='Din e-postadresse...'
+          required
+          className='bg-sidebar-foreground border-neutral-700'
+        />
+        <Button type='submit' disabled={isPending} className='group shrink-0'>
+          {isPending ?
+            '...'
+          : <>
+              Få rabatt
+              <ArrowRight className='ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
+            </>
+          }
+        </Button>
+      </form>
+    </div>
   )
 }
