@@ -10,8 +10,8 @@ import {
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Mail } from 'lucide-react' // X er fjernet herfra
-import { subscribeToNewsletter } from '@/lib/actions/subscribeToNewsLetter'
+import { Mail, Tag } from 'lucide-react'
+import { subscribeToNewsletter } from '@/lib/actions/subscribeToNewsLetters'
 import { toast } from 'sonner'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils/className'
@@ -19,6 +19,7 @@ import { cn } from '@/lib/utils/className'
 export function NewsletterPopup() {
   const [isOpen, setIsOpen] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false) // La til loading state
   const pathname = usePathname()
   const soundPlayedRef = useRef(false)
 
@@ -43,7 +44,7 @@ export function NewsletterPopup() {
     const startCountdown = () => {
       const timer = setTimeout(() => {
         setIsOpen(true)
-      }, 8000) // Satt tilbake til 8 sekunder
+      }, 8000)
       return () => clearTimeout(timer)
     }
 
@@ -69,11 +70,24 @@ export function NewsletterPopup() {
   }
 
   const handleSubmit = async (formData: FormData) => {
-    setIsOpen(false)
-    localStorage.setItem('utekos_newsletter_v5', 'true')
-    const result = await subscribeToNewsletter(formData)
-    if (result.success) toast.success(result.message)
-    else toast.error(result.message)
+    setIsSubmitting(true)
+
+    // Vi kaller server action manuelt her siden vi er i en modal og vil styre lukking
+    // Vi sender med en dummy 'prevState' som første argument siden server action forventer det
+    const result = await subscribeToNewsletter(
+      { status: 'idle', message: '' },
+      formData
+    )
+
+    setIsSubmitting(false)
+
+    if (result.status === 'success') {
+      setIsOpen(false)
+      localStorage.setItem('utekos_newsletter_v5', 'true')
+      toast.success(result.message) // Viser meldingen om at kode er sendt
+    } else {
+      toast.error(result.message)
+    }
   }
 
   if (!isMounted) return null
@@ -97,33 +111,38 @@ export function NewsletterPopup() {
         )}
       >
         <div className='grid grid-cols-1 md:grid-cols-2'>
-          {/* Venstre side: Bilde */}
+          {/* Venstre side: Bilde/Grafikk */}
           <div className='relative hidden md:flex h-full min-h-[400px] w-full flex-col justify-between bg-neutral-900 p-8'>
             <div className='absolute inset-0 bg-gradient-to-br from-emerald-900/40 to-neutral-900/40 z-0' />
+
+            {/* Endret innhold her for å matche rabatt */}
             <div className='relative z-10'>
               <div className='inline-flex items-center justify-center rounded-full bg-emerald-500/10 p-3 mb-4'>
-                <Mail className='h-6 w-6 text-emerald-400' />
+                <Tag className='h-6 w-6 text-emerald-400' />
               </div>
               <h3 className='text-lg font-medium text-emerald-100'>
-                Utekos® Club
+                Eksklusiv medlemsfordel
               </h3>
             </div>
+
             <div className='relative z-10'>
+              <p className='text-3xl font-bold text-white mb-2'>Spar 800,-</p>
               <p className='text-sm text-neutral-400 leading-relaxed'>
-                "Det finnes ikke dårlig vær, bare dårlige klær... og for få
-                nyhetsbrev om komfort."
+                "Ingenting slår følelsen av å være varm og tørr – spesielt når
+                du gjør et kupp."
               </p>
             </div>
           </div>
 
+          {/* Høyre side: Skjema */}
           <div className='flex flex-col justify-center p-8 sm:p-12 bg-neutral-950'>
             <DialogHeader className='text-left mb-6'>
               <DialogTitle className='text-2xl sm:text-3xl font-bold tracking-tight mb-2'>
-                Bli en del av varmen
+                Få 800kr i rabatt
               </DialogTitle>
               <DialogDescription className='text-neutral-400 text-base'>
-                Få eksklusive rabatter, livsnyter-tips og få vite først om
-                nyheter rett i innboksen.
+                Meld deg på nyhetsbrevet og få rabattkoden på Comfyrobe™ sendt
+                direkte til innboksen din.
               </DialogDescription>
             </DialogHeader>
 
@@ -139,12 +158,13 @@ export function NewsletterPopup() {
               </div>
               <Button
                 type='submit'
-                className='w-full bg-white text-black hover:bg-neutral-200 font-bold h-11'
+                disabled={isSubmitting}
+                className='w-full bg-white text-black hover:bg-neutral-200 font-bold h-11 transition-colors'
               >
-                Meld meg på
+                {isSubmitting ? 'Registrerer...' : 'Få rabattkode'}
               </Button>
               <p className='text-xs text-neutral-600 text-center mt-4'>
-                Meld deg av når som helst.
+                Du kan melde deg av når som helst.
               </p>
             </form>
           </div>

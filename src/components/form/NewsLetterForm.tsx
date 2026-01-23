@@ -30,7 +30,6 @@ export function NewsletterForm() {
 
   return (
     <div className='w-full max-w-sm mx-auto space-y-3 text-left'>
-      {/* Informasjon om rabatt */}
       <div className='flex flex-col space-y-1'>
         <h3 className='font-semibold text-lg flex items-center gap-2 text-foreground'>
           <Mail className='w-5 h-5' />
@@ -41,8 +40,6 @@ export function NewsletterForm() {
           din.
         </p>
       </div>
-
-      {/* Selve skjemaet (Uten <Form> wrapper som ga feilmelding) */}
       <form
         ref={formRef}
         action={formAction}
