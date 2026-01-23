@@ -71,25 +71,20 @@ export function NewsletterPopup() {
 
   const handleSubmit = async (formData: FormData) => {
     setIsSubmitting(true)
-
-    // Vi kaller server action manuelt her siden vi er i en modal og vil styre lukking
-    // Vi sender med en dummy 'prevState' som første argument siden server action forventer det
     const result = await subscribeToNewsletter(
       { status: 'idle', message: '' },
       formData
     )
 
     setIsSubmitting(false)
-
     if (result.status === 'success') {
       setIsOpen(false)
       localStorage.setItem('utekos_newsletter_v5', 'true')
-      toast.success(result.message) // Viser meldingen om at kode er sendt
+      toast.success(result.message)
     } else {
       toast.error(result.message)
     }
   }
-
   if (!isMounted) return null
 
   return (
