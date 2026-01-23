@@ -5,13 +5,11 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils/className'
 
-// Definer et interface for å inkludere din nye prop
 interface CustomScrollAreaProps
   extends React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root> {
   hideScrollbar?: boolean
 }
 
-// Definer et interface for å inkludere din nye prop
 interface CustomScrollAreaProps
   extends React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root> {
   hideScrollbar?: boolean
@@ -34,10 +32,6 @@ const ScrollArea = React.forwardRef<
       {children}
     </ScrollAreaPrimitive.Viewport>
 
-    {/* ENDRING: Render alltid ScrollBar og Corner, 
-      men skjul dem visuelt med 'hidden' (display: none) hvis hideScrollbar er true.
-      Dette sikrer at Radix-logikken for scrolling fortsatt fungerer.
-    */}
     <ScrollBar className={cn(hideScrollbar && 'hidden')} />
     <ScrollAreaPrimitive.Corner className={cn(hideScrollbar && 'hidden')} />
   </ScrollAreaPrimitive.Root>

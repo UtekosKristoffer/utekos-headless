@@ -30,7 +30,6 @@ import {
 } from '@/lib/actions/submitContactForm'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-// Fjern useEffectEvent, legg til useRef
 import { useActionState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'

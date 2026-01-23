@@ -1,0 +1,888 @@
+# Globals CSS
+
+```css
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+:root {
+  --spatind: #2c2420;
+  --makalaus: #f4f1ea;
+  --ember: #e07a5f;
+  --color-neutral-900: oklch(0.185 0 0);
+  --silver-bright: #e8e8e8;
+  --silver-medium: #a8a8a8;
+  --silver-dark: #808080;
+  --radius: 0.625rem;
+  --header-background: oklch(0.1161 0 0);
+  --background: oklch(0.1161 0 0);
+  --foreground: oklch(0.985 0 0);
+  --button: oklch(0.57 0.23507 260.1068);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+  --ds-background-200-value: 0, 0%, 0%;
+  --article-white: oklch(0.94 0 0);
+}
+```
+
+```css
+.dark {
+  --article-white: oklch(0.94 0 0);
+  --header-background: oklch(0.1161 0 0);
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --button: oklch(0.57 0.23507 260.1068);
+  --card: oklch(0.205 0 0);
+  --card-foreground: rgb(17 17 17);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --neutral-border: neutral-800;
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+```
+
+```css
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-button: var(--button);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-neutral-border: var(--neutral-border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --ds-background-200: hsla(var(--ds-background-200-value), 1);
+
+  --animate-wander: wander 7s infinite ease-in-out;
+  --animate-chip-pulse: chip-pulse 2.6s infinite ease-in-out;
+  --animate-blinking-cursor: blinking-cursor 1.2s infinite step-end;
+  --animate-blob-pulse: blob-pulse 5s infinite ease-in-out;
+```
+
+```css
+  @keyframes slideInDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes blob-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    50% {
+      transform: scale(1.15);
+      border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+    }
+  }
+
+  @keyframes blinking-cursor {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes wander {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(4px, -3px);
+    }
+    50% {
+      transform: translate(-3px, 5px);
+    }
+    75% {
+      transform: translate(-5px, -3px);
+    }
+  }
+
+  @keyframes chip-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.9;
+    }
+    50% {
+      transform: scale(1.02);
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes grill-seasons-pulse-glow {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes grill-seasons-tab-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes seasons-pulse-glow {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes seasons-tab-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* === Reusable Animations === */
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounceSlow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+@keyframes scrollFadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* === Boat Benefits Section Animations === */
+
+@keyframes boat-benefits-fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideOutUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+```
+
+```css
+.animate-slide-in-down {
+  animation: slideInDown 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-slide-out-up {
+  animation: slideOutUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.boat-benefits-header {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.boat-benefits-card {
+  animation: boat-benefits-fade-in-scale 0.4s ease-out both;
+}
+
+.boat-usecases-header {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.boat-destinations-card {
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+.boat-usecases-card {
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: var(--transition-delay, 0s);
+  will-change: opacity, transform;
+}
+
+.animate-on-scroll.is-in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes stroke-draw {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+@keyframes hytte-seasons-pulse-glow {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes bobil-seasons-pulse-glow {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes bobil-seasons-tab-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bobil-seasons-tip-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.3;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 8s ease-in-out infinite;
+}
+
+.will-animate-scale-y-from-top {
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.5s ease-out;
+  transition-delay: var(--transition-delay, 0s);
+}
+
+.dot-pattern {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    oklch(var(--border) / 0.3) 1px,
+    transparent 0
+  );
+  background-size: 24px 24px;
+}
+
+.bobil-seasons-glow-pulse {
+  animation: bobil-seasons-pulse-glow 8s ease-in-out infinite;
+}
+
+.bobil-seasons-fade-in-delayed {
+  animation: fadeInUp 0.7s ease-out 0.2s both;
+}
+
+.bobil-seasons-tab-trigger {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bobil-seasons-active-glow {
+  position: absolute;
+  inset: -0.5rem -0.5rem -2rem;
+  opacity: 0.25;
+  filter: blur(2rem);
+  transition: opacity 0.3s ease;
+}
+
+.bobil-seasons-tab-content-enter {
+  animation: bobil-seasons-tab-fade-in 0.3s ease-out;
+}
+
+.bobil-seasons-tip-enter {
+  animation: bobil-seasons-tip-fade-in 0.3s ease-out both;
+}
+
+@keyframes boat-seasons-pulse-glow {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes boat-seasons-tab-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.boat-seasons-glow-pulse {
+  animation: boat-seasons-pulse-glow 8s ease-in-out infinite;
+}
+
+.boat-seasons-fade-in-delayed {
+  animation: fadeInUp 0.7s ease-out 0.2s both;
+}
+
+.boat-seasons-tab-trigger {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.boat-seasons-active-glow {
+  position: absolute;
+  inset: -0.5rem -0.5rem -2rem;
+  opacity: 0.25;
+  filter: blur(2rem);
+  transition: opacity 0.3s ease;
+}
+
+.boat-seasons-tab-content-enter {
+  animation: boat-seasons-tab-fade-in 0.3s ease-out;
+}
+
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+@keyframes boat-hero-pulse-glow-1 {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes boat-hero-pulse-glow-2 {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.28;
+    transform: scale(1.12);
+  }
+}
+
+.boat-hero-glow-1 {
+  animation: boat-hero-pulse-glow-1 10s ease-in-out infinite;
+}
+
+.boat-hero-glow-2 {
+  animation: boat-hero-pulse-glow-2 12s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+.boat-hero-content {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.boat-hero-breadcrumb {
+  animation: fadeInUp 0.5s ease-out 0.1s both;
+}
+
+.boat-hero-title {
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.boat-hero-text {
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+.boat-hero-buttons {
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+.boat-hero-features {
+  animation: fadeInUp 0.6s ease-out 0.5s both;
+}
+
+.boat-hero-feature-glow {
+  transition: opacity 0.3s ease;
+}
+
+@scroll-timeline --fade-in-timeline {
+  source: auto;
+  orientation: block;
+}
+@keyframes hytte-seasons-tab-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.grill-seasons-glow-pulse {
+  animation: grill-seasons-pulse-glow 8s ease-in-out infinite;
+}
+
+.grill-seasons-fade-in-delayed {
+  animation: fadeInUp 0.7s ease-out 0.2s both;
+}
+
+.grill-seasons-tab-trigger {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.grill-seasons-active-glow {
+  position: absolute;
+  inset: -0.5rem -0.5rem -2rem;
+  opacity: 0.25;
+  filter: blur(2rem);
+  transition: opacity 0.3s ease;
+}
+
+.grill-seasons-tab-content-enter {
+  animation: grill-seasons-tab-fade-in 0.3s ease-out;
+}
+
+.hytte-seasons-glow-pulse {
+  animation: hytte-seasons-pulse-glow 8s ease-in-out infinite;
+}
+
+.hytte-seasons-fade-in-delayed {
+  animation: fadeInUp 0.7s ease-out 0.2s both;
+}
+
+.hytte-seasons-tab-trigger {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hytte-seasons-active-glow {
+  position: absolute;
+  inset: -0.5rem -0.5rem -2rem;
+  opacity: 0.25;
+  filter: blur(2rem);
+  transition: opacity 0.3s ease;
+}
+
+.hytte-seasons-tab-content-enter {
+  animation: hytte-seasons-tab-fade-in 0.3s ease-out;
+}
+
+.seasons-glow-pulse {
+  animation: seasons-pulse-glow 8s ease-in-out infinite;
+}
+
+.seasons-fade-in-delayed {
+  animation: fadeInUp 0.7s ease-out 0.2s both;
+}
+
+.seasons-tab-trigger {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.seasons-active-glow {
+  position: absolute;
+  inset: -0.5rem -0.5rem -2rem;
+  opacity: 0.25;
+  filter: blur(2rem);
+  transition: opacity 0.3s ease;
+}
+
+.seasons-tab-content-enter {
+  animation: seasons-tab-fade-in 0.3s ease-out;
+}
+
+.will-animate-scale-x {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s ease-in-out;
+  transition-delay: var(--transition-delay, 0s);
+}
+
+.will-animate-scale-y {
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.5s ease-out;
+  transition-delay: var(--transition-delay, 0s);
+}
+
+/* Den generiske .is-in-view-klassen fungerer også for skalering */
+/* Sørg for at den har transform: none; eller transform: scale(1); */
+.is-in-view {
+  opacity: 1;
+  transform: none; /* none tilbakestiller scale, translate, etc. */
+}
+
+.will-animate-progress-bar {
+  width: 100%;
+  transition: width 1.5s ease-out;
+  transition-delay: var(--transition-delay, 0s);
+}
+
+.is-in-view.will-animate-progress-bar {
+  width: var(--progress-width, 0%);
+}
+
+.will-animate-fade-in-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.will-animate-fade-in-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out;
+  transition-delay: var(--transition-delay, 0s);
+}
+
+.will-animate-fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
+  transition-delay: var(--transition-delay, 0s);
+}
+
+.will-animate-fade-in-left {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+  transition-delay: var(--transition-delay, 0s);
+}
+
+.is-in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.6s ease-out both;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.7s ease-out both;
+}
+
+.animate-bounce-slow {
+  animation: bounceSlow 2s ease-in-out infinite;
+}
+
+/* {
+  outline: 1px solid red !important;
+} */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+
+  .PhoneInput {
+    @apply phone-input-root;
+  }
+  .PhoneInputCountry {
+    @apply phone-input-country;
+  }
+  .PhoneInputCountryIcon {
+    @apply phone-input-flag;
+  }
+  .PhoneInputInput {
+    @apply phone-input-field;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--color-background) inset !important;
+    box-shadow: 0 0 0 30px var(--color-background) inset !important;
+    -webkit-text-fill-color: var(--color-foreground) !important;
+    caret-color: var(--color-foreground) !important;
+  }
+}
+```
+
+```css
+@custom-variant dark (&:is(.dark *));
+
+@utility item-deleting {
+  @apply opacity-50 scale-95;
+}
+
+@utility text-fluid-display {
+  font-size: clamp(2.25rem, 1.5rem + 3vw, 3.75rem);
+  line-height: 1.1;
+}
+
+@utility text-fluid-headline {
+  font-size: clamp(1.875rem, 1.5rem + 1.5vw, 2.25rem);
+  line-height: 1.2;
+}
+
+@utility btn-tab {
+  @apply rounded-lg border border-neutral-800 bg-sidebar-foreground;
+}
+
+@utility content-auto {
+  content-visibility: auto;
+}
+
+@utility color-swatch-container {
+  @apply relative size-8 shrink-0 overflow-hidden rounded-full border border-white/10;
+  background-color: var(--swatch-bg, transparent);
+}
+
+@utility color-swatch-dot {
+  @apply absolute inset-1 rounded-full border-2 border-orange-500 transition-colors data-[selected=true]:border-white;
+  background-color: var(--swatch-dot-color, transparent);
+}
+
+@utility product-card {
+  @apply h-full w-full flex-col overflow-hidden transition-all duration-300 ease-in-out hover:shadow-xl border-neutral-700 hover:shadow-primary/5 hover:-translate-y-1;
+}
+
+@utility product-card-image {
+  @apply object-cover transition-transform duration-300 group-hover:scale-105;
+}
+
+@utility btn-product-view {
+  @apply w-full border-primary bg-transparent font-medium text-white transition-all duration-200 hover:bg-primary hover:text-primary-foreground;
+}
+
+@utility btn-product-quick-buy {
+  @apply flex-1 font-medium text-primary-foreground transition-all duration-200 hover:bg-button/90 hover:shadow-lg hover:shadow-primary/25;
+}
+
+@utility variant-label {
+  @apply mb-2 text-sm font-medium uppercase tracking-wide text-white;
+}
+
+@utility btn-variant-swatch {
+  @apply size-6 rounded-full border-2 cursor-pointer transition-all duration-200 hover:scale-110;
+  @apply border-primary hover:border-primary/50;
+  @apply data-[selected=true]:border-border data-[selected=true]:ring-2 data-[selected=true]:ring-primary/30;
+  background-color: var(--swatch-color);
+}
+
+@utility btn-variant-option {
+  @apply px-3 py-1 text-sm border rounded cursor-pointer transition-all duration-200 hover:border-white;
+  @apply border-primary text-white;
+  @apply data-[selected=true]:border-border data-[selected=true]:bg-primary/10 data-[selected=true]:font-medium data-[selected=true]:text-white;
+}
+
+@utility phone-input-root {
+  @apply flex h-12 w-full items-center rounded-none border border-neutral-800 focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background;
+}
+@utility phone-input-country {
+  @apply flex h-full items-center justify-center border-r border-neutral-800 bg-transparent p-3;
+}
+@utility phone-input-flag {
+  @apply h-6 w-auto;
+}
+@utility phone-input-field {
+  @apply h-full w-full flex-1 rounded-none border-none bg-background px-3 text-base placeholder:text-muted-foreground focus:outline-none focus:ring-0;
+}
+```
