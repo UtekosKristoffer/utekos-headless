@@ -15,12 +15,9 @@ export const metadata: Metadata = {
   }
 }
 
-// -- KONFIGURASJON --
-// FIX: Korrigert til riktig handle fra din dokumentasjon
 const PRODUCT_HANDLE = 'comfyrobe'
 const DISCOUNT_CODE = 'COMFYMEDLEMSRABATT'
 const CAMPAIGN_PRICE = 890
-// --------------------
 
 // Hardkodede anmeldelser for sosialt bevis
 const testimonials = [
@@ -65,8 +62,6 @@ export default async function CampaignSubscriberPage() {
             ultimate allværsrobe: Utekos Comfyrobe™.
           </p>
         </div>
-
-        {/* Produktdisplay */}
         <div className='pb-24'>
           <CampaignProductDisplay
             product={product}
@@ -75,8 +70,6 @@ export default async function CampaignSubscriberPage() {
           />
         </div>
       </section>
-
-      {/* Tekniske Funksjoner */}
       <section className='bg-foreground/5 py-20'>
         <div className='container mx-auto px-4'>
           <div className='text-center max-w-2xl mx-auto mb-12'>
@@ -92,31 +85,31 @@ export default async function CampaignSubscriberPage() {
             <div className='bg-foreground/5 p-8 rounded-xl'>
               <div className='flex items-center gap-3 mb-4'>
                 <ShieldCheck className='w-8 h-8 text-emerald-400' />
-                <h3 className='text-xl font-semibold'>Vanntett & Vindtett</h3>
+                <h3 className='text-xl font-semibold'>Vanntett og vindtett</h3>
               </div>
               <p className='text-neutral-400'>
-                Et robust **HydroGuard™**-ytterstoff med 8000mm vannsøyle og
-                tapede sømmer stenger regn og vind ute, mens den pustende
-                membranen forhindrer en klam følelse.
+                Et robust HydroGuard™-ytterstoff med 8000mm vannsøyle og tapede
+                sømmer stenger regn og vind ute, mens den pustende membranen
+                forhindrer en klam følelse.
               </p>
             </div>
             <div className='bg-foreground/5 p-8 rounded-xl'>
               <div className='flex items-center gap-3 mb-4'>
                 <Droplets className='w-8 h-8 text-sky-400' />
                 <h3 className='text-xl font-semibold'>
-                  Varm & Fuktabsorberende
+                  Varm og fuktabsorberende
                 </h3>
               </div>
               <p className='text-neutral-400'>
-                Tykt **SherpaCore™** fôr i syntetisk lammeull gir umiddelbar
-                varme og absorberer effektivt fukt fra kroppen – perfekt etter
-                isbad eller en tur i regnet.
+                Tykt SherpaCore™ fôr i syntetisk lammeull gir umiddelbar varme
+                og absorberer effektivt fukt fra kroppen – perfekt etter isbad
+                eller en tur i regnet.
               </p>
             </div>
             <div className='bg-foreground/5 p-8 rounded-xl'>
               <div className='flex items-center gap-3 mb-4'>
                 <Wind className='w-8 h-8 text-neutral-300' />
-                <h3 className='text-xl font-semibold'>Gjennomtenkt Design</h3>
+                <h3 className='text-xl font-semibold'>Gjennomtenkt design</h3>
               </div>
               <p className='text-neutral-400'>
                 Romslig hette, toveis YKK®-glidelås, dype fôrede lommer og
@@ -127,8 +120,6 @@ export default async function CampaignSubscriberPage() {
           </div>
         </div>
       </section>
-
-      {/* Sosialt Bevis */}
       <section className='py-20'>
         <div className='container mx-auto px-4'>
           <div className='text-center max-w-2xl mx-auto mb-12'>
@@ -162,7 +153,6 @@ export default async function CampaignSubscriberPage() {
         </div>
       </section>
 
-      {/* Størrelsesguide */}
       <section
         id='størrelsesguide'
         className='bg-foreground/5 py-20 scroll-mt-20'
