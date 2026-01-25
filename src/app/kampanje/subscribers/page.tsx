@@ -31,14 +31,13 @@ const CAMPAIGN_PRICE = 890
 // Hardkodede anmeldelser for sosialt bevis
 const testimonials = [
   {
-    name: 'Kristine H.',
+    name: 'Anne O.',
     review:
-      'Den beste investeringen jeg har gjort! Perfekt etter et kaldt bad, eller bare for en rolig kveld på sofaen. Elsker den!'
+      'Perfekt etter etter bading! Stor, varm og utrolig komfortabel. Elsker min Comfyrobe™.'
   },
   {
     name: 'Markus T.',
-    review:
-      'Gikk fra å grue meg til å gå ut av dusjen, til å glede meg. Comfyrobe er utrolig myk og varm. Anbefales på det sterkeste.'
+    review: 'Utrolig myk og varm. Anbefales på det sterkeste.'
   },
   {
     name: 'Silje B.',

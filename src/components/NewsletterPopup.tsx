@@ -128,8 +128,6 @@ export function NewsletterPopup() {
               </p>
             </div>
           </div>
-
-          {/* Høyre side: Skjema */}
           <div className='flex flex-col justify-center p-8 sm:p-12 bg-neutral-950'>
             <DialogHeader className='text-left mb-6'>
               <DialogTitle className='text-2xl sm:text-3xl font-bold tracking-tight mb-2'>
@@ -140,7 +138,6 @@ export function NewsletterPopup() {
                 direkte til innboksen din.
               </DialogDescription>
             </DialogHeader>
-
             <form action={handleSubmit} className='space-y-4'>
               <div className='space-y-2'>
                 <Input
