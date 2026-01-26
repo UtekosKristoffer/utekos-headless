@@ -38,7 +38,7 @@ export default function TechTeaserSection() {
                   {
                     icon: Thermometer,
                     title: 'Termisk effektivitet',
-                    desc: 'Isolasjon som puster og varmer.'
+                    desc: 'Isolasjon som absorberer og varmer.'
                   },
                   {
                     icon: Shield,
