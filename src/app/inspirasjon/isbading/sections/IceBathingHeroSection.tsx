@@ -20,7 +20,7 @@ export function IceBathingHeroSection() {
         />
 
         <Image
-          src='/comfyrobe/comfy-isbading-liggende.png'
+          src='/comfyrobe/comfy-isbading-1080-master.png'
           alt='Isbader som nyter varmen i Comfyrobe - desktop'
           fill
           className='hidden object-cover md:block'
