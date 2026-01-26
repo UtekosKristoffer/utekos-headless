@@ -10,13 +10,12 @@ const pricing = [
   { price: '1 790 kr', before: '1 990 kr' },
   { price: '1 990 kr', before: '3 290 kr' },
   { price: '1 590 kr', before: '2 290 kr' },
-  { price: '1 290 kr', before: '1 690 kr' }
+  { price: '1 690 kr' }
 ]
 
 export function HelpChooseSection() {
   return (
     <section className='relative mb-24 w-full px-4 md:px-6'>
-      {/* Bakgrunnseffekter */}
       <div className='absolute inset-0 -z-10 overflow-hidden opacity-40'>
         <div
           className='absolute left-1/4 top-0 h-[400px] w-[400px] blur-3xl'

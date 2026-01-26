@@ -58,7 +58,7 @@ export function ComfyrobeFeatureSection() {
 
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.5s'>
               <div className='mt-12 flex w-full flex-col items-center gap-4 sm:flex-row'>
-                <p className='text-4xl font-bold text-foreground'>NOK 1290,-</p>
+                <p className='text-4xl font-bold text-foreground'>NOK 1690,-</p>
                 <Button asChild size='lg' className='group w-full sm:w-auto'>
                   <Link href='/produkter/comfyrobe'>
                     Utforsk Comfyrobe™
