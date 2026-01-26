@@ -82,7 +82,7 @@ export function FrontpageIceBathingSection() {
               </Button>
               <Button variant='outline' size='lg' asChild>
                 <Link href={'/inspirasjon/isbading' as Route}>
-                  Se isbade-universet
+                  Få isbading-inspo
                 </Link>
               </Button>
             </AnimatedBlock>
