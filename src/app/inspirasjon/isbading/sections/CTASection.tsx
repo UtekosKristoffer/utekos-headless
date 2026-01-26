@@ -25,8 +25,8 @@ export function CTASection() {
               size='lg'
               className='group gap-2 bg-cyan-600 hover:bg-cyan-700'
             >
-              <Link href={'/produkter' as Route}>
-                Se isbadeutstyret
+              <Link href={'/produkter/comfyrobe' as Route}>
+                Kjøp Comfyrobe™
                 <ArrowRight className='size-4 transition-transform group-hover:translate-x-1' />
               </Link>
             </Button>

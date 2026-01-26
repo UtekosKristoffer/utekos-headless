@@ -15,6 +15,7 @@ import TechTeaserSection from '@/components/frontpage/components/TechTeaserSecti
 import { FrontPageJsonLd } from './FrontPageJsonLd'
 import { AsyncProductLaunchWrapper } from '@/components/frontpage/AsyncProductLaunchWrapper'
 import { FeaturedProductsSection } from '@/components/frontpage/FeaturedProductSection'
+import { FrontpageIceBathingSection } from '@/components/frontpage/FrontpageIcebathingSection'
 
 const HomePage = () => {
   return (
@@ -29,6 +30,7 @@ const HomePage = () => {
           </Suspense>
         </Activity>
         <TechTeaserSection />
+        <FrontpageIceBathingSection />
         <NewProductInStoreNotice />
         <ComfyrobeSection />
 
