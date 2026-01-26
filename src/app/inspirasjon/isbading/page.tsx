@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     canonical: '/inspirasjon/isbading'
   },
   openGraph: {
-    title: 'Isbading og Utekos | Forleng følelsen av mestring',
+    title: 'Comfyrobe™ | Forleng følelsen av mestring',
     description:
       'Slipp å fryse mens du skifter. Oppdag hvordan Utekos gjør overgangen fra iskaldt vann til varm bil lekende lett.',
     url: '/inspirasjon/isbading',
