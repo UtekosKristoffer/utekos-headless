@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: 'Utekos',
     images: [
       {
-        url: '/og-image-isbading.webp',
+        url: '/comfyrobe/comfy-isbading-1080-master.png',
         width: 1200,
         height: 630,
         alt: 'Isbader som varmer seg i Utekos-plagg etter et bad'
