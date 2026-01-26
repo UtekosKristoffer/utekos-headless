@@ -44,7 +44,7 @@ export default function InspirasjonLayout({
           </div>
         </section>
       </Activity>
-      {children}s
+      {children}
       <Activity>
         <section className='bg-sidebar-foreground py-16 border-t border-neutral-800'>
           <div className='container mx-auto px-4'>
