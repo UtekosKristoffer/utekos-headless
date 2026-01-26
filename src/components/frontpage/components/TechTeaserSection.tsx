@@ -43,7 +43,7 @@ export default function TechTeaserSection() {
                   {
                     icon: Shield,
                     title: 'HydroGuard™ beskyttelse',
-                    desc: 'Vanntett membran med 8000mm søyle.'
+                    desc: 'Pustende membran med 8000mm vannsøyle.'
                   },
                   {
                     icon: Layers,
