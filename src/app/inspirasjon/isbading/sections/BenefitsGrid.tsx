@@ -8,19 +8,22 @@ export const benefitsData: Benefit[] = [
   {
     icon: Thermometer,
     title: 'Gjenopprett varmen',
-    description: 'Absorberende fôr tørker huden og får opp kroppstemperaturen umiddelbart.',
+    description:
+      'Absorberende fôr tørker huden og får opp kroppstemperaturen umiddelbart.',
     color: 'text-orange-500'
   },
   {
     icon: Shirt,
     title: 'Ditt mobile skifterom',
-    description: 'Romslig nok til at du enkelt trekker armene inn og skifter diskret på stranden.',
+    description:
+      'Romslig nok til at du enkelt trekker armene inn og skifter diskret på stranden.',
     color: 'text-blue-500'
   },
   {
     icon: Wind,
-    title: '100% Vindtett',
-    description: 'Blokkerer den iskalde trekken som ellers stjeler varmen din etter badet.',
+    title: '100% vindtett',
+    description:
+      'Blokkerer den iskalde trekken som ellers stjeler varmen din etter badet.',
     color: 'text-cyan-400'
   },
   {
