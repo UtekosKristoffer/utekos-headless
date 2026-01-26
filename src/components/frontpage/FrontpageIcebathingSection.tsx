@@ -43,7 +43,7 @@ export function FrontpageIceBathingSection() {
               <div className='flex items-start gap-3 p-3 rounded-lg bg-neutral-900/50 border border-neutral-800'>
                 <Thermometer className='h-6 w-6 text-orange-400 shrink-0' />
                 <div>
-                  <h3 className='font-medium text-sm'>SherpaCore™ Varme</h3>
+                  <h3 className='font-medium text-sm'>SherpaCore™</h3>
                   <p className='text-xs text-muted-foreground'>
                     250 GSM fôr som gir umiddelbar isolering.
                   </p>
