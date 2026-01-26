@@ -12,28 +12,28 @@ import {
 
 const galleryImages = [
   {
-    src: '/comfyrobe/monica-arne-comfy.png', // Husk å legge inn riktige bildenavn
+    src: '/comfyrobe/comfy-afterbath-1080.png', // Husk å legge inn riktige bildenavn
     alt: 'En isbader kommer opp av vannet med et stort smil, klar til å ta på seg Utekos-kåpen.',
     title: 'Det øyeblikkelige rushet',
     description:
       'Sekundet du kommer opp av vannet og kjenner varmen fra kåpen treffe huden. Det er da magien skjer.'
   },
   {
-    src: '/1080/comfy-1080.png',
+    src: '/comfyrobe/comfy-isbading-to-1080.png',
     alt: 'En vennegjeng står i snøen iført Utekos-kåper og drikker kaffe etter badet.',
     title: 'Varmen i fellesskapet',
     description:
       'Isbading er ofte best sammen med andre. Del opplevelsen, kaffen og varmen uten å fryse.'
   },
   {
-    src: '/1080/comfy-open-1080.png',
+    src: '/comfyrobe/comfy-isbading-1080-master.png',
     alt: 'Person sitter på et svaberg med rimfrost, pakket inn i Utekos og ser utover havet.',
     title: 'Ro i sjelen',
     description:
       'Finn stillheten ved havet. Med riktig utstyr kan du sitte lenge og la pulsen synke etter sjokket.'
   },
   {
-    src: '/1080/comfy-back-1080.png',
+    src: '/1080/comfy-open-1080.png',
     alt: 'Person på vei fra badstue til sjøen i en Utekos-poncho.',
     title: 'Fra sauna til sjø',
     description:
@@ -42,7 +42,7 @@ const galleryImages = [
   {
     src: '/1080/comfy-design-1080.png',
     alt: 'Nærbilde av en person som smiler bredt mens de har på seg Utekos-kåpen etter isbading.',
-    title: 'SherpaCore komfort',
+    title: 'SherpaCore™',
     description:
       'Absorberende innside av syntetisk lammeull som starter tørke- og varmeprosessen umiddelbart.'
   }
@@ -95,8 +95,9 @@ export function SocialProof() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className='left-[-50px] hidden xl:inline-flex' />
-          <CarouselNext className='right-[-50px] hidden xl:inline-flex' />
+
+          <CarouselPrevious className='left-2 md:left-[-50px] inline-flex z-10' />
+          <CarouselNext className='right-2 md:right-[-50px] inline-flex z-10' />
         </Carousel>
       </div>
     </section>
