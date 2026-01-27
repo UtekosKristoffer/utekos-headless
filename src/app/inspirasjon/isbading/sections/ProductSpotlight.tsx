@@ -72,7 +72,7 @@ export function ProductSpotlight() {
                 </Link>
               </Button>
               <p className='text-xs text-neutral-500 mt-2 sm:mt-0 flex items-center justify-center'>
-                Meld deg på nyhetsbrevet og rabattkode på kr 800,-
+                Meld deg på nyhetsbrevet og motta rabattkode på kr 800,-
               </p>
             </AnimatedBlock>
           </div>
