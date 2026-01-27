@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 // Path: src/app/inspirasjon/isbading/sections/ComfyrobeQuickBuy.tsx
 'use client'
 
@@ -37,8 +36,6 @@ interface Props {
 
 export function ComfyrobeQuickBuy({ product }: Props) {
   const variants = product.variants.edges.map(e => e.node)
-
-  // Finn første tilgjengelige variant som standardvalg
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
     variants.find(v => v.availableForSale)?.id || null
   )
