@@ -76,7 +76,7 @@ const fathersDayAdvantages: {
     icon: 'flame-kindling',
     title: 'Bygget for norsk utehygge',
     description:
-      'Flammehemmende og vannavvisende. Tåler gnister fra bålpannen og holder ham varm i fuktig vær.',
+      'Flammehemmende og vannavvisende. DWR-blegg som virker flammehemmende og holder varmen i fuktig vær.',
     color: 'text-orange-400'
   },
   {
@@ -119,7 +119,6 @@ export function MicrofiberFathersDaySection() {
           </AnimatedBlock>
         </div>
 
-    
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 mb-20'>
           <AnimatedBlock className='will-animate-fade-in-left' delay='0.2s'>
             <h3 className='mb-4 text-lg font-semibold text-foreground'>

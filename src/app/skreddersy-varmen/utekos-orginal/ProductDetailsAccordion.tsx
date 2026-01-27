@@ -102,9 +102,8 @@ export function ProductDetailsAccordion() {
                       Robust og allsidig
                     </h4>
                     <p className='text-[#2C2420]/80'>
-                      Bygget for å tåle alt fra gnister fra bålpannen til våte
-                      høstturer. Utekos™-modellen med lavest vekt, best egnet
-                      for både rolig hygge og aktivitet.
+                      Utekos™-modellen med lavest vekt, best egnet for både
+                      rolig hygge og aktivitet.
                     </p>
                   </div>
                 </li>
