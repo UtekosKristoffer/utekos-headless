@@ -28,8 +28,8 @@ export function IceBathingFAQ() {
             <AccordionContent>
               Ytterstoffet er vannavvisende, og innerfôret er laget av syntetisk
               lammeull som ikke trekker til seg vann på samme måte som bomull.
-              Tyngden vil øke, men varmen vil beholdes selv om du tar den rett
-              på våt hud.
+              Vekten vil øke, men varmen vil beholdes selv om du tar den rett på
+              våt hud.
             </AccordionContent>
           </AccordionItem>
 
