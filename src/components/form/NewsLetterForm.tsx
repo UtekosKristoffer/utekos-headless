@@ -1,3 +1,4 @@
+// Path: src/components/form/NewsLetterForm.tsx
 'use client'
 
 import { useActionState, useEffect, useRef } from 'react'
@@ -6,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ArrowRight, Mail } from 'lucide-react'
 import { toast } from 'sonner'
+import { trackNewsletterConversion } from '@/components/analytics/MetaPixel/trackNewsletterConversion'
 
 const initialState = {
   status: 'idle' as 'success' | 'error' | 'idle',
@@ -19,14 +21,30 @@ export function NewsletterForm() {
   )
   const formRef = useRef<HTMLFormElement>(null)
 
+  const submittedEmailRef = useRef<string | null>(null)
+
   useEffect(() => {
     if (state.status === 'success') {
       toast.success(state.message)
+
+      if (submittedEmailRef.current) {
+        trackNewsletterConversion(submittedEmailRef.current, 'footer')
+        submittedEmailRef.current = null // Nullstill etter sporing
+      }
+
       formRef.current?.reset()
     } else if (state.status === 'error') {
       toast.error(state.message)
     }
   }, [state])
+
+  const handleSubmit = (formData: FormData) => {
+    const email = formData.get('email') as string
+    if (email) {
+      submittedEmailRef.current = email
+    }
+    formAction(formData)
+  }
 
   return (
     <div className='w-full max-w-sm mx-auto space-y-3 text-left'>
@@ -42,7 +60,7 @@ export function NewsletterForm() {
       </div>
       <form
         ref={formRef}
-        action={formAction}
+        action={handleSubmit}
         className='flex w-full items-center space-x-2'
       >
         <Input

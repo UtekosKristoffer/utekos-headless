@@ -1,4 +1,4 @@
-// Path: types/meta.types.ts
+// Path: src/types/meta.types.ts
 
 export interface UserDataStored {
   fbp?: string | undefined
@@ -36,10 +36,8 @@ export type LogPayload = {
   event: string
   level?: 'info' | 'warn' | 'error'
   data?: Record<string, unknown>
-  context?: {
-    cartId?: string
-    path?: string
-  }
+  // ENDRET: Gjort context fleksibel for å støtte vilkårlige data som 'url'
+  context?: Record<string, unknown>
 }
 
 export type AddToCartContent = {
@@ -131,6 +129,8 @@ export interface MetaEventData {
   currency?: string | undefined
   content_name?: string | undefined
   content_type?: string | undefined
+  // NYTT FELT
+  content_category?: string | undefined
   content_ids?: string[] | undefined
   contents?: MetaContentItem[] | undefined
   num_items?: number | undefined
@@ -147,6 +147,7 @@ export type MetaEventType =
   | 'HeroInteract'
   | 'InteractWithAccordion'
   | 'OpenQuickView'
+  | 'Lead' // NY EVENT-TYPE
 
 export interface MetaEventPayload {
   eventName: MetaEventType

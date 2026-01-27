@@ -9,7 +9,6 @@ import { SeasonsSection } from './sections/SeasonsSection'
 import { PopularSpotsGrid, popularSpotsData } from './sections/PopularSpotsGrid'
 import { SocialProof } from './sections/SocialProof'
 import { CTASection } from './sections/CTASection'
-
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Isbading og Utekos | Varmen du trenger etter kuldesjokket',

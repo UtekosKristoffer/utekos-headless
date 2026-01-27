@@ -1,3 +1,4 @@
+// Path: src/components/NewsletterPopup.tsx
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
@@ -10,16 +11,17 @@ import {
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Mail, Tag } from 'lucide-react'
+import { Tag } from 'lucide-react'
 import { subscribeToNewsletter } from '@/lib/actions/subscribeToNewsLetters'
 import { toast } from 'sonner'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils/className'
+import { trackNewsletterConversion } from '@/components/analytics/MetaPixel/trackNewsletterConversion'
 
 export function NewsletterPopup() {
   const [isOpen, setIsOpen] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false) // La til loading state
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const pathname = usePathname()
   const soundPlayedRef = useRef(false)
 
@@ -71,13 +73,19 @@ export function NewsletterPopup() {
 
   const handleSubmit = async (formData: FormData) => {
     setIsSubmitting(true)
+    const email = formData.get('email') as string
+
     const result = await subscribeToNewsletter(
       { status: 'idle', message: '' },
       formData
     )
 
     setIsSubmitting(false)
+
     if (result.status === 'success') {
+      // Sporing legges til her ved suksess
+      trackNewsletterConversion(email, 'popup')
+
       setIsOpen(false)
       localStorage.setItem('utekos_newsletter_v5', 'true')
       toast.success(result.message)
@@ -85,6 +93,7 @@ export function NewsletterPopup() {
       toast.error(result.message)
     }
   }
+
   if (!isMounted) return null
 
   return (
@@ -110,7 +119,6 @@ export function NewsletterPopup() {
           <div className='relative hidden md:flex h-full min-h-[400px] w-full flex-col justify-between bg-neutral-900 p-8'>
             <div className='absolute inset-0 bg-gradient-to-br from-emerald-900/40 to-neutral-900/40 z-0' />
 
-            {/* Endret innhold her for å matche rabatt */}
             <div className='relative z-10'>
               <div className='inline-flex items-center justify-center rounded-full bg-emerald-500/10 p-3 mb-4'>
                 <Tag className='h-6 w-6 text-emerald-400' />
@@ -123,8 +131,8 @@ export function NewsletterPopup() {
             <div className='relative z-10'>
               <p className='text-3xl font-bold text-white mb-2'>Spar 800,-</p>
               <p className='text-sm text-neutral-400 leading-relaxed'>
-                "Ingenting slår følelsen av å være varm og tørr – spesielt når
-                du gjør et kupp."
+                Ingenting slår følelsen av å være varm og tørr – spesielt når du
+                gjør et kupp.
               </p>
             </div>
           </div>

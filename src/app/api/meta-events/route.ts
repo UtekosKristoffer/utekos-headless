@@ -158,6 +158,9 @@ export async function POST(request: NextRequest) {
       if (eventData.currency) custom.setCurrency(eventData.currency)
       if (eventData.content_name) custom.setContentName(eventData.content_name)
       if (eventData.content_type) custom.setContentType(eventData.content_type)
+      if (eventData.content_category)
+        custom.setContentCategory(eventData.content_category)
+
       if (eventData.search_string)
         custom.setSearchString(eventData.search_string)
       if (eventData.num_items) custom.setNumItems(eventData.num_items)

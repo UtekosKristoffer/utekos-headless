@@ -11,7 +11,6 @@ export async function subscribeToNewsletter(
   prevState: ActionState,
   formData: FormData
 ): Promise<ActionState> {
-  // FIKSET: Kjedet sammen string() og email() for korrekt validering
   const emailSchema = z
     .string()
     .email('Vennligst skriv inn en gyldig e-postadresse.')
