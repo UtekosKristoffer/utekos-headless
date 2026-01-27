@@ -16,7 +16,7 @@ const features = [
 
 export function ProductSpotlight() {
   return (
-    <section className='py-24 bg-neutral-900 text-white overflow-hidden'>
+    <section id="product-spotlight" className='py-24 bg-neutral-900 text-white overflow-hidden'>
       <div className='container mx-auto px-4'>
         <div className='grid lg:grid-cols-2 gap-12 items-center'>
           <AnimatedBlock className='relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none rounded-2xl overflow-hidden border border-white/10 shadow-2xl'>

@@ -5,9 +5,11 @@ import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
-import type { Route } from 'next'
+import { useAnalytics } from '@/hooks/useAnalytics'
 
 export function IceBathingHeroSection() {
+  const { trackEvent } = useAnalytics()
+
   return (
     <section className='relative min-h-[85vh] overflow-hidden flex flex-col justify-center'>
       <div className='absolute inset-0 select-none'>
@@ -58,7 +60,22 @@ export function IceBathingHeroSection() {
               size='lg'
               className='group min-w-[200px] border-none bg-white text-neutral-900 hover:bg-neutral-100'
             >
-              <Link href={'/produkter/comfyrobe' as Route}>
+              <Link
+                href='#product-spotlight'
+                onClick={e => {
+                  e.preventDefault()
+                  trackEvent('HeroInteract', {
+                    content_name: 'Scroll to Product Spotlight',
+                    content_category: 'Hero Section'
+                  })
+
+                  const element = document.getElementById('product-spotlight')
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}
+                className='inline-flex items-center justify-center'
+              >
                 Kle deg for kulden
                 <ArrowRight className='ml-2 size-4 transition-transform group-hover:translate-x-1' />
               </Link>
