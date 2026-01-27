@@ -39,7 +39,6 @@ export function ComfyrobeQuickBuy({ product }: Props) {
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
     variants.find(v => v.availableForSale)?.id || null
   )
-
   const selectedVariant = variants.find(v => v.id === selectedVariantId)
   const cartActor = CartMutationContext.useActorRef()
   const { trackEvent } = useAnalytics()

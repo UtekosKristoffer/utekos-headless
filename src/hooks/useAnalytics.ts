@@ -1,5 +1,4 @@
 // Path: src/hooks/useAnalytics.ts
-'use client'
 import { useEffectEvent } from 'react'
 import type { MetaUserData, MetaEventPayload, MetaEventType } from '@types'
 import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
