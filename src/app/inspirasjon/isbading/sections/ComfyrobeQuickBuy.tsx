@@ -295,12 +295,8 @@ export function ComfyrobeQuickBuy({ product }: Props) {
             <AccordionContent className='text-neutral-400 text-sm'>
               <p className='mb-2'>
                 Comfyrobe™ har en <strong>oversized unisex-passform</strong>.
-                Den er designet romslig slik at du kan trekke armene inn og
-                skifte klær under den.
-              </p>
-              <p>
-                Vipper du mellom størrelser? Gå ned. Den skal være stor, men du
-                trenger ikke "telt" hvis du er usikker.
+                Den er designet romslig og med praktiske løsninger for å enkelt
+                kle på eller av seg.
               </p>
             </AccordionContent>
           </AccordionItem>
