@@ -19,25 +19,24 @@ export function IceBathingFAQ() {
             <AccordionTrigger>Hvordan er størrelsene?</AccordionTrigger>
             <AccordionContent>
               Comfyrobe er designet for å være romslig (oversized) slik at du
-              enkelt kan trekke armene inn og skifte under den. Vi anbefaler å
-              velge din normale størrelse. Vipper du mellom to, kan du trygt
-              velge den minste.
+              enkelt kan trekke armene inn og skifte under den.
             </AccordionContent>
           </AccordionItem>
 
           <AccordionItem value='item-2'>
             <AccordionTrigger>Blir den tung når den blir våt?</AccordionTrigger>
             <AccordionContent>
-              Ytterstoffet er vannavvisende, og innerfôret er laget av teknisk
-              polyester som ikke trekker til seg vann på samme måte som bomull.
-              Den holder seg lett og varm selv om du tar den rett på våt hud.
+              Ytterstoffet er vannavvisende, og innerfôret er laget av syntetisk
+              lammeull som ikke trekker til seg vann på samme måte som bomull.
+              Tyngden vil øke, men varmen vil beholdes selv om du tar den rett
+              på våt hud.
             </AccordionContent>
           </AccordionItem>
 
           <AccordionItem value='item-3'>
             <AccordionTrigger>Kan den vaskes i maskin?</AccordionTrigger>
             <AccordionContent>
-              Ja! Vi anbefaler finvask på 30 grader. Unngå tøymykner for å
+              Ja! Se vaskeinstrukser for mer informasjon. Unngå tøymykner for å
               bevare de vannavvisende egenskapene i ytterstoffet. Den tørker
               raskt på snor.
             </AccordionContent>
@@ -46,8 +45,9 @@ export function IceBathingFAQ() {
           <AccordionItem value='item-4'>
             <AccordionTrigger>Er den vindtett?</AccordionTrigger>
             <AccordionContent>
-              Absolutt. Ytterstoffet er tettvevd og vindtett, noe som er
-              avgjørende for å stoppe ''wind chill" faktoren etter et isbad.
+              Absolutt. Ytterstoffet av HydroGuard er tettvevd og vindtett, noe
+              som er avgjørende for å stoppe både "wind chill" faktoren og
+              eventuell nedbør etter et isbad.
             </AccordionContent>
           </AccordionItem>
         </Accordion>
