@@ -9,6 +9,10 @@ import { SeasonsSection } from './sections/SeasonsSection'
 import { PopularSpotsGrid, popularSpotsData } from './sections/PopularSpotsGrid'
 import { SocialProof } from './sections/SocialProof'
 import { CTASection } from './sections/CTASection'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { ProductSpotlight } from './sections/ProductSpotlight'
+import { IceBathingFAQ } from './sections/IceBathingFAQ'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Isbading og Utekos | Varmen du trenger etter kuldesjokket',
@@ -51,6 +55,9 @@ export default function IceBathingInspirationPage() {
         <IceBathingHeroSection />
       </Activity>
       <Activity>
+        <ProductSpotlight />
+      </Activity>
+      <Activity>
         <UseCasesGrid useCases={useCasesData} />
       </Activity>
       <Activity>
@@ -58,6 +65,9 @@ export default function IceBathingInspirationPage() {
       </Activity>
       <Activity>
         <SeasonsSection />
+      </Activity>
+      <Activity>
+        <IceBathingFAQ />
       </Activity>
       <Activity>
         <PopularSpotsGrid destinations={popularSpotsData} />
@@ -68,6 +78,14 @@ export default function IceBathingInspirationPage() {
       <Activity>
         <CTASection />
       </Activity>
+      <div className='fixed bottom-4 left-4 right-4 z-50 md:hidden animate-in slide-in-from-bottom-10 fade-in duration-700'>
+        <Button
+          className='w-full h-14 rounded-full text-white font-bold shadow-2xl border border-white/10 bg-[#232B38] hover:bg-[#232B38]/90'
+          asChild
+        >
+          <Link href='/produkter/comfyrobe'>Kjøp Comfyrobe™</Link>
+        </Button>
+      </div>
     </div>
   )
 }

@@ -1,40 +1,40 @@
 // Path: src/app/inspirasjon/isbading/sections/CTASection.tsx
 
-import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
-import Link from 'next/link'
+import { getProducts } from '@/api/lib/products/getProducts'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
-import type { Route } from 'next'
+import { ComfyrobeQuickBuy } from './ComfyrobeQuickBuy'
 
-export function CTASection() {
+export async function CTASection() {
+  const response = await getProducts({ query: 'handle:comfyrobe' })
+  const product = response.body?.find(p => p.handle === 'comfyrobe')
+  response.body?.find(
+    p =>
+      p.title.toLowerCase().includes('comfyrobe')
+      && !p.title.toLowerCase().includes('dun')
+  ) || response.body?.[0]
+
+  if (!product) {
+    return null
+  }
+
   return (
-    <section className='relative overflow-hidden py-24'>
-      <div className='absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-transparent to-blue-500/10' />
-      <div className='container relative mx-auto px-4 text-center'>
-        <AnimatedBlock className='will-animate-fade-in-scale'>
-          <h2 className='text-fluid-display mb-6 font-bold tracking-tight'>
-            Klar for det kalde gys?
+    <section className='relative overflow-hidden py-24 bg-sidebar-foreground/50 border-t border-white/5'>
+      <div className='absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-blue-500/5 pointer-events-none' />
+
+      <div className='container relative mx-auto px-4'>
+        <AnimatedBlock className='will-animate-fade-in-scale mb-12 text-center'>
+          <h2 className='text-fluid-display font-bold tracking-tight mb-4'>
+            Sikre deg varmen nå
           </h2>
-          <p className='mx-auto mb-8 max-w-2xl text-xl text-muted-foreground'>
-            Ikke la frykten for kulden stoppe deg. Med Utekos er du alltid bare
-            sekunder unna varmen.
+          <p className='mx-auto max-w-2xl text-xl text-muted-foreground'>
+            Gjør som hundrevis av andre isbadere. Bestill din Comfyrobe i dag og
+            kjenn forskjellen.
           </p>
-          <div className='flex flex-wrap justify-center gap-4'>
-            <Button
-              asChild
-              size='lg'
-              className='group gap-2 bg-cyan-600 hover:bg-cyan-700'
-            >
-              <Link href={'/produkter/comfyrobe' as Route}>
-                Kjøp Comfyrobe™
-                <ArrowRight className='size-4 transition-transform group-hover:translate-x-1' />
-              </Link>
-            </Button>
-            <Button variant='outline' size='lg' asChild>
-              <Link href={'/handlehjelp/storrelsesguide' as Route}>
-                Finn din størrelse
-              </Link>
-            </Button>
+        </AnimatedBlock>
+
+        <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
+          <div className='mx-auto max-w-6xl bg-background/50 backdrop-blur-sm rounded-3xl p-6 md:p-12 border border-white/10 shadow-2xl'>
+            <ComfyrobeQuickBuy product={product} />
           </div>
         </AnimatedBlock>
       </div>
