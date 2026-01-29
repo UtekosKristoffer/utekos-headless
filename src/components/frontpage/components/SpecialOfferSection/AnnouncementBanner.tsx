@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowRightIcon, XIcon, Info } from 'lucide-react'
+import { ArrowRightIcon, XIcon, Timer } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils/className'
@@ -57,7 +57,7 @@ export default function AnnouncementBanner() {
         className='group block w-full bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 py-3 pl-4 pr-12 text-center text-sm font-medium text-white transition-all hover:bg-slate-950 sm:px-8'
       >
         <div className='flex items-center justify-center gap-2'>
-          <Info className='h-4 w-4 shrink-0 text-blue-200' />
+          <Timer className='h-4 w-4 shrink-0 text-blue-200' />
 
           <span className='mr-1'>
             <span className='hidden font-bold text-blue-100 sm:inline'>
