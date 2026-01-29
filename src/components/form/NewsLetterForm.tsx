@@ -51,11 +51,11 @@ export function NewsletterForm() {
       <div className='flex flex-col space-y-1'>
         <h3 className='font-semibold text-lg flex items-center gap-2 text-foreground'>
           <Mail className='w-5 h-5' />
-          Få 800kr rabatt på Comfyrobe™
+          Meld deg på vårt nyhetsbrev
         </h3>
         <p className='text-sm text-muted-foreground'>
-          Meld deg på nyhetsbrevet og motta en eksklusiv rabattkode i innboksen
-          din.
+          Meld deg inn i vår medlemsklubb og få nyhetsbrev, inspirasjon og
+          eksklusive rabatter i innboksen din.
         </p>
       </div>
       <form

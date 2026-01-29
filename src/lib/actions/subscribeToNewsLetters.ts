@@ -106,7 +106,7 @@ export async function subscribeToNewsletter(
       return {
         status: 'success',
         // NY TEKST: Bekrefter at koden kommer på mail
-        message: 'Takk! Rabattkoden på 800kr er på vei til din innboks.'
+        message: 'Takk! Velkomstmail er på vei til din innboks.'
       }
     }
 
@@ -119,4 +119,3 @@ export async function subscribeToNewsletter(
     }
   }
 }
-
