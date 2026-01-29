@@ -65,7 +65,7 @@ export default function AnnouncementBanner() {
             </span>
 
             <span className='inline md:hidden'>
-              Siste sjanse: Comfyrobe™ kun kr 990,-
+              Siste sjanse: Comfyrobe™ kr 990,-
             </span>
 
             <span className='hidden md:inline'>
