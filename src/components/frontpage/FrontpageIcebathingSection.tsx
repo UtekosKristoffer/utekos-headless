@@ -23,8 +23,8 @@ export function FrontpageIceBathingSection() {
               </div>
 
               <h2 className='text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6'>
-                Vi rydder plass til
-                <span className='text-blue-900'>sesongens nyheter</span>
+                Vi rydder plass til{' '}
+                <span className='text-blue-400'>sesongens nyheter</span>
               </h2>
             </AnimatedBlock>
 
@@ -71,7 +71,7 @@ export function FrontpageIceBathingSection() {
               <Button
                 asChild
                 size='lg'
-                className='bg-cyan-600 hover:bg-cyan-700 group'
+                className='bg-button hover:bg-button/80 group'
               >
                 <Link href={'/produkter/comfyrobe' as Route}>
                   Sikre deg din nå
