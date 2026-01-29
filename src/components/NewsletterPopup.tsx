@@ -124,25 +124,25 @@ export function NewsletterPopup() {
                 <Tag className='h-6 w-6 text-emerald-400' />
               </div>
               <h3 className='text-lg font-medium text-emerald-100'>
-                Eksklusiv medlemsfordel
+                Utekos® Club
               </h3>
             </div>
 
             <div className='relative z-10'>
-              <p className='text-3xl font-bold text-white mb-2'>Spar 800,-</p>
+              <p className='text-3xl font-bold text-white mb-2'>Bli medlem</p>
               <p className='text-sm text-neutral-400 leading-relaxed'>
-                Ingenting slår følelsen av å være varm og tørr – spesielt når du
-                gjør et kupp.
+                "Det finnes ikke dårlig vær, bare dårlige klær... og for få
+                nyhetsbrev om komfort."
               </p>
             </div>
           </div>
           <div className='flex flex-col justify-center p-8 sm:p-12 bg-neutral-950'>
             <DialogHeader className='text-left mb-6'>
               <DialogTitle className='text-2xl sm:text-3xl font-bold tracking-tight mb-2'>
-                Få 800kr i rabatt
+                Nyhetsbrev
               </DialogTitle>
               <DialogDescription className='text-neutral-400 text-base'>
-                Meld deg på nyhetsbrevet og få rabattkoden på Comfyrobe™ sendt
+                Meld deg på nyhetsbrevet og få rabattkode på Comfyrobe™ sendt
                 direkte til innboksen din.
               </DialogDescription>
             </DialogHeader>
