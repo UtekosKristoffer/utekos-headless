@@ -32,7 +32,6 @@ const HomePage = () => {
         <TechTeaserSection />
         <FrontpageIceBathingSection />
         <NewProductInStoreNotice />
-        <ComfyrobeSection />
 
         <Activity>
           <TestimonialConstellation />
@@ -51,7 +50,7 @@ const HomePage = () => {
         <Activity>
           <SocialProofSection />
         </Activity>
-
+        <ComfyrobeSection />
         <NewStandardSection />
         <CachedPromiseSection />
         <MomentsSection />
