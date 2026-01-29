@@ -100,7 +100,8 @@ export function ProductCard({
             UNISEX
           </Badge>
 
-          {product.handle === 'utekos-dun' && (
+          {(product.handle === 'utekos-dun'
+            || product.handle === 'comfyrobe') && (
             <Badge
               variant='destructive'
               className='absolute right-4 top-4 z-10 px-3 py-1 text-xs font-medium uppercase tracking-wide'
