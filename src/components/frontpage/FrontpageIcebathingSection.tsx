@@ -24,7 +24,9 @@ export function FrontpageIceBathingSection() {
 
               <h2 className='text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6'>
                 Vi rydder plass til{' '}
-                <span className='text-blue-400'>sesongens nyheter</span>
+                <span className='text-gradient-to-r-from-slate-900 via-slate-800 to-slate-900'>
+                  sesongens nyheter
+                </span>
               </h2>
             </AnimatedBlock>
 
