@@ -53,7 +53,7 @@ export default function AnnouncementBanner() {
       )}
     >
       <Link
-        href='/handlehjelp/teknologi-materialer'
+        href='/produkter/comfyrobe'
         className='group block w-full bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 py-3 pl-4 pr-12 text-center text-sm font-medium text-white transition-all hover:bg-slate-950 sm:px-8'
       >
         <div className='flex items-center justify-center gap-2'>
