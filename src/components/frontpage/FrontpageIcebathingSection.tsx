@@ -23,17 +23,15 @@ export function FrontpageIceBathingSection() {
               </div>
 
               <h2 className='text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6'>
-                Fra kuldesjokk til{' '}
-                <span className='text-cyan-400'>umiddelbar varme</span>
+                Vi rydder plass til
+                <span className='text-blue-900'>sesongens nyheter</span>
               </h2>
             </AnimatedBlock>
 
             <AnimatedBlock delay='0.1s'>
               <p className='text-lg text-muted-foreground mb-8 leading-relaxed'>
-                Mestringsfølelsen etter et isbad er magisk, men minuttene
-                etterpå kan være brutale. Comfyrobe™ er designet spesifikt for
-                dette øyeblikket. Det er ikke bare en jakke, det er ditt mobile
-                skifterom og varmestue i ett.
+                Sikre deg Comfyrobe™ til svært redusert pris. 
+                Begrenset antall – førstemann til mølla!
               </p>
             </AnimatedBlock>
             <AnimatedBlock

@@ -44,7 +44,7 @@ export async function ChristmasCampaignJsonLd() {
       name: 'Utekos Comfyrobe',
       url: `${baseUrl}/produkter/comfyrobe`,
       image: `${baseUrl}/magasinet/comfy-front-u-bakgrunn-1080.png`,
-      price: '1290',
+      price: '990',
       originalPrice: '1690',
       description: 'Den ultimate skifteroben. Vindtett, vanntett og foret.'
     }

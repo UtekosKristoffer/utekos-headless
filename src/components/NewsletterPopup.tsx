@@ -115,7 +115,6 @@ export function NewsletterPopup() {
         )}
       >
         <div className='grid grid-cols-1 md:grid-cols-2'>
-          {/* Venstre side: Bilde/Grafikk */}
           <div className='relative hidden md:flex h-full min-h-[400px] w-full flex-col justify-between bg-neutral-900 p-8'>
             <div className='absolute inset-0 bg-gradient-to-br from-emerald-900/40 to-neutral-900/40 z-0' />
 

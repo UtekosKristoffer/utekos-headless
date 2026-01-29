@@ -60,22 +60,21 @@ export default function AnnouncementBanner() {
           <Info className='h-4 w-4 shrink-0 text-blue-200' />
 
           <span className='mr-1'>
-            {/* "Info:" vises kun på større skjermer (sm og oppover) */}
             <span className='hidden font-bold text-blue-100 sm:inline'>
-              Info:{' '}
+              Siste sjanse:{' '}
             </span>
 
-            {/* Kort tekst på mobil for å sikre én linje */}
-            <span className='inline md:hidden'>Teknologien bak Utekos®</span>
+            <span className='inline md:hidden'>
+              Sikre Comfyrobe™ til kun kr 990,-
+            </span>
 
-            {/* Full tekst på desktop */}
             <span className='hidden md:inline'>
-              Lær om funksjonaliteten og teknologien bak Utekos®
+              Sikre Comfyrobe™ til kun kr 990,-
             </span>
           </span>
 
           <span className='hidden items-center font-bold text-white underline decoration-blue-400 underline-offset-4 transition-all group-hover:decoration-white sm:flex'>
-            Les mer her
+            Kjøp her
             <ArrowRightIcon className='ml-1 inline-block size-4 transition-transform group-hover:translate-x-1' />
           </span>
 

@@ -132,7 +132,7 @@ export async function BergenDeliveryJsonLd() {
       url: `${baseUrl}/produkter/comfyrobe`,
       image: `${baseUrl}/magasinet/comfy-front-u-bakgrunn-1080.png`,
       price: '1290',
-      originalPrice: '1690',
+      originalPrice: '990',
       variantSKU: `${variantSku}`,
       ratingValue: '95',
       bestRating: '100',
