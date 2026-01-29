@@ -30,8 +30,8 @@ export function FrontpageIceBathingSection() {
 
             <AnimatedBlock delay='0.1s'>
               <p className='text-lg text-muted-foreground mb-8 leading-relaxed'>
-                Sikre deg Comfyrobe™ til svært redusert pris. 
-                Begrenset antall – førstemann til mølla!
+                Sikre deg Comfyrobe™ til svært redusert pris. Begrenset antall
+                og størrelser – førstemann til mølla!
               </p>
             </AnimatedBlock>
             <AnimatedBlock
