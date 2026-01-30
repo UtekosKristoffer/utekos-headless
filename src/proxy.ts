@@ -28,16 +28,14 @@ export async function proxy(request: NextRequest) {
   }
 
   const response = NextResponse.next()
-
   const scCid = url.searchParams.get('ScCid')
-
   if (scCid) {
     response.cookies.set('ute_sc_cid', scCid, {
       path: '/',
       secure: process.env.NODE_ENV === 'production',
-      httpOnly: false, // VIGTIGT: Skal være false så SnapPixel.tsx kan læse den
+      httpOnly: false,
       sameSite: 'lax',
-      maxAge: 2592000 // 30 dage
+      maxAge: 2592000
     })
 
     try {
@@ -56,7 +54,29 @@ export async function proxy(request: NextRequest) {
         })
       })
     } catch (err) {
-      console.error('Failed to send Snap log from proxy:', err)
+      console.error('Failed to send Snap log:', err)
+    }
+  }
+
+  const fbclid = url.searchParams.get('fbclid')
+  if (fbclid) {
+    try {
+      await fetch(new URL('/api/log', request.url), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          level: 'INFO',
+          event: '💙 Meta Ad Click Detected',
+          context: {
+            fbclid,
+            path: pathname,
+            source: 'proxy-middleware',
+            userAgent
+          }
+        })
+      })
+    } catch (err) {
+      console.error('Failed to send Meta log:', err)
     }
   }
 
