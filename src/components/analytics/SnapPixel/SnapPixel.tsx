@@ -6,14 +6,6 @@ import { useEffect, useRef } from 'react'
 
 const SNAP_PIXEL_ID = process.env.NEXT_PUBLIC_SNAP_PIXEL_ID
 
-function getCookie(name: string): string | null {
-  if (typeof document === 'undefined') return null
-  const value = `; ${document.cookie}`
-  const parts = value.split(`; ${name}=`)
-  if (parts.length === 2) return parts.pop()?.split(';').shift() || null
-  return null
-}
-
 export function SnapPixel() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -25,6 +17,7 @@ export function SnapPixel() {
       isFirstRender.current = false
       return
     }
+
     if (window.snaptr) {
       window.snaptr('track', 'PAGE_VIEW')
     }
