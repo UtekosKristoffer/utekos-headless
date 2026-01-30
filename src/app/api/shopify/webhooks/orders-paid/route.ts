@@ -7,6 +7,7 @@ import { normalizePhone } from '@/lib/utils/normalizePhone'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 import { handlePurchaseEvent } from '@/lib/tracking/google/handlePurchaseEvents'
 import { hashSnapData } from '@/lib/snapchat/hashSnapData'
+import { getCleanIp } from '@/lib/snapchat/getCleanIp'
 import {
   FacebookAdsApi,
   ServerEvent,
@@ -22,7 +23,6 @@ const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE
 
 const SNAP_ACCESS_TOKEN = process.env.SNAP_CAPI_TOKEN
 const SNAP_PIXEL_ID = process.env.NEXT_PUBLIC_SNAP_PIXEL_ID
-
 export async function POST(request: Request) {
   if (!ACCESS_TOKEN || !PIXEL_ID) {
     console.error(
@@ -218,6 +218,7 @@ export async function POST(request: Request) {
       contentList.push(content)
     }
   }
+
   const sendSnapEvent = async () => {
     if (!SNAP_ACCESS_TOKEN || !SNAP_PIXEL_ID) {
       console.warn('[Snap CAPI] Missing tokens, skipping.')
@@ -226,6 +227,8 @@ export async function POST(request: Request) {
 
     try {
       const eventTime = Math.floor(Date.now() / 1000)
+
+      const snapClientIp = getCleanIp(clientIp)
 
       const snapPayload = {
         event_name: 'PURCHASE',
@@ -239,9 +242,8 @@ export async function POST(request: Request) {
         user_data: {
           em: [hashSnapData(email)].filter(Boolean),
           ph: [hashSnapData(phone)].filter(Boolean),
-          client_ip_address: hashSnapData(clientIp),
+          client_ip_address: snapClientIp,
           client_user_agent: userAgent,
-
           sc_cookie1: (redisData?.userData as any)?.scid,
           sc_click_id: (redisData?.userData as any)?.click_id,
           fn: [hashSnapData(firstName)].filter(Boolean),
@@ -308,7 +310,6 @@ export async function POST(request: Request) {
   }
 
   const snapPromise = sendSnapEvent()
-
   const customData = new CustomData()
   const currency = safeString(order.currency) || 'NOK'
   customData.setCurrency(currency)
