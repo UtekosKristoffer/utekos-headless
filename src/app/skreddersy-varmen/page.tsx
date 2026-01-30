@@ -42,14 +42,14 @@ export default async function LandingPage() {
     getProduct('utekos-techdown'),
     getProduct('utekos-dun'),
     getProduct('utekos-mikrofiber'),
-    getProduct('utekos-buff') // Hent buff-produktet
+    getProduct('utekos-buff')
   ])
 
   const productsMap = {
     'utekos-techdown': techDown,
     'utekos-dun': dun,
     'utekos-mikrofiber': mikro,
-    'utekos-buff': buff // Legg til buff i produkt-map
+    'utekos-buff': buff
   }
 
   if (!techDown) return <div>Produktet TechDown ble ikke funnet.</div>

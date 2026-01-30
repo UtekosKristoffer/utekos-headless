@@ -5,6 +5,7 @@ import { Check, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
+import SherpaCoreImg from '@public/1080/comfy-design-1080.png'
 
 const features = [
   'SherpaCore™ fôr som tørker deg umiddelbart',
@@ -24,7 +25,7 @@ export function ProductSpotlight() {
         <div className='grid lg:grid-cols-2 gap-12 items-center'>
           <AnimatedBlock className='relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none rounded-2xl overflow-hidden border border-white/10 shadow-2xl'>
             <Image
-              src='/1080/comfy-design-1080.png'
+              src={SherpaCoreImg}
               alt='Utekos Comfyrobe detaljer'
               fill
               className='object-cover'
