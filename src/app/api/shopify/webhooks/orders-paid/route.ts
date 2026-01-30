@@ -155,6 +155,7 @@ export async function POST(request: Request) {
   let city = ''
   let state = ''
   let zip = ''
+  let countryCode = ''
 
   if (addr) {
     firstName = safeString(addr.first_name) || ''
@@ -162,7 +163,7 @@ export async function POST(request: Request) {
     city = safeString(addr.city) || ''
     state = safeString(addr.province_code) || ''
     zip = safeString(addr.zip) || ''
-    const countryCode = safeString(addr.country_code) || ''
+    countryCode = safeString(addr.country_code) || ''
 
     if (firstName) userData.setFirstName(firstName)
     if (lastName) userData.setLastName(lastName)
@@ -217,7 +218,6 @@ export async function POST(request: Request) {
       contentList.push(content)
     }
   }
-
   const sendSnapEvent = async () => {
     if (!SNAP_ACCESS_TOKEN || !SNAP_PIXEL_ID) {
       console.warn('[Snap CAPI] Missing tokens, skipping.')
@@ -239,31 +239,38 @@ export async function POST(request: Request) {
         user_data: {
           em: [hashSnapData(email)].filter(Boolean),
           ph: [hashSnapData(phone)].filter(Boolean),
-          client_ip_address: clientIp,
+          client_ip_address: hashSnapData(clientIp),
           client_user_agent: userAgent,
+
           sc_cookie1: (redisData?.userData as any)?.scid,
           sc_click_id: (redisData?.userData as any)?.click_id,
-
           fn: [hashSnapData(firstName)].filter(Boolean),
           ln: [hashSnapData(lastName)].filter(Boolean),
           ct: [hashSnapData(city)].filter(Boolean),
           st: [hashSnapData(state)].filter(Boolean),
-          zp: [hashSnapData(zip)].filter(Boolean)
+          zp: [hashSnapData(zip)].filter(Boolean),
+          country: [hashSnapData(countryCode)].filter(Boolean)
         },
 
         custom_data: {
           currency: safeString(order.currency) || 'NOK',
           value: Number(order.total_price || 0),
-          transaction_id: safeString(order.id),
-          item_category: 'Apparel',
-          content_ids: contentIds,
-          num_items: order.line_items
-            ?.reduce((acc, item) => acc + (item.quantity || 0), 0)
-            .toString()
-        },
+          order_id: safeString(order.id),
+          content_category: 'Apparel',
 
-        event_id: `shopify_order_${order.id}`,
-        client_dedup_id: `shopify_order_${order.id}`
+          content_ids: contentIds,
+          num_items: order.line_items?.reduce(
+            (acc, item) => acc + (item.quantity || 0),
+            0
+          ),
+
+          contents: order.line_items?.map(item => ({
+            id: safeString(item.variant_id) || safeString(item.product_id),
+            quantity: item.quantity,
+            item_price: item.price
+          }))
+        },
+        event_id: `shopify_order_${order.id}`
       }
 
       await logToAppLogs('INFO', 'Snap CAPI Payload Debug', {

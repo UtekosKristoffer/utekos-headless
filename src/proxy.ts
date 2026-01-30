@@ -34,9 +34,9 @@ export async function proxy(request: NextRequest) {
     response.cookies.set('ute_sc_cid', scCid, {
       path: '/',
       secure: process.env.NODE_ENV === 'production',
-      httpOnly: true,
+      httpOnly: false,
       sameSite: 'lax',
-      maxAge: 2592000
+      maxAge: 2592000 // 30 dager
     })
   }
 
