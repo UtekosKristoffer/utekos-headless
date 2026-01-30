@@ -15,7 +15,9 @@ import type {
   CartMutationEvent,
   ShopifyProduct,
   ShopifyProductVariant,
-  MetaContentItem
+  MetaContentItem,
+  MetaEventPayload,
+  MetaUserData
 } from '@types'
 import { useContext, useEffect, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
@@ -27,6 +29,8 @@ import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { useQueryClient } from '@tanstack/react-query'
 import { useAnalytics } from '@/hooks/useAnalytics'
 import { logAttribution } from '@/lib/tracking/log/logAttribution'
+import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
+
 export function AddToCart({
   product,
   selectedVariant,
@@ -115,6 +119,7 @@ export function AddToCart({
         const mainVariantId =
           cleanShopifyId(selectedVariant.id) || selectedVariant.id.toString()
         const eventID = `atc_${cleanShopifyId(selectedVariant.id)}_${Date.now()}`
+
         const contents: MetaContentItem[] = [
           {
             id: mainVariantId,
@@ -153,7 +158,6 @@ export function AddToCart({
           },
           { eventID }
         )
-
         logAttribution(contentName, value)
 
         if (typeof window !== 'undefined' && window.snaptr) {
@@ -196,6 +200,66 @@ export function AddToCart({
             ecommerce: { currency: currency, value: value, items: ga4Items }
           })
         }
+
+        if (typeof window !== 'undefined' && window.fbq) {
+          window.fbq(
+            'track',
+            'AddToCart',
+            {
+              content_name: contentName,
+              content_ids: contentIds,
+              content_type: 'product',
+              value: value,
+              currency: currency,
+              contents: contents,
+              num_items: totalQty
+            },
+            { eventID }
+          )
+        }
+
+        const fbp = getCookie('_fbp')
+        const fbc = getCookie('_fbc')
+        const extId = getCookie('ute_ext_id')
+        const emailHash = getCookie('ute_user_hash')
+        const ua =
+          typeof navigator !== 'undefined' ? navigator.userAgent : undefined
+
+        const userData: MetaUserData = {
+          fbp: fbp || undefined,
+          fbc: fbc || undefined,
+          external_id: extId || undefined,
+          email_hash: emailHash || undefined,
+          client_user_agent: ua
+        }
+
+        const capiPayload: MetaEventPayload = {
+          eventName: 'AddToCart',
+          eventId: eventID,
+          eventSourceUrl:
+            typeof window !== 'undefined' ?
+              window.location.href
+            : 'https://utekos.no',
+          eventTime: Math.floor(Date.now() / 1000),
+          actionSource: 'website',
+          userData,
+          eventData: {
+            value,
+            currency,
+            content_name: contentName,
+            content_ids: contentIds,
+            content_type: 'product',
+            contents: contents,
+            num_items: totalQty
+          }
+        }
+
+        fetch('/api/meta-events', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(capiPayload),
+          keepalive: true
+        }).catch(err => console.error('CAPI AddToCart failed', err))
 
         cartStore.send({ type: 'OPEN' })
       } catch (mutationError) {
