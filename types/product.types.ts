@@ -16,6 +16,7 @@ export type ShopifyProduct = {
   id: string
   title: string
   handle: string
+  productType: string
   totalInventory: number
   updatedAt: string
   collections: {

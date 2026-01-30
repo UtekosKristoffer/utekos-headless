@@ -34,7 +34,7 @@ export function SnapPixel() {
         'https://sc-static.net/scevent.min.js');
 
         snaptr('init', '${SNAP_PIXEL_ID}', {
-          'user_email': '__INSERT_USER_EMAIL__' // Kan settes hvis du har innlogget bruker
+          'user_email': '__INSERT_USER_EMAIL__' 
         });
         snaptr('track', 'PAGE_VIEW');
         `

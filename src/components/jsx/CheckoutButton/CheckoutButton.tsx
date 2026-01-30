@@ -1,4 +1,3 @@
-// Path: src/components/jsx/CheckoutButton/CheckoutButton.tsx
 'use client'
 import { track } from '@vercel/analytics'
 import * as React from 'react'
@@ -9,6 +8,7 @@ import { generateEventID } from '@/components/analytics/MetaPixel/generateEventI
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { sendGTMEvent } from '@next/third-parties/google'
+
 export const CheckoutButton = ({
   checkoutUrl,
   subtotal,
@@ -69,12 +69,22 @@ export const CheckoutButton = ({
           {
             value,
             currency,
-            content_ids: cleanItemIds, // Send rensede ID-er
+            content_ids: cleanItemIds,
             content_type: 'product',
             num_items
           },
           { eventID }
         )
+      }
+
+      // SNAPCHAT TRACKING (START_CHECKOUT)
+      if (typeof window !== 'undefined' && window.snaptr) {
+        window.snaptr('track', 'START_CHECKOUT', {
+          price: value,
+          currency: currency,
+          number_items: num_items,
+          item_ids: cleanItemIds
+        })
       }
 
       const captureBody: CaptureBody = {
@@ -102,7 +112,7 @@ export const CheckoutButton = ({
         eventData: {
           value,
           currency,
-          content_ids: cleanItemIds, // Send rensede ID-er
+          content_ids: cleanItemIds,
           content_type: 'product',
           num_items
         }

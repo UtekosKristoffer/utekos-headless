@@ -32,13 +32,11 @@ declare global {
     dataLayer: Record<string, any>[]
 
     // Snapchat Pixel
-    snaptr: {
-      (method: 'init', pixelId: string, config?: Record<string, any>): void
-      (method: 'track', event: string, params?: Record<string, any>): void
-      handleRequest?: (...args: any[]) => void
-      queue?: any[]
-    }
-    _snaptr_loaded?: boolean
+    snaptr?: (
+      method: string,
+      eventType: string,
+      data?: Record<string, string | number | string[]>
+    ) => void
   }
 }
 

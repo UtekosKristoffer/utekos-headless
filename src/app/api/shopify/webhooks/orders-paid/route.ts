@@ -145,29 +145,33 @@ export async function POST(request: Request) {
     userData.setExternalId(externalId)
   }
 
+  // Address Extraction for Hashing
   const addr =
     order.shipping_address
     ?? order.billing_address
     ?? order.customer?.default_address
 
+  let firstName: string = ''
+  let lastName: string = ''
+  let city: string = ''
+  let state: string = ''
+  let zip: string = ''
+  let countryCode: string
+
   if (addr) {
-    const firstName = safeString(addr.first_name)
+    firstName = safeString(addr.first_name) || ''
+    lastName = safeString(addr.last_name) || ''
+    city = safeString(addr.city) || ''
+    state = safeString(addr.province_code) || ''
+    zip = safeString(addr.zip) || ''
+    countryCode = safeString(addr.country_code) || ''
+
     if (firstName) userData.setFirstName(firstName)
-
-    const lastName = safeString(addr.last_name)
     if (lastName) userData.setLastName(lastName)
-
-    const city = safeString(addr.city)
     if (city) userData.setCity(city.toLowerCase())
-
-    const state = safeString(addr.province_code)
     if (state) userData.setState(state.toLowerCase())
-
-    const zip = safeString(addr.zip)
     if (zip) userData.setZip(zip)
-
-    const country = safeString(addr.country_code)
-    if (country) userData.setCountry(country.toLowerCase())
+    if (countryCode) userData.setCountry(countryCode.toLowerCase())
   }
 
   const clientIp =
@@ -233,15 +237,28 @@ export async function POST(request: Request) {
           || redisData?.checkoutUrl
           || 'https://utekos.no',
         event_id: `shopify_order_${order.id}`,
+        // Dokumentasjonen anbefaler client_dedup_id lik event_id for deduplisering på tvers av kanaler
+        client_dedup_id: `shopify_order_${order.id}`,
+
         hashed_email: hashSnapData(email),
         hashed_phone_number: hashSnapData(phone),
         hashed_ip_address: hashSnapData(clientIp),
+
+        // --- NYE FELTER BASERT PÅ BEST PRACTICE DOCS ---
+        hashed_first_name_sha: hashSnapData(firstName),
+        hashed_last_name_sha: hashSnapData(lastName),
+        hashed_city_sha: hashSnapData(city),
+        hashed_state_sha: hashSnapData(state),
+        hashed_zip: hashSnapData(zip),
+        // ----------------------------------------------
+
         user_agent: userAgent,
         uuid_c1: (redisData?.userData as any)?.scid,
         click_id: (redisData?.userData as any)?.click_id,
         price: order.total_price,
         currency: safeString(order.currency) || 'NOK',
         transaction_id: safeString(order.id),
+        item_category: 'Apparel', // Anbefalt parameter
         item_ids: contentIds,
         number_items: order.line_items
           ?.reduce((acc, item) => acc + (item.quantity || 0), 0)

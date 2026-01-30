@@ -11,6 +11,7 @@ import type { DehydratedState } from '@tanstack/react-query'
 import { CookieConsentProvider } from '@/components/cookie-consent/CookieConsentProvider'
 import CookieConsent from '@/components/cookie-consent/CookieConsent'
 import { ConditionalTracking } from '../analytics/ConditionalTracking'
+import { SnapPixel } from '@/components/analytics/SnapPixel'
 
 interface ProvidersProps {
   children: React.ReactNode
@@ -43,12 +44,12 @@ export default function Providers({
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
       <CookieConsent />
+      <SnapPixel />
 
       <ConditionalTracking
         {...(process.env.NEXT_PUBLIC_META_PIXEL_ID && {
           metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID
         })}
-
         {...(process.env.NEXT_PUBLIC_POSTHOG_KEY && {
           postHogApiKey: process.env.NEXT_PUBLIC_POSTHOG_KEY
         })}

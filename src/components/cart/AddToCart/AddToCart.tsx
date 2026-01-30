@@ -151,10 +151,20 @@ export function AddToCart({
             currency: currency,
             num_items: totalQty
           },
-          { eventID } // <-- Sender custom ID
+          { eventID }
         )
 
-        // GA4 (Beholdes manuell)
+        if (typeof window !== 'undefined' && window.snaptr) {
+          window.snaptr('track', 'ADD_CART', {
+            item_ids: contentIds,
+            price: value,
+            currency: currency,
+            number_items: totalQty,
+            description: contentName,
+            item_category: product.productType || 'Apparel' // Lagt til parameter
+          })
+        }
+
         if (typeof window !== 'undefined' && window.dataLayer) {
           const ga4Items = [
             {

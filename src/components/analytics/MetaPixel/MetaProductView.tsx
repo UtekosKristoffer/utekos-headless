@@ -1,11 +1,9 @@
-// Path: src/components/analytics/MetaPixel/MetaProductView.tsx
-
 'use client'
 
 import { useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
-import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID' // VIKTIG: Gjeninnført
+import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
 import { useAnalytics } from '@/hooks/useAnalytics'
 import type { ShopifyProduct, ShopifyProductVariant } from '@types'
 
@@ -29,9 +27,7 @@ export function MetaProductView({
     if (eventFired.current === uniqueKey) return
     eventFired.current = uniqueKey
 
-    // VIKTIG: Vi genererer ID-en her for full kontroll (ingen .replace('evt_', 'track_'))
     const eventId = generateEventID()
-
     const price = parseFloat(selectedVariant.price.amount)
     const currency = selectedVariant.price.currencyCode
 
@@ -44,11 +40,22 @@ export function MetaProductView({
         content_type: 'product',
         content_name: product.title
       },
-      { eventID: eventId } // Sender ID-en eksplisitt
+      { eventID: eventId }
     )
+
+    if (typeof window !== 'undefined' && window.snaptr) {
+      window.snaptr('track', 'VIEW_CONTENT', {
+        item_ids: [contentId],
+        price: price,
+        currency: currency,
+        description: product.title,
+        item_category: product.productType || 'Apparel' // Sender kategori hvis tilgjengelig, ellers fallback
+      })
+    }
   }, [
     pathname,
     product.title,
+    product.productType,
     selectedVariant.id,
     selectedVariant.price,
     trackEvent

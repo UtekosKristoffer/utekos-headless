@@ -9,6 +9,7 @@ const product = /* GraphQL */ `
     handle
     totalInventory
     updatedAt
+    productType
     collections(first: 10) {
       nodes {
         id
