@@ -40,11 +40,8 @@ export function HeroAndEmpathy() {
         <div className='absolute inset-0 bg-gradient-to-b from-black/50 via-transparent via-60% to-[#1F2421] to-95%' />
 
         <div className='relative z-10 w-full h-full flex flex-col items-center justify-start pt-32 md:justify-center md:pt-0 px-6'>
-          <h1 className='font-serif text-4xl md:text-7xl mb-4 md:mb-6 drop-shadow-xl text-center text-balance leading-[1.1] tracking-tight'>
-           <span className='bg-gradient-to-r from-slate-900 via-slate-200 to-slate-900 bg-clip-text text-transparent'>
-  Skreddersy varmen.
-</span>
-            <br className='hidden md:block' />
+          <h1 className='font-serif text-4xl md:text-7xl text-[#F4F1EA] mb-4 md:mb-6 drop-shadow-xl text-center text-balance leading-[1.1] tracking-tight'>
+            Skreddersy varmen. <br className='hidden md:block' />
             <span className='font-light italic opacity-90 block mt-2 text-2xl md:text-6xl text-[#E07A5F]'>
               Forleng de gode stundene.
             </span>
