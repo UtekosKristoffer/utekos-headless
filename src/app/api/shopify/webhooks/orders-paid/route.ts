@@ -145,18 +145,16 @@ export async function POST(request: Request) {
     userData.setExternalId(externalId)
   }
 
-  // Address Extraction for Hashing
   const addr =
     order.shipping_address
     ?? order.billing_address
     ?? order.customer?.default_address
 
-  let firstName: string = ''
-  let lastName: string = ''
-  let city: string = ''
-  let state: string = ''
-  let zip: string = ''
-  let countryCode: string
+  let firstName = ''
+  let lastName = ''
+  let city = ''
+  let state = ''
+  let zip = ''
 
   if (addr) {
     firstName = safeString(addr.first_name) || ''
@@ -164,7 +162,7 @@ export async function POST(request: Request) {
     city = safeString(addr.city) || ''
     state = safeString(addr.province_code) || ''
     zip = safeString(addr.zip) || ''
-    countryCode = safeString(addr.country_code) || ''
+    const countryCode = safeString(addr.country_code) || ''
 
     if (firstName) userData.setFirstName(firstName)
     if (lastName) userData.setLastName(lastName)
@@ -227,44 +225,51 @@ export async function POST(request: Request) {
     }
 
     try {
+      const eventTime = Math.floor(Date.now() / 1000)
+
       const snapPayload = {
-        pixel_id: SNAP_PIXEL_ID,
-        timestamp: Date.now(),
-        event_type: 'PURCHASE',
-        event_conversion_type: 'WEB',
+        event_name: 'PURCHASE',
+        event_time: eventTime,
         event_source_url:
           safeString(order.order_status_url)
           || redisData?.checkoutUrl
           || 'https://utekos.no',
+        action_source: 'WEB',
+
+        user_data: {
+          em: [hashSnapData(email)].filter(Boolean),
+          ph: [hashSnapData(phone)].filter(Boolean),
+          client_ip_address: clientIp,
+          client_user_agent: userAgent,
+          sc_cookie1: (redisData?.userData as any)?.scid,
+          sc_click_id: (redisData?.userData as any)?.click_id,
+
+          fn: [hashSnapData(firstName)].filter(Boolean),
+          ln: [hashSnapData(lastName)].filter(Boolean),
+          ct: [hashSnapData(city)].filter(Boolean),
+          st: [hashSnapData(state)].filter(Boolean),
+          zp: [hashSnapData(zip)].filter(Boolean)
+        },
+
+        custom_data: {
+          currency: safeString(order.currency) || 'NOK',
+          value: Number(order.total_price || 0),
+          transaction_id: safeString(order.id),
+          item_category: 'Apparel',
+          content_ids: contentIds,
+          num_items: order.line_items
+            ?.reduce((acc, item) => acc + (item.quantity || 0), 0)
+            .toString()
+        },
+
         event_id: `shopify_order_${order.id}`,
-        // Dokumentasjonen anbefaler client_dedup_id lik event_id for deduplisering på tvers av kanaler
-        client_dedup_id: `shopify_order_${order.id}`,
-
-        hashed_email: hashSnapData(email),
-        hashed_phone_number: hashSnapData(phone),
-        hashed_ip_address: hashSnapData(clientIp),
-
-        // --- NYE FELTER BASERT PÅ BEST PRACTICE DOCS ---
-        hashed_first_name_sha: hashSnapData(firstName),
-        hashed_last_name_sha: hashSnapData(lastName),
-        hashed_city_sha: hashSnapData(city),
-        hashed_state_sha: hashSnapData(state),
-        hashed_zip: hashSnapData(zip),
-        // ----------------------------------------------
-
-        user_agent: userAgent,
-        uuid_c1: (redisData?.userData as any)?.scid,
-        click_id: (redisData?.userData as any)?.click_id,
-        price: order.total_price,
-        currency: safeString(order.currency) || 'NOK',
-        transaction_id: safeString(order.id),
-        item_category: 'Apparel', // Anbefalt parameter
-        item_ids: contentIds,
-        number_items: order.line_items
-          ?.reduce((acc, item) => acc + (item.quantity || 0), 0)
-          .toString(),
-        integration: 'api-custom'
+        client_dedup_id: `shopify_order_${order.id}`
       }
+
+      await logToAppLogs('INFO', 'Snap CAPI Payload Debug', {
+        payload: snapPayload,
+        orderId: order.id
+      })
 
       const snapRes = await fetch(
         `https://tr.snapchat.com/v3/${SNAP_PIXEL_ID}/events?access_token=${SNAP_ACCESS_TOKEN}`,
@@ -277,13 +282,21 @@ export async function POST(request: Request) {
 
       if (!snapRes.ok) {
         const errText = await snapRes.text()
+        await logToAppLogs('ERROR', 'Snap CAPI Response Error', {
+          status: snapRes.status,
+          error: errText,
+          orderId: order.id
+        })
         console.error(`[Snap CAPI] Failed: ${snapRes.status} ${errText}`)
       } else {
         const resJson = await snapRes.json()
         console.log('[Snap CAPI] Success', resJson)
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('[Snap CAPI] Error executing request:', error)
+      await logToAppLogs('ERROR', 'Snap CAPI Execution Error', {
+        message: error.message
+      })
     }
   }
 
