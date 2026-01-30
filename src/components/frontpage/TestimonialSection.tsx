@@ -8,7 +8,6 @@ export function TestimonialSection() {
   return (
     <>
       <div className='relative'>
-        {/* Horisontal "Databus"-linje */}
         <div
           ref={hLineRef}
           className={cn(

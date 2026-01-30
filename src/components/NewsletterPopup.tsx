@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 // Path: src/components/NewsletterPopup.tsx
 'use client'
 
