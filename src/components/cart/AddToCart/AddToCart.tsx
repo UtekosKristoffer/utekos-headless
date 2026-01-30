@@ -26,7 +26,7 @@ import { QuantitySelector } from '../QuantitySelector'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { useQueryClient } from '@tanstack/react-query'
 import { useAnalytics } from '@/hooks/useAnalytics'
-
+import { logAttribution } from '@/lib/tracking/log/logAttribution'
 export function AddToCart({
   product,
   selectedVariant,
@@ -154,6 +154,8 @@ export function AddToCart({
           { eventID }
         )
 
+        logAttribution(contentName, value)
+
         if (typeof window !== 'undefined' && window.snaptr) {
           window.snaptr('track', 'ADD_CART', {
             item_ids: contentIds,
@@ -161,7 +163,7 @@ export function AddToCart({
             currency: currency,
             number_items: totalQty,
             description: contentName,
-            item_category: product.productType || 'Apparel' // Lagt til parameter
+            item_category: product.productType || 'Apparel'
           })
         }
 

@@ -50,7 +50,8 @@ export const CheckoutButton = ({
       const fbc = getCookie('_fbc')
       const extId = getCookie('ute_ext_id')
       const emailHash = getCookie('ute_user_hash')
-      const ua = typeof navigator !== 'undefined' ? navigator.userAgent : undefined
+      const ua =
+        typeof navigator !== 'undefined' ? navigator.userAgent : undefined
       const rawEventID = generateEventID()
       const eventID = rawEventID.replace('evt_', 'ic_')
       const value = Number.parseFloat(subtotalAmount || '0') || 0
@@ -60,6 +61,32 @@ export const CheckoutButton = ({
         external_id: extId || undefined,
         email_hash: emailHash || undefined,
         client_user_agent: ua
+      }
+
+      const snapId = getCookie('ute_sc_cid')
+      const metaId = fbc // Vi har allerede hentet denne
+
+      const sources = []
+      if (snapId) sources.push('Snapchat 👻')
+      if (metaId) sources.push('Meta 💙')
+
+      if (sources.length > 0) {
+        const sourceLabel = sources.join(' + ')
+        fetch('/api/log', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            level: 'INFO',
+            event: `💳 InitiateCheckout fra ${sourceLabel}`,
+            context: {
+              source: sourceLabel,
+              value,
+              cartId,
+              snapId: snapId || undefined,
+              metaId: metaId || undefined
+            }
+          })
+        }).catch(() => {})
       }
 
       if (typeof window !== 'undefined' && window.fbq) {
@@ -77,7 +104,6 @@ export const CheckoutButton = ({
         )
       }
 
-      // SNAPCHAT TRACKING (START_CHECKOUT)
       if (typeof window !== 'undefined' && window.snaptr) {
         window.snaptr('track', 'START_CHECKOUT', {
           price: value,
