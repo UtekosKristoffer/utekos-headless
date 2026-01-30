@@ -6,7 +6,6 @@ import { useEffect, useRef } from 'react'
 
 const SNAP_PIXEL_ID = process.env.NEXT_PUBLIC_SNAP_PIXEL_ID
 
-// Hjelpefunksjon for å lese cookies på klientsiden
 function getCookie(name: string): string | null {
   if (typeof document === 'undefined') return null
   const value = `; ${document.cookie}`
@@ -18,20 +17,14 @@ function getCookie(name: string): string | null {
 export function SnapPixel() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  // Vi bruker en ref for å spore om det er første render (initial load)
   const isFirstRender = useRef(true)
 
   useEffect(() => {
     if (!SNAP_PIXEL_ID) return
-
-    // Sjekk om dette er første visning
     if (isFirstRender.current) {
-      // Sett flagget til false, slik at neste navigasjon (SPA) trigges
       isFirstRender.current = false
-      return // Avbryt, la inline-scriptet ta seg av den aller første Page View
+      return
     }
-
-    // Denne koden kjører kun når pathname/searchParams endres (navigasjon)
     if (window.snaptr) {
       window.snaptr('track', 'PAGE_VIEW')
     }
