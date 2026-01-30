@@ -22,9 +22,9 @@ export function FrontpageIceBathingSection() {
                 Siste sjanse!
               </div>
 
-              <h2 className='text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6'>
+              <h2 className='mb-6 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl'>
                 Vi rydder plass til{' '}
-                <span className='text-gradient-to-r-from-slate-900 via-slate-800 to-slate-900'>
+                <span className='bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text text-transparent'>
                   sesongens nyheter
                 </span>
               </h2>
