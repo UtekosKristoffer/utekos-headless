@@ -10,6 +10,8 @@ import { BLOCKED_USER_AGENTS } from '@/api/constants/monitoring'
 
 export async function proxy(request: NextRequest) {
   const userAgent = request.headers.get('user-agent')?.toLowerCase() || ''
+  const referer = request.headers.get('referer') || '' // Hent faktisk referer
+
   const isBlockedAgent = BLOCKED_USER_AGENTS.some(agent =>
     userAgent.includes(agent)
   )
@@ -28,6 +30,7 @@ export async function proxy(request: NextRequest) {
   }
 
   const response = NextResponse.next()
+
   const scCid = url.searchParams.get('ScCid')
   if (scCid) {
     response.cookies.set('ute_sc_cid', scCid, {
@@ -41,15 +44,19 @@ export async function proxy(request: NextRequest) {
     try {
       await fetch(new URL('/api/log', request.url), {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        // VIKTIG ENDRING: Vi videresender headere her
+        headers: {
+          'Content-Type': 'application/json',
+          'Referer': referer,
+          'User-Agent': userAgent
+        },
         body: JSON.stringify({
           level: 'INFO',
           event: '👻 Snapchat Ad Click Detected',
           context: {
             scCid,
             path: pathname,
-            source: 'proxy-middleware',
-            userAgent
+            source: 'proxy-middleware'
           }
         })
       })
@@ -63,15 +70,18 @@ export async function proxy(request: NextRequest) {
     try {
       await fetch(new URL('/api/log', request.url), {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Referer': referer,
+          'User-Agent': userAgent
+        },
         body: JSON.stringify({
           level: 'INFO',
           event: '💙 Meta Ad Click Detected',
           context: {
             fbclid,
             path: pathname,
-            source: 'proxy-middleware',
-            userAgent
+            source: 'proxy-middleware'
           }
         })
       })
