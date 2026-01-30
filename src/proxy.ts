@@ -28,6 +28,18 @@ export async function proxy(request: NextRequest) {
   }
 
   const response = NextResponse.next()
+
+  const scCid = url.searchParams.get('ScCid')
+  if (scCid) {
+    response.cookies.set('ute_sc_cid', scCid, {
+      path: '/',
+      secure: process.env.NODE_ENV === 'production',
+      httpOnly: true,
+      sameSite: 'lax',
+      maxAge: 2592000
+    })
+  }
+
   return handleMarketingParams(request, response)
 }
 

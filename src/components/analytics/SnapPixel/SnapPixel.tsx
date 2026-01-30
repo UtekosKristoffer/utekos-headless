@@ -10,13 +10,9 @@ export function SnapPixel() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [initialized, setInitialized] = useState(false)
-
-  // Håndter PageView ved navigasjon
   useEffect(() => {
     if (!initialized || !SNAP_PIXEL_ID) return
 
-    // Snap Pixel sporer automatisk første pageview ved init,
-    // så vi sporer kun ved endringer i pathname/params etter init.
     if (window.snaptr) {
       window.snaptr('track', 'PAGE_VIEW')
     }

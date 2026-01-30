@@ -1,5 +1,3 @@
-// src/app/api/checkout/capture-identifiers/route.ts
-
 import { NextRequest, NextResponse } from 'next/server'
 import { redisSet } from '@/lib/redis'
 import { getStorageKey } from '@/lib/utils/getStorageKey'
@@ -30,9 +28,10 @@ export async function POST(req: NextRequest) {
   const cookieStore = req.cookies
   const cookieFbp = cookieStore.get('_fbp')?.value
   const cookieFbc = cookieStore.get('_fbc')?.value
-  const cookieScid = cookieStore.get('_scid')?.value
   const cookieExtId = cookieStore.get('ute_ext_id')?.value
   const cookieUserHash = cookieStore.get('ute_user_hash')?.value
+  const cookieScid = cookieStore.get('_scid')?.value
+  const cookieScCid = cookieStore.get('ute_sc_cid')?.value
   const gaCookie = cookieStore.get('_ga')?.value
   const gaClientId = parseGaClientId(gaCookie)
   const cookieMap = new Map<string, string>()
@@ -59,6 +58,10 @@ export async function POST(req: NextRequest) {
 
   if (cookieScid) {
     ;(userDataToSave as any).scid = cookieScid
+  }
+
+  if (cookieScCid) {
+    ;(userDataToSave as any).click_id = cookieScCid
   }
 
   if (body.userData?.client_user_agent) {
@@ -106,6 +109,7 @@ export async function POST(req: NextRequest) {
       fbp: userDataToSave.fbp,
       fbc: userDataToSave.fbc,
       scid: (userDataToSave as any).scid,
+      click_id: (userDataToSave as any).click_id,
       external_id: userDataToSave.external_id,
       hasEmailHash: !!userDataToSave.email_hash,
       clientIp: userDataToSave.client_ip_address,

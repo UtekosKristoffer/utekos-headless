@@ -1,5 +1,3 @@
-// src/app/api/webhook/orders-paid/route.ts
-
 import { NextResponse } from 'next/server'
 import { verifyShopifyWebhook } from '@/lib/shopify/verifyWebhook'
 import { redisGet } from '@/lib/redis'
@@ -240,6 +238,7 @@ export async function POST(request: Request) {
         hashed_ip_address: hashSnapData(clientIp),
         user_agent: userAgent,
         uuid_c1: (redisData?.userData as any)?.scid,
+        click_id: (redisData?.userData as any)?.click_id,
         price: order.total_price,
         currency: safeString(order.currency) || 'NOK',
         transaction_id: safeString(order.id),
@@ -272,6 +271,7 @@ export async function POST(request: Request) {
   }
 
   const snapPromise = sendSnapEvent()
+
   const customData = new CustomData()
   const currency = safeString(order.currency) || 'NOK'
   customData.setCurrency(currency)
@@ -312,7 +312,6 @@ export async function POST(request: Request) {
 
     const response = await eventRequest.execute()
 
-    // Ensure Snap request is finished (or at least waited for) before function exit
     await snapPromise
 
     await logToAppLogs(
