@@ -1,3 +1,4 @@
+// Path: src/components/providers/Providers.tsx
 'use client'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -11,7 +12,7 @@ import type { DehydratedState } from '@tanstack/react-query'
 import { CookieConsentProvider } from '@/components/cookie-consent/CookieConsentProvider'
 import CookieConsent from '@/components/cookie-consent/CookieConsent'
 import { ConditionalTracking } from '../analytics/ConditionalTracking'
-import { SnapPixel } from '@/components/analytics/SnapPixel'
+import { SnapPixel } from '@/components/analytics/SnapPixel/SnapPixel'
 
 interface ProvidersProps {
   children: React.ReactNode
