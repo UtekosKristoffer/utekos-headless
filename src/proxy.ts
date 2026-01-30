@@ -30,14 +30,34 @@ export async function proxy(request: NextRequest) {
   const response = NextResponse.next()
 
   const scCid = url.searchParams.get('ScCid')
+
   if (scCid) {
     response.cookies.set('ute_sc_cid', scCid, {
       path: '/',
       secure: process.env.NODE_ENV === 'production',
-      httpOnly: false,
+      httpOnly: false, // VIGTIGT: Skal være false så SnapPixel.tsx kan læse den
       sameSite: 'lax',
-      maxAge: 2592000 // 30 dager
+      maxAge: 2592000 // 30 dage
     })
+
+    try {
+      await fetch(new URL('/api/log', request.url), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          level: 'INFO',
+          event: '👻 Snapchat Ad Click Detected',
+          context: {
+            scCid,
+            path: pathname,
+            source: 'proxy-middleware',
+            userAgent
+          }
+        })
+      })
+    } catch (err) {
+      console.error('Failed to send Snap log from proxy:', err)
+    }
   }
 
   return handleMarketingParams(request, response)
