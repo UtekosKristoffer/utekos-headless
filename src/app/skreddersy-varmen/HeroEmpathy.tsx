@@ -26,7 +26,6 @@ export function HeroAndEmpathy() {
           />
         </div>
 
-        {/* Mobile Image */}
         <div className='block md:hidden absolute inset-0 z-0'>
           <Image
             src={MobileOne}
@@ -78,27 +77,19 @@ export function HeroAndEmpathy() {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
         <div className='absolute bottom-8 animate-bounce text-[#F4F1EA]/50 z-20 hidden md:block'>
           <ChevronDown size={32} />
         </div>
       </section>
 
-      {/* =========================================
-          SECTION 2: EMPATHY ("The Story")
-          Style: Modern Lodge Luxury / Editorial
-      ========================================= */}
       <section className='relative w-full bg-[#F4F1EA] text-[#2C2420] py-24 md:py-40 overflow-hidden'>
         <div className='max-w-7xl mx-auto px-6 md:px-12'>
           <div className='flex flex-col lg:flex-row items-center gap-16 lg:gap-32'>
-            {/* TEXT BLOCK (Venstre) */}
             <div className='lg:w-1/2 relative'>
-              {/* Kicker / Category label */}
               <span className='inline-block text-[#E07A5F] font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-6 border-b border-[#E07A5F]/30 pb-2'>
                 Ditt sosiale rom
               </span>
 
-              {/* Headline: Mer emosjonell og beskrivende */}
               <h2 className='font-serif text-4xl md:text-6xl lg:text-7xl text-[#2C2420] mb-8 leading-[1.05] tracking-tight'>
                 Når øyeblikket er for godt til å avsluttes.
               </h2>
@@ -114,13 +105,12 @@ export function HeroAndEmpathy() {
                   magien.
                 </p>
 
-                {/* The Emotional Pivot */}
                 <div className='relative py-4'>
                   <p className='font-serif text-3xl md:text-4xl text-[#2C2420] italic font-medium leading-tight ml-8 md:ml-12'>
                     &ldquo;Det begynner å bli kaldt. <br />
                     Skal vi trekke inn?&rdquo;
                   </p>
-                  {/* Dekorativ "Quote line" */}
+
                   <div className='absolute left-0 top-6 bottom-6 w-1 bg-[#E07A5F]' />
                 </div>
 
@@ -135,7 +125,6 @@ export function HeroAndEmpathy() {
                 </p>
               </div>
 
-              {/* Call to Action - "Link" style for luksusfølelse */}
               <div className='mt-12'>
                 <button
                   onClick={scrollToModel}
@@ -147,10 +136,8 @@ export function HeroAndEmpathy() {
               </div>
             </div>
 
-            {/* IMAGE BLOCK (Høyre) */}
             <div className='lg:w-1/2 w-full'>
               <div className='relative w-full aspect-[4/5] md:aspect-square'>
-                {/* Image Container med "Card" effekt */}
                 <div className='relative h-full w-full rounded-sm overflow-hidden shadow-2xl shadow-[#2C2420]/20'>
                   <Image
                     src={Balpanne}
@@ -160,10 +147,7 @@ export function HeroAndEmpathy() {
                     sizes='(max-width: 768px) 100vw, 50vw'
                   />
 
-                  {/* Subtle Gradient Overlay i bunnen for tekst */}
                   <div className='absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent' />
-
-                  {/* "Editorial Caption" - Forteller en historie om tid */}
                   <div className='absolute bottom-8 left-8 right-8 text-[#F4F1EA]'>
                     <div className='flex items-center gap-3 mb-2 opacity-80'>
                       <div className='w-2 h-2 rounded-full bg-[#E07A5F] animate-pulse' />
@@ -179,14 +163,12 @@ export function HeroAndEmpathy() {
                   </div>
                 </div>
 
-                {/* Dekorativt element bak bildet (Lagvis design) */}
                 <div className='absolute -z-10 -bottom-6 -right-6 w-full h-full border-2 border-[#2C2420]/5 rounded-sm hidden md:block' />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Scroll Anchor */}
         <div id='section-solution' className='absolute bottom-0' />
       </section>
     </>
