@@ -8,8 +8,8 @@ export function MotionContent() {
         className='animate-fade-in-down mb-6 inline-flex items-center gap-2 rounded-full border border-sky-800/30 bg-sky-900/10 px-4 py-2'
         style={{ animationDelay: '0.2s' }}
       >
-        <Award className='h-4 w-4 text-sky-400' />
-        <span className='text-sm font-medium text-sky-400'>
+        <Award className='h-4 w-4 text-slate-600' />
+        <span className='bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text text-sm font-medium text-transparent'>
           Funksjonell varme - siden 2020
         </span>
       </div>
@@ -19,10 +19,9 @@ export function MotionContent() {
         style={{ animationDelay: '0.3s' }}
       >
         <span className='relative inline-block'>Utekos®</span>
-
-        <span className='mt-2 block bg-gradient-to-r from-sky-800 via-cyan-700 to-sky-800 bg-clip-text text-transparent'>
-          Skreddersy varmen
-        </span>
+        <span className='bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text text-transparent'>
+          Skreddersy varmen.
+        </span>{' '}
       </h1>
 
       <p
