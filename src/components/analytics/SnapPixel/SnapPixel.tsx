@@ -2,7 +2,7 @@
 
 import { usePathname, useSearchParams } from 'next/navigation'
 import Script from 'next/script'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 const SNAP_PIXEL_ID = process.env.NEXT_PUBLIC_SNAP_PIXEL_ID
 
@@ -18,19 +18,21 @@ function getCookie(name: string): string | null {
 export function SnapPixel() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const [initialized, setInitialized] = useState(false)
+  // Vi bruker en ref for å spore om det er første render (initial load)
+  const isFirstRender = useRef(true)
 
-  // Initialiserings-effekt
   useEffect(() => {
     if (!SNAP_PIXEL_ID) return
 
-    // Vi venter til window.snaptr er tilgjengelig (lastet av Script-taggen)
-    // Men siden Script-taggen er 'afterInteractive', kjører koden i 'dangerouslySetInnerHTML' først.
-    // Vi bruker denne effekten for å håndtere navigasjon (SPA transitions)
+    // Sjekk om dette er første visning
+    if (isFirstRender.current) {
+      // Sett flagget til false, slik at neste navigasjon (SPA) trigges
+      isFirstRender.current = false
+      return // Avbryt, la inline-scriptet ta seg av den aller første Page View
+    }
 
+    // Denne koden kjører kun når pathname/searchParams endres (navigasjon)
     if (window.snaptr) {
-      // Ved navigasjon i Next.js (SPA), trigg et nytt PAGE_VIEW
-      // Dette sikrer at URL oppdateres i Snaps systemer
       window.snaptr('track', 'PAGE_VIEW')
     }
   }, [pathname, searchParams])
@@ -56,12 +58,11 @@ export function SnapPixel() {
         var initData = {};
         if (clickId) initData.click_id = clickId;
         if (externalId) initData.external_id = externalId;
-
+        
         snaptr('init', '${SNAP_PIXEL_ID}', initData);
         snaptr('track', 'PAGE_VIEW');
         `
       }}
-      onLoad={() => setInitialized(true)}
     />
   )
 }
