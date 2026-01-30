@@ -30,6 +30,7 @@ export async function POST(req: NextRequest) {
   const cookieStore = req.cookies
   const cookieFbp = cookieStore.get('_fbp')?.value
   const cookieFbc = cookieStore.get('_fbc')?.value
+  const cookieScid = cookieStore.get('_scid')?.value
   const cookieExtId = cookieStore.get('ute_ext_id')?.value
   const cookieUserHash = cookieStore.get('ute_user_hash')?.value
   const gaCookie = cookieStore.get('_ga')?.value
@@ -54,6 +55,10 @@ export async function POST(req: NextRequest) {
 
   if (cookieUserHash) {
     userDataToSave.email_hash = cookieUserHash
+  }
+
+  if (cookieScid) {
+    ;(userDataToSave as any).scid = cookieScid
   }
 
   if (body.userData?.client_user_agent) {
@@ -87,8 +92,8 @@ export async function POST(req: NextRequest) {
     cartId: body.cartId ?? null,
     checkoutUrl: body.checkoutUrl,
     userData: userDataToSave,
-    ga_client_id: gaClientId || undefined, // NY
-    ga_session_id: gaSessionId || undefined, // NY
+    ga_client_id: gaClientId || undefined,
+    ga_session_id: gaSessionId || undefined,
     ts: Date.now(),
     ...(body.eventId && { eventId: body.eventId })
   }
@@ -100,6 +105,7 @@ export async function POST(req: NextRequest) {
       cartId: body.cartId,
       fbp: userDataToSave.fbp,
       fbc: userDataToSave.fbc,
+      scid: (userDataToSave as any).scid,
       external_id: userDataToSave.external_id,
       hasEmailHash: !!userDataToSave.email_hash,
       clientIp: userDataToSave.client_ip_address,

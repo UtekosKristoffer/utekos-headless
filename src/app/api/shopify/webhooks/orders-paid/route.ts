@@ -1,3 +1,5 @@
+// src/app/api/webhook/orders-paid/route.ts
+
 import { NextResponse } from 'next/server'
 import { verifyShopifyWebhook } from '@/lib/shopify/verifyWebhook'
 import { redisGet } from '@/lib/redis'
@@ -6,6 +8,7 @@ import { safeString } from '@/lib/utils/safeString'
 import { normalizePhone } from '@/lib/utils/normalizePhone'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 import { handlePurchaseEvent } from '@/lib/tracking/google/handlePurchaseEvents'
+import { hashSnapData } from '@/lib/snapchat/hashSnapData'
 import {
   FacebookAdsApi,
   ServerEvent,
@@ -18,6 +21,9 @@ import {
 const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
 const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
 const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE
+
+const SNAP_ACCESS_TOKEN = process.env.SNAP_CAPI_TOKEN
+const SNAP_PIXEL_ID = process.env.NEXT_PUBLIC_SNAP_PIXEL_ID
 
 export async function POST(request: Request) {
   if (!ACCESS_TOKEN || !PIXEL_ID) {
@@ -212,6 +218,60 @@ export async function POST(request: Request) {
     }
   }
 
+  const sendSnapEvent = async () => {
+    if (!SNAP_ACCESS_TOKEN || !SNAP_PIXEL_ID) {
+      console.warn('[Snap CAPI] Missing tokens, skipping.')
+      return
+    }
+
+    try {
+      const snapPayload = {
+        pixel_id: SNAP_PIXEL_ID,
+        timestamp: Date.now(),
+        event_type: 'PURCHASE',
+        event_conversion_type: 'WEB',
+        event_source_url:
+          safeString(order.order_status_url)
+          || redisData?.checkoutUrl
+          || 'https://utekos.no',
+        event_id: `shopify_order_${order.id}`,
+        hashed_email: hashSnapData(email),
+        hashed_phone_number: hashSnapData(phone),
+        hashed_ip_address: hashSnapData(clientIp),
+        user_agent: userAgent,
+        uuid_c1: (redisData?.userData as any)?.scid,
+        price: order.total_price,
+        currency: safeString(order.currency) || 'NOK',
+        transaction_id: safeString(order.id),
+        item_ids: contentIds,
+        number_items: order.line_items
+          ?.reduce((acc, item) => acc + (item.quantity || 0), 0)
+          .toString(),
+        integration: 'api-custom'
+      }
+
+      const snapRes = await fetch(
+        `https://tr.snapchat.com/v3/${SNAP_PIXEL_ID}/events?access_token=${SNAP_ACCESS_TOKEN}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ data: [snapPayload] })
+        }
+      )
+
+      if (!snapRes.ok) {
+        const errText = await snapRes.text()
+        console.error(`[Snap CAPI] Failed: ${snapRes.status} ${errText}`)
+      } else {
+        const resJson = await snapRes.json()
+        console.log('[Snap CAPI] Success', resJson)
+      }
+    } catch (error) {
+      console.error('[Snap CAPI] Error executing request:', error)
+    }
+  }
+
+  const snapPromise = sendSnapEvent()
   const customData = new CustomData()
   const currency = safeString(order.currency) || 'NOK'
   customData.setCurrency(currency)
@@ -251,6 +311,10 @@ export async function POST(request: Request) {
     }
 
     const response = await eventRequest.execute()
+
+    // Ensure Snap request is finished (or at least waited for) before function exit
+    await snapPromise
+
     await logToAppLogs(
       'INFO',
       'CAPI Purchase Sent',
@@ -274,6 +338,8 @@ export async function POST(request: Request) {
       fbtrace_id: response.fbtrace_id
     })
   } catch (err: any) {
+    await snapPromise
+
     const errorResponse = err.response?.data || {}
     console.error(
       '[Meta CAPI] Request Failed:',
