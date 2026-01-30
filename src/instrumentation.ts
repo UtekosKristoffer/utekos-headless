@@ -1,6 +1,14 @@
-// Path: src/instrumentation.ts
 import { registerOTel } from '@vercel/otel'
+import type { Instrumentation } from 'next'
 
 export function register() {
-  registerOTel({ serviceName: 'utekos-headless' })
+  if (process.env.NEXT_RUNTIME === 'nodejs') {
+    registerOTel({ serviceName: 'utekos-headless' })
+  }
 }
+
+export const onRequestError: Instrumentation.onRequestError = async (
+  err,
+  request,
+  context
+) => {}
