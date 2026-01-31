@@ -30,7 +30,6 @@ export const metadata: Metadata = {
   },
   applicationName: 'Utekos',
   category: 'Yttertøy',
-  keywords: ['Yttertøy', 'Dun', 'Varmedress', 'Komfortplagg', 'Utekos'],
   manifest: '/manifest.json',
   authors: [{ name: 'Utekos', url: 'https://utekos.no' }],
   creator: 'Utekos',
