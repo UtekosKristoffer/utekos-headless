@@ -86,11 +86,22 @@ export async function POST(request: NextRequest) {
     const cookieFbc = request.cookies.get('_fbc')?.value
     const cookieExtId = request.cookies.get('ute_ext_id')?.value
     const cookieUserHash = request.cookies.get('ute_user_hash')?.value
+    const cookieScCid = request.cookies.get('ute_sc_cid')?.value
 
     const fbp = userData.fbp || cookieFbp
     const fbc = userData.fbc || cookieFbc
     const externalId = userData.external_id || cookieExtId
     const emailHash = userData.email_hash || cookieUserHash
+    let sourceEmoji = '🤷'
+    let sourceName = 'Direct/Unknown'
+
+    if (cookieScCid) {
+      sourceEmoji = '👻'
+      sourceName = 'Snapchat'
+    } else if (fbc) {
+      sourceEmoji = '💙'
+      sourceName = 'Meta'
+    }
 
     const effectiveUserData = {
       ...userData,
@@ -202,7 +213,7 @@ export async function POST(request: NextRequest) {
 
     await logToAppLogs(
       'INFO',
-      `CAPI Sent: ${eventName}`,
+      `${sourceEmoji} ${sourceName} | CAPI: ${eventName}`,
       {
         eventId,
         events_received: response.events_received,
@@ -210,6 +221,8 @@ export async function POST(request: NextRequest) {
       },
       {
         actionSource,
+        source: sourceName,
+        scCid: cookieScCid ? '***Found***' : 'Missing',
         hasFbp: !!fbp,
         hasFbc: !!fbc,
         hasExtId: !!externalId,
