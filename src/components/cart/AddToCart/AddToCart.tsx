@@ -2,14 +2,24 @@
 
 import { Form } from '@/components/ui/form'
 import { CartIdContext } from '@/lib/context/CartIdContext'
-import {
-  CartMutationContext,
-  type CartMutationMachine
-} from '@/lib/context/CartMutationContext'
 import { createAddToCartFormConfig } from '@/lib/helpers/cart/createAddToCartFormConfig'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { cartStore } from '@/lib/state/cartStore'
 import { applyDiscount } from '@/api/lib/cart/applyDiscount'
+import { useContext, useEffect, useTransition } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import { ModalSubmitButton } from '../AddToCartButton/ModalSubmitButton'
+import { QuantitySelector } from '../QuantitySelector'
+import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
+import { useQueryClient } from '@tanstack/react-query'
+import { useAnalytics } from '@/hooks/useAnalytics'
+import { logAttribution } from '@/lib/tracking/log/logAttribution'
+import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
+import {
+  CartMutationContext,
+  type CartMutationMachine
+} from '@/lib/context/CartMutationContext'
 import type {
   AddToCartFormValues,
   CartMutationEvent,
@@ -19,17 +29,8 @@ import type {
   MetaEventPayload,
   MetaUserData
 } from '@types'
-import { useContext, useEffect, useTransition } from 'react'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
+
 import type { ActorRef, StateFrom } from 'xstate'
-import { ModalSubmitButton } from '../AddToCartButton/ModalSubmitButton'
-import { QuantitySelector } from '../QuantitySelector'
-import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
-import { useQueryClient } from '@tanstack/react-query'
-import { useAnalytics } from '@/hooks/useAnalytics'
-import { logAttribution } from '@/lib/tracking/log/logAttribution'
-import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 
 export function AddToCart({
   product,

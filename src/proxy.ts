@@ -44,7 +44,6 @@ export async function proxy(request: NextRequest) {
     try {
       await fetch(new URL('/api/log', request.url), {
         method: 'POST',
-        // VIKTIG ENDRING: Vi videresender headere her
         headers: {
           'Content-Type': 'application/json',
           'Referer': referer,

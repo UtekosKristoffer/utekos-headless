@@ -14,10 +14,10 @@ export async function logToAppLogs(
   const logId = crypto.randomUUID()
 
   const logEntry = {
+    event,
     id: logId,
     timestamp,
     level,
-    event,
     data: data || {},
     context: context || {}
   }
