@@ -87,7 +87,6 @@ export async function POST(request: NextRequest) {
     const cookieExtId = request.cookies.get('ute_ext_id')?.value
     const cookieUserHash = request.cookies.get('ute_user_hash')?.value
     const cookieScCid = request.cookies.get('ute_sc_cid')?.value
-
     const fbp = userData.fbp || cookieFbp
     const fbc = userData.fbc || cookieFbc
     const externalId = userData.external_id || cookieExtId
