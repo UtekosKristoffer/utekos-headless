@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: '%s | Utekos®'
   },
   description:
-    'For kompromissløs komfort og overlegen allsidighet. Med tusenvis av fornøyde livsnytere og gjennomtestede løsninger kan du stole på at Utekos vil forlenge og oppgradere dine utendørsopplevelser. Juster, form og nyt.',
+    'Opplev kompromissløs komfort og overlegen allsidighet. Gjør som tusenvis av andre livsnytere og løft utendørslivet til et nytt nivå. Juster, form og nyt',
 
   alternates: {
     canonical: '/'
