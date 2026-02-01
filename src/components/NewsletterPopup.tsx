@@ -142,8 +142,8 @@ export function NewsletterPopup() {
                 Nyhetsbrev
               </DialogTitle>
               <DialogDescription className='text-neutral-400 text-base'>
-                Meld deg på nyhetsbrevet og få rabattkode på Comfyrobe™ sendt
-                direkte til innboksen din.
+                Meld deg inn i varmen og motta nyhetsbrev, inspirasjon og
+                eksklusive tilbud.
               </DialogDescription>
             </DialogHeader>
             <form action={handleSubmit} className='space-y-4'>
