@@ -1,3 +1,5 @@
+// Path: src/proxy.ts
+
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { hashEmail } from './lib/tracking/hash/hashEmail'
