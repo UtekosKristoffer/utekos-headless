@@ -74,9 +74,6 @@ export function ProductSpotlight() {
                   <ArrowRight className='ml-2 size-5' />
                 </Link>
               </Button>
-              <p className='text-xs text-neutral-500 mt-2 sm:mt-0 flex items-center justify-center'>
-                Meld deg på nyhetsbrevet og motta rabattkode på kr 800,-
-              </p>
             </AnimatedBlock>
           </div>
         </div>
