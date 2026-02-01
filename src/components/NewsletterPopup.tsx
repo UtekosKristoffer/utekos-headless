@@ -161,7 +161,7 @@ export function NewsletterPopup() {
                 disabled={isSubmitting}
                 className='w-full bg-white text-black hover:bg-neutral-200 font-bold h-11 transition-colors'
               >
-                {isSubmitting ? 'Registrerer...' : 'Få rabattkode'}
+                {isSubmitting ? 'Registrerer...' : 'Meld meg på'}
               </Button>
               <p className='text-xs text-neutral-600 text-center mt-4'>
                 Du kan melde deg av når som helst.
