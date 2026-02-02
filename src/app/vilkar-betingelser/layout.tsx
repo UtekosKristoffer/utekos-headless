@@ -1,4 +1,4 @@
-import { TermsPageJsonLd } from './TermsPageJsonLd'
+import { TermsPageJsonLd } from './components/TermsPageJsonLd'
 import type { ReactNode } from 'react'
 
 export default function TermsLayout({ children }: { children: ReactNode }) {

@@ -1,12 +1,12 @@
 // Path: src/components/analytics/PinterestPixel/PinterestPixel.tsx
-
 'use client'
 
 import { usePathname, useSearchParams } from 'next/navigation'
 import Script from 'next/script'
 import { useEffect, useState } from 'react'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
-import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID' // Må importeres
+import { setUrlCookie } from '@/components/analytics/PinterestPixel/setUrlCookie'
+import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
 
 const PINTEREST_TAG_ID = process.env.NEXT_PUBLIC_PINTEREST_TAG_ID
 
@@ -14,9 +14,13 @@ export function PinterestPixel() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [loaded, setLoaded] = useState(false)
-
   useEffect(() => {
     if (!PINTEREST_TAG_ID) return
+
+    const epik = searchParams.get('epik')
+    if (epik) {
+      setUrlCookie('_epik', epik, 365)
+    }
 
     if (!window.pintrk) {
       const pintrkInit = function (...args: any[]) {
@@ -39,12 +43,12 @@ export function PinterestPixel() {
     window.pintrk?.('load', PINTEREST_TAG_ID, userData)
 
     setLoaded(true)
-  }, [])
-
+  }, [searchParams])
   useEffect(() => {
     if (!loaded || !PINTEREST_TAG_ID) return
 
     window.pintrk?.('page')
+
     const isCategoryPage =
       pathname?.startsWith('/produkter') || pathname?.startsWith('/kolleksjon')
 
@@ -60,7 +64,7 @@ export function PinterestPixel() {
         actionSource: 'website'
       }
 
-      fetch('/api/tracking-events', {
+      fetch('/api/tracking/event', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

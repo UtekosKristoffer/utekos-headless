@@ -3,7 +3,7 @@ import { GridCross } from '@/components/legal/GridCross'
 import { PrivacyNav } from '@/components/legal/PrivacyNav'
 import { lastUpdated, termsSections } from '@/db/config/terms.config'
 import type { Metadata } from 'next'
-import { SectionWrapper } from './SectionWrapper'
+import { SectionWrapper } from './components/SectionWrapper'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),

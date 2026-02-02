@@ -2,7 +2,7 @@
 
 'use client'
 
-import { SupportPageButton } from '@/app/kontaktskjema/Buttons/SupportPageButton'
+import { SupportPageButton } from '@/app/kontaktskjema/utils/SupportPageButton'
 import {
   Form,
   FormControl,

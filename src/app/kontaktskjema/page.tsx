@@ -2,11 +2,11 @@
 
 import { Toaster } from '@/components/ui/sonner'
 import type { Metadata } from 'next'
-import { BottomGrid } from './sections/BottomGrid'
-import { CornerPluses } from './sections/CornerPluses'
-import { DesktopSection } from './sections/DesktopSection'
-import { MobileSection } from './sections/MobileSection'
-import { TopGrid } from './sections/TopGrid'
+import { BottomGrid } from './components/BottomGrid'
+import { CornerPluses } from './components/CornerPluses'
+import { DesktopSection } from './components/DesktopSection'
+import { MobileSection } from './components/MobileSection'
+import { TopGrid } from './components/TopGrid'
 import { Activity } from 'react'
 
 export const metadata: Metadata = {

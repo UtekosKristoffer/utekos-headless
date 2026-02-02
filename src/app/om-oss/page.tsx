@@ -1,13 +1,13 @@
 // Path: src/app/om-oss/page.tsx
 import { AboutCarousel } from '@/components/about/AboutCarousel'
 import type { Metadata } from 'next'
-import { GrunderSection } from './Sections/GrunderSection'
-import { FindUsSection } from './Sections/FindUsSection'
-import { PromiseSection } from './Sections/PromiseSection'
-import { CTASection } from './Sections/CTASection'
-import { PhilosophiesSection } from './Sections/PhilosophiesSection'
-import { AboutUsHeroSection } from './Sections/AboutUsHeroSection'
-import { IntersportSection } from './Sections/IntersportSection'
+import { GrunderSection } from './components/GrunderSection'
+import { FindUsSection } from './components/FindUsSection'
+import { PromiseSection } from './components/PromiseSection'
+import { CTASection } from './components/CTASection'
+import { PhilosophiesSection } from './components/PhilosophiesSection'
+import { AboutUsHeroSection } from './components/AboutUsHeroSection'
+import { IntersportSection } from './components/IntersportSection'
 export const metadata: Metadata = {
   title: 'Om Utekos® | Vår historie og løfte til deg',
   description:
