@@ -1,4 +1,4 @@
-// Path: src/app/api/tracking-events/route.ts
+// Path: src/app/api/tracking/event/route.ts
 
 import { NextRequest, NextResponse } from 'next/server'
 import {
@@ -57,11 +57,12 @@ export async function POST(request: NextRequest) {
     }
 
     eventName = body.eventName
+
     const {
       eventId,
       eventSourceUrl,
       actionSource = 'website',
-      userData,
+      userData = {}, // <--- Dette hindrer krasjen ("undefined")
       eventData
     } = body
 
@@ -71,7 +72,6 @@ export async function POST(request: NextRequest) {
     const cookieUserHash = request.cookies.get('ute_user_hash')?.value
     const cookieScCid = request.cookies.get('ute_sc_cid')?.value
     const cookieEpik = request.cookies.get('_epik')?.value
-
     const fbp = userData.fbp || cookieFbp
     const fbc = userData.fbc || cookieFbc
     const externalId = userData.external_id || cookieExtId
@@ -97,6 +97,7 @@ export async function POST(request: NextRequest) {
       external_id: externalId,
       email_hash: emailHash
     }
+
     const user = new UserData()
     const finalIp = effectiveUserData.client_ip_address || getClientIp(request)
     const finalAgent =
@@ -149,6 +150,7 @@ export async function POST(request: NextRequest) {
       if (!PINTEREST_TOKEN || !PINTEREST_AD_ACCOUNT_ID) return
 
       let pinEventName = eventName.toLowerCase()
+      // Mapping basert på docs
       if (eventName === 'AddToCart') pinEventName = 'add_to_cart'
       if (eventName === 'InitiateCheckout') pinEventName = 'checkout'
       if (eventName === 'ViewCategory') pinEventName = 'view_category'
@@ -260,7 +262,6 @@ export async function POST(request: NextRequest) {
 
     const response: MetaEventRequestResult = await eventRequest.execute()
 
-    // Vent på Pinterest før vi logger (for å få alt i én logg-linje hvis mulig, eller bare tidsmessig samlet)
     await pinPromise
 
     await logToAppLogs(
