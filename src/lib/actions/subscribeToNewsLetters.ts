@@ -6,6 +6,7 @@ import { headers, cookies } from 'next/headers'
 import { hashSnapData } from '@/lib/snapchat/hashSnapData'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 
+// PINTEREST CONFIG
 const PINTEREST_TOKEN = process.env.PINTEREST_ACCESS_TOKEN
 const PINTEREST_AD_ACCOUNT_ID = process.env.PINTEREST_AD_ACCOUNT_ID
 
@@ -126,6 +127,7 @@ export async function subscribeToNewsletter(
   }
 }
 
+// --- TRACKING LEAD (CAPI) ---
 async function trackLeadEvent(email: string) {
   if (!PINTEREST_TOKEN || !PINTEREST_AD_ACCOUNT_ID) return
 
@@ -161,7 +163,7 @@ async function trackLeadEvent(email: string) {
         click_id: clickId || undefined
       },
       custom_data: {
-        lead_type: 'Newsletter'
+        content_name: 'Newsletter'
       }
     }
 
