@@ -37,10 +37,10 @@ declare global {
       (method: 'load', tagId: string, userData?: Record<string, unknown>): void
       (method: 'page'): void
       (method: 'track', event: string, data?: Record<string, unknown>): void
-      // Fallback for andre metoder
       (method: string, ...args: any[]): void
       queue: any[]
       version: string
+      loaded?: boolean
     }
   }
 }

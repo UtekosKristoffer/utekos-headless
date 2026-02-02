@@ -1,21 +1,22 @@
-// Path: src/components/analytics/PinterestPixel/PinterestPixel.tsx
 'use client'
 
 import { usePathname, useSearchParams } from 'next/navigation'
 import Script from 'next/script'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
-import { setUrlCookie } from '@/components/analytics/PinterestPixel/setUrlCookie'
 import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
+import { setUrlCookie } from '@/components/analytics/PinterestPixel/setUrlCookie'
 
 const PINTEREST_TAG_ID = process.env.NEXT_PUBLIC_PINTEREST_TAG_ID
-
 export function PinterestPixel() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [loaded, setLoaded] = useState(false)
+  const isInitialized = useRef(false)
+  const lastPathname = useRef<string | null>(null)
+
   useEffect(() => {
-    if (!PINTEREST_TAG_ID) return
+    if (!PINTEREST_TAG_ID || isInitialized.current) return
 
     const epik = searchParams.get('epik')
     if (epik) {
@@ -39,13 +40,25 @@ export function PinterestPixel() {
     const userData: Record<string, string> = {}
     if (emailHash) userData.em = emailHash
     if (externalId) userData.external_id = externalId
-
-    window.pintrk?.('load', PINTEREST_TAG_ID, userData)
-
-    setLoaded(true)
+    if (window.pintrk && !window.pintrk.loaded) {
+      window.pintrk('load', PINTEREST_TAG_ID, userData)
+      window.pintrk.loaded = true
+      isInitialized.current = true
+      setLoaded(true)
+    } else {
+      setLoaded(true)
+      isInitialized.current = true
+    }
   }, [searchParams])
+
   useEffect(() => {
     if (!loaded || !PINTEREST_TAG_ID) return
+
+    const currentPath =
+      pathname + (searchParams.toString() ? '?' + searchParams.toString() : '')
+
+    if (lastPathname.current === currentPath) return
+    lastPathname.current = currentPath
 
     window.pintrk?.('page')
 
