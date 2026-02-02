@@ -1,4 +1,4 @@
-import { LandingPageJsonLd } from './LandingPageJsonLd'
+import { LandingPageJsonLd } from './utekos-orginal/components/LandingPageJsonLd'
 import type { ReactNode } from 'react'
 import type { Metadata } from 'next'
 

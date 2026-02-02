@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { VideoSkeleton } from '@/app/produkter/(oversikt)/components/VideoSkeleton'
-import { ProductVideoSection } from '@/app/produkter/components/ProductVideoSection'
+import { ProductVideoSection } from '@/app/produkter/(oversikt)/components/ProductVideoSection'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { getProduct } from '@/api/lib/products/getProduct'
 import { FindInStoreSection } from '@/components/frontpage/FindStoreSection'

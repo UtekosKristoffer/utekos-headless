@@ -1,5 +1,5 @@
 import { getProduct } from '@/api/lib/products/getProduct'
-import { PriceDisplay } from './PriceDisplay' // Importer UI
+import { PriceDisplay } from './components/PriceDisplay' // Importer UI
 
 export const PricingDynamic = async ({
   handle,

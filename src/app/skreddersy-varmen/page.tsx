@@ -1,14 +1,14 @@
 // Path: src/app/skreddersy-varmen/page.tsx
 
 import { Suspense } from 'react'
-import { TechDownSlider } from './TechDownSlider'
-import { SectionThreeInOne } from './SectionThreeInOne'
-import { SectionSocialProof } from './SectionSocialProof'
-import { HeroAndEmpathy } from './HeroEmpathy'
-import { PurchaseClient } from './PurchaseClient'
+import { TechDownSlider } from './utekos-orginal/components/TechDownSlider'
+import { SectionThreeInOne } from './utekos-orginal/components/SectionThreeInOne'
+import { SectionSocialProof } from './utekos-orginal/components/SectionSocialProof'
+import { HeroAndEmpathy } from './components/HeroEmpathy'
+import { PurchaseClient } from './utekos-orginal/components/PurchaseClient'
 import { getProduct } from '@/api/lib/products/getProduct'
-import { StickyMobileAction } from './StickyMobileAction'
-import { PreFooterNavigation } from './PreFooterNavigation'
+import { StickyMobileAction } from './utekos-orginal/components/StickyMobileAction'
+import { PreFooterNavigation } from './utekos-orginal/components/PreFooterNavigation'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
