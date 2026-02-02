@@ -131,7 +131,7 @@ export function LandingPageAddToCart({
           external_id: getCookie('ute_ext_id') || undefined,
           email_hash: getCookie('ute_user_hash') || undefined
         }
-        sendJSON('/api/meta-events', {
+        sendJSON('/api/tracking-events', {
           eventName: 'AddToCart',
           eventId: eventID,
           eventSourceUrl:

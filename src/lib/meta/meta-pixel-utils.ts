@@ -121,7 +121,7 @@ export async function trackMetaEvent(
     const userData = includeUserData ? getCachedAdvancedMatchingData() : null
 
     try {
-      const response = await fetch('/api/meta-events', {
+      const response = await fetch('/api/tracking-events', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

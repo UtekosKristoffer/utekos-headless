@@ -64,11 +64,14 @@ export const CheckoutButton = ({
       }
 
       const snapId = getCookie('ute_sc_cid')
-      const metaId = fbc // Vi har allerede hentet denne
+      const metaId = fbc
+      // NY: Pinterest Click ID
+      const pinId = getCookie('_epik')
 
       const sources = []
       if (snapId) sources.push('Snapchat 👻')
       if (metaId) sources.push('Meta 💙')
+      if (pinId) sources.push('Pinterest ❤️')
 
       if (sources.length > 0) {
         const sourceLabel = sources.join(' + ')
@@ -83,7 +86,8 @@ export const CheckoutButton = ({
               value,
               cartId,
               snapId: snapId || undefined,
-              metaId: metaId || undefined
+              metaId: metaId || undefined,
+              pinId: pinId || undefined
             }
           })
         }).catch(() => {})
@@ -110,6 +114,14 @@ export const CheckoutButton = ({
           currency: currency,
           number_items: num_items,
           item_ids: cleanItemIds
+        })
+      }
+      if (typeof window !== 'undefined' && window.pintrk) {
+        window.pintrk?.('track', 'InitiateCheckout', {
+          value: value,
+          currency: currency,
+          order_quantity: num_items,
+          product_ids: cleanItemIds
         })
       }
 
@@ -144,7 +156,7 @@ export const CheckoutButton = ({
         }
       }
 
-      fetch('/api/meta-events', {
+      fetch('/api/trackin-events', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(capiPayload),

@@ -1,4 +1,4 @@
-// Path: src/app/api/meta-events/route.ts
+// Path: src/app/api/tracking-events/route.ts
 
 import { NextRequest, NextResponse } from 'next/server'
 import {
@@ -71,6 +71,7 @@ export async function POST(request: NextRequest) {
     const cookieUserHash = request.cookies.get('ute_user_hash')?.value
     const cookieScCid = request.cookies.get('ute_sc_cid')?.value
     const cookieEpik = request.cookies.get('_epik')?.value
+
     const fbp = userData.fbp || cookieFbp
     const fbc = userData.fbc || cookieFbc
     const externalId = userData.external_id || cookieExtId
@@ -96,13 +97,10 @@ export async function POST(request: NextRequest) {
       external_id: externalId,
       email_hash: emailHash
     }
-
     const user = new UserData()
-    const requestIp = getClientIp(request)
-    const requestAgent = request.headers.get('user-agent')
-
-    const finalIp = effectiveUserData.client_ip_address || requestIp
-    const finalAgent = effectiveUserData.client_user_agent || requestAgent
+    const finalIp = effectiveUserData.client_ip_address || getClientIp(request)
+    const finalAgent =
+      effectiveUserData.client_user_agent || request.headers.get('user-agent')
 
     if (finalIp) user.setClientIpAddress(finalIp)
     if (finalAgent) user.setClientUserAgent(finalAgent)
@@ -121,6 +119,7 @@ export async function POST(request: NextRequest) {
       const normalizedPhone = normalize.phone(effectiveUserData.phone)
       if (normalizedPhone) user.setPhone(normalizedPhone)
     }
+
     if (effectiveUserData.first_name) {
       const fn = normalize.name(effectiveUserData.first_name)
       if (fn) user.setFirstName(fn)
@@ -152,6 +151,8 @@ export async function POST(request: NextRequest) {
       let pinEventName = eventName.toLowerCase()
       if (eventName === 'AddToCart') pinEventName = 'add_to_cart'
       if (eventName === 'InitiateCheckout') pinEventName = 'checkout'
+      if (eventName === 'ViewCategory') pinEventName = 'view_category'
+      if (eventName === 'ViewContent') pinEventName = 'page_visit'
 
       try {
         const pinPayload = {
@@ -211,8 +212,8 @@ export async function POST(request: NextRequest) {
     }
 
     const pinPromise = sendPinterestEvent()
-    const custom = new CustomData()
 
+    const custom = new CustomData()
     if (eventData) {
       if (eventData.value !== undefined) custom.setValue(eventData.value)
       if (eventData.currency) custom.setCurrency(eventData.currency)
@@ -220,7 +221,6 @@ export async function POST(request: NextRequest) {
       if (eventData.content_type) custom.setContentType(eventData.content_type)
       if (eventData.content_category)
         custom.setContentCategory(eventData.content_category)
-
       if (eventData.search_string)
         custom.setSearchString(eventData.search_string)
       if (eventData.num_items) custom.setNumItems(eventData.num_items)
@@ -260,7 +260,7 @@ export async function POST(request: NextRequest) {
 
     const response: MetaEventRequestResult = await eventRequest.execute()
 
-    // Vent på at Pinterest også er (nesten) ferdig før vi logger
+    // Vent på Pinterest før vi logger (for å få alt i én logg-linje hvis mulig, eller bare tidsmessig samlet)
     await pinPromise
 
     await logToAppLogs(
@@ -275,7 +275,7 @@ export async function POST(request: NextRequest) {
         actionSource,
         source: sourceName,
         scCid: cookieScCid ? '***Found***' : 'Missing',
-        epik: cookieEpik ? '***Found***' : 'Missing', // Logg status på Pinterest Click ID
+        epik: cookieEpik ? '***Found***' : 'Missing',
         hasFbp: !!fbp,
         hasFbc: !!fbc,
         hasExtId: !!externalId,
@@ -290,7 +290,6 @@ export async function POST(request: NextRequest) {
       fbtrace_id: response.fbtrace_id
     })
   } catch (error: unknown) {
-    // ... Error handling beholdes som før ...
     const { response: errorResponse, message } = parseMetaError(error)
     const errorData = errorResponse?.data || {}
 

@@ -5,7 +5,7 @@ import { useProductPage } from '@/hooks/useProductPage'
 import ProductPageView from '@/app/produkter/[handle]/ProductPageView/ProductPageView'
 import { ProductPageSkeleton } from '../ProductPageSkeleton/ProductPageSkeleton'
 import type { ShopifyProduct } from '@types'
-import { MetaProductView } from '@/components/analytics/MetaPixel/MetaProductView'
+import { ProductViewTracking } from '@/components/analytics/MetaPixel/ProductViewTracking'
 
 interface ProductPageControllerProps {
   handle: string
@@ -33,7 +33,7 @@ export function ProductPageController({
 
   return (
     <>
-      <MetaProductView
+      <ProductViewTracking
         product={productData}
         selectedVariant={selectedVariant}
       />

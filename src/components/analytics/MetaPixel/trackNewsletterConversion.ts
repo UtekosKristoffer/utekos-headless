@@ -48,7 +48,7 @@ export async function trackNewsletterConversion(
       content_name: source
     }
   }
-  fetch('/api/meta-events', {
+  fetch('/api/tracking-events', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),

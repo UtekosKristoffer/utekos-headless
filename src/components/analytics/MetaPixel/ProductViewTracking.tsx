@@ -7,30 +7,39 @@ import { generateEventID } from '@/components/analytics/MetaPixel/generateEventI
 import { useAnalytics } from '@/hooks/useAnalytics'
 import type { ShopifyProduct, ShopifyProductVariant } from '@types'
 
-interface MetaProductViewProps {
+// Endret navn på props interface
+interface ProductViewProps {
   product: ShopifyProduct
   selectedVariant: ShopifyProductVariant
 }
 
-export function MetaProductView({
+// Endret navn på komponent
+export function ProductViewTracking({
   product,
   selectedVariant
-}: MetaProductViewProps) {
+}: ProductViewProps) {
   const pathname = usePathname()
   const eventFired = useRef<string | null>(null)
+
+  // trackEvent håndterer Meta (Pixel + CAPI) via useAnalytics hooken
+  // Husk at vi mappet 'ViewContent' -> 'page_visit' for Pinterest i route.ts
   const { trackEvent } = useAnalytics()
 
   useEffect(() => {
+    // 1. Forbered data
     const contentId = cleanShopifyId(selectedVariant.id) || selectedVariant.id
     const uniqueKey = `${pathname}-${contentId}`
 
+    // Hindre dobbel fyring på samme variant/url
     if (eventFired.current === uniqueKey) return
     eventFired.current = uniqueKey
 
     const eventId = generateEventID()
     const price = parseFloat(selectedVariant.price.amount)
     const currency = selectedVariant.price.currencyCode
+    const category = product.productType || 'Apparel'
 
+    // 2. Meta (Pixel + CAPI)
     trackEvent(
       'ViewContent',
       {
@@ -38,18 +47,37 @@ export function MetaProductView({
         currency: currency,
         content_ids: [contentId],
         content_type: 'product',
-        content_name: product.title
+        content_name: product.title,
+        content_category: category
       },
       { eventID: eventId }
     )
 
+    // 3. Snapchat (Client Tag)
     if (typeof window !== 'undefined' && window.snaptr) {
       window.snaptr('track', 'VIEW_CONTENT', {
         item_ids: [contentId],
         price: price,
         currency: currency,
         description: product.title,
-        item_category: product.productType || 'Apparel' // Sender kategori hvis tilgjengelig, ellers fallback
+        item_category: category
+      })
+    }
+
+    // 4. Pinterest (Client Tag)
+    // Pinterest anbefaler å sende produktdata som 'line_items' i PageVisit-eventet
+    // for å bygge målgrupper.
+    if (typeof window !== 'undefined' && window.pintrk) {
+      window.pintrk?.('track', 'PageVisit', {
+        line_items: [
+          {
+            product_id: contentId,
+            product_name: product.title,
+            product_price: price,
+            product_category: category,
+            product_quantity: 1
+          }
+        ]
       })
     }
   }, [
