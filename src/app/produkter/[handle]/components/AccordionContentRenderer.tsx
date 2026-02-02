@@ -1,8 +1,8 @@
-// Path: src/app/produkter/[handle]/ProductPageView/components/ProductPageAccordion.tsx
+// Path: src/app/produkter/[handle]/components/AccordionContentRenderer.tsx
 'use client'
 
 import { AccordionContent } from '@/components/ui/accordion'
-import { renderMetafield } from './renderMetafield'
+import { renderMetafield } from '../utils/renderMetafield'
 
 export function AccordionContentRenderer({ content }: { content: string }) {
   return (
