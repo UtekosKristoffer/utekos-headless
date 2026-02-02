@@ -1,4 +1,4 @@
-// Path: types/fbq.d.ts
+// Path: types/window.d.ts
 
 declare global {
   interface Window {

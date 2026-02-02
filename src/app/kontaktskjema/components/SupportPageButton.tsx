@@ -3,7 +3,7 @@
 'use client'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils/className'
-import { useCtaMotion } from './useCtaMotion'
+import { useCtaMotion } from '@/app/kontaktskjema/utils/useCtaMotion'
 
 type Props = Omit<React.ComponentProps<typeof Button>, 'variant' | 'size'> & {
   isBusy?: boolean
