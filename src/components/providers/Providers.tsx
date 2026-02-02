@@ -13,7 +13,6 @@ import { CookieConsentProvider } from '@/components/cookie-consent/CookieConsent
 import CookieConsent from '@/components/cookie-consent/CookieConsent'
 import { ConditionalTracking } from '../analytics/ConditionalTracking'
 import { SnapPixel } from '@/components/analytics/SnapPixel/SnapPixel'
-// NY: Import av Pinterest Pixel
 import { PinterestPixel } from '@/components/analytics/PinterestPixel/PinterestPixel'
 
 interface ProvidersProps {

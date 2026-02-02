@@ -13,6 +13,7 @@ export function PinterestPixel() {
   const searchParams = useSearchParams()
   const [loaded, setLoaded] = useState(false)
   const isInitialized = useRef(false)
+  const firedEvents = useRef<Set<string>>(new Set())
   const lastPathname = useRef<string | null>(null)
 
   useEffect(() => {
@@ -40,6 +41,7 @@ export function PinterestPixel() {
     const userData: Record<string, string> = {}
     if (emailHash) userData.em = emailHash
     if (externalId) userData.external_id = externalId
+
     if (window.pintrk && !window.pintrk.loaded) {
       window.pintrk('load', PINTEREST_TAG_ID, userData)
       window.pintrk.loaded = true
@@ -57,15 +59,24 @@ export function PinterestPixel() {
     const currentPath =
       pathname + (searchParams.toString() ? '?' + searchParams.toString() : '')
 
-    if (lastPathname.current === currentPath) return
-    lastPathname.current = currentPath
+    if (lastPathname.current !== currentPath) {
+      firedEvents.current.clear()
+      lastPathname.current = currentPath
+    }
 
-    window.pintrk?.('page')
+    if (!firedEvents.current.has('page_visit')) {
+      window.pintrk?.('page')
+      firedEvents.current.add('page_visit')
+    }
 
-    const isCategoryPage =
-      pathname?.startsWith('/produkter') || pathname?.startsWith('/kolleksjon')
+    const isExactCategoryPage =
+      pathname === '/produkter'
+      || pathname === '/kolleksjon'
+      || pathname === '/products'
 
-    if (isCategoryPage) {
+    if (isExactCategoryPage && !firedEvents.current.has('view_category')) {
+      firedEvents.current.add('view_category')
+
       const eventID = generateEventID()
 
       window.pintrk?.('track', 'ViewCategory')
@@ -82,7 +93,7 @@ export function PinterestPixel() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
         keepalive: true
-      }).catch(err => console.error('Pinterest ViewCategory CAPI failed', err))
+      }).catch(err => console.error(err))
     }
   }, [pathname, searchParams, loaded])
 
