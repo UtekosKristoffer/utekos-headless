@@ -1,3 +1,5 @@
+// Path: src/app/skreddersy-varmen/components/PriceDisplay.tsx
+
 import { CreditCard } from 'lucide-react'
 
 interface PriceDisplayProps {
