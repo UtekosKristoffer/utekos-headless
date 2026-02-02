@@ -26,18 +26,22 @@ export async function POST(req: NextRequest) {
   const requestIp = getClientIp(req)
   const userAgent = req.headers.get('user-agent') || undefined
   const cookieStore = req.cookies
+
   const cookieFbp = cookieStore.get('_fbp')?.value
   const cookieFbc = cookieStore.get('_fbc')?.value
   const cookieExtId = cookieStore.get('ute_ext_id')?.value
   const cookieUserHash = cookieStore.get('ute_user_hash')?.value
   const cookieScid = cookieStore.get('_scid')?.value
   const cookieScCid = cookieStore.get('ute_sc_cid')?.value
+  const cookieEpik = cookieStore.get('_epik')?.value
+
   const gaCookie = cookieStore.get('_ga')?.value
   const gaClientId = parseGaClientId(gaCookie)
   const cookieMap = new Map<string, string>()
   cookieStore.getAll().forEach(c => cookieMap.set(c.name, c.value))
   const gaSessionCookieVal = findGaSessionCookie(cookieMap, GA_MEASUREMENT_ID)
   const gaSessionId = parseGaSessionId(gaSessionCookieVal)
+
   const userDataToSave: MetaUserData = {}
 
   if (body.userData?.fbp) userDataToSave.fbp = body.userData.fbp
@@ -62,6 +66,10 @@ export async function POST(req: NextRequest) {
 
   if (cookieScCid) {
     ;(userDataToSave as any).click_id = cookieScCid
+  }
+
+  if (cookieEpik) {
+    ;(userDataToSave as any).epik = cookieEpik
   }
 
   if (body.userData?.client_user_agent) {
@@ -110,6 +118,7 @@ export async function POST(req: NextRequest) {
       fbc: userDataToSave.fbc,
       scid: (userDataToSave as any).scid,
       click_id: (userDataToSave as any).click_id,
+      epik: (userDataToSave as any).epik,
       external_id: userDataToSave.external_id,
       hasEmailHash: !!userDataToSave.email_hash,
       clientIp: userDataToSave.client_ip_address,
