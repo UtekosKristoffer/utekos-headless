@@ -1,3 +1,5 @@
+// Path: src/app/produkter/(oversikt)/components/MicrofiberSection/iconMap.ts
+
 import {
   CloudDrizzle,
   Feather,

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Sparkles } from 'lucide-react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { microfiberAdvantages } from './microfiberAdvantages'
-import { downAdvantages } from './downAdvantages'
+import { downAdvantages } from '@/app/produkter/(oversikt)/utils/downAdvantages'
 import { IconRenderer } from './iconRenderer'
 
 export function MicrofiberFeatureSection() {

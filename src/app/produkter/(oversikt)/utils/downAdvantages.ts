@@ -1,4 +1,6 @@
-import type { IconName } from './iconMap'
+// Path: src/app/produkter/(oversikt)/utils/downAdvantages.ts
+
+import type { IconName } from '@/app/produkter/(oversikt)/components/MicrofiberSection/iconMap.ts'
 
 export const downAdvantages: {
   icon: IconName
