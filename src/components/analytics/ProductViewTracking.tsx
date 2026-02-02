@@ -1,3 +1,5 @@
+// Path: src/components/analytics/ProductViewTracking.tsx
+
 'use client'
 
 import { useEffect, useRef } from 'react'
@@ -7,30 +9,22 @@ import { generateEventID } from '@/components/analytics/MetaPixel/generateEventI
 import { useAnalytics } from '@/hooks/useAnalytics'
 import type { ShopifyProduct, ShopifyProductVariant } from '@types'
 
-// Endret navn på props interface
 interface ProductViewProps {
   product: ShopifyProduct
   selectedVariant: ShopifyProductVariant
 }
 
-// Endret navn på komponent
 export function ProductViewTracking({
   product,
   selectedVariant
 }: ProductViewProps) {
   const pathname = usePathname()
   const eventFired = useRef<string | null>(null)
-
-  // trackEvent håndterer Meta (Pixel + CAPI) via useAnalytics hooken
-  // Husk at vi mappet 'ViewContent' -> 'page_visit' for Pinterest i route.ts
   const { trackEvent } = useAnalytics()
 
   useEffect(() => {
-    // 1. Forbered data
     const contentId = cleanShopifyId(selectedVariant.id) || selectedVariant.id
     const uniqueKey = `${pathname}-${contentId}`
-
-    // Hindre dobbel fyring på samme variant/url
     if (eventFired.current === uniqueKey) return
     eventFired.current = uniqueKey
 
@@ -39,7 +33,6 @@ export function ProductViewTracking({
     const currency = selectedVariant.price.currencyCode
     const category = product.productType || 'Apparel'
 
-    // 2. Meta (Pixel + CAPI)
     trackEvent(
       'ViewContent',
       {
@@ -53,7 +46,6 @@ export function ProductViewTracking({
       { eventID: eventId }
     )
 
-    // 3. Snapchat (Client Tag)
     if (typeof window !== 'undefined' && window.snaptr) {
       window.snaptr('track', 'VIEW_CONTENT', {
         item_ids: [contentId],
@@ -64,9 +56,6 @@ export function ProductViewTracking({
       })
     }
 
-    // 4. Pinterest (Client Tag)
-    // Pinterest anbefaler å sende produktdata som 'line_items' i PageVisit-eventet
-    // for å bygge målgrupper.
     if (typeof window !== 'undefined' && window.pintrk) {
       window.pintrk?.('track', 'PageVisit', {
         line_items: [
