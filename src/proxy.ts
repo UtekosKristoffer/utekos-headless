@@ -90,6 +90,38 @@ export async function proxy(request: NextRequest) {
       console.error('Failed to send Meta log:', err)
     }
   }
+  const epik = url.searchParams.get('epik')
+  if (epik) {
+    response.cookies.set('_epik', epik, {
+      path: '/',
+      secure: process.env.NODE_ENV === 'production',
+      httpOnly: false, // Tillater at klient-pixel kan lese den om nødvendig
+      sameSite: 'lax',
+      maxAge: 2592000 // 30 dager
+    })
+
+    try {
+      await fetch(new URL('/api/log', request.url), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Referer': referer,
+          'User-Agent': userAgent
+        },
+        body: JSON.stringify({
+          level: 'INFO',
+          event: '❤️ Pinterest Ad Click Detected',
+          context: {
+            epik,
+            path: pathname,
+            source: 'proxy-middleware'
+          }
+        })
+      })
+    } catch (err) {
+      console.error('Failed to send Pinterest log:', err)
+    }
+  }
 
   return handleMarketingParams(request, response)
 }

@@ -20,9 +20,11 @@ import {
 const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
 const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
 const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE
-
 const SNAP_ACCESS_TOKEN = process.env.SNAP_CAPI_TOKEN
 const SNAP_PIXEL_ID = process.env.NEXT_PUBLIC_SNAP_PIXEL_ID
+const PINTEREST_TOKEN = process.env.PINTEREST_ACCESS_TOKEN
+const PINTEREST_AD_ACCOUNT_ID = process.env.PINTEREST_AD_ACCOUNT_ID
+
 export async function POST(request: Request) {
   if (!ACCESS_TOKEN || !PIXEL_ID) {
     console.error(
@@ -173,8 +175,10 @@ export async function POST(request: Request) {
     if (countryCode) userData.setCountry(countryCode.toLowerCase())
   }
 
-  const clientIp =
+  const rawIp =
     redisData?.userData?.client_ip_address || safeString(order.browser_ip)
+  const clientIp = getCleanIp(rawIp)
+
   if (clientIp) userData.setClientIpAddress(clientIp)
 
   const clientDetails = order.client_details as Record<string, unknown> | null
@@ -220,29 +224,21 @@ export async function POST(request: Request) {
   }
 
   const sendSnapEvent = async () => {
-    if (!SNAP_ACCESS_TOKEN || !SNAP_PIXEL_ID) {
-      console.warn('[Snap CAPI] Missing tokens, skipping.')
-      return
-    }
+    if (!SNAP_ACCESS_TOKEN || !SNAP_PIXEL_ID) return
 
     try {
       const eventTime = Math.floor(Date.now() / 1000)
-
-      const snapClientIp = getCleanIp(clientIp)
 
       const snapPayload = {
         event_name: 'PURCHASE',
         event_time: eventTime,
         event_source_url:
-          safeString(order.order_status_url)
-          || redisData?.checkoutUrl
-          || 'https://utekos.no',
+          safeString(order.order_status_url) || 'https://utekos.no',
         action_source: 'WEB',
-
         user_data: {
           em: [hashSnapData(email)].filter(Boolean),
           ph: [hashSnapData(phone)].filter(Boolean),
-          client_ip_address: snapClientIp,
+          client_ip_address: clientIp,
           client_user_agent: userAgent,
           sc_cookie1: (redisData?.userData as any)?.scid,
           sc_click_id: (redisData?.userData as any)?.click_id,
@@ -253,19 +249,16 @@ export async function POST(request: Request) {
           zp: [hashSnapData(zip)].filter(Boolean),
           country: [hashSnapData(countryCode)].filter(Boolean)
         },
-
         custom_data: {
           currency: safeString(order.currency) || 'NOK',
           value: Number(order.total_price || 0),
           order_id: safeString(order.id),
           content_category: 'Apparel',
-
           content_ids: contentIds,
           num_items: order.line_items?.reduce(
             (acc, item) => acc + (item.quantity || 0),
             0
           ),
-
           contents: order.line_items?.map(item => ({
             id: safeString(item.variant_id) || safeString(item.product_id),
             quantity: item.quantity,
@@ -275,12 +268,7 @@ export async function POST(request: Request) {
         event_id: `shopify_order_${order.id}`
       }
 
-      await logToAppLogs('INFO', 'Snap CAPI Payload Debug', {
-        payload: snapPayload,
-        orderId: order.id
-      })
-
-      const snapRes = await fetch(
+      await fetch(
         `https://tr.snapchat.com/v3/${SNAP_PIXEL_ID}/events?access_token=${SNAP_ACCESS_TOKEN}`,
         {
           method: 'POST',
@@ -288,28 +276,77 @@ export async function POST(request: Request) {
           body: JSON.stringify({ data: [snapPayload] })
         }
       )
-
-      if (!snapRes.ok) {
-        const errText = await snapRes.text()
-        await logToAppLogs('ERROR', 'Snap CAPI Response Error', {
-          status: snapRes.status,
-          error: errText,
-          orderId: order.id
-        })
-        console.error(`[Snap CAPI] Failed: ${snapRes.status} ${errText}`)
-      } else {
-        const resJson = await snapRes.json()
-        console.log('[Snap CAPI] Success', resJson)
-      }
-    } catch (error: any) {
-      console.error('[Snap CAPI] Error executing request:', error)
-      await logToAppLogs('ERROR', 'Snap CAPI Execution Error', {
-        message: error.message
-      })
+    } catch (error) {
+      console.error('[Snap CAPI] Error:', error)
     }
   }
 
+  const sendPinterestEvent = async () => {
+    if (!PINTEREST_TOKEN || !PINTEREST_AD_ACCOUNT_ID) return
+
+    try {
+      const pinPayload = {
+        event_name: 'checkout',
+        action_source: 'web',
+        event_time: Math.floor(Date.now() / 1000),
+        event_id: `shopify_order_${order.id}`,
+        event_source_url:
+          safeString(order.order_status_url) || 'https://utekos.no',
+        user_data: {
+          em: [hashSnapData(email)].filter(Boolean),
+          ph: [hashSnapData(phone)].filter(Boolean),
+          client_ip_address: clientIp,
+          client_user_agent: userAgent,
+          click_id: (redisData?.userData as any)?.epik || undefined,
+          external_id: [hashSnapData(externalId)].filter(Boolean),
+          fn: [hashSnapData(firstName)].filter(Boolean),
+          ln: [hashSnapData(lastName)].filter(Boolean),
+          ct: [hashSnapData(city)].filter(Boolean),
+          st: [hashSnapData(state)].filter(Boolean),
+          zp: [hashSnapData(zip)].filter(Boolean),
+          country: [hashSnapData(countryCode)].filter(Boolean)
+        },
+        custom_data: {
+          currency: safeString(order.currency) || 'NOK',
+          value: String(order.total_price || '0'), // Pinterest vil ofte ha value som string
+          order_id: safeString(order.id),
+          num_items: order.line_items?.reduce(
+            (acc, item) => acc + (item.quantity || 0),
+            0
+          ),
+          content_ids: contentIds,
+          contents: order.line_items?.map(item => ({
+            item_price: String(item.price || '0'),
+            quantity: item.quantity
+          }))
+        }
+      }
+
+      const res = await fetch(
+        `https://api.pinterest.com/v5/ad_accounts/${PINTEREST_AD_ACCOUNT_ID}/events`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${PINTEREST_TOKEN}`
+          },
+          body: JSON.stringify({ data: [pinPayload] })
+        }
+      )
+
+      if (!res.ok) {
+        const errText = await res.text()
+        console.error('[Pinterest CAPI] Error:', errText)
+        await logToAppLogs('ERROR', 'Pinterest CAPI Failed', { error: errText })
+      } else {
+        console.log('[Pinterest CAPI] Success')
+      }
+    } catch (error: any) {
+      console.error('[Pinterest CAPI] Exception:', error)
+    }
+  }
   const snapPromise = sendSnapEvent()
+  const pinPromise = sendPinterestEvent()
   const customData = new CustomData()
   const currency = safeString(order.currency) || 'NOK'
   customData.setCurrency(currency)
@@ -350,7 +387,7 @@ export async function POST(request: Request) {
 
     const response = await eventRequest.execute()
 
-    await snapPromise
+    await Promise.all([snapPromise, pinPromise])
 
     await logToAppLogs(
       'INFO',
@@ -362,8 +399,6 @@ export async function POST(request: Request) {
       },
       {
         fbp: userData.fbp,
-        fbc: userData.fbc,
-        externalId: userData.external_id,
         clientIp: userData.client_ip_address,
         eventTime: serverEvent.event_time
       }
@@ -375,7 +410,7 @@ export async function POST(request: Request) {
       fbtrace_id: response.fbtrace_id
     })
   } catch (err: any) {
-    await snapPromise
+    await Promise.all([snapPromise, pinPromise])
 
     const errorResponse = err.response?.data || {}
     console.error(

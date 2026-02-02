@@ -13,6 +13,8 @@ import { CookieConsentProvider } from '@/components/cookie-consent/CookieConsent
 import CookieConsent from '@/components/cookie-consent/CookieConsent'
 import { ConditionalTracking } from '../analytics/ConditionalTracking'
 import { SnapPixel } from '@/components/analytics/SnapPixel/SnapPixel'
+// NY: Import av Pinterest Pixel
+import { PinterestPixel } from '@/components/analytics/PinterestPixel/PinterestPixel'
 
 interface ProvidersProps {
   children: React.ReactNode
@@ -46,6 +48,7 @@ export default function Providers({
       </QueryClientProvider>
       <CookieConsent />
       <SnapPixel />
+      <PinterestPixel />
 
       <ConditionalTracking
         {...(process.env.NEXT_PUBLIC_META_PIXEL_ID && {

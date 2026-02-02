@@ -2,7 +2,6 @@
 
 declare global {
   interface Window {
-    // Facebook Pixel (Meta)
     fbq: {
       (
         method: 'init',
@@ -27,16 +26,22 @@ declare global {
       queue?: unknown[]
     }
     _fbq?: Window['fbq']
-
-    // Google Tag Manager / Analytics Data Layer
     dataLayer: Record<string, any>[]
-
-    // Snapchat Pixel
     snaptr?: (
       method: string,
       eventType: string,
       data?: Record<string, string | number | string[]>
     ) => void
+
+    pintrk?: {
+      (method: 'load', tagId: string, userData?: Record<string, unknown>): void
+      (method: 'page'): void
+      (method: 'track', event: string, data?: Record<string, unknown>): void
+      // Fallback for andre metoder
+      (method: string, ...args: any[]): void
+      queue: any[]
+      version: string
+    }
   }
 }
 

@@ -18,10 +18,14 @@ import type {
   MetaEventRequestResult,
   MetaErrorResponseData
 } from '@types'
+import { hashSnapData } from '@/lib/snapchat/hashSnapData'
+import { getClientIp } from '@/lib/tracking/user-data/getClientIp'
 
 const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
 const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
 const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE
+const PINTEREST_TOKEN = process.env.PINTEREST_ACCESS_TOKEN
+const PINTEREST_AD_ACCOUNT_ID = process.env.PINTEREST_AD_ACCOUNT_ID
 
 if (!ACCESS_TOKEN || !PIXEL_ID) {
   console.error(
@@ -29,27 +33,6 @@ if (!ACCESS_TOKEN || !PIXEL_ID) {
   )
 } else {
   FacebookAdsApi.init(ACCESS_TOKEN)
-}
-
-function getClientIp(req: NextRequest): string | null {
-  const forwardedFor = req.headers.get('x-forwarded-for')
-  if (forwardedFor) {
-    const candidates = forwardedFor
-      .split(',')
-      .map(ip => ip.trim())
-      .filter(Boolean)
-    const ipv6 = candidates.find(ip => ip.includes(':'))
-    if (ipv6) return ipv6
-    if (candidates.length > 0) return candidates[0] ?? null
-  }
-
-  const realIp = req.headers.get('x-real-ip')
-  if (realIp) return realIp.trim()
-
-  const reqIp = (req as NextRequest & { ip?: string }).ip
-  if (reqIp) return reqIp
-
-  return null
 }
 
 export async function POST(request: NextRequest) {
@@ -87,6 +70,7 @@ export async function POST(request: NextRequest) {
     const cookieExtId = request.cookies.get('ute_ext_id')?.value
     const cookieUserHash = request.cookies.get('ute_user_hash')?.value
     const cookieScCid = request.cookies.get('ute_sc_cid')?.value
+    const cookieEpik = request.cookies.get('_epik')?.value
     const fbp = userData.fbp || cookieFbp
     const fbc = userData.fbc || cookieFbc
     const externalId = userData.external_id || cookieExtId
@@ -94,7 +78,10 @@ export async function POST(request: NextRequest) {
     let sourceEmoji = '🤷'
     let sourceName = 'Direct/Unknown'
 
-    if (cookieScCid) {
+    if (cookieEpik) {
+      sourceEmoji = '❤️'
+      sourceName = 'Pinterest'
+    } else if (cookieScCid) {
       sourceEmoji = '👻'
       sourceName = 'Snapchat'
     } else if (fbc) {
@@ -130,12 +117,10 @@ export async function POST(request: NextRequest) {
     } else if (emailHash) {
       user.setEmails([emailHash])
     }
-
     if (effectiveUserData.phone) {
       const normalizedPhone = normalize.phone(effectiveUserData.phone)
       if (normalizedPhone) user.setPhone(normalizedPhone)
     }
-
     if (effectiveUserData.first_name) {
       const fn = normalize.name(effectiveUserData.first_name)
       if (fn) user.setFirstName(fn)
@@ -161,6 +146,71 @@ export async function POST(request: NextRequest) {
       if (country) user.setCountry(country)
     }
 
+    const sendPinterestEvent = async () => {
+      if (!PINTEREST_TOKEN || !PINTEREST_AD_ACCOUNT_ID) return
+
+      let pinEventName = eventName.toLowerCase()
+      if (eventName === 'AddToCart') pinEventName = 'add_to_cart'
+      if (eventName === 'InitiateCheckout') pinEventName = 'checkout'
+
+      try {
+        const pinPayload = {
+          event_name: pinEventName,
+          action_source: 'web',
+          event_time: Math.floor(Date.now() / 1000),
+          event_id: eventId,
+          event_source_url:
+            eventSourceUrl
+            || request.headers.get('referer')
+            || 'https://utekos.no',
+          user_data: {
+            em:
+              effectiveUserData.email ?
+                [hashSnapData(effectiveUserData.email)].filter(Boolean)
+              : emailHash ? [emailHash]
+              : undefined,
+            client_ip_address: finalIp,
+            client_user_agent: finalAgent,
+            click_id: cookieEpik || undefined,
+            external_id:
+              externalId ?
+                [hashSnapData(externalId)].filter(Boolean)
+              : undefined
+          },
+          custom_data: {
+            currency: eventData?.currency || 'NOK',
+            value: eventData?.value ? String(eventData.value) : undefined,
+            content_ids: eventData?.content_ids,
+            num_items: eventData?.num_items,
+            contents: eventData?.contents?.map((c: any) => ({
+              id: c.id,
+              quantity: c.quantity,
+              item_price: String(c.item_price || '0')
+            }))
+          }
+        }
+
+        const res = await fetch(
+          `https://api.pinterest.com/v5/ad_accounts/${PINTEREST_AD_ACCOUNT_ID}/events`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${PINTEREST_TOKEN}`
+            },
+            body: JSON.stringify({ data: [pinPayload] })
+          }
+        )
+
+        if (!res.ok) {
+          console.error('[Pinterest CAPI] Failed:', await res.text())
+        }
+      } catch (e) {
+        console.error('[Pinterest CAPI] Exception:', e)
+      }
+    }
+
+    const pinPromise = sendPinterestEvent()
     const custom = new CustomData()
 
     if (eventData) {
@@ -210,6 +260,9 @@ export async function POST(request: NextRequest) {
 
     const response: MetaEventRequestResult = await eventRequest.execute()
 
+    // Vent på at Pinterest også er (nesten) ferdig før vi logger
+    await pinPromise
+
     await logToAppLogs(
       'INFO',
       `${sourceEmoji} ${sourceName} | CAPI: ${eventName}`,
@@ -222,6 +275,7 @@ export async function POST(request: NextRequest) {
         actionSource,
         source: sourceName,
         scCid: cookieScCid ? '***Found***' : 'Missing',
+        epik: cookieEpik ? '***Found***' : 'Missing', // Logg status på Pinterest Click ID
         hasFbp: !!fbp,
         hasFbc: !!fbc,
         hasExtId: !!externalId,
@@ -236,6 +290,7 @@ export async function POST(request: NextRequest) {
       fbtrace_id: response.fbtrace_id
     })
   } catch (error: unknown) {
+    // ... Error handling beholdes som før ...
     const { response: errorResponse, message } = parseMetaError(error)
     const errorData = errorResponse?.data || {}
 

@@ -219,6 +219,38 @@ export function AddToCart({
           )
         }
 
+        if (typeof window !== 'undefined' && window.pintrk) {
+          const pinItems = [
+            {
+              product_name: product.title,
+              product_id: mainVariantId,
+              product_category: product.productType || 'Apparel',
+              product_price: basePrice,
+              product_quantity: values.quantity
+            }
+          ]
+
+          if (additionalLine) {
+            const buffId =
+              cleanShopifyId(additionalLine.variantId)
+              || additionalLine.variantId
+            pinItems.push({
+              product_name: 'Utekos Buff™',
+              product_id: buffId,
+              product_category: 'Apparel',
+              product_price: 0,
+              product_quantity: additionalLine.quantity
+            })
+          }
+
+          window.pintrk?.('track', 'AddToCart', {
+            value: value,
+            order_quantity: totalQty,
+            currency: currency,
+            line_items: pinItems
+          })
+        }
+
         const fbp = getCookie('_fbp')
         const fbc = getCookie('_fbc')
         const extId = getCookie('ute_ext_id')
