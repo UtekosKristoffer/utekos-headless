@@ -1,5 +1,4 @@
 // Path: types/index.ts
-export type { ProductPageViewProps } from '@/app/produkter/[handle]/ProductPageView/types'
 export type * from './api.types'
 export type * from './cart.types'
 export type * from './chat.types'
@@ -22,6 +21,8 @@ export type * from './order-paid-related-types'
 export type * from './monitoring.types'
 export type * from './backfill-shopify.types'
 export type * from './user-data.types'
+export type * from './productpage.types.ts'
+export type * from './skreddersy-varmen.types'
 export type RootLayoutProps = Readonly<{
   children: React.ReactNode
 }>

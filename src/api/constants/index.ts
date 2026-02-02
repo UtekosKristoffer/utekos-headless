@@ -24,3 +24,4 @@ export const productUrl = `/produkter/${productHandle}`
 export const originalPrice = 1990
 export const discountAmount = 200
 export const currentPrice = originalPrice - discountAmount
+export const GID_PREFIX = 'gid://shopify/ProductVariant/'

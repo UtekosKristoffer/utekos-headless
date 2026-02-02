@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { VideoSkeleton } from '@/app/produkter/components/VideoSkeleton'
+import { VideoSkeleton } from '@/app/produkter/(oversikt)/components/VideoSkeleton'
 import { ProductVideoSection } from '@/app/produkter/components/ProductVideoSection'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { getProduct } from '@/api/lib/products/getProduct'
@@ -10,13 +10,13 @@ import {
   productOptions
 } from '@/api/lib/products/productOptions'
 import { notFound } from 'next/navigation'
-import { ProductPageController } from '@/app/produkter/[handle]/ProductPageController/ProductPageController'
+import { ProductPageController } from '@/app/produkter/[handle]/components/ProductPageController'
 import type { Metadata, ResolvingMetadata } from 'next'
 import { getCachedRelatedProducts } from '@/api/lib/products/getCachedRelatedProducts'
 import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
 import { flattenVariants } from '@/lib/utils/flattenVariants'
 import { computeVariantImages } from '@/lib/utils/computeVariantImages'
-import { ProductPageSkeleton } from './ProductPageSkeleton/ProductPageSkeleton' // Antar denne importen
+import { ProductPageSkeleton } from './components/ProductPageSkeleton' // Antar denne importen
 import { cacheLife, cacheTag } from 'next/cache' // Viktig import
 
 type RouteParamsPromise = Promise<{ handle: string }>

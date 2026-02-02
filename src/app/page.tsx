@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { NewProductInStoreNotice } from '@/components/frontpage/NewProductInStoreNotice'
-import { ProductVideoSection } from '@/app/produkter/components/ProductVideoSection'
+import { ProductVideoSection } from '@/app/produkter/(oversikt)/components/ProductVideoSection'
 import { HeroSection } from '@/components/frontpage/components/HeroSection/HeroSection'
 import { MomentsSection } from '@/components/frontpage/MomentsSection'
 import { NewStandardSection } from '@/components/frontpage/NewStandardSection'

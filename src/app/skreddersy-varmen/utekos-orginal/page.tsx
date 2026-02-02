@@ -1,12 +1,12 @@
 // Path: src/app/skreddersy-varmen/utekos-orginal/page.tsx
 import type { Metadata } from 'next'
-import { HeroSection } from './HeroSection'
-import { EmpathySection } from './EmpatySection'
-import { ProductShowcase } from './ProductShowcase'
-import { ThreeInOneDemo } from './ThreeInOneDemo'
-import { SizeGuideTable } from './SizeGuideTable'
-import { PurchaseSection } from './PurchaseSection'
-import { ProductDetailsAccordion } from './ProductDetailsAccordion'
+import { HeroSection } from './components/HeroSection'
+import { EmpathySection } from './components/EmpatySection'
+import { ProductShowcase } from './components/ProductShowcase'
+import { ThreeInOneDemo } from './components/ThreeInOneDemo'
+import { SizeGuideTable } from './components/SizeGuideTable'
+import { PurchaseSection } from './components/PurchaseSection'
+import { ProductDetailsAccordion } from './components/ProductDetailsAccordion'
 export const metadata: Metadata = {
   title: 'Skreddersy varmen | Utekos®',
   description:
