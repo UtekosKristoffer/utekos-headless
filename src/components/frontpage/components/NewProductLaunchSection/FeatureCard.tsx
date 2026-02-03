@@ -1,19 +1,18 @@
 'use client'
 
 import { cn } from '@/lib/utils/className'
-import { useEffect, useRef, useState } from 'react'
-import { CloudRain, Feather, Gift, ShieldCheck } from 'lucide-react' // Importer Gift
+import { useRef, useState } from 'react'
+import { CloudRain, Feather, Gift, ShieldCheck } from 'lucide-react'
 
-// Mapper streng-identifikator til den faktiske komponenten
 const iconMap = {
   'cloud-rain': CloudRain,
   'feather': Feather,
   'shield-check': ShieldCheck,
-  'gift': Gift // Legg til det nye ikonet her
+  'gift': Gift
 }
 
 export interface Feature {
-  icon: keyof typeof iconMap // Typen er nå en av nøklene i iconMap
+  icon: keyof typeof iconMap
   title: string
   description: string
   glowColor: string
@@ -25,67 +24,76 @@ interface FeatureCardProps {
 }
 
 export function FeatureCard({ feature, delay }: FeatureCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const [isInView, setIsInView] = useState(false)
+  const divRef = useRef<HTMLDivElement>(null)
+  const [position, setPosition] = useState({ x: 0, y: 0 })
+  const [opacity, setOpacity] = useState(0)
 
   const IconComponent = iconMap[feature.icon] || CloudRain
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry && entry.isIntersecting) {
-          setIsInView(true)
-          observer.unobserve(entry.target)
-        }
-      },
-      { threshold: 0.35 }
-    )
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!divRef.current) return
 
-    const currentRef = cardRef.current
-    if (currentRef) {
-      observer.observe(currentRef)
-    }
+    const div = divRef.current
+    const rect = div.getBoundingClientRect()
 
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef)
-      }
-    }
-  }, [])
+    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top })
+  }
+
+  const handleFocus = () => {
+    setOpacity(1)
+  }
+
+  const handleBlur = () => {
+    setOpacity(0)
+  }
+
+  const handleMouseEnter = () => {
+    setOpacity(1)
+  }
+
+  const handleMouseLeave = () => {
+    setOpacity(0)
+  }
 
   return (
     <div
-      ref={cardRef}
+      ref={divRef}
+      onMouseMove={handleMouseMove}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       className={cn(
-        'will-animate-fade-in-left group relative overflow-hidden rounded-lg border border-neutral-800 bg-sidebar-foreground p-4 transition-all duration-300 hover:translate-x-1',
-        isInView && 'is-in-view'
+        'group relative overflow-hidden rounded-xl border border-white/10 bg-neutral-900/40 p-5 transition-all duration-300',
+        // Mobile-specific static glow to avoid lifelessness
+        'after:absolute after:inset-0 after:rounded-xl after:border after:border-white/5 after:opacity-100 md:after:opacity-0',
+        'hover:border-white/20'
       )}
-      style={{ '--transition-delay': `${delay}s` } as React.CSSProperties}
     >
+      {/* Spotlight Gradient (Follows mouse) */}
       <div
-        className='absolute -inset-x-2 -inset-y-8 opacity-20 blur-2xl transition-opacity duration-300 group-hover:opacity-30'
+        className='pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100'
         style={{
-          background: `radial-gradient(120% 120% at 50% 0%, transparent 30%, ${feature.glowColor} 100%)`
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${feature.glowColor}15, transparent 40%)`
         }}
       />
-      <div className='relative z-10 flex items-start gap-4'>
-        <div className='flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg border border-neutral-700 bg-background transition-all duration-300 group-hover:scale-110 group-hover:border-neutral-600'>
-          <IconComponent className='h-6 w-6 text-sky-800' />
+
+      {/* Content */}
+      <div className='relative z-10 flex items-start gap-5'>
+        <div className='flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 shadow-inner transition-transform duration-500 group-hover:scale-110 group-hover:border-white/20'>
+          <IconComponent
+            className='h-5 w-5 text-sky-100'
+            style={{ color: feature.glowColor }}
+          />
         </div>
         <div className='flex-1'>
-          <h4 className='mb-1 font-semibold text-foreground'>
+          <h4 className='mb-2 text-base font-semibold tracking-tight text-white group-hover:text-sky-50 transition-colors'>
             {feature.title}
           </h4>
-          <p className='text-sm leading-relaxed text-access/60'>
+          <p className='text-sm leading-relaxed text-neutral-400 group-hover:text-neutral-300 transition-colors'>
             {feature.description}
           </p>
         </div>
-      </div>
-      <div className='absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
-        <div
-          className='absolute inset-0 rounded-lg blur-sm opacity-20'
-          style={{ background: feature.glowColor }}
-        />
       </div>
     </div>
   )

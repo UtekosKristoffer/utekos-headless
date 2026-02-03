@@ -1,67 +1,173 @@
-// Path: src/components/frontpage/TechTeaserSection.tsx
+'use client'
+
+import { useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Layers, Shield, Thermometer, Zap } from 'lucide-react'
+import { ArrowRight, Layers, Shield, Thermometer, Cpu } from 'lucide-react'
 import type { Route } from 'next'
 import SherpaCoraImg from '@public/1080/comfy-design-1080.png'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 export default function TechTeaserSection() {
-  return (
-    <section className='mt-12 w-full py-12'>
-      <div className='container mx-auto max-w-7xl px-4'>
-        <div className='relative overflow-hidden rounded-sm border border-[#F4F1EA]/10 bg-[#2C2420] p-8 shadow-2xl md:p-12 lg:p-16'>
-          <div className='pointer-events-none absolute -left-[10%] top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-[#E07A5F]/10 blur-[100px]' />
+  const container = useRef<HTMLDivElement>(null)
+  const cardRef = useRef<HTMLDivElement>(null)
 
-          <div className='relative grid items-center gap-12 lg:grid-cols-2 lg:gap-16'>
-            <div className='space-y-8'>
-              <div className='inline-flex items-center gap-2 rounded-full border border-[#E07A5F]/30 bg-[#E07A5F]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#E07A5F]'>
-                <Zap className='h-3 w-3' />
-                Innovasjon og materialer
+  useGSAP(
+    () => {
+      // 1. Entrance Animations
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        }
+      })
+
+      tl.fromTo(
+        '.gsap-content',
+        { y: 30, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.8, stagger: 0.1, ease: 'power2.out' }
+      )
+
+      tl.fromTo(
+        '.gsap-card-visual',
+        { x: 30, autoAlpha: 0, rotationY: 10 },
+        { x: 0, autoAlpha: 1, rotationY: 0, duration: 1, ease: 'power3.out' },
+        '-=0.6'
+      )
+
+      // 2. Interactive 3D Tilt for Desktop
+      const card = cardRef.current
+      if (card) {
+        const handleMouseMove = (e: MouseEvent) => {
+          const { left, top, width, height } = card.getBoundingClientRect()
+          const x = (e.clientX - left) / width - 0.5
+          const y = (e.clientY - top) / height - 0.5
+
+          gsap.to('.gsap-tilt-layer', {
+            rotationY: x * 10, // Roterer basert på mus X
+            rotationX: -y * 10, // Roterer basert på mus Y
+            transformPerspective: 1000,
+            duration: 0.5,
+            ease: 'power2.out'
+          })
+
+          // Parallax effekt på innholdet inni kortet
+          gsap.to('.gsap-inner-parallax', {
+            x: x * 20,
+            y: y * 20,
+            duration: 0.5,
+            ease: 'power2.out'
+          })
+        }
+
+        const handleMouseLeave = () => {
+          gsap.to('.gsap-tilt-layer', {
+            rotationY: 0,
+            rotationX: 0,
+            duration: 0.8,
+            ease: 'elastic.out(1, 0.5)'
+          })
+          gsap.to('.gsap-inner-parallax', { x: 0, y: 0, duration: 0.8 })
+        }
+
+        card.addEventListener('mousemove', handleMouseMove)
+        card.addEventListener('mouseleave', handleMouseLeave)
+
+        return () => {
+          card.removeEventListener('mousemove', handleMouseMove)
+          card.removeEventListener('mouseleave', handleMouseLeave)
+        }
+      }
+    },
+    { scope: container }
+  )
+
+  return (
+    <section
+      ref={container}
+      className='mt-12 w-full py-12 md:py-24 overflow-hidden'
+    >
+      <div className='container mx-auto max-w-7xl px-4'>
+        {/* Main Wrapper - Dark Technical Look */}
+        <div className='relative overflow-hidden rounded-3xl border border-white/5 bg-neutral-950 p-8 shadow-2xl md:p-12 lg:p-20'>
+          {/* Ambient Lighting Background */}
+          <div className='pointer-events-none absolute -left-[10%] top-0 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-sky-500/5 blur-[120px]' />
+          <div className='pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] translate-y-1/3 rounded-full bg-orange-500/5 blur-[100px]' />
+
+          <div className='relative grid items-center gap-12 lg:grid-cols-2 lg:gap-20'>
+            {/* Left Column: Content */}
+            <div className='space-y-10'>
+              {/* Badge */}
+              <div className='gsap-content inline-flex items-center gap-2 rounded-full border border-sky-500/30 bg-sky-500/10 px-4 py-1.5'>
+                <div className='relative flex h-2 w-2'>
+                  <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75'></span>
+                  <span className='relative inline-flex h-2 w-2 rounded-full bg-sky-500'></span>
+                </div>
+                <span className='text-xs font-bold uppercase tracking-widest text-sky-400'>
+                  Innovasjon & Materialer
+                </span>
               </div>
 
-              <div className='space-y-4'>
-                <h2 className='text-3xl font-medium tracking-tight font-serif text-[#F4F1EA] sm:text-4xl md:text-5xl'>
+              <div className='space-y-6'>
+                <h2 className='gsap-content text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl'>
                   Vitenskapen bak <br />
-                  <span className='bg-gradient-to-r from-[#E07A5F] via-[#ffb09c] to-[#E07A5F] bg-clip-text text-transparent'>
+                  <span className='text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-white to-orange-300'>
                     din komfort.
                   </span>
                 </h2>
-                <p className='max-w-xl text-lg font-light leading-relaxed text-[#F4F1EA]/80'>
+                <p className='gsap-content max-w-lg text-lg leading-relaxed text-neutral-400'>
                   Det handler ikke bare om varme, men om hvordan varmen skapes.
-                  Fra vår hydrofobiske <strong>TechDown™</strong> til det
-                  robuste <strong>HydroGuard™</strong>-skallet. Oppdag
-                  teknologien og funksjonaliteten som gjør at Utekos
-                  revolusjonerer utendørsopplevelsen.
+                  Fra vår hydrofobiske{' '}
+                  <strong className='text-white'>TechDown™</strong> til det
+                  robuste <strong className='text-white'>HydroGuard™</strong>
+                  -skallet.
                 </p>
               </div>
 
-              <ul className='space-y-5'>
+              {/* Feature List */}
+              <ul className='space-y-6'>
                 {[
                   {
                     icon: Thermometer,
                     title: 'Termisk effektivitet',
-                    desc: 'Isolasjon som absorberer og varmer.'
+                    desc: 'Isolasjon som absorberer og resirkulerer kroppsvarme.',
+                    color: 'text-orange-400',
+                    bg: 'bg-orange-500/10'
                   },
                   {
                     icon: Shield,
                     title: 'HydroGuard™ beskyttelse',
-                    desc: 'Pustende membran med 8000mm vannsøyle.'
+                    desc: 'Pustende membran med 8000mm vannsøyle.',
+                    color: 'text-sky-400',
+                    bg: 'bg-sky-500/10'
                   },
                   {
                     icon: Layers,
                     title: '3-i-1 adaptivitet',
-                    desc: 'Endre funksjon fra kokong til parkas.'
+                    desc: 'Fra isolerende kokong til bevegelig parkas på sekunder.',
+                    color: 'text-emerald-400',
+                    bg: 'bg-emerald-500/10'
                   }
                 ].map((item, idx) => (
-                  <li key={idx} className='flex items-start gap-4'>
-                    <div className='mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#E07A5F]/10 text-[#E07A5F]'>
-                      <item.icon className='h-4 w-4' />
+                  <li
+                    key={idx}
+                    className='gsap-content group flex items-start gap-4'
+                  >
+                    <div
+                      className={`mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/5 ${item.bg} ${item.color} transition-transform duration-300 group-hover:scale-110`}
+                    >
+                      <item.icon className='h-5 w-5' />
                     </div>
                     <div>
-                      <span className='block text-base font-medium text-[#F4F1EA]'>
+                      <span className='block text-base font-semibold text-white group-hover:text-sky-100 transition-colors'>
                         {item.title}
                       </span>
-                      <span className='block text-sm font-light text-[#F4F1EA]/60'>
+                      <span className='block text-sm text-neutral-500 group-hover:text-neutral-400 transition-colors'>
                         {item.desc}
                       </span>
                     </div>
@@ -69,10 +175,10 @@ export default function TechTeaserSection() {
                 ))}
               </ul>
 
-              <div className='pt-6'>
+              <div className='gsap-content pt-4'>
                 <Link
                   href={'/handlehjelp/teknologi-materialer' as Route}
-                  className='group inline-flex items-center gap-2 rounded-sm bg-[#E07A5F] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-[#E07A5F]/20 transition-all hover:bg-[#d0694e]'
+                  className='group inline-flex h-12 items-center gap-2 rounded-full bg-white px-8 text-sm font-bold text-neutral-950 transition-all hover:bg-sky-50 hover:scale-105 active:scale-95'
                 >
                   Utforsk teknologien
                   <ArrowRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
@@ -80,60 +186,66 @@ export default function TechTeaserSection() {
               </div>
             </div>
 
-            <div className='relative mx-auto mt-0 h-[320px] w-full max-w-md lg:mt-0 lg:aspect-square lg:h-auto'>
-              <div className='relative h-full w-full'>
-                <div className='absolute right-[5%] top-[5%] h-3/4 w-3/4 rounded-sm border border-[#F4F1EA]/5 bg-[#1F2421]/60 opacity-60 backdrop-blur-sm transition-transform duration-500 hover:-translate-y-2 hover:translate-x-2 lg:right-0 lg:top-0' />
+            {/* Right Column: 3D Interactive Card */}
+            <div
+              ref={cardRef}
+              className='gsap-card-visual relative mx-auto w-full max-w-md perspective-1000 lg:h-auto'
+            >
+              <div className='gsap-tilt-layer relative w-full aspect-[4/5] preserve-3d'>
+                {/* Back Layer (Decoration) */}
+                <div className='absolute -right-4 -top-4 h-full w-full rounded-2xl border border-white/5 bg-neutral-900/50 backdrop-blur-sm -z-10 transform translate-z-[-20px]' />
 
-                <div className='absolute bottom-[15%] right-[15%] top-[15%] w-3/4 rounded-sm border border-[#F4F1EA]/10 bg-[#1F2421]/90 p-6 backdrop-blur-md transition-transform duration-500 hover:-translate-y-2 hover:translate-x-2 lg:bottom-8 lg:right-8 lg:top-8'>
-                  <div className='grid h-full grid-cols-2 gap-4 opacity-20'>
-                    {[...Array(4)].map((_, i) => (
-                      <div key={i} className='rounded-sm bg-[#F4F1EA]' />
-                    ))}
-                  </div>
-                </div>
-                <div className='absolute bottom-0 left-0 h-3/4 w-3/4 overflow-hidden rounded-sm border border-[#E07A5F]/30 bg-[#1F2421] shadow-2xl shadow-[#E07A5F]/10 transition-transform duration-500 hover:-translate-y-2'>
+                {/* Main Card */}
+                <div className='relative h-full w-full overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-2xl'>
+                  {/* Image */}
                   <Image
                     src={SherpaCoraImg}
                     alt='SherpaCore Technology Layer'
                     fill
-                    className='object-cover'
+                    className='object-cover opacity-80'
                     sizes='(max-width: 768px) 100vw, 33vw'
                   />
-                  <div className='absolute inset-0 bg-gradient-to-t from-[#1F2421] via-[#1F2421]/40 to-transparent opacity-90' />
 
-                  {/* Card Content */}
-                  <div className='relative flex h-full flex-col justify-between p-6 lg:p-8'>
-                    <div className='flex items-center justify-between border-b border-[#F4F1EA]/20 pb-4'>
-                      <span className='text-xs font-bold uppercase tracking-widest text-[#E07A5F] drop-shadow-sm'>
-                        Core Tech
-                      </span>
-                      <Shield className='h-5 w-5 text-[#E07A5F]' />
+                  {/* Overlay Gradient */}
+                  <div className='absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent' />
+
+                  {/* UI Elements Inside Card */}
+                  <div className='gsap-inner-parallax relative flex h-full flex-col justify-between p-8'>
+                    {/* Top Bar */}
+                    <div className='flex items-center justify-between'>
+                      <div className='flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md'>
+                        <Cpu className='h-3.5 w-3.5 text-sky-400' />
+                        <span className='text-[10px] font-bold uppercase tracking-widest text-white'>
+                          Core Tech
+                        </span>
+                      </div>
+                      <Shield className='h-5 w-5 text-neutral-500' />
                     </div>
 
-                    {/* Fake loading bars / tech UI */}
-                    <div className='space-y-2 opacity-80'>
-                      <div className='h-1.5 w-1/3 rounded-full bg-[#F4F1EA]/30' />
-                      <div className='h-1.5 w-1/2 rounded-full bg-[#F4F1EA]/30' />
-                    </div>
-
+                    {/* Bottom Info */}
                     <div>
-                      <h3 className='text-xl font-bold font-serif text-[#F4F1EA] lg:text-2xl'>
+                      <div className='mb-4 space-y-1.5 opacity-60'>
+                        <div className='h-1 w-12 rounded-full bg-sky-500' />
+                        <div className='h-1 w-8 rounded-full bg-neutral-600' />
+                      </div>
+
+                      <h3 className='text-3xl font-bold text-white tracking-tight'>
                         SherpaCore™
                       </h3>
-                      <p className='text-sm text-[#E07A5F] opacity-90'>
-                        Thermal Lining
+                      <p className='text-sm font-medium text-sky-400'>
+                        Thermal Lining System
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* 8K Badge */}
-                <div className='absolute bottom-0 right-0 flex h-20 w-20 items-center justify-center rounded-full border border-[#F4F1EA]/10 bg-[#1F2421] shadow-xl lg:-bottom-6 lg:-right-6 lg:h-24 lg:w-24'>
+                {/* Floating Badge (8K) */}
+                <div className='gsap-inner-parallax absolute -bottom-6 -right-6 flex h-24 w-24 items-center justify-center rounded-full border border-white/10 bg-neutral-900 shadow-2xl translate-z-[40px]'>
                   <div className='text-center'>
-                    <span className='block text-lg font-bold text-[#E07A5F] lg:text-xl'>
+                    <span className='block text-2xl font-bold text-sky-400'>
                       8K
                     </span>
-                    <span className='text-[9px] uppercase tracking-wider text-[#F4F1EA]/50 lg:text-[10px]'>
+                    <span className='text-[10px] font-bold uppercase tracking-wider text-neutral-500'>
                       Vannsøyle
                     </span>
                   </div>

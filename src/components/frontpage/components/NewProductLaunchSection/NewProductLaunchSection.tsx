@@ -1,18 +1,15 @@
-// Path: src/components/frontpage/components/NewProductLaunchSection/NewProductLaunchSection.tsx
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Gift } from 'lucide-react'
+import { ArrowRight, Gift, Sparkles } from 'lucide-react'
 import { AmbientBackgroundGlow } from './AmbientBackgroundGlow'
 import { FeatureCard } from './FeatureCard'
 import { ImageColumn } from './ImageColumn'
 import { newProductFeatures } from './newProductFeatures'
-import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { QuickViewModal } from '@/components/products/QuickViewModal'
 import { Activity } from 'react'
-import type { MetaUserData, MetaEventPayload } from '@types'
 import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
@@ -20,9 +17,13 @@ import {
   productName,
   productHandle,
   productUrl,
-  originalPrice,
   currentPrice
 } from '@/api/constants'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import type { MetaUserData, MetaEventPayload, MetaEventType } from '@types'
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 interface NewProductLaunchSectionProps {
   variantId: string
@@ -32,6 +33,7 @@ export function NewProductLaunchSection({
   variantId
 }: NewProductLaunchSectionProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const container = useRef<HTMLElement>(null)
 
   const getUserData = (): MetaUserData => {
     return {
@@ -44,13 +46,16 @@ export function NewProductLaunchSection({
     }
   }
 
-  const handleDiscoverClick = () => {
+  const trackEvent = (eventName: string, customEventName: string) => {
     const contentId = cleanShopifyId(variantId) || variantId
-    const eventID = generateEventID().replace('evt_', 'click_')
+    const eventID = generateEventID().replace(
+      'evt_',
+      `${eventName.toLowerCase().substring(0, 3)}_`
+    )
     const sourceUrl = window.location.href
 
     const eventData = {
-      content_name: `Discover ${productName}`,
+      content_name: `${eventName} ${productName}`,
       content_ids: [contentId],
       content_type: 'product' as const,
       value: currentPrice,
@@ -58,13 +63,13 @@ export function NewProductLaunchSection({
     }
 
     if (typeof window !== 'undefined' && (window as any).fbq) {
-      ;(window as any).fbq('trackCustom', 'HeroInteract', eventData, {
+      ;(window as any).fbq('trackCustom', customEventName, eventData, {
         eventID
       })
     }
 
     const capiPayload: MetaEventPayload = {
-      eventName: 'HeroInteract',
+      eventName: customEventName as MetaEventType,
       eventId: eventID,
       eventSourceUrl: sourceUrl,
       eventTime: Math.floor(Date.now() / 1000),
@@ -81,202 +86,180 @@ export function NewProductLaunchSection({
     }).catch(console.error)
   }
 
+  const handleDiscoverClick = () => trackEvent('Discover', 'HeroInteract')
   const handleQuickViewClick = () => {
     setIsModalOpen(true)
-
-    const contentId = cleanShopifyId(variantId) || variantId
-    const eventID = generateEventID().replace('evt_', 'qv_')
-    const sourceUrl = window.location.href
-
-    const eventData = {
-      content_name: `QuickView ${productName}`,
-      content_ids: [contentId],
-      content_type: 'product' as const,
-      value: currentPrice,
-      currency: 'NOK'
-    }
-
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      ;(window as any).fbq('trackCustom', 'OpenQuickView', eventData, {
-        eventID
-      })
-    }
-
-    const capiPayload: MetaEventPayload = {
-      eventName: 'OpenQuickView',
-      eventId: eventID,
-      eventSourceUrl: sourceUrl,
-      eventTime: Math.floor(Date.now() / 1000),
-      actionSource: 'website',
-      userData: getUserData(),
-      eventData: eventData
-    }
-
-    fetch('/api/tracking-events', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(capiPayload),
-      keepalive: true
-    }).catch(console.error)
+    trackEvent('QuickView', 'OpenQuickView')
   }
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container.current,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        }
+      })
+
+      // Image entrance
+      tl.fromTo(
+        '.gsap-image-col',
+        { x: -50, autoAlpha: 0, scale: 0.95 },
+        { x: 0, autoAlpha: 1, scale: 1, duration: 1.2, ease: 'power3.out' }
+      )
+
+      // Content staggered entrance
+      tl.fromTo(
+        '.gsap-fade-up',
+        { y: 30, autoAlpha: 0 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: 'power2.out'
+        },
+        '-=0.8'
+      )
+
+      // Feature cards sliding in
+      tl.fromTo(
+        '.gsap-feature',
+        { x: 30, autoAlpha: 0 },
+        {
+          x: 0,
+          autoAlpha: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'back.out(1.2)'
+        },
+        '-=0.6'
+      )
+
+      // Badge subtle float animation (Living UI)
+      gsap.to('.gsap-badge-float', {
+        y: -4,
+        duration: 3,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+        stagger: {
+          each: 0.5,
+          from: 'random'
+        }
+      })
+    },
+    { scope: container }
+  )
 
   return (
     <>
       <section
         id='featured-product'
-        className='relative mx-auto mt-16 max-w-[95%] overflow-hidden rounded-xl border border-neutral-800 py-16 md:max-w-7xl'
+        ref={container}
+        className='relative mx-auto mt-12 md:mt-24 max-w-[98%] md:max-w-7xl overflow-hidden rounded-3xl border border-white/5 bg-neutral-950/50 py-12 md:py-24 shadow-2xl'
       >
         <AmbientBackgroundGlow />
-        <div className='container mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 md:grid-cols-2'>
-          <ImageColumn />
 
-          <AnimatedBlock
-            className='will-animate-fade-in-right flex flex-col items-start'
-            delay='0.2s'
-            threshold={0.3}
-          >
-            <div className='mb-6'>
-              <div className='flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-3 md:hidden'>
-                <AnimatedBlock
-                  className='will-animate-fade-in-up inline-flex items-center gap-2.5 rounded-full border border-sky-800/30 bg-sky-900/20 px-4 py-2'
-                  delay='0.2s'
-                  threshold={1}
-                >
-                  <span className='relative flex h-2.5 w-2.5 shrink-0'>
-                    <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75'></span>
-                    <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-sky-500'></span>
-                  </span>
-                  <span className='whitespace-nowrap text-sm font-semibold text-sky-400'>
-                    Lanseringstilbud 🎉
-                  </span>
-                </AnimatedBlock>
-                <AnimatedBlock
-                  className='will-animate-fade-in-up inline-flex items-center gap-2.5 rounded-full border border-emerald-800/30 bg-emerald-900/20 px-4 py-2'
-                  delay='0.3s'
-                  threshold={1}
-                >
-                  <Gift className='h-4 w-4 shrink-0 text-emerald-400' />
-                  <span className='text-sm font-semibold text-emerald-400'>
-                    Gratis Buff™ (verdi 249,-)
-                  </span>
-                </AnimatedBlock>
-                <AnimatedBlock
-                  className='will-animate-fade-in-up inline-flex items-center gap-2 rounded-full border border-amber-800/30 bg-amber-900/20 px-4 py-2'
-                  delay='0.4s'
-                  threshold={1}
-                >
-                  <svg
-                    className='h-4 w-4 shrink-0 text-amber-400'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-                    />
-                  </svg>
-                  <span className='whitespace-nowrap text-sm font-bold text-amber-400'>
-                    Spar 449 kr totalt
-                  </span>
-                </AnimatedBlock>
-              </div>
+        <div className='container mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 lg:grid-cols-2 lg:gap-20'>
+          {/* Left Column: Image with Parallax */}
+          <div className='gsap-image-col opacity-0'>
+            <ImageColumn />
+          </div>
 
-              <div className='hidden md:inline-flex'>
-                <AnimatedBlock
-                  className='will-animate-fade-in-up inline-flex items-center gap-3 rounded-full border border-sky-800/30 bg-sky-900/20 px-5 py-2.5'
-                  delay='0.4s'
-                  threshold={1}
-                >
-                  <span className='relative flex h-2.5 w-2.5 shrink-0'>
-                    <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75'></span>
-                    <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-sky-500'></span>
-                  </span>
-                  <span className='whitespace-nowrap text-base font-semibold text-sky-400'>
-                    Tilbud
-                  </span>
-                  <span>🎉</span>{' '}
-                  <span className='whitespace-nowrap text-base font-semibold text-sky-400'>
-                    Få gratis Utekos Buff™ og spar 449 kr!
-                  </span>
-                </AnimatedBlock>
+          {/* Right Column: Content */}
+          <div className='flex flex-col items-start'>
+            {/* Badges - Scrollable on mobile for premium app feel */}
+            <div className='gsap-fade-up opacity-0 mb-8 w-full'>
+              <div className='flex items-center gap-3 overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0 md:pb-0 snap-x hide-scrollbar'>
+                {/* Badge 1: Nyhet */}
+                <div className='gsap-badge-float shrink-0 snap-start'>
+                  <div className='inline-flex items-center gap-2 rounded-full border border-sky-500/30 bg-sky-500/10 px-4 py-1.5 backdrop-blur-md'>
+                    <Sparkles className='h-3.5 w-3.5 text-sky-400' />
+                    <span className='text-xs font-bold uppercase tracking-wider text-sky-300'>
+                      Nyhet
+                    </span>
+                  </div>
+                </div>
+
+                {/* Badge 2: Gratis Buff */}
+                <div className='gsap-badge-float shrink-0 snap-start'>
+                  <div className='inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 backdrop-blur-md'>
+                    <Gift className='h-3.5 w-3.5 text-emerald-400' />
+                    <span className='text-xs font-bold uppercase tracking-wider text-emerald-300'>
+                      Gratis Buff (Verdi 249,-)
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <AnimatedBlock
-              className='will-animate-fade-in-up'
-              delay='0.4s'
-              threshold={1}
-            >
-              <h2 className='mb-4 text-4xl font-bold leading-tight text-accent/80  sm:text-5xl'>
-                Nyhet!
-              </h2>
-            </AnimatedBlock>
-            <AnimatedBlock
-              className='will-animate-fade-in-up'
-              delay='0.4s'
-              threshold={1}
-            >
-              <p className='mb-8 max-w-prose text-lg leading-relaxed text-access/80'>
-                Vi introduserer {productName} – vår varmeste og mest allsidige
-                modell. Perfekt for deg som stiller de høyeste kravene til
-                komfort og funksjonalitet.
-              </p>
-            </AnimatedBlock>
-            <div className='mb-8 w-full space-y-3 text-access/80'>
+            <h2 className='gsap-fade-up opacity-0 mb-6 text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl'>
+              Introduserer <br className='hidden md:block' />
+              <span className='text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-white to-sky-300'>
+                {productName}
+              </span>
+            </h2>
+
+            <p className='gsap-fade-up opacity-0 mb-10 max-w-lg text-lg leading-relaxed text-neutral-400 md:text-xl'>
+              Vår varmeste og mest allsidige modell noensinne.
+            </p>
+
+            {/* Feature Cards Grid */}
+            <div className='mb-10 w-full grid gap-3'>
               {newProductFeatures.map((feature, idx) => (
-                <FeatureCard
-                  key={feature.title}
-                  feature={feature}
-                  delay={0.6 + idx * 0.1}
-                />
+                <div key={feature.title} className='gsap-feature opacity-0'>
+                  <FeatureCard feature={feature} delay={idx * 0.1} />
+                </div>
               ))}
             </div>
 
-            <AnimatedBlock
-              className='will-animate-fade-in-up w-full'
-              delay='0.5s'
-              threshold={1}
-            >
-              <div className='flex w-full flex-col gap-6'>
-                <div className='flex flex-col gap-3'>
-                  <div className='flex flex-wrap items-baseline gap-3'>
-                    <p className='bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-5xl font-bold text-transparent'>
+            {/* Price & Actions */}
+            <div className='gsap-fade-up opacity-0 w-full rounded-2xl border border-white/5 bg-white/[0.02] p-6 backdrop-blur-sm'>
+              <div className='flex flex-col gap-6 md:flex-row md:items-center md:justify-between'>
+                <div className='flex flex-col'>
+                  <div className='flex items-baseline gap-2'>
+                    <span className='text-3xl font-bold text-white'>
                       {currentPrice},-
-                    </p>
-                    <span className='text-sm text-access/80'>inkl. mva</span>
-                    <span className='line-through rounded-full bg-emerald-500/10 px-3 py-1 text-sm font-bold text-emerald-400 ring-1 ring-emerald-500/20'>
-                      {originalPrice},-
                     </span>
+                    <span className='text-sm text-neutral-500'>inkl. mva</span>
                   </div>
-                  <p className='text-sm text-access/80'>
-                    Begrenset tilbud ved lansering
+                  <p className='text-sm font-medium text-emerald-400 flex items-center gap-1.5 mt-1'>
+                    <Gift className='h-3 w-3' />
+                    Inkluderer gratis Utekos Buff™
                   </p>
                 </div>
 
-                <div className='flex flex-wrap gap-3'>
-                  <Button asChild size='lg' className='group flex-1'>
+                <div className='flex flex-col gap-3 sm:flex-row'>
+                  <Button
+                    asChild
+                    size='lg'
+                    className='group relative overflow-hidden bg-sky-600 text-white hover:bg-sky-500 border-0 ring-0'
+                  >
                     <Link href={productUrl} onClick={handleDiscoverClick}>
-                      Oppdag {productName}
-                      <ArrowRight className='ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1' />
+                      <span className='relative z-10 flex items-center'>
+                        Se alle detaljer
+                        <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+                      </span>
                     </Link>
                   </Button>
+
                   <Button
                     size='lg'
-                    variant='secondary'
+                    variant='outline'
                     onClick={handleQuickViewClick}
-                    className='group flex-1 bg-button text-access hover:bg-button/80 hover:scale-105 active:scale-95'
+                    className='border-white/10 bg-transparent text-white hover:bg-white/5 hover:text-white'
                   >
-                    Legg i handlekurv
+                    Kjøp nå
                   </Button>
                 </div>
               </div>
-            </AnimatedBlock>
-          </AnimatedBlock>
+            </div>
+          </div>
         </div>
       </section>
+
       <Activity>
         <QuickViewModal
           productHandle={productHandle}

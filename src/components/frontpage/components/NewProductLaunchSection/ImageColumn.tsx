@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import Image from 'next/image'
 import {
   Carousel,
@@ -10,7 +10,11 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { cn } from '@/lib/utils/className'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const images = [
   {
@@ -26,68 +30,70 @@ const images = [
     alt: 'Nærbilde av det slitesterke og vannavvisende stoffet på jakken'
   }
 ]
+
 export function ImageColumn() {
-  const columnRef = useRef<HTMLDivElement>(null)
-  const [isInView, setIsInView] = useState(false)
+  const container = useRef<HTMLDivElement>(null)
+  const parallaxRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry && entry.isIntersecting) {
-          setIsInView(true)
-          observer.unobserve(entry.target)
+  useGSAP(
+    () => {
+      // Parallax effect on the image container
+      gsap.fromTo(
+        parallaxRef.current,
+        { y: -30 },
+        {
+          y: 30,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: container.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
         }
-      },
-      { threshold: 0.3 }
-    )
-
-    const currentRef = columnRef.current
-    if (currentRef) {
-      observer.observe(currentRef)
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef)
-      }
-    }
-  }, [])
+      )
+    },
+    { scope: container }
+  )
 
   return (
     <div
-      ref={columnRef}
-      className={cn(
-        'will-animate-fade-in-left relative w-full',
-        isInView && 'is-in-view'
-      )}
-      style={{ '--transition-delay': '0s' } as React.CSSProperties}
+      ref={container}
+      className='relative w-full max-w-[500px] mx-auto md:max-w-none'
     >
-      <div className='relative overflow-hidden rounded-2xl'>
-        <Carousel
-          opts={{
-            loop: true
-          }}
-        >
-          <CarouselContent>
-            {images.map((image, index) => (
-              <CarouselItem key={index}>
-                <AspectRatio ratio={1 / 1}>
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    quality={95}
-                    className='object-cover transition-transform duration-500 hover:scale-105'
-                    sizes='(max-width: 768px) 100vw, 50vw'
-                    fetchPriority='high'
-                  />
-                </AspectRatio>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className='left-4 hidden sm:inline-flex' />
-          <CarouselNext className='right-4 hidden sm:inline-flex' />
-        </Carousel>
+      {/* Decorative backdrop elements */}
+      <div className='absolute inset-0 bg-gradient-to-tr from-sky-500/10 to-transparent opacity-50 blur-3xl -z-10 rounded-full scale-90' />
+
+      <div ref={parallaxRef} className='will-change-transform'>
+        <div className='relative overflow-hidden rounded-3xl border border-white/5 shadow-2xl shadow-sky-900/20'>
+          <Carousel
+            opts={{
+              loop: true
+            }}
+            className='w-full'
+          >
+            <CarouselContent>
+              {images.map((image, index) => (
+                <CarouselItem key={index}>
+                  <AspectRatio ratio={3 / 4} className='bg-neutral-900/50'>
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      quality={95}
+                      className='object-cover'
+                      sizes='(max-width: 768px) 100vw, 50vw'
+                      fetchPriority='high'
+                    />
+                  </AspectRatio>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            {/* Minimalist controls */}
+            <CarouselPrevious className='left-4 border-white/10 bg-black/40 text-white backdrop-blur-sm hover:bg-black/60 hidden sm:inline-flex' />
+            <CarouselNext className='right-4 border-white/10 bg-black/40 text-white backdrop-blur-sm hover:bg-black/60 hidden sm:inline-flex' />
+          </Carousel>
+        </div>
       </div>
     </div>
   )
