@@ -65,7 +65,6 @@ export function FeatureCard({ feature, delay }: FeatureCardProps) {
       onMouseLeave={handleMouseLeave}
       className={cn(
         'group relative overflow-hidden rounded-xl border border-white/10 bg-neutral-900/40 p-5 transition-all duration-300',
-        // Mobile-specific static glow to avoid lifelessness
         'after:absolute after:inset-0 after:rounded-xl after:border after:border-white/5 after:opacity-100 md:after:opacity-0',
         'hover:border-white/20'
       )}

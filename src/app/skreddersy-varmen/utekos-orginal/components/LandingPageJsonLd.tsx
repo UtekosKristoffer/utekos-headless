@@ -35,7 +35,7 @@ export async function LandingPageJsonLd() {
       name: 'Utekos Dun',
       url: `${baseUrl}/produkter/utekos-dun`,
       image: `${baseUrl}/magasinet/mikro-front-1080.png`,
-      price: '1990',
+      price: '2490',
       originalPrice: '3290',
       description: 'Klassisk dun-kvalitet for de kaldeste dagene.'
     },

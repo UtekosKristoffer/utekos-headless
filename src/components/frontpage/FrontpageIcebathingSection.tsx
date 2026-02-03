@@ -196,7 +196,7 @@ export function FrontpageIceBathingSection() {
               <div className='absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-transparent pointer-events-none' />
 
               <div className='absolute top-6 right-6 backdrop-blur-md bg-black/30 border border-white/10 rounded-full px-4 py-2 text-xs font-medium text-white/90'>
-                Utekos® Original
+                Comfyrobe™
               </div>
             </div>
 

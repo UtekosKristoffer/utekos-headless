@@ -163,7 +163,7 @@ gjør Utekos unikt:
 
 - **PRODUKT:** Utekos TechDown™
 - **HANDLE:** utekos-techdown
-- **PRIS:** 1790 kr (Lanseringspris, normalt 1990 kr)
+- **PRIS:** 1790 kr
 - **NØKKELORD:** Et av vårt varmeste plagg. Kombinerer luksusfølelsen fra dun
   med ytelsen til syntetisk. Vannavvisende (Luméa™ stoff), isolerer selv når
   det er fuktig (CloudWeave™ fyll). Perfekt for norsk kystklima og varierende

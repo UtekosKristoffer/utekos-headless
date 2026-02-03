@@ -37,7 +37,7 @@ export function ImageColumn() {
 
   useGSAP(
     () => {
-      // Parallax effect on the image container
+      // Parallax effekt på bildet: Beveger seg litt saktere enn scroll
       gsap.fromTo(
         parallaxRef.current,
         { y: -30 },
@@ -61,7 +61,7 @@ export function ImageColumn() {
       ref={container}
       className='relative w-full max-w-[500px] mx-auto md:max-w-none'
     >
-      {/* Decorative backdrop elements */}
+      {/* Dekorativ bakgrunn */}
       <div className='absolute inset-0 bg-gradient-to-tr from-sky-500/10 to-transparent opacity-50 blur-3xl -z-10 rounded-full scale-90' />
 
       <div ref={parallaxRef} className='will-change-transform'>
@@ -70,7 +70,7 @@ export function ImageColumn() {
             opts={{
               loop: true
             }}
-            className='w-full'
+            className='w-full group'
           >
             <CarouselContent>
               {images.map((image, index) => (
@@ -89,9 +89,9 @@ export function ImageColumn() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            {/* Minimalist controls */}
-            <CarouselPrevious className='left-4 border-white/10 bg-black/40 text-white backdrop-blur-sm hover:bg-black/60 hidden sm:inline-flex' />
-            <CarouselNext className='right-4 border-white/10 bg-black/40 text-white backdrop-blur-sm hover:bg-black/60 hidden sm:inline-flex' />
+
+            <CarouselPrevious className='absolute left-2 top-1/2 -translate-y-1/2 h-8 w-8 md:h-10 md:w-10 border-white/20 bg-black/40 text-white backdrop-blur-md hover:bg-black/60 hover:text-white transition-all z-20' />
+            <CarouselNext className='absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 md:h-10 md:w-10 border-white/20 bg-black/40 text-white backdrop-blur-md hover:bg-black/60 hover:text-white transition-all z-20' />
           </Carousel>
         </div>
       </div>
