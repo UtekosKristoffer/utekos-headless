@@ -13,17 +13,22 @@ import { GridCross } from '@/components/legal/GridCross'
 import { ClockIcon, ShieldCheckIcon } from '@heroicons/react/24/outline'
 import { ThermometerIcon } from 'lucide-react'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import KvamskogenPic from '@public/kvamskogen_1.webp'
-import Kristoffer from '@public/1080/tech-kristoffer-1080.png'
+import ClassicGeminiCouple from '@public/webp/classic-couple-1080.webp'
+import TechDownKateKikkert from '@public/webp/techdown-kate-kikkert-1080.webp'
+import ClassicGeminiWoman from '@public/webp/classic-gemini-woman-1080.webp'
 
 const images = [
   {
-    src: KvamskogenPic,
+    src: ClassicGeminiCouple,
     alt: 'Bilde av en gjeng som bruker Utekos-plagg i snørike omgivelser på Kvamskogen.'
   },
   {
-    src: Kristoffer,
+    src: TechDownKateKikkert,
     alt: 'En fornøyd herre som bruker Utekos-produktet på terrassen.'
+  },
+  {
+    src: ClassicGeminiWoman,
+    alt: 'En kvinne som bruker Utekos-produktet i snørike omgivelser.'
   }
 ]
 

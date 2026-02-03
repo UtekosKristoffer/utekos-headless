@@ -45,8 +45,6 @@ export async function QualitySection() {
               </div>
             </div>
           </AnimatedBlock>
-
-          {/* Lite kort 1 */}
           <AnimatedBlock
             className='will-animate-fade-in-up h-full'
             delay='0.4s'
@@ -67,8 +65,6 @@ export async function QualitySection() {
               </p>
             </div>
           </AnimatedBlock>
-
-          {/* Lite kort 2 */}
           <AnimatedBlock
             className='will-animate-fade-in-up h-full'
             delay='0.6s'

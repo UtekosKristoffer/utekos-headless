@@ -84,7 +84,6 @@ function MomentCard({
   )
 }
 
-// Hovedkomponenten for hele seksjonen (også en Server Component)
 export function MomentsSection() {
   return (
     <section className='mx-auto max-w-[95%] py-16 sm:py-24 md:max-w-7xl'>

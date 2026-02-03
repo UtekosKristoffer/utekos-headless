@@ -4,7 +4,7 @@ import React, { useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Gift, Sparkles, Zap } from 'lucide-react'
+import { ArrowRight, Gift, Zap } from 'lucide-react'
 import {
   Carousel,
   CarouselContent,
