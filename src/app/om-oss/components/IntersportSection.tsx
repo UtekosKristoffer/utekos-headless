@@ -1,5 +1,4 @@
-// Path: src/app/om-oss/components/IntersportSection.tsx
-
+// Path: src/components/sections/FindInStoreSection.tsx
 'use client'
 
 import { useRef, useState } from 'react'
@@ -51,25 +50,32 @@ export function IntersportSection() {
 
   useGSAP(
     () => {
+      // 0. Sikre start-tilstander umiddelbart (hindrer "flash of content")
+      gsap.set(cardRef.current, { y: 100, autoAlpha: 0, scale: 0.95 })
+      gsap.set('.gsap-logo-card', { x: -50, autoAlpha: 0, rotationY: -15 })
+      gsap.set('.gsap-content', { x: 50, autoAlpha: 0 })
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse'
+          start: 'top 70%', // Starter når toppen av seksjonen er 70% ned på skjermen
+          end: 'bottom 20%',
+          toggleActions: 'play none none reverse' // Spiller av nedover, reverserer når man scroller opp igjen
         }
       })
 
-      // 1. Reveal av hele kortet
-      tl.fromTo(
-        cardRef.current,
-        { y: 50, autoAlpha: 0, scale: 0.95 },
-        { y: 0, autoAlpha: 1, scale: 1, duration: 1, ease: 'power3.out' }
-      )
+      // 1. Reveal av hele kortet (løftes opp)
+      tl.to(cardRef.current, {
+        y: 0,
+        autoAlpha: 1,
+        scale: 1,
+        duration: 1,
+        ease: 'power3.out'
+      })
 
-      // 2. Logo card pop-in
-      tl.fromTo(
+      // 2. Logo card pop-in (kommer inn fra venstre)
+      tl.to(
         '.gsap-logo-card',
-        { x: -30, autoAlpha: 0, rotationY: -15 },
         {
           x: 0,
           autoAlpha: 1,
@@ -80,11 +86,16 @@ export function IntersportSection() {
         '-=0.6'
       )
 
-      // 3. Tekst staggered
-      tl.fromTo(
+      // 3. Tekst staggered (kommer inn fra høyre)
+      tl.to(
         '.gsap-content',
-        { x: 30, autoAlpha: 0 },
-        { x: 0, autoAlpha: 1, duration: 0.8, stagger: 0.1, ease: 'power2.out' },
+        {
+          x: 0,
+          autoAlpha: 1,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: 'power2.out'
+        },
         '-=0.8'
       )
     },
@@ -100,7 +111,7 @@ export function IntersportSection() {
         {/* Main Card Container */}
         <div
           ref={cardRef}
-          className='relative overflow-hidden rounded-3xl border border-white/5 bg-[#1a1a1a] p-8 md:p-12 shadow-2xl opacity-0'
+          className='relative overflow-hidden rounded-3xl border border-white/5 bg-[#1a1a1a] p-8 md:p-12 shadow-2xl opacity-0' // opacity-0 som fallback
         >
           {/* Ambient Background Glow */}
           <div className='absolute right-0 top-0 -z-10 h-[600px] w-[600px] translate-x-1/3 -translate-y-1/3 opacity-10 blur-[120px] bg-red-600' />
