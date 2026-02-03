@@ -118,7 +118,8 @@ export const TechDownFeatureSection = () => {
                       alt={image.alt}
                       width={600}
                       height={600}
-                      className='max-h-[500px] w-auto object-contain drop-shadow-2xl'
+                      className='h-auto w-auto max-h-[500px] object-contain drop-shadow-2xl'
+                      style={{ width: 'auto', height: 'auto' }}
                       priority={index === 0}
                     />
                   </CarouselItem>
