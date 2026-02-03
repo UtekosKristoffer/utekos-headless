@@ -100,7 +100,6 @@ export function MotionContent() {
         </div>
       </div>
 
-      {/* Main Title with Masking for "Reveal" effect */}
       <h1 className='mt-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl xl:text-7xl'>
         <span
           className='relative inline-block overflow-hidden pb-4 px-2 -mx-2'
@@ -132,7 +131,7 @@ export function MotionContent() {
 
       <div
         data-nosnippet
-        className='gsap-chevron invisible n justify-center md:flex'
+        className='gsap-chevron invisible justify-center md:flex'
       >
         <ChevronDownSection />
       </div>

@@ -56,7 +56,7 @@ export function StickyMobileAction() {
             <span className='text-xs font-bold uppercase tracking-wider text-[#E07A5F]'>
               Utekos TechDown™
             </span>
-            <span className='text-sm font-medium opacity-90'> Fra 190,-</span>
+            <span className='text-sm font-medium opacity-90'> Fra 1790,-</span>
           </div>
         </div>
 

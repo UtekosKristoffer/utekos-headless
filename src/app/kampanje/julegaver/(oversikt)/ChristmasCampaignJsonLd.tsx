@@ -15,7 +15,7 @@ export async function ChristmasCampaignJsonLd() {
       name: 'Utekos TechDown™',
       url: `${baseUrl}/produkter/utekos-techdown`,
       image: `${baseUrl}/magasinet/techdown-1080.png`,
-      price: '1790',
+      price: '1990',
       originalPrice: '1990',
       description:
         'Vår varmeste mest allsidige modell. Optimalisert etter erfaringer og tilbakemeldinger.'

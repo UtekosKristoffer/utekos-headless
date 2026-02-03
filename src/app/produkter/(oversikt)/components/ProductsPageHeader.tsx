@@ -129,7 +129,7 @@ export function ProductsPageHeader() {
             <span className='gsap-title-line block'>Kolleksjonen for</span>
           </span>
           <span className='block overflow-hidden pt-2'>
-            <span className='gsap-title-line block bg-gradient-to-r from-sky-300 via-white to-sky-300 bg-clip-text text-transparent bg-[length:200%_auto] animate-shine leading-tight py-1'>
+            <span className='gsap-title-line block bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text text-transparent bg-[length:200%_auto] animate-shine leading-tight py-1'>
               kompromissløs komfort.
             </span>
           </span>
@@ -137,8 +137,7 @@ export function ProductsPageHeader() {
 
         <p className='gsap-desc opacity-0 mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-neutral-400 md:text-xl'>
           Vi har redefinert utekosen gjennom teknologi og funksjonalitet.
-          Utforsk vår kolleksjon og finn den perfekte følgesvennen for din
-          utekos.
+          Utforsk vår kolleksjon og skreddersy din egen varme.
         </p>
       </div>
 

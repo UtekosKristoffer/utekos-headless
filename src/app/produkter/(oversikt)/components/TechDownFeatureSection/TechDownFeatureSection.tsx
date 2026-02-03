@@ -93,10 +93,6 @@ export const TechDownFeatureSection = () => {
       <div className='container mx-auto grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20'>
         <div className='gsap-visual w-full opacity-0'>
           <div className='relative rounded-2xl border border-white/5 bg-white/[0.02] p-2 backdrop-blur-sm shadow-2xl'>
-            {/* BADGE FIX: 
-                - Mobil (default): `top-4 right-4` (Plassert inni kortet så den ikke kuttes)
-                - Desktop (md): `-top-4 -right-4` (Pop-out effekt)
-            */}
             <div className='absolute top-4 right-4 z-20 rotate-6 md:-top-4 md:-right-4 md:rotate-3'>
               <div className='flex h-24 w-24 flex-col items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-sky-600 p-4 text-white shadow-lg shadow-sky-900/40'>
                 <span className='text-xs font-bold uppercase'>Kun</span>
@@ -134,10 +130,8 @@ export const TechDownFeatureSection = () => {
           </div>
         </div>
 
-        {/* Content Side */}
         <div className='flex flex-col items-start px-4 lg:px-0'>
           <div className='gsap-content opacity-0 mb-8 flex flex-wrap gap-3'>
-            {/* Pulsing Launch Offer Badge */}
             <div className='gsap-pulse-badge inline-flex items-center gap-2 rounded-full border border-sky-400/50 bg-sky-500/20 px-4 py-1.5 backdrop-blur-md'>
               <Zap className='h-3.5 w-3.5 text-sky-400 fill-sky-400' />
               <span className='text-xs font-bold uppercase tracking-wider text-sky-300'>
@@ -166,7 +160,6 @@ export const TechDownFeatureSection = () => {
             personlig komfort.
           </p>
 
-          {/* Price Block */}
           <div className='gsap-content opacity-0 mb-10 flex items-end gap-3 rounded-xl border border-white/5 bg-white/5 p-4 backdrop-blur-sm'>
             <div className='flex flex-col'>
               <span className='text-sm font-medium text-neutral-400 line-through mb-1'>
