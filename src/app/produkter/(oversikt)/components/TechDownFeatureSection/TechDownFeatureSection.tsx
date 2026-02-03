@@ -4,7 +4,7 @@ import React, { useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Gift, Sparkles } from 'lucide-react'
+import { ArrowRight, Gift, Sparkles, Zap } from 'lucide-react'
 import {
   Carousel,
   CarouselContent,
@@ -61,6 +61,15 @@ export const TechDownFeatureSection = () => {
         '-=0.4'
       )
 
+      gsap.to('.gsap-pulse-badge', {
+        scale: 1.05,
+        boxShadow: '0 0 20px rgba(14, 165, 233, 0.4)',
+        duration: 1.5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      })
+
       gsap.to('.gsap-glow', {
         opacity: 0.3,
         scale: 1.2,
@@ -83,7 +92,17 @@ export const TechDownFeatureSection = () => {
 
       <div className='container mx-auto grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20'>
         <div className='gsap-visual w-full opacity-0'>
-          <div className='relative rounded-2xl border border-white/5 bg-white/[0.02] p-2 backdrop-blur-sm'>
+          <div className='relative rounded-2xl border border-white/5 bg-white/[0.02] p-2 backdrop-blur-sm shadow-2xl'>
+            {/* Offer Tag floating on image */}
+            <div className='absolute -top-4 -right-4 z-20 rotate-3'>
+              <div className='flex flex-col items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-sky-600 p-4 text-white shadow-lg shadow-sky-900/40 w-24 h-24'>
+                <span className='text-xs font-bold uppercase'>Kun</span>
+                <span className='text-xl font-bold tracking-tighter'>
+                  1790,-
+                </span>
+              </div>
+            </div>
+
             <Carousel
               plugins={[autoHeight.current]}
               className='w-full'
@@ -112,19 +131,21 @@ export const TechDownFeatureSection = () => {
           </div>
         </div>
 
+        {/* Content Side */}
         <div className='flex flex-col items-start px-4 lg:px-0'>
           <div className='gsap-content opacity-0 mb-8 flex flex-wrap gap-3'>
-            <div className='inline-flex items-center gap-2 rounded-full border border-sky-500/30 bg-sky-500/10 px-4 py-1.5 backdrop-blur-md'>
-              <Sparkles className='h-3.5 w-3.5 text-sky-400' />
+            {/* Pulsing Launch Offer Badge */}
+            <div className='gsap-pulse-badge inline-flex items-center gap-2 rounded-full border border-sky-400/50 bg-sky-500/20 px-4 py-1.5 backdrop-blur-md'>
+              <Zap className='h-3.5 w-3.5 text-sky-400 fill-sky-400' />
               <span className='text-xs font-bold uppercase tracking-wider text-sky-300'>
-                Flaggskipmodell
+                Lanseringstilbud
               </span>
             </div>
 
             <div className='inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 backdrop-blur-md'>
               <Gift className='h-3.5 w-3.5 text-emerald-400' />
               <span className='text-xs font-bold uppercase tracking-wider text-emerald-300'>
-                Gratis Buff inkludert
+                + Gratis Buff (Verdi 249,-)
               </span>
             </div>
           </div>
@@ -136,11 +157,26 @@ export const TechDownFeatureSection = () => {
             </span>
           </h2>
 
-          <p className='gsap-content opacity-0 mb-10 max-w-lg text-lg leading-relaxed text-neutral-400'>
+          <p className='gsap-content opacity-0 mb-8 max-w-lg text-lg leading-relaxed text-neutral-400'>
             Vi har ikke bare kombinert det beste fra dunens letthet og
             mikrofiberens slitestyrke – vi har utviklet en helt ny kategori av
-            personlig komfort. Vår varmeste og mest allsidige modell.
+            personlig komfort.
           </p>
+
+          {/* Price Block */}
+          <div className='gsap-content opacity-0 mb-10 flex items-end gap-3 rounded-xl border border-white/5 bg-white/5 p-4 backdrop-blur-sm'>
+            <div className='flex flex-col'>
+              <span className='text-sm font-medium text-neutral-400 line-through mb-1'>
+                Før 1990,-
+              </span>
+              <div className='flex items-baseline gap-2'>
+                <span className='text-3xl font-bold text-white'>1790,-</span>
+                <span className='text-sm text-neutral-500'>inkl. mva</span>
+              </div>
+            </div>
+            <div className='h-8 w-[1px] bg-white/10 mx-2'></div>
+            <div className='text-sm font-medium text-sky-400'>Spar 200,-</div>
+          </div>
 
           <ul className='mb-10 w-full space-y-3'>
             {TechDownfeatures.map((feature, index) => (
@@ -162,13 +198,16 @@ export const TechDownFeatureSection = () => {
             <Button
               asChild
               size='lg'
-              className='group h-14 rounded-full bg-white px-8 text-neutral-950 hover:bg-sky-50'
+              className='group h-14 rounded-full bg-white px-8 text-neutral-950 hover:bg-sky-50 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_25px_rgba(255,255,255,0.4)] transition-all'
             >
               <Link href='/produkter/utekos-techdown'>
-                Utforsk TechDown™
+                Benytt tilbudet nå
                 <ArrowRight className='ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1' />
               </Link>
             </Button>
+            <p className='mt-4 text-xs text-neutral-500 italic'>
+              *Tilbudet gjelder i en begrenset periode.
+            </p>
           </div>
         </div>
       </div>

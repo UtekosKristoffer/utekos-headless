@@ -1,4 +1,4 @@
-import TechDownImageFront from '@public/fiberdun/rett.png'
+import TechDownImageFront from '@public/1080/utekos-techdown.png'
 import TechDownImagePatch from '@public/fiberdun/patch.jpg'
 
 export const TechDownImages = [
