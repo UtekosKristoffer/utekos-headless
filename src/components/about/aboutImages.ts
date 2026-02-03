@@ -1,6 +1,6 @@
 export const aboutImages = [
   {
-    src: '/girl-stone-snow.webp',
+    src: '/webp/classic-girl-stone-snow-1080.png',
     alt: 'To personer i Utekos-plagg nyter utsikten fra en fjelltopp.'
   },
   {
@@ -8,15 +8,19 @@ export const aboutImages = [
     alt: 'Nærbilde av materialet og sømmene på et Utekos-produkt.'
   },
   {
-    src: '/automn_walking_2048.webp',
+    src: '/webp/classic-gemini-woman-1080.webp',
     alt: 'En familie samlet rundt en bålpanne, alle kledd i Utekos.'
   },
   {
-    src: '/coffe_utekos.webp',
+    src: '/webp/classic-coffee-1080.webp',
     alt: 'En person med en kaffekopp utenfor en bobil en kjølig høstmorgen.'
   },
   {
-    src: '/kate-erling-gress-vann.webp',
+    src: '/webp/techdown-kate-kikkert-1080.webp',
     alt: 'Utekos-plagg henger klare til bruk på en hyttevegg.'
+  },
+  {
+    src: '/webp/tech-male-woman.webp',
+    alt: 'Ett par iført Utekos TechDown-plagg nyter en rolig stund utendørs.'
   }
 ]
