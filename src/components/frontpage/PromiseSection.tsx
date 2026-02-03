@@ -16,19 +16,24 @@ import { AspectRatio } from '@/components/ui/aspect-ratio'
 import ClassicGeminiCouple from '@public/webp/classic-couple-1080.webp'
 import TechDownKateKikkert from '@public/webp/techdown-kate-kikkert-1080.webp'
 import ClassicGeminiWoman from '@public/webp/classic-gemini-woman-1080.webp'
+import TechDownMonica from '@public/webp/techdown-monica-1080.webp'
 
 const images = [
   {
     src: ClassicGeminiCouple,
-    alt: 'Bilde av en gjeng som bruker Utekos-plagg i snørike omgivelser på Kvamskogen.'
+    alt: 'Bilde av ett par som bruker Utekos-plagg i på terrassen i snørike omgivelser.'
   },
   {
     src: TechDownKateKikkert,
-    alt: 'En fornøyd herre som bruker Utekos-produktet på terrassen.'
+    alt: 'En fornøyd kvinne som bruker Utekos-produktet på terrassen.'
   },
   {
     src: ClassicGeminiWoman,
     alt: 'En kvinne som bruker Utekos-produktet i snørike omgivelser.'
+  },
+  {
+    src: TechDownMonica,
+    alt: 'En fornøyd kvinne som bruker Utekos TechDown ved bålbannen.'
   }
 ]
 
