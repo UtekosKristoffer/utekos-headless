@@ -88,7 +88,7 @@ export async function POST(request: NextRequest) {
       sourceEmoji = '🎵'
       sourceName = 'TikTok'
     } else if (cookieEpik) {
-      sourceEmoji = '❤️'
+      sourceEmoji = '📌'
       sourceName = 'Pinterest'
     } else if (cookieScCid) {
       sourceEmoji = '👻'

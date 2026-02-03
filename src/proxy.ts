@@ -109,7 +109,7 @@ export async function proxy(request: NextRequest) {
         },
         body: JSON.stringify({
           level: 'INFO',
-          event: '❤️ Pinterest Ad Click Detected',
+          event: '📌 Pinterest Ad Click Detected',
           context: {
             epik,
             path: pathname,

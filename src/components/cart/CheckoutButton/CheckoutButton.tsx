@@ -70,7 +70,7 @@ export const CheckoutButton = ({
       const sources = []
       if (snapId) sources.push('Snapchat 👻')
       if (metaId) sources.push('Meta 💙')
-      if (pinId) sources.push('Pinterest ❤️')
+      if (pinId) sources.push('Pinterest 📌')
       if (tiktokId) sources.push('TikTok 🎵')
 
       if (sources.length > 0) {

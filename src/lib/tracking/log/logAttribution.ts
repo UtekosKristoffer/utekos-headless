@@ -2,7 +2,7 @@ import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 export function logAttribution(productName: string, price: number) {
   try {
     const snapId = getCookie('ute_sc_cid')
-    const metaId = getCookie('_fbc') // Meta Click ID cookie
+    const metaId = getCookie('_fbc')
     const pinID = getCookie('_epik')
     const sources = []
     if (snapId) sources.push('Snapchat 👻')

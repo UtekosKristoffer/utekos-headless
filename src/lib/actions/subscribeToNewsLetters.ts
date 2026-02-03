@@ -184,7 +184,7 @@ async function trackLeadEvent(email: string) {
       if (res.ok) {
         await logToAppLogs(
           'INFO',
-          '❤️ Pinterest CAPI: Lead Sent',
+          '📌 Pinterest CAPI: Lead Sent',
           { eventId },
           {
             clickId: clickId ? 'Found' : 'Missing',
