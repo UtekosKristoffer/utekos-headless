@@ -29,7 +29,7 @@ export async function ProductVideoSection() {
             <p className='mt-6 text-lg text-neutral-300'>
               Er du lei av å la kulden ødelegge de gode øyeblikkene ute? Enten
               du er på fjellet, i hagen, på hytten eller i båten, er Utekos
-              løsningen som holder deg varm og komfortabel, uansett.
+              løsningen som holder deg varm og komfortabel.
             </p>
             <div className='mt-8 flex flex-col items-center gap-y-4 text-left sm:flex-row sm:justify-center sm:gap-x-8 lg:justify-start'>
               <div className='flex items-center gap-3'>
