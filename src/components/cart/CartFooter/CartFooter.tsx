@@ -1,7 +1,7 @@
 // Path: src/components/cart/CartFooter.tsx
 import * as React from 'react'
 
-import { CheckoutButton } from '@/components/jsx/CheckoutButton/CheckoutButton'
+import { CheckoutButton } from '@/components/cart/CheckoutButton/CheckoutButton'
 import { DrawerFooter } from '@/components/ui/drawer'
 import { useCartPending } from '@/hooks/useCartPending'
 import { formatPrice } from '@/lib/utils/formatPrice'

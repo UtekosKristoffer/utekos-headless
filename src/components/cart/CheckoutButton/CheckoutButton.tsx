@@ -8,7 +8,6 @@ import { generateEventID } from '@/components/analytics/MetaPixel/generateEventI
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { sendGTMEvent } from '@next/third-parties/google'
-
 export const CheckoutButton = ({
   checkoutUrl,
   subtotal,
@@ -65,13 +64,14 @@ export const CheckoutButton = ({
 
       const snapId = getCookie('ute_sc_cid')
       const metaId = fbc
-      // NY: Pinterest Click ID
       const pinId = getCookie('_epik')
+      const tiktokId = getCookie('ute_ttclid')
 
       const sources = []
       if (snapId) sources.push('Snapchat 👻')
       if (metaId) sources.push('Meta 💙')
       if (pinId) sources.push('Pinterest ❤️')
+      if (tiktokId) sources.push('TikTok 🎵')
 
       if (sources.length > 0) {
         const sourceLabel = sources.join(' + ')
@@ -87,7 +87,8 @@ export const CheckoutButton = ({
               cartId,
               snapId: snapId || undefined,
               metaId: metaId || undefined,
-              pinId: pinId || undefined
+              pinId: pinId || undefined,
+              tiktokId: tiktokId || undefined
             }
           })
         }).catch(() => {})
@@ -125,6 +126,20 @@ export const CheckoutButton = ({
         })
       }
 
+      if (typeof window !== 'undefined' && window.ttq) {
+        window.ttq.track(
+          'InitiateCheckout',
+          {
+            content_id: cleanItemIds[0], // TikTok foretrekker ofte én hoved-ID eller array mapping
+            content_type: 'product',
+            value: value,
+            currency: currency,
+            quantity: num_items
+          },
+          { event_id: eventID }
+        )
+      }
+
       const captureBody: CaptureBody = {
         cartId,
         checkoutUrl,
@@ -156,7 +171,8 @@ export const CheckoutButton = ({
         }
       }
 
-      fetch('/api/trackin-events', {
+      // Rettet skrivefeil: trackin-events -> tracking-events
+      fetch('/api/tracking-events', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(capiPayload),

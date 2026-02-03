@@ -42,6 +42,29 @@ declare global {
       version: string
       loaded?: boolean
     }
+    ttq?: {
+      load: (id: string) => void
+      page: () => void
+      track: (
+        event: string,
+        params?: Record<string, any>,
+        options?: { event_id?: string }
+      ) => void
+      identify: (data: {
+        email?: string
+        phone?: string
+        external_id?: string
+      }) => void
+      instance: (id: string) => any
+      on: (event: string, callback: () => void) => void
+      off: (event: string, callback: () => void) => void
+      methods: string[]
+      setAndDefer: (target: any, method: string) => void
+      _i: Record<string, any>
+      _t: Record<string, number>
+      _o: Record<string, any>
+    }
+    TiktokAnalyticsObject?: string
   }
 }
 

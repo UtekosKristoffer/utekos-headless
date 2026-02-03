@@ -219,6 +219,21 @@ export function AddToCart({
           )
         }
 
+        if (typeof window !== 'undefined' && window.ttq) {
+          window.ttq.track(
+            'AddToCart',
+            {
+              content_type: 'product',
+              content_id: mainVariantId,
+              content_name: contentName,
+              value: value,
+              currency: currency,
+              quantity: totalQty
+            },
+            { event_id: eventID }
+          )
+        }
+
         if (typeof window !== 'undefined' && window.pintrk) {
           const pinItems = [
             {

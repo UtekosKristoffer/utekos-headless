@@ -1,4 +1,3 @@
-// Path: src/components/providers/Providers.tsx
 'use client'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -14,6 +13,7 @@ import CookieConsent from '@/components/cookie-consent/CookieConsent'
 import { ConditionalTracking } from '../analytics/ConditionalTracking'
 import { SnapPixel } from '@/components/analytics/SnapPixel/SnapPixel'
 import { PinterestPixel } from '@/components/analytics/PinterestPixel/PinterestPixel'
+import { TikTokPixel } from '@/components/analytics/TikTokPixel/TikTokPixel'
 
 interface ProvidersProps {
   children: React.ReactNode
@@ -48,6 +48,7 @@ export default function Providers({
       <CookieConsent />
       <SnapPixel />
       <PinterestPixel />
+      <TikTokPixel />
 
       <ConditionalTracking
         {...(process.env.NEXT_PUBLIC_META_PIXEL_ID && {

@@ -1,4 +1,4 @@
-// Path: src/app/api/tracking/event/route.ts
+// Path: src/app/api/tracking-events/route.ts
 
 import { NextRequest, NextResponse } from 'next/server'
 import {
@@ -26,6 +26,8 @@ const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
 const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE
 const PINTEREST_TOKEN = process.env.PINTEREST_ACCESS_TOKEN
 const PINTEREST_AD_ACCOUNT_ID = process.env.PINTEREST_AD_ACCOUNT_ID
+const TIKTOK_ACCESS_TOKEN = process.env.TIKTOK_ACCESS_TOKEN
+const TIKTOK_PIXEL_ID = process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID
 
 if (!ACCESS_TOKEN || !PIXEL_ID) {
   console.error(
@@ -62,7 +64,7 @@ export async function POST(request: NextRequest) {
       eventId,
       eventSourceUrl,
       actionSource = 'website',
-      userData = {}, // <--- Dette hindrer krasjen ("undefined")
+      userData = {},
       eventData
     } = body
 
@@ -72,6 +74,9 @@ export async function POST(request: NextRequest) {
     const cookieUserHash = request.cookies.get('ute_user_hash')?.value
     const cookieScCid = request.cookies.get('ute_sc_cid')?.value
     const cookieEpik = request.cookies.get('_epik')?.value
+    const cookieTtclid = request.cookies.get('ute_ttclid')?.value
+    const cookieTtp = request.cookies.get('_ttp')?.value
+
     const fbp = userData.fbp || cookieFbp
     const fbc = userData.fbc || cookieFbc
     const externalId = userData.external_id || cookieExtId
@@ -79,7 +84,10 @@ export async function POST(request: NextRequest) {
     let sourceEmoji = '🤷'
     let sourceName = 'Direct/Unknown'
 
-    if (cookieEpik) {
+    if (cookieTtclid) {
+      sourceEmoji = '🎵'
+      sourceName = 'TikTok'
+    } else if (cookieEpik) {
       sourceEmoji = '❤️'
       sourceName = 'Pinterest'
     } else if (cookieScCid) {
@@ -150,7 +158,6 @@ export async function POST(request: NextRequest) {
       if (!PINTEREST_TOKEN || !PINTEREST_AD_ACCOUNT_ID) return
 
       let pinEventName = eventName.toLowerCase()
-      // Mapping basert på docs
       if (eventName === 'AddToCart') pinEventName = 'add_to_cart'
       if (eventName === 'InitiateCheckout') pinEventName = 'checkout'
       if (eventName === 'ViewCategory') pinEventName = 'view_category'
@@ -213,7 +220,77 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    const sendTikTokEvent = async () => {
+      if (!TIKTOK_ACCESS_TOKEN || !TIKTOK_PIXEL_ID) return
+
+      try {
+        const payload = {
+          event_source: 'web',
+          event_source_id: TIKTOK_PIXEL_ID,
+          data: [
+            {
+              event: eventName,
+              event_id: eventId,
+              event_time: Math.floor(Date.now() / 1000),
+              user: {
+                ttclid: cookieTtclid,
+                ttp: cookieTtp,
+                ip: finalIp,
+                user_agent: finalAgent,
+                email:
+                  effectiveUserData.email ?
+                    hashSnapData(effectiveUserData.email)
+                  : emailHash,
+                phone:
+                  effectiveUserData.phone ?
+                    hashSnapData(effectiveUserData.phone)
+                  : undefined,
+                external_id: externalId ? hashSnapData(externalId) : undefined
+              },
+              properties: {
+                currency: eventData?.currency || 'NOK',
+                value: eventData?.value ? Number(eventData.value) : undefined,
+                content_id: eventData?.content_ids?.[0],
+                content_type: eventData?.content_type,
+                contents: eventData?.contents?.map((c: any) => ({
+                  content_id: c.id,
+                  price: Number(c.item_price || 0),
+                  quantity: Number(c.quantity || 1)
+                }))
+              },
+              page: {
+                url:
+                  eventSourceUrl
+                  || request.headers.get('referer')
+                  || 'https://utekos.no'
+              }
+            }
+          ]
+        }
+
+        const res = await fetch(
+          'https://business-api.tiktok.com/open_api/v1.3/event/track/',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Token': TIKTOK_ACCESS_TOKEN
+            },
+            body: JSON.stringify(payload)
+          }
+        )
+
+        const data = await res.json()
+        if (data.code !== 0) {
+          console.error('[TikTok CAPI] Error:', JSON.stringify(data))
+        }
+      } catch (e) {
+        console.error('[TikTok CAPI] Exception:', e)
+      }
+    }
+
     const pinPromise = sendPinterestEvent()
+    const tiktokPromise = sendTikTokEvent()
 
     const custom = new CustomData()
     if (eventData) {
@@ -262,7 +339,7 @@ export async function POST(request: NextRequest) {
 
     const response: MetaEventRequestResult = await eventRequest.execute()
 
-    await pinPromise
+    await Promise.all([pinPromise, tiktokPromise])
 
     await logToAppLogs(
       'INFO',
@@ -277,6 +354,7 @@ export async function POST(request: NextRequest) {
         source: sourceName,
         scCid: cookieScCid ? '***Found***' : 'Missing',
         epik: cookieEpik ? '***Found***' : 'Missing',
+        ttclid: cookieTtclid ? '***Found***' : 'Missing',
         hasFbp: !!fbp,
         hasFbc: !!fbc,
         hasExtId: !!externalId,

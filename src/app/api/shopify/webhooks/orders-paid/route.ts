@@ -24,6 +24,8 @@ const SNAP_ACCESS_TOKEN = process.env.SNAP_CAPI_TOKEN
 const SNAP_PIXEL_ID = process.env.NEXT_PUBLIC_SNAP_PIXEL_ID
 const PINTEREST_TOKEN = process.env.PINTEREST_ACCESS_TOKEN
 const PINTEREST_AD_ACCOUNT_ID = process.env.PINTEREST_AD_ACCOUNT_ID
+const TIKTOK_ACCESS_TOKEN = process.env.TIKTOK_ACCESS_TOKEN
+const TIKTOK_PIXEL_ID = process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID
 
 export async function POST(request: Request) {
   if (!ACCESS_TOKEN || !PIXEL_ID) {
@@ -189,6 +191,8 @@ export async function POST(request: Request) {
 
   let fbp = redisData?.userData?.fbp
   let fbc = redisData?.userData?.fbc
+  let ttclid = (redisData?.userData as any)?.ttclid
+  let ttp = (redisData?.userData as any)?.ttp
 
   if (!fbp && order.note_attributes && order.note_attributes.length > 0) {
     const fbpAttr = order.note_attributes.find(a => a.name === '_fbp')
@@ -198,6 +202,18 @@ export async function POST(request: Request) {
   if (!fbc && order.note_attributes && order.note_attributes.length > 0) {
     const fbcAttr = order.note_attributes.find(a => a.name === '_fbc')
     if (fbcAttr?.value) fbc = fbcAttr.value
+  }
+
+  if (!ttclid && order.note_attributes && order.note_attributes.length > 0) {
+    const ttclidAttr = order.note_attributes.find(
+      a => a.name === 'ttclid' || a.name === 'ute_ttclid'
+    )
+    if (ttclidAttr?.value) ttclid = ttclidAttr.value
+  }
+
+  if (!ttp && order.note_attributes && order.note_attributes.length > 0) {
+    const ttpAttr = order.note_attributes.find(a => a.name === '_ttp')
+    if (ttpAttr?.value) ttp = ttpAttr.value
   }
 
   if (fbp) userData.setFbp(fbp)
@@ -345,8 +361,94 @@ export async function POST(request: Request) {
       console.error('[Pinterest CAPI] Exception:', error)
     }
   }
+
+  const sendTikTokEvent = async () => {
+    if (!TIKTOK_ACCESS_TOKEN || !TIKTOK_PIXEL_ID) return
+
+    try {
+      const tiktokPayload = {
+        event_source: 'web',
+        event_source_id: TIKTOK_PIXEL_ID,
+        data: [
+          {
+            event: 'Purchase',
+            event_id: `shopify_order_${order.id}`,
+            event_time: Math.floor(Date.now() / 1000),
+            user: {
+              ttclid: ttclid,
+              ttp: ttp,
+              email: email ? hashSnapData(email) : undefined,
+              phone: phone ? hashSnapData(phone) : undefined,
+              external_id: externalId ? hashSnapData(externalId) : undefined,
+              ip: clientIp,
+              user_agent: userAgent
+            },
+            properties: {
+              currency: safeString(order.currency) || 'NOK',
+              value: Number(order.total_price || 0),
+              order_id: safeString(order.id),
+              content_type: 'product',
+              contents: order.line_items?.map(item => ({
+                content_id:
+                  safeString(item.variant_id) || safeString(item.product_id),
+                price: Number(item.price || 0),
+                quantity: Number(item.quantity || 1)
+              }))
+            },
+            page: {
+              url:
+                safeString(order.order_status_url)
+                || redisData?.checkoutUrl
+                || 'https://utekos.no'
+            }
+          }
+        ]
+      }
+
+      const res = await fetch(
+        'https://business-api.tiktok.com/open_api/v1.3/event/track/',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Token': TIKTOK_ACCESS_TOKEN
+          },
+          body: JSON.stringify(tiktokPayload)
+        }
+      )
+
+      const responseData = await res.json()
+
+      if (responseData.code === 0) {
+        await logToAppLogs(
+          'INFO',
+          '🎵 TikTok CAPI Purchase Success',
+          { orderId: order.id },
+          { ttclid: ttclid ? 'Found' : 'Missing' }
+        )
+      } else {
+        await logToAppLogs(
+          'ERROR',
+          'TikTok CAPI Purchase Failed',
+          { error: responseData },
+          { orderId: order.id }
+        )
+      }
+    } catch (error) {
+      console.error('[TikTok CAPI] Exception:', error)
+      await logToAppLogs(
+        'ERROR',
+        'TikTok CAPI Exception',
+        { error: String(error) },
+        {}
+      )
+    }
+  }
+
   const snapPromise = sendSnapEvent()
   const pinPromise = sendPinterestEvent()
+  const tiktokPromise = sendTikTokEvent()
+
   const customData = new CustomData()
   const currency = safeString(order.currency) || 'NOK'
   customData.setCurrency(currency)
@@ -387,11 +489,11 @@ export async function POST(request: Request) {
 
     const response = await eventRequest.execute()
 
-    await Promise.all([snapPromise, pinPromise])
+    await Promise.all([snapPromise, pinPromise, tiktokPromise])
 
     await logToAppLogs(
       'INFO',
-      '💵🎰💵 CAPI 💵🎰💵 Purchase Sent',
+      '跳鴫跳 CAPI 跳鴫跳 Purchase Sent',
       {
         fbtrace_id: response.fbtrace_id,
         events_received: response.events_received,
@@ -410,7 +512,7 @@ export async function POST(request: Request) {
       fbtrace_id: response.fbtrace_id
     })
   } catch (err: any) {
-    await Promise.all([snapPromise, pinPromise])
+    await Promise.all([snapPromise, pinPromise, tiktokPromise])
 
     const errorResponse = err.response?.data || {}
     console.error(

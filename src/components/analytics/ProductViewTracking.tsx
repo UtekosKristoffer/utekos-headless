@@ -69,6 +69,23 @@ export function ProductViewTracking({
         ]
       })
     }
+
+    if (typeof window !== 'undefined' && window.ttq) {
+      window.ttq.track(
+        'ViewContent',
+        {
+          content_type: 'product',
+          content_id: contentId,
+          content_name: product.title,
+          content_category: category,
+          value: price,
+          currency: currency,
+          description: product.title,
+          quantity: 1
+        },
+        { event_id: eventId }
+      )
+    }
   }, [
     pathname,
     product.title,
