@@ -169,11 +169,8 @@ export function NewProductInStoreNotice() {
           />
 
           <div className='flex flex-col items-center gap-8 text-center'>
-            {/* Animation Stage */}
             <div className='relative flex h-32 w-full items-center justify-center overflow-visible'>
-              {/* PARTICLE LAYER - Behind Logo */}
               <div className='absolute left-1/2 top-1/2 z-0 flex h-1 w-1 -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-visible'>
-                {/* Smoke - larger, varied colors */}
                 {[...Array(5)].map((_, i) => (
                   <div
                     key={`smoke-${i}`}
@@ -181,7 +178,7 @@ export function NewProductInStoreNotice() {
                     style={{ left: i * 5, top: i * 2 }}
                   />
                 ))}
-                {/* Sparks - small, bright, orange/yellow */}
+
                 {[...Array(8)].map((_, i) => (
                   <div
                     key={`spark-${i}`}
@@ -191,7 +188,6 @@ export function NewProductInStoreNotice() {
                 ))}
               </div>
 
-              {/* THE LOGO BOX (Animated Element) */}
               <div
                 ref={logoBoxRef}
                 className='relative z-10 flex h-16 items-center justify-center rounded-2xl border-2 border-white/90 bg-white px-8 shadow-[0_0_30px_rgba(255,255,255,0.2)] opacity-0 will-change-transform'
@@ -207,7 +203,6 @@ export function NewProductInStoreNotice() {
               </div>
             </div>
 
-            {/* Text Content */}
             <div
               ref={contentRef}
               className='flex flex-col items-center gap-6 opacity-0'
