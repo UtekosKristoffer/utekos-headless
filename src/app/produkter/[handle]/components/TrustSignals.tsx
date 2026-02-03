@@ -71,70 +71,72 @@ export function TrustSignals() {
       aria-label='Trygghetsinformasjon'
     >
       <div className='hidden md:block'>
-        <div className='grid grid-cols-3 gap-4 px-6 py-5 border-b border-slate-800/50'>
+        {/* Justert padding (px-3) og gap (gap-2) for bedre plass */}
+        <div className='grid grid-cols-3 gap-2 px-3 py-5 border-b border-slate-800/50'>
           <Link
             href='/frakt-og-retur'
-            className='gsap-signal flex flex-col items-center text-center gap-2.5 group rounded-lg p-2 border border-transparent transition-all'
+            className='gsap-signal flex flex-col items-center text-center gap-2 group rounded-lg p-1.5 border border-transparent transition-all'
             aria-label='Les mer om returpolicy'
           >
-            <div className='w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/15 transition-colors'>
-              <RotateCcw className='w-5 h-5 text-cyan-400' />
+            <div className='w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/15 transition-colors'>
+              <RotateCcw className='w-4.5 h-4.5 text-cyan-400' />
             </div>
-            <span className='text-sm font-medium text-slate-200 group-hover:text-cyan-300 transition-colors leading-tight'>
+            {/* Endret til text-xs og whitespace-nowrap for å sikre en linje */}
+            <span className='text-xs font-medium text-slate-200 group-hover:text-cyan-300 transition-colors whitespace-nowrap'>
               14 dagers åpent kjøp
             </span>
           </Link>
 
           <Link
             href='/frakt-og-retur'
-            className='gsap-signal flex flex-col items-center text-center gap-2.5 group rounded-lg p-2 border border-transparent transition-all'
+            className='gsap-signal flex flex-col items-center text-center gap-2 group rounded-lg p-1.5 border border-transparent transition-all'
             aria-label='Les mer om levering'
           >
-            <div className='w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/15 transition-colors'>
-              <Truck className='w-5 h-5 text-cyan-400' />
+            <div className='w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/15 transition-colors'>
+              <Truck className='w-4.5 h-4.5 text-cyan-400' />
             </div>
-            <span className='text-sm font-medium text-slate-200 group-hover:text-cyan-300 transition-colors leading-tight'>
+            <span className='text-xs font-medium text-slate-200 group-hover:text-cyan-300 transition-colors whitespace-nowrap'>
               Rask levering 2-5 dager
             </span>
           </Link>
 
           <Link
             href='/frakt-og-retur'
-            className='gsap-signal flex flex-col items-center text-center gap-2.5 group rounded-lg p-2 border border-transparent transition-all'
+            className='gsap-signal flex flex-col items-center text-center gap-2 group rounded-lg p-1.5 border border-transparent transition-all'
             aria-label='Les mer om betalingsalternativer'
           >
-            <div className='w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/15 transition-colors'>
-              <ShieldCheck className='w-5 h-5 text-cyan-400' />
+            <div className='w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/15 transition-colors'>
+              <ShieldCheck className='w-4.5 h-4.5 text-cyan-400' />
             </div>
-            <span className='text-sm font-medium text-slate-200 group-hover:text-cyan-300 transition-colors leading-tight'>
+            <span className='text-xs font-medium text-slate-200 group-hover:text-cyan-300 transition-colors whitespace-nowrap'>
               Trygg handel
             </span>
           </Link>
         </div>
 
-        <div className='px-6 py-4'>
-          <div className='flex items-center justify-center gap-8'>
+        <div className='px-4 py-4'>
+          <div className='flex items-center justify-center gap-6 xl:gap-8'>
             <div className='gsap-logo origin-center'>
-              <VippsLogo className='h-[20px] w-auto opacity-70 hover:opacity-100 transition-opacity' />
+              <VippsLogo className='h-[18px] w-auto opacity-70 hover:opacity-100 transition-opacity' />
             </div>
             <div className='gsap-logo origin-center'>
-              <KlarnaLogo className='h-[18px] w-auto opacity-70 hover:opacity-100 transition-opacity' />
+              <KlarnaLogo className='h-[16px] w-auto opacity-70 hover:opacity-100 transition-opacity' />
             </div>
             <div className='gsap-logo origin-center'>
-              <VisaLogo className='h-[16px] w-auto opacity-70 hover:opacity-100 transition-opacity' />
+              <VisaLogo className='h-[14px] w-auto opacity-70 hover:opacity-100 transition-opacity' />
             </div>
             <div className='gsap-logo origin-center'>
               <Image
                 src={GooglePayLogo}
                 alt='Google Pay'
-                className='h-[20px] w-auto opacity-70 hover:opacity-100 transition-opacity'
+                className='h-[18px] w-auto opacity-70 hover:opacity-100 transition-opacity'
               />
             </div>
             <div className='gsap-logo px-2.5 py-1 bg-white rounded-md flex items-center origin-center'>
               <Image
                 src={ApplePayLogo}
                 alt='Apple Pay'
-                className='h-[16px] w-auto'
+                className='h-[14px] w-auto'
               />
             </div>
           </div>
