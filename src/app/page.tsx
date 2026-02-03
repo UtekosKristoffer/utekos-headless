@@ -12,7 +12,6 @@ import { ComfyrobeSection } from '../components/frontpage/components/SpecialOffe
 import { Activity } from 'react'
 import { FeaturedProductsSkeleton } from '@/components/skeletons/FeaturedProductsSkeleton'
 import TechTeaserSection from '@/components/frontpage/components/TechTeaserSection'
-import { FrontPageJsonLd } from './FrontPageJsonLd'
 import { AsyncProductLaunchWrapper } from '@/components/frontpage/AsyncProductLaunchWrapper'
 import { FeaturedProductsSection } from '@/components/frontpage/FeaturedProductSection'
 import { FrontpageIceBathingSection } from '@/components/frontpage/FrontpageIcebathingSection'
@@ -20,7 +19,6 @@ import { FrontpageIceBathingSection } from '@/components/frontpage/FrontpageIceb
 const HomePage = () => {
   return (
     <>
-      <FrontPageJsonLd />
       <section>
         <HeroSection />
 

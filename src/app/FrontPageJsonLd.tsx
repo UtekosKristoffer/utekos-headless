@@ -1,3 +1,5 @@
+// Path: src/app/FrontPageJsonLd.tsx
+
 import type {
   WebSite,
   VideoObject,
@@ -5,11 +7,11 @@ import type {
   SiteNavigationElement
 } from 'schema-dts'
 import { cacheLife } from 'next/cache'
-
-export const VIDEO_URL = 'https://utekos.no/videos/TensorPix2.mp4'
-export const VIDEO_THUMBNAIL_URL = 'https://utekos.no/linn-kate-kikkert.webp'
-export const VIDEO_POSTER_URL = 'https://utekos.no/linn-kate-kikkert.webp'
-export const VIDEO_EMBED_URL = 'https://utekos.no/video/tensorpix'
+import {
+  VIDEO_URL,
+  VIDEO_THUMBNAIL_URL,
+  VIDEO_EMBED_URL
+} from '@/api/constants'
 
 export async function FrontPageJsonLd() {
   'use cache'
