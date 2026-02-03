@@ -171,7 +171,6 @@ export const CheckoutButton = ({
         }
       }
 
-      // Rettet skrivefeil: trackin-events -> tracking-events
       fetch('/api/tracking-events', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -193,7 +192,7 @@ export const CheckoutButton = ({
           currency: currency,
           cart_id: cartId || 'unknown',
           _fpc: getCookie('_fpc'),
-          external_id: getCookie('ute_ext_id') || 'unknownn',
+          external_id: getCookie('ute_ext_id') || 'unknown',
           event_name: 'CheckoutButtonClick',
           event_id: generateEventID()
         })
