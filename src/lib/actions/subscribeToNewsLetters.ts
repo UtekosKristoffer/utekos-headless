@@ -1,3 +1,5 @@
+// Path: src/lib/actions/subscribeToNewsLetters.ts
+
 'use server'
 
 import { z } from 'zod'
