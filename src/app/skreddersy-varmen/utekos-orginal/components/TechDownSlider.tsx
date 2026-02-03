@@ -1,10 +1,11 @@
-// Path: src/components/frontpage/TechDownSlider.tsx
+// Path: src/app/skreddersy-varmen/utekos-orginal/components/TechDownSlider.tsx
+
 'use client'
 
 import Image from 'next/image'
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
-import { ChevronsLeftRight, ShieldCheck, Waves } from 'lucide-react' // Mer relevante ikoner
+import { ChevronsLeftRight, ShieldCheck, Waves } from 'lucide-react'
 import TechDownDryFiber from '@public/techdown-dry-macro.png'
 import TechDownWetFiber from '@public/techdown-wet-macro.png'
 import { cn } from '@/lib/utils/className'
@@ -14,7 +15,6 @@ export function TechDownSlider() {
   const [isDragging, setIsDragging] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // Innholdet er spisset mot "Trygghet" og "Komfort"
   const content = {
     dry: {
       label: 'Tørt klima',
@@ -35,7 +35,6 @@ export function TechDownSlider() {
   const isDryView = position > 50
   const currentContent = isDryView ? content.dry : content.wet
 
-  // Touch/Drag Logic
   const handleMove = useCallback((clientX: number) => {
     if (!containerRef.current) return
     const rect = containerRef.current.getBoundingClientRect()
@@ -66,7 +65,6 @@ export function TechDownSlider() {
   return (
     <section className='w-full py-24 bg-[#F9F8F6] text-[#2C2420] border-t border-[#2C2420]/5'>
       <div className='max-w-5xl mx-auto px-6'>
-        {/* HEADER: Editorial Style */}
         <AnimatedBlock className='text-center mb-16'>
           <span className='text-[#E07A5F] font-bold tracking-[0.2em] uppercase text-xs block mb-3'>
             Teknologi
@@ -79,8 +77,6 @@ export function TechDownSlider() {
             TechDown™ håndterer fuktighet.
           </p>
         </AnimatedBlock>
-
-        {/* SLIDER CONTAINER - "The Window" */}
         <AnimatedBlock className='animate-on-scroll' delay='0.2s'>
           <div className='relative p-2 md:p-4 bg-white border border-[#2C2420]/10 shadow-2xl rounded-sm'>
             <div
@@ -91,7 +87,6 @@ export function TechDownSlider() {
               onMouseMove={onMouseMove}
               onTouchMove={onTouchMove}
             >
-              {/* IMAGE 1: WET (Background) */}
               <div className='absolute inset-0 w-full h-full'>
                 <Image
                   src={TechDownWetFiber}
@@ -102,10 +97,7 @@ export function TechDownSlider() {
                   draggable={false}
                 />
                 <div className='absolute inset-0 bg-black/20' />{' '}
-                {/* Contrast Overlay */}
               </div>
-
-              {/* IMAGE 2: DRY (Clipped Foreground) */}
               <div
                 className='absolute inset-0 overflow-hidden z-20 border-r-2 border-white/50'
                 style={{ width: `${position}%` }}
@@ -131,8 +123,6 @@ export function TechDownSlider() {
                   <div className='absolute inset-0 bg-black/10' />
                 </div>
               </div>
-
-              {/* LABELS - Always visible for clarity */}
               <div className='absolute top-6 right-6 z-10 pointer-events-none'>
                 <span className='bg-[#2C2420]/80 backdrop-blur-md text-white px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-sm border border-white/10'>
                   Fuktig vær
@@ -143,8 +133,6 @@ export function TechDownSlider() {
                   Tørt vær
                 </span>
               </div>
-
-              {/* THE HANDLE - Tactile & Premium */}
               <div
                 className='absolute top-0 bottom-0 w-1 bg-white z-40 cursor-ew-resize flex items-center justify-center shadow-[0_0_30px_rgba(0,0,0,0.5)]'
                 style={{ left: `${position}%` }}
@@ -156,12 +144,9 @@ export function TechDownSlider() {
             </div>
           </div>
         </AnimatedBlock>
-
-        {/* INFO CARD - "The Spec Sheet" */}
         <AnimatedBlock className='animate-on-scroll mt-12' delay='0.3s'>
           <div className='bg-white p-8 md:p-12 border border-[#2C2420]/5 shadow-xl rounded-sm transition-all duration-500'>
             <div className='flex flex-col md:flex-row gap-8 md:gap-16 items-start'>
-              {/* Left Column: Icon & Title */}
               <div className='md:w-1/3 flex flex-col items-start'>
                 <div className='flex items-center gap-3 mb-4 text-[#E07A5F] bg-[#E07A5F]/10 px-4 py-2 rounded-full'>
                   {currentContent.icon}
@@ -173,14 +158,10 @@ export function TechDownSlider() {
                   {currentContent.title}
                 </h3>
               </div>
-
-              {/* Right Column: Description & Metric */}
               <div className='md:w-2/3'>
                 <p className='text-lg text-[#2C2420]/70 leading-relaxed mb-8'>
                   {currentContent.desc}
                 </p>
-
-                {/* Visual Metric Bar */}
                 <div className='border-t border-[#2C2420]/10 pt-6'>
                   <div className='flex justify-between items-end mb-2'>
                     <span className='text-xs uppercase tracking-widest text-[#2C2420]/50 font-bold'>
@@ -190,7 +171,6 @@ export function TechDownSlider() {
                       {isDryView ? '100%' : '98%'}
                     </span>
                   </div>
-                  {/* Progress Bar Animation */}
                   <div className='w-full h-1 bg-[#2C2420]/5 rounded-full overflow-hidden'>
                     <div
                       className={cn(

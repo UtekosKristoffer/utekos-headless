@@ -4,8 +4,6 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils/className'
 import { ArrowDown } from 'lucide-react'
-
-// Du kan evt. sende inn produktbilde/pris som props hvis du vil gjøre den dynamisk
 import TechDownThumb from '@public/fiberdun/techdawn-front.png'
 
 export function StickyMobileAction() {
@@ -13,15 +11,10 @@ export function StickyMobileAction() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Sjekk om brukeren har scrollet forbi Hero-seksjonen (ca. 800px)
-      // Du kan justere 800 til høyden på Hero-seksjonen din
       const show = window.scrollY > 800
-
-      // Skjul den igjen hvis de når bunnen (selve kjøpsseksjonen) for å unngå dobbel info
       const purchaseSection = document.getElementById('purchase-section')
       if (purchaseSection) {
         const rect = purchaseSection.getBoundingClientRect()
-        // Hvis kjøpsseksjonen er synlig i viewporten, skjul sticky bar
         if (rect.top < window.innerHeight && rect.bottom >= 0) {
           setIsVisible(false)
           return
@@ -50,7 +43,6 @@ export function StickyMobileAction() {
       )}
     >
       <div className='bg-[#2C2420] text-[#F4F1EA] rounded-full shadow-2xl p-2 pr-6 flex items-center justify-between border border-[#E07A5F]/30 backdrop-blur-md bg-opacity-95'>
-        {/* Venstre side: Bilde og Info */}
         <div className='flex items-center gap-3'>
           <div className='relative w-12 h-12 bg-white/10 rounded-full overflow-hidden border border-white/10'>
             <Image
@@ -68,7 +60,6 @@ export function StickyMobileAction() {
           </div>
         </div>
 
-        {/* Høyre side: Action Knapp */}
         <button
           onClick={scrollToPurchase}
           className='bg-[#E07A5F] hover:bg-[#d0694e] text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors flex items-center gap-2 shadow-lg'

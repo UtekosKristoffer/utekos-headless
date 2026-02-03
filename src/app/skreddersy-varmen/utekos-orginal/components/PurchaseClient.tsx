@@ -1,4 +1,4 @@
-// Path: src/app/skreddersy-varmen/PurchaseClient.tsx
+// Path: src/ap/skreddersy-varmen/PurchaseClient.tsx
 'use client'
 
 import { useState, useEffect, useTransition, useContext } from 'react'
@@ -11,98 +11,25 @@ import {
   Truck,
   RefreshCcw,
   Loader2,
-  Gift // Importer Gift-ikon
+  Gift
 } from 'lucide-react'
 import { cn } from '@/lib/utils/className'
 import { VippsLogo } from '@/components/logo/payments/VippsLogo'
 import { KlarnaLogo } from '@/components/logo/payments/KlarnaLogo'
 import { PostNordLogo } from '@/components/logo/payments/PostNordLogo'
 import Link from 'next/link'
-import DunImage1 from '@public/1080/classic-blue-1080.png'
-import MicroImage1 from '@public/mikro-front-hvit-bakgrunn-1080.png'
-import TechDownImage1 from '@public/1080/techdown.png'
-import {
-  CartMutationContext,
-  type CartMutationMachine
-} from '@/lib/context/CartMutationContext'
+import { CartMutationContext } from '@/lib/context/CartMutationContext'
+import { createMutationPromise } from '@/app/skreddersy-varmen/utekos-orginal/utils/createMutationPromise'
+import { getVariants } from '@/app/skreddersy-varmen/utekos-orginal/utils/getVariants'
 import { cartStore } from '@/lib/state/cartStore'
 import { toast } from 'sonner'
-import type { ActorRef, StateFrom } from 'xstate'
-import type { CartMutationEvent, ShopifyProduct } from '@types'
 import { applyDiscount } from '@/api/lib/cart/applyDiscount'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { CartIdContext } from '@/lib/context/CartIdContext'
 import { useQueryClient } from '@tanstack/react-query'
-
-const PRODUCT_VARIANTS = {
-  techdown: {
-    id: 'utekos-techdown',
-    title: 'Utekos TechDown™',
-    subtitle: 'Vår varmeste og mest allsidige',
-    price: 1790,
-    features: ['Vannavstøtende', 'Helårsbruk', 'Slitesterk'],
-    colors: [{ name: 'Havdyp', hex: '#0F2B40' }],
-    sizes: ['Liten', 'Middels', 'Stor'],
-    image: TechDownImage1.src
-  },
-  dun: {
-    id: 'utekos-dun',
-    title: 'Utekos Dun™',
-    subtitle: 'Utekos Dun™',
-    price: 2490,
-    features: ['Ultralett', 'Maksimal varme', 'Høy kompresjon'],
-    colors: [
-      { name: 'Fjellblå', hex: '#020244' },
-      { name: 'Vargnatt', hex: '#000000' }
-    ],
-    sizes: ['Medium', 'Large'],
-    image: DunImage1.src
-  },
-  mikro: {
-    id: 'utekos-mikro',
-    title: 'Utekos Mikrofiber™',
-    subtitle: 'Lettvekts reisefølge',
-    price: 1590,
-    features: ['Hurtigtørkende', 'Mest kompakt', 'Allergivennlig'],
-    colors: [
-      { name: 'Fjellblå', hex: '#020244' },
-      { name: 'Vargnatt', hex: '#000000' }
-    ],
-    sizes: ['Medium', 'Large'],
-    image: MicroImage1.src
-  }
-}
-
-type ModelKey = keyof typeof PRODUCT_VARIANTS
-
-const createMutationPromise = (
-  event: CartMutationEvent,
-  actor: ActorRef<StateFrom<CartMutationMachine>, CartMutationEvent>
-): Promise<StateFrom<CartMutationMachine>> => {
-  return new Promise(resolve => {
-    let isInitialEmission = true
-    const subscription = actor.subscribe(snapshot => {
-      if (isInitialEmission) {
-        isInitialEmission = false
-        return
-      }
-      if (snapshot.matches('idle')) {
-        subscription.unsubscribe()
-        resolve(snapshot)
-      }
-    })
-    actor.send(event)
-  })
-}
-
-function getVariants(product: ShopifyProduct | undefined | null) {
-  if (!product?.variants) return []
-  // @ts-ignore
-  if (product.variants.edges) return product.variants.edges.map(e => e.node)
-  // @ts-ignore
-  if (Array.isArray(product.variants)) return product.variants
-  return []
-}
+import { PRODUCT_VARIANTS } from '@/api/constants'
+import type { ModelKey } from '@/api/constants'
+import type { ShopifyProduct } from '@types'
 
 export function PurchaseClient({
   products

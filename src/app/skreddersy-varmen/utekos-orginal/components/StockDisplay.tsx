@@ -1,11 +1,5 @@
 import { Check, Clock } from 'lucide-react'
-
-interface StockDisplayProps {
-  count: number
-  available: boolean
-  theme?: 'light' | 'dark'
-}
-
+import type { StockDisplayProps } from '@types'
 export function StockDisplay({
   count,
   available,

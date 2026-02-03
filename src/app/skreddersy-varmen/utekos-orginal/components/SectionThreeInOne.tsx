@@ -4,53 +4,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils/className'
-import { Maximize2, Move, User } from 'lucide-react'
-import KateLinnKikkertImage from '@public/kate-linn-kikkert-4-5.png'
-import TechDownFrontImage from '@public/fiberdun/techdawn-front.png'
-import ClassicGeminiCouple45 from '@public/classic-gemeni-4-5.png'
-
-const steps = [
-  {
-    id: 'fullengde',
-    stepNumber: '01',
-    modeName: 'Fullengdemodus',
-    title: 'Maksimal isolasjon',
-    description:
-      'Utgangspunktet for selve utekosen. Pakk deg inn i en isolerende kokong for komplett komfort. Perfekt i hytteveggen, utenfor bobilen eller lange kvelder på terrassen hvor roen senker seg.',
-    icon: <Maximize2 className='w-5 h-5' />,
-    image: ClassicGeminiCouple45,
-    isProduct: false,
-    desktopObjectFit: 'cover',
-    desktopObjectPosition: 'center 30%'
-  },
-  {
-    id: 'oppjustert',
-    stepNumber: '02',
-    modeName: 'Oppjustert modus',
-    title: 'Umiddelbar mobilitet',
-    description:
-      'Nyter du total omfavnelse av Utekos, men må plutselig en rask tur på kjøkkenet eller svare på telefonen som ringer fra andre siden av huset? Heis opp plagget til ønsket lengde, stram med den utvendige snoren i livet og vær mobil på få sekunder. Beveg deg uten snublefare og subbefritt - uten å miste varmen.',
-    icon: <Move className='w-5 h-5' />,
-    image: TechDownFrontImage,
-    isProduct: true,
-    desktopObjectFit: 'contain',
-    desktopObjectPosition: 'center center'
-  },
-  {
-    id: 'parkas',
-    stepNumber: '03',
-    modeName: 'Parkasmodus',
-    title: 'Selvformet eleganse',
-    description:
-      'Planlagt bevegelse over tid. Forvandle Utekos til en selvformet parkas. Full bevegelsesfrihet med et elegant snitt.',
-    icon: <User className='w-5 h-5' />,
-    image: KateLinnKikkertImage,
-    isProduct: false,
-    desktopObjectFit: 'cover',
-    desktopObjectPosition: 'center center'
-  }
-]
-
+import { Steps } from './Steps'
 export function SectionThreeInOne() {
   const [activeStep, setActiveStep] = useState(0)
   const stepRefs = useRef<(HTMLDivElement | null)[]>([])
@@ -79,7 +33,6 @@ export function SectionThreeInOne() {
 
   return (
     <section className='bg-[#1F2421] text-[#F4F1EA] w-full'>
-      {/* HEADER (Felles) */}
       <div className='py-16 px-6 md:py-24 text-center max-w-4xl mx-auto'>
         <span className='text-[#E07A5F] font-bold tracking-[0.2em] uppercase text-xs block mb-3'>
           Adaptiv funksjonalitet
@@ -92,12 +45,8 @@ export function SectionThreeInOne() {
           til en elegant parkas på sekunder. Juster, form og nyt.
         </p>
       </div>
-
-      {/* =========================================
-          MOBILE LAYOUT
-      ========================================= */}
       <div className='lg:hidden flex flex-col w-full pb-20'>
-        {steps.map((step, index) => (
+        {Steps.map((step, index) => (
           <div key={step.id} className='flex flex-col mb-12 last:mb-0'>
             <div
               className={cn(
@@ -136,14 +85,9 @@ export function SectionThreeInOne() {
           </div>
         ))}
       </div>
-
-      {/* =========================================
-          DESKTOP LAYOUT (FIXED BLUR)
-      ========================================= */}
       <div className='hidden lg:flex w-full'>
-        {/* Venstre: Sticky Image */}
         <div className='w-1/2 h-screen sticky top-0 flex items-center justify-center bg-[#151515] overflow-hidden border-r border-white/5'>
-          {steps.map((step, index) => (
+          {Steps.map((step, index) => (
             <div
               key={step.id}
               className={cn(
@@ -173,7 +117,7 @@ export function SectionThreeInOne() {
           ))}
 
           <div className='absolute left-8 bottom-8 z-20 flex gap-3'>
-            {steps.map((_, i) => (
+            {Steps.map((_, i) => (
               <div
                 key={i}
                 className={cn(
@@ -185,9 +129,8 @@ export function SectionThreeInOne() {
           </div>
         </div>
 
-        {/* Høyre: Text Scroll */}
         <div className='w-1/2 flex flex-col bg-[#1F2421]'>
-          {steps.map((step, index) => (
+          {Steps.map((step, index) => (
             <div
               key={step.id}
               data-step-index={index}

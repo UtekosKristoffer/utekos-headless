@@ -4,6 +4,9 @@ import {
   AccordionItem,
   AccordionTrigger
 } from '@/components/ui/accordion'
+import { SpecRow } from './SpecRow'
+import { DetailBlock } from './DetailBlock'
+import { UsageGroup } from './UsageGroup'
 import { Leaf, ShieldCheck, Waves, Thermometer, Info } from 'lucide-react'
 
 export function ProductDetailsAccordion() {
@@ -32,7 +35,6 @@ export function ProductDetailsAccordion() {
             </AccordionContent>
           </AccordionItem>
 
-          {/* --- FUNKSJONER --- */}
           <AccordionItem value='functions'>
             <AccordionTrigger className='text-lg md:text-xl font-serif hover:no-underline hover:text-[#E07A5F]'>
               Nøkkelfunksjoner
@@ -142,7 +144,6 @@ export function ProductDetailsAccordion() {
             </AccordionContent>
           </AccordionItem>
 
-          {/* --- PASSFORM --- */}
           <AccordionItem value='fit'>
             <AccordionTrigger className='text-lg md:text-xl font-serif hover:no-underline hover:text-[#E07A5F]'>
               Passform
@@ -174,7 +175,6 @@ export function ProductDetailsAccordion() {
             </AccordionContent>
           </AccordionItem>
 
-          {/* --- VASKEANVISNING --- */}
           <AccordionItem value='care'>
             <AccordionTrigger className='text-lg md:text-xl font-serif hover:no-underline hover:text-[#E07A5F]'>
               Vedlikehold
@@ -212,46 +212,5 @@ export function ProductDetailsAccordion() {
         </Accordion>
       </div>
     </section>
-  )
-}
-
-function SpecRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className='flex justify-between md:justify-start gap-2 border-b border-[#2C2420]/10 pb-1 last:border-0'>
-      <span className='font-semibold text-[#2C2420] w-32 shrink-0'>
-        {label}:
-      </span>
-      <span className='text-[#2C2420]/80'>{value}</span>
-    </div>
-  )
-}
-
-function DetailBlock({ title, text }: { title: string; text: string }) {
-  return (
-    <li>
-      <h4 className='font-bold text-base mb-1 text-[#2C2420]'>{title}</h4>
-      <p className='text-[#2C2420]/80 leading-relaxed text-sm md:text-base'>
-        {text}
-      </p>
-    </li>
-  )
-}
-
-function UsageGroup({
-  title,
-  children
-}: {
-  title: string
-  children: React.ReactNode
-}) {
-  return (
-    <div>
-      <h4 className='font-serif text-lg text-[#E07A5F] mb-3 border-b border-[#E07A5F]/20 pb-1'>
-        {title}
-      </h4>
-      <ul className='list-disc list-inside space-y-1 text-[#2C2420]/80 text-sm'>
-        {children}
-      </ul>
-    </div>
   )
 }

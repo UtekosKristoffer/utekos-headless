@@ -5,10 +5,15 @@ import {
   AccordionItem,
   AccordionTrigger
 } from '@/components/ui/accordion'
+import { SizeFeature } from './SizeFeature'
+import { TableRow } from './TableRow'
 
 export function SizeGuideTable() {
   return (
-    <section className='w-full bg-[#1F2421] py-24 border-t border-[#F4F1EA]/5' id='size-guide'>
+    <section
+      className='w-full bg-[#1F2421] py-24 border-t border-[#F4F1EA]/5'
+      id='size-guide'
+    >
       <div className='max-w-5xl mx-auto px-6'>
         <div className='text-center mb-12'>
           <h3 className='font-serif text-3xl text-[#F4F1EA] mb-4'>
@@ -20,8 +25,6 @@ export function SizeGuideTable() {
             basert på hvor mye kokong-følelse du ønsker.
           </p>
         </div>
-
-        {/* Feature Icons - Disse forblir synlige */}
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 text-center'>
           <SizeFeature
             title='Snorstramming i livet'
@@ -36,8 +39,6 @@ export function SizeGuideTable() {
             desc='Åpne nedenfra for full bevegelsesfrihet, eller ovenfra for å slippe ut overskuddsvarme.'
           />
         </div>
-
-        {/* Accordion for selve tabellen */}
         <div className='max-w-3xl mx-auto'>
           <Accordion
             type='single'
@@ -110,29 +111,5 @@ export function SizeGuideTable() {
         </div>
       </div>
     </section>
-  )
-}
-
-function SizeFeature({ title, desc }: { title: string; desc: string }) {
-  return (
-    <div className='flex flex-col items-center'>
-      <div className='w-12 h-12 rounded-full bg-[#2C2420] border border-[#F4F1EA]/10 flex items-center justify-center mb-4 text-[#E07A5F]'>
-        <Ruler size={20} />
-      </div>
-      <h4 className='text-[#F4F1EA] font-medium mb-2'>{title}</h4>
-      <p className='text-sm text-[#F4F1EA]/60 leading-relaxed max-w-xs'>
-        {desc}
-      </p>
-    </div>
-  )
-}
-
-function TableRow({ label, m, l }: { label: string; m: string; l: string }) {
-  return (
-    <tr className='hover:bg-[#F4F1EA]/5 transition-colors'>
-      <td className='p-4 md:p-6 font-medium text-[#F4F1EA]/90'>{label}</td>
-      <td className='p-4 md:p-6'>{m}</td>
-      <td className='p-4 md:p-6'>{l}</td>
-    </tr>
   )
 }

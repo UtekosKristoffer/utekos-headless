@@ -2,63 +2,9 @@
 'use client'
 
 import Link from 'next/link'
-import {
-  ArrowRight,
-  Box,
-  Layers,
-  MapPin,
-  Truck,
-  Home,
-  Ruler
-} from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils/className'
-import type { Route } from 'next'
-
-interface NavLink {
-  label: string
-  href: Route
-  icon: React.ReactNode
-  description: string
-}
-
-const navLinks: NavLink[] = [
-  {
-    label: 'Forsiden',
-    href: '/' as Route,
-    icon: <Home className='w-6 h-6' />,
-    description: 'Hjem | Utekos.no'
-  },
-  {
-    label: 'Se alle produkter',
-    href: '/produkter' as Route,
-    icon: <Box className='w-6 h-6' />,
-    description: 'Utforsk kolleksjonen'
-  },
-  {
-    label: 'Teknologi og materialer',
-    href: '/handlehjelp/teknologi-materialer' as Route,
-    icon: <Layers className='w-6 h-6' />,
-    description: 'Hvorfor det virker'
-  },
-  {
-    label: 'Vår historie',
-    href: '/om-oss' as Route,
-    icon: <MapPin className='w-6 h-6' />,
-    description: 'Om Utekos'
-  },
-  {
-    label: 'Frakt og retur',
-    href: '/frakt-og-retur' as Route,
-    icon: <Truck className='w-6 h-6' />,
-    description: 'Trygg handel'
-  },
-  {
-    label: 'Størrelseguide',
-    href: '/handlehjelp/storrelsesguide' as Route,
-    icon: <Ruler className='w-6 h-6' />,
-    description: 'Finn din størrelse'
-  }
-]
+import { NavLinks } from './NavLinks'
 
 export function PreFooterNavigation() {
   return (
@@ -71,7 +17,7 @@ export function PreFooterNavigation() {
           <div className='h-1 w-20 bg-[#E07A5F] mx-auto rounded-full' />
         </div>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-          {navLinks.map((link, index) => (
+          {NavLinks.map((link, index) => (
             <Link
               key={link.href}
               href={link.href}
