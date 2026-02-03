@@ -25,11 +25,10 @@ export function NewProductInStoreNotice() {
       const sparkParticles = gsap.utils.toArray('.spark-particle')
       const content = contentRef.current
 
-      // --- SETUP INITIAL STATES ---
       gsap.set(logoBox, {
-        xPercent: -500, // Start way off screen
-        rotation: -15, // Lean forward ready to sprint
-        scaleX: 1.2, // Artificial "motion stretch"
+        xPercent: -500,
+        rotation: -15,
+        scaleX: 1.2,
         autoAlpha: 1
       })
       gsap.set(smokeParticles, { scale: 0, opacity: 0 })
@@ -39,36 +38,32 @@ export function NewProductInStoreNotice() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 70%', // Start litt tidligere så man ser det komme
+          start: 'top 70%',
           toggleActions: 'play none none reverse'
         }
       })
 
-      // --- PHASE 1: THE APPROACH (Maximum Velocity) ---
       tl.to(logoBox, {
-        xPercent: 30, // Overshoot center significantly (sliding past)
-        rotation: 5, // Lean into speed
+        xPercent: 30,
+        rotation: 5,
         duration: 0.8,
-        ease: 'power4.in' // Violent acceleration
+        ease: 'power4.in'
       })
 
-      // --- PHASE 2: THE IMPACT BRAKE (The "Oh sh*t" moment) ---
       tl.addLabel('brake')
 
-      // 2a. The physical slide and tilt
       tl.to(
         logoBox,
         {
-          xPercent: 15, // Still sliding forward while braking
-          rotation: -25, // Violent tilt back (nose dive)
-          scaleX: 0.9, // "Squash" on impact
+          xPercent: 15,
+          rotation: -25,
+          scaleX: 0.9,
           duration: 0.3,
-          ease: 'power3.out' // Rapid deceleration
+          ease: 'power3.out'
         },
         'brake'
       )
 
-      // 2b. Camera Rumble Effect
       tl.add(() => {
         gsap.fromTo(
           containerRef.current,
@@ -77,40 +72,37 @@ export function NewProductInStoreNotice() {
         )
       }, 'brake')
 
-      // 2c. Smoke Explosion (Big, puffy, lingering)
       tl.to(
         smokeParticles,
         {
-          scale: 'random(2.5, 4)', // Huge expansion
-          x: 'random(-100, -20)', // Drift backward along momentum
-          y: 'random(-50, 0)', // Rise up like smoke
-          opacity: 'random(0.4, 0.8)', // Visible puff
-          duration: 0.2, // Explode out instantly
+          scale: 'random(2.5, 4)',
+          x: 'random(-100, -20)',
+          y: 'random(-50, 0)',
+          opacity: 'random(0.4, 0.8)',
+          duration: 0.2,
           stagger: { amount: 0.1, from: 'center' },
           ease: 'expo.out'
         },
         'brake'
       )
 
-      // Smoke dissipation (slow fade out after explosion)
       tl.to(
         smokeParticles,
         {
           opacity: 0,
-          scale: '+=1', // Continue expanding slowly while fading
+          scale: '+=1',
           duration: 'random(1.5, 2.5)',
           ease: 'power1.out'
         },
         'brake+=0.2'
       )
 
-      // 2d. Sparks Flying (Fast, bright, short-lived)
       tl.to(
         sparkParticles,
         {
           scale: 'random(0.5, 1)',
-          x: 'random(20, 100)', // Shoot forward from friction
-          y: 'random(10, 50)', // Fall down towards "ground"
+          x: 'random(20, 100)',
+          y: 'random(10, 50)',
           opacity: 1,
           duration: 0.3,
           stagger: { amount: 0.1, from: 'random' },
@@ -127,18 +119,14 @@ export function NewProductInStoreNotice() {
         'brake+=0.3'
       )
 
-      // --- PHASE 3: THE RECOIL & SETTLE (Heavy Physics) ---
-      // Snap back from the overshoot position to the center
       tl.to(logoBox, {
         xPercent: 0,
         rotation: 0,
-        scaleX: 1, // Back to normal shape
-        duration: 1.5,
-        // Very heavy, wobbly elastic ease to simulate heavy weight settling
+        scaleX: 1,
+        duration: 1.2,
         ease: 'elastic.out(1, 0.5)'
       })
 
-      // --- PHASE 4: REVEAL TEXT CONTENT ---
       tl.to(
         content,
         {
@@ -147,8 +135,8 @@ export function NewProductInStoreNotice() {
           duration: 0.8,
           ease: 'power2.out'
         },
-        '-=1'
-      ) // Start revealing before settle finishes
+        '-=1.1'
+      )
     },
     { scope: containerRef }
   )
@@ -160,7 +148,6 @@ export function NewProductInStoreNotice() {
           ref={containerRef}
           className='relative overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900/80 p-10 shadow-2xl'
         >
-          {/* Background Glow */}
           <div
             className='pointer-events-none absolute left-1/2 top-0 -z-20 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 opacity-20 blur-[100px]'
             style={{
