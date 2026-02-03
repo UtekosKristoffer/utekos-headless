@@ -294,11 +294,6 @@ export function PurchaseClient({
                   </button>
                 ))}
               </div>
-              <p className='text-sm text-[#2C2420] mt-4'>
-                {selectedModel === 'techdown' ?
-                  '*Liten (Kroppsnær), Medium (Allsidig), Stor (Romslig)'
-                : '*Medium (opp til 180cm), Large (over 180cm)'}
-              </p>
             </div>
           </div>
         </div>
