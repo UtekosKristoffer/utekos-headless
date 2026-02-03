@@ -1,4 +1,4 @@
-import { VIDEO_THUMBNAIL_URL, VIDEO_URL } from '@/app/FrontPageJsonLd'
+import { VIDEO_THUMBNAIL_URL, VIDEO_URL } from '@/api/constants'
 
 export default function TensorPixVideoPage() {
   return (
