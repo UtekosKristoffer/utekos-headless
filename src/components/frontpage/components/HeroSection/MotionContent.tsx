@@ -90,12 +90,11 @@ export function MotionContent() {
 
   return (
     <div ref={container} className='mb-8 text-center'>
-      {/* Badge Section */}
       <div className='gsap-badge-container invisible relative mx-auto mb-6 inline-flex h-10 items-center justify-center'>
         <div className='gsap-badge-bg absolute inset-0 rounded-full border border-sky-800/30 bg-sky-900/10' />
         <div className='gsap-badge-content relative flex items-center gap-2 px-4'>
-          <Award className='h-4 w-4 text-slate-600' />
-          <span className='bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text text-sm font-medium text-transparent'>
+          <Award className='h-4 w-4 text-sky-400' />
+          <span className='bg-gradient-to-r from-sky-200 via-white to-sky-200 bg-clip-text text-sm font-medium text-transparent'>
             Funksjonell varme - siden 2020
           </span>
         </div>
@@ -117,7 +116,6 @@ export function MotionContent() {
           ))}
         </span>
 
-        {/* Subtitle Wrapper with overflow-hidden for slide-up effect */}
         <div className='overflow-hidden'>
           <span className='gsap-subtitle mt-2 block bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text text-transparent will-change-transform'>
             Skreddersy varmen
@@ -134,7 +132,7 @@ export function MotionContent() {
 
       <div
         data-nosnippet
-        className='gsap-chevron invisible hidden justify-center md:flex'
+        className='gsap-chevron invisible n justify-center md:flex'
       >
         <ChevronDownSection />
       </div>
