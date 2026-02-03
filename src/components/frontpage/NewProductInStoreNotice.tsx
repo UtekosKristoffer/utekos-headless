@@ -9,6 +9,10 @@ import { INTERSPORT_LAKSEVAG_MAPS_URL } from '@/constants/maps'
 import { useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger' // 1. Import ScrollTrigger
+
+// 2. Registrer plugin
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 export function NewProductInStoreNotice() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -17,7 +21,6 @@ export function NewProductInStoreNotice() {
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({ delay: 0.5 })
       const logo = logoRef.current
       const smokeParticles = gsap.utils.toArray('.smoke-particle')
       const content = contentRef.current
@@ -27,12 +30,21 @@ export function NewProductInStoreNotice() {
       gsap.set(smokeParticles, { scale: 0, opacity: 0.8 })
       gsap.set(content, { y: 20, autoAlpha: 0 })
 
+      // 3. Konfigurer timeline med ScrollTrigger
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current, // Elementet som trigger animasjonen
+          start: 'top 75%', // Starter når toppen av elementet er 75% ned på skjermen
+          toggleActions: 'play none none reverse' // Spiller når man scroller ned, reverserer når man scroller opp
+        }
+      })
+
       // --- Phase 1: The Approach (Shooting in) ---
       tl.to(logo, {
-        xPercent: 20, // Overshoot center slightly
-        rotation: 5, // Lean into speed
+        xPercent: 20,
+        rotation: 5,
         duration: 1,
-        ease: 'power3.in' // Accelerate
+        ease: 'power3.in'
       })
 
       // --- Phase 2: The Brake & Smoke Effect ---
@@ -43,9 +55,9 @@ export function NewProductInStoreNotice() {
         logo,
         {
           xPercent: 5,
-          rotation: -8, // Violent tilt back on braking
+          rotation: -8,
           duration: 0.25,
-          ease: 'power4.out' // Hard deceleration
+          ease: 'power4.out'
         },
         'brake'
       )
@@ -54,15 +66,15 @@ export function NewProductInStoreNotice() {
       tl.to(
         smokeParticles,
         {
-          scale: 'random(2, 3)', // Expand greatly
-          x: 'random(-150, -50)', // Drift backward (left) away from momentum
-          y: 'random(-30, 30)', // Slight vertical spread
-          opacity: 0, // Fade out
+          scale: 'random(2, 3)',
+          x: 'random(-150, -50)',
+          y: 'random(-30, 30)',
+          opacity: 0,
           duration: 'random(1, 1.8)',
-          stagger: { amount: 0.2, from: 'end' }, // Randomize timings slightly
+          stagger: { amount: 0.2, from: 'end' },
           ease: 'power2.out'
         },
-        'brake-=0.1' // Start smoke just before the hardest stop finishes
+        'brake-=0.1'
       )
 
       // --- Phase 3: The Settle (Falling into place) ---
@@ -70,7 +82,6 @@ export function NewProductInStoreNotice() {
         xPercent: 0,
         rotation: 0,
         duration: 1.2,
-        // Heavy elastic ease for a solid "thud" into place
         ease: 'elastic.out(1, 0.75)'
       })
 
@@ -83,7 +94,7 @@ export function NewProductInStoreNotice() {
           duration: 0.8,
           ease: 'power2.out'
         },
-        '-=0.8' // Overlap with the settle animation
+        '-=0.8'
       )
     },
     { scope: containerRef }
