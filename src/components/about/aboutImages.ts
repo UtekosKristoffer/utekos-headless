@@ -8,12 +8,12 @@ export const aboutImages = [
     alt: 'En kvinne iført Utekos-plagg sitter terrassen i snørike omgivelser.'
   },
   {
-    src: '/ykk.webp',
-    alt: 'Nærbilde av materialet og sømmene på et Utekos-produkt.'
+    src: '/webp/classic-couple-1080.webp',
+    alt: 'En familie samlet rundt en bålpanne, alle kledd i Utekos.'
   },
   {
-    src: '/webp/classic-gemini-woman-1080.webp',
-    alt: 'En familie samlet rundt en bålpanne, alle kledd i Utekos.'
+    src: '/ykk.webp',
+    alt: 'Nærbilde av materialet og sømmene på et Utekos-produkt.'
   },
   {
     src: '/webp/classic-coffee-1080.webp',
