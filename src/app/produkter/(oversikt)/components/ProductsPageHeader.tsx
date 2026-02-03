@@ -124,12 +124,12 @@ export function ProductsPageHeader() {
           </div>
         </div>
 
-        <h1 className='mx-auto max-w-5xl text-5xl font-bold tracking-tight text-white sm:text-6xl md:text-7xl perspective-1000'>
+        <h1 className='mx-auto max-w-5xl text-3xl font-bold tracking-tight text-white sm:text-5xl md:text-7xl perspective-1000'>
           <span className='block overflow-hidden'>
             <span className='gsap-title-line block'>Kolleksjonen for</span>
           </span>
           <span className='block overflow-hidden pt-2'>
-            <span className='gsap-title-line block bg-gradient-to-r from-sky-300 via-white to-sky-300 bg-clip-text text-transparent bg-[length:200%_auto] animate-shine'>
+            <span className='gsap-title-line block bg-gradient-to-r from-sky-300 via-white to-sky-300 bg-clip-text text-transparent bg-[length:200%_auto] animate-shine leading-tight py-1'>
               kompromissløs komfort.
             </span>
           </span>
