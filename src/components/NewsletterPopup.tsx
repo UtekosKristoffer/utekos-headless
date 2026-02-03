@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unescaped-entities */
-// Path: src/components/NewsletterPopup.tsx
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
@@ -84,17 +83,20 @@ export function NewsletterPopup() {
     setIsSubmitting(false)
 
     if (result.status === 'success') {
-      // Sporing legges til her ved suksess
       trackNewsletterConversion(email, 'popup')
 
-      // --- PINTEREST TRACKING (NY) ---
       if (typeof window !== 'undefined' && window.pintrk) {
         window.pintrk?.('track', 'Lead', {
           lead_type: 'Newsletter',
           event_source: 'popup'
         })
       }
-      // -------------------------------
+
+      if (typeof window !== 'undefined' && window.ttq) {
+        window.ttq.track('CompleteRegistration', {
+          content_name: 'Newsletter'
+        })
+      }
 
       setIsOpen(false)
       localStorage.setItem('utekos_newsletter_v5', 'true')

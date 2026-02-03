@@ -1,4 +1,3 @@
-// Path: src/lib/actions/subscribeToNewsLetters.ts
 'use server'
 
 import { z } from 'zod'
@@ -6,9 +5,10 @@ import { headers, cookies } from 'next/headers'
 import { hashSnapData } from '@/lib/snapchat/hashSnapData'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 
-// PINTEREST CONFIG
 const PINTEREST_TOKEN = process.env.PINTEREST_ACCESS_TOKEN
 const PINTEREST_AD_ACCOUNT_ID = process.env.PINTEREST_AD_ACCOUNT_ID
+const TIKTOK_ACCESS_TOKEN = process.env.TIKTOK_ACCESS_TOKEN
+const TIKTOK_PIXEL_ID = process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID
 
 export type ActionState = {
   status: 'success' | 'error' | 'idle'
@@ -127,73 +127,132 @@ export async function subscribeToNewsletter(
   }
 }
 
-// --- TRACKING LEAD (CAPI) ---
 async function trackLeadEvent(email: string) {
-  if (!PINTEREST_TOKEN || !PINTEREST_AD_ACCOUNT_ID) return
+  const headersList = await headers()
+  const cookieStore = await cookies()
 
-  try {
-    const headersList = await headers()
-    const cookieStore = await cookies()
+  const forwardedFor = headersList.get('x-forwarded-for')
+  const userAgent = headersList.get('user-agent') || ''
+  const referer = headersList.get('referer') || 'https://utekos.no'
 
-    const forwardedFor = headersList.get('x-forwarded-for')
-    const userAgent = headersList.get('user-agent') || ''
-    const referer = headersList.get('referer') || 'https://utekos.no'
-
-    let clientIp = '0.0.0.0'
-    if (forwardedFor) {
-      const firstIp = forwardedFor.split(',')[0]
-      if (firstIp) {
-        clientIp = firstIp.trim()
-      }
+  let clientIp = '0.0.0.0'
+  if (forwardedFor) {
+    const firstIp = forwardedFor.split(',')[0]
+    if (firstIp) {
+      clientIp = firstIp.trim()
     }
+  }
 
-    const clickId = cookieStore.get('_epik')?.value
-    const eventId = `lead_${Date.now()}_${Math.random().toString(36).substring(7)}`
+  const clickId = cookieStore.get('_epik')?.value
+  const ttclid = cookieStore.get('ute_ttclid')?.value
+  const ttp = cookieStore.get('_ttp')?.value
+  const eventId = `lead_${Date.now()}_${Math.random().toString(36).substring(7)}`
 
-    const pinPayload = {
-      event_name: 'lead',
-      action_source: 'web',
-      event_time: Math.floor(Date.now() / 1000),
-      event_id: eventId,
-      event_source_url: referer,
-      user_data: {
-        em: [hashSnapData(email)],
-        client_ip_address: clientIp,
-        client_user_agent: userAgent,
-        click_id: clickId || undefined
-      },
-      custom_data: {
-        content_name: 'Newsletter'
-      }
-    }
+  const sendPinterestLead = async () => {
+    if (!PINTEREST_TOKEN || !PINTEREST_AD_ACCOUNT_ID) return
 
-    const res = await fetch(
-      `https://api.pinterest.com/v5/ad_accounts/${PINTEREST_AD_ACCOUNT_ID}/events`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${PINTEREST_TOKEN}`
+    try {
+      const pinPayload = {
+        event_name: 'lead',
+        action_source: 'web',
+        event_time: Math.floor(Date.now() / 1000),
+        event_id: eventId,
+        event_source_url: referer,
+        user_data: {
+          em: [hashSnapData(email)],
+          client_ip_address: clientIp,
+          client_user_agent: userAgent,
+          click_id: clickId || undefined
         },
-        body: JSON.stringify({ data: [pinPayload] })
+        custom_data: {
+          content_name: 'Newsletter'
+        }
       }
-    )
 
-    if (res.ok) {
-      await logToAppLogs(
-        'INFO',
-        '❤️ Pinterest CAPI: Lead Sent',
-        { eventId },
+      const res = await fetch(
+        `https://api.pinterest.com/v5/ad_accounts/${PINTEREST_AD_ACCOUNT_ID}/events`,
         {
-          clickId: clickId ? 'Found' : 'Missing',
-          source: 'Newsletter Action'
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${PINTEREST_TOKEN}`
+          },
+          body: JSON.stringify({ data: [pinPayload] })
         }
       )
-    } else {
-      const errText = await res.text()
-      console.error('[Pinterest CAPI] Lead Failed:', errText)
+
+      if (res.ok) {
+        await logToAppLogs(
+          'INFO',
+          '❤️ Pinterest CAPI: Lead Sent',
+          { eventId },
+          {
+            clickId: clickId ? 'Found' : 'Missing',
+            source: 'Newsletter Action'
+          }
+        )
+      } else {
+        const errText = await res.text()
+        console.error('[Pinterest CAPI] Lead Failed:', errText)
+      }
+    } catch (e) {
+      console.error('[Pinterest CAPI] Error:', e)
     }
-  } catch (e) {
-    console.error('[Tracking] Error sending lead event:', e)
   }
+
+  const sendTikTokLead = async () => {
+    if (!TIKTOK_ACCESS_TOKEN || !TIKTOK_PIXEL_ID) return
+
+    try {
+      const payload = {
+        event_source: 'web',
+        event_source_id: TIKTOK_PIXEL_ID,
+        data: [
+          {
+            event: 'CompleteRegistration',
+            event_id: eventId,
+            event_time: Math.floor(Date.now() / 1000),
+            user: {
+              ttclid: ttclid,
+              ttp: ttp,
+              email: hashSnapData(email),
+              ip: clientIp,
+              user_agent: userAgent
+            },
+            page: {
+              url: referer
+            }
+          }
+        ]
+      }
+
+      const res = await fetch(
+        'https://business-api.tiktok.com/open_api/v1.3/event/track/',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Token': TIKTOK_ACCESS_TOKEN
+          },
+          body: JSON.stringify(payload)
+        }
+      )
+
+      const data = await res.json()
+      if (data.code === 0) {
+        await logToAppLogs(
+          'INFO',
+          '🎵 TikTok CAPI: Lead Sent',
+          { eventId },
+          { ttclid: ttclid ? 'Found' : 'Missing' }
+        )
+      } else {
+        console.error('[TikTok CAPI] Error:', JSON.stringify(data))
+      }
+    } catch (e) {
+      console.error('[TikTok CAPI] Exception:', e)
+    }
+  }
+
+  await Promise.all([sendPinterestLead(), sendTikTokLead()])
 }
