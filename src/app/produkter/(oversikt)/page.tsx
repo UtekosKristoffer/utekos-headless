@@ -90,7 +90,6 @@ const ProductsPage = async () => {
 
         <Activity>
           <section className='mb-24'>
-            {/* Ny komponent erstatter den gamle div-blokken */}
             <CreatedForSection />
 
             <HydrationBoundary state={dehydrate(queryClient)}>
