@@ -3,7 +3,7 @@ import { VideoSkeleton } from '@/app/produkter/(oversikt)/components/VideoSkelet
 import { ProductVideoSection } from '@/app/produkter/(oversikt)/components/ProductVideoSection'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { getProduct } from '@/api/lib/products/getProduct'
-import { FindInStoreSection } from '@/components/frontpage/FindStoreSection'
+import { IntersportSection } from '@/app/om-oss/components/IntersportSection'
 import { QueryClient } from '@tanstack/react-query'
 import {
   allProductsOptions,
@@ -158,7 +158,7 @@ export default async function ProductPage({
         <AsyncProductContent handle={handle} />
       </Suspense>
 
-      <FindInStoreSection />
+      <IntersportSection />
 
       <Suspense fallback={<VideoSkeleton />}>
         <ProductVideoSection />

@@ -1,4 +1,5 @@
-// Path: src/components/sections/FindInStoreSection.tsx
+// Path: src/app/om-oss/components/IntersportSection.tsx
+
 'use client'
 
 import { useRef, useState } from 'react'
