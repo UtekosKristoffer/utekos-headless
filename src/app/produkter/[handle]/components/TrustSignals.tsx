@@ -19,7 +19,8 @@ export function TrustSignals() {
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.5 })
+      // Fjernet repeatDelay (var 0.5) for å unngå pause mellom syklusene
+      const tl = gsap.timeline({ repeat: -1, repeatDelay: 0 })
 
       const signals = gsap.utils.toArray<HTMLElement>('.gsap-signal')
       const logos = gsap.utils.toArray<HTMLElement>('.gsap-logo')
@@ -31,7 +32,7 @@ export function TrustSignals() {
           backgroundColor: 'rgba(34, 211, 238, 0.08)',
           borderColor: 'rgba(34, 211, 238, 0.2)',
           scale: 1.02,
-          duration: 0.9,
+          duration: 0.6, // Redusert fra 0.9 til 0.6 for høyere tempo
           ease: 'sine.inOut',
           yoyo: true,
           repeat: 1
@@ -45,7 +46,7 @@ export function TrustSignals() {
           scale: 1.2,
           opacity: 1,
           filter: 'brightness(1.2)',
-          duration: 0.6,
+          duration: 0.4, // Redusert fra 0.6 til 0.4 for kjappere flyt
           ease: 'power2.out',
           yoyo: true,
           repeat: 1
