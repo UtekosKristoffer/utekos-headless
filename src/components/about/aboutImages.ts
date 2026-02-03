@@ -4,6 +4,10 @@ export const aboutImages = [
     alt: 'To personer i Utekos-plagg nyter utsikten fra en fjelltopp.'
   },
   {
+    src: '/webp/classic-gemini-woman-1080.webp',
+    alt: 'En kvinne iført Utekos-plagg sitter terrassen i snørike omgivelser.'
+  },
+  {
     src: '/ykk.webp',
     alt: 'Nærbilde av materialet og sømmene på et Utekos-produkt.'
   },
