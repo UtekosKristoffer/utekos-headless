@@ -1,5 +1,3 @@
-// Path: src/components/analytics/ProductViewTracking.tsx
-
 'use client'
 
 import { useEffect, useRef } from 'react'
