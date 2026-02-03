@@ -17,6 +17,8 @@ import { ProductVideoSection } from './components/ProductVideoSection'
 import { TechDownFeatureSection } from './components/TechDownFeatureSection/TechDownFeatureSection'
 import { connection } from 'next/server'
 import { MikrofiberSection } from './components/MicrofiberSection/MikrofiberSection'
+import { CreatedForSection } from './components/CreatedForSection'
+
 export const metadata: Metadata = {
   title: 'Kolleksjon: Komfortplagg for hytteliv & utekos | Utekos',
   description:
@@ -88,24 +90,8 @@ const ProductsPage = async () => {
 
         <Activity>
           <section className='mb-24'>
-            <div className='relative mb-12 w-full overflow-hidden border-y border-white/5 bg-neutral-950 py-20 text-center md:mb-20 md:py-24'>
-              <div className='absolute inset-0 -z-10'>
-                <div className='absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]' />
-                <div className='absolute left-1/2 top-1/2 h-[400px] w-full max-w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-25'>
-                  <div className='h-full w-full bg-gradient-to-r from-sky-500/10 via-sky-400/20 to-sky-500/10 blur-[80px]' />
-                </div>
-              </div>
-
-              <div className='relative z-10 container mx-auto px-4'>
-                <h2 className='text-balance text-4xl font-bold tracking-tight text-white sm:text-5xl'>
-                  Skapt for din Utekos
-                </h2>
-                <p className='mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-neutral-400'>
-                  Våre komfortplagg er designet for å holde deg varm, slik at du
-                  kan nyte de gode øyeblikkene lenger.
-                </p>
-              </div>
-            </div>
+            {/* Ny komponent erstatter den gamle div-blokken */}
+            <CreatedForSection />
 
             <HydrationBoundary state={dehydrate(queryClient)}>
               <Suspense fallback={<ProductGridSkeleton />}>
