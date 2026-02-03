@@ -17,6 +17,7 @@ import ClassicGeminiCouple from '@public/webp/classic-couple-1080.webp'
 import TechDownKateKikkert from '@public/webp/techdown-kate-kikkert-1080.webp'
 import ClassicGeminiWoman from '@public/webp/classic-gemini-woman-1080.webp'
 import TechDownMonica from '@public/webp/techdown-monica-1080.webp'
+import TechDownKristoffer from '@public/webp/techdown-kristoffer-1080.webp'
 
 const images = [
   {
@@ -34,6 +35,10 @@ const images = [
   {
     src: TechDownMonica,
     alt: 'En fornøyd kvinne som bruker Utekos TechDown ved bålbannen.'
+  },
+  {
+    src: TechDownKristoffer,
+    alt: 'En fornøyd herre som bruker Utekos TechDown på terrassen.'
   }
 ]
 
