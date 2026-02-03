@@ -493,7 +493,7 @@ export async function POST(request: Request) {
 
     await logToAppLogs(
       'INFO',
-      '跳鴫跳 CAPI 跳鴫跳 Purchase Sent',
+      '💵💵💵💵💵💵💵 CAPI Purchase Sent💵💵💵💵💵💵💵',
       {
         fbtrace_id: response.fbtrace_id,
         events_received: response.events_received,

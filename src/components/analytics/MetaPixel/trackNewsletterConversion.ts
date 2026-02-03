@@ -14,8 +14,6 @@ export async function trackNewsletterConversion(
   const externalId = getOrSetExternalId()
   const fbc = getCookie('_fbc')
   const fbp = getCookie('_fbp')
-
-  // 1. Meta Pixel (Client-side)
   if (typeof window !== 'undefined' && window.fbq) {
     window.fbq(
       'track',
@@ -29,7 +27,6 @@ export async function trackNewsletterConversion(
     )
   }
 
-  // 2. Meta CAPI (Server-side)
   const payload: MetaEventPayload = {
     eventName: 'Lead',
     eventId,

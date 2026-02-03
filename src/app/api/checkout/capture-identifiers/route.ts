@@ -111,7 +111,7 @@ export async function POST(req: NextRequest) {
 
   await logToAppLogs(
     'INFO',
-    'Capture Identifiers',
+    '📩📩📩📩📩📩📩📩📩📩 Capture Identifiers 📩📩📩📩📩📩📩📩📩📩',
     {
       cartId: body.cartId,
       fbp: userDataToSave.fbp,
