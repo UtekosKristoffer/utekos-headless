@@ -30,12 +30,14 @@ export function ProductsPageHeader() {
     () => {
       const tl = gsap.timeline()
 
+      // 1. Scene setup
       tl.fromTo(
         '.gsap-grid',
         { opacity: 0, scale: 1.1 },
         { opacity: 1, scale: 1, duration: 2, ease: 'power3.out' }
       )
 
+      // 2. Badge & Title
       tl.fromTo(
         '.gsap-badge',
         { y: -20, autoAlpha: 0 },
@@ -57,6 +59,7 @@ export function ProductsPageHeader() {
         '-=0.6'
       )
 
+      // 3. Description Fade In
       tl.fromTo(
         '.gsap-desc',
         { y: 20, autoAlpha: 0 },
@@ -64,6 +67,22 @@ export function ProductsPageHeader() {
         '-=0.8'
       )
 
+      // 4. Highlight Animations (Strek & Marker)
+      tl.fromTo(
+        '.gsap-underline',
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.8, ease: 'expo.out' },
+        '-=0.6'
+      )
+
+      tl.fromTo(
+        '.gsap-highlight',
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.6, ease: 'circ.out' },
+        '-=0.6'
+      )
+
+      // 5. Stars Loop
       gsap.to('.gsap-star', {
         y: -20,
         opacity: 0.4,
@@ -136,8 +155,21 @@ export function ProductsPageHeader() {
         </h1>
 
         <p className='gsap-desc opacity-0 mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-neutral-400 md:text-xl'>
-          Vi har redefinert utekosen gjennom teknologi og funksjonalitet.
-          Utforsk vår kolleksjon og skreddersy din egen varme.
+          Vi har{' '}
+          <span className='relative inline-block text-white font-medium'>
+            redefinert
+            <span className='gsap-underline absolute left-0 bottom-0 h-[2px] w-full bg-sky-500 origin-left' />
+          </span>{' '}
+          utekosen gjennom teknologi og funksjonalitet.
+          <br className='hidden md:block' />
+          Utforsk vår kolleksjon og{' '}
+          <span className='relative inline-block px-1'>
+            <span className='gsap-highlight absolute inset-0 -skew-x-6 rounded bg-sky-500/20 origin-left' />
+            <span className='relative z-10 font-medium text-sky-300'>
+              skreddersy
+            </span>
+          </span>{' '}
+          din egen varme.
         </p>
       </div>
 
