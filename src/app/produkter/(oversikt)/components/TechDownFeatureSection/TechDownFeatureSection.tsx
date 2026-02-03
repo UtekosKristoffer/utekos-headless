@@ -93,9 +93,12 @@ export const TechDownFeatureSection = () => {
       <div className='container mx-auto grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20'>
         <div className='gsap-visual w-full opacity-0'>
           <div className='relative rounded-2xl border border-white/5 bg-white/[0.02] p-2 backdrop-blur-sm shadow-2xl'>
-            {/* Offer Tag floating on image */}
-            <div className='absolute -top-4 -right-4 z-20 rotate-3'>
-              <div className='flex flex-col items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-sky-600 p-4 text-white shadow-lg shadow-sky-900/40 w-24 h-24'>
+            {/* BADGE FIX: 
+                - Mobil (default): `top-4 right-4` (Plassert inni kortet så den ikke kuttes)
+                - Desktop (md): `-top-4 -right-4` (Pop-out effekt)
+            */}
+            <div className='absolute top-4 right-4 z-20 rotate-6 md:-top-4 md:-right-4 md:rotate-3'>
+              <div className='flex h-24 w-24 flex-col items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-sky-600 p-4 text-white shadow-lg shadow-sky-900/40'>
                 <span className='text-xs font-bold uppercase'>Kun</span>
                 <span className='text-xl font-bold tracking-tighter'>
                   1790,-
