@@ -6,6 +6,7 @@ import { TechDownComparison } from '@/app/magasinet/utekos-techdown/TechDownComp
 import { TechDownInfographic } from '@/app/magasinet/utekos-techdown/TechDownInfoGraphic'
 import { TechDownUseCases } from '@/app/magasinet/utekos-techdown/TechDownUseCases'
 import { TechDownCTA } from '@/app/magasinet/utekos-techdown/TechDownCTA'
+import { TechDownPerfectFor } from '@/app/magasinet/utekos-techdown/TechDownPerfectFor'
 import { Activity } from 'react'
 
 export function TechDownArticle() {
@@ -47,27 +48,20 @@ export function TechDownArticle() {
           </p>
         </section>
       </Activity>
-      {/* Features Grid */}
       <Activity>
         <TechDownFeatures />
       </Activity>
-
-      {/* Technology Infographic */}
       <Activity>
         <TechDownInfographic />
       </Activity>
 
-      {/* Use Cases Section */}
       <Activity>
         <TechDownUseCases />
       </Activity>
-
-      {/* Comparison Section */}
       <Activity>
         <TechDownComparison />
       </Activity>
 
-      {/* Image Section */}
       <Activity>
         <section className='relative w-max-7xl size-full mx-auto mb-0 mt-16'>
           <Image
@@ -93,34 +87,10 @@ export function TechDownArticle() {
           </div>
         </div>
       </Activity>
-      {/* Perfect For Section */}
       <Activity>
-        <section className='max-w-4xl mx-auto px-6 pt-4 pb-16'>
-          <h2 className='text-3xl font-light mb-8'>Perfekt for hyttekosen</h2>
-          <p className='text-gray-300 leading-relaxed mb-8'>
-            TechDown™ har selvfølgelig vår anerkjente 3-i-1-funksjon. Fra
-            morgenkaffen på terrassen til kveldskosen rundt bålet – ett plagg,
-            uendelige muligheter for komfort.
-          </p>
-
-          {/* Livsnyter Tips */}
-          <div className='border-l-4 border-yellow-500 bg-yellow-500/10 p-6 rounded-r-lg'>
-            <div className='flex items-center gap-3 mb-3'>
-              <span className='text-2xl'>✨</span>
-              <h3 className='text-lg font-semibold text-yellow-400'>
-                Livsnyter-tips:
-              </h3>
-            </div>
-            <p className='text-gray-300'>
-              Hold alltid en TechDown™ hengende i båten eller bobilen. Den
-              tåler fuktighet bedre og er perfekt når kveldene blir kjølige til
-              sjøs!
-            </p>
-          </div>
-        </section>
+        <TechDownPerfectFor />
       </Activity>
 
-      {/* CTA Section */}
       <Activity>
         <TechDownCTA />
       </Activity>

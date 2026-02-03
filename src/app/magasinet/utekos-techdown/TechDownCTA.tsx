@@ -1,90 +1,138 @@
+'use client'
+
+import { useRef } from 'react'
 import Link from 'next/link'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ArrowRight, PartyPopper } from 'lucide-react'
+
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 export function TechDownCTA() {
+  const containerRef = useRef<HTMLElement>(null)
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 75%',
+          toggleActions: 'play none none reverse'
+        }
+      })
+
+      tl.fromTo(
+        '.gsap-badge',
+        { scale: 0, autoAlpha: 0 },
+        { scale: 1, autoAlpha: 1, duration: 0.6, ease: 'back.out(1.7)' }
+      )
+
+      tl.fromTo(
+        '.gsap-title',
+        { y: 30, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.8, ease: 'power2.out' },
+        '-=0.4'
+      )
+
+      tl.fromTo(
+        '.gsap-desc',
+        { y: 20, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.8, ease: 'power2.out' },
+        '-=0.6'
+      )
+
+      tl.fromTo(
+        '.gsap-button',
+        { y: 20, autoAlpha: 0 },
+        { 
+          y: 0, 
+          autoAlpha: 1, 
+          duration: 0.6, 
+          stagger: 0.1, 
+          ease: 'back.out(1.2)' 
+        },
+        '-=0.4'
+      )
+
+      tl.fromTo(
+        '.gsap-stat-item',
+        { y: 20, autoAlpha: 0 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'power2.out'
+        },
+        '-=0.2'
+      )
+    },
+    { scope: containerRef }
+  )
+
   return (
-    <section className='pb-24 pt-6 px-6'>
-      <div className='max-w-4xl mx-auto text-center'>
-        {/* Badge */}
-        <div
-          className='inline-flex items-center gap-2 bg-yellow-500/10 
-                      border border-yellow-500/30 rounded-full px-4 py-2 mb-8'
-        >
-          <span className='text-yellow-400 text-sm'>🎉</span>
-          <span className='text-yellow-400 text-sm uppercase tracking-wider'>
+    <section ref={containerRef} className='relative px-6 pb-24 pt-12 overflow-hidden'>
+      <div className='absolute left-1/2 top-1/2 -z-10 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 blur-[120px]' />
+
+      <div className='mx-auto max-w-4xl text-center'>
+        <div className='gsap-badge mb-8 inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-4 py-2 opacity-0'>
+          <PartyPopper className='h-4 w-4 text-yellow-400' />
+          <span className='text-sm font-bold uppercase tracking-wider text-yellow-400'>
             Lansering
           </span>
         </div>
 
-        {/* Heading */}
-        <h2 className='text-4xl font-light mb-6'>
-          Opplev den nye standarden for komfort
+        <h2 className='gsap-title mb-6 text-4xl font-light text-white opacity-0 md:text-5xl'>
+          Opplev den <span className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500">nye standarden</span> for komfort
         </h2>
 
-        {/* Description */}
-        <p className='text-xl text-gray-400 mb-12 max-w-2xl mx-auto'>
+        <p className='gsap-desc mx-auto mb-12 max-w-2xl text-xl text-gray-400 opacity-0'>
           Utekos TechDown™ er nå tilgjengelig. Bli med tusenvis av nordmenn som
           har forlenget utesesongen.
         </p>
 
-        {/* CTA Buttons */}
-        <div className='flex flex-col sm:flex-row gap-4 justify-center'>
+        <div className='flex flex-col justify-center gap-4 sm:flex-row'>
           <Link
             href='/produkter/utekos-techdown'
-            className='inline-flex items-center justify-center px-8 py-4 
-                     bg-white text-black font-medium rounded-lg
-                     hover:bg-gray-100 transition-colors duration-200'
+            className='gsap-button group inline-flex items-center justify-center rounded-full bg-white px-8 py-4 font-medium text-black transition-all duration-200 hover:bg-gray-100 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] opacity-0'
           >
             Utforsk TechDown™
-            <svg
-              className='ml-2 w-5 h-5'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M9 5l7 7-7 7'
-              />
-            </svg>
+            <ArrowRight className='ml-2 h-5 w-5 transition-transform group-hover:translate-x-1' />
           </Link>
 
           <Link
             href='/produkter'
-            className='inline-flex items-center justify-center px-8 py-4 
-                     border border-gray-700 text-white font-medium rounded-lg
-                     hover:bg-gray-900 transition-colors duration-200'
+            className='gsap-button inline-flex items-center justify-center rounded-full border border-gray-700 px-8 py-4 font-medium text-white transition-colors duration-200 hover:border-white hover:bg-white/5 opacity-0'
           >
             Se hele kolleksjonen
           </Link>
         </div>
 
-        {/* Trust Indicators */}
-        <div className='mt-16 pt-16 border-t border-gray-800'>
-          <div className='grid grid-cols-2 md:grid-cols-4 gap-8'>
-            <div>
-              <div className='text-3xl font-light text-white mb-2'>2.000+</div>
+        <div className='mt-16 border-t border-gray-800 pt-16'>
+          <div className='grid grid-cols-2 gap-8 md:grid-cols-4'>
+            <div className='gsap-stat-item opacity-0'>
+              <div className='mb-2 text-3xl font-light text-white'>2.000+</div>
               <div className='text-sm text-gray-500'>Fornøyde kunder</div>
             </div>
-            <div>
-              <div className='text-3xl font-light text-white mb-2'>
+            <div className='gsap-stat-item opacity-0'>
+              <div className='mb-2 text-3xl font-light text-white'>
                 Trygg handel
               </div>
               <div className='text-sm text-gray-500'>
                 Vi tilbyr betaling med Klarna og Vipps
               </div>
             </div>
-            <div>
-              <div className='text-3xl font-light text-white mb-2'>
+            <div className='gsap-stat-item opacity-0'>
+              <div className='mb-2 text-3xl font-light text-white'>
                 Fri frakt
               </div>
               <div className='text-sm text-gray-500'>
                 På bestillinger over 999kr
               </div>
             </div>
-            <div>
-              <div className='text-3xl font-light text-white mb-2'>
+            <div className='gsap-stat-item opacity-0'>
+              <div className='mb-2 text-3xl font-light text-white'>
                 Rask levering
               </div>
               <div className='text-sm text-gray-500'>2-5 dager</div>
