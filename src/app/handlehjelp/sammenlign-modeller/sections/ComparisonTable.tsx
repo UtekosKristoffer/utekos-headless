@@ -36,9 +36,7 @@ function IconRenderer({
   return Icon ? <Icon className={className} /> : null
 }
 
-// ENDRINGEN ER I DENNE KOMPONENTEN:
 function TableCellContent({ value }: { value: string | boolean }) {
-  // Logikk for boolean (sjekkboks/minus) er beholdt
   if (typeof value === 'boolean') {
     return value ?
         <Check className='mx-auto h-5 w-5 text-green-500' />
