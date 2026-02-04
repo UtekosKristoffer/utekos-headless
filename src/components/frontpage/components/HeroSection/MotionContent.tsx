@@ -62,7 +62,7 @@ export function MotionContent() {
 
       tl.fromTo(
         '.gsap-desc',
-        { y: 30, autoAlpha: 0, filter: 'blur(5px)' },
+        { y: 20, autoAlpha: 0, filter: 'blur(5px)' },
         {
           y: 0,
           autoAlpha: 1,
@@ -74,16 +74,16 @@ export function MotionContent() {
       )
 
       tl.fromTo(
-        '.gsap-glow-aura',
-        { scale: 0.8, opacity: 0, filter: 'blur(20px)' },
+        '.gsap-splash',
+        { scaleX: 0, opacity: 0, skewX: -20 },
         {
-          scale: 1,
+          scaleX: 1,
           opacity: 1,
-          filter: 'blur(40px)',
-          duration: 2,
-          ease: 'power2.out'
+          skewX: 0,
+          duration: 1.5,
+          ease: 'elastic.out(1, 0.8)'
         },
-        '-=0.8'
+        '-=0.6'
       )
 
       tl.fromTo(
@@ -130,16 +130,24 @@ export function MotionContent() {
         </div>
       </h1>
 
-      <div className='relative mx-auto mt-6 mb-12 max-w-2xl md:max-w-4xl'>
-        <div className='gsap-glow-aura pointer-events-none absolute inset-x-0 top-1/2 -z-10 h-12 -translate-y-1/2 bg-sky-500/15 opacity-0 blur-3xl' />
-
+      <div className='mx-auto mt-6 mb-12 max-w-2xl md:max-w-4xl'>
         <p
           data-nosnippet='false'
           className='gsap-desc invisible text-lg leading-relaxed text-foreground/80 lg:text-2xl'
         >
           Kompromissløs komfort. Overlegen allsidighet.{' '}
-          <span className='relative inline-block px-1'>
-            Juster, form og nyt.
+          <span className='relative inline-block whitespace-nowrap px-3 py-1'>
+            <svg
+              viewBox='0 0 200 40'
+              preserveAspectRatio='none'
+              className='gsap-splash absolute inset-0 -z-10 h-full w-full fill-sky-500/20 stroke-sky-400/30 stroke-1'
+              style={{ transformOrigin: 'left center' }}
+            >
+              <path d='M0,20 Q5,5 20,8 T50,12 T80,5 T110,15 T140,8 T170,12 T200,10 L195,35 Q180,38 160,35 T120,32 T80,38 T40,34 T5,36 Z' />
+            </svg>
+            <span className='relative inline-block -rotate-1 font-semibold text-sky-100'>
+              Juster, form og nyt.
+            </span>
           </span>
         </p>
       </div>
