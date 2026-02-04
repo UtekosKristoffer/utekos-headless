@@ -47,7 +47,6 @@ export function HeroSection() {
         </p>
 
         <div className='flex flex-col items-center gap-6 w-full'>
-          {/* Her bruker vi Client Componenten */}
           <ScrollToButton />
 
           <div className='flex flex-col items-center animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300'>

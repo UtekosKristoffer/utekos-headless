@@ -1,4 +1,3 @@
-
 'use client'
 import { ArrowRight, Feather } from 'lucide-react'
 import Link from 'next/link'
@@ -94,6 +93,7 @@ export function MikrofiberContentColumn() {
       >
         <Link
           href='/produkter/utekos-mikrofiber'
+          data-track='MikrofiberContentProductPageExploreClick'
           className={buttonVariants({
             size: 'lg',
             className:

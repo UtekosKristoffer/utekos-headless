@@ -71,7 +71,7 @@ export function AllProductsCarousel() {
           )
         })}
       </CarouselContent>
-      <CarouselPrevious />
+      <CarouselPrevious  />
       <CarouselNext />
     </Carousel>
   )

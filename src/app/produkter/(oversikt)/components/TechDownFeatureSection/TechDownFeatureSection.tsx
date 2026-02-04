@@ -197,7 +197,10 @@ export const TechDownFeatureSection = () => {
               size='lg'
               className='group h-14 rounded-full bg-white px-8 text-neutral-950 hover:bg-sky-50 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_25px_rgba(255,255,255,0.4)] transition-all'
             >
-              <Link href='/produkter/utekos-techdown'>
+              <Link
+                href='/produkter/utekos-techdown'
+                data-track='TechDownProductPageSectionShopNowClick'
+              >
                 Benytt tilbudet nå
                 <ArrowRight className='ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1' />
               </Link>

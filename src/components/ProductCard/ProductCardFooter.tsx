@@ -32,7 +32,12 @@ export function ProductCardFooter({
         <p className='text-2xl font-bold text-white'>{price}</p>
       </div>
       <div className='grid grid-cols-2 w-full gap-3'>
-        <Link href={productUrl} className='flex-1'>
+        <Link
+          href={productUrl}
+          data-track='ProductCardFooterViewMoreClick'
+          aria-label='Se produkt'
+          className='flex-1'
+        >
           <Button
             variant='default'
             size='default'
@@ -44,6 +49,7 @@ export function ProductCardFooter({
         {isAvailable ?
           <Button
             onClick={handleQuickBuyClick}
+            data-track='ProductCardFooterAddToCartClick'
             variant='default'
             size='default'
             disabled={isPending}

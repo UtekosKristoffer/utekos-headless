@@ -116,6 +116,7 @@ export function ComfyrobeContentColumn({
         <Link
           href={'/produkter/comfyrobe' as Route}
           onClick={handleCtaClick}
+          data-track='ComfyrobeMonicaArneFrontPageClick'
           className={buttonVariants({
             size: 'lg',
             className:

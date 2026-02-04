@@ -2,7 +2,7 @@
 'use client'
 
 import { useProductPage } from '@/hooks/useProductPage'
-import ProductPageView from '@/app/produkter/[handle]/components/ProductPageView'
+import { ProductPageView } from '@/app/produkter/[handle]/components/ProductPageView'
 import { ProductPageSkeleton } from './ProductPageSkeleton'
 import type { ShopifyProduct } from '@types'
 import { ProductViewTracking } from '@/components/analytics/ProductViewTracking'

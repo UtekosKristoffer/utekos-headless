@@ -11,6 +11,7 @@ export function ScrollToButton() {
   return (
     <button
       onClick={scrollToModel}
+      data-track='HeroSectionScrollToModelClick'
       className='group relative bg-[#E07A5F] hover:bg-[#D06A4F] text-white px-8 py-4 rounded-full text-lg font-medium tracking-wide transition-all active:scale-95 shadow-2xl w-auto flex items-center gap-3'
     >
       Finn din favoritt

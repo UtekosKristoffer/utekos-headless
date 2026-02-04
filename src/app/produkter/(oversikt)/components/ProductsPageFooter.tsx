@@ -14,7 +14,10 @@ export function ProductsPageFooter() {
               Se vår størrelsesguide og finn den perfekte passformen for deg.
             </p>
             <Button asChild className='mt-4'>
-              <Link href='/handlehjelp/storrelsesguide'>
+              <Link
+                href='/handlehjelp/storrelsesguide'
+                data-track='ProductsPageFooterSizeGuideClick'
+              >
                 Til størrelsesguiden
               </Link>
             </Button>
@@ -29,7 +32,10 @@ export function ProductsPageFooter() {
               Les om materialene og designfilosofien som holder deg varm.
             </p>
             <Button asChild className='mt-4'>
-              <Link href='/handlehjelp/teknologi-materialer'>
+              <Link
+                href='/handlehjelp/teknologi-materialer'
+                data-track='ProductsPageFooterTechnologyMaterialsClick'
+              >
                 Utforsk materialene
               </Link>
             </Button>

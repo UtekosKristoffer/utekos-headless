@@ -12,7 +12,7 @@ export const ListItem = React.forwardRef<
   ComponentRef<typeof Link>,
   Omit<React.ComponentPropsWithoutRef<typeof Link>, 'href'> & {
     title: string
-    href: Route // Changed from string to Route
+    href: Route 
   }
 >(({ className, title, href, children, ...props }, ref) => {
   return (

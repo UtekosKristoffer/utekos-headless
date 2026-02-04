@@ -204,6 +204,7 @@ export const CheckoutButton = ({
       }}
       asChild
       className={className}
+      data-track='CheckoutButtonClick'
       disabled={isPending}
       aria-label={getCheckoutAriaLabel(subtotal, isPending)}
       {...props}

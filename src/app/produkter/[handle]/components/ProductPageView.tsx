@@ -29,9 +29,9 @@ import { TechDownLaunchOffer } from './TechDownLaunchOffer'
 import type { ProductPageViewProps, ShopifyProduct, Image } from '@types'
 const SmartRealTimeActivity = dynamic(
   () =>
-    import(
-      '@/app/produkter/[handle]/components/SmartRealTimeActivity'
-    ).then(mod => mod.SmartRealTimeActivity),
+    import('@/app/produkter/[handle]/components/SmartRealTimeActivity').then(
+      mod => mod.SmartRealTimeActivity
+    ),
   { ssr: false, loading: () => <div className='h-6' /> }
 )
 
@@ -48,7 +48,7 @@ const ProductGallery = dynamic(
 
 const STOCK_THRESHOLD = 31
 
-export default function ProductPageView({
+export function ProductPageView({
   productData,
   selectedVariant,
   allVariants,

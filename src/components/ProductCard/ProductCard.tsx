@@ -90,6 +90,7 @@ export function ProductCard({
       <CardContent className='relative p-0'>
         <Link
           href={productUrl}
+          data-track='ProductCardViewMoreClick'
           aria-label={`Se produkt ${product.title}`}
           className='block w-full'
         >

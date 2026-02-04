@@ -81,7 +81,11 @@ export function ProductGridCard({
   return (
     <Card className='group relative flex h-full flex-col overflow-hidden border-none bg-transparent shadow-none'>
       <div className='relative overflow-hidden rounded-lg'>
-        <Link href={productUrl} aria-label={`Se produkt ${product.title}`}>
+        <Link
+          href={productUrl}
+          aria-label={`Se produkt ${product.title}`}
+          data-track='ProductGridCardViewMoreClick'
+        >
           <AspectRatio ratio={2 / 3}>
             <Image
               src={imageUrl}
@@ -98,6 +102,7 @@ export function ProductGridCard({
           {isAvailable ?
             <Button
               onClick={handleQuickBuy}
+              data-track='ProductGridCardAddToCartClick'
               className='w-full'
               aria-label='Legg i handlekurv'
             >

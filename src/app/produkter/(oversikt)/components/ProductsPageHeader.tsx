@@ -30,14 +30,12 @@ export function ProductsPageHeader() {
     () => {
       const tl = gsap.timeline()
 
-      // 1. Scene setup
       tl.fromTo(
         '.gsap-grid',
         { opacity: 0, scale: 1.1 },
         { opacity: 1, scale: 1, duration: 2, ease: 'power3.out' }
       )
 
-      // 2. Badge & Title
       tl.fromTo(
         '.gsap-badge',
         { y: -20, autoAlpha: 0 },
@@ -59,7 +57,6 @@ export function ProductsPageHeader() {
         '-=0.6'
       )
 
-      // 3. Description Fade In
       tl.fromTo(
         '.gsap-desc',
         { y: 20, autoAlpha: 0 },
@@ -67,7 +64,6 @@ export function ProductsPageHeader() {
         '-=0.8'
       )
 
-      // 4. Highlight Animations (Strek & Marker)
       tl.fromTo(
         '.gsap-underline',
         { scaleX: 0 },
@@ -82,7 +78,6 @@ export function ProductsPageHeader() {
         '-=0.6'
       )
 
-      // 5. Stars Loop
       gsap.to('.gsap-star', {
         y: -20,
         opacity: 0.4,
@@ -138,7 +133,7 @@ export function ProductsPageHeader() {
             </div>
             <Sparkles className='h-3.5 w-3.5 text-sky-400 animate-pulse' />
             <span className='text-xs font-bold uppercase tracking-[0.2em] text-sky-400'>
-              Utekos® Collection
+              Utekos®
             </span>
           </div>
         </div>

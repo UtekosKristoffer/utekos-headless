@@ -58,14 +58,11 @@ export function ComparisonTeaser() {
         }
       })
 
-      // 1. Container fade in
       tl.fromTo(
         '.gsap-container',
         { y: 40, autoAlpha: 0 },
         { y: 0, autoAlpha: 1, duration: 0.8, ease: 'power3.out' }
       )
-
-      // 2. Tittel og tekst
       tl.fromTo(
         '.gsap-text',
         { y: 20, autoAlpha: 0 },
@@ -73,7 +70,6 @@ export function ComparisonTeaser() {
         '-=0.4'
       )
 
-      // 3. Tekst effekter (Understrek & Highlight)
       tl.to(
         '.gsap-underline',
         { scaleX: 1, duration: 0.8, ease: 'expo.out' },
@@ -85,7 +81,6 @@ export function ComparisonTeaser() {
         '-=0.6'
       )
 
-      // 4. Kortene kommer inn (Staggered)
       tl.fromTo(
         '.gsap-card',
         { y: 30, autoAlpha: 0 },
@@ -99,7 +94,6 @@ export function ComparisonTeaser() {
         '-=0.4'
       )
 
-      // 5. Knapp
       tl.fromTo(
         '.gsap-btn',
         { scale: 0.9, autoAlpha: 0 },
@@ -113,7 +107,6 @@ export function ComparisonTeaser() {
   return (
     <section ref={container} className='mb-24 px-4'>
       <div className='gsap-container opacity-0 container mx-auto overflow-hidden rounded-3xl border border-white/5 bg-neutral-950/50 shadow-2xl'>
-        {/* Bakgrunns-grid */}
         <div className='absolute inset-0 -z-10 opacity-20'>
           <div className='absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px]' />
         </div>
@@ -143,6 +136,7 @@ export function ComparisonTeaser() {
               <Link
                 key={model.handle}
                 href={`/produkter/${model.handle}` as Route}
+                data-track='ComparisonTeaserModelClick'
                 className={cn(
                   'gsap-card group relative flex flex-col rounded-2xl border border-white/5 bg-white/[0.02] p-6 opacity-0 transition-all duration-300',
                   'hover:-translate-y-1 hover:bg-white/[0.04]',
@@ -187,7 +181,10 @@ export function ComparisonTeaser() {
               size='lg'
               className='h-12 rounded-full bg-white px-8 text-neutral-950 hover:bg-sky-50 transition-all'
             >
-              <Link href={'/handlehjelp/sammenlign-modeller' as Route}>
+              <Link
+                href={'/handlehjelp/sammenlign-modeller' as Route}
+                data-track='ComparisonTeaserSeeFullComparisonClick'
+              >
                 Se full sammenligning
                 <ArrowRightIcon className='ml-2 h-4 w-4' />
               </Link>

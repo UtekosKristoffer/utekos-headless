@@ -147,7 +147,7 @@ export function ProductVideoSection() {
                 size='lg'
                 className='group h-12 rounded-full bg-white px-8 text-neutral-950 hover:bg-sky-50 w-full sm:w-auto'
               >
-                <Link href={'/produkter/utekos-dun' as Route}>
+                <Link href={'/produkter/utekos-dun' as Route} data-track>
                   Opplev Utekos selv
                   <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
                 </Link>

@@ -178,6 +178,7 @@ export default function TechTeaserSection() {
               <div className='gsap-content pt-4'>
                 <Link
                   href={'/handlehjelp/teknologi-materialer' as Route}
+                  data-track='TechTeaserSectionExploreTechClick'
                   className='group inline-flex h-12 items-center gap-2 rounded-full bg-white px-8 text-sm font-bold text-neutral-950 transition-all hover:bg-sky-50 hover:scale-105 active:scale-95'
                 >
                   Utforsk teknologien
@@ -186,7 +187,6 @@ export default function TechTeaserSection() {
               </div>
             </div>
 
-            {/* Right Column: 3D Interactive Card */}
             <div
               ref={cardRef}
               className='gsap-card-visual relative mx-auto w-full max-w-md perspective-1000 lg:h-auto'

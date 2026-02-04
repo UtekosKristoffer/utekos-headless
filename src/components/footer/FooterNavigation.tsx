@@ -1,9 +1,9 @@
 // Path: src/components/footer/FooterNavigation.tsx
-
+import { CertificationSmall } from '@/components/common/CertificationSmall'
+import CookieSettingsButton from '@/components/cookie-consent/CookieSettingsButton'
 import { footerConfig } from '@/db/config/footer.config'
 import Link from 'next/link'
-import CookieSettingsButton from '@/components/cookie-consent/CookieSettingsButton'
-import { CertificationSmall } from '@/components/common/CertificationSmall'
+
 export function FooterNavigation() {
   return (
     <div className='grid grid-cols-1 gap-8 md:grid-cols-5'>
@@ -22,6 +22,7 @@ export function FooterNavigation() {
                   <Link
                     href={link.path}
                     className='text-sm text-foreground-on-dark/60 transition-colors hover:text-foreground-on-dark'
+                    data-track={link.trackingEvent}
                     {...(link.external && {
                       target: '_blank',
                       rel: 'noopener noreferrer'

@@ -124,6 +124,8 @@ export function PurchaseSection() {
                   </label>
                   <button
                     onClick={scrollToSizeGuide}
+                    aria-label='Usikker på størrelsen?'
+                    data-track='SizeGuideScrollClick'
                     className='text-xs md:text-sm underline text-[#2C2420]/60 hover:text-[#E07A5F] transition-colors'
                   >
                     Usikker på størrelsen?
@@ -158,6 +160,7 @@ export function PurchaseSection() {
               </div>
               <button
                 onClick={handleAddToCart}
+                data-track='❗🛒❗SkreddersyUtekosOrginalAddToCartClick ❗🛒❗'
                 disabled={isPending}
                 className='
                   w-full bg-[#E07A5F] hover:bg-[#D06A4F] text-white text-lg font-bold 

@@ -40,7 +40,11 @@ export function HelpChooseSection() {
               delay={`${index * 0.1}s`}
               threshold={0.5}
             >
-              <Link href={choice.href} className='group block h-full'>
+              <Link
+                href={choice.href}
+                data-track='HelpChooseSectionClick'
+                className='group block h-full'
+              >
                 <div className='relative flex h-full flex-col overflow-hidden rounded-lg border border-neutral-800 bg-sidebar-foreground shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-neutral-700'>
                   <div
                     className='pointer-events-none absolute -inset-x-2 -top-20 h-40 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-20'

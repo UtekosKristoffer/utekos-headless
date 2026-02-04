@@ -77,7 +77,10 @@ export function StapperFeatureSection() {
 
         <AnimatedBlock className='will-animate-fade-in-up mt-16'>
           <Button asChild size='lg' className='group'>
-            <Link href='/produkter/utekos-stapper'>
+            <Link
+              href='/produkter/utekos-stapper'
+              data-track='StapperFeatureSectionDiscoverClick'
+            >
               Oppdag Stapper™
               <PackageCheck className='ml-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-12' />
             </Link>

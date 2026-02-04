@@ -1,4 +1,6 @@
 // Path: src/components/header/DesktopNavigation.tsx
+import { ActiveLink } from './ActiveLink'
+import { ListItem } from './ListItem'
 import {
   InteractiveNavContent,
   InteractiveNavItem,
@@ -7,10 +9,8 @@ import {
   InteractiveNavTrigger
 } from '@/components/header/InteractiveNavigation'
 import { normalizeShopifyUrl } from '@/lib/helpers/normalizers/normalizeShopifyUrl'
-import { ActiveLink } from './ActiveLink'
-import { ListItem } from './ListItem'
-
 import type { MenuItem } from '@types'
+
 export const DesktopNavigation = ({ menu = [] }: { menu?: MenuItem[] }) => {
   return (
     <nav aria-label='Hovednavigasjon' className='hidden lg:block'>
@@ -32,12 +32,19 @@ export const DesktopNavigation = ({ menu = [] }: { menu?: MenuItem[] }) => {
                             key={subItem.url}
                             href={normalizeShopifyUrl(subItem.url)}
                             title={subItem.title}
+                            data-track={`HeaderDesktopSub_${subItem.title}`}
                           />
                         ))}
                       </ul>
                     </InteractiveNavContent>
                   </>
-                : <ActiveLink href={href}>{item.title}</ActiveLink>}
+                : <ActiveLink
+                    href={href}
+                    data-track={`HeaderDesktop_${item.title}`}
+                  >
+                    {item.title}
+                  </ActiveLink>
+                }
               </InteractiveNavItem>
             )
           })}
