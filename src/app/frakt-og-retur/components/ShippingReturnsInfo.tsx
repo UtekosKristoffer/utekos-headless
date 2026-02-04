@@ -1,3 +1,5 @@
+// Path: src/components/shipping-returns/ShippingReturnsInfo.tsx
+import { AnimatedBlock } from '@/components/AnimatedBlock'
 import {
   Accordion,
   AccordionContent,
@@ -12,14 +14,13 @@ import {
   CardTitle
 } from '@/components/ui/card'
 import {
-  PackageCheck,
   Clock,
   Mail,
+  PackageCheck,
   ShieldCheck,
   Truck,
   Undo2
 } from 'lucide-react'
-import { AnimatedBlock } from '@/components/AnimatedBlock'
 
 export function ShippingReturnsInfo() {
   return (
@@ -96,11 +97,16 @@ export function ShippingReturnsInfo() {
         </h2>
         <Accordion type='single' collapsible className='w-full'>
           <AccordionItem value='item-1'>
-            <AccordionTrigger>Steg 1: Gi oss beskjed</AccordionTrigger>
+            <AccordionTrigger data-track='ShippingReturnsStep1Click'>
+              Steg 1: Gi oss beskjed
+            </AccordionTrigger>
             <AccordionContent className='prose prose-invert max-w-none text-foreground/80'>
               <p>
                 Send en e-post til{' '}
-                <a href='mailto:kundeservice@utekos.no'>
+                <a
+                  href='mailto:kundeservice@utekos.no'
+                  data-track='ShippingReturnsEmailClick'
+                >
                   kundeservice@utekos.no
                 </a>
                 . For at vi skal kunne hjelpe deg raskt, ber vi deg inkludere
@@ -110,7 +116,9 @@ export function ShippingReturnsInfo() {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value='item-2'>
-            <AccordionTrigger>Steg 2: Pakk varen trygt</AccordionTrigger>
+            <AccordionTrigger data-track='ShippingReturnsStep2Click'>
+              Steg 2: Pakk varen trygt
+            </AccordionTrigger>
             <AccordionContent className='prose prose-invert max-w-none text-foreground/80'>
               <p>
                 Du er ansvarlig for varen til den når oss. Sørg for at
@@ -120,7 +128,9 @@ export function ShippingReturnsInfo() {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value='item-3'>
-            <AccordionTrigger>Steg 3: Send pakken</AccordionTrigger>
+            <AccordionTrigger data-track='ShippingReturnsStep3Click'>
+              Steg 3: Send pakken
+            </AccordionTrigger>
             <AccordionContent className='prose prose-invert max-w-none text-foreground/80'>
               <p>
                 Vi dekker kostnaden for returfrakt. Vi anbefaler å bruke en
@@ -129,7 +139,9 @@ export function ShippingReturnsInfo() {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value='item-4'>
-            <AccordionTrigger>Unntak fra angreretten</AccordionTrigger>
+            <AccordionTrigger data-track='ShippingReturnsExceptionClick'>
+              Unntak fra angreretten
+            </AccordionTrigger>
             <AccordionContent className='prose prose-invert max-w-none text-foreground/80'>
               <p>
                 Angreretten gjelder ikke for produkter som er forseglet av
