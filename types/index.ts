@@ -29,6 +29,7 @@ export type * from './event-payload'
 export type * from './ports.types'
 export type * from './tracking.capture-types'
 export type * from './middleware.types'
+export type * from './flow.types'
 export type RootLayoutProps = Readonly<{
   children: React.ReactNode
 }>
