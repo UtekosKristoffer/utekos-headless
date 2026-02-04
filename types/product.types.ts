@@ -1,5 +1,5 @@
 // Path: types/product.types.ts
-import { string } from 'zod'
+import type { StaticImageData } from 'next/image'
 import type {
   Image,
   Metafield,
@@ -113,4 +113,43 @@ export type ShopifyProductVariant = {
   weight: number | null
   weightUnit: string
   quantityAvailable: number | null
+}
+
+export type ModelKey = 'techdown' | 'dun' | 'mikro'
+
+export interface ColorVariant {
+  name: string
+  hex: string
+}
+
+export interface ProductConfig {
+  id: string
+  title: string
+  subtitle: string
+  price: number
+  // Støtter både string (fra .src) og StaticImageData for fleksibilitet
+  image: string | { src: string; width: number; height: number }
+  colors: ColorVariant[]
+  sizes: string[]
+  features: string[]
+}
+
+export interface PurchaseClientViewProps {
+  selectedModel: ModelKey
+  setSelectedModel: (model: ModelKey) => void
+  quantity: number
+  setQuantity: (qty: number) => void
+  selectedColorIndex: number
+  setSelectedColorIndex: (index: number) => void
+  selectedSize: string
+  setSelectedSize: (size: string) => void
+  handleAddToCart: () => void
+  isPending: boolean
+  currentConfig: ProductConfig
+  currentColor: ColorVariant
+  isTechDownOffer: boolean
+}
+
+export interface UsePurchaseLogicProps {
+  products: Record<string, ShopifyProduct | null | undefined>
 }
