@@ -247,7 +247,11 @@ export function NewProductLaunchSection({
 
                 <div className='flex flex-wrap gap-3'>
                   <Button asChild size='lg' className='group flex-1'>
-                    <Link href={productUrl} onClick={handleDiscoverClick}>
+                    <Link
+                      href={productUrl}
+                      onClick={handleDiscoverClick}
+                      data-track='NewProductLaunchDiscoverClick'
+                    >
                       Oppdag {productName}
                       <ArrowRight className='ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1' />
                     </Link>
@@ -256,6 +260,7 @@ export function NewProductLaunchSection({
                     size='lg'
                     variant='secondary'
                     onClick={handleQuickViewClick}
+                    data-track='NewProductLaunchAddToCartClick'
                     className='group flex-1 bg-button text-access hover:bg-button/80 hover:scale-105 active:scale-95'
                   >
                     Legg i handlekurv
