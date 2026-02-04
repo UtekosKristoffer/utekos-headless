@@ -16,6 +16,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { NewsletterPopup } from '@/components/NewsletterPopup'
 import { CartProviderLoader } from '@/components/providers/CartProviderLoader'
 import { CookieConsentBanner } from '@/components/CookieBanner'
+import { ClickTracker } from '@/components/analytics/ClickTracker'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
@@ -53,7 +54,7 @@ export const metadata: Metadata = {
     locale: 'no_NO',
     url: 'https://utekos.no',
     siteName: 'Utekos',
-    title: 'Utekos® - Skreddersy varmen.',
+    title: 'Utekos® - Skreddersy varmen',
     description:
       'Kompromissløs komfort. Overlegen allsidighet. Juster, form og nyt.',
     images: {
@@ -83,7 +84,7 @@ export const metadata: Metadata = {
   }
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayo({ children }: RootLayoutProps) {
   return (
     <html lang='no'>
       <GoogleTagManager gtmId='GTM-5TWMJQFP' />
@@ -92,6 +93,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <OnlineStoreJsonLd />
         <Suspense>
+          <ClickTracker />
           <CartProviderLoader>
             <AnnouncementBanner />
             <Header menu={mainMenu} />

@@ -1,10 +1,16 @@
+// Path: src/components/header/HeaderLogo.tsx
+import UtekosLogo from '@public/icon.png'
 import Image from 'next/image'
 import Link from 'next/link'
-import UtekosLogo from '@public/icon.png'
+
 export function HeaderLogo() {
   return (
     <div className='flex items-center'>
-      <Link href='/' aria-label='Utekos - Til forsiden'>
+      <Link
+        href='/'
+        aria-label='Utekos - Til forsiden'
+        data-track='HeaderLogoClick'
+      >
         <Image
           src={UtekosLogo}
           alt='Utekos logo'
@@ -17,4 +23,5 @@ export function HeaderLogo() {
     </div>
   )
 }
+
 export default HeaderLogo

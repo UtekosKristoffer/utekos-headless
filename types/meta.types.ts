@@ -36,7 +36,6 @@ export type LogPayload = {
   event: string
   level?: 'info' | 'warn' | 'error'
   data?: Record<string, unknown>
-  // ENDRET: Gjort context fleksibel for å støtte vilkårlige data som 'url'
   context?: Record<string, unknown>
 }
 
