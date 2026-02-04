@@ -1,4 +1,5 @@
 // Path: src/types/meta.types.ts
+import type { TrackingUserData } from '@types'
 
 export interface UserDataStored {
   fbp?: string | undefined
@@ -11,7 +12,7 @@ export interface UserDataStored {
 export interface CheckoutAttribution {
   cartId: string | null
   checkoutUrl: string | null
-  userData: MetaUserData
+  userData: TrackingUserData
   ts: number
   eventId?: string | undefined
   ga_client_id?: string | undefined
@@ -22,7 +23,7 @@ export interface CaptureBody {
   cartId?: string | null
   checkoutUrl: string
   eventId?: string
-  userData: MetaUserData
+  userData?: TrackingUserData | undefined
 }
 
 export type ContentItem = {

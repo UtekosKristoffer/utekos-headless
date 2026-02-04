@@ -1,5 +1,5 @@
 import { parseAndVerifyWebhook } from '@/lib/shopify/webhook-helper'
-import { processOrderTracking } from '@/lib/services/processOrderTracking'
+import { processOrderTracking } from '@/lib/tracking/services/processOrderTracking'
 import { createTrackingResponse } from '@/lib/tracking/utils/trackingResponseFactory'
 
 export async function POST(request: Request) {

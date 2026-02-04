@@ -1,4 +1,4 @@
-import { prepareEventContext } from '@/lib/services/prepareEventContext'
+import { prepareEventContext } from '@/lib/tracking/services/prepareEventContext'
 import type { MetaEventPayload, EventCookies } from '@types'
 import type { TrackingDependencies } from '@types'
 

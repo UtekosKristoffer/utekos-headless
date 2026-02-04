@@ -2,7 +2,8 @@ import type {
   CheckoutAttribution,
   ClientUserData,
   OrderPaid,
-  MetaEventPayload
+  MetaEventPayload,
+  MetaUserData
 } from '@types'
 import type { NextResponse } from 'next/server'
 export interface EnrichedCustomerData {
@@ -73,3 +74,12 @@ export interface TrackingServiceResult {
   error?: string | undefined
   details?: unknown | undefined
 }
+
+export interface TrackingUserData extends MetaUserData {
+  scid?: string | undefined
+  click_id?: string | undefined
+  epik?: string | undefined
+  ttclid?: string | undefined
+  ttp?: string | undefined
+}
+
