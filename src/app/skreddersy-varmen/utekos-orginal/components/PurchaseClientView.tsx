@@ -15,7 +15,7 @@ import { VippsLogo } from '@/components/logo/payments/VippsLogo'
 import { KlarnaLogo } from '@/components/logo/payments/KlarnaLogo'
 import { PostNordLogo } from '@/components/logo/payments/PostNordLogo'
 import { PRODUCT_VARIANTS } from '@/api/constants'
-import type { PurchaseClientViewProps, ModelKey } from '@types'
+import type { ModelKey, PurchaseClientViewProps } from '@types'
 
 export function PurchaseClientView({
   selectedModel,
@@ -44,14 +44,16 @@ export function PurchaseClientView({
           </span>
         </div>
         <div className='relative h-[50vh] w-full max-w-2xl lg:h-[70vh]'>
-          <Image
-            src={currentConfig.image}
-            alt={currentConfig.title}
-            fill
-            className='object-contain drop-shadow-2xl transition-all duration-700 ease-out hover:scale-105'
-            priority
-            sizes='(max-width: 1024px) 100vw, 50vw'
-          />
+          <div className='relative h-full w-full'>
+            <Image
+              src={currentConfig.image}
+              alt={currentConfig.title}
+              fill
+              className='object-contain drop-shadow-2xl transition-all duration-700 ease-out hover:scale-105'
+              priority
+              sizes='(max-width: 1024px) 100vw, 50vw'
+            />
+          </div>
         </div>
         <p className='mt-8 hidden font-serif text-base italic text-[#2C2420] lg:block'>
           Modell vist: {currentConfig.title}

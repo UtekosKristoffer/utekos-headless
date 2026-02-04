@@ -39,6 +39,7 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
   const currentConfig = PRODUCT_VARIANTS[selectedModel]
   const currentShopifyProduct = products[currentConfig.id]
   const buffProduct = products['utekos-buff']
+
   const safeColorIndex =
     selectedColorIndex < currentConfig.colors.length ? selectedColorIndex : 0
   const currentColor = currentConfig.colors[safeColorIndex] as ColorVariant
@@ -89,10 +90,13 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
 
     startTransition(async () => {
       try {
-        const cartId = contextCartId || (await getCartIdFromCookie())
+        // Hent ID *før* vi starter (kan være undefined hvis ny bruker)
+        let currentCartId = contextCartId || (await getCartIdFromCookie())
+
         let additionalLine: { variantId: string; quantity: number } | undefined
         let selectedBuffVariant: ShopifyProductVariant | undefined
 
+        // Finn buff-varianten hvis tilbudet er aktivt
         if (isTechDownOffer && buffProduct) {
           const buffVariants = getVariants(buffProduct)
           selectedBuffVariant = buffVariants.find((v: any) =>
@@ -109,9 +113,10 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
           }
         }
 
-        if (cartId) {
+        // 1. OPTIMISTIC UPDATE (Kun hvis vi har en cartId)
+        if (currentCartId) {
           await updateCartCache({
-            cartId,
+            cartId: currentCartId,
             product: currentShopifyProduct,
             variant: selectedVariant,
             quantity
@@ -119,7 +124,7 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
 
           if (selectedBuffVariant && buffProduct) {
             await updateCartCache({
-              cartId,
+              cartId: currentCartId,
               product: buffProduct,
               variant: selectedBuffVariant,
               quantity: 1 * quantity
@@ -129,6 +134,7 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
           cartStore.send({ type: 'OPEN' })
         }
 
+        // 2. SERVER MUTATION (Legg til varer)
         const linesToProcess = [{ variantId: selectedVariant.id, quantity }]
         if (additionalLine) {
           linesToProcess.push(additionalLine)
@@ -136,24 +142,36 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
 
         await addLines(linesToProcess)
 
-        if (cartId) {
-          queryClient.invalidateQueries({ queryKey: ['cart', cartId] })
+        // 3. FIX: OPPDATER CART ID & LEGG TIL RABATT
+        // Hvis dette var en ny kurv, har vi nå fått en cookie. Vi må lese den på nytt.
+        if (!currentCartId) {
+          currentCartId = await getCartIdFromCookie()
         }
 
-        if (additionalLine) {
-          try {
-            if (cartId) {
-              const updatedCart = await applyDiscount(cartId, 'GRATISBUFF')
+        if (currentCartId) {
+          // Invalider query for å hente ferske data fra server
+          queryClient.invalidateQueries({ queryKey: ['cart', currentCartId] })
+
+          // Påfør rabattkoden NÅ som vi garantert har en kurv med varer
+          if (additionalLine) {
+            try {
+              const updatedCart = await applyDiscount(
+                currentCartId,
+                'GRATISBUFF'
+              )
               if (updatedCart) {
-                queryClient.setQueryData(['cart', cartId], updatedCart)
-                toast.success('Gratis Utekos Buff™ lagt til i handlekurven!')
+                // Oppdater cache direkte med svaret fra applyDiscount for umiddelbar feedback
+                queryClient.setQueryData(['cart', currentCartId], updatedCart)
+                toast.success('Gratis Utekos Buff™ registrert!')
               }
+            } catch (e) {
+              console.error('Feil ved påføring av rabatt:', e)
+              // Vi stopper ikke flyten her, varene er i kurven, men kanskje uten rabatt.
             }
-          } catch (e) {
-            console.error('Feil ved påføring av rabatt:', e)
           }
         }
 
+        // 4. TRACKING
         await trackAddToCart({
           product: currentShopifyProduct,
           selectedVariant,
@@ -167,13 +185,13 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
           currency: selectedVariant.price.currencyCode
         })
 
-        if (!cartId) {
-          cartStore.send({ type: 'OPEN' })
-        }
+        // Åpne skuffen til slutt også (sikring)
+        cartStore.send({ type: 'OPEN' })
       } catch (error) {
         console.error('Feil under kjøp:', error)
         toast.error('Kunne ikke legge varen i handlekurven.')
 
+        // Rollback / Refresh ved feil
         const cartId = contextCartId || (await getCartIdFromCookie())
         if (cartId) {
           queryClient.invalidateQueries({ queryKey: ['cart', cartId] })

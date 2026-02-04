@@ -68,7 +68,10 @@ export function BackToShopCta() {
             garanterer vi svar innen én time frem til kl. 22:00.
           </p>
           <Button asChild variant='secondary' className='mt-6'>
-            <Link href={'/kontaktskjema' as Route}>
+            <Link
+              href={'/kontaktskjema' as Route}
+              data-track='StorrelsesguideBackToShopCtaContactUsClick'
+            >
               <MessageCircle className='mr-2 h-4 w-4' />
               Spør oss om størrelse
             </Link>

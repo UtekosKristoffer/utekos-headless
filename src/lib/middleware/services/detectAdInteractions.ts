@@ -18,7 +18,7 @@ export function detectAdInteractions(
           level: 'INFO',
           event: config.logConfig.eventName,
           context: {
-            [config.param]: value, // Dynamisk nøkkel (f.eks "fbclid": "...")
+            [config.param]: value, 
             source: 'proxy-middleware'
           }
         }
