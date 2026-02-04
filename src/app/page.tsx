@@ -29,12 +29,11 @@ const HomePage = () => {
         </Activity>
 
         <NewProductInStoreNotice />
-
-        <FrontpageIceBathingSection />
-
         <Activity>
           <ProductVideoSection />
         </Activity>
+
+        <FrontpageIceBathingSection />
 
         <Activity>
           <Suspense fallback={<FeaturedProductsSkeleton />}>
