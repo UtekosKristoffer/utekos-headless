@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogDescription
 } from '@/components/ui/dialog'
-import { Skeleton } from '@/components/ui/skeleton'
+
 import { useVariantState } from '@/hooks/useVariantState'
 import type { ShopifyProduct } from '@types'
 import Image from 'next/image'

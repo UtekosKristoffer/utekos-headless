@@ -1,8 +1,10 @@
 import type {
   MetaContentItem,
   ShopifyProduct,
-  ShopifyProductVariant
+  ShopifyProductVariant,
+  AddToCartFormValues
 } from '@types'
+import type { UseFormReturn } from 'react-hook-form'
 
 export interface PrepareAddToCartInput {
   product: ShopifyProduct
@@ -45,4 +47,11 @@ export interface AddToCartProps {
   product: ShopifyProduct
   selectedVariant: ShopifyProductVariant | null
   additionalLine?: { variantId: string; quantity: number } | undefined
+}
+
+export interface AddToCartViewProps {
+  form: UseFormReturn<AddToCartFormValues>
+  onSubmit: (values: AddToCartFormValues) => void
+  isPending: boolean
+  isAvailable: boolean
 }

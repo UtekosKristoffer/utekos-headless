@@ -1,13 +1,9 @@
 'use client'
 
-import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import { Form } from '@/components/ui/form'
-import { ModalSubmitButton } from './ModalSubmitButton'
-import { QuantitySelector } from './QuantitySelector'
-import { createAddToCartFormConfig } from '@/lib/helpers/cart/createAddToCartFormConfig'
 import { useAddToCartAction } from '@/hooks/useAddToCartAction'
-import { CartMutationContext } from '@/lib/context/CartMutationContext'
+import { useAddToCartForm } from '@/hooks/useAddToCartForm'
+import { useCartErrorMonitoring } from '@/hooks/useCartErrorMonitoring'
+import { AddToCartView } from './AddToCartView'
 import type { AddToCartFormValues, AddToCartProps } from '@types'
 
 export function AddToCart({
@@ -21,23 +17,9 @@ export function AddToCart({
     additionalLine
   })
 
-  const form = useForm<AddToCartFormValues>(
-    createAddToCartFormConfig(selectedVariant)
-  )
+  const form = useAddToCartForm(selectedVariant)
 
-  const lastError = CartMutationContext.useSelector(
-    state => state.context.error
-  )
-
-  useEffect(() => {
-    form.setValue('variantId', selectedVariant?.id ?? '')
-  }, [selectedVariant?.id, form])
-
-  useEffect(() => {
-    if (lastError) {
-      console.error('Feil fra handlekurv-maskin:', lastError)
-    }
-  }, [lastError])
+  useCartErrorMonitoring()
 
   const onSubmit = (values: AddToCartFormValues) => {
     performAddToCart(values.quantity)
@@ -45,22 +27,13 @@ export function AddToCart({
 
   const isAvailable = selectedVariant?.availableForSale ?? false
 
+  // 4. Render View (Pure Presentation)
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className='flex flex-col gap-4'
-      >
-        <div>
-          <label className='mb-2 block text-sm font-medium'>Antall</label>
-          <QuantitySelector />
-        </div>
-        <ModalSubmitButton
-          isPending={isPending}
-          isDisabled={!selectedVariant || !isAvailable || isPending}
-          availableForSale={isAvailable}
-        />
-      </form>
-    </Form>
+    <AddToCartView
+      form={form}
+      onSubmit={onSubmit}
+      isPending={isPending}
+      isAvailable={isAvailable}
+    />
   )
 }
