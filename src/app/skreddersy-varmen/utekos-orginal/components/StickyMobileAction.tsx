@@ -1,3 +1,4 @@
+// Path: src/components/products/StickyMobileAction.tsx
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -62,6 +63,7 @@ export function StickyMobileAction() {
 
         <button
           onClick={scrollToPurchase}
+          data-track='SkreddersyVarmenTilBestilling'
           className='bg-[#E07A5F] hover:bg-[#d0694e] text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors flex items-center gap-2 shadow-lg'
         >
           Til bestilling

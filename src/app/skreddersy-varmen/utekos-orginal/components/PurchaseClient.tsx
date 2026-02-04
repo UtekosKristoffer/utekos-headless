@@ -270,6 +270,7 @@ export function PurchaseClient({
                 </span>
                 <Link
                   href='/handlehjelp/storrelsesguide'
+                  data-track='SizeGuideSkreddersyVarmen'
                   className='text-sm underline text-[#2C2420] hover:text-[#E07A5F] transition-colors'
                 >
                   Se størrelsesguide
@@ -321,6 +322,7 @@ export function PurchaseClient({
             </div>
             <button
               onClick={handleAddToCart}
+              data-track='🔔🛒 AddToCartSkreddersyVarmen 🛒🔔'
               disabled={isPending}
               className={cn(
                 'flex-1 bg-[#E07A5F] hover:bg-[#D06A4F] text-white rounded-sm shadow-xl transition-all active:scale-[0.98] flex flex-row items-center justify-center gap-3 h-full px-2',

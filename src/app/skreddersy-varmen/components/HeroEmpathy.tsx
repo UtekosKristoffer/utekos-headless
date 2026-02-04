@@ -1,4 +1,4 @@
-// Path: src/components/frontpage/HeroEmpathy.tsx
+// Path: src/app/skreddersy-varmen/components/HeroEmpathy.tsx
 'use client'
 
 import Image from 'next/image'
