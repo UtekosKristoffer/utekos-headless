@@ -68,7 +68,6 @@ export const BobilHostruterArticle = () => {
         </div>
       </Activity>
 
-      {/* KORRIGERT: Erstatter den gamle teksten med den nye, visuelle grid-komponenten */}
       <Activity>
         <div className='not-prose my-16'>
           <RouteDetailsGrid elements={routeDetailsData} />
@@ -87,7 +86,10 @@ export const BobilHostruterArticle = () => {
               skarpe høstluften i timevis, fullstendig komfortabel og varm.
             </p>
             <Button asChild>
-              <Link href='/produkter'>
+              <Link
+                href='/produkter'
+                data-track='BobilHostruterArticleAllProductsClick'
+              >
                 Gjør bobilen høstklar
                 <ArrowRightIcon className='ml-2 h-4 w-4' />
               </Link>

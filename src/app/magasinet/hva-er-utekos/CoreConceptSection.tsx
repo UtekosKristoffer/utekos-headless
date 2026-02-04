@@ -56,7 +56,6 @@ export const CoreConceptSection = () => {
       </style>
 
       <section className='relative bg-gradient-to-br from-zinc-900/50 to-zinc-800/30 border border-zinc-700/50 rounded-3xl my-24 overflow-hidden'>
-        {/* Decorative background elements */}
         <div className='absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-amber-500/5 via-transparent to-transparent' />
         <div className='absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-amber-500/10 to-transparent blur-3xl rounded-full' />
 
@@ -188,15 +187,14 @@ export const CoreConceptSection = () => {
 
               <AnimatedBlockTwo className='fade-in-up' delay='600ms'>
                 <div className='relative group/quote'>
-                  {/* Subtle glow */}
                   <div className='absolute -inset-1 bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 rounded-xl opacity-0 group-hover/quote:opacity-100 blur-xl transition-opacity duration-500' />
 
                   <div className='relative rounded-xl bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 border border-amber-500/10 p-6 backdrop-blur-sm'>
                     <div className='flex gap-3 items-start'>
                       <div className='text-4xl text-amber-500/30 leading-none font-serif'></div>
                       <p className='text-lg italic text-zinc-300 leading-relaxed flex-1'>
-                        "Den ultimate følgesvenn – fra hytteterrassen til kalde
-                        tribuner"
+                        Den ultimate følgesvenn – fra hytteterrassen til kalde
+                        tribuner
                       </p>
                       <div className='text-4xl text-amber-500/30 leading-none font-serif self-end'></div>
                     </div>

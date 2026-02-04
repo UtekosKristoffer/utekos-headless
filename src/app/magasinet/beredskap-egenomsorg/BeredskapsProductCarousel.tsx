@@ -51,7 +51,7 @@ export function BeredskapsProductCarousel() {
                 <BeredskapsProductGridCard
                   product={product}
                   initialOptions={initialOptions}
-                  isPriority={index < 3} // Prioriter lasting av de første bildene
+                  isPriority={index < 3}
                   colorHexMap={new Map<string, string>()}
                 />
               </CarouselItem>

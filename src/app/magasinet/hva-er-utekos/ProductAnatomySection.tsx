@@ -119,8 +119,6 @@ export const ProductAnatomySection = () => {
                 )
               })}
           </div>
-
-          {/* Center - Product */}
           <div className='relative flex-shrink-0'>
             <div className='relative bg-gradient-to-b from-zinc-50 to-zinc-100 rounded-2xl p-8 shadow-2xl'>
               <Image
@@ -133,8 +131,6 @@ export const ProductAnatomySection = () => {
               />
             </div>
           </div>
-
-          {/* Right Features */}
           <div className='space-y-8 pt-12'>
             {features
               .filter(f => f.side === 'right')
@@ -170,8 +166,6 @@ export const ProductAnatomySection = () => {
                         <p className='text-sm text-zinc-400 leading-relaxed'>
                           {feature.description}
                         </p>
-
-                        {/* Connection dot */}
                         <div
                           className={`absolute top-1/2 -translate-y-1/2 -left-3 w-2 h-2 rounded-full transition-all duration-300 ${
                             isActive ?
@@ -179,8 +173,6 @@ export const ProductAnatomySection = () => {
                             : 'bg-zinc-600'
                           }`}
                         />
-
-                        {/* Glow effect */}
                         {isActive && (
                           <div className='absolute inset-0 bg-gradient-to-r from-amber-500/10 to-orange-500/10 rounded-xl -z-10 blur-xl' />
                         )}
@@ -192,8 +184,6 @@ export const ProductAnatomySection = () => {
           </div>
         </div>
       </div>
-
-      {/* Mobile Layout */}
       <div className='lg:hidden'>
         <div className='relative bg-gradient-to-b from-zinc-50 to-zinc-100 rounded-2xl p-8 shadow-2xl mb-8'>
           <Image
@@ -230,9 +220,7 @@ export const ProductAnatomySection = () => {
         </div>
       </div>
 
-      {/* Bottom Section */}
       <div className='mt-24 space-y-16'>
-        {/* Replaces Section */}
         <div className='text-center'>
           <h3 className='text-2xl sm:text-3xl font-bold tracking-tight mb-4'>
             Ett Plagg. Uendelige muligheter.
@@ -259,7 +247,6 @@ export const ProductAnatomySection = () => {
           </div>
         </div>
 
-        {/* Reward Section */}
         <div className='max-w-2xl mx-auto'>
           <div className='relative group'>
             <div className='absolute -inset-1 bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-amber-500/20 rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500' />
@@ -288,5 +275,3 @@ export const ProductAnatomySection = () => {
     </section>
   )
 }
-
-export default ProductAnatomySection

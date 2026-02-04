@@ -9,7 +9,7 @@ import {
   CustomData,
   Content
 } from 'facebook-nodejs-business-sdk'
-import { normalize } from '@/lib/meta/normalization'
+import { normalize } from '@/lib/tracking/meta/normalization'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 import type {
   MetaContentItem,

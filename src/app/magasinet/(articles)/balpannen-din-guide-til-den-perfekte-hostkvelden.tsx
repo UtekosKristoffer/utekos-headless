@@ -64,7 +64,10 @@ export const BalpanneArticle = () => {
               tenke på den kjølige luften bak.
             </p>
             <Button asChild>
-              <Link href='/produkter'>
+              <Link
+                href='/produkter'
+                data-track='BalpanneArticleShopPersonalHeatingClick'
+              >
                 Oppgrader din bålkos
                 <ArrowRightIcon className='ml-2 h-4 w-4' />
               </Link>

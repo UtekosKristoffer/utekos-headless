@@ -104,7 +104,10 @@ export const VintercampingArticle = () => {
               forvandler en kjølig morgen til en magisk start på dagen.
             </p>
             <Button asChild>
-              <Link href='/produkter'>
+              <Link
+                href='/produkter'
+                data-track='VintercampingArticleExploreUtekosClick'
+              >
                 Oppdag Utekos-serien
                 <ArrowRightIcon className='ml-2 h-4 w-4' />
               </Link>

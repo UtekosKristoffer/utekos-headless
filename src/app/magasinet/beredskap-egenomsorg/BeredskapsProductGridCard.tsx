@@ -79,7 +79,12 @@ export function BeredskapsProductGridCard({
   return (
     <Card className='group relative flex h-full flex-col overflow-hidden border-none bg-transparent shadow-none'>
       <div className='relative overflow-hidden rounded-lg'>
-        <Link href={productUrl} aria-label={`Se produkt ${product.title}`}>
+        <Link
+          href={productUrl}
+          aria-label={`Se produkt ${product.title}`}
+          data-track='BeredskapsProductGridCardClick'
+          data-track-data={JSON.stringify({ productHandle: product.handle })}
+        >
           <AspectRatio ratio={2 / 3}>
             <Image
               src={imageUrl}

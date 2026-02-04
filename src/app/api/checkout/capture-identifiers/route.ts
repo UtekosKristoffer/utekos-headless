@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { redisSet } from '@/lib/redis'
 import { getStorageKey } from '@/lib/utils/getStorageKey'
-import { normalize } from '@/lib/meta/normalization'
+import { normalize } from '@/lib/tracking/meta/normalization'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 import { getClientIp } from '@/lib/tracking/user-data/getClientIp'
 import { GA_MEASUREMENT_ID } from '@/api/constants/monitoring'

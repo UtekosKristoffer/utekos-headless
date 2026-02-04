@@ -123,6 +123,7 @@ export const ProductFamilySection = () => {
                 <div className='relative grid md:grid-cols-2'>
                   <Link
                     href={products[0].href as Route}
+                    data-track='ProductFamilySectionOriginalClick'
                     className='relative block aspect-[4/3] md:aspect-auto overflow-hidden'
                   >
                     <Image
@@ -165,6 +166,7 @@ export const ProductFamilySection = () => {
 
                     <Link
                       href={products[0].href as Route}
+                      data-track='ProductFamilySectionOriginalLearnMoreClick'
                       className='inline-flex items-center gap-2 text-base font-medium text-zinc-100 group/link transition-all hover:gap-3'
                     >
                       Utforsk Original
@@ -186,6 +188,7 @@ export const ProductFamilySection = () => {
                   <div className='relative'>
                     <Link
                       href={products[1].href as Route}
+                      data-track='ProductFamilySectionTechDownClick'
                       className='relative block aspect-[4/3] overflow-hidden'
                     >
                       <Image
@@ -218,6 +221,7 @@ export const ProductFamilySection = () => {
 
                       <Link
                         href={products[1].href as Route}
+                        data-track='ProductFamilySectionTechDownLearnMoreClick'
                         className='inline-flex items-center gap-2 text-sm font-medium text-zinc-100 group/link transition-all hover:gap-3'
                       >
                         Les mer
@@ -238,6 +242,7 @@ export const ProductFamilySection = () => {
                   <div className='relative'>
                     <Link
                       href={products[2].href as Route}
+                      data-track='ProductFamilySectionComfyrobeClick'
                       className='relative block aspect-[4/3] overflow-hidden'
                     >
                       <Image
@@ -259,6 +264,7 @@ export const ProductFamilySection = () => {
 
                       <Link
                         href={products[2].href as Route}
+                        data-track='ProductFamilySectionComfyrobeLearnMoreClick'
                         className='inline-flex items-center gap-2 text-sm font-medium text-zinc-100 group/link transition-all hover:gap-3'
                       >
                         Les mer

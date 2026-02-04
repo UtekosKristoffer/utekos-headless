@@ -29,7 +29,10 @@ export function BeredskapEgenomsorgArticle() {
       </div>
       <ProduktguideBeredskap />
       <div className='relative'>
-        <Link href='/produkter'>
+        <Link
+          href='/produkter'
+          data-track='BeredskapEgenomsorgArticleAllProductsClick'
+        >
           <Image
             src={Kaffe}
             alt='Utekos i en beredskapssituasjon, illustrerer varme og komfort'
@@ -44,7 +47,10 @@ export function BeredskapEgenomsorgArticle() {
       <BeredskapspakkenSection />
 
       <div className='relative'>
-        <Link href='/produkter/utekos-stapper '>
+        <Link
+          href='/produkter/utekos-stapper'
+          data-track='BeredskapEgenomsorgArticleStapperClick'
+        >
           <Image
             src={Stapper}
             alt='Utekos i en beredskapssituasjon, illustrerer varme og komfort'

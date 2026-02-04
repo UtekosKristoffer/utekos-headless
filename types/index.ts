@@ -23,6 +23,7 @@ export type * from './backfill-shopify.types'
 export type * from './user-data.types'
 export type * from './productpage.types.ts'
 export type * from './skreddersy-varmen.types'
+export type * from './tracking.types'
 export type RootLayoutProps = Readonly<{
   children: React.ReactNode
 }>

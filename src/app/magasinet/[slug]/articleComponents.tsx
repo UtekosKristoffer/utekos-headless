@@ -103,7 +103,9 @@ export default async function ArticlePage({
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href='/magasinet'>Magasinet</Link>
+                <Link href='/magasinet' data-track='MagazineNav'>
+                  Magasinet
+                </Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
@@ -120,3 +122,4 @@ export default async function ArticlePage({
     </div>
   )
 }
+ 

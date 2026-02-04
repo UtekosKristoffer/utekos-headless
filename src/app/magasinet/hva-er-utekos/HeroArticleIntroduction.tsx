@@ -30,11 +30,9 @@ export const HeroArticleIntroduction = () => {
       </style>
 
       <section className='relative bg-background'>
-        {/* Subtil gradient-bakgrunn */}
         <div className='absolute inset-0 bg-gradient-to-b from-muted/20 to-transparent' />
 
         <div className='container !mt-12 relative mx-auto max-w-4xl px-6 py-20 md:py-16 mb-12'>
-          {/* Dato og lesetid - gir kontekst */}
           <AnimatedBlockTwo className='fade-in-up mb-8' delay='0ms'>
             <div className='flex items-center gap-4 text-sm text-muted-foreground'>
               <time dateTime='2025-10-17'>17. oktober 2025</time>
@@ -44,7 +42,6 @@ export const HeroArticleIntroduction = () => {
           </AnimatedBlockTwo>
 
           <div className='grid gap-12 lg:grid-cols-5 lg:gap-16'>
-            {/* Tekstinnhold */}
             <div className='lg:col-span-3'>
               <AnimatedBlockTwo className='fade-in-up' delay='100ms'>
                 <h1 className='text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl'>
@@ -87,7 +84,6 @@ export const HeroArticleIntroduction = () => {
                         history.replaceState(null, '', '#erling')
                       }
                     } else {
-                      // Fallback: sett hash (i tilfelle seksjonen lastes senere)
                       window.location.hash = 'erling'
                     }
                   }}
@@ -111,7 +107,6 @@ export const HeroArticleIntroduction = () => {
               </AnimatedBlockTwo>
             </div>
 
-            {/* Bilde */}
             <div className='relative lg:col-span-2'>
               <AnimatedBlockTwo className='fade-in-up' delay='300ms'>
                 <div className='aspect-[3/4] overflow-hidden rounded-2xl bg-muted lg:aspect-[4/5]'>

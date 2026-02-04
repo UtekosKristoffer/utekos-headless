@@ -76,7 +76,10 @@ export const TerrasseArticle = () => {
               dette – å la deg nyte frisk luft uten å ofre komforten.
             </p>
             <Button asChild>
-              <Link href='/produkter'>
+              <Link
+                href='/produkter'
+                data-track='TerrasseArticleShopPersonalHeatingClick'
+              >
                 Oppdag din personlige varmekilde
                 <ArrowRightIcon className='ml-2 h-4 w-4' />
               </Link>
