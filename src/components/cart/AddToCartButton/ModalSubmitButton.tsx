@@ -1,7 +1,6 @@
 // Path: src/components/cart/AddToCartButton/ModalSubmitButton.tsx
-
 'use client'
-import { track } from '@vercel/analytics'
+
 import { Button } from '@/components/ui/button'
 import {
   Tooltip,
@@ -15,6 +14,7 @@ interface ModalSubmitButtonProps {
   isPending: boolean
   isDisabled: boolean
 }
+
 export function ModalSubmitButton({
   availableForSale,
   isPending,
@@ -39,10 +39,8 @@ export function ModalSubmitButton({
 
   return (
     <Button
-      onClick={() => {
-        track('ModalAddToCart')
-      }}
       type='submit'
+      data-track='ModalAddToCart'
       size='lg'
       disabled={isPending || isDisabled}
       aria-label='Legg i handlekurv'
