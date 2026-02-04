@@ -4,7 +4,7 @@
 
 import { z } from 'zod'
 import { headers, cookies } from 'next/headers'
-import { hashSnapData } from '@/lib/snapchat/hashSnapData'
+import { hashSnapData } from '@/lib/tracking/snapchat/hashSnapData'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 
 const PINTEREST_TOKEN = process.env.PINTEREST_ACCESS_TOKEN

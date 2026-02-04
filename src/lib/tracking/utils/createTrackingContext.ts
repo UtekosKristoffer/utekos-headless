@@ -1,7 +1,7 @@
 import type { CheckoutAttribution, OrderPaid } from '@types'
 import { safeString } from '@/lib/utils/safeString'
 import { normalizePhone } from '@/lib/utils/normalizePhone'
-import { getCleanIp } from '@/lib/snapchat/getCleanIp'
+import { getCleanIp } from '@/lib/tracking/snapchat/getCleanIp'
 import type { EnrichedCustomerData, TrackingContext } from '@types'
 
 export function createTrackingContext(

@@ -24,6 +24,8 @@ export type * from './user-data.types'
 export type * from './productpage.types.ts'
 export type * from './skreddersy-varmen.types'
 export type * from './tracking.types'
+export type * from './event-payload'
+export type * from './ports.types'
 export type RootLayoutProps = Readonly<{
   children: React.ReactNode
 }>

@@ -1,4 +1,4 @@
-import { hashSnapData } from '@/lib/snapchat/hashSnapData'
+import { hashSnapData } from '@/lib/tracking/snapchat/hashSnapData'
 import { safeString } from '@/lib/utils/safeString'
 import type { TrackingContext } from '@types'
 

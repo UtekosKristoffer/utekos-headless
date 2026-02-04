@@ -97,8 +97,8 @@ export interface MetaContentItem {
   quantity: number
   item_price?: number | undefined
   title?: string | undefined
-  delivery_category?: string | undefined
   content_name?: string | undefined
+  content_category?: string | undefined
 }
 export type MetaPurchaseCustomData = {
   currency: string
@@ -128,7 +128,6 @@ export interface MetaEventData {
   currency?: string | undefined
   content_name?: string | undefined
   content_type?: string | undefined
-  // NYTT FELT
   content_category?: string | undefined
   content_ids?: string[] | undefined
   contents?: MetaContentItem[] | undefined
@@ -149,12 +148,12 @@ export type MetaEventType =
   | 'Lead' // NY EVENT-TYPE
 
 export interface MetaEventPayload {
-  eventName: MetaEventType
-  eventId: string
-  eventSourceUrl: string
+  eventName: MetaEventType | undefined
+  eventId: string | undefined
+  eventSourceUrl: string | undefined
   eventTime?: number | undefined
-  actionSource: 'website'
-  userData: MetaUserData
+  actionSource: 'website' | undefined
+  userData: MetaUserData | undefined
   eventData?: MetaEventData | undefined
 }
 export type CustomData = {

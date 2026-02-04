@@ -1,4 +1,9 @@
-import type { CheckoutAttribution, OrderPaid } from '@types'
+import type {
+  CheckoutAttribution,
+  ClientUserData,
+  OrderPaid,
+  MetaEventPayload
+} from '@types'
 import type { NextResponse } from 'next/server'
 export interface EnrichedCustomerData {
   email?: string | undefined
@@ -36,3 +41,35 @@ export interface ServiceResult {
 export type WebhookResult =
   | { success: true; order: OrderPaid }
   | { success: false; errorResponse: NextResponse }
+
+export interface EnrichedEventContext {
+  userData: ClientUserData
+  clientIp: string
+  userAgent: string
+  sourceInfo: {
+    emoji: string
+    name: string
+  }
+}
+export interface EventCookies {
+  fbp?: string | undefined
+  fbc?: string | undefined
+  externalId?: string | undefined
+  userHash?: string | undefined
+  scCid?: string | undefined
+  epik?: string | undefined
+  ttclid?: string | undefined
+  ttp?: string | undefined
+}
+
+export type ValidationResult =
+  | { success: true; payload: MetaEventPayload }
+  | { success: false; errorResponse: NextResponse }
+
+export interface TrackingServiceResult {
+  success: boolean
+  events_received?: number | undefined
+  fbtrace_id?: string | undefined
+  error?: string | undefined
+  details?: unknown | undefined
+}
