@@ -27,7 +27,6 @@ export function AddToCart({
 
   const isAvailable = selectedVariant?.availableForSale ?? false
 
-  // 4. Render View (Pure Presentation)
   return (
     <AddToCartView
       form={form}

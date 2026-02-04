@@ -32,7 +32,6 @@ export function ContactSubmissionEmail(
       <Body style={main}>
         <Container style={container}>
           <Section style={header}>
-            {/* Legg til logoen her */}
             <Img
               src={`${UTK_BASE_URL}/icon.png`} // Full URL til logoen
               width='48' // Juster bredde etter behov
@@ -40,10 +39,6 @@ export function ContactSubmissionEmail(
               alt='Utekos Logo'
               style={logoImg}
             />
-            {/* <Heading as='h1' style={logo}>
-              Utekos
-            </Heading> */}{' '}
-            {/* Valgfritt: Kommentert ut tekstlogo for å unngå duplisering med bilde */}
           </Section>
 
           <Section style={content}>
@@ -103,8 +98,6 @@ export function ContactSubmissionEmail(
     </Html>
   )
 }
-
-// --- Stiler for e-posten ---
 
 const main = {
   backgroundColor: '#f6f9fc',
