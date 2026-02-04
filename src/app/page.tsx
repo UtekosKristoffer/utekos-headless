@@ -41,7 +41,9 @@ const HomePage = () => {
             <FeaturedProductsSection />
           </Suspense>
         </Activity>
-
+        <Activity>
+          <SocialProofSection />
+        </Activity>
         <ComfyrobeSection />
 
         <NewStandardSection />
@@ -56,10 +58,6 @@ const HomePage = () => {
 
         <Activity>
           <TestimonialConstellation />
-        </Activity>
-
-        <Activity>
-          <SocialProofSection />
         </Activity>
       </section>
     </>
