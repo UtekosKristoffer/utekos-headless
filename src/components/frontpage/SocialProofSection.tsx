@@ -1,22 +1,43 @@
-import { CustomerNetwork } from '@/components/frontpage/CustomerNetwork'
-import { CustomerStory } from '@/components/frontpage/CustomerStory'
-import { SocialProofHeader } from '@/components/frontpage/SocialProofHeader'
+import { forwardRef, type ReactNode } from 'react'
 
-export async function SocialProofSection() {
-  return (
-    <section className='mx-auto mb-16 pt-12 sm:py-12'>
-      <div className='mx-auto max-w-[95%] md:max-w-7xl'>
-        <SocialProofHeader />
-
-        <div className='grid grid-cols-1 gap-8 lg:grid-cols-2'>
-          <div className='rounded-xl border border-neutral-800 bg-sidebar-foreground p-8'>
-            <CustomerNetwork />
-          </div>
-          <div className='rounded-xl border border-neutral-800 bg-sidebar-foreground p-8'>
-            <CustomerStory />
-          </div>
-        </div>
-      </div>
-    </section>
-  )
+interface SocialProofHeaderViewProps {
+  title: string
+  description: ReactNode
+  titleRef: React.RefObject<HTMLHeadingElement | null>
+  textRef: React.RefObject<HTMLParagraphElement | null>
 }
+
+export const SocialProofHeaderView = forwardRef<
+  HTMLDivElement,
+  SocialProofHeaderViewProps
+>(({ title, description, titleRef, textRef }, ref) => {
+  const letters = title.split('')
+
+  return (
+    <div ref={ref} className='mb-16 text-center'>
+      <h2
+        ref={titleRef}
+        className='overflow-hidden text-3xl font-bold tracking-tight text-foreground sm:text-4xl'
+        aria-label={title}
+      >
+        {letters.map((char, i) => (
+          <span
+            key={i}
+            className='gsap-heading-char inline-block origin-bottom'
+            style={{ whiteSpace: char === ' ' ? 'pre' : 'normal' }}
+          >
+            {char}
+          </span>
+        ))}
+      </h2>
+      <div
+        ref={textRef}
+        className='mx-auto mt-4 max-w-3xl text-lg text-accent/80 opacity-0 will-change-transform'
+      >
+        {description}
+      </div>
+    </div>
+  )
+})
+
+SocialProofHeaderView.displayName = 'SocialProofHeaderView'

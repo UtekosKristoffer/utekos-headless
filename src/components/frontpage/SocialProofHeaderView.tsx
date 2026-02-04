@@ -1,8 +1,8 @@
-import { forwardRef } from 'react'
+import { forwardRef, type ReactNode } from 'react'
 
 interface SocialProofHeaderViewProps {
   title: string
-  description: string
+  description: ReactNode
   titleRef: React.RefObject<HTMLHeadingElement | null>
   textRef: React.RefObject<HTMLParagraphElement | null>
 }
@@ -30,12 +30,14 @@ export const SocialProofHeaderView = forwardRef<
           </span>
         ))}
       </h2>
-      <p
+
+      {/* Her rendrer vi nå ReactNode (div/p/span) i stedet for bare tekst */}
+      <div
         ref={textRef}
         className='mx-auto mt-4 max-w-3xl text-lg text-accent/80 opacity-0 will-change-transform'
       >
         {description}
-      </p>
+      </div>
     </div>
   )
 })

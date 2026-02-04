@@ -55,6 +55,30 @@ export function useSocialProofAnimation() {
         },
         '-=0.8'
       )
+
+      tl.fromTo(
+        '.gsap-highlight-bg',
+        { scaleX: 0, opacity: 0 },
+        {
+          scaleX: 1,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power3.out',
+          transformOrigin: 'left center'
+        },
+        '-=0.6'
+      )
+
+      tl.fromTo(
+        '.gsap-underline',
+        { width: '0%' },
+        {
+          width: '100%',
+          duration: 1,
+          ease: 'expo.out'
+        },
+        '-=0.6'
+      )
     },
     { scope: containerRef }
   )
