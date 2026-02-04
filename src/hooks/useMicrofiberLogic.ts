@@ -43,8 +43,7 @@ export function useMicrofiberLogic() {
   }
 
   const handleAddToCart = () => {
-    const map = variantMap as Record<string, Record<string, string>>
-    const variantIdRaw = map[color]?.[size]
+    const variantIdRaw = variantMap[color]?.[size]
 
     if (!variantIdRaw) {
       toast.error('Kunne ikke finne varianten. Prøv en annen kombinasjon.')
