@@ -159,7 +159,10 @@ export function FrontpageIceBathingSection() {
                 size='lg'
                 className='bg-amber-600 text-white hover:bg-amber-500 border-0 ring-0 h-14 px-8 text-base font-semibold rounded-full shadow-[0_0_20px_-5px_rgba(217,119,6,0.4)] transition-all hover:scale-105 active:scale-95'
               >
-                <Link href={'/produkter/comfyrobe' as Route}>
+                <Link
+                  href={'/produkter/comfyrobe' as Route}
+                  data-track='FrontpageIceBathingSectionShopNowClick'
+                >
                   Sikre deg din nå
                   <ArrowRight className='ml-2 h-5 w-5 transition-transform group-hover:translate-x-1' />
                 </Link>
@@ -170,7 +173,10 @@ export function FrontpageIceBathingSection() {
                 asChild
                 className='h-14 px-8 text-base rounded-full border-white/10 bg-transparent text-white hover:bg-white/5 hover:text-white hover:border-white/20'
               >
-                <Link href={'/inspirasjon/isbading' as Route}>
+                <Link
+                  href={'/inspirasjon/isbading' as Route}
+                  data-track='FrontpageIceBathingSectionGetInspoClick'
+                >
                   Få isbading-inspo
                 </Link>
               </Button>
