@@ -27,13 +27,10 @@ const HomePage = () => {
             <AsyncProductLaunchWrapper />
           </Suspense>
         </Activity>
-        <TechTeaserSection />
-        <FrontpageIceBathingSection />
+
         <NewProductInStoreNotice />
 
-        <Activity>
-          <TestimonialConstellation />
-        </Activity>
+        <FrontpageIceBathingSection />
 
         <Activity>
           <ProductVideoSection />
@@ -45,14 +42,25 @@ const HomePage = () => {
           </Suspense>
         </Activity>
 
+        <ComfyrobeSection />
+
+        <NewStandardSection />
+
+        <CachedPromiseSection />
+
+        <MomentsSection />
+
+        <QualitySection />
+
+        <TechTeaserSection />
+
+        <Activity>
+          <TestimonialConstellation />
+        </Activity>
+
         <Activity>
           <SocialProofSection />
         </Activity>
-        <ComfyrobeSection />
-        <NewStandardSection />
-        <CachedPromiseSection />
-        <MomentsSection />
-        <QualitySection />
       </section>
     </>
   )
