@@ -4,6 +4,8 @@
 import { trackEvent } from '@/lib/utils/trackEvent'
 import { useEffect } from 'react'
 
+type AnalyticsProperty = string | number | boolean | null
+
 export function ClickTracker() {
   useEffect(() => {
     function handleClick(event: MouseEvent) {
@@ -16,7 +18,7 @@ export function ClickTracker() {
       const trackDataString = trackableElement.getAttribute('data-track-data')
 
       if (eventName) {
-        let parsedData: Record<string, unknown> | undefined
+        let parsedData: Record<string, AnalyticsProperty> | undefined
 
         if (trackDataString) {
           try {
