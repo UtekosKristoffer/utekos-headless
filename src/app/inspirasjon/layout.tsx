@@ -24,7 +24,6 @@ export default function InspirasjonLayout({
 }: InspirasjonLayoutProps) {
   return (
     <section className='min-h-screen bg-background'>
-      {/* Breadcrumb Section */}
       <Activity>
         <section className='border-b border-neutral-800'>
           <div className='container mx-auto px-4 py-6'>

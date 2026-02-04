@@ -6,10 +6,6 @@ import { fromZodError } from 'zod-validation-error'
 import { RemoveCartLineSchema } from '@/db/zod/schemas/RemoveCartLineSchema'
 import type { RemoveCartLineInput } from '@types'
 
-/**
- * Må være async i Next.js 15 når filen er 'use server'.
- * Bruker safeParseAsync og kaster norsk, lesbar feil.
- */
 export async function validateRemoveCartLineInput(
   input: RemoveCartLineInput
 ): Promise<void> {

@@ -176,7 +176,17 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Nei, avbryt</AlertDialogCancel>
-                      <AlertDialogAction onClick={handleRemoveLine}>
+                      <AlertDialogAction
+                        onClick={handleRemoveLine}
+                        data-track='CartRemoveItem'
+                        data-track-data={JSON.stringify({
+                          product: productTitle,
+                          variant: variantTitle,
+                          price: basePrice,
+                          quantity: localQuantity,
+                          total: displayPrice
+                        })}
+                      >
                         Ja, fjern produkt
                       </AlertDialogAction>
                     </AlertDialogFooter>

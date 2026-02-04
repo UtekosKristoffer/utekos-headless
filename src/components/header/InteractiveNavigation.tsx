@@ -15,7 +15,5 @@ import {
 export const InteractiveNavMenu = NavigationMenu
 export const InteractiveNavContent = NavigationMenuContent
 export const InteractiveNavItem = NavigationMenuItem
-export const InteractiveNavLink = NavigationMenuLink
 export const InteractiveNavList = NavigationMenuList
 export const InteractiveNavTrigger = NavigationMenuTrigger
-export const interactiveNavTriggerStyle = navigationMenuTriggerStyle
