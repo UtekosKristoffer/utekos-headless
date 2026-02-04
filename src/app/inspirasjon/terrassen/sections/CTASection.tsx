@@ -19,13 +19,19 @@ export function CTASection() {
           </p>
           <div className='flex flex-wrap justify-center gap-4'>
             <Button asChild size='lg' className='group gap-2'>
-              <Link href={'/produkter' as Route}>
+              <Link
+                href={'/produkter' as Route}
+                data-track='TerrassenShopAllProductsClick'
+              >
                 Se alle produkter
                 <ArrowRight className='size-4 transition-transform group-hover:translate-x-1' />
               </Link>
             </Button>
             <Button variant='outline' size='lg' asChild>
-              <Link href={'/handlehjelp/storrelsesguide' as Route}>
+              <Link
+                href={'/handlehjelp/storrelsesguide' as Route}
+                data-track='TerrassenFindYourSizeClick'
+              >
                 Finn din størrelse
               </Link>
             </Button>

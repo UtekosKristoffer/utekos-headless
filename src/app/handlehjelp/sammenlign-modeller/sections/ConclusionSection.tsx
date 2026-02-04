@@ -14,10 +14,20 @@ export function ConclusionSection() {
         </p>
         <div className='mt-8 flex flex-wrap gap-4 justify-center'>
           <Button asChild size='lg'>
-            <Link href='/produkter'>Se hele kolleksjonen</Link>
+            <Link
+              href='/produkter'
+              data-track='SammenlignModellerConclusionSectionAllProductsClick'
+            >
+              Se hele kolleksjonen
+            </Link>
           </Button>
           <Button asChild size='lg' variant='outline'>
-            <Link href='/kontaktskjema'>Kontakt oss for råd</Link>
+            <Link
+              href='/kontaktskjema'
+              data-track='SammenlignModellerConclusionSectionContactUsClick'
+            >
+              Kontakt oss for råd
+            </Link>
           </Button>
         </div>
       </div>

@@ -23,7 +23,6 @@ export function DeepDiveSection() {
           delay='0.2s'
           threshold={0.3}
         >
-          {/* Kort 1: Varme & Værforhold */}
           <Card className='relative overflow-hidden border-neutral-800 bg-sidebar-foreground'>
             <div className='absolute left-0 top-0 h-2 w-full bg-gradient-to-r from-orange-400 to-cyan-400' />
             <CardContent className='p-8'>
@@ -48,7 +47,6 @@ export function DeepDiveSection() {
             </CardContent>
           </Card>
 
-          {/* Kort 2: Vekt & Pakkbarhet */}
           <Card className='relative overflow-hidden border-neutral-800 bg-sidebar-foreground'>
             <div className='absolute left-0 top-0 h-2 w-full bg-gradient-to-r from-violet-400 to-pink-400' />
             <CardContent className='p-8'>
@@ -73,7 +71,6 @@ export function DeepDiveSection() {
             </CardContent>
           </Card>
 
-          {/* Kort 3: Vask og vedlikehold */}
           <Card className='relative overflow-hidden border-neutral-800 bg-sidebar-foreground'>
             <div className='absolute left-0 top-0 h-2 w-full bg-emerald-400' />
             <CardContent className='p-8'>

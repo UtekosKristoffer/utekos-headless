@@ -63,6 +63,7 @@ export function CTASection() {
             >
               <Link
                 href='/produkter'
+                data-track='AboutUsShopAllProductsClick'
                 className='group inline-flex items-center justify-center rounded-sm bg-[#E07A5F] px-8 py-4 text-base font-bold text-white shadow-lg shadow-[#E07A5F]/20 transition-all duration-300 hover:scale-105 hover:bg-[#d0694e] hover:shadow-[#E07A5F]/40'
               >
                 Se alle produkter

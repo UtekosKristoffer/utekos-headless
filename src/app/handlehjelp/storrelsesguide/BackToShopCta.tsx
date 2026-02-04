@@ -16,19 +16,28 @@ export function BackToShopCta() {
         </p>
         <div className='mt-8 flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-4'>
           <Button asChild size='lg' className='w-full sm:w-auto'>
-            <Link href='/produkter/utekos-dun'>
+            <Link
+              href='/produkter/utekos-dun'
+              data-track='StorrelsesguideBackToShopCtaUtekosDunClick'
+            >
               Til Utekos Dun™
               <ArrowRight className='ml-2 h-4 w-4' />
             </Link>
           </Button>
           <Button asChild size='lg' className='w-full sm:w-auto'>
-            <Link href='/produkter/utekos-mikrofiber'>
+            <Link
+              href='/produkter/utekos-mikrofiber'
+              data-track='StorrelsesguideBackToShopCtaUtekosMikrofiberClick'
+            >
               Til Utekos Mikrofiber™
               <ArrowRight className='ml-2 h-4 w-4' />
             </Link>
           </Button>
           <Button asChild size='lg' className='w-full sm:w-auto'>
-            <Link href='/produkter/comfyrobe'>
+            <Link
+              href='/produkter/comfyrobe'
+              data-track='StorrelsesguideBackToShopCtaComfyrobeClick'
+            >
               Til Comfyrobe™
               <ArrowRight className='ml-2 h-4 w-4' />
             </Link>
