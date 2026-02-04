@@ -1,4 +1,4 @@
-// Path: src/components/hero/ChevronDownSection.tsx
+// Path: src/components/frontpage/components/HeroSection/ChevronDown.tsx
 'use client'
 
 import { useRef } from 'react'
