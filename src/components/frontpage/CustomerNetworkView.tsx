@@ -77,13 +77,17 @@ export function CustomerNetworkView({
           >
             <div className='rounded-lg border border-neutral-800 bg-sidebar-foreground p-3 shadow-lg'>
               <div className='flex items-center gap-2'>
-                <IconRenderer
-                  name={node.data.icon as IconName}
-                  className={`h-4 w-4 flex-shrink-0 ${node.data.iconColor}`}
-                />
-                <span className='whitespace-nowrap text-xs font-medium'>
-                  {node.data.text}
-                </span>
+                {node.data && (
+                  <>
+                    <IconRenderer
+                      name={node.data.icon as IconName}
+                      className={`h-4 w-4 flex-shrink-0 ${node.data.iconColor}`}
+                    />
+                    <span className='whitespace-nowrap text-xs font-medium'>
+                      {node.data.text}
+                    </span>
+                  </>
+                )}
               </div>
             </div>
           </foreignObject>
