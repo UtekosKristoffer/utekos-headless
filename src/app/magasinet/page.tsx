@@ -1,5 +1,4 @@
 // Path: src/app/magasinet/page.tsx
-
 import { mockArticles } from '@/db/data/articles'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
@@ -19,6 +18,12 @@ export default function MagazinePage() {
             <Link
               href={`/magasinet/${featuredArticle.slug}`}
               className='group block'
+              data-track='MagazineFeaturedClick'
+              data-track-data={JSON.stringify({
+                title: featuredArticle.title,
+                slug: featuredArticle.slug,
+                category: featuredArticle.category
+              })}
             >
               <Card className='grid grid-cols-1 md:grid-cols-2 overflow-hidden border-neutral-800 bg-sidebar-foreground transition-all hover:border-neutral-700'>
                 <div className='relative h-64 md:h-auto'>
@@ -59,6 +64,12 @@ export default function MagazinePage() {
                 key={article.slug}
                 href={`/magasinet/${article.slug}`}
                 className='group block'
+                data-track='MagazineGridClick'
+                data-track-data={JSON.stringify({
+                  title: article.title,
+                  slug: article.slug,
+                  category: article.category
+                })}
               >
                 <Card className='overflow-hidden border-neutral-800 bg-sidebar-foreground h-full transition-all hover:border-neutral-700 hover:-translate-y-1'>
                   <div className='relative h-48'>
