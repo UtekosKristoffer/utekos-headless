@@ -1,3 +1,4 @@
+// Path: src/components/header/MobileMenuClient.tsx
 'use client'
 
 import { MenuIcon } from 'lucide-react'
@@ -36,6 +37,7 @@ export function MobileMenuClient({ menu }: { menu: MenuItem[] }) {
           size='icon'
           onClick={() => dispatch({ type: 'OPEN_MENU' })}
           aria-label='Åpne meny'
+          data-track='MobileMenuClick'
         >
           <MenuIcon className='size-6' />
         </Button>
