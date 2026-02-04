@@ -3,7 +3,7 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import safeJsonParse from '@/lib/utils/safeJsonParse'
+import { safeJsonParse } from '@/lib/utils/safeJsonParse'
 import { richTextToHtml } from '@/lib/utils/richTextToHtml'
 import type { ProductDescriptionProps } from '@types'
 

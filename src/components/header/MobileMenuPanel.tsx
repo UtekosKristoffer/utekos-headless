@@ -1,5 +1,5 @@
 import { MobileMenuItem } from '@/components/header/MobileMenuItem'
-import { 
+import {
   Sheet,
   SheetContent,
   SheetHeader,
@@ -28,7 +28,6 @@ export function MobileMenuPanel({
         side='left'
         className='w-full max-w-sm p-0 md:hidden bg-neutral-950 border-neutral-800'
       >
-  
         <div className='pointer-events-none absolute inset-0 -z-10 opacity-20'>
           <div
             className='absolute left-0 top-1/4 h-[300px] w-[300px] blur-3xl'
@@ -82,5 +81,3 @@ export function MobileMenuPanel({
     </Sheet>
   )
 }
-
-export default MobileMenuPanel

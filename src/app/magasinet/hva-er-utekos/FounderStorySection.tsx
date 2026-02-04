@@ -106,5 +106,3 @@ export const FounderStorySection = () => {
     </section>
   )
 }
-
-export default FounderStorySection

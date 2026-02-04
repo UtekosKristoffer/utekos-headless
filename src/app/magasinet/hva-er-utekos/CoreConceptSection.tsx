@@ -208,5 +208,3 @@ export const CoreConceptSection = () => {
     </>
   )
 }
-
-export default CoreConceptSection

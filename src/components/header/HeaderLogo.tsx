@@ -23,5 +23,3 @@ export function HeaderLogo() {
     </div>
   )
 }
-
-export default HeaderLogo

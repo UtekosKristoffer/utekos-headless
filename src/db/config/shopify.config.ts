@@ -1,10 +1,4 @@
 // Path: src/db/config/shopify.config.ts
-
-/**
- * Shopify configuration
- * Centralizes all Shopify-related environment variables and URL construction
- */
-
 const SHOPIFY_API_VERSION = '2025-10'
 export const shopifyConfig = {
   storeDomain: process.env.SHOPIFY_STORE_DOMAIN,
@@ -41,8 +35,6 @@ export const shopifyConfig = {
     return true
   }
 }
-
 export const getShopifyEndpoint = () => shopifyConfig.storefrontApiUrl
 
 export const getShopifyToken = () => shopifyConfig.storefrontAccessToken
-export const validateShopifyConfig = () => shopifyConfig.validate()

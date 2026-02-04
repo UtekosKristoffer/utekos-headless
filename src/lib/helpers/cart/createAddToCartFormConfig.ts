@@ -8,11 +8,6 @@ import type { z } from '@/db/zod/zodClient'
 
 export type AddToCartFormValuesClient = z.infer<typeof AddToCartSchemaClient>
 
-/**
- * Konfig for react-hook-form i AddToCart (klient).
- * - Bruker Zod Mini via AddToCartSchemaClient for minimal bundle.
- * - Unngår unødvendige felter i defaultValues (holder optional helt utelatt).
- */
 export const createAddToCartFormConfig = (
   selectedVariant: ShopifyProductVariant | null
 ) => ({

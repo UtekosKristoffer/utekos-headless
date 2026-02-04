@@ -281,5 +281,3 @@ export const ProductFamilySection = () => {
     </>
   )
 }
-
-export default ProductFamilySection

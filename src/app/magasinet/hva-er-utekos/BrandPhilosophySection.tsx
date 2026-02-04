@@ -89,8 +89,6 @@ export const BrandPhilosophySection = () => {
               produkter designet for å gjøre disse stundene enda bedre.
             </p>
           </AnimatedBlockTwo>
-
-          {/* Values Grid */}
           <div className='grid gap-6 sm:grid-cols-2 mb-16'>
             {values.map((value, index) => {
               const Icon = value.icon
@@ -108,7 +106,6 @@ export const BrandPhilosophySection = () => {
                     onMouseEnter={() => setHoveredValue(value.id)}
                     onMouseLeave={() => setHoveredValue(null)}
                   >
-                    {/* Glow effect */}
                     <div
                       className={`absolute -inset-1 bg-gradient-to-br ${value.color} opacity-0 group-hover:opacity-10 blur-xl transition-opacity duration-500 rounded-2xl`}
                     />
@@ -120,7 +117,6 @@ export const BrandPhilosophySection = () => {
                         : 'bg-zinc-900/50 border-zinc-700/50 hover:border-zinc-600/50'
                       }`}
                     >
-                      {/* Icon */}
                       <div
                         className={`mb-5 inline-flex h-14 w-14 items-center justify-center rounded-xl transition-all duration-300 ${
                           isHovered ?
@@ -135,7 +131,6 @@ export const BrandPhilosophySection = () => {
                         />
                       </div>
 
-                      {/* Content */}
                       <h3
                         className={`text-xl font-semibold mb-3 transition-colors duration-300 ${
                           isHovered ? 'text-zinc-100' : 'text-zinc-200'
@@ -161,14 +156,11 @@ export const BrandPhilosophySection = () => {
             })}
           </div>
 
-          {/* CTA */}
           <AnimatedBlockTwo className='fade-in-up' delay='750ms'>
             <div className='relative group/cta'>
-              {/* Glow effect */}
               <div className='absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 opacity-0 group-hover/cta:opacity-100 blur-xl transition-opacity duration-500 rounded-2xl' />
 
               <div className='relative rounded-2xl border border-zinc-700/50 bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 backdrop-blur-sm p-10 sm:p-12 text-center overflow-hidden'>
-                {/* Decorative elements */}
                 <div className='absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-blue-500/5 to-transparent blur-2xl rounded-full' />
                 <div className='absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-500/5 to-transparent blur-2xl rounded-full' />
 
@@ -201,5 +193,3 @@ export const BrandPhilosophySection = () => {
     </>
   )
 }
-
-export default BrandPhilosophySection
