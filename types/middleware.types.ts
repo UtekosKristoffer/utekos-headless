@@ -1,3 +1,4 @@
+import type { NextRequest, NextResponse } from 'next/server'
 export interface AdPlatformConfig {
   id: 'meta' | 'snapchat' | 'pinterest' | 'tiktok'
   param: string
@@ -44,4 +45,21 @@ export interface MiddlewareContext {
 export interface MiddlewareActionPlan {
   cookiesToSet: MiddlewareCookieConfig[]
   logsToDispatch: DetectedAdInteraction['logData'][]
+}
+
+export interface ProxyPipelineDependencies {
+  detectInteractions: (params: URLSearchParams) => DetectedAdInteraction[]
+  planActions: (
+    interactions: DetectedAdInteraction[],
+    isProduction: boolean
+  ) => MiddlewareActionPlan
+
+  applyCookies: (res: NextResponse, cookies: MiddlewareCookieConfig[]) => void
+  dispatchLogs: (
+    req: NextRequest,
+    logs: DetectedAdInteraction['logData'][],
+    meta: { userAgent: string; referer: string }
+  ) => Promise<void>
+
+  legacyHandler: (req: NextRequest, res: NextResponse) => Promise<NextResponse>
 }

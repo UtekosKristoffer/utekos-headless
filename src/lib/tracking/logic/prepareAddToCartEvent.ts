@@ -1,0 +1,57 @@
+import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
+import type {
+  MetaContentItem,
+  PrepareAddToCartInput,
+  AddToCartEventData
+} from '@types'
+
+export function prepareAddToCartEvent(
+  input: PrepareAddToCartInput
+): AddToCartEventData {
+  const { product, selectedVariant, quantity, additionalLine } = input
+
+  const basePrice = Number.parseFloat(selectedVariant.price.amount)
+  const currency = selectedVariant.price.currencyCode
+  let totalQty = quantity
+
+  const mainVariantId =
+    cleanShopifyId(selectedVariant.id) || selectedVariant.id.toString()
+  const eventID = `atc_${cleanShopifyId(selectedVariant.id)}_${Date.now()}`
+
+  const contents: MetaContentItem[] = [
+    {
+      id: mainVariantId,
+      quantity: quantity,
+      item_price: basePrice
+    }
+  ]
+  const contentIds: string[] = [mainVariantId]
+  let contentName = product.title
+
+  if (additionalLine) {
+    const buffId =
+      cleanShopifyId(additionalLine.variantId) || additionalLine.variantId
+
+    contents.push({
+      id: buffId,
+      quantity: additionalLine.quantity,
+      item_price: 0
+    })
+    contentIds.push(buffId)
+    totalQty += additionalLine.quantity
+    contentName += ' + Utekos Buff™'
+  }
+
+  const value = basePrice * quantity
+
+  return {
+    eventID,
+    contentName,
+    contentIds,
+    contents,
+    value,
+    currency,
+    totalQty,
+    mainVariantId
+  }
+}

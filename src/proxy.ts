@@ -3,7 +3,9 @@ import type { NextRequest } from 'next/server'
 import { createMiddlewareContext } from '@/lib/middleware/utils/createMiddlewareContext'
 import { detectAdInteractions } from '@/lib/middleware/services/detectAdInteractions'
 import { planMiddlewareActions } from '@/lib/middleware/services/planMiddlewareActions'
-import { executeMiddlewareActions } from '@/lib/middleware/infrastructure/executeMiddlewareActions'
+import { applyResponseCookies } from '@/lib/middleware/infrastructure/applyResponseCookies'
+import { dispatchAnalyticsLogs } from '@/lib/middleware/infrastructure/dispatchAnalyticsLogs'
+import { runProxyPipeline } from '@/lib/middleware/services/runProxyPipeline'
 import { handleMarketingParams } from './lib/tracking/proxy/handleMarketingParams'
 import { extractMarketingParams } from './lib/tracking/proxy/extractMarketingParams'
 import { buildCookieConfigs } from './lib/tracking/proxy/buildCookieConfigs'
@@ -13,6 +15,7 @@ import { formatFbcCookie } from './lib/tracking/proxy/formatFbcCookie'
 
 export async function proxy(request: NextRequest) {
   const context = createMiddlewareContext(request)
+
   if (context.isBlockedAgent) {
     return new NextResponse(null, { status: 403, statusText: 'Forbidden' })
   }
@@ -21,15 +24,13 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next()
   }
 
-  const response = NextResponse.next()
-
-  const interactions = detectAdInteractions(context.url.searchParams)
-
-  const actionPlan = planMiddlewareActions(interactions, context.isProduction)
-
-  await executeMiddlewareActions(request, response, actionPlan, context)
-
-  return handleMarketingParams(request, response)
+  return runProxyPipeline(request, context, {
+    detectInteractions: detectAdInteractions,
+    planActions: planMiddlewareActions,
+    applyCookies: applyResponseCookies,
+    dispatchLogs: dispatchAnalyticsLogs,
+    legacyHandler: async (req, res) => handleMarketingParams(req, res)
+  })
 }
 
 export const config = {
