@@ -1,3 +1,4 @@
+// Path: src/components/hero/ChevronDownSection.tsx
 'use client'
 
 import { useRef } from 'react'
@@ -85,6 +86,7 @@ export function ChevronDownSection() {
       onMouseLeave={onLeave}
       className='gsap-cta group relative inline-flex items-center justify-center py-6 px-6 min-h-[44px]'
       aria-label='Gå til skreddersy varmen'
+      data-track='ReadMoreHeroClick'
     >
       <div className='relative flex items-center gap-3'>
         <span
