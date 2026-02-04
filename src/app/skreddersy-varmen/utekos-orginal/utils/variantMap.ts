@@ -1,7 +1,10 @@
-// Path: src/app/skreddersy-varmen/utekos-orginal/utils/variantMap.ts
-import type { ColorVariant, SizeVariant } from '@types'
+// Vi importerer de spesifikke typene for Mikrofiber som er string-unions
+import type { MicrofiberColor, MicrofiberSize } from '@types'
 
-export const variantMap: Record<ColorVariant, Record<SizeVariant, string>> = {
+export const variantMap: Record<
+  MicrofiberColor,
+  Record<MicrofiberSize, string>
+> = {
   vargnatt: {
     medium: '42903231004920',
     large: '42903231070456'
