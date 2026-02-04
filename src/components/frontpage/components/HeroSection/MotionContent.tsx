@@ -18,7 +18,6 @@ export function MotionContent() {
         defaults: { ease: 'expo.out' }
       })
 
-      // 1. Badge: Expands from width 0 to auto, text fades in late
       tl.set('.gsap-badge-container', { autoAlpha: 1 })
       tl.fromTo(
         '.gsap-badge-bg',
@@ -31,12 +30,11 @@ export function MotionContent() {
         '-=0.4'
       )
 
-      // 2. Main Title "Utekos": Staggered letter reveal from bottom with 3D feel
       tl.fromTo(
         '.gsap-char',
         {
-          yPercent: 120, // Push below visible area
-          rotationX: -50, // Slight tilt for 3D effect
+          yPercent: 120,
+          rotationX: -50,
           opacity: 0
         },
         {
@@ -44,13 +42,12 @@ export function MotionContent() {
           rotationX: 0,
           opacity: 1,
           duration: 1.5,
-          stagger: 0.05, // Domino effect
+          stagger: 0.05,
           ease: 'power4.out'
         },
         '-=1.0'
       )
 
-      // 3. Subtitle: Masked reveal + Blur removal
       tl.fromTo(
         '.gsap-subtitle',
         { yPercent: 100, filter: 'blur(10px)', autoAlpha: 0 },
@@ -63,7 +60,6 @@ export function MotionContent() {
         '-=1.2'
       )
 
-      // 4. Description: Soft cinematic rise
       tl.fromTo(
         '.gsap-desc',
         { y: 30, autoAlpha: 0, filter: 'blur(5px)' },
@@ -77,7 +73,19 @@ export function MotionContent() {
         '-=1.0'
       )
 
-      // 5. Chevron: Simple delayed entry
+      tl.fromTo(
+        '.gsap-glow-aura',
+        { scale: 0.8, opacity: 0, filter: 'blur(20px)' },
+        {
+          scale: 1,
+          opacity: 1,
+          filter: 'blur(40px)',
+          duration: 2,
+          ease: 'power2.out'
+        },
+        '-=0.8'
+      )
+
       tl.fromTo(
         '.gsap-chevron',
         { autoAlpha: 0, y: -20 },
@@ -116,18 +124,25 @@ export function MotionContent() {
         </span>
 
         <div className='overflow-hidden'>
-          <span className='gsap-subtitle mt-2 block bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text text-transparent will-change-transform'>
+          <span className='gsap-subtitle mt-2 block bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text text-transparent outline-hidden'>
             Skreddersy varmen
           </span>
         </div>
       </h1>
 
-      <p
-        data-nosnippet='false'
-        className='gsap-desc invisible mx-auto mt-6 mb-12 max-w-2xl text-lg leading-relaxed text-foreground/80 md:max-w-4xl lg:text-2xl will-change-transform'
-      >
-        Kompromissløs komfort. Overlegen allsidighet. Juster, form og nyt.
-      </p>
+      <div className='relative mx-auto mt-6 mb-12 max-w-2xl md:max-w-4xl'>
+        <div className='gsap-glow-aura pointer-events-none absolute inset-x-0 top-1/2 -z-10 h-12 -translate-y-1/2 bg-sky-500/15 opacity-0 blur-3xl' />
+
+        <p
+          data-nosnippet='false'
+          className='gsap-desc invisible text-lg leading-relaxed text-foreground/80 lg:text-2xl'
+        >
+          Kompromissløs komfort. Overlegen allsidighet.{' '}
+          <span className='relative inline-block px-1'>
+            Juster, form og nyt.
+          </span>
+        </p>
+      </div>
 
       <div
         data-nosnippet
