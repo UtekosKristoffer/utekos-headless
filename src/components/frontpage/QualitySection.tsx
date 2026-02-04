@@ -37,6 +37,7 @@ export async function QualitySection() {
               <div className='mt-8'>
                 <Link
                   href='/handlehjelp/teknologi-materialer'
+                  data-track='UtforskTeknologienFrontPageClick'
                   className='inline-flex items-center justify-center rounded-md bg-button px-6 py-3 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-button/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
                 >
                   Utforsk teknologien
