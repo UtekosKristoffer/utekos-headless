@@ -1,26 +1,16 @@
-import { useState, useTransition, useContext } from 'react'
+import { useTransition, useContext } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
-// Context & State
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import { CartIdContext } from '@/lib/context/CartIdContext'
 import { cartStore } from '@/lib/state/cartStore'
-// Infrastructure
 import { useCartMutations } from '@/hooks/useCartMutations'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
 import { useOptimisticCartUpdate } from '@/hooks/useOptimisticCartUpdate'
-// Services
 import { handlePostAddToCartCampaigns } from '@/lib/campaigns/cart/handlePostAddToCartCampaigns'
 import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
 import { useAnalytics } from '@/hooks/useAnalytics'
-// Types
-import type { ShopifyProduct, ShopifyProductVariant } from '@types'
-
-interface UseAddToCartActionProps {
-  product: ShopifyProduct
-  selectedVariant: ShopifyProductVariant | null
-  additionalLine?: { variantId: string; quantity: number } | undefined
-}
+import type { UseAddToCartActionProps } from '@types'
 
 export function useAddToCartAction({
   product,
@@ -29,7 +19,7 @@ export function useAddToCartAction({
 }: UseAddToCartActionProps) {
   const [isTransitioning, startTransition] = useTransition()
   const { addLines } = useCartMutations()
-  const { updateCartCache } = useOptimisticCartUpdate() // <-- NY
+  const { updateCartCache } = useOptimisticCartUpdate()
   const queryClient = useQueryClient()
   const { trackEvent } = useAnalytics()
   const contextCartId = useContext(CartIdContext)
@@ -48,7 +38,6 @@ export function useAddToCartAction({
       try {
         const cartId = contextCartId || (await getCartIdFromCookie())
 
-        // 1. OPTIMISTIC UPDATE: Oppdater UI umiddelbart
         if (cartId) {
           await updateCartCache({
             cartId,
@@ -56,11 +45,10 @@ export function useAddToCartAction({
             variant: selectedVariant,
             quantity
           })
-          // Hvis du har additionalLine (Buff), bør den også legges til optimistisk her
-          // ved å kalle updateCartCache en gang til eller utvide funksjonen.
+
+          cartStore.send({ type: 'OPEN' })
         }
 
-        // 2. Prepare Data
         const lines = [{ variantId: selectedVariant.id, quantity }]
         if (additionalLine) {
           lines.push({
@@ -69,22 +57,18 @@ export function useAddToCartAction({
           })
         }
 
-        // 3. Execute Mutation (Server)
         await addLines(lines)
 
-        // 4. Invalidate (Sikre at vi har fersk data fra server til slutt)
         if (cartId) {
           queryClient.invalidateQueries({ queryKey: ['cart', cartId] })
         }
 
-        // 5. Apply Campaigns (Business Logic)
         await handlePostAddToCartCampaigns({
           cartId,
           additionalLine,
           queryClient
         })
 
-        // 6. Tracking
         await trackAddToCart({
           product,
           selectedVariant,
@@ -98,13 +82,17 @@ export function useAddToCartAction({
           currency: selectedVariant.price.currencyCode
         })
 
-        // 7. UI Feedback (Allerede håndtert av OptimisticCartOpen, men dette sikrer state sync)
-        cartStore.send({ type: 'OPEN' })
+        if (!cartId) {
+          cartStore.send({ type: 'OPEN' })
+        }
       } catch (mutationError) {
         console.error('Feil under legg-i-kurv operasjon:', mutationError)
         toast.error('Kunne ikke legge varen(e) i handlekurven. Prøv igjen.')
-        // Ved feil vil React Query automatisk refetche ved neste invalidation,
-        // så cachen retter seg selv opp.
+
+        const cartId = contextCartId || (await getCartIdFromCookie())
+        if (cartId) {
+          queryClient.invalidateQueries({ queryKey: ['cart', cartId] })
+        }
       }
     })
   }

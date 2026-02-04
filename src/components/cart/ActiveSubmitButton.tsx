@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button'
-import { useOptimisticCartOpen } from '@/hooks/useCartOptimisticOpen'
 
 interface ActiveSubmitButtonProps {
   isPending: boolean
@@ -10,18 +9,9 @@ export function ActiveSubmitButton({
   isPending,
   isDisabled
 }: ActiveSubmitButtonProps) {
-  const { openCartImmediately } = useOptimisticCartOpen()
-
-  const handleInteraction = () => {
-    if (!isDisabled && !isPending) {
-      openCartImmediately()
-    }
-  }
-
   return (
     <Button
       type='submit'
-      onClick={handleInteraction}
       data-track='ModalAddToCart'
       size='lg'
       disabled={isPending || isDisabled}
