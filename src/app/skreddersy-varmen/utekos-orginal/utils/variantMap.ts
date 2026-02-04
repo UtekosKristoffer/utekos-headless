@@ -1,4 +1,3 @@
-// Vi importerer de spesifikke typene for Mikrofiber som er string-unions
 import type { MicrofiberColor, MicrofiberSize } from '@types'
 
 export const variantMap: Record<
