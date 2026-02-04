@@ -153,3 +153,20 @@ export interface PurchaseClientViewProps {
 export interface UsePurchaseLogicProps {
   products: Record<string, ShopifyProduct | null | undefined>
 }
+
+
+export type MicrofiberColor = 'fjellbla' | 'vargnatt'
+
+export type MicrofiberSize = 'medium' | 'large'
+
+
+export interface MicrofiberLogicProps {
+  color: MicrofiberColor
+  setColor: (color: MicrofiberColor) => void
+  size: MicrofiberSize
+  setSize: (size: MicrofiberSize) => void
+  activeImage: string | undefined
+  handleAddToCart: () => void
+  scrollToSizeGuide: () => void
+  isPending: boolean
+}
