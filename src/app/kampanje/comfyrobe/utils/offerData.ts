@@ -22,5 +22,5 @@ export const UPSELL_PRODUCT: ProductOffer = {
   id: 'stapper-addon',
   name: 'Utekos Stapper™',
   price: 149,
-  features: ['Reduserer volum med 40%', 'Vannavvisende nylon', 'Bærehåndtak']
+  features: ['Reduserer volum med 50%']
 }

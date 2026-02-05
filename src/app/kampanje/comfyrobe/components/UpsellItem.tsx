@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
-import { Plus, Check, Minimize2 } from 'lucide-react'
+import { useRef, useState } from 'react'
+import Image from 'next/image'
+import { Plus, Check } from 'lucide-react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import type { ProductOffer } from '../utils/offerData'
@@ -38,9 +39,14 @@ export function UpsellItem({ product, isSelected, onToggle }: UpsellItemProps) {
       className='group relative cursor-pointer border rounded-2xl p-4 transition-all duration-300 active:scale-[0.98]'
     >
       <div className='flex items-start justify-between gap-4'>
-        <div className='flex items-center justify-center w-16 h-16 rounded-xl bg-slate-800 border border-slate-700 shrink-0'>
-          <Minimize2
-            className={`w-8 h-8 transition-colors duration-300 ${isSelected ? 'text-sky-400' : 'text-slate-500'}`}
+        {/* Bilde-container: Lagt til relative og overflow-hidden for at bildet skal respektere rounded corners */}
+        <div className='relative flex items-center justify-center w-16 h-16 rounded-xl bg-slate-800 border border-slate-700 shrink-0 overflow-hidden'>
+          <Image
+            src='/webp/utekos-stapper-1080.webp'
+            alt={product.name}
+            fill
+            className='object-cover'
+            sizes='64px'
           />
         </div>
 

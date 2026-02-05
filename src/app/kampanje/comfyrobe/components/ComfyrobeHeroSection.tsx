@@ -86,7 +86,7 @@ export function ComfyrobeHeroSection({
             ref={bodyRef}
             className='invisible text-base sm:text-lg text-slate-300 leading-relaxed max-w-sm sm:max-w-md'
           >
-            Comfyrobe™ er din festning mot kulda. 8000mm vanntett skall møter
+            Comfyrobe™ er din festning mot kulden. 8000mm vanntett skall møter
             myk SherpaCore™ innside.
           </p>
 

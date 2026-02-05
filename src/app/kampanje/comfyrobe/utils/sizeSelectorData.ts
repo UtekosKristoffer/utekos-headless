@@ -25,11 +25,7 @@ export const SIZE_DATA: Record<SizeOptionKey, SizeProfile> = {
     label: 'Active / Compact',
     tagline: 'Frihet i bevegelse',
     heightRange: '160 - 170 cm',
-    idealFor: [
-      'Voksne (opp til 170cm)',
-      'Aktive livsstiler',
-      'Lettvekts-pakking'
-    ],
+    idealFor: ['Høyde opp til 170cm', 'Aktive livsstiler', 'Lettvekts-pakking'],
     icon: Move,
     // imageSrc: '/images/silhouette-active.png', // Klar for bilde når du har det
     visualScale: 0.9,

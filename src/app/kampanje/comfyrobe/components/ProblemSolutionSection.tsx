@@ -97,7 +97,7 @@ export function ProblemSolutionSection() {
             </h2>
             <p className='text-lg text-slate-400 leading-relaxed'>
               Vindkast som skjærer gjennom marg og bein. Regn som finner veien
-              inn overalt. Den norske kulda tar ingen pauser.
+              inn overalt. Den norske kulden tar ingen pauser.
             </p>
           </div>
         </div>
