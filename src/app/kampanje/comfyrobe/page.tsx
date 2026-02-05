@@ -1,4 +1,3 @@
-import React from 'react'
 import { ComfyrobeHeroSection } from './components/ComfyrobeHeroSection'
 import { ProblemSolutionSection } from './components/ProblemSolutionSection'
 import { AnatomySection } from './components/AnatomySection'
@@ -9,7 +8,6 @@ export default function ComfyrobeLandingPage() {
 
   return (
     <main className='min-h-screen bg-[#0a0a0a]'>
-      {/* Statiske / Isolerte Server/Client komponenter */}
       <ComfyrobeHeroSection
         productImageSrc={productImagePath}
         backgroundImageSrc={backgroundImagePath}
@@ -17,7 +15,6 @@ export default function ComfyrobeLandingPage() {
       <ProblemSolutionSection />
       <AnatomySection />
 
-      {/* Orkestratoren som håndterer state mellom SizeSelector og Offer */}
       <ComfyrobeCommerceFlow productImageSrc={productImagePath} />
     </main>
   )

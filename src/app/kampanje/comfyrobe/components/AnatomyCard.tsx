@@ -1,6 +1,21 @@
-import React from 'react'
-import { AnatomyLayerData } from '../utils/config'
-
+import { type LucideIcon } from 'lucide-react'
+interface AnatomyLayerData {
+  id: number
+  layerLabel: string
+  title: string
+  subtitle: string
+  description: string
+  highlight: string
+  icon: LucideIcon
+  colors: {
+    text: string
+    subText: string
+    icon: string
+    border: string
+    shadow: string
+    bgGradient: string
+  }
+}
 interface AnatomyCardProps {
   data: AnatomyLayerData
   index: number
