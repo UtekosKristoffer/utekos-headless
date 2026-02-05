@@ -97,3 +97,24 @@ export interface GoogleIds {
   clientId?: string | undefined
   sessionId?: string | undefined
 }
+
+export interface PinterestLeadProps {
+  eventId: string
+  emailHash: string
+  clientIp: string | undefined
+  userAgent: string
+  url: string
+  clickId?: string | undefined
+  fbp?: string | undefined
+  fbc?: string | undefined
+}
+
+export interface TikTokLeadProps {
+  eventId: string
+  emailHash: string
+  clientIp: string | undefined
+  userAgent: string
+  url: string
+  ttclid?: string | undefined
+  ttp?: string | undefined
+}

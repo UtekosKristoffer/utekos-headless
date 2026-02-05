@@ -44,7 +44,7 @@ export async function LandingPageJsonLd() {
       name: 'Utekos Comfyrobe',
       url: `${baseUrl}/produkter/comfyrobe`,
       image: `${baseUrl}/magasinet/comfy-front-u-bakgrunn-1080.png`,
-      price: '990',
+      price: '999',
       originalPrice: '1690',
       description: 'Den ultimate skifteroben. Vindtett, vanntett og foret.'
     }

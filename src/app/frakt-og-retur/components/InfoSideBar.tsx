@@ -41,7 +41,7 @@ export function InfoSidebar() {
             <li className='flex items-start gap-3'>
               <BadgeCheck className='mt-0.5 size-5 shrink-0 text-rose-500' />
               <div>
-                <h4 className='font-medium'>Gratis retur</h4>
+                <h4 className='font-medium'>Retur</h4>
                 <p className='text-sm text-muted-foreground'>
                   Send en e-post til kundeservice@utekos.no, så er du i gang.
                 </p>

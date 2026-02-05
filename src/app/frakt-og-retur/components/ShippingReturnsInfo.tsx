@@ -133,7 +133,7 @@ export function ShippingReturnsInfo() {
             </AccordionTrigger>
             <AccordionContent className='prose prose-invert max-w-none text-foreground/80'>
               <p>
-                Vi dekker kostnaden for returfrakt. Vi anbefaler å bruke en
+                Kjøperen dekker kostnad for returfrakt. Vi anbefaler å bruke en
                 sendingsmetode med sporing for din egen sikkerhet.
               </p>
             </AccordionContent>

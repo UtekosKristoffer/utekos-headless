@@ -51,15 +51,15 @@ export interface AnalyticsEvent {
 }
 
 export interface TrackingOverrides {
-  clientId?: string
-  sessionId?: string
-  userId?: string
-  fbp?: string
-  fbc?: string
-  userData?: any
-  userProperties?: Record<string, any>
-  userAgent?: string
-  ipOverride?: string
-  timestampMicros?: number
+  clientId?: string | undefined
+  sessionId?: string | undefined
+  fbp?: string | undefined
+  fbc?: string | undefined
+  userId?: string | undefined
+  timestampMicros?: number | undefined
+  userData?: Record<string, any> | undefined
+  userProperties?: Record<string, any> | undefined
+  userAgent?: string | undefined
+  ipOverride?: string | undefined
 }
 export type Currency = 'NOK' | 'EUR' | 'USD'
