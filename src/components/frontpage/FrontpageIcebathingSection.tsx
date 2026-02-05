@@ -177,7 +177,7 @@ export function FrontpageIceBathingSection() {
                   href={'/kampanje/comfyrobe' as Route}
                   data-track='FrontpageIceBathingSectionGetInspoClick'
                 >
-                  Les mer
+                  Les mer ✨
                 </Link>
               </Button>
             </div>
