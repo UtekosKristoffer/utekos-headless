@@ -3,7 +3,6 @@ import { cookies } from 'next/headers'
 import { v4 as uuidv4 } from 'uuid'
 import type { AnalyticsEvent, TrackingOverrides } from '@types'
 
-// Vi bruker nå kun Google sine direkte keys
 const MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 const API_SECRET = process.env.GA_API_SECRET
 
@@ -11,7 +10,6 @@ export async function trackServerEvent(
   event: AnalyticsEvent,
   overrides?: TrackingOverrides
 ) {
-  // Avbryt hvis manglende credentials
   if (!MEASUREMENT_ID || !API_SECRET) {
     console.warn('[Tracking] Mangler GA4 credentials')
     return
@@ -63,8 +61,8 @@ export async function trackServerEvent(
       non_personalized_ads: false,
       user_data: {
         ...userData,
-        fbc: fbc, // Sender med hvis funnet
-        fbp: fbp // Sender med hvis funnet
+        fbc: fbc,
+        fbp: fbp
       },
       user_properties: userProperties,
       events: [
@@ -74,7 +72,7 @@ export async function trackServerEvent(
             ...event.params,
             ...event.ecommerce,
             session_id: sessionId,
-            engagement_time_msec: 100, // Standard "engaged" signal
+            engagement_time_msec: 100,
             debug_mode: process.env.NODE_ENV === 'development' ? 1 : undefined,
             ip_override: overrides?.ipOverride,
             user_agent: userAgent
@@ -83,7 +81,7 @@ export async function trackServerEvent(
       ]
     }
 
-    const endpoint = `https://www.google-analytics.com/mp/collect?measurement_id=${MEASUREMENT_ID}&api_secret=${API_SECRET}`
+    const endpoint = `https://region1.google-analytics.com/mp/collect?measurement_id=${MEASUREMENT_ID}&api_secret=${API_SECRET}`
 
     const response = await fetch(endpoint, {
       method: 'POST',
