@@ -80,7 +80,7 @@ export async function submitContactForm(
         name: result.data.name
       })
 
-      return { message: 'Noe gikk galt under sending av e-post. Prøv igjen.' }
+      return { message: 'Noe gikk galt under sending av e-post. Send direkte til kundeservice@utekos.no.' }
     }
 
     await logToAppLogs(
