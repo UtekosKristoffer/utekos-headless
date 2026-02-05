@@ -122,6 +122,7 @@ export function ComfyrobeHeroSection({
               src={productImageSrc}
               alt='Comfyrobe Waterproof Changing Robe'
               fill
+              quality={95}
               priority
               className='object-contain lg:object-cover drop-shadow-2xl z-10'
               sizes='(max-width: 768px) 100vw, 50vw'
