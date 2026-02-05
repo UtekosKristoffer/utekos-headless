@@ -1,15 +1,18 @@
 import { trackServerEvent } from '@/lib/tracking/google/trackingServerEvent'
-import type { AnalyticsItem } from '@types'
+import type { AnalyticsItem, GoogleIds } from '@types'
 import { normalizeUserData } from '@/lib/tracking/user-data/normalizeUserData'
 
-export async function handlePurchaseEvent(order: any) {
+export async function handlePurchaseEvent(order: any, ids?: GoogleIds) {
   try {
     const noteAttributes = order.note_attributes || []
     const getAttr = (name: string) =>
       noteAttributes.find((a: any) => a.name === name)?.value
+    const clientId = ids?.clientId || getAttr('_ga_client_id')
+    const sessionId = ids?.sessionId || getAttr('_ga_session_id')
+    if (!clientId) {
+      return
+    }
 
-    const clientId = getAttr('_ga_client_id')
-    const sessionId = getAttr('_ga_session_id')
     const fbp = getAttr('_fbp')
     const fbc = getAttr('_fbc')
     const customer = order.customer || {}
@@ -75,5 +78,6 @@ export async function handlePurchaseEvent(order: any) {
     )
   } catch (error) {
     console.error('[Purchase Tracking] Failed:', error)
+    throw error
   }
 }

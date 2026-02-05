@@ -1,3 +1,4 @@
+// Path: src/app/api/checkout/capture-identifiers/route.ts
 import type { NextRequest } from 'next/server'
 import { parseAndValidateCaptureRequest } from '@/lib/tracking/capture/parseAndValidateCaptureRequest'
 import { adaptRequestToCaptureContext } from '@/lib/tracking/capture/adaptRequestToCaptureContext'

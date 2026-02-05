@@ -1,5 +1,5 @@
 // Path: src/types/meta.types.ts
-import type { TrackingUserData } from '@types'
+import type { TrackingUserData, GA4DataPayload } from '@types'
 
 export interface UserDataStored {
   fbp?: string | undefined
@@ -156,6 +156,7 @@ export interface MetaEventPayload {
   actionSource: 'website' | undefined
   userData: MetaUserData | undefined
   eventData?: MetaEventData | undefined
+  ga4Data?: GA4DataPayload | undefined
 }
 export type CustomData = {
   value?: number | undefined

@@ -29,6 +29,8 @@ export interface TrackingContext {
   customer: EnrichedCustomerData
   redisData: CheckoutAttribution | null
   contentIds: string[]
+  ga_client_id?: string
+  ga_session_id?: string
 }
 
 export interface ServiceResult {
@@ -83,3 +85,15 @@ export interface TrackingUserData extends MetaUserData {
   ttp?: string | undefined
 }
 
+export interface GA4DataPayload {
+  client_id?: string
+  session_id?: string
+  items?: any[]
+  value?: number
+  currency?: string
+}
+
+export interface GoogleIds {
+  clientId?: string | undefined
+  sessionId?: string | undefined
+}

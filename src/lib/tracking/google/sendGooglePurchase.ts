@@ -1,10 +1,16 @@
 import { handlePurchaseEvent } from '@/lib/tracking/google/handlePurchaseEvents'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
-import type { OrderPaid } from '@types'
+import type { TrackingContext } from '@types' // Eller hvor du har definert denne
 
-export async function sendGooglePurchase(order: OrderPaid) {
+export async function sendGooglePurchase(context: TrackingContext) {
+  const { order, redisData } = context
+
   try {
-    await handlePurchaseEvent(order)
+    await handlePurchaseEvent(order, {
+      clientId: redisData?.ga_client_id,
+      sessionId: redisData?.ga_session_id
+    })
+
     await logToAppLogs(
       'INFO',
       'sGTM Purchase Dispatch Success',

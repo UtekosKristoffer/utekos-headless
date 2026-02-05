@@ -1,3 +1,5 @@
+// Path: src/app/api/shopify/webhooks/orders-paid/route.ts
+
 import { parseAndVerifyWebhook } from '@/lib/shopify/webhook-helper'
 import { processOrderTracking } from '@/lib/tracking/services/processOrderTracking'
 import { createTrackingResponse } from '@/lib/tracking/utils/trackingResponseFactory'

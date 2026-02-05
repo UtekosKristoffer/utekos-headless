@@ -6,7 +6,7 @@ export async function processBrowserEvent(
   body: MetaEventPayload,
   cookies: EventCookies,
   metadata: { clientIp: string; userAgent: string },
-  deps: TrackingDependencies // <--- Dependency Injection
+  deps: TrackingDependencies
 ) {
   const { userData, sourceInfo } = prepareEventContext(
     body,
@@ -16,15 +16,21 @@ export async function processBrowserEvent(
   )
 
   const pinPromise = deps.sendPinterest(body, userData, cookies.epik)
+
   const tiktokPromise = deps.sendTikTok(body, userData, {
     ...(cookies.ttclid ? { ttclid: cookies.ttclid } : {}),
     ...(cookies.ttp ? { ttp: cookies.ttp } : {})
   })
 
+  const googlePromise = deps.sendGoogle(body, {
+    clientIp: metadata.clientIp,
+    userAgent: metadata.userAgent
+  })
+
   try {
     const metaResponse = await deps.sendMeta(body, userData)
 
-    await Promise.all([pinPromise, tiktokPromise])
+    await Promise.all([pinPromise, tiktokPromise, googlePromise])
 
     await deps.logger(
       'INFO',
@@ -44,7 +50,8 @@ export async function processBrowserEvent(
         hasFbc: !!userData.fbc,
         hasExtId: !!userData.external_id,
         hasEmail: !!userData.email || !!userData.email_hash,
-        clientIp: userData.client_ip_address
+        clientIp: userData.client_ip_address,
+        hasGA4: !!body.ga4Data?.client_id
       }
     )
 

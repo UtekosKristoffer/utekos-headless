@@ -1,54 +1,59 @@
-// Path: src/lib/tracking/server.ts
-
 import 'server-only'
 import { cookies } from 'next/headers'
 import { v4 as uuidv4 } from 'uuid'
 import type { AnalyticsEvent, TrackingOverrides } from '@types'
 
-const SGTM_ENDPOINT = process.env.NEXT_PUBLIC_SGTM_ENDPOINT
+// Vi bruker nå kun Google sine direkte keys
 const MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
-const API_SECRET = process.env.NEXT_PUBLIC_GA_API_SECRET
+const API_SECRET = process.env.GA_API_SECRET
 
 export async function trackServerEvent(
   event: AnalyticsEvent,
   overrides?: TrackingOverrides
 ) {
-  if (!MEASUREMENT_ID || !API_SECRET || !SGTM_ENDPOINT) {
+  // Avbryt hvis manglende credentials
+  if (!MEASUREMENT_ID || !API_SECRET) {
+    console.warn('[Tracking] Mangler GA4 credentials')
     return
   }
 
   try {
-    let clientId: string
+    let clientId: string | undefined
     let sessionId: string | undefined
     let fbp: string | undefined
     let fbc: string | undefined
     let userAgent = overrides?.userAgent || 'Next.js Server'
     let userData = overrides?.userData || {}
     let userProperties = overrides?.userProperties || {}
-
-    if (overrides) {
-      clientId = overrides.clientId || uuidv4()
+    if (overrides?.clientId) {
+      clientId = overrides.clientId
       sessionId = overrides.sessionId
       fbp = overrides.fbp
       fbc = overrides.fbc
     } else {
-      const cookieStore = await cookies()
-      const gaCookie = cookieStore.get('_ga')?.value
-      clientId = gaCookie ? gaCookie.split('.').slice(2).join('.') : uuidv4()
+      try {
+        const cookieStore = await cookies()
+        const gaCookie = cookieStore.get('_ga')?.value
+        if (gaCookie) {
+          const parts = gaCookie.split('.')
+          if (parts.length >= 4) {
+            clientId = parts.slice(2).join('.')
+          }
+        }
+        const containerId = MEASUREMENT_ID.replace('G-', '')
+        const sessionCookie = cookieStore.get(`_ga_${containerId}`)?.value
 
-      const sessionCookie = cookieStore
-        .getAll()
-        .find(c => c.name.startsWith('_ga_') && c.name !== '_ga')
-      sessionId = sessionCookie ? sessionCookie.value.split('.')[2] : undefined
+        if (sessionCookie) {
+          sessionId = sessionCookie.split('.')[2]
+        }
 
-      fbp = cookieStore.get('_fbp')?.value
-      fbc = cookieStore.get('_fbc')?.value
+        fbp = cookieStore.get('_fbp')?.value
+        fbc = cookieStore.get('_fbc')?.value
+      } catch (error) {}
     }
 
-    const mpUserData = {
-      ...userData,
-      fbc: fbc,
-      fbp: fbp
+    if (!clientId) {
+      clientId = uuidv4()
     }
 
     const payload = {
@@ -56,7 +61,11 @@ export async function trackServerEvent(
       user_id: overrides?.userId,
       timestamp_micros: overrides?.timestampMicros || Date.now() * 1000,
       non_personalized_ads: false,
-      user_data: mpUserData,
+      user_data: {
+        ...userData,
+        fbc: fbc, // Sender med hvis funnet
+        fbp: fbp // Sender med hvis funnet
+      },
       user_properties: userProperties,
       events: [
         {
@@ -65,25 +74,31 @@ export async function trackServerEvent(
             ...event.params,
             ...event.ecommerce,
             session_id: sessionId,
-            engagement_time_msec: 100,
-            debug_mode: process.env.NODE_ENV === 'development' ? 1 : undefined
+            engagement_time_msec: 100, // Standard "engaged" signal
+            debug_mode: process.env.NODE_ENV === 'development' ? 1 : undefined,
+            ip_override: overrides?.ipOverride,
+            user_agent: userAgent
           }
         }
       ]
     }
 
-    const endpoint = `${SGTM_ENDPOINT}/mp/collect?measurement_id=${MEASUREMENT_ID}&api_secret=${API_SECRET}`
+    const endpoint = `https://www.google-analytics.com/mp/collect?measurement_id=${MEASUREMENT_ID}&api_secret=${API_SECRET}`
 
-    await fetch(endpoint, {
+    const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'User-Agent': userAgent
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(payload),
       cache: 'no-store'
     })
+
+    if (!response.ok) {
+      const text = await response.text()
+      console.error(`[Tracking] GA4 Error (${response.status}):`, text)
+    }
   } catch (error) {
-    console.error('[Tracking] Error:', error)
+    console.error('[Tracking] Critical Error:', error)
   }
 }

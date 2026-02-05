@@ -1,3 +1,5 @@
+// Path: src/app/api/tracking-events/route.ts
+
 import { type NextRequest } from 'next/server'
 import { adaptRequestToEventContext } from '@/lib/tracking/utils/adaptRequestToEventContext'
 import { parseAndValidateEventPayload } from '@/lib/tracking/utils/parseAndValidateEventPayload'
@@ -6,6 +8,7 @@ import { processBrowserEvent } from '@/lib/tracking/services/processBrowserEvent
 import { sendMetaBrowserEvent } from '@/lib/tracking/meta/sendMetaBrowserEvent'
 import { sendPinterestBrowserEvent } from '@/lib/tracking/pinterest/sendPinterestBrowserEvent'
 import { sendTikTokBrowserEvent } from '@/lib/tracking/tiktok/sendTikTokBrowserEvent'
+import { sendGA4BrowserEvent } from '@/lib/tracking/google/sendGA4BrowserEvent'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 
 export async function POST(request: NextRequest) {
@@ -23,6 +26,7 @@ export async function POST(request: NextRequest) {
       sendMeta: sendMetaBrowserEvent,
       sendPinterest: sendPinterestBrowserEvent,
       sendTikTok: sendTikTokBrowserEvent,
+      sendGoogle: sendGA4BrowserEvent,
       logger: logToAppLogs
     }
   )
