@@ -81,7 +81,7 @@ export function SizeInfoPanel({ profile }: SizeInfoPanelProps) {
           Velg {profile.fullName} - 999,-
         </button>
         <p className='text-center text-xs text-slate-500 mt-3'>
-          Utsolgt for M/L? {profile.fullName} er det smarte valget.
+          Utsolgt for Medium? {profile.fullName} er det smarte valget.
         </p>
       </div>
     </div>

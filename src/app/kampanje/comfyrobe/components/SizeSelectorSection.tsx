@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 'use client'
 
 import { SizeControls } from './SizeControls'
@@ -40,8 +39,8 @@ export function SizeSelectorSection({
             </span>
           </h2>
           <p className='text-slate-400 max-w-lg mx-auto'>
-            Vi er utsolgt for "standard" størrelsen, men sjansen er stor for at
-            en av våre spesial-profiler passer deg <i>bedre</i>.
+            Vi er utsolgt for størrelse Medium, men sjansen er stor for at en av
+            våre spesial-profiler passer deg <i>bedre</i>.
           </p>
         </div>
 

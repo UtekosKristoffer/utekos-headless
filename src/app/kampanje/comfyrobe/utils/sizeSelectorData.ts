@@ -24,7 +24,7 @@ export const SIZE_DATA: Record<SizeOptionKey, SizeProfile> = {
     fullName: 'Small',
     label: 'Active / Compact',
     tagline: 'Frihet i bevegelse',
-    heightRange: '150 - 170 cm',
+    heightRange: '160 - 170 cm',
     idealFor: [
       'Voksne (opp til 170cm)',
       'Aktive livsstiler',
@@ -49,19 +49,18 @@ export const SIZE_DATA: Record<SizeOptionKey, SizeProfile> = {
     fullName: 'Large',
     label: 'Max / Privacy',
     tagline: 'Ditt private fristed',
-    heightRange: '175 - 200 cm+',
-    idealFor: ['Alle over 175cm', 'Isbadere som skifter', 'Maksimal hygge'],
+    heightRange: '180 - 190 cm+',
+    idealFor: ['Alle over 180cm', 'Isbadere som skifter', 'Maksimal hygge'],
     icon: Maximize,
-    // imageSrc: '/images/silhouette-max.png', // Klar for bilde når du har det
     visualScale: 1.1,
     benefits: [
       {
         title: 'Mobile Changing Room',
-        desc: 'Ekstra vidde lar deg trekke armene inn og skifte våttøy helt privat, varmt og uforstyrret.'
+        desc: 'Ekstra plass til å skifte tøy helt privat og uforstyrret'
       },
       {
         title: 'Full Body Shield',
-        desc: 'Maksimert lengde gir beskyttelse helt ned til leggene for den ultimate "sovepose-følelsen".'
+        desc: 'Oversized fit gir beskyttelse helt ned til leggene.'
       }
     ]
   }
