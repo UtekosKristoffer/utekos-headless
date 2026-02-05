@@ -15,7 +15,7 @@ export function OfferProduct({ product, imageSrc }: OfferProductProps) {
         <div className='inline-flex items-center gap-2 px-4 py-2 bg-sky-900/80 backdrop-blur-md border border-sky-700/50 rounded-full shadow-lg'>
           <ShieldCheck className='w-4 h-4 text-sky-400' />
           <span className='text-xs font-bold text-white tracking-wider uppercase'>
-            Bestselger
+            UNISEX
           </span>
         </div>
       </div>
