@@ -1,3 +1,5 @@
+// Path: src/app/kampanje/comfyrobe/components/ComfyrobeHeroSection.tsx
+
 'use client'
 
 import React, { useRef } from 'react'
