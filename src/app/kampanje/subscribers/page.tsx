@@ -182,7 +182,7 @@ export default async function CampaignSubscriberPage() {
                   <th className='px-6 py-3'>Måling</th>
                   <th className='px-6 py-3 text-center'>S</th>
                   <th className='px-6 py-3 text-center'>M</th>
-                  <th className='px-6 py-3 text-center'>L/</th>
+                  <th className='px-6 py-3 text-center'>L</th>
                 </tr>
               </thead>
               <tbody className='divide-y divide-white/10'>

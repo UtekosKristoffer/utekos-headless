@@ -199,7 +199,7 @@ gjør Utekos unikt:
   vindtett ytterstoff med tapede sømmer. Varmt og mykt Sherpa-fleece fôr.
   Perfekt etter isbading, surfing, svømming eller ved ankomst til en kald hytte.
 - **FARGE:** Fjellnatt
-- **STØRRELSER:** S, L, L/XL
+- **STØRRELSER:** S, L, L
 - **INKLUDERER IKKE:** Bag
 
 - **PRODUKT:** Utekos Stapper™ (Tilbehør)
@@ -228,7 +228,7 @@ gjør Utekos unikt:
   - **Anbefaling:** Velg Medium hvis du er opptil ca. 180 cm. Velg Large hvis du
     er over 180 cm eller ønsker en bevisst overdimensjonert følelse med god
     plass til tykke lag under.
-- **ComfyRobe™ (XS/S, M/L, L/XL):** Designet for å være oversized og romslig.
+- **ComfyRobe™ (S, M, L):** Designet for å være oversized og romslig.
   - **Anbefaling:** Den er ment å enkelt kunne trekkes over våte klær eller
     tykke gensere. Velg din normale størrelse for en veldig romslig passform.
 

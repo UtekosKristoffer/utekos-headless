@@ -3,7 +3,7 @@
 import React, { useRef, useLayoutEffect } from 'react'
 import Image from 'next/image'
 import gsap from 'gsap'
-import type { SizeProfile } from '../utils/sizeSelectorData'
+import type { SizeProfile } from '@types'
 
 interface SizeVisualizerProps {
   profile: SizeProfile
