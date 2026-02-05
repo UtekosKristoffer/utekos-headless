@@ -5,7 +5,7 @@ import { OfferProduct } from './OfferProduct'
 import { UpsellItem } from './UpsellItem'
 import { CheckoutPanel } from './CheckoutPanel'
 import { MAIN_PRODUCT, UPSELL_PRODUCT } from '../utils/offerData'
-import type { SizeOptionKey } from '../utils/sizeSelectorData'
+import { SIZE_DATA, type SizeOptionKey } from '../utils/sizeSelectorData'
 
 interface OfferSectionProps {
   productImageSrc: string
@@ -18,6 +18,9 @@ export function OfferSection({
 }: OfferSectionProps) {
   const [upsellSelected, setUpsellSelected] = useState(false)
 
+  // Henter visningsnavn direkte fra datakilden (S -> Small, L -> Large)
+  const displaySizeName = SIZE_DATA[selectedSize].fullName
+
   return (
     <section className='relative min-h-screen bg-[#0a0a0a] py-20 lg:py-32 overflow-hidden flex items-center'>
       <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-sky-900/10 rounded-full blur-[150px] pointer-events-none' />
@@ -26,7 +29,7 @@ export function OfferSection({
         <div className='mb-12 lg:mb-20 text-center'>
           <h2 className='text-3xl lg:text-6xl font-bold text-white mb-4'>
             Sikre din størrelse:{' '}
-            <span className='text-sky-400'>{selectedSize}</span>
+            <span className='text-sky-400'>{displaySizeName}</span>
           </h2>
           <p className='text-slate-400 text-lg max-w-2xl mx-auto'>
             Fri frakt er aktivert. Legg til kompresjonstrekket for den ultimate

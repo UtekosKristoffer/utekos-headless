@@ -1,65 +1,67 @@
-import { type LucideIcon, Zap, Maximize } from 'lucide-react'
+import { type LucideIcon, Move, Maximize, ScanFace } from 'lucide-react'
 
 export type SizeOptionKey = 'S' | 'L'
 
 export interface SizeProfile {
   id: SizeOptionKey
+  fullName: string
   label: string
   tagline: string
   heightRange: string
   idealFor: string[]
   icon: LucideIcon
+  imageSrc?: string // Nytt felt for silhuett-bilde
+  visualScale: number
   benefits: {
     title: string
     desc: string
   }[]
-  visualScale: number
 }
 
 export const SIZE_DATA: Record<SizeOptionKey, SizeProfile> = {
   S: {
     id: 'S',
-    label: 'Kompakt / Junior',
-    tagline: 'Smidig presisjon',
-    heightRange: '150 - 165 cm',
+    fullName: 'Small',
+    label: 'Active / Compact',
+    tagline: 'Frihet i bevegelse',
+    heightRange: '150 - 170 cm',
     idealFor: [
-      'Junior (10-15 år)',
-      'Petite / Lavere voksne',
-      'Konkurransesvømmere'
+      'Voksne (opp til 170cm)',
+      'Aktive livsstiler',
+      'Lettvekts-pakking'
     ],
-    icon: Zap,
-    visualScale: 0.85,
+    icon: Move,
+    // imageSrc: '/images/silhouette-active.png', // Klar for bilde når du har det
+    visualScale: 0.9,
     benefits: [
       {
-        title: 'Optimalisert Lengde',
-        desc: 'Kortere snitt som forhindrer at kåpen subber i bakken. Gir full bevegelsesfrihet.'
+        title: 'Active Fit™',
+        desc: 'Kortere snitt optimalisert for bevegelse. Gå, løp eller rigg utstyr uten at stoffet kommer i veien.'
       },
       {
-        title: 'Konsentrert Varme',
-        desc: 'Mindre luftrom å varme opp betyr raskere isolasjonseffekt for mindre kropper.'
+        title: 'Flash Heat',
+        desc: 'Mindre innvendig volum betyr at kroppsvarmen din fyller kåpen og isolerer deg raskere.'
       }
     ]
   },
   L: {
     id: 'L',
-    label: 'Romslig / Skifterom',
-    tagline: 'Ditt private skifterom',
-    heightRange: '180 - 200 cm+',
-    idealFor: [
-      'Høye Voksne (185+)',
-      'Isbadere som skifter',
-      'Maksimal Dekning'
-    ],
+    fullName: 'Large',
+    label: 'Max / Privacy',
+    tagline: 'Ditt private fristed',
+    heightRange: '175 - 200 cm+',
+    idealFor: ['Alle over 175cm', 'Isbadere som skifter', 'Maksimal hygge'],
     icon: Maximize,
-    visualScale: 1.15,
+    // imageSrc: '/images/silhouette-max.png', // Klar for bilde når du har det
+    visualScale: 1.1,
     benefits: [
       {
-        title: 'Mobilt Skifterom',
-        desc: 'Ekstra vidde lar deg trekke armene inn og skifte våttøy privat og varmt, uansett hvor du er.'
+        title: 'Mobile Changing Room',
+        desc: 'Ekstra vidde lar deg trekke armene inn og skifte våttøy helt privat, varmt og uforstyrret.'
       },
       {
-        title: 'Totalbeskyttelse',
-        desc: 'Maksimert lengde gir beskyttelse helt ned til leggene for optimal isolasjon mot vær og vind.'
+        title: 'Full Body Shield',
+        desc: 'Maksimert lengde gir beskyttelse helt ned til leggene for den ultimate "sovepose-følelsen".'
       }
     ]
   }

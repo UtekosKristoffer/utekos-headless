@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 'use client'
 
 import React, { useRef, useLayoutEffect } from 'react'
@@ -15,7 +14,6 @@ export function SizeInfoPanel({ profile }: SizeInfoPanelProps) {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate content in whenever profile changes
       gsap.fromTo(
         '.anim-text',
         { y: 20, opacity: 0 },
@@ -61,7 +59,6 @@ export function SizeInfoPanel({ profile }: SizeInfoPanelProps) {
         </div>
       </div>
 
-      {/* Benefits List */}
       <div className='space-y-6'>
         {profile.benefits.map((benefit, i) => (
           <div key={i} className='anim-text flex gap-4'>
@@ -78,13 +75,13 @@ export function SizeInfoPanel({ profile }: SizeInfoPanelProps) {
         ))}
       </div>
 
-      {/* Direct CTA per size */}
       <div className='anim-text mt-10 pt-8 border-t border-slate-800'>
-        <button className='w-full bg-white text-black font-bold py-4 rounded-full hover:scale-[1.02] transition-transform active:scale-95'>
-          Velg {profile.id} - 999,-
+        {/* Endret knappetekst til å bruke fullName (Small/Large) */}
+        <button className='w-full bg-white text-black font-bold py-4 rounded-full hover:scale-[1.02] transition-transform active:scale-95 text-lg lg:text-base xl:text-lg whitespace-nowrap'>
+          Velg {profile.fullName} - 999,-
         </button>
         <p className='text-center text-xs text-slate-500 mt-3'>
-          Utsolgt for M/L? {profile.id} er det smarte valget.
+          Utsolgt for M/L? {profile.fullName} er det smarte valget.
         </p>
       </div>
     </div>
