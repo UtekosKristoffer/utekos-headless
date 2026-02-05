@@ -174,10 +174,10 @@ export function FrontpageIceBathingSection() {
                 className='h-14 px-8 text-base rounded-full border-white/10 bg-transparent text-white hover:bg-white/5 hover:text-white hover:border-white/20'
               >
                 <Link
-                  href={'/inspirasjon/isbading' as Route}
+                  href={'/kampanje/comfyrobe' as Route}
                   data-track='FrontpageIceBathingSectionGetInspoClick'
                 >
-                  Få isbading-inspo
+                  Les mer
                 </Link>
               </Button>
             </div>
