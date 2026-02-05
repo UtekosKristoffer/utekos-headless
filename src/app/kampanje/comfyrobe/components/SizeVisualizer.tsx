@@ -22,7 +22,6 @@ export function SizeVisualizer({ profile }: SizeVisualizerProps) {
         ease: 'elastic.out(1, 0.6)'
       })
 
-      // Roter ikonet ved bytte
       gsap.fromTo(
         iconRef.current,
         { rotate: -45, opacity: 0, scale: 0.5 },
@@ -70,7 +69,7 @@ export function SizeVisualizer({ profile }: SizeVisualizerProps) {
 
         {/* Height Indicators */}
         <div className='absolute -right-12 top-0 bottom-0 flex flex-col justify-between py-4 text-xs font-mono text-slate-500'>
-          <span>HEAD</span>
+          <span>HODE</span>
           <div className='h-full w-px bg-slate-800 mx-auto my-2 relative'>
             <div className='absolute top-0 left-1/2 -translate-x-1/2 w-2 h-px bg-slate-500'></div>
             <div className='absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-px bg-slate-500'></div>
