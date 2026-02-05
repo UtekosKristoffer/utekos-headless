@@ -8,6 +8,7 @@ export interface AnatomyLayerData {
   description: string
   highlight: string
   icon: LucideIcon
+  imageSrc?: string
   colors: {
     text: string
     subText: string
@@ -28,6 +29,7 @@ export const ANATOMY_LAYERS: AnatomyLayerData[] = [
       'Dette er ikke bare stoff. Det er et skjold. HydroGuard™ 8K stopper regnet momentant, mens ripstop-vevingen tåler grener, svaberg og hundeklør.',
     highlight: 'HydroGuard™ 8K',
     icon: Shield,
+    imageSrc: '/webp/hydroguard-01.webp',
     colors: {
       text: 'text-white',
       subText: 'text-slate-400',
@@ -46,6 +48,7 @@ export const ANATOMY_LAYERS: AnatomyLayerData[] = [
       'Mellomlaget jobber hardest. Det slipper ut fuktigheten fra kroppen din, men stenger den iskalde vinden ute. Full balanse, null klamhet.',
     highlight: 'Intelligent Pusteevne',
     icon: Wind,
+    imageSrc: '/webp/windbarrier-02.webp',
     colors: {
       text: 'text-slate-200',
       subText: 'text-slate-400',
@@ -64,6 +67,7 @@ export const ANATOMY_LAYERS: AnatomyLayerData[] = [
       'Innerst mot huden ligger SherpaCore™. Det føles som myk ull, men tørker på minutter og isolerer selv om du nettopp kom opp av isvannet.',
     highlight: 'SherpaCore™',
     icon: Flame,
+    imageSrc: '/1080/comfy-design-1080.png',
     colors: {
       text: 'text-amber-500',
       subText: 'text-amber-800/80',
