@@ -13,7 +13,6 @@ import { ChatBotAgent } from '@/components/chat/ChatBotAgent/source-code'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { GoogleTagManager } from '@next/third-parties/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import { NewsletterPopup } from '@/components/NewsletterPopup'
 import { CartProviderLoader } from '@/components/providers/CartProviderLoader'
 import { CookieConsentBanner } from '@/components/CookieBanner'
 import { ClickTracker } from '@/components/analytics/ClickTracker'
@@ -104,7 +103,6 @@ export default function RootLayo({ children }: RootLayoutProps) {
               <ChatBotAgent />
             </main>
             <Footer />
-            <NewsletterPopup />
             <CookieConsentBanner />
           </CartProviderLoader>
         </Suspense>
