@@ -1,3 +1,4 @@
+// Path: src/app/kampanje/comfyrobe/page.tsx
 import { ComfyrobeHeroSection } from './components/ComfyrobeHeroSection'
 import { ProblemSolutionSection } from './components/ProblemSolutionSection'
 import { AnatomySection } from './components/AnatomySection'
