@@ -8,9 +8,9 @@ export interface ProductOffer {
 
 export const MAIN_PRODUCT: ProductOffer = {
   id: 'comfyrobe-main',
-  name: 'Comfyrobe™ - The Fortress',
+  name: 'Comfyrobe™',
   price: 999,
-  originalPrice: 1490,
+  originalPrice: 1690,
   features: [
     'HydroGuard™ 8000mm Skall',
     'SherpaCore™ Fôr',

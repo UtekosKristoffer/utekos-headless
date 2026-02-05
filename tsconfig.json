@@ -40,7 +40,6 @@
     "src/lib/queries/graphql.d.ts",
     ".next/types/**/*.ts",
     "types/**/*.d.ts",
-    "src/lib/errors",
     "src/api/types/event",
     "src/api/types/state",
     "src/components/WelcomeToast",

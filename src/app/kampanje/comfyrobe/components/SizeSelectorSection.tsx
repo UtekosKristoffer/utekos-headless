@@ -18,7 +18,10 @@ export function SizeSelectorSection({
   const currentProfile = SIZE_DATA[selectedSize]
 
   return (
-    <section className='relative bg-[#0a0a0a] py-24 lg:py-32 overflow-hidden'>
+    <section
+      id='size-selector'
+      className='relative bg-[#0a0a0a] py-24 lg:py-32 overflow-hidden'
+    >
       <div className='absolute inset-0 pointer-events-none'>
         <div
           className={`absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-sky-900/20 rounded-full blur-[120px] transition-all duration-1000 ${selectedSize === 'S' ? 'opacity-100 scale-100' : 'opacity-20 scale-50'}`}

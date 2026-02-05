@@ -9,7 +9,7 @@ import type { SizeOptionKey } from '../utils/sizeSelectorData'
 
 interface OfferSectionProps {
   productImageSrc: string
-  selectedSize: SizeOptionKey // Ny prop
+  selectedSize: SizeOptionKey
 }
 
 export function OfferSection({
