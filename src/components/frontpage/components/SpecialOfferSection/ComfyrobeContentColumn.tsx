@@ -114,7 +114,7 @@ export function ComfyrobeContentColumn({
         style={{ '--transition-delay': '0.9s' } as React.CSSProperties}
       >
         <Link
-          href={'/produkter/comfyrobe' as Route}
+          href={'/kampanje/comfyrobe' as Route}
           onClick={handleCtaClick}
           data-track='ComfyrobeMonicaArneFrontPageClick'
           className={buttonVariants({
