@@ -37,7 +37,7 @@ export async function sendGA4Event({
 
   try {
     const response = await fetch(
-      `https://www.google-analytics.com/mp/collect?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${GA_API_SECRET}`,
+      `https://region1.google-analytics.com/mp/collect?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${GA_API_SECRET}`,
       {
         method: 'POST',
         body: JSON.stringify(payload)

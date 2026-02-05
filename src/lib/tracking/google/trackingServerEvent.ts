@@ -3,14 +3,14 @@ import { cookies } from 'next/headers'
 import { v4 as uuidv4 } from 'uuid'
 import type { AnalyticsEvent, TrackingOverrides } from '@types'
 
-const MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 const API_SECRET = process.env.GA_API_SECRET
 
 export async function trackServerEvent(
   event: AnalyticsEvent,
   overrides?: TrackingOverrides
 ) {
-  if (!MEASUREMENT_ID || !API_SECRET) {
+  if (!GA_MEASUREMENT_ID || !API_SECRET) {
     console.warn('[Tracking] Mangler GA4 credentials')
     return
   }
@@ -38,7 +38,7 @@ export async function trackServerEvent(
             clientId = parts.slice(2).join('.')
           }
         }
-        const containerId = MEASUREMENT_ID.replace('G-', '')
+        const containerId = GA_MEASUREMENT_ID.replace('G-', '')
         const sessionCookie = cookieStore.get(`_ga_${containerId}`)?.value
 
         if (sessionCookie) {
@@ -81,7 +81,7 @@ export async function trackServerEvent(
       ]
     }
 
-    const endpoint = `https://region1.google-analytics.com/mp/collect?measurement_id=${MEASUREMENT_ID}&api_secret=${API_SECRET}`
+    const endpoint = `https://region1.google-analytics.com/mp/collect?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${API_SECRET}`
 
     const response = await fetch(endpoint, {
       method: 'POST',
