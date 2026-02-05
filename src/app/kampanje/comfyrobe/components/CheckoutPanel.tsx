@@ -7,16 +7,16 @@ import type { ProductOffer } from '../utils/offerData'
 import { useAddToCartAction } from '@/hooks/useAddToCartAction'
 
 const VARIANT_IDS = {
-  'XS/S': 'gid://shopify/ProductVariant/43959919051000',
-  'L/XL': 'gid://shopify/ProductVariant/43959919116536',
-  'STAPPER': 'gid://shopify/ProductVariant/42903954292984'
+  S: 'gid://shopify/ProductVariant/43959919051000',
+  L: 'gid://shopify/ProductVariant/43959919116536',
+  STAPPER: 'gid://shopify/ProductVariant/42903954292984'
 }
 
 interface CheckoutPanelProps {
   mainProduct: ProductOffer
   upsellProduct: ProductOffer
   isUpsellSelected: boolean
-  selectedSize: 'XS/S' | 'L/XL'
+  selectedSize: 'S' | 'L'
   productImageSrc: string // NY PROP: Viktig for at bildet skal vises i cart
 }
 

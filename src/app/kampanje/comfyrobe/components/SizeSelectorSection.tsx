@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 'use client'
 
-import React, { useState } from 'react'
 import { SizeControls } from './SizeControls'
 import { SizeVisualizer } from './SizeVisualizer'
 import { SizeInfoPanel } from './SizeInfoPanel'
@@ -20,13 +19,12 @@ export function SizeSelectorSection({
 
   return (
     <section className='relative bg-[#0a0a0a] py-24 lg:py-32 overflow-hidden'>
-      {/* Background Ambience */}
       <div className='absolute inset-0 pointer-events-none'>
         <div
-          className={`absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-sky-900/20 rounded-full blur-[120px] transition-all duration-1000 ${selectedSize === 'XS/S' ? 'opacity-100 scale-100' : 'opacity-20 scale-50'}`}
+          className={`absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-sky-900/20 rounded-full blur-[120px] transition-all duration-1000 ${selectedSize === 'S' ? 'opacity-100 scale-100' : 'opacity-20 scale-50'}`}
         />
         <div
-          className={`absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-orange-900/20 rounded-full blur-[120px] transition-all duration-1000 ${selectedSize === 'L/XL' ? 'opacity-100 scale-100' : 'opacity-20 scale-50'}`}
+          className={`absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-orange-900/20 rounded-full blur-[120px] transition-all duration-1000 ${selectedSize === 'L' ? 'opacity-100 scale-100' : 'opacity-20 scale-50'}`}
         />
       </div>
 
@@ -44,7 +42,6 @@ export function SizeSelectorSection({
           </p>
         </div>
 
-        {/* Sender props videre til kontrollene */}
         <SizeControls selected={selectedSize} onSelect={onSelect} />
 
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-6xl mx-auto'>

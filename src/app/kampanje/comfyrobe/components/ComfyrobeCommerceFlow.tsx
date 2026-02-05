@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { SizeSelectorSection } from './SizeSelectorSection'
 import { OfferSection } from './OfferSection'
-import type { SizeOptionKey } from '../utils/sizeSelectorData'
+import type{ SizeOptionKey } from '../utils/sizeSelectorData'
 interface ComfyrobeCommerceFlowProps {
   productImageSrc: string
 }

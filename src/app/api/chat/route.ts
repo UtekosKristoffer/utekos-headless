@@ -199,7 +199,7 @@ gjør Utekos unikt:
   vindtett ytterstoff med tapede sømmer. Varmt og mykt Sherpa-fleece fôr.
   Perfekt etter isbading, surfing, svømming eller ved ankomst til en kald hytte.
 - **FARGE:** Fjellnatt
-- **STØRRELSER:** XS/S, M/L, L/XL
+- **STØRRELSER:** S, L, L/XL
 - **INKLUDERER IKKE:** Bag
 
 - **PRODUKT:** Utekos Stapper™ (Tilbehør)

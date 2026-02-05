@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import {
   Expand,
   Footprints,
@@ -131,19 +132,19 @@ export function ComfyrobeSizeGuide() {
                         scope='col'
                         className='px-3 py-3.5 text-center text-sm font-semibold'
                       >
-                        XS/S
+                        Small
                       </th>
                       <th
                         scope='col'
                         className='px-3 py-3.5 text-center text-sm font-semibold'
                       >
-                        M/L
+                        Medium
                       </th>
                       <th
                         scope='col'
                         className='px-3 py-3.5 text-center text-sm font-semibold'
                       >
-                        L/XL
+                        Large
                       </th>
                     </tr>
                   </thead>

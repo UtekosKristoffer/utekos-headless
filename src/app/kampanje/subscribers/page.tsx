@@ -180,9 +180,9 @@ export default async function CampaignSubscriberPage() {
               <thead className='bg-white/5 text-xs uppercase tracking-wider'>
                 <tr>
                   <th className='px-6 py-3'>Måling</th>
-                  <th className='px-6 py-3 text-center'>XS/S</th>
-                  <th className='px-6 py-3 text-center'>M/L</th>
-                  <th className='px-6 py-3 text-center'>L/XL</th>
+                  <th className='px-6 py-3 text-center'>S</th>
+                  <th className='px-6 py-3 text-center'>M</th>
+                  <th className='px-6 py-3 text-center'>L/</th>
                 </tr>
               </thead>
               <tbody className='divide-y divide-white/10'>

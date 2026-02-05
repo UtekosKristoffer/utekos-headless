@@ -1,6 +1,6 @@
 import { type LucideIcon, Zap, Maximize } from 'lucide-react'
 
-export type SizeOptionKey = 'XS/S' | 'L/XL'
+export type SizeOptionKey = 'S' | 'L'
 
 export interface SizeProfile {
   id: SizeOptionKey
@@ -17,8 +17,8 @@ export interface SizeProfile {
 }
 
 export const SIZE_DATA: Record<SizeOptionKey, SizeProfile> = {
-  'XS/S': {
-    id: 'XS/S',
+  S: {
+    id: 'S',
     label: 'Kompakt / Junior',
     tagline: 'Smidig presisjon',
     heightRange: '150 - 165 cm',
@@ -40,8 +40,8 @@ export const SIZE_DATA: Record<SizeOptionKey, SizeProfile> = {
       }
     ]
   },
-  'L/XL': {
-    id: 'L/XL',
+  L: {
+    id: 'L',
     label: 'Romslig / Skifterom',
     tagline: 'Ditt private skifterom',
     heightRange: '180 - 200 cm+',
