@@ -13,14 +13,14 @@ export async function sendGooglePurchase(context: TrackingContext) {
 
     await logToAppLogs(
       'INFO',
-      'sGTM Purchase Dispatch Success',
+      'GA4 Purchase Dispatch Success',
       { orderId: order.id, value: order.total_price },
       { source: 'orders-paid webhook' }
     )
   } catch (err: any) {
     await logToAppLogs(
       'ERROR',
-      'sGTM Purchase Dispatch Failed',
+      'GA4 Purchase Dispatch Failed',
       { orderId: order.id, error: err.message },
       { source: 'orders-paid webhook' }
     )
