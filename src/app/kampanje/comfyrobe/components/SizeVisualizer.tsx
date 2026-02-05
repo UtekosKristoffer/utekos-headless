@@ -35,9 +35,8 @@ export function SizeVisualizer({ profile }: SizeVisualizerProps) {
         }
       )
 
-      // Endre fargeglød basert på profil
       const glowColor =
-        profile.id === 'XS/S' ?
+        profile.id === 'S' ?
           'rgba(56, 189, 248, 0.4)' // Sky Blue
         : 'rgba(249, 115, 22, 0.4)' // Orange
 
