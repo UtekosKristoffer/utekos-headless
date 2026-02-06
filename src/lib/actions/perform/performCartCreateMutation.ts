@@ -1,5 +1,3 @@
-// Path: src/lib/actions/perform/performCartCreateMutation.ts
-
 'use server'
 
 import { mutationCartCreate } from '@/api/graphql/mutations/cart'
@@ -10,7 +8,8 @@ import { getMarketingAttributes } from '@/lib/tracking/google/getMarketingAttrib
 import type { CartResponse, ShopifyCreateCartOperation } from '@types'
 
 export const performCartCreateMutation = async (
-  lines: { variantId: string; quantity: number }[]
+  lines: { variantId: string; quantity: number }[],
+  discountCode?: string // <--- Ny valgfri parameter
 ): Promise<CartResponse | null> => {
   const attributes = await getMarketingAttributes()
 
@@ -21,7 +20,9 @@ export const performCartCreateMutation = async (
         merchandiseId: line.variantId,
         quantity: line.quantity
       })),
-      attributes: attributes
+      attributes: attributes,
+      // Legger til rabattkoder hvis det finnes
+      ...(discountCode && { discountCodes: [discountCode] })
     }
   })
 

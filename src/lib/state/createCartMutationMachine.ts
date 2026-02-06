@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 // Path: src/lib/state/createCartMutationMachine.ts
 import { assign, fromPromise, setup, type ErrorActorEvent } from 'xstate'
 import { extractCartErrorMessage } from '@/lib/errors/extractCartErrorMessage'
@@ -11,7 +12,7 @@ import type {
 
 export const createCartMutationMachine = (
   serverActions: CartActions,
-  updateCartCache: (cart: Cart) => void, // ENDRET: Mer presis funksjon
+  updateCartCache: (cart: Cart) => void,
   setCartId: (cartId: string) => void
 ) =>
   setup({
@@ -23,8 +24,20 @@ export const createCartMutationMachine = (
       cartMutator: fromPromise<CartActionsResult, CartMutationEvent>(
         async ({ input: event }) => {
           switch (event.type) {
-            case 'ADD_LINES':
-              return serverActions.addCartLine(event.input)
+            case 'ADD_LINES': {
+              let lines: { variantId: string; quantity: number }[]
+              let discountCode: string | undefined
+
+              if (Array.isArray(event.input)) {
+                lines = event.input
+                discountCode = undefined
+              } else {
+                lines = event.input.lines
+                discountCode = event.input.discountCode
+              }
+
+              return serverActions.addCartLine(lines, discountCode)
+            }
             case 'UPDATE_LINE':
               return serverActions.updateCartLineQuantity(event.input)
             case 'REMOVE_LINE':
@@ -32,10 +45,7 @@ export const createCartMutationMachine = (
             case 'CLEAR':
               return serverActions.clearCart()
             default: {
-              const exhaustiveCheck: never = event
-              throw new Error(
-                `Unhandled event type: ${String(exhaustiveCheck)}`
-              )
+              throw new Error(`Unhandled event type in cartMutator`)
             }
           }
         }
@@ -55,7 +65,8 @@ export const createCartMutationMachine = (
       mutating: {
         invoke: {
           src: 'cartMutator',
-          input: ({ event }) => event,
+
+          input: ({ event }) => event as CartMutationEvent,
           onDone: [
             {
               guard: ({ event }) => !event.output.success,

@@ -92,29 +92,33 @@ export type CartLineInput = {
   discountCode?: string
 }
 
-export type CartActions = {
-  addCartLine(lines: AddToCartFormValues[]): Promise<CartActionsResult>
-
-  updateCartLineQuantity(
-    input: UpdateCartLineQuantityInput
-  ): Promise<CartActionsResult>
-  removeCartLine(input: RemoveCartLineInput): Promise<CartActionsResult>
-  clearCart(): Promise<CartActionsResult>
+export interface CartActions {
+  addCartLine: (
+    lines: { variantId: string; quantity: number }[],
+    discountCode?: string
+  ) => Promise<CartActionsResult>
+  updateCartLineQuantity: (input: {
+    lineId: string
+    quantity: number
+  }) => Promise<CartActionsResult>
+  removeCartLine: (input: { lineId: string }) => Promise<CartActionsResult>
+  clearCart: () => Promise<CartActionsResult>
 }
-
 export type CartMutationContext = {
   error?: string | null
 }
 
-export type CartMutationEvent =
+export type AddLinesInput =
+  | { variantId: string; quantity: number }[]
   | {
-      type: 'ADD_LINES'
-      input: { variantId: string; quantity: number; discountCode?: string }[]
+      lines: { variantId: string; quantity: number }[]
+      discountCode?: string
     }
-  | { type: 'UPDATE_LINE'; input: UpdateCartLineQuantityInput }
-  | { type: 'REMOVE_LINE'; input: RemoveCartLineInput }
+export type CartMutationEvent =
+  | { type: 'ADD_LINES'; input: AddLinesInput }
+  | { type: 'UPDATE_LINE'; input: { lineId: string; quantity: number } }
+  | { type: 'REMOVE_LINE'; input: { lineId: string } }
   | { type: 'CLEAR' }
-
 export type CartMutationInput =
   | AddToCartFormValues
   | UpdateCartLineQuantityInput
