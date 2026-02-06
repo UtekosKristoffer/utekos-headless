@@ -215,6 +215,7 @@ export function CheckoutPanel({
               src={GooglePayLogo}
               alt='Google Pay'
               className='h-full w-auto object-contain'
+              quality={100}
               height={20}
               width={35}
             />
