@@ -99,3 +99,8 @@ export interface SizeProfile {
   }[]
 }
 
+export interface UpsellItemProps {
+  product: ProductOffer
+  isSelected: boolean
+  onToggle: () => void
+}

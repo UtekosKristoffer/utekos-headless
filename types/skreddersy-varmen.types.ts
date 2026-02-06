@@ -16,19 +16,3 @@ export interface NavLink {
   icon: React.ReactNode
   description: string
 }
-
-export interface SizeProfile {
-  id: SizeOptionKey
-  fullName: string
-  label: string
-  tagline: string
-  heightRange: string
-  idealFor: string[]
-  icon: LucideIcon
-  imageSrc?: string // Nytt felt for silhuett-bilde
-  visualScale: number
-  benefits: {
-    title: string
-    desc: string
-  }[]
-}

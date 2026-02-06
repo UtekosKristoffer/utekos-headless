@@ -5,13 +5,7 @@ import Image from 'next/image'
 import { Plus, Check } from 'lucide-react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-import type { ProductOffer } from '@types'
-
-interface UpsellItemProps {
-  product: ProductOffer
-  isSelected: boolean
-  onToggle: () => void
-}
+import type { UpsellItemProps } from '@types'
 
 export function UpsellItem({ product, isSelected, onToggle }: UpsellItemProps) {
   const containerRef = useRef<HTMLDivElement>(null)
