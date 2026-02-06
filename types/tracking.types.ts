@@ -34,10 +34,10 @@ export interface TrackingContext {
 }
 
 export interface ServiceResult {
-  success: boolean
-  events_received?: number
-  fbtrace_id?: string
-  error?: string
+  success: boolean | undefined
+  events_received?: number | undefined
+  fbtrace_id?: string | undefined
+  error?: string | undefined
   details?: any
 }
 
