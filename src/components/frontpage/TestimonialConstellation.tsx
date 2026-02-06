@@ -31,7 +31,7 @@ export function TestimonialConstellation() {
           ease: 'power3.out',
           scrollTrigger: {
             trigger: headerRef.current,
-            start: 'top 85%', // Starter når toppen av elementet er 85% ned på skjermen
+            start: 'top 85%',
             toggleActions: 'play none none reverse'
           }
         }
@@ -58,7 +58,7 @@ export function TestimonialConstellation() {
                   key={i}
                   className={`w-3.5 h-3.5 ${
                     i === 4 ?
-                      'fill-sky-500/50 text-sky-500' // Halv stjerne visuelt (valgfritt, eller full fill for 4.8)
+                      'fill-sky-500/50 text-sky-500' // Halv stjerne visuelt
                     : 'fill-sky-500 text-sky-500'
                   }`}
                 />
@@ -79,14 +79,13 @@ export function TestimonialConstellation() {
 
           <p className='animate-header-item mx-auto text-lg md:text-xl text-neutral-400 leading-relaxed font-light'>
             Ekte tilbakemeldinger fra kunder som, i likhet med deg, verdsetter{' '}
-            {/* Graffiti Effect: Skewed background box */}
             <span className='relative inline-block px-2 mx-1'>
-              <span className='absolute inset-0 bg-sky-500/15 -skew-y-2 -rotate-2 rounded-sm -z-10 backdrop-blur-[1px] border border-sky-500/10' />
+              <span className='absolute inset-0 bg-sky-500/15 -skew-y-1 -rotate-1 rounded-sm -z-10 backdrop-blur-[1px] border border-sky-500/10' />
               <span className='relative font-medium text-sky-100/90'>
                 kompromissløs kvalitet
               </span>
             </span>{' '}
-            og {/* Elegant Underline: Gradient bottom border */}
+            og{' '}
             <span className='relative inline-block'>
               <span className='relative z-10'>varige opplevelser utendørs</span>
               <span className='absolute left-0 -bottom-0.5 w-full h-[2px] bg-gradient-to-r from-transparent via-sky-400/60 to-transparent' />
