@@ -1,15 +1,31 @@
+// Path: src/lib/tracking/google/sendGooglePurchase.ts
+import 'server-only'
 import { handlePurchaseEvent } from '@/lib/tracking/google/handlePurchaseEvents'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
-import type { TrackingContext } from '@types' // Eller hvor du har definert denne
+import type { TrackingContext } from '@types'
 
 export async function sendGooglePurchase(context: TrackingContext) {
   const { order, redisData } = context
 
   try {
-    await handlePurchaseEvent(order, {
+    const res = await handlePurchaseEvent(order, {
       clientId: redisData?.ga_client_id,
       sessionId: redisData?.ga_session_id
     })
+
+    if (res.sent === false) {
+      await logToAppLogs(
+        'WARN',
+        'GA4 Purchase Skipped',
+        {
+          orderId: order.id,
+          reason: res.reason,
+          ...(res.details ? { details: res.details } : {})
+        },
+        { source: 'orders-paid webhook' }
+      )
+      return
+    }
 
     await logToAppLogs(
       'INFO',
@@ -21,7 +37,7 @@ export async function sendGooglePurchase(context: TrackingContext) {
     await logToAppLogs(
       'ERROR',
       'GA4 Purchase Dispatch Failed',
-      { orderId: order.id, error: err.message },
+      { orderId: order.id, error: err?.message || String(err) },
       { source: 'orders-paid webhook' }
     )
   }

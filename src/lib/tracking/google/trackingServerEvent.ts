@@ -1,81 +1,102 @@
+// Path: src/lib/tracking/google/trackingServerEvent.ts
 import 'server-only'
 import { cookies } from 'next/headers'
-import { v4 as uuidv4 } from 'uuid'
 import type { AnalyticsEvent, TrackingOverrides } from '@types'
 
-const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
+const GA_MEASUREMENT_ID =
+  process.env.GA_MEASUREMENT_ID || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 const API_SECRET = process.env.GA_API_SECRET
+
+export type TrackServerEventResult =
+  | { ok: true; status: number }
+  | {
+      ok: false
+      reason: 'missing_credentials' | 'missing_client_id' | 'ga_error'
+      status?: number
+      details?: any
+    }
+
+function parseClientIdFromGaCookie(gaCookie?: string) {
+  if (!gaCookie) return undefined
+  const parts = gaCookie.split('.')
+  if (parts.length >= 4) return parts.slice(2).join('.')
+  return undefined
+}
+
+function parseSessionIdFromGaContainerCookie(cookieValue?: string) {
+  if (!cookieValue) return undefined
+  const parts = cookieValue.split('.')
+  const sid = parts?.[2]
+  return sid ? Number(sid) : undefined
+}
 
 export async function trackServerEvent(
   event: AnalyticsEvent,
   overrides?: TrackingOverrides
-) {
+): Promise<TrackServerEventResult> {
   if (!GA_MEASUREMENT_ID || !API_SECRET) {
-    console.warn('[Tracking] Mangler GA4 credentials')
-    return
+    return { ok: false, reason: 'missing_credentials' }
   }
 
   try {
-    let clientId: string | undefined
-    let sessionId: string | undefined
-    let fbp: string | undefined
-    let fbc: string | undefined
-    let userAgent = overrides?.userAgent || 'Next.js Server'
-    let userData = overrides?.userData || {}
-    let userProperties = overrides?.userProperties || {}
-    if (overrides?.clientId) {
-      clientId = overrides.clientId
-      sessionId = overrides.sessionId
-      fbp = overrides.fbp
-      fbc = overrides.fbc
-    } else {
+    let clientId: string | undefined = overrides?.clientId
+    let sessionId: number | undefined =
+      (
+        overrides?.sessionId !== undefined
+        && overrides?.sessionId !== null
+        && overrides?.sessionId !== ''
+      ) ?
+        Number(overrides.sessionId)
+      : undefined
+
+    const userAgent = overrides?.userAgent || 'Next.js Server'
+
+    if (!clientId) {
       try {
         const cookieStore = await cookies()
-        const gaCookie = cookieStore.get('_ga')?.value
-        if (gaCookie) {
-          const parts = gaCookie.split('.')
-          if (parts.length >= 4) {
-            clientId = parts.slice(2).join('.')
-          }
-        }
+        clientId = parseClientIdFromGaCookie(cookieStore.get('_ga')?.value)
+
         const containerId = GA_MEASUREMENT_ID.replace('G-', '')
         const sessionCookie = cookieStore.get(`_ga_${containerId}`)?.value
-
-        if (sessionCookie) {
-          sessionId = sessionCookie.split('.')[2]
-        }
-
-        fbp = cookieStore.get('_fbp')?.value
-        fbc = cookieStore.get('_fbc')?.value
-      } catch (error) {}
+        sessionId = parseSessionIdFromGaContainerCookie(sessionCookie)
+      } catch {}
     }
 
     if (!clientId) {
-      clientId = uuidv4()
+      return { ok: false, reason: 'missing_client_id' }
     }
 
-    const payload = {
+    const userId = overrides?.userId
+    const shouldSendUserData =
+      !!userId
+      && !!overrides?.userData
+      && Object.keys(overrides.userData).length > 0
+
+    const payload: any = {
       client_id: clientId,
-      user_id: overrides?.userId,
-      timestamp_micros: overrides?.timestampMicros || Date.now() * 1000,
+      ...(userId ? { user_id: userId } : {}),
+      timestamp_micros:
+        overrides?.timestampMicros !== undefined ?
+          overrides.timestampMicros
+        : Math.floor(Date.now() * 1000),
       non_personalized_ads: false,
-      user_data: {
-        ...userData,
-        fbc: fbc,
-        fbp: fbp
-      },
-      user_properties: userProperties,
+      ...(shouldSendUserData ? { user_data: overrides!.userData } : {}),
+      ...((
+        overrides?.userProperties
+        && Object.keys(overrides.userProperties).length
+      ) ?
+        { user_properties: overrides.userProperties }
+      : {}),
+      ...(overrides?.ipOverride ? { ip_override: overrides.ipOverride } : {}),
       events: [
         {
           name: event.name,
           params: {
-            ...event.params,
-            ...event.ecommerce,
-            session_id: sessionId,
-            engagement_time_msec: 100,
-            debug_mode: process.env.NODE_ENV === 'development' ? 1 : undefined,
-            ip_override: overrides?.ipOverride,
-            user_agent: userAgent
+            ...(event.params || {}),
+            ...(event.ecommerce || {}),
+            ...(sessionId !== undefined ? { session_id: sessionId } : {}),
+            engagement_time_msec: 1,
+            ...(process.env.NODE_ENV === 'development' ? { debug_mode: 1 } : {})
           }
         }
       ]
@@ -86,17 +107,29 @@ export async function trackServerEvent(
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'User-Agent': userAgent
       },
       body: JSON.stringify(payload),
       cache: 'no-store'
     })
 
     if (!response.ok) {
-      const text = await response.text()
-      console.error(`[Tracking] GA4 Error (${response.status}):`, text)
+      const text = await response.text().catch(() => '')
+      return {
+        ok: false,
+        reason: 'ga_error',
+        status: response.status,
+        details: text
+      }
     }
-  } catch (error) {
-    console.error('[Tracking] Critical Error:', error)
+
+    return { ok: true, status: response.status }
+  } catch (error: any) {
+    return {
+      ok: false,
+      reason: 'ga_error',
+      details: error?.message || String(error)
+    }
   }
 }

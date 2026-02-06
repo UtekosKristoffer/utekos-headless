@@ -1,112 +1,27 @@
-'use client'
-
-import { useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Layers, Shield, Thermometer, Cpu } from 'lucide-react'
 import type { Route } from 'next'
 import SherpaCoraImg from '@public/1080/comfy-design-1080.png'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(useGSAP, ScrollTrigger)
+import TechTeaserMotion from './TechTeaserMotion'
 
 export default function TechTeaserSection() {
-  const container = useRef<HTMLDivElement>(null)
-  const cardRef = useRef<HTMLDivElement>(null)
-
-  useGSAP(
-    () => {
-      // 1. Entrance Animations
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container.current,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse'
-        }
-      })
-
-      tl.fromTo(
-        '.gsap-content',
-        { y: 30, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 0.8, stagger: 0.1, ease: 'power2.out' }
-      )
-
-      tl.fromTo(
-        '.gsap-card-visual',
-        { x: 30, autoAlpha: 0, rotationY: 10 },
-        { x: 0, autoAlpha: 1, rotationY: 0, duration: 1, ease: 'power3.out' },
-        '-=0.6'
-      )
-
-      // 2. Interactive 3D Tilt for Desktop
-      const card = cardRef.current
-      if (card) {
-        const handleMouseMove = (e: MouseEvent) => {
-          const { left, top, width, height } = card.getBoundingClientRect()
-          const x = (e.clientX - left) / width - 0.5
-          const y = (e.clientY - top) / height - 0.5
-
-          gsap.to('.gsap-tilt-layer', {
-            rotationY: x * 10, // Roterer basert på mus X
-            rotationX: -y * 10, // Roterer basert på mus Y
-            transformPerspective: 1000,
-            duration: 0.5,
-            ease: 'power2.out'
-          })
-
-          // Parallax effekt på innholdet inni kortet
-          gsap.to('.gsap-inner-parallax', {
-            x: x * 20,
-            y: y * 20,
-            duration: 0.5,
-            ease: 'power2.out'
-          })
-        }
-
-        const handleMouseLeave = () => {
-          gsap.to('.gsap-tilt-layer', {
-            rotationY: 0,
-            rotationX: 0,
-            duration: 0.8,
-            ease: 'elastic.out(1, 0.5)'
-          })
-          gsap.to('.gsap-inner-parallax', { x: 0, y: 0, duration: 0.8 })
-        }
-
-        card.addEventListener('mousemove', handleMouseMove)
-        card.addEventListener('mouseleave', handleMouseLeave)
-
-        return () => {
-          card.removeEventListener('mousemove', handleMouseMove)
-          card.removeEventListener('mouseleave', handleMouseLeave)
-        }
-      }
-    },
-    { scope: container }
-  )
-
   return (
     <section
-      ref={container}
+      id='tech-teaser'
       className='mt-12 w-full py-12 md:py-24 overflow-hidden'
     >
       <div className='container mx-auto max-w-7xl px-4'>
-        {/* Main Wrapper - Dark Technical Look */}
         <div className='relative overflow-hidden rounded-3xl border border-white/5 bg-neutral-950 p-8 shadow-2xl md:p-12 lg:p-20'>
-          {/* Ambient Lighting Background */}
           <div className='pointer-events-none absolute -left-[10%] top-0 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-sky-500/5 blur-[120px]' />
           <div className='pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] translate-y-1/3 rounded-full bg-orange-500/5 blur-[100px]' />
 
           <div className='relative grid items-center gap-12 lg:grid-cols-2 lg:gap-20'>
-            {/* Left Column: Content */}
             <div className='space-y-10'>
-              {/* Badge */}
               <div className='gsap-content inline-flex items-center gap-2 rounded-full border border-sky-500/30 bg-sky-500/10 px-4 py-1.5'>
                 <div className='relative flex h-2 w-2'>
-                  <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75'></span>
-                  <span className='relative inline-flex h-2 w-2 rounded-full bg-sky-500'></span>
+                  <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75' />
+                  <span className='relative inline-flex h-2 w-2 rounded-full bg-sky-500' />
                 </div>
                 <span className='text-xs font-bold uppercase tracking-widest text-sky-400'>
                   Innovasjon & Materialer
@@ -129,7 +44,6 @@ export default function TechTeaserSection() {
                 </p>
               </div>
 
-              {/* Feature List */}
               <ul className='space-y-6'>
                 {[
                   {
@@ -188,16 +102,16 @@ export default function TechTeaserSection() {
             </div>
 
             <div
-              ref={cardRef}
+              data-tech-card
               className='gsap-card-visual relative mx-auto w-full max-w-md perspective-1000 lg:h-auto'
             >
-              <div className='gsap-tilt-layer relative w-full aspect-[4/5] preserve-3d'>
-                {/* Back Layer (Decoration) */}
+              <div
+                data-tilt-layer
+                className='relative w-full aspect-[4/5] preserve-3d'
+              >
                 <div className='absolute -right-4 -top-4 h-full w-full rounded-2xl border border-white/5 bg-neutral-900/50 backdrop-blur-sm -z-10 transform translate-z-[-20px]' />
 
-                {/* Main Card */}
                 <div className='relative h-full w-full overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-2xl'>
-                  {/* Image */}
                   <Image
                     src={SherpaCoraImg}
                     alt='SherpaCore Technology Layer'
@@ -205,13 +119,12 @@ export default function TechTeaserSection() {
                     className='object-cover opacity-80'
                     sizes='(max-width: 768px) 100vw, 33vw'
                   />
-
-                  {/* Overlay Gradient */}
                   <div className='absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent' />
 
-                  {/* UI Elements Inside Card */}
-                  <div className='gsap-inner-parallax relative flex h-full flex-col justify-between p-8'>
-                    {/* Top Bar */}
+                  <div
+                    data-inner-parallax
+                    className='gsap-inner-parallax relative flex h-full flex-col justify-between p-8'
+                  >
                     <div className='flex items-center justify-between'>
                       <div className='flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md'>
                         <Cpu className='h-3.5 w-3.5 text-sky-400' />
@@ -222,7 +135,6 @@ export default function TechTeaserSection() {
                       <Shield className='h-5 w-5 text-neutral-500' />
                     </div>
 
-                    {/* Bottom Info */}
                     <div>
                       <div className='mb-4 space-y-1.5 opacity-60'>
                         <div className='h-1 w-12 rounded-full bg-sky-500' />
@@ -239,7 +151,6 @@ export default function TechTeaserSection() {
                   </div>
                 </div>
 
-                {/* Floating Badge (8K) */}
                 <div className='gsap-inner-parallax absolute -bottom-6 -right-6 flex h-24 w-24 items-center justify-center rounded-full border border-white/10 bg-neutral-900 shadow-2xl translate-z-[40px]'>
                   <div className='text-center'>
                     <span className='block text-2xl font-bold text-sky-400'>
@@ -253,6 +164,7 @@ export default function TechTeaserSection() {
               </div>
             </div>
           </div>
+          <TechTeaserMotion targetId='tech-teaser' />
         </div>
       </div>
     </section>

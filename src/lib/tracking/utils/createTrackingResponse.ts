@@ -1,7 +1,6 @@
-// Path: src/lib/tracking/utils/createTrackingResponse.ts
-
 import { NextResponse } from 'next/server'
 import type { TrackingServiceResult } from '@types'
+
 export function createTrackingResponse(
   result: TrackingServiceResult
 ): NextResponse {
@@ -15,9 +14,10 @@ export function createTrackingResponse(
 
   return NextResponse.json(
     {
+      success: false,
       error: result.error || 'Unknown tracking error',
       details: result.details
     },
-    { status: 500 }
+    { status: 200 }
   )
 }
