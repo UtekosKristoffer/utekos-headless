@@ -17,7 +17,7 @@ interface CheckoutPanelProps {
   upsellProduct: ProductOffer
   isUpsellSelected: boolean
   selectedSize: 'S' | 'L'
-  productImageSrc: string // NY PROP: Viktig for at bildet skal vises i cart
+  productImageSrc: string
 }
 
 export function CheckoutPanel({
@@ -30,8 +30,6 @@ export function CheckoutPanel({
   const totalPrice =
     mainProduct.price + (isUpsellSelected ? upsellProduct.price : 0)
   const priceRef = useRef<HTMLSpanElement>(null)
-
-  // --- ROBUST MOCK DATA FOR OPTIMISTIC UI & TRACKING ---
 
   const productMock = {
     id: 'gid://shopify/Product/8036341448952',
@@ -120,7 +118,6 @@ export function CheckoutPanel({
   return (
     <div className='bg-slate-900/80 backdrop-blur-xl border border-slate-700 rounded-3xl p-6 lg:p-8 shadow-2xl'>
       <div className='flex flex-col gap-6'>
-        {/* Progress Bar for Free Shipping (Alltid oppfylt her) */}
         <div className='mb-4'>
           <div className='flex justify-between items-center mb-2 text-xs uppercase font-bold tracking-wider'>
             <span className='text-green-400 flex items-center gap-1.5'>
