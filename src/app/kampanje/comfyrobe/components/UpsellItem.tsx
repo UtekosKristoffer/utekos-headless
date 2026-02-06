@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Plus, Check } from 'lucide-react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-import type { ProductOffer } from '../utils/offerData'
+import type { ProductOffer } from '@types'
 
 interface UpsellItemProps {
   product: ProductOffer
