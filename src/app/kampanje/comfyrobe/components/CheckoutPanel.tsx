@@ -1,12 +1,18 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react'
+import Image from 'next/image'
 import { ArrowRight, Truck, Loader2 } from 'lucide-react'
 import gsap from 'gsap'
 import type { CheckoutPanelProps } from '@types'
 import { useAddToCartAction } from '@/hooks/useAddToCartAction'
 import { VARIANT_IDS } from '../utils/config'
 import type { SizeOptionKey } from '../utils/sizeSelectorData'
+import { VippsLogo } from '@/components/payments/VippsLogo'
+import { KlarnaLogo } from '@/components/payments/KlarnaLogo'
+import { VisaLogo } from '@/components/payments/VisaLogo'
+import GooglePayLogo from '@public/logo/Google_Pay_Logo.svg'
+import ApplePayLogo from '@public/logo/Apple_Pay_logo.svg'
 
 type ExtendedCheckoutPanelProps = CheckoutPanelProps & {
   onSizeChange: (size: SizeOptionKey) => void
@@ -194,8 +200,34 @@ export function CheckoutPanel({
           </span>
         </button>
 
-        <div className='text-center text-xs text-slate-500'>
-          Sikker betaling via Vipps • Klarna • Kort
+        <div className='flex items-center justify-center gap-3 lg:gap-4 mt-2'>
+          <div className='h-5 w-auto [&>svg]:h-full [&>svg]:w-auto flex items-center justify-center'>
+            <VippsLogo />
+          </div>
+          <div className='h-5 w-auto [&>svg]:h-full [&>svg]:w-auto flex items-center justify-center'>
+            <KlarnaLogo />
+          </div>
+          <div className='h-4 w-auto [&>svg]:h-full [&>svg]:w-auto flex items-center justify-center'>
+            <VisaLogo />
+          </div>
+          <div className='h-5 w-auto flex items-center justify-center'>
+            <Image
+              src={GooglePayLogo}
+              alt='Google Pay'
+              className='h-full w-auto object-contain'
+              height={20}
+              width={35}
+            />
+          </div>
+          <div className='h-5 w-auto flex items-center justify-center'>
+            <Image
+              src={ApplePayLogo}
+              alt='Apple Pay'
+              className='h-full w-auto object-contain'
+              height={20}
+              width={35}
+            />
+          </div>
         </div>
       </div>
     </div>

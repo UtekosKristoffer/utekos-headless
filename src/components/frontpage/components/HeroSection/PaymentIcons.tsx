@@ -1,6 +1,5 @@
 import { VippsLogo } from '@/components/payments/VippsLogo'
 import { KlarnaLogo } from '@/components/payments/KlarnaLogo'
-import { VisaLogo } from '@/components/payments/VisaLogo'
 
 export function PaymentIcons() {
   return (
