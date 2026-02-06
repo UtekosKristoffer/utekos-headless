@@ -1,3 +1,5 @@
+'use client'
+
 import { useTransition, useContext } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
@@ -10,6 +12,7 @@ import { useOptimisticCartUpdate } from '@/hooks/useOptimisticCartUpdate'
 import { handlePostAddToCartCampaigns } from '@/lib/campaigns/cart/handlePostAddToCartCampaigns'
 import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
 import { useAnalytics } from '@/hooks/useAnalytics'
+import { applyDiscount } from '@/api/lib/cart/applyDiscount'
 import type { UseAddToCartActionProps } from '@types'
 
 export function useAddToCartAction({
@@ -45,11 +48,11 @@ export function useAddToCartAction({
             variant: selectedVariant,
             quantity
           })
-
           cartStore.send({ type: 'OPEN' })
         }
 
         const lines = [{ variantId: selectedVariant.id, quantity }]
+
         if (additionalLine) {
           lines.push({
             variantId: additionalLine.variantId,
@@ -58,6 +61,20 @@ export function useAddToCartAction({
         }
 
         await addLines(lines)
+
+        if (cartId && additionalLine) {
+          try {
+            const updatedCart = await applyDiscount(cartId, 'GRATISBUFF')
+            if (updatedCart) {
+              queryClient.setQueryData(['cart', cartId], updatedCart)
+            }
+          } catch (discountError) {
+            console.warn(
+              'Kunne ikke aktivere gratis buff-rabatt:',
+              discountError
+            )
+          }
+        }
 
         if (cartId) {
           queryClient.invalidateQueries({ queryKey: ['cart', cartId] })

@@ -3,8 +3,8 @@
 import Link from 'next/link'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { ArrowRight, Sparkles, Check } from 'lucide-react'
-import { VippsLogo } from '@/components/logo/payments/VippsLogo'
-import { KlarnaLogo } from '@/components/logo/payments/KlarnaLogo'
+import { VippsLogo } from '@/components/payments/VippsLogo'
+import { KlarnaLogo } from '@/components/payments/KlarnaLogo'
 
 export function CTASection() {
   return (

@@ -11,9 +11,9 @@ import {
   Gift
 } from 'lucide-react'
 import { cn } from '@/lib/utils/className'
-import { VippsLogo } from '@/components/logo/payments/VippsLogo'
-import { KlarnaLogo } from '@/components/logo/payments/KlarnaLogo'
-import { PostNordLogo } from '@/components/logo/payments/PostNordLogo'
+import { VippsLogo } from '@/components/payments/VippsLogo'
+import { KlarnaLogo } from '@/components/payments/KlarnaLogo'
+import { PostNordLogo } from '@/components/payments/PostNordLogo'
 import { PRODUCT_VARIANTS } from '@/api/constants'
 import type { ModelKey, PurchaseClientViewProps } from '@types'
 

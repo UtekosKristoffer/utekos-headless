@@ -5,9 +5,9 @@
 import { RotateCcw, Truck, ShieldCheck, Store } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { VippsLogo } from '@/components/logo/payments/VippsLogo'
-import { KlarnaLogo } from '@/components/logo/payments/KlarnaLogo'
-import { VisaLogo } from '@/components/logo/payments/VisaLogo'
+import { VippsLogo } from '@/components/payments/VippsLogo'
+import { KlarnaLogo } from '@/components/payments/KlarnaLogo'
+import { VisaLogo } from '@/components/payments/VisaLogo'
 import GooglePayLogo from '@public/logo/Google_Pay_Logo.svg'
 import ApplePayLogo from '@public/logo/Apple_Pay_logo.svg'
 export function TrustSignals() {
