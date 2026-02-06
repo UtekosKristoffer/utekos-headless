@@ -1,19 +1,84 @@
+// Path: src/components/frontpage/TestimonialConstellation.tsx
+'use client'
+
+import React, { useRef, useLayoutEffect } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Star } from 'lucide-react'
 import { TestimonialSection } from './TestimonialSection'
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
+
 export function TestimonialConstellation() {
+  const containerRef = useRef<HTMLElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        '.animate-header-item',
+        {
+          y: 30,
+          opacity: 0
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.15,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: 'top 85%', // Starter når toppen av elementet er 85% ned på skjermen
+            toggleActions: 'play none none reverse'
+          }
+        }
+      )
+    }, containerRef)
+
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <section className='mx-auto py-24 md:mt-6 md:max-w-7xl'>
-      <div className='mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='mb-16 text-center'>
-          <h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
-            Hva sier andre livsnytere?
+    <section
+      ref={containerRef}
+      className='relative mx-auto py-24 md:py-32 overflow-hidden'
+    >
+      <div className='absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] bg-sky-900/10 blur-[120px] rounded-full pointer-events-none' />
+
+      <div className='relative z-10 mx-auto px-4 sm:px-6 lg:px-8 md:max-w-7xl'>
+        <div ref={headerRef} className='mb-20 text-center max-w-3xl mx-auto'>
+          <div className='animate-header-item inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-neutral-900/80 border border-neutral-800 backdrop-blur-md shadow-lg shadow-sky-900/5'>
+            <div className='flex gap-0.5'>
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className='w-3.5 h-3.5 fill-sky-500 text-sky-500'
+                />
+              ))}
+            </div>
+            <span className='h-4 w-px bg-neutral-700 mx-2' />
+            <span className='text-xs font-medium text-neutral-300 tracking-wide uppercase'>
+              4.8 av 5 stjerner
+            </span>
+          </div>
+          <h2 className='animate-header-item text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6'>
+            Hva sier andre{' '}
+            <span className='text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-sky-200 to-white'>
+              livsnytere?
+            </span>
           </h2>
-          <p className='mx-auto mt-4 max-w-2xl text-lg text-access/80'>
+
+          <p className='animate-header-item mx-auto text-lg md:text-xl text-neutral-400 leading-relaxed font-light'>
             Ekte tilbakemeldinger fra kunder som, i likhet med deg, verdsetter
-            komfort og kvalitetstid.
+            kompromissløs kvalitet og varige opplevelser utendørs.
           </p>
         </div>
-
-        <TestimonialSection />
+        <div className='relative z-20'>
+          <TestimonialSection />
+        </div>
       </div>
     </section>
   )
