@@ -160,7 +160,7 @@ export function FrontpageIceBathingSection() {
                 className='bg-amber-600 text-white hover:bg-amber-500 border-0 ring-0 h-14 px-8 text-base font-semibold rounded-full shadow-[0_0_20px_-5px_rgba(217,119,6,0.4)] transition-all hover:scale-105 active:scale-95'
               >
                 <Link
-                  href={'/produkter/comfyrobe' as Route}
+                  href={'/kampanje/comfyrobe' as Route}
                   data-track='FrontpageIceBathingSectionShopNowClick'
                 >
                   Sikre deg din nå

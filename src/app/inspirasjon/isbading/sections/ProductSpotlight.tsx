@@ -69,7 +69,7 @@ export function ProductSpotlight() {
                 className='bg-white text-black hover:bg-neutral-200 h-14 px-8 text-lg w-full sm:w-auto'
                 asChild
               >
-                <Link href='/produkter/comfyrobe'>
+                <Link href='/kampanje/comfyrobe' prefetch={false}>
                   Kjøp nå
                   <ArrowRight className='ml-2 size-5' />
                 </Link>
