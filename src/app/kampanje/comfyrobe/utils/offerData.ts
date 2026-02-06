@@ -1,10 +1,4 @@
-export interface ProductOffer {
-  id: string
-  name: string
-  price: number
-  originalPrice?: number
-  features: string[]
-}
+import type { ProductOffer } from '@types'
 
 export const MAIN_PRODUCT: ProductOffer = {
   id: 'comfyrobe-main',

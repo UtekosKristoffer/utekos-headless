@@ -5,6 +5,8 @@ import type {
   AddToCartFormValues
 } from '@types'
 import type { UseFormReturn } from 'react-hook-form'
+import type { SizeOptionKey } from '../src/app/kampanje/comfyrobe/utils/sizeSelectorData'
+import type { LucideIcon } from 'lucide-react'
 
 export interface PrepareAddToCartInput {
   product: ShopifyProduct
@@ -55,3 +57,45 @@ export interface AddToCartViewProps {
   isPending: boolean
   isAvailable: boolean
 }
+
+export interface CheckoutPanelProps {
+  mainProduct: ProductOffer
+  upsellProduct: ProductOffer
+  isUpsellSelected: boolean
+  selectedSize: 'S' | 'L'
+  productImageSrc: string
+}
+
+export interface ProductOffer {
+  id: string
+  name: string
+  price: number
+  originalPrice?: number
+  features: string[]
+}
+
+export interface OfferProductProps {
+  product: ProductOffer
+}
+
+export interface OfferSectionProps {
+  productImageSrc: string
+  selectedSize: SizeOptionKey
+}
+
+export interface SizeProfile {
+  id: SizeOptionKey
+  fullName: string
+  label: string
+  tagline: string
+  heightRange: string
+  idealFor: string[]
+  icon: LucideIcon
+  imageSrc?: string
+  visualScale: number
+  benefits: {
+    title: string
+    desc: string
+  }[]
+}
+

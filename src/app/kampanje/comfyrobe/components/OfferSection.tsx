@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { OfferProduct } from './OfferProduct'
 import { OfferGallery } from './OfferGallery'
 import { OfferSpecs } from './OfferSpecs'
@@ -8,11 +8,7 @@ import { UpsellItem } from './UpsellItem'
 import { CheckoutPanel } from './CheckoutPanel'
 import { MAIN_PRODUCT, UPSELL_PRODUCT } from '../utils/offerData'
 import { SIZE_DATA, type SizeOptionKey } from '../utils/sizeSelectorData'
-
-interface OfferSectionProps {
-  productImageSrc: string
-  selectedSize: SizeOptionKey
-}
+import type { OfferSectionProps } from '@types'
 
 export function OfferSection({
   productImageSrc,
@@ -49,8 +45,6 @@ export function OfferSection({
               mainImageSrc={productImageSrc}
             />
           </div>
-
-          {/* HØYRE: Produktinfo & Checkout */}
           <div className='lg:col-span-5 relative'>
             <div className='lg:sticky lg:top-8 flex flex-col gap-8'>
               <OfferProduct product={MAIN_PRODUCT} />
@@ -73,8 +67,6 @@ export function OfferSection({
             </div>
           </div>
         </div>
-
-        {/* BUNN SEKSJON: Spesifikasjoner (Full bredde container) */}
         <div className='w-full max-w-6xl mx-auto'>
           <OfferSpecs />
         </div>

@@ -50,8 +50,6 @@ export function OfferGallery({ name, mainImageSrc }: OfferGalleryProps) {
           sizes='(max-width: 768px) 100vw, 50vw'
           priority={selectedIndex === 0}
         />
-
-        {/* Navigation Buttons */}
         <button
           onClick={handlePrev}
           className='absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-slate-900/80 border border-slate-700 text-white hover:bg-sky-600 hover:border-sky-500 transition-all duration-300 backdrop-blur-sm opacity-0 group-hover:opacity-100 focus:opacity-100 translate-x-[-10px] group-hover:translate-x-0'
@@ -68,16 +66,14 @@ export function OfferGallery({ name, mainImageSrc }: OfferGalleryProps) {
           <ChevronRight className='w-5 h-5' />
         </button>
       </div>
-
-      {/* Thumbnails Container */}
       <div className='mt-6 w-full'>
-        {/* ENDRING HER: Lagt til p-3 for å gi plass til skalering og skygge uten at det klippes */}
         <div className='flex gap-3 overflow-x-auto p-3 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:"none"] [scrollbar-width:"none"]'>
           {images.map((img, index) => (
             <button
               key={index}
               onClick={() => setSelectedIndex(index)}
-              // Fjernet 'relative' herfra da det ikke er nødvendig og kan skape stacking context problemer
+              data-track={`gallery-thumb-${index + 1}`}
+              aria-label={`${name} thumbnail ${index + 1}`}
               className={`shrink-0 w-[80px] lg:w-[100px] aspect-[3/4] snap-center rounded-xl overflow-hidden border transition-all duration-300 ${
                 selectedIndex === index ?
                   'border-sky-500 ring-2 ring-sky-500/20 scale-105 shadow-lg shadow-sky-900/20'

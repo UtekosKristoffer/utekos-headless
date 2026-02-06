@@ -66,10 +66,15 @@ export function ProductSpotlight() {
             >
               <Button
                 size='lg'
+                data-track='comfyrobe-icebath-campaign-buy-now'
                 className='bg-white text-black hover:bg-neutral-200 h-14 px-8 text-lg w-full sm:w-auto'
                 asChild
               >
-                <Link href='/kampanje/comfyrobe' prefetch={false}>
+                <Link
+                  href='/kampanje/comfyrobe'
+                  prefetch={false}
+                  data-track='comfyrobe-icebath-campaign-buy-now'
+                >
                   Kjøp nå
                   <ArrowRight className='ml-2 size-5' />
                 </Link>

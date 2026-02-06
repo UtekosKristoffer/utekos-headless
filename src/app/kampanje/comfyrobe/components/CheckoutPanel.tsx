@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from 'react'
 import { ArrowRight, Truck, PackageCheck, Loader2 } from 'lucide-react'
 import gsap from 'gsap'
-import type { ProductOffer } from '../utils/offerData'
+import type { ProductOffer } from '@types'
 import { useAddToCartAction } from '@/hooks/useAddToCartAction'
 
 const VARIANT_IDS = {
@@ -142,6 +142,7 @@ export function CheckoutPanel({
         <button
           onClick={() => performAddToCart(1)}
           disabled={isPending}
+          data-track='🚨KJØP-NÅ-COMFYROBE-CAMPAIGN🚨'
           className='group relative w-full overflow-hidden rounded-full bg-white py-4 lg:py-5 text-lg font-bold text-black transition-all hover:scale-[1.01] active:scale-[0.98] shadow-[0_0_40px_rgba(255,255,255,0.1)] disabled:opacity-70 disabled:cursor-not-allowed'
         >
           <div className='absolute inset-0 bg-gradient-to-r from-sky-400 via-white to-sky-400 opacity-0 group-hover:opacity-20 transition-opacity duration-500' />

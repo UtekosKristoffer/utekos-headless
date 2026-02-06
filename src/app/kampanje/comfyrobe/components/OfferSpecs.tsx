@@ -1,10 +1,9 @@
 'use client'
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { ACCORDION_DATA } from '../utils/offerSpecsData'
 
-// Gjenbrukbar komponent for selve accordion-elementet
 function AccordionItem({
   item,
   isOpen,
@@ -66,21 +65,18 @@ function AccordionItem({
 }
 
 export function OfferSpecs() {
-  // Stat null betyr at alle er lukket fra start
   const [openAccordionId, setOpenAccordionId] = useState<string | null>(null)
 
   const toggleAccordion = (id: string) => {
     setOpenAccordionId(prev => (prev === id ? null : id))
   }
 
-  // Splitter dataen i to for desktop-visning
   const midPoint = Math.ceil(ACCORDION_DATA.length / 2)
   const leftColumnData = ACCORDION_DATA.slice(0, midPoint)
   const rightColumnData = ACCORDION_DATA.slice(midPoint)
 
   return (
     <div className='w-full'>
-      {/* Header / Divider */}
       <div className='flex items-center gap-4 mb-8 lg:mb-12'>
         <div className='h-px flex-1 bg-gradient-to-r from-transparent via-slate-800 to-transparent lg:via-slate-700' />
         <p className='text-sm font-bold text-sky-500 uppercase tracking-widest px-2'>
@@ -89,7 +85,6 @@ export function OfferSpecs() {
         <div className='h-px flex-1 bg-gradient-to-r from-transparent via-slate-800 to-transparent lg:via-slate-700' />
       </div>
 
-      {/* MOBILE VIEW: Single Column Stack */}
       <div className='block lg:hidden space-y-3'>
         {ACCORDION_DATA.map(item => (
           <AccordionItem
@@ -100,11 +95,7 @@ export function OfferSpecs() {
           />
         ))}
       </div>
-
-      {/* DESKTOP VIEW: 2-Column Grid of Accordions */}
-      {/* items-start sikrer at de ikke strekker seg hvis en kolonne er lengre enn den andre */}
       <div className='hidden lg:grid lg:grid-cols-2 gap-6 items-start'>
-        {/* Venstre kolonne */}
         <div className='space-y-4'>
           {leftColumnData.map(item => (
             <AccordionItem
@@ -115,7 +106,7 @@ export function OfferSpecs() {
             />
           ))}
         </div>
-        {/* Høyre kolonne */}
+
         <div className='space-y-4'>
           {rightColumnData.map(item => (
             <AccordionItem

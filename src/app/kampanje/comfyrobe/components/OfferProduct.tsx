@@ -1,10 +1,5 @@
-import React from 'react'
 import { Check } from 'lucide-react'
-import type { ProductOffer } from '../utils/offerData'
-
-interface OfferProductProps {
-  product: ProductOffer
-}
+import type { OfferProductProps } from '@types'
 
 export function OfferProduct({ product }: OfferProductProps) {
   return (

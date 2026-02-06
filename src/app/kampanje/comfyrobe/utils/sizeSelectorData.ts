@@ -1,22 +1,7 @@
-import { type LucideIcon, Move, Maximize, ScanFace } from 'lucide-react'
+import { Move, Maximize, ScanFace } from 'lucide-react'
+import type { SizeProfile } from '@types'
 
 export type SizeOptionKey = 'S' | 'L'
-
-export interface SizeProfile {
-  id: SizeOptionKey
-  fullName: string
-  label: string
-  tagline: string
-  heightRange: string
-  idealFor: string[]
-  icon: LucideIcon
-  imageSrc?: string // Nytt felt for silhuett-bilde
-  visualScale: number
-  benefits: {
-    title: string
-    desc: string
-  }[]
-}
 
 export const SIZE_DATA: Record<SizeOptionKey, SizeProfile> = {
   S: {
@@ -27,7 +12,7 @@ export const SIZE_DATA: Record<SizeOptionKey, SizeProfile> = {
     heightRange: '160 - 170 cm',
     idealFor: ['Høyde opp til 170cm', 'Aktive livsstiler', 'Lettvekts-pakking'],
     icon: Move,
-    // imageSrc: '/images/silhouette-active.png', // Klar for bilde når du har det
+    // imageSrc: '/images/silhouette-active.png',
     visualScale: 0.9,
     benefits: [
       {
