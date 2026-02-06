@@ -30,7 +30,12 @@ export const SocialProofHeaderView = forwardRef<
                 {char}
               </span>
             ))}
-            {wordIndex < words.length - 1 && ' '}
+
+            {wordIndex < words.length - 1 && (
+              <span className='gsap-heading-char inline-block origin-bottom'>
+                &nbsp;
+              </span>
+            )}
           </span>
         ))}
       </h2>

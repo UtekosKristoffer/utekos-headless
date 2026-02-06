@@ -3,7 +3,7 @@
 import React, { useRef, useLayoutEffect } from 'react'
 import gsap from 'gsap'
 import { Check, Ruler, User } from 'lucide-react'
-import type { SizeProfile } from '../utils/sizeSelectorData'
+import type { SizeProfile } from '@types'
 
 interface SizeInfoPanelProps {
   profile: SizeProfile
