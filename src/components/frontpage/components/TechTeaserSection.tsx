@@ -18,20 +18,23 @@ export default function TechTeaserSection() {
 
           <div className='relative grid items-center gap-12 lg:grid-cols-2 lg:gap-20'>
             <div className='space-y-10'>
-              <div className='gsap-content inline-flex items-center gap-2 rounded-full border border-sky-500/30 bg-sky-500/10 px-4 py-1.5'>
+              <div className='gsap-content inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-4 py-1.5 backdrop-blur-sm'>
                 <div className='relative flex h-2 w-2'>
-                  <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75' />
-                  <span className='relative inline-flex h-2 w-2 rounded-full bg-sky-500' />
+                  {/* Ping-effekt i varmt gull */}
+                  <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75' />
+                  {/* Statisk punkt i dypere rav/gull */}
+                  <span className='relative inline-flex h-2 w-2 rounded-full bg-amber-500' />
                 </div>
-                <span className='text-xs font-bold uppercase tracking-widest text-sky-400'>
+                {/* Tekst i lysere gull for god lesbarhet mot mørk bakgrunn */}
+                <span className='text-xs font-bold uppercase tracking-widest text-amber-400'>
                   Innovasjon & Materialer
                 </span>
               </div>
 
               <div className='space-y-6'>
-                <h2 className='gsap-content text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl'>
+                <h2 className='gsap-content text-4xl font-bold tracking-tight text-neutral-100 sm:text-5xl md:text-6xl'>
                   Vitenskapen bak <br />
-                  <span className='text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-white to-orange-300'>
+                  <span className='text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-500 to-amber-600'>
                     din komfort.
                   </span>
                 </h2>
@@ -100,7 +103,6 @@ export default function TechTeaserSection() {
                 </Link>
               </div>
             </div>
-
             <div
               data-tech-card
               className='gsap-card-visual relative mx-auto w-full max-w-md perspective-1000 lg:h-auto'
