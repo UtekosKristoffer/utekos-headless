@@ -16,13 +16,12 @@ export const createDesktopTimeline = (
     scrollTrigger: {
       trigger: trigger,
       start: 'top top',
-      end: '+=300%', // Økt litt igjen for å gi plass til pausene
+      end: '+=300%',
       scrub: 1,
       pin: true,
       anticipatePin: 1,
       onUpdate: self => {
         const progress = self.progress
-        // Justert logikk for active state for å matche pausene
         if (progress < 0.4) setActiveLayer(1)
         else if (progress < 0.7) setActiveLayer(2)
         else setActiveLayer(3)
@@ -30,7 +29,6 @@ export const createDesktopTimeline = (
     }
   })
 
-  // Start: Vipp bunken litt (intro)
   tl.to(
     cardsContainer,
     {
@@ -43,9 +41,6 @@ export const createDesktopTimeline = (
     0
   )
 
-  // --- PAUSE HER (Lar Kort 1 stå i ro) ---
-
-  // FASE 1: Start overgang fra Kort 1 -> Kort 2 (Ved t=0.8)
   const t1Exit = 0.8
 
   tl.to(
@@ -65,9 +60,6 @@ export const createDesktopTimeline = (
   tl.to(t1, { autoAlpha: 0, x: -20, duration: 0.3 }, t1Exit)
   tl.to(t2, { autoAlpha: 1, x: 0, duration: 0.3 }, t1Exit + 0.3)
 
-  // --- PAUSE HER (Lar Kort 2 stå i ro) ---
-
-  // FASE 2: Start overgang fra Kort 2 -> Kort 3 (Ved t=2.0)
   const t2Exit = 2.0
 
   tl.to(
@@ -84,7 +76,6 @@ export const createDesktopTimeline = (
     t2Exit
   )
 
-  // Sikkerhetsnett: Sørg for at c1 forblir borte/skjult
   tl.set(c1, { display: 'none' }, t2Exit)
 
   // Løft frem C3 (Hero)

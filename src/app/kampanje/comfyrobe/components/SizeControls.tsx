@@ -1,6 +1,4 @@
 'use client'
-
-import React from 'react'
 import type { SizeOptionKey } from '../utils/sizeSelectorData'
 
 interface SizeControlsProps {

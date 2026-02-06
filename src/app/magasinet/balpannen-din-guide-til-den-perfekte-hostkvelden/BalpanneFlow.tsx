@@ -7,7 +7,7 @@ import {
   type IconName,
   type CustomNodeData
 } from './initialElements'
-import { useMediaQuery } from '@/hooks/use-media-query'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useState, useEffect } from 'react'
 
 function IconRenderer({

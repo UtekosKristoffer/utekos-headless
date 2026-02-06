@@ -20,11 +20,9 @@ export function OfferSection({
 
   return (
     <section className='relative min-h-screen bg-[#0a0a0a] py-12 lg:py-24 overflow-hidden'>
-      {/* Bakgrunnseffekt */}
       <div className='absolute top-1/4 left-0 w-[60vw] h-[60vw] bg-sky-900/10 rounded-full blur-[150px] pointer-events-none' />
 
       <div className='w-full max-w-[1600px] mx-auto px-4 md:px-8 relative z-10'>
-        {/* Seksjonsoverskrift */}
         <div className='mb-12 text-center lg:text-left lg:mb-16'>
           <h2 className='text-2xl lg:text-4xl font-bold text-white mb-3'>
             Sikre din størrelse:{' '}
@@ -35,10 +33,7 @@ export function OfferSection({
             opplevelsen.
           </p>
         </div>
-
-        {/* TOPP SEKSJON: Bilder vs Info/Kjøp */}
         <div className='grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-start mb-20 lg:mb-32'>
-          {/* VENSTRE: Galleri (Tar litt mer plass for å gi bildet rom) */}
           <div className='lg:col-span-7 w-full'>
             <OfferGallery
               name={MAIN_PRODUCT.name}

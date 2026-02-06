@@ -3,22 +3,9 @@
 import React, { useEffect, useRef } from 'react'
 import { ArrowRight, Truck, PackageCheck, Loader2 } from 'lucide-react'
 import gsap from 'gsap'
-import type { ProductOffer } from '@types'
+import type { CheckoutPanelProps } from '@types'
 import { useAddToCartAction } from '@/hooks/useAddToCartAction'
-
-const VARIANT_IDS = {
-  S: 'gid://shopify/ProductVariant/43959919051000',
-  L: 'gid://shopify/ProductVariant/43959919116536',
-  STAPPER: 'gid://shopify/ProductVariant/42903954292984'
-}
-
-interface CheckoutPanelProps {
-  mainProduct: ProductOffer
-  upsellProduct: ProductOffer
-  isUpsellSelected: boolean
-  selectedSize: 'S' | 'L'
-  productImageSrc: string
-}
+import { VARIANT_IDS } from '../utils/config'
 
 export function CheckoutPanel({
   mainProduct,

@@ -23,8 +23,8 @@ export const createMobileTimeline = (
     scrollTrigger: {
       trigger: trigger,
       start: 'top top',
-      end: '+=200%', // Kortere scroll-distanse totalt = raskere følelse
-      scrub: 0.2, // Lavere scrub-verdi = mer responsiv (mindre "sirup")
+      end: '+=200%',
+      scrub: 0.2,
       pin: true,
       anticipatePin: 1,
       onUpdate: self => {
@@ -36,22 +36,17 @@ export const createMobileTimeline = (
     }
   })
 
-  // FASE 1: Raskere utkast
   tl.to(c1, {
     y: -500,
     rotation: -15,
     opacity: 0,
-    duration: 0.5, // Kortere tid
+    duration: 0.5,
     ease: 'power2.in'
   })
-  tl.to(c2, { scale: 1, y: 0, duration: 0.3 }, '<0.1') // Starter nesten umiddelbart
-
+  tl.to(c2, { scale: 1, y: 0, duration: 0.3 }, '<0.1')
   tl.to(t1, { autoAlpha: 0, display: 'none', duration: 0.1 }, 0.1)
   tl.to(t2, { autoAlpha: 1, display: 'block', duration: 0.1 }, 0.2)
 
-  // Pause...
-
-  // FASE 2
   tl.to(
     c2,
     {
@@ -62,7 +57,7 @@ export const createMobileTimeline = (
       ease: 'power2.in'
     },
     '+=0.3'
-  ) // Liten pause før neste kast
+  )
 
   tl.to(c3, { scale: 1, y: 0, duration: 0.3 }, '<0.1')
 

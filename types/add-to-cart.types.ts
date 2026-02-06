@@ -83,6 +83,10 @@ export interface OfferSectionProps {
   selectedSize: SizeOptionKey
 }
 
+export interface SizeInfoPanelProps {
+  profile: SizeProfile
+}
+
 export interface SizeProfile {
   id: SizeOptionKey
   fullName: string
@@ -97,4 +101,17 @@ export interface SizeProfile {
     title: string
     desc: string
   }[]
+}
+
+export interface CheckoutPanelProps {
+  mainProduct: ProductOffer
+  upsellProduct: ProductOffer
+  isUpsellSelected: boolean
+  selectedSize: 'S' | 'L'
+  productImageSrc: string
+}
+
+export interface OfferGalleryProps {
+  name: string
+  mainImageSrc: string
 }

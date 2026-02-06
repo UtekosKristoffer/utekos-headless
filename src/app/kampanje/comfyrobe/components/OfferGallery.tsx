@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import { ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react'
 
@@ -46,6 +46,7 @@ export function OfferGallery({ name, mainImageSrc }: OfferGalleryProps) {
           src={images[selectedIndex] ?? mainImageSrc}
           alt={`${name} - view ${selectedIndex + 1}`}
           fill
+          quality={95}
           className='object-contain p-2 lg:p-6 drop-shadow-2xl transition-all duration-500 ease-in-out'
           sizes='(max-width: 768px) 100vw, 50vw'
           priority={selectedIndex === 0}

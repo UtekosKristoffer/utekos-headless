@@ -1,14 +1,10 @@
+/* eslint-disable react/no-unescaped-entities */
 'use client'
 
-import React, { useRef, useLayoutEffect } from 'react'
+import { useRef, useLayoutEffect } from 'react'
 import gsap from 'gsap'
 import { Check, Ruler, User } from 'lucide-react'
-import type { SizeProfile } from '@types'
-
-interface SizeInfoPanelProps {
-  profile: SizeProfile
-}
-
+import type { SizeInfoPanelProps } from '@types'
 export function SizeInfoPanel({ profile }: SizeInfoPanelProps) {
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -37,7 +33,6 @@ export function SizeInfoPanel({ profile }: SizeInfoPanelProps) {
         "{profile.tagline}"
       </p>
 
-      {/* Stats Grid */}
       <div className='anim-text grid grid-cols-2 gap-4 mb-8'>
         <div className='bg-slate-900/50 p-4 rounded-xl border border-slate-800'>
           <div className='flex items-center gap-2 mb-1 text-slate-400'>
@@ -76,7 +71,6 @@ export function SizeInfoPanel({ profile }: SizeInfoPanelProps) {
       </div>
 
       <div className='anim-text mt-10 pt-8 border-t border-slate-800'>
-        {/* Endret knappetekst til å bruke fullName (Small/Large) */}
         <button className='w-full bg-white text-black font-bold py-4 rounded-full hover:scale-[1.02] transition-transform active:scale-95 text-lg lg:text-base xl:text-lg whitespace-nowrap'>
           Velg {profile.fullName} - 999,-
         </button>

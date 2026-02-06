@@ -1,7 +1,7 @@
 'use client'
 import { iconMap, type IconName } from './initialElements'
 import { useState, useEffect } from 'react'
-import { useMediaQuery } from '@/hooks/use-media-query'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { DesktopFlow } from './DesktopFlow'
 import { MobileFlow } from './MobileFlow'
 export function IconRenderer({
