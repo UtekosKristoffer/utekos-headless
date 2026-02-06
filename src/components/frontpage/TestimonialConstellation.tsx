@@ -50,12 +50,17 @@ export function TestimonialConstellation() {
 
       <div className='relative z-10 mx-auto px-4 sm:px-6 lg:px-8 md:max-w-7xl'>
         <div ref={headerRef} className='mb-20 text-center max-w-3xl mx-auto'>
+          {/* Trust Badge */}
           <div className='animate-header-item inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-neutral-900/80 border border-neutral-800 backdrop-blur-md shadow-lg shadow-sky-900/5'>
             <div className='flex gap-0.5'>
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className='w-3.5 h-3.5 fill-sky-500 text-sky-500'
+                  className={`w-3.5 h-3.5 ${
+                    i === 4 ?
+                      'fill-sky-500/50 text-sky-500' // Halv stjerne visuelt (valgfritt, eller full fill for 4.8)
+                    : 'fill-sky-500 text-sky-500'
+                  }`}
                 />
               ))}
             </div>
@@ -64,6 +69,7 @@ export function TestimonialConstellation() {
               4.8 av 5 stjerner
             </span>
           </div>
+
           <h2 className='animate-header-item text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6'>
             Hva sier andre{' '}
             <span className='text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-sky-200 to-white'>
@@ -72,10 +78,23 @@ export function TestimonialConstellation() {
           </h2>
 
           <p className='animate-header-item mx-auto text-lg md:text-xl text-neutral-400 leading-relaxed font-light'>
-            Ekte tilbakemeldinger fra kunder som, i likhet med deg, verdsetter
-            kompromissløs kvalitet og varige opplevelser utendørs.
+            Ekte tilbakemeldinger fra kunder som, i likhet med deg, verdsetter{' '}
+            {/* Graffiti Effect: Skewed background box */}
+            <span className='relative inline-block px-2 mx-1'>
+              <span className='absolute inset-0 bg-sky-500/15 -skew-y-2 -rotate-2 rounded-sm -z-10 backdrop-blur-[1px] border border-sky-500/10' />
+              <span className='relative font-medium text-sky-100/90'>
+                kompromissløs kvalitet
+              </span>
+            </span>{' '}
+            og {/* Elegant Underline: Gradient bottom border */}
+            <span className='relative inline-block'>
+              <span className='relative z-10'>varige opplevelser utendørs</span>
+              <span className='absolute left-0 -bottom-0.5 w-full h-[2px] bg-gradient-to-r from-transparent via-sky-400/60 to-transparent' />
+            </span>
+            .
           </p>
         </div>
+
         <div className='relative z-20'>
           <TestimonialSection />
         </div>
