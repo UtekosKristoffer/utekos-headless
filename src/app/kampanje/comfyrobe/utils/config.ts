@@ -75,9 +75,9 @@ export const ANATOMY_LAYERS: AnatomyLayerData[] = [
   }
 ]
 
-
 export const VARIANT_IDS = {
   S: 'gid://shopify/ProductVariant/43959919051000',
+  M: 'gid://shopify/ProductVariant/43959919083768',
   L: 'gid://shopify/ProductVariant/43959919116536',
   STAPPER: 'gid://shopify/ProductVariant/42903954292984'
 }

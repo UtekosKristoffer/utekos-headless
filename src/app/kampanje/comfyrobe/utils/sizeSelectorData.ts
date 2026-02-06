@@ -1,7 +1,7 @@
 import { Move, Maximize, ScanFace } from 'lucide-react'
 import type { SizeProfile } from '@types'
 
-export type SizeOptionKey = 'S' | 'L'
+export type SizeOptionKey = 'S' | 'M' | 'L'
 
 export const SIZE_DATA: Record<SizeOptionKey, SizeProfile> = {
   S: {
@@ -22,6 +22,26 @@ export const SIZE_DATA: Record<SizeOptionKey, SizeProfile> = {
       {
         title: 'Flash Heat',
         desc: 'Mindre innvendig volum betyr at kroppsvarmen din fyller kåpen og isolerer deg raskere.'
+      }
+    ]
+  },
+  M: {
+    id: 'M',
+    fullName: 'Medium',
+    label: 'Medium',
+    tagline: 'Den perfekte balansen',
+    heightRange: '170 - 180 cm',
+    idealFor: ['Høyde 170-180cm', 'Allsidig bruk', 'Komfort og funksjon'],
+    icon: ScanFace,
+    visualScale: 1.0,
+    benefits: [
+      {
+        title: 'Optimal Passform',
+        desc: 'Designet for å gi en ideell balanse mellom bevegelsesfrihet og full dekning for de fleste kroppstyper.'
+      },
+      {
+        title: 'Adaptiv Varme',
+        desc: 'Effektiv varmebevaring som tilpasser seg ulike aktivitetsnivåer, fra rolig avslapning til lett aktivitet.'
       }
     ]
   },

@@ -1,6 +1,4 @@
 import type { Route } from 'next'
-import type { LucideIcon } from 'lucide-react'
-import type { SizeOptionKey } from '@/app/kampanje/comfyrobe/utils/sizeSelectorData'
 export type SizeVariant = 'medium' | 'large'
 
 export type Mode = 'parkas' | 'oppfestet' | 'fulldekket'

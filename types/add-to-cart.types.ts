@@ -62,7 +62,7 @@ export interface CheckoutPanelProps {
   mainProduct: ProductOffer
   upsellProduct: ProductOffer
   isUpsellSelected: boolean
-  selectedSize: 'S' | 'L'
+  selectedSize: 'S' | 'M' | 'L'
   productImageSrc: string
 }
 
@@ -101,14 +101,6 @@ export interface SizeProfile {
     title: string
     desc: string
   }[]
-}
-
-export interface CheckoutPanelProps {
-  mainProduct: ProductOffer
-  upsellProduct: ProductOffer
-  isUpsellSelected: boolean
-  selectedSize: 'S' | 'L'
-  productImageSrc: string
 }
 
 export interface OfferGalleryProps {

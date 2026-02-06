@@ -10,10 +10,15 @@ import { MAIN_PRODUCT, UPSELL_PRODUCT } from '../utils/offerData'
 import { SIZE_DATA, type SizeOptionKey } from '../utils/sizeSelectorData'
 import type { OfferSectionProps } from '@types'
 
+type ExtendedOfferSectionProps = OfferSectionProps & {
+  onSizeChange: (size: SizeOptionKey) => void
+}
+
 export function OfferSection({
   productImageSrc,
-  selectedSize
-}: OfferSectionProps) {
+  selectedSize,
+  onSizeChange
+}: ExtendedOfferSectionProps) {
   const [upsellSelected, setUpsellSelected] = useState(false)
 
   const displaySizeName = SIZE_DATA[selectedSize].fullName
@@ -57,6 +62,7 @@ export function OfferSection({
                   isUpsellSelected={upsellSelected}
                   selectedSize={selectedSize}
                   productImageSrc={productImageSrc}
+                  onSizeChange={onSizeChange}
                 />
               </div>
             </div>

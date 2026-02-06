@@ -1,19 +1,35 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react'
-import { ArrowRight, Truck, PackageCheck, Loader2 } from 'lucide-react'
+import { ArrowRight, Truck, Loader2 } from 'lucide-react'
 import gsap from 'gsap'
 import type { CheckoutPanelProps } from '@types'
 import { useAddToCartAction } from '@/hooks/useAddToCartAction'
 import { VARIANT_IDS } from '../utils/config'
+import type { SizeOptionKey } from '../utils/sizeSelectorData'
+
+type ExtendedCheckoutPanelProps = CheckoutPanelProps & {
+  onSizeChange: (size: SizeOptionKey) => void
+}
+
+const AVAILABLE_SIZES: {
+  key: SizeOptionKey
+  label: string
+  soldOut: boolean
+}[] = [
+  { key: 'S', label: 'S', soldOut: false },
+  { key: 'M', label: 'M (Utsolgt)', soldOut: true },
+  { key: 'L', label: 'L', soldOut: false }
+]
 
 export function CheckoutPanel({
   mainProduct,
   upsellProduct,
   isUpsellSelected,
   selectedSize,
-  productImageSrc
-}: CheckoutPanelProps) {
+  productImageSrc,
+  onSizeChange
+}: ExtendedCheckoutPanelProps) {
   const totalPrice =
     mainProduct.price + (isUpsellSelected ? upsellProduct.price : 0)
   const priceRef = useRef<HTMLSpanElement>(null)
@@ -105,7 +121,7 @@ export function CheckoutPanel({
   return (
     <div className='bg-slate-900/80 backdrop-blur-xl border border-slate-700 rounded-3xl p-6 lg:p-8 shadow-2xl'>
       <div className='flex flex-col gap-6'>
-        <div className='mb-4'>
+        <div className='mb-2'>
           <div className='flex justify-between items-center mb-2 text-xs uppercase font-bold tracking-wider'>
             <span className='text-green-400 flex items-center gap-1.5'>
               <Truck className='w-3 h-3' /> Fri Frakt Oppnådd
@@ -114,6 +130,38 @@ export function CheckoutPanel({
           </div>
           <div className='h-2 w-full bg-slate-800 rounded-full overflow-hidden'>
             <div className='h-full w-full bg-gradient-to-r from-green-500 to-emerald-400 shadow-[0_0_15px_rgba(34,197,94,0.5)]' />
+          </div>
+        </div>
+
+        <div>
+          <span className='text-slate-400 text-xs uppercase tracking-widest font-semibold mb-3 block'>
+            Velg Størrelse
+          </span>
+          <div className='grid grid-cols-3 gap-2'>
+            {AVAILABLE_SIZES.map(sizeOption => {
+              const isActive = selectedSize === sizeOption.key
+              const isSoldOut = sizeOption.soldOut
+
+              return (
+                <button
+                  key={sizeOption.key}
+                  onClick={() => !isSoldOut && onSizeChange(sizeOption.key)}
+                  disabled={isSoldOut}
+                  className={`
+                    relative rounded-xl py-3 px-1 text-sm font-bold transition-all duration-200 border
+                    ${
+                      isActive ?
+                        'bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.2)] scale-[1.02]'
+                      : isSoldOut ?
+                        'bg-slate-800/50 text-slate-500 border-transparent cursor-not-allowed opacity-60'
+                      : 'bg-slate-800/50 text-slate-300 border-transparent hover:bg-slate-800 hover:border-slate-600'
+                    }
+                  `}
+                >
+                  {sizeOption.label}
+                </button>
+              )
+            })}
           </div>
         </div>
 

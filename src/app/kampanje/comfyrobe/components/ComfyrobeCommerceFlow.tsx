@@ -1,10 +1,10 @@
-// Path: src/app/kampanje/comfyrobe/components/ComfyrobeCommerceFlow.tsx
 'use client'
 
 import React, { useState } from 'react'
 import { SizeSelectorSection } from './SizeSelectorSection'
 import { OfferSection } from './OfferSection'
 import type { SizeOptionKey } from '../utils/sizeSelectorData'
+
 interface ComfyrobeCommerceFlowProps {
   productImageSrc: string
 }
@@ -23,6 +23,7 @@ export function ComfyrobeCommerceFlow({
       <OfferSection
         productImageSrc={productImageSrc}
         selectedSize={selectedSize}
+        onSizeChange={setSelectedSize}
       />
     </>
   )
