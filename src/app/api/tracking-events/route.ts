@@ -9,6 +9,7 @@ import { sendMetaBrowserEvent } from '@/lib/tracking/meta/sendMetaBrowserEvent'
 import { sendPinterestBrowserEvent } from '@/lib/tracking/pinterest/sendPinterestBrowserEvent'
 import { sendTikTokBrowserEvent } from '@/lib/tracking/tiktok/sendTikTokBrowserEvent'
 import { sendGA4BrowserEvent } from '@/lib/tracking/google/sendGA4BrowserEvent'
+import { sendSnapchatBrowserEvent } from '@/lib/tracking/snapchat/sendSnapchatBrowserEvent'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 
 export async function POST(request: NextRequest) {
@@ -27,6 +28,7 @@ export async function POST(request: NextRequest) {
       sendPinterest: sendPinterestBrowserEvent,
       sendTikTok: sendTikTokBrowserEvent,
       sendGoogle: sendGA4BrowserEvent,
+      sendSnapchat: sendSnapchatBrowserEvent,
       logger: logToAppLogs
     }
   )

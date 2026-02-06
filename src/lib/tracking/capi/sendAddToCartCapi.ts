@@ -8,14 +8,18 @@ export async function sendAddToCartCapi(
   const fbc = getCookie('_fbc')
   const extId = getCookie('ute_ext_id')
   const emailHash = getCookie('ute_user_hash')
+  const scid = getCookie('_scid')
+  const clickId = getCookie('sc_click_id')
   const ua = typeof navigator !== 'undefined' ? navigator.userAgent : undefined
 
-  const userData: MetaUserData = {
-    fbp: fbp || undefined,
-    fbc: fbc || undefined,
-    external_id: extId || undefined,
-    email_hash: emailHash || undefined,
-    client_user_agent: ua
+  const userData: MetaUserData & { scid?: string; click_id?: string } = {
+    ...(fbp ? { fbp } : {}),
+    ...(fbc ? { fbc } : {}),
+    ...(extId ? { external_id: extId } : {}),
+    ...(emailHash ? { email_hash: emailHash } : {}),
+    ...(ua ? { client_user_agent: ua } : {}),
+    ...(scid ? { scid } : {}),
+    ...(clickId ? { click_id: clickId } : {})
   }
 
   const payload: MetaEventPayload = {

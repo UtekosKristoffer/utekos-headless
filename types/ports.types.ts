@@ -1,6 +1,7 @@
 import type {
   MetaEventPayload,
   ClientUserData,
+  MetaUserData,
   MetaEventRequestResult
 } from '@types'
 
@@ -31,6 +32,11 @@ export interface TrackingDependencies {
   sendMeta: MetaSender
   sendPinterest: PinterestSender
   sendTikTok: TikTokSender
+  sendSnapchat: (
+    payload: MetaEventPayload,
+    userData: MetaUserData,
+    extra?: { sc_cookie1?: string; sc_click_id?: string }
+  ) => Promise<any>
   sendGoogle: (
     payload: MetaEventPayload,
     context: { clientIp?: string; userAgent?: string }

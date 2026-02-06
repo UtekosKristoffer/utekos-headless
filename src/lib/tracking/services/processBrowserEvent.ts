@@ -27,10 +27,23 @@ export async function processBrowserEvent(
     userAgent: metadata.userAgent
   })
 
+  const snapchatPromise =
+    deps.sendSnapchat ?
+      deps.sendSnapchat(body, userData, {
+        ...(cookies.scCid ? { sc_cookie1: cookies.scCid } : {}),
+        ...(cookies.scCid ? { sc_click_id: cookies.scCid } : {})
+      })
+    : Promise.resolve()
+
   try {
     const metaResponse = await deps.sendMeta(body, userData)
 
-    await Promise.all([pinPromise, tiktokPromise, googlePromise])
+    await Promise.all([
+      pinPromise,
+      tiktokPromise,
+      googlePromise,
+      snapchatPromise
+    ])
 
     await deps.logger(
       'INFO',
