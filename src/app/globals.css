@@ -485,6 +485,46 @@
   }
 }
 
+@keyframes sharp-twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4) rotate(180deg);
+  }
+}
+
+@keyframes star-glint {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1) rotate(90deg);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(0) rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(180deg);
+  }
+}
+
+.animate-glint {
+  animation: star-glint 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.sparkle-point {
+  animation: sharp-twinkle 3s ease-in-out infinite;
+}
+
 .boat-seasons-glow-pulse {
   animation: boat-seasons-pulse-glow 8s ease-in-out infinite;
 }

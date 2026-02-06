@@ -3,7 +3,8 @@
 
 import { useInView } from '@/hooks/useInView'
 import { cn } from '@/lib/utils/className'
-import { TestimonialCard, testimonials } from './TestimonialCard'
+import { TestimonialCard } from './TestimonialCard'
+import { testimonials } from './utils/testimonials'
 
 export function TestimonialSection() {
   const [hLineRef, hLineInView] = useInView({ threshold: 0.5 })
