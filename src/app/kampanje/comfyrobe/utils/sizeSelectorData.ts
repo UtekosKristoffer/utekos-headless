@@ -22,7 +22,7 @@ export const SIZE_DATA: Record<SizeOptionKey, SizeProfile> = {
   S: {
     id: 'S',
     fullName: 'Small',
-    label: 'Active / Compact',
+    label: 'Small',
     tagline: 'Frihet i bevegelse',
     heightRange: '160 - 170 cm',
     idealFor: ['Høyde opp til 170cm', 'Aktive livsstiler', 'Lettvekts-pakking'],
@@ -43,7 +43,7 @@ export const SIZE_DATA: Record<SizeOptionKey, SizeProfile> = {
   L: {
     id: 'L',
     fullName: 'Large',
-    label: 'Max / Privacy',
+    label: 'Large',
     tagline: 'Ditt private fristed',
     heightRange: '180 - 190 cm+',
     idealFor: ['Alle over 180cm', 'Isbadere som skifter', 'Maksimal hygge'],
