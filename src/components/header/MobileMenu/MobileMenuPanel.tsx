@@ -26,28 +26,61 @@ export function MobileMenuPanel({
   onOpenChange: (_open: boolean) => void
 }) {
   const subtitleSpanRef = useRef<HTMLSpanElement | null>(null)
+  const subtitleWrapRef = useRef<HTMLSpanElement | null>(null)
+  const listRef = useRef<HTMLDivElement | null>(null)
+  const rafRef = useRef<number | null>(null)
 
   useLayoutEffect(() => {
-    const el = subtitleSpanRef.current
-    if (!el) return
+    const wrap = subtitleWrapRef.current
+    const subtitle = subtitleSpanRef.current
+    const list = listRef.current
+    if (!wrap || !subtitle || !list) return
 
-    gsap.killTweensOf(el)
+    if (rafRef.current) cancelAnimationFrame(rafRef.current)
 
-    if (!isOpen) {
-      gsap.set(el, { opacity: 0, y: 10 })
-      return
+    const items = Array.from(list.querySelectorAll('[data-mm-item="true"]'))
+
+    const ctx = gsap.context(() => {
+      gsap.killTweensOf([subtitle, ...items])
+
+      if (!isOpen) {
+        gsap.set(subtitle, { opacity: 0, y: 10, filter: 'blur(6px)' })
+        gsap.set(items, { opacity: 0, x: -18, filter: 'blur(8px)' })
+        return
+      }
+
+      gsap.set(subtitle, { opacity: 0, y: 10, filter: 'blur(6px)' })
+      gsap.set(items, { opacity: 0, x: -18, filter: 'blur(8px)' })
+
+      rafRef.current = requestAnimationFrame(() => {
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+
+        tl.to(subtitle, {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          duration: 0.7,
+          delay: 0.08
+        }).to(
+          items,
+          {
+            opacity: 1,
+            x: 0,
+            filter: 'blur(0px)',
+            duration: 0.55,
+            stagger: 0.055
+          },
+          '-=0.35'
+        )
+      })
+    }, list)
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      rafRef.current = null
+      ctx.revert()
     }
-
-    gsap.set(el, { opacity: 0, y: 10 })
-    gsap.to(el, {
-      opacity: 1,
-      y: 0,
-      duration: 0.55,
-      delay: 0.12,
-      ease: 'power3.out',
-      overwrite: true
-    })
-  }, [isOpen])
+  }, [isOpen, menu.length])
 
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
@@ -77,7 +110,7 @@ export function MobileMenuPanel({
           </div>
 
           <p className='text-sm tracking-tight text-slate-200/60'>
-            <span className='block overflow-hidden'>
+            <span ref={subtitleWrapRef} className='block overflow-hidden'>
               <span ref={subtitleSpanRef} className='block'>
                 Utforsk vår kolleksjon
               </span>
@@ -86,28 +119,21 @@ export function MobileMenuPanel({
         </SheetHeader>
 
         <nav className='relative flex-grow overflow-y-auto px-4 pb-6 pt-4'>
-          {isOpen && (
-            <Accordion
-              type='single'
-              collapsible
-              className='flex flex-col gap-2'
-            >
-              {menu.map((item, index) => (
-                <div
-                  key={item.title}
-                  className='animate-fade-in-left'
-                  style={
-                    {
-                      animationDelay: `${index * 0.04}s`,
-                      animationDuration: '0.28s'
-                    } as React.CSSProperties
-                  }
-                >
-                  <MobileMenuItem item={item} />
-                </div>
-              ))}
-            </Accordion>
-          )}
+          <div ref={listRef}>
+            {isOpen && (
+              <Accordion
+                type='single'
+                collapsible
+                className='flex flex-col gap-2'
+              >
+                {menu.map(item => (
+                  <div key={item.title} data-mm-item='true'>
+                    <MobileMenuItem item={item} />
+                  </div>
+                ))}
+              </Accordion>
+            )}
+          </div>
         </nav>
       </SheetContent>
     </Sheet>
