@@ -1,4 +1,3 @@
-// Path: src/hooks/useAddToCartAction.ts
 'use client'
 
 import { useTransition, useContext } from 'react'
@@ -13,13 +12,28 @@ import { useOptimisticCartUpdate } from '@/hooks/useOptimisticCartUpdate'
 import { handlePostAddToCartCampaigns } from '@/lib/campaigns/cart/handlePostAddToCartCampaigns'
 import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
 import { useAnalytics } from '@/hooks/useAnalytics'
-import type { UseAddToCartActionProps } from '@types'
+import type {
+  UseAddToCartActionProps,
+  ShopifyProduct,
+  ShopifyProductVariant
+} from '@types'
+
+// FIX: Legg til '| undefined' for å tilfredsstille exactOptionalPropertyTypes
+interface ExtendedAddToCartProps extends UseAddToCartActionProps {
+  additionalProductData?:
+    | {
+        product: ShopifyProduct
+        variant: ShopifyProductVariant
+      }
+    | undefined
+}
 
 export function useAddToCartAction({
   product,
   selectedVariant,
-  additionalLine
-}: UseAddToCartActionProps) {
+  additionalLine,
+  additionalProductData
+}: ExtendedAddToCartProps) {
   const [isTransitioning, startTransition] = useTransition()
   const { addLines } = useCartMutations()
   const { updateCartCache } = useOptimisticCartUpdate()
@@ -37,7 +51,7 @@ export function useAddToCartAction({
       return
     }
 
-    // Umiddelbar respons: Åpne handlekurven med en gang
+    // 1. Umiddelbar respons i UI
     cartStore.send({ type: 'OPEN' })
 
     startTransition(async () => {
@@ -45,13 +59,21 @@ export function useAddToCartAction({
         const cartId = contextCartId || (await getCartIdFromCookie())
 
         if (cartId) {
-          // Optimistisk oppdatering for hovedproduktet
           await updateCartCache({
             cartId,
             product,
             variant: selectedVariant,
             quantity
           })
+          if (additionalLine && additionalProductData) {
+            await updateCartCache({
+              cartId,
+              product: additionalProductData.product,
+              variant: additionalProductData.variant,
+              quantity: additionalLine.quantity,
+              customPrice: 0 // Tvinger prisen til 0,- visuelt
+            })
+          }
         }
 
         const lines = [{ variantId: selectedVariant.id, quantity }]
@@ -62,9 +84,6 @@ export function useAddToCartAction({
             quantity: additionalLine.quantity
           })
         }
-
-        // Send med rabattkode direkte i payloaden hvis vi har en additionalLine (Buff)
-        // Dette sikrer at rabatten registreres atomisk på serveren.
         const mutationPayload =
           additionalLine ? { lines, discountCode: 'GRATISBUFF' } : lines
 
@@ -73,9 +92,6 @@ export function useAddToCartAction({
         if (cartId) {
           queryClient.invalidateQueries({ queryKey: ['cart', cartId] })
         }
-
-        // Merk: applyDiscount er fjernet herfra fordi den nå håndteres
-        // direkte i addLines-kallet via server actions.
 
         await handlePostAddToCartCampaigns({
           cartId,

@@ -1,52 +1,43 @@
-import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
-import type {
-  CartLine,
-  ShopifyProduct,
-  ShopifyProductVariant,
-  Image
-} from '@types'
+import type { CartLine, ShopifyProduct, ShopifyProductVariant } from '@types'
 
 export function createOptimisticLineItem(
   product: ShopifyProduct,
   variant: ShopifyProductVariant,
-  quantity: number
+  quantity: number,
+  customPrice?: number
 ): CartLine {
-  const variantId = cleanShopifyId(variant.id) || variant.id
-
-  const unitPriceAmount = parseFloat(variant.price.amount)
-  const totalAmountValue = (unitPriceAmount * quantity).toString()
-
-  // FIX 1: Image-typen krever 'id'. Vi genererer en dummy-id.
-  const placeholderImage: Image = {
-    id: `placeholder_${product.id}`,
+  const unitPrice =
+    customPrice !== undefined ? customPrice : parseFloat(variant.price.amount)
+  const fallbackImage = {
+    id: `missing_image_${product.id}`,
     url: '',
     altText: product.title,
     width: 0,
     height: 0
   }
 
-  const activeImage = variant.image || product.featuredImage || placeholderImage
+  const featuredImage = product.featuredImage ?? variant.image ?? fallbackImage
 
   return {
-    id: `temp_${Date.now()}`,
+    id: `temp_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
     quantity,
+    cost: {
+      totalAmount: {
+        amount: (unitPrice * quantity).toString(),
+        currencyCode: variant.price.currencyCode
+      }
+    },
     merchandise: {
-      id: variantId,
+      id: variant.id,
       title: variant.title,
-      selectedOptions: variant.selectedOptions,
-      image: activeImage,
       availableForSale: variant.availableForSale,
       price: variant.price,
       compareAtPrice: variant.compareAtPrice,
+      selectedOptions: variant.selectedOptions,
+      image: variant.image ?? featuredImage,
       product: {
         ...product,
-        featuredImage: activeImage
-      }
-    },
-    cost: {
-      totalAmount: {
-        amount: totalAmountValue,
-        currencyCode: variant.price.currencyCode
+        featuredImage: featuredImage
       }
     }
   }

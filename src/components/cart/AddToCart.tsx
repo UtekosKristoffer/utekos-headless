@@ -4,17 +4,31 @@ import { useAddToCartAction } from '@/hooks/useAddToCartAction'
 import { useAddToCartForm } from '@/hooks/useAddToCartForm'
 import { useCartErrorMonitoring } from '@/hooks/useCartErrorMonitoring'
 import { AddToCartView } from './AddToCartView'
-import type { AddToCartFormValues, AddToCartProps } from '@types'
+import type {
+  AddToCartFormValues,
+  AddToCartProps,
+  ShopifyProduct,
+  ShopifyProductVariant
+} from '@types'
+
+interface ExtendedAddToCartProps extends AddToCartProps {
+  additionalProductData?: {
+    product: ShopifyProduct
+    variant: ShopifyProductVariant
+  }
+}
 
 export function AddToCart({
   product,
   selectedVariant,
-  additionalLine
-}: AddToCartProps) {
+  additionalLine,
+  additionalProductData
+}: ExtendedAddToCartProps) {
   const { performAddToCart, isPending } = useAddToCartAction({
     product,
     selectedVariant,
-    additionalLine
+    additionalLine,
+    ...(additionalProductData && { additionalProductData })
   })
 
   const form = useAddToCartForm(selectedVariant)
