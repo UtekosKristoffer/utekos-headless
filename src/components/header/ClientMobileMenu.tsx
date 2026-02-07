@@ -4,7 +4,7 @@
 import type { MenuItem } from '@types'
 import dynamic from 'next/dynamic'
 const MobileMenu = dynamic(
-  () => import('@/components/header/MobileMenu').then(mod => mod.MobileMenu),
+  () => import('@/components/header/MobileMenu/MobileMenu').then(mod => mod.MobileMenu),
   {
     ssr: false,
     loading: () => <div className='h-9 w-9 lg:hidden' />
