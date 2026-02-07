@@ -71,7 +71,7 @@ export function TechDownSizeGuide() {
             <ul className='mt-4 list-disc list-inside space-y-2 text-neutral-300'>
               <li>Du er opptil 175-180 cm høy.</li>
               <li>Eller noe lavere og ønsker ekstra romslig passform.</li>
-              <li>Eller du er noe høyere, men ønsker kroppsnær passform.</li>
+              <li>Eller noe høyere, men ønsker kroppsnær passform.</li>
             </ul>
           </div>
           <div className='bg-neutral-900/50 p-8 rounded-lg text-left'>

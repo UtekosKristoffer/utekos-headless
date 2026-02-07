@@ -1,3 +1,4 @@
+// Path: src/components/ProductCard/PurchaseClientView.tsx
 import Image from 'next/image'
 import Link from 'next/link'
 import {
@@ -8,7 +9,9 @@ import {
   Truck,
   RefreshCcw,
   Loader2,
-  Gift
+  Gift,
+  Ruler,
+  Info
 } from 'lucide-react'
 import { cn } from '@/lib/utils/className'
 import { VippsLogo } from '@/components/payments/VippsLogo'
@@ -16,6 +19,30 @@ import { KlarnaLogo } from '@/components/payments/KlarnaLogo'
 import { PostNordLogo } from '@/components/payments/PostNordLogo'
 import { PRODUCT_VARIANTS } from '@/api/constants'
 import type { ModelKey, PurchaseClientViewProps } from '@types'
+
+const SIZE_GUIDANCE: Record<string, { height: string; tips: string[] }> = {
+  Liten: {
+    height: 'Opptil 170 cm',
+    tips: [
+      'Er du lavere enn 165 cm får du en ekstra romslig og lun følelse.',
+      'Er du litt høyere får du en nettere silhuett uten overflødig volum.'
+    ]
+  },
+  Middels: {
+    height: '170 – 180 cm',
+    tips: [
+      'Er du lavere enn 170 cm får du en svært romslig "oversized" look.',
+      'Ligger du i øvre sjiktet (mot 180 cm) får du en mer kroppsnær passform.'
+    ]
+  },
+  Stor: {
+    height: '180 – 195 cm',
+    tips: [
+      'Perfekt for deg over 180 cm, eller for deg som er lavere og ønsker maksimal romslighet.',
+      'Obs: Er du over 195 cm kan denne størrelsen oppleves som litt snau.'
+    ]
+  }
+}
 
 export function PurchaseClientView({
   selectedModel,
@@ -33,6 +60,7 @@ export function PurchaseClientView({
   isTechDownOffer
 }: PurchaseClientViewProps) {
   const monthlyPrice = Math.round(currentConfig.price / 12)
+  const guidance = SIZE_GUIDANCE[selectedSize]
 
   return (
     <section className='relative left-[calc(-50vw+50%)] w-screen overflow-hidden bg-[#F9F8F6] text-[#2C2420] lg:flex lg:min-h-screen'>
@@ -148,6 +176,7 @@ export function PurchaseClientView({
                 ))}
               </div>
             </div>
+
             <div>
               <div className='mb-4 flex items-center justify-between'>
                 <span className='text-sm font-bold uppercase tracking-widest text-[#2C2420]'>
@@ -180,6 +209,33 @@ export function PurchaseClientView({
                   </button>
                 ))}
               </div>
+
+              {guidance && (
+                <div
+                  key={selectedSize}
+                  className='mt-6 animate-in fade-in slide-in-from-top-2 duration-300'
+                >
+                  <div className='relative overflow-hidden rounded-md bg-[#F4F1EA] p-5'>
+                    <div className='mb-3 flex items-center gap-2 border-b border-[#2C2420]/10 pb-3'>
+                      <Ruler className='h-4 w-4 text-[#E07A5F]' />
+                      <span className='text-sm font-bold uppercase tracking-wider text-[#2C2420]'>
+                        Passer best for deg som er {guidance.height}
+                      </span>
+                    </div>
+                    <ul className='space-y-2'>
+                      {guidance.tips.map((tip, i) => (
+                        <li
+                          key={i}
+                          className='flex items-start gap-2.5 text-sm leading-relaxed text-[#2C2420]/80'
+                        >
+                          <div className='mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#E07A5F]' />
+                          <span>{tip}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
