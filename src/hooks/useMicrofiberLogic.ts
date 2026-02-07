@@ -89,12 +89,15 @@ export function useMicrofiberLogic() {
               { name: 'Størrelse', value: size }
             ]
           } as unknown as ShopifyProductVariant
-
           await updateCartCache({
             cartId,
-            product: mockProduct,
-            variant: mockVariant,
-            quantity: 1
+            items: [
+              {
+                product: mockProduct,
+                variant: mockVariant,
+                quantity: 1
+              }
+            ]
           })
 
           cartStore.send({ type: 'OPEN' })

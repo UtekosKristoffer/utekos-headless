@@ -44,9 +44,6 @@ export function useOptimisticCartUpdate() {
         if (existingLineIndex >= 0) {
           // Hent linjen sikkert
           const existingLine = newLines[existingLineIndex]
-
-          // FIX: Guard clause som tilfredsstiller TypeScript strict null checks
-          // Dette løser "'existingLine' is possibly 'undefined'" og følgefeilen med 'id'
           if (!existingLine) continue
 
           const newQuantity = existingLine.quantity + item.quantity
