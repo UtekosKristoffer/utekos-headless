@@ -25,38 +25,28 @@ export function MobileMenuPanel({
   isOpen: boolean
   onOpenChange: (_open: boolean) => void
 }) {
-  const subtitleRef = useRef<HTMLParagraphElement | null>(null)
-  const rafRef = useRef<number | null>(null)
+  const subtitleSpanRef = useRef<HTMLSpanElement | null>(null)
 
   useLayoutEffect(() => {
-    const el = subtitleRef.current
+    const el = subtitleSpanRef.current
     if (!el) return
 
     gsap.killTweensOf(el)
-    if (rafRef.current) cancelAnimationFrame(rafRef.current)
 
     if (!isOpen) {
-      gsap.set(el, { opacity: 0, y: 8, clipPath: 'inset(0 100% 0 0)' })
+      gsap.set(el, { opacity: 0, y: 10 })
       return
     }
 
-    gsap.set(el, { opacity: 0, y: 8, clipPath: 'inset(0 100% 0 0)' })
-
-    rafRef.current = requestAnimationFrame(() => {
-      gsap.to(el, {
-        opacity: 1,
-        y: 0,
-        clipPath: 'inset(0 0% 0 0)',
-        duration: 0.6,
-        delay: 0.08,
-        ease: 'power3.out'
-      })
+    gsap.set(el, { opacity: 0, y: 10 })
+    gsap.to(el, {
+      opacity: 1,
+      y: 0,
+      duration: 0.55,
+      delay: 0.12,
+      ease: 'power3.out',
+      overwrite: true
     })
-
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
-      rafRef.current = null
-    }
   }, [isOpen])
 
   return (
@@ -86,12 +76,12 @@ export function MobileMenuPanel({
             </SheetTitle>
           </div>
 
-          <p
-            ref={subtitleRef}
-            className='text-sm text-slate-200/60 tracking-tight'
-            style={{ clipPath: 'inset(0 100% 0 0)' }}
-          >
-            Utforsk vår kolleksjon
+          <p className='text-sm tracking-tight text-slate-200/60'>
+            <span className='block overflow-hidden'>
+              <span ref={subtitleSpanRef} className='block'>
+                Utforsk vår kolleksjon
+              </span>
+            </span>
           </p>
         </SheetHeader>
 
