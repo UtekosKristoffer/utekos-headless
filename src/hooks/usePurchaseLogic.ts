@@ -59,6 +59,9 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
   }, [selectedModel, currentConfig, selectedSize, selectedColorIndex])
 
   const handleAddToCart = async () => {
+    // 1. UMIDDELBAR RESPONS: Åpne handlekurven med en gang
+    cartStore.send({ type: 'OPEN' })
+
     if (!currentShopifyProduct) {
       toast.error(`Fant ikke produktdata for ${currentConfig.title}.`)
       return
@@ -97,14 +100,14 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
 
         const itemsToUpdate: OptimisticItemInput[] = []
 
-        // 1. Hovedprodukt
+        // a) Hovedprodukt
         itemsToUpdate.push({
           product: currentShopifyProduct,
           variant: selectedVariant,
           quantity
         })
 
-        // 2. Buff
+        // b) Buff
         if (isTechDownOffer && buffProduct) {
           const buffVariants = getVariants(buffProduct)
           selectedBuffVariant = buffVariants.find((v: any) =>
@@ -118,22 +121,22 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
               variantId: selectedBuffVariant.id,
               quantity: 1 * quantity
             }
+            // Legg til i batch for 0ms visning
             itemsToUpdate.push({
               product: buffProduct,
               variant: selectedBuffVariant,
               quantity: 1 * quantity,
-              customPrice: 0
+              customPrice: 0 // Tving 0 kr visuelt
             })
           }
         }
 
-        // 3. Optimistisk UI oppdatering (Batch)
+        // 2. OPTIMISTISK BATCH UPDATE
         if (currentCartId) {
           await updateCartCache({
             cartId: currentCartId,
             items: itemsToUpdate
           })
-          cartStore.send({ type: 'OPEN' })
         }
 
         const linesToProcess = [{ variantId: selectedVariant.id, quantity }]
@@ -141,7 +144,7 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
           linesToProcess.push(additionalLine)
         }
 
-        // 4. Server Action
+        // 3. SERVER KALL (Atomisk)
         const mutationPayload =
           additionalLine ?
             { lines: linesToProcess, discountCode: 'GRATISBUFF' }
@@ -153,9 +156,10 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
           currentCartId = await getCartIdFromCookie()
         }
 
-        // 5. Synkronisering & Safety Net
+        // 4. SAFETY CHECK & SYNC
         if (currentCartId) {
-          queryClient.invalidateQueries({ queryKey: ['cart', currentCartId] })
+          // Ikke overskriv cachen med server-data umiddelbart hvis det kan skape blink.
+          // Invalider heller queries etter at rabattsjekken er gjort.
 
           if (additionalLine) {
             toast.success('Gratis Utekos Buff™ registrert!')
@@ -165,6 +169,9 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
               queryClient
             })
           }
+
+          // Nå som vi vet at alt er i orden, hent ferske data
+          queryClient.invalidateQueries({ queryKey: ['cart', currentCartId] })
         }
 
         await trackAddToCart({
@@ -179,7 +186,6 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
           value: Number(selectedVariant.price.amount),
           currency: selectedVariant.price.currencyCode
         })
-        cartStore.send({ type: 'OPEN' })
       } catch (error) {
         console.error('Feil under kjøp:', error)
         toast.error('Kunne ikke legge varen i handlekurven.')

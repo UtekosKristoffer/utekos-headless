@@ -53,31 +53,26 @@ export function useAddToCartAction({
       return
     }
 
-    // 1. Umiddelbar visuell respons
     cartStore.send({ type: 'OPEN' })
 
     startTransition(async () => {
       try {
         let cartId = contextCartId || (await getCartIdFromCookie())
-
-        // 2. OPTIMISTISK BATCH UPDATE (0ms)
         if (cartId) {
           const itemsToUpdate: OptimisticItemInput[] = []
 
-          // a) Hovedprodukt
           itemsToUpdate.push({
             product,
             variant: selectedVariant,
             quantity
           })
 
-          // b) Gratis Buff (med pris 0)
           if (additionalLine && additionalProductData) {
             itemsToUpdate.push({
               product: additionalProductData.product,
               variant: additionalProductData.variant,
               quantity: additionalLine.quantity,
-              customPrice: 0 // Tvinger visuell pris til 0,-
+              customPrice: 0 // <--- Tvinger visuell pris til 0,-
             })
           }
 
@@ -87,7 +82,6 @@ export function useAddToCartAction({
           })
         }
 
-        // 3. SERVER KALL
         const lines = [{ variantId: selectedVariant.id, quantity }]
         if (additionalLine) {
           lines.push({
@@ -99,29 +93,26 @@ export function useAddToCartAction({
         const mutationPayload =
           additionalLine ? { lines, discountCode: 'GRATISBUFF' } : lines
 
-        // Vi venter på at maskinen skal gjøre seg ferdig.
-        // Maskinen oppdaterer cachen automatisk via sin onDone-handler.
         await addLines(mutationPayload)
 
-        // Håndter ny cartId for inkognito-brukere
         if (!cartId) {
           cartId = await getCartIdFromCookie()
         }
 
-        // 4. SYNKRONISERING & SAFETY NET
+        // 4. SAFETY NET
         if (cartId) {
-          // Invalider cachen for å være 100% sikker på at vi har ferske data
-          queryClient.invalidateQueries({ queryKey: ['cart', cartId] })
+          // Sjekk rabatt eksplisitt for sikkerhets skyld
+          if (additionalLine) {
+            await handlePostAddToCartCampaigns({
+              cartId,
+              additionalLine,
+              queryClient
+            })
+          }
 
-          // Sjekk om rabatten ble registrert (Silent Check)
-          await handlePostAddToCartCampaigns({
-            cartId,
-            additionalLine,
-            queryClient
-          })
+          queryClient.invalidateQueries({ queryKey: ['cart', cartId] })
         }
 
-        // 5. Tracking
         await trackAddToCart({
           product,
           selectedVariant,
