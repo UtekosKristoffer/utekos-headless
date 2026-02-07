@@ -1,4 +1,6 @@
-import { redisGet } from '@/lib/redis/getRedis'
+// Path: src/lib/tracking/utils/getRedisAttribution.ts
+
+import { redisGet } from '@/lib/redis/redisGet'
 import { safeString } from '@/lib/utils/safeString'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 import type { CheckoutAttribution, OrderPaid } from '@types'
