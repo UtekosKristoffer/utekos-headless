@@ -7,7 +7,7 @@ import { cartStore } from '@/lib/state/cartStore'
 import { useCartMutations } from '@/hooks/useCartMutations'
 import { useOptimisticCartUpdate } from '@/hooks/useOptimisticCartUpdate'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
-import { applyDiscount } from '@/api/lib/cart/applyDiscount'
+// applyDiscount er ikke lenger nødvendig her, da vi sender koden med addLines
 import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
 import { useAnalytics } from '@/hooks/useAnalytics'
 import { getVariants } from '@/app/skreddersy-varmen/utekos-orginal/utils/getVariants'
@@ -18,6 +18,7 @@ import type {
   ColorVariant,
   UsePurchaseLogicProps
 } from '@types'
+import type { OptimisticItemInput } from '@/hooks/useOptimisticCartUpdate'
 
 export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
   const [selectedModel, setSelectedModel] = useState<ModelKey>('techdown')
@@ -93,6 +94,18 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
         let currentCartId = contextCartId || (await getCartIdFromCookie())
         let additionalLine: { variantId: string; quantity: number } | undefined
         let selectedBuffVariant: ShopifyProductVariant | undefined
+
+        // Forbered items for batch update
+        const itemsToUpdate: OptimisticItemInput[] = []
+
+        // 1. Legg til hovedproduktet
+        itemsToUpdate.push({
+          product: currentShopifyProduct,
+          variant: selectedVariant,
+          quantity
+        })
+
+        // 2. Håndter Buff-logikk
         if (isTechDownOffer && buffProduct) {
           const buffVariants = getVariants(buffProduct)
           selectedBuffVariant = buffVariants.find((v: any) =>
@@ -106,26 +119,22 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
               variantId: selectedBuffVariant.id,
               quantity: 1 * quantity
             }
+            // Legg til buff i batch update med 0 i pris
+            itemsToUpdate.push({
+              product: buffProduct,
+              variant: selectedBuffVariant,
+              quantity: 1 * quantity,
+              customPrice: 0
+            })
           }
         }
 
+        // 3. Atomisk optimistisk oppdatering
         if (currentCartId) {
           await updateCartCache({
             cartId: currentCartId,
-            product: currentShopifyProduct,
-            variant: selectedVariant,
-            quantity
+            items: itemsToUpdate // <--- FIX: Bruker nå items-array
           })
-
-          if (selectedBuffVariant && buffProduct) {
-            await updateCartCache({
-              cartId: currentCartId,
-              product: buffProduct,
-              variant: selectedBuffVariant,
-              quantity: 1 * quantity
-            })
-          }
-
           cartStore.send({ type: 'OPEN' })
         }
 
@@ -134,7 +143,13 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
           linesToProcess.push(additionalLine)
         }
 
-        await addLines(linesToProcess)
+        // 4. Send til server med rabattkode (Robust løsning)
+        const mutationPayload =
+          additionalLine ?
+            { lines: linesToProcess, discountCode: 'GRATISBUFF' }
+          : linesToProcess
+
+        await addLines(mutationPayload)
 
         if (!currentCartId) {
           currentCartId = await getCartIdFromCookie()
@@ -143,19 +158,10 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
         if (currentCartId) {
           queryClient.invalidateQueries({ queryKey: ['cart', currentCartId] })
 
+          // Vi trenger ikke lenger manuell applyDiscount her,
+          // siden det håndteres av addLines + server action.
           if (additionalLine) {
-            try {
-              const updatedCart = await applyDiscount(
-                currentCartId,
-                'GRATISBUFF'
-              )
-              if (updatedCart) {
-                queryClient.setQueryData(['cart', currentCartId], updatedCart)
-                toast.success('Gratis Utekos Buff™ registrert!')
-              }
-            } catch (e) {
-              console.error('Feil ved påføring av rabatt:', e)
-            }
+            toast.success('Gratis Utekos Buff™ registrert!')
           }
         }
 
