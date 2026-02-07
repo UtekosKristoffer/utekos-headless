@@ -240,7 +240,7 @@ export function HelpChooseCard({
                       : <>
                           <ShoppingBag className='h-4 w-4 md:mr-2' />
                           <span className='hidden text-xs font-bold md:block'>
-                            Velg størrelse
+                            Kjøp nå
                           </span>
                         </>
                       }
