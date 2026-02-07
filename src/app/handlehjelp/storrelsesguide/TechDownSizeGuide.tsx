@@ -56,9 +56,12 @@ export function TechDownSizeGuide() {
               Velg Liten hvis...
             </h3>
             <ul className='mt-4 list-disc list-inside space-y-2 text-neutral-300'>
-              <li>Du ønsker en mer kroppsnær passform som sitter pent.</li>
-              <li>Du ser for deg å bruke den over en tynnere genser.</li>
-              <li>Du vil ha en nettere silhuett uten overflødig volum.</li>
+              <li>Er opptil 165-170 cm høy.</li>
+              <li>Eller noe lavere og ønsker ekstra romslig følelse</li>
+              <li>
+                Eller du er noe høyere, men ønsker nettere silhuett uten
+                overflødig volum.
+              </li>
             </ul>
           </div>
           <div className='bg-neutral-900/50 p-8 rounded-lg text-left'>
@@ -66,9 +69,9 @@ export function TechDownSizeGuide() {
               Velg Medium hvis...
             </h3>
             <ul className='mt-4 list-disc list-inside space-y-2 text-neutral-300'>
-              <li>Du ønsker en allsidig passform med litt ekstra plass.</li>
-              <li>Du vil ha plass til en god og tykk strikkegenser under.</li>
-              <li>Du vipper mellom to størrelser og prioriterer komfort.</li>
+              <li>Du er opptil 175-180 cm høy.</li>
+              <li>Eller noe lavere og ønsker ekstra romslig passform.</li>
+              <li>Eller du er noe høyere, men ønsker kroppsnær passform.</li>
             </ul>
           </div>
           <div className='bg-neutral-900/50 p-8 rounded-lg text-left'>
@@ -76,9 +79,9 @@ export function TechDownSizeGuide() {
               Velg Large hvis...
             </h3>
             <ul className='mt-4 list-disc list-inside space-y-2 text-neutral-300'>
-              <li>Du foretrekker en romslig og avslappet følelse.</li>
-              <li>Du elsker å ha god plass til flere lag på kalde dager.</li>
-              <li>Du verdsetter maksimal komfort og bevegelsesfrihet.</li>
+              <li>Du er over 180-185 cm høy</li>
+              <li>Eller noe lavere og ønsker ekstra romslig passform.</li>
+              <li>Er du over 195 cm vil størrelsen være for liten.</li>
             </ul>
           </div>
         </div>
