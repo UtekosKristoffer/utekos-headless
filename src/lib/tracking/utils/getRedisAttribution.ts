@@ -1,4 +1,4 @@
-import { redisGet } from '@/lib/redis'
+import { redisGet } from '@/lib/redis/getRedis'
 import { safeString } from '@/lib/utils/safeString'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 import type { CheckoutAttribution, OrderPaid } from '@types'

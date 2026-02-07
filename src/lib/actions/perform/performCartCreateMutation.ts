@@ -21,7 +21,6 @@ export const performCartCreateMutation = async (
         quantity: line.quantity
       })),
       attributes: attributes,
-      // Legger til rabattkoder hvis det finnes
       ...(discountCode && { discountCodes: [discountCode] })
     }
   })

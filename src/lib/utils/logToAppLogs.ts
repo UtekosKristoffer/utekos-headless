@@ -1,5 +1,6 @@
 // Path: src/lib/utils/logToAppLogs.ts
-import { redisPush, redisTrim } from '@/lib/redis'
+import { redisPush } from '@/lib/redis/redisPush'
+import { redisTrim } from '@/lib/redis/redisList'
 import crypto from 'crypto'
 
 type LogLevel = 'INFO' | 'WARN' | 'ERROR' | 'DEBUG'
