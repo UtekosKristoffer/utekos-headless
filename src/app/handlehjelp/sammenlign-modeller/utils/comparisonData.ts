@@ -1,5 +1,4 @@
-// Path: src/app/handlehjelp/sammenlign-modeller/config.ts
-
+// Path: src/app/handlehjelp/sammenlign-modeller/utils/comparisonData.ts
 export const comparisonData = [
   {
     feature: 'Best for',

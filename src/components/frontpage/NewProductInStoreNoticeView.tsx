@@ -87,7 +87,7 @@ export function NewProductInStoreNoticeView({
                 <strong className='text-white'>Utekos TechDown™</strong> hos
                 våre gode venner på Intersport Laksevåg. Ta turen innom for å
                 bli en av de første som får oppleve den neste generasjonen av
-                Utekos!
+                Utekos®!
               </p>
 
               <Button

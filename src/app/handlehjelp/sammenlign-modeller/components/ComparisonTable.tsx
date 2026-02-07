@@ -1,6 +1,5 @@
 import {
   Check,
-  Minus,
   Thermometer,
   Feather,
   Droplets,
@@ -9,9 +8,10 @@ import {
   Layers,
   Shield
 } from 'lucide-react'
-import { comparisonData } from '../config'
+import { comparisonData } from '../utils/comparisonData'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { cn } from '@/lib/utils/className'
+import { TableCellContent } from './TableCellContent'
 
 const iconMap = {
   'star': Star,
@@ -34,20 +34,6 @@ function IconRenderer({
 }) {
   const Icon = iconMap[name]
   return Icon ? <Icon className={className} /> : null
-}
-
-function TableCellContent({ value }: { value: string | boolean }) {
-  if (typeof value === 'boolean') {
-    return value ?
-        <Check className='mx-auto h-5 w-5 text-green-500' />
-      : <Minus className='mx-auto h-5 w-5 text-neutral-600' />
-  }
-
-  return (
-    <span className='text-sm leading-relaxed text-muted-foreground'>
-      {value}
-    </span>
-  )
 }
 
 export function ComparisonTable() {

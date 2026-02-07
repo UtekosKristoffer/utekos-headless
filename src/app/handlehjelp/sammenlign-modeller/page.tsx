@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import { PersonaCards } from './sections/PersonaCards'
-import { CompareModelsPageHero } from './sections/CompareModelsPageHero'
-import { ComparisonSection } from './sections/ComparisonSection'
-import { DeepDiveSection } from './sections/DeepDiveSection'
-import { ConclusionSection } from './sections/ConclusionSection'
+import { PersonaCards } from './components/PersonaCards'
+import { CompareModelsPageHero } from './components/CompareModelsPageHero'
+import { ComparisonSection } from './components/ComparisonSection'
+import { DeepDiveSection } from './components/DeepDiveSection'
+import { ConclusionSection } from './components/ConclusionSection'
 import { Activity } from 'react'
 export const metadata: Metadata = {
   title: 'Sammenlign Utekos-modeller | Finn den perfekte for deg',

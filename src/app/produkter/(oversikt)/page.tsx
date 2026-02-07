@@ -1,7 +1,7 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
 import { getProducts } from '@/api/lib/products/getProducts'
 import { QueryClient } from '@tanstack/react-query'
-import { ComparisonTeaser } from '@/app/handlehjelp/sammenlign-modeller/sections/ComparisonTeaser'
+import { ComparisonTeaser } from '@/app/handlehjelp/sammenlign-modeller/components/ComparisonTeaser'
 import { HelpChooseSection } from './components/HelpChooseSection'
 import { ProductTestimonial } from '@/app/produkter/(oversikt)/components/ProductTestimonial'
 import { ProductsPageFooter } from '@/app/produkter/(oversikt)/components/ProductsPageFooter'
