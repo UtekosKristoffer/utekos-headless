@@ -5,11 +5,17 @@
 import { useAddToCartAction } from '@/hooks/useAddToCartAction'
 import type { ShopifyProduct, ShopifyProductVariant } from '@types'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowUpRight, Loader2, ShoppingBag, X } from 'lucide-react'
+import {
+  ArrowUpRight,
+  Loader2,
+  MousePointer2,
+  ShoppingBag,
+  X
+} from 'lucide-react'
 import type { Route } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 interface HelpChooseCardProps {
   product: ShopifyProduct
@@ -49,7 +55,15 @@ export function HelpChooseCard({
   const [isSelectingSize, setIsSelectingSize] = useState(false)
   const [selectedVariant, setSelectedVariant] =
     useState<ShopifyProductVariant | null>(null)
+
+  const [toast, setToast] = useState<string | null>(null)
+  const toastTimerRef = useRef<number | null>(null)
+
   const [colorGateFlash, setColorGateFlash] = useState(false)
+  const [showColorHint, setShowColorHint] = useState(false)
+  const hintTimerRef = useRef<number | null>(null)
+
+  const [pendingAdd, setPendingAdd] = useState(false)
 
   const colorOptions = useMemo(() => {
     const map = new Map<string, string>()
@@ -88,6 +102,38 @@ export function HelpChooseCard({
     selectedVariant: selectedVariant
   })
 
+  useEffect(() => {
+    if (!pendingAdd) return
+    if (!selectedVariant) return
+    performAddToCart(1)
+    setPendingAdd(false)
+  }, [pendingAdd, selectedVariant, performAddToCart])
+
+  useEffect(() => {
+    return () => {
+      if (toastTimerRef.current) window.clearTimeout(toastTimerRef.current)
+      if (hintTimerRef.current) window.clearTimeout(hintTimerRef.current)
+    }
+  }, [])
+
+  const showToast = (msg: string) => {
+    if (toastTimerRef.current) window.clearTimeout(toastTimerRef.current)
+    setToast(msg)
+    toastTimerRef.current = window.setTimeout(() => setToast(null), 1800)
+  }
+
+  const triggerColorGuidance = () => {
+    setColorGateFlash(true)
+    setShowColorHint(true)
+    window.setTimeout(() => setColorGateFlash(false), 550)
+
+    if (hintTimerRef.current) window.clearTimeout(hintTimerRef.current)
+    hintTimerRef.current = window.setTimeout(
+      () => setShowColorHint(false),
+      2200
+    )
+  }
+
   const handleBuyClick = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
@@ -95,8 +141,8 @@ export function HelpChooseCard({
     if (!product.availableForSale) return
 
     if (!selectedColor) {
-      setColorGateFlash(true)
-      window.setTimeout(() => setColorGateFlash(false), 550)
+      showToast('Velg farge for å fortsette')
+      triggerColorGuidance()
       return
     }
 
@@ -110,7 +156,7 @@ export function HelpChooseCard({
     e.preventDefault()
     e.stopPropagation()
     setSelectedVariant(variant)
-    performAddToCart(1)
+    setPendingAdd(true)
   }
 
   const handleColorSelect = (e: React.MouseEvent, color: string) => {
@@ -118,8 +164,10 @@ export function HelpChooseCard({
     e.stopPropagation()
     setSelectedColor(color)
     setSelectedVariant(null)
-    setIsSelectingSize(false)
+    setIsSelectingSize(true)
     setColorGateFlash(false)
+    setShowColorHint(false)
+    setToast(null)
   }
 
   const activeImage =
@@ -161,14 +209,18 @@ export function HelpChooseCard({
                   fill
                   quality={90}
                   sizes='(max-width: 640px) 50vw, 25vw'
-                  className={`object-cover transition-transform duration-700 will-change-transform ${isSelectingSize ? 'scale-105 blur-[2px]' : 'group-hover:scale-105'}`}
+                  className={`object-cover transition-transform duration-700 will-change-transform ${
+                    isSelectingSize ?
+                      'scale-105 blur-[2px]'
+                    : 'group-hover:scale-105'
+                  }`}
                 />
               </motion.div>
             </AnimatePresence>
             <div className='absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80' />
           </div>
 
-          <div className='absolute left-0 top-0 z-20 flex w-full justify-between p-3'>
+          <div className='absolute left-0 top-0 z-30 flex w-full justify-between p-3'>
             <div className='flex items-center justify-center rounded-full border border-white/10 bg-black/20 px-2 py-0.5 backdrop-blur-md md:px-2.5 md:py-1'>
               <span className='text-[9px] font-semibold uppercase tracking-wider text-white/90 md:text-[10px]'>
                 Unisex
@@ -176,27 +228,72 @@ export function HelpChooseCard({
             </div>
 
             {colorOptions.length > 0 && (
-              <div
-                className={`flex items-center gap-1.5 rounded-full border border-white/10 bg-black/20 p-1.5 backdrop-blur-md transition-transform ${
-                  colorGateFlash ? 'scale-[1.03]' : ''
-                }`}
-              >
-                {colorOptions.map(([color, _]) => (
-                  <button
-                    key={color}
-                    onClick={e => handleColorSelect(e, color)}
-                    className={`relative h-4 w-4 rounded-full transition-transform ${
-                      selectedColor === color ?
-                        'scale-125 ring-2 ring-white'
-                      : 'opacity-80 hover:scale-110'
-                    } ${colorGateFlash && !selectedColor ? 'ring-2 ring-white/80' : ''}`}
-                    style={{ backgroundColor: mapColorToHex(color) }}
-                    aria-label={`Velg farge ${color}`}
-                  />
-                ))}
+              <div className='relative'>
+                <div
+                  className={`flex items-center gap-1.5 rounded-full border border-white/10 bg-black/20 p-1.5 backdrop-blur-md transition-transform ${
+                    colorGateFlash ? 'scale-[1.04]' : ''
+                  }`}
+                >
+                  {colorOptions.map(([color, _]) => (
+                    <button
+                      key={color}
+                      onClick={e => handleColorSelect(e, color)}
+                      className={`relative h-4 w-4 rounded-full transition-transform ${
+                        selectedColor === color ?
+                          'scale-125 ring-2 ring-white'
+                        : 'opacity-85 hover:scale-110'
+                      } ${colorGateFlash && !selectedColor ? 'ring-2 ring-white/80' : ''}`}
+                      style={{ backgroundColor: mapColorToHex(color) }}
+                      aria-label={`Velg farge ${color}`}
+                    />
+                  ))}
+                </div>
+
+                <AnimatePresence>
+                  {showColorHint && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                      transition={{ duration: 0.18 }}
+                      className='pointer-events-none absolute -left-10 top-1/2 -translate-y-1/2'
+                    >
+                      <motion.div
+                        animate={{ x: [0, 6, 0] }}
+                        transition={{
+                          duration: 0.8,
+                          repeat: Infinity,
+                          ease: 'easeInOut'
+                        }}
+                        className='flex items-center gap-2'
+                      >
+                        <div className='rounded-full bg-white/90 px-2 py-1 text-[10px] font-bold text-black shadow-lg'>
+                          Velg farge
+                        </div>
+                        <MousePointer2 className='h-4 w-4 text-white drop-shadow' />
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             )}
           </div>
+
+          <AnimatePresence>
+            {toast && (
+              <motion.div
+                initial={{ opacity: 0, y: -8, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -8, scale: 0.98 }}
+                transition={{ duration: 0.18 }}
+                className='absolute left-1/2 top-14 z-40 -translate-x-1/2'
+              >
+                <div className='rounded-full bg-white px-3 py-1.5 text-[11px] font-semibold text-black shadow-xl'>
+                  {toast}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <div className='relative z-10 mt-auto flex flex-col p-3 pb-3 md:p-4 md:pb-4'>
             <div className='mb-3'>
@@ -272,11 +369,16 @@ export function HelpChooseCard({
                           key={size.id}
                           onClick={e => handleSizeSelect(e, size.variant)}
                           disabled={isPending}
-                          className='flex h-8 min-w-[36px] flex-1 items-center justify-center rounded-full bg-black px-2 text-xs font-bold text-white transition-transform active:scale-95 whitespace-nowrap'
+                          className='flex h-8 min-w-[36px] flex-1 max-w-[68px] items-center justify-center overflow-hidden rounded-full bg-black px-2 text-xs font-bold text-white transition-transform active:scale-95'
+                          aria-label={`Velg størrelse ${size.title}`}
+                          title={size.title}
                         >
                           {isPending && selectedVariant?.id === size.id ?
                             <Loader2 className='h-3 w-3 animate-spin' />
-                          : size.title}
+                          : <span className='min-w-0 truncate whitespace-nowrap'>
+                              {size.title}
+                            </span>
+                          }
                         </button>
                       ))}
 

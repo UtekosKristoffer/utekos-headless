@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server'
 import { parseAndValidateCaptureRequest } from '@/lib/tracking/capture/parseAndValidateCaptureRequest'
 import { adaptRequestToCaptureContext } from '@/lib/tracking/capture/adaptRequestToCaptureContext'
 import { createCaptureResponse } from '@/lib/tracking/capture/createCaptureResponse'
-import { redisSet } from '@/lib/redis/getRedis'
+import { redisSet } from '@/lib/redis/redisSet'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 import { processCapture } from '@/lib/tracking/capture/processCapture'
 
