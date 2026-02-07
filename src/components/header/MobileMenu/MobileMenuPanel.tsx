@@ -1,5 +1,7 @@
 // Path: src/components/header/MobileMenu/MobileMenuPanel.tsx
 
+'use client'
+
 import { MobileMenuItem } from '@/components/header/MobileMenu/MobileMenuItem'
 import {
   Sheet,
@@ -11,6 +13,8 @@ import {
 import type { MenuItem } from '@types'
 import { HeaderLogo } from '../HeaderLogo'
 import { Accordion } from '@/components/ui/accordion'
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
 
 export function MobileMenuPanel({
   menu = [],
@@ -21,6 +25,30 @@ export function MobileMenuPanel({
   isOpen: boolean
   onOpenChange: (_open: boolean) => void
 }) {
+  const subtitleRef = useRef<HTMLParagraphElement | null>(null)
+
+  useEffect(() => {
+    const el = subtitleRef.current
+    if (!el) return
+
+    gsap.killTweensOf(el)
+
+    if (!isOpen) {
+      gsap.set(el, { opacity: 0, y: 8, clipPath: 'inset(0 100% 0 0)' })
+      return
+    }
+
+    gsap.set(el, { opacity: 0, y: 8, clipPath: 'inset(0 100% 0 0)' })
+    gsap.to(el, {
+      opacity: 1,
+      y: 0,
+      clipPath: 'inset(0 0% 0 0)',
+      duration: 0.6,
+      delay: 0.12,
+      ease: 'power3.out'
+    })
+  }, [isOpen])
+
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
       <SheetTrigger asChild>
@@ -48,7 +76,11 @@ export function MobileMenuPanel({
             </SheetTitle>
           </div>
 
-          <p className='text-sm text-muted-foreground'>
+          <p
+            ref={subtitleRef}
+            className='text-sm text-slate-200/60 tracking-tight'
+            style={{ clipPath: 'inset(0 100% 0 0)' }}
+          >
             Utforsk vår kolleksjon
           </p>
         </SheetHeader>
