@@ -16,6 +16,10 @@ import { Accordion } from '@/components/ui/accordion'
 import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 
+function nextFrame() {
+  return new Promise<void>(resolve => requestAnimationFrame(() => resolve()))
+}
+
 export function MobileMenuPanel({
   menu = [],
   isOpen,
@@ -25,60 +29,66 @@ export function MobileMenuPanel({
   isOpen: boolean
   onOpenChange: (_open: boolean) => void
 }) {
-  const subtitleSpanRef = useRef<HTMLSpanElement | null>(null)
-  const subtitleWrapRef = useRef<HTMLSpanElement | null>(null)
+  const subtitleRef = useRef<HTMLSpanElement | null>(null)
   const listRef = useRef<HTMLDivElement | null>(null)
-  const rafRef = useRef<number | null>(null)
+  const tlRef = useRef<gsap.core.Timeline | null>(null)
+  const runIdRef = useRef(0)
 
   useLayoutEffect(() => {
-    const wrap = subtitleWrapRef.current
-    const subtitle = subtitleSpanRef.current
-    const list = listRef.current
-    if (!wrap || !subtitle || !list) return
+    runIdRef.current += 1
+    const runId = runIdRef.current
 
-    if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    const run = async () => {
+      await nextFrame()
+      if (runId !== runIdRef.current) return
 
-    const items = Array.from(list.querySelectorAll('[data-mm-item="true"]'))
+      const subtitle = subtitleRef.current
+      const list = listRef.current
+      if (!subtitle || !list) return
 
-    const ctx = gsap.context(() => {
-      gsap.killTweensOf([subtitle, ...items])
+      const items = Array.from(
+        list.querySelectorAll<HTMLElement>('[data-mm-item="true"]')
+      )
 
-      if (!isOpen) {
-        gsap.set(subtitle, { opacity: 0, y: 10, filter: 'blur(6px)' })
-        gsap.set(items, { opacity: 0, x: -18, filter: 'blur(8px)' })
-        return
-      }
+      if (!items.length) return
+
+      if (tlRef.current) tlRef.current.kill()
 
       gsap.set(subtitle, { opacity: 0, y: 10, filter: 'blur(6px)' })
       gsap.set(items, { opacity: 0, x: -18, filter: 'blur(8px)' })
 
-      rafRef.current = requestAnimationFrame(() => {
-        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+      if (!isOpen) return
 
-        tl.to(subtitle, {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+      tl.to(subtitle, {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        duration: 0.65,
+        delay: 0.08
+      }).to(
+        items,
+        {
           opacity: 1,
-          y: 0,
+          x: 0,
           filter: 'blur(0px)',
-          duration: 0.7,
-          delay: 0.08
-        }).to(
-          items,
-          {
-            opacity: 1,
-            x: 0,
-            filter: 'blur(0px)',
-            duration: 0.55,
-            stagger: 0.055
-          },
-          '-=0.35'
-        )
-      })
-    }, list)
+          duration: 0.55,
+          stagger: 0.055
+        },
+        '-=0.32'
+      )
+
+      tlRef.current = tl
+    }
+
+    run()
 
     return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
-      rafRef.current = null
-      ctx.revert()
+      runIdRef.current += 1
+      if (tlRef.current) {
+        tlRef.current.kill()
+        tlRef.current = null
+      }
     }
   }, [isOpen, menu.length])
 
@@ -110,8 +120,8 @@ export function MobileMenuPanel({
           </div>
 
           <p className='text-sm tracking-tight text-slate-200/60'>
-            <span ref={subtitleWrapRef} className='block overflow-hidden'>
-              <span ref={subtitleSpanRef} className='block'>
+            <span className='block overflow-hidden'>
+              <span ref={subtitleRef} className='block'>
                 Utforsk vår kolleksjon
               </span>
             </span>
@@ -120,19 +130,17 @@ export function MobileMenuPanel({
 
         <nav className='relative flex-grow overflow-y-auto px-4 pb-6 pt-4'>
           <div ref={listRef}>
-            {isOpen && (
-              <Accordion
-                type='single'
-                collapsible
-                className='flex flex-col gap-2'
-              >
-                {menu.map(item => (
-                  <div key={item.title} data-mm-item='true'>
-                    <MobileMenuItem item={item} />
-                  </div>
-                ))}
-              </Accordion>
-            )}
+            <Accordion
+              type='single'
+              collapsible
+              className='flex flex-col gap-2'
+            >
+              {menu.map(item => (
+                <div key={item.title} data-mm-item='true'>
+                  <MobileMenuItem item={item} />
+                </div>
+              ))}
+            </Accordion>
           </div>
         </nav>
       </SheetContent>
