@@ -3,12 +3,9 @@ import { geistSans } from '@/db/config/font.config'
 import { Suspense, type ReactNode } from 'react'
 import { mainMenu } from '@/db/config/menu.config'
 import { Analytics } from '@vercel/analytics/react'
-import { Toaster } from '@/components/ui/sonner'
-import AnnouncementBanner from '@/components/frontpage/components/SpecialOfferSection/AnnouncementBanner'
 import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
-import type { RootLayoutProps } from '@types'
-import type { Metadata } from 'next'
+import AnnouncementBanner from '@/components/frontpage/components/SpecialOfferSection/AnnouncementBanner'
 import { ChatBotAgent } from '@/components/chat/ChatBotAgent/source-code'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { GoogleTagManager } from '@next/third-parties/google'
@@ -16,6 +13,8 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { CartProviderLoader } from '@/components/providers/CartProviderLoader'
 import { CookieConsentBanner } from '@/components/CookieBanner'
 import { ClickTracker } from '@/components/analytics/ClickTracker'
+import type { RootLayoutProps } from '@types'
+import type { Metadata } from 'next'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
@@ -106,7 +105,6 @@ export default function RootLayo({ children }: RootLayoutProps) {
             <CookieConsentBanner />
           </CartProviderLoader>
         </Suspense>
-        <Toaster closeButton />
       </body>
     </html>
   )
