@@ -7,7 +7,7 @@ import { cartStore } from '@/lib/state/cartStore'
 import { useCartMutations } from '@/hooks/useCartMutations'
 import { useOptimisticCartUpdate } from '@/hooks/useOptimisticCartUpdate'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
-// applyDiscount er ikke lenger nødvendig her, da vi sender koden med addLines
+import { handlePostAddToCartCampaigns } from '@/lib/campaigns/cart/handlePostAddToCartCampaigns' // <--- Safety net tilbake
 import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
 import { useAnalytics } from '@/hooks/useAnalytics'
 import { getVariants } from '@/app/skreddersy-varmen/utekos-orginal/utils/getVariants'
@@ -95,17 +95,14 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
         let additionalLine: { variantId: string; quantity: number } | undefined
         let selectedBuffVariant: ShopifyProductVariant | undefined
 
-        // Forbered items for batch update
         const itemsToUpdate: OptimisticItemInput[] = []
 
-        // 1. Legg til hovedproduktet
         itemsToUpdate.push({
           product: currentShopifyProduct,
           variant: selectedVariant,
           quantity
         })
 
-        // 2. Håndter Buff-logikk
         if (isTechDownOffer && buffProduct) {
           const buffVariants = getVariants(buffProduct)
           selectedBuffVariant = buffVariants.find((v: any) =>
@@ -119,21 +116,20 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
               variantId: selectedBuffVariant.id,
               quantity: 1 * quantity
             }
-            // Legg til buff i batch update med 0 i pris
             itemsToUpdate.push({
               product: buffProduct,
               variant: selectedBuffVariant,
               quantity: 1 * quantity,
-              customPrice: 0
+              customPrice: 0 // Optimistisk pris: 0,-
             })
           }
         }
 
-        // 3. Atomisk optimistisk oppdatering
+        // Optimistisk oppdatering (kun hvis vi har cartId)
         if (currentCartId) {
           await updateCartCache({
             cartId: currentCartId,
-            items: itemsToUpdate // <--- FIX: Bruker nå items-array
+            items: itemsToUpdate
           })
           cartStore.send({ type: 'OPEN' })
         }
@@ -143,7 +139,7 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
           linesToProcess.push(additionalLine)
         }
 
-        // 4. Send til server med rabattkode (Robust løsning)
+        // Send til server (Atomisk forsøk)
         const mutationPayload =
           additionalLine ?
             { lines: linesToProcess, discountCode: 'GRATISBUFF' }
@@ -151,6 +147,7 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
 
         await addLines(mutationPayload)
 
+        // Hent cartId på nytt (hvis bruker var incognito og nettopp fikk en cart)
         if (!currentCartId) {
           currentCartId = await getCartIdFromCookie()
         }
@@ -158,11 +155,13 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
         if (currentCartId) {
           queryClient.invalidateQueries({ queryKey: ['cart', currentCartId] })
 
-          // Vi trenger ikke lenger manuell applyDiscount her,
-          // siden det håndteres av addLines + server action.
-          if (additionalLine) {
-            toast.success('Gratis Utekos Buff™ registrert!')
-          }
+          // SAFETY NET: Sørg for at rabatten faktisk ligger der.
+          // Dette løser problemet hvis atomisk oppdatering feilet/gikk for fort.
+          await handlePostAddToCartCampaigns({
+            cartId: currentCartId,
+            additionalLine,
+            queryClient
+          })
         }
 
         await trackAddToCart({

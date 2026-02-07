@@ -21,7 +21,6 @@ import type {
   ShopifyProductVariant
 } from '@types'
 
-// FIX: Tillat undefined eksplisitt i typen
 interface ExtendedAddToCartProps extends UseAddToCartActionProps {
   additionalProductData?:
     | {
@@ -53,28 +52,31 @@ export function useAddToCartAction({
       toast.error('Vennligst velg en variant før du legger i handlekurven.')
       return
     }
+
     cartStore.send({ type: 'OPEN' })
 
     startTransition(async () => {
       try {
-        const cartId = contextCartId || (await getCartIdFromCookie())
+        let cartId = contextCartId || (await getCartIdFromCookie())
 
         if (cartId) {
-          // --- BATCH UPDATE START ---
           const itemsToUpdate: OptimisticItemInput[] = []
+
           itemsToUpdate.push({
             product,
             variant: selectedVariant,
             quantity
           })
+
           if (additionalLine && additionalProductData) {
             itemsToUpdate.push({
               product: additionalProductData.product,
               variant: additionalProductData.variant,
               quantity: additionalLine.quantity,
-              customPrice: 0 // Tvinger prisen til 0,- visuelt
+              customPrice: 0 // Optimistisk pris: 0,-
             })
           }
+
           await updateCartCache({
             cartId,
             items: itemsToUpdate
@@ -94,6 +96,10 @@ export function useAddToCartAction({
           additionalLine ? { lines, discountCode: 'GRATISBUFF' } : lines
 
         await addLines(mutationPayload)
+
+        if (!cartId) {
+          cartId = await getCartIdFromCookie()
+        }
 
         if (cartId) {
           queryClient.invalidateQueries({ queryKey: ['cart', cartId] })

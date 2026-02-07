@@ -2,6 +2,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { createOptimisticLineItem } from '@/lib/helpers/cart/createOptimisticLineItem'
 import type { Cart, ShopifyProduct, ShopifyProductVariant } from '@types'
 
+// Definerer strukturen for et enkelt item i en batch-oppdatering
 export interface OptimisticItemInput {
   product: ShopifyProduct
   variant: ShopifyProductVariant
@@ -11,21 +12,18 @@ export interface OptimisticItemInput {
 
 interface OptimisticUpdateParams {
   cartId: string
-  items: OptimisticItemInput[]
+  items: OptimisticItemInput[] // <--- Batch-støtte
 }
 
 export function useOptimisticCartUpdate() {
   const queryClient = useQueryClient()
 
   const updateCartCache = async ({ cartId, items }: OptimisticUpdateParams) => {
-    // Avbryt pågående queries for å unngå race conditions
     await queryClient.cancelQueries({ queryKey: ['cart', cartId] })
 
     queryClient.setQueryData<Cart>(['cart', cartId], oldCart => {
-      // Hvis ingen cart finnes i cache, har vi ingenting å oppdatere
       if (!oldCart) return oldCart
 
-      // Lag en kopi av linjene (shallow copy av arrayet er nok her, vi bytter ut objektene)
       const newLines = [...oldCart.lines]
       let addedQuantity = 0
 
@@ -42,8 +40,8 @@ export function useOptimisticCartUpdate() {
         )
 
         if (existingLineIndex >= 0) {
-          // Hent linjen sikkert
           const existingLine = newLines[existingLineIndex]
+
           if (!existingLine) continue
 
           const newQuantity = existingLine.quantity + item.quantity
@@ -60,9 +58,8 @@ export function useOptimisticCartUpdate() {
           const addedCost = unitPriceToAdd * item.quantity
           const newTotalAmount = (currentTotalAmount + addedCost).toString()
 
-          // Oppdater linjen ved å erstatte den i arrayet
           newLines[existingLineIndex] = {
-            ...existingLine, // Nå er existingLine garantert 'CartLine', så 'id' blir med
+            ...existingLine,
             quantity: newQuantity,
             cost: {
               ...existingLine.cost,
@@ -73,7 +70,6 @@ export function useOptimisticCartUpdate() {
             }
           }
         } else {
-          // Ny linje
           newLines.push(newLine)
         }
 
