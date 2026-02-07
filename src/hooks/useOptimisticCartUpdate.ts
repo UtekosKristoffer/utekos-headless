@@ -2,62 +2,70 @@ import { useQueryClient } from '@tanstack/react-query'
 import { createOptimisticLineItem } from '@/lib/helpers/cart/createOptimisticLineItem'
 import type { Cart, ShopifyProduct, ShopifyProductVariant } from '@types'
 
-interface OptimisticUpdateParams {
-  cartId: string
+export interface OptimisticItemInput {
   product: ShopifyProduct
   variant: ShopifyProductVariant
   quantity: number
-  customPrice?: number //
+  customPrice?: number
+}
+
+interface OptimisticUpdateParams {
+  cartId: string
+  items: OptimisticItemInput[]
 }
 
 export function useOptimisticCartUpdate() {
   const queryClient = useQueryClient()
 
-  const updateCartCache = async ({
-    cartId,
-    product,
-    variant,
-    quantity,
-    customPrice
-  }: OptimisticUpdateParams) => {
+  const updateCartCache = async ({ cartId, items }: OptimisticUpdateParams) => {
+    // Avbryt pågående queries for å unngå race conditions
     await queryClient.cancelQueries({ queryKey: ['cart', cartId] })
-    const previousCart = queryClient.getQueryData<Cart>(['cart', cartId])
 
-    if (previousCart) {
-      // Opprett linjen med eventuell customPrice (0,-)
-      const newLine = createOptimisticLineItem(
-        product,
-        variant,
-        quantity,
-        customPrice
-      )
+    queryClient.setQueryData<Cart>(['cart', cartId], oldCart => {
+      // Hvis ingen cart finnes i cache, har vi ingenting å oppdatere
+      if (!oldCart) return oldCart
 
-      const existingLineIndex = previousCart.lines.findIndex(
-        line => line.merchandise.id === newLine.merchandise.id
-      )
+      // Lag en kopi av linjene (shallow copy av arrayet er nok her, vi bytter ut objektene)
+      const newLines = [...oldCart.lines]
+      let addedQuantity = 0
 
-      // Bruk en kopi av linjene for immutability
-      const newLines = [...previousCart.lines]
+      for (const item of items) {
+        const newLine = createOptimisticLineItem(
+          item.product,
+          item.variant,
+          item.quantity,
+          item.customPrice
+        )
 
-      if (existingLineIndex >= 0) {
-        const existingLine = newLines[existingLineIndex]
-        if (existingLine) {
-          const newQuantity = existingLine.quantity + quantity
+        const existingLineIndex = newLines.findIndex(
+          line => line.merchandise.id === newLine.merchandise.id
+        )
+
+        if (existingLineIndex >= 0) {
+          // Hent linjen sikkert
+          const existingLine = newLines[existingLineIndex]
+
+          // FIX: Guard clause som tilfredsstiller TypeScript strict null checks
+          // Dette løser "'existingLine' is possibly 'undefined'" og følgefeilen med 'id'
+          if (!existingLine) continue
+
+          const newQuantity = existingLine.quantity + item.quantity
+
+          const unitPriceToAdd =
+            item.customPrice !== undefined ?
+              item.customPrice
+            : parseFloat(item.variant.price.amount)
+
           const currentTotalAmount = parseFloat(
             existingLine.cost.totalAmount.amount
           )
 
-          // Hvis customPrice er satt (0), legg til 0. Hvis ikke, bruk variantens pris.
-          const unitPriceToAdd =
-            customPrice !== undefined ? customPrice : (
-              parseFloat(variant.price.amount)
-            )
-
-          const addedCost = unitPriceToAdd * quantity
+          const addedCost = unitPriceToAdd * item.quantity
           const newTotalAmount = (currentTotalAmount + addedCost).toString()
 
+          // Oppdater linjen ved å erstatte den i arrayet
           newLines[existingLineIndex] = {
-            ...existingLine,
+            ...existingLine, // Nå er existingLine garantert 'CartLine', så 'id' blir med
             quantity: newQuantity,
             cost: {
               ...existingLine.cost,
@@ -67,20 +75,20 @@ export function useOptimisticCartUpdate() {
               }
             }
           }
+        } else {
+          // Ny linje
+          newLines.push(newLine)
         }
-      } else {
-        newLines.push(newLine)
+
+        addedQuantity += item.quantity
       }
 
-      // Oppdater totalantallet i kurven
-      queryClient.setQueryData<Cart>(['cart', cartId], {
-        ...previousCart,
+      return {
+        ...oldCart,
         lines: newLines,
-        totalQuantity: previousCart.totalQuantity + quantity
-      })
-    }
-
-    return { previousCart }
+        totalQuantity: oldCart.totalQuantity + addedQuantity
+      }
+    })
   }
 
   return { updateCartCache }

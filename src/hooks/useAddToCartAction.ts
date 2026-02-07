@@ -8,7 +8,10 @@ import { CartIdContext } from '@/lib/context/CartIdContext'
 import { cartStore } from '@/lib/state/cartStore'
 import { useCartMutations } from '@/hooks/useCartMutations'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
-import { useOptimisticCartUpdate } from '@/hooks/useOptimisticCartUpdate'
+import {
+  useOptimisticCartUpdate,
+  type OptimisticItemInput
+} from '@/hooks/useOptimisticCartUpdate'
 import { handlePostAddToCartCampaigns } from '@/lib/campaigns/cart/handlePostAddToCartCampaigns'
 import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
 import { useAnalytics } from '@/hooks/useAnalytics'
@@ -18,7 +21,7 @@ import type {
   ShopifyProductVariant
 } from '@types'
 
-// FIX: Legg til '| undefined' for å tilfredsstille exactOptionalPropertyTypes
+// FIX: Tillat undefined eksplisitt i typen
 interface ExtendedAddToCartProps extends UseAddToCartActionProps {
   additionalProductData?:
     | {
@@ -50,8 +53,6 @@ export function useAddToCartAction({
       toast.error('Vennligst velg en variant før du legger i handlekurven.')
       return
     }
-
-    // 1. Umiddelbar respons i UI
     cartStore.send({ type: 'OPEN' })
 
     startTransition(async () => {
@@ -59,21 +60,25 @@ export function useAddToCartAction({
         const cartId = contextCartId || (await getCartIdFromCookie())
 
         if (cartId) {
-          await updateCartCache({
-            cartId,
+          // --- BATCH UPDATE START ---
+          const itemsToUpdate: OptimisticItemInput[] = []
+          itemsToUpdate.push({
             product,
             variant: selectedVariant,
             quantity
           })
           if (additionalLine && additionalProductData) {
-            await updateCartCache({
-              cartId,
+            itemsToUpdate.push({
               product: additionalProductData.product,
               variant: additionalProductData.variant,
               quantity: additionalLine.quantity,
               customPrice: 0 // Tvinger prisen til 0,- visuelt
             })
           }
+          await updateCartCache({
+            cartId,
+            items: itemsToUpdate
+          })
         }
 
         const lines = [{ variantId: selectedVariant.id, quantity }]
@@ -84,6 +89,7 @@ export function useAddToCartAction({
             quantity: additionalLine.quantity
           })
         }
+
         const mutationPayload =
           additionalLine ? { lines, discountCode: 'GRATISBUFF' } : lines
 

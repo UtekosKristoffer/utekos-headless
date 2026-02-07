@@ -28,7 +28,7 @@ export function AddToCart({
     product,
     selectedVariant,
     additionalLine,
-    ...(additionalProductData && { additionalProductData })
+    ...(additionalProductData ? { additionalProductData } : {})
   })
 
   const form = useAddToCartForm(selectedVariant)
