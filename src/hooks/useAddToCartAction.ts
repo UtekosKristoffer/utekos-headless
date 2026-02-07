@@ -1,3 +1,4 @@
+// Path: src/hooks/useAddToCartAction.ts
 'use client'
 
 import { useTransition, useContext } from 'react'
@@ -12,7 +13,6 @@ import { useOptimisticCartUpdate } from '@/hooks/useOptimisticCartUpdate'
 import { handlePostAddToCartCampaigns } from '@/lib/campaigns/cart/handlePostAddToCartCampaigns'
 import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
 import { useAnalytics } from '@/hooks/useAnalytics'
-import { applyDiscount } from '@/api/lib/cart/applyDiscount'
 import type { UseAddToCartActionProps } from '@types'
 
 export function useAddToCartAction({
@@ -37,18 +37,21 @@ export function useAddToCartAction({
       return
     }
 
+    // Umiddelbar respons: Åpne handlekurven med en gang
+    cartStore.send({ type: 'OPEN' })
+
     startTransition(async () => {
       try {
         const cartId = contextCartId || (await getCartIdFromCookie())
 
         if (cartId) {
+          // Optimistisk oppdatering for hovedproduktet
           await updateCartCache({
             cartId,
             product,
             variant: selectedVariant,
             quantity
           })
-          cartStore.send({ type: 'OPEN' })
         }
 
         const lines = [{ variantId: selectedVariant.id, quantity }]
@@ -60,25 +63,19 @@ export function useAddToCartAction({
           })
         }
 
-        await addLines(lines)
+        // Send med rabattkode direkte i payloaden hvis vi har en additionalLine (Buff)
+        // Dette sikrer at rabatten registreres atomisk på serveren.
+        const mutationPayload =
+          additionalLine ? { lines, discountCode: 'GRATISBUFF' } : lines
 
-        if (cartId && additionalLine) {
-          try {
-            const updatedCart = await applyDiscount(cartId, 'GRATISBUFF')
-            if (updatedCart) {
-              queryClient.setQueryData(['cart', cartId], updatedCart)
-            }
-          } catch (discountError) {
-            console.warn(
-              'Kunne ikke aktivere gratis buff-rabatt:',
-              discountError
-            )
-          }
-        }
+        await addLines(mutationPayload)
 
         if (cartId) {
           queryClient.invalidateQueries({ queryKey: ['cart', cartId] })
         }
+
+        // Merk: applyDiscount er fjernet herfra fordi den nå håndteres
+        // direkte i addLines-kallet via server actions.
 
         await handlePostAddToCartCampaigns({
           cartId,
@@ -98,10 +95,6 @@ export function useAddToCartAction({
           value: Number(selectedVariant.price.amount),
           currency: selectedVariant.price.currencyCode
         })
-
-        if (!cartId) {
-          cartStore.send({ type: 'OPEN' })
-        }
       } catch (mutationError) {
         console.error('Feil under legg-i-kurv operasjon:', mutationError)
         toast.error('Kunne ikke legge varen(e) i handlekurven. Prøv igjen.')
