@@ -1,4 +1,4 @@
-// Path: 
+// Path: src/app/skreddersy-varmen/utekos-orginal/components/PurchaseClient.tsx
 'use client'
 
 import { usePurchaseLogic } from '@/hooks/usePurchaseLogic'
