@@ -13,7 +13,7 @@ import {
 import type { MenuItem } from '@types'
 import { HeaderLogo } from '../HeaderLogo'
 import { Accordion } from '@/components/ui/accordion'
-import { useEffect, useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 
 export function MobileMenuPanel({
@@ -26,12 +26,14 @@ export function MobileMenuPanel({
   onOpenChange: (_open: boolean) => void
 }) {
   const subtitleRef = useRef<HTMLParagraphElement | null>(null)
+  const rafRef = useRef<number | null>(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = subtitleRef.current
     if (!el) return
 
     gsap.killTweensOf(el)
+    if (rafRef.current) cancelAnimationFrame(rafRef.current)
 
     if (!isOpen) {
       gsap.set(el, { opacity: 0, y: 8, clipPath: 'inset(0 100% 0 0)' })
@@ -39,14 +41,22 @@ export function MobileMenuPanel({
     }
 
     gsap.set(el, { opacity: 0, y: 8, clipPath: 'inset(0 100% 0 0)' })
-    gsap.to(el, {
-      opacity: 1,
-      y: 0,
-      clipPath: 'inset(0 0% 0 0)',
-      duration: 0.6,
-      delay: 0.12,
-      ease: 'power3.out'
+
+    rafRef.current = requestAnimationFrame(() => {
+      gsap.to(el, {
+        opacity: 1,
+        y: 0,
+        clipPath: 'inset(0 0% 0 0)',
+        duration: 0.6,
+        delay: 0.08,
+        ease: 'power3.out'
+      })
     })
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      rafRef.current = null
+    }
   }, [isOpen])
 
   return (
