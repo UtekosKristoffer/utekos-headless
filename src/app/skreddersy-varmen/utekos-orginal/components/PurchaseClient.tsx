@@ -1,3 +1,4 @@
+// Path: 
 'use client'
 
 import { usePurchaseLogic } from '@/hooks/usePurchaseLogic'

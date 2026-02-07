@@ -16,7 +16,8 @@ import type {
   ShopifyProductVariant,
   ModelKey,
   ColorVariant,
-  UsePurchaseLogicProps
+  UsePurchaseLogicProps,
+  Cart
 } from '@types'
 import type { OptimisticItemInput } from '@/hooks/useOptimisticCartUpdate'
 
@@ -59,7 +60,6 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
   }, [selectedModel, currentConfig, selectedSize, selectedColorIndex])
 
   const handleAddToCart = async () => {
-    // 1. UMIDDELBAR RESPONS: Åpne handlekurven med en gang
     cartStore.send({ type: 'OPEN' })
 
     if (!currentShopifyProduct) {
@@ -100,14 +100,12 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
 
         const itemsToUpdate: OptimisticItemInput[] = []
 
-        // a) Hovedprodukt
         itemsToUpdate.push({
           product: currentShopifyProduct,
           variant: selectedVariant,
           quantity
         })
 
-        // b) Buff
         if (isTechDownOffer && buffProduct) {
           const buffVariants = getVariants(buffProduct)
           selectedBuffVariant = buffVariants.find((v: any) =>
@@ -121,17 +119,15 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
               variantId: selectedBuffVariant.id,
               quantity: 1 * quantity
             }
-            // Legg til i batch for 0ms visning
             itemsToUpdate.push({
               product: buffProduct,
               variant: selectedBuffVariant,
               quantity: 1 * quantity,
-              customPrice: 0 // Tving 0 kr visuelt
+              customPrice: 0
             })
           }
         }
 
-        // 2. OPTIMISTISK BATCH UPDATE
         if (currentCartId) {
           await updateCartCache({
             cartId: currentCartId,
@@ -144,34 +140,57 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
           linesToProcess.push(additionalLine)
         }
 
-        // 3. SERVER KALL (Atomisk)
         const mutationPayload =
           additionalLine ?
             { lines: linesToProcess, discountCode: 'GRATISBUFF' }
           : linesToProcess
 
+        // Maskinen oppdaterer cachen. Vi venter på ferdigstillelse.
         await addLines(mutationPayload)
 
         if (!currentCartId) {
           currentCartId = await getCartIdFromCookie()
         }
 
-        // 4. SAFETY CHECK & SYNC
-        if (currentCartId) {
-          // Ikke overskriv cachen med server-data umiddelbart hvis det kan skape blink.
-          // Invalider heller queries etter at rabattsjekken er gjort.
+        // PRICE GUARD (Post-Correction)
+        if (currentCartId && additionalLine) {
+          const freshCart = queryClient.getQueryData<Cart>([
+            'cart',
+            currentCartId
+          ])
 
-          if (additionalLine) {
-            toast.success('Gratis Utekos Buff™ registrert!')
-            await handlePostAddToCartCampaigns({
-              cartId: currentCartId,
-              additionalLine,
-              queryClient
+          if (freshCart) {
+            let needsFix = false
+            const fixedLines = freshCart.lines.map(line => {
+              if (line.merchandise.id === additionalLine.variantId) {
+                if (parseFloat(line.cost.totalAmount.amount) > 0) {
+                  needsFix = true
+                  return {
+                    ...line,
+                    cost: {
+                      ...line.cost,
+                      totalAmount: { ...line.cost.totalAmount, amount: '0.0' }
+                    }
+                  }
+                }
+              }
+              return line
             })
+
+            if (needsFix) {
+              queryClient.setQueryData(['cart', currentCartId], {
+                ...freshCart,
+                lines: fixedLines
+              })
+            }
           }
 
-          // Nå som vi vet at alt er i orden, hent ferske data
-          queryClient.invalidateQueries({ queryKey: ['cart', currentCartId] })
+          toast.success('Gratis Utekos Buff™ registrert!')
+          handlePostAddToCartCampaigns({
+            cartId: currentCartId,
+            additionalLine,
+            queryClient
+          }).catch(console.error)
         }
 
         await trackAddToCart({

@@ -18,12 +18,24 @@ export function useOptimisticCartUpdate() {
   const queryClient = useQueryClient()
 
   const updateCartCache = async ({ cartId, items }: OptimisticUpdateParams) => {
+    // Avbryt pågående kall så vi har fri bane
     await queryClient.cancelQueries({ queryKey: ['cart', cartId] })
 
     queryClient.setQueryData<Cart>(['cart', cartId], oldCart => {
-      if (!oldCart) return oldCart
+      // FIX: Opprett en midlertidig cart hvis den ikke finnes.
+      // Dette sikrer at skuffen viser innhold umiddelbart selv for nye brukere.
+      const baseCart: Cart = oldCart || {
+        id: cartId,
+        checkoutUrl: '',
+        totalQuantity: 0,
+        cost: {
+          totalAmount: { amount: '0.0', currencyCode: 'NOK' },
+          subtotalAmount: { amount: '0.0', currencyCode: 'NOK' }
+        },
+        lines: []
+      }
 
-      const newLines = [...oldCart.lines]
+      const newLines = [...baseCart.lines]
       let addedTotalQuantity = 0
 
       for (const item of items) {
@@ -34,7 +46,6 @@ export function useOptimisticCartUpdate() {
           item.customPrice
         )
 
-        // Sjekk om varianten finnes fra før (unngå duplikater i UI)
         const existingLineIndex = newLines.findIndex(
           line => line.merchandise.id === newLine.merchandise.id
         )
@@ -45,7 +56,6 @@ export function useOptimisticCartUpdate() {
 
           const newQuantity = existingLine.quantity + item.quantity
 
-          // Bruk customPrice (0) hvis satt, ellers vanlig pris
           const unitPriceToAdd =
             item.customPrice !== undefined ?
               item.customPrice
@@ -76,9 +86,9 @@ export function useOptimisticCartUpdate() {
       }
 
       return {
-        ...oldCart,
+        ...baseCart,
         lines: newLines,
-        totalQuantity: oldCart.totalQuantity + addedTotalQuantity
+        totalQuantity: baseCart.totalQuantity + addedTotalQuantity
       }
     })
   }

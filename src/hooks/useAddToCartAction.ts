@@ -18,7 +18,8 @@ import { useAnalytics } from '@/hooks/useAnalytics'
 import type {
   UseAddToCartActionProps,
   ShopifyProduct,
-  ShopifyProductVariant
+  ShopifyProductVariant,
+  Cart
 } from '@types'
 
 interface ExtendedAddToCartProps extends UseAddToCartActionProps {
@@ -53,14 +54,16 @@ export function useAddToCartAction({
       return
     }
 
+    // 1. Umiddelbar respons
     cartStore.send({ type: 'OPEN' })
 
     startTransition(async () => {
       try {
         let cartId = contextCartId || (await getCartIdFromCookie())
+
+        // 2. Optimistisk Batch (viser innhold umiddelbart)
         if (cartId) {
           const itemsToUpdate: OptimisticItemInput[] = []
-
           itemsToUpdate.push({
             product,
             variant: selectedVariant,
@@ -72,16 +75,13 @@ export function useAddToCartAction({
               product: additionalProductData.product,
               variant: additionalProductData.variant,
               quantity: additionalLine.quantity,
-              customPrice: 0 // <--- Tvinger visuell pris til 0,-
+              customPrice: 0
             })
           }
-
-          await updateCartCache({
-            cartId,
-            items: itemsToUpdate
-          })
+          await updateCartCache({ cartId, items: itemsToUpdate })
         }
 
+        // 3. Server Action
         const lines = [{ variantId: selectedVariant.id, quantity }]
         if (additionalLine) {
           lines.push({
@@ -93,24 +93,53 @@ export function useAddToCartAction({
         const mutationPayload =
           additionalLine ? { lines, discountCode: 'GRATISBUFF' } : lines
 
+        // Maskinen oppdaterer cachen internt når den er ferdig.
+        // Vi venter bare på at den skal fullføre.
         await addLines(mutationPayload)
 
         if (!cartId) {
           cartId = await getCartIdFromCookie()
         }
 
-        // 4. SAFETY NET
-        if (cartId) {
-          // Sjekk rabatt eksplisitt for sikkerhets skyld
-          if (additionalLine) {
-            await handlePostAddToCartCampaigns({
-              cartId,
-              additionalLine,
-              queryClient
+        // 4. PRICE GUARD (Etter-korrigering)
+        if (cartId && additionalLine) {
+          // Hent den ferske cachen som maskinen nettopp oppdaterte
+          const freshCart = queryClient.getQueryData<Cart>(['cart', cartId])
+
+          if (freshCart) {
+            let needsFix = false
+            const fixedLines = freshCart.lines.map(line => {
+              // Hvis buffen har pris > 0, rett det opp lokalt
+              if (line.merchandise.id === additionalLine.variantId) {
+                if (parseFloat(line.cost.totalAmount.amount) > 0) {
+                  needsFix = true
+                  return {
+                    ...line,
+                    cost: {
+                      ...line.cost,
+                      totalAmount: { ...line.cost.totalAmount, amount: '0.0' }
+                    }
+                  }
+                }
+              }
+              return line
             })
+
+            // Hvis vi fant feil pris, oppdater cachen umiddelbart for å unngå blink
+            if (needsFix) {
+              queryClient.setQueryData(['cart', cartId], {
+                ...freshCart,
+                lines: fixedLines
+              })
+            }
           }
 
-          queryClient.invalidateQueries({ queryKey: ['cart', cartId] })
+          // Kjør sikkerhetsnettet i bakgrunnen
+          handlePostAddToCartCampaigns({
+            cartId,
+            additionalLine,
+            queryClient
+          }).catch(console.error)
         }
 
         await trackAddToCart({
