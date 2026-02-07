@@ -29,7 +29,7 @@ export function CustomerStoryView() {
 
       <StoryNodeView
         icon={Moon}
-        label='Før Utekos:'
+        label='Før Utekos®:'
         description='Kulden satte en stopper for kosen.'
         iconColor='text-red-400'
         glowColor='#f87171'
@@ -37,7 +37,7 @@ export function CustomerStoryView() {
 
       <StoryNodeView
         icon={Sun}
-        label='Etter Utekos:'
+        label='Etter Utekos®:'
         description='Nå varer de beste øyeblikkene lenger.'
         iconColor='text-blue-400'
         glowColor='#60a5fa'
