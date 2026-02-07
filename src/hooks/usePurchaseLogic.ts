@@ -7,7 +7,7 @@ import { cartStore } from '@/lib/state/cartStore'
 import { useCartMutations } from '@/hooks/useCartMutations'
 import { useOptimisticCartUpdate } from '@/hooks/useOptimisticCartUpdate'
 import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
-import { handlePostAddToCartCampaigns } from '@/lib/campaigns/cart/handlePostAddToCartCampaigns' // <--- Safety net tilbake
+import { handlePostAddToCartCampaigns } from '@/lib/campaigns/cart/handlePostAddToCartCampaigns'
 import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
 import { useAnalytics } from '@/hooks/useAnalytics'
 import { getVariants } from '@/app/skreddersy-varmen/utekos-orginal/utils/getVariants'
@@ -97,12 +97,14 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
 
         const itemsToUpdate: OptimisticItemInput[] = []
 
+        // 1. Hovedprodukt
         itemsToUpdate.push({
           product: currentShopifyProduct,
           variant: selectedVariant,
           quantity
         })
 
+        // 2. Buff
         if (isTechDownOffer && buffProduct) {
           const buffVariants = getVariants(buffProduct)
           selectedBuffVariant = buffVariants.find((v: any) =>
@@ -120,12 +122,12 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
               product: buffProduct,
               variant: selectedBuffVariant,
               quantity: 1 * quantity,
-              customPrice: 0 // Optimistisk pris: 0,-
+              customPrice: 0
             })
           }
         }
 
-        // Optimistisk oppdatering (kun hvis vi har cartId)
+        // 3. Optimistisk UI oppdatering (Batch)
         if (currentCartId) {
           await updateCartCache({
             cartId: currentCartId,
@@ -139,7 +141,7 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
           linesToProcess.push(additionalLine)
         }
 
-        // Send til server (Atomisk forsøk)
+        // 4. Server Action
         const mutationPayload =
           additionalLine ?
             { lines: linesToProcess, discountCode: 'GRATISBUFF' }
@@ -147,21 +149,22 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
 
         await addLines(mutationPayload)
 
-        // Hent cartId på nytt (hvis bruker var incognito og nettopp fikk en cart)
         if (!currentCartId) {
           currentCartId = await getCartIdFromCookie()
         }
 
+        // 5. Synkronisering & Safety Net
         if (currentCartId) {
           queryClient.invalidateQueries({ queryKey: ['cart', currentCartId] })
 
-          // SAFETY NET: Sørg for at rabatten faktisk ligger der.
-          // Dette løser problemet hvis atomisk oppdatering feilet/gikk for fort.
-          await handlePostAddToCartCampaigns({
-            cartId: currentCartId,
-            additionalLine,
-            queryClient
-          })
+          if (additionalLine) {
+            toast.success('Gratis Utekos Buff™ registrert!')
+            await handlePostAddToCartCampaigns({
+              cartId: currentCartId,
+              additionalLine,
+              queryClient
+            })
+          }
         }
 
         await trackAddToCart({
