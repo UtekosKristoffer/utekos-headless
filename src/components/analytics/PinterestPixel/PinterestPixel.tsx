@@ -8,6 +8,7 @@ import { generateEventID } from '@/components/analytics/MetaPixel/generateEventI
 import { setUrlCookie } from '@/components/analytics/PinterestPixel/setUrlCookie'
 
 const PINTEREST_TAG_ID = process.env.NEXT_PUBLIC_PINTEREST_TAG_ID
+
 export function PinterestPixel() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -15,11 +16,11 @@ export function PinterestPixel() {
   const isInitialized = useRef(false)
   const firedEvents = useRef<Set<string>>(new Set())
   const lastPathname = useRef<string | null>(null)
+  const epik = searchParams.get('epik')
 
   useEffect(() => {
     if (!PINTEREST_TAG_ID || isInitialized.current) return
 
-    const epik = searchParams.get('epik')
     if (epik) {
       setUrlCookie('_epik', epik, 365)
     }
@@ -28,16 +29,13 @@ export function PinterestPixel() {
       const pintrkInit = function (...args: any[]) {
         window.pintrk?.queue.push(args)
       } as any
-
       pintrkInit.queue = []
       pintrkInit.version = '3.0'
-
       window.pintrk = pintrkInit
     }
 
     const emailHash = getCookie('ute_user_hash')
     const externalId = getCookie('ute_ext_id')
-
     const userData: Record<string, string> = {}
     if (emailHash) userData.em = emailHash
     if (externalId) userData.external_id = externalId
@@ -51,7 +49,7 @@ export function PinterestPixel() {
       setLoaded(true)
       isInitialized.current = true
     }
-  }, [searchParams])
+  }, [searchParams, epik]) // La til epik i dependency
 
   useEffect(() => {
     if (!loaded || !PINTEREST_TAG_ID) return
@@ -65,7 +63,12 @@ export function PinterestPixel() {
     }
 
     if (!firedEvents.current.has('page_visit')) {
-      window.pintrk?.('page')
+      const pageViewID = generateEventID()
+
+      window.pintrk?.('track', 'PageVisit', {
+        event_id: pageViewID
+      })
+
       firedEvents.current.add('page_visit')
     }
 
@@ -76,10 +79,9 @@ export function PinterestPixel() {
 
     if (isExactCategoryPage && !firedEvents.current.has('view_category')) {
       firedEvents.current.add('view_category')
-
       const eventID = generateEventID()
 
-      window.pintrk?.('track', 'ViewCategory')
+      window.pintrk?.('track', 'ViewCategory', { event_id: eventID })
 
       const payload = {
         eventName: 'view_category',
@@ -88,22 +90,12 @@ export function PinterestPixel() {
         actionSource: 'website'
       }
 
-      fetch('/api/tracking/event', {
+      fetch('/api/tracking/event?epik=' + (epik || ''), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
         keepalive: true
       }).catch(err => console.error(err))
     }
-  }, [pathname, searchParams, loaded])
-
-  if (!PINTEREST_TAG_ID) return null
-
-  return (
-    <Script
-      id='pinterest-pixel'
-      strategy='afterInteractive'
-      src='https://s.pinimg.com/ct/core.js'
-    />
-  )
+  }, [pathname, searchParams, loaded, epik])
 }

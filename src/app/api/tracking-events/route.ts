@@ -14,14 +14,21 @@ import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 
 export async function POST(request: NextRequest) {
   const validation = await parseAndValidateEventPayload(request)
+
   if (!validation.success) {
     return validation.errorResponse
   }
 
   const context = adaptRequestToEventContext(request)
+  const epikFromUrl = request.nextUrl.searchParams.get('epik')
+
+  const enhancedCookies = {
+    ...context.cookies,
+    epik: epikFromUrl || context.cookies.epik || context.cookies.epik
+  }
   const result = await processBrowserEvent(
     validation.payload,
-    context.cookies,
+    enhancedCookies, // Send med de forbedrede cookiene som inneholder sikker epik
     { clientIp: context.clientIp, userAgent: context.userAgent },
     {
       sendMeta: sendMetaBrowserEvent,
