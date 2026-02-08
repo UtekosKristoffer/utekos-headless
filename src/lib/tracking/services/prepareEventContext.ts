@@ -1,3 +1,4 @@
+// Path: src/lib/tracking/services/prepareEventContext.ts
 import { normalize } from '@/lib/tracking/meta/normalization'
 import type { MetaEventPayload, ClientUserData, EventCookies } from '@types'
 
