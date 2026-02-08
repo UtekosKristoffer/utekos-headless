@@ -14,10 +14,9 @@ export interface EnrichedEventContext {
 export function prepareEventContext(
   body: MetaEventPayload,
   cookies: EventCookies,
-  clientIp: string, // NYTT: Mottar ferdig uthentet IP
-  userAgent: string // NYTT: Mottar ferdig uthentet UserAgent
+  clientIp: string,
+  userAgent: string
 ): EnrichedEventContext {
-  // 1. Identifiser kilde for logging
   let sourceEmoji = '🤷'
   let sourceName = 'Direct/Unknown'
 
@@ -62,12 +61,8 @@ export function prepareEventContext(
   if (finalUserData.country)
     finalUserData.country = normalize.country(finalUserData.country)
 
-  // 4. IP og User Agent
-  // Vi prioriterer det som kom i body (sjelden), ellers bruker vi det som ble sendt inn (fra server context)
   const finalIp = finalUserData.client_ip_address || clientIp
   const finalUserAgent = finalUserData.client_user_agent || userAgent
-
-  // Oppdater objektet slik at plattform-handlerne får alt på ett sted
   if (finalIp) finalUserData.client_ip_address = finalIp
   if (finalUserAgent) finalUserData.client_user_agent = finalUserAgent
 
