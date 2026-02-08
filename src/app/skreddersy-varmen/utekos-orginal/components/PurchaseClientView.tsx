@@ -136,7 +136,8 @@ export function PurchaseClientView({
                     Lanseringstilbud
                   </h3>
                   <p className='text-sm text-emerald-700/80'>
-                    Gratis Utekos Buff™ (verdi 249,-) legges til i kurven.
+                    10% rabatt + Gratis Buff™ (verdi 249,-) legges til i
+                    kurven.
                   </p>
                 </div>
               </div>
