@@ -1,7 +1,6 @@
 'use client'
 
 import { usePathname, useSearchParams } from 'next/navigation'
-import Script from 'next/script'
 import { useEffect, useRef, useState } from 'react'
 import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
 import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
@@ -49,7 +48,7 @@ export function PinterestPixel() {
       setLoaded(true)
       isInitialized.current = true
     }
-  }, [searchParams, epik]) // La til epik i dependency
+  }, [searchParams, epik])
 
   useEffect(() => {
     if (!loaded || !PINTEREST_TAG_ID) return
@@ -98,4 +97,6 @@ export function PinterestPixel() {
       }).catch(err => console.error(err))
     }
   }, [pathname, searchParams, loaded, epik])
+
+  return null
 }
