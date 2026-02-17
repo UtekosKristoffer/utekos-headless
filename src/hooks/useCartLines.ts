@@ -2,7 +2,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useCartId } from '@/hooks/useCartId'
 import { fetchCart } from '@/lib/helpers/cart/fetchCart'
-import type { Cart } from '@types'
+import type { Cart } from 'types/cart'
 
 const selectLineIds = (cart: Cart | null) =>
   cart?.lines?.map(line => line.id) ?? []

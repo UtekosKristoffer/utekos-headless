@@ -1,7 +1,7 @@
 // Path: src/hooks/useCartPending.ts
 
 import { cartStore } from '@/lib/state/cartStore'
-import type { CartUserInterfaceContext } from '@types'
+import type { CartUserInterfaceContext } from 'types/cart'
 import type { StoreSnapshot } from '@xstate/store'
 import { useSelector } from '@xstate/store/react'
 
