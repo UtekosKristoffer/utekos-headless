@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/carousel'
 import { createColorHexMap } from '@/lib/helpers/shared/createColorHexMap'
 import { initializeCarouselProducts } from '@/components/ProductCard/initializeCarouselProducts'
-import type { RelatedProductsProps } from '@types'
+import type { RelatedProductsProps } from 'types/product/ProductTypes'
 
 export function RelatedProducts({ products }: RelatedProductsProps) {
   if (!products || products.length === 0) {
