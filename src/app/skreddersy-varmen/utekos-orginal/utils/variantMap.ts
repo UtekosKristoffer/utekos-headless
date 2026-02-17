@@ -1,4 +1,4 @@
-import type { MicrofiberColor, MicrofiberSize } from '@types'
+import type { MicrofiberColor, MicrofiberSize } from 'types/product/'
 
 export const variantMap: Record<
   MicrofiberColor,
