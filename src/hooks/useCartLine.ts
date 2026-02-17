@@ -4,7 +4,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useCartId } from '@/hooks/useCartId'
 import { fetchCart } from '@/lib/helpers/cart/fetchCart'
-import type { Cart, CartLine } from '@types'
+import type { Cart, CartLine } from 'types/cart'
 import { useCallback } from 'react'
 
 export const useCartLine = (lineId: string): CartLine | undefined => {
