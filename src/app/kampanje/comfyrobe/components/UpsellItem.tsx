@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Plus, Check } from 'lucide-react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-import type { ProductOffer } from '@types'
+import type { ProductOffer } from 'types/cart'
 export interface UpsellItemProps {
   product: ProductOffer
   isSelected: boolean
