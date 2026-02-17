@@ -16,7 +16,7 @@ export async function OnlineStoreJsonLd() {
     'url': 'https://utekos.no',
     'logo': 'https://utekos.no/logo.png',
     'image': 'https://utekos.no/og-image-produkter.png',
-    'description': 'Utekos - Skreddersy varmen.',
+    'description': 'Utekos - Skreddersy varmen',
     'foundingDate': '2020',
     'email': 'kundeservice@utekos.no',
     'telephone': '+47 40 21 63 43',
