@@ -7,7 +7,7 @@ import { useCartPending } from '@/hooks/useCartPending'
 import { formatPrice } from '@/lib/utils/formatPrice'
 import { SubtotalDisplay } from './SubTotalDisplay'
 import { shouldRenderFooter } from './utils/shouldRenderFooter'
-import type { Cart } from '@types'
+import type { Cart } from 'types/cart'
 
 export const CartFooter = ({
   cart
