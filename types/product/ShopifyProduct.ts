@@ -1,11 +1,8 @@
 // Path: types/product/ShopifyProduct.ts
-import type {
-  Image,
-  Money,
-  MetaobjectReference,
-  ShopifyImageConnection
-} from '@types'
+import type { Image, ShopifyImageConnection } from 'types/media'
+import type { Money } from 'types/commerce/Money'
 import type { Metafield } from './MetaField'
+import type { MetaobjectReference } from './MetaobjectReference'
 import type { ProductOption, ProductVariantConnection } from './ProductTypes'
 import type { ShopifyProductVariant } from './ShopifyProductVariant'
 import type { WeightUnit } from './ProductTypes'
