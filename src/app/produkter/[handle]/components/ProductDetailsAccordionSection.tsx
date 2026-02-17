@@ -1,4 +1,3 @@
-// Path: src/app/produkter/[handle]/ProductPageAccordion/ProductDetailsAccordionSection.tsx
 'use client'
 
 import { sendGAEvent } from '@next/third-parties/google'
@@ -7,10 +6,10 @@ import type { AccordionSectionData } from '@types'
 import type { MetaUserData, MetaEventPayload } from 'types/tracking/meta'
 import { colorHexByTextClass } from '../utils/colorHexByTextClass'
 import { AccordionContentRenderer } from './AccordionContentRenderer'
-import { generateEventID } from '@/components/analytics/Meta/generateEventID'
 import { getCookie } from '@/components/analytics/Meta/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { track } from '@vercel/analytics/react'
+import { generateEventID } from '@/components/analytics/Meta/generateEventID'
 
 export function ProductDetailsAccordionSection({
   sectionData,
