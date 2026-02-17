@@ -7,8 +7,8 @@ import { MissingCartIdError } from '@/lib/errors/MissingCartIdError'
 import { getCartIdFromCookie } from '@/lib/actions/getCartIdFromCookie'
 import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import { validateClearCartInput } from '@/lib/actions/validations/validateClearCartInput'
-import type { CartActionsResult } from '@types'
-import { updateTag } from 'next/cache' // <--- NY: Import for invalidering
+import type { CartActionsResult } from 'types/cart'
+import { updateTag } from 'next/cache'
 
 export const clearCartAction = async (): Promise<CartActionsResult> => {
   try {
