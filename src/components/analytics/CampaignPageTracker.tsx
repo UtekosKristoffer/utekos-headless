@@ -1,11 +1,10 @@
-// Path: src/components/analytics/CampaignPageTracker.tsx
 'use client'
 
 import { useEffect, useRef } from 'react'
 import { generateEventID } from '@/components/analytics/Meta/generateEventID'
 import { getCookie } from '@/components/analytics/Meta/getCookie'
 import { getOrSetExternalId } from '@/components/analytics/Meta/getOrSetExternalId'
-import type { MetaEventPayload } from 'types/tracking'
+import type { MetaEventPayload } from 'types/tracking/meta/event'
 export function CampaignPageTracker() {
   const hasFired = useRef(false)
   useEffect(() => {
