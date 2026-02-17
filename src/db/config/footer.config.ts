@@ -1,17 +1,6 @@
 // Path: src/config/footer.config.ts
 import type { Route } from 'next'
-
-export type FooterLink = {
-  title: string
-  path: Route
-  external?: boolean
-  trackingEvent?: string
-}
-
-export type FooterSection = {
-  title: string
-  links: FooterLink[]
-}
+import type { FooterSection } from '@types'
 
 export const footerConfig: FooterSection[] = [
   {

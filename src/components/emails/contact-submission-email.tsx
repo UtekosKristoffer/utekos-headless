@@ -118,12 +118,12 @@ const container = {
 const header = {
   padding: '20px 40px',
   borderBottom: '1px solid #e6ebf1',
-  textAlign: 'center' as const // Sentrerer logoen
+  textAlign: 'center' as const
 }
 
 const logoImg = {
-  margin: '0 auto', // Sentrerer bildet
-  display: 'block' as const // Nødvendig for margin: auto
+  margin: '0 auto',
+  display: 'block' as const
 }
 const content = {
   padding: '30px 40px'

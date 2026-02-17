@@ -32,6 +32,7 @@ export type * from './middleware.types'
 export type * from './flow.types'
 export type * from './email.types'
 export type * from './provider.types'
+export type * from './footer.types'
 export type RootLayoutProps = Readonly<{
   children: React.ReactNode
 }>
