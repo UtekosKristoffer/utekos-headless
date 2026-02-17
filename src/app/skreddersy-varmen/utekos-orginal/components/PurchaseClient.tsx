@@ -12,5 +12,5 @@ export function PurchaseClient({
 }) {
   const logic = usePurchaseLogic({ products })
 
-  return <PurchaseClientView {...logic} />
+  return <PurchaseClientView {...logic} isTechDownOffer={false} />
 }

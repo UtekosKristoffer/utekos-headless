@@ -18,7 +18,8 @@ import { VippsLogo } from '@/components/payments/VippsLogo'
 import { KlarnaLogo } from '@/components/payments/KlarnaLogo'
 import { PostNordLogo } from '@/components/payments/PostNordLogo'
 import { PRODUCT_VARIANTS } from '@/api/constants'
-import type { ModelKey, PurchaseClientViewProps } from '@types'
+import type { ModelKey } from 'types/product/ProductTypes'
+import type { PurchaseClientViewProps } from 'types/product/PageProps'
 
 const SIZE_GUIDANCE: Record<string, { height: string; tips: string[] }> = {
   Liten: {
