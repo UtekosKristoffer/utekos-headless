@@ -1,4 +1,4 @@
-import type { ProductOffer } from '@types'
+import type { ProductOffer } from 'types/cart'
 
 export const MAIN_PRODUCT: ProductOffer = {
   id: 'comfyrobe-main',
