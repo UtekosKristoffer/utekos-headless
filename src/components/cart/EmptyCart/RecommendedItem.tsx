@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import { cartStore } from '@/lib/state/cartStore'
 import { formatPrice } from '@/lib/utils/formatPrice'
-import type { ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
 import Image from 'next/image'
 import Link from 'next/link'
 

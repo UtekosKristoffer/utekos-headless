@@ -8,7 +8,7 @@ import type {
   CartActionsResult,
   CartMutationContext,
   CartMutationEvent
-} from '@types'
+} from 'types/cart'
 
 export const createCartMutationMachine = (
   serverActions: CartActions,

@@ -1,4 +1,4 @@
-import type { ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
 
 export function createSwatchColorMap(
   product: ShopifyProduct | undefined

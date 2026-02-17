@@ -2,7 +2,7 @@
 
 import { getProducts } from '@/api/lib/products/getProducts'
 import { HelpChooseCard } from '@/app/produkter/(oversikt)/components/HelpChooseCard'
-import type { ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
 
 const PRODUCT_CONFIG = [
   {

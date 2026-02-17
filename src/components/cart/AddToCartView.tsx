@@ -1,7 +1,7 @@
 import { Form } from '@/components/ui/form'
 import { ModalSubmitButton } from './ModalSubmitButton'
 import { QuantitySelector } from './QuantitySelector'
-import type { AddToCartViewProps } from '@types'
+import type { AddToCartViewProps } from 'types/cart'
 
 export function AddToCartView({
   form,

@@ -4,7 +4,8 @@ import { getCartQuery } from '@/api/graphql/queries/cart/getCartQuery'
 import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
 import { CartNotFoundError } from '@/lib/errors/CartNotFoundError'
 import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
-import type { Cart, ShopifyCartOperation } from '@types'
+import type { ShopifyCartOperation } from '@types'
+import type { Cart } from 'types/cart'
 
 export const fetchCart = async (cartId: string): Promise<Cart | null> => {
   const res = await shopifyFetch<ShopifyCartOperation>({

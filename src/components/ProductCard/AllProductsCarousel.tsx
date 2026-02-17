@@ -13,7 +13,7 @@ import {
 import { createColorHexMap } from '@/lib/helpers/shared/createColorHexMap'
 import { initializeCarouselProducts } from '@/components/ProductCard/initializeCarouselProducts'
 import { ProductCard } from './ProductCard'
-import type { ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
 import { useMemo } from 'react'
 
 export function AllProductsCarousel() {

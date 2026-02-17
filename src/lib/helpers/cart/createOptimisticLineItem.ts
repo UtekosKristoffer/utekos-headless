@@ -1,4 +1,5 @@
-import type { CartLine, ShopifyProduct, ShopifyProductVariant } from '@types'
+import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
+import type { CartLine } from 'types/cart'
 
 export function createOptimisticLineItem(
   product: ShopifyProduct,

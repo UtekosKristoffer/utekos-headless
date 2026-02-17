@@ -1,10 +1,8 @@
 import { normalize } from '@/lib/tracking/meta/normalization'
-import type {
-  CaptureBody,
-  CheckoutAttribution,
-  ExtendedUserData,
-  CaptureContext
-} from '@types'
+import type { CaptureBody } from 'types/tracking/meta'
+import type { CaptureContext } from 'types/tracking/capture/CaptureContext'
+import type { ExtendedUserData } from 'types/tracking/user/ExtendedUserData'
+import type { CheckoutAttribution } from 'types/tracking/user/CheckoutAttribution'
 
 export function prepareCaptureData(
   body: CaptureBody,

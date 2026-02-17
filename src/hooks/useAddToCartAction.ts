@@ -15,12 +15,8 @@ import {
 import { handlePostAddToCartCampaigns } from '@/lib/campaigns/cart/handlePostAddToCartCampaigns'
 import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
 import { useAnalytics } from '@/hooks/useAnalytics'
-import type {
-  UseAddToCartActionProps,
-  ShopifyProduct,
-  ShopifyProductVariant,
-  Cart
-} from '@types'
+import type { UseAddToCartActionProps, Cart } from 'types/cart'
+import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
 
 interface ExtendedAddToCartProps extends UseAddToCartActionProps {
   additionalProductData?:
@@ -53,15 +49,12 @@ export function useAddToCartAction({
       toast.error('Vennligst velg en variant før du legger i handlekurven.')
       return
     }
-
-    // 1. Umiddelbar respons
     cartStore.send({ type: 'OPEN' })
 
     startTransition(async () => {
       try {
         let cartId = contextCartId || (await getCartIdFromCookie())
 
-        // 2. Optimistisk Batch (viser innhold umiddelbart)
         if (cartId) {
           const itemsToUpdate: OptimisticItemInput[] = []
           itemsToUpdate.push({
@@ -81,7 +74,6 @@ export function useAddToCartAction({
           await updateCartCache({ cartId, items: itemsToUpdate })
         }
 
-        // 3. Server Action
         const lines = [{ variantId: selectedVariant.id, quantity }]
         if (additionalLine) {
           lines.push({
@@ -93,23 +85,17 @@ export function useAddToCartAction({
         const mutationPayload =
           additionalLine ? { lines, discountCode: 'GRATISBUFF' } : lines
 
-        // Maskinen oppdaterer cachen internt når den er ferdig.
-        // Vi venter bare på at den skal fullføre.
         await addLines(mutationPayload)
 
         if (!cartId) {
           cartId = await getCartIdFromCookie()
         }
-
-        // 4. PRICE GUARD (Etter-korrigering)
         if (cartId && additionalLine) {
-          // Hent den ferske cachen som maskinen nettopp oppdaterte
           const freshCart = queryClient.getQueryData<Cart>(['cart', cartId])
 
           if (freshCart) {
             let needsFix = false
             const fixedLines = freshCart.lines.map(line => {
-              // Hvis buffen har pris > 0, rett det opp lokalt
               if (line.merchandise.id === additionalLine.variantId) {
                 if (parseFloat(line.cost.totalAmount.amount) > 0) {
                   needsFix = true
@@ -125,7 +111,6 @@ export function useAddToCartAction({
               return line
             })
 
-            // Hvis vi fant feil pris, oppdater cachen umiddelbart for å unngå blink
             if (needsFix) {
               queryClient.setQueryData(['cart', cartId], {
                 ...freshCart,
@@ -134,7 +119,6 @@ export function useAddToCartAction({
             }
           }
 
-          // Kjør sikkerhetsnettet i bakgrunnen
           handlePostAddToCartCampaigns({
             cartId,
             additionalLine,

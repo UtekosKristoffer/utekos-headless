@@ -4,7 +4,7 @@ import 'server-only'
 
 import { fromZodError } from 'zod-validation-error'
 import { UpdateCartSchema } from '@/db/zod/schemas/UpdateCartSchema'
-import type { UpdateCartLineInput } from '@types'
+import type { UpdateCartLineInput } from 'types/cart'
 
 /**
  * Server Action-hjelper må være async i Next.js 15.

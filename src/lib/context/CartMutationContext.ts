@@ -2,7 +2,7 @@
 
 import { createActorContext } from '@xstate/react'
 import { createCartMutationMachine } from '@/lib/state/createCartMutationMachine'
-import type { CartActions } from '@types'
+import type { CartActions } from 'types/cart'
 export type CartMutationMachine = ReturnType<typeof createCartMutationMachine>
 
 export const dummyServerActions: CartActions = {

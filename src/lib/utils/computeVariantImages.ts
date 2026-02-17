@@ -1,4 +1,5 @@
-import type { Image, ShopifyProduct, ShopifyProductVariant } from '@types'
+import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
+import type { Image } from 'types/media'
 
 export function computeVariantImages(
   product: ShopifyProduct,

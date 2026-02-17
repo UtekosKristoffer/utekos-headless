@@ -1,4 +1,4 @@
-import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
+import { getCookie } from '@/components/analytics/Meta/getCookie'
 
 export function useGA4Ids() {
   const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.replace(

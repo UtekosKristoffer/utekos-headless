@@ -1,6 +1,6 @@
 // Path: src/app/kontaktskjema/sections/DesktopSection.tsx
 import { HelpCircle, Leaf, Package } from 'lucide-react'
-import { SupportForm } from '@/components/form/SupportForm'
+import { SupportForm } from '@/components/form/components/SupportForm'
 
 export function DesktopSection() {
   return (

@@ -19,12 +19,5 @@ export const newProductFeatures: Feature[] = [
     title: 'Skapt for å brukes',
     description: 'Et robust og lettstelt plagg for ekte, hverdagslig utekos.',
     glowColor: '#0891b2'
-  },
-  {
-    icon: 'gift', // Nytt ikon for gaven
-    title: 'Gratis Utekos Buff™',
-    description:
-      'Få med vår allsidige buff på kjøpet (verdi 249,-).',
-    glowColor: '#f59e0b' // En varm farge for å skille seg ut
   }
 ]

@@ -7,9 +7,9 @@ import { reshapeProducts } from '@/lib/utils/reshapeProducts'
 import type {
   GetProductsParams,
   GetProductsResponse,
-  ShopifyProduct,
   ShopifyProductsOperation
 } from '@types'
+import type { ShopifyProduct } from 'types/product'
 import { cacheLife, cacheTag } from 'next/cache'
 import { TAGS } from '../../constants'
 

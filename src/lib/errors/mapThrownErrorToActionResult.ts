@@ -1,11 +1,3 @@
-/**
- * @fileoverview Centralized error mapping that leverages reusable error message utilities.
- *
- * This mapper composes error message extraction utilities with CartActionsResult
- * formatting to provide consistent error responses. By delegating message extraction
- * to pure utility functions, we achieve better separation of concerns and reusability.
- */
-
 import { isValidationErrorLike } from 'zod-validation-error'
 
 import {
@@ -18,7 +10,7 @@ import { MissingCartIdError } from '@/lib/errors/MissingCartIdError'
 import { extractCartErrorMessage } from './extractCartErrorMessage'
 import { formatShopifyErrorResponse } from './formatShopifyErrorResponse'
 
-import type { CartActionsResult } from '@types'
+import type { CartActionsResult } from 'types/cart'
 /**
  * Maps any thrown error into a standardized CartActionsResult.
  *

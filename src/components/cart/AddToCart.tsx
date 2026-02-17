@@ -4,12 +4,8 @@ import { useAddToCartAction } from '@/hooks/useAddToCartAction'
 import { useAddToCartForm } from '@/hooks/useAddToCartForm'
 import { useCartErrorMonitoring } from '@/hooks/useCartErrorMonitoring'
 import { AddToCartView } from './AddToCartView'
-import type {
-  AddToCartFormValues,
-  AddToCartProps,
-  ShopifyProduct,
-  ShopifyProductVariant
-} from '@types'
+import type { AddToCartFormValues, AddToCartProps } from 'types/cart'
+import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
 
 interface ExtendedAddToCartProps extends AddToCartProps {
   additionalProductData?: {

@@ -6,7 +6,7 @@ import { useVariantState } from '@/hooks/useVariantState'
 import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
 import { createSwatchColorMap } from '@/hooks/createSwatchColorMap'
 import { computeVariantImages } from '@/lib/utils/computeVariantImages'
-import type { ShopifyProduct, ShopifyProductVariant } from '@types'
+import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
 
 export function useProductPage(
   handle: string,

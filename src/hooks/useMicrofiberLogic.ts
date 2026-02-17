@@ -15,7 +15,7 @@ import type {
   ShopifyProductVariant,
   MicrofiberColor,
   MicrofiberSize
-} from '@types'
+} from 'types/product'
 
 export function useMicrofiberLogic() {
   const [color, setColor] = useState<MicrofiberColor>('fjellbla')

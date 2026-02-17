@@ -4,8 +4,8 @@
 import { useConsent } from '@/components/cookie-consent/useConsent'
 import { GoogleTagManager } from '@next/third-parties/google'
 import Script from 'next/script'
-import { MetaPixelEvents } from './MetaPixel/MetaPixelEvents'
-import type { TrackingProps } from '@types'
+import { MetaPixelEvents } from './Meta/MetaPixelEvents'
+import type { TrackingProps } from 'types/tracking/props/TrackingProps'
 
 export function ConditionalTracking({
   googleTagManagerId,

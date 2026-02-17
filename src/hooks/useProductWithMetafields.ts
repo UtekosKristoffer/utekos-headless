@@ -1,5 +1,5 @@
 import { reshapeMetaobject } from '@/lib/utils/reshapeMetaobject'
-import type { ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
 
 export function reshapeProductWithMetafields(
   productData: ShopifyProduct | undefined

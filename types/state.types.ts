@@ -1,4 +1,4 @@
-import type { ShopifyProduct, ShopifyProductVariant } from '@types'
+import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
 
 /**
  * @type {Object} VariantEvent

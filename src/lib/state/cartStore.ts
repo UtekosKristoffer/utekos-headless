@@ -3,7 +3,10 @@
 
 import { createStore, type EventPayloadMap } from '@xstate/store'
 import { removeZeroQuantityLines } from '@/lib/helpers/cart/removeZeroQuantityLines'
-import type { CartUserInterfaceContext, UserInterfaceEventMap } from '@types'
+import type {
+  CartUserInterfaceContext,
+  UserInterfaceEventMap
+} from 'types/cart'
 
 export const cartStore = createStore<
   CartUserInterfaceContext,

@@ -1,5 +1,6 @@
 import { normalizeProductImage } from '@/lib/helpers/normalizers/normalizeProductImage'
-import type { RawMetaobject, ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
+import type { RawMetaobject } from 'types/product/MetaobjectReference'
 import { reshapeMetaobject } from './reshapeMetaobject' // Bruk den delte funksjonen
 
 export const reshapeProduct = (product: ShopifyProduct): ShopifyProduct => {

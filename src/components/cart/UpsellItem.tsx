@@ -3,7 +3,8 @@ import { findMatchingVariant } from '@/components/ProductCard/findMatchingVarian
 import { Button } from '@/components/ui/button'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import { formatPrice } from '@/lib/utils/formatPrice'
-import type { ShopifyProduct, UpsellItemProps } from '@types'
+import type { ShopifyProduct } from 'types/product'
+import type { UpsellItemProps } from 'types/cart'
 import { ArrowRightIcon, PercentIcon } from 'lucide-react'
 import Image from 'next/image'
 

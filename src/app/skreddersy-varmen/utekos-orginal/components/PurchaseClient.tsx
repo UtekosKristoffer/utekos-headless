@@ -3,7 +3,7 @@
 
 import { usePurchaseLogic } from '@/hooks/usePurchaseLogic'
 import { PurchaseClientView } from './PurchaseClientView'
-import type { ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
 
 export function PurchaseClient({
   products

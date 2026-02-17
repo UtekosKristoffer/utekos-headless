@@ -6,7 +6,7 @@ import { createVariantReducer } from '@/lib/utils/createVariantReducer'
 import { flattenVariants } from '@/lib/utils/flattenVariants'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import { useEffect, useReducer } from 'react'
-import type { ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
 import type { Route } from 'next'
 export function useVariantState(
   product: ShopifyProduct | undefined,

@@ -4,7 +4,7 @@ import 'server-only'
 
 import { fromZodError } from 'zod-validation-error'
 import { RemoveCartLineSchema } from '@/db/zod/schemas/RemoveCartLineSchema'
-import type { RemoveCartLineInput } from '@types'
+import type { RemoveCartLineInput } from 'types/cart'
 
 export async function validateRemoveCartLineInput(
   input: RemoveCartLineInput

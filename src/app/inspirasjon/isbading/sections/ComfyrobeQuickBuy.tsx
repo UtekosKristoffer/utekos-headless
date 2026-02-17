@@ -19,14 +19,14 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel'
 import { Badge } from '@/components/ui/badge'
-import { NewsletterForm } from '@/components/form/NewsLetterForm'
+import { NewsletterForm } from '@/components/form/components/NewsLetterForm'
 import { useAnalytics } from '@/hooks/useAnalytics'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import { cartStore } from '@/lib/state/cartStore'
 import { VippsLogo } from '@/components/payments/VippsLogo'
 import { KlarnaLogo } from '@/components/payments/KlarnaLogo'
 import { ShoppingBag, Check } from 'lucide-react'
-import type { ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
 import { cn } from '@/lib/utils/className'
 import { toast } from 'sonner'
 

@@ -143,7 +143,7 @@ export const TechDownFeatureSection = () => {
             <div className='inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 backdrop-blur-md'>
               <Gift className='h-3.5 w-3.5 text-emerald-400' />
               <span className='text-xs font-bold uppercase tracking-wider text-emerald-300'>
-                + Gratis Buff (Verdi 249,-)
+                Spar kr 200,-
               </span>
             </div>
           </div>

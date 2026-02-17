@@ -1,7 +1,7 @@
 // Path: src/components/ProductCard/initializeCarouselProducts.ts
-import type { ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
 import { getInitialOptionsForProduct } from './getInitialOptionsForProduct'
- 
+
 export function initializeCarouselProducts(
   products: ShopifyProduct[]
 ): Map<string, Record<string, string>> {

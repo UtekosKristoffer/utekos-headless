@@ -6,7 +6,8 @@ import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
 import { reshapeProduct } from '@/lib/utils/reshapeProduct'
 import { cacheTag, cacheLife } from 'next/cache'
 import { TAGS } from '@/api/constants'
-import type { ShopifyProduct, ShopifyProductOperation } from '@types'
+import type { ShopifyProduct } from 'types/product'
+import type { ShopifyProductOperation } from '@types'
 
 export async function getProduct(
   handle: string

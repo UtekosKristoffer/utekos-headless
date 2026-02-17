@@ -2,13 +2,8 @@
 
 import { flattenVariants } from '@/lib/utils/flattenVariants'
 import { selectVariantByOptions } from '@/lib/utils/selectVariantByOptions'
-import type {
-  ShopifyProduct,
-  ShopifyProductVariant,
-  VariantEvent,
-  VariantState
-} from '@types'
-
+import type { VariantEvent, VariantState } from '@types'
+import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
 export function createVariantReducer(product: ShopifyProduct) {
   return function variantReducer(
     state: VariantState,

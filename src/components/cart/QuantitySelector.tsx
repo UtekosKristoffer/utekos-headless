@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { MinusIcon, PlusIcon } from 'lucide-react'
 import { useFormContext } from 'react-hook-form'
-import type { AddToCartFormValues } from '@types'
+import type { AddToCartFormValues } from 'types/cart'
 
 export function QuantitySelector() {
   const { watch, setValue } = useFormContext<AddToCartFormValues>()

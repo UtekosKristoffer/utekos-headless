@@ -1,4 +1,4 @@
-import type { OptimisticCartLines } from '@types'
+import type { OptimisticCartLines } from 'types/cart'
 
 export const removeZeroQuantityLines = (
   lines: OptimisticCartLines['lines']

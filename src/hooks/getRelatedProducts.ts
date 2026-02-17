@@ -1,6 +1,6 @@
 // Path: src/hooks/getRelatedProducts.ts
 
-import type { ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
 
 export function getRelatedProducts(
   allProducts: ShopifyProduct[] | undefined,

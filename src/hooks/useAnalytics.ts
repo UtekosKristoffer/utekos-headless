@@ -1,12 +1,13 @@
 // Path: src/hooks/useAnalytics.ts
 import { useEffectEvent } from 'react'
-import type { MetaUserData, MetaEventPayload, MetaEventType } from '@types'
-import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
-import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
-
-type TrackEventOptions = {
-  eventID?: string
-}
+import { generateEventID } from '@/components/analytics/Meta/generateEventID'
+import { getCookie } from '@/components/analytics/Meta/getCookie'
+import type { MetaUserData } from 'types/tracking/meta'
+import type {
+  MetaEventPayload,
+  MetaEventType,
+  TrackEventOptions
+} from 'types/tracking/meta/event'
 
 export function useAnalytics() {
   const trackEvent = useEffectEvent(

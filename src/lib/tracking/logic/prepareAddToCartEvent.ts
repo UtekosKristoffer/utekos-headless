@@ -1,10 +1,9 @@
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
+import type { MetaContentItem } from 'types/tracking/meta'
 import type {
-  MetaContentItem,
-  PrepareAddToCartInput,
-  AddToCartEventData
-} from '@types'
-
+  AddToCartEventData,
+  PrepareAddToCartInput
+} from 'types/cart/AddToCart'
 export function prepareAddToCartEvent(
   input: PrepareAddToCartInput
 ): AddToCartEventData {

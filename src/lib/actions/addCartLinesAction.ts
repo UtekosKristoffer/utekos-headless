@@ -11,8 +11,8 @@ import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import { validateAddLineInput } from '@/lib/actions/validations/validateAddLineInput'
 import { updateTag } from 'next/cache'
 import { trackServerEvent } from '@/lib/tracking/google/trackingServerEvent'
-import type { AnalyticsItem, CartActionsResult, CartResponse } from '@types'
-
+import type { AnalyticsItem } from 'types/analytics/AnalyticsItem'
+import type { CartResponse, CartActionsResult } from 'types/cart'
 type CartLineInput = {
   variantId: string
   quantity: number

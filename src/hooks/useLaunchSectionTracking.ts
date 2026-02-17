@@ -1,9 +1,10 @@
-import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
-import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
+import { generateEventID } from '@/components/analytics/Meta/generateEventID'
+import { getCookie } from '@/components/analytics/Meta/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { productName, currentPrice } from '@/api/constants'
 import { useGA4Ids } from '@/hooks/useGA4Ids'
-import type { MetaUserData, MetaEventPayload, MetaEventType } from '@types'
+import type { MetaEventType } from 'types/tracking/meta/event'
+import type { MetaUserData } from 'types/tracking/meta'
 
 export function useLaunchSectionTracking(variantId: string) {
   const { client_id, session_id } = useGA4Ids()

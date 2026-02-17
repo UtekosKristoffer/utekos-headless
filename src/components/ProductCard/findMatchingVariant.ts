@@ -1,6 +1,7 @@
 // Path: src/components/ProductCard/findMatchingVariant.ts
 
-import type { ProductCardProps, ShopifyProductVariant } from '@types'
+import type { ShopifyProductVariant } from 'types/product'
+import type { ProductCardProps } from '@types'
 
 export function findMatchingVariant(
   product: ProductCardProps['product'],

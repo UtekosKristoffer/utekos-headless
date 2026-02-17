@@ -1,6 +1,6 @@
 // Path: src/lib/helpers/normalizers/normalizeCart.ts
 
-import type { Cart, CartLine, CartResponse } from '@types'
+import type { Cart, CartLine, CartResponse } from 'types/cart'
 import { normalizeProductImage } from './normalizeProductImage'
 
 type ShopifyCartLineEdge = CartResponse['lines']['edges'][number]

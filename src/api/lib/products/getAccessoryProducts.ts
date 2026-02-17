@@ -1,7 +1,7 @@
 'use server'
 import { getProducts } from '@/api/lib/products/getProducts'
 import { TAGS } from '@/api/constants'
-import type { ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
 import { cacheTag, cacheLife } from 'next/cache'
 
 export async function getAccessoryProducts(): Promise<ShopifyProduct[]> {

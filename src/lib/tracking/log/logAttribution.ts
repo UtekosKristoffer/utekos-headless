@@ -1,4 +1,4 @@
-import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
+import { getCookie } from '@/components/analytics/Meta/getCookie'
 export function logAttribution(productName: string, price: number) {
   try {
     const snapId = getCookie('ute_sc_cid')

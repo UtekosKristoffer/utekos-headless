@@ -25,8 +25,10 @@ import ProductGalleryCard from './ProductGalleryCard'
 import PriceActivityPanel from './PriceActivityPanel'
 import { ProductDescription } from './ProductDescription'
 import { TrustSignals } from './TrustSignals'
-import { TechDownLaunchOffer } from './TechDownLaunchOffer'
-import type { ProductPageViewProps, ShopifyProduct, Image } from '@types'
+import type { ProductPageViewProps } from 'types/product/PageProps'
+import type { ShopifyProduct } from 'types/product'
+import type { Image } from 'types/media'
+
 const SmartRealTimeActivity = dynamic(
   () =>
     import('@/app/produkter/[handle]/components/SmartRealTimeActivity').then(
@@ -189,16 +191,7 @@ export function ProductPageView({
                     })
                 )}
               </div>
-
               <TrustSignals />
-
-              {productData.handle === 'utekos-techdown' && (
-                <Activity>
-                  <TechDownLaunchOffer
-                    onAdditionalLineChange={setAdditionalLine}
-                  />
-                </Activity>
-              )}
               <div className='mt-8'>
                 <Activity>
                   <AddToCart

@@ -4,11 +4,8 @@
 import { mutationCartLinesUpdate } from '@/api/graphql/mutations/cart'
 import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
 import { ShopifyApiError } from '@/lib/errors/ShopifyApiError'
-import type {
-  CartResponse,
-  ShopifyUpdateCartLineQuantityOperation,
-  UpdateCartLineInput
-} from '@types'
+import type { ShopifyUpdateCartLineQuantityOperation } from '@types'
+import type { CartResponse, UpdateCartLineInput } from 'types/cart'
 
 export const performCartLinesUpdateMutation = async (
   cartId: string,

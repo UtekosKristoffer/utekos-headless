@@ -1,6 +1,6 @@
 // Path: src/lib/helpers/async/getSortedOptions.ts
 
-import type { ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
 
 export function getSortedOptions(
   options: ShopifyProduct['options'],

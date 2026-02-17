@@ -1,6 +1,6 @@
 // Path: src/components/ProductCard/getInitialAvailableOptions.ts
 
-import type { ShopifyProduct } from 'types/product.types'
+import type { ShopifyProduct } from 'types/product'
 import { buildFallbackOptions } from './buildFallbackOptions'
 export function getInitialAvailableOptions(
   product: ShopifyProduct
@@ -17,7 +17,7 @@ export function getInitialAvailableOptions(
         variant.selectedOptions.map(opt => [opt.name, opt.value])
       )
     }
-  } 
+  }
 
   return buildFallbackOptions(product.options)
 }

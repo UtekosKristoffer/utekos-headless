@@ -47,13 +47,6 @@ export const NewProductLaunchSectionView = forwardRef<
                 </span>
               </div>
 
-              <div className='gsap-item opacity-0 inline-flex items-center gap-2.5 rounded-full border border-emerald-800/30 bg-emerald-900/20 px-4 py-2'>
-                <Gift className='h-4 w-4 shrink-0 text-emerald-400' />
-                <span className='text-sm font-semibold text-emerald-400'>
-                  Gratis Buff™ (verdi 249,-)
-                </span>
-              </div>
-
               <div className='gsap-item opacity-0 inline-flex items-center gap-2 rounded-full border border-amber-800/30 bg-amber-900/20 px-4 py-2'>
                 <svg
                   className='h-4 w-4 shrink-0 text-amber-400'
@@ -69,7 +62,7 @@ export const NewProductLaunchSectionView = forwardRef<
                   />
                 </svg>
                 <span className='whitespace-nowrap text-sm font-bold text-amber-400'>
-                  Spar 449 kr totalt
+                  Spar 200 kr!
                 </span>
               </div>
             </div>
@@ -81,11 +74,11 @@ export const NewProductLaunchSectionView = forwardRef<
                   <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-sky-500'></span>
                 </span>
                 <span className='whitespace-nowrap text-base font-semibold text-sky-400'>
-                  Tilbud
+                  Lanseringstilbud
                 </span>
                 <span>🎉</span>{' '}
                 <span className='whitespace-nowrap text-base font-semibold text-sky-400'>
-                  Få gratis Utekos Buff™ og spar 449 kr!
+                  Spar 200 kr!
                 </span>
               </div>
             </div>

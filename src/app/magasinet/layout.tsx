@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/breadcrumb'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
-import { MagazineNewsletterSignup } from '@/components/form/MagazineNewsletterSignUp' // Importer den nye komponenten
+import { MagazineNewsletterSignup } from '@/components/form/components/MagazineNewsletterSignUp' // Importer den nye komponenten
 import { Activity } from 'react'
 
 export default function MagazineLayout({ children }: { children: ReactNode }) {

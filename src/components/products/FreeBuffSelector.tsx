@@ -3,7 +3,7 @@
 
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
-import type { ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
 import Image from 'next/image'
 import { cn } from '@/lib/utils/className'
 const VARGNATT_IMAGE = '/black_buff_w.webp'

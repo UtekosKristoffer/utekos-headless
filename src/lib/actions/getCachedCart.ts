@@ -3,7 +3,7 @@
 
 import { CartNotFoundError } from '@/lib/errors/CartNotFoundError'
 import { fetchCart } from '@/lib/helpers/cart/fetchCart'
-import type { Cart } from '@types'
+import type { Cart } from 'types/cart'
 import { cacheTag, cacheLife } from 'next/cache'
 
 export async function getCachedCart(

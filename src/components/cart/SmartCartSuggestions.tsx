@@ -6,7 +6,8 @@ import { getAccessoryProducts } from '@/api/lib/products/getAccessoryProducts'
 import { getRecommendedProducts } from '@/api/lib/products/getRecommendedProducts'
 import { Progress } from '@/components/ui/progress'
 import { formatNOK } from '@/lib/utils/formatters/formatNOK'
-import type { Cart, ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
+import type { Cart } from 'types/cart'
 import { FreeShippingConfirmation } from './FreeShippingConfirmation'
 import { UpsellItem } from './UpsellItem'
 
@@ -125,7 +126,3 @@ export function SmartCartSuggestions({
     </div>
   )
 }
-
-
-
-

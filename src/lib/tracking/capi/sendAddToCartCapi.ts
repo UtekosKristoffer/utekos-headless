@@ -1,5 +1,7 @@
-import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
-import type { MetaUserData, MetaEventPayload, AddToCartEventData } from '@types'
+import { getCookie } from '@/components/analytics/Meta/getCookie'
+import type { MetaUserData } from 'types/tracking/meta'
+import type { MetaEventPayload } from 'types/tracking/meta/event'
+import type { AddToCartEventData } from 'types/cart'
 
 export async function sendAddToCartCapi(
   eventData: AddToCartEventData

@@ -5,7 +5,7 @@ import { fetchProducts } from '@/api/lib/products/getProducts' // Bruker fetchPr
 import { getRelatedProducts } from '@/hooks/getRelatedProducts' // Gjenbruker logikken din
 import { cacheLife, cacheTag } from 'next/cache'
 import { TAGS } from '@/api/constants'
-import type { ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
 
 export async function getCachedRelatedProducts(
   currentHandle: string,

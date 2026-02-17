@@ -3,14 +3,9 @@
 import { useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
-import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
+import { generateEventID } from '@/components/analytics/Meta/generateEventID'
 import { useAnalytics } from '@/hooks/useAnalytics'
-import type { ShopifyProduct, ShopifyProductVariant } from '@types'
-
-interface ProductViewProps {
-  product: ShopifyProduct
-  selectedVariant: ShopifyProductVariant
-}
+import type { ProductViewProps } from 'types/product/PageProps'
 
 export function ProductViewTracking({
   product,

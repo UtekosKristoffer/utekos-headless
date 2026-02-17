@@ -2,7 +2,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import type { ShopifyProduct, ShopifyProductVariant } from '@types'
+import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
 import { cn } from '@/lib/utils/className'
 
 interface VariantSelectorsProps {

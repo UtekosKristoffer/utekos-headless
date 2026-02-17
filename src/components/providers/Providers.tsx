@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { HydrationBoundary } from '@tanstack/react-query'
 import { useState } from 'react'
 import { getQueryClient } from '@/api/lib/getQueryClient'
-import { CartMutationClient } from '@/clients/CartMutationClient'
+import { CartMutationProvider } from '@/clients/CartMutationProvider'
 import { serverActions } from '@/constants/serverActions'
 import { CartIdProvider } from '@/components/providers/CartIdProvider'
 import type { DehydratedState } from '@tanstack/react-query'
@@ -12,7 +12,7 @@ import { CookieConsentProvider } from '@/components/cookie-consent/CookieConsent
 import CookieConsent from '@/components/cookie-consent/CookieConsent'
 import { ConditionalTracking } from '../analytics/ConditionalTracking'
 import { SnapPixel } from '@/components/analytics/SnapPixel/SnapPixel'
-import { PinterestPixel } from '@/components/analytics/PinterestPixel/PinterestPixel'
+import { PinterestTag } from '@/components/analytics/Pinterest/PinterestTag'
 import { TikTokPixel } from '@/components/analytics/TikTokPixel/TikTokPixel'
 
 interface ProvidersProps {
@@ -34,22 +34,21 @@ export default function Providers({
       <QueryClientProvider client={queryClient}>
         <HydrationBoundary state={dehydratedState}>
           <CartIdProvider value={cartId}>
-            <CartMutationClient
+            <CartMutationProvider
               actions={serverActions}
               cartId={cartId}
               setCartId={setCartId}
             >
               {children}
-            </CartMutationClient>
+            </CartMutationProvider>
           </CartIdProvider>
         </HydrationBoundary>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
       <CookieConsent />
       <SnapPixel />
-      <PinterestPixel />
+      <PinterestTag />
       <TikTokPixel />
-
       <ConditionalTracking
         {...(process.env.NEXT_PUBLIC_META_PIXEL_ID && {
           metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID

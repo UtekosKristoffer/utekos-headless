@@ -1,4 +1,3 @@
-// Path: src/components/products/quick-view/QuickViewModal.tsx
 'use client'
 
 import { getProductAction } from '@/api/lib/products/actions'
@@ -12,13 +11,12 @@ import {
 } from '@/components/ui/dialog'
 
 import { useVariantState } from '@/hooks/useVariantState'
-import type { ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
 import Image from 'next/image'
 import { useEffect, useState, useEffectEvent } from 'react'
 import { toast } from 'sonner'
 import { VariantSelectors } from './VariantSelectors'
 import { Price } from '../jsx/Price'
-import { FreeBuffSelector } from './FreeBuffSelector'
 import { QuickViewModalSkeleton } from '../skeletons/QuickViewModalSkeleton'
 
 interface QuickViewModalProps {
@@ -33,10 +31,8 @@ export function QuickViewModal({
   onOpenChange
 }: QuickViewModalProps) {
   const [productData, setProductData] = useState<ShopifyProduct | null>(null)
-  const [buffProduct, setBuffProduct] = useState<ShopifyProduct | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [includeBuff, setIncludeBuff] = useState(true)
-  const selectedBuffColor = 'Vargnatt'
+
   const { variantState, updateVariant } = useVariantState(
     productData ?? undefined,
     false
@@ -50,16 +46,12 @@ export function QuickViewModal({
   })
 
   useEffect(() => {
-    async function fetchAllProducts() {
+    async function fetchMainProduct() {
       if (isOpen && !productData) {
         setIsLoading(true)
         try {
-          const [mainProduct, freeBuffProduct] = await Promise.all([
-            getProductAction(productHandle),
-            getProductAction('utekos-buff')
-          ])
+          const mainProduct = await getProductAction(productHandle)
           setProductData(mainProduct)
-          setBuffProduct(freeBuffProduct)
         } catch (error) {
           handleFetchError()
         } finally {
@@ -67,20 +59,8 @@ export function QuickViewModal({
         }
       }
     }
-    fetchAllProducts()
+    fetchMainProduct()
   }, [isOpen, productHandle, productData, handleFetchError])
-
-  const selectedBuffVariant = buffProduct?.variants.edges.find(edge =>
-    edge.node.selectedOptions.some(opt => opt.value === selectedBuffColor)
-  )?.node
-
-  const additionalLine =
-    includeBuff && selectedBuffVariant ?
-      {
-        variantId: selectedBuffVariant.id,
-        quantity: 1
-      }
-    : undefined
 
   const selectedVariant =
     variantState.status === 'selected' ? variantState.variant : null
@@ -152,50 +132,11 @@ export function QuickViewModal({
                   />
                 </div>
 
-                <div className='rounded-2xl border-2 border-emerald-600/20 bg-gradient-to-br from-emerald-50/5 to-transparent p-6 shadow-sm'>
-                  <div className='mb-4 flex items-center gap-3'>
-                    <div className='flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600/10'>
-                      <svg
-                        className='h-5 w-5 text-emerald-600'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        stroke='currentColor'
-                      >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          d='M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7'
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className='text-lg font-semibold'>Nylansering</h3>
-                      <p className='text-sm text-foreground/70'>
-                        Få en gratis Utekos Buff™ med på kjøpet
-                      </p>
-                    </div>
-                  </div>
-
-                  <FreeBuffSelector
-                    buffProduct={buffProduct}
-                    includeBuff={includeBuff}
-                    onIncludeBuffChange={setIncludeBuff}
-                  />
-                </div>
-
                 <div className='mt-auto space-y-4'>
                   <AddToCart
                     product={productData}
                     selectedVariant={selectedVariant}
-                    {...(additionalLine && { additionalLine })}
                   />
-
-                  {includeBuff && (
-                    <p className='text-center md:text-left text-sm text-emerald-600 font-medium'>
-                      Utekos Buff™ inkludert (verdi 249,-)
-                    </p>
-                  )}
                 </div>
               </div>
             </div>

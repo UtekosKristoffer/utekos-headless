@@ -2,7 +2,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { ShopifyProductVariant } from '@types'
+import type { ShopifyProductVariant } from 'types/product'
 import { AddToCartSchemaClient } from '@/db/zod/schemas/AddToCartSchema.client'
 import type { z } from '@/db/zod/zodClient'
 

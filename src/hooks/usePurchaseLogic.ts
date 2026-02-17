@@ -7,18 +7,12 @@ import { cartStore } from '@/lib/state/cartStore'
 import { useCartMutations } from '@/hooks/useCartMutations'
 import { useOptimisticCartUpdate } from '@/hooks/useOptimisticCartUpdate'
 import { getCartIdFromCookie } from '@/lib/actions/getCartIdFromCookie'
-import { handlePostAddToCartCampaigns } from '@/lib/campaigns/cart/handlePostAddToCartCampaigns'
 import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
 import { useAnalytics } from '@/hooks/useAnalytics'
 import { getVariants } from '@/app/skreddersy-varmen/utekos-orginal/utils/getVariants'
 import { PRODUCT_VARIANTS } from '@/api/constants'
-import type {
-  ShopifyProductVariant,
-  ModelKey,
-  ColorVariant,
-  UsePurchaseLogicProps,
-  Cart
-} from '@types'
+import type { ModelKey, ColorVariant } from 'types/product/ProductTypes'
+import type { UsePurchaseLogicProps } from 'types/product/PageProps'
 import type { OptimisticItemInput } from '@/hooks/useOptimisticCartUpdate'
 
 export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
@@ -40,13 +34,10 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
 
   const currentConfig = PRODUCT_VARIANTS[selectedModel]
   const currentShopifyProduct = products[currentConfig.id]
-  const buffProduct = products['utekos-buff']
 
   const safeColorIndex =
     selectedColorIndex < currentConfig.colors.length ? selectedColorIndex : 0
   const currentColor = currentConfig.colors[safeColorIndex] as ColorVariant
-
-  const isTechDownOffer = selectedModel === 'techdown'
 
   useEffect(() => {
     if (!currentConfig.sizes.includes(selectedSize)) {
@@ -95,38 +86,14 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
     startTransition(async () => {
       try {
         let currentCartId = contextCartId || (await getCartIdFromCookie())
-        let additionalLine: { variantId: string; quantity: number } | undefined
-        let selectedBuffVariant: ShopifyProductVariant | undefined
 
-        const itemsToUpdate: OptimisticItemInput[] = []
-
-        itemsToUpdate.push({
-          product: currentShopifyProduct,
-          variant: selectedVariant,
-          quantity
-        })
-
-        if (isTechDownOffer && buffProduct) {
-          const buffVariants = getVariants(buffProduct)
-          selectedBuffVariant = buffVariants.find((v: any) =>
-            v.selectedOptions.some(
-              (opt: any) => opt.value.toLowerCase() === 'vargnatt'
-            )
-          )
-
-          if (selectedBuffVariant) {
-            additionalLine = {
-              variantId: selectedBuffVariant.id,
-              quantity: 1 * quantity
-            }
-            itemsToUpdate.push({
-              product: buffProduct,
-              variant: selectedBuffVariant,
-              quantity: 1 * quantity,
-              customPrice: 0
-            })
+        const itemsToUpdate: OptimisticItemInput[] = [
+          {
+            product: currentShopifyProduct,
+            variant: selectedVariant,
+            quantity
           }
-        }
+        ]
 
         if (currentCartId) {
           await updateCartCache({
@@ -136,68 +103,14 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
         }
 
         const linesToProcess = [{ variantId: selectedVariant.id, quantity }]
-        if (additionalLine) {
-          linesToProcess.push(additionalLine)
-        }
-
-        const mutationPayload =
-          additionalLine ?
-            { lines: linesToProcess, discountCode: 'GRATISBUFF' }
-          : linesToProcess
 
         // Maskinen oppdaterer cachen. Vi venter på ferdigstillelse.
-        await addLines(mutationPayload)
-
-        if (!currentCartId) {
-          currentCartId = await getCartIdFromCookie()
-        }
-
-        // PRICE GUARD (Post-Correction)
-        if (currentCartId && additionalLine) {
-          const freshCart = queryClient.getQueryData<Cart>([
-            'cart',
-            currentCartId
-          ])
-
-          if (freshCart) {
-            let needsFix = false
-            const fixedLines = freshCart.lines.map(line => {
-              if (line.merchandise.id === additionalLine.variantId) {
-                if (parseFloat(line.cost.totalAmount.amount) > 0) {
-                  needsFix = true
-                  return {
-                    ...line,
-                    cost: {
-                      ...line.cost,
-                      totalAmount: { ...line.cost.totalAmount, amount: '0.0' }
-                    }
-                  }
-                }
-              }
-              return line
-            })
-
-            if (needsFix) {
-              queryClient.setQueryData(['cart', currentCartId], {
-                ...freshCart,
-                lines: fixedLines
-              })
-            }
-          }
-
-          toast.success('Gratis Utekos Buff™ registrert!')
-          handlePostAddToCartCampaigns({
-            cartId: currentCartId,
-            additionalLine,
-            queryClient
-          }).catch(console.error)
-        }
+        await addLines(linesToProcess)
 
         await trackAddToCart({
           product: currentShopifyProduct,
           selectedVariant,
-          quantity,
-          additionalLine
+          quantity
         })
 
         trackEvent('AddToCart', {
@@ -228,7 +141,6 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
     handleAddToCart,
     isPending: isTransitioning || isPendingFromMachine,
     currentConfig,
-    currentColor,
-    isTechDownOffer
+    currentColor
   }
 }

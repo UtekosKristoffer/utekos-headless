@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { createAddToCartFormConfig } from '@/lib/helpers/cart/createAddToCartFormConfig'
-import type { AddToCartFormValues, ShopifyProductVariant } from '@types'
+import type { AddToCartFormValues } from 'types/cart'
+import type { ShopifyProductVariant } from 'types/product'
 
 export function useAddToCartForm(
   selectedVariant: ShopifyProductVariant | null

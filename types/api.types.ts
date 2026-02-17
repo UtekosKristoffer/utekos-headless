@@ -1,9 +1,9 @@
 // Path: types/api.types.ts
 
-import type { Cart, CartResponse, ShopifyCart } from './cart.types'
+import type { Cart, CartResponse, ShopifyCart } from 'types/cart'
 import type { GraphQLErrorResponse } from './graphql.types'
 import type { DehydratedState } from '@tanstack/react-query'
-import type { ShopifyProduct } from './product.types'
+import type { ShopifyProduct } from 'types/product'
 
 export interface ProvidersProps {
   children: React.ReactNode

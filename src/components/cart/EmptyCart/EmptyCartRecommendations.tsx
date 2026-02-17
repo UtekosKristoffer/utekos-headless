@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { RecommendedItem } from './RecommendedItem'
-import type { ShopifyProduct } from '@types'
+import type { ShopifyProduct } from 'types/product'
 import { getRecommendedProducts } from '@/api/lib/products/getRecommendedProducts'
 
 export function EmptyCartRecommendations() {

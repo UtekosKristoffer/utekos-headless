@@ -1,5 +1,5 @@
 // Path: src/app/kampanje/julegaver/lokal-levering/BergenDeliveryJsonLd.tsx
-import type { ShopifyProduct, ShopifyProductVariant } from '@types'
+import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
 import { cacheLife, cacheTag } from 'next/cache'
 import type {
   CollectionPage,
