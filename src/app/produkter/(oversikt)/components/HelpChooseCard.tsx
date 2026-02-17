@@ -1,9 +1,6 @@
-// Path: src/app/produkter/(oversikt)/components/HelpChooseCard.tsx
-
 'use client'
 
 import { useAddToCartAction } from '@/hooks/useAddToCartAction'
-import type { ShopifyProduct, ShopifyProductVariant } from '@types'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
   ArrowUpRight,
@@ -16,6 +13,7 @@ import type { Route } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
 
 interface HelpChooseCardProps {
   product: ShopifyProduct
