@@ -1,7 +1,7 @@
-import type { TrackAddToCartOptions } from 'types/cart'
 import { prepareAddToCartEvent } from '@/lib/tracking/logic/prepareAddToCartEvent'
 import { dispatchAddToCartPixels } from '@/lib/tracking/pixels/dispatchAddToCartPixels'
 import { sendAddToCartCapi } from '@/lib/tracking/capi/sendAddToCartCapi'
+import type { TrackAddToCartOptions } from 'types/cart'
 
 export async function trackAddToCart(
   input: TrackAddToCartOptions
