@@ -13,7 +13,7 @@ import type {
   MicrofiberLogicProps,
   MicrofiberColor,
   MicrofiberSize
-} from '@types'
+} from 'types/product/'
 
 export function MicrofiberView({
   color,
