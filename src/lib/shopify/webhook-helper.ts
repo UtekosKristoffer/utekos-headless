@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { verifyShopifyWebhook } from '@/lib/shopify/verifyWebhook'
-import type { OrderPaid, WebhookResult } from '@types'
+import type { OrderPaid } from 'types/commerce/order/OrderPaid'
+import type { WebhookResult } from 'types/tracking/webhook/WebhookResult'
 
 export async function parseAndVerifyWebhook(
   request: Request

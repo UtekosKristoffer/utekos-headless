@@ -7,11 +7,11 @@ import { MissingCartIdError } from '@/lib/errors/MissingCartIdError'
 import { getCartIdFromCookie } from '@/lib/actions/getCartIdFromCookie'
 import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import { validateUpdateLineInput } from '@/lib/actions/validations/validateUpdateLineInput'
+import { updateTag } from 'next/cache'
 import type {
   CartActionsResult,
   UpdateCartLineInput
 } from 'types/cart/CartActions'
-import { updateTag } from 'next/cache'
 
 export const updateCartLineQuantityAction = async (
   input: UpdateCartLineInput

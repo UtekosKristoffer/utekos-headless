@@ -6,10 +6,6 @@ import { fromZodError } from 'zod-validation-error'
 import { UpdateCartSchema } from '@/db/zod/schemas/UpdateCartSchema'
 import type { UpdateCartLineInput } from 'types/cart'
 
-/**
- * Server Action-hjelper må være async i Next.js 15.
- * Validerer data og kaster norsk, lesbar feil ved ugyldig input.
- */
 export async function validateUpdateLineInput(
   input: UpdateCartLineInput
 ): Promise<void> {
