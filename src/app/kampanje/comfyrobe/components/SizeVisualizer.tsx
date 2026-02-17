@@ -3,7 +3,7 @@
 import { useRef, useLayoutEffect } from 'react'
 import Image from 'next/image'
 import gsap from 'gsap'
-import type { SizeProfile } from '@types'
+import type { SizeProfile } from 'types/cart'
 
 interface SizeVisualizerProps {
   profile: SizeProfile
