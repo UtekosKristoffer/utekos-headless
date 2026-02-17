@@ -1,7 +1,7 @@
 // Path: src/hooks/useCartMutations.ts
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import { createMutationPromise } from '@/lib/utils/createMutationPromise'
-import type { CartLineInput } from '@types'
+import type { CartLineInput } from 'types/cart'
 
 type AddLinesPayload =
   | CartLineInput[]
