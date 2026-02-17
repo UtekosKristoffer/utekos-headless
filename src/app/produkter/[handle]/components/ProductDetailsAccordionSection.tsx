@@ -3,15 +3,12 @@
 
 import { sendGAEvent } from '@next/third-parties/google'
 import { AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import type {
-  AccordionSectionData,
-  MetaUserData,
-  MetaEventPayload
-} from '@types'
+import type { AccordionSectionData } from '@types'
+import type { MetaUserData, MetaEventPayload } from 'types/tracking/meta'
 import { colorHexByTextClass } from '../utils/colorHexByTextClass'
 import { AccordionContentRenderer } from './AccordionContentRenderer'
-import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
-import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
+import { generateEventID } from '@/components/analytics/Meta/generateEventID'
+import { getCookie } from '@/components/analytics/Meta/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { track } from '@vercel/analytics/react'
 

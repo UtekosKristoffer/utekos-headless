@@ -1,8 +1,8 @@
-// Path: src/components/analytics/MetaPixel/sendPageViewToCAPI.ts
+// Path: src/components/analytics/Meta/sendPageViewToCAPI.ts
 
 import { getPageViewParams } from './getPageViewParams'
 import { getCookie } from './getCookie'
-import type { MetaEventPayload } from '@types'
+import type { MetaEventPayload } from 'types/tracking/meta'
 
 export async function sendPageViewToCAPI(
   pathname: string,

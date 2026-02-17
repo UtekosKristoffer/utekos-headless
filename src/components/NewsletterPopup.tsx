@@ -16,7 +16,7 @@ import { subscribeToNewsletter } from '@/lib/actions/subscribeToNewsLetters'
 import { toast } from 'sonner'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils/className'
-import { trackNewsletterConversion } from '@/components/analytics/MetaPixel/trackNewsletterConversion'
+import { trackNewsletterConversion } from '@/components/analytics/Meta/trackNewsletterConversion'
 
 export function NewsletterPopup() {
   const [isOpen, setIsOpen] = useState(false)

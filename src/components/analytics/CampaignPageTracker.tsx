@@ -2,10 +2,10 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { generateEventID } from '@/components/analytics/MetaPixel/generateEventID'
-import { getCookie } from '@/components/analytics/MetaPixel/getCookie'
-import { getOrSetExternalId } from '@/components/analytics/MetaPixel/getOrSetExternalId'
-import type { MetaEventPayload } from '@types'
+import { generateEventID } from '@/components/analytics/Meta/generateEventID'
+import { getCookie } from '@/components/analytics/Meta/getCookie'
+import { getOrSetExternalId } from '@/components/analytics/Meta/getOrSetExternalId'
+import type { MetaEventPayload } from 'types/tracking'
 export function CampaignPageTracker() {
   const hasFired = useRef(false)
   useEffect(() => {
