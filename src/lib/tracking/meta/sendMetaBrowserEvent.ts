@@ -1,3 +1,8 @@
+import type {
+  MetaEventPayload,
+  ClientUserData,
+  MetaContentItem
+} from 'types/tracking/meta'
 import {
   FacebookAdsApi,
   ServerEvent,
@@ -6,7 +11,6 @@ import {
   CustomData,
   Content
 } from 'facebook-nodejs-business-sdk'
-import type { MetaEventPayload, ClientUserData, MetaContentItem } from 'types/tra'
 
 const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
 const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
