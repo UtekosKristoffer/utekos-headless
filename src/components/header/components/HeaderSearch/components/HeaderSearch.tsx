@@ -14,8 +14,8 @@ import { useRouter } from 'next/navigation'
 import { startTransition, useState, Suspense, useEffect } from 'react' // 1. Importer useEffect
 import { HeaderSearchFooter } from './HeaderSearchFooter'
 import { HeaderSearchInputField } from './HeaderSearchInputField'
-import { useCommandK } from './useCommandK'
-import { searchIndexQueryOptions } from './searchIndexQueryOption'
+import { useCommandK } from '@/components/header/components/HeaderSearch/utils/useCommandK'
+import { searchIndexQueryOptions } from '@/components/header/components/HeaderSearch/utils/searchIndexQueryOption'
 import { SearchResults } from './SearchResults'
 
 export function HeaderSearch({ className }: { className?: string }) {

@@ -1,3 +1,4 @@
+// Path: src/components/header/components/HeaderSearch/utils/useCommandK.tsx
 /*eslint-disable react-hooks/exhaustive-deps*/
 
 import { startTransition, useEffect } from 'react'
