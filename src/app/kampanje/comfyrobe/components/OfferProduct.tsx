@@ -1,5 +1,5 @@
 import { Check } from 'lucide-react'
-import type { OfferProductProps } from '@types'
+import type { OfferProductProps } from 'types/cart'
 
 export function OfferProduct({ product }: OfferProductProps) {
   return (
