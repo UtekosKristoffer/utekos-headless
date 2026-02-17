@@ -4,7 +4,7 @@
 import { useRef, useLayoutEffect } from 'react'
 import gsap from 'gsap'
 import { Check, Ruler, User } from 'lucide-react'
-import type { SizeInfoPanelProps } from '@types'
+import type { SizeInfoPanelProps } from 'types/cart'
 export function SizeInfoPanel({ profile }: SizeInfoPanelProps) {
   const containerRef = useRef<HTMLDivElement>(null)
 
