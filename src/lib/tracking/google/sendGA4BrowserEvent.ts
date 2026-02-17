@@ -1,4 +1,4 @@
-import { mapToGA4EventName } from './mapToGA$EventName'
+import { mapToGA4EventName } from './mapToGA4EventName'
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 const GA_API_SECRET = process.env.GA_API_SECRET
