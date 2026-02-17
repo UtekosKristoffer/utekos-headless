@@ -1,4 +1,4 @@
-import type { CartActions } from '@types'
+import type { CartActions } from 'types/cart/CartActions'
 import { addCartLinesAction } from '@/lib/actions/addCartLinesAction'
 import { clearCartAction } from '@/lib/actions/clearCartAction'
 import { removeCartLineAction } from '@/lib/actions/removeCartLineAction'
