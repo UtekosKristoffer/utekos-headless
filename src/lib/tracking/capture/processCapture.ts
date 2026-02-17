@@ -1,10 +1,10 @@
 import { prepareCaptureData } from '@/lib/tracking/capture/prepareCaptureData'
 import type {
-  CaptureBody,
   CaptureDependencies,
   CaptureContext,
   CaptureResult
-} from '@types'
+} from 'types/tracking/capture'
+import type { CaptureBody } from 'types/tracking/meta'
 
 export async function processCapture(
   token: string,

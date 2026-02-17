@@ -4,7 +4,7 @@ import { parseGaClientId } from '@/lib/tracking/google/parseGaClientId'
 import { parseGaSessionId } from '@/lib/tracking/google/parseGaSessionId'
 import { findGaSessionCookie } from '@/lib/tracking/google/findGaSessionCookie'
 import { GA_MEASUREMENT_ID } from '@/api/constants/monitoring'
-import type { CaptureContext } from '@types'
+import type { CaptureContext } from 'types/tracking/capture/CaptureContext'
 
 export function adaptRequestToCaptureContext(req: NextRequest): CaptureContext {
   const cookieStore = req.cookies

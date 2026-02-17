@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import type { CaptureResult } from '@types'
+import type { CaptureResult } from 'types/tracking/capture/CaptureResult'
 export function createCaptureResponse(result: CaptureResult): NextResponse {
   if (result.success) {
     return NextResponse.json({ ok: true })
