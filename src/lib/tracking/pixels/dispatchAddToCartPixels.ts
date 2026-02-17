@@ -1,5 +1,5 @@
 import { logAttribution } from '@/lib/tracking/log/logAttribution'
-import type { DispatchPixelsOptions } from '@types'
+import type { DispatchPixelsOptions } from 'types/cart'
 
 export function dispatchAddToCartPixels({
   eventData,
