@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query'
 import { useCartId } from '@/hooks/useCartId'
 import { fetchCart } from '@/lib/helpers/cart/fetchCart'
 import type { Cart } from 'types/cart'
-
 export const useCartQuery = () => {
   const cartId = useCartId()
 

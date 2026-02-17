@@ -7,7 +7,7 @@ import { MissingCartIdError } from '@/lib/errors/MissingCartIdError'
 import { getCartIdFromCookie } from '@/lib/actions/getCartIdFromCookie'
 import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
 import { validateRemoveCartLineInput } from '@/lib/actions/validations/validateRemoveCartLineInput'
-import type { CartActionsResult, RemoveCartLineInput } from '@types'
+import type { CartActionsResult, RemoveCartLineInput } from 'types/cart'
 import { updateTag } from 'next/cache'
 
 export const removeCartLineAction = async (
