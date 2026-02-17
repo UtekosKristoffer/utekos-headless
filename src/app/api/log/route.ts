@@ -2,7 +2,7 @@
 import { NextRequest, NextResponse, connection } from 'next/server'
 import { redisList } from '@/lib/redis/redisList'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
-import type { LogPayload } from '@types'
+import type { LogPayload } from 'types/tracking/log/LogPayload'
 
 export async function GET() {
   await connection()
