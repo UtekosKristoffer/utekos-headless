@@ -1,6 +1,6 @@
 // Path: src/lib/helpers/normalizers/normalizeProductImage.ts
 
-import type { Image } from '@types'
+import type { Image } from 'types/media'
 
 export const normalizeProductImage = (
   image: Image | null,
