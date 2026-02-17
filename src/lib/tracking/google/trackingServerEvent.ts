@@ -1,7 +1,8 @@
 // Path: src/lib/tracking/google/trackingServerEvent.ts
 import 'server-only'
 import { cookies } from 'next/headers'
-import type { AnalyticsEvent, TrackingOverrides } from '@types'
+import type { AnalyticsEvent } from 'types/analytics/AnalyticsEvent'
+import type { TrackingOverrides } from 'types/tracking/meta/TrackingOverrides'
 
 const GA_MEASUREMENT_ID =
   process.env.GA_MEASUREMENT_ID || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID

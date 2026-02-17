@@ -2,7 +2,7 @@
 import 'server-only'
 import { handlePurchaseEvent } from '@/lib/tracking/google/handlePurchaseEvents'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
-import type { TrackingContext } from '@types'
+import type { TrackingContext } from 'types/tracking/user/TrackingContext'
 
 export async function sendGooglePurchase(context: TrackingContext) {
   const { order, redisData } = context

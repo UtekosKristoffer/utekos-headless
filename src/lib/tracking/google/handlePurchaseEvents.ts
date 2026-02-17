@@ -1,6 +1,7 @@
 // Path: src/lib/tracking/google/handlePurchaseEvents.ts
 import { trackServerEvent } from '@/lib/tracking/google/trackingServerEvent'
-import type { AnalyticsItem, GoogleIds } from '@types'
+import type { GoogleIds } from 'types/tracking/google/GoogleIds'
+import type { AnalyticsItem } from 'types/analytics/AnalyticsItem'
 import { normalizeUserData } from '@/lib/tracking/user-data/normalizeUserData'
 
 export type PurchaseTrackResult =
