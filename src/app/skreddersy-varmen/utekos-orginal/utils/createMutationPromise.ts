@@ -1,5 +1,5 @@
 import type { ActorRef, StateFrom } from 'xstate'
-import type { CartMutationEvent } from '@types'
+import type { CartMutationEvent } from 'types/cart'
 import type { CartMutationMachine } from '@/lib/context/CartMutationContext'
 export const createMutationPromise = (
   event: CartMutationEvent,
