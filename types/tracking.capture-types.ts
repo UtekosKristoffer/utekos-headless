@@ -7,7 +7,6 @@ export interface ExtendedUserData extends MetaUserData {
   email_hash?: string | undefined
 }
 
-// Kontrakt for data ekstrahert fra requesten (Cookies + Headers)
 export interface CaptureContext {
   cookies: {
     fbp?: string | undefined

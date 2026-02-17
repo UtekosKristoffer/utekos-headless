@@ -1,5 +1,5 @@
-import { getCachedCart } from '@/lib/helpers/cart/getCachedCart'
-import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
+import { getCachedCart } from '@/lib/actions/getCachedCart'
+import { getCartIdFromCookie } from '@/lib/actions/getCartIdFromCookie'
 import Providers from '@/components/providers/Providers'
 import type { ReactNode } from 'react'
 import { QueryClient, dehydrate } from '@tanstack/react-query'

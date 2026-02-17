@@ -8,14 +8,14 @@ import type { UseFormReturn } from 'react-hook-form'
 import type { SizeOptionKey } from '../src/app/kampanje/comfyrobe/utils/sizeSelectorData'
 import type { LucideIcon } from 'lucide-react'
 
-export interface PrepareAddToCartInput {
+export type PrepareAddToCartInput = {
   product: ShopifyProduct
   selectedVariant: ShopifyProductVariant
   quantity: number
   additionalLine?: { variantId: string; quantity: number } | undefined
 }
 
-export interface AddToCartEventData {
+export type AddToCartEventData = {
   eventID: string
   contentName: string
   contentIds: string[]
@@ -26,39 +26,39 @@ export interface AddToCartEventData {
   mainVariantId: string
 }
 
-export interface DispatchPixelsOptions {
+export type DispatchPixelsOptions = {
   eventData: AddToCartEventData
   product: ShopifyProduct
   selectedVariant: ShopifyProductVariant
 }
 
-export interface TrackAddToCartOptions {
+export type TrackAddToCartOptions = {
   product: ShopifyProduct
   selectedVariant: ShopifyProductVariant
   quantity: number
   additionalLine?: { variantId: string; quantity: number } | undefined
 }
 
-export interface UseAddToCartActionProps {
+export type UseAddToCartActionProps = {
   product: ShopifyProduct
   selectedVariant: ShopifyProductVariant | null
   additionalLine?: { variantId: string; quantity: number } | undefined
 }
 
-export interface AddToCartProps {
+export type AddToCartProps = {
   product: ShopifyProduct
   selectedVariant: ShopifyProductVariant | null
   additionalLine?: { variantId: string; quantity: number } | undefined
 }
 
-export interface AddToCartViewProps {
+export type AddToCartViewProps = {
   form: UseFormReturn<AddToCartFormValues>
   onSubmit: (values: AddToCartFormValues) => void
   isPending: boolean
   isAvailable: boolean
 }
 
-export interface CheckoutPanelProps {
+export type CheckoutPanelProps = {
   mainProduct: ProductOffer
   upsellProduct: ProductOffer
   isUpsellSelected: boolean
@@ -66,7 +66,7 @@ export interface CheckoutPanelProps {
   productImageSrc: string
 }
 
-export interface ProductOffer {
+export type ProductOffer = {
   id: string
   name: string
   price: number
@@ -74,20 +74,20 @@ export interface ProductOffer {
   features: string[]
 }
 
-export interface OfferProductProps {
+export type OfferProductProps = {
   product: ProductOffer
 }
 
-export interface OfferSectionProps {
+export type OfferSectionProps = {
   productImageSrc: string
   selectedSize: SizeOptionKey
 }
 
-export interface SizeInfoPanelProps {
+export type SizeInfoPanelProps = {
   profile: SizeProfile
 }
 
-export interface SizeProfile {
+export type SizeProfile = {
   id: SizeOptionKey
   fullName: string
   label: string
@@ -103,7 +103,7 @@ export interface SizeProfile {
   }[]
 }
 
-export interface OfferGalleryProps {
+export type OfferGalleryProps = {
   name: string
   mainImageSrc: string
 }

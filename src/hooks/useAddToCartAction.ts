@@ -7,7 +7,7 @@ import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import { CartIdContext } from '@/lib/context/CartIdContext'
 import { cartStore } from '@/lib/state/cartStore'
 import { useCartMutations } from '@/hooks/useCartMutations'
-import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
+import { getCartIdFromCookie } from '@/lib/actions/getCartIdFromCookie'
 import {
   useOptimisticCartUpdate,
   type OptimisticItemInput

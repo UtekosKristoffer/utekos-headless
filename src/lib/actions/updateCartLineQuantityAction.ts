@@ -4,9 +4,9 @@
 import { performCartLinesUpdateMutation } from '@/lib/actions/perform/performCartLinesUpdateMutation'
 import { mapThrownErrorToActionResult } from '@/lib/errors/mapThrownErrorToActionResult'
 import { MissingCartIdError } from '@/lib/errors/MissingCartIdError'
-import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
+import { getCartIdFromCookie } from '@/lib/actions/getCartIdFromCookie'
 import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
-import { validateUpdateLineInput } from '@/lib/helpers/validations/validateUpdateLineInput'
+import { validateUpdateLineInput } from '@/lib/actions/validations/validateUpdateLineInput'
 import type { CartActionsResult, UpdateCartLineInput } from '@types'
 import { updateTag } from 'next/cache'
 

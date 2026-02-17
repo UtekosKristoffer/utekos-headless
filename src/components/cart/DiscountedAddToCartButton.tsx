@@ -8,7 +8,7 @@ import {
   type CartMutationMachine
 } from '@/lib/context/CartMutationContext'
 import { createAddToCartFormConfig } from '@/lib/helpers/cart/createAddToCartFormConfig'
-import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
+import { getCartIdFromCookie } from '@/lib/actions/getCartIdFromCookie'
 import { cartStore } from '@/lib/state/cartStore'
 import { applyDiscount } from '@/api/lib/cart/applyDiscount'
 import type {

@@ -4,9 +4,9 @@
 import { performCartClearMutation } from '@/lib/actions/perform/performCartClearMutation'
 import { mapThrownErrorToActionResult } from '@/lib/errors/mapThrownErrorToActionResult'
 import { MissingCartIdError } from '@/lib/errors/MissingCartIdError'
-import { getCartIdFromCookie } from '@/lib/helpers/cart/getCartIdFromCookie'
+import { getCartIdFromCookie } from '@/lib/actions/getCartIdFromCookie'
 import { normalizeCart } from '@/lib/helpers/normalizers/normalizeCart'
-import { validateClearCartInput } from '@/lib/helpers/validations/validateClearCartInput'
+import { validateClearCartInput } from '@/lib/actions/validations/validateClearCartInput'
 import type { CartActionsResult } from '@types'
 import { updateTag } from 'next/cache' // <--- NY: Import for invalidering
 
