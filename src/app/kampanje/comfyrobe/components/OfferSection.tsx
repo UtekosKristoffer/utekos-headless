@@ -8,7 +8,7 @@ import { UpsellItem } from './UpsellItem'
 import { CheckoutPanel } from './CheckoutPanel'
 import { MAIN_PRODUCT, UPSELL_PRODUCT } from '../utils/offerData'
 import { SIZE_DATA, type SizeOptionKey } from '../utils/sizeSelectorData'
-import type { OfferSectionProps } from '@types'
+import type { OfferSectionProps } from 'types/cart'
 
 type ExtendedOfferSectionProps = OfferSectionProps & {
   onSizeChange: (size: SizeOptionKey) => void
