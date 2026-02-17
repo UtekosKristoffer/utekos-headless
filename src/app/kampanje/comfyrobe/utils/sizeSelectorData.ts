@@ -1,5 +1,5 @@
 import { Move, Maximize, ScanFace } from 'lucide-react'
-import type { SizeProfile } from '@types'
+import type { SizeProfile } from 'types/cart'
 
 export type SizeOptionKey = 'S' | 'M' | 'L'
 
