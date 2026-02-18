@@ -3,9 +3,10 @@
 'use client'
 
 import { formatPrice } from '@/lib/utils/formatPrice'
+import type { CurrencyCode } from 'types/commerce/CurrencyCode'
 interface PriceProps {
   amount: string
-  currencyCode: string
+  currencyCode: CurrencyCode
 }
 
 export function Price({ amount, currencyCode }: PriceProps) {
