@@ -3,7 +3,7 @@ import type {
   ClientUserData,
   MetaUserData,
   MetaEventRequestResult
-} from '@types'
+} from 'types/tracking/meta'
 
 export type LogFunction = (
   level: 'INFO' | 'ERROR' | 'WARN' | 'DEBUG',
