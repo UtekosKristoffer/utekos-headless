@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server'
 import { extractEventCookies } from '@/lib/tracking/utils/extractEventCookies'
 import { getClientIp } from '@/lib/tracking/user-data/getClientIp'
-import type { EventCookies } from '@types'
+import type { EventCookies } from 'types/tracking/event/cookies/EventCookies'
 
 export interface RequestEventContext {
   cookies: EventCookies

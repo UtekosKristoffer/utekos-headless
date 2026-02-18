@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import type { TrackingServiceResult } from '@types'
+import type { TrackingServiceResult } from 'types/tracking/webhook/TrackingServiceResult'
 
 export function createTrackingResponse(
   result: TrackingServiceResult

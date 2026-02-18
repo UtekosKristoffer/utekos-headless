@@ -1,4 +1,4 @@
-import type { MetaEventPayload, MetaUserData } from '@types'
+import type { MetaEventPayload, MetaUserData } from 'types/tracking/meta'
 
 const SNAP_PIXEL_ID = process.env.NEXT_PUBLIC_SNAP_PIXEL_ID
 const SNAP_API_TOKEN = process.env.SNAP_API_TOKEN

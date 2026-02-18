@@ -1,4 +1,6 @@
-import type { UserDataInput, NormalizedUserData } from '@types'
+import type { NormalizedUserData } from 'types/tracking/user/NormalizedUserData'
+import type { UserDataInput } from 'types/tracking/user/UserDataInput'
+
 import { sha256 } from '@/lib/tracking//hash/sha256'
 
 export function normalizeUserData(input: UserDataInput): NormalizedUserData {

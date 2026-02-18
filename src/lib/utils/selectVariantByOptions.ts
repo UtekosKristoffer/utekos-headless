@@ -1,13 +1,4 @@
-/**
- * @fileoverview Provides functionality to find matching product variants based on option updates.
- * @module utils/selectVariantByOptions
- */
-
 import type { ShopifyProductVariant } from 'types/product'
-
-/**
- * Represents the input for updating a variant selection
- */
 type UpdateInput = {
   current: ShopifyProductVariant
   optionName: string

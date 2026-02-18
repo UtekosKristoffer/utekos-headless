@@ -1,4 +1,4 @@
-import type { EventCookies } from '@types'
+import type { EventCookies } from 'types/tracking/event/cookies/EventCookies'
 
 export function extractEventCookies(
   cookies: Map<string, string>

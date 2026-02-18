@@ -1,7 +1,7 @@
 import { hashSnapData } from '@/lib/tracking/snapchat/hashSnapData'
 import { safeString } from '@/lib/utils/safeString'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
-import type { TrackingContext } from '@types'
+import type { TrackingContext } from 'types/tracking/user/TrackingContext'
 
 const TIKTOK_ACCESS_TOKEN = process.env.TIKTOK_ACCESS_TOKEN
 const TIKTOK_PIXEL_ID = process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID

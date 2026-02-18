@@ -3,7 +3,8 @@
 import { redisGet } from '@/lib/redis/redisGet'
 import { safeString } from '@/lib/utils/safeString'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
-import type { CheckoutAttribution, OrderPaid } from '@types'
+import type { OrderPaid } from 'types/commerce/order/OrderPaid'
+import type { CheckoutAttribution } from 'types/tracking/user/CheckoutAttribution'
 
 export async function getRedisAttribution(
   order: OrderPaid

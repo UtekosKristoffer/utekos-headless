@@ -1,7 +1,7 @@
 import { hashSnapData } from '@/lib/tracking/snapchat/hashSnapData'
 import { safeString } from '@/lib/utils/safeString'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
-import type { TrackingContext } from '@types'
+import type { TrackingContext } from 'types/tracking/user/TrackingContext'
 
 const PINTEREST_TOKEN = process.env.PINTEREST_ACCESS_TOKEN
 const PINTEREST_AD_ACCOUNT_ID = process.env.PINTEREST_AD_ACCOUNT_ID

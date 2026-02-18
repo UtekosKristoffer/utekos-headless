@@ -1,5 +1,5 @@
 // Path: src/lib/utils/formatPrice.ts
-import type { Money } from '@types'
+import type { Money } from 'types/commerce/Money'
 
 export const formatPrice = (money: Money): string => {
   const amount = parseFloat(money.amount)

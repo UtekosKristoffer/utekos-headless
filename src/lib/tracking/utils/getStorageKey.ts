@@ -1,6 +1,6 @@
 // src/lib/tracking/utils/getStorageKey.ts
 
-import type { CaptureBody } from '@types'
+import type { CaptureBody } from 'types/tracking/meta'
 
 export function getStorageKey(body: CaptureBody): string | undefined {
   if (body.cartId) {

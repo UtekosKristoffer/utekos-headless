@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import type { MetaEventPayload, ValidationResult } from '@types'
+import type { MetaEventPayload } from 'types/tracking/meta/event/MetaEventPayload'
+import type { ValidationResult } from 'types/tracking/webhook/ValidationResult'
 
 export async function parseAndValidateEventPayload(
   request: NextRequest

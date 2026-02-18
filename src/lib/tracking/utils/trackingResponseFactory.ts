@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import type { ServiceResult } from '@types'
+import type { ServiceResult } from 'types/tracking/meta/ServiceResult'
 export function createTrackingResponse(result: ServiceResult): NextResponse {
   if (result.success) {
     return NextResponse.json({

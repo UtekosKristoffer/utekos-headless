@@ -1,5 +1,5 @@
 import { hashSnapData } from '@/lib/tracking/snapchat/hashSnapData'
-import type { MetaEventPayload, ClientUserData } from '@types'
+import type { MetaEventPayload, ClientUserData } from 'types/tracking/meta'
 
 const TIKTOK_ACCESS_TOKEN = process.env.TIKTOK_ACCESS_TOKEN
 const TIKTOK_PIXEL_ID = process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID

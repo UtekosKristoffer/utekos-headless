@@ -1,5 +1,5 @@
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
-import type { TikTokLeadProps } from '@types'
+import type { TikTokLeadProps } from 'types/tracking/tiktok/TikTokLeadProps'
 
 const TIKTOK_ACCESS_TOKEN = process.env.TIKTOK_ACCESS_TOKEN
 const TIKTOK_PIXEL_ID = process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID

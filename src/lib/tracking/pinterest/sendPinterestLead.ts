@@ -1,5 +1,5 @@
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
-import type { PinterestLeadProps } from '@types'
+import type { PinterestLeadProps } from 'types/tracking/pinterest/PinterestLeadProps'
 
 const PINTEREST_TOKEN = process.env.PINTEREST_ACCESS_TOKEN
 const PINTEREST_AD_ACCOUNT_ID = process.env.PINTEREST_AD_ACCOUNT_ID

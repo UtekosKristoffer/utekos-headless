@@ -1,6 +1,6 @@
 import { hashSnapData } from '@/lib/tracking/snapchat/hashSnapData'
 import { safeString } from '@/lib/utils/safeString'
-import type { TrackingContext } from '@types'
+import type { TrackingContext } from 'types/tracking/user/TrackingContext'
 
 const SNAP_ACCESS_TOKEN = process.env.SNAP_CAPI_TOKEN
 const SNAP_PIXEL_ID = process.env.NEXT_PUBLIC_SNAP_PIXEL_ID
