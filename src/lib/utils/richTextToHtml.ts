@@ -1,7 +1,6 @@
 // Path: src/lib/utils/richTextToHtml.ts
 
-// Very basic type definitions for the rich text object structure
-interface RichTextNode {
+type RichTextNode = {
   type: string
   value?: string
   children?: RichTextNode[]
@@ -28,10 +27,10 @@ function processNode(node: RichTextNode): string {
 
 export function richTextToHtml(richTextObject: unknown): string | null {
   if (
-    !richTextObject ||
-    typeof richTextObject !== 'object' ||
-    !('type' in richTextObject) ||
-    richTextObject.type !== 'root'
+    !richTextObject
+    || typeof richTextObject !== 'object'
+    || !('type' in richTextObject)
+    || richTextObject.type !== 'root'
   ) {
     return null
   }

@@ -1,6 +1,6 @@
 // Path: src/lib/utils/trackEvent.ts
 import { track } from '@vercel/analytics'
-import type { LogPayload } from '@types'
+import type { LogPayload } from 'types/tracking/log/LogPayload'
 
 type AnalyticsProperty = string | number | boolean | null
 

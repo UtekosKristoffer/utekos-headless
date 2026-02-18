@@ -1,6 +1,9 @@
 // Path: src/lib/utils/reshapeMetaobject.ts
 
-import type { MetaobjectField, RawField } from '@types'
+import type {
+  MetaobjectField,
+  RawField
+} from 'types/product/MetaobjectReference'
 import { toCamelCase } from './toCamelCase'
 
 /**
