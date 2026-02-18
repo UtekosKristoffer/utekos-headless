@@ -1,5 +1,6 @@
 import { prepareEventContext } from '@/lib/tracking/services/prepareEventContext'
-import type { MetaEventPayload, EventCookies } from '@types'
+import type { MetaEventPayload } from 'types/tracking/meta'
+import type { EventCookies } from 'types/tracking/event/cookies/EventCookies'
 import type { TrackingDependencies } from '@types'
 
 export async function processBrowserEvent(

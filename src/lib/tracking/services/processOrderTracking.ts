@@ -1,4 +1,5 @@
-import type { OrderPaid, TrackingServiceResult } from '@types'
+import type { OrderPaid } from 'types/commerce/order/OrderPaid'
+import type { TrackingServiceResult } from 'types/tracking/webhook/TrackingServiceResult'
 import { getRedisAttribution } from '@/lib/tracking/utils/getRedisAttribution'
 import { createTrackingContext } from '@/lib/tracking/utils/createTrackingContext'
 import { sendGooglePurchase } from '@/lib/tracking/google/sendGooglePurchase'

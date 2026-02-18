@@ -1,6 +1,5 @@
 // Path: src/lib/tracking/proxy/extractMarketingParams.ts
-
-import type { CookieConfig, GoogleMarketingParams } from '@types'
+import type { GoogleMarketingParams } from 'types/tracking/google/GoogleMarketingParams'
 import { MARKETING_CONFIG } from '@/api/constants/monitoring'
 import { hashEmail } from '@/lib/tracking/hash/hashEmail'
 

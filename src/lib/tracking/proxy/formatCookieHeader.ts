@@ -1,6 +1,6 @@
 // Path: src/lib/tracking/proxy/formatCookieHeader.ts
 
-import type { CookieConfig } from '@types'
+import type { CookieConfig } from 'types/tracking/event/cookies/CookieConfig'
 
 export function formatCookieHeader(config: CookieConfig): string {
   const parts = [

@@ -1,6 +1,7 @@
 // Path: src/lib/tracking/services/prepareEventContext.ts
 import { normalize } from '@/lib/tracking/meta/normalization'
-import type { MetaEventPayload, ClientUserData, EventCookies } from '@types'
+import type { MetaEventPayload, ClientUserData } from 'types/tracking/meta'
+import type { EventCookies } from 'types/tracking/event/cookies/EventCookies'
 
 export interface EnrichedEventContext {
   userData: ClientUserData

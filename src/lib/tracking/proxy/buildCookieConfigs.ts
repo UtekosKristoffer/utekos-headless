@@ -1,9 +1,10 @@
 // Path: src/lib/tracking/proxy/buildCookieConfigs.ts
 
-import type { CookieConfig } from 'types/tracking/event/cookies/CookieConfig'
-import type { GoogleMarketingParams } from 'types/tracking/google/GoogleMarketingParams'
 import { MARKETING_CONFIG } from '@/api/constants/monitoring'
 import { formatFbcCookie } from '@/lib/tracking/proxy/formatFbcCookie'
+import type { CookieConfig } from 'types/tracking/event/cookies/CookieConfig'
+import type { GoogleMarketingParams } from 'types/tracking/google/GoogleMarketingParams'
+
 export function buildCookieConfigs(
   params: GoogleMarketingParams,
   isSecureConnection: boolean
