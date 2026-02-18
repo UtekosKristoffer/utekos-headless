@@ -8,7 +8,7 @@ import {
 } from 'facebook-nodejs-business-sdk'
 import { safeString } from '@/lib/utils/safeString'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
-import type { TrackingContext } from '@types'
+import type { TrackingContext } from 'types/tracking/user/TrackingContext'
 
 const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
 const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
