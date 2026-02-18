@@ -4,7 +4,7 @@
 
 import { formatPrice } from '@/lib/utils/formatPrice'
 import type { CurrencyCode } from 'types/commerce/CurrencyCode'
-interface PriceProps {
+type PriceProps = {
   amount: string
   currencyCode: CurrencyCode
 }

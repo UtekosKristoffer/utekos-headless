@@ -3,11 +3,12 @@
 import { Price } from '@/components/jsx/Price'
 import { ShieldAlert } from 'lucide-react'
 import type { ReactNode } from 'react'
+import type { CurrencyCode } from 'types/commerce/CurrencyCode'
 
 export interface PriceActivityPanelProps {
   productHandle: string
   priceAmount: string
-  currencyCode: string
+  currencyCode: CurrencyCode
   activityNode?: ReactNode
   limitedStockCount?: number
 }
