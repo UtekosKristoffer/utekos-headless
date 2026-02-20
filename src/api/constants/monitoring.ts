@@ -29,4 +29,4 @@ export const BLOCKED_USER_AGENTS = [
   'wget'
 ]
 
-export const NEXT_PUBLIC_GA_MEASUREMENT_ID = 'G-FCES3L0M9M'
+export const GA_MEASUREMENT_ID = 'G-FCES3L0M9M'

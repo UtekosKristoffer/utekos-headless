@@ -2,6 +2,8 @@
 import 'server-only'
 import { cookies } from 'next/headers'
 import type { CurrencyCode } from 'types/commerce/CurrencyCode'
+import { parseClientIdFromGaCookie } from './parseClientIdFromGaCookie'
+import { parseSessionIdFromGaContainerCookie } from './parseSessionIdFromGaContainerCookie'
 export type AnalyticsItem = {
   item_id: string
   item_name: string
@@ -58,20 +60,6 @@ const GA_MEASUREMENT_ID =
   process.env.GA_MEASUREMENT_ID || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 const API_SECRET = process.env.GA_API_SECRET
 
-function parseClientIdFromGaCookie(gaCookie?: string) {
-  if (!gaCookie) return undefined
-  const parts = gaCookie.split('.')
-  if (parts.length >= 4) return parts.slice(2).join('.')
-  return undefined
-}
-
-function parseSessionIdFromGaContainerCookie(cookieValue?: string) {
-  if (!cookieValue) return undefined
-  const parts = cookieValue.split('.')
-  const sid = parts?.[2]
-  return sid ? Number(sid) : undefined
-}
-
 export async function trackServerEvent(
   event: AnalyticsEvent,
   overrides?: TrackingOverrides
@@ -82,14 +70,32 @@ export async function trackServerEvent(
 
   try {
     let clientId: string | undefined = overrides?.clientId
-    let sessionId: number | undefined =
-      (
-        overrides?.sessionId !== undefined
-        && overrides?.sessionId !== null
-        && overrides?.sessionId !== ''
-      ) ?
-        Number(overrides.sessionId)
-      : undefined
+    let sessionId: number | undefined = undefined
+
+    // Sikker parsing av Session ID for å forhindre "NaN"
+    if (overrides?.sessionId) {
+      const sidStr = String(overrides.sessionId)
+
+      if (sidStr.includes('$') || sidStr.startsWith('s')) {
+        // Nytt GA4 cookie-format: s1766430637$o1$g0...
+        const match = sidStr.match(/^s(\d+)/)
+        if (match && match[1]) {
+          sessionId = Number(match[1])
+        }
+      } else if (sidStr.includes('.')) {
+        // Gammelt GA4 cookie-format: GS1.1.1766430637.1.0.0
+        const parts = sidStr.split('.')
+        if (parts.length >= 3 && !isNaN(Number(parts[2]))) {
+          sessionId = Number(parts[2])
+        }
+      } else {
+        // Allerede kun tall
+        const parsed = Number(sidStr)
+        if (!isNaN(parsed)) {
+          sessionId = parsed
+        }
+      }
+    }
 
     const userAgent = overrides?.userAgent || 'Next.js Server'
 
@@ -97,10 +103,13 @@ export async function trackServerEvent(
       try {
         const cookieStore = await cookies()
         clientId = parseClientIdFromGaCookie(cookieStore.get('_ga')?.value)
-
         const containerId = GA_MEASUREMENT_ID.replace('G-', '')
         const sessionCookie = cookieStore.get(`_ga_${containerId}`)?.value
-        sessionId = parseSessionIdFromGaContainerCookie(sessionCookie)
+
+        // Sørg for at den kun oppdaterer hvis vi ikke allerede fant den i overrides
+        if (sessionId === undefined) {
+          sessionId = parseSessionIdFromGaContainerCookie(sessionCookie)
+        }
       } catch {}
     }
 
@@ -109,6 +118,7 @@ export async function trackServerEvent(
     }
 
     const userId = overrides?.userId
+
     const shouldSendUserData =
       !!userId
       && !!overrides?.userData
@@ -136,7 +146,10 @@ export async function trackServerEvent(
           params: {
             ...(event.params || {}),
             ...(event.ecommerce || {}),
-            ...(sessionId !== undefined ? { session_id: sessionId } : {}),
+            // Unngår å sende session_id hvis vi fortsatt fikk NaN
+            ...(sessionId !== undefined && !isNaN(sessionId) ?
+              { session_id: sessionId }
+            : {}),
             engagement_time_msec: 1,
             ...(process.env.NODE_ENV === 'development' ? { debug_mode: 1 } : {})
           }
