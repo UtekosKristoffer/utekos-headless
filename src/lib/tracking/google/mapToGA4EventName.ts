@@ -1,3 +1,5 @@
+// Path: src/lib/tracking/google/mapToGA4EventName.ts
+
 export function mapToGA4EventName(metaName: string): string {
   const map: Record<string, string> = {
     Purchase: 'purchase',

@@ -15,9 +15,16 @@ import { formatFbcCookie } from './lib/tracking/proxy/formatFbcCookie'
 
 export async function proxy(request: NextRequest) {
   const context = createMiddlewareContext(request)
-
   if (context.isBlockedAgent) {
     return new NextResponse(null, { status: 403, statusText: 'Forbidden' })
+  }
+  if (context.pathname.startsWith('/sporing')) {
+    const pathWithoutPrefix = context.pathname.replace(/^\/sporing/, '')
+
+    const sgtmUrl = new URL(pathWithoutPrefix, 'https://sgtm.utekos.no')
+    sgtmUrl.search = request.nextUrl.search
+
+    return NextResponse.rewrite(sgtmUrl)
   }
 
   if (!context.isTargetRoute) {
@@ -38,7 +45,6 @@ export const config = {
     '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|videos|apple-icon|icon|manifest).*)'
   ]
 }
-
 export {
   handleMarketingParams,
   extractMarketingParams,

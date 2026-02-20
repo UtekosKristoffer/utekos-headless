@@ -1,23 +1,14 @@
 import { isValidationErrorLike } from 'zod-validation-error'
-
+import { isShopifyErrorResponse } from '@/lib/errors/isShopifyErrorResponse'
+import { MissingCartIdError } from '@/lib/errors/MissingCartIdError'
+import { extractCartErrorMessage } from './extractCartErrorMessage'
+import { formatShopifyErrorResponse } from './formatShopifyErrorResponse'
 import {
   CartErrorCode,
   type CartErrorCodeType
 } from '@/constants/CartErrorCode'
-import { isShopifyErrorResponse } from '@/lib/errors/isShopifyErrorResponse'
-import { MissingCartIdError } from '@/lib/errors/MissingCartIdError'
-
-import { extractCartErrorMessage } from './extractCartErrorMessage'
-import { formatShopifyErrorResponse } from './formatShopifyErrorResponse'
-
 import type { CartActionsResult } from 'types/cart'
-/**
- * Maps any thrown error into a standardized CartActionsResult.
- *
- * This function focuses on determining the appropriate error code and delegating
- * message extraction to specialized utilities. This separation allows the same
- * error message logic to be reused in different contexts.
- */
+
 export function mapThrownErrorToActionResult(
   thrown: unknown
 ): CartActionsResult {

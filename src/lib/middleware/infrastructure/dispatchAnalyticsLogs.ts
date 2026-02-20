@@ -1,6 +1,8 @@
-import type { NextRequest } from 'next/server'
+// Path: src/lib/middleware/infrastructure/dispatchAnalyticsLogs.ts
+
 import { dispatchLog } from '@/lib/middleware/utils/dispatchLog'
 import type { DetectedAdInteraction } from '@types'
+import type { NextRequest } from 'next/server'
 
 export async function dispatchAnalyticsLogs(
   request: NextRequest,

@@ -1,6 +1,8 @@
+// Path: src/lib/tracking/capture/parseAndValidateCaptureRequest.ts
+
 import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
 import { getStorageKey } from '@/lib/utils/getStorageKey'
+import type { NextRequest } from 'next/server'
 import type { CaptureBody } from 'types/tracking/meta'
 
 type ValidationResult =

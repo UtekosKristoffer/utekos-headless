@@ -1,3 +1,5 @@
+// Path: src/lib/middleware/guards/isBlockedUserAgent.ts
+
 import { BLOCKED_USER_AGENTS } from '@/api/constants/monitoring'
 
 export function isBlockedUserAgent(userAgent: string | null): boolean {

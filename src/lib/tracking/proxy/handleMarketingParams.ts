@@ -2,10 +2,9 @@
 
 import { MARKETING_CONFIG } from '@/api/constants/monitoring'
 import { extractMarketingParams } from '@/lib/tracking/proxy/extractMarketingParams'
-import type { NextRequest, NextResponse } from 'next/server'
 import { buildCookieConfigs } from '@/lib/tracking/proxy/buildCookieConfigs'
 import { formatCookieHeader } from '@/lib/tracking/proxy/formatCookieHeader'
-
+import type { NextRequest, NextResponse } from 'next/server'
 export function handleMarketingParams(
   request: NextRequest,
   response: NextResponse

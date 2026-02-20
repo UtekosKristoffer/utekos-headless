@@ -1,13 +1,50 @@
 // Path: src/lib/tracking/google/trackingServerEvent.ts
 import 'server-only'
 import { cookies } from 'next/headers'
-import type { AnalyticsEvent } from 'types/analytics/AnalyticsEvent'
-import type { TrackingOverrides } from 'types/tracking/meta/TrackingOverrides'
+import type { CurrencyCode } from 'types/commerce/CurrencyCode'
+export type AnalyticsItem = {
+  item_id: string
+  item_name: string
+  price?: number
+  quantity?: number
+  item_brand?: string
+  item_category?: string
+  item_variant?: string
+  index?: number
+  coupon?: string
+  discount?: number
+  location_id?: string
+  item_list_id?: string
+  item_list_name?: string
+}
 
-const GA_MEASUREMENT_ID =
-  process.env.GA_MEASUREMENT_ID || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
-const API_SECRET = process.env.GA_API_SECRET
+export type AnalyticsEvent = {
+  name: string
+  params?: Record<string, any>
+  ecommerce?: {
+    currency: CurrencyCode
+    value: number
+    transaction_id?: string
+    coupon?: string
+    shipping?: number
+    tax?: number
+    items: AnalyticsItem[]
+    customer_type?: 'new' | 'returning'
+  }
+}
 
+export type TrackingOverrides = {
+  clientId?: string | undefined
+  sessionId?: string | undefined
+  fbp?: string | undefined
+  fbc?: string | undefined
+  userId?: string | undefined
+  timestampMicros?: number | undefined
+  userData?: Record<string, any> | undefined
+  userProperties?: Record<string, any> | undefined
+  userAgent?: string | undefined
+  ipOverride?: string | undefined
+}
 export type TrackServerEventResult =
   | { ok: true; status: number }
   | {
@@ -16,6 +53,10 @@ export type TrackServerEventResult =
       status?: number
       details?: any
     }
+
+const GA_MEASUREMENT_ID =
+  process.env.GA_MEASUREMENT_ID || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
+const API_SECRET = process.env.GA_API_SECRET
 
 function parseClientIdFromGaCookie(gaCookie?: string) {
   if (!gaCookie) return undefined

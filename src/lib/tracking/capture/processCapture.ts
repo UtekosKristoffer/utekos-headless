@@ -1,3 +1,4 @@
+// Path: src/lib/tracking/capture/processCapture.ts
 import { prepareCaptureData } from '@/lib/tracking/capture/prepareCaptureData'
 import type {
   CaptureDependencies,

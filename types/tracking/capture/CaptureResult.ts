@@ -1,4 +1,4 @@
-// Path: 
+// Path: types/tracking/capture/CaptureResult.ts
 
 export type CaptureResult =
   | { success: true }

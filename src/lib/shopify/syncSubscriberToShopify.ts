@@ -1,3 +1,5 @@
+// Path: src/lib/shopify/syncSubscriberToShopify.ts
+
 export async function syncSubscriberToShopify(email: string) {
   const mutation = `
     mutation customerCreate($input: CustomerInput!) {

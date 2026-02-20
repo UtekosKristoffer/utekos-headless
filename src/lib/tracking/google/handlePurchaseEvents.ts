@@ -1,8 +1,21 @@
 // Path: src/lib/tracking/google/handlePurchaseEvents.ts
 import { trackServerEvent } from '@/lib/tracking/google/trackingServerEvent'
-import type { GoogleIds } from 'types/tracking/google/GoogleIds'
-import type { AnalyticsItem } from 'types/analytics/AnalyticsItem'
 import { normalizeUserData } from '@/lib/tracking/user-data/normalizeUserData'
+export type AnalyticsItem = {
+  item_id: string
+  item_name: string
+  price?: number
+  quantity?: number
+  item_brand?: string
+  item_category?: string
+  item_variant?: string
+  index?: number
+  coupon?: string
+  discount?: number
+  location_id?: string
+  item_list_id?: string
+  item_list_name?: string
+}
 
 export type PurchaseTrackResult =
   | { sent: true }
@@ -16,6 +29,11 @@ export type PurchaseTrackResult =
         | 'missing_credentials'
       details?: Record<string, any>
     }
+
+export type GoogleIds = {
+  clientId?: string | undefined
+  sessionId?: string | undefined
+}
 
 export async function handlePurchaseEvent(
   order: any,

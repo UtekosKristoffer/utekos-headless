@@ -85,7 +85,7 @@ export const metadata: Metadata = {
 export default function RootLayo({ children }: RootLayoutProps) {
   return (
     <html lang='no'>
-      <GoogleTagManager gtmId='GTM-5TWMJQFP' />
+      <GoogleTagManager gtmId='GTM-5TWMJQFP' gtmScriptUrl='/sporing/gtm.js' />
       <body
         className={`bg-background text-foreground ${geistSans.className} antialiased`}
       >

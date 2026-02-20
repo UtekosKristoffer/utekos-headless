@@ -1,5 +1,19 @@
-
-            "value": "Medium"
+{
+  "data": {
+    "products": [
+      {
+        "node": {
+          "id": "gid://shopify/ProductVariant/42903231005000",
+          "title": "Vargnatt / Medium / Unisex",
+          "currentlyNotInStock": false,
+          "selectedOptions": [
+            {
+              "name": "Farge",
+              "value": "Vargnatt"
+            },
+            {
+              "name": "Størrelse",
+              "value": "Medium"
             },
             {
               "name": "Kjønn",

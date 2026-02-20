@@ -1,3 +1,5 @@
+// Path: src/lib/middleware/config/ad-platforms.ts
+
 import type { AdPlatformConfig } from '@types'
 
 export const AD_PLATFORMS: AdPlatformConfig[] = [

@@ -1,7 +1,7 @@
 // Path: src/lib/tracking/proxy/extractMarketingParams.ts
-import type { GoogleMarketingParams } from 'types/tracking/google/GoogleMarketingParams'
 import { MARKETING_CONFIG } from '@/api/constants/monitoring'
 import { hashEmail } from '@/lib/tracking/hash/hashEmail'
+import type { GoogleMarketingParams } from 'types/tracking/google/GoogleMarketingParams'
 
 export function extractMarketingParams(
   searchParams: URLSearchParams
