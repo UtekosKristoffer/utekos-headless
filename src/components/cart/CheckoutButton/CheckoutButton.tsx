@@ -186,9 +186,13 @@ export const CheckoutButton = ({
   return (
     <Button
       onClick={() => {
+        const valueNum = Number.parseFloat(subtotalAmount || '0') || 0
+        const cleanItemIds = item_ids.map(id => cleanShopifyId(id) || id)
+
+        // 1. Vercel Analytics
         track('Vercel Analytics', {
           event: 'CheckoutButtonClick',
-          quantity: num_items | 1,
+          quantity: num_items || 1,
           value: subtotalAmount,
           currency: currency,
           cart_id: cartId || 'unknown',
@@ -197,10 +201,19 @@ export const CheckoutButton = ({
           event_name: 'CheckoutButtonClick',
           event_id: generateEventID()
         })
+
+        // 2. Google Analytics 4 (begin_checkout)
+        // Dette formatet plukkes automatisk opp av "Send Ecommerce data"-avkrysningen
+        // i GTM-taggen din!
         sendGTMEvent({
-          event: 'slow',
-          value: 'xyz',
-          event_category: 'engagement'
+          event: 'begin_checkout',
+          ecommerce: {
+            currency: currency,
+            value: valueNum,
+            items: cleanItemIds.map(id => ({
+              item_id: id
+            }))
+          }
         })
       }}
       asChild
