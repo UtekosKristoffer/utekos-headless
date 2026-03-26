@@ -49,3 +49,4 @@ next-env.d.ts
 .github
 /.githubnode_modules
 .next
+.env*.local

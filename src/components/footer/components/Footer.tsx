@@ -3,7 +3,6 @@ import { FooterNavigation } from '@/components/footer/components/FooterNavigatio
 import { PaymentMethods } from '@/components/footer/components/PaymentMethods'
 import { ConditionalNewsLetter } from '@/components/footer/components/ConditionalNewsletter'
 import { Activity } from 'react'
-import { FooterLogo } from '@/components/footer/components/FooterLogo' // Importer den nye komponenten
 
 export default function Footer() {
   return (

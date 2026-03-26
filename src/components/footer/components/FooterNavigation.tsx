@@ -1,15 +1,11 @@
 // Path: src/components/footer/FooterNavigation.tsx
-import { CertificationSmall } from '@/components/common/CertificationSmall'
 import CookieSettingsButton from '@/components/cookie-consent/CookieSettingsButton'
 import { footerConfig } from '@/db/config/footer.config'
 import Link from 'next/link'
 
 export function FooterNavigation() {
   return (
-    <div className='grid grid-cols-1 gap-8 md:grid-cols-5'>
-      <div className='flex justify-center md:justify-start'>
-        <CertificationSmall />
-      </div>
+    <div className='grid grid-cols-1 gap-8 md:grid-cols-4'>
       {footerConfig.map(section => (
         <div key={section.title}>
           <h3 className='mb-4 text-md font-semibold text-foreground-on-dark'>
