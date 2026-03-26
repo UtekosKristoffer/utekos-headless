@@ -1,25 +1,13 @@
-import { FlatCompat } from '@eslint/eslintrc'
+import { defineConfig, globalIgnores } from 'eslint/config'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTs from 'eslint-config-next/typescript'
+import prettier from 'eslint-config-prettier/flat'
 
-const compat = new FlatCompat({
-  baseDirectory: import.meta.dirname
-})
-
-const eslintConfig = [
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  prettier,
   {
-    ignores: ['docs/md-docs/**', 'docs/**/*.md']
-  },
-  ...compat.config({
-    env: {
-      browser: true,
-      es2024: true,
-      node: true
-    },
-    extends: ['next/core-web-vitals', 'prettier'],
-    parserOptions: {
-      ecmaVersion: 'latest',
-      project: ['./tsconfig.json'],
-      sourceType: 'module'
-    },
     rules: {
       'block-scoped-var': 'error',
       'comma-dangle': ['error', 'never'],
@@ -35,7 +23,15 @@ const eslintConfig = [
       'no-useless-assignment': 'error',
       'quotes': ['error', 'single']
     }
-  })
-]
+  },
+  globalIgnores([
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts',
+    'docs/md-docs/**',
+    'docs/**/*.md'
+  ])
+])
 
 export default eslintConfig

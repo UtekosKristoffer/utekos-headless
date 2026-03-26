@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--use-system-ca' next dev",
     "backfill:meta": "tsx src/scripts/backfillMetaPurchasesFromShopify.ts",
     "build": "next build",
     "start": "next start",
@@ -103,7 +103,7 @@
     "cross-env": "^10.1.0",
     "dotenv": "^17.2.1",
     "eslint": "^9.18.0",
-    "eslint-config-next": "^15.5.0",
+    "eslint-config-next": "^16.2.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "graphql-tag": "^2.12.6",
