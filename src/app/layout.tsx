@@ -11,6 +11,10 @@ import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { GoogleTagManager } from '@next/third-parties/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { CartProviderLoader } from '@/components/providers/CartProviderLoader'
+import {
+  BrandArmorScript,
+  BRAND_ARMOR_COMPANY_ID
+} from '@/components/analytics/BrandArmorScript'
 import { CookieConsentBanner } from '@/components/CookieBanner'
 import { ClickTracker } from '@/components/analytics/ClickTracker'
 import type { RootLayoutProps } from '@types'
@@ -77,12 +81,13 @@ export const metadata: Metadata = {
     google: 'G2CuMG6i_BKaNpqVN9N_SS2rvFxXWUOwydpZH0hp2NM',
     other: {
       'facebook-domain-verification': 'e3q80hk1igl2celczeysvf7y1mltrs',
-      'p:domain_verify': 'b34f9dce9b34f18d3b3c8852ff7a8497'
+      'p:domain_verify': 'b34f9dce9b34f18d3b3c8852ff7a8497',
+      'BrandArmorAIConfig': '69d1eae4f30f6cdbe9580bb'
     }
   }
 }
 
-export default function RootLayo({ children }: RootLayoutProps) {
+export default function RootLayot({ children }: RootLayoutProps) {
   return (
     <html lang='no'>
       <GoogleTagManager gtmId='GTM-5TWMJQFP' gtmScriptUrl='/sporing/gtm.js' />
@@ -98,6 +103,7 @@ export default function RootLayo({ children }: RootLayoutProps) {
             <main>
               {children}
               <SpeedInsights />
+              <BrandArmorScript companyId={BRAND_ARMOR_COMPANY_ID} />
               <Analytics mode='production' />
               <ChatBotAgent />
             </main>
