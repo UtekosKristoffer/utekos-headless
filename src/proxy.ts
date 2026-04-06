@@ -13,15 +13,21 @@ import { formatCookieHeader } from './lib/tracking/proxy/formatCookieHeader'
 import { hashEmail } from './lib/tracking/hash/hashEmail'
 import { formatFbcCookie } from './lib/tracking/proxy/formatFbcCookie'
 
+const SGTM_TAGGING_SERVER_ORIGIN = (
+  process.env.SGTM_TAGGING_SERVER_ORIGIN ||
+  'https://gtm-server-63040510375.europe-west1.run.app'
+).replace(/\/$/, '')
+
 export async function proxy(request: NextRequest) {
   const context = createMiddlewareContext(request)
+
   if (context.isBlockedAgent) {
     return new NextResponse(null, { status: 403, statusText: 'Forbidden' })
   }
-  if (context.pathname.startsWith('/sporing')) {
-    const pathWithoutPrefix = context.pathname.replace(/^\/sporing/, '')
 
-    const sgtmUrl = new URL(pathWithoutPrefix, 'https://sgtm.utekos.no')
+  if (context.pathname.startsWith('/sporing')) {
+    const pathWithoutPrefix = context.pathname.replace(/^\/sporing/, '') || '/'
+    const sgtmUrl = new URL(pathWithoutPrefix, SGTM_TAGGING_SERVER_ORIGIN)
     sgtmUrl.search = request.nextUrl.search
 
     return NextResponse.rewrite(sgtmUrl)
@@ -45,6 +51,7 @@ export const config = {
     '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|videos|apple-icon|icon|manifest).*)'
   ]
 }
+
 export {
   handleMarketingParams,
   extractMarketingParams,

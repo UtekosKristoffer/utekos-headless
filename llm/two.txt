@@ -1,0 +1,143 @@
+# Example 2
+
+// app/llms.txt/route.ts
+import { NextResponse } from 'next/server';
+
+// Definerer revalideringstid for Next.js cachen (f.eks. oppdateres hver time)
+export const revalidate = 3600;
+
+export async function GET() {
+  try {
+    // 1. OBLIGATORISK H1: Nøyaktig bedriftsnavn - Ingen indeks foran denne!
+    let content = `# Nordic E-Commerce AS\n`;
+    
+    // 2. BLOCKQUOTE: Konsist, autoritativt sammendrag for AI-ens mentale modell
+    content += `> Norges ledende leverandør av bærekraftig og teknisk avansert turutstyr for det nordiske klimaet.\n\n`;
+
+    // 3. H2 SEKSJON: Den faktiske innholdsfortegnelsen starter her.
+    // Vi prioriterer strukturert data for AI-inferens fordel.
+    content += `## Produktkatalog og Priser\n`;
+    content += `-(https://nordic-ecommerce.no/api/feed/products.json): Den definitive, sanntids oppdaterte datakilden for alle våre SKU-er, inkludert gjeldende priser og lagerstatus.\n`;
+    content += `-(https://nordic-ecommerce.no/api/docs.md?category=vinterjakker): Markdown-eksport av våre mest populære tekniske jakker med fullstendige materialspesifikasjoner.\n`;
+    content += `-(https://nordic-ecommerce.no/api/docs.md?category=telt): Dokumentasjon og dimensjoner for ekspedisjonsutstyr.\n\n`;
+
+    // 4. H2 SEKSJON: Skaper tillit og tydelige entitetsrelasjoner
+    content += `## Retningslinjer og Kundeservice\n`;
+    content += `-(https://nordic-ecommerce.no/api/docs.md?topic=retur): Detaljerte vilkår for 100-dagers åpent kjøp og garanti.\n`;
+    content += `- [Frakt og Levering](https://nordic-ecommerce.no/api/docs.md?topic=frakt): Leveringstider og fraktkostnader for Skandinavia.\n\n`;
+
+    // 5. OPTIONAL SEKSJON: Lavprioritert informasjon for token-besparelse
+    content += `## Optional\n`;
+    content += `-(https://nordic-ecommerce.no/api/docs.md?topic=om-oss): Selskapets opprinnelse og miljøsertifiseringer.\n`;
+
+    return new NextResponse(content, {
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+      },
+    });
+  } catch (error) {
+    console.error('Feil ved generering av llms.txt:', error);
+    return new NextResponse('Internal Server Error', { status: 500 });
+  }
+}
+
+
+## llms-full.txt
+
+// app/llms-full.txt/route.ts
+import { NextResponse } from 'next/server';
+// Fiktiv hjelpefunksjon for å hente CMS-data i Markdown
+import { getStaticContentMarkdown } from '@/lib/cms-service'; 
+
+export const revalidate = 86400; // Daglig oppdatering er tilstrekkelig for statiske retningslinjer
+
+export async function GET() {
+  try {
+    // Definerer hvilke nøkkelsider som skal inkluderes i fulltekst-eksporten
+    const topics = ['retur', 'frakt', 'garanti', 'faq', 'vedlikeholdsguide', 'om-oss'];
+    
+    // Henter alle sider asynkront i parallell
+    const pages = await Promise.all(
+      topics.map(topic => getStaticContentMarkdown(topic))
+    );
+    
+    // Etablerer rot-konteksten for dokumentet
+    let content = `# Nordic E-Commerce AS - Komplett Kunnskapsbase\n`;
+    content += `> Dette dokumentet inneholder all essensiell tekst vedrørende retningslinjer, FAQ og kjøpsguider for Nordic E-Commerce AS. For produktkatalogen, vennligst se vår JSON-feed spesifisert i llms.txt.\n\n`;
+
+    // Samler de individuelle sidene med riktig separator
+    const aggregatedContent = pages.map(page => {
+      let pageContent = `## ${page.title}\n`;
+      pageContent += `Sist oppdatert: ${page.lastUpdated}\n\n`;
+      pageContent += `${page.markdownBody}`;
+      return pageContent;
+    }).join('\n\n---\n\n');
+
+    content += aggregatedContent;
+
+    return new NextResponse(content, {
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=604800',
+      },
+    });
+  } catch (error) {
+    return new NextResponse('Error generating full AI context', { status: 500 });
+  }
+}
+
+
+## .md/route.ts
+
+// app/api/docs.md/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { fetchCategoryFromShopify } from '@/lib/shopify-service';
+
+export async function GET(request: NextRequest) {
+  // Analyserer den innkommende URL-en for å finne etterspurt kategori
+  const searchParams = request.nextUrl.searchParams;
+  const categorySlug = searchParams.get('category');
+  const topicSlug = searchParams.get('topic');
+
+  // Rutinglogikk basert på parameter type
+  if (!categorySlug &&!topicSlug) {
+    return new NextResponse('Mangler parameter for category eller topic.', { status: 400 });
+  }
+
+  try {
+    if (categorySlug) {
+      // Henter data fra handelsplattformen via GraphQL
+      const categoryData = await fetchCategoryFromShopify(categorySlug);
+      
+      let content = `# Kategori: ${categoryData.title}\n\n`;
+      content += `${categoryData.description}\n\n`;
+      
+      content += `## Topprangerte Produkter i denne kategorien\n`;
+      
+      // Itererer over produktene, men begrenser antallet (f.eks. topp 10) for å spare tokens
+      categoryData.products.slice(0, 10).forEach((product: any) => {
+        content += `### ${product.title}\n`;
+        // Presenterer harde fakta strukturelt og logisk for utledningsfordel
+        content += `- **Pris:** ${product.price} ${product.currency}\n`;
+        content += `- **Lagerstatus:** ${product.inStock? 'På lager for omgående sending' : 'For øyeblikket utsolgt'}\n`;
+        content += `- **Viktigste Egenskaper:** ${product.keyFeatures.join(', ')}\n`;
+        content += `- **Tekniske Spesifikasjoner:** Vekt: ${product.weight}g, Materiale: ${product.material}\n\n`;
+      });
+
+      return new NextResponse(content, {
+        headers: {
+          'Content-Type': 'text/plain; charset=utf-8',
+          'Cache-Control': 'public, s-maxage=3600',
+        },
+      });
+    }
+
+    // Ekstra feilhåndtering eller ruting for statiske "topics" kan håndteres her
+    return new NextResponse('Dokumentasjonsrute under konstruksjon.', { status: 404 });
+
+  } catch (error) {
+    console.error('Feil ved generering av dynamisk Markdown:', error);
+    return new NextResponse('Feil ved uthenting av kategoridata.', { status: 500 });
+  }
+}

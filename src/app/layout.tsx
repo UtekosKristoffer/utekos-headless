@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   applicationName: 'Utekos',
   category: 'Yttertøy',
-  manifest: '/manifest.json',
+  manifest: '/manifest.webmanifest',
   authors: [{ name: 'Utekos', url: 'https://utekos.no' }],
   creator: 'Utekos',
   publisher: 'Utekos',
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
 export default function RootLayot({ children }: { children: ReactNode }) {
   return (
     <html lang='no'>
-      <GoogleTagManager gtmId='GTM-5TWMJQFP' />
+      <GoogleTagManager gtmId='GTM-5TWMJQFP' gtmScriptUrl='/sporing/gtm.js' />
       <body
         className={`bg-background text-foreground ${geistSans.className} antialiased`}
       >

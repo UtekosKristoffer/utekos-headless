@@ -16,8 +16,10 @@ import { getCachedRelatedProducts } from '@/api/lib/products/getCachedRelatedPro
 import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
 import { flattenVariants } from '@/lib/utils/flattenVariants'
 import { computeVariantImages } from '@/lib/utils/computeVariantImages'
-import { ProductPageSkeleton } from './components/ProductPageSkeleton' // Antar denne importen
-import { cacheLife, cacheTag } from 'next/cache' // Viktig import
+import { ProductPageSkeleton } from './components/ProductPageSkeleton'
+import { cacheLife, cacheTag } from 'next/cache'
+
+const SITE_URL = 'https://utekos.no'
 
 type RouteParamsPromise = Promise<{ handle: string }>
 type SearchParamsPromise = Promise<{
@@ -63,10 +65,7 @@ export async function generateMetadata(
     : product.seo.title || product.title
 
   const seoDescription = product.seo.description || product.description
-
-  const canonicalUrl = `/produkter/${handle}${
-    activeVariant ? `?variant=${activeVariant.id}` : ''
-  }`
+  const canonicalUrl = `/produkter/${handle}`
 
   const selectedVariant =
     activeVariant ?? product.selectedOrFirstAvailableVariant
@@ -85,18 +84,21 @@ export async function generateMetadata(
   if (itemGroupId) other['product:item_group_id'] = itemGroupId
   if (priceAmount != null) other['product:price:amount'] = String(priceAmount)
   if (currencyCode) other['product:price:currency'] = currencyCode
-  if (selectedVariant?.compareAtPrice?.amount)
+  if (selectedVariant?.compareAtPrice?.amount) {
     other['product:variant:compare_at_price'] =
       selectedVariant.compareAtPrice.amount
+  }
 
   other['product:availability'] = isOutOfStock ? 'out of stock' : 'in stock'
   other['product:condition'] = 'new'
 
   return {
-    metadataBase: new URL('https://utekos.no'),
+    metadataBase: new URL(SITE_URL),
     title: seoTitle,
     description: seoDescription,
-    alternates: { canonical: canonicalUrl },
+    alternates: {
+      canonical: canonicalUrl
+    },
     openGraph: {
       type: 'website',
       locale: 'no_NO',
@@ -104,7 +106,14 @@ export async function generateMetadata(
       siteName: 'Utekos',
       title: seoTitle,
       description: seoDescription,
-      images: [{ url: displayImage, width: 1200, height: 630, alt: seoTitle }]
+      images: [
+        {
+          url: displayImage,
+          width: 1200,
+          height: 630,
+          alt: seoTitle
+        }
+      ]
     },
     twitter: {
       card: 'summary_large_image',
@@ -118,7 +127,7 @@ export async function generateMetadata(
 
 async function AsyncProductContent({ handle }: { handle: string }) {
   'use cache'
-  cacheTag(`product-${handle}`, 'products') // Invalideres ved produktoppdatering
+  cacheTag(`product-${handle}`, 'products')
   cacheLife('hours')
 
   const queryClient = new QueryClient()
@@ -129,10 +138,12 @@ async function AsyncProductContent({ handle }: { handle: string }) {
   }
 
   const relatedProducts = await getCachedRelatedProducts(handle)
+
   await queryClient.prefetchQuery({
     ...productOptions(handle),
     queryFn: () => product
   })
+
   await queryClient.prefetchQuery(allProductsOptions())
 
   return (
