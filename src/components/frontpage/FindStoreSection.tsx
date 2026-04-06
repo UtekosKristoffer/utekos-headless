@@ -24,6 +24,7 @@ export function FindInStoreSection() {
                 width={250}
                 height={70}
                 className='h-auto w-full max-w-[250px]'
+                style={{ height: 'auto' }}
               />
             </div>
 

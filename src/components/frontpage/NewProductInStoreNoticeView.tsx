@@ -68,6 +68,7 @@ export function NewProductInStoreNoticeView({
                   width={120}
                   height={34}
                   className='h-auto w-full max-w-[120px]'
+                  style={{ height: 'auto' }}
                   priority
                 />
               </div>

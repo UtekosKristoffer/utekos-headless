@@ -1,19 +1,14 @@
-// Path: src/app/FrontPageJsonLd.tsx
-
 import type {
   WebSite,
   VideoObject,
   WithContext,
-  SiteNavigationElement
+  SiteNavigationElement,
+  Offer
 } from 'schema-dts'
 import { cacheLife } from 'next/cache'
-import {
-  VIDEO_URL,
-  VIDEO_THUMBNAIL_URL,
-  VIDEO_EMBED_URL
-} from '@/api/constants'
+import { VIDEO_THUMBNAIL_URL, VIDEO_EMBED_URL } from '@/api/constants'
 
-export async function FrontPageJsonLd() {
+export async function WebSiteSchemaJsonLd() {
   'use cache'
   cacheLife('days')
 
@@ -22,6 +17,11 @@ export async function FrontPageJsonLd() {
     '@type': 'WebSite',
     'name': 'Utekos',
     'url': 'https://utekos.no',
+    'sameAs': [
+      'https://www.wikidata.org/wiki/Q138904544',
+      'https://www.facebook.com/utekosen',
+      'https://www.instagram.com/utekos.no'
+    ],
     'potentialAction': {
       '@type': 'SearchAction',
       'target': {
@@ -31,8 +31,16 @@ export async function FrontPageJsonLd() {
       'query': 'required'
     },
     'publisher': {
-      '@id': 'https://utekos.no/#organization'
-    }
+      '@id': 'https://utekos.no/#organization',
+      'sameAs': [
+        'https://www.wikidata.org/wiki/Q138904544',
+        'https://www.facebook.com/utekosen',
+        'https://www.instagram.com/utekos.no'
+      ]
+    },
+    'description': 'Utekos - Skreddersy varmen',
+    'inLanguage': 'no',
+    'dateModified': new Date().toISOString()
   }
 
   const navigationSchema: WithContext<SiteNavigationElement> = {
@@ -52,6 +60,11 @@ export async function FrontPageJsonLd() {
       'https://utekos.no/produkter/comfyrobe',
       'https://utekos.no/kontaktskjema'
     ]
+  }
+
+  const offerSchema: WithContext<Offer> = {
+    '@context': 'https://schema.org',
+    '@type': 'Offer'
   }
 
   const videoSchema: WithContext<VideoObject> = {

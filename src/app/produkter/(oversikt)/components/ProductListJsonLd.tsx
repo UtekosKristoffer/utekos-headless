@@ -37,7 +37,6 @@ export async function ProductListJsonLd() {
         '@type': 'ListItem',
         'position': index + 1,
         'url': `https://utekos.no/produkter/${product.handle}`,
-        // https://utekos.no/og-kate-linn-kikkert-master.png'
         'name': product.title,
         ...(product.featuredImage?.url ?
           { image: product.featuredImage.url }

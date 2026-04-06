@@ -152,6 +152,7 @@ export function IntersportSection() {
                     width={280}
                     height={80}
                     className='h-auto w-full max-w-[240px] md:max-w-[280px]'
+                    style={{ height: 'auto' }}
                     priority
                   />
                 </div>

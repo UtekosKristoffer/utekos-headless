@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { Suspense, Activity } from 'react'
 import { NewProductInStoreNotice } from '@/components/frontpage/NewProductInStoreNotice'
 import { ProductVideoSection } from '@/app/produkter/(oversikt)/components/ProductVideoSection'
 import { HeroSection } from '@/components/frontpage/components/HeroSection/HeroSection'
@@ -8,8 +8,7 @@ import { CachedPromiseSection } from '@/components/frontpage/components/CachedPr
 import { QualitySection } from '@/components/frontpage/QualitySection'
 import { SocialProofSection } from '@/components/frontpage/SocialProofSection'
 import { TestimonialConstellation } from '@/components/frontpage/TestimonialConstellation'
-import { ComfyrobeSection } from '../components/frontpage/components/SpecialOfferSection/ComfyrobeSection'
-import { Activity } from 'react'
+import { ComfyrobeSection } from '@/components/frontpage/components/SpecialOfferSection/ComfyrobeSection'
 import { FeaturedProductsSkeleton } from '@/components/skeletons/FeaturedProductsSkeleton'
 import TechTeaserSection from '@/components/frontpage/components/TechTeaserSection'
 import { AsyncProductLaunchWrapper } from '@/components/frontpage/AsyncProductLaunchWrapper'
@@ -18,48 +17,44 @@ import { FrontpageIceBathingSection } from '@/components/frontpage/FrontpageIceb
 
 const HomePage = () => {
   return (
-    <>
-      <section>
-        <HeroSection />
+    <section>
+      <HeroSection />
 
-        <Activity>
-          <Suspense fallback={null}>
-            <AsyncProductLaunchWrapper />
-          </Suspense>
-        </Activity>
+      <Activity>
+        <Suspense fallback={null}>
+          <AsyncProductLaunchWrapper />
+        </Suspense>
+      </Activity>
 
-        <NewProductInStoreNotice />
-        <Activity>
-          <ProductVideoSection />
-        </Activity>
+      <NewProductInStoreNotice />
 
-        <FrontpageIceBathingSection />
+      <Activity>
+        <ProductVideoSection />
+      </Activity>
 
-        <Activity>
-          <Suspense fallback={<FeaturedProductsSkeleton />}>
-            <FeaturedProductsSection />
-          </Suspense>
-        </Activity>
-        <Activity>
-          <SocialProofSection />
-        </Activity>
-        <ComfyrobeSection />
+      <FrontpageIceBathingSection />
 
-        <NewStandardSection />
+      <Activity>
+        <Suspense fallback={<FeaturedProductsSkeleton />}>
+          <FeaturedProductsSection />
+        </Suspense>
+      </Activity>
 
-        <CachedPromiseSection />
+      <Activity>
+        <SocialProofSection />
+      </Activity>
 
-        <MomentsSection />
+      <ComfyrobeSection />
+      <NewStandardSection />
+      <CachedPromiseSection />
+      <MomentsSection />
+      <QualitySection />
+      <TechTeaserSection />
 
-        <QualitySection />
-
-        <TechTeaserSection />
-
-        <Activity>
-          <TestimonialConstellation />
-        </Activity>
-      </section>
-    </>
+      <Activity>
+        <TestimonialConstellation />
+      </Activity>
+    </section>
   )
 }
 

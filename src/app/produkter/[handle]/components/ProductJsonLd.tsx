@@ -1,28 +1,42 @@
-// Path: src/app/ProductJsonLd.tsx
-
 import { getProduct } from '@/api/lib/products/getProduct'
 import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
 import { computeVariantImages } from '@/lib/utils/computeVariantImages'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
+import { productReviewBundles } from '@/db/data/reviews/productReviews'
 import { cacheLife, cacheTag } from 'next/cache'
 import type {
-  ProductGroup,
-  Product as ProductSchema,
-  WithContext,
-  Offer,
+  AggregateRating,
   MerchantReturnPolicy,
+  Offer,
   OfferShippingDetails,
-  UnitPriceSpecification
+  Product as ProductSchema,
+  ProductGroup,
+  Review,
+  UnitPriceSpecification,
+  WithContext
 } from 'schema-dts'
 
 type Props = {
   handle: string
 }
 
+type ProductJsonLdShape = WithContext<ProductSchema | ProductGroup> & {
+  aggregateRating?: AggregateRating
+  review?: Review[]
+}
+
+const SITE_URL = 'https://utekos.no'
+const ORGANIZATION_ID = `${SITE_URL}/#organization`
+
 const mapAvailability = (availableForSale: boolean) =>
   availableForSale ?
     'https://schema.org/InStock'
   : 'https://schema.org/OutOfStock'
+
+const sanitizeText = (value?: string | null) => {
+  if (!value) return ''
+  return value.replace(/\s+/g, ' ').trim()
+}
 
 const getShippingDetails = (): OfferShippingDetails => {
   return {
@@ -54,8 +68,60 @@ const getShippingDetails = (): OfferShippingDetails => {
   }
 }
 
+const getReviewMarkup = (
+  handle: string
+): Pick<ProductJsonLdShape, 'aggregateRating' | 'review'> => {
+  const bundle = productReviewBundles[handle]
+  if (!bundle) return {}
+
+  const aggregateRating: AggregateRating = {
+    '@type': 'AggregateRating',
+    'ratingValue': bundle.aggregateRating.ratingValue,
+    'reviewCount': bundle.aggregateRating.reviewCount,
+    'ratingCount': bundle.aggregateRating.ratingCount,
+    'bestRating': bundle.aggregateRating.bestRating,
+    'worstRating': bundle.aggregateRating.worstRating
+  }
+
+  const review: Review[] = bundle.reviews
+    .filter(item => sanitizeText(item.reviewBody).length > 0)
+    .map(item => ({
+      '@type': 'Review',
+      'author': {
+        '@type': 'Person',
+        'name': sanitizeText(item.author) || 'Verifisert kunde'
+      },
+      'publisher': {
+        '@id': ORGANIZATION_ID,
+        'sameAs': [
+          'https://www.facebook.com/utekosen',
+          'https://www.instagram.com/utekos.no',
+          'https://www.wikidata.org/wiki/Q138904544'
+        ]
+      },
+      'datePublished': item.datePublished,
+      'reviewBody': sanitizeText(item.reviewBody),
+      'reviewRating': {
+        '@type': 'Rating',
+        'ratingValue': item.ratingValue,
+        'bestRating': 5,
+        'worstRating': 4
+      }
+    }))
+
+  if (review.length === 0) {
+    return { aggregateRating }
+  }
+
+  return { aggregateRating, review }
+}
+
+const serializeJsonLd = (jsonLd: ProductJsonLdShape) =>
+  JSON.stringify(jsonLd).replace(/</g, '\\u003c')
+
 export async function ProductJsonLd({ handle }: Props) {
   'use cache'
+
   cacheLife('max')
   cacheTag(`product-${handle}`, 'products')
 
@@ -70,6 +136,7 @@ export async function ProductJsonLd({ handle }: Props) {
     .toISOString()
     .slice(0, 10)
 
+  const productUrl = `${SITE_URL}/produkter/${product.handle}`
   const variants = product.variants.edges
   const isProductGroup = variants.length > 0
 
@@ -85,15 +152,12 @@ export async function ProductJsonLd({ handle }: Props) {
     'returnMethod': 'https://schema.org/ReturnByMail',
     'returnFees': 'https://schema.org/FreeReturn',
     'refundType': 'https://schema.org/FullRefund',
-    'url': 'https://utekos.no/frakt-og-retur'
+    'url': `${SITE_URL}/frakt-og-retur`
   }
 
-  // Sikrer at brand name aldri er tomt
-  const brandName = (product.vendor && product.vendor.trim()) || 'Utekos®'
-
-  // Sikrer at description aldri er tom
-  const mainDescription =
-    (product.description && product.description.trim()) || product.title
+  const brandName = sanitizeText(product.vendor) || 'Utekos®'
+  const mainDescription = sanitizeText(product.description) || product.title
+  const reviewMarkup = getReviewMarkup(product.handle)
 
   const commonData = {
     name: product.title,
@@ -106,19 +170,21 @@ export async function ProductJsonLd({ handle }: Props) {
   } as const
 
   const sellerReference = {
-    '@id': 'https://utekos.no/#organization'
+    '@id': ORGANIZATION_ID
   } as const
 
-  let jsonLd: WithContext<ProductSchema | ProductGroup>
+  let jsonLd: ProductJsonLdShape
   const cleanGroupId = cleanShopifyId(product.id)
 
   if (isProductGroup) {
     jsonLd = {
       '@context': 'https://schema.org',
       '@type': 'ProductGroup',
+      '@id': `${productUrl}#product-group`,
       ...commonData,
+      ...reviewMarkup,
       ...(cleanGroupId ? { productGroupID: cleanGroupId } : {}),
-      'url': `https://utekos.no/produkter/${product.handle}`,
+      'url': productUrl,
       'hasVariant': variants.map(({ node: variant }): ProductSchema => {
         const variantImages = computeVariantImages(product, variant)
         const variantImage = variantImages[0]?.url || featuredImage
@@ -149,22 +215,26 @@ export async function ProductJsonLd({ handle }: Props) {
 
         const offer: Offer = {
           '@type': 'Offer',
-          'url': `https://utekos.no/produkter/${product.handle}?variant=${encodeURIComponent(variant.id)}`,
+          'url': `${productUrl}?variant=${encodeURIComponent(variant.id)}`,
           'priceCurrency': variant.price?.currencyCode || 'NOK',
           'availability': mapAvailability(variant.availableForSale),
-          'priceValidUntil': priceValidUntil,
+          priceValidUntil,
           'seller': sellerReference,
           'itemCondition': 'https://schema.org/NewCondition',
           'hasMerchantReturnPolicy': merchantReturnPolicy,
-          'shippingDetails': shippingDetails,
+          shippingDetails,
           ...(variantPrice ? { price: variantPrice } : {}),
           ...(priceSpec ? { priceSpecification: priceSpec } : {})
         }
 
         return {
           '@type': 'Product',
+          '@id': `${productUrl}#variant-${cleanVariantId || encodeURIComponent(variant.id)}`,
           ...(cleanVariantId ? { productID: cleanVariantId } : {}),
-          'name': `${product.title} - ${variant.title}`,
+          'name':
+            variant.title && variant.title !== 'Default Title' ?
+              `${product.title} - ${variant.title}`
+            : product.title,
           'brand': commonData.brand,
           'description': variantDescription,
           ...(variant.sku ? { sku: variant.sku } : {}),
@@ -198,14 +268,14 @@ export async function ProductJsonLd({ handle }: Props) {
 
     const offer: Offer = {
       '@type': 'Offer',
-      'url': `https://utekos.no/produkter/${product.handle}`,
+      'url': productUrl,
       'priceCurrency': firstVariant?.price?.currencyCode || 'NOK',
       'availability': mapAvailability(product.availableForSale),
-      'priceValidUntil': priceValidUntil,
+      priceValidUntil,
       'seller': sellerReference,
       'itemCondition': 'https://schema.org/NewCondition',
       'hasMerchantReturnPolicy': merchantReturnPolicy,
-      'shippingDetails': shippingDetails,
+      shippingDetails,
       ...(variantPrice ? { price: variantPrice } : {}),
       ...(priceSpec ? { priceSpecification: priceSpec } : {})
     }
@@ -213,9 +283,12 @@ export async function ProductJsonLd({ handle }: Props) {
     jsonLd = {
       '@context': 'https://schema.org',
       '@type': 'Product',
-      ...commonData, // Inkluderer brand og description
+      '@id': `${productUrl}#product`,
+      ...commonData,
+      ...reviewMarkup,
       ...(cleanVariantId ? { productID: cleanVariantId } : {}),
       ...(firstVariant?.sku ? { sku: firstVariant.sku } : {}),
+      'url': productUrl,
       'offers': offer
     }
   }
@@ -224,7 +297,7 @@ export async function ProductJsonLd({ handle }: Props) {
     <script
       type='application/ld+json'
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c')
+        __html: serializeJsonLd(jsonLd)
       }}
     />
   )

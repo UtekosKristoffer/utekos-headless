@@ -52,7 +52,7 @@ export async function TechJsonLd() {
             'acceptedAnswer': {
               '@type': 'Answer',
               'text':
-                'TechDown™ er vår avanserte syntetiske isolasjon. Den etterligner dunets varmeeffekt og lette vekt, men er hydrofobisk, noe som betyr at den beholder isolasjonsevnen selv under fuktige forhold.'
+                'TechDown™ er vår nyeste og mest allside produkt. Den etterligner dunets varmeeffekt og lette vekt, men er hydrofobisk, noe som betyr at den beholder isolasjonsevnen selv under fuktige forhold.'
             }
           },
           {

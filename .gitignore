@@ -12,6 +12,12 @@
 !.yarn/releases
 !.yarn/versions
 
+# .agents
+.agents/
+
+# mcp config (may contain local secrets/tokens)
+mcp.json
+
 # testing
 /coverage
 
@@ -44,6 +50,9 @@ next-env.d.ts
 
 # docs
 /md-docs
+/in
+/copilot-instructions
+/gemini-status
 
 # github
 .github

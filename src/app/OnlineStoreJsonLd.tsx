@@ -13,7 +13,9 @@ export async function OnlineStoreJsonLd() {
     '@id': 'https://utekos.no/#organization',
     'name': 'Utekos',
     'legalName': 'Kelc As',
+    'sameAs': 'https://www.wikidata.org/wiki/Q138905787',
     'url': 'https://utekos.no',
+    'brand': 'Utekos',
     'logo': 'https://utekos.no/logo.png',
     'image': 'https://utekos.no/og-image-produkter.png',
     'description': 'Utekos - Skreddersy varmen',
@@ -42,10 +44,7 @@ export async function OnlineStoreJsonLd() {
       'areaServed': 'NO',
       'availableLanguage': 'no'
     },
-    'sameAs': [
-      'https://www.facebook.com/utekosen',
-      'https://www.instagram.com/utekos.no'
-    ],
+
     'makesOffer': {
       '@type': 'Offer',
       'shippingDetails': {
@@ -68,8 +67,6 @@ export async function OnlineStoreJsonLd() {
         'https://schema.org/MerchantReturnFiniteReturnWindow',
       'merchantReturnDays': 14,
       'returnMethod': 'https://schema.org/ReturnByMail',
-      'returnFees': 'https://schema.org/FreeReturn',
-      'refundType': 'https://schema.org/FullRefund',
       'url': 'https://utekos.no/frakt-og-retur'
     }
   }
