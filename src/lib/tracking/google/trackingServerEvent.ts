@@ -1,9 +1,8 @@
-// Path: src/lib/tracking/google/trackingServerEvent.ts
 import 'server-only'
 import { cookies } from 'next/headers'
 import type { CurrencyCode } from 'types/commerce/CurrencyCode'
 import { parseClientIdFromGaCookie } from './parseClientIdFromGaCookie'
-import { parseSessionIdFromGaContainerCookie } from './parseSessionIdFromGaContainerCookie'
+
 export type AnalyticsItem = {
   item_id: string
   item_name: string
@@ -46,7 +45,9 @@ export type TrackingOverrides = {
   userProperties?: Record<string, any> | undefined
   userAgent?: string | undefined
   ipOverride?: string | undefined
+  debugMode?: boolean | undefined
 }
+
 export type TrackServerEventResult =
   | { ok: true; status: number }
   | {
@@ -58,59 +59,99 @@ export type TrackServerEventResult =
 
 const GA_MEASUREMENT_ID =
   process.env.GA_MEASUREMENT_ID || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
-const API_SECRET = process.env.GA_API_SECRET
+
+const GA_API_SECRET = process.env.GA_API_SECRET
+
+const GA_SERVER_CONTAINER_URL = (
+  process.env.GA_SERVER_CONTAINER_URL ||
+  process.env.NEXT_PUBLIC_GA_SERVER_CONTAINER_URL ||
+  'https://utekos.no/sporing'
+).replace(/\/$/, '')
+
+function toNumericSessionId(input?: string): number | undefined {
+  if (!input) return undefined
+
+  const raw = String(input).trim()
+  if (!raw) return undefined
+
+  const direct = Number(raw)
+  if (Number.isFinite(direct)) {
+    return direct
+  }
+
+  const normalized = raw.replace(/^GS\d+\.\d+\./, '')
+  const tokens = normalized.split(/[.$]/)
+
+  for (const token of tokens) {
+    const match = token.match(/^s?(\d{6,})$/)
+    if (match?.[1]) {
+      const parsed = Number(match[1])
+      if (Number.isFinite(parsed)) {
+        return parsed
+      }
+    }
+  }
+
+  const embedded = normalized.match(/(?:^|[.$])s?(\d{6,})/)
+  if (embedded?.[1]) {
+    const parsed = Number(embedded[1])
+    if (Number.isFinite(parsed)) {
+      return parsed
+    }
+  }
+
+  return undefined
+}
+
+function toGaUserProperties(
+  userProperties?: Record<string, unknown>
+): Record<string, { value: string | number | boolean }> | undefined {
+  if (!userProperties) return undefined
+
+  const entries = Object.entries(userProperties).flatMap(([key, value]) => {
+    if (value === undefined || value === null || value === '') return []
+
+    if (
+      typeof value !== 'string'
+      && typeof value !== 'number'
+      && typeof value !== 'boolean'
+    ) {
+      return []
+    }
+
+    return [[key, { value }]]
+  })
+
+  return entries.length ? Object.fromEntries(entries) : undefined
+}
 
 export async function trackServerEvent(
   event: AnalyticsEvent,
   overrides?: TrackingOverrides
 ): Promise<TrackServerEventResult> {
-  if (!GA_MEASUREMENT_ID || !API_SECRET) {
+  if (!GA_MEASUREMENT_ID || !GA_API_SECRET || !GA_SERVER_CONTAINER_URL) {
     return { ok: false, reason: 'missing_credentials' }
   }
 
   try {
     let clientId: string | undefined = overrides?.clientId
-    let sessionId: number | undefined = undefined
-
-    // Sikker parsing av Session ID for å forhindre "NaN"
-    if (overrides?.sessionId) {
-      const sidStr = String(overrides.sessionId)
-
-      if (sidStr.includes('$') || sidStr.startsWith('s')) {
-        // Nytt GA4 cookie-format: s1766430637$o1$g0...
-        const match = sidStr.match(/^s(\d+)/)
-        if (match && match[1]) {
-          sessionId = Number(match[1])
-        }
-      } else if (sidStr.includes('.')) {
-        // Gammelt GA4 cookie-format: GS1.1.1766430637.1.0.0
-        const parts = sidStr.split('.')
-        if (parts.length >= 3 && !isNaN(Number(parts[2]))) {
-          sessionId = Number(parts[2])
-        }
-      } else {
-        // Allerede kun tall
-        const parsed = Number(sidStr)
-        if (!isNaN(parsed)) {
-          sessionId = parsed
-        }
-      }
-    }
-
+    let sessionId: number | undefined = toNumericSessionId(overrides?.sessionId)
     const userAgent = overrides?.userAgent || 'Next.js Server'
 
-    if (!clientId) {
-      try {
-        const cookieStore = await cookies()
-        clientId = parseClientIdFromGaCookie(cookieStore.get('_ga')?.value)
-        const containerId = GA_MEASUREMENT_ID.replace('G-', '')
-        const sessionCookie = cookieStore.get(`_ga_${containerId}`)?.value
+    try {
+      const cookieStore = await cookies()
 
-        // Sørg for at den kun oppdaterer hvis vi ikke allerede fant den i overrides
-        if (sessionId === undefined) {
-          sessionId = parseSessionIdFromGaContainerCookie(sessionCookie)
-        }
-      } catch {}
+      if (!clientId) {
+        clientId = parseClientIdFromGaCookie(cookieStore.get('_ga')?.value)
+      }
+
+      if (sessionId === undefined) {
+        const containerId = GA_MEASUREMENT_ID.replace(/^G-/, '')
+        const sessionCookie = cookieStore.get(`_ga_${containerId}`)?.value
+        sessionId = toNumericSessionId(sessionCookie)
+      }
+    } catch {
+      // No request cookie context available in this execution path.
     }
 
     if (!clientId) {
@@ -124,21 +165,15 @@ export async function trackServerEvent(
       && !!overrides?.userData
       && Object.keys(overrides.userData).length > 0
 
-    const payload: any = {
+    const userProperties = toGaUserProperties(overrides?.userProperties)
+
+    const payload: Record<string, any> = {
       client_id: clientId,
       ...(userId ? { user_id: userId } : {}),
       timestamp_micros:
-        overrides?.timestampMicros !== undefined ?
-          overrides.timestampMicros
-        : Math.floor(Date.now() * 1000),
-      non_personalized_ads: false,
+        overrides?.timestampMicros ?? Math.floor(Date.now() * 1000),
       ...(shouldSendUserData ? { user_data: overrides!.userData } : {}),
-      ...((
-        overrides?.userProperties
-        && Object.keys(overrides.userProperties).length
-      ) ?
-        { user_properties: overrides.userProperties }
-      : {}),
+      ...(userProperties ? { user_properties: userProperties } : {}),
       ...(overrides?.ipOverride ? { ip_override: overrides.ipOverride } : {}),
       events: [
         {
@@ -146,18 +181,54 @@ export async function trackServerEvent(
           params: {
             ...(event.params || {}),
             ...(event.ecommerce || {}),
-            // Unngår å sende session_id hvis vi fortsatt fikk NaN
-            ...(sessionId !== undefined && !isNaN(sessionId) ?
-              { session_id: sessionId }
-            : {}),
+            ...(sessionId !== undefined ? { session_id: sessionId } : {}),
             engagement_time_msec: 1,
-            ...(process.env.NODE_ENV === 'development' ? { debug_mode: 1 } : {})
+            ...(overrides?.debugMode ? { debug_mode: 1 } : {})
           }
         }
       ]
     }
 
-    const endpoint = `https://region1.google-analytics.com/mp/collect?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${API_SECRET}`
+    if (process.env.GA_MP_VALIDATE === '1') {
+      const validationResponse = await fetch(
+        `https://region1.google-analytics.com/debug/mp/collect?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${GA_API_SECRET}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'User-Agent': userAgent
+          },
+          body: JSON.stringify({
+            ...payload,
+            validation_behavior: 'ENFORCE_RECOMMENDATIONS'
+          }),
+          cache: 'no-store'
+        }
+      )
+
+      const validationJson = await validationResponse.json().catch(() => null)
+      const validationMessages = Array.isArray(
+        validationJson?.validationMessages
+      )
+        ? validationJson.validationMessages
+        : []
+
+      if (!validationResponse.ok || validationMessages.length > 0) {
+        return {
+          ok: false,
+          reason: 'ga_error',
+          status: validationResponse.status,
+          details:
+            validationMessages.length > 0
+              ? validationMessages
+              : validationJson
+        }
+      }
+    }
+
+    const endpoint =
+      `${GA_SERVER_CONTAINER_URL}/mp/collect` +
+      `?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${GA_API_SECRET}`
 
     const response = await fetch(endpoint, {
       method: 'POST',

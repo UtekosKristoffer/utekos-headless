@@ -1,64 +1,129 @@
+import 'server-only'
 import { mapToGA4EventName } from './mapToGA4EventName'
+import { trackServerEvent } from './trackingServerEvent'
 
-const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
-const GA_API_SECRET = process.env.GA_API_SECRET
+const GTM_OWNED_EVENTS = new Set([
+  'PageView',
+  'ViewContent',
+  'AddToCart',
+  'InitiateCheckout',
+  'Purchase'
+])
+
+function buildEventParams(eventData?: Record<string, any>): Record<string, any> {
+  const data = eventData ?? {}
+  const params: Record<string, any> = {}
+
+  if (data.value !== undefined) {
+    const value = Number(data.value)
+    if (Number.isFinite(value)) {
+      params.value = value
+    }
+  }
+
+  if (typeof data.currency === 'string' && data.currency) {
+    params.currency = data.currency
+  }
+
+  if (typeof data.coupon === 'string' && data.coupon) {
+    params.coupon = data.coupon
+  }
+
+  if (typeof data.url === 'string' && data.url) {
+    params.page_location = data.url
+  }
+
+  if (typeof data.page_location === 'string' && data.page_location) {
+    params.page_location = data.page_location
+  }
+
+  if (typeof data.title === 'string' && data.title) {
+    params.page_title = data.title
+  }
+
+  if (typeof data.page_title === 'string' && data.page_title) {
+    params.page_title = data.page_title
+  }
+
+  if (typeof data.search_term === 'string' && data.search_term) {
+    params.search_term = data.search_term
+  }
+
+  if (Array.isArray(data.content_ids) && data.content_ids.length > 0) {
+    params.items = data.content_ids.map((id: unknown, index: number) => ({
+      item_id: String(id),
+      ...(data.content_name ? { item_name: String(data.content_name) } : {}),
+      index
+    }))
+  }
+
+  return params
+}
 
 export async function sendGA4BrowserEvent(
   payload: any,
   userContext: { clientIp?: string; userAgent?: string }
 ) {
-  if (!payload.ga4Data?.client_id || !GA_MEASUREMENT_ID || !GA_API_SECRET) {
+  const { eventName, eventData, ga4Data } = payload ?? {}
+
+  if (!eventName) {
     return {
       success: false,
       provider: 'google',
-      error: 'Missing credentials or client_id'
+      error: 'Missing eventName'
     }
   }
 
-  const { eventName, eventData, ga4Data } = payload
+  if (!ga4Data?.client_id) {
+    return {
+      success: false,
+      provider: 'google',
+      error: 'Missing client_id'
+    }
+  }
+
+
+  if (GTM_OWNED_EVENTS.has(eventName)) {
+    return {
+      success: true,
+      provider: 'google',
+      transport: 'gtm_web_to_sgtm',
+      skipped: true,
+      reason: 'handled_by_google_tag'
+    }
+  }
+
   const gaEventName = mapToGA4EventName(eventName)
 
-  const body = {
-    client_id: ga4Data.client_id,
-    events: [
-      {
-        name: gaEventName,
-        params: {
-          session_id: ga4Data.session_id,
-          currency: eventData?.currency || 'NOK',
-          value: eventData?.value,
-          items:
-            eventData?.content_ids ?
-              eventData.content_ids.map((id: string) => ({
-                item_id: id,
-                item_name: eventData.content_name
-              }))
-            : undefined,
-          engagement_time_msec: 100,
-          ip_override: userContext.clientIp,
-          user_agent: userContext.userAgent
-        }
-      }
-    ]
+  const result = await trackServerEvent(
+    {
+      name: gaEventName,
+      params: buildEventParams(eventData)
+    },
+    {
+      clientId: ga4Data.client_id,
+      sessionId:
+        ga4Data.session_id !== undefined ?
+          String(ga4Data.session_id)
+        : undefined,
+      userAgent: userContext.userAgent,
+      ipOverride: userContext.clientIp,
+      debugMode: process.env.GA_MP_DEBUG === '1'
+    }
+  )
+
+  if (!result.ok) {
+    return {
+      success: false,
+      provider: 'google',
+      error: result.reason,
+      details: result.details
+    }
   }
 
-  try {
-    const response = await fetch(
-      `https://region1.google-analytics.com/mp/collect?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${GA_API_SECRET}`,
-      {
-        method: 'POST',
-        body: JSON.stringify(body)
-      }
-    )
-
-    if (!response.ok) {
-      console.error('GA4 Error:', await response.text())
-      return { success: false, provider: 'google' }
-    }
-
-    return { success: true, provider: 'google' }
-  } catch (error) {
-    console.error('GA4 Network Exception:', error)
-    return { success: false, provider: 'google', error }
+  return {
+    success: true,
+    provider: 'google',
+    transport: 'next_api_to_sgtm'
   }
 }

@@ -8,15 +8,19 @@ import { findGaSessionCookie } from '@/lib/tracking/google/findGaSessionCookie'
 import { GA_MEASUREMENT_ID } from '@/api/constants/monitoring'
 import type { CaptureContext } from 'types/tracking/capture/CaptureContext'
 
-export function adaptRequestToCaptureContext(req: NextRequest): CaptureContext {
+export function adaptRequestToCaptureContext(
+  req: NextRequest,
+  body?: { gaClientId?: string; gaSessionId?: string }
+): CaptureContext {
   const cookieStore = req.cookies
   const gaCookie = cookieStore.get('_ga')?.value
-  const gaClientId = parseGaClientId(gaCookie)
+  const gaClientIdFromCookie = parseGaClientId(gaCookie) || undefined
+
   const cookieMap = new Map<string, string>()
   cookieStore.getAll().forEach(c => cookieMap.set(c.name, c.value))
 
   const gaSessionCookieVal = findGaSessionCookie(cookieMap, GA_MEASUREMENT_ID)
-  const gaSessionId = parseGaSessionId(gaSessionCookieVal)
+  const gaSessionIdFromCookie = parseGaSessionId(gaSessionCookieVal)
 
   return {
     cookies: {
@@ -25,12 +29,11 @@ export function adaptRequestToCaptureContext(req: NextRequest): CaptureContext {
       externalId: cookieStore.get('ute_ext_id')?.value,
       userHash: cookieStore.get('ute_user_hash')?.value,
       scid: cookieStore.get('_scid')?.value,
-      click_id: cookieStore.get('ute_sc_cid')?.value, // Mapper ute_sc_cid -> click_id
+      click_id: cookieStore.get('ute_sc_cid')?.value,
       epik: cookieStore.get('_epik')?.value,
-      gaClientId: gaClientId || undefined,
-      gaSessionId: gaSessionId || undefined
+      gaClientId: body?.gaClientId || gaClientIdFromCookie,
+      gaSessionId: body?.gaSessionId || gaSessionIdFromCookie
     },
-
     clientIp: getClientIp(req) ?? '',
     userAgent: req.headers.get('user-agent') ?? ''
   }

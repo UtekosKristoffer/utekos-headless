@@ -1,20 +1,26 @@
 export function parseGaSessionId(cookieValue?: string): string | undefined {
   if (!cookieValue) return undefined
 
-  // Cookien ser ofte slik ut: GS1.1.1766430637.1.0.0.0 (gammel standard)
-  // eller s1766430637$o1$g0... (ny standard)
+  const raw = cookieValue.trim()
+  if (!raw) return undefined
 
-  // For ny standard: Hent tallene rett etter 's'
-  if (cookieValue.startsWith('s')) {
-    const match = cookieValue.match(/^s(\d+)/)
-    return match ? match[1] : undefined
+  const normalized = raw.replace(/^GS\d+\.\d+\./, '')
+
+  const directMatch = normalized.match(/^s?(\d{6,})$/)
+  if (directMatch?.[1]) return directMatch[1]
+
+  for (const token of normalized.split('.')) {
+    const match = token.match(/^s?(\d{6,})$/)
+    if (match?.[1]) return match[1]
   }
 
-  // For gammel standard (hvis den har punktumer):
-  const parts = cookieValue.split('.')
-  if (parts.length >= 3) {
-    return parts[2] // Posisjon 2 er normalt session_id
+  for (const token of normalized.split('$')) {
+    const match = token.match(/^s?(\d{6,})$/)
+    if (match?.[1]) return match[1]
   }
+
+  const embeddedMatch = normalized.match(/(?:^|[.$])s?(\d{6,})/)
+  if (embeddedMatch?.[1]) return embeddedMatch[1]
 
   return undefined
 }

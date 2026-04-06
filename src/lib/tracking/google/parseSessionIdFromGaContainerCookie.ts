@@ -1,8 +1,9 @@
-// Path: src/lib/tracking/google/parseSessionIdFromGaContainerCookie.ts
+import { parseGaSessionId } from './parseGaSessionId'
 
 export function parseSessionIdFromGaContainerCookie(cookieValue?: string) {
-  if (!cookieValue) return undefined
-  const parts = cookieValue.split('.')
-  const sid = parts?.[2]
-  return sid ? Number(sid) : undefined
+  const parsed = parseGaSessionId(cookieValue)
+  if (!parsed) return undefined
+
+  const numericValue = Number(parsed)
+  return Number.isFinite(numericValue) ? numericValue : undefined
 }
