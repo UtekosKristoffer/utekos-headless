@@ -65,7 +65,7 @@ const GA_API_SECRET = process.env.GA_API_SECRET
 const GA_SERVER_CONTAINER_URL = (
   process.env.GA_SERVER_CONTAINER_URL ||
   process.env.NEXT_PUBLIC_GA_SERVER_CONTAINER_URL ||
-  'https://utekos.no/sporing'
+  'https://sgtm.utekos.no'
 ).replace(/\/$/, '')
 
 function toNumericSessionId(input?: string): number | undefined {

@@ -87,7 +87,10 @@ export const metadata: Metadata = {
 export default function RootLayot({ children }: { children: ReactNode }) {
   return (
     <html lang='no'>
-      <GoogleTagManager gtmId='GTM-5TWMJQFP' gtmScriptUrl='/sporing/gtm.js' />
+      <GoogleTagManager
+        gtmId='GTM-5TWMJQFP'
+        gtmScriptUrl='https://sgtm.utekos.no/gtm.js'
+      />
       <body
         className={`bg-background text-foreground ${geistSans.className} antialiased`}
       >

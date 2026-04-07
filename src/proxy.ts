@@ -13,9 +13,9 @@ import { formatCookieHeader } from './lib/tracking/proxy/formatCookieHeader'
 import { hashEmail } from './lib/tracking/hash/hashEmail'
 import { formatFbcCookie } from './lib/tracking/proxy/formatFbcCookie'
 
-const SGTM_TAGGING_SERVER_ORIGIN = (
-  process.env.SGTM_TAGGING_SERVER_ORIGIN ||
-  'https://gtm-server-63040510375.europe-west1.run.app'
+const SGTM_PUBLIC_ORIGIN = (
+  process.env.SGTM_PUBLIC_ORIGIN ||
+  'https://sgtm.utekos.no'
 ).replace(/\/$/, '')
 
 export async function proxy(request: NextRequest) {
@@ -27,10 +27,10 @@ export async function proxy(request: NextRequest) {
 
   if (context.pathname.startsWith('/sporing')) {
     const pathWithoutPrefix = context.pathname.replace(/^\/sporing/, '') || '/'
-    const sgtmUrl = new URL(pathWithoutPrefix, SGTM_TAGGING_SERVER_ORIGIN)
-    sgtmUrl.search = request.nextUrl.search
+    const redirectUrl = new URL(pathWithoutPrefix, SGTM_PUBLIC_ORIGIN)
+    redirectUrl.search = request.nextUrl.search
 
-    return NextResponse.rewrite(sgtmUrl)
+    return NextResponse.redirect(redirectUrl, 308)
   }
 
   if (!context.isTargetRoute) {
