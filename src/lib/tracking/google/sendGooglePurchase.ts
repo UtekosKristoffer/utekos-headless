@@ -10,7 +10,25 @@ type RedisGoogleIds = {
   gaSessionId?: string
 }
 
-export async function sendGooglePurchase(context: TrackingContext) {
+export type GooglePurchaseDispatchResult =
+  | {
+      success: true
+      orderId: string | number | undefined
+      transactionId: string
+      value: number
+      currency: string
+      itemCount: number
+    }
+  | {
+      success: false
+      orderId: string | number | undefined
+      error: string
+      details?: Record<string, any>
+    }
+
+export async function sendGooglePurchase(
+  context: TrackingContext
+): Promise<GooglePurchaseDispatchResult> {
   const { order, redisData } = context
   const googleIds = (redisData ?? {}) as RedisGoogleIds
   const clientId = googleIds.ga_client_id || googleIds.gaClientId
@@ -35,7 +53,13 @@ export async function sendGooglePurchase(context: TrackingContext) {
         },
         { source: 'orders-paid webhook' }
       )
-      return
+
+      return {
+        success: false,
+        orderId: order.id,
+        error: res.reason,
+        ...(res.details ? { details: res.details } : {})
+      }
     }
 
     await logToAppLogs(
@@ -43,12 +67,24 @@ export async function sendGooglePurchase(context: TrackingContext) {
       'GA4 Purchase Dispatch Success',
       {
         orderId: order.id,
-        value: order.total_price,
+        transactionId: res.payload.transactionId,
+        value: res.payload.value,
+        currency: res.payload.currency,
+        itemCount: res.payload.itemCount,
         hasRedisClientId: !!clientId,
         hasRedisSessionId: !!sessionId
       },
       { source: 'orders-paid webhook' }
     )
+
+    return {
+      success: true,
+      orderId: order.id,
+      transactionId: res.payload.transactionId,
+      value: res.payload.value,
+      currency: res.payload.currency,
+      itemCount: res.payload.itemCount
+    }
   } catch (err: any) {
     await logToAppLogs(
       'ERROR',
@@ -56,5 +92,11 @@ export async function sendGooglePurchase(context: TrackingContext) {
       { orderId: order.id, error: err?.message || String(err) },
       { source: 'orders-paid webhook' }
     )
+
+    return {
+      success: false,
+      orderId: order.id,
+      error: err?.message || String(err)
+    }
   }
 }

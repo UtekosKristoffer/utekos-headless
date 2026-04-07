@@ -18,7 +18,17 @@ export type AnalyticsItem = {
 }
 
 export type PurchaseTrackResult =
-  | { sent: true }
+  | {
+      sent: true
+      payload: {
+        transactionId: string
+        value: number
+        currency: string
+        itemCount: number
+        clientIdPresent: boolean
+        sessionIdPresent: boolean
+      }
+    }
   | {
       sent: false
       reason:
@@ -177,5 +187,15 @@ export async function handlePurchaseEvent(
     }
   }
 
-  return { sent: true }
+  return {
+    sent: true,
+    payload: {
+      transactionId,
+      value: computedValue,
+      currency,
+      itemCount: items.length,
+      clientIdPresent: !!clientId,
+      sessionIdPresent: !!sessionId
+    }
+  }
 }
