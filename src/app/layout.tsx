@@ -8,7 +8,6 @@ import Header from '@/components/header/Header'
 import AnnouncementBanner from '@/components/frontpage/components/SpecialOfferSection/AnnouncementBanner'
 import { ChatBotAgent } from '@/components/chat/ChatBotAgent/source-code'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
-import { GoogleTagManager } from '@next/third-parties/google'
 import { CartProviderLoader } from '@/components/providers/CartProviderLoader'
 import {
   BrandArmorScript,
@@ -17,6 +16,31 @@ import {
 import { CookieConsentBanner } from '@/components/CookieBanner'
 import { ClickTracker } from '@/components/analytics/ClickTracker'
 import type { Metadata } from 'next'
+import Script from 'next/script'
+
+const GOOGLE_TAG_MANAGER_ID =
+  process.env.NEXT_GOOGLE_GTM_ID || 'GTM-5TWMJQFP'
+
+const GTM_SCRIPT_ORIGIN = (
+  process.env.NEXT_PUBLIC_SGTM_ENDPOINT || 'https://sgtm.utekos.no'
+).replace(/\/$/, '')
+
+const SHOULD_LOAD_GOOGLE_TAG_MANAGER =
+  process.env.NODE_ENV === 'production' && process.env.VERCEL_ENV !== 'preview'
+
+const GTM_BOOTSTRAP_SCRIPT = `
+  (function(w,d,s,l,i){
+    w[l]=w[l]||[];
+    w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),
+      dl=l!='dataLayer'?'&l='+l:'';
+    j.async=true;
+    j.src='${GTM_SCRIPT_ORIGIN}/gtm.js?id='+i+dl;
+    f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','${GOOGLE_TAG_MANAGER_ID}');
+`
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
@@ -85,13 +109,26 @@ export const metadata: Metadata = {
 export default function RootLayot({ children }: { children: ReactNode }) {
   return (
     <html lang='no'>
-      <GoogleTagManager
-        gtmId='GTM-5TWMJQFP'
-        gtmScriptUrl='https://sgtm.utekos.no/gtm.js'
-      />
+      <head>
+        {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (
+          <Script id='gtm-bootstrap' strategy='beforeInteractive'>
+            {GTM_BOOTSTRAP_SCRIPT}
+          </Script>
+        )}
+      </head>
       <body
         className={`bg-background text-foreground ${geistSans.className} antialiased`}
       >
+        {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GOOGLE_TAG_MANAGER_ID}`}
+              height='0'
+              width='0'
+              style={{ display: 'none', visibility: 'hidden' }}
+            />
+          </noscript>
+        )}
         <OnlineStoreJsonLd />
         <Suspense>
           <ClickTracker />
