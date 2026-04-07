@@ -10,9 +10,25 @@ import { safeString } from '@/lib/utils/safeString'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 import type { TrackingContext } from 'types/tracking/user/TrackingContext'
 
-const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN
 const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
 const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE
+
+function resolveMetaAccessToken() {
+  return (
+    process.env.META_ACCESS_TOKEN ||
+    process.env.META_SYSTEM_USER_TOKEN ||
+    process.env.CATALOG_ACCESS_TOKEN ||
+    undefined
+  )
+}
+
+type MetaApiError = Error & {
+  response?: {
+    data?: {
+      error?: unknown
+    }
+  }
+}
 
 export async function sendMetaPurchase({
   order,
@@ -20,12 +36,14 @@ export async function sendMetaPurchase({
   redisData,
   contentIds
 }: TrackingContext) {
-  if (!ACCESS_TOKEN || !PIXEL_ID) {
+  const accessToken = resolveMetaAccessToken()
+
+  if (!accessToken || !PIXEL_ID) {
     console.error('[Meta CAPI] Critical: Missing Configuration')
     return { success: false, error: 'Missing Config' }
   }
 
-  const api = FacebookAdsApi.init(ACCESS_TOKEN)
+  const api = FacebookAdsApi.init(accessToken)
   if (process.env.NODE_ENV === 'development') {
     api.setDebug(true)
   }
@@ -84,7 +102,7 @@ export async function sendMetaPurchase({
     )
 
   try {
-    const eventRequest = new EventRequest(ACCESS_TOKEN, PIXEL_ID).setEvents([
+    const eventRequest = new EventRequest(accessToken, PIXEL_ID).setEvents([
       serverEvent
     ])
     if (TEST_EVENT_CODE) eventRequest.setTestEventCode(TEST_EVENT_CODE)
@@ -111,7 +129,8 @@ export async function sendMetaPurchase({
       events_received: response.events_received,
       fbtrace_id: response.fbtrace_id
     }
-  } catch (err: any) {
+  } catch (error: unknown) {
+    const err = error as MetaApiError
     const errorResponse = err.response?.data || {}
     console.error(
       '[Meta CAPI] Request Failed:',
