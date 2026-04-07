@@ -78,8 +78,7 @@ export const metadata: Metadata = {
   },
   verification: {
     other: {
-      'facebook-domain-verification': 'e3q80hk1igl2celczeysvf7y1mltrs',
-      'p:domain_verify': 'b34f9dce9b34f18d3b3c8852ff7a8497'
+      'facebook-domain-verification': 'e3q80hk1igl2celczeysvf7y1mltrs'
     }
   }
 }
