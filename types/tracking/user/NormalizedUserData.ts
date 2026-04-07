@@ -1,4 +1,4 @@
-// Path: types/tracking/user/NormalizedUserData.ts
+
 export type NormalizedUserData = {
   sha256_email_address?: string[]
   sha256_phone_number?: string[]
