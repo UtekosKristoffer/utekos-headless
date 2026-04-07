@@ -1,6 +1,3 @@
-// Path: src/app/produkter/[handle]/ProductPageView/components/ProductHeader.tsx
-// Server Component: ren presentasjon av tittel, undertittel og ev. badge
-
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { Sparkles } from 'lucide-react'
 

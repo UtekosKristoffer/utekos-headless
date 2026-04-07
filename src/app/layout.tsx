@@ -9,7 +9,6 @@ import AnnouncementBanner from '@/components/frontpage/components/SpecialOfferSe
 import { ChatBotAgent } from '@/components/chat/ChatBotAgent/source-code'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { GoogleTagManager } from '@next/third-parties/google'
-import { SpeedInsights } from '@vercel/speed-insights/next'
 import { CartProviderLoader } from '@/components/providers/CartProviderLoader'
 import {
   BrandArmorScript,
@@ -101,7 +100,6 @@ export default function RootLayot({ children }: { children: ReactNode }) {
             <Header menu={mainMenu} />
             <main>
               {children}
-              <SpeedInsights />
               <BrandArmorScript companyId={BRAND_ARMOR_COMPANY_ID} />
               <Analytics mode='production' />
               <ChatBotAgent />

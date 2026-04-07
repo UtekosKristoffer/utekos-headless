@@ -1,0 +1,7 @@
+mcp.json
+.env*
+.agents/
+src/api/lib/cloud-credentials/
+*.service-account.json
+*oauth-credentials*.json
+*tag-manager-credentials*.json

@@ -1,5 +1,12 @@
 import { trackServerEvent } from '@/lib/tracking/google/trackingServerEvent'
+import type { TrackDispatchDiagnostics } from '@/lib/tracking/google/trackingServerEvent'
 import { normalizeUserData } from '@/lib/tracking/user-data/normalizeUserData'
+import type { OrderPaid } from 'types/commerce/order/OrderPaid'
+
+type PurchaseErrorDetails = Record<string, unknown>
+type ShopifyCustomerWithOrdersCount = NonNullable<OrderPaid['customer']> & {
+  orders_count?: number | null
+}
 
 export type AnalyticsItem = {
   item_id: string
@@ -21,12 +28,16 @@ export type PurchaseTrackResult =
   | {
       sent: true
       payload: {
+        requestId: string
         transactionId: string
         value: number
         currency: string
         itemCount: number
+        transport: 'sgtm' | 'direct_ga4'
+        fallbackUsed: boolean
         clientIdPresent: boolean
         sessionIdPresent: boolean
+        diagnostics: TrackDispatchDiagnostics
       }
     }
   | {
@@ -37,7 +48,7 @@ export type PurchaseTrackResult =
         | 'missing_items'
         | 'ga_error'
         | 'missing_credentials'
-      details?: Record<string, any>
+      details?: PurchaseErrorDetails
     }
 
 export type GoogleIds = {
@@ -46,14 +57,14 @@ export type GoogleIds = {
 }
 
 export async function handlePurchaseEvent(
-  order: any,
+  order: OrderPaid,
   ids?: GoogleIds
 ): Promise<PurchaseTrackResult> {
   const noteAttributes =
     Array.isArray(order?.note_attributes) ? order.note_attributes : []
 
   const getAttr = (name: string): string | undefined =>
-    noteAttributes.find((attribute: any) => attribute?.name === name)?.value
+    noteAttributes.find((attribute) => attribute.name === name)?.value
 
   const clientId = ids?.clientId || getAttr('_ga_client_id')
   const sessionId = ids?.sessionId || getAttr('_ga_session_id')
@@ -78,39 +89,41 @@ export async function handlePurchaseEvent(
     return { sent: false, reason: 'missing_transaction_id' }
   }
 
-  const customer = order?.customer || {}
-  const billing = order?.billing_address || {}
-  const shipping = order?.shipping_address || {}
+  const customer = (order.customer ?? null) as ShopifyCustomerWithOrdersCount | null
+  const billing = order.billing_address
+  const shipping = order.shipping_address
 
   const email = order?.email || order?.contact_email || customer?.email
   const phone =
     billing?.phone || shipping?.phone || customer?.phone || order?.phone
+  const firstName = billing?.first_name ?? customer?.first_name
+  const lastName = billing?.last_name ?? customer?.last_name
 
   const normalizedUser = normalizeUserData({
-    email,
-    phone,
-    firstName: billing?.first_name || customer?.first_name,
-    lastName: billing?.last_name || customer?.last_name,
-    city: billing?.city,
-    region: billing?.province,
-    postalCode: billing?.zip,
-    country: billing?.country_code
+    ...(email !== undefined ? { email } : {}),
+    ...(phone !== undefined ? { phone } : {}),
+    ...(firstName !== undefined ? { firstName } : {}),
+    ...(lastName !== undefined ? { lastName } : {}),
+    ...(billing?.city !== undefined ? { city: billing.city } : {}),
+    ...(billing?.province !== undefined ? { region: billing.province } : {}),
+    ...(billing?.zip !== undefined ? { postalCode: billing.zip } : {}),
+    ...(billing?.country_code !== undefined ? { country: billing.country_code } : {})
   })
 
   const lineItems = Array.isArray(order?.line_items) ? order.line_items : []
   const items: AnalyticsItem[] = lineItems
-    .map((item: any) => ({
+    .map((item) => ({
       item_id:
         item?.sku
         || item?.variant_id?.toString()
         || item?.product_id?.toString(),
       item_name: item?.title || item?.name,
       quantity: Number(item?.quantity) || 1,
-      price: item?.price !== undefined ? Number(item.price) : undefined,
-      item_variant: item?.variant_title,
-      item_brand: item?.vendor
+      price: Number(item.price),
+      ...(item.variant_title ? { item_variant: item.variant_title } : {}),
+      ...(item.vendor ? { item_brand: item.vendor } : {})
     }))
-    .filter((item: AnalyticsItem) => Boolean(item.item_id || item.item_name))
+    .filter((item) => Boolean(item.item_id || item.item_name))
 
   if (!items.length) {
     return {
@@ -132,12 +145,18 @@ export async function handlePurchaseEvent(
     order?.total_shipping_price_set?.shop_money?.amount ?? 0
   )
   const coupon = order?.discount_codes?.[0]?.code
+  const customerOrdersCount =
+    typeof customer?.orders_count === 'number' ? customer.orders_count : undefined
 
   const customerType =
-    typeof customer?.orders_count === 'number'
-      ? customer.orders_count === 1
+    customerOrdersCount !== undefined
+      ? customerOrdersCount === 1
         ? 'new'
         : 'returning'
+      : undefined
+  const userAgent =
+    typeof order.client_details?.user_agent === 'string'
+      ? order.client_details.user_agent
       : undefined
 
   const res = await trackServerEvent(
@@ -161,41 +180,68 @@ export async function handlePurchaseEvent(
       userData: normalizedUser,
       userProperties: {
         ...(customerType ? { customer_tier: customerType } : {}),
-        ...(typeof customer?.orders_count === 'number'
-          ? { purchase_count: customer.orders_count }
+        ...(customerOrdersCount !== undefined
+          ? { purchase_count: customerOrdersCount }
           : {})
       },
-      userAgent: order?.client_details?.user_agent,
-      ipOverride: order?.browser_ip,
-      debugMode: process.env.GA_MP_DEBUG === '1'
+      userAgent,
+      ipOverride: order.browser_ip ?? undefined,
+      debugMode: process.env.GA_MP_DEBUG === '1',
+      allowDirectFallback: true,
+      fallbackOnSgtmSuccess: process.env.GA_DIRECT_FALLBACK_ON_SGTM_SUCCESS === '1'
     }
   )
 
   if (!res.ok) {
     if (res.reason === 'missing_credentials') {
-      return { sent: false, reason: 'missing_credentials' }
+      return {
+        sent: false,
+        reason: 'missing_credentials',
+        details: {
+          requestId: res.requestId,
+          diagnostics: res.diagnostics
+        }
+      }
     }
 
     if (res.reason === 'missing_client_id') {
-      return { sent: false, reason: 'missing_client_id' }
+      return {
+        sent: false,
+        reason: 'missing_client_id',
+        details: {
+          requestId: res.requestId,
+          diagnostics: res.diagnostics
+        }
+      }
     }
 
     return {
       sent: false,
       reason: 'ga_error',
-      details: { status: res.status, details: res.details }
+      details: {
+        requestId: res.requestId,
+        status: res.status,
+        transport: res.transport,
+        fallbackUsed: res.fallbackUsed,
+        diagnostics: res.diagnostics,
+        errorDetails: res.details
+      }
     }
   }
 
   return {
     sent: true,
     payload: {
+      requestId: res.requestId,
       transactionId,
       value: computedValue,
       currency,
       itemCount: items.length,
+      transport: res.transport,
+      fallbackUsed: res.fallbackUsed,
       clientIdPresent: !!clientId,
-      sessionIdPresent: !!sessionId
+      sessionIdPresent: !!sessionId,
+      diagnostics: res.diagnostics
     }
   }
 }

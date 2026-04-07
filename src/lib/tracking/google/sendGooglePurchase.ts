@@ -14,16 +14,19 @@ export type GooglePurchaseDispatchResult =
   | {
       success: true
       orderId: string | number | undefined
+      requestId: string
       transactionId: string
       value: number
       currency: string
       itemCount: number
+      transport: 'sgtm' | 'direct_ga4'
+      fallbackUsed: boolean
     }
   | {
       success: false
       orderId: string | number | undefined
       error: string
-      details?: Record<string, any>
+      details?: Record<string, unknown>
     }
 
 export async function sendGooglePurchase(
@@ -49,6 +52,10 @@ export async function sendGooglePurchase(
           reason: res.reason,
           hasRedisClientId: !!clientId,
           hasRedisSessionId: !!sessionId,
+          requestId:
+            typeof res.details?.requestId === 'string' ?
+              res.details.requestId
+            : undefined,
           ...(res.details ? { details: res.details } : {})
         },
         { source: 'orders-paid webhook' }
@@ -67,10 +74,18 @@ export async function sendGooglePurchase(
       'GA4 Purchase Dispatch Success',
       {
         orderId: order.id,
+        requestId: res.payload.requestId,
         transactionId: res.payload.transactionId,
         value: res.payload.value,
         currency: res.payload.currency,
         itemCount: res.payload.itemCount,
+        transport: res.payload.transport,
+        fallbackUsed: res.payload.fallbackUsed,
+        validationStatus: res.payload.diagnostics?.validation?.status,
+        validationMessageCount: res.payload.diagnostics?.validation?.messageCount,
+        sgtmStatus: res.payload.diagnostics?.sgtm?.status,
+        directGa4Status: res.payload.diagnostics?.directGa4?.status,
+        directGa4Trigger: res.payload.diagnostics?.directGa4?.trigger,
         hasRedisClientId: !!clientId,
         hasRedisSessionId: !!sessionId
       },
@@ -80,23 +95,28 @@ export async function sendGooglePurchase(
     return {
       success: true,
       orderId: order.id,
+      requestId: res.payload.requestId,
       transactionId: res.payload.transactionId,
       value: res.payload.value,
       currency: res.payload.currency,
-      itemCount: res.payload.itemCount
+      itemCount: res.payload.itemCount,
+      transport: res.payload.transport,
+      fallbackUsed: res.payload.fallbackUsed
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : String(err)
+
     await logToAppLogs(
       'ERROR',
       'GA4 Purchase Dispatch Failed',
-      { orderId: order.id, error: err?.message || String(err) },
+      { orderId: order.id, error: errorMessage },
       { source: 'orders-paid webhook' }
     )
 
     return {
       success: false,
       orderId: order.id,
-      error: err?.message || String(err)
+      error: errorMessage
     }
   }
 }

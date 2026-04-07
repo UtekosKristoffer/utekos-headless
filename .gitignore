@@ -18,6 +18,12 @@
 # mcp config (may contain local secrets/tokens)
 mcp.json
 
+# local credentials and service accounts
+src/api/lib/cloud-credentials/
+*.service-account.json
+*oauth-credentials*.json
+*tag-manager-credentials*.json
+
 # testing
 /coverage
 
