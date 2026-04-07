@@ -1,5 +1,3 @@
-// Src/db/data/articles.ts
-
 export interface Article {
   slug: string
   title: string
