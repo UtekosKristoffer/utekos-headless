@@ -1,4 +1,4 @@
-// Path: types/index.ts
+
 export type * from './api.types'
 export type * from './chat.types'
 export type * from './context.types'
