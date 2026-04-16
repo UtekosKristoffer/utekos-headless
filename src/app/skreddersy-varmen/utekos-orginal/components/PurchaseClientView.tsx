@@ -133,9 +133,7 @@ export function PurchaseClientView({
                   <Gift className='h-5 w-5 text-emerald-500' />
                 </div>
                 <div>
-                  <h3 className='font-semibold text-emerald-800'>
-                    Lanseringstilbud
-                  </h3>
+                  <h3 className='font-semibold text-emerald-800'>Vårtilbud</h3>
                   <p className='text-sm text-emerald-700/80'>
                     10% rabatt + Gratis Buff™ (verdi 249,-) legges til i
                     kurven.

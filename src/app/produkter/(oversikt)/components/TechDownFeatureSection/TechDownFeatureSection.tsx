@@ -136,7 +136,7 @@ export const TechDownFeatureSection = () => {
             <div className='gsap-pulse-badge inline-flex items-center gap-2 rounded-full border border-sky-400/50 bg-sky-500/20 px-4 py-1.5 backdrop-blur-md'>
               <Zap className='h-3.5 w-3.5 text-sky-400 fill-sky-400' />
               <span className='text-xs font-bold uppercase tracking-wider text-sky-300'>
-                Lanseringstilbud
+                Vårtilbud
               </span>
             </div>
 

@@ -43,7 +43,7 @@ export const NewProductLaunchSectionView = forwardRef<
                   <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-sky-500'></span>
                 </span>
                 <span className='whitespace-nowrap text-sm font-semibold text-sky-400'>
-                  Lanseringstilbud 🎉
+                  Vårtilbud 🎉
                 </span>
               </div>
 
@@ -74,7 +74,7 @@ export const NewProductLaunchSectionView = forwardRef<
                   <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-sky-500'></span>
                 </span>
                 <span className='whitespace-nowrap text-base font-semibold text-sky-400'>
-                  Lanseringstilbud
+                  Vårtilbud
                 </span>
                 <span>🎉</span>{' '}
                 <span className='whitespace-nowrap text-base font-semibold text-sky-400'>

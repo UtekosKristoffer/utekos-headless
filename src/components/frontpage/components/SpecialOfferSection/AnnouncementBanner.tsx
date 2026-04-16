@@ -63,15 +63,15 @@ export default function AnnouncementBanner() {
 
           <span className='mr-1'>
             <span className='hidden font-bold text-blue-100 sm:inline'>
-              Siste sjanse:{' '}
+              Vårtilbud:{' '}
             </span>
 
             <span className='inline md:hidden'>
-              Siste sjanse: Comfyrobe™ kr 999,-
+              Vårtilbud: Utekos TechDown™ kr 1790,-
             </span>
 
             <span className='hidden md:inline'>
-              Sikre deg Comfyrobe™ til kun kr 999,-
+              Vårtilbud: Utekos TechDown™ kr 1790,-
             </span>
           </span>
 

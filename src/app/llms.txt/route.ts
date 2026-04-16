@@ -61,7 +61,7 @@ intuitive ventilasjonsytemer, YKK® Dual V-Zip™ og en lengre liste med ytterli
 - [Terrassen](https://utekos.no/inspirasjon/terrassen): Hjemmebruk på uteplassen.
 - [Isbading](https://utekos.no/inspirasjon/isbading): Kaldbad og restitusjon.
 
-## Valgri
+## Valgfri
 
 - [AI-surface overview](https://utekos.no/llms): Menneskelesbar oversikt over AI-endepunktene.
 - [Full AI context](https://utekos.no/llms-full.txt): Utvidet kontekstfil for modeller som trenger mer produkt- og merkevaregrunnlag.`

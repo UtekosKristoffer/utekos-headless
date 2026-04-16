@@ -22,7 +22,7 @@ export function SocialProof() {
         </SocialProofCard>
 
         <SocialProofCard
-          title='2000+'
+          title='3000+'
           Icon={Smile}
           hoverBorderClass='hover:border-emerald-500/20'
           iconWrapperClass='bg-emerald-500/10 shadow-[0_0_15px_rgba(16,185,129,0.15)]'
