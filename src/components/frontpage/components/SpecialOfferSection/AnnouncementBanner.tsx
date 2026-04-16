@@ -1,7 +1,7 @@
 // Path: src/components/banner/AnnouncementBanner.tsx
 'use client'
 
-import { ArrowRightIcon, XIcon, Timer } from 'lucide-react'
+import { ArrowRightIcon, XIcon, Sun, BirdIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils/className'
@@ -59,7 +59,7 @@ export default function AnnouncementBanner() {
         className='group block w-full bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 py-3 pl-4 pr-12 text-center text-sm font-medium text-white transition-all hover:bg-slate-950 sm:px-8'
       >
         <div className='flex items-center justify-center gap-2'>
-          <Timer className='h-4 w-4 shrink-0 text-blue-200' />
+          <BirdIcon className='h-4 w-4 shrink-0 text-blue-200' />
 
           <span className='mr-1'>
             <span className='hidden font-bold text-blue-100 sm:inline'>
@@ -67,11 +67,11 @@ export default function AnnouncementBanner() {
             </span>
 
             <span className='inline md:hidden'>
-              Vårtilbud: Utekos TechDown™ kr 1790,-
+              Utekos TechDown™ til kr 1790,-
             </span>
 
             <span className='hidden md:inline'>
-              Vårtilbud: Utekos TechDown™ kr 1790,-
+              Utekos TechDown™ til kr 1790,-
             </span>
           </span>
 

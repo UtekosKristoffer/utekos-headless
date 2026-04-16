@@ -84,15 +84,12 @@ export const NewProductLaunchSectionView = forwardRef<
             </div>
           </div>
 
-          <h2 className='gsap-item opacity-0 mb-4 text-4xl font-bold leading-tight text-accent/80 sm:text-5xl'>
-            Nyhet!
-          </h2>
-
-          <p className='gsap-item opacity-0 mb-8 max-w-prose text-lg leading-relaxed text-access/80'>
-            Vi introduserer {productName} – vår varmeste og mest allsidige
-            modell. Perfekt for deg som stiller de høyeste kravene til komfort
-            og funksjonalitet.
+          <p className='gsap-item opacity-0 mb-4 text-2xl! leading-tight text-accent/80 sm:text-5xl'>
+            Norsk vår er uforutsigbar.
           </p>
+          <h2 className='gsap-item opacity-0 mb-4 text-4xl! pb-4 font-bold leading-tight text-accent/80 sm:text-6xl'>
+            {productName} er ikke det.
+          </h2>
 
           <div className='mb-8 w-full space-y-3 text-access/80'>
             {newProductFeatures.map(feature => (
@@ -114,9 +111,7 @@ export const NewProductLaunchSectionView = forwardRef<
                     {originalPrice},-
                   </span>
                 </div>
-                <p className='text-sm text-access/80'>
-                  Begrenset tilbud ved lansering
-                </p>
+                <p className='text-sm text-access/80'>Tidbegrenset tilbud.</p>
               </div>
 
               <div className='flex flex-wrap gap-3'>

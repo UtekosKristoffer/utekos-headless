@@ -17,7 +17,7 @@ export interface PriceActivityPanelProps {
 const OFFERS = {
   'utekos-techdown': {
     label: 'Vårtilbud',
-    fixedSavings: 449, // Fast sparebeløp
+    fixedSavings: 200, // Fast sparebeløp
     originalPrice: null, // null = Ikke vis førpris
     description: 'Tilbudet gjelder i en begrenset periode.'
   },
