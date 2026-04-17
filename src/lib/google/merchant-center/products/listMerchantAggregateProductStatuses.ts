@@ -12,7 +12,7 @@ export async function listMerchantAggregateProductStatuses() {
 
   do {
     const response = await merchantApiRequest({
-      path: `/accounts/v1/${config.accountName}/aggregateProductStatuses`,
+      path: `/issueresolution/v1/${config.accountName}/aggregateProductStatuses`,
       searchParams: {
         pageSize: 1000,
         pageToken: nextPageToken

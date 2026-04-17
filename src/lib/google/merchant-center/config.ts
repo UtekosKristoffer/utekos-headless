@@ -1,13 +1,17 @@
+import { existsSync, readFileSync } from 'node:fs'
+import path from 'node:path'
+
 import { z } from 'zod'
 
 const EXPECTED_SERVICE_ACCOUNT_EMAIL =
   'tag-manager-service-account@nifty-structure-490519-u6.iam.gserviceaccount.com'
+const LOCAL_DEV_MERCHANT_SERVICE_ACCOUNT_PATH =
+  'src/api/lib/cloud-credentials/tag-manager-credentials.json'
 
 const merchantEnvSchema = z.object({
   GOOGLE_MERCHANT_ACCOUNT_ID: z.string().regex(/^\d+$/),
-  GOOGLE_MERCHANT_SERVICE_ACCOUNT_JSON: z.string().min(1),
+  GOOGLE_MERCHANT_SERVICE_ACCOUNT_JSON: z.string().min(1).optional(),
   GOOGLE_MERCHANT_QUOTA_PROJECT: z.string().min(1),
-  GOOGLE_MERCHANT_SYNC_SECRET: z.string().min(1),
   GOOGLE_MERCHANT_DATA_SOURCE_ID: z
     .string()
     .regex(/^\d+$/)
@@ -46,7 +50,6 @@ export const MERCHANT_CENTER_PRIMARY_DATA_SOURCE_DISPLAY_NAME =
 export type MerchantCenterConfig = {
   accountId: string
   accountName: string
-  syncSecret: string
   quotaProject: string
   primaryDataSourceDisplayName: string
   defaults: typeof MERCHANT_CENTER_DEFAULTS
@@ -65,17 +68,54 @@ function normalizeOptionalEnvValue(value: string | undefined) {
   return trimmedValue ? trimmedValue : undefined
 }
 
-function parseMerchantServiceAccount(rawValue: string) {
-  const parsedJson = JSON.parse(rawValue) as unknown
-  const serviceAccount = merchantServiceAccountSchema.parse(parsedJson)
-
-  return {
-    clientEmail: serviceAccount.client_email,
-    privateKey: serviceAccount.private_key.replace(/\\n/g, '\n'),
-    ...(serviceAccount.project_id
-      ? { projectId: serviceAccount.project_id }
-      : {})
+function readLocalMerchantServiceAccount() {
+  if (process.env.NODE_ENV === 'production') {
+    return undefined
   }
+
+  const credentialsPath = path.join(
+    process.cwd(),
+    LOCAL_DEV_MERCHANT_SERVICE_ACCOUNT_PATH
+  )
+
+  if (!existsSync(credentialsPath)) {
+    return undefined
+  }
+
+  return readFileSync(credentialsPath, 'utf8')
+}
+
+function parseMerchantServiceAccount(rawValue?: string) {
+  const candidateValues = [
+    normalizeOptionalEnvValue(rawValue),
+    readLocalMerchantServiceAccount()
+  ].filter((value): value is string => Boolean(value))
+  let lastError: unknown = null
+
+  for (const candidateValue of candidateValues) {
+    try {
+      const parsedJson = JSON.parse(candidateValue) as unknown
+      const serviceAccount = merchantServiceAccountSchema.parse(parsedJson)
+
+      return {
+        clientEmail: serviceAccount.client_email,
+        privateKey: serviceAccount.private_key.replace(/\\n/g, '\n'),
+        ...(serviceAccount.project_id
+          ? { projectId: serviceAccount.project_id }
+          : {})
+      }
+    } catch (error) {
+      lastError = error
+    }
+  }
+
+  if (lastError instanceof Error) {
+    throw lastError
+  }
+
+  throw new Error(
+    'Missing Merchant service account credentials. Set GOOGLE_MERCHANT_SERVICE_ACCOUNT_JSON or provide the local credential file.'
+  )
 }
 
 export function getMerchantCenterConfig(): MerchantCenterConfig {
@@ -85,10 +125,10 @@ export function getMerchantCenterConfig(): MerchantCenterConfig {
 
   const parsedEnv = merchantEnvSchema.parse({
     GOOGLE_MERCHANT_ACCOUNT_ID: process.env.GOOGLE_MERCHANT_ACCOUNT_ID,
-    GOOGLE_MERCHANT_SERVICE_ACCOUNT_JSON:
-      process.env.GOOGLE_MERCHANT_SERVICE_ACCOUNT_JSON,
+    GOOGLE_MERCHANT_SERVICE_ACCOUNT_JSON: normalizeOptionalEnvValue(
+      process.env.GOOGLE_MERCHANT_SERVICE_ACCOUNT_JSON
+    ),
     GOOGLE_MERCHANT_QUOTA_PROJECT: process.env.GOOGLE_MERCHANT_QUOTA_PROJECT,
-    GOOGLE_MERCHANT_SYNC_SECRET: process.env.GOOGLE_MERCHANT_SYNC_SECRET,
     GOOGLE_MERCHANT_DATA_SOURCE_ID: normalizeOptionalEnvValue(
       process.env.GOOGLE_MERCHANT_DATA_SOURCE_ID
     )
@@ -97,7 +137,6 @@ export function getMerchantCenterConfig(): MerchantCenterConfig {
   const config: MerchantCenterConfig = {
     accountId: parsedEnv.GOOGLE_MERCHANT_ACCOUNT_ID,
     accountName: `accounts/${parsedEnv.GOOGLE_MERCHANT_ACCOUNT_ID}`,
-    syncSecret: parsedEnv.GOOGLE_MERCHANT_SYNC_SECRET,
     quotaProject: parsedEnv.GOOGLE_MERCHANT_QUOTA_PROJECT,
     primaryDataSourceDisplayName:
       MERCHANT_CENTER_PRIMARY_DATA_SOURCE_DISPLAY_NAME,

@@ -99,7 +99,16 @@ export const merchantAggregateProductStatusSchema = z
   .object({
     name: z.string(),
     reportingContext: z.string().optional(),
+    country: z.string().optional(),
     countryCode: z.string().optional(),
+    stats: z
+      .object({
+        approvedCount: z.string().optional(),
+        pendingCount: z.string().optional(),
+        disapprovedCount: z.string().optional()
+      })
+      .passthrough()
+      .optional(),
     statistics: z
       .object({
         approvedCount: z.string().optional(),
@@ -107,6 +116,18 @@ export const merchantAggregateProductStatusSchema = z
         disapprovedCount: z.string().optional()
       })
       .passthrough()
+      .optional(),
+    itemLevelIssues: z
+      .array(
+        z
+          .object({
+            issueType: z.string().optional(),
+            severity: z.string().optional(),
+            numProducts: z.string().optional(),
+            sampleProducts: z.array(z.string()).optional()
+          })
+          .passthrough()
+      )
       .optional(),
     issues: z
       .array(

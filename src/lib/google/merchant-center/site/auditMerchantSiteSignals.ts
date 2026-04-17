@@ -270,9 +270,13 @@ export async function auditMerchantSiteSignals(productHandle?: string) {
       homepageHasAddress: homepageAudit?.hasAddress ?? false,
       homepageHasReturnPolicy: homepageAudit?.hasReturnPolicy ?? false,
       productCanonicalMatchesMerchantLink:
-        productPageAudit?.browser.canonical === merchantLink,
+        productHandle ?
+          productPageAudit?.browser.canonical === merchantLink
+        : null,
       productHasProductStructuredData:
-        productPageAudit?.browser.hasProductStructuredData ?? false
+        productHandle ?
+          (productPageAudit?.browser.hasProductStructuredData ?? false)
+        : null
     },
     pages
   }

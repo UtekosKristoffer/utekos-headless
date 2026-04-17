@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+import { getMerchantApiDiagnostic } from '@/lib/google/merchant-center/getMerchantApiDiagnostic'
 import { isAuthorizedMerchantRequest } from '@/lib/google/merchant-center/isAuthorizedMerchantRequest'
 import { syncCatalogToMerchantCenter } from '@/lib/google/merchant-center/sync/syncCatalogToMerchantCenter'
 
@@ -17,17 +18,12 @@ export async function GET(request: NextRequest) {
       status: result.success ? 200 : 500
     })
   } catch (error) {
-    const message =
-      error instanceof Error
-        ? error.message
-        : 'Unexpected Merchant cron sync error'
+    const diagnostic = getMerchantApiDiagnostic(error)
 
     return NextResponse.json(
       {
         success: false,
-        error: {
-          message
-        }
+        error: diagnostic
       },
       { status: 500 }
     )

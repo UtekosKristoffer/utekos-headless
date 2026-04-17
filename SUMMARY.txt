@@ -1,0 +1,293 @@
+Oppgave: Implementere korrekt bruk av Merchant Center API. 
+Dette har vært et enormt problem tidligere, hvor jeg alltid har fått advarsler fra Google av ulike grunner som jeg aldri har forstått. 
+Det er essensielt at vi følger deres retningslinjer til punkt og brikke. Utfordringer er min headless løsning med Shopify og next.js og vercel. Primærdomenet i Shopify er kasse.utekos.no som er stedet jeg sender kunder når de skal i kassen. Dette DNS peker altså på Shopify - opprettet i one.com - min domeneleverandør - som utekos.no - som igjen peker på Vercel.
+Product URL i shopify har /products/ som default, umulig å endre. Jeg har utekos.no/produkter 
+Så forøvrig at det nå en metafield fra google som het Adredirect etc. Men har også gått klager på at jeg ikke har informasjon om bedriften og "kontakt oss" lett tilgjengelig på siden. Det er direkte feil. Alt skal være omtrent optimalt. Dermed svært frustrerende. Merchant Center API er essensielt, sammen med Google Ads og GA4 når målet er optimalisering. 
+En annen irriterende ting er at jeg ikke får lagt til "review widget" via Merchant Center, fordi de ha har følgende retningslinjer. 
+
+Set up your opt-in integration
+Opt-in integration is a required step for Google Customer Reviews. This integration lets Google display surveys for customers to rate your business.
+
+Getting started
+Before getting started, review the Google Customer Reviews policies and complete the integration requirements for the opt-in
+
+Your shopping cart and checkout pages must be hosted on the same domain
+The confirmation page must be hosted on your own domain
+<!DOCTYPE HTML> must be added to the top of every webpage
+Once verified, follow the integration instructions to add the code snippet below to your order confirmation page and customize the variables as needed. The snippet integration will allow Google to display the Google Customer Reviews opt-in on your website. View instructions
+
+
+<script src="https://apis.google.com/js/platform.js?onload=renderOptIn" async defer></script>
+
+<script>
+  window.renderOptIn = function() {
+    window.gapi.load('surveyoptin', function() {
+      window.gapi.surveyoptin.render(
+        {
+          // REQUIRED FIELDS
+          "merchant_id": 5759759298,
+          "order_id": "ORDER_ID",
+          "email": "CUSTOMER_EMAIL",
+          "delivery_country": "COUNTRY_CODE",
+          "estimated_delivery_date": "YYYY-MM-DD",
+
+          // OPTIONAL FIELDS
+          "products": [{"gtin":"GTIN1"}, {"gtin":"GTIN2"}]
+        });
+    });
+  }
+</script>
+      
+Privacy Policy
+·
+Terms of Service
+·
+Set up your Google Customer Reviews Badge
+Use the badge to display your participation in the Google Customer Reviews program as well as show your seller rating on your site.
+
+Getting started
+Optional: Use the badge to display your participation in the Google Customer Reviews program as well as show your seller rating on your site.
+
+To get started, add the code snippet below to any page on your site and customize the variables as needed. After the code snippet has been added, verify the badge and attached text appear as expected on your site. Note: If there aren’t any seller ratings available, the message "no rating available" will appear. Learn more about badge integration
+
+
+<script id='merchantWidgetScript' src="https://www.gstatic.com/shopping/merchant/merchantwidget.js" defer></script>
+
+<script>
+  merchantWidgetScript.addEventListener('load', function () {
+    merchantwidget.start({
+         // REQUIRED FIELDS
+         merchant_id: 5759759298,
+
+         // OPTIONAL FIELDS
+         position: POSITION,
+         region: REGION,
+    });
+  });
+</script>
+     
+Dette er vel ikke mulig med min løsning i shopify - får ikke gjort stort etter at kunden har betalt eller i kassen. Har prøvd. En annen løsning, er å kanskje opprette en Shopiy App, som må må vel gjøres ifm med Agentic Commerce i shopify uansett, og se om det finnes en mulighet inn der. "Custom app" via admin funker ikke på agentic commerce - har prøvd - godtar ikke api nøykler / secrets / tokens. 
+
+Du har tag-manager-service-account@nifty-structure-490519-u6.iam.gserviceaccount.com  service accounten med tilgang og admin accesss på Merchant Center API + Oauth.  
+Merchant Center ID = 5759759298 - bare spør om. tilgang hvis du behøver mer.  Google sier eksplisitt at API nøkler ikke brukes til dette, men at måten jeg nevnte er korrekt. Dette skal bli satt opp slavisk etter Google best practise. Du må også analysere min utekos.no og se om det er noe som gjør at signalene google forteller om er reellle. Bruk alle MCP-server mulighetene du har. Med tilgang på Google Knowledge MCP, Google Gemini CLI MCP, Shopify MCP, Google Cloud MCP, Vercel, Next og Context7 MCP så bør dette være mulig. Bare å jobbe på uten å stoppe, men ta gjerne kort pause for å be om tilganger eller behov for info. Det meste skal dog være tilgjengelgi for deg. Tror også du har en Merchant Center MCP. også kjørt gcloud beta services mcp enable developerknowledge.googleapis.com --project=PROJECT_ID og satt opp mcp der. Ikke garantert at alt funker første forsøk uansett. Men dette er viktig, og det må finnes en løsning. Produktene må bli godkjent på merchant center og alt annet skal bekreftes at er registrert av Merchant center.
+Show more
+11:52
+
+
+Jeg behandler dette som en plan- og diagnoseoppgave først: jeg skal kartlegge eksisterende Merchant Center/Shopify/GA4-oppsett i repoet, bekrefte hvilke oppdaterte Google-/Shopify-dokumenter vi faktisk har, og så låse en beslutningskomplett implementeringsplan uten å gjette på API-er eller policy.
+
+
+Explored 1 file, 1 search, ran 2 commands
+Jeg har bekreftet at repoet allerede har Shopify Admin-integrasjon og Meta-katalogsync, men ingen tydelig Merchant Center-integrasjon. Jeg mangler fortsatt oppdatert Merchant Center-/Customer Reviews-dokumentasjon for å kunne spesifisere korrekt API- og policy-løsning; derfor henter jeg nå både lokal app-struktur og offisiell dokumentasjon før jeg låser plan.
+
+
+Explored 1 file, 1 search, 1 list
+Jeg ser allerede flere sterke signaler i koden: dere har rewrites fra /products/* til /produkter/*, product JSON-LD med MerchantReturnPolicy, kontakt/personvern/vilkår-ruter, og canonical-/sitemap-struktur i App Router. Nå går jeg over på ekstern verifikasjon: offisiell Google-dokumentasjon og live-sidekontroll for å skille reelle Merchant Center-feil fra falske/sekundære symptomer.
+
+
+Searched web 2 times
+Den eksterne dokumentasjonen gir allerede to avgjørende fakta: checkoutSettings i Merchant API gjelder bare USA, og Google Customer Reviews krever at Shopify-checkout returnerer til din egen domene-hostede ordrebekreftelsesside. Nå verifiserer jeg om utekos.no faktisk sender de signalene Google forventer på live produkt-, kontakt- og policy-sider.
+
+
+Explored 8 files, ran 1 command, searched web 1 time
+Direkte curl fra terminalen får 403 fra Vercel, mens en nettleser-aktig fetch får side-titler. Det peker mot bot/firewall-behandling, ikke nødvendigvis et faktisk brukerproblem, så jeg sjekker nå siden med ekte browser-automatisering for å se hva Google-lignende crawlers faktisk kan møte.
+
+
+Explored 9 files, 2 searches, 1 list, ran 1 command
+Jeg har funnet en konkret teknisk inkonsistens allerede: robots.ts eksponerer /api/google/feed, men den ruten finnes ikke i src/app/api. Det er akkurat typen signal-mismatch som kan gjøre Merchant Center-oppsett skjørt, så jeg går nå gjennom checkout-/order-webhook-strømmen for å se hva dere faktisk kan kontrollere etter kjøp.
+
+
+Explored 1 search, ran 2 commands, searched web 3 times
+Jeg prøver nå å verifisere selve Merchant Center-kontoen maskinelt, ikke bare repoet. Hvis lesetilgang virker, kan jeg se faktiske datasources, produkter og issues i kontoen og skille konfigurasjonsfeil fra policy-/landing page-feil.
+
+
+Ran 9 commands, searched web 1 time
+Merchant API-kallene ga ikke lesbar respons via den aktive gcloud-konteksten, så jeg sjekker auth/transport eksplisitt før jeg antar at API-tilgangen mangler. Det er viktig å skille “ingen tilgang” fra “feil endpoint / scope / shell-oppsett”.
+
+
+Ran 6 commands
+Den aktive brukerøkten kan ikke refreshe token non-interaktivt. Jeg prøver derfor en isolert, midlertidig service-account-auth med egen CLOUDSDK_CONFIG bare for lesing mot Merchant API, slik at vi kan få faktiske account/product-status-data uten å endre repo eller din vanlige gcloud-profil.
+
+
+Ran 1 command
+Service-account JSON i .env.local ser ut til å være lagret i et format som ikke kan parses direkte som standard .env-verdi. Jeg leter derfor etter en faktisk nøkkelfil eller alternativ Merchant Center-credential i workspace før jeg konkluderer om API-lesetilgangen.
+
+
+Explored 3 searches, ran 5 commands
+Jeg fikk nå parsingen til å fungere på Merchant Center-service-accounten fra miljøet. Neste steg er å bruke den i en helt midlertidig auth-kontekst og lese ut datasources og produktstatuser direkte fra Merchant API.
+
+
+Ran 1 command
+Merchant API-autentisering fungerer med service account. Responsene kom tilbake tomme i første forsøk, så jeg re-kjører med eksplisitte HTTP-statuskoder og headere for å fastslå om det er “ingen data”, feil resource path, eller manglende Merchant-rolle på akkurat denne service accounten.
+
+
+Ran 3 commands
+Jeg har nå verifisert selve årsaken til de mislykkede Merchant API-kallene: tokenet manglet https://www.googleapis.com/auth/content. Jeg henter derfor et ADC-token med riktig scope og leser ut kontoens faktiske Merchant-statuser.
+
+
+Ran 1 command
+Jeg har nå verifisert to separate auth-fakta, ikke antatt dem: service accounten er gyldig for Merchant API-scope, men blir stoppet av GCP-prosjektets serviceusage.services.use/roles/serviceUsageConsumer når quota-prosjekt settes. Jeg tester én siste variant uten quota-prosjekt-header før jeg ber om tilgangsendring.
+
+
+Explored 1 file, ran 1 command
+Jeg har nok repo-kontekst til å bruke browser-inspeksjon målrettet. Nå sjekker jeg live produktside, kontaktside og footer-signaler i ekte nettleser for å se om “kontakt oss / bedrift / policy”-kritikken er plausibel eller misvisende.
+
+
+Ran 3 commands
+Browser-inspeksjonen starter nå. Hvis siden laster normalt her, men ga 403 til terminal/curl, er det et klart tegn på bot-/firewall-differensiering som også kan påvirke Googles systemsjekker avhengig av user-agent og IP-behandling.
+
+
+Ran 13 commands
+403-forskjellen kan fortsatt bare være user-agent-basert. Jeg tester nå med vanlig browser user-agent i stedet for default curl, siden det er nærmere både ekte brukere og Googles renderte crawls.
+
+
+Ran 2 commands
+Kontekst automatisk komprimert
+Jeg har verifisert at Merchant Center ikke er implementert i repoet i dag, og at én kritisk blokkering er reell: service accounten i miljøet har ikke faktisk tilgang til Merchant Center-kontoen 5759759298. Nå samler jeg siste offisielle Google- og Shopify-dokumentasjon for å låse hva som faktisk er mulig i denne headless/Shopify-oppsettingen.
+
+
+Explored 3 files, 1 search, searched web 3 times
+Jeg låser nå de to punktene som avgjør løsningsrommet: 1) hva Merchant API faktisk krever for auth/issue-diagnostikk, og 2) hva Shopify Checkout Extensibility faktisk tillater på takk-/ordresidene. Dokumentasjon er delvis bekreftet fra Google, men jeg mangler fortsatt fullstendig oppdatert Shopify-dokumentasjon for å konkludere endelig om review-widget-sporet.
+
+
+Called 2 tools, searched web 5 times
+Jeg har nå bekreftet fra Shopify-dokumentasjonen at Checkout UI Extensions ikke kan injisere vilkårlig HTML eller <script>-tagger på checkout/takkesiden. Det betyr at Google Customer Reviews-snippet sannsynligvis ikke kan implementeres direkte i Shopify checkout på standard måte i dagens arkitektur, så jeg verifiserer nå om miljøet bruker samme service account som du oppga, og om blokkeringen er en tilgangsfeil eller et kontovalgproblem.
+
+
+Explored 1 file, ran 3 commands
+Jeg fant samtidig en sannsynlig signalkonflikt i kodebasen: flere interne datafiler peker fortsatt på https://www.utekos.no/products/..., mens live-site og canonical/JSON-LD bruker https://utekos.no/produkter/.... Det kan gi Google inkonsistente URL-signaler selv om redirect finnes, så jeg bekrefter nå hvilken service account som faktisk er lastet i miljøet.
+
+
+Explored 1 search, ran 2 commands, searched web 2 times
+Jeg har nå en viktig avklaring fra offisiell dokumentasjon: dagens Google Customer Reviews-dokumentasjon sier ikke lenger eksplisitt “cart og checkout må være samme domene”, men den krever at tredjeparts-checkout redirecter tilbake til en ordrebekreftelsesside på ditt eget domene. I praksis betyr det at Merchant Center-sporet er løsbart, mens Google Customer Reviews fortsatt ser blokkert ut av Shopify sin sandbox fordi snippet-et krever ekte <script>-injection på bekreftelsessiden.
+
+
+Explored 1 search, ran 2 commands
+Jeg har nok grunnlag til å låse løsningsrommet, men to valg påvirker planen direkte. Oppdatert dokumentasjon er nå på plass for Google Merchant API, Merchant Center-policyene og Shopify checkout-begrensningene; det som fortsatt mangler er korrekt konto-/tilgangsoppsett i Merchant Center.
+
+
+Spurte 2 spørsmål
+Jeg har nok til å forme en implementerbar plan nå. Siste kontroll jeg gjør er teknisk: om vi bør planlegge Merchant API-kall via ren REST/fetch eller via et Google-SDK i dette repoet, slik at planen ikke etterlater implementasjonsvalg åpne.
+
+
+Explored 1 file, 2 searches, searched web 2 times
+Kontekst automatisk komprimert
+Jeg har nok oppdatert dokumentasjon til å låse en implementeringsplan, men ikke hele endpoint-/feltskjemaet som trengs for selve koden enda. Jeg gjør ett siste repo-pass for å låse hvordan sync faktisk bør trigges, så planen blir beslutningskomplett.
+
+
+Explored 2 searches, ran 1 command
+Jeg har låst triggere og tidsstyring nå: repoet har allerede en katalog-cron vi kan gjenbruke, men det finnes ingen Merchant-synk eller produkt-webhooks ennå. Jeg leser akkurat de få filene som avgjør om vi skal utvide eksisterende sync-løp eller lage et separat Google-løp.
+
+
+Explored 3 files
+Jeg har bekreftet at dagens arkitektur allerede har et mønster vi kan bygge videre på: Shopify Admin som kilde, intern sync-tjeneste, og Vercel-cron for periodisk katalogoppdatering. Det gjør at jeg kan låse planen uten flere åpne designvalg.
+
+Arbeidet i 22m 27s
+Jeg har også låst hovedårsaken nokså tydelig: Googlebot ser ut til å få 200 og siden har både kontaktinfo og structured data, så «manglende bedriftsinformasjon» ser ikke ut som hovedfeilen. Den største reelle risikoen er inkonsistente URL-signaler og at Merchant-auth/access ikke faktisk er riktig satt opp enda.
+
+Utforsket 4 filer
+Plan
+
+
+Åpne
+
+Merchant API og signalopprydding for Utekos
+Sammendrag
+Dokumentasjonsstatus: Nok oppdatert Google- og Shopify-dokumentasjon er innhentet til å låse planen. Under implementering skal hvert konkret Merchant-endepunkt og feltskjema fortsatt verifiseres mot live/offisiell dokumentasjon før koden skrives.
+Mål: gjøre Merchant API til autoritativ katalogkanal for Google, få deterministisk innsikt i avvisninger/advarsler, og rydde alle URL-/domene-signaler som kan skape falske Merchant-varsler.
+Dagens diagnose: Googlebot får 200, <!DOCTYPE html> er til stede, kontaktinfo/returvilkår finnes, og structured data er rendret. De mest sannsynlige reelle problemene er Merchant-auth/access, produktdatakompletthet og inkonsistente signaler rundt /products vs /produkter, www vs apex, og Shopify checkout-domenet.
+Google Customer Reviews inngår ikke i denne leveransen: dagens arkitektur er ikke kompatibel med Googles opt-in-krav, og Shopify checkout-utvidelser kan ikke injisere den klassiske Google-snippeten.
+Viktige grensesnitt
+Nye konfig-verdier: GOOGLE_MERCHANT_ACCOUNT_ID=5759759298, GOOGLE_MERCHANT_SERVICE_ACCOUNT_JSON, GOOGLE_MERCHANT_QUOTA_PROJECT=nifty-structure-490519-u6, GOOGLE_MERCHANT_SYNC_SECRET, og valgfri GOOGLE_MERCHANT_DATA_SOURCE_ID.
+Nye interne HTTP-flater: GET /api/internal/google/merchant/sync?dryRun=1|0, GET /api/internal/google/merchant/status, og GET /api/cron/sync-google-merchant.
+Delt katalogtype i kode: Shopify-produkt/variant-modellen løftes til en felles “catalog sync”-shape som kan brukes av både Meta og Google uten domene-spesifikk logikk i fetch-laget.
+Implementeringsendringer
+Opprett eller oppdater PLAN.md først, siden den mangler og skal være kilde for resten av arbeidet.
+Standardiser auth på tag-manager-service-account@nifty-structure-490519-u6.iam.gserviceaccount.com. Før kodebruk skal kontoen ha Merchant Center-tilgang til 5759759298, quota-prosjektet skal ha Merchant API aktivert, og servicekontoen skal ha roles/serviceusage.serviceUsageConsumer.
+Legg til google-auth-library som eneste auth-lag for Merchant API. API-nøkler skal ikke brukes.
+Opprett et nytt domene under src/lib/google/merchant-center med små enkeltfiler for auth-client, config-validering, datasourceresolusjon, produktmapper, fullsynk, sletting av stale produkter, og status/issue-normalisering. All input og config valideres med Zod.
+Bruk Shopify Admin som eneste katalogkilde. Utvid dagens produkt-query til å hente minst barcode, sku, vendor, bilder, pris, lagerstatus, vekt og eksisterende Google custom labels.
+Mapperen skal bruke https://utekos.no/produkter/{handle} som eneste Merchant link, aldri /products/*.
+Mapperen skal sette brand fra vendor, med fallback til Utekos bare når produktet faktisk er eget merke.
+Mapperen skal bruke gtin fra barcode når den er gyldig, mpn fra SKU når GTIN mangler og SKU faktisk er produsentidentifikator, og identifierExists=false bare når identifikatorer legitimt ikke finnes.
+Mapperen skal alltid sende availability, price, image_link, shipping_weight, condition og custom_label_0..4, og bare sende kategori-spesifikke felter når kildedata faktisk finnes.
+Opprett eller verifiser en dedikert Merchant API-datasource for synken. Hvis GOOGLE_MERCHANT_DATA_SOURCE_ID ikke er satt, skal koden først prøve å finne riktig datasource ved navn; hvis ingen finnes, skal den feile tydelig i stedet for å gjette.
+Implementer full reconcile-synk i stedet for blind upsert: hver kjøring skal hente aktiv Shopify-katalog, upserte alle gyldige variantprodukter til Merchant API, og slette produkter som ikke lenger finnes eller ikke lenger skal eksponeres.
+Hold Google-synken separert fra Meta-synken. Meta-ruten og Google-ruten kan dele katalog-data-layer, men ikke runtime eller feilhåndtering.
+Legg til en Vercel-cron for Google-synk hver 6. time. Behold manuell dryRun for trygg første utrulling.
+Rydd alle hardkodede https://www.utekos.no/... og /products/...-referanser i repo-data som kan lekke inn i JSON-LD, feed-payloads eller interne lenker. next.config.ts sin eksisterende redirect-strategi beholdes; bare kildedata og utgående signaler normaliseres.
+Verifiser og behold disse signalene som del av status-audit: Googlebot og vanlig browser UA får 200 på butikk-, produkt-, kontakt- og retur-sider; <!DOCTYPE html> finnes; canonical matcher Merchant link; OnlineStore og Product JSON-LD inneholder kontaktpunkt, adresse og returpolicy; robots eller noindex blokkerer ikke aktuelle sider.
+Testplan
+Auth smoke test mot Merchant API med valgt servicekonto og quota-prosjekt.
+dryRun-synk på et lite utvalg produkter for å verifisere payload-validering og identifikator-regler før første live upsert.
+Live upsert av minst ett kjent produkt og etterfølgende lesing av produktstatus og issues fra Merchant API.
+Full reconcile-test som viser både opprettelse, oppdatering og sletting av stale Merchant-produkter.
+Live site audit mot utekos.no med både browser- og Googlebot-UA for butikkforside, /produkter, minst ett produkt, kontaktside, frakt-og-retur, personvern og vilkar-betingelser.
+Verifiser at GET /api/internal/google/merchant/status returnerer både Merchant-feil og site-signalresultater i en strukturert, lesbar form.
+Antakelser og valgte defaults
+Primær offentlig butikk-URL er https://utekos.no; https://kasse.utekos.no brukes kun til Shopify checkout og skal ikke være Merchant produkt-landing page.
+Primært marked er Norge med defaults country=NO, language=no, currency=NOK, med mindre Shopify-data senere eksplisitt krever flere markeder.
+Google Customer Reviews utsettes eksplisitt. Årsaken er at dagens cart/checkout-topologi og Shopify checkout-sandbox ikke støtter Googles klassiske opt-in-snippett på en måte som følger policy “slavisk”.
+Hvis Merchant fortsatt melder konto- eller policyvarsler etter denne implementasjonen, behandles de som et eget account-level spor i Merchant Center UI, ikke som feed- eller API-feil.
+Iverksett plan
+12:18
+
+
+Arbeidet i 31m 32s
+Jeg hadde tilstrekkelig oppdatert dokumentasjon til å implementere dette. Det som gjenstår nå er ikke dokumentasjon, men live Merchant-konfigurasjon: prosjektmiljøet mangler GOOGLE_MERCHANT_ACCOUNT_ID, GOOGLE_MERCHANT_SERVICE_ACCOUNT_JSON, GOOGLE_MERCHANT_QUOTA_PROJECT og GOOGLE_MERCHANT_SYNC_SECRET, så runtime-smoke mot Google stopper før første API-kall.
+
+Implementasjonen er på plass i repoet. Jeg opprettet PLAN.md, la inn et nytt Merchant Center-domene under src/lib/google/merchant-center, utvidet Shopify-kataloghentingen i src/lib/shopify/admin.ts, og løftet felles katalogtyper ut i src/lib/catalog-sync/types.ts. Merchant-mapperen bruker nå konsekvent https://utekos.no/produkter/{handle}, setter brand/gtin/mpn etter de reglene du ba om, støtter full reconcile med sletting av stale produkter, og holder Google-syncen helt separat fra Meta-runtime. Jeg la også inn interne ruter for sync/status under src/app/api/internal/google/merchant, en cron-route i src/app/api/cron/sync-google-merchant/route.ts, og oppdaterte vercel.json med 6-timers cron. I tillegg ryddet jeg kjente /products- og www-signaler i produktdata og lenker.
+
+Verifikasjon som er kjørt:
+
+npx tsc --noEmit
+npx eslint src/lib/shopify/admin.ts src/lib/tracking/meta/metaCatalogTypes.ts src/lib/google/merchant-center/**/*.ts src/app/api/internal/google/merchant/**/*.ts src/app/api/cron/sync-google-merchant/route.ts src/db/data/products/product-info.ts src/db/data/products/special-edition/details.ts src/db/data/products/comfyrobe/details.ts src/app/magasinet/hva-er-utekos/ProductFamilySection.tsx
+Begge er grønne. Runtime-verifikasjon mot Merchant API er blokkert av manglende env, og Zod bekrefter det eksplisitt. Når de fire Merchant-variablene er satt i Vercel og lokalt, er neste steg å kjøre dryRun mot GET /api/internal/google/merchant/sync?dryRun=1 og deretter live sync/status.
+
+
+12:50
+32 filer endret
++2001
+-115
+Angre
+
+Se gjennom
+PLAN.md
+src/app/api/cron/sync-google-merchant/route.ts
+src/app/api/internal/google/merchant/status/route.ts
+src/app/api/internal/google/merchant/sync/route.ts
+src/app/magasinet/hva-er-utekos/ProductFamilySection.tsx
+src/db/data/products/comfyrobe/details.ts
+src/db/data/products/product-info.ts
+src/db/data/products/products.json
+src/db/data/products/special-edition/details.ts
+src/lib/catalog-sync/types.ts
+src/lib/google/merchant-center/config.ts
+src/lib/google/merchant-center/dataSources/listMerchantDataSources.ts
+src/lib/google/merchant-center/dataSources/resolveMerchantProductDataSource.ts
+src/lib/google/merchant-center/getMerchantAuthClient.ts
+src/lib/google/merchant-center/isAuthorizedMerchantRequest.ts
+src/lib/google/merchant-center/issues/listMerchantAccountIssues.ts
+src/lib/google/merchant-center/issues/normalizeMerchantAccountIssue.ts
+src/lib/google/merchant-center/issues/normalizeMerchantProductStatus.ts
+src/lib/google/merchant-center/merchantApiRequest.ts
+src/lib/google/merchant-center/merchantCenterTypes.ts
+src/lib/google/merchant-center/products/buildMerchantProductInput.ts
+src/lib/google/merchant-center/products/buildMerchantProductInputName.ts
+src/lib/google/merchant-center/products/deleteMerchantProductInput.ts
+src/lib/google/merchant-center/products/insertMerchantProductInput.ts
+src/lib/google/merchant-center/products/listMerchantAggregateProductStatuses.ts
+src/lib/google/merchant-center/products/listMerchantProcessedProducts.ts
+src/lib/google/merchant-center/site/auditMerchantSiteSignals.ts
+src/lib/google/merchant-center/status/getMerchantCenterStatus.ts
+src/lib/google/merchant-center/sync/syncCatalogToMerchantCenter.ts
+src/lib/shopify/admin.ts
+src/lib/tracking/meta/metaCatalogTypes.ts
+vercel.json
+GOOGLE_MERCHANT_DATA_SOURCE_ID  er ikke opprettet
+GOOGLE_MERCHANT_SYNC_SECRET hva skal jeg legge her? 
+Google Cloud Storage bucket name = merchantcenter5759759298
+Er forøvrig tilkoblet Google Analytics. Ser det er integrasjonsmuligheter med Shopify også - men antar at det er uaktuelt for å få dette til å funke. Har lagt inn resterende i env.local og vercel env variables speiler den.
+13:20
+
+

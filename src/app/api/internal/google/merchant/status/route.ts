@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+import { getMerchantApiDiagnostic } from '@/lib/google/merchant-center/getMerchantApiDiagnostic'
 import { isAuthorizedMerchantRequest } from '@/lib/google/merchant-center/isAuthorizedMerchantRequest'
 import { getMerchantCenterStatus } from '@/lib/google/merchant-center/status/getMerchantCenterStatus'
 
@@ -14,17 +15,12 @@ export async function GET(request: NextRequest) {
     const result = await getMerchantCenterStatus()
     return NextResponse.json(result, { status: 200 })
   } catch (error) {
-    const message =
-      error instanceof Error
-        ? error.message
-        : 'Unexpected Merchant status error'
+    const diagnostic = getMerchantApiDiagnostic(error)
 
     return NextResponse.json(
       {
         success: false,
-        error: {
-          message
-        }
+        error: diagnostic
       },
       { status: 500 }
     )
