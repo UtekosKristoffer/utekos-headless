@@ -41,7 +41,7 @@ export default function MagazineLayout({ children }: { children: ReactNode }) {
             <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>
               Utekos Magasinet
             </h1>
-            <p className='mt-4 text-lg text-muted-foreground max-w-2xl mx-auto'>
+            <p className='mt-4 text-lg text-foreground max-w-2xl mx-auto'>
               Inspirasjon, tips og historier for deg som verdsetter de gode
               stundene ute.
             </p>

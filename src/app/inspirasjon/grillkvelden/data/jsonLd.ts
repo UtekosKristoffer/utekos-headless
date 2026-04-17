@@ -18,8 +18,8 @@ export const jsonLd: WithContext<Article> = {
       'url': 'https://utekos.no/logo.png'
     }
   },
-  'datePublished': '2025-09-21',
-  'dateModified': '2025-09-21',
+  'datePublished': '2026-04-17',
+  'dateModified': '2026-04-17',
   'mainEntityOfPage': {
     '@type': 'WebPage',
     '@id': 'https://utekos.no/inspirasjon/grillkvelden'

@@ -1,123 +1,218 @@
-// Path: src/lib/meta/catalogSync.ts
+// Path: src/lib/tracking/meta/catalogSync.ts
+
+import { FacebookAdsApi, ProductCatalog } from 'facebook-nodejs-business-sdk'
 
 import { getAllProductsForMetaSync } from '@/lib/shopify/admin'
-import { FacebookAdsApi, ProductCatalog } from 'facebook-nodejs-business-sdk'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 
-const ACCESS_TOKEN =
-  process.env.CATALOG_ACCESS_TOKEN || process.env.META_ACCESS_TOKEN
+import { buildMetaCatalogItemPayload } from './buildMetaCatalogItemPayload'
+import { extractMetaCatalogCustomLabels } from './extractMetaCatalogCustomLabels'
+import {
+  META_CUSTOM_LABEL_KEYS,
+  type MetaCatalogCustomLabelKey,
+  type MetaCatalogSyncErrorDetails,
+  type MetaCatalogSyncResult,
+  type MetaCatalogSyncSummary
+} from './metaCatalogTypes'
+import { resolveMetaCatalogAccessToken } from './resolveMetaCatalogAccessToken'
+
 const CATALOG_ID = '690208780604782'
-const WEBSITE_BASE_URL = 'https://utekos.no'
-if (!ACCESS_TOKEN) {
-  throw new Error('Missing META_ACCESS_TOKEN for Catalog Sync')
+
+const EXCLUDED_PRODUCT_IDS = [
+  '9227603149048', // Utekos Buff
+  '7710325899512' // Utekos Stapper
+]
+
+const EXCLUDED_VARIANT_IDS = ['42903234642168', '42903234609400']
+
+function createMissingLabelCounts(): Record<MetaCatalogCustomLabelKey, number> {
+  return META_CUSTOM_LABEL_KEYS.reduce(
+    (counts, key) => {
+      counts[key] = 0
+      return counts
+    },
+    {} as Record<MetaCatalogCustomLabelKey, number>
+  )
 }
 
-FacebookAdsApi.init(ACCESS_TOKEN)
-
-function getOptionValue(
-  options: any[],
-  nameToCheck: string[]
-): string | undefined {
-  const option = options.find((o: any) =>
-    nameToCheck.includes(o.name.toLowerCase())
-  )
-  return option ? option.value : undefined
+function createSyncSummary(): MetaCatalogSyncSummary {
+  return {
+    productsScanned: 0,
+    productsExcluded: 0,
+    inactiveProductsSkipped: 0,
+    productsMissingGroupId: 0,
+    variantsScanned: 0,
+    variantsExcluded: 0,
+    variantsMissingIdentifiers: 0,
+    variantsQueued: 0,
+    missingLabels: createMissingLabelCounts()
+  }
 }
 
-export async function syncProductsToMetaCatalog() {
-  console.log('[Meta Catalog] Starting sync...')
-
-  const products = await getAllProductsForMetaSync()
-  console.log(
-    `[Meta Catalog] Fetched ${products.length} products from Shopify.`
-  )
-
-  const batchRequests: any[] = []
-
-  for (const product of products) {
-    if (product.availableForSale !== true) continue
-    product.category.id
-    const googleProductCategory = 203
-    const cleanProductId = cleanShopifyId(product.id)
-    for (const variantEdge of product.variants.edges) {
-      const variant = variantEdge.node
-      const variantId = cleanShopifyId(variant.id)
-      if (!variantId) continue
-      const link = `${WEBSITE_BASE_URL}/produkter/${product.handle}?variant=${encodeURIComponent(variant.id)}`
-      const imageUrl = variant.image?.url || product.featuredImage?.url || ''
-      const brand = product.vendor || 'Utekos'
-      const color = getOptionValue(variant.selectedOptions, ['farge', 'color'])
-      const size = getOptionValue(variant.selectedOptions, [
-        'size',
-        'størrelse',
-        'str'
-      ])
-
-      const ageGroup = 'adult'
-      const gender = 'unisex'
-
-      const payloadData = {
-        id: `${product.id}_${variant.id}`,
-        title: `${product.title} - ${variant.title}`,
-        description:
-          product.Htmldescription ?
-            product.Htmldescription.replace(/<[^>]*>?/gm, '').substring(0, 5000)
-          : product.title,
-        availability:
-          variant.quantityAvailable && variant.quantityAvailable > 0 ?
-            'in stock'
-          : 'out of stock',
-        condition: 'new',
-        price: `${variant.price} NOK`,
-        compareAtPrice:
-          variant.compareAtPrice ? `${variant.compareAtPrice} NOK` : undefined,
-        link: link,
-        image_link: imageUrl,
-        brand: brand,
-        color: color,
-        size: size,
-        retailer_id: variantId,
-        item_group_id: cleanProductId,
-        google_product_category: googleProductCategory,
-        age_group: ageGroup,
-        gender: gender,
-        ...(variant.weight && {
-          shipping_weight: `${variant.weight} ${variant.weightUnit.toLowerCase()}`
-        })
+function createErrorDetails(error: unknown): MetaCatalogSyncErrorDetails {
+  const metaError = error as {
+    message?: string
+    response?: {
+      error?: {
+        code?: number | string
+        type?: string
+        fbtrace_id?: string
+        error_subcode?: number | string
+        message?: string
       }
-
-      if (variant.compareAtPrice) {
-        payloadData.price = `${variant.compareAtPrice} NOK`
-      }
-
-      batchRequests.push({
-        method: 'UPDATE',
-        retailer_id: variantId,
-        data: payloadData
-      })
     }
   }
 
-  if (batchRequests.length === 0) {
-    console.log('[Meta Catalog] No active variants to sync.')
-    return
+  const responseError = metaError.response?.error
+  const errorDetails: MetaCatalogSyncErrorDetails = {
+    message:
+      responseError?.message || metaError.message || 'Meta catalog sync failed',
+    raw: error
   }
 
+  const errorCode = responseError?.code ?? responseError?.error_subcode
+  if (errorCode !== undefined) {
+    errorDetails.code = errorCode
+  }
+
+  if (responseError?.type) {
+    errorDetails.type = responseError.type
+  }
+
+  if (responseError?.fbtrace_id) {
+    errorDetails.fbtraceId = responseError.fbtrace_id
+  }
+
+  return errorDetails
+}
+
+export async function syncProductsToMetaCatalog(): Promise<MetaCatalogSyncResult> {
+  const summary = createSyncSummary()
+  const resolvedToken = resolveMetaCatalogAccessToken()
+
+  if (!resolvedToken) {
+    return {
+      success: false,
+      catalogId: CATALOG_ID,
+      summary,
+      error: {
+        message:
+          'Missing Meta catalog token. Expected META_SYSTEM_USER_TOKEN, CATALOG_ACCESS_TOKEN, or META_ACCESS_TOKEN.'
+      }
+    }
+  }
+
+  FacebookAdsApi.init(resolvedToken.token)
+
   try {
+    console.log('[Meta Catalog] Starting sync...')
+
+    const products = await getAllProductsForMetaSync()
+    const batchRequests: Array<{
+      method: 'UPDATE'
+      retailer_id: string
+      data: ReturnType<typeof buildMetaCatalogItemPayload>
+    }> = []
+
+    for (const product of products) {
+      summary.productsScanned += 1
+
+      const retailerProductGroupId = cleanShopifyId(product.id)
+      const variantEdges = product.variants.edges
+
+      if (!retailerProductGroupId) {
+        summary.productsMissingGroupId += 1
+        summary.variantsMissingIdentifiers += variantEdges.length
+        continue
+      }
+
+      if (EXCLUDED_PRODUCT_IDS.includes(retailerProductGroupId)) {
+        summary.productsExcluded += 1
+        summary.variantsExcluded += variantEdges.length
+        continue
+      }
+
+      if (product.status !== 'ACTIVE') {
+        summary.inactiveProductsSkipped += 1
+        continue
+      }
+
+      for (const variantEdge of variantEdges) {
+        summary.variantsScanned += 1
+
+        const variant = variantEdge.node
+        const retailerId = cleanShopifyId(variant.id)
+
+        if (!retailerId) {
+          summary.variantsMissingIdentifiers += 1
+          continue
+        }
+
+        if (EXCLUDED_VARIANT_IDS.includes(retailerId)) {
+          summary.variantsExcluded += 1
+          continue
+        }
+
+        const { labels, missingLabels } = extractMetaCatalogCustomLabels(variant)
+        for (const missingLabel of missingLabels) {
+          summary.missingLabels[missingLabel] += 1
+        }
+
+        batchRequests.push({
+          method: 'UPDATE',
+          retailer_id: retailerId,
+          data: buildMetaCatalogItemPayload({
+            product,
+            variant,
+            retailerId,
+            retailerProductGroupId,
+            customLabels: labels
+          })
+        })
+
+        summary.variantsQueued += 1
+      }
+    }
+
+    if (batchRequests.length === 0) {
+      console.log('[Meta Catalog] No variants queued for sync.')
+
+      return {
+        success: true,
+        catalogId: CATALOG_ID,
+        tokenSource: resolvedToken.source,
+        summary,
+        batchResponse: null
+      }
+    }
+
     const catalog = new ProductCatalog(CATALOG_ID)
 
-    const response = await catalog.createItemsBatch([], {
+    const batchResponse = await catalog.createItemsBatch([], {
       item_type: 'PRODUCT_ITEM',
       requests: batchRequests
     })
 
-    console.log('[Meta Catalog] Sync successful!', response)
-    return response
-  } catch (error: any) {
-    console.error(
-      '[Meta Catalog] Sync failed:',
-      error.response ? error.response.data : error
-    )
-    throw error
+    console.log('[Meta Catalog] Sync successful.')
+
+    return {
+      success: true,
+      catalogId: CATALOG_ID,
+      tokenSource: resolvedToken.source,
+      summary,
+      batchResponse
+    }
+  } catch (error) {
+    const errorDetails = createErrorDetails(error)
+
+    console.error('[Meta Catalog] Sync failed:', errorDetails)
+
+    return {
+      success: false,
+      catalogId: CATALOG_ID,
+      tokenSource: resolvedToken.source,
+      summary,
+      error: errorDetails
+    }
   }
 }

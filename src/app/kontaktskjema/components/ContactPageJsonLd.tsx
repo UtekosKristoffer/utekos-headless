@@ -43,7 +43,7 @@ export async function ContactPageJsonLd() {
       'audienceType': 'Customers'
     },
 
-    'lastReviewed': '2025-11-10'
+    'lastReviewed': '2026-04-17'
   }
 
   return (

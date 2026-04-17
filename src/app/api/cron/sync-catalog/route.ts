@@ -1,5 +1,6 @@
 // Path: src/app/api/cron/sync-catalog/route.ts
 import { NextRequest, NextResponse } from 'next/server'
+
 import { syncProductsToMetaCatalog } from '@/lib/tracking/meta/catalogSync'
 
 export const maxDuration = 60
@@ -19,10 +20,21 @@ export async function GET(request: NextRequest) {
 
   try {
     const result = await syncProductsToMetaCatalog()
-    return NextResponse.json({ success: true, result })
-  } catch (error: any) {
+
+    return NextResponse.json(result, {
+      status: result.success ? 200 : 500
+    })
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : 'Unexpected catalog sync error'
+
     return NextResponse.json(
-      { success: false, error: error.message },
+      {
+        success: false,
+        error: {
+          message
+        }
+      },
       { status: 500 }
     )
   }

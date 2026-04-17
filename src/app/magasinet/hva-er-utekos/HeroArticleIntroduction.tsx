@@ -35,7 +35,7 @@ export const HeroArticleIntroduction = () => {
         <div className='container !mt-12 relative mx-auto max-w-4xl px-6 py-20 md:py-16 mb-12'>
           <AnimatedBlockTwo className='fade-in-up mb-8' delay='0ms'>
             <div className='flex items-center gap-4 text-sm text-muted-foreground'>
-              <time dateTime='2025-10-17'>17. oktober 2025</time>
+              <time dateTime='2026-04-17'>17. april 2026</time>
               <span className='h-1 w-1 rounded-full bg-muted-foreground' />
               <span>3 min lesetid</span>
             </div>

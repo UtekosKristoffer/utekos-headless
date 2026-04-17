@@ -24,7 +24,8 @@ export async function HyttelivJsonLd() {
       '@type': 'Thing',
       'name': 'Hytteliv og Utekos'
     },
-    'datePublished': '2025-10-01'
+    'datePublished': '2026-04-17',
+    'dateModified': '2026-04-17'
   }
 
   return (

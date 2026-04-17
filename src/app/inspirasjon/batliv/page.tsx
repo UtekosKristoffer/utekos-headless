@@ -68,8 +68,8 @@ const jsonLd: WithContext<Article> = {
       'url': 'https://utekos.no/logo.png'
     }
   },
-  'datePublished': '2025-04-10',
-  'dateModified': '2025-04-10',
+  'datePublished': '2026-04-17',
+  'dateModified': '2026-04-17',
   'mainEntityOfPage': {
     '@type': 'WebPage',
     '@id': 'https://utekos.no/inspirasjon/båtliv'

@@ -1,7 +1,13 @@
 // Path: src/lib/shopify/admin.ts
+import type {
+  MetaCatalogProduct,
+  MetaCatalogShippingWeightUnit,
+  MetaCatalogVariant
+} from '@/lib/tracking/meta/metaCatalogTypes'
+
 const SHOPIFY_ADMIN_API_TOKEN = process.env.SHOPIFY_ADMIN_API_TOKEN
 const SHOPIFY_STORE_DOMAIN = process.env.SHOPIFY_STORE_DOMAIN
-const API_VERSION = '2025-10'
+const API_VERSION = '2026-04'
 
 if (!SHOPIFY_ADMIN_API_TOKEN || !SHOPIFY_STORE_DOMAIN) {
   throw new Error('Missing Shopify Admin API credentials')
@@ -9,7 +15,80 @@ if (!SHOPIFY_ADMIN_API_TOKEN || !SHOPIFY_STORE_DOMAIN) {
 
 const SHOPIFY_GRAPHQL_URL = `https://${SHOPIFY_STORE_DOMAIN}/admin/api/${API_VERSION}/graphql.json`
 
-function mapWeightUnit(unit: string): string {
+type ShopifyWeightUnit =
+  | 'KILOGRAMS'
+  | 'GRAMS'
+  | 'POUNDS'
+  | 'OUNCES'
+  | string
+
+type ShopifyMetaSyncVariantNode = {
+  id: string
+  title: string
+  price: string
+  compareAtPrice: string | null
+  inventoryQuantity: number | null
+  image: {
+    url: string
+  } | null
+  selectedOptions: Array<{
+    name: string
+    value: string
+  }>
+  customLabel0: {
+    value: string
+  } | null
+  customLabel1: {
+    value: string
+  } | null
+  customLabel2: {
+    value: string
+  } | null
+  customLabel3: {
+    value: string
+  } | null
+  customLabel4: {
+    value: string
+  } | null
+  inventoryItem: {
+    measurement: {
+      weight: {
+        value: number
+        unit: ShopifyWeightUnit
+      } | null
+    } | null
+  } | null
+}
+
+type ShopifyMetaSyncProductNode = {
+  id: string
+  title: string
+  handle: string
+  descriptionHtml: string
+  vendor: string | null
+  status: string
+  featuredImage: {
+    url: string
+  } | null
+  variants: {
+    edges: Array<{
+      node: ShopifyMetaSyncVariantNode
+    }>
+  }
+}
+
+type ShopifyMetaSyncQueryResponse = {
+  data?: {
+    products: {
+      edges: Array<{
+        node: ShopifyMetaSyncProductNode
+      }>
+    }
+  }
+  errors?: unknown
+}
+
+function mapWeightUnit(unit: ShopifyWeightUnit): MetaCatalogShippingWeightUnit {
   switch (unit) {
     case 'KILOGRAMS':
       return 'kg'
@@ -24,9 +103,47 @@ function mapWeightUnit(unit: string): string {
   }
 }
 
-export async function getAllProductsForMetaSync() {
+function mapVariant(node: ShopifyMetaSyncVariantNode): MetaCatalogVariant {
+  const weightData = node.inventoryItem?.measurement?.weight
+
+  return {
+    id: node.id,
+    title: node.title,
+    price: node.price,
+    compareAtPrice: node.compareAtPrice,
+    inventoryQuantity: node.inventoryQuantity,
+    image: node.image,
+    selectedOptions: node.selectedOptions,
+    weight: weightData?.value || null,
+    weightUnit: weightData?.unit ? mapWeightUnit(weightData.unit) : 'kg',
+    customLabel0: node.customLabel0,
+    customLabel1: node.customLabel1,
+    customLabel2: node.customLabel2,
+    customLabel3: node.customLabel3,
+    customLabel4: node.customLabel4
+  }
+}
+
+function mapProduct(node: ShopifyMetaSyncProductNode): MetaCatalogProduct {
+  return {
+    id: node.id,
+    title: node.title,
+    handle: node.handle,
+    descriptionHtml: node.descriptionHtml,
+    vendor: node.vendor,
+    status: node.status,
+    featuredImage: node.featuredImage,
+    variants: {
+      edges: node.variants.edges.map(variantEdge => ({
+        node: mapVariant(variantEdge.node)
+      }))
+    }
+  }
+}
+
+export async function getAllProductsForMetaSync(): Promise<MetaCatalogProduct[]> {
   const query = `
-    query getAllProducts {
+    query getAllProductsForMetaSync {
       products(first: 250) {
         edges {
           node {
@@ -35,29 +152,15 @@ export async function getAllProductsForMetaSync() {
             handle
             descriptionHtml
             vendor
-            productType
             status
-            tags
-            productCategory {
-              productTaxonomyNode {
-                fullName
-                name
-              }
-            }
             featuredImage {
               url
-            }
-            options {
-              name
-              values
             }
             variants(first: 100) {
               edges {
                 node {
                   id
                   title
-                  sku
-                  barcode
                   price
                   compareAtPrice
                   inventoryQuantity
@@ -74,6 +177,21 @@ export async function getAllProductsForMetaSync() {
                   }
                   selectedOptions {
                     name
+                    value
+                  }
+                  customLabel0: metafield(namespace: "mm-google-shopping", key: "custom_label_0") {
+                    value
+                  }
+                  customLabel1: metafield(namespace: "mm-google-shopping", key: "custom_label_1") {
+                    value
+                  }
+                  customLabel2: metafield(namespace: "mm-google-shopping", key: "custom_label_2") {
+                    value
+                  }
+                  customLabel3: metafield(namespace: "mm-google-shopping", key: "custom_label_3") {
+                    value
+                  }
+                  customLabel4: metafield(namespace: "mm-google-shopping", key: "custom_label_4") {
                     value
                   }
                 }
@@ -100,60 +218,15 @@ export async function getAllProductsForMetaSync() {
       throw new Error(`Shopify Admin API Error (${response.status}): ${text}`)
     }
 
-    const json = await response.json()
+    const json = (await response.json()) as ShopifyMetaSyncQueryResponse
 
     if (json.errors) {
       throw new Error(`GraphQL Errors: ${JSON.stringify(json.errors)}`)
     }
 
-    const EXCLUDED_PRODUCT_IDS = [
-      '9227603149048', // Utekos Buff
-      '7710325899512' // Utekos Stapper
-    ]
-
-    const EXCLUDED_VARIANT_IDS = ['42903234642168', '42903234609400']
-
-    const filteredEdges = json.data.products.edges.filter((edge: any) => {
-      const nodeId = edge.node.id // F.eks "gid://shopify/Product/9227603149048"
-
-      const isExcludedProduct = EXCLUDED_PRODUCT_IDS.some(id =>
-        nodeId.endsWith(id)
-      )
-
-      return !isExcludedProduct
-    })
-
-    return filteredEdges.map((edge: any) => {
-      const product = edge.node
-
-      const validVariantEdges = product.variants.edges.filter((vEdge: any) => {
-        const variantId = vEdge.node.id // F.eks "gid://shopify/ProductVariant/42903234642168"
-        const isExcludedVariant = EXCLUDED_VARIANT_IDS.some(id =>
-          variantId.endsWith(id)
-        )
-        return !isExcludedVariant
-      })
-
-      const flatVariants = validVariantEdges.map((vEdge: any) => {
-        const v = vEdge.node
-        const weightData = v.inventoryItem?.measurement?.weight
-
-        return {
-          ...v,
-          weight: weightData?.value || null,
-          weightUnit: weightData?.unit ? mapWeightUnit(weightData.unit) : 'kg'
-        }
-      })
-
-      return {
-        ...product,
-        variants: {
-          edges: flatVariants.map((v: any) => ({ node: v }))
-        }
-      }
-    })
+    return json.data?.products.edges.map(edge => mapProduct(edge.node)) ?? []
   } catch (error) {
-    console.error('[Shopify Admin] Failed to fetch products:', error)
+    console.error('[Shopify Admin] Failed to fetch products for Meta sync:', error)
     throw error
   }
 }
