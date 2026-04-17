@@ -4,9 +4,9 @@
       "command": "npx",
       "args": ["-y", "meta-ads-mcp"],
       "env": {
-        "META_ACCESS_TOKEN": "EAAQZAyEd7NPYBQso3VSD6ltfhjkJVHtRWCIIlFbuUxgjmSC7zgSOp9ODP0rZCv8p79LsXd16uvsq2mCSk5xR8gvnrEd3MTZBPfB4dB0z3lZAcIuL5thx4CUOYgvfBrwhIpdhnzl2W1CIuMR3RjMf8eZCmgAynVr2se1phMtjLIyhmG8os7d2ibrrMlubJQI1AfkavF8uZCi5SvvZAR1OlCYtjfEzv3ZBPkkQZB1Xi932w",
+        "META_ACCESS_TOKEN": "EAAQZAyEd7NPYBRBOcLS5Ac8NOEfHdlEj4eYzojkhKyM5G7GiOnPfYZAOqOIMRkeXvPuywt6BVDLre5aSZCMQ20LtXALYl6HJygM583jmiZBoK2mph1BOUADA0m12iJqZBKqkEzHm99cEZAIvjGiSeAKRgcgdw6NtjhFlfT59lXLOyeFvBnPuxrLAp8O7UOVN9hUzggqfsUiZCFJNK22ygMHir0QNu71mDS455IL",
         "META_APP_ID": "1154247890253046",
-        "META_APP_SECRET": "d735025fbea1ac4e398f6ae20d0c305a",
+        "META_APP_SECRET": "cc07e82e19d1729a339e8ed27a15227d",
         "META_AUTO_REFRESH": "false",
         "META_BUSINESS_ID": "538548380599665"
       }

@@ -1,7 +1,6 @@
 import type {
   MetaCatalogCustomLabels,
   MetaCatalogProduct,
-  MetaCatalogShippingWeightUnit,
   MetaCatalogVariant
 } from './metaCatalogTypes'
 
@@ -19,17 +18,16 @@ export type MetaCatalogItemPayload = MetaCatalogCustomLabels & {
   condition: MetaCatalogCondition
   description: string
   gender: MetaCatalogGender
-  name: string
+  id: string
   price: string
-  retailer_id: string
-  retailer_product_group_id: string
+  title: string
+  item_group_id: string
   sale_price?: string
-  image_url?: string
+  image_link?: string
   color?: string
   size?: string
-  shipping_weight_unit?: MetaCatalogShippingWeightUnit
-  shipping_weight_value?: number
-  url: string
+  shipping_weight?: string
+  link: string
 }
 
 function getOptionValue(
@@ -76,6 +74,16 @@ function buildPriceData(variant: Pick<MetaCatalogVariant, 'price' | 'compareAtPr
   }
 }
 
+function buildShippingWeight(
+  variant: Pick<MetaCatalogVariant, 'weight' | 'weightUnit'>
+) {
+  if (!variant.weight) {
+    return undefined
+  }
+
+  return `${variant.weight} ${variant.weightUnit}`
+}
+
 export function buildMetaCatalogItemPayload({
   product,
   variant,
@@ -104,11 +112,11 @@ export function buildMetaCatalogItemPayload({
     condition: 'new',
     description,
     gender: 'unisex',
-    name: buildProductName(product, variant),
-    retailer_id: retailerId,
-    retailer_product_group_id: retailerProductGroupId,
-    url: buildVariantUrl(product.handle, variant.id),
+    id: retailerId,
+    item_group_id: retailerProductGroupId,
+    link: buildVariantUrl(product.handle, variant.id),
     ...buildPriceData(variant),
+    title: buildProductName(product, variant),
     ...customLabels
   }
 
@@ -128,14 +136,13 @@ export function buildMetaCatalogItemPayload({
 
   const imageUrl = variant.image?.url || product.featuredImage?.url
   if (imageUrl) {
-    payload.image_url = imageUrl
+    payload.image_link = imageUrl
   }
 
-  if (variant.weight) {
-    payload.shipping_weight_value = variant.weight
-    payload.shipping_weight_unit = variant.weightUnit
+  const shippingWeight = buildShippingWeight(variant)
+  if (shippingWeight) {
+    payload.shipping_weight = shippingWeight
   }
 
   return payload
 }
-

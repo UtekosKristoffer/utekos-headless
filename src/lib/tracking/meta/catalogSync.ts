@@ -110,7 +110,6 @@ export async function syncProductsToMetaCatalog(): Promise<MetaCatalogSyncResult
     const products = await getAllProductsForMetaSync()
     const batchRequests: Array<{
       method: 'UPDATE'
-      retailer_id: string
       data: ReturnType<typeof buildMetaCatalogItemPayload>
     }> = []
 
@@ -160,7 +159,6 @@ export async function syncProductsToMetaCatalog(): Promise<MetaCatalogSyncResult
 
         batchRequests.push({
           method: 'UPDATE',
-          retailer_id: retailerId,
           data: buildMetaCatalogItemPayload({
             product,
             variant,
