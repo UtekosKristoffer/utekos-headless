@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Sparkles, Zap } from 'lucide-react'
@@ -35,7 +34,7 @@ const products = [
       'Det geniale 3-i-1 designet',
       'Velg mellom Dun™ eller Mikrofiber™'
     ],
-    href: '/products/utekos-original' as Route,
+    href: '/produkter/utekos-original' as Route,
     featured: true
   },
   {
@@ -45,7 +44,7 @@ const products = [
       'Teknisk ytelse møter moderne design. CloudWeave™ isolasjon varmer selv når den er fuktig.',
     image: techdownImage,
     badge: { text: 'Nyhet', type: 'new' },
-    href: '/products/utekos-techdown' as Route,
+    href: '/produkter/utekos-techdown' as Route,
     featured: false
   },
   {
@@ -55,14 +54,12 @@ const products = [
       'Allværskåpe for helårsbruk. Vind- og vanntett med tykt Sherpa Fleece innerfôr.',
     image: comfyrobeImage,
     badge: null,
-    href: '/products/comfyrobe' as Route,
+    href: '/produkter/comfyrobe' as Route,
     featured: false
   }
 ] satisfies readonly [Product, Product, Product]
 
 export const ProductFamilySection = () => {
-  const [hoveredProduct, setHoveredProduct] = useState<string | null>(null)
-
   return (
     <>
       <style>
@@ -113,11 +110,7 @@ export const ProductFamilySection = () => {
 
           <div className='space-y-6'>
             <AnimatedBlockTwo className='fade-in-up' delay='150ms'>
-              <div
-                className='group relative overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-800/90 to-zinc-900/90 border border-zinc-700/50 hover:border-zinc-600/50 transition-all duration-500'
-                onMouseEnter={() => setHoveredProduct('original')}
-                onMouseLeave={() => setHoveredProduct(null)}
-              >
+              <div className='group relative overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-800/90 to-zinc-900/90 border border-zinc-700/50 hover:border-zinc-600/50 transition-all duration-500'>
                 <div className='absolute -inset-1 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500' />
 
                 <div className='relative grid md:grid-cols-2'>
@@ -178,11 +171,7 @@ export const ProductFamilySection = () => {
             </AnimatedBlockTwo>
             <div className='grid gap-6 md:grid-cols-2'>
               <AnimatedBlockTwo className='fade-in-up' delay='300ms'>
-                <div
-                  className='group relative h-full overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-800/90 to-zinc-900/90 border border-zinc-700/50 hover:border-zinc-600/50 transition-all duration-500'
-                  onMouseEnter={() => setHoveredProduct('techdown')}
-                  onMouseLeave={() => setHoveredProduct(null)}
-                >
+                <div className='group relative h-full overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-800/90 to-zinc-900/90 border border-zinc-700/50 hover:border-zinc-600/50 transition-all duration-500'>
                   <div className='absolute -inset-1 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500' />
 
                   <div className='relative'>
@@ -232,11 +221,7 @@ export const ProductFamilySection = () => {
                 </div>
               </AnimatedBlockTwo>
               <AnimatedBlockTwo className='fade-in-up' delay='450ms'>
-                <div
-                  className='group relative h-full overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-800/90 to-zinc-900/90 border border-zinc-700/50 hover:border-zinc-600/50 transition-all duration-500'
-                  onMouseEnter={() => setHoveredProduct('comfyrobe')}
-                  onMouseLeave={() => setHoveredProduct(null)}
-                >
+                <div className='group relative h-full overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-800/90 to-zinc-900/90 border border-zinc-700/50 hover:border-zinc-600/50 transition-all duration-500'>
                   <div className='absolute -inset-1 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500' />
 
                   <div className='relative'>

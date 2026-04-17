@@ -8,7 +8,7 @@
         "handle": "utekos-dun",
         "category": "Puffer Jackets",
         "urls": {
-          "publicUrl": "https://www.utekos.no/products/utekos-mikrofiber",
+          "publicUrl": "https://utekos.no/produkter/utekos-dun",
           "adminUrl": "https://admin.shopify.com/store/erling-7921/products/7710040391928"
         },
         "variantOptions": ["Farge", "Størrelse", "Kjønn"],
@@ -272,7 +272,7 @@
         "handle": "comfyrobe",
         "category": null,
         "urls": {
-          "publicUrl": "https://www.utekos.no/products/comfyrobe",
+          "publicUrl": "https://utekos.no/produkter/comfyrobe",
           "adminUrl": "https://admin.shopify.com/store/erling-7921/products/8036341448952"
         },
         "variantOptions": ["Farge", "Størrelse"],
@@ -373,7 +373,7 @@
         "handle": "utekos-special-edition",
         "category": null,
         "urls": {
-          "publicUrl": "https://www.utekos.no/products/utekos-special-edition",
+          "publicUrl": "https://utekos.no/produkter/utekos-special-edition",
           "adminUrl": "https://admin.shopify.com/store/erling-7921/products/7710043439352"
         },
         "variantOptions": ["Farge", "Størrelse", "Kjønn"],

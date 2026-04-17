@@ -1,4 +1,4 @@
-export const UTEKOS_DUN_PUBLIC_URL = 'https://www.utekos.no/products/utekos-dun'
+export const UTEKOS_DUN_PUBLIC_URL = 'https://utekos.no/produkter/utekos-dun'
 export const BEREDSKAPSPRODUKTER = [
   'utekos-dun',
   'utekos-techdown',

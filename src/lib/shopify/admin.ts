@@ -1,13 +1,15 @@
 // Path: src/lib/shopify/admin.ts
 import type {
-  MetaCatalogProduct,
-  MetaCatalogShippingWeightUnit,
-  MetaCatalogVariant
-} from '@/lib/tracking/meta/metaCatalogTypes'
+  CatalogSyncProduct,
+  CatalogSyncVariant,
+  CatalogSyncWeightUnit
+} from '@/lib/catalog-sync/types'
 
 const SHOPIFY_ADMIN_API_TOKEN = process.env.SHOPIFY_ADMIN_API_TOKEN
 const SHOPIFY_STORE_DOMAIN = process.env.SHOPIFY_STORE_DOMAIN
 const API_VERSION = '2026-04'
+const PRODUCT_PAGE_SIZE = 100
+const VARIANT_PAGE_SIZE = 250
 
 if (!SHOPIFY_ADMIN_API_TOKEN || !SHOPIFY_STORE_DOMAIN) {
   throw new Error('Missing Shopify Admin API credentials')
@@ -22,12 +24,15 @@ type ShopifyWeightUnit =
   | 'OUNCES'
   | string
 
-type ShopifyMetaSyncVariantNode = {
+type ShopifyCatalogSyncVariantNode = {
   id: string
   title: string
+  sku: string | null
+  barcode: string | null
   price: string
   compareAtPrice: string | null
   inventoryQuantity: number | null
+  availableForSale: boolean
   image: {
     url: string
   } | null
@@ -60,7 +65,7 @@ type ShopifyMetaSyncVariantNode = {
   } | null
 }
 
-type ShopifyMetaSyncProductNode = {
+type ShopifyCatalogSyncProductNode = {
   id: string
   title: string
   handle: string
@@ -72,23 +77,27 @@ type ShopifyMetaSyncProductNode = {
   } | null
   variants: {
     edges: Array<{
-      node: ShopifyMetaSyncVariantNode
+      node: ShopifyCatalogSyncVariantNode
     }>
   }
 }
 
-type ShopifyMetaSyncQueryResponse = {
+type ShopifyCatalogSyncQueryResponse = {
   data?: {
-    products: {
+    products?: {
+      pageInfo: {
+        hasNextPage: boolean
+        endCursor: string | null
+      }
       edges: Array<{
-        node: ShopifyMetaSyncProductNode
+        node: ShopifyCatalogSyncProductNode
       }>
     }
   }
   errors?: unknown
 }
 
-function mapWeightUnit(unit: ShopifyWeightUnit): MetaCatalogShippingWeightUnit {
+function mapWeightUnit(unit: ShopifyWeightUnit): CatalogSyncWeightUnit {
   switch (unit) {
     case 'KILOGRAMS':
       return 'kg'
@@ -103,15 +112,18 @@ function mapWeightUnit(unit: ShopifyWeightUnit): MetaCatalogShippingWeightUnit {
   }
 }
 
-function mapVariant(node: ShopifyMetaSyncVariantNode): MetaCatalogVariant {
+function mapVariant(node: ShopifyCatalogSyncVariantNode): CatalogSyncVariant {
   const weightData = node.inventoryItem?.measurement?.weight
 
   return {
     id: node.id,
     title: node.title,
+    sku: node.sku,
+    barcode: node.barcode,
     price: node.price,
     compareAtPrice: node.compareAtPrice,
     inventoryQuantity: node.inventoryQuantity,
+    availableForSale: node.availableForSale,
     image: node.image,
     selectedOptions: node.selectedOptions,
     weight: weightData?.value || null,
@@ -124,7 +136,7 @@ function mapVariant(node: ShopifyMetaSyncVariantNode): MetaCatalogVariant {
   }
 }
 
-function mapProduct(node: ShopifyMetaSyncProductNode): MetaCatalogProduct {
+function mapProduct(node: ShopifyCatalogSyncProductNode): CatalogSyncProduct {
   return {
     id: node.id,
     title: node.title,
@@ -141,10 +153,14 @@ function mapProduct(node: ShopifyMetaSyncProductNode): MetaCatalogProduct {
   }
 }
 
-export async function getAllProductsForMetaSync(): Promise<MetaCatalogProduct[]> {
+async function fetchCatalogSyncProductPage(cursor: string | null) {
   const query = `
-    query getAllProductsForMetaSync {
-      products(first: 250) {
+    query getCatalogSyncProducts($cursor: String) {
+      products(first: ${PRODUCT_PAGE_SIZE}, after: $cursor) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
         edges {
           node {
             id
@@ -156,14 +172,17 @@ export async function getAllProductsForMetaSync(): Promise<MetaCatalogProduct[]>
             featuredImage {
               url
             }
-            variants(first: 100) {
+            variants(first: ${VARIANT_PAGE_SIZE}) {
               edges {
                 node {
                   id
                   title
+                  sku
+                  barcode
                   price
                   compareAtPrice
                   inventoryQuantity
+                  availableForSale
                   inventoryItem {
                     measurement {
                       weight {
@@ -203,30 +222,72 @@ export async function getAllProductsForMetaSync(): Promise<MetaCatalogProduct[]>
     }
   `
 
-  try {
-    const response = await fetch(SHOPIFY_GRAPHQL_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Shopify-Access-Token': SHOPIFY_ADMIN_API_TOKEN as string
-      },
-      body: JSON.stringify({ query })
+  const response = await fetch(SHOPIFY_GRAPHQL_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Shopify-Access-Token': SHOPIFY_ADMIN_API_TOKEN as string
+    },
+    body: JSON.stringify({
+      query,
+      variables: {
+        cursor
+      }
     })
+  })
 
-    if (!response.ok) {
-      const text = await response.text()
-      throw new Error(`Shopify Admin API Error (${response.status}): ${text}`)
+  if (!response.ok) {
+    const text = await response.text()
+    throw new Error(`Shopify Admin API Error (${response.status}): ${text}`)
+  }
+
+  const json = (await response.json()) as ShopifyCatalogSyncQueryResponse
+
+  if (json.errors) {
+    throw new Error(`GraphQL Errors: ${JSON.stringify(json.errors)}`)
+  }
+
+  const productsConnection = json.data?.products
+
+  if (!productsConnection) {
+    return {
+      products: [],
+      nextCursor: null
     }
+  }
 
-    const json = (await response.json()) as ShopifyMetaSyncQueryResponse
+  return {
+    products: productsConnection.edges.map(edge => mapProduct(edge.node)),
+    nextCursor: productsConnection.pageInfo.hasNextPage
+      ? productsConnection.pageInfo.endCursor
+      : null
+  }
+}
 
-    if (json.errors) {
-      throw new Error(`GraphQL Errors: ${JSON.stringify(json.errors)}`)
+export async function getAllProductsForCatalogSync(): Promise<CatalogSyncProduct[]> {
+  try {
+    const products: CatalogSyncProduct[] = []
+    let cursor: string | null = null
+
+    while (true) {
+      const page = await fetchCatalogSyncProductPage(cursor)
+      products.push(...page.products)
+
+      if (!page.nextCursor) {
+        return products
+      }
+
+      cursor = page.nextCursor
     }
-
-    return json.data?.products.edges.map(edge => mapProduct(edge.node)) ?? []
   } catch (error) {
-    console.error('[Shopify Admin] Failed to fetch products for Meta sync:', error)
+    console.error(
+      '[Shopify Admin] Failed to fetch products for catalog sync:',
+      error
+    )
     throw error
   }
+}
+
+export async function getAllProductsForMetaSync() {
+  return getAllProductsForCatalogSync()
 }
