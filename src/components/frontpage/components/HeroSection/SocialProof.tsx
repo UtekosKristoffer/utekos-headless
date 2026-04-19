@@ -9,7 +9,7 @@ export function SocialProof() {
   const containerRef = useSocialProofAnimations()
 
   return (
-    <div ref={containerRef} className='mx-auto max-w-4xl px-4 md:px-0'>
+    <div ref={containerRef} className='mx-auto mt-84 max-w-4xl px-4 md:px-0'>
       <div className='grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6'>
         <SocialProofCard
           title='Rask levering'

@@ -1,53 +1,45 @@
-// Path: src/components/frontpage/SectionThreeInOne.tsx
+// Path: src/app/skreddersy-varmen/utekos-orginal/components/SectionThreeInOne.tsx
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils/className'
 import { Steps } from './Steps'
+import { useThreeInOneAnimations } from '@/hooks/useThreeInOneAnimations'
+
 export function SectionThreeInOne() {
-  const [activeStep, setActiveStep] = useState(0)
-  const stepRefs = useRef<(HTMLDivElement | null)[]>([])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const index = Number(entry.target.getAttribute('data-step-index'))
-            setActiveStep(index)
-          }
-        })
-      },
-      {
-        rootMargin: '-30% 0px -30% 0px',
-        threshold: 0
-      }
-    )
-
-    stepRefs.current.forEach(ref => {
-      if (ref) observer.observe(ref)
-    })
-    return () => observer.disconnect()
-  }, [])
+  const { containerRef, activeStep } = useThreeInOneAnimations()
 
   return (
-    <section className='bg-[#1F2421] text-[#F4F1EA] w-full'>
-      <div className='py-16 px-6 md:py-24 text-center max-w-4xl mx-auto'>
-        <span className='text-[#E07A5F] font-bold tracking-[0.2em] uppercase text-xs block mb-3'>
+    <section
+      ref={containerRef}
+      aria-labelledby='threeinone-heading'
+      className='w-full bg-[#1F2421] text-[#F4F1EA]'
+    >
+      {/* Intro header */}
+      <div className='gsap-three-intro mx-auto max-w-4xl px-6 py-16 text-center md:py-24'>
+        <span className='gsap-three-eyebrow mb-3 block text-xs font-bold uppercase tracking-[0.2em] text-[#E07A5F]'>
           Adaptiv funksjonalitet
         </span>
-        <h2 className='font-serif text-4xl md:text-6xl mb-6 leading-tight'>
+        <h2
+          id='threeinone-heading'
+          className='gsap-three-title mb-6 font-serif text-[clamp(2rem,7.5vw,4rem)] leading-tight'
+        >
           Friheten til å velge.
         </h2>
-        <p className='text-[#F4F1EA]/70 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto'>
-          Det unike med Utekos® er transformasjonen. Fra en isolerende kokong
-          til en elegant parkas på sekunder. Juster, form og nyt.
+        <p className='gsap-three-subtitle mx-auto max-w-2xl text-balance text-base font-light leading-relaxed text-[#F4F1EA]/70 md:text-xl'>
+          Det unike med Utekos<span className='text-[#E07A5F]'>®</span> er
+          transformasjonen. Fra en isolerende kokong til en elegant parkas på
+          sekunder. Juster, form og nyt.
         </p>
       </div>
-      <div className='lg:hidden flex flex-col w-full pb-20'>
-        {Steps.map((step, index) => (
-          <div key={step.id} className='flex flex-col mb-12 last:mb-0'>
+
+      {/* MOBILE: stacked cards */}
+      <div className='flex flex-col pb-20 lg:hidden'>
+        {Steps.map(step => (
+          <div
+            key={step.id}
+            className='gsap-step-panel mb-12 flex flex-col last:mb-0'
+          >
             <div
               className={cn(
                 'relative w-full border-y border-white/5 bg-[#151515]',
@@ -63,38 +55,41 @@ export function SectionThreeInOne() {
                 }
                 sizes='100vw'
               />
-              <div className='absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 text-xs font-bold text-white tracking-widest border border-white/10'>
+              <div className='gsap-step-badge absolute left-4 top-4 border border-white/10 bg-black/60 px-3 py-1 text-xs font-bold tracking-widest text-white backdrop-blur-md'>
                 {step.stepNumber}
               </div>
             </div>
 
             <div className='px-6 pt-6'>
-              <div className='flex items-center gap-2 mb-2 text-[#E07A5F]'>
+              <div className='gsap-step-eyebrow mb-2 flex items-center gap-2 text-[#E07A5F]'>
                 {step.icon}
                 <span className='text-xs font-bold uppercase tracking-widest'>
                   {step.modeName}
                 </span>
               </div>
-              <h3 className='text-2xl font-serif text-[#F4F1EA] mb-3'>
+              <h3 className='gsap-step-title mb-3 font-serif text-2xl text-[#F4F1EA]'>
                 {step.title}
               </h3>
-              <p className='text-[#F4F1EA]/70 text-base leading-relaxed font-light'>
+              <p className='gsap-step-desc text-base font-light leading-relaxed text-[#F4F1EA]/70'>
                 {step.description}
               </p>
             </div>
           </div>
         ))}
       </div>
-      <div className='hidden lg:flex w-full'>
-        <div className='w-1/2 h-screen sticky top-0 flex items-center justify-center bg-[#151515] overflow-hidden border-r border-white/5'>
+
+      {/* DESKTOP: scroll-pinned storytelling */}
+      <div className='hidden w-full lg:flex'>
+        {/* Sticky image column */}
+        <div className='sticky top-0 flex h-screen w-1/2 items-center justify-center overflow-hidden border-r border-white/5 bg-[#151515]'>
           {Steps.map((step, index) => (
             <div
               key={step.id}
               className={cn(
-                'absolute inset-0 w-full h-full transition-all duration-1000 ease-in-out',
+                'absolute inset-0 h-full w-full transition-all duration-1000 ease-in-out',
                 activeStep === index ?
-                  'opacity-100 scale-100 z-10'
-                : 'opacity-0 scale-105 z-0'
+                  'z-10 scale-100 opacity-100'
+                : 'z-0 scale-105 opacity-0'
               )}
             >
               <Image
@@ -102,11 +97,12 @@ export function SectionThreeInOne() {
                 alt={step.title}
                 fill
                 priority={index === 0}
-                className={
+                className={cn(
+                  'gsap-step-image will-change-transform',
                   step.desktopObjectFit === 'contain' ?
                     'object-contain p-20'
                   : 'object-cover'
-                }
+                )}
                 style={{
                   objectPosition: step.desktopObjectPosition || 'center'
                 }}
@@ -116,7 +112,7 @@ export function SectionThreeInOne() {
             </div>
           ))}
 
-          <div className='absolute left-8 bottom-8 z-20 flex gap-3'>
+          <div className='absolute bottom-8 left-8 z-20 flex gap-3'>
             {Steps.map((_, i) => (
               <div
                 key={i}
@@ -129,37 +125,27 @@ export function SectionThreeInOne() {
           </div>
         </div>
 
-        <div className='w-1/2 flex flex-col bg-[#1F2421]'>
-          {Steps.map((step, index) => (
+        {/* Scrolling text column */}
+        <div className='flex w-1/2 flex-col bg-[#1F2421]'>
+          {Steps.map(step => (
             <div
               key={step.id}
-              data-step-index={index}
-              ref={el => {
-                stepRefs.current[index] = el
-              }}
-              className='min-h-screen flex flex-col justify-center px-20 border-b border-white/5 last:border-0'
+              className='gsap-step-panel flex min-h-screen flex-col justify-center border-b border-white/5 px-20 last:border-0'
             >
-              <div
-                className={cn(
-                  'transition-all duration-700 delay-200 transform will-change-transform',
-                  activeStep === index ?
-                    'opacity-100 translate-y-0 blur-0'
-                  : 'opacity-20 translate-y-8 blur-sm'
-                )}
-              >
-                <span className='text-[#E07A5F] font-mono text-sm tracking-widest uppercase mb-4 block'>
+              <div className='will-change-transform'>
+                <span className='gsap-step-eyebrow mb-4 block font-mono text-sm uppercase tracking-widest text-[#E07A5F]'>
                   {step.stepNumber} — {step.modeName}
                 </span>
 
-                <h3 className='text-5xl font-serif text-[#F4F1EA] mb-6'>
+                <h3 className='gsap-step-title mb-6 font-serif text-5xl text-[#F4F1EA]'>
                   {step.title}
                 </h3>
 
-                <p className='text-xl text-[#F4F1EA]/70 leading-relaxed font-light max-w-lg'>
+                <p className='gsap-step-desc max-w-lg text-xl font-light leading-relaxed text-[#F4F1EA]/70'>
                   {step.description}
                 </p>
 
-                <div className='mt-8 p-4 bg-white/5 rounded-full w-fit text-[#E07A5F] border border-white/5'>
+                <div className='gsap-step-icon mt-8 w-fit rounded-full border border-white/5 bg-white/5 p-4 text-[#E07A5F]'>
                   {step.icon}
                 </div>
               </div>

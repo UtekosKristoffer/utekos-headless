@@ -1,122 +1,166 @@
-// Path: src/components/frontpage/SectionSocialProof.tsx
+// Path: src/app/skreddersy-varmen/utekos-orginal/components/SectionSocialProof.tsx
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
-import { Star, Quote, ChevronLeft, ChevronRight, MapPin } from 'lucide-react'
+import { useMemo } from 'react'
+import { Star, Quote, MapPin, BadgeCheck } from 'lucide-react'
 import { cn } from '@/lib/utils/className'
-import { reviews } from '../utils/reviews'
+import { reviews, type Review } from '../utils/reviews'
+import { useSocialProofMarqueeAnimations } from '@/hooks/useSocialProofMarqueeAnimations'
+
+function initialsFrom(name: string) {
+  const first = name.split(',')[0]?.trim() ?? name
+  return first
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map(part => part[0]?.toUpperCase() ?? '')
+    .join('')
+}
+
+function ReviewCard({ review }: { review: Review }) {
+  return (
+    <article
+      className={cn(
+        'group relative flex h-full flex-col justify-between rounded-lg border border-white/10 bg-[#2C2420]/70 p-6 backdrop-blur-sm transition-all duration-300 md:p-7',
+        'hover:-translate-y-0.5 hover:border-[#E07A5F]/40 hover:bg-[#2C2420] hover:shadow-2xl hover:shadow-black/40'
+      )}
+    >
+      <header className='mb-5 flex items-center justify-between gap-3'>
+        <div
+          aria-hidden
+          className='flex gap-0.5 text-[#FFD56B] [filter:drop-shadow(0_1px_3px_rgba(0,0,0,0.4))]'
+        >
+          {Array.from({ length: Math.round(review.rating) }).map((_, i) => (
+            <Star key={i} fill='currentColor' size={14} strokeWidth={0} />
+          ))}
+        </div>
+        <span className='inline-flex shrink-0 items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-emerald-300/90'>
+          <BadgeCheck size={12} aria-hidden />
+          Verifisert
+        </span>
+      </header>
+
+      {review.title && (
+        <h3 className='mb-3 font-serif text-xl leading-snug text-[#E07A5F] md:text-2xl'>
+          &ldquo;{review.title}&rdquo;
+        </h3>
+      )}
+
+      <p className='mb-6 text-sm leading-relaxed text-[#F4F1EA]/85 md:text-base'>
+        {review.quote}
+      </p>
+
+      <footer className='flex items-center gap-3 border-t border-white/10 pt-4'>
+        <div
+          aria-hidden
+          className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#E07A5F]/30 bg-[#E07A5F]/10 text-sm font-semibold text-[#E07A5F]'
+        >
+          {initialsFrom(review.name)}
+        </div>
+        <div className='min-w-0'>
+          <p className='truncate text-sm font-semibold text-[#F4F1EA]'>
+            {review.name}
+          </p>
+          {(review.role || review.location) && (
+            <p className='flex items-center gap-1.5 text-xs text-[#F4F1EA]/55'>
+              {review.role && (
+                <>
+                  <span className='truncate'>{review.role}</span>
+                  {review.location && <span aria-hidden>·</span>}
+                </>
+              )}
+              {review.location && (
+                <>
+                  <MapPin size={10} aria-hidden />
+                  <span className='truncate'>{review.location}</span>
+                </>
+              )}
+            </p>
+          )}
+        </div>
+      </footer>
+    </article>
+  )
+}
 
 export function SectionSocialProof() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isAnimating, setIsAnimating] = useState(false)
-
-  const nextReview = useCallback(() => {
-    if (isAnimating) return
-    setIsAnimating(true)
-    setTimeout(() => {
-      setCurrentIndex(prev => (prev + 1) % reviews.length)
-      setIsAnimating(false)
-    }, 300) // Matcher transition tid
-  }, [isAnimating])
-
-  const prevReview = () => {
-    if (isAnimating) return
-    setIsAnimating(true)
-    setTimeout(() => {
-      setCurrentIndex(prev => (prev - 1 + reviews.length) % reviews.length)
-      setIsAnimating(false)
-    }, 300)
-  }
-
-  useEffect(() => {
-    const timer = setInterval(nextReview, 8000)
-    return () => clearInterval(timer)
-  }, [nextReview])
-
-  const currentReview = reviews[currentIndex]
-
-  if (!currentReview) {
-    return null
-  }
+  const { containerRef, trackRef } = useSocialProofMarqueeAnimations()
+  const averageRating = useMemo(() => {
+    const avg =
+      reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
+    return avg.toFixed(1)
+  }, [])
 
   return (
-    <section className='bg-[#1F2421] text-[#F4F1EA] py-24 md:py-32 overflow-hidden border-t border-white/5 relative'>
-      <div className='absolute top-10 left-10 md:left-1/4 opacity-[0.03] pointer-events-none select-none'>
-        <Quote size={400} />
+    <section
+      ref={containerRef}
+      aria-labelledby='socialproof-heading'
+      className='relative border-t border-white/5 bg-[#1F2421] py-20 text-[#F4F1EA] md:py-28'
+    >
+      <div
+        aria-hidden
+        className='pointer-events-none absolute -top-16 right-4 select-none opacity-[0.04] md:right-16'
+      >
+        <Quote size={320} strokeWidth={1} />
       </div>
 
-      <div className='max-w-4xl mx-auto px-6 relative z-10'>
-        <div className='text-center mb-16'>
-          <div className='flex justify-center gap-2 mb-4 text-[#E07A5F]'>
-            {[1, 2, 3, 4, 5].map(i => (
-              <Star key={i} fill='currentColor' size={18} />
-            ))}
+      <div className='relative z-10 mx-auto max-w-6xl px-6'>
+        <header className='gsap-sp-header mb-12 text-center md:mb-16'>
+          <div className='gsap-sp-rating-pill mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium tracking-wider text-[#F4F1EA]/80'>
+            <span aria-hidden className='flex gap-0.5 text-[#FFD56B]'>
+              {[1, 2, 3, 4, 5].map(i => (
+                <Star key={i} fill='currentColor' size={10} strokeWidth={0} />
+              ))}
+            </span>
+            <span className='text-[#F4F1EA]'>{averageRating}</span>
+            <span aria-hidden className='text-[#F4F1EA]/30'>
+              /
+            </span>
+            <span className='text-[#F4F1EA]/70'>5 i snitt</span>
           </div>
-          <h2 className='text-3xl md:text-5xl font-serif mb-4'>
-            De som har opplevd Utekos
+
+          <h2
+            id='socialproof-heading'
+            className='gsap-sp-title mx-auto max-w-[18ch] text-balance break-words font-serif text-[clamp(1.75rem,7vw,3.75rem)] leading-[1.1] tracking-tight text-[#F4F1EA] sm:max-w-[22ch] md:max-w-3xl md:leading-[1.08]'
+          >
+            Livsnytere som tok kvelden tilbake.
           </h2>
-          <p className='text-[#F4F1EA]/60 text-lg font-light'>
-            4.8 av 5 i snitt på tvers av kolleksjonen.
+
+          <p className='gsap-sp-subtitle mx-auto mt-5 max-w-[34ch] text-balance break-words text-[clamp(0.875rem,3.4vw,1.125rem)] leading-relaxed text-[#F4F1EA]/65 md:max-w-2xl'>
+            Ord fra dem som allerede har byttet den snikende trekken mot en
+            lun kokong.
           </p>
-        </div>
-        <div className='relative min-h-[400px] flex items-center justify-center'>
-          <button
-            onClick={prevReview}
-            className='hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 p-4 text-white/30 hover:text-[#E07A5F] transition-colors z-20 hover:scale-110'
-            aria-label='Forrige omtale'
-          >
-            <ChevronLeft size={40} strokeWidth={1} />
-          </button>
+        </header>
+      </div>
 
-          <button
-            onClick={nextReview}
-            className='hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 p-4 text-white/30 hover:text-[#E07A5F] transition-colors z-20 hover:scale-110'
-            aria-label='Neste omtale'
-          >
-            <ChevronRight size={40} strokeWidth={1} />
-          </button>
+      {/* Marquee — continuous horizontal stream, pauses on hover/touch */}
+      <div
+        className='gsap-sp-marquee relative overflow-hidden py-4'
+        role='region'
+        aria-label='Kundeanmeldelser'
+      >
+        {/* Edge gradient masks */}
+        <div
+          aria-hidden
+          className='pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[#1F2421] to-transparent md:w-24'
+        />
+        <div
+          aria-hidden
+          className='pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[#1F2421] to-transparent md:w-24'
+        />
 
-          <div
-            className={cn(
-              'flex flex-col items-center text-center transition-all duration-300 ease-in-out px-4 md:px-20',
-              isAnimating ?
-                'opacity-0 scale-95 blur-sm'
-              : 'opacity-100 scale-100 blur-0'
-            )}
-          >
-            <h3 className='font-serif text-2xl md:text-3xl text-[#E07A5F] mb-6 italic'>
-              &ldquo;{currentReview.title}&rdquo;
-            </h3>
-            <p className='text-xl md:text-3xl font-serif leading-relaxed text-[#F4F1EA] mb-10 max-w-3xl'>
-              {currentReview.quote}
-            </p>
-
-            <div className='flex flex-col items-center gap-1 border-t border-white/10 pt-6 px-10'>
-              <span className='font-bold text-lg tracking-wide uppercase'>
-                {currentReview.name}
-              </span>
-              <div className='flex items-center gap-2 text-[#F4F1EA]/50 text-sm'>
-                <span>{currentReview.role}</span>
-                <span>•</span>
-                <span className='flex items-center gap-1'>
-                  <MapPin size={12} /> {currentReview.location}
-                </span>
-              </div>
+        <div
+          ref={trackRef}
+          className='gsap-sp-track flex w-max will-change-transform'
+        >
+          {[...reviews, ...reviews].map((review, i) => (
+            <div
+              key={`${review.id}-${i}`}
+              aria-hidden={i >= reviews.length}
+              className='mr-4 w-[min(85vw,22rem)] shrink-0 md:mr-6 md:w-[22rem] lg:w-[24rem]'
+            >
+              <ReviewCard review={review} />
             </div>
-          </div>
-        </div>
-
-        <div className='flex justify-center gap-3 mt-8 md:hidden'>
-          {reviews.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentIndex(i)}
-              className={cn(
-                'w-2 h-2 rounded-full transition-all duration-300',
-                i === currentIndex ? 'bg-[#E07A5F] w-6' : 'bg-white/20'
-              )}
-              aria-label={`Gå til omtale ${i + 1}`}
-            />
           ))}
         </div>
       </div>

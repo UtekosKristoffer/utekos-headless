@@ -1,7 +1,4 @@
 // Path: src/api/constants/index.ts
-import DunImage1 from '@public/1080/classic-blue-1080.png'
-import MicroImage1 from '@public/mikro-front-hvit-bakgrunn-1080.png'
-import TechDownImage1 from '@public/1080/techdown.png'
 export type ModelKey = keyof typeof PRODUCT_VARIANTS
 export const TAGS = {
   products: 'products',
@@ -25,36 +22,72 @@ export const PRODUCT_VARIANTS = {
     title: 'Utekos TechDown™',
     subtitle: 'Vår varmeste og mest allsidige',
     price: 1790,
+    badge: 'Bestselger',
+    description:
+      'Flaggskipet i kolleksjonen. CloudWave™ hydrofob isolasjon beholder varmen selv i fukt — der vanlig dun kollapser, består Utekos. 3-i-1-konstruksjonen lar deg justere fra parkas til kokong på sekunder, slik at du kan bli sittende lenger.',
+    highlights: [
+      {
+        title: 'Holder varmen i fukt',
+        body: 'CloudWave™ hydrofob isolasjon beholder rundt 98 % varmeevne selv når den blir våt. Vanlig dun kollapser; TechDown består.'
+      },
+      {
+        title: '3-i-1 fleksibilitet',
+        body: 'Parkas, oppfestet eller kokong — juster på sekunder uten å gå inn for å skifte.'
+      },
+      {
+        title: 'YKK® Dual V-Zip™',
+        body: 'To-spors omvendt V-glidelås gir ventilasjon og tilgang uten å åpne hele forsiden.'
+      },
+      {
+        title: 'Bygget for nordisk vær',
+        body: 'DuraLite™ Nylon — vindtett, vannavstøtende og slitesterkt 20D/380T-materiale.'
+      }
+    ],
     features: ['Vannavstøtende', 'Helårsbruk', 'Slitesterk'],
     colors: [{ name: 'Havdyp', hex: '#0F2B40' }],
-    sizes: ['Liten', 'Middels', 'Stor'],
-    image: TechDownImage1.src
-  },
-  dun: {
-    id: 'utekos-dun',
-    title: 'Utekos Dun™',
-    subtitle: 'Utekos Dun™',
-    price: 2490,
-    features: ['Ultralett', 'Maksimal varme', 'Høy kompresjon'],
-    colors: [
-      { name: 'Fjellblå', hex: '#020244' },
-      { name: 'Vargnatt', hex: '#000000' }
-    ],
-    sizes: ['Medium', 'Large'],
-    image: DunImage1.src
+    sizes: ['Liten', 'Middels', 'Stor', 'Ekstra stor'],
+    images: [
+      '/1080/kate-1080.png',
+      '/1080/techdown.png',
+      '/1080/tech-bakside-hel-1080.png',
+      '/1080/tech-halv-1080.png'
+    ]
   },
   mikro: {
     id: 'utekos-mikro',
     title: 'Utekos Mikrofiber™',
     subtitle: 'Lettvekts reisefølge',
     price: 1590,
-    features: ['Hurtigtørkende', 'Mest kompakt', 'Allergivennlig'],
-    colors: [
-      { name: 'Fjellblå', hex: '#020244' },
-      { name: 'Vargnatt', hex: '#000000' }
+    badge: 'Reisefavoritt',
+    description:
+      'Vårt letteste plagg — pakker seg ned, men gir overraskende lun varme. Perfekt for bobil, båt, hytte og reise. Hurtigtørkende mikrofiber-isolasjon og samme premium ytre som flaggskipet, bare lettere.',
+    highlights: [
+      {
+        title: 'Pakker seg lett',
+        body: 'Lavest vekt i kolleksjonen — ferdig sammenpakket tar den minimal plass i bagasjen.'
+      },
+      {
+        title: 'Hurtigtørkende',
+        body: 'Mikrofiber-isolasjonen tørker raskt etter regnbyger eller fuktig morgenduft på campingstolen.'
+      },
+      {
+        title: 'Allergivennlig',
+        body: '100 % syntetisk — ingen animalske produkter. Trygt valg for deg med dunallergi.'
+      },
+      {
+        title: 'YKK® Dual V-Zip™',
+        body: 'Lett, vindtett og vannavstøtende ytre. Bygget for samme situasjoner som flaggskipet — bare lettere.'
+      }
     ],
+    features: ['Hurtigtørkende', 'Mest kompakt', 'Allergivennlig'],
+    colors: [{ name: 'Fjellblå', hex: '#020244' }],
     sizes: ['Medium', 'Large'],
-    image: MicroImage1.src
+    images: [
+      '/1080/blue-full.png',
+      '/1080/blue-parkas.png',
+      '/1080/blue-oppfestet.png',
+      '/classic-blue-jacket-3-4.png'
+    ]
   }
 }
 

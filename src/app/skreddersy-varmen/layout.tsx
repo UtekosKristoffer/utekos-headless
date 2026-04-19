@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Utekos® definerer en ny standard for utendørs velvære, der funksjon møter kompromissløs komfort. Juster, form og nyt.',
   category: 'Yttertøy',
-    creator: 'Utekos',
+  creator: 'Utekos',
   publisher: 'Utekos',
   openGraph: {
     type: 'website',
@@ -35,6 +35,16 @@ export default function LandingPageLayout({
   return (
     <>
       <LandingPageJsonLd />
+      <style>
+        {`
+          #chatbase-bubble-button,
+          #chatbase-bubble-window,
+          iframe[src*="chatbase.co"],
+          iframe[id^="chatbase"] {
+            display: none !important;
+          }
+        `}
+      </style>
 
       {children}
     </>

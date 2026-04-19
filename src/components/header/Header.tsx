@@ -10,23 +10,23 @@ import { ClientMobileMenu } from './ClientMobileMenu'
 
 export default function Header({ menu }: { menu: MenuItem[] }) {
   return (
-    <header className='sticky top-0 z-50 border-b border-white/10 bg-sidebar-foreground py-3'>
-      <div className='container mx-auto flex items-center justify-between gap-6 px-4 sm:px-6 lg:px-8'>
+    <header className='sticky lg:min-h-[90px] px-10 mx-auto max-sm:px-6 top-0 z-50 border-b border-white/10 bg-sidebar-foreground py-3 w-full min-w-screen flex items-stretch justify-evenly'>
+      <div className='flex flex-1 basis-0 items-center justify-start max-w-screen-2xl'>
         <HeaderLogo />
+      </div>
 
-        <Suspense fallback={null}>
-          <ClientDesktopNavigation menu={menu} />
-        </Suspense>
+      <Suspense fallback={null}>
+        <ClientDesktopNavigation menu={menu} />
+      </Suspense>
 
-        <div className='flex items-center gap-2'>
-          <HeaderSearch />
+      <div className='flex flex-1 basis-0 items-center justify-end gap-2'>
+        <HeaderSearch />
 
-          <Activity>
-            <Cart />
-          </Activity>
+        <Activity>
+          <Cart />
+        </Activity>
 
-          <ClientMobileMenu menu={menu} />
-        </div>
+        <ClientMobileMenu menu={menu} />
       </div>
     </header>
   )

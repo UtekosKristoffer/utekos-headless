@@ -13,4 +13,6 @@ export interface NavLink {
   href: Route
   icon: React.ReactNode
   description: string
+  /** Hide on mobile, show from md breakpoint and up */
+  mdOnly?: boolean
 }

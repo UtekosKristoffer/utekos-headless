@@ -25,9 +25,9 @@ export function PreFooterNavigation() {
                 'group flex items-center justify-between p-6',
                 'bg-[#2C2420]/50 border border-white/5 rounded-sm',
                 'hover:bg-[#2C2420] hover:border-[#E07A5F]/50 transition-all duration-300',
-                index === 0 ?
-                  'md:col-span-2 lg:col-span-1 bg-[#2C2420] border-white/10'
-                : ''
+                index === 0 &&
+                  'md:col-span-2 lg:col-span-1 bg-[#2C2420] border-white/10',
+                link.mdOnly && 'hidden md:flex'
               )}
             >
               <div className='flex items-center gap-4'>

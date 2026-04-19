@@ -1,5 +1,5 @@
 import type { NavLink } from '@types'
-import { Home, Box, Layers, MapPin, Truck, Ruler } from 'lucide-react'
+import { Home, Box, Layers, MapPin, Truck, Ruler, BookOpen } from 'lucide-react'
 import type { Route } from 'next'
 export const NavLinks: NavLink[] = [
   {
@@ -37,5 +37,12 @@ export const NavLinks: NavLink[] = [
     href: '/handlehjelp/storrelsesguide' as Route,
     icon: <Ruler className='w-6 h-6' />,
     description: 'Finn din størrelse'
+  },
+  {
+    label: 'Magasinet',
+    href: '/magasinet' as Route,
+    icon: <BookOpen className='w-6 h-6' />,
+    description: 'Inspirasjon og historier',
+    mdOnly: true
   }
 ]

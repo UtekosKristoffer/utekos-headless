@@ -55,7 +55,7 @@ export function CartDrawer(): React.JSX.Element {
       </Activity>
 
       <Activity>
-        <DrawerContent className='h-full max-h-full overflow-hidden'>
+        <DrawerContent className='size-full overflow-hidden'>
           <VisuallyHidden>
             <DrawerTitle>Handlekurv</DrawerTitle>
             <DrawerDescription>

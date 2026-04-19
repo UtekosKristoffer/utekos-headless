@@ -17,13 +17,13 @@ export const MotionContentView = forwardRef<
         <div className='gsap-badge-bg absolute inset-0 rounded-full border border-sky-800/30 bg-sky-900/10' />
         <div className='gsap-badge-content relative flex items-center gap-2 px-4'>
           <Award className='h-4 w-4 text-sky-400' />
-          <span className='bg-gradient-to-r from-sky-200 via-white to-sky-200 bg-clip-text text-sm font-medium text-transparent'>
+          <span className='bg-gradient-to-r from-sky-200 via-white to-sky-200 bg-clip-text py-6 px-4 rounded-full text-sm font-medium text-transparent'>
             Funksjonell varme - siden 2020
           </span>
         </div>
       </div>
 
-      <h1 className='mt-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl xl:text-7xl'>
+      <h1 className='mt-6 text-5xl font-bold tracking-tight text-foreground sm:text-7xl lg:text-[56px] xl:text-8xl'>
         <span
           className='relative -mx-2 inline-block overflow-hidden px-2 pb-4'
           aria-label='Utekos'
@@ -39,9 +39,9 @@ export const MotionContentView = forwardRef<
         </span>
 
         <div className='overflow-hidden'>
-          <span className='gsap-subtitle mt-2 block bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text text-transparent outline-hidden'>
+          <h2 className='gsap-subtitle mb-6 block text-6xl text-xs:6xl lg:text-7xl xl:text-[110px] bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text text-transparent outline-hidden'>
             Skreddersy varmen
-          </span>
+          </h2>
         </div>
       </h1>
 

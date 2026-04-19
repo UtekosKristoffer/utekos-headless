@@ -49,7 +49,7 @@ export function HeaderSearch({ className }: { className?: string }) {
     'onTouchStart': handlePrefetch,
     'aria-label': 'Åpne søk (⌘/Ctrl + K)',
     'className': cn(
-      'group relative hidden h-9 w-[14rem] items-center gap-2 rounded-md border border-neutral-800 px-3 text-left text-sm text-muted-foreground outline-none transition md:flex',
+      'group relative hidden h-11 w-[11rem] items-center gap-2 rounded-md border border-neutral-800 px-3 text-left text-sm text-muted-foreground outline-none transition md:flex xl:mr-2 xl:w-[14rem]',
       'hover:border-white/20 focus-visible:border-white/30',
       className
     )

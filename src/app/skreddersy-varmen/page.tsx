@@ -6,6 +6,7 @@ import { SectionThreeInOne } from './utekos-orginal/components/SectionThreeInOne
 import { SectionSocialProof } from './utekos-orginal/components/SectionSocialProof'
 import { HeroAndEmpathy } from './components/HeroEmpathy'
 import { PurchaseClient } from './utekos-orginal/components/PurchaseClient'
+import { ProductDetailsAccordion } from './utekos-orginal/components/ProductDetailsAccordion'
 import { getProduct } from '@/api/lib/products/getProduct'
 import { StickyMobileAction } from './utekos-orginal/components/StickyMobileAction'
 import { PreFooterNavigation } from './utekos-orginal/components/PreFooterNavigation'
@@ -38,17 +39,15 @@ export const metadata: Metadata = {
 }
 
 export default async function LandingPage() {
-  const [techDown, dun, mikro, buff] = await Promise.all([
+  const [techDown, mikro, buff] = await Promise.all([
     getProduct('utekos-techdown'),
-    getProduct('utekos-dun'),
     getProduct('utekos-mikrofiber'),
     getProduct('utekos-buff')
   ])
 
   const productsMap = {
     'utekos-techdown': techDown,
-    'utekos-dun': dun,
-    'utekos-mikrofiber': mikro,
+    'utekos-mikro': mikro,
     'utekos-buff': buff
   }
 
@@ -62,10 +61,15 @@ export default async function LandingPage() {
       <TechDownSlider />
       <SectionSocialProof />
       <Suspense fallback={null}>
-        <div id='purchase-section'>
+        <div
+          id='purchase-section'
+          className='scroll-mt-[70px] xl:scroll-mt-[86px]'
+        >
           <PurchaseClient products={productsMap} />
         </div>
       </Suspense>
+
+      <ProductDetailsAccordion />
 
       <PreFooterNavigation />
     </section>

@@ -39,11 +39,16 @@ export type ProductVariantConnection = {
   edges: ProductVariantEdge[]
 }
 
-export type ModelKey = 'techdown' | 'dun' | 'mikro'
+export type ModelKey = 'techdown' | 'mikro'
 
 export type ColorVariant = {
   name: string
   hex: string
+}
+
+export type ProductHighlight = {
+  title: string
+  body: string
 }
 
 export type ProductConfig = {
@@ -51,7 +56,10 @@ export type ProductConfig = {
   title: string
   subtitle: string
   price: number
-  image: string | { src: string; width: number; height: number }
+  badge: string
+  description: string
+  highlights: ProductHighlight[]
+  images: string[]
   colors: ColorVariant[]
   sizes: string[]
   features: string[]

@@ -941,3 +941,19 @@
 @utility phone-input-field {
   @apply h-full w-full flex-1 rounded-none border-none bg-background px-3 text-base placeholder:text-muted-foreground focus:outline-none focus:ring-0;
 }
+
+/* Utekos continuous marquee — used in SectionSocialProof */
+@keyframes utekos-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-utekos-marquee] {
+    animation: none !important;
+  }
+}
