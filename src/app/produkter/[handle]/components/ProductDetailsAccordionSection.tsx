@@ -1,12 +1,11 @@
 'use client'
 
+import { dispatchMetaTrackingEvent } from '@/lib/tracking/meta/dispatchMetaTrackingEvent'
 import { sendGAEvent } from '@next/third-parties/google'
 import { AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import type { AccordionSectionData } from '@types'
-import type { MetaUserData, MetaEventPayload } from 'types/tracking/meta'
 import { colorHexByTextClass } from '../utils/colorHexByTextClass'
 import { AccordionContentRenderer } from './AccordionContentRenderer'
-import { getCookie } from '@/components/analytics/Meta/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { track } from '@vercel/analytics/react'
 import { generateEventID } from '@/components/analytics/Meta/generateEventID'
@@ -29,54 +28,18 @@ export function ProductDetailsAccordionSection({
     const contentId = rawId || ''
     const contentIds = contentId ? [contentId] : []
     const eventID = generateEventID().replace('evt_', 'acc_')
-    const timestamp = Math.floor(Date.now() / 1000)
-    const sourceUrl = window.location.href
     const pixelEventData = {
       content_name: title,
       content_ids: contentIds,
       content_type: 'product',
       accordion_section: id
     }
-    if (typeof window !== 'undefined' && window.fbq) {
-      window.fbq('trackCustom', 'InteractWithAccordion', pixelEventData, {
-        eventID
-      })
-    }
 
-    const capiEventData = {
-      content_name: title,
-      content_ids: contentIds,
-      content_type: 'product' as const
-    }
-
-    const fbc = getCookie('_fbc')
-    const fbp = getCookie('_fbp')
-    const externalId = getCookie('ute_ext_id')
-    const emailHash = getCookie('ute_user_hash')
-    const userData: MetaUserData = {
-      external_id: externalId || undefined,
-      fbc: fbc || undefined,
-      fbp: fbp || undefined,
-      email_hash: emailHash || undefined,
-      client_user_agent: navigator.userAgent
-    }
-
-    const capiPayload: MetaEventPayload = {
+    void dispatchMetaTrackingEvent({
       eventName: 'InteractWithAccordion',
       eventId: eventID,
-      eventSourceUrl: sourceUrl,
-      eventTime: timestamp,
-      actionSource: 'website',
-      userData,
-      eventData: capiEventData
-    }
-
-    fetch('/api/tracking-events', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(capiPayload),
-      keepalive: true
-    }).catch(console.error)
+      eventData: pixelEventData
+    })
   }
 
   return (

@@ -1,8 +1,9 @@
 'use client'
 import { track } from '@vercel/analytics'
 import * as React from 'react'
+import { dispatchMetaTrackingEvent } from '@/lib/tracking/meta/dispatchMetaTrackingEvent'
+import { getClientMetaUserData } from '@/lib/tracking/meta/getClientMetaUserData'
 import { Button } from '@/components/ui/button'
-import type { MetaEventPayload } from 'types/tracking/meta/event'
 import type { CaptureBody, MetaUserData } from 'types/tracking/meta'
 import { getCheckoutAriaLabel } from './getCheckoutAriaLabel'
 import { generateEventID } from '@/components/analytics/Meta/generateEventID'
@@ -36,7 +37,7 @@ export const CheckoutButton = ({
   React.ComponentProps<typeof Button>,
   'asChild' | 'disabled' | 'aria-label'
 >): React.JSX.Element => {
-  const onClick = (_e: React.MouseEvent<HTMLAnchorElement>) => {
+  const onClick = () => {
     if (isPending) return
     if (!cartId) {
       console.error('CheckoutButton onClick: Missing cartId!')
@@ -46,25 +47,13 @@ export const CheckoutButton = ({
     try {
       const cleanItemIds = item_ids.map(id => cleanShopifyId(id) || id)
 
-      const fbp = getCookie('_fbp')
-      const fbc = getCookie('_fbc')
-      const extId = getCookie('ute_ext_id')
-      const emailHash = getCookie('ute_user_hash')
-      const ua =
-        typeof navigator !== 'undefined' ? navigator.userAgent : undefined
       const rawEventID = generateEventID()
       const eventID = rawEventID.replace('evt_', 'ic_')
       const value = Number.parseFloat(subtotalAmount || '0') || 0
-      const userData: MetaUserData = {
-        fbp: fbp || undefined,
-        fbc: fbc || undefined,
-        external_id: extId || undefined,
-        email_hash: emailHash || undefined,
-        client_user_agent: ua
-      }
+      const userData: MetaUserData = getClientMetaUserData()
 
       const snapId = getCookie('ute_sc_cid')
-      const metaId = fbc
+      const metaId = userData.fbc
       const pinId = getCookie('_epik')
       const tiktokId = getCookie('ute_ttclid')
 
@@ -93,21 +82,6 @@ export const CheckoutButton = ({
             }
           })
         }).catch(() => {})
-      }
-
-      if (typeof window !== 'undefined' && window.fbq) {
-        window.fbq(
-          'track',
-          'InitiateCheckout',
-          {
-            value,
-            currency,
-            content_ids: cleanItemIds,
-            content_type: 'product',
-            num_items
-          },
-          { eventID }
-        )
       }
 
       if (typeof window !== 'undefined' && window.snaptr) {
@@ -155,29 +129,18 @@ export const CheckoutButton = ({
         keepalive: true
       }).catch(err => console.error('Capture identifiers failed', err))
 
-      const capiPayload: MetaEventPayload = {
+      void dispatchMetaTrackingEvent({
         eventName: 'InitiateCheckout',
         eventId: eventID,
-        eventSourceUrl:
-          typeof window !== 'undefined' ? window.location.href : checkoutUrl,
-        eventTime: Math.floor(Date.now() / 1000),
-        actionSource: 'website',
-        userData,
         eventData: {
           value,
           currency,
           content_ids: cleanItemIds,
           content_type: 'product',
           num_items
-        }
-      }
-
-      fetch('/api/tracking-events', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(capiPayload),
-        keepalive: true
-      }).catch(err => console.error('CAPI IC failed', err))
+        },
+        userData
+      })
     } catch (error) {
       console.error('Feil under sending av checkout-events:', error)
     }

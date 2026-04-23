@@ -10,4 +10,9 @@ export type CheckoutAttribution = {
   eventId?: string | undefined
   ga_client_id?: string | undefined
   ga_session_id?: string | undefined
+  gclid?: string | undefined
+  gbraid?: string | undefined
+  wbraid?: string | undefined
+  msclkid?: string | undefined
+  dclid?: string | undefined
 }

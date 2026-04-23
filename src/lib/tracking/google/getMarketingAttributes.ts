@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers'
+import { parseMarketingParamsCookie } from '@/lib/tracking/google/parseMarketingParamsCookie'
 
 interface Attribute {
   key: string
@@ -37,9 +38,29 @@ export async function getMarketingAttributes(): Promise<Attribute[]> {
     const parts = sessionCookie.value.split('.')
     const sessionId = parts[2]
 
-    if (parts.length >= 3 && sessionId) {
+  if (parts.length >= 3 && sessionId) {
       attributes.push({ key: '_ga_session_id', value: sessionId })
     }
+  }
+
+  const marketingParams = parseMarketingParamsCookie(
+    cookieStore.get('marketing_params')?.value
+  )
+
+  if (marketingParams.gclid) {
+    attributes.push({ key: 'gclid', value: marketingParams.gclid })
+  }
+  if (marketingParams.gbraid) {
+    attributes.push({ key: 'gbraid', value: marketingParams.gbraid })
+  }
+  if (marketingParams.wbraid) {
+    attributes.push({ key: 'wbraid', value: marketingParams.wbraid })
+  }
+  if (marketingParams.msclkid) {
+    attributes.push({ key: 'msclkid', value: marketingParams.msclkid })
+  }
+  if (marketingParams.dclid) {
+    attributes.push({ key: 'dclid', value: marketingParams.dclid })
   }
 
   return attributes

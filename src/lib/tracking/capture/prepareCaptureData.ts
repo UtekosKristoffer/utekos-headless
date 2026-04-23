@@ -17,6 +17,11 @@ export function prepareCaptureData(
     scid: cookies.scid || undefined,
     click_id: cookies.click_id || undefined,
     epik: cookies.epik || undefined,
+    gclid: cookies.gclid || undefined,
+    gbraid: cookies.gbraid || undefined,
+    wbraid: cookies.wbraid || undefined,
+    msclkid: cookies.msclkid || undefined,
+    dclid: cookies.dclid || undefined,
     client_user_agent:
       body.userData?.client_user_agent || userAgent || undefined,
 
@@ -40,6 +45,11 @@ export function prepareCaptureData(
     userData,
     ga_client_id: cookies.gaClientId || undefined,
     ga_session_id: cookies.gaSessionId || undefined,
+    gclid: cookies.gclid || undefined,
+    gbraid: cookies.gbraid || undefined,
+    wbraid: cookies.wbraid || undefined,
+    msclkid: cookies.msclkid || undefined,
+    dclid: cookies.dclid || undefined,
     ts: Date.now(),
     ...(body.eventId ? { eventId: body.eventId } : {})
   }

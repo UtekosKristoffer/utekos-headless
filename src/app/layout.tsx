@@ -7,6 +7,7 @@ import Footer from '@/components/footer/components/Footer'
 import Header from '@/components/header/Header'
 import AnnouncementBanner from '@/components/frontpage/components/SpecialOfferSection/AnnouncementBanner'
 import { ChatBotAgent } from '@/components/chat/ChatBotAgent/source-code'
+import { MetaPixelEvents } from '@/components/analytics/Meta/MetaPixelEvents'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { CartProviderLoader } from '@/components/providers/CartProviderLoader'
 import {
@@ -27,6 +28,13 @@ const GTM_SCRIPT_ORIGIN = (
 
 const SHOULD_LOAD_GOOGLE_TAG_MANAGER =
   process.env.NODE_ENV === 'production' && process.env.VERCEL_ENV !== 'preview'
+
+const SHOULD_LOAD_META_PIXEL =
+  !!process.env.NEXT_PUBLIC_META_PIXEL_ID
+  && (
+    process.env.NODE_ENV === 'production'
+    || !!process.env.NEXT_PUBLIC_META_TEST_EVENT_CODE
+  )
 
 const GTM_BOOTSTRAP_SCRIPT = `
   (function(w,d,s,l,i){
@@ -119,6 +127,7 @@ export default function RootLayot({ children }: { children: ReactNode }) {
       <body
         className={`bg-background text-foreground ${geistSans.className} antialiased`}
       >
+        {SHOULD_LOAD_META_PIXEL && <MetaPixelEvents />}
         {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (
           <noscript>
             <iframe

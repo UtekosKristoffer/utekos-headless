@@ -74,25 +74,47 @@ export async function processBrowserEvent(
       events_received: metaResponse.events_received,
       fbtrace_id: metaResponse.fbtrace_id
     }
-  } catch (error: any) {
-    const errorData = error.response?.data || {}
+  } catch (error: unknown) {
+    const normalizedError =
+      error instanceof Error ?
+        error
+      : new Error(typeof error === 'string' ? error : 'Unknown Error')
+    const errorWithResponse = normalizedError as Error & {
+      response?: {
+        data?: {
+          error?: {
+            code?: number
+            message?: string
+            type?: string
+          }
+        }
+      }
+    }
+    const errorData = errorWithResponse.response?.data || {}
 
     await deps.logger(
       'ERROR',
       `CAPI Failed: ${body.eventName}`,
       {
-        error: error.message || 'Unknown Error',
+        eventId: body.eventId,
+        eventTime: body.eventTime,
+        error: normalizedError.message || 'Unknown Error',
         details: errorData,
         type: errorData.error?.type,
         code: errorData.error?.code
       },
-      { eventId: body.eventId }
+      {
+        actionSource: body.actionSource || 'website',
+        eventName: body.eventName,
+        eventSourceUrl: body.eventSourceUrl,
+        eventId: body.eventId
+      }
     )
 
     return {
       success: false,
       error: 'Failed to send event to Meta',
-      details: errorData.error?.message || error.message
+      details: errorData.error?.message || normalizedError.message
     }
   }
 }

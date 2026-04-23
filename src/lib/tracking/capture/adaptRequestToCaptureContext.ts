@@ -5,6 +5,7 @@ import { getClientIp } from '@/lib/tracking/user-data/getClientIp'
 import { parseGaClientId } from '@/lib/tracking/google/parseGaClientId'
 import { parseGaSessionId } from '@/lib/tracking/google/parseGaSessionId'
 import { findGaSessionCookie } from '@/lib/tracking/google/findGaSessionCookie'
+import { parseMarketingParamsCookie } from '@/lib/tracking/google/parseMarketingParamsCookie'
 import { GA_MEASUREMENT_ID } from '@/api/constants/monitoring'
 import type { CaptureContext } from 'types/tracking/capture/CaptureContext'
 
@@ -21,6 +22,9 @@ export function adaptRequestToCaptureContext(
 
   const gaSessionCookieVal = findGaSessionCookie(cookieMap, GA_MEASUREMENT_ID)
   const gaSessionIdFromCookie = parseGaSessionId(gaSessionCookieVal)
+  const marketingParams = parseMarketingParamsCookie(
+    cookieStore.get('marketing_params')?.value
+  )
 
   return {
     cookies: {
@@ -31,6 +35,11 @@ export function adaptRequestToCaptureContext(
       scid: cookieStore.get('_scid')?.value,
       click_id: cookieStore.get('ute_sc_cid')?.value,
       epik: cookieStore.get('_epik')?.value,
+      gclid: marketingParams.gclid,
+      gbraid: marketingParams.gbraid,
+      wbraid: marketingParams.wbraid,
+      msclkid: marketingParams.msclkid,
+      dclid: marketingParams.dclid,
       gaClientId: body?.gaClientId || gaClientIdFromCookie,
       gaSessionId: body?.gaSessionId || gaSessionIdFromCookie
     },

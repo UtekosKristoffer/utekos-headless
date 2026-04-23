@@ -6,12 +6,10 @@ import {
   CustomData,
   Content
 } from 'facebook-nodejs-business-sdk'
+import { getMetaPurchaseEventTime } from '@/lib/tracking/meta/getMetaPurchaseEventTime'
 import { safeString } from '@/lib/utils/safeString'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 import type { TrackingContext } from 'types/tracking/user/TrackingContext'
-
-const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
-const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE
 
 function resolveMetaAccessToken() {
   return (
@@ -22,10 +20,20 @@ function resolveMetaAccessToken() {
   )
 }
 
+function resolveMetaPixelId() {
+  return process.env.NEXT_PUBLIC_META_PIXEL_ID || undefined
+}
+
 type MetaApiError = Error & {
   response?: {
     data?: {
-      error?: unknown
+      error?: {
+        code?: number
+        error_subcode?: number
+        fbtrace_id?: string
+        message?: string
+        type?: string
+      }
     }
   }
 }
@@ -37,8 +45,10 @@ export async function sendMetaPurchase({
   contentIds
 }: TrackingContext) {
   const accessToken = resolveMetaAccessToken()
+  const pixelId = resolveMetaPixelId()
+  const testEventCode = process.env.META_TEST_EVENT_CODE
 
-  if (!accessToken || !PIXEL_ID) {
+  if (!accessToken || !pixelId) {
     console.error('[Meta CAPI] Critical: Missing Configuration')
     return { success: false, error: 'Missing Config' }
   }
@@ -90,7 +100,7 @@ export async function sendMetaPurchase({
 
   const serverEvent = new ServerEvent()
     .setEventName('Purchase')
-    .setEventTime(Math.floor(Date.now() / 1000))
+    .setEventTime(getMetaPurchaseEventTime(order))
     .setActionSource('website')
     .setEventId(`shopify_order_${order.id}`)
     .setUserData(userData)
@@ -102,10 +112,10 @@ export async function sendMetaPurchase({
     )
 
   try {
-    const eventRequest = new EventRequest(accessToken, PIXEL_ID).setEvents([
+    const eventRequest = new EventRequest(accessToken, pixelId).setEvents([
       serverEvent
     ])
-    if (TEST_EVENT_CODE) eventRequest.setTestEventCode(TEST_EVENT_CODE)
+    if (testEventCode) eventRequest.setTestEventCode(testEventCode)
 
     const response = await eventRequest.execute()
 
@@ -132,6 +142,7 @@ export async function sendMetaPurchase({
   } catch (error: unknown) {
     const err = error as MetaApiError
     const errorResponse = err.response?.data || {}
+    const graphError = errorResponse.error
     console.error(
       '[Meta CAPI] Request Failed:',
       JSON.stringify(errorResponse, null, 2)
@@ -142,8 +153,15 @@ export async function sendMetaPurchase({
       'CAPI Purchase Failed',
       {
         orderId: order.id,
+        eventId: `shopify_order_${order.id}`,
+        eventTime: serverEvent.event_time,
         error: err.message,
-        details: err.response?.data?.error
+        graphCode: graphError?.code,
+        graphSubcode: graphError?.error_subcode,
+        graphMessage: graphError?.message,
+        graphType: graphError?.type,
+        fbtrace_id: graphError?.fbtrace_id,
+        details: graphError
       },
       {}
     )

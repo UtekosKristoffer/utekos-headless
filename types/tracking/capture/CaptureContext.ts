@@ -9,6 +9,11 @@ export type CaptureContext = {
     scid?: string | undefined
     click_id?: string | undefined
     epik?: string | undefined
+    gclid?: string | undefined
+    gbraid?: string | undefined
+    wbraid?: string | undefined
+    msclkid?: string | undefined
+    dclid?: string | undefined
     gaClientId?: string | undefined
     gaSessionId?: string | undefined
   }

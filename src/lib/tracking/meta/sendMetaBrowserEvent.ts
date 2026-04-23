@@ -12,9 +12,6 @@ import type {
   MetaContentItem
 } from 'types/tracking/meta'
 
-const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
-const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE
-
 function resolveMetaAccessToken() {
   return (
     process.env.META_ACCESS_TOKEN ||
@@ -24,13 +21,19 @@ function resolveMetaAccessToken() {
   )
 }
 
+function resolveMetaPixelId() {
+  return process.env.NEXT_PUBLIC_META_PIXEL_ID || undefined
+}
+
 export async function sendMetaBrowserEvent(
   payload: MetaEventPayload,
   userData: ClientUserData
 ) {
   const accessToken = resolveMetaAccessToken()
+  const pixelId = resolveMetaPixelId()
+  const testEventCode = process.env.META_TEST_EVENT_CODE
 
-  if (!accessToken || !PIXEL_ID) throw new Error('Missing Meta Credentials')
+  if (!accessToken || !pixelId) throw new Error('Missing Meta Credentials')
   if (!payload.eventName) throw new Error('Missing eventName in payload')
 
   FacebookAdsApi.init(accessToken)
@@ -96,10 +99,10 @@ export async function sendMetaBrowserEvent(
 
   serverEvent.setActionSource(payload.actionSource || 'website')
 
-  const eventRequest = new EventRequest(accessToken, PIXEL_ID).setEvents([
+  const eventRequest = new EventRequest(accessToken, pixelId).setEvents([
     serverEvent
   ])
-  if (TEST_EVENT_CODE) eventRequest.setTestEventCode(TEST_EVENT_CODE)
+  if (testEventCode) eventRequest.setTestEventCode(testEventCode)
 
   return await eventRequest.execute()
 }
