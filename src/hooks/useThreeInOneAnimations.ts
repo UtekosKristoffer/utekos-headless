@@ -72,19 +72,36 @@ export function useThreeInOneAnimations() {
 
         // ─── PER-STEP PANELS ─────────────────────────────────────
         // Each panel triggers its own animations + sets activeStep
-        const panels = gsap.utils.toArray<HTMLElement>('.gsap-step-panel')
+        // ─── PER-STEP PANELS ─────────────────────────────────────
+        // ─── PER-STEP PANELS ─────────────────────────────────────
+        const mobilePanels = gsap.utils.toArray<HTMLElement>(
+          '.gsap-mobile-step-panel'
+        )
+        const desktopPanels = gsap.utils.toArray<HTMLElement>(
+          '.gsap-desktop-step-panel'
+        )
+        const panels = [...mobilePanels, ...desktopPanels]
 
-        panels.forEach((panel, index) => {
-          // Direction varies per step — left, right, up
+        panels.forEach(panel => {
+          const isDesktopPanel = panel.classList.contains(
+            'gsap-desktop-step-panel'
+          )
+          const stepIndex =
+            isDesktopPanel ?
+              desktopPanels.indexOf(panel)
+            : mobilePanels.indexOf(panel)
+
           const direction =
-            index === 0 ? 'left' : index === 1 ? 'right' : 'up'
+            stepIndex === 0 ? 'left'
+            : stepIndex === 1 ? 'right'
+            : 'up'
           const offset = 56
+
           const fromX =
-            direction === 'left'
-              ? -offset
-              : direction === 'right'
-                ? offset
-                : 0
+            direction === 'left' ? -offset
+            : direction === 'right' ? offset
+            : 0
+
           const fromY = direction === 'up' ? offset : 0
 
           const tl = gsap.timeline({
@@ -93,8 +110,12 @@ export function useThreeInOneAnimations() {
               start: 'top 65%',
               end: 'bottom 35%',
               toggleActions: 'play reverse play reverse',
-              onEnter: () => setActiveStep(index),
-              onEnterBack: () => setActiveStep(index)
+              onEnter: () => {
+                if (isDesktopPanel) setActiveStep(stepIndex)
+              },
+              onEnterBack: () => {
+                if (isDesktopPanel) setActiveStep(stepIndex)
+              }
             }
           })
 
@@ -168,12 +189,17 @@ export function useThreeInOneAnimations() {
         })
 
         // ─── DESKTOP IMAGE PARALLAX ──────────────────────────────
-        gsap.utils.toArray<HTMLElement>('.gsap-step-image').forEach(image => {
+        const images = gsap.utils.toArray<HTMLElement>('.gsap-step-image')
+
+        images.forEach((image, index) => {
+          const triggerPanel = desktopPanels[index]
+          if (!triggerPanel) return
+
           gsap.to(image, {
             yPercent: -6,
             ease: 'none',
             scrollTrigger: {
-              trigger: image.closest('.gsap-step-panel') as HTMLElement,
+              trigger: triggerPanel,
               start: 'top bottom',
               end: 'bottom top',
               scrub: 0.6

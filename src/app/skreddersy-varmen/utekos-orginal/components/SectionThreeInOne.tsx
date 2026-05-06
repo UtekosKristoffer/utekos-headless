@@ -38,7 +38,7 @@ export function SectionThreeInOne() {
         {Steps.map(step => (
           <div
             key={step.id}
-            className='gsap-step-panel mb-12 flex flex-col last:mb-0'
+            className='gsap-mobile-step-panel mb-12 flex flex-col last:mb-0'
           >
             <div
               className={cn(
@@ -130,7 +130,7 @@ export function SectionThreeInOne() {
           {Steps.map(step => (
             <div
               key={step.id}
-              className='gsap-step-panel flex min-h-screen flex-col justify-center border-b border-white/5 px-20 last:border-0'
+              className='gsap-desktop-step-panel flex min-h-screen flex-col justify-center border-b border-white/5 px-20 last:border-0'
             >
               <div className='will-change-transform'>
                 <span className='gsap-step-eyebrow mb-4 block font-mono text-sm uppercase tracking-widest text-[#E07A5F]'>
