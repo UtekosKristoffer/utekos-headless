@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 
-export const dynamic = 'force-dynamic'
-export const runtime = 'nodejs'
-
 const SOURCE_PROJECT = 'utekos-headless'
 
 const visitorEventPayloadSchema = z.object({
