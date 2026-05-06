@@ -4,6 +4,7 @@ import { Suspense, type ReactNode } from 'react'
 import { mainMenu } from '@/db/config/menu.config'
 import { Analytics } from '@vercel/analytics/react'
 import Footer from '@/components/footer/components/Footer'
+import { VisitorAnalyticsTracker } from '@/components/analytics/VisitorAnalyticsTracker'
 import Header from '@/components/header/Header'
 import AnnouncementBanner from '@/components/frontpage/components/SpecialOfferSection/AnnouncementBanner'
 import { ChatBotAgent } from '@/components/chat/ChatBotAgent/source-code'
@@ -19,8 +20,7 @@ import { ClickTracker } from '@/components/analytics/ClickTracker'
 import type { Metadata } from 'next'
 import Script from 'next/script'
 
-const GOOGLE_TAG_MANAGER_ID =
-  process.env.NEXT_GOOGLE_GTM_ID || 'GTM-5TWMJQFP'
+const GOOGLE_TAG_MANAGER_ID = process.env.NEXT_GOOGLE_GTM_ID || 'GTM-5TWMJQFP'
 
 const GTM_SCRIPT_ORIGIN = (
   process.env.NEXT_PUBLIC_SGTM_ENDPOINT || 'https://sgtm.utekos.no'
@@ -31,10 +31,8 @@ const SHOULD_LOAD_GOOGLE_TAG_MANAGER =
 
 const SHOULD_LOAD_META_PIXEL =
   !!process.env.NEXT_PUBLIC_META_PIXEL_ID
-  && (
-    process.env.NODE_ENV === 'production'
-    || !!process.env.NEXT_PUBLIC_META_TEST_EVENT_CODE
-  )
+  && (process.env.NODE_ENV === 'production'
+    || !!process.env.NEXT_PUBLIC_META_TEST_EVENT_CODE)
 
 const GTM_BOOTSTRAP_SCRIPT = `
   (function(w,d,s,l,i){
@@ -141,6 +139,7 @@ export default function RootLayot({ children }: { children: ReactNode }) {
         <OnlineStoreJsonLd />
         <Suspense>
           <ClickTracker />
+          <VisitorAnalyticsTracker />
           <CartProviderLoader>
             <AnnouncementBanner />
             <Header menu={mainMenu} />

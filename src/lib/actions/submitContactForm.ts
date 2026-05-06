@@ -9,6 +9,7 @@ import {
 } from '@/db/zod/schemas/ServerContactFormSchema'
 import { Resend } from 'resend'
 import { z } from 'zod'
+import { forwardContactSubmissionToAtlas } from '@/lib/actions/forwardContactSubmissionToAtlas'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -101,6 +102,11 @@ export async function submitContactForm(
         source: 'Server Action: submitContactForm'
       }
     )
+
+    await forwardContactSubmissionToAtlas({
+      submission: result.data,
+      ...(data?.id ? { resendNotificationId: data.id } : {})
+    })
 
     return { message: 'Takk for din henvendelse!', data: result.data }
   } catch (exception: any) {
