@@ -25,10 +25,10 @@ export async function QualitySection() {
               )}
             >
               <div>
-                <h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
+                <h2 className='text-3xl bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text outline-hiddenfont-bold tracking-tight text-white sm:text-4xl'>
                   Kvalitet i hver fiber
                 </h2>
-                <p className='mt-4 max-w-xl text-lg text-access/80'>
+                <p className='mt-4 max-w-xl bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text outline-hidden text-lg text-paper-foreground'>
                   Fra den lette spensten i dunet til slitestyrken i hver søm –
                   vi er transparente om materialvalgene som definerer Utekos.
                   Dette er kvalitet du kan føle på, designet for å vare.

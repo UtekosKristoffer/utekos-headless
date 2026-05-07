@@ -14,10 +14,10 @@ export function HeaderLogo() {
         <Image
           src={UtekosLogo}
           alt='Utekos logo'
-          width={45}
-          height={45}
+          width={58}
+          height={58}
           priority
-          className='rounded-full ring ring-white/30'
+          className='md:ml-4 lg:ml-6 xl:ml-8 rounded-full ring ring-white/90'
         />
       </Link>
     </div>

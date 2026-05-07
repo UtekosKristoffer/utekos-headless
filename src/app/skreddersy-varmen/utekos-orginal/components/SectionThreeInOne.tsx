@@ -133,9 +133,14 @@ export function SectionThreeInOne() {
               className='gsap-desktop-step-panel flex min-h-screen flex-col justify-center border-b border-white/5 px-20 last:border-0'
             >
               <div className='will-change-transform'>
-                <span className='gsap-step-eyebrow mb-4 block font-mono text-sm uppercase tracking-widest text-[#E07A5F]'>
-                  {step.stepNumber} — {step.modeName}
-                </span>
+                <div className='gsap-step-eyebrow mb-4 flex items-center gap-3 font-mono text-sm uppercase tracking-widest text-[#E07A5F]'>
+                  <span className='gsap-step-icon inline-flex shrink-0 text-[#E07A5F]'>
+                    {step.icon}
+                  </span>
+                  <span>
+                    {step.stepNumber} — {step.modeName}
+                  </span>
+                </div>
 
                 <h3 className='gsap-step-title mb-6 font-serif text-5xl text-[#F4F1EA]'>
                   {step.title}
@@ -144,10 +149,6 @@ export function SectionThreeInOne() {
                 <p className='gsap-step-desc max-w-lg text-xl font-light leading-relaxed text-[#F4F1EA]/70'>
                   {step.description}
                 </p>
-
-                <div className='gsap-step-icon mt-8 w-fit rounded-full border border-white/5 bg-white/5 p-4 text-[#E07A5F]'>
-                  {step.icon}
-                </div>
               </div>
             </div>
           ))}

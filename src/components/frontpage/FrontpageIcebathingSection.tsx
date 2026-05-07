@@ -88,21 +88,21 @@ export function FrontpageIceBathingSection() {
             <div className='gsap-content opacity-0 inline-flex items-center self-start rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 mb-8 backdrop-blur-md'>
               <span className='relative flex h-2 w-2 mr-3'>
                 <span className='gsap-badge-pulse absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75'></span>
-                <span className='relative inline-flex rounded-full h-2 w-2 bg-amber-500'></span>
+                <span className='relative inline-flex rounded-full bg-sidebar-primary h-2 w-2'></span>
               </span>
-              <span className='text-xs font-bold uppercase tracking-widest text-amber-500'>
+              <span className='bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text text-transparent outline-hidden'>
                 Siste sjanse
               </span>
             </div>
 
-            <h2 className='gsap-content opacity-0 mb-6 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl'>
+            <h2 className='gsap-content opacity-0 mb-6 text-4xl bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text outline-hiddenfont-bold tracking-tight text-white sm:text-5xl lg:text-6xl'>
               Vi rydder plass til <br />
-              <span className='text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-amber-200'>
+              <span className='text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900'>
                 sesongens nyheter
               </span>
             </h2>
 
-            <p className='gsap-content opacity-0 text-lg text-neutral-400 mb-10 leading-relaxed max-w-lg'>
+            <p className='gsap-content opacity-0 bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 text-lg text-neutral-400 mb-10 leading-relaxed max-w-lg'>
               Sikre deg Comfyrobe™ til svært redusert pris.{' '}
               <br className='hidden sm:block' />
               Begrenset antall og størrelser – førstemann til mølla!
@@ -171,13 +171,14 @@ export function FrontpageIceBathingSection() {
                 variant='outline'
                 size='lg'
                 asChild
-                className='h-14 px-8 text-base rounded-full border-white/10 bg-transparent text-white hover:bg-white/5 hover:text-white hover:border-white/20'
+                className='h-14 w-full md:w-[162px] lg:w-[182px] px-8 text-base rounded-full py-2 md:py-3 lg:py-4 border-white/10 bg-transparent text-white hover:bg-white/5 hover:text-white hover:border-white/20'
               >
                 <Link
                   href={'/kampanje/comfyrobe' as Route}
                   data-track='FrontpageIceBathingSectionGetInspoClick'
                 >
                   Les mer ✨
+                  <ArrowRight className='ml-2 h-5 w-5 transition-transform group-hover:translate-x-1' />
                 </Link>
               </Button>
             </div>

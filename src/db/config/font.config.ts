@@ -1,4 +1,8 @@
-import { Geist, Geist_Mono as GeistMono } from 'next/font/google'
+import {
+  Geist,
+  Geist_Mono as GeistMono,
+  Google_Sans as GoogleSans
+} from 'next/font/google'
 
 export const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -8,6 +12,12 @@ export const geistSans = Geist({
 
 export const geistMono = GeistMono({
   variable: '--font-geist-mono',
+  subsets: ['latin'],
+  display: 'swap'
+})
+
+export const brandSansFontFamily = GoogleSans({
+  variable: '--font-brand-sans',
   subsets: ['latin'],
   display: 'swap'
 })

@@ -72,15 +72,15 @@ export function TestimonialConstellation() {
 
           <h2 className='animate-header-item text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6'>
             Hva sier andre{' '}
-            <span className='text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-sky-200 to-white'>
+            <span className='text-transparent bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text outline-hiddenfont-bold tracking-normal'>
               livsnytere?
             </span>
           </h2>
 
-          <p className='animate-header-item mx-auto text-lg md:text-xl text-neutral-400 leading-relaxed font-light'>
+          <p className='animate-header-item mx-auto text-lg md:text-xl text-neutral-200 leading-relaxed font-light'>
             Ekte tilbakemeldinger fra kunder som, i likhet med deg, verdsetter{' '}
             <span className='relative inline-block px-2 mx-1'>
-              <span className='absolute inset-0 bg-sky-500/15 -skew-y-1 -rotate-1 rounded-sm -z-10 backdrop-blur-[1px] border border-sky-500/10' />
+              <span className='absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text outline-hiddenfont-bold tracking-tight -skew-y-1 -rotate-1 rounded-sm -z-10 backdrop-blur-[1px] border border-sky-500/10' />
               <span className='relative font-medium text-sky-100/90'>
                 kompromissløs kvalitet
               </span>

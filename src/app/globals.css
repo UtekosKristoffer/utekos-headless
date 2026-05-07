@@ -2,10 +2,12 @@
 @import 'tw-animate-css';
 
 :root {
+  --font-brand-sans: var(--font-brand-sans-source), system-ui, sans-serif;
   --spatind: #2c2420;
   --makalaus: #f4f1ea;
   --ember: #e07a5f;
-  --color-neutral-900: oklch(0.185 0 0);
+  --skreddersy-orange: oklch(0.6878 0.1331 35.78);
+  --neutral-900: oklch(0.185 0 0);
   --silver-bright: #e8e8e8;
   --silver-medium: #a8a8a8;
   --silver-dark: #808080;
@@ -90,6 +92,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-brand-sans: var(--font-brand-sans);
+  --font-google-sans: var(--font-google-sans);
   --color-button: var(--button);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -650,10 +654,6 @@
   transition: opacity 0.3s ease;
 }
 
-@scroll-timeline --fade-in-timeline {
-  source: auto;
-  orientation: block;
-}
 @keyframes hytte-seasons-tab-fade-in {
   from {
     opacity: 0;
@@ -822,6 +822,28 @@
 
 .animate-bounce-slow {
   animation: bounceSlow 2s ease-in-out infinite;
+}
+
+.wordmark {
+  --utekos-wordmark-size: 4rem;
+  --utekos-wordmark-color: currentColor;
+
+  display: inline-block;
+  color: var(--utekos-wordmark-color);
+  font-family: var(--font-brand-sans);
+  font-size: var(--utekos-wordmark-size);
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 0.76;
+  text-rendering: geometricPrecision;
+  transform: skewX(-5deg) scaleX(1.05);
+  transform-origin: left center;
+  white-space: nowrap;
+}
+
+.wordmark::first-letter {
+  font-size: 1.1em;
 }
 
 /* {

@@ -49,7 +49,7 @@ export function HeaderSearch({ className }: { className?: string }) {
     'onTouchStart': handlePrefetch,
     'aria-label': 'Åpne søk (⌘/Ctrl + K)',
     'className': cn(
-      'group relative hidden h-11 w-[11rem] items-center gap-2 rounded-md border border-neutral-800 px-3 text-left text-sm text-muted-foreground outline-none transition md:flex xl:mr-2 xl:w-[14rem]',
+      'group relative hidden h-12 w-[24rem] items-center gap-3 rounded-md border border-foreground px-3 text-left text-sm text-muted-foreground outline-none transition md:flex xl:mr-4 xl:w-[18rem]',
       'hover:border-white/20 focus-visible:border-white/30',
       className
     )
@@ -67,10 +67,10 @@ export function HeaderSearch({ className }: { className?: string }) {
           onOpenChange={setOpen}
           showCloseButton={false}
           className={cn(
-            'mx-auto max-w-2xl rounded-xl p-2 pb-11 shadow-2xl',
-            'bg-neutral-900/95 text-neutral-100',
-            'border border-neutral-700 ring-3 ring-neutral-700',
-            'backdrop-blur-sm',
+            'mx-auto! max-w-3xl md:max-w-4xl lg:max-w-5xl rounded-xl p-2 pb-11 h-[50vh] shadow-2xl',
+            'bg-sidebar-foreground text-foreground',
+            'border border-foreground ring-2 ring-foreground',
+            'backdrop-blur-md',
             className
           )}
           title='Søk på nettsiden...'

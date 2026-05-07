@@ -8,6 +8,7 @@ import { CTASection } from './components/CTASection'
 import { PhilosophiesSection } from './components/PhilosophiesSection'
 import { AboutUsHeroSection } from './components/AboutUsHeroSection'
 import { IntersportSection } from './components/IntersportSection'
+
 export const metadata: Metadata = {
   title: 'Om Utekos® | Vår historie og løfte til deg',
   description:

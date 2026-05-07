@@ -1,5 +1,5 @@
 import './globals.css'
-import { geistSans } from '@/db/config/font.config'
+import { geistSans, brandSansFontFamily } from '@/db/config/font.config'
 import { Suspense, type ReactNode } from 'react'
 import { mainMenu } from '@/db/config/menu.config'
 import { Analytics } from '@vercel/analytics/react'
@@ -123,7 +123,7 @@ export default function RootLayot({ children }: { children: ReactNode }) {
         )}
       </head>
       <body
-        className={`bg-background text-foreground ${geistSans.className} antialiased`}
+        className={`bg-background text-foreground ${geistSans.className} ${brandSansFontFamily.className} antialiased`}
       >
         {SHOULD_LOAD_META_PIXEL && <MetaPixelEvents />}
         {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (

@@ -5,6 +5,7 @@ import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { ArrowRight, Sparkles, Check } from 'lucide-react'
 import { VippsLogo } from '@/components/payments/VippsLogo'
 import { KlarnaLogo } from '@/components/payments/KlarnaLogo'
+import { Badge } from '@/components/ui/badge'
 
 export function CTASection() {
   return (
@@ -30,10 +31,12 @@ export function CTASection() {
               delay='0s'
               threshold={0.2}
             >
-              <Sparkles className='h-4 w-4 text-[#E07A5F]' />
-              <span className='text-xs font-bold tracking-[0.15em] uppercase text-[#E07A5F]'>
+              <Badge
+                variant='secondary'
+                className='text-xs font-bold tracking-[0.15em] text-[#E07A5F]'
+              >
                 Oppdag kolleksjonen
-              </span>
+              </Badge>
             </AnimatedBlock>
 
             {/* Overskrift */}
@@ -42,9 +45,9 @@ export function CTASection() {
               delay='0.08s'
               threshold={0.2}
             >
-              <h2 className='text-3xl md:text-5xl font-serif font-medium text-[#F4F1EA] mb-6 leading-tight'>
+              <h6 className='text-3xl md:text-5xl font-serif font-medium text-[#F4F1EA] mb-6 leading-tight grid items-center visible!'>
                 Klar til å ta kvelden tilbake?
-              </h2>
+              </h6>
             </AnimatedBlock>
             <AnimatedBlock
               className='will-animate-fade-in-up'

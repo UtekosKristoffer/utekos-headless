@@ -8,7 +8,16 @@ import { Input } from '@/components/ui/input'
 import { ArrowRight, Mail } from 'lucide-react'
 import { toast } from 'sonner'
 import { trackNewsletterConversion } from '@/components/analytics/Meta/trackNewsletterConversion'
-
+import { UtekosWordmark } from '@/components/branding/UtekosWordmark'
+import { Badge } from '@/components/ui/badge'
+const brandName = (
+  <UtekosWordmark
+    color='sidebar'
+    size={24}
+    className='size-full text-sidebar-foreground p-2'
+    style={{ fontFamily: 'var(--font-brand-sans)' }}
+  />
+)
 const initialState = {
   status: 'idle' as 'success' | 'error' | 'idle',
   message: ''
@@ -47,39 +56,42 @@ export function NewsletterForm() {
   }
 
   return (
-    <div className='w-full max-w-sm mx-auto space-y-3 text-left'>
-      <div className='flex flex-col space-y-1'>
-        <h3 className='font-semibold text-lg flex items-center gap-2 text-foreground'>
-          <Mail className='w-5 h-5' />
-          Meld deg på vårt nyhetsbrev
-        </h3>
-        <p className='text-sm text-muted-foreground'>
+    <div className='w-full max-w-4xl mx-auto space-y-3 text-left'>
+      <div className='flex flex-col space-y-3'>
+        <div className='font-semibold text-2xl md:text-3xl flex items-center gap-2 text-sidebar-foreground'>
+          <div className='flex items-center size-full flex-nowrap gap-2'>
+            <Mail data-icon='inline-start' size='42' />
+            <p className='text-neutral-300 w-fit md:min-w-2xl text-4xl'>
+              Meld deg på Utekos sitt nyhetsbrev!
+            </p>
+          </div>
+        </div>
+        <p className='text-base mt-2! self-center text-center justify-center mc-auto! z-10 text-neutral-300 w-fit md:min-xl'>
           Meld deg inn i vår medlemsklubb og få nyhetsbrev, inspirasjon og
           eksklusive rabatter i innboksen din.
         </p>
+        <form
+          ref={formRef}
+          action={handleSubmit}
+          className='flex w-full md: ml-12! mt-4! items-center space-x-2'
+        >
+          <Input
+            type='email'
+            name='email'
+            placeholder='Din e-postadresse...'
+            required
+            className='bg-sidebar-accent-foreground w-full py-4 px-6 border border-neutral-300 text-neutral-400 placeholder:text-neutral-400'
+          />
+          <Button
+            type='submit'
+            disabled={isPending}
+            className='ml-4 py-6 min-h-6 px-6 group shrink-0'
+          >
+            {isPending ? '...' : 'Meld meg inn'}
+            <ArrowRight className='ml-2 size-5 transition-transform duration-300 group-hover:translate-x-1' />
+          </Button>
+        </form>
       </div>
-      <form
-        ref={formRef}
-        action={handleSubmit}
-        className='flex w-full items-center space-x-2'
-      >
-        <Input
-          type='email'
-          name='email'
-          placeholder='Din e-postadresse...'
-          required
-          className='bg-background border-input'
-        />
-        <Button type='submit' disabled={isPending} className='group shrink-0'>
-          {isPending ?
-            '...'
-          : <>
-              Meld meg inn
-              <ArrowRight className='ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
-            </>
-          }
-        </Button>
-      </form>
     </div>
   )
 }
