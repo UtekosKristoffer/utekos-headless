@@ -4,7 +4,7 @@ import { AnimatedBlock } from '@/components/AnimatedBlock'
 
 export function PhilosophiesSection() {
   return (
-    <section className='py-24 sm:py-32 bg-[#2C2420] text-[#F4F1EA]'>
+    <section className='py-24 sm:py-32 bg-utekos-brown text-[#F4F1EA]'>
       <div className='container mx-auto max-w-7xl px-6 lg:px-8'>
         {/* HEADER */}
         <div className='mb-20 text-center max-w-3xl mx-auto'>

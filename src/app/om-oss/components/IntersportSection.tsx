@@ -113,12 +113,8 @@ export function IntersportSection() {
           ref={cardRef}
           className='relative overflow-hidden rounded-3xl border border-white/5 bg-[#1a1a1a] p-8 md:p-12 shadow-2xl opacity-0' // opacity-0 som fallback
         >
-          {/* Ambient Background Glow */}
-          <div className='absolute right-0 top-0 -z-10 h-[600px] w-[600px] translate-x-1/3 -translate-y-1/3 opacity-10 blur-[120px] bg-red-600' />
-          <div className='absolute left-0 bottom-0 -z-10 h-[500px] w-[500px] -translate-x-1/3 translate-y-1/3 opacity-10 blur-[120px] bg-blue-600' />
-
           {/* Dot Grid Texture */}
-          <div className='absolute inset-0 -z-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] opacity-20' />
+          <div className='absolute inset-0 -z-10 bg-utekos-brown bg-[size:24px_24px] opacity-20' />
 
           <div className='grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20'>
             {/* INTERACTIVE LOGO CARD (Left Column) */}

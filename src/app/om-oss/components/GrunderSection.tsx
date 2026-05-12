@@ -6,7 +6,7 @@ import { Quote } from 'lucide-react'
 
 export function GrunderSection() {
   return (
-    <section className='relative overflow-hidden py-24 sm:py-32 bg-white'>
+    <section className='relative overflow-hidden py-24 sm:py-32 bg-[#1F2421]'>
       <div className='absolute inset-0 -z-10 opacity-40'>
         <div
           className='absolute right-1/3 top-1/4 h-[500px] w-[500px] blur-3xl'
@@ -48,7 +48,7 @@ export function GrunderSection() {
               delay='0.15s'
               threshold={0.3}
             >
-              <p className='text-lg font-serif font-medium text-[#2C2420]'>
+              <p className='text-lg font-serif font-medium text-article-white'>
                 Erling Holthe
               </p>
               <p className='text-sm tracking-wider uppercase text-[#E07A5F]'>
@@ -59,7 +59,7 @@ export function GrunderSection() {
 
           <div className='flex flex-col justify-center lg:col-span-8'>
             <AnimatedBlock
-              className='mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-[#E07A5F]/30 bg-[#E07A5F]/5 px-4 py-1.5 will-animate-fade-in-up'
+              className='mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-[#E07A5F]/30 bg-utekos-brown! px-4 py-1.5 will-animate-fade-in-up'
               delay='0.1s'
               threshold={0.3}
             >
@@ -73,21 +73,21 @@ export function GrunderSection() {
               delay='0.2s'
               threshold={0.3}
             >
-              <h2 className='mb-8 text-4xl md:text-5xl font-serif text-[#2C2420] leading-tight'>
+              <h2 className='mb-8 text-4xl md:text-5xl font-serif text-article-white leading-tight'>
                 Fra idé til virkelighet
               </h2>
             </AnimatedBlock>
             <AnimatedBlock
-              className='relative mb-10 overflow-hidden rounded-sm border-l-4 border-[#E07A5F] bg-[#F4F1EA] p-8 will-animate-fade-in-up shadow-sm'
+              className='relative mb-10 overflow-hidden rounded-sm border-l-4 border-utekos-brown/30 bg-utekos-brown p-8 will-animate-fade-in-up shadow-sm'
               delay='0.3s'
               threshold={0.3}
             >
-              <div className='relative flex flex-col md:flex-row gap-4 items-start'>
+              <div className='relative rounded-sm flex flex-col bg-utekos-brown md:flex-row gap-4 items-start'>
                 <Quote
                   aria-hidden='true'
-                  className='h-8 w-8 flex-shrink-0 text-[#E07A5F] rotate-180 md:rotate-0'
+                  className='h-8 w-8 flex-shrink-0 text-article-white rotate-180 md:rotate-0'
                 />
-                <p className='text-xl md:text-2xl font-serif italic leading-relaxed text-[#2C2420]/90'>
+                <p className='text-xl md:text-2xl font-serif italic leading-relaxed text-article-white/90'>
                   &ldquo;Jeg var lei av stive pledd og gode øyeblikk som ble
                   kuttet kort av kulden. Det måtte finnes en bedre måte å holde
                   varmen på.&rdquo;
@@ -96,7 +96,7 @@ export function GrunderSection() {
             </AnimatedBlock>
 
             {/* Brødtekst - Økt lesbarhet for 55+ */}
-            <div className='space-y-6 text-[#2C2420]/80 text-lg leading-relaxed font-light'>
+            <div className='space-y-6 text-article-white/80 text-lg leading-relaxed font-light'>
               <AnimatedBlock
                 className='will-animate-fade-in-up'
                 delay='0.4s'

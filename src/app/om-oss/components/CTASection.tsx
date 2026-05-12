@@ -33,7 +33,7 @@ export function CTASection() {
             >
               <Badge
                 variant='secondary'
-                className='text-xs font-bold tracking-[0.15em] text-[#E07A5F]'
+                className='text-xs bg-transparent font-bold tracking-[0.15em] text-[#E07A5F]'
               >
                 Oppdag kolleksjonen
               </Badge>
