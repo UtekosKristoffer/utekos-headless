@@ -10,8 +10,8 @@ import { ClientMobileMenu } from './ClientMobileMenu'
 
 export default function Header({ menu }: { menu: MenuItem[] }) {
   return (
-    <header className='sticky! lg:min-h-[80px] xl:min-h-[90px] px-10 mx-auto max-sm:px-6 top-0 z-50 border-b border-white/10 bg-sidebar-foreground py-3 w-full min-w-screen flex items-stretch justify-evenly'>
-      <div className='flex flex-1 basis-0 items-center justify-start max-w-screen-2xl'>
+    <header className='sticky! lg:min-h-[80px] xl:min-h-[90px] px-10 mx-auto max-sm:px-6 top-0! z-50 border-b border-white/10 bg-sidebar-foreground py-3 w-full min-w-screen flex items-stretch justify-evenly'>
+      <div className='flex flex-1 basis-0 items-center justify-start min-w-fit w-fit max-w-3xl'>
         <HeaderLogo />
       </div>
 

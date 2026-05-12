@@ -56,7 +56,7 @@ export function NewsletterForm() {
   }
 
   return (
-    <div className='w-full max-w-4xl mx-auto space-y-3 text-left'>
+    <div className='w-full min-w-6 mx-auto space-y-3 text-left'>
       <div className='flex flex-col space-y-3'>
         <div className='font-semibold text-2xl md:text-3xl flex items-center gap-2 text-sidebar-foreground'>
           <div className='flex items-center size-full flex-nowrap gap-2'>
@@ -66,7 +66,7 @@ export function NewsletterForm() {
             </p>
           </div>
         </div>
-        <p className='text-base mt-2! self-center text-center justify-center mc-auto! z-10 text-neutral-300 w-fit md:min-xl'>
+        <p className='text-base mt-2! mx-auto!self-center text-center justify-center mc-auto! z-10 text-neutral-300 w-fit md:min-xl'>
           Meld deg inn i vår medlemsklubb og få nyhetsbrev, inspirasjon og
           eksklusive rabatter i innboksen din.
         </p>

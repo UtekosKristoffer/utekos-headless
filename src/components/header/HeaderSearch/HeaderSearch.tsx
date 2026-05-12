@@ -1,4 +1,3 @@
-// Path: src/components/header/HeaderSearch/HeaderSearch.tsx
 'use client'
 
 import {
@@ -49,7 +48,7 @@ export function HeaderSearch({ className }: { className?: string }) {
     'onTouchStart': handlePrefetch,
     'aria-label': 'Åpne søk (⌘/Ctrl + K)',
     'className': cn(
-      'group relative hidden h-12 w-[24rem] items-center gap-3 rounded-md border border-foreground px-3 text-left text-sm text-muted-foreground outline-none transition md:flex xl:mr-4 xl:w-[18rem]',
+      'group relative hidden h-11 w-[22rem] items-center gap-3 rounded-md border border-foreground px-3 text-left text-sm text-muted-foreground outline-none transition md:flex xl:mr-4 xl:w-[18rem]',
       'hover:border-white/20 focus-visible:border-white/30',
       className
     )

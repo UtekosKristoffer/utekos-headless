@@ -26,7 +26,7 @@ export const DesktopNavigation = ({ menu = [] }: { menu?: MenuItem[] }) => {
                   <>
                     <InteractiveNavTrigger>{item.title}</InteractiveNavTrigger>
                     <InteractiveNavContent>
-                      <ul className='grid w-[400px] gap-3 !mt-4 items-center justify-center mx-auto md:w-[500px] md:grid-cols-2 lg:w-[600px]'>
+                      <ul className='grid w-[400px] gap-3 mt-4 lg:mt-1! underline! underline-offset-4 decoration-1 decoration-sidebar pb-1 items-center justify-center mx-auto md:w-[500px] md:grid-cols-2 lg:w-[600px]'>
                         {item.items?.map(subItem => (
                           <ListItem
                             key={subItem.url}

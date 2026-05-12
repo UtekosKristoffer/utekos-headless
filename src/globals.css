@@ -979,3 +979,445 @@
     animation: none !important;
   }
 }
+
+/* Sidebar*/
+
+html[data-utekos-sidebar-active-rail='gjoremal']:has(
+    [data-ongoing-process-page='true']
+  ):has(.nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true'])
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul
+  > li
+  > a:hover,
+html[data-utekos-sidebar-active-rail='gjoremal']:has(
+    [data-ongoing-process-page='true']
+  ):has(.nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true'])
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul
+  > li
+  > a[data-utekos-current-process-link='true'],
+html[data-utekos-sidebar-active-rail='gjoremal']:has(
+    [data-ongoing-process-page='true']
+  ):has(.nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true'])
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul
+  > li
+  > a[aria-current='page'] {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--signal-blue) 12%, var(--surface-panel)) 0%,
+    color-mix(in srgb, var(--surface-panel-inset) 90%, var(--surface-panel))
+      100%
+  ) !important;
+  color: color-mix(in srgb, var(--signal-blue) 74%, white 26%) !important;
+}
+
+html[data-utekos-sidebar-active-rail='gjoremal']:has(
+    [data-ongoing-process-page='true']
+  ):has(.nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true'])
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul
+  > li
+  > a:hover::before,
+html[data-utekos-sidebar-active-rail='gjoremal']:has(
+    [data-ongoing-process-page='true']
+  ):has(.nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true'])
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul
+  > li
+  > a[data-utekos-current-process-link='true']::before,
+html[data-utekos-sidebar-active-rail='gjoremal']:has(
+    [data-ongoing-process-page='true']
+  ):has(.nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true'])
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul
+  > li
+  > a[aria-current='page']::before {
+  background:
+    radial-gradient(
+      circle at 35% 28%,
+      color-mix(in srgb, var(--signal-blue) 24%, transparent),
+      transparent 58%
+    ),
+    color-mix(in srgb, var(--signal-blue) 12%, var(--surface-panel-inset)) !important;
+}
+
+html:has([data-ongoing-process-page='true'])
+  .nextra-sidebar
+  > div:first-child
+  > div
+  > ul
+  > li:has(> button[data-href='/vitenskap']) {
+  display: block !important;
+  height: auto !important;
+  min-height: 0 !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+}
+
+html:has([data-ongoing-process-page='true'])
+  .nextra-sidebar
+  > div:first-child
+  > div
+  > ul
+  > li:has(> button[data-href='/vitenskap'])
+  > button[data-href='/vitenskap'] {
+  display: flex !important;
+  height: auto !important;
+  min-height: 4.45rem !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  pointer-events: auto !important;
+}
+
+html:has([data-ongoing-process-page='true']):has(
+    .nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true']
+  )
+  .nextra-sidebar
+  > div:first-child
+  > div
+  > ul
+  > li:has(> button[data-href='/vitenskap'])
+  > button[data-href='/vitenskap'] {
+  min-height: 3.85rem !important;
+}
+
+html:has([data-ongoing-process-page='true']):has(
+    .nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true']
+  )
+  .nextra-sidebar
+  > div:first-child
+  > div
+  > ul
+  > li:has(> button[data-href='/arbeidsomrade'])
+  > button[data-href='/arbeidsomrade'] {
+  min-height: 3.85rem !important;
+}
+
+html:has([data-ongoing-process-page='true'])
+  .nextra-sidebar:has(button[title='Expand sidebar'][aria-expanded='false'])
+  .x\:grid.x\:gap-1
+  > li:not(:has(a, button))
+  + li:has(> button[data-href='/arbeidsomrade'])
+  > button[data-href='/arbeidsomrade'] {
+  display: flex !important;
+  height: auto !important;
+  min-height: 4.45rem !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  pointer-events: auto !important;
+}
+
+/* Ongoing process routes: final sidebar readability pass */
+html:has([data-ongoing-process-page='true']):has(
+    .nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true']
+  )
+  .nextra-sidebar {
+  width: 19.5rem !important;
+  min-width: 19.5rem !important;
+  max-width: 19.5rem !important;
+}
+
+html[data-utekos-sidebar-active-rail='gjoremal']:has(
+    [data-ongoing-process-page='true']
+  ):has(.nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true'])
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul
+  > li
+  > a {
+  gap: 0.42rem !important;
+  min-height: 2.44rem !important;
+  padding: 0.34rem 0.54rem 0.34rem 0.72rem !important;
+  font-size: 0.76rem !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+html[data-utekos-sidebar-active-rail='gjoremal']:has(
+    [data-ongoing-process-page='true']
+  ):has(.nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true'])
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul
+  > li
+  > a::before {
+  width: 1.34rem !important;
+  height: 1.34rem !important;
+  border-radius: 0.48rem !important;
+  mask-size: 0.82rem 0.82rem !important;
+}
+
+html[data-utekos-sidebar-active-rail='vitenskap']:has(
+    [data-ongoing-process-page='true']
+  ):has(.nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true'])
+  .nextra-sidebar
+  button[data-href='/vitenskap']
+  + div {
+  display: block !important;
+  height: auto !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+}
+
+html[data-utekos-sidebar-active-rail='vitenskap']:has(
+    [data-ongoing-process-page='true']
+  ):has(.nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true'])
+  .nextra-sidebar
+  button[data-href='/vitenskap']
+  + div
+  > ul
+  > li
+  > a {
+  gap: 0.42rem !important;
+  min-height: 2.44rem !important;
+  padding: 0.34rem 0.54rem 0.34rem 0.72rem !important;
+  font-size: 0.76rem !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+html[data-utekos-sidebar-active-rail='vitenskap']:has(
+    [data-ongoing-process-page='true']
+  ):has(.nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true'])
+  .nextra-sidebar
+  button[data-href='/vitenskap']
+  + div
+  > ul {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.22rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html[data-utekos-sidebar-active-rail='vitenskap']:has(
+    [data-ongoing-process-page='true']
+  ):has(.nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true'])
+  .nextra-sidebar
+  button[data-href='/vitenskap']
+  + div
+  > ul
+  > li {
+  display: block !important;
+}
+
+html:has([data-ongoing-process-page='true']):has(
+    .nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true']
+  )
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul
+  > li
+  > a {
+  display: flex !important;
+  min-height: 2.44rem !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0.42rem !important;
+  padding: 0.34rem 0.54rem 0.34rem 0.72rem !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  color: var(--content-soft) !important;
+  font-size: 0.76rem !important;
+  font-weight: 580 !important;
+  line-height: 1 !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+}
+
+.nextra-sidebar:has(button[title='Expand sidebar'][aria-expanded='false'])
+  button[data-href='/arbeidsomrade']::before {
+  display: block !important;
+  background: #0f3f91 !important;
+  color: #0f3f91 !important;
+  content: '' !important;
+}
+
+html[data-utekos-sidebar-active-rail='gjoremal']:has(
+    [data-ongoing-process-page='true']
+  )
+  .nextra-sidebar:has(button[title='Expand sidebar'][aria-expanded='false'])
+  button[data-href='/arbeidsomrade/gjoremal']::before {
+  display: block !important;
+  background: #0f3f91 !important;
+  color: #0f3f91 !important;
+  content: '' !important;
+}
+
+html[data-utekos-sidebar-active-rail='vitenskap']:has(
+    [data-ongoing-process-page='true']
+  )
+  .nextra-sidebar:has(button[title='Expand sidebar'][aria-expanded='false'])
+  button[data-href='/vitenskap']::before {
+  display: block !important;
+  background: #0f3f91 !important;
+  color: #0f3f91 !important;
+  content: '' !important;
+}
+
+html[data-utekos-sidebar-active-rail='gjoremal']:has(
+    [data-ongoing-process-page='true']
+  ):has(.nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true'])
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul
+  > li
+  > a::before {
+  background: #174ea6 !important;
+  color: #174ea6 !important;
+  opacity: 1 !important;
+}
+
+html[data-utekos-sidebar-active-rail='gjoremal']:has(
+    [data-ongoing-process-page='true']
+  ):has(.nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true'])
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul
+  > li
+  > a:hover::before,
+html[data-utekos-sidebar-active-rail='gjoremal']:has(
+    [data-ongoing-process-page='true']
+  ):has(.nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true'])
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul
+  > li
+  > a[data-utekos-current-process-link='true']::before,
+html[data-utekos-sidebar-active-rail='gjoremal']:has(
+    [data-ongoing-process-page='true']
+  ):has(.nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true'])
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul
+  > li
+  > a[aria-current='page']::before {
+  background: #0f3f91 !important;
+}
+
+html:has([data-ongoing-process-page='true']):has(
+    .nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true']
+  )
+  .nextra-sidebar
+  a[href$='/kildemateriale']::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 3h9l3 3v15H6z'/%3E%3Cpath d='M14 3v4h4'/%3E%3Cpath d='M9 12h6'/%3E%3Cpath d='M9 16h6'/%3E%3C/svg%3E") !important;
+}
+
+html:has([data-ongoing-process-page='true']):has(
+    .nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true']
+  )
+  .nextra-sidebar
+  a[href$='/situasjonsanalyse']::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 12h4'/%3E%3Cpath d='M17 12h4'/%3E%3Cpath d='M12 3v4'/%3E%3Cpath d='M12 17v4'/%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='m15 15 4 4'/%3E%3C/svg%3E") !important;
+}
+
+/* Ongoing process routes: make the Pågående child links readable without
+ depending on the JS-managed active-rail attribute. */
+html:has([data-ongoing-process-page='true']):has(
+    .nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true']
+  )
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.36rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html:has([data-ongoing-process-page='true']):has(
+    .nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true']
+  )
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul
+  > li
+  > a {
+  display: flex !important;
+  min-height: 2.44rem !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0.42rem !important;
+  padding: 0.34rem 0.54rem 0.34rem 0.72rem !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  color: var(--content-soft) !important;
+  font-size: 0.76rem !important;
+  font-weight: 580 !important;
+  line-height: 1 !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+}
+
+html:has([data-ongoing-process-page='true']):has(
+    .nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true']
+  )
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul
+  > li
+  > a:hover,
+html:has([data-ongoing-process-page='true']):has(
+    .nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true']
+  )
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul
+  > li
+  > a[data-utekos-current-process-link='true'],
+html:has([data-ongoing-process-page='true']):has(
+    .nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true']
+  )
+  .nextra-sidebar
+  button[data-href='/arbeidsomrade/gjoremal/pagaende']
+  + div
+  > ul
+  > li
+  > a[aria-current='page'] {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--signal-blue) 12%, var(--surface-panel)) 0%,
+    color-mix(in srgb, var(--surface-panel-inset) 90%, var(--surface-panel))
+      100%
+  ) !important;
+  color: color-mix(in srgb, var(--signal-blue) 74%, white 26%) !important;
+}
+
+html:has([data-ongoing-process-page='true']):has(
+    .nextra-sidebar button[title='Collapse sidebar'][aria-expanded='true']
+  )
+  .nextra-sidebar
+  .utekos-sidebar-search-input {
+  display: block !important;
+  flex: 1 1 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  opacity: 1 !important;
+}
