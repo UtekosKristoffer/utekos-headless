@@ -1,4 +1,3 @@
-// Path: src/components/form/NewsLetterForm.tsx
 'use client'
 
 import { useActionState, useEffect, useRef } from 'react'
