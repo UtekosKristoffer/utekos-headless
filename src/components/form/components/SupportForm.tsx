@@ -1,5 +1,3 @@
-// Path: src/app/kontaktskjema/SupportForm.tsx
-
 'use client'
 
 import { SupportPageButton } from '@/app/kontaktskjema/components/SupportPageButton'
