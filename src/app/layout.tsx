@@ -1,4 +1,4 @@
-import './globals.css'
+import '../globals.css'
 import { geistSans, brandSansFontFamily } from '@/db/config/font.config'
 import { Suspense, type ReactNode } from 'react'
 import { mainMenu } from '@/db/config/menu.config'
