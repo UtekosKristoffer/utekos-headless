@@ -10,7 +10,7 @@ export function DesktopSection() {
           <h1 className='text-4xl font-bold tracking-tight'>
             Snakk med Utekos
           </h1>
-          <p className='mt-4 text-xl text-muted-foreground'>
+          <p className='mt-4 text-xl text-gray-00'>
             Vi er her for å hjelpe deg med alt du måtte lure på.
           </p>
 
@@ -19,7 +19,7 @@ export function DesktopSection() {
               <HelpCircle className='h-6 w-6 flex-shrink-0 text-white' />
               <div>
                 <h3 className='font-semibold'>Få personlig veiledning</h3>
-                <p className='text-base text-muted-foreground'>
+                <p className='text-base text-gray-300'>
                   Usikker på hvilket produkt som passer ditt bruk? Vi hjelper
                   deg å velge riktig.
                 </p>
@@ -29,7 +29,7 @@ export function DesktopSection() {
               <Package className='h-6 w-6 flex-shrink-0 text-white' />
               <div>
                 <h3 className='font-semibold'>Hjelp med din bestilling</h3>
-                <p className='text-base text-muted-foreground'>
+                <p className='text-base text-gray-300'>
                   Spørsmål om en ordre, retur eller reklamasjon? Oppgi gjerne
                   ordrenummer.
                 </p>
@@ -45,7 +45,7 @@ export function DesktopSection() {
                 <Leaf className='h-5 w-5' />
                 En investering i komfort
               </h4>
-              <p className='mt-2 text-base text-muted-foreground max-w-prose'>
+              <p className='mt-2 text-base text-gray-300 max-w-prose'>
                 Mer enn bare et plagg; det er et verktøy designet for å gi deg
                 utallige timer med varme og velvære.
               </p>
@@ -57,7 +57,7 @@ export function DesktopSection() {
                 <span className='sr-only'>Norsk</span>
                 Skapt for norske forhold
               </h4>
-              <p className='mt-2 text-base text-muted-foreground max-w-prose'>
+              <p className='mt-2 text-base text-gray-300 max-w-prose'>
                 Våre produkter er utviklet for å forlenge de gode stundene
                 utendørs, enten det er på en kjølig sommerkveld på hytten eller
                 en frisk høstdag i båten.
@@ -67,7 +67,7 @@ export function DesktopSection() {
         </div>
 
         <div className='p-8 lg:p-12'>
-          <blockquote className='text-lg italic text-muted-foreground'>
+          <blockquote className='text-lg italic text-article-white/50'>
             &ldquo;Vårt løfte til deg er enkelt: å levere komfortplagg av
             ypperste kvalitet som lar deg forlenge de gode stundene utendørs,
             uansett vær.&rdquo;
