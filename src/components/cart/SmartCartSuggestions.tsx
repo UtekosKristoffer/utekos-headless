@@ -11,6 +11,36 @@ import type { Cart } from 'types/cart'
 import { FreeShippingConfirmation } from './FreeShippingConfirmation'
 import { UpsellItem } from './UpsellItem'
 
+const BLOCKED_SUGGESTION_PRODUCT_IDS = new Set([
+  'gid://shopify/Product/7710325899512'
+])
+
+const BLOCKED_SUGGESTION_HANDLES = new Set(['utekos-stapper'])
+
+function isSuggestionEligible(product: ShopifyProduct): boolean {
+  if (
+    BLOCKED_SUGGESTION_PRODUCT_IDS.has(product.id)
+    || BLOCKED_SUGGESTION_HANDLES.has(product.handle)
+  ) {
+    return false
+  }
+
+  if (!product.availableForSale) {
+    return false
+  }
+
+  if (
+    typeof product.totalInventory === 'number'
+    && product.totalInventory <= 0
+  ) {
+    return false
+  }
+
+  return (
+    product.variants?.edges?.some(edge => edge.node.availableForSale) ?? false
+  )
+}
+
 export function SmartCartSuggestions({
   cart
 }: {
@@ -20,6 +50,7 @@ export function SmartCartSuggestions({
     queryKey: ['products', 'recommended'],
     queryFn: getRecommendedProducts
   })
+
   const { data: accessoryProducts = [] } = useQuery<ShopifyProduct[]>({
     queryKey: ['products', 'accessory'],
     queryFn: getAccessoryProducts
@@ -34,28 +65,41 @@ export function SmartCartSuggestions({
     cart.lines.map(line => line.merchandise.product.id)
   )
 
+  const eligibleAccessoryProducts =
+    accessoryProducts.filter(isSuggestionEligible)
+  const eligibleRecommendedProducts =
+    recommendedProducts.filter(isSuggestionEligible)
+
   if (subtotal < FREE_SHIPPING_THRESHOLD) {
     const remainingAmount = FREE_SHIPPING_THRESHOLD - subtotal
-    const allPotential = [...accessoryProducts, ...recommendedProducts]
+    const allPotential = [
+      ...eligibleAccessoryProducts,
+      ...eligibleRecommendedProducts
+    ]
+
     const availableSuggestions = [
-      ...new Map(allPotential.map(p => [p.id, p])).values()
-    ].filter(p => !cartLineProductIds.has(p.id))
+      ...new Map(allPotential.map(product => [product.id, product])).values()
+    ].filter(product => !cartLineProductIds.has(product.id))
 
     const sorted = [...availableSuggestions].sort((a, b) => {
       const priceA = parseFloat(a.priceRange.minVariantPrice.amount)
       const priceB = parseFloat(b.priceRange.minVariantPrice.amount)
       const aIsBridge = priceA >= remainingAmount
       const bIsBridge = priceB >= remainingAmount
+
       if (aIsBridge && !bIsBridge) return -1
       if (!aIsBridge && bIsBridge) return 1
       if (aIsBridge && bIsBridge) return priceA - priceB
+
       return priceB - priceA
     })
 
     const suggestions = sorted.slice(0, 1)
     if (suggestions.length === 0) return null
 
-    const showDiscountHint = accessoryProducts.some(p => p.id === sorted[0]?.id)
+    const showDiscountHint = eligibleAccessoryProducts.some(
+      product => product.id === suggestions[0]?.id
+    )
 
     return (
       <div className='border-t border-neutral-800 p-6'>
@@ -85,14 +129,16 @@ export function SmartCartSuggestions({
     )
   }
 
-  const accessoriesToShow = accessoryProducts.filter(
-    p => !cartLineProductIds.has(p.id)
+  const accessoriesToShow = eligibleAccessoryProducts.filter(
+    product => !cartLineProductIds.has(product.id)
   )
 
   const suggestions =
     accessoriesToShow.length > 0 ?
       accessoriesToShow
-    : recommendedProducts.filter(p => !cartLineProductIds.has(p.id)).slice(0, 2)
+    : eligibleRecommendedProducts
+        .filter(product => !cartLineProductIds.has(product.id))
+        .slice(0, 2)
 
   if (suggestions.length === 0) {
     return (

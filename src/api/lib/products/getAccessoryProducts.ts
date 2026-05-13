@@ -8,10 +8,11 @@ export async function getAccessoryProducts(): Promise<ShopifyProduct[]> {
   'use cache'
   cacheTag(TAGS.products)
   cacheLife('days')
+
   try {
     const response = await getProducts({
       first: 10,
-      query: 'tag:"tilbehør"'
+      query: 'tag:"tilbehør" AND available_for_sale:true'
     })
 
     if (response.success && response.body) {
