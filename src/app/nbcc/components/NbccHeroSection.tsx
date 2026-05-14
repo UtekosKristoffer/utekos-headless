@@ -10,6 +10,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { nbccHeroTracking } from '../data/nbccLandingPageContent'
+import { NbccAiSummaryButton } from './NbccAiSummaryButton'
+
 export function NbccHeroSection() {
   return (
     <section className='relative isolate min-h-[76svh] overflow-hidden bg-[#15120e]'>
@@ -97,20 +99,16 @@ export function NbccHeroSection() {
                 <MoveRightIcon size={18} animateOnHover='default' />
               </Link>
             </Button>
-            <Button
-              asChild
-              variant='outline'
-              size='lg'
-              className='h-12 w-full justify-center rounded-md border-white/25  bg-white/[0.06] px-6 text-[15px] font-semibold text-white hover:bg-utekos-brown/60 sm:w-auto'
-            >
-              <Link
-                href='#slik-bruker-du-fordelen'
-                data-track='NbccHeroHowToClick'
-                data-track-data={JSON.stringify(nbccHeroTracking.secondary)}
-              >
-                Slik brukes fordelen
-              </Link>
-            </Button>
+
+            <NbccAiSummaryButton
+              intent='how-to-use'
+              idleLabel='Generer forklaring'
+              trackingName='NbccHeroHowToAiClick'
+              trackingData={nbccHeroTracking.secondary}
+              panelMode='overlay'
+              containerClassName='relative w-full sm:w-auto'
+              buttonClassName='h-12 w-full justify-center rounded-md border-white/25 bg-white/[0.06] px-6 text-[15px] font-semibold text-white hover:bg-utekos-brown/60 sm:w-auto'
+            />
           </div>
 
           <div

@@ -1,5 +1,5 @@
+import { getProduct } from '@/api/lib/products/getProduct'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -7,13 +7,12 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { getProduct } from '@/api/lib/products/getProduct'
 import { formatPrice } from '@/lib/utils/formatPrice'
 import type { ShopifyProductVariant } from 'types/product'
 import { cacheLife, cacheTag } from 'next/cache'
-import Link from 'next/link'
 
 import { nbccProducts } from '../data/nbccLandingPageContent'
+import { NbccAiSummaryButton } from './NbccAiSummaryButton'
 import { NbccProductCarousel } from './NbccProductCarousel'
 import {
   NbccProductCardActions,
@@ -121,23 +120,19 @@ export async function NbccProductSection() {
           data-nbcc-animate
           className='mt-10 flex justify-center'
         >
-          <Button
-            asChild
-            variant='outline'
-            className='h-12 rounded-md border-white/20 bg-white/[0.06] px-6 text-white hover:bg-white/[0.12]'
-          >
-            <Link
-              href='/produkter'
-              data-track='NbccAllProductsClick'
-              data-track-data={JSON.stringify({
-                page: 'nbcc',
-                section: 'products',
-                target: 'all-products'
-              })}
-            >
-              Se hele produktutvalget
-            </Link>
-          </Button>
+          <NbccAiSummaryButton
+            intent='sizes'
+            idleLabel='Generer størrelseinformasjon'
+            trackingName='NbccSizeInfoAiClick'
+            trackingData={{
+              page: 'nbcc',
+              section: 'products',
+              target: 'sizes-ai'
+            }}
+            panelMode='inline'
+            containerClassName='relative flex w-full max-w-3xl flex-col items-center'
+            buttonClassName='h-12 w-full justify-center rounded-md border-white/20 bg-white/[0.06] px-6 text-white hover:bg-white/[0.12] sm:w-auto'
+          />
         </div>
       </div>
     </section>
