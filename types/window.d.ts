@@ -20,13 +20,13 @@ declare global {
         params?: Record<string, unknown>,
         options?: { eventID?: string }
       ): void
-      (method: 'set', property: string, value: any, pixelId?: string): void
+      (method: 'set', property: string, value: unknown, pixelId?: string): void
       loaded?: boolean
       version?: string
       queue?: unknown[]
     }
     _fbq?: Window['fbq']
-    dataLayer: Record<string, any>[]
+    dataLayer: Record<string, unknown>[]
     snaptr?: (
       method: string,
       eventType: string,
@@ -37,8 +37,8 @@ declare global {
       (method: 'load', tagId: string, userData?: Record<string, unknown>): void
       (method: 'page'): void
       (method: 'track', event: string, data?: Record<string, unknown>): void
-      (method: string, ...args: any[]): void
-      queue: any[]
+      (method: string, ...args: unknown[]): void
+      queue: unknown[]
       version: string
       loaded?: boolean
     }
@@ -47,7 +47,7 @@ declare global {
       page: () => void
       track: (
         event: string,
-        params?: Record<string, any>,
+        params?: Record<string, unknown>,
         options?: { event_id?: string }
       ) => void
       identify: (data: {
@@ -55,14 +55,14 @@ declare global {
         phone?: string
         external_id?: string
       }) => void
-      instance: (id: string) => any
+      instance: (id: string) => unknown
       on: (event: string, callback: () => void) => void
       off: (event: string, callback: () => void) => void
       methods: string[]
-      setAndDefer: (target: any, method: string) => void
-      _i: Record<string, any>
+      setAndDefer: (target: unknown, method: string) => void
+      _i: Record<string, unknown>
       _t: Record<string, number>
-      _o: Record<string, any>
+      _o: Record<string, unknown>
     }
     TiktokAnalyticsObject?: string
   }

@@ -32,7 +32,7 @@ const PRODUCTS: ProductSeed[] = [
     handle: 'utekos-techdown',
     name: 'Utekos TechDown™',
     description:
-      'Flaggskipet i kolleksjonen. Hydrofob CloudWave™-isolasjon beholder varmen selv i fukt. 3-i-1-konstruksjon lar deg justere fra parkas til kokong på sekunder.',
+      'Flaggskipet i kolleksjonen. Hydrofob CloudWeave™-isolasjon beholder varmen selv i fukt. 3-i-1-konstruksjon lar deg justere fra parkas til kokong på sekunder.',
     price: '1790',
     originalPrice: '1990',
     image: `${BASE_URL}/1080/kate-1080.png`,
@@ -66,7 +66,7 @@ const FAQ_ENTRIES: { q: string; a: string }[] = [
   },
   {
     q: 'Fungerer Utekos i fuktig vær?',
-    a: 'Ja. Utekos TechDown™ bruker hydrofob CloudWave™-isolasjon som beholder rundt 98 % varmeevne selv når den blir våt. I motsetning til vanlig dun kollapser ikke fibrene.'
+    a: 'Ja. Utekos TechDown™ bruker hydrofob CloudWeave™-isolasjon som beholder rundt 98 % varmeevne selv når den blir våt. I motsetning til vanlig dun kollapser ikke fibrene.'
   },
   {
     q: 'Hva menes med 3-i-1-funksjonalitet?',
@@ -74,7 +74,7 @@ const FAQ_ENTRIES: { q: string; a: string }[] = [
   },
   {
     q: 'Hvordan vasker jeg Utekos?',
-    a: 'Maskinvask på maks 30 °C med mild såpe. Unngå tørketrommel og stryking. La plagget lufttørke. CloudWave™-isolasjonen bevarer loft og varmeevne, vask etter vask.'
+    a: 'Maskinvask på maks 30 °C med mild såpe. Unngå tørketrommel og stryking. La plagget lufttørke. CloudWeave™-isolasjonen bevarer loft og varmeevne, vask etter vask.'
   },
   {
     q: 'Kan jeg hente Utekos i butikk?',

@@ -17,5 +17,10 @@
     "lib": "@/lib",
     "hooks": "@/useHooks"
   },
+  "registries": {
+  "@ss-components": "https://shadcnstudio.com/r/components/{name}.json",
+  "@ss-themes": "https://shadcnstudio.com/r/themes/{name}.json",
+  "@ss-blocks": "https://shadcnstudio.com/r/blocks/{name}.json"
+},
   "iconLibrary": "lucide"
 }

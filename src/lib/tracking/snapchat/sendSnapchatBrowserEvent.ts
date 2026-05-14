@@ -10,8 +10,8 @@ export async function sendSnapchatBrowserEvent(
 ) {
   if (!event || !user || !SNAP_PIXEL_ID || !SNAP_API_TOKEN) return
 
-  const scCookie1 = (user as any).scid || extra?.sc_cookie1
-  const clickId = (user as any).click_id || extra?.sc_click_id
+  const scCookie1 = user.scid ?? extra?.sc_cookie1
+  const clickId = user.click_id ?? extra?.sc_click_id
 
   const payload = {
     pixel_id: SNAP_PIXEL_ID,

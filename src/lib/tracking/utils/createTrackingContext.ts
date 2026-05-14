@@ -17,8 +17,8 @@ export function createTrackingContext(
   const clientDetails = order.client_details as Record<string, unknown> | null
   let fbp = redisData?.userData?.fbp
   let fbc = redisData?.userData?.fbc
-  let ttclid = (redisData?.userData as any)?.ttclid
-  let ttp = (redisData?.userData as any)?.ttp
+  let ttclid = redisData?.userData?.ttclid
+  let ttp = redisData?.userData?.ttp
 
   if (order.note_attributes && order.note_attributes.length > 0) {
     const fbpAttr = order.note_attributes.find(a => a.name === '_fbp')

@@ -13,6 +13,7 @@ import { updateTag } from 'next/cache'
 import { trackServerEvent } from '@/lib/tracking/google/trackingServerEvent'
 import type { AnalyticsItem } from 'types/analytics/AnalyticsItem'
 import type { CartResponse, CartActionsResult } from 'types/cart'
+import type { ShopifyDiscountCodesUpdateOperation } from '@types'
 type CartLineInput = {
   variantId: string
   quantity: number
@@ -34,13 +35,14 @@ export const addCartLinesAction = async (
       if (rawCart && discountCode) {
         // Fjernet 'cache: no-store' da typen ikke støtter det.
         // Mutations (POST) blir som regel ikke cachet uansett.
-        const discountResult = await shopifyFetch<any>({
-          query: mutationCartDiscountCodesUpdate,
-          variables: {
-            cartId,
-            discountCodes: [discountCode]
-          }
-        })
+        const discountResult =
+          await shopifyFetch<ShopifyDiscountCodesUpdateOperation>({
+            query: mutationCartDiscountCodesUpdate,
+            variables: {
+              cartId,
+              discountCodes: [discountCode]
+            }
+          })
 
         if (
           discountResult.success
@@ -73,7 +75,7 @@ export const addCartLinesAction = async (
 
     for (const line of lines) {
       const addedLine = rawCart.lines.edges.find(
-        (edge: any) => edge.node.merchandise.id === line.variantId
+        edge => edge.node.merchandise.id === line.variantId
       )
 
       if (addedLine) {

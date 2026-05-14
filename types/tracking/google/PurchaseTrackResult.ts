@@ -8,5 +8,5 @@ export type PurchaseTrackResult =
         | 'missing_items'
         | 'ga_error'
         | 'missing_credentials'
-      details?: Record<string, any>
+      details?: Record<string, unknown>
     }

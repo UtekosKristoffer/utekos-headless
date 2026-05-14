@@ -4,11 +4,7 @@ export const TAGS = {
   products: 'products',
   cart: 'cart'
 }
-
-import { ensureStartsWith } from '@/lib/utils/ensureStartsWith'
-
 export const FREE_SHIPPING_THRESHOLD = 999
-
 export const productName = 'Utekos TechDown™'
 export const productHandle = 'utekos-techdown'
 export const productUrl = `/produkter/${productHandle}`
@@ -24,11 +20,11 @@ export const PRODUCT_VARIANTS = {
     price: 1790,
     badge: 'Bestselger',
     description:
-      'Flaggskipet i kolleksjonen. CloudWave™ hydrofob isolasjon beholder varmen selv i fukt — der vanlig dun kollapser, består Utekos. 3-i-1-konstruksjonen lar deg justere fra parkas til kokong på sekunder, slik at du kan bli sittende lenger.',
+      'Flaggskipet i kolleksjonen. CloudWeave™ hydrofob isolasjon beholder varmen selv i fukt — der vanlig dun kollapser, består Utekos. 3-i-1-konstruksjonen lar deg justere fra parkas til kokong på sekunder, slik at du kan bli sittende lenger.',
     highlights: [
       {
         title: 'Holder varmen i fukt',
-        body: 'CloudWave™ hydrofob isolasjon beholder rundt 98 % varmeevne selv når den blir våt. Vanlig dun kollapser; TechDown består.'
+        body: 'CloudWeave™ hydrofob isolasjon beholder rundt 98 % varmeevne selv når den blir våt. Vanlig dun kollapser; TechDown består.'
       },
       {
         title: '3-i-1 fleksibilitet',

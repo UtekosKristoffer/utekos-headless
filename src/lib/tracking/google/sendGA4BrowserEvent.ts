@@ -10,9 +10,11 @@ const GTM_OWNED_EVENTS = new Set([
   'Purchase'
 ])
 
-function buildEventParams(eventData?: Record<string, any>): Record<string, any> {
+function buildEventParams(
+  eventData?: Record<string, unknown>
+): Record<string, unknown> {
   const data = eventData ?? {}
-  const params: Record<string, any> = {}
+  const params: Record<string, unknown> = {}
 
   if (data.value !== undefined) {
     const value = Number(data.value)
@@ -60,8 +62,17 @@ function buildEventParams(eventData?: Record<string, any>): Record<string, any> 
   return params
 }
 
+type SendGA4BrowserEventPayload = {
+  eventName?: string
+  eventData?: Record<string, unknown>
+  ga4Data?: {
+    client_id?: string
+    session_id?: string | number
+  }
+}
+
 export async function sendGA4BrowserEvent(
-  payload: any,
+  payload: SendGA4BrowserEventPayload,
   userContext: { clientIp?: string; userAgent?: string }
 ) {
   const { eventName, eventData, ga4Data } = payload ?? {}
@@ -81,7 +92,6 @@ export async function sendGA4BrowserEvent(
       error: 'Missing client_id'
     }
   }
-
 
   if (GTM_OWNED_EVENTS.has(eventName)) {
     return {

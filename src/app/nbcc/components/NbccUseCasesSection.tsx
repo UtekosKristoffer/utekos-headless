@@ -1,0 +1,72 @@
+import { BadgeCheckIcon } from '@/components/animate-icons/icons/badge-check'
+import { ClockIcon } from '@/components/animate-icons/icons/clock'
+import { CompassIcon } from '@/components/animate-icons/icons/compass'
+import { LayersIcon } from '@/components/animate-icons/icons/layers'
+import { MessageSquareDashedIcon } from '@/components/animate-icons/icons/message-square-dashed'
+import { UsersIcon } from '@/components/animate-icons/icons/users'
+import { nbccUseCases } from '../data/nbccLandingPageContent'
+
+const useCaseIcons = [
+  CompassIcon,
+  ClockIcon,
+  LayersIcon,
+  UsersIcon,
+  MessageSquareDashedIcon,
+  BadgeCheckIcon
+] as const
+
+export function NbccUseCasesSection() {
+  return (
+    <section className='relative overflow-hidden bg-[#f5efe4] px-4 py-20 text-[#17130f] sm:px-6 lg:px-8'>
+      <div className='absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#17130f]/20 to-transparent' />
+      <div className='mx-auto max-w-7xl'>
+        <div
+          data-nbcc-reveal
+          data-nbcc-animate
+          className='grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-end'
+        >
+          <div>
+            <p className='text-sm font-semibold uppercase tracking-[0.18em] text-[#6d4a20]'>
+              Campinglivet har mange former
+            </p>
+            <h2 className='mt-4 max-w-xl text-balance text-3xl font-semibold tracking-normal sm:text-4xl'>
+              Fra morgenkaffe til den siste praten i forteltet.
+            </h2>
+          </div>
+          <p className='max-w-2xl text-base leading-8 text-[#51463a] lg:justify-self-end'>
+            For noen ligger den største gleden i friheten til å våkne til ny
+            utsikt, for andre er det det trygge fellesskapet på fastplassen
+            eller latteren rundt bordet på et regionstreff. Uansett hvor du slår
+            leir, eller om du nyter roen på terrassen hjemme, er fellesnevneren
+            den samme: De aller beste stundene skapes utendørs.
+          </p>
+        </div>
+
+        <div className='mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
+          {nbccUseCases.map((useCase, index) => {
+            const Icon = useCaseIcons[index] ?? CompassIcon
+            return (
+              <article
+                key={useCase.title}
+                data-nbcc-reveal
+                data-nbcc-animate
+                className='rounded-lg border border-[#17130f]/10 bg-white/55 p-6 shadow-[0_1px_0_rgba(255,255,255,0.5)_inset]'
+              >
+                <Icon
+                  size={28}
+                  animateOnHover='default'
+                  className='mb-5 text-[#6d4a20]'
+                  aria-hidden
+                />
+                <h3 className='text-lg font-semibold'>{useCase.title}</h3>
+                <p className='mt-3 text-sm leading-7 text-[#5a5046]'>
+                  {useCase.description}
+                </p>
+              </article>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}

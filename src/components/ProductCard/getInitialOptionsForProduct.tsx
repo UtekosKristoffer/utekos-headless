@@ -2,7 +2,7 @@
 
 import { getInitialAvailableOptions } from './getInitialAvailableOptions'
 import type { ShopifyProduct } from 'types/product'
-import { FORCED_COLORS } from 'src/constants/forced-colors'
+import { FORCED_COLORS } from '@/constants/forced-colors'
 
 interface ProductContext {
   usedColors?: Set<string>

@@ -29,20 +29,23 @@ export async function processOrderTracking(
   const secondaryOk = secondarySettled.status === 'fulfilled'
 
   const metaFailure =
-    metaSettled.status === 'fulfilled' && metaSettled.value?.success === false
-      ? metaSettled.value
-      : undefined
+    metaSettled.status === 'fulfilled' && metaSettled.value?.success === false ?
+      metaSettled.value
+    : undefined
 
   const googleFailure =
-    googleSettled.status === 'fulfilled' && googleSettled.value.success === false
-      ? googleSettled.value
-      : undefined
+    (
+      googleSettled.status === 'fulfilled'
+      && googleSettled.value.success === false
+    ) ?
+      googleSettled.value
+    : undefined
 
   if (metaOk && googleOk) {
     return {
       success: true,
       details: {
-        orderId: (order as any)?.id,
+        orderId: order.id,
         metaOk,
         googleOk,
         secondaryOk
@@ -51,25 +54,25 @@ export async function processOrderTracking(
   }
 
   const metaError =
-    metaSettled.status === 'rejected'
-      ? String(metaSettled.reason)
-      : metaFailure?.error || metaFailure?.details
+    metaSettled.status === 'rejected' ?
+      String(metaSettled.reason)
+    : metaFailure?.error || metaFailure?.details
 
   const googleError =
-    googleSettled.status === 'rejected'
-      ? String(googleSettled.reason)
-      : googleFailure?.error || googleFailure?.details
+    googleSettled.status === 'rejected' ?
+      String(googleSettled.reason)
+    : googleFailure?.error || googleFailure?.details
 
   const secondaryError =
-    secondarySettled.status === 'rejected'
-      ? String(secondarySettled.reason)
-      : undefined
+    secondarySettled.status === 'rejected' ?
+      String(secondarySettled.reason)
+    : undefined
 
   return {
     success: false,
     error: !metaOk ? 'Meta tracking failed' : 'Google tracking failed',
     details: {
-      orderId: (order as any)?.id,
+      orderId: order.id,
       metaOk,
       googleOk,
       secondaryOk,

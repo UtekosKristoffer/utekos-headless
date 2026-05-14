@@ -103,7 +103,7 @@ Opplev en ny standard for utendørs velvære.
 
 **Utekos TechDown™** forener banebrytende innovasjon med tidløs eleganse. Det
 eksklusive Luméa™-skallet gir en sofistikert finish og fungerer som et
-beskyttende skjold, mens den ytelsesoptimaliserte **CloudWave™-isolasjonen**
+beskyttende skjold, mens den ytelsesoptimaliserte **CloudWeave™-isolasjonen**
 sikrer høy og pålitelig varme.
 
 Kjernen i konseptet er vår unike **3-i-1 funksjonalitet**. Gjennomtestede

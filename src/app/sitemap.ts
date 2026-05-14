@@ -32,6 +32,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9
     },
     {
+      url: `${baseUrl}/nbcc`,
+      lastModified: lastModifiedISO,
+      changeFrequency: 'monthly',
+      priority: 0.8
+    },
+    {
       url: `${baseUrl}/skreddersy-varmen/utekos-orginal`,
       lastModified: lastModifiedISO,
       changeFrequency: 'weekly',

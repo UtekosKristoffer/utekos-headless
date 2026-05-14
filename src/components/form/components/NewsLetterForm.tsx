@@ -7,16 +7,7 @@ import { Input } from '@/components/ui/input'
 import { ArrowRight, Mail } from 'lucide-react'
 import { toast } from 'sonner'
 import { trackNewsletterConversion } from '@/components/analytics/Meta/trackNewsletterConversion'
-import { UtekosWordmark } from '@/components/branding/UtekosWordmark'
-import { Badge } from '@/components/ui/badge'
-const brandName = (
-  <UtekosWordmark
-    color='sidebar'
-    size={24}
-    className='size-full text-sidebar-foreground p-2'
-    style={{ fontFamily: 'var(--font-brand-sans)' }}
-  />
-)
+
 const initialState = {
   status: 'idle' as 'success' | 'error' | 'idle',
   message: ''
@@ -72,7 +63,7 @@ export function NewsletterForm() {
         <form
           ref={formRef}
           action={handleSubmit}
-          className='flex w-full md: ml-12! mt-4! items-center space-x-2'
+          className='mt-4! flex w-full items-center space-x-2 md:ml-12!'
         >
           <Input
             type='email'
