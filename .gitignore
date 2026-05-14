@@ -18,6 +18,9 @@
 # mcp config (may contain local secrets/tokens)
 mcp.json
 
+# vscode settings (may contain MCP secrets/tokens)
+.vscode/settings.json
+
 # local credentials and service accounts
 src/api/lib/cloud-credentials/
 *.service-account.json
