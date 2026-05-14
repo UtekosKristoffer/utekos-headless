@@ -18,11 +18,13 @@ export function NbccProductCarousel({ images }: NbccProductCarouselProps) {
   if (images.length === 0) return null
 
   if (images.length === 1) {
+    const singleImage = images[0]
+    if (!singleImage) return null
     return (
       <div className='relative aspect-square overflow-hidden bg-[#e8dfd0]'>
         <Image
-          src={images[0].src}
-          alt={images[0].alt}
+          src={singleImage.src}
+          alt={singleImage.alt}
           fill
           sizes='(min-width: 1024px) 31vw, (min-width: 768px) 45vw, 100vw'
           data-nbcc-product-image
