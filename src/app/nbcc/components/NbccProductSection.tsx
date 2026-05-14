@@ -19,19 +19,38 @@ import {
   type NbccProductVariant
 } from './NbccProductCardActions'
 
+function normalizeVariantOption(value: string): string {
+  return value.trim().toLocaleLowerCase('nb-NO')
+}
+
 function resolveVariantsForSizes(
   allVariants: ShopifyProductVariant[],
   sizes: string[],
   color?: string
 ): NbccProductVariant[] {
   return sizes.flatMap(label => {
+    const normalizedLabel = normalizeVariantOption(label)
+
     const variant = allVariants.find(v => {
-      const hasSize = v.selectedOptions.some(o => o.value === label)
+      const hasSize = v.selectedOptions.some(
+        option => normalizeVariantOption(option.value) === normalizedLabel
+      )
+
       if (!hasSize) return false
-      if (color) return v.selectedOptions.some(o => o.value === color)
+
+      if (color) {
+        const normalizedColor = normalizeVariantOption(color)
+
+        return v.selectedOptions.some(
+          option => normalizeVariantOption(option.value) === normalizedColor
+        )
+      }
+
       return true
     })
+
     if (!variant) return []
+
     return [
       {
         label,
@@ -130,9 +149,9 @@ export async function NbccProductSection() {
               section: 'products',
               target: 'sizes-ai'
             }}
-            containerClassName='w-full max-w-3xl'
+            containerClassName='flex w-full max-w-3xl flex-col items-center'
             panelClassName='w-full'
-            buttonClassName='mx-auto h-12 w-full justify-center gap-2 rounded-md border-white/20 bg-white/[0.06] px-6 text-white hover:bg-white/[0.12] sm:w-auto'
+            buttonClassName='h-12 w-full justify-center gap-2 rounded-md border-white/20 bg-white/[0.06] px-6 text-white hover:bg-white/[0.12] sm:w-auto'
           />
         </div>
       </div>

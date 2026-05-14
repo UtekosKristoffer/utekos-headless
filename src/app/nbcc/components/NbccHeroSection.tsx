@@ -108,7 +108,7 @@ export function NbccHeroSection() {
               trackingData={nbccHeroTracking.secondary}
               containerClassName='w-full sm:w-auto'
               panelClassName='w-full sm:w-[32rem]'
-              buttonClassName='h-12 w-full justify-center gap-2 rounded-md border-white/25 bg-white/[0.06] px-6 text-[15px] font-semibold text-white hover:bg-utekos-brown/60 sm:w-auto'
+              buttonClassName='h-12 w-full justify-center gap-2 rounded-md border-white/25 bg-utekos-brown/90 px-6 text-[15px] font-semibold text-white hover:bg-utekos-brown/60 sm:w-auto'
             />
           </div>
 
