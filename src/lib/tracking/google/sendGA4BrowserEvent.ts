@@ -63,12 +63,14 @@ function buildEventParams(
 }
 
 type SendGA4BrowserEventPayload = {
-  eventName?: string
-  eventData?: Record<string, unknown>
-  ga4Data?: {
-    client_id?: string
-    session_id?: string | number
-  }
+  eventName?: string | undefined
+  eventData?: Record<string, unknown> | undefined
+  ga4Data?:
+    | {
+        client_id?: string | undefined
+        session_id?: string | number | undefined
+      }
+    | undefined
 }
 
 export async function sendGA4BrowserEvent(
