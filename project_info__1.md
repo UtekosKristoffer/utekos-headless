@@ -1,17 +1,17 @@
-# Utekos Headless — Codebase Overview (Tracking Codebase Note #1)
+---
+title: 'Utekos Headless — General Codebase Overview'
+category: 'Project Overview — Stack, Architecture, Key Patterns'
+date: '2026-05-14'
+---
 
-## Summary
+# Utekos Headless — General Codebase Overview
 
-This is a Next.js + TypeScript “headless” application that sends
-analytics/tracking events to multiple third-party providers. Provider
-integration is implemented as small, purpose-specific sender functions under
-`src/lib/tracking/*`, using shared TypeScript types under `types/tracking/*`.
+## Project Summary
 
-In this session, the targeted change was fixing an ESLint/TypeScript issue in
-the Snapchat sender (`src/lib/tracking/snapchat/sendSnapchatBrowserEvent.ts`)
-where the code used `(user as any)` to access Snapchat-specific identifiers; the
-fix was to extend the shared `MetaUserData` type so the sender can use proper
-typed properties.
+Headless e-commerce application for `utekos.no` built on `Next.js 15.5.5` with
+`App Router`, `React 19.1.0`, and `TypeScript 5.9.2`. Backend is
+`Shopify Storefront API` via GraphQL. Styling uses `Tailwind CSS v4`. Deployed
+on `Vercel`.
 
 ## Architecture
 

@@ -19,5 +19,6 @@ export const geistMono = GeistMono({
 export const brandSansFontFamily = GoogleSans({
   variable: '--font-brand-sans',
   subsets: ['latin'],
-  display: 'swap'
+  display: 'swap',
+  adjustFontFallback: false
 })
