@@ -1,3 +1,5 @@
+'use client'
+
 import { BadgeCheckIcon } from '@/components/animate-icons/icons/badge-check'
 import { ClockIcon } from '@/components/animate-icons/icons/clock'
 import { CompassIcon } from '@/components/animate-icons/icons/compass'
@@ -6,22 +8,69 @@ import { Button } from '@/components/ui/button'
 import heroImage from '@public/nbcc-master-video.png'
 import heroImageMobile from '@public/nbcc-mobile-master-2.png'
 import nbccLogo from '@public/NBCC_logo_RGB_lys_bg.png'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRef } from 'react'
 
 import { nbccHeroTracking } from '../data/nbccLandingPageContent'
 import { NbccAiSummaryButton } from './NbccAiSummaryButton'
 
+gsap.registerPlugin(useGSAP)
+
+/** Kun tekst / innhold — ikke fullskjerms-bilder (tung scale + opacity konflikt med Tailwind 0.72). */
+const CONTENT_SELECTOR = '[data-nbcc-hero-content]'
+
 export function NbccHeroSection() {
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useGSAP(
+    () => {
+      const root = sectionRef.current
+      if (!root) return
+
+      const blocks = gsap.utils.toArray<HTMLElement>(CONTENT_SELECTOR, root)
+
+      const clearWillChange = () => {
+        blocks.forEach(el => {
+          el.style.removeProperty('will-change')
+        })
+      }
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.set(blocks, { autoAlpha: 1, y: 0, clearProps: 'willChange' })
+        return
+      }
+
+      blocks.forEach(el => {
+        el.style.willChange = 'opacity, transform'
+      })
+
+      gsap.set(blocks, { autoAlpha: 0, y: 14, force3D: true })
+
+      const tl = gsap.timeline({
+        defaults: { ease: 'power2.out', duration: 0.58 },
+        onComplete: clearWillChange
+      })
+
+      tl.to(blocks, {
+        autoAlpha: 1,
+        y: 0,
+        stagger: 0.085
+      })
+    },
+    { scope: sectionRef }
+  )
+
   return (
-    <section className='relative isolate min-h-[76svh] overflow-hidden bg-[#15120e]'>
+    <section ref={sectionRef} className='relative isolate min-h-[76svh] overflow-hidden bg-[#15120e]'>
       <Image
         src={heroImageMobile}
         alt='Historisk NBCC-bilde'
         fill
         priority
         sizes='100vw'
-        data-nbcc-hero-media
         className='object-cover object-[center_65%] opacity-[0.72] md:hidden'
       />
       <Image
@@ -30,7 +79,6 @@ export function NbccHeroSection() {
         fill
         priority
         sizes='100vw'
-        data-nbcc-hero-media
         className='hidden object-cover object-center opacity-[0.72] md:block'
       />
       <div className='absolute inset-0 bg-[linear-gradient(90deg,rgba(12,10,7,0.94)_0%,rgba(12,10,7,0.78)_38%,rgba(12,10,7,0.28)_72%,rgba(12,10,7,0.64)_100%)]' />
@@ -41,7 +89,8 @@ export function NbccHeroSection() {
           <div
             data-nbcc-hero
             data-nbcc-animate
-            className='mb-7 flex flex-wrap items-center gap-3'
+            data-nbcc-hero-content
+            className='mb-8 flex flex-wrap items-center gap-3'
           >
             <span className='inline-flex items-center gap-3 rounded-md border border-white/[0.18] bg-white/[0.92] px-3 py-2 shadow-sm'>
               <Image
@@ -61,7 +110,8 @@ export function NbccHeroSection() {
           <h1
             data-nbcc-hero
             data-nbcc-animate
-            className='max-w-[calc(100vw-2rem)] text-balance text-5xl font-semibold leading-[0.96] tracking-normal text-white sm:max-w-2xl sm:text-6xl lg:text-7xl'
+            data-nbcc-hero-content
+            className='max-w-[calc(100vw-2rem)] text-balance text-5xl font-semibold leading-[1.08] tracking-[-0.02em] text-white sm:max-w-2xl sm:text-6xl sm:leading-[1.06] lg:text-7xl lg:leading-[1.05]'
           >
             NBCC-medlemsfordel hos Utekos
           </h1>
@@ -69,9 +119,9 @@ export function NbccHeroSection() {
           <p
             data-nbcc-hero
             data-nbcc-animate
-            className='mt-6 max-w-[calc(100vw-2rem)] text-pretty text-lg leading-8 text-[#f5efe4]/[0.9] sm:max-w-2xl sm:text-xl'
+            data-nbcc-hero-content
+            className='mt-7 max-w-[calc(100vw-2rem)] text-pretty text-lg leading-8 text-[#f5efe4]/[0.9] sm:max-w-2xl sm:text-xl sm:leading-relaxed'
           >
-            {' '}
             Helt siden 1960 har Norsk Bobil og Caravan Club samlet folk rundt de
             gode opplevelsene og gleden av å treffe andre campingelskere. Vi i
             Utekos deler lidenskapen for sosiale, lune og komfortable
@@ -83,6 +133,7 @@ export function NbccHeroSection() {
           <div
             data-nbcc-hero
             data-nbcc-animate
+            data-nbcc-hero-content
             className='mt-9 flex max-w-3xl flex-col gap-3 sm:flex-row sm:items-start'
           >
             <Button
@@ -115,6 +166,7 @@ export function NbccHeroSection() {
           <div
             data-nbcc-hero
             data-nbcc-animate
+            data-nbcc-hero-content
             className='mt-12 grid max-w-3xl gap-4 border-t border-white/[0.16] pt-6 text-sm text-[#f5efe4]/[0.82] sm:grid-cols-3'
           >
             <div className='flex items-start gap-3'>
@@ -125,7 +177,6 @@ export function NbccHeroSection() {
                 aria-hidden
               />
               <span>
-                {' '}
                 Et beskyttende ytre forent med en silkemyk og tilpasningsdyktig
                 kjerne.
               </span>

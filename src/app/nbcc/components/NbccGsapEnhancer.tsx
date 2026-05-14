@@ -12,7 +12,7 @@ export function NbccGsapEnhancer() {
     if (!root) return
 
     const animatedItems = gsap.utils.toArray<HTMLElement>(
-      '[data-nbcc-animate]',
+      '[data-nbcc-animate]:not([data-nbcc-hero])',
       root
     )
     const reducedMotion = window.matchMedia(
@@ -33,24 +33,6 @@ export function NbccGsapEnhancer() {
     animatedItems.forEach(item => {
       item.style.willChange = 'transform, opacity'
     })
-
-    gsap
-      .timeline({ defaults: { ease: 'power3.out' } })
-      .from('[data-nbcc-hero]', {
-        opacity: 0,
-        y: 28,
-        duration: 0.75,
-        stagger: 0.08
-      })
-      .from(
-        '[data-nbcc-hero-media]',
-        {
-          opacity: 0,
-          scale: 1.04,
-          duration: 1.1
-        },
-        0
-      )
 
     ScrollTrigger.batch('[data-nbcc-reveal]', {
       start: 'top 82%',
