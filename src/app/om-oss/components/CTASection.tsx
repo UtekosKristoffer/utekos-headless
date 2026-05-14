@@ -1,5 +1,3 @@
-// Path: src/app/(sections)/CTASection.tsx
-
 import Link from 'next/link'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { ArrowRight, Sparkles, Check } from 'lucide-react'
