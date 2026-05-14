@@ -5,6 +5,12 @@ import { unstable_cache } from 'next/cache'
 import { z } from 'zod'
 
 import {
+  comfyrobeData,
+  tecDownData,
+  utekosData
+} from '@/app/handlehjelp/storrelsesguide/data'
+
+import {
   nbccFaqItems,
   nbccProducts,
   nbccSteps
@@ -27,17 +33,15 @@ export const NbccAiSummarySchema = z.object({
     .max(420)
     .describe('Kort oppsummering i naturlig norsk prosa.'),
   bullets: z
-    .array(z.string().min(8).max(140))
+    .array(z.string().min(8).max(170))
     .min(3)
     .max(5)
-    .describe('3–5 korte punkter med konkret, nyttig informasjon.'),
+    .describe('3–5 konkrete, kundehjelpende punkter.'),
   conclusion: z
     .string()
     .min(20)
     .max(180)
-    .describe(
-      'Én avsluttende setning som gjør valget eller handlingen tydelig.'
-    )
+    .describe('Én avsluttende setning som gjør neste steg tydelig.')
 })
 
 export type NbccAiSummaryPayload = z.infer<typeof NbccAiSummarySchema>
@@ -51,30 +55,31 @@ const NBCC_AI_MODEL_FALLBACK =
 const FALLBACK_SUMMARIES: Record<NbccAiSummaryIntent, NbccAiSummaryPayload> = {
   'how-to-use': {
     kicker: 'Medlemsfordel',
-    title: 'Slik brukes NBCC-fordelen',
+    title: 'Slik bruker du NBCC-fordelen',
     summary:
-      'Som NBCC-medlem finner du fordelskoden i Min Side eller Gnist under medlemsfordeler. Velg Utekos-produktet som passer turen din, legg det i handlekurven og skriv inn koden i kassen. Da trekkes medlemsrabatten automatisk før du betaler.',
+      'Finn fordelskoden din hos NBCC, velg Utekos-produktet som passer turen din, og legg inn koden i kassen. Rabatten trekkes automatisk før betaling, så du ser medlemsprisen før du fullfører kjøpet.',
     bullets: [
-      'Finn fordelskoden hos NBCC i Min Side eller Gnist.',
-      'Velg Utekos-produkt og størrelse før du går til kassen.',
-      'Legg inn fordelskoden i rabattfeltet, så oppdateres prisen automatisk.'
+      'Finn fordelskoden i NBCCs medlemsflate, for eksempel Min Side eller Gnist.',
+      'Velg produkt og størrelse hos Utekos før du går videre til kassen.',
+      'Lim inn fordelskoden i rabattfeltet. Da oppdateres prisen automatisk.',
+      'Kontroller at rabatten er trukket fra før du betaler.'
     ],
     conclusion:
-      'Kort sagt: koden gjør ordinær pris om til NBCC-medlemspris før betaling.'
+      'Kort sagt: finn kode hos NBCC, velg Utekos, bruk koden i kassen.'
   },
   'sizes': {
-    kicker: 'Størrelser',
-    title: 'Størrelser fra lavest til høyest',
+    kicker: 'Størrelseshjelp',
+    title: 'Velg størrelse etter bruk og passform',
     summary:
-      'NBCC-utvalget bruker litt ulike størrelsesnavn per produkt. Comfyrobe går fra S til L, Mikrofiber fra Medium til Large, og TechDown fra Middels til Ekstra Stor. Samlet kan størrelsene leses fra lavest til høyest som S, Middels/Medium, Stor/Large og Ekstra Stor.',
+      'Start med hvordan plagget skal brukes. Velg mindre når du vil ha en nettere og mer kontrollert passform, og større når du vil ha ekstra plass til tykke lag, mer bevegelsesrom eller en tydelig oversized følelse.',
     bullets: [
-      'Comfyrobe: S → L.',
-      'Mikrofiber: Medium → Large.',
-      'TechDown: Middels → Stor → Ekstra Stor.',
-      'Samlet rekkefølge: S → Middels/Medium → Stor/Large → Ekstra Stor.'
+      'TechDown™: Velg Middels hvis du er opptil ca. 175–180 cm eller ønsker en nettere passform. Velg Stor hvis du er over ca. 180–185 cm eller vil ha mer rom.',
+      'Mikrofiber™: Velg Medium hvis du er opptil ca. 180 cm og bruker plagget over lettere klær. Velg Large hvis du er over 180 cm eller vil ha plass til tykkere lag.',
+      'Comfyrobe™: Plagget er bevisst oversized. Velg S for en romslig, men mer håndterlig robe. Velg L hvis du vil ha mest dekning og plass over klær.',
+      'Er du mellom to størrelser, velg etter bruk: tettere og lettere å bevege seg i = ned; mer lag-på-lag og maksimal lunhet = opp.'
     ],
     conclusion:
-      'Velg lavere størrelse for tettere passform og høyere størrelse for mer romslighet.'
+      'For campingbruk velger mange den størrelsen som gir plass til varme lag uten at plagget føles i veien.'
   }
 }
 
@@ -100,7 +105,7 @@ function formatProductFacts(): string {
   Kortnavn: ${product.shortTitle}
   Beskrivelse: ${product.description}
   Best for: ${product.bestFor}
-  Størrelser: ${product.sizes.join(' → ')}${color}`
+  Størrelser vist på NBCC-siden: ${product.sizes.join(' → ')}${color}`
     })
     .join('\n\n')
 }
@@ -117,25 +122,52 @@ function formatFaqFacts(): string {
     .join('\n')
 }
 
+function formatComfyrobeSizeFacts(): string {
+  return comfyrobeData
+    .map(row => `- ${row.measurement}: S ${row.xs}, M ${row.ml}, L ${row.lxl}`)
+    .join('\n')
+}
+
+function formatMikrofiberSizeFacts(): string {
+  return utekosData
+    .map(row => `- ${row.measurement}: Medium ${row.m}, Large ${row.l}`)
+    .join('\n')
+}
+
+function formatTechDownSizeFacts(): string {
+  return tecDownData
+    .map(
+      row =>
+        `- ${row.measurement}: Liten ${row.liten}, Middels ${row.middels}, Stor ${row.stor}`
+    )
+    .join('\n')
+}
+
 function buildNbccPrompt(intent: NbccAiSummaryIntent): string {
   const task =
     intent === 'how-to-use' ?
       `Oppgave: Forklar kort hvordan NBCC-medlemsfordelen hos Utekos fungerer.
 
-Svar slik:
-- Forklar hvor fordelskoden finnes.
-- Forklar hva kunden gjør hos Utekos.
-- Forklar at rabatten trekkes i kassen.
-- Bruk trygg, tydelig og praktisk tone.
+Skriv som en hjelpsom handleveileder:
+- Forklar hvor medlemmet finner fordelskoden.
+- Forklar at kunden velger produkt og størrelse hos Utekos.
+- Forklar at koden legges inn i kassen.
+- Forklar at prisen oppdateres før betaling.
 - Ikke legg til prosenter, priser eller vilkår som ikke står i fakta.`
-    : `Oppgave: Generer kort størrelseinformasjon for NBCC-utvalget.
+    : `Oppgave: Lag konkret størrelseshjelp for NBCC-medlemmer som skal velge Utekos.
 
-Svar slik:
-- Oppsummer størrelsene fra laveste til høyeste.
-- Vis produktvis størrelsesrekkefølge.
-- Forklar at navn varierer mellom produktene.
-- Bruk benevnelsen: S → Middels/Medium → Stor/Large → Ekstra Stor når du oppsummerer samlet.
-- Ikke påstå eksakte kroppsmål, centimeter eller garantier som ikke står i fakta.`
+Skriv som en hjelpsom butikkmedarbeider, ikke som en teknisk oppsummering.
+
+Målet:
+- Gjør det enklere å velge størrelse.
+- Bruk høyde, passform og bruksområde der faktaene støtter det.
+- Forklar hva kunden bør velge hvis de står mellom to størrelser.
+- Knytt rådene til campingbruk: lag-på-lag, kalde kvelder, bevegelsesrom og komfort.
+- Ikke bare list opp størrelsene.
+- Ikke skriv setninger som "NBCC-utvalget bruker ulike størrelsesnavn".
+- Ikke skriv metaformuleringer som "samlet kan størrelsene leses".
+- Ikke gi centimeter- eller høydepåstander som ikke finnes i faktaene.
+- For TechDown Ekstra Stor: det finnes som valg på NBCC-siden, men måltabellen under har bare Liten, Middels og Stor. Gi derfor kun generell veiledning for Ekstra Stor: mest romslig valg, mest plass til lag under.`
 
   return `Du er en presis norsk produktveileder for Utekos sin NBCC-landingsside.
 
@@ -147,17 +179,36 @@ Regler:
 - Ikke bruk emoji.
 - Ikke nevn at teksten er AI-generert.
 - Ikke bruk markdown.
-- Vær kort, nyttig og konkret.
+- Vær kort, trygg, nyttig og konkret.
 - Returner strukturert innhold som matcher skjemaet.
+- Skriv for en kunde som vurderer å kjøpe, ikke for en intern produktdatabase.
 
-Produkter:
+Produkter på NBCC-siden:
 ${formatProductFacts()}
 
 Slik brukes fordelen:
 ${formatStepFacts()}
 
 FAQ-fakta:
-${formatFaqFacts()}`
+${formatFaqFacts()}
+
+Størrelsesguide — Comfyrobe:
+Comfyrobe er oversized og beskyttende. Den er ment å kunne trekkes over klær og gi god bevegelsesfrihet.
+Beste tips: Velg normal størrelse for romslig, men kontrollerbar passform. Vurder større størrelse hvis kunden vil ha maksimal plass til tykke lag eller en bevisst overdimensjonert stil.
+${formatComfyrobeSizeFacts()}
+
+Størrelsesguide — TechDown:
+TechDown har mer kroppsnær passform, justerbar midje og nettere design.
+Liten: opptil 165–170 cm, eller lavere person som ønsker ekstra romslig følelse.
+Medium/Middels: opptil 175–180 cm, eller lavere person som ønsker ekstra romslig passform.
+Large/Stor: over 180–185 cm, eller lavere person som ønsker ekstra romslig passform. Over 195 cm kan bli for lite.
+${formatTechDownSizeFacts()}
+
+Størrelsesguide — Mikrofiber:
+Mikrofiber/Utekos har stor forskjell mellom Medium og Large. Passformen kan formes med snorstramming i livet og nederst.
+Medium: opptil ca. 180 cm, generøs men tettere passform, best over lettere klær.
+Large: over 180 cm, eller hvis kunden ønsker oversized følelse, maksimal plass til tykke lag og mer kokong-effekt.
+${formatMikrofiberSizeFacts()}`
 }
 
 function cleanText(value: string): string {
@@ -188,8 +239,8 @@ async function generateWithModel(
     model: gateway(modelId),
     schema: NbccAiSummarySchema,
     prompt: buildNbccPrompt(intent),
-    temperature: 0.25,
-    maxOutputTokens: 700
+    temperature: 0.2,
+    maxOutputTokens: 850
   })
 
   return normalizeSummaryPayload(object)
@@ -216,10 +267,10 @@ export async function generateNbccAiSummary(
   const cached = unstable_cache(
     (selectedIntent: NbccAiSummaryIntent) =>
       generateNbccAiSummaryUncached(selectedIntent),
-    ['nbcc-ai-summary', intent],
+    ['nbcc-ai-summary:v2', intent],
     {
       revalidate: 3600,
-      tags: [`nbcc-ai-summary-${intent}`]
+      tags: [`nbcc-ai-summary-v2-${intent}`]
     }
   )
 

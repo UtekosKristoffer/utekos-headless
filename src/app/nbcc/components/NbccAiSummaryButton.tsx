@@ -18,11 +18,12 @@ type NbccAiSummaryResponse = NbccAiSummaryPayload & {
 type NbccAiSummaryButtonProps = {
   intent: NbccAiSummaryIntent
   idleLabel: string
+  completedLabel?: string
   trackingName: string
   trackingData: Record<string, string>
   buttonClassName: string
   containerClassName?: string
-  panelMode?: 'inline' | 'overlay'
+  panelClassName?: string
 }
 
 type Status = 'idle' | 'thinking' | 'completed'
@@ -30,41 +31,43 @@ type Status = 'idle' | 'thinking' | 'completed'
 const CLIENT_FALLBACKS: Record<NbccAiSummaryIntent, NbccAiSummaryPayload> = {
   'how-to-use': {
     kicker: 'Medlemsfordel',
-    title: 'Slik brukes NBCC-fordelen',
+    title: 'Slik bruker du NBCC-fordelen',
     summary:
-      'Som NBCC-medlem finner du fordelskoden i Min Side eller Gnist under medlemsfordeler. Velg Utekos-produktet som passer turen din, legg det i handlekurven og skriv inn koden i kassen. Da trekkes medlemsrabatten automatisk før du betaler.',
+      'Finn fordelskoden din hos NBCC, velg Utekos-produktet som passer turen din, og legg inn koden i kassen. Rabatten trekkes automatisk før betaling, så du ser medlemsprisen før du fullfører kjøpet.',
     bullets: [
-      'Finn fordelskoden hos NBCC i Min Side eller Gnist.',
-      'Velg Utekos-produkt og størrelse før du går til kassen.',
-      'Legg inn fordelskoden i rabattfeltet, så oppdateres prisen automatisk.'
+      'Finn fordelskoden i NBCCs medlemsflate, for eksempel Min Side eller Gnist.',
+      'Velg produkt og størrelse hos Utekos før du går videre til kassen.',
+      'Lim inn fordelskoden i rabattfeltet. Da oppdateres prisen automatisk.',
+      'Kontroller at rabatten er trukket fra før du betaler.'
     ],
     conclusion:
-      'Kort sagt: koden gjør ordinær pris om til NBCC-medlemspris før betaling.'
+      'Kort sagt: finn kode hos NBCC, velg Utekos, bruk koden i kassen.'
   },
   'sizes': {
-    kicker: 'Størrelser',
-    title: 'Størrelser fra lavest til høyest',
+    kicker: 'Størrelseshjelp',
+    title: 'Velg størrelse etter bruk og passform',
     summary:
-      'NBCC-utvalget bruker litt ulike størrelsesnavn per produkt. Comfyrobe går fra S til L, Mikrofiber fra Medium til Large, og TechDown fra Middels til Ekstra Stor. Samlet kan størrelsene leses fra lavest til høyest som S, Middels/Medium, Stor/Large og Ekstra Stor.',
+      'Start med hvordan plagget skal brukes. Velg mindre når du vil ha en nettere og mer kontrollert passform, og større når du vil ha ekstra plass til tykke lag, mer bevegelsesrom eller en tydelig oversized følelse.',
     bullets: [
-      'Comfyrobe: S → L.',
-      'Mikrofiber: Medium → Large.',
-      'TechDown: Middels → Stor → Ekstra Stor.',
-      'Samlet rekkefølge: S → Middels/Medium → Stor/Large → Ekstra Stor.'
+      'TechDown™: Velg Middels hvis du er opptil ca. 175–180 cm eller ønsker en nettere passform. Velg Stor hvis du er over ca. 180–185 cm eller vil ha mer rom.',
+      'Mikrofiber™: Velg Medium hvis du er opptil ca. 180 cm og bruker plagget over lettere klær. Velg Large hvis du er over 180 cm eller vil ha plass til tykkere lag.',
+      'Comfyrobe™: Plagget er bevisst oversized. Velg S for en romslig, men mer håndterlig robe. Velg L hvis du vil ha mest dekning og plass over klær.',
+      'Er du mellom to størrelser, velg etter bruk: tettere og lettere å bevege seg i = ned; mer lag-på-lag og maksimal lunhet = opp.'
     ],
     conclusion:
-      'Velg lavere størrelse for tettere passform og høyere størrelse for mer romslighet.'
+      'For campingbruk velger mange den størrelsen som gir plass til varme lag uten at plagget føles i veien.'
   }
 }
 
 export function NbccAiSummaryButton({
   intent,
   idleLabel,
+  completedLabel = 'Vis forklaring',
   trackingName,
   trackingData,
   buttonClassName,
-  containerClassName = 'relative w-full',
-  panelMode = 'inline'
+  containerClassName = 'w-full',
+  panelClassName = 'w-full'
 }: NbccAiSummaryButtonProps) {
   const panelId = useId()
   const [status, setStatus] = useState<Status>('idle')
@@ -76,15 +79,10 @@ export function NbccAiSummaryButton({
   const isCompleted = status === 'completed'
 
   const buttonLabel =
-    isThinking ? 'Genererer...'
+    isThinking ? 'Henter forklaring'
     : isCompleted && isOpen ? 'Skjul forklaring'
-    : isCompleted ? 'Vis forklaring'
+    : isCompleted ? completedLabel
     : idleLabel
-
-  const panelPositionClass =
-    panelMode === 'overlay' ?
-      'sm:absolute sm:left-0 sm:top-full sm:z-30 sm:w-[min(32rem,calc(100vw-2rem))]'
-    : 'w-full'
 
   async function handleActivate() {
     if (isThinking) return
@@ -99,7 +97,7 @@ export function NbccAiSummaryButton({
     setGenerated(null)
 
     try {
-      const minimumDelay = new Promise(resolve => setTimeout(resolve, 1200))
+      const minimumDelay = new Promise(resolve => setTimeout(resolve, 650))
       const fetchPromise = fetch(
         `/api/nbcc-ai-summary?intent=${encodeURIComponent(intent)}`,
         {
@@ -111,7 +109,7 @@ export function NbccAiSummaryButton({
       const data = (await response.json()) as NbccAiSummaryResponse
 
       if (!response.ok) {
-        throw new Error(data.error || 'Kunne ikke hente AI-oppsummering')
+        throw new Error(data.error || 'Kunne ikke hente forklaring')
       }
 
       setPayload({
@@ -159,9 +157,16 @@ export function NbccAiSummaryButton({
         : null}
       </Button>
 
-      {isOpen ?
-        <div id={panelId} className={`mt-3 ${panelPositionClass}`}>
-          <div className='overflow-hidden rounded-xl border border-[#f0c36a]/25 bg-[#17130f]/95 text-left shadow-2xl shadow-black/25 backdrop-blur'>
+      <div
+        id={panelId}
+        className={`grid transition-all duration-300 ease-out ${
+          isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+        }`}
+      >
+        <div className='overflow-hidden'>
+          <div
+            className={`mt-3 overflow-hidden rounded-xl border border-[#f0c36a]/25 bg-[#16120e] text-left shadow-xl shadow-black/20 ${panelClassName}`}
+          >
             {isThinking ?
               <div
                 aria-live='polite'
@@ -174,11 +179,11 @@ export function NbccAiSummaryButton({
                     aria-hidden
                   />
                   <div>
-                    <p className='text-xs font-semibold uppercase tracking-[0.18em] text-[#f0c36a]'>
-                      Atlas prosesserer
+                    <p className='text-[11px] font-bold uppercase tracking-[0.18em] text-[#f0c36a]'>
+                      Henter veiledning
                     </p>
-                    <p className='mt-1 text-sm text-[#f5efe4]/80'>
-                      Lager en kort og praktisk forklaring...
+                    <p className='mt-1 text-sm text-[#f5efe4]/75'>
+                      Leser produkt- og størrelsesgrunnlaget...
                     </p>
                   </div>
                 </div>
@@ -190,18 +195,17 @@ export function NbccAiSummaryButton({
               </div>
             : payload ?
               <>
-                <header className='border-b border-white/10 bg-white/[0.04] px-5 py-4'>
+                <header className='border-b border-white/10 bg-white/[0.035] px-5 py-4'>
                   <div className='flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-[#f0c36a]'>
                     <SparklesIcon className='h-3.5 w-3.5' aria-hidden />
                     {payload.kicker}
                   </div>
-                  <h3 className='mt-2 text-lg font-semibold leading-snug text-white'>
+                  <h3 className='mt-2 text-base font-semibold leading-snug text-white sm:text-lg'>
                     {payload.title}
                   </h3>
                   {generated === false ?
                     <p className='mt-2 text-xs text-[#f5efe4]/55'>
-                      Viser standardforklaring fordi AI-svaret ikke var
-                      tilgjengelig akkurat nå.
+                      Viser standardveiledning akkurat nå.
                     </p>
                   : null}
                 </header>
@@ -234,7 +238,7 @@ export function NbccAiSummaryButton({
             : null}
           </div>
         </div>
-      : null}
+      </div>
     </div>
   )
 }

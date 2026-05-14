@@ -122,16 +122,17 @@ export async function NbccProductSection() {
         >
           <NbccAiSummaryButton
             intent='sizes'
-            idleLabel='Generer størrelseinformasjon'
+            idleLabel='Få størrelseshjelp'
+            completedLabel='Vis størrelseshjelp'
             trackingName='NbccSizeInfoAiClick'
             trackingData={{
               page: 'nbcc',
               section: 'products',
               target: 'sizes-ai'
             }}
-            panelMode='inline'
-            containerClassName='relative flex w-full max-w-3xl flex-col items-center'
-            buttonClassName='h-12 w-full justify-center rounded-md border-white/20 bg-white/[0.06] px-6 text-white hover:bg-white/[0.12] sm:w-auto'
+            containerClassName='w-full max-w-3xl'
+            panelClassName='w-full'
+            buttonClassName='mx-auto h-12 w-full justify-center gap-2 rounded-md border-white/20 bg-white/[0.06] px-6 text-white hover:bg-white/[0.12] sm:w-auto'
           />
         </div>
       </div>

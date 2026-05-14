@@ -83,7 +83,7 @@ export function NbccHeroSection() {
           <div
             data-nbcc-hero
             data-nbcc-animate
-            className='mt-9 flex flex-col gap-3 sm:flex-row'
+            className='mt-9 flex max-w-3xl flex-col gap-3 sm:flex-row sm:items-start'
           >
             <Button
               asChild
@@ -102,12 +102,13 @@ export function NbccHeroSection() {
 
             <NbccAiSummaryButton
               intent='how-to-use'
-              idleLabel='Generer forklaring'
+              idleLabel='Forklar fordelen'
+              completedLabel='Vis forklaring'
               trackingName='NbccHeroHowToAiClick'
               trackingData={nbccHeroTracking.secondary}
-              panelMode='overlay'
-              containerClassName='relative w-full sm:w-auto'
-              buttonClassName='h-12 w-full justify-center rounded-md border-white/25 bg-white/[0.06] px-6 text-[15px] font-semibold text-white hover:bg-utekos-brown/60 sm:w-auto'
+              containerClassName='w-full sm:w-auto'
+              panelClassName='w-full sm:w-[32rem]'
+              buttonClassName='h-12 w-full justify-center gap-2 rounded-md border-white/25 bg-white/[0.06] px-6 text-[15px] font-semibold text-white hover:bg-utekos-brown/60 sm:w-auto'
             />
           </div>
 
