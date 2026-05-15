@@ -118,7 +118,7 @@ export function NbccHeroSection() {
           data-nbcc-hero
           data-nbcc-animate
           data-nbcc-hero-content
-          className='text-pretty text-lg leading-8 text-[#f5efe4]/[0.9] sm:text-xl sm:leading-relaxed lg:col-start-1'
+          className='text-pretty text-lg md:py-2 leading-8 text-[#f5efe4]/[0.9] sm:text-xl sm:leading-relaxed lg:col-start-1'
         >
           Helt siden 1960 har Norsk Bobil og Caravan Club samlet folk rundt de
           gode opplevelsene og gleden av å treffe andre campingelskere. Utekos
