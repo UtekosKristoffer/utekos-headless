@@ -11,11 +11,8 @@ import type { Cart } from 'types/cart'
 import { FreeShippingConfirmation } from './FreeShippingConfirmation'
 import { UpsellItem } from './UpsellItem'
 
-const BLOCKED_SUGGESTION_PRODUCT_IDS = new Set([
-  'gid://shopify/Product/7710325899512'
-])
-
-const BLOCKED_SUGGESTION_HANDLES = new Set(['utekos-stapper'])
+const BLOCKED_SUGGESTION_PRODUCT_IDS = new Set<string>()
+const BLOCKED_SUGGESTION_HANDLES = new Set<string>()
 
 function isSuggestionEligible(product: ShopifyProduct): boolean {
   if (
