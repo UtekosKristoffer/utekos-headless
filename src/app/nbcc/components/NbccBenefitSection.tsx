@@ -29,12 +29,6 @@ export function NbccBenefitSection() {
             litt til. Passer like godt ved bobilen som i forteltet eller på
             fastplassen.
           </p>
-          <p>
-            Som stolt samarbeidspartner gir vi deg en rabattert pris på våre
-            produkter. Din unike rabattkode finner du på NBCCs egne
-            medlemsflater. Bare legg inn koden når du kommer til kassen her hos
-            oss, så aktiveres medlemsrabatten din automatisk.
-          </p>
         </div>
       </div>
 

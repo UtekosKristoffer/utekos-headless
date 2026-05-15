@@ -12,12 +12,9 @@ export function NbccFaqSection() {
     <section className='bg-background px-4 py-20 sm:px-6 lg:px-8'>
       <div className='mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1fr]'>
         <div data-nbcc-reveal data-nbcc-animate>
-          <p className='text-sm font-semibold uppercase tracking-[0.18em] text-[#f0c36a]'>
+          <p className='text-sm md:text-2xl font-semibold uppercase tracking-[0.18em] text-[#f0c36a]'>
             Spørsmål og svar
           </p>
-          <h2 className='mt-4 max-w-lg text-balance text-3xl font-semibold tracking-normal text-white sm:text-4xl'>
-            Det viktigste før NBCC-medlemmer klikker videre.
-          </h2>
         </div>
 
         <Accordion

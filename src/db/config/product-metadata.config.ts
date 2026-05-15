@@ -12,5 +12,5 @@ export const productMetadata: Record<string, ProductMetadata> = {
 
   // Tilbehør får ikke sanntidsvisning
   'utekos-buff': { showActivity: true, baseViewers: 2 },
-  'kompresjonsbag': { showActivity: true, baseViewers: 2 }
+  'utekos-stapper': { showActivity: true, baseViewers: 2 }
 }

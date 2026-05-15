@@ -64,7 +64,10 @@ export function NbccHeroSection() {
   )
 
   return (
-    <section ref={sectionRef} className='relative isolate min-h-[76svh] overflow-hidden bg-[#15120e]'>
+    <section
+      ref={sectionRef}
+      className='relative isolate min-h-[76svh] overflow-hidden bg-[#15120e]'
+    >
       <Image
         src={heroImageMobile}
         alt='Historisk NBCC-bilde'
@@ -111,7 +114,7 @@ export function NbccHeroSection() {
             data-nbcc-hero
             data-nbcc-animate
             data-nbcc-hero-content
-            className='max-w-[calc(100vw-2rem)] text-balance text-5xl font-semibold leading-[1.08] tracking-[-0.02em] text-white sm:max-w-2xl sm:text-6xl sm:leading-[1.06] lg:text-7xl lg:leading-[1.05]'
+            className='max-w-[calc(100vw-2rem)] md:max-w-[calc(100vw-1rem)] text-balance text-5xl font-semibold leading-[1.08] tracking-[-0.02em] text-white sm:max-w-2xl sm:text-6xl sm:leading-[1.06] lg:text-7xl lg:leading-[1.05]'
           >
             NBCC-medlemsfordel hos Utekos
           </h1>
@@ -123,11 +126,11 @@ export function NbccHeroSection() {
             className='mt-7 max-w-[calc(100vw-2rem)] text-pretty text-lg leading-8 text-[#f5efe4]/[0.9] sm:max-w-2xl sm:text-xl sm:leading-relaxed'
           >
             Helt siden 1960 har Norsk Bobil og Caravan Club samlet folk rundt de
-            gode opplevelsene og gleden av å treffe andre campingelskere. Vi i
-            Utekos deler lidenskapen for sosiale, lune og komfortable
-            utendørsøyeblikk. Som stolt samarbeidspartner gir vi deg derfor en
-            medlemsrabatt, slik at du kan ta med deg enda mer varme og komfort
-            ut i de sene kveldstimene.
+            gode opplevelsene og gleden av å treffe andre campingelskere. Utekos
+            deler lidenskapen for denne type sosiale og komfortable
+            utendørsøyeblikk. Derfor gir vi deg en hyggelig medlemsrabatt, slik
+            at du kan ta med deg enda mer varme og komfort ut i de sene
+            kveldstimene.
           </p>
 
           <div
@@ -146,15 +149,15 @@ export function NbccHeroSection() {
                 data-track='NbccHeroProductsClick'
                 data-track-data={JSON.stringify(nbccHeroTracking.primary)}
               >
-                Finn din Utekos
+                Finn din favoritt
                 <MoveRightIcon size={18} animateOnHover='default' />
               </Link>
             </Button>
 
             <NbccAiSummaryButton
               intent='how-to-use'
-              idleLabel='Forklar fordelen'
-              completedLabel='Vis forklaring'
+              idleLabel='Få rabattveiledning'
+              completedLabel='Vis rabattveiledningen'
               trackingName='NbccHeroHowToAiClick'
               trackingData={nbccHeroTracking.secondary}
               containerClassName='w-full sm:w-auto'
