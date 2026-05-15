@@ -308,14 +308,12 @@ export function NbccAiSummaryButton({
 
       <div
         id={panelId}
-        className={`grid transition-all duration-300 ease-out ${
+        className={`grid transition-all duration-300 ease-out ${panelClassName} ${
           isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
         }`}
       >
-        <div className='overflow-hidden'>
-          <div
-            className={`mt-3 overflow-hidden rounded-xl border border-[#f0c36a]/25 bg-[#16120e] text-left shadow-xl shadow-black/20 ${panelClassName}`}
-          >
+        <div className='w-full overflow-hidden'>
+          <div className='mt-3 w-full overflow-hidden rounded-xl border border-[#f0c36a]/25 bg-[#16120e] text-left shadow-xl shadow-black/20'>
             {isThinking ?
               <div
                 aria-live='polite'

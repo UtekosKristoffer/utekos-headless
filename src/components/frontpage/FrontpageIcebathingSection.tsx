@@ -103,8 +103,6 @@ export function FrontpageIceBathingSection() {
             </h2>
 
             <p className='gsap-content opacity-0 bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 text-lg text-neutral-400 mb-10 leading-relaxed max-w-lg'>
-              Sikre deg Comfyrobe™ til svært redusert pris.{' '}
-              <br className='hidden sm:block' />
               Begrenset antall og størrelser – førstemann til mølla!
             </p>
 

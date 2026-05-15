@@ -20,9 +20,14 @@ export function NbccFinalCtaSection() {
           Ta med varmen til plassen der praten fortsetter.
         </h2>
         <p className='mt-6 max-w-2xl text-base leading-8 text-neutral-300'>
-          Sikre deg plagget som gjør de sene kveldene enda litt lengre. Finn din
-          Utekos-favoritt og bruk NBCC-koden din i kassen for å få din unike
-          medlemspris.
+          Opplev en ny standard for utendørs velvære. Utekos forener
+          banebrytende innovasjon med tidløs eleganse. Kjernen i konseptet er
+          vår unike 3-i-1 funksjonalitet. Gjennomtestede løsninger lar deg
+          enkelt tilpasse passform, regulere ventilasjon og veksle mellom ulike
+          funksjonelle moduser. Når dine behov for velvære endrer seg, finnes
+          det alltid en justeringsmulighet som lar deg fortsette opplevelsen av
+          kompromissløs komfort. Helt uavbrutt. Du har en mobil varmekilde som
+          endrer måten du behøver å planlegge på.
         </p>
         <Button
           asChild

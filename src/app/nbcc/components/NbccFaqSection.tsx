@@ -10,9 +10,9 @@ import { nbccFaqItems } from '../data/nbccLandingPageContent'
 export function NbccFaqSection() {
   return (
     <section className='bg-background px-4 py-20 sm:px-6 lg:px-8'>
-      <div className='mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1fr]'>
+      <div className='mx-auto grid w-full max-w-4xl gap-10'>
         <div data-nbcc-reveal data-nbcc-animate>
-          <p className='text-sm md:text-2xl font-semibold uppercase tracking-[0.18em] text-[#f0c36a]'>
+          <p className='text-sm mx-auto md:text-2xl font-semibold uppercase tracking-[0.18em] text-[#f0c36a]'>
             Spørsmål og svar
           </p>
         </div>
