@@ -3,16 +3,16 @@ import Image from 'next/image' // Importer Image-komponent
 
 export function SocialProof() {
   return (
-    <section className='bg-sidebar-foreground py-24'>
+    <section className='bg-overcast py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='text-fluid-display mb-8 font-bold tracking-tight'>
+          <h2 className='text-fluid-display mb-8 font-bold text-maritime-darkest tracking-normal'>
             Huseiere elsker Utekos
           </h2>
 
-          <Card className='border-neutral-800 bg-background'>
+          <Card className='border-cloud-dancer/12 bg-mountain-view'>
             <CardContent className='p-12'>
-              <blockquote className='mb-6 text-xl italic text-foreground/90'>
+              <blockquote className='mb-6 text-xl italic text-cloud-dancer'>
                 &quot;Vi har doblet bruken av terrassen etter at vi fikk Utekos
                 i hus. Den brukes av hele familien, fra tenåringen som vil sitte
                 ute med venner, til oss voksne som endelig kan nyte kveldene ute
@@ -28,7 +28,7 @@ export function SocialProof() {
                 />
                 <div className='text-left'>
                   <p className='font-semibold'>Kristin</p>
-                  <p className='text-sm text-muted-foreground'>
+                  <p className='text-sm text-overcast'>
                     Eneboligeier fra Ulvik
                   </p>
                 </div>

@@ -1,8 +1,43 @@
-import { Button } from '@/components/ui/button'
-import { ArrowRight, Flame, Users, Clock } from 'lucide-react'
-import Link from 'next/link'
+import { Flame, Users, Clock } from 'lucide-react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
-import type { Route } from 'next'
+import { InspirationHeroActions } from '../../layout/InspirationHeroActions'
+import { InspirationHeroBreadcrumb } from '../../layout/InspirationHeroBreadcrumb'
+
+const grillFeatureCards = [
+  {
+    title: 'Ved grillen',
+    description: 'Hold varmen mens du steker',
+    Icon: Flame,
+    iconColor:
+      'color-mix(in oklch, var(--maritime-darkest) 68%, var(--soft-warm))',
+    borderColor: 'color-mix(in oklch, var(--soft-warm) 44%, transparent)',
+    background:
+      'linear-gradient(180deg, color-mix(in oklch, var(--soft-warm) 72%, rgba(255, 255, 255, 0.24)) 0%, color-mix(in oklch, var(--soft-warm) 42%, rgba(25, 20, 18, 0.18)) 100%)',
+    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--soft-warm) 78%, transparent) 100%)'
+  },
+  {
+    title: 'Hele kvelden',
+    description: 'La samtalen flyte til langt på natt',
+    Icon: Clock,
+    iconColor:
+      'color-mix(in oklch, var(--maritime-darkest) 70%, var(--bleached-mauve))',
+    borderColor: 'color-mix(in oklch, var(--bleached-mauve) 42%, transparent)',
+    background:
+      'linear-gradient(180deg, color-mix(in oklch, var(--bleached-mauve) 72%, rgba(255, 255, 255, 0.24)) 0%, color-mix(in oklch, var(--bleached-mauve) 40%, rgba(24, 20, 24, 0.16)) 100%)',
+    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--bleached-mauve) 76%, transparent) 100%)'
+  },
+  {
+    title: 'For gjestene',
+    description: 'Alle sitter komfortabelt utendørs',
+    Icon: Users,
+    iconColor:
+      'color-mix(in oklch, var(--maritime-darkest) 72%, var(--overcast))',
+    borderColor: 'color-mix(in oklch, var(--overcast) 42%, transparent)',
+    background:
+      'linear-gradient(180deg, color-mix(in oklch, var(--overcast) 78%, rgba(255, 255, 255, 0.28)) 0%, color-mix(in oklch, var(--overcast) 44%, rgba(18, 24, 28, 0.16)) 100%)',
+    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--overcast) 82%, transparent) 100%)'
+  }
+] as const
 
 export function GrillHeroSection() {
   return (
@@ -12,13 +47,15 @@ export function GrillHeroSection() {
         <div
           className='animate-pulse-glow absolute left-1/3 top-1/4 h-[600px] w-[600px] blur-3xl'
           style={{
-            background: 'radial-gradient(circle, #f97316 0%, transparent 70%)'
+            background:
+              'radial-gradient(circle, color-mix(in oklch, var(--soft-warm) 72%, transparent) 0%, transparent 70%)'
           }}
         />
         <div
           className='animate-pulse-glow absolute right-1/3 bottom-1/4 h-[600px] w-[600px] blur-3xl'
           style={{
-            background: 'radial-gradient(circle, #ef4444 0%, transparent 70%)',
+            background:
+              'radial-gradient(circle, color-mix(in oklch, var(--bleached-mauve) 70%, transparent) 0%, transparent 70%)',
             animationDuration: '10s',
             animationDelay: '2s'
           }}
@@ -29,25 +66,26 @@ export function GrillHeroSection() {
 
       <div className='container relative mx-auto px-4 py-16'>
         <div className='max-w-3xl'>
-          <AnimatedBlock
-            className='will-animate-fade-in-up mb-6 inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-900/10 px-4 py-2'
-            delay='0.1s'
-          >
-            <Flame className='h-4 w-4 text-orange-400' />
-            <span className='font-medium text-orange-400'>Grillkvelden</span>
+          <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s'>
+            <InspirationHeroBreadcrumb
+              label='Grillkvelden'
+              color='var(--maritime-blue)'
+              textColor='var(--cloud-dancer)'
+              icon={Flame}
+            />
           </AnimatedBlock>
 
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
-            <h1 className='text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'>
+            <h1 className='text-4xl font-bold tracking-normal sm:text-5xl lg:text-6xl'>
               Grillkvelden som{' '}
-              <span className='bg-gradient-to-r from-orange-400 to-orange-900/50 bg-clip-text text-transparent'>
+              <span className='bg-[linear-gradient(90deg,color-mix(in_oklab,var(--maritime-blue)_58%,var(--cloud-dancer)_42%),var(--skipper-blue),color-mix(in_oklab,var(--maritime-blue)_58%,var(--cloud-dancer)_42%))] bg-clip-text text-transparent'>
                 aldri tar slutt
               </span>
             </h1>
           </AnimatedBlock>
 
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.3s'>
-            <p className='mt-6 max-w-2xl text-xl leading-relaxed text-muted-foreground'>
+            <p className='mt-6 max-w-2xl text-xl leading-[1.45] tracking-normal text-overcast'>
               Bli verten for de uforglemmelige kveldene, der de gode samtalene
               og latteren fortsetter lenge etter at den siste pølsen er grillet.
             </p>
@@ -57,78 +95,57 @@ export function GrillHeroSection() {
             className='will-animate-fade-in-up mt-8 flex flex-wrap gap-4'
             delay='0.4s'
           >
-            <Button asChild size='lg' className='group'>
-              <Link href={'/produkter' as Route}>
-                Bli klar for kvelden
-                <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
-              </Link>
-            </Button>
-            <Button variant='outline' size='lg' asChild>
-              <Link href='#bruksomrader'>Se øyeblikkene</Link>
-            </Button>
+            <InspirationHeroActions
+              primaryLabel='Bli klar for kvelden'
+              secondaryLabel='Se øyeblikkene'
+            />
           </AnimatedBlock>
 
           <AnimatedBlock
             className='will-animate-fade-in-up mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3'
             delay='0.5s'
           >
-            {/* Kortene er uendret og trenger ikke egne animasjonsblokker */}
-            <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all hover:border-neutral-700'>
-              <div
-                className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
-                style={{
-                  background:
-                    'radial-gradient(120% 120% at 50% 0%, transparent 30%, #f97316 100%)'
-                }}
-              />
-              <div className='relative'>
-                <Flame className='mb-3 h-8 w-8 text-orange-400' />
-                <p className='mb-1 font-semibold text-foreground'>
-                  Ved grillen
-                </p>
-                <p className='text-sm text-muted-foreground'>
-                  Hold varmen mens du steker
-                </p>
-              </div>
-            </div>
-
-            <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all hover:border-neutral-700'>
-              <div
-                className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
-                style={{
-                  background:
-                    'radial-gradient(120% 120% at 50% 0%, transparent 30%, #ef4444 100%)'
-                }}
-              />
-              <div className='relative'>
-                <Clock className='mb-3 h-8 w-8 text-red-400' />
-                <p className='mb-1 font-semibold text-foreground'>
-                  Hele kvelden
-                </p>
-                <p className='text-sm text-muted-foreground'>
-                  La samtalen flyte til langt på natt
-                </p>
-              </div>
-            </div>
-
-            <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all hover:border-neutral-700'>
-              <div
-                className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
-                style={{
-                  background:
-                    'radial-gradient(120% 120% at 50% 0%, transparent 30%, #fb923c 100%)'
-                }}
-              />
-              <div className='relative'>
-                <Users className='mb-3 h-8 w-8 text-amber-400' />
-                <p className='mb-1 font-semibold text-foreground'>
-                  For gjestene
-                </p>
-                <p className='text-sm text-muted-foreground'>
-                  Alle sitter komfortabelt utendørs
-                </p>
-              </div>
-            </div>
+            {grillFeatureCards.map(
+              ({
+                title,
+                description,
+                Icon,
+                iconColor,
+                borderColor,
+                background,
+                glow
+              }) => (
+                <div
+                  key={title}
+                  className='group relative overflow-hidden rounded-[1.35rem] border p-4 transition-all duration-300 hover:-translate-y-0.5'
+                  style={{
+                    borderColor,
+                    background,
+                    boxShadow: '0 24px 48px -38px rgba(9, 15, 22, 0.42)'
+                  }}
+                >
+                  <div
+                    className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
+                    style={{ background: glow }}
+                  />
+                  <div className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.24)_0%,rgba(255,255,255,0.08)_34%,transparent_100%)] opacity-90' />
+                  <div className='relative'>
+                    <div className='mb-2 flex items-center gap-3'>
+                      <Icon
+                        className='h-8 w-8 shrink-0'
+                        style={{ color: iconColor }}
+                      />
+                      <p className='font-semibold text-maritime-darkest'>
+                        {title}
+                      </p>
+                    </div>
+                    <p className='text-sm text-maritime-darkest/78'>
+                      {description}
+                    </p>
+                  </div>
+                </div>
+              )
+            )}
           </AnimatedBlock>
         </div>
       </div>

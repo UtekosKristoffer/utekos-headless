@@ -1,8 +1,43 @@
-import { Button } from '@/components/ui/button'
-import { ArrowRight, MapPin, Mountain, Sunrise } from 'lucide-react'
-import Link from 'next/link'
+import { MapPin, Mountain, Sunrise } from 'lucide-react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
-import type { Route } from 'next'
+import { InspirationHeroActions } from '../../layout/InspirationHeroActions'
+import { InspirationHeroBreadcrumb } from '../../layout/InspirationHeroBreadcrumb'
+
+const motorhomeFeatureCards = [
+  {
+    title: 'Morgenkaffe',
+    description: 'Start dagen i varme utenfor bobilen',
+    Icon: Sunrise,
+    iconColor:
+      'color-mix(in oklch, var(--maritime-darkest) 70%, var(--bleached-mauve))',
+    borderColor: 'color-mix(in oklch, var(--bleached-mauve) 42%, transparent)',
+    background:
+      'linear-gradient(180deg, color-mix(in oklch, var(--bleached-mauve) 72%, rgba(255, 255, 255, 0.24)) 0%, color-mix(in oklch, var(--bleached-mauve) 40%, rgba(20, 22, 28, 0.16)) 100%)',
+    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--bleached-mauve) 76%, transparent) 100%)'
+  },
+  {
+    title: 'Alle stopp',
+    description: 'Nyt utsikten i komfort, hvor som helst',
+    Icon: Mountain,
+    iconColor:
+      'color-mix(in oklch, var(--maritime-darkest) 72%, var(--ancient-water))',
+    borderColor: 'color-mix(in oklch, var(--ancient-water) 40%, transparent)',
+    background:
+      'linear-gradient(180deg, color-mix(in oklch, var(--ancient-water) 74%, rgba(255, 255, 255, 0.26)) 0%, color-mix(in oklch, var(--ancient-water) 42%, rgba(16, 24, 30, 0.16)) 100%)',
+    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--ancient-water) 78%, transparent) 100%)'
+  },
+  {
+    title: 'Lengre turer',
+    description: 'Reis tidligere på året og senere på høsten',
+    Icon: MapPin,
+    iconColor:
+      'color-mix(in oklch, var(--maritime-darkest) 74%, var(--overcast))',
+    borderColor: 'color-mix(in oklch, var(--overcast) 42%, transparent)',
+    background:
+      'linear-gradient(180deg, color-mix(in oklch, var(--overcast) 78%, rgba(255, 255, 255, 0.28)) 0%, color-mix(in oklch, var(--overcast) 46%, rgba(18, 24, 29, 0.14)) 100%)',
+    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--overcast) 82%, transparent) 100%)'
+  }
+] as const
 
 export function BobilHeroSection() {
   return (
@@ -12,13 +47,15 @@ export function BobilHeroSection() {
         <div
           className='absolute left-1/3 top-1/4 h-[600px] w-[600px] blur-3xl'
           style={{
-            background: 'radial-gradient(circle, #0ea5e9 0%, transparent 70%)'
+            background:
+              'radial-gradient(circle, color-mix(in oklch, var(--bleached-mauve) 72%, transparent) 0%, transparent 70%)'
           }}
         />
         <div
           className='absolute right-1/3 bottom-1/4 h-[600px] w-[600px] blur-3xl'
           style={{
-            background: 'radial-gradient(circle, #06b6d4 0%, transparent 70%)'
+            background:
+              'radial-gradient(circle, color-mix(in oklch, var(--ancient-water) 70%, transparent) 0%, transparent 70%)'
           }}
         />
       </div>
@@ -27,34 +64,26 @@ export function BobilHeroSection() {
 
       <div className='container relative mx-auto px-4 py-16'>
         <div className='max-w-3xl'>
-          <AnimatedBlock
-            className='will-animate-fade-in-up mb-6 flex items-center gap-3 text-sm text-muted-foreground'
-            delay='0.1s'
-          >
-            <Link
-              href={'/inspirasjon' as Route}
-              className='transition-colors hover:text-foreground'
-            >
-              Inspirasjon
-            </Link>
-            <span>/</span>
-            <span className='inline-flex items-center gap-2 rounded-full border border-amber-950 bg-amber-900/10 px-3 py-1'>
-              <MapPin className='h-3 w-3 text-amber-950' />
-              <span className='font-medium text-amber-950'>Bobilliv</span>
-            </span>
+          <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s'>
+            <InspirationHeroBreadcrumb
+              label='Bobil og camping'
+              color='var(--bleached-mauve)'
+              textColor='var(--maritime-darkest)'
+              icon={MapPin}
+            />
           </AnimatedBlock>
 
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
-            <h1 className='text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'>
+            <h1 className='text-4xl font-bold tracking-normal sm:text-5xl lg:text-6xl'>
               Bobilliv uten{' '}
-              <span className='bg-gradient-to-r from-amber-950 to-amber-900 bg-clip-text text-transparent'>
+              <span className='bg-[linear-gradient(90deg,var(--bleached-mauve),var(--raindrops-on-roses),var(--bleached-mauve))] bg-clip-text text-transparent'>
                 kompromisser
               </span>
             </h1>
           </AnimatedBlock>
 
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.3s'>
-            <p className='mt-6 max-w-2xl text-xl leading-relaxed text-muted-foreground'>
+            <p className='mt-6 max-w-2xl text-xl leading-[1.45] tracking-normal text-cloud-dancer'>
               Fra den første morgenkaffen til de sene kveldene rundt bordet.
               Oppdag hvordan Utekos forvandler hver stopp til en destinasjon
               verdt å huske.
@@ -65,15 +94,10 @@ export function BobilHeroSection() {
             className='will-animate-fade-in-up mt-8 flex flex-wrap gap-4'
             delay='0.4s'
           >
-            <Button asChild size='lg' className='group'>
-              <Link href={'/produkter' as Route}>
-                Se produktene
-                <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
-              </Link>
-            </Button>
-            <Button variant='outline' size='lg' asChild>
-              <Link href='#bruksomrader'>Utforsk mulighetene</Link>
-            </Button>
+            <InspirationHeroActions
+              primaryLabel='Se produktene'
+              secondaryLabel='Utforsk mulighetene'
+            />
           </AnimatedBlock>
 
           {/* Feature highlights */}
@@ -81,60 +105,47 @@ export function BobilHeroSection() {
             className='will-animate-fade-in-up mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3'
             delay='0.5s'
           >
-            <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all hover:border-neutral-700'>
-              <div
-                className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
-                style={{
-                  background:
-                    'radial-gradient(120% 120% at 50% 0%, transparent 30%, #0ea5e9 100%)'
-                }}
-              />
-              <div className='relative'>
-                <Sunrise className='mb-3 h-8 w-8 text-amber-600' />
-                <p className='mb-1 font-semibold text-foreground'>
-                  Morgenkaffe
-                </p>
-                <p className='text-sm text-muted-foreground'>
-                  Start dagen i varme utenfor bobilen
-                </p>
-              </div>
-            </div>
-
-            <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all hover:border-neutral-700'>
-              <div
-                className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
-                style={{
-                  background:
-                    'radial-gradient(120% 120% at 50% 0%, transparent 30%, #06b6d4 100%)'
-                }}
-              />
-              <div className='relative'>
-                <Mountain className='mb-3 h-8 w-8 text-blue-950' />
-                <p className='mb-1 font-semibold text-foreground'>Alle stopp</p>
-                <p className='text-sm text-muted-foreground'>
-                  Nyt utsikten i komfort, hvor som helst
-                </p>
-              </div>
-            </div>
-
-            <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all hover:border-neutral-700'>
-              <div
-                className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
-                style={{
-                  background:
-                    'radial-gradient(120% 120% at 50% 0%, transparent 30%, #22d3ee 100%)'
-                }}
-              />
-              <div className='relative'>
-                <MapPin className='mb-3 h-8 w-8 text-amber-200' />
-                <p className='mb-1 font-semibold text-foreground'>
-                  Lengre turer
-                </p>
-                <p className='text-sm text-muted-foreground'>
-                  Reis tidligere på året og senere på høsten
-                </p>
-              </div>
-            </div>
+            {motorhomeFeatureCards.map(
+              ({
+                title,
+                description,
+                Icon,
+                iconColor,
+                borderColor,
+                background,
+                glow
+              }) => (
+                <div
+                  key={title}
+                  className='group relative overflow-hidden rounded-[1.35rem] border p-4 transition-all duration-300 hover:-translate-y-0.5'
+                  style={{
+                    borderColor,
+                    background,
+                    boxShadow: '0 24px 48px -38px rgba(9, 15, 22, 0.42)'
+                  }}
+                >
+                  <div
+                    className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
+                    style={{ background: glow }}
+                  />
+                  <div className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.26)_0%,rgba(255,255,255,0.08)_34%,transparent_100%)] opacity-90' />
+                  <div className='relative'>
+                    <div className='mb-2 flex items-center gap-3'>
+                      <Icon
+                        className='h-8 w-8 shrink-0'
+                        style={{ color: iconColor }}
+                      />
+                      <p className='font-semibold text-maritime-darkest'>
+                        {title}
+                      </p>
+                    </div>
+                    <p className='text-sm text-maritime-darkest/78'>
+                      {description}
+                    </p>
+                  </div>
+                </div>
+              )
+            )}
           </AnimatedBlock>
         </div>
       </div>

@@ -46,10 +46,10 @@ export function InspirationGallerySection() {
     <section className='py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='text-fluid-display mb-4 font-bold tracking-tight'>
+          <h2 className='text-fluid-display mb-4 font-bold tracking-normal'>
             Utekos i sitt rette element
           </h2>
-          <p className='mb-12 max-w-2xl text-lg text-muted-foreground mx-auto'>
+          <p className='mb-12 max-w-2xl text-lg text-cloud-dancer mx-auto'>
             Fra morgenkaffen i soloppgang til sene kvelder under stjernene. La
             deg inspirere av ekte øyeblikk fra bobillivet.
           </p>
@@ -72,7 +72,7 @@ export function InspirationGallerySection() {
                   {/* ENDRING: Card er fjernet. Styling er flyttet hit. */}
                   <AspectRatio
                     ratio={4 / 5}
-                    className='relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900'
+                    className='relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest'
                   >
                     <Image
                       src={image.src}
@@ -85,7 +85,7 @@ export function InspirationGallerySection() {
                   </AspectRatio>
                   <div className='pt-4 text-left'>
                     <h4 className='font-semibold'>{image.title}</h4>
-                    <p className='text-sm text-muted-foreground'>
+                    <p className='text-sm text-overcast'>
                       {image.description}
                     </p>
                   </div>

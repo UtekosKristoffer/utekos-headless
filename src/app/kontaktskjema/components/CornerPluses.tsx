@@ -2,7 +2,7 @@
 export function CornerPluses() {
   return (
     <>
-      {/* Plus-ikon øverst venstre */}
+      {/* Top-left plus */}
       <div
         className='pointer-events-none absolute left-0 top-0 z-10'
         style={{ transform: 'translate(-50%, -50%)' }}
@@ -14,7 +14,8 @@ export function CornerPluses() {
             y1='0'
             x2='16'
             y2='32'
-            stroke='rgb(255 255 255 / 0.2)'
+            stroke='var(--cloud-dancer)'
+            strokeOpacity='0.22'
             strokeWidth='1'
           />
           <line
@@ -22,13 +23,14 @@ export function CornerPluses() {
             y1='16'
             x2='32'
             y2='16'
-            stroke='rgb(255 255 255 / 0.2)'
+            stroke='var(--cloud-dancer)'
+            strokeOpacity='0.22'
             strokeWidth='1'
           />
         </svg>
       </div>
 
-      {/* Plus-ikon nederst høyre */}
+      {/* Bottom-right plus */}
       <div
         className='pointer-events-none absolute bottom-0 right-0 z-10'
         style={{ transform: 'translate(50%, 50%)' }}
@@ -40,7 +42,8 @@ export function CornerPluses() {
             y1='0'
             x2='16'
             y2='32'
-            stroke='rgb(255 255 255 / 0.2)'
+            stroke='var(--cloud-dancer)'
+            strokeOpacity='0.22'
             strokeWidth='1'
           />
           <line
@@ -48,7 +51,8 @@ export function CornerPluses() {
             y1='16'
             x2='32'
             y2='16'
-            stroke='rgb(255 255 255 / 0.2)'
+            stroke='var(--cloud-dancer)'
+            strokeOpacity='0.22'
             strokeWidth='1'
           />
         </svg>

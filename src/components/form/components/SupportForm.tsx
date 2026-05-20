@@ -36,6 +36,8 @@ import type { z } from '@/db/zod/zodClient'
 type ContactFormData = z.infer<typeof ClientContactFormSchema>
 
 const initialState: ContactFormState = { message: '' }
+const contactFieldClassName =
+  'h-12 rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal placeholder:text-maritime-blue focus-visible:border-primary-button focus-visible:ring-primary-button/35'
 
 export function SupportForm() {
   const [state, formAction, isPending] = useActionState(
@@ -54,7 +56,7 @@ export function SupportForm() {
       message: '',
       privacy: false
     },
-    mode: 'onChange',
+    mode: 'onSubmit',
     reValidateMode: 'onChange',
     criteriaMode: 'all'
   })
@@ -86,8 +88,6 @@ export function SupportForm() {
     lastStateRef.current = state
   }, [state, form])
 
-  const messageValue = form.watch('message') ?? ''
-  const messageChars = messageValue.length
   const messageMin = 10
 
   return (
@@ -98,13 +98,15 @@ export function SupportForm() {
           name='email'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='font-medium'>E-post</FormLabel>
+              <FormLabel className='font-medium leading-[1.45] tracking-normal text-cloud-dancer'>
+                E-post
+              </FormLabel>
               <FormControl>
                 <Input
                   placeholder='din@epost.no'
                   autoComplete='email'
                   {...field}
-                  className='h-12 rounded-none border-neutral-800 bg-background'
+                  className={contactFieldClassName}
                 />
               </FormControl>
               <FormMessage />
@@ -117,13 +119,15 @@ export function SupportForm() {
             name='name'
             render={({ field }) => (
               <FormItem>
-                <FormLabel className='font-medium'>Fullt navn</FormLabel>
+                <FormLabel className='font-medium leading-[1.45] tracking-normal text-cloud-dancer'>
+                  Fullt navn
+                </FormLabel>
                 <FormControl>
                   <Input
                     placeholder='Ditt navn'
                     autoComplete='name'
                     {...field}
-                    className='h-12 rounded-none border-neutral-800 bg-background'
+                    className={contactFieldClassName}
                   />
                 </FormControl>
                 <FormMessage />
@@ -135,7 +139,7 @@ export function SupportForm() {
             name='phone'
             render={({ field }) => (
               <FormItem>
-                <FormLabel className='font-medium'>
+                <FormLabel className='font-medium leading-[1.45] tracking-normal text-cloud-dancer'>
                   Telefon (valgfritt)
                 </FormLabel>
                 <FormControl>
@@ -144,7 +148,7 @@ export function SupportForm() {
                     placeholder='+47 123 45 678'
                     autoComplete='tel'
                     {...field}
-                    className='h-12 rounded-none border-neutral-800 bg-background'
+                    className={contactFieldClassName}
                   />
                 </FormControl>
                 <FormMessage />
@@ -157,7 +161,9 @@ export function SupportForm() {
           name='country'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='font-medium'>Land</FormLabel>
+              <FormLabel className='font-medium leading-[1.45] tracking-normal text-cloud-dancer'>
+                Land
+              </FormLabel>
               <Select value={field.value ?? ''} onValueChange={field.onChange}>
                 <FormControl>
                   <div>
@@ -166,14 +172,18 @@ export function SupportForm() {
                       name={field.name}
                       value={field.value ?? ''}
                     />
-                    <SelectTrigger className='h-12 w-full rounded-none border-neutral-800 bg-background'>
+                    <SelectTrigger className='h-12 w-full rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal focus-visible:border-primary-button focus-visible:ring-primary-button/35 data-[placeholder]:text-maritime-blue [&_svg:not([class*=text-])]:text-maritime-blue'>
                       <SelectValue placeholder='Velg ditt land' />
                     </SelectTrigger>
                   </div>
                 </FormControl>
-                <SelectContent className='dark'>
+                <SelectContent className='border-cloud-dancer/20 bg-ancient-water text-maritime-darkest'>
                   {countries.map(country => (
-                    <SelectItem key={country.value} value={country.value}>
+                    <SelectItem
+                      key={country.value}
+                      value={country.value}
+                      className='tracking-normal focus:bg-maritime-blue/12 focus:text-maritime-darkest'
+                    >
                       {country.label}
                     </SelectItem>
                   ))}
@@ -188,14 +198,14 @@ export function SupportForm() {
           name='orderNumber'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='font-medium'>
+              <FormLabel className='font-medium leading-[1.45] tracking-normal text-cloud-dancer'>
                 Ordrenummer (valgfritt)
               </FormLabel>
               <FormControl>
                 <Input
                   placeholder='F.eks. #12345'
                   {...field}
-                  className='h-12 rounded-none border-neutral-800 bg-background'
+                  className={contactFieldClassName}
                 />
               </FormControl>
               <FormMessage />
@@ -205,42 +215,65 @@ export function SupportForm() {
         <FormField
           control={form.control}
           name='message'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className='font-medium'>
-                Hvordan kan vi hjelpe?
-              </FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder='Skriv meldingen din her...'
-                  {...field}
-                  className='min-h-[160px] rounded-none border-neutral-800 bg-background'
-                />
-              </FormControl>
-              <div className='mt-1 flex items-center justify-between text-xs text-muted-foreground'>
-                <span>
-                  {messageChars < messageMin ?
-                    `Må være minst ${messageMin} tegn.`
-                  : 'Ser bra ut ✅'}
-                </span>
-                <span>
-                  {messageChars}/{messageMin} tegn
-                </span>
-              </div>
-              <FormMessage />
-            </FormItem>
-          )}
+          render={({ field, fieldState }) => {
+            const messageChars = field.value.length
+            const showMessageMinimumError =
+              Boolean(fieldState.error) && messageChars < messageMin
+
+            return (
+              <FormItem>
+                <FormLabel className='font-medium leading-[1.45] tracking-normal text-cloud-dancer'>
+                  Hvordan kan vi hjelpe?
+                </FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder='Skriv meldingen din her...'
+                    {...field}
+                    onChange={event => {
+                      field.onChange(event)
+                      if (event.target.value.length >= messageMin) {
+                        form.clearErrors('message')
+                      }
+                    }}
+                    className='min-h-[160px] rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal placeholder:text-maritime-blue focus-visible:border-primary-button focus-visible:ring-primary-button/35'
+                  />
+                </FormControl>
+                <div className='mt-1 flex items-center justify-between text-xs leading-[1.45] tracking-normal text-overcast'>
+                  <span
+                    className={
+                      showMessageMinimumError ? 'text-destructive' : undefined
+                    }
+                  >
+                    {showMessageMinimumError ?
+                      `Må være minst ${messageMin} tegn.`
+                    : messageChars >= messageMin ?
+                      'Ser bra ut'
+                    : 'Skriv gjerne kort, bare nok til at vi kan hjelpe.'}
+                  </span>
+                  <span>
+                    {messageChars}/{messageMin} tegn
+                  </span>
+                </div>
+                <FormMessage />
+              </FormItem>
+            )
+          }}
         />
         <FormField
           control={form.control}
           name='privacy'
           render={({ field }) => (
-            <FormItem className='flex flex-row items-center justify-between rounded-none border border-neutral-800 p-4'>
+            <FormItem className='relative flex flex-row items-center justify-between rounded-none border border-cloud-dancer/15 bg-cloud-dancer/[0.03] p-4'>
               <div className='flex-1 space-y-0.5 pr-4'>
-                <FormLabel className='text-base'>Personvern</FormLabel>
-                <FormDescription>
+                <FormLabel className='text-base leading-[1.45] tracking-normal text-cloud-dancer'>
+                  Personvern
+                </FormLabel>
+                <FormDescription className='leading-[1.45] tracking-normal text-overcast'>
                   Jeg godtar at Utekos behandler mine data, som beskrevet i{' '}
-                  <Link href='/personvern' className='underline'>
+                  <Link
+                    href='/personvern'
+                    className='text-cloud-dancer underline underline-offset-4 hover:text-ancient-water'
+                  >
                     Personvernerklæringen
                   </Link>
                   .
@@ -256,6 +289,7 @@ export function SupportForm() {
                   <Switch
                     checked={!!field.value}
                     onCheckedChange={field.onChange}
+                    className='border border-cloud-dancer/15 data-[state=checked]:bg-primary-button data-[state=unchecked]:bg-maritime-blue focus-visible:ring-primary-button/35'
                   />
                 </div>
               </FormControl>

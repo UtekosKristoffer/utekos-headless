@@ -23,7 +23,10 @@ export function ProductDescription({
   const expandedMaxHeightPx = 5000
 
   return (
-    <article aria-label='Produktbeskrivelse' className='mt-12'>
+    <article
+      aria-label='Produktbeskrivelse'
+      className='mt-12 rounded-[1.25rem] border border-cloud-dancer/70 bg-cloud-dancer/54 p-5 shadow-lg shadow-maritime-blue/5'
+    >
       <div
         aria-live='polite'
         aria-atomic='true'
@@ -40,7 +43,7 @@ export function ProductDescription({
           className='transition-[max-height] duration-500 ease-in-out'
         >
           <div
-            className='prose prose-invert max-w-none text-foreground-on-dark/80'
+            className='prose max-w-none text-maritime-blue/76'
             dangerouslySetInnerHTML={{ __html: descriptionHtmlString }}
           />
         </div>
@@ -48,7 +51,7 @@ export function ProductDescription({
         {!isDescriptionExpanded && (
           <div
             aria-hidden='true'
-            className='pointer-events-none absolute inset-x-0 bottom-0 h-16 w-full bg-gradient-to-t from-background to-transparent'
+            className='pointer-events-none absolute inset-x-0 bottom-0 h-16 w-full bg-gradient-to-t from-cloud-dancer to-transparent'
           />
         )}
       </div>
@@ -60,7 +63,7 @@ export function ProductDescription({
           aria-expanded={isDescriptionExpanded}
           aria-controls='product-description-content'
           onClick={() => setIsDescriptionExpanded(prev => !prev)}
-          className='p-0 text-base text-link hover:text-link/80'
+          className='p-0 text-base text-maritime-blue hover:text-maritime-blue/76'
         >
           {isDescriptionExpanded ? 'Vis mindre' : 'Les mer'}
         </Button>

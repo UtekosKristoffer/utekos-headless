@@ -12,9 +12,13 @@ export function useProductPage(
   handle: string,
   initialRelatedProducts: ShopifyProduct[]
 ) {
-  const { data: productData, isLoading: isProductLoading } = useQuery(
-    productOptions(handle)
-  )
+  const {
+    data: productData,
+    error: productError,
+    isFetching: isProductFetching,
+    isLoading: isProductLoading,
+    refetch
+  } = useQuery(productOptions(handle))
 
   const productWithMetafields = reshapeProductWithMetafields(productData)
 
@@ -41,6 +45,9 @@ export function useProductPage(
     updateVariant,
     relatedProducts,
     swatchColorMap,
+    productError,
+    refetch,
+    isFetching: isProductFetching,
     isLoading: isProductLoading,
     isUpdating: !isProductLoading && variantState.status !== 'selected'
   }

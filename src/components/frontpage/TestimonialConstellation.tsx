@@ -44,51 +44,55 @@ export function TestimonialConstellation() {
   return (
     <section
       ref={containerRef}
-      className='relative mx-auto py-24 md:py-32 overflow-hidden'
+      className='relative mx-auto overflow-hidden bg-maritime-blue py-24 md:py-32'
     >
       <div className='absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] bg-sky-900/10 blur-[120px] rounded-full pointer-events-none' />
 
       <div className='relative z-10 mx-auto px-4 sm:px-6 lg:px-8 md:max-w-7xl'>
         <div ref={headerRef} className='mb-20 text-center max-w-3xl mx-auto'>
           {/* Trust Badge */}
-          <div className='animate-header-item inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-neutral-900/80 border border-neutral-800 backdrop-blur-md shadow-lg shadow-sky-900/5'>
+          <div className='animate-header-item mb-8 inline-flex items-center gap-2 rounded-full border border-dusted-peri/40 bg-dusted-peri px-4 py-2 shadow-lg shadow-dusted-peri/12'>
             <div className='flex gap-0.5'>
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
                   className={`w-3.5 h-3.5 ${
                     i === 4 ?
-                      'fill-sky-500/50 text-sky-500' // Halv stjerne visuelt
-                    : 'fill-sky-500 text-sky-500'
+                      'fill-cloud-dancer text-cloud-dancer' // Halv stjerne visuelt
+                    : 'fill-cloud-dancer text-cloud-dancer/80' // Full stjerne visuelt
                   }`}
                 />
               ))}
             </div>
-            <span className='h-4 w-px bg-neutral-700 mx-2' />
-            <span className='text-xs font-medium text-neutral-300 tracking-wide uppercase'>
+            <span className='mx-2 h-4 w-px bg-maritime-darkest/20' />
+            <span className='text-xs font-medium uppercase tracking-wide text-maritime-darkest/75'>
               4.8 av 5 stjerner
             </span>
           </div>
 
-          <h2 className='animate-header-item text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6'>
+          <h2 className='animate-header-item text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-cloud-dancer! mb-6'>
             Hva sier andre{' '}
-            <span className='text-transparent bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text outline-hiddenfont-bold tracking-normal'>
+            <span className='text-transparent bg-cloud-dancer bg-clip-text outline-hiddenfont-bold tracking-normal'>
               livsnytere?
             </span>
           </h2>
 
-          <p className='animate-header-item mx-auto text-lg md:text-xl text-neutral-200 leading-relaxed font-light'>
+          <p className='animate-header-item mx-auto text-lg md:text-xl text-cloud-dancer leading-relaxed font-light'>
             Ekte tilbakemeldinger fra kunder som, i likhet med deg, verdsetter{' '}
-            <span className='relative inline-block px-2 mx-1'>
-              <span className='absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text outline-hiddenfont-bold tracking-tight -skew-y-1 -rotate-1 rounded-sm -z-10 backdrop-blur-[1px] border border-sky-500/10' />
-              <span className='relative font-medium text-sky-100/90'>
+            <span className='relative inline-flex items-center justify-center px-1'>
+              <span className='absolute inset-0 -z-10 -skew-x-12 rounded-md bg-gradient-to-r from-maritime-blue via-dusted-peri to-maritime-blue blur-[1px]' />
+              <span className='absolute inset-0 -z-10 -rotate-1 rounded-lg border border-dusted-peri/35 bg-gradient-to-br from-maritime-blue/70 via-sweet-lavender/24 to-dusted-peri' />
+              <span className='relative z-10 inline-block font-medium text-cloud-dancer'>
                 kompromissløs kvalitet
               </span>
             </span>{' '}
             og{' '}
-            <span className='relative inline-block'>
-              <span className='relative z-10'>varige opplevelser utendørs</span>
-              <span className='absolute left-0 -bottom-0.5 w-full h-[2px] bg-gradient-to-r from-transparent via-sky-400/60 to-transparent' />
+            <span className='relative inline-flex items-center justify-center px-1'>
+              <span className='absolute inset-0 -z-10 -skew-x-12 rounded-md bg-gradient-to-r from-maritime-blue via-dusted-peri to-maritime-blue blur-[1px]' />
+              <span className='absolute inset-0 -z-10 -skew-x-16 rounded-lg border border-ancient-water bg-gradient-to-br from-country-air via-ancient-water to-country-air' />
+              <span className='relative z-10 inline-block'>
+                varige opplevelser utendørs
+              </span>
             </span>
             .
           </p>

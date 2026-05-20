@@ -16,7 +16,7 @@ export const popularDestinationsData: Destination[] = [
     name: 'Sørlandskysten',
     season: 'Sommer',
     highlight: 'For sene kvelder i uthavn',
-    color: 'text-amber-400'
+    color: 'text-primary-button'
   },
   {
     name: 'Vestlandskysten',
@@ -28,13 +28,13 @@ export const popularDestinationsData: Destination[] = [
     name: 'Oslofjorden',
     season: 'Vår/Høst',
     highlight: 'Forleng pendlersesongen',
-    color: 'text-blue-500'
+    color: 'text-ancient-water'
   },
   {
     name: 'Helgelandskysten',
     season: 'Sommer',
     highlight: 'For lyse, men kjølige netter',
-    color: 'text-cyan-400'
+    color: 'text-ancient-water'
   }
 ]
 
@@ -44,7 +44,7 @@ export function PopularDestinations({
   destinations: Destination[]
 }) {
   return (
-    <section className='py-24 bg-background' id='populære-destinasjoner'>
+    <section className='py-24 bg-maritime-darkest' id='populære-destinasjoner'>
       <div className='container mx-auto px-4'>
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
           {destinations.map((destination, destinationIndex) => (
@@ -54,7 +54,7 @@ export function PopularDestinations({
               delay={`${destinationIndex * 0.1}s`}
               threshold={0.2}
             >
-              <Card className='border-neutral-800 bg-sidebar-foreground transition-colors hover:bg-sidebar-foreground/80'>
+              <Card className='border-cloud-dancer/12 bg-maritime-blue/24 transition-colors hover:bg-maritime-blue/32'>
                 <CardContent className='p-6'>
                   <div className='mb-3 flex items-start justify-between'>
                     <h3 className='text-lg font-semibold'>
@@ -62,10 +62,10 @@ export function PopularDestinations({
                     </h3>
                     <MapPinIcon className={`h-5 w-5 ${destination.color}`} />
                   </div>
-                  <p className='mb-2 text-sm text-muted-foreground'>
+                  <p className='mb-2 text-sm text-overcast'>
                     {destination.season}
                   </p>
-                  <p className='text-sm text-foreground/80'>
+                  <p className='text-sm text-cloud-dancer/80'>
                     {destination.highlight}
                   </p>
                 </CardContent>

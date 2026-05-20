@@ -15,7 +15,7 @@ export function TestimonialSection() {
         <div
           ref={hLineRef}
           className={cn(
-            'will-animate-scale-x absolute top-4 left-0 h-px w-full origin-left bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text outline-hiddenfont-bold text-transparent transition-transform duration-1000 ease-out',
+            'will-animate-scale-x absolute top-4 left-0 h-px w-full origin-left bg-gradient-to-r from-overcast via-egg-white to-overcast bg-clip-text outline-hiddenfont-bold text-transparent transition-transform duration-1000 ease-out',
             hLineInView ? 'scale-x-100' : 'scale-x-0'
           )}
         />

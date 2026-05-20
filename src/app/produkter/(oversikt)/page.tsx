@@ -1,12 +1,11 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
-import { getProducts } from '@/api/lib/products/getProducts'
+import { getFeaturedProducts } from '@/api/lib/products/getFeaturedProducts'
 import { QueryClient } from '@tanstack/react-query'
 import { ComparisonTeaser } from '@/app/handlehjelp/sammenlign-modeller/components/ComparisonTeaser'
 import { HelpChooseSection } from './components/HelpChooseSection'
-import { ProductTestimonial } from '@/app/produkter/(oversikt)/components/ProductTestimonial'
 import { ProductsPageFooter } from '@/app/produkter/(oversikt)/components/ProductsPageFooter'
 import { ProductsPageHeader } from '@/app/produkter/(oversikt)/components/ProductsPageHeader'
-import { AllProductsCarousel } from '@/components/ProductCard/AllProductsCarousel'
+import { ProductCarousel } from '@/components/ProductCard/ProductCarousel'
 import { ComfyrobeFeatureSection } from './components/ComfyrobeFeatureSection'
 import { ProductGridSkeleton } from '@/components/frontpage/Skeletons/ProductGridSkeleton'
 import { VideoSkeleton } from './components/VideoSkeleton'
@@ -56,14 +55,8 @@ const ProductsPage = async () => {
   await connection()
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
-    queryKey: ['products', 'all'],
-    queryFn: () =>
-      getProducts().then(response => {
-        if (!response.success || !response.body) {
-          return []
-        }
-        return response.body
-      })
+    queryKey: ['products', 'featured'],
+    queryFn: getFeaturedProducts
   })
 
   return (
@@ -82,9 +75,6 @@ const ProductsPage = async () => {
           </Suspense>
         </Activity>
         <Activity>
-          <ProductTestimonial />
-        </Activity>
-        <Activity>
           <ComparisonTeaser />
         </Activity>
 
@@ -94,7 +84,7 @@ const ProductsPage = async () => {
 
             <HydrationBoundary state={dehydrate(queryClient)}>
               <Suspense fallback={<ProductGridSkeleton />}>
-                <AllProductsCarousel />
+                <ProductCarousel />
               </Suspense>
             </HydrationBoundary>
           </section>

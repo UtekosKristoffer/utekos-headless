@@ -6,6 +6,7 @@ import { ProductPageView } from '@/app/produkter/[handle]/components/ProductPage
 import { ProductPageSkeleton } from './ProductPageSkeleton'
 import type { ShopifyProduct } from 'types/product'
 import { ProductViewTracking } from '@/components/analytics/ProductViewTracking'
+import { ProductPageErrorState } from './ProductPageErrorState'
 
 interface ProductPageControllerProps {
   handle: string
@@ -24,10 +25,25 @@ export function ProductPageController({
     updateVariant,
     relatedProducts,
     swatchColorMap,
+    productError,
+    refetch,
+    isFetching,
     isLoading
   } = useProductPage(handle, initialRelatedProducts)
 
-  if (isLoading || !productData || !selectedVariant) {
+  if (productError && !productData) {
+    return (
+      <ProductPageErrorState
+        error={productError}
+        isRetrying={isFetching}
+        onRetry={() => {
+          void refetch()
+        }}
+      />
+    )
+  }
+
+  if ((isLoading && !productData) || !productData || !selectedVariant) {
     return <ProductPageSkeleton />
   }
 

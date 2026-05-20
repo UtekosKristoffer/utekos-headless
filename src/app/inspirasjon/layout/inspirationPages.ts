@@ -6,39 +6,44 @@ export const inspirationPages = [
     label: 'Hytteliv',
     description: 'Komfort på hytten året rundt',
     icon: Home,
-    color: 'from-emerald-500/20',
-    iconColor: 'text-emerald-500'
+    color: 'var(--ancient-water)',
+    midColor: 'var(--country-air)',
+    iconColor: 'text-ancient-water'
   },
   {
     href: '/inspirasjon/bobil' as const,
-    label: 'Bobil & Camping',
+    label: 'Bobil og camping',
     description: 'Forleng campingsesongen',
     icon: Caravan,
-    color: 'from-blue-500/20',
-    iconColor: 'text-blue-500'
+    color: 'var(--bleached-mauve)',
+    midColor: 'var(--raindrops-on-roses)',
+    iconColor: 'text-bleached-mauve'
   },
   {
     href: '/inspirasjon/batliv' as const,
     label: 'Båtliv',
     description: 'Varme på vannet',
     icon: Sailboat,
-    color: 'from-cyan-500/20',
-    iconColor: 'text-cyan-400'
+    color: 'var(--dusted-peri)',
+    midColor: 'var(--sweet-lavender)',
+    iconColor: 'text-dusted-peri'
   },
   {
     href: '/inspirasjon/terrassen' as const,
     label: 'Terrassen',
     description: 'Hjemme best',
     icon: Sofa,
-    color: 'from-amber-500/20',
-    iconColor: 'text-amber-400'
+    color: 'var(--mountain-view)',
+    midColor: 'var(--camping-green)',
+    iconColor: 'text-mountain-view'
   },
   {
     href: '/inspirasjon/grillkvelden' as const,
     label: 'Grillkvelden',
     description: 'Sosiale stunder',
     icon: Flame,
-    color: 'from-orange-500/20',
-    iconColor: 'text-orange-500'
+    color: 'var(--maritime-blue)',
+    midColor: 'var(--skipper-blue)',
+    iconColor: 'text-maritime-blue'
   }
 ]

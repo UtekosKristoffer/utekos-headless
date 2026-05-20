@@ -7,19 +7,24 @@ import {
 import { SpecRow } from './SpecRow'
 import { DetailBlock } from './DetailBlock'
 import { UsageGroup } from './UsageGroup'
-import { Leaf, ShieldCheck, Waves, Thermometer, Info } from 'lucide-react'
+import { Leaf, ShieldCheck, Waves, Info } from 'lucide-react'
+
+const triggerClassName =
+  'font-google-sans text-lg text-maritime-darkest hover:text-maritime-darkest hover:no-underline [&>svg]:text-maritime-darkest md:text-xl'
+
+const itemClassName = 'border-maritime-darkest/20'
 
 export function ProductDetailsAccordion() {
   return (
-    <section className='w-full bg-[#F4F1EA] text-[#2C2420] pb-24 px-6'>
+    <section className='w-full bg-overcast pt-6 text-maritime-darkest pb-24 px-6'>
       <div className='max-w-3xl mx-auto'>
-        <h3 className='font-serif text-2xl md:text-3xl my-8 text-center text-[#2C2420]'>
+        <h3 className='font-google-sans font-semibold text-4xl md:text-5xl my-8 text-center text-maritime-darkest'>
           Alt du trenger å vite
         </h3>
 
         <Accordion type='single' collapsible className='w-full'>
-          <AccordionItem value='materials'>
-            <AccordionTrigger className='text-lg md:text-xl font-serif hover:no-underline hover:text-[#E07A5F]'>
+          <AccordionItem value='materials' className={itemClassName}>
+            <AccordionTrigger className={`${triggerClassName} font-semibold`}>
               Materialer
             </AccordionTrigger>
             <AccordionContent>
@@ -35,8 +40,8 @@ export function ProductDetailsAccordion() {
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value='functions'>
-            <AccordionTrigger className='text-lg md:text-xl font-serif hover:no-underline hover:text-[#E07A5F]'>
+          <AccordionItem value='functions' className={itemClassName}>
+            <AccordionTrigger className={triggerClassName}>
               Nøkkelfunksjoner
             </AccordionTrigger>
             <AccordionContent>
@@ -64,14 +69,17 @@ export function ProductDetailsAccordion() {
               </ul>
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value='features'>
-            <AccordionTrigger className='text-lg md:text-xl font-serif hover:no-underline hover:text-[#E07A5F]'>
+          <AccordionItem value='features' className={itemClassName}>
+            <AccordionTrigger className={triggerClassName}>
               Egenskaper
             </AccordionTrigger>
             <AccordionContent>
               <ul className='space-y-6 p-2'>
                 <li className='flex gap-4'>
-                  <Waves className='shrink-0 text-[#E07A5F] mt-1' size={20} />
+                  <Waves
+                    className='shrink-0 text-bleached-mauve mt-1'
+                    size={20}
+                  />
                   <div>
                     <h4 className='font-bold text-base mb-1'>
                       Håndterer fuktige forhold
@@ -84,7 +92,10 @@ export function ProductDetailsAccordion() {
                   </div>
                 </li>
                 <li className='flex gap-4'>
-                  <Leaf className='shrink-0 text-[#E07A5F] mt-1' size={20} />
+                  <Leaf
+                    className='shrink-0 text-bleached-mauve mt-1'
+                    size={20}
+                  />
                   <div>
                     <h4 className='font-bold text-base mb-1'>Allergivennlig</h4>
                     <p className='text-[#2C2420]/80'>
@@ -96,7 +107,7 @@ export function ProductDetailsAccordion() {
                 </li>
                 <li className='flex gap-4'>
                   <ShieldCheck
-                    className='shrink-0 text-[#E07A5F] mt-1'
+                    className='shrink-0 text-bleached-mauve mt-1'
                     size={20}
                   />
                   <div>
@@ -112,8 +123,8 @@ export function ProductDetailsAccordion() {
               </ul>
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value='usage'>
-            <AccordionTrigger className='text-lg md:text-xl font-serif hover:no-underline hover:text-[#E07A5F]'>
+          <AccordionItem value='usage' className={itemClassName}>
+            <AccordionTrigger className={triggerClassName}>
               Bruksområder
             </AccordionTrigger>
             <AccordionContent>
@@ -144,8 +155,8 @@ export function ProductDetailsAccordion() {
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value='fit'>
-            <AccordionTrigger className='text-lg md:text-xl font-serif hover:no-underline hover:text-[#E07A5F]'>
+          <AccordionItem value='fit' className={itemClassName}>
+            <AccordionTrigger className={triggerClassName}>
               Passform
             </AccordionTrigger>
             <AccordionContent>
@@ -166,17 +177,17 @@ export function ProductDetailsAccordion() {
                   optimal varme og komfort. Gå fra en luftig, beskyttende parkas
                   til en tett og varmende kokong.
                 </p>
-                <p className='bg-[#E07A5F]/10 p-4 rounded-lg border border-[#E07A5F]/20 text-sm'>
-                  <strong className='text-[#E07A5F]'>Tips:</strong> Bruk linken
-                  ved størrelsevelgeren og i menyen over for å se de nøyaktige
-                  målene i tabellen.
+                <p className='bg-bleached-text-bleached-mauve/10 p-4 rounded-lg border border-bleached-text-bleached-mauve/20 text-sm'>
+                  <strong className='text-cloud-dancer'>Tips:</strong> Bruk
+                  linken ved størrelsevelgeren og i menyen over for å se de
+                  nøyaktige målene i tabellen.
                 </p>
               </div>
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value='care'>
-            <AccordionTrigger className='text-lg md:text-xl font-serif hover:no-underline hover:text-[#E07A5F]'>
+          <AccordionItem value='care' className={itemClassName}>
+            <AccordionTrigger className={triggerClassName}>
               Vedlikehold
             </AccordionTrigger>
             <AccordionContent>
@@ -193,8 +204,8 @@ export function ProductDetailsAccordion() {
                   <li>Unngå stryking og bleking</li>
                 </ul>
 
-                <div className='mt-4 flex gap-3 p-4 bg-[#2C2420]/5 rounded-lg border-l-4 border-[#E07A5F]'>
-                  <Info className='shrink-0 text-[#E07A5F]' />
+                <div className='mt-4 flex gap-3 p-4 bg-[#2C2420]/5 rounded-lg border-l-4 border-bleached-text-cloud-dancer'>
+                  <Info className='shrink-0 text-cloud-dancer' />
                   <div className='text-sm leading-relaxed'>
                     <span className='font-bold block mb-1'>
                       Viktig om oppbevaring

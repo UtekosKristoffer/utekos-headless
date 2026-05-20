@@ -7,6 +7,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const PIXELS_PER_SECOND = 50
+const TABLET_MOBILE_QUERY =
+  '(prefers-reduced-motion: no-preference) and (max-width: 1279px)'
+const DESKTOP_QUERY =
+  '(prefers-reduced-motion: no-preference) and (min-width: 1280px)'
 
 export function useSocialProofMarqueeAnimations() {
   const containerRef = useRef<HTMLElement>(null)
@@ -16,76 +20,136 @@ export function useSocialProofMarqueeAnimations() {
   // ── Header & marquee fade-in (scroll-triggered) ──────────────────
   useGSAP(
     () => {
-      const reduce = gsap.matchMedia()
+      const container = containerRef.current
+      if (!container) return
 
-      reduce.add('(prefers-reduced-motion: reduce)', () => {
+      const q = gsap.utils.selector(container)
+      const media = gsap.matchMedia()
+      const refreshFrames: number[] = []
+
+      const queueRefresh = () => {
+        const firstFrame = window.requestAnimationFrame(() => {
+          const secondFrame = window.requestAnimationFrame(() => {
+            ScrollTrigger.refresh(true)
+          })
+          refreshFrames.push(secondFrame)
+        })
+        refreshFrames.push(firstFrame)
+      }
+
+      const setVisible = () => {
+        const targets = [
+          '.gsap-sp-rating-pill',
+          '.gsap-sp-title',
+          '.gsap-sp-subtitle',
+          '.gsap-sp-track'
+        ].flatMap(selector => q(selector))
+
+        if (!targets.length) return
+
         gsap.set(
-          [
-            '.gsap-sp-rating-pill',
-            '.gsap-sp-title',
-            '.gsap-sp-subtitle',
-            '.gsap-sp-track'
-          ],
-          { autoAlpha: 1, x: 0, y: 0 }
+          targets,
+          { autoAlpha: 1, x: 0, y: 0, scale: 1, filter: 'blur(0px)' }
         )
+      }
+
+      media.add('(prefers-reduced-motion: reduce)', () => {
+        setVisible()
       })
 
-      reduce.add('(prefers-reduced-motion: no-preference)', () => {
+      media.add(TABLET_MOBILE_QUERY, () => {
+        setVisible()
+        queueRefresh()
+      })
+
+      media.add(DESKTOP_QUERY, () => {
+        const header = q('.gsap-sp-header')[0]
         const headerTl = gsap.timeline({
           scrollTrigger: {
-            trigger: '.gsap-sp-header',
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
+            trigger: header ?? container,
+            start: 'top 92%',
+            once: true,
+            toggleActions: 'play none none none'
           }
         })
 
-        headerTl
-          .fromTo(
-            '.gsap-sp-rating-pill',
-            { y: 20, autoAlpha: 0, scale: 0.9 },
-            {
-              y: 0,
-              autoAlpha: 1,
-              scale: 1,
-              duration: 0.7,
-              ease: 'back.out(1.4)'
-            }
-          )
-          .fromTo(
-            '.gsap-sp-title',
-            { y: 32, autoAlpha: 0 },
-            { y: 0, autoAlpha: 1, duration: 0.9, ease: 'power3.out' },
-            '-=0.4'
-          )
-          .fromTo(
-            '.gsap-sp-subtitle',
-            { y: 16, autoAlpha: 0, filter: 'blur(6px)' },
-            {
-              y: 0,
-              autoAlpha: 1,
-              filter: 'blur(0px)',
-              duration: 0.9,
-              ease: 'power3.out'
-            },
-            '-=0.5'
-          )
+        const addHeaderTween = (
+          selector: string,
+          fromVars: gsap.TweenVars,
+          toVars: gsap.TweenVars,
+          position?: string
+        ) => {
+          const targets = q(selector)
+          if (!targets.length) return
 
-        gsap.fromTo(
-          '.gsap-sp-track',
-          { autoAlpha: 0, y: 20 },
+          if (position) {
+            headerTl.fromTo(targets, fromVars, toVars, position)
+            return
+          }
+
+          headerTl.fromTo(targets, fromVars, toVars)
+        }
+
+        addHeaderTween(
+          '.gsap-sp-rating-pill',
+          { y: 20, autoAlpha: 0, scale: 0.9 },
           {
-            autoAlpha: 1,
             y: 0,
-            duration: 0.9,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: '.gsap-sp-marquee',
-              start: 'top 85%',
-              toggleActions: 'play none none reverse'
-            }
+            autoAlpha: 1,
+            scale: 1,
+            duration: 0.7,
+            ease: 'back.out(1.4)'
           }
         )
+        addHeaderTween(
+          '.gsap-sp-title',
+          { y: 32, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.9, ease: 'power3.out' },
+          '-=0.4'
+        )
+        addHeaderTween(
+          '.gsap-sp-subtitle',
+          { y: 16, autoAlpha: 0, filter: 'blur(6px)' },
+          {
+            y: 0,
+            autoAlpha: 1,
+            filter: 'blur(0px)',
+            duration: 0.9,
+            ease: 'power3.out'
+          },
+          '-=0.5'
+        )
+
+        const track = q('.gsap-sp-track')
+        const marquee = q('.gsap-sp-marquee')[0]
+        if (track.length) {
+          const trackElement = track[0]!
+
+          gsap.fromTo(
+            track,
+            { autoAlpha: 0, y: 20 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.9,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: marquee ?? trackElement,
+                start: 'top 95%',
+                once: true,
+                toggleActions: 'play none none none'
+              }
+            }
+          )
+        }
+
+        queueRefresh()
       })
+
+      return () => {
+        refreshFrames.forEach(frame => window.cancelAnimationFrame(frame))
+        media.revert()
+      }
     },
     { scope: containerRef }
   )
@@ -104,6 +168,9 @@ export function useSocialProofMarqueeAnimations() {
 
     // Wait one paint frame so widths are correct (after fonts/images)
     const init = () => {
+      cleanupListeners?.()
+      cleanupListeners = undefined
+
       // Half of total track width — exactly where the duplicate set begins.
       // We use `scrollWidth / 2` because the children are duplicated 1:1
       // and each card carries its own right-margin (no flex gap), so the
@@ -153,9 +220,9 @@ export function useSocialProofMarqueeAnimations() {
     }
 
     // Wait two RAFs so layout (incl. images/fonts) is settled
-    let raf1 = requestAnimationFrame(() => {
-      let raf2 = requestAnimationFrame(init)
-      return () => cancelAnimationFrame(raf2)
+    let raf2: number | null = null
+    const raf1 = requestAnimationFrame(() => {
+      raf2 = requestAnimationFrame(init)
     })
 
     // Recompute on resize so width changes don't break the loop
@@ -172,6 +239,7 @@ export function useSocialProofMarqueeAnimations() {
 
     return () => {
       cancelAnimationFrame(raf1)
+      if (raf2) cancelAnimationFrame(raf2)
       window.removeEventListener('resize', onResize)
       if (resizeTimer) clearTimeout(resizeTimer)
       cleanupListeners?.()

@@ -1,64 +1,63 @@
 'use client'
 // Path: src/components/ProductCard/ProductCardFooter.tsx
-import { Button } from '@/components/ui/button'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { CardFooter } from '@/components/ui/card'
 import { Loader2 } from 'lucide-react'
 import type { ProductCardFooterProps } from '@types'
 import Link from 'next/link'
 import type React from 'react'
-import { useTransition } from 'react' // Importer useTransition
 import { ProductCardSoldOut } from './ProductCardSoldOut'
 
 export function ProductCardFooter({
   price,
   productUrl,
   isAvailable,
-  isPending: isMutationPending, // Gi nytt navn for å unngå kollisjon
+  isPending,
   onQuickBuy
 }: ProductCardFooterProps) {
-  const [isTransitioning, startTransition] = useTransition()
-
   const handleQuickBuyClick = (e: React.MouseEvent) => {
-    startTransition(() => {
-      onQuickBuy(e) // Kall den originale funksjonen inne i en transition
-    })
+    onQuickBuy(e)
   }
-
-  const isPending = isTransitioning || isMutationPending
 
   return (
     <CardFooter className='mt-auto flex flex-col gap-4 p-6 pt-0'>
       <div className='flex w-full items-center justify-between'>
-        <p className='text-2xl font-bold text-white'>{price}</p>
+        <p className='text-2xl font-bold text-cloud-dancer'>{price}</p>
       </div>
-      <div className='grid grid-cols-2 w-full gap-3'>
-        <Link
-          href={productUrl}
-          data-track='ProductCardFooterViewMoreClick'
-          aria-label='Se produkt'
-          className='flex-1'
+      <div className='grid w-full grid-cols-2 gap-3'>
+        <BrandBadge
+          asChild
+          backgroundColor='var(--cloud-dancer)'
+          textColor='var(--maritime-darkest)'
+          className='size-full min-h-12 border border-cloud-dancer/20 px-4 text-sm font-medium transition-all duration-200 hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cloud-dancer sm:text-base'
         >
-          <Button
-            variant='default'
-            size='default'
-            className='border size-full border-neutral-700  text-white hover:bg-primary font-medium hover:text-primary-foreground transition-all duration-200 bg-transparent'
+          <Link
+            href={productUrl}
+            data-track='ProductCardFooterViewMoreClick'
+            aria-label='Se produkt'
+            className='flex-1'
           >
             Se produkt
-          </Button>
-        </Link>
+          </Link>
+        </BrandBadge>
         {isAvailable ?
-          <Button
-            onClick={handleQuickBuyClick}
-            data-track='ProductCardFooterAddToCartClick'
-            variant='default'
-            size='default'
-            disabled={isPending}
-            className='bg-button border border-primary size-full font-medium text-primary-foreground transition-all duration-200 hover:bg-button/90 hover:shadow-lg hover:shadow-primary/25'
+          <BrandBadge
+            asChild
+            backgroundColor='var(--primary-button)'
+            textColor='var(--maritime-darkest)'
+            className='size-full min-h-12 border border-primary-button/35 px-4 text-sm font-medium transition-all duration-200 hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-button sm:text-base'
           >
-            {isPending ?
-              <Loader2 className='size-4 animate-spin' />
-            : 'Legg i handlekurv'}
-          </Button>
+            <button
+              type='button'
+              onClick={handleQuickBuyClick}
+              data-track='ProductCardFooterAddToCartClick'
+              disabled={isPending}
+            >
+              {isPending ?
+                <Loader2 className='size-4 animate-spin' />
+              : 'Legg i handlekurv'}
+            </button>
+          </BrandBadge>
         : <ProductCardSoldOut />}
       </div>
     </CardFooter>

@@ -1,5 +1,5 @@
 import '../globals.css'
-import { geistSans, brandSansFontFamily } from '@/db/config/font.config'
+import { brandSansFontFamily, geistMono } from '@/db/config/font.config'
 import { Suspense, type ReactNode } from 'react'
 import { mainMenu } from '@/db/config/menu.config'
 import { Analytics } from '@vercel/analytics/react'
@@ -33,6 +33,9 @@ const SHOULD_LOAD_META_PIXEL =
   !!process.env.NEXT_PUBLIC_META_PIXEL_ID
   && (process.env.NODE_ENV === 'production'
     || !!process.env.NEXT_PUBLIC_META_TEST_EVENT_CODE)
+
+const SHOULD_LOAD_VERCEL_ANALYTICS =
+  process.env.NODE_ENV === 'production' && process.env.VERCEL === '1'
 
 const GTM_BOOTSTRAP_SCRIPT = `
   (function(w,d,s,l,i){
@@ -114,7 +117,10 @@ export const metadata: Metadata = {
 
 export default function RootLayot({ children }: { children: ReactNode }) {
   return (
-    <html lang='no'>
+    <html
+      lang='no'
+      className={`${brandSansFontFamily.className} ${brandSansFontFamily.variable} ${geistMono.variable}`}
+    >
       <head>
         {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (
           <Script id='gtm-bootstrap' strategy='beforeInteractive'>
@@ -122,9 +128,7 @@ export default function RootLayot({ children }: { children: ReactNode }) {
           </Script>
         )}
       </head>
-      <body
-        className={`bg-background text-foreground ${geistSans.className} ${brandSansFontFamily.className} antialiased`}
-      >
+      <body className='bg-background text-foreground antialiased'>
         {SHOULD_LOAD_META_PIXEL && <MetaPixelEvents />}
         {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (
           <noscript>
@@ -146,7 +150,7 @@ export default function RootLayot({ children }: { children: ReactNode }) {
             <main>
               {children}
               <BrandArmorScript companyId={BRAND_ARMOR_COMPANY_ID} />
-              <Analytics mode='production' />
+              {SHOULD_LOAD_VERCEL_ANALYTICS && <Analytics />}
               <ChatBotAgent />
             </main>
             <Footer />

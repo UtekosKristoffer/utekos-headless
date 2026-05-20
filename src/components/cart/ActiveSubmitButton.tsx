@@ -1,4 +1,5 @@
-import { Button } from '@/components/ui/button'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
+import { ShoppingBag } from 'lucide-react'
 
 interface ActiveSubmitButtonProps {
   isPending: boolean
@@ -10,15 +11,22 @@ export function ActiveSubmitButton({
   isDisabled
 }: ActiveSubmitButtonProps) {
   return (
-    <Button
-      type='submit'
-      data-track='ModalAddToCart'
-      size='lg'
-      disabled={isPending || isDisabled}
-      aria-label='Legg i handlekurv'
-      className='h-10 w-full bg-button text-access/40 hover:scale-105 hover:bg-button/90 md:w-[70%]'
+    <BrandBadge
+      asChild
+      backgroundColor='var(--maritime-darkest)'
+      textColor='var(--cloud-dancer)'
+      className='h-14 w-full gap-3 border border-cloud-dancer/14 px-8 py-4 text-base font-semibold shadow-[0_20px_42px_-26px_rgba(14,18,35,0.92)] ring-1 ring-cloud-dancer/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-maritime-blue hover:shadow-[0_26px_52px_-30px_rgba(14,18,35,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dusted-peri/70 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast disabled:pointer-events-none disabled:opacity-55 md:w-[70%]'
     >
-      {isPending ? 'Legger til...' : 'Legg i handlekurv'}
-    </Button>
+      <button
+        type='submit'
+        data-track='ModalAddToCart'
+        disabled={isPending || isDisabled}
+        aria-label='Legg i handlekurv'
+        className='cursor-pointer disabled:cursor-not-allowed'
+      >
+        <ShoppingBag className='size-5 shrink-0' aria-hidden='true' />
+        <span>{isPending ? 'Legger til...' : 'Legg i handlekurv'}</span>
+      </button>
+    </BrandBadge>
   )
 }

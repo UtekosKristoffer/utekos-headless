@@ -1,6 +1,6 @@
 // Path: src/app/inspirasjon/isbading/sections/IceBathingHeroSection.tsx
 'use client'
-import { Button } from '@/components/ui/button'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -29,22 +29,22 @@ export function IceBathingHeroSection() {
           priority
         />
 
-        <div className='absolute inset-0 bg-black/60' />
+        <div className='absolute inset-0 bg-maritime-darkest/68' />
       </div>
 
       <div className='container relative z-10 mx-auto px-4 py-24 text-center'>
         <div className='mx-auto max-w-4xl'>
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
-            <h1 className='text-fluid-display font-bold tracking-tight text-white drop-shadow-sm'>
+            <h1 className='text-fluid-display font-bold tracking-normal text-cloud-dancer drop-shadow-sm'>
               Det kalde gys -{' '}
-              <span className='block text-cyan-200 sm:inline'>
+              <span className='block text-ancient-water sm:inline'>
                 den varme belønningen
               </span>
             </h1>
           </AnimatedBlock>
 
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.3s'>
-            <p className='mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-neutral-100 drop-shadow-sm'>
+            <p className='mx-auto mt-6 max-w-2xl text-xl leading-[1.45] tracking-normal text-cloud-dancer drop-shadow-sm'>
               Mestringsfølelsen etter et isbad er unik. Men turen tilbake til
               bilen trenger ikke være en kamp. Gjør overgangen fra null grader
               til full komfort umiddelbar.
@@ -55,10 +55,11 @@ export function IceBathingHeroSection() {
             className='will-animate-fade-in-up mt-10 flex flex-wrap justify-center gap-4'
             delay='0.4s'
           >
-            <Button
+            <BrandBadge
               asChild
-              size='lg'
-              className='group min-w-[200px] border-none bg-white text-neutral-900 hover:bg-neutral-100'
+              backgroundColor='var(--primary-button)'
+              textColor='var(--maritime-darkest)'
+              className='group min-h-14 min-w-[200px] border border-primary-button/24 px-8 py-4 text-base leading-[1.4] font-bold tracking-normal shadow-2xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
             >
               <Link
                 href='#product-spotlight'
@@ -79,7 +80,7 @@ export function IceBathingHeroSection() {
                 Kle deg for kulden
                 <ArrowRight className='ml-2 size-4 transition-transform group-hover:translate-x-1' />
               </Link>
-            </Button>
+            </BrandBadge>
           </AnimatedBlock>
         </div>
       </div>

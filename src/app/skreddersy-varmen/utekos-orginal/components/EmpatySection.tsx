@@ -11,13 +11,13 @@ export function EmpathySection() {
             <span className='inline-block text-[#E07A5F] font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-6 border-b border-[#E07A5F]/30 pb-2'>
               Ditt sosiale rom
             </span>
-            <h2 className='font-serif text-4xl md:text-6xl lg:text-7xl text-[#2C2420] mb-8 leading-[1.05] tracking-tight'>
+            <h2 className='font-google-sans text-4xl md:text-6xl lg:text-7xl text-[#2C2420] mb-8 leading-[1.05] tracking-tight'>
               Når øyeblikket er for godt til å avsluttes.
             </h2>
 
-            <div className='prose prose-lg md:prose-xl text-[#2C2420]/75 font-serif leading-relaxed space-y-8'>
+            <div className='prose prose-lg md:prose-xl text-[#2C2420]/75 font-google-sans leading-relaxed space-y-8'>
               <p>
-                <span className='float-left text-6xl md:text-7xl text-[#E07A5F] font-serif pr-4 pt-2 leading-[0.8]'>
+                <span className='inline-block pr-1 align-baseline font-google-sans text-6xl leading-none text-[#E07A5F] md:text-7xl'>
                   D
                 </span>
                 u kjenner følelsen. Praten går lett rundt bålpannen, flammene
@@ -25,14 +25,14 @@ export function EmpathySection() {
                 kommer den – den snikende trekken som truer med å bryte magien.
               </p>
               <div className='relative py-4'>
-                <p className='font-serif text-3xl md:text-4xl text-[#2C2420] italic font-medium leading-tight ml-8 md:ml-12'>
+                <p className='font-google-sans text-3xl md:text-4xl text-[#2C2420] italic font-medium leading-tight ml-8 md:ml-12'>
                   &ldquo;Det begynner å bli kaldt. <br />
                   Skal vi trekke inn?&rdquo;
                 </p>
                 <div className='absolute left-0 top-6 bottom-6 w-1 bg-[#E07A5F]' />
               </div>
 
-              <p className='font-sans text-base md:text-lg tracking-wide text-[#2C2420]/90'>
+              <p className='font-google-sans text-base md:text-lg tracking-wide text-[#2C2420]/90'>
                 Med Utekos® er svaret nei. Vi har skapt en kolleksjon designet
                 for å ta kvelden tilbake. Fra lett mikrofiber til eksklusiv dun
                 – våre løsninger pakker deg inn i en beskyttende kokong av
@@ -68,7 +68,7 @@ export function EmpathySection() {
                       Stemning
                     </span>
                   </div>
-                  <p className='font-serif text-2xl italic leading-none'>
+                  <p className='font-google-sans text-2xl italic leading-none'>
                     &ldquo;Klokken er 23:15.
                     <br />
                     Ingen vil gå inn.&rdquo;

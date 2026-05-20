@@ -1,5 +1,7 @@
+import type { LucideIcon } from 'lucide-react'
+
 export interface Benefit {
-  icon: any
+  icon: LucideIcon
   title: string
   description: string
   color: string
@@ -8,6 +10,6 @@ export interface Benefit {
 export interface HostTip {
   name: string
   highlight: string
-  icon: any
+  icon: LucideIcon
   color: string
 }

@@ -37,7 +37,7 @@ export const terraceIdeasData: TerraceIdea[] = [
     name: 'Morgenkaffe-kroken',
     highlight: 'En lun start på dagen',
     icon: 'coffee',
-    color: 'text-amber-400'
+    color: 'text-primary-button'
   },
   {
     name: 'Lounge-området',
@@ -49,7 +49,7 @@ export const terraceIdeasData: TerraceIdea[] = [
     name: 'Balkong-oasen',
     highlight: 'Maksimal komfort, minimal plass',
     icon: 'building2',
-    color: 'text-cyan-400'
+    color: 'text-ancient-water'
   },
   {
     name: 'Lesekroken',
@@ -64,10 +64,10 @@ export function TerraceIdeasGrid({ ideas }: { ideas: TerraceIdea[] }) {
     <section className='py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl text-center'>
-          <h2 className='text-fluid-display font-bold tracking-tight'>
+          <h2 className='text-fluid-display font-bold tracking-normal'>
             Ideer for din uteplass
           </h2>
-          <p className='mt-4 text-lg text-muted-foreground'>
+          <p className='mt-4 text-lg text-overcast'>
             Uansett størrelse på uteplassen din, kan den bli en oase for komfort
             og hygge.
           </p>
@@ -79,7 +79,7 @@ export function TerraceIdeasGrid({ ideas }: { ideas: TerraceIdea[] }) {
               className='will-animate-fade-in-up h-full'
               delay={`${index * 0.1}s`}
             >
-              <Card className='group border-neutral-800 bg-sidebar-foreground transition-colors hover:bg-sidebar-foreground/80'>
+              <Card className='group border-cloud-dancer/12 bg-maritime-blue/24 transition-colors hover:bg-maritime-blue/32'>
                 <CardContent className='p-6'>
                   <div className='mb-3 flex items-start justify-between'>
                     <h3 className='text-lg font-semibold'>{idea.name}</h3>
@@ -88,7 +88,7 @@ export function TerraceIdeasGrid({ ideas }: { ideas: TerraceIdea[] }) {
                       className={`${idea.color} transition-colors group-hover:text-primary`}
                     />
                   </div>
-                  <p className='text-sm text-foreground/80'>{idea.highlight}</p>
+                  <p className='text-sm text-cloud-dancer/80'>{idea.highlight}</p>
                 </CardContent>
               </Card>
             </AnimatedBlock>

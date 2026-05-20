@@ -3,20 +3,21 @@
 
 import Image from 'next/image'
 import { useRef } from 'react'
-import { preload } from 'react-dom'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 import {
   motion,
   useReducedMotion,
   useScroll,
-  useTransform,
-  type Variants
+  useTransform
 } from 'framer-motion'
 import { Star, ChevronDown, ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils/className'
 import CinemaOne from '@public/cinema-twilight.png'
 import MobileOne from '@public/terrace-4-5.png'
+import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 
-const WORDMARK_URL = '/Wordmark%20Black.png'
+gsap.registerPlugin(useGSAP)
 
 const SCROLL_TARGETS = {
   purchase: 'purchase-section',
@@ -29,8 +30,6 @@ function smoothScrollTo(id: string) {
 }
 
 export function Hero() {
-  preload(WORDMARK_URL, { as: 'image', fetchPriority: 'high' })
-
   const reduced = useReducedMotion()
   const heroRef = useRef<HTMLElement>(null)
 
@@ -41,54 +40,145 @@ export function Hero() {
   const contentY = useTransform(scrollY, [0, 400], [0, reduced ? 0 : -30])
   const contentOpacity = useTransform(scrollY, [0, 400], [1, 0.4])
 
-  const containerVariants: Variants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: reduced ? 0 : 0.09,
-        delayChildren: reduced ? 0 : 0.05
+  useGSAP(
+    () => {
+      if (reduced) {
+        gsap.set(
+          [
+            '.sv-headline-1',
+            '.sv-headline-2',
+            '.sv-body',
+            '.sv-cta-row',
+            '.sv-trust',
+            '.sv-badge',
+            '.sv-scroll-hint'
+          ],
+          { clearProps: 'all' }
+        )
+        return
       }
-    }
-  }
 
-  const fadeUp: Variants = {
-    hidden: { opacity: 0, y: reduced ? 0 : 16 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
-    }
-  }
+      const tl = gsap.timeline()
 
-  const headlineRise: Variants = {
-    hidden: { opacity: 1, y: reduced ? 0 : 14 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
-    }
-  }
+      // 1. UTEKOS — letters materialize from below, one by one
+      tl.fromTo(
+        '.gsap-char',
+        { yPercent: 120, rotationX: -55, opacity: 0 },
+        {
+          yPercent: 0,
+          rotationX: 0,
+          opacity: 1,
+          duration: 1.5,
+          stagger: { each: 0.065, ease: 'power2.out' },
+          ease: 'power4.out'
+        }
+      )
 
-  const wordmarkReveal: Variants = {
-    hidden: {
-      opacity: 0,
-      y: reduced ? 0 : 14,
-      scale: reduced ? 1 : 0.98
+      // 2. "Skreddersy varmen." — clips up from below through overflow container
+      tl.fromTo(
+        '.sv-headline-1',
+        { yPercent: 105, autoAlpha: 0 },
+        {
+          yPercent: 0,
+          autoAlpha: 1,
+          duration: 1.1,
+          ease: 'power3.out'
+        },
+        '-=0.85'
+      )
+
+      // 3. "Forleng kvelden." — italic sweep with tilt correction
+      tl.fromTo(
+        '.sv-headline-2',
+        { yPercent: 100, rotationZ: 1.6, autoAlpha: 0 },
+        {
+          yPercent: 0,
+          rotationZ: 0,
+          autoAlpha: 1,
+          duration: 1.0,
+          ease: 'power3.out'
+        },
+        '-=0.7'
+      )
+
+      // 4. Body copy — blur fade up
+      tl.fromTo(
+        '.sv-body',
+        { y: 22, autoAlpha: 0, filter: 'blur(6px)' },
+        {
+          y: 0,
+          autoAlpha: 1,
+          filter: 'blur(0px)',
+          duration: 1.0,
+          ease: 'power2.out'
+        },
+        '-=0.6'
+      )
+
+      // 5. CTA buttons — spring entrance
+      tl.fromTo(
+        '.sv-cta-row',
+        { y: 22, autoAlpha: 0, scale: 0.97 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          scale: 1,
+          duration: 0.95,
+          ease: 'back.out(1.7)'
+        },
+        '-=0.5'
+      )
+
+      // 6. Trust signals — slide in from left
+      tl.fromTo(
+        '.sv-trust',
+        { x: -18, autoAlpha: 0 },
+        {
+          x: 0,
+          autoAlpha: 1,
+          duration: 0.8,
+          ease: 'power2.out'
+        },
+        '-=0.4'
+      )
+
+      // 7. Stock badge — scale fade up
+      tl.fromTo(
+        '.sv-badge',
+        { y: 10, autoAlpha: 0, scale: 0.94 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          scale: 1,
+          duration: 0.7,
+          ease: 'power2.out'
+        },
+        '-=0.35'
+      )
+
+      // 8. Bottom scroll hint — final reveal
+      tl.fromTo(
+        '.sv-scroll-hint',
+        { opacity: 0, y: -8 },
+        {
+          opacity: 0.6,
+          y: 0,
+          duration: 0.9,
+          ease: 'power2.out'
+        },
+        '-=0.15'
+      )
     },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
-    }
-  }
+    { scope: heroRef }
+  )
 
   return (
     <section
       ref={heroRef}
       aria-labelledby='hero-headline'
-      className='relative w-full min-h-[calc(100svh-70px)] xl:min-h-[calc(100svh-86px)] overflow-hidden bg-[#1A1612] text-[#F4F1EA]'
+      className='relative w-full min-h-[calc(100svh-70px)] xl:min-h-[calc(100svh-86px)] overflow-hidden bg-[#1A1612] text-cloud-dancer font-google-sans'
     >
+      {/* Background — desktop */}
       <motion.div
         className='absolute inset-0 z-0 hidden md:block'
         style={{ y: imageY, scale: imageScale }}
@@ -99,13 +189,14 @@ export function Hero() {
           fill
           priority
           fetchPriority='high'
-          quality={88}
-          sizes='100vw'
+          quality={90}
+          sizes='(max-width: 767px) 0px, 100vw'
           placeholder='blur'
           className='object-cover'
         />
       </motion.div>
 
+      {/* Background — mobile */}
       <motion.div
         className='absolute inset-0 z-0 block md:hidden'
         style={{ y: imageY, scale: imageScale }}
@@ -116,13 +207,14 @@ export function Hero() {
           fill
           priority
           fetchPriority='high'
-          quality={85}
-          sizes='100vw'
+          quality={80}
+          sizes='(min-width: 768px) 0px, 100vw'
           placeholder='blur'
           className='object-cover'
         />
       </motion.div>
 
+      {/* Gradient overlays */}
       <motion.div
         aria-hidden
         className='absolute inset-0 z-[1] bg-gradient-to-b from-black/30 via-black/40 via-50% to-[#1A1612]/95'
@@ -133,60 +225,54 @@ export function Hero() {
         className='absolute inset-y-0 left-0 z-[1] hidden w-1/2 bg-gradient-to-r from-black/55 via-black/15 to-transparent md:block'
       />
 
+      {/* Main content — scroll parallax via framer-motion, entrance via GSAP */}
       <motion.div
         className='relative z-10 mx-auto flex min-h-[calc(100svh-70px)] xl:min-h-[calc(100svh-86px)] w-full max-w-[1400px] flex-col items-start justify-center px-6 pt-20 pb-16 md:px-12 md:pt-24 lg:px-20'
         style={{ y: contentY, opacity: contentOpacity }}
-        variants={containerVariants}
-        initial='hidden'
-        animate='visible'
       >
         <div className='max-w-2xl'>
-          <motion.div
-            variants={wordmarkReveal}
-            role='img'
-            aria-label='Utekos®'
-            className='mb-5 aspect-[1281/312] h-11 bg-[#F4F1EA] sm:h-14 md:mb-6 md:h-16 lg:h-20'
-            style={{
-              WebkitMaskImage: `url('${WORDMARK_URL}')`,
-              maskImage: `url('${WORDMARK_URL}')`,
-              WebkitMaskRepeat: 'no-repeat',
-              maskRepeat: 'no-repeat',
-              WebkitMaskSize: 'contain',
-              maskSize: 'contain',
-              WebkitMaskPosition: 'left center',
-              maskPosition: 'left center',
-              filter: 'drop-shadow(0 2px 20px rgba(0,0,0,0.5))'
-            }}
-          />
+          {/* Utekos wordmark — letter-by-letter GSAP entrance */}
+          <div
+            className='mb-5 aspect-[1281/312] text-overcast h-11 sm:h-14 md:mb-6 md:h-16 lg:h-20 drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]'
+            style={{ perspective: '900px' }}
+          >
+            <UtekosWordmark
+              animated={true}
+              className='size-full text-overcast will-change-transform'
+            />
+          </div>
 
-          <motion.h1
+          {/* Headlines — overflow-hidden parents for clip reveal effect */}
+          <h1
             id='hero-headline'
-            variants={headlineRise}
-            className='font-serif text-4xl leading-[1.02] tracking-tight text-[#F4F1EA] sm:text-5xl md:text-6xl lg:text-7xl [text-shadow:0_2px_24px_rgba(0,0,0,0.45)]'
+            className='font-google-sans text-4xl leading-[0.92] tracking-[-0.01em]  font-semibold sm:text-5xl md:text-6xl lg:text-7xl [text-shadow:0_2px_24px_rgba(0,0,0,0.45)]'
           >
-            Skreddersy varmen.
-            <span className='mt-3 block font-light italic text-[#E07A5F] text-3xl sm:text-4xl md:text-5xl lg:text-6xl'>
-              Forleng kvelden.
-            </span>
-          </motion.h1>
+            <div className='overflow-hidden'>
+              <span className='sv-headline-1 text-ancient-water block whitespace-nowrap'>
+                Skreddersy varmen.
+              </span>
+            </div>
+            <div className='overflow-hidden mt-3'>
+              <span className='sv-headline-2 block text-bleached-mauve italic font-google-sans font-semibold max-w-4xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl'>
+                Forleng kvelden.
+              </span>
+            </div>
+          </h1>
 
-          <motion.p
-            variants={fadeUp}
-            className='mt-7 max-w-xl text-base leading-relaxed text-[#F4F1EA]/85 md:text-lg lg:text-xl [text-shadow:0_1px_12px_rgba(0,0,0,0.5)]'
-          >
-            Kompromissløs komfort <span className='text-[#F4F1EA]'> og </span>
+          {/* Body copy */}
+          <p className='sv-body font-google-sans mt-7 max-w-xl text-base leading-[1.45] text-cloud-dancer md:text-lg lg:text-xl [text-shadow:0_1px_12px_rgba(0,0,0,0.5)]'>
+            Kompromissløs komfort{' '}
+            <span className='text-cloud-dancer'> og </span>
             overlegen allsidighet.
-          </motion.p>
+          </p>
 
-          <motion.div
-            variants={fadeUp}
-            className='mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5'
-          >
+          {/* CTA row */}
+          <div className='sv-cta-row mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5'>
             <button
               type='button'
               onClick={() => smoothScrollTo(SCROLL_TARGETS.purchase)}
               data-track='HeroCtaSkreddersyVarmen'
-              className='group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-[#E07A5F] px-7 py-4 text-base font-semibold tracking-wide text-white shadow-[0_10px_40px_-8px_rgba(224,122,95,0.6)] transition-all duration-300 hover:bg-[#D06A4F] hover:shadow-[0_14px_50px_-8px_rgba(224,122,95,0.75)] active:scale-[0.97] md:text-lg'
+              className='group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-maritime-blue px-7 py-4 text-base font-semibold tracking-wide text-cloud-dancer shadow-[0_10px_40px_-8px_rgba(60,80,160,0.5)] transition-all duration-300 hover:bg-maritime-blue-cmyk-coated hover:shadow-[0_14px_50px_-8px_rgba(60,80,160,0.72)] active:scale-[0.97] md:text-lg'
             >
               <span className='relative z-10'>Finn din favoritt</span>
               <ArrowRight
@@ -203,18 +289,18 @@ export function Hero() {
               type='button'
               onClick={() => smoothScrollTo(SCROLL_TARGETS.solution)}
               data-track='HeroSecondaryCtaSkreddersyVarmen'
-              className='group inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-[#F4F1EA]/85 transition-colors hover:text-[#E07A5F] md:text-base'
+              className='group inline-flex items-center gap-2 text-sm font-google-sans font-semibold uppercase text-cloud-dancer/85 transition-colors hover:text-primary-button md:text-base'
             >
               <ChevronDown
                 className='h-4 w-4 transition-transform group-hover:translate-y-0.5'
                 aria-hidden
               />
             </button>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={fadeUp}
-            className='mt-9 flex items-center gap-3 text-sm text-[#F4F1EA]/85 md:text-[15px]'
+          {/* Trust signals */}
+          <div
+            className='sv-trust mt-9 flex items-center gap-3 text-sm text-cloud-dancer/85 md:text-[15px]'
             aria-label='Kundeanmeldelser'
           >
             <div
@@ -225,13 +311,11 @@ export function Hero() {
                 <Star key={i} fill='currentColor' size={15} strokeWidth={0} />
               ))}
             </div>
-            <span className='font-semibold text-[#F4F1EA]'>4.8/5</span>
-          </motion.div>
+            <span className='font-semibold text-cloud-dancer'>4.8/5</span>
+          </div>
 
-          <motion.div
-            variants={fadeUp}
-            className='mt-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/30 px-3 py-1.5 text-xs text-[#F4F1EA]/85 backdrop-blur-md'
-          >
+          {/* Stock badge */}
+          <div className='sv-badge mt-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/30 px-3 py-1.5 text-xs text-cloud-dancer/85 backdrop-blur-md'>
             <span className='relative flex h-2 w-2' aria-hidden>
               <span
                 className={cn(
@@ -242,29 +326,26 @@ export function Hero() {
               <span className='relative inline-flex h-2 w-2 rounded-full bg-emerald-400' />
             </span>
             <span className='font-medium'>På lager</span>
-            <span className='text-[#F4F1EA]/45'>·</span>
+            <span className='text-cloud-dancer/45'>·</span>
             <span>Levering 2–5 dager</span>
-            <span className='hidden text-[#F4F1EA]/45 sm:inline'>·</span>
+            <span className='hidden text-cloud-dancer/45 sm:inline'>·</span>
             <span className='hidden sm:inline'>14 dagers retur</span>
-          </motion.div>
+          </div>
         </div>
       </motion.div>
 
-      <motion.button
+      {/* Bottom scroll hint */}
+      <button
         type='button'
         onClick={() => smoothScrollTo(SCROLL_TARGETS.solution)}
         aria-label='Bla videre'
-        initial={{ opacity: 0, y: -8 }}
-        animate={{ opacity: 0.6, y: 0 }}
-        transition={{ delay: 1.4, duration: 0.8 }}
-        whileHover={{ opacity: 1, y: 4 }}
-        className='absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-[#F4F1EA]/60 md:flex'
+        className='sv-scroll-hint absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-cloud-dancer/60 transition-[opacity,transform] duration-300 hover:opacity-100 hover:translate-y-1 md:flex'
       >
         <span className='text-[10px] font-semibold uppercase tracking-[0.25em]'>
           Bla
         </span>
         <ChevronDown size={20} className='animate-bounce' aria-hidden />
-      </motion.button>
+      </button>
     </section>
   )
 }

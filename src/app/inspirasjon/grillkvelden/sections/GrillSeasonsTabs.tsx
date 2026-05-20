@@ -11,8 +11,8 @@ const seasons = [
     value: 'spring',
     label: 'Vår',
     icon: Sun,
-    iconColor: 'text-yellow-400',
-    glowColor: '#facc15',
+    iconColor: 'text-primary-button',
+    glowColor: 'var(--primary-button)',
     title: 'Sesongstarten',
     description:
       'Vær den første i nabolaget til å dra frem grillen. Med Utekos er ikke en kjølig vårkveld noen hindring for en vellykket premiere.'
@@ -21,8 +21,8 @@ const seasons = [
     value: 'summer',
     label: 'Sommer',
     icon: Flame,
-    iconColor: 'text-orange-500',
-    glowColor: '#f97316',
+    iconColor: 'text-dusted-peri',
+    glowColor: 'var(--soft-warm)',
     title: 'De lange sommerkveldene',
     description:
       'Selv på sommeren blir det kaldt når solen går ned. Hold festen i gang og la gjestene bli sittende i komfort til langt på natt.'
@@ -31,8 +31,8 @@ const seasons = [
     value: 'autumn',
     label: 'Høst',
     icon: Leaf,
-    iconColor: 'text-green-500',
-    glowColor: '#22c55e',
+    iconColor: 'text-mountain-view',
+    glowColor: 'var(--mountain-view)',
     title: 'Høstens farger og smaker',
     description:
       'Høsten er perfekt for grilling med rike smaker. Nyt den skarpe, klare luften rundt grillen med venner, uten å tenke på temperaturen.'
@@ -41,8 +41,8 @@ const seasons = [
     value: 'winter',
     label: 'Vinter',
     icon: Snowflake,
-    iconColor: 'text-blue-400',
-    glowColor: '#60a5fa',
+    iconColor: 'text-ancient-water',
+    glowColor: 'var(--ancient-water)',
     title: 'For de tøffeste grill entusiastene',
     description:
       'Vintergrilling er en unik opplevelse. Utekos er essensielt for å holde grillmesteren (og gjestene) varme mellom slagene.'
@@ -67,7 +67,7 @@ export function GrillSeasonsTabs() {
             <TabsTrigger
               key={season.value}
               value={season.value}
-              className='grill-seasons-tab-trigger relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 transition-all duration-300 data-[state=active]:border-neutral-700 data-[state=active]:bg-neutral-900'
+              className='grill-seasons-tab-trigger relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/58 transition-all duration-300 data-[state=active]:border-cloud-dancer/18 data-[state=active]:bg-maritime-darkest'
             >
               {isActive && (
                 <div
@@ -80,10 +80,10 @@ export function GrillSeasonsTabs() {
 
               <div className='relative flex items-center justify-center gap-2 py-3'>
                 <Icon
-                  className={`h-5 w-5 transition-colors ${isActive ? season.iconColor : 'text-muted-foreground'}`}
+                  className={`h-5 w-5 transition-colors ${isActive ? season.iconColor : 'text-overcast'}`}
                 />
                 <span
-                  className={`font-medium text-sm transition-colors ${isActive ? 'text-primary-foreground' : 'text-primary-foreground'}`}
+                  className={`font-medium text-sm transition-colors ${isActive ? 'text-cloud-dancer' : 'text-cloud-dancer'}`}
                 >
                   {season.label}
                 </span>
@@ -99,7 +99,7 @@ export function GrillSeasonsTabs() {
         return (
           <TabsContent key={season.value} value={season.value} className='mt-8'>
             <div className='grill-seasons-tab-content-enter'>
-              <Card className='relative overflow-hidden border-neutral-800 bg-neutral-900/50'>
+              <Card className='relative overflow-hidden border-cloud-dancer/12 bg-maritime-darkest/58'>
                 <div
                   className='absolute -inset-x-2 -inset-y-16 opacity-20 blur-3xl'
                   style={{
@@ -110,19 +110,19 @@ export function GrillSeasonsTabs() {
                 <CardContent className='relative p-8'>
                   <div className='mb-6 flex items-center gap-4'>
                     <div
-                      className='flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-700 bg-background transition-shadow duration-300'
+                      className='flex h-12 w-12 items-center justify-center rounded-lg border border-cloud-dancer/18 bg-maritime-darkest transition-shadow duration-300'
                       style={{
                         boxShadow: `0 0 20px ${season.glowColor}20`
                       }}
                     >
                       <Icon className={`h-6 w-6 ${season.iconColor}`} />
                     </div>
-                    <h3 className='text-2xl font-semibold text-foreground'>
+                    <h3 className='text-2xl font-semibold text-cloud-dancer'>
                       {season.title}
                     </h3>
                   </div>
 
-                  <p className='text-lg leading-relaxed text-muted-foreground'>
+                  <p className='text-lg leading-[1.45] tracking-normal text-overcast'>
                     {season.description}
                   </p>
                 </CardContent>

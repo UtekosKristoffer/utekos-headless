@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { Camera } from 'lucide-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { aboutImages } from './aboutImages'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { type CarouselApi } from '@/components/ui/carousel'
 import {
   Carousel,
@@ -92,45 +93,37 @@ export function AboutCarousel() {
   return (
     <section
       ref={containerRef}
-      className='relative mx-auto overflow-hidden px-4 py-16 sm:py-32 bg-[#1F2421] text-[#F4F1EA]'
+      className='relative isolate mx-auto overflow-hidden bg-maritime-darkest px-4 py-16 text-cloud-dancer sm:py-32'
     >
-      <div className='absolute inset-0 -z-10 opacity-20 pointer-events-none'>
-        <div
-          className='absolute left-1/4 top-1/4 h-[500px] w-[500px] blur-[100px]'
-          style={{
-            background: 'radial-gradient(circle, #E07A5F 0%, transparent 70%)'
-          }}
-        />
-        <div
-          className='absolute right-1/4 bottom-1/4 h-[500px] w-[500px] blur-[100px]'
-          style={{
-            background: 'radial-gradient(circle, #2C2420 0%, transparent 70%)'
-          }}
-        />
+      <div className='pointer-events-none absolute inset-0 -z-10'>
+        <div className='absolute left-[18%] top-[18%] h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_20%,transparent)_0%,transparent_70%)] blur-[110px]' />
+        <div className='absolute bottom-[10%] right-[14%] h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_16%,transparent)_0%,transparent_72%)] blur-[110px]' />
       </div>
 
       <div className='container mx-auto max-w-7xl'>
         <div className='mb-16 text-center'>
-          <div className='gsap-header opacity-0 mb-6 inline-flex items-center gap-2 rounded-full border border-[#E07A5F]/30 bg-[#E07A5F]/10 px-4 py-1.5'>
-            <Camera className='h-4 w-4 text-[#E07A5F]' />
-            <span className='text-xs font-bold tracking-[0.15em] uppercase text-[#E07A5F]'>
-              Livet med Utekos
-            </span>
-          </div>
+          <BrandBadge
+            backgroundColor='var(--dusted-peri)'
+            textColor='var(--maritime-darkest)'
+            className='gsap-header mb-6 gap-2 opacity-0 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
+          >
+            <Camera className='h-5 w-5' strokeWidth={1.6} />
+            <span>Livet med Utekos</span>
+          </BrandBadge>
 
-          <h2 className='gsap-title opacity-0 text-4xl md:text-5xl font-serif font-medium tracking-tight mb-4'>
+          <h2 className='gsap-title mb-4 text-4xl font-serif font-medium tracking-tight opacity-0 md:text-5xl'>
             Et glimt av opplevelsen
           </h2>
 
-          <p className='gsap-desc opacity-0 mx-auto max-w-2xl text-lg md:text-xl leading-relaxed text-[#F4F1EA]/70 font-light'>
+          <p className='gsap-desc mx-auto max-w-2xl text-lg font-light leading-relaxed text-overcast/82 opacity-0 md:text-xl'>
             Se hvordan kompromissløs komfort gir liv til dine favorittøyeblikk
             utendørs.
           </p>
         </div>
 
-        <div className='gsap-carousel opacity-0 relative'>
-          <div className='relative mx-auto max-w-6xl overflow-hidden rounded-sm border border-[#F4F1EA]/5 bg-[#2C2420] p-4 md:p-6 shadow-2xl shadow-black/40'>
-            <div className='absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-[#E07A5F]/50 to-transparent' />
+        <div className='gsap-carousel relative opacity-0'>
+          <div className='relative mx-auto max-w-6xl overflow-hidden rounded-[1.75rem] border border-cloud-dancer/10 bg-[color-mix(in_oklab,var(--cloud-dancer)_8%,transparent)] p-3 shadow-2xl shadow-black/35 backdrop-blur-sm md:p-5'>
+            <div className='absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-dusted-peri/55 to-transparent' />
 
             <Carousel
               setApi={setApi}
@@ -146,7 +139,7 @@ export function AboutCarousel() {
                     key={index}
                     className='pl-4 md:basis-1/2 lg:basis-1/3'
                   >
-                    <div className='group relative overflow-hidden rounded-sm border border-[#F4F1EA]/5 bg-[#151515]'>
+                    <div className='group relative overflow-hidden rounded-[1.25rem] border border-cloud-dancer/8 bg-maritime-darkest'>
                       <AspectRatio ratio={1 / 1}>
                         <Image
                           src={image.src}
@@ -155,7 +148,7 @@ export function AboutCarousel() {
                           className='object-cover transition-transform duration-1000 ease-out group-hover:scale-105'
                           sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
                         />
-                        <div className='absolute inset-0 bg-gradient-to-t from-[#1F2421]/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
+                        <div className='absolute inset-0 bg-gradient-to-t from-maritime-darkest/62 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
                       </AspectRatio>
                     </div>
                   </CarouselItem>
@@ -163,8 +156,8 @@ export function AboutCarousel() {
               </CarouselContent>
 
               <div className='hidden md:block'>
-                <CarouselPrevious className='left-8 bg-[#2C2420]/80 text-[#F4F1EA] border-[#F4F1EA]/10 hover:bg-[#E07A5F] hover:text-white hover:border-[#E07A5F] backdrop-blur-md' />
-                <CarouselNext className='right-8 bg-[#2C2420]/80 text-[#F4F1EA] border-[#F4F1EA]/10 hover:bg-[#E07A5F] hover:text-white hover:border-[#E07A5F] backdrop-blur-md' />
+                <CarouselPrevious className='left-8 border-cloud-dancer/12 bg-maritime-darkest/80 text-cloud-dancer backdrop-blur-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
+                <CarouselNext className='right-8 border-cloud-dancer/12 bg-maritime-darkest/80 text-cloud-dancer backdrop-blur-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
               </div>
             </Carousel>
 
@@ -176,8 +169,8 @@ export function AboutCarousel() {
                   className={cn(
                     'h-1.5 rounded-full transition-all duration-300',
                     current === index + 1 ?
-                      'w-8 bg-[#E07A5F]'
-                    : 'w-2 bg-[#F4F1EA]/20 hover:bg-[#F4F1EA]/40'
+                      'w-8 bg-dusted-peri'
+                    : 'w-2 bg-cloud-dancer/22 hover:bg-cloud-dancer/45'
                   )}
                   aria-label={`Gå til bilde ${index + 1}`}
                 />

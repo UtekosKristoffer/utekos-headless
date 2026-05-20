@@ -1,8 +1,43 @@
-import { ArrowRight, Coffee, Leaf, Sparkles } from 'lucide-react'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
+import { Coffee, Leaf, Sparkles } from 'lucide-react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
-import type { Route } from 'next'
+import { InspirationHeroActions } from '../../layout/InspirationHeroActions'
+import { InspirationHeroBreadcrumb } from '../../layout/InspirationHeroBreadcrumb'
+
+const terraceFeatureCards = [
+  {
+    title: 'Tidlig vår',
+    description: 'Nyt morgenkafffen uker tidligere',
+    Icon: Coffee,
+    iconColor:
+      'color-mix(in oklch, var(--maritime-darkest) 72%, var(--ancient-water))',
+    borderColor: 'color-mix(in oklch, var(--ancient-water) 40%, transparent)',
+    background:
+      'linear-gradient(180deg, color-mix(in oklch, var(--ancient-water) 74%, rgba(255, 255, 255, 0.26)) 0%, color-mix(in oklch, var(--ancient-water) 42%, rgba(16, 24, 30, 0.16)) 100%)',
+    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--ancient-water) 78%, transparent) 100%)'
+  },
+  {
+    title: 'Sen høst',
+    description: 'Forleng sesongen utover september',
+    Icon: Leaf,
+    iconColor:
+      'color-mix(in oklch, var(--maritime-darkest) 70%, var(--soft-warm))',
+    borderColor: 'color-mix(in oklch, var(--soft-warm) 42%, transparent)',
+    background:
+      'linear-gradient(180deg, color-mix(in oklch, var(--soft-warm) 72%, rgba(255, 255, 255, 0.24)) 0%, color-mix(in oklch, var(--soft-warm) 42%, rgba(20, 24, 28, 0.16)) 100%)',
+    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--soft-warm) 76%, transparent) 100%)'
+  },
+  {
+    title: 'Hver kveld',
+    description: 'Nyt uteplassen når det kjølner',
+    Icon: Sparkles,
+    iconColor:
+      'color-mix(in oklch, var(--maritime-darkest) 74%, var(--overcast))',
+    borderColor: 'color-mix(in oklch, var(--overcast) 42%, transparent)',
+    background:
+      'linear-gradient(180deg, color-mix(in oklch, var(--overcast) 78%, rgba(255, 255, 255, 0.28)) 0%, color-mix(in oklch, var(--overcast) 46%, rgba(18, 24, 29, 0.14)) 100%)',
+    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--overcast) 82%, transparent) 100%)'
+  }
+] as const
 
 export function TerraceHeroSection() {
   return (
@@ -12,13 +47,15 @@ export function TerraceHeroSection() {
         <div
           className='absolute left-1/3 top-1/4 h-[600px] w-[600px] blur-3xl'
           style={{
-            background: 'radial-gradient(circle, #0ea5e9 0%, transparent 70%)'
+            background:
+              'radial-gradient(circle, color-mix(in oklch, var(--ancient-water) 70%, transparent) 0%, transparent 70%)'
           }}
         />
         <div
           className='absolute right-1/3 bottom-1/4 h-[600px] w-[600px] blur-3xl'
           style={{
-            background: 'radial-gradient(circle, #06b6d4 0%, transparent 70%)'
+            background:
+              'radial-gradient(circle, color-mix(in oklch, var(--soft-warm) 70%, transparent) 0%, transparent 70%)'
           }}
         />
       </div>
@@ -27,27 +64,26 @@ export function TerraceHeroSection() {
 
       <div className='container relative mx-auto px-4 py-16'>
         <div className='max-w-3xl'>
-          <AnimatedBlock
-            className='will-animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-button/30 bg-button/10 px-4 py-2'
-            delay='0.1s'
-          >
-            <Sparkles className='h-4 w-4 text-button' />
-            <span className='text-sm font-medium text-button'>
-              For terrassen
-            </span>
+          <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s'>
+            <InspirationHeroBreadcrumb
+              label='Terrassen'
+              color='var(--mountain-view)'
+              textColor='var(--cloud-dancer)'
+              icon={Sparkles}
+            />
           </AnimatedBlock>
 
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
-            <h1 className='text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'>
+            <h1 className='text-4xl font-bold tracking-normal sm:text-5xl lg:text-6xl'>
               Din terrasse,{' '}
-              <span className='bg-gradient-to-r from-button to-sky-800 bg-clip-text text-transparent'>
+              <span className='bg-[linear-gradient(90deg,color-mix(in_oklab,var(--mountain-view)_74%,var(--cloud-dancer)_26%),var(--camping-green),color-mix(in_oklab,var(--mountain-view)_74%,var(--cloud-dancer)_26%))] bg-clip-text text-transparent'>
                 hele året
               </span>
             </h1>
           </AnimatedBlock>
 
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.3s'>
-            <p className='mt-6 max-w-2xl text-xl leading-relaxed text-muted-foreground'>
+            <p className='mt-6 max-w-2xl text-xl leading-[1.45] tracking-normal text-overcast'>
               Gjør uteplassen til husets beste rom. Fra den første kaffen i
               vårsolen til de sene sommerkveldene – nyt øyeblikkene lenger.
             </p>
@@ -57,71 +93,69 @@ export function TerraceHeroSection() {
             className='will-animate-fade-in-up mt-8 flex flex-wrap gap-4'
             delay='0.4s'
           >
-            <Button asChild size='lg' className='group'>
-              <Link href={'/produkter' as Route}>
-                Oppdag din Utekos
-                <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
-              </Link>
-            </Button>
-            <Button variant='outline' size='lg' asChild>
-              <Link href='#bruksomrader'>Se bruksområdene</Link>
-            </Button>
+            <InspirationHeroActions
+              primaryLabel='Oppdag din Utekos'
+              secondaryLabel='Se bruksområdene'
+            />
           </AnimatedBlock>
 
           <AnimatedBlock
             className='will-animate-fade-in-up mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3'
             delay='0.5s'
           >
-            <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all hover:border-neutral-700'>
-              <div
-                className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
-                style={{
-                  background:
-                    'radial-gradient(120% 120% at 50% 0%, transparent 30%, #22c55e 100%)'
-                }}
-              />
-              <div className='relative'>
-                <Coffee className='mb-3 h-8 w-8 text-rose-500' />
-                <p className='mb-1 font-semibold text-foreground'>Tidlig vår</p>
-                <p className='text-sm text-muted-foreground'>
-                  Nyt morgenkafffen uker tidligere
-                </p>
-              </div>
-            </div>
-
-            <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all hover:border-neutral-700'>
-              <div
-                className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
-                style={{
-                  background:
-                    'radial-gradient(120% 120% at 50% 0%, transparent 30%, #f59e0b 100%)'
-                }}
-              />
-              <div className='relative'>
-                <Leaf className='mb-3 h-8 w-8 text-amber-400' />
-                <p className='mb-1 font-semibold text-foreground'>Sen høst</p>
-                <p className='text-sm text-muted-foreground'>
-                  Forleng sesongen utover september
-                </p>
-              </div>
-            </div>
-
-            <div className='group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all hover:border-neutral-700'>
-              <div
-                className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
-                style={{
-                  background:
-                    'radial-gradient(120% 120% at 50% 0%, transparent 30%, #06b6d4 100%)'
-                }}
-              />
-              <div className='relative'>
-                <Sparkles className='mb-3 h-8 w-8 text-button' />
-                <p className='mb-1 font-semibold text-foreground'>Hver kveld</p>
-                <p className='text-sm text-muted-foreground'>
-                  Nyt uteplassen når det kjølner
-                </p>
-              </div>
-            </div>
+            {terraceFeatureCards.map(
+              ({
+                title,
+                description,
+                Icon,
+                iconColor,
+                borderColor,
+                background,
+                glow
+              }) => (
+                <div
+                  key={title}
+                  className='group relative overflow-hidden rounded-[1.35rem] border p-4 transition-all duration-300 hover:-translate-y-0.5'
+                  style={{
+                    borderColor,
+                    background,
+                    boxShadow: '0 24px 48px -38px rgba(9, 15, 22, 0.42)'
+                  }}
+                >
+                  <div
+                    className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
+                    style={{ background: glow }}
+                  />
+                  <div className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.26)_0%,rgba(255,255,255,0.08)_34%,transparent_100%)] opacity-90' />
+                  <div className='relative'>
+                    <div className='mb-2 flex items-center gap-3'>
+                      <Icon
+                        className='h-8 w-8 shrink-0'
+                        style={{ color: iconColor }}
+                      />
+                      <p
+                        className={
+                          title === 'Sen høst' ?
+                            'font-semibold text-cloud-dancer'
+                          : 'font-semibold text-maritime-darkest'
+                        }
+                      >
+                        {title}
+                      </p>
+                    </div>
+                    <p
+                      className={
+                        title === 'Sen høst' ?
+                          'text-sm text-cloud-dancer/88'
+                        : 'text-sm text-maritime-darkest/78'
+                      }
+                    >
+                      {description}
+                    </p>
+                  </div>
+                </div>
+              )
+            )}
           </AnimatedBlock>
         </div>
       </div>

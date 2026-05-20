@@ -41,13 +41,13 @@ export function MikrofiberContentColumn() {
       <div
         ref={badgeRef}
         className={cn(
-          'will-animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-900/20 px-4 py-2',
+          'will-animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-cloud-dancer/10 bg-maritime-blue px-4 py-2',
           badgeInView && 'is-in-view'
         )}
         style={{ '--transition-delay': '0.3s' } as React.CSSProperties}
       >
-        <Feather className='h-4 w-4 text-orange-400' />
-        <span className='text-sm font-semibold text-orange-400'>
+        <Feather className='size-4 text-cloud-dancer' />
+        <span className='text-sm font-medium text-cloud-dancer'>
           Ultralett allsidighet
         </span>
       </div>

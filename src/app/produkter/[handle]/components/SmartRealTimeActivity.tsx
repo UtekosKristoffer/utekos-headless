@@ -38,21 +38,25 @@ export function SmartRealTimeActivity({
       isFirstRenderRef.current = false
       return
     }
-    setIsEntering(true)
-
+    let raf2: number | undefined
     const raf1 = requestAnimationFrame(() => {
-      const raf2 = requestAnimationFrame(() => setIsEntering(false))
-      return () => cancelAnimationFrame(raf2)
+      setIsEntering(true)
+      raf2 = requestAnimationFrame(() => {
+        setIsEntering(false)
+      })
     })
-    return () => cancelAnimationFrame(raf1)
+    return () => {
+      cancelAnimationFrame(raf1)
+      if (raf2) cancelAnimationFrame(raf2)
+    }
   }, [currentViewerCount])
 
   return (
     <div
       aria-live='polite'
-      className='mt-4 flex items-center gap-2 text-sm text-button'
+      className='mt-4 flex items-center gap-2 text-sm text-maritime-blue/70'
     >
-      <EyeIcon className='h-4 w-4 text-neutral-400' />
+      <EyeIcon className='h-4 w-4 text-dusted-peri' />
       <span
         // Transition på transform+opacity (GPU-vennlig)
         className={[

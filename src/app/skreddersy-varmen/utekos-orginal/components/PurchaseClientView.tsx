@@ -34,26 +34,27 @@ import {
   AccordionItem,
   AccordionTrigger
 } from '@/components/ui/accordion'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import type { ModelKey } from 'types/product/ProductTypes'
 import type { PurchaseClientViewProps } from 'types/product/PageProps'
 
 const SIZE_GUIDANCE: Record<string, { height: string; tips: string[] }> = {
-  Liten: {
+  'Liten': {
     height: 'Opptil 170 cm',
     tips: [
       'Er du lavere enn 165 cm får du en romslig og lun følelse.',
       'Er du litt høyere får du en nettere silhuett uten overflødig volum.'
     ]
   },
-  Middels: {
+  'Middels': {
     height: '170 – 180 cm',
     tips: [
       'Er du lavere enn 170 cm får du en romslig passform.',
       'Ligger du i øvre sjiktet (mot 180 cm) får du en mer kroppsnær passform.'
     ]
   },
-  Stor: {
+  'Stor': {
     height: '180 – 195 cm',
     tips: [
       'Perfekt for deg over 180 cm, eller for deg som er lavere og ønsker romslighet.',
@@ -81,24 +82,23 @@ export function PurchaseClientView({
   handleAddToCart,
   isPending,
   currentConfig,
-  currentColor,
   isTechDownOffer
 }: PurchaseClientViewProps) {
   const monthlyPrice = Math.round(currentConfig.price / 12)
   const guidance = SIZE_GUIDANCE[selectedSize]
 
   return (
-    <section className='relative left-[calc(-50vw+50%)] w-screen overflow-hidden bg-[#F9F8F6] text-[#2C2420] lg:flex lg:min-h-screen'>
-      <div className='relative flex w-full flex-col items-center justify-center bg-[#EAE8E3] p-8 lg:sticky lg:top-0 lg:h-screen lg:w-1/2'>
+    <section className='relative left-[calc(-50vw+50%)] w-screen overflow-clip text-cloud-dancer lg:flex lg:min-h-screen'>
+      <div className='relative flex w-full flex-col items-center justify-center bg-maritime-darkest p-8 lg:sticky lg:top-0 lg:h-screen lg:w-1/2'>
         <div
           key={`badge-${selectedModel}`}
-          className='absolute left-4 top-4 z-20 flex animate-in items-center gap-1.5 rounded-sm border border-[#2C2420]/10 bg-white/90 px-2.5 py-1 shadow-sm backdrop-blur-md fade-in slide-in-from-left-2 duration-500'
+          className='absolute left-4 top-4 z-20 flex animate-in items-center gap-1.5 rounded-sm border border-maritime-darkest/10 bg-cloud-dancer/90 px-2.5 py-1 shadow-sm backdrop-blur-md fade-in slide-in-from-left-2 duration-500'
         >
           <span className='relative flex h-1.5 w-1.5'>
-            <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-[#E07A5F] opacity-60' />
-            <span className='relative inline-flex h-1.5 w-1.5 rounded-full bg-[#E07A5F]' />
+            <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-ember opacity-60' />
+            <span className='relative inline-flex h-1.5 w-1.5 rounded-full bg-ember' />
           </span>
-          <span className='text-[10px] font-bold uppercase tracking-wider text-[#2C2420]'>
+          <span className='text-[10px] font-bold uppercase tracking-wider text-maritime-darkest'>
             {currentConfig.badge}
           </span>
         </div>
@@ -114,7 +114,7 @@ export function PurchaseClientView({
                 key={src}
                 className='relative h-[50vh] pl-0 lg:h-[70vh]'
               >
-                <div className='relative h-full w-full overflow-hidden rounded-3xl bg-gradient-to-b from-white/70 to-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-[#2C2420]/10'>
+                <div className='relative h-full w-full overflow-hidden rounded-3xl bg-gradient-to-b from-white/70 to-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-maritime-darkest/10'>
                   <Image
                     src={src}
                     alt={`${currentConfig.title} – bilde ${i + 1}`}
@@ -131,52 +131,50 @@ export function PurchaseClientView({
             <>
               <CarouselPrevious
                 aria-label='Forrige bilde'
-                className='left-2 size-10 border-[#2C2420]/15 bg-white/90 text-[#2C2420] shadow-md backdrop-blur-md hover:bg-white hover:text-[#E07A5F] md:left-4 md:size-11'
+                className='left-2 size-10 border-maritime-darkest/15 bg-cloud-dancer/90 text-maritime-darkest shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-ember md:left-4 md:size-11'
               />
               <CarouselNext
                 aria-label='Neste bilde'
-                className='right-2 size-10 border-[#2C2420]/15 bg-white/90 text-[#2C2420] shadow-md backdrop-blur-md hover:bg-white hover:text-[#E07A5F] md:right-4 md:size-11'
+                className='right-2 size-10 border-maritime-darkest/15 bg-cloud-dancer/90 text-maritime-darkest shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-ember md:right-4 md:size-11'
               />
             </>
           )}
         </Carousel>
         <p
           key={`caption-${selectedModel}`}
-          className='mt-8 hidden animate-in font-serif text-base italic text-[#2C2420] fade-in duration-700 lg:block'
+          className='mt-8 hidden animate-in font-google-sans text-base italic text-maritime-darkest fade-in duration-700 lg:block'
         >
           Modell vist: {currentConfig.title}
         </p>
       </div>
 
-      <div className='flex w-full flex-col bg-white lg:w-1/2'>
+      <div className='flex w-full flex-col bg-overcast lg:h-screen lg:w-1/2'>
         <div className='flex-1 p-6 md:p-12 lg:overflow-y-auto lg:p-24'>
           <AnimatedBlock
             className='mb-12 will-animate-fade-in-up'
             delay='0s'
             threshold={0.15}
           >
-            <div
-              role='tablist'
-              aria-label='Velg modell'
-              className='flex w-full flex-wrap gap-2 rounded-lg bg-[#F4F1EA] p-1.5 md:w-fit'
+            <Tabs
+              value={selectedModel}
+              onValueChange={v => setSelectedModel(v as ModelKey)}
+              className='w-full md:w-fit'
             >
-              {(Object.keys(PRODUCT_VARIANTS) as ModelKey[]).map(key => (
-                <button
-                  key={key}
-                  role='tab'
-                  aria-selected={selectedModel === key}
-                  onClick={() => setSelectedModel(key)}
-                  className={cn(
-                    'flex-1 whitespace-nowrap rounded-md px-6 py-3 text-base font-medium transition-all duration-300 md:flex-none',
-                    selectedModel === key ?
-                      'scale-100 bg-white text-[#2C2420] shadow-md ring-1 ring-black/5'
-                    : 'text-[#2C2420] hover:scale-[1.02] hover:bg-white/60'
-                  )}
-                >
-                  {PRODUCT_VARIANTS[key].title.replace('Utekos ', '')}
-                </button>
-              ))}
-            </div>
+              <TabsList
+                aria-label='Velg modell'
+                className='flex h-auto w-full flex-wrap gap-2 rounded-lg bg-dusted-peri p-1.5 md:w-fit'
+              >
+                {(Object.keys(PRODUCT_VARIANTS) as ModelKey[]).map(key => (
+                  <TabsTrigger
+                    key={key}
+                    value={key}
+                    className='h-auto flex-1 whitespace-nowrap rounded-md px-6 py-3 text-base font-medium transition-all duration-300 data-[state=active]:bg-ancient-water data-[state=active]:text-maritime-darkest data-[state=active]:shadow-md data-[state=active]:ring-1 data-[state=active]:ring-black/5 data-[state=inactive]:text-maritime-darkest data-[state=inactive]:hover:scale-[1.02] data-[state=inactive]:hover:bg-cloud-dancer/60 md:flex-none'
+                  >
+                    {PRODUCT_VARIANTS[key].title.replace('Utekos ', '')}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
           </AnimatedBlock>
 
           <div key={`hero-${selectedModel}`} className='mb-12'>
@@ -185,7 +183,7 @@ export function PurchaseClientView({
               delay='0.05s'
               threshold={0.15}
             >
-              <h2 className='mb-4 font-serif text-4xl leading-[1.1] tracking-tight text-[#2C2420] lg:text-7xl'>
+              <h2 className='mb-4 font-google-sans text-4xl font-semibold leading-[1.1] tracking-tight text-maritime-darkest lg:text-7xl'>
                 {currentConfig.title}
               </h2>
             </AnimatedBlock>
@@ -194,7 +192,7 @@ export function PurchaseClientView({
               delay='0.1s'
               threshold={0.15}
             >
-              <p className='mb-8 text-xl font-light text-[#2C2420]'>
+              <p className='mb-8 text-xl font-light text-maritime-darkest'>
                 {currentConfig.subtitle}
               </p>
             </AnimatedBlock>
@@ -204,14 +202,14 @@ export function PurchaseClientView({
               threshold={0.15}
             >
               <div className='flex flex-wrap items-center gap-4 lg:gap-8'>
-                <span className='text-3xl font-medium text-[#2C2420] lg:text-4xl'>
+                <span className='text-3xl font-medium text-maritime-darkest lg:text-4xl'>
                   {currentConfig.price},-
                 </span>
-                <div className='flex items-center gap-2 rounded-sm border border-[#FFB3C7]/40 bg-[#FFB3C7]/10 px-4 py-2'>
-                  <span className='text-sm font-medium text-[#2C2420]'>
+                <div className='flex items-center gap-2 rounded-sm bg-klarna-pink px-4 py-2'>
+                  <span className='text-sm font-medium text-maritime-darkest'>
                     Eller {monthlyPrice},- /mnd
                   </span>
-                  <KlarnaLogo className='h-5 w-auto' />
+                  <KlarnaLogo className='h-6 w-fit p-1 border border-maritime-darkest/30 rounded-sm' />
                 </div>
               </div>
             </AnimatedBlock>
@@ -221,13 +219,15 @@ export function PurchaseClientView({
                 delay='0.2s'
                 threshold={0.15}
               >
-                <div className='mt-8 flex items-center gap-4 rounded-lg border-2 border-emerald-600/20 bg-gradient-to-br from-emerald-50/5 to-transparent p-4 shadow-sm'>
-                  <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-600/10'>
-                    <Gift className='h-5 w-5 text-emerald-500' />
+                <div className='mt-8 flex items-center gap-4 rounded-lg border-2 border-mountain-view/20 bg-gradient-to-br from-mountain-view/5 to-transparent p-4 shadow-sm'>
+                  <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-mountain-view/10'>
+                    <Gift className='h-5 w-5 text-mountain-view' />
                   </div>
                   <div>
-                    <h3 className='font-semibold text-emerald-800'>Vårtilbud</h3>
-                    <p className='text-sm text-emerald-700/80'>
+                    <h3 className='font-semibold text-mountain-view'>
+                      Vårtilbud
+                    </h3>
+                    <p className='text-sm text-mountain-view'>
                       10% rabatt + Gratis Buff™ (verdi 249,-) legges til i
                       kurven.
                     </p>
@@ -247,7 +247,7 @@ export function PurchaseClientView({
               delay='0.05s'
               threshold={0.15}
             >
-              <p className='text-base leading-relaxed text-[#2C2420]/85 md:text-lg'>
+              <p className='text-base leading-[1.45] text-maritime-darkest/85 md:text-lg'>
                 {currentConfig.description}
               </p>
             </AnimatedBlock>
@@ -257,15 +257,15 @@ export function PurchaseClientView({
               delay='0.1s'
               threshold={0.15}
             >
-              <div className='-mx-1 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-[#2C2420]/75'>
-                {currentConfig.features.map((feature, i) => (
+              <div className='-mx-1 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-maritime-darkest/75'>
+                {currentConfig.features.map(feature => (
                   <span
                     key={feature}
                     className='inline-flex items-center gap-1.5 px-1 font-medium'
                   >
                     <span
                       aria-hidden
-                      className='h-1 w-1 shrink-0 rounded-full bg-[#E07A5F]'
+                      className='h-1 w-1 shrink-0 rounded-full bg-ember'
                     />
                     <span className='whitespace-nowrap'>{feature}</span>
                   </span>
@@ -278,13 +278,14 @@ export function PurchaseClientView({
               delay='0.15s'
               threshold={0.1}
             >
-              <div className='rounded-md border border-[#2C2420]/10 bg-[#F9F8F6] px-4'>
-                <div className='flex items-center justify-between border-b border-[#2C2420]/10 py-3'>
-                  <span className='text-[11px] font-bold uppercase tracking-wider text-[#2C2420]/60'>
-                    Hva gjør {currentConfig.title.replace('Utekos ', '')} spesiell
+              <div className='rounded-md border border-maritime-darkest/10 bg-very-white px-4'>
+                <div className='flex items-center justify-between border-b border-maritime-darkest/10 py-3'>
+                  <span className='text-[11px] font-bold uppercase tracking-wider text-maritime-darkest/60'>
+                    Hva gjør {currentConfig.title.replace('Utekos ', '')}{' '}
+                    spesiell
                   </span>
                   <Sparkles
-                    className='h-3.5 w-3.5 text-[#E07A5F]'
+                    className='size-4 text-maritime-darkest'
                     aria-hidden
                   />
                 </div>
@@ -298,12 +299,12 @@ export function PurchaseClientView({
                     <AccordionItem
                       key={highlight.title}
                       value={highlight.title}
-                      className='border-b border-[#2C2420]/10 last:border-b-0'
+                      className='border-b border-maritime-darkest/10 last:border-b-0'
                     >
-                      <AccordionTrigger className='py-3 text-left text-sm font-semibold text-[#2C2420] hover:no-underline hover:text-[#E07A5F]'>
+                      <AccordionTrigger className='py-3 text-left text-sm font-semibold text-maritime-darkest hover:no-underline hover:text-ember'>
                         {highlight.title}
                       </AccordionTrigger>
-                      <AccordionContent className='pb-3 pt-0 text-sm leading-relaxed text-[#2C2420]/70'>
+                      <AccordionContent className='pb-3 pt-0 text-sm leading-[1.45] text-maritime-darkest/70'>
                         {highlight.body}
                       </AccordionContent>
                     </AccordionItem>
@@ -313,17 +314,17 @@ export function PurchaseClientView({
             </AnimatedBlock>
           </div>
 
-          <div className='mb-12 h-px w-full bg-[#2C2420]/10' />
+          <div className='mb-12 h-px w-full bg-maritime-blue' />
           <div className='mb-12 space-y-12'>
             <div>
               <div className='mb-4 flex items-center justify-between'>
-                <span className='text-sm font-bold uppercase tracking-widest text-[#2C2420]'>
+                <span className='text-sm font-bold tracking-widest text-maritime-darkest'>
                   Størrelse
                 </span>
                 <Link
                   href='/handlehjelp/storrelsesguide'
                   data-track='SizeGuideSkreddersyVarmen'
-                  className='text-sm text-[#2C2420] underline transition-colors hover:text-[#E07A5F]'
+                  className='text-sm text-maritime-darkest underline transition-colors hover:text-maritime-blue'
                 >
                   Se størrelsesguide
                 </Link>
@@ -343,20 +344,20 @@ export function PurchaseClientView({
                     className={cn(
                       'group relative overflow-hidden rounded-sm border px-3 py-5 text-sm font-medium transition-all md:px-4 md:text-base',
                       selectedSize === size ?
-                        'border-[#2C2420] bg-[#2C2420] text-white shadow-lg'
-                      : 'border-[#2C2420]/20 bg-white text-[#2C2420] hover:border-[#2C2420]'
+                        'border-maritime-darkest bg-maritime-darkest text-white shadow-lg'
+                      : 'border-maritime-darkest/20 bg-cloud-dancer text-maritime-darkest hover:border-maritime-darkest'
                     )}
                   >
                     {size}
                     {selectedSize === size && (
-                      <div className='absolute right-0 top-0 -mr-1.5 -mt-1.5 h-3 w-3 rotate-45 bg-[#E07A5F]' />
+                      <div className='absolute right-0 top-0 -mr-1.5 -mt-1.5 size-3 rotate-45 bg-dusted-peri' />
                     )}
                   </button>
                 ))}
               </div>
 
               <div className='mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs'>
-                <span className='uppercase tracking-wider text-[#2C2420]/55'>
+                <span className='uppercase tracking-wider text-maritime-darkest/55'>
                   Farge
                 </span>
                 {currentConfig.colors.map((colorObj, index) => {
@@ -378,16 +379,16 @@ export function PurchaseClientView({
                     >
                       <span
                         className={cn(
-                          'h-3.5 w-3.5 rounded-full border border-black/15',
+                          'size-4 rounded-full border border-black/15',
                           isActive
-                          && isInteractive
-                          && 'ring-1 ring-[#E07A5F] ring-offset-1 ring-offset-white',
+                            && isInteractive
+                            && 'ring-1 ring-dusted-peri ring-offset-1 ring-offset-white',
                           !isActive && isInteractive && 'opacity-60'
                         )}
                         style={{ backgroundColor: colorObj.hex }}
                       />
                       {isActive && (
-                        <span className='font-medium text-[#2C2420]'>
+                        <span className='font-medium text-cloud-dancer'>
                           {colorObj.name}
                         </span>
                       )}
@@ -401,10 +402,10 @@ export function PurchaseClientView({
                   key={selectedSize}
                   className='mt-6 animate-in fade-in slide-in-from-top-2 duration-300'
                 >
-                  <div className='relative overflow-hidden rounded-md bg-[#F4F1EA] p-5'>
-                    <div className='mb-3 flex items-center gap-2 border-b border-[#2C2420]/10 pb-3'>
-                      <Ruler className='h-4 w-4 text-[#E07A5F]' />
-                      <span className='text-sm font-bold uppercase tracking-wider text-[#2C2420]'>
+                  <div className='relative overflow-hidden rounded-md bg-maritime-darkest p-5'>
+                    <div className='mb-3 flex items-center gap-2 border-b border-maritime-darkest pb-3'>
+                      <Ruler className='h-4 w-4 text-dusted-peri' />
+                      <span className='text-sm font-bold tracking-wider text-cloud-dancer'>
                         Passer best for deg som er {guidance.height}
                       </span>
                     </div>
@@ -412,9 +413,9 @@ export function PurchaseClientView({
                       {guidance.tips.map((tip, i) => (
                         <li
                           key={i}
-                          className='flex items-start gap-2.5 text-sm leading-relaxed text-[#2C2420]/80'
+                          className='flex items-start gap-2.5 text-sm leading-[1.45] text-cloud-dancer'
                         >
-                          <div className='mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#E07A5F]' />
+                          <div className='mt-1.5 size-1 shrink-0 rounded-full bg-dusted-peri' />
                           <span>{tip}</span>
                         </li>
                       ))}
@@ -426,12 +427,12 @@ export function PurchaseClientView({
           </div>
         </div>
 
-        <div className='z-30 mx-auto border-t border-[#2C2420]/10 bg-white p-6 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] md:p-12 lg:p-20'>
+        <div className='z-30 mx-auto border-t border-maritime-darkest/10 bg-cloud-dancer p-6 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] md:p-12 lg:p-20'>
           <div className='mb-8 flex h-16 gap-4'>
-            <div className='mx-auto flex h-full items-center rounded-sm border border-[#2C2420]/20 bg-white'>
+            <div className='mx-auto flex h-full items-center rounded-sm border border-maritime-darkest/20 bg-cloud-dancer'>
               <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className='flex h-full w-16 items-center justify-center transition-colors hover:bg-[#2C2420]/5'
+                className='flex h-full w-16 items-center justify-center transition-colors hover:bg-maritime-darkest/5'
                 aria-label='Reduser antall'
               >
                 <Minus size={20} />
@@ -441,7 +442,7 @@ export function PurchaseClientView({
               </span>
               <button
                 onClick={() => setQuantity(quantity + 1)}
-                className='flex h-full w-16 items-center justify-center transition-colors hover:bg-[#2C2420]/5'
+                className='flex h-full w-16 items-center justify-center transition-colors hover:bg-maritime-darkest/5'
                 aria-label='Øk antall'
               >
                 <Plus size={20} />
@@ -452,22 +453,22 @@ export function PurchaseClientView({
               data-track='🔔🛒 AddToCartSkreddersyVarmen 🛒🔔'
               disabled={isPending}
               className={cn(
-                'flex h-full flex-1 flex-row items-center justify-center gap-3 rounded-sm bg-[#E07A5F] px-2 text-white shadow-xl transition-all active:scale-[0.98] hover:bg-[#D06A4F]',
+                'flex h-full flex-1 flex-row items-center justify-center gap-3 rounded-sm bg-primary-button px-2 text-cloud-dancer shadow-xl transition-all active:scale-[0.98] hover:bg-ember-dark',
                 isPending && 'cursor-not-allowed opacity-80'
               )}
             >
               {isPending ?
                 <>
                   <Loader2 className='h-6 w-6 animate-spin' />
-                  <span className='whitespace-nowrap text-lg font-bold uppercase tracking-wider'>
+                  <span className='whitespace-nowrap text-lg font-bold tracking-wider'>
                     Legger til...
                   </span>
                 </>
               : <>
-                  <span className='whitespace-nowrap text-lg font-bold uppercase tracking-wider md:text-xl'>
+                  <span className='whitespace-nowrap text-lg font-bold tracking-wider md:text-xl'>
                     Legg i kurv
                   </span>
-                  <div className='hidden h-8 w-px bg-white/30 md:block' />
+                  <div className='hidden h-8 w-px bg-cloud-dancer md:block' />
                   <span className='hidden whitespace-nowrap text-xl font-normal opacity-100 md:inline'>
                     {currentConfig.price * quantity},-
                   </span>
@@ -487,18 +488,15 @@ export function PurchaseClientView({
               delay='0s'
               threshold={0.1}
             >
-              <div className='rounded-lg border border-[#2C2420]/10 bg-[#F9F8F6]'>
-                <div className='grid grid-cols-1 divide-y divide-[#2C2420]/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0'>
+              <div className='rounded-lg border border-maritime-darkest/10 bg-very-white'>
+                <div className='grid grid-cols-1 divide-y divide-maritime-darkest/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0'>
                   <div className='flex items-start gap-3 p-4'>
-                    <Truck
-                      size={22}
-                      className='mt-0.5 shrink-0 text-[#E07A5F]'
-                    />
+                    <Truck size={22} className='mt-0.5 shrink-0 text-ember' />
                     <div className='min-w-0'>
-                      <p className='text-sm font-semibold text-[#2C2420]'>
+                      <p className='text-sm font-semibold text-maritime-darkest'>
                         Rask levering 2–5 dager
                       </p>
-                      <p className='mt-0.5 text-xs leading-snug text-[#2C2420]/65'>
+                      <p className='mt-0.5 text-xs leading-snug text-maritime-darkest/65'>
                         Sendes samme dag (ikke søndag). Fri frakt fra 999,-.
                       </p>
                     </div>
@@ -506,39 +504,36 @@ export function PurchaseClientView({
                   <div className='flex items-start gap-3 p-4'>
                     <RefreshCcw
                       size={22}
-                      className='mt-0.5 shrink-0 text-[#E07A5F]'
+                      className='mt-0.5 shrink-0 text-ember'
                     />
                     <div className='min-w-0'>
-                      <p className='text-sm font-semibold text-[#2C2420]'>
+                      <p className='text-sm font-semibold text-maritime-darkest'>
                         14 dagers åpent kjøp
                       </p>
-                      <p className='mt-0.5 text-xs leading-snug text-[#2C2420]/65'>
+                      <p className='mt-0.5 text-xs leading-snug text-maritime-darkest/65'>
                         Send tilbake uten spørsmål.
                       </p>
                     </div>
                   </div>
                   <div className='flex items-start gap-3 p-4'>
-                    <Store
-                      size={22}
-                      className='mt-0.5 shrink-0 text-[#E07A5F]'
-                    />
+                    <Store size={22} className='mt-0.5 shrink-0 text-ember' />
                     <div className='min-w-0'>
-                      <p className='text-sm font-semibold text-[#2C2420]'>
+                      <p className='text-sm font-semibold text-maritime-darkest'>
                         På lager i Bergen
                       </p>
-                      <p className='mt-0.5 text-xs leading-snug text-[#2C2420]/65'>
+                      <p className='mt-0.5 text-xs leading-snug text-maritime-darkest/65'>
                         Også via Intersport. Norsk garanti.
                       </p>
                     </div>
                   </div>
                 </div>
-                <div className='border-t border-[#2C2420]/10 px-4 py-2.5'>
+                <div className='border-t border-maritime-darkest/10 px-4 py-2.5'>
                   <Link
                     href='/frakt-og-retur'
                     data-track='SkreddersyVarmenFraktOgReturLink'
-                    className='group inline-flex items-center gap-1.5 text-xs font-medium text-[#2C2420]/75 transition-colors hover:text-[#E07A5F]'
+                    className='group inline-flex items-center gap-1.5 text-xs font-medium text-maritime-darkest/75 transition-colors hover:text-ember'
                   >
-                    Se all frakt- og retur-info
+                    Alt om frakt og retur
                     <ArrowRight
                       size={12}
                       className='transition-transform group-hover:translate-x-0.5'

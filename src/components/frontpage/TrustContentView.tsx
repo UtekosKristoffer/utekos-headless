@@ -1,12 +1,17 @@
-import { forwardRef } from 'react'
+import { forwardRef, type ComponentType, type RefObject } from 'react'
+
+interface InfoCardsComponentProps {
+  card1Ref: RefObject<HTMLDivElement | null>
+  card2Ref: RefObject<HTMLDivElement | null>
+}
 
 interface TrustContentViewProps {
-  headingRef: React.RefObject<HTMLHeadingElement | null>
-  textRef: React.RefObject<HTMLParagraphElement | null>
-  card1Ref: React.RefObject<HTMLDivElement | null>
-  card2Ref: React.RefObject<HTMLDivElement | null>
+  headingRef: RefObject<HTMLHeadingElement | null>
+  textRef: RefObject<HTMLParagraphElement | null>
+  card1Ref: RefObject<HTMLDivElement | null>
+  card2Ref: RefObject<HTMLDivElement | null>
   // Vi importerer InfoCardStackView her for å bruke den inni
-  InfoCardsComponent: React.ComponentType<any>
+  InfoCardsComponent: ComponentType<InfoCardsComponentProps>
 }
 
 export const TrustContentView = forwardRef<
@@ -16,7 +21,7 @@ export const TrustContentView = forwardRef<
   return (
     <div
       ref={ref}
-      className='flex flex-col justify-between bg-sidebar-foreground p-8 lg:p-12'
+      className='flex flex-col justify-between bg-background p-8 lg:p-12'
     >
       <div>
         {/* Maskert Overskrift for Reveal Effekt */}
@@ -34,7 +39,7 @@ export const TrustContentView = forwardRef<
 
         <p
           ref={textRef}
-          className='mb-2 mt-4 text-lg text-muted-foreground opacity-0'
+          className='mb-2 mt-4 text-lg text-cloud-dancer opacity-0'
         >
           Fra du besøker siden vår til du nyter kveldssolen i ditt Utekos-plagg
           – vi er dedikerte til å levere en trygg og førsteklasses opplevelse i

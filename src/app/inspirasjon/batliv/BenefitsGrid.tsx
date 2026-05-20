@@ -6,19 +6,19 @@ const benefitsData = [
     icon: Thermometer,
     title: 'Øyeblikkelig varme',
     description: 'Effektiv beskyttelse når temperaturen plutselig synker.',
-    color: 'text-orange-500'
+    color: 'text-dusted-peri'
   },
   {
     icon: Wind,
     title: 'Vindtett komfort',
     description: 'Designet for å stenge den kjølige sjøbrisen og trekken ute.',
-    color: 'text-cyan-400'
+    color: 'text-ancient-water'
   },
   {
     icon: Sparkles,
     title: 'Kompakt og praktisk',
     description: 'Tar minimalt med plass og er enkel å stue vekk om bord.',
-    color: 'text-yellow-400'
+    color: 'text-primary-button'
   },
   {
     icon: Users,
@@ -33,10 +33,10 @@ export function BenefitsGrid() {
     <section className='py-24'>
       <div className='container mx-auto px-4'>
         <div className='boat-benefits-header text-center mb-16'>
-          <h2 className='text-3xl font-bold tracking-tight sm:text-4xl'>
+          <h2 className='text-3xl font-bold tracking-normal sm:text-4xl'>
             Skapt for livet på sjøen
           </h2>
-          <p className='mt-4 text-lg text-muted-foreground max-w-2xl mx-auto'>
+          <p className='mt-4 text-lg text-overcast max-w-2xl mx-auto'>
             Vi vet at været kan snu fort. Derfor er Utekos designet for å gi deg
             øyeblikkelig og pålitelig varme.
           </p>
@@ -50,11 +50,11 @@ export function BenefitsGrid() {
                 className='boat-benefits-card text-center'
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
-                <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-sidebar-foreground border border-neutral-800'>
+                <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-maritime-blue/24 border border-cloud-dancer/12'>
                   <Icon className={`h-8 w-8 ${benefit.color}`} />
                 </div>
                 <h3 className='text-lg font-semibold mb-2'>{benefit.title}</h3>
-                <p className='text-sm text-muted-foreground'>
+                <p className='text-sm text-overcast'>
                   {benefit.description}
                 </p>
               </div>

@@ -100,7 +100,7 @@ export function MobileMenuPanel({
 
       <SheetContent
         side='left'
-        className='w-full max-w-sm p-0 md:hidden border-slate-800/70 bg-slate-950/95 backdrop-blur-xl'
+        className='w-full max-w-sm p-0 md:hidden border-cloud-dancer bg-maritime-darkest backdrop-blur-xl'
       >
         <div className='pointer-events-none absolute inset-0 -z-10'>
           <div className='absolute inset-0 bg-gradient-to-b from-slate-800/35 via-slate-900/75 to-slate-950' />

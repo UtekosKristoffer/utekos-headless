@@ -1,43 +1,68 @@
 import { cacheLife, cacheTag } from 'next/cache'
-import type { FAQPage, WithContext } from 'schema-dts'
+import { shippingReturnsFaqItems } from '@/app/frakt-og-retur/data/shippingReturnsContent'
+import type { BreadcrumbList, FAQPage, Graph, WebPage } from 'schema-dts'
+
+const SITE_URL = 'https://utekos.no'
+const PAGE_URL = `${SITE_URL}/frakt-og-retur`
+const ORGANIZATION_ID = `${SITE_URL}/#organization`
+const WEBSITE_ID = `${SITE_URL}/#website`
 
 export async function ShippingAndReturnsPageJsonLd() {
   'use cache'
   cacheLife('max')
   cacheTag('shipping-returns-jsonld')
 
-  const jsonLd: WithContext<FAQPage> = {
-    '@context': 'https://schema.org',
+  const webpageNode: WebPage = {
+    '@type': 'WebPage',
+    '@id': `${PAGE_URL}#webpage`,
+    'url': PAGE_URL,
+    'name': 'Frakt og retur hos Utekos',
+    'description':
+      'Informasjon om leveringstid, fri frakt over 999 kr, 14 dagers angrerett og returprosessen hos Utekos.',
+    'inLanguage': 'nb-NO',
+    'isPartOf': {
+      '@id': WEBSITE_ID
+    },
+    'about': {
+      '@id': ORGANIZATION_ID
+    }
+  }
+
+  const faqNode: FAQPage = {
     '@type': 'FAQPage',
-    'mainEntity': [
+    '@id': `${PAGE_URL}#faq`,
+    'mainEntity': shippingReturnsFaqItems.map(item => ({
+      '@type': 'Question',
+      'name': item.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': item.answer
+      }
+    }))
+  }
+
+  const breadcrumbNode: BreadcrumbList = {
+    '@type': 'BreadcrumbList',
+    '@id': `${PAGE_URL}#breadcrumb`,
+    'itemListElement': [
       {
-        '@type': 'Question',
-        'name': 'Hva koster frakten hos Utekos?',
-        'acceptedAnswer': {
-          '@type': 'Answer',
-          'text':
-            'Vi tilbyr gratis frakt på alle bestillinger over 999 kr i hele Norge. For bestillinger under dette beløpet vil fraktkostnaden bli spesifisert i kassen.'
-        }
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Forside',
+        'item': SITE_URL
       },
       {
-        '@type': 'Question',
-        'name': 'Hvor lang er angreretten?',
-        'acceptedAnswer': {
-          '@type': 'Answer',
-          'text':
-            'Som kunde hos Utekos har du alltid 14 dagers angrerett, som gjelder fra den dagen du mottar varen din. Dette gir deg trygghet til å se og føle på produktet hjemme.'
-        }
-      },
-      {
-        '@type': 'Question',
-        'name': 'Hvordan returnerer jeg en vare?',
-        'acceptedAnswer': {
-          '@type': 'Answer',
-          'text':
-            'For å returnere en vare, send en e-post til kundeservice@utekos.no med ditt ordrenummer og informasjon om hvilke produkter det gjelder. Deretter pakker du varen forsvarlig og sender den tilbake til oss. Du er selv ansvarlig for returfrakten.'
-        }
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Frakt og retur',
+        'item': PAGE_URL
       }
     ]
+  }
+
+  const jsonLd: Graph = {
+    '@context': 'https://schema.org',
+    '@graph': [webpageNode, faqNode, breadcrumbNode]
   }
 
   return (

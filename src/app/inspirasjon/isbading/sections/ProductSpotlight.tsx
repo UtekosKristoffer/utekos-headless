@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { Check, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -19,27 +19,27 @@ export function ProductSpotlight() {
   return (
     <section
       id='product-spotlight'
-      className='py-24 bg-neutral-900 text-white overflow-hidden'
+      className='overflow-hidden bg-maritime-darkest py-24 text-cloud-dancer'
     >
       <div className='container mx-auto px-4'>
-        <div className='grid lg:grid-cols-2 gap-12 items-center'>
-          <AnimatedBlock className='relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none rounded-2xl overflow-hidden border border-white/10 shadow-2xl'>
+        <div className='grid items-center gap-12 lg:grid-cols-2'>
+          <AnimatedBlock className='relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border border-cloud-dancer/12 shadow-2xl lg:max-w-none'>
             <Image
               src={SherpaCoreImg}
               alt='Utekos Comfyrobe detaljer'
               fill
               className='object-cover'
             />
-            <div className='absolute top-4 right-4 bg-emerald-500 text-black font-bold px-4 py-2 rounded-full text-sm'>
-              Bestselger
+            <div className='absolute top-4 right-4 bg-mountain-view text-cloud-dancer font-bold px-4 py-2 rounded-full text-sm'>
+              Følgesvenn
             </div>
           </AnimatedBlock>
           <div className='space-y-8'>
             <AnimatedBlock delay='0.2s'>
-              <h2 className='text-4xl md:text-5xl font-bold tracking-tight mb-4'>
+              <h2 className='mb-4 text-4xl font-bold leading-[0.95] tracking-normal md:text-5xl'>
                 Comfyrobe™
               </h2>
-              <p className='text-xl text-neutral-400'>
+              <p className='text-xl leading-[1.45] tracking-normal text-overcast'>
                 Ikke bare en kåpe, men ditt viktigste sikkerhetsutstyr etter
                 kuldesjokket.
               </p>
@@ -52,23 +52,26 @@ export function ProductSpotlight() {
                   delay={`${0.3 + i * 0.1}s`}
                   className='flex items-center gap-3'
                 >
-                  <div className='flex-shrink-0 size-6 rounded-full bg-cyan-900/50 flex items-center justify-center border border-cyan-500/30'>
-                    <Check className='size-4 text-cyan-400' />
+                  <div className='flex size-6 flex-shrink-0 items-center justify-center rounded-full border border-cloud-dancer/16 bg-mountain-view'>
+                    <Check className='size-4 text-cloud-dancer' />
                   </div>
-                  <span className='text-lg'>{feature}</span>
+                  <span className='text-lg leading-[1.45] tracking-normal'>
+                    {feature}
+                  </span>
                 </AnimatedBlock>
               ))}
             </ul>
 
             <AnimatedBlock
               delay='0.8s'
-              className='pt-4 flex flex-col sm:flex-row gap-4'
+              className='flex flex-col gap-4 pt-4 sm:flex-row'
             >
-              <Button
-                size='lg'
-                data-track='comfyrobe-icebath-campaign-buy-now'
-                className='bg-white text-black hover:bg-neutral-200 h-14 px-8 text-lg w-full sm:w-auto'
+              <BrandBadge
                 asChild
+                backgroundColor='var(--primary-button)'
+                textColor='var(--maritime-darkest)'
+                data-track='comfyrobe-icebath-campaign-buy-now'
+                className='min-h-14 w-full px-8 py-4 text-lg leading-[1.35] font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 sm:w-auto'
               >
                 <Link
                   href='/kampanje/comfyrobe'
@@ -78,7 +81,7 @@ export function ProductSpotlight() {
                   Kjøp nå
                   <ArrowRight className='ml-2 size-5' />
                 </Link>
-              </Button>
+              </BrandBadge>
             </AnimatedBlock>
           </div>
         </div>

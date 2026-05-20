@@ -3,6 +3,7 @@
 
 import { useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { MapPin } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -15,7 +16,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 export function IntersportSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
   const logoCardRef = useRef<HTMLDivElement>(null)
 
@@ -105,83 +106,80 @@ export function IntersportSection() {
   return (
     <section
       ref={sectionRef}
-      className='w-full bg-neutral-950 py-24 px-4 sm:py-32'
+      className='relative isolate w-full overflow-hidden bg-maritime-darkest px-4 py-24 sm:py-32'
     >
+      <div className='pointer-events-none absolute inset-0 -z-10'>
+        <div className='absolute left-[8%] top-16 h-80 w-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_22%,transparent)_0%,transparent_72%)] blur-3xl' />
+        <div className='absolute bottom-12 right-[10%] h-96 w-96 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_14%,transparent)_0%,transparent_72%)] blur-3xl' />
+      </div>
+
       <div className='container mx-auto max-w-7xl'>
-        {/* Main Card Container */}
         <div
           ref={cardRef}
-          className='relative overflow-hidden rounded-3xl border border-white/5 bg-[#1a1a1a] p-8 md:p-12 shadow-2xl opacity-0' // opacity-0 som fallback
+          className='relative overflow-hidden rounded-[1.75rem] border border-cloud-dancer/10 bg-[color-mix(in_oklab,var(--cloud-dancer)_8%,transparent)] p-8 opacity-0 shadow-2xl shadow-black/35 backdrop-blur-sm md:p-12'
         >
-          {/* Dot Grid Texture */}
-          <div className='absolute inset-0 -z-10 bg-utekos-brown bg-[size:24px_24px] opacity-20' />
+          <div className='absolute inset-0 -z-10 bg-[radial-gradient(circle_at_1px_1px,color-mix(in_oklab,var(--cloud-dancer)_14%,transparent)_1px,transparent_0)] bg-[size:24px_24px] opacity-30' />
 
           <div className='grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20'>
-            {/* INTERACTIVE LOGO CARD (Left Column) */}
             <div
-              className='gsap-logo-card perspective-1000 w-full flex justify-center opacity-0'
+              className='gsap-logo-card perspective-1000 flex w-full justify-center opacity-0'
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
             >
               <div
                 ref={logoCardRef}
-                className='relative flex h-64 w-full max-w-md items-center justify-center rounded-2xl bg-white shadow-2xl transition-transform duration-100 ease-out will-change-transform'
+                className='relative flex h-64 w-full max-w-md items-center justify-center rounded-[1.5rem] border border-cloud-dancer/70 bg-cloud-dancer shadow-2xl shadow-black/20 transition-transform duration-100 ease-out will-change-transform'
                 style={{
                   transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
                   transformStyle: 'preserve-3d'
                 }}
               >
-                {/* Glare Effect */}
                 <div
-                  className='absolute inset-0 rounded-2xl pointer-events-none z-10 mix-blend-soft-light'
+                  className='pointer-events-none absolute inset-0 z-10 rounded-[1.5rem] mix-blend-soft-light'
                   style={{
                     background: `radial-gradient(circle at ${glarePosition.x}% ${glarePosition.y}%, rgba(255,255,255,0.8) 0%, transparent 100%)`,
                     opacity: 0.4
                   }}
                 />
 
-                {/* Logo */}
-                <div className='relative z-0 transform translate-z-10'>
+                <div className='relative z-0 translate-z-10 transform'>
                   <Image
                     src={IntersportLogo}
                     alt='Intersport logo'
-                    width={280}
-                    height={80}
-                    className='h-auto w-full max-w-[240px] md:max-w-[280px]'
-                    style={{ height: 'auto' }}
+                    width={1024}
+                    height={112}
+                    className='max-w-[240px] md:max-w-[280px]'
+                    style={{ width: '100%', height: 'auto' }}
                     priority
                   />
                 </div>
 
-                {/* Decorative Elements on the card */}
-                <div className='absolute top-4 left-4 h-2 w-2 rounded-full bg-neutral-200' />
-                <div className='absolute top-4 right-4 h-2 w-2 rounded-full bg-neutral-200' />
-                <div className='absolute bottom-4 left-4 h-2 w-2 rounded-full bg-neutral-200' />
-                <div className='absolute bottom-4 right-4 h-2 w-2 rounded-full bg-neutral-200' />
+                <div className='absolute left-4 top-4 h-2 w-2 rounded-full bg-maritime-blue/18' />
+                <div className='absolute right-4 top-4 h-2 w-2 rounded-full bg-maritime-blue/18' />
+                <div className='absolute bottom-4 left-4 h-2 w-2 rounded-full bg-maritime-blue/18' />
+                <div className='absolute bottom-4 right-4 h-2 w-2 rounded-full bg-maritime-blue/18' />
               </div>
             </div>
 
-            {/* TEXT CONTENT (Right Column) */}
             <div className='flex flex-col items-start text-left'>
-              {/* Badge: Fysisk butikk */}
-              <div className='gsap-content opacity-0 mb-8 inline-flex items-center gap-3 rounded-full border border-red-500/30 bg-red-500/10 px-4 py-2 backdrop-blur-md'>
+              <BrandBadge
+                backgroundColor='var(--dusted-peri)'
+                textColor='var(--maritime-darkest)'
+                className='gsap-content mb-8 gap-3 opacity-0 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
+              >
                 <span className='relative flex h-3 w-3'>
-                  <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75'></span>
-                  <span className='relative inline-flex rounded-full h-3 w-3 bg-red-500'></span>
+                  <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-maritime-darkest opacity-35'></span>
+                  <span className='relative inline-flex h-3 w-3 rounded-full bg-maritime-darkest'></span>
                 </span>
-                <span className='text-xs font-bold uppercase tracking-widest text-red-400'>
-                  Fysisk butikk i Bergen
-                </span>
-              </div>
+                <span>Fysisk butikk i Bergen</span>
+              </BrandBadge>
 
-              <h2 className='gsap-content opacity-0 text-balance text-3xl md:text-5xl font-bold text-white mb-6 leading-tight'>
+              <h2 className='gsap-content mb-6 text-balance text-3xl font-serif font-medium leading-tight text-cloud-dancer opacity-0 md:text-5xl'>
                 Opplev Utekos hos <br />
-                <span className='text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500'>
-                  Intersport Laksevåg
-                </span>
+                <span className='text-overcast'>Intersport Laksevåg</span>
               </h2>
 
-              <p className='gsap-content opacity-0 max-w-lg text-lg leading-relaxed text-neutral-400 mb-10'>
+              <p className='gsap-content mb-10 max-w-lg text-lg font-light leading-relaxed text-overcast/82 opacity-0'>
                 Lyst til å kjenne på kvaliteten og finne den perfekte
                 passformen? Som eneste fysiske forhandler i Bergen finner du et
                 utvalg av våre produkter hos våre venner på Laksevåg Senter.
@@ -191,7 +189,7 @@ export function IntersportSection() {
                 <Button
                   asChild
                   size='lg'
-                  className='group h-14 bg-red-600 hover:bg-red-500 text-white border-0 rounded-full px-8 text-base shadow-[0_0_20px_rgba(220,38,38,0.3)] hover:shadow-[0_0_30px_rgba(220,38,38,0.5)] transition-all duration-300'
+                  className='group h-14 rounded-full border-0 bg-primary-button px-8 text-base text-maritime-darkest shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--primary-button)_90%,transparent)] transition-all duration-300 hover:bg-primary-button/88 hover:shadow-[0_18px_54px_-24px_color-mix(in_oklab,var(--primary-button)_90%,transparent)]'
                 >
                   <Link
                     href={INTERSPORT_LAKSEVAG_MAPS_URL}

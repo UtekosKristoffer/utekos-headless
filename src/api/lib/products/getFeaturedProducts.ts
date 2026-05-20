@@ -4,6 +4,7 @@ import 'server-only'
 import { handles } from '@/db/data/products/product-info'
 import { getProducts } from './getProducts'
 import { cacheLife, cacheTag } from 'next/cache'
+import type { ShopifyProduct } from 'types/product'
 
 export async function getFeaturedProducts() {
   cacheLife('hours')
@@ -15,9 +16,13 @@ export async function getFeaturedProducts() {
     return []
   }
 
-  const featuredProducts = response.body.filter(product =>
-    handles.includes(product.handle)
+  const productsByHandle = new Map(
+    response.body.map(product => [product.handle, product])
   )
+
+  const featuredProducts = handles
+    .map(handle => productsByHandle.get(handle))
+    .filter((product): product is ShopifyProduct => Boolean(product))
 
   return featuredProducts
 }

@@ -12,8 +12,8 @@ export function ChatBubble({
   const justify = side === 'left' ? 'justify-start' : 'justify-end'
   return (
     <div className={cn('flex', justify)}>
-      <div className='max-w-xs rounded-lg bg-sidebar-foreground p-3 sm:max-w-sm'>
-        <div className='text-base leading-snug text-foreground/90'>
+      <div className='max-w-xs rounded-lg bg-maritime-blue p-3 sm:max-w-sm'>
+        <div className='text-base leading-snug text-cloud-dancer'>
           {children}
         </div>
       </div>

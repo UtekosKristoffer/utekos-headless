@@ -12,27 +12,28 @@ export const stapperFeatures: {
     title: 'Maksimal plassbesparelse',
     description:
       'Reduserer volumet på klær og soveposer med over 50 %, og frigjør verdifull plass i bagasjen.',
-    colorClasses: 'text-sky-400 border-sky-400/20 bg-sky-900/20'
+    colorClasses:
+      'text-ancient-water border-ancient-water/24 bg-ancient-water/12'
   },
   {
     icon: 'feather',
     title: 'Ultralett design',
     description:
       'Veier kun ca. 100 gram. Du reduserer volum uten å legge til merkbart med vekt i oppakningen.',
-    colorClasses: 'text-slate-300 border-slate-300/20 bg-slate-700/20'
+    colorClasses: 'text-overcast border-overcast/24 bg-overcast/10'
   },
   {
     icon: 'shield-check',
     title: 'Slitesterkt materiale',
     description:
       'Laget for å tåle røff behandling på tur. Stram hardt og pakk tett, år etter år.',
-    colorClasses: 'text-teal-400 border-teal-400/20 bg-teal-900/20'
+    colorClasses: 'text-dusted-peri border-dusted-peri/24 bg-dusted-peri/12'
   },
   {
     icon: 'settings-2',
     title: 'Enkel og jevn kompresjon',
     description:
       'Fire justerbare strammestropper lar deg enkelt komprimere innholdet jevnt og effektivt.',
-    colorClasses: 'text-amber-400 border-amber-400/20 bg-amber-900/20'
+    colorClasses: 'text-soft-warm border-soft-warm/24 bg-soft-warm/12'
   }
 ]

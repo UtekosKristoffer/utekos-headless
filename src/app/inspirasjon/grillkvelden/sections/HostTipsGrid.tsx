@@ -8,19 +8,19 @@ export const hostTipsData: HostTip[] = [
     name: 'Planlegg for komfort',
     highlight: 'Ha Utekos klar til gjestene',
     icon: Thermometer,
-    color: 'text-orange-400'
+    color: 'text-dusted-peri'
   },
   {
     name: 'God belysning',
     highlight: 'Lysslynger skaper magi',
     icon: Lightbulb,
-    color: 'text-yellow-400'
+    color: 'text-primary-button'
   },
   {
     name: 'Enkel servering',
     highlight: 'Fingermat og selvbetjening',
     icon: UtensilsCrossed,
-    color: 'text-cyan-400'
+    color: 'text-ancient-water'
   },
   {
     name: 'Riktig musikk',
@@ -35,10 +35,10 @@ export function HostTipsGrid({ tips }: { tips: HostTip[] }) {
     <section className='py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl text-center'>
-          <h2 className='text-fluid-display font-bold tracking-tight'>
+          <h2 className='text-fluid-display font-bold tracking-normal'>
             Vertens sjekkliste
           </h2>
-          <p className='mx-auto mt-4 max-w-2xl text-lg text-muted-foreground'>
+          <p className='mx-auto mt-4 max-w-2xl text-lg text-overcast'>
             Fire enkle tips for en uforglemmelig (og komfortabel) grillkveld.
           </p>
         </div>
@@ -51,7 +51,7 @@ export function HostTipsGrid({ tips }: { tips: HostTip[] }) {
               threshold={0.2}
               key={tip.name}
             >
-              <Card className='group border-neutral-800 bg-sidebar-foreground transition-colors hover:bg-sidebar-foreground/80'>
+              <Card className='group border-cloud-dancer/12 bg-maritime-blue/24 transition-colors hover:bg-maritime-blue/32'>
                 <CardContent className='p-6'>
                   <div className='mb-3 flex items-start justify-between'>
                     <h3 className='text-lg font-semibold'>{tip.name}</h3>
@@ -59,7 +59,7 @@ export function HostTipsGrid({ tips }: { tips: HostTip[] }) {
                       className={`size-5 ${tip.color} transition-colors group-hover:text-primary`}
                     />
                   </div>
-                  <p className='text-sm text-foreground/80'>{tip.highlight}</p>
+                  <p className='text-sm text-cloud-dancer/80'>{tip.highlight}</p>
                 </CardContent>
               </Card>
             </AnimatedBlock>

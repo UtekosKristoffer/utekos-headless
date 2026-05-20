@@ -27,7 +27,8 @@ export function ActiveLink({
       href={href}
       className={cn(
         navigationMenuTriggerStyle(),
-        isActive && 'bg-accent text-accent-foreground',
+        'text-cloud-dancer hover:text-cloud-dancer',
+        isActive && 'bg-accent/20 text-cloud-dancer',
         className
       )}
       {...props}

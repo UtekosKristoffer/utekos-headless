@@ -15,10 +15,10 @@ export function OptionButton({
       aria-checked={isSelected}
       data-selected={isSelected}
       className='
-        flex w-full bg-sidebar-foreground border-neutral-700 items-center justify-between rounded-lg border p-4 text-left 
+        flex w-full items-center justify-between rounded-[1rem] border bg-cloud-dancer/72 p-4 text-left text-maritime-blue
         transition-all duration-200 ease-in-out
-        data-[selected=true]:border-foreground-on-dark data-[selected=true]:ring-1 data-[selected=true]:ring-foreground-on-dark
-        data-[selected=false]:border-white/20 data-[selected=false]:bg-surface-raised/40 data-[selected=false]:hover:border-foreground-on-dark/50
+        data-[selected=true]:border-maritime-blue data-[selected=true]:ring-1 data-[selected=true]:ring-maritime-blue
+        data-[selected=false]:border-maritime-blue/14 data-[selected=false]:hover:border-dusted-peri/50
       '
     >
       {children}

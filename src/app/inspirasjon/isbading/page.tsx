@@ -10,9 +10,9 @@ import { PopularSpotsGrid, popularSpotsData } from './sections/PopularSpotsGrid'
 import { SocialProof } from './sections/SocialProof'
 import { CTASection } from './sections/CTASection'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { ProductSpotlight } from './sections/ProductSpotlight'
-import { IceBathingFAQ } from './sections/IceBathingFAQ'
+import { IceBathingFAQ, iceBathingFaqItems } from './sections/IceBathingFAQ'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Isbading og Utekos | Varmen du trenger etter kuldesjokket',
@@ -49,8 +49,27 @@ export const metadata: Metadata = {
 }
 
 export default function IceBathingInspirationPage() {
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': iceBathingFaqItems.map(item => ({
+      '@type': 'Question',
+      'name': item.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': item.answer
+      }
+    }))
+  }
+
   return (
     <div className='flex flex-col gap-12 pb-20'>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c')
+        }}
+      />
       <Activity>
         <IceBathingHeroSection />
       </Activity>
@@ -79,12 +98,14 @@ export default function IceBathingInspirationPage() {
         <CTASection />
       </Activity>
       <div className='fixed bottom-4 left-4 right-4 z-50 md:hidden animate-in slide-in-from-bottom-10 fade-in duration-700'>
-        <Button
-          className='w-full h-14 rounded-full text-white font-bold shadow-2xl border border-white/10 bg-[#232B38] hover:bg-[#232B38]/90'
+        <BrandBadge
           asChild
+          backgroundColor='var(--primary-button)'
+          textColor='var(--maritime-darkest)'
+          className='min-h-14 w-full border border-primary-button/24 px-6 py-3 text-base leading-[1.4] font-bold tracking-normal shadow-2xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
         >
           <Link href='/produkter/comfyrobe'>Kjøp Comfyrobe™</Link>
-        </Button>
+        </BrandBadge>
       </div>
     </div>
   )

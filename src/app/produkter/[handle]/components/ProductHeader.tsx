@@ -1,4 +1,5 @@
 import { AnimatedBlock } from '@/components/AnimatedBlock'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { Sparkles } from 'lucide-react'
 
 export interface ProductHeaderProps {
@@ -20,19 +21,23 @@ export default function ProductHeader({
         threshold={0.2}
       >
         {productHandle === 'utekos-special-edition' && (
-          <div className='mb-4 inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-900/20 px-4 py-2'>
-            <Sparkles className='h-4 w-4 text-amber-400' aria-hidden='true' />
-            <span className='text-sm font-medium text-amber-400'>
-              Begrenset opplag
-            </span>
-          </div>
+          <BrandBadge
+            backgroundColor='var(--dusted-peri)'
+            textColor='var(--maritime-darkest)'
+            className='mb-5 gap-2 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
+          >
+            <Sparkles className='h-5 w-5' aria-hidden='true' />
+            <span>Begrenset opplag</span>
+          </BrandBadge>
         )}
 
-        <h1 className='text-fluid-headline font-bold'>{productTitle}</h1>
+        <h1 className='text-fluid-headline font-sans font-medium leading-none text-maritime-blue'>
+          {productTitle}
+        </h1>
 
         {typeof productSubtitle === 'string'
           && productSubtitle.trim() !== '' && (
-            <p className='mt-3 text-lg leading-relaxed text-foreground/80'>
+            <p className='mt-4 max-w-2xl text-lg font-light leading-relaxed text-maritime-blue/76'>
               {productSubtitle}
             </p>
           )}

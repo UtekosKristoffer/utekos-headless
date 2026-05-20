@@ -53,7 +53,7 @@ export function SocialProof() {
     <section className='py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='text-fluid-display mb-4 font-bold tracking-tight'>
+          <h2 className='text-fluid-display mb-4 font-bold tracking-normal'>
             Ekte kulde, ekte varme
           </h2>
         </div>
@@ -74,7 +74,7 @@ export function SocialProof() {
                 <div className='p-1 group'>
                   <AspectRatio
                     ratio={1 / 1}
-                    className='relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900'
+                    className='relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest'
                   >
                     <Image
                       src={image.src}
@@ -87,7 +87,7 @@ export function SocialProof() {
                   </AspectRatio>
                   <div className='pt-4 text-left'>
                     <h4 className='font-semibold'>{image.title}</h4>
-                    <p className='text-sm text-muted-foreground'>
+                    <p className='text-sm text-overcast'>
                       {image.description}
                     </p>
                   </div>

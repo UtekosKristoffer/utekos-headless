@@ -5,7 +5,7 @@ import { SocialProof } from './SocialProof'
 import { HeroImage } from './HeroImage'
 export async function HeroSection() {
   return (
-    <section className='relative container mx-auto px-4 pt-12 pb-2 overflow-hidden'>
+    <section className='relative container mx-auto px-4 pt-12 overflow-hidden'>
       <MotionContent />
       <HeroImage />
       <SocialProof />

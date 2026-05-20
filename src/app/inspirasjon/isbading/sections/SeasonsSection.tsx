@@ -11,8 +11,8 @@ const seasons = [
     value: 'winter',
     label: 'Vinter',
     icon: Snowflake,
-    iconColor: 'text-cyan-400',
-    glowColor: '#22d3ee',
+    iconColor: 'text-ancient-water',
+    glowColor: 'var(--ancient-water)',
     title: 'Høysesong for endorfiner',
     description:
       'Når isen legger seg og vannet er på sitt kaldeste. Dette er tiden for de mest intense opplevelsene, hvor Utekos er skillet mellom smertefull kulde og komfortabel mestring.'
@@ -21,8 +21,8 @@ const seasons = [
     value: 'spring',
     label: 'Vår',
     icon: Sun,
-    iconColor: 'text-yellow-400',
-    glowColor: '#facc15',
+    iconColor: 'text-primary-button',
+    glowColor: 'var(--primary-button)',
     title: 'Vårløsning og smeltevann',
     description:
       'Dagene blir lengre, men vannet er fortsatt iskaldt. Nyt kontrasten mellom den varmende vårsolen i ansiktet og det kjølige vannet, trygt pakket inn i din Utekos.'
@@ -31,8 +31,8 @@ const seasons = [
     value: 'summer',
     label: 'Sommer',
     icon: CloudRain,
-    iconColor: 'text-blue-500',
-    glowColor: '#3b82f6',
+    iconColor: 'text-ancient-water',
+    glowColor: 'var(--ancient-water)',
     title: 'Morgenbad og sommerregn',
     description:
       'For de dagene hvor norsk sommer viser seg fra sin kjølige side. Perfekt etter et morgenbad før solen har stått opp, eller som varme etter en svømmetur i regnet.'
@@ -42,7 +42,7 @@ const seasons = [
     label: 'Høst',
     icon: Wind,
     iconColor: 'text-slate-400',
-    glowColor: '#94a3b8',
+    glowColor: 'var(--overcast)',
     title: 'Tilvenningsfasen',
     description:
       'Luften blir skarpere og vannet kjøles ned. Høsten er den perfekte tiden å bygge toleranse på. Utekos gjør det enkelt å forlenge sesongen inn i mørketiden.'
@@ -67,7 +67,7 @@ export function SeasonsSection() {
             <TabsTrigger
               key={season.value}
               value={season.value}
-              className='relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 transition-all duration-300 data-[state=active]:border-neutral-700 data-[state=active]:bg-neutral-900'
+              className='relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/58 transition-all duration-300 data-[state=active]:border-cloud-dancer/18 data-[state=active]:bg-maritime-darkest'
             >
               {isActive && (
                 <div
@@ -80,10 +80,10 @@ export function SeasonsSection() {
 
               <div className='relative flex items-center justify-center gap-2 py-3'>
                 <Icon
-                  className={`h-5 w-5 transition-colors ${isActive ? season.iconColor : 'text-muted-foreground'}`}
+                  className={`h-5 w-5 transition-colors ${isActive ? season.iconColor : 'text-overcast'}`}
                 />
                 <span
-                  className={`hidden font-medium sm:inline ${isActive ? 'text-foreground' : 'text-muted-foreground'}`}
+                  className={`hidden font-medium sm:inline ${isActive ? 'text-cloud-dancer' : 'text-overcast'}`}
                 >
                   {season.label}
                 </span>
@@ -99,7 +99,7 @@ export function SeasonsSection() {
         return (
           <TabsContent key={season.value} value={season.value} className='mt-8'>
             <div className='animate-in fade-in zoom-in-95 duration-300'>
-              <Card className='relative overflow-hidden border-neutral-800 bg-neutral-900/50'>
+              <Card className='relative overflow-hidden border-cloud-dancer/12 bg-maritime-darkest/58'>
                 <div
                   className='absolute -inset-x-2 -inset-y-16 opacity-20 blur-3xl'
                   style={{
@@ -110,18 +110,18 @@ export function SeasonsSection() {
                 <CardContent className='relative p-8'>
                   <div className='mb-6 flex items-center gap-4'>
                     <div
-                      className='flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-700 bg-background transition-shadow duration-300'
+                      className='flex h-12 w-12 items-center justify-center rounded-lg border border-cloud-dancer/18 bg-maritime-darkest transition-shadow duration-300'
                       style={{
                         boxShadow: `0 0 20px ${season.glowColor}20`
                       }}
                     >
                       <Icon className={`h-6 w-6 ${season.iconColor}`} />
                     </div>
-                    <h3 className='text-2xl font-semibold text-foreground'>
+                    <h3 className='text-2xl font-semibold text-cloud-dancer'>
                       {season.title}
                     </h3>
                   </div>
-                  <p className='text-lg leading-relaxed text-muted-foreground'>
+                  <p className='text-lg leading-[1.45] tracking-normal text-overcast'>
                     {season.description}
                   </p>
                 </CardContent>

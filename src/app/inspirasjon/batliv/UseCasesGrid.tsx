@@ -22,8 +22,8 @@ export const useCasesData: UseCase[] = [
     description:
       'Nyt en stille morgen for anker med kaffekoppen, uansett hvor frisk brisen er.',
     temperature: '8-15°C',
-    color: 'from-amber-500/20',
-    iconColor: 'text-amber-400'
+    color: 'from-primary-button/20',
+    iconColor: 'text-primary-button'
   },
   {
     icon: Moon,
@@ -32,8 +32,8 @@ export const useCasesData: UseCase[] = [
     description:
       'Bli samlingspunktet i gjestehavna. Forleng de sosiale kveldene uten å fryse.',
     temperature: '10-18°C',
-    color: 'from-indigo-500/20',
-    iconColor: 'text-indigo-400'
+    color: 'from-dusted-peri/20',
+    iconColor: 'text-dusted-peri'
   },
   {
     icon: Wind,
@@ -42,20 +42,20 @@ export const useCasesData: UseCase[] = [
     description:
       'Perfekt for å holde varmen i cockpiten når du seiler eller på flybridgen i motvind.',
     temperature: 'Alle temperaturer',
-    color: 'from-cyan-500/20',
-    iconColor: 'text-cyan-400'
+    color: 'from-ancient-water/20',
+    iconColor: 'text-ancient-water'
   }
 ]
 
 export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
   return (
-    <section id='bruksomrader' className='py-24 bg-sidebar-foreground'>
+    <section id='bruksomrader' className='py-24 bg-maritime-blue/24'>
       <div className='container mx-auto px-4'>
         <div className='mb-16 text-center'>
-          <h2 className='text-3xl font-bold tracking-tight sm:text-4xl'>
+          <h2 className='text-3xl font-bold tracking-normal sm:text-4xl'>
             Utekos gjennom båtdøgnet
           </h2>
-          <p className='mx-auto mt-4 max-w-2xl text-lg text-muted-foreground'>
+          <p className='mx-auto mt-4 max-w-2xl text-lg text-overcast'>
             Fra soloppgang i uthavn til sene kvelder ved brygga – Utekos holder
             deg varm.
           </p>
@@ -69,22 +69,22 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
               delay={`${useCaseIndex * 0.1}s`}
               threshold={0.2}
             >
-              <Card className='group relative h-full overflow-hidden border-neutral-800 bg-background'>
+              <Card className='group relative h-full overflow-hidden border-cloud-dancer/12 bg-maritime-darkest'>
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${useCase.color} to-transparent opacity-20 transition-opacity group-hover:opacity-30`}
                 />
                 <CardContent className='relative p-8'>
                   <div className='mb-6 flex items-center gap-4'>
-                    <div className='flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-700 bg-sidebar-foreground'>
+                    <div className='flex h-12 w-12 items-center justify-center rounded-lg border border-cloud-dancer/18 bg-maritime-blue/24'>
                       <useCase.icon
                         className={`h-6 w-6 ${useCase.iconColor}`}
                       />
                     </div>
                     <div>
-                      <p className='text-sm text-muted-foreground-primary'>
+                      <p className='text-sm text-overcast'>
                         {useCase.time}
                       </p>
-                      <p className='text-sm font-medium text-primary-foreground'>
+                      <p className='text-sm font-medium text-cloud-dancer'>
                         {useCase.temperature}
                       </p>
                     </div>
@@ -92,7 +92,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                   <h3 className='mb-2 text-xl font-semibold'>
                     {useCase.title}
                   </h3>
-                  <p className='text-muted-foreground'>{useCase.description}</p>
+                  <p className='text-overcast'>{useCase.description}</p>
                 </CardContent>
               </Card>
             </AnimatedBlock>

@@ -1,16 +1,23 @@
 import Image from 'next/image'
+import type { CSSProperties } from 'react'
 import UtekosLogo from '@public/icon.png'
 import { iconMap, type IconName } from './initialElements'
 import type { CustomerNetworkViewProps } from 'types/flow.types'
+
 function IconRenderer({
   name,
-  className
+  className,
+  style
 }: {
   name: IconName
   className?: string
+  style?: CSSProperties
 }) {
   const Icon = iconMap[name]
-  return Icon ? <Icon className={className} /> : null
+
+  return Icon ?
+      <Icon aria-hidden='true' className={className} style={style} />
+    : null
 }
 
 export function CustomerNetworkView({
@@ -21,17 +28,17 @@ export function CustomerNetworkView({
   const benefitNodes = nodes.filter(node => node.type !== 'center')
 
   return (
-    <div className='relative mx-auto aspect-square w-full max-w-[450px]'>
+    <div className='relative mx-auto aspect-square w-full max-w-[520px]'>
       <svg
         width='100%'
         height='100%'
-        viewBox='0 0 450 450'
+        viewBox='0 0 520 520'
         aria-hidden='true'
-        className='absolute inset-0'
+        className='absolute inset-0 overflow-visible'
       >
         {edges.map(edge => {
-          const sourceNode = nodes.find(n => n.id === edge.sourceId)
-          const targetNode = nodes.find(n => n.id === edge.targetId)
+          const sourceNode = nodes.find(node => node.id === edge.sourceId)
+          const targetNode = nodes.find(node => node.id === edge.targetId)
 
           if (!sourceNode || !targetNode) return null
 
@@ -42,74 +49,85 @@ export function CustomerNetworkView({
 
           const midX = (sourceX + targetX) / 2
           const midY = (sourceY + targetY) / 2
-
           const pathD = `M ${sourceX},${sourceY} Q ${sourceX},${midY} ${midX},${midY} T ${targetX},${targetY}`
 
           return (
-            <g key={edge.id}>
-              <path
-                d={pathD}
-                stroke={edge.data.color}
-                strokeWidth={2}
-                fill='none'
-                strokeDasharray='5 5'
-                className='animate-pulse'
-              />
-              <circle
-                cx={targetX}
-                cy={targetY}
-                r='6'
-                fill={edge.data.color}
-                opacity='0.3'
-                filter='blur(4px)'
-              />
-            </g>
+            <path
+              key={edge.id}
+              d={pathD}
+              stroke={edge.data.color}
+              strokeWidth={2}
+              strokeLinecap='round'
+              strokeDasharray='5 7'
+              strokeOpacity={0.72}
+              vectorEffect='non-scaling-stroke'
+              fill='none'
+            />
           )
         })}
 
-        {benefitNodes.map(node => (
-          <foreignObject
-            key={node.id}
-            x={node.position.x}
-            y={node.position.y}
-            width={node.width}
-            height={node.height}
-          >
-            <div className='rounded-lg border border-neutral-800 bg-sidebar-foreground p-3 shadow-lg'>
-              <div className='flex items-center gap-2'>
-                {node.data && (
-                  <>
-                    <IconRenderer
-                      name={node.data.icon as IconName}
-                      className={`h-4 w-4 flex-shrink-0 ${node.data.iconColor}`}
-                    />
-                    <span className='whitespace-nowrap text-xs font-medium'>
+        {benefitNodes.map(node => {
+          const accentColor = node.data?.color ?? 'var(--ancient-water)'
+
+          const nodeStyle = {
+            '--network-accent': accentColor,
+            'borderColor': `color-mix(in oklch, ${accentColor} 72%, var(--maritime-darkest) 28%)`,
+            'background': `color-mix(in oklch, ${accentColor} 86%, var(--cloud-dancer) 14%)`
+          } as CSSProperties
+
+          return (
+            <foreignObject
+              key={node.id}
+              x={node.position.x}
+              y={node.position.y}
+              width={node.width}
+              height={node.height}
+            >
+              <div
+                className='flex size-full items-center justify-center rounded-full border px-4 text-maritime-darkest shadow-[0_18px_40px_-28px_rgba(14,18,35,0.68)] ring-1 ring-cloud-dancer/35'
+                style={nodeStyle}
+              >
+                {node.data ?
+                  <div className='flex min-w-0 items-center justify-center gap-2.5'>
+                    <span
+                      className='flex size-8 shrink-0 items-center justify-center rounded-full border border-maritime-darkest/12 bg-maritime-darkest shadow-[inset_0_1px_0_rgba(255,255,255,0.16)]'
+                      style={{
+                        color: accentColor
+                      }}
+                    >
+                      <IconRenderer
+                        name={node.data.icon as IconName}
+                        className='h-4 w-4'
+                      />
+                    </span>
+
+                    <span className='whitespace-nowrap text-sm font-medium leading-none tracking-wide text-maritime-darkest'>
                       {node.data.text}
                     </span>
-                  </>
-                )}
+                  </div>
+                : null}
               </div>
-            </div>
-          </foreignObject>
-        ))}
+            </foreignObject>
+          )
+        })}
       </svg>
 
-      {centerNode && (
-        <div className='pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
-          <div className='relative'>
-            <div className='flex h-24 w-24 items-center justify-center rounded-full border-2 border-neutral-700 bg-background shadow-2xl'>
-              <div className='flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-transparent'>
-                <Image
-                  src={UtekosLogo}
-                  alt='Utekos Logo'
-                  className='h-12 w-12'
-                />
-              </div>
+      {centerNode ?
+        <div className='pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2'>
+          <div className='relative flex h-28 w-28 items-center justify-center rounded-full border border-ancient-water/40 bg-[var(--dark-background)] shadow-[0_0_0_8px_rgba(255,255,255,0.025),0_24px_54px_-32px_rgba(0,0,0,0.9)]'>
+            <div className='relative h-24 w-24 overflow-hidden rounded-full border-2 border-cloud-dancer/55 bg-cloud-dancer'>
+              <Image
+                src={UtekosLogo}
+                alt='Utekos'
+                fill
+                priority
+                sizes='96px'
+                className='scale-[1.08] object-cover'
+              />
             </div>
-            <div className='absolute inset-0 rounded-full bg-primary/20 blur-xl' />
           </div>
         </div>
-      )}
+      : null}
     </div>
   )
 }

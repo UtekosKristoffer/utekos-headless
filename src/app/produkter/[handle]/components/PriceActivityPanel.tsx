@@ -1,6 +1,7 @@
 'use client'
 
 import { Price } from '@/components/jsx/Price'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { ShieldAlert } from 'lucide-react'
 import type { ReactNode } from 'react'
 import type { CurrencyCode } from 'types/commerce/CurrencyCode'
@@ -88,38 +89,40 @@ export default function PriceActivityPanel({
   const showSavings = hasOffer && savingsAmount > 0
 
   return (
-    <section aria-label='Pris og tilgjengelighet' className='space-y-4'>
-      {/* --- SPARE-BADGE (Vises for alle med tilbud) --- */}
+    <section
+      aria-label='Pris og tilgjengelighet'
+      className='relative space-y-4'
+    >
       {showSavings && (
-        <div className='inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-blue-500/20 px-4 py-2 ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:ring-white/20'>
-          <div className='relative flex h-2 w-2'>
-            <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75' />
-            <span className='relative inline-flex h-2 w-2 rounded-full bg-emerald-500' />
-          </div>
-          <div className='flex items-center gap-2'>
-            <span className='text-sm font-semibold text-white'>
-              {currentOffer.label}
+        <div className='absolute -left-6 -top-20 z-20 flex flex-wrap items-center gap-3 md:-top-12 lg:-top-[5.75rem]'>
+          <BrandBadge
+            backgroundColor='var(--dusted-peri)'
+            textColor='var(--maritime-darkest)'
+            className='gap-2 border border-dusted-peri/20 px-4 py-2 text-sm font-semibold shadow-[0_12px_28px_-22px_rgba(32,28,54,0.72)] sm:px-5 sm:py-2.5'
+          >
+            <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-maritime-darkest'>
+              <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-maritime-darkest opacity-30' />
             </span>
-            <div className='h-4 w-px bg-white/20' />
-            <span className='text-sm font-bold text-emerald-400'>
-              Spar totalt kr {Math.round(savingsAmount)} 🎉
-            </span>
-          </div>
+            {currentOffer.label}
+          </BrandBadge>
+          <BrandBadge
+            label={`Spar totalt kr ${Math.round(savingsAmount)}`}
+            backgroundColor='var(--dusted-peri)'
+            textColor='var(--maritime-darkest)'
+            className='border border-dusted-peri/24 px-4 py-2 text-sm font-semibold shadow-[0_14px_32px_-24px_rgba(32,28,54,0.58)] sm:px-5 sm:py-2.5'
+          />
         </div>
       )}
 
-      {/* --- PRISVISNING --- */}
       <div className='flex items-baseline gap-3'>
         {showSavings ?
           <>
-            {/* Nå-prisen (alltid farget ved tilbud) */}
-            <div className='bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent'>
+            <div className='text-maritime-blue'>
               <Price amount={priceAmount} currencyCode={currencyCode} />
             </div>
 
-            {/* Før-prisen (Kun for Dun, Mikrofiber, Comfyrobe) */}
             {showBeforePrice && (
-              <div className='text-lg text-muted-foreground line-through opacity-70'>
+              <div className='text-lg text-maritime-blue/48 line-through'>
                 <Price
                   amount={String(originalPriceToDisplay)}
                   currencyCode={currencyCode}
@@ -127,45 +130,41 @@ export default function PriceActivityPanel({
               </div>
             )}
           </>
-        : /* Ingen tilbud - standard visning */
-          <Price amount={priceAmount} currencyCode={currencyCode} />
+        : <div className='text-maritime-blue'>
+            <Price amount={priceAmount} currencyCode={currencyCode} />
+          </div>
         }
       </div>
 
       {showSavings && currentOffer.description && (
-        <p className='text-sm text-muted-foreground'>
+        <p className='text-sm text-maritime-blue/64'>
           {currentOffer.description}
         </p>
       )}
 
-      {/* --- SPECIAL EDITION LAGERSTATUS --- */}
       {isSpecialEdition && shouldShowLimitedStockNotice && (
-        <div className='relative overflow-hidden rounded-lg border border-amber-400/30 bg-amber-900/10 p-4'>
+        <div className='relative overflow-hidden rounded-[1rem] border border-dusted-peri/24 bg-dusted-peri/12 p-4'>
           <div
             className='relative flex items-center gap-3'
             style={{ zIndex: 10 }}
           >
-            <div className='flex h-10 w-10 items-center justify-center rounded-lg border border-amber-400/40 bg-amber-400/10'>
-              <ShieldAlert
-                className='h-5 w-5 text-amber-400'
-                aria-hidden='true'
-              />
+            <div className='flex h-10 w-10 items-center justify-center rounded-full border border-maritime-blue/14 bg-maritime-blue text-cloud-dancer'>
+              <ShieldAlert className='h-5 w-5' aria-hidden='true' />
             </div>
             <div>
-              <p className='font-semibold text-amber-400'>
+              <p className='font-semibold text-maritime-blue'>
                 Kun {limitedStockCount} igjen på lager!
               </p>
-              <p className='text-sm text-amber-400/80'>
+              <p className='text-sm text-maritime-blue/68'>
                 Unik utgave - kommer ikke tilbake
               </p>
             </div>
           </div>
-          {/* Bakgrunnseffekt */}
           <div
             className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-20 blur-2xl'
             style={{
               background:
-                'radial-gradient(120% 120% at 50% 0%, transparent 30%, #f59e0b 100%)'
+                'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklab, var(--dusted-peri) 72%, transparent) 100%)'
             }}
             aria-hidden='true'
           />

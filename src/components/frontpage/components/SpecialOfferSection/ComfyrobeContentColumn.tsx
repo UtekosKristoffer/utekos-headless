@@ -14,17 +14,20 @@ const benefits = [
   {
     label: 'Vanntett og vindtett',
     description: '— 8000mm vannsøyle og tapede sømmer',
-    glowColor: '#475569'
+    glowColor: '#475569',
+    tone: 'water' as const
   },
   {
     label: 'Lammeull-fôr',
     description: '— Varm og hurtigtørkende',
-    glowColor: '#d4c5b9'
+    glowColor: '#d4c5b9',
+    tone: 'mauve' as const
   },
   {
     label: 'Toveis YKK®-glidelås',
     description: '— Enkel av- og påkledning',
-    glowColor: '#64748b'
+    glowColor: '#64748b',
+    tone: 'overcast' as const
   }
 ]
 
@@ -63,13 +66,13 @@ export function ComfyrobeContentColumn({
       <div
         ref={badgeRef}
         className={cn(
-          'will-animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-slate-500/30 bg-slate-900/20 px-4 py-2',
+          'will-animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-maritime-darkest bg-dusted-peri px-4 py-2',
           badgeInView && 'is-in-view'
         )}
         style={{ '--transition-delay': '0.3s' } as React.CSSProperties}
       >
-        <Shield className='h-4 w-4 text-slate-400' />
-        <span className='text-sm font-semibold text-slate-400'>
+        <Shield className='size-4 text-maritime-darkest' />
+        <span className='text-sm font-semibold text-maritime-darkest'>
           Comfyrobe™
         </span>
       </div>
@@ -88,7 +91,7 @@ export function ComfyrobeContentColumn({
       <p
         ref={pRef}
         className={cn(
-          'will-animate-fade-in-up mt-4 text-lg leading-relaxed text-neutral-400',
+          'will-animate-fade-in-up mt-4 text-lg leading-relaxed text-cloud-dancer sm:text-xl',
           pInView && 'is-in-view'
         )}
         style={{ '--transition-delay': '0.5s' } as React.CSSProperties}
@@ -120,7 +123,7 @@ export function ComfyrobeContentColumn({
           className={buttonVariants({
             size: 'lg',
             className:
-              'group mt-8 w-full sm:w-auto bg-slate-700 text-white hover:bg-slate-600 shadow-lg shadow-slate-700/20 hover:shadow-slate-600/40 transition-all duration-300'
+              'group mt-8 w-full sm:w-auto text-semibold! bg-dusted-peri! !text-maritime-darkest hover:!bg-dusted-peri/85 shadow-lg shadow-dusted-peri/35 hover:shadow-dusted-peri/20 transition-all duration-300'
           })}
         >
           Utforsk Comfyrobe™

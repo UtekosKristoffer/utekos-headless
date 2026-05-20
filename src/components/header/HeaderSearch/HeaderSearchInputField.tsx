@@ -3,11 +3,11 @@ import { SearchIcon } from 'lucide-react'
 export function HeaderSearchInputField() {
   return (
     <>
-      <SearchIcon className='size-4 opacity-90' />
+      <SearchIcon className='size-4 text-cloud-dancer opacity-80' />
       <span>Søk…</span>
       <kbd
         aria-hidden
-        className='pointer-events-none ml-auto inline-flex select-none items-center gap-1 rounded border border-white/10 bg-black/20 px-1.5 font-mono text-[10px] text-white/60 dark:bg-white/10'
+        className='pointer-events-none ml-auto inline-flex select-none items-center gap-1 rounded border border-cloud-dancer/10 bg-cloud-dancer/6 px-1.5 font-mono text-[10px] text-cloud-dancer/70'
       >
         <span className='text-xs'>⌘</span>K
       </kbd>

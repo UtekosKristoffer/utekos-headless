@@ -24,8 +24,10 @@ export const DesktopNavigation = ({ menu = [] }: { menu?: MenuItem[] }) => {
               <InteractiveNavItem key={item.title}>
                 {hasSubMenu ?
                   <>
-                    <InteractiveNavTrigger>{item.title}</InteractiveNavTrigger>
-                    <InteractiveNavContent>
+                    <InteractiveNavTrigger className='text-cloud-dancer hover:text-cloud-dancer'>
+                      {item.title}
+                    </InteractiveNavTrigger>
+                    <InteractiveNavContent className='text-cloud-dancer'>
                       <ul className='grid w-[400px] gap-3 mt-4 lg:mt-1! underline! underline-offset-4 decoration-1 decoration-sidebar pb-1 items-center justify-center mx-auto md:w-[500px] md:grid-cols-2 lg:w-[600px]'>
                         {item.items?.map(subItem => (
                           <ListItem

@@ -10,10 +10,8 @@ import { SocialProofSection } from '@/components/frontpage/SocialProofSection'
 import { TestimonialConstellation } from '@/components/frontpage/TestimonialConstellation'
 import { ComfyrobeSection } from '@/components/frontpage/components/SpecialOfferSection/ComfyrobeSection'
 import { FeaturedProductsSkeleton } from '@/components/skeletons/FeaturedProductsSkeleton'
-import TechTeaserSection from '@/components/frontpage/components/TechTeaserSection'
 import { AsyncProductLaunchWrapper } from '@/components/frontpage/AsyncProductLaunchWrapper'
 import { FeaturedProductsSection } from '@/components/frontpage/FeaturedProductSection'
-import { FrontpageIceBathingSection } from '@/components/frontpage/FrontpageIcebathingSection'
 
 const HomePage = () => {
   return (
@@ -28,11 +26,9 @@ const HomePage = () => {
 
       <NewProductInStoreNotice />
 
-      <Activity>
+      <Activity mode='visible'>
         <ProductVideoSection />
       </Activity>
-
-      <FrontpageIceBathingSection />
 
       <Activity>
         <Suspense fallback={<FeaturedProductsSkeleton />}>
@@ -49,8 +45,6 @@ const HomePage = () => {
       <CachedPromiseSection />
       <MomentsSection />
       <QualitySection />
-      <TechTeaserSection />
-
       <Activity>
         <TestimonialConstellation />
       </Activity>

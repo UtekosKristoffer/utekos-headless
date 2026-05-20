@@ -10,8 +10,8 @@ const seasons = [
     value: 'spring',
     label: 'Vår',
     icon: Sunrise,
-    iconColor: 'text-green-500',
-    glowColor: '#22c55e',
+    iconColor: 'text-mountain-view',
+    glowColor: 'var(--mountain-view)',
     title: 'Vårcamping med Utekos',
     intro:
       'Våren byr på fantastiske muligheter for bobilisten, men temperaturene kan være uforutsigbare.',
@@ -25,8 +25,8 @@ const seasons = [
     value: 'summer',
     label: 'Sommer',
     icon: Sun,
-    iconColor: 'text-yellow-500',
-    glowColor: '#eab308',
+    iconColor: 'text-primary-button',
+    glowColor: 'var(--primary-button)',
     title: 'Sommerkvelder med stil',
     intro:
       'Selv om sommeren er varm, blir kveldene ofte overraskende kjølige, spesielt ved kysten.',
@@ -40,8 +40,8 @@ const seasons = [
     value: 'autumn',
     label: 'Høst',
     icon: Mountain,
-    iconColor: 'text-orange-500',
-    glowColor: '#f97316',
+    iconColor: 'text-dusted-peri',
+    glowColor: 'var(--soft-warm)',
     title: 'Høstens fargeprakt i komfort',
     intro:
       'Høsten er mange bobilisters favoritt-sesong, og med Utekos kan du nyte den fullt ut.',
@@ -55,8 +55,8 @@ const seasons = [
     value: 'winter',
     label: 'Vinter',
     icon: Wind,
-    iconColor: 'text-blue-400',
-    glowColor: '#60a5fa',
+    iconColor: 'text-ancient-water',
+    glowColor: 'var(--ancient-water)',
     title: 'Vintercamping for de modige',
     intro:
       'For de som bruker bobilen året rundt, er Utekos den ultimate følgesvennen.',
@@ -86,7 +86,7 @@ export function BobilSeasonsTabs() {
             <TabsTrigger
               key={season.value}
               value={season.value}
-              className='bobil-seasons-tab-trigger relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 transition-all duration-300 data-[state=active]:border-neutral-700 data-[state=active]:bg-neutral-900'
+              className='bobil-seasons-tab-trigger relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/58 transition-all duration-300 data-[state=active]:border-cloud-dancer/18 data-[state=active]:bg-maritime-darkest'
             >
               {isActive && (
                 <div
@@ -99,10 +99,10 @@ export function BobilSeasonsTabs() {
 
               <div className='relative flex items-center justify-center gap-2 py-3'>
                 <Icon
-                  className={`h-5 w-5 transition-colors ${isActive ? season.iconColor : 'text-muted-foreground'}`}
+                  className={`h-5 w-5 transition-colors ${isActive ? season.iconColor : 'text-overcast'}`}
                 />
                 <span
-                  className={`font-medium transition-colors ${isActive ? 'text-foreground' : 'text-muted-foreground'}`}
+                  className={`font-medium transition-colors ${isActive ? 'text-cloud-dancer' : 'text-overcast'}`}
                 >
                   {season.label}
                 </span>
@@ -118,7 +118,7 @@ export function BobilSeasonsTabs() {
         return (
           <TabsContent key={season.value} value={season.value} className='mt-8'>
             <div className='bobil-seasons-tab-content-enter'>
-              <Card className='relative overflow-hidden border-neutral-800 bg-neutral-900/50'>
+              <Card className='relative overflow-hidden border-cloud-dancer/12 bg-maritime-darkest/58'>
                 <div
                   className='absolute -inset-x-2 -inset-y-16 opacity-20 blur-3xl'
                   style={{
@@ -129,19 +129,19 @@ export function BobilSeasonsTabs() {
                 <CardContent className='relative p-8'>
                   <div className='mb-6 flex items-center gap-4'>
                     <div
-                      className='flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-700 bg-background transition-shadow duration-300'
+                      className='flex h-12 w-12 items-center justify-center rounded-lg border border-cloud-dancer/18 bg-maritime-darkest transition-shadow duration-300'
                       style={{
                         boxShadow: `0 0 20px ${season.glowColor}20`
                       }}
                     >
                       <Icon className={`h-6 w-6 ${season.iconColor}`} />
                     </div>
-                    <h3 className='text-2xl font-semibold text-foreground'>
+                    <h3 className='text-2xl font-semibold text-cloud-dancer'>
                       {season.title}
                     </h3>
                   </div>
 
-                  <p className='mb-6 text-lg text-muted-foreground'>
+                  <p className='mb-6 text-lg text-overcast'>
                     {season.intro}
                   </p>
 
@@ -152,10 +152,10 @@ export function BobilSeasonsTabs() {
                         className='bobil-seasons-tip-enter flex items-start gap-3'
                         style={{ animationDelay: `${index * 0.1}s` }}
                       >
-                        <div className='flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-neutral-700 bg-background mt-0.5'>
+                        <div className='flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-cloud-dancer/18 bg-maritime-darkest mt-0.5'>
                           <Check className={`h-4 w-4 ${season.iconColor}`} />
                         </div>
-                        <span className='text-muted-foreground leading-relaxed'>
+                        <span className='text-overcast leading-[1.45] tracking-normal'>
                           {tip}
                         </span>
                       </li>

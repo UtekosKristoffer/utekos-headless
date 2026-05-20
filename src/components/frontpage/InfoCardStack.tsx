@@ -35,7 +35,7 @@ export function InfoCardStack() {
       <div
         className={cn(
           cardBaseClasses,
-          'top-0 left-0 bg-neutral-900',
+          'top-0 left-0 bg-dusted-peri',
           'h-40 sm:h-48 max-w-[280px] sm:max-w-sm',
           'p-4 sm:p-6'
         )}
@@ -56,7 +56,7 @@ export function InfoCardStack() {
       <div
         className={cn(
           cardBaseClasses,
-          'bg-neutral-900 overflow-hidden',
+          'bg-dusted-peri overflow-hidden',
           'h-40 sm:h-48 max-w-[280px] sm:max-w-sm',
           'p-4 sm:p-6',
           'top-28 left-12 sm:top-32 sm:left-1/4'
@@ -78,12 +78,12 @@ export function InfoCardStack() {
 
         <div className='relative z-10 flex h-full flex-col'>
           <div className='mt-6 flex items-start gap-3'>
-            <Lock className='h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 text-access/70' />
+            <Lock className='h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 text-maritime-darkest' />
             <div>
-              <h3 className='text-sm sm:text-base font-semibold text-foreground'>
+              <h3 className='text-sm sm:text-base font-semibold text-maritime-darkest'>
                 Ditt personvern
               </h3>
-              <p className='mt-1 text-xs sm:text-sm text-access/70'>
+              <p className='mt-1 text-xs sm:text-sm text-maritime-darkest'>
                 Vi tar personvern på alvor. Se hvordan vi behandler dine data.
               </p>
             </div>

@@ -8,6 +8,7 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { MapPinIcon } from 'lucide-react'
 import Image from 'next/image'
 
@@ -17,7 +18,6 @@ type PastEvent = {
   date: string
 }
 
-// Fjernet individuelle farger for et roligere, mer eksklusivt uttrykk
 const pastEvents: PastEvent[] = [
   {
     name: 'Boligmesse Sotra',
@@ -45,43 +45,53 @@ const fairImages = [
 
 export function FindUsSection() {
   return (
-    <section className='py-24 sm:py-32 bg-[#F9F8F6] text-[#2C2420]'>
+    <section className='relative isolate overflow-hidden bg-overcast py-24 text-maritime-blue sm:py-32'>
+      <div className='pointer-events-none absolute inset-0 -z-10'>
+        <div className='absolute left-[6%] top-20 h-72 w-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_58%,transparent)_0%,transparent_72%)] blur-3xl' />
+        <div className='absolute bottom-12 right-[8%] h-80 w-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_22%,transparent)_0%,transparent_72%)] blur-3xl' />
+      </div>
+
       <div className='container mx-auto max-w-7xl px-6 lg:px-8'>
         <div className='grid grid-cols-1 items-center gap-16 lg:grid-cols-2'>
-          
-          {/* Venstre kolonne: Tekst og liste */}
           <AnimatedBlock
             className='will-animate-fade-in-left'
             delay='0s'
             threshold={0.3}
           >
-            <span className='text-[#E07A5F] font-bold tracking-[0.2em] uppercase text-xs block mb-4'>
-              Møteplasser
-            </span>
-            <h2 className='text-4xl font-serif font-medium text-[#2C2420] sm:text-5xl mb-6'>
+            <BrandBadge
+              label='Møteplasser'
+              backgroundColor='var(--dusted-peri)'
+              textColor='var(--maritime-darkest)'
+              className='mb-6 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
+            />
+            <h2 className='mb-6 text-4xl font-serif font-medium text-maritime-blue sm:text-5xl'>
               Der du har møtt oss
             </h2>
-            <p className='text-lg leading-relaxed text-[#2C2420]/70 font-light mb-10'>
+            <p className='mb-10 text-lg font-light leading-relaxed text-maritime-blue/74'>
               Vi elsker å prate med folk – derfor er vi jevnlig på messer og
               stands. Her er noen av stedene du kan ha truffet oss, og hvor vi
               har fått verdifulle innspill fra kunder som faktisk har kjent
               komforten.
             </p>
-            
+
             <div className='space-y-6'>
               {pastEvents.map(event => (
-                <div key={`${event.name}-${event.date}`} className='flex gap-5 items-start group'>
-                  {/* Ikon boks - Varmere stil */}
-                  <div className='flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#E07A5F]/20 bg-[#E07A5F]/5 text-[#E07A5F] group-hover:bg-[#E07A5F] group-hover:text-white transition-colors duration-300'>
+                <div
+                  key={`${event.name}-${event.date}`}
+                  className='group flex items-start gap-5'
+                >
+                  <div className='flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-maritime-blue/14 bg-maritime-blue text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
                     <MapPinIcon className='h-5 w-5' strokeWidth={2} />
                   </div>
-                  
+
                   <div className='pt-1'>
-                    <h3 className='font-serif text-xl text-[#2C2420] mb-1'>
+                    <h3 className='mb-1 font-serif text-xl text-maritime-blue'>
                       {event.name}
                     </h3>
-                    <p className='text-sm text-[#2C2420]/60 uppercase tracking-wider font-medium'>
-                      {event.location} <span className='mx-2 text-[#E07A5F]'>•</span> {event.date}
+                    <p className='text-sm font-medium text-maritime-blue/62'>
+                      {event.location}
+                      <span className='mx-2 text-dusted-peri'>•</span>
+                      {event.date}
                     </p>
                   </div>
                 </div>
@@ -96,10 +106,9 @@ export function FindUsSection() {
             threshold={0.3}
           >
             <div className='relative'>
-              {/* Dekorativ ramme bak */}
-              <div className='absolute -inset-4 bg-[#2C2420]/5 rounded-sm -rotate-2 transform' />
-              
-              <Carousel className='relative rounded-sm overflow-hidden shadow-2xl shadow-[#2C2420]/10'>
+              <div className='absolute -inset-4 -rotate-2 rounded-sm bg-cloud-dancer/38' />
+
+              <Carousel className='relative overflow-hidden rounded-sm border border-cloud-dancer/65 bg-cloud-dancer shadow-2xl shadow-maritime-blue/10'>
                 <CarouselContent>
                   {fairImages.map((src, index) => (
                     <CarouselItem key={src}>
@@ -112,16 +121,14 @@ export function FindUsSection() {
                           sizes='(max-width: 1024px) 90vw, 45vw'
                           priority={false}
                         />
-                        {/* Gradient overlay i bunn for dybde */}
-                        <div className='absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/50 to-transparent' />
+                        <div className='absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-maritime-darkest/52 to-transparent' />
                       </div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                
-                {/* Custom styling på piler */}
-                <CarouselPrevious className='left-4 bg-white/90 text-[#2C2420] hover:bg-[#E07A5F] hover:text-white border-none shadow-md' />
-                <CarouselNext className='right-4 bg-white/90 text-[#2C2420] hover:bg-[#E07A5F] hover:text-white border-none shadow-md' />
+
+                <CarouselPrevious className='left-4 border-cloud-dancer/80 bg-cloud-dancer/92 text-maritime-blue shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
+                <CarouselNext className='right-4 border-cloud-dancer/80 bg-cloud-dancer/92 text-maritime-blue shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
               </Carousel>
             </div>
           </AnimatedBlock>

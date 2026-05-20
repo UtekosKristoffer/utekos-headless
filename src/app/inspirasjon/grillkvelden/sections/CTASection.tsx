@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
@@ -6,19 +6,24 @@ import type { Route } from 'next'
 
 export function CTASection() {
   return (
-    <section className='relative overflow-hidden py-24'>
-      <div className='absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-primary/10' />
+    <section className='relative overflow-hidden border-t border-cloud-dancer/12 bg-maritime-darkest py-24'>
+      <div className='absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,var(--ancient-water)_0%,transparent_32%),radial-gradient(circle_at_82%_20%,var(--soft-warm)_0%,transparent_28%)] opacity-[0.18]' />
       <div className='container relative mx-auto px-4 text-center'>
         <AnimatedBlock className='will-animate-fade-in-scale'>
-          <h2 className='text-fluid-display mb-6 font-bold tracking-tight'>
+          <h2 className='mb-6 text-fluid-display font-bold leading-[0.95] tracking-normal text-cloud-dancer'>
             Klar for å bli nabolagets grillkonge?
           </h2>
-          <p className='mx-auto mb-8 max-w-2xl text-xl text-muted-foreground'>
+          <p className='mx-auto mb-8 max-w-2xl text-xl leading-[1.45] tracking-normal text-overcast'>
             Sørg for at du har hemmeligheten til vellykket helårsgrilling i
             skapet. Dine gjester vil takke deg.
           </p>
           <div className='flex flex-wrap justify-center gap-4'>
-            <Button asChild size='lg' className='group gap-2'>
+            <BrandBadge
+              asChild
+              backgroundColor='var(--primary-button)'
+              textColor='var(--maritime-darkest)'
+              className='group min-h-14 border border-primary-button/24 px-8 py-4 text-base leading-[1.4] font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
+            >
               <Link
                 href={'/produkter' as Route}
                 data-track='GrillkveldenShopAllProductsClick'
@@ -26,15 +31,20 @@ export function CTASection() {
                 Se alle produkter
                 <ArrowRight className='size-4 transition-transform group-hover:translate-x-1' />
               </Link>
-            </Button>
-            <Button variant='outline' size='lg' asChild>
+            </BrandBadge>
+            <BrandBadge
+              asChild
+              backgroundColor='var(--cloud-dancer)'
+              textColor='var(--maritime-darkest)'
+              className='min-h-14 border border-cloud-dancer/24 px-8 py-4 text-base leading-[1.4] font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
+            >
               <Link
                 href={'/handlehjelp/storrelsesguide' as Route}
                 data-track='GrillkveldenFindYourSizeClick'
               >
                 Finn din størrelse
               </Link>
-            </Button>
+            </BrandBadge>
           </div>
         </AnimatedBlock>
       </div>

@@ -5,7 +5,7 @@ import { TechDownSlider } from './utekos-orginal/components/TechDownSlider'
 import { SectionThreeInOne } from './utekos-orginal/components/SectionThreeInOne'
 import { SectionSocialProof } from './utekos-orginal/components/SectionSocialProof'
 import { HeroAndEmpathy } from './components/HeroEmpathy'
-import { PurchaseClient } from './utekos-orginal/components/PurchaseClient'
+import { PurchaseClientLanding } from './components/PurchaseClientLanding'
 import { ProductDetailsAccordion } from './utekos-orginal/components/ProductDetailsAccordion'
 import { getProduct } from '@/api/lib/products/getProduct'
 import { StickyMobileAction } from './utekos-orginal/components/StickyMobileAction'
@@ -54,7 +54,7 @@ export default async function LandingPage() {
   if (!techDown) return <div>Produktet TechDown ble ikke funnet.</div>
 
   return (
-    <section className='flex min-h-screen flex-col items-center justify-start bg-[#1F2421]'>
+    <section className='flex min-h-screen w-full flex-col items-center justify-start overflow-x-clip bg-[#1F2421]'>
       <StickyMobileAction />
       <HeroAndEmpathy />
       <SectionThreeInOne />
@@ -63,9 +63,9 @@ export default async function LandingPage() {
       <Suspense fallback={null}>
         <div
           id='purchase-section'
-          className='scroll-mt-[70px] xl:scroll-mt-[86px]'
+          className='w-full scroll-mt-[70px] xl:scroll-mt-[86px]'
         >
-          <PurchaseClient products={productsMap} />
+          <PurchaseClientLanding products={productsMap} />
         </div>
       </Suspense>
 

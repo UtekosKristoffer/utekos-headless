@@ -1,7 +1,7 @@
 // Path: src/components/ProductCard/ProductCardSoldOut.tsx
 'use client'
 
-import { Button } from '@/components/ui/button'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import {
   HoverCard,
   HoverCardContent,
@@ -14,19 +14,17 @@ export function ProductCardSoldOut() {
   return (
     <HoverCard openDelay={200} closeDelay={100}>
       <HoverCardTrigger asChild>
-        <span className='flex-1 cursor-not-allowed'>
-          <Button
-            variant='default'
-            size='sm'
-            disabled={true}
-            className='w-full bg-muted text-muted-foreground pointer-events-none'
-          >
-            Utsolgt
-          </Button>
-        </span>
+        <BrandBadge
+          asChild
+          backgroundColor='var(--overcast)'
+          textColor='var(--maritime-blue)'
+          className='size-full min-h-12 cursor-not-allowed border border-cloud-dancer/10 text-base font-medium opacity-90'
+        >
+          <span aria-disabled='true'>Utsolgt</span>
+        </BrandBadge>
       </HoverCardTrigger>
       <HoverCardContent
-        className='w-60 bg-sidebar-foreground border border-border'
+        className='w-64 border border-chocolate-plum/20 bg-cloud-dancer text-maritime-blue shadow-xl'
         side='top'
         align='center'
       >
@@ -36,13 +34,13 @@ export function ProductCardSoldOut() {
             alt='Utekos logo'
             width={20}
             height={20}
-            className='mt-1 border border-neutral-800 rounded-full'
+            className='mt-1 rounded-full border border-chocolate-plum/20'
           />
           <div className='space-y-1'>
-            <h4 className='text-sm text-muted-foreground font-semibold'>
+            <h4 className='text-sm font-semibold text-maritime-blue'>
               Utsolgt for denne kombinasjonen
             </h4>
-            <p className='text-sm text-button'>
+            <p className='text-sm text-maritime-blue/75'>
               Prøv en annen farge eller størrelse.
             </p>
           </div>

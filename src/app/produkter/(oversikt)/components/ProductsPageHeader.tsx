@@ -1,22 +1,30 @@
 'use client'
 
-import { useRef, useState } from 'react'
-import { Sparkles } from 'lucide-react'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
+import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
+import { useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 
 gsap.registerPlugin(useGSAP)
 
+const STAR_POSITIONS = [
+  { top: 8, left: 12 },
+  { top: 18, left: 78 },
+  { top: 26, left: 34 },
+  { top: 39, left: 91 },
+  { top: 47, left: 56 },
+  { top: 58, left: 21 }
+] as const
+
 export function ProductsPageHeader() {
   const container = useRef<HTMLElement>(null)
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!container.current) return
     const rect = container.current.getBoundingClientRect()
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
-    setMousePos({ x, y })
 
     gsap.to('.gsap-spotlight', {
       x: x - rect.width / 2,
@@ -98,28 +106,30 @@ export function ProductsPageHeader() {
     <header
       ref={container}
       onMouseMove={handleMouseMove}
-      className='relative w-full overflow-hidden border-b border-white/5 bg-neutral-950 pt-20 pb-16 md:pt-32 md:pb-24 mb-12'
+      className='relative mb-12 w-full rounded-3xl overflow-hidden bg-[radial-gradient(circle_at_top,color-mix(in_oklab,var(--ancient-water)_16%,transparent),transparent_42%),linear-gradient(180deg,color-mix(in_oklab,var(--maritime-blue)_90%,black)_0%,color-mix(in_oklab,var(--maritime-darkest)_94%,black)_100%)] pt-12 pb-16'
     >
       <div className='absolute inset-0 -z-10 overflow-hidden pointer-events-none'>
-        <div className='gsap-grid absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]' />
+        <div className='gsap-grid absolute inset-0 bg-[linear-gradient(to_right,rgba(245,243,239,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(245,243,239,0.045)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]' />
 
-        <div className='absolute left-1/2 top-0 h-[800px] w-[1000px] -translate-x-1/2 opacity-20 mix-blend-screen'>
+        <div className='absolute left-1/2 top-0 h-[800px] w-[1000px] -translate-x-1/2 opacity-25 mix-blend-screen'>
           <div
-            className='gsap-spotlight h-full w-full bg-gradient-to-b from-sky-500 via-sky-900/20 to-transparent blur-[120px] will-change-transform'
+            className='gsap-spotlight h-full w-full bg-gradient-to-b from-ancient-water via-dusted-peri/18 to-transparent blur-[120px] will-change-transform'
             style={{
               transform: 'translate(0, 0)'
             }}
           />
         </div>
 
-        {[...Array(6)].map((_, i) => (
+        <div className='absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-cloud-dancer/30 to-transparent' />
+
+        {STAR_POSITIONS.map((position, i) => (
           <div
             key={i}
-            className='gsap-star absolute h-1 w-1 rounded-full bg-white opacity-10'
+            className='gsap-star absolute h-1 w-1 rounded-full bg-cloud-dancer opacity-16'
             style={{
-              top: `${Math.random() * 60}%`,
-              left: `${Math.random() * 100}%`,
-              boxShadow: '0 0 10px rgba(255,255,255,0.5)'
+              top: `${position.top}%`,
+              left: `${position.left}%`,
+              boxShadow: '0 0 10px rgba(245,243,239,0.42)'
             }}
           />
         ))}
@@ -127,40 +137,44 @@ export function ProductsPageHeader() {
 
       <div className='container mx-auto px-4 text-center relative z-10'>
         <div className='gsap-badge opacity-0 mb-8 inline-flex items-center justify-center'>
-          <div className='group relative flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-500/5 px-5 py-2 backdrop-blur-md transition-all duration-300 hover:border-sky-500/40 hover:bg-sky-500/10 hover:shadow-[0_0_20px_-5px_rgba(14,165,233,0.3)]'>
-            <div className='absolute inset-0 overflow-hidden rounded-full'>
-              <div className='absolute top-0 -left-[100%] h-full w-full bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 transition-all duration-1000 group-hover:left-[100%]' />
-            </div>
-            <Sparkles className='h-3.5 w-3.5 text-sky-400 animate-pulse' />
-            <span className='text-xs font-bold uppercase tracking-[0.2em] text-sky-400'>
-              Utekos®
+          <BrandBadge
+            backgroundColor='var(--maritime-blue)'
+            textColor='var(--cloud-dancer)'
+            className='group relative border border-cloud-dancer/18 px-5 py-2.5 shadow-[0_14px_32px_-24px_rgba(8,10,24,0.62)] sm:px-6 sm:py-3'
+          >
+            <span className='absolute inset-0 overflow-hidden rounded-full'>
+              <span className='absolute top-0 -left-[100%] h-full w-full bg-gradient-to-r from-transparent via-cloud-dancer/25 to-transparent skew-x-12 transition-all duration-1000 group-hover:left-[100%]' />
             </span>
-          </div>
+            <UtekosWordmark
+              className='relative z-10 h-auto w-[98px] sm:w-[112px]'
+              style={{ color: 'var(--cloud-dancer)' }}
+            />
+          </BrandBadge>
         </div>
 
-        <h1 className='mx-auto max-w-5xl text-3xl font-bold tracking-tight text-white sm:text-5xl md:text-7xl perspective-1000'>
+        <h1 className='perspective-1000 mx-auto max-w-5xl text-3xl font-bold tracking-[-0.02em] text-cloud-dancer sm:text-5xl md:text-7xl'>
           <span className='block overflow-hidden'>
             <span className='gsap-title-line block'>Kolleksjonen for</span>
           </span>
           <span className='block overflow-hidden pt-2'>
-            <span className='gsap-title-line block bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text text-transparent bg-[length:200%_auto] animate-shine leading-tight py-1'>
-              kompromissløs komfort.
+            <span className='gsap-title-line block bg-gradient-to-r from-ancient-water via-cloud-dancer to-overcast bg-clip-text py-1 leading-tight text-transparent'>
+              kompromissløs komfort
             </span>
           </span>
         </h1>
 
-        <p className='gsap-desc opacity-0 mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-neutral-400 md:text-xl'>
+        <p className='gsap-desc opacity-0 mx-auto mt-8 max-w-2xl text-lg leading-[1.5] text-overcast md:text-xl'>
           Vi har{' '}
-          <span className='relative inline-block text-white font-medium'>
+          <span className='relative inline-block font-medium text-cloud-dancer'>
             redefinert
-            <span className='gsap-underline absolute left-0 bottom-0 h-[2px] w-full bg-sky-500 origin-left' />
+            <span className='gsap-underline absolute bottom-0 left-0 h-[2px] w-full origin-left bg-primary-button' />
           </span>{' '}
           utekosen gjennom teknologi og funksjonalitet.
           <br className='hidden md:block' />
           Utforsk vår kolleksjon og{' '}
           <span className='relative inline-block px-1'>
-            <span className='gsap-highlight absolute inset-0 -skew-x-6 rounded bg-sky-500/20 origin-left' />
-            <span className='relative z-10 font-medium text-sky-300'>
+            <span className='gsap-highlight absolute inset-0 origin-left rounded bg-dusted-peri/24 -skew-x-6' />
+            <span className='relative z-10 font-medium text-ancient-water'>
               skreddersy
             </span>
           </span>{' '}
@@ -168,7 +182,7 @@ export function ProductsPageHeader() {
         </p>
       </div>
 
-      <div className='absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-neutral-950 via-neutral-950/80 to-transparent pointer-events-none' />
+      <div className='pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-maritime-darkest via-maritime-darkest/80 to-transparent' />
     </header>
   )
 }

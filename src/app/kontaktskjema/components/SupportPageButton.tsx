@@ -1,11 +1,12 @@
 // Path: src/app/kontaktskjema/Buttons/SupportPageButton.tsx
 
 'use client'
-import { Button } from '@/components/ui/button'
+import type { ComponentProps } from 'react'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { cn } from '@/lib/utils/className'
 import { useCtaMotion } from '@/app/kontaktskjema/utils/useCtaMotion'
 
-type Props = Omit<React.ComponentProps<typeof Button>, 'variant' | 'size'> & {
+type Props = ComponentProps<'button'> & {
   isBusy?: boolean
 }
 
@@ -17,14 +18,18 @@ export function SupportPageButton({
 }: Props) {
   const ref = useCtaMotion<HTMLButtonElement>()
   return (
-    <Button
-      ref={ref}
-      variant='vercel'
-      aria-busy={isBusy || undefined}
-      className={cn('w-full select-none', className)}
-      {...props}
+    <BrandBadge
+      asChild
+      backgroundColor='var(--primary-button)'
+      textColor='var(--maritime-darkest)'
+      className={cn(
+        'min-h-12 w-full select-none border border-primary-button/20 px-6 py-3 text-base leading-[1.4] font-semibold tracking-normal shadow-[0_16px_36px_-26px_rgba(232,178,66,0.72)] transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:ring-3 focus-visible:ring-primary-button/35 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-60',
+        className
+      )}
     >
-      <span aria-live='polite'>{children}</span>
-    </Button>
+      <button ref={ref} aria-busy={isBusy || undefined} {...props}>
+        <span aria-live='polite'>{children}</span>
+      </button>
+    </BrandBadge>
   )
 }

@@ -46,7 +46,7 @@ export function SizeSelector({
             onClick={() => onSelect(optionName, sizeValue)}
           >
             <span className='font-semibold'>{sizeValue}</span>
-            <div className='text-right text-xs text-foreground-on-dark/60'>
+            <div className='text-right text-xs text-maritime-blue/62'>
               {length && <div>Lengde til hals: {`${length.value} cm`}</div>}
               {centerToWrist && (
                 <div>Senter til ermetupp: {`${centerToWrist.value} cm`}</div>
@@ -59,10 +59,10 @@ export function SizeSelector({
 
       {/* STEG 2: Bruker nå propen til å sjekke betingelsen */}
       {!handlesToHideGuide.includes(productHandle) && (
-        <div className='flex w-full flex-col rounded-lg border border-white/20 bg-sidebar-foreground bg-surface-raised/40 p-4 text-left transition-colors'>
+        <div className='flex w-full flex-col rounded-[1rem] border border-maritime-blue/14 bg-cloud-dancer/72 p-4 text-left transition-colors'>
           <button
             onClick={() => setIsDetailsOpen(!isDetailsOpen)}
-            className='flex w-full justify-between bg-transparent p-0 font-semibold text-foreground-on-dark/80 transition-colors hover:text-foreground-on-dark'
+            className='flex w-full justify-between bg-transparent p-0 font-semibold text-maritime-blue/80 transition-colors hover:text-maritime-blue'
             aria-expanded={isDetailsOpen}
             aria-controls='size-details'
           >
@@ -75,7 +75,7 @@ export function SizeSelector({
               fill='none'
               stroke='currentColor'
               strokeWidth='2'
-              className={`transform rounded-full ring-1 ring-button text-button transition-transform duration-200 hover:scale-105 hover:ring-2 ${isDetailsOpen ? 'rotate-45' : ''}`}
+              className={`transform rounded-full text-maritime-blue ring-1 ring-maritime-blue transition-transform duration-200 hover:scale-105 hover:ring-2 ${isDetailsOpen ? 'rotate-45' : ''}`}
               aria-hidden='true'
             >
               <path d='M5 12h14' />
@@ -89,11 +89,11 @@ export function SizeSelector({
             ${isDetailsOpen ? 'max-h-40 pt-3 opacity-100' : 'max-h-0 opacity-0'}
           `}
           >
-            <p className='text-xs text-foreground-on-dark/80'>
+            <p className='text-xs text-maritime-blue'>
               Se dimensjonene på Utekos-modellene{' '}
               <Link
                 href='/handlehjelp/storrelsesguide'
-                className='underline text-button hover:text-foreground-on-dark'
+                className='text-maritime-blue underline hover:text-maritime-blue/76'
               >
                 her
               </Link>

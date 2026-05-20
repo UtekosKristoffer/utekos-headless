@@ -7,80 +7,108 @@ import { AnimatedBlock } from '@/components/AnimatedBlock'
 
 export async function QualitySection() {
   const cardClasses =
-    'relative overflow-hidden rounded-xl border border-neutral-800 bg-sidebar-foreground p-8'
+    'relative overflow-hidden rounded-[1.5rem] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.2)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] backdrop-blur-2xl transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl'
 
   return (
-    <section className='py-16 sm:py-24'>
+    <section className='relative my-16 sm:my-24! overflow-hidden'>
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-        <div className='grid grid-cols-1 grid-rows-2 gap-4 lg:grid-cols-3'>
+        <div className='grid grid-cols-1 gap-6 lg:grid-cols-3 lg:grid-rows-2'>
+          {/* HOVEDKORT: Maritime Blue */}
           <AnimatedBlock
             className='will-animate-fade-in-up lg:col-span-2 lg:row-span-2'
             delay='0.2s'
-            threshold={0.5}
+            threshold={0.3}
           >
             <div
               className={cn(
                 cardClasses,
-                'flex h-full flex-col justify-between'
+                // Endret fra justify-between til justify-center for å unngå det store tomrommet
+                'group flex h-full flex-col justify-center bg-gradient-to-br from-maritime-blue/95 to-maritime-blue/80 p-8 sm:p-12 lg:p-16'
               )}
             >
-              <div>
-                <h2 className='text-3xl bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text outline-hiddenfont-bold tracking-tight text-white sm:text-4xl'>
+              {/* Premium shine overlay on hover */}
+              <div
+                className='pointer-events-none absolute inset-0 z-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-full'
+                aria-hidden='true'
+              />
+
+              <div className='relative z-10'>
+                <h2 className='text-[2rem] sm:text-[2.5rem] lg:text-[3rem] font-medium leading-[0.9] tracking-[-0.01em] text-cloud-dancer'>
                   Kvalitet i hver fiber
                 </h2>
-                <p className='mt-4 max-w-xl bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text outline-hidden text-lg text-paper-foreground'>
+                <p className='mt-5 sm:mt-6 max-w-xl text-[1.125rem] font-normal leading-[1.45] tracking-[-0.02em] text-cloud-dancer/80'>
                   Fra den lette spensten i dunet til slitestyrken i hver søm –
                   vi er transparente om materialvalgene som definerer Utekos.
                   Dette er kvalitet du kan føle på, designet for å vare.
                 </p>
               </div>
-              <div className='mt-8'>
+
+              {/* Justert margin-top for en tettere og mer logisk gruppering */}
+              <div className='relative z-10 mt-8 sm:mt-10'>
                 <Link
                   href='/handlehjelp/teknologi-materialer'
                   data-track='UtforskTeknologienFrontPageClick'
-                  className='inline-flex items-center justify-center rounded-md bg-button px-6 py-3 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-button/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+                  className='group/btn inline-flex items-center justify-center rounded-full bg-[var(--primary-button)] px-8 py-4 text-[1rem] font-medium text-maritime-blue transition-all duration-300 hover:bg-white hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(255,255,255,0.2)] focus:outline-none focus:ring-2 focus:ring-brand-highlight focus:ring-offset-2 focus:ring-offset-maritime-blue'
                 >
                   Utforsk teknologien
-                  <ArrowRightIcon className='ml-2 h-4 w-4' />
+                  <ArrowRightIcon className='ml-2 h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1' />
                 </Link>
               </div>
             </div>
           </AnimatedBlock>
+
+          {/* KORT 1: Chocolate Plum (Premium Isolasjon) */}
           <AnimatedBlock
             className='will-animate-fade-in-up h-full'
             delay='0.4s'
-            threshold={0.5}
+            threshold={0.3}
           >
             <div
-              className={cn(cardClasses, 'flex h-full flex-col justify-center')}
+              className={cn(
+                cardClasses,
+                // Endret justify-center til justify-start for å fjerne tomrom på topp
+                'group flex h-full flex-col justify-start bg-gradient-to-br from-chocolate-plum/95 to-chocolate-plum/80 p-6 sm:p-8'
+              )}
             >
-              <div className='flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-700 bg-background'>
-                <Feather className='h-6 w-6 text-pink-400' />
+              {/* Flex-container for å plassere ikon og tittel på samme horisontale linje */}
+              <div className='mb-4 flex items-center gap-4'>
+                <div className='flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-soft-warm/20 bg-gradient-to-br from-white/10 to-transparent text-soft-warm shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] shadow-soft-warm/10 transition-transform duration-500 group-hover:scale-110'>
+                  <Feather className='h-5 w-5 stroke-[1.5]' />
+                </div>
+                <h3 className='text-[1.125rem] sm:text-[1.25rem] font-medium leading-[1.1] tracking-[-0.01em] text-cloud-dancer'>
+                  Premium Isolasjon
+                </h3>
               </div>
-              <h3 className='mt-4 font-semibold text-foreground'>
-                Premium Isolasjon
-              </h3>
-              <p className='mt-1 text-sm text-access/70'>
+              <p className='text-[1rem] font-normal leading-[1.45] tracking-[-0.02em] text-cloud-dancer/70'>
                 Kun sertifisert dun og høykvalitets syntetisk fyll for optimal
                 varme-til-vekt.
               </p>
             </div>
           </AnimatedBlock>
+
+          {/* KORT 2: Mountain View (Bygget for å vare) */}
           <AnimatedBlock
             className='will-animate-fade-in-up h-full'
             delay='0.6s'
-            threshold={0.5}
+            threshold={0.3}
           >
             <div
-              className={cn(cardClasses, 'flex h-full flex-col justify-center')}
+              className={cn(
+                cardClasses,
+                // Endret justify-center til justify-start
+                'group flex h-full flex-col justify-start bg-gradient-to-br from-mountain-view/95 to-mountain-view/80 p-6 sm:p-8'
+              )}
             >
-              <div className='flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-700 bg-background'>
-                <ShieldCheckIcon className='h-6 w-6 text-green-400' />
+              {/* Flex-container for å plassere ikon og tittel på samme horisontale linje */}
+              <div className='mb-4 flex items-center gap-4'>
+                <div className='flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-ancient-water/20 bg-gradient-to-br from-white/10 to-transparent text-ancient-water shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] shadow-ancient-water/10 transition-transform duration-500 group-hover:scale-110'>
+                  <ShieldCheckIcon className='h-5 w-5 stroke-[1.5]' />
+                </div>
+                <h3 className='text-[1.125rem] sm:text-[1.25rem] font-medium leading-[1.1] tracking-[-0.01em] text-cloud-dancer'>
+                  Bygget for å vare
+                </h3>
               </div>
-              <h3 className='mt-4 font-semibold text-foreground'>
-                Bygget for å vare
-              </h3>
-              <p className='mt-1 text-sm text-access/70'>
+              <p className='text-[1rem] font-normal leading-[1.45] tracking-[-0.02em] text-cloud-dancer/70'>
                 Slitesterke materialer og solide sømmer som tåler aktiv bruk i
                 norske forhold.
               </p>

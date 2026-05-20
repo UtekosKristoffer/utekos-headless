@@ -12,12 +12,23 @@ export function useInStoreNoticeAnimation() {
 
   useGSAP(
     () => {
+      const root = containerRef.current
       const logoBox = logoBoxRef.current
       const content = contentRef.current
-      const smokeParticles = gsap.utils.toArray('.smoke-particle')
-      const sparkParticles = gsap.utils.toArray('.spark-particle')
+      const smokeParticles = gsap.utils.toArray<HTMLElement>(
+        '.smoke-particle',
+        root
+      )
+      const sparkParticles = gsap.utils.toArray<HTMLElement>(
+        '.spark-particle',
+        root
+      )
+      const highlights = gsap.utils.toArray<HTMLElement>(
+        '.gsap-highlight',
+        root
+      )
 
-      if (!logoBox || !content) return
+      if (!root || !logoBox || !content) return
 
       // Nullstill verdier (Reset)
       gsap.set(logoBox, {
@@ -26,13 +37,19 @@ export function useInStoreNoticeAnimation() {
         scaleX: 1.2,
         autoAlpha: 1
       })
-      gsap.set(smokeParticles, { scale: 0, opacity: 0 })
-      gsap.set(sparkParticles, { scale: 0, opacity: 0 })
+      if (smokeParticles.length > 0) {
+        gsap.set(smokeParticles, { scale: 0, opacity: 0 })
+      }
+
+      if (sparkParticles.length > 0) {
+        gsap.set(sparkParticles, { scale: 0, opacity: 0 })
+      }
+
       gsap.set(content, { y: 30, autoAlpha: 0 })
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: containerRef.current,
+          trigger: root,
           start: 'top 70%',
           toggleActions: 'play none none reverse'
         }
@@ -73,47 +90,55 @@ export function useInStoreNoticeAnimation() {
       }, 'brake')
 
       // 4. Partikkel-eksplosjon (Starter ved brake)
-      tl.to(
-        smokeParticles,
-        {
-          scale: 'random(2.5, 4)',
-          x: 'random(-100, -20)',
-          y: 'random(-50, 0)',
-          opacity: 'random(0.4, 0.8)',
-          duration: 0.2,
-          stagger: { amount: 0.1, from: 'center' },
-          ease: 'expo.out'
-        },
-        'brake'
-      )
+      if (smokeParticles.length > 0) {
+        tl.to(
+          smokeParticles,
+          {
+            scale: 'random(2.5, 4)',
+            x: 'random(-100, -20)',
+            y: 'random(-50, 0)',
+            opacity: 'random(0.4, 0.8)',
+            duration: 0.2,
+            stagger: { amount: 0.1, from: 'center' },
+            ease: 'expo.out'
+          },
+          'brake'
+        )
+      }
 
-      tl.to(
-        sparkParticles,
-        {
-          scale: 'random(0.5, 1)',
-          x: 'random(20, 100)',
-          y: 'random(10, 50)',
-          opacity: 1,
-          duration: 0.3,
-          stagger: { amount: 0.1, from: 'random' },
-          ease: 'power3.out'
-        },
-        'brake'
-      )
+      if (sparkParticles.length > 0) {
+        tl.to(
+          sparkParticles,
+          {
+            scale: 'random(0.5, 1)',
+            x: 'random(20, 100)',
+            y: 'random(10, 50)',
+            opacity: 1,
+            duration: 0.3,
+            stagger: { amount: 0.1, from: 'random' },
+            ease: 'power3.out'
+          },
+          'brake'
+        )
+      }
 
       // 5. Fade ut partikler (Skjer i bakgrunnen)
-      tl.to(
-        smokeParticles,
-        {
-          opacity: 0,
-          scale: '+=1',
-          duration: 'random(1.5, 2.5)',
-          ease: 'power1.out'
-        },
-        'brake+=0.2'
-      )
+      if (smokeParticles.length > 0) {
+        tl.to(
+          smokeParticles,
+          {
+            opacity: 0,
+            scale: '+=1',
+            duration: 'random(1.5, 2.5)',
+            ease: 'power1.out'
+          },
+          'brake+=0.2'
+        )
+      }
 
-      tl.to(sparkParticles, { opacity: 0, duration: 0.2 }, 'brake+=0.3')
+      if (sparkParticles.length > 0) {
+        tl.to(sparkParticles, { opacity: 0, duration: 0.2 }, 'brake+=0.3')
+      }
 
       // 6. TEKST VISES (Flyttet frem!)
       // Starter 0.2 sekunder etter brems, mens logoen fortsatt henger litt.
@@ -142,6 +167,22 @@ export function useInStoreNoticeAnimation() {
         },
         'brake+=0.4'
       )
+
+      // 8. TEKST HIGHLIGHT
+      if (highlights.length > 0) {
+        tl.fromTo(
+          highlights,
+          { scaleX: 0, opacity: 0 },
+          {
+            scaleX: 1,
+            opacity: 1,
+            duration: 1.2,
+            ease: 'power3.out',
+            transformOrigin: 'left center'
+          },
+          'brake+=0.8'
+        )
+      }
     },
     { scope: containerRef }
   )

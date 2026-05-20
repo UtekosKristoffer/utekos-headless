@@ -14,6 +14,8 @@ type VisitorEventPayload = {
   referrer: string | null
 }
 
+let lastDevelopmentVisitorPath: string | null = null
+
 function sendVisitorEvent(payload: VisitorEventPayload) {
   const body = JSON.stringify(payload)
 
@@ -52,7 +54,15 @@ export function VisitorAnalyticsTracker() {
       return
     }
 
+    if (
+      process.env.NODE_ENV === 'development'
+      && lastDevelopmentVisitorPath === fullPath
+    ) {
+      return
+    }
+
     lastTrackedPathRef.current = fullPath
+    lastDevelopmentVisitorPath = fullPath
 
     sendVisitorEvent({
       visitorId: getOrCreateVisitorId(),

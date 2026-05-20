@@ -1,7 +1,7 @@
 // Path: src/app/om-oss/Sections/AboutUsHeroSection.tsx
 import AboutUsOG from '@public/about-use-hero-gemini.png'
 import Image from 'next/image'
-import { UtekosWordmark } from '@/components/branding/UtekosWordmark'
+import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import { Separator } from '@/components/ui/separator'
 
 export function AboutUsHeroSection() {

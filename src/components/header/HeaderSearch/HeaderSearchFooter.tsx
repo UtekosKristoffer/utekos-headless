@@ -21,13 +21,13 @@ export function HeaderSearchFooter() {
       </div>
       <div className='hidden items-center gap-2 md:flex'>
         <span className='flex items-center gap-1'>
-          <kbd className='rounded border border-white/10 bg-black/20 px-1.5 font-mono text-[10px] text-white/70 dark:bg-white/10'>
+          <kbd className='rounded border border-cloud-dancer/10 bg-cloud-dancer/6 px-1.5 font-mono text-[10px] text-cloud-dancer/70'>
             ↑↓
           </kbd>
           for å velge
         </span>
         <span className='flex items-center gap-1'>
-          <kbd className='rounded border border-white/10 bg-black/20 px-1.5 font-mono text-[10px] text-white/70 dark:bg-white/10'>
+          <kbd className='rounded border border-cloud-dancer/10 bg-cloud-dancer/6 px-1.5 font-mono text-[10px] text-cloud-dancer/70'>
             esc
           </kbd>
           for å lukke

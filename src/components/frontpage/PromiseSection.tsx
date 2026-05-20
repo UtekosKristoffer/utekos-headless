@@ -79,7 +79,7 @@ export function PromiseSection() {
               </CarouselContent>
             </Carousel>
           </div>
-          <div className='relative overflow-hidden rounded-xl border border-neutral-800 bg-sidebar-foreground p-8 lg:p-12'>
+          <div className='relative overflow-hidden rounded-xl border border-cloud-dancer bg-maritime-blue p-8 lg:p-12'>
             <div
               className='absolute inset-0 z-0 opacity-20'
               style={{
@@ -115,7 +115,7 @@ export function PromiseSection() {
                   </div>
                 </div>
                 <div className='flex items-start gap-4'>
-                  <div className='flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-pink-500/10 text-pink-400'>
+                  <div className='flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-bleached-mauve text-dry-rose'>
                     <ClockIcon className='h-5 w-5' />
                   </div>
                   <div>
@@ -129,7 +129,7 @@ export function PromiseSection() {
                   </div>
                 </div>
                 <div className='flex items-start gap-4'>
-                  <div className='flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-green-500/10 text-green-400'>
+                  <div className='flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-mountain-view text-fairest-jade'>
                     <ShieldCheckIcon className='h-5 w-5' />
                   </div>
                   <div>

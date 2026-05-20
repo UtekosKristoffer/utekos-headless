@@ -184,7 +184,7 @@ export async function FrontPageJsonLd() {
     const featuredProductsNode: ItemList = {
       '@type': 'ItemList',
       '@id': FEATURED_PRODUCTS_ID,
-      'name': 'Våre kunders favoritter',
+      'name': 'Kundenes favoritter',
       'description':
         'Utvalgte Utekos-produkter som fremheves på forsiden akkurat nå.',
       'url': SITE_URL,

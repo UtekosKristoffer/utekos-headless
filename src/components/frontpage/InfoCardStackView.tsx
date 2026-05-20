@@ -48,18 +48,18 @@ export const InfoCardStackView = forwardRef<
         ref={card1Ref}
         className={cn(
           cardBaseClasses,
-          'left-0 top-0 bg-neutral-900',
+          'left-0 top-0 bg-maritime-blue',
           'h-40 max-w-[280px] p-4 sm:h-48 sm:max-w-sm sm:p-6'
         )}
       >
         <TrafficLights variant='default' />
         <div className='mt-6 flex items-start gap-3'>
-          <ShoppingBag className='h-4 w-4 flex-shrink-0 text-muted-foreground sm:h-5 sm:w-5' />
+          <ShoppingBag className='h-4 w-4 flex-shrink-0 text-cloud-dancer sm:h-5 sm:w-5' />
           <div>
-            <h3 className='text-sm font-semibold text-foreground sm:text-base'>
+            <h3 className='text-sm font-semibold text-cloud-dancer sm:text-base'>
               En trygg handel
             </h3>
-            <p className='mt-1 text-xs text-muted-foreground sm:text-sm'>
+            <p className='mt-1 text-xs text-cloud-dancer sm:text-sm'>
               Sikre betalingsløsninger og 14 dagers angrerett.
             </p>
           </div>
@@ -71,7 +71,7 @@ export const InfoCardStackView = forwardRef<
         ref={card2Ref}
         className={cn(
           cardBaseClasses,
-          'left-12 top-28 overflow-hidden bg-neutral-900 sm:left-1/4 sm:top-32',
+          'left-12 top-28 overflow-hidden bg-overcast sm:left-1/4 sm:top-32',
           'h-40 max-w-[280px] p-4 sm:h-48 sm:max-w-sm sm:p-6'
         )}
       >
@@ -91,12 +91,12 @@ export const InfoCardStackView = forwardRef<
 
         <div className='relative z-10 flex h-full flex-col'>
           <div className='mt-6 flex items-start gap-3'>
-            <Lock className='h-4 w-4 flex-shrink-0 text-access/70 sm:h-5 sm:w-5' />
+            <Lock className='size-4 flex-shrink-0 text-maritime-darkest sm:size-5' />
             <div>
-              <h3 className='text-sm font-semibold text-foreground sm:text-base'>
+              <h3 className='text-sm font-semibold text-maritime-darkest sm:text-base'>
                 Ditt personvern
               </h3>
-              <p className='mt-1 text-xs text-access/70 sm:text-sm'>
+              <p className='mt-1 text-xs text-maritime-darkest sm:text-sm'>
                 Vi tar personvern på alvor. Se hvordan vi behandler dine data.
               </p>
             </div>
@@ -106,7 +106,7 @@ export const InfoCardStackView = forwardRef<
             <Image
               src={UtekosLogo}
               alt='Utekos logo ikon'
-              className='h-6 w-6 opacity-50 sm:h-8 sm:w-8'
+              className='size-7 sm:size-9'
             />
           </div>
         </div>

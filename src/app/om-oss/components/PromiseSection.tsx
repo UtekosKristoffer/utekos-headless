@@ -1,64 +1,72 @@
 // Path: src/app/om-oss/Sections/PromiseSection.tsx
 import { Handshake, Heart, ShieldCheck } from 'lucide-react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 
 export function PromiseSection() {
   return (
-    <section className='relative py-24 sm:py-32 bg-[#1F2421] overflow-hidden'>
-      {/* Bakgrunns-atmosfære (Varm peis-glød) */}
-      <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#E07A5F]/10 blur-[120px] rounded-full pointer-events-none' />
+    <section className='relative isolate overflow-hidden bg-maritime-darkest py-24 sm:py-32'>
+      <div className='pointer-events-none absolute inset-0 -z-10'>
+        <div className='absolute left-1/2 top-1/2 h-[44rem] w-[44rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_24%,transparent)_0%,transparent_70%)] blur-[120px]' />
+        <div className='absolute bottom-0 left-[12%] h-72 w-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_18%,transparent)_0%,transparent_72%)] blur-3xl' />
+      </div>
 
-      <div className='container mx-auto max-w-4xl px-6 relative z-10'>
-        {/* SENTRERT SØYLE */}
+      <div className='container relative z-10 mx-auto max-w-4xl px-6'>
         <div className='flex flex-col items-center text-center'>
-          {/* 1. IKON / SEGL */}
+          <AnimatedBlock className='mb-6 will-animate-fade-in-up' delay='0s'>
+            <BrandBadge
+              label='Vårt løfte'
+              backgroundColor='var(--dusted-peri)'
+              textColor='var(--maritime-darkest)'
+              className='shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
+            />
+          </AnimatedBlock>
+
           <AnimatedBlock className='relative mb-8' delay='0s'>
-            <div className='relative flex h-24 w-24 items-center justify-center rounded-full border border-[#E07A5F]/30 bg-[#2C2420] text-[#E07A5F] shadow-[0_0_30px_rgba(224,122,95,0.2)]'>
+            <div className='relative flex h-24 w-24 items-center justify-center rounded-full border border-cloud-dancer/14 bg-cloud-dancer text-maritime-darkest shadow-[0_24px_70px_-42px_color-mix(in_oklab,var(--cloud-dancer)_70%,transparent)]'>
               <Handshake className='h-10 w-10' strokeWidth={1.5} />
             </div>
-            {/* Den gylne tråden som starter under ikonet */}
-            <div className='absolute left-1/2 top-full h-16 w-px bg-gradient-to-b from-[#E07A5F]/50 to-transparent -translate-x-1/2' />
+            <div className='absolute left-1/2 top-full h-16 w-px -translate-x-1/2 bg-gradient-to-b from-dusted-peri/60 to-transparent' />
           </AnimatedBlock>
 
-          {/* 2. OVERSKRIFT */}
           <AnimatedBlock className='mb-12' delay='0.1s'>
-            <h2 className='text-4xl md:text-5xl font-serif text-[#F4F1EA] mb-4'>
+            <h2 className='mb-5 text-4xl font-serif text-cloud-dancer md:text-5xl'>
               Vårt løfte til deg
             </h2>
-            <div className='h-1 w-12 bg-[#E07A5F] mx-auto rounded-full opacity-80' />
+            <p className='mx-auto max-w-2xl text-xl font-light leading-relaxed text-overcast/85'>
+              Komforten skal merkes med en gang, og kvaliteten skal fortsette å
+              bære øyeblikkene ute.
+            </p>
           </AnimatedBlock>
 
-          {/* 3. LØFTENE (Kort) */}
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-6 w-full'>
-            {/* Løfte 1: Følelsen */}
+          <div className='grid w-full grid-cols-1 gap-6 md:grid-cols-2'>
             <AnimatedBlock
-              className='group relative flex flex-col items-center p-8 rounded-sm bg-[#2C2420] border border-[#F4F1EA]/5 hover:border-[#E07A5F]/30 transition-all duration-500'
+              className='group relative flex flex-col items-center rounded-[1.75rem] border border-ancient-water/18 bg-[color-mix(in_oklab,var(--cloud-dancer)_92%,var(--ancient-water))] p-8 shadow-[0_24px_70px_-48px_rgba(0,0,0,0.55)] transition-all duration-500 hover:-translate-y-1 hover:border-dusted-peri/38'
               delay='0.2s'
             >
-              <div className='mb-4 p-3 rounded-full bg-[#E07A5F]/10 text-[#E07A5F]'>
-                <Heart className='w-6 h-6' />
+              <div className='mb-5 rounded-full border border-maritime-blue/14 bg-maritime-blue p-4 text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
+                <Heart className='h-6 w-6' strokeWidth={1.6} />
               </div>
-              <p className='text-lg text-[#F4F1EA]/90 font-serif italic mb-2'>
+              <p className='mb-3 text-xl font-serif text-maritime-blue'>
                 Mer enn et plagg
               </p>
-              <p className='text-[#F4F1EA]/60 leading-relaxed font-light'>
+              <p className='text-lg font-light leading-relaxed text-maritime-blue/78'>
                 Vi lover deg følelsen av umiddelbar varme og velvære. En garanti
                 for at du kan nyte øyeblikket lenger, uten å fryse.
               </p>
             </AnimatedBlock>
 
-            {/* Løfte 2: Investeringen */}
             <AnimatedBlock
-              className='group relative flex flex-col items-center p-8 rounded-sm bg-[#2C2420] border border-[#F4F1EA]/5 hover:border-[#E07A5F]/30 transition-all duration-500'
+              className='group relative flex flex-col items-center rounded-[1.75rem] border border-ancient-water/18 bg-[color-mix(in_oklab,var(--cloud-dancer)_92%,var(--ancient-water))] p-8 shadow-[0_24px_70px_-48px_rgba(0,0,0,0.55)] transition-all duration-500 hover:-translate-y-1 hover:border-dusted-peri/38'
               delay='0.3s'
             >
-              <div className='mb-4 p-3 rounded-full bg-[#E07A5F]/10 text-[#E07A5F]'>
-                <ShieldCheck className='w-6 h-6' />
+              <div className='mb-5 rounded-full border border-maritime-blue/14 bg-maritime-blue p-4 text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
+                <ShieldCheck className='h-6 w-6' strokeWidth={1.6} />
               </div>
-              <p className='text-lg text-[#F4F1EA]/90 font-serif italic mb-2'>
+              <p className='mb-3 text-xl font-serif text-maritime-blue'>
                 En varig verdi
               </p>
-              <p className='text-[#F4F1EA]/60 leading-relaxed font-light'>
+              <p className='text-lg font-light leading-relaxed text-maritime-blue/78'>
                 Se på det som en investering i din egen livskvalitet.
                 Kompromissløs komfort og overlegen allsidighet, designet for å
                 gi deg flere timer utendørs, år etter år.

@@ -1,8 +1,59 @@
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://utekos.no'),
+  title: 'Inspirasjon til hytteliv, bobil, båtliv og utekos | Utekos',
+  description:
+    'Finn inspirasjon til mer komfort ute: hytteliv, bobil, båtliv, terrasse, grillkvelder og isbading med Utekos.',
+  alternates: {
+    canonical: '/inspirasjon'
+  },
+  openGraph: {
+    title: 'Inspirasjon til mer utekos | Utekos',
+    description:
+      'Utforsk guider og ideer for hytteliv, bobil, båtliv, terrasse, grillkvelder og isbading.',
+    url: '/inspirasjon',
+    siteName: 'Utekos',
+    locale: 'no_NO',
+    type: 'website'
+  }
+}
+
 export default function InspirationPage() {
   return (
-    <>
-      <title>Inspirasjon</title>
-      <meta name='description' content='Inspirasjon for din neste tur' />
-    </>
+    <section className='bg-cloud-dancer py-16 text-maritime-darkest sm:py-24'>
+      <div className='container mx-auto max-w-4xl px-4 text-center'>
+        <h1 className='text-4xl font-bold leading-[0.95] tracking-normal sm:text-5xl lg:text-6xl'>
+          Inspirasjon for mer utekos
+        </h1>
+        <p className='mx-auto mt-6 max-w-2xl text-lg leading-[1.45] tracking-normal text-maritime-blue'>
+          Utforsk praktiske guider for hytteliv, bobil, båtliv, terrasse,
+          grillkvelder og isbading. Finn situasjonen som ligner din, og se
+          hvordan Utekos forlenger de gode øyeblikkene ute.
+        </p>
+        <div className='mt-8 flex flex-wrap justify-center gap-4'>
+          <BrandBadge
+            asChild
+            backgroundColor='var(--primary-button)'
+            textColor='var(--maritime-darkest)'
+            className='border border-primary-button/24 px-7 py-3 text-base leading-[1.4] font-semibold tracking-normal shadow-[0_18px_38px_-30px_rgba(49,42,18,0.58)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
+          >
+            <Link href='/produkter'>Se produktene</Link>
+          </BrandBadge>
+          <BrandBadge
+            asChild
+            backgroundColor='var(--maritime-darkest)'
+            textColor='var(--cloud-dancer)'
+            className='border border-maritime-darkest/18 px-7 py-3 text-base leading-[1.4] font-semibold tracking-normal shadow-[0_18px_38px_-32px_rgba(14,18,35,0.7)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-110'
+          >
+            <Link href='/handlehjelp/storrelsesguide'>
+              Finn riktig størrelse
+            </Link>
+          </BrandBadge>
+        </div>
+      </div>
+    </section>
   )
 }

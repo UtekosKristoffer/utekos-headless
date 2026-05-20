@@ -13,8 +13,14 @@ import type { ProductGalleryProps } from '@types'
 
 export function ProductGallery({ title, images }: ProductGalleryProps) {
   if (images.length === 0) {
-    return <div className='relative w-full rounded-2xl aspect-[2/3]' />
+    return <div className='relative aspect-[2/3] w-full rounded-[1.25rem]' />
   }
+
+  const firstImage = images[0]
+  const imageAspectRatio =
+    firstImage?.width && firstImage.height ?
+      `${firstImage.width} / ${firstImage.height}`
+    : '2 / 3'
 
   return (
     <div className='w-full'>
@@ -22,22 +28,24 @@ export function ProductGallery({ title, images }: ProductGalleryProps) {
         opts={{
           loop: images.length > 1
         }}
-        className='relative w-full max-w-lg mx-auto rounded-2xl aspect-[1/1] overflow-hidden'
+        className='relative mx-auto w-full overflow-hidden rounded-[1.25rem]'
         aria-label={`Produktbilder for ${title}`}
+        style={{ aspectRatio: imageAspectRatio }}
       >
         <CarouselContent>
           {images.map((image, index) => (
             <CarouselItem
               key={image.url}
-              className='relative rounded-2xl aspect-[1/1]'
+              className='relative rounded-[1.25rem]'
+              style={{ aspectRatio: imageAspectRatio }}
             >
               <Image
                 src={image.url}
                 alt={image.altText || `Bilde av ${title}`}
                 fill
-                sizes='(min-width: 1024px) 50vw, 100vw'
+                sizes='(min-width: 1280px) 58vw, (min-width: 1024px) 54vw, 100vw'
                 quality={95}
-                className='object-cover md:object-contain rounded-2xl'
+                className='rounded-[1.25rem] object-cover'
                 priority={index === 0}
               />
             </CarouselItem>

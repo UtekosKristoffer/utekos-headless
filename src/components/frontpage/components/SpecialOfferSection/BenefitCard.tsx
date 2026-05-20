@@ -7,6 +7,7 @@ interface Benefit {
   label: string
   description: string
   glowColor: string
+  tone: 'water' | 'mauve' | 'overcast'
 }
 
 interface BenefitCardProps {
@@ -14,10 +15,18 @@ interface BenefitCardProps {
   delay: number
 }
 
+const toneStyles = {
+  water: 'bg-ancient-water',
+  mauve: 'bg-bleached-mauve',
+  overcast: 'bg-overcast'
+} as const
+
 export function BenefitCard({ benefit, delay }: BenefitCardProps) {
+  const backgroundClass = toneStyles[benefit.tone] ?? toneStyles.overcast
+
   return (
     <li
-      className='animate-fade-in-on-scroll group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all duration-300 hover:translate-x-1'
+      className={`animate-fade-in-on-scroll group relative overflow-hidden rounded-lg border border-maritime-blue/12 ${backgroundClass} p-4 transition-all duration-300 hover:translate-x-1 hover:border-maritime-blue/25`}
       style={{ '--animation-delay': `${delay}s` } as React.CSSProperties}
     >
       {/* Aurora gradient effect */}
@@ -29,18 +38,21 @@ export function BenefitCard({ benefit, delay }: BenefitCardProps) {
       />
 
       <div className='relative z-10 flex items-center gap-3'>
-        <div className='flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md border border-neutral-700 bg-neutral-900 transition-all duration-300 group-hover:scale-110 group-hover:border-slate-500/50'>
-          <Check className='h-5 w-5 text-slate-400' />
+        <div className='flex size-8 flex-shrink-0 items-center justify-center rounded-md border border-maritime-blue bg-maritime-blue transition-all duration-300 group-hover:scale-110 group-hover:border-maritime-blue/80'>
+          <Check className='size-5 text-cloud-dancer' />
         </div>
         <div className='flex-1 text-sm'>
-          <span className='font-semibold text-white'>{benefit.label}</span>
+          <span className='font-semibold text-maritime-darkest'>
+            {benefit.label}
+          </span>
           {benefit.description && (
-            <span className='text-neutral-300'> {benefit.description}</span>
+            <span className='text-maritime-blue/75'>
+              {' '}
+              {benefit.description}
+            </span>
           )}
         </div>
       </div>
-
-      {/* Subtle border glow on hover */}
       <div className='absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
         <div
           className='absolute inset-0 rounded-lg blur-sm opacity-20'

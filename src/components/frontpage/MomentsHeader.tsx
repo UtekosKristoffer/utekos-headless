@@ -11,65 +11,69 @@ import {
 export function MomentsHeader() {
   return (
     <div className='mb-24 text-center mx-auto max-w-5xl px-4'>
-      {/* Overskrift */}
-      <h2 className='text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-10 leading-[1.1]'>
+      {/* Overskrift: Strengt bundet til Utekos Title (Sentence case, leading 90%, tracking -1%, primærfarge) */}
+      <h2 className='text-5xl md:text-6xl lg:text-7xl font-bold text-cloud-dancer mb-10 leading-[0.9] tracking-[-0.01em]'>
         <div className='flex flex-wrap justify-center gap-x-3 md:gap-x-5 items-baseline'>
           <CinematicWord delay={0.1}>Skapt</CinematicWord>
           <CinematicWord delay={0.15}>for</CinematicWord>
           <CinematicWord delay={0.2}>dine</CinematicWord>
 
-          {/* THE HERO WORD: "Øyeblikk" i gull-shimmer */}
-          <span className='inline-block pb-2'>
+          {/* THE HERO WORD: Holdes i primærfargen cloud-dancer med subtilt luksus-shimmer i hvit/lys oklch spekter */}
+          <span className='inline-block'>
             <LuxuryShimmerText
               text='øyeblikk'
-              className='font-serif italic tracking-wide'
+              className='font-bold tracking-[-0.01em] text-cloud-dancer [--shimmer-color:rgba(255,255,255,0.4)]'
             />
           </span>
         </div>
       </h2>
 
-      {/* Brødtekst */}
+      {/* Brødtekst: Strengt bundet til Utekos Text (Leading 145%, tracking -2%, primærfarge med kontrollert opasitet for hierarki) */}
       <div className='max-w-3xl mx-auto'>
-        <p className='text-lg md:text-2xl text-neutral-400 leading-relaxed flex flex-wrap justify-center gap-x-2 items-center'>
-          <CinematicWord className='font-light' delay={0.4}>
+        <p className='text-lg md:text-2xl text-cloud-dancer/90 leading-[1.45] tracking-[-0.02em] flex flex-wrap justify-center gap-x-2 items-center'>
+          <CinematicWord className='font-normal' delay={0.4}>
             Uansett
           </CinematicWord>
-          <CinematicWord className='font-light' delay={0.45}>
+          <CinematicWord className='font-normal' delay={0.45}>
             hvor
           </CinematicWord>
-          <CinematicWord className='font-light' delay={0.5}>
+          <CinematicWord className='font-normal' delay={0.5}>
             du
           </CinematicWord>
-          <CinematicWord className='font-light' delay={0.55}>
+          <CinematicWord className='font-normal' delay={0.55}>
             finner
           </CinematicWord>
 
-          {/* "Roen" - Organisk sirkel som tegnes */}
-          <OrganicCircleWord delay={0.6}>roen,</OrganicCircleWord>
+          {/* "Roen" - Ringen holdes som en tynn, funksjonell linje i ancient-water (lint), men teksten forblir primær cloud-dancer */}
+          <span className='text-cloud-dancer font-medium [--circle-stroke:var(--ancient-water)]'>
+            <OrganicCircleWord delay={0.6}>roen,</OrganicCircleWord>
+          </span>
 
-          <CinematicWord className='font-light' delay={0.7}>
+          <CinematicWord className='font-normal' delay={0.7}>
             er
           </CinematicWord>
-          <CinematicWord className='font-light' delay={0.75}>
+          <CinematicWord className='font-normal' delay={0.75}>
             Utekos
           </CinematicWord>
-          <CinematicWord className='font-light' delay={0.8}>
+          <CinematicWord className='font-normal' delay={0.8}>
             designet
           </CinematicWord>
-          <CinematicWord className='font-light' delay={0.85}>
+          <CinematicWord className='font-normal' delay={0.85}>
             for
           </CinematicWord>
-          <CinematicWord className='font-light' delay={0.9}>
+          <CinematicWord className='font-normal' delay={0.9}>
             å
           </CinematicWord>
-          <CinematicWord className='font-light' delay={0.95}>
+          <CinematicWord className='font-normal' delay={0.95}>
             gjøre
           </CinematicWord>
 
-          {/* "Opplevelsen" - Glødende og eksklusiv */}
-          <GlowWord delay={1.0}>opplevelsen</GlowWord>
+          {/* "Opplevelsen" - Gløden er kalibrert til en dempet hvit skyggeeffekt i stedet for mettede farger */}
+          <span className='text-cloud-dancer font-medium [--glow-color:rgba(244,244,247,0.25)]'>
+            <GlowWord delay={1.0}>opplevelsen</GlowWord>
+          </span>
 
-          <CinematicWord className='font-light' delay={1.1}>
+          <CinematicWord className='font-normal' delay={1.1}>
             bedre.
           </CinematicWord>
         </p>

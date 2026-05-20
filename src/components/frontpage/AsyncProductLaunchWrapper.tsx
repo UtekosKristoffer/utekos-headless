@@ -16,7 +16,12 @@ export async function AsyncProductLaunchWrapper() {
   const featuredProducts = queryClient.getQueryData([
     'products',
     'featured'
-  ]) as any[]
+  ]) as Array<{
+    handle: string
+    variants?: {
+      edges?: Array<{ node: { availableForSale: boolean; id: string } }>
+    }
+  }>
 
   const techDownProduct = featuredProducts?.find(
     product => product.handle === 'utekos-techdown'
@@ -24,7 +29,8 @@ export async function AsyncProductLaunchWrapper() {
 
   const techDownId =
     techDownProduct?.variants?.edges?.find(
-      (edge: any) => edge.node.availableForSale
+      (edge: { node: { availableForSale: boolean; id: string } }) =>
+        edge.node.availableForSale
     )?.node?.id
     || techDownProduct?.variants?.edges?.[0]?.node?.id
     || ''

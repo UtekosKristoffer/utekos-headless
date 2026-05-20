@@ -8,7 +8,7 @@ export function AmbientBackgroundGlow() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Organisk bevegelse for den blå/cyan gløden
+      // Organisk bevegelse for glødene i brand-paletten
       gsap.to('.ambient-blob-1', {
         x: '30%',
         y: '20%',
@@ -40,13 +40,15 @@ export function AmbientBackgroundGlow() {
       <div
         className='ambient-blob-1 absolute left-0 top-0 h-[800px] w-[800px] opacity-[0.08] blur-[120px]'
         style={{
-          background: 'radial-gradient(circle, #0ea5e9 0%, transparent 70%)'
+          background:
+            'radial-gradient(circle, var(--ancient-water) 0%, transparent 70%)'
         }}
       />
       <div
         className='ambient-blob-2 absolute right-0 bottom-0 h-[800px] w-[800px] opacity-[0.08] blur-[120px]'
         style={{
-          background: 'radial-gradient(circle, #06b6d4 0%, transparent 70%)'
+          background:
+            'radial-gradient(circle, var(--primary-button) 0%, transparent 70%)'
         }}
       />
     </div>

@@ -12,7 +12,7 @@ export const ListItem = React.forwardRef<
   ComponentRef<typeof Link>,
   Omit<React.ComponentPropsWithoutRef<typeof Link>, 'href'> & {
     title: string
-    href: Route 
+    href: Route
   }
 >(({ className, title, href, children, ...props }, ref) => {
   return (
@@ -22,15 +22,17 @@ export const ListItem = React.forwardRef<
           ref={ref}
           href={href}
           className={cn(
-            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors focus:bg-accent focus:text-accent-foreground',
+            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors focus:bg-accent/20 focus:text-cloud-dancer',
             'hover:bg-transparent',
             className
           )}
           {...props}
         >
-          <div className='text-sm font-medium leading-none'>{title}</div>
+          <div className='text-sm font-medium leading-none text-cloud-dancer'>
+            {title}
+          </div>
           {children && (
-            <p className='line-clamp-2 text-sm leading-snug text-muted-foreground'>
+            <p className='line-clamp-2 text-sm leading-snug text-cloud-dancer/70'>
               {children}
             </p>
           )}

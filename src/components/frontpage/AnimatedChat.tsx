@@ -40,9 +40,9 @@ export function AnimatedChat() {
       </AnimatedBlock>
 
       <div className='flex justify-end mt-2'>
-        <div className='relative max-w-[80%] rounded-lg border border-neutral-800 bg-sidebar-foreground p-3'>
+        <div className='relative max-w-[80%] rounded-lg border border-maritime-darkest bg-maritime-blue p-3'>
           <div className='flex items-center gap-2'>
-            <p className='flex items-center whitespace-nowrap text-base text-foreground/90'>
+            <p className='flex items-center whitespace-nowrap text-base text-cloud-dancer'>
               <span>Nettopp. Mer plass til vinen 😉</span>
               <span className='ml-1 inline-block h-4 w-0.5 animate-blinking-cursor bg-foreground' />
             </p>

@@ -16,11 +16,11 @@ export const PRODUCT_VARIANTS = {
   techdown: {
     id: 'utekos-techdown',
     title: 'Utekos TechDown™',
-    subtitle: 'Vår varmeste og mest allsidige',
+    subtitle: 'Vår nyeste, varmeste og mest allsidige',
     price: 1790,
     badge: 'Bestselger',
     description:
-      'Flaggskipet i kolleksjonen. CloudWeave™ hydrofob isolasjon beholder varmen selv i fukt — der vanlig dun kollapser, består Utekos. 3-i-1-konstruksjonen lar deg justere fra parkas til kokong på sekunder, slik at du kan bli sittende lenger.',
+      'Forener banebrytende innovasjon med tidløs eleganse. CloudWeave™ opprettholder varmen i deg, og spensten i foret, selv under fuktige forhold. 3-i-1-konstruksjonen lar deg enkelt tilpasse passform, regulere ventilasjon og veksle mellom ulike funksjonelle moduser.',
     highlights: [
       {
         title: 'Holder varmen i fukt',
@@ -33,17 +33,13 @@ export const PRODUCT_VARIANTS = {
       {
         title: 'YKK® Dual V-Zip™',
         body: 'To-spors omvendt V-glidelås gir ventilasjon og tilgang uten å åpne hele forsiden.'
-      },
-      {
-        title: 'Bygget for nordisk vær',
-        body: 'DuraLite™ Nylon — vindtett, vannavstøtende og slitesterkt 20D/380T-materiale.'
       }
     ],
     features: ['Vannavstøtende', 'Helårsbruk', 'Slitesterk'],
-    colors: [{ name: 'Havdyp', hex: '#0F2B40' }],
+    colors: [{ name: 'Havdyp', hex: '#27293D' }],
     sizes: ['Liten', 'Middels', 'Stor', 'Ekstra stor'],
     images: [
-      '/1080/kate-1080.png',
+      '/kate-tech-photo.webp',
       '/1080/techdown.png',
       '/1080/tech-bakside-hel-1080.png',
       '/1080/tech-halv-1080.png'
@@ -56,7 +52,7 @@ export const PRODUCT_VARIANTS = {
     price: 1590,
     badge: 'Reisefavoritt',
     description:
-      'Vårt letteste plagg — pakker seg ned, men gir overraskende lun varme. Perfekt for bobil, båt, hytte og reise. Hurtigtørkende mikrofiber-isolasjon og samme premium ytre som flaggskipet, bare lettere.',
+      'Utekos kolleksjonens letteste signaturmodell. Det naturlige valget for deg som vil ha maksimal komfort, robust beskyttelse og minimal vekt. DuraLite sørger for utmerket fukttransport fra innsiden, mens DWR-behandlingen gir vannavstøtende beskyttelse fra utsiden. Bredt bruksområde. Egner seg til alt fra bobil, båt og hytte til den passive tiden som tilskuer på sidelinjen av fotballbanen.',
     highlights: [
       {
         title: 'Pakker seg lett',

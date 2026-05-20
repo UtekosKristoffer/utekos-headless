@@ -1,6 +1,5 @@
 'use client'
 
-import { useRef } from 'react'
 import Image from 'next/image'
 import {
   Carousel,
@@ -10,11 +9,6 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const images = [
   {
@@ -32,69 +26,53 @@ const images = [
 ]
 
 export function ImageColumn() {
-  const container = useRef<HTMLDivElement>(null)
-  const parallaxRef = useRef<HTMLDivElement>(null)
-
-  useGSAP(
-    () => {
-      // Parallax effekt på bildet: Beveger seg litt saktere enn scroll
-      gsap.fromTo(
-        parallaxRef.current,
-        { y: -30 },
-        {
-          y: 30,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: container.current,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true
-          }
-        }
-      )
-    },
-    { scope: container }
-  )
-
   return (
-    <div
-      ref={container}
-      className='relative w-full max-w-[500px] mx-auto md:max-w-none'
-    >
-      {/* Dekorativ bakgrunn */}
-      <div className='absolute inset-0 bg-gradient-to-tr from-sky-500/10 to-transparent opacity-50 blur-3xl -z-10 rounded-full scale-90' />
+    <figure className='relative mx-auto w-full max-w-[500px] md:max-w-none'>
+      <div className='overflow-hidden rounded-[1.5rem] border border-cloud-dancer/25 bg-transparent p-2'>
+        <Carousel
+          opts={{ loop: true }}
+          className='group w-full'
+          role='group'
+          aria-roledescription='bildekarusell'
+          aria-label='Produktbilder av Utekos TechDown'
+        >
+          <CarouselContent>
+            {images.map((image, index) => (
+              <CarouselItem key={image.src}>
+                <AspectRatio
+                  ratio={3 / 4}
+                  className='overflow-hidden rounded-[1.25rem] bg-transparent'
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    quality={95}
+                    className='object-cover'
+                    sizes='(max-width: 768px) 92vw, (max-width: 1280px) 45vw, 540px'
+                    fetchPriority={index === 0 ? 'high' : 'auto'}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                </AspectRatio>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
 
-      <div ref={parallaxRef} className='will-change-transform'>
-        <div className='relative overflow-hidden rounded-3xl border border-white/5 shadow-2xl shadow-sky-900/20'>
-          <Carousel
-            opts={{
-              loop: true
-            }}
-            className='w-full group'
-          >
-            <CarouselContent>
-              {images.map((image, index) => (
-                <CarouselItem key={index}>
-                  <AspectRatio ratio={3 / 4} className='bg-neutral-900/50'>
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      quality={95}
-                      className='object-cover'
-                      sizes='(max-width: 768px) 100vw, 50vw'
-                      fetchPriority='high'
-                    />
-                  </AspectRatio>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
+          <CarouselPrevious
+            aria-label='Forrige produktbilde'
+            className='absolute left-3 top-1/2 z-20 h-11 w-11 -translate-y-1/2 border border-maritime-blue bg-cloud-dancer text-maritime-blue shadow-none transition-colors hover:bg-overcast hover:text-maritime-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cloud-dancer'
+          />
 
-            <CarouselPrevious className='absolute left-2 top-1/2 -translate-y-1/2 h-8 w-8 md:h-10 md:w-10 border-white/20 bg-black/40 text-white backdrop-blur-md hover:bg-black/60 hover:text-white transition-all z-20' />
-            <CarouselNext className='absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 md:h-10 md:w-10 border-white/20 bg-black/40 text-white backdrop-blur-md hover:bg-black/60 hover:text-white transition-all z-20' />
-          </Carousel>
-        </div>
+          <CarouselNext
+            aria-label='Neste produktbilde'
+            className='absolute right-3 top-1/2 z-20 h-11 w-11 -translate-y-1/2 border border-maritime-blue bg-cloud-dancer text-maritime-blue shadow-none transition-colors hover:bg-overcast hover:text-maritime-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cloud-dancer'
+          />
+        </Carousel>
       </div>
-    </div>
+
+      <figcaption className='sr-only'>
+        Bildekarusell med {images.length} produktbilder av Utekos TechDown.
+      </figcaption>
+    </figure>
   )
 }

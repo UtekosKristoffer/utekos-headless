@@ -90,34 +90,34 @@ export function TerrasseCarousel() {
         <div
           className='absolute left-1/4 top-1/4 h-[500px] w-[500px] blur-3xl'
           style={{
-            background: 'radial-gradient(circle, #0ea5e9 0%, transparent 70%)'
+            background: 'radial-gradient(circle, var(--ancient-water) 0%, transparent 70%)'
           }}
         />
         <div
           className='absolute right-1/4 bottom-1/4 h-[500px] w-[500px] blur-3xl'
           style={{
-            background: 'radial-gradient(circle, #06b6d4 0%, transparent 70%)'
+            background: 'radial-gradient(circle, var(--ancient-water) 0%, transparent 70%)'
           }}
         />
       </div>
 
       <div className='container mx-auto max-w-7xl'>
         <div className='mb-12 text-center'>
-          <div className='gsap-header mb-4 inline-flex items-center gap-2 rounded-full border border-sky-800/30 bg-sky-900/10 px-4 py-2 opacity-0'>
-            <Camera className='h-4 w-4 text-sky-800' />
-            <span className='text-sm font-medium text-sky-800'>
+          <div className='gsap-header bg-ancient-water mb-4 inline-flex items-center gap-2 rounded-full border border-ancient-water px-4 py-2 opacity-0'>
+            <Camera className='size-4 text-maritime-darkest' />
+            <span className='text-sm font-medium text-maritime-darkest'>
               Terrasselivet med Utekos
             </span>
           </div>
 
-          <h2 className='gsap-title mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl opacity-0'>
+          <h2 className='gsap-title mt-4 text-3xl font-bold tracking-normal sm:text-4xl lg:text-5xl opacity-0'>
             Forleng dine beste øyeblikk
           </h2>
         </div>
 
         <div className='gsap-carousel relative opacity-0'>
-          <div className='relative mx-auto max-w-6xl overflow-hidden rounded-3xl border border-white/5 bg-neutral-900/50 p-6 shadow-2xl backdrop-blur-sm'>
-            <div className='absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-500/20 to-transparent' />
+          <div className='relative mx-auto max-w-6xl overflow-hidden rounded-3xl border border-cloud-dancer/10 bg-maritime-darkest/58 p-6 shadow-2xl backdrop-blur-sm'>
+            <div className='absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-ancient-water/30 to-transparent' />
 
             <Carousel
               setApi={setApi}
@@ -133,7 +133,7 @@ export function TerrasseCarousel() {
                     key={index}
                     className='pl-4 md:basis-1/2 lg:basis-1/3'
                   >
-                    <div className='group relative overflow-hidden rounded-2xl border border-white/10 bg-neutral-900'>
+                    <div className='group relative overflow-hidden rounded-2xl border border-cloud-dancer/12 bg-maritime-darkest'>
                       <AspectRatio ratio={1 / 1}>
                         <Image
                           src={image.src}
@@ -148,8 +148,8 @@ export function TerrasseCarousel() {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className='left-4 border-white/10 bg-black/50 text-white backdrop-blur-md hover:bg-black/70' />
-              <CarouselNext className='right-4 border-white/10 bg-black/50 text-white backdrop-blur-md hover:bg-black/70' />
+              <CarouselPrevious className='left-4 border-cloud-dancer/12 bg-maritime-darkest/70 text-cloud-dancer backdrop-blur-md hover:bg-maritime-blue' />
+              <CarouselNext className='right-4 border-cloud-dancer/12 bg-maritime-darkest/70 text-cloud-dancer backdrop-blur-md hover:bg-maritime-blue' />
             </Carousel>
 
             <div className='mt-8 flex items-center justify-center gap-2'>
@@ -160,8 +160,8 @@ export function TerrasseCarousel() {
                   className={cn(
                     'h-1.5 rounded-full transition-all duration-300',
                     current === index + 1 ?
-                      'w-6 bg-sky-500'
-                    : 'w-1.5 bg-neutral-700 hover:bg-neutral-600'
+                      'w-6 bg-ancient-water'
+                    : 'w-1.5 bg-overcast hover:bg-cloud-dancer'
                   )}
                   aria-label={`Gå til bilde ${index + 1}`}
                 />

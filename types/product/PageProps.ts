@@ -24,6 +24,7 @@ export type PurchaseClientViewProps = {
   selectedSize: string
   setSelectedSize: (size: string) => void
   handleAddToCart: () => void
+  handleGoToCheckout: () => Promise<void>
   isPending: boolean
   currentConfig: ProductConfig
   currentColor: ColorVariant

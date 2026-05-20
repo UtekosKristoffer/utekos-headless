@@ -7,13 +7,13 @@ export const benefitsData: Benefit[] = [
     icon: Thermometer,
     title: 'Øyeblikkelig varme',
     description: 'Fra kjølig ankomst til peiskos-følelse på sekunder.',
-    color: 'text-orange-500'
+    color: 'text-dusted-peri'
   },
   {
     icon: Sparkles,
     title: 'Praktisk design',
     description: 'Tar minimalt med plass og er enkel å ta med seg.',
-    color: 'text-yellow-400'
+    color: 'text-primary-button'
   },
   {
     icon: HeartHandshake,
@@ -34,10 +34,10 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
     <section className='py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl text-center'>
-          <h2 className='text-fluid-display font-bold tracking-tight'>
+          <h2 className='text-fluid-display font-bold tracking-normal'>
             Designet for hyttelivet
           </h2>
-          <p className='mt-4 text-lg text-muted-foreground'>
+          <p className='mt-4 text-lg text-cloud-dancer'>
             Vi forstår hva som er viktig for deg som hytteeier – komfort,
             kvalitet og praktiske løsninger.
           </p>
@@ -50,13 +50,11 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
               delay={`${benefitIndex * 0.05}s`}
               threshold={0.2}
             >
-              <div className='mx-auto mb-4 flex size-16 items-center justify-center rounded-full border border-neutral-800 bg-sidebar-foreground'>
+              <div className='mx-auto mb-4 flex size-16 items-center justify-center rounded-full border border-cloud-dancer/12 bg-maritime-blue/24'>
                 <benefit.icon className={`size-8 ${benefit.color}`} />
               </div>
               <h3 className='mb-2 text-lg font-semibold'>{benefit.title}</h3>
-              <p className='text-sm text-muted-foreground'>
-                {benefit.description}
-              </p>
+              <p className='text-sm text-cloud-dancer'>{benefit.description}</p>
             </AnimatedBlock>
           ))}
         </div>

@@ -10,19 +10,19 @@ export const popularSpotsData: Destination[] = [
     name: 'Oslofjorden & Sauna',
     season: 'Hele året',
     highlight: 'Kombinasjon av badstu og fjord',
-    color: 'text-orange-400'
+    color: 'text-dusted-peri'
   },
   {
     name: 'Lofoten & Arktis',
     season: 'Vinter',
     highlight: 'Det ultimate isbadet i nordlys',
-    color: 'text-cyan-400'
+    color: 'text-ancient-water'
   },
   {
     name: 'Fjellvann & Innlandet',
     season: 'Vinter/Vår',
     highlight: 'Hugg hull i isen for stillhet',
-    color: 'text-blue-500'
+    color: 'text-ancient-water'
   },
   {
     name: 'Vestlandskysten',
@@ -41,10 +41,10 @@ export function PopularSpotsGrid({
     <section className='py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl text-center'>
-          <h2 className='text-fluid-display font-bold tracking-tight'>
+          <h2 className='text-fluid-display font-bold tracking-normal'>
             Hvor tar du ditt neste dykk?
           </h2>
-          <p className='mt-4 text-lg text-muted-foreground'>
+          <p className='mt-4 text-lg text-overcast'>
             Fra urbane badstuer til øde fjellvann – Utekos er med deg der vannet
             er kaldt.
           </p>
@@ -57,7 +57,7 @@ export function PopularSpotsGrid({
               delay={`${destinationIndex * 0.1}s`}
               threshold={0.2}
             >
-              <Card className='border-neutral-800 bg-sidebar-foreground transition-colors hover:bg-sidebar-foreground/80'>
+              <Card className='border-cloud-dancer/12 bg-maritime-blue/24 transition-colors hover:bg-maritime-blue/32'>
                 <CardContent className='p-6'>
                   <div className='mb-3 flex items-start justify-between'>
                     <h3 className='text-lg font-semibold'>
@@ -65,10 +65,10 @@ export function PopularSpotsGrid({
                     </h3>
                     <MapPinIcon className={`size-5 ${destination.color}`} />
                   </div>
-                  <p className='mb-2 text-sm text-muted-foreground'>
+                  <p className='mb-2 text-sm text-overcast'>
                     {destination.season}
                   </p>
-                  <p className='text-sm text-foreground/80'>
+                  <p className='text-sm text-cloud-dancer/80'>
                     {destination.highlight}
                   </p>
                 </CardContent>

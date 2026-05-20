@@ -18,7 +18,7 @@ export const useCasesData: UseCase[] = [
     description:
       'Hold gjestene varme og komfortable mens de venter på den perfekte gløden.',
     color: 'from-orange-500/20',
-    iconColor: 'text-orange-400'
+    iconColor: 'text-dusted-peri'
   },
   {
     icon: Users,
@@ -35,20 +35,20 @@ export const useCasesData: UseCase[] = [
     title: 'Når stjernene titter frem',
     description:
       'For de som blir igjen. Den ultimate komforten for de siste, rolige timene.',
-    color: 'from-indigo-500/20',
-    iconColor: 'text-indigo-400'
+    color: 'from-dusted-peri/20',
+    iconColor: 'text-dusted-peri'
   }
 ]
 
 export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
   return (
-    <section id='bruksomrader' className='bg-sidebar-foreground py-24'>
+    <section id='bruksomrader' className='bg-maritime-blue/24 py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl text-center'>
-          <h2 className='text-fluid-display font-bold tracking-tight'>
+          <h2 className='text-fluid-display font-bold tracking-normal'>
             Gjennom hele kvelden
           </h2>
-          <p className='mx-auto mt-4 max-w-2xl text-lg text-muted-foreground'>
+          <p className='mx-auto mt-4 max-w-2xl text-lg text-overcast'>
             Fra de første gjestene ankommer til de siste drar – Utekos sikrer
             komforten.
           </p>
@@ -62,23 +62,23 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
               delay={`${caseIndex * 0.1}s`}
               threshold={0.2}
             >
-              <Card className='@container relative h-full overflow-hidden border-neutral-800 bg-background group'>
+              <Card className='@container relative h-full overflow-hidden border-cloud-dancer/12 bg-maritime-darkest group'>
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${useCase.color} to-transparent opacity-20 transition-opacity group-hover:opacity-30`}
                 />
                 <CardContent className='relative p-8'>
                   <div className='mb-6 flex items-center gap-4'>
-                    <div className='flex size-12 items-center justify-center rounded-lg border border-neutral-700 bg-sidebar-foreground'>
+                    <div className='flex size-12 items-center justify-center rounded-lg border border-cloud-dancer/18 bg-maritime-blue/24'>
                       <useCase.icon className={`size-6 ${useCase.iconColor}`} />
                     </div>
-                    <p className='font-medium text-primary-foreground'>
+                    <p className='font-medium text-cloud-dancer'>
                       {useCase.time}
                     </p>
                   </div>
                   <h3 className='mb-2 text-xl font-semibold'>
                     {useCase.title}
                   </h3>
-                  <p className='text-muted-foreground'>{useCase.description}</p>
+                  <p className='text-overcast'>{useCase.description}</p>
                 </CardContent>
               </Card>
             </AnimatedBlock>

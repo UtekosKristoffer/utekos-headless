@@ -8,6 +8,7 @@ interface AnimatedBlockProps {
   children?: ReactNode // Gjort valgfri med '?'
   className?: string
   delay?: string
+  rootMargin?: string
   threshold?: number
 }
 
@@ -15,9 +16,10 @@ export function AnimatedBlock({
   children,
   className,
   delay = '0s',
+  rootMargin = '0px',
   threshold = 0.2
 }: AnimatedBlockProps) {
-  const [ref, isInView] = useInView({ threshold })
+  const [ref, isInView] = useInView({ rootMargin, threshold })
 
   return (
     <div

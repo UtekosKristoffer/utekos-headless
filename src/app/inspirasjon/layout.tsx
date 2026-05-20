@@ -8,12 +8,13 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import { Button } from '@/components/ui/button'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { inspirationPages } from './layout/inspirationPages'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { TrustIndicators } from './layout/sections/TrustIndicators'
 import { Activity } from 'react'
+import type { CSSProperties } from 'react'
 
 interface InspirasjonLayoutProps {
   children: ReactNode
@@ -23,9 +24,9 @@ export default function InspirasjonLayout({
   children
 }: InspirasjonLayoutProps) {
   return (
-    <section className='min-h-screen bg-background'>
+    <section className='bg-maritime-darkest'>
       <Activity>
-        <section className='border-b border-neutral-800'>
+        <section className='border-b border-cloud-dancer/12 text-cloud-dancer'>
           <div className='container mx-auto px-4 py-6'>
             <Breadcrumb>
               <BreadcrumbList>
@@ -45,35 +46,74 @@ export default function InspirasjonLayout({
       </Activity>
       {children}
       <Activity>
-        <section className='bg-sidebar-foreground py-16 border-t border-neutral-800'>
+        <section className='border-t border-chocolate-plum/35 bg-overcast py-16'>
           <div className='container mx-auto px-4'>
-            <div className='text-center mb-12'>
-              <h2 className='text-2xl font-bold tracking-tight mb-4'>
+            <div className='mb-12 text-center'>
+              <h2 className='mb-4 text-4xl font-bold leading-[0.95] tracking-normal text-maritime-darkest md:text-6xl'>
                 Mer inspirasjon for dine øyeblikk
               </h2>
-              <p className='text-muted-foreground max-w-2xl mx-auto'>
+              <p className='mx-auto max-w-2xl text-base leading-[1.45] tracking-normal text-maritime-blue'>
                 Utekos passer perfekt til alle situasjoner hvor komfort møter
                 norsk natur. La deg inspirere av hvordan andre nyter de gode
                 stundene.
               </p>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4'>
-              {inspirationPages.map(page => (
+            <div className='grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5'>
+              {inspirationPages.map((page, pageIndex) => (
                 <Link key={page.href} href={page.href} className='group block'>
-                  <div className='relative overflow-hidden rounded-lg border border-neutral-800 bg-background p-6 transition-all h-full hover:border-neutral-700 hover:-translate-y-1'>
+                  <div
+                    className='relative h-full overflow-hidden rounded-lg border border-maritime-darkest/14 bg-[var(--inspiration-card-bg)] p-6 text-[var(--inspiration-card-text)] shadow-[0_18px_46px_-34px_rgba(12,18,32,0.55)] transition-all hover:-translate-y-1 hover:border-maritime-darkest/28 hover:shadow-[0_24px_58px_-38px_rgba(12,18,32,0.7)]'
+                    style={
+                      {
+                        '--inspiration-card-bg': page.color,
+                        '--inspiration-card-mid': page.midColor,
+                        '--inspiration-card-text':
+                          pageIndex >= 3 ?
+                            'var(--cloud-dancer)'
+                          : 'var(--maritime-darkest)',
+                        '--inspiration-card-muted':
+                          pageIndex >= 3 ?
+                            'color-mix(in oklab, var(--cloud-dancer) 78%, transparent)'
+                          : 'color-mix(in oklab, var(--maritime-darkest) 76%, transparent)',
+                        '--inspiration-card-border':
+                          pageIndex >= 3 ?
+                            'color-mix(in oklab, var(--cloud-dancer) 24%, transparent)'
+                          : 'color-mix(in oklab, var(--maritime-darkest) 18%, transparent)',
+                        '--inspiration-icon-default':
+                          pageIndex === 0 ?
+                            'var(--maritime-darkest)'
+                          : page.color,
+                        '--inspiration-icon-hover':
+                          pageIndex === 0 ?
+                            page.color
+                          : 'var(--maritime-darkest)'
+                      } as CSSProperties
+                    }
+                  >
                     <div
-                      className={`absolute inset-0 bg-gradient-to-br ${page.color} to-transparent opacity-20 transition-opacity group-hover:opacity-30`}
+                      className='pointer-events-none absolute inset-0 opacity-85 transition-opacity group-hover:opacity-100'
+                      style={{
+                        background:
+                          'linear-gradient(145deg, var(--inspiration-card-bg) 0%, var(--inspiration-card-mid) 52%, color-mix(in oklab, var(--inspiration-card-bg) 84%, var(--maritime-darkest) 16%) 100%)'
+                      }}
+                    />
+                    <div
+                      className='pointer-events-none absolute inset-x-0 top-0 h-px'
+                      style={{
+                        background:
+                          'linear-gradient(90deg, transparent, var(--inspiration-card-border), transparent)'
+                      }}
                     />
                     <div className='relative'>
-                      <div className='mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-sidebar-foreground border border-neutral-700'>
-                        <page.icon
-                          className={`h-5 w-5 ${page.iconColor} transition-colors group-hover:text-primary`}
-                        />
+                      <div className='mb-4 flex items-center gap-3'>
+                        <div className='flex size-10 shrink-0 items-center justify-center rounded-lg border border-[var(--inspiration-card-border)] bg-cloud-dancer'>
+                          <page.icon className='size-5 text-[var(--inspiration-icon-default)] transition-colors group-hover:text-[var(--inspiration-icon-hover)]' />
+                        </div>
+                        <h3 className='font-semibold leading-[1.25] tracking-normal text-[var(--inspiration-card-text)] transition-colors'>
+                          {page.label}
+                        </h3>
                       </div>
-                      <h3 className='font-semibold mb-2 group-hover:text-primary-foreground transition-colors'>
-                        {page.label}
-                      </h3>
-                      <p className='text-sm text-muted-foreground'>
+                      <p className='text-sm leading-[1.45] tracking-normal text-[var(--inspiration-card-muted)]'>
                         {page.description}
                       </p>
                     </div>
@@ -82,18 +122,28 @@ export default function InspirasjonLayout({
               ))}
             </div>
             <div className='mt-12 text-center'>
-              <p className='text-sm text-muted-foreground mb-4'>
+              <p className='mb-4 text-sm leading-[1.45] tracking-normal text-maritime-blue'>
                 Klar til å oppleve komforten selv?
               </p>
-              <div className='flex flex-wrap gap-4 justify-center'>
-                <Button asChild>
+              <div className='flex flex-wrap justify-center gap-4'>
+                <BrandBadge
+                  asChild
+                  backgroundColor='var(--maritime-darkest)'
+                  textColor='var(--cloud-dancer)'
+                  className='border border-cloud-dancer/14 px-7 py-3 text-base leading-[1.4] font-semibold tracking-normal shadow-[0_18px_38px_-28px_rgba(14,18,35,0.86)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-maritime-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dusted-peri/70 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast'
+                >
                   <Link href='/produkter'>Se alle produkter</Link>
-                </Button>
-                <Button variant='outline' asChild>
+                </BrandBadge>
+                <BrandBadge
+                  asChild
+                  backgroundColor='var(--cloud-dancer)'
+                  textColor='var(--maritime-darkest)'
+                  className='border border-maritime-darkest/14 px-7 py-3 text-base leading-[1.4] font-semibold tracking-normal shadow-[0_18px_38px_-30px_rgba(14,18,35,0.42)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-cloud-dancer/88 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-maritime-darkest/55 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast'
+                >
                   <Link href='/handlehjelp/storrelsesguide'>
                     Finn din størrelse
                   </Link>
-                </Button>
+                </BrandBadge>
               </div>
             </div>
           </div>

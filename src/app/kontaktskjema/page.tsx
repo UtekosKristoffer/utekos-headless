@@ -38,13 +38,13 @@ export const metadata: Metadata = {
 export default function SupportPage() {
   return (
     <>
-      <section className='container mx-auto my-32 max-w-[76rem] px-4'>
+      <section className='container mx-auto my-24 max-w-[76rem] px-4 text-cloud-dancer tracking-normal sm:my-32'>
         <div>
           <Activity>
             <TopGrid />
           </Activity>
           <Activity>
-            <div className='relative border border-white/10 bg-background'>
+            <div className='relative border border-cloud-dancer/12 bg-[radial-gradient(circle_at_10%_0%,color-mix(in_oklab,var(--ancient-water)_10%,transparent),transparent_36%),linear-gradient(135deg,var(--maritime-blue)_0%,var(--maritime-darkest)_58%,var(--chocolate-plum)_100%)]'>
               <Activity>
                 <CornerPluses />
               </Activity>
@@ -66,4 +66,3 @@ export default function SupportPage() {
     </>
   )
 }
-

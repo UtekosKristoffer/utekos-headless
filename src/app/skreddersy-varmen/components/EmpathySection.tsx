@@ -21,25 +21,25 @@ export function EmpathySection() {
     <section
       ref={sectionRef}
       aria-labelledby='empathy-heading'
-      className='relative w-full overflow-hidden bg-[#F4F1EA] py-24 text-[#2C2420] md:py-36 lg:py-40'
+      className='relative w-full overflow-hidden bg-overcast py-24 text-maritime-darkest md:py-36 lg:py-40'
     >
       <div className='mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-6 md:px-12 lg:grid-cols-2 lg:gap-24'>
         <div className='relative'>
           {/* 1. Eyebrow — slide from LEFT + underline grow */}
           <div className='gsap-empathy-anim relative mb-6 inline-flex items-end overflow-hidden pb-2'>
-            <span className='gsap-empathy-eyebrow text-[11px] font-bold uppercase tracking-[0.22em] text-[#E07A5F] md:text-xs'>
+            <span className='gsap-empathy-eyebrow text-[11px] font-bold uppercase tracking-[0.22em] text-chocolate-plum md:text-xs'>
               Det du kjenner igjen
             </span>
             <span
               aria-hidden
-              className='gsap-empathy-eyebrow-bar absolute left-0 bottom-0 h-px w-full bg-[#E07A5F]/40'
+              className='gsap-empathy-eyebrow-bar absolute left-0 bottom-0 h-px w-full bg-chocolate-plum transition-transform duration-500 origin-left scale-x-0 group-hover:scale-x-100'
             />
           </div>
 
           {/* 2. H2 — word-by-word curtain reveal */}
           <h2
             id='empathy-heading'
-            className='mb-8 font-serif text-3xl leading-[1.08] tracking-tight text-[#2C2420] sm:text-4xl md:text-5xl lg:text-6xl'
+            className='mb-8 font-google-sans text-3xl leading-[0.92] tracking-[-0.01em] text-maritime-darkest sm:text-4xl md:text-5xl lg:text-6xl'
             aria-label={HEADLINE}
           >
             {words.map((word, i) => (
@@ -55,17 +55,16 @@ export function EmpathySection() {
             ))}
           </h2>
 
-          <div className='prose prose-lg md:prose-xl max-w-none font-serif leading-relaxed text-[#2C2420]/80'>
+          <div className='prose prose-lg md:prose-xl max-w-none font-google-sans leading-[1.45] text-maritime-darkest'>
             <p className='relative'>
               {/* 3. Drop-cap D — scale + rotate */}
               <span
                 aria-hidden
-                className='gsap-empathy-dropcap float-left pr-3 pt-2 font-serif text-6xl leading-[0.8] text-[#E07A5F] md:text-7xl'
+                className='gsap-empathy-dropcap inline-block pr-1 align-baseline font-google-sans text-6xl leading-none text-cloud-dancer md:text-7xl'
               >
                 D
               </span>
-              {/* 4. First paragraph body — letter-spacing release */}
-              <span className='gsap-empathy-para1 inline-block'>
+              <span className='gsap-empathy-para1 inline'>
                 u kjenner følelsen. Praten går lett rundt bålpannen, flammene
                 danser, og roen har senket seg. Men så kommer den — den snikende
                 trekken som truer med å bryte magien.
@@ -76,22 +75,22 @@ export function EmpathySection() {
             <div className='relative my-10 py-2'>
               <span
                 aria-hidden
-                className='gsap-empathy-quote-bar absolute left-0 top-4 bottom-4 w-[3px] bg-[#E07A5F]'
+                className='gsap-empathy-quote-bar absolute left-0 top-4 bottom-4 w-[3px] bg-maritime-darkest transition-transform duration-500 origin-top scale-y-0'
               />
-              <p className='gsap-empathy-quote ml-6 font-serif text-2xl italic font-medium leading-tight text-[#2C2420] md:ml-10 md:text-4xl'>
+              <p className='gsap-empathy-quote ml-6 font-google-sans text-2xl italic font-medium leading-[0.92] text-maritime-darkest md:ml-10 md:text-4xl'>
                 &ldquo;Det begynner å bli kaldt. <br />
                 Skal vi trekke inn?&rdquo;
               </p>
             </div>
 
             {/* 6. Second paragraph — blur to focus */}
-            <p className='gsap-empathy-para2 font-sans text-base leading-relaxed tracking-wide text-[#2C2420]/85 md:text-lg'>
-              Med Utekos<span className='text-[#E07A5F]'>®</span> er svaret nei.
-              Fra lett mikrofiber til TechDown™ — plagget pakker deg inn i en
-              beskyttende kokong av varme slik at du kan bli sittende.
+            <p className='gsap-empathy-para2 font-google-sans text-base leading-[1.45] tracking-[-0.01em] text-maritime-darkest/85 md:text-lg'>
+              Med Utekos<span className='text-cloud-dancer'>®</span> er svaret
+              nei. Fra lett mikrofiber til TechDown™ — plagget pakker deg inn i
+              en beskyttende kokong av varme slik at du kan bli sittende.
               <br />
               <br />
-              <span className='italic text-[#2C2420]'>
+              <span className='italic text-maritime-darkest'>
                 Glem kulden. Forleng kvelden.
               </span>
             </p>
@@ -103,9 +102,11 @@ export function EmpathySection() {
               type='button'
               onClick={scrollToModel}
               data-track='EmpathyCtaSkreddersyVarmen'
-              className='group relative inline-flex items-center gap-4 pb-2 text-sm font-bold uppercase tracking-widest text-[#2C2420] transition-colors duration-300 hover:text-[#E07A5F]'
+              className='group relative inline-flex items-center gap-4 pb-2 text-sm font-bold uppercase tracking-widest text-maritime-darkest transition-colors duration-300 hover:text-cloud-dancer'
             >
-              <span className='gsap-empathy-cta-text'>Utforsk kolleksjonen</span>
+              <span className='gsap-empathy-cta-text'>
+                Utforsk kolleksjonen
+              </span>
               <span aria-hidden className='gsap-empathy-cta-arrow inline-flex'>
                 <ArrowRight className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-2' />
               </span>
@@ -128,7 +129,7 @@ export function EmpathySection() {
                   fill
                   className='object-cover'
                   sizes='(max-width: 1024px) 100vw, 50vw'
-                  quality={88}
+                  quality={90}
                 />
               </div>
 
@@ -143,11 +144,11 @@ export function EmpathySection() {
                     <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-[#E07A5F] opacity-60' />
                     <span className='relative inline-flex h-2 w-2 rounded-full bg-[#E07A5F]' />
                   </span>
-                  <span className='text-[10px] font-mono uppercase tracking-widest md:text-xs'>
+                  <span className='text-[10px] font-google-sans uppercase tracking-[0.15em] md:text-xs'>
                     Stemning
                   </span>
                 </div>
-                <p className='font-serif text-xl italic leading-tight md:text-2xl [text-shadow:0_1px_12px_rgba(0,0,0,0.5)]'>
+                <p className='font-google-sans text-xl italic leading-[0.92] md:text-2xl [text-shadow:0_1px_12px_rgba(0,0,0,0.5)]'>
                   &ldquo;Klokken er 23:15.
                   <br />
                   Ingen vil gå inn.&rdquo;

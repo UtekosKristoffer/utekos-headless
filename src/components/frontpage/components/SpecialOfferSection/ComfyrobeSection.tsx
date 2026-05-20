@@ -3,11 +3,25 @@ import { ComfyrobeContentColumn } from './ComfyrobeContentColumn'
 import { Activity } from 'react'
 import { getProduct } from '@/api/lib/products/getProduct'
 import { cacheLife } from 'next/cache' // Husk import
-function getFirstAvailableVariantId(product: any): string {
+
+interface ProductVariantEdge {
+  node: {
+    id: string
+    availableForSale: boolean
+  }
+}
+
+interface Product {
+  variants?: {
+    edges: ProductVariantEdge[]
+  }
+}
+
+function getFirstAvailableVariantId(product: Product | null): string {
   if (!product || !product.variants || !product.variants.edges) return ''
 
   const availableVariant = product.variants.edges.find(
-    (edge: any) => edge.node.availableForSale
+    (edge: ProductVariantEdge) => edge.node.availableForSale
   )
   if (availableVariant) {
     return availableVariant.node.id
@@ -25,20 +39,20 @@ export async function ComfyrobeSection() {
   return (
     <section className='mx-auto max-w-[95%] py-20 sm:py-24 md:max-w-7xl'>
       <div className='container mx-auto'>
-        <div className='relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/50 p-8 md:p-12'>
+        <div className='relative overflow-hidden rounded-2xl border border-cloud-dancer bg-maritime-darkest p-8 md:p-12'>
           <div className='absolute inset-0 -z-10 overflow-hidden'>
             <div
               className='absolute left-1/4 top-1/4 h-[600px] w-[600px] opacity-15 blur-3xl'
               style={{
                 background:
-                  'radial-gradient(circle, #475569 0%, transparent 70%)'
+                  'radial-gradient(circle, #c3bdab 0%, transparent 70%)'
               }}
             />
             <div
               className='absolute right-1/4 bottom-1/4 h-[600px] w-[600px] opacity-10 blur-3xl'
               style={{
                 background:
-                  'radial-gradient(circle, #64748b 0%, transparent 70%)'
+                  'radial-gradient(circle, #c3bdab 0%, transparent 70%)'
               }}
             />
           </div>

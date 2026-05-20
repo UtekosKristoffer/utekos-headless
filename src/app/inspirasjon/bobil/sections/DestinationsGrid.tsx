@@ -12,10 +12,10 @@ export function DestinationsGrid({
     <section className='py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl text-center'>
-          <h2 className='text-fluid-display font-bold tracking-tight'>
+          <h2 className='text-fluid-display font-bold tracking-normal'>
             Populære destinasjoner med Utekos
           </h2>
-          <p className='mt-4 text-lg text-muted-foreground'>
+          <p className='mt-4 text-lg text-overcast'>
             Norges vakreste bobildestinasjoner venter - nyt dem i komfort hele
             sesongen
           </p>
@@ -30,7 +30,7 @@ export function DestinationsGrid({
               threshold={0.2}
             >
               <Card
-                className='@container group relative h-full overflow-hidden border-neutral-800 bg-sidebar-foreground transition-colors hover:bg-sidebar-foreground/80 focus-within:ring-1 focus-within:ring-primary/30'
+                className='@container group relative h-full overflow-hidden border-cloud-dancer/12 bg-maritime-blue/24 transition-colors hover:bg-maritime-blue/32 focus-within:ring-1 focus-within:ring-primary-button/35'
                 tabIndex={-1}
               >
                 {/* Diskré bakgrunnsforsterker: subtil gradient-overlay som øker litt på hover */}
@@ -48,10 +48,10 @@ export function DestinationsGrid({
                     </h3>
                     <MapPinIcon className={`size-5 ${destination.color}`} />
                   </div>
-                  <p className='mb-2 text-sm text-muted-foreground'>
+                  <p className='mb-2 text-sm text-overcast'>
                     {destination.season}
                   </p>
-                  <p className='text-sm text-foreground/80'>
+                  <p className='text-sm text-cloud-dancer/80'>
                     {destination.highlight}
                   </p>
                 </CardContent>

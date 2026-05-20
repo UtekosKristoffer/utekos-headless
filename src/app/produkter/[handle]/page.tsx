@@ -11,7 +11,7 @@ import {
 } from '@/api/lib/products/productOptions'
 import { notFound } from 'next/navigation'
 import { ProductPageController } from '@/app/produkter/[handle]/components/ProductPageController'
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata } from 'next'
 import { getCachedRelatedProducts } from '@/api/lib/products/getCachedRelatedProducts'
 import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
 import { flattenVariants } from '@/lib/utils/flattenVariants'
@@ -20,6 +20,15 @@ import { ProductPageSkeleton } from './components/ProductPageSkeleton'
 import { cacheLife, cacheTag } from 'next/cache'
 
 const SITE_URL = 'https://utekos.no'
+
+const toAbsoluteUrl = (url: string) => {
+  try {
+    return new URL(url).toString()
+  } catch {
+    const normalizedPath = url.startsWith('/') ? url : `/${url}`
+    return new URL(normalizedPath, SITE_URL).toString()
+  }
+}
 
 type RouteParamsPromise = Promise<{ handle: string }>
 type SearchParamsPromise = Promise<{
@@ -31,10 +40,10 @@ type GenerateMetadataProps = {
   searchParams: SearchParamsPromise
 }
 
-export async function generateMetadata(
-  { params, searchParams }: GenerateMetadataProps,
-  _parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+  searchParams
+}: GenerateMetadataProps): Promise<Metadata> {
   const { handle } = await params
   const resolvedSearchParams = await searchParams
   const variantId = resolvedSearchParams?.variant as string | undefined
@@ -58,6 +67,7 @@ export async function generateMetadata(
   const variantImages = computeVariantImages(product, activeVariant)
   const displayImage =
     variantImages[0]?.url || product.featuredImage?.url || '/og-image.jpg'
+  const displayImageUrl = toAbsoluteUrl(displayImage)
 
   const seoTitle =
     activeVariant?.title ?
@@ -65,7 +75,8 @@ export async function generateMetadata(
     : product.seo.title || product.title
 
   const seoDescription = product.seo.description || product.description
-  const canonicalUrl = `/produkter/${handle}`
+  const canonicalPath = `/produkter/${handle}`
+  const canonicalUrl = toAbsoluteUrl(canonicalPath)
 
   const selectedVariant =
     activeVariant ?? product.selectedOrFirstAvailableVariant
@@ -97,7 +108,7 @@ export async function generateMetadata(
     title: seoTitle,
     description: seoDescription,
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalPath
     },
     openGraph: {
       type: 'website',
@@ -108,7 +119,7 @@ export async function generateMetadata(
       description: seoDescription,
       images: [
         {
-          url: displayImage,
+          url: displayImageUrl,
           width: 1200,
           height: 630,
           alt: seoTitle
@@ -119,7 +130,7 @@ export async function generateMetadata(
       card: 'summary_large_image',
       title: seoTitle,
       description: seoDescription,
-      images: [displayImage]
+      images: [displayImageUrl]
     },
     other
   }

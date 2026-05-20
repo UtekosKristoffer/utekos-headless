@@ -4,10 +4,12 @@ import { useEffect, useRef, useState, useEffectEvent } from 'react'
 interface UseInViewOptions {
   threshold?: number
   triggerOnce?: boolean
+  rootMargin?: string
 }
 export function useInView<T extends Element>({
   threshold = 0.3,
-  triggerOnce = true
+  triggerOnce = true,
+  rootMargin = '0px'
 }: UseInViewOptions = {}): [(node: T | null) => void, boolean] {
   const [ref, setRef] = useState<T | null>(null)
   const [isInView, setIsInView] = useState(false)
@@ -25,7 +27,10 @@ export function useInView<T extends Element>({
   useEffect(() => {
     if (!ref) return
 
-    observerRef.current = new IntersectionObserver(onIntersect, { threshold })
+    observerRef.current = new IntersectionObserver(onIntersect, {
+      rootMargin,
+      threshold
+    })
 
     observerRef.current.observe(ref)
 
@@ -34,8 +39,7 @@ export function useInView<T extends Element>({
         observerRef.current.disconnect()
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref, threshold])
+  }, [ref, rootMargin, threshold])
 
   return [setRef, isInView]
 }

@@ -13,7 +13,7 @@ export function ChevronDownSection() {
   const arrowRef = useRef<SVGSVGElement>(null)
   const textRef = useRef<HTMLSpanElement>(null)
 
-  const { contextSafe } = useGSAP(
+  useGSAP(
     () => {
       gsap.to(arrowRef.current, {
         x: 3,
@@ -26,46 +26,64 @@ export function ChevronDownSection() {
     { scope: container }
   )
 
-  const onEnter = contextSafe(() => {
-    gsap.killTweensOf(arrowRef.current)
-    gsap.killTweensOf(textRef.current)
+  const onEnter = () => {
+    const arrow = arrowRef.current
+    const text = textRef.current
+    const hoverLine = container.current?.querySelector('.hover-line')
 
-    gsap.to(textRef.current, {
-      color: '#ffffff',
+    if (!arrow || !text) {
+      return
+    }
+
+    gsap.killTweensOf(arrow)
+    gsap.killTweensOf(text)
+
+    gsap.to(text, {
+      color: 'var(--color-cloud-dancer)',
       letterSpacing: '0.25em',
       x: 2,
       duration: 0.5,
       ease: 'power2.out'
     })
 
-    gsap.to(arrowRef.current, {
+    gsap.to(arrow, {
       x: 8,
       scale: 1.1,
       duration: 0.6,
       ease: 'back.out(1.7)',
-      color: '#ffffff'
+      color: 'var(--color-cloud-dancer)'
     })
 
-    gsap.to('.hover-line', { scaleX: 1, duration: 0.4, ease: 'expo.out' })
-  })
+    if (hoverLine) {
+      gsap.to(hoverLine, { scaleX: 1, duration: 0.4, ease: 'expo.out' })
+    }
+  }
 
-  const onLeave = contextSafe(() => {
-    gsap.to(textRef.current, {
-      color: 'rgba(255, 255, 255, 0.6)',
+  const onLeave = () => {
+    const arrow = arrowRef.current
+    const text = textRef.current
+    const hoverLine = container.current?.querySelector('.hover-line')
+
+    if (!arrow || !text) {
+      return
+    }
+
+    gsap.to(text, {
+      color: 'var(--color-cloud-dancer)',
       letterSpacing: '0.2em',
       x: 0,
       duration: 0.4,
       ease: 'power2.out'
     })
 
-    gsap.to(arrowRef.current, {
+    gsap.to(arrow, {
       x: 0,
       scale: 1,
       duration: 0.4,
       ease: 'power2.out',
-      color: 'rgba(255, 255, 255, 0.6)',
+      color: 'var(--color-cloud-dancer)',
       onComplete: () => {
-        gsap.to(arrowRef.current, {
+        gsap.to(arrow, {
           x: 3,
           duration: 1.2,
           ease: 'sine.inOut',
@@ -75,8 +93,10 @@ export function ChevronDownSection() {
       }
     })
 
-    gsap.to('.hover-line', { scaleX: 0, duration: 0.4, ease: 'power2.out' })
-  })
+    if (hoverLine) {
+      gsap.to(hoverLine, { scaleX: 0, duration: 0.4, ease: 'power2.out' })
+    }
+  }
 
   return (
     <Link
@@ -91,12 +111,12 @@ export function ChevronDownSection() {
       <div className='relative flex items-center gap-3'>
         <span
           ref={textRef}
-          className='block text-xs font-medium uppercase tracking-[0.2em] text-white/60 transition-colors'
+          className='block text-xs font-medium uppercase tracking-[0.2em] text-cloud-dancer transition-colors'
         >
           Les mer
         </span>
 
-        <ArrowRight ref={arrowRef} className='h-4 w-4 text-white/60' />
+        <ArrowRight ref={arrowRef} className='h-4 w-4 text-cloud-dancer' />
       </div>
 
       <span className='hover-line absolute bottom-4 left-0 h-[1px] w-full origin-center scale-x-0 bg-gradient-to-r from-transparent via-white to-transparent' />

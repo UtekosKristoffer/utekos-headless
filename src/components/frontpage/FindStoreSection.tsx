@@ -21,10 +21,10 @@ export function FindInStoreSection() {
               <Image
                 src={IntersportLogo}
                 alt='Intersport logo'
-                width={250}
-                height={70}
-                className='h-auto w-full max-w-[250px]'
-                style={{ height: 'auto' }}
+                width={1024}
+                height={112}
+                className='max-w-[250px]'
+                style={{ width: '100%', height: 'auto' }}
               />
             </div>
 

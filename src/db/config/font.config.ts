@@ -1,24 +1,33 @@
-import {
-  Geist,
-  Geist_Mono as GeistMono,
-  Google_Sans as GoogleSans
-} from 'next/font/google'
+import localFont from 'next/font/local'
 
-export const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-  display: 'swap'
-})
+import { Geist_Mono as GeistMono } from 'next/font/google'
 
 export const geistMono = GeistMono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+  preload: false,
   display: 'swap'
 })
 
-export const brandSansFontFamily = GoogleSans({
-  variable: '--font-brand-sans',
-  subsets: ['latin'],
-  display: 'swap',
-  adjustFontFallback: false
+export const brandSansFontFamily = localFont({
+  src: [
+    {
+      path: './fonts/google-sans-latin.woff2',
+      weight: '400',
+      style: 'normal'
+    },
+    {
+      path: './fonts/google-sans-latin.woff2',
+      weight: '500',
+      style: 'normal'
+    },
+    {
+      path: './fonts/google-sans-latin.woff2',
+      weight: '700',
+      style: 'normal'
+    }
+  ],
+  variable: '--font-google-sans',
+  preload: false,
+  display: 'swap'
 })

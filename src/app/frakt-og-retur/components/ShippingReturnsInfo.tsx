@@ -1,5 +1,6 @@
-// Path: src/components/shipping-returns/ShippingReturnsInfo.tsx
+// Path: src/app/frakt-og-retur/components/ShippingReturnsInfo.tsx
 import { AnimatedBlock } from '@/components/AnimatedBlock'
+import { shippingReturnsFaqItems } from '@/app/frakt-og-retur/data/shippingReturnsContent'
 import {
   Accordion,
   AccordionContent,
@@ -27,28 +28,28 @@ export function ShippingReturnsInfo() {
     <section className='lg:col-span-8'>
       <div className='grid gap-8 md:grid-cols-2'>
         <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
-          <Card className='h-full border-neutral-700 bg-sidebar-foreground'>
+          <Card className='h-full border-cloud-dancer/12 bg-maritime-blue/24 text-cloud-dancer shadow-[0_22px_62px_-50px_rgba(8,12,28,0.78)]'>
             <CardHeader>
-              <CardTitle className='flex items-center gap-3'>
-                <Truck className='size-7 text-button' />
+              <CardTitle className='flex items-center gap-3 text-xl leading-[1.2] tracking-normal'>
+                <Truck className='size-7 text-primary-button' />
                 Frakt og levering
               </CardTitle>
-              <CardDescription>
+              <CardDescription className='leading-[1.5] tracking-normal text-cloud-dancer'>
                 Vi sender alle bestillinger som gjøres før kl 16. samme dag, så
                 du kan starte din utekos så raskt som mulig.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ul className='space-y-4 text-foreground/80'>
+              <ul className='space-y-4 text-cloud-dancer'>
                 <li className='flex items-start gap-3'>
-                  <Clock className='mt-1 size-5 shrink-0 text-yellow-400' />
-                  <span>
+                  <Clock className='mt-1 size-5 shrink-0 text-primary-button' />
+                  <span className='leading-[1.45] tracking-normal'>
                     <strong>Leveringstid</strong> er normalt 2-5 virkedager.
                   </span>
                 </li>
                 <li className='flex items-start gap-3'>
-                  <Mail className='mt-1 size-5 shrink-0 text-pink-400' />
-                  <span>
+                  <Mail className='mt-1 size-5 shrink-0 text-bleached-mauve' />
+                  <span className='leading-[1.45] tracking-normal'>
                     <strong>Sporing</strong> sendes på e-post så snart pakken er
                     på vei.
                   </span>
@@ -59,28 +60,28 @@ export function ShippingReturnsInfo() {
         </AnimatedBlock>
 
         <AnimatedBlock className='will-animate-fade-in-up' delay='0.4s'>
-          <Card className='h-full border-neutral-700 bg-sidebar-foreground'>
+          <Card className='h-full border-cloud-dancer/12 bg-maritime-blue/24 text-cloud-dancer shadow-[0_22px_62px_-50px_rgba(8,12,28,0.78)]'>
             <CardHeader>
-              <CardTitle className='flex items-center gap-3'>
-                <Undo2 className='size-7 text-amber-400' />
+              <CardTitle className='flex items-center gap-3 text-xl leading-[1.2] tracking-normal'>
+                <Undo2 className='size-7 text-ancient-water' />
                 Retur og angrerett
               </CardTitle>
-              <CardDescription>
+              <CardDescription className='leading-[1.5] tracking-normal text-cloud-dancer'>
                 Du har 14 dagers angrerett fra dagen du mottar varen.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ul className='space-y-4 text-foreground/80'>
+              <ul className='space-y-4 text-cloud-dancer'>
                 <li className='flex items-start gap-3'>
-                  <ShieldCheck className='mt-1 size-5 shrink-0 text-green-500' />
-                  <span>
+                  <ShieldCheck className='mt-1 size-5 shrink-0 text-primary-button' />
+                  <span className='leading-[1.45] tracking-normal'>
                     <strong>Full trygghet</strong> for å kjenne på kvaliteten
                     hjemme hos deg selv.
                   </span>
                 </li>
                 <li className='flex items-start gap-3'>
-                  <PackageCheck className='mt-1 size-5 shrink-0 text-sky-400' />
-                  <span>
+                  <PackageCheck className='mt-1 size-5 shrink-0 text-ancient-water' />
+                  <span className='leading-[1.45] tracking-normal'>
                     Varen må være <strong>ubrukt</strong>, uten lukt og med alle
                     merkelapper intakt for full refusjon.
                   </span>
@@ -92,65 +93,41 @@ export function ShippingReturnsInfo() {
       </div>
 
       <AnimatedBlock className='will-animate-fade-in-up mt-12' delay='0.6s'>
-        <h2 className='mb-4 text-2xl font-semibold tracking-tight text-foreground'>
+        <h2 className='mb-4 text-2xl font-semibold leading-[1.15] tracking-normal text-cloud-dancer'>
           Slik fungerer returprosessen
         </h2>
         <Accordion type='single' collapsible className='w-full'>
-          <AccordionItem value='item-1'>
-            <AccordionTrigger data-track='ShippingReturnsStep1Click'>
-              Steg 1: Gi oss beskjed
-            </AccordionTrigger>
-            <AccordionContent className='prose prose-invert max-w-none text-foreground/80'>
-              <p>
-                Send en e-post til{' '}
-                <a
-                  href='mailto:kundeservice@utekos.no'
-                  data-track='ShippingReturnsEmailClick'
-                >
-                  kundeservice@utekos.no
-                </a>
-                . For at vi skal kunne hjelpe deg raskt, ber vi deg inkludere
-                fullt navn, adresse, ordrenummer og hvilke produkter returen
-                gjelder.
-              </p>
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value='item-2'>
-            <AccordionTrigger data-track='ShippingReturnsStep2Click'>
-              Steg 2: Pakk varen trygt
-            </AccordionTrigger>
-            <AccordionContent className='prose prose-invert max-w-none text-foreground/80'>
-              <p>
-                Du er ansvarlig for varen til den når oss. Sørg for at
-                produktene er pakket godt, helst i originalemballasjen. Varen må
-                være i samme stand som da du mottok den.
-              </p>
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value='item-3'>
-            <AccordionTrigger data-track='ShippingReturnsStep3Click'>
-              Steg 3: Send pakken
-            </AccordionTrigger>
-            <AccordionContent className='prose prose-invert max-w-none text-foreground/80'>
-              <p>
-                Kjøperen dekker kostnad for returfrakt. Vi anbefaler å bruke en
-                sendingsmetode med sporing for din egen sikkerhet.
-              </p>
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value='item-4'>
-            <AccordionTrigger data-track='ShippingReturnsExceptionClick'>
-              Unntak fra angreretten
-            </AccordionTrigger>
-            <AccordionContent className='prose prose-invert max-w-none text-foreground/80'>
-              <p>
-                Angreretten gjelder ikke for produkter som er forseglet av
-                hygieniske årsaker dersom forseglingen er brutt etter mottak.
-                For våre produkter vil dette i praksis si at plagget må være
-                ubrukt, uten lukt og med alle merkelapper intakt.
-              </p>
-            </AccordionContent>
-          </AccordionItem>
+          {shippingReturnsFaqItems.map(item => (
+            <AccordionItem
+              key={item.id}
+              value={item.id}
+              className='border-cloud-dancer/12'
+            >
+              <AccordionTrigger
+                data-track={`ShippingReturns-${item.id}-Click`}
+                className='text-base leading-[1.35] tracking-normal text-cloud-dancer hover:text-primary-button hover:no-underline'
+              >
+                {item.question}
+              </AccordionTrigger>
+              <AccordionContent className='text-sm leading-[1.55] tracking-normal text-overcast'>
+                {item.id === 'return-process' ?
+                  <p>
+                    Send en e-post til{' '}
+                    <a
+                      href='mailto:kundeservice@utekos.no'
+                      data-track='ShippingReturnsEmailClick'
+                      className='font-medium text-cloud-dancer underline decoration-overcast/50 underline-offset-4 hover:text-primary-button'
+                    >
+                      kundeservice@utekos.no
+                    </a>{' '}
+                    med fullt navn, adresse, ordrenummer og hvilke produkter
+                    returen gjelder. Pakk varen forsvarlig og bruk en
+                    sendingsmetode med sporing.
+                  </p>
+                : <p>{item.answer}</p>}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
         </Accordion>
       </AnimatedBlock>
     </section>

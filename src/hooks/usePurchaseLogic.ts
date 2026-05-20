@@ -7,12 +7,14 @@ import { cartStore } from '@/lib/state/cartStore'
 import { useCartMutations } from '@/hooks/useCartMutations'
 import { useOptimisticCartUpdate } from '@/hooks/useOptimisticCartUpdate'
 import { getCartIdFromCookie } from '@/lib/actions/getCartIdFromCookie'
+import { fetchCart } from '@/lib/helpers/cart/fetchCart'
 import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
 import { useAnalytics } from '@/hooks/useAnalytics'
 import { getVariants } from '@/app/skreddersy-varmen/utekos-orginal/utils/getVariants'
 import { PRODUCT_VARIANTS } from '@/api/constants'
 import type { ModelKey, ColorVariant } from 'types/product/ProductTypes'
 import type { UsePurchaseLogicProps } from 'types/product/PageProps'
+import type { Cart } from 'types/cart'
 import type { OptimisticItemInput } from '@/hooks/useOptimisticCartUpdate'
 
 export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
@@ -21,6 +23,7 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
   const [selectedColorIndex, setSelectedColorIndex] = useState(0)
   const [selectedSize, setSelectedSize] = useState('Middels')
   const [isTransitioning, startTransition] = useTransition()
+  const [isCheckoutRedirecting, setIsCheckoutRedirecting] = useState(false)
 
   const { addLines } = useCartMutations()
   const { updateCartCache } = useOptimisticCartUpdate()
@@ -50,12 +53,10 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
     }
   }, [selectedModel, currentConfig, selectedSize, selectedColorIndex])
 
-  const handleAddToCart = async () => {
-    cartStore.send({ type: 'OPEN' })
-
+  const resolveSelectedVariant = () => {
     if (!currentShopifyProduct) {
       toast.error(`Fant ikke produktdata for ${currentConfig.title}.`)
-      return
+      return null
     }
 
     const variants = getVariants(currentShopifyProduct)
@@ -75,58 +76,125 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
       toast.error(
         `Fant ikke variant for ${currentColor.name} / ${selectedSize}.`
       )
-      return
+      return null
     }
 
     if (!selectedVariant.availableForSale) {
       toast.error('Denne varianten er dessverre utsolgt for øyeblikket.')
+      return null
+    }
+
+    return {
+      product: currentShopifyProduct,
+      selectedVariant
+    }
+  }
+
+  const addConfiguredSelectionToCart = async ({
+    openCart
+  }: {
+    openCart: boolean
+  }): Promise<{ cart: Cart | null; cartId: string | null } | null> => {
+    const resolvedVariant = resolveSelectedVariant()
+
+    if (!resolvedVariant) {
+      return null
+    }
+
+    const { product, selectedVariant } = resolvedVariant
+
+    if (openCart) {
+      cartStore.send({ type: 'OPEN' })
+    }
+
+    try {
+      let currentCartId = contextCartId || (await getCartIdFromCookie())
+
+      const itemsToUpdate: OptimisticItemInput[] = [
+        {
+          product,
+          variant: selectedVariant,
+          quantity
+        }
+      ]
+
+      if (currentCartId) {
+        await updateCartCache({
+          cartId: currentCartId,
+          items: itemsToUpdate
+        })
+      }
+
+      const linesToProcess = [{ variantId: selectedVariant.id, quantity }]
+
+      await addLines(linesToProcess)
+
+      if (!currentCartId) {
+        currentCartId = await getCartIdFromCookie()
+      }
+
+      await trackAddToCart({
+        product,
+        selectedVariant,
+        quantity
+      })
+
+      trackEvent('AddToCart', {
+        content_name: product.title,
+        value: Number(selectedVariant.price.amount),
+        currency: selectedVariant.price.currencyCode
+      })
+
+      let cart: Cart | null = null
+
+      if (currentCartId) {
+        cart =
+          queryClient.getQueryData<Cart>(['cart', currentCartId])
+          ?? (await fetchCart(currentCartId))
+
+        if (cart) {
+          queryClient.setQueryData(['cart', currentCartId], cart)
+        }
+      }
+
+      return {
+        cart,
+        cartId: currentCartId ?? null
+      }
+    } catch (error) {
+      console.error('Feil under kjøp:', error)
+      toast.error('Kunne ikke legge varen i handlekurven.')
+      const cartId = contextCartId || (await getCartIdFromCookie())
+      if (cartId) {
+        queryClient.invalidateQueries({ queryKey: ['cart', cartId] })
+      }
+      return null
+    }
+  }
+
+  const handleAddToCart = () => {
+    startTransition(() => {
+      void addConfiguredSelectionToCart({ openCart: true })
+    })
+  }
+
+  const handleGoToCheckout = async () => {
+    if (isCheckoutRedirecting || isPendingFromMachine) {
       return
     }
 
-    startTransition(async () => {
-      try {
-        let currentCartId = contextCartId || (await getCartIdFromCookie())
+    setIsCheckoutRedirecting(true)
 
-        const itemsToUpdate: OptimisticItemInput[] = [
-          {
-            product: currentShopifyProduct,
-            variant: selectedVariant,
-            quantity
-          }
-        ]
+    const result = await addConfiguredSelectionToCart({ openCart: false })
+    const checkoutUrl = result?.cart?.checkoutUrl
 
-        if (currentCartId) {
-          await updateCartCache({
-            cartId: currentCartId,
-            items: itemsToUpdate
-          })
-        }
+    if (!checkoutUrl) {
+      setIsCheckoutRedirecting(false)
+      toast.error('Kunne ikke åpne kassen. Prøv igjen.')
+      return
+    }
 
-        const linesToProcess = [{ variantId: selectedVariant.id, quantity }]
-
-        // Maskinen oppdaterer cachen. Vi venter på ferdigstillelse.
-        await addLines(linesToProcess)
-
-        await trackAddToCart({
-          product: currentShopifyProduct,
-          selectedVariant,
-          quantity
-        })
-
-        trackEvent('AddToCart', {
-          content_name: currentShopifyProduct.title,
-          value: Number(selectedVariant.price.amount),
-          currency: selectedVariant.price.currencyCode
-        })
-      } catch (error) {
-        console.error('Feil under kjøp:', error)
-        toast.error('Kunne ikke legge varen i handlekurven.')
-        const cartId = contextCartId || (await getCartIdFromCookie())
-        if (cartId) {
-          queryClient.invalidateQueries({ queryKey: ['cart', cartId] })
-        }
-      }
-    })
+    window.location.assign(checkoutUrl)
   }
 
   return {
@@ -139,7 +207,8 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
     selectedSize,
     setSelectedSize,
     handleAddToCart,
-    isPending: isTransitioning || isPendingFromMachine,
+    handleGoToCheckout,
+    isPending: isTransitioning || isPendingFromMachine || isCheckoutRedirecting,
     currentConfig,
     currentColor
   }

@@ -3,16 +3,16 @@ import Image from 'next/image' // Importer Image-komponent
 
 export function GrillMasterSection() {
   return (
-    <section className='bg-sidebar-foreground py-24'>
+    <section className='bg-maritime-blue/24 py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='text-fluid-display mb-8 font-bold tracking-tight'>
+          <h2 className='text-fluid-display mb-8 font-bold tracking-normal'>
             Grillmestere elsker Utekos
           </h2>
 
-          <Card className='border-neutral-800 bg-background'>
+          <Card className='border-cloud-dancer/12 bg-maritime-darkest'>
             <CardContent className='p-12'>
-              <blockquote className='mb-6 text-xl italic text-foreground/90'>
+              <blockquote className='mb-6 text-xl italic text-cloud-dancer/90'>
                 &quot;Jeg elsker å arrangere grillfester, men hatet at folk
                 begynte å trekke inn så snart det ble litt kjølig. Utekos
                 forandret alt. Nå er det alltid noen som har en på seg, og
@@ -29,7 +29,7 @@ export function GrillMasterSection() {
                 />
                 <div className='text-left'>
                   <p className='font-semibold'>Hans Åge</p>
-                  <p className='text-sm text-muted-foreground'>
+                  <p className='text-sm text-overcast'>
                     Hobby-grillmester og livsnyter
                   </p>
                 </div>

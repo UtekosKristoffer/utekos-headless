@@ -1,4 +1,4 @@
-// Path: src/app/inspirasjon/båtliv/page.tsx
+// Path: src/app/inspirasjon/batliv/page.tsx
 import type { Metadata } from 'next'
 import type { Article, WithContext } from 'schema-dts'
 import { UseCasesGrid, useCasesData } from './UseCasesGrid'
@@ -29,13 +29,13 @@ export const metadata: Metadata = {
     'bryggekos'
   ],
   alternates: {
-    canonical: '/inspirasjon/båtliv'
+    canonical: '/inspirasjon/batliv'
   },
   openGraph: {
     title: 'Båtliv og Utekos | Forleng den norske båtsommeren',
     description:
       'Ikke la kjølige kvelder og vind forkorte tiden på sjøen. Oppdag hvordan Utekos blir din beste følgesvenn på båtturen.',
-    url: '/inspirasjon/båtliv',
+    url: '/inspirasjon/batliv',
     siteName: 'Utekos',
     images: [
       {
@@ -72,7 +72,7 @@ const jsonLd: WithContext<Article> = {
   'dateModified': '2026-04-17',
   'mainEntityOfPage': {
     '@type': 'WebPage',
-    '@id': 'https://utekos.no/inspirasjon/båtliv'
+    '@id': 'https://utekos.no/inspirasjon/batliv'
   }
 }
 
@@ -81,7 +81,9 @@ export default function BoatingInspirationPage() {
     <>
       <script
         type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c')
+        }}
       />
       <main>
         <Activity>

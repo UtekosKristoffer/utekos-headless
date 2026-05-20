@@ -9,39 +9,54 @@ export function SocialProof() {
   const containerRef = useSocialProofAnimations()
 
   return (
-    <div ref={containerRef} className='mx-auto mt-4 max-w-4xl px-4 md:px-0'>
+    <section
+      ref={containerRef}
+      className='mx-auto mt-8 sm:mt-16 max-w-4xl px-4 md:px-0'
+      aria-label='Fordeler med å handle hos oss'
+    >
       <div className='grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6'>
         <SocialProofCard
           title='Rask levering'
           Icon={Truck}
-          hoverBorderClass='hover:border-sky-500/20'
-          iconWrapperClass='bg-sky-500/10 shadow-[0_0_15px_rgba(14,165,233,0.15)]'
-          iconColorClass='text-sky-400'
+          cardClass='border-[color-mix(in_oklch,var(--maritime-blue)_10%,transparent)] bg-[var(--ancient-water)] hover:bg-[color-mix(in_oklch,var(--ancient-water)_90%,transparent)] transition-colors'
+          titleClass='text-[var(--maritime-blue)]'
+          shineClass='via-[color-mix(in_oklch,var(--cloud-dancer)_40%,transparent)]'
+          hoverBorderClass='hover:border-[color-mix(in_oklch,var(--maritime-blue)_30%,transparent)]'
+          iconWrapperClass='bg-[var(--barely-blue)] shadow-[0_0_18px_color-mix(in_oklch,var(--maritime-blue)_15%,transparent)]'
+          iconColorClass='text-[var(--maritime-blue)]'
         >
-          <p className='mt-1 text-sm font-medium text-sky-200/60'>2-5 dager</p>
+          <p className='mt-1 text-sm font-medium text-[color-mix(in_oklch,var(--maritime-blue)_80%,transparent)]'>
+            2-5 dager
+          </p>
         </SocialProofCard>
 
         <SocialProofCard
           title='3000+'
           Icon={Smile}
-          hoverBorderClass='hover:border-emerald-500/20'
-          iconWrapperClass='bg-emerald-500/10 shadow-[0_0_15px_rgba(16,185,129,0.15)]'
-          iconColorClass='text-emerald-400'
+          cardClass='border-[color-mix(in_oklch,var(--chocolate-plum)_10%,transparent)] bg-[var(--overcast)] hover:bg-[color-mix(in_oklch,var(--overcast)_90%,transparent)] transition-colors'
+          titleClass='text-[var(--chocolate-plum)]'
+          shineClass='via-[color-mix(in_oklch,var(--cloud-dancer)_40%,transparent)]'
+          hoverBorderClass='hover:border-[color-mix(in_oklch,var(--chocolate-plum)_30%,transparent)]'
+          iconWrapperClass='bg-[color-mix(in_oklch,var(--cloud-dancer)_50%,transparent)] shadow-[0_0_18px_color-mix(in_oklch,var(--chocolate-plum)_15%,transparent)]'
+          iconColorClass='text-[var(--chocolate-plum)]'
         >
-          <p className='mt-1 text-sm font-medium text-emerald-200/60'>
+          <p className='mt-1 text-sm font-medium text-[color-mix(in_oklch,var(--chocolate-plum)_80%,transparent)]'>
             Fornøyde kunder
           </p>
         </SocialProofCard>
+
         <SocialProofCard
           title='Trygg handel'
           Icon={ShieldCheck}
-          hoverBorderClass='hover:border-violet-500/20'
-          iconWrapperClass='bg-violet-500/10 shadow-[0_0_15px_rgba(139,92,246,0.15)]'
-          iconColorClass='text-violet-400'
+          cardClass='border-[var(--mountain-view)] bg-[var(--mountain-view)] transition-colors'
+          titleClass='text-[var(--cloud-dancer)]'
+          hoverBorderClass='hover:border-[color-mix(in_oklch,var(--cloud-dancer)_30%,transparent)]'
+          iconWrapperClass='bg-[color-mix(in_oklch,var(--cloud-dancer)_10%,transparent)] shadow-[0_0_18px_color-mix(in_oklch,var(--cloud-dancer)_15%,transparent)]'
+          iconColorClass='text-[var(--cloud-dancer)]'
         >
           <PaymentIcons />
         </SocialProofCard>
       </div>
-    </div>
+    </section>
   )
 }

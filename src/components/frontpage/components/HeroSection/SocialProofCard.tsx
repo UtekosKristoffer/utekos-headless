@@ -7,6 +7,9 @@ interface SocialProofCardProps {
   readonly iconWrapperClass: string
   readonly iconColorClass: string
   readonly hoverBorderClass: string
+  readonly cardClass?: string
+  readonly titleClass?: string
+  readonly shineClass?: string
   readonly children: ReactNode
 }
 
@@ -16,13 +19,24 @@ export function SocialProofCard({
   iconWrapperClass,
   iconColorClass,
   hoverBorderClass,
+  cardClass,
+  titleClass,
+  shineClass,
   children
 }: SocialProofCardProps) {
+  const surfaceClass =
+    cardClass ?? 'border-white/5 bg-white/[0.02] hover:bg-white/[0.04]'
+
+  const shineStyle = shineClass ?? 'via-white/10'
+
   return (
-    <div
-      className={`gsap-card group relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.02] p-6 backdrop-blur-md transition-colors duration-500 hover:bg-white/[0.04] ${hoverBorderClass}`}
+    <article
+      className={`gsap-card group relative overflow-hidden rounded-2xl border p-6 backdrop-blur-md transition-colors duration-500 ${hoverBorderClass} ${surfaceClass}`}
     >
-      <div className='gsap-shine absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none' />
+      <div
+        className={`gsap-shine absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent ${shineStyle} to-transparent pointer-events-none`}
+        aria-hidden='true'
+      />
 
       <div className='relative flex flex-col items-center text-center'>
         <div
@@ -30,9 +44,13 @@ export function SocialProofCard({
         >
           <Icon className={`gsap-icon h-6 w-6 ${iconColorClass}`} />
         </div>
-        <p className='text-lg font-bold text-white tracking-tight'>{title}</p>
+        <p
+          className={`text-lg font-bold tracking-tight ${titleClass ?? 'text-white'}`}
+        >
+          {title}
+        </p>
         {children}
       </div>
-    </div>
+    </article>
   )
 }

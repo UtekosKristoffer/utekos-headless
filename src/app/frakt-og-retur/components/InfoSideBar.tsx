@@ -1,5 +1,5 @@
 // Path: src/app/frakt-og-retur/components/InfoSidebar.tsx
-import { Button } from '@/components/ui/button'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import {
   Card,
   CardContent,
@@ -14,52 +14,71 @@ import Link from 'next/link'
 export function InfoSidebar() {
   return (
     <aside className='lg:col-span-4'>
-      <Card className='sticky top-28 bg-sidebar-foreground border-neutral-700'>
+      <Card className='sticky top-28 border-cloud-dancer/12 bg-maritime-blue/24 text-cloud-dancer shadow-[0_24px_70px_-52px_rgba(8,12,28,0.88)]'>
         <CardHeader>
-          <CardTitle>Dine trygghetsgarantier</CardTitle>
+          <CardTitle className='text-xl leading-[1.15] tracking-normal'>
+            Dine trygghetsgarantier
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <ul className='space-y-4'>
             <li className='flex items-start gap-3'>
-              <ShieldCheck className='mt-0.5 size-5 shrink-0 text-green-500' />
+              <ShieldCheck className='mt-0.5 size-5 shrink-0 text-primary-button' />
               <div>
-                <h4 className='font-medium'>14 dagers angrerett</h4>
-                <p className='text-sm text-muted-foreground'>
+                <h4 className='font-medium leading-[1.35] tracking-normal'>
+                  14 dagers angrerett
+                </h4>
+                <p className='text-sm leading-[1.45] tracking-normal text-cloud-dancer/80'>
                   Lovfestet trygghet fra du mottar varen.
                 </p>
               </div>
             </li>
             <li className='flex items-start gap-3'>
-              <Package className='mt-0.5 size-5 shrink-0 text-foreground/80' />
+              <Package className='mt-0.5 size-5 shrink-0 text-ancient-water' />
               <div>
-                <h4 className='font-medium'>Fri frakt over 999 kr</h4>
-                <p className='text-sm text-muted-foreground'>
+                <h4 className='font-medium leading-[1.35] tracking-normal'>
+                  Fri frakt over 999 kr
+                </h4>
+                <p className='text-sm leading-[1.45] tracking-normal text-cloud-dancer/80'>
                   Vi spanderer frakten på større bestillinger.
                 </p>
               </div>
             </li>
             <li className='flex items-start gap-3'>
-              <BadgeCheck className='mt-0.5 size-5 shrink-0 text-rose-500' />
+              <BadgeCheck className='mt-0.5 size-5 shrink-0 text-[var(--soft-warm)]' />
               <div>
-                <h4 className='font-medium'>Retur</h4>
-                <p className='text-sm text-muted-foreground'>
+                <h4 className='font-medium leading-[1.35] tracking-normal'>
+                  Retur
+                </h4>
+                <p className='text-sm leading-[1.45] tracking-normal text-cloud-dancer/80'>
                   Send en e-post til kundeservice@utekos.no, så er du i gang.
                 </p>
               </div>
             </li>
           </ul>
         </CardContent>
-        <Separator className='my-2' />
+        <Separator className='my-2 bg-cloud-dancer/12' />
         <CardFooter className='flex-col items-start'>
-          <h4 className='font-medium'>Har du spørsmål?</h4>
-          <p className='mt-1 mb-3 text-sm text-muted-foreground'>
+          <h4 className='font-medium leading-[1.35] tracking-normal'>
+            Har du spørsmål?
+          </h4>
+          <p className='mt-1 mb-4 text-sm leading-[1.45] tracking-normal text-cloud-dancer/80'>
             Vårt kundeserviceteam er klare til å hjelpe deg.
           </p>
-          <Button asChild className='w-full'>
-            <Link href='/kontaktskjema'>
-              <Mail className='mr-2 size-4' /> Kontakt oss
+          <BrandBadge
+            asChild
+            backgroundColor='var(--primary-button)'
+            textColor='var(--maritime-darkest)'
+            className='min-h-12 w-full border border-primary-button/24 px-6 py-3 text-base leading-[1.4] font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
+          >
+            <Link
+              href='/kontaktskjema'
+              data-track='ShippingReturnsContactClick'
+            >
+              <Mail className='mr-2 size-4' />
+              Kontakt oss
             </Link>
-          </Button>
+          </BrandBadge>
         </CardFooter>
       </Card>
     </aside>

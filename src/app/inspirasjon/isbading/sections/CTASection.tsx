@@ -18,22 +18,22 @@ export async function CTASection() {
   }
 
   return (
-    <section className='relative overflow-hidden py-24 bg-sidebar-foreground/50 border-t border-white/5'>
-      <div className='absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-blue-500/5 pointer-events-none' />
+    <section className='relative overflow-hidden border-t border-cloud-dancer/12 bg-maritime-darkest py-24'>
+      <div className='pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,var(--ancient-water)_0%,transparent_34%),radial-gradient(circle_at_85%_10%,var(--soft-warm)_0%,transparent_28%)] opacity-[0.18]' />
 
       <div className='container relative mx-auto px-4'>
         <AnimatedBlock className='will-animate-fade-in-scale mb-12 text-center'>
-          <h2 className='text-fluid-display font-bold tracking-tight mb-4'>
+          <h2 className='mb-4 text-fluid-display font-bold leading-[0.95] tracking-normal text-cloud-dancer'>
             Sikre deg varmen nå
           </h2>
-          <p className='mx-auto max-w-2xl text-xl text-muted-foreground'>
+          <p className='mx-auto max-w-2xl text-xl leading-[1.45] tracking-normal text-overcast'>
             Gjør som hundrevis av andre isbadere. Bestill din Comfyrobe i dag og
             kjenn forskjellen.
           </p>
         </AnimatedBlock>
 
         <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
-          <div className='mx-auto max-w-6xl bg-background/50 backdrop-blur-sm rounded-3xl p-6 md:p-12 border border-white/10 shadow-2xl'>
+          <div className='mx-auto max-w-6xl rounded-3xl border border-cloud-dancer/12 bg-maritime-blue/18 p-6 shadow-2xl backdrop-blur-sm md:p-12'>
             <ComfyrobeQuickBuy product={product} />
           </div>
         </AnimatedBlock>

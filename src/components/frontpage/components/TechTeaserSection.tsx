@@ -12,33 +12,29 @@ export default function TechTeaserSection() {
       className='mt-12 w-full py-12 md:py-24 overflow-hidden'
     >
       <div className='container mx-auto max-w-7xl px-4'>
-        <div className='relative overflow-hidden rounded-3xl border border-white/5 bg-neutral-950 p-8 shadow-2xl md:p-12 lg:p-20'>
-          <div className='pointer-events-none absolute -left-[10%] top-0 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-sky-500/5 blur-[120px]' />
-          <div className='pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] translate-y-1/3 rounded-full bg-orange-500/5 blur-[100px]' />
+        <div className='relative overflow-hidden rounded-3xl border border-cloud-dancer bg-mountain-view p-8 shadow-2xl md:p-12 lg:p-20'>
+          <div className='pointer-events-none absolute -left-[10%] top-0 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-mountain-view blur-[120px]' />
+          <div className='pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] translate-y-1/3 rounded-full bg-overcast blur-[100px]' />
 
           <div className='relative grid items-center gap-12 lg:grid-cols-2 lg:gap-20'>
-            <div className='space-y-10'>
-              <div className='gsap-content inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-4 py-1.5 backdrop-blur-sm'>
+            <div className='space-y-4'>
+              <div className='gsap-content inline-flex items-center gap-2 rounded-full border border-mountain-view/20 px-4 py-1.5 backdrop-blur-sm'>
                 <div className='relative flex h-2 w-2'>
                   {/* Ping-effekt i varmt gull */}
-                  <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75' />
+                  <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-mountain-view opacity-75' />
                   {/* Statisk punkt i dypere rav/gull */}
-                  <span className='relative inline-flex h-2 w-2 rounded-full bg-amber-500' />
+                  <span className='relative inline-flex h-2 w-2 rounded-full bg-mountain-view' />
                 </div>
-                {/* Tekst i lysere gull for god lesbarhet mot mørk bakgrunn */}
-                <span className='text-xs font-bold uppercase tracking-widest text-amber-400'>
-                  Innovasjon & Materialer
-                </span>
               </div>
 
               <div className='space-y-6'>
-                <h2 className='gsap-content text-4xl font-bold tracking-tight text-neutral-100 sm:text-5xl md:text-6xl'>
+                <h2 className='gsap-content text-4xl font-bold tracking-tight text-cloud-dancer sm:text-5xl md:text-6xl'>
                   Vitenskapen bak <br />
-                  <span className='text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-500 to-amber-600'>
-                    din komfort.
+                  <span className='text-transparent bg-clip-text bg-gradient-to-r from-primary-button via-yellow-500 to-primary-button'>
+                    din komfort
                   </span>
                 </h2>
-                <p className='gsap-content max-w-lg text-lg leading-relaxed text-neutral-400'>
+                <p className='gsap-content max-w-lg text-lg leading-relaxed text-cloud-dancer'>
                   Det handler ikke bare om varme, men om hvordan varmen skapes.
                   Fra vår hydrofobiske{' '}
                   <strong className='text-white'>TechDown™</strong> til det
@@ -53,22 +49,22 @@ export default function TechTeaserSection() {
                     icon: Thermometer,
                     title: 'Termisk effektivitet',
                     desc: 'Isolasjon som absorberer og resirkulerer kroppsvarme.',
-                    color: 'text-orange-400',
-                    bg: 'bg-orange-500/10'
+                    color: 'text-cloud-dancer',
+                    bg: 'bg-bleached-mauve'
                   },
                   {
                     icon: Shield,
                     title: 'HydroGuard™ beskyttelse',
                     desc: 'Pustende membran med 8000mm vannsøyle.',
-                    color: 'text-sky-400',
-                    bg: 'bg-sky-500/10'
+                    color: 'text-maritime-darkest',
+                    bg: 'bg-ancient-water'
                   },
                   {
                     icon: Layers,
                     title: '3-i-1 adaptivitet',
                     desc: 'Fra isolerende kokong til bevegelig parkas på sekunder.',
-                    color: 'text-emerald-400',
-                    bg: 'bg-emerald-500/10'
+                    color: 'text-chocolate-plum',
+                    bg: 'bg-overcast'
                   }
                 ].map((item, idx) => (
                   <li
@@ -76,15 +72,15 @@ export default function TechTeaserSection() {
                     className='gsap-content group flex items-start gap-4'
                   >
                     <div
-                      className={`mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/5 ${item.bg} ${item.color} transition-transform duration-300 group-hover:scale-110`}
+                      className={`mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cloud-dancer ${item.bg} ${item.color} transition-transform duration-300 group-hover:scale-110`}
                     >
-                      <item.icon className='h-5 w-5' />
+                      <item.icon className='size-5' />
                     </div>
                     <div>
-                      <span className='block text-base font-semibold text-white group-hover:text-sky-100 transition-colors'>
+                      <span className='block text-base font-semibold text-cloud-dancer group-hover:text-ancient-water transition-colors'>
                         {item.title}
                       </span>
-                      <span className='block text-sm text-neutral-500 group-hover:text-neutral-400 transition-colors'>
+                      <span className='block text-sm text-ancient-water group-hover:text-barely-blue transition-colors'>
                         {item.desc}
                       </span>
                     </div>
@@ -129,36 +125,36 @@ export default function TechTeaserSection() {
                   >
                     <div className='flex items-center justify-between'>
                       <div className='flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md'>
-                        <Cpu className='h-3.5 w-3.5 text-sky-400' />
+                        <Cpu className='h-3.5 w-3.5 text-maritime-blue' />
                         <span className='text-[10px] font-bold uppercase tracking-widest text-white'>
                           Core Tech
                         </span>
                       </div>
-                      <Shield className='h-5 w-5 text-neutral-500' />
+                      <Shield className='h-5 w-5 text-cloud-dancer' />
                     </div>
 
                     <div>
                       <div className='mb-4 space-y-1.5 opacity-60'>
-                        <div className='h-1 w-12 rounded-full bg-sky-500' />
-                        <div className='h-1 w-8 rounded-full bg-neutral-600' />
+                        <div className='h-1 w-12 rounded-full bg-ancient-water' />
+                        <div className='h-1 w-8 rounded-full bg-chocolate-plum' />
                       </div>
 
-                      <h3 className='text-3xl font-bold text-white tracking-tight'>
+                      <h3 className='text-3xl font-bold text-cloud-dancer tracking-tight'>
                         SherpaCore™
                       </h3>
-                      <p className='text-sm font-medium text-sky-400'>
+                      <p className='text-sm font-medium text-ancient-water'>
                         Thermal Lining System
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className='gsap-inner-parallax absolute -bottom-6 -right-6 flex h-24 w-24 items-center justify-center rounded-full border border-white/10 bg-neutral-900 shadow-2xl translate-z-[40px]'>
+                <div className='gsap-inner-parallax absolute -bottom-6 -right-6 flex h-24 w-24 items-center justify-center rounded-full border border-white/10 bg-maritime-darkest shadow-2xl translate-z-[40px]'>
                   <div className='text-center'>
-                    <span className='block text-2xl font-bold text-sky-400'>
+                    <span className='block text-2xl font-bold text-cloud-dancer'>
                       8K
                     </span>
-                    <span className='text-[10px] font-bold uppercase tracking-wider text-neutral-500'>
+                    <span className='text-[10px] font-bold uppercase tracking-wider text-ancient-water'>
                       Vannsøyle
                     </span>
                   </div>

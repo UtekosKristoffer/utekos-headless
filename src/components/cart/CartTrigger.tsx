@@ -54,20 +54,19 @@ export function CartTrigger({
         variant='cart'
         className={cn(
           'relative flex h-11 w-11 items-center justify-center rounded-md',
-          'border border-white/10 transition-colors',
-          'dark:border-neutral-700 dark:text-white',
+          'border border-cloud-dancer/10 text-cloud-dancer transition-colors hover:bg-cloud-dancer/5',
           'p-0',
           className
         )}
         onMouseEnter={handlePrefetch}
       >
-        <ShoppingCartIcon className='h-4 text-white transition-all ease-in-out hover:scale-110' />
+        <ShoppingCartIcon className='h-4 text-cloud-dancer transition-all ease-in-out hover:scale-110' />
 
         {itemCount > 0 && (
           <div
             className='pointer-events-none absolute -right-2 -top-2 z-10 grid h-4 w-4
-                          place-items-center rounded-sm bg-blue-600 text-[11px]
-                          font-medium text-white'
+                          place-items-center rounded-sm border border-cloud-dancer/10 bg-maritime-darkest text-[11px]
+                          font-medium text-cloud-dancer'
           >
             {itemCount}
           </div>

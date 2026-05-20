@@ -1,0 +1,40 @@
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
+import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
+import type { Route } from 'next'
+
+interface InspirationHeroActionsProps {
+  primaryLabel: string
+  secondaryLabel: string
+  secondaryHref?: Route | string
+}
+
+export function InspirationHeroActions({
+  primaryLabel,
+  secondaryLabel,
+  secondaryHref = '#bruksomrader'
+}: InspirationHeroActionsProps) {
+  return (
+    <>
+      <BrandBadge
+        asChild
+        backgroundColor='var(--primary-button)'
+        textColor='var(--maritime-darkest)'
+        className='group border border-primary-button/35 px-7 py-3 text-base leading-[1.4] font-semibold tracking-normal shadow-[0_18px_38px_-28px_rgba(49,42,18,0.72)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest'
+      >
+        <Link href={'/produkter' as Route}>
+          {primaryLabel}
+          <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+        </Link>
+      </BrandBadge>
+      <BrandBadge
+        asChild
+        backgroundColor='var(--cloud-dancer)'
+        textColor='var(--maritime-darkest)'
+        className='border border-cloud-dancer/35 px-7 py-3 text-base leading-[1.4] font-semibold tracking-normal shadow-[0_18px_38px_-30px_rgba(14,18,35,0.48)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-cloud-dancer/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest'
+      >
+        <Link href={secondaryHref as Route}>{secondaryLabel}</Link>
+      </BrandBadge>
+    </>
+  )
+}

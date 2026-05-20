@@ -24,7 +24,7 @@ export function ItemRow({
         onSelect={handleSelect}
         className={cn(
           'h-9 rounded-md px-3 font-medium',
-          depth > 0 && 'text-neutral-200',
+          depth > 0 && 'text-cloud-dancer/80',
           depth > 0 && pad
         )}
       >
@@ -39,7 +39,7 @@ export function ItemRow({
             onSelect={() => handleChildSelect(child.path)}
             className={cn(
               'h-9 rounded-md px-3',
-              'pl-8 text-sm text-neutral-300'
+              'pl-8 text-sm text-cloud-dancer/70'
             )}
           >
             <span aria-hidden className='mr-1'>

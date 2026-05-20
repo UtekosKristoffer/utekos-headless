@@ -6,91 +6,125 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
+const TABLET_MOBILE_QUERY =
+  '(prefers-reduced-motion: no-preference) and (max-width: 1279px)'
+const DESKTOP_QUERY =
+  '(prefers-reduced-motion: no-preference) and (min-width: 1280px)'
+
 export function useThreeInOneAnimations() {
   const containerRef = useRef<HTMLElement>(null)
   const [activeStep, setActiveStep] = useState(0)
 
   useGSAP(
     () => {
-      const reduce = gsap.matchMedia()
+      const container = containerRef.current
+      if (!container) return
 
-      reduce.add('(prefers-reduced-motion: reduce)', () => {
+      const q = gsap.utils.selector(container)
+      const media = gsap.matchMedia()
+      const refreshFrames: number[] = []
+
+      const queueRefresh = () => {
+        const firstFrame = window.requestAnimationFrame(() => {
+          const secondFrame = window.requestAnimationFrame(() => {
+            ScrollTrigger.refresh(true)
+          })
+          refreshFrames.push(secondFrame)
+        })
+        refreshFrames.push(firstFrame)
+      }
+
+      const setVisible = () => {
+        const targets = [
+          '.gsap-three-eyebrow',
+          '.gsap-three-title',
+          '.gsap-three-subtitle',
+          '.gsap-step-eyebrow',
+          '.gsap-step-title',
+          '.gsap-step-desc',
+          '.gsap-step-icon',
+          '.gsap-step-badge'
+        ].flatMap(selector => q(selector))
+
+        if (!targets.length) return
+
         gsap.set(
-          [
-            '.gsap-three-eyebrow',
-            '.gsap-three-title',
-            '.gsap-three-subtitle',
-            '.gsap-step-eyebrow',
-            '.gsap-step-title',
-            '.gsap-step-desc',
-            '.gsap-step-icon'
-          ],
-          { autoAlpha: 1, x: 0, y: 0, scale: 1, rotation: 0 }
+          targets,
+          {
+            autoAlpha: 1,
+            x: 0,
+            y: 0,
+            scale: 1,
+            rotation: 0,
+            filter: 'blur(0px)'
+          }
         )
-      })
+      }
 
-      reduce.add('(prefers-reduced-motion: no-preference)', () => {
-        // ─── INTRO HEADER ────────────────────────────────────────
+      const setupIntro = () => {
+        const intro = q('.gsap-three-intro')[0]
         const introTl = gsap.timeline({
           scrollTrigger: {
-            trigger: '.gsap-three-intro',
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
+            trigger: intro ?? container,
+            start: 'top 92%',
+            once: true,
+            toggleActions: 'play none none none'
           }
         })
 
-        introTl
-          .fromTo(
-            '.gsap-three-eyebrow',
-            { x: -32, autoAlpha: 0 },
-            { x: 0, autoAlpha: 1, duration: 0.7, ease: 'power3.out' }
-          )
-          .fromTo(
-            '.gsap-three-title',
-            { y: 32, autoAlpha: 0, scale: 0.97 },
-            {
-              y: 0,
-              autoAlpha: 1,
-              scale: 1,
-              duration: 0.95,
-              ease: 'power3.out'
-            },
-            '-=0.4'
-          )
-          .fromTo(
-            '.gsap-three-subtitle',
-            { y: 16, autoAlpha: 0, filter: 'blur(6px)' },
-            {
-              y: 0,
-              autoAlpha: 1,
-              filter: 'blur(0px)',
-              duration: 0.9,
-              ease: 'power3.out'
-            },
-            '-=0.5'
-          )
+        const addIntroTween = (
+          selector: string,
+          fromVars: gsap.TweenVars,
+          toVars: gsap.TweenVars,
+          position?: string
+        ) => {
+          const targets = q(selector)
+          if (!targets.length) return
 
-        // ─── PER-STEP PANELS ─────────────────────────────────────
-        // Each panel triggers its own animations + sets activeStep
-        // ─── PER-STEP PANELS ─────────────────────────────────────
-        // ─── PER-STEP PANELS ─────────────────────────────────────
-        const mobilePanels = gsap.utils.toArray<HTMLElement>(
-          '.gsap-mobile-step-panel'
+          if (position) {
+            introTl.fromTo(targets, fromVars, toVars, position)
+            return
+          }
+
+          introTl.fromTo(targets, fromVars, toVars)
+        }
+
+        addIntroTween(
+          '.gsap-three-eyebrow',
+          { x: -32, autoAlpha: 0 },
+          { x: 0, autoAlpha: 1, duration: 0.7, ease: 'power3.out' }
         )
-        const desktopPanels = gsap.utils.toArray<HTMLElement>(
-          '.gsap-desktop-step-panel'
+        addIntroTween(
+          '.gsap-three-title',
+          { y: 32, autoAlpha: 0, scale: 0.97 },
+          {
+            y: 0,
+            autoAlpha: 1,
+            scale: 1,
+            duration: 0.95,
+            ease: 'power3.out'
+          },
+          '-=0.4'
         )
-        const panels = [...mobilePanels, ...desktopPanels]
+        addIntroTween(
+          '.gsap-three-subtitle',
+          { y: 16, autoAlpha: 0, filter: 'blur(6px)' },
+          {
+            y: 0,
+            autoAlpha: 1,
+            filter: 'blur(0px)',
+            duration: 0.9,
+            ease: 'power3.out'
+          },
+          '-=0.5'
+        )
+      }
 
-        panels.forEach(panel => {
-          const isDesktopPanel = panel.classList.contains(
-            'gsap-desktop-step-panel'
-          )
-          const stepIndex =
-            isDesktopPanel ?
-              desktopPanels.indexOf(panel)
-            : mobilePanels.indexOf(panel)
-
+      const setupStepPanels = (
+        panels: HTMLElement[],
+        shouldUpdateActiveStep: boolean
+      ) => {
+        panels.forEach((panel, stepIndex) => {
           const direction =
             stepIndex === 0 ? 'left'
             : stepIndex === 1 ? 'right'
@@ -107,20 +141,37 @@ export function useThreeInOneAnimations() {
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: panel,
-              start: 'top 65%',
-              end: 'bottom 35%',
-              toggleActions: 'play reverse play reverse',
+              start: 'top 88%',
+              once: true,
+              toggleActions: 'play none none none',
               onEnter: () => {
-                if (isDesktopPanel) setActiveStep(stepIndex)
+                if (shouldUpdateActiveStep) setActiveStep(stepIndex)
               },
               onEnterBack: () => {
-                if (isDesktopPanel) setActiveStep(stepIndex)
+                if (shouldUpdateActiveStep) setActiveStep(stepIndex)
               }
             }
           })
 
-          tl.fromTo(
-            panel.querySelectorAll('.gsap-step-eyebrow'),
+          const addPanelTween = (
+            selector: string,
+            fromVars: gsap.TweenVars,
+            toVars: gsap.TweenVars,
+            position?: string
+          ) => {
+            const targets = panel.querySelectorAll(selector)
+            if (!targets.length) return
+
+            if (position) {
+              tl.fromTo(targets, fromVars, toVars, position)
+              return
+            }
+
+            tl.fromTo(targets, fromVars, toVars)
+          }
+
+          addPanelTween(
+            '.gsap-step-eyebrow',
             { x: fromX, y: fromY, autoAlpha: 0 },
             {
               x: 0,
@@ -130,70 +181,71 @@ export function useThreeInOneAnimations() {
               ease: 'power3.out'
             }
           )
-            .fromTo(
-              panel.querySelectorAll('.gsap-step-title'),
-              { x: fromX * 0.6, y: fromY, autoAlpha: 0 },
-              {
-                x: 0,
-                y: 0,
-                autoAlpha: 1,
-                duration: 0.85,
-                ease: 'power3.out'
-              },
-              '-=0.5'
-            )
-            .fromTo(
-              panel.querySelectorAll('.gsap-step-desc'),
-              { x: fromX * 0.4, y: fromY * 0.7, autoAlpha: 0 },
-              {
-                x: 0,
-                y: 0,
-                autoAlpha: 1,
-                duration: 0.75,
-                ease: 'power3.out'
-              },
-              '-=0.5'
-            )
-            .fromTo(
-              panel.querySelectorAll('.gsap-step-icon'),
-              { scale: 0.4, rotation: -15, autoAlpha: 0 },
-              {
-                scale: 1,
-                rotation: 0,
-                autoAlpha: 1,
-                duration: 0.8,
-                ease: 'back.out(1.7)'
-              },
-              '-=0.4'
-            )
-        })
-
-        // ─── DESKTOP STEP-NUMBER BADGE (mobile cards) ────────────
-        gsap.utils.toArray<HTMLElement>('.gsap-step-badge').forEach(badge => {
-          gsap.fromTo(
-            badge,
-            { scale: 0.6, rotation: -8, autoAlpha: 0 },
+          addPanelTween(
+            '.gsap-step-title',
+            { x: fromX * 0.6, y: fromY, autoAlpha: 0 },
+            {
+              x: 0,
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.85,
+              ease: 'power3.out'
+            },
+            '-=0.5'
+          )
+          addPanelTween(
+            '.gsap-step-desc',
+            { x: fromX * 0.4, y: fromY * 0.7, autoAlpha: 0 },
+            {
+              x: 0,
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.75,
+              ease: 'power3.out'
+            },
+            '-=0.5'
+          )
+          addPanelTween(
+            '.gsap-step-icon',
+            { scale: 0.4, rotation: -15, autoAlpha: 0 },
             {
               scale: 1,
               rotation: 0,
               autoAlpha: 1,
-              duration: 0.7,
-              ease: 'back.out(1.7)',
-              scrollTrigger: {
-                trigger: badge,
-                start: 'top 85%',
-                toggleActions: 'play none none reverse'
-              }
-            }
+              duration: 0.8,
+              ease: 'back.out(1.7)'
+            },
+            '-=0.4'
           )
         })
+      }
 
-        // ─── DESKTOP IMAGE PARALLAX ──────────────────────────────
-        const images = gsap.utils.toArray<HTMLElement>('.gsap-step-image')
+      media.add('(prefers-reduced-motion: reduce)', () => {
+        setVisible()
+      })
+
+      media.add(TABLET_MOBILE_QUERY, () => {
+        setVisible()
+        queueRefresh()
+      })
+
+      media.add(DESKTOP_QUERY, () => {
+        const desktopPanels = q('.gsap-desktop-step-panel')
+
+        setupIntro()
+        setupStepPanels(desktopPanels, true)
+
+        const images = q('.gsap-step-image')
+        if (!images.length || !desktopPanels.length) {
+          queueRefresh()
+          return
+        }
 
         images.forEach((image, index) => {
           const triggerPanel = desktopPanels[index]
-          if (!triggerPanel) return
+          if (!triggerPanel || !image.isConnected || !triggerPanel.isConnected) {
+            return
+          }
 
           gsap.to(image, {
             yPercent: -6,
@@ -201,12 +253,20 @@ export function useThreeInOneAnimations() {
             scrollTrigger: {
               trigger: triggerPanel,
               start: 'top bottom',
-              end: 'bottom top',
+              end: 'clamp(bottom top)',
+              invalidateOnRefresh: true,
               scrub: 0.6
             }
           })
         })
+
+        queueRefresh()
       })
+
+      return () => {
+        refreshFrames.forEach(frame => window.cancelAnimationFrame(frame))
+        media.revert()
+      }
     },
     { scope: containerRef }
   )

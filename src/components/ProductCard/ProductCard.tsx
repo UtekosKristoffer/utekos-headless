@@ -1,6 +1,7 @@
 // Path: src/components/ProductCard/ProductCard.tsx
 'use client'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
@@ -86,26 +87,26 @@ export function ProductCard({
   }, [lastError])
 
   return (
-    <Card className='product-card bg-sidebar-foreground group flex h-full flex-col gap-0 overflow-hidden p-0'>
+    <Card className='product-card group flex h-full flex-col gap-0 overflow-hidden border border-cloud-dancer/10 bg-maritime-blue p-0 shadow-[0_18px_56px_-42px_rgba(8,10,24,0.85)]'>
       <CardContent className='relative p-0'>
         <Link
           href={productUrl}
           data-track='ProductCardViewMoreClick'
           aria-label={`Se produkt ${product.title}`}
-          className='block w-full'
+          className='block w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-button'
         >
-          <Badge
-            variant='secondary'
-            className='absolute left-4 top-4 z-10 border border-muted-foreground bg-[#020244] px-3 py-1 text-xs font-medium tracking-wide text-white'
-          >
-            UNISEX
-          </Badge>
+          <BrandBadge
+            label='UNISEX'
+            backgroundColor='var(--dusted-peri)'
+            textColor='var(--maritime-darkest)'
+            className='absolute left-4 top-4 z-10 border border-dusted-peri/24 px-3 py-1 text-xs font-medium tracking-wide shadow-[0_12px_28px_-22px_rgba(32,28,54,0.58)]'
+          />
 
           {(product.handle === 'utekos-dun'
             || product.handle === 'comfyrobe') && (
             <Badge
               variant='destructive'
-              className='absolute right-4 top-4 z-10 px-3 py-1 text-xs font-medium uppercase tracking-wide'
+              className='absolute right-4 top-4 z-10 border border-primary-button/35 bg-primary-button px-3 py-1 text-xs font-medium uppercase tracking-wide text-maritime-darkest'
             >
               Få igjen
             </Badge>
@@ -118,8 +119,9 @@ export function ProductCard({
               fill
               quality={100}
               sizes='(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw'
-              className='object-cover transition-transform duration-300 group-hover:scale-105'
-              priority={isPriority}
+              className='object-cover transition-transform duration-300 group-hover:scale-[1.03]'
+              fetchPriority={isPriority ? 'high' : 'auto'}
+              loading={isPriority ? 'eager' : 'lazy'}
             />
           </AspectRatio>
         </Link>

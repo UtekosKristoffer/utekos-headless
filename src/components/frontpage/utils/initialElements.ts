@@ -1,5 +1,7 @@
-import { Check, Feather, Heart, Moon, type LucideIcon } from 'lucide-react'
+import { Check, Feather, Heart, Moon } from 'lucide-react'
+
 export type IconName = keyof typeof iconMap
+
 export const iconMap = {
   moon: Moon,
   feather: Feather,
@@ -7,12 +9,13 @@ export const iconMap = {
   check: Check
 }
 
-const layoutSize = 220
 const centerX = 225
 const centerY = 225
-const nodeWidth = 160
+const nodeWidth = 200
 const nodeHeight = 52
-const centerNodeSize = 96
+const centerNodeSize = 108
+const offsetX = 225
+const offsetY = 182
 
 export const nodes = [
   {
@@ -28,56 +31,56 @@ export const nodes = [
   {
     id: 'benefit-1',
     type: 'benefit',
-    position: { x: centerX - layoutSize, y: centerY - layoutSize },
+    position: { x: centerX - offsetX, y: centerY - offsetY },
     width: nodeWidth,
     height: nodeHeight,
     data: {
       icon: 'moon' as IconName,
       text: 'Forlenget kveldene',
-      color: '#60a5fa',
-      iconColor: 'text-blue-400'
+      color: 'var(--ancient-water)',
+      iconColor: 'text-cloud-dancer'
     }
   },
   {
     id: 'benefit-2',
     type: 'benefit',
-    position: { x: centerX + layoutSize - nodeWidth, y: centerY - layoutSize },
+    position: { x: centerX + offsetX - nodeWidth, y: centerY - offsetY },
     width: nodeWidth,
     height: nodeHeight,
     data: {
       icon: 'feather' as IconName,
       text: 'Overraskende lett',
-      color: '#f472b6',
-      iconColor: 'text-pink-400'
+      color: 'var(--overcast)',
+      iconColor: 'text-cloud-dancer'
     }
   },
   {
     id: 'benefit-3',
     type: 'benefit',
-    position: { x: centerX - layoutSize, y: centerY + layoutSize - nodeHeight },
+    position: { x: centerX - offsetX, y: centerY + offsetY - nodeHeight },
     width: nodeWidth,
     height: nodeHeight,
     data: {
       icon: 'heart' as IconName,
       text: 'Gjennomført kvalitet',
-      color: '#4ade80',
-      iconColor: 'text-green-400'
+      color: 'var(--bleached-mauve)',
+      iconColor: 'text-cloud-dancer'
     }
   },
   {
     id: 'benefit-4',
     type: 'benefit',
     position: {
-      x: centerX + layoutSize - nodeWidth,
-      y: centerY + layoutSize - nodeHeight
+      x: centerX + offsetX - nodeWidth,
+      y: centerY + offsetY - nodeHeight
     },
     width: nodeWidth,
     height: nodeHeight,
     data: {
       icon: 'check' as IconName,
       text: 'Verdt hver krone',
-      color: '#fb923c',
-      iconColor: 'text-orange-400'
+      color: 'var(--dusted-peri)',
+      iconColor: 'text-cloud-dancer'
     }
   }
 ]
@@ -87,24 +90,24 @@ export const edges = [
     id: 'e-center-1',
     sourceId: 'center',
     targetId: 'benefit-1',
-    data: { color: '#60a5fa' }
+    data: { color: 'var(--ancient-water)' }
   },
   {
     id: 'e-center-2',
     sourceId: 'center',
     targetId: 'benefit-2',
-    data: { color: '#f472b6' }
+    data: { color: 'var(--overcast)' }
   },
   {
     id: 'e-center-3',
     sourceId: 'center',
     targetId: 'benefit-3',
-    data: { color: '#4ade80' }
+    data: { color: 'var(--bleached-mauve)' }
   },
   {
     id: 'e-center-4',
     sourceId: 'center',
     targetId: 'benefit-4',
-    data: { color: '#fb923c' }
+    data: { color: 'var(--dusted-peri)' }
   }
 ]

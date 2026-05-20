@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Button } from '@/components/ui/button'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import {
   ArrowRight,
   Droplets,
@@ -15,6 +15,7 @@ import type { Route } from 'next'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import ComfyrobeOriginal from '@public/comfyrobe-full.webp'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -85,24 +86,24 @@ export function FrontpageIceBathingSection() {
       <div className='container mx-auto max-w-7xl px-4'>
         <div className='grid items-center gap-12 lg:grid-cols-2 lg:gap-24'>
           <div className='flex flex-col justify-center order-2 lg:order-1'>
-            <div className='gsap-content opacity-0 inline-flex items-center self-start rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 mb-8 backdrop-blur-md'>
+            <div className='gsap-content opacity-0 inline-flex items-center self-start rounded-full bg-mountain-view px-4 py-1.5 mb-8 backdrop-blur-md'>
               <span className='relative flex h-2 w-2 mr-3'>
-                <span className='gsap-badge-pulse absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75'></span>
-                <span className='relative inline-flex rounded-full bg-sidebar-primary h-2 w-2'></span>
+                <span className='gsap-badge-pulse absolute inline-flex h-full w-full rounded-full bg-mountain-view opacity-75'></span>
+                <span className='relative inline-flex rounded-full bg-cloud-dancer h-2 w-2'></span>
               </span>
-              <span className='bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text text-transparent outline-hidden'>
+              <span className='text-cloud-dancer outline-hidden'>
                 Siste sjanse
               </span>
             </div>
 
             <h2 className='gsap-content opacity-0 mb-6 text-4xl bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text outline-hiddenfont-bold tracking-tight text-white sm:text-5xl lg:text-6xl'>
               Vi rydder plass til <br />
-              <span className='text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900'>
+              <span className='text-transparent text-left bg-clip-text bg-gradient-to-r from-dusted-peri via-sweet-lavender to-dusted-peri'>
                 sesongens nyheter
               </span>
             </h2>
 
-            <p className='gsap-content opacity-0 bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 text-lg text-neutral-400 mb-10 leading-relaxed max-w-lg'>
+            <p className='gsap-content p-1 text-left text-cloud-dancer rounded-lg opacity-0 text-lg mb-10 leading-relaxed max-w-lg'>
               Begrenset antall og størrelser – førstemann til mølla!
             </p>
 
@@ -112,38 +113,38 @@ export function FrontpageIceBathingSection() {
                   icon: Thermometer,
                   title: 'SherpaCore™',
                   desc: '250 GSM fôr som gir umiddelbar isolering.',
-                  color: 'text-orange-400',
-                  bg: 'bg-orange-500/10'
+                  color: 'text-maritime-darkest',
+                  bg: 'bg-overcast'
                 },
                 {
                   icon: Droplets,
                   title: 'Tørker deg opp',
                   desc: 'Fôret absorberer restfuktighet effektivt.',
-                  color: 'text-cyan-400',
-                  bg: 'bg-cyan-500/10'
+                  color: 'text-comfrey',
+                  bg: 'bg-mountain-view'
                 },
                 {
                   icon: Wind,
                   title: 'Stopper vinden',
                   desc: 'HydroGuard™ skall med 8000mm vannsøyle.',
-                  color: 'text-blue-400',
-                  bg: 'bg-blue-500/10'
+                  color: 'text-cloud-dancer',
+                  bg: 'bg-dusted-peri'
                 }
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className='gsap-feature-card opacity-0 group flex items-center gap-5 p-4 rounded-xl border border-white/5 bg-white/[0.02] transition-all duration-300 hover:bg-white/[0.05] hover:border-white/10 hover:translate-x-1'
+                  className='gsap-feature-card opacity-0 group flex items-center gap-5 p-4 rounded-xl border border-cloud-dancer/70 bg-white/[0.02] transition-all duration-300 hover:bg-white/[0.05] hover:border-cloud-dancer/40 hover:translate-x-1'
                 >
                   <div
-                    className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-white/5 ${item.bg} transition-transform group-hover:scale-110`}
+                    className={`flex size-12 shrink-0 items-center justify-center rounded-lg border border-white/5 ${item.bg} transition-transform group-hover:scale-110`}
                   >
-                    <item.icon className={`h-6 w-6 ${item.color}`} />
+                    <item.icon className={`size-7 ${item.color}`} />
                   </div>
                   <div>
                     <h3 className='text-base font-semibold text-white mb-0.5 group-hover:text-amber-100 transition-colors'>
                       {item.title}
                     </h3>
-                    <p className='text-sm text-neutral-500 group-hover:text-neutral-400 transition-colors'>
+                    <p className='text-sm text-ancient-water group-hover:text-overcast transition-colors'>
                       {item.desc}
                     </p>
                   </div>
@@ -152,60 +153,67 @@ export function FrontpageIceBathingSection() {
             </div>
 
             <div className='gsap-content opacity-0 flex flex-col sm:flex-row gap-4'>
-              <Button
+              <BrandBadge
                 asChild
-                size='lg'
-                className='bg-amber-600 text-white hover:bg-amber-500 border-0 ring-0 h-14 px-8 text-base font-semibold rounded-full shadow-[0_0_20px_-5px_rgba(217,119,6,0.4)] transition-all hover:scale-105 active:scale-95'
+                backgroundColor='var(--color-primary-button)'
+                textColor='var(--color-maritime-darkest)'
+                className='group h-14 w-full justify-center px-8 text-base font-medium shadow-[0_18px_42px_-26px_rgba(27,53,74,0.42)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-95 sm:w-auto'
               >
                 <Link
                   href={'/kampanje/comfyrobe' as Route}
                   data-track='FrontpageIceBathingSectionShopNowClick'
                 >
                   Sikre deg din nå
-                  <ArrowRight className='ml-2 h-5 w-5 transition-transform group-hover:translate-x-1' />
+                  <ArrowRight className='ml-2 size-5 transition-transform group-hover:translate-x-1' />
                 </Link>
-              </Button>
-              <Button
-                variant='outline'
-                size='lg'
+              </BrandBadge>
+              <BrandBadge
                 asChild
-                className='h-14 w-full md:w-[162px] lg:w-[182px] px-8 text-base rounded-full py-2 md:py-3 lg:py-4 border-white/10 bg-transparent text-white hover:bg-white/5 hover:text-white hover:border-white/20'
+                backgroundColor='var(--color-overcast)'
+                textColor='var(--color-maritime-darkest)'
+                className='group h-14 w-full justify-center px-8 text-base font-medium ring-1 ring-maritime-darkest/10 transition-all duration-300 hover:-translate-y-0.5 hover:brightness-95 sm:w-auto md:w-[162px] lg:w-[182px]'
               >
                 <Link
                   href={'/kampanje/comfyrobe' as Route}
                   data-track='FrontpageIceBathingSectionGetInspoClick'
                 >
-                  Les mer ✨
+                  Les mer
                   <ArrowRight className='ml-2 h-5 w-5 transition-transform group-hover:translate-x-1' />
                 </Link>
-              </Button>
+              </BrandBadge>
             </div>
 
-            <div className='gsap-content opacity-0 mt-6 flex items-center gap-2 text-sm text-neutral-500'>
-              <AlertCircle className='h-4 w-4 text-amber-500/80' />
+            <div className='gsap-content opacity-0 mt-6 flex items-center gap-2 text-sm text-ancient-water'>
+              <AlertCircle className='h-4 w-4 text-primary-button' />
               <span className='italic'>
                 OBS: Begrenset antall igjen på lager.
               </span>
             </div>
           </div>
 
-          <div className='relative h-[500px] lg:h-[750px] w-full order-1 lg:order-2'>
-            <div className='gsap-mask-image relative h-full w-full overflow-hidden rounded-3xl border border-white/10 shadow-2xl bg-neutral-900'>
-              <Image
-                src='/comfyrobe/comfy-isbading-to-1080.png'
-                alt='En isbader står ved en iskant og ser utover vannet, pakket inn i en varm Comfyrobe etter badet.'
-                fill
-                className='object-cover transition-transform duration-[2s] hover:scale-105'
-                sizes='(max-width: 1024px) 100vw, 50vw'
-              />
-              <div className='absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-transparent pointer-events-none' />
+          <div className='relative order-1 w-full lg:order-2 lg:flex lg:justify-end'>
+            <div className='w-full max-w-[30rem] mx-auto lg:mx-0'>
+              <div className='gsap-mask-image relative aspect-[2/3] overflow-hidden rounded-3xl border border-white/10 bg-transparent shadow-2xl'>
+                <Image
+                  src={ComfyrobeOriginal}
+                  alt='En isbader står ved en iskant og ser utover vannet, pakket inn i en varm Comfyrobe etter badet.'
+                  fill
+                  className='object-cover object-bottom transition-transform duration-[2s] hover:scale-105'
+                  sizes='(max-width: 1024px) 100vw, 50vw'
+                />
+                <div className='absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-transparent pointer-events-none' />
 
-              <div className='absolute top-6 right-6 backdrop-blur-md bg-black/30 border border-white/10 rounded-full px-4 py-2 text-xs font-medium text-white/90'>
-                Comfyrobe™
+                <BrandBadge
+                  backgroundColor='var(--color-ancient-water)'
+                  textColor='var(--color-maritime-darkest)'
+                  className='absolute right-6 top-6 px-4 py-2 text-sm font-medium shadow-[0_16px_32px_-24px_rgba(18,24,29,0.45)] ring-1 ring-maritime-darkest/10'
+                >
+                  Comfyrobe™
+                </BrandBadge>
               </div>
             </div>
 
-            <div className='absolute -bottom-10 -right-10 w-64 h-64 bg-amber-500/20 rounded-full blur-[100px] -z-10 pointer-events-none' />
+            <div className='absolute -bottom-10 -right-10 w-64 h-64 bg-ancient-water rounded-full blur-[100px] -z-10 pointer-events-none' />
           </div>
         </div>
       </div>

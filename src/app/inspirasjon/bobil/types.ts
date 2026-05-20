@@ -1,5 +1,7 @@
+import type { LucideIcon } from 'lucide-react'
+
 export interface UseCase {
-  icon: any
+  icon: LucideIcon
   time: string
   title: string
   description: string
@@ -9,7 +11,7 @@ export interface UseCase {
 }
 
 export interface Benefit {
-  icon: any
+  icon: LucideIcon
   title: string
   description: string
   color: string

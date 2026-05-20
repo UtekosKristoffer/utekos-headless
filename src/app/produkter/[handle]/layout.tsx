@@ -1,6 +1,7 @@
 // Path: src/app/produkter/[handle]/layout.tsx
 
 import { ProductJsonLd } from './components/ProductJsonLd'
+import { ProductBreadcrumbJsonLd } from './components/ProductBreadcrumbJsonLd'
 import type { ReactNode } from 'react'
 
 type ProductLayoutProps = {
@@ -17,6 +18,7 @@ export default async function ProductLayout({
   return (
     <>
       <ProductJsonLd handle={handle} />
+      <ProductBreadcrumbJsonLd handle={handle} />
       {children}
     </>
   )
