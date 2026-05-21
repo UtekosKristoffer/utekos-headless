@@ -15,14 +15,6 @@ export async function POST(req: Request) {
   try {
     const { messages } = await req.json()
 
-    const today = new Date()
-    const formattedDate = today.toLocaleDateString('nb-NO', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
-
     const result = streamText({
       model: openai('gpt-4o-mini'),
       temperature: 0.5,

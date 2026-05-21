@@ -1,5 +1,9 @@
 import '../globals.css'
-import { brandSansFontFamily, geistMono } from '@/db/config/font.config'
+import {
+  brandSansFontFamily,
+  geistMono,
+  utekosText
+} from '@/db/config/font.config'
 import { Suspense, type ReactNode } from 'react'
 import { mainMenu } from '@/db/config/menu.config'
 import { Analytics } from '@vercel/analytics/react'
@@ -15,6 +19,7 @@ import {
   BrandArmorScript,
   BRAND_ARMOR_COMPANY_ID
 } from '@/components/analytics/BrandArmorScript'
+import { MicrosoftUetTag } from '@/components/analytics/MicrosoftUetTag'
 import { CookieConsentBanner } from '@/components/CookieBanner'
 import { ClickTracker } from '@/components/analytics/ClickTracker'
 import type { Metadata } from 'next'
@@ -119,7 +124,7 @@ export default function RootLayot({ children }: { children: ReactNode }) {
   return (
     <html
       lang='no'
-      className={`${brandSansFontFamily.className} ${brandSansFontFamily.variable} ${geistMono.variable}`}
+      className={`${brandSansFontFamily.className} ${brandSansFontFamily.variable} ${utekosText.variable} ${geistMono.variable}`}
     >
       <head>
         {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (
@@ -127,6 +132,7 @@ export default function RootLayot({ children }: { children: ReactNode }) {
             {GTM_BOOTSTRAP_SCRIPT}
           </Script>
         )}
+        <MicrosoftUetTag />
       </head>
       <body className='bg-background text-foreground antialiased'>
         {SHOULD_LOAD_META_PIXEL && <MetaPixelEvents />}

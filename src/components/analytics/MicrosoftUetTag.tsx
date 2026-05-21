@@ -1,0 +1,110 @@
+import Script from 'next/script'
+
+const DEFAULT_MICROSOFT_UET_TAG_ID = '97247724'
+
+export const MICROSOFT_UET_TAG_ID =
+  process.env.NEXT_PUBLIC_MICROSOFT_UET_TAG_ID || DEFAULT_MICROSOFT_UET_TAG_ID
+
+export const SHOULD_LOAD_MICROSOFT_UET =
+  !!MICROSOFT_UET_TAG_ID
+  && process.env.NODE_ENV === 'production'
+  && process.env.VERCEL_ENV !== 'preview'
+
+type MicrosoftUetTagProps = {
+  tagId?: string
+}
+
+const MICROSOFT_UET_CONSENT_SYNC_SCRIPT = `
+  (function() {
+    function parseStoredConsent(value) {
+      if (!value) return false;
+      try {
+        var parsed = JSON.parse(value);
+        return !!parsed && parsed.marketing === true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function readCookie(name) {
+      var prefix = name + '=';
+      var parts = document.cookie ? document.cookie.split('; ') : [];
+      for (var index = 0; index < parts.length; index += 1) {
+        var part = parts[index];
+        if (part.indexOf(prefix) === 0) {
+          return decodeURIComponent(part.slice(prefix.length));
+        }
+      }
+      return null;
+    }
+
+    function hasMarketingConsent() {
+      try {
+        if (parseStoredConsent(window.localStorage.getItem('utekos_cookie_consent'))) {
+          return true;
+        }
+      } catch (error) {}
+
+      return parseStoredConsent(readCookie('cookie-consent'));
+    }
+
+    function updateMicrosoftUetConsent() {
+      window.uetq = window.uetq || [];
+      window.uetq.push('consent', 'update', {
+        ad_storage: hasMarketingConsent() ? 'granted' : 'denied'
+      });
+    }
+
+    updateMicrosoftUetConsent();
+    window.addEventListener('cookie_consent_saved', updateMicrosoftUetConsent);
+    window.addEventListener('storage', function(event) {
+      if (event.key === 'utekos_cookie_consent') updateMicrosoftUetConsent();
+    });
+  })();
+`
+
+function createMicrosoftUetBootstrapScript(tagId: string): string {
+  return `
+    (function(w,d,t,u,o) {
+      w[u] = w[u] || [];
+      w[u].push('consent', 'default', { ad_storage: 'denied' });
+      o = {
+        ti: ${JSON.stringify(tagId)},
+        enableAutoSpaTracking: true,
+        enableAutoConsent: false
+      };
+      o.ts = (new Date()).getTime();
+      var script = d.createElement(t);
+      script.src = 'https://bat.bing.net/bat.js?ti=' + o.ti + (u !== 'uetq' ? '&q=' + u : '');
+      script.async = 1;
+      script.onload = script.onreadystatechange = function() {
+        var state = this.readyState;
+        if (!state || state === 'loaded' || state === 'complete') {
+          o.q = w[u];
+          w[u] = new UET(o);
+          w[u].push('pageLoad');
+          script.onload = script.onreadystatechange = null;
+        }
+      };
+      var firstScript = d.getElementsByTagName(t)[0];
+      firstScript.parentNode.insertBefore(script, firstScript);
+    })(window, document, 'script', 'uetq');
+  `
+}
+
+export function MicrosoftUetTag({
+  tagId = MICROSOFT_UET_TAG_ID
+}: MicrosoftUetTagProps) {
+  if (!SHOULD_LOAD_MICROSOFT_UET || !tagId) return null
+
+  return (
+    <>
+      <Script id='microsoft-uet-bootstrap' strategy='afterInteractive'>
+        {createMicrosoftUetBootstrapScript(tagId)}
+      </Script>
+      <Script id='microsoft-uet-consent-sync' strategy='afterInteractive'>
+        {MICROSOFT_UET_CONSENT_SYNC_SCRIPT}
+      </Script>
+    </>
+  )
+}

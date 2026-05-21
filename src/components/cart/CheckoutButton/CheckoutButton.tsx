@@ -9,6 +9,7 @@ import { getCheckoutAriaLabel } from './getCheckoutAriaLabel'
 import { generateEventID } from '@/components/analytics/Meta/generateEventID'
 import { getCookie } from '@/components/analytics/Meta/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
+import { trackMicrosoftUetEvent } from '@/lib/tracking/microsoft-uet/trackMicrosoftUetEvent'
 import { sendGTMEvent } from '@next/third-parties/google'
 export const CheckoutButton = ({
   checkoutUrl,
@@ -114,6 +115,17 @@ export const CheckoutButton = ({
           { event_id: eventID }
         )
       }
+
+      trackMicrosoftUetEvent({
+        category: 'ecommerce',
+        action: 'begin_checkout',
+        label: cartId,
+        value: num_items,
+        revenueValue: value,
+        currency,
+        productId: cleanItemIds,
+        pageType: 'cart'
+      })
 
       const captureBody: CaptureBody = {
         cartId,

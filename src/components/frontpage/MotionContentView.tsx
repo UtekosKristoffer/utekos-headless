@@ -5,7 +5,7 @@ import { Award } from 'lucide-react'
 import { Shimmer } from '@/components/ai-elements/Shimmer'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { ChevronDownSection } from '@/components/frontpage/components/HeroSection/ChevronDown'
-import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark.tsx'
+import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 
 export const MotionContentView = forwardRef<HTMLDivElement, object>(
   (_, ref) => {

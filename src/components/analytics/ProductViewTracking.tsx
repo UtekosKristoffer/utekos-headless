@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { generateEventID } from '@/components/analytics/Meta/generateEventID'
 import { useAnalytics } from '@/hooks/useAnalytics'
+import { trackMicrosoftUetEvent } from '@/lib/tracking/microsoft-uet/trackMicrosoftUetEvent'
 import type { ProductViewProps } from 'types/product/PageProps'
 
 export function ProductViewTracking({
@@ -38,6 +39,17 @@ export function ProductViewTracking({
       },
       { eventID: eventId }
     )
+
+    trackMicrosoftUetEvent({
+      category: 'ecommerce',
+      action: 'view_content',
+      label: product.title,
+      value: 1,
+      revenueValue: price,
+      currency,
+      productId: contentId,
+      pageType: 'product'
+    })
 
     if (typeof window !== 'undefined' && window.snaptr) {
       window.snaptr('track', 'VIEW_CONTENT', {

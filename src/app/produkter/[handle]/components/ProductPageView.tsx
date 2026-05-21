@@ -49,6 +49,99 @@ const ProductGallery = dynamic(
 
 const STOCK_THRESHOLD = 31
 
+const PRODUCT_GALLERY_IMAGE_OVERRIDES: Partial<Record<string, Image[]>> = {
+  'utekos-techdown': [
+    {
+      id: 'utekos-techdown-maritime-blue-front',
+      url: '/maritime-blue-bg.png',
+      altText: 'Utekos TechDown i maritime blue vist forfra.',
+      width: 1288,
+      height: 1288
+    },
+    {
+      id: 'utekos-techdown-kristoffer-maritime-blue',
+      url: '/kristoffer-maritime-blue-bg.png',
+      altText: 'Kristoffer sitter ute med Utekos TechDown i maritime blue.',
+      width: 1288,
+      height: 1288
+    },
+    {
+      id: 'utekos-techdown-monica-maritime-blue',
+      url: '/monica-maritime-blue-bg.png',
+      altText: 'Monica bruker Utekos TechDown i maritime blue.',
+      width: 1288,
+      height: 1288
+    },
+    {
+      id: 'utekos-techdown-diagonal-half-maritime-blue',
+      url: '/tech-diagonal-halv-maritime-blue-bg.png',
+      altText: 'Utekos TechDown i maritime blue vist diagonalt.',
+      width: 2060,
+      height: 2060
+    },
+    {
+      id: 'utekos-techdown-back-maritime-blue',
+      url: '/tech-bakside-maritime-blue-bg.png',
+      altText: 'Utekos TechDown i maritime blue sett bakfra.',
+      width: 1288,
+      height: 1288
+    },
+    {
+      id: 'utekos-techdown-front-half-maritime-blue',
+      url: '/tech-forside-halv-maritime-blue-bg.png',
+      altText: 'Utekos TechDown i maritime blue vist halvt forfra.',
+      width: 1288,
+      height: 1288
+    },
+    {
+      id: 'utekos-techdown-back-half-maritime-blue',
+      url: '/tech-bakside-halv-maritime-blue-bg.png',
+      altText: 'Utekos TechDown i maritime blue vist halvt bakfra.',
+      width: 1288,
+      height: 1288
+    }
+  ],
+  'comfyrobe': [
+    {
+      id: 'comfyrobe-demitasse-open-front',
+      url: '/comfyrobe-demitasse-open-front.png',
+      altText: 'Comfyrobe i demitasse vist åpen forfra.',
+      width: 1288,
+      height: 1288
+    },
+    {
+      id: 'comfyrobe-demitasse-closed-front',
+      url: '/comfy-front-lukket-demitasse-bg.png',
+      altText: 'Comfyrobe i demitasse vist lukket forfra.',
+      width: 1288,
+      height: 1288
+    },
+    {
+      id: 'comfyrobe-demitasse-back',
+      url: '/comfy-bak-demitasse-bg.png',
+      altText: 'Comfyrobe i demitasse sett bakfra.',
+      width: 1288,
+      height: 1288
+    },
+    {
+      id: 'comfyrobe-demitasse-sherpa',
+      url: '/comfy-sherpa-demitasse-bg.png',
+      altText: 'Comfyrobe i demitasse med sherpa-fôr synlig.',
+      width: 1288,
+      height: 1288
+    }
+  ],
+  'utekos-stapper': [
+    {
+      id: 'utekos-stapper-demitasse',
+      url: '/stapper-demitasse-bg.png',
+      altText: 'Utekos Stapper i demitasse.',
+      width: 1288,
+      height: 1288
+    }
+  ]
+}
+
 export function ProductPageView({
   productData,
   selectedVariant,
@@ -87,6 +180,17 @@ export function ProductPageView({
   const quantity = productData.totalInventory ?? 0
   const limitedStockCount =
     quantity > 0 && quantity < STOCK_THRESHOLD ? quantity : undefined
+  const galleryImageOverride =
+    PRODUCT_GALLERY_IMAGE_OVERRIDES[productData.handle]
+  const galleryImages =
+    galleryImageOverride
+    ?? variantImages.map((image: Image) => ({
+      id: image.id,
+      url: image.url,
+      altText: image.altText ?? '',
+      width: image.width ?? 0,
+      height: image.height ?? 0
+    }))
 
   return (
     <main className='relative isolate overflow-x-clip bg-overcast py-10 text-maritime-blue md:py-14'>
@@ -139,17 +243,12 @@ export function ProductPageView({
               <ProductGalleryCard
                 galleryContent={
                   <div className='relative isolate overflow-hidden rounded-[1.5rem]'>
-                    <ProductGallery
-                      title={title}
-                      images={variantImages.map((image: Image) => ({
-                        id: image.id,
-                        url: image.url,
-                        altText: image.altText ?? '',
-                        width: image.width ?? 0,
-                        height: image.height ?? 0
-                      }))}
-                    />
+                    <ProductGallery title={title} images={galleryImages} />
                   </div>
+                }
+                hasIntegratedBackground={!!galleryImageOverride}
+                integratedBackgroundSize={
+                  productData.handle === 'utekos-stapper' ? 'compact' : 'wide'
                 }
                 enableStickyOnDesktop
                 stickyTopClassName='md:top-32 md:mt-4 lg:top-28 lg:mt-6'

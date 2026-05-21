@@ -17,10 +17,10 @@ import { toast } from 'sonner'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils/className'
 import { trackNewsletterConversion } from '@/components/analytics/Meta/trackNewsletterConversion'
+import { trackMicrosoftUetEvent } from '@/lib/tracking/microsoft-uet/trackMicrosoftUetEvent'
 
 export function NewsletterPopup() {
   const [isOpen, setIsOpen] = useState(false)
-  const [isMounted, setIsMounted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const pathname = usePathname()
   const soundPlayedRef = useRef(false)
@@ -35,8 +35,6 @@ export function NewsletterPopup() {
   }, [isOpen])
 
   useEffect(() => {
-    setIsMounted(true)
-
     if (pathname?.includes('/checkouts') || pathname?.includes('/handlekurv'))
       return
 
@@ -84,6 +82,13 @@ export function NewsletterPopup() {
 
     if (result.status === 'success') {
       trackNewsletterConversion(email, 'popup')
+      trackMicrosoftUetEvent({
+        category: 'lead',
+        action: 'newsletter_signup',
+        label: 'popup',
+        value: 1,
+        pageType: 'other'
+      })
 
       if (typeof window !== 'undefined' && window.pintrk) {
         window.pintrk?.('track', 'Lead', {
@@ -105,8 +110,6 @@ export function NewsletterPopup() {
       toast.error(result.message)
     }
   }
-
-  if (!isMounted) return null
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>

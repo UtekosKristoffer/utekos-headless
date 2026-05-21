@@ -31,3 +31,26 @@ export const brandSansFontFamily = localFont({
   preload: false,
   display: 'swap'
 })
+
+/**
+ * Utekos Text — the brand body typeface (per AGENTS.md).
+ * Regular (400) and Medium (500) are the only published cuts.
+ * Used for supporting & body copy; headlines stay on Google Sans Bold.
+ */
+export const utekosText = localFont({
+  src: [
+    {
+      path: './fonts/utekos-text-regular.otf',
+      weight: '400',
+      style: 'normal'
+    },
+    {
+      path: './fonts/utekos-text-medium.otf',
+      weight: '500',
+      style: 'normal'
+    }
+  ],
+  variable: '--font-utekos-text-local',
+  preload: false,
+  display: 'swap'
+})

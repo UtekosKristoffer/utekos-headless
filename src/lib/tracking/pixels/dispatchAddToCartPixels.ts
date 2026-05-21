@@ -1,4 +1,5 @@
 import { logAttribution } from '@/lib/tracking/log/logAttribution'
+import { trackMicrosoftUetEvent } from '@/lib/tracking/microsoft-uet/trackMicrosoftUetEvent'
 import type { DispatchPixelsOptions } from 'types/cart'
 
 export function dispatchAddToCartPixels({
@@ -57,6 +58,17 @@ export function dispatchAddToCartPixels({
       ecommerce: { currency, value, items: ga4Items }
     })
   }
+
+  trackMicrosoftUetEvent({
+    category: 'ecommerce',
+    action: 'add_to_cart',
+    label: contentName,
+    value: totalQty,
+    revenueValue: value,
+    currency,
+    productId: contentIds,
+    pageType: 'cart'
+  })
 
   if (window.fbq) {
     window.fbq(

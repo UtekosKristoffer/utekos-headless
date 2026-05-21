@@ -36,7 +36,6 @@
   --deep-cobalt: oklch(0.3982 0.0575 278.29);
   --graytone: oklch(0.4162 0.03 295.25);
   --skipper-blue: oklch(0.4252 0.0661 280.99);
-  --test: oklch(23, 10, 265);
   --polar-night: oklch(0.3325 0.0194 281.19);
   --mandarin: oklch(0.6753 0.1735 40.6);
   --chocolate-plum: oklch(0.3159 0.0237 14.31);
@@ -91,6 +90,9 @@
   --maritime-darker: oklch(0.1584 0.0366 279.42);
   --maritime-darkest: oklch(0.1284 0.0366 279.42);
   --font-brand-sans: var(--font-google-sans), system-ui, sans-serif;
+  --font-utekos-text:
+    var(--font-utekos-text-local), var(--font-google-sans), system-ui,
+    sans-serif;
   --utekos-title-line-height: 0.95;
   --utekos-title-letter-spacing: -0.01em;
   --utekos-text-line-height: 1.45;
@@ -143,7 +145,6 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --ds-background-200-value: 0, 0%, 0%;
   --article-white: oklch(0.94 0 0);
   --bleached-mauve: oklch(0.7864 0.0487 359.96);
   --dry-rose: oklch(0.4885 0.0953 4.64);
@@ -321,11 +322,13 @@
   --color-camping-green: var(--camping-green);
   --color-overcast: var(--overcast);
   --color-white-down: var(--white-down);
+  --deep-forest: var(--deep-forest);
   --color-mineral-green: var(--mineral-green);
   --color-fairest-jade: var(--fairest-jade);
   --delicioso: var(--delicioso);
+  --raindrops-on-roses: var(--raindrops-on-roses);
   --color-tendril: var(--tendril);
-  --after-dark: oklch(0.3374 0.0114 17.73);
+  --after-dark: var(--after-dark);
   --plum-truffle: var(--plum-truffle);
   --color-licorice: var(--licorice);
   --color-maritime-darkest: var(--maritime-darkest);
@@ -344,6 +347,7 @@
   --color-utekos-brown: var(--utekos-brown);
   --color-taupe-600: var(--taupe-600);
   --color-taupe-700: var(--taupe-700);
+  --black-forest: var(--black-forrest);
   --color-taupe-800: var(--taupe-800);
   --color-inking: var(--inking);
   --color-taupe-900: var(--taupe-900);
@@ -353,9 +357,13 @@
   --color-ember: var(--ember);
   --color-ember-dark: var(--ember-dark);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-google-sans), system-ui, sans-serif;
+  --font-sans:
+    var(--font-utekos-text), var(--font-google-sans), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
   --font-brand-sans: var(--font-google-sans), system-ui, sans-serif;
+  --font-utekos-text:
+    var(--font-utekos-text-local), var(--font-google-sans), system-ui,
+    sans-serif;
   --color-mandarin: var(--mandarin);
   --color-button: var(--button);
   --color-almost-mauve: var(--almost-mauve);
@@ -1144,7 +1152,7 @@
   }
 
   body {
-    font-family: var(--font-brand-sans);
+    font-family: var(--font-utekos-text);
     line-height: var(--utekos-text-line-height);
     letter-spacing: var(--utekos-text-letter-spacing);
   }
@@ -1164,6 +1172,7 @@
   li,
   dd,
   blockquote {
+    font-family: var(--font-utekos-text);
     line-height: var(--utekos-text-line-height);
     letter-spacing: var(--utekos-text-letter-spacing);
   }
@@ -1201,6 +1210,10 @@
 
 @utility font-google-sans {
   font-family: var(--font-google-sans), system-ui, sans-serif;
+}
+
+@utility font-utekos-text {
+  font-family: var(--font-utekos-text);
 }
 
 @utility item-deleting {
