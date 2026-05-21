@@ -58,7 +58,7 @@ export function trackMicrosoftUetEvent({
 
   if (Object.keys(payload).length === 0) return
 
-  const microsoftUetQueue = window.uetq || []
+  const microsoftUetQueue = window.uetq ?? ([] as Record<string, unknown>[])
   window.uetq = microsoftUetQueue
-  microsoftUetQueue.push(payload)
+  ;(microsoftUetQueue as Record<string, unknown>[]).push(payload)
 }
