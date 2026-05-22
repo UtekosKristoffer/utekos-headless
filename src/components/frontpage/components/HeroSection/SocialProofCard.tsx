@@ -31,10 +31,10 @@ export function SocialProofCard({
 
   return (
     <article
-      className={`gsap-card group relative overflow-hidden rounded-2xl border p-6 backdrop-blur-md transition-colors duration-500 ${hoverBorderClass} ${surfaceClass}`}
+      className={`group relative overflow-hidden rounded-2xl border p-6 backdrop-blur-md transition-colors duration-500 ${hoverBorderClass} ${surfaceClass}`}
     >
       <div
-        className={`gsap-shine absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent ${shineStyle} to-transparent pointer-events-none`}
+        className={`pointer-events-none absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent ${shineStyle} to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 motion-reduce:transition-none`}
         aria-hidden='true'
       />
 
@@ -42,7 +42,7 @@ export function SocialProofCard({
         <div
           className={`mb-3 flex h-12 w-12 items-center justify-center rounded-full ${iconWrapperClass}`}
         >
-          <Icon className={`gsap-icon h-6 w-6 ${iconColorClass}`} />
+          <Icon className={`size-6 ${iconColorClass}`} />
         </div>
         <p
           className={`text-lg font-bold tracking-tight ${titleClass ?? 'text-white'}`}

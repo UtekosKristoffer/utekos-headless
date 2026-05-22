@@ -1,5 +1,14 @@
 import type { NextConfig } from 'next'
 
+const STATIC_ASSET_CACHE_CONTROL = 'public, max-age=31536000, immutable'
+
+const staticAssetHeaders = [
+  {
+    key: 'Cache-Control',
+    value: STATIC_ASSET_CACHE_CONTROL
+  }
+]
+
 const nextConfig: NextConfig = {
   typedRoutes: true,
   reactCompiler: true,
@@ -38,6 +47,19 @@ const nextConfig: NextConfig = {
       }
     ],
     qualities: [75, 80, 90, 95, 100]
+  },
+  async headers() {
+    return [
+      {
+        source:
+          '/:path*.:extension(png|jpg|jpeg|webp|avif|gif|svg|ico|otf|woff2)',
+        headers: staticAssetHeaders
+      },
+      {
+        source: '/videos/:path*',
+        headers: staticAssetHeaders
+      }
+    ]
   },
   async redirects() {
     return [

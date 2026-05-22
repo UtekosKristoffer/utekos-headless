@@ -1,7 +1,3 @@
-// Path: src/app/produkter/(oversikt)/components/ProductVideoPlayer.tsx
-
-'use client'
-
 type ProductVideoPlayerProps = {
   src: string
   poster: string

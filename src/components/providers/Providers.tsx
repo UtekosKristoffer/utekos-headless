@@ -1,8 +1,8 @@
 'use client'
 import { QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { HydrationBoundary } from '@tanstack/react-query'
 import { useState } from 'react'
+import dynamic from 'next/dynamic'
 import { getQueryClient } from '@/api/lib/getQueryClient'
 import { CartMutationProvider } from '@/clients/CartMutationProvider'
 import { serverActions } from '@/constants/serverActions'
@@ -14,6 +14,17 @@ import { ConditionalTracking } from '../analytics/ConditionalTracking'
 import { SnapPixel } from '@/components/analytics/SnapPixel/SnapPixel'
 import { PinterestTag } from '@/components/analytics/Pinterest/PinterestTag'
 import { TikTokPixel } from '@/components/analytics/TikTokPixel/TikTokPixel'
+
+const ReactQueryDevtools =
+  process.env.NODE_ENV === 'development' ?
+    dynamic(
+      () =>
+        import('@tanstack/react-query-devtools').then(
+          module => module.ReactQueryDevtools
+        ),
+      { ssr: false }
+    )
+  : null
 
 interface ProvidersProps {
   children: React.ReactNode
@@ -43,7 +54,9 @@ export default function Providers({
             </CartMutationProvider>
           </CartIdProvider>
         </HydrationBoundary>
-        <ReactQueryDevtools initialIsOpen={false} />
+        {ReactQueryDevtools ?
+          <ReactQueryDevtools initialIsOpen={false} />
+        : null}
       </QueryClientProvider>
       <CookieConsent />
       <SnapPixel />

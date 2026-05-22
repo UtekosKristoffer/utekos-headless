@@ -7,11 +7,13 @@ type BrandArmorScriptProps = {
 }
 
 export function BrandArmorScript({ companyId }: BrandArmorScriptProps) {
+  if (!companyId) return null
+
   return (
     <>
       <Script
         id='brand-armor-ai-config'
-        strategy='afterInteractive'
+        strategy='lazyOnload'
         dangerouslySetInnerHTML={{
           __html: `
             window.BrandArmorAIConfig = {
@@ -23,7 +25,7 @@ export function BrandArmorScript({ companyId }: BrandArmorScriptProps) {
       <Script
         id='brand-armor-ai-pixel'
         src='https://brandarmor.ai/brand-armor-ai-pixel.min.js'
-        strategy='afterInteractive'
+        strategy='lazyOnload'
       />
     </>
   )

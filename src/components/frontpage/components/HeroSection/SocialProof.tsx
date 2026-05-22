@@ -1,16 +1,10 @@
-'use client'
-
 import { Truck, Smile, ShieldCheck } from 'lucide-react'
 import { SocialProofCard } from './SocialProofCard'
-import { useSocialProofAnimations } from '@/hooks/useSocialProofAnimations'
 import { PaymentIcons } from './PaymentIcons'
 
 export function SocialProof() {
-  const containerRef = useSocialProofAnimations()
-
   return (
     <section
-      ref={containerRef}
       className='mx-auto mt-8 sm:mt-16 max-w-4xl px-4 md:px-0'
       aria-label='Fordeler med å handle hos oss'
     >

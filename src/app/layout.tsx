@@ -128,7 +128,7 @@ export default function RootLayot({ children }: { children: ReactNode }) {
     >
       <head>
         {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (
-          <Script id='gtm-bootstrap' strategy='beforeInteractive'>
+          <Script id='gtm-bootstrap' strategy='afterInteractive'>
             {GTM_BOOTSTRAP_SCRIPT}
           </Script>
         )}
