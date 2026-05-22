@@ -25,27 +25,28 @@ export function SocialProofCard({
   children
 }: SocialProofCardProps) {
   const surfaceClass =
-    cardClass ?? 'border-white/5 bg-white/[0.02] hover:bg-white/[0.04]'
+    cardClass
+    ?? 'border-cloud-dancer/8 bg-cloud-dancer/[0.03] hover:bg-cloud-dancer/[0.05]'
 
-  const shineStyle = shineClass ?? 'via-white/10'
+  const shineStyle = shineClass ?? 'via-cloud-dancer/12'
 
   return (
     <article
-      className={`group relative overflow-hidden rounded-2xl border p-6 backdrop-blur-md transition-colors duration-500 ${hoverBorderClass} ${surfaceClass}`}
+      className={`group relative overflow-hidden rounded-xl border p-4 backdrop-blur-md transition-colors duration-300 sm:p-5 ${hoverBorderClass} ${surfaceClass}`}
     >
       <div
-        className={`pointer-events-none absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent ${shineStyle} to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 motion-reduce:transition-none`}
+        className={`pointer-events-none absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent ${shineStyle} to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 motion-reduce:transition-none`}
         aria-hidden='true'
       />
 
       <div className='relative flex flex-col items-center text-center'>
         <div
-          className={`mb-3 flex h-12 w-12 items-center justify-center rounded-full ${iconWrapperClass}`}
+          className={`mb-3 flex size-12 items-center justify-center rounded-full ${iconWrapperClass}`}
         >
-          <Icon className={`size-6 ${iconColorClass}`} />
+          <Icon className={`size-5 ${iconColorClass}`} />
         </div>
         <p
-          className={`text-lg font-bold tracking-tight ${titleClass ?? 'text-white'}`}
+          className={`text-lg leading-[0.95] font-bold tracking-[-0.01em] ${titleClass ?? 'text-cloud-dancer'}`}
         >
           {title}
         </p>

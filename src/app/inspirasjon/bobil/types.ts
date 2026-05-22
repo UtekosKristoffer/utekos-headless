@@ -1,7 +1,9 @@
-import type { LucideIcon } from 'lucide-react'
+import type { ComponentType } from 'react'
+
+export type SectionIcon = ComponentType<{ className?: string }>
 
 export interface UseCase {
-  icon: LucideIcon
+  icon: SectionIcon
   time: string
   title: string
   description: string
@@ -11,7 +13,7 @@ export interface UseCase {
 }
 
 export interface Benefit {
-  icon: LucideIcon
+  icon: SectionIcon
   title: string
   description: string
   color: string

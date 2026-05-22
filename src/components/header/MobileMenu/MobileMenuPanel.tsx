@@ -6,6 +6,7 @@ import { MobileMenuItem } from '@/components/header/MobileMenu/MobileMenuItem'
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger
@@ -100,32 +101,31 @@ export function MobileMenuPanel({
 
       <SheetContent
         side='left'
-        className='w-full max-w-sm p-0 md:hidden border-cloud-dancer bg-maritime-darkest backdrop-blur-xl'
+        className='w-full max-w-sm border-cloud-dancer/12 bg-maritime-darkest p-0 text-cloud-dancer backdrop-blur-xl lg:hidden'
       >
         <div className='pointer-events-none absolute inset-0 -z-10'>
-          <div className='absolute inset-0 bg-gradient-to-b from-slate-800/35 via-slate-900/75 to-slate-950' />
-          <div className='absolute inset-0 bg-[radial-gradient(120%_90%_at_18%_10%,rgba(148,163,184,0.18),transparent_60%),radial-gradient(90%_70%_at_90%_30%,rgba(71,85,105,0.22),transparent_62%),radial-gradient(100%_80%_at_50%_110%,rgba(30,41,59,0.55),transparent_60%)]' />
-          <div className='absolute inset-0 opacity-[0.045] [background-image:linear-gradient(rgba(255,255,255,0.10)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.10)_1px,transparent_1px)] [background-size:22px_22px]' />
-          <div className='absolute inset-0 bg-gradient-to-b from-black/0 via-black/15 to-black/55' />
+          <div className='absolute inset-0 bg-[linear-gradient(180deg,color-mix(in_oklab,var(--maritime-blue)_36%,var(--maritime-darkest))_0%,var(--maritime-darkest)_54%,color-mix(in_oklab,var(--demitasse)_22%,var(--maritime-darkest))_100%)]' />
+          <div className='absolute inset-0 bg-[radial-gradient(105%_78%_at_20%_0%,color-mix(in_oklab,var(--dusted-peri)_18%,transparent)_0%,transparent_64%),radial-gradient(95%_72%_at_88%_34%,color-mix(in_oklab,var(--ancient-water)_12%,transparent)_0%,transparent_66%)]' />
+          <div className='absolute inset-0 bg-gradient-to-b from-transparent via-maritime-darkest/8 to-maritime-darkest/48' />
         </div>
 
-        <SheetHeader className='relative border-b border-slate-800/70 p-6'>
-          <div className='absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-300/20 to-transparent' />
+        <SheetHeader className='relative border-b border-cloud-dancer/10 p-6'>
+          <div className='absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-cloud-dancer/24 to-transparent' />
 
           <div className='mb-2 flex items-center gap-2'>
             <HeaderLogo />
-            <SheetTitle className='ml-2 text-xl font-bold text-foreground'>
+            <SheetTitle className='ml-2 text-xl leading-[0.95] font-bold tracking-[-0.01em] text-cloud-dancer'>
               Meny
             </SheetTitle>
           </div>
 
-          <p className='text-sm tracking-tight text-slate-200/60'>
+          <SheetDescription className='text-sm leading-[1.45] tracking-[-0.01em] text-cloud-dancer/66'>
             <span className='block overflow-hidden'>
               <span ref={subtitleRef} className='block'>
                 Utforsk vår kolleksjon
               </span>
             </span>
-          </p>
+          </SheetDescription>
         </SheetHeader>
 
         <nav className='relative flex-grow overflow-y-auto px-4 pb-6 pt-4'>

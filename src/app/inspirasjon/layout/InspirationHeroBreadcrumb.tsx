@@ -17,7 +17,7 @@ export function InspirationHeroBreadcrumb({
   icon: Icon
 }: InspirationHeroBreadcrumbProps) {
   return (
-    <div className='mb-6 flex items-center gap-3 text-sm leading-[1.45] tracking-normal text-cloud-dancer/72'>
+    <div className='mb-6 flex items-center gap-3 text-sm leading-[1.45] tracking-[-0.01em] text-cloud-dancer/72'>
       <Link
         href={'/inspirasjon' as Route}
         className='transition-colors hover:text-cloud-dancer'
@@ -28,9 +28,9 @@ export function InspirationHeroBreadcrumb({
       <BrandBadge
         backgroundColor={color}
         textColor={textColor}
-        className='gap-2 border border-cloud-dancer/18 px-4 py-2 text-sm leading-[1.4] font-semibold tracking-normal shadow-[0_14px_32px_-24px_rgba(14,18,35,0.6)]'
+        className='gap-2 border border-cloud-dancer/18 px-4 py-2 text-sm leading-[1.4] font-semibold tracking-[-0.01em] shadow-[0_14px_32px_-24px_color-mix(in_oklch,var(--maritime-darkest)_60%,transparent)]'
       >
-        <Icon className='h-4 w-4' aria-hidden='true' />
+        <Icon className='size-4' aria-hidden='true' />
         {label}
       </BrandBadge>
     </div>

@@ -15,6 +15,10 @@ export function ChevronDownSection() {
 
   useGSAP(
     () => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return
+      }
+
       gsap.to(arrowRef.current, {
         x: 3,
         duration: 1.2,
@@ -39,8 +43,7 @@ export function ChevronDownSection() {
     gsap.killTweensOf(text)
 
     gsap.to(text, {
-      color: 'var(--color-cloud-dancer)',
-      letterSpacing: '0.25em',
+      color: 'var(--cloud-dancer)',
       x: 2,
       duration: 0.5,
       ease: 'power2.out'
@@ -51,7 +54,7 @@ export function ChevronDownSection() {
       scale: 1.1,
       duration: 0.6,
       ease: 'back.out(1.7)',
-      color: 'var(--color-cloud-dancer)'
+      color: 'var(--cloud-dancer)'
     })
 
     if (hoverLine) {
@@ -69,8 +72,7 @@ export function ChevronDownSection() {
     }
 
     gsap.to(text, {
-      color: 'var(--color-cloud-dancer)',
-      letterSpacing: '0.2em',
+      color: 'var(--cloud-dancer)',
       x: 0,
       duration: 0.4,
       ease: 'power2.out'
@@ -81,8 +83,12 @@ export function ChevronDownSection() {
       scale: 1,
       duration: 0.4,
       ease: 'power2.out',
-      color: 'var(--color-cloud-dancer)',
+      color: 'var(--cloud-dancer)',
       onComplete: () => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          return
+        }
+
         gsap.to(arrow, {
           x: 3,
           duration: 1.2,
@@ -104,22 +110,22 @@ export function ChevronDownSection() {
       ref={container}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
-      className='gsap-cta group relative inline-flex items-center justify-center py-6 px-6 min-h-[44px]'
+      className='gsap-cta group relative inline-flex min-h-11 items-center justify-center px-5 py-4'
       aria-label='Gå til skreddersy varmen'
       data-track='ReadMoreHeroClick'
     >
       <div className='relative flex items-center gap-3'>
         <span
           ref={textRef}
-          className='block text-xs font-medium uppercase tracking-[0.2em] text-cloud-dancer transition-colors'
+          className='block text-sm font-medium leading-none tracking-[-0.01em] text-cloud-dancer transition-colors'
         >
           Les mer
         </span>
 
-        <ArrowRight ref={arrowRef} className='h-4 w-4 text-cloud-dancer' />
+        <ArrowRight ref={arrowRef} className='size-4 text-cloud-dancer' />
       </div>
 
-      <span className='hover-line absolute bottom-4 left-0 h-[1px] w-full origin-center scale-x-0 bg-gradient-to-r from-transparent via-white to-transparent' />
+      <span className='hover-line absolute bottom-3 left-0 h-px w-full origin-center scale-x-0 bg-gradient-to-r from-transparent via-cloud-dancer to-transparent' />
     </Link>
   )
 }

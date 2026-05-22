@@ -10,22 +10,31 @@ import { cn } from '@/lib/utils/className'
 import { useQueryClient } from '@tanstack/react-query'
 import type { Route } from 'next'
 import { useRouter } from 'next/navigation'
-import { startTransition, useState, Suspense, useEffect } from 'react' // 1. Importer useEffect
+import {
+  Suspense,
+  startTransition,
+  useState,
+  useSyncExternalStore
+} from 'react'
 import { HeaderSearchFooter } from './HeaderSearchFooter'
 import { HeaderSearchInputField } from './HeaderSearchInputField'
 import { useCommandK } from './useCommandK'
 import { searchIndexQueryOptions } from './searchIndexQueryOption'
 import { SearchResults } from './SearchResults'
 
+const subscribeToClientSnapshot = () => () => {}
+const getClientSnapshot = () => true
+const getServerSnapshot = () => false
+
 export function HeaderSearch({ className }: { className?: string }) {
   const [open, setOpen] = useState(false)
-  const [isMounted, setIsMounted] = useState(false) // 2. Legg til isMounted state
+  const isMounted = useSyncExternalStore(
+    subscribeToClientSnapshot,
+    getClientSnapshot,
+    getServerSnapshot
+  )
   const router = useRouter()
   const queryClient = useQueryClient()
-
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
 
   useCommandK(open, setOpen)
 
@@ -48,7 +57,7 @@ export function HeaderSearch({ className }: { className?: string }) {
     'onTouchStart': handlePrefetch,
     'aria-label': 'Åpne søk (⌘/Ctrl + K)',
     'className': cn(
-      'group relative hidden h-11 w-[22rem] items-center gap-3 rounded-md border border-cloud-dancer/15 bg-cloud-dancer/6 px-3 text-left text-sm text-cloud-dancer/70 outline-none transition md:flex xl:mr-4 xl:w-[18rem]',
+      'group relative hidden h-11 w-64 items-center gap-3 rounded-md border border-cloud-dancer/15 bg-cloud-dancer/6 px-3 text-left text-sm text-cloud-dancer/70 outline-none transition md:flex lg:w-52 xl:mr-3 xl:w-56 2xl:w-60',
       'hover:border-cloud-dancer/30 hover:text-cloud-dancer focus-visible:border-cloud-dancer/35',
       className
     )

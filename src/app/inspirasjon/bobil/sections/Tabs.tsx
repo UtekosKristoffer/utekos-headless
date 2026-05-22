@@ -1,13 +1,4 @@
-'use client'
-
-import dynamic from 'next/dynamic'
-
-const BobilSeasonsTabs = dynamic(
-  () => import('./BobilSeasonsTabs').then(mod => mod.BobilSeasonsTabs),
-  {
-    ssr: false
-  }
-)
+import { BobilSeasonsTabs } from './BobilSeasonsTabs'
 
 export function Tabs() {
   return (

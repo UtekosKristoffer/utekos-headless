@@ -17,7 +17,7 @@ export function HeaderLogo() {
           width={58}
           height={58}
           priority
-          className='md:ml-4 lg:ml-6 xl:ml-8 rounded-full ring ring-white/90'
+          className='size-12 rounded-full ring ring-cloud-dancer/80 md:size-14 lg:size-[58px]'
         />
       </Link>
     </div>

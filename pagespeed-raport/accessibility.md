@@ -9,292 +9,350 @@ the accessibility of your web app, so
 [manual testing](https://web.dev/articles/how-to-review?utm_source=lighthouse&utm_medium=lr)
 is also encouraged.
 
-ARIA
+## ARIA
 
-Elements use prohibited ARIA attributes
+### Elements use prohibited ARIA attributes
 
 Using ARIA attributes in roles where they are prohibited can mean that important
 information is not communicated to users of assistive technologies.
 [Learn more about prohibited ARIA roles](https://dequeuniversity.com/rules/axe/4.11/aria-prohibited-attr).
 
-| Failing elements
+Failing elements:
 
-| | | |
+1. 5 av 5 stjerner
 
-|
+   ```html
+   <div
+     class="relative flex items-center gap-1"
+     aria-label="5 av 5 stjerner"
+   ></div>
+   ```
 
-5 av 5 stjerner
+2. 5 av 5 stjerner
 
-<div class="relative flex items-center gap-1" aria-label="5 av 5 stjerner">
+   ```html
+   <div
+     class="relative flex items-center gap-1"
+     aria-label="5 av 5 stjerner"
+   ></div>
+   ```
 
-| |
+3. 5 av 5 stjerner
 
-5 av 5 stjerner
+   ```html
+   <div
+     class="relative flex items-center gap-1"
+     aria-label="5 av 5 stjerner"
+   ></div>
+   ```
 
-<div class="relative flex items-center gap-1" aria-label="5 av 5 stjerner">
+4. 5 av 5 stjerner
 
-| |
+   ```html
+   <div
+     class="relative flex items-center gap-1"
+     aria-label="5 av 5 stjerner"
+   ></div>
+   ```
 
-5 av 5 stjerner
+5. 4.5 av 5 stjerner
 
-<div class="relative flex items-center gap-1" aria-label="5 av 5 stjerner">
+   ```html
+   <div
+     class="relative flex items-center gap-1"
+     aria-label="4.5 av 5 stjerner"
+   ></div>
+   ```
 
-| |
+6. 5 av 5 stjerner
 
-5 av 5 stjerner
-
-<div class="relative flex items-center gap-1" aria-label="5 av 5 stjerner">
-
-| |
-
-4.5 av 5 stjerner
-
-<div class="relative flex items-center gap-1" aria-label="4.5 av 5 stjerner">
-
-| |
-
-5 av 5 stjerner
-
-<div class="relative flex items-center gap-1" aria-label="5 av 5 stjerner">
-
-|
+   ```html
+   <div
+     class="relative flex items-center gap-1"
+     aria-label="5 av 5 stjerner"
+   ></div>
+   ```
 
 These are opportunities to improve the usage of ARIA in your application which
 may enhance the experience for users of assistive technology, such as a screen
 reader.
 
-Contrast
+## Contrast
 
-Background and foreground colours do not have a sufficient contrast ratio.
+### Background and foreground colours do not have a sufficient contrast ratio
 
 Low-contrast text is difficult or impossible for many users to read.
 [Learn how to provide sufficient colour contrast](https://dequeuniversity.com/rules/axe/4.11/color-contrast).
 
-| Failing elements
+Failing elements:
 
-| | | |
+1. Isolasjon som absorberer og resirkulerer kroppsvarme.
 
-|
+   ```html
+   <span
+     class="block text-sm text-neutral-500 group-hover:text-neutral-400 transition-col…"
+   ></span>
+   ```
 
-Isolasjon som absorberer og resirkulerer kroppsvarme.
+2. INNOVASJON & MATERIALER Vitenskapen bak din komfort. Det handler ikke bare om
+   …
 
-<span class="block text-sm text-neutral-500 group-hover:text-neutral-400 transition-col…">
+   ```html
+   <div
+     class="relative overflow-hidden rounded-3xl border border-white/5 bg-neutral-950 …"
+   ></div>
+   ```
 
-| |
+3. Pustende membran med 8000mm vannsøyle.
 
-INNOVASJON & MATERIALER Vitenskapen bak din komfort. Det handler ikke bare om …
+   ```html
+   <span
+     class="block text-sm text-neutral-500 group-hover:text-neutral-400 transition-col…"
+   ></span>
+   ```
 
-<div class="relative overflow-hidden rounded-3xl border border-white/5 bg-neutral-950 …">
+4. INNOVASJON & MATERIALER Vitenskapen bak din komfort. Det handler ikke bare om
+   …
 
-| |
+   ```html
+   <div
+     class="relative overflow-hidden rounded-3xl border border-white/5 bg-neutral-950 …"
+   ></div>
+   ```
 
-Pustende membran med 8000mm vannsøyle.
+5. Fra isolerende kokong til bevegelig parkas på sekunder.
 
-<span class="block text-sm text-neutral-500 group-hover:text-neutral-400 transition-col…">
+   ```html
+   <span
+     class="block text-sm text-neutral-500 group-hover:text-neutral-400 transition-col…"
+   ></span>
+   ```
 
-| |
+6. INNOVASJON & MATERIALER Vitenskapen bak din komfort. Det handler ikke bare om
+   …
 
-INNOVASJON & MATERIALER Vitenskapen bak din komfort. Det handler ikke bare om …
+   ```html
+   <div
+     class="relative overflow-hidden rounded-3xl border border-white/5 bg-neutral-950 …"
+   ></div>
+   ```
 
-<div class="relative overflow-hidden rounded-3xl border border-white/5 bg-neutral-950 …">
+7. Godta alle
 
-| |
-
-Fra isolerende kokong til bevegelig parkas på sekunder.
-
-<span class="block text-sm text-neutral-500 group-hover:text-neutral-400 transition-col…">
-
-| |
-
-INNOVASJON & MATERIALER Vitenskapen bak din komfort. Det handler ikke bare om …
-
-<div class="relative overflow-hidden rounded-3xl border border-white/5 bg-neutral-950 …">
-
-| |
-
-Godta alle
-
-<button data-slot="button" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md…">
-
-|
+   ```html
+   <button
+     data-slot="button"
+     class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md…"
+   ></button>
+   ```
 
 These are opportunities to improve the legibility of your content.
 
-Tables and lists
+## Tables and Lists
 
-Lists do not contain only `<li>` elements and script supporting elements
-(`<script>` and `<template>`).
+### Lists do not contain only `<li>` elements and script supporting elements (`<script>` and `<template>`)
 
 Screen readers have a specific way of announcing lists. Ensuring proper list
 structure aids screen reader output.
 [Learn more about proper list structure](https://dequeuniversity.com/rules/axe/4.11/list).
 
-| Failing elements
+Failing elements:
 
-| | | |
+1. Kundeservice Tlf: +47 40 21 63 43 E-post: kundeservice@utekos.no
+   Innstillinger …
 
-|
+   ```html
+   <ul class="space-y-2"></ul>
+   ```
 
-Kundeservice Tlf: +47 40 21 63 43 E-post: kundeservice@utekos.no Innstillinger …
+2. Innstillinger for informasjonskapsler
 
-<ul class="space-y-2">
-
-| |
-
-Innstillinger for informasjonskapsler
-
-<button data-slot="dialog-trigger" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md…" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-\_r\_0\_" data-state="closed">
-
-|
+   ```html
+   <button
+     data-slot="dialog-trigger"
+     class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md…"
+     type="button"
+     aria-haspopup="dialog"
+     aria-expanded="false"
+     aria-controls="radix-_r_0_"
+     data-state="closed"
+   ></button>
+   ```
 
 These are opportunities to improve the experience of reading tabular or list
 data using assistive technology, like a screen reader.
 
-Best practices
+## Best Practices
 
-All heading elements contain content.
+### All heading elements contain content
 
 A heading with no content or inaccessible text prevents screen reader users from
 accessing information on the page's structure.
-[Learn more about headings](https://dequeuniversity.com/rules/axe/4.11/empty-heading).Unscored
+[Learn more about headings](https://dequeuniversity.com/rules/axe/4.11/empty-heading).
+Unscored
 
-| Failing elements
+Failing elements:
 
-| | | |
+1. ```html
+   <h2
+     class="text-4xl font-bold tracking-tight text-white sm:text-5xl leading-tight"
+   ></h2>
+   ```
 
-|
+2. div.grid > div.flex > div > h2.text-3xl
 
-<h2 class="text-4xl font-bold tracking-tight text-white sm:text-5xl leading-tight">
+   ```html
+   <h2 class="text-3xl font-bold tracking-tight text-foreground"></h2>
+   ```
 
-| |
-
-div.grid > div.flex > div > h2.text-3xl
-
-<h2 class="text-3xl font-bold tracking-tight text-foreground">
-
-|
-
-Identical links have the same purpose.
+### Identical links have the same purpose
 
 Links with the same destination should have the same description, to help users
 understand the link's purpose and decide whether to follow it.
-[Learn more about identical links](https://dequeuniversity.com/rules/axe/4.11/identical-links-same-purpose).Unscored
+[Learn more about identical links](https://dequeuniversity.com/rules/axe/4.11/identical-links-same-purpose).
+Unscored
 
-| Failing elements
+Failing elements:
 
-| | | |
+1. Se produkt
 
-|
+   ```html
+   <a
+     data-track="ProductCardFooterViewMoreClick"
+     aria-label="Se produkt"
+     class="flex-1"
+     href="/produkter/utekos-dun?variant=gid%3A%2F%2Fshopify%2FProductVariant%2F42903…"
+   ></a>
+   ```
 
-Se produkt
+2. Se produkt
 
-<a data-track="ProductCardFooterViewMoreClick" aria-label="Se produkt" class="flex-1" href="/produkter/utekos-dun?variant=gid%3A%2F%2Fshopify%2FProductVariant%2F42903…">
+   ```html
+   <a
+     data-track="ProductCardFooterViewMoreClick"
+     aria-label="Se produkt"
+     class="flex-1"
+     href="/produkter/utekos-mikrofiber?variant=gid%3A%2F%2Fshopify%2FProductVariant%…"
+   ></a>
+   ```
 
-| |
+3. Se produkt
 
-Se produkt
+   ```html
+   <a
+     data-track="ProductCardFooterViewMoreClick"
+     aria-label="Se produkt"
+     class="flex-1"
+     href="/produkter/comfyrobe?variant=gid%3A%2F%2Fshopify%2FProductVariant%2F439599…"
+   ></a>
+   ```
 
-<a data-track="ProductCardFooterViewMoreClick" aria-label="Se produkt" class="flex-1" href="/produkter/utekos-mikrofiber?variant=gid%3A%2F%2Fshopify%2FProductVariant%…">
+4. Se produkt
 
-| |
-
-Se produkt
-
-<a data-track="ProductCardFooterViewMoreClick" aria-label="Se produkt" class="flex-1" href="/produkter/comfyrobe?variant=gid%3A%2F%2Fshopify%2FProductVariant%2F439599…">
-
-| |
-
-Se produkt
-
-<a data-track="ProductCardFooterViewMoreClick" aria-label="Se produkt" class="flex-1" href="/produkter/utekos-techdown?variant=gid%3A%2F%2Fshopify%2FProductVariant%2F…">
-
-|
+   ```html
+   <a
+     data-track="ProductCardFooterViewMoreClick"
+     aria-label="Se produkt"
+     class="flex-1"
+     href="/produkter/utekos-techdown?variant=gid%3A%2F%2Fshopify%2FProductVariant%2F…"
+   ></a>
+   ```
 
 These items highlight common accessibility best practices.
 
-Additional items to manually check (10)
+## Additional Items to Manually Check (10)
 
 Show Hide
 
-Interactive controls are keyboard focusable
+1. Interactive controls are keyboard focusable
 
-Custom interactive controls are keyboard focusable and display a focus
-indicator.
-[Learn how to make custom controls focusable](https://developer.chrome.com/docs/lighthouse/accessibility/focusable-controls/?utm_source=lighthouse&utm_medium=lr).Unscored
+   Custom interactive controls are keyboard focusable and display a focus
+   indicator.
+   [Learn how to make custom controls focusable](https://developer.chrome.com/docs/lighthouse/accessibility/focusable-controls/?utm_source=lighthouse&utm_medium=lr).
+   Unscored
 
-Interactive elements indicate their purpose and state
+2. Interactive elements indicate their purpose and state
 
-Interactive elements, such as links and buttons, should indicate their state and
-be distinguishable from non-interactive elements.
-[Learn how to decorate interactive elements with affordance hints](https://developer.chrome.com/docs/lighthouse/accessibility/interactive-element-affordance/?utm_source=lighthouse&utm_medium=lr).Unscored
+   Interactive elements, such as links and buttons, should indicate their state
+   and be distinguishable from non-interactive elements.
+   [Learn how to decorate interactive elements with affordance hints](https://developer.chrome.com/docs/lighthouse/accessibility/interactive-element-affordance/?utm_source=lighthouse&utm_medium=lr).
+   Unscored
 
-The page has a logical tab order
+3. The page has a logical tab order
 
-Tabbing through the page follows the visual layout. Users cannot focus elements
-that are offscreen.
-[Learn more about logical tab ordering](https://developer.chrome.com/docs/lighthouse/accessibility/logical-tab-order/?utm_source=lighthouse&utm_medium=lr).Unscored
+   Tabbing through the page follows the visual layout. Users cannot focus
+   elements that are offscreen.
+   [Learn more about logical tab ordering](https://developer.chrome.com/docs/lighthouse/accessibility/logical-tab-order/?utm_source=lighthouse&utm_medium=lr).
+   Unscored
 
-Visual order on the page follows DOM order
+4. Visual order on the page follows DOM order
 
-DOM order matches the visual order, improving navigation for assistive
-technology.
-[Learn more about DOM and visual ordering](https://developer.chrome.com/docs/lighthouse/accessibility/visual-order-follows-dom/?utm_source=lighthouse&utm_medium=lr).Unscored
+   DOM order matches the visual order, improving navigation for assistive
+   technology.
+   [Learn more about DOM and visual ordering](https://developer.chrome.com/docs/lighthouse/accessibility/visual-order-follows-dom/?utm_source=lighthouse&utm_medium=lr).
+   Unscored
 
-User focus is not accidentally trapped in a region
+5. User focus is not accidentally trapped in a region
 
-A user can tab into and out of any control or region without accidentally
-trapping their focus.
-[Learn how to avoid focus traps](https://developer.chrome.com/docs/lighthouse/accessibility/focus-traps/?utm_source=lighthouse&utm_medium=lr).Unscored
+   A user can tab into and out of any control or region without accidentally
+   trapping their focus.
+   [Learn how to avoid focus traps](https://developer.chrome.com/docs/lighthouse/accessibility/focus-traps/?utm_source=lighthouse&utm_medium=lr).
+   Unscored
 
-The user's focus is directed to new content added to the page
+6. The user's focus is directed to new content added to the page
 
-If new content, such as a dialog, is added to the page, the user's focus is
-directed to it.
-[Learn how to direct focus to new content](https://developer.chrome.com/docs/lighthouse/accessibility/managed-focus/?utm_source=lighthouse&utm_medium=lr).Unscored
+   If new content, such as a dialog, is added to the page, the user's focus is
+   directed to it.
+   [Learn how to direct focus to new content](https://developer.chrome.com/docs/lighthouse/accessibility/managed-focus/?utm_source=lighthouse&utm_medium=lr).
+   Unscored
 
-HTML5 landmark elements are used to improve navigation
+7. HTML5 landmark elements are used to improve navigation
 
-Landmark elements (`<main>`, `<nav>`, etc.) are used to improve the keyboard
-navigation of the page for assistive technology.
-[Learn more about landmark elements](https://developer.chrome.com/docs/lighthouse/accessibility/use-landmarks/?utm_source=lighthouse&utm_medium=lr).Unscored
+   Landmark elements (`<main>`, `<nav>`, etc.) are used to improve the keyboard
+   navigation of the page for assistive technology.
+   [Learn more about landmark elements](https://developer.chrome.com/docs/lighthouse/accessibility/use-landmarks/?utm_source=lighthouse&utm_medium=lr).
+   Unscored
 
-Offscreen content is hidden from assistive technology
+8. Offscreen content is hidden from assistive technology
 
-Offscreen content is hidden with display: none or aria-hidden=true.
-[Learn how to properly hide offscreen content](https://developer.chrome.com/docs/lighthouse/accessibility/offscreen-content-hidden/?utm_source=lighthouse&utm_medium=lr).Unscored
+   Offscreen content is hidden with display: none or aria-hidden=true.
+   [Learn how to properly hide offscreen content](https://developer.chrome.com/docs/lighthouse/accessibility/offscreen-content-hidden/?utm_source=lighthouse&utm_medium=lr).
+   Unscored
 
-Custom controls have associated labels
+9. Custom controls have associated labels
 
-Custom interactive controls have associated labels, provided by aria-label or
-aria-labelledby.
-[Learn more about custom controls and labels](https://developer.chrome.com/docs/lighthouse/accessibility/custom-controls-labels/?utm_source=lighthouse&utm_medium=lr).Unscored
+   Custom interactive controls have associated labels, provided by aria-label or
+   aria-labelledby.
+   [Learn more about custom controls and labels](https://developer.chrome.com/docs/lighthouse/accessibility/custom-controls-labels/?utm_source=lighthouse&utm_medium=lr).
+   Unscored
 
-Custom controls have ARIA roles
+10. Custom controls have ARIA roles
 
-Custom interactive controls have appropriate ARIA roles.
-[Learn how to add roles to custom controls](https://developer.chrome.com/docs/lighthouse/accessibility/custom-control-roles/?utm_source=lighthouse&utm_medium=lr).Unscored
+    Custom interactive controls have appropriate ARIA roles.
+    [Learn how to add roles to custom controls](https://developer.chrome.com/docs/lighthouse/accessibility/custom-control-roles/?utm_source=lighthouse&utm_medium=lr).
+    Unscored
 
 These items address areas which an automated testing tool cannot cover. Learn
 more in our guide on
 [conducting an accessibility review](https://web.dev/articles/how-to-review?utm_source=lighthouse&utm_medium=lr).
 
-Passed audits (22)
+## Passed Audits (22)
 
 Show Hide
 
-`[aria-*]` attributes match their roles
+### `[aria-*]` attributes match their roles
 
 Each ARIA `role` supports a specific subset of `aria-*` attributes. Mismatching
 these invalidates the `aria-*` attributes.
 [Learn how to match ARIA attributes to their roles](https://dequeuniversity.com/rules/axe/4.11/aria-allowed-attr).
 
-`[aria-hidden="true"]` is not present on the document `<body>`
+### `[aria-hidden="true"]` is not present on the document `<body>`
 
 Assistive technologies, like screen readers, work inconsistently when
 `aria-hidden="true"` is set on the document `<body>`.
 [Learn how `aria-hidden` affects the document body](https://dequeuniversity.com/rules/axe/4.11/aria-hidden-body).
 
-`[role]`s have all required `[aria-*]` attributes
+### `[role]`s have all required `[aria-*]` attributes
 
 Some ARIA roles have required attributes that describe the state of the element
 to screen readers.

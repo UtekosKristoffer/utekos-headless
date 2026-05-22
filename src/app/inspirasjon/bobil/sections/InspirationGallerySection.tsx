@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { Card, CardContent } from '@/components/ui/card'
+import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import {
   Carousel,
   CarouselContent,
@@ -11,7 +11,6 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel'
 
-// Bytt ut med dine egne bilder og tekster
 const galleryImages = [
   {
     src: '/coffe_utekos.webp',
@@ -46,10 +45,11 @@ export function InspirationGallerySection() {
     <section className='py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='text-fluid-display mb-4 font-bold tracking-normal'>
-            Utekos i sitt rette element
+          <h2 className='text-fluid-display mb-4 inline-flex flex-wrap items-baseline justify-center gap-x-[0.18em] leading-[0.95] font-bold tracking-normal'>
+            <UtekosWordmark className='h-[0.78em] w-auto translate-y-[0.06em]' />
+            <span>i sitt rette element</span>
           </h2>
-          <p className='mb-12 max-w-2xl text-lg text-cloud-dancer mx-auto'>
+          <p className='mx-auto mb-12 max-w-2xl text-lg leading-[1.45] tracking-normal text-cloud-dancer'>
             Fra morgenkaffen i soloppgang til sene kvelder under stjernene. La
             deg inspirere av ekte øyeblikk fra bobillivet.
           </p>
@@ -68,8 +68,7 @@ export function InspirationGallerySection() {
                 key={index}
                 className='pl-4 md:basis-1/2 lg:basis-1/3'
               >
-                <div className='p-1 group'>
-                  {/* ENDRING: Card er fjernet. Styling er flyttet hit. */}
+                <div className='group p-1'>
                   <AspectRatio
                     ratio={4 / 5}
                     className='relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest'
@@ -84,10 +83,10 @@ export function InspirationGallerySection() {
                     />
                   </AspectRatio>
                   <div className='pt-4 text-left'>
-                    <h4 className='font-semibold'>{image.title}</h4>
-                    <p className='text-sm text-overcast'>
-                      {image.description}
-                    </p>
+                    <h4 className='leading-[1] font-semibold tracking-normal'>
+                      {image.title}
+                    </h4>
+                    <p className='text-sm text-overcast'>{image.description}</p>
                   </div>
                 </div>
               </CarouselItem>

@@ -50,10 +50,10 @@ export function GrunderSection() {
               delay='0.15s'
               threshold={0.3}
             >
-              <p className='text-lg font-serif font-medium text-cloud-dancer'>
+              <p className='text-lg leading-[1] font-semibold tracking-[-0.01em] text-cloud-dancer'>
                 Erling Holthe
               </p>
-              <p className='text-sm uppercase tracking-wider text-dusted-peri'>
+              <p className='text-sm leading-[1.45] font-medium tracking-[-0.01em] text-dusted-peri'>
                 Grunnlegger
               </p>
             </AnimatedBlock>
@@ -78,7 +78,7 @@ export function GrunderSection() {
               delay='0.2s'
               threshold={0.3}
             >
-              <h2 className='mb-8 text-4xl font-serif leading-tight text-cloud-dancer md:text-5xl'>
+              <h2 className='mb-8 text-4xl leading-[0.95] font-bold tracking-[-0.01em] text-cloud-dancer md:text-5xl'>
                 Fra idé til virkelighet
               </h2>
             </AnimatedBlock>
@@ -90,9 +90,9 @@ export function GrunderSection() {
               <div className='relative flex flex-col items-start gap-4 rounded-sm bg-overcast md:flex-row'>
                 <Quote
                   aria-hidden='true'
-                  className='h-8 w-8 shrink-0 rotate-180 text-maritime-blue md:rotate-0'
+                  className='size-8 shrink-0 rotate-180 text-maritime-blue md:rotate-0'
                 />
-                <p className='text-xl font-serif italic leading-relaxed text-maritime-blue/90 md:text-2xl'>
+                <p className='text-xl leading-[1.35] font-medium tracking-[-0.01em] text-maritime-blue/90 md:text-2xl'>
                   &ldquo;Jeg var lei av stive pledd og gode øyeblikk som ble
                   kuttet kort av kulden. Det måtte finnes en bedre måte å holde
                   varmen på.&rdquo;
@@ -100,8 +100,7 @@ export function GrunderSection() {
               </div>
             </AnimatedBlock>
 
-            {/* Brødtekst - Økt lesbarhet for 55+ */}
-            <div className='space-y-6 text-lg font-light leading-relaxed text-overcast/85'>
+            <div className='space-y-6 text-lg leading-[1.45] tracking-[-0.01em] text-overcast/85'>
               <AnimatedBlock
                 className='will-animate-fade-in-up'
                 delay='0.4s'

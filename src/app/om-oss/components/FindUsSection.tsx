@@ -47,8 +47,8 @@ export function FindUsSection() {
   return (
     <section className='relative isolate overflow-hidden bg-overcast py-24 text-maritime-blue sm:py-32'>
       <div className='pointer-events-none absolute inset-0 -z-10'>
-        <div className='absolute left-[6%] top-20 h-72 w-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_58%,transparent)_0%,transparent_72%)] blur-3xl' />
-        <div className='absolute bottom-12 right-[8%] h-80 w-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_22%,transparent)_0%,transparent_72%)] blur-3xl' />
+        <div className='absolute left-[6%] top-20 size-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_58%,transparent)_0%,transparent_72%)] blur-3xl' />
+        <div className='absolute bottom-12 right-[8%] size-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_22%,transparent)_0%,transparent_72%)] blur-3xl' />
       </div>
 
       <div className='container mx-auto max-w-7xl px-6 lg:px-8'>
@@ -64,10 +64,10 @@ export function FindUsSection() {
               textColor='var(--maritime-darkest)'
               className='mb-6 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
             />
-            <h2 className='mb-6 text-4xl font-serif font-medium text-maritime-blue sm:text-5xl'>
+            <h2 className='mb-6 text-4xl leading-[0.95] font-bold tracking-[-0.01em] text-maritime-blue sm:text-5xl'>
               Der du har møtt oss
             </h2>
-            <p className='mb-10 text-lg font-light leading-relaxed text-maritime-blue/74'>
+            <p className='mb-10 text-lg leading-[1.45] tracking-[-0.01em] text-maritime-blue/74'>
               Vi elsker å prate med folk – derfor er vi jevnlig på messer og
               stands. Her er noen av stedene du kan ha truffet oss, og hvor vi
               har fått verdifulle innspill fra kunder som faktisk har kjent
@@ -80,15 +80,15 @@ export function FindUsSection() {
                   key={`${event.name}-${event.date}`}
                   className='group flex items-start gap-5'
                 >
-                  <div className='flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-maritime-blue/14 bg-maritime-blue text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
-                    <MapPinIcon className='h-5 w-5' strokeWidth={2} />
+                  <div className='flex size-12 shrink-0 items-center justify-center rounded-full border border-maritime-blue/14 bg-maritime-blue text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
+                    <MapPinIcon className='size-5' strokeWidth={2} />
                   </div>
 
                   <div className='pt-1'>
-                    <h3 className='mb-1 font-serif text-xl text-maritime-blue'>
+                    <h3 className='mb-1 text-xl leading-[1] font-semibold tracking-[-0.01em] text-maritime-blue'>
                       {event.name}
                     </h3>
-                    <p className='text-sm font-medium text-maritime-blue/62'>
+                    <p className='text-sm leading-[1.45] font-medium tracking-[-0.01em] text-maritime-blue/62'>
                       {event.location}
                       <span className='mx-2 text-dusted-peri'>•</span>
                       {event.date}
@@ -99,7 +99,7 @@ export function FindUsSection() {
             </div>
           </AnimatedBlock>
 
-          {/* Høyre kolonne: Karusell */}
+          {/* Right column: carousel */}
           <AnimatedBlock
             className='will-animate-fade-in-right'
             delay='0.1s'

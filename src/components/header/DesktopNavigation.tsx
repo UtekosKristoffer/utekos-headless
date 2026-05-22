@@ -13,7 +13,10 @@ import type { MenuItem } from '@types'
 
 export const DesktopNavigation = ({ menu = [] }: { menu?: MenuItem[] }) => {
   return (
-    <nav aria-label='Hovednavigasjon' className='hidden lg:block'>
+    <nav
+      aria-label='Hovednavigasjon'
+      className='pointer-events-auto hidden lg:block'
+    >
       <InteractiveNavMenu>
         <InteractiveNavList>
           {menu.map(item => {
@@ -24,11 +27,11 @@ export const DesktopNavigation = ({ menu = [] }: { menu?: MenuItem[] }) => {
               <InteractiveNavItem key={item.title}>
                 {hasSubMenu ?
                   <>
-                    <InteractiveNavTrigger className='text-cloud-dancer hover:text-cloud-dancer'>
+                    <InteractiveNavTrigger className='text-cloud-dancer/84 hover:bg-cloud-dancer/7 hover:text-cloud-dancer focus-visible:ring-cloud-dancer/45 data-[state=open]:bg-cloud-dancer/8 data-[state=open]:text-cloud-dancer'>
                       {item.title}
                     </InteractiveNavTrigger>
                     <InteractiveNavContent className='text-cloud-dancer'>
-                      <ul className='grid w-[400px] gap-3 mt-4 lg:mt-1! underline! underline-offset-4 decoration-1 decoration-sidebar pb-1 items-center justify-center mx-auto md:w-[500px] md:grid-cols-2 lg:w-[600px]'>
+                      <ul className='mx-auto grid w-[420px] items-center justify-center gap-2 p-2 md:w-[520px] md:grid-cols-2 lg:w-[640px]'>
                         {item.items?.map(subItem => (
                           <ListItem
                             key={subItem.url}

@@ -1,47 +1,61 @@
 import { Coffee, Mountain, Star } from 'lucide-react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
+import { Card, CardContent } from '@/components/ui/card'
 import { InspirationHeroActions } from '../../layout/InspirationHeroActions'
 import { InspirationHeroBreadcrumb } from '../../layout/InspirationHeroBreadcrumb'
 
 const heroFeatureCards = [
   {
     title: 'Morgenstund',
-    description: 'Nyt morgenkaffeen ute i frisk fjellluft',
-    Icon: Coffee,
-    iconColor:
-      'color-mix(in oklch, var(--maritime-darkest) 72%, var(--ancient-water))',
-    borderColor: 'color-mix(in oklch, var(--ancient-water) 38%, transparent)',
-    background:
-      'linear-gradient(180deg, color-mix(in oklch, var(--ancient-water) 74%, rgba(255, 255, 255, 0.28)) 0%, color-mix(in oklch, var(--ancient-water) 42%, rgba(19, 27, 33, 0.18)) 100%)',
-    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--ancient-water) 78%, transparent) 100%)'
+    description: 'Nyt morgenkaffen ute i frisk fjellluft',
+    Icon: Coffee
   },
   {
     title: 'Utsikten',
     description: 'Nyt panoramaet i komfort, hele dagen',
-    Icon: Mountain,
-    iconColor:
-      'color-mix(in oklch, var(--maritime-darkest) 74%, var(--overcast))',
-    borderColor: 'color-mix(in oklch, var(--overcast) 42%, transparent)',
-    background:
-      'linear-gradient(180deg, color-mix(in oklch, var(--overcast) 78%, rgba(255, 255, 255, 0.28)) 0%, color-mix(in oklch, var(--overcast) 46%, rgba(18, 24, 29, 0.14)) 100%)',
-    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--overcast) 82%, transparent) 100%)'
+    Icon: Mountain
   },
   {
     title: 'Stjerneklar kveld',
     description: 'Forleng kveldene under natthimmelen',
-    Icon: Star,
-    iconColor:
-      'color-mix(in oklch, var(--maritime-darkest) 72%, var(--bleached-mauve))',
-    borderColor: 'color-mix(in oklch, var(--bleached-mauve) 38%, transparent)',
-    background:
-      'linear-gradient(180deg, color-mix(in oklch, var(--bleached-mauve) 72%, rgba(255, 255, 255, 0.24)) 0%, color-mix(in oklch, var(--bleached-mauve) 40%, rgba(18, 23, 29, 0.16)) 100%)',
-    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--bleached-mauve) 78%, transparent) 100%)'
+    Icon: Star
+  }
+] as const
+
+const heroFeatureCardThemes = [
+  {
+    surface:
+      'color-mix(in oklch, var(--cloud-dancer) 84%, var(--ancient-water))',
+    border:
+      'color-mix(in oklch, var(--ancient-water) 46%, var(--maritime-darkest))',
+    marker: 'var(--ancient-water)',
+    iconSurface: 'var(--ancient-water)',
+    icon: 'var(--maritime-darkest)'
+  },
+  {
+    surface: 'color-mix(in oklch, var(--cloud-dancer) 80%, var(--overcast))',
+    border: 'color-mix(in oklch, var(--overcast) 54%, var(--maritime-darkest))',
+    marker: 'var(--overcast)',
+    iconSurface: 'var(--overcast)',
+    icon: 'var(--maritime-darkest)'
+  },
+  {
+    surface:
+      'color-mix(in oklch, var(--cloud-dancer) 82%, var(--bleached-mauve))',
+    border:
+      'color-mix(in oklch, var(--bleached-mauve) 48%, var(--maritime-darkest))',
+    marker: 'var(--bleached-mauve)',
+    iconSurface: 'var(--bleached-mauve)',
+    icon: 'var(--maritime-darkest)'
   }
 ] as const
 
 export function CabinHeroSection() {
   return (
-    <section className='relative flex min-h-[70vh] items-center overflow-hidden'>
+    <section
+      className='relative flex min-h-[70vh] items-center overflow-hidden'
+      style={{ backgroundColor: 'var(--maritime-blue-paper)' }}
+    >
       <div className='absolute inset-0 -z-10 opacity-25'>
         <div
           className='animate-pulse-glow absolute left-1/3 top-1/4 h-[600px] w-[600px] blur-3xl'
@@ -62,7 +76,7 @@ export function CabinHeroSection() {
         />
       </div>
 
-      <div className='absolute inset-0 bg-gradient-to-b from-transparent to-background/50' />
+      <div className='absolute inset-0 bg-gradient-to-b from-maritime-darkest/10 via-transparent to-maritime-blue/20' />
 
       <div className='container relative mx-auto px-4 py-16'>
         <div className='max-w-3xl'>
@@ -76,8 +90,8 @@ export function CabinHeroSection() {
           </AnimatedBlock>
 
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
-            <h1 className='text-4xl font-bold tracking-normal sm:text-5xl lg:text-6xl'>
-              Hyttekos -{' '}
+            <h1 className='text-4xl leading-[0.95] font-bold tracking-[-0.01em] sm:text-5xl lg:text-6xl'>
+              Hyttekos,{' '}
               <span className='bg-[linear-gradient(90deg,var(--ancient-water),var(--country-air),var(--ancient-water))] bg-clip-text text-transparent'>
                 perfeksjonert
               </span>
@@ -85,10 +99,9 @@ export function CabinHeroSection() {
           </AnimatedBlock>
 
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.3s'>
-            <p className='mt-6 max-w-2xl text-xl leading-[1.45] tracking-normal text-cloud-dancer'>
-              Fra den krystallklare morgenluften på terrassen, til de magiske
-              kveldene under stjernene. Gjør hytten til et fristed for komfort,
-              uansett årstid.
+            <p className='mt-6 max-w-2xl text-xl leading-[1.45] tracking-[-0.01em] text-cloud-dancer'>
+              Fra morgenkaffen på terrassen til kveldene under stjernene. Gjør
+              hytten til et varmt fristed, uansett årstid.
             </p>
           </AnimatedBlock>
 
@@ -106,47 +119,49 @@ export function CabinHeroSection() {
             className='will-animate-fade-in-up mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3'
             delay='0.5s'
           >
-            {heroFeatureCards.map(
-              ({
-                title,
-                description,
-                Icon,
-                iconColor,
-                borderColor,
-                background,
-                glow
-              }) => (
-                <div
+            {heroFeatureCards.map(({ title, description, Icon }, cardIndex) => {
+              const theme =
+                heroFeatureCardThemes[cardIndex % heroFeatureCardThemes.length]
+                ?? heroFeatureCardThemes[0]
+
+              return (
+                <Card
                   key={title}
-                  className='group relative overflow-hidden rounded-[1.35rem] border p-4 transition-all duration-300 hover:-translate-y-0.5'
+                  className='group relative overflow-hidden rounded-xl border py-0 text-maritime-darkest transition-transform duration-300 hover:-translate-y-0.5'
                   style={{
-                    borderColor,
-                    background,
-                    boxShadow: '0 24px 48px -38px rgba(9, 15, 22, 0.45)'
+                    backgroundColor: theme.surface,
+                    borderColor: theme.border,
+                    boxShadow:
+                      '0 22px 44px -34px color-mix(in oklch, var(--maritime-darkest) 52%, transparent)'
                   }}
                 >
                   <div
-                    className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
-                    style={{ background: glow }}
+                    className='absolute inset-x-4 top-0 h-px transition-opacity duration-300 group-hover:opacity-70'
+                    style={{ background: theme.marker }}
                   />
-                  <div className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.26)_0%,rgba(255,255,255,0.08)_34%,transparent_100%)] opacity-90' />
-                  <div className='relative'>
-                    <div className='mb-2 flex items-center gap-3'>
-                      <Icon
-                        className='h-8 w-8 shrink-0'
-                        style={{ color: iconColor }}
-                      />
-                      <p className='font-semibold text-maritime-darkest'>
+                  <CardContent className='relative p-4'>
+                    <div className='mb-3 flex items-center gap-3'>
+                      <div
+                        className='flex size-10 shrink-0 items-center justify-center rounded-lg border'
+                        style={{
+                          backgroundColor: theme.iconSurface,
+                          borderColor: theme.border,
+                          color: theme.icon
+                        }}
+                      >
+                        <Icon className='size-5' />
+                      </div>
+                      <h3 className='text-base leading-[1] font-semibold tracking-[-0.01em] text-maritime-darkest'>
                         {title}
-                      </p>
+                      </h3>
                     </div>
-                    <p className='text-sm text-maritime-darkest/78'>
+                    <p className='text-sm leading-[1.45] tracking-[-0.01em] text-maritime-darkest/78'>
                       {description}
                     </p>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               )
-            )}
+            })}
           </AnimatedBlock>
         </div>
       </div>

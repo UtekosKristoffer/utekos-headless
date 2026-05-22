@@ -13,7 +13,7 @@ export function CTASection() {
           <h2 className='mb-6 text-fluid-display font-bold leading-[0.95] tracking-normal text-cloud-dancer'>
             Klar for ditt neste bobil-eventyr?
           </h2>
-          <p className='mx-auto mb-8 max-w-2xl text-xl leading-[1.45] tracking-normal text-overcast'>
+          <p className='mx-auto mb-8 max-w-2xl text-xl leading-[1.45] tracking-normal text-cloud-dancer/90'>
             Bli med tusenvis av bobilister som har oppdaget hemmeligheten til
             komfortable turer hele året.
           </p>

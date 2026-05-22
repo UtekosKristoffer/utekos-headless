@@ -1,12 +1,12 @@
 // Path: src/app/om-oss/Sections/AboutUsHeroSection.tsx
 import AboutUsOG from '@public/about-use-hero-gemini.png'
 import Image from 'next/image'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
-import { Separator } from '@/components/ui/separator'
 
 export function AboutUsHeroSection() {
   return (
-    <section className='relative flex h-[100vh] flex-col items-center justify-center overflow-hidden bg-[#1F2421] text-center text-[#F4F1EA] md:h-[89vh]'>
+    <section className='relative flex min-h-[82svh] flex-col items-center justify-center overflow-hidden bg-maritime-darkest text-center text-cloud-dancer md:min-h-[89vh]'>
       <div className='absolute inset-0 z-0'>
         <Image
           src={AboutUsOG}
@@ -18,24 +18,31 @@ export function AboutUsHeroSection() {
           priority
         />
       </div>
+      <div className='absolute inset-0 z-[1] bg-maritime-darkest/58' />
+      <div className='absolute inset-x-0 bottom-0 z-[1] h-1/3 bg-gradient-to-t from-maritime-darkest to-transparent' />
 
-      <div className='relative z-10 mx-auto mb:16 xs:mb-18 md:mb-20 lg:mb-24 xl:mb-28 flex w-[99%] max-w-screen md:w-[1280px] lg:w-screen justify-center self-center flex-col items-center gap-4 px-4 py-16'>
-        <h1 className='wordmark'>
-          <UtekosWordmark className='!text-7xl -ml-2 !font-black !leading-[1.05] md:!text-8xl lg:!text-9xl xl:!text-[200px]' />
+      <div className='relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center justify-center gap-6 px-6 py-20'>
+        <h1
+          className='flex flex-col items-center leading-[0.95] tracking-[-0.01em]'
+          aria-label='Om Utekos'
+        >
+          <span className='sr-only'>Om Utekos</span>
+          <UtekosWordmark
+            aria-hidden='true'
+            className='h-auto w-[min(76vw,19rem)] text-cloud-dancer md:w-[min(72vw,34rem)] xl:w-[42rem]'
+          />
         </h1>
 
-        <Separator orientation='horizontal' className='opacity-0' />
+        <BrandBadge
+          label='Skreddersy varmen'
+          backgroundColor='var(--primary-button)'
+          textColor='var(--maritime-darkest)'
+        />
 
-        <h2 className='underline decoration-color-skreddersy-orange underline-offset-6 box-decoration-slice text-lg font-bold uppercase tracking-[0.1em] text-color-skreddersy-orange text-balance md:text-2xl'>
-          Skreddersy varmen
-        </h2>
-
-        <Separator orientation='horizontal' className='opacity-0' />
-
-        <h3 className='mx-auto max-w-2xl font-sans text-xl leading-relaxed text-[#F4F1EA]/90 drop-shadow-md md:text-3xl'>
+        <p className='mx-auto max-w-2xl text-xl leading-[1.45] tracking-[-0.01em] text-cloud-dancer/90 drop-shadow-md md:text-3xl'>
           Drevet av kalde kvelder og et løfte om å aldri la været stoppe de gode
           øyeblikkene.
-        </h3>
+        </p>
       </div>
     </section>
   )

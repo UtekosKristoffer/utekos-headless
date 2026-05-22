@@ -1,5 +1,6 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
+import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import type { UseCase } from '../types'
 import { MoonIcon } from '@heroicons/react/24/outline'
 import { Sunrise, Wind } from 'lucide-react'
@@ -21,7 +22,7 @@ export const useCasesData: UseCase[] = [
     description:
       'Forleng kvelden med venner og familie uten å la kulden drive dere inn.',
     temperature: '8-15°C',
-    color: 'from-blue-500/20',
+    color: 'from-ancient-water/20',
     iconColor: 'text-ancient-water'
   },
   {
@@ -30,8 +31,8 @@ export const useCasesData: UseCase[] = [
     title: 'Vår og høst-camping',
     description: 'Utvid sesongen og opplev Norge når det er på sitt vakreste.',
     temperature: '3-10°C',
-    color: 'from-emerald-500/20',
-    iconColor: 'text-emerald-500'
+    color: 'from-bleached-mauve/20',
+    iconColor: 'text-bleached-mauve'
   }
 ]
 
@@ -40,12 +41,15 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
     <section id='bruksomrader' className='bg-overcast py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl text-center'>
-          <h2 className='text-fluid-display font-bold tracking-normal'>
-            Utekos gjennom bobil-døgnet
+          <h2 className='text-fluid-display inline-flex flex-wrap items-baseline justify-center gap-x-[0.18em] leading-[0.95] font-bold tracking-normal text-maritime-darkest'>
+            <UtekosWordmark
+              className='h-[0.78em] w-auto translate-y-[0.06em]'
+              style={{ color: 'var(--maritime-darkest)' }}
+            />
+            <span>gjennom bobil-døgnet</span>
           </h2>
-          <p className='mt-4 text-lg text-maritime-darkest'>
-            Fra soloppgang til solnedgang - se hvordan Utekos blir din trofaste
-            følgesvenn
+          <p className='mt-4 text-lg leading-[1.45] tracking-normal text-maritime-darkest'>
+            Fra soloppgang til solnedgang får du varme når turen ber om det.
           </p>
         </div>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
@@ -75,10 +79,10 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                     </div>
                   </div>
 
-                  <h3 className='mb-2 text-xl font-semibold'>
+                  <h3 className='mb-2 text-xl leading-[1] font-semibold tracking-normal'>
                     {useCase.title}
                   </h3>
-                  <p className='text-overcast'>{useCase.description}</p>
+                  <p className='text-cloud-dancer/90'>{useCase.description}</p>
                 </CardContent>
               </Card>
             </AnimatedBlock>

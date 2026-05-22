@@ -12,7 +12,7 @@ const motorhomeFeatureCards = [
       'color-mix(in oklch, var(--maritime-darkest) 70%, var(--bleached-mauve))',
     borderColor: 'color-mix(in oklch, var(--bleached-mauve) 42%, transparent)',
     background:
-      'linear-gradient(180deg, color-mix(in oklch, var(--bleached-mauve) 72%, rgba(255, 255, 255, 0.24)) 0%, color-mix(in oklch, var(--bleached-mauve) 40%, rgba(20, 22, 28, 0.16)) 100%)',
+      'linear-gradient(180deg, color-mix(in oklch, var(--bleached-mauve) 72%, var(--cloud-dancer) 28%) 0%, color-mix(in oklch, var(--bleached-mauve) 40%, var(--maritime-darkest) 60%) 100%)',
     glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--bleached-mauve) 76%, transparent) 100%)'
   },
   {
@@ -23,7 +23,7 @@ const motorhomeFeatureCards = [
       'color-mix(in oklch, var(--maritime-darkest) 72%, var(--ancient-water))',
     borderColor: 'color-mix(in oklch, var(--ancient-water) 40%, transparent)',
     background:
-      'linear-gradient(180deg, color-mix(in oklch, var(--ancient-water) 74%, rgba(255, 255, 255, 0.26)) 0%, color-mix(in oklch, var(--ancient-water) 42%, rgba(16, 24, 30, 0.16)) 100%)',
+      'linear-gradient(180deg, color-mix(in oklch, var(--ancient-water) 74%, var(--cloud-dancer) 26%) 0%, color-mix(in oklch, var(--ancient-water) 42%, var(--maritime-darkest) 58%) 100%)',
     glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--ancient-water) 78%, transparent) 100%)'
   },
   {
@@ -34,7 +34,7 @@ const motorhomeFeatureCards = [
       'color-mix(in oklch, var(--maritime-darkest) 74%, var(--overcast))',
     borderColor: 'color-mix(in oklch, var(--overcast) 42%, transparent)',
     background:
-      'linear-gradient(180deg, color-mix(in oklch, var(--overcast) 78%, rgba(255, 255, 255, 0.28)) 0%, color-mix(in oklch, var(--overcast) 46%, rgba(18, 24, 29, 0.14)) 100%)',
+      'linear-gradient(180deg, color-mix(in oklch, var(--overcast) 78%, var(--cloud-dancer) 22%) 0%, color-mix(in oklch, var(--overcast) 46%, var(--maritime-darkest) 54%) 100%)',
     glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--overcast) 82%, transparent) 100%)'
   }
 ] as const
@@ -45,14 +45,14 @@ export function BobilHeroSection() {
       {/* Ambient background glow */}
       <div className='absolute inset-0 -z-10 opacity-25'>
         <div
-          className='absolute left-1/3 top-1/4 h-[600px] w-[600px] blur-3xl'
+          className='absolute left-1/3 top-1/4 size-[600px] blur-3xl'
           style={{
             background:
               'radial-gradient(circle, color-mix(in oklch, var(--bleached-mauve) 72%, transparent) 0%, transparent 70%)'
           }}
         />
         <div
-          className='absolute right-1/3 bottom-1/4 h-[600px] w-[600px] blur-3xl'
+          className='absolute right-1/3 bottom-1/4 size-[600px] blur-3xl'
           style={{
             background:
               'radial-gradient(circle, color-mix(in oklch, var(--ancient-water) 70%, transparent) 0%, transparent 70%)'
@@ -74,7 +74,7 @@ export function BobilHeroSection() {
           </AnimatedBlock>
 
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
-            <h1 className='text-4xl font-bold tracking-normal sm:text-5xl lg:text-6xl'>
+            <h1 className='text-4xl leading-[0.95] font-bold tracking-normal sm:text-5xl lg:text-6xl'>
               Bobilliv uten{' '}
               <span className='bg-[linear-gradient(90deg,var(--bleached-mauve),var(--raindrops-on-roses),var(--bleached-mauve))] bg-clip-text text-transparent'>
                 kompromisser
@@ -121,18 +121,25 @@ export function BobilHeroSection() {
                   style={{
                     borderColor,
                     background,
-                    boxShadow: '0 24px 48px -38px rgba(9, 15, 22, 0.42)'
+                    boxShadow:
+                      '0 24px 48px -38px color-mix(in oklch, var(--maritime-darkest) 72%, transparent)'
                   }}
                 >
                   <div
                     className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
                     style={{ background: glow }}
                   />
-                  <div className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.26)_0%,rgba(255,255,255,0.08)_34%,transparent_100%)] opacity-90' />
+                  <div
+                    className='pointer-events-none absolute inset-0 opacity-90'
+                    style={{
+                      background:
+                        'linear-gradient(180deg, color-mix(in oklch, var(--cloud-dancer) 26%, transparent) 0%, color-mix(in oklch, var(--cloud-dancer) 8%, transparent) 34%, transparent 100%)'
+                    }}
+                  />
                   <div className='relative'>
                     <div className='mb-2 flex items-center gap-3'>
                       <Icon
-                        className='h-8 w-8 shrink-0'
+                        className='size-8 shrink-0'
                         style={{ color: iconColor }}
                       />
                       <p className='font-semibold text-maritime-darkest'>

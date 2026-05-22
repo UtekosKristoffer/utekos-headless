@@ -6,8 +6,6 @@ export interface UseCase {
   title: string
   description: string
   temperature: string
-  color: string
-  iconColor: string
 }
 
 export interface Benefit {

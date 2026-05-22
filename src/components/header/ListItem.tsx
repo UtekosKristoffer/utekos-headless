@@ -22,17 +22,16 @@ export const ListItem = React.forwardRef<
           ref={ref}
           href={href}
           className={cn(
-            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors focus:bg-accent/20 focus:text-cloud-dancer',
-            'hover:bg-transparent',
+            'block select-none space-y-1 rounded-xl border border-transparent p-3 leading-none no-underline outline-none transition-colors hover:border-cloud-dancer/10 hover:bg-cloud-dancer/7 focus-visible:border-cloud-dancer/18 focus-visible:bg-cloud-dancer/8 focus-visible:ring-2 focus-visible:ring-cloud-dancer/35',
             className
           )}
           {...props}
         >
-          <div className='text-sm font-medium leading-none text-cloud-dancer'>
+          <div className='text-sm leading-[1.2] font-semibold tracking-[-0.01em] text-cloud-dancer'>
             {title}
           </div>
           {children && (
-            <p className='line-clamp-2 text-sm leading-snug text-cloud-dancer/70'>
+            <p className='line-clamp-2 text-sm leading-[1.45] tracking-[-0.01em] text-cloud-dancer/70'>
               {children}
             </p>
           )}

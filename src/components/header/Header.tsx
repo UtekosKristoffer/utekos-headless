@@ -10,23 +10,27 @@ import { ClientMobileMenu } from './ClientMobileMenu'
 
 export default function Header({ menu }: { menu: MenuItem[] }) {
   return (
-    <header className='sticky! lg:min-h-[80px] xl:min-h-[90px] px-10 mx-auto max-sm:px-6 top-0! z-50 border-b border-cloud-dancer/12 bg-maritime-blue py-3 w-full min-w-screen flex items-stretch justify-evenly text-cloud-dancer shadow-[0_18px_44px_-34px_rgba(8,12,28,0.9)] backdrop-blur-xl supports-[backdrop-filter]:bg-maritime-blue'>
-      <div className='flex flex-1 basis-0 items-center justify-start min-w-fit w-fit max-w-3xl'>
-        <HeaderLogo />
-      </div>
+    <header className='sticky! top-0! z-50 w-full border-b border-cloud-dancer/12 bg-maritime-blue/96 text-cloud-dancer shadow-[0_18px_44px_-34px_color-mix(in_oklab,var(--maritime-darkest)_82%,transparent)] backdrop-blur-xl supports-[backdrop-filter]:bg-maritime-blue/90'>
+      <div className='relative mx-auto grid min-h-[72px] w-full max-w-[1440px] grid-cols-[auto_1fr_auto] items-center gap-3 px-4 py-2.5 sm:px-6 lg:min-h-[80px] lg:pl-10 lg:pr-4 xl:min-h-[90px] xl:pr-5'>
+        <div className='flex min-w-0 items-center justify-start'>
+          <HeaderLogo />
+        </div>
 
-      <Suspense fallback={null}>
-        <ClientDesktopNavigation menu={menu} />
-      </Suspense>
+        <div className='pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center lg:flex'>
+          <Suspense fallback={null}>
+            <ClientDesktopNavigation menu={menu} />
+          </Suspense>
+        </div>
 
-      <div className='flex flex-1 basis-0 items-center justify-end gap-2'>
-        <HeaderSearch />
+        <div className='flex min-w-0 items-center justify-end gap-2'>
+          <HeaderSearch />
 
-        <Activity>
-          <Cart />
-        </Activity>
+          <Activity>
+            <Cart />
+          </Activity>
 
-        <ClientMobileMenu menu={menu} />
+          <ClientMobileMenu menu={menu} />
+        </div>
       </div>
     </header>
   )

@@ -20,7 +20,7 @@ const philosophyToneStyles = [
     text: 'text-maritime-blue/80'
   },
   {
-    card: 'border-dusted-peri/16 bg-[color-mix(in_oklab,var(--bleached-mauve)_74%,white)]',
+    card: 'border-dusted-peri/16 bg-[color-mix(in_oklab,var(--bleached-mauve)_74%,var(--cloud-dancer))]',
     glow: 'bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_50%,transparent)_0%,transparent_72%)]',
     icon: 'border-maritime-blue/14 bg-maritime-blue text-cloud-dancer',
     title: 'text-maritime-blue',
@@ -102,13 +102,12 @@ export function PhilosophiesSection() {
       className='relative overflow-hidden bg-overcast py-24 sm:py-32'
     >
       <div className='pointer-events-none absolute inset-0 -z-10'>
-        <div className='absolute left-[8%] top-16 h-64 w-64 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_70%,transparent)_0%,transparent_72%)] blur-3xl' />
-        <div className='absolute right-[10%] top-24 h-72 w-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_30%,transparent)_0%,transparent_72%)] blur-3xl' />
+        <div className='absolute left-[8%] top-16 size-64 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_70%,transparent)_0%,transparent_72%)] blur-3xl' />
+        <div className='absolute right-[10%] top-24 size-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_30%,transparent)_0%,transparent_72%)] blur-3xl' />
         <div className='absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,transparent_0%,color-mix(in_oklab,var(--cloud-dancer)_55%,transparent)_100%)]' />
       </div>
 
       <div className='container mx-auto max-w-7xl px-6 lg:px-8'>
-        {/* HEADER */}
         <div className='mx-auto mb-20 max-w-3xl text-center'>
           <AnimatedBlock
             className='will-animate-fade-in-up'
@@ -121,17 +120,16 @@ export function PhilosophiesSection() {
               textColor='var(--maritime-darkest)'
               className='mb-6 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--primary-button)_80%,transparent)]'
             />
-            <h2 className='mb-6 text-4xl font-serif text-maritime-blue md:text-5xl'>
+            <h2 className='mb-6 text-4xl leading-[0.95] font-bold tracking-[-0.01em] text-maritime-blue md:text-5xl'>
               Kjernen i alt vi gjør
             </h2>
-            <p className='text-xl font-light leading-relaxed text-maritime-blue/82'>
+            <p className='text-xl leading-[1.45] tracking-[-0.01em] text-maritime-blue/82'>
               Fire ufravikelige prinsipper som sikrer at du alltid får den
               opplevelsen du fortjener.
             </p>
           </AnimatedBlock>
         </div>
 
-        {/* GRID */}
         <div
           ref={cardRowRef}
           className='mx-auto flex max-w-4xl flex-col gap-6 sm:gap-7 lg:gap-8'
@@ -144,32 +142,32 @@ export function PhilosophiesSection() {
               style={{ zIndex: corePhilosophies.length - i }}
             >
               <div
-                className={`group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border p-7 shadow-[0_22px_60px_-40px_rgba(22,37,48,0.28)] transition-all duration-500 hover:-translate-y-1 sm:p-8 ${philosophyToneStyles[i]?.card}`}
+                className={`group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border p-7 shadow-[0_22px_60px_-40px_color-mix(in_oklab,var(--maritime-blue)_28%,transparent)] transition-all duration-500 hover:-translate-y-1 sm:p-8 ${philosophyToneStyles[i]?.card}`}
               >
                 <div
-                  className={`pointer-events-none absolute -right-10 -top-10 h-32 w-32 opacity-0 blur-[50px] transition-opacity duration-700 group-hover:opacity-30 ${philosophyToneStyles[i]?.glow}`}
+                  className={`pointer-events-none absolute -right-10 -top-10 size-32 opacity-0 blur-[50px] transition-opacity duration-700 group-hover:opacity-30 ${philosophyToneStyles[i]?.glow}`}
                 />
 
                 <div className='relative z-10 flex h-full flex-col'>
                   <div className='mb-5 flex items-center gap-5'>
                     <div
-                      className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-full border transition-transform duration-300 group-hover:scale-105 sm:h-16 sm:w-16 ${philosophyToneStyles[i]?.icon}`}
+                      className={`flex size-14 shrink-0 items-center justify-center rounded-full border transition-transform duration-300 group-hover:scale-105 sm:size-16 ${philosophyToneStyles[i]?.icon}`}
                     >
                       <item.icon
-                        className='h-6 w-6 sm:h-7 sm:w-7'
+                        className='size-6 sm:size-7'
                         strokeWidth={1.5}
                       />
                     </div>
 
                     <h3
-                      className={`text-2xl font-serif font-medium ${philosophyToneStyles[i]?.title}`}
+                      className={`text-2xl leading-[1] font-semibold tracking-[-0.01em] ${philosophyToneStyles[i]?.title}`}
                     >
                       {item.title}
                     </h3>
                   </div>
 
                   <p
-                    className={`text-lg font-light leading-relaxed ${philosophyToneStyles[i]?.text}`}
+                    className={`text-lg leading-[1.45] tracking-[-0.01em] ${philosophyToneStyles[i]?.text}`}
                   >
                     {item.text}
                   </p>

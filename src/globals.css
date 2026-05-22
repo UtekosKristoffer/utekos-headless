@@ -299,9 +299,11 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --breakpoint-tablet: 33.75rem;
 }
 
 @theme inline {
+  --breakpoint-tablet: 33.75rem;
   --bright-white: oklch(0.9801 0.0096 252.81);
   --color-klarna-pink: var(--klarna-pink);
   --color-primary-button: var(--primary-button);

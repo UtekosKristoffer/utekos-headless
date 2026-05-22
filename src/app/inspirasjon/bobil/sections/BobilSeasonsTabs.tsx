@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Sun, Mountain, Sunrise, Wind, Check } from 'lucide-react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardContent } from '@/components/ui/card'
+import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 
 const seasons = [
   {
@@ -12,7 +13,8 @@ const seasons = [
     icon: Sunrise,
     iconColor: 'text-mountain-view',
     glowColor: 'var(--mountain-view)',
-    title: 'Vårcamping med Utekos',
+    title: 'Vårcamping med',
+    hasBrandTitle: true,
     intro:
       'Våren byr på fantastiske muligheter for bobilisten, men temperaturene kan være uforutsigbare.',
     tips: [
@@ -99,7 +101,7 @@ export function BobilSeasonsTabs() {
 
               <div className='relative flex items-center justify-center gap-2 py-3'>
                 <Icon
-                  className={`h-5 w-5 transition-colors ${isActive ? season.iconColor : 'text-overcast'}`}
+                  className={`size-5 transition-colors ${isActive ? season.iconColor : 'text-overcast'}`}
                 />
                 <span
                   className={`font-medium transition-colors ${isActive ? 'text-cloud-dancer' : 'text-overcast'}`}
@@ -129,19 +131,24 @@ export function BobilSeasonsTabs() {
                 <CardContent className='relative p-8'>
                   <div className='mb-6 flex items-center gap-4'>
                     <div
-                      className='flex h-12 w-12 items-center justify-center rounded-lg border border-cloud-dancer/18 bg-maritime-darkest transition-shadow duration-300'
+                      className='flex size-12 items-center justify-center rounded-lg border border-cloud-dancer/18 bg-maritime-darkest transition-shadow duration-300'
                       style={{
                         boxShadow: `0 0 20px ${season.glowColor}20`
                       }}
                     >
-                      <Icon className={`h-6 w-6 ${season.iconColor}`} />
+                      <Icon className={`size-6 ${season.iconColor}`} />
                     </div>
-                    <h3 className='text-2xl font-semibold text-cloud-dancer'>
-                      {season.title}
+                    <h3 className='text-2xl leading-[1] font-semibold tracking-normal text-cloud-dancer'>
+                      {season.hasBrandTitle ?
+                        <span className='inline-flex flex-wrap items-baseline gap-x-2'>
+                          <span>{season.title}</span>
+                          <UtekosWordmark className='h-[0.74em] w-auto translate-y-[0.05em]' />
+                        </span>
+                      : season.title}
                     </h3>
                   </div>
 
-                  <p className='mb-6 text-lg text-overcast'>
+                  <p className='mb-6 text-lg leading-[1.45] tracking-normal text-overcast'>
                     {season.intro}
                   </p>
 
@@ -152,8 +159,8 @@ export function BobilSeasonsTabs() {
                         className='bobil-seasons-tip-enter flex items-start gap-3'
                         style={{ animationDelay: `${index * 0.1}s` }}
                       >
-                        <div className='flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-cloud-dancer/18 bg-maritime-darkest mt-0.5'>
-                          <Check className={`h-4 w-4 ${season.iconColor}`} />
+                        <div className='mt-0.5 flex size-6 flex-shrink-0 items-center justify-center rounded-full border border-cloud-dancer/18 bg-maritime-darkest'>
+                          <Check className={`size-4 ${season.iconColor}`} />
                         </div>
                         <span className='text-overcast leading-[1.45] tracking-normal'>
                           {tip}

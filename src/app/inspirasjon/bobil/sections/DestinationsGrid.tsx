@@ -1,5 +1,6 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
+import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import { MapPinIcon } from '@heroicons/react/24/outline'
 import type { Destination } from '../types'
 
@@ -12,10 +13,11 @@ export function DestinationsGrid({
     <section className='py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl text-center'>
-          <h2 className='text-fluid-display font-bold tracking-normal'>
-            Populære destinasjoner med Utekos
+          <h2 className='text-fluid-display inline-flex flex-wrap items-baseline justify-center gap-x-[0.18em] leading-[0.95] font-bold tracking-normal'>
+            <span>Populære destinasjoner med</span>
+            <UtekosWordmark className='h-[0.78em] w-auto translate-y-[0.06em]' />
           </h2>
-          <p className='mt-4 text-lg text-overcast'>
+          <p className='mt-4 text-lg leading-[1.45] tracking-normal text-overcast'>
             Norges vakreste bobildestinasjoner venter - nyt dem i komfort hele
             sesongen
           </p>
@@ -33,17 +35,13 @@ export function DestinationsGrid({
                 className='@container group relative h-full overflow-hidden border-cloud-dancer/12 bg-maritime-blue/24 transition-colors hover:bg-maritime-blue/32 focus-within:ring-1 focus-within:ring-primary-button/35'
                 tabIndex={-1}
               >
-                {/* Diskré bakgrunnsforsterker: subtil gradient-overlay som øker litt på hover */}
                 <div className='pointer-events-none absolute inset-0 opacity-15 transition-opacity duration-300 group-hover:opacity-25'>
-                  <div className='absolute inset-0 bg-gradient-to-br from-white/6 via-transparent to-transparent' />
+                  <div className='absolute inset-0 bg-gradient-to-br from-cloud-dancer/6 via-transparent to-transparent' />
                 </div>
-
-                {/* Svakt indre “glow” ved hover/focus for bedre affordance uten kraftig bevegelse */}
-                <div className='pointer-events-none absolute inset-0 rounded-[inherit] ring-0 transition-[box-shadow] duration-300 group-hover:shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_6px_18px_rgba(0,0,0,0.25)]' />
 
                 <CardContent className='relative p-6'>
                   <div className='mb-3 flex items-start justify-between'>
-                    <h3 className='text-lg font-semibold'>
+                    <h3 className='text-lg leading-[1] font-semibold tracking-normal'>
                       {destination.name}
                     </h3>
                     <MapPinIcon className={`size-5 ${destination.color}`} />

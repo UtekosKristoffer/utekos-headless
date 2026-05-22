@@ -5,23 +5,23 @@ import { AnimatedBlock } from '@/components/AnimatedBlock'
 import type { Route } from 'next'
 export function CTASection() {
   return (
-    <section className='relative overflow-hidden border-t border-cloud-dancer/12 bg-maritime-darkest py-24'>
-      <div className='absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,var(--ancient-water)_0%,transparent_32%),radial-gradient(circle_at_82%_20%,var(--soft-warm)_0%,transparent_28%)] opacity-[0.18]' />
+    <section className='relative overflow-hidden border-t border-cloud-dancer/12 bg-maritime-blue py-24'>
+      <div className='absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,var(--ancient-water)_0%,transparent_32%),radial-gradient(circle_at_82%_20%,var(--soft-warm)_0%,transparent_28%),linear-gradient(180deg,transparent_0%,var(--maritime-darkest)_120%)] opacity-[0.2]' />
       <div className='container relative mx-auto px-4 text-center'>
         <AnimatedBlock className='will-animate-fade-in-scale'>
-          <h2 className='mb-6 text-fluid-display font-bold leading-[0.95] tracking-normal text-cloud-dancer'>
-            Klar for din ultimate hytteopplevelse?
+          <h2 className='mb-6 text-fluid-display leading-[0.95] font-bold tracking-[-0.01em] text-cloud-dancer'>
+            Klar for mer varme på hytten?
           </h2>
-          <p className='mx-auto mb-8 max-w-2xl text-xl leading-[1.45] tracking-normal text-overcast'>
-            Bli en del av de som vet hvordan man skaper ekte hyttekos – uansett
-            hvor kaldt det er utenfor.
+          <p className='mx-auto mb-8 max-w-2xl text-xl leading-[1.45] tracking-[-0.01em] text-overcast'>
+            Finn plagget som gjør det lett å bli ute litt lenger, også når
+            kvelden blir kald.
           </p>
           <div className='flex flex-wrap justify-center gap-4'>
             <BrandBadge
               asChild
               backgroundColor='var(--primary-button)'
               textColor='var(--maritime-darkest)'
-              className='group min-h-14 border border-primary-button/24 px-8 py-4 text-base leading-[1.4] font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
+              className='group min-h-14 border border-primary-button/24 px-8 py-4 text-base leading-[1.4] font-bold tracking-[-0.01em] shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
             >
               <Link
                 href={'/produkter' as Route}
@@ -35,7 +35,7 @@ export function CTASection() {
               asChild
               backgroundColor='var(--cloud-dancer)'
               textColor='var(--maritime-darkest)'
-              className='min-h-14 border border-cloud-dancer/24 px-8 py-4 text-base leading-[1.4] font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
+              className='min-h-14 border border-cloud-dancer/24 px-8 py-4 text-base leading-[1.4] font-bold tracking-[-0.01em] shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
             >
               <Link
                 href={'/handlehjelp/storrelsesguide' as Route}

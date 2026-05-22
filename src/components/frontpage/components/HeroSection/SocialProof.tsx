@@ -5,21 +5,21 @@ import { PaymentIcons } from './PaymentIcons'
 export function SocialProof() {
   return (
     <section
-      className='mx-auto mt-8 sm:mt-16 max-w-4xl px-4 md:px-0'
+      className='mx-auto mt-6 max-w-5xl sm:mt-10'
       aria-label='Fordeler med å handle hos oss'
     >
-      <div className='grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6'>
+      <div className='grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3 md:gap-5'>
         <SocialProofCard
           title='Rask levering'
           Icon={Truck}
-          cardClass='border-[color-mix(in_oklch,var(--maritime-blue)_10%,transparent)] bg-[var(--ancient-water)] hover:bg-[color-mix(in_oklch,var(--ancient-water)_90%,transparent)] transition-colors'
-          titleClass='text-[var(--maritime-blue)]'
-          shineClass='via-[color-mix(in_oklch,var(--cloud-dancer)_40%,transparent)]'
-          hoverBorderClass='hover:border-[color-mix(in_oklch,var(--maritime-blue)_30%,transparent)]'
-          iconWrapperClass='bg-[var(--barely-blue)] shadow-[0_0_18px_color-mix(in_oklch,var(--maritime-blue)_15%,transparent)]'
-          iconColorClass='text-[var(--maritime-blue)]'
+          cardClass='border-maritime-blue/12 bg-ancient-water text-maritime-blue transition-colors hover:bg-[var(--country-air)]'
+          titleClass='text-maritime-blue'
+          shineClass='via-cloud-dancer/40'
+          hoverBorderClass='hover:border-maritime-blue/30'
+          iconWrapperClass='bg-cloud-dancer/65 shadow-[0_0_18px_color-mix(in_oklch,var(--maritime-blue)_15%,transparent)]'
+          iconColorClass='text-maritime-blue'
         >
-          <p className='mt-1 text-sm font-medium text-[color-mix(in_oklch,var(--maritime-blue)_80%,transparent)]'>
+          <p className='mt-1 text-sm font-medium leading-[1.45] tracking-[-0.01em] text-maritime-blue/78'>
             2-5 dager
           </p>
         </SocialProofCard>
@@ -27,14 +27,14 @@ export function SocialProof() {
         <SocialProofCard
           title='3000+'
           Icon={Smile}
-          cardClass='border-[color-mix(in_oklch,var(--chocolate-plum)_10%,transparent)] bg-[var(--overcast)] hover:bg-[color-mix(in_oklch,var(--overcast)_90%,transparent)] transition-colors'
-          titleClass='text-[var(--chocolate-plum)]'
-          shineClass='via-[color-mix(in_oklch,var(--cloud-dancer)_40%,transparent)]'
-          hoverBorderClass='hover:border-[color-mix(in_oklch,var(--chocolate-plum)_30%,transparent)]'
-          iconWrapperClass='bg-[color-mix(in_oklch,var(--cloud-dancer)_50%,transparent)] shadow-[0_0_18px_color-mix(in_oklch,var(--chocolate-plum)_15%,transparent)]'
-          iconColorClass='text-[var(--chocolate-plum)]'
+          cardClass='border-demitasse/12 bg-overcast text-demitasse transition-colors hover:bg-cloud-dancer'
+          titleClass='text-demitasse'
+          shineClass='via-cloud-dancer/40'
+          hoverBorderClass='hover:border-demitasse/30'
+          iconWrapperClass='bg-cloud-dancer/60 shadow-[0_0_18px_color-mix(in_oklch,var(--demitasse)_15%,transparent)]'
+          iconColorClass='text-demitasse'
         >
-          <p className='mt-1 text-sm font-medium text-[color-mix(in_oklch,var(--chocolate-plum)_80%,transparent)]'>
+          <p className='mt-1 text-sm font-medium leading-[1.45] tracking-[-0.01em] text-demitasse/78'>
             Fornøyde kunder
           </p>
         </SocialProofCard>
@@ -42,11 +42,11 @@ export function SocialProof() {
         <SocialProofCard
           title='Trygg handel'
           Icon={ShieldCheck}
-          cardClass='border-[var(--mountain-view)] bg-[var(--mountain-view)] transition-colors'
-          titleClass='text-[var(--cloud-dancer)]'
-          hoverBorderClass='hover:border-[color-mix(in_oklch,var(--cloud-dancer)_30%,transparent)]'
-          iconWrapperClass='bg-[color-mix(in_oklch,var(--cloud-dancer)_10%,transparent)] shadow-[0_0_18px_color-mix(in_oklch,var(--cloud-dancer)_15%,transparent)]'
-          iconColorClass='text-[var(--cloud-dancer)]'
+          cardClass='border-cloud-dancer/14 bg-mountain-view text-cloud-dancer transition-colors hover:bg-deep-forest'
+          titleClass='text-cloud-dancer'
+          hoverBorderClass='hover:border-cloud-dancer/30'
+          iconWrapperClass='bg-cloud-dancer/10 shadow-[0_0_18px_color-mix(in_oklch,var(--cloud-dancer)_15%,transparent)]'
+          iconColorClass='text-cloud-dancer'
         >
           <PaymentIcons />
         </SocialProofCard>

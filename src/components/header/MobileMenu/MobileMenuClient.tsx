@@ -35,7 +35,7 @@ export function MobileMenuClient({ menu }: { menu: MenuItem[] }) {
         <Button
           variant='ghost'
           size='icon'
-          className='text-cloud-dancer hover:bg-cloud-dancer/5 hover:text-cloud-dancer'
+          className='size-11 text-cloud-dancer hover:bg-cloud-dancer/5 hover:text-cloud-dancer'
           onClick={() => dispatch({ type: 'OPEN_MENU' })}
           aria-label='Åpne meny'
           data-track='MobileMenuClick'

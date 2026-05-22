@@ -34,6 +34,15 @@ export function AboutCarousel() {
 
   useGSAP(
     () => {
+      const animatedElements = gsap.utils.toArray<HTMLElement>(
+        '.gsap-header, .gsap-title, .gsap-desc, .gsap-carousel'
+      )
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.set(animatedElements, { y: 0, autoAlpha: 1, scale: 1 })
+        return
+      }
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
@@ -107,15 +116,15 @@ export function AboutCarousel() {
             textColor='var(--maritime-darkest)'
             className='gsap-header mb-6 gap-2 opacity-0 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
           >
-            <Camera className='h-5 w-5' strokeWidth={1.6} />
+            <Camera className='size-5' strokeWidth={1.6} />
             <span>Livet med Utekos</span>
           </BrandBadge>
 
-          <h2 className='gsap-title mb-4 text-4xl font-serif font-medium tracking-tight opacity-0 md:text-5xl'>
+          <h2 className='gsap-title mb-4 text-4xl leading-[0.95] font-bold tracking-[-0.01em] opacity-0 md:text-5xl'>
             Et glimt av opplevelsen
           </h2>
 
-          <p className='gsap-desc mx-auto max-w-2xl text-lg font-light leading-relaxed text-overcast/82 opacity-0 md:text-xl'>
+          <p className='gsap-desc mx-auto max-w-2xl text-lg leading-[1.45] tracking-[-0.01em] text-cloud-dancer/82 opacity-0 md:text-xl'>
             Se hvordan kompromissløs komfort gir liv til dine favorittøyeblikk
             utendørs.
           </p>

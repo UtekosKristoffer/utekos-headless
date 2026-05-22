@@ -4,6 +4,7 @@
 import { useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
+import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import { MapPin } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -20,7 +21,7 @@ export function IntersportSection() {
   const cardRef = useRef<HTMLDivElement>(null)
   const logoCardRef = useRef<HTMLDivElement>(null)
 
-  // State for 3D Tilt
+  // State for the interactive card tilt.
   const [rotation, setRotation] = useState({ x: 0, y: 0 })
   const [glarePosition, setGlarePosition] = useState({ x: 50, y: 50 })
 
@@ -32,11 +33,11 @@ export function IntersportSection() {
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
 
-    // Beregn rotasjon (maks 10 grader)
+    // Calculate rotation with a 10 degree cap.
     const rotateY = ((x - rect.width / 2) / rect.width) * 10
     const rotateX = ((y - rect.height / 2) / rect.height) * -10
 
-    // Beregn glare posisjon
+    // Calculate glare position.
     const glareX = (x / rect.width) * 100
     const glareY = (y / rect.height) * 100
 
@@ -51,7 +52,14 @@ export function IntersportSection() {
 
   useGSAP(
     () => {
-      // 0. Sikre start-tilstander umiddelbart (hindrer "flash of content")
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.set(cardRef.current, { y: 0, autoAlpha: 1, scale: 1 })
+        gsap.set('.gsap-logo-card', { x: 0, autoAlpha: 1, rotationY: 0 })
+        gsap.set('.gsap-content', { x: 0, autoAlpha: 1 })
+        return
+      }
+
+      // Set initial states immediately to prevent a content flash.
       gsap.set(cardRef.current, { y: 100, autoAlpha: 0, scale: 0.95 })
       gsap.set('.gsap-logo-card', { x: -50, autoAlpha: 0, rotationY: -15 })
       gsap.set('.gsap-content', { x: 50, autoAlpha: 0 })
@@ -59,13 +67,13 @@ export function IntersportSection() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 70%', // Starter når toppen av seksjonen er 70% ned på skjermen
+          start: 'top 70%',
           end: 'bottom 20%',
-          toggleActions: 'play none none reverse' // Spiller av nedover, reverserer når man scroller opp igjen
+          toggleActions: 'play none none reverse'
         }
       })
 
-      // 1. Reveal av hele kortet (løftes opp)
+      // Reveal the whole card with a soft lift.
       tl.to(cardRef.current, {
         y: 0,
         autoAlpha: 1,
@@ -74,7 +82,7 @@ export function IntersportSection() {
         ease: 'power3.out'
       })
 
-      // 2. Logo card pop-in (kommer inn fra venstre)
+      // Bring the logo card in from the left.
       tl.to(
         '.gsap-logo-card',
         {
@@ -87,7 +95,7 @@ export function IntersportSection() {
         '-=0.6'
       )
 
-      // 3. Tekst staggered (kommer inn fra høyre)
+      // Bring copy in from the right with a stagger.
       tl.to(
         '.gsap-content',
         {
@@ -109,8 +117,8 @@ export function IntersportSection() {
       className='relative isolate w-full overflow-hidden bg-maritime-darkest px-4 py-24 sm:py-32'
     >
       <div className='pointer-events-none absolute inset-0 -z-10'>
-        <div className='absolute left-[8%] top-16 h-80 w-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_22%,transparent)_0%,transparent_72%)] blur-3xl' />
-        <div className='absolute bottom-12 right-[10%] h-96 w-96 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_14%,transparent)_0%,transparent_72%)] blur-3xl' />
+        <div className='absolute left-[8%] top-16 size-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_22%,transparent)_0%,transparent_72%)] blur-3xl' />
+        <div className='absolute bottom-12 right-[10%] size-96 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_14%,transparent)_0%,transparent_72%)] blur-3xl' />
       </div>
 
       <div className='container mx-auto max-w-7xl'>
@@ -137,7 +145,7 @@ export function IntersportSection() {
                 <div
                   className='pointer-events-none absolute inset-0 z-10 rounded-[1.5rem] mix-blend-soft-light'
                   style={{
-                    background: `radial-gradient(circle at ${glarePosition.x}% ${glarePosition.y}%, rgba(255,255,255,0.8) 0%, transparent 100%)`,
+                    background: `radial-gradient(circle at ${glarePosition.x}% ${glarePosition.y}%, color-mix(in oklch, var(--cloud-dancer) 80%, transparent) 0%, transparent 100%)`,
                     opacity: 0.4
                   }}
                 />
@@ -154,10 +162,10 @@ export function IntersportSection() {
                   />
                 </div>
 
-                <div className='absolute left-4 top-4 h-2 w-2 rounded-full bg-maritime-blue/18' />
-                <div className='absolute right-4 top-4 h-2 w-2 rounded-full bg-maritime-blue/18' />
-                <div className='absolute bottom-4 left-4 h-2 w-2 rounded-full bg-maritime-blue/18' />
-                <div className='absolute bottom-4 right-4 h-2 w-2 rounded-full bg-maritime-blue/18' />
+                <div className='absolute left-4 top-4 size-2 rounded-full bg-maritime-blue/18' />
+                <div className='absolute right-4 top-4 size-2 rounded-full bg-maritime-blue/18' />
+                <div className='absolute bottom-4 left-4 size-2 rounded-full bg-maritime-blue/18' />
+                <div className='absolute bottom-4 right-4 size-2 rounded-full bg-maritime-blue/18' />
               </div>
             </div>
 
@@ -167,19 +175,23 @@ export function IntersportSection() {
                 textColor='var(--maritime-darkest)'
                 className='gsap-content mb-8 gap-3 opacity-0 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
               >
-                <span className='relative flex h-3 w-3'>
+                <span className='relative flex size-3'>
                   <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-maritime-darkest opacity-35'></span>
-                  <span className='relative inline-flex h-3 w-3 rounded-full bg-maritime-darkest'></span>
+                  <span className='relative inline-flex size-3 rounded-full bg-maritime-darkest'></span>
                 </span>
                 <span>Fysisk butikk i Bergen</span>
               </BrandBadge>
 
-              <h2 className='gsap-content mb-6 text-balance text-3xl font-serif font-medium leading-tight text-cloud-dancer opacity-0 md:text-5xl'>
-                Opplev Utekos hos <br />
+              <h2 className='gsap-content mb-6 flex flex-col text-balance text-3xl leading-[0.95] font-bold tracking-[-0.01em] text-cloud-dancer opacity-0 md:text-5xl'>
+                <span className='inline-flex flex-wrap items-baseline gap-x-[0.18em]'>
+                  <span>Opplev</span>
+                  <UtekosWordmark className='h-[0.78em] w-auto translate-y-[0.06em]' />
+                  <span>hos</span>
+                </span>
                 <span className='text-overcast'>Intersport Laksevåg</span>
               </h2>
 
-              <p className='gsap-content mb-10 max-w-lg text-lg font-light leading-relaxed text-overcast/82 opacity-0'>
+              <p className='gsap-content mb-10 max-w-lg text-lg leading-[1.45] tracking-[-0.01em] text-overcast/82 opacity-0'>
                 Lyst til å kjenne på kvaliteten og finne den perfekte
                 passformen? Som eneste fysiske forhandler i Bergen finner du et
                 utvalg av våre produkter hos våre venner på Laksevåg Senter.
@@ -197,7 +209,7 @@ export function IntersportSection() {
                     className='flex items-center gap-2'
                   >
                     Få veibeskrivelse
-                    <MapPin className='h-5 w-5 transition-transform group-hover:scale-110' />
+                    <MapPin className='size-5 transition-transform group-hover:scale-110' />
                   </Link>
                 </Button>
               </div>

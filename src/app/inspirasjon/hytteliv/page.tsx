@@ -53,7 +53,7 @@ export default function CabinInspirationPage() {
       {/* JSON-LD er flyttet til layout.tsx for optimal cache/PPR */}
 
       {/* Endret <main> til <div> for å unngå dobbel main-tag (RootLayout har main) */}
-      <div className='flex flex-col gap-12 pb-20'>
+      <div className='flex flex-col'>
         <Activity>
           <CabinHeroSection />
         </Activity>

@@ -49,13 +49,12 @@ export default function InspirasjonLayout({
         <section className='border-t border-chocolate-plum/35 bg-overcast py-16'>
           <div className='container mx-auto px-4'>
             <div className='mb-12 text-center'>
-              <h2 className='mb-4 text-4xl font-bold leading-[0.95] tracking-normal text-maritime-darkest md:text-6xl'>
+              <h2 className='mb-4 text-4xl font-bold leading-[0.95] tracking-[-0.01em] text-maritime-darkest md:text-6xl'>
                 Mer inspirasjon for dine øyeblikk
               </h2>
-              <p className='mx-auto max-w-2xl text-base leading-[1.45] tracking-normal text-maritime-blue'>
-                Utekos passer perfekt til alle situasjoner hvor komfort møter
-                norsk natur. La deg inspirere av hvordan andre nyter de gode
-                stundene.
+              <p className='mx-auto max-w-2xl text-base leading-[1.45] tracking-[-0.01em] text-maritime-blue'>
+                Finn ideer til situasjoner der komfort møter norsk natur. Se
+                hvordan små grep gjør uteøyeblikkene varmere.
               </p>
             </div>
             <div className='grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5'>
@@ -109,11 +108,11 @@ export default function InspirasjonLayout({
                         <div className='flex size-10 shrink-0 items-center justify-center rounded-lg border border-[var(--inspiration-card-border)] bg-cloud-dancer'>
                           <page.icon className='size-5 text-[var(--inspiration-icon-default)] transition-colors group-hover:text-[var(--inspiration-icon-hover)]' />
                         </div>
-                        <h3 className='font-semibold leading-[1.25] tracking-normal text-[var(--inspiration-card-text)] transition-colors'>
+                        <h3 className='font-bold leading-[0.95] tracking-[-0.01em] text-[var(--inspiration-card-text)] transition-colors'>
                           {page.label}
                         </h3>
                       </div>
-                      <p className='text-sm leading-[1.45] tracking-normal text-[var(--inspiration-card-muted)]'>
+                      <p className='text-sm leading-[1.45] tracking-[-0.01em] text-[var(--inspiration-card-muted)]'>
                         {page.description}
                       </p>
                     </div>
@@ -122,7 +121,7 @@ export default function InspirasjonLayout({
               ))}
             </div>
             <div className='mt-12 text-center'>
-              <p className='mb-4 text-sm leading-[1.45] tracking-normal text-maritime-blue'>
+              <p className='mb-4 text-sm leading-[1.45] tracking-[-0.01em] text-maritime-blue'>
                 Klar til å oppleve komforten selv?
               </p>
               <div className='flex flex-wrap justify-center gap-4'>
@@ -130,7 +129,7 @@ export default function InspirasjonLayout({
                   asChild
                   backgroundColor='var(--maritime-darkest)'
                   textColor='var(--cloud-dancer)'
-                  className='border border-cloud-dancer/14 px-7 py-3 text-base leading-[1.4] font-semibold tracking-normal shadow-[0_18px_38px_-28px_rgba(14,18,35,0.86)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-maritime-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dusted-peri/70 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast'
+                  className='border border-cloud-dancer/14 px-7 py-3 text-base font-medium leading-[1.45] tracking-[-0.01em] shadow-[0_18px_38px_-28px_rgba(14,18,35,0.86)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-maritime-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dusted-peri/70 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast'
                 >
                   <Link href='/produkter'>Se alle produkter</Link>
                 </BrandBadge>
@@ -138,7 +137,7 @@ export default function InspirasjonLayout({
                   asChild
                   backgroundColor='var(--cloud-dancer)'
                   textColor='var(--maritime-darkest)'
-                  className='border border-maritime-darkest/14 px-7 py-3 text-base leading-[1.4] font-semibold tracking-normal shadow-[0_18px_38px_-30px_rgba(14,18,35,0.42)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-cloud-dancer/88 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-maritime-darkest/55 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast'
+                  className='border border-maritime-darkest/14 px-7 py-3 text-base font-medium leading-[1.45] tracking-[-0.01em] shadow-[0_18px_38px_-30px_rgba(14,18,35,0.42)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-cloud-dancer/88 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-maritime-darkest/55 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast'
                 >
                   <Link href='/handlehjelp/storrelsesguide'>
                     Finn din størrelse
