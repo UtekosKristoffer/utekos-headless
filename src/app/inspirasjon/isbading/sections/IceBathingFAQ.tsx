@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import {
   Accordion,
   AccordionContent,
@@ -10,7 +9,7 @@ export const iceBathingFaqItems = [
   {
     question: 'Hvordan er størrelsene?',
     answer:
-      'Comfyrobe er designet for å være romslig (oversized) slik at du enkelt kan trekke armene inn og skifte under den.'
+      'Comfyrobe er designet med en oversized fit, slik at du enkelt kan trekke armene inn og skifte under den.'
   },
   {
     question: 'Blir den tung når den blir våt?',
@@ -20,12 +19,12 @@ export const iceBathingFaqItems = [
   {
     question: 'Kan den vaskes i maskin?',
     answer:
-      'Ja. Se vaskeinstrukser for mer informasjon. Unngå tøymykner for å bevare de vannavvisende egenskapene i ytterstoffet. Den tørker raskt på snor.'
+      'Ja, Comfyrobe kan vaskes i vaskemaskin. Vi anbefaler et skånsomt program med mildt vaskemiddel og 40°C. Vær bevisst på hvilket vaskemiddel du bruker.'
   },
   {
     question: 'Er den vindtett?',
     answer:
-      'Absolutt. Ytterstoffet av HydroGuard er tettvevd og vindtett, noe som er avgjørende for å stoppe både wind chill-faktoren og eventuell nedbør etter et isbad.'
+      'Ytterstoffet av HydroGuard™ har en vannsøyle på 80000 mm og pustende membran (~3000 g/m²/24 t) og tapede sømmer.'
   }
 ] as const
 
