@@ -27,7 +27,7 @@ export function MetaPixelEvents() {
     <>
       <Script
         id='meta-pixel-base'
-        strategy='afterInteractive'
+        strategy='lazyOnload'
         dangerouslySetInnerHTML={{ __html: metaPixelBaseCode }}
       />
       <Suspense fallback={null}>

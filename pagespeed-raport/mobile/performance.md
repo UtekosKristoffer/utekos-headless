@@ -794,7 +794,7 @@ Array.prototype.flat
 
 | | |
 
-[…chunks/0956.uguclzfz.js?dpl=dpl_FDRFb…:1:4992](https://utekos.no/_next/static/chunks/0956.uguclzfz.js?dpl=dpl_FDRFbWXNth4WfDHk6AUkURyqoUe9)
+[…chunks/?dpl=dpl_FDRFb…:1:4992](https://utekos.no/_next/static/chunks/0956.uguclzfz.js?dpl=dpl_FDRFbWXNth4WfDHk6AUkURyqoUe9)
 
 (utekos.no)
 

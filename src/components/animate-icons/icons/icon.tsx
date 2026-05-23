@@ -6,7 +6,7 @@ import {
   type HTMLMotionProps,
   type SVGMotionProps,
   type Variants
-} from 'framer-motion'
+} from 'motion/react'
 import * as React from 'react'
 
 import { cn } from '@/lib/utils/className'

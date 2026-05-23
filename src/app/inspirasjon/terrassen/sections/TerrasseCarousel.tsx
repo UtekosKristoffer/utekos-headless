@@ -1,9 +1,13 @@
+// Path: src/app/inspirasjon/terrassen/sections/TerrasseCarousel.tsx
+
 'use client'
 
 import Image from 'next/image'
 import { Camera } from 'lucide-react'
 import * as React from 'react'
 import Autoplay from 'embla-carousel-autoplay'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
+import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import { terrasseImages } from '@/app/inspirasjon/terrassen/images/terrasseImages'
 import type { CarouselApi } from '@/components/ui/carousel'
 import {
@@ -27,38 +31,62 @@ export function TerrasseCarousel() {
   const containerRef = React.useRef<HTMLElement>(null)
 
   const autoplayPlugin = React.useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: false })
+    Autoplay({
+      delay: 4000,
+      stopOnInteraction: false,
+      playOnInit: false
+    })
   )
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse'
+      const mm = gsap.matchMedia()
+
+      mm.add('(prefers-reduced-motion: reduce)', () => {
+        gsap.set(['.gsap-header', '.gsap-title', '.gsap-carousel'], {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1
+        })
+      })
+
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+          }
+        })
+
+        tl.fromTo(
+          '.gsap-header',
+          { y: 20, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' }
+        )
+
+        tl.fromTo(
+          '.gsap-title',
+          { y: 30, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.8, ease: 'power2.out' },
+          '-=0.4'
+        )
+
+        tl.fromTo(
+          '.gsap-carousel',
+          { y: 40, autoAlpha: 0, scale: 0.98 },
+          { y: 0, autoAlpha: 1, scale: 1, duration: 1, ease: 'power3.out' },
+          '-=0.6'
+        )
+
+        return () => {
+          tl.kill()
         }
       })
 
-      tl.fromTo(
-        '.gsap-header',
-        { y: 20, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' }
-      )
-
-      tl.fromTo(
-        '.gsap-title',
-        { y: 30, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 0.8, ease: 'power2.out' },
-        '-=0.4'
-      )
-
-      tl.fromTo(
-        '.gsap-carousel',
-        { y: 40, autoAlpha: 0, scale: 0.98 },
-        { y: 0, autoAlpha: 1, scale: 1, duration: 1, ease: 'power3.out' },
-        '-=0.6'
-      )
+      return () => {
+        mm.revert()
+      }
     },
     { scope: containerRef }
   )
@@ -81,88 +109,145 @@ export function TerrasseCarousel() {
     }
   }, [api])
 
+  React.useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+    const syncAutoplay = () => {
+      const autoplay = api.plugins().autoplay
+
+      if (!autoplay) {
+        return
+      }
+
+      if (media.matches) {
+        autoplay.stop()
+        return
+      }
+
+      autoplay.play()
+    }
+
+    syncAutoplay()
+    media.addEventListener('change', syncAutoplay)
+
+    return () => {
+      media.removeEventListener('change', syncAutoplay)
+      api.plugins().autoplay?.stop()
+    }
+  }, [api])
+
+  const stopAutoplay = () => {
+    api?.plugins().autoplay?.stop()
+  }
+
+  const resumeAutoplay = () => {
+    const shouldReduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+
+    if (shouldReduceMotion) {
+      return
+    }
+
+    api?.plugins().autoplay?.play()
+  }
+
   return (
     <section
       ref={containerRef}
-      className='relative mx-auto overflow-hidden px-4 py-16 sm:py-32'
+      className='relative isolate mx-auto overflow-hidden bg-maritime-darkest px-4 py-16 sm:py-32'
     >
-      <div className='absolute inset-0 -z-10 opacity-25 pointer-events-none'>
+      <div className='pointer-events-none absolute inset-0 -z-10 opacity-22'>
         <div
-          className='absolute left-1/4 top-1/4 h-[500px] w-[500px] blur-3xl'
+          className='absolute left-[8%] top-[16%] size-[31rem] rounded-full blur-3xl'
           style={{
-            background: 'radial-gradient(circle, var(--ancient-water) 0%, transparent 70%)'
+            background:
+              'radial-gradient(circle, color-mix(in oklch, var(--ancient-water) 58%, transparent) 0%, transparent 70%)'
           }}
         />
         <div
-          className='absolute right-1/4 bottom-1/4 h-[500px] w-[500px] blur-3xl'
+          className='absolute bottom-[10%] right-[8%] size-[31rem] rounded-full blur-3xl'
           style={{
-            background: 'radial-gradient(circle, var(--ancient-water) 0%, transparent 70%)'
+            background:
+              'radial-gradient(circle, color-mix(in oklch, var(--dusted-peri) 42%, transparent) 0%, transparent 70%)'
           }}
         />
       </div>
 
       <div className='container mx-auto max-w-7xl'>
         <div className='mb-12 text-center'>
-          <div className='gsap-header bg-ancient-water mb-4 inline-flex items-center gap-2 rounded-full border border-ancient-water px-4 py-2 opacity-0'>
-            <Camera className='size-4 text-maritime-darkest' />
-            <span className='text-sm font-medium text-maritime-darkest'>
-              Terrasselivet med Utekos
+          <BrandBadge
+            backgroundColor='var(--ancient-water)'
+            textColor='var(--maritime-darkest)'
+            className='gsap-header mb-4 gap-2 border border-ancient-water/52 px-4 py-2 text-sm leading-[1.4] font-base tracking-tight opacity-0'
+          >
+            <Camera className='size-4' aria-hidden='true' />
+            <span className='inline-flex items-baseline gap-[0.28em] leading-none'>
+              <span className='text-[0.95em]'>Terrasselivet med</span>
+              <UtekosWordmark className='inline-block h-[0.78em] w-auto translate-y-[0.035em] text-maritime-darkest' />
             </span>
-          </div>
+          </BrandBadge>
 
-          <h2 className='gsap-title mt-4 text-3xl font-bold tracking-normal sm:text-4xl lg:text-5xl opacity-0'>
+          <h2 className='gsap-title mt-4 text-3xl font-bold leading-[0.95] tracking-tight text-cloud-dancer opacity-0 sm:text-4xl lg:text-5xl'>
             Forleng dine beste øyeblikk
           </h2>
         </div>
 
         <div className='gsap-carousel relative opacity-0'>
-          <div className='relative mx-auto max-w-6xl overflow-hidden rounded-3xl border border-cloud-dancer/10 bg-maritime-darkest/58 p-6 shadow-2xl backdrop-blur-sm'>
-            <div className='absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-ancient-water/30 to-transparent' />
+          <div className='relative mx-auto max-w-6xl overflow-hidden rounded-[1.75rem] border border-cloud-dancer/10 bg-maritime-blue/40 p-4 shadow-[0_32px_90px_-56px_color-mix(in_oklch,var(--maritime-darkest)_96%,transparent)] backdrop-blur-sm sm:p-6'>
+            <div className='absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,color-mix(in_oklch,var(--ancient-water)_38%,transparent),transparent)]' />
 
             <Carousel
               setApi={setApi}
               plugins={[autoplayPlugin.current]}
-              onMouseEnter={autoplayPlugin.current.stop}
-              onMouseLeave={autoplayPlugin.current.reset}
+              onMouseEnter={stopAutoplay}
+              onMouseLeave={resumeAutoplay}
               className='w-full'
               opts={{ align: 'start', loop: true }}
             >
               <CarouselContent className='-ml-4'>
-                {terrasseImages.map((image, index) => (
+                {terrasseImages.map(image => (
                   <CarouselItem
-                    key={index}
+                    key={image.src}
                     className='pl-4 md:basis-1/2 lg:basis-1/3'
                   >
-                    <div className='group relative overflow-hidden rounded-2xl border border-cloud-dancer/12 bg-maritime-darkest'>
+                    <div className='group relative overflow-hidden rounded-[1.25rem] border border-cloud-dancer/12 bg-maritime-darkest'>
                       <AspectRatio ratio={1 / 1}>
                         <Image
                           src={image.src}
                           alt={image.alt}
                           fill
-                          className='object-cover transition-transform duration-700 will-change-transform group-hover:scale-110'
+                          className='object-cover transition-transform duration-700 will-change-transform group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100'
                           sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
                         />
-                        <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
+                        <div className='absolute inset-0 bg-gradient-to-t from-maritime-darkest/72 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 motion-reduce:transition-none' />
                       </AspectRatio>
                     </div>
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className='left-4 border-cloud-dancer/12 bg-maritime-darkest/70 text-cloud-dancer backdrop-blur-md hover:bg-maritime-blue' />
-              <CarouselNext className='right-4 border-cloud-dancer/12 bg-maritime-darkest/70 text-cloud-dancer backdrop-blur-md hover:bg-maritime-blue' />
+
+              <CarouselPrevious className='left-4 border-cloud-dancer/14 bg-maritime-darkest/78 text-cloud-dancer backdrop-blur-md hover:bg-maritime-blue focus-visible:ring-primary-button/70' />
+              <CarouselNext className='right-4 border-cloud-dancer/14 bg-maritime-darkest/78 text-cloud-dancer backdrop-blur-md hover:bg-maritime-blue focus-visible:ring-primary-button/70' />
             </Carousel>
 
             <div className='mt-8 flex items-center justify-center gap-2'>
               {api?.scrollSnapList().map((_, index) => (
                 <button
                   key={index}
+                  type='button'
                   onClick={() => api.scrollTo(index)}
                   className={cn(
-                    'h-1.5 rounded-full transition-all duration-300',
+                    'h-1.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest motion-reduce:transition-none',
                     current === index + 1 ?
-                      'w-6 bg-ancient-water'
+                      'w-6 bg-primary-button'
                     : 'w-1.5 bg-overcast hover:bg-cloud-dancer'
                   )}
+                  aria-current={current === index + 1 ? 'true' : undefined}
                   aria-label={`Gå til bilde ${index + 1}`}
                 />
               ))}

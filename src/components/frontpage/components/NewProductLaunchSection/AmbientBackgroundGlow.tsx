@@ -1,7 +1,10 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import gsap from 'gsap'
+
+type GsapContext = {
+  revert: () => void
+}
 
 export function AmbientBackgroundGlow() {
   const container = useRef<HTMLDivElement>(null)
@@ -10,38 +13,59 @@ export function AmbientBackgroundGlow() {
     const containerElement = container.current
     if (!containerElement) return
 
-    const ctx = gsap.context(() => {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        gsap.set('.ambient-blob-1, .ambient-blob-2', {
-          x: 0,
-          y: 0,
-          clearProps: 'transform'
-        })
+    let ctx: GsapContext | null = null
+    let cancelled = false
 
+    const run = async () => {
+      let gsap: (typeof import('gsap'))['default']
+
+      try {
+        const gsapModule = await import('gsap')
+        gsap = gsapModule.default
+      } catch {
         return
       }
 
-      gsap.to('.ambient-blob-1', {
-        x: '30%',
-        y: '20%',
-        duration: 15,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut'
-      })
+      if (cancelled) return
 
-      gsap.to('.ambient-blob-2', {
-        x: '-20%',
-        y: '-30%',
-        duration: 20,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-        delay: 2
-      })
-    }, containerElement)
+      ctx = gsap.context(() => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          gsap.set('.ambient-blob-1, .ambient-blob-2', {
+            x: 0,
+            y: 0,
+            clearProps: 'transform'
+          })
 
-    return () => ctx.revert()
+          return
+        }
+
+        gsap.to('.ambient-blob-1', {
+          x: '30%',
+          y: '20%',
+          duration: 15,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        })
+
+        gsap.to('.ambient-blob-2', {
+          x: '-20%',
+          y: '-30%',
+          duration: 20,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+          delay: 2
+        })
+      }, containerElement)
+    }
+
+    void run()
+
+    return () => {
+      cancelled = true
+      ctx?.revert()
+    }
   }, [])
 
   return (

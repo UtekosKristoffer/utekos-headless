@@ -1,13 +1,15 @@
 import { Suspense, Activity } from 'react'
-import { NewProductInStoreNotice } from '@/components/frontpage/NewProductInStoreNotice'
+import {
+  LazyNewProductInStoreNotice,
+  LazyNewStandardSection,
+  LazyTestimonialConstellation
+} from '@/components/frontpage/lazy/LazyHeavyClients'
 import { ProductVideoSection } from '@/app/produkter/(oversikt)/components/ProductVideoSection'
 import { HeroSection } from '@/components/frontpage/components/HeroSection/HeroSection'
 import { MomentsSection } from '@/components/frontpage/MomentsSection'
-import { NewStandardSection } from '@/components/frontpage/NewStandardSection'
 import { CachedPromiseSection } from '@/components/frontpage/components/CachedPromiseSection'
 import { QualitySection } from '@/components/frontpage/QualitySection'
 import { SocialProofSection } from '@/components/frontpage/SocialProofSection'
-import { TestimonialConstellation } from '@/components/frontpage/TestimonialConstellation'
 import { ComfyrobeSection } from '@/components/frontpage/components/SpecialOfferSection/ComfyrobeSection'
 import { FeaturedProductsSkeleton } from '@/components/skeletons/FeaturedProductsSkeleton'
 import { AsyncProductLaunchWrapper } from '@/components/frontpage/AsyncProductLaunchWrapper'
@@ -24,7 +26,7 @@ const HomePage = () => {
         </Suspense>
       </Activity>
 
-      <NewProductInStoreNotice />
+      <LazyNewProductInStoreNotice />
 
       <Activity mode='visible'>
         <ProductVideoSection />
@@ -41,12 +43,13 @@ const HomePage = () => {
       </Activity>
 
       <ComfyrobeSection />
-      <NewStandardSection />
+      <LazyNewStandardSection />
       <CachedPromiseSection />
       <MomentsSection />
       <QualitySection />
+
       <Activity>
-        <TestimonialConstellation />
+        <LazyTestimonialConstellation />
       </Activity>
     </section>
   )

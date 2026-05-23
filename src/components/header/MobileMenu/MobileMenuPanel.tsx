@@ -15,7 +15,6 @@ import type { MenuItem } from '@types'
 import { HeaderLogo } from '../HeaderLogo'
 import { Accordion } from '@/components/ui/accordion'
 import { useLayoutEffect, useRef } from 'react'
-import gsap from 'gsap'
 
 function nextFrame() {
   return new Promise<void>(resolve => requestAnimationFrame(() => resolve()))
@@ -32,12 +31,21 @@ export function MobileMenuPanel({
 }) {
   const subtitleRef = useRef<HTMLSpanElement | null>(null)
   const listRef = useRef<HTMLDivElement | null>(null)
-  const tlRef = useRef<gsap.core.Timeline | null>(null)
+  const tlRef = useRef<{ kill: () => void } | null>(null)
   const runIdRef = useRef(0)
 
   useLayoutEffect(() => {
     runIdRef.current += 1
     const runId = runIdRef.current
+
+    if (!isOpen) {
+      if (tlRef.current) {
+        tlRef.current.kill()
+        tlRef.current = null
+      }
+
+      return
+    }
 
     const run = async () => {
       await nextFrame()
@@ -55,10 +63,24 @@ export function MobileMenuPanel({
 
       if (tlRef.current) tlRef.current.kill()
 
+      let gsap: (typeof import('gsap'))['default']
+
+      try {
+        const gsapModule = await import('gsap')
+        gsap = gsapModule.default
+      } catch {
+        subtitle.style.opacity = '1'
+        items.forEach(item => {
+          item.style.opacity = '1'
+        })
+
+        return
+      }
+
+      if (runId !== runIdRef.current) return
+
       gsap.set(subtitle, { opacity: 0, y: 10, filter: 'blur(6px)' })
       gsap.set(items, { opacity: 0, x: -18, filter: 'blur(8px)' })
-
-      if (!isOpen) return
 
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
       tl.to(subtitle, {
@@ -82,7 +104,7 @@ export function MobileMenuPanel({
       tlRef.current = tl
     }
 
-    run()
+    void run()
 
     return () => {
       runIdRef.current += 1
@@ -121,7 +143,10 @@ export function MobileMenuPanel({
 
           <SheetDescription className='text-sm leading-[1.45] tracking-[-0.01em] text-cloud-dancer/66'>
             <span className='block overflow-hidden'>
-              <span ref={subtitleRef} className='block'>
+              <span
+                ref={subtitleRef}
+                className={isOpen ? 'block opacity-0' : 'block'}
+              >
                 Utforsk vår kolleksjon
               </span>
             </span>
@@ -136,7 +161,11 @@ export function MobileMenuPanel({
               className='flex flex-col gap-2'
             >
               {menu.map(item => (
-                <div key={item.title} data-mm-item='true'>
+                <div
+                  key={item.title}
+                  data-mm-item='true'
+                  className={isOpen ? 'opacity-0' : undefined}
+                >
                   <MobileMenuItem item={item} />
                 </div>
               ))}

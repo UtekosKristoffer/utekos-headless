@@ -2,13 +2,11 @@
 'use client'
 
 import React, { useRef, useLayoutEffect } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Star } from 'lucide-react'
 import { TestimonialSection } from './TestimonialSection'
 
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger)
+type GsapContext = {
+  revert: () => void
 }
 
 export function TestimonialConstellation() {
@@ -16,29 +14,59 @@ export function TestimonialConstellation() {
   const headerRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '.animate-header-item',
-        {
-          y: 30,
-          opacity: 0
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.15,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: headerRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse'
-          }
-        }
-      )
-    }, containerRef)
+    let ctx: GsapContext | null = null
+    let cancelled = false
 
-    return () => ctx.revert()
+    const run = async () => {
+      let gsap: (typeof import('gsap'))['default']
+      let ScrollTrigger: (typeof import('gsap/ScrollTrigger'))['ScrollTrigger']
+
+      try {
+        const [gsapModule, scrollTriggerModule] = await Promise.all([
+          import('gsap'),
+          import('gsap/ScrollTrigger')
+        ])
+
+        gsap = gsapModule.default
+        ScrollTrigger = scrollTriggerModule.ScrollTrigger
+      } catch {
+        return
+      }
+
+      const container = containerRef.current
+      if (cancelled || !container) return
+
+      gsap.registerPlugin(ScrollTrigger)
+
+      ctx = gsap.context(() => {
+        gsap.fromTo(
+          '.animate-header-item',
+          {
+            y: 30,
+            opacity: 0
+          },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: headerRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse'
+            }
+          }
+        )
+      }, container)
+    }
+
+    void run()
+
+    return () => {
+      cancelled = true
+      ctx?.revert()
+    }
   }, [])
 
   return (
@@ -56,7 +84,7 @@ export function TestimonialConstellation() {
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`w-3.5 h-3.5 ${
+                  className={`size-3.5 ${
                     i === 4 ?
                       'fill-cloud-dancer text-cloud-dancer' // Halv stjerne visuelt
                     : 'fill-cloud-dancer text-cloud-dancer/80' // Full stjerne visuelt
@@ -65,7 +93,7 @@ export function TestimonialConstellation() {
               ))}
             </div>
             <span className='mx-2 h-4 w-px bg-maritime-darkest/20' />
-            <span className='text-xs font-medium uppercase tracking-wide text-maritime-darkest/75'>
+            <span className='text-xs font-medium tracking-[-0.01em] text-maritime-darkest/75'>
               4.8 av 5 stjerner
             </span>
           </div>

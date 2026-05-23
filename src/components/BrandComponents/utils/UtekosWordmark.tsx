@@ -1,8 +1,9 @@
+// Path: src/components/BrandComponents/utils/UtekosWordmark.tsx
+
 import type { SVGProps } from 'react'
 
 interface UtekosWordmarkProps extends SVGProps<SVGSVGElement> {
   className?: string
-  /** Sett til true for å legge til .gsap-char klassen på hver path for bokstav-animering */
   animated?: boolean
 }
 
@@ -17,12 +18,11 @@ export default function UtekosWordmark({
   return (
     <svg
       viewBox='0 0 1280 311.16'
-      fill='currentColor' /* Sikrer at fargen fra stil eller klasse brukes */
+      fill='currentColor'
       xmlns='http://www.w3.org/2000/svg'
       className={className}
       aria-label='Utekos'
       role='img'
-      style={{ color: 'var(--cloud-dancer)' }}
       {...props}
     >
       <path

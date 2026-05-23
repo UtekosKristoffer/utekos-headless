@@ -1,48 +1,59 @@
-import type { CollectionPage, WithContext } from 'schema-dts'
+// Path: src/app/inspirasjon/terrassen/data/jsonLd.ts
 
-type Props = {
-  title: string
-  description: string
-  url: string
-  image: string
-  datePublished?: string
-}
+import type { Article, WithContext } from 'schema-dts'
 
-export function InspirationJsonLd({
-  title,
-  description,
-  url,
-  image,
-  datePublished
-}: Props) {
-  const jsonLd: WithContext<CollectionPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    'name': title,
-    'description': description,
-    'url': url,
-    'primaryImageOfPage': {
-      '@type': 'ImageObject',
-      'url': image
-    },
-    'publisher': {
-      '@id': 'https://utekos.no/#organization'
-    },
-
-    'about': {
+export const jsonLd: WithContext<Article> = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': 'Utekos på Terrassen: Slik skaper du et ekstra rom uten vegger',
+  'description':
+    'En komplett guide til hvordan du kan maksimere bruken av terrassen eller balkongen din med Utekos. Tips og inspirasjon for å forlenge utendørssesongen hjemme.',
+  'url': 'https://utekos.no/inspirasjon/terrassen',
+  'image': 'https://utekos.no/og-image-terrassen.webp',
+  'inLanguage': 'nb-NO',
+  'isAccessibleForFree': true,
+  'keywords': [
+    'terrasse',
+    'terrasseliv',
+    'balkong',
+    'utestue',
+    'hjemmekos',
+    'forlenge kvelden ute',
+    'terrassevarmer alternativ',
+    'hageinspirasjon'
+  ],
+  'about': [
+    {
       '@type': 'Thing',
-      'name': title
+      'name': 'Terrasse'
     },
-
-    ...(datePublished ? { datePublished: datePublished } : {})
+    {
+      '@type': 'Thing',
+      'name': 'Balkong'
+    },
+    {
+      '@type': 'Thing',
+      'name': 'Utekos'
+    }
+  ],
+  'author': {
+    '@type': 'Organization',
+    'name': 'Utekos',
+    'url': 'https://utekos.no'
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'Utekos',
+    'url': 'https://utekos.no',
+    'logo': {
+      '@type': 'ImageObject',
+      'url': 'https://utekos.no/logo.png'
+    }
+  },
+  'datePublished': '2026-04-17',
+  'dateModified': '2026-05-23',
+  'mainEntityOfPage': {
+    '@type': 'WebPage',
+    '@id': 'https://utekos.no/inspirasjon/terrassen'
   }
-
-  return (
-    <script
-      type='application/ld+json'
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c')
-      }}
-    />
-  )
 }

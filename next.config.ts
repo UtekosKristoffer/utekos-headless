@@ -32,6 +32,8 @@ const nextConfig: NextConfig = {
       '@radix-ui/react-tabs',
       '@radix-ui/react-toast',
       'xstate',
+      'motion',
+      'framer-motion',
       'cmdk',
       'embla-carousel-react',
       'sonner',

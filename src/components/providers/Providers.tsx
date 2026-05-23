@@ -11,9 +11,7 @@ import type { DehydratedState } from '@tanstack/react-query'
 import { CookieConsentProvider } from '@/components/cookie-consent/CookieConsentProvider'
 import CookieConsent from '@/components/cookie-consent/CookieConsent'
 import { ConditionalTracking } from '../analytics/ConditionalTracking'
-import { SnapPixel } from '@/components/analytics/SnapPixel/SnapPixel'
-import { PinterestTag } from '@/components/analytics/Pinterest/PinterestTag'
-import { TikTokPixel } from '@/components/analytics/TikTokPixel/TikTokPixel'
+import { MarketingPixels } from '@/components/analytics/MarketingPixels'
 
 const ReactQueryDevtools =
   process.env.NODE_ENV === 'development' ?
@@ -59,9 +57,7 @@ export default function Providers({
         : null}
       </QueryClientProvider>
       <CookieConsent />
-      <SnapPixel />
-      <PinterestTag />
-      <TikTokPixel />
+      <MarketingPixels />
       <ConditionalTracking
         {...(process.env.NEXT_PUBLIC_POSTHOG_KEY && {
           postHogApiKey: process.env.NEXT_PUBLIC_POSTHOG_KEY

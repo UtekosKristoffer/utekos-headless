@@ -1,20 +1,23 @@
+// Path: src/app/inspirasjon/terrassen/sections/SeasonsSection.tsx
+
 import { Tabs } from './Tabs'
 
 export function SeasonsSection() {
   return (
-    <section className='relative py-24 overflow-hidden'>
-      {/* Ambient background glow */}
-      <div className='absolute inset-0 -z-10 opacity-20'>
+    <section className='relative isolate overflow-hidden bg-maritime-blue py-24'>
+      <div className='pointer-events-none absolute inset-0 -z-10 opacity-20'>
         <div
-          className='seasons-glow-pulse absolute left-1/4 top-1/4 h-[500px] w-[500px] blur-3xl'
+          className='seasons-glow-pulse absolute left-[8%] top-[14%] size-[31rem] rounded-full blur-3xl'
           style={{
-            background: 'radial-gradient(circle, var(--soft-warm) 0%, transparent 70%)'
+            background:
+              'radial-gradient(circle, color-mix(in oklch, var(--primary-button) 44%, transparent) 0%, transparent 70%)'
           }}
         />
         <div
-          className='seasons-glow-pulse absolute right-1/4 bottom-1/4 h-[500px] w-[500px] blur-3xl'
+          className='seasons-glow-pulse absolute bottom-[8%] right-[8%] size-[31rem] rounded-full blur-3xl'
           style={{
-            background: 'radial-gradient(circle, var(--ancient-water) 0%, transparent 70%)',
+            background:
+              'radial-gradient(circle, color-mix(in oklch, var(--ancient-water) 54%, transparent) 0%, transparent 70%)',
             animationDelay: '4s'
           }}
         />
@@ -22,10 +25,10 @@ export function SeasonsSection() {
 
       <div className='container mx-auto px-4'>
         <div className='animate-fade-in-up mb-16 text-center'>
-          <h2 className='text-3xl font-bold tracking-normal sm:text-4xl lg:text-5xl'>
+          <h2 className='text-3xl font-bold leading-[0.95] font-utekos-text tracking-tight text-cloud-dancer sm:text-4xl lg:text-5xl'>
             Din uteplass gjennom året
           </h2>
-          <p className='mx-auto mt-4 max-w-2xl text-lg text-overcast'>
+          <p className='mx-auto mt-4 max-w-2xl text-lg leading-[1.45] font-utekos-text tracking-tight text-cloud-dancer/88'>
             Forleng sesongen på terrassen
           </p>
         </div>

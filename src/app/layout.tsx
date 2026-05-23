@@ -8,16 +8,14 @@ import { Suspense, type ReactNode } from 'react'
 import { mainMenu } from '@/db/config/menu.config'
 import { Analytics } from '@vercel/analytics/react'
 import Footer from '@/components/footer/components/Footer'
-import { VisitorAnalyticsTracker } from '@/components/analytics/VisitorAnalyticsTracker'
+import { TrackingRoot } from '@/components/analytics/TrackingRoot'
 import Header from '@/components/header/Header'
 import AnnouncementBanner from '@/components/frontpage/components/SpecialOfferSection/AnnouncementBanner'
 import { ChatBotAgent } from '@/components/chat/ChatBotAgent/source-code'
-import { MetaPixelEvents } from '@/components/analytics/Meta/MetaPixelEvents'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { CartProviderLoader } from '@/components/providers/CartProviderLoader'
 import { MicrosoftUetTag } from '@/components/analytics/MicrosoftUetTag'
 import { CookieConsentBanner } from '@/components/CookieBanner'
-import { ClickTracker } from '@/components/analytics/ClickTracker'
 import type { Metadata } from 'next'
 import Script from 'next/script'
 
@@ -29,11 +27,6 @@ const GTM_SCRIPT_ORIGIN = (
 
 const SHOULD_LOAD_GOOGLE_TAG_MANAGER =
   process.env.NODE_ENV === 'production' && process.env.VERCEL_ENV !== 'preview'
-
-const SHOULD_LOAD_META_PIXEL =
-  !!process.env.NEXT_PUBLIC_META_PIXEL_ID
-  && (process.env.NODE_ENV === 'production'
-    || !!process.env.NEXT_PUBLIC_META_TEST_EVENT_CODE)
 
 const SHOULD_LOAD_VERCEL_ANALYTICS =
   process.env.NODE_ENV === 'production' && process.env.VERCEL === '1'
@@ -131,7 +124,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <MicrosoftUetTag />
       </head>
       <body className='bg-background text-foreground antialiased'>
-        {SHOULD_LOAD_META_PIXEL && <MetaPixelEvents />}
         {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (
           <noscript>
             <iframe
@@ -144,8 +136,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         )}
         <OnlineStoreJsonLd />
         <Suspense>
-          <ClickTracker />
-          <VisitorAnalyticsTracker />
+          <TrackingRoot />
           <CartProviderLoader>
             <AnnouncementBanner />
             <Header menu={mainMenu} />

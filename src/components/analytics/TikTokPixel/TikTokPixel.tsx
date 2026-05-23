@@ -22,7 +22,7 @@ export function TikTokPixel() {
   return (
     <Script
       id='tiktok-pixel-init'
-      strategy='afterInteractive'
+      strategy='lazyOnload'
       dangerouslySetInnerHTML={{
         __html: `
           !function (w, d, t) {

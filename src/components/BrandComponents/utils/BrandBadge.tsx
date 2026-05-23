@@ -1,3 +1,5 @@
+// Path: src/components/BrandComponents/utils/BrandBadge.tsx
+
 import { Slot } from '@radix-ui/react-slot'
 import { cn } from '@/lib/utils/className'
 import type { CSSProperties, HTMLAttributes, ReactNode } from 'react'
@@ -13,14 +15,16 @@ interface BrandBadgeProps extends HTMLAttributes<HTMLSpanElement> {
 export default function BrandBadge({
   label,
   asChild = false,
-  backgroundColor = '#E5F596',
-  textColor = '#0F0A1A',
+  backgroundColor = 'var(--primary-button)',
+  textColor = 'var(--maritime-darkest)',
   className = '',
   children,
+  style,
   ...rest
 }: BrandBadgeProps) {
   const Component = asChild ? Slot : 'span'
   const badgeStyle = {
+    ...style,
     '--brand-badge-bg': backgroundColor,
     '--brand-badge-text': textColor
   } as CSSProperties
@@ -28,7 +32,7 @@ export default function BrandBadge({
   return (
     <Component
       className={cn(
-        'inline-flex items-center justify-center rounded-full bg-[var(--brand-badge-bg)] px-8 py-4 text-[var(--brand-badge-text)] text-lg font-medium whitespace-nowrap tracking-wide',
+        'inline-flex items-center justify-center rounded-full bg-[var(--brand-badge-bg)] px-8 py-4 text-[var(--brand-badge-text)] text-lg font-medium leading-[1.35] tracking-[-0.01em] whitespace-nowrap',
         className
       )}
       style={badgeStyle}

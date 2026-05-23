@@ -1,13 +1,6 @@
-'use client'
+// Path: src/app/inspirasjon/terrassen/sections/Tabs.tsx
 
-import dynamic from 'next/dynamic'
-
-const SeasonsTabs = dynamic(
-  () => import('./SeasonTabs').then(mod => mod.SeasonsTabs),
-  {
-    ssr: false
-  }
-)
+import { SeasonsTabs } from './SeasonTabs'
 
 export function Tabs() {
   return (

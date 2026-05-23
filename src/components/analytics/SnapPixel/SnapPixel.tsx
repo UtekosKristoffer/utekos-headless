@@ -28,7 +28,7 @@ export function SnapPixel() {
   return (
     <Script
       id='snap-pixel'
-      strategy='afterInteractive'
+      strategy='lazyOnload'
       dangerouslySetInnerHTML={{
         __html: `
         (function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
