@@ -123,7 +123,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         )}
         <MicrosoftUetTag />
       </head>
-      <body className='bg-background text-foreground antialiased'>
+      <body className='bg-background text-cloud-dancer antialiased'>
         {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (
           <noscript>
             <iframe

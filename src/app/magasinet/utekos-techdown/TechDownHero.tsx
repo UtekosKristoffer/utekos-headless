@@ -89,12 +89,12 @@ export function TechDownHero() {
               <span className='gsap-line h-[2px] w-16 origin-left scale-x-0 bg-yellow-400/80 md:w-24' />
             </div>
 
-            <h1 className='mb-4 text-5xl font-bold leading-tight tracking-tight text-white md:text-7xl'>
+            <h2 className='mb-4 text-5xl font-bold leading-tight tracking-tight text-white md:text-7xl'>
               Utekos <br />
               <span className='text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-gray-400'>
                 TechDown™
               </span>
-            </h1>
+            </h2>
 
             <p className='text-lg font-light leading-relaxed text-gray-200 md:text-2xl'>
               Vår{' '}

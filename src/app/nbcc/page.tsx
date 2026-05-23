@@ -61,7 +61,7 @@ export const metadata: Metadata = {
 
 export default function NbccPage() {
   return (
-    <main data-nbcc-page className='bg-background'>
+    <section data-nbcc-page className='bg-background'>
       <NbccGsapEnhancer />
       <NbccHeroSection />
       <NbccBenefitSection />
@@ -72,6 +72,6 @@ export default function NbccPage() {
       <NbccHowToUseSection />
       <NbccFaqSection />
       <NbccFinalCtaSection />
-    </main>
+    </section>
   )
 }

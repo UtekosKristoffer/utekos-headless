@@ -17,7 +17,7 @@ export const SocialProofHeaderView = forwardRef<
     <div ref={ref} className='mb-16 text-center'>
       <h2
         ref={titleRef}
-        className='text-balance overflow-hidden text-3xl font-bold tracking-tight text-foreground sm:text-4xl'
+        className='text-balance overflow-hidden text-5xl font-google-sans font-bold tracking-tight text-cloud-dancer sm:text-6xl md:text-7xl'
         aria-label={title}
       >
         {words.map((word, wordIndex) => (
