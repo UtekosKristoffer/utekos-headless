@@ -67,7 +67,10 @@ export function FindUsSection() {
             <h2 className='mb-6 text-4xl leading-[0.95] font-bold tracking-[-0.01em] text-maritime-blue sm:text-5xl'>
               Der du har møtt oss
             </h2>
-            <p className='mb-10 text-lg leading-[1.45] tracking-[-0.01em] text-maritime-blue/74'>
+            <p
+              className='mb-10 text-lg leading-[1.45] tracking-[-0.01em] text-maritime-blue/85
+            '
+            >
               Vi elsker å prate med folk – derfor er vi jevnlig på messer og
               stands. Her er noen av stedene du kan ha truffet oss, og hvor vi
               har fått verdifulle innspill fra kunder som faktisk har kjent

@@ -39,7 +39,7 @@ export function AboutUsHeroSection() {
           textColor='var(--maritime-darkest)'
         />
 
-        <p className='mx-auto max-w-2xl text-xl leading-[1.45] tracking-[-0.01em] text-cloud-dancer/90 drop-shadow-md md:text-3xl'>
+        <p className='mx-auto font-utekos-text max-w-2xl text-xl leading-[1.45] tracking-tight! text-cloud-dancer/90 drop-shadow-md md:text-3xl'>
           Drevet av kalde kvelder og et løfte om å aldri la været stoppe de gode
           øyeblikkene.
         </p>

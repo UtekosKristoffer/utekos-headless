@@ -191,7 +191,7 @@ export function IntersportSection() {
                 <span className='text-overcast'>Intersport Laksevåg</span>
               </h2>
 
-              <p className='gsap-content mb-10 max-w-lg text-lg leading-[1.45] tracking-[-0.01em] text-overcast/82 opacity-0'>
+              <p className='gsap-content mb-10 max-w-lg text-lg tracking-tight font-utekos-text text-cloud-dancer/85 opacity-0'>
                 Lyst til å kjenne på kvaliteten og finne den perfekte
                 passformen? Som eneste fysiske forhandler i Bergen finner du et
                 utvalg av våre produkter hos våre venner på Laksevåg Senter.

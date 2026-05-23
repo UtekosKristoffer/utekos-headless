@@ -31,7 +31,7 @@ export default function ProductHeader({
           </BrandBadge>
         )}
 
-        <h1 className='text-fluid-headline font-sans font-medium leading-none text-maritime-blue'>
+        <h1 className='text-fluid-headline font-sans font-bold leading-none tracking-tight text-maritime-blue'>
           {productTitle}
         </h1>
 

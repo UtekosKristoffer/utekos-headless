@@ -20,7 +20,7 @@ export function useTechDownSliderAnimations() {
       if (!container) return
 
       const q = gsap.utils.selector(container)
-      const media = gsap.matchMedia()
+      const media = gsap.matchMedia(container)
       const refreshFrames: number[] = []
 
       const queueRefresh = () => {
@@ -130,12 +130,11 @@ export function useTechDownSliderAnimations() {
         )
 
         // ─── SLIDER CARD ─────────────────────────────────────────
-        const slider = q('.gsap-tech-slider')
-        if (slider.length) {
-          const sliderElement = slider[0]!
+        const sliderElement = q('.gsap-tech-slider')[0]
+        if (sliderElement) {
 
           gsap.fromTo(
-            slider,
+            sliderElement,
             { y: 48, autoAlpha: 0, scale: 0.97 },
             {
               y: 0,
@@ -154,12 +153,11 @@ export function useTechDownSliderAnimations() {
         }
 
         // ─── DRAG HANDLE PROMPT (BJ Fogg prompt — only first time) ─
-        const handle = q('.gsap-tech-handle')
-        if (handle.length && slider.length) {
-          const sliderElement = slider[0]!
+        const handleElement = q('.gsap-tech-handle')[0]
+        if (handleElement && sliderElement) {
 
           gsap.fromTo(
-            handle,
+            handleElement,
             { scale: 1 },
             {
               scale: 1.06,

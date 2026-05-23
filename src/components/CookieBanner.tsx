@@ -1,7 +1,13 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
+import {
+  useEffect,
+  useState,
+  type ButtonHTMLAttributes,
+  type ReactNode
+} from 'react'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
+import { cn } from '@/lib/utils/className'
 import Link from 'next/link'
 import { Switch } from '@/components/ui/switch'
 import type { Route } from 'next'
@@ -12,21 +18,110 @@ type ConsentState = {
   analytics: boolean
 }
 
+type ConsentActionTone = 'primary' | 'cloud' | 'ancient'
+
+type ConsentActionButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  children: ReactNode
+  tone?: ConsentActionTone
+}
+
+type ConsentPreferenceCardProps = {
+  title: string
+  description: string
+  checked: boolean
+  disabled?: boolean
+  onCheckedChange?: (checked: boolean) => void
+}
+
+const consentActionClassName =
+  'min-h-11 w-full select-none px-6 py-3 text-sm font-semibold leading-[1.2] tracking-normal shadow-[0_18px_38px_-30px_color-mix(in_oklab,var(--demitasse)_72%,transparent)] transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto'
+
+const consentActionToneConfig: Record<
+  ConsentActionTone,
+  { backgroundColor: string; textColor: string; className?: string }
+> = {
+  primary: {
+    backgroundColor: 'var(--primary-button)',
+    textColor: 'var(--maritime-darkest)',
+    className: 'border border-primary-button/24'
+  },
+  cloud: {
+    backgroundColor: 'var(--cloud-dancer)',
+    textColor: 'var(--maritime-darkest)',
+    className: 'border border-cloud-dancer/24'
+  },
+  ancient: {
+    backgroundColor: 'var(--ancient-water)',
+    textColor: 'var(--maritime-darkest)',
+    className: 'border border-ancient-water/24'
+  }
+}
+
+function ConsentActionButton({
+  tone = 'cloud',
+  className,
+  children,
+  ...props
+}: ConsentActionButtonProps) {
+  const toneConfig = consentActionToneConfig[tone]
+
+  return (
+    <BrandBadge
+      asChild
+      backgroundColor={toneConfig.backgroundColor}
+      textColor={toneConfig.textColor}
+      className={cn(consentActionClassName, toneConfig.className, className)}
+    >
+      <button type='button' {...props}>
+        {children}
+      </button>
+    </BrandBadge>
+  )
+}
+
+function ConsentPreferenceCard({
+  title,
+  description,
+  checked,
+  disabled,
+  onCheckedChange
+}: ConsentPreferenceCardProps) {
+  return (
+    <section className='rounded-lg border border-cloud-dancer/12 bg-maritime-blue/55 p-4 shadow-[0_18px_38px_-34px_color-mix(in_oklab,var(--maritime-darkest)_82%,transparent)]'>
+      <div className='flex items-center justify-between gap-4'>
+        <h4 className='font-google-sans text-base font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer'>
+          {title}
+        </h4>
+        <Switch
+          checked={checked}
+          disabled={disabled}
+          onCheckedChange={onCheckedChange}
+          aria-label={`${title} informasjonskapsler`}
+          className='border-cloud-dancer/15 data-[state=checked]:bg-primary-button data-[state=unchecked]:bg-maritime-blue focus-visible:ring-primary-button/35'
+        />
+      </div>
+      <p className='mt-3 font-utekos-text text-xs leading-[1.45] tracking-tight text-cloud-dancer/72'>
+        {description}
+      </p>
+    </section>
+  )
+}
+
 export function CookieConsentBanner() {
   const [isVisible, setIsVisible] = useState(false)
   const [showDetails, setShowDetails] = useState(false)
   const [consent, setConsent] = useState<ConsentState>({
     necessary: true,
-    marketing: true,
-    analytics: true
+    marketing: false,
+    analytics: false
   })
 
   useEffect(() => {
     const savedConsent = localStorage.getItem('utekos_cookie_consent')
 
     if (!savedConsent) {
-      const timer = setTimeout(() => setIsVisible(true), 2000)
-      return () => clearTimeout(timer)
+      const timer = window.setTimeout(() => setIsVisible(true), 250)
+      return () => window.clearTimeout(timer)
     }
   }, [])
 
@@ -34,7 +129,7 @@ export function CookieConsentBanner() {
     saveConsent({ necessary: true, marketing: true, analytics: true })
   }
 
-  const handleDeclineAll = () => {
+  const handleUseNecessaryOnly = () => {
     saveConsent({ necessary: true, marketing: false, analytics: false })
   }
 
@@ -56,7 +151,6 @@ export function CookieConsentBanner() {
           ad_personalization: settings.marketing ? 'granted' : 'denied'
         }
       })
-      // Sender signal til NewsletterPopup om at valget er tatt
       window.dispatchEvent(new Event('cookie_consent_saved'))
     }
 
@@ -67,138 +161,122 @@ export function CookieConsentBanner() {
 
   return (
     <div
-      className='fixed inset-0 z-[99] h-screen w-screen cursor-default'
-      aria-hidden='true'
+      className='pointer-events-none fixed inset-x-0 bottom-0 z-[100001] px-3 pb-3 sm:px-6 sm:pb-6'
+      role='dialog'
+      aria-modal='false'
+      aria-labelledby='cookie-consent-title'
+      aria-describedby='cookie-consent-description'
     >
-      <div className='absolute bottom-0 left-0 right-0 z-[100] border-t border-neutral-800 bg-neutral-950/95 p-4 backdrop-blur-md shadow-2xl animate-in slide-in-from-bottom-10 duration-700 md:p-6'>
-        <div className='mx-auto max-w-7xl'>
+      <div className='pointer-events-auto mx-auto max-w-7xl rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/96 p-4 text-cloud-dancer shadow-[0_28px_80px_-36px_color-mix(in_oklab,var(--maritime-darkest)_92%,transparent)] backdrop-blur-md animate-in slide-in-from-bottom-6 duration-500 motion-reduce:animate-none md:p-6'>
+        <div>
           {!showDetails ?
-            /* --- ENKEL VISNING --- */
             <div className='flex flex-col gap-6 md:flex-row md:items-center md:justify-between'>
-              <div className='space-y-2 md:max-w-3xl'>
-                <h3 className='text-lg font-semibold text-white'>
+              <div className='space-y-3 md:max-w-3xl'>
+                <h3
+                  id='cookie-consent-title'
+                  className='font-google-sans text-xl font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer md:text-2xl'
+                >
                   Vi bryr oss om ditt personvern
                 </h3>
-                <p className='text-sm leading-relaxed text-neutral-400'>
-                  Vi bruker informasjonskapsler (cookies) for å gi deg den beste
-                  opplevelsen på Utekos.no, analysere trafikken vår og levere
-                  tilpasset markedsføring. Du kan når som helst endre dine
-                  preferanser. Les vår{' '}
+                <p
+                  id='cookie-consent-description'
+                  className='max-w-3xl font-utekos-text text-sm leading-[1.45] tracking-tight text-cloud-dancer/82 md:text-base'
+                >
+                  Vi bruker informasjonskapsler for å holde siden trygg, måle
+                  hva som fungerer og vise relevant innhold. Du kan godta alt,
+                  bruke kun nødvendige eller tilpasse valgene dine. Les{' '}
                   <Link
                     href={'/personvern' as Route}
-                    className='text-emerald-400 hover:underline hover:text-emerald-300 transition-colors'
+                    className='font-medium text-primary-button underline underline-offset-4 transition-colors hover:text-cloud-dancer'
                   >
-                    personvernerklæring
+                    personvernerklæringen
                   </Link>
                   .
                 </p>
               </div>
 
-              {/* Justert knapperad for symmetri */}
-              <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:min-w-fit'>
-                <Button
-                  variant='outline'
+              <div className='flex flex-col gap-3 sm:min-w-fit sm:flex-row sm:items-center'>
+                <ConsentActionButton
                   onClick={() => setShowDetails(true)}
-                  className='h-11 w-full sm:w-auto border-neutral-700 bg-neutral-800 text-white hover:text-white/60'
+                  tone='ancient'
                 >
                   Tilpass
-                </Button>
-                <Button
-                  variant='outline'
-                  onClick={handleDeclineAll}
-                  className='h-11 w-full sm:w-auto border-neutral-700 bg-neutral-800 text-white hover:text-white/60'
-                >
-                  Avvis
-                </Button>
-                <Button
-                  onClick={handleAcceptAll}
-                  // Endret fra py-6 til h-11 for å matche de andre knappene perfekt i høyden
-                  // Endret w-full til w-full sm:w-auto for å unngå at den sprenger bredden på desktop
-                  className='h-11 w-full sm:w-auto bg-emerald-600 px-8 font-bold text-white hover:bg-emerald-700'
-                >
+                </ConsentActionButton>
+                <ConsentActionButton onClick={handleUseNecessaryOnly}>
+                  Kun nødvendige
+                </ConsentActionButton>
+                <ConsentActionButton onClick={handleAcceptAll} tone='primary'>
                   Godta alle
-                </Button>
+                </ConsentActionButton>
               </div>
             </div>
-          : <div className='space-y-6 animate-in fade-in duration-300'>
-              <div className='space-y-2'>
-                <h3 className='text-lg font-semibold text-white'>
+          : <div className='space-y-6 animate-in fade-in duration-300 motion-reduce:animate-none'>
+              <div className='space-y-3'>
+                <h3
+                  id='cookie-consent-title'
+                  className='font-google-sans text-xl font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer md:text-2xl'
+                >
                   Tilpass dine valg
                 </h3>
-                <p className='text-sm text-neutral-400'>
-                  Velg hvilke informasjonskapsler du tillater.
+                <p
+                  id='cookie-consent-description'
+                  className='font-utekos-text text-sm leading-[1.45] tracking-tight text-cloud-dancer/82 md:text-base'
+                >
+                  Velg hvilke informasjonskapsler du vil bruke. Nødvendige
+                  kapsler holder handlekurv, sikkerhet og sidefunksjoner i gang.
                 </p>
               </div>
 
               <div className='grid gap-4 md:grid-cols-3'>
-                {/* Nødvendige */}
-                <div className='rounded-lg border border-neutral-800 bg-neutral-900/50 p-4'>
-                  <div className='flex items-center justify-between'>
-                    <span className='font-medium text-white'>Nødvendige</span>
-                    <Switch
-                      checked={true}
-                      disabled
-                      aria-label='Nødvendige cookies'
-                    />
-                  </div>
-                  <p className='mt-2 text-xs text-neutral-500'>
-                    Kreves for at nettsiden skal fungere (handlekurv, login).
-                    Kan ikke slås av.
-                  </p>
-                </div>
-
-                {/* Statistikk */}
-                <div className='rounded-lg border border-neutral-800 bg-neutral-900/50 p-4'>
-                  <div className='flex items-center justify-between'>
-                    <span className='font-medium text-white'>Statistikk</span>
-                    <Switch
-                      checked={consent.analytics}
-                      onCheckedChange={checked =>
-                        setConsent(prev => ({ ...prev, analytics: checked }))
-                      }
-                      aria-label='Statistikk cookies'
-                    />
-                  </div>
-                  <p className='mt-2 text-xs text-neutral-500'>
-                    Hjelper oss å forstå hvordan besøkende bruker nettsiden.
-                  </p>
-                </div>
-
-                {/* Markedsføring */}
-                <div className='rounded-lg border border-neutral-800 bg-neutral-900/50 p-4'>
-                  <div className='flex items-center justify-between'>
-                    <span className='font-medium text-white'>
-                      Markedsføring
-                    </span>
-                    <Switch
-                      checked={consent.marketing}
-                      onCheckedChange={checked =>
-                        setConsent(prev => ({ ...prev, marketing: checked }))
-                      }
-                      aria-label='Markedsføring cookies'
-                    />
-                  </div>
-                  <p className='mt-2 text-xs text-neutral-500'>
-                    Brukes for å vise deg relevante annonser på andre
-                    nettsteder.
-                  </p>
-                </div>
+                <ConsentPreferenceCard
+                  title='Nødvendige'
+                  description='Holder handlekurv, sikkerhet og grunnleggende funksjoner i gang.'
+                  checked={true}
+                  disabled
+                />
+                <ConsentPreferenceCard
+                  title='Statistikk'
+                  description='Hjelper oss å se hva som fungerer, slik at siden blir raskere og enklere å bruke.'
+                  checked={consent.analytics}
+                  onCheckedChange={checked =>
+                    setConsent(previousConsent => ({
+                      ...previousConsent,
+                      analytics: checked
+                    }))
+                  }
+                />
+                <ConsentPreferenceCard
+                  title='Markedsføring'
+                  description='Gjør innhold og annonser mer relevante når du møter Utekos andre steder.'
+                  checked={consent.marketing}
+                  onCheckedChange={checked =>
+                    setConsent(previousConsent => ({
+                      ...previousConsent,
+                      marketing: checked
+                    }))
+                  }
+                />
               </div>
 
-              <div className='flex justify-end gap-3 pt-4 border-t border-neutral-800'>
-                <Button
-                  variant='ghost'
+              <div className='flex flex-col justify-end gap-3 border-t border-cloud-dancer/12 pt-4 sm:flex-row'>
+                <ConsentActionButton
                   onClick={() => setShowDetails(false)}
-                  className='text-neutral-400 hover:text-white'
+                  tone='ancient'
                 >
                   Tilbake
-                </Button>
-                <Button
-                  onClick={handleSaveSelection}
-                  className='bg-white text-black hover:bg-neutral-200 font-bold'
+                </ConsentActionButton>
+                <ConsentActionButton
+                  onClick={handleUseNecessaryOnly}
+                  tone='cloud'
                 >
-                  Lagre mine valg
-                </Button>
+                  Kun nødvendige
+                </ConsentActionButton>
+                <ConsentActionButton
+                  onClick={handleSaveSelection}
+                  tone='primary'
+                >
+                  Lagre valg
+                </ConsentActionButton>
               </div>
             </div>
           }

@@ -132,20 +132,20 @@ export function PurchaseClientViewLanding({
     <section className='relative w-full max-w-full overflow-x-clip text-cloud-dancer min-[900px]:grid min-[900px]:grid-cols-2'>
       {/* LEFT: sticky image column — frame centered with object-cover (no letterboxing) */}
       <div className='relative flex w-full flex-col items-center justify-center bg-maritime-darkest min-[900px]:sticky min-[900px]:top-0 min-[900px]:h-[100svh] min-[900px]:self-start min-[900px]:p-8 min-[1280px]:p-12'>
-        <BrandBadge
-          key={`badge-${selectedModel}`}
-          backgroundColor='var(--color-bleached-mauve)'
-          textColor='var(--color-maritime-darkest)'
-          className='absolute left-4 top-4 z-20 animate-in px-4 py-1.5 text-xs font-semibold tracking-normal shadow-md fade-in slide-in-from-left-2 duration-500 min-[900px]:left-8 min-[900px]:top-8 min-[1280px]:left-12 min-[1280px]:top-12'
-        >
-          <span className='whitespace-nowrap'>{currentConfig.badge}</span>
-        </BrandBadge>
         <Carousel
           key={selectedModel}
           opts={{ loop: currentConfig.images.length > 1, duration: 35 }}
           plugins={currentConfig.images.length > 1 ? [Fade()] : []}
           className='relative w-full min-[900px]:max-w-xl'
         >
+          <BrandBadge
+            key={`badge-${selectedModel}`}
+            backgroundColor='var(--color-bleached-mauve)'
+            textColor='var(--color-maritime-darkest)'
+            className='absolute left-4 top-4 z-20 animate-in px-4 py-1.5 text-xs font-semibold tracking-normal shadow-md fade-in slide-in-from-left-2 duration-500 min-[900px]:left-5 min-[900px]:top-5 min-[1280px]:left-6 min-[1280px]:top-6'
+          >
+            <span className='whitespace-nowrap'>{currentConfig.badge}</span>
+          </BrandBadge>
           <CarouselContent className='ml-0'>
             {currentConfig.images.map((src, i) => (
               <CarouselItem key={src} className='relative aspect-[4/5] pl-0'>

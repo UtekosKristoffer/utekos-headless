@@ -45,7 +45,7 @@ export function CTASection() {
               delay='0.16s'
               threshold={0.2}
             >
-              <p className='mx-auto mt-4 max-w-2xl text-lg leading-[1.45] tracking-[-0.01em] text-maritime-blue/74 md:text-xl'>
+              <p className='mx-auto mt-4 max-w-2xl text-lg leading-[1.45] tracking-tight font-utekos-text text-maritime-blue/74 md:text-xl'>
                 Opplev hvordan ekte norsk design kan forvandle en kjølig kveld
                 til ditt favorittøyeblikk.
               </p>
