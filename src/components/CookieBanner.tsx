@@ -86,6 +86,19 @@ function ConsentPreferenceCard({
   disabled,
   onCheckedChange
 }: ConsentPreferenceCardProps) {
+  const switchProps: {
+    disabled?: boolean
+    onCheckedChange?: (checked: boolean) => void
+  } = {}
+
+  if (disabled !== undefined) {
+    switchProps.disabled = disabled
+  }
+
+  if (onCheckedChange !== undefined) {
+    switchProps.onCheckedChange = onCheckedChange
+  }
+
   return (
     <section className='rounded-lg border border-cloud-dancer/12 bg-maritime-blue/55 p-4 shadow-[0_18px_38px_-34px_color-mix(in_oklab,var(--maritime-darkest)_82%,transparent)]'>
       <div className='flex items-center justify-between gap-4'>
@@ -94,10 +107,9 @@ function ConsentPreferenceCard({
         </h4>
         <Switch
           checked={checked}
-          disabled={disabled}
-          onCheckedChange={onCheckedChange}
           aria-label={`${title} informasjonskapsler`}
           className='border-cloud-dancer/15 data-[state=checked]:bg-primary-button data-[state=unchecked]:bg-maritime-blue focus-visible:ring-primary-button/35'
+          {...switchProps}
         />
       </div>
       <p className='mt-3 font-utekos-text text-xs leading-[1.45] tracking-tight text-cloud-dancer/72'>

@@ -202,6 +202,12 @@ features. A long cache lifetime can speed up repeat visits to our page.
 - [Name, Role and Value](https://github.com/UtekosKristoffer/utekos-docs/blob/main/wcag/guidelines/name-role-value.md)
 - [Reading Level](https://github.com/UtekosKristoffer/utekos-docs/blob/main/wcag/guidelines/reading-level.md)
 - [Section Headings](https://github.com/UtekosKristoffer/utekos-docs/blob/main/wcag/guidelines/section-headings.md)
+- [Reviews]()
+
+## Google SEO
+
+- [Videos Best Practise:](https://github.com/UtekosKristoffer/utekos-docs/blob/main/google/seo/google-search-console/videos-best-practise.md)
+- [Ranking System:](https://github.com/UtekosKristoffer/utekos-docs/blob/main/google/seo/google-search-console/ranking-system.md)
 
   ### Other chosen API-referenced docs:
   - [generateViewport](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/api-reference/functions/generate-viewport.md)
@@ -237,3 +243,6 @@ context.
 - If Context7 MCP and GitHub access to `UtekosKristoffer/utekos-docs` both fail,
   stop before making framework or library claims, following the mandatory access
   rule above.
+
+**See**
+[Good Example:](.agents/process-updates/caching/2026-05-23-home-header-hero-cache-update.md)
