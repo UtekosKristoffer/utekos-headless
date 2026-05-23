@@ -109,7 +109,7 @@ process to not transpile
 [Baseline](https://web.dev/articles/baseline-and-polyfills?utm_source=lighthouse&utm_medium=lr)
 features. A long cache lifetime can speed up repeat visits to our page.
 
-## Examples of documentation in my GitHub repo
+## Documentation pages
 
 ### Repository Basics
 
@@ -124,21 +124,20 @@ features. A long cache lifetime can speed up repeat visits to our page.
 ### Server Components, Client Components and Boundaries
 
 - [React Server Components](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/directives/server-components.md)
-- [Next.js `use client`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/use-client.md)
-- [Next.js `use server`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/use-server.md)
 - [React `use client`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/directives/use-client.md)
 - [React `use server`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/directives/use-server.md)
-- [Client and Server Component Boundaries](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/academy/client-server-component-boundaries.md)
 - [React Server Functions](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/directives/server-functions)
+- [Next.js `use client`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/use-client.md)
+- [Next.js `use server`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/use-server.md)
+- [Client and Server Component Boundaries](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/academy/client%E2%80%91server-component-boundaries.md)
 
 ### Next.js 16 and App Router
 
-- [Next.js 16 Upgrade](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next-js-16-upgrade)
+- [Next.js 16 Upgrade Guide](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next-js-16-upgrade)
 - [Next.js `connection`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/api-reference/functions/connection.md)
 - [Static Exports](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/official-updated-docs/guides/static-exports.md)
-- [Nested Layouts](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/academy/nested-layouts.md)
 
-### Caching and Cache Components
+### Cache Components and Cache Directives
 
 - [Cache Components](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/academy/cache-components.md)
 - [Next.js `use cache`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/cache/use-cache.md)
@@ -146,8 +145,6 @@ features. A long cache lifetime can speed up repeat visits to our page.
 - [Next.js `use cache: remote`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/cache/use-cache-remote.md)
 - [Cache Handlers](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/cache/cacheHandlers.md)
 - [React `cacheSignal`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/directives/cacheSignal.md)
-- [CDN Caching](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/cache/cdn-caching.md)
-- [revalidateTag](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/revalidateTag.md)
 
 ### Cache Lifetimes, Tags and Revalidation
 
@@ -157,15 +154,18 @@ features. A long cache lifetime can speed up repeat visits to our page.
 - [How Revalidation Works](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/official-updated-docs/guides/how-revalidation-works.md)
 - [Next.js `refresh`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/official-updated-docs/api-reference/functions/refresh.md)
 
+### CDN and HTTP Caching
+
+- [CDN Caching](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/cache/cdn-caching.md)
+
 ### Data Fetching, Suspense and Streaming
 
 - [Data Fetching Without Waterfalls](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/academy/data-fetching-without-waterfalls.md)
 - [Suspense and Streaming](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/academy/suspense-streaming.md)
 - [React Suspense](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/Suspence.md)
 - [Lazy Loading](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/official-updated-docs/guides/lazy-loading.md)
-- [Query Performance](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/academy/query-performance-patterns.md)
 
-### State and Hooks
+### React State and Hooks
 
 - [Choosing the State Structure](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/managing-state/choosing-the-state-structure.md)
 - [React `useDeferredValue`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/hooks/useDeferredValue.md)
@@ -173,7 +173,6 @@ features. A long cache lifetime can speed up repeat visits to our page.
 - [React `useSyncExternalStore`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/hooks/useSyncExternalStore.md)
 - [React `useEffectEvent`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/hooks/useEffectEvent.md)
 - [React Activity](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/reference/react/Activity.md)
-- [useLinkStatus](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/api-reference/functions/useLinkStatus.md)
 
 ### Fonts, Preconnect and Asset Loading
 
@@ -183,7 +182,7 @@ features. A long cache lifetime can speed up repeat visits to our page.
 - [Font Optimization](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/official-updated-docs/guides/font-optimization.md)
 - [Advanced Image Optimization](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/academy/advanced-image-optimization.md)
 
-### Performance, Profiling and Web Vitals
+### Performance, Profiling and Observability
 
 - [React Profiler](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/reference/react/Profiler.md)
 - [Next.js Logging Config](https://github.com/UtekosKristoffer/utekos-docs/blob/main/nextconfig/next-config-js/logging.md)
@@ -202,17 +201,6 @@ features. A long cache lifetime can speed up repeat visits to our page.
 - [Name, Role and Value](https://github.com/UtekosKristoffer/utekos-docs/blob/main/wcag/guidelines/name-role-value.md)
 - [Reading Level](https://github.com/UtekosKristoffer/utekos-docs/blob/main/wcag/guidelines/reading-level.md)
 - [Section Headings](https://github.com/UtekosKristoffer/utekos-docs/blob/main/wcag/guidelines/section-headings.md)
-- [Reviews]()
-
-## Google SEO
-
-- [Videos Best Practise:](https://github.com/UtekosKristoffer/utekos-docs/blob/main/google/seo/google-search-console/videos-best-practise.md)
-- [Ranking System:](https://github.com/UtekosKristoffer/utekos-docs/blob/main/google/seo/google-search-console/ranking-system.md)
-
-  ### Other chosen API-referenced docs:
-  - [generateViewport](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/api-reference/functions/generate-viewport.md)
-  - [generateImageMetadata](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/api-reference/functions/generate-image-metadata.md)
-  - [after](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/api-reference/functions/after.md)
 
 **MANDATORY:** After every fix relatied to this process, add a file under
 .agents/process-updates/caching/ and note the speficic changes you did, why and

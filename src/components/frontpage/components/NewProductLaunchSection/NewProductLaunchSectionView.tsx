@@ -72,7 +72,7 @@ export const NewProductLaunchSectionView = forwardRef<
               <UtekosWordmark
                 aria-hidden='true'
                 focusable='false'
-                className='mr-[0.12em] inline-block h-[1.05em] w-auto translate-y-[0.15em] align-baseline'
+                className='mr-[0.14em] inline-block h-[0.78em] w-auto translate-y-[0.08em] align-baseline'
               />
               <span>{productModelName}</span>
             </span>

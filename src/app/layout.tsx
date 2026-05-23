@@ -15,10 +15,6 @@ import { ChatBotAgent } from '@/components/chat/ChatBotAgent/source-code'
 import { MetaPixelEvents } from '@/components/analytics/Meta/MetaPixelEvents'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { CartProviderLoader } from '@/components/providers/CartProviderLoader'
-import {
-  BrandArmorScript,
-  BRAND_ARMOR_COMPANY_ID
-} from '@/components/analytics/BrandArmorScript'
 import { MicrosoftUetTag } from '@/components/analytics/MicrosoftUetTag'
 import { CookieConsentBanner } from '@/components/CookieBanner'
 import { ClickTracker } from '@/components/analytics/ClickTracker'
@@ -120,7 +116,7 @@ export const metadata: Metadata = {
   }
 }
 
-export default function RootLayot({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang='no'
@@ -155,7 +151,6 @@ export default function RootLayot({ children }: { children: ReactNode }) {
             <Header menu={mainMenu} />
             <main>
               {children}
-              <BrandArmorScript companyId={BRAND_ARMOR_COMPANY_ID} />
               {SHOULD_LOAD_VERCEL_ANALYTICS && <Analytics />}
               <ChatBotAgent />
             </main>

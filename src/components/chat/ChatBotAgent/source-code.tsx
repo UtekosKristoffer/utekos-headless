@@ -3,9 +3,7 @@
 import Script from 'next/script'
 import { usePathname } from 'next/navigation'
 
-const SUPPRESSED_ROUTES: ReadonlyArray<string | RegExp> = [
-  '/skreddersy-varmen'
-]
+const SUPPRESSED_ROUTES: ReadonlyArray<string | RegExp> = ['/skreddersy-varmen']
 
 function isSuppressed(pathname: string): boolean {
   return SUPPRESSED_ROUTES.some(rule =>
@@ -25,7 +23,7 @@ export function ChatBotAgent() {
     <>
       <Script
         id='chatbot-agent'
-        async
+        strategy='lazyOnload'
         dangerouslySetInnerHTML={{ __html: ChatBotAgentSourceCode }}
       />
     </>
