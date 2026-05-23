@@ -3,7 +3,6 @@
 'use client'
 
 import { ProductCard } from '@/components/ProductCard/ProductCard'
-import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import {
   Carousel,
   CarouselContent,
@@ -25,13 +24,7 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
   return (
     <section className='mb-16 mt-24 rounded-[1.75rem] border border-cloud-dancer/70 bg-cloud-dancer/54 p-6 shadow-2xl shadow-maritime-blue/10 backdrop-blur-sm sm:p-8'>
       <div className='mb-8 text-center'>
-        <BrandBadge
-          label='Flere favoritter'
-          backgroundColor='var(--dusted-peri)'
-          textColor='var(--maritime-darkest)'
-          className='mb-5 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
-        />
-        <h2 className='text-3xl font-serif font-medium text-maritime-blue'>
+        <h2 className='text-4xl font-google-sans font-bold md:text-5xl text-maritime-blue'>
           Favoritter blant andre livsnytere
         </h2>
       </div>

@@ -12,15 +12,12 @@ import {
   Loader2,
   Gift,
   Ruler,
-  Sparkles,
   Store,
   ArrowRight
 } from 'lucide-react'
 import { cn } from '@/lib/utils/className'
-import { VippsLogo } from '@/components/payments/VippsLogo'
-import { KlarnaLogo } from '@/components/payments/KlarnaLogo'
-import { PostNordLogo } from '@/components/payments/PostNordLogo'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
+import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import { PRODUCT_VARIANTS } from '@/api/constants'
 import {
   Carousel,
@@ -72,13 +69,47 @@ const SIZE_GUIDANCE: Record<string, { height: string; tips: string[] }> = {
 }
 
 const focusRing =
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dusted-peri focus-visible:ring-offset-2 focus-visible:ring-offset-cloud-dancer'
+  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-button focus-visible:ring-2 focus-visible:ring-maritime-darkest'
 
 const maritimePanelClass =
   'rounded-3xl border border-cloud-dancer/15 bg-maritime-blue p-5 text-cloud-dancer shadow-sm'
 
-const maritimePanelHeaderClass =
-  'mb-3 flex items-center gap-2 border-b border-cloud-dancer/15 pb-3'
+const maritimePanelHeaderClass = 'mb-3 border-b border-cloud-dancer/15 pb-3'
+
+const choiceGridClass = 'grid grid-cols-3 gap-2 sm:gap-3'
+
+const choicePillClass =
+  'inline-flex min-h-12 min-w-0 items-center justify-center rounded-full px-1.5 py-2 text-center text-[11px] font-semibold leading-[1.15] tracking-normal transition-all sm:px-4 sm:text-sm md:text-base'
+
+function getModelName(title: string): string {
+  return title.replace('Utekos ', '')
+}
+
+function KlarnaCheckoutImage({ className }: { className?: string }) {
+  return (
+    <picture className={cn('block min-w-0 justify-self-end', className)}>
+      <source
+        media='(min-width: 1536px)'
+        srcSet='/klarna/Choose%20Klarna%20at%20checkout/White%20%28secondary%29/970x90%20-%20Left.png'
+      />
+      <source
+        media='(min-width: 900px)'
+        srcSet='/klarna/Choose%20Klarna%20at%20checkout/White%20%28secondary%29/728x90%20-%20Left.png'
+      />
+      <source
+        media='(min-width: 640px)'
+        srcSet='/klarna/Choose%20Klarna%20at%20checkout/White%20%28secondary%29/728x90%20-%20Center.png'
+      />
+      <img
+        src='/klarna/Choose%20Klarna%20at%20checkout/White%20%28secondary%29/320x50.png'
+        alt='Velg Klarna i kassen'
+        width={320}
+        height={50}
+        className='ml-auto block h-auto w-full max-w-[20rem] sm:max-w-[28rem] min-[1536px]:max-w-[30rem]'
+      />
+    </picture>
+  )
+}
 
 export function PurchaseClientViewLanding({
   selectedModel,
@@ -89,14 +120,13 @@ export function PurchaseClientViewLanding({
   setSelectedColorIndex,
   selectedSize,
   setSelectedSize,
-  handleAddToCart,
   handleGoToCheckout,
   isPending,
   currentConfig,
   isTechDownOffer
 }: PurchaseClientViewProps) {
-  const monthlyPrice = Math.round(currentConfig.price / 12)
   const guidance = SIZE_GUIDANCE[selectedSize]
+  const modelName = getModelName(currentConfig.title)
 
   return (
     <section className='relative w-full max-w-full overflow-x-clip text-cloud-dancer min-[900px]:grid min-[900px]:grid-cols-2'>
@@ -106,12 +136,8 @@ export function PurchaseClientViewLanding({
           key={`badge-${selectedModel}`}
           backgroundColor='var(--color-bleached-mauve)'
           textColor='var(--color-maritime-darkest)'
-          className='absolute left-4 top-4 z-20 animate-in gap-2 px-4 py-1.5 text-xs font-semibold tracking-normal shadow-md fade-in slide-in-from-left-2 duration-500 min-[900px]:left-8 min-[900px]:top-8 min-[1280px]:left-12 min-[1280px]:top-12'
+          className='absolute left-4 top-4 z-20 animate-in px-4 py-1.5 text-xs font-semibold tracking-normal shadow-md fade-in slide-in-from-left-2 duration-500 min-[900px]:left-8 min-[900px]:top-8 min-[1280px]:left-12 min-[1280px]:top-12'
         >
-          <span className='relative flex h-2 w-2'>
-            <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-maritime-darkest opacity-60' />
-            <span className='relative inline-flex h-2 w-2 rounded-full bg-maritime-darkest' />
-          </span>
           <span className='whitespace-nowrap'>{currentConfig.badge}</span>
         </BrandBadge>
         <Carousel
@@ -123,14 +149,12 @@ export function PurchaseClientViewLanding({
           <CarouselContent className='ml-0'>
             {currentConfig.images.map((src, i) => (
               <CarouselItem key={src} className='relative aspect-[4/5] pl-0'>
-                <div className='relative h-full w-full overflow-hidden rounded-3xl shadow-2xl ring-1 ring-maritime-darkest/10 min-[900px]:rounded-2xl'>
+                <div className='relative h-full w-full overflow-hidden min-[900px]:rounded-2xl min-[900px]:shadow-2xl min-[900px]:ring-1 min-[900px]:ring-maritime-darkest/10'>
                   <Image
                     src={src}
                     alt={`${currentConfig.title} – bilde ${i + 1}`}
                     fill
                     className='object-cover'
-                    priority={i === 0}
-                    fetchPriority={i === 0 ? 'high' : 'auto'}
                     sizes='(max-width: 900px) 100vw, 40vw'
                   />
                 </div>
@@ -170,8 +194,7 @@ export function PurchaseClientViewLanding({
               <TabsList
                 aria-label='Velg modell'
                 className={cn(
-                  'flex h-auto w-full flex-wrap gap-2 p-2 md:w-fit',
-                  maritimePanelClass
+                  'flex h-auto w-full flex-wrap gap-2 rounded-none bg-transparent p-0 shadow-none md:w-fit'
                 )}
               >
                 {(Object.keys(PRODUCT_VARIANTS) as ModelKey[]).map(key => (
@@ -179,7 +202,7 @@ export function PurchaseClientViewLanding({
                     key={key}
                     value={key}
                     className={cn(
-                      'h-auto flex-1 whitespace-nowrap rounded-full px-6 py-3 text-sm font-semibold tracking-normal transition-all duration-300 data-[state=active]:bg-cloud-dancer data-[state=active]:text-maritime-darkest data-[state=active]:shadow-md data-[state=inactive]:bg-maritime-darkest/25 data-[state=inactive]:text-cloud-dancer data-[state=inactive]:hover:bg-cloud-dancer/12 md:flex-none md:text-base',
+                      'h-auto flex-1 whitespace-nowrap rounded-full border border-maritime-darkest/18 bg-transparent px-6 py-3 text-sm font-semibold tracking-normal text-maritime-darkest transition-all duration-300 data-[state=active]:border-maritime-darkest data-[state=active]:bg-maritime-darkest data-[state=active]:text-cloud-dancer data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-ancient-water/55 md:flex-none md:text-base',
                       focusRing
                     )}
                   >
@@ -190,36 +213,31 @@ export function PurchaseClientViewLanding({
             </Tabs>
           </div>
 
-          {/* Hero block — no AnimatedBlock wrappers; this is LCP-critical */}
           <div key={`hero-${selectedModel}`} className='mb-12'>
-            <h2 className='mb-4 font-google-sans text-4xl font-semibold leading-[1.1] tracking-tight text-maritime-darkest min-[1280px]:text-7xl'>
-              {currentConfig.title}
+            <h2 className='mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-google-sans text-4xl font-bold leading-[0.95] tracking-[-0.01em] text-maritime-darkest min-[1280px]:text-7xl'>
+              <span className='sr-only'>Utekos </span>
+              <UtekosWordmark
+                aria-hidden
+                className='h-[0.82em] w-auto translate-y-[0.04em] text-maritime-darkest'
+                style={{ color: 'var(--color-maritime-darkest)' }}
+              />
+              <span className='font-google-sans font-bold tracking-[-0.025em]'>
+                {modelName}
+              </span>
             </h2>
-            <p className='mb-8 text-xl font-light text-maritime-darkest'>
+            <p className='mb-8 max-w-[38rem] text-lg leading-[1.45] tracking-normal text-maritime-darkest/88 md:text-xl'>
               {currentConfig.subtitle}
             </p>
-            <div className='flex flex-wrap items-center gap-4 min-[1280px]:gap-8'>
-              <span className='text-3xl font-medium text-maritime-darkest min-[1280px]:text-4xl'>
+            <div className='grid w-full max-w-none grid-cols-[auto_minmax(0,1fr)] items-center gap-4 sm:gap-5 min-[900px]:max-w-[38rem]'>
+              <span className='shrink-0 text-3xl font-medium text-maritime-darkest min-[1280px]:text-4xl'>
                 {currentConfig.price},-
               </span>
-              <BrandBadge
-                asChild
-                backgroundColor='var(--color-klarna-pink)'
-                textColor='var(--color-maritime-darkest)'
-                className='gap-2 rounded-full px-4 py-2 text-sm font-semibold tracking-normal shadow-sm ring-1 ring-maritime-darkest/10'
-              >
-                <div>
-                  <span className='text-sm font-medium text-maritime-darkest'>
-                    Eller {monthlyPrice},- /mnd
-                  </span>
-                  <KlarnaLogo className='h-6 w-fit rounded-full border border-maritime-darkest/20 p-1' />
-                </div>
-              </BrandBadge>
+              <KlarnaCheckoutImage className='w-full' />
             </div>
             {isTechDownOffer && (
-              <div className='mt-8 flex items-center gap-4 rounded-lg border-2 border-mountain-view/20 bg-gradient-to-br from-mountain-view/5 to-transparent p-4 shadow-sm'>
-                <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-mountain-view/10'>
-                  <Gift className='h-5 w-5 text-mountain-view' />
+              <div className='mt-8 flex items-center gap-4 rounded-lg border border-mountain-view/24 bg-cloud-dancer p-4 shadow-sm'>
+                <div className='flex size-10 shrink-0 items-center justify-center rounded-full bg-mountain-view/12'>
+                  <Gift className='size-5 text-mountain-view' />
                 </div>
                 <div>
                   <h3 className='font-semibold text-mountain-view'>
@@ -256,12 +274,12 @@ export function PurchaseClientViewLanding({
               rootMargin='0px 0px 25% 0px'
               threshold={0.01}
             >
-              <div className='-mx-1 flex flex-nowrap items-center gap-x-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:gap-x-3'>
+              <div className={choiceGridClass}>
                 {currentConfig.features.map((feature, index) => {
                   const palette = [
                     'var(--color-ancient-water)',
                     'var(--color-bleached-mauve)',
-                    'var(--color-dusted-peri)'
+                    'var(--color-cloud-dancer)'
                   ]
                   const bg = palette[index % palette.length]!
                   return (
@@ -269,13 +287,9 @@ export function PurchaseClientViewLanding({
                       key={feature}
                       backgroundColor={bg}
                       textColor='var(--color-maritime-darkest)'
-                      className='gap-1.5 px-3 py-1.5 text-[11px] font-medium tracking-normal sm:gap-2.5 sm:px-5 sm:py-2.5 sm:text-sm'
+                      className={cn(choicePillClass, 'shadow-sm')}
                     >
-                      <span
-                        aria-hidden
-                        className='h-1.5 w-1.5 shrink-0 rounded-full bg-maritime-darkest sm:h-2 sm:w-2'
-                      />
-                      <span className='whitespace-nowrap'>{feature}</span>
+                      <span>{feature}</span>
                     </BrandBadge>
                   )
                 })}
@@ -289,14 +303,10 @@ export function PurchaseClientViewLanding({
               threshold={0.01}
             >
               <div className={cn(maritimePanelClass, 'px-5')}>
-                <div
-                  className={cn(maritimePanelHeaderClass, 'justify-between')}
-                >
-                  <span className='text-[11px] font-bold uppercase tracking-wider text-cloud-dancer/70'>
-                    Hva gjør {currentConfig.title.replace('Utekos ', '')}{' '}
-                    spesiell
+                <div className={maritimePanelHeaderClass}>
+                  <span className='text-xs font-semibold tracking-[0.02em] text-cloud-dancer/82'>
+                    Dette gjør {modelName} spesiell
                   </span>
-                  <Sparkles className='size-4 text-cloud-dancer' aria-hidden />
                 </div>
                 <Accordion
                   key={`highlights-${selectedModel}`}
@@ -327,7 +337,7 @@ export function PurchaseClientViewLanding({
           <div className='mb-12 space-y-12'>
             <div>
               <div className='mb-4 flex items-center justify-between'>
-                <span className='text-sm font-bold tracking-widest text-maritime-darkest'>
+                <span className='text-sm font-bold tracking-normal text-maritime-darkest'>
                   Størrelse
                 </span>
                 <Link
@@ -339,7 +349,7 @@ export function PurchaseClientViewLanding({
                 </Link>
               </div>
               <div
-                className='flex flex-wrap gap-2 md:gap-3'
+                className={choiceGridClass}
                 role='radiogroup'
                 aria-label='Velg størrelse'
               >
@@ -358,9 +368,9 @@ export function PurchaseClientViewLanding({
                         aria-label={`Størrelse ${size}`}
                         onClick={() => setSelectedSize(size)}
                         className={cn(
-                          'inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium tracking-normal whitespace-nowrap transition-all md:px-6 md:py-3 md:text-base',
+                          choicePillClass,
                           isActive ?
-                            'border border-maritime-darkest bg-dusted-peri text-maritime-darkest shadow-md'
+                            'border border-maritime-darkest bg-maritime-darkest text-cloud-dancer shadow-md'
                           : 'border-0 bg-ancient-water text-maritime-darkest hover:brightness-95',
                           focusRing
                         )}
@@ -371,78 +381,24 @@ export function PurchaseClientViewLanding({
                   })}
               </div>
 
-              <div
-                className='mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs'
-                role='radiogroup'
-                aria-label='Velg farge'
-              >
-                <span className='tracking-wider text-maritime-darkest'>
-                  Farge
-                </span>
-                {currentConfig.colors.map((colorObj, index) => {
-                  const isActive = selectedColorIndex === index
-                  const isInteractive = currentConfig.colors.length > 1
-                  return (
-                    <button
-                      key={colorObj.name}
-                      type='button'
-                      role='radio'
-                      aria-checked={isActive}
-                      aria-label={`Farge ${colorObj.name}`}
-                      onClick={() =>
-                        isInteractive && setSelectedColorIndex(index)
-                      }
-                      className={cn(
-                        'inline-flex items-center gap-1.5 rounded-full transition',
-                        isInteractive && 'hover:opacity-80',
-                        !isInteractive && 'cursor-default',
-                        focusRing
-                      )}
-                    >
-                      <span
-                        className={cn(
-                          'size-4 rounded-full border border-black/15',
-                          isActive
-                            && isInteractive
-                            && 'ring-1 ring-dusted-peri ring-offset-1 ring-offset-white',
-                          !isActive && isInteractive && 'opacity-60'
-                        )}
-                        style={{ backgroundColor: colorObj.hex }}
-                      />
-                      {isActive && (
-                        <span className='font-medium text-maritime-darkest'>
-                          {colorObj.name}
-                        </span>
-                      )}
-                    </button>
-                  )
-                })}
-              </div>
-
               {guidance && (
                 <div
                   key={selectedSize}
-                  className='mt-6 animate-in fade-in slide-in-from-top-2 duration-300'
+                  className='mt-3 animate-in fade-in slide-in-from-top-2 duration-300'
                 >
-                  <div
-                    className={cn(
-                      maritimePanelClass,
-                      'relative overflow-hidden'
-                    )}
-                  >
-                    <div className={maritimePanelHeaderClass}>
-                      <Ruler className='h-4 w-4 text-dusted-peri' />
-                      <span className='text-sm font-bold tracking-wider text-cloud-dancer'>
+                  <div className='relative overflow-hidden rounded-2xl border border-cloud-dancer/15 bg-maritime-blue p-4 text-cloud-dancer shadow-sm'>
+                    <div className='mb-2 flex items-center gap-2 border-b border-cloud-dancer/15 pb-2'>
+                      <Ruler className='size-4 text-dusted-peri' />
+                      <span className='text-sm font-bold tracking-normal text-cloud-dancer'>
                         Passer best for deg som er {guidance.height}
                       </span>
                     </div>
-                    <ul className='space-y-2'>
+                    <ul className='space-y-1.5'>
                       {guidance.tips.map((tip, i) => (
                         <li
                           key={i}
-                          className='flex items-start gap-2.5 text-sm leading-[1.45] text-cloud-dancer'
+                          className='text-sm leading-[1.45] text-cloud-dancer'
                         >
-                          <div className='mt-1.5 size-1 shrink-0 rounded-full bg-dusted-peri' />
                           <span>{tip}</span>
                         </li>
                       ))}
@@ -451,56 +407,90 @@ export function PurchaseClientViewLanding({
                 </div>
               )}
 
-              <div
-                className={cn(
-                  maritimePanelClass,
-                  'mt-6 flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between'
-                )}
-              >
-                <div className='space-y-1'>
-                  <p className='text-xs font-bold uppercase tracking-[0.24em] text-cloud-dancer/70'>
-                    Antall
-                  </p>
-                </div>
-                <div className='flex h-14 items-center self-start rounded-full border border-cloud-dancer/25 bg-maritime-darkest/30 text-cloud-dancer sm:self-auto'>
-                  <button
-                    type='button'
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className={cn(
-                      'flex h-full w-14 items-center justify-center text-cloud-dancer transition-colors hover:bg-cloud-dancer/10 sm:w-16',
-                      focusRing
-                    )}
-                    aria-label='Reduser antall'
-                  >
-                    <Minus size={20} />
-                  </button>
-                  <span
-                    className='w-12 text-center text-lg font-medium tabular-nums text-cloud-dancer sm:w-14 sm:text-xl'
-                    aria-live='polite'
-                    aria-atomic='true'
-                  >
-                    {quantity}
+              <div className='mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-3 border-t border-maritime-darkest/16 pt-4'>
+                <div
+                  className='min-w-0'
+                  role='radiogroup'
+                  aria-label='Velg farge'
+                >
+                  <span className='block text-xs font-semibold tracking-normal text-maritime-darkest/72'>
+                    Farge
                   </span>
-                  <button
-                    type='button'
-                    onClick={() => setQuantity(quantity + 1)}
-                    className={cn(
-                      'flex h-full w-14 items-center justify-center text-cloud-dancer transition-colors hover:bg-cloud-dancer/10 sm:w-16',
-                      focusRing
-                    )}
-                    aria-label='Øk antall'
-                  >
-                    <Plus size={20} />
-                  </button>
+                  <div className='mt-1 grid w-full grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-2'>
+                    {currentConfig.colors.map((colorObj, index) => {
+                      const isActive = selectedColorIndex === index
+                      const isInteractive = currentConfig.colors.length > 1
+                      return (
+                        <button
+                          key={colorObj.name}
+                          type='button'
+                          role='radio'
+                          aria-checked={isActive}
+                          aria-label={`Farge ${colorObj.name}`}
+                          onClick={() =>
+                            isInteractive && setSelectedColorIndex(index)
+                          }
+                          className={cn(
+                            'inline-flex h-10 min-w-0 items-center justify-start gap-2 rounded-full border border-maritime-darkest/18 bg-ancient-water px-3 text-sm font-semibold text-maritime-darkest transition',
+                            isInteractive && 'hover:brightness-95',
+                            !isInteractive && 'cursor-default',
+                            isActive && 'border-maritime-darkest shadow-sm',
+                            focusRing
+                          )}
+                        >
+                          <span
+                            className='size-4 shrink-0 rounded-full border border-maritime-darkest/20'
+                            style={{ backgroundColor: colorObj.hex }}
+                          />
+                          <span className='truncate'>{colorObj.name}</span>
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
+
+                <div className='shrink-0'>
+                  <span className='block text-xs font-semibold tracking-normal text-maritime-darkest/72'>
+                    Antall
+                  </span>
+                  <div className='mt-1 flex h-10 items-center rounded-full border border-maritime-darkest/18 bg-ancient-water text-maritime-darkest'>
+                    <button
+                      type='button'
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      className={cn(
+                        'flex size-10 items-center justify-center rounded-l-full text-maritime-darkest transition-colors hover:bg-overcast/70',
+                        focusRing
+                      )}
+                      aria-label='Reduser antall'
+                    >
+                      <Minus size={17} />
+                    </button>
+                    <span
+                      className='w-9 text-center text-base font-semibold tabular-nums text-maritime-darkest'
+                      aria-live='polite'
+                      aria-atomic='true'
+                    >
+                      {quantity}
+                    </span>
+                    <button
+                      type='button'
+                      onClick={() => setQuantity(quantity + 1)}
+                      className={cn(
+                        'flex size-10 items-center justify-center rounded-r-full text-maritime-darkest transition-colors hover:bg-overcast/70',
+                        focusRing
+                      )}
+                      aria-label='Øk antall'
+                    >
+                      <Plus size={17} />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* CTA footer — flows naturally at the bottom of the right column */}
         <div className='border-t border-cloud-dancer/10 bg-maritime-blue p-6 text-cloud-dancer md:p-12 min-[900px]:p-8 min-[1280px]:p-12'>
-          <div className='mb-6 grid grid-cols-2 gap-3 md:gap-4'>
+          <div className='mb-4 min-[900px]:mb-6 min-[1280px]:mb-8'>
             <BrandBadge
               asChild
               backgroundColor='var(--color-primary-button)'
@@ -523,55 +513,18 @@ export function PurchaseClientViewLanding({
               >
                 {isPending ?
                   <>
-                    <Loader2 className='h-5 w-5 animate-spin' />
-                    <span className='whitespace-nowrap'>Behandler...</span>
+                    <Loader2 className='size-5 animate-spin' />
+                    <span className='whitespace-nowrap'>Behandler</span>
                   </>
                 : <>
-                    <span className='whitespace-nowrap'>Gå til kassen</span>
-                    <ArrowRight className='h-4 w-4 shrink-0' />
-                  </>
-                }
-              </button>
-            </BrandBadge>
-            <BrandBadge
-              asChild
-              backgroundColor='var(--color-cloud-dancer)'
-              textColor='var(--color-maritime-darkest)'
-              className={cn(
-                'h-14 w-full min-w-0 px-4 py-0 text-sm font-semibold tracking-normal shadow-xl transition-[transform,filter,box-shadow] hover:brightness-95 active:scale-[0.985] sm:text-base md:h-16 md:px-6 md:text-lg',
-                isPending && 'cursor-not-allowed opacity-80'
-              )}
-            >
-              <button
-                type='button'
-                onClick={handleAddToCart}
-                data-track='🔔🛒 AddToCartSkreddersyVarmen 🛒🔔'
-                disabled={isPending}
-                aria-busy={isPending}
-                className={cn(
-                  'flex w-full min-w-0 items-center justify-center gap-2 text-center',
-                  focusRing
-                )}
-              >
-                {isPending ?
-                  <>
-                    <Loader2 className='h-5 w-5 animate-spin' />
-                    <span className='whitespace-nowrap'>Legger til...</span>
-                  </>
-                : <>
-                    <span className='whitespace-nowrap'>Legg i kurv</span>
+                    <span className='whitespace-nowrap'>Kjøp nå</span>
+                    <ArrowRight className='size-4 shrink-0' />
                   </>
                 }
               </button>
             </BrandBadge>
           </div>
           <div className='flex flex-col gap-6'>
-            <div className='flex items-center gap-8 md:gap-10'>
-              <VippsLogo className='h-8 w-auto md:h-10' />
-              <KlarnaLogo className='h-8 w-auto md:h-10' />
-              <PostNordLogo className='mt-1 h-6 w-auto md:h-8' />
-            </div>
-
             <div className='rounded-lg border border-cloud-dancer/15 bg-maritime-blue text-cloud-dancer'>
               <div className='grid grid-cols-1 divide-y divide-cloud-dancer/15 sm:grid-cols-3 sm:divide-x sm:divide-y-0'>
                 <div className='flex items-start gap-3 p-4'>
@@ -584,7 +537,7 @@ export function PurchaseClientViewLanding({
                       Rask levering 2–5 dager
                     </p>
                     <p className='mt-0.5 text-xs leading-snug text-cloud-dancer/75'>
-                      Sendes samme dag (ikke søndag). Fri frakt fra 999,-.
+                      Sendes samme dag. Fri frakt på denne varen.
                     </p>
                   </div>
                 </div>
@@ -598,7 +551,7 @@ export function PurchaseClientViewLanding({
                       14 dagers åpent kjøp
                     </p>
                     <p className='mt-0.5 text-xs leading-snug text-cloud-dancer/75'>
-                      Send tilbake uten spørsmål.
+                      Rolig returfrist når varen er ubrukt.
                     </p>
                   </div>
                 </div>

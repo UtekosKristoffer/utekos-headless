@@ -7,10 +7,10 @@ export function UsageGroup({
 }) {
   return (
     <div>
-      <h4 className='font-serif text-lg text-[#E07A5F] mb-3 border-b border-[#E07A5F]/20 pb-1'>
+      <h4 className='mb-3 border-b border-maritime-darkest/20 pb-1 font-utekos-text text-lg text-maritime-darkest'>
         {title}
       </h4>
-      <ul className='list-disc list-inside space-y-1 text-[#2C2420]/80 text-sm'>
+      <ul className='list-inside list-disc space-y-1 text-sm text-maritime-darkest/82'>
         {children}
       </ul>
     </div>

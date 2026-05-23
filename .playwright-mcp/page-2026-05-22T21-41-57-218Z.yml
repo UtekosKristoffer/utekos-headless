@@ -1,0 +1,434 @@
+- generic [active] [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e7] [cursor=pointer]:
+    - img [ref=e8]
+  - alert [ref=e11]
+  - generic [ref=e12]:
+    - link "Se tilbudet på Utekos TechDown til kr 1790" [ref=e13] [cursor=pointer]:
+      - /url: /skreddersy-varmen
+      - generic [ref=e14]:
+        - img [ref=e15]
+        - generic [ref=e18]: Utekos TechDown™ til kr 1790,-
+        - generic [ref=e19]:
+          - text: Kjøp her
+          - img [ref=e20]
+    - button "Lukk banner" [ref=e22] [cursor=pointer]:
+      - img [ref=e23]
+  - banner [ref=e26]:
+    - generic [ref=e27]:
+      - link "Utekos - Til forsiden" [ref=e30] [cursor=pointer]:
+        - /url: /
+        - img "Utekos logo" [ref=e31]
+      - navigation "Hovednavigasjon" [ref=e32]:
+        - navigation "Main" [ref=e33]:
+          - list [ref=e35]:
+            - listitem [ref=e36]:
+              - button "Handle nå" [ref=e37] [cursor=pointer]:
+                - text: Handle nå
+                - img [ref=e38]
+            - listitem [ref=e40]:
+              - button "Om Utekos®" [ref=e41] [cursor=pointer]:
+                - text: Om Utekos®
+                - img [ref=e42]
+            - listitem [ref=e44]:
+              - button "Inspirasjon" [ref=e45] [cursor=pointer]:
+                - text: Inspirasjon
+                - img [ref=e46]
+            - listitem [ref=e48]:
+              - link "Magasinet" [ref=e49] [cursor=pointer]:
+                - /url: /magasinet
+      - generic [ref=e50]:
+        - button "Åpne søk (⌘/Ctrl + K)" [ref=e51] [cursor=pointer]:
+          - img [ref=e52]
+          - generic [ref=e55]: Søk…
+          - generic:
+            - generic: ⌘
+            - text: K
+        - generic [ref=e56]:
+          - heading "Søk på nettsiden..." [level=2] [ref=e57]
+          - paragraph [ref=e58]: Søk etter produkter eller sider..
+        - button "Åpne handlekurven, 0 varer" [ref=e59] [cursor=pointer]:
+          - img
+          - generic [ref=e60]: 0 varer i handlekurven
+  - main [ref=e61]:
+    - generic [ref=e62]:
+      - region "Skreddersy varmen. Forleng kvelden." [ref=e63]:
+        - img "Utekos kveldsstemning på terrassen" [ref=e65]
+        - generic [ref=e69]:
+          - img "Utekos" [ref=e71]
+          - heading "Skreddersy varmen. Forleng kvelden." [level=1] [ref=e78]
+        - button "Bla videre" [ref=e81] [cursor=pointer]:
+          - generic [ref=e82]: Bla videre
+          - img [ref=e83]
+      - region "Når øyeblikket er for godt til å avsluttes." [ref=e85]:
+        - generic [ref=e87]:
+          - heading "Når øyeblikket er for godt til å avsluttes." [level=2] [ref=e90]:
+            - generic [ref=e92]: Når øyeblikket er for godt til å avsluttes.
+          - button [ref=e97] [cursor=pointer]
+      - region "Friheten til å velge" [ref=e98]:
+        - generic [ref=e101]:
+          - img "Maksimal isolasjon" [ref=e104]
+          - img "Umiddelbar mobilitet" [ref=e108]
+          - img "Selvformet eleganse" [ref=e112]
+      - region "Når været snur, består varmen" [ref=e125]:
+        - generic [ref=e128]:
+          - generic [ref=e129]: Sammenlign tørr og fuktig isolasjon
+          - slider "Sammenlign tørr og fuktig isolasjon" [ref=e130]: "50"
+      - region "Livsnytere som tok kvelden tilbake" [ref=e131]:
+        - generic:
+          - img
+        - region "Kundeanmeldelser" [ref=e134]
+      - region "Derfor holder Utekos deg ute lenger" [ref=e135]:
+        - generic [ref=e136]:
+          - generic [ref=e137]:
+            - paragraph [ref=e138]: Faglig vurdert av Utekos fagredaksjon
+            - heading "Derfor holder Utekos deg ute lenger" [level=2] [ref=e139]
+            - paragraph [ref=e140]: Sist oppdatert 2026-05-22. Denne siden bygger på produktdata, kundeerfaringer, materialinformasjon og Utekos sine egne kjøpsguider.
+          - generic [ref=e141]:
+            - article [ref=e142]:
+              - heading "3-i-1 gir kontroll over varmen" [level=3] [ref=e143]
+              - paragraph [ref=e144]: Utekos kan brukes som parkas, oppfestet modell eller kokong. Det gjør at samme plagg fungerer når du sitter lenge ute, går en kort tur eller vil pakke bena helt inn.
+              - link "Se funksjonalitet" [ref=e145] [cursor=pointer]:
+                - /url: /handlehjelp/funksjonalitet
+            - article [ref=e146]:
+              - heading "Syntetisk isolasjon tåler rå luft" [level=3] [ref=e147]
+              - paragraph [ref=e148]: TechDown™ bruker hydrofob CloudWave™-isolasjon som holder loft og varme bedre i fukt enn klassisk dun. Det er relevant i norsk kystklima og ved bålpanne, båt og bobil.
+              - link "Se teknologi" [ref=e149] [cursor=pointer]:
+                - /url: /handlehjelp/teknologi-materialer
+            - article [ref=e150]:
+              - heading "Størrelse velges etter høyde og ønsket rom" [level=3] [ref=e151]
+              - paragraph [ref=e152]: Velg størrelse ut fra høyde, lag under og hvor lun kokongfølelse du ønsker. Størrelsesguiden forklarer forskjellen mellom Liten, Middels, Stor og Ekstra stor.
+              - link "Se størrelsesguide" [ref=e153] [cursor=pointer]:
+                - /url: /handlehjelp/storrelsesguide
+            - article [ref=e154]:
+              - heading "Trygg kjøpsramme" [level=3] [ref=e155]
+              - paragraph [ref=e156]: Utekos sendes normalt innen 2-5 virkedager i Norge. Du har 14 dagers returfrist, og frakt- og returvilkår er samlet på en egen hjelpeside.
+              - link "Se frakt og retur" [ref=e157] [cursor=pointer]:
+                - /url: /frakt-og-retur
+      - generic [ref=e159]:
+        - generic [ref=e160]:
+          - generic [ref=e162]: Bestselger
+          - region [ref=e163]:
+            - generic [ref=e165]:
+              - group [ref=e166]:
+                - img "Utekos TechDown™ – bilde 1" [ref=e168]
+              - group:
+                - generic:
+                  - img "Utekos TechDown™ – bilde 2"
+              - group:
+                - generic:
+                  - img "Utekos TechDown™ – bilde 3"
+              - group:
+                - generic:
+                  - img "Utekos TechDown™ – bilde 4"
+            - button "Forrige bilde" [ref=e169] [cursor=pointer]:
+              - img
+              - generic [ref=e170]: Previous slide
+            - button "Neste bilde" [ref=e171] [cursor=pointer]:
+              - img
+              - generic [ref=e172]: Next slide
+        - generic [ref=e173]:
+          - generic [ref=e174]:
+            - tablist "Velg modell" [ref=e177]:
+              - tab "TechDown™" [selected] [ref=e178] [cursor=pointer]
+              - tab "Mikrofiber™" [ref=e179] [cursor=pointer]
+            - generic [ref=e180]:
+              - heading "Utekos TechDown™" [level=2] [ref=e181]:
+                - generic [ref=e182]: Utekos
+                - img [ref=e183]
+                - generic [ref=e190]: TechDown™
+              - paragraph [ref=e191]: Vår nyeste, varmeste og mest allsidige modell.
+              - generic [ref=e192]:
+                - generic [ref=e193]: 1790,-
+                - img "Velg Klarna i kassen" [ref=e195]
+            - generic "Produktinformasjon" [ref=e196]:
+              - paragraph [ref=e198]: Forener banebrytende innovasjon med tidløs eleganse. CloudWave™ opprettholder varmen i deg, og spensten i foret, selv under fuktige forhold. 3-i-1-konstruksjonen lar deg enkelt tilpasse passform, regulere ventilasjon og veksle mellom ulike funksjonelle moduser.
+              - generic [ref=e200]:
+                - generic [ref=e202]: Tåler rå luft
+                - generic [ref=e204]: Tre bruksformer
+                - generic [ref=e206]: Luméa™
+              - generic [ref=e208]:
+                - generic [ref=e210]: Dette gjør TechDown™ spesiell
+                - generic [ref=e211]:
+                  - heading "Holder varmen i fukt" [level=3] [ref=e213]:
+                    - button "Holder varmen i fukt" [ref=e214] [cursor=pointer]:
+                      - text: Holder varmen i fukt
+                      - img
+                  - heading "Tre rolige måter å bruke den på" [level=3] [ref=e216]:
+                    - button "Tre rolige måter å bruke den på" [ref=e217] [cursor=pointer]:
+                      - text: Tre rolige måter å bruke den på
+                      - img
+                  - heading "YKK® Dual V-Zip™" [level=3] [ref=e219]:
+                    - button "YKK® Dual V-Zip™" [ref=e220] [cursor=pointer]:
+                      - text: YKK® Dual V-Zip™
+                      - img
+            - generic [ref=e223]:
+              - generic [ref=e224]:
+                - generic [ref=e225]: Størrelse
+                - link "Se størrelsesguide" [ref=e226] [cursor=pointer]:
+                  - /url: /handlehjelp/storrelsesguide
+              - radiogroup "Velg størrelse" [ref=e227]:
+                - radio "Størrelse Middels" [checked] [ref=e228] [cursor=pointer]: Middels
+                - radio "Størrelse Stor" [ref=e229] [cursor=pointer]: Stor
+                - radio "Størrelse Ekstra stor" [ref=e230] [cursor=pointer]: Ekstra stor
+              - generic [ref=e232]:
+                - generic [ref=e233]:
+                  - img [ref=e234]
+                  - generic [ref=e240]: Passer best for deg som er 170 – 180 cm
+                - list [ref=e241]:
+                  - listitem [ref=e242]: Er du lavere enn 170 cm får du en romslig passform.
+                  - listitem [ref=e243]: Ligger du i øvre sjiktet (mot 180 cm) får du en mer kroppsnær passform.
+              - generic [ref=e244]:
+                - radiogroup "Velg farge" [ref=e245]:
+                  - generic [ref=e246]: Farge
+                  - radio "Farge Havdyp" [checked] [ref=e248]:
+                    - generic [ref=e250]: Havdyp
+                - generic [ref=e251]:
+                  - generic [ref=e252]: Antall
+                  - generic [ref=e253]:
+                    - button "Reduser antall" [ref=e254] [cursor=pointer]:
+                      - img [ref=e255]
+                    - generic [ref=e256]: "1"
+                    - button "Øk antall" [ref=e257] [cursor=pointer]:
+                      - img [ref=e258]
+          - generic [ref=e259]:
+            - button "Kjøp nå" [ref=e261] [cursor=pointer]:
+              - generic [ref=e262]: Kjøp nå
+              - img [ref=e263]
+            - generic [ref=e266]:
+              - generic [ref=e267]:
+                - generic [ref=e268]:
+                  - img [ref=e269]
+                  - generic [ref=e274]:
+                    - paragraph [ref=e275]: Rask levering 2–5 dager
+                    - paragraph [ref=e276]: Sendes samme dag. Fri frakt på denne varen.
+                - generic [ref=e277]:
+                  - img [ref=e278]
+                  - generic [ref=e283]:
+                    - paragraph [ref=e284]: 14 dagers åpent kjøp
+                    - paragraph [ref=e285]: Rolig returfrist når varen er ubrukt.
+                - generic [ref=e286]:
+                  - img [ref=e287]
+                  - generic [ref=e291]:
+                    - paragraph [ref=e292]: På lager i Bergen
+                    - paragraph [ref=e293]: Også via Intersport. Norsk garanti.
+              - link "Alt om frakt og retur" [ref=e295] [cursor=pointer]:
+                - /url: /frakt-og-retur
+                - text: Alt om frakt og retur
+                - img [ref=e296]
+      - generic [ref=e299]:
+        - heading "Alt du trenger å vite" [level=2] [ref=e300]
+        - generic [ref=e301]:
+          - heading "Materialer" [level=3] [ref=e303]:
+            - button "Materialer" [ref=e304] [cursor=pointer]:
+              - text: Materialer
+              - img
+          - heading "Nøkkelfunksjoner" [level=3] [ref=e306]:
+            - button "Nøkkelfunksjoner" [ref=e307] [cursor=pointer]:
+              - text: Nøkkelfunksjoner
+              - img
+          - heading "Egenskaper" [level=3] [ref=e309]:
+            - button "Egenskaper" [ref=e310] [cursor=pointer]:
+              - text: Egenskaper
+              - img
+          - heading "Bruksområder" [level=3] [ref=e312]:
+            - button "Bruksområder" [ref=e313] [cursor=pointer]:
+              - text: Bruksområder
+              - img
+          - heading "Passform" [level=3] [ref=e315]:
+            - button "Passform" [ref=e316] [cursor=pointer]:
+              - text: Passform
+              - img
+          - heading "Vedlikehold" [level=3] [ref=e318]:
+            - button "Vedlikehold" [ref=e319] [cursor=pointer]:
+              - text: Vedlikehold
+              - img
+      - region "Svar før du velger modell" [ref=e320]:
+        - generic [ref=e321]:
+          - generic [ref=e322]:
+            - paragraph [ref=e323]: Ofte spurt
+            - heading "Svar før du velger modell" [level=2] [ref=e324]
+            - paragraph [ref=e325]: Kort om størrelse, fukt, vask, levering og retur. For mer detalj kan du gå videre til kjøpsguidene.
+            - link "Sammenlign modellene" [ref=e326] [cursor=pointer]:
+              - /url: /handlehjelp/sammenlign-modeller
+          - generic [ref=e327]:
+            - group [ref=e328]:
+              - generic "Hvilken Utekos-modell passer best for meg?" [ref=e329] [cursor=pointer]:
+                - generic [ref=e330]:
+                  - generic [ref=e331]: Hvilken Utekos-modell passer best for meg?
+                  - generic [ref=e332]: +
+            - group [ref=e333]:
+              - generic "Hvordan fungerer 3-i-1-konstruksjonen?" [ref=e334] [cursor=pointer]:
+                - generic [ref=e335]:
+                  - generic [ref=e336]: Hvordan fungerer 3-i-1-konstruksjonen?
+                  - generic [ref=e337]: +
+            - group [ref=e338]:
+              - generic "Fungerer Utekos i fuktig vær?" [ref=e339] [cursor=pointer]:
+                - generic [ref=e340]:
+                  - generic [ref=e341]: Fungerer Utekos i fuktig vær?
+                  - generic [ref=e342]: +
+            - group [ref=e343]:
+              - generic "Hvordan finner jeg riktig størrelse?" [ref=e344] [cursor=pointer]:
+                - generic [ref=e345]:
+                  - generic [ref=e346]: Hvordan finner jeg riktig størrelse?
+                  - generic [ref=e347]: +
+            - group [ref=e348]:
+              - generic "Hvordan vasker jeg Utekos?" [ref=e349] [cursor=pointer]:
+                - generic [ref=e350]:
+                  - generic [ref=e351]: Hvordan vasker jeg Utekos?
+                  - generic [ref=e352]: +
+            - group [ref=e353]:
+              - generic "Hvor lang er leveringstiden?" [ref=e354] [cursor=pointer]:
+                - generic [ref=e355]:
+                  - generic [ref=e356]: Hvor lang er leveringstiden?
+                  - generic [ref=e357]: +
+            - group [ref=e358]:
+              - generic "Hvor lang returfrist har jeg?" [ref=e359] [cursor=pointer]:
+                - generic [ref=e360]:
+                  - generic [ref=e361]: Hvor lang returfrist har jeg?
+                  - generic [ref=e362]: +
+      - generic [ref=e364]:
+        - heading "Utforsk mer av Utekos" [level=2] [ref=e366]
+        - generic [ref=e367]:
+          - link "Hjem | Utekos.no Forsiden" [ref=e368] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e369]:
+              - img [ref=e371]
+              - generic [ref=e374]:
+                - generic [ref=e375]: Hjem | Utekos.no
+                - generic [ref=e376]: Forsiden
+            - img [ref=e377]
+          - link "Utforsk kolleksjonen Se alle produkter" [ref=e379] [cursor=pointer]:
+            - /url: /produkter
+            - generic [ref=e380]:
+              - img [ref=e382]
+              - generic [ref=e385]:
+                - generic [ref=e386]: Utforsk kolleksjonen
+                - generic [ref=e387]: Se alle produkter
+            - img [ref=e388]
+          - link "Hvorfor det virker Teknologi og materialer" [ref=e390] [cursor=pointer]:
+            - /url: /handlehjelp/teknologi-materialer
+            - generic [ref=e391]:
+              - img [ref=e393]
+              - generic [ref=e397]:
+                - generic [ref=e398]: Hvorfor det virker
+                - generic [ref=e399]: Teknologi og materialer
+            - img [ref=e400]
+          - link "Om Utekos Vår historie" [ref=e402] [cursor=pointer]:
+            - /url: /om-oss
+            - generic [ref=e403]:
+              - img [ref=e405]
+              - generic [ref=e408]:
+                - generic [ref=e409]: Om Utekos
+                - generic [ref=e410]: Vår historie
+            - img [ref=e411]
+          - link "Trygg handel Frakt og retur" [ref=e413] [cursor=pointer]:
+            - /url: /frakt-og-retur
+            - generic [ref=e414]:
+              - img [ref=e416]
+              - generic [ref=e421]:
+                - generic [ref=e422]: Trygg handel
+                - generic [ref=e423]: Frakt og retur
+            - img [ref=e424]
+          - link "Finn din størrelse Størrelseguide" [ref=e426] [cursor=pointer]:
+            - /url: /handlehjelp/storrelsesguide
+            - generic [ref=e427]:
+              - img [ref=e429]
+              - generic [ref=e435]:
+                - generic [ref=e436]: Finn din størrelse
+                - generic [ref=e437]: Størrelseguide
+            - img [ref=e438]
+          - link "Inspirasjon og historier Magasinet" [ref=e440] [cursor=pointer]:
+            - /url: /magasinet
+            - generic [ref=e441]:
+              - img [ref=e443]
+              - generic [ref=e445]:
+                - generic [ref=e446]: Inspirasjon og historier
+                - generic [ref=e447]: Magasinet
+            - img [ref=e448]
+  - contentinfo [ref=e450]:
+    - generic [ref=e451]:
+      - generic [ref=e452]:
+        - generic [ref=e453]:
+          - heading "Handlehjelp" [level=3] [ref=e454]
+          - navigation "Handlehjelp navigasjon" [ref=e455]:
+            - list [ref=e456]:
+              - listitem [ref=e457]:
+                - link "Kontakt oss" [ref=e458] [cursor=pointer]:
+                  - /url: /kontaktskjema
+              - listitem [ref=e459]:
+                - link "Teknologi og materialer" [ref=e460] [cursor=pointer]:
+                  - /url: /handlehjelp/teknologi-materialer
+              - listitem [ref=e461]:
+                - link "Vask og vedlikehold" [ref=e462] [cursor=pointer]:
+                  - /url: /handlehjelp/vask-og-vedlikehold
+              - listitem [ref=e463]:
+                - link "Størrelsesguide" [ref=e464] [cursor=pointer]:
+                  - /url: /handlehjelp/storrelsesguide
+        - generic [ref=e465]:
+          - heading "Kundeservice" [level=3] [ref=e466]
+          - navigation "Kundeservice navigasjon" [ref=e467]:
+            - list [ref=e468]:
+              - listitem [ref=e469]:
+                - link "Kundeservice" [ref=e470] [cursor=pointer]:
+                  - /url: /kontaktskjema
+              - listitem [ref=e471]:
+                - 'link "Tlf: +47 40 21 63 43" [ref=e472] [cursor=pointer]':
+                  - /url: tel:+4740216343
+              - listitem [ref=e473]:
+                - 'link "E-post: kundeservice@utekos.no" [ref=e474] [cursor=pointer]':
+                  - /url: mailto:kundeservice@utekos.no
+              - button "Innstillinger for informasjonskapsler" [ref=e475] [cursor=pointer]
+        - generic [ref=e476]:
+          - heading "Informasjon" [level=3] [ref=e477]
+          - navigation "Informasjon navigasjon" [ref=e478]:
+            - list [ref=e479]:
+              - listitem [ref=e480]:
+                - link "Om oss" [ref=e481] [cursor=pointer]:
+                  - /url: /om-oss
+              - listitem [ref=e482]:
+                - link "Fraktinformasjon" [ref=e483] [cursor=pointer]:
+                  - /url: /frakt-og-retur
+              - listitem [ref=e484]:
+                - link "Personvern" [ref=e485] [cursor=pointer]:
+                  - /url: /personvern
+              - listitem [ref=e486]:
+                - link "Vilkår og betingelser" [ref=e487] [cursor=pointer]:
+                  - /url: /vilkar-betingelser
+        - generic [ref=e488]:
+          - heading "Bedriftsinformasjon" [level=3] [ref=e489]
+          - navigation "Bedriftsinformasjon navigasjon" [ref=e490]:
+            - list [ref=e491]:
+              - listitem [ref=e492]:
+                - link "KELC AS" [ref=e493] [cursor=pointer]:
+                  - /url: /
+              - listitem [ref=e494]:
+                - link "Lille Damsgårdsveien 25" [ref=e495] [cursor=pointer]:
+                  - /url: map:Lille Damsgårdsveien 25
+              - listitem [ref=e496]:
+                - link "5162, Laksevåg" [ref=e497] [cursor=pointer]:
+                  - /url: map:Lille Damsgårdsveien 25, 5162, Bergen
+              - listitem [ref=e498]:
+                - link "Org.nr 925 820 393" [ref=e499] [cursor=pointer]:
+                  - /url: /kontaktskjema
+      - generic [ref=e503]:
+        - generic [ref=e504]:
+          - img [ref=e505]
+          - paragraph [ref=e508]: Meld deg på Utekos sitt nyhetsbrev!
+        - paragraph [ref=e509]: Meld deg inn i vår medlemsklubb og få nyhetsbrev, inspirasjon og eksklusive rabatter i innboksen din.
+        - generic [ref=e510]:
+          - textbox "Din e-postadresse..." [ref=e511]
+          - button "Meld meg inn" [ref=e512] [cursor=pointer]:
+            - text: Meld meg inn
+            - img [ref=e513]
+      - generic [ref=e516]:
+        - img "Klarna betalingsmetode" [ref=e517]
+        - img "Vipps betalingsmetode" [ref=e522]
+        - img "Visa betalingsmetode" [ref=e524]
+        - img "Mastercard betalingsmetode" [ref=e528]
+      - generic [ref=e532]:
+        - paragraph [ref=e533]: © 2026 Kelc AS. Alle rettigheter forbeholdt.
+        - paragraph [ref=e534]: Utekos® er et registrert varemerke i Norge.
+  - generic [ref=e535]:
+    - img [ref=e537]
+    - button "Open Tanstack query devtools" [ref=e585] [cursor=pointer]:
+      - img [ref=e586]

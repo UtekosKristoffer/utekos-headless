@@ -15,6 +15,7 @@ import { Star, ChevronDown, ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils/className'
 import CinemaOne from '@public/cinema-twilight.png'
 import MobileOne from '@public/terrace-4-5.png'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 
 gsap.registerPlugin(useGSAP)
@@ -24,9 +25,9 @@ const SCROLL_TARGETS = {
   solution: 'section-solution'
 } as const
 
-function smoothScrollTo(id: string) {
+function smoothScrollTo(id: string, reducedMotion: boolean | null) {
   const el = document.getElementById(id)
-  if (el) el.scrollIntoView({ behavior: 'smooth' })
+  if (el) el.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' })
 }
 
 export function Hero() {
@@ -50,7 +51,7 @@ export function Hero() {
             '.sv-body',
             '.sv-cta-row',
             '.sv-trust',
-            '.sv-badge',
+            '.sv-availability',
             '.sv-scroll-hint'
           ],
           { clearProps: 'all' }
@@ -124,7 +125,7 @@ export function Hero() {
           autoAlpha: 1,
           scale: 1,
           duration: 0.95,
-          ease: 'back.out(1.7)'
+          ease: 'power3.out'
         },
         '-=0.5'
       )
@@ -142,9 +143,9 @@ export function Hero() {
         '-=0.4'
       )
 
-      // 7. Stock badge — scale fade up
+      // 7. Availability line — scale fade up
       tl.fromTo(
-        '.sv-badge',
+        '.sv-availability',
         { y: 10, autoAlpha: 0, scale: 0.94 },
         {
           y: 0,
@@ -176,7 +177,7 @@ export function Hero() {
     <section
       ref={heroRef}
       aria-labelledby='hero-headline'
-      className='relative w-full min-h-[calc(100svh-70px)] xl:min-h-[calc(100svh-86px)] overflow-hidden bg-[#1A1612] text-cloud-dancer font-google-sans'
+      className='relative w-full min-h-[calc(100svh-70px)] xl:min-h-[calc(100svh-86px)] overflow-hidden bg-maritime-darkest text-cloud-dancer font-google-sans'
     >
       {/* Background — desktop */}
       <motion.div
@@ -205,8 +206,7 @@ export function Hero() {
           src={MobileOne}
           alt='Utekos kveldsstemning'
           fill
-          priority
-          fetchPriority='high'
+          loading='eager'
           quality={80}
           sizes='(min-width: 768px) 0px, 100vw'
           placeholder='blur'
@@ -217,12 +217,12 @@ export function Hero() {
       {/* Gradient overlays */}
       <motion.div
         aria-hidden
-        className='absolute inset-0 z-[1] bg-gradient-to-b from-black/30 via-black/40 via-50% to-[#1A1612]/95'
+        className='absolute inset-0 z-[1] bg-gradient-to-b from-maritime-darkest/35 via-maritime-darkest/55 via-50% to-maritime-darkest/95'
         style={{ opacity: overlayOpacity }}
       />
       <div
         aria-hidden
-        className='absolute inset-y-0 left-0 z-[1] hidden w-1/2 bg-gradient-to-r from-black/55 via-black/15 to-transparent md:block'
+        className='absolute inset-y-0 left-0 z-[1] hidden w-1/2 bg-gradient-to-r from-maritime-darkest/80 via-maritime-darkest/20 to-transparent md:block'
       />
 
       {/* Main content — scroll parallax via framer-motion, entrance via GSAP */}
@@ -233,7 +233,7 @@ export function Hero() {
         <div className='max-w-2xl'>
           {/* Utekos wordmark — letter-by-letter GSAP entrance */}
           <div
-            className='mb-5 aspect-[1281/312] text-overcast h-11 sm:h-14 md:mb-6 md:h-16 lg:h-20 drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]'
+            className='mb-5 aspect-[1281/312] text-overcast h-11 drop-shadow-lg sm:h-14 md:mb-6 md:h-16 lg:h-20'
             style={{ perspective: '900px' }}
           >
             <UtekosWordmark
@@ -245,57 +245,66 @@ export function Hero() {
           {/* Headlines — overflow-hidden parents for clip reveal effect */}
           <h1
             id='hero-headline'
-            className='font-google-sans text-4xl leading-[0.92] tracking-[-0.01em]  font-semibold sm:text-5xl md:text-6xl lg:text-7xl [text-shadow:0_2px_24px_rgba(0,0,0,0.45)]'
+            aria-label='Skreddersy varmen. Forleng kvelden.'
+            className='font-google-sans text-4xl font-bold leading-[0.92] tracking-[-0.01em] drop-shadow-lg sm:text-5xl md:text-6xl lg:text-7xl'
           >
             <div className='overflow-hidden'>
-              <span className='sv-headline-1 text-ancient-water block whitespace-nowrap'>
+              <span className='sv-headline-1 block whitespace-nowrap text-cloud-dancer'>
                 Skreddersy varmen.
               </span>
             </div>
             <div className='overflow-hidden mt-3'>
-              <span className='sv-headline-2 block text-bleached-mauve italic font-google-sans font-semibold max-w-4xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl'>
+              <span className='sv-headline-2 block max-w-4xl text-3xl font-google-sans font-bold italic text-overcast sm:text-4xl md:text-5xl lg:text-6xl'>
                 Forleng kvelden.
               </span>
             </div>
           </h1>
 
           {/* Body copy */}
-          <p className='sv-body font-google-sans mt-7 max-w-xl text-base leading-[1.45] text-cloud-dancer md:text-lg lg:text-xl [text-shadow:0_1px_12px_rgba(0,0,0,0.5)]'>
+          <p className='sv-body mt-7 max-w-xl font-google-sans text-base leading-[1.45] text-cloud-dancer drop-shadow-md md:text-lg lg:text-xl'>
             Kompromissløs komfort{' '}
             <span className='text-cloud-dancer'> og </span>
             overlegen allsidighet.
           </p>
 
           {/* CTA row */}
-          <div className='sv-cta-row mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5'>
-            <button
-              type='button'
-              onClick={() => smoothScrollTo(SCROLL_TARGETS.purchase)}
-              data-track='HeroCtaSkreddersyVarmen'
-              className='group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-maritime-blue px-7 py-4 text-base font-semibold tracking-wide text-cloud-dancer shadow-[0_10px_40px_-8px_rgba(60,80,160,0.5)] transition-all duration-300 hover:bg-maritime-blue-cmyk-coated hover:shadow-[0_14px_50px_-8px_rgba(60,80,160,0.72)] active:scale-[0.97] md:text-lg'
+          <div className='sv-cta-row mt-9 flex w-full max-w-[19rem] flex-col items-stretch gap-3'>
+            <BrandBadge
+              asChild
+              backgroundColor='var(--color-cloud-dancer)'
+              textColor='var(--color-maritime-darkest)'
+              className='h-12 w-full px-5 py-0 text-sm font-semibold leading-none tracking-normal shadow-xl transition-[filter,transform] hover:brightness-95 active:scale-[0.97] md:h-14 md:text-base'
             >
-              <span className='relative z-10'>Finn din favoritt</span>
-              <ArrowRight
-                className='relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 md:h-5 md:w-5'
-                aria-hidden
-              />
-              <span
-                aria-hidden
-                className='absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-full'
-              />
-            </button>
+              <button
+                type='button'
+                onClick={() => smoothScrollTo(SCROLL_TARGETS.purchase, reduced)}
+                data-track='HeroCtaSkreddersyVarmen'
+                className='group inline-flex items-center gap-2 leading-none'
+              >
+                <span className='block leading-none'>Finn din favoritt</span>
+                <ArrowRight
+                  className='size-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1'
+                  aria-hidden
+                />
+              </button>
+            </BrandBadge>
 
-            <button
-              type='button'
-              onClick={() => smoothScrollTo(SCROLL_TARGETS.solution)}
-              data-track='HeroSecondaryCtaSkreddersyVarmen'
-              className='group inline-flex items-center gap-2 text-sm font-google-sans font-semibold uppercase text-cloud-dancer/85 transition-colors hover:text-primary-button md:text-base'
+            <BrandBadge
+              asChild
+              backgroundColor='var(--color-overcast)'
+              textColor='var(--color-maritime-darkest)'
+              className='h-12 w-full px-5 py-0 text-sm font-semibold leading-none tracking-normal shadow-sm transition-[filter,transform] hover:brightness-95 active:scale-[0.97] md:h-14 md:text-base'
             >
-              <ChevronDown
-                className='h-4 w-4 transition-transform group-hover:translate-y-0.5'
-                aria-hidden
-              />
-            </button>
+              <button
+                type='button'
+                onClick={() => smoothScrollTo(SCROLL_TARGETS.solution, reduced)}
+                data-track='HeroSecondaryCtaSkreddersyVarmen'
+                className='group inline-flex items-center gap-2 leading-none'
+              >
+                <span className='block leading-none'>Se løsningen</span>
+                <ChevronDown className='size-4 shrink-0' aria-hidden />
+              </button>
+            </BrandBadge>
           </div>
 
           {/* Trust signals */}
@@ -304,7 +313,7 @@ export function Hero() {
             aria-label='Kundeanmeldelser'
           >
             <div
-              className='flex gap-0.5 text-[#FFD56B] [filter:drop-shadow(0_1px_4px_rgba(0,0,0,0.5))]'
+              className='flex gap-0.5 text-primary-button drop-shadow-md'
               aria-hidden
             >
               {[1, 2, 3, 4, 5].map(i => (
@@ -314,37 +323,37 @@ export function Hero() {
             <span className='font-semibold text-cloud-dancer'>4.8/5</span>
           </div>
 
-          {/* Stock badge */}
-          <div className='sv-badge mt-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/30 px-3 py-1.5 text-xs text-cloud-dancer/85 backdrop-blur-md'>
-            <span className='relative flex h-2 w-2' aria-hidden>
-              <span
-                className={cn(
-                  'absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-70',
-                  !reduced && 'animate-ping'
-                )}
-              />
-              <span className='relative inline-flex h-2 w-2 rounded-full bg-emerald-400' />
-            </span>
-            <span className='font-medium'>På lager</span>
-            <span className='text-cloud-dancer/45'>·</span>
+          {/* Availability */}
+          <p
+            className='sv-availability mt-5 max-w-[19rem] font-google-sans text-xs font-medium leading-[1.45] tracking-normal text-cloud-dancer/85 md:text-sm'
+            aria-label='På lager, levering 2 til 5 dager, 14 dagers retur'
+          >
+            <span>På lager</span>
+            <span className='mx-2 text-cloud-dancer/45'>·</span>
             <span>Levering 2–5 dager</span>
-            <span className='hidden text-cloud-dancer/45 sm:inline'>·</span>
+            <span className='mx-2 hidden text-cloud-dancer/45 sm:inline'>
+              ·
+            </span>
             <span className='hidden sm:inline'>14 dagers retur</span>
-          </div>
+          </p>
         </div>
       </motion.div>
 
       {/* Bottom scroll hint */}
       <button
         type='button'
-        onClick={() => smoothScrollTo(SCROLL_TARGETS.solution)}
+        onClick={() => smoothScrollTo(SCROLL_TARGETS.solution, reduced)}
         aria-label='Bla videre'
         className='sv-scroll-hint absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-cloud-dancer/60 transition-[opacity,transform] duration-300 hover:opacity-100 hover:translate-y-1 md:flex'
       >
-        <span className='text-[10px] font-semibold uppercase tracking-[0.25em]'>
-          Bla
+        <span className='text-[10px] font-semibold tracking-normal'>
+          Bla videre
         </span>
-        <ChevronDown size={20} className='animate-bounce' aria-hidden />
+        <ChevronDown
+          size={20}
+          className={cn(!reduced && 'animate-bounce')}
+          aria-hidden
+        />
       </button>
     </section>
   )

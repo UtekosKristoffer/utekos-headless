@@ -10,7 +10,7 @@ export function KlarnaLogo(props: SVGProps<SVGSVGElement>) {
       xmlns='http://www.w3.org/2000/svg'
       {...props}
     >
-      <title>Funksjonell varme</title>
+      <title>Klarna</title>
       <g transform='matrix(17.769 0 0 17.769 .23581 .30022)' fillRule='evenodd'>
         <rect width='45' height='25' rx='4.321' fill='#FFA8CD' />
         <g fill='#0A0B09'>

@@ -83,7 +83,7 @@ export function InspirationGallerySection() {
                     />
                   </AspectRatio>
                   <div className='pt-4 text-left'>
-                    <h4 className='leading-[1] font-semibold tracking-normal'>
+                    <h4 className='leading-[1] font-sans font-semibold tracking-normal'>
                       {image.title}
                     </h4>
                     <p className='text-sm text-overcast'>{image.description}</p>

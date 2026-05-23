@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils/className'
 import { CloudRain, Feather, Gift, ShieldCheck } from 'lucide-react'
-import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
+import type { CSSProperties } from 'react'
 
 const iconMap = {
   'cloud-rain': CloudRain,
@@ -38,36 +38,35 @@ interface FeatureCardProps {
 export function FeatureCard({ feature }: FeatureCardProps) {
   const IconComponent = iconMap[feature.icon] ?? CloudRain
   const tone = toneStyles[feature.tone] ?? toneStyles.water
+  const cardStyle = {
+    '--feature-card-bg': tone.bg
+  } as CSSProperties
 
   return (
-    <BrandBadge
-      asChild
-      backgroundColor={tone.bg}
-      textColor='var(--maritime-blue)'
-      className='w-full justify-start whitespace-normal rounded-2xl border border-maritime-blue/40 p-5 pr-8 shadow-[0_1px_0_rgba(255,255,255,0.18)]'
+    <article
+      className='w-full rounded-2xl border border-maritime-blue/32 bg-[var(--feature-card-bg)] p-4 pr-5 text-maritime-blue shadow-[0_1px_0_color-mix(in_oklab,var(--cloud-dancer)_18%,transparent)] sm:p-5 sm:pr-8'
+      style={cardStyle}
     >
-      <article>
-        <div className='flex items-start gap-4'>
-          <span
-            className={cn(
-              'flex size-11 shrink-0 items-center justify-center rounded-full border',
-              tone.icon
-            )}
-          >
-            <IconComponent aria-hidden='true' className='size-5' />
-          </span>
+      <div className='flex items-start gap-3 sm:gap-4'>
+        <span
+          className={cn(
+            'flex size-10 shrink-0 items-center justify-center rounded-full border sm:size-11',
+            tone.icon
+          )}
+        >
+          <IconComponent aria-hidden='true' className='size-5' />
+        </span>
 
-          <div className='min-w-0 flex-1 pt-1'>
-            <h3 className='mb-1.5 text-base font-medium tracking-[-0.01em] text-maritime-blue'>
-              {feature.title}
-            </h3>
+        <div className='min-w-0 flex-1 pt-0.5 sm:pt-1'>
+          <h3 className='mb-1.5 text-base font-semibold leading-snug tracking-[-0.01em]'>
+            {feature.title}
+          </h3>
 
-            <p className='text-sm leading-relaxed text-maritime-blue'>
-              {feature.description}
-            </p>
-          </div>
+          <p className='text-sm leading-[1.45] tracking-[-0.01em]'>
+            {feature.description}
+          </p>
         </div>
-      </article>
-    </BrandBadge>
+      </div>
+    </article>
   )
 }

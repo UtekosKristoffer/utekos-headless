@@ -1,5 +1,6 @@
 // Path: src/components/ProductCard/ProductCard.tsx
 'use client'
+
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { Badge } from '@/components/ui/badge'

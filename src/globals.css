@@ -1,7 +1,19 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@theme {
+  --spacer-xxxs: 0.25rem;
+  --spacer-xxs: 0.5rem;
+  --spacer-xs: 0.75rem;
+  --spacer-s: 1rem;
+  --spacer-m: 1.5rem;
+  --spacer-l: 2rem;
+  --spacer-xl: 3rem;
+  --spacer-xxl: 4rem;
+  --tracking-tighter: 0.04em;
+}
 :root {
+  --tracking-tighter: 0.04em;
   --black-beauty: oklch(0.2739 0.0055 286.03);
   --black-six: oklch(0.205 0.02 248.83);
   --baritone-blue: oklch(0.2821 0.0257 281.42);
@@ -151,6 +163,7 @@
 }
 
 .dark {
+  --tracking-tighter: 0.04em;
   --color-dark-rose: oklch(0.4885 0.0953 4.64);
   --color-klarna-pink: oklch(0.8271 0.1114 352.7);
   --color-secondary-background: oklch(0.16 0.02 279.42);
@@ -303,6 +316,7 @@
 }
 
 @theme inline {
+  --tracking-tighter: 0.04em;
   --breakpoint-tablet: 33.75rem;
   --bright-white: oklch(0.9801 0.0096 252.81);
   --color-klarna-pink: var(--klarna-pink);
@@ -1215,7 +1229,7 @@
 }
 
 @utility font-utekos-text {
-  font-family: var(--font-utekos-text);
+  font-family: var(--font-utekos-text) font-base;
 }
 
 @utility item-deleting {

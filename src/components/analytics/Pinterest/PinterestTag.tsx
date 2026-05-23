@@ -1,17 +1,17 @@
 'use client'
 
 import { usePathname, useSearchParams } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { getCookie } from '@/components/analytics/Meta/getCookie'
 import { generateEventID } from '@/components/analytics/Meta/generateEventID'
 import { setUrlCookie } from '@/components/analytics/Pinterest/setUrlCookie'
 
 const PINTEREST_TAG_ID = process.env.NEXT_PUBLIC_PINTEREST_TAG_ID
+type PinterestTracker = NonNullable<Window['pintrk']>
 
 export function PinterestTag() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const [loaded, setLoaded] = useState(false)
   const isInitialized = useRef(false)
   const firedEvents = useRef<Set<string>>(new Set())
   const lastPathname = useRef<string | null>(null)
@@ -25,9 +25,9 @@ export function PinterestTag() {
     }
 
     if (!window.pintrk) {
-      const pintrkInit = function (...args: any[]) {
-        window.pintrk?.queue.push(args)
-      } as any
+      const pintrkInit = ((...args: unknown[]) => {
+        pintrkInit.queue.push(args)
+      }) as PinterestTracker
       pintrkInit.queue = []
       pintrkInit.version = '3.0'
       window.pintrk = pintrkInit
@@ -43,15 +43,13 @@ export function PinterestTag() {
       window.pintrk('load', PINTEREST_TAG_ID, userData)
       window.pintrk.loaded = true
       isInitialized.current = true
-      setLoaded(true)
     } else {
-      setLoaded(true)
       isInitialized.current = true
     }
   }, [searchParams, epik])
 
   useEffect(() => {
-    if (!loaded || !PINTEREST_TAG_ID) return
+    if (!PINTEREST_TAG_ID || !window.pintrk) return
 
     const currentPath =
       pathname + (searchParams.toString() ? '?' + searchParams.toString() : '')
@@ -89,14 +87,19 @@ export function PinterestTag() {
         actionSource: 'website'
       }
 
-      fetch('/api/tracking/event?epik=' + (epik || ''), {
+      const trackingEventsUrl =
+        epik ?
+          `/api/tracking-events?epik=${encodeURIComponent(epik)}`
+        : '/api/tracking-events'
+
+      fetch(trackingEventsUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
         keepalive: true
       }).catch(err => console.error(err))
     }
-  }, [pathname, searchParams, loaded, epik])
+  }, [pathname, searchParams, epik])
 
   return null
 }

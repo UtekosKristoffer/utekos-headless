@@ -48,7 +48,8 @@ export function ProductViewTracking({
       revenueValue: price,
       currency,
       productId: contentId,
-      pageType: 'product'
+      pageType: 'product',
+      eventId
     })
 
     if (typeof window !== 'undefined' && window.snaptr) {

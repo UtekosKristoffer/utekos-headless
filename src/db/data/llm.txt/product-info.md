@@ -103,7 +103,7 @@ Opplev en ny standard for utendørs velvære.
 
 **Utekos TechDown™** forener banebrytende innovasjon med tidløs eleganse. Det
 eksklusive Luméa™-skallet gir en sofistikert finish og fungerer som et
-beskyttende skjold, mens den ytelsesoptimaliserte **CloudWeave™-isolasjonen**
+beskyttende skjold, mens den ytelsesoptimaliserte **CloudWave™-isolasjonen**
 sikrer høy og pålitelig varme.
 
 Kjernen i konseptet er vår unike **3-i-1 funksjonalitet**. Gjennomtestede
@@ -125,7 +125,7 @@ som bruker.
 
 ## Functions
 
-**CloudWeave™**
+**CloudWave™**
 
 Avansert isolasjonsteknologi utviklet for optimal varmeeffekt. Løsningen
 kombinerer høy isolasjonsgrad med utmerket pusteevne, og opprettholder varmen
@@ -169,7 +169,7 @@ båten eller ved bålpannen. Bruk den, lev i den, og stol på at den holder. Enk
 vedlikehold
 
 Komfort skal være ukomplisert. TechDown™ tåler maskinvask og tørker raskt, slik
-at den alltid er klar for neste eventyr. CloudWeave™-isolasjonen er utviklet
+at den alltid er klar for neste eventyr. CloudWave™-isolasjonen er utviklet
 for å bevare både spenst og varmeevne over tid, vask etter vask. Helhetlig
 komfortdesign
 

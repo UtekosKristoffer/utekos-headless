@@ -1,6 +1,6 @@
 'use client'
 
-import { Activity, useCallback, useState } from 'react'
+import { Activity, useState } from 'react'
 import { QuickViewModal } from '@/components/products/QuickViewModal'
 import { productHandle } from '@/api/constants'
 import { useNewProductLaunchAnimations } from '@/hooks/useNewProductLaunchAnimations'
@@ -18,14 +18,14 @@ export function NewProductLaunchSection({
   const containerRef = useNewProductLaunchAnimations()
   const { trackEvent } = useLaunchSectionTracking(variantId)
 
-  const handleDiscoverClick = useCallback(() => {
+  const handleDiscoverClick = () => {
     trackEvent('Discover', 'HeroInteract')
-  }, [trackEvent])
+  }
 
-  const handleQuickViewClick = useCallback(() => {
+  const handleQuickViewClick = () => {
     setIsModalOpen(true)
     trackEvent('QuickView', 'OpenQuickView')
-  }, [trackEvent])
+  }
 
   return (
     <>

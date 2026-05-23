@@ -1,6 +1,22 @@
-type MicrosoftUetPayloadValue = string | number | string[]
+type MicrosoftUetPayloadValue =
+  | string
+  | number
+  | string[]
+  | Record<string, string>
+
+type MicrosoftUetPayload = Record<string, MicrosoftUetPayloadValue>
+type MicrosoftUetQueueItem = string | MicrosoftUetPayload
+type MicrosoftUetQueue = {
+  push: (...items: MicrosoftUetQueueItem[]) => number | void
+}
+
+type MicrosoftUetUserData = {
+  email?: string
+  phone?: string
+}
 
 export type TrackMicrosoftUetEventOptions = {
+  eventName?: string
   category?: string
   action?: string
   label?: string
@@ -9,10 +25,11 @@ export type TrackMicrosoftUetEventOptions = {
   currency?: string
   productId?: string | string[]
   pageType?: string
+  eventId?: string
 }
 
 function addDefinedValue(
-  payload: Record<string, MicrosoftUetPayloadValue>,
+  payload: MicrosoftUetPayload,
   key: string,
   value: MicrosoftUetPayloadValue | undefined
 ): void {
@@ -33,7 +50,35 @@ function normalizeProductIds(
   return productIds.length === 1 ? productIds[0] : productIds
 }
 
+function getMicrosoftUetQueue(): MicrosoftUetQueue {
+  const microsoftUetQueue = window.uetq
+
+  if (microsoftUetQueue && typeof microsoftUetQueue.push === 'function') {
+    return microsoftUetQueue as MicrosoftUetQueue
+  }
+
+  const queue: MicrosoftUetQueueItem[] = []
+  window.uetq = queue
+  return queue
+}
+
+export function setMicrosoftUetUserData({
+  email,
+  phone
+}: MicrosoftUetUserData): void {
+  if (typeof window === 'undefined') return
+  if (!email && !phone) return
+
+  getMicrosoftUetQueue().push('set', {
+    pid: {
+      em: email ?? '',
+      ph: phone ?? ''
+    }
+  })
+}
+
 export function trackMicrosoftUetEvent({
+  eventName,
   category,
   action,
   label,
@@ -41,24 +86,55 @@ export function trackMicrosoftUetEvent({
   revenueValue,
   currency,
   productId,
-  pageType
+  pageType,
+  eventId
 }: TrackMicrosoftUetEventOptions): void {
   if (typeof window === 'undefined') return
 
-  const payload: Record<string, MicrosoftUetPayloadValue> = {}
+  const eventAction = eventName ?? action
+  if (!eventAction) return
 
-  addDefinedValue(payload, 'ec', category)
-  addDefinedValue(payload, 'ea', action)
-  addDefinedValue(payload, 'el', label)
-  addDefinedValue(payload, 'ev', value)
+  const payload: MicrosoftUetPayload = {}
+
+  addDefinedValue(payload, 'event_category', category)
+  addDefinedValue(payload, 'event_label', label)
+  addDefinedValue(payload, 'event_value', value)
+  addDefinedValue(payload, 'event_id', eventId)
   addDefinedValue(payload, 'gv', revenueValue)
   addDefinedValue(payload, 'gc', currency)
-  addDefinedValue(payload, 'prodid', normalizeProductIds(productId))
-  addDefinedValue(payload, 'pagetype', pageType)
+  addDefinedValue(payload, 'revenue_value', revenueValue)
+  addDefinedValue(payload, 'currency', currency)
+  addDefinedValue(payload, 'ecomm_prodid', normalizeProductIds(productId))
+  addDefinedValue(payload, 'ecomm_pagetype', pageType)
 
   if (Object.keys(payload).length === 0) return
 
-  const microsoftUetQueue = window.uetq ?? ([] as Record<string, unknown>[])
-  window.uetq = microsoftUetQueue
-  ;(microsoftUetQueue as Record<string, unknown>[]).push(payload)
+  getMicrosoftUetQueue().push('event', eventAction, payload)
+}
+
+export function trackMicrosoftUetProductPurchase({
+  productId,
+  revenueValue,
+  currency,
+  eventId,
+  userData
+}: {
+  productId: string | string[]
+  revenueValue: number
+  currency: string
+  eventId?: string
+  userData?: MicrosoftUetUserData
+}): void {
+  if (userData) {
+    setMicrosoftUetUserData(userData)
+  }
+
+  trackMicrosoftUetEvent({
+    eventName: 'PRODUCT_PURCHASE',
+    productId,
+    pageType: 'PURCHASE',
+    revenueValue,
+    currency,
+    ...(eventId ? { eventId } : {})
+  })
 }

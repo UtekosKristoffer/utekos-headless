@@ -16,27 +16,27 @@ export const PRODUCT_VARIANTS = {
   techdown: {
     id: 'utekos-techdown',
     title: 'Utekos TechDown™',
-    subtitle: 'Vår nyeste, varmeste og mest allsidige',
+    subtitle: 'Vår nyeste, varmeste og mest allsidige modell.',
     price: 1790,
     badge: 'Bestselger',
     description:
-      'Forener banebrytende innovasjon med tidløs eleganse. CloudWeave™ opprettholder varmen i deg, og spensten i foret, selv under fuktige forhold. 3-i-1-konstruksjonen lar deg enkelt tilpasse passform, regulere ventilasjon og veksle mellom ulike funksjonelle moduser.',
+      'Forener banebrytende innovasjon med tidløs eleganse. CloudWave™ opprettholder varmen i deg, og spensten i foret, selv under fuktige forhold. 3-i-1-konstruksjonen lar deg enkelt tilpasse passform, regulere ventilasjon og veksle mellom ulike funksjonelle moduser.',
     highlights: [
       {
         title: 'Holder varmen i fukt',
-        body: 'CloudWeave™ hydrofob isolasjon beholder rundt 98 % varmeevne selv når den blir våt. Vanlig dun kollapser; TechDown består.'
+        body: 'Utekos TechDown™ forener banebrytende innovasjon med tidløs eleganse. Det eksklusive Luméa™-skallet gir en sofistikert finish og fungerer som et beskyttende skjold, mens den ytelsesoptimaliserte CloudWave™-isolasjonen sikrer høy og pålitelig varme. Kjernen i konseptet er vår unike 3-i-1 funksjonalitet. Gjennomtestede løsninger lar deg enkelt tilpasse passform, regulere ventilasjon og veksle mellom ulike funksjonelle moduser. Når dine behov for velvære endrer seg, finnes det alltid en justeringsmulighet som lar deg fortsette opplevelsen av kompromissløs komfort. Helt uavbrutt.'
       },
       {
-        title: '3-i-1 fleksibilitet',
-        body: 'Parkas, oppfestet eller kokong — juster på sekunder uten å gå inn for å skifte.'
+        title: '3-i-1 funksjonalitet',
+        body: 'Juster, form og nyt.'
       },
       {
         title: 'YKK® Dual V-Zip™',
-        body: 'To-spors omvendt V-glidelås gir ventilasjon og tilgang uten å åpne hele forsiden.'
+        body: 'Lar deg enkelt tilpasse graden av ventilasjon og skreddersy varmen etter dine behov.'
       }
     ],
-    features: ['Vannavstøtende', 'Helårsbruk', 'Slitesterk'],
-    colors: [{ name: 'Havdyp', hex: '#27293D' }],
+    features: ['Helårsbruk', 'Tre bruksformer', 'Vannavstøtende'],
+    colors: [{ name: 'Havdyp', hex: 'var(--color-maritime-blue)' }],
     sizes: ['Liten', 'Middels', 'Stor', 'Ekstra stor'],
     images: [
       '/kate-tech-photo.webp',
@@ -48,31 +48,31 @@ export const PRODUCT_VARIANTS = {
   mikro: {
     id: 'utekos-mikro',
     title: 'Utekos Mikrofiber™',
-    subtitle: 'Lettvekts reisefølge',
+    subtitle: 'Lett varme som tar lite plass',
     price: 1590,
     badge: 'Reisefavoritt',
     description:
-      'Utekos kolleksjonens letteste signaturmodell. Det naturlige valget for deg som vil ha maksimal komfort, robust beskyttelse og minimal vekt. DuraLite sørger for utmerket fukttransport fra innsiden, mens DWR-behandlingen gir vannavstøtende beskyttelse fra utsiden. Bredt bruksområde. Egner seg til alt fra bobil, båt og hytte til den passive tiden som tilskuer på sidelinjen av fotballbanen.',
+      'Kolleksjonens letteste modell for deg som vil ha varme uten mye volum. Den pakker seg lett, tørker raskt og gir trygg komfort i bobilen, båten, på hytta eller på sidelinjen.',
     highlights: [
       {
         title: 'Pakker seg lett',
-        body: 'Lavest vekt i kolleksjonen — ferdig sammenpakket tar den minimal plass i bagasjen.'
+        body: 'Lav vekt og lite volum gjør den enkel å ha med i bag, bobil, båt og tursekk.'
       },
       {
         title: 'Hurtigtørkende',
-        body: 'Mikrofiber-isolasjonen tørker raskt etter regnbyger eller fuktig morgenduft på campingstolen.'
+        body: 'Mikrofiber-isolasjonen tørker raskt etter regnbyger og fuktige morgener.'
       },
       {
         title: 'Allergivennlig',
-        body: '100 % syntetisk — ingen animalske produkter. Trygt valg for deg med dunallergi.'
+        body: '100 % syntetisk fyll gjør den til et godt valg for deg som vil unngå dun.'
       },
       {
         title: 'YKK® Dual V-Zip™',
-        body: 'Lett, vindtett og vannavstøtende ytre. Bygget for samme situasjoner som flaggskipet — bare lettere.'
+        body: 'Den samme praktiske glidelåsløsningen gjør det lett å sitte, gå og regulere varme.'
       }
     ],
-    features: ['Hurtigtørkende', 'Mest kompakt', 'Allergivennlig'],
-    colors: [{ name: 'Fjellblå', hex: '#020244' }],
+    features: ['Lett å pakke', 'Tørker raskt', 'Syntetisk fyll'],
+    colors: [{ name: 'Fjellblå', hex: 'var(--color-ocean-cavern)' }],
     sizes: ['Medium', 'Large'],
     images: [
       '/1080/blue-full.png',

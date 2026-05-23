@@ -124,7 +124,8 @@ export const CheckoutButton = ({
         revenueValue: value,
         currency,
         productId: cleanItemIds,
-        pageType: 'cart'
+        pageType: 'cart',
+        eventId: eventID
       })
 
       const captureBody: CaptureBody = {

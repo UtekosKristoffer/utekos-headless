@@ -67,7 +67,8 @@ export function dispatchAddToCartPixels({
     revenueValue: value,
     currency,
     productId: contentIds,
-    pageType: 'cart'
+    pageType: 'cart',
+    eventId: eventID
   })
 
   if (window.fbq) {

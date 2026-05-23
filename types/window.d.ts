@@ -65,10 +65,17 @@ declare global {
       _o: Record<string, unknown>
     }
     uetq?:
-      | Record<string, unknown>[]
+      | Array<string | Record<string, unknown>>
       | {
-          push: (...items: Record<string, unknown>[]) => number | void
+          push: (
+            ...items: Array<string | Record<string, unknown>>
+          ) => number | void
         }
+    uet_report_conversion?: (
+      productId: string | string[],
+      revenueValue: number,
+      currency?: string
+    ) => void
     TiktokAnalyticsObject?: string
   }
 }

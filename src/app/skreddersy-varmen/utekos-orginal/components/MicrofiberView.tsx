@@ -1,12 +1,5 @@
 import Image from 'next/image'
-import {
-  Check,
-  Truck,
-  RefreshCcw,
-  ShieldCheck,
-  ShoppingCart,
-  Loader2
-} from 'lucide-react'
+import { Check, Truck, ShieldCheck, ShoppingCart, Loader2 } from 'lucide-react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { productConfig } from '@/app/skreddersy-varmen/utekos-orginal/utils/productConfig'
 import type {

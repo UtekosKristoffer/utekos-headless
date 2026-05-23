@@ -1,95 +1,55 @@
 // Path: src/app/skreddersy-varmen/utekos-orginal/components/LandingPageJsonLd.tsx
 import { cacheLife, cacheTag } from 'next/cache'
 import { reviews } from '../utils/reviews'
+import {
+  LANDING_AUTHOR_NAME,
+  LANDING_BASE_URL,
+  LANDING_FAQ_ENTRIES,
+  LANDING_LAST_UPDATED,
+  LANDING_PAGE_URL,
+  LANDING_PRODUCTS
+} from '../../data/landingSeoContent'
 import type {
-  CollectionPage,
-  WithContext,
-  ListItem,
-  Product,
-  Review,
-  FAQPage,
   AggregateRating,
-  Question
+  BreadcrumbList,
+  CollectionPage,
+  FAQPage,
+  Graph,
+  ItemList,
+  ListItem,
+  Organization,
+  Product,
+  Question,
+  Review
 } from 'schema-dts'
-
-const BASE_URL = 'https://utekos.no'
-const LP_URL = `${BASE_URL}/skreddersy-varmen`
-
-type ProductSeed = {
-  position: number
-  handle: string
-  name: string
-  description: string
-  price: string
-  originalPrice: string
-  image: string
-  sku: string
-}
-
-const PRODUCTS: ProductSeed[] = [
-  {
-    position: 1,
-    handle: 'utekos-techdown',
-    name: 'Utekos TechDown™',
-    description:
-      'Flaggskipet i kolleksjonen. Hydrofob CloudWeave™-isolasjon beholder varmen selv i fukt. 3-i-1-konstruksjon lar deg justere fra parkas til kokong på sekunder.',
-    price: '1790',
-    originalPrice: '1990',
-    image: `${BASE_URL}/1080/kate-1080.png`,
-    sku: 'utekos-techdown'
-  },
-  {
-    position: 2,
-    handle: 'utekos-mikrofiber',
-    name: 'Utekos Mikrofiber™',
-    description:
-      'Vårt letteste plagg. Pakker seg ned, men gir overraskende lun varme. Perfekt for bobil, båt og reise.',
-    price: '1590',
-    originalPrice: '2290',
-    image: `${BASE_URL}/1080/blue-full.png`,
-    sku: 'utekos-mikrofiber'
-  }
-]
-
-const FAQ_ENTRIES: { q: string; a: string }[] = [
-  {
-    q: 'Hvor lang er leveringstiden?',
-    a: 'Vi sender samme dag (ikke søndag), og fraktiden er normalt 2–5 virkedager avhengig av hvor i Norge du bor. Fri frakt fra 999,- kr.'
-  },
-  {
-    q: 'Hvor lang er returfristen?',
-    a: '14 dagers åpent kjøp. Du kan sende varen tilbake uten forklaring innen 14 dager etter mottak.'
-  },
-  {
-    q: 'Hvordan finner jeg riktig størrelse?',
-    a: 'Bruk størrelsesguiden vår på utekos.no/handlehjelp/storrelsesguide. TechDown finnes i Liten, Middels, Stor og Ekstra stor – basert på din høyde og ønsket passform.'
-  },
-  {
-    q: 'Fungerer Utekos i fuktig vær?',
-    a: 'Ja. Utekos TechDown™ bruker hydrofob CloudWeave™-isolasjon som beholder rundt 98 % varmeevne selv når den blir våt. I motsetning til vanlig dun kollapser ikke fibrene.'
-  },
-  {
-    q: 'Hva menes med 3-i-1-funksjonalitet?',
-    a: 'Utekos kan brukes i tre moduser: Kokong (full isolasjon), Oppfestet (mellomlengde for mobilitet) og Parkas (kort, aktiv). Du justerer mellom modusene på sekunder uten å gå inn for å skifte.'
-  },
-  {
-    q: 'Hvordan vasker jeg Utekos?',
-    a: 'Maskinvask på maks 30 °C med mild såpe. Unngå tørketrommel og stryking. La plagget lufttørke. CloudWeave™-isolasjonen bevarer loft og varmeevne, vask etter vask.'
-  },
-  {
-    q: 'Kan jeg hente Utekos i butikk?',
-    a: 'Ja. Utekos distribueres også via Intersport. Lager i Bergen og hurtig forsendelse direkte fra oss gjør at du normalt har plagget innen 2–5 dager.'
-  }
-]
 
 function stringifyJsonLd(data: unknown): string {
   return JSON.stringify(data).replace(/</g, '\\u003c')
 }
 
-export async function LandingPageJsonLd() {
+export async function SkreddersyVarmenJsonLd() {
   'use cache'
   cacheLife('max')
   cacheTag('landing-page', 'skreddersy-varmen-jsonld')
+
+  const organizationNode: Organization = {
+    '@type': 'Organization',
+    '@id': `${LANDING_BASE_URL}/#organization`,
+    'name': 'Utekos',
+    'url': LANDING_BASE_URL,
+    'logo': `${LANDING_BASE_URL}/logo.png`,
+    'sameAs': ['https://www.instagram.com/utekos.no']
+  }
+
+  const authorNode: Organization = {
+    '@type': 'Organization',
+    '@id': `${LANDING_PAGE_URL}#author`,
+    'name': LANDING_AUTHOR_NAME,
+    'url': `${LANDING_BASE_URL}/om-oss`,
+    'parentOrganization': {
+      '@id': `${LANDING_BASE_URL}/#organization`
+    }
+  }
 
   const aggregateRating: AggregateRating = {
     '@type': 'AggregateRating',
@@ -117,48 +77,9 @@ export async function LandingPageJsonLd() {
     }
   }))
 
-  const itemListElement: ListItem[] = PRODUCTS.map(product => ({
-    '@type': 'ListItem',
-    'position': product.position,
-    'url': `${BASE_URL}/produkter/${product.handle}`,
-    'item': {
-      '@type': 'Product',
-      'name': product.name,
-      'description': product.description,
-      'image': product.image,
-      'url': `${BASE_URL}/produkter/${product.handle}`,
-      'offers': {
-        '@type': 'Offer',
-        'price': product.price,
-        'priceCurrency': 'NOK',
-        'priceSpecification': {
-          '@type': 'UnitPriceSpecification',
-          'priceType': 'https://schema.org/ListPrice',
-          'price': product.originalPrice,
-          'priceCurrency': 'NOK'
-        },
-        'availability': 'https://schema.org/InStock',
-        'url': `${BASE_URL}/produkter/${product.handle}`
-      }
-    }
-  }))
-
-  const collectionSchema: WithContext<CollectionPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    'name': 'Skreddersy varmen | Utekos®',
-    'description':
-      'Ta regien og opplev kompromissløs komfort og overlegen allsidighet.',
-    'url': LP_URL,
-    'mainEntity': {
-      '@type': 'ItemList',
-      'itemListElement': itemListElement
-    }
-  }
-
-  const productSchemas: WithContext<Product>[] = PRODUCTS.map(product => ({
-    '@context': 'https://schema.org',
+  const productNodes: Product[] = LANDING_PRODUCTS.map(product => ({
     '@type': 'Product',
+    '@id': `${LANDING_BASE_URL}/produkter/${product.handle}#product`,
     'name': product.name,
     'description': product.description,
     'image': product.image,
@@ -167,10 +88,10 @@ export async function LandingPageJsonLd() {
       '@type': 'Brand',
       'name': 'Utekos'
     },
-    'url': `${BASE_URL}/produkter/${product.handle}`,
+    'url': `${LANDING_BASE_URL}/produkter/${product.handle}`,
     'offers': {
       '@type': 'Offer',
-      'url': `${BASE_URL}/produkter/${product.handle}`,
+      'url': `${LANDING_BASE_URL}/produkter/${product.handle}`,
       'priceCurrency': 'NOK',
       'price': product.price,
       'priceSpecification': {
@@ -222,38 +143,99 @@ export async function LandingPageJsonLd() {
     'review': reviewNodes
   }))
 
-  const faqSchema: WithContext<FAQPage> = {
-    '@context': 'https://schema.org',
+  const itemListElement: ListItem[] = LANDING_PRODUCTS.map(product => ({
+    '@type': 'ListItem',
+    'position': product.position,
+    'url': `${LANDING_BASE_URL}/produkter/${product.handle}`,
+    'item': {
+      '@id': `${LANDING_BASE_URL}/produkter/${product.handle}#product`
+    }
+  }))
+
+  const productListNode: ItemList = {
+    '@type': 'ItemList',
+    '@id': `${LANDING_PAGE_URL}#products`,
+    'name': 'Utekos-modeller for justerbar varme',
+    'itemListElement': itemListElement
+  }
+
+  const breadcrumbNode: BreadcrumbList = {
+    '@type': 'BreadcrumbList',
+    '@id': `${LANDING_PAGE_URL}#breadcrumb`,
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Forside',
+        'item': LANDING_BASE_URL
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Skreddersy varmen',
+        'item': LANDING_PAGE_URL
+      }
+    ]
+  }
+
+  const faqNode: FAQPage = {
     '@type': 'FAQPage',
-    'mainEntity': FAQ_ENTRIES.map(
-      ({ q, a }): Question => ({
+    '@id': `${LANDING_PAGE_URL}#faq`,
+    'mainEntity': LANDING_FAQ_ENTRIES.map(
+      ({ question, answer }): Question => ({
         '@type': 'Question',
-        'name': q,
+        'name': question,
         'acceptedAnswer': {
           '@type': 'Answer',
-          'text': a
+          'text': answer
         }
       })
     )
   }
 
+  const collectionNode: CollectionPage = {
+    '@type': 'CollectionPage',
+    '@id': `${LANDING_PAGE_URL}#webpage`,
+    'name': 'Skreddersy varmen ute | Utekos 3-i-1 komfortplagg',
+    'description':
+      'Kjøpsnær guide til Utekos for terrasse, hytte, båt og bobil med 3-i-1-funksjon, fuktbeskyttelse, størrelse, levering og retur.',
+    'url': LANDING_PAGE_URL,
+    'dateModified': LANDING_LAST_UPDATED,
+    'inLanguage': 'nb-NO',
+    'isPartOf': {
+      '@id': `${LANDING_BASE_URL}/#website`
+    },
+    'author': {
+      '@id': `${LANDING_PAGE_URL}#author`
+    },
+    'publisher': {
+      '@id': `${LANDING_BASE_URL}/#organization`
+    },
+    'breadcrumb': {
+      '@id': `${LANDING_PAGE_URL}#breadcrumb`
+    },
+    'mainEntity': {
+      '@id': `${LANDING_PAGE_URL}#products`
+    }
+  }
+
+  const graph: Graph = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      organizationNode,
+      authorNode,
+      breadcrumbNode,
+      collectionNode,
+      productListNode,
+      ...productNodes,
+      faqNode
+    ]
+  }
+
   return (
-    <>
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(collectionSchema) }}
-      />
-      {productSchemas.map((schema, i) => (
-        <script
-          key={`ld-product-${i}`}
-          type='application/ld+json'
-          dangerouslySetInnerHTML={{ __html: stringifyJsonLd(schema) }}
-        />
-      ))}
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(faqSchema) }}
-      />
-    </>
+    <script
+      type='application/ld+json'
+      dangerouslySetInnerHTML={{ __html: stringifyJsonLd(graph) }}
+    />
   )
 }

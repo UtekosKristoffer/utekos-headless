@@ -63,6 +63,75 @@ const MICROSOFT_UET_CONSENT_SYNC_SCRIPT = `
   })();
 `
 
+const MICROSOFT_UET_ENHANCED_CONVERSIONS_SCRIPT = `
+  (function() {
+    function parseStoredConsent(value) {
+      if (!value) return false;
+      try {
+        var parsed = JSON.parse(value);
+        return !!parsed && parsed.marketing === true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function readCookie(name) {
+      var prefix = name + '=';
+      var parts = document.cookie ? document.cookie.split('; ') : [];
+      for (var index = 0; index < parts.length; index += 1) {
+        var part = parts[index];
+        if (part.indexOf(prefix) === 0) {
+          return decodeURIComponent(part.slice(prefix.length));
+        }
+      }
+      return '';
+    }
+
+    function hasMarketingConsent() {
+      try {
+        if (parseStoredConsent(window.localStorage.getItem('utekos_cookie_consent'))) {
+          return true;
+        }
+      } catch (error) {}
+
+      return parseStoredConsent(readCookie('cookie-consent'));
+    }
+
+    function setMicrosoftUetPid() {
+      if (!hasMarketingConsent()) return;
+
+      var email = readCookie('ute_user_hash') || readCookie('email_hash');
+      var phone = readCookie('ute_phone_hash');
+      if (!email && !phone) return;
+
+      window.uetq = window.uetq || [];
+      window.uetq.push('set', {
+        pid: {
+          em: email || '',
+          ph: phone || ''
+        }
+      });
+    }
+
+    window.uet_report_conversion = function(productId, revenueValue, currency) {
+      window.uetq = window.uetq || [];
+      setMicrosoftUetPid();
+      window.uetq.push('event', 'PRODUCT_PURCHASE', {
+        ecomm_prodid: productId,
+        ecomm_pagetype: 'PURCHASE',
+        revenue_value: Number(revenueValue) || 0,
+        currency: currency || 'NOK'
+      });
+    };
+
+    setMicrosoftUetPid();
+    window.addEventListener('cookie_consent_saved', setMicrosoftUetPid);
+    window.addEventListener('storage', function(event) {
+      if (event.key === 'utekos_cookie_consent') setMicrosoftUetPid();
+    });
+  })();
+`
+
 function createMicrosoftUetBootstrapScript(tagId: string): string {
   return `
     (function(w,d,t,u,o) {
@@ -101,6 +170,12 @@ export function MicrosoftUetTag({
     <>
       <Script id='microsoft-uet-bootstrap' strategy='afterInteractive'>
         {createMicrosoftUetBootstrapScript(tagId)}
+      </Script>
+      <Script
+        id='microsoft-uet-enhanced-conversions'
+        strategy='afterInteractive'
+      >
+        {MICROSOFT_UET_ENHANCED_CONVERSIONS_SCRIPT}
       </Script>
       <Script id='microsoft-uet-consent-sync' strategy='afterInteractive'>
         {MICROSOFT_UET_CONSENT_SYNC_SCRIPT}

@@ -1,4 +1,4 @@
-import { useState, useEffect, useTransition, useContext } from 'react'
+import { useState, useTransition, useContext } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
@@ -10,12 +10,26 @@ import { getCartIdFromCookie } from '@/lib/actions/getCartIdFromCookie'
 import { fetchCart } from '@/lib/helpers/cart/fetchCart'
 import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
 import { useAnalytics } from '@/hooks/useAnalytics'
+import { dispatchMetaTrackingEvent } from '@/lib/tracking/meta/dispatchMetaTrackingEvent'
+import { getClientMetaUserData } from '@/lib/tracking/meta/getClientMetaUserData'
+import { trackMicrosoftUetEvent } from '@/lib/tracking/microsoft-uet/trackMicrosoftUetEvent'
+import { generateEventID } from '@/components/analytics/Meta/generateEventID'
+import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { getVariants } from '@/app/skreddersy-varmen/utekos-orginal/utils/getVariants'
 import { PRODUCT_VARIANTS } from '@/api/constants'
 import type { ModelKey, ColorVariant } from 'types/product/ProductTypes'
 import type { UsePurchaseLogicProps } from 'types/product/PageProps'
+import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
 import type { Cart } from 'types/cart'
 import type { OptimisticItemInput } from '@/hooks/useOptimisticCartUpdate'
+import type { CaptureBody, MetaUserData } from 'types/tracking/meta'
+
+type ConfiguredSelectionCartResult = {
+  cart: Cart | null
+  cartId: string | null
+  product: ShopifyProduct
+  selectedVariant: ShopifyProductVariant
+}
 
 export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
   const [selectedModel, setSelectedModel] = useState<ModelKey>('techdown')
@@ -42,16 +56,19 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
     selectedColorIndex < currentConfig.colors.length ? selectedColorIndex : 0
   const currentColor = currentConfig.colors[safeColorIndex] as ColorVariant
 
-  useEffect(() => {
-    if (!currentConfig.sizes.includes(selectedSize)) {
-      const fallbackSize =
-        currentConfig.sizes[1] ?? currentConfig.sizes[0] ?? selectedSize
-      setSelectedSize(fallbackSize)
-    }
-    if (selectedColorIndex >= currentConfig.colors.length) {
-      setSelectedColorIndex(0)
-    }
-  }, [selectedModel, currentConfig, selectedSize, selectedColorIndex])
+  const handleSelectedModelChange = (model: ModelKey) => {
+    const nextConfig = PRODUCT_VARIANTS[model]
+
+    setSelectedModel(model)
+    setSelectedSize(size =>
+      nextConfig.sizes.includes(size) ?
+        size
+      : (nextConfig.sizes[1] ?? nextConfig.sizes[0] ?? size)
+    )
+    setSelectedColorIndex(index =>
+      index < nextConfig.colors.length ? index : 0
+    )
+  }
 
   const resolveSelectedVariant = () => {
     if (!currentShopifyProduct) {
@@ -60,14 +77,14 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
     }
 
     const variants = getVariants(currentShopifyProduct)
-    const selectedVariant = variants.find((v: any) => {
-      const hasSize = v.selectedOptions.some(
-        (opt: any) => opt.value.toLowerCase() === selectedSize.toLowerCase()
+    const selectedVariant = variants.find((variant: ShopifyProductVariant) => {
+      const hasSize = variant.selectedOptions.some(
+        option => option.value.toLowerCase() === selectedSize.toLowerCase()
       )
-      const hasColor = v.selectedOptions.some(
-        (opt: any) =>
+      const hasColor = variant.selectedOptions.some(
+        option =>
           currentColor
-          && opt.value.toLowerCase() === currentColor.name.toLowerCase()
+          && option.value.toLowerCase() === currentColor.name.toLowerCase()
       )
       return hasSize && hasColor
     })
@@ -94,7 +111,7 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
     openCart
   }: {
     openCart: boolean
-  }): Promise<{ cart: Cart | null; cartId: string | null } | null> => {
+  }): Promise<ConfiguredSelectionCartResult | null> => {
     const resolvedVariant = resolveSelectedVariant()
 
     if (!resolvedVariant) {
@@ -159,7 +176,9 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
 
       return {
         cart,
-        cartId: currentCartId ?? null
+        cartId: currentCartId ?? null,
+        product,
+        selectedVariant
       }
     } catch (error) {
       console.error('Feil under kjøp:', error)
@@ -178,6 +197,69 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
     })
   }
 
+  const trackCheckoutStart = ({
+    cartId,
+    checkoutUrl,
+    product,
+    selectedVariant
+  }: {
+    cartId: string | null
+    checkoutUrl: string
+    product: ShopifyProduct
+    selectedVariant: ShopifyProductVariant
+  }) => {
+    try {
+      const rawEventID = generateEventID()
+      const eventID = rawEventID.replace('evt_', 'ic_')
+      const productId = cleanShopifyId(selectedVariant.id) || selectedVariant.id
+      const value =
+        (Number.parseFloat(selectedVariant.price.amount) || 0) * quantity
+      const currency = selectedVariant.price.currencyCode
+      const userData: MetaUserData = getClientMetaUserData()
+
+      trackMicrosoftUetEvent({
+        category: 'ecommerce',
+        action: 'begin_checkout',
+        label: cartId ?? product.title,
+        value: quantity,
+        revenueValue: value,
+        currency,
+        productId,
+        pageType: 'cart',
+        eventId: eventID
+      })
+
+      const captureBody: CaptureBody = {
+        cartId,
+        checkoutUrl,
+        eventId: eventID,
+        userData
+      }
+
+      fetch('/api/checkout/capture-identifiers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(captureBody),
+        keepalive: true
+      }).catch(error => console.error('Capture identifiers failed', error))
+
+      void dispatchMetaTrackingEvent({
+        eventName: 'InitiateCheckout',
+        eventId: eventID,
+        eventData: {
+          value,
+          currency,
+          content_ids: [productId],
+          content_type: 'product',
+          num_items: quantity
+        },
+        userData
+      })
+    } catch (error) {
+      console.error('Feil under sending av checkout-events:', error)
+    }
+  }
+
   const handleGoToCheckout = async () => {
     if (isCheckoutRedirecting || isPendingFromMachine) {
       return
@@ -194,12 +276,19 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
       return
     }
 
+    trackCheckoutStart({
+      cartId: result.cartId,
+      checkoutUrl,
+      product: result.product,
+      selectedVariant: result.selectedVariant
+    })
+
     window.location.assign(checkoutUrl)
   }
 
   return {
     selectedModel,
-    setSelectedModel,
+    setSelectedModel: handleSelectedModelChange,
     quantity,
     setQuantity,
     selectedColorIndex,

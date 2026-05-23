@@ -48,7 +48,7 @@ Utekos bygger produkter for utendørs komfort i nordiske forhold. Kjerneidéen e
 
 | Produkt | Kjerneposisjon | 3-i-1 | Glidelås | Materialer og konstruksjon | Best for | Product care |
 | --- | --- | --- | --- | --- | --- | --- |
-| Utekos TechDown™ | Teknisk allrounder med syntetisk isolasjon og høy komfort i varierende vær | Ja | YKK® Dual V-Zip™ | Luméa™ Shell, CloudWeave™ Insulation, Taffeta innerfôr | Norsk kystklima, terrasse, hytte, bålplass, skiftende vær | Skånsom vask 30°C, mildt vaskemiddel, unngå skyllemiddel, lufttørk |
+| Utekos TechDown™ | Teknisk allrounder med syntetisk isolasjon og høy komfort i varierende vær | Ja | YKK® Dual V-Zip™ | Luméa™ Shell, CloudWave™ Insulation, Taffeta innerfôr | Norsk kystklima, terrasse, hytte, bålplass, skiftende vær | Skånsom vask 30°C, mildt vaskemiddel, unngå skyllemiddel, lufttørk |
 | Utekos Mikrofiber™ | Lett og robust modell med enkelt vedlikehold og rask tørk | Ja | YKK® Dual V-Zip™ | DuraLite™ Nylon 20D/380T, hurtigtørkende fiber, DWR Performance Nylon, Taffeta innerfôr | Allsidig bruk, fuktige forhold, reise, enkel pakking | Skånsom vask 30°C, mild såpe, unngå blekemiddel, tøymykner og tørketrommel |
 | Utekos Dun™ | Maksimal varme i forhold til vekt med klassisk dunfølelse | Ja | YKK® Dual V-Zip™ | 650 fillpower dun, DWR Performance Nylon, Taffeta innerfôr | Kalde og tørre kvelder, maksimal varmefølelse, stasjonær hygge | Skånsom vask 30°C, dunsåpe, lukk glidelåser, lav tørketrommel med 2-3 baller til plagget er helt tørt |
 | Comfyrobe™ | Værbeskyttende robe for før og etter aktivitet | Nei | YKK® to-veisglidelås | HydroGuard™ Shell 8000 mm, pustende PU-membran ~3000 g/m²/24 t, SherpaCore™ Thermal Lining 250 GSM, tapede sømmer | Isbading, bading, surfing, svømming, kald ankomst til hytte eller båt | Skånsom vask 40°C, mildt vaskemiddel, unngå blekemiddel, kjemisk rens, stryking og høy tørketrommelvarme; re-impregner ved behov |
@@ -59,7 +59,7 @@ Utekos bygger produkter for utendørs komfort i nordiske forhold. Kjerneidéen e
 
 ### Utekos TechDown™
 
-Utekos TechDown™ er den tekniske allrounderen i sortimentet. Modellen er bygget med Luméa™-ytterstoff og CloudWeave™-isolasjon, og er laget for brukere som vil ha høy varme, syntetisk driftssikkerhet og mindre sårbarhet i fuktig vær enn klassisk dun. Den er en del av Utekos-familien med 3-i-1-konstruksjon og YKK® Dual V-Zip™.
+Utekos TechDown™ er den tekniske allrounderen i sortimentet. Modellen er bygget med Luméa™-ytterstoff og CloudWave™-isolasjon, og er laget for brukere som vil ha høy varme, syntetisk driftssikkerhet og mindre sårbarhet i fuktig vær enn klassisk dun. Den er en del av Utekos-familien med 3-i-1-konstruksjon og YKK® Dual V-Zip™.
 
 Storefronten selger TechDown™ i fargen Havdyp og størrelsene Liten, Middels og Stor. Størrelsesguiden beskriver modellen som mer kroppsnær og funksjonell enn Dun™ og Mikrofiber™.
 
