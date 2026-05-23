@@ -61,7 +61,7 @@ const ProductsPage = async () => {
 
   return (
     <>
-      <main className='container mx-auto px-4 py-16 sm:py-24'>
+      <section className='container mx-auto px-4 py-16 sm:py-24'>
         <Activity>
           <ProductsPageHeader />
         </Activity>
@@ -101,7 +101,7 @@ const ProductsPage = async () => {
         <Activity>
           <ProductsPageFooter />
         </Activity>
-      </main>
+      </section>
     </>
   )
 }
