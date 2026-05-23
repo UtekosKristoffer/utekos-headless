@@ -55,7 +55,7 @@ export function MotionContentView() {
             aria-label='Gå til skreddersy varmen'
             data-track='ReadMoreHeroClick'
           >
-            <span>Skreddersy varmen</span>
+            <span>Se mer</span>
             <ArrowRight className='size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none' />
           </Link>
         </BrandBadge>
