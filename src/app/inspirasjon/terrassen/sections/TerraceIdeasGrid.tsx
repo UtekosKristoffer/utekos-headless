@@ -34,7 +34,7 @@ type TerraceIdea = {
 // Dataen bruker nå den presise typen
 export const terraceIdeasData: TerraceIdea[] = [
   {
-    name: 'Morgenkaffe-kroken',
+    name: 'Morgenkaffen ute',
     highlight: 'En lun start på dagen',
     icon: 'coffee',
     color: 'text-primary-button'
@@ -88,7 +88,9 @@ export function TerraceIdeasGrid({ ideas }: { ideas: TerraceIdea[] }) {
                       className={`${idea.color} transition-colors group-hover:text-primary`}
                     />
                   </div>
-                  <p className='text-sm text-cloud-dancer/80'>{idea.highlight}</p>
+                  <p className='text-sm text-cloud-dancer/80'>
+                    {idea.highlight}
+                  </p>
                 </CardContent>
               </Card>
             </AnimatedBlock>

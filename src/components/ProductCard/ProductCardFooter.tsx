@@ -19,6 +19,9 @@ export function ProductCardFooter({
     onQuickBuy(e)
   }
 
+  const actionBadgeClassName =
+    'size-full min-h-12 min-w-0 border px-3 py-3 text-center text-[clamp(0.75rem,3.3vw,0.875rem)] font-medium leading-[1.12] tracking-normal whitespace-normal transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2'
+
   return (
     <CardFooter className='mt-auto flex flex-col gap-4 p-6 pt-0'>
       <div className='flex w-full items-center justify-between'>
@@ -29,13 +32,13 @@ export function ProductCardFooter({
           asChild
           backgroundColor='var(--cloud-dancer)'
           textColor='var(--maritime-darkest)'
-          className='size-full min-h-12 border border-cloud-dancer/20 px-4 text-sm font-medium transition-all duration-200 hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cloud-dancer sm:text-base'
+          className={`${actionBadgeClassName} border-cloud-dancer/20 hover:brightness-95 focus-visible:outline-cloud-dancer`}
         >
           <Link
             href={productUrl}
             data-track='ProductCardFooterViewMoreClick'
             aria-label='Se produkt'
-            className='flex-1'
+            className='flex-1 min-w-0'
           >
             Se produkt
           </Link>
@@ -45,7 +48,7 @@ export function ProductCardFooter({
             asChild
             backgroundColor='var(--primary-button)'
             textColor='var(--maritime-darkest)'
-            className='size-full min-h-12 border border-primary-button/35 px-4 text-sm font-medium transition-all duration-200 hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-button sm:text-base'
+            className={`${actionBadgeClassName} border-primary-button/35 hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-primary-button`}
           >
             <button
               type='button'
