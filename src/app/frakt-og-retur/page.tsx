@@ -6,16 +6,16 @@ import type { Metadata } from 'next'
 import { Activity } from 'react'
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
-  title: 'Frakt og retur | Enkel og trygg handel hos Utekos',
+  title: 'Frakt, retur og bytte av våre produkter | Utekos',
   description:
-    'Vi tilbyr fri frakt på ordre over 999 kr og gratis 14-dagers fri retur. Les våre fulle vilkår for en trygg og forutsigbar handleopplevelse.',
+    'Bestillinger hos Utekos gir fri frakt på ordre over 999 kr og gratis 14-dagers fri retur. Les vilkårene for en trygg og forutsigbar handleopplevelse.',
   alternates: {
     canonical: '/frakt-og-retur'
   },
   openGraph: {
-    title: 'Fri frakt | Enkel og trygg handel hos Utekos',
+    title: 'Frakt, retur og bytte av våre produkter | Utekos',
     description:
-      'Få svar på alt du lurer på om levering og retur. Handle trygt hos oss.',
+      'Få svar på alt du lurer på om levering og retur. Handle trygt hos Utekos.',
     url: '/frakt-og-retur',
     siteName: 'Utekos',
     images: [

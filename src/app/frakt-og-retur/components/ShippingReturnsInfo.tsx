@@ -30,11 +30,11 @@ export function ShippingReturnsInfo() {
         <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
           <Card className='h-full border-cloud-dancer/12 bg-maritime-blue/24 text-cloud-dancer shadow-[0_22px_62px_-50px_rgba(8,12,28,0.78)]'>
             <CardHeader>
-              <CardTitle className='flex items-center gap-3 text-xl leading-[1.2] tracking-normal'>
+              <CardTitle className='flex items-center gap-3 text-xl leading-[1.2] tracking-tight'>
                 <Truck className='size-7 text-primary-button' />
                 Frakt og levering
               </CardTitle>
-              <CardDescription className='leading-[1.5] tracking-normal text-cloud-dancer'>
+              <CardDescription className='leading-[1.5] tracking-tight text-cloud-dancer'>
                 Vi sender alle bestillinger som gjøres før kl 16. samme dag, så
                 du kan starte din utekos så raskt som mulig.
               </CardDescription>
@@ -43,13 +43,13 @@ export function ShippingReturnsInfo() {
               <ul className='space-y-4 text-cloud-dancer'>
                 <li className='flex items-start gap-3'>
                   <Clock className='mt-1 size-5 shrink-0 text-primary-button' />
-                  <span className='leading-[1.45] tracking-normal'>
+                  <span className='leading-[1.45] tracking-tight'>
                     <strong>Leveringstid</strong> er normalt 2-5 virkedager.
                   </span>
                 </li>
                 <li className='flex items-start gap-3'>
                   <Mail className='mt-1 size-5 shrink-0 text-bleached-mauve' />
-                  <span className='leading-[1.45] tracking-normal'>
+                  <span className='leading-[1.45] tracking-tight'>
                     <strong>Sporing</strong> sendes på e-post så snart pakken er
                     på vei.
                   </span>
@@ -62,11 +62,11 @@ export function ShippingReturnsInfo() {
         <AnimatedBlock className='will-animate-fade-in-up' delay='0.4s'>
           <Card className='h-full border-cloud-dancer/12 bg-maritime-blue/24 text-cloud-dancer shadow-[0_22px_62px_-50px_rgba(8,12,28,0.78)]'>
             <CardHeader>
-              <CardTitle className='flex items-center gap-3 text-xl leading-[1.2] tracking-normal'>
+              <CardTitle className='flex items-center gap-3 text-xl leading-[1.2] tracking-tight'>
                 <Undo2 className='size-7 text-ancient-water' />
                 Retur og angrerett
               </CardTitle>
-              <CardDescription className='leading-[1.5] tracking-normal text-cloud-dancer'>
+              <CardDescription className='leading-[1.5] tracking-tight text-cloud-dancer'>
                 Du har 14 dagers angrerett fra dagen du mottar varen.
               </CardDescription>
             </CardHeader>
@@ -74,14 +74,14 @@ export function ShippingReturnsInfo() {
               <ul className='space-y-4 text-cloud-dancer'>
                 <li className='flex items-start gap-3'>
                   <ShieldCheck className='mt-1 size-5 shrink-0 text-primary-button' />
-                  <span className='leading-[1.45] tracking-normal'>
+                  <span className='leading-[1.45] tracking-tight'>
                     <strong>Full trygghet</strong> for å kjenne på kvaliteten
                     hjemme hos deg selv.
                   </span>
                 </li>
                 <li className='flex items-start gap-3'>
                   <PackageCheck className='mt-1 size-5 shrink-0 text-ancient-water' />
-                  <span className='leading-[1.45] tracking-normal'>
+                  <span className='leading-[1.45] tracking-tight'>
                     Varen må være <strong>ubrukt</strong>, uten lukt og med alle
                     merkelapper intakt for full refusjon.
                   </span>
@@ -93,7 +93,7 @@ export function ShippingReturnsInfo() {
       </div>
 
       <AnimatedBlock className='will-animate-fade-in-up mt-12' delay='0.6s'>
-        <h2 className='mb-4 text-2xl font-semibold leading-[1.15] tracking-normal text-cloud-dancer'>
+        <h2 className='mb-4 text-2xl font-semibold font-google-sans leading-[1.15] tracking-tight text-cloud-dancer'>
           Slik fungerer returprosessen
         </h2>
         <Accordion type='single' collapsible className='w-full'>
@@ -105,18 +105,18 @@ export function ShippingReturnsInfo() {
             >
               <AccordionTrigger
                 data-track={`ShippingReturns-${item.id}-Click`}
-                className='text-base leading-[1.35] tracking-normal text-cloud-dancer hover:text-primary-button hover:no-underline'
+                className='text-base leading-[1.35] tracking-tight font-utekos-text text-cloud-dancer hover:text-primary-button hover:no-underline'
               >
                 {item.question}
               </AccordionTrigger>
-              <AccordionContent className='text-sm leading-[1.55] tracking-normal text-overcast'>
+              <AccordionContent className='text-sm leading-[1.55] tracking-tight font-utekos-text text-cloud-dancer-90'>
                 {item.id === 'return-process' ?
                   <p>
                     Send en e-post til{' '}
                     <a
                       href='mailto:kundeservice@utekos.no'
                       data-track='ShippingReturnsEmailClick'
-                      className='font-medium text-cloud-dancer underline decoration-overcast/50 underline-offset-4 hover:text-primary-button'
+                      className='font-medium text-cloud-dancer underline decoration-cloud-dancer/70 underline-offset-4 hover:text-primary-button'
                     >
                       kundeservice@utekos.no
                     </a>{' '}

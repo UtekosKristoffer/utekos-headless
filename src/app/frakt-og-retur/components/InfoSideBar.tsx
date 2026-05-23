@@ -60,11 +60,8 @@ export function InfoSidebar() {
         <Separator className='my-2 bg-cloud-dancer/12' />
         <CardFooter className='flex-col items-start'>
           <h4 className='font-medium leading-[1.35] tracking-normal'>
-            Har du spørsmål?
+            Har du andre spørsmål?
           </h4>
-          <p className='mt-1 mb-4 text-sm leading-[1.45] tracking-normal text-cloud-dancer/80'>
-            Vårt kundeserviceteam er klare til å hjelpe deg.
-          </p>
           <BrandBadge
             asChild
             backgroundColor='var(--primary-button)'

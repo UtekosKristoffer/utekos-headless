@@ -54,9 +54,10 @@ export function NewsletterForm() {
             Meld deg på Utekos sitt nyhetsbrev!
           </p>
         </div>
-        <p className='z-10 mx-auto mt-2! max-w-xl text-base leading-[1.5] tracking-normal text-cloud-dancer/80'>
-          Meld deg inn i vår medlemsklubb og få nyhetsbrev, inspirasjon og
-          eksklusive rabatter i innboksen din.
+        <p className='z-10 mx-auto mt-2! max-w-xl text-left text-base leading-[1.5] tracking-normal text-cloud-dancer/80'>
+          Som medlem i vår kundeklubb får du personlige tilbud og tilgang til
+          salg og kampanjer først. Du får også masse tips og inspirasjon rett
+          inn i innboksen din.
         </p>
         <form
           ref={formRef}

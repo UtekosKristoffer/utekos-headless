@@ -2,8 +2,7 @@ import type {
   WebSite,
   VideoObject,
   WithContext,
-  SiteNavigationElement,
-  Offer
+  SiteNavigationElement
 } from 'schema-dts'
 import { cacheLife } from 'next/cache'
 import { VIDEO_THUMBNAIL_URL, VIDEO_EMBED_URL } from '@/api/constants'
@@ -60,11 +59,6 @@ export async function WebSiteSchemaJsonLd() {
       'https://utekos.no/produkter/comfyrobe',
       'https://utekos.no/kontaktskjema'
     ]
-  }
-
-  const offerSchema: WithContext<Offer> = {
-    '@context': 'https://schema.org',
-    '@type': 'Offer'
   }
 
   const videoSchema: WithContext<VideoObject> = {
