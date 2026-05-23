@@ -16,7 +16,7 @@ export function HeaderLogo() {
           alt='Utekos logo'
           width={58}
           height={58}
-          priority
+          loading='eager'
           className='size-12 rounded-full ring ring-cloud-dancer/80 md:size-14 lg:size-[58px]'
         />
       </Link>

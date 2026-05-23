@@ -1,18 +1,22 @@
 // Path: src/components/cart/Cart.tsx
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useSyncExternalStore } from 'react'
 import { CartDrawer } from './CartDrawer/CartDrawer'
 
-export function Cart() {
-  const [isMounted, setIsMounted] = useState(false)
+const subscribeToClientSnapshot = () => () => {}
+const getClientSnapshot = () => true
+const getServerSnapshot = () => false
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
+export function Cart() {
+  const isMounted = useSyncExternalStore(
+    subscribeToClientSnapshot,
+    getClientSnapshot,
+    getServerSnapshot
+  )
 
   if (!isMounted) {
-    return null
+    return <div aria-hidden className='size-11 shrink-0' />
   }
 
   return <CartDrawer />

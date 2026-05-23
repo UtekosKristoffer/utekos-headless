@@ -8,7 +8,7 @@ execution and results in poor performance.
 An example of code that causes forced reflow:
 
 Multiple forced reflows in quick succession is called
-["layout thrashing"](https://web.dev/articles/avoid-large-complex-layouts-and-layout-thrashing#avoid_layout_thrashing).
+["layout thrashing"](https://github.com/UtekosKristoffer/utekos-docs/tree/main/wcag/guidelines).
 
 ## How to pass this insight
 

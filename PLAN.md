@@ -1,124 +1,239 @@
 # Plan
 
-## Current Session: `/skreddersy-varmen` Purchase Section Brand, WCAG, and Checkout Flow
+## Current Session: `src/app/produkter/(oversikt)/page.tsx` and src/app/produkter/(oversikt)/layout.tsx in in focus.
 
-- Status: Completed.
-- Documentation: Confirmed via the local `utekos-brand` skill/AGENTS
-  instructions, Context7 for Next.js, Vercel documentation search, and Next
-  DevTools MCP for the running Next.js app. Klarna usage was checked against
-  local Klarna guideline assets already present in the repository.
-- Decision: Keep `PurchaseClientViewLanding.tsx` as a client component because
-  it owns purchase interactions, while tightening the section around one
-  primary action: `Kjøp nå`. Use the Utekos wordmark in the product headline,
-  calmer value-led copy, higher contrast brand color pairings, visible color
-  labels, and a compact Klarna note near price with the larger Klarna banner
-  moved below the CTA cluster.
-- Accessibility: Main color pairs were checked for WCAG AA contrast. The color
-  selector no longer relies on swatches alone, focus indicators now work across
-  light and dark surfaces, and active states include non-color cues.
-- Verification: Targeted ESLint passed, full `tsc --noEmit` passed, browser
-  rendering of `/skreddersy-varmen#purchase-section` completed, and Next
-  DevTools reported no session or config errors before final handoff.
+## Goal
 
-## Current Session: `/skreddersy-varmen` Purchase Section Visual Correction
+Correct, and maximum utilization of next.js 16's latest updates. Specificly
+target potential related to `cacheComponents`, `use cache`, `cacheHandlers`,
+`use cache: private`, `use cache: remote`, `cachehandlers`, `cacheLife`,
+`cacheTag`, `updateTag`, `serverfunctions`, `use server`, `use client`,
+`Suspense`, `Server Components`, `CDN Caching`, `LazyLoading` `Activity`,
+`useEffectEvent` to make the site world class and as good as possible related to
+performance:
 
-- Status: Completed.
-- Documentation: No new external API documentation was required. The correction
-  used the already confirmed Utekos brand instructions, local Klarna assets, and
-  live browser verification through Next DevTools.
-- Root cause: The previous iteration over-added visual elements and trusted
-  technical checks too much. Feature badges received decorative dots that broke
-  their recognizable badge form, Klarna appeared in two places, and the checkout
-  area had competing actions.
-- Decision: Restore the feature badges to text-only badge forms, remove the
-  decorative product-badge dot, keep only one Klarna component placement below
-  the primary checkout action, and remove the secondary `Legg i kurv` button
-  from this landing section. Size choices now render as equal-width controls,
-  and the color selector is separated into its own calm row.
-- Verification: ESLint passed, full `tsc --noEmit` passed, `git diff --check`
-  passed, Next DevTools reported `configErrors: []` and `sessionErrors: []`,
-  browser console had zero errors/warnings, and live DOM checks confirmed one
-  CTA, one visible Klarna placement, no feature-badge dots, equal size-button
-  dimensions, and no horizontal overflow.
+| Metric                         | Goal     | Status                               |
+| ------------------------------ | -------- | ------------------------------------ |
+| First Contentful Paint (FCP)   | < 0.5 s  | Acceptable start of visual rendering |
+| Largest Contentful Paint (LCP) | < 1 s    | Main bottleneck                      |
+| Total Blocking Time (TBT)      | < 100 ms | Significant main-thread blocking     |
+| Cumulative Layout Shift (CLS)  | 0        | Status: 0. Good visual stability     |
+| Speed Index                    | < 2 s    | Slow perceived loading               |
 
-## Current Session: `/skreddersy-varmen` Mobile Choice Grid Correction
+## Highest-Impact Opportunities (Results on mobilescreens)
 
-- Status: Completed.
-- Documentation: No new external documentation was required; this was a
-  responsive layout correction against the existing Utekos brand constraints.
-- Root cause: The feature badges and size buttons used different responsive
-  layout systems. Feature badges used nowrap horizontal scrolling, while size
-  buttons used a two-column mobile grid before `sm`, causing inconsistent
-  placement and visual rhythm on small screens.
-- Decision: Use the same shared three-column choice grid and pill class for
-  both groups. On narrow screens the pills keep equal width and height, use
-  smaller mobile text, and avoid horizontal scrolling.
-- Verification: ESLint passed, full `tsc --noEmit` passed, `git diff --check`
-  passed, and Chrome CDP checks at 390, 360, and 320 px confirmed no horizontal
-  overflow. At 320 px, all three feature badges and all three size buttons
-  measured `85x48` with matching x positions, one row, and one child per
-  feature badge.
+| Opportunity                   | Estimated savings | Primary impact     |
+| ----------------------------- | ----------------- | ------------------ |
+| Render-blocking requests      | 1,470 ms          | LCP, FCP           |
+| Improve image delivery        | 926 KiB           | LCP, FCP           |
+| Reduce unused JavaScript      | 293 KiB           | LCP, FCP           |
+| Use efficient cache lifetimes | 243 KiB           | Repeat-visit speed |
+| Legacy JavaScript             | 56 KiB            | Parse/eval cost    |
 
-## Current Session: `/skreddersy-varmen` Klarna Price Row Placement
+## Notable Diagnostics (Results on mobilescreens)
 
-- Status: Completed.
-- Documentation: No new external documentation was required. The requested
-  Klarna asset existed locally at
-  `public/klarna/Choose Klarna at checkout/White (secondary)/300x100.png`.
-- Decision: Replace the CTA-area Klarna note with the local Klarna image in the
-  product price row. The image is right-aligned in the available space and
-  vertically centered against the price.
-- Verification: ESLint passed, full `tsc --noEmit` passed, `git diff --check`
-  passed, Next DevTools reported `configErrors: []` and `sessionErrors: []`,
-  and browser checks confirmed the Klarna image is right of the `1790,-` price,
-  centered on the same row, with one visible Klarna image, one CTA, and no
-  horizontal overflow on desktop or 320 px mobile.
+| Diagnostic                | Value     |
+| ------------------------- | --------- |
+| Main-thread work          | 6.0 s     |
+| JavaScript execution time | 2.4 s     |
+| Total network payload     | 2,797 KiB |
+| Long main-thread tasks    | 7         |
+| DOM elements              | 1,779     |
+| Max critical path latency | 2,843 ms  |
+| LCP element render delay  | 3,030 ms  |
 
-## Current Session: `/skreddersy-varmen` Responsive Klarna Asset Selection
+## Prioritized Action Plan
 
-- Status: Completed.
-- Documentation: No new external documentation was required; the work used
-  local Klarna assets already present under `public/klarna`.
-- Decision: Replace the single `300x100` Klarna image with a responsive
-  `picture` element. Mobile widths use the longer `320x50` asset, `sm` and up
-  use `728x90 - Left`, and wide desktop uses `970x90 - Left`.
-- Verification: ESLint passed, full `tsc --noEmit` passed, Next DevTools
-  reported `configErrors: []` and `sessionErrors: []`, and browser checks
-  confirmed desktop selected `970x90 - Left`, 320/390 px selected `320x50`,
-  the image stayed right of the price on the same row, and no horizontal
-  overflow was introduced.
+1. Reduce LCP by addressing render-blocking CSS and critical-path fonts.
+2. Compress and resize large images, especially hero/above-the-fold media.
+3. Reduce JS cost by code-splitting and deferring non-critical scripts.
+4. Tighten third-party loading strategy (lazy load, consent-gating, sequencing).
+5. Improve caching strategy for static assets and third-party endpoints where
+   possible.
+6. Investigate forced reflow sources and non-composited animations.
 
-## Current Session: AI Chat Empty Message Diagnosis
+## Critical & Basic Assumptions
 
-- Status: Completed.
-- Documentation: Confirmed via Context7 for Vercel AI SDK 5 (`/vercel/ai/ai_5_0_0`)
-  and local `node_modules/ai` source/types for installed `ai@5.0.68`.
-- Root cause: The chat route passed incoming `messages` directly to
-  `convertToModelMessages`. AI SDK 5 expects `UIMessage.parts` text parts, while
-  older/custom callers can send text in `content` or as a single `message`
-  string. When a message arrives with empty `parts` and text in `content`, the
-  model receives an effectively empty user message.
-- Decision: Normalize and Zod-validate chat request payloads at the route
-  boundary. Preserve valid AI SDK 5 `parts` messages, and convert legacy
-  `content`/single-string payloads into `{ type: 'text', text }` parts before
-  calling `convertToModelMessages`.
-- Verification: Targeted ESLint passed, full `tsc --noEmit` passed, and a
-  runtime `tsx` check confirmed both legacy `content` and modern `parts`
-  payloads normalize to non-empty text parts.
+Assessments and decision-making must based the "up to date" the latest
+documentation. Source to get this is only through my repo
+UtekosKristoffer/utekos-docs trough my Context7 Pro subscription and/or Context7
+MCP - absolutely every docs we need , and are always up to date.
 
-## Current Session: `/skreddersy-varmen` Tablet/Mobile Reveal Stability
+**MANDATORY**: Not able to connect to Context7 MCP and use tools? Stop, try to
+find the reason and fix it and try to connect again. Not able to connect even
+after troubleshooting and retrying? Try directly through GitHub with GitHub MCP
+connection. Not able to connect to GitHub either? Stop. You have to stop.
+Continuing without insight to updates docs is not wanted.
 
-- Status: Completed.
-- Documentation: Confirmed via local GSAP skill files, Context7 for GSAP and
-  `@gsap/react`, and Next DevTools documentation for Next.js 16.
-- Root cause: Post-hero tablet/mobile layouts still depended on ScrollTrigger
-  `fromTo` reveals that initialize text with `autoAlpha: 0`. On smaller
-  viewports, text can enter the viewport before the trigger-driven reveal has
-  completed, so it appears missing until later scroll interaction.
-- Decision: For all viewports below `1280px`, post-hero content must render
-  visible-first. Desktop (`>=1280px`) keeps the stronger GSAP reveal/parallax
-  treatment.
-- Verification: Browser checks at `390x844`, `820x1180`, and `1024x1366`
-  returned `hiddenCount: 0` while scrolling downward. Next DevTools reports
-  `configErrors: []` and `sessionErrors: []`. Targeted ESLint passed; production
-  build passed with the existing Google Sans fallback warning.
+## Forced reflow
+
+A forced reflow occurs when JavaScript queries geometric properties (such as
+offsetWidth) after styles have been invalidated by a change to the DOM state.
+This can result in poor performance. Learn more about
+[forced reflows](https://developer.chrome.com/docs/performance/insights/forced-reflow?utm_source=lighthouse&utm_medium=lr)
+and ![Connor Clark](https://web.dev/images/authors/cjamcl.jpg) Connor Clark
+[X](https://twitter.com/cjamcl) [GitHub](https://github.com/connorjclark)
+
+A forced reflow occurs when JavaScript queries geometric properties (such as
+`offsetWidth`) after styles have been invalidated by a change to the DOM state.
+This forces the browser to immediately do a layout, which interrupts script
+execution and results in poor performance.
+
+An example of code that causes forced reflow:
+
+Multiple forced reflows in quick succession is called
+["layout thrashing"](https://web.dev/articles/avoid-large-complex-layouts-and-layout-thrashing#avoid_layout_thrashing).
+
+## How to pass this insight
+
+- Avoid, or at least reduce, the amount of DOM geometry writes that are done
+  just before reads.
+- Have no forced reflows that take longer than 30 milliseconds.
+
+## Additional references
+
+- [Insight source code](https://source.chromium.org/chromium/chromium/src/+/main:third_party/devtools-frontend/src/front_end/models/trace/insights/ForcedReflow.ts)
+- [Avoid large, complex layouts and layout thrashing](https://web.dev/articles/avoid-large-complex-layouts-and-layout-thrashing)
+  <https://webperf.tips/tip/layout-thrashing/>
+- <https://github.com/MicrosoftEdge/MSEdgeExplainers/blob/main/EventPhases/explainer.md#how-does-this-happen>
+
+and possible mitigations.
+
+### Use efficient cache lifetimes
+
+### Legacy JavaScript
+
+Polyfills and transforms enable older browsers to use new JavaScript features.
+However, many aren't necessary for modern browsers. Modify JavaScript build
+process to not transpile
+[Baseline](https://web.dev/articles/baseline-and-polyfills?utm_source=lighthouse&utm_medium=lr)
+features. A long cache lifetime can speed up repeat visits to our page.
+
+## Examples of documentation in my GitHub repo
+
+### Repository Basics
+
+- [React README](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/README.md)
+- [React Rules](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/RULES.md)
+- [React Agents](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/AGENTS.md)
+
+### React Mental Model
+
+- [Understanding Your UI as a Tree](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/learn/understanding-your-ui-as-a-tree.md)
+
+### Server Components, Client Components and Boundaries
+
+- [React Server Components](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/directives/server-components.md)
+- [Next.js `use client`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/use-client.md)
+- [Next.js `use server`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/use-server.md)
+- [React `use client`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/directives/use-client.md)
+- [React `use server`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/directives/use-server.md)
+- [Client and Server Component Boundaries](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/academy/client-server-component-boundaries.md)
+- [React Server Functions](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/directives/server-functions)
+
+### Next.js 16 and App Router
+
+- [Next.js 16 Upgrade](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next-js-16-upgrade)
+- [Next.js `connection`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/api-reference/functions/connection.md)
+- [Static Exports](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/official-updated-docs/guides/static-exports.md)
+- [Nested Layouts](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/academy/nested-layouts.md)
+
+### Caching and Cache Components
+
+- [Cache Components](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/academy/cache-components.md)
+- [Next.js `use cache`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/cache/use-cache.md)
+- [Next.js `use cache: private`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/cache/use-cache-private.md)
+- [Next.js `use cache: remote`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/cache/use-cache-remote.md)
+- [Cache Handlers](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/cache/cacheHandlers.md)
+- [React `cacheSignal`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/directives/cacheSignal.md)
+- [CDN Caching](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/cache/cdn-caching.md)
+- [revalidateTag](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/revalidateTag.md)
+
+### Cache Lifetimes, Tags and Revalidation
+
+- [Next.js `cacheLife`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/essentials/cache/cacheLife.md)
+- [Next.js `cacheTag`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/api-reference/functions/cache-tag.md)
+- [Next.js `updateTag`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/api-reference/functions/updateTag.md)
+- [How Revalidation Works](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/official-updated-docs/guides/how-revalidation-works.md)
+- [Next.js `refresh`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/official-updated-docs/api-reference/functions/refresh.md)
+
+### Data Fetching, Suspense and Streaming
+
+- [Data Fetching Without Waterfalls](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/academy/data-fetching-without-waterfalls.md)
+- [Suspense and Streaming](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/academy/suspense-streaming.md)
+- [React Suspense](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/Suspence.md)
+- [Lazy Loading](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/official-updated-docs/guides/lazy-loading.md)
+- [Query Performance](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/academy/query-performance-patterns.md)
+
+### State and Hooks
+
+- [Choosing the State Structure](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/managing-state/choosing-the-state-structure.md)
+- [React `useDeferredValue`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/hooks/useDeferredValue.md)
+- [React `useDebugValue`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/hooks/useDebugValue.md)
+- [React `useSyncExternalStore`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/hooks/useSyncExternalStore.md)
+- [React `useEffectEvent`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/hooks/useEffectEvent.md)
+- [React Activity](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/reference/react/Activity.md)
+- [useLinkStatus](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/api-reference/functions/useLinkStatus.md)
+
+### Fonts, Preconnect and Asset Loading
+
+- [React DOM `preconnect`](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/react-dom/preconnect.md)
+- [Next.js Font Component](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/official-updated-docs/components/font.md)
+- [Next Font](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/fonts-with-next-font.md)
+- [Font Optimization](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/official-updated-docs/guides/font-optimization.md)
+- [Advanced Image Optimization](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/academy/advanced-image-optimization.md)
+
+### Performance, Profiling and Web Vitals
+
+- [React Profiler](https://github.com/UtekosKristoffer/utekos-docs/blob/main/react/reference/react/Profiler.md)
+- [Next.js Logging Config](https://github.com/UtekosKristoffer/utekos-docs/blob/main/nextconfig/next-config-js/logging.md)
+- [Web Vitals Attribution Config](https://github.com/UtekosKristoffer/utekos-docs/blob/main/nextconfig/next-config-js%20/webVitalsAttribution.md)
+
+### Proxy and Middleware Migration
+
+- [Proxy Basics](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/academy/proxy-basics.md)
+- [Next.js Proxy Docs](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/official-updated-docs/proxy.md)
+
+### Accessibility and WCAG
+
+- [Organizing a Page Using Headings](https://github.com/UtekosKristoffer/utekos-docs/blob/main/wcag/guidelines/organizing-a-page-using-headings.md)
+- [Providing Heading Elements at the Beginning of Each Section](https://github.com/UtekosKristoffer/utekos-docs/blob/main/wcag/guidelines/providing-heading-elements-at-the-beginning-of-each-section-of-content.md)
+- [Contrast](https://github.com/UtekosKristoffer/utekos-docs/blob/main/wcag/guidelines/contrast.md)
+- [Name, Role and Value](https://github.com/UtekosKristoffer/utekos-docs/blob/main/wcag/guidelines/name-role-value.md)
+- [Reading Level](https://github.com/UtekosKristoffer/utekos-docs/blob/main/wcag/guidelines/reading-level.md)
+- [Section Headings](https://github.com/UtekosKristoffer/utekos-docs/blob/main/wcag/guidelines/section-headings.md)
+
+  ### Other chosen API-referenced docs:
+  - [generateViewport](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/api-reference/functions/generate-viewport.md)
+  - [generateImageMetadata](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/api-reference/functions/generate-image-metadata.md)
+  - [after](https://github.com/UtekosKristoffer/utekos-docs/blob/main/next/api-reference/functions/after.md)
+
+**MANDATORY:** After every fix relatied to this process, add a file under
+.agents/process-updates/caching/ and note the speficic changes you did, why and
+used sources.
+
+### Mandatory source-citation requirements for process updates
+
+Future agents doing cache, rendering, performance, or related optimization work
+must treat source references as part of the deliverable, not as optional
+context.
+
+- Every technical claim in a process update must include a source reference with
+  a file path and line range.
+- Claims about Next.js, React, platform APIs, or other library behavior must
+  cite documentation files from `UtekosKristoffer/utekos-docs` with exact line
+  ranges.
+- Claims about this application must cite local workspace files with exact line
+  ranges and must be labeled as local code evidence, not documentation evidence.
+- Claims based on Lighthouse, PageSpeed, accessibility, or performance reports
+  must cite the relevant report or documentation file with exact line ranges.
+- The `Sources used` section must list documentation sources only. Put app
+  files, audits, screenshots, terminal output, and implementation checks in a
+  separate `Local evidence checked` or `Validation` section.
+- Each `Why` or decision paragraph must carry its own citation. A broad source
+  list at the bottom is not enough for claims made earlier in the note.
+- If a claim cannot be tied to a documentation file, report, validation result,
+  or local code line range, write it as an explicit assumption or remove it.
+- If Context7 MCP and GitHub access to `UtekosKristoffer/utekos-docs` both fail,
+  stop before making framework or library claims, following the mandatory access
+  rule above.

@@ -32,7 +32,7 @@ export function SocialProofCard({
 
   return (
     <article
-      className={`group relative overflow-hidden rounded-xl border p-4 backdrop-blur-md transition-colors duration-300 sm:p-5 ${hoverBorderClass} ${surfaceClass}`}
+      className={`group relative overflow-hidden rounded-xl border p-4 transition-colors duration-300 sm:p-5 ${hoverBorderClass} ${surfaceClass}`}
     >
       <div
         className={`pointer-events-none absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent ${shineStyle} to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 motion-reduce:transition-none`}

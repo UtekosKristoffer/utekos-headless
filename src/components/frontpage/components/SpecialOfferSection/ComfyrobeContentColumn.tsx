@@ -91,7 +91,7 @@ export function ComfyrobeContentColumn({
       <p
         ref={pRef}
         className={cn(
-          'will-animate-fade-in-up mt-4 text-lg leading-relaxed text-cloud-dancer sm:text-xl',
+          'will-animate-fade-in-up mt-4 text-lg leading-relaxed text-cloud-dancer tracking-tight font-utekos-text sm:text-xl',
           pInView && 'is-in-view'
         )}
         style={{ '--transition-delay': '0.5s' } as React.CSSProperties}

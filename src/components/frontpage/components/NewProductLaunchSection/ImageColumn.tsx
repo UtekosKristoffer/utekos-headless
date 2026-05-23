@@ -41,17 +41,16 @@ export function ImageColumn() {
           aria-label='Produktbilder av Utekos TechDown'
         >
           <CarouselContent>
-            {images.map((image, index) => (
+            {images.map(image => (
               <CarouselItem key={image.src}>
                 <div className='relative aspect-square overflow-hidden rounded-[1rem] bg-transparent sm:aspect-[3/4] sm:rounded-[1.25rem]'>
                   <Image
                     src={image.src}
                     alt={image.alt}
                     fill
-                    quality={95}
+                    quality={80}
                     className={image.imageClassName}
                     sizes='(max-width: 640px) calc(100vw - 56px), (max-width: 768px) 560px, (max-width: 1280px) 620px, (max-width: 1536px) 45vw, 540px'
-                    priority={index === 0}
                   />
                 </div>
               </CarouselItem>
