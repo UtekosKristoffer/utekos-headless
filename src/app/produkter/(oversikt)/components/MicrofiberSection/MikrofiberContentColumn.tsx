@@ -1,7 +1,10 @@
+// Path: src/app/produkter/(oversikt)/components/MicrofiberSection/MikrofiberContentColumn.tsx
+
 'use client'
+
 import { ArrowRight, Feather } from 'lucide-react'
 import Link from 'next/link'
-import { buttonVariants } from '@/components/ui/button'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { BenefitCard } from '@/app/produkter/(oversikt)/components/BenefitCard'
 import { useInView } from '@/hooks/useInView'
 import { cn } from '@/lib/utils/className'
@@ -10,18 +13,21 @@ const benefits = [
   {
     label: '3-i-1 funksjonalitet',
     description: '— Parkas, oppfestet eller full lengde',
-    glowColor: '#f97316'
+    glowColor: 'var(--ancient-water)',
+    surface: 'maritime' as const
   },
   {
     label: 'Lettvekt og kompakt',
     description: '— Bare ca. 800g, enkel å pakke',
-    glowColor: '#fb923c'
+    glowColor: 'var(--primary-button)',
+    surface: 'plum' as const
   },
   {
     label: 'YKK®-toveisglidelåser',
     description:
       '— Bransjens mest anerkjente glidelås sikrer pålitelig og enkel bruk',
-    glowColor: '#fdba74'
+    glowColor: 'var(--dusted-peri)',
+    surface: 'blueberry' as const
   }
 ]
 
@@ -35,74 +41,94 @@ export function MikrofiberContentColumn() {
   return (
     <div
       ref={containerRef}
-      className={cn('will-animate-fade-in-up', containerInView && 'is-in-view')}
+      className={cn(
+        'will-animate-fade-in-up h-full min-h-full',
+        containerInView && 'is-in-view'
+      )}
       style={{ '--transition-delay': '0.1s' } as React.CSSProperties}
     >
-      <div
-        ref={badgeRef}
-        className={cn(
-          'will-animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-cloud-dancer/10 bg-maritime-blue px-4 py-2',
-          badgeInView && 'is-in-view'
-        )}
-        style={{ '--transition-delay': '0.3s' } as React.CSSProperties}
-      >
-        <Feather className='size-4 text-cloud-dancer' />
-        <span className='text-sm font-medium text-cloud-dancer'>
-          Ultralett allsidighet
-        </span>
-      </div>
+      <div className='flex h-full min-h-full flex-col justify-center lg:min-h-[34rem]'>
+        <div>
+          <div
+            ref={badgeRef}
+            className={cn(
+              'will-animate-fade-in-up mb-5',
+              badgeInView && 'is-in-view'
+            )}
+            style={{ '--transition-delay': '0.3s' } as React.CSSProperties}
+          >
+            <BrandBadge
+              backgroundColor='var(--maritime-darkest)'
+              textColor='var(--cloud-dancer)'
+              className='gap-2 border border-maritime-darkest/12 px-4 py-2 font-utekos-text text-sm font-medium tracking-tight shadow-[0_16px_34px_-28px_color-mix(in_oklch,var(--maritime-darkest)_82%,transparent)]'
+            >
+              <Feather
+                className='size-4 text-primary-button'
+                aria-hidden='true'
+              />
+              <span>Ultralett allsidighet</span>
+            </BrandBadge>
+          </div>
 
-      <h2
-        ref={h2Ref}
-        className={cn(
-          'will-animate-fade-in-up text-balance text-3xl font-bold tracking-tight sm:text-4xl',
-          h2InView && 'is-in-view'
-        )}
-        style={{ '--transition-delay': '0.4s' } as React.CSSProperties}
-      >
-        Lettvekt møter varme og allsidighet
-      </h2>
+          <h2
+            ref={h2Ref}
+            className={cn(
+              'will-animate-fade-in-up text-balance font-brand-sans text-3xl font-bold leading-[0.95] tracking-tight text-maritime-darkest sm:text-4xl',
+              h2InView && 'is-in-view'
+            )}
+            style={{ '--transition-delay': '0.4s' } as React.CSSProperties}
+          >
+            Lettvekt møter varme og allsidighet
+          </h2>
 
-      <p
-        ref={pRef}
-        className={cn(
-          'will-animate-fade-in-up mt-4 text-lg leading-relaxed text-neutral-200',
-          pInView && 'is-in-view'
-        )}
-        style={{ '--transition-delay': '0.5s' } as React.CSSProperties}
-      >
-        Utekos Mikrofiber™ gir deg følelsen av dun med ekstra fordeler.
-        Beholder varmen selv når den blir fuktig og tørker raskt. Ulike
-        snorstramminger sørger for at passformen kan justeres etter behov.
-        Tilgjengelig i fargene Fjellblå og Vargnatt.
-      </p>
+          <p
+            ref={pRef}
+            className={cn(
+              'will-animate-fade-in-up mt-6 max-w-2xl font-utekos-text text-lg leading-[1.45] tracking-tight text-maritime-darkest/82',
+              pInView && 'is-in-view'
+            )}
+            style={{ '--transition-delay': '0.5s' } as React.CSSProperties}
+          >
+            Utekos Mikrofiber™ gir deg følelsen av dun med ekstra fordeler.
+            Beholder varmen selv når den blir fuktig og tørker raskt. Ulike
+            snorstramminger sørger for at passformen kan justeres etter behov.
+            Tilgjengelig i fargene Fjellblå og Vargnatt.
+          </p>
 
-      <ul className='mt-8 space-y-3'>
-        {benefits.map((benefit, idx) => (
-          <BenefitCard
-            key={benefit.label}
-            benefit={benefit}
-            delay={0.6 + idx * 0.1}
-          />
-        ))}
-      </ul>
-      <div
-        ref={ctaRef}
-        className={cn('will-animate-fade-in-up', ctaInView && 'is-in-view')}
-        style={{ '--transition-delay': '0.9s' } as React.CSSProperties}
-      >
-        <Link
-          href='/produkter/utekos-mikrofiber'
-          data-track='MikrofiberContentProductPageExploreClick'
-          className={buttonVariants({
-            size: 'lg',
-            className:
-              'group mt-8 w-full sm:w-auto bg-orange-600 text-white hover:bg-orange-500 shadow-lg shadow-orange-600/20 hover:shadow-orange-500/40 transition-all duration-300'
-          })}
-        >
-          Utforsk Utekos Mikrofiber™
-          <ArrowRight className='ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
-        </Link>
+          <ul className='mt-8 space-y-3'>
+            {benefits.map((benefit, idx) => (
+              <BenefitCard
+                key={benefit.label}
+                benefit={benefit}
+                delay={0.6 + idx * 0.1}
+              />
+            ))}
+          </ul>
+
+          <div
+            ref={ctaRef}
+            className={cn(
+              'will-animate-fade-in-up mt-8',
+              ctaInView && 'is-in-view'
+            )}
+            style={{ '--transition-delay': '0.9s' } as React.CSSProperties}
+          >
+            <BrandBadge
+              asChild
+              backgroundColor='var(--primary-button)'
+              textColor='var(--maritime-darkest)'
+              className='group min-h-12 w-full gap-2 whitespace-normal border border-primary-button/35 px-6 py-3 font-utekos-text text-base font-semibold leading-[1.35] tracking-tight shadow-[0_18px_40px_-28px_color-mix(in_oklch,var(--primary-button)_70%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/70 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto sm:whitespace-nowrap'
+            >
+              <Link
+                href='/produkter/utekos-mikrofiber'
+                data-track='MikrofiberContentProductPageExploreClick'
+              >
+                Utforsk Utekos Mikrofiber™
+                <ArrowRight className='size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none' />
+              </Link>
+            </BrandBadge>
+          </div>
+        </div>
       </div>
     </div>
   )

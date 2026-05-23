@@ -1,12 +1,17 @@
-// Path: src/app/produkter/components/sections/MicrofiberSection/BenefitCard.tsx
+// Path: src/app/produkter/(oversikt)/components/BenefitCard.tsx
+
 'use client'
 
 import { Check } from 'lucide-react'
+import type { CSSProperties } from 'react'
+
+type BenefitSurface = 'maritime' | 'plum' | 'blueberry'
 
 interface Benefit {
   label: string
   description: string
   glowColor: string
+  surface?: BenefitSurface
 }
 
 interface BenefitCardProps {
@@ -14,38 +19,81 @@ interface BenefitCardProps {
   delay: number
 }
 
+const surfaceStyles: Record<
+  BenefitSurface,
+  {
+    background: string
+    border: string
+  }
+> = {
+  maritime: {
+    background:
+      'linear-gradient(145deg, color-mix(in oklch, var(--maritime-darkest) 92%, var(--ancient-water) 8%) 0%, color-mix(in oklch, var(--maritime-darkest) 96%, var(--maritime-blue) 4%) 100%)',
+    border:
+      'color-mix(in oklch, var(--ancient-water) 34%, var(--maritime-darkest) 66%)'
+  },
+  plum: {
+    background:
+      'linear-gradient(145deg, color-mix(in oklch, var(--chocolate-plum) 82%, var(--maritime-darkest) 18%) 0%, color-mix(in oklch, var(--maritime-darkest) 88%, var(--chocolate-plum) 12%) 100%)',
+    border:
+      'color-mix(in oklch, var(--primary-button) 36%, var(--chocolate-plum) 64%)'
+  },
+  blueberry: {
+    background:
+      'linear-gradient(145deg, color-mix(in oklch, var(--blueberry) 42%, var(--maritime-darkest) 58%) 0%, color-mix(in oklch, var(--maritime-darkest) 92%, var(--dusted-peri) 8%) 100%)',
+    border:
+      'color-mix(in oklch, var(--dusted-peri) 36%, var(--maritime-darkest) 64%)'
+  }
+}
+
 export function BenefitCard({ benefit, delay }: BenefitCardProps) {
+  const surface = surfaceStyles[benefit.surface ?? 'maritime']
+
   return (
     <li
-      className='animate-fade-in-on-scroll group relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all duration-300 hover:translate-x-1'
-      style={{ '--animation-delay': `${delay}s` } as React.CSSProperties}
+      className='animate-fade-in-on-scroll group relative overflow-hidden rounded-[1.05rem] border font-utekos-text tracking-tight shadow-[0_18px_44px_-36px_color-mix(in_oklch,var(--maritime-darkest)_82%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+      style={
+        {
+          '--animation-delay': `${delay}s`,
+          '--benefit-accent': benefit.glowColor,
+          'borderColor': surface.border,
+          'background': surface.background
+        } as CSSProperties
+      }
     >
-      {/* Aurora gradient effect */}
       <div
-        className='absolute -inset-x-2 -inset-y-8 opacity-15 blur-2xl transition-opacity duration-300 group-hover:opacity-25'
+        className='pointer-events-none absolute -inset-x-8 -top-20 h-44 opacity-[0.14] blur-3xl transition-opacity duration-300 group-hover:opacity-[0.22]'
         style={{
-          background: `radial-gradient(120% 120% at 50% 0%, transparent 30%, ${benefit.glowColor} 100%)`
+          background:
+            'radial-gradient(120% 120% at 50% 0%, transparent 38%, var(--benefit-accent) 100%)'
         }}
       />
 
-      <div className='relative z-10 flex items-center gap-3'>
-        <div className='flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md border border-neutral-700 bg-neutral-900 transition-all duration-300 group-hover:scale-110 group-hover:border-orange-500/50'>
-          <Check className='h-5 w-5 text-orange-400' />
+      <div className='relative z-10 flex min-h-[3.75rem] items-center gap-3 px-4 py-3.5'>
+        <div
+          className='flex size-8 shrink-0 items-center justify-center rounded-lg border transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none'
+          style={{
+            borderColor:
+              'color-mix(in oklch, var(--benefit-accent) 44%, transparent)',
+            background:
+              'color-mix(in oklch, var(--maritime-darkest) 86%, var(--benefit-accent) 14%)'
+          }}
+        >
+          <Check
+            className='size-5'
+            style={{ color: 'var(--benefit-accent)' }}
+            aria-hidden='true'
+          />
         </div>
-        <div className='flex-1 text-sm'>
-          <span className='font-semibold text-white'>{benefit.label}</span>
+
+        <div className='flex-1 text-sm leading-[1.35]'>
+          <span className='font-semibold text-cloud-dancer'>
+            {benefit.label}
+          </span>
           {benefit.description && (
-            <span className='text-neutral-300'> {benefit.description}</span>
+            <span className='text-cloud-dancer/78'> {benefit.description}</span>
           )}
         </div>
-      </div>
-
-      {/* Subtle border glow on hover */}
-      <div className='absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
-        <div
-          className='absolute inset-0 rounded-lg blur-sm opacity-20'
-          style={{ background: benefit.glowColor }}
-        />
       </div>
     </li>
   )

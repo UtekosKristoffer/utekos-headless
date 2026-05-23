@@ -152,22 +152,22 @@ export function ProductsPageHeader() {
           </BrandBadge>
         </div>
 
-        <h1 className='perspective-1000 mx-auto max-w-5xl text-3xl font-bold tracking-[-0.02em] text-cloud-dancer sm:text-5xl md:text-7xl'>
+        <h1 className='perspective-1000 mx-auto max-w-5xl text-3xl font-bold tracking-tight font-google-sans text-cloud-dancer sm:text-5xl md:text-7xl'>
           <span className='block overflow-hidden'>
             <span className='gsap-title-line block'>Kolleksjonen for</span>
           </span>
           <span className='block overflow-hidden pt-2'>
-            <span className='gsap-title-line block bg-gradient-to-r from-ancient-water via-cloud-dancer to-overcast bg-clip-text py-1 leading-tight text-transparent'>
+            <span className='gsap-title-line block tracking-tight font-google-sans  bg-gradient-to-r from-ancient-water via-cloud-dancer to-overcast bg-clip-text py-1 leading-tight text-transparent'>
               kompromissløs komfort
             </span>
           </span>
         </h1>
 
-        <p className='gsap-desc opacity-0 mx-auto mt-8 max-w-2xl text-lg leading-[1.5] text-overcast md:text-xl'>
+        <p className='gsap-desc opacity-0 mx-auto tracking-tight font-utekos-text mt-8 max-w-2xl text-lg leading-[1.5] text-cloud-dancer/95 md:text-xl'>
           Vi har{' '}
-          <span className='relative inline-block font-medium text-cloud-dancer'>
+          <span className='relative inline-block font-medium tracking-tight font-utekos-text  text-cloud-dancer'>
             redefinert
-            <span className='gsap-underline absolute bottom-0 left-0 h-[2px] w-full origin-left bg-primary-button' />
+            <span className='gsap-underline absolute bottom-0 left-0 h-[2px] w-full origin-left bg-primary-button tracking-tight font-utekos-text' />
           </span>{' '}
           utekosen gjennom teknologi og funksjonalitet.
           <br className='hidden md:block' />

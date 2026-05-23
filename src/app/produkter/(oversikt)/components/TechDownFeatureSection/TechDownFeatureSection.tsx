@@ -151,7 +151,7 @@ export const TechDownFeatureSection = () => {
             </span>
           </h2>
 
-          <p className='gsap-content opacity-0 mb-8 max-w-lg text-lg leading-relaxed text-overcast/82'>
+          <p className='gsap-content opacity-0 mb-8 max-w-lg text-lg leading-relaxed tracking-tight font-utekos-text text-cloud-dancer/90'>
             Vi har ikke bare kombinert det beste fra dunens letthet og
             mikrofiberens slitestyrke – vi har utviklet en helt ny kategori av
             personlig komfort.
@@ -163,14 +163,16 @@ export const TechDownFeatureSection = () => {
                 Før 1990,-
               </span>
               <div className='flex items-baseline gap-2'>
-                <span className='text-3xl font-bold text-cloud-dancer'>
+                <span className='text-3xl font-bold tracking-tight font-utekos-text text-cloud-dancer'>
                   1790,-
                 </span>
-                <span className='text-sm text-overcast/62'>inkl. mva</span>
+                <span className='text-sm tracking-tight font-utekos-text text-overcast/62'>
+                  inkl. mva
+                </span>
               </div>
             </div>
             <div className='mx-2 h-8 w-[1px] bg-cloud-dancer/10'></div>
-            <div className='text-sm font-medium text-ancient-water'>
+            <div className='text-sm font-medium tracking-tight font-utekos-text text-ancient-water'>
               Spar 200,-
             </div>
           </div>
@@ -184,7 +186,7 @@ export const TechDownFeatureSection = () => {
                 <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-ancient-water/12 text-ancient-water transition-transform group-hover:scale-110'>
                   <feature.icon className='h-5 w-5' />
                 </div>
-                <span className='font-medium text-overcast/88 transition-colors group-hover:text-cloud-dancer'>
+                <span className='font-medium tracking-tight font-utekos-text text-cloud-dancer/90 transition-colors group-hover:text-cloud-dancer'>
                   {feature.text}
                 </span>
               </li>
@@ -196,7 +198,7 @@ export const TechDownFeatureSection = () => {
               asChild
               backgroundColor='var(--color-primary-button)'
               textColor='var(--color-maritime-darkest)'
-              className='group h-14 px-8 text-base font-medium shadow-[0_20px_46px_-28px_rgba(20,30,40,0.56)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-95'
+              className='group h-14 px-8 text-base tracking-tight font-utekos-text shadow-[0_20px_46px_-28px_rgba(20,30,40,0.56)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-95'
             >
               <Link
                 href='/produkter/utekos-techdown'
@@ -206,7 +208,7 @@ export const TechDownFeatureSection = () => {
                 <ArrowRight className='ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1' />
               </Link>
             </BrandBadge>
-            <p className='mt-4 text-xs italic text-overcast/56'>
+            <p className='mt-4 text-xs tracking-tight font-utekos-text text-overcast/70'>
               *Tilbudet gjelder i en begrenset periode.
             </p>
           </div>

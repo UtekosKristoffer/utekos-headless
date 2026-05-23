@@ -5,7 +5,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 export function ProductPageSkeleton() {
   return (
-    <main className='relative isolate overflow-hidden bg-overcast py-10 md:py-14'>
+    <section className='relative isolate overflow-hidden bg-overcast py-10 md:py-14'>
       <div className='pointer-events-none absolute inset-0 -z-10'>
         <div className='absolute left-[8%] top-12 h-80 w-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_62%,transparent)_0%,transparent_72%)] blur-3xl' />
         <div className='absolute bottom-[18%] right-[8%] h-96 w-96 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_20%,transparent)_0%,transparent_72%)] blur-3xl' />
@@ -54,6 +54,6 @@ export function ProductPageSkeleton() {
           </OptionsColumn>
         </ProductPageGrid>
       </div>
-    </main>
+    </section>
   )
 }

@@ -1,8 +1,7 @@
-// Path: src/components/MikrofiberSection/MikrofiberImageSection.tsx
+// Path: src/app/produkter/(oversikt)/components/MicrofiberSection/MikrofiberImageSection.tsx
 
 'use client'
 
-import { AspectRatio } from '@/components/ui/aspect-ratio'
 import {
   Carousel,
   CarouselContent,
@@ -24,55 +23,55 @@ export function MikrofiberImageSection() {
     <div
       ref={ref}
       className={cn(
-        'will-animate-fade-in-scale relative',
+        'will-animate-fade-in-scale relative h-full min-h-full',
         isInView && 'is-in-view'
       )}
     >
-      <Carousel className='w-full overflow-hidden rounded-2xl'>
-        <CarouselContent>
-          <CarouselItem>
-            <div className='w-full'>
-              <AspectRatio ratio={1} className='bg-transparent'>
-                <Image
-                  src={LinnKate}
-                  alt='Utekos Mikrofiber™ - Lettvekt og allsidig'
-                  fill
-                  className='object-cover transition-transform duration-500 hover:scale-105'
-                  sizes='(max-width: 1024px) 80vw, 40vw'
-                  priority
-                />
-              </AspectRatio>
+      <Carousel
+        className='h-full w-full overflow-hidden rounded-[1.35rem] border border-maritime-darkest/10 bg-maritime-darkest/5 shadow-[0_24px_70px_-48px_color-mix(in_oklch,var(--maritime-darkest)_72%,transparent)]'
+        opts={{ align: 'start', loop: true }}
+      >
+        <CarouselContent className='h-full'>
+          <CarouselItem className='h-full'>
+            <div className='relative aspect-square w-full overflow-hidden bg-maritime-darkest/5 lg:h-full lg:min-h-[34rem] lg:aspect-auto'>
+              <Image
+                src={LinnKate}
+                alt='Utekos Mikrofiber™ - Lettvekt og allsidig'
+                fill
+                className='object-cover transition-transform duration-500 hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100'
+                sizes='(max-width: 1024px) 92vw, 40vw'
+                priority
+              />
             </div>
           </CarouselItem>
-          <CarouselItem>
-            <div className='w-full'>
-              <AspectRatio ratio={1} className='bg-transparent'>
-                <Image
-                  src={MikroPicFront}
-                  alt='Utekos Mikrofiber™ - Forsiden'
-                  fill
-                  className='object-cover transition-transform duration-500 hover:scale-105'
-                  sizes='(max-width: 1024px) 80vw, 40vw'
-                />
-              </AspectRatio>
+
+          <CarouselItem className='h-full'>
+            <div className='relative aspect-square w-full overflow-hidden bg-cloud-dancer lg:h-full lg:min-h-[34rem] lg:aspect-auto'>
+              <Image
+                src={MikroPicFront}
+                alt='Utekos Mikrofiber™ - Forsiden'
+                fill
+                className='object-cover transition-transform duration-500 hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100'
+                sizes='(max-width: 1024px) 92vw, 40vw'
+              />
             </div>
           </CarouselItem>
-          <CarouselItem>
-            <div className='w-full'>
-              <AspectRatio ratio={1} className='bg-transparent'>
-                <Image
-                  src={MikroPicBack}
-                  alt='Utekos Mikrofiber™ - Baksiden'
-                  fill
-                  className='object-cover transition-transform duration-500 hover:scale-105'
-                  sizes='(max-width: 1024px) 80vw, 40vw'
-                />
-              </AspectRatio>
+
+          <CarouselItem className='h-full'>
+            <div className='relative aspect-square w-full overflow-hidden bg-cloud-dancer lg:h-full lg:min-h-[34rem] lg:aspect-auto'>
+              <Image
+                src={MikroPicBack}
+                alt='Utekos Mikrofiber™ - Baksiden'
+                fill
+                className='object-cover transition-transform duration-500 hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100'
+                sizes='(max-width: 1024px) 92vw, 40vw'
+              />
             </div>
           </CarouselItem>
         </CarouselContent>
-        <CarouselPrevious className='left-4 hidden sm:inline-flex' />
-        <CarouselNext className='right-4 hidden sm:inline-flex' />
+
+        <CarouselPrevious className='left-4 hidden border-maritime-darkest/10 bg-cloud-dancer/86 text-maritime-darkest backdrop-blur-md hover:bg-primary-button focus-visible:ring-primary-button/70 sm:inline-flex' />
+        <CarouselNext className='right-4 hidden border-maritime-darkest/10 bg-cloud-dancer/86 text-maritime-darkest backdrop-blur-md hover:bg-primary-button focus-visible:ring-primary-button/70 sm:inline-flex' />
       </Carousel>
     </div>
   )

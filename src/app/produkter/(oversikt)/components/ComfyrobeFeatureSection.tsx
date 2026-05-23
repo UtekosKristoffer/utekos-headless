@@ -1,77 +1,213 @@
 // Path: src/app/produkter/(oversikt)/components/ComfyrobeFeatureSection.tsx
 
 import Link from 'next/link'
+import type { CSSProperties } from 'react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { ComfyrobeImageCarousel } from '@/app/produkter/(oversikt)/components/ComfyrobeImageCarousel'
-import { Button } from '@/components/ui/button'
 import { Wind } from 'lucide-react'
 import { comfyrobeFeatures } from '@/app/produkter/(oversikt)/utils/comfyrobeFeatures'
+
+const featureSurfaceStyles = {
+  weather: {
+    background:
+      'linear-gradient(145deg, color-mix(in oklch, var(--maritime-darkest) 88%, var(--ancient-water) 12%) 0%, color-mix(in oklch, var(--maritime-darkest) 94%, var(--maritime-blue) 6%) 100%)',
+    border:
+      'color-mix(in oklch, var(--ancient-water) 36%, var(--maritime-darkest) 64%)',
+    iconBackground:
+      'color-mix(in oklch, var(--ancient-water) 18%, var(--maritime-darkest) 82%)',
+    iconBorder: 'color-mix(in oklch, var(--ancient-water) 42%, transparent)',
+    iconColor: 'var(--ancient-water)'
+  },
+  warmth: {
+    background:
+      'linear-gradient(145deg, color-mix(in oklch, var(--demitasse) 58%, var(--maritime-darkest) 42%) 0%, color-mix(in oklch, var(--chocolate-plum) 42%, var(--maritime-darkest) 58%) 100%)',
+    border:
+      'color-mix(in oklch, var(--bleached-mauve) 38%, var(--demitasse) 62%)',
+    iconBackground:
+      'color-mix(in oklch, var(--bleached-mauve) 18%, var(--maritime-darkest) 82%)',
+    iconBorder: 'color-mix(in oklch, var(--bleached-mauve) 44%, transparent)',
+    iconColor: 'var(--bleached-mauve)'
+  },
+  freedom: {
+    background:
+      'linear-gradient(145deg, color-mix(in oklch, var(--mountain-view) 48%, var(--maritime-darkest) 52%) 0%, color-mix(in oklch, var(--maritime-darkest) 90%, var(--mountain-view) 10%) 100%)',
+    border:
+      'color-mix(in oklch, var(--primary-button) 34%, var(--mountain-view) 66%)',
+    iconBackground:
+      'color-mix(in oklch, var(--primary-button) 16%, var(--maritime-darkest) 84%)',
+    iconBorder: 'color-mix(in oklch, var(--primary-button) 42%, transparent)',
+    iconColor: 'var(--primary-button)'
+  }
+} as const
+
 export function ComfyrobeFeatureSection() {
   return (
-    <section className='py-16 sm:py-24 md:mb-24 rounded-lg'>
-      <div className='container mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 lg:grid-cols-2 lg:gap-16'>
-        <ComfyrobeImageCarousel />
+    <section
+      aria-labelledby='comfyrobe-feature-heading'
+      className='w-full py-16 sm:py-24 md:mb-24'
+    >
+      <div className='container mx-auto px-4'>
+        <div className='relative overflow-hidden rounded-[1.75rem] border border-cloud-dancer/12 bg-maritime-darkest p-5 shadow-[0_28px_90px_-62px_color-mix(in_oklch,var(--maritime-darkest)_90%,transparent)] sm:p-8 lg:p-12'>
+          <div className='pointer-events-none absolute inset-0 opacity-70'>
+            <div
+              className='absolute -left-24 top-0 size-[34rem] rounded-full blur-3xl'
+              style={{
+                background:
+                  'radial-gradient(circle, color-mix(in oklch, var(--demitasse) 42%, transparent) 0%, transparent 70%)'
+              }}
+            />
+            <div
+              className='absolute -right-24 bottom-0 size-[34rem] rounded-full blur-3xl'
+              style={{
+                background:
+                  'radial-gradient(circle, color-mix(in oklch, var(--ancient-water) 38%, transparent) 0%, transparent 72%)'
+              }}
+            />
+            <div
+              className='absolute left-1/2 top-1/2 size-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl'
+              style={{
+                background:
+                  'radial-gradient(circle, color-mix(in oklch, var(--mountain-view) 28%, transparent) 0%, transparent 74%)'
+              }}
+            />
+          </div>
 
-        <AnimatedBlock className='will-animate-fade-in-right'>
-          <div className='flex flex-col items-start'>
-            <AnimatedBlock className='will-animate-fade-in-up'>
-              <h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl'>
-                Forleng utekosen.
-                <br />
-                <span className='text-sky-800'>Uansett Vær.</span>
-              </h2>
-            </AnimatedBlock>
+          <div className='relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-stretch lg:gap-12'>
+            <ComfyrobeImageCarousel />
 
-            <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s'>
-              <p className='mt-4 max-w-2xl text-lg leading-relaxed text-access/80'>
-                Comfyrobe™ er den ultimate allværskåpen for livsnyteren. Den
-                kombinerer den urokkelige beskyttelsen til en teknisk skalljakke
-                med den komfortable omfavnelsen av din mykeste badekåpe.
-              </p>
-            </AnimatedBlock>
-
-            <div className='mt-10 w-full text-access/80 space-y-6'>
-              {comfyrobeFeatures.map((feature, index) => (
-                <AnimatedBlock
-                  key={feature.title}
-                  className='will-animate-fade-in-up'
-                  delay={`${0.2 + index * 0.1}s`}
-                >
-                  <div className='flex items-start gap-4'>
-                    <div
-                      className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg border ${feature.colorClasses}`}
+            <AnimatedBlock className='will-animate-fade-in-right h-full min-h-full'>
+              <div className='flex h-full min-h-full flex-col justify-center lg:min-h-[38rem]'>
+                <div>
+                  <AnimatedBlock className='will-animate-fade-in-up'>
+                    <BrandBadge
+                      backgroundColor='var(--bleached-mauve)'
+                      textColor='var(--maritime-darkest)'
+                      className='mb-5 gap-2 border border-cloud-dancer/18 px-4 py-2 font-utekos-text text-sm font-medium tracking-tight shadow-[0_16px_34px_-28px_color-mix(in_oklch,var(--bleached-mauve)_68%,transparent)]'
                     >
-                      <feature.icon className='h-6 w-6' />
-                    </div>
-                    <div>
-                      <h3 className='font-semibold text-foreground'>
-                        {feature.title}
-                      </h3>
-                      <p className='mt-1 text-sm text-access/80'>
-                        {feature.description}
-                      </p>
-                    </div>
-                  </div>
-                </AnimatedBlock>
-              ))}
-            </div>
+                      <Wind
+                        className='size-4 text-maritime-darkest'
+                        aria-hidden='true'
+                      />
+                      <span>Comfyrobe™</span>
+                    </BrandBadge>
+                  </AnimatedBlock>
 
-            <AnimatedBlock className='will-animate-fade-in-up' delay='0.5s'>
-              <div className='mt-12 flex w-full flex-col items-center gap-4 sm:flex-row'>
-                <p className='text-4xl font-bold text-foreground'>NOK 990,-</p>
-                <Button asChild size='lg' className='group w-full sm:w-auto'>
-                  <Link
-                    href='/produkter/comfyrobe'
-                    data-track='ComfyrobeExploreProductPageClick'
+                  <AnimatedBlock
+                    className='will-animate-fade-in-up'
+                    delay='0.05s'
                   >
-                    Utforsk Comfyrobe™
-                    <Wind className='ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1' />
-                  </Link>
-                </Button>
+                    <h2
+                      id='comfyrobe-feature-heading'
+                      className='max-w-2xl text-balance font-brand-sans text-3xl font-bold leading-[0.95] tracking-tight text-cloud-dancer sm:text-4xl lg:text-5xl'
+                    >
+                      Forleng utekosen.
+                      <br />
+                      <span className='text-ancient-water'>Uansett vær.</span>
+                    </h2>
+                  </AnimatedBlock>
+
+                  <AnimatedBlock
+                    className='will-animate-fade-in-up'
+                    delay='0.1s'
+                  >
+                    <p className='mt-6 max-w-2xl font-utekos-text text-lg leading-[1.45] tracking-tight text-cloud-dancer/88'>
+                      Comfyrobe™ er den ultimate allværskåpen for livsnyteren.
+                      Den kombinerer den urokkelige beskyttelsen til en teknisk
+                      skalljakke med den komfortable omfavnelsen av din mykeste
+                      badekåpe.
+                    </p>
+                  </AnimatedBlock>
+
+                  <div className='mt-8 w-full space-y-3'>
+                    {comfyrobeFeatures.map((feature, index) => {
+                      const surface = featureSurfaceStyles[feature.surface]
+                      const Icon = feature.icon
+
+                      return (
+                        <AnimatedBlock
+                          key={feature.title}
+                          className='will-animate-fade-in-up'
+                          delay={`${0.2 + index * 0.1}s`}
+                        >
+                          <article
+                            className='group relative overflow-hidden rounded-[1.05rem] border p-4 font-utekos-text tracking-tight shadow-[0_18px_44px_-36px_color-mix(in_oklch,var(--maritime-darkest)_86%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+                            style={
+                              {
+                                '--feature-accent': surface.iconColor,
+                                'borderColor': surface.border,
+                                'background': surface.background
+                              } as CSSProperties
+                            }
+                          >
+                            <div
+                              className='pointer-events-none absolute -inset-x-8 -top-20 h-44 opacity-[0.14] blur-3xl transition-opacity duration-300 group-hover:opacity-[0.22]'
+                              style={{
+                                background:
+                                  'radial-gradient(120% 120% at 50% 0%, transparent 38%, var(--feature-accent) 100%)'
+                              }}
+                            />
+
+                            <div className='relative z-10 flex min-h-[4.25rem] items-center gap-3'>
+                              <div
+                                className='flex size-11 shrink-0 items-center justify-center rounded-xl border transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none'
+                                style={{
+                                  borderColor: surface.iconBorder,
+                                  background: surface.iconBackground
+                                }}
+                              >
+                                <Icon
+                                  className='size-5'
+                                  style={{ color: surface.iconColor }}
+                                  aria-hidden='true'
+                                />
+                              </div>
+
+                              <div className='flex-1'>
+                                <h3 className='text-base font-semibold leading-[1.2] tracking-tight text-cloud-dancer'>
+                                  {feature.title}
+                                </h3>
+                                <p className='mt-1 text-sm leading-[1.45] tracking-tight text-cloud-dancer/78'>
+                                  {feature.description}
+                                </p>
+                              </div>
+                            </div>
+                          </article>
+                        </AnimatedBlock>
+                      )
+                    })}
+                  </div>
+
+                  <AnimatedBlock
+                    className='will-animate-fade-in-up'
+                    delay='0.5s'
+                  >
+                    <div className='mt-8 flex w-full flex-col items-start gap-4 sm:flex-row sm:items-center'>
+                      <p className='font-brand-sans text-4xl font-bold leading-none tracking-tight text-cloud-dancer'>
+                        NOK 990,-
+                      </p>
+
+                      <BrandBadge
+                        asChild
+                        backgroundColor='var(--primary-button)'
+                        textColor='var(--maritime-darkest)'
+                        className='group min-h-12 w-full gap-2 whitespace-normal border border-primary-button/35 px-6 py-3 font-utekos-text text-base font-semibold leading-[1.35] tracking-tight shadow-[0_18px_40px_-28px_color-mix(in_oklch,var(--primary-button)_70%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto sm:whitespace-nowrap'
+                      >
+                        <Link
+                          href='/produkter/comfyrobe'
+                          data-track='ComfyrobeExploreProductPageClick'
+                        >
+                          Utforsk Comfyrobe™
+                          <Wind className='size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none' />
+                        </Link>
+                      </BrandBadge>
+                    </div>
+                  </AnimatedBlock>
+                </div>
               </div>
             </AnimatedBlock>
           </div>
-        </AnimatedBlock>
+        </div>
       </div>
     </section>
   )

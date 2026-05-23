@@ -1,4 +1,4 @@
-import { iconMap, type IconName } from './iconMap'
+import type { IconName } from './iconMap'
 
 export const microfiberAdvantages: {
   icon: IconName
