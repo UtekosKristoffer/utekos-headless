@@ -101,7 +101,7 @@ export function SectionThreeInOne() {
                   fill
                   priority={index === 0}
                   className={cn(
-                    'gsap-step-image will-change-transform',
+                    'gsap-step-image',
                     step.desktopObjectFit === 'contain' ?
                       'object-contain p-12 min-[1536px]:p-16'
                     : 'object-cover'

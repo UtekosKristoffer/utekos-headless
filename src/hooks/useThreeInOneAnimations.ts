@@ -233,23 +233,10 @@ export function useThreeInOneAnimations() {
         setupIntro()
         setupStepPanels(desktopPanels, true)
 
-        const images = q('.gsap-step-image')
-        if (!desktopStory || !images.length || !desktopPanels.length) {
+        if (!desktopStory || !desktopPanels.length) {
           queueRefresh()
           return
         }
-
-        gsap.to(images, {
-          yPercent: -6,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: desktopStory,
-            start: 'top bottom',
-            end: 'bottom top',
-            invalidateOnRefresh: true,
-            scrub: 0.6
-          }
-        })
 
         queueRefresh()
       })

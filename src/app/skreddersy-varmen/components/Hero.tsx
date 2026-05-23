@@ -325,16 +325,16 @@ export function Hero() {
 
           {/* Availability */}
           <p
-            className='sv-availability mt-5 max-w-[19rem] font-google-sans text-xs font-medium leading-[1.45] tracking-normal text-cloud-dancer/85 md:text-sm'
+            className='sv-availability mt-5 flex w-fit max-w-full flex-nowrap items-center whitespace-nowrap font-google-sans text-xs font-medium leading-[1.45] tracking-normal text-cloud-dancer/85 md:text-sm'
             aria-label='På lager, levering 2 til 5 dager, 14 dagers retur'
           >
             <span>På lager</span>
             <span className='mx-2 text-cloud-dancer/45'>·</span>
             <span>Levering 2–5 dager</span>
-            <span className='mx-2 hidden text-cloud-dancer/45 sm:inline'>
+            <span className='mx-2 hidden text-cloud-dancer/45 lg:inline'>
               ·
             </span>
-            <span className='hidden sm:inline'>14 dagers retur</span>
+            <span className='hidden lg:inline'>14 dagers retur</span>
           </p>
         </div>
       </motion.div>
