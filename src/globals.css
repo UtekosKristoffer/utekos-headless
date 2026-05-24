@@ -1,6 +1,5 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
-@import 'tailwindcss' important;
 
 @theme {
   --spacer-xxxs: 0.25rem;
@@ -102,8 +101,7 @@
   --maritime-darkest: oklch(0.1284 0.0366 279.42);
   --font-brand-sans: var(--font-google-sans), system-ui, sans-serif;
   --font-utekos-text:
-    var(--font-utekos-text-local), var(--font-google-sans), system-ui,
-    sans-serif;
+    var(--font-utekos-text), var(--font-google-sans), system-ui, sans-serif;
   --utekos-title-line-height: 0.95;
   --utekos-title-letter-spacing: -0.01em;
   --utekos-text-line-height: 1.3;
@@ -379,8 +377,7 @@
   --font-mono: var(--font-geist-mono);
   --font-brand-sans: var(--font-google-sans), system-ui, sans-serif;
   --font-utekos-text:
-    var(--font-utekos-text-local), var(--font-google-sans), system-ui,
-    sans-serif;
+    var(--font-utekos-text), var(--font-google-sans), system-ui, sans-serif;
   --color-mandarin: var(--mandarin);
   --color-button: var(--button);
   --color-almost-mauve: var(--almost-mauve);

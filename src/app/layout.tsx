@@ -113,7 +113,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang='no'
-      className={`${brandSansFontFamily.className} ${brandSansFontFamily.variable} ${utekosText.variable} ${geistMono.variable}`}
+      className={`${brandSansFontFamily.variable} ${utekosText.variable}`}
     >
       <head>
         {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (

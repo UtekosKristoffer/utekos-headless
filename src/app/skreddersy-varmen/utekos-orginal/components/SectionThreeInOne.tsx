@@ -36,7 +36,7 @@ export function SectionThreeInOne() {
 
       {/* MOBILE: stacked cards */}
       <div className='flex flex-col pb-20 xl:hidden'>
-        {Steps.map(step => (
+        {Steps.map((step, index) => (
           <div
             key={step.id}
             className='gsap-mobile-step-panel mb-12 flex flex-col last:mb-0'
@@ -46,6 +46,10 @@ export function SectionThreeInOne() {
                 src={step.image}
                 alt={step.title}
                 fill
+                placeholder='blur'
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchPriority={index === 0 ? 'high' : 'auto'}
+                quality={80}
                 className={
                   step.isProduct ? 'object-contain p-8' : 'object-cover'
                 }
@@ -99,7 +103,7 @@ export function SectionThreeInOne() {
                   src={step.image}
                   alt={step.title}
                   fill
-                  priority={index === 0}
+                  loading={index === 0 ? 'eager' : 'lazy'}
                   className={cn(
                     'gsap-step-image',
                     step.desktopObjectFit === 'contain' ?
