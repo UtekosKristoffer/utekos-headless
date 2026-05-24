@@ -8,8 +8,8 @@ type LogLevel = 'INFO' | 'WARN' | 'ERROR' | 'DEBUG'
 export async function logToAppLogs(
   level: LogLevel,
   event: string,
-  data?: Record<string, any>,
-  context?: Record<string, any>
+  data?: Record<string, unknown>,
+  context?: Record<string, unknown>
 ) {
   const timestamp = new Date().toISOString()
   const logId = crypto.randomUUID()
