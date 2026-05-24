@@ -278,10 +278,9 @@ export const NewProductLaunchSectionView = forwardRef<
               </div>
 
               {/* Kicker — blekk som setter seg på papir */}
-              <p
-                aria-label={kickerText}
-                className='mb-4 text-lg font-bold leading-[1.08] tracking-tight text-cloud-dancer sm:text-2xl md:text-3xl xl:text-3xl'
-              >
+              <p className='mb-4 text-lg font-bold leading-[1.08] tracking-tight text-cloud-dancer sm:text-2xl md:text-3xl xl:text-3xl'>
+                <span className='sr-only'>{kickerText}</span>
+
                 <span aria-hidden='true' className='block overflow-hidden pb-1'>
                   {kickerCharacters.map((character, index) => (
                     <span
@@ -294,7 +293,6 @@ export const NewProductLaunchSectionView = forwardRef<
                   ))}
                 </span>
               </p>
-
               <h2 className='mb-7 max-w-3xl pb-2 text-[1.7rem] font-bold leading-[0.94] tracking-tight text-cloud-dancer min-[360px]:text-[1.8rem] sm:mb-8 sm:text-[2.5rem] md:text-5xl md:leading-[0.96] lg:text-6xl lg:leading-[0.94]'>
                 <span className='sr-only'>Utekos </span>
 

@@ -1,3 +1,5 @@
+// Path: src/components/frontpage/PremiumStar.tsx
+
 import { getStableDelay } from '@/components/frontpage/utils/getStableDelay'
 
 interface PremiumStarProps {
@@ -19,8 +21,9 @@ export function PremiumStar({ isFull, isHalf, seed }: PremiumStarProps) {
     return (
       <svg
         viewBox='0 0 24 24'
-        className='w-4 h-4 drop-shadow-sm'
+        className='h-4 w-4 drop-shadow-sm'
         aria-hidden='true'
+        focusable='false'
       >
         <path
           d={sharpStarPath}
@@ -31,31 +34,39 @@ export function PremiumStar({ isFull, isHalf, seed }: PremiumStarProps) {
   }
 
   return (
-    <div className='relative w-4 h-4'>
+    <div className='relative h-4 w-4' aria-hidden='true'>
       <svg
         viewBox='0 0 24 24'
-        className='w-full h-full drop-shadow-md overflow-visible'
+        className='h-full w-full overflow-visible drop-shadow-md'
+        aria-hidden='true'
+        focusable='false'
       >
         <defs>
-          <linearGradient id='luxuryGold' x1='10%' y1='0%' x2='90%' y2='100%'>
+          <linearGradient
+            id={`luxuryGold-${seed}`}
+            x1='10%'
+            y1='0%'
+            x2='90%'
+            y2='100%'
+          >
             <stop offset='0%' stopColor='#FEF3C7' />
             <stop offset='45%' stopColor='#F59E0B' />
             <stop offset='100%' stopColor='#B45309' />
           </linearGradient>
 
-          <clipPath id='halfClip'>
+          <clipPath id={`halfClip-${seed}`}>
             <rect x='0' y='0' width='12' height='24' />
           </clipPath>
         </defs>
 
         <path
           d={sharpStarPath}
-          fill='url(#luxuryGold)'
-          clipPath={isHalf ? 'url(#halfClip)' : undefined}
+          fill={`url(#luxuryGold-${seed})`}
+          clipPath={isHalf ? `url(#halfClip-${seed})` : undefined}
           className='drop-shadow-sm'
         />
 
-        <g clipPath={isHalf ? 'url(#halfClip)' : undefined}>
+        <g clipPath={isHalf ? `url(#halfClip-${seed})` : undefined}>
           <path
             d={flarePath}
             fill='white'
@@ -77,7 +88,7 @@ export function PremiumStar({ isFull, isHalf, seed }: PremiumStarProps) {
           d={sharpStarPath}
           fill='white'
           fillOpacity='0.1'
-          clipPath={isHalf ? 'url(#halfClip)' : undefined}
+          clipPath={isHalf ? `url(#halfClip-${seed})` : undefined}
           style={{ pointerEvents: 'none' }}
         />
       </svg>
