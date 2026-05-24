@@ -16,7 +16,6 @@ import { ProductVideoSection } from './components/ProductVideoSection'
 import { TechDownFeatureSection } from './components/TechDownFeatureSection/TechDownFeatureSection'
 import { connection } from 'next/server'
 import { MikrofiberSection } from './components/MicrofiberSection/MikrofiberSection'
-import { CreatedForSection } from './components/CreatedForSection'
 
 export const metadata: Metadata = {
   title: 'Kolleksjon: Komfortplagg for hytteliv & utekos | Utekos',
@@ -80,8 +79,6 @@ const ProductsPage = async () => {
 
         <Activity>
           <section className='mb-24'>
-            <CreatedForSection />
-
             <HydrationBoundary state={dehydrate(queryClient)}>
               <Suspense fallback={<ProductGridSkeleton />}>
                 <ProductCarousel />
