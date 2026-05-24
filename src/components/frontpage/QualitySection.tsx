@@ -48,7 +48,7 @@ export async function QualitySection() {
                 <Link
                   href='/handlehjelp/teknologi-materialer'
                   data-track='UtforskTeknologienFrontPageClick'
-                  className='group/btn inline-flex items-center justify-center rounded-full bg-[var(--primary-button)] px-8 py-4 text-[1rem] font-medium text-maritime-blue transition-all duration-300 hover:bg-white hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(255,255,255,0.2)] focus:outline-none focus:ring-2 focus:ring-brand-highlight focus:ring-offset-2 focus:ring-offset-maritime-blue'
+                  className='group/btn inline-flex items-center justify-center rounded-full bg-[var(--primary-button)] px-8 py-4 text-[1rem] font-medium text-maritime-blue transition-all duration-300 hover:bg-white hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(255,255,255,0.2)] focus:outline-none focus:ring-2 focus:ring-dusted-peri focus:ring-offset-2 focus:ring-offset-maritime-blue'
                 >
                   Utforsk teknologien
                   <ArrowRightIcon className='ml-2 h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1' />

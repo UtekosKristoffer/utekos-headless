@@ -85,7 +85,6 @@ just in a section or div. Make sure it harmonizes. And make sure to vary.
 --color-eclipse: oklch(0.3276 0.0405 291.98);
 --color-astral-night: oklch(0.3436 0.0538 283.2);
 --color-patriot-blue: oklch(0.3504 0.0537 281.83);
---color-maritime-blue-paper: oklch(0.367 0.0256 288.12);
 --color-deep-cobalt: oklch(0.3982 0.0575 278.29);
 --color-graytone: oklch(0.4162 0.03 295.25);
 --color-skipper-blue: oklch(0.4252 0.0661 280.99);
@@ -94,7 +93,6 @@ just in a section or div. Make sure it harmonizes. And make sure to vary.
 ### `--demitasse`
 
 ```css
---after-dark: oklch(0.3374 0.0114 17.73);
 --chocolate-plum: oklch(0.3159 0.0237 14.31);
 --color-demitasse-200: oklch(0.2781 0.0186 52.67);
 --color-solemnity: oklch(0.3082 0.0147 17.98);
@@ -102,9 +100,7 @@ just in a section or div. Make sure it harmonizes. And make sure to vary.
 --color-black-coffee: oklch(0.3221 0.0176 23.7);
 --color-printers-ink: oklch(0.3293 0.0017 286.3);
 --color-demitasse: oklch(0.3328 0.0233 53.3);
---color-licorice: oklch(0.3356 0.0086 6.11);
 --color-delicioso: oklch(0.3377 0.0177 52.86);
---color-after-dark: oklch(0.3374 0.0114 17.73);
 --color-hot-fudge: oklch(0.363 0.023 39.26);
 --color-slate-black: oklch(0.3718 0.0257 57.37);
 --color-raisin: oklch(0.3943 0.024 6.35);
@@ -117,7 +113,6 @@ just in a section or div. Make sure it harmonizes. And make sure to vary.
 --color-amphora: oklch(0.6377 0.0421 60.6);
 --color-antier: oklch(0.6039 0.0343 27.96);
 --color-plum-perfect: oklch(0.3517 0.0353 336.04);
---color-fudge: oklch(0.3481 0.0327 3.89);
 ```
 
 ### `--mountain-water`

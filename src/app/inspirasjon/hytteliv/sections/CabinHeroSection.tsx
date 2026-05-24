@@ -52,10 +52,7 @@ const heroFeatureCardThemes = [
 
 export function CabinHeroSection() {
   return (
-    <section
-      className='relative flex min-h-[70vh] items-center overflow-hidden'
-      style={{ backgroundColor: 'var(--maritime-blue-paper)' }}
-    >
+    <section className='relative flex min-h-[70vh] items-center overflow-hidden'>
       <div className='absolute inset-0 -z-10 opacity-25'>
         <div
           className='animate-pulse-glow absolute left-1/3 top-1/4 h-[600px] w-[600px] blur-3xl'
