@@ -69,7 +69,7 @@ export function IntersportSection() {
           trigger: sectionRef.current,
           start: 'top 70%',
           end: 'bottom 20%',
-          toggleActions: 'play none none reverse'
+          toggleActions: 'play none none none'
         }
       })
 
@@ -124,13 +124,13 @@ export function IntersportSection() {
       <div className='container mx-auto max-w-7xl'>
         <div
           ref={cardRef}
-          className='relative overflow-hidden rounded-[1.75rem] border border-cloud-dancer/10 bg-[color-mix(in_oklab,var(--cloud-dancer)_8%,transparent)] p-8 opacity-0 shadow-2xl shadow-black/35 backdrop-blur-sm md:p-12'
+          className='relative overflow-hidden rounded-[1.75rem] border border-cloud-dancer/10 bg-[color-mix(in_oklab,var(--cloud-dancer)_8%,transparent)] p-8 shadow-2xl shadow-black/35 backdrop-blur-sm md:p-12'
         >
           <div className='absolute inset-0 -z-10 bg-[radial-gradient(circle_at_1px_1px,color-mix(in_oklab,var(--cloud-dancer)_14%,transparent)_1px,transparent_0)] bg-[size:24px_24px] opacity-30' />
 
           <div className='grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20'>
             <div
-              className='gsap-logo-card perspective-1000 flex w-full justify-center opacity-0'
+              className='gsap-logo-card perspective-1000 flex w-full justify-center'
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
             >
@@ -173,7 +173,7 @@ export function IntersportSection() {
               <BrandBadge
                 backgroundColor='var(--dusted-peri)'
                 textColor='var(--maritime-darkest)'
-                className='gsap-content mb-8 gap-3 opacity-0 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
+                className='gsap-content mb-8 gap-3 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
               >
                 <span className='relative flex size-3'>
                   <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-maritime-darkest opacity-35'></span>
@@ -182,7 +182,7 @@ export function IntersportSection() {
                 <span>Fysisk butikk i Bergen</span>
               </BrandBadge>
 
-              <h2 className='gsap-content mb-6 flex flex-col text-balance text-3xl leading-[0.95] font-bold tracking-[-0.01em] text-cloud-dancer opacity-0 md:text-5xl'>
+              <h2 className='gsap-content mb-6 flex flex-col text-balance text-3xl leading-[0.95] font-bold tracking-[-0.01em] text-cloud-dancer md:text-5xl'>
                 <span className='inline-flex flex-wrap items-baseline gap-x-[0.18em]'>
                   <span>Opplev</span>
                   <UtekosWordmark className='h-[0.78em] w-auto translate-y-[0.06em]' />
@@ -191,13 +191,13 @@ export function IntersportSection() {
                 <span className='text-overcast'>Intersport Laksevåg</span>
               </h2>
 
-              <p className='gsap-content mb-10 max-w-lg text-lg tracking-tight font-utekos-text text-cloud-dancer/85 opacity-0'>
+              <p className='gsap-content mb-10 max-w-lg text-lg tracking-tight font-utekos-text text-cloud-dancer/85'>
                 Lyst til å kjenne på kvaliteten og finne den perfekte
                 passformen? Som eneste fysiske forhandler i Bergen finner du et
                 utvalg av våre produkter hos våre venner på Laksevåg Senter.
               </p>
 
-              <div className='gsap-content opacity-0'>
+              <div className='gsap-content'>
                 <Button
                   asChild
                   size='lg'

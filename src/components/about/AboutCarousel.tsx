@@ -38,16 +38,20 @@ export function AboutCarousel() {
         '.gsap-header, .gsap-title, .gsap-desc, .gsap-carousel'
       )
 
+      if (!containerRef.current || animatedElements.length === 0) return
+
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         gsap.set(animatedElements, { y: 0, autoAlpha: 1, scale: 1 })
         return
       }
 
+      gsap.set(animatedElements, { autoAlpha: 0 })
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top 80%',
-          toggleActions: 'play none none reverse'
+          toggleActions: 'play none none none'
         }
       })
 
@@ -114,23 +118,23 @@ export function AboutCarousel() {
           <BrandBadge
             backgroundColor='var(--dusted-peri)'
             textColor='var(--maritime-darkest)'
-            className='gsap-header mb-6 gap-2 opacity-0 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
+            className='gsap-header mb-6 gap-2 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
           >
             <Camera className='size-5' strokeWidth={1.6} />
             <span>Livet med Utekos</span>
           </BrandBadge>
 
-          <h2 className='gsap-title mb-4 text-4xl leading-[0.95] font-bold tracking-[-0.01em] opacity-0 md:text-5xl'>
+          <h2 className='gsap-title mb-4 text-4xl leading-[0.95] font-bold tracking-[-0.01em] md:text-5xl'>
             Et glimt av opplevelsen
           </h2>
 
-          <p className='gsap-desc mx-auto max-w-2xl text-lg leading-[1.45] tracking-[-0.01em] text-cloud-dancer/82 opacity-0 md:text-xl'>
+          <p className='gsap-desc mx-auto max-w-2xl text-lg leading-[1.45] tracking-[-0.01em] text-cloud-dancer/82 md:text-xl'>
             Se hvordan kompromissløs komfort gir liv til dine favorittøyeblikk
             utendørs.
           </p>
         </div>
 
-        <div className='gsap-carousel relative opacity-0'>
+        <div className='gsap-carousel relative'>
           <div className='relative mx-auto max-w-6xl overflow-hidden rounded-[1.75rem] border border-cloud-dancer/10 bg-[color-mix(in_oklab,var(--cloud-dancer)_8%,transparent)] p-3 shadow-2xl shadow-black/35 backdrop-blur-sm md:p-5'>
             <div className='absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-dusted-peri/55 to-transparent' />
 

@@ -1,6 +1,8 @@
 // Path: src/app/handlehjelp/storrelsesguide/page.tsx
 import type { Metadata } from 'next'
 import { Activity } from 'react'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
+import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import { BackToShopCta } from './BackToShopCta'
 import { ComfyrobeSizeGuide } from './ComfyrobeSizeGuide'
 import { TechDownSizeGuide } from './TechDownSizeGuide'
@@ -42,37 +44,56 @@ const navigationLinks = [
 export default function SizeGuidePage() {
   return (
     <>
-      <section>
+      <section className='bg-overcast text-maritime-darkest'>
         <Activity>
           <div className='container mx-auto px-4 pt-12 sm:pt-16'>
             <div className='mx-auto max-w-3xl text-center'>
-              <h1 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
-                Finn din perfekte passform
+              <BrandBadge
+                label='Handlehjelp'
+                backgroundColor='var(--cloud-dancer)'
+                textColor='var(--maritime-darkest)'
+                className='mb-4 px-4 py-2 text-sm'
+              />
+              <h1 className='text-4xl font-bold leading-[1.05] tracking-tight text-maritime-darkest sm:text-5xl'>
+                Finn passformen til din{' '}
+                <span className='inline-flex items-baseline'>
+                  <UtekosWordmark
+                    aria-hidden='true'
+                    focusable='false'
+                    className='inline-block h-[0.72em] w-auto translate-y-[0.06em] align-baseline text-maritime-darkest'
+                  />
+                  <span className='sr-only'>Utekos</span>
+                </span>
               </h1>
-              <p className='mt-4 text-lg text-foreground/80'>
-                Riktig størrelse er nøkkelen til den ultimate
-                komfortopplevelsen. Denne guiden gir deg tryggheten du trenger
-                for å velge riktig.
+              <p className='mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-maritime-darkest/82'>
+                Riktig størrelse gir mer ro, bedre varme og en passform som
+                følger deg ute. Bruk guiden til å velge trygt før du handler.
               </p>
             </div>
           </div>
         </Activity>
         <Activity>
-          <div className='sticky top-0 z-20 my-10 bg-black/60 py-4 backdrop-blur-md sm:my-16'>
+          <div className='sticky top-0 z-20 my-10 border-y border-cloud-dancer/12 bg-maritime-blue py-4 text-cloud-dancer shadow-[0_20px_48px_-38px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)] backdrop-blur-md sm:my-16'>
             <div className='container mx-auto px-4'>
               <nav
-                className='flex items-center justify-center gap-2 sm:gap-6'
+                className='flex flex-wrap items-center justify-center gap-2 sm:gap-3'
                 aria-label='Hopp til produktguide'
               >
                 {navigationLinks.map(link => (
-                  <a
+                  <BrandBadge
+                    asChild
                     key={link.name}
-                    href={link.href}
-                    data-track={`SizeGuideNav_${link.name}`}
-                    className='transform rounded-full border border-neutral-700 bg-neutral-900 px-4 py-2 text-center text-sm font-semibold text-neutral-200 transition-all duration-150 ease-in-out hover:border-neutral-500 hover:bg-neutral-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-black'
+                    backgroundColor='var(--cloud-dancer)'
+                    textColor='var(--maritime-darkest)'
+                    className='border border-cloud-dancer/20 px-4 py-2 text-sm transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
                   >
-                    {link.name}
-                  </a>
+                    <a
+                      href={link.href}
+                      data-track={`SizeGuideNav_${link.name}`}
+                    >
+                      {link.name}
+                    </a>
+                  </BrandBadge>
                 ))}
               </nav>
             </div>
@@ -91,7 +112,7 @@ export default function SizeGuidePage() {
               className='absolute inset-0 flex items-center'
               aria-hidden='true'
             >
-              <div className='w-full border-t border-neutral-800' />
+              <div className='w-full border-t border-maritime-darkest/14' />
             </div>
           </div>
         </div>
@@ -108,7 +129,7 @@ export default function SizeGuidePage() {
               className='absolute inset-0 flex items-center'
               aria-hidden='true'
             >
-              <div className='w-full border-t border-neutral-800' />
+              <div className='w-full border-t border-maritime-darkest/14' />
             </div>
           </div>
         </div>

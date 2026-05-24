@@ -1,47 +1,72 @@
-import { Button } from '@/components/ui/button'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
+import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import { ArrowRight, Compass, MessageCircle } from 'lucide-react'
 import Link from 'next/link'
 import type { Route } from 'next'
 export function BackToShopCta() {
   return (
-    <section className='border-t border-neutral-800 bg-neutral-950/50'>
+    <section className='border-t border-cloud-dancer/12 bg-maritime-blue text-cloud-dancer'>
       <div className='container mx-auto px-4 py-16 sm:py-20 text-center'>
-        <Compass className='mx-auto h-10 w-10 text-sky-800' />
-        <h2 className='mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
-          Klar for å finne din Utekos?
+        <Compass className='mx-auto size-10 text-primary-button' />
+        <h2 className='mx-auto mt-4 max-w-3xl text-3xl font-bold leading-[1.05] tracking-tight text-cloud-dancer sm:text-5xl'>
+          Klar for å finne din
+          <span className='inline-flex items-baseline'>
+            <UtekosWordmark
+              aria-hidden='true'
+              focusable='false'
+              className='ml-[0.18em] inline-block h-[0.72em] w-auto translate-y-[0.06em] align-baseline text-cloud-dancer'
+            />
+            <span className='sr-only'>Utekos</span>
+            <span className='ml-1 text-cloud-dancer'>?</span>
+          </span>
         </h2>
-        <p className='mt-4 max-w-2xl mx-auto text-lg text-foreground/80'>
+        <p className='mt-5 max-w-2xl mx-auto text-lg leading-relaxed text-cloud-dancer/82'>
           Nå som du har full kontroll på størrelsen, er du bare et par klikk
           unna en helt ny standard for komfort.
         </p>
         <div className='mt-8 flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-4'>
-          <Button asChild size='lg' className='w-full sm:w-auto'>
+          <BrandBadge
+            asChild
+            backgroundColor='var(--primary-button)'
+            textColor='var(--maritime-darkest)'
+            className='w-full px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto'
+          >
             <Link
               href='/produkter/utekos-dun'
               data-track='StorrelsesguideBackToShopCtaUtekosDunClick'
             >
               Til Utekos Dun™
-              <ArrowRight className='ml-2 h-4 w-4' />
+              <ArrowRight className='ml-2 size-4' />
             </Link>
-          </Button>
-          <Button asChild size='lg' className='w-full sm:w-auto'>
+          </BrandBadge>
+          <BrandBadge
+            asChild
+            backgroundColor='var(--cloud-dancer)'
+            textColor='var(--maritime-darkest)'
+            className='w-full px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto'
+          >
             <Link
               href='/produkter/utekos-mikrofiber'
               data-track='StorrelsesguideBackToShopCtaUtekosMikrofiberClick'
             >
               Til Utekos Mikrofiber™
-              <ArrowRight className='ml-2 h-4 w-4' />
+              <ArrowRight className='ml-2 size-4' />
             </Link>
-          </Button>
-          <Button asChild size='lg' className='w-full sm:w-auto'>
+          </BrandBadge>
+          <BrandBadge
+            asChild
+            backgroundColor='var(--cloud-dancer)'
+            textColor='var(--maritime-darkest)'
+            className='w-full px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto'
+          >
             <Link
               href='/produkter/comfyrobe'
               data-track='StorrelsesguideBackToShopCtaComfyrobeClick'
             >
               Til Comfyrobe™
-              <ArrowRight className='ml-2 h-4 w-4' />
+              <ArrowRight className='ml-2 size-4' />
             </Link>
-          </Button>
+          </BrandBadge>
         </div>
 
         <div className='relative mt-16'>
@@ -49,10 +74,10 @@ export function BackToShopCta() {
             className='absolute inset-0 flex items-center'
             aria-hidden='true'
           >
-            <div className='w-full border-t border-neutral-800' />
+            <div className='w-full border-t border-cloud-dancer/12' />
           </div>
           <div className='relative flex justify-center'>
-            <span className='bg-neutral-950/50 px-3 text-sm font-medium text-neutral-400'>
+            <span className='bg-maritime-blue px-3 text-sm font-medium text-cloud-dancer/72'>
               eller
             </span>
           </div>
@@ -62,20 +87,25 @@ export function BackToShopCta() {
           <h3 className='text-xl font-semibold'>
             Fortsatt usikker? Få personlig hjelp.
           </h3>
-          <p className='mt-2 text-foreground/70'>
+          <p className='mt-2 text-cloud-dancer/74'>
             Hvis du ønsker en skreddersydd anbefaling basert på din bruk, høyde,
             og kroppsfasong, er vi her for deg. Send oss en melding, så
             garanterer vi svar innen én time frem til kl. 22:00.
           </p>
-          <Button asChild variant='secondary' className='mt-6'>
+          <BrandBadge
+            asChild
+            backgroundColor='var(--overcast)'
+            textColor='var(--maritime-darkest)'
+            className='mt-6 px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+          >
             <Link
               href={'/kontaktskjema' as Route}
               data-track='StorrelsesguideBackToShopCtaContactUsClick'
             >
-              <MessageCircle className='mr-2 h-4 w-4' />
+              <MessageCircle className='mr-2 size-4' />
               Spør oss om størrelse
             </Link>
-          </Button>
+          </BrandBadge>
         </div>
       </div>
     </section>

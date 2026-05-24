@@ -1,5 +1,7 @@
 import { tecDownData } from './data'
 import { Scale, StretchHorizontal, GitCommitVertical } from 'lucide-react'
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
+import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 
 const techDownFeatures = [
   {
@@ -23,13 +25,27 @@ const techDownFeatures = [
 ]
 export function TechDownSizeGuide() {
   return (
-    <section className='text-white bg-black' id='tech-down-size-guide'>
-      <div className='container mx-auto px-4 py-12 text-center'>
+    <section className='bg-maritime-blue text-cloud-dancer'>
+      <div className='container mx-auto px-4 py-16 text-center sm:py-24'>
         <div className='max-w-4xl mx-auto'>
-          <h2 className='text-3xl font-bold tracking-tight sm:text-4xl'>
-            Utekos TechDown™ - Presisjon i hver størrelse
+          <BrandBadge
+            label='TechDown™'
+            backgroundColor='var(--cloud-dancer)'
+            textColor='var(--maritime-darkest)'
+            className='mb-5 px-4 py-2 text-sm'
+          />
+          <h2 className='text-3xl font-bold leading-[1.05] tracking-tight sm:text-5xl'>
+            <span className='inline-flex items-baseline'>
+              <UtekosWordmark
+                aria-hidden='true'
+                focusable='false'
+                className='inline-block h-[0.72em] w-auto translate-y-[0.06em] align-baseline text-cloud-dancer'
+              />
+              <span className='sr-only'>Utekos</span>
+            </span>{' '}
+            TechDown™ - presisjon i hver størrelse
           </h2>
-          <p className='mt-4 text-lg text-neutral-300'>
+          <p className='mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-cloud-dancer/82'>
             For livsnyteren som verdsetter både funksjon og form, er TechDown
             designet med en mer kroppsnær passform. Dette gir deg suveren
             bevegelsesfrihet og effektiv varme, pakket inn i et nettere design –
@@ -38,7 +54,7 @@ export function TechDownSizeGuide() {
           </p>
         </div>
 
-        <div className='mt-12 max-w-3xl mx-auto text-left space-y-6 text-neutral-300'>
+        <div className='mt-12 max-w-3xl mx-auto text-left space-y-6 text-cloud-dancer/82'>
           <p>
             TechDown sine størrelser har en mer tradisjonell progresjon for å
             sikre at du finner en størrelse som passer perfekt til din
@@ -50,12 +66,12 @@ export function TechDownSizeGuide() {
           </p>
         </div>
 
-        <div className='mt-16 grid grid-cols-1 gap-x-8 gap-y-12 lg:grid-cols-3 max-w-6xl mx-auto'>
-          <div className='bg-neutral-900/50 p-8 rounded-lg text-left'>
+        <div className='mt-16 grid grid-cols-1 gap-x-6 gap-y-6 lg:grid-cols-3 max-w-6xl mx-auto'>
+          <div className='rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/58 p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)] sm:p-8'>
             <h3 className='text-xl font-semibold leading-7'>
               Velg Liten hvis...
             </h3>
-            <ul className='mt-4 list-disc list-inside space-y-2 text-neutral-300'>
+            <ul className='mt-4 list-disc list-inside space-y-2 text-cloud-dancer/82'>
               <li>Er opptil 165-170 cm høy.</li>
               <li>Eller noe lavere og ønsker ekstra romslig følelse</li>
               <li>
@@ -64,21 +80,21 @@ export function TechDownSizeGuide() {
               </li>
             </ul>
           </div>
-          <div className='bg-neutral-900/50 p-8 rounded-lg text-left'>
+          <div className='rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/58 p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)] sm:p-8'>
             <h3 className='text-xl font-semibold leading-7'>
               Velg Medium hvis...
             </h3>
-            <ul className='mt-4 list-disc list-inside space-y-2 text-neutral-300'>
+            <ul className='mt-4 list-disc list-inside space-y-2 text-cloud-dancer/82'>
               <li>Du er opptil 175-180 cm høy.</li>
               <li>Eller noe lavere og ønsker ekstra romslig passform.</li>
               <li>Eller noe høyere, men ønsker kroppsnær passform.</li>
             </ul>
           </div>
-          <div className='bg-neutral-900/50 p-8 rounded-lg text-left'>
+          <div className='rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/58 p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)] sm:p-8'>
             <h3 className='text-xl font-semibold leading-7'>
               Velg Large hvis...
             </h3>
-            <ul className='mt-4 list-disc list-inside space-y-2 text-neutral-300'>
+            <ul className='mt-4 list-disc list-inside space-y-2 text-cloud-dancer/82'>
               <li>Du er over 180-185 cm høy</li>
               <li>Eller noe lavere og ønsker ekstra romslig passform.</li>
               <li>Er du over 195 cm vil størrelsen være for liten.</li>
@@ -87,7 +103,7 @@ export function TechDownSizeGuide() {
         </div>
 
         <div className='mt-20 max-w-4xl mx-auto'>
-          <h3 className='text-2xl font-bold tracking-tight'>
+          <h3 className='text-2xl font-bold tracking-tight sm:text-3xl'>
             Gjennomtenkte detaljer for din komfort
           </h3>
           <div className='mt-8 grid grid-cols-1 gap-12 sm:grid-cols-3'>
@@ -96,15 +112,12 @@ export function TechDownSizeGuide() {
                 key={feature.title}
                 className='flex flex-col items-center gap-4'
               >
-                <div className='flex items-center justify-center h-12 w-12 rounded-full bg-neutral-900'>
-                  <feature.Icon
-                    className='h-6 w-6 text-sky-800'
-                    aria-hidden='true'
-                  />
+                <div className='flex size-12 items-center justify-center rounded-full bg-cloud-dancer text-maritime-darkest'>
+                  <feature.Icon className='size-6' aria-hidden='true' />
                 </div>
                 <div className='text-center'>
                   <p className='font-semibold'>{feature.title}</p>
-                  <p className='mt-1 text-sm text-neutral-400'>
+                  <p className='mt-1 text-sm text-cloud-dancer/74'>
                     {feature.description}
                   </p>
                 </div>
@@ -115,9 +128,9 @@ export function TechDownSizeGuide() {
         <div className='mt-20 flow-root'>
           <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
             <div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
-              <div className='overflow-hidden border border-neutral-800 rounded-lg'>
-                <table className='min-w-full divide-y divide-neutral-800 bg-neutral-950'>
-                  <thead className='bg-neutral-900'>
+              <div className='overflow-hidden rounded-lg border border-cloud-dancer/12 shadow-[0_22px_54px_-42px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)]'>
+                <table className='min-w-full divide-y divide-cloud-dancer/12 bg-maritime-darkest/72'>
+                  <thead className='bg-cloud-dancer text-maritime-darkest'>
                     <tr>
                       <th
                         scope='col'
@@ -145,19 +158,19 @@ export function TechDownSizeGuide() {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className='divide-y divide-neutral-800'>
+                  <tbody className='divide-y divide-cloud-dancer/12'>
                     {tecDownData.map(item => (
                       <tr key={item.measurement}>
                         <td className='whitespace-nowrap py-4 pl-4 pr-3 text-sm text-left font-medium sm:pl-6'>
                           {item.measurement}
                         </td>
-                        <td className='whitespace-nowrap px-3 py-4 text-sm text-neutral-300 text-center'>
+                        <td className='whitespace-nowrap px-3 py-4 text-sm text-cloud-dancer/82 text-center'>
                           {item.liten}
                         </td>
-                        <td className='whitespace-nowrap px-3 py-4 text-sm text-neutral-300 text-center'>
+                        <td className='whitespace-nowrap px-3 py-4 text-sm text-cloud-dancer/82 text-center'>
                           {item.middels}
                         </td>
-                        <td className='whitespace-nowrap px-3 py-4 text-sm text-neutral-300 text-center'>
+                        <td className='whitespace-nowrap px-3 py-4 text-sm text-cloud-dancer/82 text-center'>
                           {item.stor}
                         </td>
                       </tr>
