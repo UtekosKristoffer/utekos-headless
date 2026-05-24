@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Star, ChevronDown } from 'lucide-react'
-import CinemaOne from '@public/cinema-twilight.png'
-import MobileOne from '@public/terrace-4-5.png'
+import CinemaOne from '@public/cinema-twilight.webp'
+import MobileOne from '@public/skreddersy-varmen-hero-mobile.webp'
 import { ScrollToButton } from './ScrollToButton' // Importer den lille klient-komponenten
 
 export function HeroSection() {
