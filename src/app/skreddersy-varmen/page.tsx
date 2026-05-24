@@ -1,9 +1,7 @@
 // Path: src/app/skreddersy-varmen/page.tsx
 
 import { Suspense } from 'react'
-import { TechDownSlider } from './utekos-orginal/components/TechDownSlider'
-import { SectionThreeInOne } from './utekos-orginal/components/SectionThreeInOne'
-import { SectionSocialProof } from './utekos-orginal/components/SectionSocialProof'
+import { DeferredLandingSections } from '@/app/skreddersy-varmen/components/DeferredLandingSections'
 import { HeroAndEmpathy } from './components/HeroEmpathy'
 import { LandingPurchaseFallback } from './components/LandingPurchaseFallback'
 import { LandingPurchaseSection } from './components/LandingPurchaseSection'
@@ -65,9 +63,9 @@ export default function LandingPage() {
     <section className='flex min-h-screen w-full flex-col items-center justify-start overflow-x-clip bg-maritime-darkest'>
       <StickyMobileAction />
       <HeroAndEmpathy />
-      <SectionThreeInOne />
-      <TechDownSlider />
-      <SectionSocialProof />
+
+      <DeferredLandingSections />
+
       <div
         id='purchase-section'
         className='w-full scroll-mt-[70px] xl:scroll-mt-[86px]'
@@ -78,7 +76,6 @@ export default function LandingPage() {
       </div>
 
       <ProductDetailsAccordion />
-
       <PreFooterNavigation />
     </section>
   )

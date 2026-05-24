@@ -1,4 +1,5 @@
 // Path: src/hooks/useThreeInOneAnimations.ts
+
 import { useEffect, useRef, useState } from 'react'
 import { createGsapDevTools } from '@/lib/gsap/createGsapDevTools'
 import { loadGsap } from '@/lib/gsap/loadGsap'
@@ -8,8 +9,6 @@ type GsapTweenVars = NonNullable<
   Parameters<Awaited<ReturnType<typeof loadGsap>>['to']>[1]
 >
 
-const TABLET_MOBILE_QUERY =
-  '(prefers-reduced-motion: no-preference) and (max-width: 1279px)'
 const DESKTOP_QUERY =
   '(prefers-reduced-motion: no-preference) and (min-width: 1280px)'
 
@@ -18,12 +17,19 @@ export function useThreeInOneAnimations() {
   const [activeStep, setActiveStep] = useState(0)
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
+
     let cleanup: (() => void) | null = null
     let cancelled = false
+    const desktopMedia = window.matchMedia(DESKTOP_QUERY)
 
-    const mountAnimation = async () => {
+    const mountDesktopAnimation = async () => {
+      if (cleanup || !desktopMedia.matches) {
+        return
+      }
+
       const { gsap, ScrollTrigger } = await loadScrollTrigger()
-      if (cancelled || !containerRef.current) {
+      if (cancelled || !containerRef.current || !desktopMedia.matches) {
         return
       }
 
@@ -32,7 +38,6 @@ export function useThreeInOneAnimations() {
         if (!container) return
 
         const q = gsap.utils.selector(container)
-        const media = gsap.matchMedia()
         const refreshFrames: number[] = []
 
         const queueRefresh = () => {
@@ -43,31 +48,6 @@ export function useThreeInOneAnimations() {
             refreshFrames.push(secondFrame)
           })
           refreshFrames.push(firstFrame)
-        }
-
-        const setVisible = () => {
-          const targets = [
-            '.gsap-three-eyebrow',
-            '.gsap-three-title',
-            '.gsap-three-subtitle',
-            '.gsap-step-eyebrow',
-            '.gsap-step-title',
-            '.gsap-step-desc',
-            '.gsap-step-icon',
-            '.gsap-step-badge'
-          ].flatMap(selector => q(selector))
-
-          if (!targets.length) return
-
-          gsap.set(targets, {
-            autoAlpha: 1,
-            x: 0,
-            y: 0,
-            scale: 1,
-            rotation: 0,
-            filter: 'blur(0px)',
-            clearProps: 'willChange'
-          })
         }
 
         const setupIntro = () => {
@@ -110,6 +90,7 @@ export function useThreeInOneAnimations() {
               clearProps: 'willChange'
             }
           )
+
           addIntroTween(
             '.gsap-three-title',
             {
@@ -128,19 +109,18 @@ export function useThreeInOneAnimations() {
             },
             '-=0.4'
           )
+
           addIntroTween(
             '.gsap-three-subtitle',
             {
               y: 16,
               autoAlpha: 0,
-              filter: 'blur(6px)',
-              willChange: 'transform, opacity, filter'
+              willChange: 'transform, opacity'
             },
             {
               y: 0,
               autoAlpha: 1,
-              filter: 'blur(0px)',
-              duration: 0.9,
+              duration: 0.8,
               ease: 'power3.out',
               clearProps: 'willChange'
             },
@@ -221,6 +201,7 @@ export function useThreeInOneAnimations() {
                 clearProps: 'willChange'
               }
             )
+
             addPanelTween(
               '.gsap-step-title',
               {
@@ -239,6 +220,7 @@ export function useThreeInOneAnimations() {
               },
               '-=0.5'
             )
+
             addPanelTween(
               '.gsap-step-desc',
               {
@@ -257,6 +239,7 @@ export function useThreeInOneAnimations() {
               },
               '-=0.5'
             )
+
             addPanelTween(
               '.gsap-step-icon',
               {
@@ -278,46 +261,53 @@ export function useThreeInOneAnimations() {
           })
         }
 
-        media.add('(prefers-reduced-motion: reduce)', () => {
-          setVisible()
-        })
+        const desktopStory = q('.gsap-three-desktop')[0]
+        const desktopPanels = q('.gsap-desktop-step-panel')
 
-        media.add(TABLET_MOBILE_QUERY, () => {
-          setVisible()
+        setupIntro()
+        setupStepPanels(desktopPanels, true)
+
+        if (!desktopStory || !desktopPanels.length) {
           queueRefresh()
-        })
+          return
+        }
 
-        media.add(DESKTOP_QUERY, () => {
-          const desktopStory = q('.gsap-three-desktop')[0]
-          const desktopPanels = q('.gsap-desktop-step-panel')
-
-          setupIntro()
-          setupStepPanels(desktopPanels, true)
-
-          if (!desktopStory || !desktopPanels.length) {
-            queueRefresh()
-            return
-          }
-
-          queueRefresh()
-        })
+        queueRefresh()
 
         return () => {
           refreshFrames.forEach(frame => window.cancelAnimationFrame(frame))
-          media.revert()
         }
       }, containerRef.current)
 
       cleanup = () => {
         context.revert()
+        cleanup = null
       }
     }
 
-    void mountAnimation()
+    const unmountDesktopAnimation = () => {
+      cleanup?.()
+    }
+
+    const handleDesktopChange = (event: MediaQueryListEvent) => {
+      if (event.matches) {
+        void mountDesktopAnimation()
+        return
+      }
+
+      unmountDesktopAnimation()
+    }
+
+    if (desktopMedia.matches) {
+      void mountDesktopAnimation()
+    }
+
+    desktopMedia.addEventListener('change', handleDesktopChange)
 
     return () => {
       cancelled = true
-      cleanup?.()
+      desktopMedia.removeEventListener('change', handleDesktopChange)
+      unmountDesktopAnimation()
     }
   }, [])
 

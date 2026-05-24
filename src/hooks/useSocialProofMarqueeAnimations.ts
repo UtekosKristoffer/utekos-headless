@@ -1,4 +1,5 @@
 // Path: src/hooks/useSocialProofMarqueeAnimations.ts
+
 import { useEffect, useRef } from 'react'
 import { createGsapDevTools } from '@/lib/gsap/createGsapDevTools'
 import { loadGsap } from '@/lib/gsap/loadGsap'
@@ -15,8 +16,6 @@ interface MarqueeTween {
 }
 
 const PIXELS_PER_SECOND = 50
-const TABLET_MOBILE_QUERY =
-  '(prefers-reduced-motion: no-preference) and (max-width: 1279px)'
 const DESKTOP_QUERY =
   '(prefers-reduced-motion: no-preference) and (min-width: 1280px)'
 
@@ -25,12 +24,19 @@ export function useSocialProofMarqueeAnimations() {
   const trackRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
+
     let cleanup: (() => void) | null = null
     let cancelled = false
+    const desktopMedia = window.matchMedia(DESKTOP_QUERY)
 
-    const mountReveal = async () => {
+    const mountDesktopReveal = async () => {
+      if (cleanup || !desktopMedia.matches) {
+        return
+      }
+
       const { gsap, ScrollTrigger } = await loadScrollTrigger()
-      if (cancelled || !containerRef.current) {
+      if (cancelled || !containerRef.current || !desktopMedia.matches) {
         return
       }
 
@@ -39,7 +45,6 @@ export function useSocialProofMarqueeAnimations() {
         if (!container) return
 
         const q = gsap.utils.selector(container)
-        const media = gsap.matchMedia()
         const refreshFrames: number[] = []
 
         const queueRefresh = () => {
@@ -52,166 +57,156 @@ export function useSocialProofMarqueeAnimations() {
           refreshFrames.push(firstFrame)
         }
 
-        const setVisible = () => {
-          const targets = [
-            '.gsap-sp-rating-pill',
-            '.gsap-sp-title',
-            '.gsap-sp-subtitle',
-            '.gsap-sp-track'
-          ].flatMap(selector => q(selector))
+        const header = q('.gsap-sp-header')[0]
+        const headerTl = gsap.timeline({
+          id: 'skreddersy-social-proof-header',
+          scrollTrigger: {
+            trigger: header ?? container,
+            start: 'top 92%',
+            once: true,
+            toggleActions: 'play none none none'
+          }
+        })
 
+        const addHeaderTween = (
+          selector: string,
+          fromVars: GsapTweenVars,
+          toVars: GsapTweenVars,
+          position?: string
+        ) => {
+          const targets = q(selector)
           if (!targets.length) return
 
-          gsap.set(targets, {
-            autoAlpha: 1,
-            x: 0,
-            y: 0,
-            scale: 1,
-            filter: 'blur(0px)',
-            clearProps: 'willChange'
-          })
+          if (position) {
+            headerTl.fromTo(targets, fromVars, toVars, position)
+            return
+          }
+
+          headerTl.fromTo(targets, fromVars, toVars)
         }
 
-        media.add('(prefers-reduced-motion: reduce)', () => {
-          setVisible()
-        })
-
-        media.add(TABLET_MOBILE_QUERY, () => {
-          setVisible()
-          queueRefresh()
-        })
-
-        media.add(DESKTOP_QUERY, () => {
-          const header = q('.gsap-sp-header')[0]
-          const headerTl = gsap.timeline({
-            id: 'skreddersy-social-proof-header',
-            scrollTrigger: {
-              trigger: header ?? container,
-              start: 'top 92%',
-              once: true,
-              toggleActions: 'play none none none'
-            }
-          })
-
-          const addHeaderTween = (
-            selector: string,
-            fromVars: GsapTweenVars,
-            toVars: GsapTweenVars,
-            position?: string
-          ) => {
-            const targets = q(selector)
-            if (!targets.length) return
-
-            if (position) {
-              headerTl.fromTo(targets, fromVars, toVars, position)
-              return
-            }
-
-            headerTl.fromTo(targets, fromVars, toVars)
+        addHeaderTween(
+          '.gsap-sp-rating-pill',
+          {
+            y: 20,
+            autoAlpha: 0,
+            scale: 0.9,
+            willChange: 'transform, opacity'
+          },
+          {
+            y: 0,
+            autoAlpha: 1,
+            scale: 1,
+            duration: 0.7,
+            ease: 'back.out(1.4)',
+            clearProps: 'willChange'
           }
+        )
 
-          addHeaderTween(
-            '.gsap-sp-rating-pill',
+        addHeaderTween(
+          '.gsap-sp-title',
+          { y: 32, autoAlpha: 0, willChange: 'transform, opacity' },
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.9,
+            ease: 'power3.out',
+            clearProps: 'willChange'
+          },
+          '-=0.4'
+        )
+
+        addHeaderTween(
+          '.gsap-sp-subtitle',
+          {
+            y: 16,
+            autoAlpha: 0,
+            willChange: 'transform, opacity'
+          },
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.8,
+            ease: 'power3.out',
+            clearProps: 'willChange'
+          },
+          '-=0.5'
+        )
+
+        const track = q('.gsap-sp-track')
+        const marquee = q('.gsap-sp-marquee')[0]
+        if (track.length) {
+          const trackElement = track[0]!
+
+          gsap.fromTo(
+            track,
+            { autoAlpha: 0, y: 20, willChange: 'transform, opacity' },
             {
-              y: 20,
-              autoAlpha: 0,
-              scale: 0.9,
-              willChange: 'transform, opacity'
-            },
-            {
-              y: 0,
               autoAlpha: 1,
-              scale: 1,
-              duration: 0.7,
-              ease: 'back.out(1.4)',
-              clearProps: 'willChange'
-            }
-          )
-          addHeaderTween(
-            '.gsap-sp-title',
-            { y: 32, autoAlpha: 0, willChange: 'transform, opacity' },
-            {
               y: 0,
-              autoAlpha: 1,
               duration: 0.9,
               ease: 'power3.out',
-              clearProps: 'willChange'
-            },
-            '-=0.4'
-          )
-          addHeaderTween(
-            '.gsap-sp-subtitle',
-            {
-              y: 16,
-              autoAlpha: 0,
-              filter: 'blur(6px)',
-              willChange: 'transform, opacity, filter'
-            },
-            {
-              y: 0,
-              autoAlpha: 1,
-              filter: 'blur(0px)',
-              duration: 0.9,
-              ease: 'power3.out',
-              clearProps: 'willChange'
-            },
-            '-=0.5'
-          )
-
-          const track = q('.gsap-sp-track')
-          const marquee = q('.gsap-sp-marquee')[0]
-          if (track.length) {
-            const trackElement = track[0]!
-
-            gsap.fromTo(
-              track,
-              { autoAlpha: 0, y: 20, willChange: 'transform, opacity' },
-              {
-                autoAlpha: 1,
-                y: 0,
-                duration: 0.9,
-                ease: 'power3.out',
-                clearProps: 'willChange',
-                scrollTrigger: {
-                  trigger: marquee ?? trackElement,
-                  start: 'top 95%',
-                  once: true,
-                  toggleActions: 'play none none none'
-                }
+              clearProps: 'willChange',
+              scrollTrigger: {
+                trigger: marquee ?? trackElement,
+                start: 'top 95%',
+                once: true,
+                toggleActions: 'play none none none'
               }
-            )
-          }
+            }
+          )
+        }
 
-          void createGsapDevTools({
-            animation: headerTl,
-            id: 'skreddersy-social-proof-header'
-          })
-
-          queueRefresh()
+        void createGsapDevTools({
+          animation: headerTl,
+          id: 'skreddersy-social-proof-header'
         })
+
+        queueRefresh()
 
         return () => {
           refreshFrames.forEach(frame => window.cancelAnimationFrame(frame))
-          media.revert()
         }
       }, containerRef.current)
 
       cleanup = () => {
         context.revert()
+        cleanup = null
       }
     }
 
-    void mountReveal()
+    const unmountDesktopReveal = () => {
+      cleanup?.()
+    }
+
+    const handleDesktopChange = (event: MediaQueryListEvent) => {
+      if (event.matches) {
+        void mountDesktopReveal()
+        return
+      }
+
+      unmountDesktopReveal()
+    }
+
+    if (desktopMedia.matches) {
+      void mountDesktopReveal()
+    }
+
+    desktopMedia.addEventListener('change', handleDesktopChange)
 
     return () => {
       cancelled = true
-      cleanup?.()
+      desktopMedia.removeEventListener('change', handleDesktopChange)
+      unmountDesktopReveal()
     }
   }, [])
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const container = containerRef.current
     const track = trackRef.current
-    if (!track) return
+    if (!container || !track) return
 
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
@@ -223,7 +218,9 @@ export function useSocialProofMarqueeAnimations() {
     let raf2: number | null = null
     let resizeTimer: number | null = null
     let cleanupListeners: (() => void) | null = null
+    let cleanupResize: (() => void) | null = null
     let marqueeTween: MarqueeTween | null = null
+    let observer: IntersectionObserver | null = null
 
     const mountMarquee = async () => {
       const gsap = await loadGsap()
@@ -298,20 +295,38 @@ export function useSocialProofMarqueeAnimations() {
 
       window.addEventListener('resize', onResize, { passive: true })
 
-      cleanup = () => {
+      cleanupResize = () => {
         window.removeEventListener('resize', onResize)
       }
     }
 
-    let cleanup: (() => void) | null = null
-    void mountMarquee()
+    observer = new IntersectionObserver(
+      entries => {
+        const shouldStart = entries.some(entry => entry.isIntersecting)
+        if (!shouldStart) return
+
+        observer?.disconnect()
+        observer = null
+        void mountMarquee()
+      },
+      {
+        root: null,
+        rootMargin: '400px 0px',
+        threshold: 0
+      }
+    )
+
+    observer.observe(container)
 
     return () => {
       cancelled = true
-      cleanup?.()
+      observer?.disconnect()
+      cleanupResize?.()
+
       if (raf1 !== null) window.cancelAnimationFrame(raf1)
       if (raf2 !== null) window.cancelAnimationFrame(raf2)
       if (resizeTimer) window.clearTimeout(resizeTimer)
+
       cleanupListeners?.()
       marqueeTween?.kill()
       marqueeTween = null

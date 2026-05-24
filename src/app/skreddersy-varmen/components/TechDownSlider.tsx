@@ -1,16 +1,22 @@
-// Path: src/app/skreddersy-varmen/utekos-orginal/components/TechDownSlider.tsx
+// Path: src/app/skreddersy-varmen/components/TechDownSlider.tsx
+
 'use client'
 
 import Image from 'next/image'
-import { useState, useRef, useEffect, useLayoutEffect } from 'react'
-import type { MouseEvent, TouchEvent } from 'react'
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type PointerEvent
+} from 'react'
 import { ChevronsLeftRight, ShieldCheck, Waves } from 'lucide-react'
 import TechDownDryFiber from '@public/techdown-dry-macro.png'
 import TechDownWetFiber from '@public/techdown-wet-macro.png'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import {
-  useTechDownSliderAnimations,
-  useTechDownContentSwap
+  useTechDownContentSwap,
+  useTechDownSliderAnimations
 } from '@/hooks/useTechDownSliderAnimations'
 
 const content = {
@@ -28,17 +34,24 @@ const content = {
   }
 } as const
 
+function clampPercentage(value: number) {
+  return Math.min(Math.max(value, 0), 100)
+}
+
 export function TechDownSlider() {
   const containerRef = useTechDownSliderAnimations()
   const [position, setPosition] = useState(50)
   const [isDragging, setIsDragging] = useState(false)
-  const [sliderImageWidth, setSliderImageWidth] = useState<number | undefined>()
+
   const sliderImageRef = useRef<HTMLDivElement>(null)
+  const dragRectRef = useRef<DOMRect | null>(null)
+  const isDraggingRef = useRef(false)
+  const pendingClientXRef = useRef<number | null>(null)
+  const animationFrameRef = useRef<number | null>(null)
 
   const isDryView = position > 50
   const currentContent = isDryView ? content.dry : content.wet
 
-  // Animate content swap when dry/wet toggles
   useTechDownContentSwap(isDryView, {
     badge: '.gsap-tech-status-badge',
     title: '.gsap-tech-card-title',
@@ -46,50 +59,73 @@ export function TechDownSlider() {
     stat: '.gsap-tech-stat'
   })
 
-  useLayoutEffect(() => {
-    const sliderImage = sliderImageRef.current
-    if (!sliderImage) return
+  const updatePositionFromClientX = (clientX: number) => {
+    const rect = dragRectRef.current
+    if (!rect || rect.width <= 0) return
 
-    const updateSliderImageWidth = () => {
-      setSliderImageWidth(sliderImage.offsetWidth)
-    }
-
-    updateSliderImageWidth()
-
-    const resizeObserver = new ResizeObserver(updateSliderImageWidth)
-    resizeObserver.observe(sliderImage)
-
-    return () => {
-      resizeObserver.disconnect()
-    }
-  }, [])
-
-  const handleMove = (clientX: number) => {
-    if (!sliderImageRef.current) return
-    const rect = sliderImageRef.current.getBoundingClientRect()
     const x = clientX - rect.left
-    const percentage = Math.min(Math.max((x / rect.width) * 100, 0), 100)
-    setPosition(percentage)
+    const nextPosition = clampPercentage((x / rect.width) * 100)
+    setPosition(nextPosition)
   }
 
-  const onMouseMove = (e: MouseEvent<HTMLDivElement>) =>
-    isDragging && handleMove(e.clientX)
+  const schedulePositionUpdate = (clientX: number) => {
+    pendingClientXRef.current = clientX
 
-  const onTouchMove = (e: TouchEvent<HTMLDivElement>) => {
-    if (isDragging && e.touches[0]) {
-      handleMove(e.touches[0].clientX)
+    if (animationFrameRef.current !== null) {
+      return
+    }
+
+    animationFrameRef.current = window.requestAnimationFrame(() => {
+      animationFrameRef.current = null
+
+      const pendingClientX = pendingClientXRef.current
+      pendingClientXRef.current = null
+
+      if (pendingClientX === null) {
+        return
+      }
+
+      updatePositionFromClientX(pendingClientX)
+    })
+  }
+
+  const startDrag = (event: PointerEvent<HTMLDivElement>) => {
+    dragRectRef.current = event.currentTarget.getBoundingClientRect()
+    isDraggingRef.current = true
+    setIsDragging(true)
+
+    event.currentTarget.setPointerCapture(event.pointerId)
+    schedulePositionUpdate(event.clientX)
+  }
+
+  const moveDrag = (event: PointerEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current) return
+    schedulePositionUpdate(event.clientX)
+  }
+
+  const endDrag = (event: PointerEvent<HTMLDivElement>) => {
+    isDraggingRef.current = false
+    dragRectRef.current = null
+    pendingClientXRef.current = null
+    setIsDragging(false)
+
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId)
     }
   }
 
   useEffect(() => {
-    const handleUp = () => setIsDragging(false)
-    window.addEventListener('mouseup', handleUp)
-    window.addEventListener('touchend', handleUp, { passive: true })
     return () => {
-      window.removeEventListener('mouseup', handleUp)
-      window.removeEventListener('touchend', handleUp)
+      if (animationFrameRef.current !== null) {
+        window.cancelAnimationFrame(animationFrameRef.current)
+      }
     }
   }, [])
+
+  const sliderStyle = {
+    '--techdown-position': `${position}%`,
+    '--techdown-clip-right': `${100 - position}%`
+  } as CSSProperties
 
   return (
     <section
@@ -98,7 +134,6 @@ export function TechDownSlider() {
       className='w-full border-t border-maritime-darkest bg-overcast py-24 text-maritime-darkest'
     >
       <div className='mx-auto max-w-5xl px-6'>
-        {/* Intro header */}
         <div className='gsap-tech-intro mb-16 text-center'>
           <span className='gsap-tech-eyebrow mb-3 inline-block font-utekos-text text-sm font-medium leading-[1.4] tracking-tight text-maritime-darkest'>
             Teknologi
@@ -129,20 +164,27 @@ export function TechDownSlider() {
             max={100}
             value={position}
             aria-valuetext={`${Math.round(position)} prosent tørr visning`}
-            onChange={event => setPosition(Number(event.currentTarget.value))}
+            onChange={event =>
+              setPosition(clampPercentage(Number(event.currentTarget.value)))
+            }
             className='h-2 w-full accent-maritime-darkest focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-button md:max-w-sm'
           />
         </div>
 
-        {/* Slider card */}
         <div className='gsap-tech-slider relative rounded-sm border border-maritime-darkest/10 bg-overcast p-2 shadow-2xl md:p-4'>
           <div
             ref={sliderImageRef}
             className='relative aspect-[4/3] w-full cursor-ew-resize select-none overflow-hidden rounded-sm bg-maritime-darkest touch-none md:aspect-[21/9]'
-            onMouseDown={() => setIsDragging(true)}
-            onTouchStart={() => setIsDragging(true)}
-            onMouseMove={onMouseMove}
-            onTouchMove={onTouchMove}
+            style={sliderStyle}
+            onPointerDown={startDrag}
+            onPointerMove={moveDrag}
+            onPointerUp={endDrag}
+            onPointerCancel={endDrag}
+            onPointerLeave={event => {
+              if (isDraggingRef.current) {
+                endDrag(event)
+              }
+            }}
           >
             <div className='absolute inset-0 size-full'>
               <Image
@@ -154,26 +196,23 @@ export function TechDownSlider() {
                 draggable={false}
               />
             </div>
+
             <div
               className='absolute inset-0 z-20 overflow-hidden border-r-2 border-cloud-dancer/50'
-              style={{ width: `${position}%` }}
+              style={{
+                clipPath: 'inset(0 var(--techdown-clip-right) 0 0)'
+              }}
             >
-              <div
-                className='relative size-full'
-                style={{
-                  width: sliderImageWidth ? `${sliderImageWidth}px` : '100%'
-                }}
-              >
-                <Image
-                  src={TechDownDryFiber}
-                  alt='TechDown fiber i tørt vær'
-                  fill
-                  sizes='(max-width: 1024px) 100vw, 80vw'
-                  className='object-cover'
-                  draggable={false}
-                />
-              </div>
+              <Image
+                src={TechDownDryFiber}
+                alt='TechDown fiber i tørt vær'
+                fill
+                sizes='(max-width: 1024px) 100vw, 80vw'
+                className='object-cover'
+                draggable={false}
+              />
             </div>
+
             <div className='pointer-events-none absolute right-6 top-6 z-10'>
               <BrandBadge
                 backgroundColor='var(--color-cloud-dancer)'
@@ -183,6 +222,7 @@ export function TechDownSlider() {
                 Fuktig vær
               </BrandBadge>
             </div>
+
             <div className='pointer-events-none absolute left-6 top-6 z-30'>
               <BrandBadge
                 backgroundColor='var(--color-cloud-dancer)'
@@ -192,18 +232,23 @@ export function TechDownSlider() {
                 Tørt vær
               </BrandBadge>
             </div>
+
             <div
               className='absolute bottom-0 top-0 z-40 flex w-1 cursor-ew-resize items-center justify-center bg-cloud-dancer shadow-[0_0_30px_rgba(0,0,0,0.5)]'
-              style={{ left: `${position}%` }}
+              style={{ left: 'var(--techdown-position)' }}
             >
-              <div className='gsap-tech-handle flex size-16 -translate-x-1/2 transform items-center justify-center rounded-full border border-overcast bg-cloud-dancer text-maritime-darkest shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-transform duration-200 hover:scale-110 active:scale-95'>
+              <div
+                className={[
+                  'gsap-tech-handle flex size-16 -translate-x-1/2 transform items-center justify-center rounded-full border border-overcast bg-cloud-dancer text-maritime-darkest shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-transform duration-200 hover:scale-110 active:scale-95',
+                  isDragging ? 'scale-105' : ''
+                ].join(' ')}
+              >
                 <ChevronsLeftRight size={28} strokeWidth={2.5} />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Content card — animated swap on slider change */}
         <div className='gsap-tech-card mt-12 rounded-sm border border-maritime-darkest/5 bg-overcast p-8 shadow-xl md:p-12'>
           <div className='flex flex-col items-start gap-8 md:flex-row md:gap-16'>
             <div className='flex flex-col items-start md:w-1/3'>

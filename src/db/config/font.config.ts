@@ -1,14 +1,5 @@
 import localFont from 'next/font/local'
 
-import { Geist_Mono as GeistMono } from 'next/font/google'
-
-export const geistMono = GeistMono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-  preload: false,
-  display: 'swap'
-})
-
 export const brandSansFontFamily = localFont({
   src: [
     {
@@ -32,11 +23,6 @@ export const brandSansFontFamily = localFont({
   display: 'swap'
 })
 
-/**
- * Utekos Text — the brand body typeface (per AGENTS.md).
- * Regular (400) and Medium (500) are the only published cuts.
- * Used for supporting & body copy; headlines stay on Google Sans Bold.
- */
 export const utekosText = localFont({
   src: [
     {
