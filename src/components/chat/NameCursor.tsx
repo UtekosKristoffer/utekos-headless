@@ -17,10 +17,10 @@ export function NameCursor({
 }) {
   return (
     <div className={cn('absolute z-10 animate-wander', className)} aria-hidden>
-      <div className='flex items-center gap-1.5 animate-chip-pulse'>
+      <div className='flex animate-chip-pulse items-center gap-1.5'>
         <CursorIcon side={side} style={{ color }} />
         <span
-          className='rounded-md px-2 py-0.5 text-xs font-medium text-black'
+          className='rounded-md px-2 py-0.5 text-xs font-semibold text-cloud-dancer shadow-sm'
           style={{ backgroundColor: color }}
         >
           {name}

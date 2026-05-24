@@ -69,7 +69,7 @@ export function NewsletterForm() {
             name='email'
             placeholder='Din e-postadresse...'
             required
-            className='bg-ancient-water w-full py-4 px-6 border border-cloud-dancer text-cloud-dancer placeholder:text-maritime-darkest focus:ring-2 focus:ring-cloud-dancer focus:ring-offset-2 focus:ring-offset-maritime-darkest transition-colors duration-300'
+            className='w-full border border-cloud-dancer bg-cloud-dancer px-6 py-4 text-maritime-darkest placeholder:text-maritime-darkest/70 focus:ring-2 focus:ring-cloud-dancer focus:ring-offset-2 focus:ring-offset-maritime-darkest transition-colors duration-300'
           />
           <BrandBadge
             asChild

@@ -246,7 +246,7 @@ export const NewProductLaunchSectionView = forwardRef<
                   <BrandBadge
                     backgroundColor='var(--dusted-peri)'
                     textColor='var(--maritime-darkest)'
-                    className='max-w-full gap-2.5 border border-dusted-peri/55 px-3 py-2 text-sm font-medium tracking-[-0.01em] shadow-[0_10px_30px_-22px_color-mix(in_oklab,var(--cloud-dancer)_45%,transparent)]'
+                    className='max-w-full gap-2.5 border border-dusted-peri/55 px-3 py-2 text-sm font-medium tracking-tight shadow-[0_10px_30px_-22px_color-mix(in_oklab,var(--cloud-dancer)_45%,transparent)]'
                   >
                     <span className='relative flex size-2 shrink-0'>
                       <span className='absolute inline-flex size-full animate-ping rounded-full bg-maritime-darkest opacity-75 motion-reduce:animate-none'></span>
@@ -267,7 +267,7 @@ export const NewProductLaunchSectionView = forwardRef<
                   <BrandBadge
                     backgroundColor='var(--bleached-mauve)'
                     textColor='var(--maritime-darkest)'
-                    className='max-w-full gap-2 border border-bleached-mauve/35 px-3 py-2 text-sm font-medium tracking-[-0.01em] shadow-[0_14px_32px_-24px_color-mix(in_oklab,var(--bleached-mauve)_60%,transparent)]'
+                    className='max-w-full gap-2 border border-bleached-mauve/35 px-3 py-2 text-sm font-medium tracking-tight shadow-[0_14px_32px_-24px_color-mix(in_oklab,var(--bleached-mauve)_60%,transparent)]'
                   >
                     <BadgePercent className='size-4 shrink-0' />
                     <span className='whitespace-nowrap'>

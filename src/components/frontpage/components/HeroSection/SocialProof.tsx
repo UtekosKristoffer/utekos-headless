@@ -27,14 +27,14 @@ export function SocialProof() {
         <SocialProofCard
           title='3000+'
           Icon={Smile}
-          cardClass='border-demitasse/12 bg-overcast text-demitasse transition-colors hover:bg-cloud-dancer'
-          titleClass='text-demitasse'
+          cardClass='border-demitasse/20 bg-overcast text-maritime-darkest transition-colors hover:bg-cloud-dancer'
+          titleClass='text-maritime-darkest'
           shineClass='via-cloud-dancer/40'
-          hoverBorderClass='hover:border-demitasse/30'
+          hoverBorderClass='hover:border-maritime-darkest/70'
           iconWrapperClass='bg-cloud-dancer/60 shadow-[0_0_18px_color-mix(in_oklch,var(--demitasse)_15%,transparent)]'
           iconColorClass='text-demitasse'
         >
-          <p className='mt-1 text-sm font-medium leading-[1.45] tracking-[-0.01em] text-demitasse/78'>
+          <p className='mt-1 text-sm font-medium leading-[1.45] tracking-tight text-maritime-darkest'>
             Fornøyde kunder
           </p>
         </SocialProofCard>

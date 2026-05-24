@@ -60,15 +60,15 @@ export function FindUsSection() {
           >
             <BrandBadge
               label='Møteplasser'
-              backgroundColor='var(--dusted-peri)'
-              textColor='var(--maritime-darkest)'
-              className='mb-6 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
+              backgroundColor='var(--maritime-darkest)'
+              textColor='var(--cloud-dancer)'
+              className='mb-6 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--cloud-dancer)_80%,transparent)]'
             />
-            <h2 className='mb-6 text-4xl leading-[0.95] font-bold tracking-[-0.01em] text-maritime-blue sm:text-5xl'>
+            <h2 className='mb-6 text-4xl leading-[0.95] font-bold tracking-tight text-cloud-dancer sm:text-5xl'>
               Der du har møtt oss
             </h2>
             <p
-              className='mb-10 text-lg leading-[1.45] tracking-[-0.01em] text-maritime-blue/85
+              className='mb-10 text-lg leading-[1.45] tracking-tight text-cloud-dancer/85
             '
             >
               Vi elsker å prate med folk – derfor er vi jevnlig på messer og

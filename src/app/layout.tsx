@@ -1,10 +1,7 @@
 import '../globals.css'
-import {
-  brandSansFontFamily,
-  geistMono,
-  utekosText
-} from '@/db/config/font.config'
+import { brandSansFontFamily, utekosText } from '@/db/config/font.config'
 import { Suspense, type ReactNode } from 'react'
+import { WebVitalsReporter } from '@/components/analytics/WebVitalsReporter'
 import { mainMenu } from '@/db/config/menu.config'
 import { Analytics } from '@vercel/analytics/react'
 import Footer from '@/components/footer/components/Footer'
@@ -143,6 +140,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <main>
               {children}
               {SHOULD_LOAD_VERCEL_ANALYTICS && <Analytics />}
+              <WebVitalsReporter />
               <ChatBotAgent />
             </main>
             <Footer />

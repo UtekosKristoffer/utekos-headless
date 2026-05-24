@@ -66,7 +66,7 @@ export function ComfyrobeContentColumn({
       <div
         ref={badgeRef}
         className={cn(
-          'will-animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-maritime-darkest bg-dusted-peri px-4 py-2',
+          'will-animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-full border border-cloud-dancer/40 bg-cloud-dancer px-4 py-2',
           badgeInView && 'is-in-view'
         )}
         style={{ '--transition-delay': '0.3s' } as React.CSSProperties}
@@ -123,7 +123,7 @@ export function ComfyrobeContentColumn({
           className={buttonVariants({
             size: 'lg',
             className:
-              'group mt-8 w-full sm:w-auto text-semibold! bg-dusted-peri! !text-maritime-darkest hover:!bg-dusted-peri/85 shadow-lg shadow-dusted-peri/35 hover:shadow-dusted-peri/20 transition-all duration-300'
+              'group mt-8 w-full sm:w-auto text-semibold! !bg-cloud-dancer !text-maritime-darkest hover:!bg-overcast shadow-lg shadow-cloud-dancer/20 transition-all duration-300'
           })}
         >
           Utforsk Comfyrobe™

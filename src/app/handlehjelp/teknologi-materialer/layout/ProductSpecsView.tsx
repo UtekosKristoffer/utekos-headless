@@ -18,7 +18,10 @@ import {
   Shirt
 } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
-import { ProductLayersVisual, MobileProductLayersVisual  } from './ProductLayersVisual'
+import {
+  ProductLayersVisual,
+  MobileProductLayersVisual
+} from './ProductLayersVisual'
 import { cn } from '@/lib/utils/className' // Sørg for at du har denne eller tilsvarende
 import type {
   Technology,
@@ -68,7 +71,7 @@ export const TechnologyBlock = ({
             'flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border transition-colors',
             isActive ?
               'border-ancient-water/30 bg-ancient-water/10 text-ancient-water'
-            : 'border-maritime-blue bg-maritime-blue text-cloud-dancer/70'
+            : 'border-maritime-blue bg-maritime-blue text-cloud-dancer/90'
           )}
         >
           <IconComponent className='h-6 w-6' />
@@ -76,14 +79,14 @@ export const TechnologyBlock = ({
         <h3
           className={cn(
             'text-xl font-bold transition-colors',
-            isActive ? 'text-white' : 'text-cloud-dancer/70'
+            isActive ? 'text-white' : 'text-cloud-dancer/90'
           )}
         >
           {tech.title}
         </h3>
       </div>
       <div className='prose prose-invert mt-4 max-w-none'>
-        <p className='text-cloud-dancer/70 leading-relaxed'>{tech.content}</p>
+        <p className='text-cloud-dancer/90 leading-relaxed'>{tech.content}</p>
         <div className='mt-4 flex flex-wrap gap-2'>
           {tech.products.map(product => (
             <span
@@ -92,7 +95,7 @@ export const TechnologyBlock = ({
                 'rounded-full border px-2.5 py-1 text-sm font-medium transition-colors',
                 isActive ?
                   'border-white/10 bg-white/5 text-white'
-                : 'border-maritime-blue bg-transparent text-cloud-dancer/70'
+                : 'border-maritime-blue bg-transparent text-cloud-dancer/90'
               )}
             >
               {product}
@@ -141,7 +144,6 @@ export function ProductSpecsView({
 
   return (
     <div className='mt-24 grid grid-cols-1 gap-16 lg:grid-cols-2'>
-      
       {/* MOBIL VISUAL (Floating HUD) - Vises kun på mobil */}
       <div className='lg:hidden'>
         <MobileProductLayersVisual activeTech={activeTech} />
@@ -158,7 +160,7 @@ export function ProductSpecsView({
       <div className='space-y-24 pb-24'>
         {technologyGroups.map(group => (
           <section key={group.groupTitle}>
-            <h2 className='mb-8 border-b border-white/10 pb-4 text-sm font-bold tracking-widest text-cloud-dancer/70'>
+            <h2 className='mb-8 border-b border-white/10 pb-4 text-sm font-bold tracking-widest text-cloud-dancer/90'>
               {group.groupTitle}
             </h2>
             <div className='space-y-8'>

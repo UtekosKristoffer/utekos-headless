@@ -49,7 +49,7 @@ const models = [
     iconClass: 'text-maritime-blue',
     textClass: 'text-cloud-dancer',
     descriptionClass: 'text-cloud-dancer/75',
-    lesmerClass: 'text-cloud-dancer/70 group-hover:text-cloud-dancer'
+    lesmerClass: 'text-cloud-dancer/90 group-hover:text-cloud-dancer'
   }
 ]
 

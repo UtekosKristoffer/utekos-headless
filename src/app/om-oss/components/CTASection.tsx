@@ -25,8 +25,8 @@ export function CTASection() {
             >
               <BrandBadge
                 label='Oppdag kolleksjonen'
-                backgroundColor='var(--dusted-peri)'
-                textColor='var(--maritime-darkest)'
+                backgroundColor='var(--maritime-darkest)'
+                textColor='var(--cloud-dancer)'
                 className='shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
               />
             </AnimatedBlock>

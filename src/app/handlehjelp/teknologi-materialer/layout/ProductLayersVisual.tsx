@@ -60,7 +60,7 @@ export function ProductLayersVisual({ activeTech }: { activeTech: string }) {
 
   return (
     <div className='relative flex h-[60vh] w-full items-center justify-center p-8'>
-      <div className='absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]' />
+      <div className='absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_90%,transparent_100%)]' />
 
       <div className='relative flex w-full max-w-sm flex-col gap-4 perspective-[1000px]'>
         <MaterialCard
@@ -98,7 +98,7 @@ export function ProductLayersVisual({ activeTech }: { activeTech: string }) {
 
         <div
           className={cn(
-            'absolute -right-12 top-1/2 -translate-y-1/2 transition-all duration-700',
+            'absolute -right-12 top-1/2 -translate-y-1/2 transition-all duration-900',
             activeLayer === 'function' ?
               'opacity-100 translate-x-0'
             : 'opacity-0 translate-x-8 pointer-events-none'
@@ -255,7 +255,7 @@ function MaterialCard({
           'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border transition-colors duration-300',
           isActive ?
             `${theme.border} bg-white/5 ${theme.text}`
-          : 'border-white/10 bg-maritime-blue text-cloud-dancer/70'
+          : 'border-white/10 bg-maritime-blue text-cloud-dancer/90'
         )}
       >
         <Icon className='h-6 w-6' />
@@ -265,7 +265,7 @@ function MaterialCard({
         <span
           className={cn(
             'text-xs font-bold uppercase tracking-widest transition-colors',
-            isActive ? theme.text : 'text-cloud-dancer/70'
+            isActive ? theme.text : 'text-cloud-dancer/90'
           )}
         >
           {title}
@@ -273,7 +273,7 @@ function MaterialCard({
         <span
           className={cn(
             'text-lg font-semibold transition-colors',
-            isActive ? 'text-white' : 'text-cloud-dancer/70'
+            isActive ? 'text-white' : 'text-cloud-dancer/90'
           )}
         >
           {subtitle}

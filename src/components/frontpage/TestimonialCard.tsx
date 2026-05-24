@@ -39,14 +39,14 @@ export function TestimonialCard({ testimonial, index }: TestimonialCardProps) {
         />
       </div>
 
-      <div className='relative flex h-full flex-col overflow-hidden rounded-2xl border border-dusted-peri/45 bg-dusted-peri p-8 backdrop-blur-md transition-all duration-500 hover:border-sweet-lavender/65 hover:bg-dusted-peri/92 hover:-translate-y-1 hover:shadow-2xl hover:shadow-dusted-peri/20'>
+      <div className='relative flex h-full flex-col overflow-hidden rounded-2xl border border-dusted-peri/35 bg-cloud-dancer p-8 backdrop-blur-md transition-all duration-500 hover:border-maritime-darkest/25 hover:bg-overcast hover:-translate-y-1 hover:shadow-2xl hover:shadow-dusted-peri/20'>
         <div className='absolute inset-0 bg-gradient-to-br from-cloud-dancer/18 via-cloud-dancer/8 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none' />
 
-        <Quote className='absolute top-6 right-6 h-16 w-16 text-maritime-darkest/10 rotate-12 transition-transform duration-700 group-hover:rotate-0 group-hover:scale-110' />
+        <Quote className='absolute top-6 right-6 h-16 w-16 rotate-12 text-maritime-darkest/18 transition-transform duration-700 group-hover:rotate-0 group-hover:scale-110' />
 
         <div className='relative z-10 flex flex-col h-full'>
           <blockquote className='flex-grow mb-8'>
-            <p className='text-base font-light italic leading-relaxed text-maritime-darkest md:text-lg'>
+            <p className='text-base font-medium italic leading-relaxed text-maritime-darkest md:text-lg'>
               &quot;{testimonial.quote}&quot;
             </p>
           </blockquote>

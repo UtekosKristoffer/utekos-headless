@@ -16,8 +16,10 @@ const nextConfig: NextConfig = {
   staticPageGenerationTimeout: 180,
   experimental: {
     cpus: 1,
+    webVitalsAttribution: ['CLS', 'INP', 'LCP'],
     optimizePackageImports: [
       'zod',
+      'gsap',
       '@radix-ui/react-dialog',
       '@radix-ui/react-hover-card',
       '@radix-ui/react-label',
@@ -30,7 +32,6 @@ const nextConfig: NextConfig = {
       '@radix-ui/react-slot',
       '@radix-ui/react-switch',
       '@radix-ui/react-tabs',
-      '@radix-ui/react-toast',
       'xstate',
       'motion',
       'framer-motion',
@@ -48,7 +49,7 @@ const nextConfig: NextConfig = {
         pathname: '/**'
       }
     ],
-    qualities: [75, 80, 90, 95, 100]
+    qualities: [75, 80, 85, 90, 95, 100]
   },
   async headers() {
     return [

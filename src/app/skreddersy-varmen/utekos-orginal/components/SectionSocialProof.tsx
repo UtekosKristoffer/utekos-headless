@@ -37,7 +37,7 @@ export function SectionSocialProof() {
             <span aria-hidden className='text-cloud-dancer/30'>
               /
             </span>
-            <span className='text-cloud-dancer/70'>5 i snitt</span>
+            <span className='text-cloud-dancer/90'>5 i snitt</span>
           </div>
 
           <h2
