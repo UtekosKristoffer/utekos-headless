@@ -49,29 +49,29 @@ export function ProductVideoSection() {
 
             <div className='mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start'>
               <div className='group flex items-center gap-4 rounded-[1rem] border border-white/10 bg-mountain-view p-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] backdrop-blur-md transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5'>
-                <div className='flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-soft-warm/20 bg-gradient-to-br from-white/10 to-transparent text-soft-warm shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] transition-transform duration-500 group-hover:scale-110'>
-                  <Sun className='h-5 w-5 stroke-[1.5]' />
+                <div className='flex size-12 shrink-0 items-center justify-center rounded-xl border border-soft-warm/20 bg-gradient-to-br from-white/10 to-transparent text-soft-warm shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] transition-transform duration-500 group-hover:scale-110'>
+                  <Sun className='h-5 stroke-[1.5]' />
                 </div>
                 <div className='text-left'>
                   <p className='text-[1rem] font-medium leading-[1.1] tracking-[-0.01em]  text-cloud-dancer'>
                     Garantert varm
                   </p>
                   <p className='mt-1 text-[0.875rem] font-normal text-cloud-dancer tracking-[-0.01em]'>
-                    Uansett værforhold
+                    Regisser din egen komfort
                   </p>
                 </div>
               </div>
 
               <div className='group flex items-center gap-4 rounded-[1rem] border border-maritime-blue/20 bg-overcast p-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] backdrop-blur-md transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5'>
-                <div className='flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-maritime-blue/20 bg-gradient-to-br from-white/50 to-transparent text-maritime-blue shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)] transition-transform duration-500 group-hover:scale-110'>
-                  <Layers className='h-5 w-5 text-maritime-blue stroke-[1.5]' />
+                <div className='flex size-12 shrink-0 items-center justify-center rounded-xl border border-maritime-blue/20 bg-gradient-to-br from-white/50 to-transparent text-maritime-blue shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)] transition-transform duration-500 group-hover:scale-110'>
+                  <Layers className='size-5 text-maritime-blue stroke-[1.5]' />
                 </div>
                 <div className='text-left'>
                   <p className='text-[1rem] font-medium leading-[1.1] tracking-[-0.01em] text-maritime-blue'>
-                    3-i-1 Design
+                    3-i-1 funksjonalitet
                   </p>
                   <p className='mt-1 text-[0.875rem] font-normal text-maritime-blue tracking-[-0.01em]'>
-                    Jakke, parkas og pose
+                    Veksle enkelt mellom ulike moduser
                   </p>
                 </div>
               </div>
@@ -84,7 +84,7 @@ export function ProductVideoSection() {
                 className='group/btn inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-[var(--primary-button)] px-8 py-4 text-[1rem] font-medium text-maritime-blue transition-all duration-300 hover:bg-white hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(255,255,255,0.2)] focus:outline-none focus:ring-2 focus:ring-brand-highlight focus:ring-offset-2 focus:ring-offset-maritime-blue'
               >
                 Opplev Utekos selv
-                <ArrowRight className='ml-2 h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1' />
+                <ArrowRight className='ml-2 h-5 transition-transform duration-300 group-hover/btn:translate-x-1' />
               </Link>
             </div>
           </div>

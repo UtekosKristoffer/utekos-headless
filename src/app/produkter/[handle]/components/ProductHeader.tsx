@@ -31,13 +31,13 @@ export default function ProductHeader({
           </BrandBadge>
         )}
 
-        <h1 className='text-fluid-headline font-sans font-bold leading-none tracking-tight text-maritime-blue'>
+        <h1 className='text-4xl md:text-5xl lg:text-6xl font-google-sans font-bold leading-[1.45] tracking-tight text-maritime-blue'>
           {productTitle}
         </h1>
 
         {typeof productSubtitle === 'string'
           && productSubtitle.trim() !== '' && (
-            <p className='mt-4 max-w-2xl text-lg font-light leading-relaxed text-maritime-blue/76'>
+            <p className='mt-4 max-w-2xl text-lg font-light leading-[1.45] text-maritime-blue/76'>
               {productSubtitle}
             </p>
           )}

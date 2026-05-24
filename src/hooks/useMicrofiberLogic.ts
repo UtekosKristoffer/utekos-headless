@@ -8,6 +8,7 @@ import { useCartMutations } from '@/hooks/useCartMutations'
 import { useOptimisticCartUpdate } from '@/hooks/useOptimisticCartUpdate'
 import { getCartIdFromCookie } from '@/lib/actions/getCartIdFromCookie'
 import { GID_PREFIX } from '@/api/constants'
+import { scrollToElement } from '@/lib/gsap/scrollToElement'
 import { variantMap } from '@/app/skreddersy-varmen/utekos-orginal/utils/variantMap'
 import { productConfig } from '@/app/skreddersy-varmen/utekos-orginal/utils/productConfig'
 import type {
@@ -36,10 +37,7 @@ export function useMicrofiberLogic() {
   )?.image
 
   const scrollToSizeGuide = () => {
-    const element = document.getElementById('size-guide')
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
+    void scrollToElement('size-guide', { offsetY: 96 })
   }
 
   const handleAddToCart = () => {

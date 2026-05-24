@@ -1,33 +1,61 @@
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { createGsapDevTools } from '@/lib/gsap/createGsapDevTools'
+import { loadScrollTrigger } from '@/lib/gsap/loadScrollTrigger'
 
-export function mountTechTeaser(root: HTMLElement): () => void {
-  gsap.registerPlugin(ScrollTrigger)
+export async function mountTechTeaser(root: HTMLElement): Promise<() => void> {
+  const { gsap, ScrollTrigger } = await loadScrollTrigger()
   const ctx = gsap.context(() => {
     const content = root.querySelectorAll<HTMLElement>('.gsap-content')
     const cardVisual = root.querySelector<HTMLElement>('.gsap-card-visual')
     const timeline = gsap.timeline({
+      id: 'frontpage-tech-teaser',
       scrollTrigger: {
         trigger: root,
         start: 'top 80%',
-        toggleActions: 'play none none reverse'
+        once: true,
+        toggleActions: 'play none none none'
       }
     })
 
     timeline.fromTo(
       content,
-      { y: 30, autoAlpha: 0 },
-      { y: 0, autoAlpha: 1, duration: 0.8, stagger: 0.1, ease: 'power2.out' }
+      { y: 30, autoAlpha: 0, willChange: 'transform, opacity' },
+      {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power2.out',
+        clearProps: 'willChange'
+      }
     )
 
     if (cardVisual) {
       timeline.fromTo(
         cardVisual,
-        { x: 30, autoAlpha: 0, rotationY: 10 },
-        { x: 0, autoAlpha: 1, rotationY: 0, duration: 1, ease: 'power3.out' },
+        {
+          x: 30,
+          autoAlpha: 0,
+          rotationY: 10,
+          willChange: 'transform, opacity'
+        },
+        {
+          x: 0,
+          autoAlpha: 1,
+          rotationY: 0,
+          duration: 1,
+          ease: 'power3.out',
+          clearProps: 'willChange'
+        },
         '-=0.6'
       )
     }
+
+    void createGsapDevTools({
+      animation: timeline,
+      id: 'frontpage-tech-teaser'
+    })
+
+    ScrollTrigger.refresh(true)
   }, root)
 
   const canHover = window.matchMedia('(hover: hover)').matches

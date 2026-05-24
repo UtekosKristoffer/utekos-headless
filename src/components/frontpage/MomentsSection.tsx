@@ -1,8 +1,5 @@
-'use client'
-
 import { MomentsHeader } from './MomentsHeader'
-import { MomentCard } from '@/components/frontpage/MomentCard'
-import { moments } from '@/components/frontpage/utils/moments'
+import { MomentCardsGrid } from '@/components/frontpage/MomentCardsGrid'
 
 export function MomentsSection() {
   return (
@@ -16,11 +13,7 @@ export function MomentsSection() {
       <div className='mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl'>
         <MomentsHeader />
 
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8'>
-          {moments.map((moment, i) => (
-            <MomentCard key={moment.id} moment={moment} index={i} />
-          ))}
-        </div>
+        <MomentCardsGrid />
       </div>
     </section>
   )

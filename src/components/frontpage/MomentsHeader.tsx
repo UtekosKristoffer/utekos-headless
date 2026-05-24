@@ -1,16 +1,17 @@
-'use client'
-
-import React from 'react'
 import {
   CinematicWord,
   LuxuryShimmerText,
   OrganicCircleWord,
   GlowWord
 } from '@/components/frontpage/TextReveal'
+import { MomentsHeaderMotion } from './MomentsHeaderMotion'
 
 export function MomentsHeader() {
   return (
-    <div className='mb-24 text-center mx-auto max-w-5xl px-4'>
+    <div
+      id='moments-header'
+      className='mb-24 text-center mx-auto max-w-5xl px-4'
+    >
       {/* Overskrift: Strengt bundet til Utekos Title (Sentence case, leading 90%, tracking -1%, primærfarge) */}
       <h2 className='text-5xl md:text-6xl lg:text-7xl font-bold text-cloud-dancer mb-10 leading-[0.9] tracking-[-0.01em]'>
         <div className='flex flex-wrap justify-center gap-x-3 md:gap-x-5 items-baseline'>
@@ -28,7 +29,6 @@ export function MomentsHeader() {
         </div>
       </h2>
 
-      {/* Brødtekst: Strengt bundet til Utekos Text (Leading 145%, tracking -2%, primærfarge med kontrollert opasitet for hierarki) */}
       <div className='max-w-3xl mx-auto'>
         <p className='text-lg md:text-2xl text-cloud-dancer/90 leading-[1.45] tracking-[-0.02em] flex flex-wrap justify-center gap-x-2 items-center'>
           <CinematicWord className='font-normal' delay={0.4}>
@@ -43,8 +43,6 @@ export function MomentsHeader() {
           <CinematicWord className='font-normal' delay={0.55}>
             finner
           </CinematicWord>
-
-          {/* "Roen" - Ringen holdes som en tynn, funksjonell linje i ancient-water (lint), men teksten forblir primær cloud-dancer */}
           <span className='text-cloud-dancer font-medium [--circle-stroke:var(--ancient-water)]'>
             <OrganicCircleWord delay={0.6}>roen,</OrganicCircleWord>
           </span>
@@ -78,6 +76,7 @@ export function MomentsHeader() {
           </CinematicWord>
         </p>
       </div>
+      <MomentsHeaderMotion />
     </div>
   )
 }

@@ -6,12 +6,12 @@ import { ArrowRight } from 'lucide-react'
 import Balpanne from '@public/empathy-bonfire.png'
 import { useEmpathySectionAnimations } from '@/hooks/useEmpathySectionAnimations'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
+import { scrollToElement } from '@/lib/gsap/scrollToElement'
 
 const HEADLINE = 'Når øyeblikket er for godt til å avsluttes.'
 
 function scrollToModel() {
-  const element = document.getElementById('section-solution')
-  if (element) element.scrollIntoView({ behavior: 'smooth' })
+  void scrollToElement('section-solution', { offsetY: 80 })
 }
 
 export function EmpathySection() {

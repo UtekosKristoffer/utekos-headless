@@ -1,22 +1,22 @@
-import { forwardRef, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 interface SocialProofHeaderViewProps {
+  id: string
   title: string
   description: ReactNode
-  titleRef: React.RefObject<HTMLHeadingElement | null>
-  textRef: React.RefObject<HTMLParagraphElement | null>
 }
 
-export const SocialProofHeaderView = forwardRef<
-  HTMLDivElement,
-  SocialProofHeaderViewProps
->(({ title, description, titleRef, textRef }, ref) => {
+export function SocialProofHeaderView({
+  id,
+  title,
+  description
+}: SocialProofHeaderViewProps) {
   const words = title.split(' ')
 
   return (
-    <div ref={ref} className='mb-16 text-center'>
+    <div id={id} className='mb-16 text-center'>
       <h2
-        ref={titleRef}
+        data-social-proof-title=''
         className='text-balance overflow-hidden text-5xl font-google-sans font-bold tracking-tight text-cloud-dancer sm:text-6xl md:text-7xl'
         aria-label={title}
       >
@@ -40,13 +40,11 @@ export const SocialProofHeaderView = forwardRef<
         ))}
       </h2>
       <div
-        ref={textRef}
+        data-social-proof-text=''
         className='mx-auto mt-4 max-w-3xl text-lg text-accent/80 opacity-0 will-change-transform'
       >
         {description}
       </div>
     </div>
   )
-})
-
-SocialProofHeaderView.displayName = 'SocialProofHeaderView'
+}

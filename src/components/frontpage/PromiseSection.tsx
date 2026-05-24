@@ -12,7 +12,6 @@ import Autoplay from 'embla-carousel-autoplay'
 import { GridCross } from '@/components/legal/GridCross'
 import { ClockIcon, ShieldCheckIcon } from '@heroicons/react/24/outline'
 import { ThermometerIcon } from 'lucide-react'
-import { AspectRatio } from '@/components/ui/aspect-ratio'
 import ClassicGeminiCouple from '@public/webp/classic-couple-1080.webp'
 import TechDownKateKikkert from '@public/webp/techdown-kate-kikkert-1080.webp'
 import ClassicGeminiWoman from '@public/webp/classic-gemini-woman-1080.webp'
@@ -61,18 +60,17 @@ export function PromiseSection() {
                 {images.map((image, index) => (
                   <CarouselItem key={index}>
                     <div className='overflow-hidden rounded-lg'>
-                      <AspectRatio ratio={1 / 1} className='relative'>
+                      <div className='relative aspect-square w-full'>
                         <Image
                           src={image.src}
                           alt={image.alt}
-                          height={1080}
-                          width={1080}
+                          fill
                           quality={95}
                           className='object-cover'
                           sizes='(min-width: 1024px) 50vw, 100vw'
                           priority={index === 0}
                         />
-                      </AspectRatio>
+                      </div>
                     </div>
                   </CarouselItem>
                 ))}

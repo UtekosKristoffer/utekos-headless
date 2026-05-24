@@ -37,10 +37,7 @@ export const TrustContentView = forwardRef<
           </span>
         </h2>
 
-        <p
-          ref={textRef}
-          className='mb-2 mt-4 text-lg text-cloud-dancer opacity-0'
-        >
+        <p ref={textRef} className='mb-2 mt-4 text-lg text-cloud-dancer'>
           Fra du besøker siden vår til du nyter kveldssolen i ditt Utekos-plagg
           – vi er dedikerte til å levere en trygg og førsteklasses opplevelse i
           alle ledd.

@@ -1,13 +1,4 @@
-'use client'
-
-import React, { useRef, useLayoutEffect } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { cn } from '@/lib/utils/className'
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger)
-}
 
 export function CinematicWord({
   children,
@@ -18,43 +9,11 @@ export function CinematicWord({
   className?: string
   delay?: number
 }) {
-  const elRef = useRef<HTMLSpanElement>(null)
-
-  useLayoutEffect(() => {
-    const el = elRef.current
-    if (!el) return
-
-    gsap.fromTo(
-      el,
-      {
-        filter: 'blur(12px)',
-        opacity: 0,
-        y: 20,
-        scale: 1.1
-      },
-      {
-        filter: 'blur(0px)',
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 1.2,
-        delay,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 95%'
-        }
-      }
-    )
-  }, [delay])
-
   return (
     <span
-      ref={elRef}
-      className={cn(
-        'inline-block will-change-[transform,opacity,filter]',
-        className
-      )}
+      data-cinematic-word=''
+      data-gsap-delay={delay}
+      className={cn('inline-block transform-gpu', className)}
     >
       {children}
     </span>
@@ -86,35 +45,15 @@ export function OrganicCircleWord({
   children: string
   delay?: number
 }) {
-  const pathRef = useRef<SVGPathElement>(null)
-  const containerRef = useRef<HTMLSpanElement>(null)
-
-  useLayoutEffect(() => {
-    if (!pathRef.current || !containerRef.current) return
-
-    const length = pathRef.current.getTotalLength()
-    gsap.set(pathRef.current, {
-      strokeDasharray: length,
-      strokeDashoffset: length
-    })
-
-    gsap.to(pathRef.current, {
-      strokeDashoffset: 0,
-      duration: 1.5,
-      delay: delay + 0.5,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top 80%'
-      }
-    })
-  }, [delay])
-
   return (
-    <span ref={containerRef} className='relative inline-block px-1'>
+    <span
+      data-organic-circle-word=''
+      data-gsap-delay={delay}
+      className='relative inline-block px-1'
+    >
       <CinematicWord
         delay={delay}
-        className='relative z-10 font-medium text-white'
+        className='relative z-10 font-medium text-cloud-dancer'
       >
         {children}
       </CinematicWord>
@@ -125,10 +64,10 @@ export function OrganicCircleWord({
         preserveAspectRatio='none'
       >
         <path
-          ref={pathRef}
+          data-organic-circle-path=''
           d='M5,25 C5,8 25,5 50,5 C75,5 95,8 95,25 C95,42 75,45 50,45 C25,45 5,42 5,25 Z'
           fill='none'
-          stroke='#F59E0B'
+          stroke='var(--circle-stroke, var(--ancient-water))'
           strokeWidth='2'
           strokeLinecap='round'
           strokeLinejoin='round'
@@ -149,10 +88,10 @@ export function GlowWord({
 }) {
   return (
     <span className='relative mx-1 inline-block'>
-      <span className='animate-pulse-slow absolute inset-0 rounded-full bg-white/10 blur-lg' />
+      <span className='animate-pulse-slow absolute inset-0 rounded-full bg-cloud-dancer/10 blur-lg' />
       <CinematicWord
         delay={delay}
-        className='relative z-10 font-medium italic text-white'
+        className='relative z-10 font-medium italic text-cloud-dancer'
       >
         {children}
       </CinematicWord>

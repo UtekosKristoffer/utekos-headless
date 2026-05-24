@@ -2,23 +2,17 @@
 'use client'
 
 import Image from 'next/image'
-import { useRef } from 'react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform
-} from 'framer-motion'
+import { useEffect, useRef } from 'react'
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { Star, ChevronDown, ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils/className'
 import CinemaOne from '@public/cinema-twilight.png'
 import MobileOne from '@public/terrace-4-5.png'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
-
-gsap.registerPlugin(useGSAP)
+import { createGsapDevTools } from '@/lib/gsap/createGsapDevTools'
+import { loadGsap } from '@/lib/gsap/loadGsap'
+import { scrollToElement } from '@/lib/gsap/scrollToElement'
 
 const SCROLL_TARGETS = {
   purchase: 'purchase-section',
@@ -26,8 +20,10 @@ const SCROLL_TARGETS = {
 } as const
 
 function smoothScrollTo(id: string, reducedMotion: boolean | null) {
-  const el = document.getElementById(id)
-  if (el) el.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' })
+  void scrollToElement(id, {
+    offsetY: 72,
+    reducedMotion
+  })
 }
 
 export function Hero() {
@@ -41,137 +37,199 @@ export function Hero() {
   const contentY = useTransform(scrollY, [0, 400], [0, reduced ? 0 : -30])
   const contentOpacity = useTransform(scrollY, [0, 400], [1, 0.4])
 
-  useGSAP(
-    () => {
-      if (reduced) {
-        gsap.set(
-          [
-            '.sv-headline-1',
-            '.sv-headline-2',
-            '.sv-body',
-            '.sv-cta-row',
-            '.sv-trust',
-            '.sv-availability',
-            '.sv-scroll-hint'
-          ],
-          { clearProps: 'all' }
-        )
+  useEffect(() => {
+    let cleanup: (() => void) | null = null
+    let cancelled = false
+
+    const mountAnimation = async () => {
+      const gsap = await loadGsap()
+      if (cancelled || !heroRef.current) {
         return
       }
 
-      const tl = gsap.timeline()
-
-      // 1. UTEKOS — letters materialize from below, one by one
-      tl.fromTo(
-        '.gsap-char',
-        { yPercent: 120, rotationX: -55, opacity: 0 },
-        {
-          yPercent: 0,
-          rotationX: 0,
-          opacity: 1,
-          duration: 1.5,
-          stagger: { each: 0.065, ease: 'power2.out' },
-          ease: 'power4.out'
+      const context = gsap.context(() => {
+        if (reduced) {
+          gsap.set(
+            [
+              '.sv-headline-1',
+              '.sv-headline-2',
+              '.sv-body',
+              '.sv-cta-row',
+              '.sv-trust',
+              '.sv-availability',
+              '.sv-scroll-hint'
+            ],
+            { clearProps: 'all' }
+          )
+          return
         }
-      )
 
-      // 2. "Skreddersy varmen." — clips up from below through overflow container
-      tl.fromTo(
-        '.sv-headline-1',
-        { yPercent: 105, autoAlpha: 0 },
-        {
-          yPercent: 0,
-          autoAlpha: 1,
-          duration: 1.1,
-          ease: 'power3.out'
-        },
-        '-=0.85'
-      )
+        const tl = gsap.timeline({ id: 'skreddersy-varmen-hero' })
 
-      // 3. "Forleng kvelden." — italic sweep with tilt correction
-      tl.fromTo(
-        '.sv-headline-2',
-        { yPercent: 100, rotationZ: 1.6, autoAlpha: 0 },
-        {
-          yPercent: 0,
-          rotationZ: 0,
-          autoAlpha: 1,
-          duration: 1.0,
-          ease: 'power3.out'
-        },
-        '-=0.7'
-      )
+        // 1. UTEKOS — letters materialize from below, one by one
+        tl.fromTo(
+          '.gsap-char',
+          {
+            yPercent: 120,
+            rotationX: -55,
+            opacity: 0,
+            willChange: 'transform, opacity'
+          },
+          {
+            yPercent: 0,
+            rotationX: 0,
+            opacity: 1,
+            duration: 1.5,
+            stagger: { each: 0.065, ease: 'power2.out' },
+            ease: 'power4.out',
+            clearProps: 'willChange'
+          }
+        )
 
-      // 4. Body copy — blur fade up
-      tl.fromTo(
-        '.sv-body',
-        { y: 22, autoAlpha: 0, filter: 'blur(6px)' },
-        {
-          y: 0,
-          autoAlpha: 1,
-          filter: 'blur(0px)',
-          duration: 1.0,
-          ease: 'power2.out'
-        },
-        '-=0.6'
-      )
+        // 2. "Skreddersy varmen." — clips up from below through overflow container
+        tl.fromTo(
+          '.sv-headline-1',
+          {
+            yPercent: 105,
+            autoAlpha: 0,
+            willChange: 'transform, opacity'
+          },
+          {
+            yPercent: 0,
+            autoAlpha: 1,
+            duration: 1.1,
+            ease: 'power3.out',
+            clearProps: 'willChange'
+          },
+          '-=0.85'
+        )
 
-      // 5. CTA buttons — spring entrance
-      tl.fromTo(
-        '.sv-cta-row',
-        { y: 22, autoAlpha: 0, scale: 0.97 },
-        {
-          y: 0,
-          autoAlpha: 1,
-          scale: 1,
-          duration: 0.95,
-          ease: 'power3.out'
-        },
-        '-=0.5'
-      )
+        // 3. "Forleng kvelden." — italic sweep with tilt correction
+        tl.fromTo(
+          '.sv-headline-2',
+          {
+            yPercent: 100,
+            rotationZ: 1.6,
+            autoAlpha: 0,
+            willChange: 'transform, opacity'
+          },
+          {
+            yPercent: 0,
+            rotationZ: 0,
+            autoAlpha: 1,
+            duration: 1.0,
+            ease: 'power3.out',
+            clearProps: 'willChange'
+          },
+          '-=0.7'
+        )
 
-      // 6. Trust signals — slide in from left
-      tl.fromTo(
-        '.sv-trust',
-        { x: -18, autoAlpha: 0 },
-        {
-          x: 0,
-          autoAlpha: 1,
-          duration: 0.8,
-          ease: 'power2.out'
-        },
-        '-=0.4'
-      )
+        // 4. Body copy — blur fade up
+        tl.fromTo(
+          '.sv-body',
+          {
+            y: 22,
+            autoAlpha: 0,
+            filter: 'blur(6px)',
+            willChange: 'transform, opacity, filter'
+          },
+          {
+            y: 0,
+            autoAlpha: 1,
+            filter: 'blur(0px)',
+            duration: 1.0,
+            ease: 'power2.out',
+            clearProps: 'willChange'
+          },
+          '-=0.6'
+        )
 
-      // 7. Availability line — scale fade up
-      tl.fromTo(
-        '.sv-availability',
-        { y: 10, autoAlpha: 0, scale: 0.94 },
-        {
-          y: 0,
-          autoAlpha: 1,
-          scale: 1,
-          duration: 0.7,
-          ease: 'power2.out'
-        },
-        '-=0.35'
-      )
+        // 5. CTA buttons — spring entrance
+        tl.fromTo(
+          '.sv-cta-row',
+          {
+            y: 22,
+            autoAlpha: 0,
+            scale: 0.97,
+            willChange: 'transform, opacity'
+          },
+          {
+            y: 0,
+            autoAlpha: 1,
+            scale: 1,
+            duration: 0.95,
+            ease: 'power3.out',
+            clearProps: 'willChange'
+          },
+          '-=0.5'
+        )
 
-      // 8. Bottom scroll hint — final reveal
-      tl.fromTo(
-        '.sv-scroll-hint',
-        { opacity: 0, y: -8 },
-        {
-          opacity: 0.6,
-          y: 0,
-          duration: 0.9,
-          ease: 'power2.out'
-        },
-        '-=0.15'
-      )
-    },
-    { scope: heroRef }
-  )
+        // 6. Trust signals — slide in from left
+        tl.fromTo(
+          '.sv-trust',
+          { x: -18, autoAlpha: 0, willChange: 'transform, opacity' },
+          {
+            x: 0,
+            autoAlpha: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            clearProps: 'willChange'
+          },
+          '-=0.4'
+        )
+
+        // 7. Availability line — scale fade up
+        tl.fromTo(
+          '.sv-availability',
+          {
+            y: 10,
+            autoAlpha: 0,
+            scale: 0.94,
+            willChange: 'transform, opacity'
+          },
+          {
+            y: 0,
+            autoAlpha: 1,
+            scale: 1,
+            duration: 0.7,
+            ease: 'power2.out',
+            clearProps: 'willChange'
+          },
+          '-=0.35'
+        )
+
+        // 8. Bottom scroll hint — final reveal
+        tl.fromTo(
+          '.sv-scroll-hint',
+          { opacity: 0, y: -8, willChange: 'transform, opacity' },
+          {
+            opacity: 0.6,
+            y: 0,
+            duration: 0.9,
+            ease: 'power2.out',
+            clearProps: 'willChange'
+          },
+          '-=0.15'
+        )
+
+        void createGsapDevTools({
+          animation: tl,
+          id: 'skreddersy-varmen-hero'
+        })
+      }, heroRef.current)
+
+      cleanup = () => {
+        context.revert()
+      }
+    }
+
+    void mountAnimation()
+
+    return () => {
+      cancelled = true
+      cleanup?.()
+    }
+  }, [reduced])
 
   return (
     <section
@@ -225,7 +283,7 @@ export function Hero() {
         className='absolute inset-y-0 left-0 z-[1] hidden w-1/2 bg-gradient-to-r from-maritime-darkest/80 via-maritime-darkest/20 to-transparent md:block'
       />
 
-      {/* Main content — scroll parallax via framer-motion, entrance via GSAP */}
+      {/* Main content — scroll parallax via motion/react, entrance via GSAP */}
       <motion.div
         className='relative z-10 mx-auto flex min-h-[calc(100svh-70px)] xl:min-h-[calc(100svh-86px)] w-full max-w-[1400px] flex-col items-start justify-center px-6 pt-20 pb-16 md:px-12 md:pt-24 lg:px-20'
         style={{ y: contentY, opacity: contentOpacity }}

@@ -2,11 +2,12 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { ArrowDown, X } from 'lucide-react'
 import { cn } from '@/lib/utils/className'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
+import { scrollToElement } from '@/lib/gsap/scrollToElement'
 
 const DISMISS_KEY = 'utekos:sticky-mobile-dismissed'
 const focusRing =
@@ -19,12 +20,20 @@ export function StickyMobileAction() {
   const rafRef = useRef<number | null>(null)
 
   useEffect(() => {
-    try {
-      if (sessionStorage.getItem(DISMISS_KEY) === '1') {
-        setIsDismissed(true)
+    let cancelled = false
+
+    queueMicrotask(() => {
+      try {
+        if (!cancelled && sessionStorage.getItem(DISMISS_KEY) === '1') {
+          setIsDismissed(true)
+        }
+      } catch {
+        // SSR / privacy mode — silently ignore
       }
-    } catch {
-      // SSR / privacy mode — silently ignore
+    })
+
+    return () => {
+      cancelled = true
     }
   }, [])
 
@@ -62,8 +71,10 @@ export function StickyMobileAction() {
   }, [isDismissed])
 
   const scrollToPurchase = () => {
-    const element = document.getElementById('purchase-section')
-    if (element) element.scrollIntoView({ behavior: 'smooth' })
+    void scrollToElement('purchase-section', {
+      offsetY: 72,
+      reducedMotion: reduced
+    })
   }
 
   const handleDismiss = () => {

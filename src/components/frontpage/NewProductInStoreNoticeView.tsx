@@ -32,7 +32,7 @@ export function NewProductInStoreNoticeView({
             <div className='relative flex h-32 w-full items-center justify-center overflow-visible'>
               <div
                 ref={logoBoxRef}
-                className='relative z-10 flex h-16 min-w-48 items-center justify-center rounded-2xl border border-mountain-view/20 bg-cloud-dancer px-8 opacity-0 shadow-[0_16px_40px_-28px_rgba(49,36,38,0.65)] will-change-transform'
+                className='relative z-10 flex h-16 min-w-48 items-center justify-center rounded-2xl border border-mountain-view/20 bg-cloud-dancer px-8 shadow-[0_16px_40px_-28px_rgba(49,36,38,0.65)] will-change-transform'
               >
                 <Image
                   src={IntersportLogo}
@@ -46,15 +46,12 @@ export function NewProductInStoreNoticeView({
               </div>
             </div>
 
-            <div
-              ref={contentRef}
-              className='flex flex-col items-center gap-6 opacity-0'
-            >
-              <h2 className='text-balance text-3xl font-bold tracking-tight text-maritime-blue sm:text-4xl'>
+            <div ref={contentRef} className='flex flex-col items-center gap-6'>
+              <h2 className='text-balance text-3xl font-bold tracking-tight font-utekos-text text-maritime-darkest/90 sm:text-4xl'>
                 På plass hos Intersport Laksevåg!
               </h2>
 
-              <p className='max-w-4xl text-balance text-lg leading-relaxed text-maritime-blue/90'>
+              <p className='max-w-4xl text-balance text-lg tracking-tight font-utekos-text text-maritime-darkest/90'>
                 Nå kan du se, prøve og kjenne på vår splitter nye{' '}
                 <Link
                   href={'/produkter/utekos-techdown' as Route}

@@ -1,12 +1,12 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'node:fs';
+import path from 'node:path';
 
 const mcpPath = path.join(process.env.HOME, 'Library/Application Support/Code/User/mcp.json');
 const logPath = '/Users/kristofferohnstadhjelmeland/.npm/_logs/2026-05-20T12_15_41_260Z-debug-0.log';
 
 function redact(str) {
     if (typeof str !== 'string') return str;
-    return str.replace(/(?:(?::|\\/\\/)|\\?|&|\\b(auth|token|key|secret|pass|pwd|authorization)=)([^\\s&\\/]+)/gi, (m, p1, p2) => p1 ? p1 + '=REDACTED' : m);
+    return str.replace(/(?:(?::|\/\/)|\?|&|\b(auth|token|key|secret|pass|pwd|authorization)=)([^\s&\/]+)/gi, (m, p1) => p1 ? p1 + '=REDACTED' : m);
 }
 
 function sanitize(str) {
@@ -41,7 +41,7 @@ if (!fs.existsSync(mcpPath)) {
                     if (args.length === 0) {
                         console.log('  [FLAG] npx command with no args');
                     } else if (!/^(?:@[a-z0-9-~][a-z0-9-._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/.test(args[0]) && !args[0].startsWith('-')) {
-                         console.log('  [FLAG] First arg for npx might not be a package');
+                    console.log('  [FLAG] First arg for npx might not be a package');
                     }
                 }
             }

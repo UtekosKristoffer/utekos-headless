@@ -1,7 +1,7 @@
 import { ComparisonTable } from './ComparisonTable'
 export function ComparisonSection() {
   return (
-    <section className='py-24 bg-sidebar-foreground'>
+    <section className='py-24 bg-dusted-peri'>
       <div className='container mx-auto px-4'>
         <div className='text-center mb-16'>
           <h2 className='text-3xl font-bold tracking-tight sm:text-4xl'>

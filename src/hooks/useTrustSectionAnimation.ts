@@ -17,8 +17,8 @@ export function useTrustSectionAnimation() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 70%', // Starter litt tidligere så brukeren ser det skje
-          toggleActions: 'play none none reverse'
+          start: 'top 78%',
+          once: true
         }
       })
 
@@ -48,7 +48,7 @@ export function useTrustSectionAnimation() {
           x: 0,
           autoAlpha: 1,
           duration: 0.8,
-          ease: 'back.out(1.2)' // Gir en liten "sprett"
+          ease: 'back.out(1.2)'
         },
         '-=0.4'
       )

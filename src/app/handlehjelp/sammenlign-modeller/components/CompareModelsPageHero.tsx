@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { Sparkles, Scale } from 'lucide-react'
+import { Scale } from 'lucide-react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 
@@ -9,7 +9,7 @@ gsap.registerPlugin(useGSAP)
 
 export function CompareModelsPageHero() {
   const container = useRef<HTMLElement>(null)
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const [, setMousePos] = useState({ x: 0, y: 0 })
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!container.current) return

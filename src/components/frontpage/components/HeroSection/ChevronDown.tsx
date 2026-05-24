@@ -1,36 +1,82 @@
 // Path: src/components/frontpage/components/HeroSection/ChevronDown.tsx
 'use client'
 
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import type { Route } from 'next'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
+import { loadGsap } from '@/lib/gsap/loadGsap'
 
 export function ChevronDownSection() {
   const container = useRef<HTMLAnchorElement>(null)
   const arrowRef = useRef<SVGSVGElement>(null)
   const textRef = useRef<HTMLSpanElement>(null)
+  const loopCleanupRef = useRef<(() => void) | null>(null)
 
-  useGSAP(
-    () => {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const startArrowLoop = async () => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return
+    }
+
+    const arrow = arrowRef.current
+    if (!arrow) {
+      return
+    }
+
+    const gsap = await loadGsap()
+    if (!arrowRef.current) {
+      return
+    }
+
+    loopCleanupRef.current?.()
+    gsap.killTweensOf(arrowRef.current)
+
+    const tween = gsap.to(arrowRef.current, {
+      x: 3,
+      duration: 1.2,
+      ease: 'sine.inOut',
+      yoyo: true,
+      repeat: -1
+    })
+
+    loopCleanupRef.current = () => {
+      tween.kill()
+    }
+  }
+
+  useEffect(() => {
+    let cancelled = false
+    let idleId: number | null = null
+    let timeoutId: ReturnType<typeof setTimeout> | null = null
+
+    const scheduleLoop = () => {
+      if (cancelled) {
         return
       }
 
-      gsap.to(arrowRef.current, {
-        x: 3,
-        duration: 1.2,
-        ease: 'sine.inOut',
-        yoyo: true,
-        repeat: -1
-      })
-    },
-    { scope: container }
-  )
+      void startArrowLoop()
+    }
 
-  const onEnter = () => {
+    if ('requestIdleCallback' in window) {
+      idleId = window.requestIdleCallback(scheduleLoop, { timeout: 1200 })
+    } else {
+      timeoutId = setTimeout(scheduleLoop, 450)
+    }
+
+    return () => {
+      cancelled = true
+      if (idleId !== null) {
+        window.cancelIdleCallback(idleId)
+      }
+      if (timeoutId !== null) {
+        clearTimeout(timeoutId)
+      }
+      loopCleanupRef.current?.()
+      loopCleanupRef.current = null
+    }
+  }, [])
+
+  const onEnter = async () => {
     const arrow = arrowRef.current
     const text = textRef.current
     const hoverLine = container.current?.querySelector('.hover-line')
@@ -39,6 +85,8 @@ export function ChevronDownSection() {
       return
     }
 
+    const gsap = await loadGsap()
+    loopCleanupRef.current?.()
     gsap.killTweensOf(arrow)
     gsap.killTweensOf(text)
 
@@ -62,7 +110,7 @@ export function ChevronDownSection() {
     }
   }
 
-  const onLeave = () => {
+  const onLeave = async () => {
     const arrow = arrowRef.current
     const text = textRef.current
     const hoverLine = container.current?.querySelector('.hover-line')
@@ -70,6 +118,8 @@ export function ChevronDownSection() {
     if (!arrow || !text) {
       return
     }
+
+    const gsap = await loadGsap()
 
     gsap.to(text, {
       color: 'var(--cloud-dancer)',
@@ -89,13 +139,7 @@ export function ChevronDownSection() {
           return
         }
 
-        gsap.to(arrow, {
-          x: 3,
-          duration: 1.2,
-          ease: 'sine.inOut',
-          yoyo: true,
-          repeat: -1
-        })
+        void startArrowLoop()
       }
     })
 
@@ -108,8 +152,12 @@ export function ChevronDownSection() {
     <Link
       href={'/skreddersy-varmen' as Route}
       ref={container}
-      onMouseEnter={onEnter}
-      onMouseLeave={onLeave}
+      onMouseEnter={() => {
+        void onEnter()
+      }}
+      onMouseLeave={() => {
+        void onLeave()
+      }}
       className='gsap-cta group relative inline-flex min-h-11 items-center justify-center px-5 py-4'
       aria-label='Gå til skreddersy varmen'
       data-track='ReadMoreHeroClick'

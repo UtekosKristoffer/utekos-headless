@@ -39,10 +39,10 @@ export const InfoCardStackView = forwardRef<
   // ref her er containeren for hele stacken om nødvendig, men vi animerer kortene direkte
 
   const cardBaseClasses =
-    'absolute w-full rounded-lg border border-neutral-800 shadow-xl will-change-transform opacity-0' // Start opacity 0 for GSAP
+    'absolute w-full rounded-lg border border-neutral-800 shadow-xl will-change-transform'
 
   return (
-    <div className='relative h-72 w-full overflow-visible sm:h-80'>
+    <div ref={ref} className='relative h-72 w-full overflow-visible sm:h-80'>
       {/* KORT 1: En trygg handel */}
       <div
         ref={card1Ref}

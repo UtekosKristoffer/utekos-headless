@@ -23,7 +23,13 @@ export default function TechTeaserMotion({ targetId }: Props) {
         const mod = await import('./mountTechTeaser')
         if (cancelled) return
 
-        cleanupRef.current = mod.mountTechTeaser(root)
+        const cleanup = await mod.mountTechTeaser(root)
+        if (cancelled) {
+          cleanup()
+          return
+        }
+
+        cleanupRef.current = cleanup
       },
       { rootMargin: '200px 0px' }
     )

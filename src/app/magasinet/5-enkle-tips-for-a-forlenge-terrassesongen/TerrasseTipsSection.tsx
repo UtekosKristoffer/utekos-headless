@@ -126,12 +126,12 @@ export function TerrasseTipsSection() {
           <h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
             5 enkle tips for å forlenge terrassesongen
           </h2>
-          <p className='mx-auto mt-4 max-w-3xl text-lg text-muted-foreground'>
+          <p className='mx-auto mt-4 max-w-3xl text-lg text-cloud-dancer/90'>
             Med noen enkle grep kan du nyte terrassen din langt utover sommeren.
           </p>
         </AnimatedBlock>
 
-        <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-6'>
+        <div className='flex flex-col gap-6'>
           {tips.map((tip, i) => (
             <AnimatedBlock
               key={tip.title}

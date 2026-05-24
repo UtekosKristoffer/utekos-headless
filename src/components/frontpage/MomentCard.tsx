@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@/lib/utils/className'
 import { useInView } from '@/hooks/useInView'
 import type { Moment, MomentTheme } from '@/components/frontpage/utils/moments'

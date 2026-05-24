@@ -1,11 +1,7 @@
-'use client'
-
-import { useSocialProofAnimation } from '@/hooks/useSocialProofAnimation'
 import { SocialProofHeaderView } from './SocialProofHeaderView'
+import { SocialProofHeaderMotion } from './SocialProofHeaderMotion'
 
 export function SocialProofHeader() {
-  const { containerRef, titleRef, textRef } = useSocialProofAnimation()
-
   const descriptionContent = (
     <p className='leading-relaxed font-utekos-text tracking-tight text-cloud-dancer/90'>
       Våre beste produktutviklere er{' '}
@@ -20,19 +16,20 @@ export function SocialProofHeader() {
       skape flere og bedre{' '}
       <span className='relative inline-block font-utekos-text tracking-tight font-medium text-cloud-dancer/90'>
         minner utendørs
-        <span className='gsap-underline absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-mountain-view via-comfrey to-mountain-view opacity-80' />
+        <span className='gsap-underline absolute bottom-0 left-0 h-[2px] w-full origin-left scale-x-0 bg-gradient-to-r from-mountain-view via-comfrey to-mountain-view opacity-80 will-change-transform' />
       </span>
       .
     </p>
   )
 
   return (
-    <SocialProofHeaderView
-      ref={containerRef}
-      titleRef={titleRef}
-      textRef={textRef}
-      title='Drevet av ekte opplevelser'
-      description={descriptionContent}
-    />
+    <>
+      <SocialProofHeaderView
+        id='social-proof-header'
+        title='Drevet av ekte opplevelser'
+        description={descriptionContent}
+      />
+      <SocialProofHeaderMotion />
+    </>
   )
 }

@@ -7,26 +7,24 @@ export function ShippingReturnsHeader() {
     <header className='mx-auto max-w-5xl text-center'>
       <nav
         aria-label='Brødsmule'
-        className='mb-8 flex items-center justify-center gap-2 text-sm leading-[1.4] tracking-tight text-cloud-dancer'
+        className='mb-8 flex items-center justify-center gap-2 text-sm leading-[1.4] tracking-tight text-maritime-darkest/80'
       >
-        <Link href='/' className='hover:text-cloud-dancer'>
+        <Link href='/' className='hover:text-maritime-darkest/80'>
           Forside
         </Link>
         <span aria-hidden='true'>/</span>
-        <span className='text-cloud-dancer'>
-          Frakt og const {} = this.props;
-        </span>
+        <span className='text-maritime-darkest/80'>Frakt og retur</span>
       </nav>
       <BrandBadge
         label='Fri frakt over 999 kr'
         backgroundColor='var(--ancient-water)'
         textColor='var(--maritime-darkest)'
-        className='mb-6 border border-cloud-dancer/14 px-5 py-2 text-sm leading-[1.4] font-semibold tracking-tight'
+        className='mb-6 border border-cloud-dancer/6 px-8 py-4 text-sm leading-[1.45] tracking-tight'
       />
-      <h1 className='text-3xl font-bold leading-[1.20] tracking-tight font-google-sans text-cloud-dancer sm:text-4xl'>
-        Frakt og retur - Enket og trygt
+      <h1 className='text-4xl font-bold leading-[1.45] tracking-tight font-google-sans text-maritime-darkest sm:text-4xl md:text-5xl lg:text-6xl'>
+        Frakt og retur - enkelt og trygt
       </h1>
-      <p className='mx-auto mt-4 font-utekos-text max-w-3xl text-lg leading-[1.45] tracking-tight text-cloud-dancer/80'>
+      <p className='mx-auto mt-4 font-utekos-text max-w-3xl text-lg font-medium md:text-xl leading-[1.45] tracking-tight text-maritime-darkest'>
         Vi ønsker at din handleopplevelse skal være like trygg og komfortabel
         som produktene våre. Her finner du alt du trenger å vite om vår levering
         og returprosess.

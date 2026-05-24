@@ -1,13 +1,11 @@
 'use client'
 
 import { ArrowRight } from 'lucide-react'
+import { scrollToElement } from '@/lib/gsap/scrollToElement'
 
 export function ScrollToTextLink() {
   const scrollToModel = () => {
-    const element = document.getElementById('section-solution')
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
+    void scrollToElement('section-solution', { offsetY: 80 })
   }
 
   return (

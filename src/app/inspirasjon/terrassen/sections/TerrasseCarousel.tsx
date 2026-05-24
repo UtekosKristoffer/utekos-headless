@@ -19,11 +19,19 @@ import {
 } from '@/components/ui/carousel'
 import { cn } from '@/lib/utils/className'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { createGsapDevTools } from '@/lib/gsap/createGsapDevTools'
+import { loadScrollTrigger } from '@/lib/gsap/loadScrollTrigger'
 
-gsap.registerPlugin(useGSAP, ScrollTrigger)
+function setCarouselIntroVisible(container: HTMLElement) {
+  container
+    .querySelectorAll<HTMLElement>('.gsap-header, .gsap-title, .gsap-carousel')
+    .forEach(element => {
+      element.style.opacity = '1'
+      element.style.visibility = 'visible'
+      element.style.transform = ''
+      element.style.willChange = ''
+    })
+}
 
 export function TerrasseCarousel() {
   const [api, setApi] = React.useState<CarouselApi>()
@@ -38,58 +46,122 @@ export function TerrasseCarousel() {
     })
   )
 
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
+  React.useEffect(() => {
+    const container = containerRef.current
+    if (!container) {
+      return
+    }
 
-      mm.add('(prefers-reduced-motion: reduce)', () => {
-        gsap.set(['.gsap-header', '.gsap-title', '.gsap-carousel'], {
-          autoAlpha: 1,
-          y: 0,
-          scale: 1
+    let cleanup: (() => void) | null = null
+    let cancelled = false
+
+    const mountAnimation = async () => {
+      const { gsap, ScrollTrigger } = await loadScrollTrigger()
+      if (cancelled || !containerRef.current) {
+        return
+      }
+
+      const context = gsap.context(() => {
+        const query = gsap.utils.selector(container)
+        const media = gsap.matchMedia()
+
+        media.add('(prefers-reduced-motion: reduce)', () => {
+          gsap.set(query('.gsap-header, .gsap-title, .gsap-carousel'), {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            clearProps: 'willChange'
+          })
         })
-      })
 
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
+        media.add('(prefers-reduced-motion: no-preference)', () => {
+          const timeline = gsap.timeline({
+            id: 'terrasse-carousel-intro',
+            scrollTrigger: {
+              trigger: container,
+              start: 'top 80%',
+              once: true,
+              toggleActions: 'play none none none'
+            }
+          })
+
+          timeline.fromTo(
+            '.gsap-header',
+            { y: 20, autoAlpha: 0, willChange: 'transform, opacity' },
+            {
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.6,
+              ease: 'power2.out',
+              clearProps: 'willChange'
+            }
+          )
+
+          timeline.fromTo(
+            '.gsap-title',
+            { y: 30, autoAlpha: 0, willChange: 'transform, opacity' },
+            {
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.8,
+              ease: 'power2.out',
+              clearProps: 'willChange'
+            },
+            '-=0.4'
+          )
+
+          timeline.fromTo(
+            '.gsap-carousel',
+            {
+              y: 40,
+              autoAlpha: 0,
+              scale: 0.98,
+              willChange: 'transform, opacity'
+            },
+            {
+              y: 0,
+              autoAlpha: 1,
+              scale: 1,
+              duration: 1,
+              ease: 'power3.out',
+              clearProps: 'willChange'
+            },
+            '-=0.6'
+          )
+
+          void createGsapDevTools({
+            animation: timeline,
+            id: 'terrasse-carousel-intro'
+          })
+
+          return () => {
+            timeline.kill()
           }
         })
 
-        tl.fromTo(
-          '.gsap-header',
-          { y: 20, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' }
-        )
-
-        tl.fromTo(
-          '.gsap-title',
-          { y: 30, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.8, ease: 'power2.out' },
-          '-=0.4'
-        )
-
-        tl.fromTo(
-          '.gsap-carousel',
-          { y: 40, autoAlpha: 0, scale: 0.98 },
-          { y: 0, autoAlpha: 1, scale: 1, duration: 1, ease: 'power3.out' },
-          '-=0.6'
-        )
+        ScrollTrigger.refresh(true)
 
         return () => {
-          tl.kill()
+          media.revert()
         }
-      })
+      }, container)
 
-      return () => {
-        mm.revert()
+      cleanup = () => {
+        context.revert()
       }
-    },
-    { scope: containerRef }
-  )
+    }
+
+    void mountAnimation()
+
+    return () => {
+      cancelled = true
+      cleanup?.()
+      if (!container.isConnected) {
+        return
+      }
+      setCarouselIntroVisible(container)
+    }
+  }, [])
 
   React.useEffect(() => {
     if (!api) {
