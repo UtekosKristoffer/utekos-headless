@@ -104,6 +104,58 @@ export function useNewProductLaunchAnimations() {
 
         ScrollTrigger.saveStyles(animatedElements)
 
+        const getScrollY = () =>
+          window.scrollY
+          || window.pageYOffset
+          || document.documentElement.scrollTop
+          || 0
+
+        const getStageDocumentTop = () =>
+          stage.getBoundingClientRect().top + getScrollY()
+
+        const getDesktopSafeTop = () =>
+          Math.round(Math.min(132, Math.max(88, window.innerHeight * 0.11)))
+
+        const getDesktopRevealStart = () =>
+          Math.round(getStageDocumentTop() - window.innerHeight * 0.96)
+
+        const getDesktopRevealEnd = () => {
+          const start = getDesktopRevealStart()
+          const stageHeight = stage.offsetHeight
+          const safeTop = getDesktopSafeTop()
+          const fullyVisibleTop = window.innerHeight - stageHeight
+
+          const targetViewportTop =
+            stageHeight <= window.innerHeight - safeTop ?
+              Math.max(safeTop, fullyVisibleTop)
+            : safeTop
+
+          const naturalEnd = getStageDocumentTop() - targetViewportTop
+          const minimumRevealDistance = Math.min(window.innerHeight * 0.52, 620)
+
+          return Math.round(Math.max(naturalEnd, start + minimumRevealDistance))
+        }
+
+        const getCompactDesktopRevealStart = () =>
+          Math.round(getStageDocumentTop() - window.innerHeight * 0.94)
+
+        const getCompactDesktopRevealEnd = () => {
+          const start = getCompactDesktopRevealStart()
+          const stageHeight = stage.offsetHeight
+          const safeTop = getDesktopSafeTop()
+          const fullyVisibleTop = window.innerHeight - stageHeight
+
+          const targetViewportTop =
+            stageHeight <= window.innerHeight - safeTop ?
+              Math.max(safeTop, fullyVisibleTop)
+            : safeTop
+
+          const naturalEnd = getStageDocumentTop() - targetViewportTop
+          const minimumRevealDistance = Math.min(window.innerHeight * 0.46, 540)
+
+          return Math.round(Math.max(naturalEnd, start + minimumRevealDistance))
+        }
+
         const setInitialState = (isDesktop: boolean) => {
           gsap.set(animatedElements, {
             autoAlpha: 0,
@@ -236,13 +288,13 @@ export function useNewProductLaunchAnimations() {
 
           const revealTimeline = gsap.timeline({
             defaults: {
-              ease: 'power3.out'
+              ease: 'none'
             },
             scrollTrigger: {
               trigger: stage,
-              start: 'top 98%',
-              end: 'top -90%',
-              scrub: true,
+              start: getDesktopRevealStart,
+              end: getDesktopRevealEnd,
+              scrub: 0.85,
               invalidateOnRefresh: true,
               markers: false
             },
@@ -255,29 +307,12 @@ export function useNewProductLaunchAnimations() {
 
           buildTimeline(revealTimeline, true)
 
-          const pinTrigger = ScrollTrigger.create({
-            trigger: stage,
-            pin: true,
-
-            // Catch the section before it reaches the header so the pin feels intentional.
-            start: 'top 30%',
-
-            // Release shortly after the final reveal so the section never sits idle.
-            end: () => `+=${Math.max(window.innerHeight * 0.98, 700)}`,
-
-            pinSpacing: true,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-            markers: false
-          })
-
           requestAnimationFrame(() => {
             ScrollTrigger.refresh()
           })
 
           return () => {
             revealTimeline.kill()
-            pinTrigger.kill()
           }
         })
 
@@ -287,11 +322,14 @@ export function useNewProductLaunchAnimations() {
             setInitialState(true)
 
             const revealTimeline = gsap.timeline({
+              defaults: {
+                ease: 'none'
+              },
               scrollTrigger: {
                 trigger: stage,
-                start: 'top 98%',
-                end: 'bottom 24%',
-                scrub: true,
+                start: getCompactDesktopRevealStart,
+                end: getCompactDesktopRevealEnd,
+                scrub: 0.75,
                 invalidateOnRefresh: true,
                 markers: false
               },
@@ -304,24 +342,12 @@ export function useNewProductLaunchAnimations() {
 
             buildTimeline(revealTimeline, true)
 
-            const pinTrigger = ScrollTrigger.create({
-              trigger: stage,
-              pin: true,
-              start: 'bottom bottom',
-              end: () => `+=${Math.max(window.innerHeight * 0.34, 260)}`,
-              pinSpacing: true,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
-              markers: false
-            })
-
             requestAnimationFrame(() => {
               ScrollTrigger.refresh()
             })
 
             return () => {
               revealTimeline.kill()
-              pinTrigger.kill()
             }
           }
         )
