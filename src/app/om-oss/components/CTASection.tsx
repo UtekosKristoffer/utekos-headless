@@ -45,7 +45,7 @@ export function CTASection() {
               delay='0.16s'
               threshold={0.2}
             >
-              <p className='mx-auto mt-4 max-w-2xl text-lg leading-[1.45] tracking-tight font-utekos-text text-maritime-blue/74 md:text-xl'>
+              <p className='mx-auto mt-4 max-w-2xl text-lg leading-[1.45] tracking-tight font-utekos-text text-maritime-darkest md:text-xl'>
                 Opplev hvordan ekte norsk design kan forvandle en kjølig kveld
                 til ditt favorittøyeblikk.
               </p>
@@ -71,19 +71,19 @@ export function CTASection() {
               </BrandBadge>
             </AnimatedBlock>
             <AnimatedBlock
-              className='mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm text-maritime-blue/64 will-animate-fade-in-up'
+              className='mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-md text-maritime-darkest will-animate-fade-in-up'
               delay='0.32s'
               threshold={0.2}
             >
-              <div className='flex items-center gap-2'>
-                <Check className='size-4 text-dusted-peri' />
+              <div className='flex text-md items-center gap-2'>
+                <Check className='size-4' />
                 <span>Skapt for norske forhold</span>
               </div>
-              <div className='flex items-center gap-2'>
-                <Check className='size-4 text-dusted-peri' />
+              <div className='flex text-md items-center gap-2'>
+                <Check className='size-4' />
                 <span>Fri frakt over 999,-</span>
               </div>
-              <div className='flex items-center gap-2'>
+              <div className='flex text-md items-center gap-2'>
                 <span>Trygg handel med</span>
                 <div className='ml-1 flex items-center gap-3 opacity-80 transition-opacity hover:opacity-100'>
                   <VippsLogo className='h-[16px] w-auto' />
