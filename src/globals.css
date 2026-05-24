@@ -69,7 +69,6 @@
   --maritime-dark: oklch(0.1784 0.0366 279.42);
   --maritime-darker: oklch(0.1584 0.0366 279.42);
   --maritime-darkest: oklch(0.1284 0.0366 279.42);
-
   --font-brand-sans: var(--font-google-sans), system-ui, sans-serif;
   --font-utekos-text: var(--font-utekos-text);
   --utekos-title-line-height: 0.95;
@@ -238,6 +237,7 @@
   --color-bleached-mauve: var(--bleached-mauve);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
   --font-brand-sans: var(--font-google-sans), system-ui, sans-serif;
   --font-utekos-text: var(--font-utekos-text);
   --color-button: var(--button);
@@ -265,66 +265,66 @@
   --animate-chip-pulse: chip-pulse 2.6s infinite ease-in-out;
   --animate-blinking-cursor: blinking-cursor 1.2s infinite step-end;
   --animate-blob-pulse: blob-pulse 5s infinite ease-in-out;
+}
 
-  @keyframes slideInDown {
-    from {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
+@keyframes slideInDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
   }
-
-  @keyframes blob-pulse {
-    0%,
-    100% {
-      transform: scale(1);
-      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-    }
-    50% {
-      transform: scale(1.15);
-      border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
-    }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
+}
 
-  @keyframes blinking-cursor {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
+@keyframes blob-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   }
-
-  @keyframes wander {
-    0%,
-    100% {
-      transform: translate(0, 0);
-    }
-    25% {
-      transform: translate(4px, -3px);
-    }
-    50% {
-      transform: translate(-3px, 5px);
-    }
-    75% {
-      transform: translate(-5px, -3px);
-    }
+  50% {
+    transform: scale(1.15);
+    border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
   }
+}
 
-  @keyframes chip-pulse {
-    0%,
-    100% {
-      transform: scale(1);
-      opacity: 0.9;
-    }
-    50% {
-      transform: scale(1.02);
-      opacity: 1;
-    }
+@keyframes blinking-cursor {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes wander {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(4px, -3px);
+  }
+  50% {
+    transform: translate(-3px, 5px);
+  }
+  75% {
+    transform: translate(-5px, -3px);
+  }
+}
+
+@keyframes chip-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
   }
 }
 
