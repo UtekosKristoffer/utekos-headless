@@ -9,26 +9,26 @@ type LayerType = 'outer' | 'insulation' | 'inner' | 'function'
 
 // Felles logikk for farger og tema
 const LAYER_THEMES = {
-  cyan: {
-    border: 'border-cyan-500/50',
-    bg: 'bg-cyan-950/80',
-    text: 'text-cyan-400',
-    glow: 'shadow-cyan-900/40',
-    gradient: 'from-cyan-500/20'
+  ancient: {
+    border: 'border-ancient-water/30',
+    bg: 'bg-maritime-blue/80',
+    text: 'text-ancient-water',
+    glow: 'shadow-ancient-water/20',
+    gradient: 'from-ancient-water/10'
   },
-  orange: {
-    border: 'border-orange-500/50',
-    bg: 'bg-orange-950/80',
-    text: 'text-orange-400',
-    glow: 'shadow-orange-900/40',
-    gradient: 'from-orange-500/20'
+  cloud: {
+    border: 'border-cloud-dancer/30',
+    bg: 'bg-maritime-blue/80',
+    text: 'text-cloud-dancer/90',
+    glow: 'shadow-cloud-dancer/20',
+    gradient: 'from-cloud-dancer/10'
   },
-  violet: {
-    border: 'border-violet-500/50',
-    bg: 'bg-violet-950/80',
-    text: 'text-violet-400',
-    glow: 'shadow-violet-900/40',
-    gradient: 'from-violet-500/20'
+  peri: {
+    border: 'border-dusted-peri/30',
+    bg: 'bg-maritime-blue/80',
+    text: 'text-dusted-peri',
+    glow: 'shadow-dusted-peri/20',
+    gradient: 'from-dusted-peri/10'
   }
 }
 
@@ -68,10 +68,10 @@ export function ProductLayersVisual({ activeTech }: { activeTech: string }) {
           title='Protective Shell'
           subtitle='Værbarriere og slitestyrke'
           icon={ShieldCheck}
-          color='cyan'
+          color='ancient'
         >
           <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
-          <div className='absolute right-4 top-4 animate-pulse text-cyan-400 opacity-50'>
+          <div className='absolute right-4 top-4 animate-pulse text-ancient-water opacity-50'>
             <Droplet className='h-5 w-5' />
           </div>
         </MaterialCard>
@@ -81,9 +81,9 @@ export function ProductLayersVisual({ activeTech }: { activeTech: string }) {
           title='Thermal Core'
           subtitle='Varme og loft'
           icon={Thermometer}
-          color='orange'
+          color='cloud'
         >
-          <div className='absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-transparent' />
+          <div className='absolute inset-0 bg-gradient-to-br from-cloud-dancer/10 via-transparent to-transparent' />
         </MaterialCard>
 
         <MaterialCard
@@ -91,9 +91,9 @@ export function ProductLayersVisual({ activeTech }: { activeTech: string }) {
           title='Comfort Lining'
           subtitle='Pustende og myk'
           icon={Sparkles}
-          color='violet'
+          color='peri'
         >
-          <div className='absolute inset-0 bg-gradient-to-r from-transparent via-violet-500/5 to-transparent skew-x-12' />
+          <div className='absolute inset-0 bg-gradient-to-r from-transparent via-dusted-peri/10 to-transparent skew-x-12' />
         </MaterialCard>
 
         <div
@@ -104,14 +104,14 @@ export function ProductLayersVisual({ activeTech }: { activeTech: string }) {
             : 'opacity-0 translate-x-8 pointer-events-none'
           )}
         >
-          <div className='flex flex-col items-center gap-2 rounded-xl border border-sky-500/30 bg-neutral-900/90 p-4 shadow-2xl backdrop-blur-md'>
-            <div className='rounded-full bg-sky-500/20 p-2 text-sky-400'>
+          <div className='flex flex-col items-center gap-2 rounded-xl border border-ancient-water/30 bg-maritime-blue/90 p-4 shadow-2xl backdrop-blur-md'>
+            <div className='rounded-full bg-ancient-water/20 p-2 text-ancient-water'>
               <Zap className='h-6 w-6' />
             </div>
-            <div className='text-xs font-bold uppercase tracking-wider text-sky-500'>
+            <div className='text-sm font-bold tracking-wider text-ancient-water'>
               System
             </div>
-            <div className='h-16 w-0.5 bg-gradient-to-b from-sky-500/50 to-transparent' />
+            <div className='h-16 w-0.5 bg-gradient-to-b from-ancient-water/50 to-transparent' />
           </div>
         </div>
       </div>
@@ -132,25 +132,25 @@ export function MobileProductLayersVisual({
     outer: {
       title: 'Outer Shell',
       icon: ShieldCheck,
-      color: 'cyan' as const,
+      color: 'ancient' as const,
       index: 0
     },
     insulation: {
       title: 'Thermal Core',
       icon: Thermometer,
-      color: 'orange' as const,
+      color: 'cloud' as const,
       index: 1
     },
     inner: {
       title: 'Comfort Lining',
       icon: Sparkles,
-      color: 'violet' as const,
+      color: 'peri' as const,
       index: 2
     },
     function: {
       title: 'System Tech',
       icon: Zap,
-      color: 'cyan' as const,
+      color: 'ancient' as const,
       index: 3
     }
   }
@@ -190,12 +190,7 @@ export function MobileProductLayersVisual({
 
         {/* Tekst */}
         <div className='flex-1 min-w-0'>
-          <div
-            className={cn(
-              'text-[10px] font-bold uppercase tracking-widest',
-              theme.text
-            )}
-          >
+          <div className={cn('text-sm font-bold tracking-widest', theme.text)}>
             Active Layer
           </div>
           <div className='truncate text-lg font-bold text-white'>
@@ -233,7 +228,7 @@ function MaterialCard({
   title: string
   subtitle: string
   icon: any
-  color: 'cyan' | 'orange' | 'violet'
+  color: 'ancient' | 'cloud' | 'peri'
   children?: React.ReactNode
 }) {
   const theme = LAYER_THEMES[color]
@@ -242,9 +237,9 @@ function MaterialCard({
     <div
       className={cn(
         'relative flex items-center gap-6 overflow-hidden rounded-2xl border p-6 transition-all duration-500 ease-out',
-        'border-white/5 bg-neutral-900/80 backdrop-blur-sm',
+        'border-white/5 bg-maritime-blue/80 backdrop-blur-sm',
         isActive ?
-          `scale-105 ${theme.border} bg-neutral-900 shadow-2xl ${theme.glow} z-10 opacity-100 translate-y-0`
+          `scale-105 ${theme.border} bg-maritime-blue shadow-2xl ${theme.glow} z-10 opacity-100 translate-y-0`
         : 'scale-95 opacity-40 hover:opacity-60 z-0 grayscale-[0.5]'
       )}
     >
@@ -260,7 +255,7 @@ function MaterialCard({
           'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border transition-colors duration-300',
           isActive ?
             `${theme.border} bg-white/5 ${theme.text}`
-          : 'border-white/10 bg-neutral-800 text-neutral-500'
+          : 'border-white/10 bg-maritime-blue text-cloud-dancer/70'
         )}
       >
         <Icon className='h-6 w-6' />
@@ -270,7 +265,7 @@ function MaterialCard({
         <span
           className={cn(
             'text-xs font-bold uppercase tracking-widest transition-colors',
-            isActive ? theme.text : 'text-neutral-500'
+            isActive ? theme.text : 'text-cloud-dancer/70'
           )}
         >
           {title}
@@ -278,7 +273,7 @@ function MaterialCard({
         <span
           className={cn(
             'text-lg font-semibold transition-colors',
-            isActive ? 'text-white' : 'text-neutral-400'
+            isActive ? 'text-white' : 'text-cloud-dancer/70'
           )}
         >
           {subtitle}

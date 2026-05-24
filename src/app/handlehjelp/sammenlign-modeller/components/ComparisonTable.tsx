@@ -1,89 +1,54 @@
-import {
-  Check,
-  Thermometer,
-  Feather,
-  Droplets,
-  WashingMachine,
-  Star,
-  Layers,
-  Shield
-} from 'lucide-react'
-import { comparisonData } from '../utils/comparisonData'
-import { AnimatedBlock } from '@/components/AnimatedBlock'
-import { cn } from '@/lib/utils/className'
+// Path: src/app/handlehjelp/sammenlign-modeller/components/ComparisonTable.tsx
+import { comparisonRows, modelRecommendations } from '../utils/comparisonData'
 import { TableCellContent } from './TableCellContent'
-
-const iconMap = {
-  'star': Star,
-  'thermometer': Thermometer,
-  'droplets': Droplets,
-  'feather': Feather,
-  'washing-machine': WashingMachine,
-  'layers': Layers,
-  'shield': Shield,
-  'check': Check
-}
-type IconName = keyof typeof iconMap
-
-function IconRenderer({
-  name,
-  className
-}: {
-  name: IconName
-  className?: string
-}) {
-  const Icon = iconMap[name]
-  return Icon ? <Icon className={className} /> : null
-}
 
 export function ComparisonTable() {
   return (
-    <AnimatedBlock
-      className='will-animate-fade-in-up w-full overflow-x-auto'
-      threshold={0.3}
-    >
-      <table className='w-full min-w-[800px] border-collapse text-left'>
+    <div className='max-w-full overflow-x-auto border border-maritime-blue/14 bg-cloud-dancer [contain:paint]'>
+      <table className='w-full min-w-[880px] border-collapse text-left'>
+        <caption className='sr-only'>
+          Sammenligning av Utekos Dun, Utekos Mikrofiber og Utekos TechDown
+        </caption>
         <thead>
-          <tr className='border-b border-neutral-800'>
-            <th className='w-[25%] p-4 font-semibold'>Egenskap</th>
-            <th className='w-[25%] p-4 text-center font-semibold'>
-              Utekos Dun™
+          <tr className='bg-maritime-blue text-cloud-dancer'>
+            <th
+              scope='col'
+              className='w-[20%] p-5 font-google-sans text-base font-bold tracking-[-0.01em]'
+            >
+              Egenskap
             </th>
-            <th className='w-[25%] p-4 text-center font-semibold'>
-              Utekos Mikrofiber™
-            </th>
-            <th className='w-[25%] p-4 text-center font-semibold'>
-              Utekos TechDown™
-            </th>
+            {modelRecommendations.map(model => (
+              <th
+                key={model.key}
+                scope='col'
+                className='w-[26.6%] p-5 text-center font-google-sans text-base font-bold tracking-[-0.01em]'
+              >
+                {model.name}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {comparisonData.map(
-            ({ feature, icon, dun, mikrofiber, techdown, iconColor }) => (
-              <tr key={feature} className='border-b border-neutral-800'>
-                <td className='p-4 align-top'>
-                  <div className='flex items-center gap-3'>
-                    <IconRenderer
-                      name={icon as IconName}
-                      className={cn('h-5 w-5 flex-shrink-0', iconColor)}
-                    />
-                    <span className='font-semibold'>{feature}</span>
-                  </div>
+          {comparisonRows.map(row => (
+            <tr key={row.feature} className='border-b border-maritime-blue/12'>
+              <th
+                scope='row'
+                className='p-5 align-top font-google-sans text-base font-bold leading-[1.05] tracking-[-0.01em] text-maritime-blue'
+              >
+                <span>{row.feature}</span>
+                <span className='mt-2 block font-utekos-text text-xs font-medium leading-[1.35] tracking-tight text-maritime-blue/62'>
+                  {row.shortAnswer}
+                </span>
+              </th>
+              {modelRecommendations.map(model => (
+                <td key={model.key} className='p-5 text-center align-top'>
+                  <TableCellContent value={row.values[model.key]} />
                 </td>
-                <td className='p-4 text-center align-top'>
-                  <TableCellContent value={dun} />
-                </td>
-                <td className='p-4 text-center align-top'>
-                  <TableCellContent value={mikrofiber} />
-                </td>
-                <td className='p-4 text-center align-top'>
-                  <TableCellContent value={techdown} />
-                </td>
-              </tr>
-            )
-          )}
+              ))}
+            </tr>
+          ))}
         </tbody>
       </table>
-    </AnimatedBlock>
+    </div>
   )
 }

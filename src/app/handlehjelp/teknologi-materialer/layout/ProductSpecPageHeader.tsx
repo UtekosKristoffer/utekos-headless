@@ -1,10 +1,10 @@
 export function ProductSpecPageHeader() {
   return (
-    <section className='mx-auto mt-24 max-w-3xl text-center'>
-      <h1 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
+    <section className='mx-auto mt-24 max-w-4xl text-center px-4'>
+      <h1 className='text-5xl font-bold tracking-tight text-cloud-dancer sm:text-7xl font-google-sans leading-tight'>
         Kvalitet i hver fiber
       </h1>
-      <p className='mt-4 text-lg text-foreground/80'>
+      <p className='mt-6 text-xl text-cloud-dancer/90 font-utekos-text leading-relaxed max-w-2xl mx-auto'>
         Vi er kompromissløse i våre materialvalg fordi vi vet at ekte utekos
         starter med total komfort. Her kan du utforske funksjonaliteten og
         teknologien som revolusjonerer utendørsopplevelsen.

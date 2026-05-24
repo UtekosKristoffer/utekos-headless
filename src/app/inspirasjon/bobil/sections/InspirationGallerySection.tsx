@@ -1,7 +1,6 @@
-// Path: src/app/inspirasjon/bobil/sections/SocialProofSection.tsx
+// Path: src/app/inspirasjon/bobil/sections/InspirationGallerySection.tsx
 
 import Image from 'next/image'
-import { AspectRatio } from '@/components/ui/aspect-ratio'
 import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import {
   Carousel,
@@ -42,14 +41,14 @@ const galleryImages = [
 
 export function InspirationGallerySection() {
   return (
-    <section className='py-24'>
+    <section className='bg-maritime-blue py-24 text-cloud-dancer'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='text-fluid-display mb-4 inline-flex flex-wrap items-baseline justify-center gap-x-[0.18em] leading-[0.95] font-bold tracking-normal'>
+          <h2 className='text-fluid-display mb-4 inline-flex flex-wrap items-baseline justify-center gap-x-[0.18em] font-brand-sans font-bold leading-[0.95] tracking-[-0.01em]'>
             <UtekosWordmark className='h-[0.78em] w-auto translate-y-[0.06em]' />
             <span>i sitt rette element</span>
           </h2>
-          <p className='mx-auto mb-12 max-w-2xl text-lg leading-[1.45] tracking-normal text-cloud-dancer'>
+          <p className='mx-auto mb-12 max-w-2xl font-utekos-text text-lg leading-[1.45] tracking-[-0.02em] text-overcast'>
             Fra morgenkaffen i soloppgang til sene kvelder under stjernene. La
             deg inspirere av ekte øyeblikk fra bobillivet.
           </p>
@@ -68,25 +67,24 @@ export function InspirationGallerySection() {
                 key={index}
                 className='pl-4 md:basis-1/2 lg:basis-1/3'
               >
-                <div className='group p-1'>
-                  <AspectRatio
-                    ratio={4 / 5}
-                    className='relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest'
-                  >
+                <div className='group p-1 flex flex-col h-full'>
+                  <div className='relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest aspect-[4/5] shrink-0'>
                     <Image
                       src={image.src}
                       alt={image.alt}
-                      fill
-                      className='transition-transform duration-500 group-hover:scale-105'
-                      style={{ objectFit: 'cover' }}
+                      width={400}
+                      height={500}
+                      className='h-full w-full object-cover transition-transform duration-500 group-hover:scale-105'
                       sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                     />
-                  </AspectRatio>
-                  <div className='pt-4 text-left'>
-                    <h4 className='leading-[1] font-sans font-semibold tracking-normal'>
+                  </div>
+                  <div className='pt-4 text-left flex-1'>
+                    <h4 className='font-brand-sans font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer'>
                       {image.title}
                     </h4>
-                    <p className='text-sm text-overcast'>{image.description}</p>
+                    <p className='mt-2 font-utekos-text text-sm leading-[1.45] tracking-[-0.02em] text-overcast'>
+                      {image.description}
+                    </p>
                   </div>
                 </div>
               </CarouselItem>

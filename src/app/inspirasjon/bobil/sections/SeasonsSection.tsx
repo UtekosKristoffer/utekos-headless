@@ -17,18 +17,18 @@ export function SeasonsSection() {
           className='bobil-seasons-glow-pulse absolute right-1/4 bottom-1/4 size-[500px] blur-3xl'
           style={{
             background:
-              'radial-gradient(circle, var(--soft-warm) 0%, transparent 70%)',
+              'radial-gradient(circle, var(--demitasse) 0%, transparent 70%)',
             animationDelay: '4s'
           }}
         />
       </div>
 
       <div className='container mx-auto px-4'>
-        <div className='animate-fade-in-up mb-16 text-center'>
-          <h2 className='text-3xl leading-[0.95] font-bold tracking-normal sm:text-4xl lg:text-5xl'>
+        <div className='animate-fade-in-up mb-16 text-center text-cloud-dancer'>
+          <h2 className='font-brand-sans text-3xl font-bold leading-[0.95] tracking-[-0.01em] sm:text-4xl lg:text-5xl'>
             Tips for alle sesonger
           </h2>
-          <p className='mx-auto mt-4 max-w-2xl text-lg leading-[1.45] tracking-normal text-overcast'>
+          <p className='font-utekos-text mx-auto mt-4 max-w-2xl text-lg leading-[1.5] tracking-tight text-cloud-dancer/90'>
             Utekos følger deg på eventyr hele året
           </p>
         </div>

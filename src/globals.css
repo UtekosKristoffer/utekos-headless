@@ -162,6 +162,7 @@
 }
 
 .dark {
+  --dusted-purple: oklch(0.7794 0.0538 285.08);
   --tracking-tighter: 0.04em;
   --color-dark-rose: oklch(0.4885 0.0953 4.64);
   --color-klarna-pink: oklch(0.8271 0.1114 352.7);
@@ -315,6 +316,7 @@
 }
 
 @theme inline {
+  --dusted-purple: var(--dusted-purple);
   --tracking-tighter: 0.04em;
   --breakpoint-tablet: 33.75rem;
   --bright-white: oklch(0.9801 0.0096 252.81);

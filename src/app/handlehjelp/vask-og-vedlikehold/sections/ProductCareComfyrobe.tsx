@@ -1,49 +1,60 @@
-import { TabsContent } from '@/components/ui/tabs' // Antatt plassering for Tabs
-import { CheckCircle2, Info, XCircle } from 'lucide-react'
+import { TabsContent } from '@/components/ui/tabs'
+import { Droplets } from 'lucide-react'
+import { CareList } from './CareList'
+
+const doItems = [
+  'Skånsomt program, maks 40 °C',
+  'Bruk mildt vaskemiddel',
+  'Lufttørk eller lav varme i tørketrommel',
+  'Lufte plagget godt etter bruk'
+] as const
+
+const dontItems = [
+  'Blekemidler og tøymykner',
+  'Kjemisk rens (kan skade DWR-coating)',
+  'Stryking (kan smelte stoffet)',
+  'Høy varme i tørketrommel'
+] as const
 
 export function ProductCareComfyrobe() {
   return (
     <TabsContent
       value='comfyrobe'
-      className='mt-6 rounded-lg bg-sidebar-foreground p-6 sm:p-8'
+      className='mt-8 rounded-2xl border border-maritime-darkest/10 bg-cloud-dancer/72 p-6 shadow-[0_20px_54px_-46px_color-mix(in_oklab,var(--maritime-darkest)_72%,transparent)] sm:p-8'
     >
-      <h2 className='text-2xl font-semibold'>Comfyrobe™</h2>
-      <p className='mt-2 text-foreground/80'>
-        Ta vare på din Comfyrobe for å bevare den myke komforten og de
-        beskyttende egenskapene.
+      <h3 className='text-2xl font-semibold tracking-tight text-maritime-darkest'>
+        Comfyrobe™
+      </h3>
+      <p className='mt-3 max-w-2xl text-base font-utekos-text leading-[1.45] text-maritime-darkest/82'>
+        Comfyrobe kombinerer myk komfort med beskyttende DWR-behandling. Riktig
+        pleie bevarer både følelsen mot huden og evnen til å holde vann unna.
       </p>
-      <div className='mt-6 grid gap-6 md:grid-cols-2'>
-        <div>
-          <h3 className='flex items-center gap-2 font-semibold'>
-            <CheckCircle2 className='h-5 w-5 text-green-500' /> Vask
-          </h3>
-          <ul className='mt-2 list-disc list-inside space-y-1 text-foreground/80'>
-            <li>Skånsomt program, maks 40°C.</li>
-            <li>Bruk mildt vaskemiddel.</li>
-          </ul>
-        </div>
-        <div>
-          <h3 className='flex items-center gap-2 font-semibold'>
-            <XCircle className='h-5 w-5 text-red-500' /> Unngå
-          </h3>
-          <ul className='mt-2 list-disc list-inside space-y-1 text-foreground/80'>
-            <li>Blekemidler.</li>
-            <li>Kjemisk rens (kan skade coating).</li>
-            <li>Stryking (kan smelte stoffet).</li>
-            <li>Høy varme i tørketrommel.</li>
-          </ul>
-        </div>
+
+      <div className='mt-7 grid gap-5 md:grid-cols-2'>
+        <CareList variant='do' title='Anbefalt' items={doItems} />
+        <CareList variant='dont' title='Unngå' items={dontItems} />
       </div>
-      <div className='mt-6'>
-        <h3 className='flex items-center gap-2 font-semibold'>
-          <Info className='h-5 w-5' /> Etterbehandling og daglig bruk
-        </h3>
-        <p className='mt-2 text-foreground/80'>
-          Hvis du merker at vann ikke lenger preller av ytterstoffet, kan du
-          reaktivere DWR-behandlingen med en impregneringsspray. Husk å lufte
-          plagget godt etter bruk, spesielt om det har vært i kontakt med
-          saltvann eller klor.
-        </p>
+
+      <div className='mt-7 rounded-2xl border border-cloud-dancer/12 bg-maritime-blue p-5 text-cloud-dancer sm:p-6'>
+        <div className='flex items-start gap-3'>
+          <span
+            aria-hidden='true'
+            className='flex size-9 shrink-0 items-center justify-center rounded-full border border-cloud-dancer/22 bg-cloud-dancer text-maritime-darkest'
+          >
+            <Droplets className='size-[1.05rem]' />
+          </span>
+          <div>
+            <h4 className='text-base font-semibold tracking-tight text-cloud-dancer sm:text-lg'>
+              Frisk opp DWR-behandlingen
+            </h4>
+            <p className='mt-2 text-sm leading-relaxed  font-utekos-text text-cloud-dancer/90 sm:text-base'>
+              Hvis vann ikke lenger preller av ytterstoffet, kan du reaktivere
+              DWR-behandlingen med en impregneringsspray. Lav varme i
+              tørketrommel etterpå låser behandlingen. Husk å lufte plagget godt
+              etter kontakt med saltvann eller klor.
+            </p>
+          </div>
+        </div>
       </div>
     </TabsContent>
   )

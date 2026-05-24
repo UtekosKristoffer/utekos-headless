@@ -1,10 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { BadgeCheckIcon } from '@/components/animate-icons/icons/badge-check'
-import { CompassIcon } from '@/components/animate-icons/icons/compass'
-import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
+import { Button } from '@/components/ui/button'
 import IntersportLogo from '@public/logo/Intersport_logo.svg'
-import type { Route } from 'next'
+import type { Route } from 'next' // <-- Import Route type
 
 interface NewProductInStoreNoticeViewProps {
   containerRef: React.RefObject<HTMLDivElement | null>
@@ -20,80 +18,88 @@ export function NewProductInStoreNoticeView({
   mapsUrl
 }: NewProductInStoreNoticeViewProps) {
   return (
-    <section className='mt-24 w-full py-12'>
+    <section className='my-24 w-full py-12'>
       <div className='container mx-auto max-w-6xl px-4 md:max-w-7xl'>
         <div
           ref={containerRef}
-          className='relative overflow-hidden rounded-3xl border border-chocolate-plum/20 bg-overcast shadow-[0_24px_80px_-56px_rgba(49,36,38,0.55)]'
+          className='relative overflow-hidden rounded-3xl border border-white/10 bg-overcast p-10 shadow-2xl'
         >
-          <div className='pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-mountain-view/50 to-transparent' />
+          {/* Background Glow */}
+          <div
+            className='pointer-events-none absolute left-1/2 top-0 -z-20 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 opacity-20 blur-[100px]'
+            style={{
+              background: 'radial-gradient(circle, #f9f9e 0%, transparent 70%)'
+            }}
+          />
 
-          <div className='flex flex-col items-center gap-8 px-6 py-10 text-center sm:px-10'>
+          <div className='flex flex-col items-center gap-8 text-center'>
             <div className='relative flex h-32 w-full items-center justify-center overflow-visible'>
+              {/* Particles Container */}
+              <div className='absolute left-1/2 top-1/2 z-0 flex h-1 w-1 -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-visible'>
+                {[...Array(5)].map((_, i) => (
+                  <div
+                    key={`smoke-${i}`}
+                    className={`smoke-particle absolute h-20 w-20 rounded-full blur-xl ${
+                      i % 2 === 0 ? 'bg-overcast/80' : 'bg-overcast'
+                    }`}
+                    style={{ left: i * 5, top: i * 2 }}
+                  />
+                ))}
+
+                {[...Array(8)].map((_, i) => (
+                  <div
+                    key={`spark-${i}`}
+                    className={`spark-particle absolute h-1 w-1 rounded-full blur-[1px] ${
+                      i % 2 === 0 ? 'bg-amber-300' : 'bg-orange-400'
+                    }`}
+                    style={{ left: i * 2, top: i * 2 }}
+                  />
+                ))}
+              </div>
+
+              {/* Logo Box */}
               <div
                 ref={logoBoxRef}
-                className='relative z-10 flex h-16 min-w-48 items-center justify-center rounded-2xl border border-mountain-view/20 bg-cloud-dancer px-8 shadow-[0_16px_40px_-28px_rgba(49,36,38,0.65)] will-change-transform'
+                className='relative z-10 flex h-16 items-center justify-center rounded-2xl border-2 border-cloud-dancer/90 bg-cloud-dancer/90 px-8 shadow-[0_0_30px_rgba(255,255,255,0.2)] will-change-transform'
               >
                 <Image
                   src={IntersportLogo}
                   alt='Intersport logo'
-                  width={1024}
-                  height={112}
-                  className='max-w-[120px]'
-                  style={{ width: '100%', height: 'auto' }}
+                  width={120}
+                  height={34}
+                  className='h-auto w-full max-w-[120px]'
+                  style={{ height: 'auto' }}
                   priority
                 />
               </div>
             </div>
 
+            {/* Content */}
             <div ref={contentRef} className='flex flex-col items-center gap-6'>
-              <h2 className='text-balance text-3xl font-bold tracking-tight font-utekos-text text-maritime-darkest/90 sm:text-4xl'>
+              <h2 className='text-balance text-3xl font-bold tracking-tight font-utekos-text text-maritime-blue sm:text-4xl'>
                 På plass hos Intersport Laksevåg!
               </h2>
 
-              <p className='max-w-4xl text-balance text-lg tracking-tight font-utekos-text text-maritime-darkest/90'>
+              <p className='max-w-4xl text-balance text-lg leading-relaxed font-utekos-text text-maritime-darkest/90'>
                 Nå kan du se, prøve og kjenne på vår splitter nye{' '}
-                <Link
-                  href={'/produkter/utekos-techdown' as Route}
-                  className='group relative mx-1 inline-flex items-center justify-center rounded-md px-2 py-0.5 outline-none transition-transform hover:scale-[1.03] active:scale-95 focus-visible:ring-2 focus-visible:ring-[var(--chocolate-plum)] focus-visible:ring-offset-2 focus-visible:ring-offset-overcast'
-                >
-                  <span className='gsap-highlight absolute inset-0 -z-10 -skew-x-12 scale-x-0 rounded-md bg-gradient-to-r from-[var(--espresso)] via-[var(--plum-truffle)] to-[var(--delicioso)] blur-[3px] will-change-transform opacity-70 transition-opacity group-hover:opacity-100' />
-
-                  <span className='gsap-highlight absolute inset-0 -z-10 -rotate-1 scale-x-0 rounded-lg border border-[var(--chocolate-plum)]/40 bg-gradient-to-br from-[var(--espresso)] via-[var(--raisin)] to-[var(--after-dark)] will-change-transform shadow-sm transition-all group-hover:shadow-md' />
-
-                  <span className='relative z-10 inline-flex items-center gap-1.5 font-semibold text-cloud-dancer'>
-                    <BadgeCheckIcon
-                      size={16}
-                      animateOnHover='check'
-                      className='shrink-0 text-cloud-dancer'
-                    />
-                    Utekos TechDown™
-                  </span>
-                </Link>{' '}
+                <strong className='text-maritime-blue font-utekos-text font-bold'>
+                  Utekos TechDown™
+                </strong>{' '}
                 hos våre gode venner på Intersport Laksevåg. Ta turen innom for
                 å bli en av de første som får oppleve den neste generasjonen av
                 Utekos®!
               </p>
 
-              <Link
-                href={mapsUrl as Route}
-                target='_blank'
-                rel='noreferrer'
-                className='group my-4 inline-flex rounded-full transition-transform hover:scale-[1.02] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-chocolate-plum focus-visible:ring-offset-2 focus-visible:ring-offset-overcast'
+              <Button
+                asChild
+                size='lg'
+                className='group my-4 h-12 font-utekos-text tracking-tight text-cloud-dancer bg-maritime-blue rounded-full px-8 text-base'
               >
-                <BrandBadge
-                  backgroundColor='var(--chocolate-plum)'
-                  textColor='var(--cloud-dancer)'
-                  className='cursor-pointer gap-2 border border-[var(--chocolate-plum)]/30 shadow-sm transition-shadow group-hover:shadow-md'
-                >
-                  <CompassIcon
-                    size={16}
-                    animateOnHover='default'
-                    className='shrink-0 text-cloud-dancer'
-                  />
-                  <span>Vis vei til butikken</span>
-                </BrandBadge>
-              </Link>
+                {/* FIX: Caster string til Route for å tilfredsstille Typed Routes */}
+                <Link href={mapsUrl as Route} target='_blank'>
+                  Vis vei til butikken
+                </Link>
+              </Button>
             </div>
           </div>
         </div>

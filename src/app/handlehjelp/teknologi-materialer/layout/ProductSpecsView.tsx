@@ -58,7 +58,7 @@ export const TechnologyBlock = ({
       className={cn(
         'relative rounded-2xl border border-transparent p-6 transition-all duration-500',
         isActive ?
-          'bg-neutral-900/50 opacity-100 ring-1 ring-white/10 backdrop-blur-sm'
+          'bg-maritime-blue/50 opacity-100 ring-1 ring-white/10 backdrop-blur-sm'
         : 'opacity-30 hover:opacity-60'
       )}
     >
@@ -67,8 +67,8 @@ export const TechnologyBlock = ({
           className={cn(
             'flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border transition-colors',
             isActive ?
-              'border-sky-500/30 bg-sky-500/10 text-sky-400'
-            : 'border-neutral-800 bg-neutral-900 text-neutral-500'
+              'border-ancient-water/30 bg-ancient-water/10 text-ancient-water'
+            : 'border-maritime-blue bg-maritime-blue text-cloud-dancer/70'
           )}
         >
           <IconComponent className='h-6 w-6' />
@@ -76,23 +76,23 @@ export const TechnologyBlock = ({
         <h3
           className={cn(
             'text-xl font-bold transition-colors',
-            isActive ? 'text-white' : 'text-neutral-400'
+            isActive ? 'text-white' : 'text-cloud-dancer/70'
           )}
         >
           {tech.title}
         </h3>
       </div>
       <div className='prose prose-invert mt-4 max-w-none'>
-        <p className='text-neutral-400 leading-relaxed'>{tech.content}</p>
+        <p className='text-cloud-dancer/70 leading-relaxed'>{tech.content}</p>
         <div className='mt-4 flex flex-wrap gap-2'>
           {tech.products.map(product => (
             <span
               key={product}
               className={cn(
-                'rounded-full border px-2.5 py-1 text-xs font-medium transition-colors',
+                'rounded-full border px-2.5 py-1 text-sm font-medium transition-colors',
                 isActive ?
                   'border-white/10 bg-white/5 text-white'
-                : 'border-neutral-800 bg-transparent text-neutral-600'
+                : 'border-maritime-blue bg-transparent text-cloud-dancer/70'
               )}
             >
               {product}
@@ -158,7 +158,7 @@ export function ProductSpecsView({
       <div className='space-y-24 pb-24'>
         {technologyGroups.map(group => (
           <section key={group.groupTitle}>
-            <h2 className='mb-8 border-b border-white/10 pb-4 text-sm font-bold uppercase tracking-widest text-neutral-500'>
+            <h2 className='mb-8 border-b border-white/10 pb-4 text-sm font-bold tracking-widest text-cloud-dancer/70'>
               {group.groupTitle}
             </h2>
             <div className='space-y-8'>

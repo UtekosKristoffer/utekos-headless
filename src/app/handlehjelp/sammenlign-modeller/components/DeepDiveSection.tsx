@@ -1,96 +1,55 @@
-import { Card, CardContent } from '@/components/ui/card'
-import { Package, ThermometerSun, WashingMachine } from 'lucide-react'
-import { AnimatedBlock } from '@/components/AnimatedBlock'
+// Path: src/app/handlehjelp/sammenlign-modeller/components/DeepDiveSection.tsx
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
+import { deepDiveSections } from '../utils/comparisonData'
+
 export function DeepDiveSection() {
   return (
-    <section className='bg-background py-24'>
-      <div className='container mx-auto max-w-4xl px-4'>
-        <AnimatedBlock
-          className='will-animate-fade-in-up mb-12 text-center'
-          threshold={0.3}
-        >
-          <h2 className='text-3xl font-bold tracking-tight sm:text-4xl'>
-            Hva betyr dette i praksis?
+    <section className='bg-maritime-darkest py-20 text-cloud-dancer sm:py-28'>
+      <div className='mx-auto max-w-7xl px-[6vw]'>
+        <div className='max-w-3xl'>
+          <BrandBadge
+            label='Slik velger du'
+            backgroundColor='var(--primary-button)'
+            className='mb-6 px-6 py-3 text-sm'
+          />
+          <h2 className='font-google-sans text-4xl leading-[0.95] font-bold tracking-tight text-cloud-dancer sm:text-6xl'>
+            Se etter vær, vekt og hvor plagget skal bo
           </h2>
-          <p className='mx-auto mt-4 max-w-2xl text-muted-foreground'>
-            Hver Utekos-modell er designet med en unik styrke. Her dykker vi ned
-            i de viktigste forskjellene, slik at du kan finne den perfekte
-            matchen for ditt bruk.
+          <p className='mt-6 max-w-2xl font-utekos-text text-lg leading-[1.45] tracking-tight text-cloud-dancer/84 sm:text-xl'>
+            De fleste velger riktig når de starter med bruk, ikke materiale. Her
+            er de viktigste valgene forklart kort.
           </p>
-        </AnimatedBlock>
-        <AnimatedBlock
-          className='will-animate-fade-in-up space-y-8'
-          delay='0.2s'
-          threshold={0.3}
-        >
-          <Card className='relative overflow-hidden border-neutral-800 bg-sidebar-foreground'>
-            <div className='absolute left-0 top-0 h-2 w-full bg-gradient-to-r from-orange-400 to-cyan-400' />
-            <CardContent className='p-8'>
-              <div className='mb-4 flex items-center gap-4'>
-                <ThermometerSun className='h-8 w-8 text-cyan-400' />
-                <h3 className='text-xl font-semibold'>
-                  Varme og værforhold: Velg etter klima
-                </h3>
-              </div>
-              <p className='mt-2 text-muted-foreground'>
-                <strong>Utekos Dun™</strong> gir den absolutt høyeste varmen i
-                forhold til vekt, og er uovertruffen i tørt, kaldt vær.
-                <br />
-                <strong>Utekos Techdun™</strong> er spesialisten for
-                uforutsigbare forhold; den isolerer overlegent selv om den blir
-                fuktig, og er det tryggeste valget nær kysten eller i båt.
-                <br />
-                <strong>Utekos Mikrofiber™</strong> er en ypperlig allrounder
-                for de tre andre årstidene, og som et lettere lag når kulden
-                ikke er ekstrem.
-              </p>
-            </CardContent>
-          </Card>
+        </div>
 
-          <Card className='relative overflow-hidden border-neutral-800 bg-sidebar-foreground'>
-            <div className='absolute left-0 top-0 h-2 w-full bg-gradient-to-r from-violet-400 to-pink-400' />
-            <CardContent className='p-8'>
-              <div className='mb-4 flex items-center gap-4'>
-                <Package className='h-8 w-8 text-violet-400' />
-                <h3 className='text-xl font-semibold'>
-                  Vekt og pakkbarhet: For deg som teller gram
+        <div className='mt-14 divide-y divide-cloud-dancer/14 border-y border-cloud-dancer/14'>
+          {deepDiveSections.map(section => (
+            <article
+              key={section.title}
+              className='grid gap-8 py-10 lg:grid-cols-[0.42fr_0.58fr] lg:py-14'
+            >
+              <div>
+                <p className='font-utekos-text text-sm font-medium tracking-tight text-overcast'>
+                  {section.eyebrow}
+                </p>
+                <h3 className='mt-4 font-google-sans text-3xl leading-[0.98] font-bold tracking-tight text-cloud-dancer sm:text-4xl'>
+                  {section.title}
                 </h3>
               </div>
-              <p className='mt-2 text-muted-foreground'>
-                <strong>Utekos Dun™</strong> er mest komprimerbar og gir mest
-                varme for vekten, ideelt for tursekken.
-                <br />
-                <strong>Utekos Mikrofiber™</strong> er totalt sett vårt
-                letteste plagg, perfekt for daglig bruk hvor lav vekt er en
-                fordel.
-                <br />
-                <strong>Utekos TechDun™</strong> er vårt mest robuste plagg.
-                Det du ofrer i pakkbarhet, vinner du i bekymringsfrihet og
-                ytelse i all slags vær.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className='relative overflow-hidden border-neutral-800 bg-sidebar-foreground'>
-            <div className='absolute left-0 top-0 h-2 w-full bg-emerald-400' />
-            <CardContent className='p-8'>
-              <div className='mb-4 flex items-center gap-4'>
-                <WashingMachine className='h-8 w-8 text-emerald-400' />
-                <h3 className='text-xl font-semibold'>
-                  Vedlikehold: Fra arbeidshest til finstas
-                </h3>
+              <div>
+                <p className='font-utekos-text text-lg leading-[1.45] tracking-tight text-cloud-dancer/86'>
+                  {section.body}
+                </p>
+                <ul className='mt-7 grid gap-3 font-utekos-text text-base font-medium tracking-tight text-cloud-dancer sm:grid-cols-3'>
+                  {section.points.map(point => (
+                    <li key={point} className='border-l border-overcast pl-4'>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <p className='mt-2 text-muted-foreground'>
-                Både <strong>Utekos TechDown™</strong> og{' '}
-                <strong>Mikrofiber™</strong> er robuste arbeidshester som tåler
-                røff bruk, kan vaskes enkelt i maskin og tørker raskt.
-                <br />
-                <strong>Utekos Dun™</strong> krever en mer skånsom vaskeprosess
-                for å bevare dunets unike spenst og varmeevne over tid.
-              </p>
-            </CardContent>
-          </Card>
-        </AnimatedBlock>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   )

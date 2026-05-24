@@ -1,14 +1,20 @@
-import { Check, Minus } from 'lucide-react'
+// Path: src/app/handlehjelp/sammenlign-modeller/components/TableCellContent.tsx
+import { Check } from 'lucide-react'
 
 export function TableCellContent({ value }: { value: string | boolean }) {
   if (typeof value === 'boolean') {
     return value ?
-        <Check className='mx-auto h-5 w-5 text-green-500' />
-      : <Minus className='mx-auto h-5 w-5 text-neutral-600' />
+        <span className='inline-flex size-8 items-center justify-center rounded-full bg-primary-button text-maritime-darkest'>
+          <Check className='size-4' aria-hidden='true' />
+          <span className='sr-only'>Ja</span>
+        </span>
+      : <span className='font-utekos-text text-sm text-maritime-blue/70'>
+          Nei
+        </span>
   }
 
   return (
-    <span className='text-sm leading-relaxed text-muted-foreground'>
+    <span className='font-utekos-text text-sm leading-[1.45] tracking-tight text-maritime-blue/82'>
       {value}
     </span>
   )

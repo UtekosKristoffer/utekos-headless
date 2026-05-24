@@ -41,14 +41,14 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
     <section id='bruksomrader' className='bg-overcast py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl text-center'>
-          <h2 className='text-fluid-display inline-flex flex-wrap items-baseline justify-center gap-x-[0.18em] leading-[0.95] font-bold tracking-normal text-maritime-darkest'>
+          <h2 className='font-brand-sans text-fluid-display inline-flex flex-wrap items-baseline justify-center gap-x-[0.18em] font-bold leading-[0.95] tracking-[-0.01em] text-maritime-darkest'>
             <UtekosWordmark
               className='h-[0.78em] w-auto translate-y-[0.06em]'
               style={{ color: 'var(--maritime-darkest)' }}
             />
             <span>gjennom bobil-døgnet</span>
           </h2>
-          <p className='mt-4 text-lg leading-[1.45] tracking-normal text-maritime-darkest'>
+          <p className='font-utekos-text mt-4 text-lg leading-[1.45] tracking-[-0.02em] text-maritime-darkest'>
             Fra soloppgang til solnedgang får du varme når turen ber om det.
           </p>
         </div>
@@ -70,19 +70,21 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                       <useCase.icon className={`size-6 ${useCase.iconColor}`} />
                     </div>
                     <div>
-                      <p className='text-sm text-cloud-dancer'>
+                      <p className='font-utekos-text text-sm tracking-[-0.02em] text-cloud-dancer'>
                         {useCase.time}
                       </p>
-                      <p className='text-sm font-medium text-cloud-dancer/90'>
+                      <p className='font-utekos-text text-sm font-medium tracking-[-0.02em] text-cloud-dancer/90'>
                         {useCase.temperature}
                       </p>
                     </div>
                   </div>
 
-                  <h3 className='mb-2 text-xl leading-[1] font-semibold tracking-normal'>
+                  <h3 className='font-brand-sans mb-2 text-xl font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer'>
                     {useCase.title}
                   </h3>
-                  <p className='text-cloud-dancer/90'>{useCase.description}</p>
+                  <p className='font-utekos-text leading-[1.45] tracking-[-0.02em] text-cloud-dancer/90'>
+                    {useCase.description}
+                  </p>
                 </CardContent>
               </Card>
             </AnimatedBlock>

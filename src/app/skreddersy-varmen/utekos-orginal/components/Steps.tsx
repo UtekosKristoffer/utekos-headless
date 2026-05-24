@@ -23,7 +23,7 @@ export const Steps = [
     modeName: 'Oppjustert modus',
     title: 'Umiddelbar mobilitet',
     description:
-      'Nyter du total omfavnelse av Utekos, men må plutselig en rask tur på kjøkkenet eller svare på telefonen som ringer fra andre siden av huset? Heis opp plagget til ønsket lengde, stram med den utvendige snoren i livet og vær mobil på få sekunder. Beveg deg uten snublefare og subbefritt - uten å miste varmen.',
+      'Nyter du total omfavnelse av Utekos, men må plutselig på kjøkkenet eller svare telefonen? Heis opp plagget til ønsket lengde, stram snoren i livet og bli mobil på sekunder. Beveg deg trygt og subbefritt – uten å miste varmen.',
     icon: <Move className='size-5' />,
     image: TechHalfImage,
     isProduct: true,

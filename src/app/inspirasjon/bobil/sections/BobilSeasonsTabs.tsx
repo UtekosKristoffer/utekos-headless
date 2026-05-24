@@ -42,8 +42,8 @@ const seasons = [
     value: 'autumn',
     label: 'Høst',
     icon: Mountain,
-    iconColor: 'text-dusted-peri',
-    glowColor: 'var(--soft-warm)',
+    iconColor: 'text-bleached-mauve',
+    glowColor: 'var(--bleached-mauve)',
     title: 'Høstens fargeprakt i komfort',
     intro:
       'Høsten er mange bobilisters favoritt-sesong, og med Utekos kan du nyte den fullt ut.',
@@ -88,7 +88,7 @@ export function BobilSeasonsTabs() {
             <TabsTrigger
               key={season.value}
               value={season.value}
-              className='bobil-seasons-tab-trigger relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/58 transition-all duration-300 data-[state=active]:border-cloud-dancer/18 data-[state=active]:bg-maritime-darkest'
+              className='bobil-seasons-tab-trigger relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/58 transition-all duration-300 data-[state=active]:border-cloud-dancer/18 data-[state=active]:bg-[var(--primary-button)] data-[state=active]:text-maritime-darkest'
             >
               {isActive && (
                 <div
@@ -101,10 +101,10 @@ export function BobilSeasonsTabs() {
 
               <div className='relative flex items-center justify-center gap-2 py-3'>
                 <Icon
-                  className={`size-5 transition-colors ${isActive ? season.iconColor : 'text-overcast'}`}
+                  className={`size-5 transition-colors ${isActive ? 'text-maritime-darkest' : 'text-cloud-dancer/90'}`}
                 />
                 <span
-                  className={`font-medium transition-colors ${isActive ? 'text-cloud-dancer' : 'text-overcast'}`}
+                  className={`font-brand-sans font-bold tracking-[-0.01em] transition-colors ${isActive ? 'text-maritime-darkest' : 'text-cloud-dancer/90'}`}
                 >
                   {season.label}
                 </span>
@@ -138,7 +138,7 @@ export function BobilSeasonsTabs() {
                     >
                       <Icon className={`size-6 ${season.iconColor}`} />
                     </div>
-                    <h3 className='text-2xl leading-[1] font-semibold tracking-normal text-cloud-dancer'>
+                    <h3 className='font-brand-sans text-2xl font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer'>
                       {season.hasBrandTitle ?
                         <span className='inline-flex flex-wrap items-baseline gap-x-2'>
                           <span>{season.title}</span>
@@ -148,7 +148,7 @@ export function BobilSeasonsTabs() {
                     </h3>
                   </div>
 
-                  <p className='mb-6 text-lg leading-[1.45] tracking-normal text-overcast'>
+                  <p className='font-utekos-text mb-6 text-lg leading-[1.5] tracking-tight text-cloud-dancer/90'>
                     {season.intro}
                   </p>
 
@@ -162,7 +162,7 @@ export function BobilSeasonsTabs() {
                         <div className='mt-0.5 flex size-6 flex-shrink-0 items-center justify-center rounded-full border border-cloud-dancer/18 bg-maritime-darkest'>
                           <Check className={`size-4 ${season.iconColor}`} />
                         </div>
-                        <span className='text-overcast leading-[1.45] tracking-normal'>
+                        <span className='font-utekos-text leading-[1.5] tracking-tight text-cloud-dancer/90'>
                           {tip}
                         </span>
                       </li>

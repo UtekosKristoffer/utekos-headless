@@ -1,58 +1,81 @@
-import { TabsContent } from '@/components/ui/tabs' // Antatt plassering for Tabs
-import { CheckCircle2, Info, Thermometer, Wind, XCircle } from 'lucide-react'
+import { TabsContent } from '@/components/ui/tabs'
+import { Thermometer, Wind } from 'lucide-react'
+import { CareList } from './CareList'
+
+const doItems = [
+  'Vask på skånsomt program, maks 30 °C',
+  'Bruk mildt vaskemiddel – gjerne et eget dun-vaskemiddel',
+  'Lukk glidelåser og fest borrelås før vask',
+  'Vreng plagget for å skåne ytterstoffet'
+] as const
+
+const dontItems = [
+  'Blekemidler og tøymykner',
+  'Kjemisk rens (dry clean)',
+  'Stryking direkte på ytterstoffet',
+  'Komprimert oppbevaring over tid'
+] as const
 
 export function ProductCareUtekosDun() {
   return (
     <TabsContent
       value='dun'
-      className='mt-6 rounded-lg bg-sidebar-foreground p-6 sm:p-8'
+      className='mt-8 rounded-2xl border border-maritime-darkest/10 bg-cloud-dancer/72 p-6 shadow-[0_20px_54px_-46px_color-mix(in_oklab,var(--maritime-darkest)_72%,transparent)] sm:p-8'
     >
-      <h2 className='text-2xl font-semibold'>Utekos Dun™</h2>
-      <p className='mt-2 text-foreground/80'>
-        For å bevare den unike, luftige varmen i din Utekos Dun, er skånsom
-        behandling nøkkelen.
+      <h3 className='text-2xl font-semibold tracking-tight text-maritime-darkest'>
+        Utekos Dun™
+      </h3>
+      <p className='mt-3 max-w-2xl text-base font-utekos-text leading-[1.45] text-maritime-darkest/82'>
+        Skånsom behandling bevarer den luftige varmen. Dun er et naturmateriale
+        som belønner tålmodighet – og straffer hastverk.
       </p>
-      <div className='mt-6 grid gap-6 md:grid-cols-2'>
-        <div>
-          <h3 className='flex items-center gap-2 font-semibold'>
-            <CheckCircle2 className='h-5 w-5 text-green-500' /> Vask
-          </h3>
-          <ul className='mt-2 list-disc list-inside space-y-1 text-foreground/80'>
-            <li>Skånsomt program, maks 30°C.</li>
-            <li>Bruk mild såpe (helst dun-såpe).</li>
-            <li>Lukk alle glidelåser før vask.</li>
-          </ul>
-        </div>
-        <div>
-          <h3 className='flex items-center gap-2 font-semibold'>
-            <XCircle className='h-5 w-5 text-red-500' /> Unngå
-          </h3>
-          <ul className='mt-2 list-disc list-inside space-y-1 text-foreground/80'>
-            <li>Blekemidler og tøymykner.</li>
-            <li>Kjemisk rens (dry clean).</li>
-            <li>Stryking.</li>
-          </ul>
+
+      <div className='mt-7 grid gap-5 md:grid-cols-2'>
+        <CareList variant='do' title='Anbefalt' items={doItems} />
+        <CareList variant='dont' title='Unngå' items={dontItems} />
+      </div>
+
+      <div className='mt-7 rounded-2xl border border-cloud-dancer/12 bg-maritime-blue p-5 text-cloud-dancer sm:p-6'>
+        <div className='flex items-start gap-3'>
+          <span
+            aria-hidden='true'
+            className='flex size-9 shrink-0 items-center justify-center rounded-full border border-cloud-dancer/22 bg-cloud-dancer text-maritime-darkest'
+          >
+            <Thermometer className='size-[1.05rem]' />
+          </span>
+          <div>
+            <h4 className='text-base font-semibold tracking-tight text-cloud-dancer sm:text-lg'>
+              Tørking er avgjørende
+            </h4>
+            <p className='mt-2 text-sm leading-relaxed  font-utekos-text text-cloud-dancer/90 sm:text-base'>
+              Bruk tørketrommel på lav varme med to-tre tørkeballer eller rene
+              tennisballer. Ballene gjenoppretter dunets spenst ved å løse opp
+              klumper underveis. Avbryt syklusen et par ganger og rist plagget –
+              plagget skal være 100 % gjennomtørt før det legges bort.
+            </p>
+          </div>
         </div>
       </div>
-      <div className='mt-6'>
-        <h3 className='flex items-center gap-2 font-semibold'>
-          <Thermometer className='h-5 w-5' /> Tørking er avgjørende for dun
-        </h3>
-        <p className='mt-2 text-foreground/80'>
-          Bruk tørketrommel på lav varme med 2-3 tørkeballer (eller rene
-          tennisballer). Dette gjenoppretter dunets spenst. Prosessen kan ta tid
-          – sørg for at plagget er 100% gjennomtørt for å unngå at dunet klumper
-          seg.
-        </p>
-      </div>
-      <div className='mt-6'>
-        <h3 className='flex items-center gap-2 font-semibold'>
-          <Wind className='h-5 w-5' /> Oppbevaring
-        </h3>
-        <p className='mt-2 text-foreground/80'>
-          For langvarig lagring, heng plagget luftig. Unngå kompresjonsposer
-          over tid, da dette kan svekke spensten.
-        </p>
+
+      <div className='mt-5 rounded-2xl border border-maritime-darkest/10 bg-[color-mix(in_oklab,var(--ancient-water)_54%,var(--cloud-dancer)_46%)] p-5 text-maritime-darkest sm:p-6'>
+        <div className='flex items-start gap-3'>
+          <span
+            aria-hidden='true'
+            className='flex size-9 shrink-0 items-center justify-center rounded-full border border-maritime-blue/28 bg-maritime-blue text-cloud-dancer'
+          >
+            <Wind className='size-[1.05rem]' />
+          </span>
+          <div>
+            <h4 className='text-base font-semibold tracking-tight text-maritime-darkest sm:text-lg'>
+              Oppbevaring mellom sesongene
+            </h4>
+            <p className='mt-2 text-sm leading-relaxed  font-utekos-text text-maritime-darkest/82 sm:text-base'>
+              Heng plagget luftig på en stødig henger. Dunet trenger luft for å
+              bevare spensten som gir varmen. Kompresjonsposer over tid svekker
+              isolasjonsevnen.
+            </p>
+          </div>
+        </div>
       </div>
     </TabsContent>
   )

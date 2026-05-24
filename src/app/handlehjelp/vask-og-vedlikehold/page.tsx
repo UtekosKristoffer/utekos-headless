@@ -1,20 +1,21 @@
 // Path: src/app/handlehjelp/vask-og-vedlikehold/page.tsx
 import type { Metadata } from 'next'
 import { ProductCareHeader } from './sections/ProductCareHeader'
+import { ProductCareGeneralGuide } from '@/app/handlehjelp/vask-og-vedlikehold/sections/ProductCareGeneralGuide'
 import { ProductCareBody } from './sections/ProductCareBody'
-import { Activity } from 'react'
+import { ProductCareFaq } from '@/app/handlehjelp/vask-og-vedlikehold/sections/ProductCareFAQ'
 
 export const metadata: Metadata = {
-  title: 'Vedlikeholdsguide for Utekos | Bevar varmen og kvaliteten',
+  title: 'Vedlikehold av Utekos | Slik bevarer du varmen i mange år',
   description:
-    'Ta vare på din Utekos-investering. Vår guide sikrer at du bevarer den unike komforten og varmen, slik at du kan forlenge de gode stundene ute i mange år fremover.',
+    'En tydelig vedlikeholdsguide for Utekos Dun, Mikrofiber og Comfyrobe. Riktig vask, tørking og oppbevaring bevarer varmen, formen og kvaliteten – sesong etter sesong.',
   alternates: {
     canonical: '/handlehjelp/vask-og-vedlikehold'
   },
   openGraph: {
-    title: 'Vedlikeholdsguide for Utekos | Bevar varmen og kvaliteten',
+    title: 'Vedlikehold av Utekos | Slik bevarer du varmen i mange år',
     description:
-      'Riktig vedlikehold er nøkkelen til mange år med utekos. Se våre beste råd her.',
+      'Slik vasker, tørker og oppbevarer du Utekos-plagget ditt for å bevare varmen og kvaliteten i mange år.',
     url: '/handlehjelp/vask-og-vedlikehold',
     siteName: 'Utekos',
     images: [
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
         url: '/og-image-vedlikehold.jpg',
         width: 1200,
         height: 630,
-        alt: 'En person som tar vare på et Utekos-plagg.'
+        alt: 'Et Utekos-plagg hengt luftig til tørk i naturlige omgivelser.'
       }
     ],
     locale: 'no_NO',
@@ -32,15 +33,13 @@ export const metadata: Metadata = {
 
 export default function ProductCarePage() {
   return (
-    <>
-      <section className='container mx-auto px-4 py-12 sm:py-16'>
-        <Activity>
-          <ProductCareHeader />
-        </Activity>
-        <Activity>
-          <ProductCareBody />
-        </Activity>
-      </section>
-    </>
+    <section className='bg-overcast text-maritime-darkest'>
+      <article className='container mx-auto px-4 py-12 sm:py-16'>
+        <ProductCareHeader />
+        <ProductCareGeneralGuide />
+        <ProductCareBody />
+        <ProductCareFaq />
+      </article>
+    </section>
   )
 }

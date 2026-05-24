@@ -7,10 +7,12 @@ export function ProductsPageFooter() {
   return (
     <section>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 md:mt-2'>
-        <Card className='border-neutral-800 bg-sidebar-foreground'>
+        <Card className='border-neutral-800 bg-overcast'>
           <CardContent className='p-8'>
-            <h3 className='text-xl font-semibold'>Usikker på størrelsen?</h3>
-            <p className='mt-2 text-muted-foreground'>
+            <h3 className='text-xl font-google-sans text-maritime-darkest tracking-tight font-semibold'>
+              Usikker på størrelsen?
+            </h3>
+            <p className='mt-2 font-utekos-text tracking-tight text-maritime-darkest'>
               Se vår størrelsesguide og finn den perfekte passformen for deg.
             </p>
             <Button asChild className='mt-4'>
@@ -23,12 +25,12 @@ export function ProductsPageFooter() {
             </Button>
           </CardContent>
         </Card>
-        <Card className='border-neutral-800 bg-sidebar-foreground'>
+        <Card className='border-neutral-800 bg-overcast'>
           <CardContent className='p-8'>
-            <h3 className='text-xl font-semibold'>
+            <h3 className='text-xl font-google-sans text-maritime-darkest tracking-tight font-semibold'>
               Nysgjerrig på teknologien?
             </h3>
-            <p className='mt-2 text-muted-foreground'>
+            <p className='mt-2 font-utekos-text tracking-tight text-maritime-darkest'>
               Les om materialene og designfilosofien som holder deg varm.
             </p>
             <Button asChild className='mt-4'>

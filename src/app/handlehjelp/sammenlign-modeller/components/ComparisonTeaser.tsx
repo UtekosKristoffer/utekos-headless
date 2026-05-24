@@ -114,17 +114,17 @@ export function ComparisonTeaser() {
 
   return (
     <section ref={container} className='mb-24 px-4'>
-      <div className='gsap-container opacity-0 container mx-auto overflow-hidden rounded-3xl border border-white/5 bg-overcast shadow-2xl'>
+      <div className='gsap-container container mx-auto overflow-hidden rounded-3xl border border-white/5 bg-overcast shadow-2xl'>
         <div className='absolute inset-0 -z-10 opacity-20'>
           <div className='absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px]' />
         </div>
 
         <div className='p-8 text-center md:p-16'>
-          <h2 className='gsap-text opacity-0 text-4xl font-bold tracking-tight font-google-sans text-maritime-blue sm:text-5xl md:text-6xl'>
+          <h2 className='gsap-text text-4xl font-bold tracking-tight font-google-sans text-maritime-blue sm:text-5xl md:text-6xl'>
             Usikker på hvilken Utekos du skal velge?
           </h2>
 
-          <p className='gsap-text opacity-0 mx-auto mt-6 max-w-2xl tracking-tight text-lg font-utekos-text leading-relaxed text-maritime-blue'>
+          <p className='gsap-text mx-auto mt-6 max-w-2xl tracking-tight text-lg font-utekos-text leading-relaxed text-maritime-blue'>
             Våre tre Utekos-modeller gir deg{' '}
             <span className='relative inline-block text-maritime-blue-darkest tracking-tight font-utekos-text'>
               kompromissløs komfort
@@ -148,7 +148,7 @@ export function ComparisonTeaser() {
                 href={`/produkter/${model.handle}` as Route}
                 data-track='ComparisonTeaserModelClick'
                 className={cn(
-                  'gsap-card group relative flex flex-col rounded-2xl border p-6 opacity-0 transition-all duration-300',
+                  'gsap-card group relative flex flex-col rounded-2xl border p-6 transition-all duration-300',
                   'hover:-translate-y-1',
                   model.cardClass
                 )}
@@ -199,7 +199,7 @@ export function ComparisonTeaser() {
             ))}
           </div>
 
-          <div className='gsap-btn opacity-0 mt-12'>
+          <div className='gsap-btn mt-12'>
             <Button
               asChild
               size='lg'

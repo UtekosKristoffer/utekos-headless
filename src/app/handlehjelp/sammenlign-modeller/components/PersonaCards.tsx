@@ -1,75 +1,77 @@
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
+// Path: src/app/handlehjelp/sammenlign-modeller/components/PersonaCards.tsx
+import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
+import type { Route } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { AnimatedBlock } from '@/components/AnimatedBlock'
-import type { Route } from 'next'
+import { modelRecommendations } from '../utils/comparisonData'
 
 export function PersonaCards() {
-  const personas = [
-    {
-      href: '/produkter/utekos-dun',
-      imageSrc: '/coffe_utekos.webp',
-      imageAlt: 'Hyttekos i tørt, kaldt vær med Utekos Dun',
-      title: 'For den kompromissløse livsnyteren',
-      description:
-        'Du verdsetter den uovertrufne følelsen av premium dun, og bruker din Utekos primært i tørre, kalde omgivelser som på hytten.',
-      buttonText: 'Velg Utekos Dun™'
-    },
-    {
-      href: '/produkter/utekos-techdown',
-      imageSrc: '/og-kate-linn-kikkert-master.png',
-      imageAlt: 'TechDown produktbilde åpen',
-      title: 'For den praktiske allrounderen',
-      description:
-        'Du trenger en robust arbeidshest som presterer i all slags vær – fra fuktige kvelder i båten til uforutsigbare dager med bobilen.',
-      buttonText: 'Velg TechDown™'
-    },
-    {
-      href: '/produkter/utekos-mikrofiber',
-      imageSrc: '/frontpage-kate-linn.webp',
-      imageAlt: 'Allsidig, daglig bruk av Utekos Mikrofiber',
-      title: 'For den enkle komforten',
-      description:
-        'Du ser etter et lett og funksjonelt plagg for de daglige turene, og som et enkelt, varmende lag på terrassen eller i hverdagen.',
-      buttonText: 'Velg Utekos Mikrofiber™'
-    }
-  ]
-
   return (
-    <section className='py-24'>
-      <div className='container mx-auto px-4'>
-        <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
-          {personas.map((persona, index) => (
-            <AnimatedBlock
-              key={persona.title}
-              className='will-animate-fade-in-up h-full'
-              delay={`${0.1 + index * 0.1}s`}
-              threshold={0.5}
+    <section
+      id='velg-etter-bruk'
+      className='bg-cloud-dancer py-20 text-maritime-darkest sm:py-28'
+    >
+      <div className='mx-auto max-w-7xl px-[6vw]'>
+        <div className='max-w-3xl'>
+          <BrandBadge
+            label='Velg etter bruk'
+            backgroundColor='var(--ancient-water)'
+            className='mb-6 px-6 py-3 text-sm'
+          />
+          <h2 className='font-google-sans text-4xl leading-[0.95] font-bold tracking-[-0.01em] text-maritime-blue sm:text-6xl'>
+            Riktig Utekos starter med hvor du bruker den
+          </h2>
+          <p className='mt-6 max-w-2xl font-utekos-text text-lg leading-[1.45] tracking-tight text-maritime-blue/82 sm:text-xl'>
+            Kort svar: Velg Dun for tørr kulde, Mikrofiber for lett pakking og
+            TechDown for fuktig vær.
+          </p>
+        </div>
+
+        <div className='mt-14 grid gap-8 lg:grid-cols-3'>
+          {modelRecommendations.map(model => (
+            <article
+              key={model.key}
+              className='group overflow-hidden bg-overcast text-maritime-darkest'
             >
-              <Card className='flex h-full flex-col border-neutral-800 bg-sidebar-foreground transition-transform duration-300 hover:-translate-y-1 hover:border-neutral-700'>
-                <div className='relative h-64 w-full overflow-hidden rounded-t-lg'>
+              <Link href={model.href as Route} className='block'>
+                <div className='relative aspect-[4/3] overflow-hidden'>
                   <Image
-                    src={persona.imageSrc}
-                    alt={persona.imageAlt}
+                    src={model.imageSrc}
+                    alt={model.imageAlt}
                     fill
-                    sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                    className='object-cover'
+                    sizes='(max-width: 1024px) 100vw, 33vw'
+                    className='object-cover transition-transform duration-700 group-hover:scale-[1.04]'
                   />
                 </div>
-                <CardContent className='flex flex-grow flex-col p-8'>
-                  <h3 className='text-2xl font-bold'>{persona.title}</h3>
-                  <p className='mt-2 flex-grow text-muted-foreground'>
-                    {persona.description}
+                <div className='p-7 sm:p-8'>
+                  <BrandBadge
+                    label={model.badge}
+                    backgroundColor='var(--cloud-dancer)'
+                    className='mb-6 px-5 py-2 text-sm'
+                  />
+                  <h3 className='font-google-sans text-3xl leading-[0.95] font-bold tracking-[-0.01em] text-maritime-blue'>
+                    {model.name}
+                  </h3>
+                  <p className='mt-3 font-utekos-text text-lg font-medium leading-[1.35] tracking-tight text-maritime-darkest'>
+                    {model.bestFor}
                   </p>
-                  <Button asChild className='mt-6 w-full'>
-                    <Link href={persona.href as Route}>
-                      {persona.buttonText}
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            </AnimatedBlock>
+                  <p className='mt-4 font-utekos-text text-base leading-[1.45] tracking-tight text-maritime-blue/78'>
+                    {model.description}
+                  </p>
+                  <ul className='mt-6 space-y-2 font-utekos-text text-sm font-medium tracking-tight text-maritime-darkest'>
+                    {model.proofPoints.map(point => (
+                      <li key={point} className='flex items-center gap-3'>
+                        <span className='size-2 rounded-full bg-maritime-blue' />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                  <span className='mt-7 inline-flex font-utekos-text text-base font-medium tracking-tight text-maritime-blue underline decoration-maritime-blue/25 underline-offset-8 transition-colors duration-300 group-hover:text-maritime-darkest'>
+                    {model.cta}
+                  </span>
+                </div>
+              </Link>
+            </article>
           ))}
         </div>
       </div>

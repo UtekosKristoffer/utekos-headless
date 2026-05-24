@@ -5,6 +5,8 @@ import Image from 'next/image'
 import { ArrowRight, Truck, Loader2 } from 'lucide-react'
 import gsap from 'gsap'
 import type { CheckoutPanelProps } from 'types/cart'
+import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
+
 import { useAddToCartAction } from '@/hooks/useAddToCartAction'
 import { VARIANT_IDS } from '../utils/config'
 import type { SizeOptionKey } from '../utils/sizeSelectorData'
@@ -108,8 +110,8 @@ export function CheckoutPanel({
     : undefined
 
   const { performAddToCart, isPending } = useAddToCartAction({
-    product: productMock as any,
-    selectedVariant: selectedVariantMock as any,
+    product: productMock as unknown as ShopifyProduct,
+    selectedVariant: selectedVariantMock as unknown as ShopifyProductVariant,
     additionalLine
   })
 
@@ -175,7 +177,7 @@ export function CheckoutPanel({
           <span className='text-slate-400 text-sm uppercase tracking-widest mb-1'>
             Totalbeløp
           </span>
-          <div className='text-4xl lg:text-5xl font-bold text-white tracking-tighter'>
+          <div className='text-4xl lg:text-5xl font-bold text-cloud-dancer tracking-tight font-utekos-text'>
             <span ref={priceRef}>{totalPrice}</span>,-
           </div>
         </div>
@@ -184,7 +186,7 @@ export function CheckoutPanel({
           onClick={() => performAddToCart(1)}
           disabled={isPending}
           data-track='🚨KJØP-NÅ-COMFYROBE-CAMPAIGN🚨'
-          className='group relative w-full overflow-hidden rounded-full bg-white py-4 lg:py-5 text-lg font-bold text-black transition-all hover:scale-[1.01] active:scale-[0.98] shadow-[0_0_40px_rgba(255,255,255,0.1)] disabled:opacity-70 disabled:cursor-not-allowed'
+          className='group relative w-full overflow-hidden rounded-full bg-cloud-dancer py-4 lg:py-5 text-lg font-bold text-black transition-all hover:scale-[1.01] active:scale-[0.98] shadow-[0_0_40px_rgba(255,255,255,0.1)] disabled:opacity-70 disabled:cursor-not-allowed'
         >
           <div className='absolute inset-0 bg-gradient-to-r from-sky-400 via-white to-sky-400 opacity-0 group-hover:opacity-20 transition-opacity duration-500' />
           <span className='relative z-10 flex items-center justify-center gap-2'>

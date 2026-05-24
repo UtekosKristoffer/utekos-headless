@@ -1,58 +1,65 @@
+// Path: src/app/handlehjelp/sammenlign-modeller/page.tsx
 import type { Metadata } from 'next'
-import { PersonaCards } from './components/PersonaCards'
+import { CompareModelsJsonLd } from './components/CompareModelsJsonLd'
 import { CompareModelsPageHero } from './components/CompareModelsPageHero'
+import { ConclusionSection } from './components/ConclusionSection'
 import { ComparisonSection } from './components/ComparisonSection'
 import { DeepDiveSection } from './components/DeepDiveSection'
-import { ConclusionSection } from './components/ConclusionSection'
-import { Activity } from 'react'
+import { PersonaCards } from './components/PersonaCards'
+
+const pageTitle =
+  'Sammenlign Utekos Dun, Mikrofiber og TechDown | Hvilken er best?'
+const pageDescription =
+  'Finn riktig Utekos for hytte, bobil, båt og norsk vær. Se forskjellen på Utekos Dun, Utekos Mikrofiber og Utekos TechDown.'
+
 export const metadata: Metadata = {
-  title: 'Sammenlign Utekos-modeller | Finn den perfekte for deg',
-  description:
-    'Utekos Dun™ vs. Utekos Mikrofiber™. Se vår detaljerte guide for å finne ut hvilken modell som er best egnet for ditt bruk – enten det er på hytten, i båten eller med bobilen.',
+  title: pageTitle,
+  description: pageDescription,
   keywords: [
+    'hvilken utekos er best',
     'utekos dun vs mikrofiber',
     'sammenlign utekos',
-    'hvilken utekos er best',
-    'forskjell utekos modeller'
+    'utekos techdown',
+    'utekos til hytte',
+    'utekos til båt',
+    'utekos til bobil'
   ],
   alternates: {
     canonical: '/handlehjelp/sammenlign-modeller'
   },
   openGraph: {
-    title: 'Hvilken Utekos er riktig for deg?',
-    description: 'En komplett sammenligning som hjelper deg å velge riktig.',
-    url: '/handlehjelp/sammenlign-modeller',
+    type: 'website',
+    locale: 'no_NO',
+    title: pageTitle,
+    description: pageDescription,
+    url: 'https://utekos.no/handlehjelp/sammenlign-modeller',
     siteName: 'Utekos',
     images: [
       {
-        url: '/og-image-compare.webp',
+        url: 'https://utekos.no/og-image-compare.webp',
         width: 1200,
         height: 630,
-        alt: 'To Utekos-plagg side om side.'
+        alt: 'Sammenligning av Utekos Dun, Mikrofiber og TechDown'
       }
     ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: pageTitle,
+    description: pageDescription,
+    images: ['https://utekos.no/og-image-compare.webp']
   }
 }
 
 export default function CompareModelsPage() {
   return (
-    <main className='bg-background'>
-      <Activity>
-        <CompareModelsPageHero />
-      </Activity>
-      <Activity>
-        <PersonaCards />
-      </Activity>
-      <Activity>
-        {' '}
-        <ComparisonSection />
-      </Activity>
-      <Activity>
-        <DeepDiveSection />
-      </Activity>
-      <Activity>
-        <ConclusionSection />
-      </Activity>
+    <main className='bg-maritime-darkest'>
+      <CompareModelsJsonLd />
+      <CompareModelsPageHero />
+      <PersonaCards />
+      <ComparisonSection />
+      <DeepDiveSection />
+      <ConclusionSection />
     </main>
   )
 }

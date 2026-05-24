@@ -89,7 +89,7 @@ export const TechDownFeatureSection = () => {
       <div className='gsap-glow pointer-events-none absolute -right-[10%] bottom-0 h-[500px] w-[500px] rounded-full bg-soft-warm/10 blur-[100px]' />
 
       <div className='container mx-auto grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20'>
-        <div className='gsap-visual w-full opacity-0'>
+        <div className='gsap-visual w-full'>
           <div className='relative rounded-2xl border border-cloud-dancer/10 bg-cloud-dancer/[0.04] p-2 backdrop-blur-sm shadow-[0_32px_80px_-44px_rgba(8,15,24,0.92)]'>
             <div className='absolute top-4 right-4 z-20 rotate-6 md:-top-4 md:-right-4 md:rotate-3'>
               <div className='flex h-24 w-24 flex-col items-center justify-center rounded-[2rem] bg-dusted-peri p-4 text-maritime-darkest shadow-[0_20px_45px_-24px_rgba(32,28,54,0.58)] ring-1 ring-maritime-darkest/8'>
@@ -124,7 +124,7 @@ export const TechDownFeatureSection = () => {
         </div>
 
         <div className='flex flex-col items-start px-4 lg:px-0'>
-          <div className='gsap-content opacity-0 mb-8 flex flex-wrap gap-3'>
+          <div className='gsap-content mb-8 flex flex-wrap gap-3'>
             <BrandBadge
               backgroundColor='color-mix(in oklch, var(--ancient-water) 72%, rgba(255,255,255,0.08))'
               textColor='var(--color-maritime-darkest)'
@@ -144,20 +144,20 @@ export const TechDownFeatureSection = () => {
             </BrandBadge>
           </div>
 
-          <h2 className='gsap-content opacity-0 mb-6 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl'>
+          <h2 className='gsap-content mb-6 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl'>
             Møt Utekos <br />
             <span className='bg-gradient-to-r from-ancient-water via-sweet-lavender to-overcast bg-clip-text text-transparent'>
               TechDown™
             </span>
           </h2>
 
-          <p className='gsap-content opacity-0 mb-8 max-w-lg text-lg leading-relaxed tracking-tight font-utekos-text text-cloud-dancer/90'>
+          <p className='gsap-content mb-8 max-w-lg text-lg leading-relaxed tracking-tight font-utekos-text text-cloud-dancer/90'>
             Vi har ikke bare kombinert det beste fra dunens letthet og
             mikrofiberens slitestyrke – vi har utviklet en helt ny kategori av
             personlig komfort.
           </p>
 
-          <div className='gsap-content opacity-0 mb-10 flex items-end gap-3 rounded-xl border border-cloud-dancer/10 bg-cloud-dancer/[0.05] p-4 backdrop-blur-sm'>
+          <div className='gsap-content mb-10 flex items-end gap-3 rounded-xl border border-cloud-dancer/10 bg-cloud-dancer/[0.05] p-4 backdrop-blur-sm'>
             <div className='flex flex-col'>
               <span className='mb-1 text-sm font-medium text-overcast/58 line-through'>
                 Før 1990,-
@@ -181,7 +181,7 @@ export const TechDownFeatureSection = () => {
             {TechDownfeatures.map((feature, index) => (
               <li
                 key={index}
-                className='gsap-feature-item opacity-0 group flex items-center gap-4 rounded-xl border border-transparent bg-cloud-dancer/[0.03] p-3 transition-all duration-300 hover:translate-x-1 hover:border-cloud-dancer/14 hover:bg-cloud-dancer/[0.08]'
+                className='gsap-feature-item group flex items-center gap-4 rounded-xl border border-transparent bg-cloud-dancer/[0.03] p-3 transition-all duration-300 hover:translate-x-1 hover:border-cloud-dancer/14 hover:bg-cloud-dancer/[0.08]'
               >
                 <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-ancient-water/12 text-ancient-water transition-transform group-hover:scale-110'>
                   <feature.icon className='h-5 w-5' />
@@ -193,7 +193,7 @@ export const TechDownFeatureSection = () => {
             ))}
           </ul>
 
-          <div className='gsap-content opacity-0'>
+          <div className='gsap-content'>
             <BrandBadge
               asChild
               backgroundColor='var(--color-primary-button)'
