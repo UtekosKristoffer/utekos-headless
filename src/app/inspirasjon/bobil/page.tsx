@@ -57,7 +57,7 @@ export default function BobilInspirasjonPage() {
         }}
       />
 
-      <main>
+      <main className="bg-maritime-darkest text-cloud-dancer">
         <Activity>
           <BobilHeroSection />
         </Activity>
