@@ -1,6 +1,6 @@
 import { Maximize2, Move, User } from 'lucide-react'
 import TechHalfImage from '@public/1080/tech-halv-1080.png'
-import ClassicCoupleImage from '@public/webp/classic-couple-1080.webp'
+import ClassicCoupleImage from '@public/webp/classic-couple-mobile-1080.webp'
 import TechDownKateKikkertImage from '@public/kikkert-kate-2160.webp'
 
 export const Steps = [
