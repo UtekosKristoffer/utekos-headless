@@ -38,7 +38,7 @@ export function NbccProductCarousel({ images }: NbccProductCarouselProps) {
   const next = () => setCurrent(i => (i + 1) % images.length)
 
   return (
-    <div className='group/carousel relative aspect-square overflow-hidden bg-[#e8dfd0]'>
+    <div className='group/carousel relative aspect-square overflow-hidden bg-maritime-blue'>
       {images.map((img, i) => (
         <div
           key={img.src}
@@ -105,9 +105,7 @@ export function NbccProductCarousel({ images }: NbccProductCarouselProps) {
             onClick={() => setCurrent(i)}
             aria-label={`Bilde ${i + 1}`}
             className={`h-1.5 rounded-full transition-all duration-200 ${
-              i === current ? 'w-4 bg-[#17130f]' : (
-                'w-1.5 bg-[#17130f]/35 hover:bg-[#17130f]/60'
-              )
+              i === current ? 'w-4 bg-[#17130f]' : 'w-1.5 bg-[#17130f]/35 hover:bg-[#17130f]/60'
             }`}
           />
         ))}

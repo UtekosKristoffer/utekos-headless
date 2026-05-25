@@ -26,19 +26,18 @@ export function NbccUseCasesSection() {
           className='grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-end'
         >
           <div>
-            <p className='text-sm font-semibold uppercase tracking-[0.18em] text-[#6d4a20]'>
+            <p className='text-sm font-semibold uppercase tracking-[0.18em] text-maritime-blue'>
               Campinglivet har mange former
             </p>
             <h2 className='mt-4 max-w-xl text-balance text-3xl font-semibold tracking-normal sm:text-4xl'>
               Fra morgenkaffe til den siste praten i forteltet.
             </h2>
           </div>
-          <p className='max-w-2xl text-base leading-8 text-[#51463a] lg:justify-self-end'>
-            For noen ligger den største gleden i friheten til å våkne til ny
-            utsikt, for andre er det det trygge fellesskapet på fastplassen
-            eller latteren rundt bordet på et regionstreff. Uansett hvor du slår
-            leir, eller om du nyter roen på terrassen hjemme, er fellesnevneren
-            den samme: De aller beste stundene skapes utendørs.
+          <p className='max-w-2xl text-base font-utekos-text text-cloud-dancer lg:justify-self-end'>
+            For noen ligger den største gleden i friheten til å våkne til ny utsikt, for andre er det det
+            trygge fellesskapet på fastplassen eller latteren rundt bordet på et regionstreff. Uansett hvor du
+            slår leir, eller om du nyter roen på terrassen hjemme, er fellesnevneren den samme: De aller beste
+            stundene skapes utendørs.
           </p>
         </div>
 
@@ -52,16 +51,9 @@ export function NbccUseCasesSection() {
                 data-nbcc-animate
                 className='rounded-lg border border-[#17130f]/10 bg-white/55 p-6 shadow-[0_1px_0_rgba(255,255,255,0.5)_inset]'
               >
-                <Icon
-                  size={28}
-                  animateOnHover='default'
-                  className='mb-5 text-[#6d4a20]'
-                  aria-hidden
-                />
+                <Icon size={28} animateOnHover='default' className='mb-5 text-[#6d4a20]' aria-hidden />
                 <h3 className='text-lg font-semibold'>{useCase.title}</h3>
-                <p className='mt-3 text-sm leading-7 text-[#5a5046]'>
-                  {useCase.description}
-                </p>
+                <p className='mt-3 text-sm leading-7 text-[#5a5046]'>{useCase.description}</p>
               </article>
             )
           })}

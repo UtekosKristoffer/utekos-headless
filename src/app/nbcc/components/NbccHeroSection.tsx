@@ -63,10 +63,7 @@ export function NbccHeroSection() {
   )
 
   return (
-    <section
-      ref={sectionRef}
-      className='relative isolate overflow-hidden bg-[#15120e]'
-    >
+    <section ref={sectionRef} className='relative isolate overflow-hidden bg-maritime-darkest'>
       <div className='absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent' />
 
       <div className='relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-center lg:gap-x-16 lg:gap-y-0 lg:px-8 lg:py-28'>
@@ -85,9 +82,7 @@ export function NbccHeroSection() {
               className='h-9 w-auto object-contain'
             />
             <span className='h-8 w-px bg-neutral-300' aria-hidden />
-            <span className='text-sm font-semibold text-neutral-950'>
-              Medlemsfordel
-            </span>
+            <span className='text-sm font-semibold text-neutral-950'>Medlemsfordel</span>
           </span>
         </div>
 
@@ -118,13 +113,12 @@ export function NbccHeroSection() {
           data-nbcc-hero
           data-nbcc-animate
           data-nbcc-hero-content
-          className='text-pretty text-lg md:py-2 leading-8 text-[#f5efe4]/[0.9] sm:text-xl sm:leading-relaxed lg:col-start-1'
+          className='text-pretty text-lg md:py-2 leading-8 font-utekos-text text-cloud-dancer sm:text-xl lg:col-start-1'
         >
-          Helt siden 1960 har Norsk Bobil og Caravan Club samlet folk rundt de
-          gode opplevelsene og gleden av å treffe andre campingelskere. Utekos
-          deler lidenskapen for denne type sosiale og komfortable
-          utendørsøyeblikk. Derfor gir vi deg en hyggelig medlemsrabatt, slik at
-          du kan ta med deg enda mer varme og komfort ut i de sene kveldstimene.
+          Helt siden 1960 har Norsk Bobil og Caravan Club samlet folk rundt de gode opplevelsene og gleden av
+          å treffe andre campingelskere. Utekos deler lidenskapen for denne type sosiale og komfortable
+          utendørsøyeblikk. Derfor gir vi deg en hyggelig medlemsrabatt, slik at du kan ta med deg enda mer
+          varme og komfort ut i de sene kveldstimene.
         </p>
 
         <div
@@ -136,7 +130,7 @@ export function NbccHeroSection() {
           <Button
             asChild
             size='lg'
-            className='h-12 w-full justify-center rounded-md bg-[#f0c36a] px-6 text-[15px] font-semibold text-[#19140d] hover:bg-[#ffd886] sm:w-auto'
+            className='h-12 w-full justify-center rounded-md bg-primary-button px-6 text-[15px] font-semibold text-[#19140d] hover:bg-[#ffd886] sm:w-auto'
           >
             <Link
               href='#produkter'
@@ -156,7 +150,7 @@ export function NbccHeroSection() {
             trackingData={nbccHeroTracking.secondary}
             containerClassName='min-w-0 w-full'
             panelClassName='w-full sm:max-w-[32rem]'
-            buttonClassName='h-12 w-full justify-center gap-2 rounded-md border-white/25 bg-utekos-brown/90 px-6 text-[15px] font-semibold text-white hover:bg-utekos-brown/60 sm:w-auto'
+            buttonClassName='h-12 w-full justify-center gap-2 rounded-md border-white/25 bg-cloud-dancer px-6 text-[15px] font-semibold text-maritime-darkest hover:bg-overcast sm:w-auto'
           />
         </div>
 
@@ -164,19 +158,16 @@ export function NbccHeroSection() {
           data-nbcc-hero
           data-nbcc-animate
           data-nbcc-hero-content
-          className='grid gap-4 border-t border-white/[0.16] pt-6 text-sm text-[#f5efe4]/[0.82] sm:grid-cols-3 lg:col-start-1 lg:mt-12'
+          className='grid gap-4 border-t border-white/[0.16] pt-6 text-sm text-cloud-dancer sm:grid-cols-3 lg:col-start-1 lg:mt-12'
         >
           <div className='flex items-start gap-3'>
             <BadgeCheckIcon
               size={22}
               animate='check'
-              className='mt-0.5 shrink-0 text-[#f0c36a]'
+              className='mt-0.5 shrink-0 text-primary-button'
               aria-hidden
             />
-            <span>
-              Et beskyttende ytre forent med en silkemyk og tilpasningsdyktig
-              kjerne.
-            </span>
+            <span>Et beskyttende ytre forent med en silkemyk og tilpasningsdyktig kjerne.</span>
           </div>
           <div className='flex items-start gap-3'>
             <CompassIcon
@@ -187,20 +178,11 @@ export function NbccHeroSection() {
               className='mt-0.5 shrink-0 text-[#c7e6c9]'
               aria-hidden
             />
-            <span>
-              Lar deg ta regien over egen komfort. Helt friksjonsfritt.
-            </span>
+            <span>Lar deg ta regien over egen komfort. Helt friksjonsfritt.</span>
           </div>
           <div className='flex items-start gap-3'>
-            <ClockIcon
-              size={22}
-              animate='default'
-              className='mt-0.5 shrink-0 text-[#d8e7ff]'
-              aria-hidden
-            />
-            <span>
-              Fra morgenkaffe til kveldsamling. Bare justér, form og nyt.
-            </span>
+            <ClockIcon size={22} animate='default' className='mt-0.5 shrink-0 text-[#d8e7ff]' aria-hidden />
+            <span>Fra morgenkaffe til kveldsamling. Bare justér, form og nyt.</span>
           </div>
         </div>
       </div>

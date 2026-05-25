@@ -1,9 +1,4 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger
-} from '@/components/ui/accordion'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 import { nbccFaqItems } from '../data/nbccLandingPageContent'
 
@@ -12,7 +7,7 @@ export function NbccFaqSection() {
     <section className='bg-background px-4 py-20 sm:px-6 lg:px-8'>
       <div className='mx-auto grid w-full max-w-4xl gap-10'>
         <div data-nbcc-reveal data-nbcc-animate>
-          <p className='text-sm mx-auto md:text-2xl font-semibold uppercase tracking-[0.18em] text-[#f0c36a]'>
+          <p className='text-sm mx-auto md:text-2xl font-semibold uppercase tracking-[0.18em] text-cloud-dancer'>
             Spørsmål og svar
           </p>
         </div>
@@ -22,7 +17,7 @@ export function NbccFaqSection() {
           data-nbcc-animate
           type='single'
           collapsible
-          className='rounded-lg border border-white/[0.10] bg-[#1a1713] px-5'
+          className='rounded-lg border border-white/50 bg-maritime-darkest px-5'
         >
           {nbccFaqItems.map(item => (
             <AccordionItem key={item.question} value={item.question}>

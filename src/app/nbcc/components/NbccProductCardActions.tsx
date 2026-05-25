@@ -33,12 +33,8 @@ export function NbccProductCardActions({
   const [selectedLabel, setSelectedLabel] = useState(variants[0]?.label ?? '')
 
   const cartActor = CartMutationContext.useActorRef()
-  const isPending = CartMutationContext.useSelector(state =>
-    state.matches('mutating')
-  )
-  const lastError = CartMutationContext.useSelector(
-    state => state.context.error
-  )
+  const isPending = CartMutationContext.useSelector(state => state.matches('mutating'))
+  const lastError = CartMutationContext.useSelector(state => state.context.error)
 
   useEffect(() => {
     if (lastError) {
@@ -63,9 +59,7 @@ export function NbccProductCardActions({
       type: 'ADD_LINES',
       input: [{ variantId: selectedVariant.variantId, quantity: 1 }]
     })
-    toast.success(
-      `${productTitle} (${selectedVariant.label}) er lagt i handlekurven!`
-    )
+    toast.success(`${productTitle} (${selectedVariant.label}) er lagt i handlekurven!`)
     cartStore.send({ type: 'OPEN' })
   }
 
@@ -73,9 +67,7 @@ export function NbccProductCardActions({
     <div className='flex flex-col gap-4'>
       {/* Size selector */}
       <div>
-        <p className='mb-2 text-xs font-medium uppercase tracking-widest text-neutral-400'>
-          Størrelse
-        </p>
+        <p className='mb-2 text-xs font-medium uppercase tracking-widest text-neutral-400'>Størrelse</p>
         <div className='flex flex-wrap gap-2'>
           {variants.map(v => (
             <button
@@ -85,10 +77,8 @@ export function NbccProductCardActions({
               disabled={!v.availableForSale}
               className={[
                 'rounded-md border px-3 py-1.5 text-sm font-medium transition-all',
-                v.label === selectedLabel ?
-                  'border-[#f0c36a] bg-[#f0c36a]/15 text-[#f0c36a]'
-                : !v.availableForSale ?
-                  'cursor-not-allowed border-white/10 text-white/25 line-through'
+                v.label === selectedLabel ? 'border-primary-button bg-cloud-dancer text-maritime-darkest'
+                : !v.availableForSale ? 'cursor-not-allowed border-white/10 text-white/25 line-through'
                 : 'border-white/20 text-white/70 hover:border-white/40 hover:text-white'
               ].join(' ')}
             >
@@ -100,8 +90,8 @@ export function NbccProductCardActions({
 
       {/* Price */}
       <div className='flex items-center justify-between'>
-        <span className='text-xl font-semibold text-white'>{price}</span>
-        <span className='rounded-full border border-[#f0c36a]/30 bg-[#f0c36a]/10 px-2 py-0.5 text-xs text-[#f0c36a]'>
+        <span className='text-xl font-semibold text-cloud-dancer'>{price}</span>
+        <span className='rounded-full border font-utekos-text border-primary-button/30 bg-cloud-dancer px-2 py-0.5 text-xs text-maritime-darkest'>
           NBCC-rabatt i kassen
         </span>
       </div>
@@ -111,7 +101,7 @@ export function NbccProductCardActions({
         <Button
           onClick={handleAddToCart}
           disabled={isPending || !isAvailable}
-          className='h-11 w-full rounded-md bg-white text-[#17130f] hover:bg-[#f0c36a]'
+          className='h-11 w-full rounded-md bg-primary-button text-maritime-darkest hover:bg-primary-button/90'
         >
           {isPending ?
             <Loader2 className='size-4 animate-spin' />
@@ -119,13 +109,9 @@ export function NbccProductCardActions({
         </Button>
         <Button
           asChild
-          className='h-9 rounded-md bg-transparent w-full py-x border border-white/10 text-white/70 hover:border-white/20 hover:bg-white/5 hover:text-white transition-all duration-200'
+          className='h-9 rounded-md bg-cloud-dancer w-full py-x border border-white/10 text-maritime-darkest hover:border-white/20 hover:bg-white/5 hover:text-white transition-all duration-200'
         >
-          <Link
-            href={href}
-            data-track='NbccProductCardCtaClick'
-            data-track-data={JSON.stringify(tracking)}
-          >
+          <Link href={href} data-track='NbccProductCardCtaClick' data-track-data={JSON.stringify(tracking)}>
             Produktside
             <MoveRightIcon size={16} animateOnHover='default' />
           </Link>
