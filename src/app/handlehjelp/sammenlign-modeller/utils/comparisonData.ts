@@ -31,9 +31,9 @@ export const modelRecommendations: ModelRecommendation[] = [
     badge: 'Mest varme per gram',
     bestFor: 'Tørre, kalde kvelder på hytten',
     description:
-      'Velg Dun når du vil ha mest mulig varme, lav vekt og den myke følelsen ekte dun gir.',
+      'Velg Utekos Dun når du du primært søker varme. Denne modellen gir mest varme i forhold til vekt, og er godt  valg for tørre vinterkvelder. Varianten kan også benyttes som sovepose ved temperaturer ned mot 0 °C.',
     cta: 'Se Utekos Dun',
-    proofPoints: ['650 FP andedun', 'Høy varme i lav vekt', 'Mest pakkbar']
+    proofPoints: ['650 fillpower', 'Høy varme-til-vekt forhold', 'Komprimeres godt']
   },
   {
     key: 'mikrofiber',
@@ -45,7 +45,7 @@ export const modelRecommendations: ModelRecommendation[] = [
     badge: 'Enklest i bruk',
     bestFor: 'Bobil, reise og daglig bruk',
     description:
-      'Velg Mikrofiber når du vil ha et lett plagg som tørker raskt og er lett å pakke.',
+      'Velg Utekos Mikrofiber når du vil ha et lett plagg som tørker raskt og er lett å pakke. Best egnet for de mer lune dagene og kveldene, eller hvis du planlegger å bruke Utekos i aktivitet. Et godt valg for bobil, reise og hverdagsbruk.',
     cta: 'Se Utekos Mikrofiber',
     proofPoints: ['Lavest vekt', 'Tørker raskt', 'Maskinvask']
   },
@@ -56,25 +56,16 @@ export const modelRecommendations: ModelRecommendation[] = [
     href: '/produkter/utekos-techdown',
     imageSrc: '/og-kate-linn-kikkert-master.png',
     imageAlt: 'Utekos TechDown brukt ved sjøen i norsk vær',
-    badge: 'Best i fuktig vær',
-    bestFor: 'Båt, kyst og helårsbruk',
+    badge: 'Mest allsidig',
+    bestFor: 'Fleksibel - egner seg alle årstider.',
     description:
-      'Velg TechDown når været skifter og du vil ha robust varme som tåler fukt bedre.',
+      'Velg TechDown hvis du vil ha det mest allsidige alternativet. Den holder varmer når du holder deg i ro, og lar seg justere etter behov ved aktivitet. Har egenskaper som gjør den egnet til bruk i både tørt og fuktig vær. ',
     cta: 'Se Utekos TechDown',
     proofPoints: ['CloudWeave™', 'Robust ytterstoff', 'Helårsbruk']
   }
 ]
 
 export const comparisonRows: ComparisonRow[] = [
-  {
-    feature: 'Kort svar',
-    shortAnswer: 'Hvilken Utekos er best?',
-    values: {
-      dun: 'Best når varme og lav vekt betyr mest.',
-      mikrofiber: 'Best når lav vekt, enkel vask og pakking betyr mest.',
-      techdown: 'Best når været er fuktig, skiftende eller røft.'
-    }
-  },
   {
     feature: 'Best for',
     shortAnswer: 'Brukssituasjon',
@@ -142,10 +133,9 @@ export const comparisonRows: ComparisonRow[] = [
 
 export const deepDiveSections = [
   {
-    eyebrow: 'Dun vs mikrofiber',
+    eyebrow: 'Utekos Dun sammelignet med Utekos Mikrofiber',
     title: 'Velg Dun for tørr kulde og Mikrofiber for enkel bruk',
-    body:
-      'Utekos Dun gir mest varme i forhold til vekt. Utekos Mikrofiber er lettere å bruke ofte fordi den tåler mer fukt, tørker raskt og er lett å pakke.',
+    body: 'Utekos Dun gir mest varme i forhold til vekt. Utekos Mikrofiber er lettere å bruke ofte fordi den tåler mer fukt, tørker raskt og er lett å pakke.',
     points: [
       'Dun passer best når været er tørt og kaldt.',
       'Mikrofiber passer best når plagget ofte pakkes, vaskes og tas med på tur.',
@@ -153,10 +143,9 @@ export const deepDiveSections = [
     ]
   },
   {
-    eyebrow: 'Utekos til båt',
+    eyebrow: 'For bruk i båt',
     title: 'Velg TechDown når været skifter',
-    body:
-      'Utekos TechDown er laget for fuktige kvelder, kystluft og mer variert bruk. Den gir trygg varme når vær, underlag og temperatur endrer seg raskt.',
+    body: 'Utekos TechDown er laget for fuktige kvelder, kystluft og mer variert bruk. Den gir trygg varme når vær, underlag og temperatur endrer seg raskt.',
     points: [
       'Best valg til båt og kyst.',
       'Trygg til bobil og camping når plagget brukes ofte ute.',
@@ -164,10 +153,9 @@ export const deepDiveSections = [
     ]
   },
   {
-    eyebrow: 'Utekos til hytte og bobil',
+    eyebrow: 'Til hytte og bobil',
     title: 'Bruken din avgjør riktig modell',
-    body:
-      'Start med hvor plagget skal ligge klart. På hytten er Dun ofte riktig. I bobilen er Mikrofiber lett å pakke. I båten gir TechDown mest ro.',
+    body: 'Start med hvor plagget skal ligge klart. På hytten er Dun ofte riktig. I bobilen er Mikrofiber lett å pakke. I båten gir TechDown mest ro.',
     points: [
       'Hytte: Dun når lav vekt og høy varme er viktigst.',
       'Bobil: Mikrofiber når pakking og vask skal være lett.',

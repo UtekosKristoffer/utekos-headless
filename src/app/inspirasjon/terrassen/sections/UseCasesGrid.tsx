@@ -99,7 +99,11 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
             const surface = useCaseSurfaces[useCase.surface]
 
             return (
-              <AnimatedBlock key={useCase.title} className='will-animate-fade-in-up h-full' delay={`${index * 0.1}s`}>
+              <AnimatedBlock
+                key={useCase.title}
+                className='will-animate-fade-in-up h-full'
+                delay={`${index * 0.1}s`}
+              >
                 <Card
                   className='@container group relative h-full overflow-hidden border shadow-[0_24px_60px_-44px_color-mix(in_oklch,var(--maritime-darkest)_88%,transparent)]'
                   style={{

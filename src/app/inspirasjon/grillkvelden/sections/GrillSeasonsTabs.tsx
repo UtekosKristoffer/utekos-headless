@@ -53,11 +53,7 @@ export function GrillSeasonsTabs() {
   const [activeTab, setActiveTab] = useState('autumn')
 
   return (
-    <Tabs
-      defaultValue='autumn'
-      className='mx-auto max-w-4xl'
-      onValueChange={setActiveTab}
-    >
+    <Tabs defaultValue='autumn' className='mx-auto max-w-4xl' onValueChange={setActiveTab}>
       <TabsList className='grid w-full grid-cols-4 gap-2 bg-transparent p-1'>
         {seasons.map(season => {
           const Icon = season.icon
@@ -117,14 +113,10 @@ export function GrillSeasonsTabs() {
                     >
                       <Icon className={`h-6 w-6 ${season.iconColor}`} />
                     </div>
-                    <h3 className='text-2xl font-semibold text-cloud-dancer'>
-                      {season.title}
-                    </h3>
+                    <h3 className='text-2xl font-semibold text-cloud-dancer'>{season.title}</h3>
                   </div>
 
-                  <p className='text-lg leading-[1.45] tracking-normal text-overcast'>
-                    {season.description}
-                  </p>
+                  <p className='text-cloud-dancer'>{season.description}</p>
                 </CardContent>
               </Card>
             </div>

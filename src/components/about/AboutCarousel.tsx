@@ -28,9 +28,7 @@ export function AboutCarousel() {
   const [current, setCurrent] = useState(0)
   const containerRef = useRef<HTMLElement>(null)
 
-  const autoplayPlugin = useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: false })
-  )
+  const autoplayPlugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: false }))
 
   useGSAP(
     () => {
@@ -124,13 +122,10 @@ export function AboutCarousel() {
             <span>Livet med Utekos</span>
           </BrandBadge>
 
-          <h2 className='gsap-title mb-4 text-4xl leading-[0.95] font-bold tracking-[-0.01em] md:text-5xl'>
-            Et glimt av opplevelsen
-          </h2>
+          <h2 className='gsap-title text-cloud-dancer mb-6'>Et glimt av opplevelsen</h2>
 
-          <p className='gsap-desc mx-auto max-w-2xl text-lg leading-[1.45] tracking-[-0.01em] text-cloud-dancer/82 md:text-xl'>
-            Se hvordan kompromissløs komfort gir liv til dine favorittøyeblikk
-            utendørs.
+          <p className='gsap-desc text-cloud-dancer mx-auto utekos-section-lead'>
+            Se hvordan kompromissløs komfort gir liv til dine favorittøyeblikk utendørs.
           </p>
         </div>
 
@@ -148,10 +143,7 @@ export function AboutCarousel() {
             >
               <CarouselContent className='-ml-4'>
                 {aboutImages.map((image, index) => (
-                  <CarouselItem
-                    key={index}
-                    className='pl-4 md:basis-1/2 lg:basis-1/3'
-                  >
+                  <CarouselItem key={index} className='pl-4 md:basis-1/2 lg:basis-1/3'>
                     <div className='group relative overflow-hidden rounded-[1.25rem] border border-cloud-dancer/8 bg-maritime-darkest'>
                       <AspectRatio ratio={1 / 1}>
                         <Image

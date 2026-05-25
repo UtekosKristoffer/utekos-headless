@@ -2,68 +2,81 @@ import { Card, CardContent } from '@/components/ui/card'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import type { HostTip } from '../types'
 import { Music, Thermometer, Lightbulb, UtensilsCrossed } from 'lucide-react'
+import { grillCardThemes } from '../data/grillCardThemes'
 
 export const hostTipsData: HostTip[] = [
   {
     name: 'Planlegg for komfort',
     highlight: 'Ha Utekos klar til gjestene',
-    icon: Thermometer,
-    color: 'text-dusted-peri'
+    icon: Thermometer
   },
   {
     name: 'God belysning',
     highlight: 'Lysslynger skaper magi',
-    icon: Lightbulb,
-    color: 'text-primary-button'
+    icon: Lightbulb
   },
   {
     name: 'Enkel servering',
     highlight: 'Fingermat og selvbetjening',
-    icon: UtensilsCrossed,
-    color: 'text-ancient-water'
+    icon: UtensilsCrossed
   },
   {
     name: 'Riktig musikk',
     highlight: 'En rolig spilleliste setter tonen',
-    icon: Music,
-    color: 'text-rose-400'
+    icon: Music
   }
 ]
 
 export function HostTipsGrid({ tips }: { tips: HostTip[] }) {
   return (
-    <section className='py-24'>
+    <section className='bg-overcast py-24'>
       <div className='container mx-auto px-4'>
-        <div className='mx-auto mb-16 max-w-2xl text-center'>
-          <h2 className='text-fluid-display font-bold tracking-normal'>
-            Vertens sjekkliste
-          </h2>
-          <p className='mx-auto mt-4 max-w-2xl text-lg text-overcast'>
-            Fire enkle tips for en uforglemmelig (og komfortabel) grillkveld.
+        <div className='mx-auto mb-16 max-w-3xl md:max-w-4xl text-center'>
+          <h2 className='text-fluid-display-bold text-maritime-darkest'>Vertens sjekkliste</h2>
+          <p className='mx-auto mt-4 max-w-2xl utekos-section-lead text-maritime-darkest/82'>
+            Fire enkle tips for en uforglemmelig og komfortabel grillkveld.
           </p>
         </div>
 
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
-          {tips.map((tip, tipIndex) => (
-            <AnimatedBlock
-              className='will-animate-fade-in-up'
-              delay={`${tipIndex * 0.1}s`}
-              threshold={0.2}
-              key={tip.name}
-            >
-              <Card className='group border-cloud-dancer/12 bg-maritime-blue/24 transition-colors hover:bg-maritime-blue/32'>
-                <CardContent className='p-6'>
-                  <div className='mb-3 flex items-start justify-between'>
-                    <h3 className='text-lg font-semibold'>{tip.name}</h3>
-                    <tip.icon
-                      className={`size-5 ${tip.color} transition-colors group-hover:text-primary`}
-                    />
+          {tips.map((tip, tipIndex) => {
+            const theme = grillCardThemes[tipIndex % grillCardThemes.length] ?? grillCardThemes[0]
+
+            return (
+              <AnimatedBlock
+                className='will-animate-fade-in-up h-full'
+                delay={`${tipIndex * 0.08}s`}
+                threshold={0.18}
+                key={tip.name}
+              >
+                <Card
+                  className={`@container group relative h-full overflow-hidden border ${theme.border} ${theme.surface} transition-[transform,border-color] duration-300 ease-out motion-safe:hover:-translate-y-1`}
+                >
+                  <div className='pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
+                    <div className={`absolute inset-0 ${theme.glow}`} />
+                    <div className='absolute inset-x-0 top-0 h-px bg-cloud-dancer/24' />
                   </div>
-                  <p className='text-sm text-cloud-dancer/80'>{tip.highlight}</p>
-                </CardContent>
-              </Card>
-            </AnimatedBlock>
-          ))}
+
+                  <CardContent className='relative flex h-full flex-col p-6'>
+                    <div className='mb-4 flex items-center gap-4'>
+                      <div
+                        className='flex size-10 shrink-0 items-center justify-center rounded-full border border-maritime-darkest/10 transition-transform duration-300 motion-safe:group-hover:-translate-y-0.5'
+                        style={{ backgroundColor: `var(${theme.iconSurface})` }}
+                      >
+                        <tip.icon className={`size-5 ${theme.iconColor}`} aria-hidden />
+                      </div>
+                      <h3 className={`text-lg font-semibold leading-[1.1] tracking-[-0.01em] ${theme.text}`}>
+                        {tip.name}
+                      </h3>
+                    </div>
+                    <p className={`font-utekos-text text-sm leading-[1.45] tracking-[-0.02em] ${theme.mutedText}`}>
+                      {tip.highlight}
+                    </p>
+                  </CardContent>
+                </Card>
+              </AnimatedBlock>
+            )
+          })}
         </div>
       </div>
     </section>

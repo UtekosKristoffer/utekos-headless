@@ -14,7 +14,7 @@ import { Activity } from 'react'
 
 export default function MagazineLayout({ children }: { children: ReactNode }) {
   return (
-    <div className='min-h-screen bg-maritime-darkest'>
+    <div className='min-h-screen bg-overcast'>
       <Activity>
         <section className='border-b border-cloud-dancer'>
           <div className='container mx-auto px-4 py-6'>
@@ -38,12 +38,9 @@ export default function MagazineLayout({ children }: { children: ReactNode }) {
       <Activity>
         <section className='border-b border-cloud-dancer bg-maritime-darkest'>
           <div className='container mx-auto px-4 py-12 text-center'>
-            <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>
-              Utekos Magasinet
-            </h1>
+            <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>Utekos Magasinet</h1>
             <p className='mt-4 text-lg text-cloud-dancer/90 max-w-2xl mx-auto'>
-              Inspirasjon, tips og historier for deg som verdsetter de gode
-              stundene ute.
+              Inspirasjon, tips og historier for deg som verdsetter de gode stundene ute.
             </p>
           </div>
         </section>

@@ -5,7 +5,6 @@ import { BusFront, House, Lightbulb, Sparkles, Sun, Waves } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
-import { Activity } from 'react'
 
 const magazineCardClass =
   'h-full overflow-hidden rounded-3xl border border-maritime-darkest/12 bg-overcast text-maritime-darkest shadow-[0_20px_60px_rgba(20,24,22,0.08)] transition-[transform,border-color,box-shadow,background-color] duration-300 hover:border-maritime-blue/30 hover:bg-overcast/80 hover:shadow-[0_28px_80px_rgba(20,24,22,0.14)]'
@@ -47,99 +46,81 @@ export default function MagazinePage() {
   return (
     <div className='container mx-auto px-4'>
       {featuredArticle && (
-        <Activity>
-          <section className='mb-16'>
+        <section className='mb-16'>
+          <Link
+            href={`/magasinet/${featuredArticle.slug}`}
+            className='group block'
+            data-track='MagazineFeaturedClick'
+            data-track-data={JSON.stringify({
+              title: featuredArticle.title,
+              slug: featuredArticle.slug,
+              category: featuredArticle.category
+            })}
+          >
+            <Card className={`grid grid-cols-1 md:grid-cols-2 ${magazineCardClass}`}>
+              <div className='relative h-64 md:h-auto'>
+                <Image
+                  src={featuredArticle.imageUrl}
+                  alt={featuredArticle.title}
+                  fill
+                  sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+                  className='object-cover'
+                />
+              </div>
+              <div className='p-8 md:p-12 flex flex-col justify-center'>
+                <CategoryBadge category={featuredArticle.category} />
+                <h2 className={magazineTitleClass}>{featuredArticle.title}</h2>
+                <p className={`mb-6 ${magazineExcerptClass}`}>{featuredArticle.excerpt}</p>
+                <div className={magazineCtaClass}>
+                  Les hele saken
+                  <ArrowRightIcon className='h-4 w-4 transition-transform group-hover:translate-x-1' />
+                </div>
+              </div>
+            </Card>
+          </Link>
+        </section>
+      )}
+
+      <section>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+          {otherArticles.map(article => (
             <Link
-              href={`/magasinet/${featuredArticle.slug}`}
+              key={article.slug}
+              href={`/magasinet/${article.slug}`}
               className='group block'
-              data-track='MagazineFeaturedClick'
+              data-track='MagazineGridClick'
               data-track-data={JSON.stringify({
-                title: featuredArticle.title,
-                slug: featuredArticle.slug,
-                category: featuredArticle.category
+                title: article.title,
+                slug: article.slug,
+                category: article.category
               })}
             >
-              <Card
-                className={`grid grid-cols-1 md:grid-cols-2 ${magazineCardClass}`}
-              >
-                <div className='relative h-64 md:h-auto'>
+              <Card className={`${magazineCardClass} hover:-translate-y-1`}>
+                <div className='relative h-48'>
                   <Image
-                    src={featuredArticle.imageUrl}
-                    alt={featuredArticle.title}
+                    src={article.imageUrl}
+                    alt={article.title}
                     fill
                     sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                    className='object-cover'
+                    className='object-cover transition-transform group-hover:scale-105'
                   />
                 </div>
-                <div className='p-8 md:p-12 flex flex-col justify-center'>
-                  <CategoryBadge category={featuredArticle.category} />
-                  <h2 className={magazineTitleClass}>
-                    {featuredArticle.title}
-                  </h2>
-                  <p className={`mb-6 ${magazineExcerptClass}`}>
-                    {featuredArticle.excerpt}
-                  </p>
-                  <div className={magazineCtaClass}>
-                    Les hele saken
-                    <ArrowRightIcon className='h-4 w-4 transition-transform group-hover:translate-x-1' />
-                  </div>
+                <div className='p-6'>
+                  <CategoryBadge category={article.category} />
+                  <h3 className='mb-2 font-google-sans text-xl font-semibold text-maritime-darkest transition-colors group-hover:text-maritime-blue'>
+                    {article.title}
+                  </h3>
+                  <p className='text-sm text-maritime-darkest/78'>{article.excerpt}</p>
                 </div>
               </Card>
             </Link>
-          </section>
-        </Activity>
-      )}
-
-      <Activity>
-        <section>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-            {otherArticles.map(article => (
-              <Link
-                key={article.slug}
-                href={`/magasinet/${article.slug}`}
-                className='group block'
-                data-track='MagazineGridClick'
-                data-track-data={JSON.stringify({
-                  title: article.title,
-                  slug: article.slug,
-                  category: article.category
-                })}
-              >
-                <Card className={`${magazineCardClass} hover:-translate-y-1`}>
-                  <div className='relative h-48'>
-                    <Image
-                      src={article.imageUrl}
-                      alt={article.title}
-                      fill
-                      sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                      className='object-cover transition-transform group-hover:scale-105'
-                    />
-                  </div>
-                  <div className='p-6'>
-                    <CategoryBadge category={article.category} />
-                    <h3 className='mb-2 font-google-sans text-xl font-semibold text-maritime-darkest transition-colors group-hover:text-maritime-blue'>
-                      {article.title}
-                    </h3>
-                    <p className='text-sm text-maritime-darkest/78'>
-                      {article.excerpt}
-                    </p>
-                  </div>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </section>
-      </Activity>
+          ))}
+        </div>
+      </section>
     </div>
   )
 }
 
-function Card({
-  className,
-  children
-}: {
-  className?: string
-  children: ReactNode
-}) {
+function Card({ className, children }: { className?: string; children: ReactNode }) {
   return <div className={className}>{children}</div>
 }

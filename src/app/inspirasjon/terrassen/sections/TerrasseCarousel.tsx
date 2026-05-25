@@ -10,7 +10,13 @@ import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import { terrasseImages } from '@/app/inspirasjon/terrassen/images/terrasseImages'
 import type { CarouselApi } from '@/components/ui/carousel'
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from '@/components/ui/carousel'
 import { cn } from '@/lib/utils/className'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { createGsapDevTools } from '@/lib/gsap/createGsapDevTools'
@@ -300,7 +306,9 @@ export function TerrasseCarousel() {
                   onClick={() => api.scrollTo(index)}
                   className={cn(
                     'h-1.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest motion-reduce:transition-none',
-                    current === index + 1 ? 'w-6 bg-primary-button' : 'w-1.5 bg-overcast hover:bg-cloud-dancer'
+                    current === index + 1 ?
+                      'w-6 bg-primary-button'
+                    : 'w-1.5 bg-overcast hover:bg-cloud-dancer'
                   )}
                   aria-current={current === index + 1 ? 'true' : undefined}
                   aria-label={`Gå til bilde ${index + 1}`}

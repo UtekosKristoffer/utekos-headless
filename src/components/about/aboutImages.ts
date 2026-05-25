@@ -8,7 +8,7 @@ export const aboutImages = [
     alt: 'En kvinne iført Utekos-plagg sitter terrassen i snørike omgivelser.'
   },
   {
-    src: '/webp/classic-couple-1080.webp',
+    src: '/webp/classic-couple-mobile-1080.webp',
     alt: 'En familie samlet rundt en bålpanne, alle kledd i Utekos.'
   },
   {

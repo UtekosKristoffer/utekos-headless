@@ -7,8 +7,7 @@ import { ComparisonSection } from './components/ComparisonSection'
 import { DeepDiveSection } from './components/DeepDiveSection'
 import { PersonaCards } from './components/PersonaCards'
 
-const pageTitle =
-  'Sammenlign Utekos Dun, Mikrofiber og TechDown | Hvilken er best?'
+const pageTitle = 'Sammenlign Utekos Dun, Mikrofiber og TechDown | Hvilken er best?'
 const pageDescription =
   'Finn riktig Utekos for hytte, bobil, båt og norsk vær. Se forskjellen på Utekos Dun, Utekos Mikrofiber og Utekos TechDown.'
 

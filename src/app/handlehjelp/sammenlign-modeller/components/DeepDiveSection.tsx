@@ -4,52 +4,49 @@ import { deepDiveSections } from '../utils/comparisonData'
 
 export function DeepDiveSection() {
   return (
-    <section className='bg-maritime-darkest py-20 text-cloud-dancer sm:py-28'>
+    <section
+      aria-labelledby='sammenlign-modeller-deep-dive-heading'
+      className='bg-maritime-darkest py-20 text-cloud-dancer sm:py-28'
+    >
       <div className='mx-auto max-w-7xl px-[6vw]'>
-        <div className='max-w-3xl'>
+        <div className='max-w-3xl md:max-w-4xl text-center w-full mx-auto'>
           <BrandBadge
             label='Slik velger du'
             backgroundColor='var(--primary-button)'
             className='mb-6 px-6 py-3 text-sm'
           />
-          <h2 className='font-google-sans text-4xl leading-[0.95] font-bold tracking-tight text-cloud-dancer sm:text-6xl'>
+          <h2 id='sammenlign-modeller-deep-dive-heading' className='text-cloud-dancer w-full mx-auto'>
             Se etter vær, vekt og hvor plagget skal bo
           </h2>
-          <p className='mt-6 max-w-2xl font-utekos-text text-lg leading-[1.45] tracking-tight text-cloud-dancer/84 sm:text-xl'>
-            De fleste velger riktig når de starter med bruk, ikke materiale. Her
-            er de viktigste valgene forklart kort.
+          <p className='mt-6 utekos-section-lead max-w-2xl mx-auto text-cloud-dancer'>
+            De fleste velger riktig når de starter med bruk, ikke materiale. Her er de viktigste valgene
+            forklart kort.
           </p>
         </div>
 
-        <div className='mt-14 divide-y divide-cloud-dancer/14 border-y border-cloud-dancer/14'>
+        <ul className='mt-14 divide-y divide-cloud-dancer/14 border-y border-cloud-dancer/14'>
           {deepDiveSections.map(section => (
-            <article
-              key={section.title}
-              className='grid gap-8 py-10 lg:grid-cols-[0.42fr_0.58fr] lg:py-14'
-            >
-              <div>
+            <li key={section.title}>
+              <article className='mx-auto max-w-4xl py-10 lg:py-14'>
                 <p className='font-utekos-text text-sm font-medium tracking-tight text-cloud-dancer'>
                   {section.eyebrow}
                 </p>
                 <h3 className='mt-4 font-google-sans text-3xl leading-[0.98] font-bold tracking-tight text-cloud-dancer sm:text-4xl'>
                   {section.title}
                 </h3>
-              </div>
-              <div>
-                <p className='font-utekos-text text-lg leading-[1.45] tracking-tight text-cloud-dancer/86'>
-                  {section.body}
-                </p>
-                <ul className='mt-7 grid gap-3 font-utekos-text text-base font-medium tracking-tight text-cloud-dancer sm:grid-cols-3'>
+
+                <ul className='mt-7 list-disc space-y-4 pl-5 font-utekos-text text-base font-medium leading-[1.45] tracking-tight text-cloud-dancer marker:text-primary-button sm:text-lg'>
+                  <li className='text-cloud-dancer/90'>{section.body}</li>
                   {section.points.map(point => (
-                    <li key={point} className='border-l border-overcast pl-4'>
+                    <li key={point} className='text-cloud-dancer/86'>
                       {point}
                     </li>
                   ))}
                 </ul>
-              </div>
-            </article>
+              </article>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   )

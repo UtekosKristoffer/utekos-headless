@@ -10,12 +10,9 @@ export function CTASection() {
       <div className='absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,var(--ancient-water)_0%,transparent_32%),radial-gradient(circle_at_82%_20%,var(--soft-warm)_0%,transparent_28%)] opacity-[0.18]' />
       <div className='container relative mx-auto px-4 text-center'>
         <AnimatedBlock className='will-animate-fade-in-scale'>
-          <h2 className='mb-6 text-fluid-display font-bold leading-[0.95] tracking-normal text-cloud-dancer'>
-            Klar for å bli nabolagets grillkonge?
-          </h2>
-          <p className='mx-auto mb-8 max-w-2xl text-xl leading-[1.45] tracking-normal text-overcast'>
-            Sørg for at du har hemmeligheten til vellykket helårsgrilling i
-            skapet. Dine gjester vil takke deg.
+          <h2 className='mb-6 text-cloud-dancer'>Klar for å bli nabolagets grillkonge?</h2>
+          <p className='mx-auto mb-8 max-w-2xl utekos-section-lead text-cloud-dancer/88'>
+            Sørg for at du har hemmeligheten til vellykket helårsgrilling i skapet. Gjestene dine vil takke deg.
           </p>
           <div className='flex flex-wrap justify-center gap-4'>
             <BrandBadge

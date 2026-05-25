@@ -1,35 +1,40 @@
 import { Card, CardContent } from '@/components/ui/card'
-import Image from 'next/image' // Importer Image-komponent
+import Image from 'next/image'
+import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 
 export function GrillMasterSection() {
   return (
-    <section className='bg-maritime-blue/24 py-24'>
+    <section className='bg-mountain-view py-24 text-cloud-dancer'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='text-fluid-display mb-8 font-bold tracking-normal'>
-            Grillmestere elsker Utekos
+          <h2 className='mb-8 text-cloud-dancer'>
+            <span className='inline-flex flex-wrap items-baseline justify-center gap-x-[0.22em] gap-y-2'>
+              <span>Grillmestere elsker</span>
+              <UtekosWordmark
+                className='inline-block h-[0.78em] w-auto shrink-0 translate-y-[0.06em]'
+                style={{ color: 'var(--cloud-dancer)' }}
+              />
+            </span>
           </h2>
 
-          <Card className='border-cloud-dancer/12 bg-maritime-darkest'>
-            <CardContent className='p-12'>
-              <blockquote className='mb-6 text-xl italic text-cloud-dancer/90'>
-                &quot;Jeg elsker å arrangere grillfester, men hatet at folk
-                begynte å trekke inn så snart det ble litt kjølig. Utekos
-                forandret alt. Nå er det alltid noen som har en på seg, og
-                festen fortsetter ute der den hører hjemme – rundt
-                grillen!&quot;
+          <Card className='border-cloud-dancer/18 bg-maritime-darkest/24 shadow-[0_28px_80px_-54px_color-mix(in_oklch,var(--maritime-darkest)_82%,transparent)]'>
+            <CardContent className='p-8 sm:p-12'>
+              <blockquote className='mb-6 font-utekos-text text-xl leading-[1.45] tracking-[-0.02em] text-cloud-dancer'>
+                &quot;Jeg elsker å arrangere grillfester, men hatet at folk dro inn så snart det ble kjølig.
+                Utekos endret alt. Festen fortsetter ute — rundt grillen, der den hører hjemme.&quot;
               </blockquote>
               <div className='flex items-center justify-center gap-4'>
                 <Image
                   src='/hans-age.webp'
-                  alt='Morten P.'
+                  alt='Hans Åge'
                   width={48}
                   height={48}
+                  sizes='48px'
                   className='size-12 rounded-full object-cover'
                 />
                 <div className='text-left'>
-                  <p className='font-semibold'>Hans Åge</p>
-                  <p className='text-sm text-overcast'>
+                  <p className='font-semibold leading-[1.25] tracking-[-0.01em] text-cloud-dancer'>Hans Åge</p>
+                  <p className='font-utekos-text text-sm leading-[1.45] tracking-[-0.02em] text-cloud-dancer/82'>
                     Hobby-grillmester og livsnyter
                   </p>
                 </div>

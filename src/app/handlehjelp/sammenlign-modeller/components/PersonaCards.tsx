@@ -7,32 +7,24 @@ import { modelRecommendations } from '../utils/comparisonData'
 
 export function PersonaCards() {
   return (
-    <section
-      id='velg-etter-bruk'
-      className='bg-cloud-dancer py-20 text-maritime-darkest sm:py-28'
-    >
-      <div className='mx-auto max-w-7xl px-[6vw]'>
-        <div className='max-w-3xl'>
+    <section id='velg-etter-bruk' className='bg-cloud-dancer py-20 text-maritime-darkest sm:py-28'>
+      <div className='mx-auto max-w-7xl'>
+        <div className='max-w-3xl items-center md:max-w-3xl lg:max-w-4xl justify-center text-center w-full mx-auto'>
           <BrandBadge
             label='Velg etter bruk'
             backgroundColor='var(--ancient-water)'
             className='mb-6 px-6 py-3 text-sm'
           />
-          <h2 className='font-google-sans text-4xl leading-[0.95] font-bold tracking-[-0.01em] text-maritime-blue sm:text-6xl'>
-            Riktig Utekos starter med hvor du bruker den
-          </h2>
-          <p className='mt-6 max-w-2xl font-utekos-text text-lg leading-[1.45] tracking-tight text-maritime-blue/82 sm:text-xl'>
-            Kort svar: Velg Dun for tørr kulde, Mikrofiber for lett pakking og
-            TechDown for fuktig vær.
+          <h2 className='text-maritime-blue mx-auto md:max-w-3xl'>Hva er riktig Utekos for deg?</h2>
+          <p className='mt-6 max-w-2xl md:max-w-3xl lg:max-w-4xl utekos-section-lead mx-auto text-maritime-darkest'>
+            Å velge riktig Utekos handler i stor grad om å finne balansen mellom varme, vekt, pakkvolum og hva
+            du faktisk skal bruke jakken til.
           </p>
         </div>
 
         <div className='mt-14 grid gap-8 lg:grid-cols-3'>
           {modelRecommendations.map(model => (
-            <article
-              key={model.key}
-              className='group overflow-hidden bg-overcast text-maritime-darkest'
-            >
+            <article key={model.key} className='group overflow-hidden bg-overcast text-maritime-darkest'>
               <Link href={model.href as Route} className='block'>
                 <div className='relative aspect-[4/3] overflow-hidden'>
                   <Image
