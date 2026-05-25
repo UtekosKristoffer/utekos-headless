@@ -1,7 +1,7 @@
 // Path: src/app/skreddersy-varmen/utekos-orginal/page.tsx
 import type { Metadata } from 'next'
 import { HeroSection } from './components/HeroSection'
-import { EmpathySection } from './components/EmpatySection'
+import { EmpathySection } from '../components/EmpathySection'
 import { ProductShowcase } from './components/ProductShowcase'
 import { ThreeInOneDemo } from './components/ThreeInOneDemo'
 import { SizeGuideTable } from './components/SizeGuideTable'
