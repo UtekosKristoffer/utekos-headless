@@ -35,9 +35,7 @@ interface ComfyrobeContentColumnProps {
   variantId: string
 }
 
-export function ComfyrobeContentColumn({
-  variantId
-}: ComfyrobeContentColumnProps) {
+export function ComfyrobeContentColumn({ variantId }: ComfyrobeContentColumnProps) {
   const [containerRef, containerInView] = useInView({ threshold: 0.5 })
   const [badgeRef, badgeInView] = useInView({ threshold: 1 })
   const [h2Ref, h2InView] = useInView({ threshold: 1 })
@@ -72,9 +70,7 @@ export function ComfyrobeContentColumn({
         style={{ '--transition-delay': '0.3s' } as React.CSSProperties}
       >
         <Shield className='size-4 text-maritime-darkest' />
-        <span className='text-sm font-semibold text-maritime-darkest'>
-          Comfyrobe™
-        </span>
+        <span className='text-sm font-semibold text-maritime-darkest'>Comfyrobe™</span>
       </div>
 
       <h2
@@ -96,18 +92,13 @@ export function ComfyrobeContentColumn({
         )}
         style={{ '--transition-delay': '0.5s' } as React.CSSProperties}
       >
-        Comfyrobe™ kombinerer funksjon, tidløst design og kompromissløs
-        komfort. Vanntett og vindtett ytterstoff med pustende membran holder deg
-        tørr, mens det tykke sherpa-fôret omslutter deg med varme.
+        Comfyrobe™ kombinerer funksjon, tidløst design og kompromissløs komfort. Vanntett og vindtett
+        ytterstoff med pustende membran holder deg tørr, mens det tykke sherpa-fôret omslutter deg med varme.
       </p>
 
       <ul className='mt-8 space-y-3'>
         {benefits.map((benefit, idx) => (
-          <BenefitCard
-            key={benefit.label}
-            benefit={benefit}
-            delay={0.6 + idx * 0.1}
-          />
+          <BenefitCard key={benefit.label} benefit={benefit} delay={0.6 + idx * 0.1} />
         ))}
       </ul>
 

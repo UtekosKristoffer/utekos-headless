@@ -3,11 +3,7 @@
 
 import React from 'react'
 import Image from 'next/image'
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem
-} from '@/components/ui/carousel'
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import Autoplay from 'embla-carousel-autoplay'
 import { GridCross } from '@/components/legal/GridCross'
 import { ClockIcon, ShieldCheckIcon } from '@heroicons/react/24/outline'
@@ -45,7 +41,7 @@ export function PromiseSection() {
   const plugin = React.useRef(Autoplay({ delay: 3000 }))
 
   return (
-    <section className='mx-auto max-w-[95%] py-16 sm:py-24 md:max-w-7xl'>
+    <section className='mx-auto max-w-[95%] my-32 md:max-w-7xl'>
       <div className='mx-auto'>
         <div className='grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16'>
           <div className='flex items-center justify-center rounded-xl border border-neutral-800 p-2'>
@@ -85,58 +81,46 @@ export function PromiseSection() {
               repeating-linear-gradient(to right, var(--color-border), var(--color-border) 1px, transparent 1px, transparent 40px),
               repeating-linear-gradient(to bottom, var(--color-border), var(--color-border) 1px, transparent 1px, transparent 40px)
             `,
-                maskImage:
-                  'linear-gradient(to bottom, white 50%, transparent 100%)'
+                maskImage: 'linear-gradient(to bottom, white 50%, transparent 100%)'
               }}
             />
 
             <div className='relative z-10 flex h-full flex-col justify-center'>
-              <GridCross className='absolute right-0 top-0 h-8 w-8 -translate-y-1/2 translate-x-1/2' />
+              <GridCross className='absolute right-0 top-0 size-8 -translate-y-1/2 translate-x-1/2' />
 
-              <h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>
-                Vårt løfte
-              </h2>
+              <h2 className='text-cloud-dancer'>Vårt løfte</h2>
 
               <div className='mt-6 space-y-6'>
                 <div className='flex items-start gap-4'>
-                  <div className='flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-blue-400'>
-                    <ThermometerIcon className='h-5 w-5' />
+                  <div className='flex size-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-blue-400'>
+                    <ThermometerIcon className='size-7' />
                   </div>
                   <div>
-                    <h3 className='font-semibold md:text-[20px]'>
-                      Umiddelbar varme
-                    </h3>
-                    <p className='mt-1 text-access/70'>
-                      Nøye utvalgte materialer gir en umiddelbar følelse av
-                      varme og velvære.
+                    <h3 className='font-semibold text-xl md:text-3xl'>Umiddelbar varme</h3>
+                    <p className='mt-1 text-lg font-medium text-cloud-dancer/90'>
+                      Nøye utvalgte materialer gir en umiddelbar følelse av varme og velvære.
                     </p>
                   </div>
                 </div>
                 <div className='flex items-start gap-4'>
-                  <div className='flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-bleached-mauve text-dry-rose'>
-                    <ClockIcon className='h-5 w-5' />
+                  <div className='flex size-12 flex-shrink-0 items-center justify-center rounded-full bg-bleached-mauve text-dry-rose'>
+                    <ClockIcon className='size-7' />
                   </div>
                   <div>
-                    <h3 className='font-semibold md:text-[20px]'>
-                      Forlengede øyeblikk
-                    </h3>
-                    <p className='mt-1 text-access/70'>
-                      Designet slik at du kan nyte de gode stundene lenger, uten
-                      å tenke på kulden.
+                    <h3 className='font-semibold text-xl md:text-3xl'>Forlengede øyeblikk</h3>
+                    <p className='mt-1 text-lg font-medium text-cloud-dancer/90'>
+                      Designet slik at du kan nyte de gode stundene lenger, uten å tenke på kulden.
                     </p>
                   </div>
                 </div>
                 <div className='flex items-start gap-4'>
-                  <div className='flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-mountain-view text-fairest-jade'>
-                    <ShieldCheckIcon className='h-5 w-5' />
+                  <div className='flex size-12  flex-shrink-0 items-center justify-center rounded-full bg-mountain-view text-fairest-jade'>
+                    <ShieldCheckIcon className='size-7' />
                   </div>
                   <div>
-                    <h3 className='font-semibold md:text-[20px]'>
-                      En varig investering
-                    </h3>
-                    <p className='mt-1 text-access/70'>
-                      Se på det som en slitesterk og varig investering i din
-                      egen hygge.
+                    <h3 className='font-semibold text-xl md:text-3xl'>En varig investering</h3>
+                    <p className='mt-1 text-lg font-medium text-cloud-dancer'>
+                      Se på det som en slitesterk og varig investering i din egen hygge.
                     </p>
                   </div>
                 </div>

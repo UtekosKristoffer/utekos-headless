@@ -36,7 +36,7 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
   return (
     <section className='bg-mountain-view py-24 text-cloud-dancer'>
       <div className='container mx-auto px-4'>
-        <div className='mx-auto mb-16 max-w-2xl text-center'>
+        <div className='mx-auto mb-16 max-w-3xl md:w-3xl text-center'>
           <h2 className='text-cloud-dancer'>Skapt for bobilisten</h2>
           <p className='mt-4 utekos-section-lead max-w-2xl text-cloud-dancer'>
             Komfort som følger bobilen — fra tidlig vår til sen høst.

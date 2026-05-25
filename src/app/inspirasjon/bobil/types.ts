@@ -24,4 +24,5 @@ export interface Destination {
   season: string
   highlight: string
   color: string
+  backgroundColor: string
 }

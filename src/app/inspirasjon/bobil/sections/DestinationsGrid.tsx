@@ -50,32 +50,27 @@ export function DestinationsGrid({ destinations }: { destinations: Destination[]
                   </div>
 
                   <CardContent className='relative flex h-full flex-col p-6'>
-                    <div className='mb-5 flex items-start justify-between gap-4'>
-                      <h3
-                        className={`font-google-sans text-lg font-bold leading-[1] tracking-[-0.01em] ${theme.text}`}
+                    <div className='mb-5 flex items-center gap-4'>
+                      <div
+                        className='flex size-10 shrink-0 items-center justify-center rounded-full transition-transform duration-300 motion-safe:group-hover:-translate-y-0.5'
+                        style={{ backgroundColor: `var(${destination.backgroundColor})` }}
                       >
-                        {destination.name}
-                      </h3>
-
-                      <MapPinIcon
-                        className={`size-5 shrink-0 transition-transform duration-300 motion-safe:group-hover:-translate-y-0.5 ${destination.color}`}
-                        aria-hidden
-                      />
+                        <MapPinIcon
+                          className={`size-5 transition-colors duration-300 ${destination.color}`}
+                          aria-hidden
+                        />
+                      </div>
+                      <h3 className={`text-xl tracking-[-0.01em] ${theme.text}`}>{destination.name}</h3>
                     </div>
 
-                    <div className='mb-4'>
+                    <p className={`font-utekos-text mb-2 ${theme.mutedText}`}>{destination.highlight}</p>
+                    <div className='mt-4'>
                       <BrandBadge
                         label={destination.season}
                         backgroundColor={theme.badgeBackground}
                         textColor={theme.badgeText}
                       />
                     </div>
-
-                    <p
-                      className={`font-utekos-text text-sm leading-[1.45] tracking-[-0.02em] ${theme.mutedText}`}
-                    >
-                      {destination.highlight}
-                    </p>
                   </CardContent>
                 </Card>
               </AnimatedBlock>

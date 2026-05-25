@@ -24,23 +24,23 @@ const motorhomeFeatureCards = [
 
 const heroFeatureCardThemes = [
   {
-    surface: 'color-mix(in oklch, var(--cloud-dancer) 84%, var(--bleached-mauve))',
-    border: 'color-mix(in oklch, var(--bleached-mauve) 48%, var(--maritime-darkest))',
-    marker: 'var(--bleached-mauve)',
-    iconSurface: 'var(--bleached-mauve)',
-    icon: 'var(--maritime-darkest)'
-  },
-  {
-    surface: 'color-mix(in oklch, var(--cloud-dancer) 80%, var(--overcast))',
-    border: 'color-mix(in oklch, var(--overcast) 54%, var(--maritime-darkest))',
+    surface: 'color-mix(in oklch, var(--cloud-dancer) 10%, var(--overcast))',
+    border: 'color-mix(in oklch, var(--maritime-blue) 48%, var(--maritime-darkest))',
     marker: 'var(--overcast)',
     iconSurface: 'var(--overcast)',
     icon: 'var(--maritime-darkest)'
   },
   {
-    surface: 'color-mix(in oklch, var(--cloud-dancer) 82%, var(--ancient-water))',
-    border: 'color-mix(in oklch, var(--ancient-water) 46%, var(--maritime-darkest))',
-    marker: 'var(--ancient-water)',
+    surface: 'color-mix(in oklch, var(--bleached-mauve-light) 10%, var(--bleached-mauve))',
+    border: 'color-mix(in oklch, var(--maritime-blue) 54%, var(--maritime-darkest))',
+    marker: 'var(--bleached-mauve)',
+    iconSurface: 'var(--bleached-mauve)',
+    icon: 'var(--maritime-darkest)'
+  },
+  {
+    surface: 'color-mix(in oklch, var(--cloud-dancer) 10%, var(--dusted-peri))',
+    border: 'color-mix(in oklch, var(--maritime-blue) 48%, var(--maritime-darkest))',
+    marker: 'var(--dusted-peri)',
     iconSurface: 'var(--ancient-water)',
     icon: 'var(--maritime-darkest)'
   }
@@ -90,8 +90,8 @@ export function BobilHeroSection() {
                 </h1>
 
                 <p className='mt-6 max-w-2xl utekos-section-lead text-cloud-dancer'>
-                  Fra den første morgenkaffen til de sene kveldene rundt bordet. Ta med Utekos og gjør hvert stopp til
-                  et øyeblikk du vil huske.
+                  Fra den første morgenkaffen til de sene kveldene rundt bordet. Ta med Utekos og gjør hvert
+                  stopp til et øyeblikk du vil huske.
                 </p>
               </hgroup>
             </AnimatedBlock>

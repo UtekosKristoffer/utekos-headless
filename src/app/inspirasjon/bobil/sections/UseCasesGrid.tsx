@@ -39,15 +39,16 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
   return (
     <section id='bruksomrader' className='bg-overcast py-24'>
       <div className='container mx-auto px-4'>
-        <div className='mx-auto mb-16 max-w-2xl text-center'>
-          <h2 className='font-brand-sans text-fluid-display inline-flex flex-wrap items-baseline justify-center gap-x-[0.18em] font-bold leading-[0.95] tracking-[-0.01em] text-maritime-darkest'>
+        <div className='mx-auto mb-16 max-w-4xl text-center'>
+          <h2 className='inline-flex flex-nowrap items-baseline justify-center gap-x-[0.18em] whitespace-nowrap font-brand-sans text-fluid-display font-bold leading-[0.95] tracking-[-0.01em] text-maritime-darkest'>
             <UtekosWordmark
-              className='h-[0.78em] w-auto translate-y-[0.06em]'
+              className='h-[0.9em] w-auto shrink-0 translate-y-[0.07em]'
               style={{ color: 'var(--maritime-darkest)' }}
             />
             <span>gjennom bobildøgnet</span>
           </h2>
-          <p className='font-utekos-text mt-4 text-lg leading-[1.45] tracking-[-0.02em] text-maritime-darkest'>
+
+          <p className='mx-auto mt-4 max-w-2xl utekos-section-lead text-maritime-darkest'>
             Fra soloppgang til solnedgang får du varme når turen ber om det.
           </p>
         </div>
@@ -69,7 +70,9 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                       <useCase.icon className={`size-6 ${useCase.iconColor}`} />
                     </div>
                     <div>
-                      <p className='font-utekos-text text-sm tracking-[-0.02em] text-cloud-dancer'>{useCase.time}</p>
+                      <p className='font-utekos-text text-sm tracking-[-0.02em] text-cloud-dancer'>
+                        {useCase.time}
+                      </p>
                       <p className='font-utekos-text text-sm font-medium tracking-[-0.02em] text-cloud-dancer/90'>
                         {useCase.temperature}
                       </p>
