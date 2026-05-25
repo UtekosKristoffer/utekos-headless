@@ -2,7 +2,13 @@
 
 import Image from 'next/image'
 import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from '@/components/ui/carousel'
 import { galleryImages } from '../data/galleryImages'
 
 export function InspirationGallerySection() {
@@ -11,12 +17,12 @@ export function InspirationGallerySection() {
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl md:max-w-4xl text-center'>
           <h2 className='text-cloud-dancer'>
-            <UtekosWordmark className='h-[0.82em] w-auto shrink-0 translate-y-[0.06em]' />
+            <UtekosWordmark className='h-[0.82em] w-auto mx-auto shrink-0 translate-y-[0.06em]' />
             <span>i sitt rette element</span>
           </h2>
           <p className='mx-auto mb-12 utekos-section-lead max-w-2xl text-cloud-dancer'>
-            Fra morgenkaffen i soloppgang til sene kvelder under stjernene. La deg inspirere av ekte øyeblikk fra
-            bobillivet.
+            Fra morgenkaffen i soloppgang til sene kvelder under stjernene. La deg inspirere av ekte øyeblikk
+            fra bobillivet.
           </p>
         </div>
 

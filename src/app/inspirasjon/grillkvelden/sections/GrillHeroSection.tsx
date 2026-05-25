@@ -1,5 +1,6 @@
 import { Flame, Users, Clock } from 'lucide-react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
+import { Card, CardContent } from '@/components/ui/card'
 import { InspirationHeroActions } from '../../layout/InspirationHeroActions'
 import { InspirationHeroBreadcrumb } from '../../layout/InspirationHeroBreadcrumb'
 
@@ -41,18 +42,20 @@ const grillFeatureCards = [
 
 export function GrillHeroSection() {
   return (
-    <section className='relative flex min-h-[70vh] items-center overflow-hidden'>
-      {/* Ambient background glow with CSS animation */}
-      <div className='absolute inset-0 -z-10 opacity-25'>
+    <section
+      aria-labelledby='grillkvelden-hero-title'
+      className='relative flex min-h-[70vh] items-center overflow-hidden'
+    >
+      <div className='absolute inset-0 -z-10 opacity-25' aria-hidden='true'>
         <div
-          className='animate-pulse-glow absolute left-1/3 top-1/4 h-[600px] w-[600px] blur-3xl'
+          className='animate-pulse-glow absolute left-1/3 top-1/4 size-[600px] blur-3xl'
           style={{
             background:
               'radial-gradient(circle, color-mix(in oklch, var(--soft-warm) 72%, transparent) 0%, transparent 70%)'
           }}
         />
         <div
-          className='animate-pulse-glow absolute right-1/3 bottom-1/4 h-[600px] w-[600px] blur-3xl'
+          className='animate-pulse-glow absolute right-1/3 bottom-1/4 size-[600px] blur-3xl'
           style={{
             background:
               'radial-gradient(circle, color-mix(in oklch, var(--bleached-mauve) 70%, transparent) 0%, transparent 70%)',
@@ -62,90 +65,92 @@ export function GrillHeroSection() {
         />
       </div>
 
-      <div className='absolute inset-0 bg-gradient-to-b from-transparent to-background/50' />
+      <div className='absolute inset-0 bg-gradient-to-b from-transparent to-background/50' aria-hidden='true' />
 
       <div className='container relative mx-auto px-4 py-16'>
-        <div className='max-w-3xl'>
-          <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s'>
-            <InspirationHeroBreadcrumb
-              label='Grillkvelden'
-              color='var(--maritime-blue)'
-              textColor='var(--cloud-dancer)'
-              icon={Flame}
-            />
-          </AnimatedBlock>
+        <div className='max-w-5xl'>
+          <header>
+            <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s'>
+              <InspirationHeroBreadcrumb
+                label='Grillkvelden'
+                color='var(--maritime-blue)'
+                textColor='var(--cloud-dancer)'
+                icon={Flame}
+              />
+            </AnimatedBlock>
 
-          <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
-            <h1 className='text-4xl font-bold tracking-normal sm:text-5xl lg:text-6xl'>
-              Grillkvelden som{' '}
-              <span className='bg-[linear-gradient(90deg,color-mix(in_oklab,var(--maritime-blue)_58%,var(--cloud-dancer)_42%),var(--skipper-blue),color-mix(in_oklab,var(--maritime-blue)_58%,var(--cloud-dancer)_42%))] bg-clip-text text-transparent'>
-                aldri tar slutt
-              </span>
-            </h1>
-          </AnimatedBlock>
+            <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
+              <hgroup>
+                <h1 id='grillkvelden-hero-title' className='max-w-4xl text-title text-cloud-dancer'>
+                  Grillkvelden som{' '}
+                  <span className='bg-[linear-gradient(90deg,color-mix(in_oklab,var(--maritime-blue)_58%,var(--cloud-dancer)_42%),var(--skipper-blue),color-mix(in_oklab,var(--maritime-blue)_58%,var(--cloud-dancer)_42%))] bg-clip-text text-transparent'>
+                    aldri tar slutt
+                  </span>
+                </h1>
 
-          <AnimatedBlock className='will-animate-fade-in-up' delay='0.3s'>
-            <p className='mt-6 max-w-2xl text-xl leading-[1.45] tracking-normal text-overcast'>
-              Bli verten for de uforglemmelige kveldene, der de gode samtalene
-              og latteren fortsetter lenge etter at den siste pølsen er grillet.
-            </p>
-          </AnimatedBlock>
+                <p className='mt-6 max-w-2xl utekos-section-lead text-overcast'>
+                  Bli verten for de uforglemmelige kveldene, der de gode samtalene og latteren fortsetter lenge etter
+                  at den siste pølsen er grillet.
+                </p>
+              </hgroup>
+            </AnimatedBlock>
 
-          <AnimatedBlock
-            className='will-animate-fade-in-up mt-8 flex flex-wrap gap-4'
-            delay='0.4s'
-          >
-            <InspirationHeroActions
-              primaryLabel='Bli klar for kvelden'
-              secondaryLabel='Se øyeblikkene'
-            />
-          </AnimatedBlock>
+            <AnimatedBlock className='will-animate-fade-in-up mt-8 flex flex-wrap gap-4' delay='0.4s'>
+              <InspirationHeroActions primaryLabel='Bli klar for kvelden' secondaryLabel='Se øyeblikkene' />
+            </AnimatedBlock>
+          </header>
 
-          <AnimatedBlock
-            className='will-animate-fade-in-up mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3'
-            delay='0.5s'
-          >
-            {grillFeatureCards.map(
-              ({
-                title,
-                description,
-                Icon,
-                iconColor,
-                borderColor,
-                background,
-                glow
-              }) => (
-                <div
-                  key={title}
-                  className='group relative overflow-hidden rounded-[1.35rem] border p-4 transition-all duration-300 hover:-translate-y-0.5'
-                  style={{
-                    borderColor,
-                    background,
-                    boxShadow: '0 24px 48px -38px rgba(9, 15, 22, 0.42)'
-                  }}
-                >
-                  <div
-                    className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
-                    style={{ background: glow }}
-                  />
-                  <div className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.24)_0%,rgba(255,255,255,0.08)_34%,transparent_100%)] opacity-90' />
-                  <div className='relative'>
-                    <div className='mb-2 flex items-center gap-3'>
-                      <Icon
-                        className='h-8 w-8 shrink-0'
-                        style={{ color: iconColor }}
-                      />
-                      <p className='font-semibold text-maritime-darkest'>
-                        {title}
+          <h2 id='grillkvelden-hero-highlights-title' className='sr-only'>
+            Høydepunkter for grillkvelden med Utekos
+          </h2>
+
+          <AnimatedBlock className='will-animate-fade-in-up mt-12' delay='0.5s'>
+            <ul
+              aria-labelledby='grillkvelden-hero-highlights-title'
+              className='grid w-full grid-cols-1 gap-5 sm:grid-cols-3'
+            >
+              {grillFeatureCards.map(({ title, description, Icon, iconColor, borderColor, background, glow }) => (
+                <li key={title}>
+                  <Card
+                    className='group relative flex aspect-[2/1] w-full flex-col overflow-hidden rounded-xl border py-0 text-maritime-darkest transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+                    style={{
+                      borderColor,
+                      background,
+                      boxShadow: '0 24px 48px -38px rgba(9, 15, 22, 0.42)'
+                    }}
+                  >
+                    <div
+                      className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20'
+                      style={{ background: glow }}
+                      aria-hidden='true'
+                    />
+                    <div
+                      className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.24)_0%,rgba(255,255,255,0.08)_34%,transparent_100%)] opacity-90'
+                      aria-hidden='true'
+                    />
+
+                    <CardContent className='relative flex h-full flex-col gap-3 p-5'>
+                      <div className='flex items-center gap-3'>
+                        <div
+                          className='flex size-10 shrink-0 items-center justify-center rounded-lg border border-maritime-darkest/12 bg-cloud-dancer/38'
+                          aria-hidden='true'
+                        >
+                          <Icon className='size-5' style={{ color: iconColor }} focusable='false' />
+                        </div>
+
+                        <h3 className='inspirational-page-hero-card-heading whitespace-nowrap text-maritime-darkest'>
+                          {title}
+                        </h3>
+                      </div>
+
+                      <p className='inspirational-page-hero-card-description pr-2 text-maritime-darkest/78'>
+                        {description}
                       </p>
-                    </div>
-                    <p className='text-sm text-maritime-darkest/78'>
-                      {description}
-                    </p>
-                  </div>
-                </div>
-              )
-            )}
+                    </CardContent>
+                  </Card>
+                </li>
+              ))}
+            </ul>
           </AnimatedBlock>
         </div>
       </div>

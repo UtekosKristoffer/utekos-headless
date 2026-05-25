@@ -1,123 +1,89 @@
-import { MapPin, Mountain, Sunrise } from 'lucide-react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { Card, CardContent } from '@/components/ui/card'
 import { InspirationHeroActions } from '../../layout/InspirationHeroActions'
 import { InspirationHeroBreadcrumb } from '../../layout/InspirationHeroBreadcrumb'
+import { Mountain } from 'lucide-react'
+import { heroFeatureCards } from '../utils/heroFeatureCards'
+import { heroFeatureCardThemes } from '../utils/heroFeatureCardThemes'
 
-const motorhomeFeatureCards = [
-  {
-    title: 'Morgenkaffe',
-    description: 'Start dagen i varme utenfor bobilen',
-    Icon: Sunrise
-  },
-  {
-    title: 'Alle stopp',
-    description: 'Nyt utsikten i komfort, hvor som helst',
-    Icon: Mountain
-  },
-  {
-    title: 'Lengre turer',
-    description: 'Reis tidligere på året og senere på høsten',
-    Icon: MapPin
-  }
-] as const
-
-const heroFeatureCardThemes = [
-  {
-    surface: 'color-mix(in oklch, var(--cloud-dancer) 84%, var(--bleached-mauve))',
-    border: 'color-mix(in oklch, var(--bleached-mauve) 48%, var(--maritime-darkest))',
-    marker: 'var(--bleached-mauve)',
-    iconSurface: 'var(--bleached-mauve)',
-    icon: 'var(--maritime-darkest)'
-  },
-  {
-    surface: 'color-mix(in oklch, var(--cloud-dancer) 80%, var(--overcast))',
-    border: 'color-mix(in oklch, var(--overcast) 54%, var(--maritime-darkest))',
-    marker: 'var(--overcast)',
-    iconSurface: 'var(--overcast)',
-    icon: 'var(--maritime-darkest)'
-  },
-  {
-    surface: 'color-mix(in oklch, var(--cloud-dancer) 82%, var(--ancient-water))',
-    border: 'color-mix(in oklch, var(--ancient-water) 46%, var(--maritime-darkest))',
-    marker: 'var(--ancient-water)',
-    iconSurface: 'var(--ancient-water)',
-    icon: 'var(--maritime-darkest)'
-  }
-] as const
-
-export function BobilHeroSection() {
+export function CabinHeroSection() {
   return (
     <section
-      aria-labelledby='bobil-hero-title'
-      className='relative flex min-h-[70vh] items-center overflow-hidden bg-maritime-blue text-cloud-dancer'
+      aria-labelledby='hytteliv-hero-title'
+      className='relative flex min-h-[70vh] items-center overflow-hidden bg-maritime-blue'
     >
       <div className='absolute inset-0 -z-10 opacity-25' aria-hidden='true'>
         <div
-          className='absolute left-1/3 top-1/4 size-[600px] rounded-full blur-[100px]'
+          className='animate-pulse-glow absolute left-1/3 top-1/4 size-[600px] blur-3xl'
           style={{
             background:
-              'radial-gradient(circle, color-mix(in oklch, var(--bleached-mauve) 68%, transparent) 0%, transparent 70%)'
+              'radial-gradient(circle, color-mix(in oklch, var(--ancient-water) 72%, transparent) 0%, transparent 70%)',
+            animationDuration: '9s'
           }}
         />
         <div
-          className='absolute bottom-1/4 right-1/3 size-[600px] rounded-full blur-[100px]'
+          className='animate-pulse-glow absolute right-1/3 bottom-1/4 size-[600px] blur-3xl'
           style={{
             background:
-              'radial-gradient(circle, color-mix(in oklch, var(--maritime-blue) 72%, transparent) 0%, transparent 70%)'
+              'radial-gradient(circle, color-mix(in oklch, var(--ancient-water) 68%, transparent) 0%, transparent 70%)',
+            animationDuration: '11s',
+            animationDelay: '3s'
           }}
         />
       </div>
 
-      <div className='absolute inset-0 bg-maritime-blue' aria-hidden='true' />
+      <div
+        className='absolute inset-0 bg-gradient-to-b from-maritime-darkest/10 via-transparent to-maritime-blue/20'
+        aria-hidden='true'
+      />
 
       <div className='container relative mx-auto px-4 py-16'>
         <div className='max-w-5xl'>
           <header>
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s'>
               <InspirationHeroBreadcrumb
-                label='Bobil og camping'
-                color='var(--color-bleached-mauve)'
-                textColor='var(--color-maritime-darkest)'
-                icon={MapPin}
+                label='Hytteliv'
+                color='var(--ancient-water)'
+                textColor='var(--maritime-darkest)'
+                icon={Mountain}
               />
             </AnimatedBlock>
 
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
               <hgroup>
-                <h1 id='bobil-hero-title' className='max-w-3xl text-title text-cloud-dancer'>
-                  Bobilliv uten <span className='text-bleached-mauve'>kompromisser</span>
+                <h1 id='hytteliv-hero-title' className='text-title text-cloud-dancer'>
+                  Hyttekos, <span className='text-ancient-water'>perfeksjonert</span>
                 </h1>
 
                 <p className='mt-6 max-w-2xl utekos-section-lead text-cloud-dancer'>
-                  Fra den første morgenkaffen til de sene kveldene rundt bordet. Ta med Utekos og gjør hvert stopp til
-                  et øyeblikk du vil huske.
+                  Fra morgenkaffen på terrassen til kveldene under stjernene. Gjør hytten til et varmt
+                  fristed, uansett årstid.
                 </p>
               </hgroup>
             </AnimatedBlock>
 
             <AnimatedBlock className='will-animate-fade-in-up mt-8 flex flex-wrap gap-4' delay='0.4s'>
-              <InspirationHeroActions primaryLabel='Se produktene' secondaryLabel='Utforsk mulighetene' />
+              <InspirationHeroActions primaryLabel='Finn din Utekos' secondaryLabel='Se bruksområdene' />
             </AnimatedBlock>
           </header>
 
-          <h2 id='bobil-hero-highlights-title' className='sr-only'>
-            Høydepunkter for bobil og camping med Utekos
+          <h2 id='hytteliv-hero-highlights-title' className='sr-only'>
+            Høydepunkter for hytteliv med Utekos
           </h2>
 
           <AnimatedBlock className='will-animate-fade-in-up mt-12' delay='0.5s'>
             <ul
-              aria-labelledby='bobil-hero-highlights-title'
+              aria-labelledby='hytteliv-hero-highlights-title'
               className='grid w-full grid-cols-1 gap-5 sm:grid-cols-3'
             >
-              {motorhomeFeatureCards.map(({ title, description, Icon }, cardIndex) => {
+              {heroFeatureCards.map(({ title, description, Icon }, cardIndex) => {
                 const theme =
                   heroFeatureCardThemes[cardIndex % heroFeatureCardThemes.length] ?? heroFeatureCardThemes[0]
 
                 return (
                   <li key={title}>
                     <Card
-                      className='group relative flex aspect-[2/1] w-full flex-col overflow-hidden rounded-xl border py-0 text-maritime-darkest transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+                      className='group relative flex aspect-[2/1] w-full flex-col overflow-hidden rounded-xl border py-0 text-maritime-darkest transition-transform duration-300 hover:-translate-y-0.5'
                       style={{
                         backgroundColor: theme.surface,
                         borderColor: theme.border,

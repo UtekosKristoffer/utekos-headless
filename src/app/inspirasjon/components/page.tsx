@@ -1,13 +1,16 @@
 // Path: src/app/inspirasjon/hytteliv/page.tsx
 
 import type { Metadata } from 'next'
-import { BenefitsGrid, benefitsData } from './components/BenefitsGrid'
-import { CabinHeroSection } from './components/CabinHeroSection'
-import { CTASection } from './components/CTASection'
-import { PopularCabinAreasGrid, popularAreasData } from './components/PopularCabinAresGrid'
-import { UseCasesGrid, useCasesData } from './components/UseCasesGrid'
-import { SeasonsSection } from './components/SeasonsSection'
-import { SocialProof } from './components/SocialProof'
+import { BenefitsGrid, benefitsData } from '@/app/inspirasjon/hytteliv/components/BenefitsGrid'
+import { CabinHeroSection } from '@/app/inspirasjon/hytteliv/components/CabinHeroSection'
+import { CTASection } from '@/app/inspirasjon/hytteliv/components/CTASection'
+import {
+  PopularCabinAreasGrid,
+  popularAreasData
+} from '@/app/inspirasjon/hytteliv/components/PopularCabinAresGrid'
+import { UseCasesGrid, useCasesData } from '@/app/inspirasjon/hytteliv/components//UseCasesGrid'
+import { SeasonsSection } from '@/app/inspirasjon/hytteliv/components/SeasonsSection'
+import { SocialProof } from '@/app/inspirasjon/hytteliv/components/SocialProof'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),

@@ -61,9 +61,9 @@ export const terraceIdeasData: TerraceIdea[] = [
 
 export function TerraceIdeasGrid({ ideas }: { ideas: TerraceIdea[] }) {
   return (
-    <section className='bg-maritime-darkest py-24'>
+    <section className='bg-maritime-darkest py-24 md:py-32'>
       <div className='container mx-auto px-4'>
-        <div className='mx-auto mb-16 max-w-2xl text-center'>
+        <div className='mx-auto mb-16 max-w-3xl md:max-w-4xl text-center'>
           <h2 className=' text-cloud-dancer'>Ideer for din uteplass</h2>
           <p className='mt-4 utekos-section-lead max-w-2xl text-cloud-dancer'>
             Uansett størrelse på uteplassen din, kan den bli en oase for komfort og hygge.
@@ -72,7 +72,11 @@ export function TerraceIdeasGrid({ ideas }: { ideas: TerraceIdea[] }) {
 
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
           {ideas.map((idea, index) => (
-            <AnimatedBlock key={idea.name} className='will-animate-fade-in-up h-full' delay={`${index * 0.1}s`}>
+            <AnimatedBlock
+              key={idea.name}
+              className='will-animate-fade-in-up h-full'
+              delay={`${index * 0.1}s`}
+            >
               <Card
                 style={{ backgroundColor: idea.bgColor }}
                 className='group h-full border-cloud-dancer/12 transition-colors duration-300 motion-reduce:transition-none'

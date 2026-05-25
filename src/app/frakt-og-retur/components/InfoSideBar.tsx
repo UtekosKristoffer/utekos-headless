@@ -1,12 +1,6 @@
 // Path: src/app/frakt-og-retur/components/InfoSidebar.tsx
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from '@/components/ui/card'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { BadgeCheck, Mail, Package, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
@@ -16,9 +10,7 @@ export function InfoSidebar() {
     <aside className='lg:col-span-4'>
       <Card className='sticky top-28 border-cloud-dancer/12 bg-ancient-water text-maritime-darkest shadow-[0_24px_70px_-52px_rgba(8,12,28,0.88)]'>
         <CardHeader>
-          <CardTitle className='text-xl leading-[1.15] tracking-tight'>
-            Dine trygghetsgarantier
-          </CardTitle>
+          <CardTitle className='text-xl leading-[1.15] tracking-tight'>Dine trygghetsgarantier</CardTitle>
         </CardHeader>
         <CardContent>
           <ul className='space-y-4'>
@@ -50,9 +42,11 @@ export function InfoSidebar() {
                 <h4 className='leading-[1.45] text-md font-medium tracking-tight font-utekos-text text-maritime-darkest'>
                   Retur
                 </h4>
-                <p className='text-sm leading-[1.45] tracking-tight text-maritime-darkest/80'>
-                  Send en e-post til kundeservice@utekos.no, så er du i gang.
-                </p>
+                <address>
+                  <p className='text-sm leading-[1.45] tracking-tight text-maritime-darkest/80'>
+                    Send en e-post til kundeservice@utekos.no, så er du i gang.
+                  </p>
+                </address>
               </div>
             </li>
           </ul>
@@ -68,10 +62,7 @@ export function InfoSidebar() {
             textColor='var(--cloud-dancer)'
             className='min-h-12 mt-4 w-full border border-cloud-dancer/24 px-6 py-3 text-base leading-[1.4] font-bold tracking-tight shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
           >
-            <Link
-              href='/kontaktskjema'
-              data-track='ShippingReturnsContactClick'
-            >
+            <Link href='/kontaktskjema' data-track='ShippingReturnsContactClick'>
               <Mail className='mr-2 size-4' />
               Kontakt oss
             </Link>
