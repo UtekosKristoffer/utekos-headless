@@ -10,27 +10,19 @@ import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import { terrasseImages } from '@/app/inspirasjon/terrassen/images/terrasseImages'
 import type { CarouselApi } from '@/components/ui/carousel'
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious
-} from '@/components/ui/carousel'
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import { cn } from '@/lib/utils/className'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { createGsapDevTools } from '@/lib/gsap/createGsapDevTools'
 import { loadScrollTrigger } from '@/lib/gsap/loadScrollTrigger'
 
 function setCarouselIntroVisible(container: HTMLElement) {
-  container
-    .querySelectorAll<HTMLElement>('.gsap-header, .gsap-title, .gsap-carousel')
-    .forEach(element => {
-      element.style.opacity = '1'
-      element.style.visibility = 'visible'
-      element.style.transform = ''
-      element.style.willChange = ''
-    })
+  container.querySelectorAll<HTMLElement>('.gsap-header, .gsap-title, .gsap-carousel').forEach(element => {
+    element.style.opacity = '1'
+    element.style.visibility = 'visible'
+    element.style.transform = ''
+    element.style.willChange = ''
+  })
 }
 
 export function TerrasseCarousel() {
@@ -217,9 +209,7 @@ export function TerrasseCarousel() {
   }
 
   const resumeAutoplay = () => {
-    const shouldReduceMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches
+    const shouldReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     if (shouldReduceMotion) {
       return
@@ -264,9 +254,7 @@ export function TerrasseCarousel() {
             </span>
           </BrandBadge>
 
-          <h2 className='gsap-title mt-4 text-3xl font-bold leading-[0.95] tracking-tight text-cloud-dancer opacity-0 sm:text-4xl lg:text-5xl'>
-            Forleng dine beste øyeblikk
-          </h2>
+          <h2 className='gsap-title mt-4 text-cloud-dancer opacity-0'>Forleng dine beste øyeblikk</h2>
         </div>
 
         <div className='gsap-carousel relative opacity-0'>
@@ -283,10 +271,7 @@ export function TerrasseCarousel() {
             >
               <CarouselContent className='-ml-4'>
                 {terrasseImages.map(image => (
-                  <CarouselItem
-                    key={image.src}
-                    className='pl-4 md:basis-1/2 lg:basis-1/3'
-                  >
+                  <CarouselItem key={image.src} className='pl-4 md:basis-1/2 lg:basis-1/3'>
                     <div className='group relative overflow-hidden rounded-[1.25rem] border border-cloud-dancer/12 bg-maritime-darkest'>
                       <AspectRatio ratio={1 / 1}>
                         <Image
@@ -315,9 +300,7 @@ export function TerrasseCarousel() {
                   onClick={() => api.scrollTo(index)}
                   className={cn(
                     'h-1.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest motion-reduce:transition-none',
-                    current === index + 1 ?
-                      'w-6 bg-primary-button'
-                    : 'w-1.5 bg-overcast hover:bg-cloud-dancer'
+                    current === index + 1 ? 'w-6 bg-primary-button' : 'w-1.5 bg-overcast hover:bg-cloud-dancer'
                   )}
                   aria-current={current === index + 1 ? 'true' : undefined}
                   aria-label={`Gå til bilde ${index + 1}`}

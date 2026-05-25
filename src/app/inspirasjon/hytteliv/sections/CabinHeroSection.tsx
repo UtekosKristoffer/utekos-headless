@@ -53,14 +53,16 @@ export function CabinHeroSection() {
         <div
           className='animate-pulse-glow absolute left-1/3 top-1/4 size-[600px] blur-3xl'
           style={{
-            background: 'radial-gradient(circle, color-mix(in oklch, var(--ancient-water) 72%, transparent) 0%, transparent 70%)',
+            background:
+              'radial-gradient(circle, color-mix(in oklch, var(--ancient-water) 72%, transparent) 0%, transparent 70%)',
             animationDuration: '9s'
           }}
         />
         <div
           className='animate-pulse-glow absolute right-1/3 bottom-1/4 size-[600px] blur-3xl'
           style={{
-            background: 'radial-gradient(circle, color-mix(in oklch, var(--ancient-water) 68%, transparent) 0%, transparent 70%)',
+            background:
+              'radial-gradient(circle, color-mix(in oklch, var(--ancient-water) 68%, transparent) 0%, transparent 70%)',
             animationDuration: '11s',
             animationDelay: '3s'
           }}
@@ -72,7 +74,12 @@ export function CabinHeroSection() {
       <div className='container relative mx-auto px-4 py-16'>
         <div className='max-w-5xl'>
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s'>
-            <InspirationHeroBreadcrumb label='Hytteliv' color='var(--ancient-water)' textColor='var(--maritime-darkest)' icon={Mountain} />
+            <InspirationHeroBreadcrumb
+              label='Hytteliv'
+              color='var(--ancient-water)'
+              textColor='var(--maritime-darkest)'
+              icon={Mountain}
+            />
           </AnimatedBlock>
 
           <hgroup>
@@ -83,7 +90,10 @@ export function CabinHeroSection() {
             </AnimatedBlock>
 
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.3s'>
-              <p className='mt-6 max-w-2xl text-paragraph text-cloud-dancer'>Fra morgenkaffen på terrassen til kveldene under stjernene. Gjør hytten til et varmt fristed, uansett årstid.</p>
+              <p className='mt-6 max-w-2xl utekos-section-lead text-cloud-dancer'>
+                Fra morgenkaffen på terrassen til kveldene under stjernene. Gjør hytten til et varmt fristed, uansett
+                årstid.
+              </p>
             </AnimatedBlock>
           </hgroup>
 
@@ -91,7 +101,10 @@ export function CabinHeroSection() {
             <InspirationHeroActions primaryLabel='Finn din Utekos' secondaryLabel='Se bruksområdene' />
           </AnimatedBlock>
 
-          <AnimatedBlock className='will-animate-fade-in-up mt-12 grid w-full grid-cols-1 gap-5 sm:grid-cols-3' delay='0.5s'>
+          <AnimatedBlock
+            className='will-animate-fade-in-up mt-12 grid w-full grid-cols-1 gap-5 sm:grid-cols-3'
+            delay='0.5s'
+          >
             {heroFeatureCards.map(({ title, description, Icon }, cardIndex) => {
               const theme = heroFeatureCardThemes[cardIndex % heroFeatureCardThemes.length] ?? heroFeatureCardThemes[0]
               return (
@@ -104,7 +117,10 @@ export function CabinHeroSection() {
                     boxShadow: '0 22px 44px -34px color-mix(in oklch, var(--maritime-darkest) 52%, transparent)'
                   }}
                 >
-                  <div className='absolute inset-x-4 top-0 h-px transition-opacity duration-300 group-hover:opacity-70' style={{ background: theme.marker }} />
+                  <div
+                    className='absolute inset-x-4 top-0 h-px transition-opacity duration-300 group-hover:opacity-70'
+                    style={{ background: theme.marker }}
+                  />
                   <CardContent className='relative flex h-full flex-col gap-3 p-5'>
                     <div className='flex items-center gap-3'>
                       <div
@@ -117,9 +133,13 @@ export function CabinHeroSection() {
                       >
                         <Icon className='size-5' />
                       </div>
-                      <h3 className='inspirational-page-hero-card-heading whitespace-nowrap text-maritime-darkest'>{title}</h3>
+                      <h3 className='inspirational-page-hero-card-heading whitespace-nowrap text-maritime-darkest'>
+                        {title}
+                      </h3>
                     </div>
-                    <p className='inspirational-page-hero-card-description text-maritime-darkest/90 pr-2'>{description}</p>
+                    <p className='inspirational-page-hero-card-description text-maritime-darkest/90 pr-2'>
+                      {description}
+                    </p>
                   </CardContent>
                 </Card>
               )

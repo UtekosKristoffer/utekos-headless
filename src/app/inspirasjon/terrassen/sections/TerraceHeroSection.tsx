@@ -79,7 +79,7 @@ export function TerraceHeroSection() {
             </AnimatedBlock>
 
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.3s'>
-              <p className='mt-6 max-w-2xl text-paragraph text-cloud-dancer'>
+              <p className='mt-6 max-w-2xl text-cloud-dancer'>
                 Gjør uteplassen til husets beste rom. Fra den første kaffen i vårsolen til de sene sommerkveldene – nyt
                 øyeblikkene lenger.
               </p>

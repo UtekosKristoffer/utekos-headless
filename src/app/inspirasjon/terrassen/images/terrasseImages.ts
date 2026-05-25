@@ -1,6 +1,6 @@
 export const terrasseImages = [
   {
-    src: '/webp/classic-couple-1080.webp',
+    src: '/webp/classic-couple-mobile-1080.webp',
     alt: 'To personer i Utekos-plagg nyter utsikten fra en fjelltopp.'
   },
   {

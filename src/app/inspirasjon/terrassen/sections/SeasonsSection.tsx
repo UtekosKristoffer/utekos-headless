@@ -25,12 +25,8 @@ export function SeasonsSection() {
 
       <div className='container mx-auto px-4'>
         <div className='animate-fade-in-up mb-16 text-center'>
-          <h2 className='text-3xl font-bold leading-[0.95] font-utekos-text tracking-tight text-cloud-dancer sm:text-4xl lg:text-5xl'>
-            Din uteplass gjennom året
-          </h2>
-          <p className='mx-auto mt-4 max-w-2xl text-lg leading-[1.45] font-utekos-text tracking-tight text-cloud-dancer/88'>
-            Forleng sesongen på terrassen
-          </p>
+          <h2 className='text-cloud-dancer brightness-200'>Din uteplass gjennom året</h2>
+          <p className='mx-auto mt-4 utekos-section-lead max-w-2xl text-cloud-dancer'>Forleng sesongen på terrassen</p>
         </div>
 
         <div className='seasons-fade-in-delayed'>
