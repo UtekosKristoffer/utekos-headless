@@ -2,55 +2,21 @@
 
 import Image from 'next/image'
 import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious
-} from '@/components/ui/carousel'
-
-const galleryImages = [
-  {
-    src: '/coffe_utekos.webp',
-    alt: 'Person i Utekos-plagg nyter morgenkaffen utenfor bobilen med utsikt over en fjord.',
-    title: 'Morgenkaffe med utsikt',
-    description: 'Start dagen i ditt eget tempo, omgitt av natur og komfort.'
-  },
-  {
-    src: '/malin_tjommi.webp',
-    alt: 'Et par sitter i campingstoler utenfor bobilen en kjølig kveld, begge kledd i Utekos.',
-    title: 'Friheten til å stoppe opp',
-    description:
-      'Et raskt stopp blir en minneverdig pause når komforten er med på turen.'
-  },
-  {
-    src: '/mb_girl_sitting_outside_coffee.webp',
-    alt: 'Person som har stoppet bobilen langs en nasjonal turistvei og nyter utsikten i et Utekos-plagg.',
-    title: 'Din personlige varmesone',
-    description:
-      'Skap din egen sone av komfort og nyt en rolig stund, uansett hvor du befinner deg.'
-  },
-  {
-    src: '/girl-stone-snow.webp',
-    alt: 'Person som slapper av med en bok i en campingstol, godt innpakket i Utekos.',
-    title: 'Din egen avslapningssone',
-    description: 'Finn roen og nyt øyeblikket, uansett hvor du parkerer.'
-  }
-]
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import { galleryImages } from '../data/galleryImages'
 
 export function InspirationGallerySection() {
   return (
     <section className='bg-maritime-blue py-24 text-cloud-dancer'>
       <div className='container mx-auto px-4'>
-        <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='mb-4 inline-flex flex-wrap items-baseline justify-center gap-x-[0.18em] font-brand-sans text-fluid-display font-bold leading-[0.95] tracking-[-0.01em]'>
-            <UtekosWordmark className='h-[0.78em] w-auto translate-y-[0.06em]' />
+        <div className='mx-auto max-w-3xl md:max-w-4xl text-center'>
+          <h2 className='text-cloud-dancer'>
+            <UtekosWordmark className='h-[0.82em] w-auto shrink-0 translate-y-[0.06em]' />
             <span>i sitt rette element</span>
           </h2>
-          <p className='mx-auto mb-12 max-w-2xl font-utekos-text text-lg leading-[1.45] tracking-tight text-cloud-dancer/90'>
-            Fra morgenkaffen i soloppgang til sene kvelder under stjernene. La
-            deg inspirere av ekte øyeblikk fra bobillivet.
+          <p className='mx-auto mb-12 utekos-section-lead max-w-2xl text-cloud-dancer'>
+            Fra morgenkaffen i soloppgang til sene kvelder under stjernene. La deg inspirere av ekte øyeblikk fra
+            bobillivet.
           </p>
         </div>
 
@@ -63,10 +29,7 @@ export function InspirationGallerySection() {
         >
           <CarouselContent className='-ml-4'>
             {galleryImages.map(image => (
-              <CarouselItem
-                key={image.src}
-                className='pl-4 md:basis-1/2 lg:basis-1/3'
-              >
+              <CarouselItem key={image.src} className='pl-4 md:basis-1/2 lg:basis-1/3'>
                 <div className='group flex h-full flex-col p-1'>
                   <div className='relative aspect-[4/5] shrink-0 overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest'>
                     <Image

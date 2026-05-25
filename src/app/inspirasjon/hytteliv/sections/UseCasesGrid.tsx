@@ -57,7 +57,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl md:max-w-3xl lg:max-w-4xl text-center'>
           <h2 className='text-maritime-darkest text-shadow-background'>Hyttekos fra morgen til kveld</h2>
-          <p className='mt-4 text-maritime-darkest'>
+          <p className='mt-4 utekos-section-lead text-maritime-darkest'>
             Fra første kaffekopp til siste vedkubbe får du varme når hyttedagen ber om det.
           </p>
         </div>
@@ -108,7 +108,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                       </p>
                     </div>
                     <p
-                      className='mb-3 text-sm leading-[1] font-semibold tracking-[-0.01em]'
+                      className='mb-3 font-brand-sans text-sm leading-[1] tracking-[-0.01em]'
                       style={{ color: 'var(--maritime-darkest)' }}
                     >
                       {useCase.time}

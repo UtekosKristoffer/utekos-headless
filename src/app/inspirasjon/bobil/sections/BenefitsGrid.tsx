@@ -1,11 +1,7 @@
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import type { Benefit } from '../types'
 
-import {
-  CalendarIcon,
-  SparklesIcon,
-  UsersIcon
-} from '@heroicons/react/24/outline'
+import { CalendarIcon, SparklesIcon, UsersIcon } from '@heroicons/react/24/outline'
 
 import { ThermometerIcon } from 'lucide-react'
 
@@ -41,10 +37,8 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
     <section className='bg-mountain-view py-24 text-cloud-dancer'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl text-center'>
-          <h2 className='font-brand-sans text-fluid-display font-bold leading-[0.95] tracking-[-0.01em]'>
-            Skapt for bobilisten
-          </h2>
-          <p className='mt-4 font-utekos-text text-lg leading-[1.45] tracking-[-0.02em] text-cloud-dancer/82'>
+          <h2 className='text-cloud-dancer'>Skapt for bobilisten</h2>
+          <p className='mt-4 utekos-section-lead max-w-2xl text-cloud-dancer'>
             Komfort som følger bobilen — fra tidlig vår til sen høst.
           </p>
         </div>

@@ -10,8 +10,7 @@ const terraceFeatureCards = [
     title: 'Tidlig vår',
     description: 'Nyt morgenkaffen uker tidligere',
     Icon: Coffee,
-    iconColor:
-      'color-mix(in oklch, var(--maritime-darkest) 78%, var(--ancient-water))',
+    iconColor: 'color-mix(in oklch, var(--maritime-darkest) 78%, var(--ancient-water))',
     borderColor: 'color-mix(in oklch, var(--ancient-water) 42%, transparent)',
     background:
       'linear-gradient(180deg, color-mix(in oklch, var(--ancient-water) 82%, var(--cloud-dancer) 18%) 0%, color-mix(in oklch, var(--ancient-water) 58%, var(--maritime-darkest) 42%) 100%)',
@@ -21,8 +20,7 @@ const terraceFeatureCards = [
     title: 'Sen høst',
     description: 'Forleng sesongen',
     Icon: Leaf,
-    iconColor:
-      'color-mix(in oklch, var(--mountain-view) 68%, var(--maritime-darkest) 32%)',
+    iconColor: 'color-mix(in oklch, var(--mountain-view) 68%, var(--maritime-darkest) 32%)',
     borderColor: 'color-mix(in oklch, var(--mountain-view) 38%, transparent)',
     background:
       'linear-gradient(180deg, color-mix(in oklch, var(--overcast) 86%, var(--cloud-dancer) 14%) 0%, color-mix(in oklch, var(--mountain-view) 28%, var(--overcast) 72%) 100%)',
@@ -32,8 +30,7 @@ const terraceFeatureCards = [
     title: 'Hver kveld',
     description: 'Nyt uteplassen når det kjølner',
     Icon: Sparkles,
-    iconColor:
-      'color-mix(in oklch, var(--maritime-darkest) 78%, var(--overcast))',
+    iconColor: 'color-mix(in oklch, var(--maritime-darkest) 78%, var(--overcast))',
     borderColor: 'color-mix(in oklch, var(--overcast) 42%, transparent)',
     background:
       'linear-gradient(180deg, color-mix(in oklch, var(--overcast) 86%, var(--cloud-dancer) 14%) 0%, color-mix(in oklch, var(--overcast) 52%, var(--maritime-darkest) 48%) 100%)',
@@ -74,77 +71,57 @@ export function TerraceHeroSection() {
             />
           </AnimatedBlock>
 
-          <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
-            <h1 className='max-w-3xl text-4xl font-bold leading-[0.95] font-utekos-text tracking-tight text-cloud-dancer sm:text-5xl lg:text-6xl'>
-              Din terrasse,{' '}
-              <span className='text-primary-button'>hele året</span>
-            </h1>
-          </AnimatedBlock>
+          <hgroup>
+            <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
+              <h1 className='max-w-2xl text-cloud-dancer'>
+                Din terrasse, <span className='text-primary-button'>hele året</span>
+              </h1>
+            </AnimatedBlock>
 
-          <AnimatedBlock className='will-animate-fade-in-up' delay='0.3s'>
-            <p className='mt-6 max-w-2xl text-xl leading-[1.45] font-utekos-text tracking-tight text-cloud-dancer/88'>
-              Gjør uteplassen til husets beste rom. Fra den første kaffen i
-              vårsolen til de sene sommerkveldene – nyt øyeblikkene lenger.
-            </p>
-          </AnimatedBlock>
+            <AnimatedBlock className='will-animate-fade-in-up' delay='0.3s'>
+              <p className='mt-6 max-w-2xl text-paragraph text-cloud-dancer'>
+                Gjør uteplassen til husets beste rom. Fra den første kaffen i vårsolen til de sene sommerkveldene – nyt
+                øyeblikkene lenger.
+              </p>
+            </AnimatedBlock>
+          </hgroup>
 
-          <AnimatedBlock
-            className='will-animate-fade-in-up mt-8 flex flex-wrap gap-4'
-            delay='0.4s'
-          >
-            <InspirationHeroActions
-              primaryLabel='Oppdag din Utekos'
-              secondaryLabel='Se bruksområdene'
-            />
+          <AnimatedBlock className='will-animate-fade-in-up mt-8 flex flex-wrap gap-4' delay='0.4s'>
+            <InspirationHeroActions primaryLabel='Oppdag din Utekos' secondaryLabel='Se bruksområdene' />
           </AnimatedBlock>
 
           <AnimatedBlock
             className='will-animate-fade-in-up mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6'
             delay='0.5s'
           >
-            {terraceFeatureCards.map(
-              ({
-                title,
-                description,
-                Icon,
-                iconColor,
-                borderColor,
-                background,
-                glow
-              }) => (
+            {terraceFeatureCards.map(({ title, description, Icon, iconColor, borderColor, background, glow }) => (
+              <div
+                key={title}
+                className='group relative overflow-hidden rounded-[1.35rem] border p-4 transition-transform duration-300 hover:-translate-y-0.5'
+                style={{
+                  borderColor,
+                  background,
+                  boxShadow: '0 24px 48px -38px color-mix(in oklch, var(--maritime-darkest) 72%, transparent)'
+                }}
+              >
                 <div
-                  key={title}
-                  className='group relative overflow-hidden rounded-[1.35rem] border p-4 transition-transform duration-300 hover:-translate-y-0.5'
-                  style={{
-                    borderColor,
-                    background,
-                    boxShadow:
-                      '0 24px 48px -38px color-mix(in oklch, var(--maritime-darkest) 72%, transparent)'
-                  }}
-                >
-                  <div
-                    className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-24'
-                    style={{ background: glow }}
-                  />
-                  <div className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,color-mix(in_oklch,var(--cloud-dancer)_24%,transparent)_0%,color-mix(in_oklch,var(--cloud-dancer)_8%,transparent)_34%,transparent_100%)]' />
-                  <div className='relative'>
-                    <div className='mb-2 flex items-center gap-3'>
-                      <Icon
-                        className='size-8 shrink-0'
-                        style={{ color: iconColor }}
-                        aria-hidden='true'
-                      />
-                      <p className='font-semibold leading-[1.25] font-google-sans tracking-tight text-maritime-darkest'>
-                        {title}
-                      </p>
-                    </div>
-                    <p className='text-sm leading-[1.45] font-utekos-text tracking-tight text-maritime-darkest/88'>
-                      {description}
+                  className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-24'
+                  style={{ background: glow }}
+                />
+                <div className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,color-mix(in_oklch,var(--cloud-dancer)_24%,transparent)_0%,color-mix(in_oklch,var(--cloud-dancer)_8%,transparent)_34%,transparent_100%)]' />
+                <div className='relative'>
+                  <div className='mb-2 flex items-center gap-3'>
+                    <Icon className='size-8 shrink-0' style={{ color: iconColor }} aria-hidden='true' />
+                    <p className='font-semibold leading-[1.25] font-google-sans tracking-tight text-maritime-darkest'>
+                      {title}
                     </p>
                   </div>
+                  <p className='text-sm leading-[1.45] font-utekos-text tracking-tight text-maritime-darkest/88'>
+                    {description}
+                  </p>
                 </div>
-              )
-            )}
+              </div>
+            ))}
           </AnimatedBlock>
         </div>
       </div>

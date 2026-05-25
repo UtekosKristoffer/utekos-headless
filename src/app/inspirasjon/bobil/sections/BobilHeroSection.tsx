@@ -24,10 +24,8 @@ const motorhomeFeatureCards = [
 
 const heroFeatureCardThemes = [
   {
-    surface:
-      'color-mix(in oklch, var(--cloud-dancer) 84%, var(--bleached-mauve))',
-    border:
-      'color-mix(in oklch, var(--bleached-mauve) 48%, var(--maritime-darkest))',
+    surface: 'color-mix(in oklch, var(--cloud-dancer) 84%, var(--bleached-mauve))',
+    border: 'color-mix(in oklch, var(--bleached-mauve) 48%, var(--maritime-darkest))',
     marker: 'var(--bleached-mauve)',
     iconSurface: 'var(--bleached-mauve)',
     icon: 'var(--maritime-darkest)'
@@ -40,10 +38,8 @@ const heroFeatureCardThemes = [
     icon: 'var(--maritime-darkest)'
   },
   {
-    surface:
-      'color-mix(in oklch, var(--cloud-dancer) 82%, var(--ancient-water))',
-    border:
-      'color-mix(in oklch, var(--ancient-water) 46%, var(--maritime-darkest))',
+    surface: 'color-mix(in oklch, var(--cloud-dancer) 82%, var(--ancient-water))',
+    border: 'color-mix(in oklch, var(--ancient-water) 46%, var(--maritime-darkest))',
     marker: 'var(--ancient-water)',
     iconSurface: 'var(--ancient-water)',
     icon: 'var(--maritime-darkest)'
@@ -52,7 +48,7 @@ const heroFeatureCardThemes = [
 
 export function BobilHeroSection() {
   return (
-    <section className='relative flex min-h-[70vh] items-center overflow-hidden'>
+    <section className='relative bg-maritime-blue text-cloud-dancer flex min-h-[70vh] items-center overflow-hidden'>
       <div className='absolute inset-0 -z-10 opacity-25'>
         <div
           className='absolute left-1/3 top-1/4 size-[600px] rounded-full blur-[100px]'
@@ -70,7 +66,7 @@ export function BobilHeroSection() {
         />
       </div>
 
-      <div className='absolute inset-0 bg-gradient-to-b from-maritime-darkest/10 via-transparent to-maritime-blue/20' />
+      <div className='absolute inset-0 bg-maritime-blue' />
 
       <div className='container relative mx-auto px-4 py-16'>
         <div className='max-w-3xl'>
@@ -84,37 +80,25 @@ export function BobilHeroSection() {
           </AnimatedBlock>
 
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
-            <h1 className='font-brand-sans text-4xl font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer sm:text-5xl lg:text-6xl'>
-              Bobilliv uten{' '}
-              <span className='text-bleached-mauve'>kompromisser</span>
+            <h1 className='text-cloud-dancer sm:text-5xl lg:text-6xl'>
+              Bobilliv uten <span className='text-bleached-mauve'>kompromisser</span>
             </h1>
           </AnimatedBlock>
 
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.3s'>
             <p className='mt-6 max-w-2xl font-utekos-text text-xl leading-[1.45] tracking-[-0.02em] text-cloud-dancer'>
-              Fra den første morgenkaffen til de sene kveldene rundt bordet. Ta
-              med Utekos og gjør hvert stopp til et øyeblikk du vil huske.
+              Fra den første morgenkaffen til de sene kveldene rundt bordet. Ta med Utekos og gjør hvert stopp til et
+              øyeblikk du vil huske.
             </p>
           </AnimatedBlock>
 
-          <AnimatedBlock
-            className='will-animate-fade-in-up mt-8 flex flex-wrap gap-4'
-            delay='0.4s'
-          >
-            <InspirationHeroActions
-              primaryLabel='Se produktene'
-              secondaryLabel='Utforsk mulighetene'
-            />
+          <AnimatedBlock className='will-animate-fade-in-up mt-8 flex flex-wrap gap-4' delay='0.4s'>
+            <InspirationHeroActions primaryLabel='Se produktene' secondaryLabel='Utforsk mulighetene' />
           </AnimatedBlock>
 
-          <AnimatedBlock
-            className='will-animate-fade-in-up mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3'
-            delay='0.5s'
-          >
+          <AnimatedBlock className='will-animate-fade-in-up mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3' delay='0.5s'>
             {motorhomeFeatureCards.map(({ title, description, Icon }, cardIndex) => {
-              const theme =
-                heroFeatureCardThemes[cardIndex % heroFeatureCardThemes.length]
-                ?? heroFeatureCardThemes[0]
+              const theme = heroFeatureCardThemes[cardIndex % heroFeatureCardThemes.length] ?? heroFeatureCardThemes[0]
 
               return (
                 <Card
@@ -123,8 +107,7 @@ export function BobilHeroSection() {
                   style={{
                     backgroundColor: theme.surface,
                     borderColor: theme.border,
-                    boxShadow:
-                      '0 22px 44px -34px color-mix(in oklch, var(--maritime-darkest) 52%, transparent)'
+                    boxShadow: '0 22px 44px -34px color-mix(in oklch, var(--maritime-darkest) 52%, transparent)'
                   }}
                 >
                   <div

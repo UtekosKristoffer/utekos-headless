@@ -4,13 +4,13 @@ import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import type { UseCase } from '../types'
 import { MoonIcon } from '@heroicons/react/24/outline'
 import { Sunrise, Wind } from 'lucide-react'
+
 export const useCasesData: UseCase[] = [
   {
     icon: Sunrise,
     time: 'Morgen',
     title: 'Den kjølige morgenkaffen',
-    description:
-      'Start dagen med kaffe utenfor bobilen, innhyllet i varme mens naturen våkner.',
+    description: 'Start dagen med kaffe utenfor bobilen, innhyllet i varme mens naturen våkner.',
     temperature: '5-12°C',
     color: 'from-primary-button/20',
     iconColor: 'text-primary-button'
@@ -19,8 +19,7 @@ export const useCasesData: UseCase[] = [
     icon: MoonIcon,
     time: 'Kveld',
     title: 'Sosiale kvelder under stjernene',
-    description:
-      'Forleng kvelden med venner og familie uten å la kulden drive dere inn.',
+    description: 'Forleng kvelden med venner og familie uten å la kulden drive dere inn.',
     temperature: '8-15°C',
     color: 'from-ancient-water/20',
     iconColor: 'text-ancient-water'
@@ -60,7 +59,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
               delay={`${useCaseIndex * 0.1}s`}
               threshold={0.2}
             >
-              <Card className='@container relative h-full overflow-hidden border-cloud-dancer/12 bg-maritime-darkest group'>
+              <Card className='@container relative h-full overflow-hidden border-cloud-dancer/12 bg-maritime-blue group'>
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${useCase.color} to-transparent opacity-20 transition-opacity group-hover:opacity-30`}
                 />
@@ -70,9 +69,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                       <useCase.icon className={`size-6 ${useCase.iconColor}`} />
                     </div>
                     <div>
-                      <p className='font-utekos-text text-sm tracking-[-0.02em] text-cloud-dancer'>
-                        {useCase.time}
-                      </p>
+                      <p className='font-utekos-text text-sm tracking-[-0.02em] text-cloud-dancer'>{useCase.time}</p>
                       <p className='font-utekos-text text-sm font-medium tracking-[-0.02em] text-cloud-dancer/90'>
                         {useCase.temperature}
                       </p>

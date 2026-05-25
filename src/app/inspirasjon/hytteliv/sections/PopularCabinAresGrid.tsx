@@ -44,16 +44,12 @@ export const popularAreasData: Destination[] = [
   }
 ]
 
-export function PopularCabinAreasGrid({
-  destinations
-}: {
-  destinations: Destination[]
-}) {
+export function PopularCabinAreasGrid({ destinations }: { destinations: Destination[] }) {
   return (
     <section className='bg-maritime-blue py-24 text-cloud-dancer'>
       <div className='container mx-auto px-4'>
-        <div className='mx-auto mb-16 max-w-2xl text-center'>
-          <h2 className='font-brand-sans text-fluid-display font-bold leading-[1.2] tracking-tight text-cloud-dancer'>
+        <div className='mx-auto mb-16 max-w-3xl lg:max-w-4xl text-center'>
+          <h2 className='text-cloud-dancer'>
             <span className='block'>Populære hytteområder</span>
             <span className='inline-flex items-baseline justify-center gap-x-[0.18em] whitespace-nowrap'>
               <span>med</span>
@@ -63,9 +59,8 @@ export function PopularCabinAreasGrid({
               />
             </span>
           </h2>
-          <p className='mt-4 font-utekos-text text-lg leading-[1.45] tracking-tight text-cloud-dancer'>
-            Fra fjell til fjord får du mer tid ute, også når temperaturen
-            faller.
+          <p className='mt-4 utekos-section-lead text-cloud-dancer'>
+            Fra fjell til fjord får du mer tid ute, også når temperaturen faller.
           </p>
         </div>
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
@@ -90,10 +85,7 @@ export function PopularCabinAreasGrid({
                         destination.iconBgColor
                       )}
                     >
-                      <MapPinIcon
-                        className={cn('size-4', destination.iconColor)}
-                        aria-hidden
-                      />
+                      <MapPinIcon className={cn('size-4', destination.iconColor)} aria-hidden />
                     </div>
                     <h3
                       className={cn(
@@ -112,12 +104,7 @@ export function PopularCabinAreasGrid({
                   >
                     {destination.season}
                   </p>
-                  <p
-                    className={cn(
-                      'font-utekos-text text-base leading-[1.45] tracking-tight',
-                      destination.textColor
-                    )}
-                  >
+                  <p className={cn('font-utekos-text text-base leading-[1.45] tracking-tight', destination.textColor)}>
                     {destination.highlight}
                   </p>
                 </CardContent>

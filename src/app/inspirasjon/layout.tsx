@@ -19,9 +19,7 @@ interface InspirasjonLayoutProps {
   children: ReactNode
 }
 
-export default function InspirasjonLayout({
-  children
-}: InspirasjonLayoutProps) {
+export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) {
   return (
     <section className='bg-overcast'>
       <Activity>
@@ -48,12 +46,10 @@ export default function InspirasjonLayout({
         <section className='border-t border-chocolate-plum/35 bg-overcast py-16'>
           <div className='container mx-auto px-4'>
             <div className='mb-12 text-center'>
-              <h2 className='mb-4 text-4xl font-bold leading-[0.95] tracking-tight font-google-sans text-maritime-darkest md:text-6xl'>
-                Mer inspirasjon for dine øyeblikk
-              </h2>
-              <p className='mx-auto max-w-2xl text-base leading-[1.45] tracking-tight font-utekos-text! text-maritime-blue'>
-                Finn ideer til situasjoner der komfort møter norsk natur. Se
-                hvordan små grep gjør uteøyeblikkene varmere.
+              <h2 className='mb-4 text-maritime-darkest'>Mer inspirasjon for dine øyeblikk</h2>
+              <p className='mx-auto max-w-2xl utekos-section-lead text-maritime-blue'>
+                Finn ideer til situasjoner der komfort møter norsk natur. Se hvordan små grep gjør uteøyeblikkene
+                varmere.
               </p>
             </div>
             <div className='grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5'>
@@ -65,10 +61,7 @@ export default function InspirasjonLayout({
                       {
                         '--inspiration-card-bg': page.color,
                         '--inspiration-card-mid': page.midColor,
-                        '--inspiration-card-text':
-                          pageIndex >= 3 ?
-                            'var(--cloud-dancer)'
-                          : 'var(--maritime-darkest)',
+                        '--inspiration-card-text': pageIndex >= 3 ? 'var(--cloud-dancer)' : 'var(--maritime-darkest)',
                         '--inspiration-card-muted':
                           pageIndex >= 3 ?
                             'color-mix(in oklab, var(--cloud-dancer) 78%, transparent)'
@@ -77,14 +70,8 @@ export default function InspirasjonLayout({
                           pageIndex >= 3 ?
                             'color-mix(in oklab, var(--cloud-dancer) 24%, transparent)'
                           : 'color-mix(in oklab, var(--maritime-darkest) 18%, transparent)',
-                        '--inspiration-icon-default':
-                          pageIndex === 0 ?
-                            'var(--maritime-darkest)'
-                          : page.color,
-                        '--inspiration-icon-hover':
-                          pageIndex === 0 ?
-                            page.color
-                          : 'var(--maritime-darkest)'
+                        '--inspiration-icon-default': pageIndex === 0 ? 'var(--maritime-darkest)' : page.color,
+                        '--inspiration-icon-hover': pageIndex === 0 ? page.color : 'var(--maritime-darkest)'
                       } as CSSProperties
                     }
                   >
@@ -98,8 +85,7 @@ export default function InspirasjonLayout({
                     <div
                       className='pointer-events-none absolute inset-x-0 top-0 h-px'
                       style={{
-                        background:
-                          'linear-gradient(90deg, transparent, var(--inspiration-card-border), transparent)'
+                        background: 'linear-gradient(90deg, transparent, var(--inspiration-card-border), transparent)'
                       }}
                     />
                     <div className='relative'>
@@ -138,9 +124,7 @@ export default function InspirasjonLayout({
                   textColor='var(--maritime-darkest)'
                   className='border border-maritime-darkest/14 px-7 py-3 text-base font-medium leading-[1.45] tracking-[-0.01em] shadow-[0_18px_38px_-30px_rgba(14,18,35,0.42)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-cloud-dancer/88 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-maritime-darkest/55 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast'
                 >
-                  <Link href='/handlehjelp/storrelsesguide'>
-                    Finn din størrelse
-                  </Link>
+                  <Link href='/handlehjelp/storrelsesguide'>Finn din størrelse</Link>
                 </BrandBadge>
               </div>
             </div>
