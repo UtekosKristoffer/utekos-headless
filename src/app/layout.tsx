@@ -136,19 +136,23 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
         <OnlineStoreJsonLd />
 
-        <TrackingRoot />
+        <Suspense fallback={null}>
+          <TrackingRoot />
+        </Suspense>
 
-        <CartProviderLoader>
-          <AnnouncementBanner />
-          <Header menu={mainMenu} />
-          <main>
-            {children}
-            {SHOULD_LOAD_VERCEL_ANALYTICS && <Analytics />}
-            <ChatBotAgent />
-          </main>
-          <Footer />
-          <CookieConsentBanner />
-        </CartProviderLoader>
+        <Suspense fallback={null}>
+          <CartProviderLoader>
+            <AnnouncementBanner />
+            <Header menu={mainMenu} />
+            <main>
+              {children}
+              {SHOULD_LOAD_VERCEL_ANALYTICS && <Analytics />}
+              <ChatBotAgent />
+            </main>
+            <Footer />
+            <CookieConsentBanner />
+          </CartProviderLoader>
+        </Suspense>
       </body>
     </html>
   )

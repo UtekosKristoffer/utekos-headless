@@ -1,5 +1,3 @@
-// Path: src/components/analytics/WebVitalsReporter.tsx
-
 'use client'
 
 import { useReportWebVitals } from 'next/web-vitals'
@@ -13,25 +11,28 @@ type MetricPayload =
 
 function reportWebVitals(metric: MetricPayload) {
   const payload = {
+    type: 'web-vital',
     id: metric.id,
     name: metric.name,
     value: metric.value,
     delta: metric.delta,
     rating: metric.rating,
     navigationType: metric.navigationType,
+    attribution: 'attribution' in metric ? metric.attribution : undefined,
     entries: metric.entries,
     pathname:
       typeof window !== 'undefined' ? window.location.pathname : undefined,
     href: typeof window !== 'undefined' ? window.location.href : undefined,
+    referrer: typeof document !== 'undefined' ? document.referrer : undefined,
     timestamp: Date.now()
   }
+
+  const body = JSON.stringify(payload)
 
   if (process.env.NODE_ENV !== 'production') {
     console.info('[web-vitals]', payload)
     return
   }
-
-  const body = JSON.stringify(payload)
 
   if (navigator.sendBeacon) {
     navigator.sendBeacon('/api/analytics/web-vitals', body)
@@ -45,9 +46,7 @@ function reportWebVitals(metric: MetricPayload) {
     headers: {
       'content-type': 'application/json'
     }
-  }).catch(() => {
-    // Do not block user experience for analytics failure.
-  })
+  }).catch(() => {})
 }
 
 export function WebVitalsReporter() {
