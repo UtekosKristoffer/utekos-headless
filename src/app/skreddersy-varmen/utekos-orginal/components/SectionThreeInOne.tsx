@@ -46,14 +46,18 @@ export function SectionThreeInOne() {
                 src={step.image}
                 alt={step.title}
                 fill
-                placeholder='blur'
-                loading={index === 0 ? 'eager' : 'lazy'}
-                fetchPriority={index === 0 ? 'high' : 'auto'}
-                quality={80}
-                className={
-                  step.isProduct ? 'object-contain p-8' : 'object-cover'
-                }
-                sizes='(min-width: 1280px) 0px, 100vw'
+                loading='lazy'
+                quality={75}
+                className={cn(
+                  'gsap-step-image',
+                  step.desktopObjectFit === 'contain' ?
+                    'object-contain p-12 min-[1536px]:p-16'
+                  : 'object-cover'
+                )}
+                style={{
+                  objectPosition: step.desktopObjectPosition || 'center'
+                }}
+                sizes='(max-width: 1279px) 0px, min(43vw, 82vh)'
               />
               <BrandBadge
                 backgroundColor='var(--color-maritime-darkest)'
@@ -103,7 +107,8 @@ export function SectionThreeInOne() {
                   src={step.image}
                   alt={step.title}
                   fill
-                  loading={index === 0 ? 'eager' : 'lazy'}
+                  loading='lazy'
+                  quality={75}
                   className={cn(
                     'gsap-step-image',
                     step.desktopObjectFit === 'contain' ?

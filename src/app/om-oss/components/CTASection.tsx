@@ -36,7 +36,7 @@ export function CTASection() {
               delay='0.08s'
               threshold={0.2}
             >
-              <h2 className='mb-6 text-3xl leading-[0.95] font-bold tracking-[-0.01em] text-maritime-blue md:text-5xl'>
+              <h2 className='mb-6 text-3xl leading-[0.95] font-bold font-google-sans tracking-tight text-maritime-darkest md:text-5xl'>
                 Klar til å ta kvelden tilbake?
               </h2>
             </AnimatedBlock>
@@ -45,9 +45,9 @@ export function CTASection() {
               delay='0.16s'
               threshold={0.2}
             >
-              <p className='mx-auto mt-4 max-w-2xl text-lg leading-[1.45] tracking-tight font-utekos-text text-maritime-darkest md:text-xl'>
-                Opplev hvordan ekte norsk design kan forvandle en kjølig kveld
-                til ditt favorittøyeblikk.
+              <p className='mx-auto mt-4 max-w-2xl text-lg font-base leading-[1.45] tracking-tight font-utekos-text text-maritime-darkest md:text-xl'>
+                Opplev hvordan banebrytende innovasjon og tidløs eleganse kan
+                forvandle en kjølig kveld til ditt favorittøyeblikk.
               </p>
             </AnimatedBlock>
             <AnimatedBlock
@@ -64,6 +64,7 @@ export function CTASection() {
                 <Link
                   href='/produkter'
                   data-track='AboutUsShopAllProductsClick'
+                  className='font-utekos-text text-base font-medium tracking-tight text-maritime-darkest'
                 >
                   Se alle produkter
                   <ArrowRight className='size-5 transition-transform duration-300 group-hover:translate-x-1' />

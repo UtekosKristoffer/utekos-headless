@@ -36,7 +36,7 @@ export async function QualitySection() {
                 <h2 className='text-[2rem] sm:text-[2.5rem] lg:text-[3rem] font-medium leading-[0.9] tracking-[-0.01em] text-cloud-dancer'>
                   Kvalitet i hver fiber
                 </h2>
-                <p className='mt-5 sm:mt-6 max-w-xl text-[1.125rem] font-normal leading-[1.45] tracking-[-0.02em] text-cloud-dancer/80'>
+                <p className='mt-5 sm:mt-6 max-w-xl text-[1.125rem] font-normal leading-[1.45] tracking-tight text-cloud-dancer/80'>
                   Fra den lette spensten i dunet til slitestyrken i hver søm –
                   vi er transparente om materialvalgene som definerer Utekos.
                   Dette er kvalitet du kan føle på, designet for å vare.
@@ -79,7 +79,7 @@ export async function QualitySection() {
                   Premium Isolasjon
                 </h3>
               </div>
-              <p className='text-[1rem] font-normal leading-[1.45] tracking-[-0.02em] text-cloud-dancer/70'>
+              <p className='text-[1rem] font-normal leading-[1.45] tracking-tight font-medium text-cloud-dancer/70'>
                 Kun sertifisert dun og høykvalitets syntetisk fyll for optimal
                 varme-til-vekt.
               </p>

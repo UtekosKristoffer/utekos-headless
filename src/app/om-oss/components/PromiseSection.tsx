@@ -47,10 +47,10 @@ export function PromiseSection() {
               <div className='mb-5 rounded-full border border-maritime-blue/14 bg-maritime-blue p-4 text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
                 <Heart className='size-6' strokeWidth={1.6} />
               </div>
-              <h3 className='mb-3 text-xl leading-[1] font-semibold tracking-tight text-maritime-blue'>
+              <h3 className='mb-3 text-xl leading-[1] font-semibold font-google-sans tracking-tight text-maritime-darkest'>
                 Mer enn et plagg
               </h3>
-              <p className='text-lg leading-[1.45] tracking-tight text-maritime-blue/78'>
+              <p className='text-lg leading-[1.45] font-utekos-text tracking-tight text-maritime-darkest'>
                 Vi lover deg følelsen av umiddelbar varme og velvære. En garanti
                 for at du kan nyte øyeblikket lenger, uten å fryse.
               </p>
@@ -60,13 +60,13 @@ export function PromiseSection() {
               className='group relative flex flex-col items-center rounded-[1.75rem] border border-ancient-water/18 bg-[color-mix(in_oklab,var(--cloud-dancer)_92%,var(--ancient-water))] p-8 shadow-[0_24px_70px_-48px_color-mix(in_oklab,var(--maritime-darkest)_55%,transparent)] transition-all duration-500 hover:-translate-y-1 hover:border-dusted-peri/38'
               delay='0.3s'
             >
-              <div className='mb-5 rounded-full border border-maritime-blue/14 bg-maritime-blue p-4 text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
+              <div className='mb-5 rounded-full border border-maritime-blue/14 bg-maritime-darkest p-4 text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
                 <ShieldCheck className='size-6' strokeWidth={1.6} />
               </div>
-              <h3 className='mb-3 text-xl leading-[1] font-semibold tracking-tight text-maritime-blue'>
+              <h3 className='mb-3 text-xl leading-[1] font-semibold tracking-tight text-maritime-darkest'>
                 En varig verdi
               </h3>
-              <p className='text-lg leading-[1.45] tracking-tight text-maritime-blue/78'>
+              <p className='text-lg leading-[1.45] font-utekos-text tracking-tight text-maritime-darkest'>
                 Se på det som en investering i din egen livskvalitet.
                 Kompromissløs komfort og overlegen allsidighet, designet for å
                 gi deg flere timer utendørs, år etter år.

@@ -64,13 +64,10 @@ export function FindUsSection() {
               textColor='var(--cloud-dancer)'
               className='mb-6 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--cloud-dancer)_80%,transparent)]'
             />
-            <h2 className='mb-6 text-4xl leading-[0.95] font-bold tracking-tight text-cloud-dancer sm:text-5xl'>
+            <h2 className='mb-6 text-4xl leading-[0.95] font-bold font-google-sans tracking-tight text-maritime-darkest sm:text-5xl'>
               Der du har møtt oss
             </h2>
-            <p
-              className='mb-10 text-lg leading-[1.45] tracking-tight text-cloud-dancer/85
-            '
-            >
+            <p className='mb-10 text-lg leading-[1.45] font-utekos-text tracking-tight text-maritime-darkest'>
               Vi elsker å prate med folk – derfor er vi jevnlig på messer og
               stands. Her er noen av stedene du kan ha truffet oss, og hvor vi
               har fått verdifulle innspill fra kunder som faktisk har kjent
@@ -88,12 +85,12 @@ export function FindUsSection() {
                   </div>
 
                   <div className='pt-1'>
-                    <h3 className='mb-1 text-xl leading-[1] font-semibold tracking-[-0.01em] text-maritime-blue'>
+                    <h3 className='mb-1 text-xl leading-[1] font-semibold tracking-tight text-maritime-darkest'>
                       {event.name}
                     </h3>
-                    <p className='text-sm leading-[1.45] font-medium tracking-[-0.01em] text-maritime-blue/62'>
+                    <p className='text-sm leading-[1.45] font-medium tracking-tight text-maritime-darkest/80'>
                       {event.location}
-                      <span className='mx-2 text-dusted-peri'>•</span>
+                      <span className='mx-2 text-maritime-blue'>•</span>
                       {event.date}
                     </p>
                   </div>

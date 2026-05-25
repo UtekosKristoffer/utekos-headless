@@ -28,7 +28,7 @@ export function DeepDiveSection() {
               className='grid gap-8 py-10 lg:grid-cols-[0.42fr_0.58fr] lg:py-14'
             >
               <div>
-                <p className='font-utekos-text text-sm font-medium tracking-tight text-overcast'>
+                <p className='font-utekos-text text-sm font-medium tracking-tight text-cloud-dancer'>
                   {section.eyebrow}
                 </p>
                 <h3 className='mt-4 font-google-sans text-3xl leading-[0.98] font-bold tracking-tight text-cloud-dancer sm:text-4xl'>

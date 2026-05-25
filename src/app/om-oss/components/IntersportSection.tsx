@@ -179,7 +179,9 @@ export function IntersportSection() {
                   <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-maritime-darkest opacity-35'></span>
                   <span className='relative inline-flex size-3 rounded-full bg-maritime-darkest'></span>
                 </span>
-                <span>Fysisk butikk i Bergen</span>
+                <span className='font-utekos-text text-base font-medium tracking-tight text-maritime-darkest'>
+                  Fysisk butikk i Bergen
+                </span>
               </BrandBadge>
 
               <h2 className='gsap-content mb-6 flex flex-col text-balance text-3xl leading-[0.95] font-bold tracking-[-0.01em] text-cloud-dancer md:text-5xl'>
@@ -191,7 +193,7 @@ export function IntersportSection() {
                 <span className='text-overcast'>Intersport Laksevåg</span>
               </h2>
 
-              <p className='gsap-content mb-10 max-w-lg text-lg tracking-tight font-utekos-text text-cloud-dancer/85'>
+              <p className='gsap-content mb-10 max-w-lg text-lg leading-[1.45] font-utekos-text tracking-tight text-cloud-dancer'>
                 Lyst til å kjenne på kvaliteten og finne den perfekte
                 passformen? Som eneste fysiske forhandler i Bergen finner du et
                 utvalg av våre produkter hos våre venner på Laksevåg Senter.
