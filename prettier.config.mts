@@ -10,14 +10,13 @@ const config: Config = {
   experimentalOperatorPosition: 'start',
   experimentalTernaries: true,
   jsxSingleQuote: true,
-  printWidth: 80,
+  printWidth: 110,
   proseWrap: 'always',
   quoteProps: 'consistent',
   semi: false,
   singleQuote: true,
   tabWidth: 2,
-  trailingComma: 'none',
-  objectWrapping: 'always'
+  trailingComma: 'none'
 }
 
 export default config

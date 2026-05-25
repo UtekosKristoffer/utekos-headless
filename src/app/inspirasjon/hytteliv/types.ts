@@ -12,12 +12,16 @@ export interface Benefit {
   icon: LucideIcon
   title: string
   description: string
-  color: string
+  benefitColor: string
+  iconColor: string
 }
 
 export interface Destination {
   name: string
   season: string
   highlight: string
-  color: string
+  bgColor: string
+  iconBgColor: string
+  iconColor: string
+  textColor: string
 }

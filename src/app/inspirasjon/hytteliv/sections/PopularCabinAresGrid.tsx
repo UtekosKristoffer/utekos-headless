@@ -1,33 +1,46 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
+import { cn } from '@/lib/utils/className'
 import { MapPinIcon } from 'lucide-react'
 import type { Destination } from '../types'
 
 export const popularAreasData: Destination[] = [
   {
-    name: 'Trysil & Hemsedal',
+    name: 'Trysil og Hemsedal',
     season: 'Vinter og vår',
     highlight: 'Varme etter skituren',
-    color: 'text-ancient-water'
+    bgColor: 'bg-ancient-water',
+    iconBgColor: 'bg-ancient-water-light',
+    iconColor: 'text-maritime-darkest',
+    textColor: 'text-maritime-darkest'
   },
   {
     name: 'Sørlandskysten',
     season: 'Sommer',
     highlight: 'Varme på kjølige sommerkvelder',
-    color: 'text-dusted-peri'
+    bgColor: 'bg-dusted-peri',
+    iconBgColor: 'bg-dusted-peri-light',
+    iconColor: 'text-maritime-darkest',
+    textColor: 'text-cloud-dancer'
   },
   {
-    name: 'Hafjell & Geilo',
+    name: 'Hafjell og Geilo',
     season: 'Hele året',
     highlight: 'Komfort i fjellet, hele året',
-    color: 'text-mountain-view'
+    bgColor: 'bg-overcast',
+    iconBgColor: 'bg-overcast-light',
+    iconColor: 'text-maritime-darkest',
+    textColor: 'text-maritime-darkest'
   },
   {
     name: 'Hardanger',
     season: 'Vår og høst',
     highlight: 'Nyt fjordutsikten lenger',
-    color: 'text-bleached-mauve'
+    bgColor: 'bg-bleached-mauve',
+    iconBgColor: 'bg-bleached-mauve-light',
+    iconColor: 'text-maritime-darkest',
+    textColor: 'text-maritime-darkest'
   }
 ]
 
@@ -37,14 +50,20 @@ export function PopularCabinAreasGrid({
   destinations: Destination[]
 }) {
   return (
-    <section className='bg-demitasse py-24 text-cloud-dancer'>
+    <section className='bg-maritime-blue py-24 text-cloud-dancer'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl text-center'>
-          <h2 className='text-fluid-display inline-flex flex-col items-center justify-center gap-y-[0.2em] leading-[0.95] font-bold tracking-[-0.01em] text-cloud-dancer lg:flex-row lg:flex-wrap lg:items-baseline lg:gap-x-[0.18em] lg:gap-y-[0.08em]'>
-            <span>Populære hytteområder med</span>
-            <UtekosWordmark className='h-[0.78em] w-auto shrink-0 translate-y-0 lg:translate-y-[0.06em]' />
+          <h2 className='font-brand-sans text-fluid-display font-bold leading-[1.2] tracking-tight text-cloud-dancer'>
+            <span className='block'>Populære hytteområder</span>
+            <span className='inline-flex items-baseline justify-center gap-x-[0.18em] whitespace-nowrap'>
+              <span>med</span>
+              <UtekosWordmark
+                className='h-[0.78em] w-auto shrink-0 translate-y-[0.06em]'
+                style={{ color: 'var(--cloud-dancer)' }}
+              />
+            </span>
           </h2>
-          <p className='mt-4 text-lg leading-[1.45] tracking-[-0.01em] text-cloud-dancer'>
+          <p className='mt-4 font-utekos-text text-lg leading-[1.45] tracking-tight text-cloud-dancer'>
             Fra fjell til fjord får du mer tid ute, også når temperaturen
             faller.
           </p>
@@ -57,18 +76,48 @@ export function PopularCabinAreasGrid({
               delay={`${destinationIndex * 0.1}s`}
               threshold={0.2}
             >
-              <Card className='border-cloud-dancer/18 bg-cloud-dancer py-0 text-maritime-darkest shadow-[0_24px_58px_-42px_rgba(14,18,35,0.62)] transition-colors hover:bg-whispy-clouds'>
+              <Card
+                className={cn(
+                  'border-cloud-dancer/18 py-0 shadow-[0_24px_58px_-42px_rgba(14,18,35,0.62)] transition-[border-color,box-shadow] hover:border-cloud-dancer/28 hover:shadow-[0_28px_64px_-40px_rgba(14,18,35,0.68)]',
+                  destination.bgColor
+                )}
+              >
                 <CardContent className='p-6'>
-                  <div className='mb-3 flex items-start justify-between'>
-                    <h3 className='text-lg leading-[1] font-semibold tracking-[-0.01em]'>
+                  <div className='mb-3 flex items-center gap-3'>
+                    <div
+                      className={cn(
+                        'flex size-8 shrink-0 items-center justify-center rounded-full',
+                        destination.iconBgColor
+                      )}
+                    >
+                      <MapPinIcon
+                        className={cn('size-4', destination.iconColor)}
+                        aria-hidden
+                      />
+                    </div>
+                    <h3
+                      className={cn(
+                        'min-w-0 flex-1 text-lg font-semibold leading-[1.15] tracking-tight',
+                        destination.textColor
+                      )}
+                    >
                       {destination.name}
                     </h3>
-                    <MapPinIcon className={`size-5 ${destination.color}`} />
                   </div>
-                  <p className='mb-2 text-sm leading-[1.45] tracking-[-0.01em] text-maritime-blue'>
+                  <p
+                    className={cn(
+                      'mb-2 font-utekos-text text-sm italic leading-[1.45] tracking-tight opacity-82',
+                      destination.textColor
+                    )}
+                  >
                     {destination.season}
                   </p>
-                  <p className='text-sm leading-[1.45] tracking-[-0.01em] text-maritime-darkest/78'>
+                  <p
+                    className={cn(
+                      'font-utekos-text text-base leading-[1.45] tracking-tight',
+                      destination.textColor
+                    )}
+                  >
                     {destination.highlight}
                   </p>
                 </CardContent>

@@ -42,17 +42,17 @@ const galleryImages = [
 
 export function SocialProof() {
   return (
-    <section className='bg-cloud-dancer py-24 text-maritime-darkest'>
+    <section className='bg-overcast py-24 text-maritime-darkest'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='text-fluid-display mb-4 inline-flex flex-col items-center justify-center gap-y-[0.2em] leading-[0.95] font-bold tracking-[-0.01em] text-maritime-darkest lg:flex-row lg:flex-wrap lg:items-baseline lg:gap-x-[0.18em] lg:gap-y-[0.08em]'>
+          <h2 className='text-fluid-display-bold mb-4 inline-flex flex-col items-center justify-center gap-y-[0.2em] text-maritime-darkest lg:flex-row lg:flex-wrap lg:items-baseline lg:gap-x-[0.18em] lg:gap-y-[0.08em]'>
             <UtekosWordmark
               className='h-[0.78em] w-auto shrink-0 translate-y-0 lg:translate-y-[0.06em]'
               style={{ color: 'var(--maritime-darkest)' }}
             />
             <span>i sitt rette element</span>
           </h2>
-          <p className='mx-auto mb-12 max-w-2xl text-lg leading-[1.45] brand-tracking-normal text-maritime-blue'>
+          <p className='mx-auto mb-12 max-w-2xl text-lg leading-[1.45] font-utekos-text tracking-tight text-maritime-darkest'>
             Fra morgenkaffen på en duggfrisk trapp til sene kvelder rundt
             bålpannen. Se ekte øyeblikk fra hyttelivet.
           </p>
@@ -73,7 +73,7 @@ export function SocialProof() {
               >
                 <div className='group p-1'>
                   <AspectRatio
-                    ratio={4 / 5}
+                    ratio={1 / 1}
                     className='relative overflow-hidden rounded-lg border border-maritime-darkest/18 bg-maritime-blue shadow-[0_24px_56px_-42px_rgba(14,18,35,0.62)]'
                   >
                     <Image
@@ -86,10 +86,10 @@ export function SocialProof() {
                     />
                   </AspectRatio>
                   <div className='pt-4 text-left'>
-                    <h3 className='leading-[1] font-semibold tracking-[-0.01em]'>
+                    <h3 className='font-semibold font-google-sans leading-[1.45] tracking-tight'>
                       {image.title}
                     </h3>
-                    <p className='text-sm leading-[1.45] brand-tracking-normal text-maritime-blue'>
+                    <p className='text-sm leading-[1.15] font-utekos-text tracking-tight text-maritime-darkest'>
                       {image.description}
                     </p>
                   </div>

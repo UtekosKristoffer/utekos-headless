@@ -23,9 +23,9 @@ export default function InspirasjonLayout({
   children
 }: InspirasjonLayoutProps) {
   return (
-    <section className='bg-maritime-darkest'>
+    <section className='bg-overcast'>
       <Activity>
-        <section className='border-b border-cloud-dancer/12 text-cloud-dancer'>
+        <section className='border-b border-maritime-darkest/90 text-maritime-darkest'>
           <div className='container mx-auto px-4 py-6'>
             <Breadcrumb>
               <BreadcrumbList>
@@ -120,7 +120,7 @@ export default function InspirasjonLayout({
               ))}
             </div>
             <div className='mt-12 text-center'>
-              <p className='mb-4 text-sm leading-[1.45] tracking-[-0.01em] text-maritime-blue'>
+              <p className='mb-4 text-base leading-[1.45] font-utekos-text tracking-tight text-maritime-blue'>
                 Klar til å oppleve komforten selv?
               </p>
               <div className='flex flex-wrap justify-center gap-4'>
