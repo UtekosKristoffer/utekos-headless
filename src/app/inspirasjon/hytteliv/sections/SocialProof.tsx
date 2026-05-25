@@ -52,7 +52,7 @@ export function SocialProof() {
             />
             <span>i sitt rette element</span>
           </h2>
-          <p className='mx-auto mb-12 max-w-2xl text-lg leading-[1.45] tracking-[-0.01em] text-maritime-blue'>
+          <p className='mx-auto mb-12 max-w-2xl text-lg leading-[1.45] brand-tracking-normal text-maritime-blue'>
             Fra morgenkaffen på en duggfrisk trapp til sene kvelder rundt
             bålpannen. Se ekte øyeblikk fra hyttelivet.
           </p>
@@ -89,7 +89,7 @@ export function SocialProof() {
                     <h3 className='leading-[1] font-semibold tracking-[-0.01em]'>
                       {image.title}
                     </h3>
-                    <p className='text-sm leading-[1.45] tracking-[-0.01em] text-maritime-blue'>
+                    <p className='text-sm leading-[1.45] brand-tracking-normal text-maritime-blue'>
                       {image.description}
                     </p>
                   </div>

@@ -21,7 +21,7 @@ export type RouteType = {
 // Dataen er nå oppdatert til å bruke strenger for ikoner
 const routes: RouteType[] = [
   {
-    title: 'Fjell & Fjord',
+    title: 'Fjell og fjord',
     start: {
       label: 'Start: Sør-Norge'
     },
@@ -45,14 +45,14 @@ const routes: RouteType[] = [
     ]
   },
   {
-    title: 'Villmark & Kultur',
+    title: 'Villmark og kultur',
     start: {
       label: 'Start: Øst-Norge'
     },
     stops: [
       {
         icon: 'fish',
-        label: 'Rondane & Femundsmarka',
+        label: 'Rondane og Femundsmarka',
         description:
           'Utforsk nasjonalparker, fiske og villmarksliv i Norges eldste fjellområder. Perfekt for eventyrlystne familier.',
         iconColor: 'text-emerald-400',
@@ -73,7 +73,6 @@ const routes: RouteType[] = [
 export function SectionMagasinetBobilHostferien() {
   return (
     <section className='relative mx-auto max-w-[95%] overflow-hidden py-16 sm:py-24 md:max-w-4xl'>
-      {/* Ambient background glow */}
       <div className='absolute inset-0 -z-10 overflow-hidden'>
         <div
           className='absolute left-1/4 top-0 h-[500px] w-[500px] opacity-20 blur-3xl'

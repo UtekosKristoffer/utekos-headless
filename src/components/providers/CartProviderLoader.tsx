@@ -1,4 +1,5 @@
-import { getCachedCart } from '@/lib/actions/getCachedCart'
+// Path: src/components/providers/CartProviderLoader.tsx
+
 import { getCartIdFromCookie } from '@/lib/actions/getCartIdFromCookie'
 import Providers from '@/components/providers/Providers'
 import type { ReactNode } from 'react'
@@ -12,15 +13,8 @@ export async function CartProviderLoader({
   const queryClient = new QueryClient()
   const cartId = await getCartIdFromCookie()
 
-  await queryClient.prefetchQuery({
-    queryKey: ['cart', cartId],
-    queryFn: () => getCachedCart(cartId)
-  })
-
-  const dehydratedState = dehydrate(queryClient)
-
   return (
-    <Providers dehydratedState={dehydratedState} cartId={cartId}>
+    <Providers dehydratedState={dehydrate(queryClient)} cartId={cartId}>
       {children}
     </Providers>
   )

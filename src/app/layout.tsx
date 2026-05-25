@@ -44,8 +44,8 @@ const GTM_BOOTSTRAP_SCRIPT = `
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: {
-    default: 'Utekos® - Skreddersy varmen',
-    template: '%s | Utekos®'
+    default: 'Utekos - Skreddersy varmen',
+    template: '%s | Utekos'
   },
   description:
     'Opplev kompromissløs komfort og overlegen allsidighet. Gjør som tusenvis av andre livsnytere og løft utendørslivet til et nytt nivå. Juster, form og nyt',
@@ -60,9 +60,9 @@ export const metadata: Metadata = {
   creator: 'Utekos',
   publisher: 'Utekos',
   formatDetection: {
-    email: false,
-    address: false,
-    telephone: false
+    email: true,
+    address: true,
+    telephone: true
   },
   facebook: {
     appId: '1154247890253046'
@@ -112,15 +112,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       lang='no'
       className={`${brandSansFontFamily.variable} ${utekosText.variable}`}
     >
-      <head>
+      <body className='bg-background text-cloud-dancer antialiased'>
+        <WebVitalsReporter />
+
         {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (
           <Script id='gtm-bootstrap' strategy='afterInteractive'>
             {GTM_BOOTSTRAP_SCRIPT}
           </Script>
         )}
+
         <MicrosoftUetTag />
-      </head>
-      <body className='bg-background text-cloud-dancer antialiased'>
+
         {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (
           <noscript>
             <iframe
@@ -131,22 +133,22 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             />
           </noscript>
         )}
+
         <OnlineStoreJsonLd />
-        <Suspense>
-          <TrackingRoot />
-          <CartProviderLoader>
-            <AnnouncementBanner />
-            <Header menu={mainMenu} />
-            <main>
-              {children}
-              {SHOULD_LOAD_VERCEL_ANALYTICS && <Analytics />}
-              <WebVitalsReporter />
-              <ChatBotAgent />
-            </main>
-            <Footer />
-            <CookieConsentBanner />
-          </CartProviderLoader>
-        </Suspense>
+
+        <TrackingRoot />
+
+        <CartProviderLoader>
+          <AnnouncementBanner />
+          <Header menu={mainMenu} />
+          <main>
+            {children}
+            {SHOULD_LOAD_VERCEL_ANALYTICS && <Analytics />}
+            <ChatBotAgent />
+          </main>
+          <Footer />
+          <CookieConsentBanner />
+        </CartProviderLoader>
       </body>
     </html>
   )

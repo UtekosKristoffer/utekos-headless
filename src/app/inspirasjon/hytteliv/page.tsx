@@ -50,32 +50,15 @@ export const metadata: Metadata = {
 export default function CabinInspirationPage() {
   return (
     <>
-      {/* JSON-LD er flyttet til layout.tsx for optimal cache/PPR */}
-
-      {/* Endret <main> til <div> for å unngå dobbel main-tag (RootLayout har main) */}
-      <div className='flex flex-col'>
-        <Activity>
-          <CabinHeroSection />
-        </Activity>
-        <Activity>
-          <UseCasesGrid useCases={useCasesData} />
-        </Activity>
-        <Activity>
-          <BenefitsGrid benefits={benefitsData} />
-        </Activity>
-        <Activity>
-          <SeasonsSection />
-        </Activity>
-        <Activity>
-          <PopularCabinAreasGrid destinations={popularAreasData} />
-        </Activity>
-        <Activity>
-          <SocialProof />
-        </Activity>
-        <Activity>
-          <CTASection />
-        </Activity>
-      </div>
+      <section className='flex flex-col'>
+        <CabinHeroSection />
+        <UseCasesGrid useCases={useCasesData} />
+        <BenefitsGrid benefits={benefitsData} />
+        <SeasonsSection />
+        <PopularCabinAreasGrid destinations={popularAreasData} />
+        <SocialProof />
+        <CTASection />
+      </section>
     </>
   )
 }

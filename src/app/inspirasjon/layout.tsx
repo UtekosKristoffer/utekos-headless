@@ -15,7 +15,6 @@ import type { ReactNode } from 'react'
 import { TrustIndicators } from './layout/sections/TrustIndicators'
 import { Activity } from 'react'
 import type { CSSProperties } from 'react'
-
 interface InspirasjonLayoutProps {
   children: ReactNode
 }
@@ -49,10 +48,10 @@ export default function InspirasjonLayout({
         <section className='border-t border-chocolate-plum/35 bg-overcast py-16'>
           <div className='container mx-auto px-4'>
             <div className='mb-12 text-center'>
-              <h2 className='mb-4 text-4xl font-bold leading-[0.95] tracking-[-0.01em] text-maritime-darkest md:text-6xl'>
+              <h2 className='mb-4 text-4xl font-bold leading-[0.95] tracking-tight font-google-sans text-maritime-darkest md:text-6xl'>
                 Mer inspirasjon for dine øyeblikk
               </h2>
-              <p className='mx-auto max-w-2xl text-base leading-[1.45] tracking-[-0.01em] text-maritime-blue'>
+              <p className='mx-auto max-w-2xl text-base leading-[1.45] tracking-tight font-utekos-text! text-maritime-blue'>
                 Finn ideer til situasjoner der komfort møter norsk natur. Se
                 hvordan små grep gjør uteøyeblikkene varmere.
               </p>

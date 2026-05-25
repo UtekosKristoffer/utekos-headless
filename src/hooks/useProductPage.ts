@@ -1,5 +1,7 @@
 // Path: src/hooks/useProductPage.ts
+
 'use client'
+
 import { useQuery } from '@tanstack/react-query'
 import { productOptions } from '@/api/lib/products/productOptions'
 import { useVariantState } from '@/hooks/useVariantState'
@@ -10,7 +12,8 @@ import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
 
 export function useProductPage(
   handle: string,
-  initialRelatedProducts: ShopifyProduct[]
+  initialRelatedProducts: ShopifyProduct[],
+  initialVariantId: string | null = null
 ) {
   const {
     data: productData,
@@ -23,7 +26,9 @@ export function useProductPage(
   const productWithMetafields = reshapeProductWithMetafields(productData)
 
   const { variantState, updateVariant, allVariants } = useVariantState(
-    productWithMetafields
+    productWithMetafields,
+    true,
+    initialVariantId
   )
 
   const relatedProducts = initialRelatedProducts

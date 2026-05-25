@@ -1,4 +1,5 @@
 // Path: src/api/lib/products/getProducts.ts
+
 import 'server-only'
 import { getProductsQuery } from '@/api/graphql/queries/products'
 import { shopifyFetch } from '@/api/shopify/request/fetchShopify'
@@ -17,13 +18,20 @@ export async function fetchProducts(
   params: GetProductsParams = {}
 ): Promise<ShopifyProduct[]> {
   const variables = { first: 12, ...params }
+
   const res = await shopifyFetch<ShopifyProductsOperation>({
     query: getProductsQuery,
     variables
   })
-  if (!res.success)
+
+  if (!res.success) {
     throw new Error(res.error.errors[0]?.message ?? 'Failed to fetch products')
-  if (!res.body.products) throw new Error('Invalid response structure')
+  }
+
+  if (!res.body.products) {
+    throw new Error('Invalid response structure')
+  }
+
   return reshapeProducts(removeEdgesAndNodes(res.body.products))
 }
 
@@ -31,12 +39,18 @@ export async function getProducts(
   params: GetProductsParams = {}
 ): Promise<GetProductsResponse> {
   'use cache'
+
   cacheTag(TAGS.products)
-  cacheLife('days')
+  cacheLife('collections')
 
   try {
     const products = await fetchProducts(params)
-    return { success: true, status: 200, body: products }
+
+    return {
+      success: true,
+      status: 200,
+      body: products
+    }
   } catch (error) {
     return {
       success: false,

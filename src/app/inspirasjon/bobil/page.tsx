@@ -1,5 +1,4 @@
 // Path: src/app/inspirasjon/bobil/page.tsx
-import { jsonLd } from './data/jsonLd'
 import type { Metadata } from 'next'
 import { BobilHeroSection } from './sections/BobilHeroSection'
 import { BenefitsGrid, benefitsData } from './sections/BenefitsGrid'
@@ -10,21 +9,12 @@ import { destinationsData } from './data/destinationsData'
 import { SeasonsSection } from './sections/SeasonsSection'
 import { InspirationGallerySection } from './sections/InspirationGallerySection'
 import { Activity } from 'react'
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Bobil og Utekos | Forleng sesongen og øk komforten på turen',
   description:
     'Oppdag hvordan Utekos forvandler bobilopplevelsen. Fra kjølige morgener til sosiale kvelder - sikre deg komforten som lar deg nyte hvert øyeblikk av bobilturen.',
-  keywords: [
-    'bobil',
-    'campingvogn',
-    'bobilliv Norge',
-    'utekos bobil',
-    'varme bobil',
-    'komfort camping',
-    'bobiltilbehør',
-    'vintercamp bobil'
-  ],
   alternates: {
     canonical: '/inspirasjon/bobil'
   },
@@ -43,43 +33,34 @@ export const metadata: Metadata = {
       }
     ],
     locale: 'no_NO',
-    type: 'article'
+    type: 'website'
   }
 }
 
 export default function BobilInspirasjonPage() {
   return (
-    <>
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c')
-        }}
-      />
-
-      <main className="bg-maritime-darkest text-cloud-dancer">
-        <Activity>
-          <BobilHeroSection />
-        </Activity>
-        <Activity>
-          <UseCasesGrid useCases={useCasesData} />
-        </Activity>
-        <Activity>
-          <BenefitsGrid benefits={benefitsData} />
-        </Activity>
-        <Activity>
-          <SeasonsSection />
-        </Activity>
-        <Activity>
-          <DestinationsGrid destinations={destinationsData} />
-        </Activity>
-        <Activity>
-          <InspirationGallerySection />
-        </Activity>
-        <Activity>
-          <CTASection />
-        </Activity>
-      </main>
-    </>
+    <div className='flex flex-col text-cloud-dancer'>
+      <Activity>
+        <BobilHeroSection />
+      </Activity>
+      <Activity>
+        <UseCasesGrid useCases={useCasesData} />
+      </Activity>
+      <Activity>
+        <BenefitsGrid benefits={benefitsData} />
+      </Activity>
+      <Activity>
+        <SeasonsSection />
+      </Activity>
+      <Activity>
+        <DestinationsGrid destinations={destinationsData} />
+      </Activity>
+      <Activity>
+        <InspirationGallerySection />
+      </Activity>
+      <Activity>
+        <CTASection />
+      </Activity>
+    </div>
   )
 }

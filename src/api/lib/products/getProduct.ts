@@ -13,18 +13,23 @@ export async function getProduct(
   handle: string
 ): Promise<ShopifyProduct | null> {
   'use cache'
-  cacheTag(TAGS.products)
-  cacheLife('days')
+
+  cacheTag(`product-${handle}`, TAGS.products)
+  cacheLife('products')
 
   const res = await shopifyFetch<ShopifyProductOperation>({
     query: getProductQuery,
     variables: { handle }
   })
-  if (!res.success)
+
+  if (!res.success) {
     throw new Error(
       res.error.errors[0]?.message ?? `Failed to fetch product: ${handle}`
     )
+  }
+
   const rawProduct = res.body.product
   if (!rawProduct) return null
+
   return reshapeProduct(rawProduct)
 }

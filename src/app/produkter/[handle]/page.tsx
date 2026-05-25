@@ -1,3 +1,5 @@
+// Path: src/app/produkter/[handle]/page.tsx
+
 import { Suspense } from 'react'
 import { VideoSkeleton } from '@/app/produkter/(oversikt)/components/VideoSkeleton'
 import { ProductVideoSection } from '@/app/produkter/(oversikt)/components/ProductVideoSection'
@@ -5,10 +7,7 @@ import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { getProduct } from '@/api/lib/products/getProduct'
 import { IntersportSection } from '@/app/om-oss/components/IntersportSection'
 import { QueryClient } from '@tanstack/react-query'
-import {
-  allProductsOptions,
-  productOptions
-} from '@/api/lib/products/productOptions'
+import { productOptions } from '@/api/lib/products/productOptions'
 import { notFound } from 'next/navigation'
 import { ProductPageController } from '@/app/produkter/[handle]/components/ProductPageController'
 import type { Metadata } from 'next'
@@ -18,10 +17,29 @@ import { flattenVariants } from '@/lib/utils/flattenVariants'
 import { computeVariantImages } from '@/lib/utils/computeVariantImages'
 import { ProductPageSkeleton } from './components/ProductPageSkeleton'
 import { cacheLife, cacheTag } from 'next/cache'
+import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
 
 const SITE_URL = 'https://utekos.no'
 
-const toAbsoluteUrl = (url: string) => {
+type RouteParamsPromise = Promise<{ handle: string }>
+
+type SearchParamsRecord = {
+  [key: string]: string | string[] | undefined
+}
+
+type SearchParamsPromise = Promise<SearchParamsRecord>
+
+type GenerateMetadataProps = {
+  params: RouteParamsPromise
+  searchParams: SearchParamsPromise
+}
+
+type ProductPageProps = {
+  params: RouteParamsPromise
+  searchParams: SearchParamsPromise
+}
+
+function toAbsoluteUrl(url: string) {
   try {
     return new URL(url).toString()
   } catch {
@@ -30,14 +48,110 @@ const toAbsoluteUrl = (url: string) => {
   }
 }
 
-type RouteParamsPromise = Promise<{ handle: string }>
-type SearchParamsPromise = Promise<{
-  [key: string]: string | string[] | undefined
-}>
+function getFirstSearchParamValue(value: string | string[] | undefined) {
+  if (Array.isArray(value)) return value[0]
+  return value
+}
 
-type GenerateMetadataProps = {
-  params: RouteParamsPromise
-  searchParams: SearchParamsPromise
+function toURLSearchParams(searchParams: SearchParamsRecord) {
+  const params = new URLSearchParams()
+
+  for (const [key, value] of Object.entries(searchParams)) {
+    if (Array.isArray(value)) {
+      for (const item of value) {
+        if (item) params.append(key, item)
+      }
+      continue
+    }
+
+    if (value) {
+      params.set(key, value)
+    }
+  }
+
+  return params
+}
+
+function slugifyVariantParam(value: string) {
+  return value
+    .toLowerCase()
+    .trim()
+    .replaceAll('æ', 'ae')
+    .replaceAll('ø', 'o')
+    .replaceAll('å', 'a')
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+function findVariantFromReadableParams(
+  allVariants: ShopifyProductVariant[],
+  searchParams: URLSearchParams
+) {
+  return (
+    allVariants.find(variant => {
+      const selectedOptions = variant.selectedOptions ?? []
+      if (!selectedOptions.length) return false
+
+      return selectedOptions.every(option => {
+        const key = slugifyVariantParam(option.name)
+        const value = slugifyVariantParam(option.value)
+
+        return searchParams.get(key) === value
+      })
+    }) ?? null
+  )
+}
+
+function resolveInitialVariant(
+  product: ShopifyProduct,
+  searchParams: SearchParamsRecord
+) {
+  const allVariants = flattenVariants(product) || []
+  if (!allVariants.length) return null
+
+  const variantId = getFirstSearchParamValue(searchParams.variant)
+  if (variantId) {
+    const variantFromId = allVariants.find(variant => variant.id === variantId)
+    if (variantFromId) return variantFromId
+  }
+
+  const readableParams = toURLSearchParams(searchParams)
+  const variantFromReadableParams = findVariantFromReadableParams(
+    allVariants,
+    readableParams
+  )
+
+  if (variantFromReadableParams) return variantFromReadableParams
+
+  return (
+    allVariants.find(variant => variant.availableForSale)
+    ?? product.selectedOrFirstAvailableVariant
+    ?? allVariants[0]
+    ?? null
+  )
+}
+
+async function getCachedProductPageData(handle: string) {
+  'use cache'
+
+  cacheTag(`product-${handle}`, 'products')
+  cacheLife('products')
+
+  const [product, relatedProducts] = await Promise.all([
+    getProduct(handle),
+    getCachedRelatedProducts(handle)
+  ])
+
+  return {
+    product,
+    relatedProducts
+  }
+}
+
+export async function generateStaticParams() {
+  return [{ handle: 'utekos-techdown' }]
 }
 
 export async function generateMetadata({
@@ -46,7 +160,6 @@ export async function generateMetadata({
 }: GenerateMetadataProps): Promise<Metadata> {
   const { handle } = await params
   const resolvedSearchParams = await searchParams
-  const variantId = resolvedSearchParams?.variant as string | undefined
   const rawProduct = await getProduct(handle)
 
   if (!rawProduct) {
@@ -57,12 +170,7 @@ export async function generateMetadata({
   }
 
   const product = reshapeProductWithMetafields(rawProduct) || rawProduct
-
-  let activeVariant = null
-  if (variantId) {
-    const allVariants = flattenVariants(product) || []
-    activeVariant = allVariants.find(v => v.id === variantId) ?? null
-  }
+  const activeVariant = resolveInitialVariant(product, resolvedSearchParams)
 
   const variantImages = computeVariantImages(product, activeVariant)
   const displayImage =
@@ -136,31 +244,37 @@ export async function generateMetadata({
   }
 }
 
-async function AsyncProductContent({ handle }: { handle: string }) {
-  'use cache'
-  cacheTag(`product-${handle}`, 'products')
-  cacheLife('hours')
-
-  const queryClient = new QueryClient()
-  const product = await getProduct(handle)
+async function AsyncProductContent({
+  handle,
+  searchParams
+}: {
+  handle: string
+  searchParams: SearchParamsPromise
+}) {
+  const [{ product, relatedProducts }, resolvedSearchParams] =
+    await Promise.all([getCachedProductPageData(handle), searchParams])
 
   if (!product) {
     notFound()
   }
 
-  const relatedProducts = await getCachedRelatedProducts(handle)
+  const productWithMetafields = reshapeProductWithMetafields(product) || product
 
-  await queryClient.prefetchQuery({
-    ...productOptions(handle),
-    queryFn: () => product
-  })
+  const initialVariant = resolveInitialVariant(
+    productWithMetafields,
+    resolvedSearchParams
+  )
 
-  await queryClient.prefetchQuery(allProductsOptions())
+  const queryClient = new QueryClient()
+  const productQueryOptions = productOptions(handle)
+
+  queryClient.setQueryData(productQueryOptions.queryKey, product)
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <ProductPageController
         handle={handle}
+        initialVariantId={initialVariant?.id ?? null}
         initialRelatedProducts={relatedProducts}
       />
     </HydrationBoundary>
@@ -168,16 +282,15 @@ async function AsyncProductContent({ handle }: { handle: string }) {
 }
 
 export default async function ProductPage({
-  params
-}: {
-  params: RouteParamsPromise
-}) {
+  params,
+  searchParams
+}: ProductPageProps) {
   const { handle } = await params
 
   return (
     <>
       <Suspense fallback={<ProductPageSkeleton />}>
-        <AsyncProductContent handle={handle} />
+        <AsyncProductContent handle={handle} searchParams={searchParams} />
       </Suspense>
 
       <IntersportSection />

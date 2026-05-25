@@ -5,7 +5,7 @@
 import { Check } from 'lucide-react'
 import type { CSSProperties } from 'react'
 
-type BenefitSurface = 'maritime' | 'plum' | 'blueberry'
+type BenefitSurface = 'maritime' | 'plum' | 'peri'
 
 interface Benefit {
   label: string
@@ -38,11 +38,11 @@ const surfaceStyles: Record<
     border:
       'color-mix(in oklch, var(--primary-button) 36%, var(--chocolate-plum) 64%)'
   },
-  blueberry: {
+  peri: {
     background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--blueberry) 42%, var(--maritime-darkest) 58%) 0%, color-mix(in oklch, var(--maritime-darkest) 92%, var(--dusted-peri) 8%) 100%)',
+      'linear-gradient(145deg, color-mix(in oklch, var(--persian-violet) 36%, var(--maritime-darkest) 64%) 0%, color-mix(in oklch, var(--maritime-darkest) 84%, var(--dusted-peri) 16%) 100%)',
     border:
-      'color-mix(in oklch, var(--dusted-peri) 36%, var(--maritime-darkest) 64%)'
+      'color-mix(in oklch, var(--dusted-peri) 42%, var(--maritime-darkest) 58%)'
   }
 }
 

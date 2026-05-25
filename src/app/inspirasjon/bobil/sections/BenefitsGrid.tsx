@@ -14,7 +14,7 @@ export const benefitsData = [
     icon: ThermometerIcon,
     title: 'Øyeblikkelig varme',
     description: 'Fra kald morgen til koselig stund på sekunder',
-    color: 'text-demitasse'
+    color: 'text-dusted-peri'
   },
   {
     icon: SparklesIcon,
@@ -38,32 +38,31 @@ export const benefitsData = [
 
 export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
   return (
-    <section className='py-24'>
+    <section className='bg-mountain-view py-24 text-cloud-dancer'>
       <div className='container mx-auto px-4'>
-        <div className='mx-auto mb-16 max-w-2xl text-center text-cloud-dancer'>
+        <div className='mx-auto mb-16 max-w-2xl text-center'>
           <h2 className='font-brand-sans text-fluid-display font-bold leading-[0.95] tracking-[-0.01em]'>
             Skapt for bobilisten
           </h2>
-          <p className='font-utekos-text mt-4 text-lg leading-[1.5] tracking-[-0.02em] text-cloud-dancer'>
-            Vi forstår bobillivets unike behov og har designet Utekos for å møte
-            dem
+          <p className='mt-4 font-utekos-text text-lg leading-[1.45] tracking-[-0.02em] text-cloud-dancer/82'>
+            Komfort som følger bobilen — fra tidlig vår til sen høst.
           </p>
         </div>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4'>
           {benefits.map((benefit, benefitIndex) => (
             <AnimatedBlock
               key={benefit.title}
-              className='text-center will-animate-fade-in-scale'
+              className='will-animate-fade-in-scale text-center'
               delay={`${benefitIndex * 0.05}s`}
               threshold={0.2}
             >
-              <div className='mx-auto mb-4 flex size-16 items-center justify-center rounded-full border border-cloud-dancer/12 bg-maritime-blue/24'>
-                <benefit.icon className={`size-8 ${benefit.color}`} />
+              <div className='mx-auto mb-4 flex size-16 items-center justify-center rounded-full border border-cloud-dancer/12 bg-maritime-darkest/24'>
+                <benefit.icon className={`size-8 ${benefit.color}`} aria-hidden />
               </div>
-              <h3 className='font-brand-sans mb-2 text-lg font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer'>
+              <h3 className='mb-2 font-brand-sans text-lg font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer'>
                 {benefit.title}
               </h3>
-              <p className='font-utekos-text text-sm leading-[1.5] tracking-[-0.02em] text-overcast'>
+              <p className='font-utekos-text text-sm leading-[1.45] tracking-[-0.02em] text-cloud-dancer/82'>
                 {benefit.description}
               </p>
             </AnimatedBlock>

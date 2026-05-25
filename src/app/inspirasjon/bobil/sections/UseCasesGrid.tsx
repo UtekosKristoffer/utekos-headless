@@ -46,7 +46,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
               className='h-[0.78em] w-auto translate-y-[0.06em]'
               style={{ color: 'var(--maritime-darkest)' }}
             />
-            <span>gjennom bobil-døgnet</span>
+            <span>gjennom bobildøgnet</span>
           </h2>
           <p className='font-utekos-text mt-4 text-lg leading-[1.45] tracking-[-0.02em] text-maritime-darkest'>
             Fra soloppgang til solnedgang får du varme når turen ber om det.

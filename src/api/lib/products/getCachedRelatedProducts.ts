@@ -1,8 +1,9 @@
 // Path: src/api/lib/products/getCachedRelatedProducts.ts
-'use server'
 
-import { fetchProducts } from '@/api/lib/products/getProducts' // Bruker fetchProducts direkte for å unngå dobbel-wrapping av cache-objektet i getProducts
-import { getRelatedProducts } from '@/hooks/getRelatedProducts' // Gjenbruker logikken din
+import 'server-only'
+
+import { fetchProducts } from '@/api/lib/products/getProducts'
+import { getRelatedProducts } from '@/hooks/getRelatedProducts'
 import { cacheLife, cacheTag } from 'next/cache'
 import { TAGS } from '@/api/constants'
 import type { ShopifyProduct } from 'types/product'
@@ -12,10 +13,11 @@ export async function getCachedRelatedProducts(
   limit: number = 12
 ): Promise<ShopifyProduct[]> {
   'use cache'
-  cacheLife('days')
-  cacheTag(TAGS.products)
 
-  const allProducts = await fetchProducts({ first: 10 })
+  cacheTag(`related-products-${currentHandle}`, TAGS.products)
+  cacheLife('collections')
+
+  const allProducts = await fetchProducts({ first: Math.max(limit * 2, 24) })
   const related = getRelatedProducts(allProducts, currentHandle, limit)
 
   return related

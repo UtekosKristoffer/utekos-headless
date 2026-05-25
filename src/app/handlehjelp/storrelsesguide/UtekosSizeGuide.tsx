@@ -39,19 +39,19 @@ export function UtekosSizeGuide() {
               <UtekosWordmark
                 aria-hidden='true'
                 focusable='false'
-                className='inline-block h-[0.72em] w-auto translate-y-[0.06em] align-baseline text-cloud-dancer'
+                className='inline-block h-[0.82em] w-auto translate-y-[0.06em] align-baseline text-cloud-dancer'
               />
               <span className='sr-only'>Utekos</span>
             </span>{' '}
             - en unik tilnærming til passform
           </h2>
-          <p className='mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-cloud-dancer/82'>
+          <p className='mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-cloud-dancer/90'>
             Mer enn bare en størrelse – en garanti for komfort gjennom suveren
             tilpasningsevne.
           </p>
         </div>
 
-        <div className='mt-12 max-w-3xl mx-auto text-left space-y-6 text-cloud-dancer/82'>
+        <div className='mt-12 max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto text-lg leading-[1.45] brand-tracking-normal text-left space-y-6 text-cloud-dancer'>
           <p>
             Vi har designet Utekos Dun og Mikrofiber med en unik filosofi:
             ultimat komfort gjennom suveren tilpasningsevne. Du vil legge merke
@@ -83,7 +83,7 @@ export function UtekosSizeGuide() {
               </li>
             </ul>
           </div>
-          <div className='rounded-lg border border-cloud-dancer/12 bg-maritime-blue/52 p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)] sm:p-8'>
+          <div className='rounded-lg border tekst-base border-cloud-dancer/12 bg-maritime-blue/52 p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)] sm:p-8'>
             <h3 className='text-xl font-semibold leading-7'>
               Velg Large hvis...
             </h3>

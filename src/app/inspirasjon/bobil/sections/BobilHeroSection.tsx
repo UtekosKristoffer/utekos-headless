@@ -1,5 +1,6 @@
 import { MapPin, Mountain, Sunrise } from 'lucide-react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
+import { Card, CardContent } from '@/components/ui/card'
 import { InspirationHeroActions } from '../../layout/InspirationHeroActions'
 import { InspirationHeroBreadcrumb } from '../../layout/InspirationHeroBreadcrumb'
 
@@ -7,42 +8,69 @@ const motorhomeFeatureCards = [
   {
     title: 'Morgenkaffe',
     description: 'Start dagen i varme utenfor bobilen',
-    Icon: Sunrise,
-    iconClassName: 'text-bleached-mauve',
-    borderClassName: 'border-bleached-mauve/20',
-    bgClassName: 'bg-maritime-blue/10 backdrop-blur-md',
-    glowClassName: 'bg-bleached-mauve/20'
+    Icon: Sunrise
   },
   {
     title: 'Alle stopp',
     description: 'Nyt utsikten i komfort, hvor som helst',
-    Icon: Mountain,
-    iconClassName: 'text-overcast',
-    borderClassName: 'border-overcast/20',
-    bgClassName: 'bg-maritime-blue/10 backdrop-blur-md',
-    glowClassName: 'bg-overcast/20'
+    Icon: Mountain
   },
   {
     title: 'Lengre turer',
     description: 'Reis tidligere på året og senere på høsten',
-    Icon: MapPin,
-    iconClassName: 'text-bleached-mauve',
-    borderClassName: 'border-bleached-mauve/20',
-    bgClassName: 'bg-maritime-blue/10 backdrop-blur-md',
-    glowClassName: 'bg-bleached-mauve/20'
+    Icon: MapPin
+  }
+] as const
+
+const heroFeatureCardThemes = [
+  {
+    surface:
+      'color-mix(in oklch, var(--cloud-dancer) 84%, var(--bleached-mauve))',
+    border:
+      'color-mix(in oklch, var(--bleached-mauve) 48%, var(--maritime-darkest))',
+    marker: 'var(--bleached-mauve)',
+    iconSurface: 'var(--bleached-mauve)',
+    icon: 'var(--maritime-darkest)'
+  },
+  {
+    surface: 'color-mix(in oklch, var(--cloud-dancer) 80%, var(--overcast))',
+    border: 'color-mix(in oklch, var(--overcast) 54%, var(--maritime-darkest))',
+    marker: 'var(--overcast)',
+    iconSurface: 'var(--overcast)',
+    icon: 'var(--maritime-darkest)'
+  },
+  {
+    surface:
+      'color-mix(in oklch, var(--cloud-dancer) 82%, var(--ancient-water))',
+    border:
+      'color-mix(in oklch, var(--ancient-water) 46%, var(--maritime-darkest))',
+    marker: 'var(--ancient-water)',
+    iconSurface: 'var(--ancient-water)',
+    icon: 'var(--maritime-darkest)'
   }
 ] as const
 
 export function BobilHeroSection() {
   return (
     <section className='relative flex min-h-[70vh] items-center overflow-hidden'>
-      {/* Ambient background glow */}
       <div className='absolute inset-0 -z-10 opacity-25'>
-        <div className='absolute left-1/3 top-1/4 size-[600px] blur-[100px] rounded-full bg-bleached-mauve/30' />
-        <div className='absolute right-1/3 bottom-1/4 size-[600px] blur-[100px] rounded-full bg-maritime-blue/30' />
+        <div
+          className='absolute left-1/3 top-1/4 size-[600px] rounded-full blur-[100px]'
+          style={{
+            background:
+              'radial-gradient(circle, color-mix(in oklch, var(--bleached-mauve) 68%, transparent) 0%, transparent 70%)'
+          }}
+        />
+        <div
+          className='absolute bottom-1/4 right-1/3 size-[600px] rounded-full blur-[100px]'
+          style={{
+            background:
+              'radial-gradient(circle, color-mix(in oklch, var(--maritime-blue) 72%, transparent) 0%, transparent 70%)'
+          }}
+        />
       </div>
 
-      <div className='absolute inset-0 bg-gradient-to-b from-transparent to-background/50' />
+      <div className='absolute inset-0 bg-gradient-to-b from-maritime-darkest/10 via-transparent to-maritime-blue/20' />
 
       <div className='container relative mx-auto px-4 py-16'>
         <div className='max-w-3xl'>
@@ -56,19 +84,16 @@ export function BobilHeroSection() {
           </AnimatedBlock>
 
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
-            <h1 className='font-brand-sans text-4xl font-bold tracking-[-0.01em] text-cloud-dancer leading-[0.95] sm:text-5xl lg:text-6xl'>
+            <h1 className='font-brand-sans text-4xl font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer sm:text-5xl lg:text-6xl'>
               Bobilliv uten{' '}
-              <span className='bg-gradient-to-r from-bleached-mauve via-[var(--raindrops-on-roses)] to-bleached-mauve bg-clip-text text-transparent'>
-                kompromisser
-              </span>
+              <span className='text-bleached-mauve'>kompromisser</span>
             </h1>
           </AnimatedBlock>
 
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.3s'>
-            <p className='font-utekos-text mt-6 max-w-2xl text-xl leading-[1.45] tracking-[-0.02em] text-cloud-dancer'>
-              Fra den første morgenkaffen til de sene kveldene rundt bordet.
-              Oppdag hvordan Utekos forvandler hver stopp til en destinasjon
-              verdt å huske.
+            <p className='mt-6 max-w-2xl font-utekos-text text-xl leading-[1.45] tracking-[-0.02em] text-cloud-dancer'>
+              Fra den første morgenkaffen til de sene kveldene rundt bordet. Ta
+              med Utekos og gjør hvert stopp til et øyeblikk du vil huske.
             </p>
           </AnimatedBlock>
 
@@ -82,43 +107,53 @@ export function BobilHeroSection() {
             />
           </AnimatedBlock>
 
-          {/* Feature highlights */}
           <AnimatedBlock
             className='will-animate-fade-in-up mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3'
             delay='0.5s'
           >
-            {motorhomeFeatureCards.map(
-              ({
-                title,
-                description,
-                Icon,
-                iconClassName,
-                borderClassName,
-                bgClassName,
-                glowClassName
-              }) => (
-                <div
+            {motorhomeFeatureCards.map(({ title, description, Icon }, cardIndex) => {
+              const theme =
+                heroFeatureCardThemes[cardIndex % heroFeatureCardThemes.length]
+                ?? heroFeatureCardThemes[0]
+
+              return (
+                <Card
                   key={title}
-                  className={`group relative overflow-hidden rounded-[1.35rem] border p-4 transition-all duration-300 hover:-translate-y-0.5 shadow-xl shadow-maritime-darkest/10 ${bgClassName} ${borderClassName}`}
+                  className='group relative overflow-hidden rounded-xl border py-0 text-maritime-darkest transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+                  style={{
+                    backgroundColor: theme.surface,
+                    borderColor: theme.border,
+                    boxShadow:
+                      '0 22px 44px -34px color-mix(in oklch, var(--maritime-darkest) 52%, transparent)'
+                  }}
                 >
                   <div
-                    className={`pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20 ${glowClassName}`}
+                    className='absolute inset-x-4 top-0 h-px transition-opacity duration-300 group-hover:opacity-70'
+                    style={{ background: theme.marker }}
                   />
-                  <div className='pointer-events-none absolute inset-0 opacity-90 bg-gradient-to-b from-cloud-dancer/10 to-transparent' />
-                  <div className='relative'>
-                    <div className='mb-2 flex items-center gap-3'>
-                      <Icon className={`size-8 shrink-0 ${iconClassName}`} />
-                      <h3 className='font-brand-sans font-semibold tracking-[-0.01em] text-cloud-dancer'>
+                  <CardContent className='relative p-4'>
+                    <div className='mb-3 flex items-center gap-3'>
+                      <div
+                        className='flex size-10 shrink-0 items-center justify-center rounded-lg border'
+                        style={{
+                          backgroundColor: theme.iconSurface,
+                          borderColor: theme.border,
+                          color: theme.icon
+                        }}
+                      >
+                        <Icon className='size-5' aria-hidden />
+                      </div>
+                      <h3 className='font-brand-sans text-base font-semibold leading-[0.95] tracking-tight text-maritime-darkest'>
                         {title}
                       </h3>
                     </div>
-                    <p className='font-utekos-text text-sm tracking-[-0.02em] text-cloud-dancer/80'>
+                    <p className='font-utekos-text text-sm leading-[1.45] tracking-tight text-maritime-darkest/90'>
                       {description}
                     </p>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               )
-            )}
+            })}
           </AnimatedBlock>
         </div>
       </div>

@@ -3,7 +3,7 @@
 'use client'
 
 import ComfyRainy from '@public/comfy_rainy.webp'
-import ComfyRobe from '@public/comfy-front-1600x1600.webp'
+import ComfyRobe from '@public/comfy-1600x1600.webp'
 import Image from 'next/image'
 import { useRef } from 'react'
 import Fade from 'embla-carousel-fade'
@@ -22,7 +22,7 @@ export function ComfyrobeImageCarousel() {
       <Carousel
         plugins={[fadePlugin.current]}
         opts={{ loop: true }}
-        className='h-full w-full overflow-hidden rounded-[1.35rem] border border-cloud-dancer/12 bg-maritime-darkest/60 shadow-[0_24px_70px_-48px_color-mix(in_oklch,var(--maritime-darkest)_90%,transparent)]'
+        className='size-full overflow-hidden rounded-[1.35rem] border border-cloud-dancer/12 bg-maritime-darkest/60 shadow-[0_24px_70px_-48px_color-mix(in_oklch,var(--maritime-darkest)_90%,transparent)]'
       >
         <CarouselContent className='relative aspect-[4/5] h-full min-h-[32rem] lg:aspect-auto lg:min-h-[38rem]'>
           <CarouselItem className='absolute inset-0 pl-0'>

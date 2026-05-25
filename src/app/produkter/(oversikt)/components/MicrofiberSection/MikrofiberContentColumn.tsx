@@ -27,7 +27,7 @@ const benefits = [
     description:
       '— Bransjens mest anerkjente glidelås sikrer pålitelig og enkel bruk',
     glowColor: 'var(--dusted-peri)',
-    surface: 'blueberry' as const
+    surface: 'peri' as const
   }
 ]
 

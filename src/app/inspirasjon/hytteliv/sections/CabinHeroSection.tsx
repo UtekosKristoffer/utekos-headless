@@ -55,7 +55,7 @@ export function CabinHeroSection() {
     <section className='relative flex min-h-[70vh] items-center overflow-hidden'>
       <div className='absolute inset-0 -z-10 opacity-25'>
         <div
-          className='animate-pulse-glow absolute left-1/3 top-1/4 h-[600px] w-[600px] blur-3xl'
+          className='animate-pulse-glow absolute left-1/3 top-1/4 size-[600px] blur-3xl'
           style={{
             background:
               'radial-gradient(circle, color-mix(in oklch, var(--ancient-water) 72%, transparent) 0%, transparent 70%)',
@@ -63,7 +63,7 @@ export function CabinHeroSection() {
           }}
         />
         <div
-          className='animate-pulse-glow absolute right-1/3 bottom-1/4 h-[600px] w-[600px] blur-3xl'
+          className='animate-pulse-glow absolute right-1/3 bottom-1/4 size-[600px] blur-3xl'
           style={{
             background:
               'radial-gradient(circle, color-mix(in oklch, var(--bleached-mauve) 68%, transparent) 0%, transparent 70%)',
@@ -87,7 +87,7 @@ export function CabinHeroSection() {
           </AnimatedBlock>
 
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
-            <h1 className='text-4xl leading-[0.95] font-bold tracking-[-0.01em] sm:text-5xl lg:text-6xl'>
+            <h1 className='text-4xl leading-[0.95] font-bold tracking-tight font-google-sans sm:text-5xl lg:text-6xl'>
               Hyttekos,{' '}
               <span className='bg-[linear-gradient(90deg,var(--ancient-water),var(--country-air),var(--ancient-water))] bg-clip-text text-transparent'>
                 perfeksjonert
@@ -96,7 +96,7 @@ export function CabinHeroSection() {
           </AnimatedBlock>
 
           <AnimatedBlock className='will-animate-fade-in-up' delay='0.3s'>
-            <p className='mt-6 max-w-2xl text-xl leading-[1.45] tracking-[-0.01em] text-cloud-dancer'>
+            <p className='mt-6 max-w-2xl text-xl leading-[1.45] tracking-tight font-utekos-text! text-cloud-dancer'>
               Fra morgenkaffen på terrassen til kveldene under stjernene. Gjør
               hytten til et varmt fristed, uansett årstid.
             </p>
@@ -148,11 +148,11 @@ export function CabinHeroSection() {
                       >
                         <Icon className='size-5' />
                       </div>
-                      <h3 className='text-base leading-[1] font-semibold tracking-[-0.01em] text-maritime-darkest'>
+                      <h3 className='text-base leading-[0.95] font-semibold tracking-tight font-google-sans text-maritime-darkest'>
                         {title}
                       </h3>
                     </div>
-                    <p className='text-sm leading-[1.45] tracking-[-0.01em] text-maritime-darkest/78'>
+                    <p className='text-sm leading-[1.45] tracking-tight font-utekos-text text-maritime-darkest/90'>
                       {description}
                     </p>
                   </CardContent>

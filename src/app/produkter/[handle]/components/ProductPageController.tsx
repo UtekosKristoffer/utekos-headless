@@ -1,4 +1,5 @@
-// Path: src/app/produkter/[handle]/ProductPageController/ProductPageController.tsx
+// Path: src/app/produkter/[handle]/components/ProductPageController.tsx
+
 'use client'
 
 import { useProductPage } from '@/hooks/useProductPage'
@@ -10,11 +11,13 @@ import { ProductPageErrorState } from './ProductPageErrorState'
 
 interface ProductPageControllerProps {
   handle: string
+  initialVariantId?: string | null
   initialRelatedProducts: ShopifyProduct[]
 }
 
 export function ProductPageController({
   handle,
+  initialVariantId = null,
   initialRelatedProducts
 }: ProductPageControllerProps) {
   const {
@@ -29,7 +32,7 @@ export function ProductPageController({
     refetch,
     isFetching,
     isLoading
-  } = useProductPage(handle, initialRelatedProducts)
+  } = useProductPage(handle, initialRelatedProducts, initialVariantId)
 
   if (productError && !productData) {
     return (

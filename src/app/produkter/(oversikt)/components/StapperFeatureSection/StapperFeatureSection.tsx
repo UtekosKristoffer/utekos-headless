@@ -61,7 +61,7 @@ export function StapperFeatureSection() {
             </AnimatedBlock>
 
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s'>
-              <p className='mx-auto mt-6 max-w-xl text-lg leading-[1.55] text-overcast lg:mx-0'>
+              <p className='mx-auto mt-6 max-w-xl text-lg leading-[1.45] text-cloud-dancer lg:mx-0'>
                 Forvandle voluminøse jakker og soveposer til kompakte pakker.
                 Utekos Stapper™ er den smarte løsningen for deg som verdsetter
                 en effektiv og organisert bagasje på hytta, i bobilen eller i

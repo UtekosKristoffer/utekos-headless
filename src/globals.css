@@ -27,8 +27,6 @@
   --inking-100: oklch(0.3048 0.0341 291.48);
   --demitasse: oklch(0.3328 0.0233 53.3);
   --eclipse: oklch(0.3276 0.0405 291.98);
-  --astral-night: oklch(0.3436 0.0538 283.2);
-  --patriot-blue: oklch(0.3504 0.0537 281.83);
   --deep-cobalt: oklch(0.3982 0.0575 278.29);
   --graytone: oklch(0.4162 0.03 295.25);
   --skipper-blue: oklch(0.4252 0.0661 280.99);
@@ -69,12 +67,13 @@
   --maritime-dark: oklch(0.1784 0.0366 279.42);
   --maritime-darker: oklch(0.1584 0.0366 279.42);
   --maritime-darkest: oklch(0.1284 0.0366 279.42);
-  --font-brand-sans: var(--font-google-sans), system-ui, sans-serif;
+  --font-brand-heading: var(--font-google-sans), system-ui, sans-serif;
+  --font-brand-body: var(--font-utekos-text), system-ui, sans-serif;
   --font-utekos-text: var(--font-utekos-text);
+  --font-brand-text: var(--font-utekos-text);
   --utekos-title-line-height: 0.95;
   --utekos-title-letter-spacing: -0.02em;
-  --utekos-text-line-height: 1.3;
-  --utekos-text-letter-spacing: -0.025em;
+  --utekos-text-line-height: 1.45;
   --spatind: #2c2420;
   --makalaus: #f4f1ea;
   --country-air: oklch(0.909 0.0246 248.11);
@@ -194,6 +193,9 @@
   --ring: oklch(0.556 0 0);
   --inking: oklch(0.3048 0.0341 291.48);
   --breakpoint-tablet: 33.75rem;
+  --font-brand-heading: var(--font-brand-heading);
+  --font-brand-body: var(--font-brand-body);
+  --font-brand-text: var(--font-brand-text);
 }
 
 @theme inline {
@@ -240,6 +242,9 @@
   --color-primary: var(--primary);
   --font-brand-sans: var(--font-google-sans), system-ui, sans-serif;
   --font-utekos-text: var(--font-utekos-text);
+  --font-brand-text: var(--font-brand-text);
+  --font-brand-heading: var(--font-brand-heading);
+  --font-brand-body: var(--font-brand-body);
   --color-button: var(--button);
   --color-almost-mauve: var(--almost-mauve);
   --color-ring: var(--ring);
@@ -528,14 +533,6 @@
   background-size: 24px 24px;
 }
 
-.bobil-seasons-glow-pulse {
-  animation: bobil-seasons-pulse-glow 8s ease-in-out infinite;
-}
-
-.bobil-seasons-fade-in-delayed {
-  animation: fadeInUp 0.7s ease-out 0.2s both;
-}
-
 .bobil-seasons-tab-trigger {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -548,12 +545,31 @@
   transition: opacity 0.3s ease;
 }
 
-.bobil-seasons-tab-content-enter {
-  animation: bobil-seasons-tab-fade-in 0.3s ease-out;
+@media (prefers-reduced-motion: no-preference) {
+  .bobil-seasons-glow-pulse {
+    animation: bobil-seasons-pulse-glow 8s ease-in-out infinite;
+  }
+
+  .bobil-seasons-fade-in-delayed {
+    animation: fadeInUp 0.7s ease-out 0.2s both;
+  }
+
+  .bobil-seasons-tab-content-enter {
+    animation: bobil-seasons-tab-fade-in 0.3s ease-out;
+  }
+
+  .bobil-seasons-tip-enter {
+    animation: bobil-seasons-tip-fade-in 0.3s ease-out both;
+  }
 }
 
-.bobil-seasons-tip-enter {
-  animation: bobil-seasons-tip-fade-in 0.3s ease-out both;
+@media (prefers-reduced-motion: reduce) {
+  .bobil-seasons-glow-pulse,
+  .bobil-seasons-fade-in-delayed,
+  .bobil-seasons-tab-content-enter,
+  .bobil-seasons-tip-enter {
+    animation: none;
+  }
 }
 
 .animate-glint {
@@ -651,6 +667,30 @@
     opacity: 0.28;
     transform: scale(1.12);
   }
+}
+
+.brand-heading {
+  font-family: var(--font-brand-heading);
+}
+
+.brand-body {
+  font-family: var(--font-brand-body);
+}
+
+.brand-text {
+  font-family: var(--font-brand-text);
+}
+
+.brand-tracking-normal {
+  letter-spacing: 0;
+}
+
+.brand-tracking-wide {
+  letter-spacing: -0.025em;
+}
+
+.brand-tracking-tight {
+  letter-spacing: -0.02em;
 }
 
 .boat-hero-glow-1 {
@@ -954,13 +994,36 @@
   font-family: var(--font-google-sans), system-ui, sans-serif;
 }
 
+@utility font-google-sans-bold {
+  font-family: var(--font-google-sans), system-ui, sans-serif;
+  font-weight: 700;
+}
+
 @utility font-utekos-text {
   font-family: var(--font-utekos-text), system-ui, sans-serif;
+}
+
+@utility brand-tracking-normal {
+  letter-spacing: 0;
+}
+
+@utility brand-tracking-wide {
+  letter-spacing: -0.025em;
+}
+
+@utility brand-tracking-tight {
+  letter-spacing: -0.02em;
 }
 
 @utility text-fluid-display {
   font-size: clamp(2.25rem, 1.5rem + 3vw, 3.75rem);
   line-height: 1.1;
+}
+
+@utility text-fluid-display-bold {
+  font-size: clamp(2.25rem, 1.5rem + 3vw, 3.75rem);
+  line-height: 1.1;
+  font-weight: 700;
 }
 
 @utility color-swatch-container {
