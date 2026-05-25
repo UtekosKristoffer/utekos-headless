@@ -84,15 +84,15 @@ export function CabinHeroSection() {
 
           <hgroup>
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
-              <h1 className='text-title text-balance leading-[0.95] text-cloud-dancer'>
+              <h1 className='text-title text-cloud-dancer'>
                 Hyttekos, <span className='text-ancient-water'>perfeksjonert</span>
               </h1>
             </AnimatedBlock>
 
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.3s'>
               <p className='mt-6 max-w-2xl utekos-section-lead text-cloud-dancer'>
-                Fra morgenkaffen på terrassen til kveldene under stjernene. Gjør hytten til et varmt fristed, uansett
-                årstid.
+                Fra morgenkaffen på terrassen til kveldene under stjernene. Gjør hytten til et varmt fristed,
+                uansett årstid.
               </p>
             </AnimatedBlock>
           </hgroup>
@@ -106,7 +106,8 @@ export function CabinHeroSection() {
             delay='0.5s'
           >
             {heroFeatureCards.map(({ title, description, Icon }, cardIndex) => {
-              const theme = heroFeatureCardThemes[cardIndex % heroFeatureCardThemes.length] ?? heroFeatureCardThemes[0]
+              const theme =
+                heroFeatureCardThemes[cardIndex % heroFeatureCardThemes.length] ?? heroFeatureCardThemes[0]
               return (
                 <Card
                   key={title}
@@ -114,7 +115,8 @@ export function CabinHeroSection() {
                   style={{
                     backgroundColor: theme.surface,
                     borderColor: theme.border,
-                    boxShadow: '0 22px 44px -34px color-mix(in oklch, var(--maritime-darkest) 52%, transparent)'
+                    boxShadow:
+                      '0 22px 44px -34px color-mix(in oklch, var(--maritime-darkest) 52%, transparent)'
                   }}
                 >
                   <div

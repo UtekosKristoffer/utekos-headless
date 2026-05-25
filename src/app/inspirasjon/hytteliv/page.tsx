@@ -4,27 +4,17 @@ import type { Metadata } from 'next'
 import { BenefitsGrid, benefitsData } from './sections/BenefitsGrid'
 import { CabinHeroSection } from './sections/CabinHeroSection'
 import { CTASection } from './sections/CTASection'
-import {
-  PopularCabinAreasGrid,
-  popularAreasData
-} from './sections/PopularCabinAresGrid'
+import { PopularCabinAreasGrid, popularAreasData } from './sections/PopularCabinAresGrid'
 import { UseCasesGrid, useCasesData } from './sections/UseCasesGrid'
 import { SeasonsSection } from './sections/SeasonsSection'
 import { SocialProof } from './sections/SocialProof'
-import { Activity } from 'react'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Hytteliv og Utekos | Din guide til ultimat hyttekomfort',
   description:
     'Oppdag hvordan Utekos forvandler hytteopplevelsen. Fra kjølige morgener på terrassen til sene kvelder under stjernene – sikre deg komforten som skaper minner.',
-  keywords: [
-    'hytteliv',
-    'hyttekos',
-    'norsk hytte',
-    'utekos hytte',
-    'vinterhytte'
-  ],
+  keywords: ['hytteliv', 'hyttekos', 'norsk hytte', 'utekos hytte', 'vinterhytte'],
   alternates: {
     canonical: '/inspirasjon/hytteliv'
   },
@@ -50,7 +40,7 @@ export const metadata: Metadata = {
 export default function CabinInspirationPage() {
   return (
     <>
-      <section className='flex flex-col'>
+      <article className='flex flex-col'>
         <CabinHeroSection />
         <UseCasesGrid useCases={useCasesData} />
         <BenefitsGrid benefits={benefitsData} />
@@ -58,7 +48,7 @@ export default function CabinInspirationPage() {
         <PopularCabinAreasGrid destinations={popularAreasData} />
         <SocialProof />
         <CTASection />
-      </section>
+      </article>
     </>
   )
 }
