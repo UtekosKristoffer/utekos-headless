@@ -13,6 +13,7 @@ import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { CartProviderLoader } from '@/components/providers/CartProviderLoader'
 import { MicrosoftUetTag } from '@/components/analytics/MicrosoftUetTag'
 import { GoogleTagManagerLoader } from '@/components/analytics/GoogleTagManagerLoader'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 
 const GOOGLE_TAG_MANAGER_ID = process.env.NEXT_GOOGLE_GTM_ID || 'GTM-5TWMJQFP'
@@ -135,6 +136,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <main>
               {children}
               {SHOULD_LOAD_VERCEL_ANALYTICS && <Analytics />}
+              <SpeedInsights />
               <ChatBotAgent />
             </main>
             <Footer />
