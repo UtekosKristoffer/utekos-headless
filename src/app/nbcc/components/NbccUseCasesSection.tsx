@@ -1,3 +1,4 @@
+import { CompassIcon } from '@/components/animate-icons/icons/compass'
 import { nbccUseCases } from '../utils/nbccLandingPageContent'
 import { useCaseIcons } from '../utils/useCaseIcons'
 
