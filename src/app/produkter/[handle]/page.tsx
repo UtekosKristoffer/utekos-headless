@@ -1,14 +1,19 @@
 // Path: src/app/produkter/[handle]/page.tsx
 
 import { Suspense } from 'react'
+import type { Metadata } from 'next'
 import { VideoSkeleton } from '@/app/produkter/(oversikt)/components/VideoSkeleton'
 import { ProductVideoSection } from '@/app/produkter/(oversikt)/components/ProductVideoSection'
-import { ProductPageSkeleton } from './components/ProductPageSkeleton'
-import { generateProductMetadata } from './utils/generateProductMetadata'
-import { AsyncProductContent } from './components/AsyncProductContent'
 import { IntersportSection } from '@/app/om-oss/components/IntersportSection'
+import { ProductPageSkeleton } from './components/ProductPageSkeleton'
+import { AsyncProductContent } from './components/AsyncProductContent'
+import { generateProductMetadata } from './utils/generateProductMetadata'
+import { generateProductStaticParams } from './utils/generateProductStaticParams'
 import type { GenerateMetadataProps, ProductPageProps } from './types'
-import type { Metadata } from 'next'
+
+export async function generateStaticParams(): Promise<Array<{ handle: string }>> {
+  return generateProductStaticParams()
+}
 
 export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
   const { handle } = await params
