@@ -6,44 +6,15 @@ import {
   CustomData,
   Content
 } from 'facebook-nodejs-business-sdk'
-import { getMetaPurchaseEventTime } from '@/lib/tracking/meta/getMetaPurchaseEventTime'
+import { getMetaPurchaseEventTime } from '@/lib/tracking/meta/utils/getMetaPurchaseEventTime'
 import { safeString } from '@/lib/utils/safeString'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
+import { resolveMetaPixelId } from '@/lib/tracking/meta/utils/resolveMetaPixelId'
+import { resolveMetaAccessToken } from '@/lib/tracking/meta/utils/resolveMetaAccessToken'
 import type { TrackingContext } from 'types/tracking/user/TrackingContext'
+import type { MetaApiError } from './types'
 
-function resolveMetaAccessToken() {
-  return (
-    process.env.META_ACCESS_TOKEN ||
-    process.env.META_SYSTEM_USER_TOKEN ||
-    process.env.CATALOG_ACCESS_TOKEN ||
-    undefined
-  )
-}
-
-function resolveMetaPixelId() {
-  return process.env.NEXT_PUBLIC_META_PIXEL_ID || undefined
-}
-
-type MetaApiError = Error & {
-  response?: {
-    data?: {
-      error?: {
-        code?: number
-        error_subcode?: number
-        fbtrace_id?: string
-        message?: string
-        type?: string
-      }
-    }
-  }
-}
-
-export async function sendMetaPurchase({
-  order,
-  customer,
-  redisData,
-  contentIds
-}: TrackingContext) {
+export async function sendMetaPurchase({ order, customer, redisData, contentIds }: TrackingContext) {
   const accessToken = resolveMetaAccessToken()
   const pixelId = resolveMetaPixelId()
   const testEventCode = process.env.META_TEST_EVENT_CODE
@@ -67,8 +38,7 @@ export async function sendMetaPurchase({
   if (customer.city) userData.setCity(customer.city.toLowerCase())
   if (customer.state) userData.setState(customer.state.toLowerCase())
   if (customer.zip) userData.setZip(customer.zip)
-  if (customer.countryCode)
-    userData.setCountry(customer.countryCode.toLowerCase())
+  if (customer.countryCode) userData.setCountry(customer.countryCode.toLowerCase())
   if (customer.clientIp) userData.setClientIpAddress(customer.clientIp)
   if (customer.userAgent) userData.setClientUserAgent(customer.userAgent)
   if (customer.fbp) userData.setFbp(customer.fbp)
@@ -105,16 +75,10 @@ export async function sendMetaPurchase({
     .setEventId(`shopify_order_${order.id}`)
     .setUserData(userData)
     .setCustomData(customData)
-    .setEventSourceUrl(
-      safeString(order.order_status_url)
-        || redisData?.checkoutUrl
-        || 'https://utekos.no'
-    )
+    .setEventSourceUrl(safeString(order.order_status_url) || redisData?.checkoutUrl || 'https://utekos.no')
 
   try {
-    const eventRequest = new EventRequest(accessToken, pixelId).setEvents([
-      serverEvent
-    ])
+    const eventRequest = new EventRequest(accessToken, pixelId).setEvents([serverEvent])
     if (testEventCode) eventRequest.setTestEventCode(testEventCode)
 
     const response = await eventRequest.execute()
@@ -143,10 +107,7 @@ export async function sendMetaPurchase({
     const err = error as MetaApiError
     const errorResponse = err.response?.data || {}
     const graphError = errorResponse.error
-    console.error(
-      '[Meta CAPI] Request Failed:',
-      JSON.stringify(errorResponse, null, 2)
-    )
+    console.error('[Meta CAPI] Request Failed:', JSON.stringify(errorResponse, null, 2))
 
     await logToAppLogs(
       'ERROR',

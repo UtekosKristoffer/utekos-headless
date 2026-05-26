@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
 
-import { nbccSteps } from '../data/nbccLandingPageContent'
+import { nbccSteps } from '../utils/nbccLandingPageContent'
 
 export function NbccHowToUseSection() {
   return (

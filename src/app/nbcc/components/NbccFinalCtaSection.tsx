@@ -2,7 +2,7 @@ import { MoveRightIcon } from '@/components/animate-icons/icons/move-right'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
-import { nbccFinalCtaTracking } from '../data/nbccLandingPageContent'
+import { nbccFinalCtaTracking } from '../utils/nbccLandingPageContent'
 
 export function NbccFinalCtaSection() {
   return (

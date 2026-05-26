@@ -14,7 +14,7 @@ import { TerrasseCarousel } from './sections/TerrasseCarousel'
 export function generateMetadata(): Metadata {
   return {
     metadataBase: new URL('https://utekos.no'),
-    title: 'Terrasseliv og Utekos | Gjør uteplassen til ditt favorittrom',
+    title: 'Terrasseliv. Gjør uteplassen til ditt favorittrom',
     description:
       'Oppdag hvordan Utekos forvandler terrassen din. Fra den første vårkaffen til sene høstkvelder – få maksimalt ut av din personlige uteplass, uansett temperatur.',
     keywords: [

@@ -25,8 +25,7 @@ export async function GET(request: NextRequest) {
       status: result.success ? 200 : 500
     })
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : 'Unexpected catalog sync error'
+    const message = error instanceof Error ? error.message : 'Unexpected catalog sync error'
 
     return NextResponse.json(
       {

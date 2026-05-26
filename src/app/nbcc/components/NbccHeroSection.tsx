@@ -13,13 +13,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRef } from 'react'
 
-import { nbccHeroTracking } from '../data/nbccLandingPageContent'
+import { NBCC_HERO_CONTENT_SELECTOR } from '../constants'
+import { nbccHeroTracking } from '../utils/nbccLandingPageContent'
 import { NbccAiSummaryButton } from './NbccAiSummaryButton'
 
 gsap.registerPlugin(useGSAP)
-
-/** Kun tekst / innhold — ikke fullskjerms-bilder (tung scale + opacity konflikt med Tailwind 0.72). */
-const CONTENT_SELECTOR = '[data-nbcc-hero-content]'
 
 export function NbccHeroSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -29,7 +27,7 @@ export function NbccHeroSection() {
       const root = sectionRef.current
       if (!root) return
 
-      const blocks = gsap.utils.toArray<HTMLElement>(CONTENT_SELECTOR, root)
+      const blocks = gsap.utils.toArray<HTMLElement>(NBCC_HERO_CONTENT_SELECTOR, root)
 
       const clearWillChange = () => {
         blocks.forEach(el => {

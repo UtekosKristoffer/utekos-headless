@@ -1,8 +1,4 @@
-import type {
-  CatalogSyncProduct,
-  CatalogSyncVariant,
-  CatalogSyncWeightUnit
-} from '@/lib/catalog-sync/types'
+import type { CatalogSyncProduct, CatalogSyncVariant, CatalogSyncWeightUnit } from '@/lib/catalog-sync/types'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 
 import { getMerchantCenterConfig } from '../config'
@@ -16,16 +12,13 @@ function stripHtml(value: string) {
     .replace(/<[^>]+>/g, ' ')
     .replace(/&nbsp;/gi, ' ')
     .replace(/&amp;/gi, '&')
-    .replace(/&#39;/gi, '\'')
+    .replace(/&#39;/gi, "'")
     .replace(/&quot;/gi, '"')
     .replace(/\s+/g, ' ')
     .trim()
 }
 
-function buildMerchantProductTitle(
-  product: CatalogSyncProduct,
-  variant: CatalogSyncVariant
-) {
+function buildMerchantProductTitle(product: CatalogSyncProduct, variant: CatalogSyncVariant) {
   if (variant.title === 'Default Title') {
     return product.title.trim()
   }
@@ -35,8 +28,8 @@ function buildMerchantProductTitle(
     .filter(Boolean)
     .join(' / ')
 
-  return optionSummary
-    ? `${product.title.trim()} - ${optionSummary}`
+  return optionSummary ?
+      `${product.title.trim()} - ${optionSummary}`
     : `${product.title.trim()} - ${variant.title.trim()}`
 }
 
@@ -51,9 +44,7 @@ function buildMerchantBrand(product: CatalogSyncProduct) {
     return vendor
   }
 
-  const ownBrandSignals = [product.title, product.handle].some(signal =>
-    /^utekos\b/i.test(signal.trim())
-  )
+  const ownBrandSignals = [product.title, product.handle].some(signal => /^utekos\b/i.test(signal.trim()))
 
   return ownBrandSignals ? 'Utekos' : undefined
 }
@@ -78,10 +69,7 @@ function isValidMerchantGtin(value: string | null | undefined) {
 
   const weightedSum = digits
     .reverse()
-    .reduce(
-      (sum, digit, index) => sum + digit * (index % 2 === 0 ? 3 : 1),
-      0
-    )
+    .reduce((sum, digit, index) => sum + digit * (index % 2 === 0 ? 3 : 1), 0)
 
   const expectedCheckDigit = (10 - (weightedSum % 10)) % 10
 
@@ -134,10 +122,7 @@ function buildMerchantPrice(value: string, currencyCode: string) {
   }
 }
 
-function buildMerchantSalePrice(
-  variant: CatalogSyncVariant,
-  currencyCode: string
-) {
+function buildMerchantSalePrice(variant: CatalogSyncVariant, currencyCode: string) {
   const compareAtPrice = variant.compareAtPrice?.trim()
 
   if (!compareAtPrice) {
@@ -161,10 +146,7 @@ function buildMerchantSalePrice(
   }
 }
 
-function buildMerchantShippingWeight(
-  weight: number | null,
-  weightUnit: CatalogSyncWeightUnit
-) {
+function buildMerchantShippingWeight(weight: number | null, weightUnit: CatalogSyncWeightUnit) {
   if (!weight || !Number.isFinite(weight) || weight <= 0) {
     return undefined
   }
@@ -212,12 +194,8 @@ export function buildMerchantProductInput(
     }
   }
 
-  const gtin = isValidMerchantGtin(variant.barcode)
-    ? variant.barcode?.trim()
-    : undefined
-  const mpn = !gtin && shouldUseSkuAsMerchantMpn(variant.sku)
-    ? variant.sku?.trim()
-    : undefined
+  const gtin = isValidMerchantGtin(variant.barcode) ? variant.barcode?.trim() : undefined
+  const mpn = !gtin && shouldUseSkuAsMerchantMpn(variant.sku) ? variant.sku?.trim() : undefined
   const brand = buildMerchantBrand(product)
   const salePrice = buildMerchantSalePrice(variant, config.defaults.currencyCode)
   const productLink = buildMerchantProductLink(product.handle)
@@ -228,7 +206,7 @@ export function buildMerchantProductInput(
     canonicalLink: productLink,
     imageLink,
     availability: buildMerchantAvailability(variant),
-    condition: 'NEW',
+    googleProductCategory: '203',
     itemGroupId,
     customLabel0: variant.customLabel0?.value?.trim() || undefined,
     customLabel1: variant.customLabel1?.value?.trim() || undefined,
@@ -244,10 +222,7 @@ export function buildMerchantProductInput(
     productAttributes.price = salePrice.regularPrice
     productAttributes.salePrice = salePrice.salePrice
   } else {
-    productAttributes.price = buildMerchantPrice(
-      variant.price,
-      config.defaults.currencyCode
-    )
+    productAttributes.price = buildMerchantPrice(variant.price, config.defaults.currencyCode)
   }
 
   if (brand) {

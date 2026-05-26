@@ -10,9 +10,8 @@ import { AboutUsHeroSection } from './components/AboutUsHeroSection'
 import { IntersportSection } from './components/IntersportSection'
 
 export const metadata: Metadata = {
-  title: 'Om Utekos® | Vår historie og løfte til deg',
-  description:
-    'Lær om hvorfor Utekos ble skapt – en historie om å verdsette de små øyeblikkene og et løfte om kompromissløs komfort, designet i Norge for norske forhold.',
+  title: 'Vår historie og løfte til deg',
+  description: 'Drevet av kalde kvelder og et løfte om å aldri la været stoppe de gode øyeblikkene.',
   alternates: {
     canonical: '/om-oss'
   },

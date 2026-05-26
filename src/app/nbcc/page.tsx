@@ -10,8 +10,7 @@ import { NbccHowToUseSection } from './components/NbccHowToUseSection'
 import { NbccProductSection } from './components/NbccProductSection'
 import { NbccProductSectionSkeleton } from './components/NbccProductSectionSkeleton'
 import { NbccUseCasesSection } from './components/NbccUseCasesSection'
-
-const SITE_URL = 'https://utekos.no'
+import { SITE_URL } from './constants'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

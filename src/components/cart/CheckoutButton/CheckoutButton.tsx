@@ -2,7 +2,7 @@
 import { track } from '@vercel/analytics'
 import * as React from 'react'
 import { dispatchMetaTrackingEvent } from '@/lib/tracking/meta/dispatchMetaTrackingEvent'
-import { getClientMetaUserData } from '@/lib/tracking/meta/getClientMetaUserData'
+import { getClientMetaUserData } from '@/lib/tracking/meta/utils/getClientMetaUserData'
 import { Button } from '@/components/ui/button'
 import type { CaptureBody, MetaUserData } from 'types/tracking/meta'
 import { getCheckoutAriaLabel } from './getCheckoutAriaLabel'
@@ -34,10 +34,7 @@ export const CheckoutButton = ({
   num_items: number
   className?: string
   children?: React.ReactNode
-} & Omit<
-  React.ComponentProps<typeof Button>,
-  'asChild' | 'disabled' | 'aria-label'
->): React.JSX.Element => {
+} & Omit<React.ComponentProps<typeof Button>, 'asChild' | 'disabled' | 'aria-label'>): React.JSX.Element => {
   const onClick = () => {
     if (isPending) return
     if (!cartId) {
@@ -199,12 +196,7 @@ export const CheckoutButton = ({
       aria-label={getCheckoutAriaLabel(subtotal, isPending)}
       {...props}
     >
-      <a
-        href={checkoutUrl}
-        onClick={onClick}
-        aria-disabled={isPending}
-        rel='noopener noreferrer'
-      >
+      <a href={checkoutUrl} onClick={onClick} aria-disabled={isPending} rel='noopener noreferrer'>
         {children || (isPending ? 'Behandler...' : 'Gå til kassen')}
       </a>
     </Button>

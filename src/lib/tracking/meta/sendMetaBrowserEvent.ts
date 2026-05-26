@@ -6,29 +6,11 @@ import {
   CustomData,
   Content
 } from 'facebook-nodejs-business-sdk'
-import type {
-  MetaEventPayload,
-  ClientUserData,
-  MetaContentItem
-} from 'types/tracking/meta'
+import type { MetaEventPayload, ClientUserData, MetaContentItem } from 'types/tracking/meta'
+import { resolveMetaPixelId } from '@/lib/tracking/meta/utils/resolveMetaPixelId'
+import { resolveMetaAccessToken } from '@/lib/tracking/meta/utils/resolveMetaAccessToken'
 
-function resolveMetaAccessToken() {
-  return (
-    process.env.META_ACCESS_TOKEN ||
-    process.env.META_SYSTEM_USER_TOKEN ||
-    process.env.CATALOG_ACCESS_TOKEN ||
-    undefined
-  )
-}
-
-function resolveMetaPixelId() {
-  return process.env.NEXT_PUBLIC_META_PIXEL_ID || undefined
-}
-
-export async function sendMetaBrowserEvent(
-  payload: MetaEventPayload,
-  userData: ClientUserData
-) {
+export async function sendMetaBrowserEvent(payload: MetaEventPayload, userData: ClientUserData) {
   const accessToken = resolveMetaAccessToken()
   const pixelId = resolveMetaPixelId()
   const testEventCode = process.env.META_TEST_EVENT_CODE
@@ -39,10 +21,8 @@ export async function sendMetaBrowserEvent(
   FacebookAdsApi.init(accessToken)
 
   const user = new UserData()
-  if (userData.client_ip_address)
-    user.setClientIpAddress(userData.client_ip_address)
-  if (userData.client_user_agent)
-    user.setClientUserAgent(userData.client_user_agent)
+  if (userData.client_ip_address) user.setClientIpAddress(userData.client_ip_address)
+  if (userData.client_user_agent) user.setClientUserAgent(userData.client_user_agent)
   if (userData.fbp) user.setFbp(userData.fbp)
   if (userData.fbc) user.setFbc(userData.fbc)
   if (userData.external_id) user.setExternalId(userData.external_id)
@@ -65,8 +45,7 @@ export async function sendMetaBrowserEvent(
     if (eventData.currency) custom.setCurrency(eventData.currency)
     if (eventData.content_name) custom.setContentName(eventData.content_name)
     if (eventData.content_type) custom.setContentType(eventData.content_type)
-    if (eventData.content_category)
-      custom.setContentCategory(eventData.content_category)
+    if (eventData.content_category) custom.setContentCategory(eventData.content_category)
     if (eventData.search_string) custom.setSearchString(eventData.search_string)
     if (eventData.num_items) custom.setNumItems(eventData.num_items)
     if (eventData.content_ids) custom.setContentIds(eventData.content_ids)
@@ -94,14 +73,11 @@ export async function sendMetaBrowserEvent(
     .setCustomData(custom)
 
   if (payload.eventId) serverEvent.setEventId(payload.eventId)
-  if (payload.eventSourceUrl)
-    serverEvent.setEventSourceUrl(payload.eventSourceUrl)
+  if (payload.eventSourceUrl) serverEvent.setEventSourceUrl(payload.eventSourceUrl)
 
   serverEvent.setActionSource(payload.actionSource || 'website')
 
-  const eventRequest = new EventRequest(accessToken, pixelId).setEvents([
-    serverEvent
-  ])
+  const eventRequest = new EventRequest(accessToken, pixelId).setEvents([serverEvent])
   if (testEventCode) eventRequest.setTestEventCode(testEventCode)
 
   return await eventRequest.execute()

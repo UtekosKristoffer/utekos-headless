@@ -1,10 +1,8 @@
 import { dispatchMetaTrackingEvent } from '@/lib/tracking/meta/dispatchMetaTrackingEvent'
-import { getClientMetaUserData } from '@/lib/tracking/meta/getClientMetaUserData'
+import { getClientMetaUserData } from '@/lib/tracking/meta/utils/getClientMetaUserData'
 import type { AddToCartEventData } from 'types/cart'
 
-export async function sendAddToCartCapi(
-  eventData: AddToCartEventData
-): Promise<void> {
+export async function sendAddToCartCapi(eventData: AddToCartEventData): Promise<void> {
   await dispatchMetaTrackingEvent({
     eventName: 'AddToCart',
     eventId: eventData.eventID,

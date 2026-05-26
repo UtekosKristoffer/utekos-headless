@@ -1,6 +1,6 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
-import { nbccFaqItems } from '../data/nbccLandingPageContent'
+import { nbccFaqItems } from '../utils/nbccLandingPageContent'
 
 export function NbccFaqSection() {
   return (

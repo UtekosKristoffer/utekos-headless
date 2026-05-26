@@ -4,7 +4,7 @@ import {
   generateNbccAiSummary,
   getNbccAiSummaryFallback,
   isNbccAiSummaryIntent
-} from '@/app/nbcc/lib/nbccAiSummary'
+} from '@/app/nbcc/utils/nbccAiSummary'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)

@@ -33,6 +33,10 @@ const SHOULD_LOAD_GOOGLE_TAG_MANAGER =
 const SHOULD_LOAD_VERCEL_ANALYTICS = process.env.NODE_ENV === 'production' && process.env.VERCEL === '1'
 
 export const metadata: Metadata = {
+  icons: {
+    icon: '/icon.png',
+    apple: '/apple-icon.png'
+  },
   metadataBase: new URL('https://utekos.no'),
   title: {
     default: 'Utekos - Skreddersy varmen',

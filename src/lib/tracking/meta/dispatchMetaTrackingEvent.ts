@@ -1,20 +1,8 @@
-import { getClientMetaUserData } from '@/lib/tracking/meta/getClientMetaUserData'
+import { getClientMetaUserData } from '@/lib/tracking/meta/utils/getClientMetaUserData'
 import { getClientGA4Data } from '@/lib/tracking/google/getClientGA4Data'
 import { sendMetaPixelEvent } from '@/lib/tracking/meta/sendMetaPixelEvent'
-import type { MetaEventData, MetaEventPayload, MetaEventType } from 'types/tracking/meta/event'
-import type { MetaUserData } from 'types/tracking/meta'
-import type { GA4DataPayload } from 'types/tracking/google/GA4DataPayload'
-
-type DispatchMetaTrackingEventInput = {
-  eventName: MetaEventType
-  eventId: string
-  eventData?: MetaEventData
-  eventSourceUrl?: string
-  eventTime?: number
-  userData?: Partial<MetaUserData>
-  ga4Data?: GA4DataPayload
-  sendBrowserEvent?: boolean
-}
+import type { MetaEventPayload } from 'types/tracking/meta/event'
+import type { DispatchMetaTrackingEventInput } from './types'
 
 export async function dispatchMetaTrackingEvent({
   eventName,

@@ -1,90 +1,15 @@
 // Path: src/lib/tracking/meta/catalogSync.ts
 
 import { FacebookAdsApi, ProductCatalog } from 'facebook-nodejs-business-sdk'
-
 import { getAllProductsForMetaSync } from '@/lib/shopify/admin'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
-
 import { buildMetaCatalogItemPayload } from './buildMetaCatalogItemPayload'
 import { extractMetaCatalogCustomLabels } from './extractMetaCatalogCustomLabels'
-import {
-  META_CUSTOM_LABEL_KEYS,
-  type MetaCatalogCustomLabelKey,
-  type MetaCatalogSyncErrorDetails,
-  type MetaCatalogSyncResult,
-  type MetaCatalogSyncSummary
-} from './metaCatalogTypes'
+import type { MetaCatalogSyncResult } from './metaCatalogTypes'
 import { resolveMetaCatalogAccessToken } from './resolveMetaCatalogAccessToken'
-
-const CATALOG_ID = '690208780604782'
-
-const EXCLUDED_PRODUCT_IDS = [
-  '9227603149048', // Utekos Buff
-  '7710325899512' // Utekos Stapper
-]
-
-const EXCLUDED_VARIANT_IDS = ['42903234642168', '42903234609400']
-
-function createMissingLabelCounts(): Record<MetaCatalogCustomLabelKey, number> {
-  return META_CUSTOM_LABEL_KEYS.reduce(
-    (counts, key) => {
-      counts[key] = 0
-      return counts
-    },
-    {} as Record<MetaCatalogCustomLabelKey, number>
-  )
-}
-
-function createSyncSummary(): MetaCatalogSyncSummary {
-  return {
-    productsScanned: 0,
-    productsExcluded: 0,
-    inactiveProductsSkipped: 0,
-    productsMissingGroupId: 0,
-    variantsScanned: 0,
-    variantsExcluded: 0,
-    variantsMissingIdentifiers: 0,
-    variantsQueued: 0,
-    missingLabels: createMissingLabelCounts()
-  }
-}
-
-function createErrorDetails(error: unknown): MetaCatalogSyncErrorDetails {
-  const metaError = error as {
-    message?: string
-    response?: {
-      error?: {
-        code?: number | string
-        type?: string
-        fbtrace_id?: string
-        error_subcode?: number | string
-        message?: string
-      }
-    }
-  }
-
-  const responseError = metaError.response?.error
-  const errorDetails: MetaCatalogSyncErrorDetails = {
-    message:
-      responseError?.message || metaError.message || 'Meta catalog sync failed',
-    raw: error
-  }
-
-  const errorCode = responseError?.code ?? responseError?.error_subcode
-  if (errorCode !== undefined) {
-    errorDetails.code = errorCode
-  }
-
-  if (responseError?.type) {
-    errorDetails.type = responseError.type
-  }
-
-  if (responseError?.fbtrace_id) {
-    errorDetails.fbtraceId = responseError.fbtrace_id
-  }
-
-  return errorDetails
-}
+import { createSyncSummary } from './utils/createSyncSummary'
+import { createErrorDetails } from './utils/createErrorDetails'
+import { CATALOG_ID, EXCLUDED_PRODUCT_IDS, EXCLUDED_VARIANT_IDS } from './constants'
 
 export async function syncProductsToMetaCatalog(): Promise<MetaCatalogSyncResult> {
   const summary = createSyncSummary()

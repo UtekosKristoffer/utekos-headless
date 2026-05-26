@@ -18,16 +18,10 @@ import { connection } from 'next/server'
 import { MikrofiberSection } from './components/MicrofiberSection/MikrofiberSection'
 
 export const metadata: Metadata = {
-  title: 'Kolleksjon: Komfortplagg for hytteliv & utekos | Utekos',
+  title: 'Kolleksjonen for kompromissløs komfort | Utekos',
   description:
     'Utforsk hele kolleksjonen av komfortplagg fra Utekos. Våre varme og slitesterke produkter er skapt for å forlenge de gode stundene på hytten, i bobilen eller på kjølige kvelder.',
-  keywords: [
-    'Varmedress',
-    'Komfortplagg',
-    'Utekos kolleksjon',
-    'Hytteklær',
-    'Bobiltur'
-  ],
+  keywords: ['Varmedress', 'Komfortplagg', 'Utekos kolleksjon', 'Hytte', 'Bobil'],
   alternates: {
     canonical: '/produkter'
   },
@@ -37,8 +31,7 @@ export const metadata: Metadata = {
     url: 'https://utekos.no/produkter',
     siteName: 'Utekos',
     title: 'Hele kolleksjonen fra Utekos',
-    description:
-      'Varme og komfortable plagg for deg som elsker utelivet på hytten, i bobilen eller båten.',
+    description: 'Varme og komfortable plagg for deg som elsker utelivet på hytten, i bobilen eller båten.',
     images: [
       {
         url: 'https://utekos.no/og-image-produkter.png',

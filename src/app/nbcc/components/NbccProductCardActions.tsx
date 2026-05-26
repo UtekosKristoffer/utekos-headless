@@ -5,24 +5,10 @@ import { Button } from '@/components/ui/button'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import { cartStore } from '@/lib/state/cartStore'
 import { Loader2 } from 'lucide-react'
-import type { Route } from 'next'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
-
-export type NbccProductVariant = {
-  label: string
-  variantId: string
-  availableForSale: boolean
-  price: string
-}
-
-interface NbccProductCardActionsProps {
-  variants: NbccProductVariant[]
-  href: Route
-  productTitle: string
-  tracking: Record<string, string>
-}
+import type { NbccProductCardActionsProps } from '../types'
 
 export function NbccProductCardActions({
   variants,

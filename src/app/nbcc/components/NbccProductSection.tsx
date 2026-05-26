@@ -1,55 +1,12 @@
 import { getProduct } from '@/api/lib/products/getProduct'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { formatPrice } from '@/lib/utils/formatPrice'
-import type { ShopifyProductVariant } from 'types/product'
 import { cacheLife, cacheTag } from 'next/cache'
-
-import { nbccProducts } from '../data/nbccLandingPageContent'
+import { nbccProducts } from '../utils/nbccLandingPageContent'
+import { resolveVariantsForSizes } from '../utils/resolveVariantsForSizes'
 import { NbccAiSummaryButton } from './NbccAiSummaryButton'
 import { NbccProductCarousel } from './NbccProductCarousel'
-import { NbccProductCardActions, type NbccProductVariant } from './NbccProductCardActions'
-
-function normalizeVariantOption(value: string): string {
-  return value.trim().toLocaleLowerCase('nb-NO')
-}
-
-function resolveVariantsForSizes(
-  allVariants: ShopifyProductVariant[],
-  sizes: string[],
-  color?: string
-): NbccProductVariant[] {
-  return sizes.flatMap(label => {
-    const normalizedLabel = normalizeVariantOption(label)
-
-    const variant = allVariants.find(v => {
-      const hasSize = v.selectedOptions.some(
-        option => normalizeVariantOption(option.value) === normalizedLabel
-      )
-
-      if (!hasSize) return false
-
-      if (color) {
-        const normalizedColor = normalizeVariantOption(color)
-
-        return v.selectedOptions.some(option => normalizeVariantOption(option.value) === normalizedColor)
-      }
-
-      return true
-    })
-
-    if (!variant) return []
-
-    return [
-      {
-        label,
-        variantId: variant.id,
-        availableForSale: variant.availableForSale,
-        price: formatPrice(variant.price)
-      }
-    ]
-  })
-}
+import { NbccProductCardActions } from './NbccProductCardActions'
 
 export async function NbccProductSection() {
   'use cache'

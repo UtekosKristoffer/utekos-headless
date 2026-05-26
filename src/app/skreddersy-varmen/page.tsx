@@ -11,9 +11,8 @@ import { PreFooterNavigation } from './utekos-orginal/components/PreFooterNaviga
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Skreddersy varmen ute | Utekos 3-i-1 komfortplagg',
-  description:
-    'Velg Utekos for terrasse, hytte, båt og bobil. Se 3-i-1-funksjon, fuktbeskyttelse, størrelser, levering og retur.',
+  title: 'Skreddersy varmen | Utekos',
+  description: 'Kompromissløs komfort og overlegen allsidighet. Juster, form og nyt.',
   category: 'Yttertøy',
   authors: [{ name: 'Utekos fagredaksjon', url: 'https://utekos.no/om-oss' }],
   creator: 'Utekos fagredaksjon',
@@ -35,9 +34,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'no_NO',
-    title: 'Skreddersy varmen ute | Utekos 3-i-1 komfortplagg',
-    description:
-      'Kjøpsnær guide til Utekos for terrasse, hytte, båt og bobil. Se 3-i-1-funksjon, fuktbeskyttelse, størrelser, levering og retur.',
+    title: 'Skreddersy varmen | Utekos',
+    description: 'Kompromissløs komfort og overlegen allsidighet. Juster, form og nyt.',
     url: 'https://utekos.no/skreddersy-varmen',
     siteName: 'Utekos',
     images: [
@@ -52,8 +50,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Skreddersy varmen ute | Utekos',
-    description:
-      'Se hvordan Utekos gir justerbar varme for terrasse, hytte, båt og bobil.',
+    description: 'Se hvordan Utekos gir justerbar varme for terrasse, hytte, båt og bobil.',
     images: ['https://utekos.no/empathy-bonfire.png']
   }
 }
@@ -66,10 +63,7 @@ export default function LandingPage() {
 
       <DeferredLandingSections />
 
-      <div
-        id='purchase-section'
-        className='w-full scroll-mt-[70px] xl:scroll-mt-[86px]'
-      >
+      <div id='purchase-section' className='w-full scroll-mt-[70px] xl:scroll-mt-[86px]'>
         <Suspense fallback={<LandingPurchaseFallback />}>
           <LandingPurchaseSection />
         </Suspense>

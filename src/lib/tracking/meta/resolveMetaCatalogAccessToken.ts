@@ -1,31 +1,11 @@
 import type { MetaCatalogAccessTokenSource } from './metaCatalogTypes'
-
+import { normalizeEnvValue } from './utils/normalizeEnvValue'
 type ResolvedMetaCatalogAccessToken = {
   token: string
   source: MetaCatalogAccessTokenSource
 }
 
-function normalizeEnvValue(value: string | undefined) {
-  if (!value) return undefined
-
-  const trimmedValue = value.trim()
-
-  if (!trimmedValue) return undefined
-
-  if (
-    (trimmedValue.startsWith('"') && trimmedValue.endsWith('"'))
-    || (trimmedValue.startsWith('\'') && trimmedValue.endsWith('\''))
-  ) {
-    const unwrappedValue = trimmedValue.slice(1, -1).trim()
-    return unwrappedValue || undefined
-  }
-
-  return trimmedValue
-}
-
-export function resolveMetaCatalogAccessToken():
-  | ResolvedMetaCatalogAccessToken
-  | null {
+export function resolveMetaCatalogAccessToken(): ResolvedMetaCatalogAccessToken | null {
   const tokenCandidates: Array<{
     source: MetaCatalogAccessTokenSource
     token: string | undefined

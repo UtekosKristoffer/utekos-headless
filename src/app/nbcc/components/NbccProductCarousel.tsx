@@ -2,15 +2,7 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
-
-interface CarouselImage {
-  src: string
-  alt: string
-}
-
-interface NbccProductCarouselProps {
-  images: CarouselImage[]
-}
+import type { NbccProductCarouselProps } from '../types'
 
 export function NbccProductCarousel({ images }: NbccProductCarouselProps) {
   const [current, setCurrent] = useState(0)

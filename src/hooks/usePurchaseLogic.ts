@@ -11,7 +11,7 @@ import { fetchCart } from '@/lib/helpers/cart/fetchCart'
 import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
 import { useAnalytics } from '@/hooks/useAnalytics'
 import { dispatchMetaTrackingEvent } from '@/lib/tracking/meta/dispatchMetaTrackingEvent'
-import { getClientMetaUserData } from '@/lib/tracking/meta/getClientMetaUserData'
+import { getClientMetaUserData } from '@/lib/tracking/meta/utils/getClientMetaUserData'
 import { trackMicrosoftUetEvent } from '@/lib/tracking/microsoft-uet/trackMicrosoftUetEvent'
 import { generateEventID } from '@/components/analytics/Meta/generateEventID'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
@@ -45,15 +45,12 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
   const { trackEvent } = useAnalytics()
   const contextCartId = useContext(CartIdContext)
 
-  const isPendingFromMachine = CartMutationContext.useSelector(state =>
-    state.matches('mutating')
-  )
+  const isPendingFromMachine = CartMutationContext.useSelector(state => state.matches('mutating'))
 
   const currentConfig = PRODUCT_VARIANTS[selectedModel]
   const currentShopifyProduct = products[currentConfig.id]
 
-  const safeColorIndex =
-    selectedColorIndex < currentConfig.colors.length ? selectedColorIndex : 0
+  const safeColorIndex = selectedColorIndex < currentConfig.colors.length ? selectedColorIndex : 0
   const currentColor = currentConfig.colors[safeColorIndex] as ColorVariant
 
   const handleSelectedModelChange = (model: ModelKey) => {
@@ -61,13 +58,9 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
 
     setSelectedModel(model)
     setSelectedSize(size =>
-      nextConfig.sizes.includes(size) ?
-        size
-      : (nextConfig.sizes[1] ?? nextConfig.sizes[0] ?? size)
+      nextConfig.sizes.includes(size) ? size : (nextConfig.sizes[1] ?? nextConfig.sizes[0] ?? size)
     )
-    setSelectedColorIndex(index =>
-      index < nextConfig.colors.length ? index : 0
-    )
+    setSelectedColorIndex(index => (index < nextConfig.colors.length ? index : 0))
   }
 
   const resolveSelectedVariant = () => {
@@ -82,17 +75,13 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
         option => option.value.toLowerCase() === selectedSize.toLowerCase()
       )
       const hasColor = variant.selectedOptions.some(
-        option =>
-          currentColor
-          && option.value.toLowerCase() === currentColor.name.toLowerCase()
+        option => currentColor && option.value.toLowerCase() === currentColor.name.toLowerCase()
       )
       return hasSize && hasColor
     })
 
     if (!selectedVariant) {
-      toast.error(
-        `Fant ikke variant for ${currentColor.name} / ${selectedSize}.`
-      )
+      toast.error(`Fant ikke variant for ${currentColor.name} / ${selectedSize}.`)
       return null
     }
 
@@ -165,9 +154,7 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
       let cart: Cart | null = null
 
       if (currentCartId) {
-        cart =
-          queryClient.getQueryData<Cart>(['cart', currentCartId])
-          ?? (await fetchCart(currentCartId))
+        cart = queryClient.getQueryData<Cart>(['cart', currentCartId]) ?? (await fetchCart(currentCartId))
 
         if (cart) {
           queryClient.setQueryData(['cart', currentCartId], cart)
@@ -212,8 +199,7 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
       const rawEventID = generateEventID()
       const eventID = rawEventID.replace('evt_', 'ic_')
       const productId = cleanShopifyId(selectedVariant.id) || selectedVariant.id
-      const value =
-        (Number.parseFloat(selectedVariant.price.amount) || 0) * quantity
+      const value = (Number.parseFloat(selectedVariant.price.amount) || 0) * quantity
       const currency = selectedVariant.price.currencyCode
       const userData: MetaUserData = getClientMetaUserData()
 

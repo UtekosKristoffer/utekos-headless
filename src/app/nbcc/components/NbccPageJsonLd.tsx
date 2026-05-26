@@ -1,12 +1,8 @@
 import type { BreadcrumbList, FAQPage, Graph, WebPage } from 'schema-dts'
 import { cacheLife } from 'next/cache'
 
-import { nbccFaqItems } from '../data/nbccLandingPageContent'
-
-const SITE_URL = 'https://utekos.no'
-const NBCC_URL = `${SITE_URL}/nbcc`
-const ORGANIZATION_ID = `${SITE_URL}/#organization`
-const WEBSITE_ID = `${SITE_URL}/#website`
+import { NBCC_URL, ORGANIZATION_ID, SITE_URL, WEBSITE_ID } from '../constants'
+import { nbccFaqItems } from '../utils/nbccLandingPageContent'
 
 export async function NbccPageJsonLd() {
   'use cache'

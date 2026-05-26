@@ -8,13 +8,11 @@ import { SizeGuideTable } from './components/SizeGuideTable'
 import { PurchaseSection } from './components/PurchaseSection'
 import { ProductDetailsAccordion } from './components/ProductDetailsAccordion'
 export const metadata: Metadata = {
-  title: 'Skreddersy varmen | Utekos®',
-  description:
-    'Skreddersy varmen med Utekos®. Oppdag genial funksjonalitet og kompromissløs komfort - for alle dine utendørsopplevelser. Juster, form og nyt.',
+  title: 'Skreddersy varmen | Utekos',
+  description: 'Kompromissløs komfort og overlegen allsidighet. Juster, form og nyt.',
   openGraph: {
     title: 'Utekos - Skreddersy varmen',
-    description:
-      'Skreddersy varmen med Utekos®. Oppdag genial funksjonalitet og kompromissløs komfort - for alle dine utendørsopplevelser. Juster, form og nyt.',
+    description: 'Kompromissløs komfort og overlegen allsidighet. Juster, form og nyt.',
     url: 'https://utekos.no/skreddersy-varmen/utekos-orginal',
     siteName: 'Utekos',
     locale: 'nb_NO',

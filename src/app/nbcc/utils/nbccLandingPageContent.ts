@@ -1,34 +1,13 @@
 import type { Route } from 'next'
 
-type TrackingData = Record<string, string>
-
-export type NbccProduct = {
-  title: string
-  shortTitle: string
-  description: string
-  bestFor: string
-  images: Array<{ src: string; alt: string }>
-  href: Route
-  handle: string
-  sizes: string[]
-  color?: string
-  tracking: TrackingData
-}
-
-export type NbccUseCase = {
-  title: string
-  description: string
-}
-
-export type NbccStep = {
-  title: string
-  description: string
-}
-
-export type NbccFaqItem = {
-  question: string
-  answer: string
-}
+import type {
+  NbccFaqItem,
+  NbccHeroTracking,
+  NbccProduct,
+  NbccStep,
+  NbccTrackingData,
+  NbccUseCase
+} from '../types'
 
 export const nbccHeroTracking = {
   primary: {
@@ -41,7 +20,7 @@ export const nbccHeroTracking = {
     section: 'hero',
     target: 'how-to-use'
   }
-} satisfies Record<string, TrackingData>
+} satisfies NbccHeroTracking
 
 export const nbccProducts = [
   {
@@ -211,4 +190,4 @@ export const nbccFinalCtaTracking = {
   page: 'nbcc',
   section: 'final-cta',
   target: 'products'
-} satisfies TrackingData
+} satisfies NbccTrackingData

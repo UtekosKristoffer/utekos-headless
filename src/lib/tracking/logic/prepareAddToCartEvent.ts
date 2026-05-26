@@ -1,20 +1,15 @@
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import type { MetaContentItem } from 'types/tracking/meta'
-import type {
-  AddToCartEventData,
-  PrepareAddToCartInput
-} from 'types/cart/AddToCart'
-export function prepareAddToCartEvent(
-  input: PrepareAddToCartInput
-): AddToCartEventData {
+import type { AddToCartEventData, PrepareAddToCartInput } from 'types/cart/AddToCart'
+
+export function prepareAddToCartEvent(input: PrepareAddToCartInput): AddToCartEventData {
   const { product, selectedVariant, quantity, additionalLine } = input
 
   const basePrice = Number.parseFloat(selectedVariant.price.amount)
   const currency = selectedVariant.price.currencyCode
   let totalQty = quantity
 
-  const mainVariantId =
-    cleanShopifyId(selectedVariant.id) || selectedVariant.id.toString()
+  const mainVariantId = cleanShopifyId(selectedVariant.id) || selectedVariant.id.toString()
   const eventID = `atc_${cleanShopifyId(selectedVariant.id)}_${Date.now()}`
 
   const contents: MetaContentItem[] = [
@@ -28,8 +23,7 @@ export function prepareAddToCartEvent(
   let contentName = product.title
 
   if (additionalLine) {
-    const buffId =
-      cleanShopifyId(additionalLine.variantId) || additionalLine.variantId
+    const buffId = cleanShopifyId(additionalLine.variantId) || additionalLine.variantId
 
     contents.push({
       id: buffId,
