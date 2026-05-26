@@ -135,7 +135,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <Header menu={mainMenu} />
             <main>
               {children}
-              {SHOULD_LOAD_VERCEL_ANALYTICS && <Analytics />}
+              {SHOULD_LOAD_VERCEL_ANALYTICS && <Analytics mode='production' />}
               <SpeedInsights />
               <ChatBotAgent />
             </main>
