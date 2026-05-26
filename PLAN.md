@@ -1,5 +1,20 @@
 # Plan
 
+## Current Session: Restore GA4, Meta and Microsoft Advertising events
+
+- Root cause confirmed locally: `https://sgtm.utekos.no/gtm.js?id=GTM-5TWMJQFP`
+  returns `503`, while Google-hosted GTM returns `200`.
+- Consent is consolidated so the visible banner updates both legacy
+  `utekos_cookie_consent` localStorage and `cookie-consent` cookie.
+- GTM now tries the sGTM origin first and falls back to
+  `https://www.googletagmanager.com`.
+- GA4 server fallback is enabled by default for GTM-owned events when the sGTM
+  script health check fails.
+- Meta Pixel mounts after marketing consent and CAPI payloads include GA4 ids
+  when browser cookies are available.
+- Microsoft UET re-sends `pageLoad` after marketing consent changes from denied
+  to granted.
+
 ## Current Session: `src/app/produkter/(oversikt)/page.tsx` and src/app/produkter/(oversikt)/layout.tsx in in focus.
 
 ## Goal

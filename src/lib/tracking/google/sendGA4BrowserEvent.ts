@@ -1,18 +1,22 @@
 import 'server-only'
+import { checkGoogleTagManagerScriptHealth } from './checkGoogleTagManagerScriptHealth'
 import { mapToGA4EventName } from './mapToGA4EventName'
 import { trackServerEvent } from './trackingServerEvent'
 
-const GTM_OWNED_EVENTS = new Set([
-  'PageView',
-  'ViewContent',
-  'AddToCart',
-  'InitiateCheckout',
-  'Purchase'
-])
+const GTM_OWNED_EVENTS = new Set(['PageView', 'ViewContent', 'AddToCart', 'InitiateCheckout', 'Purchase'])
 
-function buildEventParams(
-  eventData?: Record<string, unknown>
-): Record<string, unknown> {
+const GOOGLE_TAG_MANAGER_ID = process.env.NEXT_GOOGLE_GTM_ID || 'GTM-5TWMJQFP'
+
+const GA_SERVER_CONTAINER_URL = (
+  process.env.GA_SERVER_CONTAINER_URL
+  || process.env.NEXT_PUBLIC_GA_SERVER_CONTAINER_URL
+  || process.env.NEXT_PUBLIC_SGTM_ENDPOINT
+  || 'https://sgtm.utekos.no'
+).replace(/\/$/, '')
+
+const SHOULD_FALL_BACK_FOR_GTM_OWNED_EVENTS = process.env.GA_GTM_OWNED_SERVER_FALLBACK !== '0'
+
+function buildEventParams(eventData?: Record<string, unknown>): Record<string, unknown> {
   const data = eventData ?? {}
   const params: Record<string, unknown> = {}
 
@@ -95,7 +99,9 @@ export async function sendGA4BrowserEvent(
     }
   }
 
-  if (GTM_OWNED_EVENTS.has(eventName)) {
+  const isGtmOwnedEvent = GTM_OWNED_EVENTS.has(eventName)
+
+  if (isGtmOwnedEvent && !SHOULD_FALL_BACK_FOR_GTM_OWNED_EVENTS) {
     return {
       success: true,
       provider: 'google',
@@ -106,6 +112,23 @@ export async function sendGA4BrowserEvent(
   }
 
   const gaEventName = mapToGA4EventName(eventName)
+  const gtmScriptHealth =
+    isGtmOwnedEvent ?
+      await checkGoogleTagManagerScriptHealth({
+        gtmId: GOOGLE_TAG_MANAGER_ID,
+        scriptOrigin: GA_SERVER_CONTAINER_URL
+      })
+    : { ok: false }
+
+  if (isGtmOwnedEvent && gtmScriptHealth.ok) {
+    return {
+      success: true,
+      provider: 'google',
+      transport: 'gtm_web_to_sgtm',
+      skipped: true,
+      reason: 'handled_by_healthy_google_tag'
+    }
+  }
 
   const result = await trackServerEvent(
     {
@@ -114,13 +137,12 @@ export async function sendGA4BrowserEvent(
     },
     {
       clientId: ga4Data.client_id,
-      sessionId:
-        ga4Data.session_id !== undefined ?
-          String(ga4Data.session_id)
-        : undefined,
+      sessionId: ga4Data.session_id !== undefined ? String(ga4Data.session_id) : undefined,
       userAgent: userContext.userAgent,
       ipOverride: userContext.clientIp,
-      debugMode: process.env.GA_MP_DEBUG === '1'
+      debugMode: process.env.GA_MP_DEBUG === '1',
+      allowDirectFallback: true,
+      skipSgtmDispatch: isGtmOwnedEvent
     }
   )
 
@@ -136,6 +158,7 @@ export async function sendGA4BrowserEvent(
   return {
     success: true,
     provider: 'google',
-    transport: 'next_api_to_sgtm'
+    transport: result.transport,
+    fallbackUsed: result.fallbackUsed
   }
 }

@@ -9,19 +9,15 @@ import { serverActions } from '@/constants/serverActions'
 import { CartIdProvider } from '@/components/providers/CartIdProvider'
 import type { DehydratedState } from '@tanstack/react-query'
 import { CookieConsentProvider } from '@/components/cookie-consent/CookieConsentProvider'
-import CookieConsent from '@/components/cookie-consent/CookieConsent'
 import { ConditionalTracking } from '../analytics/ConditionalTracking'
 import { MarketingPixels } from '@/components/analytics/MarketingPixels'
+import { CookieConsentBanner } from '@/components/CookieBanner'
 
 const ReactQueryDevtools =
   process.env.NODE_ENV === 'development' ?
-    dynamic(
-      () =>
-        import('@tanstack/react-query-devtools').then(
-          module => module.ReactQueryDevtools
-        ),
-      { ssr: false }
-    )
+    dynamic(() => import('@tanstack/react-query-devtools').then(module => module.ReactQueryDevtools), {
+      ssr: false
+    })
   : null
 
 interface ProvidersProps {
@@ -30,11 +26,7 @@ interface ProvidersProps {
   dehydratedState: DehydratedState
 }
 
-export default function Providers({
-  children,
-  cartId: initialCartId,
-  dehydratedState
-}: ProvidersProps) {
+export default function Providers({ children, cartId: initialCartId, dehydratedState }: ProvidersProps) {
   const queryClient = getQueryClient()
   const [cartId, setCartId] = useState<string | null>(initialCartId)
 
@@ -43,11 +35,7 @@ export default function Providers({
       <QueryClientProvider client={queryClient}>
         <HydrationBoundary state={dehydratedState}>
           <CartIdProvider value={cartId}>
-            <CartMutationProvider
-              actions={serverActions}
-              cartId={cartId}
-              setCartId={setCartId}
-            >
+            <CartMutationProvider actions={serverActions} cartId={cartId} setCartId={setCartId}>
               {children}
             </CartMutationProvider>
           </CartIdProvider>
@@ -56,7 +44,7 @@ export default function Providers({
           <ReactQueryDevtools initialIsOpen={false} />
         : null}
       </QueryClientProvider>
-      <CookieConsent />
+      <CookieConsentBanner />
       <MarketingPixels />
       <ConditionalTracking
         {...(process.env.NEXT_PUBLIC_POSTHOG_KEY && {

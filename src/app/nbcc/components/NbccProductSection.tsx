@@ -59,7 +59,7 @@ export async function NbccProductSection() {
   const fetched = await Promise.all(nbccProducts.map(p => getProduct(p.handle)))
 
   return (
-    <section id='produkter' className='bg-maritime-bluepx-4 py-20 sm:px-6 sm:py-24 lg:px-8'>
+    <section id='produkter' className='bg-maritime-darkest px-4 py-20 sm:px-6 sm:py-24 lg:px-8'>
       <div className='mx-auto max-w-7xl'>
         <div
           data-nbcc-reveal
@@ -93,9 +93,9 @@ export async function NbccProductSection() {
                 key={product.title}
                 data-nbcc-reveal
                 data-nbcc-animate
-                className='group overflow-hidden rounded-lg border-cloud-dancer/60 bg-maritime-blue py-0 shadow-none'
+                className='group overflow-hidden bg-maritime-blue/80 rounded-lg border-cloud-dancer/60 py-0 shadow-none'
               >
-                <CardHeader className='px-0'>
+                <CardHeader className='p-0'>
                   <NbccProductCarousel images={product.images} />
                 </CardHeader>
                 <CardContent className='px-6 pb-0'>

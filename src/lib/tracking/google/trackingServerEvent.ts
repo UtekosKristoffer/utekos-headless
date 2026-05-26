@@ -50,6 +50,7 @@ export type TrackingOverrides = {
   requestId?: string | undefined
   allowDirectFallback?: boolean | undefined
   fallbackOnSgtmSuccess?: boolean | undefined
+  skipSgtmDispatch?: boolean | undefined
 }
 
 export type TrackTransport = 'sgtm' | 'direct_ga4'
@@ -114,20 +115,19 @@ export type TrackServerEventResult =
       diagnostics: TrackDispatchDiagnostics
     }
 
-const GA_MEASUREMENT_ID =
-  process.env.GA_MEASUREMENT_ID || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
+const GA_MEASUREMENT_ID = process.env.GA_MEASUREMENT_ID || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 
 const GA_API_SECRET = process.env.GA_API_SECRET
 
 const GA_SERVER_CONTAINER_URL = (
-  process.env.GA_SERVER_CONTAINER_URL ||
-  process.env.NEXT_PUBLIC_GA_SERVER_CONTAINER_URL ||
-  'https://sgtm.utekos.no'
+  process.env.GA_SERVER_CONTAINER_URL
+  || process.env.NEXT_PUBLIC_GA_SERVER_CONTAINER_URL
+  || 'https://sgtm.utekos.no'
 ).replace(/\/$/, '')
 
 const GA_DIRECT_COLLECT_URL =
-  'https://region1.google-analytics.com/mp/collect' +
-  `?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${GA_API_SECRET}`
+  'https://region1.google-analytics.com/mp/collect'
+  + `?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${GA_API_SECRET}`
 
 function toNumericSessionId(input?: string): number | undefined {
   if (!input) return undefined
@@ -172,11 +172,7 @@ function toGaUserProperties(
   const entries = Object.entries(userProperties).flatMap(([key, value]) => {
     if (value === undefined || value === null || value === '') return []
 
-    if (
-      typeof value !== 'string'
-      && typeof value !== 'number'
-      && typeof value !== 'boolean'
-    ) {
+    if (typeof value !== 'string' && typeof value !== 'number' && typeof value !== 'boolean') {
       return []
     }
 
@@ -187,9 +183,7 @@ function toGaUserProperties(
 }
 
 function truncateText(input: string, maxLength = 1200): string {
-  return input.length <= maxLength
-    ? input
-    : `${input.slice(0, maxLength)}...<truncated>`
+  return input.length <= maxLength ? input : `${input.slice(0, maxLength)}...<truncated>`
 }
 
 function buildPayloadSummary(
@@ -199,9 +193,7 @@ function buildPayloadSummary(
     sessionId?: number | undefined
     userId?: string | undefined
     userData?: Record<string, unknown> | undefined
-    userProperties?:
-      | Record<string, { value: string | number | boolean }>
-      | undefined
+    userProperties?: Record<string, { value: string | number | boolean }> | undefined
   }
 ): TrackPayloadSummary {
   const mergedParams = {
@@ -211,18 +203,13 @@ function buildPayloadSummary(
 
   const items = Array.isArray(mergedParams.items) ? mergedParams.items : []
   const rawValue = mergedParams.value
-  const currency =
-    typeof mergedParams.currency === 'string' ? mergedParams.currency : undefined
+  const currency = typeof mergedParams.currency === 'string' ? mergedParams.currency : undefined
   const transactionId =
-    typeof mergedParams.transaction_id === 'string'
-      ? mergedParams.transaction_id
-      : undefined
+    typeof mergedParams.transaction_id === 'string' ? mergedParams.transaction_id : undefined
   const value =
-    typeof rawValue === 'number'
-      ? rawValue
-      : Number.isFinite(Number(rawValue))
-      ? Number(rawValue)
-      : undefined
+    typeof rawValue === 'number' ? rawValue
+    : Number.isFinite(Number(rawValue)) ? Number(rawValue)
+    : undefined
 
   return {
     eventName: event.name,
@@ -232,9 +219,7 @@ function buildPayloadSummary(
     hasSessionId: tracking.sessionId !== undefined,
     hasUserId: !!tracking.userId,
     hasUserData: !!tracking.userData && Object.keys(tracking.userData).length > 0,
-    userPropertyCount: tracking.userProperties
-      ? Object.keys(tracking.userProperties).length
-      : 0,
+    userPropertyCount: tracking.userProperties ? Object.keys(tracking.userProperties).length : 0,
     itemCount: items.length,
     ...(value !== undefined ? { value } : {}),
     ...(currency ? { currency } : {}),
@@ -251,8 +236,7 @@ function shouldUseDirectFallback(
   sgtmOk: boolean
 ): TrackFallbackTrigger | undefined {
   const fallbackEnabled =
-    overrides?.allowDirectFallback === true
-    && process.env.GA_DIRECT_FALLBACK_ENABLED === '1'
+    overrides?.allowDirectFallback === true && process.env.GA_DIRECT_FALLBACK_ENABLED !== '0'
 
   if (!fallbackEnabled) {
     return undefined
@@ -262,10 +246,7 @@ function shouldUseDirectFallback(
     return 'sgtm_error'
   }
 
-  if (
-    overrides?.fallbackOnSgtmSuccess === true
-    && process.env.GA_DIRECT_FALLBACK_ON_SGTM_SUCCESS === '1'
-  ) {
+  if (overrides?.fallbackOnSgtmSuccess === true && process.env.GA_DIRECT_FALLBACK_ON_SGTM_SUCCESS === '1') {
     return 'confirmed_sgtm_blocker'
   }
 
@@ -292,9 +273,7 @@ async function postMeasurementProtocolRequest(
       cache: 'no-store'
     })
 
-    const responseText = response.ok ?
-      undefined
-    : truncateText(await response.text().catch(() => ''))
+    const responseText = response.ok ? undefined : truncateText(await response.text().catch(() => ''))
 
     return {
       ok: response.ok,
@@ -387,10 +366,7 @@ export async function trackServerEvent(
 
     const userId = overrides?.userId
 
-    const shouldSendUserData =
-      !!userId
-      && !!overrides?.userData
-      && Object.keys(overrides.userData).length > 0
+    const shouldSendUserData = !!userId && !!overrides?.userData && Object.keys(overrides.userData).length > 0
 
     const userProperties = toGaUserProperties(overrides?.userProperties)
     diagnostics.payloadSummary = buildPayloadSummary(event, {
@@ -404,8 +380,7 @@ export async function trackServerEvent(
     const payload: Record<string, unknown> = {
       client_id: clientId,
       ...(userId ? { user_id: userId } : {}),
-      timestamp_micros:
-        overrides?.timestampMicros ?? Math.floor(Date.now() * 1000),
+      timestamp_micros: overrides?.timestampMicros ?? Math.floor(Date.now() * 1000),
       ...(shouldSendUserData ? { user_data: overrides!.userData } : {}),
       ...(userProperties ? { user_properties: userProperties } : {}),
       ...(overrides?.ipOverride ? { ip_override: overrides.ipOverride } : {}),
@@ -440,16 +415,16 @@ export async function trackServerEvent(
         }
       )
 
-      const validationJson: unknown = await validationResponse
-        .json()
-        .catch(() => null)
+      const validationJson: unknown = await validationResponse.json().catch(() => null)
       const validationMessages =
-        typeof validationJson === 'object'
-        && validationJson !== null
-        && 'validationMessages' in validationJson
-        && Array.isArray(validationJson.validationMessages)
-          ? validationJson.validationMessages
-          : []
+        (
+          typeof validationJson === 'object'
+          && validationJson !== null
+          && 'validationMessages' in validationJson
+          && Array.isArray(validationJson.validationMessages)
+        ) ?
+          validationJson.validationMessages
+        : []
 
       diagnostics.validation = {
         attempted: true,
@@ -470,15 +445,68 @@ export async function trackServerEvent(
       }
     }
 
-    const endpoint =
-      `${GA_SERVER_CONTAINER_URL}/mp/collect` +
-      `?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${GA_API_SECRET}`
+    if (overrides?.skipSgtmDispatch === true) {
+      const directFallbackEnabled =
+        overrides.allowDirectFallback === true && process.env.GA_DIRECT_FALLBACK_ENABLED !== '0'
 
-    const sgtmResult = await postMeasurementProtocolRequest(
-      endpoint,
-      payload,
-      userAgent
-    )
+      diagnostics.sgtm = {
+        attempted: false,
+        ok: false,
+        responseText: 'Skipped because GTM-owned fallback is direct-only.'
+      }
+
+      if (!directFallbackEnabled) {
+        return {
+          ok: false,
+          reason: 'ga_error',
+          requestId,
+          fallbackUsed: false,
+          details: {
+            directGa4: 'Direct GA4 fallback is disabled.'
+          },
+          diagnostics
+        }
+      }
+
+      const directGa4Result = await postMeasurementProtocolRequest(GA_DIRECT_COLLECT_URL, payload, userAgent)
+
+      diagnostics.directGa4 = {
+        attempted: true,
+        trigger: 'confirmed_sgtm_blocker',
+        status: directGa4Result.status,
+        ok: directGa4Result.ok,
+        ...(directGa4Result.responseText ? { responseText: directGa4Result.responseText } : {})
+      }
+
+      if (directGa4Result.ok) {
+        return {
+          ok: true,
+          status: directGa4Result.status ?? 200,
+          requestId,
+          transport: 'direct_ga4',
+          fallbackUsed: true,
+          diagnostics
+        }
+      }
+
+      return {
+        ok: false,
+        reason: 'ga_error',
+        requestId,
+        fallbackUsed: false,
+        status: directGa4Result.status,
+        details: {
+          directGa4: diagnostics.directGa4
+        },
+        diagnostics
+      }
+    }
+
+    const endpoint =
+      `${GA_SERVER_CONTAINER_URL}/mp/collect`
+      + `?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${GA_API_SECRET}`
+
+    const sgtmResult = await postMeasurementProtocolRequest(endpoint, payload, userAgent)
 
     diagnostics.sgtm = {
       attempted: true,
@@ -487,26 +515,17 @@ export async function trackServerEvent(
       ...(sgtmResult.responseText ? { responseText: sgtmResult.responseText } : {})
     }
 
-    const directFallbackTrigger = shouldUseDirectFallback(
-      overrides,
-      sgtmResult.ok
-    )
+    const directFallbackTrigger = shouldUseDirectFallback(overrides, sgtmResult.ok)
 
     if (directFallbackTrigger) {
-      const directGa4Result = await postMeasurementProtocolRequest(
-        GA_DIRECT_COLLECT_URL,
-        payload,
-        userAgent
-      )
+      const directGa4Result = await postMeasurementProtocolRequest(GA_DIRECT_COLLECT_URL, payload, userAgent)
 
       diagnostics.directGa4 = {
         attempted: true,
         trigger: directFallbackTrigger,
         status: directGa4Result.status,
         ok: directGa4Result.ok,
-        ...(directGa4Result.responseText ?
-          { responseText: directGa4Result.responseText }
-        : {})
+        ...(directGa4Result.responseText ? { responseText: directGa4Result.responseText } : {})
       }
 
       if (directGa4Result.ok) {

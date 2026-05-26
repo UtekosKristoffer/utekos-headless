@@ -112,7 +112,7 @@ const nextConfig: NextConfig = {
       }
     ],
     formats: ['image/avif', 'image/webp'],
-    qualities: [75, 80, 85, 90],
+    qualities: [75, 80, 85, 90, 95],
     deviceSizes: [390, 430, 640, 750, 828, 1080, 1200, 1440, 1920],
     imageSizes: [32, 48, 64, 96, 128, 256, 384]
   },
@@ -120,8 +120,7 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source:
-          '/:path*.:extension(png|jpg|jpeg|webp|avif|gif|svg|ico|otf|woff2)',
+        source: '/:path*.:extension(png|jpg|jpeg|webp|avif|gif|svg|ico|otf|woff2)',
         headers: staticAssetHeaders
       },
       {

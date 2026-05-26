@@ -6,9 +6,7 @@ export const MICROSOFT_UET_TAG_ID =
   process.env.NEXT_PUBLIC_MICROSOFT_UET_TAG_ID || DEFAULT_MICROSOFT_UET_TAG_ID
 
 export const SHOULD_LOAD_MICROSOFT_UET =
-  !!MICROSOFT_UET_TAG_ID
-  && process.env.NODE_ENV === 'production'
-  && process.env.VERCEL_ENV !== 'preview'
+  !!MICROSOFT_UET_TAG_ID && process.env.NODE_ENV === 'production' && process.env.VERCEL_ENV !== 'preview'
 
 type MicrosoftUetTagProps = {
   tagId?: string
@@ -16,6 +14,9 @@ type MicrosoftUetTagProps = {
 
 const MICROSOFT_UET_CONSENT_SYNC_SCRIPT = `
   (function() {
+    var hasCompletedInitialConsentSync = false;
+    var previousMarketingConsent = false;
+
     function parseStoredConsent(value) {
       if (!value) return false;
       try {
@@ -49,10 +50,22 @@ const MICROSOFT_UET_CONSENT_SYNC_SCRIPT = `
     }
 
     function updateMicrosoftUetConsent() {
+      var hasConsent = hasMarketingConsent();
       window.uetq = window.uetq || [];
       window.uetq.push('consent', 'update', {
-        ad_storage: hasMarketingConsent() ? 'granted' : 'denied'
+        ad_storage: hasConsent ? 'granted' : 'denied'
       });
+
+      if (
+        hasCompletedInitialConsentSync
+        && hasConsent
+        && !previousMarketingConsent
+      ) {
+        window.uetq.push('pageLoad');
+      }
+
+      previousMarketingConsent = hasConsent;
+      hasCompletedInitialConsentSync = true;
     }
 
     updateMicrosoftUetConsent();
@@ -161,9 +174,7 @@ function createMicrosoftUetBootstrapScript(tagId: string): string {
   `
 }
 
-export function MicrosoftUetTag({
-  tagId = MICROSOFT_UET_TAG_ID
-}: MicrosoftUetTagProps) {
+export function MicrosoftUetTag({ tagId = MICROSOFT_UET_TAG_ID }: MicrosoftUetTagProps) {
   if (!SHOULD_LOAD_MICROSOFT_UET || !tagId) return null
 
   return (
@@ -171,10 +182,7 @@ export function MicrosoftUetTag({
       <Script id='microsoft-uet-bootstrap' strategy='afterInteractive'>
         {createMicrosoftUetBootstrapScript(tagId)}
       </Script>
-      <Script
-        id='microsoft-uet-enhanced-conversions'
-        strategy='afterInteractive'
-      >
+      <Script id='microsoft-uet-enhanced-conversions' strategy='afterInteractive'>
         {MICROSOFT_UET_ENHANCED_CONVERSIONS_SCRIPT}
       </Script>
       <Script id='microsoft-uet-consent-sync' strategy='afterInteractive'>

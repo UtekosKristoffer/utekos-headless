@@ -1,7 +1,10 @@
 'use client'
 
 import { createContext, useEffect, useState, type ReactNode } from 'react'
-import Cookies from 'js-cookie'
+import { broadcastConsentState } from './broadcastConsentState'
+import { defaultConsentState } from './defaultConsentState'
+import { persistConsentState } from './persistConsentState'
+import { readStoredConsentState } from './readStoredConsentState'
 
 // ENDRET: Nye kategorier som matcher Nike
 export type ConsentCategory =
@@ -25,15 +28,7 @@ interface ConsentContextType {
   updateConsent: (category: ConsentCategory, value: boolean) => void
   acceptAll: () => void
   rejectNonEssential: () => void
-  savePreferences: () => void
-}
-
-const defaultConsentState: ConsentState = {
-  necessary: true, // Alltid påkrevd
-  analytics: false,
-  functional: false,
-  marketing: false,
-  profile_marketing: false // ENDRET: Lagt til
+  savePreferences: (nextConsent?: ConsentState) => void
 }
 
 export const ConsentContext = createContext<ConsentContextType>({
@@ -45,35 +40,35 @@ export const ConsentContext = createContext<ConsentContextType>({
   savePreferences: () => {}
 })
 
-const COOKIE_NAME = 'cookie-consent'
-const COOKIE_EXPIRY = 365 // Dager
-
 export function CookieConsentProvider({ children }: { children: ReactNode }) {
   const [consent, setConsent] = useState<ConsentState>(defaultConsentState)
   const [hasInteracted, setHasInteracted] = useState<boolean>(false)
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
-  // Last samtykke fra cookie ved oppstart
   useEffect(() => {
-    const savedConsent = Cookies.get(COOKIE_NAME)
+    const timer = window.setTimeout(() => {
+      const savedConsent = readStoredConsentState()
 
-    if (savedConsent) {
-      try {
-        const parsedConsent = JSON.parse(savedConsent)
-        // Sikrer at 'necessary' alltid er true
-        setConsent({
-          ...defaultConsentState,
-          ...parsedConsent,
-          necessary: true
-        })
+      if (savedConsent) {
+        setConsent(savedConsent)
+        persistConsentState(savedConsent)
+        broadcastConsentState(savedConsent)
         setHasInteracted(true)
-      } catch (e) {
-        console.error('Error parsing consent cookie:', e)
       }
-    }
 
-    setIsLoaded(true)
+      setIsLoaded(true)
+    }, 0)
+
+    return () => window.clearTimeout(timer)
   }, [])
+
+  const commitConsent = (nextConsent: ConsentState) => {
+    const finalConsent = { ...nextConsent, necessary: true }
+    setConsent(finalConsent)
+    persistConsentState(finalConsent)
+    broadcastConsentState(finalConsent)
+    setHasInteracted(true)
+  }
 
   const updateConsent = (category: ConsentCategory, value: boolean) => {
     if (category === 'necessary') return // Kan ikke endre 'necessary'
@@ -91,9 +86,7 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
       marketing: true,
       profile_marketing: true // ENDRET: Lagt til
     }
-    setConsent(allAccepted)
-    saveConsentCookie(allAccepted)
-    setHasInteracted(true)
+    commitConsent(allAccepted)
   }
 
   const rejectNonEssential = () => {
@@ -104,27 +97,13 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
       marketing: false,
       profile_marketing: false // ENDRET: Lagt til
     }
-    setConsent(essentialOnly)
-    saveConsentCookie(essentialOnly)
-    setHasInteracted(true)
+    commitConsent(essentialOnly)
   }
 
-  const savePreferences = () => {
-    // Sikrer at 'necessary' alltid er true ved lagring
-    const finalConsent = { ...consent, necessary: true }
-    saveConsentCookie(finalConsent)
-    setHasInteracted(true)
+  const savePreferences = (nextConsent?: ConsentState) => {
+    commitConsent(nextConsent ?? consent)
   }
 
-  const saveConsentCookie = (consentState: ConsentState) => {
-    Cookies.set(COOKIE_NAME, JSON.stringify(consentState), {
-      expires: COOKIE_EXPIRY,
-      sameSite: 'strict',
-      secure: process.env.NODE_ENV === 'production'
-    })
-  }
-
-  // Render barna først etter at vi har sjekket for samtykke
   if (!isLoaded) {
     return null
   }

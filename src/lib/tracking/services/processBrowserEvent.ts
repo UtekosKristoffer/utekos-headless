@@ -3,18 +3,23 @@ import type { MetaEventPayload } from 'types/tracking/meta'
 import type { EventCookies } from 'types/tracking/event/cookies/EventCookies'
 import type { TrackingDependencies } from 'types/tracking/event'
 
+function getResultField(result: unknown, fieldName: string): string | boolean | undefined {
+  if (!result || typeof result !== 'object' || !(fieldName in result)) {
+    return undefined
+  }
+
+  const value = (result as Record<string, unknown>)[fieldName]
+
+  return typeof value === 'string' || typeof value === 'boolean' ? value : undefined
+}
+
 export async function processBrowserEvent(
   body: MetaEventPayload,
   cookies: EventCookies,
   metadata: { clientIp: string; userAgent: string },
   deps: TrackingDependencies
 ) {
-  const { userData, sourceInfo } = prepareEventContext(
-    body,
-    cookies,
-    metadata.clientIp,
-    metadata.userAgent
-  )
+  const { userData, sourceInfo } = prepareEventContext(body, cookies, metadata.clientIp, metadata.userAgent)
 
   const pinPromise = deps.sendPinterest(body, userData, cookies.epik)
 
@@ -39,12 +44,7 @@ export async function processBrowserEvent(
   try {
     const metaResponse = await deps.sendMeta(body, userData)
 
-    await Promise.all([
-      pinPromise,
-      tiktokPromise,
-      googlePromise,
-      snapchatPromise
-    ])
+    const [, , googleResult] = await Promise.all([pinPromise, tiktokPromise, googlePromise, snapchatPromise])
 
     await deps.logger(
       'INFO',
@@ -65,7 +65,11 @@ export async function processBrowserEvent(
         hasExtId: !!userData.external_id,
         hasEmail: !!userData.email || !!userData.email_hash,
         clientIp: userData.client_ip_address,
-        hasGA4: !!body.ga4Data?.client_id
+        hasGA4: !!body.ga4Data?.client_id,
+        googleSuccess: getResultField(googleResult, 'success'),
+        googleTransport: getResultField(googleResult, 'transport'),
+        googleError: getResultField(googleResult, 'error'),
+        googleReason: getResultField(googleResult, 'reason')
       }
     )
 
@@ -76,9 +80,7 @@ export async function processBrowserEvent(
     }
   } catch (error: unknown) {
     const normalizedError =
-      error instanceof Error ?
-        error
-      : new Error(typeof error === 'string' ? error : 'Unknown Error')
+      error instanceof Error ? error : new Error(typeof error === 'string' ? error : 'Unknown Error')
     const errorWithResponse = normalizedError as Error & {
       response?: {
         data?: {

@@ -12,34 +12,24 @@ import { ChatBotAgent } from '@/components/chat/ChatBotAgent/source-code'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { CartProviderLoader } from '@/components/providers/CartProviderLoader'
 import { MicrosoftUetTag } from '@/components/analytics/MicrosoftUetTag'
-import { CookieConsentBanner } from '@/components/CookieBanner'
+import { GoogleTagManagerLoader } from '@/components/analytics/GoogleTagManagerLoader'
 import type { Metadata } from 'next'
-import Script from 'next/script'
 
 const GOOGLE_TAG_MANAGER_ID = process.env.NEXT_GOOGLE_GTM_ID || 'GTM-5TWMJQFP'
 
-const GTM_SCRIPT_ORIGIN = (
-  process.env.NEXT_PUBLIC_SGTM_ENDPOINT || 'https://sgtm.utekos.no'
+const GTM_SCRIPT_ORIGIN = (process.env.NEXT_PUBLIC_SGTM_ENDPOINT || 'https://sgtm.utekos.no').replace(
+  /\/$/,
+  ''
+)
+
+const GTM_FALLBACK_SCRIPT_ORIGIN = (
+  process.env.NEXT_PUBLIC_GTM_FALLBACK_ORIGIN || 'https://www.googletagmanager.com'
 ).replace(/\/$/, '')
 
 const SHOULD_LOAD_GOOGLE_TAG_MANAGER =
   process.env.NODE_ENV === 'production' && process.env.VERCEL_ENV !== 'preview'
 
-const SHOULD_LOAD_VERCEL_ANALYTICS =
-  process.env.NODE_ENV === 'production' && process.env.VERCEL === '1'
-
-const GTM_BOOTSTRAP_SCRIPT = `
-  (function(w,d,s,l,i){
-    w[l]=w[l]||[];
-    w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-    var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),
-      dl=l!='dataLayer'?'&l='+l:'';
-    j.async=true;
-    j.src='${GTM_SCRIPT_ORIGIN}/gtm.js?id='+i+dl;
-    f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','${GOOGLE_TAG_MANAGER_ID}');
-`
+const SHOULD_LOAD_VERCEL_ANALYTICS = process.env.NODE_ENV === 'production' && process.env.VERCEL === '1'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -79,8 +69,7 @@ export const metadata: Metadata = {
     url: 'https://utekos.no',
     siteName: 'Utekos',
     title: 'Utekos - Skreddersy varmen',
-    description:
-      'Kompromissløs komfort. Overlegen allsidighet. Juster, form og nyt.',
+    description: 'Kompromissløs komfort. Overlegen allsidighet. Juster, form og nyt.',
     images: {
       url: 'https://utekos.no/og-kate-linn-kikkert-master.png',
       width: 1200,
@@ -108,17 +97,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html
-      lang='no'
-      className={`${brandSansFontFamily.variable} ${utekosText.variable}`}
-    >
+    <html lang='no' className={`${brandSansFontFamily.variable} ${utekosText.variable}`}>
       <body className='bg-background text-cloud-dancer antialiased'>
         <WebVitalsReporter />
 
         {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (
-          <Script id='gtm-bootstrap' strategy='afterInteractive'>
-            {GTM_BOOTSTRAP_SCRIPT}
-          </Script>
+          <GoogleTagManagerLoader
+            gtmId={GOOGLE_TAG_MANAGER_ID}
+            scriptOrigin={GTM_SCRIPT_ORIGIN}
+            fallbackOrigin={GTM_FALLBACK_SCRIPT_ORIGIN}
+          />
         )}
 
         <MicrosoftUetTag />
@@ -150,7 +138,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <ChatBotAgent />
             </main>
             <Footer />
-            <CookieConsentBanner />
           </CartProviderLoader>
         </Suspense>
       </body>

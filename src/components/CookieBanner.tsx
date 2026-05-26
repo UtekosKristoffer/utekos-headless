@@ -1,22 +1,13 @@
 'use client'
 
-import {
-  useEffect,
-  useState,
-  type ButtonHTMLAttributes,
-  type ReactNode
-} from 'react'
+import { useEffect, useState, type ButtonHTMLAttributes, type ReactNode } from 'react'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { cn } from '@/lib/utils/className'
 import Link from 'next/link'
 import { Switch } from '@/components/ui/switch'
+import { useConsent } from '@/components/cookie-consent/useConsent'
 import type { Route } from 'next'
-
-type ConsentState = {
-  necessary: boolean
-  marketing: boolean
-  analytics: boolean
-}
+import type { ConsentState } from '@/components/cookie-consent/CookieConsentProvider'
 
 type ConsentActionTone = 'primary' | 'cloud' | 'ancient'
 
@@ -57,12 +48,7 @@ const consentActionToneConfig: Record<
   }
 }
 
-function ConsentActionButton({
-  tone = 'cloud',
-  className,
-  children,
-  ...props
-}: ConsentActionButtonProps) {
+function ConsentActionButton({ tone = 'cloud', className, children, ...props }: ConsentActionButtonProps) {
   const toneConfig = consentActionToneConfig[tone]
 
   return (
@@ -120,52 +106,43 @@ function ConsentPreferenceCard({
 }
 
 export function CookieConsentBanner() {
+  const {
+    consent: storedConsent,
+    hasInteracted,
+    acceptAll,
+    rejectNonEssential,
+    savePreferences
+  } = useConsent()
   const [isVisible, setIsVisible] = useState(false)
   const [showDetails, setShowDetails] = useState(false)
-  const [consent, setConsent] = useState<ConsentState>({
-    necessary: true,
-    marketing: false,
-    analytics: false
-  })
+  const [consent, setConsent] = useState<ConsentState>(storedConsent)
 
   useEffect(() => {
-    const savedConsent = localStorage.getItem('utekos_cookie_consent')
+    setConsent(storedConsent)
+  }, [storedConsent])
 
-    if (!savedConsent) {
-      const timer = window.setTimeout(() => setIsVisible(true), 250)
-      return () => window.clearTimeout(timer)
+  useEffect(() => {
+    if (hasInteracted) {
+      setIsVisible(false)
+      return undefined
     }
-  }, [])
+
+    const timer = window.setTimeout(() => setIsVisible(true), 250)
+    return () => window.clearTimeout(timer)
+  }, [hasInteracted])
 
   const handleAcceptAll = () => {
-    saveConsent({ necessary: true, marketing: true, analytics: true })
+    acceptAll()
+    setIsVisible(false)
   }
 
   const handleUseNecessaryOnly = () => {
-    saveConsent({ necessary: true, marketing: false, analytics: false })
+    rejectNonEssential()
+    setIsVisible(false)
   }
 
   const handleSaveSelection = () => {
-    saveConsent(consent)
-  }
-
-  const saveConsent = (settings: ConsentState) => {
-    localStorage.setItem('utekos_cookie_consent', JSON.stringify(settings))
-
-    if (typeof window !== 'undefined') {
-      window.dataLayer = window.dataLayer || []
-      window.dataLayer.push({
-        event: 'consent_update',
-        consent: {
-          ad_storage: settings.marketing ? 'granted' : 'denied',
-          analytics_storage: settings.analytics ? 'granted' : 'denied',
-          ad_user_data: settings.marketing ? 'granted' : 'denied',
-          ad_personalization: settings.marketing ? 'granted' : 'denied'
-        }
-      })
-      window.dispatchEvent(new Event('cookie_consent_saved'))
-    }
-
+    savePreferences(consent)
     setIsVisible(false)
   }
 
@@ -194,9 +171,8 @@ export function CookieConsentBanner() {
                   id='cookie-consent-description'
                   className='max-w-3xl font-utekos-text text-sm leading-[1.45] tracking-tight text-cloud-dancer/82 md:text-base'
                 >
-                  Vi bruker informasjonskapsler for å holde siden trygg, måle
-                  hva som fungerer og vise relevant innhold. Du kan godta alt,
-                  bruke kun nødvendige eller tilpasse valgene dine. Les{' '}
+                  Vi bruker informasjonskapsler for å holde siden trygg, måle hva som fungerer og vise
+                  relevant innhold. Du kan godta alt, bruke kun nødvendige eller tilpasse valgene dine. Les{' '}
                   <Link
                     href={'/personvern' as Route}
                     className='font-medium text-primary-button underline underline-offset-4 transition-colors hover:text-cloud-dancer'
@@ -208,15 +184,10 @@ export function CookieConsentBanner() {
               </div>
 
               <div className='flex flex-col gap-3 sm:min-w-fit sm:flex-row sm:items-center'>
-                <ConsentActionButton
-                  onClick={() => setShowDetails(true)}
-                  tone='ancient'
-                >
+                <ConsentActionButton onClick={() => setShowDetails(true)} tone='ancient'>
                   Tilpass
                 </ConsentActionButton>
-                <ConsentActionButton onClick={handleUseNecessaryOnly}>
-                  Kun nødvendige
-                </ConsentActionButton>
+                <ConsentActionButton onClick={handleUseNecessaryOnly}>Kun nødvendige</ConsentActionButton>
                 <ConsentActionButton onClick={handleAcceptAll} tone='primary'>
                   Godta alle
                 </ConsentActionButton>
@@ -234,8 +205,8 @@ export function CookieConsentBanner() {
                   id='cookie-consent-description'
                   className='font-utekos-text text-sm leading-[1.45] tracking-tight text-cloud-dancer/82 md:text-base'
                 >
-                  Velg hvilke informasjonskapsler du vil bruke. Nødvendige
-                  kapsler holder handlekurv, sikkerhet og sidefunksjoner i gang.
+                  Velg hvilke informasjonskapsler du vil bruke. Nødvendige kapsler holder handlekurv,
+                  sikkerhet og sidefunksjoner i gang.
                 </p>
               </div>
 
@@ -271,22 +242,13 @@ export function CookieConsentBanner() {
               </div>
 
               <div className='flex flex-col justify-end gap-3 border-t border-cloud-dancer/12 pt-4 sm:flex-row'>
-                <ConsentActionButton
-                  onClick={() => setShowDetails(false)}
-                  tone='ancient'
-                >
+                <ConsentActionButton onClick={() => setShowDetails(false)} tone='ancient'>
                   Tilbake
                 </ConsentActionButton>
-                <ConsentActionButton
-                  onClick={handleUseNecessaryOnly}
-                  tone='cloud'
-                >
+                <ConsentActionButton onClick={handleUseNecessaryOnly} tone='cloud'>
                   Kun nødvendige
                 </ConsentActionButton>
-                <ConsentActionButton
-                  onClick={handleSaveSelection}
-                  tone='primary'
-                >
+                <ConsentActionButton onClick={handleSaveSelection} tone='primary'>
                   Lagre valg
                 </ConsentActionButton>
               </div>

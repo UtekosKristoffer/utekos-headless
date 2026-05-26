@@ -67,7 +67,7 @@ export function NbccProductCardActions({
     <div className='flex flex-col gap-4'>
       {/* Size selector */}
       <div>
-        <p className='mb-2 text-xs font-medium uppercase tracking-widest text-neutral-400'>Størrelse</p>
+        <p className='mb-2 text-xs font-medium uppercase tracking-widest text-cloud-dancer'>Størrelse</p>
         <div className='flex flex-wrap gap-2'>
           {variants.map(v => (
             <button
@@ -78,8 +78,9 @@ export function NbccProductCardActions({
               className={[
                 'rounded-md border px-3 py-1.5 text-sm font-medium transition-all',
                 v.label === selectedLabel ? 'border-primary-button bg-cloud-dancer text-maritime-darkest'
-                : !v.availableForSale ? 'cursor-not-allowed border-white/10 text-white/25 line-through'
-                : 'border-white/20 text-white/70 hover:border-white/40 hover:text-white'
+                : !v.availableForSale ?
+                  'cursor-not-allowed border-cloud-dancer/10 text-cloud-dancer/25 line-through'
+                : 'border-cloud-dancer/20 text-cloud-dancer/70 hover:border-cloud-dancer/40 hover:text-cloud-dancer'
               ].join(' ')}
             >
               {v.label}
@@ -109,7 +110,7 @@ export function NbccProductCardActions({
         </Button>
         <Button
           asChild
-          className='h-9 rounded-md bg-cloud-dancer w-full py-x border border-white/10 text-maritime-darkest hover:border-white/20 hover:bg-white/5 hover:text-white transition-all duration-200'
+          className='h-9 rounded-md bg-cloud-dancer w-full py-x border border-white/10 text-maritime-blue hover:border-white/20 hover:bg-white/5 hover:text-white transition-all duration-200'
         >
           <Link href={href} data-track='NbccProductCardCtaClick' data-track-data={JSON.stringify(tracking)}>
             Produktside
