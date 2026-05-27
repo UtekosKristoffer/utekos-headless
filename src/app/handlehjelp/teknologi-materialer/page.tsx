@@ -4,10 +4,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { Coffee, Move, Maximize2, ShoppingBag, BookOpen } from 'lucide-react'
-import { ProductSpecsView } from './layout/ProductSpecsView'
+import { ProductSpecsView } from './components/ProductSpecsView'
 import { technologyGroups } from './config'
-import { TechHero } from './layout/TechHero'
-import { ProductSpecPageHeader } from './layout/ProductSpecPageHeader'
+import { TechHero } from './components/TechHero'
+import { ProductSpecPageHeader } from './components/ProductSpecPageHeader'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 
 export const metadata: Metadata = {
