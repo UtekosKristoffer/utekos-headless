@@ -2,118 +2,31 @@
 
 'use client'
 
-import { createVariantReducer } from '@/lib/utils/createVariantReducer'
-import { flattenVariants } from '@/lib/utils/flattenVariants'
-import { useSearchParams, usePathname, useRouter } from 'next/navigation'
-import { useEffect, useMemo, useReducer } from 'react'
-import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
+import { useEffect, useReducer } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { createInitialVariantState } from '@/lib/utils/createInitialVariantState'
+import { createUrlFromPathnameAndSearchParams } from '@/lib/utils/createUrlFromPathnameAndSearchParams'
+import { createVariantUrl } from '@/lib/utils/createVariantUrl'
+import { findUrlSelectedVariant } from '@/lib/utils/findUrlSelectedVariant'
+import { variantStateReducer } from '@/lib/utils/variantStateReducer'
+
 import type { Route } from 'next'
-import type { VariantState } from '@types'
 
-function idleVariantState(): VariantState {
-  return { status: 'idle' }
-}
+import { flattenVariants } from '@/lib/utils/flattenVariants'
 
-function slugify(value: string) {
-  return value
-    .toLowerCase()
-    .trim()
-    .replaceAll('æ', 'ae')
-    .replaceAll('ø', 'o')
-    .replaceAll('å', 'a')
-    .normalize('NFKD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-}
-
-function buildVariantParams(variant: ShopifyProductVariant) {
-  const params = new URLSearchParams()
-
-  for (const option of variant.selectedOptions ?? []) {
-    const key = slugify(option.name)
-    const value = slugify(option.value)
-
-    if (key && value) {
-      params.set(key, value)
-    }
-  }
-
-  return params
-}
-
-function findVariantFromReadableParams(
-  allVariants: ShopifyProductVariant[],
-  searchParams: URLSearchParams
-) {
-  return (
-    allVariants.find(variant => {
-      const selectedOptions = variant.selectedOptions ?? []
-      if (!selectedOptions.length) return false
-
-      return selectedOptions.every(option => {
-        const key = slugify(option.name)
-        const value = slugify(option.value)
-
-        return searchParams.get(key) === value
-      })
-    }) ?? null
-  )
-}
-
-function findInitialVariant(
-  allVariants: ShopifyProductVariant[],
-  initialVariantId: string | null
-) {
-  if (!allVariants.length) return null
-
-  if (initialVariantId) {
-    const fromInitialId = allVariants.find(
-      variant => variant.id === initialVariantId
-    )
-
-    if (fromInitialId) return fromInitialId
-  }
-
-  return allVariants.find(variant => variant.availableForSale) ?? allVariants[0]
-}
-
-function createInitialVariantState(
-  allVariants: ShopifyProductVariant[],
-  initialVariantId: string | null
-): VariantState {
-  const initialVariant = findInitialVariant(allVariants, initialVariantId)
-
-  return initialVariant ?
-      { status: 'selected', variant: initialVariant }
-    : { status: 'idle' }
-}
-
-const fallbackReducer = (state: VariantState) => state
+import type { ShopifyProduct } from 'types/product'
 
 export function useVariantState(
   product: ShopifyProduct | undefined,
   enableUrlSync: boolean = true,
   initialVariantId: string | null = null
 ) {
-  const allVariants = useMemo(
-    () => (product ? flattenVariants(product) || [] : []),
-    [product]
-  )
-
-  const variantReducer = useMemo(
-    () => (product ? createVariantReducer(product) : null),
-    [product]
-  )
-
-  const initialState = useMemo(
-    () => createInitialVariantState(allVariants, initialVariantId),
-    [allVariants, initialVariantId]
-  )
+  const allVariants = product ? flattenVariants(product) : []
 
   const [variantState, dispatch] = useReducer(
-    variantReducer || fallbackReducer,
-    initialState
+    variantStateReducer,
+    { allVariants, initialVariantId },
+    createInitialVariantState
   )
 
   const searchParams = useSearchParams()
@@ -121,90 +34,66 @@ export function useVariantState(
   const router = useRouter()
 
   useEffect(() => {
-    if (!product || !variantReducer || !allVariants.length) return
+    if (!product) return
 
-    let variantFromUrl: ShopifyProductVariant | null = null
+    const variants = flattenVariants(product)
+    if (!variants.length) return
 
-    if (enableUrlSync) {
-      const variantId = searchParams.get('variant')
-
-      if (variantId) {
-        variantFromUrl =
-          allVariants.find(variant => variant.id === variantId) ?? null
-      }
-
-      if (!variantFromUrl) {
-        variantFromUrl = findVariantFromReadableParams(
-          allVariants,
-          new URLSearchParams(searchParams.toString())
-        )
-      }
-    }
-
-    const fallbackVariant = findInitialVariant(allVariants, initialVariantId)
-    const nextVariant = variantFromUrl ?? fallbackVariant
+    const nextVariant = findUrlSelectedVariant({
+      variants,
+      searchParams,
+      initialVariantId,
+      enableUrlSync
+    })
 
     if (!nextVariant) return
 
-    if (
-      variantState.status === 'selected'
-      && variantState.variant.id === nextVariant.id
-    ) {
-      return
-    }
-
-    dispatch({ type: 'syncFromId', id: nextVariant.id })
-  }, [
-    allVariants,
-    enableUrlSync,
-    initialVariantId,
-    product,
-    searchParams,
-    variantReducer,
-    variantState
-  ])
+    dispatch({
+      type: 'syncFromId',
+      id: nextVariant.id,
+      variants
+    })
+  }, [enableUrlSync, initialVariantId, product, searchParams])
 
   useEffect(() => {
     if (!enableUrlSync) return
-    if (variantState.status !== 'selected' || !variantState.variant) return
+    if (variantState.status !== 'selected') return
 
-    const params = new URLSearchParams(searchParams.toString())
+    const nextUrl = createVariantUrl({
+      pathname,
+      searchParams,
+      variant: variantState.variant
+    })
 
-    params.delete('variant')
+    const currentUrl = createUrlFromPathnameAndSearchParams({
+      pathname,
+      searchParams
+    })
 
-    const nextVariantParams = buildVariantParams(variantState.variant)
+    if (currentUrl === nextUrl) return
 
-    for (const option of variantState.variant.selectedOptions ?? []) {
-      params.delete(slugify(option.name))
-    }
-
-    for (const [key, value] of nextVariantParams.entries()) {
-      params.set(key, value)
-    }
-
-    const nextQuery = params.toString()
-    const nextUrl = nextQuery.length > 0 ? `${pathname}?${nextQuery}` : pathname
-
-    const currentUrl =
-      searchParams.toString().length > 0 ?
-        `${pathname}?${searchParams.toString()}`
-      : pathname
-
-    if (currentUrl !== nextUrl) {
-      router.replace(nextUrl as Route, { scroll: false })
-    }
-  }, [variantState, pathname, router, searchParams, enableUrlSync])
+    router.replace(nextUrl as Route, { scroll: false })
+  }, [enableUrlSync, pathname, router, searchParams, variantState])
 
   function updateVariant(optionName: string, value: string) {
-    if (variantReducer) {
-      dispatch({ type: 'updateFromOptions', optionName, value })
-    }
+    if (!allVariants.length) return
+
+    dispatch({
+      type: 'updateFromOptions',
+      optionName,
+      value,
+      variants: allVariants
+    })
   }
 
   function syncVariantFromId(id: string | null) {
-    if (variantReducer) {
-      dispatch({ type: 'syncFromId', id })
-    }
+    if (!allVariants.length) return
+
+    dispatch({
+      type: 'syncFromId',
+      id,
+      variants: allVariants
+    })
   }
 
   return {

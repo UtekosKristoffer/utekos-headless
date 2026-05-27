@@ -15,8 +15,7 @@ const seasons = [
     glowColor: 'var(--mountain-view)',
     title: 'Vårcamping med',
     hasBrandTitle: true,
-    intro:
-      'Våren byr på fantastiske muligheter for bobilisten, men temperaturene kan være uforutsigbare.',
+    intro: 'Våren byr på fantastiske muligheter for bobilisten, men temperaturene kan være uforutsigbare.',
     tips: [
       'Start dagen tidlig med Utekos og kaffe for å se naturen våkne',
       'Perfekt for påskecamping i fjellet når kveldene fortsatt er kjølige',
@@ -30,8 +29,7 @@ const seasons = [
     iconColor: 'text-primary-button',
     glowColor: 'var(--primary-button)',
     title: 'Sommerkvelder med stil',
-    intro:
-      'Selv om sommeren er varm, blir kveldene ofte overraskende kjølige, spesielt ved kysten.',
+    intro: 'Selv om sommeren er varm, blir kveldene ofte overraskende kjølige, spesielt ved kysten.',
     tips: [
       'Forleng de lyse kveldene utendørs uten å pakke inn i tepper',
       'Ideell ved kysten hvor vinden kan gjøre kveldene kjølige',
@@ -45,8 +43,7 @@ const seasons = [
     iconColor: 'text-bleached-mauve',
     glowColor: 'var(--bleached-mauve)',
     title: 'Høstens fargeprakt i komfort',
-    intro:
-      'Høsten er mange bobilisters favoritt-sesong, og med Utekos kan du nyte den fullt ut.',
+    intro: 'Høsten er mange bobilisters favoritt-sesong, og med Utekos kan du nyte den fullt ut.',
     tips: [
       'Opplev de spektakulære høstfargene fra tidlig morgen til sen kveld',
       'Hold varmen under nordlys-jakt på kjølige høstkvelder',
@@ -60,8 +57,7 @@ const seasons = [
     iconColor: 'text-ancient-water',
     glowColor: 'var(--ancient-water)',
     title: 'Vintercamping for de modige',
-    intro:
-      'For de som bruker bobilen året rundt, er Utekos den ultimate følgesvennen.',
+    intro: 'For de som bruker bobilen året rundt, er Utekos den ultimate følgesvennen.',
     tips: [
       'Essensielt tilbehør for skiferier med bobil',
       'Hold varmen mens du venter på at bobilen varmes opp',
@@ -74,11 +70,7 @@ export function BobilSeasonsTabs() {
   const [activeTab, setActiveTab] = useState('spring')
 
   return (
-    <Tabs
-      defaultValue='spring'
-      className='mx-auto max-w-4xl'
-      onValueChange={setActiveTab}
-    >
+    <Tabs defaultValue='spring' className='mx-auto max-w-4xl' onValueChange={setActiveTab}>
       <TabsList className='grid w-full grid-cols-4 gap-2 bg-transparent p-1'>
         {seasons.map(season => {
           const Icon = season.icon
@@ -104,7 +96,7 @@ export function BobilSeasonsTabs() {
                   className={`size-5 transition-colors ${isActive ? 'text-maritime-darkest' : 'text-cloud-dancer/90'}`}
                 />
                 <span
-                  className={`font-brand-sans font-bold tracking-[-0.01em] transition-colors ${isActive ? 'text-maritime-darkest' : 'text-cloud-dancer/90'}`}
+                  className={`font-google-sans font-bold tracking-[-0.01em] transition-colors ${isActive ? 'text-maritime-darkest' : 'text-cloud-dancer/90'}`}
                 >
                   {season.label}
                 </span>
@@ -138,7 +130,7 @@ export function BobilSeasonsTabs() {
                     >
                       <Icon className={`size-6 ${season.iconColor}`} />
                     </div>
-                    <h3 className='font-brand-sans text-2xl font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer'>
+                    <h3 className='font-google-sans text-2xl font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer'>
                       {season.hasBrandTitle ?
                         <span className='inline-flex flex-wrap items-baseline gap-x-2'>
                           <span>{season.title}</span>

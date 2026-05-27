@@ -14,17 +14,17 @@ import { SocialProof } from '@/app/inspirasjon/hytteliv/components/SocialProof'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
-  title: 'Hytteliv og Utekos | Din guide til ultimat hyttekomfort',
+  title: 'Guide til optimal hyttekomfort med Utekos',
   description:
-    'Oppdag hvordan Utekos forvandler hytteopplevelsen. Fra kjølige morgener på terrassen til sene kvelder under stjernene – sikre deg komforten som skaper minner.',
+    'Oppdag hvordan Utekos forvandler hytteopplevelsen. Fra kjølige morgener på terrassen til sene kvelder under stjernene. Opplev komforten som skaper minner.',
   keywords: ['hytteliv', 'hyttekos', 'norsk hytte', 'utekos hytte', 'vinterhytte'],
   alternates: {
     canonical: '/inspirasjon/hytteliv'
   },
   openGraph: {
-    title: 'Hytteliv og Utekos | Forleng kveldene og øk komforten',
+    title: 'Guide til optimal hyttekomfort med Utekos',
     description:
-      'Fra soloppgang på terrassen til sene kvelder ved bålpannen – oppdag hvordan Utekos blir din beste venn på hytten.',
+      'Oppdag hvordan Utekos forvandler hytteopplevelsen. Fra kjølige morgener på terrassen til sene kvelder under stjernene.',
     url: '/inspirasjon/hytteliv',
     siteName: 'Utekos',
     images: [

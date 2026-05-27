@@ -15,14 +15,45 @@ import { formatFbcCookie } from './lib/tracking/proxy/formatFbcCookie'
 
 const SGTM_PUBLIC_ORIGIN = (process.env.SGTM_PUBLIC_ORIGIN || 'https://sgtm.utekos.no').replace(/\/$/, '')
 
+const allowedReferrers = new Set(['nbocc.no', 'bergenhordaland.nbocc.no'])
+
+const NBCC_DESTINATION_PATH = '/nbcc'
+
 const MAGASINET_UPGRADE_ENABLED = true
 const MAGASINET_UPGRADE_PATH = '/magasinet/oppgradering'
+
+function isAllowedNboccReferrer(request: NextRequest) {
+  const referer = request.headers.get('referer')
+
+  if (!referer) {
+    return false
+  }
+
+  try {
+    const refererUrl = new URL(referer)
+    const hostname = refererUrl.hostname.replace(/^www\./, '')
+
+    return allowedReferrers.has(hostname)
+  } catch {
+    return false
+  }
+}
 
 export async function proxy(request: NextRequest) {
   const context = createMiddlewareContext(request)
 
   if (context.isBlockedAgent) {
     return new NextResponse(null, { status: 403, statusText: 'Forbidden' })
+  }
+
+  // Redirect visitors from NB OCC domains from the front page to /nbcc
+  if (context.pathname === '/' && isAllowedNboccReferrer(request)) {
+    const redirectUrl = new URL(NBCC_DESTINATION_PATH, request.url)
+
+    // Optional, but recommended: preserve UTM/query params from the original link
+    redirectUrl.search = request.nextUrl.search
+
+    return NextResponse.redirect(redirectUrl, 307)
   }
 
   // Handle magasinet upgrade redirect

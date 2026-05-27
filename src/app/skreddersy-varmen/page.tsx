@@ -10,8 +10,9 @@ import { PreFooterNavigation } from './components/PreFooterNavigation'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Utekos: Skreddersy varmen',
-  description: 'Kompromissløs komfort og overlegen allsidighet. Juster, form og nyt.',
+  title: 'Skreddersy varmen med banebrytende yttertøy fra Utekos',
+  description:
+    'Utekos er en markevare som designer funksjonelle utendørsklær for Kompromissløs komfort og overlegen allsidighet. Juster, form og nyt.',
   category: 'Yttertøy',
   authors: [{ name: 'Utekos', url: 'https://utekos.no/om-oss' }],
   creator: 'Utekos',

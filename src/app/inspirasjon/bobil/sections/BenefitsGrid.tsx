@@ -53,9 +53,7 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
               <div className='mx-auto mb-4 flex size-16 items-center justify-center rounded-full border border-cloud-dancer/12 bg-maritime-darkest/24'>
                 <benefit.icon className={`size-8 ${benefit.color}`} aria-hidden />
               </div>
-              <h3 className='mb-2 font-brand-sans text-lg font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer'>
-                {benefit.title}
-              </h3>
+              <h3 className='mb-2 font-google-sans text-cloud-dancer'>{benefit.title}</h3>
               <p className='font-utekos-text text-sm leading-[1.45] tracking-[-0.02em] text-cloud-dancer/82'>
                 {benefit.description}
               </p>

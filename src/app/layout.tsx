@@ -1,5 +1,5 @@
 import '../globals.css'
-import { brandSansFontFamily, utekosText } from '@/db/config/font.config'
+import { utekosText } from '@/db/config/font.config'
 import { Suspense, type ReactNode } from 'react'
 import { WebVitalsReporter } from '@/components/analytics/WebVitalsReporter'
 import { mainMenu } from '@/db/config/menu.config'
@@ -15,6 +15,13 @@ import { MicrosoftUetTag } from '@/components/analytics/MicrosoftUetTag'
 import { GoogleTagManagerLoader } from '@/components/analytics/GoogleTagManagerLoader'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
+import { Google_Sans as GoogleSans } from 'next/font/google'
+
+// If loading a variable font, you don't need to specify the font weight
+const googleSans = GoogleSans({
+  subsets: ['latin'],
+  display: 'swap'
+})
 
 const GOOGLE_TAG_MANAGER_ID = process.env.NEXT_GOOGLE_GTM_ID || 'GTM-5TWMJQFP'
 
@@ -43,7 +50,7 @@ export const metadata: Metadata = {
     template: '%s | Utekos'
   },
   description:
-    'Opplev kompromissløs komfort og overlegen allsidighet. Gjør som tusenvis av andre livsnytere og løft utendørslivet til et nytt nivå. Juster, form og nyt',
+    'Utekos er en merkevare som designer funksjonelt yttertøy for kompromissløs komfort og overlegen allsidighet. Perfekt for hytteliv, bobilferie, telttur, i båt og terrasseliv.',
 
   alternates: {
     canonical: '/'
@@ -74,7 +81,8 @@ export const metadata: Metadata = {
     url: 'https://utekos.no',
     siteName: 'Utekos',
     title: 'Utekos - Skreddersy varmen',
-    description: 'Kompromissløs komfort. Overlegen allsidighet. Juster, form og nyt.',
+    description:
+      'Utekos er en merkevare som designer funksjonelt yttertøy for kompromissløs komfort og overlegen allsidighet. Perfekt for hytteliv, bobilferie, telttur, i båt og terrasseliv.',
     images: {
       url: 'https://utekos.no/og-kate-linn-kikkert-master.png',
       width: 1200,
@@ -102,7 +110,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang='no' className={`${brandSansFontFamily.variable} ${utekosText.variable}`}>
+    <html lang='no' className={`${googleSans.className} ${utekosText.variable}`}>
       <body className='bg-background text-cloud-dancer antialiased'>
         <WebVitalsReporter />
 

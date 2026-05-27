@@ -77,7 +77,8 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                   style={{
                     backgroundColor: theme.surface,
                     borderColor: theme.border,
-                    boxShadow: '0 24px 56px -42px color-mix(in oklch, var(--maritime-darkest) 58%, transparent)'
+                    boxShadow:
+                      '0 24px 56px -42px color-mix(in oklch, var(--maritime-darkest) 58%, transparent)'
                   }}
                 >
                   <div
@@ -108,7 +109,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                       </p>
                     </div>
                     <p
-                      className='mb-3 font-brand-sans text-sm leading-[1] tracking-[-0.01em]'
+                      className='mb-3 font-google-sans text-sm leading-[1] tracking-[-0.01em]'
                       style={{ color: 'var(--maritime-darkest)' }}
                     >
                       {useCase.time}

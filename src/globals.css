@@ -314,7 +314,6 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --font-google-sans: var(--font-google-sans);
-  --font-brand-sans: var(--font-google-sans), system-ui, sans-serif;
   --font-utekos-text: var(--font-utekos-text);
   --font-brand-text: var(--font-brand-text);
   --font-brand-heading: var(--font-brand-heading);
@@ -1014,7 +1013,7 @@
   --utekos-wordmark-color: currentColor;
   display: inline-block;
   color: var(--utekos-wordmark-color);
-  font-family: var(--font-brand-sans);
+  font-family: var(--font-google-sans);
   font-size: var(--utekos-wordmark-size);
   font-style: italic;
   font-weight: 900;
@@ -1202,11 +1201,6 @@
 
 @utility font-google-sans {
   font-family: var(--font-google-sans), system-ui, sans-serif;
-}
-
-@utility font-google-sans-bold {
-  font-family: var(--font-google-sans), system-ui, sans-serif;
-  font-weight: 700;
 }
 
 @utility font-utekos-text {

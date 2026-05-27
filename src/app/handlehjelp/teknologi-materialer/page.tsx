@@ -16,12 +16,13 @@ export const metadata: Metadata = {
   keywords: [
     'Utekos teknologi',
     'TechDown',
-    'HydroGuard',
+    'varmedress',
     'SherpaCore',
     'Vannsøyle 8000mm',
     'Varmeklær teknologi',
-    'Teknisk yttertøy',
-    '3-i-1 jakke'
+    'yttertøy',
+    'vinterdress',
+    '3-i-1 design'
   ],
   alternates: {
     canonical: '/handlehjelp/teknologi-materialer'

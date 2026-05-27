@@ -40,7 +40,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
     <section id='bruksomrader' className='bg-overcast py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-4xl text-center'>
-          <h2 className='inline-flex flex-nowrap items-baseline justify-center gap-x-[0.18em] whitespace-nowrap font-brand-sans text-fluid-display font-bold leading-[0.95] tracking-[-0.01em] text-maritime-darkest'>
+          <h2 className='inline-flex flex-nowrap items-baseline justify-center gap-x-[0.18em] whitespace-nowrap font-google-sans text-fluid-display font-bold leading-[0.95] tracking-[-0.01em] text-maritime-darkest'>
             <UtekosWordmark
               className='h-[0.9em] w-auto shrink-0 translate-y-[0.07em]'
               style={{ color: 'var(--maritime-darkest)' }}
@@ -79,7 +79,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                     </div>
                   </div>
 
-                  <h3 className='font-brand-sans mb-2 text-xl font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer'>
+                  <h3 className='font-google-sans mb-2 text-xl font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer'>
                     {useCase.title}
                   </h3>
                   <p className='font-utekos-text leading-[1.45] tracking-[-0.02em] text-cloud-dancer/90'>

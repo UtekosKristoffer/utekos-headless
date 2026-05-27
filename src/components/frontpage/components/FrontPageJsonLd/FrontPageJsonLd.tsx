@@ -100,6 +100,15 @@ export async function FrontPageJsonLd() {
     }
   }
 
+  const potentialAction = {
+    '@type': 'SearchAction',
+    'target': {
+      '@type': 'EntryPoint',
+      'urlTemplate': 'https://www.utekos.no/search?q={search_term_string}'
+    },
+    'query-input': 'required name=search_term_string'
+  }
+
   const navigationNode: SiteNavigationElement = {
     '@type': 'SiteNavigationElement',
     '@id': NAVIGATION_ID,
@@ -149,10 +158,11 @@ export async function FrontPageJsonLd() {
       'caption': 'To kvinner som koser seg utendørs på terrassen med varme komfortplagg fra Utekos.'
     },
     'significantLink': [
-      `${SITE_URL}/produkter`,
-      `${SITE_URL}/kampanje/comfyrobe`,
-      `${SITE_URL}/handlehjelp/teknologi-materialer`,
-      `${SITE_URL}/om-oss`
+      `${SITE_URL}`,
+      `${SITE_URL}/skreddersy-varmen`,
+      `${SITE_URL}/produkter/utekos-techdown`,
+      `${SITE_URL}/kontaktskjema`,
+      `${SITE_URL}/`
     ],
     ...(featuredProductItems.length > 0 ?
       {

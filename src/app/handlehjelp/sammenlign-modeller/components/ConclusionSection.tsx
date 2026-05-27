@@ -18,8 +18,8 @@ export function ConclusionSection() {
               Et trygt valg på under ett minutt
             </h2>
             <p className='mt-6 font-utekos-text text-lg leading-[1.45] tracking-tight text-maritime-blue/82 sm:text-xl'>
-              TechDown gir mest ro i skiftende vær. Dun gir mest varme per
-              gram. Mikrofiber er lettest å pakke og vaske.
+              TechDown gir mest ro i skiftende vær. Dun gir mest varme per gram. Mikrofiber er lettest å pakke
+              og vaske.
             </p>
             <div className='mt-9 flex flex-wrap gap-4'>
               <BrandBadge
@@ -27,10 +27,7 @@ export function ConclusionSection() {
                 backgroundColor='var(--primary-button)'
                 className='px-7 py-4 text-base transition-transform duration-300 hover:scale-[1.02]'
               >
-                <Link
-                  href='/produkter'
-                  data-track='SammenlignModellerConclusionAllProductsClick'
-                >
+                <Link href='/produkter' data-track='SammenlignModellerConclusionAllProductsClick'>
                   Se hele kolleksjonen
                 </Link>
               </BrandBadge>
@@ -39,17 +36,14 @@ export function ConclusionSection() {
                 backgroundColor='var(--overcast)'
                 className='px-7 py-4 text-base transition-transform duration-300 hover:scale-[1.02]'
               >
-                <Link
-                  href='/kontaktskjema'
-                  data-track='SammenlignModellerConclusionContactClick'
-                >
+                <Link href='/kontaktskjema' data-track='SammenlignModellerConclusionContactClick'>
                   Få råd fra oss
                 </Link>
               </BrandBadge>
             </div>
           </div>
 
-          <div className='divide-y divide-maritime-blue/14 border-y border-maritime-blue/14'>
+          <div data-nosnippet className='divide-y divide-maritime-blue/14 border-y border-maritime-blue/14'>
             {faqItems.map(item => (
               <details key={item.question} className='group py-6'>
                 <summary className='cursor-pointer list-none font-google-sans text-xl font-bold leading-[1.05] tracking-[-0.01em] text-maritime-blue marker:hidden'>
@@ -60,7 +54,10 @@ export function ConclusionSection() {
                     </span>
                   </span>
                 </summary>
-                <p className='mt-4 max-w-2xl font-utekos-text text-base leading-[1.45] tracking-tight text-maritime-blue/78'>
+                <p
+                  data-nosnippet
+                  className='mt-4 max-w-2xl font-utekos-text text-base leading-[1.45] tracking-tight text-maritime-blue/78'
+                >
                   {item.answer}
                 </p>
               </details>
