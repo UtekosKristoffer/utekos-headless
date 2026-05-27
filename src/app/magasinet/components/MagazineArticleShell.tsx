@@ -13,9 +13,9 @@ type MagazineArticleShellProps = {
 
 export function MagazineArticleShell({ article, children }: MagazineArticleShellProps) {
   return (
-    <main className='bg-overcast text-maritime-darkest'>
+    <article className='bg-overcast mx-auto max-w-[90%] text-maritime-darkest'>
       <div className='mx-auto w-full max-w-screen py-8 '>
-        <div className='mb-10 px-4 sm:px-6 lg:px-8'>
+        <div className='mb-10  mx-auto px-4 sm:px-6 lg:px-8'>
           <MagazineBreadcrumbs article={article} />
         </div>
 
@@ -25,6 +25,6 @@ export function MagazineArticleShell({ article, children }: MagazineArticleShell
       <div className='mx-auto w-full max-w-screen'>{children}</div>
 
       <MagazineNewsletterSection />
-    </main>
+    </article>
   )
 }
