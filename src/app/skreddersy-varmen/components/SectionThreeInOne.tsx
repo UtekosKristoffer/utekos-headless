@@ -74,7 +74,7 @@ export function SectionThreeInOne() {
               <h3 className='gsap-step-title mb-3 font-google-sans text-2xl font-bold leading-[0.92] tracking-[-0.01em] text-cloud-dancer'>
                 {step.title}
               </h3>
-              <p className='gsap-step-desc font-utekos-text text-base leading-[1.45] tracking-tight text-cloud-dancer/88'>
+              <p className='gsap-step-desc utekos-section-lead font-utekos-text text-base leading-[1.45] tracking-tight text-cloud-dancer/88'>
                 {step.description}
               </p>
             </div>

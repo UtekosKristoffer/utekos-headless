@@ -72,7 +72,7 @@ export default function ProductSpecsPage() {
               <p className='mb-4 text-sm font-bold tracking-wider text-ancient-water font-utekos-text'>
                 Maksimal isolasjon
               </p>
-              <p className='text-cloud-dancer/90 font-utekos-text leading-relaxed text-sm tracking-tight'>
+              <p className='text-cloud-dancer font-utekos-text tracking-tight'>
                 Utgangspunktet for selve utekosen. Plagget henger i full lengde som en isolerende kokong.
                 Perfekt for solveggen, hengekøyen eller lange kvelder på terrassen.
               </p>
@@ -93,7 +93,7 @@ export default function ProductSpecsPage() {
               <p className='mb-4 text-sm font-bold tracking-wider text-dusted-peri font-utekos-text'>
                 Umiddelbar mobilitet
               </p>
-              <p className='text-cloud-dancer/90 font-utekos-text leading-relaxed text-sm tracking-tight'>
+              <p className='text-cloud-dancer font-utekos-text tracking-tight'>
                 Nyter du total omfavnelse av Utekos, men må plutselig på kjøkkenet eller svare telefonen? Heis
                 opp plagget til ønsket lengde, stram snoren i livet og bli mobil på sekunder. Beveg deg trygt
                 og subbefritt – uten å miste varmen.
@@ -113,7 +113,7 @@ export default function ProductSpecsPage() {
               <p className='mb-4 text-sm font-bold tracking-wider text-cloud-dancer/90 font-utekos-text'>
                 Aktiv utendørs
               </p>
-              <p className='text-cloud-dancer/90 font-utekos-text leading-relaxed text-sm tracking-tight'>
+              <p className='text-cloud-dancer font-utekos-text tracking-tight'>
                 For turer og lengre avstander. Brett nedre del innunder seg og stram til for å forvandle
                 Utekos til en stilig parkas. Full bevegelsesfrihet med et elegant snitt.
               </p>
