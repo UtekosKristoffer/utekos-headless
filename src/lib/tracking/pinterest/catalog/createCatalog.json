@@ -1,5 +1,5 @@
 {
-      "catalog_id": "string",
+      "catalog_id": "",
       "default_locale": "string",
       "credentials": {
             "password": "string",
