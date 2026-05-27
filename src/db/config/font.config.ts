@@ -14,6 +14,6 @@ export const utekosText = localFont({
     }
   ],
   variable: '--font-utekos-text',
-  preload: true,
+  preload: false,
   display: 'swap'
 })
