@@ -10,10 +10,10 @@ import { TechDownPerfectFor } from '@/app/magasinet/utekos-techdown/TechDownPerf
 
 export function TechDownArticle() {
   return (
-    <article className='min-h-screen bg-maritime-darkest w-full  text-cloud-dancer'>
+    <article className='min-h-screen bg-maritime-darkest w-fit px-12  text-cloud-dancer'>
       <TechDownHero />
 
-      <section className='w-full mx-auto pt-12'>
+      <section className='mx-auto max-w-4xl text-left px-4 py-8 sm:px-6 lg:px-8'>
         <p className='text-lg text-cloud-dancer/90'>
           I Utekos har vi ett mål: å forlenge de gode stundene ute. Med TechDown™ introduserer vi en ny
           dimensjon av komfort – for deg som vil nyte terrassen, båtturen eller kvelden ved bålet, uansett
@@ -21,7 +21,7 @@ export function TechDownArticle() {
         </p>
       </section>
 
-      <section className='w-full mx-auto py-8'>
+      <section className='w-full mx-auto px-4 py-8'>
         <h2 className='text-3xl font-light mb-8'>Hvorfor vi skapte TechDown™</h2>
         <p className='text-cloud-dancer/90 mb-6'>
           Utekos-plaggene våre har gitt tusenvis av nordmenn uforglemmelige stunder ute. Den varme, lette og
