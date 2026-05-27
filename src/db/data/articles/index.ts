@@ -27,12 +27,11 @@ export const mockArticles: Article[] = [
   },
   {
     slug: 'hva-er-utekos',
-    title:
-      'Historien og filosofien bak Utekos: En investering i din egen hygge',
+    title: 'Historien og filosofien bak Utekos: En investering i din egen hygge',
     excerpt:
       'Utekos er mer enn bare et klesmerke. Det er en filosofi, en livsstil, og en forpliktelse til å bringe komfort og glede til dine utendørsopplevelser.',
     imageUrl: '/magasinet/bat.png',
-    category: 'Om Utekos®',
+    category: 'Om Utekos',
     date: '17. oktober 2025'
   },
   {
@@ -125,9 +124,7 @@ function parseNorwegianDate(dateString: string): string {
   const parts = dateString.replace('.', '').split(' ')
 
   if (parts.length !== 3 || !parts[0] || !parts[1] || !parts[2]) {
-    console.warn(
-      `Ugyldig datoformat funnet: "${dateString}". Bruker dagens dato som fallback.`
-    )
+    console.warn(`Ugyldig datoformat funnet: "${dateString}". Bruker dagens dato som fallback.`)
     return new Date().toISOString()
   }
   const day = parseInt(parts[0], 10)
@@ -140,9 +137,7 @@ function parseNorwegianDate(dateString: string): string {
   }
 
   // Returnerer dagens dato som en siste fallback hvis parsing feiler
-  console.warn(
-    `Klarte ikke å parse dato: "${dateString}". Bruker dagens dato som fallback.`
-  )
+  console.warn(`Klarte ikke å parse dato: "${dateString}". Bruker dagens dato som fallback.`)
   return new Date().toISOString()
 }
 

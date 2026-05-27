@@ -1,20 +1,7 @@
 import { TabsContent } from '@/components/ui/tabs'
 import { Thermometer, Wind } from 'lucide-react'
 import { CareList } from './CareList'
-
-const doItems = [
-  'Vask på skånsomt program, maks 30 °C',
-  'Bruk mildt vaskemiddel – gjerne et eget dun-vaskemiddel',
-  'Lukk glidelåser og fest borrelås før vask',
-  'Vreng plagget for å skåne ytterstoffet'
-] as const
-
-const dontItems = [
-  'Blekemidler og tøymykner',
-  'Kjemisk rens (dry clean)',
-  'Stryking direkte på ytterstoffet',
-  'Komprimert oppbevaring over tid'
-] as const
+import { DOWN_DO_ITEMS, DOWN_DONT_ITEMS } from '../constants'
 
 export function ProductCareUtekosDun() {
   return (
@@ -22,17 +9,15 @@ export function ProductCareUtekosDun() {
       value='dun'
       className='mt-8 rounded-2xl border border-maritime-darkest/10 bg-cloud-dancer/72 p-6 shadow-[0_20px_54px_-46px_color-mix(in_oklab,var(--maritime-darkest)_72%,transparent)] sm:p-8'
     >
-      <h3 className='text-2xl font-semibold tracking-tight text-maritime-darkest'>
-        Utekos Dun™
-      </h3>
+      <h3 className='text-2xl font-semibold tracking-tight text-maritime-darkest'>Utekos Dun™</h3>
       <p className='mt-3 max-w-2xl text-base font-utekos-text leading-[1.45] text-maritime-darkest/82'>
-        Skånsom behandling bevarer den luftige varmen. Dun er et naturmateriale
-        som belønner tålmodighet – og straffer hastverk.
+        Skånsom behandling bevarer den luftige varmen. Dun er et naturmateriale som belønner tålmodighet – og
+        straffer hastverk.
       </p>
 
       <div className='mt-7 grid gap-5 md:grid-cols-2'>
-        <CareList variant='do' title='Anbefalt' items={doItems} />
-        <CareList variant='dont' title='Unngå' items={dontItems} />
+        <CareList variant='do' title='Anbefalt' items={DOWN_DO_ITEMS} />
+        <CareList variant='dont' title='Unngå' items={DOWN_DONT_ITEMS} />
       </div>
 
       <div className='mt-7 rounded-2xl border border-cloud-dancer/12 bg-maritime-blue p-5 text-cloud-dancer sm:p-6'>
@@ -48,10 +33,9 @@ export function ProductCareUtekosDun() {
               Tørking er avgjørende
             </h4>
             <p className='mt-2 text-sm leading-relaxed  font-utekos-text text-cloud-dancer/90 sm:text-base'>
-              Bruk tørketrommel på lav varme med to-tre tørkeballer eller rene
-              tennisballer. Ballene gjenoppretter dunets spenst ved å løse opp
-              klumper underveis. Avbryt syklusen et par ganger og rist plagget –
-              plagget skal være 100 % gjennomtørt før det legges bort.
+              Bruk tørketrommel på lav varme med to-tre tørkeballer eller rene tennisballer. Ballene
+              gjenoppretter dunets spenst ved å løse opp klumper underveis. Avbryt syklusen et par ganger og
+              rist plagget – plagget skal være 100 % gjennomtørt før det legges bort.
             </p>
           </div>
         </div>
@@ -70,9 +54,8 @@ export function ProductCareUtekosDun() {
               Oppbevaring mellom sesongene
             </h4>
             <p className='mt-2 text-sm leading-relaxed  font-utekos-text text-maritime-darkest/82 sm:text-base'>
-              Heng plagget luftig på en stødig henger. Dunet trenger luft for å
-              bevare spensten som gir varmen. Kompresjonsposer over tid svekker
-              isolasjonsevnen.
+              Heng plagget luftig på en stødig henger. Dunet trenger luft for å bevare spensten som gir
+              varmen. Kompresjonsposer over tid svekker isolasjonsevnen.
             </p>
           </div>
         </div>

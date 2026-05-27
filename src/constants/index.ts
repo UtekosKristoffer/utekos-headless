@@ -6,37 +6,36 @@ export const TAGS = {
 }
 export const FREE_SHIPPING_THRESHOLD = 999
 
-export const SIZE_GUIDANCE: Record<string, { height: string; tips: string[] }> =
-  {
-    'Liten': {
-      height: 'Opptil 170 cm',
-      tips: [
-        'Er du lavere enn 165 cm får du en romslig og lun følelse.',
-        'Er du litt høyere får du en nettere silhuett uten overflødig volum.'
-      ]
-    },
-    'Middels': {
-      height: '170 – 180 cm',
-      tips: [
-        'Er du lavere enn 170 cm får du en romslig passform.',
-        'Ligger du i øvre sjiktet (mot 180 cm) får du en mer kroppsnær passform.'
-      ]
-    },
-    'Stor': {
-      height: '180 – 195 cm',
-      tips: [
-        'Perfekt for deg over 180 cm, eller for deg som er lavere og ønsker romslighet.',
-        'Er du over 195 cm anbefaler vi heller størrelsen Ekstra stor.'
-      ]
-    },
-    'Ekstra stor': {
-      height: '195 cm og oppover',
-      tips: [
-        'Skreddersydd for deg over 195 cm – ekstra lengde i kroppen og ermene.',
-        'Også et godt valg for deg som er lavere, men ønsker maksimal romslighet og lengde.'
-      ]
-    }
+export const SIZE_GUIDANCE: Record<string, { height: string; tips: string[] }> = {
+  'Liten': {
+    height: 'Opptil 170 cm',
+    tips: [
+      'Er du lavere enn 165 cm får du en romslig og lun følelse.',
+      'Er du litt høyere får du en nettere silhuett uten overflødig volum.'
+    ]
+  },
+  'Middels': {
+    height: '170 – 180 cm',
+    tips: [
+      'Er du lavere enn 170 cm får du en romslig passform.',
+      'Ligger du i øvre sjiktet (mot 180 cm) får du en mer kroppsnær passform.'
+    ]
+  },
+  'Stor': {
+    height: '180 – 195 cm',
+    tips: [
+      'Perfekt for deg over 180 cm, eller for deg som er lavere og ønsker romslighet.',
+      'Er du over 195 cm anbefaler vi heller størrelsen Ekstra stor.'
+    ]
+  },
+  'Ekstra stor': {
+    height: '195 cm og oppover',
+    tips: [
+      'Skreddersydd for deg over 195 cm – ekstra lengde i kroppen og ermene.',
+      'Også et godt valg for deg som er lavere, men ønsker maksimal romslighet og lengde.'
+    ]
   }
+}
 
 export const productName = 'Utekos TechDown™'
 export const productHandle = 'utekos-techdown'
@@ -124,3 +123,5 @@ export const VIDEO_URL = 'https://utekos.no/videos/TensorPix2.mp4'
 export const VIDEO_THUMBNAIL_URL = 'https://utekos.no/linn-kate-kikkert.webp'
 export const VIDEO_POSTER_URL = 'https://utekos.no/linn-kate-kikkert-960.webp'
 export const VIDEO_EMBED_URL = 'https://utekos.no/video/tensorpix'
+
+export const SITE_URL = 'https://utekos.no'

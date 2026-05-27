@@ -13,9 +13,8 @@ export async function AboutPageJsonLd() {
         '@type': 'AboutPage',
         '@id': 'https://utekos.no/om-oss/#webpage',
         'url': 'https://utekos.no/om-oss',
-        'name': 'Om Utekos® | Vår historie',
-        'description':
-          'Historien om Utekos®, vår filosofi om kompromissløs komfort, og menneskene bak merkevaren.',
+        'name': 'Utekos sin historie og løfte til deg',
+        'description': 'Drevet av kalde kvelder og et løfte om å aldri la været stoppe de gode øyeblikkene.',
         'inLanguage': 'no',
         'isPartOf': {
           '@id': 'https://utekos.no/#website' // Peker tilbake til global WebSite fra layout.tsx
@@ -40,9 +39,8 @@ export async function AboutPageJsonLd() {
         'isPartOf': {
           '@id': 'https://utekos.no/om-oss/#webpage'
         },
-        'headline': 'Historien om Utekos®',
-        'description':
-          'Historien om Utekos®, vår filosofi om kompromissløs komfort, og menneskene bak merkevaren.',
+        'headline': 'Utekos sin historie og løfte til deg',
+        'description': 'Drevet av kalde kvelder og et løfte om å aldri la været stoppe de gode øyeblikkene.',
         'author': {
           '@id': 'https://utekos.no/#organization'
         },
@@ -51,7 +49,7 @@ export async function AboutPageJsonLd() {
         },
         // LLM-spesifikke E-E-A-T signaler:
         'datePublished': '2025-10-01T08:00:00+02:00', // Starten på historien
-        'dateModified': '2026-04-01T12:00:00+02:00', // Siste oppdatering
+        'dateModified': '2026-05-26T12:00:00+02:00', // Siste oppdatering
         'mainEntityOfPage': {
           '@id': 'https://utekos.no/om-oss/#webpage'
         }

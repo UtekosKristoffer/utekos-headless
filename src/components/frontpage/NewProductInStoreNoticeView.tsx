@@ -82,12 +82,9 @@ export function NewProductInStoreNoticeView({
 
               <p className='max-w-4xl text-balance text-lg leading-relaxed font-utekos-text text-maritime-darkest/90'>
                 Nå kan du se, prøve og kjenne på vår splitter nye{' '}
-                <strong className='text-maritime-blue font-utekos-text font-bold'>
-                  Utekos TechDown™
-                </strong>{' '}
-                hos våre gode venner på Intersport Laksevåg. Ta turen innom for
-                å bli en av de første som får oppleve den neste generasjonen av
-                Utekos®!
+                <strong className='text-maritime-blue font-utekos-text font-bold'>Utekos TechDown™</strong>{' '}
+                hos våre gode venner på Intersport Laksevåg. Ta turen innom for å bli en av de første som får
+                oppleve den neste generasjonen av Utekos!
               </p>
 
               <Button

@@ -10,15 +10,14 @@ import { AboutUsHeroSection } from './components/AboutUsHeroSection'
 import { IntersportSection } from './components/IntersportSection'
 
 export const metadata: Metadata = {
-  title: 'Vår historie og løfte til deg',
+  title: 'Utekos sin historie og løfte til deg',
   description: 'Drevet av kalde kvelder og et løfte om å aldri la været stoppe de gode øyeblikkene.',
   alternates: {
     canonical: '/om-oss'
   },
   openGraph: {
-    title: 'Om Utekos® | Norsk design, kompromissløs komfort',
-    description:
-      'Fra en enkel idé om å forlenge kvelden, til en hel kolleksjon av varme komfortplagg. Bli kjent med oss.',
+    title: 'Utekos sin historie og løfte til deg',
+    description: 'Drevet av kalde kvelder og et løfte om å aldri la været stoppe de gode øyeblikkene.',
     url: '/om-oss',
     siteName: 'Utekos',
     locale: 'no_NO',

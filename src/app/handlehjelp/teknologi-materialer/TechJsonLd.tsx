@@ -1,14 +1,16 @@
 import { cacheLife, cacheTag } from 'next/cache'
-import type { Article, BreadcrumbList, FAQPage, Graph, WebPage } from 'schema-dts'
+import { SITE_URL } from '@/constants'
+import {
+  BREADCRUMB_ID,
+  FAQ_ID,
+  ARTICLE_ID,
+  WEBPAGE_ID,
+  WEBSITE_ID,
+  PAGE_URL,
+  ORGANIZATION_ID
+} from '@/app/handlehjelp/teknologi-materialer/constants'
 
-const SITE_URL = 'https://utekos.no'
-const PAGE_URL = `${SITE_URL}/handlehjelp/teknologi-materialer`
-const WEBSITE_ID = `${SITE_URL}/#website`
-const ORGANIZATION_ID = `${SITE_URL}/#organization`
-const WEBPAGE_ID = `${PAGE_URL}#webpage`
-const BREADCRUMB_ID = `${PAGE_URL}#breadcrumb`
-const ARTICLE_ID = `${PAGE_URL}#article`
-const FAQ_ID = `${PAGE_URL}#faq`
+import type { Article, BreadcrumbList, FAQPage, Graph, WebPage } from 'schema-dts'
 
 export async function TechJsonLd() {
   'use cache'

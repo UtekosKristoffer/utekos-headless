@@ -24,7 +24,7 @@ function CategoryBadge({ category }: { category: string }) {
   const Icon =
     {
       'Tips og råd': Lightbulb,
-      'Om Utekos®': Sparkles,
+      'Om Utekos': Sparkles,
       'Hytteliv': House,
       'Terrasseliv': Sun,
       'Bobilliv': BusFront,

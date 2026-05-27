@@ -11,9 +11,8 @@ import { ProductSpecPageHeader } from './layout/ProductSpecPageHeader'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 
 export const metadata: Metadata = {
-  title: 'Teknologi & Materialer | Utekos® - Varme, Kvalitet og Innovasjon',
-  description:
-    'Utforsk teknologien bak Utekos®: Fra hydrofobisk TechDown™ og vanntett HydroGuard™ (8000mm) til vårt unike 3-i-1 system. Skreddersydd for nordiske forhold.',
+  title: 'Teknologi og materialer',
+  description: 'Utforsk teknologien bak Utekos',
   keywords: [
     'Utekos teknologi',
     'TechDown',
@@ -30,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Teknologi & Materialer | Vitenskapen bak din komfort',
     description:
-      'Lær om de unike materialene som gjør Utekos® til det ultimate valget for nordisk vær. Se hvordan TechDown™ og HydroGuard™ fungerer.',
+      'Lær om de unike materialene som gjør Utekos til det ultimate valget for nordisk vær. Se hvordan TechDown™ og HydroGuard™ fungerer.',
     url: '/handlehjelp/teknologi-materialer',
     siteName: 'Utekos',
     locale: 'no_NO',
@@ -46,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Teknologi & Materialer | Utekos®',
+    title: 'Teknologi og materialer',
     description: 'Oppdag teknologien som holder deg varm. TechDown™, HydroGuard™ og mer.',
     images: ['https://utekos.no/og-kate-linn-kikkert-master.png'] // Samme bilde som OG
   }

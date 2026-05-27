@@ -1,9 +1,9 @@
 // Path: src/app/handlehjelp/vask-og-vedlikehold/page.tsx
 import type { Metadata } from 'next'
-import { ProductCareHeader } from './sections/ProductCareHeader'
-import { ProductCareGeneralGuide } from '@/app/handlehjelp/vask-og-vedlikehold/sections/ProductCareGeneralGuide'
-import { ProductCareBody } from './sections/ProductCareBody'
-import { ProductCareFaq } from '@/app/handlehjelp/vask-og-vedlikehold/sections/ProductCareFAQ'
+import { ProductCareHeader } from './components/ProductCareHeader'
+import { ProductCareGeneralGuide } from '@/app/handlehjelp/vask-og-vedlikehold/components/ProductCareGeneralGuide'
+import { ProductCareBody } from './components/ProductCareBody'
+import { ProductCareFaq } from '@/app/handlehjelp/vask-og-vedlikehold/components/ProductCareFAQ'
 
 export const metadata: Metadata = {
   title: 'Vedlikehold av Utekos | Slik bevarer du varmen i mange år',
@@ -33,13 +33,13 @@ export const metadata: Metadata = {
 
 export default function ProductCarePage() {
   return (
-    <section className='bg-overcast text-maritime-darkest'>
-      <article className='container mx-auto px-4 py-12 sm:py-16'>
+    <article className='bg-overcast text-maritime-darkest'>
+      <section className='container mx-auto px-4 py-12 sm:py-16'>
         <ProductCareHeader />
         <ProductCareGeneralGuide />
         <ProductCareBody />
         <ProductCareFaq />
-      </article>
-    </section>
+      </section>
+    </article>
   )
 }

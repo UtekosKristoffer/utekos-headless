@@ -1,4 +1,4 @@
-import { Suspense, Activity } from 'react'
+import { Suspense } from 'react'
 import {
   LazyNewProductInStoreNotice,
   LazyNewStandardSection,
@@ -17,30 +17,22 @@ import { FeaturedProductsSection } from '@/components/frontpage/FeaturedProductS
 
 const HomePage = () => {
   return (
-    <section>
+    <article>
       <HeroSection />
 
-      <Activity>
-        <Suspense fallback={null}>
-          <AsyncProductLaunchWrapper />
-        </Suspense>
-      </Activity>
+      <Suspense fallback={null}>
+        <AsyncProductLaunchWrapper />
+      </Suspense>
 
       <LazyNewProductInStoreNotice />
 
-      <Activity mode='visible'>
-        <ProductVideoSection />
-      </Activity>
+      <ProductVideoSection />
 
-      <Activity>
-        <Suspense fallback={<FeaturedProductsSkeleton />}>
-          <FeaturedProductsSection />
-        </Suspense>
-      </Activity>
+      <Suspense fallback={<FeaturedProductsSkeleton />}>
+        <FeaturedProductsSection />
+      </Suspense>
 
-      <Activity>
-        <SocialProofSection />
-      </Activity>
+      <SocialProofSection />
 
       <ComfyrobeSection />
       <LazyNewStandardSection />
@@ -48,10 +40,8 @@ const HomePage = () => {
       <MomentsSection />
       <QualitySection />
 
-      <Activity>
-        <LazyTestimonialConstellation />
-      </Activity>
-    </section>
+      <LazyTestimonialConstellation />
+    </article>
   )
 }
 

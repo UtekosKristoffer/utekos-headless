@@ -1,15 +1,5 @@
-export type Technology = {
-  readonly icon: any
-  readonly title: string
-  readonly iconColor: string
-  readonly content: string
-  readonly products: readonly string[]
-}
-
-export type TechnologyGroup = {
-  readonly groupTitle: string
-  readonly technologies: readonly Technology[]
-}
+// Path: src/app/handlehjelp/teknologi-materialer/config.ts
+import type { TechnologyGroup } from './types'
 
 export const technologyGroups: readonly TechnologyGroup[] = [
   {

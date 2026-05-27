@@ -1,12 +1,7 @@
 import { cacheLife, cacheTag } from 'next/cache'
+import { SITE_URL } from '@/constants'
+import { WEBSITE_ID, ORGANIZATION_ID, PAGE_URL, WEBPAGE_ID, BREADCRUMB_ID } from '../constants'
 import type { BreadcrumbList, Graph, WebPage } from 'schema-dts'
-
-const SITE_URL = 'https://utekos.no'
-const PAGE_URL = `${SITE_URL}/handlehjelp/funksjonalitet`
-const WEBSITE_ID = `${SITE_URL}/#website`
-const ORGANIZATION_ID = `${SITE_URL}/#organization`
-const WEBPAGE_ID = `${PAGE_URL}#webpage`
-const BREADCRUMB_ID = `${PAGE_URL}#breadcrumb`
 
 export async function FunctionalityJsonLd() {
   'use cache'

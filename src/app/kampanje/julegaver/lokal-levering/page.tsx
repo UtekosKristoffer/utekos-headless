@@ -2,15 +2,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import {
-  ArrowRight,
-  Gift,
-  Calendar,
-  ShieldCheck,
-  Truck,
-  Car,
-  CreditCard
-} from 'lucide-react'
+import { ArrowRight, Gift, Calendar, ShieldCheck, Truck, Car, CreditCard } from 'lucide-react'
 import { SantaHat } from '@/components/ui/santahat'
 import { connection } from 'next/server'
 import { CampaignPageTracker } from '@/components/analytics/CampaignPageTracker'
@@ -40,8 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Julegaver | Utekos',
-    description:
-      'Finn de varmeste julegavene hos Utekos. TechDown, Comfyrobe, Dun og Mikrofiber.',
+    description: 'Finn de varmeste julegavene hos Utekos. TechDown, Comfyrobe, Dun og Mikrofiber.',
     images: ['https://utekos.no/linn-kate-kikkert-master.png']
   }
 }
@@ -55,14 +46,12 @@ export default async function ChristmasLocalDelivery() {
           {/* Badge for lokal tilhørighet */}
           <div className='inline-flex items-center gap-2 rounded-full border border-red-800/50 bg-red-900/20 px-4 py-1.5 backdrop-blur-sm'>
             <Gift className='h-4 w-4 text-red-200' />
-            <span className='text-sm font-medium text-red-100'>
-              Gi bort funksjonell varme
-            </span>
+            <span className='text-sm font-medium text-red-100'>Gi bort funksjonell varme</span>
           </div>
 
           <h1 className='mt-8 text-4xl font-bold tracking-tight text-foreground sm:text-6xl'>
             <span className='relative inline-block'>
-              Utekos® leverer julegavene
+              Utekos leverer julegavene
               <SantaHat className='absolute -left-6 -top-8 h-16 w-16 -rotate-12 drop-shadow-xl md:-left-8 md:-top-10 md:h-20 md:w-20' />
             </span>
             <span className='block bg-gradient-to-r from-red-200 via-white to-red-200 bg-clip-text text-transparent'>
@@ -71,8 +60,8 @@ export default async function ChristmasLocalDelivery() {
           </h1>
 
           <p className='mx-auto mt-6 max-w-2xl text-lg text-article-white'>
-            Klikk og hent eller få levert bestillingen hjem. Vi kjører ut
-            julegaver helt frem til julaften! <br className='hidden sm:block' />
+            Klikk og hent eller få levert bestillingen hjem. Vi kjører ut julegaver helt frem til julaften!{' '}
+            <br className='hidden sm:block' />
           </p>
 
           <div className='mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row'>
@@ -98,12 +87,8 @@ export default async function ChristmasLocalDelivery() {
                 <Car className='h-6 w-6 text-red-400' />
               </div>
               <div>
-                <h3 className='font-semibold text-foreground'>
-                  Lokal hjemlevering
-                </h3>
-                <p className='text-sm text-article-white'>
-                  Daglig utkjøring av julegaver i Bergens-området.
-                </p>
+                <h3 className='font-semibold text-foreground'>Lokal hjemlevering</h3>
+                <p className='text-sm text-article-white'>Daglig utkjøring av julegaver i Bergens-området.</p>
               </div>
             </div>
 
@@ -113,12 +98,8 @@ export default async function ChristmasLocalDelivery() {
                 <ShieldCheck className='h-6 w-6 text-red-400' />
               </div>
               <div>
-                <h3 className='font-semibold text-foreground'>
-                  Utvidet bytterett
-                </h3>
-                <p className='text-sm text-article-white'>
-                  Bytt gaver frem til 15. januar.
-                </p>
+                <h3 className='font-semibold text-foreground'>Utvidet bytterett</h3>
+                <p className='text-sm text-article-white'>Bytt gaver frem til 15. januar.</p>
               </div>
             </div>
 
@@ -127,12 +108,8 @@ export default async function ChristmasLocalDelivery() {
                 <CreditCard className='h-6 w-6 text-red-400' />
               </div>
               <div>
-                <h3 className='font-semibold text-foreground'>
-                  Sikker betaling
-                </h3>
-                <p className='text-sm text-article-white'>
-                  Betal trygt med Vipps eller Klarna.
-                </p>
+                <h3 className='font-semibold text-foreground'>Sikker betaling</h3>
+                <p className='text-sm text-article-white'>Betal trygt med Vipps eller Klarna.</p>
               </div>
             </div>
           </div>
@@ -143,12 +120,8 @@ export default async function ChristmasLocalDelivery() {
       <section className='container mx-auto mt-12 px-4'>
         <div className='rounded-2xl border border-red-900/50 bg-red-950/20 p-6 md:p-10'>
           <div className='text-center'>
-            <h3 className='text-2xl font-bold text-red-200'>
-              Slik fungerer julegave-ekspressen:
-            </h3>
-            <p className='mt-2 text-sm text-article-white/80'>
-              Vi kjører ut gaver helt frem til julaften 🎅
-            </p>
+            <h3 className='text-2xl font-bold text-red-200'>Slik fungerer julegave-ekspressen:</h3>
+            <p className='mt-2 text-sm text-article-white/80'>Vi kjører ut gaver helt frem til julaften 🎅</p>
           </div>
 
           <div className='mt-8 grid gap-8 md:grid-cols-3'>
@@ -167,13 +140,10 @@ export default async function ChristmasLocalDelivery() {
               <div className='mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-red-800 text-lg font-bold text-white shadow-lg shadow-red-900/50'>
                 2
               </div>
-              <h4 className='font-semibold text-white'>
-                Fyll inn adressen din
-              </h4>
+              <h4 className='font-semibold text-white'>Fyll inn adressen din</h4>
               <p className='mt-2 text-sm text-article-white'>
-                Valget <strong className='text-red-200'>Lokal levering</strong>{' '}
-                dukker opp automatisk <em>etter</em> at du har skrevet inn
-                adressen din i kassen.
+                Valget <strong className='text-red-200'>Lokal levering</strong> dukker opp automatisk{' '}
+                <em>etter</em> at du har skrevet inn adressen din i kassen.
               </p>
             </div>
 
@@ -181,12 +151,9 @@ export default async function ChristmasLocalDelivery() {
               <div className='mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-red-800 text-lg font-bold text-white shadow-lg shadow-red-900/50'>
                 3
               </div>
-              <h4 className='font-semibold text-white'>
-                Skreddersydd levering?
-              </h4>
+              <h4 className='font-semibold text-white'>Skreddersydd levering?</h4>
               <p className='mt-2 text-sm text-article-white'>
-                Legg ved leveringsinstruksjon i kassen. Vi tar kontakt før
-                utkjøring.
+                Legg ved leveringsinstruksjon i kassen. Vi tar kontakt før utkjøring.
               </p>
             </div>
           </div>
@@ -220,14 +187,11 @@ export default async function ChristmasLocalDelivery() {
             <div className='p-6'>
               <h3 className='text-2xl font-bold'>Utekos TechDown™</h3>
               <p className='mt-2 text-article-white'>
-                Nyhet: Vår varmeste mest allsidige modell. Optimalisert etter
-                erfaringer og tilbakemeldinger.
+                Nyhet: Vår varmeste mest allsidige modell. Optimalisert etter erfaringer og tilbakemeldinger.
               </p>
               <div className='mt-4 flex items-baseline gap-3'>
                 <span className='text-xl font-bold text-red-400'>1 790 kr</span>
-                <span className='text-sm text-article-white line-through'>
-                  1 999 kr
-                </span>
+                <span className='text-sm text-article-white line-through'>1 999 kr</span>
               </div>
               <Link
                 href='/produkter/utekos-techdown'
@@ -256,16 +220,11 @@ export default async function ChristmasLocalDelivery() {
             <div className='p-6'>
               <h3 className='text-2xl font-bold'>Utekos Mikrofiber™</h3>
               <p className='mt-2 text-article-white'>
-                Lettvekt møter varme og allsidighet. Gir deg følelsen av dun med
-                ekstra fordeler.
+                Lettvekt møter varme og allsidighet. Gir deg følelsen av dun med ekstra fordeler.
               </p>
               <div className='mt-4 flex items-baseline gap-3'>
-                <span className='text-xl font-bold text-foreground'>
-                  1 590 kr
-                </span>
-                <span className='text-sm text-article-white line-through'>
-                  2 290 kr
-                </span>
+                <span className='text-xl font-bold text-foreground'>1 590 kr</span>
+                <span className='text-sm text-article-white line-through'>2 290 kr</span>
               </div>
               <Link
                 href='/produkter/utekos-mikrofiber'
@@ -293,16 +252,10 @@ export default async function ChristmasLocalDelivery() {
 
             <div className='p-6'>
               <h3 className='text-2xl font-bold'>Utekos Dun™</h3>
-              <p className='mt-2 text-article-white'>
-                Klassisk dun-kvalitet for de kaldeste dagene.
-              </p>
+              <p className='mt-2 text-article-white'>Klassisk dun-kvalitet for de kaldeste dagene.</p>
               <div className='mt-4 flex items-baseline gap-3'>
-                <span className='text-xl font-bold text-foreground'>
-                  1 990 kr
-                </span>
-                <span className='text-sm text-article-white line-through'>
-                  3 290 kr
-                </span>
+                <span className='text-xl font-bold text-foreground'>1 990 kr</span>
+                <span className='text-sm text-article-white line-through'>3 290 kr</span>
               </div>
               <Link
                 href='/produkter/utekos-dun'
@@ -334,12 +287,8 @@ export default async function ChristmasLocalDelivery() {
                 Den ultimate skifteroben. Vindtett, vanntett og foret.
               </p>
               <div className='mt-4 flex items-baseline gap-3'>
-                <span className='text-xl font-bold text-foreground'>
-                  1 290 kr
-                </span>
-                <span className='text-sm text-article-white line-through'>
-                  1 690 kr
-                </span>
+                <span className='text-xl font-bold text-foreground'>1 290 kr</span>
+                <span className='text-sm text-article-white line-through'>1 690 kr</span>
               </div>
               <Link
                 href='/produkter/comfyrobe'
@@ -354,18 +303,14 @@ export default async function ChristmasLocalDelivery() {
 
       <section className='container mx-auto mt-24 px-4 mb-6'>
         <div className='mb-12 text-center'>
-          <h2 className='text-3xl font-bold'>
-            Sjekk om du kan få levering på døren
-          </h2>
+          <h2 className='text-3xl font-bold'>Sjekk om du kan få levering på døren</h2>
           <p className='mt-2 text-article-white'>
-            Fyll inn adressen din i kassen. Dukker valget{' '}
-            <em>Lokal levering</em> opp? Da kan du lene deg tilbake – vi fikser
-            resten!
+            Fyll inn adressen din i kassen. Dukker valget <em>Lokal levering</em> opp? Da kan du lene deg
+            tilbake – vi fikser resten!
           </p>
           {/* Ny linje for henting lagt til her */}
           <p className='mt-1 text-article-white'>
-            Vi tilbyr også <strong>henting hver dag mellom kl. 08-21</strong>{' '}
-            frem til lille julaften.
+            Vi tilbyr også <strong>henting hver dag mellom kl. 08-21</strong> frem til lille julaften.
           </p>
         </div>
 
@@ -378,9 +323,7 @@ export default async function ChristmasLocalDelivery() {
               <Gift className='h-8 w-8 text-red-400' />
             </div>
             <h3 className='text-lg font-semibold'>Lær mer</h3>
-            <p className='text-sm text-article-white'>
-              Lær mer om funksjonaliteten.
-            </p>
+            <p className='text-sm text-article-white'>Lær mer om funksjonaliteten.</p>
           </Link>
 
           <Link
@@ -402,9 +345,7 @@ export default async function ChristmasLocalDelivery() {
               <Calendar className='h-8 w-8 text-green-400' />
             </div>
             <h3 className='text-lg font-semibold'>Usikker på størrelse?</h3>
-            <p className='text-sm text-article-white'>
-              Se vår størrelsesguide og tips.
-            </p>
+            <p className='text-sm text-article-white'>Se vår størrelsesguide og tips.</p>
           </Link>
         </div>
       </section>
