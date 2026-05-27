@@ -37,12 +37,9 @@ const SmartRealTimeActivity = dynamic(
 )
 
 const ProductGallery = dynamic(
-  () =>
-    import('@/components/jsx/ProductGallery').then(mod => mod.ProductGallery),
+  () => import('@/components/jsx/ProductGallery').then(mod => mod.ProductGallery),
   {
-    loading: () => (
-      <div className='relative aspect-[2/3] w-full overflow-hidden rounded-lg' />
-    ),
+    loading: () => <div className='relative aspect-[2/3] w-full overflow-hidden rounded-lg' />,
     ssr: false
   }
 )
@@ -151,37 +148,28 @@ export function ProductPageView({
   relatedProducts,
   colorHexMap
 }: ProductPageViewProps) {
-  const [additionalLine] = useState<
-    { variantId: string; quantity: number } | undefined
-  >(undefined)
+  const [additionalLine] = useState<{ variantId: string; quantity: number } | undefined>(undefined)
 
   const { title, options } = productData
   const selectedVariantProfile = selectedVariant.variantProfileData
   const productSubtitle =
-    typeof selectedVariantProfile?.subtitle === 'string' ?
-      selectedVariantProfile.subtitle
-    : undefined
+    typeof selectedVariantProfile?.subtitle === 'string' ? selectedVariantProfile.subtitle : undefined
 
   const optionOrderPreference = ['Størrelse', 'Farge']
   const sortedProductOptions = getSortedOptions(options, optionOrderPreference)
 
   const currentProductMetadata = productMetadata[productData.handle]
   const productDescriptionHtml =
-    (selectedVariantProfile?.description?.value as string | undefined)
-    ?? undefined
+    (selectedVariantProfile?.description?.value as string | undefined) ?? undefined
 
   const activityNode =
     currentProductMetadata?.showActivity ?
-      <SmartRealTimeActivity
-        baseViewers={currentProductMetadata.baseViewers ?? 3}
-      />
+      <SmartRealTimeActivity baseViewers={currentProductMetadata.baseViewers ?? 3} />
     : undefined
 
   const quantity = productData.totalInventory ?? 0
-  const limitedStockCount =
-    quantity > 0 && quantity < STOCK_THRESHOLD ? quantity : undefined
-  const galleryImageOverride =
-    PRODUCT_GALLERY_IMAGE_OVERRIDES[productData.handle]
+  const limitedStockCount = quantity > 0 && quantity < STOCK_THRESHOLD ? quantity : undefined
+  const galleryImageOverride = PRODUCT_GALLERY_IMAGE_OVERRIDES[productData.handle]
   const galleryImages =
     galleryImageOverride
     ?? variantImages.map((image: Image) => ({
@@ -200,32 +188,23 @@ export function ProductPageView({
       </div>
 
       <div className='container mx-auto px-4 md:px-8'>
-        <AnimatedBlock
-          className='will-animate-fade-in-up'
-          delay='0s'
-          threshold={0.2}
-        >
+        <AnimatedBlock className='will-animate-fade-in-up' delay='0s' threshold={0.2}>
           <Breadcrumb className='mb-8 text-maritime-blue/68'>
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink href='/' className='hover:text-maritime-blue'>
-                  Hjem
+                  Forside
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink
-                  href='/produkter'
-                  className='hover:text-maritime-blue'
-                >
+                <BreadcrumbLink href='/produkter' className='hover:text-maritime-blue'>
                   Produkter
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage className='text-maritime-blue'>
-                  {productData.title}
-                </BreadcrumbPage>
+                <BreadcrumbPage className='text-maritime-blue'>{productData.title}</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -247,9 +226,7 @@ export function ProductPageView({
                   </div>
                 }
                 hasIntegratedBackground={!!galleryImageOverride}
-                integratedBackgroundSize={
-                  productData.handle === 'utekos-stapper' ? 'compact' : 'wide'
-                }
+                integratedBackgroundSize={productData.handle === 'utekos-stapper' ? 'compact' : 'wide'}
                 enableStickyOnDesktop
                 stickyTopClassName='md:top-32 md:mt-4 lg:top-28 lg:mt-6'
                 ariaLabel='Produktgalleri'
@@ -279,16 +256,15 @@ export function ProductPageView({
                   Produktvalg
                 </h2>
                 <div className='mt-8 flex flex-col gap-8'>
-                  {sortedProductOptions.map(
-                    (productOption: ShopifyProduct['options'][number]) =>
-                      renderOptionComponent({
-                        option: productOption,
-                        allVariants,
-                        selectedVariant,
-                        onOptionChange,
-                        colorHexMap,
-                        productHandle: productData.handle
-                      })
+                  {sortedProductOptions.map((productOption: ShopifyProduct['options'][number]) =>
+                    renderOptionComponent({
+                      option: productOption,
+                      allVariants,
+                      selectedVariant,
+                      onOptionChange,
+                      colorHexMap,
+                      productHandle: productData.handle
+                    })
                   )}
                 </div>
                 <TrustSignals />
@@ -310,9 +286,7 @@ export function ProductPageView({
 
         <div className='mt-16 sm:mt-24'></div>
         <ProductPageAccordion variantProfile={selectedVariantProfile} />
-        {relatedProducts && relatedProducts.length > 0 && (
-          <RelatedProducts products={relatedProducts} />
-        )}
+        {relatedProducts && relatedProducts.length > 0 && <RelatedProducts products={relatedProducts} />}
       </div>
     </section>
   )

@@ -12,88 +12,60 @@ import { Activity } from 'react'
 export function TechDownArticle() {
   return (
     <article className='min-h-screen bg-black text-white'>
-      {/* Hero Section */}
-      <Activity>
-        <TechDownHero />
-      </Activity>
+      <TechDownHero />
 
-      {/* Intro */}
-      <Activity>
-        <section className='max-w-4xl mx-auto px-6 pt-12'>
-          <p className='text-lg text-gray-300 leading-relaxed'>
-            I Utekos har vi ett mål: å forlenge de gode stundene ute. Med
-            TechDown™ introduserer vi en ny dimensjon av komfort – for deg som
-            vil nyte terrassen, båtturen eller kvelden ved bålet, uansett vær.
-          </p>
-        </section>
-      </Activity>
+      <section className='max-w-4xl mx-auto px-6 pt-12'>
+        <p className='text-lg text-gray-300 leading-relaxed'>
+          I Utekos har vi ett mål: å forlenge de gode stundene ute. Med TechDown™ introduserer vi en ny
+          dimensjon av komfort – for deg som vil nyte terrassen, båtturen eller kvelden ved bålet, uansett
+          vær.
+        </p>
+      </section>
 
-      {/* Why Section */}
-      <Activity>
-        <section className='max-w-4xl mx-auto px-6 py-8'>
-          <h2 className='text-3xl font-light mb-8'>
-            Hvorfor vi skapte TechDown™
-          </h2>
-          <p className='text-gray-300 leading-relaxed mb-6'>
-            Utekos-plaggene våre har gitt tusenvis av nordmenn uforglemmelige
-            stunder ute. Den varme, lette og luftige komforten er uvurderlig når
-            været byr på motstand. Etter år med tilbakemeldinger og egne
-            erfaringer har vi finjustert hver detalj.
-          </p>
-          <p className='text-gray-300 leading-relaxed'>
-            TechDown™ er resultatet: samme herlige komfort, med ekstra trygghet
-            når været skifter. Vi har forbedret passformen, tatt i bruk nye
-            materialer og teknologier, og økt allsidigheten. Dette er plagget du
-            alltid kan stole på.
-          </p>
-        </section>
-      </Activity>
-      <Activity>
-        <TechDownFeatures />
-      </Activity>
-      <Activity>
-        <TechDownInfographic />
-      </Activity>
+      <section className='max-w-4xl mx-auto px-6 py-8'>
+        <h2 className='text-3xl font-light mb-8'>Hvorfor vi skapte TechDown™</h2>
+        <p className='text-gray-300 leading-relaxed mb-6'>
+          Utekos-plaggene våre har gitt tusenvis av nordmenn uforglemmelige stunder ute. Den varme, lette og
+          luftige komforten er uvurderlig når været byr på motstand. Etter år med tilbakemeldinger og egne
+          erfaringer har vi finjustert hver detalj.
+        </p>
+        <p className='text-gray-300 leading-relaxed'>
+          TechDown™ er resultatet: samme herlige komfort, med ekstra trygghet når været skifter. Vi har
+          forbedret passformen, tatt i bruk nye materialer og teknologier, og økt allsidigheten. Dette er
+          plagget du alltid kan stole på.
+        </p>
+      </section>
 
-      <Activity>
-        <TechDownUseCases />
-      </Activity>
-      <Activity>
-        <TechDownComparison />
-      </Activity>
+      <TechDownFeatures />
 
-      <Activity>
-        <section className='relative w-max-7xl size-full mx-auto mb-0 mt-16'>
-          <Image
-            src='/magasinet/helene-2.png'
-            alt='TechDown i bruk på terrassen'
-            fill
-            className='object-cover'
-            sizes='100vw'
-            priority={false}
-          />
-        </section>
-      </Activity>
+      <TechDownInfographic />
 
-      <Activity>
-        <div className='container mx-auto px-4'>
-          <div className='relative pb-10 sm:pb-24'>
-            <div
-              className='absolute inset-0 flex items-center'
-              aria-hidden='true'
-            >
-              <div className='w-[85%] mx-auto border-t border-neutral-800' />
-            </div>
+      <TechDownUseCases />
+
+      <TechDownComparison />
+
+      <section className='relative w-max-7xl size-full mx-auto mb-0 mt-16'>
+        <Image
+          src='/magasinet/helene-2.png'
+          alt='TechDown i bruk på terrassen'
+          fill
+          className='object-cover'
+          sizes='100vw'
+          priority={false}
+        />
+      </section>
+
+      <div className='container mx-auto px-4'>
+        <div className='relative pb-10 sm:pb-24'>
+          <div className='absolute inset-0 flex items-center' aria-hidden='true'>
+            <div className='w-[85%] mx-auto border-t border-neutral-800' />
           </div>
         </div>
-      </Activity>
-      <Activity>
-        <TechDownPerfectFor />
-      </Activity>
+      </div>
 
-      <Activity>
-        <TechDownCTA />
-      </Activity>
+      <TechDownPerfectFor />
+
+      <TechDownCTA />
     </article>
   )
 }

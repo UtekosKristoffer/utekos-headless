@@ -29,7 +29,7 @@ export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) 
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link href='/'>Hjem</Link>
+                    <Link href='/'>Forsiden</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
@@ -48,8 +48,8 @@ export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) 
             <div className='mb-12 text-center'>
               <h2 className='mb-4 text-maritime-darkest'>Mer inspirasjon for dine øyeblikk</h2>
               <p className='mx-auto max-w-2xl utekos-section-lead text-maritime-blue'>
-                Finn ideer til situasjoner der komfort møter norsk natur. Se hvordan små grep gjør uteøyeblikkene
-                varmere.
+                Finn ideer til situasjoner der komfort møter norsk natur. Se hvordan små grep gjør
+                uteøyeblikkene varmere.
               </p>
             </div>
             <div className='grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5'>
@@ -61,7 +61,8 @@ export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) 
                       {
                         '--inspiration-card-bg': page.color,
                         '--inspiration-card-mid': page.midColor,
-                        '--inspiration-card-text': pageIndex >= 3 ? 'var(--cloud-dancer)' : 'var(--maritime-darkest)',
+                        '--inspiration-card-text':
+                          pageIndex >= 3 ? 'var(--cloud-dancer)' : 'var(--maritime-darkest)',
                         '--inspiration-card-muted':
                           pageIndex >= 3 ?
                             'color-mix(in oklab, var(--cloud-dancer) 78%, transparent)'
@@ -70,7 +71,8 @@ export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) 
                           pageIndex >= 3 ?
                             'color-mix(in oklab, var(--cloud-dancer) 24%, transparent)'
                           : 'color-mix(in oklab, var(--maritime-darkest) 18%, transparent)',
-                        '--inspiration-icon-default': pageIndex === 0 ? 'var(--maritime-darkest)' : page.color,
+                        '--inspiration-icon-default':
+                          pageIndex === 0 ? 'var(--maritime-darkest)' : page.color,
                         '--inspiration-icon-hover': pageIndex === 0 ? page.color : 'var(--maritime-darkest)'
                       } as CSSProperties
                     }
@@ -85,7 +87,8 @@ export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) 
                     <div
                       className='pointer-events-none absolute inset-x-0 top-0 h-px'
                       style={{
-                        background: 'linear-gradient(90deg, transparent, var(--inspiration-card-border), transparent)'
+                        background:
+                          'linear-gradient(90deg, transparent, var(--inspiration-card-border), transparent)'
                       }}
                     />
                     <div className='relative'>

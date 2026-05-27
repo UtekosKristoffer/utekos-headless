@@ -43,27 +43,15 @@ export function TechDownHero() {
         '-=1.5'
       )
 
-      tl.fromTo(
-        '.gsap-line',
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.8, ease: 'expo.out' },
-        '-=0.8'
-      )
+      tl.fromTo('.gsap-line', { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: 'expo.out' }, '-=0.8')
 
-      tl.to(
-        '.gsap-highlight',
-        { scaleX: 1, duration: 1, ease: 'circ.out' },
-        '-=0.6'
-      )
+      tl.to('.gsap-highlight', { scaleX: 1, duration: 1, ease: 'circ.out' }, '-=0.6')
     },
     { scope: containerRef }
   )
 
   return (
-    <section
-      ref={containerRef}
-      className='relative mx-auto mt-8 w-full max-w-5xl px-4 md:px-0'
-    >
+    <header ref={containerRef} className='relative mx-auto mt-8 w-full max-w-5xl px-4 md:px-0'>
       <div className='relative h-[70vh] w-full overflow-hidden rounded-3xl shadow-2xl md:h-[80vh]'>
         <div className='absolute inset-0 z-0 h-[120%] w-full'>
           <Image
@@ -83,9 +71,7 @@ export function TechDownHero() {
         <div className='gsap-content-wrapper absolute bottom-0 left-0 z-10 w-full p-8 opacity-0 md:p-16'>
           <div className='max-w-xl'>
             <div className='mb-6 flex items-center gap-4'>
-              <span className='text-xs font-bold uppercase tracking-[0.2em] text-yellow-400'>
-                Nyhet
-              </span>
+              <span className='text-xs font-bold uppercase tracking-[0.2em] text-yellow-400'>Nyhet</span>
               <span className='gsap-line h-[2px] w-16 origin-left scale-x-0 bg-yellow-400/80 md:w-24' />
             </div>
 
@@ -112,6 +98,6 @@ export function TechDownHero() {
           </div>
         </div>
       </div>
-    </section>
+    </header>
   )
 }

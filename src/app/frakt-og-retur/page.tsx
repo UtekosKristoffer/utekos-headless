@@ -4,6 +4,7 @@ import { ShippingReturnsHeader } from '@/app/frakt-og-retur/components/ShippingR
 import { ShippingReturnsInfo } from '@/app/frakt-og-retur/components/ShippingReturnsInfo'
 import type { Metadata } from 'next'
 import { Activity } from 'react'
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Frakt, retur og bytte av våre produkter | Utekos',
@@ -14,8 +15,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Frakt, retur og bytte av våre produkter | Utekos',
-    description:
-      'Få svar på alt du lurer på om levering og retur. Handle trygt hos Utekos.',
+    description: 'Få svar på alt du lurer på om levering og retur. Handle trygt hos Utekos.',
     url: '/frakt-og-retur',
     siteName: 'Utekos',
     images: [

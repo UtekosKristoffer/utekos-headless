@@ -10,7 +10,7 @@ export function ShippingReturnsHeader() {
         className='mb-8 flex items-center justify-center gap-2 text-sm leading-[1.4] tracking-tight text-maritime-darkest/80'
       >
         <Link href='/' className='hover:text-maritime-darkest/80'>
-          Forside
+          Forsiden
         </Link>
         <span aria-hidden='true'>/</span>
         <span className='text-maritime-darkest/80'>Frakt og retur</span>
@@ -25,9 +25,8 @@ export function ShippingReturnsHeader() {
         Frakt og retur - enkelt og trygt
       </h1>
       <p className='mx-auto mt-4 font-utekos-text max-w-3xl text-lg font-medium md:text-xl leading-[1.45] tracking-tight text-maritime-darkest'>
-        Vi ønsker at din handleopplevelse skal være like trygg og komfortabel
-        som produktene våre. Her finner du alt du trenger å vite om vår levering
-        og returprosess.
+        Vi ønsker at din handleopplevelse skal være like trygg og komfortabel som produktene våre. Her finner
+        du alt du trenger å vite om vår levering og returprosess.
       </p>
     </header>
   )

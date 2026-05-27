@@ -78,7 +78,6 @@ const nextConfig: NextConfig = {
       '@radix-ui/react-toast',
       '@radix-ui/react-tooltip',
       '@radix-ui/react-visually-hidden',
-
       '@tanstack/react-query',
       'react-hook-form',
       'xstate',

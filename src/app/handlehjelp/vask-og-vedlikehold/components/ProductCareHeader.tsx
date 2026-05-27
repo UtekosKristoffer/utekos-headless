@@ -13,7 +13,7 @@ export function ProductCareHeader() {
               href='/'
               className='underline-offset-4 transition-colors hover:text-maritime-blue hover:underline'
             >
-              Hjem
+              Forsiden
             </Link>
           </li>
           <li aria-hidden='true'>
@@ -55,9 +55,8 @@ export function ProductCareHeader() {
           </span>
         </h1>
         <p className='mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-maritime-darkest/82'>
-          Du har investert i komfort og kvalitet som er ment å vare. Med riktig
-          vedlikehold bevarer du varmen, formen og isolasjonsevnen – og
-          forlenger de gode stundene ute i mange år fremover.
+          Du har investert i komfort og kvalitet som er ment å vare. Med riktig vedlikehold bevarer du varmen,
+          formen og isolasjonsevnen – og forlenger de gode stundene ute i mange år fremover.
         </p>
       </div>
     </header>

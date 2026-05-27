@@ -27,7 +27,7 @@ export async function FunctionalityJsonLd() {
       {
         '@type': 'ListItem',
         'position': 1,
-        'name': 'Forside',
+        'name': 'Forsiden',
         'item': SITE_URL
       },
       {

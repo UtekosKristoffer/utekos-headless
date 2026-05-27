@@ -17,9 +17,7 @@ const sanitizeText = (value?: string | null) => {
 const serializeJsonLd = (jsonLd: WithContext<BreadcrumbList>) =>
   JSON.stringify(jsonLd).replace(/</g, '\\u003c')
 
-export async function ProductBreadcrumbJsonLd({
-  handle
-}: ProductBreadcrumbJsonLdProps) {
+export async function ProductBreadcrumbJsonLd({ handle }: ProductBreadcrumbJsonLdProps) {
   'use cache'
 
   cacheLife('max')
@@ -39,7 +37,7 @@ export async function ProductBreadcrumbJsonLd({
       {
         '@type': 'ListItem',
         'position': 1,
-        'name': 'Hjem',
+        'name': 'Forsiden',
         'item': SITE_URL
       },
       {

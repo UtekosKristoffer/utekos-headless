@@ -172,9 +172,7 @@ const getMerchantReturnPolicy = (): MerchantReturnPolicy => ({
 })
 
 const getPriceValidUntil = () =>
-  new Date(new Date().setFullYear(new Date().getFullYear() + 1))
-    .toISOString()
-    .slice(0, 10)
+  new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().slice(0, 10)
 
 const getReviewMarkup = (handle: string): ReviewMarkup => {
   const bundle = productReviewBundles[handle]
@@ -228,8 +226,7 @@ const buildProductOffer = (model: ModelRecommendation, product: ProductData | nu
   const availabilityMarkup = typeof availability === 'boolean' ? mapAvailability(availability) : undefined
   const variants = getVariants(product)
   const effectivePrice = uniquePrices[0] ?? fallbackPricing.price
-  const effectiveOriginalPrice =
-    uniquePrices.length === 0 ? fallbackPricing.originalPrice : undefined
+  const effectiveOriginalPrice = uniquePrices.length === 0 ? fallbackPricing.originalPrice : undefined
   const priceValidUntil = getPriceValidUntil()
 
   if (uniquePrices.length > 1) {
@@ -449,7 +446,7 @@ export async function CompareModelsJsonLd() {
       {
         '@type': 'ListItem',
         'position': 1,
-        'name': 'Forside',
+        'name': 'Forsiden',
         'item': SITE_URL
       },
       {

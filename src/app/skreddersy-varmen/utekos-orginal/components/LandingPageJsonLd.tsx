@@ -53,9 +53,7 @@ export async function SkreddersyVarmenJsonLd() {
 
   const aggregateRating: AggregateRating = {
     '@type': 'AggregateRating',
-    'ratingValue': (
-      reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
-    ).toFixed(1),
+    'ratingValue': (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1),
     'bestRating': '5',
     'worstRating': '1',
     'reviewCount': reviews.length
@@ -132,8 +130,7 @@ export async function SkreddersyVarmenJsonLd() {
       'hasMerchantReturnPolicy': {
         '@type': 'MerchantReturnPolicy',
         'applicableCountry': 'NO',
-        'returnPolicyCategory':
-          'https://schema.org/MerchantReturnFiniteReturnWindow',
+        'returnPolicyCategory': 'https://schema.org/MerchantReturnFiniteReturnWindow',
         'merchantReturnDays': 14,
         'returnMethod': 'https://schema.org/ReturnByMail',
         'returnFees': 'https://schema.org/FreeReturn'
@@ -166,7 +163,7 @@ export async function SkreddersyVarmenJsonLd() {
       {
         '@type': 'ListItem',
         'position': 1,
-        'name': 'Forside',
+        'name': 'Forsiden',
         'item': LANDING_BASE_URL
       },
       {
@@ -232,10 +229,5 @@ export async function SkreddersyVarmenJsonLd() {
     ]
   }
 
-  return (
-    <script
-      type='application/ld+json'
-      dangerouslySetInnerHTML={{ __html: stringifyJsonLd(graph) }}
-    />
-  )
+  return <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: stringifyJsonLd(graph) }} />
 }

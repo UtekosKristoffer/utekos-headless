@@ -9,7 +9,7 @@ import { ProductCarousel } from '@/components/ProductCard/ProductCarousel'
 import { ComfyrobeFeatureSection } from './components/ComfyrobeFeatureSection'
 import { ProductGridSkeleton } from '@/components/frontpage/Skeletons/ProductGridSkeleton'
 import { VideoSkeleton } from './components/VideoSkeleton'
-import { Suspense, Activity } from 'react'
+import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import { StapperFeatureSection } from './components/StapperFeatureSection/StapperFeatureSection'
 import { ProductVideoSection } from './components/ProductVideoSection'
@@ -53,45 +53,33 @@ const ProductsPage = async () => {
 
   return (
     <>
-      <section className='container mx-auto px-4 py-16 sm:py-24'>
-        <Activity>
-          <ProductsPageHeader />
-        </Activity>
-        <Activity>
-          <HelpChooseSection />
-        </Activity>
-        <Activity>
-          <Suspense fallback={<VideoSkeleton />}>
-            <ProductVideoSection />
-            <TechDownFeatureSection />
-          </Suspense>
-        </Activity>
-        <Activity>
-          <ComparisonTeaser />
-        </Activity>
+      <article className='container mx-auto px-4 py-16 sm:py-24'>
+        <ProductsPageHeader />
+        <HelpChooseSection />
 
-        <Activity>
-          <section className='mb-24'>
-            <HydrationBoundary state={dehydrate(queryClient)}>
-              <Suspense fallback={<ProductGridSkeleton />}>
-                <ProductCarousel />
-              </Suspense>
-            </HydrationBoundary>
-          </section>
-        </Activity>
-        <Activity>
-          <ComfyrobeFeatureSection />
-        </Activity>
-        <Activity>
-          <MikrofiberSection />
-        </Activity>
-        <Activity>
-          <StapperFeatureSection />
-        </Activity>
-        <Activity>
-          <ProductsPageFooter />
-        </Activity>
-      </section>
+        <Suspense fallback={<VideoSkeleton />}>
+          <ProductVideoSection />
+          <TechDownFeatureSection />
+        </Suspense>
+
+        <ComparisonTeaser />
+
+        <section className='mb-24'>
+          <HydrationBoundary state={dehydrate(queryClient)}>
+            <Suspense fallback={<ProductGridSkeleton />}>
+              <ProductCarousel />
+            </Suspense>
+          </HydrationBoundary>
+        </section>
+
+        <ComfyrobeFeatureSection />
+
+        <MikrofiberSection />
+
+        <StapperFeatureSection />
+
+        <ProductsPageFooter />
+      </article>
     </>
   )
 }
