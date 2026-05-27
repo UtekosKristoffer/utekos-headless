@@ -1,19 +1,37 @@
 // Path: src/app/kontaktskjema/ContactPageJsonLd.tsx
 import { cacheLife, cacheTag } from 'next/cache'
-import type { ContactPage, WithContext } from 'schema-dts'
+import type { BreadcrumbList, ContactPage, Graph } from 'schema-dts'
+
+const breadcrumbNode: BreadcrumbList = {
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    {
+      '@type': 'ListItem',
+      'position': 1,
+      'name': 'Forsiden',
+      'item': 'https://utekos.no'
+    },
+    {
+      '@type': 'ListItem',
+      'position': 2,
+      'name': 'Kontakt oss',
+      'item': 'https://utekos.no/kontaktskjema'
+    }
+  ]
+}
 
 export async function ContactPageJsonLd() {
   'use cache'
   cacheLife('max')
   cacheTag('contact-page')
 
-  const jsonLd: WithContext<ContactPage> = {
-    '@context': 'https://schema.org',
+  const contactPageNode: ContactPage = {
     '@type': 'ContactPage',
     'name': 'Kontakt oss | Utekos Kundeservice',
     'description':
       'Kundeservice for Utekos. Vi hjelper deg med bestillinger, produktspørsmål og retur.',
     'url': 'https://utekos.no/kontaktskjema',
+    'breadcrumb': breadcrumbNode,
 
     'mainEntity': {
       '@id': 'https://utekos.no/#organization'
@@ -44,6 +62,11 @@ export async function ContactPageJsonLd() {
     },
 
     'lastReviewed': '2026-04-17'
+  }
+
+  const jsonLd: Graph = {
+    '@context': 'https://schema.org',
+    '@graph': [contactPageNode, breadcrumbNode]
   }
 
   return (

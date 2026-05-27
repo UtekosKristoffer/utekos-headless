@@ -111,7 +111,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang='no' className={`${googleSans} ${utekosText.variable}`}>
+    <html lang='no' className={`${googleSans.variable} ${utekosText.variable}`}>
       <body className='bg-background text-cloud-dancer antialiased'>
         <WebVitalsReporter />
 

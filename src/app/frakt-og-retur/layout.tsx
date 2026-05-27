@@ -1,4 +1,5 @@
 import { ShippingAndReturnsPageJsonLd } from './ShippingAndReturnsPageJsonLd'
+import { ShippingReturnsBreadcrumbs } from './components/ShippingReturnsBreadcrumbs'
 import type { ReactNode } from 'react'
 
 export default function ShippingAndReturnsLayout({
@@ -9,6 +10,7 @@ export default function ShippingAndReturnsLayout({
   return (
     <>
       <ShippingAndReturnsPageJsonLd />
+      <ShippingReturnsBreadcrumbs />
       {children}
     </>
   )

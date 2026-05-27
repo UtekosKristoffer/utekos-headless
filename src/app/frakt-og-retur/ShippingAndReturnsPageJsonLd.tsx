@@ -25,6 +25,9 @@ export async function ShippingAndReturnsPageJsonLd() {
     },
     'about': {
       '@id': ORGANIZATION_ID
+    },
+    'breadcrumb': {
+      '@id': `${PAGE_URL}#breadcrumb`
     }
   }
 

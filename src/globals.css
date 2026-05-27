@@ -16,16 +16,6 @@
   --text-title--font-weight: 700;
   --text-title--line-height: 0.85;
 
-  --text-heading-level-two: clamp(2.8125rem, 1.875rem + 3.75vw, 4.6875rem);
-  --text-heading-level-two--letter-spacing: var(--tracking-utekos-heading-level-two);
-  --text-heading-level-two--line-height: var(--leading-utekos-heading-level-two);
-  --text-heading-level-two--font-weight: 700;
-
-  --text-heading-level-three: clamp(2.5875rem, 1.725rem + 3.45vw, 4.3125rem);
-  --text-heading-level-three--letter-spacing: var(--tracking-utekos-heading-level-three);
-  --text-heading-level-three--line-height: var(--leading-utekos-heading-level-three);
-  --text-heading-level-three--font-weight: 700;
-
   --text-paragraph: clamp(0.6375rem, 0.44625rem + 0.6375vw, 0.95625rem);
   --text-paragraph--line-height: var(--leading-utekos-text);
   --text-paragraph--letter-spacing: var(--tracking-utekos-text);
@@ -49,7 +39,6 @@
   --text-inspirational-page-hero-card-description--letter-spacing: var(--tracking-utekos-text);
   --font-weight-inspirational-page-hero-card-description: 400;
 
-  --leading-utekos-heading-level-two: 0.95;
   --leading-utekos-heading-level-three: 1.1;
   --leading-subtitle: 1.6;
   --tracking-subtitle: -0.03em;
@@ -122,7 +111,6 @@
   --maritime-dark: oklch(0.1784 0.0366 279.42);
   --maritime-darker: oklch(0.1584 0.0366 279.42);
   --maritime-darkest: oklch(0.1284 0.0366 279.42);
-  --font-brand-heading: var(--font-google-sans), system-ui, sans-serif;
   --font-brand-body: var(--font-utekos-text), system-ui, sans-serif;
   --font-utekos-text: var(--font-utekos-text);
   --font-brand-text: var(--font-utekos-text);
@@ -985,14 +973,6 @@
   font-weight: var(--text-title-font-weight);
 }
 
-.utekos-heading-level-two {
-  font-family: var(--font-google-sans);
-  font-size: var(--text-heading-level-two);
-  line-height: var(--leading-utekos-heading-level-two);
-  letter-spacing: var(--text-heading-level-two-letter-spacing);
-  font-weight: var(--text-heading-level-two-font-weight);
-}
-
 .utekos-heading-level-three {
   font-family: var(--font-google-sans);
   font-size: var(--text-heading-level-three);
@@ -1050,7 +1030,7 @@
 
   h2 {
     font-family: var(--font-google-sans);
-    line-height: var(--text-heading-level-two--line-height);
+    line-height: 1.35;
     letter-spacing: var(--text-heading-level-two--letter-spacing);
     font-weight: var(--font-weight-utekos-heading-level-two);
     font-size: var(--text-heading-level-two);
@@ -1058,7 +1038,7 @@
 
   h3 {
     font-family: var(--font-google-sans);
-    line-height: var(--leading-utekos-heading-level-three);
+    line-height: 1.4;
     letter-spacing: var(--tracking-utekos-heading-level-three);
     font-weight: 700;
     font-size: var(--utekos-heading-level-three);
@@ -1148,13 +1128,6 @@
     font-weight: 700;
   }
 
-  .utekos-heading-level-three {
-    font-size: var(--text-heading-level-three);
-    line-height: var(--leading-utekos-heading-level-three);
-    letter-spacing: var(--tracking-utekos-heading-level-three);
-    font-weight: 700;
-  }
-
   .brand-badge {
     background-color: var(--color-maritime-blue);
     border-radius: var(--radius-full);
@@ -1224,14 +1197,6 @@
   line-height: var(--leading-utekos-heading-level-two);
   letter-spacing: var(--text-heading-level-two-letter-spacing);
   font-weight: var(--font-weight-utekos-heading-level-two);
-  font-family: var(--font-google-sans);
-}
-
-@utility utekos-heading-level-three {
-  font-size: var(--text-heading-level-three);
-  line-height: var(--leading-utekos-heading-level-three);
-  letter-spacing: var(--tracking-card-heading);
-  font-weight: var(--font-weight-utekos-heading-level-three);
   font-family: var(--font-google-sans);
 }
 

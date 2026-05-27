@@ -1,5 +1,23 @@
 import { cacheLife, cacheTag } from 'next/cache'
-import type { Graph } from 'schema-dts'
+import type { BreadcrumbList, Graph } from 'schema-dts'
+
+const breadcrumbNode: BreadcrumbList = {
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    {
+      '@type': 'ListItem',
+      'position': 1,
+      'name': 'Forsiden',
+      'item': 'https://utekos.no'
+    },
+    {
+      '@type': 'ListItem',
+      'position': 2,
+      'name': 'Om oss',
+      'item': 'https://utekos.no/om-oss'
+    }
+  ]
+}
 
 export async function AboutPageJsonLd() {
   'use cache'
@@ -24,7 +42,8 @@ export async function AboutPageJsonLd() {
         },
         'primaryImageOfPage': {
           '@id': 'https://utekos.no/om-oss/#primaryimage'
-        }
+        },
+        'breadcrumb': breadcrumbNode
       },
       {
         '@type': 'ImageObject',
@@ -53,7 +72,8 @@ export async function AboutPageJsonLd() {
         'mainEntityOfPage': {
           '@id': 'https://utekos.no/om-oss/#webpage'
         }
-      }
+      },
+      breadcrumbNode
     ]
   }
 
