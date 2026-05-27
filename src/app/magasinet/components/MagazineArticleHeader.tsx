@@ -19,10 +19,9 @@ export function MagazineArticleHeader({ article }: MagazineArticleHeaderProps) {
     : null
 
   return (
-    <header className='mx-auto max-w-4xl pb-10'>
-      <div className='mb-8 flex flex-wrap items-center gap-3 text-sm text-maritime-darkest/72'>
+    <header className='mx-auto max-w-4xl pb-12'>
+      <div className='mb-8 flex flex-wrap items-center gap-3 ...'>
         <MagazineCategoryBadge category={article.category} />
-
         <span className='inline-flex items-center gap-1.5'>
           <CalendarDays className='size-4' aria-hidden='true' />
           <time dateTime={article.publishedAt}>{publishedDate}</time>

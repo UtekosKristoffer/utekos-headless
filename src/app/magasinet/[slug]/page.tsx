@@ -2,14 +2,14 @@
 
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { MagazineArticleHeader } from '../components/MagazineArticleHeader'
-import { MagazineBreadcrumbs } from '../components/MagazineBreadcrumbs'
 import { JsonLdScript } from '../components/JsonLdScript'
 import { getMagazineArticle } from '../utils/getMagazineArticle'
 import { getMagazineArticleSlugs } from '../utils/getMagazineArticleSlugs'
 import { buildArticleJsonLd } from '../seo/buildArticleJsonLd'
 import { buildArticleMetadata } from '../seo/buildArticleMetadata'
 import { buildBreadcrumbJsonLd } from '../seo/buildBreadcrumbJsonLd'
+import { MagazineArticleShell } from '../components/MagazineArticleShell'
+// src/app/magasinet/[slug]/page.tsx
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -43,15 +43,13 @@ export default async function MagazineArticlePage({ params }: Props) {
   const Article = article.Article
 
   return (
-    <main className='container mx-auto px-4'>
+    <>
       <JsonLdScript data={buildArticleJsonLd(article)} />
       <JsonLdScript data={buildBreadcrumbJsonLd(article)} />
 
-      <div className='mx-auto max-w-4xl'>
-        <MagazineBreadcrumbs article={article} />
-        <MagazineArticleHeader article={article} />
+      <MagazineArticleShell article={article}>
         <Article />
-      </div>
-    </main>
+      </MagazineArticleShell>
+    </>
   )
 }
