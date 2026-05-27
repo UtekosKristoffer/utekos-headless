@@ -1,9 +1,11 @@
 // Path: src/api/constants/index.ts
 export type ModelKey = keyof typeof PRODUCT_VARIANTS
+
 export const TAGS = {
   products: 'products',
   cart: 'cart'
 }
+
 export const FREE_SHIPPING_THRESHOLD = 999
 export const productName = 'Utekos TechDown™'
 export const productHandle = 'utekos-techdown'
@@ -12,6 +14,7 @@ export const originalPrice = 1990
 export const discountAmount = 200
 export const currentPrice = originalPrice - discountAmount
 export const GID_PREFIX = 'gid://shopify/ProductVariant/'
+
 export const PRODUCT_VARIANTS = {
   techdown: {
     id: 'utekos-techdown',
@@ -81,6 +84,19 @@ export const PRODUCT_VARIANTS = {
       '/classic-blue-jacket-3-4.png'
     ]
   }
+}
+
+export const PRODUCT_HIDDEN_SIZE_LABELS: Partial<Record<ModelKey, readonly string[]>> = {
+  techdown: ['Liten']
+}
+
+export function getSelectableSizes(
+  model: ModelKey,
+  config: { sizes: readonly string[] } = PRODUCT_VARIANTS[model]
+): string[] {
+  const hiddenSizes = PRODUCT_HIDDEN_SIZE_LABELS[model] ?? []
+
+  return config.sizes.filter(size => !hiddenSizes.includes(size))
 }
 
 export const VIDEO_URL = 'https://utekos.no/videos/TensorPix2.mp4'

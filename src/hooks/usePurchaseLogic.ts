@@ -1,4 +1,4 @@
-import { useState, useTransition, useContext } from 'react'
+import { useContext, useEffect, useMemo, useState, useTransition } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
@@ -7,7 +7,6 @@ import { cartStore } from '@/lib/state/cartStore'
 import { useCartMutations } from '@/hooks/useCartMutations'
 import { useOptimisticCartUpdate } from '@/hooks/useOptimisticCartUpdate'
 import { getCartIdFromCookie } from '@/lib/actions/getCartIdFromCookie'
-import { fetchCart } from '@/lib/helpers/cart/fetchCart'
 import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
 import { useAnalytics } from '@/hooks/useAnalytics'
 import { dispatchMetaTrackingEvent } from '@/lib/tracking/meta/dispatchMetaTrackingEvent'
@@ -16,7 +15,7 @@ import { trackMicrosoftUetEvent } from '@/lib/tracking/microsoft-uet/trackMicros
 import { generateEventID } from '@/components/analytics/Meta/generateEventID'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { getVariants } from '@/app/skreddersy-varmen/utekos-orginal/utils/getVariants'
-import { PRODUCT_VARIANTS } from '@/api/constants'
+import { getSelectableSizes, PRODUCT_VARIANTS } from '@/api/constants'
 import type { ModelKey, ColorVariant } from 'types/product/ProductTypes'
 import type { UsePurchaseLogicProps } from 'types/product/PageProps'
 import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
@@ -29,6 +28,10 @@ type ConfiguredSelectionCartResult = {
   cartId: string | null
   product: ShopifyProduct
   selectedVariant: ShopifyProductVariant
+}
+
+function normalizeSelectedSize(size: string, selectableSizes: readonly string[]): string {
+  return selectableSizes.includes(size) ? size : (selectableSizes[0] ?? size)
 }
 
 export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
@@ -50,16 +53,37 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
   const currentConfig = PRODUCT_VARIANTS[selectedModel]
   const currentShopifyProduct = products[currentConfig.id]
 
+  const selectableSizes = useMemo(
+    () => getSelectableSizes(selectedModel, currentConfig),
+    [currentConfig, selectedModel]
+  )
+
+  const effectiveSelectedSize = normalizeSelectedSize(selectedSize, selectableSizes)
+
   const safeColorIndex = selectedColorIndex < currentConfig.colors.length ? selectedColorIndex : 0
-  const currentColor = currentConfig.colors[safeColorIndex] as ColorVariant
+
+  const currentColor = currentConfig.colors[safeColorIndex] as ColorVariant | undefined
+
+  useEffect(() => {
+    const resetCheckoutRedirectState = (event: PageTransitionEvent) => {
+      if (event.persisted) {
+        setIsCheckoutRedirecting(false)
+      }
+    }
+
+    window.addEventListener('pageshow', resetCheckoutRedirectState)
+
+    return () => {
+      window.removeEventListener('pageshow', resetCheckoutRedirectState)
+    }
+  }, [])
 
   const handleSelectedModelChange = (model: ModelKey) => {
     const nextConfig = PRODUCT_VARIANTS[model]
+    const nextSelectableSizes = getSelectableSizes(model, nextConfig)
 
     setSelectedModel(model)
-    setSelectedSize(size =>
-      nextConfig.sizes.includes(size) ? size : (nextConfig.sizes[1] ?? nextConfig.sizes[0] ?? size)
-    )
+    setSelectedSize(size => normalizeSelectedSize(size, nextSelectableSizes))
     setSelectedColorIndex(index => (index < nextConfig.colors.length ? index : 0))
   }
 
@@ -69,19 +93,26 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
       return null
     }
 
+    if (!currentColor) {
+      toast.error(`Fant ikke fargevalg for ${currentConfig.title}.`)
+      return null
+    }
+
     const variants = getVariants(currentShopifyProduct)
     const selectedVariant = variants.find((variant: ShopifyProductVariant) => {
       const hasSize = variant.selectedOptions.some(
-        option => option.value.toLowerCase() === selectedSize.toLowerCase()
+        option => option.value.toLowerCase() === effectiveSelectedSize.toLowerCase()
       )
+
       const hasColor = variant.selectedOptions.some(
-        option => currentColor && option.value.toLowerCase() === currentColor.name.toLowerCase()
+        option => option.value.toLowerCase() === currentColor.name.toLowerCase()
       )
+
       return hasSize && hasColor
     })
 
     if (!selectedVariant) {
-      toast.error(`Fant ikke variant for ${currentColor.name} / ${selectedSize}.`)
+      toast.error(`Fant ikke variant for ${currentColor.name} / ${effectiveSelectedSize}.`)
       return null
     }
 
@@ -132,34 +163,43 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
       }
 
       const linesToProcess = [{ variantId: selectedVariant.id, quantity }]
+      const mutationResult = await addLines(linesToProcess)
 
-      await addLines(linesToProcess)
+      if (!mutationResult.success) {
+        const message =
+          mutationResult.message || mutationResult.error || 'Kunne ikke legge varen i handlekurven.'
 
-      if (!currentCartId) {
-        currentCartId = await getCartIdFromCookie()
+        toast.error(message)
+
+        if (currentCartId) {
+          queryClient.invalidateQueries({ queryKey: ['cart', currentCartId] })
+        }
+
+        return null
       }
 
-      await trackAddToCart({
+      const cart = mutationResult.cart ?? null
+
+      if (cart?.id) {
+        currentCartId = cart.id
+        queryClient.setQueryData(['cart', cart.id], cart)
+      }
+
+      if (!currentCartId) {
+        currentCartId = cart?.id ?? (await getCartIdFromCookie())
+      }
+
+      void trackAddToCart({
         product,
         selectedVariant,
         quantity
-      })
+      }).catch(error => console.error('AddToCart tracking failed', error))
 
       trackEvent('AddToCart', {
         content_name: product.title,
         value: Number(selectedVariant.price.amount),
         currency: selectedVariant.price.currencyCode
       })
-
-      let cart: Cart | null = null
-
-      if (currentCartId) {
-        cart = queryClient.getQueryData<Cart>(['cart', currentCartId]) ?? (await fetchCart(currentCartId))
-
-        if (cart) {
-          queryClient.setQueryData(['cart', currentCartId], cart)
-        }
-      }
 
       return {
         cart,
@@ -170,10 +210,12 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
     } catch (error) {
       console.error('Feil under kjøp:', error)
       toast.error('Kunne ikke legge varen i handlekurven.')
+
       const cartId = contextCartId || (await getCartIdFromCookie())
       if (cartId) {
         queryClient.invalidateQueries({ queryKey: ['cart', cartId] })
       }
+
       return null
     }
   }
@@ -277,14 +319,14 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
     setSelectedModel: handleSelectedModelChange,
     quantity,
     setQuantity,
-    selectedColorIndex,
+    selectedColorIndex: safeColorIndex,
     setSelectedColorIndex,
-    selectedSize,
+    selectedSize: effectiveSelectedSize,
     setSelectedSize,
     handleAddToCart,
     handleGoToCheckout,
     isPending: isTransitioning || isPendingFromMachine || isCheckoutRedirecting,
     currentConfig,
-    currentColor
+    currentColor: currentColor as ColorVariant
   }
 }

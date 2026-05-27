@@ -2,6 +2,7 @@
 
 import type { AddToCartFormValues } from './AddToCart'
 import type {
+  CartActionsResult,
   ClearCartLineInput,
   RemoveCartLineInput,
   UpdateCartLineQuantityInput
@@ -10,7 +11,9 @@ import type { AddLinesInput } from './CartActions'
 
 export type CartMutationContext = {
   error?: string | null
+  lastResult?: CartActionsResult | null
 }
+
 export type CartMutationEvent =
   | { type: 'ADD_LINES'; input: AddLinesInput }
   | { type: 'UPDATE_LINE'; input: { lineId: string; quantity: number } }
