@@ -1,5 +1,4 @@
 // Path: src/app/handlehjelp/teknologi-materialer/layout/TechHero.tsx
-'use client'
 
 import { ArrowDown } from 'lucide-react'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
@@ -31,12 +30,8 @@ export function TechHero() {
           </h1>
 
           <p className='mx-auto max-w-2xl text-lg leading-relaxed text-cloud-dancer/90 md:text-xl'>
-            Det unike med Utekos er friheten til å velge. Fra en isolerende
-            kokong til en elegant parkas på sekunder. Vi kaller det{' '}
-            <strong className='text-cloud-dancer'>
-              adaptiv funksjonalitet
-            </strong>
-            .
+            Det unike med Utekos er friheten til å velge. Fra en isolerende kokong til en elegant parkas på
+            sekunder. Vi kaller det <strong className='text-cloud-dancer'>adaptiv funksjonalitet</strong>.
           </p>
         </div>
       </div>
