@@ -21,9 +21,9 @@ export function MagazineOverviewHero({ articleCount }: MagazineOverviewHeroProps
           <h1 className='mt-7 max-w-4xl text-balance font-google-sans text-5xl font-bold leading-[0.9] tracking-tight sm:text-6xl lg:text-7xl'>
             Inspirasjon for gode stunder ute
           </h1>
-          <p className='mt-6 max-w-3xl font-utekos-text text-xl leading-[1.45] tracking-tight text-cloud-dancer/86 sm:text-2xl'>
-            Guider, råd og historier for deg som vil forlenge sesongen på hytta, terrassen, båten
-            eller i bobilen med varme, komfort og mer tid ute.
+          <p className='mt-6 max-w-3xl font-utekos-text text-xl tracking-tight text-cloud-dancer/86 sm:text-2xl'>
+            Guider, råd og historier for deg som vil forlenge sesongen på hytten, terrassen, båten eller i
+            bobilen med varme, komfort og mer tid ute.
           </p>
           <p className='mt-8 font-utekos-text text-sm leading-[1.45] tracking-tight text-cloud-dancer/68'>
             {articleCount} publiserte artikler

@@ -35,7 +35,7 @@ function FeaturedArticleCard({ article }: { article: MagazineArticle }) {
             <h2 className='text-balance font-google-sans text-4xl font-bold leading-[0.95] tracking-tight text-maritime-darkest sm:text-5xl'>
               <MagazineInlineTitle text={article.title} />
             </h2>
-            <p className='mt-5 font-utekos-text text-lg leading-[1.55] tracking-tight text-maritime-darkest/76'>
+            <p className='mt-5 font-utekos-text text-lg leading-[1.45] tracking-tight text-maritime-darkest/90'>
               {article.excerpt}
             </p>
             <span className='mt-8 inline-flex items-center gap-2 font-utekos-text text-base font-semibold leading-[1.4] tracking-tight text-maritime-blue'>
@@ -99,7 +99,10 @@ export function MagazineGrid({ articles }: MagazineGridProps) {
   return (
     <>
       <FeaturedArticleCard article={featuredArticle} />
-      <section className='bg-overcast pb-16 text-maritime-darkest sm:pb-24' aria-labelledby='magazine-latest-heading'>
+      <section
+        className='bg-overcast pb-16 text-maritime-darkest sm:pb-24'
+        aria-labelledby='magazine-latest-heading'
+      >
         <div className='container mx-auto px-4'>
           <header className='mb-8 max-w-2xl'>
             <p className='font-utekos-text text-sm font-semibold leading-[1.4] tracking-tight text-maritime-blue'>
