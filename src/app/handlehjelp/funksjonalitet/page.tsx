@@ -15,7 +15,7 @@ export default async function FunctionalityPage() {
   await connection()
 
   return (
-    <article className='bg-background pb-20 pt-24 md:pt-32'>
+    <article className='bg-background py-20'>
       <FunctionalityPageHero />
       <FunctionalityPageThreeModesSection />
       <FunctionalityPageVideoSection />

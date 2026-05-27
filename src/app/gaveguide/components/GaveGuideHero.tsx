@@ -6,8 +6,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
 
 export function GaveGuideHero() {
   return (
@@ -29,9 +27,8 @@ export function GaveGuideHero() {
           Gaven som varmer. Lenge.
         </h1>
         <p className='mx-auto mt-6 max-w-2xl text-xl text-muted-foreground'>
-          Gi bort mer enn bare en ting – gi bort komfort, kvalitetstid og
-          utallige #utekosøyeblikk. Perfekt for den som har alt, men som
-          fortjener det aller beste.
+          Gi bort mer enn bare en ting – gi bort komfort, kvalitetstid og utallige #utekosøyeblikk. Perfekt
+          for den som har alt, men som fortjener det aller beste.
         </p>
       </div>
     </section>

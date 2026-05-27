@@ -2,6 +2,7 @@
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import Image from 'next/image'
 import Link from 'next/link'
+
 import CompareHeroImage from '@public/kate-linn-stort-bilde.png'
 export function CompareModelsPageHero() {
   return (
@@ -28,8 +29,8 @@ export function CompareModelsPageHero() {
             Hvilken Utekos passer best for deg?
           </h1>
           <p className='mt-7 max-w-2xl font-utekos-text text-lg leading-[1.45] tracking-tight text-cloud-dancer/90 sm:text-2xl'>
-            Sammenlign Utekos Dun, Utekos Mikrofiber og Utekos TechDown. Finn
-            riktig modell for hytte, bobil, båt og kalde kvelder ute.
+            Sammenlign Utekos Dun, Utekos Mikrofiber og Utekos TechDown. Finn riktig modell for hytte, bobil,
+            båt og kalde kvelder ute.
           </p>
           <div className='mt-9 flex flex-wrap items-center gap-4'>
             <BrandBadge
