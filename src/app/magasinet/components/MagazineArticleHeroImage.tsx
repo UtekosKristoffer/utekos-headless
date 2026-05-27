@@ -11,8 +11,8 @@ export function MagazineArticleHeroImage({ article }: MagazineArticleHeroImagePr
   const imageAlt = article.imageAlt || article.title
 
   return (
-    <figure className='mt-10 overflow-hidden rounded-3xl border border-maritime-darkest/10 bg-maritime-darkest/5 shadow-[0_24px_80px_-48px_rgba(20,24,22,0.45)]'>
-      <div className='relative aspect-[16/9] w-full'>
+    <figure className='mt-10 px-4 py-8 sm:px-6 lg:px-8  overflow-hidden rounded-3xl border border-maritime-darkest/10 bg-maritime-darkest/5 shadow-[0_24px_80px_-48px_rgba(20,24,22,0.45)]'>
+      <div className='relative aspect-[16/9] w-[90%] mx-auto rounded-3xl overflow-hidden'>
         <Image
           src={article.imageUrl}
           alt={imageAlt}

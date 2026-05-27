@@ -11,8 +11,8 @@ export const metadata: Metadata = buildMagazineOverviewMetadata()
 
 export default function MagazinePage() {
   return (
-    <main className='bg-overcast text-maritime-darkest'>
-      <div className='mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8'>
+    <article className='bg-overcast w-screen max-w-full text-maritime-darkest'>
+      <div className='mx-auto w-full px-4 py-8 sm:px-6 lg:px-8'>
         <div className='mb-8'>
           <MagazineBreadcrumbs />
         </div>
@@ -23,6 +23,6 @@ export default function MagazinePage() {
 
         <MagazineGrid articles={magazineArticles} />
       </div>
-    </main>
+    </article>
   )
 }
