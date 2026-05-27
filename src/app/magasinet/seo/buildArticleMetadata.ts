@@ -3,11 +3,13 @@
 import { SITE_URL } from '@/constants'
 import type { Metadata } from 'next'
 import type { MagazineArticle } from '../types'
+import { toAbsoluteUrl } from '../utils/toAbsoluteUrl'
 
 export function buildArticleMetadata(article: MagazineArticle): Metadata {
   const url = `${SITE_URL}/magasinet/${article.slug}`
   const title = article.seoTitle ?? `${article.title} | Utekos Magasinet`
   const description = article.seoDescription ?? article.excerpt
+  const imageUrl = toAbsoluteUrl(article.imageUrl)
 
   return {
     title,
@@ -24,10 +26,10 @@ export function buildArticleMetadata(article: MagazineArticle): Metadata {
       description,
       images: [
         {
-          url: article.imageUrl,
+          url: imageUrl,
           width: 1200,
           height: 630,
-          alt: article.title
+          alt: article.imageAlt ?? article.title
         }
       ],
       publishedTime: article.publishedAt,
@@ -37,7 +39,7 @@ export function buildArticleMetadata(article: MagazineArticle): Metadata {
       card: 'summary_large_image',
       title,
       description,
-      images: [article.imageUrl]
+      images: [imageUrl]
     }
   }
 }

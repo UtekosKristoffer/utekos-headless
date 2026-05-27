@@ -2,7 +2,9 @@
 
 import { CalendarDays, Clock, PencilLine } from 'lucide-react'
 import { MagazineCategoryBadge } from './MagazineCategoryBadge'
+import { MagazineArticleHeroImage } from './MagazineArticleHeroImage'
 import { formatMagazineArticleDate } from '../utils/formatMagazineArticleDate'
+import { shouldRenderDefaultArticleHeroImage } from '../utils/shouldRenderDefaultArticleHeroImage'
 import type { MagazineArticle } from '../types'
 
 type MagazineArticleHeaderProps = {
@@ -54,6 +56,8 @@ export function MagazineArticleHeader({ article }: MagazineArticleHeaderProps) {
       {article.authorName && (
         <p className='mt-6 text-sm font-medium text-maritime-darkest/70'>Av {article.authorName}</p>
       )}
+
+      {shouldRenderDefaultArticleHeroImage(article) && <MagazineArticleHeroImage article={article} />}
     </header>
   )
 }

@@ -1,21 +1,24 @@
-// src/app/magasinet/_seo/buildArticleJsonLd.ts
+// Path: src/app/magasinet/seo/buildArticleJsonLd.ts
 
-import { SITE_URL } from '@/constants'
 import type { BlogPosting, WithContext } from 'schema-dts'
 import type { MagazineArticle } from '../types'
+import { toAbsoluteUrl } from '../utils/toAbsoluteUrl'
+import { SITE_URL } from '@/constants'
 
 export function buildArticleJsonLd(article: MagazineArticle): WithContext<BlogPosting> {
+  const articleUrl = `${SITE_URL}/magasinet/${article.slug}`
+
   return {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    '@id': `${SITE_URL}/magasinet/${article.slug}#article`,
+    '@id': `${articleUrl}#article`,
     'mainEntityOfPage': {
       '@type': 'WebPage',
-      '@id': `${SITE_URL}/magasinet/${article.slug}`
+      '@id': articleUrl
     },
     'headline': article.title,
     'description': article.excerpt,
-    'image': [article.imageUrl],
+    'image': [toAbsoluteUrl(article.imageUrl)],
     'datePublished': article.publishedAt,
     'dateModified': article.updatedAt,
     'author': {
