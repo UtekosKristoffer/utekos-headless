@@ -1,56 +1,13 @@
 // Path: src/app/magasinet/layout.tsx
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator
-} from '@/components/ui/breadcrumb'
-import Link from 'next/link'
+
 import type { ReactNode } from 'react'
 import { MagazineNewsletterSignup } from '@/components/form/components/MagazineNewsletterSignUp' // Importer den nye komponenten
-import { Activity } from 'react'
 
 export default function MagazineLayout({ children }: { children: ReactNode }) {
   return (
-    <div className='min-h-screen bg-overcast'>
-      <Activity>
-        <section className='border-b border-cloud-dancer'>
-          <div className='container mx-auto px-4 py-6'>
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link href='/'>Hjem</Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Magasinet</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </div>
-        </section>
-      </Activity>
-
-      <Activity>
-        <section className='border-b border-cloud-dancer bg-maritime-darkest'>
-          <div className='container mx-auto px-4 py-12 text-center'>
-            <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>Utekos Magasinet</h1>
-            <p className='mt-4 text-lg text-cloud-dancer/90 max-w-2xl mx-auto'>
-              Inspirasjon, tips og historier for deg som verdsetter de gode stundene ute.
-            </p>
-          </div>
-        </section>
-      </Activity>
-
-      <main className='py-16 sm:py-24'>{children}</main>
-
-      <Activity>
-        <MagazineNewsletterSignup />
-      </Activity>
-    </div>
+    <article className='container mx-auto w-full px-4'>
+      {children}
+      <MagazineNewsletterSignup />
+    </article>
   )
 }

@@ -15,6 +15,7 @@ import type {
   UnitPriceSpecification,
   WithContext
 } from 'schema-dts'
+import { SITE_URL } from '@/constants'
 
 type Props = {
   handle: string
@@ -25,13 +26,10 @@ type ProductJsonLdShape = WithContext<ProductSchema | ProductGroup> & {
   review?: Review[]
 }
 
-const SITE_URL = 'https://utekos.no'
 const ORGANIZATION_ID = `${SITE_URL}/#organization`
 
 const mapAvailability = (availableForSale: boolean) =>
-  availableForSale ?
-    'https://schema.org/InStock'
-  : 'https://schema.org/OutOfStock'
+  availableForSale ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock'
 
 const sanitizeText = (value?: string | null) => {
   if (!value) return ''
@@ -68,9 +66,7 @@ const getShippingDetails = (): OfferShippingDetails => {
   }
 }
 
-const getReviewMarkup = (
-  handle: string
-): Pick<ProductJsonLdShape, 'aggregateRating' | 'review'> => {
+const getReviewMarkup = (handle: string): Pick<ProductJsonLdShape, 'aggregateRating' | 'review'> => {
   const bundle = productReviewBundles[handle]
   if (!bundle) return {}
 
@@ -116,8 +112,7 @@ const getReviewMarkup = (
   return { aggregateRating, review }
 }
 
-const serializeJsonLd = (jsonLd: ProductJsonLdShape) =>
-  JSON.stringify(jsonLd).replace(/</g, '\\u003c')
+const serializeJsonLd = (jsonLd: ProductJsonLdShape) => JSON.stringify(jsonLd).replace(/</g, '\\u003c')
 
 export async function ProductJsonLd({ handle }: Props) {
   'use cache'
@@ -130,9 +125,7 @@ export async function ProductJsonLd({ handle }: Props) {
 
   const product = reshapeProductWithMetafields(rawProduct) || rawProduct
 
-  const priceValidUntil = new Date(
-    new Date().setFullYear(new Date().getFullYear() + 1)
-  )
+  const priceValidUntil = new Date(new Date().setFullYear(new Date().getFullYear() + 1))
     .toISOString()
     .slice(0, 10)
 
@@ -146,8 +139,7 @@ export async function ProductJsonLd({ handle }: Props) {
   const merchantReturnPolicy: MerchantReturnPolicy = {
     '@type': 'MerchantReturnPolicy',
     'applicableCountry': 'NO',
-    'returnPolicyCategory':
-      'https://schema.org/MerchantReturnFiniteReturnWindow',
+    'returnPolicyCategory': 'https://schema.org/MerchantReturnFiniteReturnWindow',
     'merchantReturnDays': 14,
     'returnMethod': 'https://schema.org/ReturnByMail',
     'returnFees': 'https://schema.org/FreeReturn',
@@ -188,13 +180,9 @@ export async function ProductJsonLd({ handle }: Props) {
       'hasVariant': variants.map(({ node: variant }): ProductSchema => {
         const variantImages = computeVariantImages(product, variant)
         const variantImage = variantImages[0]?.url || featuredImage
-        const variantPrice =
-          variant.price?.amount ? String(variant.price.amount) : null
+        const variantPrice = variant.price?.amount ? String(variant.price.amount) : null
         const cleanVariantId = cleanShopifyId(variant.id)
-        const originalPrice =
-          variant.compareAtPrice?.amount ?
-            String(variant.compareAtPrice.amount)
-          : null
+        const originalPrice = variant.compareAtPrice?.amount ? String(variant.compareAtPrice.amount) : null
 
         const variantDescription =
           variant.title && variant.title !== 'Default Title' ?
@@ -245,14 +233,10 @@ export async function ProductJsonLd({ handle }: Props) {
     }
   } else {
     const firstVariant = variants[0]?.node
-    const variantPrice =
-      firstVariant?.price?.amount ? String(firstVariant.price.amount) : null
-    const cleanVariantId =
-      firstVariant?.id ? cleanShopifyId(firstVariant.id) : undefined
+    const variantPrice = firstVariant?.price?.amount ? String(firstVariant.price.amount) : null
+    const cleanVariantId = firstVariant?.id ? cleanShopifyId(firstVariant.id) : undefined
     const originalPrice =
-      firstVariant?.compareAtPrice?.amount ?
-        String(firstVariant.compareAtPrice.amount)
-      : null
+      firstVariant?.compareAtPrice?.amount ? String(firstVariant.compareAtPrice.amount) : null
 
     const shippingDetails = getShippingDetails()
 

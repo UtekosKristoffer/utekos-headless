@@ -9,9 +9,9 @@ import { Coffee, Snowflake, Sparkles, Thermometer } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { Activity } from 'react'
-import { BobilKlargjoringSection } from '../den-ultimate-guiden-til-komfortabel-vintercamping/Bobil/BobilKlargjoringSection'
-import { PakkelisteSection } from '../den-ultimate-guiden-til-komfortabel-vintercamping/VinterCamp/PakkelisteSection'
-import { VintercampLivetSection } from '../den-ultimate-guiden-til-komfortabel-vintercamping/VinterCamp/VintercampLivetSection'
+import { BobilKlargjoringSection } from '../../den-ultimate-guiden-til-komfortabel-vintercamping/Bobil/BobilKlargjoringSection'
+import { PakkelisteSection } from '../../den-ultimate-guiden-til-komfortabel-vintercamping/VinterCamp/PakkelisteSection'
+import { VintercampLivetSection } from '../../den-ultimate-guiden-til-komfortabel-vintercamping/VinterCamp/VintercampLivetSection'
 export const VintercampingArticle = () => {
   return (
     <article className='prose prose-invert prose-lg md:max-w-4xl mx-auto'>
@@ -33,16 +33,13 @@ export const VintercampingArticle = () => {
 
       <Activity>
         <p className='text-lg text-article-white'>
-          Å våkne opp til et landskap dekket av nyfalt snø, med den skarpe,
-          klare vinterluften som venter utenfor døren, er en opplevelse få ting
-          kan måle seg med. Men for mange bobilentusiaster er tanken på
-          vintercamping forbundet med ett stort spørsmål: Hvordan holder man
-          varmen og komforten?
+          Å våkne opp til et landskap dekket av nyfalt snø, med den skarpe, klare vinterluften som venter
+          utenfor døren, er en opplevelse få ting kan måle seg med. Men for mange bobilentusiaster er tanken
+          på vintercamping forbundet med ett stort spørsmål: Hvordan holder man varmen og komforten?
         </p>
         <p className='text-lg text-muted-article-white'>
-          Frykt ikke. Vi har samlet alt du trenger å vite – fra de tekniske
-          forberedelsene til de små triksene som forvandler en kald tur til en
-          uforglemmelig, koselig opplevelse.
+          Frykt ikke. Vi har samlet alt du trenger å vite – fra de tekniske forberedelsene til de små triksene
+          som forvandler en kald tur til en uforglemmelig, koselig opplevelse.
         </p>
       </Activity>
 
@@ -54,9 +51,8 @@ export const VintercampingArticle = () => {
         <Card className='bg-sidebar-foreground border-neutral-800 my-8 not-prose'>
           <CardContent className='p-6'>
             <p className='text-article-white mt-0'>
-              God komfort starter med en godt forberedt bobil. Før du legger ut
-              på tur i minusgrader, er det noen systemer som er helt essensielt
-              å ha kontroll på:
+              God komfort starter med en godt forberedt bobil. Før du legger ut på tur i minusgrader, er det
+              noen systemer som er helt essensielt å ha kontroll på:
             </p>
             <div className='mt-6'>
               <BobilPrepFlow />
@@ -72,9 +68,8 @@ export const VintercampingArticle = () => {
           Fase 2: Pakkelisten for personlig komfort
         </h2>
         <p className='mt-4 text-lg text-article-white'>
-          Når bobilen er klar, er det på tide å tenke på deg selv. Hemmeligheten
-          ligger i lag-på-lag-prinsippet og å ha det rette
-          &quot;kose-utstyret&quot; tilgjengelig.
+          Når bobilen er klar, er det på tide å tenke på deg selv. Hemmeligheten ligger i
+          lag-på-lag-prinsippet og å ha det rette &quot;kose-utstyret&quot; tilgjengelig.
         </p>
         <PakkelisteSection />
       </Activity>
@@ -84,8 +79,7 @@ export const VintercampingArticle = () => {
           Fase 3: Livet på vintercampingen
         </h2>
         <p className='mt-4 text-lg text-article-white'>
-          Du er fremme, bobilen er parkert, og landskapet er fantastisk. Slik
-          får du mest ut av oppholdet:
+          Du er fremme, bobilen er parkert, og landskapet er fantastisk. Slik får du mest ut av oppholdet:
         </p>
         <div className='mt-6'>
           <VintercampFlow />
@@ -96,18 +90,13 @@ export const VintercampingArticle = () => {
       <Activity>
         <Card className='my-12 not-prose text-center bg-gradient-to-br from-primary/20 to-transparent border-neutral-800'>
           <CardContent className='p-8'>
-            <h3 className='text-2xl font-bold mt-0'>
-              Klar for ditt Utekos-øyeblikk?
-            </h3>
+            <h3 className='text-2xl font-bold mt-0'>Klar for ditt Utekos-øyeblikk?</h3>
             <p className='text-article-white mt-2 mb-6'>
-              Utekos er plagget som fyller gapet mellom inne og ute, og
-              forvandler en kjølig morgen til en magisk start på dagen.
+              Utekos er plagget som fyller gapet mellom inne og ute, og forvandler en kjølig morgen til en
+              magisk start på dagen.
             </p>
             <Button asChild>
-              <Link
-                href='/produkter'
-                data-track='VintercampingArticleExploreUtekosClick'
-              >
+              <Link href='/produkter' data-track='VintercampingArticleExploreUtekosClick'>
                 Oppdag Utekos-serien
                 <ArrowRightIcon className='ml-2 h-4 w-4' />
               </Link>
@@ -124,16 +113,13 @@ export const VintercampingArticle = () => {
               Konklusjon: Omfavn vinteren
             </h3>
             <p className='text-article-white mt-4'>
-              Vintercamping handler ikke om å &quot;overleve&quot; kulden. Det
-              handler om å omfavne den, forberedt med riktig utstyr og
-              innstilling. Ved å ta disse forholdsreglene, kan du flytte
-              grensene for din egen campingsesong og skape minner som varer
-              livet ut.
+              Vintercamping handler ikke om å &quot;overleve&quot; kulden. Det handler om å omfavne den,
+              forberedt med riktig utstyr og innstilling. Ved å ta disse forholdsreglene, kan du flytte
+              grensene for din egen campingsesong og skape minner som varer livet ut.
             </p>
             <p className='text-article-white mt-4'>
-              Så fyll opp gassflaskene, pakk ullundertøyet og din Utekos, og
-              sett kursen mot stillheten, stjernehimmelen og de snødekte
-              viddene. Eventyret venter.
+              Så fyll opp gassflaskene, pakk ullundertøyet og din Utekos, og sett kursen mot stillheten,
+              stjernehimmelen og de snødekte viddene. Eventyret venter.
             </p>
           </CardContent>
         </Card>

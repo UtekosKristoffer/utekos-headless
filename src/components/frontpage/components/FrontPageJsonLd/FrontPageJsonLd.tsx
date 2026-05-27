@@ -13,8 +13,8 @@ import { cacheLife, cacheTag } from 'next/cache'
 import { getFeaturedProducts } from '@/api/lib/products/getFeaturedProducts'
 import { mainMenu } from '@/db/config/menu.config'
 import { VIDEO_EMBED_URL, VIDEO_THUMBNAIL_URL, VIDEO_URL } from '@/constants'
+import { SITE_URL } from '@/constants'
 
-const SITE_URL = 'https://utekos.no'
 const ORGANIZATION_ID = `${SITE_URL}/#organization`
 const WEBSITE_ID = `${SITE_URL}/#website`
 const WEBPAGE_ID = `${SITE_URL}/#webpage`
@@ -34,19 +34,12 @@ const sanitizeText = (value?: string | null) => {
 }
 
 const mapAvailability = (availableForSale: boolean) =>
-  availableForSale ?
-    'https://schema.org/InStock'
-  : 'https://schema.org/OutOfStock'
+  availableForSale ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock'
 
-const buildFeaturedProductListItem = (
-  product: FeaturedProduct,
-  index: number
-): ListItem => {
+const buildFeaturedProductListItem = (product: FeaturedProduct, index: number): ListItem => {
   const productUrl = `${SITE_URL}/produkter/${product.handle}`
   const description =
-    sanitizeText(product.seo?.description)
-    || sanitizeText(product.description)
-    || product.title
+    sanitizeText(product.seo?.description) || sanitizeText(product.description) || product.title
   const minimumPrice = product.priceRange.minVariantPrice
 
   const offer: Offer = {
@@ -92,9 +85,7 @@ export async function FrontPageJsonLd() {
 
   const featuredProducts = (await getFeaturedProducts()).slice(0, 4)
   const navigationUrls = mainMenu.map(item => `${SITE_URL}${item.url}`)
-  const featuredProductItems = featuredProducts.map(
-    buildFeaturedProductListItem
-  )
+  const featuredProductItems = featuredProducts.map(buildFeaturedProductListItem)
 
   const websiteNode: WebSite = {
     '@type': 'WebSite',
@@ -155,8 +146,7 @@ export async function FrontPageJsonLd() {
       'url': `${SITE_URL}/og-kate-linn-kikkert-master.png`,
       'width': '1200',
       'height': '630',
-      'caption':
-        'To kvinner som koser seg utendørs på terrassen med varme komfortplagg fra Utekos.'
+      'caption': 'To kvinner som koser seg utendørs på terrassen med varme komfortplagg fra Utekos.'
     },
     'significantLink': [
       `${SITE_URL}/produkter`,
@@ -185,8 +175,7 @@ export async function FrontPageJsonLd() {
       '@type': 'ItemList',
       '@id': FEATURED_PRODUCTS_ID,
       'name': 'Kundenes favoritter',
-      'description':
-        'Utvalgte Utekos-produkter som fremheves på forsiden akkurat nå.',
+      'description': 'Utvalgte Utekos-produkter som fremheves på forsiden akkurat nå.',
       'url': SITE_URL,
       'numberOfItems': featuredProductItems.length,
       'itemListOrder': 'https://schema.org/ItemListOrderAscending',

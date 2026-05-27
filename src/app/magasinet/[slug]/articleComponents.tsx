@@ -10,38 +10,31 @@ import { mockArticles } from '@/db/data/articles'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { Activity } from 'react'
-import { TerrasseArticle } from '../(articles)/5-enkle-tips-for-a-forlenge-terrassesongen'
-import { BalpanneArticle } from '../(articles)/balpannen-din-guide-til-den-perfekte-hostkvelden'
-import { BeredskapEgenomsorgArticle } from '../(articles)/beredskap-egenomsorg'
-import { BobilHostruterArticle } from '../(articles)/bobil-i-hostferien'
-import { VintercampingArticle } from '../(articles)/den-ultimate-guiden-til-komfortabel-vintercamping'
-import { HvaErUtekosArticle } from '../(articles)/hva-er-utekos'
-import { HyttekosArticle } from '../(articles)/slik-skaper-du-den-perfekte-stemningen-pa-hytten'
-import { TechDownArticle } from '../(articles)/utekos-techdown-lansering'
-import { BatpussArticle } from '../(articles)/varm-og-klar-for-batpussen'
-import { VinterklargjoringArticle } from '../(articles)/vinterklargjoring-av-hytta'
+import { TerrasseArticle } from '../articles/[slug]/5-enkle-tips-for-a-forlenge-terrassesongen'
+import { BalpanneArticle } from '../articles/[slug]/balpannen-din-guide-til-den-perfekte-hostkvelden'
+import { BeredskapEgenomsorgArticle } from '../articles/[slug]/beredskap-egenomsorg'
+import { BobilHostruterArticle } from '../articles/[slug]/bobil-i-hostferien'
+import { VintercampingArticle } from '../articles/[slug]/den-ultimate-guiden-til-komfortabel-vintercamping'
+import { HvaErUtekosArticle } from '../articles/[slug]/hva-er-utekos'
+import { HyttekosArticle } from '../articles/[slug]/slik-skaper-du-den-perfekte-stemningen-pa-hytten'
+import { TechDownArticle } from '../articles/[slug]/utekos-techdown-lansering'
+import { BatpussArticle } from '../articles/[slug]/varm-og-klar-for-batpussen'
+import { VinterklargjoringArticle } from '../articles/[slug]/vinterklargjoring-av-hytta'
 
 export const articleComponents = {
   'beredskap-egenomsorg': BeredskapEgenomsorgArticle,
   'hva-er-utekos': HvaErUtekosArticle,
   'balpannen-din-guide-til-den-perfekte-hostkvelden': BalpanneArticle,
-  'vinterklargjoring-av-hytta-en-sjekkliste-for-livsnyteren':
-    VinterklargjoringArticle,
+  'vinterklargjoring-av-hytta-en-sjekkliste-for-livsnyteren': VinterklargjoringArticle,
   'utekos-techdown-lansering': TechDownArticle,
   '5-enkle-tips-for-a-forlenge-terrassesongen': TerrasseArticle,
   'slik-skaper-du-den-perfekte-stemningen-pa-hytta': HyttekosArticle,
   'den-ultimate-guiden-til-komfortabel-vintercamping': VintercampingArticle,
-  'bobil-i-hostferien-de-vakreste-rutene-for-a-oppleve-hostfargene':
-    BobilHostruterArticle,
+  'bobil-i-hostferien-de-vakreste-rutene-for-a-oppleve-hostfargene': BobilHostruterArticle,
   'varm-og-klar-for-batpussen': BatpussArticle
 }
 
-export async function generateMetadata({
-  params
-}: {
-  params: Promise<{ slug: string }>
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const article = mockArticles.find(p => p.slug === slug)
 
@@ -76,23 +69,18 @@ export async function generateStaticParams() {
   return mockArticles.map(article => ({ slug: article.slug }))
 }
 
-export default async function ArticlePage({
-  params
-}: {
-  params: Promise<{ slug: string }>
-}) {
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const article = mockArticles.find(p => p.slug === slug)
-  const ArticleComponent =
-    articleComponents[slug as keyof typeof articleComponents]
+  const ArticleComponent = articleComponents[slug as keyof typeof articleComponents]
 
   if (!article || !ArticleComponent) {
     notFound()
   }
 
   return (
-    <div className='container mx-auto px-4'>
-      <div className='mx-auto md:max-w-4xl'>
+    <div className='container w-screen mx-auto px-4'>
+      <div className='mx-auto w-full'>
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -114,12 +102,9 @@ export default async function ArticlePage({
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <h1 className='!mt-8 !mb-4 text-4xl font-bold tracking-tight md:text-5xl'>
-          {article.title}
-        </h1>
+        <h1 className='!mt-8 !mb-4 text-4xl font-bold tracking-tight md:text-5xl'>{article.title}</h1>
       </div>
       <ArticleComponent />
     </div>
   )
 }
- 

@@ -7,29 +7,28 @@ import { TechDownInfographic } from '@/app/magasinet/utekos-techdown/TechDownInf
 import { TechDownUseCases } from '@/app/magasinet/utekos-techdown/TechDownUseCases'
 import { TechDownCTA } from '@/app/magasinet/utekos-techdown/TechDownCTA'
 import { TechDownPerfectFor } from '@/app/magasinet/utekos-techdown/TechDownPerfectFor'
-import { Activity } from 'react'
 
 export function TechDownArticle() {
   return (
-    <article className='min-h-screen bg-black text-white'>
+    <article className='min-h-screen bg-maritime-darkest w-full  text-cloud-dancer'>
       <TechDownHero />
 
-      <section className='max-w-4xl mx-auto px-6 pt-12'>
-        <p className='text-lg text-gray-300 leading-relaxed'>
+      <section className='w-full mx-auto pt-12'>
+        <p className='text-lg text-cloud-dancer/90'>
           I Utekos har vi ett mål: å forlenge de gode stundene ute. Med TechDown™ introduserer vi en ny
           dimensjon av komfort – for deg som vil nyte terrassen, båtturen eller kvelden ved bålet, uansett
           vær.
         </p>
       </section>
 
-      <section className='max-w-4xl mx-auto px-6 py-8'>
+      <section className='w-full mx-auto py-8'>
         <h2 className='text-3xl font-light mb-8'>Hvorfor vi skapte TechDown™</h2>
-        <p className='text-gray-300 leading-relaxed mb-6'>
+        <p className='text-cloud-dancer/90 mb-6'>
           Utekos-plaggene våre har gitt tusenvis av nordmenn uforglemmelige stunder ute. Den varme, lette og
           luftige komforten er uvurderlig når været byr på motstand. Etter år med tilbakemeldinger og egne
           erfaringer har vi finjustert hver detalj.
         </p>
-        <p className='text-gray-300 leading-relaxed'>
+        <p className='text-cloud-dancer/90'>
           TechDown™ er resultatet: samme herlige komfort, med ekstra trygghet når været skifter. Vi har
           forbedret passformen, tatt i bruk nye materialer og teknologier, og økt allsidigheten. Dette er
           plagget du alltid kan stole på.

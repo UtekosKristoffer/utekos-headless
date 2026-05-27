@@ -4,6 +4,7 @@ import { productReviewBundles } from '@/db/data/reviews/productReviews'
 import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { cacheLife } from 'next/cache'
+import { SITE_URL } from '@/constants'
 import type {
   AggregateOffer,
   AggregateRating,
@@ -44,7 +45,6 @@ type FallbackPricing = {
   originalPrice?: number
 }
 
-const SITE_URL = 'https://utekos.no'
 const PAGE_URL = `${SITE_URL}/handlehjelp/sammenlign-modeller`
 const WEBSITE_ID = `${SITE_URL}/#website`
 const ORGANIZATION_ID = `${SITE_URL}/#organization`

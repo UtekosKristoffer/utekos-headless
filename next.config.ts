@@ -108,6 +108,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'cdn.shopify.com',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'utekos.no',
+        pathname: '/**'
       }
     ],
     formats: ['image/avif', 'image/webp'],

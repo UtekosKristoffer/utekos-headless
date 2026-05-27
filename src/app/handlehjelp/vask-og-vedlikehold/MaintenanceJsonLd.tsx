@@ -1,7 +1,7 @@
 import { cacheLife, cacheTag } from 'next/cache'
+import { SITE_URL } from '@/constants'
 import type { BreadcrumbList, FAQPage, HowTo, WebPage, Graph } from 'schema-dts'
 
-const SITE_URL = 'https://utekos.no'
 const PAGE_URL = `${SITE_URL}/handlehjelp/vask-og-vedlikehold`
 const ORG_ID = `${SITE_URL}/#organization`
 const WEBSITE_ID = `${SITE_URL}/#website`

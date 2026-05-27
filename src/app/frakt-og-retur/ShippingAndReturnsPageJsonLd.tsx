@@ -1,8 +1,8 @@
 import { cacheLife, cacheTag } from 'next/cache'
 import { shippingReturnsFaqItems } from '@/app/frakt-og-retur/data/shippingReturnsContent'
+import { SITE_URL } from '@/constants'
 import type { BreadcrumbList, FAQPage, Graph, WebPage } from 'schema-dts'
 
-const SITE_URL = 'https://utekos.no'
 const PAGE_URL = `${SITE_URL}/frakt-og-retur`
 const ORGANIZATION_ID = `${SITE_URL}/#organization`
 const WEBSITE_ID = `${SITE_URL}/#website`

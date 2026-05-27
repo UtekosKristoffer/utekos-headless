@@ -44,9 +44,9 @@ export default function MagazinePage() {
   const otherArticles = mockArticles.slice(1)
 
   return (
-    <div className='container mx-auto px-4'>
+    <div className='container mx-auto w-full px-4'>
       {featuredArticle && (
-        <section className='mb-16'>
+        <section className='mb-16 w-full'>
           <Link
             href={`/magasinet/${featuredArticle.slug}`}
             className='group block'

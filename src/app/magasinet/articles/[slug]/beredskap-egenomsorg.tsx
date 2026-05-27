@@ -1,15 +1,15 @@
 // Path: src/app/magasinet/(articles)/beredskap-egenomsorg.tsx
-import { HeroBeredskap } from '../beredskap-egenomsorg/HeroBeredskap'
-import { HvorforUtekosSection } from '../beredskap-egenomsorg/HvorforUtekosSection'
-import { ProduktguideBeredskap } from '../beredskap-egenomsorg/ProduktguideBeredskap'
-import { BeredskapspakkenSection } from '../beredskap-egenomsorg/BeredskapspakkenSection'
-import { ProfesjonellBrukSection } from '../beredskap-egenomsorg/ProfesjonellBrukSection'
+import { HeroBeredskap } from '../../beredskap-egenomsorg/HeroBeredskap'
+import { HvorforUtekosSection } from '../../beredskap-egenomsorg/HvorforUtekosSection'
+import { ProduktguideBeredskap } from '../../beredskap-egenomsorg/ProduktguideBeredskap'
+import { BeredskapspakkenSection } from '../../beredskap-egenomsorg/BeredskapspakkenSection'
+import { ProfesjonellBrukSection } from '../../beredskap-egenomsorg/ProfesjonellBrukSection'
 import Image from 'next/image'
 import Kaffe from '@public/coffe_utekos.webp'
 import Stapper from '@public/kompresjonsbag.webp'
 import Lykt from '@public/magasinet/den-ultimate-hyggen.png'
-import { BeredskapOppsummeringSection } from '../beredskap-egenomsorg/BeredskapsOppsummeringSection'
-import { BeredskapsProductCarousel } from '../beredskap-egenomsorg/BeredskapsProductCarousel'
+import { BeredskapOppsummeringSection } from '../../beredskap-egenomsorg/BeredskapsOppsummeringSection'
+import { BeredskapsProductCarousel } from '../../beredskap-egenomsorg/BeredskapsProductCarousel'
 import Link from 'next/link'
 export function BeredskapEgenomsorgArticle() {
   return (
@@ -29,10 +29,7 @@ export function BeredskapEgenomsorgArticle() {
       </div>
       <ProduktguideBeredskap />
       <div className='relative'>
-        <Link
-          href='/produkter'
-          data-track='BeredskapEgenomsorgArticleAllProductsClick'
-        >
+        <Link href='/produkter' data-track='BeredskapEgenomsorgArticleAllProductsClick'>
           <Image
             src={Kaffe}
             alt='Utekos i en beredskapssituasjon, illustrerer varme og komfort'
@@ -47,10 +44,7 @@ export function BeredskapEgenomsorgArticle() {
       <BeredskapspakkenSection />
 
       <div className='relative'>
-        <Link
-          href='/produkter/utekos-stapper'
-          data-track='BeredskapEgenomsorgArticleStapperClick'
-        >
+        <Link href='/produkter/utekos-stapper' data-track='BeredskapEgenomsorgArticleStapperClick'>
           <Image
             src={Stapper}
             alt='Utekos i en beredskapssituasjon, illustrerer varme og komfort'
