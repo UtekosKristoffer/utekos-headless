@@ -28,19 +28,15 @@ export function SectionThreeInOne() {
           Friheten til å velge
         </h2>
         <p className='gsap-three-subtitle mx-auto max-w-2xl text-balance font-utekos-text text-base leading-[1.45] tracking-tight text-cloud-dancer/95'>
-          Det unike med Utekos<span className='text-overcast'>®</span> er
-          transformasjonen. Fra en isolerende kokong til en elegant parkas på
-          sekunder. Juster, form og nyt.
+          Det unike med Utekos<span className='text-overcast'>®</span> er transformasjonen. Fra en isolerende
+          kokong til en elegant parkas på sekunder. Juster, form og nyt.
         </p>
       </div>
 
       {/* MOBILE: stacked cards */}
       <div className='flex flex-col pb-20 xl:hidden'>
-        {Steps.map((step, index) => (
-          <div
-            key={step.id}
-            className='gsap-mobile-step-panel mb-12 flex flex-col last:mb-0'
-          >
+        {Steps.map(step => (
+          <div key={step.id} className='gsap-mobile-step-panel mb-12 flex flex-col last:mb-0'>
             <div className='relative aspect-square w-full overflow-hidden border-y border-cloud-dancer/10 bg-mountain-view'>
               <Image
                 src={step.image}
@@ -70,9 +66,7 @@ export function SectionThreeInOne() {
 
             <div className='mx-auto w-full max-w-[36rem] px-6 pt-6 md:px-8 lg:max-w-[34rem]'>
               <div className='gsap-step-eyebrow mb-2 flex items-center gap-2 text-overcast'>
-                <span className='gsap-step-icon inline-flex shrink-0 text-overcast'>
-                  {step.icon}
-                </span>
+                <span className='gsap-step-icon inline-flex shrink-0 text-overcast'>{step.icon}</span>
                 <span className='font-utekos-text text-sm font-medium leading-[1.4] tracking-tight'>
                   {step.modeName}
                 </span>
@@ -97,9 +91,7 @@ export function SectionThreeInOne() {
               key={step.id}
               className={cn(
                 'absolute inset-0 flex h-full w-full items-center justify-center p-6 transition-all duration-1000 ease-in-out min-[1536px]:p-10',
-                activeStep === index ?
-                  'z-10 scale-100 opacity-100'
-                : 'z-0 scale-105 opacity-0'
+                activeStep === index ? 'z-10 scale-100 opacity-100' : 'z-0 scale-105 opacity-0'
               )}
             >
               <div className='relative aspect-square w-[min(86%,82vh)] overflow-hidden rounded-[1.5rem] border border-cloud-dancer/10 bg-maritime-darkest/18 shadow-2xl'>
@@ -131,9 +123,7 @@ export function SectionThreeInOne() {
                 key={i}
                 className={cn(
                   'h-1 rounded-full transition-all duration-500',
-                  activeStep === i ? 'w-8 bg-overcast' : (
-                    'w-2 bg-cloud-dancer/20'
-                  )
+                  activeStep === i ? 'w-8 bg-overcast' : 'w-2 bg-cloud-dancer/20'
                 )}
               />
             ))}
@@ -149,9 +139,7 @@ export function SectionThreeInOne() {
             >
               <div className='will-change-transform'>
                 <div className='gsap-step-eyebrow mb-4 flex items-center gap-3 font-utekos-text text-sm font-medium leading-[1.4] tracking-tight text-overcast'>
-                  <span className='gsap-step-icon inline-flex shrink-0 text-overcast'>
-                    {step.icon}
-                  </span>
+                  <span className='gsap-step-icon inline-flex shrink-0 text-overcast'>{step.icon}</span>
                   <span>
                     {step.stepNumber} — {step.modeName}
                   </span>

@@ -12,6 +12,7 @@ export function useCartMutations() {
     const snapshot = await createMutationPromise({ type: 'ADD_LINES', input: payload }, actor)
 
     const result = snapshot.context.lastResult
+
     if (result) {
       return result
     }

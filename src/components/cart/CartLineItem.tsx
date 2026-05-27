@@ -94,16 +94,14 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
 
   const variantId = line.merchandise.id
   const baseUrl = productHandle ? `/produkter/${productHandle}` : '/'
-  const variantQuery =
-    variantId ? `?variant=${encodeURIComponent(variantId)}` : ''
+  const variantQuery = variantId ? `?variant=${encodeURIComponent(variantId)}` : ''
 
   const productUrl = `${baseUrl}${variantQuery}` as Route
 
   const variantTitle = line.merchandise.title || ''
   const imageUrl = line.merchandise.image?.url
   const [color, size] = variantTitle.split(' / ')
-  const basePrice =
-    parseFloat(line.cost?.totalAmount?.amount || '0') / line.quantity
+  const basePrice = parseFloat(line.cost?.totalAmount?.amount || '0') / line.quantity
   const displayPrice = basePrice * localQuantity
 
   return (
@@ -119,13 +117,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
             className='overflow-hidden rounded-lg border border-neutral-700 bg-background'
           >
             {imageUrl ?
-              <Image
-                src={imageUrl}
-                alt={productTitle}
-                fill
-                className='object-cover'
-                sizes='96px'
-              />
+              <Image src={imageUrl} alt={productTitle} fill className='object-cover' sizes='96px' />
             : <div className='flex size-full items-center justify-center text-gray-400'>
                 <span className='text-xs'>Ingen bilde</span>
               </div>
@@ -137,13 +129,8 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
       <div className='flex min-w-0 flex-1 flex-col'>
         <div className='relative'>
           <div className='min-w-0 pr-8'>
-            <Link
-              href={productUrl}
-              onClick={() => cartStore.send({ type: 'CLOSE' })}
-            >
-              <h3 className='break-words text-sm font-medium hover:underline'>
-                {productTitle}
-              </h3>
+            <Link href={productUrl} onClick={() => cartStore.send({ type: 'CLOSE' })}>
+              <h3 className='break-words text-sm font-medium hover:underline'>{productTitle}</h3>
             </Link>
             {color && size && (
               <p className='mt-1 text-xs text-muted-foreground'>
@@ -156,12 +143,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
               <AlertDialog>
                 <Activity>
                   <AlertDialogTrigger asChild>
-                    <Button
-                      variant='ghost'
-                      size='icon'
-                      className='size-6 p-0'
-                      disabled={isDeleting}
-                    >
+                    <Button variant='ghost' size='icon' className='size-6 p-0' disabled={isDeleting}>
                       <Trash2 className='size-4 text-red-500' />
                     </Button>
                   </AlertDialogTrigger>
@@ -200,9 +182,8 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
           <div className='flex items-center gap-1'>
             <Activity>
               <Button
-                variant='default'
                 size='icon'
-                className='size-7 rounded-md transition-transform active:scale-90'
+                className='size-7 rounded-md bg-cloud-dancer text-maritime-darkest hover:bg-cloud-dancer/90 transition-transform active:scale-90'
                 onClick={() => handleUpdateQuantity(localQuantity - 1)}
                 disabled={localQuantity <= 1 || isDeleting}
               >
@@ -214,9 +195,8 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
             </span>
             <Activity>
               <Button
-                variant='default'
                 size='icon'
-                className='size-7 rounded-md transition-transform active:scale-90'
+                className='size-7 rounded-md bg-cloud-dancer text-maritime-darkest hover:bg-cloud-dancer/90 transition-transform active:scale-90'
                 onClick={() => handleUpdateQuantity(localQuantity + 1)}
                 disabled={isDeleting || localQuantity >= 99}
               >

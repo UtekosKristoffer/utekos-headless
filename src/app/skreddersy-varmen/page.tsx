@@ -5,17 +5,16 @@ import { DeferredLandingSections } from '@/app/skreddersy-varmen/components/Defe
 import { HeroAndEmpathy } from './components/HeroEmpathy'
 import { LandingPurchaseFallback } from './components/LandingPurchaseFallback'
 import { LandingPurchaseSection } from './components/LandingPurchaseSection'
-import { ProductDetailsAccordion } from './utekos-orginal/components/ProductDetailsAccordion'
-import { StickyMobileAction } from './utekos-orginal/components/StickyMobileAction'
-import { PreFooterNavigation } from './utekos-orginal/components/PreFooterNavigation'
+import { StickyMobileAction } from './components/StickyMobileAction'
+import { PreFooterNavigation } from './components/PreFooterNavigation'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Skreddersy varmen | Utekos',
+  title: 'Utekos: Skreddersy varmen',
   description: 'Kompromissløs komfort og overlegen allsidighet. Juster, form og nyt.',
   category: 'Yttertøy',
-  authors: [{ name: 'Utekos fagredaksjon', url: 'https://utekos.no/om-oss' }],
-  creator: 'Utekos fagredaksjon',
+  authors: [{ name: 'Utekos', url: 'https://utekos.no/om-oss' }],
+  creator: 'Utekos',
   publisher: 'Utekos',
   alternates: {
     canonical: 'https://utekos.no/skreddersy-varmen'
@@ -69,7 +68,6 @@ export default function LandingPage() {
         </Suspense>
       </div>
 
-      <ProductDetailsAccordion />
       <PreFooterNavigation />
     </section>
   )

@@ -7,6 +7,7 @@ import { ThreeInOneDemo } from './components/ThreeInOneDemo'
 import { SizeGuideTable } from './components/SizeGuideTable'
 import { PurchaseSection } from './components/PurchaseSection'
 import { ProductDetailsAccordion } from './components/ProductDetailsAccordion'
+
 export const metadata: Metadata = {
   title: 'Skreddersy varmen | Utekos',
   description: 'Kompromissløs komfort og overlegen allsidighet. Juster, form og nyt.',

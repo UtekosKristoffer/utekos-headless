@@ -1,6 +1,6 @@
 // Path: src/app/skreddersy-varmen/utekos-orginal/components/LandingPageJsonLd.tsx
 import { cacheLife, cacheTag } from 'next/cache'
-import { reviews } from '../utils/reviews'
+import { reviews } from '../../data/reviews'
 import {
   LANDING_AUTHOR_NAME,
   LANDING_BASE_URL,

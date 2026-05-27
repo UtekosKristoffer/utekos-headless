@@ -4,7 +4,7 @@ import type { Route } from 'next'
 export const LANDING_BASE_URL = 'https://utekos.no'
 export const LANDING_PAGE_URL = `${LANDING_BASE_URL}/skreddersy-varmen`
 export const LANDING_LAST_UPDATED = '2026-05-22'
-export const LANDING_AUTHOR_NAME = 'Utekos fagredaksjon'
+export const LANDING_AUTHOR_NAME = 'Utekos'
 
 export type LandingProductSeed = {
   position: number

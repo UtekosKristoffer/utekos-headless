@@ -4,6 +4,7 @@ import type { Image } from 'types/media'
 import type { ShopifyProduct } from './ShopifyProduct'
 import type { ShopifyProductVariant } from './ShopifyProductVariant'
 import type { ColorVariant, ModelKey, ProductConfig } from './ProductTypes'
+
 export type ProductPageViewProps = {
   productData: ShopifyProduct
   selectedVariant: ShopifyProductVariant
@@ -23,11 +24,12 @@ export type PurchaseClientViewProps = {
   setSelectedColorIndex: (index: number) => void
   selectedSize: string
   setSelectedSize: (size: string) => void
+  selectableSizes?: string[]
   handleAddToCart: () => void
-  handleGoToCheckout: () => Promise<void>
+  handleGoToCheckout?: () => Promise<void>
   isPending: boolean
   currentConfig: ProductConfig
-  currentColor: ColorVariant
+  currentColor: ColorVariant | undefined
   isTechDownOffer: boolean
 }
 

@@ -3,7 +3,6 @@ import { findMatchingVariant } from '@/components/ProductCard/findMatchingVarian
 import { Button } from '@/components/ui/button'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import { formatPrice } from '@/lib/utils/formatPrice'
-import type { ShopifyProduct } from 'types/product'
 import type { UpsellItemProps } from 'types/cart'
 import { ArrowRightIcon, PercentIcon } from 'lucide-react'
 import Image from 'next/image'
@@ -54,9 +53,7 @@ export function UpsellItem({ product, showDiscountHint }: UpsellItemProps) {
             <div className='flex items-center gap-2 text-xs text-muted-foreground mt-1'>
               {showDiscountHint ?
                 <>
-                  <span className='line-through'>
-                    {formatPrice(product.priceRange.minVariantPrice)}
-                  </span>
+                  <span className='line-through'>{formatPrice(product.priceRange.minVariantPrice)}</span>
                   <span className='font-bold text-white'>
                     {formatPrice({
                       amount: discountedPrice.toString(),
@@ -75,7 +72,7 @@ export function UpsellItem({ product, showDiscountHint }: UpsellItemProps) {
             size='sm'
             onClick={handleAddToCart}
             disabled={!selectedVariant}
-            className='w-full sm:w-auto sm:flex-shrink-0'
+            className='w-full bg-ancient-water text-maritime-darkest hover:bg-cloud-dancer/80 sm:w-auto sm:flex-shrink-0'
           >
             Legg til <ArrowRightIcon className='ml-2 h-4 w-4' />
           </Button>

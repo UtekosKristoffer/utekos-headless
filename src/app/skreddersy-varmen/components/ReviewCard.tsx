@@ -1,6 +1,6 @@
 import { Star, MapPin, BadgeCheck } from 'lucide-react'
 import { cn } from '@/lib/utils/className'
-import type { Review } from '../utekos-orginal/utils/reviews'
+import type { Review } from '../data/reviews'
 import { initialsFrom } from '@/app/skreddersy-varmen/utils/initialsFrom'
 
 export function ReviewCard({ review }: { review: Review }) {

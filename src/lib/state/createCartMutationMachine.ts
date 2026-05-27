@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 // Path: src/lib/state/createCartMutationMachine.ts
 import { assign, fromPromise, setup, type ErrorActorEvent } from 'xstate'
 import { extractCartErrorMessage } from '@/lib/errors/extractCartErrorMessage'
@@ -31,15 +30,18 @@ export const createCartMutationMachine = (
 
             return serverActions.addCartLine(lines, discountCode)
           }
+
           case 'UPDATE_LINE':
             return serverActions.updateCartLineQuantity(event.input)
+
           case 'REMOVE_LINE':
             return serverActions.removeCartLine(event.input)
+
           case 'CLEAR':
             return serverActions.clearCart()
-          default: {
-            throw new Error(`Unhandled event type in cartMutator`)
-          }
+
+          default:
+            throw new Error('Unhandled event type in cartMutator')
         }
       })
     }
@@ -58,7 +60,6 @@ export const createCartMutationMachine = (
         entry: assign({ error: null, lastResult: null }),
         invoke: {
           src: 'cartMutator',
-
           input: ({ event }) => event as CartMutationEvent,
           onDone: [
             {
@@ -78,6 +79,7 @@ export const createCartMutationMachine = (
                 }),
                 ({ event }) => {
                   const newCart = event.output.cart
+
                   if (newCart?.id) {
                     setCartId(newCart.id)
                     updateCartCache(newCart)
@@ -92,12 +94,15 @@ export const createCartMutationMachine = (
               error: ({ event }: { event: ErrorActorEvent }) => {
                 try {
                   const serverActionResult = event.error as CartActionsResult
+
                   if (serverActionResult?.message) {
                     return serverActionResult.message
                   }
+
                   return extractCartErrorMessage(event.error)
                 } catch (extractionError) {
                   console.error('Error extracting cart error message:', extractionError)
+
                   return 'En uventet feil oppstod under behandling av handlekurven'
                 }
               },

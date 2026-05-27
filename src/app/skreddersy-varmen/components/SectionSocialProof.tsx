@@ -2,15 +2,13 @@
 'use client'
 
 import { Star, Quote } from 'lucide-react'
-import { reviews } from '../utils/reviews'
+import { reviews } from '../data/reviews'
 import { useSocialProofMarqueeAnimations } from '@/hooks/useSocialProofMarqueeAnimations'
 import { ReviewCard } from '@/app/skreddersy-varmen/components/ReviewCard'
 
 export function SectionSocialProof() {
   const { containerRef, trackRef } = useSocialProofMarqueeAnimations()
-  const averageRating = (
-    reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
-  ).toFixed(1)
+  const averageRating = (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1)
 
   return (
     <section
@@ -48,8 +46,7 @@ export function SectionSocialProof() {
           </h2>
 
           <p className='gsap-sp-subtitle mx-auto mt-5 max-w-[34ch] text-balance break-words text-[clamp(0.875rem,3.4vw,1.125rem)] leading-[1.45] tracking-[-0.01em] text-cloud-dancer md:max-w-2xl'>
-            Ord fra dem som allerede har byttet den snikende trekken mot en lun
-            kokong.
+            Ord fra dem som allerede har byttet den snikende trekken mot en lun kokong.
           </p>
         </header>
       </div>
@@ -69,10 +66,7 @@ export function SectionSocialProof() {
           className='pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-mountain-view to-transparent md:w-24'
         />
 
-        <div
-          ref={trackRef}
-          className='gsap-sp-track flex w-max will-change-transform'
-        >
+        <div ref={trackRef} className='gsap-sp-track flex w-max will-change-transform'>
           {[...reviews, ...reviews].map((review, i) => (
             <div
               key={`${review.id}-${i}`}
