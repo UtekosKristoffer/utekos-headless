@@ -1,3 +1,17 @@
+import { rawMagazineArticles } from '@/app/magasinet/data/magazineArticles'
+import { validateMagazineArticles } from '@/app/magasinet/utils/validateMagazineArticles'
+
+const magazineArticlesValidation = validateMagazineArticles(rawMagazineArticles)
+const magazineArticleLines =
+  magazineArticlesValidation.success ?
+    magazineArticlesValidation.articles
+      .map(
+        article =>
+          `- [${article.title}](https://utekos.no/magasinet/${article.slug}): ${article.excerpt}`
+      )
+      .join('\n')
+  : ''
+
 const body = `# Utekos
 
 > Utekos® er et norsk komfortkonsept for mennesker som vil holde seg varme, tørre og fleksible ute uten å gi fra seg bevegelsesfrihet eller ro. Produktene brukes typisk på terrasse, hytte, båt, bobil, rundt bålpannen og i kalde pauser før eller etter aktivitet.
@@ -112,12 +126,7 @@ Utekos Stapper™ er en kompresjonsbag som reduserer volumet på klær og sovepo
 ## Editorial and inspiration
 
 - [Magasinet](https://utekos.no/magasinet): Hovedinngang til redaksjonelt innhold.
-- [Beredskapsuken 2025: Hvordan Utekos oppgraderer din egenberedskap](https://utekos.no/magasinet/beredskap-egenomsorg): Bruk av Utekos og Stapper™ i beredskapsscenarier.
-- [Utekos TechDown™ - Plagget som redefinerer personlig komfort.](https://utekos.no/magasinet/utekos-techdown-lansering): Lanseringskontekst for TechDown™.
-- [Historien og filosofien bak Utekos: En investering i din egen hygge](https://utekos.no/magasinet/hva-er-utekos): Filosofi og merkevarefortelling.
-- [Vinterklargjøring av hytten: En sjekkliste for livsnyteren](https://utekos.no/magasinet/vinterklargjoring-av-hytta-en-sjekkliste-for-livsnyteren): Hytteliv i kald sesong.
-- [5 enkle tips som forlenger terrassesesongen med måneder](https://utekos.no/magasinet/5-enkle-tips-for-a-forlenge-terrassesongen): Terrassebruk og kaldere kvelder.
-- [Vårpussen av båten: Slik holder du varmen](https://utekos.no/magasinet/varm-og-klar-for-batpussen): Båtliv og vårbruk.
+${magazineArticleLines}
 - [Inspirasjon](https://utekos.no/inspirasjon): Temasider for bruksscenarier.
 - [Hytteliv](https://utekos.no/inspirasjon/hytteliv)
 - [Bobilliv](https://utekos.no/inspirasjon/bobil)

@@ -1,7 +1,7 @@
-// Path: src/app/magasinet/utils/getMagazineArticleSlugs.ts
+import { getMagazineArticles } from './getMagazineArticles'
 
-import { magazineArticles } from './magazineArticles'
+export async function getMagazineArticleSlugs() {
+  const articles = await getMagazineArticles()
 
-export function getMagazineArticleSlugs() {
-  return magazineArticles.map(article => ({ slug: article.slug }))
+  return articles.map(article => ({ slug: article.slug }))
 }

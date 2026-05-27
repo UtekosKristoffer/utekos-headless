@@ -1,8 +1,8 @@
 // Path: src/app/magasinet/seo/buildMagazineOverviewMetadata.ts
 
 import type { Metadata } from 'next'
+import { SITE_URL } from '@/constants'
 
-const SITE_URL = 'https://utekos.no'
 const MAGAZINE_PATH = '/magasinet'
 const MAGAZINE_URL = `${SITE_URL}${MAGAZINE_PATH}`
 
@@ -14,7 +14,10 @@ const imageUrl = `${SITE_URL}/og-image.jpg`
 
 export function buildMagazineOverviewMetadata(): Metadata {
   return {
-    title,
+    metadataBase: new URL(SITE_URL),
+    title: {
+      absolute: title
+    },
     description,
     alternates: {
       canonical: MAGAZINE_PATH

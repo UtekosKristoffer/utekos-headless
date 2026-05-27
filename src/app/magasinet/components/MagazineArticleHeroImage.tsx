@@ -1,5 +1,3 @@
-// Path: src/app/magasinet/components/MagazineArticleHeroImage.tsx
-
 import Image from 'next/image'
 import type { MagazineArticle } from '../types'
 
@@ -8,24 +6,20 @@ type MagazineArticleHeroImageProps = {
 }
 
 export function MagazineArticleHeroImage({ article }: MagazineArticleHeroImageProps) {
-  const imageAlt = article.imageAlt || article.title
-
   return (
-    <figure className='mt-10 px-4 py-8 sm:px-6 lg:px-8  overflow-hidden rounded-3xl border border-maritime-darkest/10 bg-maritime-darkest/5 shadow-[0_24px_80px_-48px_rgba(20,24,22,0.45)]'>
-      <div className='relative aspect-[16/9] w-[90%] mx-auto rounded-3xl overflow-hidden'>
-        <Image
-          src={article.imageUrl}
-          alt={imageAlt}
-          fill
-          preload
-          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 896px, 896px'
-          className='object-cover'
-        />
-      </div>
-
-      {article.imageCaption && (
-        <figcaption className='px-5 py-3 font-utekos-text text-sm leading-[1.45] text-maritime-darkest/64'>
-          {article.imageCaption}
+    <figure className='overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest shadow-[0_28px_90px_-58px_color-mix(in_oklch,var(--maritime-darkest)_92%,transparent)]'>
+      <Image
+        src={article.heroImage.src}
+        alt={article.heroImage.alt}
+        width={article.heroImage.width}
+        height={article.heroImage.height}
+        sizes='(max-width: 1024px) calc(100vw - 32px), 44vw'
+        className='aspect-[4/3] h-auto w-full object-cover'
+        priority
+      />
+      {article.heroImage.caption && (
+        <figcaption className='bg-maritime-darkest px-5 py-4 font-utekos-text text-sm leading-[1.45] tracking-tight text-cloud-dancer/72'>
+          {article.heroImage.caption}
         </figcaption>
       )}
     </figure>

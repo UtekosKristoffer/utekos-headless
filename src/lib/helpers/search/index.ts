@@ -1,6 +1,7 @@
 // Path: src/lib/helpers/search/index.ts
 import type { SearchGroup, SearchItem } from '@/app/api/search-index/types'
-import { mockArticles } from '@/db/data/articles'
+import { rawMagazineArticles } from '@/app/magasinet/data/magazineArticles'
+import { validateMagazineArticles } from '@/app/magasinet/utils/validateMagazineArticles'
 import { SEARCH_CONFIG, GROUP_LABELS } from './searchConfig'
 export type ClientSearchItem = SearchItem
 
@@ -15,7 +16,10 @@ function normalizeText(text: string): string {
     .trim()
 }
 
-export function buildSearchIndex(_allPaths?: string[]) {
+export function buildSearchIndex() {
+  const validationResult = validateMagazineArticles(rawMagazineArticles)
+  const magazineArticles = validationResult.success ? validationResult.articles : []
+
   const staticItems: SearchItem[] = SEARCH_CONFIG.map(item => ({
     id: item.id,
     title: item.title,
@@ -29,13 +33,10 @@ export function buildSearchIndex(_allPaths?: string[]) {
     ].filter(Boolean)
   }))
 
-  const magazineItems: SearchItem[] = mockArticles.map(article => {
+  const magazineItems: SearchItem[] = magazineArticles.map(article => {
     const slugWords = article.slug.split('-').filter(word => word.length > 2)
     const titleWords = article.title.split(' ').filter(word => word.length > 2)
-    const excerptWords = (article.excerpt ?? '')
-      .split(' ')
-      .slice(0, 20)
-      .filter(Boolean)
+    const excerptWords = (article.excerpt ?? '').split(' ').slice(0, 20).filter(Boolean)
 
     return {
       id: `magazine-${article.slug}`,
@@ -80,9 +81,7 @@ export function buildSearchIndex(_allPaths?: string[]) {
       if (group) {
         group.items.push(item)
       } else {
-        console.warn(
-          `Fant ikke gruppe for key: ${groupKey} for item ${item.id}`
-        )
+        console.warn(`Fant ikke gruppe for key: ${groupKey} for item ${item.id}`)
       }
     } else {
       console.warn(`Kunne ikke bestemme gruppe for item ${item.id}`)

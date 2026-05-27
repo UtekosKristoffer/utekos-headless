@@ -1,7 +1,8 @@
-// Path: src/app/magasinet/utils/getMagazineArticle.ts
+import type { MagazineArticle } from '../types'
+import { getMagazineArticles } from './getMagazineArticles'
 
-import { magazineArticles } from './magazineArticles'
+export async function getMagazineArticle(slug: string): Promise<MagazineArticle | null> {
+  const articles = await getMagazineArticles()
 
-export function getMagazineArticle(slug: string) {
-  return magazineArticles.find(article => article.slug === slug) ?? null
+  return articles.find(article => article.slug === slug) ?? null
 }

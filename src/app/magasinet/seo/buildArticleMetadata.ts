@@ -7,12 +7,15 @@ import { toAbsoluteUrl } from '../utils/toAbsoluteUrl'
 
 export function buildArticleMetadata(article: MagazineArticle): Metadata {
   const url = `${SITE_URL}/magasinet/${article.slug}`
-  const title = article.seoTitle ?? `${article.title} | Utekos Magasinet`
-  const description = article.seoDescription ?? article.excerpt
-  const imageUrl = toAbsoluteUrl(article.imageUrl)
+  const title = article.seo?.title ?? `${article.title} | Utekos Magasinet`
+  const description = article.seo?.description ?? article.excerpt
+  const imageUrl = toAbsoluteUrl(article.heroImage.src)
 
   return {
-    title,
+    metadataBase: new URL(SITE_URL),
+    title: {
+      absolute: title
+    },
     description,
     alternates: {
       canonical: url
@@ -27,9 +30,9 @@ export function buildArticleMetadata(article: MagazineArticle): Metadata {
       images: [
         {
           url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: article.imageAlt ?? article.title
+          width: article.heroImage.width,
+          height: article.heroImage.height,
+          alt: article.heroImage.alt
         }
       ],
       publishedTime: article.publishedAt,

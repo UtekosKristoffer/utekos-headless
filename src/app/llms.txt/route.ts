@@ -1,3 +1,17 @@
+import { rawMagazineArticles } from '@/app/magasinet/data/magazineArticles'
+import { validateMagazineArticles } from '@/app/magasinet/utils/validateMagazineArticles'
+
+const magazineArticlesValidation = validateMagazineArticles(rawMagazineArticles)
+const magazineArticleLines =
+  magazineArticlesValidation.success ?
+    magazineArticlesValidation.articles
+      .map(
+        article =>
+          `- [${article.title}](https://utekos.no/magasinet/${article.slug}): ${article.excerpt}`
+      )
+      .join('\n')
+  : ''
+
 const body = `# Utekos
 
 > Utekos® er en norsk merkevare som består av en kolleksjon med kompromissløs utendørs komfort. Produktene er bygget for å forlenge gode øyeblikk på terrasse, hytte, båt, bobil og i kaldt vær, med tydelig fokus på varme, fleksibilitet, materialkvalitet og enkel bruk.
@@ -45,12 +59,7 @@ intuitive ventilasjonsytemer, YKK® Dual V-Zip™ og en lengre liste med ytterli
 ## Utekos-magasinet
 
 - [Magasinet](https://utekos.no/magasinet): Redaksjonell inngang til inspirasjon, tips og historier.
-- [Beredskapsuken 2025: Hvordan Utekos oppgraderer din egenberedskap](https://utekos.no/magasinet/beredskap-egenomsorg): Bruk av Utekos i beredskap og egenomsorg.
-- [Utekos TechDown™ - Plagget som redefinerer personlig komfort.](https://utekos.no/magasinet/utekos-techdown-lansering): Lanseringsartikkel for TechDown™.
-- [Historien og filosofien bak Utekos: En investering i din egen hygge](https://utekos.no/magasinet/hva-er-utekos): Historien og filosofien bak Utekos: En investering i din egen hygge.
-- [Vinterklargjøring av hytten: En sjekkliste for livsnyteren](https://utekos.no/magasinet/vinterklargjoring-av-hytta-en-sjekkliste-for-livsnyteren): Vinterklargjøring av hytten: En sjekkliste for livsnyteren.
-- [5 enkle tips som forlenger terrassesesongen med måneder](https://utekos.no/magasinet/5-enkle-tips-for-a-forlenge-terrassesongen): Forlenger terrassesesongen med Utekos sine eksperttips.
-- [Vårpussen av båten: Slik holder du varmen](https://utekos.no/magasinet/varm-og-klar-for-batpussen): Bruksscenario for båtliv.
+${magazineArticleLines}
 
 ## Illustrasjon av Utekos sitt uendelige bruksområde. 
 

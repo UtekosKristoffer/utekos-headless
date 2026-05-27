@@ -6,7 +6,7 @@ import { cacheLife } from 'next/cache'
 async function getCachedSearchIndex() {
   'use cache'
   cacheLife('hours')
-  const { groups } = buildSearchIndex([])
+  const { groups } = buildSearchIndex()
 
   return groups
 }

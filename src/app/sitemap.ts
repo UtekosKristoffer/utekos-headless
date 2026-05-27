@@ -1,6 +1,6 @@
 // Path: src/app/sitemap.ts
 import { getProducts } from '@/api/lib/products/getProducts'
-import { getMagazineArticles } from '@/db/data/articles'
+import { getMagazineArticles } from '@/app/magasinet/utils/getMagazineArticles'
 import type { MetadataRoute } from 'next'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://utekos.no'
@@ -139,13 +139,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const articleUrls: MetadataRoute.Sitemap = articles.map(article => ({
     url: `${baseUrl}/magasinet/${article.slug}`,
-    lastModified: article.updatedAt, // Denne er allerede ISO-streng fra getMagazineArticles
+    lastModified: article.updatedAt,
     changeFrequency: 'monthly',
     priority: 0.8,
     images:
-      article.imageUrl.startsWith('/') ?
-        [`${baseUrl}${article.imageUrl}`]
-      : [article.imageUrl]
+      article.heroImage.src.startsWith('/') ?
+        [`${baseUrl}${article.heroImage.src}`]
+      : [article.heroImage.src]
   }))
 
   return [

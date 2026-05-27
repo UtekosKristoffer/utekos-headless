@@ -1,29 +1,29 @@
-// src/app/magasinet/_components/MagazineArticleShell.tsx
-
-import type { ReactNode } from 'react'
-import { MagazineNewsletterSection } from './MagazineNewsletterSection'
 import type { MagazineArticle } from '../types'
-import { MagazineBreadcrumbs } from './MagazineBreadcrumbs'
+import { getMagazineThemeStyle } from '../utils/getMagazineThemeStyle'
+import { MagazineArticleBlocks } from './MagazineArticleBlocks'
 import { MagazineArticleHeader } from './MagazineArticleHeader'
+import { MagazineBreadcrumbs } from './MagazineBreadcrumbs'
+import { MagazineNewsletterSection } from './MagazineNewsletterSection'
+import { MagazineRelatedArticles } from './MagazineRelatedArticles'
 
 type MagazineArticleShellProps = {
   article: MagazineArticle
-  children: ReactNode
+  relatedArticles: MagazineArticle[]
 }
 
-export function MagazineArticleShell({ article, children }: MagazineArticleShellProps) {
+export function MagazineArticleShell({ article, relatedArticles }: MagazineArticleShellProps) {
   return (
-    <article className='bg-overcast mx-auto max-w-[90%] text-maritime-darkest'>
-      <div className='mx-auto w-full max-w-screen py-8 '>
-        <div className='mb-10  mx-auto px-4 sm:px-6 lg:px-8'>
+    <article className='bg-overcast text-maritime-darkest' style={getMagazineThemeStyle(article.theme)}>
+      <section className='border-b border-maritime-darkest/12 bg-overcast text-maritime-darkest'>
+        <div className='container mx-auto px-4 py-5'>
           <MagazineBreadcrumbs article={article} />
         </div>
-
-        <MagazineArticleHeader article={article} />
+      </section>
+      <MagazineArticleHeader article={article} />
+      <div className='mx-auto w-full max-w-3xl px-4 py-14 sm:py-20'>
+        <MagazineArticleBlocks blocks={article.blocks} />
       </div>
-
-      <div className='mx-auto w-full max-w-screen'>{children}</div>
-
+      <MagazineRelatedArticles articles={relatedArticles} />
       <MagazineNewsletterSection />
     </article>
   )

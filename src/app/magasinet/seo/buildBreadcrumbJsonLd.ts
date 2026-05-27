@@ -2,8 +2,7 @@
 
 import type { BreadcrumbList, WithContext } from 'schema-dts'
 import type { MagazineArticle } from '../types'
-
-const SITE_URL = 'https://utekos.no'
+import { SITE_URL } from '@/constants'
 
 export function buildBreadcrumbJsonLd(article: MagazineArticle): WithContext<BreadcrumbList> {
   return {
@@ -19,7 +18,8 @@ export function buildBreadcrumbJsonLd(article: MagazineArticle): WithContext<Bre
       {
         '@type': 'ListItem',
         'position': 2,
-        'name': article.title
+        'name': article.title,
+        'item': `${SITE_URL}/magasinet/${article.slug}`
       }
     ]
   }

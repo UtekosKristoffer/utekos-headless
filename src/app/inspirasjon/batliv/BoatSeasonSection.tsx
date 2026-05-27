@@ -23,10 +23,8 @@ export function BoatSeasonSection() {
 
       <div className='container mx-auto px-4'>
         <div className='animate-fade-in-up mb-16 text-center'>
-          <h2 className='text-3xl font-bold tracking-normal sm:text-4xl lg:text-5xl'>
-            Tips for en lengre sesong
-          </h2>
-          <p className='mx-auto mt-4 max-w-2xl text-lg text-overcast'>
+          <h2 className='text-maritime-darkest mx-auto max-w-3xl'>Tips for en lengre sesong</h2>
+          <p className='mx-auto mt-4 max-w-2xl text-lg text-maritime-darkest'>
             Nyt båtlivet fra tidlig vår til sen høst
           </p>
         </div>

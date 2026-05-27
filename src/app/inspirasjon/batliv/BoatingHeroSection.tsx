@@ -9,19 +9,17 @@ const boatingFeatureCards = [
     title: 'Soloppgang',
     description: 'Nyt morgenkaffeen i cockpiten',
     Icon: Sun,
-    iconColor:
-      'color-mix(in oklch, var(--maritime-darkest) 70%, var(--soft-warm))',
-    borderColor: 'color-mix(in oklch, var(--soft-warm) 42%, transparent)',
+    iconColor: 'color-mix(in oklch, var(--bleached-mauve) 70%, var(--bleached-mauve',
+    borderColor: 'color-mix(in oklch, var(--bleached-mauve) 42%, transparent)',
     background:
-      'linear-gradient(180deg, color-mix(in oklch, var(--soft-warm) 72%, rgba(255, 255, 255, 0.24)) 0%, color-mix(in oklch, var(--soft-warm) 42%, rgba(20, 24, 28, 0.16)) 100%)',
-    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--soft-warm) 78%, transparent) 100%)'
+      'linear-gradient(180deg, color-mix(in oklch, var(--bleached-mauve) 10%, rgba(207, 160, 157, 1) 10%, color-mix(in oklch, var(--bleached-mauve) 42%, rgba(20, 24, 28, 0.16)) 100%)',
+    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--bleached-mauve) 78%, transparent) 100%)'
   },
   {
     title: 'Hele kvelden',
     description: 'Forleng tiden på dekk etter solnedgang',
     Icon: Waves,
-    iconColor:
-      'color-mix(in oklch, var(--maritime-darkest) 72%, var(--ancient-water))',
+    iconColor: 'color-mix(in oklch, var(--maritime-darkest) 72%, var(--ancient-water))',
     borderColor: 'color-mix(in oklch, var(--ancient-water) 40%, transparent)',
     background:
       'linear-gradient(180deg, color-mix(in oklch, var(--ancient-water) 74%, rgba(255, 255, 255, 0.26)) 0%, color-mix(in oklch, var(--ancient-water) 42%, rgba(16, 24, 30, 0.16)) 100%)',
@@ -31,8 +29,7 @@ const boatingFeatureCards = [
     title: 'Lengre sesong',
     description: 'Nyt båten fra tidlig vår til sen høst',
     Icon: Anchor,
-    iconColor:
-      'color-mix(in oklch, var(--maritime-darkest) 74%, var(--overcast))',
+    iconColor: 'color-mix(in oklch, var(--maritime-darkest) 74%, var(--overcast))',
     borderColor: 'color-mix(in oklch, var(--overcast) 42%, transparent)',
     background:
       'linear-gradient(180deg, color-mix(in oklch, var(--overcast) 78%, rgba(255, 255, 255, 0.28)) 0%, color-mix(in oklch, var(--overcast) 46%, rgba(18, 24, 29, 0.14)) 100%)',
@@ -44,7 +41,7 @@ export function BoatingHeroSection() {
   return (
     <section
       aria-labelledby='batliv-hero-title'
-      className='relative flex min-h-[70vh] items-center overflow-hidden'
+      className='relative flex min-h-[70vh] bg-maritime-blue items-center overflow-hidden'
     >
       <div className='absolute inset-0 -z-10 opacity-25' aria-hidden='true'>
         <div
@@ -63,7 +60,10 @@ export function BoatingHeroSection() {
         />
       </div>
 
-      <div className='absolute inset-0 bg-gradient-to-b from-transparent to-background/50' aria-hidden='true' />
+      <div
+        className='absolute inset-0 bg-gradient-to-b from-transparent to-background/50'
+        aria-hidden='true'
+      />
 
       <div className='container relative mx-auto px-4 py-16'>
         <div className='boat-hero-content max-w-5xl'>
@@ -85,14 +85,17 @@ export function BoatingHeroSection() {
                 </span>
               </h1>
 
-              <p className='boat-hero-text mt-6 max-w-2xl utekos-section-lead text-overcast'>
-                Fra den første kaffen i soloppgang til ankerdrammen under stjernene. Opplev en lengre og mer komfortabel
-                båtsesong med varme som varer.
+              <p className='boat-hero-text mt-6 max-w-2xl utekos-section-lead text-cloud-dancer'>
+                Fra den første kaffen i soloppgang til ankerdrammen under stjernene. Opplev en lengre og mer
+                komfortabel båtsesong med varme som varer.
               </p>
             </hgroup>
 
             <div className='boat-hero-buttons mt-8 flex flex-wrap gap-4'>
-              <InspirationHeroActions primaryLabel='Se produkter for båtfolket' secondaryLabel='Utforsk mulighetene' />
+              <InspirationHeroActions
+                primaryLabel='Se produkter for båtfolket'
+                secondaryLabel='Utforsk mulighetene'
+              />
             </div>
           </header>
 
@@ -105,15 +108,7 @@ export function BoatingHeroSection() {
             className='boat-hero-features mt-12 grid w-full grid-cols-1 gap-5 sm:grid-cols-3'
           >
             {boatingFeatureCards.map(
-              ({
-                title,
-                description,
-                Icon,
-                iconColor,
-                borderColor,
-                background,
-                glow
-              }) => (
+              ({ title, description, Icon, iconColor, borderColor, background, glow }) => (
                 <li key={title}>
                   <Card
                     className='group relative flex aspect-[2/1] w-full flex-col overflow-hidden rounded-xl border py-0 text-maritime-darkest transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'

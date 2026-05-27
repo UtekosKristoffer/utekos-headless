@@ -1,125 +1,83 @@
-// Path: src/app/magasinet/components/MagazineGrid.tsx
-
-import { ArrowRightIcon } from '@heroicons/react/24/outline'
+import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { MagazineCategoryBadge } from './MagazineCategoryBadge'
+import type { Route } from 'next'
 import type { MagazineArticle } from '../types'
+import { MagazineCategoryBadge } from './MagazineCategoryBadge'
+import { MagazineInlineTitle } from './MagazineInlineTitle'
 
 type MagazineGridProps = {
   articles: MagazineArticle[]
 }
 
-const cardClass =
-  'h-full overflow-hidden rounded-3xl border border-maritime-darkest/12 bg-overcast text-maritime-darkest shadow-[0_20px_60px_rgba(20,24,22,0.08)] transition-[transform,border-color,box-shadow,background-color] duration-300 hover:border-maritime-blue/30 hover:bg-cloud-dancer hover:shadow-[0_28px_80px_rgba(20,24,22,0.14)]'
-
-const titleClass =
-  'font-google-sans font-semibold tracking-tight text-maritime-darkest transition-colors group-hover:text-maritime-blue'
-
-const excerptClass = 'font-utekos-text leading-[1.55] text-maritime-darkest/76'
-
-function getImageSrcForNextImage(src: string) {
-  try {
-    const url = new URL(src)
-
-    if (url.hostname === 'utekos.no' || url.hostname === 'www.utekos.no') {
-      return `${url.pathname}${url.search}`
-    }
-
-    return src
-  } catch {
-    return src
-  }
-}
-
-function getArticleImageAlt(article: MagazineArticle) {
-  return article.imageAlt || article.title
-}
-
 function FeaturedArticleCard({ article }: { article: MagazineArticle }) {
   return (
-    <section className='mb-14 sm:mb-16'>
-      <Link
-        href={`/magasinet/${article.slug}`}
-        className='group block'
-        data-track='MagazineFeaturedClick'
-        data-track-data={JSON.stringify({
-          title: article.title,
-          slug: article.slug,
-          category: article.category
-        })}
-      >
-        <article className={`grid grid-cols-1 md:grid-cols-2 ${cardClass}`}>
-          <div className='relative min-h-72 overflow-hidden md:min-h-[28rem]'>
-            <Image
-              src={getImageSrcForNextImage(article.imageUrl)}
-              alt={getArticleImageAlt(article)}
-              fill
-              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 640px'
-              className='object-cover transition-transform duration-500 group-hover:scale-[1.03]'
-              priority
-            />
-          </div>
-
-          <div className='flex flex-col justify-center p-7 sm:p-9 md:p-12'>
+    <section className='bg-overcast py-14 text-maritime-darkest sm:py-20'>
+      <div className='container mx-auto px-4'>
+        <Link
+          href={`/magasinet/${article.slug}` as Route}
+          className='group grid overflow-hidden rounded-lg border border-maritime-darkest/10 bg-cloud-dancer shadow-[0_24px_70px_-54px_color-mix(in_oklch,var(--maritime-darkest)_68%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:grid-cols-2'
+          data-track='MagazineFeaturedClick'
+        >
+          <Image
+            src={article.heroImage.src}
+            alt={article.heroImage.alt}
+            width={article.heroImage.width}
+            height={article.heroImage.height}
+            sizes='(max-width: 768px) calc(100vw - 32px), 50vw'
+            className='aspect-[16/11] h-auto w-full object-cover md:aspect-auto md:h-full'
+            priority
+          />
+          <div className='flex flex-col justify-center p-6 sm:p-9 lg:p-12'>
             <div className='mb-5'>
               <MagazineCategoryBadge category={article.category} />
             </div>
-
-            <h2 className={`${titleClass} text-3xl leading-[1.05] sm:text-4xl md:text-5xl`}>
-              {article.title}
+            <h2 className='text-balance font-google-sans text-4xl font-bold leading-[0.95] tracking-tight text-maritime-darkest sm:text-5xl'>
+              <MagazineInlineTitle text={article.title} />
             </h2>
-
-            <p className={`mt-5 text-base sm:text-lg ${excerptClass}`}>{article.excerpt}</p>
-
-            <div className='mt-8 inline-flex items-center gap-2 font-semibold text-maritime-darkest transition-colors group-hover:text-chocolate-plum'>
+            <p className='mt-5 font-utekos-text text-lg leading-[1.55] tracking-tight text-maritime-darkest/76'>
+              {article.excerpt}
+            </p>
+            <span className='mt-8 inline-flex items-center gap-2 font-utekos-text text-base font-semibold leading-[1.4] tracking-tight text-maritime-blue'>
               Les hele saken
-              <ArrowRightIcon
-                className='size-4 transition-transform group-hover:translate-x-1'
-                aria-hidden='true'
-              />
-            </div>
+              <ArrowRight className='size-4 transition-transform group-hover:translate-x-1' aria-hidden />
+            </span>
           </div>
-        </article>
-      </Link>
+        </Link>
+      </div>
     </section>
   )
 }
 
 function MagazineArticleCard({ article }: { article: MagazineArticle }) {
   return (
-    <Link
-      href={`/magasinet/${article.slug}`}
-      className='group block'
-      data-track='MagazineGridClick'
-      data-track-data={JSON.stringify({
-        title: article.title,
-        slug: article.slug,
-        category: article.category
-      })}
-    >
-      <article className={`${cardClass} hover:-translate-y-1`}>
-        <div className='relative h-56 overflow-hidden'>
-          <Image
-            src={getImageSrcForNextImage(article.imageUrl)}
-            alt={getArticleImageAlt(article)}
-            fill
-            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 420px'
-            className='object-cover transition-transform duration-500 group-hover:scale-[1.04]'
-          />
-        </div>
-
-        <div className='p-6'>
+    <li>
+      <Link
+        href={`/magasinet/${article.slug}` as Route}
+        className='group block h-full overflow-hidden rounded-lg border border-maritime-darkest/10 bg-cloud-dancer transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+        data-track='MagazineGridClick'
+      >
+        <Image
+          src={article.heroImage.src}
+          alt={article.heroImage.alt}
+          width={article.heroImage.width}
+          height={article.heroImage.height}
+          sizes='(max-width: 768px) calc(100vw - 32px), (max-width: 1200px) 45vw, 30vw'
+          className='aspect-[16/10] h-auto w-full object-cover'
+        />
+        <div className='p-5'>
           <div className='mb-4'>
             <MagazineCategoryBadge category={article.category} />
           </div>
-
-          <h3 className={`${titleClass} text-xl leading-[1.15]`}>{article.title}</h3>
-
-          <p className={`mt-3 text-sm ${excerptClass}`}>{article.excerpt}</p>
+          <h3 className='font-google-sans text-2xl font-bold leading-[0.98] tracking-tight text-maritime-darkest transition-colors group-hover:text-maritime-blue'>
+            <MagazineInlineTitle text={article.title} />
+          </h3>
+          <p className='mt-3 font-utekos-text text-sm leading-[1.5] tracking-tight text-maritime-darkest/72'>
+            {article.excerpt}
+          </p>
         </div>
-      </article>
-    </Link>
+      </Link>
+    </li>
   )
 }
 
@@ -127,36 +85,40 @@ export function MagazineGrid({ articles }: MagazineGridProps) {
   const [featuredArticle, ...otherArticles] = articles
 
   if (!featuredArticle) {
-    return null
+    return (
+      <section className='bg-overcast py-16 text-maritime-darkest'>
+        <div className='container mx-auto px-4'>
+          <p className='font-utekos-text text-lg leading-[1.55] tracking-tight'>
+            Ingen artikler er publisert ennå.
+          </p>
+        </div>
+      </section>
+    )
   }
 
   return (
-    <div>
+    <>
       <FeaturedArticleCard article={featuredArticle} />
-
-      {otherArticles.length > 0 && (
-        <section aria-labelledby='magazine-latest-heading'>
-          <div className='mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between'>
-            <div>
-              <p className='text-sm font-semibold uppercase tracking-[0.16em] text-maritime-darkest/52'>
-                Siste fra magasinet
-              </p>
-              <h2
-                id='magazine-latest-heading'
-                className='mt-2 font-google-sans text-3xl font-semibold tracking-tight text-maritime-darkest sm:text-4xl'
-              >
-                Flere guider og historier
-              </h2>
-            </div>
-          </div>
-
-          <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
+      <section className='bg-overcast pb-16 text-maritime-darkest sm:pb-24' aria-labelledby='magazine-latest-heading'>
+        <div className='container mx-auto px-4'>
+          <header className='mb-8 max-w-2xl'>
+            <p className='font-utekos-text text-sm font-semibold leading-[1.4] tracking-tight text-maritime-blue'>
+              Siste fra magasinet
+            </p>
+            <h2
+              id='magazine-latest-heading'
+              className='mt-2 font-google-sans text-4xl font-bold leading-[0.95] tracking-tight sm:text-5xl'
+            >
+              Flere guider og historier
+            </h2>
+          </header>
+          <ul className='grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3'>
             {otherArticles.map(article => (
               <MagazineArticleCard key={article.slug} article={article} />
             ))}
-          </div>
-        </section>
-      )}
-    </div>
+          </ul>
+        </div>
+      </section>
+    </>
   )
 }

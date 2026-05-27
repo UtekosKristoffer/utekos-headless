@@ -18,12 +18,12 @@ export function buildArticleJsonLd(article: MagazineArticle): WithContext<BlogPo
     },
     'headline': article.title,
     'description': article.excerpt,
-    'image': [toAbsoluteUrl(article.imageUrl)],
+    'image': [toAbsoluteUrl(article.heroImage.src)],
     'datePublished': article.publishedAt,
     'dateModified': article.updatedAt,
     'author': {
-      '@type': 'Organization',
-      'name': 'Utekos',
+      '@type': article.author ? 'Person' : 'Organization',
+      'name': article.author?.name ?? 'Utekos',
       'url': SITE_URL
     },
     'publisher': {

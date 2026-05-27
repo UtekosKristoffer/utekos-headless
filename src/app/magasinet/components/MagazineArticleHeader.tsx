@@ -1,11 +1,9 @@
-// Path: src/app/magasinet/components/MagazineArticleHeader.tsx
-
 import { CalendarDays, Clock, PencilLine } from 'lucide-react'
-import { MagazineCategoryBadge } from './MagazineCategoryBadge'
-import { MagazineArticleHeroImage } from './MagazineArticleHeroImage'
-import { formatMagazineArticleDate } from '../utils/formatMagazineArticleDate'
-import { shouldRenderDefaultArticleHeroImage } from '../utils/shouldRenderDefaultArticleHeroImage'
 import type { MagazineArticle } from '../types'
+import { formatMagazineArticleDate } from '../utils/formatMagazineArticleDate'
+import { MagazineArticleHeroImage } from './MagazineArticleHeroImage'
+import { MagazineCategoryBadge } from './MagazineCategoryBadge'
+import { MagazineInlineTitle } from './MagazineInlineTitle'
 
 type MagazineArticleHeaderProps = {
   article: MagazineArticle
@@ -14,49 +12,49 @@ type MagazineArticleHeaderProps = {
 export function MagazineArticleHeader({ article }: MagazineArticleHeaderProps) {
   const publishedDate = formatMagazineArticleDate(article.publishedAt)
   const updatedDate =
-    article.updatedAt && article.updatedAt !== article.publishedAt ?
-      formatMagazineArticleDate(article.updatedAt)
-    : null
+    article.updatedAt !== article.publishedAt ? formatMagazineArticleDate(article.updatedAt) : null
 
   return (
-    <header className='mx-auto px-4 py-8 sm:px-6 lg:px-8 w-full pb-12'>
-      <div className='mb-8 flex px-4 py-8 sm:px-6 lg:px-8 w-full pb-12 flex-wrap items-center gap-3 ...'>
-        <MagazineCategoryBadge category={article.category} />
-        <span className='inline-flex items-center gap-1.5'>
-          <CalendarDays className='size-4' aria-hidden='true' />
-          <time dateTime={article.publishedAt}>{publishedDate}</time>
-        </span>
-
-        {updatedDate && (
-          <span className='inline-flex items-center gap-1.5'>
-            <PencilLine className='size-4' aria-hidden='true' />
-            <span>
-              Oppdatert <time dateTime={article.updatedAt}>{updatedDate}</time>
+    <header className='relative overflow-hidden bg-maritime-blue text-cloud-dancer'>
+      <div
+        className='absolute inset-0 bg-[linear-gradient(140deg,color-mix(in_oklch,var(--maritime-darkest)_72%,transparent),transparent_58%)]'
+        aria-hidden
+      />
+      <div className='container relative mx-auto grid gap-10 px-4 py-14 sm:py-20 lg:grid-cols-[minmax(0,1fr)_minmax(24rem,0.78fr)] lg:items-end lg:py-24'>
+        <div className='max-w-4xl'>
+          <div className='mb-7'>
+            <MagazineCategoryBadge category={article.category} />
+          </div>
+          <h1 className='text-balance font-google-sans text-5xl font-bold leading-[0.9] tracking-tight sm:text-6xl lg:text-7xl'>
+            <MagazineInlineTitle text={article.title} />
+          </h1>
+          <p className='mt-6 max-w-3xl font-utekos-text text-xl leading-[1.45] tracking-tight text-cloud-dancer/86 sm:text-2xl'>
+            {article.excerpt}
+          </p>
+          <div className='mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 font-utekos-text text-sm leading-[1.4] tracking-tight text-cloud-dancer/72'>
+            <span className='inline-flex items-center gap-2'>
+              <CalendarDays className='size-4' aria-hidden />
+              <time dateTime={article.publishedAt}>{publishedDate}</time>
             </span>
-          </span>
-        )}
-
-        {article.readingTimeMinutes && (
-          <span className='inline-flex items-center gap-1.5'>
-            <Clock className='size-4' aria-hidden='true' />
-            <span>{article.readingTimeMinutes} min lesing</span>
-          </span>
-        )}
+            {updatedDate && (
+              <span className='inline-flex items-center gap-2'>
+                <PencilLine className='size-4' aria-hidden />
+                <span>
+                  Oppdatert <time dateTime={article.updatedAt}>{updatedDate}</time>
+                </span>
+              </span>
+            )}
+            {article.readingTimeMinutes && (
+              <span className='inline-flex items-center gap-2'>
+                <Clock className='size-4' aria-hidden />
+                <span>{article.readingTimeMinutes} min lesing</span>
+              </span>
+            )}
+            {article.author && <span>Av {article.author.name}</span>}
+          </div>
+        </div>
+        <MagazineArticleHeroImage article={article} />
       </div>
-
-      <h1 className='text-balance font-google-sans text-4xl font-bold leading-[0.95] tracking-tight text-maritime-darkest sm:text-5xl md:text-6xl'>
-        {article.title}
-      </h1>
-
-      <p className='mt-6 max-w-3xl font-utekos-text text-lg leading-[1.55] tracking-tight text-maritime-darkest/78 sm:text-xl'>
-        {article.excerpt}
-      </p>
-
-      {article.authorName && (
-        <p className='mt-6 text-sm font-medium text-maritime-darkest/70'>Av {article.authorName}</p>
-      )}
-
-      {shouldRenderDefaultArticleHeroImage(article) && <MagazineArticleHeroImage article={article} />}
     </header>
   )
 }
