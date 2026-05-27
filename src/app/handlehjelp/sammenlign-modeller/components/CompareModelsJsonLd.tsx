@@ -17,6 +17,7 @@ import type {
   Product as ProductSchema,
   ProductGroup,
   Review,
+  UnitPriceSpecification,
   WebPage
 } from 'schema-dts'
 import { faqItems, modelRecommendations, type ModelRecommendation } from '../utils/comparisonData'
@@ -38,6 +39,11 @@ type ReviewMarkup = {
 
 type ProductSchemaWithReviews = ProductSchema & ReviewMarkup
 
+type FallbackPricing = {
+  price: number
+  originalPrice?: number
+}
+
 const SITE_URL = 'https://utekos.no'
 const PAGE_URL = `${SITE_URL}/handlehjelp/sammenlign-modeller`
 const WEBSITE_ID = `${SITE_URL}/#website`
@@ -46,6 +52,21 @@ const PRODUCT_GROUP_ID = `${PAGE_URL}#product-group`
 const ITEM_LIST_ID = `${PAGE_URL}#model-list`
 const BREADCRUMB_ID = `${PAGE_URL}#breadcrumb`
 const FAQ_ID = `${PAGE_URL}#faq`
+
+const FALLBACK_PRICING: Record<ModelRecommendation['key'], FallbackPricing> = {
+  dun: {
+    price: 2490,
+    originalPrice: 3290
+  },
+  mikrofiber: {
+    price: 1590,
+    originalPrice: 2290
+  },
+  techdown: {
+    price: 1790,
+    originalPrice: 1990
+  }
+}
 
 const sellerReference = {
   '@id': ORGANIZATION_ID
@@ -150,6 +171,11 @@ const getMerchantReturnPolicy = (): MerchantReturnPolicy => ({
   'url': `${SITE_URL}/frakt-og-retur`
 })
 
+const getPriceValidUntil = () =>
+  new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+    .toISOString()
+    .slice(0, 10)
+
 const getReviewMarkup = (handle: string): ReviewMarkup => {
   const bundle = productReviewBundles[handle]
   if (!bundle) return {}
@@ -196,12 +222,27 @@ const buildProductOffer = (model: ModelRecommendation, product: ProductData | nu
   const productUrl = getProductUrl(model)
   const prices = getVariantPrices(product)
   const uniquePrices = Array.from(new Set(prices)).sort((a, b) => a - b)
+  const fallbackPricing = FALLBACK_PRICING[model.key]
   const currency = getPriceCurrency(product)
   const availability = getAvailability(product)
   const availabilityMarkup = typeof availability === 'boolean' ? mapAvailability(availability) : undefined
   const variants = getVariants(product)
+  const effectivePrice = uniquePrices[0] ?? fallbackPricing.price
+  const effectiveOriginalPrice =
+    uniquePrices.length === 0 ? fallbackPricing.originalPrice : undefined
+  const priceValidUntil = getPriceValidUntil()
 
   if (uniquePrices.length > 1) {
+    const priceSpecification: UnitPriceSpecification | undefined =
+      fallbackPricing.originalPrice ?
+        {
+          '@type': 'UnitPriceSpecification',
+          'priceType': 'https://schema.org/ListPrice',
+          'price': String(fallbackPricing.originalPrice),
+          'priceCurrency': currency
+        }
+      : undefined
+
     const offer: AggregateOffer = {
       '@type': 'AggregateOffer',
       'url': productUrl,
@@ -209,10 +250,15 @@ const buildProductOffer = (model: ModelRecommendation, product: ProductData | nu
       'lowPrice': formatPrice(uniquePrices[0]!),
       'highPrice': formatPrice(uniquePrices[uniquePrices.length - 1]!),
       'offerCount': prices.length || variants.length || 1,
+      'priceValidUntil': priceValidUntil,
       'seller': sellerReference,
       'itemCondition': 'https://schema.org/NewCondition',
       'hasMerchantReturnPolicy': getMerchantReturnPolicy(),
       'shippingDetails': getShippingDetails()
+    }
+
+    if (priceSpecification) {
+      offer.priceSpecification = priceSpecification
     }
 
     if (availabilityMarkup) {
@@ -226,18 +272,25 @@ const buildProductOffer = (model: ModelRecommendation, product: ProductData | nu
     '@type': 'Offer',
     'url': productUrl,
     'priceCurrency': currency,
+    'price': formatPrice(effectivePrice),
+    'priceValidUntil': priceValidUntil,
     'seller': sellerReference,
     'itemCondition': 'https://schema.org/NewCondition',
     'hasMerchantReturnPolicy': getMerchantReturnPolicy(),
     'shippingDetails': getShippingDetails()
   }
 
-  if (availabilityMarkup) {
-    offer.availability = availabilityMarkup
+  if (effectiveOriginalPrice) {
+    offer.priceSpecification = {
+      '@type': 'UnitPriceSpecification',
+      'priceType': 'https://schema.org/ListPrice',
+      'price': String(effectiveOriginalPrice),
+      'priceCurrency': currency
+    }
   }
 
-  if (uniquePrices[0] !== undefined) {
-    offer.price = formatPrice(uniquePrices[0])
+  if (availabilityMarkup) {
+    offer.availability = availabilityMarkup
   }
 
   return offer
@@ -245,9 +298,13 @@ const buildProductOffer = (model: ModelRecommendation, product: ProductData | nu
 
 const buildProductGroupOffer = (resolvedModels: ResolvedModel[]): AggregateOffer | undefined => {
   const prices = resolvedModels.flatMap(({ product }) => getVariantPrices(product))
-  if (prices.length === 0) return undefined
+  const fallbackPrices = resolvedModels
+    .map(({ model }) => FALLBACK_PRICING[model.key].price)
+    .filter(price => Number.isFinite(price))
+  const effectivePrices = prices.length > 0 ? prices : fallbackPrices
+  if (effectivePrices.length === 0) return undefined
 
-  const sortedPrices = [...prices].sort((a, b) => a - b)
+  const sortedPrices = [...effectivePrices].sort((a, b) => a - b)
   const firstProductWithCurrency =
     resolvedModels.find(({ product }) => getVariants(product).length > 0)?.product ?? null
 
@@ -259,7 +316,7 @@ const buildProductGroupOffer = (resolvedModels: ResolvedModel[]): AggregateOffer
     'priceCurrency': getPriceCurrency(firstProductWithCurrency),
     'lowPrice': formatPrice(sortedPrices[0]!),
     'highPrice': formatPrice(sortedPrices[sortedPrices.length - 1]!),
-    'offerCount': prices.length,
+    'offerCount': prices.length || fallbackPrices.length,
     'availability': mapAvailability(anyAvailable),
     'seller': sellerReference
   }

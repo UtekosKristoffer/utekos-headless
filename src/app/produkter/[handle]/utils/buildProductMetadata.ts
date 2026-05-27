@@ -1,4 +1,4 @@
-// Path: src/app/produkter/[handle]/utils/buildProductMetadata.ts
+// Path: src/app/produkter/Bhandle/utils/buildProductMetadata.ts
 
 import type { Metadata } from 'next'
 import type { ShopifyProduct } from 'types/product'
