@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/utils/className'
-import { Droplet, Thermometer, Sparkles, ShieldCheck, Zap } from 'lucide-react'
+import { Droplet, Thermometer, Sparkles, ShieldCheck, Zap, type LucideIcon } from 'lucide-react'
 import { useMemo } from 'react'
 
 // Definerer lagene
@@ -227,7 +227,7 @@ function MaterialCard({
   isActive: boolean
   title: string
   subtitle: string
-  icon: any
+  icon: LucideIcon
   color: 'ancient' | 'cloud' | 'peri'
   children?: React.ReactNode
 }) {

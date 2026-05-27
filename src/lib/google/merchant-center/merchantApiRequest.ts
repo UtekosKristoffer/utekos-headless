@@ -1,4 +1,4 @@
-import { z, type ZodTypeAny } from 'zod'
+import { z, type ZodType } from 'zod'
 
 import { getMerchantCenterConfig } from './config'
 import { getMerchantAuthClient } from './getMerchantAuthClient'
@@ -15,7 +15,7 @@ export class MerchantCenterApiError extends Error {
   }
 }
 
-type MerchantApiRequestOptions<TResponseSchema extends ZodTypeAny | undefined> = {
+type MerchantApiRequestOptions<TResponseSchema extends ZodType | undefined> = {
   path: string
   method?: 'GET' | 'POST' | 'DELETE'
   searchParams?: Record<string, string | number | boolean | undefined>
@@ -23,17 +23,13 @@ type MerchantApiRequestOptions<TResponseSchema extends ZodTypeAny | undefined> =
   responseSchema?: TResponseSchema
 }
 
-type MerchantApiRequestOptionsWithoutSchema =
-  MerchantApiRequestOptions<undefined>
-type MerchantApiRequestOptionsWithSchema<TResponseSchema extends ZodTypeAny> =
+type MerchantApiRequestOptionsWithoutSchema = MerchantApiRequestOptions<undefined>
+type MerchantApiRequestOptionsWithSchema<TResponseSchema extends ZodType> =
   MerchantApiRequestOptions<TResponseSchema> & {
     responseSchema: TResponseSchema
   }
 
-function buildUrl(
-  path: string,
-  searchParams?: Record<string, string | number | boolean | undefined>
-) {
+function buildUrl(path: string, searchParams?: Record<string, string | number | boolean | undefined>) {
   const url = new URL(`https://merchantapi.googleapis.com${path}`)
 
   if (!searchParams) {
@@ -65,13 +61,11 @@ async function parseErrorBody(response: Response) {
   }
 }
 
-export async function merchantApiRequest<TResponseSchema extends ZodTypeAny>(
+export async function merchantApiRequest<TResponseSchema extends ZodType>(
   options: MerchantApiRequestOptionsWithSchema<TResponseSchema>
 ): Promise<z.infer<TResponseSchema>>
-export async function merchantApiRequest(
-  options: MerchantApiRequestOptionsWithoutSchema
-): Promise<void>
-export async function merchantApiRequest<TResponseSchema extends ZodTypeAny>({
+export async function merchantApiRequest(options: MerchantApiRequestOptionsWithoutSchema): Promise<void>
+export async function merchantApiRequest<TResponseSchema extends ZodType>({
   path,
   method = 'GET',
   searchParams,
@@ -100,11 +94,9 @@ export async function merchantApiRequest<TResponseSchema extends ZodTypeAny>({
   if (!response.ok) {
     const responseBody = await parseErrorBody(response)
     const message =
-      typeof responseBody === 'object' &&
-      responseBody !== null &&
-      'error' in responseBody
-        ? JSON.stringify(responseBody)
-        : `Merchant API request failed with status ${response.status}`
+      typeof responseBody === 'object' && responseBody !== null && 'error' in responseBody ?
+        JSON.stringify(responseBody)
+      : `Merchant API request failed with status ${response.status}`
 
     throw new MerchantCenterApiError(message, response.status, responseBody)
   }

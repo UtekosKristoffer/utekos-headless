@@ -1,6 +1,5 @@
 // Path: src/app/handlehjelp/sammenlign-modeller/page.tsx
 import type { Metadata } from 'next'
-import { CompareModelsJsonLd } from './components/CompareModelsJsonLd'
 import { CompareModelsPageHero } from './components/CompareModelsPageHero'
 import { ConclusionSection } from './components/ConclusionSection'
 import { ComparisonSection } from './components/ComparisonSection'
@@ -52,13 +51,12 @@ export const metadata: Metadata = {
 
 export default function CompareModelsPage() {
   return (
-    <main className='bg-maritime-darkest'>
-      <CompareModelsJsonLd />
+    <article className='bg-maritime-darkest'>
       <CompareModelsPageHero />
       <PersonaCards />
       <ComparisonSection />
       <DeepDiveSection />
       <ConclusionSection />
-    </main>
+    </article>
   )
 }

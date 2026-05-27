@@ -1,9 +1,10 @@
 import { cacheLife, cacheTag } from 'next/cache'
 import type { BreadcrumbList, FAQPage, HowTo, WebPage, Graph } from 'schema-dts'
 
-const PAGE_URL = 'https://utekos.no/handlehjelp/vask-og-vedlikehold'
-const ORG_ID = 'https://utekos.no/#organization'
-const WEBSITE_ID = 'https://utekos.no/#website'
+const SITE_URL = 'https://utekos.no'
+const PAGE_URL = `${SITE_URL}/handlehjelp/vask-og-vedlikehold`
+const ORG_ID = `${SITE_URL}/#organization`
+const WEBSITE_ID = `${SITE_URL}/#website`
 const WEBPAGE_ID = `${PAGE_URL}#webpage`
 const BREADCRUMB_ID = `${PAGE_URL}#breadcrumb`
 const HOWTO_ID = `${PAGE_URL}#howto`
@@ -41,20 +42,13 @@ export async function MaintenanceJsonLd() {
       {
         '@type': 'ListItem',
         'position': 1,
-        'name': 'Hjem',
-        'item': 'https://utekos.no/'
+        'name': 'Forside',
+        'item': SITE_URL
       },
       {
         '@type': 'ListItem',
         'position': 2,
-        'name': 'Handlehjelp',
-        'item': 'https://utekos.no/handlehjelp'
-      },
-      {
-        '@type': 'ListItem',
-        'position': 3,
-        'name': 'Vask og vedlikehold',
-        'item': PAGE_URL
+        'name': 'Vask og vedlikehold'
       }
     ]
   }

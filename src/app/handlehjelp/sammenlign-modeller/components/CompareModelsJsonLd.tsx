@@ -44,6 +44,7 @@ const WEBSITE_ID = `${SITE_URL}/#website`
 const ORGANIZATION_ID = `${SITE_URL}/#organization`
 const PRODUCT_GROUP_ID = `${PAGE_URL}#product-group`
 const ITEM_LIST_ID = `${PAGE_URL}#model-list`
+const BREADCRUMB_ID = `${PAGE_URL}#breadcrumb`
 const FAQ_ID = `${PAGE_URL}#faq`
 
 const sellerReference = {
@@ -363,6 +364,9 @@ export async function CompareModelsJsonLd() {
     'isPartOf': {
       '@id': WEBSITE_ID
     },
+    'breadcrumb': {
+      '@id': BREADCRUMB_ID
+    },
     'publisher': {
       '@id': ORGANIZATION_ID
     },
@@ -383,7 +387,7 @@ export async function CompareModelsJsonLd() {
 
   const breadcrumbNode: BreadcrumbList = {
     '@type': 'BreadcrumbList',
-    '@id': `${PAGE_URL}#breadcrumb`,
+    '@id': BREADCRUMB_ID,
     'itemListElement': [
       {
         '@type': 'ListItem',
@@ -394,14 +398,7 @@ export async function CompareModelsJsonLd() {
       {
         '@type': 'ListItem',
         'position': 2,
-        'name': 'Handlehjelp',
-        'item': `${SITE_URL}/handlehjelp`
-      },
-      {
-        '@type': 'ListItem',
-        'position': 3,
-        'name': 'Sammenlign modeller',
-        'item': PAGE_URL
+        'name': 'Sammenlign modeller'
       }
     ]
   }

@@ -1,21 +1,57 @@
 import { cacheLife, cacheTag } from 'next/cache'
-import type { FAQPage, WithContext } from 'schema-dts'
+import type { BreadcrumbList, FAQPage, Graph, WebPage } from 'schema-dts'
+
+const SITE_URL = 'https://utekos.no'
+const PAGE_URL = `${SITE_URL}/handlehjelp/storrelsesguide`
+const WEBSITE_ID = `${SITE_URL}/#website`
+const ORGANIZATION_ID = `${SITE_URL}/#organization`
+const WEBPAGE_ID = `${PAGE_URL}#webpage`
+const BREADCRUMB_ID = `${PAGE_URL}#breadcrumb`
+const FAQ_ID = `${PAGE_URL}#faq`
 
 export async function SizeGuideJsonLd() {
   'use cache'
   cacheLife('max')
   cacheTag('jsonld-size-guide')
 
-  const jsonLd: WithContext<FAQPage> = {
-    '@context': 'https://schema.org',
+  const webPage: WebPage = {
+    '@type': 'WebPage',
+    '@id': WEBPAGE_ID,
+    'url': PAGE_URL,
+    'name': 'Størrelsesguide for Utekos',
+    'description':
+      'Størrelsesguide for Utekos Dun, Mikrofiber og Comfyrobe med praktiske mål og råd for riktig passform.',
+    'inLanguage': 'nb-NO',
+    'isPartOf': { '@id': WEBSITE_ID },
+    'breadcrumb': { '@id': BREADCRUMB_ID },
+    'mainEntity': { '@id': FAQ_ID },
+    'publisher': { '@id': ORGANIZATION_ID }
+  }
+
+  const breadcrumb: BreadcrumbList = {
+    '@type': 'BreadcrumbList',
+    '@id': BREADCRUMB_ID,
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Forside',
+        'item': SITE_URL
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Størrelsesguide'
+      }
+    ]
+  }
+
+  const faq: FAQPage = {
     '@type': 'FAQPage',
-    'mainEntityOfPage': {
-      '@type': 'WebPage',
-      '@id': 'https://utekos.no/handlehjelp/storrelsesguide'
-    },
-    'author': {
-      '@id': 'https://utekos.no/#organization'
-    },
+    '@id': FAQ_ID,
+    'mainEntityOfPage': { '@id': WEBPAGE_ID },
+    'author': { '@id': ORGANIZATION_ID },
+    'publisher': { '@id': ORGANIZATION_ID },
     'mainEntity': [
       {
         '@type': 'Question',
@@ -28,8 +64,7 @@ export async function SizeGuideJsonLd() {
       },
       {
         '@type': 'Question',
-        'name':
-          'Hva er forskjellen i størrelse mellom Utekos Dun og Comfyrobe?',
+        'name': 'Hva er forskjellen i størrelse mellom Utekos Dun og Comfyrobe?',
         'acceptedAnswer': {
           '@type': 'Answer',
           'text':
@@ -46,6 +81,11 @@ export async function SizeGuideJsonLd() {
         }
       }
     ]
+  }
+
+  const jsonLd: Graph = {
+    '@context': 'https://schema.org',
+    '@graph': [webPage, breadcrumb, faq]
   }
 
   return (
