@@ -1,6 +1,5 @@
 // Path: src/app/magasinet/components/MagazineArticleHeader.tsx
 
-import Image from 'next/image'
 import { CalendarDays, Clock, PencilLine } from 'lucide-react'
 import { MagazineCategoryBadge } from './MagazineCategoryBadge'
 import { formatMagazineArticleDate } from '../utils/formatMagazineArticleDate'
@@ -17,10 +16,8 @@ export function MagazineArticleHeader({ article }: MagazineArticleHeaderProps) {
       formatMagazineArticleDate(article.updatedAt)
     : null
 
-  const imageAlt = article.imageAlt || article.title
-
   return (
-    <header className='mx-auto max-w-4xl'>
+    <header className='mx-auto max-w-4xl pb-10'>
       <div className='mb-8 flex flex-wrap items-center gap-3 text-sm text-maritime-darkest/72'>
         <MagazineCategoryBadge category={article.category} />
 
@@ -57,25 +54,6 @@ export function MagazineArticleHeader({ article }: MagazineArticleHeaderProps) {
       {article.authorName && (
         <p className='mt-6 text-sm font-medium text-maritime-darkest/70'>Av {article.authorName}</p>
       )}
-
-      <figure className='mt-10 overflow-hidden rounded-3xl border border-maritime-darkest/10 bg-maritime-darkest/5 shadow-[0_24px_80px_-48px_rgba(20,24,22,0.45)]'>
-        <div className='relative aspect-[16/9] w-full'>
-          <Image
-            src={article.imageUrl}
-            alt={imageAlt}
-            fill
-            preload
-            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 896px, 896px'
-            className='object-cover'
-          />
-        </div>
-
-        {article.imageCaption && (
-          <figcaption className='px-5 py-3 font-utekos-text text-sm leading-[1.45] text-maritime-darkest/64'>
-            {article.imageCaption}
-          </figcaption>
-        )}
-      </figure>
     </header>
   )
 }
