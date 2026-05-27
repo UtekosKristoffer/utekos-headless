@@ -13,16 +13,29 @@ import { formatCookieHeader } from './lib/tracking/proxy/formatCookieHeader'
 import { hashEmail } from './lib/tracking/hash/hashEmail'
 import { formatFbcCookie } from './lib/tracking/proxy/formatFbcCookie'
 
-const SGTM_PUBLIC_ORIGIN = (
-  process.env.SGTM_PUBLIC_ORIGIN ||
-  'https://sgtm.utekos.no'
-).replace(/\/$/, '')
+const SGTM_PUBLIC_ORIGIN = (process.env.SGTM_PUBLIC_ORIGIN || 'https://sgtm.utekos.no').replace(/\/$/, '')
+
+const MAGASINET_UPGRADE_ENABLED = true
+const MAGASINET_UPGRADE_PATH = '/magasinet/oppgradering'
 
 export async function proxy(request: NextRequest) {
   const context = createMiddlewareContext(request)
 
   if (context.isBlockedAgent) {
     return new NextResponse(null, { status: 403, statusText: 'Forbidden' })
+  }
+
+  // Handle magasinet upgrade redirect
+  if (MAGASINET_UPGRADE_ENABLED && context.pathname.startsWith('/magasinet')) {
+    if (
+      context.pathname === MAGASINET_UPGRADE_PATH
+      || context.pathname.startsWith(`${MAGASINET_UPGRADE_PATH}/`)
+    ) {
+      return NextResponse.next()
+    }
+
+    const upgradeUrl = new URL(MAGASINET_UPGRADE_PATH, request.url)
+    return NextResponse.redirect(upgradeUrl)
   }
 
   if (context.pathname.startsWith('/sporing')) {

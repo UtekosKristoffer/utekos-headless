@@ -1,3 +1,5 @@
+// src/components/form/components/NewsLetterForm.tsx
+
 'use client'
 
 import { useActionState, useEffect, useRef } from 'react'
@@ -16,7 +18,6 @@ const initialState = {
 export function NewsletterForm() {
   const [state, formAction, isPending] = useActionState(subscribeToNewsletter, initialState)
   const formRef = useRef<HTMLFormElement>(null)
-
   const submittedEmailRef = useRef<string | null>(null)
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export function NewsletterForm() {
 
       if (submittedEmailRef.current) {
         trackNewsletterConversion(submittedEmailRef.current, 'footer')
-        submittedEmailRef.current = null // Nullstill etter sporing
+        submittedEmailRef.current = null
       }
 
       formRef.current?.reset()
@@ -36,25 +37,30 @@ export function NewsletterForm() {
 
   const handleSubmit = (formData: FormData) => {
     const email = formData.get('email') as string
+
     if (email) {
       submittedEmailRef.current = email
     }
+
     formAction(formData)
   }
 
   return (
-    <div className='mx-auto w-full space-y-3 text-center'>
-      <div className='flex flex-col items-center space-y-3'>
-        <div className='flex flex-col items-center gap-3 text-cloud-dancer'>
+    <div className='mx-auto w-full text-center'>
+      <div className='flex w-full flex-col items-center space-y-3'>
+        <div className='flex flex-col items-center gap-3 text-center text-cloud-dancer'>
           <Mail data-icon='inline-start' className='size-10' />
-          <p className='max-w-5xl text-3xl leading-[1.05] font-semibold tracking-normal text-cloud-dancer sm:text-4xl'>
+
+          <p className='mx-auto max-w-2xl text-balance text-center text-3xl font-semibold leading-[1.05] tracking-normal text-cloud-dancer sm:text-4xl'>
             Meld deg på Utekos sitt nyhetsbrev!
           </p>
         </div>
-        <p className='z-10 w-full font-utekos-text mt-2! max-w-screen text-center mx-auto text-base leading-[1.45] tracking-normal min-w-3xl text-cloud-dancer/80'>
+
+        <p className='mx-auto mt-2! w-full max-w-4xl text-center font-utekos-text text-base leading-[1.5] tracking-normal text-cloud-dancer/80'>
           Som medlem i vår kundeklubb får du personlige tilbud og tilgang til salg og kampanjer først. Du får
           også masse tips og inspirasjon rett inn i innboksen din.
         </p>
+
         <form
           ref={formRef}
           action={handleSubmit}
@@ -65,8 +71,9 @@ export function NewsletterForm() {
             name='email'
             placeholder='Din e-postadresse...'
             required
-            className='w-full border border-cloud-dancer bg-cloud-dancer px-6 py-4 text-maritime-darkest placeholder:text-maritime-darkest/70 focus:ring-2 focus:ring-cloud-dancer focus:ring-offset-2 focus:ring-offset-maritime-darkest transition-colors duration-300'
+            className='w-full border border-cloud-dancer bg-cloud-dancer px-6 py-4 text-maritime-darkest placeholder:text-maritime-darkest/70 transition-colors duration-300 focus:ring-2 focus:ring-cloud-dancer focus:ring-offset-2 focus:ring-offset-maritime-darkest'
           />
+
           <BrandBadge
             asChild
             backgroundColor='var(--color-primary-button)'
