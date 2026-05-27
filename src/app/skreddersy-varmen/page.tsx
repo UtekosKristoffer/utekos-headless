@@ -8,6 +8,7 @@ import { LandingPurchaseSection } from './components/LandingPurchaseSection'
 import { StickyMobileAction } from './components/StickyMobileAction'
 import { PreFooterNavigation } from './components/PreFooterNavigation'
 import type { Metadata } from 'next'
+import { SkreddersyVarmenBreadcrumbs } from './components/SkreddersyVarmenBreadcrumbs'
 
 export const metadata: Metadata = {
   title: 'Skreddersy varmen med banebrytende yttertøy fra Utekos',
@@ -59,6 +60,7 @@ export default function LandingPage() {
   return (
     <section className='flex min-h-screen w-full flex-col items-center justify-start overflow-x-clip bg-maritime-darkest'>
       <StickyMobileAction />
+      <SkreddersyVarmenBreadcrumbs />
       <HeroAndEmpathy />
 
       <DeferredLandingSections />

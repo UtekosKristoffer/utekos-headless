@@ -4,6 +4,7 @@ import type {
   ListItem,
   Offer,
   Product,
+  SearchAction,
   SiteNavigationElement,
   VideoObject,
   WebPage,
@@ -87,6 +88,15 @@ export async function FrontPageJsonLd() {
   const navigationUrls = mainMenu.map(item => `${SITE_URL}${item.url}`)
   const featuredProductItems = featuredProducts.map(buildFeaturedProductListItem)
 
+  const potentialAction: SearchAction = {
+    '@type': 'SearchAction',
+    'target': {
+      '@type': 'EntryPoint',
+      'urlTemplate': `${SITE_URL}/search?q={search_term_string}`
+    },
+    'query': 'required name=search_term_string'
+  }
+
   const websiteNode: WebSite = {
     '@type': 'WebSite',
     '@id': WEBSITE_ID,
@@ -97,16 +107,8 @@ export async function FrontPageJsonLd() {
     'inLanguage': 'no-NO',
     'publisher': {
       '@id': ORGANIZATION_ID
-    }
-  }
-
-  const potentialAction = {
-    '@type': 'SearchAction',
-    'target': {
-      '@type': 'EntryPoint',
-      'urlTemplate': 'https://www.utekos.no/search?q={search_term_string}'
     },
-    'query-input': 'required name=search_term_string'
+    'potentialAction': potentialAction
   }
 
   const navigationNode: SiteNavigationElement = {

@@ -15,3 +15,4 @@
 - Add visible shadcn breadcrumbs and BreadcrumbList JSON-LD to `/kontaktskjema`.
 - Add visible shadcn breadcrumbs to `/frakt-og-retur` and connect its existing BreadcrumbList JSON-LD to the WebPage node.
 - Add WebPage and ImageObject primary image JSON-LD to `/produkter`.
+- Add visible shadcn breadcrumbs to `/skreddersy-varmen`; BreadcrumbList JSON-LD already exists in the route graph.
