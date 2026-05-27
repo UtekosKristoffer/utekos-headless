@@ -1,18 +1,18 @@
-import TechDownImageFront from '@public/1080/utekos-techdown.png'
+import TechDownImageFront from '@public/to-kvinner-nyter-terrasselivet-med-utekos-techdown.webp'
 import TechDownImagePatch from '@public/1080/utekos-techdown-bakfra.png'
-import TechDownImage from '@public/1080/techdown.png'
+import TechDownZipperPullCord from '@public/utekos-techdown-logo-orange-zipper-pull-cord.webp'
 
 export const TechDownImages = [
   {
     src: TechDownImageFront,
-    alt: 'Lykkelig kvinne nyter terrasselivet med Utekos TechDown™.'
+    alt: 'To lykkelige kvinner nyter terrasselivet med Utekos TechDown™.'
   },
   {
     src: TechDownImagePatch,
-    alt: 'Nærbilde av det slitesterke Luméa-stoffet på Utekos TechDown™.'
+    alt: '.'
   },
   {
-    src: TechDownImage,
-    alt: 'Utekos TechDown™ komfortplagg sett forfra.'
+    src: TechDownZipperPullCord,
+    alt: 'Nærbilde av Utekos TechDown med svart frontglidelås, oransje glidelåstrekk med mørkeblå tupp og svarte snorstrammere på mørkeblått vattert stoff..'
   }
 ]
