@@ -14,10 +14,7 @@ const initialState = {
 }
 
 export function NewsletterForm() {
-  const [state, formAction, isPending] = useActionState(
-    subscribeToNewsletter,
-    initialState
-  )
+  const [state, formAction, isPending] = useActionState(subscribeToNewsletter, initialState)
   const formRef = useRef<HTMLFormElement>(null)
 
   const submittedEmailRef = useRef<string | null>(null)
@@ -50,14 +47,13 @@ export function NewsletterForm() {
       <div className='flex flex-col items-center space-y-3'>
         <div className='flex flex-col items-center gap-3 text-cloud-dancer'>
           <Mail data-icon='inline-start' className='size-10' />
-          <p className='max-w-xl text-3xl leading-[1.05] font-semibold tracking-normal text-cloud-dancer sm:text-4xl'>
+          <p className='max-w-5xl text-3xl leading-[1.05] font-semibold tracking-normal text-cloud-dancer sm:text-4xl'>
             Meld deg på Utekos sitt nyhetsbrev!
           </p>
         </div>
-        <p className='z-10 mx-auto mt-2! max-w-xl text-left text-base leading-[1.5] tracking-normal text-cloud-dancer/80'>
-          Som medlem i vår kundeklubb får du personlige tilbud og tilgang til
-          salg og kampanjer først. Du får også masse tips og inspirasjon rett
-          inn i innboksen din.
+        <p className='z-10 w-full font-utekos-text mt-2! max-w-screen text-center mx-auto text-base leading-[1.45] tracking-normal min-w-3xl text-cloud-dancer/80'>
+          Som medlem i vår kundeklubb får du personlige tilbud og tilgang til salg og kampanjer først. Du får
+          også masse tips og inspirasjon rett inn i innboksen din.
         </p>
         <form
           ref={formRef}
