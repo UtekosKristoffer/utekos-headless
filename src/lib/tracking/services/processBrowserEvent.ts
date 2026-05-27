@@ -21,30 +21,14 @@ export async function processBrowserEvent(
 ) {
   const { userData, sourceInfo } = prepareEventContext(body, cookies, metadata.clientIp, metadata.userAgent)
 
-  const pinPromise = deps.sendPinterest(body, userData, cookies.epik)
-
-  const tiktokPromise = deps.sendTikTok(body, userData, {
-    ...(cookies.ttclid ? { ttclid: cookies.ttclid } : {}),
-    ...(cookies.ttp ? { ttp: cookies.ttp } : {})
-  })
-
   const googlePromise = deps.sendGoogle(body, {
     clientIp: metadata.clientIp,
     userAgent: metadata.userAgent
   })
-
-  const snapchatPromise =
-    deps.sendSnapchat ?
-      deps.sendSnapchat(body, userData, {
-        ...(cookies.scCid ? { sc_cookie1: cookies.scCid } : {}),
-        ...(cookies.scCid ? { sc_click_id: cookies.scCid } : {})
-      })
-    : Promise.resolve()
-
   try {
     const metaResponse = await deps.sendMeta(body, userData)
 
-    const [, , googleResult] = await Promise.all([pinPromise, tiktokPromise, googlePromise, snapchatPromise])
+    const [googleResult] = await Promise.all([googlePromise])
 
     await deps.logger(
       'INFO',
@@ -57,9 +41,6 @@ export async function processBrowserEvent(
       {
         actionSource: body.actionSource || 'website',
         source: sourceInfo.name,
-        scCid: cookies.scCid ? '***Found***' : 'Missing',
-        epik: cookies.epik ? '***Found***' : 'Missing',
-        ttclid: cookies.ttclid ? '***Found***' : 'Missing',
         hasFbp: !!userData.fbp,
         hasFbc: !!userData.fbc,
         hasExtId: !!userData.external_id,

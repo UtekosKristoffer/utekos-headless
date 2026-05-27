@@ -4,10 +4,7 @@ import type { CaptureContext } from 'types/tracking/capture/CaptureContext'
 import type { ExtendedUserData } from 'types/tracking/user/ExtendedUserData'
 import type { CheckoutAttribution } from 'types/tracking/user/CheckoutAttribution'
 
-export function prepareCaptureData(
-  body: CaptureBody,
-  context: CaptureContext
-): CheckoutAttribution {
+export function prepareCaptureData(body: CaptureBody, context: CaptureContext): CheckoutAttribution {
   const { cookies, clientIp, userAgent } = context
   const userData: ExtendedUserData = {
     fbp: body.userData?.fbp || cookies.fbp || undefined,
@@ -16,24 +13,20 @@ export function prepareCaptureData(
     email_hash: cookies.userHash || undefined, // Vi antar denne kun kommer fra cookie (ferdig hashet)
     scid: cookies.scid || undefined,
     click_id: cookies.click_id || undefined,
-    epik: cookies.epik || undefined,
     gclid: cookies.gclid || undefined,
     gbraid: cookies.gbraid || undefined,
     wbraid: cookies.wbraid || undefined,
     msclkid: cookies.msclkid || undefined,
     dclid: cookies.dclid || undefined,
-    client_user_agent:
-      body.userData?.client_user_agent || userAgent || undefined,
+    client_user_agent: body.userData?.client_user_agent || userAgent || undefined,
 
     client_ip_address: body.userData?.client_ip_address ?? clientIp
   }
 
   if (userData.email) userData.email = normalize.email(userData.email)
   if (userData.phone) userData.phone = normalize.phone(userData.phone)
-  if (userData.first_name)
-    userData.first_name = normalize.name(userData.first_name)
-  if (userData.last_name)
-    userData.last_name = normalize.name(userData.last_name)
+  if (userData.first_name) userData.first_name = normalize.name(userData.first_name)
+  if (userData.last_name) userData.last_name = normalize.name(userData.last_name)
   if (userData.city) userData.city = normalize.city(userData.city)
   if (userData.state) userData.city = normalize.state(userData.state)
   if (userData.zip) userData.zip = normalize.zip(userData.zip)

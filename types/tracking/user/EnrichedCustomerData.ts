@@ -14,6 +14,4 @@ export type EnrichedCustomerData = {
   userAgent?: string | undefined
   fbp?: string | undefined
   fbc?: string | undefined
-  ttclid?: string | undefined
-  ttp?: string | undefined
 }

@@ -1,7 +1,11 @@
 import 'server-only'
+
 import { checkGoogleTagManagerScriptHealth } from './checkGoogleTagManagerScriptHealth'
 import { mapToGA4EventName } from './mapToGA4EventName'
 import { trackServerEvent } from './trackingServerEvent'
+
+import type { MetaEventPayload } from 'types/tracking/meta'
+import type { GoogleBrowserEventResult } from 'types/tracking/event'
 
 const GTM_OWNED_EVENTS = new Set(['PageView', 'ViewContent', 'AddToCart', 'InitiateCheckout', 'Purchase'])
 
@@ -22,6 +26,7 @@ function buildEventParams(eventData?: Record<string, unknown>): Record<string, u
 
   if (data.value !== undefined) {
     const value = Number(data.value)
+
     if (Number.isFinite(value)) {
       params.value = value
     }
@@ -66,22 +71,11 @@ function buildEventParams(eventData?: Record<string, unknown>): Record<string, u
   return params
 }
 
-type SendGA4BrowserEventPayload = {
-  eventName?: string | undefined
-  eventData?: Record<string, unknown> | undefined
-  ga4Data?:
-    | {
-        client_id?: string | undefined
-        session_id?: string | number | undefined
-      }
-    | undefined
-}
-
 export async function sendGA4BrowserEvent(
-  payload: SendGA4BrowserEventPayload,
-  userContext: { clientIp?: string; userAgent?: string }
-) {
-  const { eventName, eventData, ga4Data } = payload ?? {}
+  payload: MetaEventPayload,
+  userContext: { clientIp?: string | undefined; userAgent?: string | undefined }
+): Promise<GoogleBrowserEventResult> {
+  const { eventName, eventData, ga4Data } = payload
 
   if (!eventName) {
     return {
@@ -151,7 +145,7 @@ export async function sendGA4BrowserEvent(
       success: false,
       provider: 'google',
       error: result.reason,
-      details: result.details
+      ...(result.details !== undefined ? { details: result.details } : {})
     }
   }
 

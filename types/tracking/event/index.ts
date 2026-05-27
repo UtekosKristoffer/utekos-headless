@@ -1,9 +1,4 @@
-import type {
-  MetaEventPayload,
-  ClientUserData,
-  MetaUserData,
-  MetaEventRequestResult
-} from 'types/tracking/meta'
+import type { ClientUserData, MetaEventPayload, MetaEventRequestResult } from 'types/tracking/meta'
 
 export type LogFunction = (
   level: 'INFO' | 'ERROR' | 'WARN' | 'DEBUG',
@@ -11,35 +6,39 @@ export type LogFunction = (
   meta?: Record<string, unknown>,
   context?: Record<string, unknown>
 ) => Promise<void>
+
 export type MetaSender = (
   payload: MetaEventPayload,
   userData: ClientUserData
 ) => Promise<MetaEventRequestResult>
 
-export type PinterestSender = (
-  payload: MetaEventPayload,
-  userData: ClientUserData,
-  epik: string | undefined
-) => Promise<void>
+export type GoogleBrowserEventTransport = 'gtm_web_to_sgtm' | 'sgtm' | 'direct_ga4'
 
-export type TikTokSender = (
+export type GoogleBrowserEventSkipReason = 'handled_by_google_tag' | 'handled_by_healthy_google_tag'
+
+export type GoogleBrowserEventResult =
+  | {
+      success: true
+      provider: 'google'
+      transport: GoogleBrowserEventTransport
+      skipped?: boolean | undefined
+      reason?: GoogleBrowserEventSkipReason | undefined
+      fallbackUsed?: boolean | undefined
+    }
+  | {
+      success: false
+      provider: 'google'
+      error: string
+      details?: unknown | undefined
+    }
+
+export type GoogleSender = (
   payload: MetaEventPayload,
-  userData: ClientUserData,
-  identifiers: { ttclid?: string; ttp?: string }
-) => Promise<void>
+  context: { clientIp?: string | undefined; userAgent?: string | undefined }
+) => Promise<GoogleBrowserEventResult>
 
 export interface TrackingDependencies {
   sendMeta: MetaSender
-  sendPinterest: PinterestSender
-  sendTikTok: TikTokSender
-  sendSnapchat: (
-    payload: MetaEventPayload,
-    userData: MetaUserData,
-    extra?: { sc_cookie1?: string; sc_click_id?: string }
-  ) => Promise<any>
-  sendGoogle: (
-    payload: MetaEventPayload,
-    context: { clientIp?: string; userAgent?: string }
-  ) => Promise<any>
+  sendGoogle: GoogleSender
   logger: LogFunction
 }
