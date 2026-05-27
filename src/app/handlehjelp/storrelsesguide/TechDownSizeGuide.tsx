@@ -43,14 +43,14 @@ export function TechDownSizeGuide() {
               </span>{' '}
               TechDown™ - presisjon i hver størrelse
             </h2>
-            <p className='mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-cloud-dancer/82'>
+            <p className='mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-cloud-dancer'>
               For livsnyteren som verdsetter både funksjon og form, er TechDown designet med en mer kroppsnær
               passform. Dette gir deg suveren bevegelsesfrihet og effektiv varme, pakket inn i et nettere
               design – perfekt for et aktivt liv på hytten, i bobilen eller på kjølige kvelder på terrassen.
             </p>
           </div>
 
-          <div className='mt-12 max-w-3xl mx-auto text-left space-y-6 text-cloud-dancer/82'>
+          <div className='mt-12 max-w-3xl mx-auto text-left space-y-6 text-cloud-dancer'>
             <p>
               TechDown sine størrelser har en mer tradisjonell progresjon for å sikre at du finner en
               størrelse som passer perfekt til din kroppstype.
@@ -64,7 +64,7 @@ export function TechDownSizeGuide() {
           <div className='mt-16 grid grid-cols-1 gap-x-6 gap-y-6 lg:grid-cols-3 max-w-6xl mx-auto'>
             <div className='rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/58 p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)] sm:p-8'>
               <h3 className='text-xl font-semibold leading-7'>Velg Liten hvis...</h3>
-              <ul className='mt-4 list-disc list-inside space-y-2 text-cloud-dancer/82'>
+              <ul className='mt-4 list-disc list-inside space-y-2 text-cloud-dancer/95'>
                 <li>Er opptil 165-170 cm høy.</li>
                 <li>Eller noe lavere og ønsker ekstra romslig følelse</li>
                 <li>Eller du er noe høyere, men ønsker nettere silhuett uten overflødig volum.</li>

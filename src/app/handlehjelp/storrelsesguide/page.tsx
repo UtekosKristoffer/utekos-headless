@@ -50,7 +50,7 @@ export default function SizeGuidePage() {
             textColor='var(--maritime-darkest)'
             className='mb-4 px-4 py-2 text-sm'
           />
-          <h1 className='text-4xl font-bold leading-[1.05] tracking-tight text-maritime-darkest sm:text-5xl'>
+          <h1 className=' text-maritime-darkest mx-auto'>
             Finn passformen til din{' '}
             <span className='inline-flex items-baseline'>
               <UtekosWordmark
@@ -61,13 +61,13 @@ export default function SizeGuidePage() {
               <span className='sr-only'>Utekos</span>
             </span>
           </h1>
-          <p className='mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-maritime-darkest/82'>
+          <p className='mx-auto mt-5 max-w-2xl utekos-section-lead text-maritime-darkest/82'>
             Riktig størrelse gir mer ro, bedre varme og en passform som følger deg ute. Bruk guiden til å
             velge trygt før du handler.
           </p>
         </div>
       </div>
-      <div className='sticky top-0 z-20 my-10 border-y border-cloud-dancer/12 bg-maritime-blue py-4 text-cloud-dancer shadow-[0_20px_48px_-38px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)] backdrop-blur-md sm:my-16'>
+      <div className='sticky top-0 z-20 my-10 py-4 text-cloud-dancer sm:my-16'>
         <div className='container mx-auto px-4'>
           <nav
             className='flex flex-wrap items-center justify-center gap-2 sm:gap-3'

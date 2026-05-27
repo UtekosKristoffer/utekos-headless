@@ -39,13 +39,13 @@ const comfyrobeFeatures = [
 export function ComfyrobeSizeGuide() {
   return (
     <section id='comfyrobe-size-guide' className='scroll-mt-28'>
-      <div className='bg-cloud-dancer text-maritime-darkest'>
+      <div className='bg-overcast text-maritime-darkest'>
         <div className='container mx-auto px-4 py-16 sm:py-24'>
           <div className='mx-auto max-w-3xl text-center'>
             <BrandBadge
               label='Comfyrobe™'
-              backgroundColor='var(--overcast)'
-              textColor='var(--maritime-darkest)'
+              backgroundColor='var(--maritime-blue)'
+              textColor='var(--cloud-dancer)'
               className='mb-5 px-4 py-2 text-sm'
             />
             <h2 className='text-3xl font-bold leading-[1.05] tracking-tight text-maritime-darkest sm:text-5xl'>
@@ -53,7 +53,7 @@ export function ComfyrobeSizeGuide() {
             </h2>
           </div>
 
-          <div className='mt-12 max-w-4xl mx-auto text-left space-y-4 text-maritime-darkest/78'>
+          <div className='mt-12 max-w-4xl mx-auto text-left space-y-4 text-maritime-darkest'>
             <p>
               Comfyrobe™ er designet som ditt personlige, beskyttende skall. Den romslige, rektangulære
               passformen er ment å være omsluttende og komfortabel, ikke figurnær. Hensikten er at den enkelt
@@ -66,26 +66,26 @@ export function ComfyrobeSizeGuide() {
             <div className='grid grid-cols-1 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-8'>
               {comfyrobeFeatures.map(feature => (
                 <div key={feature.title} className='flex items-start gap-4'>
-                  <div className='flex size-10 flex-shrink-0 items-center justify-center rounded-full bg-overcast text-maritime-blue'>
+                  <div className='flex size-10 flex-shrink-0 items-center justify-center rounded-full bg-maritime-blue text-cloud-dancer'>
                     <feature.Icon className='size-5' aria-hidden='true' />
                   </div>
                   <div>
                     <p className='font-semibold'>{feature.title}</p>
-                    <p className='mt-1 text-sm text-maritime-darkest/70'>{feature.description}</p>
+                    <p className='mt-1 text-sm text-maritime-darkest'>{feature.description}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className='mx-auto mt-16 max-w-3xl rounded-lg border border-maritime-darkest/10 bg-overcast p-6 shadow-[0_18px_44px_-36px_color-mix(in_oklab,var(--maritime-darkest)_72%,transparent)]'>
+          <div className='mx-auto mt-16 max-w-3xl rounded-lg border border-maritime-darkest/10 bg-maritime-blue p-6 shadow-[0_18px_44px_-36px_color-mix(in_oklab,var(--maritime-darkest)_72%,transparent)]'>
             <div className='flex items-start gap-4'>
-              <Lightbulb className='size-8 flex-shrink-0 text-maritime-blue' />
+              <Lightbulb className='size-8 flex-shrink-0 text-maritime-darkest' />
               <div>
-                <h3 className='text-lg font-semibold text-maritime-darkest'>
+                <h3 className='text-lg font-semibold text-cloud-dancer'>
                   Vårt beste tips for å velge riktig
                 </h3>
-                <p className='mt-1 text-maritime-darkest/74'>
+                <p className='mt-1 text-cloud-dancer'>
                   Tenk på hvordan du vil bruke plagget. Ønsker du en passform som er romslig, men som følger
                   deg? Velg din normale størrelse. Ser du for deg maksimal plass til tykke lag under, eller en
                   bevisst overdimensjonert stil? Da kan du vurdere å gå opp en størrelse. Det er ingen fasit –
@@ -98,7 +98,7 @@ export function ComfyrobeSizeGuide() {
             <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
               <div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
                 <div className='max-w-6xl mx-auto'>
-                  <div className='mb-4 flex items-center justify-center rounded-lg border border-maritime-darkest/10 bg-overcast/70 p-4'>
+                  <div className='mb-4 flex items-center justify-center rounded-lg border border-maritime-darkest/10 bg-maritime-blue p-4'>
                     <Image
                       src={ComfyFrontSkisse}
                       alt='Skisse av Comfyrobe med mål'

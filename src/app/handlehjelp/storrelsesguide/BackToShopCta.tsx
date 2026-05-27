@@ -21,8 +21,8 @@ export function BackToShopCta() {
           </span>
         </h2>
         <p className='mt-5 max-w-2xl mx-auto text-lg leading-relaxed text-cloud-dancer/82'>
-          Nå som du har full kontroll på størrelsen, er du bare et par klikk
-          unna en helt ny standard for komfort.
+          Nå som du har full kontroll på størrelsen, er du bare et par klikk unna en helt ny standard for
+          komfort.
         </p>
         <div className='mt-8 flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-4'>
           <BrandBadge
@@ -31,10 +31,7 @@ export function BackToShopCta() {
             textColor='var(--maritime-darkest)'
             className='w-full px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto'
           >
-            <Link
-              href='/produkter/utekos-dun'
-              data-track='StorrelsesguideBackToShopCtaUtekosDunClick'
-            >
+            <Link href='/produkter/utekos-dun' data-track='StorrelsesguideBackToShopCtaUtekosDunClick'>
               Til Utekos Dun™
               <ArrowRight className='ml-2 size-4' />
             </Link>
@@ -59,10 +56,7 @@ export function BackToShopCta() {
             textColor='var(--maritime-darkest)'
             className='w-full px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto'
           >
-            <Link
-              href='/produkter/comfyrobe'
-              data-track='StorrelsesguideBackToShopCtaComfyrobeClick'
-            >
+            <Link href='/produkter/comfyrobe' data-track='StorrelsesguideBackToShopCtaComfyrobeClick'>
               Til Comfyrobe™
               <ArrowRight className='ml-2 size-4' />
             </Link>
@@ -70,38 +64,27 @@ export function BackToShopCta() {
         </div>
 
         <div className='relative mt-16'>
-          <div
-            className='absolute inset-0 flex items-center'
-            aria-hidden='true'
-          >
+          <div className='absolute inset-0 flex items-center' aria-hidden='true'>
             <div className='w-full border-t border-cloud-dancer/12' />
           </div>
           <div className='relative flex justify-center'>
-            <span className='bg-maritime-blue px-3 text-sm font-medium text-cloud-dancer/72'>
-              eller
-            </span>
+            <span className='bg-maritime-blue px-3 text-sm font-medium text-cloud-dancer/72'>eller</span>
           </div>
         </div>
 
         <div className='mt-12 max-w-2xl mx-auto'>
-          <h3 className='text-xl font-semibold'>
-            Fortsatt usikker? Få personlig hjelp.
-          </h3>
+          <h3 className='text-xl font-semibold'>Fortsatt usikker? Få personlig hjelp.</h3>
           <p className='mt-2 text-cloud-dancer/74'>
-            Hvis du ønsker en skreddersydd anbefaling basert på din bruk, høyde,
-            og kroppsfasong, er vi her for deg. Send oss en melding, så
-            garanterer vi svar innen én time frem til kl. 22:00.
+            Hvis du ønsker en skreddersydd anbefaling basert på din bruk, høyde, og kroppsfasong, er vi her
+            for deg. Send oss en melding, så garanterer vi svar innen én time frem til kl. 22:00.
           </p>
           <BrandBadge
             asChild
-            backgroundColor='var(--overcast)'
+            backgroundColor='var(--bleached-mauve)'
             textColor='var(--maritime-darkest)'
             className='mt-6 px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
           >
-            <Link
-              href={'/kontaktskjema' as Route}
-              data-track='StorrelsesguideBackToShopCtaContactUsClick'
-            >
+            <Link href={'/kontaktskjema' as Route} data-track='StorrelsesguideBackToShopCtaContactUsClick'>
               <MessageCircle className='mr-2 size-4' />
               Spør oss om størrelse
             </Link>
