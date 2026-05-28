@@ -22,10 +22,7 @@ export function prepareEventContext(
   let sourceEmoji = '🤷'
   let sourceName = 'Direct/Unknown'
 
-  if (cookies.ttclid) {
-    sourceEmoji = '🎵'
-    sourceName = 'TikTok'
-  } else if (cookies.epik) {
+  if (cookies.epik) {
     sourceEmoji = '📌'
     sourceName = 'Pinterest'
   } else if (cookies.scCid) {
@@ -36,8 +33,6 @@ export function prepareEventContext(
     sourceName = 'Meta'
   }
 
-  // 2. Slå sammen UserData (Body > Cookie)
-  // Vi setter ikke client_ip/agent her ennå, det gjøres i steg 4 for consistency
   const finalUserData: ClientUserData = {
     ...body.userData,
     fbp: body.userData?.fbp || cookies.fbp || undefined,
@@ -47,21 +42,14 @@ export function prepareEventContext(
   }
 
   // 3. Normalisering
-  if (finalUserData.email)
-    finalUserData.email = normalize.email(finalUserData.email)
-  if (finalUserData.phone)
-    finalUserData.phone = normalize.phone(finalUserData.phone)
-  if (finalUserData.first_name)
-    finalUserData.first_name = normalize.name(finalUserData.first_name)
-  if (finalUserData.last_name)
-    finalUserData.last_name = normalize.name(finalUserData.last_name)
-  if (finalUserData.city)
-    finalUserData.city = normalize.city(finalUserData.city)
-  if (finalUserData.state)
-    finalUserData.state = normalize.state(finalUserData.state)
+  if (finalUserData.email) finalUserData.email = normalize.email(finalUserData.email)
+  if (finalUserData.phone) finalUserData.phone = normalize.phone(finalUserData.phone)
+  if (finalUserData.first_name) finalUserData.first_name = normalize.name(finalUserData.first_name)
+  if (finalUserData.last_name) finalUserData.last_name = normalize.name(finalUserData.last_name)
+  if (finalUserData.city) finalUserData.city = normalize.city(finalUserData.city)
+  if (finalUserData.state) finalUserData.state = normalize.state(finalUserData.state)
   if (finalUserData.zip) finalUserData.zip = normalize.zip(finalUserData.zip)
-  if (finalUserData.country)
-    finalUserData.country = normalize.country(finalUserData.country)
+  if (finalUserData.country) finalUserData.country = normalize.country(finalUserData.country)
 
   const finalIp = finalUserData.client_ip_address || clientIp
   const finalUserAgent = finalUserData.client_user_agent || userAgent
