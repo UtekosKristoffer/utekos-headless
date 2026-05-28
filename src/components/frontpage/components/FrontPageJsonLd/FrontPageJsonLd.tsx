@@ -154,7 +154,7 @@ export async function FrontPageJsonLd() {
     'primaryImageOfPage': {
       '@type': 'ImageObject',
       '@id': PRIMARY_IMAGE_ID,
-      'url': `${SITE_URL}/og-kate-linn-kikkert-master.png`,
+      'url': `${SITE_URL}/webp/kaffe-med-tilpasset-utekos-mikrofiber-vinter-terrasse-.webp`,
       'width': '1200',
       'height': '630',
       'caption': 'To kvinner som koser seg utendørs på terrassen med varme komfortplagg fra Utekos.'
