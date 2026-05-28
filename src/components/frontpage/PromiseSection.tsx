@@ -10,7 +10,7 @@ import { ClockIcon, ShieldCheckIcon } from '@heroicons/react/24/outline'
 import { ThermometerIcon } from 'lucide-react'
 import ClassicGeminiCouple from '@public/webp/classic-couple-mobile-1080.webp'
 import TechDownKateKikkert from '@public/webp/techdown-kate-kikkert-1080.webp'
-import ClassicGeminiWoman from 'public/webp/kaffe-med-tilpasset-utekos-mikrofiber-vinter-terrasse-.webp'
+import ClassicGeminiWoman from '@public/webp/kaffe-med-tilpasset-utekos-mikrofiber-vinter-terrasse-.webp'
 import TechDownMonica from '@public/webp/techdown-monica-1080.webp'
 import TechDownKristoffer from '@public/webp/techdown-kristoffer-1080.webp'
 
