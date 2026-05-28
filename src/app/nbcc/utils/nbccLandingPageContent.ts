@@ -40,7 +40,7 @@ export const nbccProducts = [
         alt: 'Utekos TechDown komfortplagg for kjølige kvelder ute'
       },
       {
-        src: '/1080/tech-bakside-hel-1080.png',
+        src: '/1080/utekos-techdown-bakside.webp',
         alt: 'Utekos TechDown sett bakfra'
       }
     ],
@@ -84,8 +84,7 @@ export const nbccProducts = [
   {
     title: 'Comfyrobe™',
     shortTitle: 'Comfyrobe™',
-    description:
-      'Vindtett, 8000 vannsøyle og lun etter dusj, bad eller en våt runde over campingplassen.',
+    description: 'Vindtett, 8000 vannsøyle og lun etter dusj, bad eller en våt runde over campingplassen.',
     bestFor: 'Som en  fuktige morgener.',
     images: [
       {
@@ -143,13 +142,11 @@ export const nbccUseCases = [
 export const nbccSteps = [
   {
     title: 'Finn fordelen hos NBCC',
-    description:
-      'Som medlem finner du fordelskoden i Min Side / Gnist under medlemsfordeler.'
+    description: 'Som medlem finner du fordelskoden i Min Side / Gnist under medlemsfordeler.'
   },
   {
     title: 'Velg produktene hos Utekos',
-    description:
-      'Velg mellom TechDown, Mikrofiber og Comfyrobe, og legg i handlekurven'
+    description: 'Velg mellom TechDown, Mikrofiber og Comfyrobe, og legg i handlekurven'
   },
   {
     title: 'Bruk fordelen i kassen',

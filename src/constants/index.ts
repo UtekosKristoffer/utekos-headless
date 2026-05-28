@@ -77,7 +77,7 @@ export const PRODUCT_VARIANTS = {
     images: [
       '/1080/kate-1080.png',
       '/1080/techdown.png',
-      '/1080/tech-bakside-hel-1080.png',
+      '/1080/utekos-techdown-bakside.webp',
       '/1080/tech-halv-1080.png'
     ]
   },
