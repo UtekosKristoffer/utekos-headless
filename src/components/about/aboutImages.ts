@@ -4,7 +4,7 @@ export const aboutImages = [
     alt: 'To personer i Utekos-plagg nyter utsikten fra en fjelltopp.'
   },
   {
-    src: '/utekos-mikrofiber/vinter-terrasse-.webp',
+    src: 'webp/kaffe-med-tilpasset-utekos-mikrofiber-vinter-terrasse-.webp',
     alt: 'En kvinne iført Utekos-plagg sitter terrassen i snørike omgivelser.'
   },
   {
