@@ -42,7 +42,7 @@ export const PRODUCT_VARIANTS = {
     colors: [{ name: 'Havdyp', hex: 'var(--color-maritime-blue)' }],
     sizes: ['Liten', 'Middels', 'Stor', 'Ekstra stor'],
     images: [
-      '/kate-tech-photo.webp',
+      '/kvinne-nyter-terrasselivet-med-utekos-techdown.webp',
       '/1080/techdown.png',
       '/1080/tech-bakside-hel-1080.png',
       '/1080/tech-halv-1080.png'
