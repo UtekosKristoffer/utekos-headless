@@ -10,15 +10,10 @@ export function createTrackingContext(
   order: OrderPaid,
   redisData: CheckoutAttribution | null
 ): TrackingContext {
-  const addr =
-    order.shipping_address
-    ?? order.billing_address
-    ?? order.customer?.default_address
+  const addr = order.shipping_address ?? order.billing_address ?? order.customer?.default_address
   const clientDetails = order.client_details as Record<string, unknown> | null
   let fbp = redisData?.userData?.fbp
   let fbc = redisData?.userData?.fbc
-  let ttclid = redisData?.userData?.ttclid
-  let ttp = redisData?.userData?.ttp
 
   if (order.note_attributes && order.note_attributes.length > 0) {
     const fbpAttr = order.note_attributes.find(a => a.name === '_fbp')
@@ -26,18 +21,9 @@ export function createTrackingContext(
 
     const fbcAttr = order.note_attributes.find(a => a.name === '_fbc')
     if (fbcAttr?.value && !fbc) fbc = fbcAttr.value
-
-    const ttclidAttr = order.note_attributes.find(
-      a => a.name === 'ttclid' || a.name === 'ute_ttclid'
-    )
-    if (ttclidAttr?.value && !ttclid) ttclid = ttclidAttr.value
-
-    const ttpAttr = order.note_attributes.find(a => a.name === '_ttp')
-    if (ttpAttr?.value && !ttp) ttp = ttpAttr.value
   }
 
-  const rawIp =
-    redisData?.userData?.client_ip_address || safeString(order.browser_ip)
+  const rawIp = redisData?.userData?.client_ip_address || safeString(order.browser_ip)
 
   const customer: EnrichedCustomerData = {
     email:
@@ -66,14 +52,9 @@ export function createTrackingContext(
     zip: safeString(addr?.zip) || undefined,
     countryCode: safeString(addr?.country_code) || undefined,
     clientIp: getCleanIp(rawIp) || undefined,
-    userAgent:
-      redisData?.userData?.client_user_agent
-      || safeString(clientDetails?.user_agent)
-      || undefined,
+    userAgent: redisData?.userData?.client_user_agent || safeString(clientDetails?.user_agent) || undefined,
     fbp: fbp || undefined,
-    fbc: fbc || undefined,
-    ttclid: ttclid || undefined,
-    ttp: ttp || undefined
+    fbc: fbc || undefined
   }
 
   const contentIds: string[] = []
