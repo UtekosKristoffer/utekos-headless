@@ -22,7 +22,7 @@ export function ActiveSubmitButton({ isPending, isDisabled }: ActiveSubmitButton
         className='cursor-pointer bg-primary-button text-maritime-darkest hover:bg-primary-button/60 disabled:cursor-not-allowed'
       >
         <ShoppingBag className='size-5 place-self-start text-left shrink-0' aria-hidden='true' />
-        <span className='truncate'>{isPending ? 'Legger til...' : 'Legg i handlekurv'}</span>
+        <span className='truncate'>{isPending ? 'Legger til...' : 'Legg i kurv'}</span>
       </Button>
     </BrandBadge>
   )

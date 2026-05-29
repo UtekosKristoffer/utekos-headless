@@ -13,7 +13,9 @@ export function MotionContentView() {
         className='relative mx-auto mb-5 gap-1.5 border border-cloud-dancer/25 px-3 py-2 text-xs leading-none tracking-tight shadow-[0_16px_32px_-26px_color-mix(in_oklab,var(--ancient-water)_64%,transparent)] sm:gap-2 sm:px-4 sm:py-2.5 sm:text-sm'
       >
         <Award className='size-4 shrink-0 text-maritime-darkest sm:size-5' />
-        <small className='whitespace-nowrap px-1 font-medium sm:px-2'>Funksjonell varme siden 2020</small>
+        <small className='whitespace-nowrap px-1 text-sm font-utekos-text! font-medium sm:px-2'>
+          Funksjonell varme siden 2020
+        </small>
       </BrandBadge>
 
       <header className='mx-auto mt-5 mb-0 max-w-4xl text-balance font-bold leading-[0.88] tracking-tight text-cloud-dancer lg:max-w-none'>
@@ -27,13 +29,10 @@ export function MotionContentView() {
       </header>
 
       <h3 className='mx-auto mt-5 max-w-[34rem] sm:mt-7 sm:max-w-2xl lg:max-w-3xl'>
-        <span
-          data-nosnippet='false'
-          className='text-balance text-base leading-[1.45] tracking-tight text-cloud-dancer sm:text-lg md:text-xl lg:text-2xl'
-        >
+        <p className='text-balance text-base leading-[1.45] tracking-tight text-cloud-dancer sm:text-lg md:text-xl lg:text-2xl'>
           Kompromissløs komfort og overlegen allsidighet.{' '}
           <span className='font-semibold text-dusted-peri tracking-normal'>Juster, form og nyt.</span>
-        </span>
+        </p>
       </h3>
 
       <div data-nosnippet className='mt-7 flex justify-center sm:mt-9'>

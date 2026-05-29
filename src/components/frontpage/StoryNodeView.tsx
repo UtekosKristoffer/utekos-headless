@@ -36,7 +36,6 @@ export function StoryNodeView({ icon: Icon, label, description, tone }: StoryNod
         styles.card
       )}
     >
-      {/* Premium shine overlay on hover */}
       <div
         className='pointer-events-none absolute inset-0 z-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-full'
         aria-hidden='true'
@@ -49,9 +48,9 @@ export function StoryNodeView({ icon: Icon, label, description, tone }: StoryNod
             styles.iconWrap
           )}
         >
+          {' '}
           <Icon aria-hidden='true' className='size-6 stroke-[1.5]' />
         </div>
-
         <div className='min-w-0 flex-1 space-y-2.5 pt-1'>
           <h3 className={cn('text-[1.125rem] font-medium leading-[0.9] tracking-[-0.01em]', styles.label)}>
             {label}

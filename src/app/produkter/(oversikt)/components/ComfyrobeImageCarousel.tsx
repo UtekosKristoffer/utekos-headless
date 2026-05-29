@@ -14,21 +14,21 @@ export function ComfyrobeImageCarousel() {
   const fadePlugin = useRef(Fade())
 
   return (
-    <AnimatedBlock className='will-animate-fade-in-left items-center place-items-center justify-center mx-auto size-full'>
+    <AnimatedBlock className='will-animate-fade-in-left mx-auto size-full'>
       <Carousel
         plugins={[fadePlugin.current]}
         opts={{ loop: true }}
-        className='w-full overflow-hidden rounded-[1.35rem] items-center justify-center mx-auto bg-maritime-darkest/60 shadow-[0_24px_70px_-48px_color-mix(in_oklch,var(--maritime-darkest)_90%,transparent)] size-full'
+        className='mx-auto size-full w-full overflow-hidden rounded-[1.35rem] bg-maritime-darkest/60 shadow-[0_24px_70px_-48px_color-mix(in_oklch,var(--maritime-darkest)_90%,transparent)]'
       >
         <CarouselContent className='relative aspect-square w-full'>
           <CarouselItem className='absolute inset-0 pl-0'>
-            <div className='relative size-full overflow-hidden items-center justify-center mx-auto bg-[radial-gradient(circle_at_50%_28%,color-mix(in_oklch,var(--havdyp)_54%,var(--maritime-darkest)_46%)_0%,var(--maritime-darkest)_72%)]'>
+            <div className='relative mx-auto size-full overflow-hidden bg-[radial-gradient(circle_at_50%_28%,color-mix(in_oklch,var(--havdyp)_54%,var(--maritime-darkest)_46%)_0%,var(--maritime-darkest)_72%)]'>
               <Image
                 src={ComfyRobe}
                 alt='Comfyrobe produktbilde.'
                 fill
                 quality={95}
-                className='mx-auto max-sm:ml-6 object-contain transition-transform duration-500 motion-reduce:translate-x-0 motion-reduce:scale-100 translate-x-0 scale-100 p-4'
+                className='object-contain object-center p-4 transition-transform duration-500 motion-reduce:scale-100'
                 sizes='(max-width: 1024px) 92vw, 40vw'
               />
             </div>

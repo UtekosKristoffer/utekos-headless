@@ -308,9 +308,9 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                       <div className='w-full lg:flex-1'>
                         <BrandBadge
                           asChild
-                          backgroundColor='color-mix(in oklab,var(--cloud-dancer) 12%,transparent)'
-                          textColor='var(--cloud-dancer)'
-                          className='group min-h-12 w-full justify-center border border-cloud-dancer/45 px-6 py-3 text-base font-semibold tracking-[-0.01em] shadow-[0_18px_38px_-30px_color-mix(in_oklab,var(--cloud-dancer)_40%,transparent)]'
+                          backgroundColor='var(--cloud-dancer)'
+                          textColor='var(--maritime-darkest)'
+                          className='group min-h-12 w-full justify-center border border-cloud-dancer/45 px-6 py-3 text-base tracking-[-0.01em]'
                         >
                           <Link
                             href={productUrl}

@@ -28,7 +28,7 @@
   --font-family-paragraph: var(--font-utekos-text), system-ui, sans-serif;
   --font-brand-heading: var(--font-google-sans), system-ui, sans-serif;
   --font-weight-utekos-heading-level-two: 700;
-  --font-weight-utekos-heading-level-three: 700;
+  --font-weight-utekos-heading-level-three: 600;
   --font-weight-utekos-text: var(--text-paragraph--font-weight);
   --font-weight-paragraph: var(--text-paragraph--font-weight);
   --font-weight-card-heading: 700;
@@ -70,7 +70,7 @@
   --text-heading-level-two--line-height: 0.95;
   --text-heading-level-two--letter-spacing: var(--tracking-utekos-heading-level-two);
   --text-heading-level-two-letter-spacing: var(--tracking-utekos-heading-level-two);
-  --text-heading-level-three: clamp(1.875rem, 1.25rem + 2.25vw, 2.8125rem);
+  --text-heading-level-three: clamp(1rem, 0.667rem + 1.201vw, 1.501rem);
   --text-heading-level-three-letter-spacing: var(--tracking-utekos-heading-level-three);
   --text-heading-level-three-font-weight: var(--font-weight-utekos-heading-level-three);
   --leading-utekos-title: var(--text-title--line-height);
@@ -82,10 +82,14 @@
   --radius: 0.625rem;
   --radius-full: 9999px;
 
+  /* Utekos TechDown */
+
   --color-vargnatt: oklch(0.2789 0.0091 285.79);
-  --color-baritone-blue: oklch(0.2821 0.0257 281.42);
   --color-silhouette: oklch(0.2881 0.0219 262.5);
+
   --color-havdyp: oklch(0.2884 0.0366 279.42);
+  --color-havdyp-hover: oklch(0.3191 0.022 259.38);
+
   --color-fjellbla: oklch(0.3504 0.0537 281.83);
   --color-evening-blue: oklch(0.2918 0.038 285.97);
   --color-peacoat: oklch(0.308 0.038 277.64);
@@ -96,8 +100,14 @@
   --color-graytone: oklch(0.4162 0.03 295.25);
   --color-skipper-blue: oklch(0.4252 0.0661 280.99);
   --color-fjellnatt: oklch(0.2471 0.0269 262.55);
-
+  --color-havdyp-dark: oklch(0.1996 0.0201 279.96);
   --color-dazzling-blue: oklch(0.457 0.1322 268.66);
+
+  --color-havdyp-analogous-100: #28393e;
+  --color-havdyp-analogous-200: #35283e;
+
+  --color-havdyp-square-300: #3e2835;
+  --color-havdyp-square-400: #283e31;
 
   --color-cloud-dancer: oklch(0.9493 0.007 88.64);
   --color-cool-gray: oklch(0.8892 0.0108 106.62);
@@ -114,9 +124,8 @@
   --color-antier: oklch(0.6039 0.0343 27.96);
   --color-demitasse: oklch(0.3328 0.0233 53.3);
   --color-chocolate-plum: oklch(0.3159 0.0237 14.31);
-  --color-rosin: oklch(0.3299 0.0153 107.21);
 
-  --color-dusted-peri: oklch(0.5481 0.0822 281.66);
+  --color-dusted-peri: oklch(0.5433 0.105 281.67);
   --color-dusted-peri-light: oklch(0.7081 0.0822 281.66);
   --color-dusted-purple: oklch(0.7794 0.0538 285.08);
   --color-persian-violet: oklch(0.6579 0.0534 282.33);
@@ -152,7 +161,7 @@
   --color-barely-blue: oklch(0.9041 0.0035 174.47);
   --color-almost-mauve: oklch(0.9024 0.0128 35.73);
 
-  --color-maritime-darkest: oklch(0.1284 0.0366 279.42);
+  --color-maritime-darkest: oklch(0.1996 0.0201 279.96);
   --color-muted: oklch(0.2684 0.0366 279.42);
 
   --utekos-title-letter-spacing: -0.02em;
@@ -254,6 +263,9 @@
   --foreground: var(--color-foreground);
   --primary: var(--color-primary);
 
+  --mono-tint: var(--ancient-water);
+  --mono-border: var(--dusted-peri);
+
   --google-sans: var(--font-google-sans);
   --utekos-text: var(--font-utekos-text);
 
@@ -266,96 +278,6 @@
   --animate-chip-pulse: chip-pulse 2.6s infinite ease-in-out;
   --animate-blinking-cursor: blinking-cursor 1.2s infinite step-end;
   --animate-blob-pulse: blob-pulse 5s infinite ease-in-out;
-}
-
-:root {
-  --baritone-blue: var(--color-baritone-blue);
-  --vargnatt: var(--color-vargnatt);
-  --silhouette: var(--color-silhouette);
-  --havdyp: var(--color-havdyp);
-  --maritime-blue: var(--color-havdyp);
-  --fjellbla: var(--color-fjellbla);
-  --evening-blue: var(--color-evening-blue);
-  --peacoat: var(--color-peacoat);
-  --inking: var(--color-inking);
-  --inking-100: var(--color-inking-100);
-  --eclipse: var(--color-eclipse);
-  --deep-cobalt: var(--color-deep-cobalt);
-  --graytone: var(--color-graytone);
-  --skipper-blue: var(--color-skipper-blue);
-  --dazzling-blue: var(--color-dazzling-blue);
-  --cloud-dancer: var(--color-cloud-dancer);
-  --ancient-water: var(--color-ancient-water);
-  --ancient-water-light: var(--color-ancient-water-light);
-  --bright-white: var(--color-bright-white);
-  --espresso: var(--color-espresso);
-  --raisin: var(--color-raisin);
-  --plum-truffle: var(--color-plum-truffle);
-  --delicioso: var(--color-delicioso);
-  --antier: var(--color-antier);
-  --demitasse: var(--color-demitasse);
-  --chocolate-plum: var(--color-chocolate-plum);
-  --rosin: var(--color-rosin);
-  --dusted-peri: var(--color-dusted-peri);
-  --dusted-peri-light: var(--color-dusted-peri-light);
-  --dusted-purple: var(--color-dusted-purple);
-  --persian-violet: var(--color-persian-violet);
-  --dusted-purple-light: var(--color-dusted-purple-light);
-  --bleached-mauve: var(--color-bleached-mauve);
-  --bleached-mauve-light: var(--color-bleached-mauve-light);
-  --dry-rose: var(--color-dry-rose);
-  --dark-rose: var(--color-dark-rose);
-  --klarna-pink: var(--color-klarna-pink);
-  --fair-orchid: var(--color-fair-orchid);
-  --raindrops-on-roses: var(--color-raindrops-on-roses);
-  --sweet-lavender: var(--color-sweet-lavender);
-  --primary-button: var(--color-primary-button);
-  --mountain-view: var(--color-mountain-view);
-  --deep-forest: var(--color-deep-forest);
-  --dark-green: var(--color-dark-green);
-  --greener-pastures: var(--color-greener-pastures);
-  --black-forrest: var(--color-black-forrest);
-  --camping-green: var(--color-camping-green);
-  --comfrey: var(--color-comfrey);
-  --mineral-green: var(--color-mineral-green);
-  --fairest-jade: var(--color-fairest-jade);
-  --overcast: var(--color-overcast);
-  --overcast-light: var(--color-overcast-light);
-  --white-down: var(--color-white-down);
-  --egg-white: var(--color-egg-white);
-  --whispy-clouds: var(--color-whispy-clouds);
-  --snow-white: var(--color-snow-white);
-  --stalacite: var(--color-stalacite);
-  --lucent-white: var(--color-lucent-white);
-  --barely-blue: var(--color-barely-blue);
-  --almost-mauve: var(--color-almost-mauve);
-  --maritime-dark: var(--color-maritime-dark);
-  --maritime-darker: var(--color-maritime-darker);
-  --maritime-darkest: var(--color-maritime-darkest);
-  --country-air: var(--color-country-air);
-  --orange-slice: var(--color-orange-slice);
-  --soft-warm: var(--color-soft-warm);
-  --background: var(--color-background);
-  --light-background: var(--color-light-background);
-  --foreground: var(--color-foreground);
-  --button: var(--color-button);
-  --card: var(--color-card);
-  --card-foreground: var(--color-card-foreground);
-  --popover: var(--color-popover);
-  --popover-foreground: var(--color-popover-foreground);
-  --primary: var(--color-primary);
-  --primary-foreground: var(--color-primary-foreground);
-  --secondary: var(--color-secondary);
-  --secondary-foreground: var(--color-secondary-foreground);
-  --muted: var(--color-muted);
-  --muted-foreground: var(--color-muted-foreground);
-  --accent: var(--color-accent);
-  --accent-foreground: var(--color-accent-foreground);
-  --destructive: var(--color-destructive);
-  --border: var(--color-border);
-  --input: var(--color-input);
-  --ring: var(--color-ring);
-  --article-white: var(--color-article-white);
 }
 
 @keyframes slideInDown {

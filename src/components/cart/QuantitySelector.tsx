@@ -16,12 +16,12 @@ export function QuantitySelector() {
   }
 
   return (
-    <div className='inline-flex h-10 items-center rounded-lg bg-ancient-water text-maritime-darkest'>
+    <div className='inline-flex h-10 items-center rounded-lg bg-dusted-peri text-maritime-darkest'>
       <Button
         type='button'
         variant='ghost'
         size='icon'
-        className='h-full text-maritime-darkest hover:bg-cloud-dancer/35 hover:text-maritime-darkest disabled:text-maritime-darkest/45'
+        className='h-full text-maritime-darkest hover:bg-cloud-dancer/35 hover:text-egg-white disabled:text-destructive'
         onClick={() => updateQuantity(quantity - 1)}
         disabled={quantity <= 1}
       >
@@ -42,7 +42,7 @@ export function QuantitySelector() {
         type='button'
         variant='ghost'
         size='icon'
-        className='h-full text-maritime-darkest hover:bg-cloud-dancer/35 hover:text-maritime-darkest'
+        className='h-full text-maritime-darkest hover:bg-havdyp/35 hover:text-egg-white'
         onClick={() => updateQuantity(quantity + 1)}
       >
         <PlusIcon className='size-4 text-maritime-darkest' />

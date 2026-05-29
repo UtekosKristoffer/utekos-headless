@@ -95,7 +95,7 @@ export function BoatSeasonsTabs() {
         return (
           <TabsContent key={season.value} value={season.value} className='mt-8'>
             <div className='boat-seasons-tab-content-enter'>
-              <Card className='relative overflow-hidden border-cloud-dancer/12 bg-maritime-darkest/58'>
+              <Card className='relative overflow-hidden border-cloud-dancer/12 bg-maritime-darkest'>
                 <div
                   className='absolute -inset-x-2 -inset-y-16 opacity-20 blur-3xl'
                   style={{

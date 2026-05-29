@@ -138,7 +138,7 @@ const TECHDOWN_MOBILE_GALLERY_IMAGES: Image[] = [
   ),
   productImage(
     'utekos-techdown-diagonalt-fullfigur-mobile',
-    '/utekos-techdown-diagonalt-fullfigur.webp',
+    '/utekos-techdown-fullfigur-diagonal-1600x1600.webp',
     'Utekos TechDown vist diagonalt som fullfigur.',
     1600,
     1600
@@ -291,6 +291,26 @@ const MICROFIBER_DESKTOP_GALLERY_IMAGES: Image[] = [
   )
 ]
 
+const STAPPER_MOBILE_GALLERY_IMAGES: Image[] = [
+  productImage(
+    'utekos-stapper-mobile',
+    '/utekos-stapper-1600-1600.webp',
+    'Utekos Stapper kompresjonsbag.',
+    1600,
+    1600
+  )
+]
+
+const STAPPER_DESKTOP_GALLERY_IMAGES: Image[] = [
+  productImage(
+    'utekos-stapper-desktop',
+    '/utekos-stapper-2600-1950.webp',
+    'Utekos Stapper kompresjonsbag.',
+    2600,
+    1950
+  )
+]
+
 const PRODUCT_GALLERY_IMAGE_OVERRIDES: Partial<Record<string, ProductGalleryImageOverrideValue>> = {
   'utekos-techdown': {
     mobileImages: TECHDOWN_MOBILE_GALLERY_IMAGES,
@@ -330,15 +350,10 @@ const PRODUCT_GALLERY_IMAGE_OVERRIDES: Partial<Record<string, ProductGalleryImag
       height: 1288
     }
   ],
-  'utekos-stapper': [
-    {
-      id: 'utekos-stapper-demitasse',
-      url: '/stapper-demitasse-bg.png',
-      altText: 'Utekos Stapper i demitasse.',
-      width: 1288,
-      height: 1288
-    }
-  ]
+  'utekos-stapper': {
+    mobileImages: STAPPER_MOBILE_GALLERY_IMAGES,
+    desktopImages: STAPPER_DESKTOP_GALLERY_IMAGES
+  }
 }
 
 export function ProductPageView({
@@ -442,7 +457,7 @@ export function ProductPageView({
                   </div>
                 }
                 hasIntegratedBackground={!!galleryImageOverride}
-                integratedBackgroundSize={productData.handle === 'utekos-stapper' ? 'compact' : 'wide'}
+                integratedBackgroundSize='wide'
                 flushOnMobile
                 enableStickyOnDesktop
                 stickyTopClassName='md:top-32 md:mt-4 lg:top-28 lg:mt-6'

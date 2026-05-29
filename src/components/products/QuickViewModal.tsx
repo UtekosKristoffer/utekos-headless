@@ -53,7 +53,7 @@ export function QuickViewModal({ productHandle, isOpen, onOpenChange }: QuickVie
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className='max-h-[70vh] bg-havdyp overflow-y-auto sm:max-w-4xl'>
+      <DialogContent className='max-h-[100vh] md:max-h-[70vh] bg-havdyp overflow-y-auto sm:max-w-4xl'>
         {isLoading || !productData || !selectedVariant ?
           <div className='p-6'>
             <DialogTitle className='sr-only'>Laster produktinformasjon</DialogTitle>

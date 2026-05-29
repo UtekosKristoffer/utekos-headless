@@ -9,11 +9,11 @@ const boatingFeatureCards = [
     title: 'Soloppgang',
     description: 'Nyt morgenkaffeen i cockpiten',
     Icon: Sun,
-    iconColor: 'color-mix(in oklch, var(--bleached-mauve) 70%, var(--bleached-mauve',
-    borderColor: 'color-mix(in oklch, var(--bleached-mauve) 42%, transparent)',
+    iconColor: 'var(--primary-button)',
+    borderColor: 'transparent',
     background:
-      'linear-gradient(180deg, color-mix(in oklch, var(--bleached-mauve) 10%, rgba(207, 160, 157, 1) 10%, color-mix(in oklch, var(--bleached-mauve) 42%, rgba(20, 24, 28, 0.16)) 100%)',
-    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--bleached-mauve) 78%, transparent) 100%)'
+      'linear-gradient(180deg, color-mix(in oklch, var(--cloud-dancer) 10%, var(--dazzle-blue)) 10%, color-mix(in oklch, var(--cloud-dancer) 42%, rgba(20, 24, 28, 0.16)) 100%)',
+    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklch, var(--primary-button) 78%, transparent) 100%)'
   },
   {
     title: 'Hele kvelden',
@@ -111,7 +111,7 @@ export function BoatingHeroSection() {
               ({ title, description, Icon, iconColor, borderColor, background, glow }) => (
                 <li key={title}>
                   <Card
-                    className='group relative flex aspect-[2/1] w-full flex-col overflow-hidden rounded-xl border py-0 text-maritime-darkest transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+                    className='group relative flex aspect-[2/1] w-full flex-col overflow-hidden rounded-xl border py-0 text-cloud-dancer transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
                     style={{
                       borderColor,
                       background,
