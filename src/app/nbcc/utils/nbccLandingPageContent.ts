@@ -36,7 +36,7 @@ export const nbccProducts = [
         alt: 'Utekos TechDown – modell Monica'
       },
       {
-        src: '/1080/techdown.png',
+        src: '/utekos-techdown-diagonalt-fullfigur.webp',
         alt: 'Utekos TechDown komfortplagg for kjølige kvelder ute'
       },
       {

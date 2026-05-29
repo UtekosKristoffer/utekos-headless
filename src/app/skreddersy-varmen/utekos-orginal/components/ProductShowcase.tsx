@@ -1,13 +1,10 @@
 import Image from 'next/image'
-import { Check, ShieldCheck, Feather, CloudRain } from 'lucide-react'
-import ProductMain from '@public/kokong-edited-4-5.png'
+import { Check, ShieldCheck, Feather, CloudRain, type LucideIcon } from 'lucide-react'
+import ProductMain from '@public/kokong-edited-4-5.webp'
 
 export function ProductShowcase() {
   return (
-    <section
-      id='section-solution'
-      className='w-full bg-[#1F2421] text-[#F4F1EA] py-24'
-    >
+    <section id='section-solution' className='w-full bg-[#1F2421] text-[#F4F1EA] py-24'>
       <div className='max-w-7xl mx-auto px-6 md:px-12'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-16 items-center'>
           <div className='space-y-8'>
@@ -19,9 +16,8 @@ export function ProductShowcase() {
                 </span>
               </h2>
               <p className='text-lg text-[#F4F1EA]/80 font-light leading-relaxed max-w-xl'>
-                Designet for nordiske forhold. Med smart hulfiber får du
-                følelsen av dun, men med egenskapene som kreves når været
-                skifter. Robust nok for leirplassen, myk nok for hytteveggen.
+                Designet for nordiske forhold. Med smart hulfiber får du følelsen av dun, men med egenskapene
+                som kreves når været skifter. Robust nok for leirplassen, myk nok for hytteveggen.
               </p>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6 pt-4'>
@@ -62,15 +58,7 @@ export function ProductShowcase() {
   )
 }
 
-function FeatureItem({
-  icon: Icon,
-  title,
-  desc
-}: {
-  icon: any
-  title: string
-  desc: string
-}) {
+function FeatureItem({ icon: Icon, title, desc }: { icon: LucideIcon; title: string; desc: string }) {
   return (
     <div className='flex gap-4 items-start'>
       <div className='p-2 rounded-full bg-[#E07A5F]/10 text-[#E07A5F] mt-1'>

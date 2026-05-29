@@ -31,18 +31,17 @@ export const rawMagazineArticles = [
     blocks: [
       {
         type: 'lead',
-        text:
-          'Egenberedskap blir ofte omtalt som vann, batterier og tørrmat. Det er riktig, men ufullstendig. Når strømmen går, temperaturen faller eller du må vente lenge, er personlig varme en del av tryggheten.'
+        text: 'Egenberedskap blir ofte omtalt som vann, batterier og tørrmat. Det er riktig, men ufullstendig. Når strømmen går, temperaturen faller eller du må vente lenge, er personlig varme en del av tryggheten.'
       },
       {
         type: 'paragraph',
-        text:
-          'Utekos er ikke en erstatning for offentlige beredskapsråd. Det er et praktisk tillegg for kroppen. Et varmt plagg som ligger klart, er lett å dele, lett å ta på og enkelt å bruke uten strøm.'
+        text: 'Utekos er ikke en erstatning for offentlige beredskapsråd. Det er et praktisk tillegg for kroppen. Et varmt plagg som ligger klart, er lett å dele, lett å ta på og enkelt å bruke uten strøm.'
       },
       {
         type: 'featureGrid',
         title: 'Tre roller i en enkel beredskapspakke',
-        intro: 'Målet er å gjøre komfort lett å hente frem når situasjonen krever mindre stress og mer kontroll.',
+        intro:
+          'Målet er å gjøre komfort lett å hente frem når situasjonen krever mindre stress og mer kontroll.',
         items: [
           {
             title: 'Personlig varme',
@@ -63,7 +62,7 @@ export const rawMagazineArticles = [
       },
       {
         type: 'image',
-        src: '/magasinet/den-ultimate-hyggen.png',
+        src: '/magasinet/den-ultimate-hyggen.webp',
         alt: 'Lykt, pledd og Utekos som del av en rolig beredskapssone',
         width: 1536,
         height: 1024,
@@ -95,8 +94,7 @@ export const rawMagazineArticles = [
         type: 'callout',
         tone: 'commerce',
         title: 'Den beste beredskapen er enkel å bruke',
-        text:
-          'Klær som ligger langt unna, er ofte klær som ikke blir brukt. Legg varme der du faktisk oppholder deg.'
+        text: 'Klær som ligger langt unna, er ofte klær som ikke blir brukt. Legg varme der du faktisk oppholder deg.'
       },
       {
         type: 'cta',
@@ -118,8 +116,7 @@ export const rawMagazineArticles = [
   {
     slug: 'utekos-techdown-lansering',
     title: 'Utekos TechDown™ - Plagget som redefinerer personlig komfort',
-    excerpt:
-      'Lansering: Dunlignende letthet med syntetisk driftssikkerhet for skiftende norsk vær.',
+    excerpt: 'Lansering: Dunlignende letthet med syntetisk driftssikkerhet for skiftende norsk vær.',
     category: 'Tips og råd',
     publishedAt: '2025-10-27T00:00:00+01:00',
     updatedAt: '2025-10-27T00:00:00+01:00',
@@ -146,13 +143,11 @@ export const rawMagazineArticles = [
     blocks: [
       {
         type: 'lead',
-        text:
-          'TechDown™ er laget for samme mål som resten av Utekos: å forlenge de gode stundene ute. Forskjellen ligger i materialvalget, passformen og tryggheten når været ikke holder seg tørt og stabilt.'
+        text: 'TechDown™ er laget for samme mål som resten av Utekos: å forlenge de gode stundene ute. Forskjellen ligger i materialvalget, passformen og tryggheten når været ikke holder seg tørt og stabilt.'
       },
       {
         type: 'paragraph',
-        text:
-          'Et nordisk komfortplagg må tåle mer enn en pen kveld på terrassen. Det må være lett nok til å brukes ofte, varmt nok til å merkes og praktisk nok til at det blir med i bilen, båten og på hytten.'
+        text: 'Et nordisk komfortplagg må tåle mer enn en pen kveld på terrassen. Det må være lett nok til å brukes ofte, varmt nok til å merkes og praktisk nok til at det blir med i bilen, båten og på hytten.'
       },
       {
         type: 'featureGrid',
@@ -207,8 +202,7 @@ export const rawMagazineArticles = [
       {
         type: 'cta',
         title: 'Finn ut om TechDown™ passer deg',
-        text:
-          'Velg TechDown™ hvis du vil ha lav vekt, syntetisk isolasjon og et plagg som passer de fleste utesituasjoner.',
+        text: 'Velg TechDown™ hvis du vil ha lav vekt, syntetisk isolasjon og et plagg som passer de fleste utesituasjoner.',
         primary: {
           href: '/produkter/utekos-techdown',
           label: 'Se TechDown™',
@@ -225,8 +219,7 @@ export const rawMagazineArticles = [
   {
     slug: 'hva-er-utekos',
     title: 'Historien og filosofien bak Utekos: En investering i din egen hygge',
-    excerpt:
-      'Utekos er mer enn et klesmerke. Det er en enkel ide: mer ro, mer varme og mer tid ute.',
+    excerpt: 'Utekos er mer enn et klesmerke. Det er en enkel ide: mer ro, mer varme og mer tid ute.',
     category: 'Om Utekos',
     publishedAt: '2025-10-17T00:00:00+02:00',
     updatedAt: '2025-10-17T00:00:00+02:00',
@@ -241,8 +234,7 @@ export const rawMagazineArticles = [
     },
     seo: {
       title: 'Hva er Utekos? Historien og filosofien | Utekos Magasinet',
-      description:
-        'Les historien bak Utekos og hvorfor personlig komfort ute er kjernen i produktfilosofien.'
+      description: 'Les historien bak Utekos og hvorfor personlig komfort ute er kjernen i produktfilosofien.'
     },
     theme: { accent: 'ancient-water', surface: 'light' },
     relatedSlugs: [
@@ -253,13 +245,11 @@ export const rawMagazineArticles = [
     blocks: [
       {
         type: 'lead',
-        text:
-          'Utekos startet med et hverdagslig problem: Nordmenn elsker å være ute, men vi trekker ofte inn lenge før vi egentlig vil. Kulde, trekk og venting stjeler små øyeblikk som kunne blitt gode minner.'
+        text: 'Utekos startet med et hverdagslig problem: Nordmenn elsker å være ute, men vi trekker ofte inn lenge før vi egentlig vil. Kulde, trekk og venting stjeler små øyeblikk som kunne blitt gode minner.'
       },
       {
         type: 'paragraph',
-        text:
-          'Svaret ble ikke å varme opp hele omgivelsen. Svaret ble å gi kroppen sin egen lune sone. Når varmen følger deg, blir terrassen, hytten, båten og bobilen lettere å bruke.'
+        text: 'Svaret ble ikke å varme opp hele omgivelsen. Svaret ble å gi kroppen sin egen lune sone. Når varmen følger deg, blir terrassen, hytten, båten og bobilen lettere å bruke.'
       },
       {
         type: 'featureGrid',
@@ -289,8 +279,7 @@ export const rawMagazineArticles = [
       },
       {
         type: 'paragraph',
-        text:
-          'De viktigste stundene ute skjer ofte i overgangene: før båten er klar, etter badet, mens grillen tar tid, når hytten fortsatt er kald eller når kaffen drikkes før resten av huset våkner.'
+        text: 'De viktigste stundene ute skjer ofte i overgangene: før båten er klar, etter badet, mens grillen tar tid, når hytten fortsatt er kald eller når kaffen drikkes før resten av huset våkner.'
       },
       {
         type: 'image',
@@ -338,8 +327,7 @@ export const rawMagazineArticles = [
   {
     slug: 'balpannen-din-guide-til-den-perfekte-hostkvelden',
     title: 'Bålpannen: Din guide til den perfekte høstkvelden',
-    excerpt:
-      'Lær de fem P-ene for perfekt bålkos og skap en lun kveld rundt bålpannen.',
+    excerpt: 'Lær de fem P-ene for perfekt bålkos og skap en lun kveld rundt bålpannen.',
     category: 'Tips og råd',
     publishedAt: '2025-09-22T00:00:00+02:00',
     updatedAt: '2025-09-22T00:00:00+02:00',
@@ -361,8 +349,7 @@ export const rawMagazineArticles = [
     blocks: [
       {
         type: 'lead',
-        text:
-          'En god bålkveld handler om mer enn flammer. Den handler om plassering, praktiske rammer, personlig varme og små detaljer som gjør at samtalen får tid.'
+        text: 'En god bålkveld handler om mer enn flammer. Den handler om plassering, praktiske rammer, personlig varme og små detaljer som gjør at samtalen får tid.'
       },
       {
         type: 'stepList',
@@ -434,8 +421,7 @@ export const rawMagazineArticles = [
   {
     slug: 'vinterklargjoring-av-hytta-en-sjekkliste-for-livsnyteren',
     title: 'Vinterklargjøring av hytten: En sjekkliste for livsnyteren',
-    excerpt:
-      'Gjør vinterstengingen til en del av kosen med en ryddig sjekkliste for trygg hyttekomfort.',
+    excerpt: 'Gjør vinterstengingen til en del av kosen med en ryddig sjekkliste for trygg hyttekomfort.',
     category: 'Hytteliv',
     publishedAt: '2025-09-21T00:00:00+02:00',
     updatedAt: '2025-09-21T00:00:00+02:00',
@@ -457,13 +443,11 @@ export const rawMagazineArticles = [
     blocks: [
       {
         type: 'lead',
-        text:
-          'For en livsnyter handler vinterklargjøring om mer enn vedlikehold. Det handler om å gi fremtidige hytteturer en bedre start.'
+        text: 'For en livsnyter handler vinterklargjøring om mer enn vedlikehold. Det handler om å gi fremtidige hytteturer en bedre start.'
       },
       {
         type: 'paragraph',
-        text:
-          'Når uteområdet er sikret, vannet er kontrollert og inneklimaet er ivaretatt, kan du låse døren med lavere skuldre. Den neste turen begynner allerede nå.'
+        text: 'Når uteområdet er sikret, vannet er kontrollert og inneklimaet er ivaretatt, kan du låse døren med lavere skuldre. Den neste turen begynner allerede nå.'
       },
       {
         type: 'stepList',
@@ -500,8 +484,7 @@ export const rawMagazineArticles = [
         type: 'callout',
         tone: 'accent',
         title: 'Planlegg for den kalde ankomsten',
-        text:
-          'En kald hytte kan ta timer å varme opp. Et Utekos-plagg på hytten gir komfort før peisen rekker å gjøre jobben.'
+        text: 'En kald hytte kan ta timer å varme opp. Et Utekos-plagg på hytten gir komfort før peisen rekker å gjøre jobben.'
       },
       {
         type: 'cta',
@@ -518,8 +501,7 @@ export const rawMagazineArticles = [
   {
     slug: '5-enkle-tips-for-a-forlenge-terrassesongen',
     title: '5 enkle tips som forlenger terrassesesongen med måneder',
-    excerpt:
-      'Med noen smarte grep kan uteplassen din bli en lun sone fra tidlig vår til sen høst.',
+    excerpt: 'Med noen smarte grep kan uteplassen din bli en lun sone fra tidlig vår til sen høst.',
     category: 'Terrasseliv',
     publishedAt: '2025-09-20T00:00:00+02:00',
     updatedAt: '2025-09-20T00:00:00+02:00',
@@ -541,18 +523,17 @@ export const rawMagazineArticles = [
     blocks: [
       {
         type: 'lead',
-        text:
-          'Med noen enkle, men effektive grep kan du forvandle terrassen din fra en ren sommerdestinasjon til et favorittsted som kan brukes store deler av året.'
+        text: 'Med noen enkle, men effektive grep kan du forvandle terrassen din fra en ren sommerdestinasjon til et favorittsted som kan brukes store deler av året.'
       },
       {
         type: 'paragraph',
-        text:
-          'Ved å kombinere varme, skjerming, gode materialer og riktig lys skaper du en sone som inviterer til bruk også når temperaturen faller. Løsningene er skalerbare for både små og store uteplasser, enkle å sette ut i livet og tilpasset nordisk klima.'
+        text: 'Ved å kombinere varme, skjerming, gode materialer og riktig lys skaper du en sone som inviterer til bruk også når temperaturen faller. Løsningene er skalerbare for både små og store uteplasser, enkle å sette ut i livet og tilpasset nordisk klima.'
       },
       {
         type: 'featureGrid',
         title: 'Fem grep som gjør størst forskjell',
-        intro: 'Disse tiltakene bygger på de eksisterende terrasse-endringene og samler dem i et vedlikeholdbart mønster.',
+        intro:
+          'Disse tiltakene bygger på de eksisterende terrasse-endringene og samler dem i et vedlikeholdbart mønster.',
         items: [
           {
             title: 'Tekstiler og pledd',
@@ -583,15 +564,13 @@ export const rawMagazineArticles = [
       },
       {
         type: 'paragraph',
-        text:
-          'Den virkelige forskjellen kommer når varmen følger kroppen. I stedet for å prøve å varme opp hele uteplassen, holder du jevn temperatur selv i trekk og kan sitte lenger uten å flytte deg nærmere flammen.'
+        text: 'Den virkelige forskjellen kommer når varmen følger kroppen. I stedet for å prøve å varme opp hele uteplassen, holder du jevn temperatur selv i trekk og kan sitte lenger uten å flytte deg nærmere flammen.'
       },
       {
         type: 'callout',
         tone: 'commerce',
         title: 'Den viktigste investeringen',
-        text:
-          'Personlig varme gir størst effekt når du vil bruke terrassen mer. Et Utekos-plagg er laget for nettopp dette: frisk luft uten at komforten forsvinner.'
+        text: 'Personlig varme gir størst effekt når du vil bruke terrassen mer. Et Utekos-plagg er laget for nettopp dette: frisk luft uten at komforten forsvinner.'
       },
       {
         type: 'cta',
@@ -608,8 +587,7 @@ export const rawMagazineArticles = [
   {
     slug: 'slik-skaper-du-den-perfekte-stemningen-pa-hytta',
     title: 'Slik skaper du den perfekte stemningen på hytten',
-    excerpt:
-      'Utforsk lys, lyd, tekstur og komfort som gjør hytten roligere og mer inviterende.',
+    excerpt: 'Utforsk lys, lyd, tekstur og komfort som gjør hytten roligere og mer inviterende.',
     category: 'Hytteliv',
     publishedAt: '2025-09-18T00:00:00+02:00',
     updatedAt: '2025-09-18T00:00:00+02:00',
@@ -631,8 +609,7 @@ export const rawMagazineArticles = [
     blocks: [
       {
         type: 'lead',
-        text:
-          'Den perfekte hyttestemningen oppstår når rommet gjør det lett å senke skuldrene. Peis og varme hjelper, men detaljene rundt er ofte det som avgjør følelsen.'
+        text: 'Den perfekte hyttestemningen oppstår når rommet gjør det lett å senke skuldrene. Peis og varme hjelper, men detaljene rundt er ofte det som avgjør følelsen.'
       },
       {
         type: 'featureGrid',
@@ -665,8 +642,7 @@ export const rawMagazineArticles = [
       },
       {
         type: 'paragraph',
-        text:
-          'Hytten skal tåle at dagen skifter tempo. Den skal fungere for morgenkaffe, våte klær, sene måltider og stille lesing. Da må komforten være praktisk, ikke pyntet.'
+        text: 'Hytten skal tåle at dagen skifter tempo. Den skal fungere for morgenkaffe, våte klær, sene måltider og stille lesing. Da må komforten være praktisk, ikke pyntet.'
       },
       {
         type: 'cta',
@@ -688,8 +664,7 @@ export const rawMagazineArticles = [
   {
     slug: 'den-ultimate-guiden-til-komfortabel-vintercamping',
     title: 'Den ultimate guiden til komfortabel vintercamping',
-    excerpt:
-      'Vintercamping kan være magisk hvis du er godt forberedt på kulde, rutiner og varme pauser.',
+    excerpt: 'Vintercamping kan være magisk hvis du er godt forberedt på kulde, rutiner og varme pauser.',
     category: 'Bobilliv',
     publishedAt: '2025-09-15T00:00:00+02:00',
     updatedAt: '2025-09-15T00:00:00+02:00',
@@ -711,8 +686,7 @@ export const rawMagazineArticles = [
     blocks: [
       {
         type: 'lead',
-        text:
-          'Vintercamping handler ikke om å tåle mest mulig. Det handler om å gjøre kulden forutsigbar, slik at naturen får hovedrollen.'
+        text: 'Vintercamping handler ikke om å tåle mest mulig. Det handler om å gjøre kulden forutsigbar, slik at naturen får hovedrollen.'
       },
       {
         type: 'stepList',
@@ -773,8 +747,7 @@ export const rawMagazineArticles = [
   {
     slug: 'bobil-i-hostferien-de-vakreste-rutene-for-a-oppleve-hostfargene',
     title: 'Bobil i høstferien: De vakreste rutene for å oppleve høstfargene',
-    excerpt:
-      'Opplev Norges høstfarger fra første rad med to ruter som gir ro, utsikt og varme stopp.',
+    excerpt: 'Opplev Norges høstfarger fra første rad med to ruter som gir ro, utsikt og varme stopp.',
     category: 'Bobilliv',
     publishedAt: '2025-09-22T00:00:00+02:00',
     updatedAt: '2025-09-22T00:00:00+02:00',
@@ -796,8 +769,7 @@ export const rawMagazineArticles = [
     blocks: [
       {
         type: 'lead',
-        text:
-          'Høstferien i bobil gir deg frihet til å følge fargene. De beste rutene har korte etapper, gode stopp og nok varme til at utsikten får vare.'
+        text: 'Høstferien i bobil gir deg frihet til å følge fargene. De beste rutene har korte etapper, gode stopp og nok varme til at utsikten får vare.'
       },
       {
         type: 'featureGrid',
@@ -848,8 +820,7 @@ export const rawMagazineArticles = [
   {
     slug: 'varm-og-klar-for-batpussen',
     title: 'Vårpussen av båten: Slik holder du varmen',
-    excerpt:
-      'Vårpussen er et sikkert vårtegn, men kan bli langt bedre når kroppen holder jevn varme.',
+    excerpt: 'Vårpussen er et sikkert vårtegn, men kan bli langt bedre når kroppen holder jevn varme.',
     category: 'Båtliv',
     publishedAt: '2025-04-12T00:00:00+02:00',
     updatedAt: '2025-04-12T00:00:00+02:00',
@@ -871,8 +842,7 @@ export const rawMagazineArticles = [
     blocks: [
       {
         type: 'lead',
-        text:
-          'Båtpuss skjer ofte i vær som skifter fort. Solen varmer i le, vinden biter på bryggen, og arbeidet veksler mellom rolig venting og fysisk innsats.'
+        text: 'Båtpuss skjer ofte i vær som skifter fort. Solen varmer i le, vinden biter på bryggen, og arbeidet veksler mellom rolig venting og fysisk innsats.'
       },
       {
         type: 'stepList',

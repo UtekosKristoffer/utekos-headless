@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://utekos.no/1080/aspect-video-kokong-2.png',
+        url: 'https://utekos.no/1080/aspect-video-kokong-2.webp',
         width: 1200,
         height: 630,
         alt: 'Personer som nyter utelivet med varme klær fra Utekos'

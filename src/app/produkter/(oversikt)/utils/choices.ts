@@ -14,7 +14,7 @@ export const choices: ProductChoice[] = [
     description:
       'Optimalisert etter erfaringer og tilbakemeldinger. Gir maksimal komfort og bevegelsesfrihet. Perfekt for hytteliv, bobil og all utekos.',
     href: '/produkter/utekos-techdown' as Route,
-    imageUrl: '/1080/techdown.png',
+    imageUrl: '/utekos-techdown-diagonalt-fullfigur.webp',
     linkColor: 'text-sky-800'
   },
   {

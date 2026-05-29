@@ -3,7 +3,7 @@
 
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
-import Balpanne from '@public/empathy-bonfire.png'
+import Balpanne from '@public/empathy-bonfire.webp'
 import { useEmpathySectionAnimations } from '@/hooks/useEmpathySectionAnimations'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { scrollToElement } from '@/lib/gsap/scrollToElement'
@@ -42,17 +42,14 @@ export function EmpathySection() {
             className='mb-5 max-w-[11ch] font-google-sans text-4xl font-bold leading-[0.92] tracking-[-0.01em] text-maritime-darkest sm:text-4xl md:text-5xl'
           >
             <span className='block overflow-hidden pb-[0.08em]'>
-              <span className='gsap-empathy-word inline-block will-change-transform'>
-                {HEADLINE}
-              </span>
+              <span className='gsap-empathy-word inline-block will-change-transform'>{HEADLINE}</span>
             </span>
           </h2>
 
           <div className='max-w-none font-utekos-text text-base leading-[1.45] tracking-tight text-maritime-darkest'>
             <p className='gsap-empathy-para1 relative max-w-[34rem]'>
-              Du kjenner følelsen. Praten går lett rundt bålpannen, flammene
-              danser, og roen har senket seg. Så kommer den snikende trekken som
-              truer med å bryte magien.
+              Du kjenner følelsen. Praten går lett rundt bålpannen, flammene danser, og roen har senket seg.
+              Så kommer den snikende trekken som truer med å bryte magien.
             </p>
             <div className='relative my-7 py-1.5'>
               <span
@@ -65,14 +62,11 @@ export function EmpathySection() {
               </p>
             </div>
             <p className='gsap-empathy-para2 mt-6 max-w-[34rem] text-maritime-darkest'>
-              Med Utekos® blir svaret enkelt. Fra lett mikrofiber til
-              TechDown™ pakker plagget deg inn i varme slik at du kan bli
-              sittende.
+              Med Utekos® blir svaret enkelt. Fra lett mikrofiber til TechDown™ pakker plagget deg inn i
+              varme slik at du kan bli sittende.
               <br />
               <br />
-              <span className='font-medium italic text-maritime-darkest'>
-                Kjenn varmen. Forleng kvelden.
-              </span>
+              <span className='font-medium italic text-maritime-darkest'>Kjenn varmen. Forleng kvelden.</span>
             </p>
           </div>
           <div className='mt-8 md:mt-9'>
@@ -88,13 +82,8 @@ export function EmpathySection() {
                 data-track='EmpathyCtaSkreddersyVarmen'
                 className='group inline-flex items-center gap-2 leading-none'
               >
-                <span className='gsap-empathy-cta-text block leading-none'>
-                  Utforsk kolleksjonen
-                </span>
-                <span
-                  aria-hidden
-                  className='gsap-empathy-cta-arrow inline-flex'
-                >
+                <span className='gsap-empathy-cta-text block leading-none'>Utforsk kolleksjonen</span>
+                <span aria-hidden className='gsap-empathy-cta-arrow inline-flex'>
                   <ArrowRight className='size-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1' />
                 </span>
               </button>

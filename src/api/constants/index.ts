@@ -43,7 +43,7 @@ export const PRODUCT_VARIANTS = {
     sizes: ['Liten', 'Middels', 'Stor', 'Ekstra stor'],
     images: [
       '/kvinne-nyter-terrasselivet-med-utekos-techdown.webp',
-      '/1080/techdown.png',
+      '/utekos-techdown-diagonalt-fullfigur.webp',
       '/1080/utekos-techdown-bakside.webp',
       '/1080/tech-halv-1080.png'
     ]

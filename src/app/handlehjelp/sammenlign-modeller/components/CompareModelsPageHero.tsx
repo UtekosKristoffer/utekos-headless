@@ -3,7 +3,7 @@ import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import CompareHeroImage from '@public/kate-linn-stort-bilde.png'
+import CompareHeroImage from '@public/kate-linn-stort-bilde.webp'
 export function CompareModelsPageHero() {
   return (
     <section className='relative isolate min-h-[calc(100svh-12rem)] overflow-hidden bg-maritime-darkest text-cloud-dancer'>

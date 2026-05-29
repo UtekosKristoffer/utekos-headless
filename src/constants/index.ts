@@ -76,7 +76,7 @@ export const PRODUCT_VARIANTS = {
     sizes: ['Liten', 'Middels', 'Stor', 'Ekstra stor'],
     images: [
       '/1080/kate-1080.png',
-      '/1080/techdown.png',
+      '/utekos-techdown-diagonalt-fullfigur.webp',
       '/1080/utekos-techdown-bakside.webp',
       '/1080/tech-halv-1080.png'
     ]

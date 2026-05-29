@@ -3,21 +3,12 @@
 'use client'
 
 import Image from 'next/image'
-import {
-  useEffect,
-  useRef,
-  useState,
-  type CSSProperties,
-  type PointerEvent
-} from 'react'
+import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from 'react'
 import { ChevronsLeftRight, ShieldCheck, Waves } from 'lucide-react'
-import TechDownDryFiber from '@public/techdown-dry-macro.png'
-import TechDownWetFiber from '@public/techdown-wet-macro.png'
+import TechDownDryFiber from '@public/techdown-dry-macro.webp'
+import TechDownWetFiber from '@public/techdown-wet-macro.webp'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
-import {
-  useTechDownContentSwap,
-  useTechDownSliderAnimations
-} from '@/hooks/useTechDownSliderAnimations'
+import { useTechDownContentSwap, useTechDownSliderAnimations } from '@/hooks/useTechDownSliderAnimations'
 
 const content = {
   dry: {
@@ -145,8 +136,7 @@ export function TechDownSlider() {
             Når været snur, består varmen
           </h2>
           <p className='gsap-tech-subtitle mx-auto max-w-2xl font-utekos-text text-base leading-[1.45] tracking-tight text-maritime-darkest'>
-            Dra linjen for å se forskjellen på hvordan vanlig dun og Utekos
-            TechDown™ håndterer fuktighet.
+            Dra linjen for å se forskjellen på hvordan vanlig dun og Utekos TechDown™ håndterer fuktighet.
           </p>
         </div>
 
@@ -164,9 +154,7 @@ export function TechDownSlider() {
             max={100}
             value={position}
             aria-valuetext={`${Math.round(position)} prosent tørr visning`}
-            onChange={event =>
-              setPosition(clampPercentage(Number(event.currentTarget.value)))
-            }
+            onChange={event => setPosition(clampPercentage(Number(event.currentTarget.value)))}
             className='h-2 w-full accent-maritime-darkest focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-button md:max-w-sm'
           />
         </div>

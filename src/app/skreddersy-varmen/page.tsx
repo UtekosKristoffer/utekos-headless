@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     siteName: 'Utekos',
     images: [
       {
-        url: 'https://utekos.no/empathy-bonfire.png',
+        url: 'https://utekos.no/empathy-bonfire.webp',
         width: 1200,
         height: 630,
         alt: 'Utekos ved bålpanne - skreddersy varmen ute'
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Skreddersy varmen ute | Utekos',
     description: 'Se hvordan Utekos gir justerbar varme for terrasse, hytte, båt og bobil.',
-    images: ['https://utekos.no/empathy-bonfire.png']
+    images: ['https://utekos.no/empathy-bonfire.webp']
   }
 }
 
