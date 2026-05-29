@@ -54,15 +54,15 @@ const BREADCRUMB_ID = `${PAGE_URL}#breadcrumb`
 const FAQ_ID = `${PAGE_URL}#faq`
 
 const FALLBACK_PRICING: Record<ModelRecommendation['key'], FallbackPricing> = {
-  dun: {
+  'utekos-dun': {
     price: 2490,
     originalPrice: 3290
   },
-  mikrofiber: {
+  'utekos-mikrofiber': {
     price: 1590,
     originalPrice: 2290
   },
-  techdown: {
+  'utekos-techdown': {
     price: 1790,
     originalPrice: 1990
   }
@@ -121,11 +121,11 @@ const getAvailability = (product: ProductData | null) => {
 
 const getModelMaterial = (key: ModelRecommendation['key']) => {
   switch (key) {
-    case 'dun':
+    case 'utekos-dun':
       return 'Andedun'
-    case 'mikrofiber':
+    case 'utekos-mikrofiber':
       return 'Syntetisk mikrofiber'
-    case 'techdown':
+    case 'utekos-techdown':
       return 'CloudWeave™ syntetisk isolasjon'
     default:
       return undefined
