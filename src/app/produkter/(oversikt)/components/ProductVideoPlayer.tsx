@@ -11,12 +11,7 @@ type ProductVideoPlayerProps = {
   captionsLabel?: string
 }
 
-export function ProductVideoPlayer({
-  src,
-  poster,
-  captionsSrc = '/captions/product-video.nb.vtt',
-  captionsLabel = 'Norsk teksting'
-}: ProductVideoPlayerProps) {
+export function ProductVideoPlayer({ src, poster }: ProductVideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [playbackFailed, setPlaybackFailed] = useState(false)
 
@@ -75,13 +70,6 @@ export function ProductVideoPlayer({
         aria-label='Produktvideo som viser Utekos i bruk'
       >
         <source src={src} type='video/mp4' />
-        <track
-          kind='captions'
-          src={captionsSrc}
-          srcLang='nb'
-          label={captionsLabel}
-          default
-        />
       </video>
 
       {playbackFailed && (
