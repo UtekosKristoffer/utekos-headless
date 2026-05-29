@@ -13,11 +13,14 @@
 !.yarn/versions
 
 # playwright
+.playwright-mcp
 .playwright-mcp/
 /playwright-mcp
 
 # .agents
 .agents/
+.agenst/skills/
+
 
 # mcp config (may contain local secrets/tokens)
 mcp.json
@@ -63,9 +66,22 @@ next-env.d.ts
 
 # docs
 /md-docs
+/ga_docs
+/documentation
+/pagespeed_raport
+/pagespeed_rapport
+/prompt-docs
+/AGENTS
+/AGENTS.md
 /in
 /copilot-instructions
 /gemini-status
+/rapport
+/project_info_1
+/PLAN
+/summary
+summary
+/copilot-instructions
 
 # github
 .github

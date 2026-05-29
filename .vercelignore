@@ -1,6 +1,11 @@
 mcp.json
 .env*
 .agents/
+.agents/skills
+.ga_docs/
+AGENTS/
+project_info_1/
+.playwright-mcp
 src/api/lib/cloud-credentials/
 *.service-account.json
 *oauth-credentials*.json
