@@ -1,5 +1,3 @@
-// Path: src/app/produkter/[handle]/RelatedProducts/RelatedProducts.tsx
-
 'use client'
 
 import { ProductCard } from '@/components/ProductCard/ProductCard'
