@@ -56,7 +56,7 @@ export function ComfyrobeFeatureSection() {
               className='absolute left-1/2 top-1/2 size-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl'
               style={{
                 background:
-                  'radial-gradient(circle, color-mix(in oklch, var(--maritime-darkest 28%, transparent) 0%, transparent 74%)'
+                  'radial-gradient(circle, color-mix(in oklch, var(--maritime-darkest) 28%, transparent) 0%, transparent 74%)'
               }}
             />
           </div>
@@ -126,29 +126,30 @@ export function ComfyrobeFeatureSection() {
                               }}
                             />
 
-                            <div className='relative z-10 flex min-h-[4.25rem] items-center gap-3'>
-                              <div
-                                className='flex size-11 shrink-0 items-center justify-center rounded-xl border transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none'
-                                style={{
-                                  borderColor: surface.iconBorder,
-                                  background: surface.iconBackground
-                                }}
-                              >
-                                <Icon
-                                  className='size-5'
-                                  style={{ color: surface.iconColor }}
-                                  aria-hidden='true'
-                                />
-                              </div>
+                            <div className='relative z-10 min-h-[4.25rem]'>
+                              <div className='flex items-center gap-3'>
+                                <div
+                                  className='flex size-9 shrink-0 items-center justify-center rounded-lg border transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none sm:size-10 lg:size-11 lg:rounded-xl'
+                                  style={{
+                                    borderColor: surface.iconBorder,
+                                    background: surface.iconBackground
+                                  }}
+                                >
+                                  <Icon
+                                    className='size-4 lg:size-5'
+                                    style={{ color: surface.iconColor }}
+                                    aria-hidden='true'
+                                  />
+                                </div>
 
-                              <div className='flex-1'>
                                 <h3 className='text-base font-semibold leading-[1.2] tracking-tight text-cloud-dancer'>
                                   {feature.title}
                                 </h3>
-                                <p className='mt-1 text-sm leading-[1.45] tracking-tight text-cloud-dancer/78'>
-                                  {feature.description}
-                                </p>
                               </div>
+
+                              <p className='mt-3 text-sm leading-[1.45] tracking-tight text-cloud-dancer/78 sm:mt-2'>
+                                {feature.description}
+                              </p>
                             </div>
                           </article>
                         </AnimatedBlock>

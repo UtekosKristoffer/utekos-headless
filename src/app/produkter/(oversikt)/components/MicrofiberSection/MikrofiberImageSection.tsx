@@ -12,9 +12,33 @@ import {
 import Image from 'next/image'
 import { useInView } from '@/hooks/useInView'
 import { cn } from '@/lib/utils/className'
-import MikroPicFront from '@public/mikro-front-hvit-bakgrunn-1080.png'
-import MikroPicBack from '@public/mikro-bak-1080.png'
-import LinnKate from '@public/katelinn.png'
+
+const MICROFIBER_IMAGES = [
+  {
+    src: '/utekos-mikrofiber-kvinner-nyter-skogen-1600-1600.webp',
+    alt: 'Kvinner nyter skogen med Utekos Mikrofiber.'
+  },
+  {
+    src: '/utekos-mikrofiber-par-nyter-kaffe-terrasse-1600-1600.webp',
+    alt: 'Par nyter kaffe med Utekos Mikrofiber på terrassen vinterstid'
+  },
+  {
+    src: '/utekos-mikrofiber-helfigur-1600-1600.webp',
+    alt: 'Utekos Mikrofiber vist som fullfigur forfra.'
+  },
+  {
+    src: '/utekos-mikrofiber-parkas-1600-1600.webp',
+    alt: 'Utekos Mikrofiber vist i parkasmodus forfra.'
+  },
+  {
+    src: '/utekos-mikrofiber-halvfigur-forside-1600-1600.webp',
+    alt: 'Utekos Mikrofiber vist som åpen halvfigur forfra.'
+  },
+  {
+    src: '/utekos-mikrofiber-bakside-full-figur-1600-1600.webp',
+    alt: 'Utekos Mikrofiber vist som helfigur bakfra.'
+  }
+] as const
 
 export function MikrofiberImageSection() {
   const [ref, isInView] = useInView({ threshold: 0.5 })
@@ -22,52 +46,24 @@ export function MikrofiberImageSection() {
   return (
     <div
       ref={ref}
-      className={cn(
-        'will-animate-fade-in-scale relative h-full min-h-full',
-        isInView && 'is-in-view'
-      )}
+      className={cn('will-animate-fade-in-scale relative h-full min-h-full', isInView && 'is-in-view')}
     >
-      <Carousel
-        className='h-full w-full overflow-hidden rounded-[1.35rem] border border-maritime-darkest/10 bg-maritime-darkest/5 shadow-[0_24px_70px_-48px_color-mix(in_oklch,var(--maritime-darkest)_72%,transparent)]'
-        opts={{ align: 'start', loop: true }}
-      >
+      <Carousel className='w-full overflow-hidden aspect-square' opts={{ align: 'start', loop: true }}>
         <CarouselContent className='h-full'>
-          <CarouselItem className='h-full'>
-            <div className='relative aspect-square w-full overflow-hidden bg-maritime-darkest/5 lg:h-full lg:min-h-[34rem] lg:aspect-auto'>
-              <Image
-                src={LinnKate}
-                alt='Utekos Mikrofiber™ - Lettvekt og allsidig'
-                fill
-                className='object-cover transition-transform duration-500 hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100'
-                sizes='(max-width: 1024px) 92vw, 40vw'
-                priority
-              />
-            </div>
-          </CarouselItem>
-
-          <CarouselItem className='h-full'>
-            <div className='relative aspect-square w-full overflow-hidden bg-cloud-dancer lg:h-full lg:min-h-[34rem] lg:aspect-auto'>
-              <Image
-                src={MikroPicFront}
-                alt='Utekos Mikrofiber™ - Forsiden'
-                fill
-                className='object-cover transition-transform duration-500 hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100'
-                sizes='(max-width: 1024px) 92vw, 40vw'
-              />
-            </div>
-          </CarouselItem>
-
-          <CarouselItem className='h-full'>
-            <div className='relative aspect-square w-full overflow-hidden bg-cloud-dancer lg:h-full lg:min-h-[34rem] lg:aspect-auto'>
-              <Image
-                src={MikroPicBack}
-                alt='Utekos Mikrofiber™ - Baksiden'
-                fill
-                className='object-cover transition-transform duration-500 hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100'
-                sizes='(max-width: 1024px) 92vw, 40vw'
-              />
-            </div>
-          </CarouselItem>
+          {MICROFIBER_IMAGES.map((image, index) => (
+            <CarouselItem key={image.src} className='h-full'>
+              <div className='relative w-full overflow-hidden rounded-xl aspect-square'>
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className='object-cover transition-transform rounded-xl duration-500 hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100'
+                  sizes='(max-width: 1024px) 92vw, 40vw'
+                  priority={index === 0}
+                />
+              </div>
+            </CarouselItem>
+          ))}
         </CarouselContent>
 
         <CarouselPrevious className='left-4 hidden border-maritime-darkest/10 bg-cloud-dancer/86 text-maritime-darkest backdrop-blur-md hover:bg-primary-button focus-visible:ring-primary-button/70 sm:inline-flex' />

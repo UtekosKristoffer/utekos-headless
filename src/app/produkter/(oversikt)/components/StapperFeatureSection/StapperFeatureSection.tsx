@@ -55,13 +55,13 @@ export function StapperFeatureSection() {
             </AnimatedBlock>
 
             <AnimatedBlock className='will-animate-fade-in-up'>
-              <h2 className='text-4xl font-bold leading-[0.96] text-cloud-dancer sm:text-5xl lg:text-[4.35rem]'>
+              <h2 className='text-4xl font-bold max-sm:text-left leading-[0.96] text-cloud-dancer sm:text-5xl lg:text-[4.35rem]'>
                 Mer plass. Mindre stress.
               </h2>
             </AnimatedBlock>
 
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s'>
-              <p className='mx-auto mt-6 max-w-xl text-lg leading-[1.45] text-cloud-dancer lg:mx-0'>
+              <p className='mx-auto max-sm:text-left mt-6 max-w-xl text-lg leading-[1.45] text-cloud-dancer lg:mx-0'>
                 Forvandle voluminøse jakker og soveposer til kompakte pakker. Utekos Stapper™ er den smarte
                 løsningen for deg som verdsetter en effektiv og organisert bagasje på hytta, i bobilen eller i
                 tursekken.
@@ -102,7 +102,7 @@ export function StapperFeatureSection() {
               </div>
               <div>
                 <h3 className='text-base font-semibold leading-tight text-cloud-dancer'>{feature.title}</h3>
-                <p className='mt-2 text-sm leading-relaxed text-overcast/88'>{feature.description}</p>
+                <p className='mt-2 text-sm leading-relaxed text-cloud-dancer/90'>{feature.description}</p>
               </div>
             </AnimatedBlock>
           ))}

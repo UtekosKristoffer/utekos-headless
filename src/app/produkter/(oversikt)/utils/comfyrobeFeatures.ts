@@ -6,22 +6,19 @@ export const comfyrobeFeatures = [
   {
     icon: ShieldCheck,
     title: 'Total værbeskyttelse',
-    description:
-      'Med 8000 mm vannsøyle og tapede sømmer holder du deg garantert tørr, mens det vindtette materialet stenger kulden ute.',
+    description: '8000 mm vannsøyle og pustende membran (~3000 g/m²/24 t) ',
     surface: 'weather'
   },
   {
     icon: ThermometerSnowflake,
     title: 'Kompromissløs komfort',
-    description:
-      'Et tykt fôr av lammeull (Sherpa Fleece) gir umiddelbar varme og en luksuriøs følelse, perfekt etter et bad eller på en kjølig kveld.',
+    description: 'Mykt SherpaCore™ plysj gir varmeisolering og komfort',
     surface: 'warmth'
   },
   {
     icon: Move3d,
     title: 'Gjennomtenkt frihet',
-    description:
-      'En romslig, unisex passform med splitter i sidene og en smart toveis YKK-glidelås® gir deg full bevegelsesfrihet til å nyte øyeblikket.',
+    description: 'Romslig unisex passform med splitter i sidene og en smart toveis YKK-glidelås®',
     surface: 'freedom'
   }
 ] as const

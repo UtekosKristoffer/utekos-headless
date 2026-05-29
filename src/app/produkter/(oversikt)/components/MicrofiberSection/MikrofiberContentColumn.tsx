@@ -13,20 +13,20 @@ const benefits = [
   {
     label: '3-i-1 funksjonalitet',
     description: '— Parkas, oppfestet eller full lengde',
-    glowColor: 'var(--ancient-water)',
-    surface: 'maritime' as const
+    glowColor: 'var(--dazzle-blue',
+    surface: 'dazzle' as const
   },
   {
     label: 'Lettvekt og kompakt',
     description: '— Bare ca. 800g, enkel å pakke',
-    glowColor: 'var(--primary-button)',
-    surface: 'plum' as const
+    glowColor: 'var(--orange-slice)',
+    surface: 'orange' as const
   },
   {
-    label: 'YKK®-toveisglidelåser',
-    description: '— Bransjens mest anerkjente glidelås sikrer pålitelig og enkel bruk',
-    glowColor: 'var(--dusted-peri)',
-    surface: 'peri' as const
+    label: 'YKK®-toveisglidelås',
+    description: '— Bransjens mest anerkjente glidelås',
+    glowColor: 'var(--dazzle-blue)',
+    surface: 'dazzle' as const
   }
 ]
 
@@ -43,7 +43,7 @@ export function MikrofiberContentColumn() {
       className={cn('will-animate-fade-in-up h-full min-h-full', containerInView && 'is-in-view')}
       style={{ '--transition-delay': '0.1s' } as React.CSSProperties}
     >
-      <div className='flex h-full min-h-full flex-col justify-center lg:min-h-[34rem]'>
+      <div className='flex h-full min-h-full flex-col justify-start'>
         <div>
           <div
             ref={badgeRef}
@@ -51,15 +51,14 @@ export function MikrofiberContentColumn() {
             style={{ '--transition-delay': '0.3s' } as React.CSSProperties}
           >
             <BrandBadge
-              backgroundColor='var(--maritime-darkest)'
+              backgroundColor='var(--dazzling-blue)'
               textColor='var(--cloud-dancer)'
-              className='gap-2 border border-maritime-darkest/12 px-4 py-2 font-utekos-text text-sm font-medium tracking-tight shadow-[0_16px_34px_-28px_color-mix(in_oklch,var(--maritime-darkest)_82%,transparent)]'
+              className='gap-2 border border-maritime-darkest/12 px-4 py-2 font-utekos-text text-sm font-medium tracking-tight'
             >
-              <Feather className='size-4 text-primary-button' aria-hidden='true' />
+              <Feather className='size-4 text-orange-slice' aria-hidden='true' />
               <span>Ultralett allsidighet</span>
             </BrandBadge>
           </div>
-
           <h2
             ref={h2Ref}
             className={cn(
@@ -70,7 +69,6 @@ export function MikrofiberContentColumn() {
           >
             Lettvekt møter varme og allsidighet
           </h2>
-
           <p
             ref={pRef}
             className={cn(
@@ -81,15 +79,13 @@ export function MikrofiberContentColumn() {
           >
             Utekos Mikrofiber™ gir deg følelsen av dun med ekstra fordeler. Beholder varmen selv når den blir
             fuktig og tørker raskt. Ulike snorstramminger sørger for at passformen kan justeres etter behov.
-            Tilgjengelig i fargene Fjellblå og Vargnatt.
           </p>
 
-          <ul className='mt-8 space-y-3'>
+          <ul className='mt-8 text-maritime-darkest space-y-3'>
             {benefits.map((benefit, idx) => (
               <BenefitCard key={benefit.label} benefit={benefit} delay={0.6 + idx * 0.1} />
             ))}
           </ul>
-
           <div
             ref={ctaRef}
             className={cn('will-animate-fade-in-up mt-8', ctaInView && 'is-in-view')}
@@ -97,12 +93,12 @@ export function MikrofiberContentColumn() {
           >
             <BrandBadge
               asChild
-              backgroundColor='var(--primary-button)'
-              textColor='var(--maritime-darkest)'
-              className='group min-h-12 w-full gap-2 whitespace-normal border border-primary-button/35 px-6 py-3 font-utekos-text text-base font-semibold leading-[1.35] tracking-tight shadow-[0_18px_40px_-28px_color-mix(in_oklch,var(--primary-button)_70%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/70 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto sm:whitespace-nowrap'
+              backgroundColor='var(--maritime-darkest)'
+              textColor='var(--cloud-dancer)'
+              className='group min-h-12 w-full gap-2 whitespace-normal border border-maritime-darkest/40 px-6 py-3 font-utekos-text text-base font-semibold leading-[1.35] tracking-tight shadow-[0_18px_40px_-28px_color-mix(in_oklch,var(--primary-button)_70%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/70 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto sm:whitespace-nowrap'
             >
               <Link href='/produkter/utekos-mikrofiber' data-track='MikrofiberContentProductPageExploreClick'>
-                Utforsk Utekos Mikrofiber™
+                Utforsk Mikrofiber™
                 <ArrowRight className='size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none' />
               </Link>
             </BrandBadge>

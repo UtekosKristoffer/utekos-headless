@@ -108,7 +108,7 @@ export function ComparisonTeaser() {
           <div className='absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px]' />
         </div>
 
-        <div className='p-8 text-center md:p-16'>
+        <div className='p-6 max-sm:text-left text-center md:p-16'>
           <h2 className='gsap-text text-4xl font-bold tracking-tight font-google-sans text-havdyp sm:text-5xl md:text-6xl'>
             Usikker på hvilken Utekos du skal velge?
           </h2>
