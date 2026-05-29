@@ -22,8 +22,8 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
   const productOptionsMap = initializeCarouselProducts(products)
 
   return (
-    <section className='mb-16 my-24 px-6 py-12 rounded-[1.75rem] border border-cloud-dancer/70 bg-cloud-dancer/54 shadow-2xl shadow-havdyp/10 backdrop-blur-sm sm:p-8'>
-      <div className='mb-8 text-center'>
+    <section className='mb-16 my-24 px-6 py-12 rounded-[1.75rem] bg-transparent sm:p-8'>
+      <div className='mb-8 md:mb-16 text-center'>
         <h2 className='text-havdyp'>Favoritter blant andre livsnytere</h2>
       </div>
       <Carousel

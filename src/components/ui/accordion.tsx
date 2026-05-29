@@ -7,22 +7,13 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils/className'
 
-function Accordion({
-  ...props
-}: React.ComponentProps<typeof AccordionPrimitive.Root>) {
+function Accordion({ ...props }: React.ComponentProps<typeof AccordionPrimitive.Root>) {
   return <AccordionPrimitive.Root data-slot='accordion' {...props} />
 }
 
-function AccordionItem({
-  className,
-  ...props
-}: React.ComponentProps<typeof AccordionPrimitive.Item>) {
+function AccordionItem({ className, ...props }: React.ComponentProps<typeof AccordionPrimitive.Item>) {
   return (
-    <AccordionPrimitive.Item
-      data-slot='accordion-item'
-      className={cn('border-b last:border-b-0', className)}
-      {...props}
-    />
+    <AccordionPrimitive.Item data-slot='accordion-item' className={cn('border-b', className)} {...props} />
   )
 }
 
@@ -42,7 +33,7 @@ function AccordionTrigger({
         {...props}
       >
         {children}
-        <ChevronDownIcon className='text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200' />
+        <ChevronDownIcon className='text-maritime-darkest pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200' />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   )

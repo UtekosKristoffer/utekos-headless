@@ -383,7 +383,7 @@ export function ProductPageView({
   const galleryImages = resolvedGallery.mobileImages
 
   return (
-    <article className='relative isolate overflow-x-clip bg-overcast py-0 text-havdyp md:py-6'>
+    <article className='relative isolate overflow-x-clip bg-cloud-dancer py-0 text-havdyp md:py-6'>
       <div className='pointer-events-none absolute inset-0 -z-10'>
         <div className='absolute left-[8%] top-12 h-80 w-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_62%,transparent)_0%,transparent_72%)] blur-3xl' />
         <div className='absolute bottom-[18%] right-[8%] h-96 w-96 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_20%,transparent)_0%,transparent_72%)] blur-3xl' />
@@ -400,7 +400,10 @@ export function ProductPageView({
               </BreadcrumbItem>
               <BreadcrumbSeparator className='text-maritime-darkest' />
               <BreadcrumbItem>
-                <BreadcrumbLink href='/produkter' className='text-maritime-darkest hover:text-maritime-darkest/80'>
+                <BreadcrumbLink
+                  href='/produkter'
+                  className='text-maritime-darkest hover:text-maritime-darkest/80'
+                >
                   Produkter
                 </BreadcrumbLink>
               </BreadcrumbItem>
@@ -451,13 +454,19 @@ export function ProductPageView({
                 <Breadcrumb className='mb-4 text-maritime-darkest'>
                   <BreadcrumbList className='text-maritime-darkest'>
                     <BreadcrumbItem>
-                      <BreadcrumbLink href='/' className='text-maritime-darkest hover:text-maritime-darkest/80'>
+                      <BreadcrumbLink
+                        href='/'
+                        className='text-maritime-darkest hover:text-maritime-darkest/80'
+                      >
                         Forside
                       </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator className='text-maritime-darkest' />
                     <BreadcrumbItem>
-                      <BreadcrumbLink href='/produkter' className='text-maritime-darkest hover:text-maritime-darkest/80'>
+                      <BreadcrumbLink
+                        href='/produkter'
+                        className='text-maritime-darkest hover:text-maritime-darkest/80'
+                      >
                         Produkter
                       </BreadcrumbLink>
                     </BreadcrumbItem>

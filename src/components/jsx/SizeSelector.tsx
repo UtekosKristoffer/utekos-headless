@@ -44,7 +44,7 @@ export function SizeSelector({
               role='radio'
               aria-checked={isSelected}
               data-selected={isSelected}
-              className='flex min-h-12 items-center justify-center rounded-[1rem] border bg-cloud-dancer/72 px-3 py-3 text-center text-sm text-havdyp transition-all duration-200 ease-in-out data-[selected=true]:border-havdyp data-[selected=true]:ring-1 data-[selected=true]:ring-havdyp data-[selected=false]:border-havdyp/14 data-[selected=false]:hover:border-dusted-peri/50 md:w-full md:justify-between md:p-4 md:text-left md:text-base'
+              className='flex min-h-12 items-center justify-center rounded-[1rem] border bg-cloud-dancer/72 px-3 py-3 text-center text-sm text-muted transition-all duration-200 ease-in-out data-[selected=true]:border-havdyp data-[selected=true]:ring-1 data-[selected=true]:ring-havdyp data-[selected=false]:border-havdyp/14 data-[selected=false]:hover:border-dusted-peri/50 md:w-full md:justify-between md:p-4 md:text-left md:text-base'
             >
               <span className='font-semibold'>{sizeValue}</span>
               <div className='hidden text-right text-xs text-havdyp/62 md:block'>
@@ -57,12 +57,11 @@ export function SizeSelector({
         })}
       </div>
 
-      {/* STEG 2: Bruker nå propen til å sjekke betingelsen */}
       {!handlesToHideGuide.includes(productHandle) && (
         <div className='flex w-full flex-col rounded-[1rem] border border-havdyp/14 bg-cloud-dancer/72 p-4 text-left transition-colors'>
           <button
             onClick={() => setIsDetailsOpen(!isDetailsOpen)}
-            className='flex w-full justify-between bg-transparent p-0 font-semibold text-havdyp/80 transition-colors hover:text-havdyp'
+            className='flex w-full justify-between bg-transparent p-0 font-semibold text-maritime-darkest transition-colors hover:text-havdyp'
             aria-expanded={isDetailsOpen}
             aria-controls='size-details'
           >

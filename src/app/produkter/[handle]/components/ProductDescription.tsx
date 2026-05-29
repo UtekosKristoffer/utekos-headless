@@ -23,7 +23,7 @@ export function ProductDescription({ descriptionHtml: descriptionJson }: Product
   return (
     <article
       aria-label='Produktbeskrivelse'
-      className='mt-12 rounded-[1.25rem] border border-cloud-dancer/70 bg-cloud-dancer/54 p-5 shadow-lg shadow-havdyp/5'
+      className='mt-12 rounded-[1.25rem] border border-maritime-darkest bg-cloud-dancer p-5 shadow-lg shadow-cloud-dancer/5'
     >
       <div aria-live='polite' aria-atomic='true' className='relative overflow-hidden'>
         <div
@@ -34,7 +34,7 @@ export function ProductDescription({ descriptionHtml: descriptionJson }: Product
           className='transition-[max-height] duration-500 ease-in-out'
         >
           <div
-            className='prose max-w-none text-havdyp/76'
+            className='font-google-sans max-w-none text-muted'
             dangerouslySetInnerHTML={{ __html: descriptionHtmlString }}
           />
         </div>
@@ -54,7 +54,7 @@ export function ProductDescription({ descriptionHtml: descriptionJson }: Product
           aria-expanded={isDescriptionExpanded}
           aria-controls='product-description-content'
           onClick={() => setIsDescriptionExpanded(prev => !prev)}
-          className='p-0 text-base text-havdyp hover:text-havdyp/76'
+          className='p-0 text-base text-maritime-darkest hover:text-havdyp/76'
         >
           {isDescriptionExpanded ? 'Vis mindre' : 'Les mer'}
         </Button>
