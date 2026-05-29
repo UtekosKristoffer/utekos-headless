@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+node_modules/
+**/node_modules/
 /alpha
 /docs
 /.pnp
@@ -12,14 +14,12 @@
 !.yarn/releases
 !.yarn/versions
 
-# playwright
-.playwright-mcp
-.playwright-mcp/
-/playwright-mcp
-
 # .agents
 .agents/
-.agenst/skills/
+.agents/skills/
+.playwright-mcp/
+playwright-mcp/
+
 
 
 # mcp config (may contain local secrets/tokens)
@@ -27,6 +27,7 @@ mcp.json
 
 # vscode settings (may contain MCP secrets/tokens)
 .vscode/settings.json
+
 
 # local credentials and service accounts
 src/api/lib/cloud-credentials/
@@ -66,10 +67,7 @@ next-env.d.ts
 
 # docs
 /md-docs
-/ga_docs
 /documentation
-/pagespeed_raport
-/pagespeed_rapport
 /prompt-docs
 /AGENTS
 /AGENTS.md
@@ -82,7 +80,17 @@ next-env.d.ts
 /summary
 summary
 /copilot-instructions
-
+ga_docs/
+.ga_docs/
+prompt-docs/
+pagespeed-raport/
+pagespeed_raport/
+pagespeed-rapport/
+pagespeed_rapport/
+rapport.md
+PLAN.md
+AGENTS.md
+project_info_1/
 # github
 .github
 /.githubnode_modules

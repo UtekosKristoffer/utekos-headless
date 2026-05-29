@@ -1,0 +1,43 @@
+/* DEMITASSE */
+
+.demitasse-shades {
+  --color-delicioso: oklch(0.3377 0.0177 52.86);
+  --color-demitasse: oklch(0.3328 0.0233 53.3);
+  --color-slate-black: oklch(0.3718 0.0257 57.37);
+  --color-rain-drum: oklch(0.4327 0.0321 53.93);
+  --color-shitake: oklch(0.5093 0.0327 61.79);
+}
+
+.demitasse-analogous {
+  --color-chocolate-plum: oklch(0.3159 0.0237 14.31);
+  --color-kombu-green: oklch(0.364 0.0267 128.05);
+}
+
+.demitasse-monochromatic {
+  --color-almost-mauve: oklch(0.9024 0.0128 35.73);
+  --color-amphora: oklch(0.6377 0.0421 60.6);
+  --color-demitasse: oklch(0.3328 0.0233 53.3);
+}
+
+.demitasse-complementary {
+  --color-magical-forest: oklch(0.3458 0.0203 221.65);
+}
+
+.demitasse-split-complementary {
+  --color-magical-forest: oklch(0.3458 0.0203 221.65);
+  --color-demitasse: oklch(0.3328 0.0233 53.3);
+  --color-peacoat: oklch(0.308 0.038 277.64);
+}
+
+.demitasse-triadic {
+  --color-inking: oklch(0.3048 0.0341 291.48);
+  --color-demitasse: oklch(0.3328 0.0233 53.3);
+  --color-mountain-view: oklch(0.3424 0.0298 148.54);
+}
+
+.demitasse-tetradic {
+  --color-blackberry-cordial: oklch(0.324 0.0576 317.78);
+  --color-mountain-view: oklch(0.3424 0.0298 148.54);
+  --color-demitasse: oklch(0.3328 0.0233 53.3);
+  --color-magical-forest: oklch(0.3458 0.0203 221.65);
+}

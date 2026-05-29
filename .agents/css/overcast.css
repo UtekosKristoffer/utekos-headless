@@ -1,0 +1,45 @@
+/* OVERCAST */
+
+.overcast-shades {
+  --color-euacalyptus: oklch(0.7352 0.0334 91.09);
+  --color-tidal-foam: oklch(0.7847 0.031 94.42);
+  --color-overcast: oklch(0.7983 0.0257 91.66);
+  --color-pelican: oklch(0.7948 0.0228 92.55);
+  --color-bone-white: oklch(0.86 0.0237 93.36);
+  --color-white-down: oklch(0.9126 0.0125 91.53);
+}
+
+.overcast-analogous {
+  --color-cement: oklch(0.7836 0.0274 71.11);
+  --color-overcast: oklch(0.7983 0.0257 91.66);
+}
+
+.overcast-monochromic {
+  --color-overcast: oklch(0.7983 0.0257 91.66);
+  --color-martini: oklch(0.524 0.0426 94.04);
+  --color-black-beauty: oklch(0.2739 0.0055 286.03);
+}
+
+.overcast-complementary {
+  --color-overcast: oklch(0.7983 0.0257 91.66);
+  --color-icelandic-blue: oklch(0.752 0.0302 279.19);
+}
+
+.overcast-split-complementary {
+  --color-queens-wreath: oklch(0.7527 0.0327 287.58);
+  --color-overcast: oklch(0.7983 0.0257 91.66);
+  --color-niagara-mist: oklch(0.78 0.0276 251.72);
+}
+
+.overcast-triadic {
+  --color-overcast: oklch(0.7983 0.0257 91.66);
+  --color-fair-orchid: oklch(0.7637 0.0395 325.96);
+  --color-harbor-gray: oklch(0.7882 0.0271 181.65);
+}
+
+.overcast-tetradic {
+  --color-aqua-foam: oklch(0.7962 0.0318 155.81);
+  --color-overcast: oklch(0.7983 0.0257 91.66);
+  --color-icelandic-blue: oklch(0.752 0.0302 279.19);
+  --color-fair-orchid: oklch(0.7637 0.0395 325.96);
+}

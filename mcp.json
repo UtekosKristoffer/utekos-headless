@@ -1,0 +1,274 @@
+{
+  "mcpServers": {
+    "schema-org": {
+      "command": "npx",
+      "args": [
+        "schema-org-mcp"
+      ]
+    },
+    "lighthouse": {
+      "command": "npx",
+      "args": [
+        "lighthouse-mcp"
+      ],
+      "disabled": false,
+      "autoApprove": []
+    },
+    "pagespeed": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "pagespeed-insights-mcp"
+      ],
+      "env": {
+        "GOOGLE_API_KEY": "AIzaSyB5O0RxsleXFhzxnsAPdSF3rHE_NsJifxQ"
+      }
+    },
+    "pagespeed-insights": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "pagespeed-insights-mcp"
+      ],
+      "env": {
+        "GOOGLE_API_KEY": "AIzaSyB5O0RxsleXFhzxnsAPdSF3rHE_NsJifxQ"
+      }
+    },
+    "cloudrun": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@google-cloud/cloud-run-mcp"
+      ]
+    },
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github@latest"
+      ]
+    },
+    "next-devtools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "next-devtools-mcp@latest"
+      ]
+    },
+      "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "ctx7sk-4d2b7834-e1a9-4d4e-8fc4-de98b98c99e5"
+      }
+    },
+    "vercel": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@vercel/mcp-server"
+      ]
+    },
+    "mapi-devdocs": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://merchantapi.googleapis.com/devdocs/mcp"
+      ]
+    },
+    "google-developer-knowledge": {
+      "httpUrl": "https://developerknowledge.googleapis.com/mcp",
+      "authProviderType": "google_credentials",
+      "oauth": {
+        "scopes": [
+          "https://www.googleapis.com/auth/cloud-platform"
+        ]
+      },
+      "timeout": 30000,
+      "headers": {
+        "X-goog-user-project": "nifty-structure-490519-u6"
+      }
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--no-usage-statistics"
+      ]
+    },
+    "meta-ads": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "meta-ads-mcp"
+      ],
+      "env": {
+        "META_ACCESS_TOKEN": "EEAAQZAyEd7NPYBRBOcLS5Ac8NOEfHdlEj4eYzojkhKyM5G7GiOnPfYZAOqOIMRkeXvPuywt6BVDLre5aSZCMQ20LtXALYl6HJygM583jmiZBoK2mph1BOUADA0m12iJqZBKqkEzHm99cEZAIvjGiSeAKRgcgdw6NtjhFlfT59lXLOyeFvBnPuxrLAp8O7UOVN9hUzggqfsUiZCFJNK22ygMHir0QNu71mDS455IL",
+        "META_APP_ID": "1154247890253046",
+        "META_APP_SECRET": "cc07e82e19d1729a339e8ed27a15227d",
+        "META_AUTO_REFRESH": "false",
+        "META_BUSINESS_ID": "538548380599665"
+      }
+    },
+    "upstash-context7": {
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "command": "npx"
+    },
+    "gtm-mcp": {
+      "command": "gtm-mcp",
+      "args": [],
+      "env": {
+        "GTM_CLIENT_ID": "63040510375-qdqauib1c4cep5hjqp44310ntojtm22k.apps.googleusercontent.com",
+        "GTM_CLIENT_SECRET": "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",
+        "GTM_PROJECT_ID": "nifty-structure-490519-u6"
+      }
+    },
+    "google-analytics": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-google-analytics"
+      ],
+      "env": {
+        "GA_SERVICE_ACCOUNT_JSON": "/Users/kristofferohnstadhjelmeland/utekos-headless/src/api/lib/cloud-credentials/google-analytics-data-api-service-account.json",
+        "GA_PROPERTY_ID": "489598217",
+        "GA_MEASUREMENT_ID": "G-FCES3L0M9M",
+        "GA_API_SECRET": "sSk8jKJiQR-RVUnDj0Nhrg"
+      }
+    },
+    "pipedream": {
+      "url": "https://mcp.pipedream.net/v2"
+    },
+    "bigquery": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@toolbox-sdk/server",
+        "--prebuilt",
+        "bigquery",
+        "--stdio"
+      ]
+    },
+    "tavily-remote-mcp": {
+      "command": "npx -y mcp-remote https://mcp.tavily.com/mcp/?tavilyApiKey=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",
+      "env": {
+        "TAVILY_API_KEY": "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"
+      }
+    },
+    "exa": {
+      "url": "https://mcp.exa.ai/mcp"
+    },
+    "fetchserp": {
+      "command": "npx",
+      "args": [
+        "github:fetchSERP/fetchserp-mcp-server-node"
+      ],
+      "env": {
+        "FETCHSERP_API_TOKEN": "AtNwWjivhCL78M1oLsnp8bj4UofMKPLXikRa"
+      }
+    },
+    "Bright Data": {
+      "command": "npx",
+      "args": [
+        "@brightdata/mcp"
+      ],
+      "env": {
+        "API_TOKEN": "226f1b82-3688-44e4-9300-3ac9da9e520f"
+      }
+    },
+    "gsc": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-server-gsc"
+      ],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "/Users/kristofferohnstadhjelmeland/utekos-wiki/home/shopping-samples/content/service-account.json"
+      }
+    },
+    "trends-mcp": {
+      "url": "https://api.trendsbi.ai/mcp",
+      "transport": "http",
+      "headers": {
+        "Authorization": "Bearer tmcp_live_kck197sprvnp99g10mamyweyuz0gfcgr"
+      }
+    },
+    "firecrawl-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "firecrawl-mcp"
+      ],
+      "env": {
+        "FIRECRAWL_API_KEY": "fc-70b359cd80cd4fac9b0d8b3d101b053b"
+      }
+    },
+    "notebooklm": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "notebooklm-mcp@latest"
+      ]
+    },
+    "pdf": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "--silent",
+        "--registry=https://registry.npmjs.org/",
+        "@modelcontextprotocol/server-pdf",
+        "--stdio"
+      ]
+    },
+    "shadcn": {
+      "command": "npx",
+      "args": [
+        "shadcn@latest",
+        "mcp"
+      ]
+    },
+    "github-copilot": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/"
+    },
+    "openai": {
+      "type": "http",
+      "url": "https://developers.openai.com/mcp"
+    },
+    "mockflow-ideaboard": {
+      "type": "http",
+      "url": "http://localhost:21193/mcp"
+    },
+    "mockflow-wireframepro": {
+      "type": "http",
+      "url": "http://localhost:21194/mcp"
+    },
+    "everything": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-everything"
+      ]
+    },
+    "posthog": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-posthog"
+      ]
+    },
+    "inputs": [
+    {
+      "id": "context7ApiKey",
+      "type": "promptString",
+      "description": "Context7 API Key",
+      "password": true
+    }
+  ]
+}
+}

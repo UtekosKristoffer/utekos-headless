@@ -1,0 +1,53 @@
+/* CLOUD DANCER */
+
+.cloud-dancer-shades {
+  --color-bone-white: oklch(0.86 0.0237 93.36);
+  --color-white-down: oklch(0.9126 0.0125 91.53);
+  --color-cloud-dancer: oklch(0.9493 0.007 88.64);
+  --color-vanilla-ice: oklch(0.9374 0.0222 89.8);
+  --color-stalactite: oklch(0.9731 0.0041 91.45);
+  --color-coconut-milk: oklch(0.9492 0.0111 89.72);
+  --color-cloud-cream: oklch(0.8984 0.0335 89.86);
+}
+
+.cloud-cream-split-complementary {
+  --color-delicate-blue: oklch(0.8749 0.0322 233.34);
+}
+
+.cloud-dancer-analogous {
+  --color-cloud-dancer: oklch(0.9493 0.007 88.64);
+}
+
+.cloud-dancer-monochromatic {
+  --color-cloud-dancer: oklch(0.9493 0.007 88.64);
+  --color-twill: oklch(0.6931 0.0379 85.38);
+  --color-wren: oklch(0.383 0.0191 60.86);
+}
+.cloud-dancer-complementary {
+  --color-cloud-dancer: oklch(0.9493 0.007 88.64);
+  --color-whispy-clouds: oklch(0.9526 0.0017 67.8);
+}
+
+.cloud-dancer-split-complementary {
+  --color-whispy-clouds: oklch(0.9526 0.0017 67.8);
+  --color-cloud-dancer: oklch(0.9493 0.007 88.64);
+  --color-diaphonous: oklch(0.9569 0.014 185.95);
+}
+
+.cloud-dancer-triadic {
+  --color-whispy-clouds: oklch(0.9526 0.0017 67.8);
+  --color-diaphonous: oklch(0.9569 0.014 185.95);
+}
+
+.cloud-dancer-tetradic {
+  --color-star-white: oklch(0.9502 0.0093 106.58);
+  --color-whispy-clouds: oklch(0.9526 0.0017 67.8);
+  --color-whispy-clouds: oklch(0.9526 0.0017 67.8);
+}
+
+.more {
+  --color-bit-of-blue: oklch(0.9313 0.0087 205.89);
+  --color-white-sand: oklch(0.8767 0.0086 56.3);
+  --color-white-alyssum: oklch(0.9421 0.0069 67.74);
+  --color-snowfall: oklch(0.908 0.0129 63.91);
+}

@@ -1,0 +1,64 @@
+.trash {
+  --color-any: oklch(0.2895 0.0231 267.23);
+  --color-dark-sapphire: oklch(0.2895 0.0231 267.23);
+  --color-carbon: oklch(0.3014 0.0198 251.52);
+  --color-silhouette: oklch(0.2881 0.0219 262.5);
+  --color-sky-captain: oklch(0.2827 0.0207 273.06);
+  --color-vulcan: oklch(0.3096 0.0111 271.04);
+
+  /* Comfyrobe */
+  --color-morganite: oklch(0.862 0.0234 41.39);
+  --color-illusion-blue: oklch(0.8619 0.0166 245.11);
+  --white-aspargous: oklch(0.8913 0.025 91.63);
+  --color-birch: oklch(0.8756 0.0209 81.78);
+
+  /* Tetradic Dusky Orchid 
+  
+  --color-blue-ice: oklch(0.5792 0.0547 274.56);
+  --color-sage: oklch(0.654 0.0537 111.54);
+  --color-malachite-green: oklch(0.6504 0.0526 167.79);
+   */
+
+  /* Pause */
+
+  /* Peppermint Shades */
+  --color-mint-green: oklch(0.5387 0.0977 144.47);
+
+  /* Comfyrobe */
+
+  --color-bordaux: oklch(0.5617 0.0734 349.97);
+  --color-blue-shadow: oklch(0.5945 0.0482 245.56);
+  --color-green-eyes: oklch(0.6379 0.0622 132.8);
+
+  --color-scarab: oklch(0.2998 0.019 174.18);
+  --color-chalk-blue: oklch(0.8769 0.0156 181.73);
+
+  /* Green Eyes Shades */
+
+  --color-dill: oklch(0.5442 0.0558 131.78);
+  --color-laurel-green: oklch(0.774 0.0393 130.5);
+  /* Analogous */
+  --color-baritone-blue: oklch(0.2821 0.0257 281.42);
+
+  /* Monochromatic */
+  --color-blue-ice: oklch(0.5792 0.0547 274.56);
+  /* Split Complementary */
+  --color-rosin: oklch(0.3299 0.0153 107.21);
+
+  /* Triadic */
+  --color-nimbus-cloud: oklch(0.8739 0.0041 286.31);
+  --color-foggy-dew: oklch(0.8685 0.008 139.44);
+  --color-potent-purple: oklch(0.3174 0.0559 344.27);
+
+  --color-havdyp-100: #d6d7e4;
+  --color-havdyp-200: #acafca;
+  --color-havdyp-300: #8386af;
+  --color-havdyp-400: #5d6191;
+  --color-havdyp-500: #424568;
+  --color-havdyp-600: #27293d;
+  --color-havdyp-700: #212334;
+  --color-havdyp-800: #1b1c29;
+  --color-havdyp-850: #14151f;
+  --color-havdyp-900: #0d0e15;
+  --color-havdyp-950: #07070a;
+}

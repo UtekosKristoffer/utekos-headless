@@ -1,0 +1,8 @@
+.dazzling-blue-triadic {
+  --color-earth-red: oklch(0.4908 0.112 13.21);
+  --color-classic-green: oklch(0.6469 0.1708 145.01);
+}
+
+.dazzling-blue-analogous {
+  --color-libery: oklch(0.4318 0.1107 287.48);
+}

@@ -1,12 +1,29 @@
-mcp.json
+# env / credentials
 .env*
-.agents/
-.agents/skills
-.ga_docs/
-AGENTS/
-project_info_1/
-.playwright-mcp
+mcp.json
+.vscode/settings.json
+src/api/constants/service-account.json
 src/api/lib/cloud-credentials/
 *.service-account.json
+service-account.json
 *oauth-credentials*.json
 *tag-manager-credentials*.json
+
+# local MCP / tooling output
+.agents/
+.agents/skills/
+.playwright-mcp/
+playwright-mcp/
+
+# local docs / reports / planning
+ga_docs/
+.ga_docs/
+prompt-docs/
+pagespeed-raport/
+pagespeed_raport/
+pagespeed-rapport/
+pagespeed_rapport/
+rapport.md
+PLAN.md
+AGENTS.md
+project_info_1/

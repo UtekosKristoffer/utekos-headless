@@ -1,1 +1,0 @@
-- generic [ref=e2]: "User-Agent: Googlebot User-Agent: Googlebot-Video Allow: / Allow: /videos/ Allow: /api/google/feed Disallow: /cart/ Disallow: /account/ Disallow: /api/ User-Agent: * Allow: / Allow: /api/google/feed Disallow: /cart/ Disallow: /account/ Disallow: /api/ Disallow: /videos/ Sitemap: https://utekos.no/sitemap.xml"

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "Utekos",
+  "description": "Internal documentation for the Utekos brand.",
+  "folders": [""],
+  "excludeFolders": [
+  ],
+  "excludeFiles": [
+  ],
+  "rules": [
+""
+  ]
+}

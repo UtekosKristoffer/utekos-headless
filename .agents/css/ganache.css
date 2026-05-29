@@ -1,0 +1,43 @@
+/* GANACHE */
+
+.ganache-shades {
+  --color-chocolate-plum: oklch(0.3159 0.0237 14.31);
+  --color-ganache: oklch(0.2938 0.0165 11.97);
+  --color-licorice: oklch(0.3356 0.0086 6.11);
+  --color-raisin: oklch(0.3943 0.024 6.35);
+  --color-chocolate-plum: oklch(0.3159 0.0237 14.31);
+  --color-plum-thruffle: oklch(0.4729 0.0211 13.65);
+}
+
+.ganache-analogous {
+  --color-ganache: oklch(0.2938 0.0165 11.97);
+}
+
+.ganache-monochromic {
+  --color-ganache: oklch(0.2938 0.0165 11.97);
+  --color-white-sand: oklch(0.8767 0.0086 56.3);
+  --color-wistful-mauve: oklch(0.5741 0.0521 5.58);
+}
+.ganache-complementary {
+  --color-ganache: oklch(0.2938 0.0165 11.97);
+  --color-scarab: oklch(0.2998 0.019 174.18);
+}
+
+.ganache-split-complementary {
+  --color-scarab: oklch(0.2998 0.019 174.18);
+  --color-ganache: oklch(0.2938 0.0165 11.97);
+  --color-salute: oklch(0.2899 0.017 270.77);
+}
+
+.ganache-triadic {
+  --color-ganache: oklch(0.2938 0.0165 11.97);
+  --color-sky-captain: oklch(0.2827 0.0207 273.06);
+  --color-scarab: oklch(0.2998 0.019 174.18);
+}
+
+.ganache-tetradic {
+  --color-deep-caverns: oklch(0.2934 0.0039 84.58);
+  --color-ganache: oklch(0.2938 0.0165 11.97);
+  --color-scarab: oklch(0.2998 0.019 174.18);
+  --color-deep-well: oklch(0.2919 0.0167 300.57);
+}

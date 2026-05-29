@@ -1,0 +1,4 @@
+interface:
+  display_name: "Markdown Perfection"
+  short_description: "Agent-ready Markdown cleanup"
+  default_prompt: "Use $markdown-perfection to rewrite this Markdown for agent-friendly structure and documentation quality."
