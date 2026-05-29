@@ -31,7 +31,7 @@ import {
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
-import type { ModelKey } from 'types/product/ProductTypes'
+import type { ModelKey } from '@/api/constants'
 import type { PurchaseClientViewProps } from 'types/product/PageProps'
 
 const SIZE_GUIDANCE: Record<string, { height: string; tips: string[] }> = {

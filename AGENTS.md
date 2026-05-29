@@ -50,23 +50,11 @@ budskap gjør at det fester seg raskere, og vi blir mer positive til det. Klarhe
 overskrifter og et enkelt ordforråd skaper flyt. Positiv stemning: Merkelig nok er vi mer tilbøyelige til å
 oppleve kognitiv letthet når vi allerede er i godt humør
 
-### Typography
+## Motion
 
-What’s our type? Bold yet balanced. Utekos signature typography gives our message character.
+**Slow Transitions:** **USE:**
 
-Titles: Google Sans Bold, in sentence case.
+- Long, eased animation curves (like ease-in-out) for page transitions and hover effects.
+- Slow fades promote relaxation.
 
-**Leading:** 80 to 95% (up to 100% for diacritics)
-
-**Tracking:** 0 to -1%
-
-**Typeface:**
-
-Utekos Text (Medium or Regular)
-
-**Leading:** 140 to 150%
-
-**Tracking:** 0 to -3%
-
-Our typography can be in cloud-dancer, mountain-darkest any of our three primary palette colors. This gives us
-a good range of possible combinations against different background hues.
+Eliminate fast, snappy animations that creates urgency.

@@ -16,7 +16,8 @@ import { generateEventID } from '@/components/analytics/Meta/generateEventID'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { getVariants } from '@/app/skreddersy-varmen/utekos-orginal/utils/getVariants'
 import { getSelectableSizes, PRODUCT_VARIANTS } from '@/api/constants'
-import type { ModelKey, ColorVariant } from 'types/product/ProductTypes'
+import type { ModelKey } from '@/api/constants'
+import type { ColorVariant } from 'types/product/ProductTypes'
 import type { UsePurchaseLogicProps } from 'types/product/PageProps'
 import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
 import type { Cart } from 'types/cart'
@@ -35,7 +36,7 @@ function normalizeSelectedSize(size: string, selectableSizes: readonly string[])
 }
 
 export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
-  const [selectedModel, setSelectedModel] = useState<ModelKey>('techdown')
+  const [selectedModel, setSelectedModel] = useState<ModelKey>('utekos-techdown')
   const [quantity, setQuantity] = useState(1)
   const [selectedColorIndex, setSelectedColorIndex] = useState(0)
   const [selectedSize, setSelectedSize] = useState('Middels')

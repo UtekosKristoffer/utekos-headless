@@ -3,7 +3,8 @@
 import type { Image } from 'types/media'
 import type { ShopifyProduct } from './ShopifyProduct'
 import type { ShopifyProductVariant } from './ShopifyProductVariant'
-import type { ColorVariant, ModelKey, ProductConfig } from './ProductTypes'
+import type { ColorVariant, ProductConfig } from './ProductTypes'
+import type { ModelKey } from '@/api/constants'
 
 export type ProductPageViewProps = {
   productData: ShopifyProduct
