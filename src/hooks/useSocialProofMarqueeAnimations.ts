@@ -138,7 +138,17 @@ export function useSocialProofMarqueeAnimations() {
         if (track.length) {
           const trackElement = track[0]!
 
-          gsap.fromTo(
+          const trackTl = gsap.timeline({
+            id: 'skreddersy-social-proof-track',
+            scrollTrigger: {
+              trigger: marquee ?? trackElement,
+              start: 'top 95%',
+              once: true,
+              toggleActions: 'play none none none'
+            }
+          })
+
+          trackTl.fromTo(
             track,
             { autoAlpha: 0, y: 20, willChange: 'transform, opacity' },
             {
@@ -146,13 +156,7 @@ export function useSocialProofMarqueeAnimations() {
               y: 0,
               duration: 0.9,
               ease: 'power3.out',
-              clearProps: 'willChange',
-              scrollTrigger: {
-                trigger: marquee ?? trackElement,
-                start: 'top 95%',
-                once: true,
-                toggleActions: 'play none none none'
-              }
+              clearProps: 'willChange'
             }
           )
         }

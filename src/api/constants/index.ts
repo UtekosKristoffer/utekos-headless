@@ -23,11 +23,11 @@ export const PRODUCT_VARIANTS = {
     price: 1790,
     badge: 'Bestselger',
     description:
-      'Forener banebrytende innovasjon med tidløs eleganse. CloudWave™ opprettholder varmen i deg, og spensten i foret, selv under fuktige forhold. 3-i-1-konstruksjonen lar deg enkelt tilpasse passform, regulere ventilasjon og veksle mellom ulike funksjonelle moduser.',
+      'Utekos TechDown forener banebrytende innovasjon med tidløs eleganse. CloudWave™ holder deg varm og bevarer spensten i fôret, selv under fuktige forhold. 3-i-1-konstruksjonen lar deg enkelt tilpasse passformen, regulere ventilasjonen og veksle mellom ulike moduser.',
     highlights: [
       {
         title: 'Holder varmen i fukt',
-        body: 'Utekos TechDown™ forener banebrytende innovasjon med tidløs eleganse. Det eksklusive Luméa™-skallet gir en sofistikert finish og fungerer som et beskyttende skjold, mens den ytelsesoptimaliserte CloudWave™-isolasjonen sikrer høy og pålitelig varme. Kjernen i konseptet er vår unike 3-i-1 funksjonalitet. Gjennomtestede løsninger lar deg enkelt tilpasse passform, regulere ventilasjon og veksle mellom ulike funksjonelle moduser. Når dine behov for velvære endrer seg, finnes det alltid en justeringsmulighet som lar deg fortsette opplevelsen av kompromissløs komfort. Helt uavbrutt.'
+        body: 'Luméa™-skallet gir en sofistikert finish og fungerer som et beskyttende skjold, mens den innovative CloudWeave™-isolasjonen sikrer pålitelig varme. Den oppleves som myk og luftig dun, samtidig som den bevarer spensten og loftet under fuktige forhold.'
       },
       {
         title: '3-i-1 funksjonalitet',
@@ -35,7 +35,7 @@ export const PRODUCT_VARIANTS = {
       },
       {
         title: 'YKK® Dual V-Zip™',
-        body: 'Lar deg enkelt tilpasse graden av ventilasjon og skreddersy varmen etter dine behov.'
+        body: 'Gjør det enkelt å tilpasse ventilasjonen og skreddersy varmen etter behovene dine.'
       }
     ],
     features: ['Helårsbruk', 'Tre bruksformer', 'Vannavstøtende'],
