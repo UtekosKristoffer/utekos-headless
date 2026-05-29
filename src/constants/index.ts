@@ -75,10 +75,10 @@ export const PRODUCT_VARIANTS = {
     colors: [{ name: 'Havdyp', hex: '#0F2B40' }],
     sizes: ['Liten', 'Middels', 'Stor', 'Ekstra stor'],
     images: [
-      '/1080/kate-1080.png',
+      '/utekos-techdown-kvinne-terrasseliv-1600x1600.webp',
       '/utekos-techdown-diagonalt-fullfigur.webp',
       '/1080/utekos-techdown-bakside.webp',
-      '/1080/tech-halv-1080.png'
+      '/utekos-techdown-halvfigur-forfra-1600x1600.webp'
     ]
   },
   mikro: {

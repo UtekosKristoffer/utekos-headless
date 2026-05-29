@@ -1,4 +1,4 @@
-export type ModelKey = 'dun' | 'mikrofiber' | 'techdown'
+export type ModelKey = 'utekos-dun' | 'utekos-mikrofiber' | 'utekos-techdown'
 
 export type ComparisonRow = {
   feature: string
@@ -22,7 +22,7 @@ export type ModelRecommendation = {
 
 export const modelRecommendations: ModelRecommendation[] = [
   {
-    key: 'dun',
+    key: 'utekos-dun',
     name: 'Utekos Dun™',
     shortName: 'Dun™',
     href: '/produkter/utekos-dun',
@@ -36,7 +36,7 @@ export const modelRecommendations: ModelRecommendation[] = [
     proofPoints: ['650 fillpower', 'Høy varme-til-vekt forhold', 'Komprimeres godt']
   },
   {
-    key: 'mikrofiber',
+    key: 'utekos-mikrofiber',
     name: 'Utekos Mikrofiber™',
     shortName: 'Mikrofiber™',
     href: '/produkter/utekos-mikrofiber',
@@ -50,7 +50,7 @@ export const modelRecommendations: ModelRecommendation[] = [
     proofPoints: ['Lavest vekt', 'Tørker raskt', 'Maskinvask']
   },
   {
-    key: 'techdown',
+    key: 'utekos-techdown',
     name: 'Utekos TechDown™',
     shortName: 'TechDown™',
     href: '/produkter/utekos-techdown',
@@ -70,63 +70,63 @@ export const comparisonRows: ComparisonRow[] = [
     feature: 'Best for',
     shortAnswer: 'Brukssituasjon',
     values: {
-      dun: 'Hytte, terrasse og tørre vinterkvelder.',
-      mikrofiber: 'Bobil, reise, hverdagsbruk og turer med lav pakkevekt.',
-      techdown: 'Båt, kyst, camping og helårsbruk i norsk vær.'
+      'utekos-dun': 'Hytte, terrasse og tørre vinterkvelder.',
+      'utekos-mikrofiber': 'Bobil, reise, hverdagsbruk og turer med lav pakkevekt.',
+      'utekos-techdown': 'Båt, kyst, camping og helårsbruk i norsk vær.'
     }
   },
   {
     feature: 'Varme i tørt vær',
     shortAnswer: 'Dun gir mest varme per gram.',
     values: {
-      dun: 'Svært høy varme i lav vekt.',
-      mikrofiber: 'God og jevn varme for de fleste dager.',
-      techdown: 'Høy varme med mer robust konstruksjon.'
+      'utekos-dun': 'Svært høy varme i lav vekt.',
+      'utekos-mikrofiber': 'God og jevn varme for de fleste dager.',
+      'utekos-techdown': 'Høy varme med mer robust konstruksjon.'
     }
   },
   {
     feature: 'Varme i fuktig vær',
     shortAnswer: 'Syntetisk isolasjon tåler fukt best.',
     values: {
-      dun: 'God, men ekte dun krever mer omsorg hvis plagget blir vått.',
-      mikrofiber: 'Svært trygg i fukt fordi syntetisk fyll tørker raskt.',
-      techdown: 'Svært trygg i fukt med CloudWeave™-isolasjon.'
+      'utekos-dun': 'God, men ekte dun krever mer omsorg hvis plagget blir vått.',
+      'utekos-mikrofiber': 'Svært trygg i fukt fordi syntetisk fyll tørker raskt.',
+      'utekos-techdown': 'Svært trygg i fukt med CloudWeave™-isolasjon.'
     }
   },
   {
     feature: 'Vekt ca.',
     shortAnswer: 'Mikrofiber er lettest.',
     values: {
-      dun: 'Ca. 1000 g.',
-      mikrofiber: 'Ca. 800 g.',
-      techdown: 'Ca. 1300 g.'
+      'utekos-dun': 'Ca. 1000 g.',
+      'utekos-mikrofiber': 'Ca. 800 g.',
+      'utekos-techdown': 'Ca. 1300 g.'
     }
   },
   {
     feature: 'Vedlikehold',
     shortAnswer: 'Mikrofiber og TechDown er enklest å vaske.',
     values: {
-      dun: 'Skånsom vask og god tørk bevarer spensten.',
-      mikrofiber: 'Maskinvask og rask tørk.',
-      techdown: 'Maskinvask og rask tørk.'
+      'utekos-dun': 'Skånsom vask og god tørk bevarer spensten.',
+      'utekos-mikrofiber': 'Maskinvask og rask tørk.',
+      'utekos-techdown': 'Maskinvask og rask tørk.'
     }
   },
   {
     feature: 'Isolasjon',
     shortAnswer: 'Tre ulike isolasjonstyper.',
     values: {
-      dun: '90 % andedun, 650 FP.',
-      mikrofiber: 'Syntetisk mikrofiber.',
-      techdown: 'CloudWeave™, en dunlignende syntetisk isolasjon.'
+      'utekos-dun': '90 % andedun, 650 FP.',
+      'utekos-mikrofiber': 'Syntetisk mikrofiber.',
+      'utekos-techdown': 'CloudWeave™, en dunlignende syntetisk isolasjon.'
     }
   },
   {
     feature: 'Isolert hette',
     shortAnswer: 'Alle tre har isolert hette.',
     values: {
-      dun: true,
-      mikrofiber: true,
-      techdown: true
+      'utekos-dun': true,
+      'utekos-mikrofiber': true,
+      'utekos-techdown': true
     }
   }
 ]

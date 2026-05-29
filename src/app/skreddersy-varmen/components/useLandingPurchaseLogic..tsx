@@ -14,7 +14,8 @@ import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
 import { useAnalytics } from '@/hooks/useAnalytics'
 import { getVariants } from '@/app/skreddersy-varmen/utekos-orginal/utils/getVariants'
 import { getSelectableSizes, PRODUCT_VARIANTS } from '@/api/constants'
-import type { ModelKey, ColorVariant } from 'types/product/ProductTypes'
+import type { ModelKey } from '@/api/constants'
+import type { ColorVariant } from 'types/product/ProductTypes'
 import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
 import type { OptimisticItemInput } from '@/hooks/useOptimisticCartUpdate'
 
@@ -27,7 +28,7 @@ function normalizeSelectedSize(size: string, selectableSizes: readonly string[])
 }
 
 export function useLandingPurchaseLogic({ products }: UseLandingPurchaseLogicProps) {
-  const [selectedModel, setSelectedModelState] = useState<ModelKey>('techdown')
+  const [selectedModel, setSelectedModelState] = useState<ModelKey>('utekos-techdown')
   const [quantity, setQuantityState] = useState(1)
   const [selectedColorIndex, setSelectedColorIndexState] = useState(0)
   const [selectedSize, setSelectedSizeState] = useState('Middels')

@@ -3,6 +3,7 @@
 import type { MetaobjectReference } from './MetaobjectReference'
 import type { ShopifyProduct } from './ShopifyProduct'
 import type { ShopifyProductVariant } from './ShopifyProductVariant'
+
 export type RelatedProductsProps = {
   products: ShopifyProduct[]
 }
@@ -38,8 +39,6 @@ export type ProductVariantEdge = {
 export type ProductVariantConnection = {
   edges: ProductVariantEdge[]
 }
-
-export type ModelKey = 'techdown' | 'mikro'
 
 export type ColorVariant = {
   name: string

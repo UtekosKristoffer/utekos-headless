@@ -38,7 +38,7 @@ export const LANDING_PRODUCTS: LandingProductSeed[] = [
       'Flaggskipet i kolleksjonen. Hydrofob CloudWave™-isolasjon beholder varmen i fukt, og 3-i-1-konstruksjonen lar deg justere fra parkas til kokong på sekunder.',
     price: '1790',
     originalPrice: '1990',
-    image: `${LANDING_BASE_URL}/1080/kate-1080.png`,
+    image: `${LANDING_BASE_URL}/utekos-techdown-kvinne-terrasseliv-1600x1600.webp`,
     sku: 'utekos-techdown'
   },
   {

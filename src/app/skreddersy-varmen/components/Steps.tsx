@@ -1,5 +1,5 @@
 import { Maximize2, Move, User } from 'lucide-react'
-import TechHalfImage from '@public/1080/tech-halv-1080.png'
+import TechHalfImage from '@public/utekos-techdown-halvfigur-forfra-1600x1600.webp'
 import ClassicCoupleImage from '@public/webp/classic-couple-mobile-1080.webp'
 import TechDownKateKikkertImage from '@public/kikkert-kate-2160.webp'
 

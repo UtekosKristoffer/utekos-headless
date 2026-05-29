@@ -30,7 +30,10 @@ export const nbccProducts = [
       'Vår nyeste og mest allsidige modell. Nyskapende innerfor som gir en følelse av dun og opprettholder spenstegenenskapene ved fukt.',
     bestFor: 'For bobil, campingvogn, fortelt og faste plasser.',
     images: [
-      { src: '/1080/kate-1080.png', alt: 'Utekos TechDown™ – modell Kate' },
+      {
+        src: '/utekos-techdown-kvinne-terrasseliv-1600x1600.webp',
+        alt: 'Kvinne nyter terrasselivet med Utekos TechDown™'
+      },
       {
         src: '/webp/techdown-monica-1080.webp',
         alt: 'Utekos TechDown – modell Monica'

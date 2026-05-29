@@ -1,5 +1,5 @@
 // Path: src/api/constants/index.ts
-export type ModelKey = keyof typeof PRODUCT_VARIANTS
+export type ModelKey = 'utekos-techdown' | 'utekos-mikrofiber'
 
 export const TAGS = {
   products: 'products',
@@ -16,7 +16,7 @@ export const currentPrice = originalPrice - discountAmount
 export const GID_PREFIX = 'gid://shopify/ProductVariant/'
 
 export const PRODUCT_VARIANTS = {
-  techdown: {
+  'utekos-techdown': {
     id: 'utekos-techdown',
     title: 'Utekos TechDown™',
     subtitle: 'Vår nyeste, varmeste og mest allsidige modell.',
@@ -45,11 +45,11 @@ export const PRODUCT_VARIANTS = {
       '/kvinne-nyter-terrasselivet-med-utekos-techdown.webp',
       '/utekos-techdown-diagonalt-fullfigur.webp',
       '/1080/utekos-techdown-bakside.webp',
-      '/1080/tech-halv-1080.png'
+      '/utekos-techdown-halvfigur-forfra-1600x1600.webpg'
     ]
   },
-  mikro: {
-    id: 'utekos-mikro',
+  'utekos-mikrofiber': {
+    id: 'utekos-mikrofiber',
     title: 'Utekos Mikrofiber™',
     subtitle: 'Lett varme som tar lite plass',
     price: 1590,
@@ -78,16 +78,16 @@ export const PRODUCT_VARIANTS = {
     colors: [{ name: 'Fjellblå', hex: 'var(--color-ocean-cavern)' }],
     sizes: ['Medium', 'Large'],
     images: [
-      '/1080/blue-full.png',
-      '/1080/blue-parkas.png',
-      '/1080/blue-oppfestet.png',
-      '/classic-blue-jacket-3-4.png'
+      '/utekos-mikrofiber-helfigur-1600-1600.webp',
+      '/utekos-mikrofiber-parkas-1600-1600.webp',
+      '/utekos-mikrofiber-bakside-full-figur-1600-1600.webp',
+      '/utekos-mikrofiber-halvfigur-forside-1600-1600.webp'
     ]
   }
 }
 
 export const PRODUCT_HIDDEN_SIZE_LABELS: Partial<Record<ModelKey, readonly string[]>> = {
-  techdown: ['Liten']
+  'utekos-techdown': ['Liten']
 }
 
 export function getSelectableSizes(

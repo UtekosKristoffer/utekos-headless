@@ -27,7 +27,7 @@ export function SectionThreeInOne() {
         >
           Friheten til å velge
         </h2>
-        <p className='gsap-three-subtitle mx-auto max-w-2xl text-balance font-utekos-text text-base leading-[1.45] tracking-tight text-cloud-dancer/95'>
+        <p className='gsap-three-subtitle mx-auto max-w-2xl text-balance utekos-section-lead font-utekos-text text-base leading-[1.45] tracking-tight text-cloud-dancer/95'>
           Det unike med Utekos<span className='text-overcast'>®</span> er transformasjonen. Fra en isolerende
           kokong til en elegant parkas på sekunder. Juster, form og nyt.
         </p>
@@ -56,7 +56,7 @@ export function SectionThreeInOne() {
                 style={{
                   objectPosition: step.desktopObjectPosition || 'center'
                 }}
-                sizes='(max-width: 1279px) 0px, min(43vw, 82vh)'
+                sizes='(max-width: 1279px) 100vw, 0px'
               />
               <BrandBadge
                 backgroundColor='var(--color-maritime-darkest)'
@@ -77,7 +77,7 @@ export function SectionThreeInOne() {
               <h3 className='gsap-step-title mb-3 font-google-sans text-2xl font-bold leading-[0.92] tracking-[-0.01em] text-cloud-dancer'>
                 {step.title}
               </h3>
-              <p className='gsap-step-desc utekos-section-lead font-utekos-text text-base leading-[1.45] tracking-tight text-cloud-dancer/88'>
+              <p className='gsap-step-desc utekos-section-lead font-utekos-text leading-[1.45] tracking-tight text-cloud-dancer/90'>
                 {step.description}
               </p>
             </div>

@@ -1,14 +1,23 @@
 // Path: src/app/skreddersy-varmen/components/ProductDetailsAccordion.tsx
 'use client'
 
+import type { ReactNode } from 'react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { Leaf, ShieldCheck, Waves, Info } from 'lucide-react'
-import type { ModelKey } from 'types/product/ProductTypes'
+import { Leaf, ShieldCheck, Waves, Info, type LucideIcon } from 'lucide-react'
+import type { ModelKey } from '@/api/constants'
 
-const triggerClassName =
-  'font-google-sans text-left text-lg font-semibold text-maritime-darkest hover:text-havdyp hover:no-underline [&>svg]:text-maritime-darkest md:text-xl'
-
-const itemClassName = 'border-maritime-darkest/20'
+const styles = {
+  item: 'border-maritime-darkest/20 px-4',
+  trigger:
+    'font-google-sans text-left text-lg font-semibold text-maritime-darkest hover:text-havdyp hover:no-underline [&>svg]:text-maritime-darkest md:text-xl',
+  content: 'space-y-6 p-2',
+  blockTitle: 'mb-1 text-base font-semibold text-maritime-darkest',
+  blockText: 'text-sm font-utekos-text leading-[1.45] text-maritime-darkest/90',
+  groupTitle:
+    'mb-3 border-b border-maritime-darkest/60 pb-1 font-utekos-text text-base font-semibold leading-[1.4] tracking-tight text-maritime-darkest',
+  list: 'list-inside list-disc space-y-1 text-sm font-utekos-text text-maritime-darkest/90',
+  callout: 'rounded-2xl border border-cloud-dancer/15 bg-havdyp p-4 text-sm leading-[1.45] text-cloud-dancer'
+} as const
 
 type FeatureIconKey = 'leaf' | 'shield' | 'waves'
 
@@ -34,8 +43,8 @@ type ProductDetailsContent = {
 }
 
 const productDetailsByModel: Record<ModelKey, ProductDetailsContent> = {
-  techdown: {
-    heading: 'Alt du trenger å vite om TechDown™',
+  'utekos-techdown': {
+    heading: 'Productdetaljer om Utekos TechDown™',
     materials: [
       { label: 'Skallstoff', value: 'Luméa™' },
       { label: 'Isolasjon', value: 'CloudWave™' },
@@ -115,8 +124,8 @@ const productDetailsByModel: Record<ModelKey, ProductDetailsContent> = {
       note: 'La plagget tørke helt før lengre lagring. Oppbevar det luftig når du kan, slik at isolasjonen bevarer spenst og form.'
     }
   },
-  mikro: {
-    heading: 'Alt du trenger å vite om Mikrofiber™',
+  'utekos-mikrofiber': {
+    heading: 'Produktdetaljer om Utekos Mikrofiber™',
     materials: [
       { label: 'Fôrstoff', value: 'Taffeta' },
       { label: 'Skallstoff', value: 'DuraLite™ Nylon' },
@@ -205,39 +214,42 @@ const featureIconMap = {
   waves: Waves
 } as const
 
-function SpecRow({ label, value }: { label: string; value: string }) {
+function Section({ value, title, children }: { value: string; title: string; children: ReactNode }) {
   return (
-    <div className='flex justify-between gap-2 border-b border-maritime-darkest/12 pb-1 last:border-0 md:justify-start'>
-      <span className='w-32 shrink-0 font-semibold text-maritime-darkest'>{label}:</span>
-      <span className='text-maritime-darkest/82'>{value}</span>
+    <AccordionItem value={value} className={styles.item}>
+      <AccordionTrigger className={styles.trigger}>{title}</AccordionTrigger>
+      <AccordionContent>
+        <div className={styles.content}>{children}</div>
+      </AccordionContent>
+    </AccordionItem>
+  )
+}
+
+function DetailBlock({ title, text, icon }: { title: string; text: string; icon?: FeatureIconKey }) {
+  const Icon = icon ? featureIconMap[icon] : null
+
+  return (
+    <div className='flex gap-3'>
+      {Icon && <Icon className='mt-1 shrink-0 text-mountain-view' size={20} />}
+      <div>
+        <h4 className={styles.blockTitle}>{title}</h4>
+        <p className={styles.blockText}>{text}</p>
+      </div>
     </div>
   )
 }
 
-function DetailBlock({ title, text }: { title: string; text: string }) {
-  return (
-    <li>
-      <h4 className='mb-1 text-base font-bold text-maritime-darkest'>{title}</h4>
-      <p className='text-sm leading-[1.45] text-maritime-darkest/82 md:text-base'>{text}</p>
-    </li>
-  )
-}
-
-function UsageGroup({ title, children }: { title: string; children: React.ReactNode }) {
+function UsageGroup({ title, items }: { title: string; items: string[] }) {
   return (
     <div>
-      <h4 className='mb-3 border-b border-maritime-darkest/20 pb-1 font-utekos-text text-lg text-maritime-darkest'>
-        {title}
-      </h4>
-      <ul className='list-inside list-disc space-y-1 text-sm text-maritime-darkest/82'>{children}</ul>
+      <h4 className={styles.groupTitle}>{title}</h4>
+      <ul className={styles.list}>
+        {items.map(item => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
     </div>
   )
-}
-
-function ProductFeatureIcon({ icon }: { icon: FeatureIconKey }) {
-  const Icon = featureIconMap[icon]
-
-  return <Icon className='mt-1 shrink-0 text-mountain-view' size={20} />
 }
 
 export function ProductDetailsAccordion({ selectedModel }: { selectedModel: ModelKey }) {
@@ -246,107 +258,71 @@ export function ProductDetailsAccordion({ selectedModel }: { selectedModel: Mode
   return (
     <section
       key={selectedModel}
-      className='w-full bg-overcast px-6 pb-24 pt-6 text-maritime-darkest'
+      className='w-full bg-overcast pb-24 pt-6 text-maritime-darkest'
       aria-live='polite'
     >
       <div className='mx-auto max-w-3xl'>
-        <h2 className='my-8 text-center font-google-sans text-4xl font-bold leading-[0.95] tracking-normal text-maritime-darkest md:text-5xl'>
+        <h2 className='my-8 max-sm:pl-0 text-center max-sm:text-left text-3xl max-w-[90%] mx-auto md:max-w-4xl font-google-sans text-maritime-darkest sm:text-5xl tracking-normal'>
           {content.heading}
         </h2>
 
         <Accordion key={`details-${selectedModel}`} type='single' collapsible className='w-full'>
-          <AccordionItem value='materials' className={itemClassName}>
-            <AccordionTrigger className={triggerClassName}>Materialer</AccordionTrigger>
-            <AccordionContent>
-              <div className='grid grid-cols-1 gap-x-8 gap-y-4 p-2 text-base leading-[1.45] md:grid-cols-2'>
-                {content.materials.map(row => (
-                  <SpecRow key={row.label} label={row.label} value={row.value} />
-                ))}
-              </div>
-            </AccordionContent>
-          </AccordionItem>
+          <Section value='materials' title='Materialer'>
+            {content.materials.map(row => (
+              <DetailBlock key={row.label} title={row.label} text={row.value} />
+            ))}
+          </Section>
 
-          <AccordionItem value='functions' className={itemClassName}>
-            <AccordionTrigger className={triggerClassName}>Nøkkelfunksjoner</AccordionTrigger>
-            <AccordionContent>
-              <ul className='space-y-6 p-2'>
-                {content.functions.map(item => (
-                  <DetailBlock key={item.title} title={item.title} text={item.text} />
-                ))}
-              </ul>
-            </AccordionContent>
-          </AccordionItem>
+          <Section value='functions' title='Nøkkelfunksjoner'>
+            {content.functions.map(item => (
+              <DetailBlock key={item.title} title={item.title} text={item.text} />
+            ))}
+          </Section>
 
-          <AccordionItem value='features' className={itemClassName}>
-            <AccordionTrigger className={triggerClassName}>Egenskaper</AccordionTrigger>
-            <AccordionContent>
-              <ul className='space-y-6 p-2'>
-                {content.features.map(feature => (
-                  <li key={feature.title} className='flex gap-4'>
-                    <ProductFeatureIcon icon={feature.icon} />
-                    <div>
-                      <h4 className='mb-1 text-base font-bold text-maritime-darkest'>{feature.title}</h4>
-                      <p className='text-maritime-darkest/82'>{feature.text}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </AccordionContent>
-          </AccordionItem>
+          <Section value='features' title='Egenskaper'>
+            {content.features.map(feature => (
+              <DetailBlock
+                key={feature.title}
+                title={feature.title}
+                text={feature.text}
+                icon={feature.icon}
+              />
+            ))}
+          </Section>
 
-          <AccordionItem value='usage' className={itemClassName}>
-            <AccordionTrigger className={triggerClassName}>Bruksområder</AccordionTrigger>
-            <AccordionContent>
-              <div className='grid grid-cols-1 gap-8 p-2 md:grid-cols-2'>
-                {content.usage.map(group => (
-                  <UsageGroup key={group.title} title={group.title}>
-                    {group.items.map(item => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </UsageGroup>
-                ))}
-              </div>
-            </AccordionContent>
-          </AccordionItem>
+          <Section value='usage' title='Bruksområder'>
+            {content.usage.map(group => (
+              <UsageGroup key={group.title} title={group.title} items={group.items} />
+            ))}
+          </Section>
 
-          <AccordionItem value='fit' className={itemClassName}>
-            <AccordionTrigger className={triggerClassName}>Passform</AccordionTrigger>
-            <AccordionContent>
-              <div className='space-y-4 p-2 text-base leading-[1.45] text-maritime-darkest/82'>
-                {content.fit.map(item => (
-                  <p key={item.title}>
-                    <strong className='mb-1 block text-maritime-darkest'>{item.title}</strong>
-                    {item.text}
-                  </p>
-                ))}
-                <p className='rounded-2xl border border-cloud-dancer/15 bg-havdyp p-4 text-sm leading-[1.45] text-cloud-dancer'>
-                  <strong>Tips:</strong> Bruk linken ved størrelsevelgeren og i menyen over for å se de
-                  nøyaktige målene i tabellen.
+          <Section value='fit' title='Passform'>
+            {content.fit.map(item => (
+              <DetailBlock key={item.title} title={item.title} text={item.text} />
+            ))}
+            <p className={styles.callout}>
+              <strong>Tips:</strong> Bruk linken ved størrelsevelgeren og i menyen over for å se de nøyaktige
+              målene i tabellen.
+            </p>
+          </Section>
+
+          <Section value='care' title='Vedlikehold'>
+            <ul className={styles.list}>
+              {content.care.bullets.map(bullet => (
+                <li key={bullet}>{bullet}</li>
+              ))}
+            </ul>
+
+            <div className='flex gap-3 rounded-2xl border-l-4 border-primary-button bg-havdyp p-4 text-cloud-dancer'>
+              <Info className='shrink-0 text-primary-button' />
+              <div>
+                <span className='mb-1 block font-semibold text-cloud-dancer'>{content.care.noteTitle}</span>
+                <p className='text-sm font-utekos-text leading-[1.45] text-cloud-dancer/80'>
+                  {content.care.note}
                 </p>
               </div>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value='care' className={itemClassName}>
-            <AccordionTrigger className={triggerClassName}>Vedlikehold</AccordionTrigger>
-            <AccordionContent>
-              <div className='space-y-4 p-2'>
-                <ul className='list-inside list-disc space-y-1 text-maritime-darkest/82'>
-                  {content.care.bullets.map(bullet => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-
-                <div className='mt-4 flex gap-3 rounded-2xl border-l-4 border-primary-button bg-havdyp p-4 text-cloud-dancer'>
-                  <Info className='shrink-0 text-primary-button' />
-                  <div className='text-sm leading-[1.45]'>
-                    <span className='mb-1 block font-bold'>{content.care.noteTitle}</span>
-                    {content.care.note}
-                  </div>
-                </div>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
+            </div>
+          </Section>
         </Accordion>
       </div>
     </section>

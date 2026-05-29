@@ -1,0 +1,57 @@
+export const SIZE_GUIDANCE: Record<string, { height: string; tips: string[] }> = {
+  'Liten': {
+    height: 'Opptil 170 cm',
+    tips: [
+      'Er du lavere enn 165 cm får du en romslig og lun følelse.',
+      'Er du litt høyere får du en nettere silhuett uten overflødig volum.'
+    ]
+  },
+  'Middels': {
+    height: '170 – 180 cm',
+    tips: [
+      'Er du lavere enn 170 cm får du en romslig passform.',
+      'Ligger du i øvre sjiktet (mot 180 cm) får du en mer kroppsnær passform.'
+    ]
+  },
+  'Stor': {
+    height: '180 – 195 cm',
+    tips: [
+      'Perfekt for deg over 180 cm, eller for deg som er lavere og ønsker romslighet.',
+      'Er du over 195 cm anbefaler vi heller størrelsen Ekstra stor.'
+    ]
+  },
+  'Ekstra stor': {
+    height: '190 cm og oppover',
+    tips: [
+      'Skreddersydd for deg over 190 cm – ekstra lengde i kroppen og ermene.',
+      'Også et godt valg for deg som er lavere, men ønsker maksimal romslighet og lengde.'
+    ]
+  },
+  'Medium': {
+    height: 'Opptil ca. 175 cm',
+    tips: [
+      'Et godt valg for deg som ønsker lett varme med normal romslighet.',
+      'Velg Large hvis du ønsker mer plass til ekstra lag under.'
+    ]
+  },
+  'Large': {
+    height: 'Fra ca. 175 cm og oppover',
+    tips: [
+      'Gir ekstra romslighet og mer dekning.',
+      'Passer også lavere brukere som ønsker en mer generøs følelse.'
+    ]
+  }
+}
+
+export const focusRing =
+  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-button focus-visible:ring-2 focus-visible:ring-maritime-darkest'
+
+export const maritimePanelClass =
+  'rounded-3xl border border-cloud-dancer/15 bg-havdyp p-5 text-cloud-dancer shadow-sm'
+
+export const maritimePanelHeaderClass = 'mb-3 border-b border-cloud-dancer/15 pb-3'
+
+export const choiceGridClass = 'grid grid-cols-3 gap-2 sm:gap-3'
+
+export const choicePillClass =
+  'inline-flex min-h-12 min-w-0 items-center justify-center rounded-full px-1.5 py-2 text-center text-[11px] font-semibold leading-[1.15] tracking-normal transition-all sm:px-4 sm:text-sm md:text-base'
