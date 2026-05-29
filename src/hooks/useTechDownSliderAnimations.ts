@@ -157,7 +157,17 @@ export function useTechDownSliderAnimations() {
 
           const sliderElement = q('.gsap-tech-slider')[0]
           if (sliderElement) {
-            gsap.fromTo(
+            const sliderTl = gsap.timeline({
+              id: 'techdown-slider-reveal',
+              scrollTrigger: {
+                trigger: sliderElement,
+                start: 'top 92%',
+                once: true,
+                toggleActions: 'play none none none'
+              }
+            })
+
+            sliderTl.fromTo(
               sliderElement,
               {
                 y: 48,
@@ -171,20 +181,24 @@ export function useTechDownSliderAnimations() {
                 scale: 1,
                 duration: 1.1,
                 ease: 'power3.out',
-                clearProps: 'willChange',
-                scrollTrigger: {
-                  trigger: sliderElement,
-                  start: 'top 92%',
-                  once: true,
-                  toggleActions: 'play none none none'
-                }
+                clearProps: 'willChange'
               }
             )
           }
 
           const handleElement = q('.gsap-tech-handle')[0]
           if (handleElement && sliderElement) {
-            gsap.fromTo(
+            const handleTl = gsap.timeline({
+              id: 'techdown-slider-handle',
+              scrollTrigger: {
+                trigger: sliderElement,
+                start: 'top 80%',
+                once: true,
+                toggleActions: 'play none none none'
+              }
+            })
+
+            handleTl.fromTo(
               handleElement,
               { scale: 1 },
               {
@@ -192,13 +206,7 @@ export function useTechDownSliderAnimations() {
                 duration: 0.65,
                 ease: 'sine.inOut',
                 yoyo: true,
-                repeat: 3,
-                scrollTrigger: {
-                  trigger: sliderElement,
-                  start: 'top 80%',
-                  toggleActions: 'play none none none',
-                  once: true
-                }
+                repeat: 3
               }
             )
           }

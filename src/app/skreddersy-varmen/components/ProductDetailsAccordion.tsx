@@ -169,19 +169,15 @@ const productDetailsByModel: Record<ModelKey, ProductDetailsContent> = {
     usage: [
       {
         title: 'Båt- og hytteliv',
-        items: ['Camping, båt og bobilliv', 'Perfekt på hytten eller terrassen hjemme']
+        items: ['Camping, båt og bobilliv', ' På hytten, utenfor bobilen, i båten og på din egen terrasse']
       },
       {
         title: 'Fjellsport og turer',
         items: ['Pause og bålkos', 'Aktiv vandring', 'Ekstra varme når du sitter stille']
       },
       {
-        title: 'Jakt og fiske',
-        items: ['Posteringsjakt', 'Fiske', 'Tidlige morgener ute']
-      },
-      {
-        title: 'Til vanns & annet',
-        items: ['Båt- og seiltur', 'Isbading før og etter', 'På kalde tribuner', 'Fotooppdrag i kulden']
+        title: 'På kalde tribuner',
+        items: ['Konserter', 'Fotballkamper', 'Skirenn']
       }
     ],
     fit: [
@@ -202,8 +198,8 @@ const productDetailsByModel: Record<ModelKey, ProductDetailsContent> = {
         'La den lufttørke',
         'Unngå stryking og bleking'
       ],
-      noteTitle: 'Viktig om oppbevaring',
-      note: 'Oppbevares tørt. Sørg for at plagget tørkes godt etter bruk i fuktige omgivelser. For lengre lagring anbefales luftig og ukomprimert oppbevaring.'
+      noteTitle: 'Vedlikeholdsanvisning',
+      note: 'Sørg for at plagget tørkes godt etter bruk i fuktige omgivelser. For lengre lagring anbefales luftig og ukomprimert oppbevaring.'
     }
   }
 }
@@ -242,7 +238,7 @@ function DetailBlock({ title, text, icon }: { title: string; text: string; icon?
 function UsageGroup({ title, items }: { title: string; items: string[] }) {
   return (
     <div>
-      <h4 className={styles.groupTitle}>{title}</h4>
+      <h4 className={styles.blockTitle}>{title}</h4>
       <ul className={styles.list}>
         {items.map(item => (
           <li key={item}>{item}</li>
@@ -306,22 +302,14 @@ export function ProductDetailsAccordion({ selectedModel }: { selectedModel: Mode
             </p>
           </Section>
 
-          <Section value='care' title='Vedlikehold'>
+          <Section value='care' title='Vaskeanvisning'>
+            <p className={styles.blockTitle}>{content.care.noteTitle}</p>
             <ul className={styles.list}>
               {content.care.bullets.map(bullet => (
                 <li key={bullet}>{bullet}</li>
               ))}
             </ul>
-
-            <div className='flex gap-3 rounded-2xl border-l-4 border-primary-button bg-havdyp p-4 text-cloud-dancer'>
-              <Info className='shrink-0 text-primary-button' />
-              <div>
-                <span className='mb-1 block font-semibold text-cloud-dancer'>{content.care.noteTitle}</span>
-                <p className='text-sm font-utekos-text leading-[1.45] text-cloud-dancer/80'>
-                  {content.care.note}
-                </p>
-              </div>
-            </div>
+            <p className={styles.callout}>{content.care.note}</p>
           </Section>
         </Accordion>
       </div>
