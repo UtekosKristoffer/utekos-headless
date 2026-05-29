@@ -13,35 +13,28 @@ export function MotionContentView() {
         className='relative mx-auto mb-5 gap-1.5 border border-cloud-dancer/25 px-3 py-2 text-xs leading-none tracking-tight shadow-[0_16px_32px_-26px_color-mix(in_oklab,var(--ancient-water)_64%,transparent)] sm:gap-2 sm:px-4 sm:py-2.5 sm:text-sm'
       >
         <Award className='size-4 shrink-0 text-maritime-darkest sm:size-5' />
-        <span className='whitespace-nowrap px-1 font-medium sm:px-2'>
-          Funksjonell varme siden 2020
-        </span>
+        <small className='whitespace-nowrap px-1 font-medium sm:px-2'>Funksjonell varme siden 2020</small>
       </BrandBadge>
 
-      <h1 className='mx-auto mt-5 mb-0 max-w-4xl text-balance font-bold leading-[0.88] tracking-tight text-cloud-dancer lg:max-w-none'>
-        <span
-          className='relative inline-block overflow-hidden px-2'
-          aria-label='Utekos'
-        >
+      <header className='mx-auto mt-5 mb-0 max-w-4xl text-balance font-bold leading-[0.88] tracking-tight text-cloud-dancer lg:max-w-none'>
+        <h1 className='relative inline-block overflow-hidden px-2' aria-label='Utekos'>
           <UtekosWordmark className='h-auto w-[76vw] max-w-[21rem] sm:w-[52vw] sm:max-w-[28rem] lg:w-[29rem] lg:max-w-none xl:w-[34rem]' />
-        </span>
+        </h1>
 
-        <span className='mt-4 block text-[3.2rem] leading-[0.9] tracking-tight text-cloud-dancer tablet:whitespace-nowrap tablet:text-[clamp(3rem,8.5vw,5.75rem)] sm:mt-5 lg:text-[5.75rem] xl:text-[6.75rem] 2xl:text-[7.75rem]'>
+        <h2 className='mt-4 block text-[3.2rem] leading-[0.9] tracking-tight text-cloud-dancer tablet:whitespace-nowrap tablet:text-[clamp(3rem,8.5vw,5.75rem)] sm:mt-5 lg:text-[5.75rem] xl:text-[6.75rem] 2xl:text-[7.75rem]'>
           Skreddersy varmen
-        </span>
-      </h1>
+        </h2>
+      </header>
 
-      <div className='mx-auto mt-5 max-w-[34rem] sm:mt-7 sm:max-w-2xl lg:max-w-3xl'>
-        <p
+      <h3 className='mx-auto mt-5 max-w-[34rem] sm:mt-7 sm:max-w-2xl lg:max-w-3xl'>
+        <span
           data-nosnippet='false'
           className='text-balance text-base leading-[1.45] tracking-tight text-cloud-dancer sm:text-lg md:text-xl lg:text-2xl'
         >
           Kompromissløs komfort og overlegen allsidighet.{' '}
-          <span className='font-semibold text-dusted-peri tracking-normal'>
-            Juster, form og nyt.
-          </span>
-        </p>
-      </div>
+          <span className='font-semibold text-dusted-peri tracking-normal'>Juster, form og nyt.</span>
+        </span>
+      </h3>
 
       <div data-nosnippet className='mt-7 flex justify-center sm:mt-9'>
         <BrandBadge
@@ -55,7 +48,10 @@ export function MotionContentView() {
             aria-label='Gå til skreddersy varmen'
             data-track='ReadMoreHeroClick'
           >
-            <span>Se mer</span>
+            <label htmlFor='read-more-hero'>
+              Se mer
+              <input type='button' />
+            </label>
             <ArrowRight className='size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none' />
           </Link>
         </BrandBadge>

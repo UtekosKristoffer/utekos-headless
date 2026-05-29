@@ -50,7 +50,7 @@ export async function NbccProductSection() {
                 key={product.title}
                 data-nbcc-reveal
                 data-nbcc-animate
-                className='group overflow-hidden bg-maritime-blue/80 rounded-lg border-cloud-dancer/60 py-0 shadow-none'
+                className='group overflow-hidden bg-havdyp/80 rounded-lg border-cloud-dancer/60 py-0 shadow-none'
               >
                 <CardHeader className='p-0'>
                   <NbccProductCarousel images={product.images} />
@@ -90,7 +90,7 @@ export async function NbccProductSection() {
             }}
             containerClassName='flex w-full max-w-3xl flex-col items-center'
             panelClassName='w-full'
-            buttonClassName='h-12 w-full justify-center gap-2 rounded-md border-cloud-dancer bg-maritime-blue px-6 text-cloud-dancer hover:bg-maritime-blue/90 sm:w-auto'
+            buttonClassName='h-12 w-full justify-center gap-2 rounded-md border-cloud-dancer bg-havdyp px-6 text-cloud-dancer hover:bg-havdyp/90 sm:w-auto'
           />
         </div>
       </div>

@@ -8,14 +8,10 @@ export function TableCellContent({ value }: { value: string | boolean }) {
           <Check className='size-4' aria-hidden='true' />
           <span className='sr-only'>Ja</span>
         </span>
-      : <span className='font-utekos-text text-sm text-maritime-blue/70'>
-          Nei
-        </span>
+      : <span className='font-utekos-text text-sm text-havdyp/70'>Nei</span>
   }
 
   return (
-    <span className='font-utekos-text text-sm leading-[1.45] tracking-tight text-maritime-blue/82'>
-      {value}
-    </span>
+    <span className='font-utekos-text text-sm leading-[1.45] tracking-tight text-havdyp/82'>{value}</span>
   )
 }

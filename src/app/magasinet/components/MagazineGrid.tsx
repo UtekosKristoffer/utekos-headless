@@ -38,7 +38,7 @@ function FeaturedArticleCard({ article }: { article: MagazineArticle }) {
             <p className='mt-5 font-utekos-text text-lg leading-[1.45] tracking-tight text-maritime-darkest/90'>
               {article.excerpt}
             </p>
-            <span className='mt-8 inline-flex items-center gap-2 font-utekos-text text-base font-semibold leading-[1.4] tracking-tight text-maritime-blue'>
+            <span className='mt-8 inline-flex items-center gap-2 font-utekos-text text-base font-semibold leading-[1.4] tracking-tight text-havdyp'>
               Les hele saken
               <ArrowRight className='size-4 transition-transform group-hover:translate-x-1' aria-hidden />
             </span>
@@ -69,7 +69,7 @@ function MagazineArticleCard({ article }: { article: MagazineArticle }) {
           <div className='mb-4'>
             <MagazineCategoryBadge category={article.category} />
           </div>
-          <h3 className='font-google-sans text-2xl font-bold leading-[0.98] tracking-tight text-maritime-darkest transition-colors group-hover:text-maritime-blue'>
+          <h3 className='font-google-sans text-2xl font-bold leading-[0.98] tracking-tight text-maritime-darkest transition-colors group-hover:text-havdyp'>
             <MagazineInlineTitle text={article.title} />
           </h3>
           <p className='mt-3 font-utekos-text text-sm leading-[1.5] tracking-tight text-maritime-darkest/72'>
@@ -105,7 +105,7 @@ export function MagazineGrid({ articles }: MagazineGridProps) {
       >
         <div className='container mx-auto px-4'>
           <header className='mb-8 max-w-2xl'>
-            <p className='font-utekos-text text-sm font-semibold leading-[1.4] tracking-tight text-maritime-blue'>
+            <p className='font-utekos-text text-sm font-semibold leading-[1.4] tracking-tight text-havdyp'>
               Siste fra magasinet
             </p>
             <h2

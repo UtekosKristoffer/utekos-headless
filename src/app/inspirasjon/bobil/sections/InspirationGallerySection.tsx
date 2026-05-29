@@ -13,7 +13,7 @@ import { galleryImages } from '../data/galleryImages'
 
 export function InspirationGallerySection() {
   return (
-    <section className='bg-maritime-blue py-24 text-cloud-dancer'>
+    <section className='bg-havdyp py-24 text-cloud-dancer'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl md:max-w-4xl text-center'>
           <h2 className='text-cloud-dancer inline-flex items-baseline justify-center gap-x-[0.18em] whitespace-nowrap'>
@@ -61,11 +61,11 @@ export function InspirationGallerySection() {
           </CarouselContent>
           <CarouselPrevious
             aria-label='Forrige bilde'
-            className='left-2 hidden border-cloud-dancer/20 bg-maritime-darkest/90 text-cloud-dancer hover:bg-maritime-darkest focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-blue md:inline-flex'
+            className='left-2 hidden border-cloud-dancer/20 bg-maritime-darkest/90 text-cloud-dancer hover:bg-maritime-darkest focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-havdyp md:inline-flex'
           />
           <CarouselNext
             aria-label='Neste bilde'
-            className='right-2 hidden border-cloud-dancer/20 bg-maritime-darkest/90 text-cloud-dancer hover:bg-maritime-darkest focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-blue md:inline-flex'
+            className='right-2 hidden border-cloud-dancer/20 bg-maritime-darkest/90 text-cloud-dancer hover:bg-maritime-darkest focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-havdyp md:inline-flex'
           />
         </Carousel>
       </div>

@@ -35,7 +35,7 @@ export const benefitsData: Benefit[] = [
 
 export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
   return (
-    <section className='bg-maritime-blue py-24 text-cloud-dancer'>
+    <section className='bg-havdyp py-24 text-cloud-dancer'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-3xl lg:max-w-4xl text-center'>
           <h2 className='text-cloud-dancer '>Designet for hyttelivet</h2>
@@ -57,7 +57,9 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
                 <benefit.icon className={`size-8 ${benefit.iconColor}`} aria-hidden />
               </div>
               <h3 className='mb-2 text-lg leading-[1] font-semibold tracking-[-0.01em]'>{benefit.title}</h3>
-              <p className='text-sm leading-[1.45] tracking-[-0.01em] text-cloud-dancer'>{benefit.description}</p>
+              <p className='text-sm leading-[1.45] tracking-[-0.01em] text-cloud-dancer'>
+                {benefit.description}
+              </p>
             </AnimatedBlock>
           ))}
         </div>

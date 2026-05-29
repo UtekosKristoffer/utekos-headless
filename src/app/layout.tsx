@@ -20,8 +20,7 @@ import { Google_Sans as GoogleSans } from 'next/font/google'
 // If loading a variable font, you don't need to specify the font weight
 const googleSans = GoogleSans({
   subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-google-sans'
+  display: 'swap'
 })
 
 const GOOGLE_TAG_MANAGER_ID = process.env.NEXT_GOOGLE_GTM_ID || 'GTM-5TWMJQFP'
@@ -116,7 +115,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang='no' className={`${googleSans.variable} ${utekosText.variable}`}>
+    <html lang='no' className={`${googleSans.className} ${utekosText.variable}`}>
       <body className='bg-background text-cloud-dancer antialiased'>
         <WebVitalsReporter />
 

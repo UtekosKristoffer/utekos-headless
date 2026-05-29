@@ -73,7 +73,7 @@ export function PromiseSection() {
               </CarouselContent>
             </Carousel>
           </div>
-          <div className='relative overflow-hidden rounded-xl border border-cloud-dancer bg-maritime-blue p-8 lg:p-12'>
+          <div className='relative overflow-hidden rounded-xl border border-cloud-dancer bg-havdyp p-8 lg:p-12'>
             <div
               className='absolute inset-0 z-0 opacity-20'
               style={{

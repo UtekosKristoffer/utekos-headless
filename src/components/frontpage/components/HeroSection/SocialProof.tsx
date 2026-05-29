@@ -4,22 +4,19 @@ import { PaymentIcons } from './PaymentIcons'
 
 export function SocialProof() {
   return (
-    <section
-      className='mx-auto mt-6 max-w-5xl sm:mt-10'
-      aria-label='Fordeler med å handle hos oss'
-    >
-      <div className='grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3 md:gap-5'>
+    <details className='mx-auto mt-6 max-w-5xl sm:mt-10' aria-label='Fordeler med å handle hos oss'>
+      <summary className='grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3 md:gap-5'>
         <SocialProofCard
           title='Rask levering'
           Icon={Truck}
-          cardClass='border-maritime-blue/12 bg-ancient-water text-maritime-blue transition-colors hover:bg-[var(--country-air)]'
-          titleClass='text-maritime-blue'
+          cardClass='border-havdyp/12 bg-ancient-water text-havdyp transition-colors hover:bg-[var(--country-air)]'
+          titleClass='text-havdyp'
           shineClass='via-cloud-dancer/40'
-          hoverBorderClass='hover:border-maritime-blue/30'
-          iconWrapperClass='bg-cloud-dancer/65 shadow-[0_0_18px_color-mix(in_oklch,var(--maritime-blue)_15%,transparent)]'
-          iconColorClass='text-maritime-blue'
+          hoverBorderClass='hover:border-havdyp/30'
+          iconWrapperClass='bg-cloud-dancer/65 shadow-[0_0_18px_color-mix(in_oklch,var(--havdyp)_15%,transparent)]'
+          iconColorClass='text-havdyp'
         >
-          <p className='mt-1 text-sm font-medium leading-[1.45] tracking-[-0.01em] text-maritime-blue/78'>
+          <p className='mt-1 text-sm font-medium leading-[1.45] tracking-[-0.01em] text-havdyp/78'>
             2-5 dager
           </p>
         </SocialProofCard>
@@ -50,7 +47,7 @@ export function SocialProof() {
         >
           <PaymentIcons />
         </SocialProofCard>
-      </div>
-    </section>
+      </summary>
+    </details>
   )
 }

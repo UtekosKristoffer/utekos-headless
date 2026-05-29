@@ -24,8 +24,7 @@ const seasons = [
     iconColor: 'text-dusted-peri',
     glowColor: 'var(--soft-warm)',
     title: 'Forleng sommerkveldene',
-    description:
-      'Hold varmen når samtalen varer lenge. Utekos gir myk komfort på sene sommerkvelder.'
+    description: 'Hold varmen når samtalen varer lenge. Utekos gir myk komfort på sene sommerkvelder.'
   },
   {
     value: 'autumn',
@@ -44,8 +43,7 @@ const seasons = [
     iconColor: 'text-ancient-water',
     glowColor: 'var(--ancient-water)',
     title: 'Vintervarme etter skituren',
-    description:
-      'Få varme raskt etter skituren eller når du kommer fram til en kald hytte og fyrer i peisen.'
+    description: 'Få varme raskt etter skituren eller når du kommer fram til en kald hytte og fyrer i peisen.'
   }
 ]
 
@@ -53,11 +51,7 @@ export function HytteSeasonsTabs() {
   const [activeTab, setActiveTab] = useState('autumn')
 
   return (
-    <Tabs
-      defaultValue='autumn'
-      className='mx-auto max-w-4xl'
-      onValueChange={setActiveTab}
-    >
+    <Tabs defaultValue='autumn' className='mx-auto max-w-4xl' onValueChange={setActiveTab}>
       <TabsList className='grid h-auto w-full grid-cols-4 gap-2 rounded-xl border border-maritime-darkest/12 bg-cloud-dancer p-1 shadow-[0_18px_46px_-36px_rgba(14,18,35,0.55)]'>
         {seasons.map(season => {
           const Icon = season.icon
@@ -67,14 +61,13 @@ export function HytteSeasonsTabs() {
             <TabsTrigger
               key={season.value}
               value={season.value}
-              className='hytte-seasons-tab-trigger relative min-h-12 overflow-hidden rounded-lg border border-maritime-darkest/12 px-3 transition-all duration-300 data-[state=active]:border-maritime-blue/24'
+              className='hytte-seasons-tab-trigger relative min-h-12 overflow-hidden rounded-lg border border-maritime-darkest/12 px-3 transition-all duration-300 data-[state=active]:border-havdyp/24'
               style={{
                 background:
-                  isActive ?
-                    'var(--maritime-blue)'
-                  : 'color-mix(in oklch, var(--cloud-dancer) 82%, var(--overcast))',
-                color:
-                  isActive ? 'var(--cloud-dancer)' : 'var(--maritime-darkest)'
+                  isActive ? 'var(--havdyp)' : (
+                    'color-mix(in oklch, var(--cloud-dancer) 82%, var(--overcast))'
+                  ),
+                color: isActive ? 'var(--cloud-dancer)' : 'var(--maritime-darkest)'
               }}
             >
               {isActive && (
@@ -136,7 +129,7 @@ export function HytteSeasonsTabs() {
                       {season.title}
                     </h3>
                   </div>
-                  <p className='text-lg leading-[1.45] tracking-[-0.01em] text-maritime-blue'>
+                  <p className='text-lg leading-[1.45] tracking-[-0.01em] text-havdyp'>
                     {season.description}
                   </p>
                 </CardContent>

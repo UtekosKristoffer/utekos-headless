@@ -4,18 +4,18 @@ import { ComparisonTable } from './ComparisonTable'
 
 export function ComparisonSection() {
   return (
-    <section id='sammenligning' className='overflow-hidden bg-overcast py-20 text-maritime-darkest sm:py-28'>
+    <section id='sammenligning' className='overflow-hidden bg-havdyp py-20 text-cloud-dancer sm:py-28'>
       <div className='mx-auto max-w-7xl px-[6vw]'>
         <div className='mb-12 grid gap-8 text-center'>
           <div>
             <BrandBadge
               label='Detaljert sammenligning'
-              backgroundColor='var(--cloud-dancer)'
-              className='mb-6 px-6 py-3 text-sm'
+              backgroundColor='var(--mountain-view)'
+              className='mb-6 px-6 text-cloud-dancer py-3 text-sm'
             />
-            <h2 className='text-maritime-blue'>Sammenlign egenskapene</h2>
+            <h2 className='text-cloud-dancer'>Sammenlign egenskapene</h2>
           </div>
-          <p className='max-w-2xl mx-auto text-maritime-blue/82 utekos-section-lead'>
+          <p className='max-w-2xl mx-auto text-cloud-dancer utekos-section-lead'>
             Tabellen er laget for å gi deg en detaljert sammenligning av de tre Utekos-modellene. Les vannrett
             for én modell, eller loddrett for å se hvilken egenskap som betyr mest for deg.
           </p>

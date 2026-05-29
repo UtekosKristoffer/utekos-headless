@@ -46,7 +46,7 @@ export const popularAreasData: Destination[] = [
 
 export function PopularCabinAreasGrid({ destinations }: { destinations: Destination[] }) {
   return (
-    <section className='bg-maritime-blue py-24 text-cloud-dancer'>
+    <section className='bg-havdyp py-24 text-cloud-dancer'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-3xl lg:max-w-4xl text-center'>
           <h2 className='text-cloud-dancer'>
@@ -104,7 +104,12 @@ export function PopularCabinAreasGrid({ destinations }: { destinations: Destinat
                   >
                     {destination.season}
                   </p>
-                  <p className={cn('font-utekos-text text-base leading-[1.45] tracking-tight', destination.textColor)}>
+                  <p
+                    className={cn(
+                      'font-utekos-text text-base leading-[1.45] tracking-tight',
+                      destination.textColor
+                    )}
+                  >
                     {destination.highlight}
                   </p>
                 </CardContent>

@@ -8,18 +8,10 @@ export interface ProductHeaderProps {
   productSubtitle: string
 }
 
-export default function ProductHeader({
-  productHandle,
-  productTitle,
-  productSubtitle
-}: ProductHeaderProps) {
+export default function ProductHeader({ productHandle, productTitle, productSubtitle }: ProductHeaderProps) {
   return (
-    <div className='mb-8 text-left'>
-      <AnimatedBlock
-        className='will-animate-fade-in-up'
-        delay='0.06s'
-        threshold={0.2}
-      >
+    <div className='text-left md:-mt-4'>
+      <AnimatedBlock className='will-animate-fade-in-up' delay='0.06s' threshold={0.2}>
         {productHandle === 'utekos-special-edition' && (
           <BrandBadge
             backgroundColor='var(--dusted-peri)'
@@ -31,16 +23,11 @@ export default function ProductHeader({
           </BrandBadge>
         )}
 
-        <h1 className='text-4xl md:text-5xl lg:text-6xl font-google-sans font-bold leading-[1.45] tracking-tight text-maritime-blue'>
-          {productTitle}
-        </h1>
+        <h1 className='text-4xl font-google-sans font-bold tracking-tight text-havdyp'>{productTitle}</h1>
 
-        {typeof productSubtitle === 'string'
-          && productSubtitle.trim() !== '' && (
-            <p className='mt-4 max-w-2xl text-lg font-light leading-[1.45] text-maritime-blue/76'>
-              {productSubtitle}
-            </p>
-          )}
+        {typeof productSubtitle === 'string' && productSubtitle.trim() !== '' && (
+          <p className='mt-4 max-w-2xl text-lg font-light leading-[1.45] text-havdyp/76'>{productSubtitle}</p>
+        )}
       </AnimatedBlock>
     </div>
   )

@@ -15,7 +15,7 @@ const useCaseSurfaces = {
   morning: {
     borderColor: 'color-mix(in oklch, var(--primary-button) 28%, transparent)',
     background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--maritime-darkest) 84%, var(--primary-button) 16%) 0%, color-mix(in oklch, var(--maritime-blue) 76%, var(--maritime-darkest) 24%) 100%)',
+      'linear-gradient(145deg, color-mix(in oklch, var(--maritime-darkest) 84%, var(--primary-button) 16%) 0%, color-mix(in oklch, var(--havdyp) 76%, var(--maritime-darkest) 24%) 100%)',
     iconBackground: 'color-mix(in oklch, var(--primary-button) 18%, var(--maritime-darkest) 82%)',
     iconBorder: 'color-mix(in oklch, var(--primary-button) 34%, transparent)',
     glow: 'radial-gradient(120% 120% at 50% 0%, transparent 34%, color-mix(in oklch, var(--primary-button) 40%, transparent) 100%)'
@@ -23,7 +23,7 @@ const useCaseSurfaces = {
   evening: {
     borderColor: 'color-mix(in oklch, var(--dusted-peri) 34%, transparent)',
     background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--maritime-darkest) 82%, var(--dusted-peri) 18%) 0%, color-mix(in oklch, var(--maritime-blue) 78%, var(--maritime-darkest) 22%) 100%)',
+      'linear-gradient(145deg, color-mix(in oklch, var(--maritime-darkest) 82%, var(--dusted-peri) 18%) 0%, color-mix(in oklch, var(--havdyp) 78%, var(--maritime-darkest) 22%) 100%)',
     iconBackground: 'color-mix(in oklch, var(--dusted-peri) 18%, var(--maritime-darkest) 82%)',
     iconBorder: 'color-mix(in oklch, var(--dusted-peri) 36%, transparent)',
     glow: 'radial-gradient(120% 120% at 50% 0%, transparent 34%, color-mix(in oklch, var(--dusted-peri) 42%, transparent) 100%)'
@@ -85,7 +85,7 @@ export const useCasesData: UseCase[] = [
 
 export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
   return (
-    <section id='bruksomrader' className='bg-maritime-blue py-24'>
+    <section id='bruksomrader' className='bg-havdyp py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-3xl lg:max-w-4xl text-center'>
           <h2 className='text-cloud-dancer'>Hjemmekos, bare ute</h2>

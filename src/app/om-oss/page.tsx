@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <section>
+    <article>
       <AboutUsHeroSection />
       <GrunderSection />
       <PhilosophiesSection />
@@ -44,6 +44,6 @@ export default function AboutPage() {
       <FindUsSection />
       <IntersportSection />
       <CTASection />
-    </section>
+    </article>
   )
 }

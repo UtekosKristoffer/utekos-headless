@@ -2,13 +2,7 @@
 
 import { getProductAction } from '@/api/lib/products/actions'
 import { AddToCart } from '@/components/cart/AddToCart'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 
 import { useVariantState } from '@/hooks/useVariantState'
 import type { ShopifyProduct } from 'types/product'
@@ -18,6 +12,7 @@ import { toast } from 'sonner'
 import { VariantSelectors } from './VariantSelectors'
 import { Price } from '../jsx/Price'
 import { QuickViewModalSkeleton } from '../skeletons/QuickViewModalSkeleton'
+import { getProductWithoutSmallSize } from './getProductWithoutSmallSize'
 
 interface QuickViewModalProps {
   productHandle: string
@@ -25,23 +20,14 @@ interface QuickViewModalProps {
   onOpenChange: (isOpen: boolean) => void
 }
 
-export function QuickViewModal({
-  productHandle,
-  isOpen,
-  onOpenChange
-}: QuickViewModalProps) {
+export function QuickViewModal({ productHandle, isOpen, onOpenChange }: QuickViewModalProps) {
   const [productData, setProductData] = useState<ShopifyProduct | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
-  const { variantState, updateVariant } = useVariantState(
-    productData ?? undefined,
-    false
-  )
+  const { variantState, updateVariant } = useVariantState(productData ?? undefined, false)
 
   const handleFetchError = useEffectEvent(() => {
-    toast.error(
-      'Beklager, vi kunne ikke laste produktet. Vennligst prøv igjen.'
-    )
+    toast.error('Beklager, vi kunne ikke laste produktet. Vennligst prøv igjen.')
     onOpenChange(false)
   })
 
@@ -51,8 +37,8 @@ export function QuickViewModal({
         setIsLoading(true)
         try {
           const mainProduct = await getProductAction(productHandle)
-          setProductData(mainProduct)
-        } catch (error) {
+          setProductData(mainProduct ? getProductWithoutSmallSize(mainProduct) : null)
+        } catch {
           handleFetchError()
         } finally {
           setIsLoading(false)
@@ -60,43 +46,38 @@ export function QuickViewModal({
       }
     }
     fetchMainProduct()
-  }, [isOpen, productHandle, productData, handleFetchError])
+  }, [isOpen, productHandle, productData])
 
-  const selectedVariant =
-    variantState.status === 'selected' ? variantState.variant : null
+  const selectedVariant = variantState.status === 'selected' ? variantState.variant : null
   const featuredImage = selectedVariant?.image ?? productData?.featuredImage
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className='max-h-[90vh] overflow-y-auto sm:max-w-5xl'>
+      <DialogContent className='max-h-[70vh] bg-havdyp overflow-y-auto sm:max-w-4xl'>
         {isLoading || !productData || !selectedVariant ?
           <div className='p-6'>
-            <DialogTitle className='sr-only'>
-              Laster produktinformasjon
-            </DialogTitle>
+            <DialogTitle className='sr-only'>Laster produktinformasjon</DialogTitle>
             <DialogDescription className='sr-only'>
               Vinduet viser detaljer om valgt produkt.
             </DialogDescription>
             <QuickViewModalSkeleton />
           </div>
         : <>
-            <DialogHeader className='space-y-3 pb-6'>
-              <DialogTitle className='text-3xl font-bold tracking-tight'>
-                {productData.title}
-              </DialogTitle>
+            <DialogHeader className='space-y-3 py-2'>
+              <DialogTitle className='text-3xl font-bold tracking-tight'>{productData.title}</DialogTitle>
               {productData.description && (
                 <DialogDescription asChild>
-                  <p className='text-base text-foreground/70 leading-relaxed max-w-2xl'>
+                  <p className='text-base text-cloud-dancer leading-relaxed max-w-2xl'>
                     {productData.description}
                   </p>
                 </DialogDescription>
               )}
             </DialogHeader>
 
-            <div className='grid grid-cols-1 gap-10 py-6 lg:grid-cols-2 lg:gap-12'>
+            <div className='grid grid-cols-1 gap-10 pb-2 lg:grid-cols-2 lg:gap-12'>
               <div className='relative'>
                 <div className='sticky top-6'>
-                  <div className='relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-neutral-100 shadow-lg'>
+                  <div className='relative aspect-[1/1] w-full overflow-hidden rounded-2xl bg-havdyp  shadow-lg'>
                     {featuredImage && (
                       <Image
                         src={featuredImage.url}
@@ -113,9 +94,7 @@ export function QuickViewModal({
 
               <div className='flex flex-col gap-8'>
                 <div className='space-y-2'>
-                  <p className='text-sm font-medium text-foreground/60 uppercase tracking-wide'>
-                    Pris
-                  </p>
+                  <p className='text-sm font-utekos-text text-cloud-dancer uppercase tracking-wide'>Pris</p>
                   <div className='text-3xl font-bold tracking-tight'>
                     <Price
                       amount={selectedVariant.price.amount}
@@ -133,10 +112,7 @@ export function QuickViewModal({
                 </div>
 
                 <div className='mt-auto space-y-4'>
-                  <AddToCart
-                    product={productData}
-                    selectedVariant={selectedVariant}
-                  />
+                  <AddToCart product={productData} selectedVariant={selectedVariant} />
                 </div>
               </div>
             </div>

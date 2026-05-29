@@ -26,7 +26,7 @@ export function ProductCareFaq() {
               </span>
               <span
                 aria-hidden='true'
-                className='mt-1 inline-block size-5 shrink-0 text-maritime-blue transition-transform duration-300 motion-reduce:transition-none'
+                className='mt-1 inline-block size-5 shrink-0 text-havdyp transition-transform duration-300 motion-reduce:transition-none'
               >
                 <svg viewBox='0 0 20 20' fill='none' className='size-full'>
                   <path d='M10 4v12M4 10h12' stroke='currentColor' strokeWidth='1.6' strokeLinecap='round' />

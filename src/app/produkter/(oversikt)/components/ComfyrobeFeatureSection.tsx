@@ -10,28 +10,25 @@ import { comfyrobeFeatures } from '@/app/produkter/(oversikt)/utils/comfyrobeFea
 
 const featureSurfaceStyles = {
   weather: {
-    background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--maritime-darkest) 88%, var(--ancient-water) 12%) 0%, color-mix(in oklch, var(--maritime-darkest) 94%, var(--maritime-blue) 6%) 100%)',
-    border: 'color-mix(in oklch, var(--ancient-water) 36%, var(--maritime-darkest) 64%)',
-    iconBackground: 'color-mix(in oklch, var(--ancient-water) 18%, var(--maritime-darkest) 82%)',
-    iconBorder: 'color-mix(in oklch, var(--ancient-water) 42%, transparent)',
-    iconColor: 'var(--ancient-water)'
+    background: 'var(--fjellnatt)',
+    border: 'var(--fjellnatt)',
+    iconBackground: 'var(--cloud-dancer)',
+    iconBorder: 'var(--maritime-darkest)',
+    iconColor: 'var(--fjellnatt)'
   },
   warmth: {
-    background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--demitasse) 58%, var(--maritime-darkest) 42%) 0%, color-mix(in oklch, var(--chocolate-plum) 42%, var(--maritime-darkest) 58%) 100%)',
-    border: 'color-mix(in oklch, var(--bleached-mauve) 38%, var(--demitasse) 62%)',
-    iconBackground: 'color-mix(in oklch, var(--bleached-mauve) 18%, var(--maritime-darkest) 82%)',
-    iconBorder: 'color-mix(in oklch, var(--bleached-mauve) 44%, transparent)',
-    iconColor: 'var(--bleached-mauve)'
+    background: 'var(--fjellnatt)',
+    border: 'var(--fjellnatt)',
+    iconBackground: 'var(--cloud-dancer)',
+    iconBorder: 'var(--maritime-darkest)',
+    iconColor: 'var(--fjellnatt)'
   },
   freedom: {
-    background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--mountain-view) 48%, var(--maritime-darkest) 52%) 0%, color-mix(in oklch, var(--maritime-darkest) 90%, var(--mountain-view) 10%) 100%)',
-    border: 'color-mix(in oklch, var(--primary-button) 34%, var(--mountain-view) 66%)',
-    iconBackground: 'color-mix(in oklch, var(--primary-button) 16%, var(--maritime-darkest) 84%)',
-    iconBorder: 'color-mix(in oklch, var(--primary-button) 42%, transparent)',
-    iconColor: 'var(--primary-button)'
+    background: 'var(--fjellnatt)',
+    border: 'var(--fjellnatt)',
+    iconBackground: 'var(--cloud-dancer)',
+    iconBorder: 'var(--maritime-darkest)',
+    iconColor: 'var(--fjellnatt)'
   }
 } as const
 
@@ -45,7 +42,7 @@ export function ComfyrobeFeatureSection() {
               className='absolute -left-24 top-0 size-[34rem] rounded-full blur-3xl'
               style={{
                 background:
-                  'radial-gradient(circle, color-mix(in oklch, var(--demitasse) 42%, transparent) 0%, transparent 70%)'
+                  'radial-gradient(circle, color-mix(in oklch, var(--fjellnatt) 42%, transparent) 0%, transparent 70%)'
               }}
             />
             <div
@@ -59,7 +56,7 @@ export function ComfyrobeFeatureSection() {
               className='absolute left-1/2 top-1/2 size-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl'
               style={{
                 background:
-                  'radial-gradient(circle, color-mix(in oklch, var(--mountain-view) 28%, transparent) 0%, transparent 74%)'
+                  'radial-gradient(circle, color-mix(in oklch, var(--maritime-darkest 28%, transparent) 0%, transparent 74%)'
               }}
             />
           </div>
@@ -72,11 +69,11 @@ export function ComfyrobeFeatureSection() {
                 <div>
                   <AnimatedBlock className='will-animate-fade-in-up'>
                     <BrandBadge
-                      backgroundColor='var(--bleached-mauve)'
-                      textColor='var(--maritime-darkest)'
+                      backgroundColor='var(--fjellnatt)'
+                      textColor='var(--cloud-dancer)'
                       className='mb-5 gap-2 border border-cloud-dancer/18 px-4 py-2 font-utekos-text text-sm font-medium tracking-tight shadow-[0_16px_34px_-28px_color-mix(in_oklch,var(--bleached-mauve)_68%,transparent)]'
                     >
-                      <Wind className='size-4 text-maritime-darkest' aria-hidden='true' />
+                      <Wind className='size-4 text-cloud-dancer' aria-hidden='true' />
                       <span>Comfyrobe™</span>
                     </BrandBadge>
                   </AnimatedBlock>

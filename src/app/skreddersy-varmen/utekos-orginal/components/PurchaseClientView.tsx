@@ -28,12 +28,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger
-} from '@/components/ui/accordion'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import type { ModelKey } from 'types/product/ProductTypes'
@@ -95,8 +90,8 @@ export function PurchaseClientView({
           className='absolute left-4 top-4 z-20 flex animate-in items-center gap-1.5 rounded-sm border border-maritime-darkest/10 bg-cloud-dancer/90 px-2.5 py-1 shadow-sm backdrop-blur-md fade-in slide-in-from-left-2 duration-500'
         >
           <span className='relative flex h-1.5 w-1.5'>
-            <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-ember opacity-60' />
-            <span className='relative inline-flex h-1.5 w-1.5 rounded-full bg-ember' />
+            <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-slice *:opacity-60' />
+            <span className='relative inline-flex h-1.5 w-1.5 rounded-full bg-orange-slice' />
           </span>
           <span className='text-[10px] font-bold uppercase tracking-wider text-maritime-darkest'>
             {currentConfig.badge}
@@ -110,10 +105,7 @@ export function PurchaseClientView({
         >
           <CarouselContent className='ml-0'>
             {currentConfig.images.map((src, i) => (
-              <CarouselItem
-                key={src}
-                className='relative h-[50vh] pl-0 lg:h-[70vh]'
-              >
+              <CarouselItem key={src} className='relative h-[50vh] pl-0 lg:h-[70vh]'>
                 <div className='relative h-full w-full overflow-hidden rounded-3xl bg-gradient-to-b from-white/70 to-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-maritime-darkest/10'>
                   <Image
                     src={src}
@@ -131,11 +123,11 @@ export function PurchaseClientView({
             <>
               <CarouselPrevious
                 aria-label='Forrige bilde'
-                className='left-2 size-10 border-maritime-darkest/15 bg-cloud-dancer/90 text-maritime-darkest shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-ember md:left-4 md:size-11'
+                className='left-2 size-10 border-maritime-darkest/15 bg-cloud-dancer/90 text-maritime-darkest shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-orange-slice *:md:left-4 md:size-11'
               />
               <CarouselNext
                 aria-label='Neste bilde'
-                className='right-2 size-10 border-maritime-darkest/15 bg-cloud-dancer/90 text-maritime-darkest shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-ember md:right-4 md:size-11'
+                className='right-2 size-10 border-maritime-darkest/15 bg-cloud-dancer/90 text-maritime-darkest shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-orange-slice *:md:right-4 md:size-11'
               />
             </>
           )}
@@ -150,11 +142,7 @@ export function PurchaseClientView({
 
       <div className='flex w-full flex-col bg-overcast lg:h-screen lg:w-1/2'>
         <div className='flex-1 p-6 md:p-12 lg:overflow-y-auto lg:p-24'>
-          <AnimatedBlock
-            className='mb-12 will-animate-fade-in-up'
-            delay='0s'
-            threshold={0.15}
-          >
+          <AnimatedBlock className='mb-12 will-animate-fade-in-up' delay='0s' threshold={0.15}>
             <Tabs
               value={selectedModel}
               onValueChange={v => setSelectedModel(v as ModelKey)}
@@ -178,29 +166,15 @@ export function PurchaseClientView({
           </AnimatedBlock>
 
           <div key={`hero-${selectedModel}`} className='mb-12'>
-            <AnimatedBlock
-              className='will-animate-fade-in-up'
-              delay='0.05s'
-              threshold={0.15}
-            >
+            <AnimatedBlock className='will-animate-fade-in-up' delay='0.05s' threshold={0.15}>
               <h2 className='mb-4 font-google-sans text-4xl font-semibold leading-[1.1] tracking-tight text-maritime-darkest lg:text-7xl'>
                 {currentConfig.title}
               </h2>
             </AnimatedBlock>
-            <AnimatedBlock
-              className='will-animate-fade-in-up'
-              delay='0.1s'
-              threshold={0.15}
-            >
-              <p className='mb-8 text-xl font-light text-maritime-darkest'>
-                {currentConfig.subtitle}
-              </p>
+            <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s' threshold={0.15}>
+              <p className='mb-8 text-xl font-light text-maritime-darkest'>{currentConfig.subtitle}</p>
             </AnimatedBlock>
-            <AnimatedBlock
-              className='will-animate-fade-in-up'
-              delay='0.15s'
-              threshold={0.15}
-            >
+            <AnimatedBlock className='will-animate-fade-in-up' delay='0.15s' threshold={0.15}>
               <div className='flex flex-wrap items-center gap-4 lg:gap-8'>
                 <span className='text-3xl font-medium text-maritime-darkest lg:text-4xl'>
                   {currentConfig.price},-
@@ -214,22 +188,15 @@ export function PurchaseClientView({
               </div>
             </AnimatedBlock>
             {isTechDownOffer && (
-              <AnimatedBlock
-                className='will-animate-fade-in-up'
-                delay='0.2s'
-                threshold={0.15}
-              >
+              <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s' threshold={0.15}>
                 <div className='mt-8 flex items-center gap-4 rounded-lg border-2 border-mountain-view/20 bg-gradient-to-br from-mountain-view/5 to-transparent p-4 shadow-sm'>
                   <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-mountain-view/10'>
                     <Gift className='h-5 w-5 text-mountain-view' />
                   </div>
                   <div>
-                    <h3 className='font-semibold text-mountain-view'>
-                      Vårtilbud
-                    </h3>
+                    <h3 className='font-semibold text-mountain-view'>Vårtilbud</h3>
                     <p className='text-sm text-mountain-view'>
-                      10% rabatt + Gratis Buff™ (verdi 249,-) legges til i
-                      kurven.
+                      10% rabatt + Gratis Buff™ (verdi 249,-) legges til i kurven.
                     </p>
                   </div>
                 </div>
@@ -237,64 +204,33 @@ export function PurchaseClientView({
             )}
           </div>
 
-          <div
-            key={`details-${selectedModel}`}
-            className='mb-12 space-y-8'
-            aria-label='Produktinformasjon'
-          >
-            <AnimatedBlock
-              className='will-animate-fade-in-up'
-              delay='0.05s'
-              threshold={0.15}
-            >
+          <div key={`details-${selectedModel}`} className='mb-12 space-y-8' aria-label='Produktinformasjon'>
+            <AnimatedBlock className='will-animate-fade-in-up' delay='0.05s' threshold={0.15}>
               <p className='text-base leading-[1.45] text-maritime-darkest/85 md:text-lg'>
                 {currentConfig.description}
               </p>
             </AnimatedBlock>
 
-            <AnimatedBlock
-              className='will-animate-fade-in-up'
-              delay='0.1s'
-              threshold={0.15}
-            >
+            <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s' threshold={0.15}>
               <div className='-mx-1 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-maritime-darkest/75'>
                 {currentConfig.features.map(feature => (
-                  <span
-                    key={feature}
-                    className='inline-flex items-center gap-1.5 px-1 font-medium'
-                  >
-                    <span
-                      aria-hidden
-                      className='h-1 w-1 shrink-0 rounded-full bg-ember'
-                    />
+                  <span key={feature} className='inline-flex items-center gap-1.5 px-1 font-medium'>
+                    <span aria-hidden className='h-1 w-1 shrink-0 rounded-full bg-ember' />
                     <span className='whitespace-nowrap'>{feature}</span>
                   </span>
                 ))}
               </div>
             </AnimatedBlock>
 
-            <AnimatedBlock
-              className='will-animate-fade-in-up'
-              delay='0.15s'
-              threshold={0.1}
-            >
+            <AnimatedBlock className='will-animate-fade-in-up' delay='0.15s' threshold={0.1}>
               <div className='rounded-md border border-maritime-darkest/10 bg-very-white px-4'>
                 <div className='flex items-center justify-between border-b border-maritime-darkest/10 py-3'>
                   <span className='text-[11px] font-bold uppercase tracking-wider text-maritime-darkest/60'>
-                    Hva gjør {currentConfig.title.replace('Utekos ', '')}{' '}
-                    spesiell
+                    Hva gjør {currentConfig.title.replace('Utekos ', '')} spesiell
                   </span>
-                  <Sparkles
-                    className='size-4 text-maritime-darkest'
-                    aria-hidden
-                  />
+                  <Sparkles className='size-4 text-maritime-darkest' aria-hidden />
                 </div>
-                <Accordion
-                  key={`highlights-${selectedModel}`}
-                  type='single'
-                  collapsible
-                  className='w-full'
-                >
+                <Accordion key={`highlights-${selectedModel}`} type='single' collapsible className='w-full'>
                   {currentConfig.highlights.map(highlight => (
                     <AccordionItem
                       key={highlight.title}
@@ -314,17 +250,15 @@ export function PurchaseClientView({
             </AnimatedBlock>
           </div>
 
-          <div className='mb-12 h-px w-full bg-maritime-blue' />
+          <div className='mb-12 h-px w-full bg-havdyp' />
           <div className='mb-12 space-y-12'>
             <div>
               <div className='mb-4 flex items-center justify-between'>
-                <span className='text-sm font-bold tracking-widest text-maritime-darkest'>
-                  Størrelse
-                </span>
+                <span className='text-sm font-bold tracking-widest text-maritime-darkest'>Størrelse</span>
                 <Link
                   href='/handlehjelp/storrelsesguide'
                   data-track='SizeGuideSkreddersyVarmen'
-                  className='text-sm text-maritime-darkest underline transition-colors hover:text-maritime-blue'
+                  className='text-sm text-maritime-darkest underline transition-colors hover:text-havdyp'
                 >
                   Se størrelsesguide
                 </Link>
@@ -357,9 +291,7 @@ export function PurchaseClientView({
               </div>
 
               <div className='mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs'>
-                <span className='uppercase tracking-wider text-maritime-darkest/55'>
-                  Farge
-                </span>
+                <span className='uppercase tracking-wider text-maritime-darkest/55'>Farge</span>
                 {currentConfig.colors.map((colorObj, index) => {
                   const isActive = selectedColorIndex === index
                   const isInteractive = currentConfig.colors.length > 1
@@ -367,9 +299,7 @@ export function PurchaseClientView({
                     <button
                       key={colorObj.name}
                       type='button'
-                      onClick={() =>
-                        isInteractive && setSelectedColorIndex(index)
-                      }
+                      onClick={() => isInteractive && setSelectedColorIndex(index)}
                       aria-label={`Farge ${colorObj.name}`}
                       className={cn(
                         'inline-flex items-center gap-1.5 rounded-full transition',
@@ -387,21 +317,14 @@ export function PurchaseClientView({
                         )}
                         style={{ backgroundColor: colorObj.hex }}
                       />
-                      {isActive && (
-                        <span className='font-medium text-cloud-dancer'>
-                          {colorObj.name}
-                        </span>
-                      )}
+                      {isActive && <span className='font-medium text-cloud-dancer'>{colorObj.name}</span>}
                     </button>
                   )
                 })}
               </div>
 
               {guidance && (
-                <div
-                  key={selectedSize}
-                  className='mt-6 animate-in fade-in slide-in-from-top-2 duration-300'
-                >
+                <div key={selectedSize} className='mt-6 animate-in fade-in slide-in-from-top-2 duration-300'>
                   <div className='relative overflow-hidden rounded-md bg-maritime-darkest p-5'>
                     <div className='mb-3 flex items-center gap-2 border-b border-maritime-darkest pb-3'>
                       <Ruler className='h-4 w-4 text-dusted-peri' />
@@ -437,9 +360,7 @@ export function PurchaseClientView({
               >
                 <Minus size={20} />
               </button>
-              <span className='w-14 text-center text-xl font-medium'>
-                {quantity}
-              </span>
+              <span className='w-14 text-center text-xl font-medium'>{quantity}</span>
               <button
                 onClick={() => setQuantity(quantity + 1)}
                 className='flex h-full w-16 items-center justify-center transition-colors hover:bg-maritime-darkest/5'
@@ -460,9 +381,7 @@ export function PurchaseClientView({
               {isPending ?
                 <>
                   <Loader2 className='h-6 w-6 animate-spin' />
-                  <span className='whitespace-nowrap text-lg font-bold tracking-wider'>
-                    Legger til...
-                  </span>
+                  <span className='whitespace-nowrap text-lg font-bold tracking-wider'>Legger til...</span>
                 </>
               : <>
                   <span className='whitespace-nowrap text-lg font-bold tracking-wider md:text-xl'>
@@ -483,33 +402,22 @@ export function PurchaseClientView({
               <PostNordLogo className='mt-1 h-6 w-auto md:h-8' />
             </div>
 
-            <AnimatedBlock
-              className='will-animate-fade-in-up'
-              delay='0s'
-              threshold={0.1}
-            >
+            <AnimatedBlock className='will-animate-fade-in-up' delay='0s' threshold={0.1}>
               <div className='rounded-lg border border-maritime-darkest/10 bg-very-white'>
                 <div className='grid grid-cols-1 divide-y divide-maritime-darkest/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0'>
                   <div className='flex items-start gap-3 p-4'>
                     <Truck size={22} className='mt-0.5 shrink-0 text-ember' />
                     <div className='min-w-0'>
-                      <p className='text-sm font-semibold text-maritime-darkest'>
-                        Rask levering 2–5 dager
-                      </p>
+                      <p className='text-sm font-semibold text-maritime-darkest'>Rask levering 2–5 dager</p>
                       <p className='mt-0.5 text-xs leading-snug text-maritime-darkest/65'>
                         Sendes samme dag (ikke søndag). Fri frakt fra 999,-.
                       </p>
                     </div>
                   </div>
                   <div className='flex items-start gap-3 p-4'>
-                    <RefreshCcw
-                      size={22}
-                      className='mt-0.5 shrink-0 text-ember'
-                    />
+                    <RefreshCcw size={22} className='mt-0.5 shrink-0 text-ember' />
                     <div className='min-w-0'>
-                      <p className='text-sm font-semibold text-maritime-darkest'>
-                        14 dagers åpent kjøp
-                      </p>
+                      <p className='text-sm font-semibold text-maritime-darkest'>14 dagers åpent kjøp</p>
                       <p className='mt-0.5 text-xs leading-snug text-maritime-darkest/65'>
                         Send tilbake uten spørsmål.
                       </p>
@@ -518,9 +426,7 @@ export function PurchaseClientView({
                   <div className='flex items-start gap-3 p-4'>
                     <Store size={22} className='mt-0.5 shrink-0 text-ember' />
                     <div className='min-w-0'>
-                      <p className='text-sm font-semibold text-maritime-darkest'>
-                        På lager i Bergen
-                      </p>
+                      <p className='text-sm font-semibold text-maritime-darkest'>På lager i Bergen</p>
                       <p className='mt-0.5 text-xs leading-snug text-maritime-darkest/65'>
                         Også via Intersport. Norsk garanti.
                       </p>
@@ -534,10 +440,7 @@ export function PurchaseClientView({
                     className='group inline-flex items-center gap-1.5 text-xs font-medium text-maritime-darkest/75 transition-colors hover:text-ember'
                   >
                     Alt om frakt og retur
-                    <ArrowRight
-                      size={12}
-                      className='transition-transform group-hover:translate-x-0.5'
-                    />
+                    <ArrowRight size={12} className='transition-transform group-hover:translate-x-0.5' />
                   </Link>
                 </div>
               </div>

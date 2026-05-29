@@ -65,10 +65,10 @@ export function NewProductInStoreNoticeView({
                 <Image
                   src={IntersportLogo}
                   alt='Intersport logo'
-                  width={120}
-                  height={34}
+                  width={1024}
+                  height={112}
                   className='h-auto w-full max-w-[120px]'
-                  style={{ height: 'auto' }}
+                  style={{ width: '100%', height: 'auto' }}
                   priority
                 />
               </div>
@@ -76,21 +76,19 @@ export function NewProductInStoreNoticeView({
 
             {/* Content */}
             <div ref={contentRef} className='flex flex-col items-center gap-6'>
-              <h2 className='text-balance text-3xl font-bold tracking-tight font-utekos-text text-maritime-blue sm:text-4xl'>
-                På plass hos Intersport Laksevåg!
-              </h2>
+              <h2 className='text-balance text-havdyp'>På plass hos Intersport Laksevåg!</h2>
 
               <p className='max-w-4xl text-balance text-lg leading-relaxed font-utekos-text text-maritime-darkest/90'>
                 Nå kan du se, prøve og kjenne på vår splitter nye{' '}
-                <strong className='text-maritime-blue font-utekos-text font-bold'>Utekos TechDown™</strong>{' '}
-                hos våre gode venner på Intersport Laksevåg. Ta turen innom for å bli en av de første som får
-                oppleve den neste generasjonen av Utekos!
+                <strong className='text-havdyp font-utekos-text font-bold'>Utekos TechDown™</strong> hos våre
+                gode venner på Intersport Laksevåg. Ta turen innom for å bli en av de første som får oppleve
+                den neste generasjonen av Utekos!
               </p>
 
               <Button
                 asChild
                 size='lg'
-                className='group my-4 h-12 font-utekos-text tracking-tight text-cloud-dancer bg-maritime-blue rounded-full px-8 text-base'
+                className='group my-4 h-12 font-utekos-text tracking-tight text-cloud-dancer bg-havdyp rounded-full px-8 text-base'
               >
                 {/* FIX: Caster string til Route for å tilfredsstille Typed Routes */}
                 <Link href={mapsUrl as Route} target='_blank'>

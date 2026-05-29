@@ -49,6 +49,8 @@ export type AccordionSectionData = {
 export type ProductGalleryProps = {
   title: string
   images: Image[]
+  desktopImages?: Image[]
+  imageBackgroundClassName?: string
 }
 export type QuantitySelectorProps = {
   value: number

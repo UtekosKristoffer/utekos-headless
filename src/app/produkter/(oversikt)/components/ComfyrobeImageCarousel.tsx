@@ -7,11 +7,7 @@ import ComfyRobe from '@public/comfy-1600x1600.webp'
 import Image from 'next/image'
 import { useRef } from 'react'
 import Fade from 'embla-carousel-fade'
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem
-} from '@/components/ui/carousel'
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 
 export function ComfyrobeImageCarousel() {
@@ -26,7 +22,7 @@ export function ComfyrobeImageCarousel() {
       >
         <CarouselContent className='relative aspect-[4/5] h-full min-h-[32rem] lg:aspect-auto lg:min-h-[38rem]'>
           <CarouselItem className='absolute inset-0 pl-0'>
-            <div className='relative size-full overflow-hidden bg-[radial-gradient(circle_at_50%_28%,color-mix(in_oklch,var(--maritime-blue)_54%,var(--maritime-darkest)_46%)_0%,var(--maritime-darkest)_72%)]'>
+            <div className='relative size-full overflow-hidden bg-[radial-gradient(circle_at_50%_28%,color-mix(in_oklch,var(--havdyp)_54%,var(--maritime-darkest)_46%)_0%,var(--maritime-darkest)_72%)]'>
               <Image
                 src={ComfyRobe}
                 alt='Comfyrobe produktbilde.'

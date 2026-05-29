@@ -9,7 +9,7 @@ export function TechHero() {
       {/* Bakgrunnseffekter */}
       <div className='pointer-events-none absolute inset-0 overflow-hidden'>
         <div className='absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-ancient-water/20 blur-[120px]' />
-        <div className='absolute bottom-0 right-0 h-[400px] w-[400px] translate-y-1/3 rounded-full bg-maritime-blue/20 blur-[100px]' />
+        <div className='absolute bottom-0 right-0 h-[400px] w-[400px] translate-y-1/3 rounded-full bg-havdyp/20 blur-[100px]' />
       </div>
 
       <div className='relative z-10 container mx-auto px-4'>

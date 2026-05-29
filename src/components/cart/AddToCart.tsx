@@ -20,7 +20,13 @@ export function AddToCart({
   additionalLine,
   additionalProductData
 }: ExtendedAddToCartProps) {
-  const { performAddToCart, isPending } = useAddToCartAction({
+  const {
+    performAddToCart,
+    performGoToCheckout,
+    isPending,
+    isAddToCartPending,
+    isCheckoutPending
+  } = useAddToCartAction({
     product,
     selectedVariant,
     additionalLine,
@@ -35,13 +41,20 @@ export function AddToCart({
     performAddToCart(values.quantity)
   }
 
+  const onCheckout = (values: AddToCartFormValues) => {
+    void performGoToCheckout(values.quantity)
+  }
+
   const isAvailable = selectedVariant?.availableForSale ?? false
 
   return (
     <AddToCartView
       form={form}
       onSubmit={onSubmit}
+      onCheckout={onCheckout}
       isPending={isPending}
+      isAddToCartPending={isAddToCartPending}
+      isCheckoutPending={isCheckoutPending}
       isAvailable={isAvailable}
     />
   )

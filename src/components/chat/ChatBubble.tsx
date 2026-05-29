@@ -2,20 +2,12 @@
 import { cn } from '@/lib/utils/className'
 import type { ReactNode } from 'react'
 
-export function ChatBubble({
-  side,
-  children
-}: {
-  side: 'left' | 'right'
-  children: ReactNode
-}) {
+export function ChatBubble({ side, children }: { side: 'left' | 'right'; children: ReactNode }) {
   const justify = side === 'left' ? 'justify-start' : 'justify-end'
   return (
     <div className={cn('flex', justify)}>
-      <div className='max-w-xs rounded-lg bg-maritime-blue p-3 sm:max-w-sm'>
-        <div className='text-base leading-snug text-cloud-dancer'>
-          {children}
-        </div>
+      <div className='max-w-xs rounded-lg bg-havdyp p-3 sm:max-w-sm'>
+        <div className='text-base leading-snug text-cloud-dancer'>{children}</div>
       </div>
     </div>
   )

@@ -30,7 +30,7 @@ const benefitsData = [
 
 export function BenefitsGrid() {
   return (
-    <section className='py-24 bg-maritime-blue'>
+    <section className='py-24 bg-havdyp'>
       <div className='container mx-auto px-4'>
         <div className='boat-benefits-header text-center mb-6'>
           <h2 className='max-w-3xl mx-auto md:max-w-4xl text-cloud-dancer'>Skapt for livet på sjøen</h2>
@@ -48,7 +48,7 @@ export function BenefitsGrid() {
                 className='boat-benefits-card text-center'
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
-                <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-maritime-blue/24 border border-cloud-dancer/12'>
+                <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-havdyp/24 border border-cloud-dancer/12'>
                   <Icon className={`h-8 w-8 ${benefit.color}`} />
                 </div>
                 <h3 className='text-lg font-semibold mb-2'>{benefit.title}</h3>

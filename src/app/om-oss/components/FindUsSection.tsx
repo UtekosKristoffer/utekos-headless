@@ -36,16 +36,11 @@ const pastEvents: PastEvent[] = [
   }
 ]
 
-const fairImages = [
-  '/messe-1.webp',
-  '/messe-2.webp',
-  '/erling-messe.JPEG',
-  '/messe-3.webp'
-] as const
+const fairImages = ['/messe-1.webp', '/messe-2.webp', '/erling-messe.JPEG', '/messe-3.webp'] as const
 
 export function FindUsSection() {
   return (
-    <section className='relative isolate overflow-hidden bg-overcast py-24 text-maritime-blue sm:py-32'>
+    <section className='relative isolate overflow-hidden bg-overcast py-24 text-havdyp sm:py-32'>
       <div className='pointer-events-none absolute inset-0 -z-10'>
         <div className='absolute left-[6%] top-20 size-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_58%,transparent)_0%,transparent_72%)] blur-3xl' />
         <div className='absolute bottom-12 right-[8%] size-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_22%,transparent)_0%,transparent_72%)] blur-3xl' />
@@ -53,11 +48,7 @@ export function FindUsSection() {
 
       <div className='container mx-auto max-w-7xl px-6 lg:px-8'>
         <div className='grid grid-cols-1 items-center gap-16 lg:grid-cols-2'>
-          <AnimatedBlock
-            className='will-animate-fade-in-left'
-            delay='0s'
-            threshold={0.3}
-          >
+          <AnimatedBlock className='will-animate-fade-in-left' delay='0s' threshold={0.3}>
             <BrandBadge
               label='Møteplasser'
               backgroundColor='var(--maritime-darkest)'
@@ -68,19 +59,15 @@ export function FindUsSection() {
               Der du har møtt oss
             </h2>
             <p className='mb-10 text-lg leading-[1.45] font-utekos-text tracking-tight text-maritime-darkest'>
-              Vi elsker å prate med folk – derfor er vi jevnlig på messer og
-              stands. Her er noen av stedene du kan ha truffet oss, og hvor vi
-              har fått verdifulle innspill fra kunder som faktisk har kjent
+              Vi elsker å prate med folk – derfor er vi jevnlig på messer og stands. Her er noen av stedene du
+              kan ha truffet oss, og hvor vi har fått verdifulle innspill fra kunder som faktisk har kjent
               komforten.
             </p>
 
             <div className='space-y-6'>
               {pastEvents.map(event => (
-                <div
-                  key={`${event.name}-${event.date}`}
-                  className='group flex items-start gap-5'
-                >
-                  <div className='flex size-12 shrink-0 items-center justify-center rounded-full border border-maritime-blue/14 bg-maritime-blue text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
+                <div key={`${event.name}-${event.date}`} className='group flex items-start gap-5'>
+                  <div className='flex size-12 shrink-0 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
                     <MapPinIcon className='size-5' strokeWidth={2} />
                   </div>
 
@@ -90,7 +77,7 @@ export function FindUsSection() {
                     </h3>
                     <p className='text-sm leading-[1.45] font-medium tracking-tight text-maritime-darkest/80'>
                       {event.location}
-                      <span className='mx-2 text-maritime-blue'>•</span>
+                      <span className='mx-2 text-havdyp'>•</span>
                       {event.date}
                     </p>
                   </div>
@@ -100,15 +87,11 @@ export function FindUsSection() {
           </AnimatedBlock>
 
           {/* Right column: carousel */}
-          <AnimatedBlock
-            className='will-animate-fade-in-right'
-            delay='0.1s'
-            threshold={0.3}
-          >
+          <AnimatedBlock className='will-animate-fade-in-right' delay='0.1s' threshold={0.3}>
             <div className='relative'>
               <div className='absolute -inset-4 -rotate-2 rounded-sm bg-cloud-dancer/38' />
 
-              <Carousel className='relative overflow-hidden rounded-sm border border-cloud-dancer/65 bg-cloud-dancer shadow-2xl shadow-maritime-blue/10'>
+              <Carousel className='relative overflow-hidden rounded-sm border border-cloud-dancer/65 bg-cloud-dancer shadow-2xl shadow-havdyp/10'>
                 <CarouselContent>
                   {fairImages.map((src, index) => (
                     <CarouselItem key={src}>
@@ -127,8 +110,8 @@ export function FindUsSection() {
                   ))}
                 </CarouselContent>
 
-                <CarouselPrevious className='left-4 border-cloud-dancer/80 bg-cloud-dancer/92 text-maritime-blue shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
-                <CarouselNext className='right-4 border-cloud-dancer/80 bg-cloud-dancer/92 text-maritime-blue shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
+                <CarouselPrevious className='left-4 border-cloud-dancer/80 bg-cloud-dancer/92 text-havdyp shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
+                <CarouselNext className='right-4 border-cloud-dancer/80 bg-cloud-dancer/92 text-havdyp shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
               </Carousel>
             </div>
           </AnimatedBlock>

@@ -25,21 +25,21 @@ const motorhomeFeatureCards = [
 const heroFeatureCardThemes = [
   {
     surface: 'color-mix(in oklch, var(--cloud-dancer) 10%, var(--overcast))',
-    border: 'color-mix(in oklch, var(--maritime-blue) 48%, var(--maritime-darkest))',
+    border: 'color-mix(in oklch, var(--havdyp) 48%, var(--maritime-darkest))',
     marker: 'var(--overcast)',
     iconSurface: 'var(--overcast)',
     icon: 'var(--maritime-darkest)'
   },
   {
     surface: 'color-mix(in oklch, var(--bleached-mauve-light) 10%, var(--bleached-mauve))',
-    border: 'color-mix(in oklch, var(--maritime-blue) 54%, var(--maritime-darkest))',
+    border: 'color-mix(in oklch, var(--havdyp) 54%, var(--maritime-darkest))',
     marker: 'var(--bleached-mauve)',
     iconSurface: 'var(--bleached-mauve)',
     icon: 'var(--maritime-darkest)'
   },
   {
     surface: 'color-mix(in oklch, var(--cloud-dancer) 10%, var(--dusted-peri))',
-    border: 'color-mix(in oklch, var(--maritime-blue) 48%, var(--maritime-darkest))',
+    border: 'color-mix(in oklch, var(--havdyp) 48%, var(--maritime-darkest))',
     marker: 'var(--dusted-peri)',
     iconSurface: 'var(--ancient-water)',
     icon: 'var(--maritime-darkest)'
@@ -50,7 +50,7 @@ export function BobilHeroSection() {
   return (
     <section
       aria-labelledby='bobil-hero-title'
-      className='relative flex min-h-[70vh] items-center overflow-hidden bg-maritime-blue text-cloud-dancer'
+      className='relative flex min-h-[70vh] items-center overflow-hidden bg-havdyp text-cloud-dancer'
     >
       <div className='absolute inset-0 -z-10 opacity-25' aria-hidden='true'>
         <div
@@ -64,12 +64,12 @@ export function BobilHeroSection() {
           className='absolute bottom-1/4 right-1/3 size-[600px] rounded-full blur-[100px]'
           style={{
             background:
-              'radial-gradient(circle, color-mix(in oklch, var(--maritime-blue) 72%, transparent) 0%, transparent 70%)'
+              'radial-gradient(circle, color-mix(in oklch, var(--havdyp) 72%, transparent) 0%, transparent 70%)'
           }}
         />
       </div>
 
-      <div className='absolute inset-0 bg-maritime-blue' aria-hidden='true' />
+      <div className='absolute inset-0 bg-havdyp' aria-hidden='true' />
 
       <div className='container relative mx-auto px-4 py-16'>
         <div className='max-w-5xl'>

@@ -1,7 +1,13 @@
 import Image from 'next/image'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from '@/components/ui/carousel'
 
 const galleryImages = [
   {
@@ -22,7 +28,8 @@ const galleryImages = [
     src: '/caitlinn_smooth16-19.webp',
     alt: 'Person som nyter utsikten fra et hytteområde i et Utekos-plagg.',
     title: 'Gjør naturen til din sitteplass',
-    description: 'Med Utekos kan den beste hvileplassen være den du finner selv. Varm og komfortabel, uansett underlag.'
+    description:
+      'Med Utekos kan den beste hvileplassen være den du finner selv. Varm og komfortabel, uansett underlag.'
   },
   {
     src: '/utekos-kaffe-jente.webp',
@@ -44,7 +51,8 @@ export function SocialProof() {
           </h2>
 
           <p className='mx-auto mb-12 utekos-section-lead max-w-2xl text-maritime-darkest'>
-            Fra morgenkaffen på en duggfrisk trapp til sene kvelder rundt bålpannen. Se ekte øyeblikk fra hyttelivet.
+            Fra morgenkaffen på en duggfrisk trapp til sene kvelder rundt bålpannen. Se ekte øyeblikk fra
+            hyttelivet.
           </p>
         </div>
 
@@ -61,7 +69,7 @@ export function SocialProof() {
                 <div className='group p-1'>
                   <AspectRatio
                     ratio={1 / 1}
-                    className='relative overflow-hidden rounded-lg border border-maritime-darkest/18 bg-maritime-blue shadow-[0_24px_56px_-42px_rgba(14,18,35,0.62)]'
+                    className='relative overflow-hidden rounded-lg border border-maritime-darkest/18 bg-havdyp shadow-[0_24px_56px_-42px_rgba(14,18,35,0.62)]'
                   >
                     <Image
                       src={image.src}
@@ -73,7 +81,9 @@ export function SocialProof() {
                     />
                   </AspectRatio>
                   <div className='pt-4 text-left'>
-                    <h3 className='font-semibold font-google-sans leading-[1.45] tracking-tight'>{image.title}</h3>
+                    <h3 className='font-semibold font-google-sans leading-[1.45] tracking-tight'>
+                      {image.title}
+                    </h3>
                     <p className='text-sm leading-[1.15] font-utekos-text tracking-tight text-maritime-darkest'>
                       {image.description}
                     </p>

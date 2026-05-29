@@ -15,7 +15,7 @@ export function MagazineArticleHeader({ article }: MagazineArticleHeaderProps) {
     article.updatedAt !== article.publishedAt ? formatMagazineArticleDate(article.updatedAt) : null
 
   return (
-    <header className='relative overflow-hidden bg-maritime-blue text-cloud-dancer'>
+    <header className='relative overflow-hidden bg-havdyp text-cloud-dancer'>
       <div
         className='absolute inset-0 bg-[linear-gradient(140deg,color-mix(in_oklch,var(--maritime-darkest)_72%,transparent),transparent_58%)]'
         aria-hidden

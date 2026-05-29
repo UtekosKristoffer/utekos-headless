@@ -8,6 +8,7 @@ import { useVariantState } from '@/hooks/useVariantState'
 import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
 import { createSwatchColorMap } from '@/hooks/createSwatchColorMap'
 import { computeVariantImages } from '@/lib/utils/computeVariantImages'
+import { getProductWithoutSmallSize } from '@/components/products/getProductWithoutSmallSize'
 import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
 
 export function useProductPage(
@@ -24,26 +25,30 @@ export function useProductPage(
   } = useQuery(productOptions(handle))
 
   const productWithMetafields = reshapeProductWithMetafields(productData)
+  const displayProduct =
+    productWithMetafields?.handle === 'utekos-techdown' ?
+      getProductWithoutSmallSize(productWithMetafields)
+    : productWithMetafields
 
   const { variantState, updateVariant, allVariants } = useVariantState(
-    productWithMetafields,
+    displayProduct,
     true,
     initialVariantId
   )
 
   const relatedProducts = initialRelatedProducts
-  const swatchColorMap = createSwatchColorMap(productWithMetafields)
+  const swatchColorMap = createSwatchColorMap(displayProduct)
 
   const selectedVariant: ShopifyProductVariant | null =
     variantState.status === 'selected' ? variantState.variant : null
 
   const variantImages =
-    productWithMetafields ?
-      computeVariantImages(productWithMetafields, selectedVariant)
+    displayProduct ?
+      computeVariantImages(displayProduct, selectedVariant)
     : []
 
   return {
-    productData: productWithMetafields,
+    productData: displayProduct,
     selectedVariant,
     allVariants,
     variantImages,

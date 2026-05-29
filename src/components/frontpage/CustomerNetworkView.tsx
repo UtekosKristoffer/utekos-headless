@@ -15,16 +15,10 @@ function IconRenderer({
 }) {
   const Icon = iconMap[name]
 
-  return Icon ?
-      <Icon aria-hidden='true' className={className} style={style} />
-    : null
+  return Icon ? <Icon aria-hidden='true' className={className} style={style} /> : null
 }
 
-export function CustomerNetworkView({
-  nodes,
-  edges,
-  centerNode
-}: CustomerNetworkViewProps) {
+export function CustomerNetworkView({ nodes, edges, centerNode }: CustomerNetworkViewProps) {
   const benefitNodes = nodes.filter(node => node.type !== 'center')
 
   return (
@@ -95,10 +89,7 @@ export function CustomerNetworkView({
                         color: accentColor
                       }}
                     >
-                      <IconRenderer
-                        name={node.data.icon as IconName}
-                        className='h-4 w-4'
-                      />
+                      <IconRenderer name={node.data.icon as IconName} className='h-4 w-4' />
                     </span>
 
                     <span className='whitespace-nowrap text-sm font-medium leading-none tracking-wide text-maritime-darkest'>
@@ -114,7 +105,7 @@ export function CustomerNetworkView({
 
       {centerNode ?
         <div className='pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2'>
-          <div className='relative flex h-28 w-28 items-center justify-center rounded-full border border-ancient-water/40 bg-[var(--dark-background)] shadow-[0_0_0_8px_rgba(255,255,255,0.025),0_24px_54px_-32px_rgba(0,0,0,0.9)]'>
+          <div className='relative flex h-28 w-28 items-center justify-center rounded-full border border-ancient-water/40 bg-[var(--maritime-darkest)] shadow-[0_0_0_8px_rgba(255,255,255,0.025),0_24px_54px_-32px_rgba(0,0,0,0.9)]'>
             <div className='relative h-24 w-24 overflow-hidden rounded-full border-2 border-cloud-dancer/55 bg-cloud-dancer'>
               <Image
                 src={UtekosLogo}

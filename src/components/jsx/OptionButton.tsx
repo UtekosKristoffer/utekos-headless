@@ -2,11 +2,7 @@
 
 import type { OptionButtonProps } from '@types'
 
-export function OptionButton({
-  isSelected,
-  onClick,
-  children
-}: OptionButtonProps) {
+export function OptionButton({ isSelected, onClick, children }: OptionButtonProps) {
   return (
     <button
       type='button'
@@ -15,10 +11,10 @@ export function OptionButton({
       aria-checked={isSelected}
       data-selected={isSelected}
       className='
-        flex w-full items-center justify-between rounded-[1rem] border bg-cloud-dancer/72 p-4 text-left text-maritime-blue
+        flex w-full items-center justify-between rounded-[1rem] border bg-cloud-dancer/72 p-4 text-left text-havdyp
         transition-all duration-200 ease-in-out
-        data-[selected=true]:border-maritime-blue data-[selected=true]:ring-1 data-[selected=true]:ring-maritime-blue
-        data-[selected=false]:border-maritime-blue/14 data-[selected=false]:hover:border-dusted-peri/50
+        data-[selected=true]:border-havdyp data-[selected=true]:ring-1 data-[selected=true]:ring-havdyp
+        data-[selected=false]:border-havdyp/14 data-[selected=false]:hover:border-dusted-peri/50
       '
     >
       {children}

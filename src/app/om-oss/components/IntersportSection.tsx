@@ -162,10 +162,10 @@ export function IntersportSection() {
                   />
                 </div>
 
-                <div className='absolute left-4 top-4 size-2 rounded-full bg-maritime-blue/18' />
-                <div className='absolute right-4 top-4 size-2 rounded-full bg-maritime-blue/18' />
-                <div className='absolute bottom-4 left-4 size-2 rounded-full bg-maritime-blue/18' />
-                <div className='absolute bottom-4 right-4 size-2 rounded-full bg-maritime-blue/18' />
+                <div className='absolute left-4 top-4 size-2 rounded-full bg-havdyp/18' />
+                <div className='absolute right-4 top-4 size-2 rounded-full bg-havdyp/18' />
+                <div className='absolute bottom-4 left-4 size-2 rounded-full bg-havdyp/18' />
+                <div className='absolute bottom-4 right-4 size-2 rounded-full bg-havdyp/18' />
               </div>
             </div>
 
@@ -194,9 +194,8 @@ export function IntersportSection() {
               </h2>
 
               <p className='gsap-content mb-10 max-w-lg text-lg leading-[1.45] font-utekos-text tracking-tight text-cloud-dancer'>
-                Lyst til å kjenne på kvaliteten og finne den perfekte
-                passformen? Som eneste fysiske forhandler i Bergen finner du et
-                utvalg av våre produkter hos våre venner på Laksevåg Senter.
+                Lyst til å kjenne på kvaliteten og finne den perfekte passformen? Som eneste fysiske
+                forhandler i Bergen finner du et utvalg av våre produkter hos våre venner på Laksevåg Senter.
               </p>
 
               <div className='gsap-content'>

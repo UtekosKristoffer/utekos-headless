@@ -39,7 +39,7 @@ export const PRODUCT_VARIANTS = {
       }
     ],
     features: ['Helårsbruk', 'Tre bruksformer', 'Vannavstøtende'],
-    colors: [{ name: 'Havdyp', hex: 'var(--color-maritime-blue)' }],
+    colors: [{ name: 'Havdyp', hex: 'var(--color-havdyp)' }],
     sizes: ['Liten', 'Middels', 'Stor', 'Ekstra stor'],
     images: [
       '/kvinne-nyter-terrasselivet-med-utekos-techdown.webp',

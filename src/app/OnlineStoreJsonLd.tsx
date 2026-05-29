@@ -15,7 +15,12 @@ export async function OnlineStoreJsonLd() {
     'legalName': 'Kelc As',
     'url': 'https://utekos.no',
     'brand': 'Utekos',
-    'sameAs': ['https://www.facebook.com/utekosen', 'https://www.instagram.com/utekos.no'],
+    'sameAs': [
+      'https://www.facebook.com/utekosen',
+      'https://www.instagram.com/utekos.no',
+      'https://no.pinterest.com/utekosoffisiell/',
+      'https://x.com/UtekosOffisiell'
+    ],
     'description':
       'Utekos er en merkevare som designer funksjonelt yttertøy for kompromissløs komfort og overlegen allsidighet: Hytteliv, bobilferie, telttur, båt og terrasseliv.',
     'logo': 'https://utekos.no/logo.png',

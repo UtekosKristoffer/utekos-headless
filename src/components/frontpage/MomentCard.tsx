@@ -20,8 +20,8 @@ const themeStyles: Record<
     glow: 'from-dusted-peri/20 via-dusted-peri/5 to-transparent',
     iconWrap:
       'border-chocolate-plum/18 bg-gradient-to-br from-cloud-dancer/92 to-overcast/88 text-chocolate-plum shadow-[inset_0_1px_1px_rgba(255,255,255,0.65)]',
-    title: 'text-maritime-blue',
-    desc: 'text-maritime-blue/80'
+    title: 'text-havdyp',
+    desc: 'text-havdyp/80'
   },
   plum: {
     wrapper:
@@ -37,19 +37,13 @@ const themeStyles: Record<
       'border-white/40 bg-gradient-to-br from-overcast/95 to-overcast/80 shadow-[0_16px_40px_rgba(0,0,0,0.1)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)] backdrop-blur-2xl',
     glow: 'from-mountain-view/20 via-mountain-view/5 to-transparent',
     iconWrap:
-      'border-white/80 bg-gradient-to-br from-ancient-water/90 to-ancient-water/40 text-maritime-blue shadow-[inset_0_1px_1px_rgba(255,255,255,0.7)]',
-    title: 'text-maritime-blue',
-    desc: 'text-maritime-blue/80'
+      'border-white/80 bg-gradient-to-br from-ancient-water/90 to-ancient-water/40 text-havdyp shadow-[inset_0_1px_1px_rgba(255,255,255,0.7)]',
+    title: 'text-havdyp',
+    desc: 'text-havdyp/80'
   }
 }
 
-export function MomentCard({
-  moment,
-  index
-}: {
-  moment: Moment
-  index: number
-}) {
+export function MomentCard({ moment, index }: { moment: Moment; index: number }) {
   const [ref, inView] = useInView({ threshold: 0.2 })
   const Icon = moment.icon
   const styles = themeStyles[moment.theme]
@@ -91,22 +85,12 @@ export function MomentCard({
             <Icon aria-hidden='true' className='h-5 w-5 stroke-[1.5]' />
           </div>
 
-          <h3
-            className={cn(
-              'text-[1.25rem] font-medium leading-[1.1] tracking-[-0.01em]',
-              styles.title
-            )}
-          >
+          <h3 className={cn('text-[1.25rem] font-medium leading-[1.1] tracking-[-0.01em]', styles.title)}>
             {moment.title}
           </h3>
         </div>
 
-        <p
-          className={cn(
-            'text-[1.0625rem] font-normal leading-[1.5] tracking-[-0.01em]',
-            styles.desc
-          )}
-        >
+        <p className={cn('text-[1.0625rem] font-normal leading-[1.5] tracking-[-0.01em]', styles.desc)}>
           {moment.description}
         </p>
       </div>

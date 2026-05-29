@@ -11,21 +11,12 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import { countries } from '@/constants/countries'
 import { ClientContactFormSchema } from '@/db/zod/schemas/ClientContactFormSchema'
-import {
-  submitContactForm,
-  type ContactFormState
-} from '@/lib/actions/submitContactForm'
+import { submitContactForm, type ContactFormState } from '@/lib/actions/submitContactForm'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { useActionState, useEffect, useRef } from 'react'
@@ -37,13 +28,10 @@ type ContactFormData = z.infer<typeof ClientContactFormSchema>
 
 const initialState: ContactFormState = { message: '' }
 const contactFieldClassName =
-  'h-12 rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal placeholder:text-maritime-blue focus-visible:border-primary-button focus-visible:ring-primary-button/35'
+  'h-12 rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal placeholder:text-havdyp focus-visible:border-primary-button focus-visible:ring-primary-button/35'
 
 export function SupportForm() {
-  const [state, formAction, isPending] = useActionState(
-    submitContactForm,
-    initialState
-  )
+  const [state, formAction, isPending] = useActionState(submitContactForm, initialState)
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(ClientContactFormSchema),
@@ -167,12 +155,8 @@ export function SupportForm() {
               <Select value={field.value ?? ''} onValueChange={field.onChange}>
                 <FormControl>
                   <div>
-                    <input
-                      type='hidden'
-                      name={field.name}
-                      value={field.value ?? ''}
-                    />
-                    <SelectTrigger className='h-12 w-full rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal focus-visible:border-primary-button focus-visible:ring-primary-button/35 data-[placeholder]:text-maritime-blue [&_svg:not([class*=text-])]:text-maritime-blue'>
+                    <input type='hidden' name={field.name} value={field.value ?? ''} />
+                    <SelectTrigger className='h-12 w-full rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal focus-visible:border-primary-button focus-visible:ring-primary-button/35 data-[placeholder]:text-havdyp [&_svg:not([class*=text-])]:text-havdyp'>
                       <SelectValue placeholder='Velg ditt land' />
                     </SelectTrigger>
                   </div>
@@ -182,7 +166,7 @@ export function SupportForm() {
                     <SelectItem
                       key={country.value}
                       value={country.value}
-                      className='tracking-normal focus:bg-maritime-blue/12 focus:text-maritime-darkest'
+                      className='tracking-normal focus:bg-havdyp/12 focus:text-maritime-darkest'
                     >
                       {country.label}
                     </SelectItem>
@@ -202,11 +186,7 @@ export function SupportForm() {
                 Ordrenummer (valgfritt)
               </FormLabel>
               <FormControl>
-                <Input
-                  placeholder='F.eks. #12345'
-                  {...field}
-                  className={contactFieldClassName}
-                />
+                <Input placeholder='F.eks. #12345' {...field} className={contactFieldClassName} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -217,8 +197,7 @@ export function SupportForm() {
           name='message'
           render={({ field, fieldState }) => {
             const messageChars = field.value.length
-            const showMessageMinimumError =
-              Boolean(fieldState.error) && messageChars < messageMin
+            const showMessageMinimumError = Boolean(fieldState.error) && messageChars < messageMin
 
             return (
               <FormItem>
@@ -235,15 +214,11 @@ export function SupportForm() {
                         form.clearErrors('message')
                       }
                     }}
-                    className='min-h-[160px] rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal placeholder:text-maritime-blue focus-visible:border-primary-button focus-visible:ring-primary-button/35'
+                    className='min-h-[160px] rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal placeholder:text-havdyp focus-visible:border-primary-button focus-visible:ring-primary-button/35'
                   />
                 </FormControl>
                 <div className='mt-1 flex items-center justify-between text-xs leading-[1.45] tracking-normal text-overcast'>
-                  <span
-                    className={
-                      showMessageMinimumError ? 'text-destructive' : undefined
-                    }
-                  >
+                  <span className={showMessageMinimumError ? 'text-destructive' : undefined}>
                     {showMessageMinimumError ?
                       `Må være minst ${messageMin} tegn.`
                     : messageChars >= messageMin ?
@@ -281,15 +256,11 @@ export function SupportForm() {
               </div>
               <FormControl>
                 <div>
-                  <input
-                    type='hidden'
-                    name={field.name}
-                    value={field.value ? 'on' : ''}
-                  />
+                  <input type='hidden' name={field.name} value={field.value ? 'on' : ''} />
                   <Switch
                     checked={!!field.value}
                     onCheckedChange={field.onChange}
-                    className='border border-cloud-dancer/15 data-[state=checked]:bg-primary-button data-[state=unchecked]:bg-maritime-blue focus-visible:ring-primary-button/35'
+                    className='border border-cloud-dancer/15 data-[state=checked]:bg-primary-button data-[state=unchecked]:bg-havdyp focus-visible:ring-primary-button/35'
                   />
                 </div>
               </FormControl>
@@ -297,11 +268,7 @@ export function SupportForm() {
             </FormItem>
           )}
         />
-        <SupportPageButton
-          type='submit'
-          isBusy={isPending}
-          disabled={isPending}
-        >
+        <SupportPageButton type='submit' isBusy={isPending} disabled={isPending}>
           {isPending ? 'Sender…' : 'Snakk med Utekos'}
         </SupportPageButton>
       </form>

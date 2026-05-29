@@ -40,7 +40,7 @@ export default function MagazineUpgradePage() {
     <main className='min-h-screen bg-overcast text-maritime-darkest'>
       <section className='container mx-auto flex min-h-[72vh] items-center px-4 py-20 sm:py-28'>
         <div className='mx-auto max-w-5xl text-center'>
-          <p className='font-utekos-text text-sm font-semibold tracking-[0.18em] text-maritime-blue'>
+          <p className='font-utekos-text text-sm font-semibold tracking-[0.18em] text-havdyp'>
             Utekos Magasinet
           </p>
 
@@ -93,7 +93,7 @@ export default function MagazineUpgradePage() {
                     {link.description}
                   </p>
 
-                  <span className='mt-5 inline-flex items-center gap-2 font-utekos-text text-sm font-semibold text-maritime-blue'>
+                  <span className='mt-5 inline-flex items-center gap-2 font-utekos-text text-sm font-semibold text-havdyp'>
                     Gå videre
                     <ArrowRight
                       className='size-4 transition-transform group-hover:translate-x-1'

@@ -13,10 +13,7 @@ import type { MenuItem } from '@types'
 
 export const DesktopNavigation = ({ menu = [] }: { menu?: MenuItem[] }) => {
   return (
-    <nav
-      aria-label='Hovednavigasjon'
-      className='pointer-events-auto hidden lg:block'
-    >
+    <nav aria-label='Hovednavigasjon' className='pointer-events-auto hidden lg:block'>
       <InteractiveNavMenu>
         <InteractiveNavList>
           {menu.map(item => {
@@ -30,8 +27,8 @@ export const DesktopNavigation = ({ menu = [] }: { menu?: MenuItem[] }) => {
                     <InteractiveNavTrigger className='text-cloud-dancer/84 hover:bg-cloud-dancer/7 hover:text-cloud-dancer focus-visible:ring-cloud-dancer/45 data-[state=open]:bg-cloud-dancer/8 data-[state=open]:text-cloud-dancer'>
                       {item.title}
                     </InteractiveNavTrigger>
-                    <InteractiveNavContent className='text-cloud-dancer'>
-                      <ul className='mx-auto grid w-[420px] items-center justify-center gap-2 p-2 md:w-[520px] md:grid-cols-2 lg:w-[640px]'>
+                    <InteractiveNavContent className='text-cloud-dancer bg-havdyp'>
+                      <ul className='mx-auto grid w-[420px] items-center justify-center bg-havdyp gap-2 p-2 md:w-[520px] md:grid-cols-2 lg:w-[640px]'>
                         {item.items?.map(subItem => (
                           <ListItem
                             key={subItem.url}
@@ -43,10 +40,7 @@ export const DesktopNavigation = ({ menu = [] }: { menu?: MenuItem[] }) => {
                       </ul>
                     </InteractiveNavContent>
                   </>
-                : <ActiveLink
-                    href={href}
-                    data-track={`HeaderDesktop_${item.title}`}
-                  >
+                : <ActiveLink href={href} data-track={`HeaderDesktop_${item.title}`}>
                     {item.title}
                   </ActiveLink>
                 }

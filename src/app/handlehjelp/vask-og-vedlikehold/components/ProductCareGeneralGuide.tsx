@@ -19,13 +19,12 @@ const steps: CareStep[] = [
     content: (
       <>
         <p>
-          Lukk alle glidelåser, fest borrelås og tøm lommer. Vreng plagget før
-          vask – det skåner ytterstoffet og bevarer DWR-behandlingen som gjør at
-          vann preller av.
+          Lukk alle glidelåser, fest borrelås og tøm lommer. Vreng plagget før vask – det skåner ytterstoffet
+          og bevarer DWR-behandlingen som gjør at vann preller av.
         </p>
         <p className='opacity-90'>
-          Sjekk vaskelappen for materialspesifikke detaljer. Hvert Utekos-plagg
-          er merket med presise instruksjoner for nettopp den sammensetningen.
+          Sjekk vaskelappen for materialspesifikke detaljer. Hvert Utekos-plagg er merket med presise
+          instruksjoner for nettopp den sammensetningen.
         </p>
       </>
     )
@@ -38,13 +37,12 @@ const steps: CareStep[] = [
     content: (
       <>
         <p>
-          Vask på skånsomt program med kaldt eller lunkent vann og et mildt
-          vaskemiddel uten optisk hvitt. Fyll trommelen halvfull – plagget
-          trenger plass for å bli skikkelig rent.
+          Vask på skånsomt program med kaldt eller lunkent vann og et mildt vaskemiddel uten optisk hvitt.
+          Fyll trommelen halvfull – plagget trenger plass for å bli skikkelig rent.
         </p>
         <p className='opacity-90'>
-          Unngå tøymykner. Det legger seg som en usynlig film over fibrene og
-          reduserer både pusteegenskaper og isolasjon over tid.
+          Unngå tøymykner. Det legger seg som en usynlig film over fibrene og reduserer både pusteegenskaper
+          og isolasjon over tid.
         </p>
       </>
     )
@@ -57,14 +55,12 @@ const steps: CareStep[] = [
     content: (
       <>
         <p>
-          For dun: tørketrommel på lav varme med tørkeballer eller rene
-          tennisballer. Avbryt syklusen et par ganger og rist plagget for å løse
-          opp eventuelle klumper.
+          For dun: tørketrommel på lav varme med tørkeballer eller rene tennisballer. Avbryt syklusen et par
+          ganger og rist plagget for å løse opp eventuelle klumper.
         </p>
         <p className='opacity-90'>
-          For mikrofiber: heng plagget luftig. Det tørker raskt og bevarer
-          fiberstrukturen best uten varmebehandling. Plagget skal være 100 %
-          gjennomtørt før neste steg.
+          For mikrofiber: heng plagget luftig. Det tørker raskt og bevarer fiberstrukturen best uten
+          varmebehandling. Plagget skal være 100 % gjennomtørt før neste steg.
         </p>
       </>
     )
@@ -77,12 +73,12 @@ const steps: CareStep[] = [
     content: (
       <>
         <p>
-          Heng plagget på en stødig henger i et tørt og luftig skap mellom
-          sesongene. Dunet trenger luft for å bevare spensten som gir varmen.
+          Heng plagget på en stødig henger i et tørt og luftig skap mellom sesongene. Dunet trenger luft for å
+          bevare spensten som gir varmen.
         </p>
         <p className='opacity-90'>
-          Unngå kompresjonsposer og plastomslag over lengre tid. Kortvarig
-          pakking under reise er greit – langtidslagring komprimert er ikke.
+          Unngå kompresjonsposer og plastomslag over lengre tid. Kortvarig pakking under reise er greit –
+          langtidslagring komprimert er ikke.
         </p>
       </>
     )
@@ -91,10 +87,7 @@ const steps: CareStep[] = [
 
 export function ProductCareGeneralGuide() {
   return (
-    <section
-      aria-labelledby='generell-guide-heading'
-      className='mx-auto mt-16 max-w-4xl scroll-mt-24'
-    >
+    <section aria-labelledby='generell-guide-heading' className='mx-auto mt-16 max-w-4xl scroll-mt-24'>
       <div className='mb-10 text-center'>
         <h2
           id='generell-guide-heading'
@@ -103,8 +96,7 @@ export function ProductCareGeneralGuide() {
           Slik tar du vare på plagget
         </h2>
         <p className='mx-auto mt-3 max-w-2xl text-base text-maritime-darkest/76'>
-          Fire steg som gjelder for alle Utekos-plagg. Materialspesifikke
-          detaljer finner du lenger ned.
+          Fire steg som gjelder for alle Utekos-plagg. Materialspesifikke detaljer finner du lenger ned.
         </p>
       </div>
 
@@ -118,14 +110,12 @@ export function ProductCareGeneralGuide() {
             <div className='flex items-start gap-4 sm:gap-5'>
               <span
                 aria-hidden='true'
-                className='flex size-11 shrink-0 items-center justify-center rounded-full border border-maritime-blue/30 bg-maritime-blue text-cloud-dancer sm:size-12'
+                className='flex size-11 shrink-0 items-center justify-center rounded-full border border-havdyp/30 bg-havdyp text-cloud-dancer sm:size-12'
               >
                 <Icon className='size-5 sm:size-[1.375rem]' />
               </span>
               <div className='min-w-0 flex-1'>
-                <p className='text-xs font-medium tracking-tight text-maritime-darkest/62'>
-                  {step}
-                </p>
+                <p className='text-xs font-medium tracking-tight text-maritime-darkest/62'>{step}</p>
                 <h3 className='mt-1 text-xl font-semibold tracking-tight text-maritime-darkest sm:text-2xl'>
                   {title}
                 </h3>

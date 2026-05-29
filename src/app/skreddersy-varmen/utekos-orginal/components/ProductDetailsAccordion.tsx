@@ -1,9 +1,4 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger
-} from '@/components/ui/accordion'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { cacheLife, cacheTag } from 'next/cache'
 import { SpecRow } from './SpecRow'
 import { DetailBlock } from './DetailBlock'
@@ -11,7 +6,7 @@ import { UsageGroup } from './UsageGroup'
 import { Leaf, ShieldCheck, Waves, Info } from 'lucide-react'
 
 const triggerClassName =
-  'font-google-sans text-left text-lg font-semibold text-maritime-darkest hover:text-maritime-blue hover:no-underline [&>svg]:text-maritime-darkest md:text-xl'
+  'font-google-sans text-left text-lg font-semibold text-maritime-darkest hover:text-havdyp hover:no-underline [&>svg]:text-maritime-darkest md:text-xl'
 
 const itemClassName = 'border-maritime-darkest/20'
 
@@ -29,9 +24,7 @@ export async function ProductDetailsAccordion() {
 
         <Accordion type='single' collapsible className='w-full'>
           <AccordionItem value='materials' className={itemClassName}>
-            <AccordionTrigger className={triggerClassName}>
-              Materialer
-            </AccordionTrigger>
+            <AccordionTrigger className={triggerClassName}>Materialer</AccordionTrigger>
             <AccordionContent>
               <div className='grid grid-cols-1 gap-x-8 gap-y-4 p-2 text-base leading-[1.45] md:grid-cols-2'>
                 <SpecRow label='Fôrstoff' value='Taffeta' />
@@ -46,9 +39,7 @@ export async function ProductDetailsAccordion() {
           </AccordionItem>
 
           <AccordionItem value='functions' className={itemClassName}>
-            <AccordionTrigger className={triggerClassName}>
-              Nøkkelfunksjoner
-            </AccordionTrigger>
+            <AccordionTrigger className={triggerClassName}>Nøkkelfunksjoner</AccordionTrigger>
             <AccordionContent>
               <ul className='space-y-6 p-2'>
                 <DetailBlock
@@ -75,55 +66,37 @@ export async function ProductDetailsAccordion() {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value='features' className={itemClassName}>
-            <AccordionTrigger className={triggerClassName}>
-              Egenskaper
-            </AccordionTrigger>
+            <AccordionTrigger className={triggerClassName}>Egenskaper</AccordionTrigger>
             <AccordionContent>
               <ul className='space-y-6 p-2'>
                 <li className='flex gap-4'>
-                  <Waves
-                    className='mt-1 shrink-0 text-mountain-view'
-                    size={20}
-                  />
+                  <Waves className='mt-1 shrink-0 text-mountain-view' size={20} />
                   <div>
                     <h4 className='mb-1 text-base font-bold text-maritime-darkest'>
                       Håndterer fuktige forhold
                     </h4>
                     <p className='text-maritime-darkest/82'>
-                      Den avanserte, syntetiske isolasjonen er konstruert for å
-                      prestere optimalt i fuktige forhold. Den beholder
-                      isolerende evne når den blir våt og tørker svært raskt.
+                      Den avanserte, syntetiske isolasjonen er konstruert for å prestere optimalt i fuktige
+                      forhold. Den beholder isolerende evne når den blir våt og tørker svært raskt.
                     </p>
                   </div>
                 </li>
                 <li className='flex gap-4'>
-                  <Leaf
-                    className='mt-1 shrink-0 text-mountain-view'
-                    size={20}
-                  />
+                  <Leaf className='mt-1 shrink-0 text-mountain-view' size={20} />
                   <div>
-                    <h4 className='mb-1 text-base font-bold text-maritime-darkest'>
-                      Allergivennlig
-                    </h4>
+                    <h4 className='mb-1 text-base font-bold text-maritime-darkest'>Allergivennlig</h4>
                     <p className='text-maritime-darkest/82'>
-                      Et gjennomtenkt vegansk valg som gir full trygghet og
-                      komfort for deg med dunallergi eller for deg som
-                      foretrekker produkter uten animalske materialer.
+                      Et gjennomtenkt vegansk valg som gir full trygghet og komfort for deg med dunallergi
+                      eller for deg som foretrekker produkter uten animalske materialer.
                     </p>
                   </div>
                 </li>
                 <li className='flex gap-4'>
-                  <ShieldCheck
-                    className='mt-1 shrink-0 text-mountain-view'
-                    size={20}
-                  />
+                  <ShieldCheck className='mt-1 shrink-0 text-mountain-view' size={20} />
                   <div>
-                    <h4 className='mb-1 text-base font-bold text-maritime-darkest'>
-                      Robust og allsidig
-                    </h4>
+                    <h4 className='mb-1 text-base font-bold text-maritime-darkest'>Robust og allsidig</h4>
                     <p className='text-maritime-darkest/82'>
-                      Utekos™-modellen med lavest vekt, best egnet for både
-                      rolig hygge og aktivitet.
+                      Utekos™-modellen med lavest vekt, best egnet for både rolig hygge og aktivitet.
                     </p>
                   </div>
                 </li>
@@ -131,9 +104,7 @@ export async function ProductDetailsAccordion() {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value='usage' className={itemClassName}>
-            <AccordionTrigger className={triggerClassName}>
-              Bruksområder
-            </AccordionTrigger>
+            <AccordionTrigger className={triggerClassName}>Bruksområder</AccordionTrigger>
             <AccordionContent>
               <div className='grid grid-cols-1 gap-8 p-2 md:grid-cols-2'>
                 <UsageGroup title='Båt- og hytteliv'>
@@ -163,64 +134,52 @@ export async function ProductDetailsAccordion() {
           </AccordionItem>
 
           <AccordionItem value='fit' className={itemClassName}>
-            <AccordionTrigger className={triggerClassName}>
-              Passform
-            </AccordionTrigger>
+            <AccordionTrigger className={triggerClassName}>Passform</AccordionTrigger>
             <AccordionContent>
               <div className='space-y-4 p-2 text-base leading-[1.45] text-maritime-darkest/82'>
                 <p>
                   <strong className='mb-1 block text-maritime-darkest'>
                     Rom for bevegelse og ekstra lag
                   </strong>
-                  Utekos Mikrofiber™ er designet med sjenerøs passform som gir
-                  deg full bevegelsesfrihet og gjør det enkelt å ha flere lag
-                  under uten at det føles trangt.
+                  Utekos Mikrofiber™ er designet med sjenerøs passform som gir deg full bevegelsesfrihet og
+                  gjør det enkelt å ha flere lag under uten at det føles trangt.
                 </p>
                 <p>
                   <strong className='mb-1 block text-maritime-darkest'>
                     Fra parkas til fullstendig tildekket på sekunder
                   </strong>
-                  Med smarte snorstramminger justerer du enkelt passformen for
-                  optimal varme og komfort. Gå fra en luftig, beskyttende parkas
-                  til en tett og varmende kokong.
+                  Med smarte snorstramminger justerer du enkelt passformen for optimal varme og komfort. Gå
+                  fra en luftig, beskyttende parkas til en tett og varmende kokong.
                 </p>
-                <p className='rounded-2xl border border-cloud-dancer/15 bg-maritime-blue p-4 text-sm leading-[1.45] text-cloud-dancer'>
-                  <strong>Tips:</strong> Bruk linken ved størrelsevelgeren og i
-                  menyen over for å se de nøyaktige målene i tabellen.
+                <p className='rounded-2xl border border-cloud-dancer/15 bg-havdyp p-4 text-sm leading-[1.45] text-cloud-dancer'>
+                  <strong>Tips:</strong> Bruk linken ved størrelsevelgeren og i menyen over for å se de
+                  nøyaktige målene i tabellen.
                 </p>
               </div>
             </AccordionContent>
           </AccordionItem>
 
           <AccordionItem value='care' className={itemClassName}>
-            <AccordionTrigger className={triggerClassName}>
-              Vedlikehold
-            </AccordionTrigger>
+            <AccordionTrigger className={triggerClassName}>Vedlikehold</AccordionTrigger>
             <AccordionContent>
               <div className='space-y-4 p-2'>
                 <ul className='list-inside list-disc space-y-1 text-maritime-darkest/82'>
                   <li>Maskinvask på maks 30°C</li>
                   <li>Bruk mild såpe</li>
                   <li>
-                    <span className='font-bold text-maritime-darkest'>
-                      Unngå tørketrommelen
-                    </span>
+                    <span className='font-bold text-maritime-darkest'>Unngå tørketrommelen</span>
                   </li>
                   <li>La den lufttørke (tørker raskt)</li>
                   <li>Unngå stryking og bleking</li>
                 </ul>
 
-                <div className='mt-4 flex gap-3 rounded-2xl border-l-4 border-primary-button bg-maritime-blue p-4 text-cloud-dancer'>
+                <div className='mt-4 flex gap-3 rounded-2xl border-l-4 border-primary-button bg-havdyp p-4 text-cloud-dancer'>
                   <Info className='shrink-0 text-primary-button' />
                   <div className='text-sm leading-[1.45]'>
-                    <span className='mb-1 block font-bold'>
-                      Viktig om oppbevaring
-                    </span>
-                    Oppbevares tørt. Materialet vil absorbere fuktighet under
-                    normal bruk, så sørg for at den tørkes godt etter bruk i
-                    fuktige omgivelser. For lengre lagring anbefales det å
-                    oppbevare plagget ukomprimert (hengende eller løst foldet)
-                    for å bevare loft og form.
+                    <span className='mb-1 block font-bold'>Viktig om oppbevaring</span>
+                    Oppbevares tørt. Materialet vil absorbere fuktighet under normal bruk, så sørg for at den
+                    tørkes godt etter bruk i fuktige omgivelser. For lengre lagring anbefales det å oppbevare
+                    plagget ukomprimert (hengende eller løst foldet) for å bevare loft og form.
                   </div>
                 </div>
               </div>

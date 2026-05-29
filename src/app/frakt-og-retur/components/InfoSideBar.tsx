@@ -58,7 +58,7 @@ export function InfoSidebar() {
           </h4>
           <BrandBadge
             asChild
-            backgroundColor='var(--maritime-blue)'
+            backgroundColor='var(--havdyp)'
             textColor='var(--cloud-dancer)'
             className='min-h-12 mt-4 w-full border border-cloud-dancer/24 px-6 py-3 text-base leading-[1.4] font-bold tracking-tight shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
           >

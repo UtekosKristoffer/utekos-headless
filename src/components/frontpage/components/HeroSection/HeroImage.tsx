@@ -4,7 +4,7 @@ import heroSixteenTenImage from '@public/kate-linn-2560-1600-85.webp'
 import { getImageProps } from 'next/image'
 
 const heroImageProps = {
-  alt: 'To kvinner i Utekos-plagg sitter på en terassen og nyter ost og vin.',
+  alt: 'To kvinner i Utekos TechDown sitter på en terassen og nyter ost og vin.',
   decoding: 'async',
   fetchPriority: 'high',
   loading: 'eager',
@@ -35,7 +35,7 @@ const {
 
 export function HeroImage() {
   return (
-    <div className='group relative mx-auto mb-7 max-w-6xl overflow-hidden rounded-2xl border border-cloud-dancer/12 bg-maritime-blue shadow-[0_28px_70px_-44px_color-mix(in_oklab,var(--maritime-blue)_80%,transparent)] sm:mb-10'>
+    <div className='group relative mx-auto mb-7 max-w-6xl overflow-hidden rounded-2xl border border-cloud-dancer/12 bg-havdyp shadow-[0_28px_70px_-44px_color-mix(in_oklab,var(--havdyp)_80%,transparent)] sm:mb-10'>
       <div className='pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-maritime-darkest/38 via-maritime-darkest/4 to-transparent' />
       <div className='relative aspect-[4/3] transition-transform duration-300 motion-safe:group-hover:scale-[1.01] sm:aspect-[16/10] lg:aspect-[16/9]'>
         <picture className='block size-full'>

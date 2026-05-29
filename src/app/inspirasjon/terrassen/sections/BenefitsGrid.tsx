@@ -15,28 +15,28 @@ const benefitSurfaces = {
   comfort: {
     borderColor: 'color-mix(in oklch, var(--dusted-peri) 30%, transparent)',
     background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--maritime-blue) 78%, var(--dusted-peri) 22%) 0%, color-mix(in oklch, var(--maritime-darkest) 78%, var(--maritime-blue) 22%) 100%)',
+      'linear-gradient(145deg, color-mix(in oklch, var(--havdyp) 78%, var(--dusted-peri) 22%) 0%, color-mix(in oklch, var(--maritime-darkest) 78%, var(--havdyp) 22%) 100%)',
     iconBackground: 'color-mix(in oklch, var(--dusted-peri) 18%, var(--maritime-darkest) 82%)',
     iconBorder: 'color-mix(in oklch, var(--dusted-peri) 34%, transparent)'
   },
   home: {
     borderColor: 'color-mix(in oklch, var(--ancient-water) 32%, transparent)',
     background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--maritime-blue) 76%, var(--ancient-water) 24%) 0%, color-mix(in oklch, var(--maritime-darkest) 78%, var(--maritime-blue) 22%) 100%)',
+      'linear-gradient(145deg, color-mix(in oklch, var(--havdyp) 76%, var(--ancient-water) 24%) 0%, color-mix(in oklch, var(--maritime-darkest) 78%, var(--havdyp) 22%) 100%)',
     iconBackground: 'color-mix(in oklch, var(--ancient-water) 16%, var(--maritime-darkest) 84%)',
     iconBorder: 'color-mix(in oklch, var(--ancient-water) 34%, transparent)'
   },
   simple: {
     borderColor: 'color-mix(in oklch, var(--primary-button) 30%, transparent)',
     background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--maritime-blue) 76%, var(--primary-button) 24%) 0%, color-mix(in oklch, var(--maritime-darkest) 80%, var(--maritime-blue) 20%) 100%)',
+      'linear-gradient(145deg, color-mix(in oklch, var(--havdyp) 76%, var(--primary-button) 24%) 0%, color-mix(in oklch, var(--maritime-darkest) 80%, var(--havdyp) 20%) 100%)',
     iconBackground: 'color-mix(in oklch, var(--primary-button) 18%, var(--maritime-darkest) 82%)',
     iconBorder: 'color-mix(in oklch, var(--primary-button) 34%, transparent)'
   },
   together: {
     borderColor: 'color-mix(in oklch, var(--bleached-mauve) 34%, transparent)',
     background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--maritime-blue) 78%, var(--bleached-mauve) 22%) 0%, color-mix(in oklch, var(--mountain-view) 26%, var(--maritime-darkest) 74%) 100%)',
+      'linear-gradient(145deg, color-mix(in oklch, var(--havdyp) 78%, var(--bleached-mauve) 22%) 0%, color-mix(in oklch, var(--mountain-view) 26%, var(--maritime-darkest) 74%) 100%)',
     iconBackground: 'color-mix(in oklch, var(--bleached-mauve) 18%, var(--maritime-darkest) 82%)',
     iconBorder: 'color-mix(in oklch, var(--bleached-mauve) 36%, transparent)'
   }

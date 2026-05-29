@@ -41,7 +41,7 @@ export function BoatingHeroSection() {
   return (
     <section
       aria-labelledby='batliv-hero-title'
-      className='relative flex min-h-[70vh] bg-maritime-blue items-center overflow-hidden'
+      className='relative flex min-h-[70vh] bg-havdyp items-center overflow-hidden'
     >
       <div className='absolute inset-0 -z-10 opacity-25' aria-hidden='true'>
         <div

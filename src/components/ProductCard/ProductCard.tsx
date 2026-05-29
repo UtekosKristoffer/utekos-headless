@@ -36,9 +36,7 @@ export function ProductCard({
   )
 
   const cartActor = CartMutationContext.useActorRef()
-  const isPending = CartMutationContext.useSelector(state =>
-    state.matches('mutating')
-  )
+  const isPending = CartMutationContext.useSelector(state => state.matches('mutating'))
 
   const selectedVariant = findMatchingVariant(product, selectedOptions)
 
@@ -48,13 +46,10 @@ export function ProductCard({
   const price = formatPrice(selectedVariant?.price ?? fallbackPrice)
 
   const baseUrl = `/produkter/${product.handle}`
-  const variantQuery =
-    selectedVariant ? `?variant=${encodeURIComponent(selectedVariant.id)}` : ''
+  const variantQuery = selectedVariant ? `?variant=${encodeURIComponent(selectedVariant.id)}` : ''
   const productUrl = `${baseUrl}${variantQuery}` as Route
-  const imageUrl =
-    selectedVariant?.image?.url ?? fallbackImage?.url ?? '/placeholder.svg'
-  const altText =
-    selectedVariant?.image?.altText ?? fallbackImage?.altText ?? product.title
+  const imageUrl = selectedVariant?.image?.url ?? fallbackImage?.url ?? '/placeholder.svg'
+  const altText = selectedVariant?.image?.altText ?? fallbackImage?.altText ?? product.title
   const isAvailable = selectedVariant?.availableForSale ?? false
 
   const handleQuickBuy = (e: React.MouseEvent) => {
@@ -77,9 +72,7 @@ export function ProductCard({
     cartStore.send({ type: 'OPEN' })
   }
 
-  const lastError = CartMutationContext.useSelector(
-    state => state.context.error
-  )
+  const lastError = CartMutationContext.useSelector(state => state.context.error)
 
   useEffect(() => {
     if (lastError) {
@@ -88,7 +81,7 @@ export function ProductCard({
   }, [lastError])
 
   return (
-    <Card className='product-card group flex h-full flex-col gap-0 overflow-hidden border border-cloud-dancer/10 bg-maritime-blue p-0 shadow-[0_18px_56px_-42px_rgba(8,10,24,0.85)]'>
+    <Card className='product-card group flex h-full flex-col gap-0 overflow-hidden border border-cloud-dancer/10 bg-havdyp p-0 shadow-[0_18px_56px_-42px_rgba(8,10,24,0.85)]'>
       <CardContent className='relative p-0'>
         <Link
           href={productUrl}
@@ -103,8 +96,7 @@ export function ProductCard({
             className='absolute left-4 top-4 z-10 border border-dusted-peri/24 px-3 py-1 text-xs font-medium tracking-wide shadow-[0_12px_28px_-22px_rgba(32,28,54,0.58)]'
           />
 
-          {(product.handle === 'utekos-dun'
-            || product.handle === 'comfyrobe') && (
+          {(product.handle === 'utekos-dun' || product.handle === 'comfyrobe') && (
             <Badge
               variant='destructive'
               className='absolute right-4 top-4 z-10 border border-primary-button/35 bg-primary-button px-3 py-1 text-xs font-medium uppercase tracking-wide text-maritime-darkest'

@@ -15,16 +15,16 @@ const philosophyToneStyles = [
   {
     card: 'border-ancient-water/24 bg-ancient-water',
     glow: 'bg-[radial-gradient(circle,color-mix(in_oklab,var(--cloud-dancer)_58%,transparent)_0%,transparent_72%)]',
-    icon: 'border-maritime-blue/14 bg-maritime-blue text-cloud-dancer',
-    title: 'text-maritime-blue',
-    text: 'text-maritime-blue/80'
+    icon: 'border-havdyp/14 bg-havdyp text-cloud-dancer',
+    title: 'text-havdyp',
+    text: 'text-havdyp/80'
   },
   {
     card: 'border-dusted-peri/16 bg-[color-mix(in_oklab,var(--bleached-mauve)_74%,var(--cloud-dancer))]',
     glow: 'bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_50%,transparent)_0%,transparent_72%)]',
-    icon: 'border-maritime-blue/14 bg-maritime-blue text-cloud-dancer',
-    title: 'text-maritime-blue',
-    text: 'text-maritime-blue/78'
+    icon: 'border-havdyp/14 bg-havdyp text-cloud-dancer',
+    title: 'text-havdyp',
+    text: 'text-havdyp/78'
   },
   {
     card: 'border-mountain-view/16 bg-mountain-view',
@@ -97,10 +97,7 @@ export function PhilosophiesSection() {
   )
 
   return (
-    <section
-      ref={sectionRef}
-      className='relative overflow-hidden bg-overcast py-24 sm:py-32'
-    >
+    <section ref={sectionRef} className='relative overflow-hidden bg-overcast py-24 sm:py-32'>
       <div className='pointer-events-none absolute inset-0 -z-10'>
         <div className='absolute left-[8%] top-16 size-64 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_70%,transparent)_0%,transparent_72%)] blur-3xl' />
         <div className='absolute right-[10%] top-24 size-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_30%,transparent)_0%,transparent_72%)] blur-3xl' />
@@ -109,11 +106,7 @@ export function PhilosophiesSection() {
 
       <div className='container mx-auto max-w-7xl px-6 lg:px-8'>
         <div className='mx-auto mb-20 max-w-3xl text-center'>
-          <AnimatedBlock
-            className='will-animate-fade-in-up'
-            delay='0s'
-            threshold={0.2}
-          >
+          <AnimatedBlock className='will-animate-fade-in-up' delay='0s' threshold={0.2}>
             <BrandBadge
               label='Vårt DNA'
               backgroundColor='var(--bleached-mauve)'
@@ -124,16 +117,12 @@ export function PhilosophiesSection() {
               Kjernen i alt vi gjør
             </h2>
             <p className='text-lg leading-[1.45] font-utekos-text tracking-tight text-maritime-darkest'>
-              Fire ufravikelige prinsipper som sikrer at du alltid får den
-              opplevelsen du fortjener.
+              Fire ufravikelige prinsipper som sikrer at du alltid får den opplevelsen du fortjener.
             </p>
           </AnimatedBlock>
         </div>
 
-        <div
-          ref={cardRowRef}
-          className='mx-auto flex max-w-4xl flex-col gap-6 sm:gap-7 lg:gap-8'
-        >
+        <div ref={cardRowRef} className='mx-auto flex max-w-4xl flex-col gap-6 sm:gap-7 lg:gap-8'>
           {corePhilosophies.map((item, i) => (
             <div
               key={item.title}
@@ -142,7 +131,7 @@ export function PhilosophiesSection() {
               style={{ zIndex: corePhilosophies.length - i }}
             >
               <div
-                className={`group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border p-7 shadow-[0_22px_60px_-40px_color-mix(in_oklab,var(--maritime-blue)_28%,transparent)] transition-all duration-500 hover:-translate-y-1 sm:p-8 ${philosophyToneStyles[i]?.card}`}
+                className={`group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border p-7 shadow-[0_22px_60px_-40px_color-mix(in_oklab,var(--havdyp)_28%,transparent)] transition-all duration-500 hover:-translate-y-1 sm:p-8 ${philosophyToneStyles[i]?.card}`}
               >
                 <div
                   className={`pointer-events-none absolute -right-10 -top-10 size-32 opacity-0 blur-[50px] transition-opacity duration-700 group-hover:opacity-30 ${philosophyToneStyles[i]?.glow}`}
@@ -153,10 +142,7 @@ export function PhilosophiesSection() {
                     <div
                       className={`flex size-14 shrink-0 items-center justify-center rounded-full border transition-transform duration-300 group-hover:scale-105 sm:size-16 ${philosophyToneStyles[i]?.icon}`}
                     >
-                      <item.icon
-                        className='size-6 sm:size-7'
-                        strokeWidth={1.5}
-                      />
+                      <item.icon className='size-6 sm:size-7' strokeWidth={1.5} />
                     </div>
 
                     <h3
@@ -166,9 +152,7 @@ export function PhilosophiesSection() {
                     </h3>
                   </div>
 
-                  <p
-                    className={`text-lg leading-[1.45] tracking-[-0.01em] ${philosophyToneStyles[i]?.text}`}
-                  >
+                  <p className={`text-lg leading-[1.45] tracking-[-0.01em] ${philosophyToneStyles[i]?.text}`}>
                     {item.text}
                   </p>
                 </div>

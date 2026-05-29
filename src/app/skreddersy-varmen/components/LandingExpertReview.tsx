@@ -29,9 +29,8 @@ export async function LandingExpertReview() {
             Derfor holder Utekos deg ute lenger
           </h2>
           <p className='mt-5 max-w-xl font-utekos-text text-base leading-[1.45] tracking-tight text-maritime-darkest/82 md:text-lg'>
-            Sist oppdatert {LANDING_LAST_UPDATED}. Denne siden bygger på
-            produktdata, kundeerfaringer, materialinformasjon og Utekos sine
-            egne kjøpsguider.
+            Sist oppdatert {LANDING_LAST_UPDATED}. Denne siden bygger på produktdata, kundeerfaringer,
+            materialinformasjon og Utekos sine egne kjøpsguider.
           </p>
         </div>
 
@@ -49,7 +48,7 @@ export async function LandingExpertReview() {
               </p>
               <Link
                 href={entry.href}
-                className='mt-4 inline-flex text-sm font-semibold text-maritime-darkest underline underline-offset-4 transition-colors hover:text-maritime-blue'
+                className='mt-4 inline-flex text-sm font-semibold text-maritime-darkest underline underline-offset-4 transition-colors hover:text-havdyp'
               >
                 {entry.linkLabel}
               </Link>

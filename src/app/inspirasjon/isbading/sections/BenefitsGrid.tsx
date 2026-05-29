@@ -8,22 +8,19 @@ export const benefitsData: Benefit[] = [
   {
     icon: Thermometer,
     title: 'Gjenopprett varmen',
-    description:
-      'Absorberende fôr tørker huden og får opp kroppstemperaturen umiddelbart.',
+    description: 'Absorberende fôr tørker huden og får opp kroppstemperaturen umiddelbart.',
     color: 'text-dusted-peri'
   },
   {
     icon: Shirt,
     title: 'Ditt mobile skifterom',
-    description:
-      'Romslig nok til at du enkelt trekker armene inn og skifter diskret på stranden.',
+    description: 'Romslig nok til at du enkelt trekker armene inn og skifter diskret på stranden.',
     color: 'text-ancient-water'
   },
   {
     icon: Wind,
     title: '100% vindtett',
-    description:
-      'Blokkerer den iskalde trekken som ellers stjeler varmen din etter badet.',
+    description: 'Blokkerer den iskalde trekken som ellers stjeler varmen din etter badet.',
     color: 'text-ancient-water'
   },
   {
@@ -39,12 +36,10 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
     <section className='py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl text-center'>
-          <h2 className='text-fluid-display font-bold tracking-normal'>
-            Spesiallaget for det ekstreme
-          </h2>
+          <h2 className='text-fluid-display font-bold tracking-normal'>Spesiallaget for det ekstreme</h2>
           <p className='mt-4 text-lg text-overcast'>
-            Isbading krever utstyr du kan stole på. Vi har fjernet barrierene
-            slik at du kan fokusere på opplevelsen.
+            Isbading krever utstyr du kan stole på. Vi har fjernet barrierene slik at du kan fokusere på
+            opplevelsen.
           </p>
         </div>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4'>
@@ -55,13 +50,11 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
               delay={`${benefitIndex * 0.05}s`}
               threshold={0.2}
             >
-              <div className='mx-auto mb-4 flex size-16 items-center justify-center rounded-full border border-cloud-dancer/12 bg-maritime-blue/24'>
+              <div className='mx-auto mb-4 flex size-16 items-center justify-center rounded-full border border-cloud-dancer/12 bg-havdyp/24'>
                 <benefit.icon className={`size-8 ${benefit.color}`} />
               </div>
               <h3 className='mb-2 text-lg font-semibold'>{benefit.title}</h3>
-              <p className='text-sm text-overcast'>
-                {benefit.description}
-              </p>
+              <p className='text-sm text-overcast'>{benefit.description}</p>
             </AnimatedBlock>
           ))}
         </div>

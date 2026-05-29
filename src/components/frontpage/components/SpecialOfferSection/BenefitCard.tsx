@@ -26,7 +26,7 @@ export function BenefitCard({ benefit, delay }: BenefitCardProps) {
 
   return (
     <li
-      className={`animate-fade-in-on-scroll group relative overflow-hidden rounded-lg border border-maritime-blue/12 ${backgroundClass} p-4 transition-all duration-300 hover:translate-x-1 hover:border-maritime-blue/25`}
+      className={`animate-fade-in-on-scroll group relative overflow-hidden rounded-lg border border-havdyp/12 ${backgroundClass} p-4 transition-all duration-300 hover:translate-x-1 hover:border-havdyp/25`}
       style={{ '--animation-delay': `${delay}s` } as React.CSSProperties}
     >
       {/* Aurora gradient effect */}
@@ -38,19 +38,12 @@ export function BenefitCard({ benefit, delay }: BenefitCardProps) {
       />
 
       <div className='relative z-10 flex items-center gap-3'>
-        <div className='flex size-8 flex-shrink-0 items-center justify-center rounded-md border border-maritime-blue bg-maritime-blue transition-all duration-300 group-hover:scale-110 group-hover:border-maritime-blue/80'>
+        <div className='flex size-8 flex-shrink-0 items-center justify-center rounded-md border border-havdyp bg-havdyp transition-all duration-300 group-hover:scale-110 group-hover:border-havdyp/80'>
           <Check className='size-5 text-cloud-dancer' />
         </div>
         <div className='flex-1 text-sm'>
-          <span className='font-semibold text-maritime-darkest'>
-            {benefit.label}
-          </span>
-          {benefit.description && (
-            <span className='text-maritime-blue/75'>
-              {' '}
-              {benefit.description}
-            </span>
-          )}
+          <span className='font-semibold text-maritime-darkest'>{benefit.label}</span>
+          {benefit.description && <span className='text-havdyp/75'> {benefit.description}</span>}
         </div>
       </div>
       <div className='absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100'>

@@ -1,0 +1,518 @@
+- generic [active] [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e7] [cursor=pointer]:
+    - img [ref=e8]
+  - alert [ref=e11]
+  - generic [ref=e12]:
+    - link "Se tilbudet på Utekos TechDown til kr 1790" [ref=e13] [cursor=pointer]:
+      - /url: /skreddersy-varmen
+      - generic [ref=e14]:
+        - img [ref=e15]
+        - generic [ref=e18]: Utekos TechDown™ til kr 1790,-
+        - generic [ref=e19]:
+          - text: Kjøp her
+          - img [ref=e20]
+    - button "Lukk banner" [ref=e22] [cursor=pointer]:
+      - img [ref=e23]
+  - banner [ref=e26]:
+    - generic [ref=e27]:
+      - link "Utekos - Til forsiden" [ref=e30] [cursor=pointer]:
+        - /url: /
+        - img "Utekos logo" [ref=e31]
+      - generic [ref=e32]:
+        - button "Åpne søk (⌘/Ctrl + K)" [ref=e33] [cursor=pointer]:
+          - img [ref=e34]
+          - generic [ref=e37]: Søk…
+          - generic:
+            - generic: ⌘
+            - text: K
+        - generic [ref=e38]:
+          - heading "Søk på nettsiden..." [level=2] [ref=e39]
+          - paragraph [ref=e40]: Søk etter produkter eller sider..
+        - button "Åpne handlekurven, 0 varer" [ref=e41] [cursor=pointer]:
+          - img
+          - generic [ref=e42]: 0 varer i handlekurven
+  - main [ref=e43]:
+    - article [ref=e44]:
+      - article [ref=e45]:
+        - generic [ref=e46]:
+          - generic [ref=e47]:
+            - generic [ref=e48]:
+              - img [ref=e49]
+              - generic [ref=e52]: Funksjonell varme siden 2020
+            - generic [ref=e53]:
+              - heading "Utekos" [level=1] [ref=e54]:
+                - img "Utekos" [ref=e55]
+              - heading "Skreddersy varmen" [level=2] [ref=e62]
+            - heading "Kompromissløs komfort og overlegen allsidighet. Juster, form og nyt." [level=3] [ref=e63]:
+              - generic [ref=e64]: Kompromissløs komfort og overlegen allsidighet. Juster, form og nyt.
+            - link "Gå til skreddersy varmen" [ref=e66] [cursor=pointer]:
+              - /url: /skreddersy-varmen
+              - generic [ref=e67]:
+                - text: Se mer
+                - button
+              - img [ref=e68]
+          - img "To kvinner i Utekos TechDown sitter på en terassen og nyter ost og vin." [ref=e73]
+          - group "Fordeler med å handle hos oss" [ref=e74]:
+            - generic [ref=e75]:
+              - article [ref=e76]:
+                - generic [ref=e77]:
+                  - img [ref=e79]
+                  - paragraph [ref=e84]: Rask levering
+                  - paragraph [ref=e85]: 2-5 dager
+              - article [ref=e86]:
+                - generic [ref=e87]:
+                  - img [ref=e89]
+                  - paragraph [ref=e92]: 3000+
+                  - paragraph [ref=e93]: Fornøyde kunder
+              - article [ref=e94]:
+                - generic [ref=e95]:
+                  - img [ref=e97]
+                  - paragraph [ref=e100]: Trygg handel
+                  - generic [ref=e101]:
+                    - img [ref=e102]
+                    - img "Klarna" [ref=e104]
+      - article [ref=e109]:
+        - generic [ref=e112]:
+          - figure "Bildekarusell med 3 produktbilder av Utekos TechDown." [ref=e114]:
+            - group "Produktbilder av Utekos TechDown" [ref=e116]:
+              - generic [ref=e118]:
+                - group [ref=e119]:
+                  - img "Utekos TechDown diagonalt fullfigur" [ref=e121]
+                - group [ref=e122]:
+                  - img "Utekos TechDown i bruk på en terrasse" [ref=e124]
+                - group [ref=e125]:
+                  - img "Utekos TechDown sett bakfra" [ref=e127]
+              - button "Forrige produktbilde" [ref=e128] [cursor=pointer]:
+                - img
+                - generic [ref=e129]: Previous slide
+              - button "Neste produktbilde" [ref=e130] [cursor=pointer]:
+                - img
+                - generic [ref=e131]: Next slide
+            - generic [ref=e132]: Bildekarusell med 3 produktbilder av Utekos TechDown.
+          - generic [ref=e133]:
+            - generic [ref=e134]:
+              - generic [ref=e140]: Vårtilbud
+              - generic [ref=e142]:
+                - img [ref=e143]
+                - generic [ref=e146]: Spar 200 kr
+            - paragraph [ref=e147]:
+              - generic [ref=e148]: Norsk vår er uforutsigbar
+              - generic [ref=e149]:
+                - generic [ref=e150]: "N"
+                - generic [ref=e151]: o
+                - generic [ref=e152]: r
+                - generic [ref=e153]: s
+                - generic [ref=e154]: k
+                - generic [ref=e156]: v
+                - generic [ref=e157]: å
+                - generic [ref=e158]: r
+                - generic [ref=e160]: e
+                - generic [ref=e161]: r
+                - generic [ref=e163]: u
+                - generic [ref=e164]: f
+                - generic [ref=e165]: o
+                - generic [ref=e166]: r
+                - generic [ref=e167]: u
+                - generic [ref=e168]: t
+                - generic [ref=e169]: s
+                - generic [ref=e170]: i
+                - generic [ref=e171]: g
+                - generic [ref=e172]: b
+                - generic [ref=e173]: a
+                - generic [ref=e174]: r
+            - heading "Utekos TechDown™ er ikke det" [level=2] [ref=e175]:
+              - generic [ref=e176]: Utekos TechDown™
+              - generic [ref=e177]: er ikke det
+            - generic [ref=e178]:
+              - article [ref=e180]:
+                - generic [ref=e181]:
+                  - img [ref=e183]
+                  - generic [ref=e185]:
+                    - heading "Allværsisolasjon" [level=3] [ref=e186]
+                    - paragraph [ref=e187]: Holder deg varm selv i fuktig og uforutsigbart vær.
+              - article [ref=e189]:
+                - generic [ref=e190]:
+                  - img [ref=e192]
+                  - generic [ref=e195]:
+                    - heading "Dunfølelse uten dun" [level=3] [ref=e196]
+                    - paragraph [ref=e197]: Designet med CloudWeave™. Lukseriøs, komfortabel og luftig.
+              - article [ref=e199]:
+                - generic [ref=e200]:
+                  - img [ref=e202]
+                  - generic [ref=e205]:
+                    - heading "Skapt for å brukes" [level=3] [ref=e206]
+                    - paragraph [ref=e207]: Et robust og lettstelt plagg for hverdagslig Utekos.
+            - generic [ref=e209]:
+              - generic [ref=e211]:
+                - paragraph [ref=e212]: 1790,-
+                - generic [ref=e213]: inkl. mva
+                - generic [ref=e214]: 1990,-
+              - generic [ref=e215]:
+                - button "Legg i handlekurv" [ref=e217] [cursor=pointer]
+                - link "Oppdag TechDown™" [ref=e219] [cursor=pointer]:
+                  - /url: /produkter/utekos-techdown
+                  - text: Oppdag TechDown™
+                  - img [ref=e220]
+      - generic [ref=e226]:
+        - generic "Produktvideo som viser Utekos i bruk" [ref=e231]
+        - generic [ref=e232]:
+          - heading "Slutt å fryse. Begynn å nyte." [level=2] [ref=e233]:
+            - generic [ref=e234]: Slutt
+            - generic [ref=e235]: å
+            - generic [ref=e239]: fryse.
+            - generic [ref=e240]: Begynn
+            - generic [ref=e241]: å
+            - generic [ref=e245]: nyte.
+          - paragraph [ref=e246]: Er du lei av å la kulden ødelegge de gode øyeblikkene ute? Enten du er på fjellet, i hagen, på hytten eller i båten, er Utekos løsningen som holder deg varm og komfortabel.
+          - generic [ref=e247]:
+            - generic [ref=e248]:
+              - img [ref=e250]
+              - generic [ref=e256]:
+                - paragraph [ref=e257]: Garantert varm
+                - paragraph [ref=e258]: Regisser din egen komfort
+            - generic [ref=e259]:
+              - img [ref=e261]
+              - generic [ref=e265]:
+                - paragraph [ref=e266]: 3-i-1 funksjonalitet
+                - paragraph [ref=e267]: Veksle enkelt mellom ulike moduser
+          - link "Opplev Utekos selv" [ref=e269] [cursor=pointer]:
+            - /url: /produkter/utekos-mikrofiber
+            - text: Opplev Utekos selv
+            - img [ref=e270]
+      - article [ref=e272]:
+        - heading "Kundenes favoritter" [level=2] [ref=e273]
+        - region [ref=e274]:
+          - generic [ref=e276]:
+            - group [ref=e277]:
+              - generic [ref=e278]:
+                - link "Se produkt Utekos TechDown™" [ref=e280] [cursor=pointer]:
+                  - /url: /produkter/utekos-techdown?variant=gid%3A%2F%2Fshopify%2FProductVariant%2F46944403882232
+                  - generic [ref=e281]: UNISEX
+                  - img "Bilde av Utekos TechDown™" [ref=e284]
+                - generic [ref=e285]:
+                  - generic [ref=e286]:
+                    - link "Utekos TechDown™" [ref=e287] [cursor=pointer]:
+                      - /url: /produkter/utekos-techdown?variant=gid%3A%2F%2Fshopify%2FProductVariant%2F46944403882232
+                      - generic [ref=e288]: Utekos TechDown™
+                    - generic "Velg farge" [ref=e289]:
+                      - button "Velg farge Havdyp" [pressed] [ref=e290] [cursor=pointer]
+                  - generic [ref=e292]:
+                    - link "STØRRELSE" [ref=e293] [cursor=pointer]:
+                      - /url: /handlehjelp/storrelsesguide
+                      - text: STØRRELSE
+                      - img [ref=e294]
+                    - generic [ref=e298]:
+                      - button "Middels" [ref=e299] [cursor=pointer]
+                      - button "Stor" [ref=e300] [cursor=pointer]
+                      - button "Ekstra stor" [ref=e301] [cursor=pointer]
+                - generic [ref=e302]:
+                  - paragraph [ref=e304]: 1 790,00 kr
+                  - generic [ref=e305]:
+                    - link "Se produkt" [ref=e306] [cursor=pointer]:
+                      - /url: /produkter/utekos-techdown?variant=gid%3A%2F%2Fshopify%2FProductVariant%2F46944403882232
+                    - button "Legg i handlekurv" [ref=e307] [cursor=pointer]
+            - group [ref=e308]:
+              - generic [ref=e309]:
+                - link "Se produkt Utekos Mikrofiber™" [ref=e311] [cursor=pointer]:
+                  - /url: /produkter/utekos-mikrofiber?variant=gid%3A%2F%2Fshopify%2FProductVariant%2F42903231037688
+                  - generic [ref=e312]: UNISEX
+                  - img "Bilde av Utekos Mikrofiber™" [ref=e315]
+                - generic [ref=e316]:
+                  - generic [ref=e317]:
+                    - link "Utekos Mikrofiber™" [ref=e318] [cursor=pointer]:
+                      - /url: /produkter/utekos-mikrofiber?variant=gid%3A%2F%2Fshopify%2FProductVariant%2F42903231037688
+                      - generic [ref=e319]: Utekos Mikrofiber™
+                    - generic "Velg farge" [ref=e320]:
+                      - button "Velg farge Vargnatt" [ref=e321] [cursor=pointer]
+                      - button "Velg farge Fjellblå" [pressed] [ref=e322] [cursor=pointer]
+                  - generic [ref=e324]:
+                    - link "STØRRELSE" [ref=e325] [cursor=pointer]:
+                      - /url: /handlehjelp/storrelsesguide
+                      - text: STØRRELSE
+                      - img [ref=e326]
+                    - generic [ref=e330]:
+                      - button "Medium" [ref=e331] [cursor=pointer]
+                      - button "Large" [ref=e332] [cursor=pointer]
+                - generic [ref=e333]:
+                  - paragraph [ref=e335]: 1 590,00 kr
+                  - generic [ref=e336]:
+                    - link "Se produkt" [ref=e337] [cursor=pointer]:
+                      - /url: /produkter/utekos-mikrofiber?variant=gid%3A%2F%2Fshopify%2FProductVariant%2F42903231037688
+                    - button "Legg i handlekurv" [ref=e338] [cursor=pointer]
+            - group [ref=e339]:
+              - generic [ref=e340]:
+                - link "Se produkt Comfyrobe™" [ref=e342] [cursor=pointer]:
+                  - /url: /produkter/comfyrobe?variant=gid%3A%2F%2Fshopify%2FProductVariant%2F43959919051000
+                  - generic [ref=e343]: UNISEX
+                  - generic [ref=e344]: Få igjen
+                  - img "Bilde av Comfyrobe™" [ref=e347]
+                - generic [ref=e348]:
+                  - generic [ref=e349]:
+                    - link "Comfyrobe™" [ref=e350] [cursor=pointer]:
+                      - /url: /produkter/comfyrobe?variant=gid%3A%2F%2Fshopify%2FProductVariant%2F43959919051000
+                      - generic [ref=e351]: Comfyrobe™
+                    - generic "Velg farge" [ref=e352]:
+                      - button "Velg farge Fjellnatt" [pressed] [ref=e353] [cursor=pointer]
+                  - generic [ref=e355]:
+                    - link "STØRRELSE" [ref=e356] [cursor=pointer]:
+                      - /url: /handlehjelp/storrelsesguide
+                      - text: STØRRELSE
+                      - img [ref=e357]
+                    - generic [ref=e361]:
+                      - button "S" [ref=e362] [cursor=pointer]
+                      - button "M" [ref=e363] [cursor=pointer]
+                      - button "L" [ref=e364] [cursor=pointer]
+                - generic [ref=e365]:
+                  - paragraph [ref=e367]: 999,00 kr
+                  - generic [ref=e368]:
+                    - link "Se produkt" [ref=e369] [cursor=pointer]:
+                      - /url: /produkter/comfyrobe?variant=gid%3A%2F%2Fshopify%2FProductVariant%2F43959919051000
+                    - button "Legg i handlekurv" [ref=e370] [cursor=pointer]
+          - button "Previous slide" [disabled]:
+            - img
+            - generic: Previous slide
+          - button "Next slide" [disabled]:
+            - img
+            - generic: Next slide
+      - generic [ref=e372]:
+        - generic [ref=e373]:
+          - heading "Drevet av ekte opplevelser" [level=2] [ref=e374]:
+            - generic [ref=e375]:
+              - generic [ref=e376]: D
+              - generic [ref=e377]: r
+              - generic [ref=e378]: e
+              - generic [ref=e379]: v
+              - generic [ref=e380]: e
+              - generic [ref=e381]: t
+            - generic [ref=e383]:
+              - generic [ref=e384]: a
+              - generic [ref=e385]: v
+            - generic [ref=e387]:
+              - generic [ref=e388]: e
+              - generic [ref=e389]: k
+              - generic [ref=e390]: t
+              - generic [ref=e391]: e
+            - generic [ref=e393]:
+              - generic [ref=e394]: o
+              - generic [ref=e395]: p
+              - generic [ref=e396]: p
+              - generic [ref=e397]: l
+              - generic [ref=e398]: e
+              - generic [ref=e399]: v
+              - generic [ref=e400]: e
+              - generic [ref=e401]: l
+              - generic [ref=e402]: s
+              - generic [ref=e403]: e
+              - generic [ref=e404]: r
+          - paragraph [ref=e406]:
+            - text: Våre beste produktutviklere er
+            - strong [ref=e409]: kundene våre
+            - text: . Vi lytter, lærer og designer for å løse reelle behov – slik at du kan skape flere og bedre
+            - generic [ref=e410]: minner utendørs
+            - text: .
+        - generic [ref=e411]:
+          - generic [ref=e413]:
+            - img [ref=e414]:
+              - generic [ref=e421]:
+                - img [ref=e423]
+                - generic [ref=e425]: Forlenget kveldene
+              - generic [ref=e428]:
+                - img [ref=e430]
+                - generic [ref=e433]: Overraskende lett
+              - generic [ref=e436]:
+                - img [ref=e438]
+                - generic [ref=e440]: Gjennomført kvalitet
+              - generic [ref=e443]:
+                - img [ref=e445]
+                - generic [ref=e447]: Verdt hver krone
+            - generic:
+              - generic:
+                - generic:
+                  - img "Utekos"
+          - generic [ref=e449]:
+            - article [ref=e450]:
+              - generic [ref=e451]:
+                - img [ref=e453]
+                - generic [ref=e455]:
+                  - heading "Før Utekos®:" [level=3] [ref=e456]
+                  - paragraph [ref=e457]: Kulden satte en stopper for kosen.
+            - article [ref=e458]:
+              - generic [ref=e459]:
+                - img [ref=e461]
+                - generic [ref=e467]:
+                  - heading "Etter Utekos®:" [level=3] [ref=e468]
+                  - paragraph [ref=e469]: Nå varer de beste øyeblikkene lenger.
+      - generic [ref=e476]:
+        - region [ref=e478]:
+          - group [ref=e481]:
+            - img "Comfyrobe™ - Vanntett og vindtett robe" [ref=e485]
+        - generic [ref=e486]:
+          - generic [ref=e487]:
+            - img [ref=e488]
+            - generic [ref=e490]: Comfyrobe™
+          - heading "Tøff mot været, komfortabel for deg" [level=2] [ref=e491]
+          - paragraph [ref=e492]: Comfyrobe™ kombinerer funksjon, tidløst design og kompromissløs komfort. Vanntett og vindtett ytterstoff med pustende membran holder deg tørr, mens det tykke sherpa-fôret omslutter deg med varme.
+          - list [ref=e493]:
+            - listitem [ref=e494]:
+              - generic [ref=e496]:
+                - img [ref=e498]
+                - generic [ref=e500]:
+                  - text: Vanntett og vindtett
+                  - generic [ref=e501]: — 8000mm vannsøyle og tapede sømmer
+            - listitem [ref=e504]:
+              - generic [ref=e506]:
+                - img [ref=e508]
+                - generic [ref=e510]:
+                  - text: Lammeull-fôr
+                  - generic [ref=e511]: — Varm og hurtigtørkende
+            - listitem [ref=e514]:
+              - generic [ref=e516]:
+                - img [ref=e518]
+                - generic [ref=e520]:
+                  - text: Toveis YKK®-glidelås
+                  - generic [ref=e521]: — Enkel av- og påkledning
+          - link "Utforsk Comfyrobe™" [ref=e525] [cursor=pointer]:
+            - /url: /kampanje/comfyrobe
+            - text: Utforsk Comfyrobe™
+            - img
+      - generic [ref=e530]:
+        - generic [ref=e531]:
+          - heading "Skapt for dine øyeblikk" [level=2] [ref=e532]:
+            - generic [ref=e533]:
+              - generic [ref=e534]: Skapt
+              - generic [ref=e535]: for
+              - generic [ref=e536]: dine
+              - generic [ref=e538]: øyeblikk
+          - paragraph [ref=e541]:
+            - generic [ref=e542]: Uansett
+            - generic [ref=e543]: hvor
+            - generic [ref=e544]: du
+            - generic [ref=e545]: finner
+            - generic [ref=e547]:
+              - generic [ref=e548]: roen,
+              - img
+            - generic [ref=e549]: er
+            - generic [ref=e550]: Utekos
+            - generic [ref=e551]: designet
+            - generic [ref=e552]: for
+            - generic [ref=e553]: å
+            - generic [ref=e554]: gjøre
+            - generic [ref=e558]: opplevelsen
+            - generic [ref=e559]: bedre.
+        - generic [ref=e560]:
+          - generic [ref=e563]:
+            - generic [ref=e564]:
+              - img [ref=e566]
+              - heading "I bobilen" [level=3] [ref=e570]
+            - paragraph [ref=e571]: Lett å pakke, genial i bruk. Bytt ut store pledd og ekstra jakker med ett plagg som gjør hvert eneste stopp til en varm og komfortabel opplevelse.
+          - generic [ref=e574]:
+            - generic [ref=e575]:
+              - img [ref=e577]
+              - heading "I båten" [level=3] [ref=e580]
+            - paragraph [ref=e581]: Nyt solnedgangen fra dekk uten å la den kalde sjøbrisen ødelegge øyeblikket. Den beskytter mot trekk og lar deg forlenge båtkvelden i ren komfort.
+          - generic [ref=e584]:
+            - generic [ref=e585]:
+              - img [ref=e587]
+              - heading "På hytten" [level=3] [ref=e590]
+            - paragraph [ref=e591]: Fra iskald ankomst til umiddelbar varme. Utekos er den perfekte hytteuniformen for de kjølige kveldene på terrassen og den ferske morgenkaffen ute.
+      - generic [ref=e594]:
+        - generic [ref=e596]:
+          - generic [ref=e597]:
+            - heading "Kvalitet i hver fiber" [level=2] [ref=e598]
+            - paragraph [ref=e599]: Fra den lette spensten i dunet til slitestyrken i hver søm – vi er transparente om materialvalgene som definerer Utekos. Dette er kvalitet du kan føle på, designet for å vare.
+          - link "Utforsk teknologien" [ref=e601] [cursor=pointer]:
+            - /url: /handlehjelp/teknologi-materialer
+            - text: Utforsk teknologien
+            - img [ref=e602]
+        - generic [ref=e605]:
+          - generic [ref=e606]:
+            - img [ref=e608]
+            - heading "Premium Isolasjon" [level=3] [ref=e611]
+          - paragraph [ref=e612]: Kun sertifisert dun og høykvalitets syntetisk fyll for optimal varme-til-vekt.
+        - generic [ref=e614]:
+          - generic [ref=e615]:
+            - img [ref=e617]
+            - heading "Bygget for å vare" [level=3] [ref=e620]
+          - paragraph [ref=e621]: Slitesterke materialer og solide sømmer som tåler aktiv bruk i norske forhold.
+  - contentinfo [ref=e623]:
+    - generic [ref=e624]:
+      - generic [ref=e625]:
+        - generic [ref=e626]:
+          - heading "Handlehjelp" [level=3] [ref=e627]
+          - navigation "Handlehjelp navigasjon" [ref=e628]:
+            - list [ref=e629]:
+              - listitem [ref=e630]:
+                - link "Kontakt oss" [ref=e631] [cursor=pointer]:
+                  - /url: /kontaktskjema
+              - listitem [ref=e632]:
+                - link "Teknologi og materialer" [ref=e633] [cursor=pointer]:
+                  - /url: /handlehjelp/teknologi-materialer
+              - listitem [ref=e634]:
+                - link "Vask og vedlikehold" [ref=e635] [cursor=pointer]:
+                  - /url: /handlehjelp/vask-og-vedlikehold
+              - listitem [ref=e636]:
+                - link "Størrelsesguide" [ref=e637] [cursor=pointer]:
+                  - /url: /handlehjelp/storrelsesguide
+        - generic [ref=e638]:
+          - heading "Kundeservice" [level=3] [ref=e639]
+          - navigation "Kundeservice navigasjon" [ref=e640]:
+            - list [ref=e641]:
+              - listitem [ref=e642]:
+                - link "Kundeservice" [ref=e643] [cursor=pointer]:
+                  - /url: /kontaktskjema
+              - listitem [ref=e644]:
+                - 'link "Tlf: +47 40 21 63 43" [ref=e645] [cursor=pointer]':
+                  - /url: tel:+4740216343
+              - listitem [ref=e646]:
+                - 'link "E-post: kundeservice@utekos.no" [ref=e647] [cursor=pointer]':
+                  - /url: mailto:kundeservice@utekos.no
+              - button "Innstillinger for informasjonskapsler" [ref=e648] [cursor=pointer]
+        - generic [ref=e649]:
+          - heading "Informasjon" [level=3] [ref=e650]
+          - navigation "Informasjon navigasjon" [ref=e651]:
+            - list [ref=e652]:
+              - listitem [ref=e653]:
+                - link "Om oss" [ref=e654] [cursor=pointer]:
+                  - /url: /om-oss
+              - listitem [ref=e655]:
+                - link "Fraktinformasjon" [ref=e656] [cursor=pointer]:
+                  - /url: /frakt-og-retur
+              - listitem [ref=e657]:
+                - link "Personvern" [ref=e658] [cursor=pointer]:
+                  - /url: /personvern
+              - listitem [ref=e659]:
+                - link "Vilkår og betingelser" [ref=e660] [cursor=pointer]:
+                  - /url: /vilkar-betingelser
+        - generic [ref=e661]:
+          - heading "Bedriftsinformasjon" [level=3] [ref=e662]
+          - navigation "Bedriftsinformasjon navigasjon" [ref=e663]:
+            - list [ref=e664]:
+              - listitem [ref=e665]:
+                - link "KELC AS" [ref=e666] [cursor=pointer]:
+                  - /url: /
+              - listitem [ref=e667]:
+                - link "Lille Damsgårdsveien 25" [ref=e668] [cursor=pointer]:
+                  - /url: map:Lille Damsgårdsveien 25
+              - listitem [ref=e669]:
+                - link "5162, Laksevåg" [ref=e670] [cursor=pointer]:
+                  - /url: map:Lille Damsgårdsveien 25, 5162, Bergen
+              - listitem [ref=e671]:
+                - link "Org.nr 925 820 393" [ref=e672] [cursor=pointer]:
+                  - /url: /kontaktskjema
+      - article [ref=e675]:
+        - generic [ref=e676]:
+          - generic [ref=e677]:
+            - img [ref=e678]
+            - heading "Meld deg på Utekos sitt nyhetsbrev!" [level=2] [ref=e681]
+          - heading "Som medlem i vår kundeklubb får du personlige tilbud og tilgang til salg og kampanjer først. Du får også masse tips og inspirasjon rett inn i innboksen din." [level=3] [ref=e682]
+          - generic [ref=e683]:
+            - textbox "Din e-postadresse..." [ref=e684]
+            - button "Meld meg inn" [ref=e685] [cursor=pointer]:
+              - text: Meld meg inn
+              - img [ref=e686]
+      - generic [ref=e689]:
+        - img "Klarna betalingsmetode" [ref=e690]
+        - img "Vipps betalingsmetode" [ref=e695]
+        - img "Visa betalingsmetode" [ref=e697]
+        - img "Mastercard betalingsmetode" [ref=e701]
+      - paragraph [ref=e706]: © 2026 Kelc AS. Alle rettigheter forbeholdt. Utekos® er et registrert varemerke i Norge.

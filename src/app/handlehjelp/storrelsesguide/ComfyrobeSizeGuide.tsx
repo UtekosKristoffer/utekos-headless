@@ -44,7 +44,7 @@ export function ComfyrobeSizeGuide() {
           <div className='mx-auto max-w-3xl text-center'>
             <BrandBadge
               label='Comfyrobe™'
-              backgroundColor='var(--maritime-blue)'
+              backgroundColor='var(--havdyp)'
               textColor='var(--cloud-dancer)'
               className='mb-5 px-4 py-2 text-sm'
             />
@@ -66,7 +66,7 @@ export function ComfyrobeSizeGuide() {
             <div className='grid grid-cols-1 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-8'>
               {comfyrobeFeatures.map(feature => (
                 <div key={feature.title} className='flex items-start gap-4'>
-                  <div className='flex size-10 flex-shrink-0 items-center justify-center rounded-full bg-maritime-blue text-cloud-dancer'>
+                  <div className='flex size-10 flex-shrink-0 items-center justify-center rounded-full bg-havdyp text-cloud-dancer'>
                     <feature.Icon className='size-5' aria-hidden='true' />
                   </div>
                   <div>
@@ -78,7 +78,7 @@ export function ComfyrobeSizeGuide() {
             </div>
           </div>
 
-          <div className='mx-auto mt-16 max-w-3xl rounded-lg border border-maritime-darkest/10 bg-maritime-blue p-6 shadow-[0_18px_44px_-36px_color-mix(in_oklab,var(--maritime-darkest)_72%,transparent)]'>
+          <div className='mx-auto mt-16 max-w-3xl rounded-lg border border-maritime-darkest/10 bg-havdyp p-6 shadow-[0_18px_44px_-36px_color-mix(in_oklab,var(--maritime-darkest)_72%,transparent)]'>
             <div className='flex items-start gap-4'>
               <Lightbulb className='size-8 flex-shrink-0 text-maritime-darkest' />
               <div>
@@ -98,7 +98,7 @@ export function ComfyrobeSizeGuide() {
             <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
               <div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
                 <div className='max-w-6xl mx-auto'>
-                  <div className='mb-4 flex items-center justify-center rounded-lg border border-maritime-darkest/10 bg-maritime-blue p-4'>
+                  <div className='mb-4 flex items-center justify-center rounded-lg border border-maritime-darkest/10 bg-havdyp p-4'>
                     <Image
                       src={ComfyFrontSkisse}
                       alt='Skisse av Comfyrobe med mål'
@@ -109,7 +109,7 @@ export function ComfyrobeSizeGuide() {
                   </div>
                   <div className='mt-12 overflow-hidden rounded-lg border border-maritime-darkest/10 shadow-[0_18px_44px_-36px_color-mix(in_oklab,var(--maritime-darkest)_72%,transparent)]'>
                     <table className='min-w-full divide-y divide-maritime-darkest/10 bg-cloud-dancer'>
-                      <thead className='bg-maritime-blue text-cloud-dancer'>
+                      <thead className='bg-havdyp text-cloud-dancer'>
                         <tr>
                           <th
                             scope='col'

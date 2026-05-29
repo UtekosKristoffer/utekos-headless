@@ -12,8 +12,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Inspirasjon til mer utekos | Utekos',
-    description:
-      'Utforsk guider og ideer for hytteliv, bobil, båtliv, terrasse, grillkvelder og isbading.',
+    description: 'Utforsk guider og ideer for hytteliv, bobil, båtliv, terrasse, grillkvelder og isbading.',
     url: '/inspirasjon',
     siteName: 'Utekos',
     locale: 'no_NO',
@@ -28,10 +27,9 @@ export default function InspirationPage() {
         <h1 className='text-4xl font-bold leading-[0.95] tracking-normal sm:text-5xl lg:text-6xl'>
           Inspirasjon for mer utekos
         </h1>
-        <p className='mx-auto mt-6 max-w-2xl text-lg leading-[1.45] tracking-normal text-maritime-blue'>
-          Utforsk praktiske guider for hytteliv, bobil, båtliv, terrasse,
-          grillkvelder og isbading. Finn situasjonen som ligner din, og se
-          hvordan Utekos forlenger de gode øyeblikkene ute.
+        <p className='mx-auto mt-6 max-w-2xl text-lg leading-[1.45] tracking-normal text-havdyp'>
+          Utforsk praktiske guider for hytteliv, bobil, båtliv, terrasse, grillkvelder og isbading. Finn
+          situasjonen som ligner din, og se hvordan Utekos forlenger de gode øyeblikkene ute.
         </p>
         <div className='mt-8 flex flex-wrap justify-center gap-4'>
           <BrandBadge
@@ -48,9 +46,7 @@ export default function InspirationPage() {
             textColor='var(--cloud-dancer)'
             className='border border-maritime-darkest/18 px-7 py-3 text-base leading-[1.4] font-semibold tracking-normal shadow-[0_18px_38px_-32px_rgba(14,18,35,0.7)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-110'
           >
-            <Link href='/handlehjelp/storrelsesguide'>
-              Finn riktig størrelse
-            </Link>
+            <Link href='/handlehjelp/storrelsesguide'>Finn riktig størrelse</Link>
           </BrandBadge>
         </div>
       </div>

@@ -83,7 +83,7 @@ export const TechDownFeatureSection = () => {
   return (
     <section
       ref={container}
-      className='relative my-24 overflow-hidden rounded-3xl border border-cloud-dancer/10 bg-[linear-gradient(135deg,color-mix(in_oklch,var(--maritime-blue)_82%,rgba(13,21,31,0.96))_0%,color-mix(in_oklch,var(--maritime-darkest)_92%,rgba(10,16,24,0.98))_52%,color-mix(in_oklch,var(--maritime-blue)_84%,rgba(13,21,31,0.96))_100%)] py-16 md:my-32 md:py-24'
+      className='relative my-24 overflow-hidden rounded-3xl border border-cloud-dancer/10 bg-[linear-gradient(135deg,color-mix(in_oklch,var(--havdyp)_82%,rgba(13,21,31,0.96))_0%,color-mix(in_oklch,var(--maritime-darkest)_92%,rgba(10,16,24,0.98))_52%,color-mix(in_oklch,var(--havdyp)_84%,rgba(13,21,31,0.96))_100%)] py-16 md:my-32 md:py-24'
     >
       <div className='gsap-glow pointer-events-none absolute -left-[10%] top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-ancient-water/12 blur-[120px]' />
       <div className='gsap-glow pointer-events-none absolute -right-[10%] bottom-0 h-[500px] w-[500px] rounded-full bg-soft-warm/10 blur-[100px]' />
@@ -152,23 +152,18 @@ export const TechDownFeatureSection = () => {
           </h2>
 
           <p className='gsap-content mb-8 max-w-lg text-lg leading-relaxed tracking-tight font-utekos-text text-cloud-dancer/90'>
-            Vi har ikke bare kombinert det beste fra dunens letthet og
-            mikrofiberens slitestyrke – vi har utviklet en helt ny kategori av
-            personlig komfort.
+            Vi har ikke bare kombinert det beste fra dunens letthet og mikrofiberens slitestyrke – vi har
+            utviklet en helt ny kategori av personlig komfort.
           </p>
 
           <div className='gsap-content mb-10 flex items-end gap-3 rounded-xl border border-cloud-dancer/10 bg-cloud-dancer/[0.05] p-4 backdrop-blur-sm'>
             <div className='flex flex-col'>
-              <span className='mb-1 text-sm font-medium text-overcast/58 line-through'>
-                Før 1990,-
-              </span>
+              <span className='mb-1 text-sm font-medium text-overcast/58 line-through'>Før 1990,-</span>
               <div className='flex items-baseline gap-2'>
                 <span className='text-3xl font-bold tracking-tight font-utekos-text text-cloud-dancer'>
                   1790,-
                 </span>
-                <span className='text-sm tracking-tight font-utekos-text text-overcast/62'>
-                  inkl. mva
-                </span>
+                <span className='text-sm tracking-tight font-utekos-text text-overcast/62'>inkl. mva</span>
               </div>
             </div>
             <div className='mx-2 h-8 w-[1px] bg-cloud-dancer/10'></div>
@@ -200,10 +195,7 @@ export const TechDownFeatureSection = () => {
               textColor='var(--color-maritime-darkest)'
               className='group h-14 px-8 text-base tracking-tight font-utekos-text shadow-[0_20px_46px_-28px_rgba(20,30,40,0.56)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-95'
             >
-              <Link
-                href='/produkter/utekos-techdown'
-                data-track='TechDownProductPageSectionShopNowClick'
-              >
+              <Link href='/produkter/utekos-techdown' data-track='TechDownProductPageSectionShopNowClick'>
                 Benytt tilbudet nå
                 <ArrowRight className='ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1' />
               </Link>

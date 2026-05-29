@@ -22,12 +22,10 @@ export function ProductCareComfyrobe() {
       value='comfyrobe'
       className='mt-8 rounded-2xl border border-maritime-darkest/10 bg-cloud-dancer/72 p-6 shadow-[0_20px_54px_-46px_color-mix(in_oklab,var(--maritime-darkest)_72%,transparent)] sm:p-8'
     >
-      <h3 className='text-2xl font-semibold tracking-tight text-maritime-darkest'>
-        Comfyrobe™
-      </h3>
+      <h3 className='text-2xl font-semibold tracking-tight text-maritime-darkest'>Comfyrobe™</h3>
       <p className='mt-3 max-w-2xl text-base font-utekos-text leading-[1.45] text-maritime-darkest/82'>
-        Comfyrobe kombinerer myk komfort med beskyttende DWR-behandling. Riktig
-        pleie bevarer både følelsen mot huden og evnen til å holde vann unna.
+        Comfyrobe kombinerer myk komfort med beskyttende DWR-behandling. Riktig pleie bevarer både følelsen
+        mot huden og evnen til å holde vann unna.
       </p>
 
       <div className='mt-7 grid gap-5 md:grid-cols-2'>
@@ -35,7 +33,7 @@ export function ProductCareComfyrobe() {
         <CareList variant='dont' title='Unngå' items={dontItems} />
       </div>
 
-      <div className='mt-7 rounded-2xl border border-cloud-dancer/12 bg-maritime-blue p-5 text-cloud-dancer sm:p-6'>
+      <div className='mt-7 rounded-2xl border border-cloud-dancer/12 bg-havdyp p-5 text-cloud-dancer sm:p-6'>
         <div className='flex items-start gap-3'>
           <span
             aria-hidden='true'
@@ -48,10 +46,9 @@ export function ProductCareComfyrobe() {
               Frisk opp DWR-behandlingen
             </h4>
             <p className='mt-2 text-sm leading-relaxed  font-utekos-text text-cloud-dancer/90 sm:text-base'>
-              Hvis vann ikke lenger preller av ytterstoffet, kan du reaktivere
-              DWR-behandlingen med en impregneringsspray. Lav varme i
-              tørketrommel etterpå låser behandlingen. Husk å lufte plagget godt
-              etter kontakt med saltvann eller klor.
+              Hvis vann ikke lenger preller av ytterstoffet, kan du reaktivere DWR-behandlingen med en
+              impregneringsspray. Lav varme i tørketrommel etterpå låser behandlingen. Husk å lufte plagget
+              godt etter kontakt med saltvann eller klor.
             </p>
           </div>
         </div>

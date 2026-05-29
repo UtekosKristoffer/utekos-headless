@@ -41,8 +41,7 @@ const seasons = [
     activeBackground: 'var(--primary-button)',
     activeText: 'var(--maritime-darkest)',
     title: 'Høstkvelder med klar luft',
-    description:
-      'Pakk deg inn i komfort og nyt den skarpe, klare høstluften med en kopp te og en god bok.'
+    description: 'Pakk deg inn i komfort og nyt den skarpe, klare høstluften med en kopp te og en god bok.'
   },
   {
     value: 'winter',
@@ -78,7 +77,7 @@ export function SeasonsTabs() {
             <TabsTrigger
               key={season.value}
               value={season.value}
-              className='seasons-tab-trigger relative h-auto min-h-14 overflow-hidden rounded-full border border-cloud-dancer/14 bg-maritime-darkest/72 px-5 py-4 text-sm font-semibold leading-[1.35] tracking-tight font-utekos-text text-cloud-dancer transition-[background-color,border-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:bg-maritime-darkest data-[state=active]:border-transparent data-[state=active]:text-maritime-darkest data-[state=active]:shadow-[0_18px_42px_-30px_color-mix(in_oklch,var(--maritime-darkest)_88%,transparent)] focus-visible:ring-2 focus-visible:ring-primary-button/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-blue motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+              className='seasons-tab-trigger relative h-auto min-h-14 overflow-hidden rounded-full border border-cloud-dancer/14 bg-maritime-darkest/72 px-5 py-4 text-sm font-semibold leading-[1.35] tracking-tight font-utekos-text text-cloud-dancer transition-[background-color,border-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:bg-maritime-darkest data-[state=active]:border-transparent data-[state=active]:text-maritime-darkest data-[state=active]:shadow-[0_18px_42px_-30px_color-mix(in_oklch,var(--maritime-darkest)_88%,transparent)] focus-visible:ring-2 focus-visible:ring-primary-button/70 focus-visible:ring-offset-2 focus-visible:ring-offset-havdyp motion-reduce:transition-none motion-reduce:hover:translate-y-0'
               style={{
                 backgroundColor: isActive ? season.activeBackground : undefined,
                 color: isActive ? season.activeText : undefined
@@ -124,15 +123,12 @@ export function SeasonsTabs() {
                 <CardContent className='relative p-8'>
                   <div className='mb-6 flex items-center gap-4'>
                     <div
-                      className='flex size-12 items-center justify-center rounded-full border border-cloud-dancer/18 bg-maritime-blue/58 transition-shadow duration-300 motion-reduce:transition-none'
+                      className='flex size-12 items-center justify-center rounded-full border border-cloud-dancer/18 bg-havdyp/58 transition-shadow duration-300 motion-reduce:transition-none'
                       style={{
                         boxShadow: `0 0 20px color-mix(in oklch, ${season.glowColor} 28%, transparent)`
                       }}
                     >
-                      <Icon
-                        className={`size-6 ${season.iconColor}`}
-                        aria-hidden='true'
-                      />
+                      <Icon className={`size-6 ${season.iconColor}`} aria-hidden='true' />
                     </div>
                     <h3 className='text-2xl font-semibold leading-[1.1] tracking-tight font-utekos-text text-cloud-dancer'>
                       {season.title}

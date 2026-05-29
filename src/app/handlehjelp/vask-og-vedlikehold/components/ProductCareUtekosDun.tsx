@@ -20,7 +20,7 @@ export function ProductCareUtekosDun() {
         <CareList variant='dont' title='Unngå' items={DOWN_DONT_ITEMS} />
       </div>
 
-      <div className='mt-7 rounded-2xl border border-cloud-dancer/12 bg-maritime-blue p-5 text-cloud-dancer sm:p-6'>
+      <div className='mt-7 rounded-2xl border border-cloud-dancer/12 bg-havdyp p-5 text-cloud-dancer sm:p-6'>
         <div className='flex items-start gap-3'>
           <span
             aria-hidden='true'
@@ -45,7 +45,7 @@ export function ProductCareUtekosDun() {
         <div className='flex items-start gap-3'>
           <span
             aria-hidden='true'
-            className='flex size-9 shrink-0 items-center justify-center rounded-full border border-maritime-blue/28 bg-maritime-blue text-cloud-dancer'
+            className='flex size-9 shrink-0 items-center justify-center rounded-full border border-havdyp/28 bg-havdyp text-cloud-dancer'
           >
             <Wind className='size-[1.05rem]' />
           </span>

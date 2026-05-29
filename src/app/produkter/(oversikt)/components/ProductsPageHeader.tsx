@@ -72,19 +72,9 @@ export function ProductsPageHeader() {
         '-=0.8'
       )
 
-      tl.fromTo(
-        '.gsap-underline',
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.8, ease: 'expo.out' },
-        '-=0.6'
-      )
+      tl.fromTo('.gsap-underline', { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: 'expo.out' }, '-=0.6')
 
-      tl.fromTo(
-        '.gsap-highlight',
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.6, ease: 'circ.out' },
-        '-=0.6'
-      )
+      tl.fromTo('.gsap-highlight', { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: 'circ.out' }, '-=0.6')
 
       gsap.to('.gsap-star', {
         y: -20,
@@ -106,7 +96,7 @@ export function ProductsPageHeader() {
     <header
       ref={container}
       onMouseMove={handleMouseMove}
-      className='relative mb-12 w-full rounded-3xl overflow-hidden bg-[radial-gradient(circle_at_top,color-mix(in_oklab,var(--ancient-water)_16%,transparent),transparent_42%),linear-gradient(180deg,color-mix(in_oklab,var(--maritime-blue)_90%,black)_0%,color-mix(in_oklab,var(--maritime-darkest)_94%,black)_100%)] pt-12 pb-16'
+      className='relative mb-12 w-full rounded-3xl overflow-hidden bg-[radial-gradient(circle_at_top,color-mix(in_oklab,var(--ancient-water)_16%,transparent),transparent_42%),linear-gradient(180deg,color-mix(in_oklab,var(--havdyp)_90%,black)_0%,color-mix(in_oklab,var(--maritime-darkest)_94%,black)_100%)] pt-12 pb-16'
     >
       <div className='absolute inset-0 -z-10 overflow-hidden pointer-events-none'>
         <div className='gsap-grid absolute inset-0 bg-[linear-gradient(to_right,rgba(245,243,239,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(245,243,239,0.045)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]' />
@@ -138,7 +128,7 @@ export function ProductsPageHeader() {
       <div className='container mx-auto px-4 text-center relative z-10'>
         <div className='gsap-badge opacity-0 mb-8 inline-flex items-center justify-center'>
           <BrandBadge
-            backgroundColor='var(--maritime-blue)'
+            backgroundColor='var(--havdyp)'
             textColor='var(--cloud-dancer)'
             className='group relative border border-cloud-dancer/18 px-5 py-2.5 shadow-[0_14px_32px_-24px_rgba(8,10,24,0.62)] sm:px-6 sm:py-3'
           >
@@ -174,9 +164,7 @@ export function ProductsPageHeader() {
           Utforsk vår kolleksjon og{' '}
           <span className='relative inline-block px-1'>
             <span className='gsap-highlight absolute inset-0 origin-left rounded bg-dusted-peri/24 -skew-x-6' />
-            <span className='relative z-10 font-medium text-ancient-water'>
-              skreddersy
-            </span>
+            <span className='relative z-10 font-medium text-ancient-water'>skreddersy</span>
           </span>{' '}
           din egen varme.
         </p>

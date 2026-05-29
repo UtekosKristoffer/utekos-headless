@@ -1,0 +1,19 @@
+[     376ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[     384ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780015078567-8950212896690, name: LCP, value: 10197260, delta: 10197260} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[     385ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780015078600-8096495519042, name: CLS, value: 0, delta: 0} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[     386ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[     517ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[     533ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[     701ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780025378940-7508273931318, name: FCP, value: 600, delta: 600} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[     919ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[    1110ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[    1145ms] [LOG] [Fast Refresh] done in 136ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[    1425ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780025378940-3653511452918, name: TTFB, value: 302.2999999523163, delta: 302.2999999523163} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[    1648ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[    1711ms] [LOG] [Fast Refresh] done in 164ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[    2819ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[    2917ms] [LOG] [Fast Refresh] done in 199ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[    3162ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[    3188ms] [LOG] [Fast Refresh] done in 126ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   26791ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   27393ms] [LOG] [Fast Refresh] done in 662ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925

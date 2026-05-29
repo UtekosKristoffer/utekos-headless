@@ -47,7 +47,7 @@ export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) 
           <div className='container mx-auto px-4'>
             <div className='mb-12 text-center'>
               <h2 className='mb-4 text-maritime-darkest'>Mer inspirasjon for dine øyeblikk</h2>
-              <p className='mx-auto max-w-2xl utekos-section-lead text-maritime-blue'>
+              <p className='mx-auto max-w-2xl utekos-section-lead text-havdyp'>
                 Finn ideer til situasjoner der komfort møter norsk natur. Se hvordan små grep gjør
                 uteøyeblikkene varmere.
               </p>
@@ -109,7 +109,7 @@ export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) 
               ))}
             </div>
             <div className='mt-12 text-center'>
-              <p className='mb-4 text-base leading-[1.45] font-utekos-text tracking-tight text-maritime-blue'>
+              <p className='mb-4 text-base leading-[1.45] font-utekos-text tracking-tight text-havdyp'>
                 Klar til å oppleve komforten selv?
               </p>
               <div className='flex flex-wrap justify-center gap-4'>
@@ -117,7 +117,7 @@ export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) 
                   asChild
                   backgroundColor='var(--maritime-darkest)'
                   textColor='var(--cloud-dancer)'
-                  className='border border-cloud-dancer/14 px-7 py-3 text-base font-medium leading-[1.45] tracking-[-0.01em] shadow-[0_18px_38px_-28px_rgba(14,18,35,0.86)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-maritime-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dusted-peri/70 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast'
+                  className='border border-cloud-dancer/14 px-7 py-3 text-base font-medium leading-[1.45] tracking-[-0.01em] shadow-[0_18px_38px_-28px_rgba(14,18,35,0.86)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-havdyp focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dusted-peri/70 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast'
                 >
                   <Link href='/produkter'>Se alle produkter</Link>
                 </BrandBadge>

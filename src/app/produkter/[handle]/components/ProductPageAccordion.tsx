@@ -4,23 +4,13 @@
 import { Accordion } from '@/components/ui/accordion'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import type { ProductPageAccordionProps } from '@types'
-import {
-  Layers3,
-  Mountain,
-  Ruler,
-  SlidersHorizontal,
-  Sparkles,
-  WashingMachine,
-  Info
-} from 'lucide-react'
+import { Layers3, Mountain, Ruler, SlidersHorizontal, Sparkles, WashingMachine, Info } from 'lucide-react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { Activity } from 'react'
 import type { AccordionSectionData } from '@types'
 import { mapOptionalContent } from '../utils/mapOptionalContent'
 import { ProductDetailsAccordionSection } from './ProductDetailsAccordionSection'
-export function ProductPageAccordion({
-  variantProfile
-}: ProductPageAccordionProps) {
+export function ProductPageAccordion({ variantProfile }: ProductPageAccordionProps) {
   if (!variantProfile) {
     return null
   }
@@ -31,7 +21,7 @@ export function ProductPageAccordion({
       title: 'Materialer',
       ...mapOptionalContent(variantProfile.materials?.value),
       Icon: Layers3,
-      color: 'text-maritime-blue'
+      color: 'text-havdyp'
     },
     {
       id: 'funksjoner',
@@ -52,7 +42,7 @@ export function ProductPageAccordion({
       title: 'Bruksområder',
       ...mapOptionalContent(variantProfile.usage?.value),
       Icon: Mountain,
-      color: 'text-maritime-blue'
+      color: 'text-havdyp'
     },
     {
       id: 'passform',
@@ -71,8 +61,7 @@ export function ProductPageAccordion({
   ]
 
   const sectionsWithContent = allSections.filter(
-    (s): s is AccordionSectionData =>
-      typeof s.content === 'string' && s.content.trim() !== ''
+    (s): s is AccordionSectionData => typeof s.content === 'string' && s.content.trim() !== ''
   )
 
   if (sectionsWithContent.length === 0) {
@@ -81,7 +70,7 @@ export function ProductPageAccordion({
 
   return (
     <section
-      className='relative mt-24 overflow-hidden rounded-[1.75rem] border border-cloud-dancer/70 bg-cloud-dancer/72 p-6 shadow-2xl shadow-maritime-blue/10 backdrop-blur-sm sm:p-8'
+      className='relative mt-24 overflow-hidden rounded-[1.75rem] border border-cloud-dancer/70 bg-cloud-dancer/72 p-6 shadow-2xl shadow-havdyp/10 backdrop-blur-sm sm:p-8'
       aria-labelledby='product-details-heading'
     >
       <div className='pointer-events-none absolute inset-0 -z-10'>
@@ -89,11 +78,7 @@ export function ProductPageAccordion({
       </div>
 
       <div className='mx-auto'>
-        <AnimatedBlock
-          className='mb-6 will-animate-fade-in-scale'
-          delay='0s'
-          threshold={0.3}
-        >
+        <AnimatedBlock className='mb-6 will-animate-fade-in-scale' delay='0s' threshold={0.3}>
           <BrandBadge
             backgroundColor='var(--dusted-peri)'
             textColor='var(--maritime-darkest)'
@@ -104,19 +89,12 @@ export function ProductPageAccordion({
           </BrandBadge>
         </AnimatedBlock>
         <Activity>
-          <AnimatedBlock
-            className='will-animate-fade-in-up'
-            delay='0.08s'
-            threshold={0.3}
-          ></AnimatedBlock>
+          <AnimatedBlock className='will-animate-fade-in-up' delay='0.08s' threshold={0.3}></AnimatedBlock>
         </Activity>
         <Activity>
           <Accordion type='single' collapsible className='w-full'>
             {sectionsWithContent.map(section => (
-              <ProductDetailsAccordionSection
-                key={section.id}
-                sectionData={section}
-              />
+              <ProductDetailsAccordionSection key={section.id} sectionData={section} />
             ))}
           </Accordion>
         </Activity>

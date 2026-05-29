@@ -25,9 +25,7 @@ export function CompareModelsPageHero() {
             backgroundColor='var(--overcast)'
             className='mb-7 px-6 py-3 text-sm shadow-[0_18px_44px_-30px_color-mix(in_oklab,var(--overcast)_80%,transparent)]'
           />
-          <h1 className='font-google-sans text-5xl leading-[0.9] font-bold tracking-[-0.01em] text-cloud-dancer sm:text-7xl lg:text-8xl'>
-            Hvilken Utekos passer best for deg?
-          </h1>
+          <h1 className='font-google-sans text-5xl text-cloud-dancer'>Hvilken Utekos passer best for deg?</h1>
           <p className='mt-7 max-w-2xl font-utekos-text text-lg leading-[1.45] tracking-tight text-cloud-dancer/90 sm:text-2xl'>
             Sammenlign Utekos Dun, Utekos Mikrofiber og Utekos TechDown. Finn riktig modell for hytte, bobil,
             båt og kalde kvelder ute.

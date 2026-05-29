@@ -264,7 +264,7 @@ export function TerrasseCarousel() {
         </div>
 
         <div className='gsap-carousel relative opacity-0'>
-          <div className='relative mx-auto max-w-6xl overflow-hidden rounded-[1.75rem] border border-cloud-dancer/10 bg-maritime-blue/40 p-4 shadow-[0_32px_90px_-56px_color-mix(in_oklch,var(--maritime-darkest)_96%,transparent)] backdrop-blur-sm sm:p-6'>
+          <div className='relative mx-auto max-w-6xl overflow-hidden rounded-[1.75rem] border border-cloud-dancer/10 bg-havdyp/40 p-4 shadow-[0_32px_90px_-56px_color-mix(in_oklch,var(--maritime-darkest)_96%,transparent)] backdrop-blur-sm sm:p-6'>
             <div className='absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,color-mix(in_oklch,var(--ancient-water)_38%,transparent),transparent)]' />
 
             <Carousel
@@ -294,8 +294,8 @@ export function TerrasseCarousel() {
                 ))}
               </CarouselContent>
 
-              <CarouselPrevious className='left-4 border-cloud-dancer/14 bg-maritime-darkest/78 text-cloud-dancer backdrop-blur-md hover:bg-maritime-blue focus-visible:ring-primary-button/70' />
-              <CarouselNext className='right-4 border-cloud-dancer/14 bg-maritime-darkest/78 text-cloud-dancer backdrop-blur-md hover:bg-maritime-blue focus-visible:ring-primary-button/70' />
+              <CarouselPrevious className='left-4 border-cloud-dancer/14 bg-maritime-darkest/78 text-cloud-dancer backdrop-blur-md hover:bg-havdyp focus-visible:ring-primary-button/70' />
+              <CarouselNext className='right-4 border-cloud-dancer/14 bg-maritime-darkest/78 text-cloud-dancer backdrop-blur-md hover:bg-havdyp focus-visible:ring-primary-button/70' />
             </Carousel>
 
             <div className='mt-8 flex items-center justify-center gap-2'>

@@ -1,9 +1,4 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger
-} from '@/components/ui/accordion'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 export const iceBathingFaqItems = [
   {
@@ -46,7 +41,7 @@ export function IceBathingFAQ() {
               <AccordionTrigger className='text-left text-maritime-darkest leading-[1.35] tracking-normal'>
                 {item.question}
               </AccordionTrigger>
-              <AccordionContent className='leading-[1.5] tracking-normal text-maritime-blue'>
+              <AccordionContent className='leading-[1.5] tracking-normal text-havdyp'>
                 {item.answer}
               </AccordionContent>
             </AccordionItem>

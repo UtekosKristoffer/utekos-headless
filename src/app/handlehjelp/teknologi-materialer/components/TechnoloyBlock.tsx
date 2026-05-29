@@ -45,7 +45,7 @@ export const TechnologyBlock = ({ tech, isActive }: { tech: Technology; isActive
       className={cn(
         'relative rounded-2xl border border-transparent p-6 transition-all duration-500',
         isActive ?
-          'bg-maritime-blue/50 opacity-100 ring-1 ring-white/10 backdrop-blur-sm'
+          'bg-havdyp/50 opacity-100 ring-1 ring-white/10 backdrop-blur-sm'
         : 'opacity-30 hover:opacity-60'
       )}
     >
@@ -55,7 +55,7 @@ export const TechnologyBlock = ({ tech, isActive }: { tech: Technology; isActive
             'flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border transition-colors',
             isActive ?
               'border-ancient-water/30 bg-ancient-water/10 text-ancient-water'
-            : 'border-maritime-blue bg-maritime-blue text-cloud-dancer/90'
+            : 'border-havdyp bg-havdyp text-cloud-dancer/90'
           )}
         >
           <IconComponent className='h-6 w-6' />
@@ -79,7 +79,7 @@ export const TechnologyBlock = ({ tech, isActive }: { tech: Technology; isActive
                 'rounded-full border px-2.5 py-1 text-sm font-medium transition-colors',
                 isActive ?
                   'border-white/10 bg-white/5 text-white'
-                : 'border-maritime-blue bg-transparent text-cloud-dancer/90'
+                : 'border-havdyp bg-transparent text-cloud-dancer/90'
               )}
             >
               {product}

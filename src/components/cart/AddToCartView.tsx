@@ -6,7 +6,10 @@ import type { AddToCartViewProps } from 'types/cart'
 export function AddToCartView({
   form,
   onSubmit,
+  onCheckout,
   isPending,
+  isAddToCartPending,
+  isCheckoutPending,
   isAvailable
 }: AddToCartViewProps) {
   return (
@@ -15,14 +18,18 @@ export function AddToCartView({
         onSubmit={form.handleSubmit(onSubmit)}
         className='flex flex-col gap-4'
       >
-        <div>
-          <label className='mb-2 block text-sm font-medium'>Antall</label>
+        <div className='space-y-2'>
+          <label className='block font-utekos-text text-sm font-semibold uppercase tracking-wide text-cloud-dancer'>
+            Antall
+          </label>
           <QuantitySelector />
         </div>
         <ModalSubmitButton
-          isPending={isPending}
+          isAddToCartPending={isAddToCartPending}
+          isCheckoutPending={isCheckoutPending}
           isDisabled={!isAvailable || isPending}
           availableForSale={isAvailable}
+          onCheckout={form.handleSubmit(onCheckout)}
         />
       </form>
     </Form>

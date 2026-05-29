@@ -30,7 +30,7 @@ export function StapperFeatureSection() {
   )
 
   return (
-    <section className='relative mb-8 overflow-hidden rounded-[1.75rem] border border-cloud-dancer/12 bg-[radial-gradient(circle_at_14%_18%,color-mix(in_oklab,var(--ancient-water)_14%,transparent),transparent_30%),linear-gradient(135deg,var(--maritime-blue)_0%,var(--maritime-darkest)_48%,var(--maritime-blue)_100%)] px-5 py-8 sm:px-8 sm:py-10 lg:px-10 xl:px-12'>
+    <section className='relative mb-8 overflow-hidden rounded-[1.75rem] border border-cloud-dancer/12 bg-[radial-gradient(circle_at_14%_18%,color-mix(in_oklab,var(--ancient-water)_14%,transparent),transparent_30%),linear-gradient(135deg,var(--havdyp)_0%,var(--maritime-darkest)_48%,var(--havdyp)_100%)] px-5 py-8 sm:px-8 sm:py-10 lg:px-10 xl:px-12'>
       <div
         aria-hidden='true'
         className='absolute inset-0 -z-10'
@@ -62,9 +62,8 @@ export function StapperFeatureSection() {
 
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s'>
               <p className='mx-auto mt-6 max-w-xl text-lg leading-[1.45] text-cloud-dancer lg:mx-0'>
-                Forvandle voluminøse jakker og soveposer til kompakte pakker.
-                Utekos Stapper™ er den smarte løsningen for deg som verdsetter
-                en effektiv og organisert bagasje på hytta, i bobilen eller i
+                Forvandle voluminøse jakker og soveposer til kompakte pakker. Utekos Stapper™ er den smarte
+                løsningen for deg som verdsetter en effektiv og organisert bagasje på hytta, i bobilen eller i
                 tursekken.
               </p>
             </AnimatedBlock>
@@ -76,10 +75,7 @@ export function StapperFeatureSection() {
                 textColor='var(--maritime-darkest)'
                 className='group min-h-14 justify-center border border-primary-button/18 px-7 text-base shadow-[0_16px_36px_-24px_rgba(232,178,66,0.55)] transition-transform duration-200 hover:-translate-y-0.5 hover:brightness-105 lg:justify-start'
               >
-                <Link
-                  href='/produkter/utekos-stapper'
-                  data-track='StapperFeatureSectionDiscoverClick'
-                >
+                <Link href='/produkter/utekos-stapper' data-track='StapperFeatureSectionDiscoverClick'>
                   Oppdag Stapper™
                   <PackageCheck className='ml-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-12' />
                 </Link>
@@ -87,11 +83,7 @@ export function StapperFeatureSection() {
             </AnimatedBlock>
           </div>
 
-          <AnimatedBlock
-            className='will-animate-fade-in-scale'
-            delay='0.2s'
-            threshold={0.35}
-          >
+          <AnimatedBlock className='will-animate-fade-in-scale' delay='0.2s' threshold={0.35}>
             {imagePanel}
           </AnimatedBlock>
         </div>
@@ -109,12 +101,8 @@ export function StapperFeatureSection() {
                 <IconRenderer name={feature.icon} className='h-4.5 w-4.5' />
               </div>
               <div>
-                <h3 className='text-base font-semibold leading-tight text-cloud-dancer'>
-                  {feature.title}
-                </h3>
-                <p className='mt-2 text-sm leading-relaxed text-overcast/88'>
-                  {feature.description}
-                </p>
+                <h3 className='text-base font-semibold leading-tight text-cloud-dancer'>{feature.title}</h3>
+                <p className='mt-2 text-sm leading-relaxed text-overcast/88'>{feature.description}</p>
               </div>
             </AnimatedBlock>
           ))}

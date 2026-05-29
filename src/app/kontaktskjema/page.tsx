@@ -18,8 +18,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Kontakt oss | Utekos Kundeservice',
-    description:
-      'Har du spørsmål om våre produkter eller din bestilling? Ta kontakt med oss her.',
+    description: 'Har du spørsmål om våre produkter eller din bestilling? Ta kontakt med oss her.',
     url: '/kontaktskjema',
     siteName: 'Utekos',
     locale: 'no_NO',
@@ -44,7 +43,7 @@ export default function SupportPage() {
             <TopGrid />
           </Activity>
           <Activity>
-            <div className='relative border border-cloud-dancer/12 bg-[radial-gradient(circle_at_10%_0%,color-mix(in_oklab,var(--ancient-water)_10%,transparent),transparent_36%),linear-gradient(135deg,var(--maritime-blue)_0%,var(--maritime-darkest)_58%,var(--chocolate-plum)_100%)]'>
+            <div className='relative border border-cloud-dancer/12 bg-[radial-gradient(circle_at_10%_0%,color-mix(in_oklab,var(--ancient-water)_10%,transparent),transparent_36%),linear-gradient(135deg,var(--havdyp)_0%,var(--maritime-darkest)_58%,var(--chocolate-plum)_100%)]'>
               <Activity>
                 <CornerPluses />
               </Activity>

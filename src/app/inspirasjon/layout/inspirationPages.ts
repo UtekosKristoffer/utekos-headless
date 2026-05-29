@@ -42,8 +42,8 @@ export const inspirationPages = [
     label: 'Grillkvelden',
     description: 'Sosiale stunder',
     icon: Flame,
-    color: 'var(--maritime-blue)',
+    color: 'var(--havdyp)',
     midColor: 'var(--skipper-blue)',
-    iconColor: 'text-maritime-blue'
+    iconColor: 'text-havdyp'
   }
 ]

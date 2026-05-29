@@ -11,21 +11,21 @@ type LayerType = 'outer' | 'insulation' | 'inner' | 'function'
 const LAYER_THEMES = {
   ancient: {
     border: 'border-ancient-water/30',
-    bg: 'bg-maritime-blue/80',
+    bg: 'bg-havdyp/80',
     text: 'text-ancient-water',
     glow: 'shadow-ancient-water/20',
     gradient: 'from-ancient-water/10'
   },
   cloud: {
     border: 'border-cloud-dancer/30',
-    bg: 'bg-maritime-blue/80',
+    bg: 'bg-havdyp/80',
     text: 'text-cloud-dancer/90',
     glow: 'shadow-cloud-dancer/20',
     gradient: 'from-cloud-dancer/10'
   },
   peri: {
     border: 'border-dusted-peri/30',
-    bg: 'bg-maritime-blue/80',
+    bg: 'bg-havdyp/80',
     text: 'text-dusted-peri',
     glow: 'shadow-dusted-peri/20',
     gradient: 'from-dusted-peri/10'
@@ -34,14 +34,8 @@ const LAYER_THEMES = {
 
 const getLayerType = (title: string): LayerType => {
   const t = title.toLowerCase()
-  if (t.includes('3-i-1') || t.includes('zip') || t.includes('konstruksjon'))
-    return 'function'
-  if (
-    t.includes('innerfôr')
-    || t.includes('taffeta')
-    || t.includes('sherpa')
-    || t.includes('lining')
-  )
+  if (t.includes('3-i-1') || t.includes('zip') || t.includes('konstruksjon')) return 'function'
+  if (t.includes('innerfôr') || t.includes('taffeta') || t.includes('sherpa') || t.includes('lining'))
     return 'inner'
   if (
     t.includes('insulation')
@@ -99,18 +93,16 @@ export function ProductLayersVisual({ activeTech }: { activeTech: string }) {
         <div
           className={cn(
             'absolute -right-12 top-1/2 -translate-y-1/2 transition-all duration-900',
-            activeLayer === 'function' ?
-              'opacity-100 translate-x-0'
-            : 'opacity-0 translate-x-8 pointer-events-none'
+            activeLayer === 'function' ? 'opacity-100 translate-x-0' : (
+              'opacity-0 translate-x-8 pointer-events-none'
+            )
           )}
         >
-          <div className='flex flex-col items-center gap-2 rounded-xl border border-ancient-water/30 bg-maritime-blue/90 p-4 shadow-2xl backdrop-blur-md'>
+          <div className='flex flex-col items-center gap-2 rounded-xl border border-ancient-water/30 bg-havdyp/90 p-4 shadow-2xl backdrop-blur-md'>
             <div className='rounded-full bg-ancient-water/20 p-2 text-ancient-water'>
               <Zap className='h-6 w-6' />
             </div>
-            <div className='text-sm font-bold tracking-wider text-ancient-water'>
-              System
-            </div>
+            <div className='text-sm font-bold tracking-wider text-ancient-water'>System</div>
             <div className='h-16 w-0.5 bg-gradient-to-b from-ancient-water/50 to-transparent' />
           </div>
         </div>
@@ -120,11 +112,7 @@ export function ProductLayersVisual({ activeTech }: { activeTech: string }) {
 }
 
 // --- MOBIL KOMPONENT (FLOATING HUD) ---
-export function MobileProductLayersVisual({
-  activeTech
-}: {
-  activeTech: string
-}) {
+export function MobileProductLayersVisual({ activeTech }: { activeTech: string }) {
   const activeLayer = useMemo(() => getLayerType(activeTech), [activeTech])
 
   // Data mapping for mobilvisningen
@@ -170,11 +158,7 @@ export function MobileProductLayersVisual({
       >
         {/* Bakgrunns-gradient som pulserer */}
         <div
-          className={cn(
-            'absolute inset-0 bg-gradient-to-r opacity-20',
-            theme.gradient,
-            'to-transparent'
-          )}
+          className={cn('absolute inset-0 bg-gradient-to-r opacity-20', theme.gradient, 'to-transparent')}
         />
 
         {/* Ikon Boks */}
@@ -190,12 +174,8 @@ export function MobileProductLayersVisual({
 
         {/* Tekst */}
         <div className='flex-1 min-w-0'>
-          <div className={cn('text-sm font-bold tracking-widest', theme.text)}>
-            Active Layer
-          </div>
-          <div className='truncate text-lg font-bold text-white'>
-            {current.title}
-          </div>
+          <div className={cn('text-sm font-bold tracking-widest', theme.text)}>Active Layer</div>
+          <div className='truncate text-lg font-bold text-white'>{current.title}</div>
         </div>
 
         {/* Mini Stack Indicator (Viser posisjon i lagene) */}
@@ -237,9 +217,9 @@ function MaterialCard({
     <div
       className={cn(
         'relative flex items-center gap-6 overflow-hidden rounded-2xl border p-6 transition-all duration-500 ease-out',
-        'border-white/5 bg-maritime-blue/80 backdrop-blur-sm',
+        'border-white/5 bg-havdyp/80 backdrop-blur-sm',
         isActive ?
-          `scale-105 ${theme.border} bg-maritime-blue shadow-2xl ${theme.glow} z-10 opacity-100 translate-y-0`
+          `scale-105 ${theme.border} bg-havdyp shadow-2xl ${theme.glow} z-10 opacity-100 translate-y-0`
         : 'scale-95 opacity-40 hover:opacity-60 z-0 grayscale-[0.5]'
       )}
     >
@@ -255,7 +235,7 @@ function MaterialCard({
           'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border transition-colors duration-300',
           isActive ?
             `${theme.border} bg-white/5 ${theme.text}`
-          : 'border-white/10 bg-maritime-blue text-cloud-dancer/90'
+          : 'border-white/10 bg-havdyp text-cloud-dancer/90'
         )}
       >
         <Icon className='h-6 w-6' />

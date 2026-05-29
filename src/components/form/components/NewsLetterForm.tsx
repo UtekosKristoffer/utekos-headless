@@ -46,20 +46,20 @@ export function NewsletterForm() {
   }
 
   return (
-    <div className='mx-auto w-full text-center'>
-      <div className='flex w-full flex-col items-center space-y-3'>
-        <div className='flex flex-col items-center gap-3 text-center text-cloud-dancer'>
-          <Mail data-icon='inline-start' className='size-10' />
+    <article className='mx-auto w-full text-center'>
+      <hgroup className='flex w-full flex-col items-center space-y-3'>
+        <div className='flex items-center justify-center gap-3 text-cloud-dancer'>
+          <Mail data-icon='inline-start' className='size-10 shrink-0' />
 
-          <p className='mx-auto max-w-2xl text-balance text-center text-3xl font-semibold leading-[1.05] tracking-normal text-cloud-dancer sm:text-4xl'>
+          <h2 className='max-w-2xl text-balance text-left text-3xl text-cloud-dancer sm:text-4xl'>
             Meld deg på Utekos sitt nyhetsbrev!
-          </p>
+          </h2>
         </div>
 
-        <p className='mx-auto mt-2! w-full max-w-4xl text-center font-utekos-text text-base leading-[1.5] tracking-normal text-cloud-dancer/80'>
+        <h3 className='mx-auto mt-2! w-full max-w-4xl text-center font-utekos-text text-base leading-[1.5] tracking-tight text-cloud-dancer/80'>
           Som medlem i vår kundeklubb får du personlige tilbud og tilgang til salg og kampanjer først. Du får
           også masse tips og inspirasjon rett inn i innboksen din.
-        </p>
+        </h3>
 
         <form
           ref={formRef}
@@ -86,7 +86,7 @@ export function NewsletterForm() {
             </button>
           </BrandBadge>
         </form>
-      </div>
-    </div>
+      </hgroup>
+    </article>
   )
 }

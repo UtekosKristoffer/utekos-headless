@@ -37,7 +37,10 @@ export function SectionThreeInOne() {
       <div className='flex flex-col pb-20 xl:hidden'>
         {Steps.map(step => (
           <div key={step.id} className='gsap-mobile-step-panel mb-12 flex flex-col last:mb-0'>
-            <div className='relative aspect-square w-full overflow-hidden border-y border-cloud-dancer/10 bg-mountain-view'>
+            <div
+              className='relative w-full overflow-hidden border-y border-cloud-dancer/10 bg-mountain-view'
+              style={{ aspectRatio: '1/1' }}
+            >
               <Image
                 src={step.image}
                 alt={step.title}

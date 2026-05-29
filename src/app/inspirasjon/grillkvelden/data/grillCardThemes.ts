@@ -9,7 +9,7 @@ export const grillCardThemes = [
     iconColor: 'text-maritime-darkest'
   },
   {
-    surface: 'bg-maritime-blue',
+    surface: 'bg-havdyp',
     border: 'border-cloud-dancer/14 hover:border-cloud-dancer/28',
     text: 'text-cloud-dancer',
     mutedText: 'text-cloud-dancer/88',

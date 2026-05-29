@@ -1,21 +1,11 @@
 'use client'
 
-import {
-  CommandDialog,
-  CommandEmpty,
-  CommandInput,
-  CommandList
-} from '@/components/ui/command'
+import { CommandDialog, CommandEmpty, CommandInput, CommandList } from '@/components/ui/command'
 import { cn } from '@/lib/utils/className'
 import { useQueryClient } from '@tanstack/react-query'
 import type { Route } from 'next'
 import { useRouter } from 'next/navigation'
-import {
-  Suspense,
-  startTransition,
-  useState,
-  useSyncExternalStore
-} from 'react'
+import { Suspense, startTransition, useState, useSyncExternalStore } from 'react'
 import { HeaderSearchFooter } from './HeaderSearchFooter'
 import { HeaderSearchInputField } from './HeaderSearchInputField'
 import { useCommandK } from './useCommandK'
@@ -28,11 +18,7 @@ const getServerSnapshot = () => false
 
 export function HeaderSearch({ className }: { className?: string }) {
   const [open, setOpen] = useState(false)
-  const isMounted = useSyncExternalStore(
-    subscribeToClientSnapshot,
-    getClientSnapshot,
-    getServerSnapshot
-  )
+  const isMounted = useSyncExternalStore(subscribeToClientSnapshot, getClientSnapshot, getServerSnapshot)
   const router = useRouter()
   const queryClient = useQueryClient()
 
@@ -71,6 +57,7 @@ export function HeaderSearch({ className }: { className?: string }) {
 
       {isMounted && (
         <CommandDialog
+          data-nosnippet
           open={open}
           onOpenChange={setOpen}
           showCloseButton={false}

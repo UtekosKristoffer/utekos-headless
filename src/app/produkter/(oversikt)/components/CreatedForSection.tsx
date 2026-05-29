@@ -60,17 +60,9 @@ export function CreatedForSection() {
         '-=0.7'
       )
 
-      tl.to(
-        '.gsap-desc-underline',
-        { scaleX: 1, duration: 0.8, ease: 'expo.out' },
-        '-=0.4'
-      )
+      tl.to('.gsap-desc-underline', { scaleX: 1, duration: 0.8, ease: 'expo.out' }, '-=0.4')
 
-      tl.to(
-        '.gsap-desc-highlight',
-        { scaleX: 1, duration: 0.6, ease: 'circ.out' },
-        '-=0.6'
-      )
+      tl.to('.gsap-desc-highlight', { scaleX: 1, duration: 0.6, ease: 'circ.out' }, '-=0.6')
 
       gsap.to('.gsap-icon-wrapper', {
         y: -10,
@@ -134,9 +126,7 @@ export function CreatedForSection() {
 
         <h2 className='text-balance text-4xl font-bold tracking-tight sm:text-5xl md:text-7xl leading-tight'>
           <span className='block overflow-hidden'>
-            <span className='gsap-title-line text-maritime-blue block will-change-transform'>
-              Skapt for
-            </span>
+            <span className='gsap-title-line text-havdyp block will-change-transform'>Skapt for</span>
           </span>
           <span className='block overflow-hidden pb-2'>
             <span className='gsap-title-line block will-change-transform'>
@@ -158,9 +148,7 @@ export function CreatedForSection() {
           for å holde deg varm, slik at du kan{' '}
           <span className='relative inline-block px-1'>
             <span className='gsap-desc-highlight absolute inset-0 -skew-x-6 text-maritime-darkest/90 rounded bg-white/10 origin-left scale-x-0' />
-            <span className='relative z-10 font-medium text-maritime-darkest/90'>
-              nyte
-            </span>
+            <span className='relative z-10 font-medium text-maritime-darkest/90'>nyte</span>
           </span>{' '}
           de gode øyeblikkene lenger.
         </p>

@@ -49,7 +49,7 @@ export function NbccHowToUseSection() {
             <ol className='grid gap-6'>
               {nbccSteps.map((step, index) => (
                 <li key={step.title} className='grid gap-5 sm:grid-cols-[3rem_1fr]'>
-                  <span className='flex size-12 items-center justify-center rounded-md bg-maritime-blue text-white'>
+                  <span className='flex size-12 items-center justify-center rounded-md bg-havdyp text-white'>
                     <CheckIcon size={22} animate='default' className='text-primary-button' aria-hidden />
                   </span>
                   <div>

@@ -70,10 +70,7 @@ export function TestimonialConstellation() {
   }, [])
 
   return (
-    <section
-      ref={containerRef}
-      className='relative mx-auto overflow-hidden bg-maritime-blue py-24 md:py-32'
-    >
+    <section ref={containerRef} className='relative mx-auto overflow-hidden bg-havdyp py-24 md:py-32'>
       <div className='absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] bg-sky-900/10 blur-[120px] rounded-full pointer-events-none' />
 
       <div className='relative z-10 mx-auto px-4 sm:px-6 lg:px-8 md:max-w-7xl'>
@@ -108,19 +105,17 @@ export function TestimonialConstellation() {
           <p className='animate-header-item mx-auto text-lg md:text-xl text-cloud-dancer leading-relaxed font-light'>
             Ekte tilbakemeldinger fra kunder som, i likhet med deg, verdsetter{' '}
             <span className='relative inline-flex items-center justify-center px-1'>
-              <span className='absolute inset-0 -z-10 -skew-x-12 rounded-md bg-gradient-to-r from-maritime-blue via-dusted-peri to-maritime-blue blur-[1px]' />
-              <span className='absolute inset-0 -z-10 -rotate-1 rounded-lg border border-dusted-peri/35 bg-gradient-to-br from-maritime-blue/70 via-sweet-lavender/24 to-dusted-peri' />
+              <span className='absolute inset-0 -z-10 -skew-x-12 rounded-md bg-gradient-to-r from-havdyp via-dusted-peri to-havdyp blur-[1px]' />
+              <span className='absolute inset-0 -z-10 -rotate-1 rounded-lg border border-dusted-peri/35 bg-gradient-to-br from-havdyp/70 via-sweet-lavender/24 to-dusted-peri' />
               <span className='relative z-10 inline-block font-medium text-cloud-dancer'>
                 kompromissløs kvalitet
               </span>
             </span>{' '}
             og{' '}
             <span className='relative inline-flex items-center justify-center px-1'>
-              <span className='absolute inset-0 -z-10 -skew-x-12 rounded-md bg-gradient-to-r from-maritime-blue via-dusted-peri to-maritime-blue blur-[1px]' />
+              <span className='absolute inset-0 -z-10 -skew-x-12 rounded-md bg-gradient-to-r from-havdyp via-dusted-peri to-havdyp blur-[1px]' />
               <span className='absolute inset-0 -z-10 -skew-x-16 rounded-lg border border-ancient-water bg-gradient-to-br from-country-air via-ancient-water to-country-air' />
-              <span className='relative z-10 inline-block'>
-                varige opplevelser utendørs
-              </span>
+              <span className='relative z-10 inline-block'>varige opplevelser utendørs</span>
             </span>
             .
           </p>

@@ -8,6 +8,7 @@ import { ProductPageController } from './ProductPageController'
 import { getCachedProductPageData } from '../utils/getCachedProductPageData'
 import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
 import { resolveInitialVariant } from '../utils/resolveInitialVariant'
+import { getProductWithoutSmallSize } from '@/components/products/getProductWithoutSmallSize'
 import type { SearchParamsPromise } from '../types'
 
 type AsyncProductContentProps = {
@@ -26,8 +27,12 @@ export async function AsyncProductContent({ handle, searchParams }: AsyncProduct
   }
 
   const productWithMetafields = reshapeProductWithMetafields(product) || product
+  const displayProduct =
+    productWithMetafields.handle === 'utekos-techdown' ?
+      getProductWithoutSmallSize(productWithMetafields)
+    : productWithMetafields
 
-  const initialVariant = resolveInitialVariant(productWithMetafields, resolvedSearchParams)
+  const initialVariant = resolveInitialVariant(displayProduct, resolvedSearchParams)
 
   const queryClient = new QueryClient()
   const productQueryOptions = productOptions(handle)

@@ -84,7 +84,7 @@ const focusRing =
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-button focus-visible:ring-2 focus-visible:ring-maritime-darkest'
 
 const maritimePanelClass =
-  'rounded-3xl border border-cloud-dancer/15 bg-maritime-blue p-5 text-cloud-dancer shadow-sm'
+  'rounded-3xl border border-cloud-dancer/15 bg-havdyp p-5 text-cloud-dancer shadow-sm'
 
 const maritimePanelHeaderClass = 'mb-3 border-b border-cloud-dancer/15 pb-3'
 
@@ -347,7 +347,7 @@ export function PurchaseClientViewLanding({
                   <Link
                     href='/handlehjelp/storrelsesguide'
                     data-track='SizeGuideSkreddersyVarmen'
-                    className='text-sm text-maritime-darkest underline transition-colors hover:text-maritime-blue'
+                    className='text-sm text-maritime-darkest underline transition-colors hover:text-havdyp'
                   >
                     Se størrelsesguide
                   </Link>
@@ -384,7 +384,7 @@ export function PurchaseClientViewLanding({
                     key={selectedSize}
                     className='mt-3 animate-in fade-in slide-in-from-top-2 duration-300'
                   >
-                    <div className='relative overflow-hidden rounded-2xl border border-cloud-dancer/15 bg-maritime-blue p-4 text-cloud-dancer shadow-sm'>
+                    <div className='relative overflow-hidden rounded-2xl border border-cloud-dancer/15 bg-havdyp p-4 text-cloud-dancer shadow-sm'>
                       <div className='mb-2 flex items-center gap-2 border-b border-cloud-dancer/15 pb-2'>
                         <Ruler className='size-4 text-dusted-peri' />
                         <span className='text-sm font-bold tracking-normal text-cloud-dancer'>
@@ -484,7 +484,7 @@ export function PurchaseClientViewLanding({
             </div>
           </div>
 
-          <div className='border-t border-cloud-dancer/10 bg-maritime-blue p-6 text-cloud-dancer md:p-12 min-[900px]:p-8 min-[1280px]:p-12'>
+          <div className='border-t border-cloud-dancer/10 bg-havdyp p-6 text-cloud-dancer md:p-12 min-[900px]:p-8 min-[1280px]:p-12'>
             <div className='mb-4 min-[900px]:mb-6 min-[1280px]:mb-8'>
               <BrandBadge
                 asChild
@@ -525,7 +525,7 @@ export function PurchaseClientViewLanding({
             </div>
 
             <div className='flex flex-col gap-6'>
-              <div className='rounded-lg border border-cloud-dancer/15 bg-maritime-blue text-cloud-dancer'>
+              <div className='rounded-lg border border-cloud-dancer/15 bg-havdyp text-cloud-dancer'>
                 <div className='grid grid-cols-1 divide-y divide-cloud-dancer/15 sm:grid-cols-3 sm:divide-x sm:divide-y-0'>
                   <div className='flex items-start gap-3 p-4'>
                     <Truck size={22} className='mt-0.5 shrink-0 text-primary-button' />

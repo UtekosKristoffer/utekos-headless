@@ -2,11 +2,7 @@
 'use client'
 
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger
-} from '@/components/ui/hover-card'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
 import UtekosLogo from '@public/icon.png'
 import Image from 'next/image'
 
@@ -17,14 +13,14 @@ export function ProductCardSoldOut() {
         <BrandBadge
           asChild
           backgroundColor='var(--overcast)'
-          textColor='var(--maritime-blue)'
+          textColor='var(--havdyp)'
           className='size-full min-h-12 cursor-not-allowed border border-cloud-dancer/10 text-base font-medium opacity-90'
         >
           <span aria-disabled='true'>Utsolgt</span>
         </BrandBadge>
       </HoverCardTrigger>
       <HoverCardContent
-        className='w-64 border border-chocolate-plum/20 bg-cloud-dancer text-maritime-blue shadow-xl'
+        className='w-64 border border-chocolate-plum/20 bg-cloud-dancer text-havdyp shadow-xl'
         side='top'
         align='center'
       >
@@ -37,12 +33,8 @@ export function ProductCardSoldOut() {
             className='mt-1 rounded-full border border-chocolate-plum/20'
           />
           <div className='space-y-1'>
-            <h4 className='text-sm font-semibold text-maritime-blue'>
-              Utsolgt for denne kombinasjonen
-            </h4>
-            <p className='text-sm text-maritime-blue/75'>
-              Prøv en annen farge eller størrelse.
-            </p>
+            <h4 className='text-sm font-semibold text-havdyp'>Utsolgt for denne kombinasjonen</h4>
+            <p className='text-sm text-havdyp/75'>Prøv en annen farge eller størrelse.</p>
           </div>
         </div>
       </HoverCardContent>

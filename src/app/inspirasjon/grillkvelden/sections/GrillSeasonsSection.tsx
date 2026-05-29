@@ -2,7 +2,7 @@ import { Tabs } from './Tabs'
 
 export function GrillSeasonsSection() {
   return (
-    <section className='relative isolate overflow-hidden bg-maritime-blue py-24 text-cloud-dancer'>
+    <section className='relative isolate overflow-hidden bg-havdyp py-24 text-cloud-dancer'>
       <div className='pointer-events-none absolute inset-0 -z-10 opacity-20'>
         <div
           className='grill-seasons-glow-pulse absolute left-1/4 top-1/4 size-[31rem] rounded-full blur-3xl'

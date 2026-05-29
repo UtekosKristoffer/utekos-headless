@@ -7,7 +7,7 @@ type MagazineOverviewHeroProps = {
 
 export function MagazineOverviewHero({ articleCount }: MagazineOverviewHeroProps) {
   return (
-    <section className='bg-maritime-blue py-16 text-cloud-dancer sm:py-24'>
+    <section className='bg-havdyp py-16 text-cloud-dancer sm:py-24'>
       <div className='container mx-auto px-4'>
         <div className='max-w-5xl'>
           <BrandBadge

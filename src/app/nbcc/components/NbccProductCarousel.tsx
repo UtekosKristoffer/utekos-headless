@@ -13,7 +13,7 @@ export function NbccProductCarousel({ images }: NbccProductCarouselProps) {
     const singleImage = images[0]
     if (!singleImage) return null
     return (
-      <div className='relative aspect-square overflow-hidden bg-maritime-blue/70'>
+      <div className='relative aspect-square overflow-hidden bg-havdyp/70'>
         <Image
           src={singleImage.src}
           alt={singleImage.alt}
@@ -30,7 +30,7 @@ export function NbccProductCarousel({ images }: NbccProductCarouselProps) {
   const next = () => setCurrent(i => (i + 1) % images.length)
 
   return (
-    <div className='group/carousel relative aspect-square overflow-hidden bg-maritime-blue/80'>
+    <div className='group/carousel relative aspect-square overflow-hidden bg-havdyp/80'>
       {images.map((img, i) => (
         <div
           key={img.src}

@@ -7,9 +7,7 @@ import { safeJsonParse } from '@/lib/utils/safeJsonParse'
 import { richTextToHtml } from '@/lib/utils/richTextToHtml'
 import type { ProductDescriptionProps } from '@types'
 
-export function ProductDescription({
-  descriptionHtml: descriptionJson
-}: ProductDescriptionProps) {
+export function ProductDescription({ descriptionHtml: descriptionJson }: ProductDescriptionProps) {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false)
 
   const parsedRichTextObject = safeJsonParse(descriptionJson, null) as unknown
@@ -25,25 +23,18 @@ export function ProductDescription({
   return (
     <article
       aria-label='Produktbeskrivelse'
-      className='mt-12 rounded-[1.25rem] border border-cloud-dancer/70 bg-cloud-dancer/54 p-5 shadow-lg shadow-maritime-blue/5'
+      className='mt-12 rounded-[1.25rem] border border-cloud-dancer/70 bg-cloud-dancer/54 p-5 shadow-lg shadow-havdyp/5'
     >
-      <div
-        aria-live='polite'
-        aria-atomic='true'
-        className='relative overflow-hidden'
-      >
+      <div aria-live='polite' aria-atomic='true' className='relative overflow-hidden'>
         <div
           id='product-description-content'
           style={{
-            maxHeight:
-              isDescriptionExpanded ?
-                `${expandedMaxHeightPx}px`
-              : `${collapsedMaxHeightPx}px`
+            maxHeight: isDescriptionExpanded ? `${expandedMaxHeightPx}px` : `${collapsedMaxHeightPx}px`
           }}
           className='transition-[max-height] duration-500 ease-in-out'
         >
           <div
-            className='prose max-w-none text-maritime-blue/76'
+            className='prose max-w-none text-havdyp/76'
             dangerouslySetInnerHTML={{ __html: descriptionHtmlString }}
           />
         </div>
@@ -63,7 +54,7 @@ export function ProductDescription({
           aria-expanded={isDescriptionExpanded}
           aria-controls='product-description-content'
           onClick={() => setIsDescriptionExpanded(prev => !prev)}
-          className='p-0 text-base text-maritime-blue hover:text-maritime-blue/76'
+          className='p-0 text-base text-havdyp hover:text-havdyp/76'
         >
           {isDescriptionExpanded ? 'Vis mindre' : 'Les mer'}
         </Button>

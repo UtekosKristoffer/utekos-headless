@@ -8,16 +8,14 @@ export function FooterNavigation() {
     <div className='grid grid-cols-1 gap-8 md:grid-cols-4'>
       {footerConfig.map(section => (
         <div key={section.title}>
-          <h3 className='mb-4 text-md font-semibold text-foreground-on-dark'>
-            {section.title}
-          </h3>
+          <h3 className='mb-4 text-lg font-semibold text-cloud-dancer'>{section.title}</h3>
           <nav aria-label={`${section.title} navigasjon`}>
             <ul className='space-y-2'>
               {section.links.map(link => (
                 <li key={link.path}>
                   <Link
                     href={link.path}
-                    className='text-sm text-foreground-on-dark/60 transition-colors hover:text-foreground-on-dark'
+                    className='text-sm text-cloud-dancer/90 font-utekos-text transition-colors hover:text-cloud-dancer'
                     data-track={link.trackingEvent}
                     {...(link.external && {
                       target: '_blank',

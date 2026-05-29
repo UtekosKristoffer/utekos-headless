@@ -23,7 +23,7 @@ const techDownFeatures = [
 export function TechDownSizeGuide() {
   return (
     <section id='tech-down-size-guide' className='scroll-mt-28'>
-      <div className='bg-maritime-blue text-cloud-dancer'>
+      <div className='bg-havdyp text-cloud-dancer'>
         <div className='container mx-auto px-4 py-16 text-center sm:py-24'>
           <div className='max-w-4xl mx-auto'>
             <BrandBadge

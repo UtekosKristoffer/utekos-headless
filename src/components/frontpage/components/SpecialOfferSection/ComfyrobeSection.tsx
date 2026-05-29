@@ -37,22 +37,20 @@ export async function ComfyrobeSection() {
   const comfyrobeId = getFirstAvailableVariantId(comfyrobeProduct)
 
   return (
-    <section className='mx-auto max-w-[95%] py-20 sm:py-24 md:max-w-7xl'>
+    <section className='mx-auto max-w-[95%] py-8 rounded-2xl bg-fjellnatt border border-cloud-dancer mt-32 mb-16 px-6 md:max-w-7xl'>
       <div className='container mx-auto'>
-        <div className='relative overflow-hidden rounded-2xl border border-cloud-dancer bg-maritime-darkest p-8 md:p-12'>
+        <div className='relative overflow-hidden rounded-2xl'>
           <div className='absolute inset-0 -z-10 overflow-hidden'>
             <div
               className='absolute left-1/4 top-1/4 h-[600px] w-[600px] opacity-15 blur-3xl'
               style={{
-                background:
-                  'radial-gradient(circle, #c3bdab 0%, transparent 70%)'
+                background: 'radial-gradient(circle, #c3bdab 0%, transparent 70%)'
               }}
             />
             <div
               className='absolute right-1/4 bottom-1/4 h-[600px] w-[600px] opacity-10 blur-3xl'
               style={{
-                background:
-                  'radial-gradient(circle, #c3bdab 0%, transparent 70%)'
+                background: 'radial-gradient(circle, #c3bdab 0%, transparent 70%)'
               }}
             />
           </div>

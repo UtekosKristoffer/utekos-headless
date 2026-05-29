@@ -9,10 +9,7 @@ export function ProductCareHeader() {
       <nav aria-label='Brødsmulesti' className='mb-8'>
         <ol className='flex flex-wrap items-center gap-1.5 text-sm text-maritime-darkest/70'>
           <li>
-            <Link
-              href='/'
-              className='underline-offset-4 transition-colors hover:text-maritime-blue hover:underline'
-            >
+            <Link href='/' className='underline-offset-4 transition-colors hover:text-havdyp hover:underline'>
               Forsiden
             </Link>
           </li>
@@ -22,7 +19,7 @@ export function ProductCareHeader() {
           <li>
             <Link
               href='/handlehjelp/vask-og-vedlikehold'
-              className='underline-offset-4 transition-colors hover:text-maritime-blue hover:underline'
+              className='underline-offset-4 transition-colors hover:text-havdyp hover:underline'
             >
               Handlehjelp
             </Link>

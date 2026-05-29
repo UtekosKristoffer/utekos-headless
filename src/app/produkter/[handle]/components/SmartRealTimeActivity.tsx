@@ -7,22 +7,16 @@ import { getTimeOfDayMultiplier } from '../../(oversikt)/utils/getTimeOfDayMulti
 import { getDayOfWeekMultiplier } from '../../(oversikt)/utils/getDayOfWeekMultiplier'
 import type { SmartRealTimeActivityProps } from '@types'
 
-export function SmartRealTimeActivity({
-  baseViewers
-}: SmartRealTimeActivityProps) {
+export function SmartRealTimeActivity({ baseViewers }: SmartRealTimeActivityProps) {
   const [currentViewerCount, setCurrentViewerCount] = useState<number>(() => {
-    const smartBase = Math.round(
-      baseViewers * getTimeOfDayMultiplier() * getDayOfWeekMultiplier()
-    )
+    const smartBase = Math.round(baseViewers * getTimeOfDayMultiplier() * getDayOfWeekMultiplier())
     return Math.max(2, smartBase + getRandomIntInclusive(-1, 1))
   })
 
   useEffect(() => {
     const intervalId = window.setInterval(
       () => {
-        setCurrentViewerCount(prev =>
-          Math.max(2, prev + (Math.random() > 0.55 ? 1 : -1))
-        )
+        setCurrentViewerCount(prev => Math.max(2, prev + (Math.random() > 0.55 ? 1 : -1)))
       },
       getRandomIntInclusive(8000, 22000)
     )
@@ -54,7 +48,7 @@ export function SmartRealTimeActivity({
   return (
     <div
       aria-live='polite'
-      className='mt-4 flex items-center gap-2 text-sm text-maritime-blue/70'
+      className='flex items-center font-utekos-text gap-2 text-sm -pb-2! text-maritime-darkest/70'
     >
       <EyeIcon className='h-4 w-4 text-dusted-peri' />
       <span
@@ -66,7 +60,7 @@ export function SmartRealTimeActivity({
       >
         {currentViewerCount}
       </span>
-      <span>andre ser på dette produktet akkurat nå</span>
+      <span className='text-sm text-maritime-darkest/90'>andre ser på dette produktet akkurat nå</span>
     </div>
   )
 }

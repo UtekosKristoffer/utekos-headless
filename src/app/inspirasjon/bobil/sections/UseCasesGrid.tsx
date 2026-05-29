@@ -60,13 +60,13 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
               delay={`${useCaseIndex * 0.1}s`}
               threshold={0.2}
             >
-              <Card className='@container relative h-full overflow-hidden border-cloud-dancer/12 bg-maritime-blue group'>
+              <Card className='@container relative h-full overflow-hidden border-cloud-dancer/12 bg-havdyp group'>
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${useCase.color} to-transparent opacity-20 transition-opacity group-hover:opacity-30`}
                 />
                 <CardContent className='relative p-8'>
                   <div className='mb-6 flex items-center gap-4'>
-                    <div className='flex size-12 items-center justify-center rounded-lg border border-cloud-dancer/18 bg-maritime-blue/24'>
+                    <div className='flex size-12 items-center justify-center rounded-lg border border-cloud-dancer/18 bg-havdyp/24'>
                       <useCase.icon className={`size-6 ${useCase.iconColor}`} />
                     </div>
                     <div>

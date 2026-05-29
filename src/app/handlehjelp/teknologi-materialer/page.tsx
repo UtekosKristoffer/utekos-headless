@@ -62,7 +62,7 @@ export default function ProductSpecsPage() {
       <section className='container mx-auto -mt-20 px-4 pb-24 relative z-20'>
         <div className='grid gap-6 md:grid-cols-3'>
           {/* MODUS 1 */}
-          <div className='group relative overflow-hidden rounded-3xl border border-white/10 bg-maritime-blue/80 p-8 backdrop-blur-xl transition-all duration-500 hover:border-ancient-water/30 hover:bg-maritime-blue hover:shadow-2xl hover:shadow-ancient-water/20'>
+          <div className='group relative overflow-hidden rounded-3xl border border-white/10 bg-havdyp/80 p-8 backdrop-blur-xl transition-all duration-500 hover:border-ancient-water/30 hover:bg-havdyp hover:shadow-2xl hover:shadow-ancient-water/20'>
             <div className='absolute inset-0 bg-gradient-to-br from-ancient-water/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
 
             <div className='relative z-10'>
@@ -81,7 +81,7 @@ export default function ProductSpecsPage() {
           </div>
 
           {/* MODUS 2 */}
-          <div className='group relative overflow-hidden rounded-3xl border border-white/10 bg-maritime-blue/80 p-8 backdrop-blur-xl transition-all duration-500 hover:border-dusted-peri/30 hover:bg-maritime-blue hover:shadow-2xl hover:shadow-dusted-peri/20'>
+          <div className='group relative overflow-hidden rounded-3xl border border-white/10 bg-havdyp/80 p-8 backdrop-blur-xl transition-all duration-500 hover:border-dusted-peri/30 hover:bg-havdyp hover:shadow-2xl hover:shadow-dusted-peri/20'>
             <div className='absolute inset-0 bg-gradient-to-br from-dusted-peri/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
 
             <div className='relative z-10'>
@@ -103,7 +103,7 @@ export default function ProductSpecsPage() {
           </div>
 
           {/* MODUS 3 */}
-          <div className='group relative overflow-hidden rounded-3xl border border-white/10 bg-maritime-blue/80 p-8 backdrop-blur-xl transition-all duration-500 hover:border-cloud-dancer/30 hover:bg-maritime-blue hover:shadow-2xl hover:shadow-cloud-dancer/20'>
+          <div className='group relative overflow-hidden rounded-3xl border border-white/10 bg-havdyp/80 p-8 backdrop-blur-xl transition-all duration-500 hover:border-cloud-dancer/30 hover:bg-havdyp hover:shadow-2xl hover:shadow-cloud-dancer/20'>
             <div className='absolute inset-0 bg-gradient-to-br from-cloud-dancer/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
 
             <div className='relative z-10'>
@@ -135,13 +135,13 @@ export default function ProductSpecsPage() {
       </section>
 
       {/* 4. NAVIGASJON / CTA */}
-      <section className='mt-32 border-t border-white/5 bg-maritime-blue/30 py-24'>
+      <section className='mt-32 border-t border-white/5 bg-havdyp/30 py-24'>
         <div className='container mx-auto px-4'>
           <div className='grid gap-8 md:grid-cols-2'>
             {/* PRODUKTER */}
             <Link
               href='/produkter'
-              className='group relative flex flex-col items-center justify-center rounded-3xl border border-white/10 bg-maritime-blue p-12 text-center transition-all duration-500 hover:border-ancient-water/50 hover:bg-maritime-darkest hover:shadow-2xl'
+              className='group relative flex flex-col items-center justify-center rounded-3xl border border-white/10 bg-havdyp p-12 text-center transition-all duration-500 hover:border-ancient-water/50 hover:bg-maritime-darkest hover:shadow-2xl'
             >
               <div className='mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-maritime-darkest text-cloud-dancer transition-all group-hover:scale-110 group-hover:bg-ancient-water group-hover:text-maritime-darkest'>
                 <ShoppingBag className='h-8 w-8' />
@@ -160,7 +160,7 @@ export default function ProductSpecsPage() {
             {/* MAGASINET */}
             <Link
               href='/magasinet'
-              className='group relative flex flex-col items-center justify-center rounded-3xl border border-white/10 bg-maritime-blue p-12 text-center transition-all duration-500 hover:border-dusted-peri/50 hover:bg-maritime-darkest hover:shadow-2xl'
+              className='group relative flex flex-col items-center justify-center rounded-3xl border border-white/10 bg-havdyp p-12 text-center transition-all duration-500 hover:border-dusted-peri/50 hover:bg-maritime-darkest hover:shadow-2xl'
             >
               <div className='mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-maritime-darkest text-cloud-dancer transition-all group-hover:scale-110 group-hover:bg-dusted-peri group-hover:text-maritime-darkest'>
                 <BookOpen className='h-8 w-8' />

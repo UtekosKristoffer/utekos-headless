@@ -11,13 +11,13 @@ export function ConclusionSection() {
           <div>
             <BrandBadge
               label='Klar for å velge'
-              backgroundColor='var(--ancient-water)'
-              className='mb-6 px-6 py-3 text-sm'
+              backgroundColor='var(--havdyp)'
+              className='mb-6 px-6 text-cloud-dancer py-3 text-sm'
             />
-            <h2 className='font-google-sans text-4xl leading-[0.95] font-bold tracking-[-0.01em] text-maritime-blue sm:text-6xl'>
+            <h2 className='font-google-sans text-4xl leading-[0.95] font-bold tracking-[-0.01em] text-havdyp sm:text-6xl'>
               Et trygt valg på under ett minutt
             </h2>
-            <p className='mt-6 font-utekos-text text-lg leading-[1.45] tracking-tight text-maritime-blue/82 sm:text-xl'>
+            <p className='mt-6 font-utekos-text text-lg leading-[1.45] tracking-tight text-havdyp/82 sm:text-xl'>
               TechDown gir mest ro i skiftende vær. Dun gir mest varme per gram. Mikrofiber er lettest å pakke
               og vaske.
             </p>
@@ -43,20 +43,20 @@ export function ConclusionSection() {
             </div>
           </div>
 
-          <div data-nosnippet className='divide-y divide-maritime-blue/14 border-y border-maritime-blue/14'>
+          <div data-nosnippet className='divide-y divide-havdyp/14 border-y border-havdyp/14'>
             {faqItems.map(item => (
               <details key={item.question} className='group py-6'>
-                <summary className='cursor-pointer list-none font-google-sans text-xl font-bold leading-[1.05] tracking-[-0.01em] text-maritime-blue marker:hidden'>
+                <summary className='cursor-pointer list-none font-google-sans text-xl font-bold leading-[1.05] tracking-[-0.01em] text-havdyp marker:hidden'>
                   <span className='inline-flex w-full items-center justify-between gap-6'>
                     {item.question}
-                    <span className='text-2xl leading-none text-maritime-blue/65 transition-transform duration-300 group-open:rotate-45'>
+                    <span className='text-2xl leading-none text-havdyp/65 transition-transform duration-300 group-open:rotate-45'>
                       +
                     </span>
                   </span>
                 </summary>
                 <p
                   data-nosnippet
-                  className='mt-4 max-w-2xl font-utekos-text text-base leading-[1.45] tracking-tight text-maritime-blue/78'
+                  className='mt-4 max-w-2xl font-utekos-text text-base leading-[1.45] tracking-tight text-havdyp/78'
                 >
                   {item.answer}
                 </p>

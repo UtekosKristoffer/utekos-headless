@@ -22,9 +22,9 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
   const productOptionsMap = initializeCarouselProducts(products)
 
   return (
-    <section className='mb-16 my-24 px-6 py-12 rounded-[1.75rem] border border-cloud-dancer/70 bg-cloud-dancer/54 shadow-2xl shadow-maritime-blue/10 backdrop-blur-sm sm:p-8'>
+    <section className='mb-16 my-24 px-6 py-12 rounded-[1.75rem] border border-cloud-dancer/70 bg-cloud-dancer/54 shadow-2xl shadow-havdyp/10 backdrop-blur-sm sm:p-8'>
       <div className='mb-8 text-center'>
-        <h2 className='text-maritime-blue'>Favoritter blant andre livsnytere</h2>
+        <h2 className='text-havdyp'>Favoritter blant andre livsnytere</h2>
       </div>
       <Carousel
         opts={{
@@ -53,8 +53,8 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
             )
           })}
         </CarouselContent>
-        <CarouselPrevious className='left-2 border-cloud-dancer/80 bg-cloud-dancer/92 text-maritime-blue shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
-        <CarouselNext className='right-2 border-cloud-dancer/80 bg-cloud-dancer/92 text-maritime-blue shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
+        <CarouselPrevious className='left-2 border-cloud-dancer/80 bg-cloud-dancer/92 text-havdyp shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
+        <CarouselNext className='right-2 border-cloud-dancer/80 bg-cloud-dancer/92 text-havdyp shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
       </Carousel>
     </section>
   )

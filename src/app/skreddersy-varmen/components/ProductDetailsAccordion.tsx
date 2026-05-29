@@ -6,7 +6,7 @@ import { Leaf, ShieldCheck, Waves, Info } from 'lucide-react'
 import type { ModelKey } from 'types/product/ProductTypes'
 
 const triggerClassName =
-  'font-google-sans text-left text-lg font-semibold text-maritime-darkest hover:text-maritime-blue hover:no-underline [&>svg]:text-maritime-darkest md:text-xl'
+  'font-google-sans text-left text-lg font-semibold text-maritime-darkest hover:text-havdyp hover:no-underline [&>svg]:text-maritime-darkest md:text-xl'
 
 const itemClassName = 'border-maritime-darkest/20'
 
@@ -319,7 +319,7 @@ export function ProductDetailsAccordion({ selectedModel }: { selectedModel: Mode
                     {item.text}
                   </p>
                 ))}
-                <p className='rounded-2xl border border-cloud-dancer/15 bg-maritime-blue p-4 text-sm leading-[1.45] text-cloud-dancer'>
+                <p className='rounded-2xl border border-cloud-dancer/15 bg-havdyp p-4 text-sm leading-[1.45] text-cloud-dancer'>
                   <strong>Tips:</strong> Bruk linken ved størrelsevelgeren og i menyen over for å se de
                   nøyaktige målene i tabellen.
                 </p>
@@ -337,7 +337,7 @@ export function ProductDetailsAccordion({ selectedModel }: { selectedModel: Mode
                   ))}
                 </ul>
 
-                <div className='mt-4 flex gap-3 rounded-2xl border-l-4 border-primary-button bg-maritime-blue p-4 text-cloud-dancer'>
+                <div className='mt-4 flex gap-3 rounded-2xl border-l-4 border-primary-button bg-havdyp p-4 text-cloud-dancer'>
                   <Info className='shrink-0 text-primary-button' />
                   <div className='text-sm leading-[1.45]'>
                     <span className='mb-1 block font-bold'>{content.care.noteTitle}</span>

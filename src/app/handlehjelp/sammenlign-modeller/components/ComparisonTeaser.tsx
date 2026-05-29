@@ -15,38 +15,35 @@ const models = [
   {
     title: 'Utekos Dun™',
     handle: 'utekos-dun',
-    description: 'Kvalitetsdun og innovative løsninger for funksjonell varme.',
+    description: '(UTSOLGT) - Alternativet for deg som ønsker dun.',
     icon: Feather,
-    cardClass:
-      'border-ancient-water bg-ancient-water hover:bg-ancient-water/90',
-    iconShellClass: 'border-maritime-blue/20 bg-maritime-blue',
+    cardClass: 'border-ancient-water bg-ancient-water hover:bg-ancient-water/90',
+    iconShellClass: 'border-havdyp/20 bg-havdyp',
     iconClass: 'text-cloud-dancer',
-    textClass: 'text-maritime-blue',
-    descriptionClass: 'text-maritime-blue/75',
-    lesmerClass: 'text-maritime-blue/70 group-hover:text-maritime-blue'
+    textClass: 'text-havdyp',
+    descriptionClass: 'text-havdyp/75',
+    lesmerClass: 'text-havdyp/70 group-hover:text-havdyp'
   },
   {
     title: 'Utekos TechDown™',
     handle: 'utekos-techdown',
-    description: 'Vår varmeste og mest allsidige modell. Tåler alt vær.',
+    description: 'Vår nyeste, varmeste og mest allsidige modell.',
     icon: Droplets,
     cardClass: 'border-dusted-peri bg-dusted-peri hover:bg-dusted-peri/90',
     iconShellClass: 'border-cloud-dancer/60 bg-cloud-dancer/85',
     iconClass: 'text-dusted-peri',
-    textClass: 'text-maritime-blue',
-    descriptionClass: 'text-maritime-blue/75',
-    lesmerClass: 'text-maritime-blue/70 group-hover:text-maritime-blue'
+    textClass: 'text-havdyp',
+    descriptionClass: 'text-havdyp/75',
+    lesmerClass: 'text-havdyp/70 group-hover:text-havdyp'
   },
   {
     title: 'Utekos Mikrofiber™',
     handle: 'utekos-mikrofiber',
-    description:
-      'Det letteste medlemmet i Utekos-serien. Bygget for maksimal bevegelse.',
+    description: 'For for bruk i aktivitet eller varmere temperaturer.',
     icon: Layers,
-    cardClass:
-      'border-maritime-blue bg-maritime-blue hover:bg-maritime-darkest',
+    cardClass: 'border-havdyp bg-havdyp hover:bg-maritime-darkest',
     iconShellClass: 'border-cloud-dancer/30 bg-cloud-dancer',
-    iconClass: 'text-maritime-blue',
+    iconClass: 'text-havdyp',
     textClass: 'text-cloud-dancer',
     descriptionClass: 'text-cloud-dancer/75',
     lesmerClass: 'text-cloud-dancer/90 group-hover:text-cloud-dancer'
@@ -78,16 +75,8 @@ export function ComparisonTeaser() {
         '-=0.4'
       )
 
-      tl.to(
-        '.gsap-underline',
-        { scaleX: 1, duration: 0.8, ease: 'expo.out' },
-        '-=0.2'
-      )
-      tl.to(
-        '.gsap-highlight',
-        { scaleX: 1, duration: 0.6, ease: 'circ.out' },
-        '-=0.6'
-      )
+      tl.to('.gsap-underline', { scaleX: 1, duration: 0.8, ease: 'expo.out' }, '-=0.2')
+      tl.to('.gsap-highlight', { scaleX: 1, duration: 0.6, ease: 'circ.out' }, '-=0.6')
 
       tl.fromTo(
         '.gsap-card',
@@ -113,32 +102,20 @@ export function ComparisonTeaser() {
   )
 
   return (
-    <section ref={container} className='mb-24 px-4'>
+    <article ref={container} className='mb-24 py-12 md:py-16 px-4'>
       <div className='gsap-container container mx-auto overflow-hidden rounded-3xl border border-white/5 bg-overcast shadow-2xl'>
         <div className='absolute inset-0 -z-10 opacity-20'>
           <div className='absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px]' />
         </div>
 
         <div className='p-8 text-center md:p-16'>
-          <h2 className='gsap-text text-4xl font-bold tracking-tight font-google-sans text-maritime-blue sm:text-5xl md:text-6xl'>
+          <h2 className='gsap-text text-4xl font-bold tracking-tight font-google-sans text-havdyp sm:text-5xl md:text-6xl'>
             Usikker på hvilken Utekos du skal velge?
           </h2>
 
-          <p className='gsap-text mx-auto mt-6 max-w-2xl tracking-tight text-lg font-utekos-text leading-relaxed text-maritime-blue'>
-            Våre tre Utekos-modeller gir deg{' '}
-            <span className='relative inline-block text-maritime-blue-darkest tracking-tight font-utekos-text'>
-              kompromissløs komfort
-              <span className='gsap-underline absolute left-0 bottom-0 h-[2px] w-full bg-maritime-blue origin-left scale-x-0' />
-            </span>
-            , men har{' '}
-            <span className='relative inline-block px-1'>
-              <span className='gsap-highlight absolute inset-0 -skew-x-6 rounded bg-ancient-water/40 origin-left scale-x-0' />
-              <span className='relative z-10 text-maritime-blue font-semibold'>
-                unike styrker.
-              </span>
-            </span>{' '}
-            Få en rask oversikt her, eller dykk ned i detaljene i vår komplette
-            guide.
+          <p className='gsap-text mx-auto mt-6 max-w-4xl utekos-section-lead text-[1.2rem] font-utekos-text leading-relaxed text-havdyp'>
+            Alle Utekos-modellene har justerbar passform og ventilasjon, men har ellers ulike egenskaper og
+            styrker. Se vår sammenligningsguide for å finne modellen som passer best til dine behov.
           </p>
 
           <div className='mt-12 grid grid-cols-1 gap-6 text-left md:grid-cols-3'>
@@ -167,22 +144,12 @@ export function ComparisonTeaser() {
                       )}
                     />
                   </div>
-                  <h3
-                    className={cn(
-                      'text-lg font-bold transition-colors',
-                      model.textClass
-                    )}
-                  >
+                  <h3 className={cn('text-lg font-bold font-google-sans transition-colors', model.textClass)}>
                     {model.title}
                   </h3>
                 </div>
 
-                <p
-                  className={cn(
-                    'mb-6 text-sm leading-relaxed',
-                    model.descriptionClass
-                  )}
-                >
+                <p className={cn('mb-6 text-[1rem]! font-utekos-text!', model.descriptionClass)}>
                   {model.description}
                 </p>
 
@@ -203,7 +170,7 @@ export function ComparisonTeaser() {
             <Button
               asChild
               size='lg'
-              className='h-12 rounded-full bg-maritime-blue px-8 text-cloud-dancer hover:bg-maritime-darkest transition-all'
+              className='h-12 font-utekos-text rounded-full bg-havdyp px-8 text-cloud-dancer hover:bg-maritime-darkest transition-all'
             >
               <Link
                 href={'/handlehjelp/sammenlign-modeller' as Route}
@@ -216,6 +183,6 @@ export function ComparisonTeaser() {
           </div>
         </div>
       </div>
-    </section>
+    </article>
   )
 }

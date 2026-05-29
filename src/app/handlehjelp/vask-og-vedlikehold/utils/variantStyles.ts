@@ -4,9 +4,8 @@ import { Check, Minus } from 'lucide-react'
 
 export const variantStyles = {
   do: {
-    container:
-      'border-maritime-blue/16 bg-[color-mix(in_oklab,var(--cloud-dancer)_78%,var(--ancient-water)_22%)]',
-    iconWrap: 'border-maritime-blue/40 bg-maritime-blue text-cloud-dancer',
+    container: 'border-havdyp/16 bg-[color-mix(in_oklab,var(--cloud-dancer)_78%,var(--ancient-water)_22%)]',
+    iconWrap: 'border-havdyp/40 bg-havdyp text-cloud-dancer',
     Icon: Check
   },
   dont: {

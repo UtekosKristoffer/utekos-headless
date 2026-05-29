@@ -96,7 +96,7 @@ export function NbccProductCardActions({
         </Button>
         <Button
           asChild
-          className='h-9 rounded-md bg-cloud-dancer w-full py-x border border-white/10 text-maritime-blue hover:border-white/20 hover:bg-white/5 hover:text-white transition-all duration-200'
+          className='h-9 rounded-md bg-cloud-dancer w-full py-x border border-white/10 text-havdyp hover:border-white/20 hover:bg-white/5 hover:text-white transition-all duration-200'
         >
           <Link href={href} data-track='NbccProductCardCtaClick' data-track-data={JSON.stringify(tracking)}>
             Produktside

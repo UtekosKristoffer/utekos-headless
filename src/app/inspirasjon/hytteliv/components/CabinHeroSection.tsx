@@ -10,7 +10,7 @@ export function CabinHeroSection() {
   return (
     <section
       aria-labelledby='hytteliv-hero-title'
-      className='relative flex min-h-[70vh] items-center overflow-hidden bg-maritime-blue'
+      className='relative flex min-h-[70vh] items-center overflow-hidden bg-havdyp'
     >
       <div className='absolute inset-0 -z-10 opacity-25' aria-hidden='true'>
         <div
@@ -33,7 +33,7 @@ export function CabinHeroSection() {
       </div>
 
       <div
-        className='absolute inset-0 bg-gradient-to-b from-maritime-darkest/10 via-transparent to-maritime-blue/20'
+        className='absolute inset-0 bg-gradient-to-b from-maritime-darkest/10 via-transparent to-havdyp/20'
         aria-hidden='true'
       />
 

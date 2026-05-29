@@ -59,7 +59,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
               delay={`${caseIndex * 0.1}s`}
               threshold={0.2}
             >
-              <Card className='@container group relative h-full overflow-hidden border-cloud-dancer/12 bg-maritime-blue'>
+              <Card className='@container group relative h-full overflow-hidden border-cloud-dancer/12 bg-havdyp'>
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${useCase.color} to-transparent opacity-20 transition-opacity duration-300 group-hover:opacity-30`}
                 />

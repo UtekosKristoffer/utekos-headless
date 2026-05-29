@@ -23,7 +23,7 @@ export async function QualitySection() {
               className={cn(
                 cardClasses,
                 // Endret fra justify-between til justify-center for å unngå det store tomrommet
-                'group flex h-full flex-col justify-center bg-gradient-to-br from-maritime-blue/95 to-maritime-blue/80 p-8 sm:p-12 lg:p-16'
+                'group flex h-full flex-col justify-center bg-gradient-to-br from-havdyp/95 to-havdyp/80 p-8 sm:p-12 lg:p-16'
               )}
             >
               {/* Premium shine overlay on hover */}
@@ -47,7 +47,7 @@ export async function QualitySection() {
                 <Link
                   href='/handlehjelp/teknologi-materialer'
                   data-track='UtforskTeknologienFrontPageClick'
-                  className='group/btn inline-flex items-center justify-center rounded-full bg-[var(--primary-button)] px-8 py-4 text-[1rem] font-medium text-maritime-blue transition-all duration-300 hover:bg-white hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(255,255,255,0.2)] focus:outline-none focus:ring-2 focus:ring-dusted-peri focus:ring-offset-2 focus:ring-offset-maritime-blue'
+                  className='group/btn inline-flex items-center justify-center rounded-full bg-[var(--primary-button)] px-8 py-4 text-[1rem] font-medium text-havdyp transition-all duration-300 hover:bg-white hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(255,255,255,0.2)] focus:outline-none focus:ring-2 focus:ring-dusted-peri focus:ring-offset-2 focus:ring-offset-havdyp'
                 >
                   Utforsk teknologien
                   <ArrowRightIcon className='ml-2 h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1' />

@@ -5,12 +5,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger
-} from '@/components/ui/accordion'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import {
   Carousel,
   CarouselContent,
@@ -72,16 +67,10 @@ export function ComfyrobeQuickBuy({ product }: Props) {
   const getSizeName = (title: string) => {
     const parts = title.split(' / ')
     if (parts.length > 1) {
-      const sizePart = parts.find(p =>
-        ['XS', 'S', 'M', 'L', 'XL'].some(s => p.includes(s))
-      )
+      const sizePart = parts.find(p => ['XS', 'S', 'M', 'L', 'XL'].some(s => p.includes(s)))
       return sizePart || parts[1] // Fallback
     }
-    return title
-      .replace('Fjellnatt', '')
-      .replace('Unisex', '')
-      .replace('/', '')
-      .trim()
+    return title.replace('Fjellnatt', '').replace('Unisex', '').replace('/', '').trim()
   }
 
   const price = Math.round(Number(product.priceRange.minVariantPrice.amount))
@@ -99,8 +88,7 @@ export function ComfyrobeQuickBuy({ product }: Props) {
                 image?: { url?: string; altText?: string }
               }) => {
                 const imageUrl = img.url || img.image?.url
-                const altText =
-                  img.altText || img.image?.altText || product.title
+                const altText = img.altText || img.image?.altText || product.title
 
                 if (!imageUrl) return null
 
@@ -121,8 +109,8 @@ export function ComfyrobeQuickBuy({ product }: Props) {
             )}
           </CarouselContent>
           <div className='block'>
-            <CarouselPrevious className='left-4 border border-cloud-dancer/12 bg-maritime-darkest/70 text-cloud-dancer backdrop-blur-md hover:bg-maritime-blue' />
-            <CarouselNext className='right-4 border border-cloud-dancer/12 bg-maritime-darkest/70 text-cloud-dancer backdrop-blur-md hover:bg-maritime-blue' />
+            <CarouselPrevious className='left-4 border border-cloud-dancer/12 bg-maritime-darkest/70 text-cloud-dancer backdrop-blur-md hover:bg-havdyp' />
+            <CarouselNext className='right-4 border border-cloud-dancer/12 bg-maritime-darkest/70 text-cloud-dancer backdrop-blur-md hover:bg-havdyp' />
           </div>
         </Carousel>
       </div>
@@ -147,18 +135,14 @@ export function ComfyrobeQuickBuy({ product }: Props) {
 
         <div className='flex gap-4'>
           <div className='flex-1 space-y-2'>
-            <label className='text-sm font-medium leading-[1.45] tracking-normal text-overcast'>
-              Farge
-            </label>
-            <div className='flex h-10 cursor-default items-center justify-center rounded-md border border-maritime-blue/35 bg-ancient-water text-sm font-medium leading-[1.4] tracking-normal text-maritime-darkest ring-1 ring-maritime-blue/20'>
+            <label className='text-sm font-medium leading-[1.45] tracking-normal text-overcast'>Farge</label>
+            <div className='flex h-10 cursor-default items-center justify-center rounded-md border border-havdyp/35 bg-ancient-water text-sm font-medium leading-[1.4] tracking-normal text-maritime-darkest ring-1 ring-havdyp/20'>
               Fjellnatt
             </div>
           </div>
           <div className='flex-1 space-y-2'>
-            <label className='text-sm font-medium leading-[1.45] tracking-normal text-overcast'>
-              Modell
-            </label>
-            <div className='flex h-10 cursor-default items-center justify-center rounded-md border border-maritime-blue/35 bg-ancient-water text-sm font-medium leading-[1.4] tracking-normal text-maritime-darkest ring-1 ring-maritime-blue/20'>
+            <label className='text-sm font-medium leading-[1.45] tracking-normal text-overcast'>Modell</label>
+            <div className='flex h-10 cursor-default items-center justify-center rounded-md border border-havdyp/35 bg-ancient-water text-sm font-medium leading-[1.4] tracking-normal text-maritime-darkest ring-1 ring-havdyp/20'>
               Unisex
             </div>
           </div>
@@ -186,9 +170,7 @@ export function ComfyrobeQuickBuy({ product }: Props) {
               return (
                 <button
                   key={variant.id}
-                  onClick={() =>
-                    isAvailable && setSelectedVariantId(variant.id)
-                  }
+                  onClick={() => isAvailable && setSelectedVariantId(variant.id)}
                   disabled={!isAvailable}
                   className={cn(
                     'relative flex h-12 items-center justify-center rounded-md border text-sm font-medium leading-[1.4] tracking-normal transition-all',
@@ -217,11 +199,7 @@ export function ComfyrobeQuickBuy({ product }: Props) {
             textColor='var(--maritime-darkest)'
             className='min-h-14 w-full border border-primary-button/24 px-8 py-4 text-lg leading-[1.35] font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 disabled:pointer-events-none disabled:opacity-60'
           >
-            <button
-              type='button'
-              onClick={handleAddToCart}
-              disabled={!selectedVariant || isAdding}
-            >
+            <button type='button' onClick={handleAddToCart} disabled={!selectedVariant || isAdding}>
               {isAdding ?
                 <span className='animate-pulse'>Legger til...</span>
               : <>
@@ -246,11 +224,7 @@ export function ComfyrobeQuickBuy({ product }: Props) {
           </div>
         </div>
 
-        <Accordion
-          type='single'
-          collapsible
-          className='mt-4 w-full border-t border-cloud-dancer/12'
-        >
+        <Accordion type='single' collapsible className='mt-4 w-full border-t border-cloud-dancer/12'>
           <AccordionItem value='materials' className='border-cloud-dancer/12'>
             <AccordionTrigger>Materialer og kvalitet</AccordionTrigger>
             <AccordionContent className='space-y-4 text-overcast'>
@@ -282,20 +256,20 @@ export function ComfyrobeQuickBuy({ product }: Props) {
             <AccordionContent className='text-overcast'>
               <ul className='space-y-2 text-sm leading-[1.45] tracking-normal'>
                 <li>
-                  🌊 <strong>Vanntett og vindtett:</strong> Tapede sømmer og
-                  8000mm vannsøyle holder deg tørr og varm.
+                  🌊 <strong>Vanntett og vindtett:</strong> Tapede sømmer og 8000mm vannsøyle holder deg tørr
+                  og varm.
                 </li>
                 <li>
-                  🔥 <strong>Hurtigtørkende varme:</strong> SherpaCore™ plysj
-                  absorberer restfuktighet og isolerer umiddelbart.
+                  🔥 <strong>Hurtigtørkende varme:</strong> SherpaCore™ plysj absorberer restfuktighet og
+                  isolerer umiddelbart.
                 </li>
                 <li>
-                  🧥 <strong>Smart design:</strong> Romslig hette, toveis
-                  YKK-glidelås for enkel skifting, og refleksdetaljer.
+                  🧥 <strong>Smart design:</strong> Romslig hette, toveis YKK-glidelås for enkel skifting, og
+                  refleksdetaljer.
                 </li>
                 <li>
-                  🧤 <strong>Praktiske lommer:</strong> Fôrede sidelommer til
-                  kalde hender og innerlomme til mobil/nøkler.
+                  🧤 <strong>Praktiske lommer:</strong> Fôrede sidelommer til kalde hender og innerlomme til
+                  mobil/nøkler.
                 </li>
               </ul>
             </AccordionContent>
@@ -305,9 +279,8 @@ export function ComfyrobeQuickBuy({ product }: Props) {
             <AccordionTrigger>Passform</AccordionTrigger>
             <AccordionContent className='text-sm leading-[1.45] tracking-normal text-overcast'>
               <p className='mb-2'>
-                Comfyrobe™ har en <strong>oversized unisex-passform</strong>.
-                Den er designet romslig og med praktiske løsninger for å enkelt
-                kle på eller av seg.
+                Comfyrobe™ har en <strong>oversized unisex-passform</strong>. Den er designet romslig og med
+                praktiske løsninger for å enkelt kle på eller av seg.
               </p>
             </AccordionContent>
           </AccordionItem>

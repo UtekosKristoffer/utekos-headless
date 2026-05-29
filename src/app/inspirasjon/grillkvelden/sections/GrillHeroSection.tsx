@@ -41,7 +41,7 @@ export function GrillHeroSection() {
   return (
     <section
       aria-labelledby='grillkvelden-hero-title'
-      className='relative flex min-h-[70vh] bg-maritime-blue items-center overflow-hidden'
+      className='relative flex min-h-[70vh] bg-havdyp items-center overflow-hidden'
     >
       <div className='absolute inset-0 -z-10 opacity-25' aria-hidden='true'>
         <div
@@ -73,7 +73,7 @@ export function GrillHeroSection() {
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s'>
               <InspirationHeroBreadcrumb
                 label='Grillkvelden'
-                color='var(--maritime-blue)'
+                color='var(--havdyp)'
                 textColor='var(--cloud-dancer)'
                 icon={Flame}
               />

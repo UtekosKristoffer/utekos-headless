@@ -10,7 +10,7 @@ interface StoryNodeViewProps {
 
 const toneStyles = {
   before: {
-    card: 'border-white/10 bg-gradient-to-br from-maritime-blue/95 to-maritime-blue/80 shadow-[0_16px_40px_rgba(0,0,0,0.2)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] backdrop-blur-2xl backdrop-saturate-[1.2]',
+    card: 'border-white/10 bg-gradient-to-br from-havdyp/95 to-havdyp/80 shadow-[0_16px_40px_rgba(0,0,0,0.2)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] backdrop-blur-2xl backdrop-saturate-[1.2]',
     iconWrap:
       'border-white/10 bg-gradient-to-br from-white/10 to-transparent text-cloud-dancer shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]',
     label: 'text-cloud-dancer',
@@ -19,18 +19,13 @@ const toneStyles = {
   after: {
     card: 'border-white/60 bg-gradient-to-br from-overcast/95 to-overcast/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)] backdrop-blur-2xl backdrop-saturate-[1.2]',
     iconWrap:
-      'border-white/80 bg-gradient-to-br from-ancient-water/90 to-ancient-water/40 text-maritime-blue shadow-[inset_0_1px_1px_rgba(255,255,255,0.7)]',
-    label: 'text-maritime-blue',
+      'border-white/80 bg-gradient-to-br from-ancient-water/90 to-ancient-water/40 text-havdyp shadow-[inset_0_1px_1px_rgba(255,255,255,0.7)]',
+    label: 'text-havdyp',
     description: 'text-mountain-view'
   }
 } as const
 
-export function StoryNodeView({
-  icon: Icon,
-  label,
-  description,
-  tone
-}: StoryNodeViewProps) {
+export function StoryNodeView({ icon: Icon, label, description, tone }: StoryNodeViewProps) {
   const styles = toneStyles[tone]
 
   return (
@@ -58,21 +53,11 @@ export function StoryNodeView({
         </div>
 
         <div className='min-w-0 flex-1 space-y-2.5 pt-1'>
-          <h3
-            className={cn(
-              'text-[1.125rem] font-medium leading-[0.9] tracking-[-0.01em]',
-              styles.label
-            )}
-          >
+          <h3 className={cn('text-[1.125rem] font-medium leading-[0.9] tracking-[-0.01em]', styles.label)}>
             {label}
           </h3>
 
-          <p
-            className={cn(
-              'text-[1rem] font-normal leading-[1.45] tracking-[-0.02em]',
-              styles.description
-            )}
-          >
+          <p className={cn('text-[1rem] font-normal leading-[1.45] tracking-[-0.02em]', styles.description)}>
             {description}
           </p>
         </div>

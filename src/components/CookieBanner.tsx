@@ -86,7 +86,7 @@ function ConsentPreferenceCard({
   }
 
   return (
-    <section className='rounded-lg border border-cloud-dancer/12 bg-maritime-blue/55 p-4 shadow-[0_18px_38px_-34px_color-mix(in_oklab,var(--maritime-darkest)_82%,transparent)]'>
+    <section className='rounded-lg border border-cloud-dancer/12 bg-havdyp/55 p-4 shadow-[0_18px_38px_-34px_color-mix(in_oklab,var(--maritime-darkest)_82%,transparent)]'>
       <div className='flex items-center justify-between gap-4'>
         <h4 className='font-google-sans text-base font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer'>
           {title}
@@ -94,7 +94,7 @@ function ConsentPreferenceCard({
         <Switch
           checked={checked}
           aria-label={`${title} informasjonskapsler`}
-          className='border-cloud-dancer/15 data-[state=checked]:bg-primary-button data-[state=unchecked]:bg-maritime-blue focus-visible:ring-primary-button/35'
+          className='border-cloud-dancer/15 data-[state=checked]:bg-primary-button data-[state=unchecked]:bg-havdyp focus-visible:ring-primary-button/35'
           {...switchProps}
         />
       </div>

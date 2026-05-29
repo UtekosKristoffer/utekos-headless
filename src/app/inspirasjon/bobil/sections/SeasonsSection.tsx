@@ -3,7 +3,7 @@ import { Tabs } from './Tabs'
 
 export function SeasonsSection() {
   return (
-    <section className='relative isolate overflow-hidden bg-maritime-blue py-24 text-cloud-dancer'>
+    <section className='relative isolate overflow-hidden bg-havdyp py-24 text-cloud-dancer'>
       <div className='absolute inset-0 -z-10 opacity-20'>
         <div
           className='bobil-seasons-glow-pulse absolute left-1/4 top-1/4 size-[500px] blur-3xl'

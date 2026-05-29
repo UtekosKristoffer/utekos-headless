@@ -7,10 +7,7 @@ import TechTeaserMotion from './TechTeaserMotion'
 
 export default function TechTeaserSection() {
   return (
-    <section
-      id='tech-teaser'
-      className='mt-12 w-full py-12 md:py-24 overflow-hidden'
-    >
+    <section id='tech-teaser' className='mt-12 w-full py-12 md:py-24 overflow-hidden'>
       <div className='container mx-auto max-w-7xl px-4'>
         <div className='relative overflow-hidden rounded-3xl border border-cloud-dancer bg-mountain-view p-8 shadow-2xl md:p-12 lg:p-20'>
           <div className='pointer-events-none absolute -left-[10%] top-0 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-mountain-view blur-[120px]' />
@@ -35,10 +32,9 @@ export default function TechTeaserSection() {
                   </span>
                 </h2>
                 <p className='gsap-content max-w-lg text-lg leading-relaxed text-cloud-dancer'>
-                  Det handler ikke bare om varme, men om hvordan varmen skapes.
-                  Fra vår hydrofobiske{' '}
-                  <strong className='text-white'>TechDown™</strong> til det
-                  robuste <strong className='text-white'>HydroGuard™</strong>
+                  Det handler ikke bare om varme, men om hvordan varmen skapes. Fra vår hydrofobiske{' '}
+                  <strong className='text-white'>TechDown™</strong> til det robuste{' '}
+                  <strong className='text-white'>HydroGuard™</strong>
                   -skallet.
                 </p>
               </div>
@@ -67,10 +63,7 @@ export default function TechTeaserSection() {
                     bg: 'bg-overcast'
                   }
                 ].map((item, idx) => (
-                  <li
-                    key={idx}
-                    className='gsap-content group flex items-start gap-4'
-                  >
+                  <li key={idx} className='gsap-content group flex items-start gap-4'>
                     <div
                       className={`mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cloud-dancer ${item.bg} ${item.color} transition-transform duration-300 group-hover:scale-110`}
                     >
@@ -103,10 +96,7 @@ export default function TechTeaserSection() {
               data-tech-card
               className='gsap-card-visual relative mx-auto w-full max-w-md perspective-1000 lg:h-auto'
             >
-              <div
-                data-tilt-layer
-                className='relative w-full aspect-[4/5] preserve-3d'
-              >
+              <div data-tilt-layer className='relative w-full aspect-[4/5] preserve-3d'>
                 <div className='absolute -right-4 -top-4 h-full w-full rounded-2xl border border-white/5 bg-neutral-900/50 backdrop-blur-sm -z-10 transform translate-z-[-20px]' />
 
                 <div className='relative h-full w-full overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-2xl'>
@@ -125,7 +115,7 @@ export default function TechTeaserSection() {
                   >
                     <div className='flex items-center justify-between'>
                       <div className='flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md'>
-                        <Cpu className='h-3.5 w-3.5 text-maritime-blue' />
+                        <Cpu className='h-3.5 w-3.5 text-havdyp' />
                         <span className='text-[10px] font-bold uppercase tracking-widest text-white'>
                           Core Tech
                         </span>
@@ -139,21 +129,15 @@ export default function TechTeaserSection() {
                         <div className='h-1 w-8 rounded-full bg-chocolate-plum' />
                       </div>
 
-                      <h3 className='text-3xl font-bold text-cloud-dancer tracking-tight'>
-                        SherpaCore™
-                      </h3>
-                      <p className='text-sm font-medium text-ancient-water'>
-                        Thermal Lining System
-                      </p>
+                      <h3 className='text-3xl font-bold text-cloud-dancer tracking-tight'>SherpaCore™</h3>
+                      <p className='text-sm font-medium text-ancient-water'>Thermal Lining System</p>
                     </div>
                   </div>
                 </div>
 
                 <div className='gsap-inner-parallax absolute -bottom-6 -right-6 flex h-24 w-24 items-center justify-center rounded-full border border-white/10 bg-maritime-darkest shadow-2xl translate-z-[40px]'>
                   <div className='text-center'>
-                    <span className='block text-2xl font-bold text-cloud-dancer'>
-                      8K
-                    </span>
+                    <span className='block text-2xl font-bold text-cloud-dancer'>8K</span>
                     <span className='text-[10px] font-bold uppercase tracking-wider text-ancient-water'>
                       Vannsøyle
                     </span>

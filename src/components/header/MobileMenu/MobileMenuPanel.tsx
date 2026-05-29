@@ -55,9 +55,7 @@ export function MobileMenuPanel({
       const list = listRef.current
       if (!subtitle || !list) return
 
-      const items = Array.from(
-        list.querySelectorAll<HTMLElement>('[data-mm-item="true"]')
-      )
+      const items = Array.from(list.querySelectorAll<HTMLElement>('[data-mm-item="true"]'))
 
       if (!items.length) return
 
@@ -126,7 +124,7 @@ export function MobileMenuPanel({
         className='w-full max-w-sm border-cloud-dancer/12 bg-maritime-darkest p-0 text-cloud-dancer backdrop-blur-xl lg:hidden'
       >
         <div className='pointer-events-none absolute inset-0 -z-10'>
-          <div className='absolute inset-0 bg-[linear-gradient(180deg,color-mix(in_oklab,var(--maritime-blue)_36%,var(--maritime-darkest))_0%,var(--maritime-darkest)_54%,color-mix(in_oklab,var(--demitasse)_22%,var(--maritime-darkest))_100%)]' />
+          <div className='absolute inset-0 bg-[linear-gradient(180deg,color-mix(in_oklab,var(--havdyp)_36%,var(--maritime-darkest))_0%,var(--maritime-darkest)_54%,color-mix(in_oklab,var(--demitasse)_22%,var(--maritime-darkest))_100%)]' />
           <div className='absolute inset-0 bg-[radial-gradient(105%_78%_at_20%_0%,color-mix(in_oklab,var(--dusted-peri)_18%,transparent)_0%,transparent_64%),radial-gradient(95%_72%_at_88%_34%,color-mix(in_oklab,var(--ancient-water)_12%,transparent)_0%,transparent_66%)]' />
           <div className='absolute inset-0 bg-gradient-to-b from-transparent via-maritime-darkest/8 to-maritime-darkest/48' />
         </div>
@@ -143,10 +141,7 @@ export function MobileMenuPanel({
 
           <SheetDescription className='text-sm leading-[1.45] tracking-[-0.01em] text-cloud-dancer/66'>
             <span className='block overflow-hidden'>
-              <span
-                ref={subtitleRef}
-                className={isOpen ? 'block opacity-0' : 'block'}
-              >
+              <span ref={subtitleRef} className={isOpen ? 'block opacity-0' : 'block'}>
                 Utforsk vår kolleksjon
               </span>
             </span>
@@ -155,17 +150,9 @@ export function MobileMenuPanel({
 
         <nav className='relative flex-grow overflow-y-auto px-4 pb-6 pt-4'>
           <div ref={listRef}>
-            <Accordion
-              type='single'
-              collapsible
-              className='flex flex-col gap-2'
-            >
+            <Accordion type='single' collapsible className='flex flex-col gap-2'>
               {menu.map(item => (
-                <div
-                  key={item.title}
-                  data-mm-item='true'
-                  className={isOpen ? 'opacity-0' : undefined}
-                >
+                <div key={item.title} data-mm-item='true' className={isOpen ? 'opacity-0' : undefined}>
                   <MobileMenuItem item={item} />
                 </div>
               ))}

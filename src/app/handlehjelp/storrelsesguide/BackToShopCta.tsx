@@ -5,7 +5,7 @@ import Link from 'next/link'
 import type { Route } from 'next'
 export function BackToShopCta() {
   return (
-    <section className='border-t border-cloud-dancer/12 bg-maritime-blue text-cloud-dancer'>
+    <section className='border-t border-cloud-dancer/12 bg-havdyp text-cloud-dancer'>
       <div className='container mx-auto px-4 py-16 sm:py-20 text-center'>
         <Compass className='mx-auto size-10 text-primary-button' />
         <h2 className='mx-auto mt-4 max-w-3xl text-3xl font-bold leading-[1.05] tracking-tight text-cloud-dancer sm:text-5xl'>
@@ -68,7 +68,7 @@ export function BackToShopCta() {
             <div className='w-full border-t border-cloud-dancer/12' />
           </div>
           <div className='relative flex justify-center'>
-            <span className='bg-maritime-blue px-3 text-sm font-medium text-cloud-dancer/72'>eller</span>
+            <span className='bg-havdyp px-3 text-sm font-medium text-cloud-dancer/72'>eller</span>
           </div>
         </div>
 

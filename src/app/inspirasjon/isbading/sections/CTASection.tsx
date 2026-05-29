@@ -8,9 +8,7 @@ export async function CTASection() {
   const response = await getProducts({ query: 'handle:comfyrobe' })
   const product = response.body?.find(p => p.handle === 'comfyrobe')
   response.body?.find(
-    p =>
-      p.title.toLowerCase().includes('comfyrobe')
-      && !p.title.toLowerCase().includes('dun')
+    p => p.title.toLowerCase().includes('comfyrobe') && !p.title.toLowerCase().includes('dun')
   ) || response.body?.[0]
 
   if (!product) {
@@ -27,13 +25,12 @@ export async function CTASection() {
             Sikre deg varmen nå
           </h2>
           <p className='mx-auto max-w-2xl text-xl leading-[1.45] tracking-normal text-overcast'>
-            Gjør som hundrevis av andre isbadere. Bestill din Comfyrobe i dag og
-            kjenn forskjellen.
+            Gjør som hundrevis av andre isbadere. Bestill din Comfyrobe i dag og kjenn forskjellen.
           </p>
         </AnimatedBlock>
 
         <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
-          <div className='mx-auto max-w-6xl rounded-3xl border border-cloud-dancer/12 bg-maritime-blue/18 p-6 shadow-2xl backdrop-blur-sm md:p-12'>
+          <div className='mx-auto max-w-6xl rounded-3xl border border-cloud-dancer/12 bg-havdyp/18 p-6 shadow-2xl backdrop-blur-sm md:p-12'>
             <ComfyrobeQuickBuy product={product} />
           </div>
         </AnimatedBlock>

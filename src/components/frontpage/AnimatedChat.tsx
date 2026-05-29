@@ -8,16 +8,10 @@ export function AnimatedChat() {
     <div className='relative flex h-full flex-col mx-auto justify-center gap-8 p-4 pt-4'>
       <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s'>
         <ChatBubble side='left'>
-          <p>
-            Husk å pakke noe skikkelig varmt til kvelden på hytten, det blir
-            fort kaldt 🥶
-          </p>
+          <p>Husk å pakke noe skikkelig varmt til kvelden på hytten, det blir fort kaldt 🥶</p>
         </ChatBubble>
       </AnimatedBlock>
-      <AnimatedBlock
-        className='flex justify-end pr-8 will-animate-fade-in-up md:hidden'
-        delay='0.3s'
-      >
+      <AnimatedBlock className='flex justify-end pr-8 will-animate-fade-in-up md:hidden' delay='0.3s'>
         <NameCursor name='Hanne' side='left' color='#dc2626' />
       </AnimatedBlock>
       <AnimatedBlock className='will-animate-fade-in-up' delay='0.4s'>
@@ -26,10 +20,7 @@ export function AnimatedChat() {
         </ChatBubble>
       </AnimatedBlock>
 
-      <AnimatedBlock
-        className='flex justify-start pl-8 will-animate-fade-in-up md:hidden'
-        delay='0.5s'
-      >
+      <AnimatedBlock className='flex justify-start pl-8 will-animate-fade-in-up md:hidden' delay='0.5s'>
         <NameCursor name='Thomas' side='right' color='#2563eb' />
       </AnimatedBlock>
 
@@ -40,7 +31,7 @@ export function AnimatedChat() {
       </AnimatedBlock>
 
       <div className='flex justify-end mt-2'>
-        <div className='relative max-w-[80%] rounded-lg border border-maritime-darkest bg-maritime-blue p-3'>
+        <div className='relative max-w-[80%] rounded-lg border border-maritime-darkest bg-havdyp p-3'>
           <div className='flex items-center gap-2'>
             <p className='flex items-center whitespace-nowrap text-base text-cloud-dancer'>
               <span>Nettopp. Mer plass til vinen 😉</span>
@@ -57,18 +48,8 @@ export function AnimatedChat() {
         </div>
       </div>
       <div className='hidden md:block'>
-        <NameCursor
-          name='Hanne'
-          side='left'
-          color='#dc2626'
-          className='absolute top-[22%] right-[15%]'
-        />
-        <NameCursor
-          name='Thomas'
-          side='right'
-          color='#2563eb'
-          className='absolute top-[42%] left-[18%]'
-        />
+        <NameCursor name='Hanne' side='left' color='#dc2626' className='absolute top-[22%] right-[15%]' />
+        <NameCursor name='Thomas' side='right' color='#2563eb' className='absolute top-[42%] left-[18%]' />
       </div>
     </div>
   )

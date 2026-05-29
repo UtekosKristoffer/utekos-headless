@@ -18,7 +18,7 @@ export function ProductCareUtekosMikrofiber() {
         <CareList variant='do' title='Anbefalt' items={MICROFIBER_DO_ITEMS} />
         <CareList variant='dont' title='Unngå' items={MICROFIBER_DONT_ITEMS} />
       </div>
-      <div className='mt-7 rounded-2xl border border-cloud-dancer/12 bg-maritime-blue p-5 text-cloud-dancer sm:p-6'>
+      <div className='mt-7 rounded-2xl border border-cloud-dancer/12 bg-havdyp p-5 text-cloud-dancer sm:p-6'>
         <div className='flex items-start gap-3'>
           <span
             aria-hidden='true'

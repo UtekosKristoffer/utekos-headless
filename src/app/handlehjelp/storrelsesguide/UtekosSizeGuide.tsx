@@ -29,7 +29,7 @@ export function UtekosSizeGuide() {
           <div className='max-w-4xl mx-auto'>
             <BrandBadge
               label='Dun og mikrofiber'
-              backgroundColor='var(--maritime-blue)'
+              backgroundColor='var(--havdyp)'
               textColor='var(--cloud-dancer)'
               className='mb-5 px-4 py-2 text-sm'
             />
@@ -63,7 +63,7 @@ export function UtekosSizeGuide() {
           </div>
 
           <div className='mt-16 grid grid-cols-1 gap-x-6 gap-y-6 lg:grid-cols-2 max-w-5xl mx-auto'>
-            <div className='rounded-lg border border-cloud-dancer/12 bg-maritime-blue text-cloud-dancer p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)] sm:p-8'>
+            <div className='rounded-lg border border-cloud-dancer/12 bg-havdyp text-cloud-dancer p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)] sm:p-8'>
               <h3 className='text-xl font-semibold leading-7'>Velg Medium hvis...</h3>
               <ul className='mt-4 list-disc list-inside space-y-2 text-cloud-dancer'>
                 <li>Du er opptil ca. 180 cm høy.</li>
@@ -71,7 +71,7 @@ export function UtekosSizeGuide() {
                 <li>Du ser for deg å bruke den over lettere klær som en genser eller t-skjorte.</li>
               </ul>
             </div>
-            <div className='rounded-lg border tekst-base border-cloud-dancer/12 bg-maritime-blue p-6 text-cloud-dancer text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)] sm:p-8'>
+            <div className='rounded-lg border tekst-base border-cloud-dancer/12 bg-havdyp p-6 text-cloud-dancer text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)] sm:p-8'>
               <h3 className='text-xl font-semibold leading-7'>Velg Large hvis...</h3>
               <ul className='mt-4 list-disc list-inside space-y-2 text-cloud-dancer'>
                 <li>Du er over 180 cm høy, eller bevisst ønsker en overdimensjonert følelse.</li>
@@ -103,7 +103,7 @@ export function UtekosSizeGuide() {
               <div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
                 <div className='overflow-hidden rounded-lg border border-cloud-dancer/12 shadow-[0_22px_54px_-42px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)]'>
                   <table className='min-w-full divide-y divide-cloud-dancer/12 bg-cloud-dancer'>
-                    <thead className='bg-maritime-blue text-cloud-dancer'>
+                    <thead className='bg-havdyp text-cloud-dancer'>
                       <tr>
                         <th scope='col' className='py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-6'>
                           Måling
