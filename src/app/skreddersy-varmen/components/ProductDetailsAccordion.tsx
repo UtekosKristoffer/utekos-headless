@@ -44,7 +44,7 @@ type ProductDetailsContent = {
 
 const productDetailsByModel: Record<ModelKey, ProductDetailsContent> = {
   'utekos-techdown': {
-    heading: 'Productdetaljer om Utekos TechDown™',
+    heading: 'Produktdetaljer om Utekos TechDown™',
     materials: [
       { label: 'Skallstoff', value: 'Luméa™' },
       { label: 'Isolasjon', value: 'CloudWave™' },
@@ -127,12 +127,12 @@ const productDetailsByModel: Record<ModelKey, ProductDetailsContent> = {
   'utekos-mikrofiber': {
     heading: 'Produktdetaljer om Utekos Mikrofiber™',
     materials: [
-      { label: 'Fôrstoff', value: 'Taffeta' },
+      { label: 'Innerfôr', value: 'Taffeta' },
       { label: 'Skallstoff', value: 'DuraLite™ Nylon' },
       { label: 'Belegg', value: 'DWR (inkl. flammehemming)' },
       { label: 'Trådtetthet', value: '380T' },
       { label: 'Trådtykkelse', value: '20D' },
-      { label: 'Vekt', value: 'ca. 800g' },
+      { label: 'Vekt', value: 'Omtrent 800 gram' },
       { label: 'Glidelåser', value: 'YKK®' }
     ],
     functions: [

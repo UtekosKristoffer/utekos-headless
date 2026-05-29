@@ -1,0 +1,33 @@
+---
+description: Canonical source and value format for the ModelKey type
+alwaysApply: true
+---
+
+# ModelKey: én kilde, fast verdiformat
+
+`ModelKey` for produkt-/kjøpslogikk har **én** kanonisk kilde:
+
+```ts
+import type { ModelKey } from '@/api/constants'
+// 'utekos-techdown' | 'utekos-mikrofiber'
+```
+
+## Regler (ufravikelige)
+
+- **Alltid** importer `ModelKey` fra `@/api/constants`.
+- **Aldri** importer `ModelKey` fra `types/product/ProductTypes` — den eksporteres ikke der lenger.
+- **Aldri** definer en ny lokal/duplisert `ModelKey` for kjøpsflyten.
+- Verdier har **alltid** `utekos-`-prefiks: `'utekos-techdown'`, `'utekos-mikrofiber'`.
+  Bruk aldri bare `'techdown'` / `'mikrofiber'` (gammelt format) som verdi, default i `useState`, `switch`-case eller objekt-nøkkel.
+- Nøkler i objekter typet med `Record<ModelKey, …>` (f.eks. `PRODUCT_VARIANTS`, `FALLBACK_PRICING`) og `case` i `switch (model)` **må** bruke de prefiksede verdiene.
+
+## Eneste tillatte unntak
+
+`src/app/handlehjelp/sammenlign-modeller/utils/comparisonData.ts` definerer en **egen, lokal** `ModelKey`
+(`'utekos-dun' | 'utekos-mikrofiber' | 'utekos-techdown'`) fordi sammenligningssiden også dekker Utekos Dun.
+Denne er bevisst separat og skal **ikke** slås sammen med kjøpsflytens `ModelKey`. Ikke importer den ene som den andre.
+
+## Hvorfor
+
+To konkurrerende `ModelKey`-definisjoner (med vs. uten `utekos-`-prefiks) har gjentatte ganger gitt
+build-stoppende type-feil (`'…' is not assignable to type 'ModelKey'`). Én kilde + fast verdiformat eliminerer dette.

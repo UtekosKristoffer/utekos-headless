@@ -50,9 +50,9 @@ budskap gjør at det fester seg raskere, og vi blir mer positive til det. Klarhe
 overskrifter og et enkelt ordforråd skaper flyt. Positiv stemning: Merkelig nok er vi mer tilbøyelige til å
 oppleve kognitiv letthet når vi allerede er i godt humør
 
-## Motion
+## Motion: Slow Transitions
 
-**Slow Transitions:** **USE:**
+**USE:**
 
 - Long, eased animation curves (like ease-in-out) for page transitions and hover effects.
 - Slow fades promote relaxation.
