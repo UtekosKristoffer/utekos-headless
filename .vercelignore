@@ -27,3 +27,10 @@ rapport.md
 PLAN.md
 AGENTS.md
 project_info_1/
+
+# environment-variables
+*.env.local
+.env*/
+/.env*/
+/env.local
+

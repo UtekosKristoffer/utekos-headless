@@ -56,10 +56,21 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
-.env*.local
+.env*/
+/.env*/
+/.env*.local
+/env.local
+*.env.local
 .env.local
-
+.env
+env
+./env.local
+/.env.local
+/env
+/.env
+/env
+/env
+/.env
 
 # vercel
 .vercel
@@ -99,3 +110,4 @@ project_info_1/
 /.githubnode_modules
 .next
 .env*.local
+*.env.local
