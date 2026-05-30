@@ -70,6 +70,13 @@ copilot-instructions.md
 /components.json
 */components.json
 components.json
+.cursor/
+/.cursor/
+.vscode/
+/.vscode/
+.vscode/settings.json
+/vscode/settings.json
+vscode/settings.json
 
 # mcp config (may contain local secrets/tokens)
 mcp.json
@@ -178,3 +185,4 @@ project_info_1/
 .next
 .env*.local
 *.env.local
+/env.local
