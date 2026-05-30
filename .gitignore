@@ -1,8 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+### NextJS ###
 # dependencies
 /node_modules
-node_modules/
+/.pnp
+.pnp.js
 **/node_modules/
 /alpha
 /docs
@@ -14,19 +16,71 @@ node_modules/
 !.yarn/releases
 !.yarn/versions
 
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
 # .agents
 .agents/
 .agents/skills/
 .playwright-mcp/
 playwright-mcp/
-
-
+/agents
+/.agents
+/skills
+/claude
+/gemini
+/context7
+/cursor
+/.cursor
+/AGENTS
+/skills-lock.json
 
 # mcp config (may contain local secrets/tokens)
 mcp.json
+*/mcp.json
 
 # vscode settings (may contain MCP secrets/tokens)
 .vscode/settings.json
+/mcp.json
+/PLAN.md
+/PLAN
+knip.json
+/knip
+/knip.json
+.prettierignore
+/prettierignore
+/prettierignore.json
+/prettierignore.json
+/tsconfig.tsbuildinfo
+tsconfig.tsbuildinfo
+*/tsconfig.tsbuildinfo
 
 
 # local credentials and service accounts
@@ -34,6 +88,10 @@ src/api/lib/cloud-credentials/
 *.service-account.json
 *oauth-credentials*.json
 *tag-manager-credentials*.json
+/service-account.json
+/service-account.json
+*/service-account.json
+*/service-account
 
 # testing
 /coverage
