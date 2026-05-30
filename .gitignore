@@ -61,6 +61,15 @@ playwright-mcp/
 /.cursor
 /AGENTS
 /skills-lock.json
+copilot-instructions.md
+/copilot-instructions.md
+/copilot-instructions
+/.cursorignore
+.cursorignore
+*.cursorignore
+/components.json
+*/components.json
+components.json
 
 # mcp config (may contain local secrets/tokens)
 mcp.json
