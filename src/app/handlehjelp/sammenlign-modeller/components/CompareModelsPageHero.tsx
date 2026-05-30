@@ -26,21 +26,21 @@ export function CompareModelsPageHero() {
             className='mb-7 px-6 py-3 text-sm shadow-[0_18px_44px_-30px_color-mix(in_oklab,var(--overcast)_80%,transparent)]'
           />
           <h1 className='font-google-sans text-5xl text-cloud-dancer'>Hvilken Utekos passer best for deg?</h1>
-          <p className='mt-7 max-w-2xl font-utekos-text text-lg leading-[1.45] tracking-tight text-cloud-dancer/90 sm:text-2xl'>
+          <p className='mt-7 max-w-2xl   text-lg leading-[1.45]   text-cloud-dancer/90 sm:text-2xl'>
             Sammenlign Utekos Dun, Utekos Mikrofiber og Utekos TechDown. Finn riktig modell for hytte, bobil,
             båt og kalde kvelder ute.
           </p>
           <div className='mt-9 flex flex-wrap items-center gap-4'>
             <BrandBadge
               asChild
-              backgroundColor='var(--primary-button)'
+              backgroundColor='var(--primary)'
               className='px-7 py-4 text-base transition-transform duration-300 hover:scale-[1.02]'
             >
               <Link href='#velg-etter-bruk'>Finn modellen din</Link>
             </BrandBadge>
             <Link
               href='#sammenligning'
-              className='font-utekos-text text-base font-medium tracking-tight text-cloud-dancer underline decoration-cloud-dancer/35 underline-offset-8 transition-colors duration-300 hover:text-overcast'
+              className='  text-base font-medium   text-cloud-dancer underline decoration-cloud-dancer/35 underline-offset-8 transition-colors duration-300 hover:text-overcast'
             >
               Se tabellen
             </Link>

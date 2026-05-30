@@ -64,7 +64,7 @@ export function GrunderSection() {
                 label='Vår historie'
                 backgroundColor='var(--dusted-peri)'
                 textColor='var(--maritime-darkest)'
-                className='w-fit font-utekos-text font-medium tracking-tight shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
+                className='w-fit   font-medium   shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
               />
             </AnimatedBlock>
 
@@ -87,7 +87,7 @@ export function GrunderSection() {
               </div>
             </AnimatedBlock>
 
-            <div className='space-y-6 text-lg leading-[1.45] font-utekos-text font-medium tracking-tight text-cloud-dancer/85'>
+            <div className='space-y-6 text-lg leading-[1.45]   font-medium   text-cloud-dancer/85'>
               <AnimatedBlock className='will-animate-fade-in-up' delay='0.4s' threshold={0.3}>
                 <p>
                   Jeg har alltid elsket de små, verdifulle øyeblikkene – den stille kaffekoppen på en kjølig

@@ -9,8 +9,8 @@ export function ProductCareUtekosMikrofiber() {
       value='mikrofiber'
       className='mt-8 rounded-2xl border border-maritime-darkest/10 bg-cloud-dancer/72 p-6 shadow-[0_20px_54px_-46px_color-mix(in_oklab,var(--maritime-darkest)_72%,transparent)] sm:p-8'
     >
-      <h3 className='text-2xl font-semibold tracking-tight text-maritime-darkest'>Utekos Mikrofiber™</h3>
-      <p className='mt-3 max-w-2xl text-base font-utekos-text leading-[1.45] text-maritime-darkest/82'>
+      <h3 className='text-2xl font-semibold   text-maritime-darkest'>Utekos Mikrofiber™</h3>
+      <p className='mt-3 max-w-2xl text-base   leading-[1.45] text-maritime-darkest/82'>
         Slitesterkt, raskt å tørke og enkelt å vedlikeholde. Mikrofiber takler hverdagsbruk uten å miste form
         – så lenge du holder varmen unna.
       </p>
@@ -27,10 +27,10 @@ export function ProductCareUtekosMikrofiber() {
             <Wind className='size-[1.05rem]' />
           </span>
           <div>
-            <h4 className='text-base font-semibold tracking-tight text-cloud-dancer sm:text-lg'>
+            <h4 className='text-base font-semibold   text-cloud-dancer sm:text-lg'>
               Lufttørking bevarer ytelsen
             </h4>
-            <p className='mt-2 text-sm leading-relaxed  font-utekos-text text-cloud-dancer/90 sm:text-base'>
+            <p className='mt-2 text-sm leading-relaxed    text-cloud-dancer/90 sm:text-base'>
               Mikrofiber tørker svært raskt på henger. Lufttørking bevarer fiberstrukturen og de tekniske
               egenskapene – tørketrommel kan skade fibrene over tid.
             </p>

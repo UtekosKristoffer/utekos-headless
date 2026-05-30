@@ -27,7 +27,7 @@ export function EmpathySection() {
         <div className='relative'>
           {/* 1. Eyebrow — slide from LEFT + underline grow */}
           <div className='gsap-empathy-anim relative mb-4 inline-flex items-end overflow-hidden pb-1.5'>
-            <span className='gsap-empathy-eyebrow font-utekos-text text-sm font-medium leading-[1.4] tracking-tight text-demitasse'>
+            <span className='gsap-empathy-eyebrow   text-sm font-medium leading-[1.4]   text-demitasse'>
               Det du kjenner igjen
             </span>
             <span
@@ -46,7 +46,7 @@ export function EmpathySection() {
             </span>
           </h2>
 
-          <div className='max-w-none font-utekos-text text-base leading-[1.45] tracking-tight text-maritime-darkest'>
+          <div className='max-w-none   text-base leading-[1.45]   text-maritime-darkest'>
             <p className='gsap-empathy-para1 relative max-w-[34rem]'>
               Du kjenner følelsen. Praten går lett rundt bålpannen, flammene danser, og roen har senket seg.
               Så kommer den snikende trekken som truer med å bryte magien.
@@ -112,7 +112,7 @@ export function EmpathySection() {
               />
 
               <div className='gsap-empathy-image-overlay absolute bottom-5 left-5 right-5 text-cloud-dancer md:bottom-7 md:left-7 md:right-7'>
-                <p className='mb-1.5 font-utekos-text text-sm font-medium leading-[1.4] tracking-normal text-cloud-dancer/85'>
+                <p className='mb-1.5   text-sm font-medium leading-[1.4] tracking-normal text-cloud-dancer/85'>
                   Stemning
                 </p>
                 <p className='font-google-sans text-lg font-bold italic leading-[0.95] tracking-normal drop-shadow-md md:text-2xl'>

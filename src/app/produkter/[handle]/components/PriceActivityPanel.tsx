@@ -191,7 +191,7 @@ export default function PriceActivityPanel({
           aria-label={`${reviewSummary.formattedAverage} av 5 basert på ${reviewSummary.count} anmeldelser`}
         >
           <div className='flex flex-wrap items-center gap-x-2 gap-y-1'>
-            <div className='flex items-center gap-0.5 text-primary-button' aria-hidden='true'>
+            <div className='flex items-center gap-0.5 text-primary' aria-hidden='true'>
               {Array.from({ length: 5 }, (_, index) => (
                 <Star
                   key={index}

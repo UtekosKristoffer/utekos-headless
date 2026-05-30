@@ -25,10 +25,10 @@ export function VariantSelectors({ product, selectedVariant, onUpdateVariant }: 
           if (option.optionValues.length === 1) {
             return (
               <div key={option.name} className='space-y-2'>
-                <h3 className='text-sm font-utekos-text font-semibold text-cloud-dancer uppercase tracking-wide'>
+                <h3 className='text-sm   font-semibold text-cloud-dancer uppercase tracking-wide'>
                   {option.name}
                 </h3>
-                <p className='flex items-center gap-2 text-base font-utekos-text font-medium text-cloud-dancer'>
+                <p className='flex items-center gap-2 text-base   font-medium text-cloud-dancer'>
                   {isColorOption && (
                     <span
                       aria-hidden='true'
@@ -43,7 +43,7 @@ export function VariantSelectors({ product, selectedVariant, onUpdateVariant }: 
 
           return (
             <div key={option.name} className='space-y-3'>
-              <h3 className='text-sm font-utekos-text font-semibold text-cloud-dancer uppercase tracking-wide'>
+              <h3 className='text-sm   font-semibold text-cloud-dancer uppercase tracking-wide'>
                 {option.name}
               </h3>
 
@@ -57,7 +57,7 @@ export function VariantSelectors({ product, selectedVariant, onUpdateVariant }: 
                       variant={isActive ? 'control' : 'secondary'}
                       onClick={() => onUpdateVariant(option.name, value)}
                       className={cn(
-                        'rounded-lg px-6 py-2.5 bg-ancient-water hover:bg-cloud-dancer text-sm font-utekos-text text-maritime-darkest transition-all duration-200',
+                        'rounded-lg px-6 py-2.5 bg-ancient-water hover:bg-cloud-dancer text-sm   text-maritime-darkest transition-all duration-200',
                         'hover:scale-105 active:scale-95',
                         isActive ? 'shadow-md' : 'hover:border-neutral-800'
                       )}

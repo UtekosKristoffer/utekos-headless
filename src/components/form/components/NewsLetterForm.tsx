@@ -56,7 +56,7 @@ export function NewsletterForm() {
           </h2>
         </div>
 
-        <h3 className='mx-auto mt-2! w-full max-w-4xl text-center font-utekos-text text-base leading-[1.5] tracking-tight text-cloud-dancer/80'>
+        <h3 className='mx-auto mt-2! w-full max-w-4xl text-center   text-base leading-[1.5]   text-cloud-dancer/80'>
           Som medlem i vår kundeklubb får du personlige tilbud og tilgang til salg og kampanjer først. Du får
           også masse tips og inspirasjon rett inn i innboksen din.
         </h3>
@@ -76,7 +76,7 @@ export function NewsletterForm() {
 
           <BrandBadge
             asChild
-            backgroundColor='var(--color-primary-button)'
+            backgroundColor='var(--color-primary)'
             textColor='var(--color-maritime-darkest)'
             className='ml-4 shrink-0 px-6 py-3 text-base font-medium transition-colors duration-300 hover:brightness-95'
           >

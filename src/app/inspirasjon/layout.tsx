@@ -109,7 +109,7 @@ export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) 
               ))}
             </div>
             <div className='mt-12 text-center'>
-              <p className='mb-4 text-base leading-[1.45] font-utekos-text tracking-tight text-havdyp'>
+              <p className='mb-4 text-base leading-[1.45]     text-havdyp'>
                 Klar til å oppleve komforten selv?
               </p>
               <div className='flex flex-wrap justify-center gap-4'>

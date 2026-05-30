@@ -69,22 +69,17 @@ export function AmbientBackgroundGlow() {
   }, [])
 
   return (
-    <div
-      ref={container}
-      className='pointer-events-none absolute inset-0 -z-10 overflow-hidden'
-    >
+    <div ref={container} className='pointer-events-none absolute inset-0 -z-10 overflow-hidden'>
       <div
         className='ambient-blob-1 absolute left-[-30%] top-[-18%] size-[520px] opacity-[0.08] blur-[96px] sm:size-[680px] sm:blur-[120px] lg:size-[800px]'
         style={{
-          background:
-            'radial-gradient(circle, var(--ancient-water) 0%, transparent 70%)'
+          background: 'radial-gradient(circle, var(--ancient-water) 0%, transparent 70%)'
         }}
       />
       <div
         className='ambient-blob-2 absolute right-[-35%] bottom-[-20%] size-[520px] opacity-[0.08] blur-[96px] sm:size-[680px] sm:blur-[120px] lg:size-[800px]'
         style={{
-          background:
-            'radial-gradient(circle, var(--primary-button) 0%, transparent 70%)'
+          background: 'radial-gradient(circle, var(--primary) 0%, transparent 70%)'
         }}
       />
     </div>

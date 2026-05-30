@@ -79,7 +79,7 @@ export default function SizeGuidePage() {
                 key={link.name}
                 backgroundColor='var(--cloud-dancer)'
                 textColor='var(--maritime-darkest)'
-                className='border border-cloud-dancer/20 px-4 py-2 text-sm transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+                className='border border-cloud-dancer/20 px-4 py-2 text-sm transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
               >
                 <a href={link.href} data-track={`SizeGuideNav_${link.name}`}>
                   {link.name}

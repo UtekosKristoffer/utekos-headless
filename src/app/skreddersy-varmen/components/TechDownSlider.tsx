@@ -126,7 +126,7 @@ export function TechDownSlider() {
     >
       <div className='mx-auto max-w-5xl px-6'>
         <div className='gsap-tech-intro mb-16 text-center'>
-          <span className='gsap-tech-eyebrow mb-3 inline-block font-utekos-text text-sm font-medium leading-[1.4] tracking-tight text-maritime-darkest'>
+          <span className='gsap-tech-eyebrow mb-3 inline-block   text-sm font-medium leading-[1.4]   text-maritime-darkest'>
             Teknologi
           </span>
           <h2
@@ -135,16 +135,13 @@ export function TechDownSlider() {
           >
             Når været snur, består varmen
           </h2>
-          <p className='gsap-tech-subtitle mx-auto max-w-2xl font-utekos-text text-base leading-[1.45] tracking-tight text-maritime-darkest'>
+          <p className='gsap-tech-subtitle mx-auto max-w-2xl   text-base leading-[1.45]   text-maritime-darkest'>
             Dra linjen for å se forskjellen på hvordan vanlig dun og Utekos TechDown™ håndterer fuktighet.
           </p>
         </div>
 
         <div className='mb-5 flex flex-col gap-3 rounded-sm border border-maritime-darkest/10 bg-cloud-dancer p-4 text-maritime-darkest shadow-sm md:flex-row md:items-center md:justify-between'>
-          <label
-            htmlFor='techdown-moisture-slider'
-            className='font-utekos-text text-sm font-semibold leading-[1.4] tracking-tight'
-          >
+          <label htmlFor='techdown-moisture-slider' className='  text-sm font-semibold leading-[1.4]  '>
             Sammenlign tørr og fuktig isolasjon
           </label>
           <input
@@ -155,7 +152,7 @@ export function TechDownSlider() {
             value={position}
             aria-valuetext={`${Math.round(position)} prosent tørr visning`}
             onChange={event => setPosition(clampPercentage(Number(event.currentTarget.value)))}
-            className='h-2 w-full accent-maritime-darkest focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-button md:max-w-sm'
+            className='h-2 w-full accent-maritime-darkest focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary md:max-w-sm'
           />
         </div>
 
@@ -205,7 +202,7 @@ export function TechDownSlider() {
               <BrandBadge
                 backgroundColor='var(--color-cloud-dancer)'
                 textColor='var(--color-maritime-darkest)'
-                className='h-8 px-4 py-0 font-utekos-text text-xs font-medium leading-none tracking-tight shadow-sm backdrop-blur-md'
+                className='h-8 px-4 py-0   text-xs font-medium leading-none   shadow-sm backdrop-blur-md'
               >
                 Fuktig vær
               </BrandBadge>
@@ -215,7 +212,7 @@ export function TechDownSlider() {
               <BrandBadge
                 backgroundColor='var(--color-cloud-dancer)'
                 textColor='var(--color-maritime-darkest)'
-                className='h-8 px-4 py-0 font-utekos-text text-xs font-medium leading-none tracking-tight shadow-lg backdrop-blur-md'
+                className='h-8 px-4 py-0   text-xs font-medium leading-none   shadow-lg backdrop-blur-md'
               >
                 Tørt vær
               </BrandBadge>
@@ -243,7 +240,7 @@ export function TechDownSlider() {
               <BrandBadge
                 backgroundColor='var(--color-cloud-dancer)'
                 textColor='var(--color-maritime-darkest)'
-                className='gsap-tech-status-badge mb-4 gap-3 px-4 py-2 font-utekos-text text-xs font-medium leading-none tracking-tight shadow-sm'
+                className='gsap-tech-status-badge mb-4 gap-3 px-4 py-2   text-xs font-medium leading-none   shadow-sm'
               >
                 {currentContent.icon}
                 <span>Status: {currentContent.label}</span>
@@ -255,13 +252,13 @@ export function TechDownSlider() {
             </div>
 
             <div className='md:w-2/3'>
-              <p className='gsap-tech-card-desc mb-8 font-utekos-text text-base leading-[1.45] tracking-tight text-maritime-darkest/88'>
+              <p className='gsap-tech-card-desc mb-8   text-base leading-[1.45]   text-maritime-darkest/88'>
                 {currentContent.desc}
               </p>
 
               <div className='border-t border-maritime-darkest pt-6'>
                 <div className='mb-2 flex items-end justify-between'>
-                  <span className='font-utekos-text text-sm font-medium leading-[1.4] tracking-tight text-maritime-darkest/80'>
+                  <span className='  text-sm font-medium leading-[1.4]   text-maritime-darkest/80'>
                     Isolasjonsevne
                   </span>
                   <span className='gsap-tech-stat font-google-sans text-xl font-bold leading-[0.95] tracking-[-0.01em] text-maritime-darkest'>
@@ -274,7 +271,7 @@ export function TechDownSlider() {
                     style={{ width: isDryView ? '100%' : '98%' }}
                   />
                 </div>
-                <p className='mt-2 font-utekos-text text-xs italic leading-[1.45] tracking-tight text-maritime-darkest/80'>
+                <p className='mt-2   text-xs italic leading-[1.45]   text-maritime-darkest/80'>
                   *Beholder nær full effekt selv i ekstrem fuktighet.
                 </p>
               </div>

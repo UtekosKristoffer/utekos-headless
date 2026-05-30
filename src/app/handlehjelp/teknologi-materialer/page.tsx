@@ -70,10 +70,8 @@ export default function ProductSpecsPage() {
                 <Maximize2 className='h-6 w-6' />
               </div>
               <h3 className='mb-2 text-xl font-google-sans font-bold text-cloud-dancer'>1. Fullengdemodus</h3>
-              <p className='mb-4 text-sm font-bold tracking-wider text-ancient-water font-utekos-text'>
-                Maksimal isolasjon
-              </p>
-              <p className='text-cloud-dancer font-utekos-text tracking-tight'>
+              <p className='mb-4 text-sm font-bold tracking-wider text-ancient-water  '>Maksimal isolasjon</p>
+              <p className='text-cloud-dancer    '>
                 Utgangspunktet for selve utekosen. Plagget henger i full lengde som en isolerende kokong.
                 Perfekt for solveggen, hengekøyen eller lange kvelder på terrassen.
               </p>
@@ -91,10 +89,8 @@ export default function ProductSpecsPage() {
               <h3 className='mb-2 text-xl font-google-sans font-bold text-cloud-dancer'>
                 2. Oppjustert modus
               </h3>
-              <p className='mb-4 text-sm font-bold tracking-wider text-dusted-peri font-utekos-text'>
-                Umiddelbar mobilitet
-              </p>
-              <p className='text-cloud-dancer font-utekos-text tracking-tight'>
+              <p className='mb-4 text-sm font-bold tracking-wider text-dusted-peri  '>Umiddelbar mobilitet</p>
+              <p className='text-cloud-dancer    '>
                 Nyter du total omfavnelse av Utekos, men må plutselig på kjøkkenet eller svare telefonen? Heis
                 opp plagget til ønsket lengde, stram snoren i livet og bli mobil på sekunder. Beveg deg trygt
                 og subbefritt – uten å miste varmen.
@@ -111,10 +107,8 @@ export default function ProductSpecsPage() {
                 <Move className='h-6 w-6' />
               </div>
               <h3 className='mb-2 text-xl font-google-sans font-bold text-cloud-dancer'>3. Parkasmodus</h3>
-              <p className='mb-4 text-sm font-bold tracking-wider text-cloud-dancer/90 font-utekos-text'>
-                Aktiv utendørs
-              </p>
-              <p className='text-cloud-dancer font-utekos-text tracking-tight'>
+              <p className='mb-4 text-sm font-bold tracking-wider text-cloud-dancer/90  '>Aktiv utendørs</p>
+              <p className='text-cloud-dancer    '>
                 For turer og lengre avstander. Brett nedre del innunder seg og stram til for å forvandle
                 Utekos til en stilig parkas. Full bevegelsesfrihet med et elegant snitt.
               </p>
@@ -149,7 +143,7 @@ export default function ProductSpecsPage() {
               <h3 className='mb-2 text-2xl font-google-sans font-bold text-cloud-dancer'>
                 Utforsk kolleksjonen
               </h3>
-              <p className='mb-8 max-w-sm font-utekos-text text-cloud-dancer/90 tracking-tight'>
+              <p className='mb-8 max-w-sm   text-cloud-dancer/90  '>
                 Klar for å oppleve Utekos®? Se vårt utvalg.
               </p>
               <BrandBadge className='group-hover:bg-cloud-dancer group-hover:text-maritime-darkest'>
@@ -168,7 +162,7 @@ export default function ProductSpecsPage() {
               <h3 className='mb-2 text-2xl font-google-sans font-bold text-cloud-dancer'>
                 Inspirasjon og historier
               </h3>
-              <p className='mb-8 max-w-sm font-utekos-text text-cloud-dancer/90 tracking-tight'>
+              <p className='mb-8 max-w-sm   text-cloud-dancer/90  '>
                 Les mer om tips og historier i vårt magasin.
               </p>
               <BrandBadge className='group-hover:bg-cloud-dancer group-hover:text-maritime-darkest'>

@@ -11,8 +11,8 @@ const seasons = [
     value: 'spring',
     label: 'Vår',
     icon: Sun,
-    iconColor: 'text-primary-button',
-    glowColor: 'var(--primary-button)',
+    iconColor: 'text-primary',
+    glowColor: 'var(--primary)',
     title: 'Påskesol og vårfølelse',
     description:
       'Nyt de første solstrålene på terrassen med varme som varer. God på påskefjellet og den første helgen på sjøhytten.'

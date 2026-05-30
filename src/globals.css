@@ -3,7 +3,6 @@
 
 @theme {
   --breakpoint-tablet: 33.75rem;
-
   --spacer-xxxs: 0.25rem;
   --spacer-xxs: 0.5rem;
   --spacer-xs: 0.75rem;
@@ -13,58 +12,87 @@
   --spacer-xl: 3rem;
   --spacer-xxl: 4rem;
 
+  /* The scale runs from extremely tight (headlines) to readable (body copy) */
+  --leading-1: 0.8; /* Utekos's absolute tightest limit for massive headlines (80%) */
+  --leading-2: 0.95; /* Utekos's standard heading tight limit (95%) */
+  --leading-3: 1.1; /* Transitional limit (helpful for multiline headers or special characters) */
+  --leading-4: 1.4; /* Utekos's standard for body copy and buttons (140%) */
+  --leading-5: var(--leading-normal); /* Utekos's maximum comfortable limit for long-form reading (150%) */
+
+  --font-size-1: clamp(2.25rem, 1.385rem + 3.46vw, 4.5rem);
+  --font-size-2: clamp(1.75rem, 1.365rem + 1.54vw, 2.75rem);
+  --font-size-3: clamp(1.25rem, 1.106rem + 0.58vw, 1.625rem);
+  --font-size-4: clamp(1rem, 0.9375rem + 0.25vw, 1.125rem);
+  --font-size-5: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
+
   --text-title: clamp(3.515625rem, 2.34375rem + 4.6875vw, 5.859375rem);
   --text-title--letter-spacing: var(--tracking-utekos-title);
   --text-title--font-weight: 700;
   --text-title--line-height: 0.85;
+  --text-utekos-heading-level-three: clamp(1rem, 0.667rem + 1.201vw, 1.501rem);
+  --text-utekos-heading-level-three--letter-spacing: var(--tracking-utekos-heading-level-three);
+  --text-utekos-heading-level-three--font-weight: 600;
+  --text-utekos-heading-level-three--line-height: var(--leading-utekos-heading-level-three);
+  --text-utekos-heading-level-three--font-family: var(--font-google-sans), system-ui, sans-serif;
 
-  --text-paragraph: clamp(0.6375rem, 0.44625rem + 0.6375vw, 0.95625rem);
-  --text-paragraph--line-height: var(--leading-utekos-text);
-  --text-paragraph--letter-spacing: var(--tracking-utekos-text);
-  --text-paragraph--font-weight: 500;
-  --text-paragraph--font-family: var(--font-utekos-text), system-ui, sans-serif;
   --font-sans: var(--font-utekos-text), system-ui, sans-serif;
-
-  --font-family-paragraph: var(--font-utekos-text), system-ui, sans-serif;
-  --font-brand-heading: var(--font-google-sans), system-ui, sans-serif;
-  --font-weight-utekos-heading-level-two: 700;
-  --font-weight-utekos-heading-level-three: 600;
-  --font-weight-utekos-text: var(--text-paragraph--font-weight);
-  --font-weight-paragraph: var(--text-paragraph--font-weight);
   --font-weight-card-heading: 700;
   --font-weight-inspirational-page-hero-card-heading: 600;
-  --font-weight-inspirational-page-hero-card-description: 400;
 
   --text-inspirational-page-hero-card-heading: clamp(1rem, 0.7rem + 1vw, 1.5rem);
   --text-inspirational-page-hero-card-heading--line-height: var(--leading-card-heading);
   --text-inspirational-page-hero-card-heading--letter-spacing: var(--tracking-card-heading);
   --font-weight-inspirational-page-hero-card-heading: 600;
 
-  --text-inspirational-page-hero-card-description: clamp(0.8rem, 0.56rem + 0.8vw, 1.2rem);
-  --text-inspirational-page-hero-card-description--line-height: var(--leading-utekos-text);
-  --text-inspirational-page-hero-card-description--letter-spacing: var(--tracking-utekos-text);
-  --font-weight-inspirational-page-hero-card-description: 400;
+  --text-inspirational-page-hero-card-description: var(--font-size-4);
+  --text-inspirational-page-hero-card-description--line-height: var(--leading-4);
+  --text-inspirational-page-hero-card-description--letter-spacing: var(--tracking-3);
 
-  --leading-utekos-heading-level-three: 1.1;
+  --text-paragraph: var(--font-size-4);
+  --text-paragraph-font-weight: 400;
+  --text-paragraph-letter-spacing: var(--tracking-3);
+  --text-paragraph-line-height: var(--leading-4);
+  --font-weight-inspirational-page-hero-card-description: 400;
+  --font-family-inspirational-page-hero-card-description: var(--font-google-sans);
+
+  --leading-heading-level-one: 0.85;
+  --leading-heading-level-two: 0.9;
+  --leading-heading-level-three: 1.1;
   --leading-subtitle: 1.6;
   --tracking-subtitle: -0.03em;
-  --leading-utekos-text: 1.45;
+  --leading-font-utekos-text: 1.4;
   --leading-card-heading: 1.1;
-
+  --leading-text-paragraph: 1.45;
   --tracking-utekos-title: -0.01em;
   --tracking-utekos-heading-level-two: -0.01em;
   --tracking-utekos-heading-level-three: -0.005em;
-  --tracking-utekos-text: -0.025em;
+  --tracking-font-utekos-text: -0.025em;
+
+  /* The scale runs strictly from neutral to compact */
+  --tracking-1: -0.03em; /* Utekos's max tight limit for body copy/buttons (-3%) */
+  --tracking-2: -0.02em; /* Medium-snug body copy (-2%) */
+  --tracking-3: -0.015em; /* Light-snug body copy (-1.5%) */
+  --tracking-4: -0.01em; /* Utekos's max tight limit for headlines (-1%) */
+  --tracking-5: var(--tracking-normal); /* Completely neutral/standard default */
+
   --tracking-card-heading: -0.005em;
+  --tracking-text-paragraph: -0.02em;
+  --tracking-medium: -0.0125em;
 
   --text-section-lead: clamp(1.125rem, 1.0357rem + 0.4464vw, 1.375rem);
-  --text-section-lead--line-height: var(--leading-utekos-text);
-  --text-section-lead--letter-spacing: var(--tracking-utekos-text);
+  --text-section-lead--line-height: 1.4;
+  --text-section-lead--letter-spacing: var(--tracking-font-utekos-text);
   --text-section-lead--font-weight: 400;
+
+  --text-card: clamp(1.125rem, 1.0357rem + 0.4464vw, 1.375rem);
+  --text-card--line-height: var(--leading-font-utekos-text);
+  --text-card--letter-spacing: var(--tracking-3);
+  --text-card--font-weight: 400;
 
   --text-heading-level-one: var(--text-title);
   --text-heading-level-one--line-height: var(--text-title--line-height);
   --text-heading-level-one--letter-spacing: var(--text-title--letter-spacing);
+
   --text-heading-level-one--font-weight: var(--text-title--font-weight);
   --text-heading-level-two: clamp(2.25rem, 1.5rem + 3vw, 3.75rem);
   --text-heading-level-two--line-height: 0.95;
@@ -76,14 +104,18 @@
   --leading-utekos-title: var(--text-title--line-height);
   --leading-utekos-heading-level-two: var(--text-heading-level-two--line-height);
   --utekos-heading-level-three: var(--text-heading-level-three);
-  --utekos-text-letter-spacing: var(--tracking-utekos-text);
+  --font-utekos-text-letter-spacing: var(--tracking-font-utekos-text);
   --utekos-blockquote-line-height: 1.45;
-  --utekos-blockquote-letter-spacing: var(--tracking-utekos-text);
+  --utekos-blockquote-letter-spacing: var(--tracking-font-utekos-text);
   --radius: 0.625rem;
   --radius-full: 9999px;
 
-  /* Utekos TechDown */
+  --tracking-heading-level-one: -0.01em;
+  --tracking-heading-level-two: -0.01em;
+  --tracking-heading-level-three: 0.005em;
+  --tracking-ml: -0.02em;
 
+  /* Utekos TechDown */
   --color-vargnatt: oklch(0.2789 0.0091 285.79);
   --color-silhouette: oklch(0.2881 0.0219 262.5);
 
@@ -102,13 +134,10 @@
   --color-fjellnatt: oklch(0.2471 0.0269 262.55);
   --color-havdyp-dark: oklch(0.1996 0.0201 279.96);
   --color-dazzling-blue: oklch(0.457 0.1322 268.66);
-
-  --color-havdyp-analogous-100: #28393e;
-  --color-havdyp-analogous-200: #35283e;
-
   --color-havdyp-square-300: #3e2835;
   --color-havdyp-square-400: #283e31;
-
+  --color-border: oklch(0.2884 0.0366 279.42);
+  --color-ring: oklch(0.2884 0.0366 279.42);
   --color-cloud-dancer: oklch(0.9493 0.007 88.64);
   --color-cool-gray: oklch(0.8892 0.0108 106.62);
   --color-ancient-water: oklch(0.8733 0.0246 259.82);
@@ -116,7 +145,11 @@
   --color-bright-white: oklch(0.9801 0.0096 252.81);
   --color-secondary: oklch(0.82 0.006 88.64);
   --color-muted-foreground: oklch(0.78 0.006 88.64);
-
+  --color-primary: oklch(0.57 0.23507 260.1068); /* matcher --color-button */
+  --color-primary-foreground: oklch(0.9493 0.007 88.64); /* cloud-dancer */
+  --color-secondary-foreground: oklch(0.2884 0.0366 279.42); /* havdyp */
+  --color-destructive: oklch(0.5774 0.2057 27.33);
+  --color-input: oklch(0.2884 0.0366 279.42); /* havdyp som default border/input */
   --color-espresso: oklch(0.3159 0.0088 6.16);
   --color-raisin: oklch(0.3943 0.024 6.35);
   --color-plum-truffle: oklch(0.4729 0.0211 13.65);
@@ -139,7 +172,7 @@
   --color-fair-orchid: oklch(0.7637 0.0395 325.96);
   --color-raindrops-on-roses: oklch(0.8996 0.0227 3.86);
   --color-sweet-lavender: oklch(0.7019 0.0553 283.69);
-  --color-primary-button: oklch(0.8104 0.1858 101.08);
+  --color-primary: oklch(0.8104 0.1858 101.08);
   --color-mountain-view: oklch(0.3424 0.0298 148.54);
   --color-deep-forest: oklch(0.3638 0.0178 154.9);
   --color-dark-green: oklch(0.3997 0.0433 161.05);
@@ -148,7 +181,7 @@
   --color-camping-green: oklch(0.4257 0.0261 153.39);
   --color-comfrey: oklch(0.5054 0.0686 150.31);
   --color-mineral-green: oklch(0.6545 0.0641 142.67);
-
+  --color-background: oklch(0.9493 0.007 88.64);
   --color-fairest-jade: oklch(0.9041 0.02 143.03);
   --color-overcast: oklch(0.7983 0.0257 91.66);
   --color-overcast-light: oklch(0.9183 0.0257 91.66);
@@ -163,10 +196,10 @@
 
   --color-maritime-darkest: oklch(0.1996 0.0201 279.96);
   --color-muted: oklch(0.2684 0.0366 279.42);
-
+  --color-foreground: oklch(0.985 0 0);
   --utekos-title-letter-spacing: -0.02em;
-  --utekos-text-line-height: 1.45;
-
+  --font-utekos-text-line-height: 1.45;
+  --color-muted-foreground: oklch(0.78 0.006 88.64);
   --color-country-air: oklch(0.909 0.0246 248.11);
   --color-orange-slice: oklch(0.7034 0.198 45.92);
   --color-soft-warm: oklch(0.7864 0.0487 359.96);
@@ -174,101 +207,88 @@
   --color-light-background: var(--color-cloud-dancer);
   --color-foreground: oklch(0.985 0 0);
   --color-button: oklch(0.57 0.23507 260.1068);
-  --color-card: oklch(1 0 0);
-  --color-card-foreground: oklch(0.145 0 0);
-  --color-popover: oklch(1 0 0);
-  --color-popover-foreground: oklch(0.145 0 0);
-  --color-primary: oklch(0.205 0 0);
-  --color-primary-foreground: var(--color-cloud-dancer);
-  --color-secondary: oklch(0.97 0 0);
-  --color-secondary-foreground: oklch(0.205 0 0);
-  --color-very-white: oklch(0.9893 0.007 88.64);
-  --color-muted-foreground: var(--color-cloud-dancer);
-  --color-accent: oklch(0.97 0 0);
-  --color-accent-foreground: oklch(0.205 0 0);
-  --color-destructive: oklch(0.577 0.245 27.325);
-  --color-border: oklch(0.922 0 0);
-  --color-input: oklch(0.922 0 0);
-  --color-ring: oklch(0.1284 0.0366 279.42);
-  --color-article-white: oklch(0.94 0 0);
 }
 
 @theme inline {
   --tablet: var(--breakpoint-tablet);
 
-  --tracking-utekos-text: -0.025em;
+  --tracking-1: var(--tracking-1); /* Utekos's max tight limit for body copy/buttons (-3%) */
+  --tracking-2: var(--tracking-2); /* Medium-snug body copy (-2%) */
+  --tracking-3: var(--tracking-3); /* Light-snug body copy (-1.5%) */
+  --tracking-4: var(--tracking-4); /* Utekos's max tight limit for headlines (-1%) */
+  --tracking-5: var(--tracking-normal); /* Completely neutral/standard default */
 
-  --leading-utekos-text: 1.45;
-
-  --font-weight-utekos-text: var(--text-paragraph--font-weight);
-  --font-family-paragraph: var(--font-utekos-text), system-ui, sans-serif;
-  --font-weight-paragraph: var(--text-paragraph--font-weight);
-  --font-paragraph: var(--font-family-paragraph);
-
-  --dusted-purple: var(--color-dusted-purple);
-  --vargnatt: var(--color-vargnatt);
-  --bright-white: var(--color-bright-white);
-  --klarna-pink: var(--color-klarna-pink);
-  --primary-button: var(--color-primary-button);
-  --silhouette: var(--color-silhouette);
-  --havdyp: var(--color-havdyp);
-  --very-white: var(--color-very-white);
-  --country-air: var(--color-country-air);
-  --cloud-dancer: var(--color-cloud-dancer);
-  --ancient-water: var(--color-ancient-water);
-  --ancient-water-light: var(--color-ancient-water-light);
-  --barely-blue: var(--color-barely-blue);
-  --mountain-view: var(--color-mountain-view);
-  --comfrey: var(--color-comfrey);
-  --camping-green: var(--color-camping-green);
-  --overcast: var(--color-overcast);
-  --overcast-light: var(--color-overcast-light);
-  --white-down: var(--color-white-down);
-  --deep-forest: var(--color-deep-forest);
-  --mineral-green: var(--color-mineral-green);
-  --fairest-jade: var(--color-fairest-jade);
-  --raindrops-on-roses: var(--color-raindrops-on-roses);
-  --plum-truffle: var(--color-plum-truffle);
-  --maritime-darkest: var(--color-maritime-darkest);
-  --fjellbla: var(--color-fjellbla);
-  --orange-slice: var(--color-orange-slice);
-  --inking-100: var(--color-inking-100);
-  --dazzling-blue: var(--color-dazzling-blue);
-  --sweet-lavender: var(--color-sweet-lavender);
-  --demitasse: var(--color-demitasse);
-  --rosin: var(--color-rosin);
-  --button: var(--color-button);
-  --almost-mauve: var(--color-almost-mauve);
-  --dark-rose: var(--color-dark-rose);
-  --chocolate-plum: var(--color-chocolate-plum);
-  --antier: var(--color-antier);
-  --skipper-blue: var(--color-skipper-blue);
-  --fjellnatt: var(--color-fjellnatt);
-  --dusted-peri: var(--color-dusted-peri);
-  --dusted-peri-light: var(--color-dusted-peri-light);
-  --ring: var(--color-ring);
-  --input: var(--color-input);
-  --border: var(--color-border);
-  --persian-violet: var(--color-persian-violet);
-  --destructive: var(--color-destructive);
-  --raisin: var(--color-raisin);
-  --fair-orchid: var(--color-fair-orchid);
-  --secondary-foreground: var(--color-secondary-foreground);
-  --secondary: var(--color-secondary);
-  --primary-foreground: var(--color-primary-foreground);
-  --maritime-dark: var(--color-maritime-dark);
-  --bleached-mauve: var(--color-bleached-mauve);
-  --bleached-mauve-light: var(--color-bleached-mauve-light);
-  --background: var(--color-background);
-  --foreground: var(--color-foreground);
-  --primary: var(--color-primary);
-
-  --mono-tint: var(--ancient-water);
-  --mono-border: var(--dusted-peri);
-
+  --border: oklch(0.7034 0.198 45.92);
+  --ring: oklch(0.2884 0.0366 279.42);
+  --tracking-medium: var(--tracking-medium);
+  --tracking-font-utekos-text: var(--tracking-wide);
+  --tracking-text-paragraph: var(--tracking-ml);
+  --leading-text-paragraph: 1.45;
+  --leading-font-utekos-text: var(--leading-font-utekos-text);
+  --leading-utekos-heading-level-three: var(--leading-heading-level-three);
+  --dusted-purple: oklch(0.7794 0.0538 285.08);
+  --vargnatt: oklch(0.2789 0.0091 285.79);
+  --bright-white: oklch(0.9801 0.0096 252.81);
+  --klarna-pink: oklch(0.8271 0.1114 352.7);
+  --silhouette: oklch(0.2881 0.0219 262.5);
+  --havdyp: oklch(0.2884 0.0366 279.42);
+  --very-white: oklch(0.9801 0.0096 252.81);
+  --country-air: oklch(0.909 0.0246 248.11);
+  --cloud-dancer: oklch(0.9493 0.007 88.64);
+  --ancient-water: oklch(0.8733 0.0246 259.82);
+  --ancient-water-light: oklch(0.8033 0.0246 259.82);
+  --barely-blue: oklch(0.9041 0.0035 174.47);
+  --mountain-view: oklch(0.3424 0.0298 148.54);
+  --comfrey: oklch(0.5054 0.0686 150.31);
+  --camping-green: oklch(0.4257 0.0261 153.39);
+  --overcast: oklch(0.7983 0.0257 91.66);
+  --overcast-light: oklch(0.9183 0.0257 91.66);
+  --white-down: oklch(0.9126 0.0125 91.53);
+  --deep-forest: oklch(0.3638 0.0178 154.9);
+  --mineral-green: oklch(0.6545 0.0641 142.67);
+  --fairest-jade: oklch(0.9041 0.02 143.03);
+  --raindrops-on-roses: oklch(0.8996 0.0227 3.86);
+  --plum-truffle: oklch(0.4729 0.0211 13.65);
+  --maritime-darkest: oklch(0.1996 0.0201 279.96);
+  --fjellbla: oklch(0.3504 0.0537 281.83);
+  --orange-slice: oklch(0.7034 0.198 45.92);
+  --inking-100: oklch(0.3048 0.0341 291.48);
+  --dazzling-blue: oklch(0.457 0.1322 268.66);
+  --sweet-lavender: oklch(0.7019 0.0553 283.69);
+  --demitasse: oklch(0.3328 0.0233 53.3);
+  --rosin: oklch(0.3377 0.0177 52.86);
+  --button: oklch(0.8104 0.1858 101.08);
+  --almost-mauve: oklch(0.9024 0.0128 35.73);
+  --dark-rose: oklch(0.4885 0.0953 4.64);
+  --chocolate-plum: oklch(0.3159 0.0237 14.31);
+  --antier: oklch(0.6039 0.0343 27.96);
+  --skipper-blue: oklch(0.4252 0.0661 280.99);
+  --fjellnatt: oklch(0.2471 0.0269 262.55);
+  --dusted-peri: oklch(0.5433 0.105 281.67);
+  --dusted-peri-light: oklch(0.7081 0.0822 281.66);
+  --input: oklch(0.2884 0.0366 279.42);
+  --persian-violet: oklch(0.6579 0.0534 282.33);
+  --destructive: oklch(0.5774 0.2057 27.33);
+  --raisin: oklch(0.3943 0.024 6.35);
+  --fair-orchid: oklch(0.7637 0.0395 325.96);
+  --secondary-foreground: oklch(0.2884 0.0366 279.42);
+  --secondary: oklch(0.82 0.006 88.64);
+  --primary-foreground: oklch(0.9493 0.007 88.64);
+  --maritime-dark: oklch(0.1996 0.0201 279.96);
+  --bleached-mauve: oklch(0.7864 0.0487 359.96);
+  --bleached-mauve-light: oklch(0.9064 0.0487 359.96);
+  --background: oklch(0.9493 0.007 88.64);
+  --foreground: oklch(0.9493 0.007 88.64);
+  --primary: oklch(0.8104 0.1858 101.08);
+  --muted-foreground: oklch(0.78 0.006 88.64);
+  --muted: oklch(0.2684 0.0366 279.42);
+  --ring: oklch(0.7034 0.198 45.92);
+  --border: oklch(0.2884 0.0366 279.42);
   --google-sans: var(--font-google-sans);
+  --font-utekos-text: var(--font-utekos-text);
   --utekos-text: var(--font-utekos-text);
-
+  --utekos-text-medium: var(--font-utekos-text-medium);
+  --muted: oklch(0.2684 0.0366 279.42);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -923,9 +943,9 @@
   font-weight: var(--text-heading-level-three-font-weight);
 }
 
-.utekos-text-size {
+.font-utekos-text-size {
   font-size: var(--text-paragraph);
-  line-height: var(--leading-utekos-text);
+  line-height: var(--leading-font-utekos-text);
   letter-spacing: var(--text-paragraph-letter-spacing);
   font-weight: var(--text-paragraph-font-weight);
 }
@@ -951,52 +971,61 @@
   font-size: 1.1em;
 }
 
+.Text_ParagraphLarge {
+  font-size: clamp(1.125rem, 1.3888888889vw, 1.25rem);
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
 
   body {
-    font-family: var(--font-utekos-text);
-    line-height: var(--leading-utekos-text);
-    letter-spacing: var(--tracking-utekos-text);
+    font-size: 16px;
   }
 
   h1 {
     font-family: var(--font-google-sans);
     line-height: 0.85;
-    letter-spacing: var(--text-title--letter-spacing);
-    font-weight: 700;
+    color: var(--foreground);
+    letter-spacing: var(--tracking-heading-level-one);
+    font-weight: 800;
     font-size: var(--text-title);
   }
 
   h2 {
+    line-height: 0.9;
     font-family: var(--font-google-sans);
-    line-height: 1.35;
-    letter-spacing: var(--text-heading-level-two--letter-spacing);
-    font-weight: var(--font-weight-utekos-heading-level-two);
+    color: var(--foreground);
+    letter-spacing: var(--tracking-heading-level-two);
+    font-weight: 700;
     font-size: var(--text-heading-level-two);
   }
 
   h3 {
-    font-family: var(--font-google-sans);
-    line-height: 1.4;
-    letter-spacing: var(--tracking-utekos-heading-level-three);
-    font-weight: 700;
-    font-size: var(--utekos-heading-level-three);
+    line-height: var(--leading-utekos-heading-level-three);
+    letter-spacing: var(--tracking-heading-level-three);
+    font-weight: 600;
+    font-size: var(--text-heading-level-three);
   }
 
   p {
     margin: 0;
     font-family: var(--font-utekos-text);
-    font-weight: var(--font-weight-paragraph);
+    font-size: clamp(1.125rem, 1.3888888889vw, 1.25rem);
+    line-height: var(--tracking-3);
+    letter-spacing: var(--tracking-medium);
+    color: var(--foreground);
   }
 
   li,
+  ul,
   dd {
     font-family: var(--font-utekos-text);
-    line-height: var(--utekos-text-line-height);
-    letter-spacing: var(--utekos-text-letter-spacing);
+    font-weight: 500;
+    letter-spacing: -0.0125em;
   }
 
   blockquote {
@@ -1011,7 +1040,7 @@
   }
 
   .ShippingCardDescription {
-    @apply font-utekos-text text-maritime-darkest tracking-tight leading-none;
+    @apply text-maritime-darkest tracking-tight leading-none;
   }
 
   input:-webkit-autofill,
@@ -1025,14 +1054,38 @@
   }
 }
 
-@custom-variant dark (&:is(.dark *));
-
 @layer components {
   .inspirational-page-hero-card-heading {
     font-size: var(--text-inspirational-page-hero-card-heading);
     line-height: var(--text-inspirational-page-hero-card-heading--line-height);
     letter-spacing: var(--text-inspirational-page-hero-card-heading--letter-spacing);
     font-weight: var(--font-weight-inspirational-page-hero-card-heading);
+  }
+
+  .card-text {
+    font-size: var(--text-card);
+    line-height: var(--leading-card-text);
+    letter-spacing: var(--tracking-3);
+    font-weight: 400;
+  }
+
+  .chat-bubble-text {
+    font-size: clamp(0.875rem, 0.75rem + 0.5vw, 1rem);
+    letter-spacing: var(--tracking-font-utekos-text);
+    line-height: 1.3;
+    letter-spacing: var(--tracking-wide);
+    font-family: var(--font-utekos-text);
+  }
+
+  .Text_ParagraphLarge {
+    font-size: clamp(1.125rem, 1.3888888889vw, 1.25rem);
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+  }
+
+  .Text_paragraph__I5Ups {
+    font-size: clamp(1.125rem, 1.3888888889vw, 1.25rem);
+    line-height: 1.35;
   }
 
   .inspirational-page-hero-card-description {
@@ -1076,14 +1129,6 @@
     padding: --spacing(6);
     box-shadow: 0 14px 32px -24px rgba(8, 10, 24, 0.62);
   }
-
-  .card-heading {
-    font-size: var(--text-heading-level-three);
-    line-height: var(--leading-card-heading);
-    letter-spacing: var(--tracking-card-heading);
-    font-weight: var(--font-weight-card-heading);
-    white-space: nowrap;
-  }
 }
 
 @utility utekos-section-lead {
@@ -1118,8 +1163,8 @@
   font-family: var(--font-google-sans), system-ui, sans-serif;
 }
 
-@utility font-utekos-text {
-  font-family: var(--font-utekos-text), system-ui, sans-serif;
+@utility font-utekos-text-medium {
+  font-family: var(--font-utekos-text-medium), system-ui, sans-serif;
 }
 
 @utility brand-tracking-normal {
@@ -1142,12 +1187,18 @@
   font-family: var(--font-google-sans);
 }
 
-@utility utekos-text {
+@utility font-utekos-text-regular {
   font-size: var(--text-paragraph);
-  line-height: var(--leading-utekos-text);
+  line-height: var(--leading-font-utekos-text);
   letter-spacing: var(--text-paragraph-letter-spacing);
   font-weight: var(--text-paragraph-font-weight);
   font-family: var(--font-utekos-text);
+}
+
+@utility font-utekos-text-medium {
+  line-height: 1.3;
+  letter-spacing: var(--text-paragraph-letter-spacing);
+  font-family: var(--font-utekos-text-medium);
 }
 
 @utility text-fluid-display {
@@ -1197,6 +1248,8 @@
     transform: translate3d(-50%, 0, 0);
   }
 }
+
+@custom-variant dark (&:is(.dark *));
 
 @media (prefers-reduced-motion: reduce) {
   [data-utekos-marquee] {

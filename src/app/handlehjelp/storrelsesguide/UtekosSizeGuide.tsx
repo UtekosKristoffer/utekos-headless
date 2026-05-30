@@ -33,7 +33,7 @@ export function UtekosSizeGuide() {
               textColor='var(--cloud-dancer)'
               className='mb-5 px-4 py-2 text-sm'
             />
-            <h2 className='text-3xl font-bold leading-[1.05] tracking-tight sm:text-5xl'>
+            <h2 className='text-3xl font-bold leading-[1.05]   sm:text-5xl'>
               <span className='inline-flex items-baseline'>
                 <UtekosWordmark
                   aria-hidden='true'
@@ -82,11 +82,11 @@ export function UtekosSizeGuide() {
           </div>
 
           <div className='mt-20 max-w-4xl mx-auto'>
-            <h3 className='text-2xl font-bold tracking-tight sm:text-3xl'>Skapt for å tilpasses deg</h3>
+            <h3 className='text-2xl font-bold   sm:text-3xl'>Skapt for å tilpasses deg</h3>
             <div className='mt-8 grid grid-cols-1 gap-12 sm:grid-cols-3'>
               {features.map(feature => (
                 <div key={feature.title} className='flex flex-col items-center gap-4'>
-                  <div className='flex size-12 items-center justify-center rounded-full bg-primary-button text-maritime-darkest'>
+                  <div className='flex size-12 items-center justify-center rounded-full bg-primary text-maritime-darkest'>
                     <feature.Icon className='size-6' aria-hidden='true' />
                   </div>
                   <div className='text-center'>

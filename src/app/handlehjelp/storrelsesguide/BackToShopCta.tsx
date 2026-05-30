@@ -7,8 +7,8 @@ export function BackToShopCta() {
   return (
     <section className='border-t border-cloud-dancer/12 bg-havdyp text-cloud-dancer'>
       <div className='container mx-auto px-4 py-16 sm:py-20 text-center'>
-        <Compass className='mx-auto size-10 text-primary-button' />
-        <h2 className='mx-auto mt-4 max-w-3xl text-3xl font-bold leading-[1.05] tracking-tight text-cloud-dancer sm:text-5xl'>
+        <Compass className='mx-auto size-10 text-primary' />
+        <h2 className='mx-auto mt-4 max-w-3xl text-3xl font-bold leading-[1.05]   text-cloud-dancer sm:text-5xl'>
           Klar for å finne din
           <span className='inline-flex items-baseline'>
             <UtekosWordmark
@@ -27,9 +27,9 @@ export function BackToShopCta() {
         <div className='mt-8 flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-4'>
           <BrandBadge
             asChild
-            backgroundColor='var(--primary-button)'
+            backgroundColor='var(--primary)'
             textColor='var(--maritime-darkest)'
-            className='w-full px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto'
+            className='w-full px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto'
           >
             <Link href='/produkter/utekos-dun' data-track='StorrelsesguideBackToShopCtaUtekosDunClick'>
               Til Utekos Dun™
@@ -40,7 +40,7 @@ export function BackToShopCta() {
             asChild
             backgroundColor='var(--cloud-dancer)'
             textColor='var(--maritime-darkest)'
-            className='w-full px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto'
+            className='w-full px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto'
           >
             <Link
               href='/produkter/utekos-mikrofiber'
@@ -54,7 +54,7 @@ export function BackToShopCta() {
             asChild
             backgroundColor='var(--cloud-dancer)'
             textColor='var(--maritime-darkest)'
-            className='w-full px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto'
+            className='w-full px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto'
           >
             <Link href='/produkter/comfyrobe' data-track='StorrelsesguideBackToShopCtaComfyrobeClick'>
               Til Comfyrobe™
@@ -82,7 +82,7 @@ export function BackToShopCta() {
             asChild
             backgroundColor='var(--bleached-mauve)'
             textColor='var(--maritime-darkest)'
-            className='mt-6 px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+            className='mt-6 px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
           >
             <Link href={'/kontaktskjema' as Route} data-track='StorrelsesguideBackToShopCtaContactUsClick'>
               <MessageCircle className='mr-2 size-4' />

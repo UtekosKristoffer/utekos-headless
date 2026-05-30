@@ -4,13 +4,7 @@ import { useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
-import {
-  ArrowRight,
-  Droplets,
-  Thermometer,
-  Wind,
-  AlertCircle
-} from 'lucide-react'
+import { ArrowRight, Droplets, Thermometer, Wind, AlertCircle } from 'lucide-react'
 import type { Route } from 'next'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
@@ -91,12 +85,10 @@ export function FrontpageIceBathingSection() {
                 <span className='gsap-badge-pulse absolute inline-flex h-full w-full rounded-full bg-mountain-view opacity-75'></span>
                 <span className='relative inline-flex rounded-full bg-cloud-dancer h-2 w-2'></span>
               </span>
-              <span className='text-cloud-dancer outline-hidden'>
-                Siste sjanse
-              </span>
+              <span className='text-cloud-dancer outline-hidden'>Siste sjanse</span>
             </div>
 
-            <h2 className='gsap-content opacity-0 mb-6 text-4xl bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text outline-hiddenfont-bold tracking-tight text-white sm:text-5xl lg:text-6xl'>
+            <h2 className='gsap-content opacity-0 mb-6 text-4xl bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text outline-hiddenfont-bold   text-white sm:text-5xl lg:text-6xl'>
               Vi rydder plass til <br />
               <span className='text-transparent text-left bg-clip-text bg-gradient-to-r from-dusted-peri via-sweet-lavender to-dusted-peri'>
                 sesongens nyheter
@@ -155,7 +147,7 @@ export function FrontpageIceBathingSection() {
             <div className='gsap-content opacity-0 flex flex-col sm:flex-row gap-4'>
               <BrandBadge
                 asChild
-                backgroundColor='var(--color-primary-button)'
+                backgroundColor='var(--color-primary)'
                 textColor='var(--color-maritime-darkest)'
                 className='group h-14 w-full justify-center px-8 text-base font-medium shadow-[0_18px_42px_-26px_rgba(27,53,74,0.42)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-95 sm:w-auto'
               >
@@ -184,10 +176,8 @@ export function FrontpageIceBathingSection() {
             </div>
 
             <div className='gsap-content opacity-0 mt-6 flex items-center gap-2 text-sm text-ancient-water'>
-              <AlertCircle className='h-4 w-4 text-primary-button' />
-              <span className='italic'>
-                OBS: Begrenset antall igjen på lager.
-              </span>
+              <AlertCircle className='h-4 w-4 text-primary' />
+              <span className='italic'>OBS: Begrenset antall igjen på lager.</span>
             </div>
           </div>
 

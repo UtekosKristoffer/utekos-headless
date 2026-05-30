@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils/className'
 import { useInView } from '@/hooks/useInView'
 import type { Moment, MomentTheme } from '@/components/frontpage/utils/moments'
 
-const themeStyles: Record<
+const momentThemeStyles: Record<
   MomentTheme,
   {
     wrapper: string
@@ -46,7 +46,7 @@ const themeStyles: Record<
 export function MomentCard({ moment, index }: { moment: Moment; index: number }) {
   const [ref, inView] = useInView({ threshold: 0.2 })
   const Icon = moment.icon
-  const styles = themeStyles[moment.theme]
+  const styles = momentThemeStyles[moment.theme]
 
   return (
     <div
@@ -58,7 +58,6 @@ export function MomentCard({ moment, index }: { moment: Moment; index: number })
       )}
       style={{ transitionDelay: `${index * 150}ms` }}
     >
-      {/* Dynamic Top Glow */}
       <div
         className={cn(
           'absolute -inset-x-0 top-0 h-[250px] opacity-30 blur-3xl transition-opacity duration-700 group-hover:opacity-50 bg-gradient-to-b',
@@ -67,32 +66,26 @@ export function MomentCard({ moment, index }: { moment: Moment; index: number })
         aria-hidden='true'
       />
 
-      {/* Shine Sweep Effect */}
       <div
         className='pointer-events-none absolute inset-0 z-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-full'
         aria-hidden='true'
       />
 
       <div className='relative z-10 flex h-full flex-col'>
-        {/* Horisontal justering for å låse ikon og tittel på samme x-akse */}
         <div className='mb-6 flex items-center gap-4'>
           <div
             className={cn(
-              'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border transition-all duration-500 ease-out group-hover:scale-[1.1] group-hover:shadow-md',
+              'flex size-12 shrink-0 items-center justify-center rounded-xl border transition-all duration-500 ease-out group-hover:scale-[1.1] group-hover:shadow-md',
               styles.iconWrap
             )}
           >
-            <Icon aria-hidden='true' className='h-5 w-5 stroke-[1.5]' />
+            <Icon aria-hidden='true' className='size-5 stroke-[1.5]' />
           </div>
 
-          <h3 className={cn('text-[1.25rem] font-medium leading-[1.1] tracking-[-0.01em]', styles.title)}>
-            {moment.title}
-          </h3>
+          <h3 className={cn('animate-header-item', styles.title)}>{moment.title}</h3>
         </div>
 
-        <p className={cn('text-[1.0625rem] font-normal leading-[1.5] tracking-[-0.01em]', styles.desc)}>
-          {moment.description}
-        </p>
+        <p className={cn('animate-header-item text-maritime-darkest', styles.desc)}>{moment.description}</p>
       </div>
     </div>
   )

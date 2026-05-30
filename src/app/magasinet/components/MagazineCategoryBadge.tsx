@@ -14,7 +14,7 @@ const categoryIconMap = {
   'Terrasseliv': Sun,
   'Bobilliv': BusFront,
   'Båtliv': Waves
-} satisfies Record<MagazineCategory, ComponentType<{ className?: string; 'aria-hidden'?: boolean }>>
+} satisfies Record<MagazineCategory, ComponentType<{ 'className'?: string; 'aria-hidden'?: boolean }>>
 
 export function MagazineCategoryBadge({ category }: MagazineCategoryBadgeProps) {
   const Icon = categoryIconMap[category]
@@ -23,7 +23,7 @@ export function MagazineCategoryBadge({ category }: MagazineCategoryBadgeProps) 
     <BrandBadge
       backgroundColor='var(--magazine-accent, var(--ancient-water))'
       textColor='var(--maritime-darkest)'
-      className='gap-2 border border-maritime-darkest/10 px-4 py-2 text-sm font-semibold leading-[1.35] tracking-tight'
+      className='gap-2 border border-maritime-darkest/10 px-4 py-2 text-sm font-semibold leading-[1.35]  '
     >
       <Icon className='size-4 shrink-0' aria-hidden />
       <span>{category}</span>

@@ -13,12 +13,12 @@ const iconMap = {
 
 const useCaseSurfaces = {
   morning: {
-    borderColor: 'color-mix(in oklch, var(--primary-button) 28%, transparent)',
+    borderColor: 'color-mix(in oklch, var(--primary) 28%, transparent)',
     background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--maritime-darkest) 84%, var(--primary-button) 16%) 0%, color-mix(in oklch, var(--havdyp) 76%, var(--maritime-darkest) 24%) 100%)',
-    iconBackground: 'color-mix(in oklch, var(--primary-button) 18%, var(--maritime-darkest) 82%)',
-    iconBorder: 'color-mix(in oklch, var(--primary-button) 34%, transparent)',
-    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 34%, color-mix(in oklch, var(--primary-button) 40%, transparent) 100%)'
+      'linear-gradient(145deg, color-mix(in oklch, var(--maritime-darkest) 84%, var(--primary) 16%) 0%, color-mix(in oklch, var(--havdyp) 76%, var(--maritime-darkest) 24%) 100%)',
+    iconBackground: 'color-mix(in oklch, var(--primary) 18%, var(--maritime-darkest) 82%)',
+    iconBorder: 'color-mix(in oklch, var(--primary) 34%, transparent)',
+    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 34%, color-mix(in oklch, var(--primary) 40%, transparent) 100%)'
   },
   evening: {
     borderColor: 'color-mix(in oklch, var(--dusted-peri) 34%, transparent)',
@@ -62,7 +62,7 @@ export const useCasesData: UseCase[] = [
     time: 'Morgen',
     title: 'Den første vårkaffen',
     description: 'Start dagen i frisk luft uten å fryse. Nyt roen før resten av verden våkner.',
-    iconColor: 'text-primary-button',
+    iconColor: 'text-primary',
     surface: 'morning'
   },
   {
@@ -127,16 +127,12 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                       >
                         <IconRenderer name={useCase.icon} className={useCase.iconColor} />
                       </div>
-                      <p className='font-medium leading-[1.35] font-utekos-text tracking-tight text-cloud-dancer/78'>
-                        {useCase.time}
-                      </p>
+                      <p className='font-medium leading-[1.35]     text-cloud-dancer/78'>{useCase.time}</p>
                     </div>
-                    <h3 className='mb-2 text-xl font-semibold leading-[1.1] font-utekos-text tracking-tight text-cloud-dancer'>
+                    <h3 className='mb-2 text-xl font-semibold leading-[1.1]     text-cloud-dancer'>
                       {useCase.title}
                     </h3>
-                    <p className='leading-[1.45] font-utekos-text tracking-tight text-cloud-dancer/88'>
-                      {useCase.description}
-                    </p>
+                    <p className='leading-[1.45]     text-cloud-dancer/88'>{useCase.description}</p>
                   </CardContent>
                 </Card>
               </AnimatedBlock>

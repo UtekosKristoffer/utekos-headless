@@ -17,7 +17,7 @@ export const magazineThemeSchema = z
       'dusted-peri',
       'mountain-view',
       'overcast',
-      'primary-button'
+      'primary'
     ]),
     surface: z.enum(['light', 'dark']).default('light')
   })

@@ -71,9 +71,9 @@ export function StapperFeatureSection() {
             <AnimatedBlock className='will-animate-fade-in-up mt-8'>
               <BrandBadge
                 asChild
-                backgroundColor='var(--primary-button)'
+                backgroundColor='var(--primary)'
                 textColor='var(--maritime-darkest)'
-                className='group min-h-14 justify-center border border-primary-button/18 px-7 text-base shadow-[0_16px_36px_-24px_rgba(232,178,66,0.55)] transition-transform duration-200 hover:-translate-y-0.5 hover:brightness-105 lg:justify-start'
+                className='group min-h-14 justify-center border border-primary/18 px-7 text-base shadow-[0_16px_36px_-24px_rgba(232,178,66,0.55)] transition-transform duration-200 hover:-translate-y-0.5 hover:brightness-105 lg:justify-start'
               >
                 <Link href='/produkter/utekos-stapper' data-track='StapperFeatureSectionDiscoverClick'>
                   Oppdag Stapper™

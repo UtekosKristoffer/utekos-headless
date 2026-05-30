@@ -4,7 +4,7 @@ import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { MapPinIcon } from '@heroicons/react/24/outline'
 import type { Destination } from '../types'
-import { destinationCardThemes } from '../data/destinationCardThemes'
+import { destinationCardThemes } from '../utils/destinationCardThemes'
 
 export function DestinationsGrid({ destinations }: { destinations: Destination[] }) {
   return (
@@ -63,7 +63,7 @@ export function DestinationsGrid({ destinations }: { destinations: Destination[]
                       <h3 className={`text-xl tracking-[-0.01em] ${theme.text}`}>{destination.name}</h3>
                     </div>
 
-                    <p className={`font-utekos-text mb-2 ${theme.mutedText}`}>{destination.highlight}</p>
+                    <p className={`  mb-2 ${theme.mutedText}`}>{destination.highlight}</p>
                     <div className='mt-4'>
                       <BrandBadge
                         label={destination.season}

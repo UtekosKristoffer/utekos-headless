@@ -175,7 +175,7 @@ export function ComfyrobeQuickBuy({ product }: Props) {
                   className={cn(
                     'relative flex h-12 items-center justify-center rounded-md border text-sm font-medium leading-[1.4] tracking-normal transition-all',
                     isSelected ?
-                      'border-primary-button/60 bg-primary-button text-maritime-darkest ring-1 ring-primary-button/35'
+                      'border-primary/60 bg-primary text-maritime-darkest ring-1 ring-primary/35'
                     : 'border-cloud-dancer/14 bg-maritime-darkest/58 text-overcast hover:border-cloud-dancer/28 hover:text-cloud-dancer',
                     !isAvailable
                       && 'cursor-not-allowed border-cloud-dancer/10 bg-maritime-darkest/45 text-overcast/55 line-through opacity-60 decoration-slice'
@@ -195,9 +195,9 @@ export function ComfyrobeQuickBuy({ product }: Props) {
         <div className='space-y-4 pt-2'>
           <BrandBadge
             asChild
-            backgroundColor='var(--primary-button)'
+            backgroundColor='var(--primary)'
             textColor='var(--maritime-darkest)'
-            className='min-h-14 w-full border border-primary-button/24 px-8 py-4 text-lg leading-[1.35] font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 disabled:pointer-events-none disabled:opacity-60'
+            className='min-h-14 w-full border border-primary/24 px-8 py-4 text-lg leading-[1.35] font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 disabled:pointer-events-none disabled:opacity-60'
           >
             <button type='button' onClick={handleAddToCart} disabled={!selectedVariant || isAdding}>
               {isAdding ?
@@ -212,7 +212,7 @@ export function ComfyrobeQuickBuy({ product }: Props) {
 
           <div className='flex items-center justify-center gap-6 pt-2'>
             <div className='flex items-center gap-2'>
-              <VippsLogo className='h-5 w-auto text-primary-button' />
+              <VippsLogo className='h-5 w-auto text-primary' />
             </div>
             <div className='flex items-center gap-2'>
               <KlarnaLogo className='h-6 w-auto text-[var(--soft-warm)]' />

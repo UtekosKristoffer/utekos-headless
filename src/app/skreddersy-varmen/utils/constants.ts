@@ -44,7 +44,7 @@ export const SIZE_GUIDANCE: Record<string, { height: string; tips: string[] }> =
 }
 
 export const focusRing =
-  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-button focus-visible:ring-2 focus-visible:ring-maritime-darkest'
+  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary focus-visible:ring-2 focus-visible:ring-maritime-darkest'
 
 export const maritimePanelClass =
   'rounded-3xl border border-cloud-dancer/15 bg-havdyp p-5 text-cloud-dancer shadow-sm'

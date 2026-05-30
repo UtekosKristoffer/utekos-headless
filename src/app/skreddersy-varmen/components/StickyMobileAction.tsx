@@ -11,7 +11,7 @@ import { scrollToElement } from '@/lib/gsap/scrollToElement'
 
 const DISMISS_KEY = 'utekos:sticky-mobile-dismissed'
 const focusRing =
-  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-button focus-visible:ring-2 focus-visible:ring-cloud-dancer/40'
+  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary focus-visible:ring-2 focus-visible:ring-cloud-dancer/40'
 
 export function StickyMobileAction() {
   const reduced = useReducedMotion()
@@ -127,10 +127,7 @@ export function StickyMobileAction() {
               )}
             >
               <span className='sr-only'>Utekos TechDown™</span>
-              <span
-                aria-hidden
-                className='flex min-w-0 items-baseline gap-1.5 leading-none'
-              >
+              <span aria-hidden className='flex min-w-0 items-baseline gap-1.5 leading-none'>
                 <UtekosWordmark
                   className='h-[0.58em] w-auto translate-y-[0.04em] text-cloud-dancer'
                   style={{ color: 'var(--color-cloud-dancer)' }}
@@ -146,18 +143,14 @@ export function StickyMobileAction() {
 
             <BrandBadge
               asChild
-              backgroundColor='var(--color-primary-button)'
+              backgroundColor='var(--color-primary)'
               textColor='var(--color-maritime-darkest)'
               className={cn(
                 'h-11 shrink-0 gap-1.5 px-3.5 py-0 text-xs font-semibold tracking-normal shadow-lg transition-[filter,transform] hover:brightness-95 active:scale-[0.985] sm:px-5 sm:text-sm',
                 focusRing
               )}
             >
-              <button
-                type='button'
-                onClick={scrollToPurchase}
-                data-track='SkreddersyVarmenTilBestilling'
-              >
+              <button type='button' onClick={scrollToPurchase} data-track='SkreddersyVarmenTilBestilling'>
                 <span className='whitespace-nowrap'>Til bestilling</span>
                 <ArrowDown
                   className='size-3.5 shrink-0 transition-transform group-hover:translate-y-0.5'

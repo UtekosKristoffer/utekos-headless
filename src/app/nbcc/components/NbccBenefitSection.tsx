@@ -9,7 +9,7 @@ export function NbccBenefitSection() {
     <section className='bg-background px-4 pt-3 pb-20 sm:px-6 lg:px-8'>
       <div className='mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start'>
         <div data-nbcc-reveal data-nbcc-animate>
-          <Badge className='rounded-md border-primary-button/30 bg-primary-button px-3 py-2 text-maritime-darkest'>
+          <Badge className='rounded-md border-primary/30 bg-primary px-3 py-2 text-maritime-darkest'>
             Medlemsfordel for NBCC-medlemmer
           </Badge>
           <h2 className='mt-6 max-w-2xl text-balance text-3xl font-semibold tracking-normal text-cloud-dancer sm:text-4xl'>
@@ -17,11 +17,7 @@ export function NbccBenefitSection() {
           </h2>
         </div>
 
-        <div
-          data-nbcc-reveal
-          data-nbcc-animate
-          className='grid gap-6 text-base font-utekos-text text-cloud-dancer'
-        >
+        <div data-nbcc-reveal data-nbcc-animate className='grid gap-6 text-base   text-cloud-dancer'>
           <p>
             Utekos er ikke laget for de bratteste fjelltoppene. Vi designer plagg for kompromissløs komfort.
             For de gangene du ikke skal bestige noe som helst, men bare vil bli sittende ute og nyte

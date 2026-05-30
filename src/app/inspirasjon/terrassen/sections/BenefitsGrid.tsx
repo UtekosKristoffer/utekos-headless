@@ -27,11 +27,11 @@ const benefitSurfaces = {
     iconBorder: 'color-mix(in oklch, var(--ancient-water) 34%, transparent)'
   },
   simple: {
-    borderColor: 'color-mix(in oklch, var(--primary-button) 30%, transparent)',
+    borderColor: 'color-mix(in oklch, var(--primary) 30%, transparent)',
     background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--havdyp) 76%, var(--primary-button) 24%) 0%, color-mix(in oklch, var(--maritime-darkest) 80%, var(--havdyp) 20%) 100%)',
-    iconBackground: 'color-mix(in oklch, var(--primary-button) 18%, var(--maritime-darkest) 82%)',
-    iconBorder: 'color-mix(in oklch, var(--primary-button) 34%, transparent)'
+      'linear-gradient(145deg, color-mix(in oklch, var(--havdyp) 76%, var(--primary) 24%) 0%, color-mix(in oklch, var(--maritime-darkest) 80%, var(--havdyp) 20%) 100%)',
+    iconBackground: 'color-mix(in oklch, var(--primary) 18%, var(--maritime-darkest) 82%)',
+    iconBorder: 'color-mix(in oklch, var(--primary) 34%, transparent)'
   },
   together: {
     borderColor: 'color-mix(in oklch, var(--bleached-mauve) 34%, transparent)',
@@ -78,7 +78,7 @@ export const benefitsData: Benefit[] = [
     icon: 'sparkles',
     title: 'Enkel i bruk',
     description: 'Lett å ta frem, lett å rydde vekk. Alltid klar for en kosestund.',
-    color: 'text-primary-button',
+    color: 'text-primary',
     surface: 'simple'
   },
   {
@@ -127,12 +127,10 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
                   >
                     <IconRenderer name={benefit.icon} className={benefit.color} />
                   </div>
-                  <h3 className='mb-2 text-lg font-semibold leading-[1.15] tracking-tight text-cloud-dancer'>
+                  <h3 className='mb-2 text-lg font-semibold leading-[1.15]   text-cloud-dancer'>
                     {benefit.title}
                   </h3>
-                  <p className='text-sm leading-[1.45] tracking-tight text-cloud-dancer/88'>
-                    {benefit.description}
-                  </p>
+                  <p className='text-sm leading-[1.45]   text-cloud-dancer/88'>{benefit.description}</p>
                 </article>
               </AnimatedBlock>
             )

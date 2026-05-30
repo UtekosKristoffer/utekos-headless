@@ -20,7 +20,7 @@ export function NbccUseCasesSection() {
               Fra morgenkaffe til den siste praten i forteltet.
             </h2>
           </div>
-          <p className='max-w-2xl text-base font-utekos-text text-cloud-dancer lg:justify-self-end'>
+          <p className='max-w-2xl text-base   text-cloud-dancer lg:justify-self-end'>
             For noen ligger den største gleden i friheten til å våkne til ny utsikt, for andre er det det
             trygge fellesskapet på fastplassen eller latteren rundt bordet på et regionstreff. Uansett hvor du
             slår leir, eller om du nyter roen på terrassen hjemme, er fellesnevneren den samme: De aller beste

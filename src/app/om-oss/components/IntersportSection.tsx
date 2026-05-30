@@ -179,7 +179,7 @@ export function IntersportSection() {
                   <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-maritime-darkest opacity-35'></span>
                   <span className='relative inline-flex size-3 rounded-full bg-maritime-darkest'></span>
                 </span>
-                <span className='font-utekos-text text-base font-medium tracking-tight text-maritime-darkest'>
+                <span className='  text-base font-medium   text-maritime-darkest'>
                   Fysisk butikk i Bergen
                 </span>
               </BrandBadge>
@@ -193,7 +193,7 @@ export function IntersportSection() {
                 <span className='text-overcast'>Intersport Laksevåg</span>
               </h2>
 
-              <p className='gsap-content mb-10 max-w-lg text-lg leading-[1.45] font-utekos-text tracking-tight text-cloud-dancer'>
+              <p className='gsap-content mb-10 max-w-lg text-lg leading-[1.45]     text-cloud-dancer'>
                 Lyst til å kjenne på kvaliteten og finne den perfekte passformen? Som eneste fysiske
                 forhandler i Bergen finner du et utvalg av våre produkter hos våre venner på Laksevåg Senter.
               </p>
@@ -202,7 +202,7 @@ export function IntersportSection() {
                 <Button
                   asChild
                   size='lg'
-                  className='group h-14 rounded-full border-0 bg-primary-button px-8 text-base text-maritime-darkest shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--primary-button)_90%,transparent)] transition-all duration-300 hover:bg-primary-button/88 hover:shadow-[0_18px_54px_-24px_color-mix(in_oklab,var(--primary-button)_90%,transparent)]'
+                  className='group h-14 rounded-full border-0 bg-primary px-8 text-base text-maritime-darkest shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--primary)_90%,transparent)] transition-all duration-300 hover:bg-primary/88 hover:shadow-[0_18px_54px_-24px_color-mix(in_oklab,var(--primary)_90%,transparent)]'
                 >
                   <Link
                     href={INTERSPORT_LAKSEVAG_MAPS_URL}

@@ -17,10 +17,8 @@ export function MagazineRelatedArticles({ articles }: MagazineRelatedArticlesPro
     <section className='border-t border-maritime-darkest/10 bg-cloud-dancer py-16 text-maritime-darkest'>
       <div className='container mx-auto px-4'>
         <header className='mb-8 max-w-2xl'>
-          <p className='font-utekos-text text-sm font-semibold leading-[1.4] tracking-tight text-havdyp'>
-            Les videre
-          </p>
-          <h2 className='mt-2 font-google-sans text-4xl font-bold leading-[0.95] tracking-tight'>
+          <p className='  text-sm font-semibold leading-[1.4]   text-havdyp'>Les videre</p>
+          <h2 className='mt-2 font-google-sans text-4xl font-bold leading-[0.95]  '>
             Flere guider fra magasinet
           </h2>
         </header>
@@ -40,12 +38,10 @@ export function MagazineRelatedArticles({ articles }: MagazineRelatedArticlesPro
                   className='aspect-[16/10] h-auto w-full object-cover'
                 />
                 <div className='p-5'>
-                  <h3 className='font-google-sans text-2xl font-bold leading-[0.98] tracking-tight text-maritime-darkest transition-colors group-hover:text-havdyp'>
+                  <h3 className='font-google-sans text-2xl font-bold leading-[0.98]   text-maritime-darkest transition-colors group-hover:text-havdyp'>
                     <MagazineInlineTitle text={article.title} />
                   </h3>
-                  <p className='mt-3 font-utekos-text text-sm leading-[1.5] tracking-tight text-maritime-darkest/72'>
-                    {article.excerpt}
-                  </p>
+                  <p className='mt-3   text-sm leading-[1.5]   text-maritime-darkest/72'>{article.excerpt}</p>
                 </div>
               </Link>
             </li>

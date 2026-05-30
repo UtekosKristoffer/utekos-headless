@@ -17,14 +17,14 @@ export function ConclusionSection() {
             <h2 className='font-google-sans text-4xl leading-[0.95] font-bold tracking-[-0.01em] text-havdyp sm:text-6xl'>
               Et trygt valg på under ett minutt
             </h2>
-            <p className='mt-6 font-utekos-text text-lg leading-[1.45] tracking-tight text-havdyp/82 sm:text-xl'>
+            <p className='mt-6   text-lg leading-[1.45]   text-havdyp/82 sm:text-xl'>
               TechDown gir mest ro i skiftende vær. Dun gir mest varme per gram. Mikrofiber er lettest å pakke
               og vaske.
             </p>
             <div className='mt-9 flex flex-wrap gap-4'>
               <BrandBadge
                 asChild
-                backgroundColor='var(--primary-button)'
+                backgroundColor='var(--primary)'
                 className='px-7 py-4 text-base transition-transform duration-300 hover:scale-[1.02]'
               >
                 <Link href='/produkter' data-track='SammenlignModellerConclusionAllProductsClick'>
@@ -54,10 +54,7 @@ export function ConclusionSection() {
                     </span>
                   </span>
                 </summary>
-                <p
-                  data-nosnippet
-                  className='mt-4 max-w-2xl font-utekos-text text-base leading-[1.45] tracking-tight text-havdyp/78'
-                >
+                <p data-nosnippet className='mt-4 max-w-2xl   text-base leading-[1.45]   text-havdyp/78'>
                   {item.answer}
                 </p>
               </details>

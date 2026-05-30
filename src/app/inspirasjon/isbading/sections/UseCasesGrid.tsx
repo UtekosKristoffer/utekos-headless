@@ -33,8 +33,8 @@ export const useCasesData: UseCase[] = [
     description:
       'Nyt den sosiale stunden med badeklubben etter badet, mens kroppen jobber seg tilbake til varmen.',
     temperature: 'Alle forhold',
-    color: 'from-primary-button/20',
-    iconColor: 'text-primary-button'
+    color: 'from-primary/20',
+    iconColor: 'text-primary'
   }
 ]
 

@@ -18,14 +18,7 @@ export const metadata: Metadata = {
   title: 'Isbading og Utekos | Varmen du trenger etter kuldesjokket',
   description:
     'Gjør isbadingen til en komfortabel opplevelse. Fra det kalde dykket til den varme omfavnelsen etterpå – Utekos er isbaderens viktigste utstyr.',
-  keywords: [
-    'isbading',
-    'vinterbading',
-    'helårsbading',
-    'badekåpe isbading',
-    'skifteponcho',
-    'utekos'
-  ],
+  keywords: ['isbading', 'vinterbading', 'helårsbading', 'badekåpe isbading', 'skifteponcho', 'utekos'],
   alternates: {
     canonical: '/inspirasjon/isbading'
   },
@@ -100,9 +93,9 @@ export default function IceBathingInspirationPage() {
       <div className='fixed bottom-4 left-4 right-4 z-50 md:hidden animate-in slide-in-from-bottom-10 fade-in duration-700'>
         <BrandBadge
           asChild
-          backgroundColor='var(--primary-button)'
+          backgroundColor='var(--primary)'
           textColor='var(--maritime-darkest)'
-          className='min-h-14 w-full border border-primary-button/24 px-6 py-3 text-base leading-[1.4] font-bold tracking-normal shadow-2xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
+          className='min-h-14 w-full border border-primary/24 px-6 py-3 text-base leading-[1.4] font-bold tracking-normal shadow-2xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
         >
           <Link href='/produkter/comfyrobe'>Kjøp Comfyrobe™</Link>
         </BrandBadge>

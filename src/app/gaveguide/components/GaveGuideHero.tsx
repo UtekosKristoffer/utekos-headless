@@ -25,9 +25,7 @@ export function GaveGuideHero() {
         <p data-nosnippet className='mb-2 font-semibold text-primary-foreground'>
           Gaveguiden
         </p>
-        <h1 className='text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'>
-          Gaven som varmer. Lenge.
-        </h1>
+        <h1 className='text-4xl font-bold   sm:text-5xl lg:text-6xl'>Gaven som varmer. Lenge.</h1>
         <p className='mx-auto mt-6 max-w-2xl text-xl text-muted-foreground'>
           Gi bort kompromissløs komfort, kvalitetstid og utallige #utekosøyeblikk. Perfekt for den som har
           alt, men som fortjener det aller beste.

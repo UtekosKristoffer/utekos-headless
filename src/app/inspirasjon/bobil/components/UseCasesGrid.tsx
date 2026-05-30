@@ -12,8 +12,8 @@ export const useCasesData: UseCase[] = [
     title: 'Den kjølige morgenkaffen',
     description: 'Start dagen med kaffe utenfor bobilen, innhyllet i varme mens naturen våkner.',
     temperature: '5-12°C',
-    color: 'from-primary-button/20',
-    iconColor: 'text-primary-button'
+    color: 'from-primary/20',
+    iconColor: 'text-primary'
   },
   {
     icon: MoonIcon,
@@ -70,10 +70,8 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                       <useCase.icon className={`size-6 ${useCase.iconColor}`} />
                     </div>
                     <div>
-                      <p className='font-utekos-text text-sm tracking-[-0.02em] text-cloud-dancer'>
-                        {useCase.time}
-                      </p>
-                      <p className='font-utekos-text text-sm font-medium tracking-[-0.02em] text-cloud-dancer/90'>
+                      <p className='  text-sm tracking-[-0.02em] text-cloud-dancer'>{useCase.time}</p>
+                      <p className='  text-sm font-medium tracking-[-0.02em] text-cloud-dancer/90'>
                         {useCase.temperature}
                       </p>
                     </div>
@@ -82,7 +80,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                   <h3 className='font-google-sans mb-2 text-xl font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer'>
                     {useCase.title}
                   </h3>
-                  <p className='font-utekos-text leading-[1.45] tracking-[-0.02em] text-cloud-dancer/90'>
+                  <p className='  leading-[1.45] tracking-[-0.02em] text-cloud-dancer/90'>
                     {useCase.description}
                   </p>
                 </CardContent>

@@ -179,7 +179,7 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                     <BrandBadge
                       backgroundColor='var(--dusted-peri)'
                       textColor='var(--maritime-darkest)'
-                      className='max-w-full gap-2.5 border border-dusted-peri/55 px-3 py-2 text-sm font-medium tracking-tight shadow-[0_10px_30px_-22px_color-mix(in_oklab,var(--cloud-dancer)_45%,transparent)]'
+                      className='max-w-full gap-2.5 border border-dusted-peri/55 px-3 py-2 text-sm font-medium   shadow-[0_10px_30px_-22px_color-mix(in_oklab,var(--cloud-dancer)_45%,transparent)]'
                     >
                       <span className='relative flex size-2 shrink-0'>
                         <span className='absolute inline-flex size-full animate-ping rounded-full bg-maritime-darkest opacity-75 motion-reduce:animate-none'></span>
@@ -200,7 +200,7 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                     <BrandBadge
                       backgroundColor='var(--bleached-mauve)'
                       textColor='var(--maritime-darkest)'
-                      className='max-w-full gap-2 border border-bleached-mauve/35 px-3 py-2 text-sm font-medium tracking-tight shadow-[0_14px_32px_-24px_color-mix(in_oklab,var(--bleached-mauve)_60%,transparent)]'
+                      className='max-w-full gap-2 border border-bleached-mauve/35 px-3 py-2 text-sm font-medium   shadow-[0_14px_32px_-24px_color-mix(in_oklab,var(--bleached-mauve)_60%,transparent)]'
                     >
                       <BadgePercent className='size-4 shrink-0' />
                       <span className='whitespace-nowrap'>Spar {savingsAmount} kr</span>
@@ -209,7 +209,7 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                 </div>
 
                 {/* Kicker — blekk som setter seg på papir */}
-                <p className='mb-4 text-lg font-bold leading-[1.08] tracking-tight text-cloud-dancer sm:text-2xl md:text-3xl xl:text-3xl'>
+                <p className='mb-4 text-lg font-bold leading-[1.08]   text-cloud-dancer sm:text-2xl md:text-3xl xl:text-3xl'>
                   <span className='sr-only'>{kickerText}</span>
 
                   <span aria-hidden='true' className='block overflow-hidden pb-1'>
@@ -224,7 +224,7 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                     ))}
                   </span>
                 </p>
-                <h2 className='mb-7 max-w-3xl pb-2 text-[1.7rem] font-bold leading-[0.94] tracking-tight text-cloud-dancer min-[360px]:text-[1.8rem] sm:mb-8 sm:text-[2.5rem] md:text-5xl md:leading-[0.96] lg:text-6xl lg:leading-[0.94]'>
+                <h2 className='mb-7 max-w-3xl pb-2 text-[1.7rem] font-bold leading-[0.94]   text-cloud-dancer min-[360px]:text-[1.8rem] sm:mb-8 sm:text-[2.5rem] md:text-5xl md:leading-[0.96] lg:text-6xl lg:leading-[0.94]'>
                   <span
                     className='launch-motion-item block whitespace-nowrap overflow-visible'
                     style={launchMotionStyle({
@@ -291,9 +291,9 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                       <div className='launch-motion-primary-cta w-full lg:flex-[1.05]'>
                         <BrandBadge
                           asChild
-                          backgroundColor='var(--primary-button)'
+                          backgroundColor='var(--primary)'
                           textColor='var(--maritime-darkest)'
-                          className='group min-h-12 w-full justify-center px-6 py-3 text-base font-semibold tracking-[-0.01em] shadow-[0_18px_38px_-28px_color-mix(in_oklab,var(--primary-button)_78%,transparent)]'
+                          className='group min-h-12 w-full justify-center px-6 py-3 text-base font-semibold tracking-[-0.01em] shadow-[0_18px_38px_-28px_color-mix(in_oklab,var(--primary)_78%,transparent)]'
                         >
                           <button
                             type='button'

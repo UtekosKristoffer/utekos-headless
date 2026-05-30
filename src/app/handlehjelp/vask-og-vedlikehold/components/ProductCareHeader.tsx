@@ -40,7 +40,7 @@ export function ProductCareHeader() {
           textColor='var(--maritime-darkest)'
           className='mb-4 px-4 py-2 text-sm'
         />
-        <h1 className='text-3xl font-bold leading-[1.05] tracking-tight text-maritime-darkest sm:text-5xl'>
+        <h1 className='text-3xl font-bold leading-[1.05]   text-maritime-darkest sm:text-5xl'>
           Bevar varmen i din{' '}
           <span className='inline-flex items-baseline'>
             <UtekosWordmark

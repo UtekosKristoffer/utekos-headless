@@ -1,14 +1,13 @@
 // Path: src/app/inspirasjon/bobil/page.tsx
 import type { Metadata } from 'next'
-import { BobilHeroSection } from './sections/BobilHeroSection'
-import { BenefitsGrid, benefitsData } from './sections/BenefitsGrid'
-import { CTASection } from './sections/CTASection'
-import { DestinationsGrid } from './sections/DestinationsGrid'
-import { UseCasesGrid, useCasesData } from './sections/UseCasesGrid'
-import { destinationsData } from './data/destinationsData'
-import { SeasonsSection } from './sections/SeasonsSection'
-import { InspirationGallerySection } from './sections/InspirationGallerySection'
-import { Activity } from 'react'
+import { BobilHeroSection } from './components/BobilHeroSection'
+import { BenefitsGrid, benefitsData } from './components/BenefitsGrid'
+import { CTASection } from './components/CTASection'
+import { DestinationsGrid } from './components/DestinationsGrid'
+import { UseCasesGrid, useCasesData } from './components/UseCasesGrid'
+import { destinationsData } from './utils/destinationsData'
+import { SeasonsSection } from './components/SeasonsSection'
+import { InspirationGallerySection } from './components/InspirationGallerySection'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -39,28 +38,20 @@ export const metadata: Metadata = {
 
 export default function BobilInspirasjonPage() {
   return (
-    <div className='flex flex-col text-cloud-dancer'>
-      <Activity>
-        <BobilHeroSection />
-      </Activity>
-      <Activity>
-        <UseCasesGrid useCases={useCasesData} />
-      </Activity>
-      <Activity>
-        <BenefitsGrid benefits={benefitsData} />
-      </Activity>
-      <Activity>
-        <SeasonsSection />
-      </Activity>
-      <Activity>
-        <DestinationsGrid destinations={destinationsData} />
-      </Activity>
-      <Activity>
-        <InspirationGallerySection />
-      </Activity>
-      <Activity>
-        <CTASection />
-      </Activity>
-    </div>
+    <article className='flex flex-col text-cloud-dancer'>
+      <BobilHeroSection />
+
+      <UseCasesGrid useCases={useCasesData} />
+
+      <BenefitsGrid benefits={benefitsData} />
+
+      <SeasonsSection />
+
+      <DestinationsGrid destinations={destinationsData} />
+
+      <InspirationGallerySection />
+
+      <CTASection />
+    </article>
   )
 }

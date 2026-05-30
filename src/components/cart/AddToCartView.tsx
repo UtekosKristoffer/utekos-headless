@@ -16,7 +16,7 @@ export function AddToCartView({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col gap-4'>
         <div className='space-y-2'>
-          <label className='block font-utekos-text text-sm font-semibold uppercase tracking-wide text-maritime-darkest'>
+          <label className='block   text-sm font-semibold uppercase tracking-wide text-maritime-darkest'>
             Antall
           </label>
           <QuantitySelector />

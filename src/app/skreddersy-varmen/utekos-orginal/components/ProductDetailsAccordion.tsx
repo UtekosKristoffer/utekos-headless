@@ -173,8 +173,8 @@ export async function ProductDetailsAccordion() {
                   <li>Unngå stryking og bleking</li>
                 </ul>
 
-                <div className='mt-4 flex gap-3 rounded-2xl border-l-4 border-primary-button bg-havdyp p-4 text-cloud-dancer'>
-                  <Info className='shrink-0 text-primary-button' />
+                <div className='mt-4 flex gap-3 rounded-2xl border-l-4 border-primary bg-havdyp p-4 text-cloud-dancer'>
+                  <Info className='shrink-0 text-primary' />
                   <div className='text-sm leading-[1.45]'>
                     <span className='mb-1 block font-bold'>Viktig om oppbevaring</span>
                     Oppbevares tørt. Materialet vil absorbere fuktighet under normal bruk, så sørg for at den

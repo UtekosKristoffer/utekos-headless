@@ -1,0 +1,45 @@
+import { MapPin, Mountain, Sunrise } from 'lucide-react'
+import type { InspirationHeroFeature } from '../../layout/hero/types'
+
+const CARD_SHADOW =
+  '0 22px 44px -34px color-mix(in oklch, var(--maritime-darkest) 52%, transparent)'
+
+/**
+ * Høydepunkt-kort for bobil-heroen (theme-stil: solid flate + topp-hairline).
+ */
+export const bobilHeroFeatures: readonly InspirationHeroFeature[] = [
+  {
+    title: 'Morgenkaffe',
+    description: 'Start dagen i varme utenfor bobilen',
+    icon: Sunrise,
+    surface: 'color-mix(in oklch, var(--cloud-dancer) 10%, var(--overcast))',
+    border: 'color-mix(in oklch, var(--havdyp) 48%, var(--maritime-darkest))',
+    marker: 'var(--overcast)',
+    iconSurface: 'var(--overcast)',
+    iconColor: 'var(--maritime-darkest)',
+    shadow: CARD_SHADOW
+  },
+  {
+    title: 'Alle stopp',
+    description: 'Nyt utsikten i komfort, hvor som helst',
+    icon: Mountain,
+    surface:
+      'color-mix(in oklch, var(--bleached-mauve-light) 10%, var(--bleached-mauve))',
+    border: 'color-mix(in oklch, var(--havdyp) 54%, var(--maritime-darkest))',
+    marker: 'var(--bleached-mauve)',
+    iconSurface: 'var(--bleached-mauve)',
+    iconColor: 'var(--maritime-darkest)',
+    shadow: CARD_SHADOW
+  },
+  {
+    title: 'Lengre turer',
+    description: 'Reis tidligere på året og senere på høsten',
+    icon: MapPin,
+    surface: 'color-mix(in oklch, var(--cloud-dancer) 10%, var(--dusted-peri))',
+    border: 'color-mix(in oklch, var(--havdyp) 48%, var(--maritime-darkest))',
+    marker: 'var(--dusted-peri)',
+    iconSurface: 'var(--ancient-water)',
+    iconColor: 'var(--maritime-darkest)',
+    shadow: CARD_SHADOW
+  }
+] as const

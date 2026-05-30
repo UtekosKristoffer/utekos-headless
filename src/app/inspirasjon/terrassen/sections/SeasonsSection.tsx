@@ -10,7 +10,7 @@ export function SeasonsSection() {
           className='seasons-glow-pulse absolute left-[8%] top-[14%] size-[31rem] rounded-full blur-3xl'
           style={{
             background:
-              'radial-gradient(circle, color-mix(in oklch, var(--primary-button) 44%, transparent) 0%, transparent 70%)'
+              'radial-gradient(circle, color-mix(in oklch, var(--primary) 44%, transparent) 0%, transparent 70%)'
           }}
         />
         <div

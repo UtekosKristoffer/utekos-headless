@@ -28,12 +28,12 @@ export function CTASection() {
             </AnimatedBlock>
 
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.08s' threshold={0.2}>
-              <h2 className='mb-6 text-3xl leading-[0.95] font-bold font-google-sans tracking-tight text-maritime-darkest md:text-5xl'>
+              <h2 className='mb-6 text-3xl leading-[0.95] font-bold font-google-sans   text-maritime-darkest md:text-5xl'>
                 Klar til å ta kvelden tilbake?
               </h2>
             </AnimatedBlock>
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.16s' threshold={0.2}>
-              <p className='mx-auto mt-4 max-w-2xl text-lg font-base leading-[1.45] tracking-tight font-utekos-text text-maritime-darkest md:text-xl'>
+              <p className='mx-auto mt-4 max-w-2xl text-lg font-base leading-[1.45]     text-maritime-darkest md:text-xl'>
                 Opplev hvordan banebrytende innovasjon og tidløs eleganse kan forvandle en kjølig kveld til
                 ditt favorittøyeblikk.
               </p>
@@ -41,14 +41,14 @@ export function CTASection() {
             <AnimatedBlock className='mt-10 will-animate-fade-in-up' delay='0.24s' threshold={0.2}>
               <BrandBadge
                 asChild
-                backgroundColor='var(--primary-button)'
+                backgroundColor='var(--primary)'
                 textColor='var(--maritime-darkest)'
-                className='group gap-2 px-8 py-4 text-base font-semibold tracking-[-0.01em] shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--primary-button)_90%,transparent)] transition-transform duration-300 hover:scale-[1.02]'
+                className='group gap-2 px-8 py-4 text-base font-semibold tracking-[-0.01em] shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--primary)_90%,transparent)] transition-transform duration-300 hover:scale-[1.02]'
               >
                 <Link
                   href='/produkter'
                   data-track='AboutUsShopAllProductsClick'
-                  className='font-utekos-text text-base font-medium tracking-tight text-maritime-darkest'
+                  className='  text-base font-medium   text-maritime-darkest'
                 >
                   Se alle produkter
                   <ArrowRight className='size-5 transition-transform duration-300 group-hover:translate-x-1' />

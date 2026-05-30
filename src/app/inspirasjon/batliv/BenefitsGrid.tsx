@@ -18,7 +18,7 @@ const benefitsData = [
     icon: Sparkles,
     title: 'Kompakt og praktisk',
     description: 'Tar minimalt med plass og er enkel å stue vekk om bord.',
-    color: 'text-primary-button'
+    color: 'text-primary'
   },
   {
     icon: Users,

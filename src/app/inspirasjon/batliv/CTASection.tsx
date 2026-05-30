@@ -13,21 +13,18 @@ export function CTASection() {
           <h2 className='mb-6 text-3xl font-bold leading-[1.05] tracking-normal text-cloud-dancer sm:text-4xl'>
             Klar for å kaste loss?
           </h2>
-          <p className='mx-auto mb-8 max-w-2xl text-xl leading-[1.45] tracking-normal text-overcast'>
-            Bli en av de mange båteierne som har oppdaget hemmeligheten bak en
-            varmere og lengre sesong på sjøen.
+          <p className='mx-auto mb-8 max-w-2xl utekos-section-lead'>
+            Bli en av de mange båteierne som har oppdaget hemmeligheten bak en varmere og lengre sesong på
+            sjøen.
           </p>
           <div className='flex flex-wrap justify-center gap-4'>
             <BrandBadge
               asChild
-              backgroundColor='var(--primary-button)'
+              backgroundColor='var(--primary)'
               textColor='var(--maritime-darkest)'
-              className='group min-h-14 border border-primary-button/24 px-8 py-4 text-base leading-[1.4] font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
+              className='group min-h-14 border border-primary/24 px-8 py-4 text-base leading-[1.4] font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
             >
-              <Link
-                href={'/produkter' as Route}
-                data-track='BatlivShopAllProductsClick'
-              >
+              <Link href={'/produkter' as Route} data-track='BatlivShopAllProductsClick'>
                 Se alle produkter
                 <ArrowRight className='size-4 transition-transform group-hover:translate-x-1' />
               </Link>
@@ -38,10 +35,7 @@ export function CTASection() {
               textColor='var(--maritime-darkest)'
               className='min-h-14 border border-cloud-dancer/24 px-8 py-4 text-base leading-[1.4] font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
             >
-              <Link
-                href={'/handlehjelp/storrelsesguide' as Route}
-                data-track='BatlivFindYourSizeClick'
-              >
+              <Link href={'/handlehjelp/storrelsesguide' as Route} data-track='BatlivFindYourSizeClick'>
                 Finn din størrelse
               </Link>
             </BrandBadge>

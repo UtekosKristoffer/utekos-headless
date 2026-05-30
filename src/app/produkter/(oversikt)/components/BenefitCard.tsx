@@ -56,7 +56,7 @@ export function BenefitCard({ benefit, delay }: BenefitCardProps) {
 
   return (
     <li
-      className='animate-fade-in-on-scroll group relative overflow-hidden rounded-[1.05rem] border font-utekos-text tracking-tight shadow-[0_18px_44px_-36px_color-mix(in_oklch,var(--maritime-darkest)_82%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+      className='animate-fade-in-on-scroll group relative overflow-hidden rounded-[1.05rem] border     shadow-[0_18px_44px_-36px_color-mix(in_oklch,var(--maritime-darkest)_82%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
       style={
         {
           '--animation-delay': `${delay}s`,
@@ -88,7 +88,7 @@ export function BenefitCard({ benefit, delay }: BenefitCardProps) {
           />
         </div>
 
-        <div className='flex-1 font-utekos-text'>
+        <div className='flex-1  '>
           <span className='font-semibold' style={{ color: surface.textColor }}>
             {benefit.label}
           </span>

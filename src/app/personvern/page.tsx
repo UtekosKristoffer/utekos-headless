@@ -9,18 +9,11 @@ export const metadata: Metadata = {
   title: 'Personvernerklæring | Utekos',
   description:
     'Les hvordan Utekos samler inn, bruker og beskytter dine personopplysninger i samsvar med gjeldende lover (GDPR). Din trygghet er viktig for oss.',
-  keywords: [
-    'Personvern',
-    'GDPR',
-    'Personopplysninger',
-    'Sikkerhet',
-    'Utekos vilkår'
-  ],
+  keywords: ['Personvern', 'GDPR', 'Personopplysninger', 'Sikkerhet', 'Utekos vilkår'],
   alternates: { canonical: '/personvern' },
   openGraph: {
     title: 'Personvernerklæring | Utekos',
-    description:
-      'Din trygghet er viktig for oss. Se hvordan vi håndterer dine data.',
+    description: 'Din trygghet er viktig for oss. Se hvordan vi håndterer dine data.',
     url: '/personvern',
     siteName: 'Utekos',
     images: [
@@ -50,9 +43,7 @@ const SectionWrapper = ({
     <GridCross className='right-[-16px] top-[60px] hidden lg:block' />
     <div className='absolute inset-x-0 top-[75px] h-px border-t border-dashed border-white/10 hidden lg:block' />
     <h2 className='text-2xl font-semibold sm:text-3xl'>{title}</h2>
-    <div className='prose prose-invert mt-6 max-w-none text-foreground/80'>
-      {children}
-    </div>
+    <div className='prose prose-invert mt-6 max-w-none text-foreground/80'>{children}</div>
   </section>
 )
 
@@ -65,12 +56,8 @@ export default function PrivacyPolicyPage() {
 
         <div className='p-8 sm:p-12 lg:p-16'>
           <header className='text-center'>
-            <h1 className='text-4xl font-bold text-centermx-auto tracking-tight sm:text-5xl'>
-              Personvern
-            </h1>
-            <p className='mt-4 text-muted-foreground'>
-              Sist oppdatert: {lastUpdated}
-            </p>
+            <h1 className='text-4xl font-bold text-centermx-auto   sm:text-5xl'>Personvern</h1>
+            <p className='mt-4 text-muted-foreground'>Sist oppdatert: {lastUpdated}</p>
           </header>
 
           <div className='mt-12 lg:grid lg:grid-cols-12 lg:gap-16'>

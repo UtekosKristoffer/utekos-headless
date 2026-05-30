@@ -10,13 +10,7 @@ export const metadata: Metadata = {
   title: 'Vilkår og betingelser | Utekos',
   description:
     'Les våre vilkår og betingelser for bruk av Utekos-nettstedet og kjøp av produkter. Vi streber etter å gi deg en trygg og pålitelig handleopplevelse.',
-  keywords: [
-    'Salgsbetingelser',
-    'Kjøpsvilkår',
-    'Angrerett',
-    'Reklamasjon',
-    'Utekos vilkår'
-  ],
+  keywords: ['Salgsbetingelser', 'Kjøpsvilkår', 'Angrerett', 'Reklamasjon', 'Utekos vilkår'],
   alternates: { canonical: '/vilkar-betingelser' },
   openGraph: {
     title: 'Vilkår og betingelser | Utekos',
@@ -46,12 +40,8 @@ export default function TermsPage() {
 
         <div className='p-8 sm:p-12 lg:p-16'>
           <header className='text-center'>
-            <h1 className='text-4xl font-bold mx-auto tracking-tight sm:text-5xl'>
-              Vilkår og betingelser
-            </h1>
-            <p className='mt-4 text-muted-foreground'>
-              Sist oppdatert: {lastUpdated}
-            </p>
+            <h1 className='text-4xl font-bold mx-auto   sm:text-5xl'>Vilkår og betingelser</h1>
+            <p className='mt-4 text-muted-foreground'>Sist oppdatert: {lastUpdated}</p>
           </header>
 
           <div className='mt-12 lg:grid lg:grid-cols-12 lg:gap-16'>

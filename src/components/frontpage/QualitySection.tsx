@@ -33,25 +33,11 @@ export async function QualitySection() {
               />
 
               <div className='relative z-10'>
-                <h2 className='text-[2rem] sm:text-[2.5rem] lg:text-[3rem] font-medium leading-[0.9] tracking-[-0.01em] text-cloud-dancer'>
-                  Kvalitet i hver fiber
-                </h2>
-                <p className='mt-5 sm:mt-6 max-w-xl text-[1.125rem] font-normal leading-[1.45] tracking-tight text-cloud-dancer/80'>
+                <h2 className='text-cloud-dancer'>Kvalitet i hver fiber</h2>
+                <p className='mt-5 sm:mt-6 max-w-xl text-lg text-cloud-dancer/80'>
                   Fra den lette spensten i dunet til slitestyrken i hver søm – vi er transparente om
                   materialvalgene som definerer Utekos. Dette er kvalitet du kan føle på, designet for å vare.
                 </p>
-              </div>
-
-              {/* Justert margin-top for en tettere og mer logisk gruppering */}
-              <div className='relative z-10 mt-8 sm:mt-10'>
-                <Link
-                  href='/handlehjelp/teknologi-materialer'
-                  data-track='UtforskTeknologienFrontPageClick'
-                  className='group/btn inline-flex items-center justify-center rounded-full bg-[var(--primary-button)] px-8 py-4 text-[1rem] font-medium text-havdyp transition-all duration-300 hover:bg-white hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(255,255,255,0.2)] focus:outline-none focus:ring-2 focus:ring-dusted-peri focus:ring-offset-2 focus:ring-offset-havdyp'
-                >
-                  Utforsk teknologien
-                  <ArrowRightIcon className='ml-2 h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1' />
-                </Link>
               </div>
             </div>
           </AnimatedBlock>
@@ -73,7 +59,7 @@ export async function QualitySection() {
                   Premium Isolasjon
                 </h3>
               </div>
-              <p className='text-[1rem] font-base leading-[1.45] tracking-tight font-utekos-text text-cloud-dancer/70'>
+              <p className='text-[1rem] font-base leading-[1.45]     text-cloud-dancer/70'>
                 Kun sertifisert dun og høykvalitets syntetisk fyll for optimal varme-til-vekt.
               </p>
             </div>

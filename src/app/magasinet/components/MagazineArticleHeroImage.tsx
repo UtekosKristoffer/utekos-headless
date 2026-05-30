@@ -18,7 +18,7 @@ export function MagazineArticleHeroImage({ article }: MagazineArticleHeroImagePr
         priority
       />
       {article.heroImage.caption && (
-        <figcaption className='bg-maritime-darkest px-5 py-4 font-utekos-text text-sm leading-[1.45] tracking-tight text-cloud-dancer/72'>
+        <figcaption className='bg-maritime-darkest px-5 py-4   text-sm leading-[1.45]   text-cloud-dancer/72'>
           {article.heroImage.caption}
         </figcaption>
       )}

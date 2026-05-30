@@ -9,7 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
-import { galleryImages } from '../data/galleryImages'
+import { galleryImages } from '../utils/galleryImages'
 
 export function InspirationGallerySection() {
   return (
@@ -48,10 +48,10 @@ export function InspirationGallerySection() {
                     />
                   </div>
                   <div className='flex-1 pt-4 text-left'>
-                    <h3 className='font-google-sans font-bold leading-[0.95] tracking-tight text-cloud-dancer'>
+                    <h3 className='font-google-sans font-bold leading-[0.95]   text-cloud-dancer'>
                       {image.title}
                     </h3>
-                    <p className='mt-2 font-utekos-text text-sm leading-[1.45] tracking-tight text-cloud-dancer/90'>
+                    <p className='mt-2   text-sm leading-[1.45]   text-cloud-dancer/90'>
                       {image.description}
                     </p>
                   </div>

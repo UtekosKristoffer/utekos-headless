@@ -31,17 +31,14 @@ export function FindInStoreSection() {
             <div className='flex flex-col items-start text-left'>
               <div className='mb-4 flex items-center gap-3 rounded-full border border-red-500/30 bg-red-700 px-4 py-2'>
                 <MapPin className='h-5 w-5 text-access/90' />
-                <span className='font-semibold text-acess/800'>
-                  Fysisk butikk i Bergen
-                </span>
+                <span className='font-semibold text-acess/800'>Fysisk butikk i Bergen</span>
               </div>
-              <h2 className='text-balance text-3xl font-bold tracking-tight text-white sm:text-4xl'>
+              <h2 className='text-balance text-3xl font-bold   text-white sm:text-4xl'>
                 Opplev Utekos i fysisk butikk
               </h2>
-              <p className='mt-4 max-w-lg text-balance text-lg tracking-tight font-utekos-text text-cloud-dancer/85'>
-                Lyst til å kjenne på kvaliteten og finne den perfekte
-                passformen? Som eneste fysiske forhandler i Bergen finner du et
-                utvalg av våre produkter hos Intersport på Laksevåg Senter.
+              <p className='mt-4 max-w-lg text-balance text-lg     text-cloud-dancer/85'>
+                Lyst til å kjenne på kvaliteten og finne den perfekte passformen? Som eneste fysiske
+                forhandler i Bergen finner du et utvalg av våre produkter hos Intersport på Laksevåg Senter.
               </p>
               <Button asChild size='lg' className='group mt-6'>
                 <Link href={INTERSPORT_LAKSEVAG_MAPS_URL} target='_blank'>

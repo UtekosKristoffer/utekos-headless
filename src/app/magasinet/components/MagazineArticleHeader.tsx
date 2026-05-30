@@ -25,13 +25,13 @@ export function MagazineArticleHeader({ article }: MagazineArticleHeaderProps) {
           <div className='mb-7'>
             <MagazineCategoryBadge category={article.category} />
           </div>
-          <h1 className='text-balance font-google-sans text-5xl font-bold leading-[0.9] tracking-tight sm:text-6xl lg:text-7xl'>
+          <h1 className='text-balance font-google-sans text-5xl font-bold leading-[0.9]   sm:text-6xl lg:text-7xl'>
             <MagazineInlineTitle text={article.title} />
           </h1>
-          <p className='mt-6 max-w-3xl font-utekos-text text-xl leading-[1.45] tracking-tight text-cloud-dancer/86 sm:text-2xl'>
+          <p className='mt-6 max-w-3xl   text-xl leading-[1.45]   text-cloud-dancer/86 sm:text-2xl'>
             {article.excerpt}
           </p>
-          <div className='mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 font-utekos-text text-sm leading-[1.4] tracking-tight text-cloud-dancer/72'>
+          <div className='mt-8 flex flex-wrap items-center gap-x-5 gap-y-3   text-sm leading-[1.4]   text-cloud-dancer/72'>
             <span className='inline-flex items-center gap-2'>
               <CalendarDays className='size-4' aria-hidden />
               <time dateTime={article.publishedAt}>{publishedDate}</time>

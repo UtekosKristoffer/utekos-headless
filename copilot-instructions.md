@@ -37,7 +37,7 @@ palette, opening up limitless creative possibilities.
 Add to cart button
 
 ```css
---primary-button: oklch(0.7 0.15 95);
+--primary: oklch(0.7 0.15 95);
 ```
 
 Background-colors:

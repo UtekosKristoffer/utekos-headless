@@ -10,8 +10,8 @@ export const useCasesData: UseCase[] = [
     time: 'Før maten',
     title: 'Mens grillen blir varm',
     description: 'Hold gjestene komfortable mens de venter på den perfekte gløden.',
-    color: 'from-primary-button/20',
-    iconColor: 'text-primary-button',
+    color: 'from-primary/20',
+    iconColor: 'text-primary',
     iconBackground: '--color-cloud-dancer'
   },
   {
@@ -72,7 +72,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                     >
                       <useCase.icon className={`size-6 ${useCase.iconColor}`} aria-hidden />
                     </div>
-                    <p className='font-utekos-text text-sm font-medium tracking-[-0.02em] text-cloud-dancer/82'>
+                    <p className='  text-sm font-medium tracking-[-0.02em] text-cloud-dancer/82'>
                       {useCase.time}
                     </p>
                   </div>
@@ -80,7 +80,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                   <h3 className='mb-2 text-xl font-semibold leading-[1.1] tracking-[-0.01em] text-cloud-dancer'>
                     {useCase.title}
                   </h3>
-                  <p className='font-utekos-text text-sm leading-[1.45] tracking-[-0.02em] text-cloud-dancer/88'>
+                  <p className='  text-sm leading-[1.45] tracking-[-0.02em] text-cloud-dancer/88'>
                     {useCase.description}
                   </p>
                 </CardContent>

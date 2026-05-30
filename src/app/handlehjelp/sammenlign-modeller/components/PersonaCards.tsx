@@ -44,13 +44,11 @@ export function PersonaCards() {
                   <h3 className='font-google-sans text-3xl leading-[0.95] font-bold tracking-[-0.01em] text-cloud-dancer'>
                     {model.name}
                   </h3>
-                  <p className='mt-3 font-utekos-text text-lg font-medium leading-[1.35] tracking-tight text-cloud-dancer'>
+                  <p className='mt-3   text-lg font-medium leading-[1.35]   text-cloud-dancer'>
                     {model.bestFor}
                   </p>
-                  <p className='mt-4 font-utekos-text text-base leading-[1.45] tracking-tight text-clud-dancer/7'>
-                    {model.description}
-                  </p>
-                  <ul className='mt-6 space-y-2 font-utekos-text text-sm font-medium tracking-tight text-cloud-dancer'>
+                  <p className='mt-4   text-base leading-[1.45]   text-clud-dancer/7'>{model.description}</p>
+                  <ul className='mt-6 space-y-2   text-sm font-medium   text-cloud-dancer'>
                     {model.proofPoints.map(point => (
                       <li key={point} className='flex items-center gap-3'>
                         <span className='size-2 rounded-full bg-cloud-dancer' />
@@ -58,7 +56,7 @@ export function PersonaCards() {
                       </li>
                     ))}
                   </ul>
-                  <span className='mt-7 inline-flex font-utekos-text text-base font-medium tracking-tight text-cloud-dancer underline decoration-cloud-dancer underline-offset-8 transition-colors duration-300 group-hover:text-overcast'>
+                  <span className='mt-7 inline-flex   text-base font-medium   text-cloud-dancer underline decoration-cloud-dancer underline-offset-8 transition-colors duration-300 group-hover:text-overcast'>
                     {model.cta}
                   </span>
                 </div>

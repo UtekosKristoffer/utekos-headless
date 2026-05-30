@@ -16,7 +16,7 @@ export const popularDestinationsData: Destination[] = [
     name: 'Sørlandskysten',
     season: 'Sommer',
     highlight: 'For sene kvelder i uthavn',
-    color: 'text-primary-button'
+    color: 'text-primary'
   },
   {
     name: 'Vestlandskysten',
@@ -40,7 +40,7 @@ export const popularDestinationsData: Destination[] = [
 
 export function PopularDestinations({ destinations }: { destinations: Destination[] }) {
   return (
-    <section className='py-24 bg-maritime-darkest' id='populære-destinasjoner'>
+    <section className='pb-24 bg-havdyp' id='populære-destinasjoner'>
       <div className='container mx-auto px-4'>
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
           {destinations.map((destination, destinationIndex) => (

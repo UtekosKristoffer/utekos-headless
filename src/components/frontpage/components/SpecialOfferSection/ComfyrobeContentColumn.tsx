@@ -76,7 +76,7 @@ export function ComfyrobeContentColumn({ variantId }: ComfyrobeContentColumnProp
       <h2
         ref={h2Ref}
         className={cn(
-          'will-animate-fade-in-up text-balance text-3xl font-bold tracking-tight sm:text-4xl',
+          'will-animate-fade-in-up text-balance text-3xl font-bold   sm:text-4xl',
           h2InView && 'is-in-view'
         )}
         style={{ '--transition-delay': '0.4s' } as React.CSSProperties}
@@ -87,7 +87,7 @@ export function ComfyrobeContentColumn({ variantId }: ComfyrobeContentColumnProp
       <p
         ref={pRef}
         className={cn(
-          'will-animate-fade-in-up mt-4 text-lg leading-relaxed text-cloud-dancer tracking-tight font-utekos-text sm:text-xl',
+          'will-animate-fade-in-up mt-4 text-lg leading-relaxed text-cloud-dancer     sm:text-xl',
           pInView && 'is-in-view'
         )}
         style={{ '--transition-delay': '0.5s' } as React.CSSProperties}

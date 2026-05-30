@@ -21,8 +21,8 @@ export const useCasesData: UseCase[] = [
     title: 'Kaffe i havgapet',
     description: 'Nyt en stille morgen for anker med kaffekoppen, uansett hvor frisk brisen er.',
     temperature: '8-15°C',
-    color: 'from-primary-button/20',
-    iconColor: 'text-primary-button'
+    color: 'from-primary/20',
+    iconColor: 'text-primary'
   },
   {
     icon: Moon,

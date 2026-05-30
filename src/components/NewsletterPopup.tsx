@@ -2,13 +2,7 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Tag } from 'lucide-react'
@@ -35,8 +29,7 @@ export function NewsletterPopup() {
   }, [isOpen])
 
   useEffect(() => {
-    if (pathname?.includes('/checkouts') || pathname?.includes('/handlekurv'))
-      return
+    if (pathname?.includes('/checkouts') || pathname?.includes('/handlekurv')) return
 
     const hasSeenPopup = localStorage.getItem('utekos_newsletter_v5')
     if (hasSeenPopup) return
@@ -59,8 +52,7 @@ export function NewsletterPopup() {
       }
 
       window.addEventListener('cookie_consent_saved', handleConsentSaved)
-      return () =>
-        window.removeEventListener('cookie_consent_saved', handleConsentSaved)
+      return () => window.removeEventListener('cookie_consent_saved', handleConsentSaved)
     }
   }, [pathname])
 
@@ -73,10 +65,7 @@ export function NewsletterPopup() {
     setIsSubmitting(true)
     const email = formData.get('email') as string
 
-    const result = await subscribeToNewsletter(
-      { status: 'idle', message: '' },
-      formData
-    )
+    const result = await subscribeToNewsletter({ status: 'idle', message: '' }, formData)
 
     setIsSubmitting(false)
 
@@ -137,27 +126,21 @@ export function NewsletterPopup() {
               <div className='inline-flex items-center justify-center rounded-full bg-emerald-500/10 p-3 mb-4'>
                 <Tag className='h-6 w-6 text-emerald-400' />
               </div>
-              <h3 className='text-lg font-medium text-emerald-100'>
-                Utekos® Club
-              </h3>
+              <h3 className='text-lg font-medium text-emerald-100'>Utekos® Club</h3>
             </div>
 
             <div className='relative z-10'>
               <p className='text-3xl font-bold text-white mb-2'>Bli medlem</p>
               <p className='text-sm text-neutral-400 leading-relaxed'>
-                "Det finnes ikke dårlig vær, bare dårlige klær... og for få
-                nyhetsbrev om komfort."
+                "Det finnes ikke dårlig vær, bare dårlige klær... og for få nyhetsbrev om komfort."
               </p>
             </div>
           </div>
           <div className='flex flex-col justify-center p-8 sm:p-12 bg-neutral-950'>
             <DialogHeader className='text-left mb-6'>
-              <DialogTitle className='text-2xl sm:text-3xl font-bold tracking-tight mb-2'>
-                Nyhetsbrev
-              </DialogTitle>
+              <DialogTitle className='text-2xl sm:text-3xl font-bold   mb-2'>Nyhetsbrev</DialogTitle>
               <DialogDescription className='text-neutral-400 text-base'>
-                Meld deg inn i varmen og motta nyhetsbrev, inspirasjon og
-                eksklusive tilbud.
+                Meld deg inn i varmen og motta nyhetsbrev, inspirasjon og eksklusive tilbud.
               </DialogDescription>
             </DialogHeader>
             <form action={handleSubmit} className='space-y-4'>
@@ -177,9 +160,7 @@ export function NewsletterPopup() {
               >
                 {isSubmitting ? 'Registrerer...' : 'Meld meg på'}
               </Button>
-              <p className='text-xs text-neutral-600 text-center mt-4'>
-                Du kan melde deg av når som helst.
-              </p>
+              <p className='text-xs text-neutral-600 text-center mt-4'>Du kan melde deg av når som helst.</p>
             </form>
           </div>
         </div>

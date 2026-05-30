@@ -215,7 +215,7 @@ export const CheckoutButton = ({
   return (
     <Button
       asChild
-      className={cn('bg-primary-button text-maritime-darkest hover:brightness-110', className)}
+      className={cn('bg-primary text-maritime-darkest hover:brightness-110', className)}
       data-track='CheckoutButtonClick'
       disabled={isDisabled}
       aria-label={disabledReason ?? getCheckoutAriaLabel(subtotal, isPending)}

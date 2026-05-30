@@ -38,8 +38,7 @@ export function CheckoutPanel({
   productImageSrc,
   onSizeChange
 }: ExtendedCheckoutPanelProps) {
-  const totalPrice =
-    mainProduct.price + (isUpsellSelected ? upsellProduct.price : 0)
+  const totalPrice = mainProduct.price + (isUpsellSelected ? upsellProduct.price : 0)
   const priceRef = useRef<HTMLSpanElement>(null)
 
   const productMock = {
@@ -174,10 +173,8 @@ export function CheckoutPanel({
         </div>
 
         <div className='flex justify-between items-end'>
-          <span className='text-slate-400 text-sm uppercase tracking-widest mb-1'>
-            Totalbeløp
-          </span>
-          <div className='text-4xl lg:text-5xl font-bold text-cloud-dancer tracking-tight font-utekos-text'>
+          <span className='text-slate-400 text-sm uppercase tracking-widest mb-1'>Totalbeløp</span>
+          <div className='text-4xl lg:text-5xl font-bold text-cloud-dancer    '>
             <span ref={priceRef}>{totalPrice}</span>,-
           </div>
         </div>
@@ -195,8 +192,7 @@ export function CheckoutPanel({
                 <Loader2 className='w-5 h-5 animate-spin' /> Legger til...
               </>
             : <>
-                Kjøp nå{' '}
-                <ArrowRight className='w-5 h-5 group-hover:translate-x-1 transition-transform' />
+                Kjøp nå <ArrowRight className='w-5 h-5 group-hover:translate-x-1 transition-transform' />
               </>
             }
           </span>

@@ -9,8 +9,8 @@ export function ProductCareUtekosDun() {
       value='dun'
       className='mt-8 rounded-2xl border border-maritime-darkest/10 bg-cloud-dancer/72 p-6 shadow-[0_20px_54px_-46px_color-mix(in_oklab,var(--maritime-darkest)_72%,transparent)] sm:p-8'
     >
-      <h3 className='text-2xl font-semibold tracking-tight text-maritime-darkest'>Utekos Dun™</h3>
-      <p className='mt-3 max-w-2xl text-base font-utekos-text leading-[1.45] text-maritime-darkest/82'>
+      <h3 className='text-2xl font-semibold   text-maritime-darkest'>Utekos Dun™</h3>
+      <p className='mt-3 max-w-2xl text-base   leading-[1.45] text-maritime-darkest/82'>
         Skånsom behandling bevarer den luftige varmen. Dun er et naturmateriale som belønner tålmodighet – og
         straffer hastverk.
       </p>
@@ -29,10 +29,8 @@ export function ProductCareUtekosDun() {
             <Thermometer className='size-[1.05rem]' />
           </span>
           <div>
-            <h4 className='text-base font-semibold tracking-tight text-cloud-dancer sm:text-lg'>
-              Tørking er avgjørende
-            </h4>
-            <p className='mt-2 text-sm leading-relaxed  font-utekos-text text-cloud-dancer/90 sm:text-base'>
+            <h4 className='text-base font-semibold   text-cloud-dancer sm:text-lg'>Tørking er avgjørende</h4>
+            <p className='mt-2 text-sm leading-relaxed    text-cloud-dancer/90 sm:text-base'>
               Bruk tørketrommel på lav varme med to-tre tørkeballer eller rene tennisballer. Ballene
               gjenoppretter dunets spenst ved å løse opp klumper underveis. Avbryt syklusen et par ganger og
               rist plagget – plagget skal være 100 % gjennomtørt før det legges bort.
@@ -50,10 +48,10 @@ export function ProductCareUtekosDun() {
             <Wind className='size-[1.05rem]' />
           </span>
           <div>
-            <h4 className='text-base font-semibold tracking-tight text-maritime-darkest sm:text-lg'>
+            <h4 className='text-base font-semibold   text-maritime-darkest sm:text-lg'>
               Oppbevaring mellom sesongene
             </h4>
-            <p className='mt-2 text-sm leading-relaxed  font-utekos-text text-maritime-darkest/82 sm:text-base'>
+            <p className='mt-2 text-sm leading-relaxed    text-maritime-darkest/82 sm:text-base'>
               Heng plagget luftig på en stødig henger. Dunet trenger luft for å bevare spensten som gir
               varmen. Kompresjonsposer over tid svekker isolasjonsevnen.
             </p>

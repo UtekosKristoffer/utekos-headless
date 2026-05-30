@@ -49,7 +49,7 @@ export default async function ChristmasLocalDelivery() {
             <span className='text-sm font-medium text-red-100'>Gi bort funksjonell varme</span>
           </div>
 
-          <h1 className='mt-8 text-4xl font-bold tracking-tight text-foreground sm:text-6xl'>
+          <h1 className='mt-8 text-4xl font-bold   text-foreground sm:text-6xl'>
             <span className='relative inline-block'>
               Utekos leverer julegavene
               <SantaHat className='absolute -left-6 -top-8 h-16 w-16 -rotate-12 drop-shadow-xl md:-left-8 md:-top-10 md:h-20 md:w-20' />

@@ -11,8 +11,8 @@ const seasons = [
     value: 'spring',
     label: 'Vår',
     icon: Sun,
-    iconColor: 'text-primary-button',
-    glowColor: 'var(--primary-button)',
+    iconColor: 'text-primary',
+    glowColor: 'var(--primary)',
     title: 'Sesongstarten',
     description:
       'Vær den første i nabolaget til å dra frem grillen. Med Utekos er ikke en kjølig vårkveld noen hindring for en vellykket premiere.'

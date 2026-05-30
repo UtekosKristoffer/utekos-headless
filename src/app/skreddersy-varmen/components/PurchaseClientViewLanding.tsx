@@ -171,7 +171,7 @@ export function PurchaseClientViewLanding({
                         value={highlight.title}
                         className='border-b border-cloud-dancer/15 last:border-b-0'
                       >
-                        <AccordionTrigger className='py-3 text-left text-sm font-semibold text-cloud-dancer hover:text-primary-button hover:no-underline'>
+                        <AccordionTrigger className='py-3 text-left text-sm font-semibold text-cloud-dancer hover:text-primary hover:no-underline'>
                           {highlight.title}
                         </AccordionTrigger>
                         <AccordionContent className='pb-3 pt-0 text-sm leading-[1.45] text-cloud-dancer/80'>
@@ -334,7 +334,7 @@ export function PurchaseClientViewLanding({
             <div className='mb-4 min-[900px]:mb-6 min-[1280px]:mb-8'>
               <BrandBadge
                 asChild
-                backgroundColor='var(--color-primary-button)'
+                backgroundColor='var(--color-primary)'
                 textColor='var(--color-maritime-darkest)'
                 className={cn(
                   'h-14 w-full min-w-0 px-4 py-0 text-sm font-semibold tracking-normal shadow-xl transition-[transform,filter,box-shadow] hover:brightness-95 active:scale-[0.985] sm:text-base md:h-16 md:px-6 md:text-lg',

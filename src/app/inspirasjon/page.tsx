@@ -34,9 +34,9 @@ export default function InspirationPage() {
         <div className='mt-8 flex flex-wrap justify-center gap-4'>
           <BrandBadge
             asChild
-            backgroundColor='var(--primary-button)'
+            backgroundColor='var(--primary)'
             textColor='var(--maritime-darkest)'
-            className='border border-primary-button/24 px-7 py-3 text-base leading-[1.4] font-semibold tracking-normal shadow-[0_18px_38px_-30px_rgba(49,42,18,0.58)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
+            className='border border-primary/24 px-7 py-3 text-base leading-[1.4] font-semibold tracking-normal shadow-[0_18px_38px_-30px_rgba(49,42,18,0.58)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
           >
             <Link href='/produkter'>Se produktene</Link>
           </BrandBadge>

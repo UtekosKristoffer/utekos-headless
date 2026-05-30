@@ -22,7 +22,7 @@ export function TechHero() {
             Skapt for komfort
           </BrandBadge>
 
-          <h1 className='text-5xl font-bold tracking-tight text-cloud-dancer sm:text-7xl md:text-8xl'>
+          <h1 className='text-5xl font-bold   text-cloud-dancer sm:text-7xl md:text-8xl'>
             Ett plagg. <br />
             <span className='bg-gradient-to-r from-ancient-water via-cloud-dancer to-ancient-water bg-clip-text text-transparent opacity-90'>
               Tre opplevelser.

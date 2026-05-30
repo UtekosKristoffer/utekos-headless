@@ -6,9 +6,7 @@ export function TrustSection() {
       <div className='container mx-auto px-4'>
         <div className='max-w-4xl mx-auto'>
           <div className='text-center mb-12'>
-            <h2 className='text-3xl font-bold tracking-tight sm:text-4xl'>
-              En garantert suksess
-            </h2>
+            <h2 className='text-3xl font-bold   sm:text-4xl'>En garantert suksess</h2>
             <p className='mt-4 text-lg text-muted-foreground'>
               Vi gjør gaveshoppingen trygg og enkel for deg.
             </p>
@@ -25,16 +23,13 @@ export function TrustSection() {
               <CheckIcon className='h-8 w-8 text-emerald-400 mb-4' />
               <h3 className='font-semibold mb-2'>Rask levering</h3>
               <p className='text-sm text-muted-foreground'>
-                Vi sender raskt fra vårt lager i Norge, slik at gaven kommer
-                frem i tide.
+                Vi sender raskt fra vårt lager i Norge, slik at gaven kommer frem i tide.
               </p>
             </div>
             <div className='flex flex-col items-center'>
               <CheckIcon className='h-8 w-8 text-amber-400 mb-4' />
               <h3 className='font-semibold mb-2'>Trygg handel</h3>
-              <p className='text-sm text-muted-foreground'>
-                Vil tilbyr betaling med Klarna og Vipps
-              </p>
+              <p className='text-sm text-muted-foreground'>Vil tilbyr betaling med Klarna og Vipps</p>
             </div>
           </div>
         </div>

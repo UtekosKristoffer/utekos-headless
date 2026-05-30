@@ -4,9 +4,7 @@ import type { OfferProductProps } from 'types/cart'
 export function OfferProduct({ product }: OfferProductProps) {
   return (
     <div className='flex flex-col space-y-6'>
-      <h1 className='text-3xl lg:text-5xl font-bold text-white tracking-tight'>
-        {product.name}
-      </h1>
+      <h1 className='text-3xl lg:text-5xl font-bold text-white  '>{product.name}</h1>
 
       <div className='flex flex-wrap gap-2'>
         {product.features.map((feature, i) => (
@@ -21,8 +19,8 @@ export function OfferProduct({ product }: OfferProductProps) {
       </div>
 
       <p className='text-slate-400 text-lg leading-relaxed border-l-2 border-sky-500/30 pl-4'>
-        Det ultimate ytterplagget for nordiske forhold. Designet med
-        SherpaCore™ og HydroGuard™ for å holde deg varm og tørr uansett vær.
+        Det ultimate ytterplagget for nordiske forhold. Designet med SherpaCore™ og HydroGuard™ for å holde
+        deg varm og tørr uansett vær.
       </p>
     </div>
   )

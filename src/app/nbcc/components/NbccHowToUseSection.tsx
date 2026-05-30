@@ -18,7 +18,7 @@ export function NbccHowToUseSection() {
             <h2 className='mt-4 max-w-xl text-balance text-3xl text-maritime-darkest font-semibold tracking-normal sm:text-4xl'>
               Fra medlemskode til ekte Utekos.
             </h2>
-            <p className='mt-5 max-w-xl text-base text-maritime-darkest font-utekos-text'>
+            <p className='mt-5 max-w-xl text-base text-maritime-darkest  '>
               Som medlem får du en hyggelig prisrabatt på hele vårt hovedsortiment. Følg de tre enkle stegene
               for å hente koden din, eller hopp rett til kassen om du allerede har den klar.
             </p>
@@ -50,18 +50,12 @@ export function NbccHowToUseSection() {
               {nbccSteps.map((step, index) => (
                 <li key={step.title} className='grid gap-5 sm:grid-cols-[3rem_1fr]'>
                   <span className='flex size-12 items-center justify-center rounded-md bg-havdyp text-white'>
-                    <CheckIcon size={22} animate='default' className='text-primary-button' aria-hidden />
+                    <CheckIcon size={22} animate='default' className='text-primary' aria-hidden />
                   </span>
                   <div>
-                    <p className='text-sm font-semibold font-utekos-text text-maritime-darkest'>
-                      Steg {index + 1}
-                    </p>
-                    <h3 className='mt-1 text-xl font-utekos-text font-semibold text-maritime-darkest'>
-                      {step.title}
-                    </h3>
-                    <p className='mt-2 text-sm leading-7 font-utekos-text text-maritime-darkest'>
-                      {step.description}
-                    </p>
+                    <p className='text-sm font-semibold   text-maritime-darkest'>Steg {index + 1}</p>
+                    <h3 className='mt-1 text-xl   font-semibold text-maritime-darkest'>{step.title}</h3>
+                    <p className='mt-2 text-sm leading-7   text-maritime-darkest'>{step.description}</p>
                   </div>
                   {index < nbccSteps.length - 1 && (
                     <Separator className='sm:col-start-2 bg-maritime-darkest/50' />

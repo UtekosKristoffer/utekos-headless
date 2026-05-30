@@ -32,13 +32,11 @@ function FeaturedArticleCard({ article }: { article: MagazineArticle }) {
             <div className='mb-5'>
               <MagazineCategoryBadge category={article.category} />
             </div>
-            <h2 className='text-balance font-google-sans text-4xl font-bold leading-[0.95] tracking-tight text-maritime-darkest sm:text-5xl'>
+            <h2 className='text-balance font-google-sans text-4xl font-bold leading-[0.95]   text-maritime-darkest sm:text-5xl'>
               <MagazineInlineTitle text={article.title} />
             </h2>
-            <p className='mt-5 font-utekos-text text-lg leading-[1.45] tracking-tight text-maritime-darkest/90'>
-              {article.excerpt}
-            </p>
-            <span className='mt-8 inline-flex items-center gap-2 font-utekos-text text-base font-semibold leading-[1.4] tracking-tight text-havdyp'>
+            <p className='mt-5   text-lg leading-[1.45]   text-maritime-darkest/90'>{article.excerpt}</p>
+            <span className='mt-8 inline-flex items-center gap-2   text-base font-semibold leading-[1.4]   text-havdyp'>
               Les hele saken
               <ArrowRight className='size-4 transition-transform group-hover:translate-x-1' aria-hidden />
             </span>
@@ -69,12 +67,10 @@ function MagazineArticleCard({ article }: { article: MagazineArticle }) {
           <div className='mb-4'>
             <MagazineCategoryBadge category={article.category} />
           </div>
-          <h3 className='font-google-sans text-2xl font-bold leading-[0.98] tracking-tight text-maritime-darkest transition-colors group-hover:text-havdyp'>
+          <h3 className='font-google-sans text-2xl font-bold leading-[0.98]   text-maritime-darkest transition-colors group-hover:text-havdyp'>
             <MagazineInlineTitle text={article.title} />
           </h3>
-          <p className='mt-3 font-utekos-text text-sm leading-[1.5] tracking-tight text-maritime-darkest/72'>
-            {article.excerpt}
-          </p>
+          <p className='mt-3   text-sm leading-[1.5]   text-maritime-darkest/72'>{article.excerpt}</p>
         </div>
       </Link>
     </li>
@@ -88,9 +84,7 @@ export function MagazineGrid({ articles }: MagazineGridProps) {
     return (
       <section className='bg-overcast py-16 text-maritime-darkest'>
         <div className='container mx-auto px-4'>
-          <p className='font-utekos-text text-lg leading-[1.55] tracking-tight'>
-            Ingen artikler er publisert ennå.
-          </p>
+          <p className='  text-lg leading-[1.55]  '>Ingen artikler er publisert ennå.</p>
         </div>
       </section>
     )
@@ -105,12 +99,10 @@ export function MagazineGrid({ articles }: MagazineGridProps) {
       >
         <div className='container mx-auto px-4'>
           <header className='mb-8 max-w-2xl'>
-            <p className='font-utekos-text text-sm font-semibold leading-[1.4] tracking-tight text-havdyp'>
-              Siste fra magasinet
-            </p>
+            <p className='  text-sm font-semibold leading-[1.4]   text-havdyp'>Siste fra magasinet</p>
             <h2
               id='magazine-latest-heading'
-              className='mt-2 font-google-sans text-4xl font-bold leading-[0.95] tracking-tight sm:text-5xl'
+              className='mt-2 font-google-sans text-4xl font-bold leading-[0.95]   sm:text-5xl'
             >
               Flere guider og historier
             </h2>

@@ -16,9 +16,9 @@ export function CTASection() {
           <div className='flex flex-wrap justify-center gap-4'>
             <BrandBadge
               asChild
-              backgroundColor='var(--primary-button)'
+              backgroundColor='var(--primary)'
               textColor='var(--maritime-darkest)'
-              className='group min-h-14 border border-primary-button/24 px-8 py-4 text-base leading-[1.4] font-bold tracking-tight font-utekos-text shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
+              className='group min-h-14 border border-primary/24 px-8 py-4 text-base leading-[1.4] font-bold     shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
             >
               <Link href={'/produkter' as Route} data-track='HyttelivShopAllProductsClick'>
                 Se alle produkter
@@ -29,7 +29,7 @@ export function CTASection() {
               asChild
               backgroundColor='var(--cloud-dancer)'
               textColor='var(--maritime-darkest)'
-              className='min-h-14 border border-cloud-dancer/24 px-8 py-4 text-base leading-[1.4] font-bold tracking-tight font-utekos-text shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
+              className='min-h-14 border border-cloud-dancer/24 px-8 py-4 text-base leading-[1.4] font-bold     shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
             >
               <Link href={'/handlehjelp/storrelsesguide' as Route} data-track='HyttelivFindYourSizeClick'>
                 Finn din størrelse

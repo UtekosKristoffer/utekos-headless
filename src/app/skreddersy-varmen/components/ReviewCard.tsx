@@ -14,7 +14,7 @@ export function ReviewCard({ review }: { review: Review }) {
       <header className='mb-5 flex items-center justify-between gap-3'>
         <div
           aria-hidden
-          className='flex gap-0.5 text-primary-button [filter:drop-shadow(0_1px_3px_rgba(0,0,0,0.4))]'
+          className='flex gap-0.5 text-primary [filter:drop-shadow(0_1px_3px_rgba(0,0,0,0.4))]'
         >
           {Array.from({ length: Math.round(review.rating) }).map((_, i) => (
             <Star key={i} fill='currentColor' size={14} strokeWidth={0} />

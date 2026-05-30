@@ -87,7 +87,7 @@ export function ProductCard({
           href={productUrl}
           data-track='ProductCardViewMoreClick'
           aria-label={`Se produkt ${product.title}`}
-          className='block w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-button'
+          className='block w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
         >
           <BrandBadge
             label='UNISEX'
@@ -99,7 +99,7 @@ export function ProductCard({
           {(product.handle === 'utekos-dun' || product.handle === 'comfyrobe') && (
             <Badge
               variant='destructive'
-              className='absolute right-4 top-4 z-10 border border-primary-button/35 bg-primary-button px-3 py-1 text-xs font-medium uppercase tracking-wide text-maritime-darkest'
+              className='absolute right-4 top-4 z-10 border border-primary/35 bg-primary px-3 py-1 text-xs font-medium uppercase tracking-wide text-maritime-darkest'
             >
               Få igjen
             </Badge>

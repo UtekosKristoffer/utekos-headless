@@ -167,7 +167,7 @@ export function PurchaseClientView({
 
           <div key={`hero-${selectedModel}`} className='mb-12'>
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.05s' threshold={0.15}>
-              <h2 className='mb-4 font-google-sans text-4xl font-semibold leading-[1.1] tracking-tight text-maritime-darkest lg:text-7xl'>
+              <h2 className='mb-4 font-google-sans text-4xl font-semibold leading-[1.1]   text-maritime-darkest lg:text-7xl'>
                 {currentConfig.title}
               </h2>
             </AnimatedBlock>
@@ -374,7 +374,7 @@ export function PurchaseClientView({
               data-track='🔔🛒 AddToCartSkreddersyVarmen 🛒🔔'
               disabled={isPending}
               className={cn(
-                'flex h-full flex-1 flex-row items-center justify-center gap-3 rounded-sm bg-primary-button px-2 text-cloud-dancer shadow-xl transition-all active:scale-[0.98] hover:bg-ember-dark',
+                'flex h-full flex-1 flex-row items-center justify-center gap-3 rounded-sm bg-primary px-2 text-cloud-dancer shadow-xl transition-all active:scale-[0.98] hover:bg-ember-dark',
                 isPending && 'cursor-not-allowed opacity-80'
               )}
             >

@@ -124,7 +124,7 @@ export function CreatedForSection() {
           </div>
         </div>
 
-        <h2 className='text-balance text-4xl font-bold tracking-tight sm:text-5xl md:text-7xl leading-tight'>
+        <h2 className='text-balance text-4xl font-bold   sm:text-5xl md:text-7xl leading-tight'>
           <span className='block overflow-hidden'>
             <span className='gsap-title-line text-havdyp block will-change-transform'>Skapt for</span>
           </span>

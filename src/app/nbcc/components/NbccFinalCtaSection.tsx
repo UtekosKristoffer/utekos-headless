@@ -13,13 +13,13 @@ export function NbccFinalCtaSection() {
         data-nbcc-animate
         className='relative mx-auto flex max-w-4xl flex-col items-center text-center'
       >
-        <p className='text-sm font-semibold font-utekos-text uppercase tracking-[0.18em] text-maritime-darkest'>
+        <p className='text-sm font-semibold   uppercase tracking-[0.18em] text-maritime-darkest'>
           Klar for neste campingtur
         </p>
-        <h2 className='mt-4 max-w-3xl text-balance text-4xl font-google-sans *:font-semibold tracking-tight text-maritime-darkest sm:text-5xl'>
+        <h2 className='mt-4 max-w-3xl text-balance text-4xl font-google-sans *:font-semibold   text-maritime-darkest sm:text-5xl'>
           Ta med varmen til plassen der praten fortsetter
         </h2>
-        <p className='mt-6 max-w-2xl text-base font-utekos-text text-maritime-darkest'>
+        <p className='mt-6 max-w-2xl text-base   text-maritime-darkest'>
           Opplev en ny standard for utendørs velvære. Utekos forener banebrytende innovasjon med tidløs
           eleganse. Kjernen i konseptet er vår unike 3-i-1 funksjonalitet. Gjennomtestede løsninger lar deg
           enkelt tilpasse passform, regulere ventilasjon og veksle mellom ulike funksjonelle moduser. Når dine
@@ -32,7 +32,7 @@ export function NbccFinalCtaSection() {
           data-track='NbccFinalProductsClick'
           data-track-data={JSON.stringify(nbccFinalCtaTracking)}
           size='lg'
-          className='mt-9 h-12 rounded-md bg-primary-button px-6 text-[15px] font-semibold text-maritime-darkest hover:bg-primary-button/90'
+          className='mt-9 h-12 rounded-md bg-primary px-6 text-[15px] font-semibold text-maritime-darkest hover:bg-primary/90'
         >
           <Link
             href='/produkter'

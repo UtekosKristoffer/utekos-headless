@@ -18,9 +18,9 @@ export function InspirationHeroActions({
     <>
       <BrandBadge
         asChild
-        backgroundColor='var(--primary-button)'
+        backgroundColor='var(--primary)'
         textColor='var(--maritime-darkest)'
-        className='group border border-primary-button/35 px-7 py-3 text-base leading-[1.4] font-semibold tracking-[-0.01em] shadow-[0_18px_38px_-28px_color-mix(in_oklch,var(--demitasse)_72%,transparent)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest'
+        className='group border border-primary/35 px-7 py-3 text-base leading-[1.4] font-semibold tracking-[-0.01em] shadow-[0_18px_38px_-28px_color-mix(in_oklch,var(--demitasse)_72%,transparent)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest'
       >
         <Link href={'/produkter' as Route}>
           {primaryLabel}

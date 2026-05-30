@@ -48,7 +48,7 @@ export function ComfyrobeSizeGuide() {
               textColor='var(--cloud-dancer)'
               className='mb-5 px-4 py-2 text-sm'
             />
-            <h2 className='text-3xl font-bold leading-[1.05] tracking-tight text-maritime-darkest sm:text-5xl'>
+            <h2 className='text-3xl font-bold leading-[1.05]   text-maritime-darkest sm:text-5xl'>
               Størrelsesguide for Comfyrobe™
             </h2>
           </div>

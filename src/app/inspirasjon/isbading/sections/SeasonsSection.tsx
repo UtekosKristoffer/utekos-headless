@@ -21,8 +21,8 @@ const seasons = [
     value: 'spring',
     label: 'Vår',
     icon: Sun,
-    iconColor: 'text-primary-button',
-    glowColor: 'var(--primary-button)',
+    iconColor: 'text-primary',
+    glowColor: 'var(--primary)',
     title: 'Vårløsning og smeltevann',
     description:
       'Dagene blir lengre, men vannet er fortsatt iskaldt. Nyt kontrasten mellom den varmende vårsolen i ansiktet og det kjølige vannet, trygt pakket inn i din Utekos.'
@@ -53,11 +53,7 @@ export function SeasonsSection() {
   const [activeTab, setActiveTab] = useState('winter')
 
   return (
-    <Tabs
-      defaultValue='winter'
-      className='mx-auto max-w-4xl'
-      onValueChange={setActiveTab}
-    >
+    <Tabs defaultValue='winter' className='mx-auto max-w-4xl' onValueChange={setActiveTab}>
       <TabsList className='grid w-full grid-cols-4 gap-2 bg-transparent p-1'>
         {seasons.map(season => {
           const Icon = season.icon
@@ -117,13 +113,9 @@ export function SeasonsSection() {
                     >
                       <Icon className={`h-6 w-6 ${season.iconColor}`} />
                     </div>
-                    <h3 className='text-2xl font-semibold text-cloud-dancer'>
-                      {season.title}
-                    </h3>
+                    <h3 className='text-2xl font-semibold text-cloud-dancer'>{season.title}</h3>
                   </div>
-                  <p className='text-lg leading-[1.45] tracking-normal text-overcast'>
-                    {season.description}
-                  </p>
+                  <p className='text-lg leading-[1.45] tracking-normal text-overcast'>{season.description}</p>
                 </CardContent>
               </Card>
             </div>

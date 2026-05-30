@@ -22,7 +22,7 @@ export const rawMagazineArticles = [
       description:
         'Slik kan personlig varme, riktig pakking og enkle rutiner gjøre egenberedskapen mer praktisk og trygg.'
     },
-    theme: { accent: 'primary-button', surface: 'light' },
+    theme: { accent: 'primary', surface: 'light' },
     relatedSlugs: [
       'vinterklargjoring-av-hytta-en-sjekkliste-for-livsnyteren',
       'den-ultimate-guiden-til-komfortabel-vintercamping',
@@ -340,7 +340,7 @@ export const rawMagazineArticles = [
       height: 1024,
       caption: 'Bålpannen skaper samlingspunktet. Komforten gjør at folk blir sittende.'
     },
-    theme: { accent: 'primary-button', surface: 'dark' },
+    theme: { accent: 'primary', surface: 'dark' },
     relatedSlugs: [
       '5-enkle-tips-for-a-forlenge-terrassesongen',
       'slik-skaper-du-den-perfekte-stemningen-pa-hytta',

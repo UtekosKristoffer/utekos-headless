@@ -30,10 +30,10 @@ export function PromiseSection() {
           </AnimatedBlock>
 
           <AnimatedBlock className='mb-12' delay='0.1s'>
-            <h2 className='mb-5 text-4xl leading-[0.95] font-bold tracking-tight text-cloud-dancer md:text-5xl'>
+            <h2 className='mb-5 text-4xl leading-[0.95] font-bold   text-cloud-dancer md:text-5xl'>
               Vårt løfte til deg
             </h2>
-            <p className='mx-auto max-w-2xl text-xl leading-[1.45] tracking-tight text-cloud-dancer/85'>
+            <p className='mx-auto max-w-2xl text-xl leading-[1.45]   text-cloud-dancer/85'>
               Komforten skal merkes med en gang, og kvaliteten skal fortsette å bære øyeblikkene ute.
             </p>
           </AnimatedBlock>
@@ -46,10 +46,10 @@ export function PromiseSection() {
               <div className='mb-5 rounded-full border border-havdyp/14 bg-havdyp p-4 text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
                 <Heart className='size-6' strokeWidth={1.6} />
               </div>
-              <h3 className='mb-3 text-xl leading-[1] font-semibold font-google-sans tracking-tight text-maritime-darkest'>
+              <h3 className='mb-3 text-xl leading-[1] font-semibold font-google-sans   text-maritime-darkest'>
                 Mer enn et plagg
               </h3>
-              <p className='text-lg leading-[1.45] font-utekos-text tracking-tight text-maritime-darkest'>
+              <p className='text-lg leading-[1.45]     text-maritime-darkest'>
                 Vi lover deg følelsen av umiddelbar varme og velvære. En garanti for at du kan nyte øyeblikket
                 lenger, uten å fryse.
               </p>
@@ -62,10 +62,10 @@ export function PromiseSection() {
               <div className='mb-5 rounded-full border border-havdyp/14 bg-maritime-darkest p-4 text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
                 <ShieldCheck className='size-6' strokeWidth={1.6} />
               </div>
-              <h3 className='mb-3 text-xl leading-[1] font-semibold tracking-tight text-maritime-darkest'>
+              <h3 className='mb-3 text-xl leading-[1] font-semibold   text-maritime-darkest'>
                 En varig verdi
               </h3>
-              <p className='text-lg leading-[1.45] font-utekos-text tracking-tight text-maritime-darkest'>
+              <p className='text-lg leading-[1.45]     text-maritime-darkest'>
                 Se på det som en investering i din egen livskvalitet. Kompromissløs komfort og overlegen
                 allsidighet, designet for å gi deg flere timer utendørs, år etter år.
               </p>

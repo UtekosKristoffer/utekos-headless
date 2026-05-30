@@ -19,7 +19,7 @@ export async function LandingExpertReview() {
     >
       <div className='mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16'>
         <div>
-          <p className='mb-3 font-utekos-text text-sm font-medium leading-[1.4] tracking-tight text-demitasse'>
+          <p className='mb-3   text-sm font-medium leading-[1.4]   text-demitasse'>
             Faglig vurdert av {LANDING_AUTHOR_NAME}
           </p>
           <h2
@@ -28,7 +28,7 @@ export async function LandingExpertReview() {
           >
             Derfor holder Utekos deg ute lenger
           </h2>
-          <p className='mt-5 max-w-xl font-utekos-text text-base leading-[1.45] tracking-tight text-maritime-darkest/82 md:text-lg'>
+          <p className='mt-5 max-w-xl   text-base leading-[1.45]   text-maritime-darkest/82 md:text-lg'>
             Sist oppdatert {LANDING_LAST_UPDATED}. Denne siden bygger på produktdata, kundeerfaringer,
             materialinformasjon og Utekos sine egne kjøpsguider.
           </p>
@@ -43,9 +43,7 @@ export async function LandingExpertReview() {
               <h3 className='font-google-sans text-xl font-bold leading-[0.98] tracking-normal text-maritime-darkest'>
                 {entry.title}
               </h3>
-              <p className='mt-3 font-utekos-text text-sm leading-[1.45] tracking-tight text-maritime-darkest/82'>
-                {entry.answer}
-              </p>
+              <p className='mt-3   text-sm leading-[1.45]   text-maritime-darkest/82'>{entry.answer}</p>
               <Link
                 href={entry.href}
                 className='mt-4 inline-flex text-sm font-semibold text-maritime-darkest underline underline-offset-4 transition-colors hover:text-havdyp'

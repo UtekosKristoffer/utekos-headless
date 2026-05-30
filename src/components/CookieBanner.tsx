@@ -25,16 +25,16 @@ type ConsentPreferenceCardProps = {
 }
 
 const consentActionClassName =
-  'min-h-11 w-full select-none px-6 py-3 text-sm font-semibold leading-[1.2] tracking-normal shadow-[0_18px_38px_-30px_color-mix(in_oklab,var(--demitasse)_72%,transparent)] transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto'
+  'min-h-11 w-full select-none px-6 py-3 text-sm font-semibold leading-[1.2] tracking-normal shadow-[0_18px_38px_-30px_color-mix(in_oklab,var(--demitasse)_72%,transparent)] transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto'
 
 const consentActionToneConfig: Record<
   ConsentActionTone,
   { backgroundColor: string; textColor: string; className?: string }
 > = {
   primary: {
-    backgroundColor: 'var(--primary-button)',
+    backgroundColor: 'var(--primary)',
     textColor: 'var(--maritime-darkest)',
-    className: 'border border-primary-button/24'
+    className: 'border border-primary/24'
   },
   cloud: {
     backgroundColor: 'var(--cloud-dancer)',
@@ -94,13 +94,11 @@ function ConsentPreferenceCard({
         <Switch
           checked={checked}
           aria-label={`${title} informasjonskapsler`}
-          className='border-cloud-dancer/15 data-[state=checked]:bg-primary-button data-[state=unchecked]:bg-havdyp focus-visible:ring-primary-button/35'
+          className='border-cloud-dancer/15 data-[state=checked]:bg-primary data-[state=unchecked]:bg-havdyp focus-visible:ring-primary/35'
           {...switchProps}
         />
       </div>
-      <p className='mt-3 font-utekos-text text-xs leading-[1.45] tracking-tight text-cloud-dancer/72'>
-        {description}
-      </p>
+      <p className='mt-3   text-xs leading-[1.45]   text-cloud-dancer/72'>{description}</p>
     </section>
   )
 }
@@ -169,13 +167,13 @@ export function CookieConsentBanner() {
                 </h3>
                 <p
                   id='cookie-consent-description'
-                  className='max-w-3xl font-utekos-text text-sm leading-[1.45] tracking-tight text-cloud-dancer/82 md:text-base'
+                  className='max-w-3xl   text-sm leading-[1.45]   text-cloud-dancer/82 md:text-base'
                 >
                   Vi bruker informasjonskapsler for å holde siden trygg, måle hva som fungerer og vise
                   relevant innhold. Du kan godta alt, bruke kun nødvendige eller tilpasse valgene dine. Les{' '}
                   <Link
                     href={'/personvern' as Route}
-                    className='font-medium text-primary-button underline underline-offset-4 transition-colors hover:text-cloud-dancer'
+                    className='font-medium text-primary underline underline-offset-4 transition-colors hover:text-cloud-dancer'
                   >
                     personvernerklæringen
                   </Link>
@@ -203,7 +201,7 @@ export function CookieConsentBanner() {
                 </h3>
                 <p
                   id='cookie-consent-description'
-                  className='font-utekos-text text-sm leading-[1.45] tracking-tight text-cloud-dancer/82 md:text-base'
+                  className='  text-sm leading-[1.45]   text-cloud-dancer/82 md:text-base'
                 >
                   Velg hvilke informasjonskapsler du vil bruke. Nødvendige kapsler holder handlekurv,
                   sikkerhet og sidefunksjoner i gang.

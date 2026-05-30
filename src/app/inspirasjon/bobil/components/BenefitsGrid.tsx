@@ -16,7 +16,7 @@ export const benefitsData = [
     icon: SparklesIcon,
     title: 'Kompakt og praktisk',
     description: 'Tar minimal plass i bobilen, maksimal komfort på turen',
-    color: 'text-primary-button'
+    color: 'text-primary'
   },
   {
     icon: CalendarIcon,
@@ -54,7 +54,7 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
                 <benefit.icon className={`size-8 ${benefit.color}`} aria-hidden />
               </div>
               <h3 className='mb-2 font-google-sans text-cloud-dancer'>{benefit.title}</h3>
-              <p className='font-utekos-text text-sm leading-[1.45] tracking-[-0.02em] text-cloud-dancer/82'>
+              <p className='  text-sm leading-[1.45] tracking-[-0.02em] text-cloud-dancer/82'>
                 {benefit.description}
               </p>
             </AnimatedBlock>

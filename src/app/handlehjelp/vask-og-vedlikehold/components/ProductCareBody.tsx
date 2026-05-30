@@ -7,13 +7,10 @@ export function ProductCareBody() {
   return (
     <section aria-labelledby='materialspesifikk-heading' className='mx-auto mt-20 max-w-4xl scroll-mt-24'>
       <div className='mb-8 text-center'>
-        <h2
-          id='materialspesifikk-heading'
-          className='text-2xl font-bold tracking-tight text-maritime-darkest sm:text-3xl'
-        >
+        <h2 id='materialspesifikk-heading' className='text-2xl font-bold   text-maritime-darkest sm:text-3xl'>
           Materialspesifikk pleie
         </h2>
-        <p className='mx-auto mt-3 max-w-2xl text-base font-utekos-text text-maritime-darkest/78'>
+        <p className='mx-auto mt-3 max-w-2xl text-base   text-maritime-darkest/78'>
           Hvert materiale har sine egne styrker – og sine egne behov. Velg plagget ditt for detaljerte råd.
         </p>
       </div>

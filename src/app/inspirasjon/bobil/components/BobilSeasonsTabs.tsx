@@ -26,8 +26,8 @@ const seasons = [
     value: 'summer',
     label: 'Sommer',
     icon: Sun,
-    iconColor: 'text-primary-button',
-    glowColor: 'var(--primary-button)',
+    iconColor: 'text-primary',
+    glowColor: 'var(--primary)',
     title: 'Sommerkvelder med stil',
     intro: 'Selv om sommeren er varm, blir kveldene ofte overraskende kjølige, spesielt ved kysten.',
     tips: [
@@ -80,7 +80,7 @@ export function BobilSeasonsTabs() {
             <TabsTrigger
               key={season.value}
               value={season.value}
-              className='bobil-seasons-tab-trigger relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/58 transition-all duration-300 data-[state=active]:border-cloud-dancer/18 data-[state=active]:bg-[var(--primary-button)] data-[state=active]:text-maritime-darkest'
+              className='bobil-seasons-tab-trigger relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/58 transition-all duration-300 data-[state=active]:border-cloud-dancer/18 data-[state=active]:bg-[var(--primary)] data-[state=active]:text-maritime-darkest'
             >
               {isActive && (
                 <div
@@ -140,9 +140,7 @@ export function BobilSeasonsTabs() {
                     </h3>
                   </div>
 
-                  <p className='font-utekos-text mb-6 text-lg leading-[1.5] tracking-tight text-cloud-dancer/90'>
-                    {season.intro}
-                  </p>
+                  <p className='  mb-6 text-lg leading-[1.5]   text-cloud-dancer/90'>{season.intro}</p>
 
                   <ul className='space-y-3'>
                     {season.tips.map((tip, index) => (
@@ -154,9 +152,7 @@ export function BobilSeasonsTabs() {
                         <div className='mt-0.5 flex size-6 flex-shrink-0 items-center justify-center rounded-full border border-cloud-dancer/18 bg-maritime-darkest'>
                           <Check className={`size-4 ${season.iconColor}`} />
                         </div>
-                        <span className='font-utekos-text leading-[1.5] tracking-tight text-cloud-dancer/90'>
-                          {tip}
-                        </span>
+                        <span className='  leading-[1.5]   text-cloud-dancer/90'>{tip}</span>
                       </li>
                     ))}
                   </ul>

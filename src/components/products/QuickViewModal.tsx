@@ -64,7 +64,7 @@ export function QuickViewModal({ productHandle, isOpen, onOpenChange }: QuickVie
           </div>
         : <>
             <DialogHeader className='space-y-3 py-2'>
-              <DialogTitle className='text-3xl font-bold tracking-tight'>{productData.title}</DialogTitle>
+              <DialogTitle className='text-3xl font-bold  '>{productData.title}</DialogTitle>
               {productData.description && (
                 <DialogDescription asChild>
                   <p className='text-base text-cloud-dancer leading-relaxed max-w-2xl'>
@@ -94,8 +94,8 @@ export function QuickViewModal({ productHandle, isOpen, onOpenChange }: QuickVie
 
               <div className='flex flex-col gap-8'>
                 <div className='space-y-2'>
-                  <p className='text-sm font-utekos-text text-cloud-dancer uppercase tracking-wide'>Pris</p>
-                  <div className='text-3xl font-bold tracking-tight'>
+                  <p className='text-sm   text-cloud-dancer uppercase tracking-wide'>Pris</p>
+                  <div className='text-3xl font-bold  '>
                     <Price
                       amount={selectedVariant.price.amount}
                       currencyCode={selectedVariant.price.currencyCode}

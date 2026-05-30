@@ -111,12 +111,12 @@ export function PhilosophiesSection() {
               label='Vårt DNA'
               backgroundColor='var(--bleached-mauve)'
               textColor='var(--maritime-darkest)'
-              className='mb-6 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--primary-button)_80%,transparent)]'
+              className='mb-6 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--primary)_80%,transparent)]'
             />
-            <h2 className='mb-6 text-5xl leading-[0.95] font-bold font-google-sans tracking-tight text-maritime-darkest md:text-6xl lg:text-7xl'>
+            <h2 className='mb-6 text-5xl leading-[0.95] font-bold font-google-sans   text-maritime-darkest md:text-6xl lg:text-7xl'>
               Kjernen i alt vi gjør
             </h2>
-            <p className='text-lg leading-[1.45] font-utekos-text tracking-tight text-maritime-darkest'>
+            <p className='text-lg leading-[1.45]     text-maritime-darkest'>
               Fire ufravikelige prinsipper som sikrer at du alltid får den opplevelsen du fortjener.
             </p>
           </AnimatedBlock>
@@ -146,7 +146,7 @@ export function PhilosophiesSection() {
                     </div>
 
                     <h3
-                      className={`text-2xl leading-[1] font-semibold font-google-sans tracking-tight ${philosophyToneStyles[i]?.title}`}
+                      className={`text-2xl leading-[1] font-semibold font-google-sans   ${philosophyToneStyles[i]?.title}`}
                     >
                       {item.title}
                     </h3>

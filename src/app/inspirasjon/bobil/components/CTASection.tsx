@@ -17,15 +17,15 @@ export function CTASection() {
       <div className='container relative mx-auto px-4 text-center'>
         <AnimatedBlock className='will-animate-fade-in-scale'>
           <h2 className='mb-6 font-google-sans text-cloud-dancer'>Klar for ditt neste bobil-eventyr?</h2>
-          <p className='mx-auto mb-8 max-w-2xl font-utekos-text text-xl leading-[1.45] tracking-[-0.02em] text-cloud-dancer/90'>
+          <p className='mx-auto mb-8 max-w-2xl   text-xl leading-[1.45] tracking-[-0.02em] text-cloud-dancer/90'>
             Bli med tusenvis av bobilister som har oppdaget varme som gjør hvert stopp verdt å huske.
           </p>
           <div className='flex flex-wrap justify-center gap-4'>
             <BrandBadge
               asChild
-              backgroundColor='var(--primary-button)'
+              backgroundColor='var(--primary)'
               textColor='var(--color-maritime-darkest)'
-              className='group min-h-14 border border-primary-button/24 px-8 py-4 font-utekos-text text-base font-bold leading-[1.4] tracking-[-0.02em] shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest'
+              className='group min-h-14 border border-primary/24 px-8 py-4   text-base font-bold leading-[1.4] tracking-[-0.02em] shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest'
             >
               <Link href={'/produkter' as Route} data-track='BobilShopAllProductsClick'>
                 Se alle produkter
@@ -39,7 +39,7 @@ export function CTASection() {
               asChild
               backgroundColor='var(--color-cloud-dancer)'
               textColor='var(--color-maritime-darkest)'
-              className='min-h-14 border border-cloud-dancer/24 px-8 py-4 font-utekos-text text-base font-bold leading-[1.4] tracking-[-0.02em] shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest'
+              className='min-h-14 border border-cloud-dancer/24 px-8 py-4   text-base font-bold leading-[1.4] tracking-[-0.02em] shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest'
             >
               <Link href={'/handlehjelp/storrelsesguide' as Route} data-track='BobilFindYourSizeClick'>
                 Finn din størrelse

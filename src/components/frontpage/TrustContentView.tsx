@@ -19,7 +19,7 @@ export const TrustContentView = forwardRef<HTMLDivElement, TrustContentViewProps
     return (
       <div ref={ref} className='flex flex-col justify-between bg-background p-8 lg:p-12'>
         <div>
-          <h2 ref={headingRef} className='text-3xl font-bold tracking-tight text-foreground'>
+          <h2 ref={headingRef} className='text-3xl font-bold   text-foreground'>
             <span className='block overflow-hidden'>
               <span className='gsap-reveal-line block'>En opplevelse</span>
             </span>

@@ -2,13 +2,7 @@
 
 import { useAddToCartAction } from '@/hooks/useAddToCartAction'
 import { AnimatePresence, motion } from 'framer-motion'
-import {
-  ArrowUpRight,
-  Loader2,
-  MousePointer2,
-  ShoppingBag,
-  X
-} from 'lucide-react'
+import { ArrowUpRight, Loader2, MousePointer2, ShoppingBag, X } from 'lucide-react'
 import type { Route } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -42,17 +36,12 @@ function normalizeVariants(product: ShopifyProduct): ShopifyProductVariant[] {
   return []
 }
 
-export function HelpChooseCard({
-  product,
-  index,
-  glowColor
-}: HelpChooseCardProps) {
+export function HelpChooseCard({ product, index, glowColor }: HelpChooseCardProps) {
   const variants = useMemo(() => normalizeVariants(product), [product])
 
   const [selectedColor, setSelectedColor] = useState<string | null>(null)
   const [isSelectingSize, setIsSelectingSize] = useState(false)
-  const [selectedVariant, setSelectedVariant] =
-    useState<ShopifyProductVariant | null>(null)
+  const [selectedVariant, setSelectedVariant] = useState<ShopifyProductVariant | null>(null)
 
   const [toast, setToast] = useState<string | null>(null)
   const toastTimerRef = useRef<number | null>(null)
@@ -66,9 +55,7 @@ export function HelpChooseCard({
   const colorOptions = useMemo(() => {
     const map = new Map<string, string>()
     variants.forEach(variant => {
-      const color = variant.selectedOptions.find(
-        o => o.name === 'Color' || o.name === 'Farge'
-      )?.value
+      const color = variant.selectedOptions.find(o => o.name === 'Color' || o.name === 'Farge')?.value
       if (color && !map.has(color)) {
         map.set(color, variant.image?.url || product.featuredImage?.url || '')
       }
@@ -80,17 +67,12 @@ export function HelpChooseCard({
     if (!selectedColor) return []
     return variants
       .filter(v => {
-        const vColor = v.selectedOptions.find(
-          o => o.name === 'Color' || o.name === 'Farge'
-        )?.value
+        const vColor = v.selectedOptions.find(o => o.name === 'Color' || o.name === 'Farge')?.value
         return vColor === selectedColor && v.availableForSale
       })
       .map(v => ({
         id: v.id,
-        title:
-          v.selectedOptions.find(
-            o => o.name === 'Size' || o.name === 'Størrelse'
-          )?.value || 'One Size',
+        title: v.selectedOptions.find(o => o.name === 'Size' || o.name === 'Størrelse')?.value || 'One Size',
         variant: v
       }))
   }, [variants, selectedColor])
@@ -126,10 +108,7 @@ export function HelpChooseCard({
     window.setTimeout(() => setColorGateFlash(false), 550)
 
     if (hintTimerRef.current) window.clearTimeout(hintTimerRef.current)
-    hintTimerRef.current = window.setTimeout(
-      () => setShowColorHint(false),
-      2200
-    )
+    hintTimerRef.current = window.setTimeout(() => setShowColorHint(false), 2200)
   }
 
   const handleBuyClick = (e: React.MouseEvent) => {
@@ -147,10 +126,7 @@ export function HelpChooseCard({
     setIsSelectingSize(true)
   }
 
-  const handleSizeSelect = (
-    e: React.MouseEvent,
-    variant: ShopifyProductVariant
-  ) => {
+  const handleSizeSelect = (e: React.MouseEvent, variant: ShopifyProductVariant) => {
     e.preventDefault()
     e.stopPropagation()
     setSelectedVariant(variant)
@@ -186,10 +162,7 @@ export function HelpChooseCard({
       className='group relative h-full w-full'
       onMouseLeave={() => setIsSelectingSize(false)}
     >
-      <Link
-        href={`/produkter/${product.handle}` as Route}
-        className='block h-full w-full'
-      >
+      <Link href={`/produkter/${product.handle}` as Route} className='block h-full w-full'>
         <div className='relative flex aspect-[2/3] h-full flex-col overflow-hidden rounded-3xl border border-white/5 bg-neutral-900 shadow-2xl transition-transform duration-300 md:hover:-translate-y-1'>
           <div className='absolute inset-0 z-0 bg-neutral-800'>
             <AnimatePresence mode='wait'>
@@ -208,9 +181,7 @@ export function HelpChooseCard({
                   quality={95}
                   sizes='(max-width: 640px) 50vw, 25vw'
                   className={`object-cover transition-transform duration-700 will-change-transform ${
-                    isSelectingSize ?
-                      'scale-105 blur-[2px]'
-                    : 'group-hover:scale-105'
+                    isSelectingSize ? 'scale-105 blur-[2px]' : 'group-hover:scale-105'
                   }`}
                 />
               </motion.div>
@@ -237,9 +208,7 @@ export function HelpChooseCard({
                       key={color}
                       onClick={e => handleColorSelect(e, color)}
                       className={`relative h-4 w-4 rounded-full transition-transform ${
-                        selectedColor === color ?
-                          'scale-125 ring-2 ring-white'
-                        : 'opacity-85 hover:scale-110'
+                        selectedColor === color ? 'scale-125 ring-2 ring-white' : 'opacity-85 hover:scale-110'
                       } ${colorGateFlash && !selectedColor ? 'ring-2 ring-white/80' : ''}`}
                       style={{ backgroundColor: mapColorToHex(color) }}
                       aria-label={`Velg farge ${color}`}
@@ -295,13 +264,11 @@ export function HelpChooseCard({
 
           <div className='relative z-10 mt-auto flex flex-col p-3 pb-3 md:p-4 md:pb-4'>
             <div className='mb-3'>
-              <h3 className='font-heading text-base font-bold leading-tight tracking-tight text-white md:text-xl'>
+              <h3 className='font-heading text-base font-bold leading-tight   text-white md:text-xl'>
                 {product.title}
               </h3>
               <div className='mt-0.5 flex items-baseline gap-2'>
-                <span className='text-sm font-bold text-white/90 md:text-base'>
-                  {formattedPrice}
-                </span>
+                <span className='text-sm font-bold text-white/90 md:text-base'>{formattedPrice}</span>
               </div>
             </div>
 
@@ -317,9 +284,7 @@ export function HelpChooseCard({
                     className='grid grid-cols-[1fr_auto] gap-2'
                   >
                     <div className='flex h-10 items-center justify-center gap-2 rounded-full bg-white/10 backdrop-blur-md transition-colors duration-300 md:group-hover:bg-white/20'>
-                      <span className='text-xs font-semibold text-white'>
-                        Les mer
-                      </span>
+                      <span className='text-xs font-semibold text-white'>Les mer</span>
                       <ArrowUpRight className='h-3.5 w-3.5 text-white/80' />
                     </div>
 
@@ -334,9 +299,7 @@ export function HelpChooseCard({
                         <span className='text-[10px] font-bold'>TOMT</span>
                       : <>
                           <ShoppingBag className='h-4 w-4 md:mr-2' />
-                          <span className='hidden text-xs font-bold md:block'>
-                            Kjøp nå
-                          </span>
+                          <span className='hidden text-xs font-bold md:block'>Kjøp nå</span>
                         </>
                       }
                     </button>
@@ -373,10 +336,7 @@ export function HelpChooseCard({
                         >
                           {isPending && selectedVariant?.id === size.id ?
                             <Loader2 className='h-3 w-3 animate-spin' />
-                          : <span className='min-w-0 truncate whitespace-nowrap'>
-                              {size.title}
-                            </span>
-                          }
+                          : <span className='min-w-0 truncate whitespace-nowrap'>{size.title}</span>}
                         </button>
                       ))}
 

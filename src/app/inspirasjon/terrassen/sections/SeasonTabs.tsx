@@ -36,9 +36,9 @@ const seasons = [
     value: 'autumn',
     label: 'Høst',
     icon: Leaf,
-    iconColor: 'text-primary-button',
-    glowColor: 'var(--primary-button)',
-    activeBackground: 'var(--primary-button)',
+    iconColor: 'text-primary',
+    glowColor: 'var(--primary)',
+    activeBackground: 'var(--primary)',
     activeText: 'var(--maritime-darkest)',
     title: 'Høstkvelder med klar luft',
     description: 'Pakk deg inn i komfort og nyt den skarpe, klare høstluften med en kopp te og en god bok.'
@@ -77,7 +77,7 @@ export function SeasonsTabs() {
             <TabsTrigger
               key={season.value}
               value={season.value}
-              className='seasons-tab-trigger relative h-auto min-h-14 overflow-hidden rounded-full border border-cloud-dancer/14 bg-maritime-darkest/72 px-5 py-4 text-sm font-semibold leading-[1.35] tracking-tight font-utekos-text text-cloud-dancer transition-[background-color,border-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:bg-maritime-darkest data-[state=active]:border-transparent data-[state=active]:text-maritime-darkest data-[state=active]:shadow-[0_18px_42px_-30px_color-mix(in_oklch,var(--maritime-darkest)_88%,transparent)] focus-visible:ring-2 focus-visible:ring-primary-button/70 focus-visible:ring-offset-2 focus-visible:ring-offset-havdyp motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+              className='seasons-tab-trigger relative h-auto min-h-14 overflow-hidden rounded-full border border-cloud-dancer/14 bg-maritime-darkest/72 px-5 py-4 text-sm font-semibold leading-[1.35]     text-cloud-dancer transition-[background-color,border-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:bg-maritime-darkest data-[state=active]:border-transparent data-[state=active]:text-maritime-darkest data-[state=active]:shadow-[0_18px_42px_-30px_color-mix(in_oklch,var(--maritime-darkest)_88%,transparent)] focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-havdyp motion-reduce:transition-none motion-reduce:hover:translate-y-0'
               style={{
                 backgroundColor: isActive ? season.activeBackground : undefined,
                 color: isActive ? season.activeText : undefined
@@ -130,14 +130,12 @@ export function SeasonsTabs() {
                     >
                       <Icon className={`size-6 ${season.iconColor}`} aria-hidden='true' />
                     </div>
-                    <h3 className='text-2xl font-semibold leading-[1.1] tracking-tight font-utekos-text text-cloud-dancer'>
+                    <h3 className='text-2xl font-semibold leading-[1.1]     text-cloud-dancer'>
                       {season.title}
                     </h3>
                   </div>
 
-                  <p className='text-lg leading-[1.45] tracking-tight font-utekos-text text-cloud-dancer/88'>
-                    {season.description}
-                  </p>
+                  <p className='text-lg leading-[1.45]     text-cloud-dancer/88'>{season.description}</p>
                 </CardContent>
               </Card>
             </div>

@@ -89,7 +89,7 @@ export function PopularCabinAreasGrid({ destinations }: { destinations: Destinat
                     </div>
                     <h3
                       className={cn(
-                        'min-w-0 flex-1 text-lg font-semibold leading-[1.15] tracking-tight',
+                        'min-w-0 flex-1 text-lg font-semibold leading-[1.15]  ',
                         destination.textColor
                       )}
                     >
@@ -97,19 +97,11 @@ export function PopularCabinAreasGrid({ destinations }: { destinations: Destinat
                     </h3>
                   </div>
                   <p
-                    className={cn(
-                      'mb-2 font-utekos-text text-sm italic leading-[1.45] tracking-tight opacity-82',
-                      destination.textColor
-                    )}
+                    className={cn('mb-2   text-sm italic leading-[1.45]   opacity-82', destination.textColor)}
                   >
                     {destination.season}
                   </p>
-                  <p
-                    className={cn(
-                      'font-utekos-text text-base leading-[1.45] tracking-tight',
-                      destination.textColor
-                    )}
-                  >
+                  <p className={cn('  text-base leading-[1.45]  ', destination.textColor)}>
                     {destination.highlight}
                   </p>
                 </CardContent>

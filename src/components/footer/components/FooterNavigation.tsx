@@ -15,7 +15,7 @@ export function FooterNavigation() {
                 <li key={link.path}>
                   <Link
                     href={link.path}
-                    className='text-sm text-cloud-dancer/90 font-utekos-text transition-colors hover:text-cloud-dancer'
+                    className='text-sm text-cloud-dancer/90   transition-colors hover:text-cloud-dancer'
                     data-track={link.trackingEvent}
                     {...(link.external && {
                       target: '_blank',

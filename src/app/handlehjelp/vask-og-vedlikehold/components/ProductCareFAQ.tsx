@@ -6,7 +6,7 @@ export function ProductCareFaq() {
   return (
     <section aria-labelledby='faq-heading' className='mx-auto mt-20 max-w-3xl scroll-mt-24'>
       <div className='mb-8 text-center'>
-        <h2 id='faq-heading' className='text-2xl font-bold tracking-tight text-maritime-darkest sm:text-3xl'>
+        <h2 id='faq-heading' className='text-2xl font-bold   text-maritime-darkest sm:text-3xl'>
           Vanlige spørsmål
         </h2>
         <p className='mx-auto mt-3 max-w-2xl text-base text-maritime-darkest/76'>
@@ -21,9 +21,7 @@ export function ProductCareFaq() {
             className='group px-5 py-4 sm:px-6 sm:py-5 [&[open]>summary>span:last-child]:rotate-45'
           >
             <summary className='flex cursor-pointer list-none items-start justify-between gap-4'>
-              <span className='text-base font-semibold tracking-tight text-maritime-darkest sm:text-lg'>
-                {question}
-              </span>
+              <span className='text-base font-semibold   text-maritime-darkest sm:text-lg'>{question}</span>
               <span
                 aria-hidden='true'
                 className='mt-1 inline-block size-5 shrink-0 text-havdyp transition-transform duration-300 motion-reduce:transition-none'

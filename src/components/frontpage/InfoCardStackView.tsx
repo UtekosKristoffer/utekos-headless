@@ -88,7 +88,7 @@ export const InfoCardStackView = forwardRef<HTMLDivElement, InfoCardStackViewPro
             </div>
 
             <div className='mt-auto flex justify-center pb-1 pt-2'>
-              <Image src={UtekosLogo} alt='Utekos logo ikon' className='size-7 sm:size-9' />
+              <Image src={UtekosLogo} alt='Utekos Logo' width={32} height={32} className='size-7 sm:size-9' />
             </div>
           </div>
         </div>

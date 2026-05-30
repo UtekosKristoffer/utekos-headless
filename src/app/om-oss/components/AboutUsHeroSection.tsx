@@ -32,11 +32,11 @@ export function AboutUsHeroSection() {
 
         <BrandBadge
           label='Skreddersy varmen'
-          backgroundColor='var(--primary-button)'
+          backgroundColor='var(--primary)'
           textColor='var(--maritime-darkest)'
         />
 
-        <p className='mx-auto font-utekos-text max-w-2xl text-xl leading-[1.45] tracking-tight text-cloud-dancer/95 drop-shadow-md md:text-3xl'>
+        <p className='mx-auto   max-w-2xl text-xl leading-[1.45]   text-cloud-dancer/95 drop-shadow-md md:text-3xl'>
           Drevet av kalde kvelder og et løfte om å aldri la været stoppe de gode øyeblikkene.
         </p>
       </div>

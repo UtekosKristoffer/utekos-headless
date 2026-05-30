@@ -66,8 +66,8 @@ export function MikrofiberImageSection() {
           ))}
         </CarouselContent>
 
-        <CarouselPrevious className='left-4 hidden border-maritime-darkest/10 bg-cloud-dancer/86 text-maritime-darkest backdrop-blur-md hover:bg-primary-button focus-visible:ring-primary-button/70 sm:inline-flex' />
-        <CarouselNext className='right-4 hidden border-maritime-darkest/10 bg-cloud-dancer/86 text-maritime-darkest backdrop-blur-md hover:bg-primary-button focus-visible:ring-primary-button/70 sm:inline-flex' />
+        <CarouselPrevious className='left-4 hidden border-maritime-darkest/10 bg-cloud-dancer/86 text-maritime-darkest backdrop-blur-md hover:bg-primary focus-visible:ring-primary/70 sm:inline-flex' />
+        <CarouselNext className='right-4 hidden border-maritime-darkest/10 bg-cloud-dancer/86 text-maritime-darkest backdrop-blur-md hover:bg-primary focus-visible:ring-primary/70 sm:inline-flex' />
       </Carousel>
     </div>
   )

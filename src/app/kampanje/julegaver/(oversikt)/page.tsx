@@ -2,15 +2,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import {
-  ArrowRight,
-  Gift,
-  Calendar,
-  ShieldCheck,
-  Truck,
-  CreditCard,
-  MapPin
-} from 'lucide-react'
+import { ArrowRight, Gift, Calendar, ShieldCheck, Truck, CreditCard, MapPin } from 'lucide-react'
 import { SantaHat } from '@/components/ui/santahat'
 import { connection } from 'next/server'
 
@@ -38,8 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Julegavetips | Utekos',
-    description:
-      'Finn de varmeste julegavene hos Utekos. TechDown, Comfyrobe, Dun og Mikrofiber.',
+    description: 'Finn de varmeste julegavene hos Utekos. TechDown, Comfyrobe, Dun og Mikrofiber.',
     images: ['/linn-kate-kikkert.webp']
   }
 }
@@ -52,11 +43,9 @@ export default async function ChristmasCampaign() {
         <div className='container relative z-10 mx-auto px-4'>
           <div className='inline-flex items-center gap-2 rounded-full border border-red-800/50 bg-red-900/20 px-4 py-1.5 backdrop-blur-sm'>
             <Gift className='h-4 w-4 text-red-200' />
-            <span className='text-sm font-medium text-red-100'>
-              Julegaver fra Utekos®
-            </span>
+            <span className='text-sm font-medium text-red-100'>Julegaver fra Utekos®</span>
           </div>
-          <h1 className='mt-8 text-4xl font-bold tracking-tight text-foreground sm:text-6xl'>
+          <h1 className='mt-8 text-4xl font-bold   text-foreground sm:text-6xl'>
             <span className='relative inline-block'>
               Gi bort
               <SantaHat className='absolute -left-6 -top-8 h-16 w-16 -rotate-12 drop-shadow-xl md:-left-8 md:-top-10 md:h-20 md:w-20' />
@@ -66,8 +55,7 @@ export default async function ChristmasCampaign() {
             </span>
           </h1>
           <p className='mx-auto mt-6 max-w-2xl text-lg text-article-white'>
-            Den perfekte gaven til livsnyteren som har alt – unntatt varmen.
-            Sikre deg høstens store trend.
+            Den perfekte gaven til livsnyteren som har alt – unntatt varmen. Sikre deg høstens store trend.
           </p>
           <div className='mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row'>
             <Link
@@ -94,9 +82,7 @@ export default async function ChristmasCampaign() {
                 <MapPin className='h-6 w-6 text-red-400' />{' '}
               </div>
               <div>
-                <h3 className='font-semibold text-foreground'>
-                  Sendes samme dag
-                </h3>
+                <h3 className='font-semibold text-foreground'>Sendes samme dag</h3>
                 <p className='text-sm text-muted-foreground'>
                   Bestill før 17. des – vi garanterer levering til jul!
                 </p>
@@ -109,12 +95,8 @@ export default async function ChristmasCampaign() {
                 <ShieldCheck className='h-6 w-6 text-red-400' />
               </div>
               <div>
-                <h3 className='font-semibold text-foreground'>
-                  Utvidet bytterett
-                </h3>
-                <p className='text-sm text-muted-foreground'>
-                  Bytt gaver frem til 15. januar.
-                </p>
+                <h3 className='font-semibold text-foreground'>Utvidet bytterett</h3>
+                <p className='text-sm text-muted-foreground'>Bytt gaver frem til 15. januar.</p>
               </div>
             </div>
 
@@ -123,12 +105,8 @@ export default async function ChristmasCampaign() {
                 <CreditCard className='h-6 w-6 text-red-400' />
               </div>
               <div>
-                <h3 className='font-semibold text-foreground'>
-                  Sikker betaling
-                </h3>
-                <p className='text-sm text-muted-foreground'>
-                  Betal trygt med Vipps eller Klarna.
-                </p>
+                <h3 className='font-semibold text-foreground'>Sikker betaling</h3>
+                <p className='text-sm text-muted-foreground'>Betal trygt med Vipps eller Klarna.</p>
               </div>
             </div>
           </div>
@@ -165,14 +143,11 @@ export default async function ChristmasCampaign() {
             <div className='p-6'>
               <h3 className='text-2xl font-bold'>Utekos TechDown™</h3>
               <p className='mt-2 text-article-white'>
-                Nyhet: Vår varmeste mest allsidige modell. Optimalisert etter
-                erfaringer og tilbakemeldinger.
+                Nyhet: Vår varmeste mest allsidige modell. Optimalisert etter erfaringer og tilbakemeldinger.
               </p>
               <div className='mt-4 flex items-baseline gap-3'>
                 <span className='text-xl font-bold text-red-400'>1 790 kr</span>
-                <span className='text-sm text-article-white line-through'>
-                  1 999 kr
-                </span>
+                <span className='text-sm text-article-white line-through'>1 999 kr</span>
               </div>
               <Link
                 href='/produkter/utekos-techdown'
@@ -201,16 +176,11 @@ export default async function ChristmasCampaign() {
             <div className='p-6'>
               <h3 className='text-2xl font-bold'>Utekos Mikrofiber™</h3>
               <p className='mt-2 text-article-white'>
-                Lettvekt møter varme og allsidighet. Gir deg følelsen av dun med
-                ekstra fordeler.
+                Lettvekt møter varme og allsidighet. Gir deg følelsen av dun med ekstra fordeler.
               </p>
               <div className='mt-4 flex items-baseline gap-3'>
-                <span className='text-xl font-bold text-foreground'>
-                  1 590 kr
-                </span>
-                <span className='text-sm text-article-white line-through'>
-                  2 290 kr
-                </span>
+                <span className='text-xl font-bold text-foreground'>1 590 kr</span>
+                <span className='text-sm text-article-white line-through'>2 290 kr</span>
               </div>
               <Link
                 href='/produkter/utekos-mikrofiber'
@@ -238,16 +208,10 @@ export default async function ChristmasCampaign() {
 
             <div className='p-6'>
               <h3 className='text-2xl font-bold'>Utekos Dun™</h3>
-              <p className='mt-2 text-article-white'>
-                Klassisk dun-kvalitet for de kaldeste dagene.
-              </p>
+              <p className='mt-2 text-article-white'>Klassisk dun-kvalitet for de kaldeste dagene.</p>
               <div className='mt-4 flex items-baseline gap-3'>
-                <span className='text-xl font-bold text-foreground'>
-                  1 990 kr
-                </span>
-                <span className='text-sm text-article-white line-through'>
-                  3 290 kr
-                </span>
+                <span className='text-xl font-bold text-foreground'>1 990 kr</span>
+                <span className='text-sm text-article-white line-through'>3 290 kr</span>
               </div>
               <Link
                 href='/produkter/utekos-dun'
@@ -279,12 +243,8 @@ export default async function ChristmasCampaign() {
                 Den ultimate skifteroben. Vindtett, vanntett og foret.
               </p>
               <div className='mt-4 flex items-baseline gap-3'>
-                <span className='text-xl font-bold text-foreground'>
-                  1 290 kr
-                </span>
-                <span className='text-sm text-article-white line-through'>
-                  1 690 kr
-                </span>
+                <span className='text-xl font-bold text-foreground'>1 290 kr</span>
+                <span className='text-sm text-article-white line-through'>1 690 kr</span>
               </div>
               <Link
                 href='/produkter/comfyrobe'
@@ -316,9 +276,7 @@ export default async function ChristmasCampaign() {
               <Gift className='h-8 w-8 text-red-400' />
             </div>
             <h3 className='text-lg font-semibold'>Hele kolleksjonen</h3>
-            <p className='text-sm text-muted-foreground'>
-              Utforsk alle våre produkter
-            </p>
+            <p className='text-sm text-muted-foreground'>Utforsk alle våre produkter</p>
           </Link>
 
           <Link
@@ -329,9 +287,7 @@ export default async function ChristmasCampaign() {
               <ShieldCheck className='h-8 w-8 text-blue-400' />
             </div>
             <h3 className='text-lg font-semibold'>Lær mer</h3>
-            <p className='text-sm text-muted-foreground'>
-              Lær mer om funksjonaliteten.
-            </p>
+            <p className='text-sm text-muted-foreground'>Lær mer om funksjonaliteten.</p>
           </Link>
 
           <Link
@@ -342,9 +298,7 @@ export default async function ChristmasCampaign() {
               <Calendar className='h-8 w-8 text-green-400' />
             </div>
             <h3 className='text-lg font-semibold'>Usikker på størrelse?</h3>
-            <p className='text-sm text-muted-foreground'>
-              Se vår størrelsesguide og tips.
-            </p>
+            <p className='text-sm text-muted-foreground'>Se vår størrelsesguide og tips.</p>
           </Link>
         </div>
       </section>

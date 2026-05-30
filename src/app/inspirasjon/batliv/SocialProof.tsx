@@ -1,10 +1,10 @@
 import { Card, CardContent } from '@/components/ui/card'
 export function SocialProof() {
   return (
-    <section className='py-24 bg-havdyp/24'>
+    <article className='py-24 bg-havdyp'>
       <div className='container mx-auto px-4'>
         <div className='max-w-3xl mx-auto text-center'>
-          <h2 className='text-3xl font-bold tracking-normal sm:text-4xl mb-8'>Skippere elsker Utekos</h2>
+          <h2 className='mb-8'>Skippere elsker Utekos</h2>
 
           <Card className='border-cloud-dancer/12 bg-maritime-darkest'>
             <CardContent className='p-12'>
@@ -23,6 +23,6 @@ export function SocialProof() {
           </Card>
         </div>
       </div>
-    </section>
+    </article>
   )
 }

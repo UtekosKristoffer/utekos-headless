@@ -17,7 +17,7 @@ export async function FeaturedProductsSection() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <article className='container md:max-w-7xl bg-maritime-darkest mx-auto px-4 py-12 lg:pt-16! md:mt-20 md:pb-8! sm:py-16'>
+      <article className='container md:max-w-7xl mx-auto px-4 py-12 lg:pt-16 md:mt-20 md:pb-8 sm:py-16'>
         <h2 className='mb-8 text-center md:mb-12'>Kundenes favoritter</h2>
         <ProductCarousel />
       </article>

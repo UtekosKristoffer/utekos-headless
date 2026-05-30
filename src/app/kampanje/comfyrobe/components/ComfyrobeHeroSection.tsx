@@ -15,10 +15,7 @@ interface ComfyrobeHeroSectionProps {
   backgroundImageSrc?: string
 }
 
-export function ComfyrobeHeroSection({
-  productImageSrc,
-  backgroundImageSrc
-}: ComfyrobeHeroSectionProps) {
+export function ComfyrobeHeroSection({ productImageSrc, backgroundImageSrc }: ComfyrobeHeroSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const imageContainerRef = useRef<HTMLDivElement>(null)
   const badgeRef = useRef<HTMLDivElement>(null)
@@ -68,7 +65,7 @@ export function ComfyrobeHeroSection({
 
           <h1
             ref={headlineMainRef}
-            className='invisible text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.1] will-change-transform skew-y-3'
+            className='invisible text-4xl sm:text-5xl lg:text-7xl font-bold   leading-[1.1] will-change-transform skew-y-3'
           >
             Hold varmen. <br />
             <span className='relative whitespace-nowrap inline-block mt-1'>
@@ -86,14 +83,10 @@ export function ComfyrobeHeroSection({
             ref={bodyRef}
             className='invisible text-base sm:text-lg text-slate-300 leading-relaxed max-w-sm sm:max-w-md'
           >
-            Comfyrobe™ er din festning mot kulden. 8000mm vanntett skall møter
-            myk SherpaCore™ innside.
+            Comfyrobe™ er din festning mot kulden. 8000mm vanntett skall møter myk SherpaCore™ innside.
           </p>
 
-          <div
-            ref={ctaRef}
-            className='invisible flex flex-col w-full sm:w-auto gap-4 mt-2'
-          >
+          <div ref={ctaRef} className='invisible flex flex-col w-full sm:w-auto gap-4 mt-2'>
             <button
               onClick={handleScrollToShop}
               className='w-full sm:w-auto group relative px-8 py-4 bg-white text-[#0a0a0a] font-bold rounded-full text-lg overflow-hidden transition-transform active:scale-95 shadow-lg shadow-sky-900/30'

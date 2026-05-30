@@ -46,7 +46,7 @@ function BreadcrumbLink({
     <Comp
       data-slot='breadcrumb-link'
       className={cn(
-        'hover:text-maritime-darkest/90 font-normal text-maritime-darkest font-utekos-text tracking-tight transition-colors',
+        'hover:text-maritime-darkest/90 font-normal text-maritime-darkest     transition-colors',
         className
       )}
       {...props}
@@ -61,20 +61,13 @@ function BreadcrumbPage({ className, ...props }: React.ComponentProps<'span'>) {
       role='link'
       aria-disabled='true'
       aria-current='page'
-      className={cn(
-        'text-maritime-darkest font-utekos-text font-medium tracking-tight',
-        className
-      )}
+      className={cn('text-maritime-darkest   font-medium  ', className)}
       {...props}
     />
   )
 }
 
-function BreadcrumbSeparator({
-  children,
-  className,
-  ...props
-}: React.ComponentProps<'li'>) {
+function BreadcrumbSeparator({ children, className, ...props }: React.ComponentProps<'li'>) {
   return (
     <li
       data-slot='breadcrumb-separator'
@@ -88,10 +81,7 @@ function BreadcrumbSeparator({
   )
 }
 
-function BreadcrumbEllipsis({
-  className,
-  ...props
-}: React.ComponentProps<'span'>) {
+function BreadcrumbEllipsis({ className, ...props }: React.ComponentProps<'span'>) {
   return (
     <span
       data-slot='breadcrumb-ellipsis'

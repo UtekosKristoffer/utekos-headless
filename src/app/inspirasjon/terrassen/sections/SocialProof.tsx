@@ -18,7 +18,7 @@ export function SocialProof() {
 
           <Card className='border-cloud-dancer/24 bg-mountain-view shadow-[0_28px_80px_-54px_color-mix(in_oklch,var(--maritime-darkest)_82%,transparent)]'>
             <CardContent className='p-8 sm:p-12'>
-              <blockquote className='mb-6 text-xl leading-[1.45] tracking-tight font-utekos-text text-cloud-dancer'>
+              <blockquote className='mb-6 text-xl leading-[1.45]     text-cloud-dancer'>
                 &quot;Vi har doblet bruken av terrassen etter at vi fikk Utekos i hus. Den brukes av hele
                 familien, fra tenåringen som vil sitte ute med venner, til oss voksne som endelig kan nyte
                 kveldene ute uten å pakke oss inn i ti tepper.&quot;

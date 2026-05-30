@@ -26,7 +26,7 @@ export function SectionSocialProof() {
       <div className='relative z-10 mx-auto max-w-6xl px-6'>
         <header className='gsap-sp-header mb-12 text-center md:mb-16'>
           <div className='gsap-sp-rating-pill mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium leading-[1.45] tracking-[-0.01em] text-cloud-dancer/80'>
-            <span aria-hidden className='flex gap-0.5 text-primary-button'>
+            <span aria-hidden className='flex gap-0.5 text-primary'>
               {[1, 2, 3, 4].map(i => (
                 <Star key={i} fill='currentColor' size={10} strokeWidth={0} />
               ))}

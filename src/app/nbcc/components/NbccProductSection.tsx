@@ -24,10 +24,10 @@ export async function NbccProductSection() {
           className='flex flex-col gap-6 md:flex-row md:items-end md:justify-between'
         >
           <div>
-            <Badge className='rounded-md border-primary-button/30 bg-primary-button px-3 py-2 text-maritime-darkest font-utekos-text'>
+            <Badge className='rounded-md border-primary/30 bg-primary px-3 py-2 text-maritime-darkest  '>
               Utekos for NBCC-medlemmer
             </Badge>
-            <h2 className='mt-5 max-w-2xl text-balance text-3xl font-google-sans font-semibold tracking-tight text-cloud-dancer sm:text-4xl'>
+            <h2 className='mt-5 max-w-2xl text-balance text-3xl font-google-sans font-semibold   text-cloud-dancer sm:text-4xl'>
               Skreddersy din campingopplevelse
             </h2>
           </div>
@@ -56,10 +56,8 @@ export async function NbccProductSection() {
                   <NbccProductCarousel images={product.images} />
                 </CardHeader>
                 <CardContent className='px-6 pb-0'>
-                  <p className='text-sm font-semibold font-utekos-text text-cloud-dancer'>
-                    {product.shortTitle}
-                  </p>
-                  <CardTitle className='mt-3 text-2xl font-utekos-text font-semibold text-cloud-dancer'>
+                  <p className='text-sm font-semibold   text-cloud-dancer'>{product.shortTitle}</p>
+                  <CardTitle className='mt-3 text-2xl   font-semibold text-cloud-dancer'>
                     {product.title}
                   </CardTitle>
                   <div className='mt-5'>

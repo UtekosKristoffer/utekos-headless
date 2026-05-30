@@ -1,5 +1,6 @@
 import { cacheLife, cacheTag } from 'next/cache'
 import type { CollectionPage, WithContext } from 'schema-dts'
+import Script from 'next/script'
 
 export async function BobilJsonLd() {
   'use cache'
@@ -10,8 +11,7 @@ export async function BobilJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     'name': 'Bobil og Utekos',
-    'description':
-      'Oppdag hvordan Utekos forvandler bobilopplevelsen. Inspirasjon for alle sesonger.',
+    'description': 'Oppdag hvordan Utekos forvandler bobilopplevelsen. Inspirasjon for alle sesonger.',
     'url': 'https://utekos.no/inspirasjon/bobil',
     'primaryImageOfPage': {
       '@type': 'ImageObject',
@@ -29,11 +29,8 @@ export async function BobilJsonLd() {
   }
 
   return (
-    <script
-      type='application/ld+json'
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c')
-      }}
-    />
+    <Script id='bobil-json-ld' type='application/ld+json'>
+      {`${JSON.stringify(jsonLd).replace(/</g, '\\u003c')}`}
+    </Script>
   )
 }

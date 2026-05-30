@@ -1,5 +1,5 @@
 import '../globals.css'
-import { utekosText } from '@/db/config/font.config'
+import { utekosText, utekosTextMedium, geist } from '@/app/fonts/font.config'
 import { Suspense, type ReactNode } from 'react'
 import { WebVitalsReporter } from '@/components/analytics/WebVitalsReporter'
 import { mainMenu } from '@/db/config/menu.config'
@@ -17,10 +17,10 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import { Google_Sans as GoogleSans } from 'next/font/google'
 
-// If loading a variable font, you don't need to specify the font weight
 const googleSans = GoogleSans({
   subsets: ['latin'],
-  display: 'swap'
+  display: 'swap',
+  variable: '--font-google-sans'
 })
 
 const GOOGLE_TAG_MANAGER_ID = process.env.NEXT_GOOGLE_GTM_ID || 'GTM-5TWMJQFP'
@@ -107,16 +107,15 @@ export const metadata: Metadata = {
   },
   verification: {
     other: {
-      'facebook-domain-verification': 'e3q80hk1igl2celczeysvf7y1mltrs',
-      'pinterest-domain-verification': 'b93d956ac3026cff7c10fa3a2f116a78'
+      'facebook-domain-verification': 'e3q80hk1igl2celczeysvf7y1mltrs'
     }
   }
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang='no' className={`${googleSans.className} ${utekosText.variable}`}>
-      <body className='bg-background text-cloud-dancer antialiased'>
+    <html lang='no' className={`${googleSans.className} ${utekosText.variable} ${utekosTextMedium.variable}`}>
+      <body className='bg-background text-foreground antialiased'>
         <WebVitalsReporter />
 
         {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (

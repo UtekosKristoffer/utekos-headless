@@ -109,11 +109,11 @@ export function ComparisonTeaser() {
         </div>
 
         <div className='p-6 max-sm:text-left text-center md:p-16'>
-          <h2 className='gsap-text text-4xl font-bold tracking-tight font-google-sans text-havdyp sm:text-5xl md:text-6xl'>
+          <h2 className='gsap-text text-4xl font-bold   font-google-sans text-havdyp sm:text-5xl md:text-6xl'>
             Usikker på hvilken Utekos du skal velge?
           </h2>
 
-          <p className='gsap-text mx-auto mt-6 max-w-4xl utekos-section-lead text-[1.2rem] font-utekos-text leading-relaxed text-havdyp'>
+          <p className='gsap-text mx-auto mt-6 max-w-4xl utekos-section-lead text-[1.2rem]   leading-relaxed text-havdyp'>
             Alle Utekos-modellene har justerbar passform og ventilasjon, men har ellers ulike egenskaper og
             styrker. Se vår sammenligningsguide for å finne modellen som passer best til dine behov.
           </p>
@@ -149,9 +149,7 @@ export function ComparisonTeaser() {
                   </h3>
                 </div>
 
-                <p className={cn('mb-6 text-[1rem]! font-utekos-text!', model.descriptionClass)}>
-                  {model.description}
-                </p>
+                <p className={cn('mb-6 text-[1rem]!  !', model.descriptionClass)}>{model.description}</p>
 
                 <div
                   className={cn(
@@ -170,7 +168,7 @@ export function ComparisonTeaser() {
             <Button
               asChild
               size='lg'
-              className='h-12 font-utekos-text rounded-full bg-havdyp px-8 text-cloud-dancer hover:bg-maritime-darkest transition-all'
+              className='h-12   rounded-full bg-havdyp px-8 text-cloud-dancer hover:bg-maritime-darkest transition-all'
             >
               <Link
                 href={'/handlehjelp/sammenlign-modeller' as Route}

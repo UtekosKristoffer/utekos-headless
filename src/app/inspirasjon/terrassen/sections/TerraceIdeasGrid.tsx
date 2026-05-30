@@ -55,7 +55,7 @@ export const terraceIdeasData: TerraceIdea[] = [
     highlight: 'Fordyp deg i en annen verden',
     icon: 'book-open',
     color: 'text-maritime-darkest',
-    bgColor: 'color-mix(in oklch, var(--primary-button) 90%, transparent)'
+    bgColor: 'color-mix(in oklch, var(--primary) 90%, transparent)'
   }
 ]
 

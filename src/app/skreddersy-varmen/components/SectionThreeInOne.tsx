@@ -18,7 +18,7 @@ export function SectionThreeInOne() {
     >
       {/* Intro header */}
       <div className='gsap-three-intro mx-auto max-w-4xl px-6 py-16 text-center md:py-24'>
-        <span className='gsap-three-eyebrow mb-3 block font-utekos-text text-sm font-medium leading-[1.4] tracking-tight text-overcast'>
+        <span className='gsap-three-eyebrow mb-3 block   text-sm font-medium leading-[1.4]   text-overcast'>
           Adaptiv funksjonalitet
         </span>
         <h2
@@ -27,7 +27,7 @@ export function SectionThreeInOne() {
         >
           Friheten til å velge
         </h2>
-        <p className='gsap-three-subtitle mx-auto max-w-2xl text-balance utekos-section-lead font-utekos-text text-base leading-[1.45] tracking-tight text-cloud-dancer/95'>
+        <p className='gsap-three-subtitle mx-auto max-w-2xl text-balance utekos-section-lead   text-base leading-[1.45]   text-cloud-dancer/95'>
           Det unike med Utekos<span className='text-overcast'>®</span> er transformasjonen. Fra en isolerende
           kokong til en elegant parkas på sekunder. Juster, form og nyt.
         </p>
@@ -61,7 +61,7 @@ export function SectionThreeInOne() {
               <BrandBadge
                 backgroundColor='var(--color-maritime-darkest)'
                 textColor='var(--color-cloud-dancer)'
-                className='gsap-step-badge absolute left-4 top-4 h-7 px-3 py-0 font-utekos-text text-xs font-medium leading-none tracking-tight backdrop-blur-md'
+                className='gsap-step-badge absolute left-4 top-4 h-7 px-3 py-0   text-xs font-medium leading-none   backdrop-blur-md'
               >
                 {step.stepNumber}
               </BrandBadge>
@@ -70,14 +70,12 @@ export function SectionThreeInOne() {
             <div className='mx-auto w-full max-w-[36rem] px-6 pt-6 md:px-8 lg:max-w-[34rem]'>
               <div className='gsap-step-eyebrow mb-2 flex items-center gap-2 text-overcast'>
                 <span className='gsap-step-icon inline-flex shrink-0 text-overcast'>{step.icon}</span>
-                <span className='font-utekos-text text-sm font-medium leading-[1.4] tracking-tight'>
-                  {step.modeName}
-                </span>
+                <span className='  text-sm font-medium leading-[1.4]  '>{step.modeName}</span>
               </div>
               <h3 className='gsap-step-title mb-3 font-google-sans text-2xl font-bold leading-[0.92] tracking-[-0.01em] text-cloud-dancer'>
                 {step.title}
               </h3>
-              <p className='gsap-step-desc utekos-section-lead font-utekos-text leading-[1.45] tracking-tight text-cloud-dancer/90'>
+              <p className='gsap-step-desc utekos-section-lead   leading-[1.45]   text-cloud-dancer/90'>
                 {step.description}
               </p>
             </div>
@@ -141,7 +139,7 @@ export function SectionThreeInOne() {
               className='gsap-desktop-step-panel flex min-h-screen flex-col justify-center border-b border-cloud-dancer/10 px-20 last:border-0'
             >
               <div className='will-change-transform'>
-                <div className='gsap-step-eyebrow mb-4 flex items-center gap-3 font-utekos-text text-sm font-medium leading-[1.4] tracking-tight text-overcast'>
+                <div className='gsap-step-eyebrow mb-4 flex items-center gap-3   text-sm font-medium leading-[1.4]   text-overcast'>
                   <span className='gsap-step-icon inline-flex shrink-0 text-overcast'>{step.icon}</span>
                   <span>
                     {step.stepNumber} — {step.modeName}
@@ -152,7 +150,7 @@ export function SectionThreeInOne() {
                   {step.title}
                 </h3>
 
-                <p className='gsap-step-desc max-w-lg font-utekos-text text-base leading-[1.45] tracking-tight text-cloud-dancer/88'>
+                <p className='gsap-step-desc max-w-lg   text-base leading-[1.45]   text-cloud-dancer/88'>
                   {step.description}
                 </p>
               </div>

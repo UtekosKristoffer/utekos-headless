@@ -57,7 +57,7 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
               <h3 className='mb-2 text-lg font-semibold leading-[1.15] tracking-[-0.01em] text-cloud-dancer'>
                 {benefit.title}
               </h3>
-              <p className='font-utekos-text text-sm leading-[1.45] tracking-[-0.02em] text-cloud-dancer/82'>
+              <p className='  text-sm leading-[1.45] tracking-[-0.02em] text-cloud-dancer/82'>
                 {benefit.description}
               </p>
             </AnimatedBlock>

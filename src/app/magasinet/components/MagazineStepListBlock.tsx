@@ -11,12 +11,12 @@ export function MagazineStepListBlock({ block }: MagazineStepListBlockProps) {
       {(block.title || block.intro) && (
         <header className='mb-8'>
           {block.title && (
-            <h2 className='text-balance font-google-sans text-4xl font-bold leading-[0.95] tracking-tight text-maritime-darkest sm:text-5xl'>
+            <h2 className='text-balance font-google-sans text-4xl font-bold leading-[0.95]   text-maritime-darkest sm:text-5xl'>
               <MagazineInlineTitle text={block.title} />
             </h2>
           )}
           {block.intro && (
-            <p className='mt-4 max-w-2xl font-utekos-text text-lg leading-[1.55] tracking-tight text-maritime-darkest/76'>
+            <p className='mt-4 max-w-2xl   text-lg leading-[1.55]   text-maritime-darkest/76'>
               {block.intro}
             </p>
           )}
@@ -32,12 +32,10 @@ export function MagazineStepListBlock({ block }: MagazineStepListBlockProps) {
               {index + 1}
             </div>
             <div>
-              <h3 className='font-google-sans text-2xl font-bold leading-[0.95] tracking-tight text-maritime-darkest'>
+              <h3 className='font-google-sans text-2xl font-bold leading-[0.95]   text-maritime-darkest'>
                 <MagazineInlineTitle text={step.title} />
               </h3>
-              <p className='mt-3 font-utekos-text text-base leading-[1.55] tracking-tight text-maritime-darkest/76'>
-                {step.text}
-              </p>
+              <p className='mt-3   text-base leading-[1.55]   text-maritime-darkest/76'>{step.text}</p>
             </div>
           </li>
         ))}

@@ -251,7 +251,7 @@ export function TerrasseCarousel() {
           <BrandBadge
             backgroundColor='var(--ancient-water)'
             textColor='var(--maritime-darkest)'
-            className='gsap-header mb-4 gap-2 border border-ancient-water/52 px-4 py-2 text-sm leading-[1.4] font-base tracking-tight opacity-0'
+            className='gsap-header mb-4 gap-2 border border-ancient-water/52 px-4 py-2 text-sm leading-[1.4] font-base   opacity-0'
           >
             <Camera className='size-4' aria-hidden='true' />
             <span className='inline-flex items-baseline gap-[0.28em] leading-none'>
@@ -294,8 +294,8 @@ export function TerrasseCarousel() {
                 ))}
               </CarouselContent>
 
-              <CarouselPrevious className='left-4 border-cloud-dancer/14 bg-maritime-darkest/78 text-cloud-dancer backdrop-blur-md hover:bg-havdyp focus-visible:ring-primary-button/70' />
-              <CarouselNext className='right-4 border-cloud-dancer/14 bg-maritime-darkest/78 text-cloud-dancer backdrop-blur-md hover:bg-havdyp focus-visible:ring-primary-button/70' />
+              <CarouselPrevious className='left-4 border-cloud-dancer/14 bg-maritime-darkest/78 text-cloud-dancer backdrop-blur-md hover:bg-havdyp focus-visible:ring-primary/70' />
+              <CarouselNext className='right-4 border-cloud-dancer/14 bg-maritime-darkest/78 text-cloud-dancer backdrop-blur-md hover:bg-havdyp focus-visible:ring-primary/70' />
             </Carousel>
 
             <div className='mt-8 flex items-center justify-center gap-2'>
@@ -305,10 +305,8 @@ export function TerrasseCarousel() {
                   type='button'
                   onClick={() => api.scrollTo(index)}
                   className={cn(
-                    'h-1.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest motion-reduce:transition-none',
-                    current === index + 1 ?
-                      'w-6 bg-primary-button'
-                    : 'w-1.5 bg-overcast hover:bg-cloud-dancer'
+                    'h-1.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest motion-reduce:transition-none',
+                    current === index + 1 ? 'w-6 bg-primary' : 'w-1.5 bg-overcast hover:bg-cloud-dancer'
                   )}
                   aria-current={current === index + 1 ? 'true' : undefined}
                   aria-label={`Gå til bilde ${index + 1}`}

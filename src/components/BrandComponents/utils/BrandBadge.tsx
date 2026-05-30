@@ -15,7 +15,7 @@ interface BrandBadgeProps extends HTMLAttributes<HTMLSpanElement> {
 export default function BrandBadge({
   label,
   asChild = false,
-  backgroundColor = 'var(--primary-button)',
+  backgroundColor = 'var(--primary)',
   textColor = 'var(--maritime-darkest)',
   className = '',
   children,

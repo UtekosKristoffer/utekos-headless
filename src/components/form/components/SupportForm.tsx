@@ -28,7 +28,7 @@ type ContactFormData = z.infer<typeof ClientContactFormSchema>
 
 const initialState: ContactFormState = { message: '' }
 const contactFieldClassName =
-  'h-12 rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal placeholder:text-havdyp focus-visible:border-primary-button focus-visible:ring-primary-button/35'
+  'h-12 rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal placeholder:text-havdyp focus-visible:border-primary focus-visible:ring-primary/35'
 
 export function SupportForm() {
   const [state, formAction, isPending] = useActionState(submitContactForm, initialState)
@@ -156,7 +156,7 @@ export function SupportForm() {
                 <FormControl>
                   <div>
                     <input type='hidden' name={field.name} value={field.value ?? ''} />
-                    <SelectTrigger className='h-12 w-full rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal focus-visible:border-primary-button focus-visible:ring-primary-button/35 data-[placeholder]:text-havdyp [&_svg:not([class*=text-])]:text-havdyp'>
+                    <SelectTrigger className='h-12 w-full rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal focus-visible:border-primary focus-visible:ring-primary/35 data-[placeholder]:text-havdyp [&_svg:not([class*=text-])]:text-havdyp'>
                       <SelectValue placeholder='Velg ditt land' />
                     </SelectTrigger>
                   </div>
@@ -214,7 +214,7 @@ export function SupportForm() {
                         form.clearErrors('message')
                       }
                     }}
-                    className='min-h-[160px] rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal placeholder:text-havdyp focus-visible:border-primary-button focus-visible:ring-primary-button/35'
+                    className='min-h-[160px] rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal placeholder:text-havdyp focus-visible:border-primary focus-visible:ring-primary/35'
                   />
                 </FormControl>
                 <div className='mt-1 flex items-center justify-between text-xs leading-[1.45] tracking-normal text-overcast'>
@@ -260,7 +260,7 @@ export function SupportForm() {
                   <Switch
                     checked={!!field.value}
                     onCheckedChange={field.onChange}
-                    className='border border-cloud-dancer/15 data-[state=checked]:bg-primary-button data-[state=unchecked]:bg-havdyp focus-visible:ring-primary-button/35'
+                    className='border border-cloud-dancer/15 data-[state=checked]:bg-primary data-[state=unchecked]:bg-havdyp focus-visible:ring-primary/35'
                   />
                 </div>
               </FormControl>

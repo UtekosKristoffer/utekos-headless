@@ -71,7 +71,7 @@ export function ComfyrobeFeatureSection() {
                     <BrandBadge
                       backgroundColor='var(--fjellnatt)'
                       textColor='var(--cloud-dancer)'
-                      className='mb-5 gap-2 border border-cloud-dancer/18 px-4 py-2 font-utekos-text text-sm font-medium tracking-tight shadow-[0_16px_34px_-28px_color-mix(in_oklch,var(--bleached-mauve)_68%,transparent)]'
+                      className='mb-5 gap-2 border border-cloud-dancer/18 px-4 py-2   text-sm font-medium   shadow-[0_16px_34px_-28px_color-mix(in_oklch,var(--bleached-mauve)_68%,transparent)]'
                     >
                       <Wind className='size-4 text-cloud-dancer' aria-hidden='true' />
                       <span>Comfyrobe™</span>
@@ -81,7 +81,7 @@ export function ComfyrobeFeatureSection() {
                   <AnimatedBlock className='will-animate-fade-in-up' delay='0.05s'>
                     <h2
                       id='comfyrobe-feature-heading'
-                      className='max-w-2xl text-balance font-google-sans text-3xl font-bold leading-[0.95] tracking-tight text-cloud-dancer sm:text-4xl lg:text-5xl'
+                      className='max-w-2xl text-balance font-google-sans text-3xl font-bold leading-[0.95]   text-cloud-dancer sm:text-4xl lg:text-5xl'
                     >
                       Forleng utekosen.
                       <br />
@@ -90,7 +90,7 @@ export function ComfyrobeFeatureSection() {
                   </AnimatedBlock>
 
                   <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s'>
-                    <p className='mt-6 max-w-2xl font-utekos-text text-lg leading-[1.45] tracking-tight text-cloud-dancer/88'>
+                    <p className='mt-6 max-w-2xl   text-lg leading-[1.45]   text-cloud-dancer/88'>
                       Comfyrobe™ er den ultimate allværskåpen for livsnyteren. Den kombinerer den urokkelige
                       beskyttelsen til en teknisk skalljakke med den komfortable omfavnelsen av din mykeste
                       badekåpe.
@@ -109,7 +109,7 @@ export function ComfyrobeFeatureSection() {
                           delay={`${0.2 + index * 0.1}s`}
                         >
                           <article
-                            className='group relative overflow-hidden rounded-[1.05rem] border p-4 font-utekos-text tracking-tight shadow-[0_18px_44px_-36px_color-mix(in_oklch,var(--maritime-darkest)_86%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+                            className='group relative overflow-hidden rounded-[1.05rem] border p-4     shadow-[0_18px_44px_-36px_color-mix(in_oklch,var(--maritime-darkest)_86%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
                             style={
                               {
                                 '--feature-accent': surface.iconColor,
@@ -142,12 +142,12 @@ export function ComfyrobeFeatureSection() {
                                   />
                                 </div>
 
-                                <h3 className='text-base font-semibold leading-[1.2] tracking-tight text-cloud-dancer'>
+                                <h3 className='text-base font-semibold leading-[1.2]   text-cloud-dancer'>
                                   {feature.title}
                                 </h3>
                               </div>
 
-                              <p className='mt-3 text-sm leading-[1.45] tracking-tight text-cloud-dancer/78 sm:mt-2'>
+                              <p className='mt-3 text-sm leading-[1.45]   text-cloud-dancer/78 sm:mt-2'>
                                 {feature.description}
                               </p>
                             </div>
@@ -159,15 +159,15 @@ export function ComfyrobeFeatureSection() {
 
                   <AnimatedBlock className='will-animate-fade-in-up' delay='0.5s'>
                     <div className='mt-8 flex w-full flex-col items-start gap-4 sm:flex-row sm:items-center'>
-                      <p className='font-google-sans text-4xl font-bold leading-none tracking-tight text-cloud-dancer'>
+                      <p className='font-google-sans text-4xl font-bold leading-none   text-cloud-dancer'>
                         NOK 990,-
                       </p>
 
                       <BrandBadge
                         asChild
-                        backgroundColor='var(--primary-button)'
+                        backgroundColor='var(--primary)'
                         textColor='var(--maritime-darkest)'
-                        className='group min-h-12 w-full gap-2 whitespace-normal border border-primary-button/35 px-6 py-3 font-utekos-text text-base font-semibold leading-[1.35] tracking-tight shadow-[0_18px_40px_-28px_color-mix(in_oklch,var(--primary-button)_70%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-button/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto sm:whitespace-nowrap'
+                        className='group min-h-12 w-full gap-2 whitespace-normal border border-primary/35 px-6 py-3   text-base font-semibold leading-[1.35]   shadow-[0_18px_40px_-28px_color-mix(in_oklch,var(--primary)_70%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto sm:whitespace-nowrap'
                       >
                         <Link href='/produkter/comfyrobe' data-track='ComfyrobeExploreProductPageClick'>
                           Utforsk Comfyrobe™

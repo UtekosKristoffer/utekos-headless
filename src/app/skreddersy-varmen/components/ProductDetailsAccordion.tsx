@@ -12,11 +12,12 @@ const styles = {
     'font-google-sans text-left text-lg font-semibold text-maritime-darkest hover:text-havdyp hover:no-underline [&>svg]:text-maritime-darkest md:text-xl',
   content: 'space-y-6 p-2',
   blockTitle: 'mb-1 text-base font-semibold text-maritime-darkest',
-  blockText: 'text-sm font-utekos-text leading-[1.45] text-maritime-darkest/90',
+  blockText: 'text-sm leading-relaxed tracking-normal text-maritime-darkest/90',
   groupTitle:
-    'mb-3 border-b border-maritime-darkest/60 pb-1 font-utekos-text text-base font-semibold leading-[1.4] tracking-tight text-maritime-darkest',
-  list: 'list-inside list-disc space-y-1 text-sm font-utekos-text text-maritime-darkest/90',
-  callout: 'rounded-2xl border border-cloud-dancer/15 bg-havdyp p-4 text-sm leading-[1.45] text-cloud-dancer'
+    'mb-3 border-b border-maritime-darkest/60 pb-1   text-base font-semibold leading-relaxed tracking-normal text-maritime-darkest',
+  list: 'list-inside list-disc space-y-1 text-sm   text-maritime-darkest/90',
+  callout:
+    'rounded-2xl border border-cloud-dancer/15 bg-havdyp p-4 text-sm leading-relaxed tracking-normal text-cloud-dancer'
 } as const
 
 type FeatureIconKey = 'leaf' | 'shield' | 'waves'
@@ -44,7 +45,7 @@ type ProductDetailsContent = {
 
 const productDetailsByModel: Record<ModelKey, ProductDetailsContent> = {
   'utekos-techdown': {
-    heading: 'Produktdetaljer om Utekos TechDown™',
+    heading: 'Produktdetaljer',
     materials: [
       { label: 'Skallstoff', value: 'Luméa™' },
       { label: 'Isolasjon', value: 'CloudWave™' },
@@ -125,7 +126,7 @@ const productDetailsByModel: Record<ModelKey, ProductDetailsContent> = {
     }
   },
   'utekos-mikrofiber': {
-    heading: 'Produktdetaljer om Utekos Mikrofiber™',
+    heading: 'Produktdetaljer',
     materials: [
       { label: 'Innerfôr', value: 'Taffeta' },
       { label: 'Skallstoff', value: 'DuraLite™ Nylon' },

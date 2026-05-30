@@ -33,7 +33,7 @@ export function ComparisonTable() {
                 className='p-5 align-top font-google-sans text-base font-bold leading-[1.05] tracking-[-0.01em] text-havdyp'
               >
                 <span>{row.feature}</span>
-                <span className='mt-2 block font-utekos-text text-xs font-medium leading-[1.35] tracking-tight text-havdyp/62'>
+                <span className='mt-2 block   text-xs font-medium leading-[1.35]   text-havdyp/62'>
                   {row.shortAnswer}
                 </span>
               </th>

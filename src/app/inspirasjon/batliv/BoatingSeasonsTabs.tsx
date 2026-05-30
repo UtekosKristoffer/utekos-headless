@@ -21,8 +21,8 @@ const seasons = [
     value: 'summer',
     label: 'Sommer',
     icon: Sun,
-    iconColor: 'text-primary-button',
-    glowColor: 'var(--primary-button)',
+    iconColor: 'text-primary',
+    glowColor: 'var(--primary)',
     title: 'Når solen har gått ned',
     description:
       'Ikke la gåsehuden jage deg under dekk. Forleng de magiske sommerkveldene i cockpiten eller på flybridgen.'

@@ -46,9 +46,9 @@ export function ProductCardFooter({
         {isAvailable ?
           <BrandBadge
             asChild
-            backgroundColor='var(--primary-button)'
+            backgroundColor='var(--primary)'
             textColor='var(--maritime-darkest)'
-            className={`${actionBadgeClassName} border-primary-button/35 hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-primary-button`}
+            className={`${actionBadgeClassName} border-primary/35 hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-primary`}
           >
             <button
               type='button'

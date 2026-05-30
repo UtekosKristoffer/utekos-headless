@@ -89,10 +89,7 @@ export function ProductCareGeneralGuide() {
   return (
     <section aria-labelledby='generell-guide-heading' className='mx-auto mt-16 max-w-4xl scroll-mt-24'>
       <div className='mb-10 text-center'>
-        <h2
-          id='generell-guide-heading'
-          className='text-2xl font-bold tracking-tight text-maritime-darkest sm:text-3xl'
-        >
+        <h2 id='generell-guide-heading' className='text-2xl font-bold   text-maritime-darkest sm:text-3xl'>
           Slik tar du vare på plagget
         </h2>
         <p className='mx-auto mt-3 max-w-2xl text-base text-maritime-darkest/76'>
@@ -115,10 +112,8 @@ export function ProductCareGeneralGuide() {
                 <Icon className='size-5 sm:size-[1.375rem]' />
               </span>
               <div className='min-w-0 flex-1'>
-                <p className='text-xs font-medium tracking-tight text-maritime-darkest/62'>{step}</p>
-                <h3 className='mt-1 text-xl font-semibold tracking-tight text-maritime-darkest sm:text-2xl'>
-                  {title}
-                </h3>
+                <p className='text-xs font-medium   text-maritime-darkest/62'>{step}</p>
+                <h3 className='mt-1 text-xl font-semibold   text-maritime-darkest sm:text-2xl'>{title}</h3>
                 <div className='mt-3 space-y-3 text-base leading-relaxed text-maritime-darkest/82'>
                   {content}
                 </div>

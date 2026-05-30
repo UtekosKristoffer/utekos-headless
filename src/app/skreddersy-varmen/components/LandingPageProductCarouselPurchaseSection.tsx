@@ -63,14 +63,14 @@ export function LandingPageProductCarouselPurchaseSection({
             <CarouselPrevious
               aria-label='Forrige bilde'
               className={cn(
-                'left-2 size-10 border-maritime-darkest/15 bg-cloud-dancer/90 text-maritime-darkest shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-primary-button md:left-4 md:size-11',
+                'left-2 size-10 border-maritime-darkest/15 bg-cloud-dancer/90 text-maritime-darkest shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-primary md:left-4 md:size-11',
                 focusRing
               )}
             />
             <CarouselNext
               aria-label='Neste bilde'
               className={cn(
-                'right-2 size-10 border-maritime-darkest/15 bg-cloud-dancer/90 text-maritime-darkest shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-primary-button md:right-4 md:size-11',
+                'right-2 size-10 border-maritime-darkest/15 bg-cloud-dancer/90 text-maritime-darkest shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-primary md:right-4 md:size-11',
                 focusRing
               )}
             />

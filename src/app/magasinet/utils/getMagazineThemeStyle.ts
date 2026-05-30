@@ -7,7 +7,7 @@ const accentTokenByName = {
   'dusted-peri': 'var(--dusted-peri)',
   'mountain-view': 'var(--mountain-view)',
   'overcast': 'var(--overcast)',
-  'primary-button': 'var(--primary-button)'
+  'primary': 'var(--primary)'
 } satisfies Record<MagazineArticle['theme']['accent'], string>
 
 export function getMagazineThemeStyle(theme: MagazineArticle['theme']): CSSProperties {

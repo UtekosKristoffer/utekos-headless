@@ -25,9 +25,9 @@ export default function TechTeaserSection() {
               </div>
 
               <div className='space-y-6'>
-                <h2 className='gsap-content text-4xl font-bold tracking-tight text-cloud-dancer sm:text-5xl md:text-6xl'>
+                <h2 className='gsap-content text-4xl font-bold   text-cloud-dancer sm:text-5xl md:text-6xl'>
                   Vitenskapen bak <br />
-                  <span className='text-transparent bg-clip-text bg-gradient-to-r from-primary-button via-yellow-500 to-primary-button'>
+                  <span className='text-transparent bg-clip-text bg-gradient-to-r from-primary via-yellow-500 to-primary'>
                     din komfort
                   </span>
                 </h2>
@@ -129,7 +129,7 @@ export default function TechTeaserSection() {
                         <div className='h-1 w-8 rounded-full bg-chocolate-plum' />
                       </div>
 
-                      <h3 className='text-3xl font-bold text-cloud-dancer tracking-tight'>SherpaCore™</h3>
+                      <h3 className='text-3xl font-bold text-cloud-dancer  '>SherpaCore™</h3>
                       <p className='text-sm font-medium text-ancient-water'>Thermal Lining System</p>
                     </div>
                   </div>

@@ -18,7 +18,7 @@ export function NewProductInStoreNoticeView({
   mapsUrl
 }: NewProductInStoreNoticeViewProps) {
   return (
-    <section className='my-24 w-full py-12'>
+    <article className='my-24 w-full py-12'>
       <div className='container mx-auto max-w-6xl px-4 md:max-w-7xl'>
         <div
           ref={containerRef}
@@ -34,7 +34,6 @@ export function NewProductInStoreNoticeView({
 
           <div className='flex flex-col items-center gap-8 text-center'>
             <div className='relative flex h-32 w-full items-center justify-center overflow-visible'>
-              {/* Particles Container */}
               <div className='absolute left-1/2 top-1/2 z-0 flex h-1 w-1 -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-visible'>
                 {[...Array(5)].map((_, i) => (
                   <div
@@ -76,11 +75,11 @@ export function NewProductInStoreNoticeView({
 
             {/* Content */}
             <div ref={contentRef} className='flex flex-col items-center gap-6'>
-              <h2 className='text-balance text-havdyp'>På plass hos Intersport Laksevåg!</h2>
+              <h2 className='text-havdyp'>På plass hos Intersport Laksevåg!</h2>
 
-              <p className='max-w-4xl text-balance text-lg leading-relaxed font-utekos-text text-maritime-darkest/90'>
+              <p className='max-w-4xl text-maritime-darkest'>
                 Nå kan du se, prøve og kjenne på vår splitter nye{' '}
-                <strong className='text-havdyp font-utekos-text font-bold'>Utekos TechDown™</strong> hos våre
+                <strong className='text-maritime-darkest font-semibold'>Utekos TechDown™</strong> hos våre
                 gode venner på Intersport Laksevåg. Ta turen innom for å bli en av de første som får oppleve
                 den neste generasjonen av Utekos!
               </p>
@@ -88,7 +87,7 @@ export function NewProductInStoreNoticeView({
               <Button
                 asChild
                 size='lg'
-                className='group my-4 h-12 font-utekos-text tracking-tight text-cloud-dancer bg-havdyp rounded-full px-8 text-base'
+                className='group my-4 h-12 text-cloud-dancer bg-havdyp rounded-full px-8 text-base'
               >
                 {/* FIX: Caster string til Route for å tilfredsstille Typed Routes */}
                 <Link href={mapsUrl as Route} target='_blank'>
@@ -99,6 +98,6 @@ export function NewProductInStoreNoticeView({
           </div>
         </div>
       </div>
-    </section>
+    </article>
   )
 }

@@ -81,12 +81,8 @@ export function SocialProof() {
                     />
                   </AspectRatio>
                   <div className='pt-4 text-left'>
-                    <h3 className='font-semibold font-google-sans leading-[1.45] tracking-tight'>
-                      {image.title}
-                    </h3>
-                    <p className='text-sm leading-[1.15] font-utekos-text tracking-tight text-maritime-darkest'>
-                      {image.description}
-                    </p>
+                    <h3 className='font-semibold font-google-sans leading-[1.45]  '>{image.title}</h3>
+                    <p className='text-sm leading-[1.15]     text-maritime-darkest'>{image.description}</p>
                   </div>
                 </div>
               </CarouselItem>
