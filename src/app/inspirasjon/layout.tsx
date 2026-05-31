@@ -16,9 +16,12 @@ interface InspirasjonLayoutProps {
 export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) {
   return (
     <article className='w-full border-white'>
-      <section aria-label='Betalingsinformasjon fra Klarna' className='border-b mx-auto h-hull py-4 w-full min-w-full max-w-full! border-background/10'>
+      <section
+        aria-label='Betalingsinformasjon fra Klarna'
+        className='border-b mx-auto h-full py-4 my-0! w-full min-w-full max-w-full! border-background/10'
+      >
         <KlarnaOnSiteMessagingScript />
-          <KlarnaTopStripPromotionBadge />
+        <KlarnaTopStripPromotionBadge />
       </section>
       {children}
       <Activity>
