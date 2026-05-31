@@ -15,10 +15,10 @@ interface InspirasjonLayoutProps {
 
 export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) {
   return (
-    <article className='w-full'>
-      <section aria-label='Betalingsinformasjon fra Klarna' className='border-b mx-auto w-full min-w-full! max-w-full! border-background/10'>
+    <article className='w-full border-white'>
+      <section aria-label='Betalingsinformasjon fra Klarna' className='border-b mx-auto py-4 w-full min-w-full max-w-full! border-background/10'>
         <KlarnaOnSiteMessagingScript />
-        <div className='container mx-aut w-full min-w-full! max-w-full!'>
+        <div className='container mx-aut w-full min-w-full max-w-full!'>
           <KlarnaTopStripPromotionBadge />
         </div>
       </section>
