@@ -10,7 +10,6 @@ export function KlarnaInfoPagePlacement() {
     <klarna-placement
       data-key='info-page'
       data-locale='no-NO'
-      data-theme='dark'
     ></klarna-placement>
   )
 }

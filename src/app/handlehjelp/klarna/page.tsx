@@ -21,23 +21,11 @@ export const metadata: Metadata = {
 
 export default function KlarnaHelpPage() {
   return (
-    <main className='bg-cloud-dancer text-havdyp'>
+    <article className='bg-foreground  w-full min-w-full max-w-full!  text-background'>
       <KlarnaOnSiteMessagingScript />
-      <section className='container mx-auto max-w-5xl px-4 py-16 sm:py-24'>
-        <div className='mx-auto max-w-3xl text-center'>
-          <p className='text-sm font-semibold uppercase tracking-normal text-background'>Betaling</p>
-          <h1 className='mt-3 text-4xl font-bold leading-[0.95] tracking-normal text-background sm:text-5xl'>
-            Betaling med Klarna
-          </h1>
-        </div>
-
-        <section
-          aria-label='Betalingsinformasjon fra Klarna'
-          className='mt-10 overflow-hidden rounded-lg border border-background/12 bg-white p-4 shadow-[0_18px_46px_-36px_rgba(14,18,35,0.48)] sm:p-6'
-        >
+      <section aria-label='Betalingsinformasjon fra Klarna' className='container mx-auto px-4 py-16 sm:py-24'>
           <KlarnaInfoPagePlacement />
-        </section>
       </section>
-    </main>
+    </article>
   )
 }
