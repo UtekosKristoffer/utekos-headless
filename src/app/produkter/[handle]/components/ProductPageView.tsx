@@ -517,15 +517,15 @@ export function ProductPageView({
             </AnimatedBlock>
 
             <AnimatedBlock className='will-animate-fade-in-right' delay='0.13s'>
-              <section
+              <div
                 aria-label='Betalingsinformasjon fra Klarna'
-                className='mt-4 overflow-hidden rounded-lg border border-background/10 bg-white px-4 py-3 shadow-[0_16px_38px_-34px_rgba(14,18,35,0.5)]'
+                className='mt-4 py-4 bg-background overflow-hidden'
               >
                 <KlarnaCreditPromotionAutoSize
                   id={`klarna-credit-promotion-${productData.handle}`}
                   purchaseAmount={klarnaPurchaseAmount}
                 />
-              </section>
+              </div>
             </AnimatedBlock>
 
             <AnimatedBlock className='will-animate-fade-in-right' delay='0.16s'>

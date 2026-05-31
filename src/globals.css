@@ -206,7 +206,7 @@
   --tracking-3: var(--tracking-3); /* Light-snug body copy (-1.5%) */
   --tracking-4: var(--tracking-4); /* Utekos's max tight limit for headlines (-1%) */
   --tracking-5: var(--tracking-normal); /* Completely neutral/standard default */
-  --background: oklch(0.1996 0.0201 279.96);
+  --background: oklch(0.1442 0.0511 291.62);
   --border: oklch(0.7034 0.198 45.92);
   --ring: oklch(0.2884 0.0366 279.42);
   --tracking-medium: var(--tracking-medium);
@@ -331,7 +331,6 @@
     transform: translate(-5px, -3px);
   }
 }
-
 
 @keyframes chip-pulse {
   0%,
