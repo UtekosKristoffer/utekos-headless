@@ -18,12 +18,12 @@ export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) 
     <article className='w-full border-white'>
       <section
         aria-label='Betalingsinformasjon fra Klarna'
-        className='border-b mx-auto h-full py-4 my-0! w-full min-w-full max-w-full! border-background/10'
+        className='border-b mx-auto h-full py-4 w-full min-w-full -my-2! max-w-full! border-background/10'
       >
         <KlarnaOnSiteMessagingScript />
         <KlarnaTopStripPromotionBadge />
       </section>
-      {children}
+      s{children}
       <Activity>
         <section className='border-t border-chocolate-plum/35 bg-overcast py-16'>
           <div className='container mx-auto px-4'>
