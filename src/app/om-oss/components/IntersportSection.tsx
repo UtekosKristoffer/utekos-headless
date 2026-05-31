@@ -114,7 +114,7 @@ export function IntersportSection() {
   return (
     <section
       ref={sectionRef}
-      className='relative isolate w-full overflow-hidden bg-maritime-darkest px-4 py-24 sm:py-32'
+      className='relative isolate w-full overflow-hidden bg-background px-4 py-24 sm:py-32'
     >
       <div className='pointer-events-none absolute inset-0 -z-10'>
         <div className='absolute left-[8%] top-16 size-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_22%,transparent)_0%,transparent_72%)] blur-3xl' />
@@ -172,16 +172,14 @@ export function IntersportSection() {
             <div className='flex flex-col items-start text-left'>
               <BrandBadge
                 backgroundColor='var(--dusted-peri)'
-                textColor='var(--maritime-darkest)'
+                textColor='var(--background)'
                 className='gsap-content mb-8 gap-3 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
               >
                 <span className='relative flex size-3'>
-                  <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-maritime-darkest opacity-35'></span>
-                  <span className='relative inline-flex size-3 rounded-full bg-maritime-darkest'></span>
+                  <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-background opacity-35'></span>
+                  <span className='relative inline-flex size-3 rounded-full bg-background'></span>
                 </span>
-                <span className='  text-base font-medium   text-maritime-darkest'>
-                  Fysisk butikk i Bergen
-                </span>
+                <span className='  text-base font-medium   text-background'>Fysisk butikk i Bergen</span>
               </BrandBadge>
 
               <h2 className='gsap-content mb-6 flex flex-col text-balance text-3xl leading-[0.95] font-bold tracking-[-0.01em] text-cloud-dancer md:text-5xl'>
@@ -202,7 +200,7 @@ export function IntersportSection() {
                 <Button
                   asChild
                   size='lg'
-                  className='group h-14 rounded-full border-0 bg-primary px-8 text-base text-maritime-darkest shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--primary)_90%,transparent)] transition-all duration-300 hover:bg-primary/88 hover:shadow-[0_18px_54px_-24px_color-mix(in_oklab,var(--primary)_90%,transparent)]'
+                  className='group h-14 rounded-full border-0 bg-primary px-8 text-base text-background shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--primary)_90%,transparent)] transition-all duration-300 hover:bg-primary/88 hover:shadow-[0_18px_54px_-24px_color-mix(in_oklab,var(--primary)_90%,transparent)]'
                 >
                   <Link
                     href={INTERSPORT_LAKSEVAG_MAPS_URL}

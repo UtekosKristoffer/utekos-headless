@@ -1,10 +1,8 @@
 export function SpecRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className='flex justify-between gap-2 border-b border-maritime-darkest/12 pb-1 last:border-0 md:justify-start'>
-      <span className='w-32 shrink-0 font-semibold text-maritime-darkest'>
-        {label}:
-      </span>
-      <span className='text-maritime-darkest/82'>{value}</span>
+    <div className='flex justify-between gap-2 border-b border-background/12 pb-1 last:border-0 md:justify-start'>
+      <span className='w-32 shrink-0 font-semibold text-background'>{label}:</span>
+      <span className='text-background/82'>{value}</span>
     </div>
   )
 }

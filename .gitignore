@@ -57,8 +57,6 @@ playwright-mcp/
 /claude
 /gemini
 /context7
-/cursor
-/.cursor
 /AGENTS
 /skills-lock.json
 copilot-instructions.md
@@ -70,8 +68,6 @@ copilot-instructions.md
 /components.json
 */components.json
 components.json
-.cursor/
-/.cursor/
 .vscode/
 /.vscode/
 .vscode/settings.json
@@ -154,6 +150,7 @@ env
 next-env.d.ts
 
 # docs
+/src/components/klarna/dev/docs/
 /md-docs
 /documentation
 /prompt-docs

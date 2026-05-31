@@ -15,24 +15,24 @@ const useCaseSurfaces = {
   morning: {
     borderColor: 'color-mix(in oklch, var(--primary) 28%, transparent)',
     background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--maritime-darkest) 84%, var(--primary) 16%) 0%, color-mix(in oklch, var(--havdyp) 76%, var(--maritime-darkest) 24%) 100%)',
-    iconBackground: 'color-mix(in oklch, var(--primary) 18%, var(--maritime-darkest) 82%)',
+      'linear-gradient(145deg, color-mix(in oklch, var(--background) 84%, var(--primary) 16%) 0%, color-mix(in oklch, var(--havdyp) 76%, var(--background) 24%) 100%)',
+    iconBackground: 'color-mix(in oklch, var(--primary) 18%, var(--background) 82%)',
     iconBorder: 'color-mix(in oklch, var(--primary) 34%, transparent)',
     glow: 'radial-gradient(120% 120% at 50% 0%, transparent 34%, color-mix(in oklch, var(--primary) 40%, transparent) 100%)'
   },
   evening: {
     borderColor: 'color-mix(in oklch, var(--dusted-peri) 34%, transparent)',
     background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--maritime-darkest) 82%, var(--dusted-peri) 18%) 0%, color-mix(in oklch, var(--havdyp) 78%, var(--maritime-darkest) 22%) 100%)',
-    iconBackground: 'color-mix(in oklch, var(--dusted-peri) 18%, var(--maritime-darkest) 82%)',
+      'linear-gradient(145deg, color-mix(in oklch, var(--background) 82%, var(--dusted-peri) 18%) 0%, color-mix(in oklch, var(--havdyp) 78%, var(--background) 22%) 100%)',
+    iconBackground: 'color-mix(in oklch, var(--dusted-peri) 18%, var(--background) 82%)',
     iconBorder: 'color-mix(in oklch, var(--dusted-peri) 36%, transparent)',
     glow: 'radial-gradient(120% 120% at 50% 0%, transparent 34%, color-mix(in oklch, var(--dusted-peri) 42%, transparent) 100%)'
   },
   afternoon: {
     borderColor: 'color-mix(in oklch, var(--ancient-water) 34%, transparent)',
     background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--maritime-darkest) 82%, var(--ancient-water) 18%) 0%, color-mix(in oklch, var(--mountain-view) 32%, var(--maritime-darkest) 68%) 100%)',
-    iconBackground: 'color-mix(in oklch, var(--ancient-water) 16%, var(--maritime-darkest) 84%)',
+      'linear-gradient(145deg, color-mix(in oklch, var(--background) 82%, var(--ancient-water) 18%) 0%, color-mix(in oklch, var(--mountain-view) 32%, var(--background) 68%) 100%)',
+    iconBackground: 'color-mix(in oklch, var(--ancient-water) 16%, var(--background) 84%)',
     iconBorder: 'color-mix(in oklch, var(--ancient-water) 34%, transparent)',
     glow: 'radial-gradient(120% 120% at 50% 0%, transparent 34%, color-mix(in oklch, var(--ancient-water) 38%, transparent) 100%)'
   }
@@ -105,7 +105,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                 delay={`${index * 0.1}s`}
               >
                 <Card
-                  className='@container group relative h-full overflow-hidden border shadow-[0_24px_60px_-44px_color-mix(in_oklch,var(--maritime-darkest)_88%,transparent)]'
+                  className='@container group relative h-full overflow-hidden border shadow-[0_24px_60px_-44px_color-mix(in_oklch,var(--background)_88%,transparent)]'
                   style={{
                     borderColor: surface.borderColor,
                     background: surface.background

@@ -13,9 +13,9 @@ export default async function MagazinePage() {
   const articles = await getMagazineArticles()
 
   return (
-    <main className='bg-overcast text-maritime-darkest'>
+    <main className='bg-overcast text-background'>
       <JsonLdScript data={buildMagazineCollectionJsonLd(articles)} />
-      <section className='border-b border-maritime-darkest/12 bg-overcast'>
+      <section className='border-b border-background/12 bg-overcast'>
         <div className='container mx-auto px-4 py-5'>
           <MagazineBreadcrumbs />
         </div>

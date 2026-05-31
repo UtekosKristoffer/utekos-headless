@@ -3,14 +3,14 @@ export const destinationsData = [
     name: 'Lofoten',
     season: 'Sommer/Høst',
     highlight: 'Midnattssol og nordlys',
-    color: 'text-maritime-darkest',
+    color: 'text-background',
     backgroundColor: '--bleached-mauve-light'
   },
   {
     name: 'Geirangerfjorden',
     season: 'Vår/Sommer',
     highlight: 'Spektakulære fjorder',
-    color: 'text-maritime-darkest',
+    color: 'text-background',
     backgroundColor: '--ancient-water-light'
   },
   {

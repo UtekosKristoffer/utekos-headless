@@ -83,7 +83,7 @@ export const TechDownFeatureSection = () => {
   return (
     <section
       ref={container}
-      className='relative my-24 overflow-hidden rounded-3xl border border-cloud-dancer/10 bg-[linear-gradient(135deg,color-mix(in_oklch,var(--havdyp)_82%,rgba(13,21,31,0.96))_0%,color-mix(in_oklch,var(--maritime-darkest)_92%,rgba(10,16,24,0.98))_52%,color-mix(in_oklch,var(--havdyp)_84%,rgba(13,21,31,0.96))_100%)] py-16 md:my-32 md:py-24'
+      className='relative my-24 overflow-hidden rounded-3xl border border-cloud-dancer/10 bg-[linear-gradient(135deg,color-mix(in_oklch,var(--havdyp)_82%,rgba(13,21,31,0.96))_0%,color-mix(in_oklch,var(--background)_92%,rgba(10,16,24,0.98))_52%,color-mix(in_oklch,var(--havdyp)_84%,rgba(13,21,31,0.96))_100%)] py-16 md:my-32 md:py-24'
     >
       <div className='gsap-glow pointer-events-none absolute -left-[10%] top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-ancient-water/12 blur-[120px]' />
       <div className='gsap-glow pointer-events-none absolute -right-[10%] bottom-0 h-[500px] w-[500px] rounded-full bg-soft-warm/10 blur-[100px]' />
@@ -92,7 +92,7 @@ export const TechDownFeatureSection = () => {
         <div className='gsap-visual w-full'>
           <div className='relative rounded-2xl border border-cloud-dancer/10 bg-cloud-dancer/[0.04] p-2 backdrop-blur-sm shadow-[0_32px_80px_-44px_rgba(8,15,24,0.92)]'>
             <div className='absolute top-4 right-4 z-20 rotate-6 md:-top-4 md:-right-4 md:rotate-3'>
-              <div className='flex h-24 w-24 flex-col items-center justify-center rounded-[2rem] bg-dusted-peri p-4 text-maritime-darkest shadow-[0_20px_45px_-24px_rgba(32,28,54,0.58)] ring-1 ring-maritime-darkest/8'>
+              <div className='flex h-24 w-24 flex-col items-center justify-center rounded-[2rem] bg-dusted-peri p-4 text-background shadow-[0_20px_45px_-24px_rgba(32,28,54,0.58)] ring-1 ring-background/8'>
                 <span className='text-xs font-bold'>Kun</span>
                 <span className='text-xl font-bold  '>1790,-</span>
               </div>
@@ -117,8 +117,8 @@ export const TechDownFeatureSection = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className='left-4 border-cloud-dancer/12 bg-maritime-darkest/72 text-cloud-dancer backdrop-blur-md hover:bg-maritime-darkest/88 hover:text-overcast' />
-              <CarouselNext className='right-4 border-cloud-dancer/12 bg-maritime-darkest/72 text-cloud-dancer backdrop-blur-md hover:bg-maritime-darkest/88 hover:text-overcast' />
+              <CarouselPrevious className='left-4 border-cloud-dancer/12 bg-background/72 text-cloud-dancer backdrop-blur-md hover:bg-background/88 hover:text-overcast' />
+              <CarouselNext className='right-4 border-cloud-dancer/12 bg-background/72 text-cloud-dancer backdrop-blur-md hover:bg-background/88 hover:text-overcast' />
             </Carousel>
           </div>
         </div>
@@ -127,19 +127,19 @@ export const TechDownFeatureSection = () => {
           <div className='gsap-content mb-8 flex flex-wrap gap-3'>
             <BrandBadge
               backgroundColor='color-mix(in oklch, var(--ancient-water) 72%, rgba(255,255,255,0.08))'
-              textColor='var(--color-maritime-darkest)'
+              textColor='var(--color-background)'
               className='gsap-pulse-badge gap-2 border border-ancient-water/30 px-4 py-2 text-xs font-semibold tracking-normal shadow-[0_16px_30px_-24px_rgba(201,214,224,0.45)]'
             >
-              <Zap className='h-3.5 w-3.5 fill-current text-maritime-darkest' />
+              <Zap className='h-3.5 w-3.5 fill-current text-background' />
               <span>Vårtilbud</span>
             </BrandBadge>
 
             <BrandBadge
               backgroundColor='var(--color-dusted-peri)'
-              textColor='var(--color-maritime-darkest)'
+              textColor='var(--color-background)'
               className='gap-2 border border-dusted-peri/24 px-4 py-2 text-xs font-semibold tracking-normal shadow-[0_16px_30px_-24px_rgba(32,28,54,0.48)]'
             >
-              <Gift className='h-3.5 w-3.5 text-maritime-darkest' />
+              <Gift className='h-3.5 w-3.5 text-background' />
               <span>Spar kr 200,-</span>
             </BrandBadge>
           </div>
@@ -188,7 +188,7 @@ export const TechDownFeatureSection = () => {
             <BrandBadge
               asChild
               backgroundColor='var(--color-primary)'
-              textColor='var(--color-maritime-darkest)'
+              textColor='var(--color-background)'
               className='group h-14 px-8 text-base     shadow-[0_20px_46px_-28px_rgba(20,30,40,0.56)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-95'
             >
               <Link href='/produkter/utekos-techdown' data-track='TechDownProductPageSectionShopNowClick'>

@@ -6,9 +6,9 @@ import { HeroHighlight } from '../layout/hero/HeroHighlight'
 import type { InspirationHeroFeature } from '../layout/hero/types'
 
 const ICON_SURFACE = 'color-mix(in oklch, var(--cloud-dancer) 38%, transparent)'
-const ICON_BORDER = 'color-mix(in oklch, var(--maritime-darkest) 12%, transparent)'
+const ICON_BORDER = 'color-mix(in oklch, var(--background) 12%, transparent)'
 const CARD_SHADOW = '0 24px 48px -38px rgba(9, 15, 22, 0.42)'
-const DESCRIPTION_COLOR = 'color-mix(in oklch, var(--maritime-darkest) 78%, transparent)'
+const DESCRIPTION_COLOR = 'color-mix(in oklch, var(--background) 78%, transparent)'
 
 const boatingHeroFeatures: readonly InspirationHeroFeature[] = [
   {
@@ -30,7 +30,7 @@ const boatingHeroFeatures: readonly InspirationHeroFeature[] = [
     title: 'Hele kvelden',
     description: 'Forleng tiden på dekk etter solnedgang',
     icon: Waves,
-    iconColor: 'color-mix(in oklch, var(--maritime-darkest) 72%, var(--ancient-water))',
+    iconColor: 'color-mix(in oklch, var(--background) 72%, var(--ancient-water))',
     border: 'color-mix(in oklch, var(--ancient-water) 40%, transparent)',
     surface:
       'linear-gradient(180deg, color-mix(in oklch, var(--ancient-water) 74%, rgba(255, 255, 255, 0.26)) 0%, color-mix(in oklch, var(--ancient-water) 42%, rgba(16, 24, 30, 0.16)) 100%)',
@@ -45,7 +45,7 @@ const boatingHeroFeatures: readonly InspirationHeroFeature[] = [
     title: 'Lengre sesong',
     description: 'Nyt båten fra tidlig vår til sen høst',
     icon: Anchor,
-    iconColor: 'color-mix(in oklch, var(--maritime-darkest) 74%, var(--overcast))',
+    iconColor: 'color-mix(in oklch, var(--background) 74%, var(--overcast))',
     border: 'color-mix(in oklch, var(--overcast) 42%, transparent)',
     surface:
       'linear-gradient(180deg, color-mix(in oklch, var(--overcast) 78%, rgba(255, 255, 255, 0.28)) 0%, color-mix(in oklch, var(--overcast) 46%, rgba(18, 24, 29, 0.14)) 100%)',
@@ -91,7 +91,7 @@ export function BoatingHeroSection() {
         <InspirationHeroBreadcrumb
           label='Båtliv'
           color='var(--dusted-peri)'
-          textColor='var(--maritime-darkest)'
+          textColor='var(--background)'
           icon={Anchor}
         />
       }

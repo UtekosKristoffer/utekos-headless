@@ -1,4 +1,4 @@
-// Path: types/window.d.ts
+import type { KlarnaPaymentsButtons } from 'klarna-payments-sdk'
 
 declare global {
   interface Window {
@@ -16,10 +16,12 @@ declare global {
       version?: string
       queue?: unknown[]
     }
+
     _fbq?: Window['fbq']
+
     dataLayer: unknown[]
+
     gtag?: (command: string, action: string, params?: Record<string, unknown>) => void
-    snaptr?: (method: string, eventType: string, data?: Record<string, string | number | string[]>) => void
 
     pintrk?: {
       (method: 'load', tagId: string, userData?: Record<string, unknown>): void
@@ -30,27 +32,22 @@ declare global {
       version: string
       loaded?: boolean
     }
-    ttq?: {
-      load: (id: string) => void
-      page: () => void
-      track: (event: string, params?: Record<string, unknown>, options?: { event_id?: string }) => void
-      identify: (data: { email?: string; phone?: string; external_id?: string }) => void
-      instance: (id: string) => unknown
-      on: (event: string, callback: () => void) => void
-      off: (event: string, callback: () => void) => void
-      methods: string[]
-      setAndDefer: (target: unknown, method: string) => void
-      _i: Record<string, unknown>
-      _t: Record<string, number>
-      _o: Record<string, unknown>
-    }
+
     uetq?:
       | Array<string | Record<string, unknown>>
       | {
           push: (...items: Array<string | Record<string, unknown>>) => number | void
         }
+
     uet_report_conversion?: (productId: string | string[], revenueValue: number, currency?: string) => void
-    TiktokAnalyticsObject?: string
+
+    klarnaAsyncCallback?: () => void
+
+    Klarna?: {
+      Payments?: {
+        Buttons?: KlarnaPaymentsButtons
+      }
+    }
   }
 }
 

@@ -89,20 +89,20 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
     })
   }
 
-  const productTitle = line.merchandise.product?.title || 'Produkt'
-  const productHandle = line.merchandise.product?.handle
+  const productTitle: string = line.merchandise.product?.title || 'Produkt'
+  const productHandle: string = line.merchandise.product?.handle
 
-  const variantId = line.merchandise.id
-  const baseUrl = productHandle ? `/produkter/${productHandle}` : '/'
-  const variantQuery = variantId ? `?variant=${encodeURIComponent(variantId)}` : ''
+  const variantId: string = line.merchandise.id
+  const baseUrl: string = productHandle ? `/produkter/${productHandle}` : '/'
+  const variantQuery: string | number = variantId ? `?variant=${encodeURIComponent(variantId)}` : ''
 
-  const productUrl = `${baseUrl}${variantQuery}` as Route
+  const productUrl: string = `${baseUrl}${variantQuery}` as Route
 
-  const variantTitle = line.merchandise.title || ''
-  const imageUrl = line.merchandise.image?.url
-  const [color, size] = variantTitle.split(' / ')
-  const basePrice = parseFloat(line.cost?.totalAmount?.amount || '0') / line.quantity
-  const displayPrice = basePrice * localQuantity
+  const variantTitle: string = line.merchandise.title || ''
+  const imageUrl: string | undefined = line.merchandise.image?.url
+  const [color, size]: string[] = variantTitle.split(' / ')
+  const basePrice: number = parseFloat(line.cost?.totalAmount?.amount || '0') / line.quantity
+  const displayPrice: number = basePrice * localQuantity
 
   return (
     <div
@@ -110,7 +110,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
         'opacity-50 pointer-events-none': isDeleting
       })}
     >
-      <Link href={productUrl} onClick={() => cartStore.send({ type: 'CLOSE' })}>
+      <Link href={productUrl as Route} onClick={() => cartStore.send({ type: 'CLOSE' })}>
         <div className='w-24 flex-shrink-0'>
           <AspectRatio
             ratio={1 / 1}
@@ -129,7 +129,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
       <div className='flex min-w-0 flex-1 flex-col'>
         <div className='relative'>
           <div className='min-w-0 pr-8'>
-            <Link href={productUrl} onClick={() => cartStore.send({ type: 'CLOSE' })}>
+            <Link href={productUrl as Route} onClick={() => cartStore.send({ type: 'CLOSE' })}>
               <h3 className='break-words text-sm font-medium hover:underline'>{productTitle}</h3>
             </Link>
             {color && size && (
@@ -139,16 +139,16 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
             )}
           </div>
           <div className='absolute -right-2 md:right-0 top-0'>
-            <Activity>
+            
               <AlertDialog>
-                <Activity>
+          
                   <AlertDialogTrigger asChild>
                     <Button variant='ghost' size='icon' className='size-6 p-0' disabled={isDeleting}>
                       <Trash2 className='size-4 text-red-500' />
                     </Button>
                   </AlertDialogTrigger>
-                </Activity>
-                <Activity>
+                
+            
                   <AlertDialogContent>
                     <AlertDialogHeader>
                       <AlertDialogTitle>Er du sikker?</AlertDialogTitle>
@@ -161,6 +161,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
                       <AlertDialogAction
                         onClick={handleRemoveLine}
                         data-track='CartRemoveItem'
+                        className='text-background hover:text-havdyp'
                         data-track-data={JSON.stringify({
                           product: productTitle,
                           variant: variantTitle,
@@ -173,9 +174,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
-                </Activity>
               </AlertDialog>
-            </Activity>
           </div>
         </div>
         <div className='mt-auto flex flex-col items-start gap-2 pt-2 md:flex-row md:items-center md:justify-between md:gap-4'>
@@ -183,7 +182,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
             <Activity>
               <Button
                 size='icon'
-                className='size-7 rounded-md bg-cloud-dancer text-maritime-darkest hover:bg-cloud-dancer/90 transition-transform active:scale-90'
+                className='size-7 rounded-md bg-cloud-dancer text-background hover:bg-cloud-dancer/90 transition-transform active:scale-90'
                 onClick={() => handleUpdateQuantity(localQuantity - 1)}
                 disabled={localQuantity <= 1 || isDeleting}
               >
@@ -196,7 +195,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
             <Activity>
               <Button
                 size='icon'
-                className='size-7 rounded-md bg-cloud-dancer text-maritime-darkest hover:bg-cloud-dancer/90 transition-transform active:scale-90'
+                className='size-7 rounded-md bg-cloud-dancer text-background hover:bg-cloud-dancer/90 transition-transform active:scale-90'
                 onClick={() => handleUpdateQuantity(localQuantity + 1)}
                 disabled={isDeleting || localQuantity >= 99}
               >

@@ -49,8 +49,8 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
     <section id='bruksomrader' className='py-24 bg-overcast'>
       <div className='container mx-auto px-4'>
         <div className='mb-16 text-center'>
-          <h2 className='mx-auto text-maritime-darkest max-w-3xl'>Utekos gjennom båtdøgnet</h2>
-          <p className='mx-auto mt-4 max-w-2xl utekos-section-lead text-maritime-darkest'>
+          <h2 className='mx-auto text-background max-w-3xl'>Utekos gjennom båtdøgnet</h2>
+          <p className='mx-auto mt-4 max-w-2xl utekos-section-lead text-background'>
             Fra soloppgang i uthavn til sene kvelder ved brygga – Utekos holder deg varm.
           </p>
         </div>

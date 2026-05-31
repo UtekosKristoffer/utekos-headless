@@ -40,15 +40,15 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
     <section id='bruksomrader' className='bg-overcast py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-4xl text-center'>
-          <h2 className='inline-flex flex-nowrap items-baseline justify-center gap-x-[0.18em] whitespace-nowrap font-google-sans text-fluid-display font-bold leading-[0.95] tracking-[-0.01em] text-maritime-darkest'>
+          <h2 className='inline-flex flex-nowrap items-baseline justify-center gap-x-[0.18em] whitespace-nowrap font-google-sans text-fluid-display font-bold leading-[0.95] tracking-[-0.01em] text-background'>
             <UtekosWordmark
               className='h-[0.9em] w-auto shrink-0 translate-y-[0.07em]'
-              style={{ color: 'var(--maritime-darkest)' }}
+              style={{ color: 'var(--background)' }}
             />
             <span>gjennom bobildøgnet</span>
           </h2>
 
-          <p className='mx-auto mt-4 max-w-2xl utekos-section-lead text-maritime-darkest'>
+          <p className='mx-auto mt-4 max-w-2xl utekos-section-lead text-background'>
             Fra soloppgang til solnedgang får du varme når turen ber om det.
           </p>
         </div>

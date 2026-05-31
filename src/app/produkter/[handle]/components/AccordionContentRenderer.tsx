@@ -6,7 +6,7 @@ import { renderMetafield } from '../utils/renderMetafield'
 
 export function AccordionContentRenderer({ content }: { content: string }) {
   return (
-    <AccordionContent className='prose relative z-10 max-w-none px-6 pb-6 text-base leading-relaxed text-havdyp/76'>
+    <AccordionContent className='relative z-10 max-w-none px-6 pb-6 text-base leading-relaxed text-maritime-darkest'>
       {renderMetafield(content)}
     </AccordionContent>
   )

@@ -57,7 +57,7 @@ export function VariantSelectors({ product, selectedVariant, onUpdateVariant }: 
                       variant={isActive ? 'control' : 'secondary'}
                       onClick={() => onUpdateVariant(option.name, value)}
                       className={cn(
-                        'rounded-lg px-6 py-2.5 bg-ancient-water hover:bg-cloud-dancer text-sm   text-maritime-darkest transition-all duration-200',
+                        'rounded-lg px-6 py-2.5 bg-ancient-water hover:bg-cloud-dancer text-sm   text-background transition-all duration-200',
                         'hover:scale-105 active:scale-95',
                         isActive ? 'shadow-md' : 'hover:border-neutral-800'
                       )}
@@ -67,7 +67,7 @@ export function VariantSelectors({ product, selectedVariant, onUpdateVariant }: 
                       {isColorOption && (
                         <span
                           aria-hidden='true'
-                          className='size-3 rounded-full border border-maritime-darkest/25 bg-havdyp shadow-[0_0_0_2px_color-mix(in_oklab,var(--cloud-dancer)_35%,transparent)]'
+                          className='size-3 rounded-full border border-background/25 bg-havdyp shadow-[0_0_0_2px_color-mix(in_oklab,var(--cloud-dancer)_35%,transparent)]'
                         />
                       )}
                       {value}

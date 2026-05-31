@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 
 export default function ShippingAndReturnsPage() {
   return (
-    <div className='bg-overcast maritime-darkest '>
+    <div className='bg-overcast background '>
       <section className='container mx-auto px-4 py-12 sm:py-16'>
         <Activity>
           <ShippingReturnsHeader />

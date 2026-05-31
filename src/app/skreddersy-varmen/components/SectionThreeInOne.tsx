@@ -59,7 +59,7 @@ export function SectionThreeInOne() {
                 sizes='(max-width: 1279px) 100vw, 0px'
               />
               <BrandBadge
-                backgroundColor='var(--color-maritime-darkest)'
+                backgroundColor='var(--color-background)'
                 textColor='var(--color-cloud-dancer)'
                 className='gsap-step-badge absolute left-4 top-4 h-7 px-3 py-0   text-xs font-medium leading-none   backdrop-blur-md'
               >
@@ -95,7 +95,7 @@ export function SectionThreeInOne() {
                 activeStep === index ? 'z-10 scale-100 opacity-100' : 'z-0 scale-105 opacity-0'
               )}
             >
-              <div className='relative aspect-square w-[min(86%,82vh)] overflow-hidden rounded-[1.5rem] border border-cloud-dancer/10 bg-maritime-darkest/18 shadow-2xl'>
+              <div className='relative aspect-square w-[min(86%,82vh)] overflow-hidden rounded-[1.5rem] border border-cloud-dancer/10 bg-background/18 shadow-2xl'>
                 <Image
                   src={step.image}
                   alt={step.title}
@@ -113,7 +113,7 @@ export function SectionThreeInOne() {
                   }}
                   sizes='(max-width: 1279px) 0px, min(43vw, 82vh)'
                 />
-                <div className='absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-maritime-darkest to-transparent opacity-45' />
+                <div className='absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background to-transparent opacity-45' />
               </div>
             </div>
           ))}

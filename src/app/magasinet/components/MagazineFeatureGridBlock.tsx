@@ -12,13 +12,13 @@ export function MagazineFeatureGridBlock({ block }: MagazineFeatureGridBlockProp
       {(block.title || block.intro) && (
         <header className='mx-auto mb-8 max-w-3xl text-center'>
           {block.title && (
-            <h2 className='text-balance font-google-sans text-4xl font-bold leading-[0.95]   text-maritime-darkest sm:text-5xl'>
+            <h2 className='text-balance font-google-sans text-4xl font-bold leading-[0.95]   text-background sm:text-5xl'>
               <MagazineInlineTitle text={block.title} />
             </h2>
           )}
 
           {block.intro && (
-            <p className='mx-auto mt-4 max-w-2xl   text-lg leading-[1.55]   text-maritime-darkest/76'>
+            <p className='mx-auto mt-4 max-w-2xl   text-lg leading-[1.55]   text-background/76'>
               {block.intro}
             </p>
           )}
@@ -29,17 +29,17 @@ export function MagazineFeatureGridBlock({ block }: MagazineFeatureGridBlockProp
         {block.items.map(item => (
           <li
             key={item.title}
-            className='rounded-lg border border-maritime-darkest/10 bg-cloud-dancer p-5 shadow-[0_22px_62px_-54px_color-mix(in_oklch,var(--maritime-darkest)_70%,transparent)]'
+            className='rounded-lg border border-background/10 bg-cloud-dancer p-5 shadow-[0_22px_62px_-54px_color-mix(in_oklch,var(--background)_70%,transparent)]'
           >
-            <div className='mb-4 flex size-11 items-center justify-center rounded-lg border border-maritime-darkest/10 bg-[var(--magazine-accent)] text-maritime-darkest'>
+            <div className='mb-4 flex size-11 items-center justify-center rounded-lg border border-background/10 bg-[var(--magazine-accent)] text-background'>
               <MagazineIcon name={item.icon ?? 'check'} className='size-5' />
             </div>
 
-            <h3 className='font-google-sans text-2xl font-bold leading-[0.95]   text-maritime-darkest'>
+            <h3 className='font-google-sans text-2xl font-bold leading-[0.95]   text-background'>
               <MagazineInlineTitle text={item.title} />
             </h3>
 
-            <p className='mt-3   text-base leading-[1.55]   text-maritime-darkest/76'>{item.text}</p>
+            <p className='mt-3   text-base leading-[1.55]   text-background/76'>{item.text}</p>
           </li>
         ))}
       </ul>

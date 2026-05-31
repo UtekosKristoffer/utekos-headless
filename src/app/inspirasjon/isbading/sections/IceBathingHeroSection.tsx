@@ -10,13 +10,7 @@ import { iceBathingHeroFeatures } from './iceBathingHeroFeatures'
 
 const IceBathingHeroBackground = (
   <div className='absolute inset-0 select-none' aria-hidden='true'>
-    <Image
-      src='/comfyrobe/comfy-isbading-1080.png'
-      alt=''
-      fill
-      className='object-cover md:hidden'
-      priority
-    />
+    <Image src='/comfyrobe/comfy-isbading-1080.png' alt='' fill className='object-cover md:hidden' priority />
     <Image
       src='/comfyrobe/comfy-isbading-1080-master.png'
       alt=''
@@ -24,7 +18,7 @@ const IceBathingHeroBackground = (
       className='hidden object-cover md:block'
       priority
     />
-    <div className='absolute inset-0 bg-maritime-darkest/68' />
+    <div className='absolute inset-0 bg-background/68' />
   </div>
 )
 
@@ -40,7 +34,7 @@ export function IceBathingHeroSection() {
         <InspirationHeroBreadcrumb
           label='Isbading'
           color='var(--ancient-water)'
-          textColor='var(--maritime-darkest)'
+          textColor='var(--background)'
           icon={Waves}
         />
       }

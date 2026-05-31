@@ -37,7 +37,7 @@ const links = [
 
 export default function MagazineUpgradePage() {
   return (
-    <main className='min-h-screen bg-overcast text-maritime-darkest'>
+    <main className='min-h-screen bg-overcast text-background'>
       <section className='container mx-auto flex min-h-[72vh] items-center px-4 py-20 sm:py-28'>
         <div className='mx-auto max-w-5xl text-center'>
           <p className='  text-sm font-semibold tracking-[0.18em] text-havdyp'>Utekos Magasinet</p>
@@ -46,7 +46,7 @@ export default function MagazineUpgradePage() {
             Utekos Magasinet er under oppgradering
           </h1>
 
-          <p className='mx-auto mt-6 max-w-3xl   text-lg leading-[1.6]   text-maritime-darkest/76 sm:text-xl'>
+          <p className='mx-auto mt-6 max-w-3xl   text-lg leading-[1.6]   text-background/76 sm:text-xl'>
             Vi oppdaterer magasinet vårt for å gi deg en enda bedre opplevelse, med mer relevante guider,
             artikler og inspirasjon. Mens vi gjør de siste justeringene, kan du gjerne utforske produktene
             våre, besøke inspirasjonssidene eller gå direkte til forsiden.
@@ -55,7 +55,7 @@ export default function MagazineUpgradePage() {
           <div className='mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row'>
             <Link
               href='/produkter'
-              className='inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-primary/30 bg-primary px-7 py-3   text-base font-semibold leading-[1.35]   text-maritime-darkest transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+              className='inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-primary/30 bg-primary px-7 py-3   text-base font-semibold leading-[1.35]   text-background transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
             >
               Se produktene
               <ArrowRight className='size-4' aria-hidden />
@@ -63,7 +63,7 @@ export default function MagazineUpgradePage() {
 
             <Link
               href='/inspirasjon'
-              className='inline-flex min-h-12 items-center justify-center rounded-full border border-maritime-darkest/12 bg-cloud-dancer px-7 py-3   text-base font-semibold leading-[1.35]   text-maritime-darkest transition-transform duration-300 hover:-translate-y-0.5 hover:bg-cloud-dancer/90 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+              className='inline-flex min-h-12 items-center justify-center rounded-full border border-background/12 bg-cloud-dancer px-7 py-3   text-base font-semibold leading-[1.35]   text-background transition-transform duration-300 hover:-translate-y-0.5 hover:bg-cloud-dancer/90 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
             >
               Gå til inspirasjon
             </Link>
@@ -77,19 +77,17 @@ export default function MagazineUpgradePage() {
                 <Link
                   key={link.href}
                   href={link.href as Route}
-                  className='group rounded-lg border border-maritime-darkest/10 bg-cloud-dancer p-5 shadow-[0_22px_62px_-54px_color-mix(in_oklch,var(--maritime-darkest)_70%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+                  className='group rounded-lg border border-background/10 bg-cloud-dancer p-5 shadow-[0_22px_62px_-54px_color-mix(in_oklch,var(--background)_70%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
                 >
-                  <div className='mb-4 flex size-11 items-center justify-center rounded-lg border border-maritime-darkest/10 bg-primary text-maritime-darkest'>
+                  <div className='mb-4 flex size-11 items-center justify-center rounded-lg border border-background/10 bg-primary text-background'>
                     <Icon className='size-5' aria-hidden />
                   </div>
 
-                  <h2 className='font-google-sans text-2xl font-bold leading-[0.95]   text-maritime-darkest'>
+                  <h2 className='font-google-sans text-2xl font-bold leading-[0.95]   text-background'>
                     {link.label}
                   </h2>
 
-                  <p className='mt-3   text-base leading-[1.55]   text-maritime-darkest/76'>
-                    {link.description}
-                  </p>
+                  <p className='mt-3   text-base leading-[1.55]   text-background/76'>{link.description}</p>
 
                   <span className='mt-5 inline-flex items-center gap-2   text-sm font-semibold text-havdyp'>
                     Gå videre

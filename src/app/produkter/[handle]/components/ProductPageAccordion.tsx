@@ -20,42 +20,42 @@ export function ProductPageAccordion({ variantProfile }: ProductPageAccordionPro
       title: 'Materialer',
       ...mapOptionalContent(variantProfile.materials?.value),
       Icon: Layers3,
-      color: 'text-maritime-darkest'
+      color: 'text-background'
     },
     {
       id: 'funksjoner',
       title: 'Funksjoner',
       ...mapOptionalContent(variantProfile.functions?.value),
       Icon: Activity,
-      color: 'text-maritime-darkest'
+      color: 'text-background'
     },
     {
       id: 'egenskaper',
       title: 'Egenskaper',
       ...mapOptionalContent(variantProfile.properties?.value),
       Icon: TableProperties,
-      color: 'text-maritime-darkest'
+      color: 'text-background'
     },
     {
       id: 'bruksomrader',
       title: 'Bruksområder',
       ...mapOptionalContent(variantProfile.usage?.value),
       Icon: Waypoints,
-      color: 'text-maritime-darkest'
+      color: 'text-background'
     },
     {
       id: 'passform',
       title: 'Passform',
       ...mapOptionalContent(variantProfile.sizeFit?.value),
       Icon: Ruler,
-      color: 'text-maritime-darkest'
+      color: 'text-background'
     },
     {
       id: 'vaskeanvisning',
       title: 'Vaskeanvisning',
       ...mapOptionalContent(variantProfile.storageAndMaintenance?.value),
       Icon: WashingMachine,
-      color: 'text-maritime-darkest'
+      color: 'text-background'
     }
   ]
 
@@ -80,7 +80,7 @@ export function ProductPageAccordion({ variantProfile }: ProductPageAccordionPro
         <AnimatedBlock className='mb-6 will-animate-fade-in-scale' delay='0s' threshold={0.3}>
           <BrandBadge
             backgroundColor='var(--dusted-peri)'
-            textColor='var(--maritime-darkest)'
+            textColor='var(--background)'
             className='gap-2 text-left shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
           >
             <Info className='size-5 text-left' aria-hidden='true' />

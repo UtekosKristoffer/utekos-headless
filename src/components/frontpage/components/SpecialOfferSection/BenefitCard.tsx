@@ -42,7 +42,7 @@ export function BenefitCard({ benefit, delay }: BenefitCardProps) {
           <Check className='size-5 text-cloud-dancer' />
         </div>
         <div className='flex-1 text-sm'>
-          <span className='font-semibold text-maritime-darkest'>{benefit.label}</span>
+          <span className='font-semibold text-background'>{benefit.label}</span>
           {benefit.description && <span className='text-havdyp/75'> {benefit.description}</span>}
         </div>
       </div>

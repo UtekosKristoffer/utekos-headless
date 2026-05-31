@@ -13,8 +13,8 @@ type MagazineArticleShellProps = {
 
 export function MagazineArticleShell({ article, relatedArticles }: MagazineArticleShellProps) {
   return (
-    <article className='bg-overcast text-maritime-darkest' style={getMagazineThemeStyle(article.theme)}>
-      <section className='border-b border-maritime-darkest/12 bg-overcast text-maritime-darkest'>
+    <article className='bg-overcast text-background' style={getMagazineThemeStyle(article.theme)}>
+      <section className='border-b border-background/12 bg-overcast text-background'>
         <div className='container mx-auto px-4 py-5'>
           <MagazineBreadcrumbs article={article} />
         </div>

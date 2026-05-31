@@ -85,7 +85,7 @@ export function MomentCard({ moment, index }: { moment: Moment; index: number })
           <h3 className={cn('animate-header-item', styles.title)}>{moment.title}</h3>
         </div>
 
-        <p className={cn('animate-header-item text-maritime-darkest', styles.desc)}>{moment.description}</p>
+        <p className={cn('animate-header-item text-background', styles.desc)}>{moment.description}</p>
       </div>
     </div>
   )

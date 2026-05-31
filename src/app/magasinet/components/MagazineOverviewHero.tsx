@@ -12,7 +12,7 @@ export function MagazineOverviewHero({ articleCount }: MagazineOverviewHeroProps
         <div className='max-w-5xl'>
           <BrandBadge
             backgroundColor='var(--ancient-water)'
-            textColor='var(--maritime-darkest)'
+            textColor='var(--background)'
             className='gap-2 border border-cloud-dancer/12 px-5 py-2 text-sm font-semibold leading-[1.35]  '
           >
             <UtekosWordmark className='h-4 w-auto' />

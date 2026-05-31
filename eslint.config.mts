@@ -30,7 +30,8 @@ const eslintConfig = defineConfig([
     'build/**',
     'next-env.d.ts',
     'docs/md-docs/**',
-    'docs/**/*.md'
+    'docs/**/*.md',
+    'src/components/klarna/dev/docs/**'
   ])
 ])
 

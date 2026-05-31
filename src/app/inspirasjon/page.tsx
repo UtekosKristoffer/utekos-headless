@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function InspirationPage() {
   return (
-    <section className='bg-cloud-dancer py-16 text-maritime-darkest sm:py-24'>
+    <section className='bg-cloud-dancer py-16 text-background sm:py-24'>
       <div className='container mx-auto max-w-4xl px-4 text-center'>
         <h1 className='text-4xl font-bold leading-[0.95] tracking-normal sm:text-5xl lg:text-6xl'>
           Inspirasjon for mer utekos
@@ -35,16 +35,16 @@ export default function InspirationPage() {
           <BrandBadge
             asChild
             backgroundColor='var(--primary)'
-            textColor='var(--maritime-darkest)'
+            textColor='var(--background)'
             className='border border-primary/24 px-7 py-3 text-base leading-[1.4] font-semibold tracking-normal shadow-[0_18px_38px_-30px_rgba(49,42,18,0.58)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
           >
             <Link href='/produkter'>Se produktene</Link>
           </BrandBadge>
           <BrandBadge
             asChild
-            backgroundColor='var(--maritime-darkest)'
+            backgroundColor='var(--background)'
             textColor='var(--cloud-dancer)'
-            className='border border-maritime-darkest/18 px-7 py-3 text-base leading-[1.4] font-semibold tracking-normal shadow-[0_18px_38px_-32px_rgba(14,18,35,0.7)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-110'
+            className='border border-background/18 px-7 py-3 text-base leading-[1.4] font-semibold tracking-normal shadow-[0_18px_38px_-32px_rgba(14,18,35,0.7)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-110'
           >
             <Link href='/handlehjelp/storrelsesguide'>Finn riktig størrelse</Link>
           </BrandBadge>

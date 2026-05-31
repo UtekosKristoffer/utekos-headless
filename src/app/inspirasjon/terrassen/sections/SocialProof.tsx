@@ -9,14 +9,14 @@ export function SocialProof() {
     <section className='bg-overcast py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='mb-8 text-maritime-darkest'>
+          <h2 className='mb-8 text-background'>
             <span className='inline-flex flex-wrap items-baseline justify-center gap-x-[0.22em] gap-y-2'>
               <span>Huseiere elsker</span>
-              <UtekosWordmark className='inline-block -mb-2 h-[0.8em] w-auto -translate-y-[0.035em] text-maritime-darkest' />
+              <UtekosWordmark className='inline-block -mb-2 h-[0.8em] w-auto -translate-y-[0.035em] text-background' />
             </span>
           </h2>
 
-          <Card className='border-cloud-dancer/24 bg-mountain-view shadow-[0_28px_80px_-54px_color-mix(in_oklch,var(--maritime-darkest)_82%,transparent)]'>
+          <Card className='border-cloud-dancer/24 bg-mountain-view shadow-[0_28px_80px_-54px_color-mix(in_oklch,var(--background)_82%,transparent)]'>
             <CardContent className='p-8 sm:p-12'>
               <blockquote className='mb-6 text-xl leading-[1.45]     text-cloud-dancer'>
                 &quot;Vi har doblet bruken av terrassen etter at vi fikk Utekos i hus. Den brukes av hele

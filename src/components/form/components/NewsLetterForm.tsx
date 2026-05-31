@@ -71,13 +71,13 @@ export function NewsletterForm() {
             name='email'
             placeholder='Din e-postadresse...'
             required
-            className='w-full border border-cloud-dancer bg-cloud-dancer px-6 py-4 text-maritime-darkest placeholder:text-maritime-darkest/70 transition-colors duration-300 focus:ring-2 focus:ring-cloud-dancer focus:ring-offset-2 focus:ring-offset-maritime-darkest'
+            className='w-full border border-cloud-dancer bg-cloud-dancer px-6 py-4 text-background placeholder:text-background/70 transition-colors duration-300 focus:ring-2 focus:ring-cloud-dancer focus:ring-offset-2 focus:ring-offset-background'
           />
 
           <BrandBadge
             asChild
             backgroundColor='var(--color-primary)'
-            textColor='var(--color-maritime-darkest)'
+            textColor='var(--color-background)'
             className='ml-4 shrink-0 px-6 py-3 text-base font-medium transition-colors duration-300 hover:brightness-95'
           >
             <button type='submit' disabled={isPending} className='group'>

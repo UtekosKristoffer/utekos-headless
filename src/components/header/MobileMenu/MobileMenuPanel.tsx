@@ -121,12 +121,12 @@ export function MobileMenuPanel({
 
       <SheetContent
         side='left'
-        className='w-full max-w-sm border-cloud-dancer/12 bg-maritime-darkest p-0 text-cloud-dancer backdrop-blur-xl lg:hidden'
+        className='w-full max-w-sm border-cloud-dancer/12 bg-background p-0 text-cloud-dancer backdrop-blur-xl lg:hidden'
       >
         <div className='pointer-events-none absolute inset-0 -z-10'>
-          <div className='absolute inset-0 bg-[linear-gradient(180deg,color-mix(in_oklab,var(--havdyp)_36%,var(--maritime-darkest))_0%,var(--maritime-darkest)_54%,color-mix(in_oklab,var(--demitasse)_22%,var(--maritime-darkest))_100%)]' />
+          <div className='absolute inset-0 bg-[linear-gradient(180deg,color-mix(in_oklab,var(--havdyp)_36%,var(--background))_0%,var(--background)_54%,color-mix(in_oklab,var(--demitasse)_22%,var(--background))_100%)]' />
           <div className='absolute inset-0 bg-[radial-gradient(105%_78%_at_20%_0%,color-mix(in_oklab,var(--dusted-peri)_18%,transparent)_0%,transparent_64%),radial-gradient(95%_72%_at_88%_34%,color-mix(in_oklab,var(--ancient-water)_12%,transparent)_0%,transparent_66%)]' />
-          <div className='absolute inset-0 bg-gradient-to-b from-transparent via-maritime-darkest/8 to-maritime-darkest/48' />
+          <div className='absolute inset-0 bg-gradient-to-b from-transparent via-background/8 to-background/48' />
         </div>
 
         <SheetHeader className='relative border-b border-cloud-dancer/10 p-6'>

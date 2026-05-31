@@ -11,7 +11,7 @@ export async function LandingFaq() {
   return (
     <section
       aria-labelledby='landing-faq-heading'
-      className='w-full bg-maritime-darkest px-6 py-16 text-cloud-dancer md:px-12 md:py-24'
+      className='w-full bg-background px-6 py-16 text-cloud-dancer md:px-12 md:py-24'
     >
       <div className='mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16'>
         <div>

@@ -65,7 +65,7 @@ export function CustomerNetworkView({ nodes, edges, centerNode }: CustomerNetwor
 
           const nodeStyle = {
             '--network-accent': accentColor,
-            'borderColor': `color-mix(in oklch, ${accentColor} 72%, var(--maritime-darkest) 28%)`,
+            'borderColor': `color-mix(in oklch, ${accentColor} 72%, var(--background) 28%)`,
             'background': `color-mix(in oklch, ${accentColor} 86%, var(--cloud-dancer) 14%)`
           } as CSSProperties
 
@@ -78,13 +78,13 @@ export function CustomerNetworkView({ nodes, edges, centerNode }: CustomerNetwor
               height={node.height}
             >
               <div
-                className='flex size-full items-center justify-center rounded-full border px-4 text-maritime-darkest shadow-[0_18px_40px_-28px_rgba(14,18,35,0.68)] ring-1 ring-cloud-dancer/35'
+                className='flex size-full items-center justify-center rounded-full border px-4 text-background shadow-[0_18px_40px_-28px_rgba(14,18,35,0.68)] ring-1 ring-cloud-dancer/35'
                 style={nodeStyle}
               >
                 {node.data ?
                   <div className='flex min-w-0 items-center justify-center gap-2.5'>
                     <span
-                      className='flex size-8 shrink-0 items-center justify-center rounded-full border border-maritime-darkest/12 bg-maritime-darkest shadow-[inset_0_1px_0_rgba(255,255,255,0.16)]'
+                      className='flex size-8 shrink-0 items-center justify-center rounded-full border border-background/12 bg-background shadow-[inset_0_1px_0_rgba(255,255,255,0.16)]'
                       style={{
                         color: accentColor
                       }}
@@ -92,7 +92,7 @@ export function CustomerNetworkView({ nodes, edges, centerNode }: CustomerNetwor
                       <IconRenderer name={node.data.icon as IconName} className='h-4 w-4' />
                     </span>
 
-                    <span className='whitespace-nowrap text-sm font-medium leading-none tracking-wide text-maritime-darkest'>
+                    <span className='whitespace-nowrap text-sm font-medium leading-none tracking-wide text-background'>
                       {node.data.text}
                     </span>
                   </div>
@@ -105,7 +105,7 @@ export function CustomerNetworkView({ nodes, edges, centerNode }: CustomerNetwor
 
       {centerNode ?
         <div className='pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2'>
-          <div className='relative flex h-28 w-28 items-center justify-center rounded-full border border-ancient-water/40 bg-[var(--maritime-darkest)] shadow-[0_0_0_8px_rgba(255,255,255,0.025),0_24px_54px_-32px_rgba(0,0,0,0.9)]'>
+          <div className='relative flex h-28 w-28 items-center justify-center rounded-full border border-ancient-water/40 bg-[var(--background)] shadow-[0_0_0_8px_rgba(255,255,255,0.025),0_24px_54px_-32px_rgba(0,0,0,0.9)]'>
             <div className='relative h-24 w-24 overflow-hidden rounded-full border-2 border-cloud-dancer/55 bg-cloud-dancer'>
               <Image
                 src={UtekosLogo}

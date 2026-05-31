@@ -33,21 +33,17 @@
   },
   "include": [
     "next-env.d.ts",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "eslint.config.mts",
-    "**/*.graphql",
-    "src/lib/queries/graphql.d.ts",
-    ".next/types/**/*.ts",
-    "types/**/*.d.ts",
-    "src/api/types/event",
-    "src/api/types/state",
-    "src/components/WelcomeToast",
-    "src/db/config",
-    "src/components/ProductCard/ProductCarousel.tsx",
-    ".next/dev/types/**/*.ts",
-    "src/components/cookie-consent",
-    "docs/google-tag-manager/custom-pixel.js"
+    "eslint.config.mts"
   ],
-  "exclude": ["node_modules", ".github/**/*", "alpha/**/*", "docs/**/*"]
+  "exclude": [
+    "node_modules",
+    ".github/**/*",
+    "alpha/**/*",
+    "docs/**/*",
+    "src/components/klarna/dev/docs/**/*"
+  ]
 }

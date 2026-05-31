@@ -8,19 +8,19 @@ import { HeroHighlight } from '../../layout/hero/HeroHighlight'
 import type { InspirationHeroFeature } from '../../layout/hero/types'
 
 const ICON_SURFACE = 'color-mix(in oklch, var(--cloud-dancer) 38%, transparent)'
-const ICON_BORDER = 'color-mix(in oklch, var(--maritime-darkest) 12%, transparent)'
-const CARD_SHADOW = '0 24px 48px -38px color-mix(in oklch, var(--maritime-darkest) 72%, transparent)'
-const DESCRIPTION_COLOR = 'color-mix(in oklch, var(--maritime-darkest) 88%, transparent)'
+const ICON_BORDER = 'color-mix(in oklch, var(--background) 12%, transparent)'
+const CARD_SHADOW = '0 24px 48px -38px color-mix(in oklch, var(--background) 72%, transparent)'
+const DESCRIPTION_COLOR = 'color-mix(in oklch, var(--background) 88%, transparent)'
 
 const terraceHeroFeatures: readonly InspirationHeroFeature[] = [
   {
     title: 'Tidlig vår',
     description: 'Nyt morgenkaffen uker tidligere',
     icon: Coffee,
-    iconColor: 'color-mix(in oklch, var(--maritime-darkest) 78%, var(--ancient-water))',
+    iconColor: 'color-mix(in oklch, var(--background) 78%, var(--ancient-water))',
     border: 'color-mix(in oklch, var(--ancient-water) 42%, transparent)',
     surface:
-      'linear-gradient(180deg, color-mix(in oklch, var(--ancient-water) 82%, var(--cloud-dancer) 18%) 0%, color-mix(in oklch, var(--ancient-water) 58%, var(--maritime-darkest) 42%) 100%)',
+      'linear-gradient(180deg, color-mix(in oklch, var(--ancient-water) 82%, var(--cloud-dancer) 18%) 0%, color-mix(in oklch, var(--ancient-water) 58%, var(--background) 42%) 100%)',
     glow: 'radial-gradient(120% 120% at 50% 0%, transparent 32%, color-mix(in oklch, var(--ancient-water) 74%, transparent) 100%)',
     sheen: true,
     iconSurface: ICON_SURFACE,
@@ -32,7 +32,7 @@ const terraceHeroFeatures: readonly InspirationHeroFeature[] = [
     title: 'Sen høst',
     description: 'Forleng sesongen',
     icon: Leaf,
-    iconColor: 'color-mix(in oklch, var(--mountain-view) 68%, var(--maritime-darkest) 32%)',
+    iconColor: 'color-mix(in oklch, var(--mountain-view) 68%, var(--background) 32%)',
     border: 'color-mix(in oklch, var(--mountain-view) 38%, transparent)',
     surface:
       'linear-gradient(180deg, color-mix(in oklch, var(--overcast) 86%, var(--cloud-dancer) 14%) 0%, color-mix(in oklch, var(--mountain-view) 28%, var(--overcast) 72%) 100%)',
@@ -47,10 +47,10 @@ const terraceHeroFeatures: readonly InspirationHeroFeature[] = [
     title: 'Hver kveld',
     description: 'Nyt uteplassen når det kjølner',
     icon: Sparkles,
-    iconColor: 'color-mix(in oklch, var(--maritime-darkest) 78%, var(--overcast))',
+    iconColor: 'color-mix(in oklch, var(--background) 78%, var(--overcast))',
     border: 'color-mix(in oklch, var(--overcast) 42%, transparent)',
     surface:
-      'linear-gradient(180deg, color-mix(in oklch, var(--overcast) 86%, var(--cloud-dancer) 14%) 0%, color-mix(in oklch, var(--overcast) 52%, var(--maritime-darkest) 48%) 100%)',
+      'linear-gradient(180deg, color-mix(in oklch, var(--overcast) 86%, var(--cloud-dancer) 14%) 0%, color-mix(in oklch, var(--overcast) 52%, var(--background) 48%) 100%)',
     glow: 'radial-gradient(120% 120% at 50% 0%, transparent 32%, color-mix(in oklch, var(--overcast) 78%, transparent) 100%)',
     sheen: true,
     iconSurface: ICON_SURFACE,
@@ -80,7 +80,7 @@ const TerraceHeroBackground = (
     </div>
 
     <div
-      className='absolute inset-0 -z-10 bg-[linear-gradient(180deg,transparent_0%,color-mix(in_oklch,var(--maritime-darkest)_92%,transparent)_100%)]'
+      className='absolute inset-0 -z-10 bg-[linear-gradient(180deg,transparent_0%,color-mix(in_oklch,var(--background)_92%,transparent)_100%)]'
       aria-hidden='true'
     />
   </>
@@ -90,7 +90,7 @@ export function TerraceHeroSection() {
   return (
     <InspirationHero
       labelledById='terrassen-hero-title'
-      surfaceClassName='bg-maritime-darkest'
+      surfaceClassName='bg-background'
       containerClassName='sm:py-24'
       background={TerraceHeroBackground}
       breadcrumb={

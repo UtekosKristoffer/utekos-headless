@@ -28,7 +28,7 @@ export function LandingPageVariantSelector({
               key={key}
               value={key}
               className={cn(
-                'h-auto flex-1 whitespace-nowrap rounded-full border border-maritime-darkest/18 bg-transparent px-6 py-3 text-sm font-semibold tracking-normal text-maritime-darkest transition-all duration-300 data-[state=active]:border-maritime-darkest data-[state=active]:bg-maritime-darkest data-[state=active]:text-cloud-dancer data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-ancient-water/55 md:flex-none md:text-base',
+                'h-auto flex-1 whitespace-nowrap rounded-full border border-background/18 bg-transparent px-6 py-3 text-sm font-semibold tracking-normal text-background transition-all duration-300 data-[state=active]:border-background data-[state=active]:bg-background data-[state=active]:text-cloud-dancer data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-ancient-water/55 md:flex-none md:text-base',
                 focusRing
               )}
             >

@@ -74,22 +74,22 @@ export function PurchaseClientViewLanding({
               setSelectedModel={(model: ModelKey) => setSelectedModel(model as ModelKey)}
             />
             <div key={`hero-${selectedModel}`} className='mb-12'>
-              <h2 className='mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-google-sans text-4xl font-bold leading-[0.95] tracking-[-0.01em] text-maritime-darkest min-[1280px]:text-7xl'>
+              <h2 className='mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-google-sans text-4xl font-bold leading-[0.95] tracking-[-0.01em] text-background min-[1280px]:text-7xl'>
                 <span className='sr-only'>Utekos </span>
                 <UtekosWordmark
                   aria-hidden
-                  className='h-[0.82em] w-auto translate-y-[0.04em] text-maritime-darkest'
-                  style={{ color: 'var(--color-maritime-darkest)' }}
+                  className='h-[0.82em] w-auto translate-y-[0.04em] text-background'
+                  style={{ color: 'var(--color-background)' }}
                 />
                 <span className='font-google-sans font-bold tracking-[-0.015em]'>{modelName}</span>
               </h2>
 
-              <p className='mb-8 max-w-[38rem] text-lg leading-[1.45] tracking-normal text-maritime-darkest/88 md:text-xl'>
+              <p className='mb-8 max-w-[38rem] text-lg leading-[1.45] tracking-normal text-background/88 md:text-xl'>
                 {currentConfig.subtitle}
               </p>
 
               <div className='grid w-full max-w-none grid-cols-[auto_minmax(0,1fr)] items-center gap-4 sm:gap-5 min-[900px]:max-w-[38rem]'>
-                <span className='shrink-0 text-3xl font-medium text-maritime-darkest min-[1280px]:text-4xl'>
+                <span className='shrink-0 text-3xl font-medium text-background min-[1280px]:text-4xl'>
                   {currentConfig.price},-
                 </span>
                 <KlarnaCheckoutImage className='w-full' />
@@ -117,7 +117,7 @@ export function PurchaseClientViewLanding({
                 rootMargin='0px 0px 25% 0px'
                 threshold={0.01}
               >
-                <p className='text-base leading-[1.45] text-maritime-darkest/85 md:text-lg'>
+                <p className='text-base leading-[1.45] text-background/85 md:text-lg'>
                   {currentConfig.description}
                 </p>
               </AnimatedBlock>
@@ -141,7 +141,7 @@ export function PurchaseClientViewLanding({
                       <BrandBadge
                         key={feature}
                         backgroundColor={bg}
-                        textColor='var(--color-maritime-darkest)'
+                        textColor='var(--color-background)'
                         className={cn(choicePillClass, 'shadow-sm')}
                       >
                         <span>{feature}</span>
@@ -184,16 +184,16 @@ export function PurchaseClientViewLanding({
               </AnimatedBlock>
             </div>
 
-            <div className='mb-12 h-px w-full bg-maritime-darkest' />
+            <div className='mb-12 h-px w-full bg-background' />
 
             <div className='mb-12 space-y-12'>
               <div>
                 <div className='mb-4 flex items-center justify-between'>
-                  <span className='text-sm font-bold tracking-normal text-maritime-darkest'>Størrelse</span>
+                  <span className='text-sm font-bold tracking-normal text-background'>Størrelse</span>
                   <Link
                     href='/handlehjelp/storrelsesguide'
                     data-track='SizeGuideSkreddersyVarmen'
-                    className='text-sm text-maritime-darkest underline transition-colors hover:text-havdyp'
+                    className='text-sm text-background underline transition-colors hover:text-havdyp'
                   >
                     Se størrelsesguide
                   </Link>
@@ -214,8 +214,8 @@ export function PurchaseClientViewLanding({
                         className={cn(
                           choicePillClass,
                           isActive ?
-                            'border border-maritime-darkest bg-maritime-darkest text-cloud-dancer shadow-md'
-                          : 'border-0 bg-ancient-water text-maritime-darkest hover:brightness-95',
+                            'border border-background bg-background text-cloud-dancer shadow-md'
+                          : 'border-0 bg-ancient-water text-background hover:brightness-95',
                           focusRing
                         )}
                       >
@@ -248,9 +248,9 @@ export function PurchaseClientViewLanding({
                   </div>
                 )}
 
-                <div className='mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-3 border-t border-maritime-darkest/16 pt-4'>
+                <div className='mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-3 border-t border-background/16 pt-4'>
                   <div className='min-w-0' role='radiogroup' aria-label='Velg farge'>
-                    <span className='block text-xs font-semibold tracking-normal text-maritime-darkest/72'>
+                    <span className='block text-xs font-semibold tracking-normal text-background/72'>
                       Farge
                     </span>
 
@@ -268,15 +268,15 @@ export function PurchaseClientViewLanding({
                             aria-label={`Farge ${colorObj.name}`}
                             onClick={() => isInteractive && setSelectedColorIndex(index)}
                             className={cn(
-                              'inline-flex h-10 min-w-0 items-center justify-start gap-2 rounded-full border border-maritime-darkest/18 bg-ancient-water px-3 text-sm font-semibold text-maritime-darkest transition',
+                              'inline-flex h-10 min-w-0 items-center justify-start gap-2 rounded-full border border-background/18 bg-ancient-water px-3 text-sm font-semibold text-background transition',
                               isInteractive && 'hover:brightness-95',
                               !isInteractive && 'cursor-default',
-                              isActive && 'border-maritime-darkest shadow-sm',
+                              isActive && 'border-background shadow-sm',
                               focusRing
                             )}
                           >
                             <span
-                              className='size-4 shrink-0 rounded-full border border-maritime-darkest/20'
+                              className='size-4 shrink-0 rounded-full border border-background/20'
                               style={{ backgroundColor: colorObj.hex }}
                             />
                             <span className='truncate'>{colorObj.name}</span>
@@ -287,16 +287,16 @@ export function PurchaseClientViewLanding({
                   </div>
 
                   <div className='shrink-0'>
-                    <span className='block text-xs font-semibold tracking-normal text-maritime-darkest/72'>
+                    <span className='block text-xs font-semibold tracking-normal text-background/72'>
                       Antall
                     </span>
 
-                    <div className='mt-1 flex h-10 items-center rounded-full border border-maritime-darkest/18 bg-ancient-water text-maritime-darkest'>
+                    <div className='mt-1 flex h-10 items-center rounded-full border border-background/18 bg-ancient-water text-background'>
                       <button
                         type='button'
                         onClick={() => setQuantity(quantity - 1)}
                         className={cn(
-                          'flex size-10 items-center justify-center rounded-l-full text-maritime-darkest transition-colors hover:bg-overcast/70',
+                          'flex size-10 items-center justify-center rounded-l-full text-background transition-colors hover:bg-overcast/70',
                           focusRing
                         )}
                         aria-label='Reduser antall'
@@ -305,7 +305,7 @@ export function PurchaseClientViewLanding({
                       </button>
 
                       <span
-                        className='w-9 text-center text-base font-semibold tabular-nums text-maritime-darkest'
+                        className='w-9 text-center text-base font-semibold tabular-nums text-background'
                         aria-live='polite'
                         aria-atomic='true'
                       >
@@ -316,7 +316,7 @@ export function PurchaseClientViewLanding({
                         type='button'
                         onClick={() => setQuantity(quantity + 1)}
                         className={cn(
-                          'flex size-10 items-center justify-center rounded-r-full text-maritime-darkest transition-colors hover:bg-overcast/70',
+                          'flex size-10 items-center justify-center rounded-r-full text-background transition-colors hover:bg-overcast/70',
                           focusRing
                         )}
                         aria-label='Øk antall'
@@ -335,7 +335,7 @@ export function PurchaseClientViewLanding({
               <BrandBadge
                 asChild
                 backgroundColor='var(--color-primary)'
-                textColor='var(--color-maritime-darkest)'
+                textColor='var(--color-background)'
                 className={cn(
                   'h-14 w-full min-w-0 px-4 py-0 text-sm font-semibold tracking-normal shadow-xl transition-[transform,filter,box-shadow] hover:brightness-95 active:scale-[0.985] sm:text-base md:h-16 md:px-6 md:text-lg',
                   isPending && 'cursor-not-allowed opacity-80'
@@ -360,7 +360,7 @@ export function PurchaseClientViewLanding({
                   : <>
                       <ShoppingCart className='size-4 shrink-0' />
                       <span className='whitespace-nowrap'>Legg i handlekurv</span>
-                      <span className='hidden h-5 w-px bg-maritime-darkest/25 sm:block' />
+                      <span className='hidden h-5 w-px bg-background/25 sm:block' />
                       <span className='hidden whitespace-nowrap font-medium sm:inline'>
                         {currentConfig.price * quantity},-
                       </span>

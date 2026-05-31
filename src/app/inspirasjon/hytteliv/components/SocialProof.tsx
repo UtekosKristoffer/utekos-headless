@@ -42,15 +42,15 @@ const galleryImages = [
 
 export function SocialProof() {
   return (
-    <section className='bg-overcast py-24 text-maritime-darkest'>
+    <section className='bg-overcast py-24 text-background'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center md:max-w-4xl'>
-          <h2 className='mb-4 inline-flex flex-nowrap items-baseline justify-center gap-x-[0.18em] whitespace-nowrap text-maritime-darkest'>
+          <h2 className='mb-4 inline-flex flex-nowrap items-baseline justify-center gap-x-[0.18em] whitespace-nowrap text-background'>
             <UtekosWordmark className='h-[0.82em] w-auto shrink-0 translate-y-[0.06em]' />
             <span>i sitt rette element</span>
           </h2>
 
-          <p className='mx-auto mb-12 utekos-section-lead max-w-2xl text-maritime-darkest'>
+          <p className='mx-auto mb-12 utekos-section-lead max-w-2xl text-background'>
             Fra morgenkaffen på en duggfrisk trapp til sene kvelder rundt bålpannen. Se ekte øyeblikk fra
             hyttelivet.
           </p>
@@ -69,7 +69,7 @@ export function SocialProof() {
                 <div className='group p-1'>
                   <AspectRatio
                     ratio={1 / 1}
-                    className='relative overflow-hidden rounded-lg border border-maritime-darkest/18 bg-havdyp shadow-[0_24px_56px_-42px_rgba(14,18,35,0.62)]'
+                    className='relative overflow-hidden rounded-lg border border-background/18 bg-havdyp shadow-[0_24px_56px_-42px_rgba(14,18,35,0.62)]'
                   >
                     <Image
                       src={image.src}
@@ -82,7 +82,7 @@ export function SocialProof() {
                   </AspectRatio>
                   <div className='pt-4 text-left'>
                     <h3 className='font-semibold font-google-sans leading-[1.45]  '>{image.title}</h3>
-                    <p className='text-sm leading-[1.15]     text-maritime-darkest'>{image.description}</p>
+                    <p className='text-sm leading-[1.15]     text-background'>{image.description}</p>
                   </div>
                 </div>
               </CarouselItem>

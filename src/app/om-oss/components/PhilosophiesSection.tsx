@@ -110,13 +110,13 @@ export function PhilosophiesSection() {
             <BrandBadge
               label='Vårt DNA'
               backgroundColor='var(--bleached-mauve)'
-              textColor='var(--maritime-darkest)'
+              textColor='var(--background)'
               className='mb-6 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--primary)_80%,transparent)]'
             />
-            <h2 className='mb-6 text-5xl leading-[0.95] font-bold font-google-sans   text-maritime-darkest md:text-6xl lg:text-7xl'>
+            <h2 className='mb-6 text-5xl leading-[0.95] font-bold font-google-sans   text-background md:text-6xl lg:text-7xl'>
               Kjernen i alt vi gjør
             </h2>
-            <p className='text-lg leading-[1.45]     text-maritime-darkest'>
+            <p className='text-lg leading-[1.45]     text-background'>
               Fire ufravikelige prinsipper som sikrer at du alltid får den opplevelsen du fortjener.
             </p>
           </AnimatedBlock>

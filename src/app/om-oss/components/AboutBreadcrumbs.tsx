@@ -10,7 +10,7 @@ import Link from 'next/link'
 
 export function AboutBreadcrumbs() {
   return (
-    <section className='border-b border-maritime-darkest/12 bg-overcast text-maritime-darkest'>
+    <section className='border-b border-background/12 bg-overcast text-background'>
       <div className='container mx-auto px-4 py-5'>
         <Breadcrumb>
           <BreadcrumbList>

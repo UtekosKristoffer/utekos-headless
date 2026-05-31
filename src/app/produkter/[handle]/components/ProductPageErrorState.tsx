@@ -36,7 +36,7 @@ export function ProductPageErrorState({ error, isRetrying, onRetry }: ProductPag
             type='button'
             onClick={onRetry}
             disabled={isRetrying}
-            className='h-12 rounded-full bg-primary px-7 text-maritime-darkest hover:bg-primary/88'
+            className='h-12 rounded-full bg-primary px-7 text-background hover:bg-primary/88'
           >
             {isRetrying ? 'Prøver igjen...' : 'Prøv igjen'}
           </Button>

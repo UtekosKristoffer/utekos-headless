@@ -17,7 +17,7 @@ const features = [
 
 export function ProductSpotlight() {
   return (
-    <section id='product-spotlight' className='overflow-hidden bg-maritime-darkest py-24 text-cloud-dancer'>
+    <section id='product-spotlight' className='overflow-hidden bg-background py-24 text-cloud-dancer'>
       <div className='container mx-auto px-4'>
         <div className='grid items-center gap-12 lg:grid-cols-2'>
           <AnimatedBlock className='relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border border-cloud-dancer/12 shadow-2xl lg:max-w-none'>
@@ -51,7 +51,7 @@ export function ProductSpotlight() {
               <BrandBadge
                 asChild
                 backgroundColor='var(--primary)'
-                textColor='var(--maritime-darkest)'
+                textColor='var(--background)'
                 data-track='comfyrobe-icebath-campaign-buy-now'
                 className='min-h-14 w-full px-8 py-4 text-lg leading-[1.35] font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 sm:w-auto'
               >

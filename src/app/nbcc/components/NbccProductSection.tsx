@@ -16,7 +16,7 @@ export async function NbccProductSection() {
   const fetched = await Promise.all(nbccProducts.map(p => getProduct(p.handle)))
 
   return (
-    <section id='produkter' className='bg-maritime-darkest px-4 py-20 sm:px-6 sm:py-24 lg:px-8'>
+    <section id='produkter' className='bg-background px-4 py-20 sm:px-6 sm:py-24 lg:px-8'>
       <div className='mx-auto max-w-7xl'>
         <div
           data-nbcc-reveal
@@ -24,7 +24,7 @@ export async function NbccProductSection() {
           className='flex flex-col gap-6 md:flex-row md:items-end md:justify-between'
         >
           <div>
-            <Badge className='rounded-md border-primary/30 bg-primary px-3 py-2 text-maritime-darkest  '>
+            <Badge className='rounded-md border-primary/30 bg-primary px-3 py-2 text-background  '>
               Utekos for NBCC-medlemmer
             </Badge>
             <h2 className='mt-5 max-w-2xl text-balance text-3xl font-google-sans font-semibold   text-cloud-dancer sm:text-4xl'>

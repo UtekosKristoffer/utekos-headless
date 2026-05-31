@@ -105,7 +105,7 @@ export function FrontpageIceBathingSection() {
                   icon: Thermometer,
                   title: 'SherpaCore™',
                   desc: '250 GSM fôr som gir umiddelbar isolering.',
-                  color: 'text-maritime-darkest',
+                  color: 'text-background',
                   bg: 'bg-overcast'
                 },
                 {
@@ -148,7 +148,7 @@ export function FrontpageIceBathingSection() {
               <BrandBadge
                 asChild
                 backgroundColor='var(--color-primary)'
-                textColor='var(--color-maritime-darkest)'
+                textColor='var(--color-background)'
                 className='group h-14 w-full justify-center px-8 text-base font-medium shadow-[0_18px_42px_-26px_rgba(27,53,74,0.42)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-95 sm:w-auto'
               >
                 <Link
@@ -162,8 +162,8 @@ export function FrontpageIceBathingSection() {
               <BrandBadge
                 asChild
                 backgroundColor='var(--color-overcast)'
-                textColor='var(--color-maritime-darkest)'
-                className='group h-14 w-full justify-center px-8 text-base font-medium ring-1 ring-maritime-darkest/10 transition-all duration-300 hover:-translate-y-0.5 hover:brightness-95 sm:w-auto md:w-[162px] lg:w-[182px]'
+                textColor='var(--color-background)'
+                className='group h-14 w-full justify-center px-8 text-base font-medium ring-1 ring-background/10 transition-all duration-300 hover:-translate-y-0.5 hover:brightness-95 sm:w-auto md:w-[162px] lg:w-[182px]'
               >
                 <Link
                   href={'/kampanje/comfyrobe' as Route}
@@ -195,8 +195,8 @@ export function FrontpageIceBathingSection() {
 
                 <BrandBadge
                   backgroundColor='var(--color-ancient-water)'
-                  textColor='var(--color-maritime-darkest)'
-                  className='absolute right-6 top-6 px-4 py-2 text-sm font-medium shadow-[0_16px_32px_-24px_rgba(18,24,29,0.45)] ring-1 ring-maritime-darkest/10'
+                  textColor='var(--color-background)'
+                  className='absolute right-6 top-6 px-4 py-2 text-sm font-medium shadow-[0_16px_32px_-24px_rgba(18,24,29,0.45)] ring-1 ring-background/10'
                 >
                   Comfyrobe™
                 </BrandBadge>

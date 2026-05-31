@@ -8,40 +8,40 @@ import Link from 'next/link'
 export function InfoSidebar() {
   return (
     <aside className='lg:col-span-4'>
-      <Card className='sticky top-28 border-cloud-dancer/12 bg-ancient-water text-maritime-darkest shadow-[0_24px_70px_-52px_rgba(8,12,28,0.88)]'>
+      <Card className='sticky top-28 border-cloud-dancer/12 bg-ancient-water text-background shadow-[0_24px_70px_-52px_rgba(8,12,28,0.88)]'>
         <CardHeader>
           <CardTitle className='text-xl leading-[1.15]  '>Dine trygghetsgarantier</CardTitle>
         </CardHeader>
         <CardContent>
           <ul className='space-y-4'>
             <li className='flex items-start gap-3'>
-              <ShieldCheck className='mt-0.5 size-5 rounded-full shrink-0 text-maritime-darkest' />
+              <ShieldCheck className='mt-0.5 size-5 rounded-full shrink-0 text-background' />
               <div>
-                <h4 className='leading-[1.35] text-md font-medium     text-maritime-darkest'>
+                <h4 className='leading-[1.35] text-md font-medium     text-background'>
                   14 dagers angrerett
                 </h4>
-                <p className='text-sm leading-[1.45]   text-maritime-darkest/80'>
+                <p className='text-sm leading-[1.45]   text-background/80'>
                   Lovfestet trygghet fra du mottar varen.
                 </p>
               </div>
             </li>
             <li className='flex items-start gap-3'>
-              <Package className='mt-0.5 size-5 rounded-full shrink-0 text-maritime-darkest' />
+              <Package className='mt-0.5 size-5 rounded-full shrink-0 text-background' />
               <div>
-                <h4 className='leading-[1.35] text-md font-medium     text-maritime-darkest'>
+                <h4 className='leading-[1.35] text-md font-medium     text-background'>
                   Fri frakt over 999 kr
                 </h4>
-                <p className='text-sm leading-[1.45]   text-maritime-darkest/80'>
+                <p className='text-sm leading-[1.45]   text-background/80'>
                   Vi spanderer frakten på større bestillinger.
                 </p>
               </div>
             </li>
             <li className='flex items-start gap-3'>
-              <BadgeCheck className='mt-0.5 size-5 shrink-0 text-maritime-darkest' />
+              <BadgeCheck className='mt-0.5 size-5 shrink-0 text-background' />
               <div>
-                <h4 className='leading-[1.45] text-md font-medium     text-maritime-darkest'>Retur</h4>
+                <h4 className='leading-[1.45] text-md font-medium     text-background'>Retur</h4>
                 <address>
-                  <p className='text-sm leading-[1.45]   text-maritime-darkest/80'>
+                  <p className='text-sm leading-[1.45]   text-background/80'>
                     Send en e-post til kundeservice@utekos.no, så er du i gang.
                   </p>
                 </address>
@@ -51,9 +51,7 @@ export function InfoSidebar() {
         </CardContent>
         <Separator className='my-2 bg-cloud-dancer/40' />
         <CardFooter className='flex-col items-start'>
-          <h4 className='leading-[1.45] text-md font-medium     text-maritime-darkest'>
-            Har du andre spørsmål?
-          </h4>
+          <h4 className='leading-[1.45] text-md font-medium     text-background'>Har du andre spørsmål?</h4>
           <BrandBadge
             asChild
             backgroundColor='var(--havdyp)'

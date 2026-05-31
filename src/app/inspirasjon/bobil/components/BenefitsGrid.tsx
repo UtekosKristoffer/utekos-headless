@@ -50,7 +50,7 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
               delay={`${benefitIndex * 0.05}s`}
               threshold={0.2}
             >
-              <div className='mx-auto mb-4 flex size-16 items-center justify-center rounded-full border border-cloud-dancer/12 bg-maritime-darkest/24'>
+              <div className='mx-auto mb-4 flex size-16 items-center justify-center rounded-full border border-cloud-dancer/12 bg-background/24'>
                 <benefit.icon className={`size-8 ${benefit.color}`} aria-hidden />
               </div>
               <h3 className='mb-2 font-google-sans text-cloud-dancer'>{benefit.title}</h3>

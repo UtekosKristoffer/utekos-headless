@@ -41,27 +41,27 @@ const navigationLinks = [
 
 export default function SizeGuidePage() {
   return (
-    <article className='bg-overcast text-maritime-darkest'>
+    <article className='bg-overcast text-background'>
       <div className='container mx-auto px-4 pt-12 sm:pt-16'>
         <div className='mx-auto max-w-3xl text-center'>
           <BrandBadge
             label='Handlehjelp'
             backgroundColor='var(--cloud-dancer)'
-            textColor='var(--maritime-darkest)'
+            textColor='var(--background)'
             className='mb-4 px-4 py-2 text-sm'
           />
-          <h1 className=' text-maritime-darkest mx-auto'>
+          <h1 className=' text-background mx-auto'>
             Finn passformen til din{' '}
             <span className='inline-flex items-baseline'>
               <UtekosWordmark
                 aria-hidden='true'
                 focusable='false'
-                className='inline-block h-[0.72em] w-auto translate-y-[0.06em] align-baseline text-maritime-darkest'
+                className='inline-block h-[0.72em] w-auto translate-y-[0.06em] align-baseline text-background'
               />
               <span className='sr-only'>Utekos</span>
             </span>
           </h1>
-          <p className='mx-auto mt-5 max-w-2xl utekos-section-lead text-maritime-darkest/82'>
+          <p className='mx-auto mt-5 max-w-2xl utekos-section-lead text-background/82'>
             Riktig størrelse gir mer ro, bedre varme og en passform som følger deg ute. Bruk guiden til å
             velge trygt før du handler.
           </p>
@@ -78,7 +78,7 @@ export default function SizeGuidePage() {
                 asChild
                 key={link.name}
                 backgroundColor='var(--cloud-dancer)'
-                textColor='var(--maritime-darkest)'
+                textColor='var(--background)'
                 className='border border-cloud-dancer/20 px-4 py-2 text-sm transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
               >
                 <a href={link.href} data-track={`SizeGuideNav_${link.name}`}>
@@ -95,7 +95,7 @@ export default function SizeGuidePage() {
       <div className='container mx-auto px-4'>
         <div className='relative my-10 sm:my-24'>
           <div className='absolute inset-0 flex items-center' aria-hidden='true'>
-            <div className='w-full border-t border-maritime-darkest/14' />
+            <div className='w-full border-t border-background/14' />
           </div>
         </div>
       </div>
@@ -105,7 +105,7 @@ export default function SizeGuidePage() {
       <div className='container mx-auto px-4'>
         <div className='relative sm:my-16'>
           <div className='absolute inset-0 flex items-center' aria-hidden='true'>
-            <div className='w-full border-t border-maritime-darkest/14' />
+            <div className='w-full border-t border-background/14' />
           </div>
         </div>
       </div>

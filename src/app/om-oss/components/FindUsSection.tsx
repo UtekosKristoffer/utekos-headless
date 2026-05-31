@@ -51,14 +51,14 @@ export function FindUsSection() {
           <AnimatedBlock className='will-animate-fade-in-left' delay='0s' threshold={0.3}>
             <BrandBadge
               label='Møteplasser'
-              backgroundColor='var(--maritime-darkest)'
+              backgroundColor='var(--background)'
               textColor='var(--cloud-dancer)'
               className='mb-6 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--cloud-dancer)_80%,transparent)]'
             />
-            <h2 className='mb-6 text-4xl leading-[0.95] font-bold font-google-sans   text-maritime-darkest sm:text-5xl'>
+            <h2 className='mb-6 text-4xl leading-[0.95] font-bold font-google-sans   text-background sm:text-5xl'>
               Der du har møtt oss
             </h2>
-            <p className='mb-10 text-lg leading-[1.45]     text-maritime-darkest'>
+            <p className='mb-10 text-lg leading-[1.45]     text-background'>
               Vi elsker å prate med folk – derfor er vi jevnlig på messer og stands. Her er noen av stedene du
               kan ha truffet oss, og hvor vi har fått verdifulle innspill fra kunder som faktisk har kjent
               komforten.
@@ -72,10 +72,8 @@ export function FindUsSection() {
                   </div>
 
                   <div className='pt-1'>
-                    <h3 className='mb-1 text-xl leading-[1] font-semibold   text-maritime-darkest'>
-                      {event.name}
-                    </h3>
-                    <p className='text-sm leading-[1.45] font-medium   text-maritime-darkest/80'>
+                    <h3 className='mb-1 text-xl leading-[1] font-semibold   text-background'>{event.name}</h3>
+                    <p className='text-sm leading-[1.45] font-medium   text-background/80'>
                       {event.location}
                       <span className='mx-2 text-havdyp'>•</span>
                       {event.date}
@@ -104,14 +102,14 @@ export function FindUsSection() {
                           sizes='(max-width: 1024px) 90vw, 45vw'
                           priority={false}
                         />
-                        <div className='absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-maritime-darkest/52 to-transparent' />
+                        <div className='absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background/52 to-transparent' />
                       </div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
 
-                <CarouselPrevious className='left-4 border-cloud-dancer/80 bg-cloud-dancer/92 text-havdyp shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
-                <CarouselNext className='right-4 border-cloud-dancer/80 bg-cloud-dancer/92 text-havdyp shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
+                <CarouselPrevious className='left-4 border-cloud-dancer/80 bg-cloud-dancer/92 text-havdyp shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-background' />
+                <CarouselNext className='right-4 border-cloud-dancer/80 bg-cloud-dancer/92 text-havdyp shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-background' />
               </Carousel>
             </div>
           </AnimatedBlock>

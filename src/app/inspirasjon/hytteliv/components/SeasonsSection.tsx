@@ -22,8 +22,8 @@ export function SeasonsSection() {
 
       <div className='container mx-auto px-4'>
         <div className='animate-fade-in-up mb-16 text-center'>
-          <h2 className='text-maritime-darkest'>Hytteglede i alle sesonger</h2>
-          <p className='mx-auto mt-4 utekos-section-lead max-w-2xl text-maritime-darkest'>
+          <h2 className='text-background'>Hytteglede i alle sesonger</h2>
+          <p className='mx-auto mt-4 utekos-section-lead max-w-2xl text-background'>
             Få varme og ro gjennom alle fire årstider.
           </p>
         </div>

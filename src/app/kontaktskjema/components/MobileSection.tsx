@@ -10,7 +10,7 @@ export function MobileSection() {
         <BrandBadge
           label='Kundeservice'
           backgroundColor='var(--ancient-water)'
-          textColor='var(--maritime-darkest)'
+          textColor='var(--background)'
           className='mb-5 border border-cloud-dancer/12 px-4 py-2 text-sm leading-[1.4] font-semibold tracking-normal'
         />
         <h1 className='text-3xl font-bold leading-[0.95] tracking-normal text-cloud-dancer'>
@@ -28,8 +28,7 @@ export function MobileSection() {
                 Få personlig veiledning
               </h3>
               <p className='mt-1 text-sm leading-[1.45] tracking-normal text-overcast'>
-                Usikker på hvilket produkt som passer ditt bruk? Vi hjelper deg
-                å velge riktig.
+                Usikker på hvilket produkt som passer ditt bruk? Vi hjelper deg å velge riktig.
               </p>
             </div>
           </li>
@@ -40,14 +39,13 @@ export function MobileSection() {
                 Hjelp med din bestilling
               </h3>
               <p className='mt-1 text-sm leading-[1.45] tracking-normal text-overcast'>
-                Spørsmål om en ordre, retur eller reklamasjon? Oppgi gjerne
-                ordrenummer.
+                Spørsmål om en ordre, retur eller reklamasjon? Oppgi gjerne ordrenummer.
               </p>
             </div>
           </li>
         </ul>
       </div>
-      <div className='border-t border-cloud-dancer/12 bg-maritime-darkest/72 p-6'>
+      <div className='border-t border-cloud-dancer/12 bg-background/72 p-6'>
         <SupportForm />
       </div>
 
@@ -59,9 +57,8 @@ export function MobileSection() {
               For norske forhold
             </h4>
             <p className='mt-1.5 text-xs leading-[1.45] tracking-normal text-overcast'>
-              Våre produkter er utviklet for å forlenge de gode stundene
-              utendørs, enten det er på en kjølig sommerkveld på hytten eller en
-              frisk høstdag i båten.
+              Våre produkter er utviklet for å forlenge de gode stundene utendørs, enten det er på en kjølig
+              sommerkveld på hytten eller en frisk høstdag i båten.
             </p>
           </div>
           <div className='p-6'>
@@ -70,17 +67,16 @@ export function MobileSection() {
               Investering i komfort
             </h4>
             <p className='mt-1.5 text-xs leading-[1.45] tracking-normal text-overcast'>
-              Mer enn bare et plagg; det er et verktøy designet for å gi deg
-              utallige timer med varme og velvære.
+              Mer enn bare et plagg; det er et verktøy designet for å gi deg utallige timer med varme og
+              velvære.
             </p>
           </div>
         </div>
       </div>
       <div className='border-t border-cloud-dancer/12 p-6'>
         <blockquote className='text-sm leading-[1.45] tracking-normal italic text-overcast'>
-          &ldquo;Vårt løfte til deg er enkelt: å levere komfortplagg av ypperste
-          kvalitet som lar deg forlenge de gode stundene utendørs, uansett
-          vær.&rdquo;
+          &ldquo;Vårt løfte til deg er enkelt: å levere komfortplagg av ypperste kvalitet som lar deg forlenge
+          de gode stundene utendørs, uansett vær.&rdquo;
         </blockquote>
         <p className='mt-3 text-sm font-semibold leading-[1.3] tracking-normal text-cloud-dancer'>
           - Utekos Teamet

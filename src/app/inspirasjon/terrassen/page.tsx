@@ -90,7 +90,7 @@ export default function TerraceInspirationPage() {
     <>
       <JsonLd />
 
-      <main className='bg-maritime-darkest text-cloud-dancer'>
+      <main className='bg-background text-cloud-dancer'>
         <TerraceHeroSection />
         <UseCasesGrid useCases={useCasesData} />
         <BenefitsGrid benefits={benefitsData} />

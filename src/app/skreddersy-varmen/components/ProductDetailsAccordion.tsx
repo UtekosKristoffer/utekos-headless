@@ -7,15 +7,15 @@ import { Leaf, ShieldCheck, Waves, Info, type LucideIcon } from 'lucide-react'
 import type { ModelKey } from '@/api/constants'
 
 const styles = {
-  item: 'border-maritime-darkest/20 px-4',
+  item: 'border-background/20 px-4',
   trigger:
-    'font-google-sans text-left text-lg font-semibold text-maritime-darkest hover:text-havdyp hover:no-underline [&>svg]:text-maritime-darkest md:text-xl',
+    'font-google-sans text-left text-lg font-semibold text-background hover:text-havdyp hover:no-underline [&>svg]:text-background md:text-xl',
   content: 'space-y-6 p-2',
-  blockTitle: 'mb-1 text-base font-semibold text-maritime-darkest',
-  blockText: 'text-sm leading-relaxed tracking-normal text-maritime-darkest/90',
+  blockTitle: 'mb-1 text-base font-semibold text-background',
+  blockText: 'text-sm leading-relaxed tracking-normal text-background/90',
   groupTitle:
-    'mb-3 border-b border-maritime-darkest/60 pb-1   text-base font-semibold leading-relaxed tracking-normal text-maritime-darkest',
-  list: 'list-inside list-disc space-y-1 text-sm   text-maritime-darkest/90',
+    'mb-3 border-b border-background/60 pb-1   text-base font-semibold leading-relaxed tracking-normal text-background',
+  list: 'list-inside list-disc space-y-1 text-sm   text-background/90',
   callout:
     'rounded-2xl border border-cloud-dancer/15 bg-havdyp p-4 text-sm leading-relaxed tracking-normal text-cloud-dancer'
 } as const
@@ -253,13 +253,9 @@ export function ProductDetailsAccordion({ selectedModel }: { selectedModel: Mode
   const content = productDetailsByModel[selectedModel]
 
   return (
-    <section
-      key={selectedModel}
-      className='w-full bg-overcast pb-24 pt-6 text-maritime-darkest'
-      aria-live='polite'
-    >
+    <section key={selectedModel} className='w-full bg-overcast pb-24 pt-6 text-background' aria-live='polite'>
       <div className='mx-auto max-w-3xl'>
-        <h2 className='my-8 max-sm:pl-0 text-center max-sm:text-left text-3xl max-w-[90%] mx-auto md:max-w-4xl font-google-sans text-maritime-darkest sm:text-5xl tracking-normal'>
+        <h2 className='my-8 max-sm:pl-0 text-center max-sm:text-left text-3xl max-w-[90%] mx-auto md:max-w-4xl font-google-sans text-background sm:text-5xl tracking-normal'>
           {content.heading}
         </h2>
 

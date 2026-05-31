@@ -9,11 +9,11 @@ function ThreeInOneFallback() {
 }
 
 function TechDownFallback() {
-  return <div aria-hidden className='min-h-[760px] w-full border-t border-maritime-darkest bg-overcast' />
+  return <div aria-hidden className='min-h-[760px] w-full border-t border-background bg-overcast' />
 }
 
 function SocialProofFallback() {
-  return <div aria-hidden className='min-h-[560px] w-full bg-maritime-darkest' />
+  return <div aria-hidden className='min-h-[560px] w-full bg-background' />
 }
 
 const SectionThreeInOne = dynamic(

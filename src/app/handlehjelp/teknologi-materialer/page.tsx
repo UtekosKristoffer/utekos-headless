@@ -54,7 +54,7 @@ export const metadata: Metadata = {
 
 export default function ProductSpecsPage() {
   return (
-    <main className='bg-maritime-darkest text-cloud-dancer'>
+    <main className='bg-background text-cloud-dancer'>
       {/* 1. HERO SEKSJON */}
       <TechHero />
 
@@ -66,7 +66,7 @@ export default function ProductSpecsPage() {
             <div className='absolute inset-0 bg-gradient-to-br from-ancient-water/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
 
             <div className='relative z-10'>
-              <div className='mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-ancient-water/10 text-ancient-water ring-1 ring-white/10 transition-colors group-hover:bg-ancient-water group-hover:text-maritime-darkest'>
+              <div className='mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-ancient-water/10 text-ancient-water ring-1 ring-white/10 transition-colors group-hover:bg-ancient-water group-hover:text-background'>
                 <Maximize2 className='h-6 w-6' />
               </div>
               <h3 className='mb-2 text-xl font-google-sans font-bold text-cloud-dancer'>1. Fullengdemodus</h3>
@@ -83,7 +83,7 @@ export default function ProductSpecsPage() {
             <div className='absolute inset-0 bg-gradient-to-br from-dusted-peri/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
 
             <div className='relative z-10'>
-              <div className='mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-dusted-peri/10 text-dusted-peri ring-1 ring-white/10 transition-colors group-hover:bg-dusted-peri group-hover:text-maritime-darkest'>
+              <div className='mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-dusted-peri/10 text-dusted-peri ring-1 ring-white/10 transition-colors group-hover:bg-dusted-peri group-hover:text-background'>
                 <Coffee className='h-6 w-6' />
               </div>
               <h3 className='mb-2 text-xl font-google-sans font-bold text-cloud-dancer'>
@@ -103,7 +103,7 @@ export default function ProductSpecsPage() {
             <div className='absolute inset-0 bg-gradient-to-br from-cloud-dancer/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
 
             <div className='relative z-10'>
-              <div className='mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-cloud-dancer/10 text-cloud-dancer/90 ring-1 ring-white/10 transition-colors group-hover:bg-cloud-dancer group-hover:text-maritime-darkest'>
+              <div className='mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-cloud-dancer/10 text-cloud-dancer/90 ring-1 ring-white/10 transition-colors group-hover:bg-cloud-dancer group-hover:text-background'>
                 <Move className='h-6 w-6' />
               </div>
               <h3 className='mb-2 text-xl font-google-sans font-bold text-cloud-dancer'>3. Parkasmodus</h3>
@@ -135,9 +135,9 @@ export default function ProductSpecsPage() {
             {/* PRODUKTER */}
             <Link
               href='/produkter'
-              className='group relative flex flex-col items-center justify-center rounded-3xl border border-white/10 bg-havdyp p-12 text-center transition-all duration-500 hover:border-ancient-water/50 hover:bg-maritime-darkest hover:shadow-2xl'
+              className='group relative flex flex-col items-center justify-center rounded-3xl border border-white/10 bg-havdyp p-12 text-center transition-all duration-500 hover:border-ancient-water/50 hover:bg-background hover:shadow-2xl'
             >
-              <div className='mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-maritime-darkest text-cloud-dancer transition-all group-hover:scale-110 group-hover:bg-ancient-water group-hover:text-maritime-darkest'>
+              <div className='mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-background text-cloud-dancer transition-all group-hover:scale-110 group-hover:bg-ancient-water group-hover:text-background'>
                 <ShoppingBag className='h-8 w-8' />
               </div>
               <h3 className='mb-2 text-2xl font-google-sans font-bold text-cloud-dancer'>
@@ -146,7 +146,7 @@ export default function ProductSpecsPage() {
               <p className='mb-8 max-w-sm   text-cloud-dancer/90  '>
                 Klar for å oppleve Utekos®? Se vårt utvalg.
               </p>
-              <BrandBadge className='group-hover:bg-cloud-dancer group-hover:text-maritime-darkest'>
+              <BrandBadge className='group-hover:bg-cloud-dancer group-hover:text-background'>
                 Gå til butikken
               </BrandBadge>
             </Link>
@@ -154,9 +154,9 @@ export default function ProductSpecsPage() {
             {/* MAGASINET */}
             <Link
               href='/magasinet'
-              className='group relative flex flex-col items-center justify-center rounded-3xl border border-white/10 bg-havdyp p-12 text-center transition-all duration-500 hover:border-dusted-peri/50 hover:bg-maritime-darkest hover:shadow-2xl'
+              className='group relative flex flex-col items-center justify-center rounded-3xl border border-white/10 bg-havdyp p-12 text-center transition-all duration-500 hover:border-dusted-peri/50 hover:bg-background hover:shadow-2xl'
             >
-              <div className='mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-maritime-darkest text-cloud-dancer transition-all group-hover:scale-110 group-hover:bg-dusted-peri group-hover:text-maritime-darkest'>
+              <div className='mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-background text-cloud-dancer transition-all group-hover:scale-110 group-hover:bg-dusted-peri group-hover:text-background'>
                 <BookOpen className='h-8 w-8' />
               </div>
               <h3 className='mb-2 text-2xl font-google-sans font-bold text-cloud-dancer'>
@@ -165,7 +165,7 @@ export default function ProductSpecsPage() {
               <p className='mb-8 max-w-sm   text-cloud-dancer/90  '>
                 Les mer om tips og historier i vårt magasin.
               </p>
-              <BrandBadge className='group-hover:bg-cloud-dancer group-hover:text-maritime-darkest'>
+              <BrandBadge className='group-hover:bg-cloud-dancer group-hover:text-background'>
                 Les magasinet
               </BrandBadge>
             </Link>

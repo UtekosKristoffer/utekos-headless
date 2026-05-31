@@ -17,7 +17,7 @@ export function MagazineArticleHeader({ article }: MagazineArticleHeaderProps) {
   return (
     <header className='relative overflow-hidden bg-havdyp text-cloud-dancer'>
       <div
-        className='absolute inset-0 bg-[linear-gradient(140deg,color-mix(in_oklch,var(--maritime-darkest)_72%,transparent),transparent_58%)]'
+        className='absolute inset-0 bg-[linear-gradient(140deg,color-mix(in_oklch,var(--background)_72%,transparent),transparent_58%)]'
         aria-hidden
       />
       <div className='container relative mx-auto grid gap-10 px-4 py-14 sm:py-20 lg:grid-cols-[minmax(0,1fr)_minmax(24rem,0.78fr)] lg:items-end lg:py-24'>

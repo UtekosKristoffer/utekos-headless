@@ -8,14 +8,14 @@ export const benefitsData: Benefit[] = [
     title: 'Øyeblikkelig varme',
     description: 'Fra kjølig ankomst til peiskos-følelse på sekunder.',
     benefitColor: 'bg-bleached-mauve',
-    iconColor: 'text-maritime-darkest'
+    iconColor: 'text-background'
   },
   {
     icon: Settings2,
     title: 'Praktisk design',
     description: 'Tar minimalt med plass og er enkel å ta med seg.',
     benefitColor: 'bg-ancient-water',
-    iconColor: 'text-maritime-darkest'
+    iconColor: 'text-background'
   },
   {
     icon: HeartHandshake,
@@ -29,7 +29,7 @@ export const benefitsData: Benefit[] = [
     title: 'En del av hytten',
     description: 'Blir like selvsagt å ta på seg som tøflene inne.',
     benefitColor: 'bg-overcast',
-    iconColor: 'text-maritime-darkest'
+    iconColor: 'text-background'
   }
 ]
 

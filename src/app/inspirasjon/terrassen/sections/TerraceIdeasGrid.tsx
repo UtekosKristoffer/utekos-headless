@@ -33,35 +33,35 @@ export const terraceIdeasData: TerraceIdea[] = [
     name: 'Morgenkaffen ute',
     highlight: 'En lun start på dagen',
     icon: 'coffee',
-    color: 'text-maritime-darkest',
+    color: 'text-background',
     bgColor: 'color-mix(in oklch, var(--cloud-dancer) 90%, transparent)'
   },
   {
     name: 'Lounge-området',
     highlight: 'For sosiale kvelder',
     icon: 'sofa',
-    color: 'text-maritime-darkest',
+    color: 'text-background',
     bgColor: 'color-mix(in oklch, var(--ancient-water) 90%, transparent)'
   },
   {
     name: 'Balkong-oasen',
     highlight: 'Maksimal komfort, minimal plass',
     icon: 'building2',
-    color: 'text-maritime-darkest',
+    color: 'text-background',
     bgColor: 'color-mix(in oklch, var(--bleached-mauve) 90%, transparent)'
   },
   {
     name: 'Lesekroken',
     highlight: 'Fordyp deg i en annen verden',
     icon: 'book-open',
-    color: 'text-maritime-darkest',
+    color: 'text-background',
     bgColor: 'color-mix(in oklch, var(--primary) 90%, transparent)'
   }
 ]
 
 export function TerraceIdeasGrid({ ideas }: { ideas: TerraceIdea[] }) {
   return (
-    <section className='bg-maritime-darkest py-24 md:py-32'>
+    <section className='bg-background py-24 md:py-32'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-3xl md:max-w-4xl text-center'>
           <h2 className=' text-cloud-dancer'>Ideer for din uteplass</h2>
@@ -85,11 +85,11 @@ export function TerraceIdeasGrid({ ideas }: { ideas: TerraceIdea[] }) {
                   <div className='mb-3 flex items-center gap-2'>
                     <IconRenderer
                       name={idea.icon}
-                      className={`${idea.color} shrink-0 transition-colors duration-300 group-hover:text-maritime-darkest/80 motion-reduce:transition-none`}
+                      className={`${idea.color} shrink-0 transition-colors duration-300 group-hover:text-background/80 motion-reduce:transition-none`}
                     />
-                    <h3 className='text-maritime-darkest'>{idea.name} </h3>
+                    <h3 className='text-background'>{idea.name} </h3>
                   </div>
-                  <p className=' text-maritime-darkest text-paragraph'>{idea.highlight}</p>
+                  <p className=' text-background text-paragraph'>{idea.highlight}</p>
                 </CardContent>
               </Card>
             </AnimatedBlock>

@@ -12,19 +12,19 @@ export function NbccHowToUseSection() {
       <div className='mx-auto max-w-7xl'>
         <div className='grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start'>
           <div data-nbcc-reveal data-nbcc-animate>
-            <p className='text-sm font-semibold uppercase tracking-[0.18em] text-maritime-darkest'>
+            <p className='text-sm font-semibold uppercase tracking-[0.18em] text-background'>
               NBCC MEDLEMSFORDEL
             </p>
-            <h2 className='mt-4 max-w-xl text-balance text-3xl text-maritime-darkest font-semibold tracking-normal sm:text-4xl'>
+            <h2 className='mt-4 max-w-xl text-balance text-3xl text-background font-semibold tracking-normal sm:text-4xl'>
               Fra medlemskode til ekte Utekos.
             </h2>
-            <p className='mt-5 max-w-xl text-base text-maritime-darkest  '>
+            <p className='mt-5 max-w-xl text-base text-background  '>
               Som medlem får du en hyggelig prisrabatt på hele vårt hovedsortiment. Følg de tre enkle stegene
               for å hente koden din, eller hopp rett til kassen om du allerede har den klar.
             </p>
             <Button
               asChild
-              className='mt-8 h-12 rounded-md bg-maritime-darkest px-6 text-cloud-dancer hover:bg-overcast'
+              className='mt-8 h-12 rounded-md bg-background px-6 text-cloud-dancer hover:bg-overcast'
             >
               <Link
                 href='/produkter'
@@ -53,13 +53,11 @@ export function NbccHowToUseSection() {
                     <CheckIcon size={22} animate='default' className='text-primary' aria-hidden />
                   </span>
                   <div>
-                    <p className='text-sm font-semibold   text-maritime-darkest'>Steg {index + 1}</p>
-                    <h3 className='mt-1 text-xl   font-semibold text-maritime-darkest'>{step.title}</h3>
-                    <p className='mt-2 text-sm leading-7   text-maritime-darkest'>{step.description}</p>
+                    <p className='text-sm font-semibold   text-background'>Steg {index + 1}</p>
+                    <h3 className='mt-1 text-xl   font-semibold text-background'>{step.title}</h3>
+                    <p className='mt-2 text-sm leading-7   text-background'>{step.description}</p>
                   </div>
-                  {index < nbccSteps.length - 1 && (
-                    <Separator className='sm:col-start-2 bg-maritime-darkest/50' />
-                  )}
+                  {index < nbccSteps.length - 1 && <Separator className='sm:col-start-2 bg-background/50' />}
                 </li>
               ))}
             </ol>

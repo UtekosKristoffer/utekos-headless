@@ -227,7 +227,7 @@ export function TerrasseCarousel() {
   return (
     <section
       ref={containerRef}
-      className='relative isolate mx-auto overflow-hidden bg-maritime-darkest px-4 py-16 sm:py-32'
+      className='relative isolate mx-auto overflow-hidden bg-background px-4 py-16 sm:py-32'
     >
       <div className='pointer-events-none absolute inset-0 -z-10 opacity-22'>
         <div
@@ -250,13 +250,13 @@ export function TerrasseCarousel() {
         <div className='mb-12 text-center'>
           <BrandBadge
             backgroundColor='var(--ancient-water)'
-            textColor='var(--maritime-darkest)'
+            textColor='var(--background)'
             className='gsap-header mb-4 gap-2 border border-ancient-water/52 px-4 py-2 text-sm leading-[1.4] font-base   opacity-0'
           >
             <Camera className='size-4' aria-hidden='true' />
             <span className='inline-flex items-baseline gap-[0.28em] leading-none'>
               <span className='text-[0.95em]'>Terrasselivet med</span>
-              <UtekosWordmark className='inline-block h-[0.78em] w-auto translate-y-[0.035em] text-maritime-darkest' />
+              <UtekosWordmark className='inline-block h-[0.78em] w-auto translate-y-[0.035em] text-background' />
             </span>
           </BrandBadge>
 
@@ -264,7 +264,7 @@ export function TerrasseCarousel() {
         </div>
 
         <div className='gsap-carousel relative opacity-0'>
-          <div className='relative mx-auto max-w-6xl overflow-hidden rounded-[1.75rem] border border-cloud-dancer/10 bg-havdyp/40 p-4 shadow-[0_32px_90px_-56px_color-mix(in_oklch,var(--maritime-darkest)_96%,transparent)] backdrop-blur-sm sm:p-6'>
+          <div className='relative mx-auto max-w-6xl overflow-hidden rounded-[1.75rem] border border-cloud-dancer/10 bg-havdyp/40 p-4 shadow-[0_32px_90px_-56px_color-mix(in_oklch,var(--background)_96%,transparent)] backdrop-blur-sm sm:p-6'>
             <div className='absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,color-mix(in_oklch,var(--ancient-water)_38%,transparent),transparent)]' />
 
             <Carousel
@@ -278,7 +278,7 @@ export function TerrasseCarousel() {
               <CarouselContent className='-ml-4'>
                 {terrasseImages.map(image => (
                   <CarouselItem key={image.src} className='pl-4 md:basis-1/2 lg:basis-1/3'>
-                    <div className='group relative overflow-hidden rounded-[1.25rem] border border-cloud-dancer/12 bg-maritime-darkest'>
+                    <div className='group relative overflow-hidden rounded-[1.25rem] border border-cloud-dancer/12 bg-background'>
                       <AspectRatio ratio={1 / 1}>
                         <Image
                           src={image.src}
@@ -287,15 +287,15 @@ export function TerrasseCarousel() {
                           className='object-cover transition-transform duration-700 will-change-transform group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100'
                           sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
                         />
-                        <div className='absolute inset-0 bg-gradient-to-t from-maritime-darkest/72 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 motion-reduce:transition-none' />
+                        <div className='absolute inset-0 bg-gradient-to-t from-background/72 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 motion-reduce:transition-none' />
                       </AspectRatio>
                     </div>
                   </CarouselItem>
                 ))}
               </CarouselContent>
 
-              <CarouselPrevious className='left-4 border-cloud-dancer/14 bg-maritime-darkest/78 text-cloud-dancer backdrop-blur-md hover:bg-havdyp focus-visible:ring-primary/70' />
-              <CarouselNext className='right-4 border-cloud-dancer/14 bg-maritime-darkest/78 text-cloud-dancer backdrop-blur-md hover:bg-havdyp focus-visible:ring-primary/70' />
+              <CarouselPrevious className='left-4 border-cloud-dancer/14 bg-background/78 text-cloud-dancer backdrop-blur-md hover:bg-havdyp focus-visible:ring-primary/70' />
+              <CarouselNext className='right-4 border-cloud-dancer/14 bg-background/78 text-cloud-dancer backdrop-blur-md hover:bg-havdyp focus-visible:ring-primary/70' />
             </Carousel>
 
             <div className='mt-8 flex items-center justify-center gap-2'>
@@ -305,7 +305,7 @@ export function TerrasseCarousel() {
                   type='button'
                   onClick={() => api.scrollTo(index)}
                   className={cn(
-                    'h-1.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest motion-reduce:transition-none',
+                    'h-1.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',
                     current === index + 1 ? 'w-6 bg-primary' : 'w-1.5 bg-overcast hover:bg-cloud-dancer'
                   )}
                   aria-current={current === index + 1 ? 'true' : undefined}

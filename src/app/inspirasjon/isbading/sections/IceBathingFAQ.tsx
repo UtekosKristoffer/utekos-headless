@@ -27,18 +27,14 @@ export function IceBathingFAQ() {
   return (
     <section className='border-t border-cloud-dancer/12 bg-overcast py-24'>
       <div className='container mx-auto max-w-3xl px-4'>
-        <h2 className='mb-12 text-center text-3xl font-bold leading-[1.05] tracking-normal text-maritime-darkest'>
+        <h2 className='mb-12 text-center text-3xl font-bold leading-[1.05] tracking-normal text-background'>
           Ofte stilte spørsmål
         </h2>
 
         <Accordion type='single' collapsible className='w-full'>
           {iceBathingFaqItems.map((item, index) => (
-            <AccordionItem
-              key={item.question}
-              value={`item-${index + 1}`}
-              className='border-maritime-darkest/16'
-            >
-              <AccordionTrigger className='text-left text-maritime-darkest leading-[1.35] tracking-normal'>
+            <AccordionItem key={item.question} value={`item-${index + 1}`} className='border-background/16'>
+              <AccordionTrigger className='text-left text-background leading-[1.35] tracking-normal'>
                 {item.question}
               </AccordionTrigger>
               <AccordionContent className='leading-[1.5] tracking-normal text-havdyp'>

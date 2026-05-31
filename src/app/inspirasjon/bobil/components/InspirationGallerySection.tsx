@@ -37,7 +37,7 @@ export function InspirationGallerySection() {
             {galleryImages.map(image => (
               <CarouselItem key={image.src} className='pl-4 md:basis-1/2 lg:basis-1/3'>
                 <div className='group flex h-full flex-col p-1'>
-                  <div className='relative aspect-[4/5] shrink-0 overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest'>
+                  <div className='relative aspect-[4/5] shrink-0 overflow-hidden rounded-lg border border-cloud-dancer/12 bg-background'>
                     <Image
                       src={image.src}
                       alt={image.alt}
@@ -61,11 +61,11 @@ export function InspirationGallerySection() {
           </CarouselContent>
           <CarouselPrevious
             aria-label='Forrige bilde'
-            className='left-2 hidden border-cloud-dancer/20 bg-maritime-darkest/90 text-cloud-dancer hover:bg-maritime-darkest focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-havdyp md:inline-flex'
+            className='left-2 hidden border-cloud-dancer/20 bg-background/90 text-cloud-dancer hover:bg-background focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-havdyp md:inline-flex'
           />
           <CarouselNext
             aria-label='Neste bilde'
-            className='right-2 hidden border-cloud-dancer/20 bg-maritime-darkest/90 text-cloud-dancer hover:bg-maritime-darkest focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-havdyp md:inline-flex'
+            className='right-2 hidden border-cloud-dancer/20 bg-background/90 text-cloud-dancer hover:bg-background focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-havdyp md:inline-flex'
           />
         </Carousel>
       </div>

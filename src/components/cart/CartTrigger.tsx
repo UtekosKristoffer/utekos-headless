@@ -12,9 +12,7 @@ import { useCallback } from 'react'
 import { getRecommendedProducts } from '@/api/lib/products/getRecommendedProducts'
 import { getAccessoryProducts } from '@/api/lib/products/getAccessoryProducts'
 
-const getOptimisticCount = (
-  lines: Record<string, unknown> | undefined
-): number => {
+const getOptimisticCount = (lines: Record<string, unknown> | undefined): number => {
   if (!lines) return 0
   return Object.values(lines).reduce<number>((sum, line) => {
     const quantity = (line as { quantity?: unknown })?.quantity
@@ -22,11 +20,7 @@ const getOptimisticCount = (
   }, 0)
 }
 
-export function CartTrigger({
-  className
-}: {
-  className?: string
-}): React.JSX.Element {
+export function CartTrigger({ className }: { className?: string }): React.JSX.Element {
   const { optimisticCartLines } = useCartStoreSnapshot().context
   const { data: cart } = useCartQuery()
   const queryClient = useQueryClient()
@@ -65,7 +59,7 @@ export function CartTrigger({
         {itemCount > 0 && (
           <div
             className='pointer-events-none absolute -right-2 -top-2 z-10 grid h-4 w-4
-                          place-items-center rounded-sm border border-cloud-dancer/10 bg-maritime-darkest text-[11px]
+                          place-items-center rounded-sm border border-cloud-dancer/10 bg-background text-[11px]
                           font-medium text-cloud-dancer'
           >
             {itemCount}

@@ -6,9 +6,9 @@ import { UsageGroup } from './UsageGroup'
 import { Leaf, ShieldCheck, Waves, Info } from 'lucide-react'
 
 const triggerClassName =
-  'font-google-sans text-left text-lg font-semibold text-maritime-darkest hover:text-havdyp hover:no-underline [&>svg]:text-maritime-darkest md:text-xl'
+  'font-google-sans text-left text-lg font-semibold text-background hover:text-havdyp hover:no-underline [&>svg]:text-background md:text-xl'
 
-const itemClassName = 'border-maritime-darkest/20'
+const itemClassName = 'border-background/20'
 
 export async function ProductDetailsAccordion() {
   'use cache'
@@ -16,9 +16,9 @@ export async function ProductDetailsAccordion() {
   cacheTag('skreddersy-varmen', 'skreddersy-varmen-product-details')
 
   return (
-    <section className='w-full bg-overcast px-6 pb-24 pt-6 text-maritime-darkest'>
+    <section className='w-full bg-overcast px-6 pb-24 pt-6 text-background'>
       <div className='mx-auto max-w-3xl'>
-        <h2 className='my-8 text-center font-google-sans text-4xl font-bold leading-[0.95] tracking-normal text-maritime-darkest md:text-5xl'>
+        <h2 className='my-8 text-center font-google-sans text-4xl font-bold leading-[0.95] tracking-normal text-background md:text-5xl'>
           Alt du trenger å vite
         </h2>
 
@@ -72,10 +72,8 @@ export async function ProductDetailsAccordion() {
                 <li className='flex gap-4'>
                   <Waves className='mt-1 shrink-0 text-mountain-view' size={20} />
                   <div>
-                    <h4 className='mb-1 text-base font-bold text-maritime-darkest'>
-                      Håndterer fuktige forhold
-                    </h4>
-                    <p className='text-maritime-darkest/82'>
+                    <h4 className='mb-1 text-base font-bold text-background'>Håndterer fuktige forhold</h4>
+                    <p className='text-background/82'>
                       Den avanserte, syntetiske isolasjonen er konstruert for å prestere optimalt i fuktige
                       forhold. Den beholder isolerende evne når den blir våt og tørker svært raskt.
                     </p>
@@ -84,8 +82,8 @@ export async function ProductDetailsAccordion() {
                 <li className='flex gap-4'>
                   <Leaf className='mt-1 shrink-0 text-mountain-view' size={20} />
                   <div>
-                    <h4 className='mb-1 text-base font-bold text-maritime-darkest'>Allergivennlig</h4>
-                    <p className='text-maritime-darkest/82'>
+                    <h4 className='mb-1 text-base font-bold text-background'>Allergivennlig</h4>
+                    <p className='text-background/82'>
                       Et gjennomtenkt vegansk valg som gir full trygghet og komfort for deg med dunallergi
                       eller for deg som foretrekker produkter uten animalske materialer.
                     </p>
@@ -94,8 +92,8 @@ export async function ProductDetailsAccordion() {
                 <li className='flex gap-4'>
                   <ShieldCheck className='mt-1 shrink-0 text-mountain-view' size={20} />
                   <div>
-                    <h4 className='mb-1 text-base font-bold text-maritime-darkest'>Robust og allsidig</h4>
-                    <p className='text-maritime-darkest/82'>
+                    <h4 className='mb-1 text-base font-bold text-background'>Robust og allsidig</h4>
+                    <p className='text-background/82'>
                       Utekos™-modellen med lavest vekt, best egnet for både rolig hygge og aktivitet.
                     </p>
                   </div>
@@ -136,16 +134,14 @@ export async function ProductDetailsAccordion() {
           <AccordionItem value='fit' className={itemClassName}>
             <AccordionTrigger className={triggerClassName}>Passform</AccordionTrigger>
             <AccordionContent>
-              <div className='space-y-4 p-2 text-base leading-[1.45] text-maritime-darkest/82'>
+              <div className='space-y-4 p-2 text-base leading-[1.45] text-background/82'>
                 <p>
-                  <strong className='mb-1 block text-maritime-darkest'>
-                    Rom for bevegelse og ekstra lag
-                  </strong>
+                  <strong className='mb-1 block text-background'>Rom for bevegelse og ekstra lag</strong>
                   Utekos Mikrofiber™ er designet med sjenerøs passform som gir deg full bevegelsesfrihet og
                   gjør det enkelt å ha flere lag under uten at det føles trangt.
                 </p>
                 <p>
-                  <strong className='mb-1 block text-maritime-darkest'>
+                  <strong className='mb-1 block text-background'>
                     Fra parkas til fullstendig tildekket på sekunder
                   </strong>
                   Med smarte snorstramminger justerer du enkelt passformen for optimal varme og komfort. Gå
@@ -163,11 +159,11 @@ export async function ProductDetailsAccordion() {
             <AccordionTrigger className={triggerClassName}>Vedlikehold</AccordionTrigger>
             <AccordionContent>
               <div className='space-y-4 p-2'>
-                <ul className='list-inside list-disc space-y-1 text-maritime-darkest/82'>
+                <ul className='list-inside list-disc space-y-1 text-background/82'>
                   <li>Maskinvask på maks 30°C</li>
                   <li>Bruk mild såpe</li>
                   <li>
-                    <span className='font-bold text-maritime-darkest'>Unngå tørketrommelen</span>
+                    <span className='font-bold text-background'>Unngå tørketrommelen</span>
                   </li>
                   <li>La den lufttørke (tørker raskt)</li>
                   <li>Unngå stryking og bleking</li>

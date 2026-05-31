@@ -17,7 +17,7 @@ export function IceBathingHeroCta() {
     <BrandBadge
       asChild
       backgroundColor='var(--primary)'
-      textColor='var(--maritime-darkest)'
+      textColor='var(--background)'
       className='group min-h-14 min-w-[200px] border border-primary/24 px-8 py-4 text-base leading-[1.4] font-bold tracking-normal shadow-2xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
     >
       <Link

@@ -15,7 +15,7 @@ export default function ProductHeader({ productHandle, productTitle, productSubt
         {productHandle === 'utekos-special-edition' && (
           <BrandBadge
             backgroundColor='var(--dusted-peri)'
-            textColor='var(--maritime-darkest)'
+            textColor='var(--background)'
             className='mb-5 gap-2 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
           >
             <Sparkles className='h-5 w-5' aria-hidden='true' />

@@ -63,7 +63,7 @@ export function NbccProductCardActions({
               disabled={!v.availableForSale}
               className={[
                 'rounded-md border px-3 py-1.5 text-sm font-medium transition-all',
-                v.label === selectedLabel ? 'border-primary bg-cloud-dancer text-maritime-darkest'
+                v.label === selectedLabel ? 'border-primary bg-cloud-dancer text-background'
                 : !v.availableForSale ?
                   'cursor-not-allowed border-cloud-dancer/10 text-cloud-dancer/25 line-through'
                 : 'border-cloud-dancer/20 text-cloud-dancer/70 hover:border-cloud-dancer/40 hover:text-cloud-dancer'
@@ -78,7 +78,7 @@ export function NbccProductCardActions({
       {/* Price */}
       <div className='flex items-center justify-between'>
         <span className='text-xl font-semibold text-cloud-dancer'>{price}</span>
-        <span className='rounded-full border   border-primary/30 bg-cloud-dancer px-2 py-0.5 text-xs text-maritime-darkest'>
+        <span className='rounded-full border   border-primary/30 bg-cloud-dancer px-2 py-0.5 text-xs text-background'>
           NBCC-rabatt i kassen
         </span>
       </div>
@@ -88,7 +88,7 @@ export function NbccProductCardActions({
         <Button
           onClick={handleAddToCart}
           disabled={isPending || !isAvailable}
-          className='h-11 w-full rounded-md bg-primary text-maritime-darkest hover:bg-primary/90'
+          className='h-11 w-full rounded-md bg-primary text-background hover:bg-primary/90'
         >
           {isPending ?
             <Loader2 className='size-4 animate-spin' />

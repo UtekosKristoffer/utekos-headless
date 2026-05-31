@@ -11,7 +11,7 @@ type MagazineCtaBlockProps = {
 
 export function MagazineCtaBlock({ block }: MagazineCtaBlockProps) {
   return (
-    <section className='my-16 rounded-lg border border-cloud-dancer/12 bg-maritime-darkest p-6 text-cloud-dancer shadow-[0_28px_90px_-62px_color-mix(in_oklch,var(--maritime-darkest)_90%,transparent)] sm:p-8'>
+    <section className='my-16 rounded-lg border border-cloud-dancer/12 bg-background p-6 text-cloud-dancer shadow-[0_28px_90px_-62px_color-mix(in_oklch,var(--background)_90%,transparent)] sm:p-8'>
       <h2 className='max-w-2xl text-balance font-google-sans text-3xl font-bold leading-[0.95]   sm:text-4xl'>
         <MagazineInlineTitle text={block.title} />
       </h2>
@@ -20,7 +20,7 @@ export function MagazineCtaBlock({ block }: MagazineCtaBlockProps) {
         <BrandBadge
           asChild
           backgroundColor='var(--primary)'
-          textColor='var(--maritime-darkest)'
+          textColor='var(--background)'
           className='group min-h-12 gap-2 border border-primary/24 px-6 py-3 text-base font-semibold leading-[1.35]   transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
         >
           <Link href={block.primary.href as Route} data-track={block.primary.trackingId}>
@@ -32,7 +32,7 @@ export function MagazineCtaBlock({ block }: MagazineCtaBlockProps) {
           <BrandBadge
             asChild
             backgroundColor='var(--cloud-dancer)'
-            textColor='var(--maritime-darkest)'
+            textColor='var(--background)'
             className='min-h-12 border border-cloud-dancer/24 px-6 py-3 text-base font-semibold leading-[1.35]   transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
           >
             <Link href={block.secondary.href as Route} data-track={block.secondary.trackingId}>

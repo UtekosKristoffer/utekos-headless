@@ -89,10 +89,10 @@ export function ProductCareGeneralGuide() {
   return (
     <section aria-labelledby='generell-guide-heading' className='mx-auto mt-16 max-w-4xl scroll-mt-24'>
       <div className='mb-10 text-center'>
-        <h2 id='generell-guide-heading' className='text-2xl font-bold   text-maritime-darkest sm:text-3xl'>
+        <h2 id='generell-guide-heading' className='text-2xl font-bold   text-background sm:text-3xl'>
           Slik tar du vare på plagget
         </h2>
-        <p className='mx-auto mt-3 max-w-2xl text-base text-maritime-darkest/76'>
+        <p className='mx-auto mt-3 max-w-2xl text-base text-background/76'>
           Fire steg som gjelder for alle Utekos-plagg. Materialspesifikke detaljer finner du lenger ned.
         </p>
       </div>
@@ -102,7 +102,7 @@ export function ProductCareGeneralGuide() {
           <li
             key={id}
             id={id}
-            className='scroll-mt-24 rounded-2xl border border-maritime-darkest/10 bg-cloud-dancer/68 p-5 shadow-[0_20px_54px_-46px_color-mix(in_oklab,var(--maritime-darkest)_72%,transparent)] sm:p-7'
+            className='scroll-mt-24 rounded-2xl border border-background/10 bg-cloud-dancer/68 p-5 shadow-[0_20px_54px_-46px_color-mix(in_oklab,var(--background)_72%,transparent)] sm:p-7'
           >
             <div className='flex items-start gap-4 sm:gap-5'>
               <span
@@ -112,11 +112,9 @@ export function ProductCareGeneralGuide() {
                 <Icon className='size-5 sm:size-[1.375rem]' />
               </span>
               <div className='min-w-0 flex-1'>
-                <p className='text-xs font-medium   text-maritime-darkest/62'>{step}</p>
-                <h3 className='mt-1 text-xl font-semibold   text-maritime-darkest sm:text-2xl'>{title}</h3>
-                <div className='mt-3 space-y-3 text-base leading-relaxed text-maritime-darkest/82'>
-                  {content}
-                </div>
+                <p className='text-xs font-medium   text-background/62'>{step}</p>
+                <h3 className='mt-1 text-xl font-semibold   text-background sm:text-2xl'>{title}</h3>
+                <div className='mt-3 space-y-3 text-base leading-relaxed text-background/82'>{content}</div>
               </div>
             </div>
           </li>

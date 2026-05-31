@@ -12,8 +12,8 @@ export const popularAreasData: Destination[] = [
     highlight: 'Varme etter skituren',
     bgColor: 'bg-ancient-water',
     iconBgColor: 'bg-ancient-water-light',
-    iconColor: 'text-maritime-darkest',
-    textColor: 'text-maritime-darkest'
+    iconColor: 'text-background',
+    textColor: 'text-background'
   },
   {
     name: 'Sørlandskysten',
@@ -21,7 +21,7 @@ export const popularAreasData: Destination[] = [
     highlight: 'Varme på kjølige sommerkvelder',
     bgColor: 'bg-dusted-peri',
     iconBgColor: 'bg-dusted-peri-light',
-    iconColor: 'text-maritime-darkest',
+    iconColor: 'text-background',
     textColor: 'text-cloud-dancer'
   },
   {
@@ -30,8 +30,8 @@ export const popularAreasData: Destination[] = [
     highlight: 'Komfort i fjellet, hele året',
     bgColor: 'bg-overcast',
     iconBgColor: 'bg-overcast-light',
-    iconColor: 'text-maritime-darkest',
-    textColor: 'text-maritime-darkest'
+    iconColor: 'text-background',
+    textColor: 'text-background'
   },
   {
     name: 'Hardanger',
@@ -39,8 +39,8 @@ export const popularAreasData: Destination[] = [
     highlight: 'Nyt fjordutsikten lenger',
     bgColor: 'bg-bleached-mauve',
     iconBgColor: 'bg-bleached-mauve-light',
-    iconColor: 'text-maritime-darkest',
-    textColor: 'text-maritime-darkest'
+    iconColor: 'text-background',
+    textColor: 'text-background'
   }
 ]
 

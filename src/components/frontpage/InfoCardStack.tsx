@@ -3,19 +3,11 @@ import { Lock, ShoppingBag } from 'lucide-react'
 import Image from 'next/image'
 import UtekosLogo from '@public/icon.png'
 
-const TrafficLights = ({
-  variant = 'default'
-}: {
-  variant?: 'default' | 'colored'
-}) => {
+const TrafficLights = ({ variant = 'default' }: { variant?: 'default' | 'colored' }) => {
   const colors =
     variant === 'colored' ?
       ['bg-red-500/80', 'bg-blue-500/80', 'bg-green-500/80']
-    : [
-        'bg-sidebar-foreground',
-        'bg-sidebar-foreground',
-        'bg-sidebar-foreground'
-      ]
+    : ['bg-sidebar-foreground', 'bg-sidebar-foreground', 'bg-sidebar-foreground']
 
   return (
     <div className='absolute top-3 left-3 z-20 flex gap-1.5'>
@@ -44,9 +36,7 @@ export function InfoCardStack() {
         <div className='mt-6 flex items-start gap-3'>
           <ShoppingBag className='h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 text-muted-foreground' />
           <div>
-            <h3 className='text-sm sm:text-base font-semibold text-foreground'>
-              En trygg handel
-            </h3>
+            <h3 className='text-sm sm:text-base font-semibold text-foreground'>En trygg handel</h3>
             <p className='mt-1 text-xs sm:text-sm text-muted-foreground'>
               Sikre betalingsløsninger og 14 dagers angrerett.
             </p>
@@ -69,8 +59,7 @@ export function InfoCardStack() {
               repeating-linear-gradient(to right, var(--color-border), var(--color-border) 1px, transparent 1px, transparent 40px),
               repeating-linear-gradient(to bottom, var(--color-border), var(--color-border) 1px, transparent 1px, transparent 40px)
             `,
-            maskImage:
-              'linear-gradient(to bottom, white 0%, white 70%, transparent 100%)'
+            maskImage: 'linear-gradient(to bottom, white 0%, white 70%, transparent 100%)'
           }}
         />
 
@@ -78,23 +67,17 @@ export function InfoCardStack() {
 
         <div className='relative z-10 flex h-full flex-col'>
           <div className='mt-6 flex items-start gap-3'>
-            <Lock className='h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 text-maritime-darkest' />
+            <Lock className='h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 text-background' />
             <div>
-              <h3 className='text-sm sm:text-base font-semibold text-maritime-darkest'>
-                Ditt personvern
-              </h3>
-              <p className='mt-1 text-xs sm:text-sm text-maritime-darkest'>
+              <h3 className='text-sm sm:text-base font-semibold text-background'>Ditt personvern</h3>
+              <p className='mt-1 text-xs sm:text-sm text-background'>
                 Vi tar personvern på alvor. Se hvordan vi behandler dine data.
               </p>
             </div>
           </div>
 
           <div className='mt-auto flex justify-center pb-1 pt-2'>
-            <Image
-              src={UtekosLogo}
-              alt='Utekos logo ikon'
-              className='h-6 w-6 sm:h-8 sm:w-8 opacity-50'
-            />
+            <Image src={UtekosLogo} alt='Utekos logo ikon' className='h-6 w-6 sm:h-8 sm:w-8 opacity-50' />
           </div>
         </div>
       </div>

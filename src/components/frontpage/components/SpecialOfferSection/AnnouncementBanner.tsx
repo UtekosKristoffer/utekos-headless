@@ -62,7 +62,7 @@ export default function AnnouncementBanner() {
   return (
     <div
       className={cn(
-        'relative z-40 animate-slide-in-down border-b border-havdyp/16 bg-overcast text-maritime-darkest shadow-[0_14px_34px_-30px_color-mix(in_oklab,var(--demitasse)_46%,transparent)]',
+        'relative z-40 animate-slide-in-down border-b border-havdyp/16 bg-overcast text-background shadow-[0_14px_34px_-30px_color-mix(in_oklab,var(--demitasse)_46%,transparent)]',
         isExiting && 'animate-slide-out-up'
       )}
     >
@@ -79,12 +79,12 @@ export default function AnnouncementBanner() {
             strokeWidth={1.8}
           />
 
-          <span className='min-w-0 text-maritime-darkest/86'>
-            <span className='font-semibold text-maritime-darkest'>Utekos TechDown™</span>{' '}
-            <span className='text-maritime-darkest/72'>til kr 1790,-</span>
+          <span className='min-w-0 text-background/86'>
+            <span className='font-semibold text-background'>Utekos TechDown™</span>{' '}
+            <span className='text-background/72'>til kr 1790,-</span>
           </span>
 
-          <span className='hidden items-center gap-1 font-semibold text-havdyp transition-colors group-hover:text-maritime-darkest sm:flex'>
+          <span className='hidden items-center gap-1 font-semibold text-havdyp transition-colors group-hover:text-background sm:flex'>
             Kjøp her
             <ArrowRightIcon className='size-4 transition-transform group-hover:translate-x-1' />
           </span>
@@ -95,7 +95,7 @@ export default function AnnouncementBanner() {
       <button
         onClick={handleDismiss}
         aria-label='Lukk banner'
-        className='absolute right-2 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full text-maritime-darkest/62 transition-colors hover:bg-havdyp/8 hover:text-maritime-darkest focus:outline-none focus:ring-2 focus:ring-havdyp/50 focus:ring-offset-2 focus:ring-offset-overcast'
+        className='absolute right-2 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full text-background/62 transition-colors hover:bg-havdyp/8 hover:text-background focus:outline-none focus:ring-2 focus:ring-havdyp/50 focus:ring-offset-2 focus:ring-offset-overcast'
       >
         <XIcon className='size-4 cursor-pointer' />
       </button>

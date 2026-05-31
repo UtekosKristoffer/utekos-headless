@@ -21,7 +21,7 @@ export function EmpathySection() {
     <section
       ref={sectionRef}
       aria-labelledby='empathy-heading'
-      className='relative w-full overflow-hidden bg-cloud-dancer py-16 text-maritime-darkest md:py-24 lg:py-28'
+      className='relative w-full overflow-hidden bg-cloud-dancer py-16 text-background md:py-24 lg:py-28'
     >
       <div className='mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 md:px-12 lg:grid-cols-2 lg:gap-16'>
         <div className='relative'>
@@ -39,14 +39,14 @@ export function EmpathySection() {
           {/* 2. H2 — curtain reveal */}
           <h2
             id='empathy-heading'
-            className='mb-5 max-w-[11ch] font-google-sans text-4xl font-bold leading-[0.92] tracking-[-0.01em] text-maritime-darkest sm:text-4xl md:text-5xl'
+            className='mb-5 max-w-[11ch] font-google-sans text-4xl font-bold leading-[0.92] tracking-[-0.01em] text-background sm:text-4xl md:text-5xl'
           >
             <span className='block overflow-hidden pb-[0.08em]'>
               <span className='gsap-empathy-word inline-block will-change-transform'>{HEADLINE}</span>
             </span>
           </h2>
 
-          <div className='max-w-none   text-base leading-[1.45]   text-maritime-darkest'>
+          <div className='max-w-none   text-base leading-[1.45]   text-background'>
             <p className='gsap-empathy-para1 relative max-w-[34rem]'>
               Du kjenner følelsen. Praten går lett rundt bålpannen, flammene danser, og roen har senket seg.
               Så kommer den snikende trekken som truer med å bryte magien.
@@ -54,25 +54,25 @@ export function EmpathySection() {
             <div className='relative my-7 py-1.5'>
               <span
                 aria-hidden
-                className='gsap-empathy-quote-bar absolute left-0 top-4 bottom-4 w-[3px] origin-top scale-y-0 bg-maritime-darkest transition-transform duration-500'
+                className='gsap-empathy-quote-bar absolute left-0 top-4 bottom-4 w-[3px] origin-top scale-y-0 bg-background transition-transform duration-500'
               />
-              <p className='gsap-empathy-quote ml-5 font-google-sans text-xl font-bold italic leading-[0.95] tracking-normal text-maritime-darkest md:ml-7 md:text-3xl'>
+              <p className='gsap-empathy-quote ml-5 font-google-sans text-xl font-bold italic leading-[0.95] tracking-normal text-background md:ml-7 md:text-3xl'>
                 &ldquo;Det begynner å bli kaldt. <br />
                 Skal vi trekke inn?&rdquo;
               </p>
             </div>
-            <p className='gsap-empathy-para2 mt-6 max-w-[34rem] text-maritime-darkest'>
+            <p className='gsap-empathy-para2 mt-6 max-w-[34rem] text-background'>
               Med Utekos® blir svaret enkelt. Fra lett mikrofiber til TechDown™ pakker plagget deg inn i
               varme slik at du kan bli sittende.
               <br />
               <br />
-              <span className='font-medium italic text-maritime-darkest'>Kjenn varmen. Forleng kvelden.</span>
+              <span className='font-medium italic text-background'>Kjenn varmen. Forleng kvelden.</span>
             </p>
           </div>
           <div className='mt-8 md:mt-9'>
             <BrandBadge
               asChild
-              backgroundColor='var(--color-maritime-darkest)'
+              backgroundColor='var(--color-background)'
               textColor='var(--color-cloud-dancer)'
               className='h-12 px-5 py-0 text-sm font-semibold leading-none tracking-normal shadow-sm transition-[filter,transform] hover:brightness-110 active:scale-[0.98] md:h-14 md:px-6 md:text-base'
             >
@@ -108,7 +108,7 @@ export function EmpathySection() {
 
               <div
                 aria-hidden
-                className='absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-maritime-darkest/75 via-maritime-darkest/30 to-transparent'
+                className='absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background/75 via-background/30 to-transparent'
               />
 
               <div className='gsap-empathy-image-overlay absolute bottom-5 left-5 right-5 text-cloud-dancer md:bottom-7 md:left-7 md:right-7'>

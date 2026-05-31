@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 
 export default function ProductCarePage() {
   return (
-    <article className='bg-overcast text-maritime-darkest'>
+    <article className='bg-overcast text-background'>
       <section className='container mx-auto px-4 py-12 sm:py-16'>
         <ProductCareHeader />
         <ProductCareGeneralGuide />

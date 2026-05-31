@@ -4,11 +4,7 @@ import Link from 'next/link'
 import { normalizeShopifyUrl } from '@/lib/helpers/normalizers/normalizeShopifyUrl'
 import type { MenuItem } from '@types'
 import type { Route } from 'next'
-import {
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger
-} from '@/components/ui/accordion'
+import { AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { ChevronRight } from 'lucide-react'
 import { SubMenuItem } from '@/components/header/MobileMenu/SubMenuItem'
 
@@ -45,7 +41,7 @@ export function MobileMenuItem({ item }: { item: MenuItem }) {
       </AccordionTrigger>
 
       <AccordionContent className='pb-0 pt-2'>
-        <div className='rounded-2xl border border-cloud-dancer/10 bg-maritime-darkest/54 p-2 backdrop-blur'>
+        <div className='rounded-2xl border border-cloud-dancer/10 bg-background/54 p-2 backdrop-blur'>
           <div className='space-y-1.5'>
             {item.items!.map(subItem => (
               <SubMenuItem key={subItem.title} item={subItem} />

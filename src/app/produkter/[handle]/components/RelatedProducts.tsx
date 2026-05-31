@@ -51,8 +51,8 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
             )
           })}
         </CarouselContent>
-        <CarouselPrevious className='left-2 border-cloud-dancer/80 bg-cloud-dancer/92 text-havdyp shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
-        <CarouselNext className='right-2 border-cloud-dancer/80 bg-cloud-dancer/92 text-havdyp shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
+        <CarouselPrevious className='left-2 border-cloud-dancer/80 bg-cloud-dancer/92 text-havdyp shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-background' />
+        <CarouselNext className='right-2 border-cloud-dancer/80 bg-cloud-dancer/92 text-havdyp shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-background' />
       </Carousel>
     </section>
   )

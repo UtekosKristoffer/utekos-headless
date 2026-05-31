@@ -6,7 +6,7 @@ export function SocialProof() {
         <div className='max-w-3xl mx-auto text-center'>
           <h2 className='mb-8'>Skippere elsker Utekos</h2>
 
-          <Card className='border-cloud-dancer/12 bg-maritime-darkest'>
+          <Card className='border-cloud-dancer/12 bg-background'>
             <CardContent className='p-12'>
               <blockquote className='text-xl italic text-cloud-dancer/90 mb-6'>
                 &quot;Som mangeårig seiler er Utekos det beste båtutstyret jeg har kjøpt på lenge. Den er helt

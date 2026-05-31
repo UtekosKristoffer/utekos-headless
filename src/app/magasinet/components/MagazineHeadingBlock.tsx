@@ -12,7 +12,7 @@ export function MagazineHeadingBlock({ block }: MagazineHeadingBlockProps) {
         {block.eyebrow && (
           <p className='mb-3   text-sm font-semibold leading-[1.4]   text-havdyp'>{block.eyebrow}</p>
         )}
-        <h3 className='text-balance font-google-sans text-3xl font-bold leading-[0.95]   text-maritime-darkest sm:text-4xl'>
+        <h3 className='text-balance font-google-sans text-3xl font-bold leading-[0.95]   text-background sm:text-4xl'>
           <MagazineInlineTitle text={block.text} />
         </h3>
       </div>
@@ -24,7 +24,7 @@ export function MagazineHeadingBlock({ block }: MagazineHeadingBlockProps) {
       {block.eyebrow && (
         <p className='mb-3   text-sm font-semibold leading-[1.4]   text-havdyp'>{block.eyebrow}</p>
       )}
-      <h2 className='text-balance font-google-sans text-4xl font-bold leading-[0.95]   text-maritime-darkest sm:text-5xl'>
+      <h2 className='text-balance font-google-sans text-4xl font-bold leading-[0.95]   text-background sm:text-5xl'>
         <MagazineInlineTitle text={block.text} />
       </h2>
     </div>

@@ -78,10 +78,10 @@ export const InfoCardStackView = forwardRef<HTMLDivElement, InfoCardStackViewPro
 
           <div className='relative z-10 flex h-full flex-col'>
             <div className='mt-6 flex items-start gap-3'>
-              <Lock className='size-4 flex-shrink-0 text-maritime-darkest sm:size-5' />
+              <Lock className='size-4 flex-shrink-0 text-background sm:size-5' />
               <div>
-                <h3 className='text-sm font-semibold text-maritime-darkest sm:text-base'>Ditt personvern</h3>
-                <p className='mt-1 text-xs text-maritime-darkest sm:text-sm'>
+                <h3 className='text-sm font-semibold text-background sm:text-base'>Ditt personvern</h3>
+                <p className='mt-1 text-xs text-background sm:text-sm'>
                   Vi tar personvern på alvor. Se hvordan vi behandler dine data.
                 </p>
               </div>

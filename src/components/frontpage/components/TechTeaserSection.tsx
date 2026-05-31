@@ -52,7 +52,7 @@ export default function TechTeaserSection() {
                     icon: Shield,
                     title: 'HydroGuard™ beskyttelse',
                     desc: 'Pustende membran med 8000mm vannsøyle.',
-                    color: 'text-maritime-darkest',
+                    color: 'text-background',
                     bg: 'bg-ancient-water'
                   },
                   {
@@ -135,7 +135,7 @@ export default function TechTeaserSection() {
                   </div>
                 </div>
 
-                <div className='gsap-inner-parallax absolute -bottom-6 -right-6 flex h-24 w-24 items-center justify-center rounded-full border border-white/10 bg-maritime-darkest shadow-2xl translate-z-[40px]'>
+                <div className='gsap-inner-parallax absolute -bottom-6 -right-6 flex h-24 w-24 items-center justify-center rounded-full border border-white/10 bg-background shadow-2xl translate-z-[40px]'>
                   <div className='text-center'>
                     <span className='block text-2xl font-bold text-cloud-dancer'>8K</span>
                     <span className='text-[10px] font-bold uppercase tracking-wider text-ancient-water'>

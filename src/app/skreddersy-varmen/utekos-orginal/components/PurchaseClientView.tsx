@@ -84,16 +84,16 @@ export function PurchaseClientView({
 
   return (
     <section className='relative left-[calc(-50vw+50%)] w-screen overflow-clip text-cloud-dancer lg:flex lg:min-h-screen'>
-      <div className='relative flex w-full flex-col items-center justify-center bg-maritime-darkest p-8 lg:sticky lg:top-0 lg:h-screen lg:w-1/2'>
+      <div className='relative flex w-full flex-col items-center justify-center bg-background p-8 lg:sticky lg:top-0 lg:h-screen lg:w-1/2'>
         <div
           key={`badge-${selectedModel}`}
-          className='absolute left-4 top-4 z-20 flex animate-in items-center gap-1.5 rounded-sm border border-maritime-darkest/10 bg-cloud-dancer/90 px-2.5 py-1 shadow-sm backdrop-blur-md fade-in slide-in-from-left-2 duration-500'
+          className='absolute left-4 top-4 z-20 flex animate-in items-center gap-1.5 rounded-sm border border-background/10 bg-cloud-dancer/90 px-2.5 py-1 shadow-sm backdrop-blur-md fade-in slide-in-from-left-2 duration-500'
         >
           <span className='relative flex h-1.5 w-1.5'>
             <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-slice *:opacity-60' />
             <span className='relative inline-flex h-1.5 w-1.5 rounded-full bg-orange-slice' />
           </span>
-          <span className='text-[10px] font-bold uppercase tracking-wider text-maritime-darkest'>
+          <span className='text-[10px] font-bold uppercase tracking-wider text-background'>
             {currentConfig.badge}
           </span>
         </div>
@@ -106,7 +106,7 @@ export function PurchaseClientView({
           <CarouselContent className='ml-0'>
             {currentConfig.images.map((src, i) => (
               <CarouselItem key={src} className='relative h-[50vh] pl-0 lg:h-[70vh]'>
-                <div className='relative h-full w-full overflow-hidden rounded-3xl bg-gradient-to-b from-white/70 to-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-maritime-darkest/10'>
+                <div className='relative h-full w-full overflow-hidden rounded-3xl bg-gradient-to-b from-white/70 to-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-background/10'>
                   <Image
                     src={src}
                     alt={`${currentConfig.title} – bilde ${i + 1}`}
@@ -123,18 +123,18 @@ export function PurchaseClientView({
             <>
               <CarouselPrevious
                 aria-label='Forrige bilde'
-                className='left-2 size-10 border-maritime-darkest/15 bg-cloud-dancer/90 text-maritime-darkest shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-orange-slice *:md:left-4 md:size-11'
+                className='left-2 size-10 border-background/15 bg-cloud-dancer/90 text-background shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-orange-slice *:md:left-4 md:size-11'
               />
               <CarouselNext
                 aria-label='Neste bilde'
-                className='right-2 size-10 border-maritime-darkest/15 bg-cloud-dancer/90 text-maritime-darkest shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-orange-slice *:md:right-4 md:size-11'
+                className='right-2 size-10 border-background/15 bg-cloud-dancer/90 text-background shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-orange-slice *:md:right-4 md:size-11'
               />
             </>
           )}
         </Carousel>
         <p
           key={`caption-${selectedModel}`}
-          className='mt-8 hidden animate-in font-google-sans text-base italic text-maritime-darkest fade-in duration-700 lg:block'
+          className='mt-8 hidden animate-in font-google-sans text-base italic text-background fade-in duration-700 lg:block'
         >
           Modell vist: {currentConfig.title}
         </p>
@@ -156,7 +156,7 @@ export function PurchaseClientView({
                   <TabsTrigger
                     key={key}
                     value={key}
-                    className='h-auto flex-1 whitespace-nowrap rounded-md px-6 py-3 text-base font-medium transition-all duration-300 data-[state=active]:bg-ancient-water data-[state=active]:text-maritime-darkest data-[state=active]:shadow-md data-[state=active]:ring-1 data-[state=active]:ring-black/5 data-[state=inactive]:text-maritime-darkest data-[state=inactive]:hover:scale-[1.02] data-[state=inactive]:hover:bg-cloud-dancer/60 md:flex-none'
+                    className='h-auto flex-1 whitespace-nowrap rounded-md px-6 py-3 text-base font-medium transition-all duration-300 data-[state=active]:bg-ancient-water data-[state=active]:text-background data-[state=active]:shadow-md data-[state=active]:ring-1 data-[state=active]:ring-black/5 data-[state=inactive]:text-background data-[state=inactive]:hover:scale-[1.02] data-[state=inactive]:hover:bg-cloud-dancer/60 md:flex-none'
                   >
                     {PRODUCT_VARIANTS[key].title.replace('Utekos ', '')}
                   </TabsTrigger>
@@ -167,23 +167,21 @@ export function PurchaseClientView({
 
           <div key={`hero-${selectedModel}`} className='mb-12'>
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.05s' threshold={0.15}>
-              <h2 className='mb-4 font-google-sans text-4xl font-semibold leading-[1.1]   text-maritime-darkest lg:text-7xl'>
+              <h2 className='mb-4 font-google-sans text-4xl font-semibold leading-[1.1]   text-background lg:text-7xl'>
                 {currentConfig.title}
               </h2>
             </AnimatedBlock>
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s' threshold={0.15}>
-              <p className='mb-8 text-xl font-light text-maritime-darkest'>{currentConfig.subtitle}</p>
+              <p className='mb-8 text-xl font-light text-background'>{currentConfig.subtitle}</p>
             </AnimatedBlock>
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.15s' threshold={0.15}>
               <div className='flex flex-wrap items-center gap-4 lg:gap-8'>
-                <span className='text-3xl font-medium text-maritime-darkest lg:text-4xl'>
+                <span className='text-3xl font-medium text-background lg:text-4xl'>
                   {currentConfig.price},-
                 </span>
                 <div className='flex items-center gap-2 rounded-sm bg-klarna-pink px-4 py-2'>
-                  <span className='text-sm font-medium text-maritime-darkest'>
-                    Eller {monthlyPrice},- /mnd
-                  </span>
-                  <KlarnaLogo className='h-6 w-fit p-1 border border-maritime-darkest/30 rounded-sm' />
+                  <span className='text-sm font-medium text-background'>Eller {monthlyPrice},- /mnd</span>
+                  <KlarnaLogo className='h-6 w-fit p-1 border border-background/30 rounded-sm' />
                 </div>
               </div>
             </AnimatedBlock>
@@ -206,13 +204,13 @@ export function PurchaseClientView({
 
           <div key={`details-${selectedModel}`} className='mb-12 space-y-8' aria-label='Produktinformasjon'>
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.05s' threshold={0.15}>
-              <p className='text-base leading-[1.45] text-maritime-darkest/85 md:text-lg'>
+              <p className='text-base leading-[1.45] text-background/85 md:text-lg'>
                 {currentConfig.description}
               </p>
             </AnimatedBlock>
 
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s' threshold={0.15}>
-              <div className='-mx-1 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-maritime-darkest/75'>
+              <div className='-mx-1 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-background/75'>
                 {currentConfig.features.map(feature => (
                   <span key={feature} className='inline-flex items-center gap-1.5 px-1 font-medium'>
                     <span aria-hidden className='h-1 w-1 shrink-0 rounded-full bg-ember' />
@@ -223,24 +221,24 @@ export function PurchaseClientView({
             </AnimatedBlock>
 
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.15s' threshold={0.1}>
-              <div className='rounded-md border border-maritime-darkest/10 bg-very-white px-4'>
-                <div className='flex items-center justify-between border-b border-maritime-darkest/10 py-3'>
-                  <span className='text-[11px] font-bold uppercase tracking-wider text-maritime-darkest/60'>
+              <div className='rounded-md border border-background/10 bg-very-white px-4'>
+                <div className='flex items-center justify-between border-b border-background/10 py-3'>
+                  <span className='text-[11px] font-bold uppercase tracking-wider text-background/60'>
                     Hva gjør {currentConfig.title.replace('Utekos ', '')} spesiell
                   </span>
-                  <Sparkles className='size-4 text-maritime-darkest' aria-hidden />
+                  <Sparkles className='size-4 text-background' aria-hidden />
                 </div>
                 <Accordion key={`highlights-${selectedModel}`} type='single' collapsible className='w-full'>
                   {currentConfig.highlights.map(highlight => (
                     <AccordionItem
                       key={highlight.title}
                       value={highlight.title}
-                      className='border-b border-maritime-darkest/10 last:border-b-0'
+                      className='border-b border-background/10 last:border-b-0'
                     >
-                      <AccordionTrigger className='py-3 text-left text-sm font-semibold text-maritime-darkest hover:no-underline hover:text-ember'>
+                      <AccordionTrigger className='py-3 text-left text-sm font-semibold text-background hover:no-underline hover:text-ember'>
                         {highlight.title}
                       </AccordionTrigger>
-                      <AccordionContent className='pb-3 pt-0 text-sm leading-[1.45] text-maritime-darkest/70'>
+                      <AccordionContent className='pb-3 pt-0 text-sm leading-[1.45] text-background/70'>
                         {highlight.body}
                       </AccordionContent>
                     </AccordionItem>
@@ -254,11 +252,11 @@ export function PurchaseClientView({
           <div className='mb-12 space-y-12'>
             <div>
               <div className='mb-4 flex items-center justify-between'>
-                <span className='text-sm font-bold tracking-widest text-maritime-darkest'>Størrelse</span>
+                <span className='text-sm font-bold tracking-widest text-background'>Størrelse</span>
                 <Link
                   href='/handlehjelp/storrelsesguide'
                   data-track='SizeGuideSkreddersyVarmen'
-                  className='text-sm text-maritime-darkest underline transition-colors hover:text-havdyp'
+                  className='text-sm text-background underline transition-colors hover:text-havdyp'
                 >
                   Se størrelsesguide
                 </Link>
@@ -278,8 +276,8 @@ export function PurchaseClientView({
                     className={cn(
                       'group relative overflow-hidden rounded-sm border px-3 py-5 text-sm font-medium transition-all md:px-4 md:text-base',
                       selectedSize === size ?
-                        'border-maritime-darkest bg-maritime-darkest text-white shadow-lg'
-                      : 'border-maritime-darkest/20 bg-cloud-dancer text-maritime-darkest hover:border-maritime-darkest'
+                        'border-background bg-background text-white shadow-lg'
+                      : 'border-background/20 bg-cloud-dancer text-background hover:border-background'
                     )}
                   >
                     {size}
@@ -291,7 +289,7 @@ export function PurchaseClientView({
               </div>
 
               <div className='mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs'>
-                <span className='uppercase tracking-wider text-maritime-darkest/55'>Farge</span>
+                <span className='uppercase tracking-wider text-background/55'>Farge</span>
                 {currentConfig.colors.map((colorObj, index) => {
                   const isActive = selectedColorIndex === index
                   const isInteractive = currentConfig.colors.length > 1
@@ -325,8 +323,8 @@ export function PurchaseClientView({
 
               {guidance && (
                 <div key={selectedSize} className='mt-6 animate-in fade-in slide-in-from-top-2 duration-300'>
-                  <div className='relative overflow-hidden rounded-md bg-maritime-darkest p-5'>
-                    <div className='mb-3 flex items-center gap-2 border-b border-maritime-darkest pb-3'>
+                  <div className='relative overflow-hidden rounded-md bg-background p-5'>
+                    <div className='mb-3 flex items-center gap-2 border-b border-background pb-3'>
                       <Ruler className='h-4 w-4 text-dusted-peri' />
                       <span className='text-sm font-bold tracking-wider text-cloud-dancer'>
                         Passer best for deg som er {guidance.height}
@@ -350,12 +348,12 @@ export function PurchaseClientView({
           </div>
         </div>
 
-        <div className='z-30 mx-auto border-t border-maritime-darkest/10 bg-cloud-dancer p-6 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] md:p-12 lg:p-20'>
+        <div className='z-30 mx-auto border-t border-background/10 bg-cloud-dancer p-6 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] md:p-12 lg:p-20'>
           <div className='mb-8 flex h-16 gap-4'>
-            <div className='mx-auto flex h-full items-center rounded-sm border border-maritime-darkest/20 bg-cloud-dancer'>
+            <div className='mx-auto flex h-full items-center rounded-sm border border-background/20 bg-cloud-dancer'>
               <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className='flex h-full w-16 items-center justify-center transition-colors hover:bg-maritime-darkest/5'
+                className='flex h-full w-16 items-center justify-center transition-colors hover:bg-background/5'
                 aria-label='Reduser antall'
               >
                 <Minus size={20} />
@@ -363,7 +361,7 @@ export function PurchaseClientView({
               <span className='w-14 text-center text-xl font-medium'>{quantity}</span>
               <button
                 onClick={() => setQuantity(quantity + 1)}
-                className='flex h-full w-16 items-center justify-center transition-colors hover:bg-maritime-darkest/5'
+                className='flex h-full w-16 items-center justify-center transition-colors hover:bg-background/5'
                 aria-label='Øk antall'
               >
                 <Plus size={20} />
@@ -403,13 +401,13 @@ export function PurchaseClientView({
             </div>
 
             <AnimatedBlock className='will-animate-fade-in-up' delay='0s' threshold={0.1}>
-              <div className='rounded-lg border border-maritime-darkest/10 bg-very-white'>
-                <div className='grid grid-cols-1 divide-y divide-maritime-darkest/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0'>
+              <div className='rounded-lg border border-background/10 bg-very-white'>
+                <div className='grid grid-cols-1 divide-y divide-background/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0'>
                   <div className='flex items-start gap-3 p-4'>
                     <Truck size={22} className='mt-0.5 shrink-0 text-ember' />
                     <div className='min-w-0'>
-                      <p className='text-sm font-semibold text-maritime-darkest'>Rask levering 2–5 dager</p>
-                      <p className='mt-0.5 text-xs leading-snug text-maritime-darkest/65'>
+                      <p className='text-sm font-semibold text-background'>Rask levering 2–5 dager</p>
+                      <p className='mt-0.5 text-xs leading-snug text-background/65'>
                         Sendes samme dag (ikke søndag). Fri frakt fra 999,-.
                       </p>
                     </div>
@@ -417,8 +415,8 @@ export function PurchaseClientView({
                   <div className='flex items-start gap-3 p-4'>
                     <RefreshCcw size={22} className='mt-0.5 shrink-0 text-ember' />
                     <div className='min-w-0'>
-                      <p className='text-sm font-semibold text-maritime-darkest'>14 dagers åpent kjøp</p>
-                      <p className='mt-0.5 text-xs leading-snug text-maritime-darkest/65'>
+                      <p className='text-sm font-semibold text-background'>14 dagers åpent kjøp</p>
+                      <p className='mt-0.5 text-xs leading-snug text-background/65'>
                         Send tilbake uten spørsmål.
                       </p>
                     </div>
@@ -426,18 +424,18 @@ export function PurchaseClientView({
                   <div className='flex items-start gap-3 p-4'>
                     <Store size={22} className='mt-0.5 shrink-0 text-ember' />
                     <div className='min-w-0'>
-                      <p className='text-sm font-semibold text-maritime-darkest'>På lager i Bergen</p>
-                      <p className='mt-0.5 text-xs leading-snug text-maritime-darkest/65'>
+                      <p className='text-sm font-semibold text-background'>På lager i Bergen</p>
+                      <p className='mt-0.5 text-xs leading-snug text-background/65'>
                         Også via Intersport. Norsk garanti.
                       </p>
                     </div>
                   </div>
                 </div>
-                <div className='border-t border-maritime-darkest/10 px-4 py-2.5'>
+                <div className='border-t border-background/10 px-4 py-2.5'>
                   <Link
                     href='/frakt-og-retur'
                     data-track='SkreddersyVarmenFraktOgReturLink'
-                    className='group inline-flex items-center gap-1.5 text-xs font-medium text-maritime-darkest/75 transition-colors hover:text-ember'
+                    className='group inline-flex items-center gap-1.5 text-xs font-medium text-background/75 transition-colors hover:text-ember'
                   >
                     Alt om frakt og retur
                     <ArrowRight size={12} className='transition-transform group-hover:translate-x-0.5' />

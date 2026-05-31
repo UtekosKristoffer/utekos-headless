@@ -28,7 +28,7 @@ export function BackToShopCta() {
           <BrandBadge
             asChild
             backgroundColor='var(--primary)'
-            textColor='var(--maritime-darkest)'
+            textColor='var(--background)'
             className='w-full px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto'
           >
             <Link href='/produkter/utekos-dun' data-track='StorrelsesguideBackToShopCtaUtekosDunClick'>
@@ -39,7 +39,7 @@ export function BackToShopCta() {
           <BrandBadge
             asChild
             backgroundColor='var(--cloud-dancer)'
-            textColor='var(--maritime-darkest)'
+            textColor='var(--background)'
             className='w-full px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto'
           >
             <Link
@@ -53,7 +53,7 @@ export function BackToShopCta() {
           <BrandBadge
             asChild
             backgroundColor='var(--cloud-dancer)'
-            textColor='var(--maritime-darkest)'
+            textColor='var(--background)'
             className='w-full px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto'
           >
             <Link href='/produkter/comfyrobe' data-track='StorrelsesguideBackToShopCtaComfyrobeClick'>
@@ -81,7 +81,7 @@ export function BackToShopCta() {
           <BrandBadge
             asChild
             backgroundColor='var(--bleached-mauve)'
-            textColor='var(--maritime-darkest)'
+            textColor='var(--background)'
             className='mt-6 px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
           >
             <Link href={'/kontaktskjema' as Route} data-track='StorrelsesguideBackToShopCtaContactUsClick'>

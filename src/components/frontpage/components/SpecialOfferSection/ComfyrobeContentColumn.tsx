@@ -69,8 +69,8 @@ export function ComfyrobeContentColumn({ variantId }: ComfyrobeContentColumnProp
         )}
         style={{ '--transition-delay': '0.3s' } as React.CSSProperties}
       >
-        <Shield className='size-4 text-maritime-darkest' />
-        <span className='text-sm font-semibold text-maritime-darkest'>Comfyrobe™</span>
+        <Shield className='size-4 text-background' />
+        <span className='text-sm font-semibold text-background'>Comfyrobe™</span>
       </div>
 
       <h2
@@ -114,7 +114,7 @@ export function ComfyrobeContentColumn({ variantId }: ComfyrobeContentColumnProp
           className={buttonVariants({
             size: 'lg',
             className:
-              'group mt-8 w-full sm:w-auto text-semibold! !bg-cloud-dancer !text-maritime-darkest hover:!bg-overcast shadow-lg shadow-cloud-dancer/20 transition-all duration-300'
+              'group mt-8 w-full sm:w-auto text-semibold! !bg-cloud-dancer !text-background hover:!bg-overcast shadow-lg shadow-cloud-dancer/20 transition-all duration-300'
           })}
         >
           Utforsk Comfyrobe™

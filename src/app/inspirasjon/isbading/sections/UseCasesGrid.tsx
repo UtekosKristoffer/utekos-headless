@@ -43,10 +43,10 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
     <section id='bruksomrader' className='bg-overcast py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl text-center'>
-          <h2 className='text-fluid-display text-maritime-darkest font-bold tracking-normal'>
+          <h2 className='text-fluid-display text-background font-bold tracking-normal'>
             Fra forberedelse til varmen
           </h2>
-          <p className='mt-4 text-lg text-maritime-darkest/90'>
+          <p className='mt-4 text-lg text-background/90'>
             Isbading handler om ritualer. Utekos gjør hvert steg i prosessen mer behagelig.
           </p>
         </div>
@@ -58,7 +58,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
               delay={`${useCaseIndex * 0.1}s`}
               threshold={0.2}
             >
-              <Card className='@container relative h-full overflow-hidden border-cloud-dancer/12 bg-maritime-darkest group'>
+              <Card className='@container relative h-full overflow-hidden border-cloud-dancer/12 bg-background group'>
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${useCase.color} to-transparent opacity-20 transition-opacity group-hover:opacity-30`}
                 />

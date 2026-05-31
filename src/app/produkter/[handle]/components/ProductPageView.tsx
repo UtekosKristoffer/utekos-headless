@@ -5,6 +5,9 @@ import { renderOptionComponent } from '@/app/produkter/[handle]/utils/renderOpti
 import { RelatedProducts } from '@/app/produkter/[handle]/components/RelatedProducts'
 import { AddToCart } from '@/components/cart/AddToCart'
 import { GalleryColumn } from '@/components/jsx/GalleryColumn'
+import { getKlarnaMinorUnitAmount } from '@/components/klarna/utils/getKlarnaMinorUnitAmount'
+import { KlarnaCreditPromotionAutoSize } from '@/components/klarna/components/KlarnaCreditPromotionAutoSize'
+import { KlarnaOnSiteMessagingScript } from '@/components/klarna/components/KlarnaOnSiteMessagingScript'
 import { OptionsColumn } from '@/components/jsx/OptionsColumn'
 import { ProductPageGrid } from '@/components/jsx/ProductPageGrid'
 import {
@@ -396,9 +399,15 @@ export function ProductPageView({
   }))
   const resolvedGallery = resolveProductGalleryImages(galleryImageOverride, fallbackGalleryImages)
   const galleryImages = resolvedGallery.mobileImages
+  const klarnaPurchaseAmount =
+    getKlarnaMinorUnitAmount({
+      amount: selectedVariant.price.amount ?? '0',
+      currencyCode: selectedVariant.price.currencyCode
+    }) ?? ''
 
   return (
     <article className='relative isolate overflow-x-clip bg-cloud-dancer py-0 text-havdyp md:py-6'>
+      <KlarnaOnSiteMessagingScript />
       <div className='pointer-events-none absolute inset-0 -z-10'>
         <div className='absolute left-[8%] top-12 h-80 w-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_62%,transparent)_0%,transparent_72%)] blur-3xl' />
         <div className='absolute bottom-[18%] right-[8%] h-96 w-96 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_20%,transparent)_0%,transparent_72%)] blur-3xl' />
@@ -406,25 +415,22 @@ export function ProductPageView({
 
       <div className='container mx-auto px-4 md:px-8'>
         <AnimatedBlock className='will-animate-fade-in-up hidden md:block' delay='0s' threshold={0.2}>
-          <Breadcrumb className='mb-8 text-maritime-darkest'>
-            <BreadcrumbList className='text-maritime-darkest'>
+          <Breadcrumb className='mb-8 text-background'>
+            <BreadcrumbList className='text-background'>
               <BreadcrumbItem>
-                <BreadcrumbLink href='/' className='text-maritime-darkest hover:text-maritime-darkest/80'>
+                <BreadcrumbLink href='/' className='text-background hover:text-background/80'>
                   Forside
                 </BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbSeparator className='text-maritime-darkest' />
+              <BreadcrumbSeparator className='text-background' />
               <BreadcrumbItem>
-                <BreadcrumbLink
-                  href='/produkter'
-                  className='text-maritime-darkest hover:text-maritime-darkest/80'
-                >
+                <BreadcrumbLink href='/produkter' className='text-background hover:text-background/80'>
                   Produkter
                 </BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbSeparator className='text-maritime-darkest' />
+              <BreadcrumbSeparator className='text-background' />
               <BreadcrumbItem>
-                <BreadcrumbPage className='text-maritime-darkest'>{productData.title}</BreadcrumbPage>
+                <BreadcrumbPage className='text-background'>{productData.title}</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -466,28 +472,22 @@ export function ProductPageView({
             </Activity>
             <div className='mt-4 md:hidden'>
               <AnimatedBlock className='will-animate-fade-in-up' delay='0s' threshold={0.2}>
-                <Breadcrumb className='mb-4 text-maritime-darkest'>
-                  <BreadcrumbList className='text-maritime-darkest'>
+                <Breadcrumb className='mb-4 text-background'>
+                  <BreadcrumbList className='text-background'>
                     <BreadcrumbItem>
-                      <BreadcrumbLink
-                        href='/'
-                        className='text-maritime-darkest hover:text-maritime-darkest/80'
-                      >
+                      <BreadcrumbLink href='/' className='text-background hover:text-background/80'>
                         Forside
                       </BreadcrumbLink>
                     </BreadcrumbItem>
-                    <BreadcrumbSeparator className='text-maritime-darkest' />
+                    <BreadcrumbSeparator className='text-background' />
                     <BreadcrumbItem>
-                      <BreadcrumbLink
-                        href='/produkter'
-                        className='text-maritime-darkest hover:text-maritime-darkest/80'
-                      >
+                      <BreadcrumbLink href='/produkter' className='text-background hover:text-background/80'>
                         Produkter
                       </BreadcrumbLink>
                     </BreadcrumbItem>
-                    <BreadcrumbSeparator className='text-maritime-darkest' />
+                    <BreadcrumbSeparator className='text-background' />
                     <BreadcrumbItem>
-                      <BreadcrumbPage className='text-maritime-darkest'>{productData.title}</BreadcrumbPage>
+                      <BreadcrumbPage className='text-background'>{productData.title}</BreadcrumbPage>
                     </BreadcrumbItem>
                   </BreadcrumbList>
                 </Breadcrumb>
@@ -514,6 +514,18 @@ export function ProductPageView({
                   activityNode={activityNode}
                 />
               </div>
+            </AnimatedBlock>
+
+            <AnimatedBlock className='will-animate-fade-in-right' delay='0.13s'>
+              <section
+                aria-label='Betalingsinformasjon fra Klarna'
+                className='mt-4 overflow-hidden rounded-lg border border-background/10 bg-white px-4 py-3 shadow-[0_16px_38px_-34px_rgba(14,18,35,0.5)]'
+              >
+                <KlarnaCreditPromotionAutoSize
+                  id={`klarna-credit-promotion-${productData.handle}`}
+                  purchaseAmount={klarnaPurchaseAmount}
+                />
+              </section>
             </AnimatedBlock>
 
             <AnimatedBlock className='will-animate-fade-in-right' delay='0.16s'>

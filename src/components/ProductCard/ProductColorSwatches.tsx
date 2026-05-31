@@ -40,7 +40,7 @@ export function ProductColorSwatches({
             className={`btn-variant-swatch hover:scale-110 ${
               isSelected ?
                 'border-border ring-1 ring-border'
-              : 'border-primary hover:border-primary/50 hover:ring-2 hover:ring-border'
+              : 'border-cloud-dancer/20 hover:border-cloud-dancer/40 hover:ring-2 hover:ring-cloud-dancer/20'
             }`}
             style={{ backgroundColor: colorCode }}
             title={value.name}

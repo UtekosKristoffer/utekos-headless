@@ -19,8 +19,8 @@ export function InspirationHeroActions({
       <BrandBadge
         asChild
         backgroundColor='var(--primary)'
-        textColor='var(--maritime-darkest)'
-        className='group border border-primary/35 px-7 py-3 text-base leading-[1.4] font-semibold tracking-[-0.01em] shadow-[0_18px_38px_-28px_color-mix(in_oklch,var(--demitasse)_72%,transparent)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest'
+        textColor='var(--background)'
+        className='group border border-primary/35 px-7 py-3 text-base leading-[1.4] font-semibold tracking-[-0.01em] shadow-[0_18px_38px_-28px_color-mix(in_oklch,var(--demitasse)_72%,transparent)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background'
       >
         <Link href={'/produkter' as Route}>
           {primaryLabel}
@@ -30,8 +30,8 @@ export function InspirationHeroActions({
       <BrandBadge
         asChild
         backgroundColor='var(--cloud-dancer)'
-        textColor='var(--maritime-darkest)'
-        className='border border-cloud-dancer/35 px-7 py-3 text-base leading-[1.4] font-semibold tracking-[-0.01em] shadow-[0_18px_38px_-30px_color-mix(in_oklch,var(--maritime-darkest)_48%,transparent)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-cloud-dancer/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest'
+        textColor='var(--background)'
+        className='border border-cloud-dancer/35 px-7 py-3 text-base leading-[1.4] font-semibold tracking-[-0.01em] shadow-[0_18px_38px_-30px_color-mix(in_oklch,var(--background)_48%,transparent)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-cloud-dancer/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background'
       >
         <Link href={secondaryHref as Route}>{secondaryLabel}</Link>
       </BrandBadge>

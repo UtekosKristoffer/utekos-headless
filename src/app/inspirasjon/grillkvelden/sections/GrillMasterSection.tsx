@@ -17,7 +17,7 @@ export function GrillMasterSection() {
             </span>
           </h2>
 
-          <Card className='border-cloud-dancer/18 bg-maritime-darkest/24 shadow-[0_28px_80px_-54px_color-mix(in_oklch,var(--maritime-darkest)_82%,transparent)]'>
+          <Card className='border-cloud-dancer/18 bg-background/24 shadow-[0_28px_80px_-54px_color-mix(in_oklch,var(--background)_82%,transparent)]'>
             <CardContent className='p-8 sm:p-12'>
               <blockquote className='mb-6   text-xl leading-[1.45] tracking-[-0.02em] text-cloud-dancer'>
                 &quot;Jeg elsker å arrangere grillfester, men hatet at folk dro inn så snart det ble kjølig.

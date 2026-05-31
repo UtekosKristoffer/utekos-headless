@@ -43,7 +43,7 @@ export default function SupportPage() {
             <TopGrid />
           </Activity>
           <Activity>
-            <div className='relative border border-cloud-dancer/12 bg-[radial-gradient(circle_at_10%_0%,color-mix(in_oklab,var(--ancient-water)_10%,transparent),transparent_36%),linear-gradient(135deg,var(--havdyp)_0%,var(--maritime-darkest)_58%,var(--chocolate-plum)_100%)]'>
+            <div className='relative border border-cloud-dancer/12 bg-[radial-gradient(circle_at_10%_0%,color-mix(in_oklab,var(--ancient-water)_10%,transparent),transparent_36%),linear-gradient(135deg,var(--havdyp)_0%,var(--background)_58%,var(--chocolate-plum)_100%)]'>
               <Activity>
                 <CornerPluses />
               </Activity>

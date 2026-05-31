@@ -14,7 +14,7 @@ export function StapperFeatureSection() {
     <Card className='relative isolate min-h-[22rem] overflow-hidden rounded-[1.5rem] border-cloud-dancer/12 bg-cloud-dancer/[0.035] py-0 shadow-none backdrop-blur-[2px] sm:min-h-[26rem] lg:min-h-[33rem]'>
       <CardContent className='relative flex size-full min-h-[inherit] items-center justify-center p-0'>
         <div className='absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,color-mix(in_oklab,var(--ancient-water)_18%,transparent),transparent_44%)]' />
-        <div className='absolute inset-x-10 bottom-8 h-24 rounded-full bg-maritime-darkest/55 blur-3xl' />
+        <div className='absolute inset-x-10 bottom-8 h-24 rounded-full bg-background/55 blur-3xl' />
         <div className='absolute right-8 top-8 hidden rounded-full border border-cloud-dancer/12 px-4 py-2 text-xs font-medium text-overcast/78 uppercase sm:block'>
           100 g
         </div>
@@ -30,7 +30,7 @@ export function StapperFeatureSection() {
   )
 
   return (
-    <section className='relative mb-8 overflow-hidden rounded-[1.75rem] border border-cloud-dancer/12 bg-[radial-gradient(circle_at_14%_18%,color-mix(in_oklab,var(--ancient-water)_14%,transparent),transparent_30%),linear-gradient(135deg,var(--havdyp)_0%,var(--maritime-darkest)_48%,var(--havdyp)_100%)] px-5 py-8 sm:px-8 sm:py-10 lg:px-10 xl:px-12'>
+    <section className='relative mb-8 overflow-hidden rounded-[1.75rem] border border-cloud-dancer/12 bg-[radial-gradient(circle_at_14%_18%,color-mix(in_oklab,var(--ancient-water)_14%,transparent),transparent_30%),linear-gradient(135deg,var(--havdyp)_0%,var(--background)_48%,var(--havdyp)_100%)] px-5 py-8 sm:px-8 sm:py-10 lg:px-10 xl:px-12'>
       <div
         aria-hidden='true'
         className='absolute inset-0 -z-10'
@@ -72,7 +72,7 @@ export function StapperFeatureSection() {
               <BrandBadge
                 asChild
                 backgroundColor='var(--primary)'
-                textColor='var(--maritime-darkest)'
+                textColor='var(--background)'
                 className='group min-h-14 justify-center border border-primary/18 px-7 text-base shadow-[0_16px_36px_-24px_rgba(232,178,66,0.55)] transition-transform duration-200 hover:-translate-y-0.5 hover:brightness-105 lg:justify-start'
               >
                 <Link href='/produkter/utekos-stapper' data-track='StapperFeatureSectionDiscoverClick'>

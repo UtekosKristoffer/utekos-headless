@@ -94,7 +94,7 @@ export function ComfyrobeQuickBuy({ product }: Props) {
 
                 return (
                   <CarouselItem key={img.id}>
-                    <div className='relative aspect-[4/5] w-full overflow-hidden rounded-xl border border-cloud-dancer/12 bg-maritime-darkest'>
+                    <div className='relative aspect-[4/5] w-full overflow-hidden rounded-xl border border-cloud-dancer/12 bg-background'>
                       <Image
                         src={imageUrl}
                         alt={altText}
@@ -109,8 +109,8 @@ export function ComfyrobeQuickBuy({ product }: Props) {
             )}
           </CarouselContent>
           <div className='block'>
-            <CarouselPrevious className='left-4 border border-cloud-dancer/12 bg-maritime-darkest/70 text-cloud-dancer backdrop-blur-md hover:bg-havdyp' />
-            <CarouselNext className='right-4 border border-cloud-dancer/12 bg-maritime-darkest/70 text-cloud-dancer backdrop-blur-md hover:bg-havdyp' />
+            <CarouselPrevious className='left-4 border border-cloud-dancer/12 bg-background/70 text-cloud-dancer backdrop-blur-md hover:bg-havdyp' />
+            <CarouselNext className='right-4 border border-cloud-dancer/12 bg-background/70 text-cloud-dancer backdrop-blur-md hover:bg-havdyp' />
           </div>
         </Carousel>
       </div>
@@ -127,7 +127,7 @@ export function ComfyrobeQuickBuy({ product }: Props) {
             <BrandBadge
               label='På lager'
               backgroundColor='var(--ancient-water)'
-              textColor='var(--maritime-darkest)'
+              textColor='var(--background)'
               className='border border-cloud-dancer/14 px-3 py-1.5 text-xs leading-[1.4] font-semibold tracking-normal'
             />
           </div>
@@ -136,13 +136,13 @@ export function ComfyrobeQuickBuy({ product }: Props) {
         <div className='flex gap-4'>
           <div className='flex-1 space-y-2'>
             <label className='text-sm font-medium leading-[1.45] tracking-normal text-overcast'>Farge</label>
-            <div className='flex h-10 cursor-default items-center justify-center rounded-md border border-havdyp/35 bg-ancient-water text-sm font-medium leading-[1.4] tracking-normal text-maritime-darkest ring-1 ring-havdyp/20'>
+            <div className='flex h-10 cursor-default items-center justify-center rounded-md border border-havdyp/35 bg-ancient-water text-sm font-medium leading-[1.4] tracking-normal text-background ring-1 ring-havdyp/20'>
               Fjellnatt
             </div>
           </div>
           <div className='flex-1 space-y-2'>
             <label className='text-sm font-medium leading-[1.45] tracking-normal text-overcast'>Modell</label>
-            <div className='flex h-10 cursor-default items-center justify-center rounded-md border border-havdyp/35 bg-ancient-water text-sm font-medium leading-[1.4] tracking-normal text-maritime-darkest ring-1 ring-havdyp/20'>
+            <div className='flex h-10 cursor-default items-center justify-center rounded-md border border-havdyp/35 bg-ancient-water text-sm font-medium leading-[1.4] tracking-normal text-background ring-1 ring-havdyp/20'>
               Unisex
             </div>
           </div>
@@ -175,10 +175,10 @@ export function ComfyrobeQuickBuy({ product }: Props) {
                   className={cn(
                     'relative flex h-12 items-center justify-center rounded-md border text-sm font-medium leading-[1.4] tracking-normal transition-all',
                     isSelected ?
-                      'border-primary/60 bg-primary text-maritime-darkest ring-1 ring-primary/35'
-                    : 'border-cloud-dancer/14 bg-maritime-darkest/58 text-overcast hover:border-cloud-dancer/28 hover:text-cloud-dancer',
+                      'border-primary/60 bg-primary text-background ring-1 ring-primary/35'
+                    : 'border-cloud-dancer/14 bg-background/58 text-overcast hover:border-cloud-dancer/28 hover:text-cloud-dancer',
                     !isAvailable
-                      && 'cursor-not-allowed border-cloud-dancer/10 bg-maritime-darkest/45 text-overcast/55 line-through opacity-60 decoration-slice'
+                      && 'cursor-not-allowed border-cloud-dancer/10 bg-background/45 text-overcast/55 line-through opacity-60 decoration-slice'
                   )}
                 >
                   {displayName}
@@ -196,7 +196,7 @@ export function ComfyrobeQuickBuy({ product }: Props) {
           <BrandBadge
             asChild
             backgroundColor='var(--primary)'
-            textColor='var(--maritime-darkest)'
+            textColor='var(--background)'
             className='min-h-14 w-full border border-primary/24 px-8 py-4 text-lg leading-[1.35] font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 disabled:pointer-events-none disabled:opacity-60'
           >
             <button type='button' onClick={handleAddToCart} disabled={!selectedVariant || isAdding}>

@@ -33,17 +33,17 @@ const consentActionToneConfig: Record<
 > = {
   primary: {
     backgroundColor: 'var(--primary)',
-    textColor: 'var(--maritime-darkest)',
+    textColor: 'var(--background)',
     className: 'border border-primary/24'
   },
   cloud: {
     backgroundColor: 'var(--cloud-dancer)',
-    textColor: 'var(--maritime-darkest)',
+    textColor: 'var(--background)',
     className: 'border border-cloud-dancer/24'
   },
   ancient: {
     backgroundColor: 'var(--ancient-water)',
-    textColor: 'var(--maritime-darkest)',
+    textColor: 'var(--background)',
     className: 'border border-ancient-water/24'
   }
 }
@@ -86,7 +86,7 @@ function ConsentPreferenceCard({
   }
 
   return (
-    <section className='rounded-lg border border-cloud-dancer/12 bg-havdyp/55 p-4 shadow-[0_18px_38px_-34px_color-mix(in_oklab,var(--maritime-darkest)_82%,transparent)]'>
+    <section className='rounded-lg border border-cloud-dancer/12 bg-havdyp/55 p-4 shadow-[0_18px_38px_-34px_color-mix(in_oklab,var(--background)_82%,transparent)]'>
       <div className='flex items-center justify-between gap-4'>
         <h4 className='font-google-sans text-base font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer'>
           {title}
@@ -154,7 +154,7 @@ export function CookieConsentBanner() {
       aria-labelledby='cookie-consent-title'
       aria-describedby='cookie-consent-description'
     >
-      <div className='pointer-events-auto mx-auto max-w-7xl rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/96 p-4 text-cloud-dancer shadow-[0_28px_80px_-36px_color-mix(in_oklab,var(--maritime-darkest)_92%,transparent)] backdrop-blur-md animate-in slide-in-from-bottom-6 duration-500 motion-reduce:animate-none md:p-6'>
+      <div className='pointer-events-auto mx-auto max-w-7xl rounded-lg border border-cloud-dancer/12 bg-background/96 p-4 text-cloud-dancer shadow-[0_28px_80px_-36px_color-mix(in_oklab,var(--background)_92%,transparent)] backdrop-blur-md animate-in slide-in-from-bottom-6 duration-500 motion-reduce:animate-none md:p-6'>
         <div>
           {!showDetails ?
             <div className='flex flex-col gap-6 md:flex-row md:items-center md:justify-between'>

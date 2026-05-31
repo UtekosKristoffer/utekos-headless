@@ -32,15 +32,15 @@ const surfaceStyles: Record<
   dazzle: {
     background:
       'linear-gradient(145deg, color-mix(in oklch, var(--dazzling-blue) 36%, var(--dazzling-blue) 64%) 0%, color-mix(in oklch, var(--dazzling-blue) 84%, var(--dazzling-blue) 16%) 100%)',
-    borderColor: 'color-mix(in oklch, var(--dazzling-blue) 42%, var(--maritime-darkest) 58%)',
+    borderColor: 'color-mix(in oklch, var(--dazzling-blue) 42%, var(--background) 58%)',
     textColor: 'var(--cloud-dancer)',
     descriptionColor: 'var(--cloud-dancer/90)'
   },
   orange: {
     background: 'var(--orange-slice)',
-    borderColor: 'color-mix(in oklch, var(--dazzling-blue) 42%, var(--maritime-darkest) 58%)',
-    textColor: 'var(--maritime-darkest)',
-    descriptionColor: 'color-mix(in oklch, var(--maritime-darkest) 85%, transparent)'
+    borderColor: 'color-mix(in oklch, var(--dazzling-blue) 42%, var(--background) 58%)',
+    textColor: 'var(--background)',
+    descriptionColor: 'color-mix(in oklch, var(--background) 85%, transparent)'
   },
   dazzleagain: {
     background:
@@ -56,7 +56,7 @@ export function BenefitCard({ benefit, delay }: BenefitCardProps) {
 
   return (
     <li
-      className='animate-fade-in-on-scroll group relative overflow-hidden rounded-[1.05rem] border     shadow-[0_18px_44px_-36px_color-mix(in_oklch,var(--maritime-darkest)_82%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+      className='animate-fade-in-on-scroll group relative overflow-hidden rounded-[1.05rem] border     shadow-[0_18px_44px_-36px_color-mix(in_oklch,var(--background)_82%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
       style={
         {
           '--animation-delay': `${delay}s`,
@@ -78,7 +78,7 @@ export function BenefitCard({ benefit, delay }: BenefitCardProps) {
           className='flex size-8 shrink-0 items-center justify-center rounded-lg border transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none'
           style={{
             borderColor: 'color-mix(in oklch, var(--benefit-accent) 44%, transparent)',
-            background: 'color-mix(in oklch, var(--maritime-darkest) 86%, var(--benefit-accent) 14%)'
+            background: 'color-mix(in oklch, var(--background) 86%, var(--benefit-accent) 14%)'
           }}
         >
           <Check

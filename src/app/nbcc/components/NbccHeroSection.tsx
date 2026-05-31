@@ -61,7 +61,7 @@ export function NbccHeroSection() {
   )
 
   return (
-    <section ref={sectionRef} className='relative isolate overflow-hidden bg-maritime-darkest'>
+    <section ref={sectionRef} className='relative isolate overflow-hidden bg-background'>
       <div className='absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent' />
 
       <div className='relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-center lg:gap-x-16 lg:gap-y-0 lg:px-8 lg:py-28'>
@@ -148,7 +148,7 @@ export function NbccHeroSection() {
             trackingData={nbccHeroTracking.secondary}
             containerClassName='min-w-0 w-full'
             panelClassName='w-full sm:max-w-[32rem]'
-            buttonClassName='h-12 w-full justify-center gap-2 rounded-md border-white/25 bg-cloud-dancer px-6 text-[15px] font-semibold text-maritime-darkest hover:bg-overcast sm:w-auto'
+            buttonClassName='h-12 w-full justify-center gap-2 rounded-md border-white/25 bg-cloud-dancer px-6 text-[15px] font-semibold text-background hover:bg-overcast sm:w-auto'
           />
         </div>
 

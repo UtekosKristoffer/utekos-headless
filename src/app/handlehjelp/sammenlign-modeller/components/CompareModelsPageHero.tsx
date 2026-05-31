@@ -6,7 +6,7 @@ import Link from 'next/link'
 import CompareHeroImage from '@public/kate-linn-stort-bilde.webp'
 export function CompareModelsPageHero() {
   return (
-    <section className='relative isolate min-h-[calc(100svh-12rem)] overflow-hidden bg-maritime-darkest text-cloud-dancer'>
+    <section className='relative isolate min-h-[calc(100svh-12rem)] overflow-hidden bg-background text-cloud-dancer'>
       <Image
         src={CompareHeroImage}
         alt='To personer i Utekos ute i norsk natur'
@@ -15,8 +15,8 @@ export function CompareModelsPageHero() {
         sizes='100vw'
         className='-z-20 object-cover object-[58%_center]'
       />
-      <div className='absolute inset-0 -z-10 bg-maritime-darkest/72' />
-      <div className='absolute inset-x-0 bottom-0 -z-10 h-2/5 bg-[linear-gradient(to_top,var(--maritime-darkest),transparent)]' />
+      <div className='absolute inset-0 -z-10 bg-background/72' />
+      <div className='absolute inset-x-0 bottom-0 -z-10 h-2/5 bg-[linear-gradient(to_top,var(--background),transparent)]' />
 
       <div className='mx-auto flex min-h-[calc(100svh-12rem)] w-full max-w-7xl flex-col justify-end px-[6vw] py-10 sm:py-12 lg:py-16'>
         <div className='max-w-6xl'>

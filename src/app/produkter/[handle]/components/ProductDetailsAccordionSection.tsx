@@ -67,7 +67,7 @@ export function ProductDetailsAccordionSection({
 
           sendGAEvent('event', 'buttonClicked', { value: title }) // Oppdaterte value til title her også for konsistens
         }}
-        className='relative z-10 px-6 py-4 text-maritime-darkest transition-colors duration-200 hover:text-havdyp data-[state=open]:text-maritime-darkest hover:no-underline'
+        className='relative z-10 px-6 py-4 text-background transition-colors duration-200 hover:text-havdyp data-[state=open]:text-background hover:no-underline'
       >
         <div className='flex items-center gap-4'>
           <div

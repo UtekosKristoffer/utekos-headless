@@ -6,17 +6,19 @@ import { ComfyrobeQuickBuy } from './ComfyrobeQuickBuy'
 
 export async function CTASection() {
   const response = await getProducts({ query: 'handle:comfyrobe' })
-  const product = response.body?.find(p => p.handle === 'comfyrobe')
-  response.body?.find(
-    p => p.title.toLowerCase().includes('comfyrobe') && !p.title.toLowerCase().includes('dun')
-  ) || response.body?.[0]
+  const product =
+    response.body?.find(p => p.handle === 'comfyrobe') ??
+    response.body?.find(
+      p => p.title.toLowerCase().includes('comfyrobe') && !p.title.toLowerCase().includes('dun')
+    ) ??
+    response.body?.[0]
 
   if (!product) {
     return null
   }
 
   return (
-    <section className='relative overflow-hidden border-t border-cloud-dancer/12 bg-maritime-darkest py-24'>
+    <section className='relative overflow-hidden border-t border-cloud-dancer/12 bg-background py-24'>
       <div className='pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,var(--ancient-water)_0%,transparent_34%),radial-gradient(circle_at_85%_10%,var(--soft-warm)_0%,transparent_28%)] opacity-[0.18]' />
 
       <div className='container relative mx-auto px-4'>

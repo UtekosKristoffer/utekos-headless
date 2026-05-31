@@ -61,7 +61,7 @@ export function SizeSelector({
         <div className='flex w-full flex-col rounded-[1rem] border border-havdyp/14 bg-cloud-dancer/72 p-4 text-left transition-colors'>
           <button
             onClick={() => setIsDetailsOpen(!isDetailsOpen)}
-            className='flex w-full justify-between bg-transparent p-0 font-semibold text-maritime-darkest transition-colors hover:text-havdyp'
+            className='flex w-full justify-between bg-transparent p-0 font-semibold text-background transition-colors hover:text-havdyp'
             aria-expanded={isDetailsOpen}
             aria-controls='size-details'
           >

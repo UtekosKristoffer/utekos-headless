@@ -139,16 +139,16 @@ export function CreatedForSection() {
 
         <div className='gsap-divider h-[2px] w-32 bg-gradient-to-r from-transparent via-slate-500/30 to-transparent my-10 origin-center will-change-transform' />
 
-        <p className='gsap-text opacity-0 mx-auto max-w-2xl text-lg leading-relaxed text-maritime-darkest/90 md:text-xl font-light'>
+        <p className='gsap-text opacity-0 mx-auto max-w-2xl text-lg leading-relaxed text-background/90 md:text-xl font-light'>
           Våre komfortplagg er{' '}
-          <span className='relative inline-block text-maritime-darkest font-medium'>
+          <span className='relative inline-block text-background font-medium'>
             designet
             <span className='gsap-desc-underline absolute left-0 bottom-0 h-[2px] w-full bg-slate-500 origin-left scale-x-0' />
           </span>{' '}
           for å holde deg varm, slik at du kan{' '}
           <span className='relative inline-block px-1'>
-            <span className='gsap-desc-highlight absolute inset-0 -skew-x-6 text-maritime-darkest/90 rounded bg-white/10 origin-left scale-x-0' />
-            <span className='relative z-10 font-medium text-maritime-darkest/90'>nyte</span>
+            <span className='gsap-desc-highlight absolute inset-0 -skew-x-6 text-background/90 rounded bg-white/10 origin-left scale-x-0' />
+            <span className='relative z-10 font-medium text-background/90'>nyte</span>
           </span>{' '}
           de gode øyeblikkene lenger.
         </p>

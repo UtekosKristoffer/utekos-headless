@@ -17,7 +17,7 @@ export function NbccFaqSection() {
           data-nbcc-animate
           type='single'
           collapsible
-          className='rounded-lg border border-white/50 bg-maritime-darkest px-5'
+          className='rounded-lg border border-white/50 bg-background px-5'
         >
           {nbccFaqItems.map(item => (
             <AccordionItem key={item.question} value={item.question}>

@@ -15,7 +15,7 @@ export async function LandingExpertReview() {
   return (
     <section
       aria-labelledby='expert-review-heading'
-      className='w-full bg-cloud-dancer px-6 py-16 text-maritime-darkest md:px-12 md:py-24'
+      className='w-full bg-cloud-dancer px-6 py-16 text-background md:px-12 md:py-24'
     >
       <div className='mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16'>
         <div>
@@ -24,11 +24,11 @@ export async function LandingExpertReview() {
           </p>
           <h2
             id='expert-review-heading'
-            className='max-w-[12ch] font-google-sans text-4xl font-bold leading-[0.95] tracking-normal text-maritime-darkest md:text-5xl'
+            className='max-w-[12ch] font-google-sans text-4xl font-bold leading-[0.95] tracking-normal text-background md:text-5xl'
           >
             Derfor holder Utekos deg ute lenger
           </h2>
-          <p className='mt-5 max-w-xl   text-base leading-[1.45]   text-maritime-darkest/82 md:text-lg'>
+          <p className='mt-5 max-w-xl   text-base leading-[1.45]   text-background/82 md:text-lg'>
             Sist oppdatert {LANDING_LAST_UPDATED}. Denne siden bygger på produktdata, kundeerfaringer,
             materialinformasjon og Utekos sine egne kjøpsguider.
           </p>
@@ -38,15 +38,15 @@ export async function LandingExpertReview() {
           {LANDING_EVIDENCE_ENTRIES.map(entry => (
             <article
               key={entry.title}
-              className='rounded-sm border border-maritime-darkest/12 bg-overcast p-5 shadow-sm'
+              className='rounded-sm border border-background/12 bg-overcast p-5 shadow-sm'
             >
-              <h3 className='font-google-sans text-xl font-bold leading-[0.98] tracking-normal text-maritime-darkest'>
+              <h3 className='font-google-sans text-xl font-bold leading-[0.98] tracking-normal text-background'>
                 {entry.title}
               </h3>
-              <p className='mt-3   text-sm leading-[1.45]   text-maritime-darkest/82'>{entry.answer}</p>
+              <p className='mt-3   text-sm leading-[1.45]   text-background/82'>{entry.answer}</p>
               <Link
                 href={entry.href}
-                className='mt-4 inline-flex text-sm font-semibold text-maritime-darkest underline underline-offset-4 transition-colors hover:text-havdyp'
+                className='mt-4 inline-flex text-sm font-semibold text-background underline underline-offset-4 transition-colors hover:text-havdyp'
               >
                 {entry.linkLabel}
               </Link>

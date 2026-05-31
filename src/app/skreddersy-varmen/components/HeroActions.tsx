@@ -13,8 +13,7 @@ const SCROLL_TARGETS = {
 
 function smoothScrollTo(id: string) {
   const reducedMotion =
-    typeof window !== 'undefined'
-    && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   void scrollToElement(id, {
     offsetY: 72,
@@ -29,7 +28,7 @@ export function HeroActions() {
         <BrandBadge
           asChild
           backgroundColor='var(--color-cloud-dancer)'
-          textColor='var(--color-maritime-darkest)'
+          textColor='var(--color-background)'
           className='h-12 w-full px-5 py-0 text-sm font-semibold leading-none tracking-normal shadow-xl transition-[filter,transform] hover:brightness-95 active:scale-[0.97] md:h-14 md:text-base'
         >
           <button
@@ -49,7 +48,7 @@ export function HeroActions() {
         <BrandBadge
           asChild
           backgroundColor='var(--color-overcast)'
-          textColor='var(--color-maritime-darkest)'
+          textColor='var(--color-background)'
           className='h-12 w-full px-5 py-0 text-sm font-semibold leading-none tracking-normal shadow-sm transition-[filter,transform] hover:brightness-95 active:scale-[0.97] md:h-14 md:text-base'
         >
           <button
@@ -70,9 +69,7 @@ export function HeroActions() {
         aria-label='Bla videre'
         className='absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-cloud-dancer/75 transition-[opacity,transform] duration-300 hover:translate-y-1 hover:opacity-100 md:flex'
       >
-        <span className='text-[10px] font-semibold tracking-normal'>
-          Bla videre
-        </span>
+        <span className='text-[10px] font-semibold tracking-normal'>Bla videre</span>
         <ChevronDown size={20} aria-hidden />
       </button>
     </>

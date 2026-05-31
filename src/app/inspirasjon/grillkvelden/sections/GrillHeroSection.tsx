@@ -6,19 +6,19 @@ import { HeroHighlight } from '../../layout/hero/HeroHighlight'
 import type { InspirationHeroFeature } from '../../layout/hero/types'
 
 const ICON_SURFACE = 'color-mix(in oklch, var(--cloud-dancer) 38%, transparent)'
-const ICON_BORDER = 'color-mix(in oklch, var(--maritime-darkest) 12%, transparent)'
+const ICON_BORDER = 'color-mix(in oklch, var(--background) 12%, transparent)'
 const CARD_SHADOW = '0 24px 48px -38px rgba(9, 15, 22, 0.42)'
-const DESCRIPTION_COLOR = 'color-mix(in oklch, var(--maritime-darkest) 78%, transparent)'
+const DESCRIPTION_COLOR = 'color-mix(in oklch, var(--background) 78%, transparent)'
 
 const grillHeroFeatures: readonly InspirationHeroFeature[] = [
   {
     title: 'Ved grillen',
     description: 'Hold varmen mens du steker',
     icon: Flame,
-    iconColor: 'var(--maritime-darkest)',
+    iconColor: 'var(--background)',
     border: 'color-mix(in oklch, var(--primary) 42%, transparent)',
     surface:
-      'linear-gradient(180deg, color-mix(in oklch, var(--primary) 78%, var(--cloud-dancer) 22%) 0%, color-mix(in oklch, var(--primary) 52%, var(--maritime-darkest) 48%) 100%)',
+      'linear-gradient(180deg, color-mix(in oklch, var(--primary) 78%, var(--cloud-dancer) 22%) 0%, color-mix(in oklch, var(--primary) 52%, var(--background) 48%) 100%)',
     glow: 'radial-gradient(120% 120% at 50% 0%, transparent 32%, color-mix(in oklch, var(--primary) 70%, transparent) 100%)',
     sheen: true,
     iconSurface: ICON_SURFACE,
@@ -30,7 +30,7 @@ const grillHeroFeatures: readonly InspirationHeroFeature[] = [
     title: 'Hele kvelden',
     description: 'La samtalen flyte til langt på natt',
     icon: Clock,
-    iconColor: 'color-mix(in oklch, var(--maritime-darkest) 70%, var(--bleached-mauve))',
+    iconColor: 'color-mix(in oklch, var(--background) 70%, var(--bleached-mauve))',
     border: 'color-mix(in oklch, var(--bleached-mauve) 42%, transparent)',
     surface:
       'linear-gradient(180deg, color-mix(in oklch, var(--bleached-mauve) 72%, rgba(255, 255, 255, 0.24)) 0%, color-mix(in oklch, var(--bleached-mauve) 40%, rgba(24, 20, 24, 0.16)) 100%)',
@@ -45,7 +45,7 @@ const grillHeroFeatures: readonly InspirationHeroFeature[] = [
     title: 'For gjestene',
     description: 'Alle sitter komfortabelt utendørs',
     icon: Users,
-    iconColor: 'color-mix(in oklch, var(--maritime-darkest) 72%, var(--overcast))',
+    iconColor: 'color-mix(in oklch, var(--background) 72%, var(--overcast))',
     border: 'color-mix(in oklch, var(--overcast) 42%, transparent)',
     surface:
       'linear-gradient(180deg, color-mix(in oklch, var(--overcast) 78%, rgba(255, 255, 255, 0.28)) 0%, color-mix(in oklch, var(--overcast) 44%, rgba(18, 24, 28, 0.16)) 100%)',

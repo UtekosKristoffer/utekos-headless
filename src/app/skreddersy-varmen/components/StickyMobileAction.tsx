@@ -102,7 +102,7 @@ export function StickyMobileAction() {
           }}
           className='fixed inset-x-3 bottom-3 z-50 lg:hidden'
         >
-          <div className='flex items-center gap-2 rounded-full border border-cloud-dancer/15 bg-maritime-darkest/95 p-2 text-cloud-dancer shadow-2xl backdrop-blur-md'>
+          <div className='flex items-center gap-2 rounded-full border border-cloud-dancer/15 bg-background/95 p-2 text-cloud-dancer shadow-2xl backdrop-blur-md'>
             <button
               type='button'
               onClick={handleDismiss}
@@ -144,7 +144,7 @@ export function StickyMobileAction() {
             <BrandBadge
               asChild
               backgroundColor='var(--color-primary)'
-              textColor='var(--color-maritime-darkest)'
+              textColor='var(--color-background)'
               className={cn(
                 'h-11 shrink-0 gap-1.5 px-3.5 py-0 text-xs font-semibold tracking-normal shadow-lg transition-[filter,transform] hover:brightness-95 active:scale-[0.985] sm:px-5 sm:text-sm',
                 focusRing

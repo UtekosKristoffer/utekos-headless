@@ -32,8 +32,8 @@ export function HostTipsGrid({ tips }: { tips: HostTip[] }) {
     <section className='bg-overcast py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-3xl md:max-w-4xl text-center'>
-          <h2 className='text-fluid-display-bold text-maritime-darkest'>Vertens sjekkliste</h2>
-          <p className='mx-auto mt-4 max-w-2xl utekos-section-lead text-maritime-darkest/82'>
+          <h2 className='text-fluid-display-bold text-background'>Vertens sjekkliste</h2>
+          <p className='mx-auto mt-4 max-w-2xl utekos-section-lead text-background/82'>
             Fire enkle tips for en uforglemmelig og komfortabel grillkveld.
           </p>
         </div>
@@ -60,7 +60,7 @@ export function HostTipsGrid({ tips }: { tips: HostTip[] }) {
                   <CardContent className='relative flex h-full flex-col p-6'>
                     <div className='mb-4 flex items-center gap-4'>
                       <div
-                        className='flex size-10 shrink-0 items-center justify-center rounded-full border border-maritime-darkest/10 transition-transform duration-300 motion-safe:group-hover:-translate-y-0.5'
+                        className='flex size-10 shrink-0 items-center justify-center rounded-full border border-background/10 transition-transform duration-300 motion-safe:group-hover:-translate-y-0.5'
                         style={{ backgroundColor: `var(${theme.iconSurface})` }}
                       >
                         <tip.icon className={`size-5 ${theme.iconColor}`} aria-hidden />

@@ -39,7 +39,7 @@ const comfyrobeFeatures = [
 export function ComfyrobeSizeGuide() {
   return (
     <section id='comfyrobe-size-guide' className='scroll-mt-28'>
-      <div className='bg-overcast text-maritime-darkest'>
+      <div className='bg-overcast text-background'>
         <div className='container mx-auto px-4 py-16 sm:py-24'>
           <div className='mx-auto max-w-3xl text-center'>
             <BrandBadge
@@ -48,12 +48,12 @@ export function ComfyrobeSizeGuide() {
               textColor='var(--cloud-dancer)'
               className='mb-5 px-4 py-2 text-sm'
             />
-            <h2 className='text-3xl font-bold leading-[1.05]   text-maritime-darkest sm:text-5xl'>
+            <h2 className='text-3xl font-bold leading-[1.05]   text-background sm:text-5xl'>
               Størrelsesguide for Comfyrobe™
             </h2>
           </div>
 
-          <div className='mt-12 max-w-4xl mx-auto text-left space-y-4 text-maritime-darkest'>
+          <div className='mt-12 max-w-4xl mx-auto text-left space-y-4 text-background'>
             <p>
               Comfyrobe™ er designet som ditt personlige, beskyttende skall. Den romslige, rektangulære
               passformen er ment å være omsluttende og komfortabel, ikke figurnær. Hensikten er at den enkelt
@@ -71,16 +71,16 @@ export function ComfyrobeSizeGuide() {
                   </div>
                   <div>
                     <p className='font-semibold'>{feature.title}</p>
-                    <p className='mt-1 text-sm text-maritime-darkest'>{feature.description}</p>
+                    <p className='mt-1 text-sm text-background'>{feature.description}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className='mx-auto mt-16 max-w-3xl rounded-lg border border-maritime-darkest/10 bg-havdyp p-6 shadow-[0_18px_44px_-36px_color-mix(in_oklab,var(--maritime-darkest)_72%,transparent)]'>
+          <div className='mx-auto mt-16 max-w-3xl rounded-lg border border-background/10 bg-havdyp p-6 shadow-[0_18px_44px_-36px_color-mix(in_oklab,var(--background)_72%,transparent)]'>
             <div className='flex items-start gap-4'>
-              <Lightbulb className='size-8 flex-shrink-0 text-maritime-darkest' />
+              <Lightbulb className='size-8 flex-shrink-0 text-background' />
               <div>
                 <h3 className='text-lg font-semibold text-cloud-dancer'>
                   Vårt beste tips for å velge riktig
@@ -98,7 +98,7 @@ export function ComfyrobeSizeGuide() {
             <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
               <div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
                 <div className='max-w-6xl mx-auto'>
-                  <div className='mb-4 flex items-center justify-center rounded-lg border border-maritime-darkest/10 bg-havdyp p-4'>
+                  <div className='mb-4 flex items-center justify-center rounded-lg border border-background/10 bg-havdyp p-4'>
                     <Image
                       src={ComfyFrontSkisse}
                       alt='Skisse av Comfyrobe med mål'
@@ -107,8 +107,8 @@ export function ComfyrobeSizeGuide() {
                       className='rounded-lg bg-cloud-dancer object-contain'
                     />
                   </div>
-                  <div className='mt-12 overflow-hidden rounded-lg border border-maritime-darkest/10 shadow-[0_18px_44px_-36px_color-mix(in_oklab,var(--maritime-darkest)_72%,transparent)]'>
-                    <table className='min-w-full divide-y divide-maritime-darkest/10 bg-cloud-dancer'>
+                  <div className='mt-12 overflow-hidden rounded-lg border border-background/10 shadow-[0_18px_44px_-36px_color-mix(in_oklab,var(--background)_72%,transparent)]'>
+                    <table className='min-w-full divide-y divide-background/10 bg-cloud-dancer'>
                       <thead className='bg-havdyp text-cloud-dancer'>
                         <tr>
                           <th
@@ -128,19 +128,19 @@ export function ComfyrobeSizeGuide() {
                           </th>
                         </tr>
                       </thead>
-                      <tbody className='divide-y divide-maritime-darkest/10'>
+                      <tbody className='divide-y divide-background/10'>
                         {comfyrobeData.map(row => (
                           <tr key={row.measurement}>
                             <td className='whitespace-nowrap py-4 pl-4 pr-3 text-sm text-left font-medium sm:pl-6'>
                               {row.measurement}
                             </td>
-                            <td className='whitespace-nowrap px-3 py-4 text-sm text-maritime-darkest/78 text-center'>
+                            <td className='whitespace-nowrap px-3 py-4 text-sm text-background/78 text-center'>
                               {row.xs}
                             </td>
-                            <td className='whitespace-nowrap px-3 py-4 text-sm text-maritime-darkest/78 text-center'>
+                            <td className='whitespace-nowrap px-3 py-4 text-sm text-background/78 text-center'>
                               {row.ml}
                             </td>
-                            <td className='whitespace-nowrap px-3 py-4 text-sm text-maritime-darkest/78 text-center'>
+                            <td className='whitespace-nowrap px-3 py-4 text-sm text-background/78 text-center'>
                               {row.lxl}
                             </td>
                           </tr>

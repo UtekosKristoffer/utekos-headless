@@ -7,7 +7,7 @@ import { Quote } from 'lucide-react'
 
 export function GrunderSection() {
   return (
-    <section className='relative overflow-hidden bg-maritime-darkest py-24 sm:py-32'>
+    <section className='relative overflow-hidden bg-background py-24 sm:py-32'>
       <div className='absolute inset-0 -z-10 opacity-40'>
         <div
           className='absolute right-1/3 top-1/4 h-[500px] w-[500px] blur-3xl'
@@ -63,7 +63,7 @@ export function GrunderSection() {
               <BrandBadge
                 label='Vår historie'
                 backgroundColor='var(--dusted-peri)'
-                textColor='var(--maritime-darkest)'
+                textColor='var(--background)'
                 className='w-fit   font-medium   shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
               />
             </AnimatedBlock>

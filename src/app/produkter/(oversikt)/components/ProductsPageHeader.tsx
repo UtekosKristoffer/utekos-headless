@@ -96,7 +96,7 @@ export function ProductsPageHeader() {
     <header
       ref={container}
       onMouseMove={handleMouseMove}
-      className='relative mb-12 w-full rounded-3xl overflow-hidden bg-[radial-gradient(circle_at_top,color-mix(in_oklab,var(--ancient-water)_16%,transparent),transparent_42%),linear-gradient(180deg,color-mix(in_oklab,var(--havdyp)_90%,black)_0%,color-mix(in_oklab,var(--maritime-darkest)_94%,black)_100%)] pt-12 pb-16'
+      className='relative mb-12 w-full rounded-3xl overflow-hidden bg-[radial-gradient(circle_at_top,color-mix(in_oklab,var(--ancient-water)_16%,transparent),transparent_42%),linear-gradient(180deg,color-mix(in_oklab,var(--havdyp)_90%,black)_0%,color-mix(in_oklab,var(--background)_94%,black)_100%)] pt-12 pb-16'
     >
       <div className='absolute inset-0 -z-10 overflow-hidden pointer-events-none'>
         <div className='gsap-grid absolute inset-0 bg-[linear-gradient(to_right,rgba(245,243,239,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(245,243,239,0.045)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]' />
@@ -170,7 +170,7 @@ export function ProductsPageHeader() {
         </p>
       </div>
 
-      <div className='pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-maritime-darkest via-maritime-darkest/80 to-transparent' />
+      <div className='pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent' />
     </header>
   )
 }

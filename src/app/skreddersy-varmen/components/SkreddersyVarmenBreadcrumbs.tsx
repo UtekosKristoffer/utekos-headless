@@ -10,7 +10,7 @@ import Link from 'next/link'
 
 export function SkreddersyVarmenBreadcrumbs() {
   return (
-    <section className='w-full border-b border-cloud-dancer/12 bg-maritime-darkest text-cloud-dancer'>
+    <section className='w-full border-b border-cloud-dancer/12 bg-background text-cloud-dancer'>
       <div className='container mx-auto px-4 py-5'>
         <Breadcrumb>
           <BreadcrumbList>

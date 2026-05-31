@@ -53,7 +53,7 @@ export function MikrofiberContentColumn() {
             <BrandBadge
               backgroundColor='var(--dazzling-blue)'
               textColor='var(--cloud-dancer)'
-              className='gap-2 border border-maritime-darkest/12 px-4 py-2   text-sm font-medium  '
+              className='gap-2 border border-background/12 px-4 py-2   text-sm font-medium  '
             >
               <Feather className='size-4 text-orange-slice' aria-hidden='true' />
               <span>Ultralett allsidighet</span>
@@ -62,7 +62,7 @@ export function MikrofiberContentColumn() {
           <h2
             ref={h2Ref}
             className={cn(
-              'will-animate-fade-in-up text-balance font-google-sans  text-maritime-darkest',
+              'will-animate-fade-in-up text-balance font-google-sans  text-background',
               h2InView && 'is-in-view'
             )}
             style={{ '--transition-delay': '0.4s' } as React.CSSProperties}
@@ -72,7 +72,7 @@ export function MikrofiberContentColumn() {
           <p
             ref={pRef}
             className={cn(
-              'will-animate-fade-in-up mt-6 max-w-2xl   text-lg leading-[1.45]   text-maritime-darkest/82',
+              'will-animate-fade-in-up mt-6 max-w-2xl   text-lg leading-[1.45]   text-background/82',
               pInView && 'is-in-view'
             )}
             style={{ '--transition-delay': '0.5s' } as React.CSSProperties}
@@ -81,7 +81,7 @@ export function MikrofiberContentColumn() {
             fuktig og tørker raskt. Ulike snorstramminger sørger for at passformen kan justeres etter behov.
           </p>
 
-          <ul className='mt-8 text-maritime-darkest space-y-3'>
+          <ul className='mt-8 text-background space-y-3'>
             {benefits.map((benefit, idx) => (
               <BenefitCard key={benefit.label} benefit={benefit} delay={0.6 + idx * 0.1} />
             ))}
@@ -93,9 +93,9 @@ export function MikrofiberContentColumn() {
           >
             <BrandBadge
               asChild
-              backgroundColor='var(--maritime-darkest)'
+              backgroundColor='var(--background)'
               textColor='var(--cloud-dancer)'
-              className='group min-h-12 w-full gap-2 whitespace-normal border border-maritime-darkest/40 px-6 py-3   text-base font-semibold leading-[1.35]   shadow-[0_18px_40px_-28px_color-mix(in_oklch,var(--primary)_70%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto sm:whitespace-nowrap'
+              className='group min-h-12 w-full gap-2 whitespace-normal border border-background/40 px-6 py-3   text-base font-semibold leading-[1.35]   shadow-[0_18px_40px_-28px_color-mix(in_oklch,var(--primary)_70%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto sm:whitespace-nowrap'
             >
               <Link href='/produkter/utekos-mikrofiber' data-track='MikrofiberContentProductPageExploreClick'>
                 Utforsk Mikrofiber™

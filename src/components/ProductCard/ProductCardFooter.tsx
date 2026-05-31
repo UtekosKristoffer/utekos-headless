@@ -31,7 +31,7 @@ export function ProductCardFooter({
         <BrandBadge
           asChild
           backgroundColor='var(--cloud-dancer)'
-          textColor='var(--maritime-darkest)'
+          textColor='var(--background)'
           className={`${actionBadgeClassName} border-cloud-dancer/20 hover:brightness-95 focus-visible:outline-cloud-dancer`}
         >
           <Link
@@ -47,7 +47,7 @@ export function ProductCardFooter({
           <BrandBadge
             asChild
             backgroundColor='var(--primary)'
-            textColor='var(--maritime-darkest)'
+            textColor='var(--background)'
             className={`${actionBadgeClassName} border-primary/35 hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-primary`}
           >
             <button

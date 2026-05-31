@@ -29,7 +29,7 @@ export function TechDownSizeGuide() {
             <BrandBadge
               label='TechDown™'
               backgroundColor='var(--cloud-dancer)'
-              textColor='var(--maritime-darkest)'
+              textColor='var(--background)'
               className='mb-5 px-4 py-2 text-sm'
             />
             <h2 className='text-3xl font-bold leading-[1.05]   sm:text-5xl'>
@@ -62,7 +62,7 @@ export function TechDownSizeGuide() {
           </div>
 
           <div className='mt-16 grid grid-cols-1 gap-x-6 gap-y-6 lg:grid-cols-3 max-w-6xl mx-auto'>
-            <div className='rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/58 p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)] sm:p-8'>
+            <div className='rounded-lg border border-cloud-dancer/12 bg-background/58 p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--background)_90%,transparent)] sm:p-8'>
               <h3 className='text-xl font-semibold leading-7'>Velg Liten hvis...</h3>
               <ul className='mt-4 list-disc list-inside space-y-2 text-cloud-dancer/95'>
                 <li>Er opptil 165-170 cm høy.</li>
@@ -70,7 +70,7 @@ export function TechDownSizeGuide() {
                 <li>Eller du er noe høyere, men ønsker nettere silhuett uten overflødig volum.</li>
               </ul>
             </div>
-            <div className='rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/58 p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)] sm:p-8'>
+            <div className='rounded-lg border border-cloud-dancer/12 bg-background/58 p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--background)_90%,transparent)] sm:p-8'>
               <h3 className='text-xl font-semibold leading-7'>Velg Medium hvis...</h3>
               <ul className='mt-4 list-disc list-inside space-y-2 text-cloud-dancer/82'>
                 <li>Du er opptil 175-180 cm høy.</li>
@@ -78,7 +78,7 @@ export function TechDownSizeGuide() {
                 <li>Eller noe høyere, men ønsker kroppsnær passform.</li>
               </ul>
             </div>
-            <div className='rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/58 p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)] sm:p-8'>
+            <div className='rounded-lg border border-cloud-dancer/12 bg-background/58 p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--background)_90%,transparent)] sm:p-8'>
               <h3 className='text-xl font-semibold leading-7'>Velg Large hvis...</h3>
               <ul className='mt-4 list-disc list-inside space-y-2 text-cloud-dancer/82'>
                 <li>Du er over 180-185 cm høy</li>
@@ -93,7 +93,7 @@ export function TechDownSizeGuide() {
             <div className='mt-8 grid grid-cols-1 gap-12 sm:grid-cols-3'>
               {techDownFeatures.map(feature => (
                 <div key={feature.title} className='flex flex-col items-center gap-4'>
-                  <div className='flex size-12 items-center justify-center rounded-full bg-cloud-dancer text-maritime-darkest'>
+                  <div className='flex size-12 items-center justify-center rounded-full bg-cloud-dancer text-background'>
                     <feature.Icon className='size-6' aria-hidden='true' />
                   </div>
                   <div className='text-center'>
@@ -107,9 +107,9 @@ export function TechDownSizeGuide() {
           <div className='mt-20 flow-root'>
             <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
               <div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
-                <div className='overflow-hidden rounded-lg border border-cloud-dancer/12 shadow-[0_22px_54px_-42px_color-mix(in_oklab,var(--maritime-darkest)_90%,transparent)]'>
-                  <table className='min-w-full divide-y divide-cloud-dancer/12 bg-maritime-darkest/72'>
-                    <thead className='bg-cloud-dancer text-maritime-darkest'>
+                <div className='overflow-hidden rounded-lg border border-cloud-dancer/12 shadow-[0_22px_54px_-42px_color-mix(in_oklab,var(--background)_90%,transparent)]'>
+                  <table className='min-w-full divide-y divide-cloud-dancer/12 bg-background/72'>
+                    <thead className='bg-cloud-dancer text-background'>
                       <tr>
                         <th scope='col' className='py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-6'>
                           Måling

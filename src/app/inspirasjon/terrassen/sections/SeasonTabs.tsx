@@ -15,7 +15,7 @@ const seasons = [
     iconColor: 'text-bleached-mauve',
     glowColor: 'var(--bleached-mauve)',
     activeBackground: 'var(--bleached-mauve)',
-    activeText: 'var(--maritime-darkest)',
+    activeText: 'var(--background)',
     title: 'Den første kaffen ute',
     description:
       'Det er noe magisk med den første dagen det er varmt nok til å sitte ute. Med Utekos kan den dagen komme uker tidligere.'
@@ -27,7 +27,7 @@ const seasons = [
     iconColor: 'text-ancient-water',
     glowColor: 'var(--ancient-water)',
     activeBackground: 'var(--ancient-water)',
-    activeText: 'var(--maritime-darkest)',
+    activeText: 'var(--background)',
     title: 'Når duggfallet kommer',
     description:
       'Ikke la den kjølige kveldsluften avslutte den gode samtalen. Forleng de lyse sommerkveldene til langt etter at solen har gått ned.'
@@ -39,7 +39,7 @@ const seasons = [
     iconColor: 'text-primary',
     glowColor: 'var(--primary)',
     activeBackground: 'var(--primary)',
-    activeText: 'var(--maritime-darkest)',
+    activeText: 'var(--background)',
     title: 'Høstkvelder med klar luft',
     description: 'Pakk deg inn i komfort og nyt den skarpe, klare høstluften med en kopp te og en god bok.'
   },
@@ -50,7 +50,7 @@ const seasons = [
     iconColor: 'text-overcast',
     glowColor: 'var(--overcast)',
     activeBackground: 'var(--overcast)',
-    activeText: 'var(--maritime-darkest)',
+    activeText: 'var(--background)',
     title: 'En kort pause i frisk luft',
     description:
       'Noen ganger trenger man bare fem minutter ute, selv om det er kaldt. Perfekt for en rask pause med gløgg eller kaffe på vinteren.'
@@ -77,7 +77,7 @@ export function SeasonsTabs() {
             <TabsTrigger
               key={season.value}
               value={season.value}
-              className='seasons-tab-trigger relative h-auto min-h-14 overflow-hidden rounded-full border border-cloud-dancer/14 bg-maritime-darkest/72 px-5 py-4 text-sm font-semibold leading-[1.35]     text-cloud-dancer transition-[background-color,border-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:bg-maritime-darkest data-[state=active]:border-transparent data-[state=active]:text-maritime-darkest data-[state=active]:shadow-[0_18px_42px_-30px_color-mix(in_oklch,var(--maritime-darkest)_88%,transparent)] focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-havdyp motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+              className='seasons-tab-trigger relative h-auto min-h-14 overflow-hidden rounded-full border border-cloud-dancer/14 bg-background/72 px-5 py-4 text-sm font-semibold leading-[1.35]     text-cloud-dancer transition-[background-color,border-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:bg-background data-[state=active]:border-transparent data-[state=active]:text-background data-[state=active]:shadow-[0_18px_42px_-30px_color-mix(in_oklch,var(--background)_88%,transparent)] focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-havdyp motion-reduce:transition-none motion-reduce:hover:translate-y-0'
               style={{
                 backgroundColor: isActive ? season.activeBackground : undefined,
                 color: isActive ? season.activeText : undefined
@@ -95,7 +95,7 @@ export function SeasonsTabs() {
               <div className='relative flex items-center justify-center gap-2.5'>
                 <Icon
                   className={`size-5 transition-colors motion-reduce:transition-none ${
-                    isActive ? 'text-maritime-darkest' : season.iconColor
+                    isActive ? 'text-background' : season.iconColor
                   }`}
                   aria-hidden='true'
                 />
@@ -112,7 +112,7 @@ export function SeasonsTabs() {
         return (
           <TabsContent key={season.value} value={season.value} className='mt-8'>
             <div className='seasons-tab-content-enter'>
-              <Card className='relative overflow-hidden border-cloud-dancer/12 bg-maritime-darkest/78 shadow-[0_26px_72px_-52px_color-mix(in_oklch,var(--maritime-darkest)_95%,transparent)]'>
+              <Card className='relative overflow-hidden border-cloud-dancer/12 bg-background/78 shadow-[0_26px_72px_-52px_color-mix(in_oklch,var(--background)_95%,transparent)]'>
                 <div
                   className='absolute -inset-x-2 -inset-y-16 opacity-20 blur-3xl'
                   style={{

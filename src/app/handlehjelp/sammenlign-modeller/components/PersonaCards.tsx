@@ -7,7 +7,7 @@ import { modelRecommendations } from '../utils/comparisonData'
 
 export function PersonaCards() {
   return (
-    <section id='velg-etter-bruk' className='bg-cloud-dancer py-20 text-maritime-darkest sm:py-28'>
+    <section id='velg-etter-bruk' className='bg-cloud-dancer py-20 text-background sm:py-28'>
       <div className='mx-auto max-w-7xl'>
         <div className='max-w-3xl px-4 items-center md:max-w-3xl lg:max-w-4xl justify-center text-center w-full mx-auto'>
           <BrandBadge
@@ -16,7 +16,7 @@ export function PersonaCards() {
             className='mb-6 px-6 py-3 text-cloud-dancer text-sm'
           />
           <h2 className='text-havdyp mx-auto md:max-w-3xl'>Hva er riktig Utekos for deg?</h2>
-          <p className='mt-6 max-w-2xl md:max-w-3xl lg:max-w-4xl utekos-section-lead mx-auto  text-maritime-darkest'>
+          <p className='mt-6 max-w-2xl md:max-w-3xl lg:max-w-4xl utekos-section-lead mx-auto  text-background'>
             Å velge riktig Utekos handler i stor grad om å finne balansen mellom varme, vekt, pakkvolum og hva
             du faktisk skal bruke jakken til.
           </p>

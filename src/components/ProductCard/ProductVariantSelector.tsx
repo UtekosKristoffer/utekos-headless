@@ -43,7 +43,7 @@ export function ProductVariantSelector({
                           // Selected
                           'border-border ring-1 ring-border'
                           // Unselected
-                        : 'border-primary hover:border-primary/50 hover:ring-2 hover:ring-border'
+                        : 'border-cloud-dancer/20 hover:border-cloud-dancer/40 hover:ring-2 hover:ring-cloud-dancer/20'
                       }`}
                       style={{ backgroundColor: colorCode ?? undefined }}
                       title={value.name}
@@ -64,7 +64,7 @@ export function ProductVariantSelector({
                     className={`btn-variant-option hover:border-white ${
                       selectedOptions[option.name] === value.name ?
                         'border-border font-medium text-white'
-                      : 'border-primary text-white hover:border-primary/50'
+                      : 'border-cloud-dancer/20 text-white hover:border-cloud-dancer/40'
                     }`}
                   >
                     {value.name}

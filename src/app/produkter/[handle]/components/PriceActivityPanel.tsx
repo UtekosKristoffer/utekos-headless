@@ -121,18 +121,18 @@ export default function PriceActivityPanel({
         <div className='relative z-20 flex flex-wrap items-center gap-3'>
           <BrandBadge
             backgroundColor='var(--dusted-peri)'
-            textColor='var(--maritime-darkest)'
+            textColor='var(--background)'
             className='gap-2 border border-dusted-peri/20 px-4 py-2 text-sm font-semibold shadow-[0_12px_28px_-22px_rgba(32,28,54,0.72)] sm:px-5 sm:py-2.5'
           >
-            <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-maritime-darkest'>
-              <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-maritime-darkest opacity-30' />
+            <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-background'>
+              <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-background opacity-30' />
             </span>
             {currentOffer.label}
           </BrandBadge>
           <BrandBadge
             label={`Spar totalt kr ${Math.round(savingsAmount)}`}
             backgroundColor='var(--dusted-peri)'
-            textColor='var(--maritime-darkest)'
+            textColor='var(--background)'
             className='border border-dusted-peri/24 px-4 py-2 text-sm font-semibold shadow-[0_14px_32px_-24px_rgba(32,28,54,0.58)] sm:px-5 sm:py-2.5'
           />
         </div>
@@ -187,7 +187,7 @@ export default function PriceActivityPanel({
 
       {reviewSummary && (
         <div
-          className='text-sm text-maritime-darkest'
+          className='text-sm text-background'
           aria-label={`${reviewSummary.formattedAverage} av 5 basert på ${reviewSummary.count} anmeldelser`}
         >
           <div className='flex flex-wrap items-center gap-x-2 gap-y-1'>

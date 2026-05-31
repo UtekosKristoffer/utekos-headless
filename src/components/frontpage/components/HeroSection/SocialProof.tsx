@@ -24,14 +24,14 @@ export function SocialProof() {
         <SocialProofCard
           title='3000+'
           Icon={Smile}
-          cardClass='border-demitasse/20 bg-overcast text-maritime-darkest transition-colors hover:bg-cloud-dancer'
-          titleClass='text-maritime-darkest'
+          cardClass='border-demitasse/20 bg-overcast text-background transition-colors hover:bg-cloud-dancer'
+          titleClass='text-background'
           shineClass='via-cloud-dancer/40'
-          hoverBorderClass='hover:border-maritime-darkest/70'
+          hoverBorderClass='hover:border-background/70'
           iconWrapperClass='bg-cloud-dancer/60 shadow-[0_0_18px_color-mix(in_oklch,var(--demitasse)_15%,transparent)]'
           iconColorClass='text-demitasse'
         >
-          <p className='mt-1 text-sm font-medium leading-[1.45]   text-maritime-darkest'>Fornøyde kunder</p>
+          <p className='mt-1 text-sm font-medium leading-[1.45]   text-background'>Fornøyde kunder</p>
         </SocialProofCard>
 
         <SocialProofCard

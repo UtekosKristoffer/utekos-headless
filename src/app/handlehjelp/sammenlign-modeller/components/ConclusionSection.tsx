@@ -5,7 +5,7 @@ import { faqItems } from '../utils/comparisonData'
 
 export function ConclusionSection() {
   return (
-    <section className='bg-cloud-dancer py-20 text-maritime-darkest sm:py-28'>
+    <section className='bg-cloud-dancer py-20 text-background sm:py-28'>
       <div className='mx-auto max-w-7xl px-[6vw]'>
         <div className='grid gap-12 lg:grid-cols-[0.45fr_0.55fr] lg:items-start'>
           <div>

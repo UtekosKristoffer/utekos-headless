@@ -16,15 +16,12 @@ export function CareList({ variant, title, items }: CareListProps) {
         >
           <Icon className='size-[1.05rem]' strokeWidth={2.4} />
         </span>
-        <h4 className='text-base font-semibold   text-maritime-darkest sm:text-lg'>{title}</h4>
+        <h4 className='text-base font-semibold   text-background sm:text-lg'>{title}</h4>
       </div>
-      <ul className='mt-4 space-y-2.5 text-sm   leading-relaxed text-maritime-darkest sm:text-base'>
+      <ul className='mt-4 space-y-2.5 text-sm   leading-relaxed text-background sm:text-base'>
         {items.map(item => (
           <li key={item} className='flex gap-2.5'>
-            <span
-              aria-hidden='true'
-              className='mt-[0.55em] size-1 shrink-0 rounded-full bg-maritime-darkest/44'
-            />
+            <span aria-hidden='true' className='mt-[0.55em] size-1 shrink-0 rounded-full bg-background/44' />
             <span>{item}</span>
           </li>
         ))}

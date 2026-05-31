@@ -8,7 +8,7 @@ import type { Route } from 'next'
 
 export function CTASection() {
   return (
-    <section className='relative isolate overflow-hidden border-t border-cloud-dancer/12 bg-maritime-darkest py-24 md:py-32 lg:py-40'>
+    <section className='relative isolate overflow-hidden border-t border-cloud-dancer/12 bg-background py-24 md:py-32 lg:py-40'>
       <div className='pointer-events-none absolute inset-0 -z-10 opacity-[0.18]'>
         <div
           className='absolute left-[12%] top-[8%] size-[28rem] rounded-full blur-3xl'
@@ -36,8 +36,8 @@ export function CTASection() {
             <BrandBadge
               asChild
               backgroundColor='var(--primary)'
-              textColor='var(--maritime-darkest)'
-              className='group min-h-14 border border-primary/24 px-8 py-4 text-base leading-[1.4] font-bold     shadow-[0_22px_52px_-34px_color-mix(in_oklch,var(--primary)_62%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest motion-reduce:transition-none'
+              textColor='var(--background)'
+              className='group min-h-14 border border-primary/24 px-8 py-4 text-base leading-[1.4] font-bold     shadow-[0_22px_52px_-34px_color-mix(in_oklch,var(--primary)_62%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none'
             >
               <Link href={'/produkter' as Route} data-track='TerrassenShopAllProductsClick'>
                 Se alle produkter
@@ -47,8 +47,8 @@ export function CTASection() {
             <BrandBadge
               asChild
               backgroundColor='var(--cloud-dancer)'
-              textColor='var(--maritime-darkest)'
-              className='min-h-14 border border-cloud-dancer/24 px-8 py-4 text-base leading-[1.4] font-bold     shadow-[0_18px_42px_-34px_color-mix(in_oklch,var(--cloud-dancer)_48%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest motion-reduce:transition-none'
+              textColor='var(--background)'
+              className='min-h-14 border border-cloud-dancer/24 px-8 py-4 text-base leading-[1.4] font-bold     shadow-[0_18px_42px_-34px_color-mix(in_oklch,var(--cloud-dancer)_48%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none'
             >
               <Link href={'/handlehjelp/storrelsesguide' as Route} data-track='TerrassenFindYourSizeClick'>
                 Finn din størrelse

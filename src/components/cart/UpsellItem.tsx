@@ -72,7 +72,7 @@ export function UpsellItem({ product, showDiscountHint }: UpsellItemProps) {
             size='sm'
             onClick={handleAddToCart}
             disabled={!selectedVariant}
-            className='w-full bg-ancient-water text-maritime-darkest hover:bg-cloud-dancer/80 sm:w-auto sm:flex-shrink-0'
+            className='w-full bg-ancient-water text-background hover:bg-cloud-dancer/80 sm:w-auto sm:flex-shrink-0'
           >
             Legg til <ArrowRightIcon className='ml-2 h-4 w-4' />
           </Button>

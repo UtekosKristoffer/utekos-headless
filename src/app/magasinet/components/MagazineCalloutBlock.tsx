@@ -6,10 +6,10 @@ type MagazineCalloutBlockProps = {
 }
 
 const calloutClassByTone = {
-  quiet: 'border-maritime-darkest/12 bg-cloud-dancer text-maritime-darkest',
-  dark: 'border-cloud-dancer/12 bg-maritime-darkest text-cloud-dancer',
-  accent: 'border-maritime-darkest/14 bg-[var(--magazine-accent)] text-maritime-darkest',
-  commerce: 'border-primary/30 bg-primary text-maritime-darkest'
+  quiet: 'border-background/12 bg-cloud-dancer text-background',
+  dark: 'border-cloud-dancer/12 bg-background text-cloud-dancer',
+  accent: 'border-background/14 bg-[var(--magazine-accent)] text-background',
+  commerce: 'border-primary/30 bg-primary text-background'
 } satisfies Record<Extract<MagazineBlock, { type: 'callout' }>['tone'], string>
 
 export function MagazineCalloutBlock({ block }: MagazineCalloutBlockProps) {

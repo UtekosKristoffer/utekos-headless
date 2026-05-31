@@ -11,7 +11,7 @@ export function Hero() {
   return (
     <section
       aria-labelledby='hero-headline'
-      className='relative min-h-[calc(100svh-70px)] w-full overflow-hidden bg-maritime-darkest font-google-sans text-cloud-dancer xl:min-h-[calc(100svh-86px)]'
+      className='relative min-h-[calc(100svh-70px)] w-full overflow-hidden bg-background font-google-sans text-cloud-dancer xl:min-h-[calc(100svh-86px)]'
     >
       {/* Background — desktop */}
       <div className='absolute inset-0 z-0 hidden md:block'>
@@ -45,11 +45,11 @@ export function Hero() {
       {/* Static overlays. No motion values, no JS. */}
       <div
         aria-hidden
-        className='absolute inset-0 z-[1] bg-gradient-to-b from-maritime-darkest/35 via-maritime-darkest/55 via-50% to-maritime-darkest/95'
+        className='absolute inset-0 z-[1] bg-gradient-to-b from-background/35 via-background/55 via-50% to-background/95'
       />
       <div
         aria-hidden
-        className='absolute inset-y-0 left-0 z-[1] hidden w-1/2 bg-gradient-to-r from-maritime-darkest/80 via-maritime-darkest/20 to-transparent md:block'
+        className='absolute inset-y-0 left-0 z-[1] hidden w-1/2 bg-gradient-to-r from-background/80 via-background/20 to-transparent md:block'
       />
 
       {/* Main content */}
@@ -66,9 +66,7 @@ export function Hero() {
             id='hero-headline'
             className='font-google-sans text-4xl font-bold leading-[0.92] tracking-[-0.01em] drop-shadow-lg sm:text-5xl md:text-6xl lg:text-7xl'
           >
-            <span className='block whitespace-nowrap text-cloud-dancer'>
-              Skreddersy varmen.
-            </span>
+            <span className='block whitespace-nowrap text-cloud-dancer'>Skreddersy varmen.</span>
             <span className='mt-3 block max-w-4xl font-google-sans text-3xl font-bold italic text-overcast sm:text-4xl md:text-5xl lg:text-6xl'>
               Forleng kvelden.
             </span>
@@ -97,10 +95,7 @@ export function Hero() {
               ·
             </span>
             <span>Levering 2–5 dager</span>
-            <span
-              className='mx-2 hidden text-cloud-dancer/65 lg:inline'
-              aria-hidden
-            >
+            <span className='mx-2 hidden text-cloud-dancer/65 lg:inline' aria-hidden>
               ·
             </span>
             <span className='hidden lg:inline'>14 dagers retur</span>

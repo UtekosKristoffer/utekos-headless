@@ -11,18 +11,18 @@ export function DestinationsGrid({ destinations }: { destinations: Destination[]
     <section className='bg-overcast py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-3xl md:max-w-4xl text-center'>
-          <h2 className='text-fluid-display-bold text-maritime-darkest'>
+          <h2 className='text-fluid-display-bold text-background'>
             <span className='block'>Populære destinasjoner</span>
             <span className='mt-[0.08em] inline-flex items-baseline justify-center gap-x-[0.18em] whitespace-nowrap'>
               <span>med</span>
               <UtekosWordmark
                 className='h-[0.78em] w-auto shrink-0 translate-y-[0.06em]'
-                style={{ color: 'var(--maritime-darkest)' }}
+                style={{ color: 'var(--background)' }}
               />
             </span>
           </h2>
 
-          <p className='mx-auto mt-4 max-w-xl utekos-section-lead text-maritime-darkest/82'>
+          <p className='mx-auto mt-4 max-w-xl utekos-section-lead text-background/82'>
             Norges vakreste bobildestinasjoner venter — nyt dem i komfort hele sesongen
           </p>
         </div>

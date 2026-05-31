@@ -14,7 +14,7 @@ export function MagazineRelatedArticles({ articles }: MagazineRelatedArticlesPro
   }
 
   return (
-    <section className='border-t border-maritime-darkest/10 bg-cloud-dancer py-16 text-maritime-darkest'>
+    <section className='border-t border-background/10 bg-cloud-dancer py-16 text-background'>
       <div className='container mx-auto px-4'>
         <header className='mb-8 max-w-2xl'>
           <p className='  text-sm font-semibold leading-[1.4]   text-havdyp'>Les videre</p>
@@ -27,7 +27,7 @@ export function MagazineRelatedArticles({ articles }: MagazineRelatedArticlesPro
             <li key={article.slug}>
               <Link
                 href={`/magasinet/${article.slug}` as Route}
-                className='group block h-full overflow-hidden rounded-lg border border-maritime-darkest/10 bg-overcast transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+                className='group block h-full overflow-hidden rounded-lg border border-background/10 bg-overcast transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
               >
                 <Image
                   src={article.heroImage.src}
@@ -38,10 +38,10 @@ export function MagazineRelatedArticles({ articles }: MagazineRelatedArticlesPro
                   className='aspect-[16/10] h-auto w-full object-cover'
                 />
                 <div className='p-5'>
-                  <h3 className='font-google-sans text-2xl font-bold leading-[0.98]   text-maritime-darkest transition-colors group-hover:text-havdyp'>
+                  <h3 className='font-google-sans text-2xl font-bold leading-[0.98]   text-background transition-colors group-hover:text-havdyp'>
                     <MagazineInlineTitle text={article.title} />
                   </h3>
-                  <p className='mt-3   text-sm leading-[1.5]   text-maritime-darkest/72'>{article.excerpt}</p>
+                  <p className='mt-3   text-sm leading-[1.5]   text-background/72'>{article.excerpt}</p>
                 </div>
               </Link>
             </li>

@@ -53,7 +53,7 @@ export function NbccProductCarousel({ images }: NbccProductCarouselProps) {
       <button
         onClick={prev}
         aria-label='Forrige bilde'
-        className='absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-cloud-dancer p-1.5 text-maritime-darkest opacity-0 shadow-sm transition-opacity duration-200 group-hover/carousel:opacity-100 hover:bg-cloud-dancer/90'
+        className='absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-cloud-dancer p-1.5 text-background opacity-0 shadow-sm transition-opacity duration-200 group-hover/carousel:opacity-100 hover:bg-cloud-dancer/90'
       >
         <svg
           width='16'

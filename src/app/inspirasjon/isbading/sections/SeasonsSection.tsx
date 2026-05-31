@@ -63,7 +63,7 @@ export function SeasonsSection() {
             <TabsTrigger
               key={season.value}
               value={season.value}
-              className='relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/58 transition-all duration-300 data-[state=active]:border-cloud-dancer/18 data-[state=active]:bg-maritime-darkest'
+              className='relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-background/58 transition-all duration-300 data-[state=active]:border-cloud-dancer/18 data-[state=active]:bg-background'
             >
               {isActive && (
                 <div
@@ -95,7 +95,7 @@ export function SeasonsSection() {
         return (
           <TabsContent key={season.value} value={season.value} className='mt-8'>
             <div className='animate-in fade-in zoom-in-95 duration-300'>
-              <Card className='relative overflow-hidden border-cloud-dancer/12 bg-maritime-darkest/58'>
+              <Card className='relative overflow-hidden border-cloud-dancer/12 bg-background/58'>
                 <div
                   className='absolute -inset-x-2 -inset-y-16 opacity-20 blur-3xl'
                   style={{
@@ -106,7 +106,7 @@ export function SeasonsSection() {
                 <CardContent className='relative p-8'>
                   <div className='mb-6 flex items-center gap-4'>
                     <div
-                      className='flex h-12 w-12 items-center justify-center rounded-lg border border-cloud-dancer/18 bg-maritime-darkest transition-shadow duration-300'
+                      className='flex h-12 w-12 items-center justify-center rounded-lg border border-cloud-dancer/18 bg-background transition-shadow duration-300'
                       style={{
                         boxShadow: `0 0 20px ${season.glowColor}20`
                       }}

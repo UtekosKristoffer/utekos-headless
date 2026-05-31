@@ -13,21 +13,21 @@ const featureSurfaceStyles = {
     background: 'var(--fjellnatt)',
     border: 'var(--fjellnatt)',
     iconBackground: 'var(--cloud-dancer)',
-    iconBorder: 'var(--maritime-darkest)',
+    iconBorder: 'var(--background)',
     iconColor: 'var(--fjellnatt)'
   },
   warmth: {
     background: 'var(--fjellnatt)',
     border: 'var(--fjellnatt)',
     iconBackground: 'var(--cloud-dancer)',
-    iconBorder: 'var(--maritime-darkest)',
+    iconBorder: 'var(--background)',
     iconColor: 'var(--fjellnatt)'
   },
   freedom: {
     background: 'var(--fjellnatt)',
     border: 'var(--fjellnatt)',
     iconBackground: 'var(--cloud-dancer)',
-    iconBorder: 'var(--maritime-darkest)',
+    iconBorder: 'var(--background)',
     iconColor: 'var(--fjellnatt)'
   }
 } as const
@@ -36,7 +36,7 @@ export function ComfyrobeFeatureSection() {
   return (
     <section aria-labelledby='comfyrobe-feature-heading' className='w-full py-16 sm:py-24 md:mb-24'>
       <div className='container mx-auto px-4'>
-        <div className='relative overflow-hidden rounded-[1.75rem] border border-cloud-dancer/12 bg-maritime-darkest p-5 shadow-[0_28px_90px_-62px_color-mix(in_oklch,var(--maritime-darkest)_90%,transparent)] sm:p-8 lg:p-12'>
+        <div className='relative overflow-hidden rounded-[1.75rem] border border-cloud-dancer/12 bg-background p-5 shadow-[0_28px_90px_-62px_color-mix(in_oklch,var(--background)_90%,transparent)] sm:p-8 lg:p-12'>
           <div className='pointer-events-none absolute inset-0 opacity-70'>
             <div
               className='absolute -left-24 top-0 size-[34rem] rounded-full blur-3xl'
@@ -56,7 +56,7 @@ export function ComfyrobeFeatureSection() {
               className='absolute left-1/2 top-1/2 size-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl'
               style={{
                 background:
-                  'radial-gradient(circle, color-mix(in oklch, var(--maritime-darkest) 28%, transparent) 0%, transparent 74%)'
+                  'radial-gradient(circle, color-mix(in oklch, var(--background) 28%, transparent) 0%, transparent 74%)'
               }}
             />
           </div>
@@ -109,7 +109,7 @@ export function ComfyrobeFeatureSection() {
                           delay={`${0.2 + index * 0.1}s`}
                         >
                           <article
-                            className='group relative overflow-hidden rounded-[1.05rem] border p-4     shadow-[0_18px_44px_-36px_color-mix(in_oklch,var(--maritime-darkest)_86%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+                            className='group relative overflow-hidden rounded-[1.05rem] border p-4     shadow-[0_18px_44px_-36px_color-mix(in_oklch,var(--background)_86%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
                             style={
                               {
                                 '--feature-accent': surface.iconColor,
@@ -166,8 +166,8 @@ export function ComfyrobeFeatureSection() {
                       <BrandBadge
                         asChild
                         backgroundColor='var(--primary)'
-                        textColor='var(--maritime-darkest)'
-                        className='group min-h-12 w-full gap-2 whitespace-normal border border-primary/35 px-6 py-3   text-base font-semibold leading-[1.35]   shadow-[0_18px_40px_-28px_color-mix(in_oklch,var(--primary)_70%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto sm:whitespace-nowrap'
+                        textColor='var(--background)'
+                        className='group min-h-12 w-full gap-2 whitespace-normal border border-primary/35 px-6 py-3   text-base font-semibold leading-[1.35]   shadow-[0_18px_40px_-28px_color-mix(in_oklch,var(--primary)_70%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto sm:whitespace-nowrap'
                       >
                         <Link href='/produkter/comfyrobe' data-track='ComfyrobeExploreProductPageClick'>
                           Utforsk Comfyrobe™

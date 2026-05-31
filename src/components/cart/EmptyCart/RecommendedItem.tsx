@@ -61,7 +61,12 @@ export function RecommendedItem({ product }: { product: ShopifyProduct }) {
           {formatPrice(product.priceRange.minVariantPrice)}
         </p>
       </div>
-      <Button size='sm' onClick={handleAddToCart} disabled={!selectedVariant}>
+      <Button 
+        size='sm' 
+        onClick={handleAddToCart} 
+        disabled={!selectedVariant}
+        className='bg-ancient-water text-maritime-darkest hover:bg-ancient-water/80'
+      >
         Legg til
       </Button>
     </div>

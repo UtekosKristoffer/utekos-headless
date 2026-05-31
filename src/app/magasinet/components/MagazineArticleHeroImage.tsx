@@ -7,7 +7,7 @@ type MagazineArticleHeroImageProps = {
 
 export function MagazineArticleHeroImage({ article }: MagazineArticleHeroImageProps) {
   return (
-    <figure className='overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest shadow-[0_28px_90px_-58px_color-mix(in_oklch,var(--maritime-darkest)_92%,transparent)]'>
+    <figure className='overflow-hidden rounded-lg border border-cloud-dancer/12 bg-background shadow-[0_28px_90px_-58px_color-mix(in_oklch,var(--background)_92%,transparent)]'>
       <Image
         src={article.heroImage.src}
         alt={article.heroImage.alt}
@@ -18,7 +18,7 @@ export function MagazineArticleHeroImage({ article }: MagazineArticleHeroImagePr
         priority
       />
       {article.heroImage.caption && (
-        <figcaption className='bg-maritime-darkest px-5 py-4   text-sm leading-[1.45]   text-cloud-dancer/72'>
+        <figcaption className='bg-background px-5 py-4   text-sm leading-[1.45]   text-cloud-dancer/72'>
           {article.heroImage.caption}
         </figcaption>
       )}

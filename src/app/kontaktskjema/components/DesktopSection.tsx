@@ -11,7 +11,7 @@ export function DesktopSection() {
           <BrandBadge
             label='Kundeservice'
             backgroundColor='var(--ancient-water)'
-            textColor='var(--maritime-darkest)'
+            textColor='var(--background)'
             className='mb-6 border border-cloud-dancer/12 px-4 py-2 text-sm leading-[1.4] font-semibold tracking-normal'
           />
           <h1 className='text-4xl font-bold leading-[0.95] tracking-normal text-cloud-dancer'>
@@ -29,8 +29,7 @@ export function DesktopSection() {
                   Få personlig veiledning
                 </h3>
                 <p className='mt-1 text-base leading-[1.45] tracking-normal text-cloud-dancer/90'>
-                  Usikker på hvilket produkt som passer ditt bruk? Vi hjelper
-                  deg å velge riktig.
+                  Usikker på hvilket produkt som passer ditt bruk? Vi hjelper deg å velge riktig.
                 </p>
               </div>
             </li>
@@ -41,8 +40,7 @@ export function DesktopSection() {
                   Hjelp med din bestilling
                 </h3>
                 <p className='mt-1 text-base leading-[1.45] tracking-normal text-cloud-dancer/90'>
-                  Spørsmål om en ordre, retur eller reklamasjon? Oppgi gjerne
-                  ordrenummer.
+                  Spørsmål om en ordre, retur eller reklamasjon? Oppgi gjerne ordrenummer.
                 </p>
               </div>
             </li>
@@ -57,8 +55,8 @@ export function DesktopSection() {
                 En investering i komfort
               </h4>
               <p className='mt-2 max-w-prose text-base leading-[1.45] tracking-normal text-cloud-dancer/90'>
-                Mer enn bare et plagg; det er et verktøy designet for å gi deg
-                utallige timer med varme og velvære.
+                Mer enn bare et plagg; det er et verktøy designet for å gi deg utallige timer med varme og
+                velvære.
               </p>
             </div>
 
@@ -69,9 +67,8 @@ export function DesktopSection() {
                 Skapt for norske forhold
               </h4>
               <p className='mt-2 max-w-prose text-base leading-[1.45] tracking-normal text-cloud-dancer/90'>
-                Våre produkter er utviklet for å forlenge de gode stundene
-                utendørs, enten det er på en kjølig sommerkveld på hytten eller
-                en frisk høstdag i båten.
+                Våre produkter er utviklet for å forlenge de gode stundene utendørs, enten det er på en kjølig
+                sommerkveld på hytten eller en frisk høstdag i båten.
               </p>
             </div>
           </div>
@@ -79,17 +76,14 @@ export function DesktopSection() {
 
         <div className='p-8 lg:p-12'>
           <blockquote className='text-lg leading-[1.45] tracking-normal italic text-cloud-dancer/90'>
-            &ldquo;Vårt løfte til deg er enkelt: å levere komfortplagg av
-            ypperste kvalitet som lar deg forlenge de gode stundene utendørs,
-            uansett vær.&rdquo;
+            &ldquo;Vårt løfte til deg er enkelt: å levere komfortplagg av ypperste kvalitet som lar deg
+            forlenge de gode stundene utendørs, uansett vær.&rdquo;
           </blockquote>
-          <p className='mt-4 font-semibold leading-[1.25] tracking-normal text-cloud-dancer'>
-            - Utekos
-          </p>
+          <p className='mt-4 font-semibold leading-[1.25] tracking-normal text-cloud-dancer'>- Utekos</p>
         </div>
       </div>
 
-      <div className='border-l border-cloud-dancer/12 bg-maritime-darkest/72 p-8 lg:p-12'>
+      <div className='border-l border-cloud-dancer/12 bg-background/72 p-8 lg:p-12'>
         <SupportForm />
       </div>
     </div>

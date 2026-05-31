@@ -16,7 +16,7 @@ export default function BrandBadge({
   label,
   asChild = false,
   backgroundColor = 'var(--primary)',
-  textColor = 'var(--maritime-darkest)',
+  textColor = 'var(--background)',
   className = '',
   children,
   style,

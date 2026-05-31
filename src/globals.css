@@ -37,7 +37,6 @@
 
   --font-sans: var(--font-utekos-text), system-ui, sans-serif;
   --font-weight-card-heading: 700;
-  --font-weight-inspirational-page-hero-card-heading: 600;
 
   --text-inspirational-page-hero-card-heading: clamp(1rem, 0.7rem + 1vw, 1.5rem);
   --text-inspirational-page-hero-card-heading--line-height: var(--leading-card-heading);
@@ -118,10 +117,8 @@
   /* Utekos TechDown */
   --color-vargnatt: oklch(0.2789 0.0091 285.79);
   --color-silhouette: oklch(0.2881 0.0219 262.5);
-
   --color-havdyp: oklch(0.2884 0.0366 279.42);
   --color-havdyp-hover: oklch(0.3191 0.022 259.38);
-
   --color-fjellbla: oklch(0.3504 0.0537 281.83);
   --color-evening-blue: oklch(0.2918 0.038 285.97);
   --color-peacoat: oklch(0.308 0.038 277.64);
@@ -144,8 +141,6 @@
   --color-ancient-water-light: oklch(0.8033 0.0246 259.82);
   --color-bright-white: oklch(0.9801 0.0096 252.81);
   --color-secondary: oklch(0.82 0.006 88.64);
-  --color-muted-foreground: oklch(0.78 0.006 88.64);
-  --color-primary: oklch(0.57 0.23507 260.1068); /* matcher --color-button */
   --color-primary-foreground: oklch(0.9493 0.007 88.64); /* cloud-dancer */
   --color-secondary-foreground: oklch(0.2884 0.0366 279.42); /* havdyp */
   --color-destructive: oklch(0.5774 0.2057 27.33);
@@ -157,13 +152,11 @@
   --color-antier: oklch(0.6039 0.0343 27.96);
   --color-demitasse: oklch(0.3328 0.0233 53.3);
   --color-chocolate-plum: oklch(0.3159 0.0237 14.31);
-
   --color-dusted-peri: oklch(0.5433 0.105 281.67);
   --color-dusted-peri-light: oklch(0.7081 0.0822 281.66);
   --color-dusted-purple: oklch(0.7794 0.0538 285.08);
   --color-persian-violet: oklch(0.6579 0.0534 282.33);
   --color-dusted-purple-light: oklch(0.6681 0.0822 281.66);
-
   --color-bleached-mauve: oklch(0.7864 0.0487 359.96);
   --color-bleached-mauve-light: oklch(0.9064 0.0487 359.96);
   --color-dry-rose: oklch(0.4885 0.0953 4.64);
@@ -181,7 +174,7 @@
   --color-camping-green: oklch(0.4257 0.0261 153.39);
   --color-comfrey: oklch(0.5054 0.0686 150.31);
   --color-mineral-green: oklch(0.6545 0.0641 142.67);
-  --color-background: oklch(0.9493 0.007 88.64);
+  --color-maritime-darkest: oklch(0.1996 0.0201 279.96);
   --color-fairest-jade: oklch(0.9041 0.02 143.03);
   --color-overcast: oklch(0.7983 0.0257 91.66);
   --color-overcast-light: oklch(0.9183 0.0257 91.66);
@@ -193,8 +186,7 @@
   --color-lucent-white: oklch(0.9762 0.0111 269.55);
   --color-barely-blue: oklch(0.9041 0.0035 174.47);
   --color-almost-mauve: oklch(0.9024 0.0128 35.73);
-
-  --color-maritime-darkest: oklch(0.1996 0.0201 279.96);
+  --color-background: oklch(0.1996 0.0201 279.96);
   --color-muted: oklch(0.2684 0.0366 279.42);
   --color-foreground: oklch(0.985 0 0);
   --utekos-title-letter-spacing: -0.02em;
@@ -203,21 +195,18 @@
   --color-country-air: oklch(0.909 0.0246 248.11);
   --color-orange-slice: oklch(0.7034 0.198 45.92);
   --color-soft-warm: oklch(0.7864 0.0487 359.96);
-  --color-background: oklch(0.1284 0.0366 279.42);
   --color-light-background: var(--color-cloud-dancer);
-  --color-foreground: oklch(0.985 0 0);
   --color-button: oklch(0.57 0.23507 260.1068);
 }
 
 @theme inline {
   --tablet: var(--breakpoint-tablet);
-
   --tracking-1: var(--tracking-1); /* Utekos's max tight limit for body copy/buttons (-3%) */
   --tracking-2: var(--tracking-2); /* Medium-snug body copy (-2%) */
   --tracking-3: var(--tracking-3); /* Light-snug body copy (-1.5%) */
   --tracking-4: var(--tracking-4); /* Utekos's max tight limit for headlines (-1%) */
   --tracking-5: var(--tracking-normal); /* Completely neutral/standard default */
-
+  --background: oklch(0.1996 0.0201 279.96);
   --border: oklch(0.7034 0.198 45.92);
   --ring: oklch(0.2884 0.0366 279.42);
   --tracking-medium: var(--tracking-medium);
@@ -249,7 +238,6 @@
   --fairest-jade: oklch(0.9041 0.02 143.03);
   --raindrops-on-roses: oklch(0.8996 0.0227 3.86);
   --plum-truffle: oklch(0.4729 0.0211 13.65);
-  --maritime-darkest: oklch(0.1996 0.0201 279.96);
   --fjellbla: oklch(0.3504 0.0537 281.83);
   --orange-slice: oklch(0.7034 0.198 45.92);
   --inking-100: oklch(0.3048 0.0341 291.48);
@@ -277,23 +265,18 @@
   --maritime-dark: oklch(0.1996 0.0201 279.96);
   --bleached-mauve: oklch(0.7864 0.0487 359.96);
   --bleached-mauve-light: oklch(0.9064 0.0487 359.96);
-  --background: oklch(0.9493 0.007 88.64);
   --foreground: oklch(0.9493 0.007 88.64);
   --primary: oklch(0.8104 0.1858 101.08);
   --muted-foreground: oklch(0.78 0.006 88.64);
   --muted: oklch(0.2684 0.0366 279.42);
-  --ring: oklch(0.7034 0.198 45.92);
-  --border: oklch(0.2884 0.0366 279.42);
   --google-sans: var(--font-google-sans);
   --font-utekos-text: var(--font-utekos-text);
   --utekos-text: var(--font-utekos-text);
   --utekos-text-medium: var(--font-utekos-text-medium);
-  --muted: oklch(0.2684 0.0366 279.42);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-
   --animate-wander: wander 7s infinite ease-in-out;
   --animate-chip-pulse: chip-pulse 2.6s infinite ease-in-out;
   --animate-blinking-cursor: blinking-cursor 1.2s infinite step-end;
@@ -348,6 +331,7 @@
     transform: translate(-5px, -3px);
   }
 }
+
 
 @keyframes chip-pulse {
   0%,
@@ -989,7 +973,6 @@
   h1 {
     font-family: var(--font-google-sans);
     line-height: 0.85;
-    color: var(--foreground);
     letter-spacing: var(--tracking-heading-level-one);
     font-weight: 800;
     font-size: var(--text-title);
@@ -998,7 +981,6 @@
   h2 {
     line-height: 0.9;
     font-family: var(--font-google-sans);
-    color: var(--foreground);
     letter-spacing: var(--tracking-heading-level-two);
     font-weight: 700;
     font-size: var(--text-heading-level-two);
@@ -1017,7 +999,6 @@
     font-size: clamp(1.125rem, 1.3888888889vw, 1.25rem);
     line-height: var(--tracking-3);
     letter-spacing: var(--tracking-medium);
-    color: var(--foreground);
   }
 
   li,
@@ -1040,7 +1021,7 @@
   }
 
   .ShippingCardDescription {
-    @apply text-maritime-darkest tracking-tight leading-none;
+    @apply text-background tracking-tight leading-none;
   }
 
   input:-webkit-autofill,
@@ -1071,7 +1052,6 @@
 
   .chat-bubble-text {
     font-size: clamp(0.875rem, 0.75rem + 0.5vw, 1rem);
-    letter-spacing: var(--tracking-font-utekos-text);
     line-height: 1.3;
     letter-spacing: var(--tracking-wide);
     font-family: var(--font-utekos-text);

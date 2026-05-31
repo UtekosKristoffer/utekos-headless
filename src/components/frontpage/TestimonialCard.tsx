@@ -22,10 +22,7 @@ export function TestimonialCard({ testimonial, index }: TestimonialCardProps) {
   return (
     <div
       ref={cardRef}
-      className={cn(
-        'will-animate-fade-in-up relative flex flex-col group',
-        cardInView && 'is-in-view'
-      )}
+      className={cn('will-animate-fade-in-up relative flex flex-col group', cardInView && 'is-in-view')}
       style={{ '--transition-delay': cardDelay } as React.CSSProperties}
     >
       <div className='absolute -top-12 left-8 h-12 w-0.5 md:left-10 z-0'>
@@ -39,28 +36,23 @@ export function TestimonialCard({ testimonial, index }: TestimonialCardProps) {
         />
       </div>
 
-      <div className='relative flex h-full flex-col overflow-hidden rounded-2xl border border-dusted-peri/35 bg-cloud-dancer p-8 backdrop-blur-md transition-all duration-500 hover:border-maritime-darkest/25 hover:bg-overcast hover:-translate-y-1 hover:shadow-2xl hover:shadow-dusted-peri/20'>
+      <div className='relative flex h-full flex-col overflow-hidden rounded-2xl border border-dusted-peri/35 bg-cloud-dancer p-8 backdrop-blur-md transition-all duration-500 hover:border-background/25 hover:bg-overcast hover:-translate-y-1 hover:shadow-2xl hover:shadow-dusted-peri/20'>
         <div className='absolute inset-0 bg-gradient-to-br from-cloud-dancer/18 via-cloud-dancer/8 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none' />
 
-        <Quote className='absolute top-6 right-6 h-16 w-16 rotate-12 text-maritime-darkest/18 transition-transform duration-700 group-hover:rotate-0 group-hover:scale-110' />
+        <Quote className='absolute top-6 right-6 h-16 w-16 rotate-12 text-background/18 transition-transform duration-700 group-hover:rotate-0 group-hover:scale-110' />
 
         <div className='relative z-10 flex flex-col h-full'>
           <blockquote className='flex-grow mb-8'>
-            <p className='text-base font-medium italic leading-relaxed text-maritime-darkest md:text-lg'>
+            <p className='text-base font-medium italic leading-relaxed text-background md:text-lg'>
               &quot;{testimonial.quote}&quot;
             </p>
           </blockquote>
 
-          <footer className='mt-auto flex items-center justify-between border-t border-maritime-darkest/18 pt-6'>
+          <footer className='mt-auto flex items-center justify-between border-t border-background/18 pt-6'>
             <div className='flex flex-col gap-2'>
-              <p className='text-sm font-bold tracking-wide text-maritime-darkest'>
-                {testimonial.name}
-              </p>
+              <p className='text-sm font-bold tracking-wide text-background'>{testimonial.name}</p>
 
-              <PremiumStarRating
-                rating={testimonial.rating}
-                cardIndex={index}
-              />
+              <PremiumStarRating rating={testimonial.rating} cardIndex={index} />
             </div>
           </footer>
         </div>

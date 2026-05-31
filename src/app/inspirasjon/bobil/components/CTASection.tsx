@@ -6,7 +6,7 @@ import type { Route } from 'next'
 
 export function CTASection() {
   return (
-    <section className='relative overflow-hidden border-t border-cloud-dancer/12 bg-maritime-darkest py-24'>
+    <section className='relative overflow-hidden border-t border-cloud-dancer/12 bg-background py-24'>
       <div
         className='absolute inset-0 opacity-[0.18]'
         style={{
@@ -24,8 +24,8 @@ export function CTASection() {
             <BrandBadge
               asChild
               backgroundColor='var(--primary)'
-              textColor='var(--color-maritime-darkest)'
-              className='group min-h-14 border border-primary/24 px-8 py-4   text-base font-bold leading-[1.4] tracking-[-0.02em] shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest'
+              textColor='var(--color-background)'
+              className='group min-h-14 border border-primary/24 px-8 py-4   text-base font-bold leading-[1.4] tracking-[-0.02em] shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background'
             >
               <Link href={'/produkter' as Route} data-track='BobilShopAllProductsClick'>
                 Se alle produkter
@@ -38,8 +38,8 @@ export function CTASection() {
             <BrandBadge
               asChild
               backgroundColor='var(--color-cloud-dancer)'
-              textColor='var(--color-maritime-darkest)'
-              className='min-h-14 border border-cloud-dancer/24 px-8 py-4   text-base font-bold leading-[1.4] tracking-[-0.02em] shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-maritime-darkest'
+              textColor='var(--color-background)'
+              className='min-h-14 border border-cloud-dancer/24 px-8 py-4   text-base font-bold leading-[1.4] tracking-[-0.02em] shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background'
             >
               <Link href={'/handlehjelp/storrelsesguide' as Route} data-track='BobilFindYourSizeClick'>
                 Finn din størrelse

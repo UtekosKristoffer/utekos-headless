@@ -30,21 +30,21 @@ export const useCasesData: UseCase[] = [
 const useCaseCardThemes = [
   {
     surface: 'color-mix(in oklch, var(--cloud-dancer) 78%, var(--ancient-water))',
-    border: 'color-mix(in oklch, var(--ancient-water) 44%, var(--maritime-darkest))',
+    border: 'color-mix(in oklch, var(--ancient-water) 44%, var(--background))',
     accent: 'var(--ancient-water)',
     iconSurface: 'var(--ancient-water)',
-    icon: 'var(--maritime-darkest)'
+    icon: 'var(--background)'
   },
   {
     surface: 'color-mix(in oklch, var(--cloud-dancer) 78%, var(--bleached-mauve))',
-    border: 'color-mix(in oklch, var(--bleached-mauve) 44%, var(--maritime-darkest))',
+    border: 'color-mix(in oklch, var(--bleached-mauve) 44%, var(--background))',
     accent: 'var(--bleached-mauve)',
     iconSurface: 'var(--bleached-mauve)',
-    icon: 'var(--maritime-darkest)'
+    icon: 'var(--background)'
   },
   {
     surface: 'color-mix(in oklch, var(--cloud-dancer) 76%, var(--mountain-view))',
-    border: 'color-mix(in oklch, var(--mountain-view) 46%, var(--maritime-darkest))',
+    border: 'color-mix(in oklch, var(--mountain-view) 46%, var(--background))',
     accent: 'var(--mountain-view)',
     iconSurface: 'var(--mountain-view)',
     icon: 'var(--cloud-dancer)'
@@ -56,8 +56,8 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
     <section id='bruksomrader' className='bg-overcast py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl md:max-w-3xl lg:max-w-4xl text-center'>
-          <h2 className='text-maritime-darkest text-shadow-background'>Hyttekos fra morgen til kveld</h2>
-          <p className='mt-4 utekos-section-lead text-maritime-darkest'>
+          <h2 className='text-background text-shadow-background'>Hyttekos fra morgen til kveld</h2>
+          <p className='mt-4 utekos-section-lead text-background'>
             Fra første kaffekopp til siste vedkubbe får du varme når hyttedagen ber om det.
           </p>
         </div>
@@ -73,12 +73,11 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                 threshold={0.2}
               >
                 <Card
-                  className='group/card relative isolate h-full overflow-hidden rounded-xl border py-0 text-maritime-darkest transition-transform duration-300 hover:-translate-y-1'
+                  className='group/card relative isolate h-full overflow-hidden rounded-xl border py-0 text-background transition-transform duration-300 hover:-translate-y-1'
                   style={{
                     backgroundColor: theme.surface,
                     borderColor: theme.border,
-                    boxShadow:
-                      '0 24px 56px -42px color-mix(in oklch, var(--maritime-darkest) 58%, transparent)'
+                    boxShadow: '0 24px 56px -42px color-mix(in oklch, var(--background) 58%, transparent)'
                   }}
                 >
                   <div
@@ -102,7 +101,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                         style={{
                           backgroundColor: 'color-mix(in oklch, var(--cloud-dancer) 72%, var(--overcast))',
                           borderColor: theme.border,
-                          color: 'var(--maritime-darkest)'
+                          color: 'var(--background)'
                         }}
                       >
                         {useCase.temperature}
@@ -110,12 +109,12 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                     </div>
                     <p
                       className='mb-3 font-google-sans text-sm leading-[1] tracking-[-0.01em]'
-                      style={{ color: 'var(--maritime-darkest)' }}
+                      style={{ color: 'var(--background)' }}
                     >
                       {useCase.time}
                     </p>
-                    <h3 className='text-maritime-darkest'>{useCase.title}</h3>
-                    <p className='mt-4 text-base leading-[1.45] tracking-[-0.01em] text-maritime-darkest/78'>
+                    <h3 className='text-background'>{useCase.title}</h3>
+                    <p className='mt-4 text-base leading-[1.45] tracking-[-0.01em] text-background/78'>
                       {useCase.description}
                     </p>
                   </CardContent>

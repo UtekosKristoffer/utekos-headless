@@ -61,7 +61,7 @@ interface InspirationHeroProps {
  *   labelledById='bobil-hero-title'
  *   surfaceClassName='bg-havdyp text-cloud-dancer'
  *   background={<BobilHeroBackground />}
- *   breadcrumb={<InspirationHeroBreadcrumb label='Bobil og camping' color='var(--bleached-mauve)' textColor='var(--maritime-darkest)' icon={MapPin} />}
+ *   breadcrumb={<InspirationHeroBreadcrumb label='Bobil og camping' color='var(--bleached-mauve)' textColor='var(--background)' icon={MapPin} />}
  *   title={<>Bobilliv uten <HeroHighlight color='var(--bleached-mauve)'>kompromisser</HeroHighlight></>}
  *   lead='Fra den første morgenkaffen …'
  *   actions={<InspirationHeroActions primaryLabel='Se produktene' secondaryLabel='Utforsk mulighetene' />}

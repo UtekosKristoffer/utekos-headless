@@ -146,7 +146,7 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
         <div data-launch-stage className='w-full'>
           <div
             data-launch-card
-            className='relative isolate mx-2 overflow-hidden rounded-[1.25rem] border border-cloud-dancer/12 bg-[radial-gradient(circle_at_12%_10%,color-mix(in_oklch,var(--ancient-water)_16%,transparent)_0%,transparent_55%),radial-gradient(circle_at_88%_92%,color-mix(in_oklch,var(--bleached-mauve)_12%,transparent)_0%,transparent_60%),var(--maritime-darkest)] p-4 sm:mx-4 sm:p-8 lg:p-12'
+            className='relative isolate mx-2 overflow-hidden rounded-[1.25rem] border border-cloud-dancer/12 bg-[radial-gradient(circle_at_12%_10%,color-mix(in_oklch,var(--ancient-water)_16%,transparent)_0%,transparent_55%),radial-gradient(circle_at_88%_92%,color-mix(in_oklch,var(--bleached-mauve)_12%,transparent)_0%,transparent_60%),var(--background)] p-4 sm:mx-4 sm:p-8 lg:p-12'
           >
             <AmbientBackgroundGlow />
 
@@ -178,12 +178,12 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                   >
                     <BrandBadge
                       backgroundColor='var(--dusted-peri)'
-                      textColor='var(--maritime-darkest)'
+                      textColor='var(--background)'
                       className='max-w-full gap-2.5 border border-dusted-peri/55 px-3 py-2 text-sm font-medium   shadow-[0_10px_30px_-22px_color-mix(in_oklab,var(--cloud-dancer)_45%,transparent)]'
                     >
                       <span className='relative flex size-2 shrink-0'>
-                        <span className='absolute inline-flex size-full animate-ping rounded-full bg-maritime-darkest opacity-75 motion-reduce:animate-none'></span>
-                        <span className='relative inline-flex size-2 rounded-full bg-maritime-darkest'></span>
+                        <span className='absolute inline-flex size-full animate-ping rounded-full bg-background opacity-75 motion-reduce:animate-none'></span>
+                        <span className='relative inline-flex size-2 rounded-full bg-background'></span>
                       </span>
                       <span className='whitespace-nowrap'>Vårtilbud</span>
                     </BrandBadge>
@@ -199,7 +199,7 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                   >
                     <BrandBadge
                       backgroundColor='var(--bleached-mauve)'
-                      textColor='var(--maritime-darkest)'
+                      textColor='var(--background)'
                       className='max-w-full gap-2 border border-bleached-mauve/35 px-3 py-2 text-sm font-medium   shadow-[0_14px_32px_-24px_color-mix(in_oklab,var(--bleached-mauve)_60%,transparent)]'
                     >
                       <BadgePercent className='size-4 shrink-0' />
@@ -250,7 +250,7 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                   </span>
                 </h2>
 
-                <div className='mb-8 w-full space-y-3 text-overcast sm:space-y-4'>
+                <div className='mb-8 w-full space-y-3 text-background sm:space-y-4'>
                   {newProductFeatures.map((feature, index) => (
                     <div
                       key={feature.title}
@@ -292,7 +292,7 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                         <BrandBadge
                           asChild
                           backgroundColor='var(--primary)'
-                          textColor='var(--maritime-darkest)'
+                          textColor='var(--background)'
                           className='group min-h-12 w-full justify-center px-6 py-3 text-base font-semibold tracking-[-0.01em] shadow-[0_18px_38px_-28px_color-mix(in_oklab,var(--primary)_78%,transparent)]'
                         >
                           <button
@@ -309,7 +309,7 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                         <BrandBadge
                           asChild
                           backgroundColor='var(--cloud-dancer)'
-                          textColor='var(--maritime-darkest)'
+                          textColor='var(--background)'
                           className='group min-h-12 w-full justify-center border border-cloud-dancer/45 px-6 py-3 text-base tracking-[-0.01em]'
                         >
                           <Link

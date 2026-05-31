@@ -80,7 +80,7 @@ export function BobilSeasonsTabs() {
             <TabsTrigger
               key={season.value}
               value={season.value}
-              className='bobil-seasons-tab-trigger relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest/58 transition-all duration-300 data-[state=active]:border-cloud-dancer/18 data-[state=active]:bg-[var(--primary)] data-[state=active]:text-maritime-darkest'
+              className='bobil-seasons-tab-trigger relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-background/58 transition-all duration-300 data-[state=active]:border-cloud-dancer/18 data-[state=active]:bg-[var(--primary)] data-[state=active]:text-background'
             >
               {isActive && (
                 <div
@@ -93,10 +93,10 @@ export function BobilSeasonsTabs() {
 
               <div className='relative flex items-center justify-center gap-2 py-3'>
                 <Icon
-                  className={`size-5 transition-colors ${isActive ? 'text-maritime-darkest' : 'text-cloud-dancer/90'}`}
+                  className={`size-5 transition-colors ${isActive ? 'text-background' : 'text-cloud-dancer/90'}`}
                 />
                 <span
-                  className={`font-google-sans font-bold tracking-[-0.01em] transition-colors ${isActive ? 'text-maritime-darkest' : 'text-cloud-dancer/90'}`}
+                  className={`font-google-sans font-bold tracking-[-0.01em] transition-colors ${isActive ? 'text-background' : 'text-cloud-dancer/90'}`}
                 >
                   {season.label}
                 </span>
@@ -112,7 +112,7 @@ export function BobilSeasonsTabs() {
         return (
           <TabsContent key={season.value} value={season.value} className='mt-8'>
             <div className='bobil-seasons-tab-content-enter'>
-              <Card className='relative overflow-hidden border-cloud-dancer/12 bg-maritime-darkest/58'>
+              <Card className='relative overflow-hidden border-cloud-dancer/12 bg-background/58'>
                 <div
                   className='absolute -inset-x-2 -inset-y-16 opacity-20 blur-3xl'
                   style={{
@@ -123,7 +123,7 @@ export function BobilSeasonsTabs() {
                 <CardContent className='relative p-8'>
                   <div className='mb-6 flex items-center gap-4'>
                     <div
-                      className='flex size-12 items-center justify-center rounded-lg border border-cloud-dancer/18 bg-maritime-darkest transition-shadow duration-300'
+                      className='flex size-12 items-center justify-center rounded-lg border border-cloud-dancer/18 bg-background transition-shadow duration-300'
                       style={{
                         boxShadow: `0 0 20px ${season.glowColor}20`
                       }}
@@ -149,7 +149,7 @@ export function BobilSeasonsTabs() {
                         className='bobil-seasons-tip-enter flex items-start gap-3'
                         style={{ animationDelay: `${index * 0.1}s` }}
                       >
-                        <div className='mt-0.5 flex size-6 flex-shrink-0 items-center justify-center rounded-full border border-cloud-dancer/18 bg-maritime-darkest'>
+                        <div className='mt-0.5 flex size-6 flex-shrink-0 items-center justify-center rounded-full border border-cloud-dancer/18 bg-background'>
                           <Check className={`size-4 ${season.iconColor}`} />
                         </div>
                         <span className='  leading-[1.5]   text-cloud-dancer/90'>{tip}</span>

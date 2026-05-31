@@ -28,7 +28,7 @@ type ContactFormData = z.infer<typeof ClientContactFormSchema>
 
 const initialState: ContactFormState = { message: '' }
 const contactFieldClassName =
-  'h-12 rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal placeholder:text-havdyp focus-visible:border-primary focus-visible:ring-primary/35'
+  'h-12 rounded-none border-cloud-dancer/20 bg-ancient-water text-background tracking-normal placeholder:text-havdyp focus-visible:border-primary focus-visible:ring-primary/35'
 
 export function SupportForm() {
   const [state, formAction, isPending] = useActionState(submitContactForm, initialState)
@@ -156,17 +156,17 @@ export function SupportForm() {
                 <FormControl>
                   <div>
                     <input type='hidden' name={field.name} value={field.value ?? ''} />
-                    <SelectTrigger className='h-12 w-full rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal focus-visible:border-primary focus-visible:ring-primary/35 data-[placeholder]:text-havdyp [&_svg:not([class*=text-])]:text-havdyp'>
+                    <SelectTrigger className='h-12 w-full rounded-none border-cloud-dancer/20 bg-ancient-water text-background tracking-normal focus-visible:border-primary focus-visible:ring-primary/35 data-[placeholder]:text-havdyp [&_svg:not([class*=text-])]:text-havdyp'>
                       <SelectValue placeholder='Velg ditt land' />
                     </SelectTrigger>
                   </div>
                 </FormControl>
-                <SelectContent className='border-cloud-dancer/20 bg-ancient-water text-maritime-darkest'>
+                <SelectContent className='border-cloud-dancer/20 bg-ancient-water text-background'>
                   {countries.map(country => (
                     <SelectItem
                       key={country.value}
                       value={country.value}
-                      className='tracking-normal focus:bg-havdyp/12 focus:text-maritime-darkest'
+                      className='tracking-normal focus:bg-havdyp/12 focus:text-background'
                     >
                       {country.label}
                     </SelectItem>
@@ -214,7 +214,7 @@ export function SupportForm() {
                         form.clearErrors('message')
                       }
                     }}
-                    className='min-h-[160px] rounded-none border-cloud-dancer/20 bg-ancient-water text-maritime-darkest tracking-normal placeholder:text-havdyp focus-visible:border-primary focus-visible:ring-primary/35'
+                    className='min-h-[160px] rounded-none border-cloud-dancer/20 bg-ancient-water text-background tracking-normal placeholder:text-havdyp focus-visible:border-primary focus-visible:ring-primary/35'
                   />
                 </FormControl>
                 <div className='mt-1 flex items-center justify-between text-xs leading-[1.45] tracking-normal text-overcast'>

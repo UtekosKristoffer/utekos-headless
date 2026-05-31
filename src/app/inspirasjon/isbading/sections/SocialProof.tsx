@@ -22,8 +22,7 @@ const galleryImages = [
     src: '/comfyrobe/comfy-isbading-to-1080.png',
     alt: 'En vennegjeng står i snøen iført Utekos-kåper og drikker kaffe etter badet.',
     title: 'Varmen i fellesskapet',
-    description:
-      'Isbading er ofte best sammen med andre. Del opplevelsen, kaffen og varmen uten å fryse.'
+    description: 'Isbading er ofte best sammen med andre. Del opplevelsen, kaffen og varmen uten å fryse.'
   },
   {
     src: '/comfyrobe/comfy-isbading-1080-master.png',
@@ -36,8 +35,7 @@ const galleryImages = [
     src: '/1080/comfy-open-1080.png',
     alt: 'Person på vei fra badstue til sjøen i en Utekos-poncho.',
     title: 'Fra sauna til sjø',
-    description:
-      'Den perfekte følgesvenn mellom den varme badstuen og den iskalde fjorden.'
+    description: 'Den perfekte følgesvenn mellom den varme badstuen og den iskalde fjorden.'
   },
   {
     src: '/1080/comfy-design-1080.png',
@@ -53,9 +51,7 @@ export function SocialProof() {
     <section className='py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='text-fluid-display mb-4 font-bold tracking-normal'>
-            Ekte kulde, ekte varme
-          </h2>
+          <h2 className='text-fluid-display mb-4 font-bold tracking-normal'>Ekte kulde, ekte varme</h2>
         </div>
 
         <Carousel
@@ -67,14 +63,11 @@ export function SocialProof() {
         >
           <CarouselContent className='-ml-4'>
             {galleryImages.map((image, index) => (
-              <CarouselItem
-                key={index}
-                className='pl-4 md:basis-1/2 lg:basis-1/3'
-              >
+              <CarouselItem key={index} className='pl-4 md:basis-1/2 lg:basis-1/3'>
                 <div className='p-1 group'>
                   <AspectRatio
                     ratio={1 / 1}
-                    className='relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-maritime-darkest'
+                    className='relative overflow-hidden rounded-lg border border-cloud-dancer/12 bg-background'
                   >
                     <Image
                       src={image.src}
@@ -87,9 +80,7 @@ export function SocialProof() {
                   </AspectRatio>
                   <div className='pt-4 text-left'>
                     <h4 className='font-semibold'>{image.title}</h4>
-                    <p className='text-sm text-overcast'>
-                      {image.description}
-                    </p>
+                    <p className='text-sm text-overcast'>{image.description}</p>
                   </div>
                 </div>
               </CarouselItem>

@@ -7,10 +7,10 @@ export function ProductCareUtekosMikrofiber() {
   return (
     <TabsContent
       value='mikrofiber'
-      className='mt-8 rounded-2xl border border-maritime-darkest/10 bg-cloud-dancer/72 p-6 shadow-[0_20px_54px_-46px_color-mix(in_oklab,var(--maritime-darkest)_72%,transparent)] sm:p-8'
+      className='mt-8 rounded-2xl border border-background/10 bg-cloud-dancer/72 p-6 shadow-[0_20px_54px_-46px_color-mix(in_oklab,var(--background)_72%,transparent)] sm:p-8'
     >
-      <h3 className='text-2xl font-semibold   text-maritime-darkest'>Utekos Mikrofiber™</h3>
-      <p className='mt-3 max-w-2xl text-base   leading-[1.45] text-maritime-darkest/82'>
+      <h3 className='text-2xl font-semibold   text-background'>Utekos Mikrofiber™</h3>
+      <p className='mt-3 max-w-2xl text-base   leading-[1.45] text-background/82'>
         Slitesterkt, raskt å tørke og enkelt å vedlikeholde. Mikrofiber takler hverdagsbruk uten å miste form
         – så lenge du holder varmen unna.
       </p>
@@ -22,7 +22,7 @@ export function ProductCareUtekosMikrofiber() {
         <div className='flex items-start gap-3'>
           <span
             aria-hidden='true'
-            className='flex size-9 shrink-0 items-center justify-center rounded-full border border-cloud-dancer/22 bg-cloud-dancer text-maritime-darkest'
+            className='flex size-9 shrink-0 items-center justify-center rounded-full border border-cloud-dancer/22 bg-cloud-dancer text-background'
           >
             <Wind className='size-[1.05rem]' />
           </span>

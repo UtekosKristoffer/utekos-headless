@@ -104,7 +104,7 @@ export function AboutCarousel() {
   return (
     <section
       ref={containerRef}
-      className='relative isolate mx-auto overflow-hidden bg-maritime-darkest px-4 py-16 text-cloud-dancer sm:py-32'
+      className='relative isolate mx-auto overflow-hidden bg-background px-4 py-16 text-cloud-dancer sm:py-32'
     >
       <div className='pointer-events-none absolute inset-0 -z-10'>
         <div className='absolute left-[18%] top-[18%] h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_20%,transparent)_0%,transparent_70%)] blur-[110px]' />
@@ -115,7 +115,7 @@ export function AboutCarousel() {
         <div className='mb-16 text-center'>
           <BrandBadge
             backgroundColor='var(--dusted-peri)'
-            textColor='var(--maritime-darkest)'
+            textColor='var(--background)'
             className='gsap-header mb-6 gap-2 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
           >
             <Camera className='size-5' strokeWidth={1.6} />
@@ -144,7 +144,7 @@ export function AboutCarousel() {
               <CarouselContent className='-ml-4'>
                 {aboutImages.map((image, index) => (
                   <CarouselItem key={index} className='pl-4 md:basis-1/2 lg:basis-1/3'>
-                    <div className='group relative overflow-hidden rounded-[1.25rem] border border-cloud-dancer/8 bg-maritime-darkest'>
+                    <div className='group relative overflow-hidden rounded-[1.25rem] border border-cloud-dancer/8 bg-background'>
                       <AspectRatio ratio={1 / 1}>
                         <Image
                           src={image.src}
@@ -153,7 +153,7 @@ export function AboutCarousel() {
                           className='object-cover transition-transform duration-1000 ease-out group-hover:scale-105'
                           sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
                         />
-                        <div className='absolute inset-0 bg-gradient-to-t from-maritime-darkest/62 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
+                        <div className='absolute inset-0 bg-gradient-to-t from-background/62 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
                       </AspectRatio>
                     </div>
                   </CarouselItem>
@@ -161,8 +161,8 @@ export function AboutCarousel() {
               </CarouselContent>
 
               <div className='hidden md:block'>
-                <CarouselPrevious className='left-8 border-cloud-dancer/12 bg-maritime-darkest/80 text-cloud-dancer backdrop-blur-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
-                <CarouselNext className='right-8 border-cloud-dancer/12 bg-maritime-darkest/80 text-cloud-dancer backdrop-blur-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-maritime-darkest' />
+                <CarouselPrevious className='left-8 border-cloud-dancer/12 bg-background/80 text-cloud-dancer backdrop-blur-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-background' />
+                <CarouselNext className='right-8 border-cloud-dancer/12 bg-background/80 text-cloud-dancer backdrop-blur-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-background' />
               </div>
             </Carousel>
 

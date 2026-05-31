@@ -34,3 +34,22 @@ project_info_1/
 /.env*/
 /env.local
 
+# klarna
+src/components/klarna/dev/docs/
+src/components/klarna/dev/docs/json/
+src/components/klarna/dev/docs/markdown/
+src/components/klarna/dev/docs/next-docs/
+src/components/klarna/dev/docs/SCHEMAS/
+src/components/klarna/dev/docs/klarna-theme/
+/src/components/klarna/dev/docs/
+/src/components/klarna/dev/docs/json/
+/src/components/klarna/dev/docs/markdown/
+/src/components/klarna/dev/docs/next-docs/
+/src/components/klarna/dev/docs/SCHEMAS/
+/src/components/klarna/dev/docs/klarna-theme/
+./src/components/klarna/dev/docs/
+./src/components/klarna/dev/docs/json/
+./src/components/klarna/dev/docs/markdown/
+./src/components/klarna/dev/docs/next-docs/
+/src/components/klarna/dev/docs/SCHEMAS/
+./src/components/klarna/dev/docs/klarna-theme/

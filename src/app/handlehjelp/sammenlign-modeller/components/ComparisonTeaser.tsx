@@ -41,7 +41,7 @@ const models = [
     handle: 'utekos-mikrofiber',
     description: 'For for bruk i aktivitet eller varmere temperaturer.',
     icon: Layers,
-    cardClass: 'border-havdyp bg-havdyp hover:bg-maritime-darkest',
+    cardClass: 'border-havdyp bg-havdyp hover:bg-background',
     iconShellClass: 'border-cloud-dancer/30 bg-cloud-dancer',
     iconClass: 'text-havdyp',
     textClass: 'text-cloud-dancer',
@@ -168,7 +168,7 @@ export function ComparisonTeaser() {
             <Button
               asChild
               size='lg'
-              className='h-12   rounded-full bg-havdyp px-8 text-cloud-dancer hover:bg-maritime-darkest transition-all'
+              className='h-12   rounded-full bg-havdyp px-8 text-cloud-dancer hover:bg-background transition-all'
             >
               <Link
                 href={'/handlehjelp/sammenlign-modeller' as Route}

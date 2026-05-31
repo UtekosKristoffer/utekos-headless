@@ -28,7 +28,7 @@ const CabinHeroBackground = (
     </div>
 
     <div
-      className='absolute inset-0 bg-gradient-to-b from-maritime-darkest/10 via-transparent to-havdyp/20'
+      className='absolute inset-0 bg-gradient-to-b from-background/10 via-transparent to-havdyp/20'
       aria-hidden='true'
     />
   </>
@@ -44,23 +44,17 @@ export function CabinHeroSection() {
         <InspirationHeroBreadcrumb
           label='Hytteliv'
           color='var(--ancient-water)'
-          textColor='var(--maritime-darkest)'
+          textColor='var(--background)'
           icon={Mountain}
         />
       }
       title={
         <>
-          Hyttekos,{' '}
-          <HeroHighlight color='var(--ancient-water)'>perfeksjonert</HeroHighlight>
+          Hyttekos, <HeroHighlight color='var(--ancient-water)'>perfeksjonert</HeroHighlight>
         </>
       }
       lead='Fra morgenkaffen på terrassen til kveldene under stjernene. Gjør hytten til et varmt fristed, uansett årstid.'
-      actions={
-        <InspirationHeroActions
-          primaryLabel='Finn din Utekos'
-          secondaryLabel='Se bruksområdene'
-        />
-      }
+      actions={<InspirationHeroActions primaryLabel='Finn din Utekos' secondaryLabel='Se bruksområdene' />}
       features={cabinHeroFeatures}
       featuresHeading='Høydepunkter for hytteliv med Utekos'
       featuresHeadingId='hytteliv-hero-highlights-title'

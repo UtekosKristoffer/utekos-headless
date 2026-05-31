@@ -77,11 +77,11 @@ export function NewProductInStoreNoticeView({
             <div ref={contentRef} className='flex flex-col items-center gap-6'>
               <h2 className='text-havdyp'>På plass hos Intersport Laksevåg!</h2>
 
-              <p className='max-w-4xl text-maritime-darkest'>
+              <p className='max-w-4xl text-background'>
                 Nå kan du se, prøve og kjenne på vår splitter nye{' '}
-                <strong className='text-maritime-darkest font-semibold'>Utekos TechDown™</strong> hos våre
-                gode venner på Intersport Laksevåg. Ta turen innom for å bli en av de første som får oppleve
-                den neste generasjonen av Utekos!
+                <strong className='text-background font-semibold'>Utekos TechDown™</strong> hos våre gode
+                venner på Intersport Laksevåg. Ta turen innom for å bli en av de første som får oppleve den
+                neste generasjonen av Utekos!
               </p>
 
               <Button

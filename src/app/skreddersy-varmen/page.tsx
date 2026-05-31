@@ -58,7 +58,7 @@ export const metadata: Metadata = {
 
 export default function LandingPage() {
   return (
-    <section className='flex min-h-screen w-full flex-col items-center justify-start overflow-x-clip bg-maritime-darkest'>
+    <section className='flex min-h-screen w-full flex-col items-center justify-start overflow-x-clip bg-background'>
       <StickyMobileAction />
       <SkreddersyVarmenBreadcrumbs />
       <HeroAndEmpathy />

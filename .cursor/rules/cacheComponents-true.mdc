@@ -1,0 +1,11 @@
+---
+description: 
+alwaysApply: true
+---
+
+---
+description: Prosjektet har cacheComponents: true i next.config.js
+alwaysApply: true
+---
+
+Prosjektet benytter cacheComponents: true via next.conig.ts. Sørg for å vite konsekvensene og optimaliseringsmulighetene det innebærer før skriver av kode. Ellers er den uten verdi.

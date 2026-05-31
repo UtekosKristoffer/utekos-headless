@@ -90,8 +90,8 @@ export function TestimonialConstellation() {
                 : <StarHalf size={16} color='var(--color-primary)' fill='var(--color-primary)' key={i} />
               )}
             </div>
-            <small className='text-maritime-darkest'>4.8</small>
-            <small className='text-maritime-darkest'>/ 5</small>
+            <small className='text-background'>4.8</small>
+            <small className='text-background'>/ 5</small>
           </div>
 
           <h2 className='animate-header-item text-cloud-dancer! mb-6'>
