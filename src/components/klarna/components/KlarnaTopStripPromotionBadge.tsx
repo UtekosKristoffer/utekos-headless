@@ -5,6 +5,7 @@ export function KlarnaTopStripPromotionBadge() {
     <klarna-placement
       data-key='top-strip-promotion-badge'
       data-locale='no-NO'
+      data-theme='dark'
       data-purchase-amount=''
     ></klarna-placement>
   )

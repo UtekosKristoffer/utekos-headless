@@ -1,13 +1,5 @@
 // /app/inspirasjon/layout.tsx
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator
-} from '@/components/ui/breadcrumb'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { KlarnaOnSiteMessagingScript } from '@/components/klarna/components/KlarnaOnSiteMessagingScript'
 import { KlarnaTopStripPromotionBadge } from '@/components/klarna/components/KlarnaTopStripPromotionBadge'
@@ -23,27 +15,8 @@ interface InspirasjonLayoutProps {
 
 export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) {
   return (
-    <section className='bg-overcast'>
-      <Activity>
-        <section className='border-b border-background/90 text-background'>
-          <div className='container mx-auto px-4 py-6'>
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link href='/'>Forsiden</Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Inspirasjon</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </div>
-        </section>
-      </Activity>
-      <section aria-label='Betalingsinformasjon fra Klarna' className='border-b border-background/10 bg-cloud-dancer'>
+    <article className='w-full'>
+      <section aria-label='Betalingsinformasjon fra Klarna' className='border-b border-background/10'>
         <KlarnaOnSiteMessagingScript />
         <div className='container mx-auto px-4 py-3'>
           <KlarnaTopStripPromotionBadge />
@@ -144,6 +117,6 @@ export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) 
       <Activity>
         <TrustIndicators />
       </Activity>
-    </section>
+    </article>
   )
 }
