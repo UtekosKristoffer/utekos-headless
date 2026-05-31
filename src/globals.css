@@ -108,6 +108,7 @@
   --utekos-blockquote-letter-spacing: var(--tracking-font-utekos-text);
   --radius: 0.625rem;
   --radius-full: 9999px;
+  --color-foreground: oklch(0.985 0 0);
 
   --tracking-heading-level-one: -0.01em;
   --tracking-heading-level-two: -0.01em;
@@ -141,10 +142,10 @@
   --color-ancient-water-light: oklch(0.8033 0.0246 259.82);
   --color-bright-white: oklch(0.9801 0.0096 252.81);
   --color-secondary: oklch(0.82 0.006 88.64);
-  --color-primary-foreground: oklch(0.9493 0.007 88.64); /* cloud-dancer */
-  --color-secondary-foreground: oklch(0.2884 0.0366 279.42); /* havdyp */
+  --color-primary-foreground: oklch(0.9493 0.007 88.64);
+  --color-secondary-foreground: oklch(0.2884 0.0366 279.42);
   --color-destructive: oklch(0.5774 0.2057 27.33);
-  --color-input: oklch(0.2884 0.0366 279.42); /* havdyp som default border/input */
+  --color-input: oklch(0.2884 0.0366 279.42);
   --color-espresso: oklch(0.3159 0.0088 6.16);
   --color-raisin: oklch(0.3943 0.024 6.35);
   --color-plum-truffle: oklch(0.4729 0.0211 13.65);
@@ -197,9 +198,11 @@
   --color-soft-warm: oklch(0.7864 0.0487 359.96);
   --color-light-background: var(--color-cloud-dancer);
   --color-button: oklch(0.57 0.23507 260.1068);
+  --color-header-secondary: oklch(0.2805 0.0458 357.59);
 }
 
 @theme inline {
+  --foreground: oklch(0.985 0 0);
   --tablet: var(--breakpoint-tablet);
   --tracking-1: var(--tracking-1); /* Utekos's max tight limit for body copy/buttons (-3%) */
   --tracking-2: var(--tracking-2); /* Medium-snug body copy (-2%) */
@@ -220,7 +223,7 @@
   --bright-white: oklch(0.9801 0.0096 252.81);
   --klarna-pink: oklch(0.8271 0.1114 352.7);
   --silhouette: oklch(0.2881 0.0219 262.5);
-  --havdyp: oklch(0.2884 0.0366 279.42);
+  --havdyp: var(--color-havdyp);
   --very-white: oklch(0.9801 0.0096 252.81);
   --country-air: oklch(0.909 0.0246 248.11);
   --cloud-dancer: oklch(0.9493 0.007 88.64);
@@ -240,6 +243,7 @@
   --plum-truffle: oklch(0.4729 0.0211 13.65);
   --fjellbla: oklch(0.3504 0.0537 281.83);
   --orange-slice: oklch(0.7034 0.198 45.92);
+  --header-secondary: oklch(0.2249 0.0287 8.33);
   --inking-100: oklch(0.3048 0.0341 291.48);
   --dazzling-blue: oklch(0.457 0.1322 268.66);
   --sweet-lavender: oklch(0.7019 0.0553 283.69);
@@ -268,6 +272,7 @@
   --foreground: oklch(0.9493 0.007 88.64);
   --primary: oklch(0.8104 0.1858 101.08);
   --muted-foreground: oklch(0.78 0.006 88.64);
+  --foreground: oklch(0.9493 0.007 88.64);
   --muted: oklch(0.2684 0.0366 279.42);
   --google-sans: var(--font-google-sans);
   --font-utekos-text: var(--font-utekos-text);

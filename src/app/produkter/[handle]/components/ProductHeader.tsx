@@ -10,25 +10,21 @@ export interface ProductHeaderProps {
 
 export default function ProductHeader({ productHandle, productTitle, productSubtitle }: ProductHeaderProps) {
   return (
-    <div className='text-left md:-mt-4'>
+    <hgroup className='text-foreground text-left md:-mt-4'>
       <AnimatedBlock className='will-animate-fade-in-up' delay='0.06s' threshold={0.2}>
         {productHandle === 'utekos-special-edition' && (
-          <BrandBadge
-            backgroundColor='var(--dusted-peri)'
-            textColor='var(--background)'
-            className='mb-5 gap-2 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
-          >
+          <BrandBadge backgroundColor='bg-havdyp' textColor='text-foreground' className='mb-5 gap-2'>
             <Sparkles className='h-5 w-5' aria-hidden='true' />
-            <span>Begrenset opplag</span>
+            <span className='text-foreground'>Begrenset opplag</span>
           </BrandBadge>
         )}
 
-        <h1 className='text-4xl font-google-sans font-bold   text-havdyp'>{productTitle}</h1>
+        <h1 className='text-4xl font-google-sans font-bold text-foreground'>{productTitle}</h1>
 
         {typeof productSubtitle === 'string' && productSubtitle.trim() !== '' && (
-          <p className='mt-4 max-w-2xl text-lg font-light leading-[1.45] text-havdyp/76'>{productSubtitle}</p>
+          <p className='mt-4 max-w-2xl text-lg  leading-[1.45] text-foreground'>{productSubtitle}</p>
         )}
       </AnimatedBlock>
-    </div>
+    </hgroup>
   )
 }

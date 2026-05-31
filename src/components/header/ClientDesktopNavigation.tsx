@@ -7,10 +7,7 @@ import { useSyncExternalStore } from 'react'
 const DESKTOP_NAVIGATION_QUERY = '(min-width: 1024px)'
 
 const DesktopNavigation = dynamic(
-  () =>
-    import('@/components/header/DesktopNavigation').then(
-      mod => mod.DesktopNavigation
-    ),
+  () => import('@/components/header/DesktopNavigation').then(mod => mod.DesktopNavigation),
   { ssr: false }
 )
 
@@ -26,8 +23,7 @@ const subscribeToDesktopNavigationQuery = (onStoreChange: () => void) => {
 }
 
 const getDesktopNavigationSnapshot = () =>
-  typeof window !== 'undefined'
-  && window.matchMedia(DESKTOP_NAVIGATION_QUERY).matches
+  typeof window !== 'undefined' && window.matchMedia(DESKTOP_NAVIGATION_QUERY).matches
 
 const getServerNavigationSnapshot = () => false
 

@@ -142,17 +142,17 @@ export default function PriceActivityPanel({
         <div className='flex items-baseline gap-3'>
           {showSavings ?
             <>
-              <div className='text-havdyp'>
+              <div className='text-foreground'>
                 <Price amount={priceAmount} currencyCode={currencyCode} />
               </div>
 
               {showBeforePrice && (
-                <div className='text-lg text-havdyp/48 line-through'>
+                <div className='text-lg text-foreground/55 line-through'>
                   <Price amount={String(originalPriceToDisplay)} currencyCode={currencyCode} />
                 </div>
               )}
             </>
-          : <div className='text-havdyp'>
+          : <div className='text-foreground'>
               <Price amount={priceAmount} currencyCode={currencyCode} />
             </div>
           }

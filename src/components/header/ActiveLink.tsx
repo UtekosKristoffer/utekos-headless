@@ -13,12 +13,7 @@ type ActiveLinkProps = Omit<ComponentProps<typeof Link>, 'href'> & {
   href: Route
 }
 
-export function ActiveLink({
-  href,
-  className,
-  children,
-  ...props
-}: ActiveLinkProps) {
+export function ActiveLink({ href, className, children, ...props }: ActiveLinkProps) {
   const pathname = usePathname()
   const isActive = pathname === href
 
@@ -27,8 +22,8 @@ export function ActiveLink({
       href={href}
       className={cn(
         navigationMenuTriggerStyle(),
-        'text-cloud-dancer/84 hover:bg-cloud-dancer/7 hover:text-cloud-dancer focus-visible:ring-cloud-dancer/45 data-[state=open]:bg-cloud-dancer/8',
-        isActive && 'bg-cloud-dancer/10 text-cloud-dancer',
+        'text-foreground hover:bg-cloud-dancer/10 hover:text-foreground focus-visible:ring-cloud-dancer/45 data-[state=open]:bg-cloud-dancer/10',
+        isActive && 'bg-cloud-dancer/12 text-foreground',
         className
       )}
       {...props}

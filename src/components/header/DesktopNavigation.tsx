@@ -24,11 +24,11 @@ export const DesktopNavigation = ({ menu = [] }: { menu?: MenuItem[] }) => {
               <InteractiveNavItem key={item.title}>
                 {hasSubMenu ?
                   <>
-                    <InteractiveNavTrigger className='text-cloud-dancer/84 hover:bg-cloud-dancer/7 hover:text-cloud-dancer focus-visible:ring-cloud-dancer/45 data-[state=open]:bg-cloud-dancer/8 data-[state=open]:text-cloud-dancer'>
+                    <InteractiveNavTrigger className='text-foreground hover:bg-cloud-dancer/7 hover:text-foreground focus-visible:ring-cloud-dancer/45 data-[state=open]:bg-cloud-dancer/8 data-[state=open]:text-foreground'>
                       {item.title}
                     </InteractiveNavTrigger>
-                    <InteractiveNavContent className='text-cloud-dancer bg-havdyp'>
-                      <ul className='mx-auto grid w-[420px] items-center justify-center bg-havdyp gap-2 p-2 md:w-[520px] md:grid-cols-2 lg:w-[640px]'>
+                    <InteractiveNavContent className='text-foreground'>
+                      <ul className='grid w-[420px] gap-1.5 md:w-[520px] md:grid-cols-2 lg:w-[640px]'>
                         {item.items?.map(subItem => (
                           <ListItem
                             key={subItem.url}

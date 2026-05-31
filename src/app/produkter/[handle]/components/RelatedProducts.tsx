@@ -20,16 +20,16 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
   const productOptionsMap = initializeCarouselProducts(products)
 
   return (
-    <section className='px-6 py-12 md:py-16 rounded-[1.75rem] bg-transparent'>
-      <div className='mb-8 text-center'>
-        <h2 className='text-havdyp'>Favoritter blant andre livsnytere</h2>
+    <section className='px-6 py-12 md:py-16 mt-8 rounded-[1.75rem] bg-transparent'>
+      <div className='mb-8 md:mb-12 lg:mb-16 text-center'>
+        <h2 className='text-foreground text-7xl'>Favoritter blant andre livsnytere</h2>
       </div>
       <Carousel
         opts={{
           align: 'start',
           loop: true
         }}
-        className='w-full'
+        className='w-full mt-4 lg:mt-8'
       >
         <CarouselContent className='-ml-4'>
           {products.map((product, index) => {

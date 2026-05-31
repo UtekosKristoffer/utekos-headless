@@ -62,7 +62,7 @@ export default function AnnouncementBanner() {
   return (
     <div
       className={cn(
-        'relative z-40 animate-slide-in-down border-b border-havdyp/16 bg-overcast text-background shadow-[0_14px_34px_-30px_color-mix(in_oklab,var(--demitasse)_46%,transparent)]',
+        'relative py-2 z-40 hover:bg-header-secondary/80 bg-header-secondary animate-slide-in-do text-foreground text-lg font-medium)',
         isExiting && 'animate-slide-out-up'
       )}
     >
@@ -70,34 +70,34 @@ export default function AnnouncementBanner() {
         href='/skreddersy-varmen'
         data-track='AnnouncementBannerClick'
         aria-label='Se tilbudet på Utekos TechDown til kr 1790'
-        className='group block w-full px-10 py-2.5 text-center text-sm font-medium tracking-[-0.01em] outline-none transition-colors hover:bg-cloud-dancer/34 focus-visible:ring-2 focus-visible:ring-havdyp/50 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast sm:px-12'
+        className='group block w-full px-10 py-2.5 text-center tracking-wide font-medium  outline-none transition-colors focus-visible:ring-2 focus-visible:ring-havdyp/50 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast sm:px-12'
       >
         <div className='mx-auto flex max-w-5xl items-center justify-center gap-2.5'>
           <BadgePercent
             aria-hidden='true'
-            className='hidden size-4 shrink-0 text-havdyp sm:block'
+            className='hidden size-4 shrink-0 text-foreground sm:block'
             strokeWidth={1.8}
           />
 
-          <span className='min-w-0 text-background/86'>
-            <span className='font-semibold text-background'>Utekos TechDown™</span>{' '}
-            <span className='text-background/72'>til kr 1790,-</span>
+          <span className='min-w-0 text-foreground'>
+            <span className='font-semibold text-foreground'>Utekos TechDown™</span>{' '}
+            <span className='text-foreground'>til kr 1790,-</span>
           </span>
 
-          <span className='hidden items-center gap-1 font-semibold text-havdyp transition-colors group-hover:text-background sm:flex'>
+          <span className='hidden items-center gap-1 font-semibold text-foreground transition-colors group-hover:text-background sm:flex'>
             Kjøp her
             <ArrowRightIcon className='size-4 transition-transform group-hover:translate-x-1' />
           </span>
-          <ArrowRightIcon aria-hidden='true' className='size-4 shrink-0 text-havdyp sm:hidden' />
+          <ArrowRightIcon aria-hidden='true' className='size-4 shrink-0 text-foreground sm:hidden' />
         </div>
       </Link>
 
       <button
         onClick={handleDismiss}
         aria-label='Lukk banner'
-        className='absolute right-2 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full text-background/62 transition-colors hover:bg-havdyp/8 hover:text-background focus:outline-none focus:ring-2 focus:ring-havdyp/50 focus:ring-offset-2 focus:ring-offset-overcast'
+        className='absolute right-2 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full text-foreground transition-colors hover:bg-havdyp/8 hover:text-background focus:outline-none focus:ring-2 focus:ring-havdyp/50 focus:ring-offset-2 focus:ring-offset-overcast'
       >
-        <XIcon className='size-4 cursor-pointer' />
+        <XIcon className='size-4 cursor-pointer text-foreground' />
       </button>
     </div>
   )

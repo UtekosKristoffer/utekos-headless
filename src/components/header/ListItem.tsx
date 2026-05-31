@@ -27,11 +27,11 @@ export const ListItem = React.forwardRef<
           )}
           {...props}
         >
-          <div className='text-sm leading-[1.2] font-semibold tracking-[-0.01em] text-cloud-dancer'>
+          <div className='text-[0.9375rem] leading-[1.4] font-semibold tracking-[0.01em] text-cloud-dancer'>
             {title}
           </div>
           {children && (
-            <p className='line-clamp-2 text-sm leading-[1.45] tracking-[-0.01em] text-cloud-dancer/70'>
+            <p className='line-clamp-2 text-sm leading-[1.45] tracking-[0.01em] text-cloud-dancer/80'>
               {children}
             </p>
           )}
