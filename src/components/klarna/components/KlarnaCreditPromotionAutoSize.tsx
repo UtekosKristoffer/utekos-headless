@@ -14,6 +14,7 @@ export function KlarnaCreditPromotionAutoSize({
       id={id}
       data-key='credit-promotion-auto-size'
       data-locale='no-NO'
+      data-theme='dark'
       data-purchase-amount={purchaseAmount}
     ></klarna-placement>
   )
