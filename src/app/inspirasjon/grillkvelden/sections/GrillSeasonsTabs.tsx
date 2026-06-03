@@ -79,7 +79,7 @@ export function GrillSeasonsTabs() {
                   className={`h-5 w-5 transition-colors ${isActive ? season.iconColor : 'text-overcast'}`}
                 />
                 <span
-                  className={`font-medium text-sm transition-colors ${isActive ? 'text-cloud-dancer' : 'text-cloud-dancer'}`}
+                  className={`font-medium text-sm transition-colors ${isActive ? 'text-foreground' : 'text-foreground'}`}
                 >
                   {season.label}
                 </span>
@@ -113,10 +113,10 @@ export function GrillSeasonsTabs() {
                     >
                       <Icon className={`h-6 w-6 ${season.iconColor}`} />
                     </div>
-                    <h3 className='text-2xl font-semibold text-cloud-dancer'>{season.title}</h3>
+                    <h3 className='text-2xl font-semibold text-foreground'>{season.title}</h3>
                   </div>
 
-                  <p className='text-cloud-dancer'>{season.description}</p>
+                  <p className='text-foreground'>{season.description}</p>
                 </CardContent>
               </Card>
             </div>

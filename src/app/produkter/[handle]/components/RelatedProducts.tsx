@@ -8,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
+import { CAROUSEL_SSR } from '@/components/ui/carousel-ssr'
 import { createColorHexMap } from '@/lib/helpers/shared/createColorHexMap'
 import { initializeCarouselProducts } from '@/components/ProductCard/initializeCarouselProducts'
 import type { RelatedProductsProps } from 'types/product/ProductTypes'
@@ -25,6 +26,8 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
         <h2 className='text-foreground text-7xl'>Favoritter blant andre livsnytere</h2>
       </div>
       <Carousel
+        slideCount={products.length}
+        ssr={CAROUSEL_SSR.productGrid(products.length)}
         opts={{
           align: 'start',
           loop: true

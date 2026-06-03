@@ -22,7 +22,7 @@ export function ProductPageErrorState({ error, isRetrying, onRetry }: ProductPag
         aria-labelledby='product-error-heading'
         className='mx-auto max-w-2xl rounded-[1.75rem] border border-cloud-dancer/70 bg-cloud-dancer/72 p-8 text-center shadow-2xl shadow-havdyp/10 backdrop-blur-sm sm:p-10'
       >
-        <div className='mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-cloud-dancer'>
+        <div className='mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-foreground'>
           <AlertTriangle className='h-6 w-6' aria-hidden='true' />
         </div>
         <h1 id='product-error-heading' className='mb-4 text-3xl font-serif text-havdyp sm:text-4xl'>

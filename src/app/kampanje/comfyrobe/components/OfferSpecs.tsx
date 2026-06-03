@@ -28,9 +28,7 @@ function AccordionItem({
         <div className='flex items-center gap-3 lg:gap-4'>
           <div
             className={`p-2 rounded-lg transition-colors duration-300 ${
-              isOpen ?
-                'bg-sky-500/20 text-sky-400'
-              : 'bg-slate-800 text-slate-500 group-hover:text-slate-400'
+              isOpen ? 'bg-sky-500/20 text-sky-400' : 'bg-slate-800 text-slate-500 group-hover:text-slate-400'
             }`}
           >
             {item.icon}
@@ -78,11 +76,11 @@ export function OfferSpecs() {
   return (
     <div className='w-full'>
       <div className='flex items-center gap-4 mb-8 lg:mb-12'>
-        <div className='h-px flex-1 bg-gradient-to-r from-transparent via-slate-800 to-transparent lg:via-slate-700' />
+        <div className='h-px flex-1 bg-linear-to-r from-transparent via-slate-800 to-transparent lg:via-slate-700' />
         <p className='text-sm font-bold text-sky-500 uppercase tracking-widest px-2'>
           Tekniske Spesifikasjoner
         </p>
-        <div className='h-px flex-1 bg-gradient-to-r from-transparent via-slate-800 to-transparent lg:via-slate-700' />
+        <div className='h-px flex-1 bg-linear-to-r from-transparent via-slate-800 to-transparent lg:via-slate-700' />
       </div>
 
       <div className='block lg:hidden space-y-3'>

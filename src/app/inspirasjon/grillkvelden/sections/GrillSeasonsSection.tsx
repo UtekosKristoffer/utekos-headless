@@ -2,7 +2,7 @@ import { Tabs } from './Tabs'
 
 export function GrillSeasonsSection() {
   return (
-    <section className='relative isolate overflow-hidden bg-havdyp py-24 text-cloud-dancer'>
+    <section className='relative isolate overflow-hidden bg-havdyp py-24 text-foreground'>
       <div className='pointer-events-none absolute inset-0 -z-10 opacity-20'>
         <div
           className='grill-seasons-glow-pulse absolute left-1/4 top-1/4 size-[31rem] rounded-full blur-3xl'
@@ -23,8 +23,8 @@ export function GrillSeasonsSection() {
 
       <div className='container mx-auto px-4'>
         <div className='animate-fade-in-up mb-16 text-center'>
-          <h2 className='text-cloud-dancer'>Grilling i alle sesonger</h2>
-          <p className='mx-auto mt-4 max-w-2xl utekos-section-lead text-cloud-dancer/88'>
+          <h2 className='text-foreground'>Grilling i alle sesonger</h2>
+          <p className='mx-auto mt-4 max-w-2xl utekos-section-lead text-foreground/88'>
             Hold varmen ved grillen — fra tidlig vår til sen høst.
           </p>
         </div>

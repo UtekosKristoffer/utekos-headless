@@ -7,11 +7,11 @@ import { ComfyrobeQuickBuy } from './ComfyrobeQuickBuy'
 export async function CTASection() {
   const response = await getProducts({ query: 'handle:comfyrobe' })
   const product =
-    response.body?.find(p => p.handle === 'comfyrobe') ??
-    response.body?.find(
+    response.body?.find(p => p.handle === 'comfyrobe')
+    ?? response.body?.find(
       p => p.title.toLowerCase().includes('comfyrobe') && !p.title.toLowerCase().includes('dun')
-    ) ??
-    response.body?.[0]
+    )
+    ?? response.body?.[0]
 
   if (!product) {
     return null
@@ -23,10 +23,10 @@ export async function CTASection() {
 
       <div className='container relative mx-auto px-4'>
         <AnimatedBlock className='will-animate-fade-in-scale mb-12 text-center'>
-          <h2 className='mb-4 text-fluid-display font-bold leading-[0.95] tracking-normal text-cloud-dancer'>
+          <h2 className='mb-4 text-fluid-display font-bold leading-[0.95] tracking-normal text-foreground'>
             Sikre deg varmen nå
           </h2>
-          <p className='mx-auto max-w-2xl text-xl leading-[1.45] tracking-normal text-overcast'>
+          <p className='mx-auto max-w-2xl text-xl leading-text-paragraph tracking-normal text-overcast'>
             Gjør som hundrevis av andre isbadere. Bestill din Comfyrobe i dag og kjenn forskjellen.
           </p>
         </AnimatedBlock>

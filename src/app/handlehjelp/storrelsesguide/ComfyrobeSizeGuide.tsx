@@ -1,4 +1,11 @@
-import { Expand, Footprints, GitCommitVertical, Pocket, Lightbulb, SlidersHorizontal } from 'lucide-react'
+import {
+  Expand,
+  Footprints,
+  GitCommitVertical,
+  PackageOpen,
+  Lightbulb,
+  SlidersHorizontal
+} from 'lucide-react'
 import Image from 'next/image'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import ComfyFrontSkisse from '../../../../public/ComfyFrontSkisse.png'
@@ -18,7 +25,7 @@ const comfyrobeFeatures = [
       'Splitt i sidene og bak sikrer at du kan bevege deg fritt, enten du går tur, klatrer eller bare strekker deg etter kaffekoppen.'
   },
   {
-    Icon: Pocket,
+    Icon: PackageOpen,
     title: 'Gjennomtenkt oppbevaring',
     description:
       'To varme, fôrede sidelommer holder hendene dine lune, mens en trygg innerlomme tar vare på verdisakene dine.'
@@ -66,7 +73,7 @@ export function ComfyrobeSizeGuide() {
             <div className='grid grid-cols-1 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-8'>
               {comfyrobeFeatures.map(feature => (
                 <div key={feature.title} className='flex items-start gap-4'>
-                  <div className='flex size-10 flex-shrink-0 items-center justify-center rounded-full bg-havdyp text-cloud-dancer'>
+                  <div className='flex size-10 flex-shrink-0 items-center justify-center rounded-full bg-havdyp text-foreground'>
                     <feature.Icon className='size-5' aria-hidden='true' />
                   </div>
                   <div>
@@ -82,10 +89,8 @@ export function ComfyrobeSizeGuide() {
             <div className='flex items-start gap-4'>
               <Lightbulb className='size-8 flex-shrink-0 text-background' />
               <div>
-                <h3 className='text-lg font-semibold text-cloud-dancer'>
-                  Vårt beste tips for å velge riktig
-                </h3>
-                <p className='mt-1 text-cloud-dancer'>
+                <h3 className='text-lg font-semibold text-foreground'>Vårt beste tips for å velge riktig</h3>
+                <p className='mt-1 text-foreground'>
                   Tenk på hvordan du vil bruke plagget. Ønsker du en passform som er romslig, men som følger
                   deg? Velg din normale størrelse. Ser du for deg maksimal plass til tykke lag under, eller en
                   bevisst overdimensjonert stil? Da kan du vurdere å gå opp en størrelse. Det er ingen fasit –
@@ -109,7 +114,7 @@ export function ComfyrobeSizeGuide() {
                   </div>
                   <div className='mt-12 overflow-hidden rounded-lg border border-background/10 shadow-[0_18px_44px_-36px_color-mix(in_oklab,var(--background)_72%,transparent)]'>
                     <table className='min-w-full divide-y divide-background/10 bg-cloud-dancer'>
-                      <thead className='bg-havdyp text-cloud-dancer'>
+                      <thead className='bg-havdyp text-foreground'>
                         <tr>
                           <th
                             scope='col'

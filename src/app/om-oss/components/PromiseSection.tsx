@@ -26,14 +26,14 @@ export function PromiseSection() {
             <div className='relative flex size-24 items-center justify-center rounded-full border border-cloud-dancer/14 bg-cloud-dancer text-background shadow-[0_24px_70px_-42px_color-mix(in_oklab,var(--cloud-dancer)_70%,transparent)]'>
               <Handshake className='size-10' strokeWidth={1.5} />
             </div>
-            <div className='absolute left-1/2 top-full h-16 w-px -translate-x-1/2 bg-gradient-to-b from-dusted-peri/60 to-transparent' />
+            <div className='absolute left-1/2 top-full h-16 w-px -translate-x-1/2 bg-linear-to-b from-dusted-peri/60 to-transparent' />
           </AnimatedBlock>
 
           <AnimatedBlock className='mb-12' delay='0.1s'>
-            <h2 className='mb-5 text-4xl leading-[0.95] font-bold   text-cloud-dancer md:text-5xl'>
+            <h2 className='mb-5 text-4xl leading-[0.95] font-bold   text-foreground md:text-5xl'>
               Vårt løfte til deg
             </h2>
-            <p className='mx-auto max-w-2xl text-xl leading-[1.45]   text-cloud-dancer/85'>
+            <p className='mx-auto max-w-2xl text-xl leading-text-paragraph   text-foreground/85'>
               Komforten skal merkes med en gang, og kvaliteten skal fortsette å bære øyeblikkene ute.
             </p>
           </AnimatedBlock>
@@ -43,13 +43,13 @@ export function PromiseSection() {
               className='group relative flex flex-col items-center rounded-[1.75rem] border border-ancient-water/18 bg-[color-mix(in_oklab,var(--cloud-dancer)_92%,var(--ancient-water))] p-8 shadow-[0_24px_70px_-48px_color-mix(in_oklab,var(--background)_55%,transparent)] transition-all duration-500 hover:-translate-y-1 hover:border-dusted-peri/38'
               delay='0.2s'
             >
-              <div className='mb-5 rounded-full border border-havdyp/14 bg-havdyp p-4 text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
+              <div className='mb-5 rounded-full border border-havdyp/14 bg-havdyp p-4 text-foreground transition-transform duration-300 group-hover:scale-105'>
                 <Heart className='size-6' strokeWidth={1.6} />
               </div>
-              <h3 className='mb-3 text-xl leading-[1] font-semibold font-google-sans   text-background'>
+              <h3 className='mb-3 text-xl leading-nonefont-semibold font-google-sans   text-background'>
                 Mer enn et plagg
               </h3>
-              <p className='text-lg leading-[1.45]     text-background'>
+              <p className='text-lg leading-text-paragraph     text-background'>
                 Vi lover deg følelsen av umiddelbar varme og velvære. En garanti for at du kan nyte øyeblikket
                 lenger, uten å fryse.
               </p>
@@ -59,11 +59,11 @@ export function PromiseSection() {
               className='group relative flex flex-col items-center rounded-[1.75rem] border border-ancient-water/18 bg-[color-mix(in_oklab,var(--cloud-dancer)_92%,var(--ancient-water))] p-8 shadow-[0_24px_70px_-48px_color-mix(in_oklab,var(--background)_55%,transparent)] transition-all duration-500 hover:-translate-y-1 hover:border-dusted-peri/38'
               delay='0.3s'
             >
-              <div className='mb-5 rounded-full border border-havdyp/14 bg-background p-4 text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
+              <div className='mb-5 rounded-full border border-havdyp/14 bg-background p-4 text-foreground transition-transform duration-300 group-hover:scale-105'>
                 <ShieldCheck className='size-6' strokeWidth={1.6} />
               </div>
-              <h3 className='mb-3 text-xl leading-[1] font-semibold   text-background'>En varig verdi</h3>
-              <p className='text-lg leading-[1.45]     text-background'>
+              <h3 className='mb-3 text-xl leading-nonefont-semibold   text-background'>En varig verdi</h3>
+              <p className='text-lg leading-text-paragraph     text-background'>
                 Se på det som en investering i din egen livskvalitet. Kompromissløs komfort og overlegen
                 allsidighet, designet for å gi deg flere timer utendørs, år etter år.
               </p>

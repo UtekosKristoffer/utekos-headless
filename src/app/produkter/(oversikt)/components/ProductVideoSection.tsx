@@ -8,7 +8,7 @@ export function ProductVideoSection() {
   return (
     <article className='relative overflow-hidden py-20 sm:py-32'>
       <div className='absolute inset-0 bg-[color-mix(in_oklab,var(--havdyp)_85%,#050508)] pointer-events-none -z-10' />
-      <div className='absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-60' />
+      <div className='absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-white/10 to-transparent opacity-60' />
 
       <div className='container mx-auto px-4 max-w-7xl'>
         <div className='grid grid-cols-1 items-center gap-x-16 gap-y-16 lg:grid-cols-2'>
@@ -22,45 +22,45 @@ export function ProductVideoSection() {
           </div>
 
           <div className='text-center lg:text-left'>
-            <h2 className='animate-header-item text-[2.5rem] sm:text-[3.5rem] font-medium leading-[0.9] tracking-[-0.01em] text-cloud-dancer'>
+            <h2 className='animate-header-item text-[2.5rem] sm:text-[3.5rem] font-medium leading-[0.9] tracking-[-0.01em] text-foreground'>
               <span className='inline-block'>Slutt</span> <span className='inline-block'>å</span>{' '}
               <span className='relative z-[1] inline-flex items-center justify-center px-2 ml-1 whitespace-nowrap'>
-                <span className='absolute inset-0 -z-10 -skew-x-6 rounded-md bg-gradient-to-r from-overcast via-havdyp to-overcast opacity-50 blur-[2px]' />
+                <span className='absolute inset-0 -z-10 -skew-x-6 rounded-md bg-linear-to-r from-overcast via-havdyp to-overcast opacity-50 blur-[2px]' />
 
-                <span className='absolute inset-0 -z-10 -rotate-1 rounded-lg border border-overcast bg-gradient-to-br from-overcast/80 via-overcast to-overcast/80 opacity-40' />
-                <span className='relative z-10 text-cloud-dancer'>fryse.</span>
+                <span className='absolute inset-0 -z-10 -rotate-1 rounded-lg border border-overcast bg-linear-to-br from-overcast/80 via-overcast to-overcast/80 opacity-40' />
+                <span className='relative z-10 text-foreground'>fryse.</span>
               </span>
               <br />
               <span className='inline-block mt-2'>Begynn</span> <span className='inline-block'>å</span>{' '}
               <span className='relative z-[1] inline-flex items-center justify-center px-2 ml-1 whitespace-nowrap'>
-                <span className='absolute inset-0 -z-10 -skew-x-6 rounded-md bg-gradient-to-r from-soft-warm via-chocolate-plum to-soft-warm opacity-50 blur-[2px]' />
-                <span className='absolute inset-0 -z-10 -rotate-1 rounded-lg border border-soft-warm/50 bg-gradient-to-br from-soft-warm via-chocolate-plum to-soft-warm opacity-40' />
+                <span className='absolute inset-0 -z-10 -skew-x-6 rounded-md bg-linear-to-r from-soft-warm via-chocolate-plum to-soft-warm opacity-50 blur-[2px]' />
+                <span className='absolute inset-0 -z-10 -rotate-1 rounded-lg border border-soft-warm/50 bg-linear-to-br from-soft-warm via-chocolate-plum to-soft-warm opacity-40' />
                 <span className='relative z-10 text-soft-warm'>nyte.</span>
               </span>
             </h2>
 
-            <p className='animate-header-item mt-8 text-cloud-dancer max-w-xl mx-auto lg:mx-0'>
+            <p className='animate-header-item mt-8 text-foreground max-w-xl mx-auto lg:mx-0'>
               Er du lei av å la kulden ødelegge de gode øyeblikkene ute? Enten du er på fjellet, i hagen, på
               hytten eller i båten, er Utekos løsningen som holder deg varm og komfortabel.
             </p>
             <div className='animate-header-item'>
               <div className='mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start'>
                 <div className='group flex items-center gap-4 rounded-[1rem] border border-white/10 bg-mountain-view p-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] backdrop-blur-md transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5'>
-                  <div className='flex size-12 shrink-0 items-center justify-center rounded-xl border border-soft-warm/20 bg-gradient-to-br from-white/10 to-transparent text-soft-warm shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] transition-transform duration-500 group-hover:scale-110'>
+                  <div className='flex size-12 shrink-0 items-center justify-center rounded-xl border border-soft-warm/20 bg-linear-to-br from-white/10 to-transparent text-soft-warm shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] transition-transform duration-500 group-hover:scale-110'>
                     <Sun className='h-5 stroke-[1.5]' />
                   </div>
                   <div className='text-left'>
-                    <p className='text-[1rem] font-medium leading-[1.1] tracking-[-0.01em]  text-cloud-dancer'>
+                    <p className='text-[1rem] font-medium leading-[1.1] tracking-[-0.01em]  text-foreground'>
                       Garantert varm
                     </p>
-                    <p className='mt-1 text-[0.875rem] font-normal text-cloud-dancer tracking-[-0.01em]'>
+                    <p className='mt-1 text-[0.875rem] font-normal text-foreground tracking-[-0.01em]'>
                       Regisser din egen komfort
                     </p>
                   </div>
                 </div>
 
                 <div className='group flex items-center gap-4 rounded-[1rem] border border-havdyp/20 bg-overcast p-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] backdrop-blur-md transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5'>
-                  <div className='flex size-12 shrink-0 items-center justify-center rounded-xl border border-havdyp/20 bg-gradient-to-br from-white/50 to-transparent text-havdyp shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)] transition-transform duration-500 group-hover:scale-110'>
+                  <div className='flex size-12 shrink-0 items-center justify-center rounded-xl border border-havdyp/20 bg-linear-to-br from-white/50 to-transparent text-havdyp shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)] transition-transform duration-500 group-hover:scale-110'>
                     <Layers className='size-5 text-havdyp stroke-[1.5]' />
                   </div>
                   <div className='text-left'>

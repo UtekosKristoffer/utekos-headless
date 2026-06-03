@@ -18,7 +18,7 @@ export function HeroBackground({ src }: HeroBackgroundProps) {
         className='object-cover opacity-30 grayscale hue-rotate-180'
         sizes='100vw'
       />
-      <div className='absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a]/80 to-[#0a0a0a]' />
+      <div className='absolute inset-0 bg-linear-to-b from-[#0a0a0a] via-[#0a0a0a]/80 to-[#0a0a0a]' />
     </div>
   )
 }

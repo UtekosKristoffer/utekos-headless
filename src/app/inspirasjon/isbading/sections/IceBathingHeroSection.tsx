@@ -46,7 +46,7 @@ export function IceBathingHeroSection() {
           </HeroHighlight>
         </>
       }
-      titleClassName='max-w-4xl drop-shadow-sm'
+      titleClassName='max-w-4xl drop-shadow-sm md:text-[clamp(1.875rem,2.35vw,3.5rem)]'
       leadClassName='drop-shadow-sm'
       lead='Mestringsfølelsen etter et isbad er unik. Men turen tilbake til bilen trenger ikke være en kamp. Gjør overgangen fra null grader til full komfort umiddelbar.'
       actions={<IceBathingHeroCta />}

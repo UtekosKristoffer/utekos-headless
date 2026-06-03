@@ -25,10 +25,10 @@ export function VariantSelectors({ product, selectedVariant, onUpdateVariant }: 
           if (option.optionValues.length === 1) {
             return (
               <div key={option.name} className='space-y-2'>
-                <h3 className='text-sm   font-semibold text-cloud-dancer uppercase tracking-wide'>
+                <h3 className='text-sm   font-semibold text-foreground uppercase tracking-wide'>
                   {option.name}
                 </h3>
-                <p className='flex items-center gap-2 text-base   font-medium text-cloud-dancer'>
+                <p className='flex items-center gap-2 text-base   font-medium text-foreground'>
                   {isColorOption && (
                     <span
                       aria-hidden='true'
@@ -43,7 +43,7 @@ export function VariantSelectors({ product, selectedVariant, onUpdateVariant }: 
 
           return (
             <div key={option.name} className='space-y-3'>
-              <h3 className='text-sm   font-semibold text-cloud-dancer uppercase tracking-wide'>
+              <h3 className='text-sm   font-semibold text-foreground uppercase tracking-wide'>
                 {option.name}
               </h3>
 

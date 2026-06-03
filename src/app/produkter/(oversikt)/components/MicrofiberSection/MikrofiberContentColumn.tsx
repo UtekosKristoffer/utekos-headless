@@ -72,7 +72,7 @@ export function MikrofiberContentColumn() {
           <p
             ref={pRef}
             className={cn(
-              'will-animate-fade-in-up mt-6 max-w-2xl   text-lg leading-[1.45]   text-background/82',
+              'will-animate-fade-in-up mt-6 max-w-2xl   text-lg leading-text-paragraph   text-background/82',
               pInView && 'is-in-view'
             )}
             style={{ '--transition-delay': '0.5s' } as React.CSSProperties}

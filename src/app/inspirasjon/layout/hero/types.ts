@@ -29,7 +29,7 @@ export interface InspirationHeroFeature {
   /** Topp-hairline-aksent (theme-stil). Rendres kun når satt. */
   marker?: string
   /** Radial hover-glød (gradient-stil). Rendres kun når satt. */
-  glow?: string
+  glow?: string | null
   /** Topp-skinn-overlay (gradient-stil). */
   sheen?: boolean
   /** Bakgrunn på ikon-boksen (CSS `background-color`). */

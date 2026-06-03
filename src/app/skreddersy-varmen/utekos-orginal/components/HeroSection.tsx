@@ -33,19 +33,19 @@ export function HeroSection() {
         />
       </div>
 
-      <div className='absolute inset-0 bg-gradient-to-b from-black/50 via-transparent via-60% to-[#1F2421] to-95%' />
+      <div className='absolute inset-0 bg-linear-to-b from-black/50 via-transparent via-60% to-[#1F2421] to-95%' />
 
       <div className='relative z-10 w-full h-full flex flex-col items-center justify-start pt-32 md:justify-center md:pt-0 px-6'>
-        <h1 className='mb-4 text-balance text-center text-4xl leading-[0.95] tracking-[-0.01em] text-cloud-dancer drop-shadow-xl md:mb-6 md:text-7xl'>
+        <h1 className='mb-4 text-balance text-center text-4xl leading-[0.95] tracking-[-0.01em] text-foreground drop-shadow-xl md:mb-6 md:text-7xl'>
           Skreddersy varmen <br className='hidden md:block' />
           <span className='mt-2 block text-2xl font-light italic leading-[0.95] tracking-[-0.01em] text-[#E07A5F] opacity-90 md:text-6xl'>
             Forleng de gode stundene
           </span>
         </h1>
 
-        <p className='mb-8 max-w-xs text-center text-lg font-light leading-[1.45] tracking-[-0.01em] text-cloud-dancer drop-shadow-md md:mb-12 md:max-w-3xl md:text-2xl'>
-          Utekos® definerer en ny standard for utendørs velvære. Juster, form
-          og nyt – uansett sted og temperatur.
+        <p className='mb-8 max-w-xs text-center text-lg font-light leading-text-paragraph tracking-[-0.01em] text-foreground drop-shadow-md md:mb-12 md:max-w-3xl md:text-2xl'>
+          Utekos® definerer en ny standard for utendørs velvære. Juster, form og nyt – uansett sted og
+          temperatur.
         </p>
 
         <div className='flex flex-col items-center gap-6 w-full'>
@@ -57,7 +57,7 @@ export function HeroSection() {
                 <Star key={i} fill='currentColor' size={16} />
               ))}
             </div>
-            <p className='text-sm font-medium leading-[1.45] tracking-[-0.01em] text-[#F4F1EA]/90 shadow-black'>
+            <p className='text-sm font-medium leading-text-paragraph tracking-[-0.01em] text-[#F4F1EA]/90 shadow-black'>
               4.8/5 - fra våre livsnytere
             </p>
           </div>

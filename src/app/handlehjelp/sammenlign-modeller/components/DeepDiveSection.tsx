@@ -33,7 +33,7 @@ export function DeepDiveSection() {
                   {section.title}
                 </h3>
 
-                <ul className='mt-7 list-disc space-y-4 pl-5   text-base font-medium leading-[1.45]   text-background marker:text-primary sm:text-lg'>
+                <ul className='mt-7 list-disc space-y-4 pl-5   text-base font-medium leading-text-paragraph   text-background marker:text-primary sm:text-lg'>
                   <li className='text-background/90'>{section.body}</li>
                   {section.points.map(point => (
                     <li key={point} className='text-backgrounds/86'>

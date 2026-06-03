@@ -9,14 +9,13 @@ import Image from 'next/image'
 export function ProductCardSoldOut() {
   return (
     <HoverCard openDelay={200} closeDelay={100}>
-      <HoverCardTrigger asChild>
+      <HoverCardTrigger className='size-full min-h-12 cursor-not-allowed'>
         <BrandBadge
-          asChild
           backgroundColor='var(--overcast)'
           textColor='var(--havdyp)'
           className='size-full min-h-12 cursor-not-allowed border border-cloud-dancer/10 text-base font-medium opacity-90'
         >
-          <span aria-disabled='true'>Utsolgt</span>
+          Utsolgt
         </BrandBadge>
       </HoverCardTrigger>
       <HoverCardContent

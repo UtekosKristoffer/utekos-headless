@@ -17,7 +17,7 @@ const styles = {
     'mb-3 border-b border-background/60 pb-1   text-base font-semibold leading-relaxed tracking-normal text-background',
   list: 'list-inside list-disc space-y-1 text-sm   text-background/90',
   callout:
-    'rounded-2xl border border-cloud-dancer/15 bg-havdyp p-4 text-sm leading-relaxed tracking-normal text-cloud-dancer'
+    'rounded-2xl border border-cloud-dancer/15 bg-havdyp p-4 text-sm leading-relaxed tracking-normal text-foreground'
 } as const
 
 type FeatureIconKey = 'leaf' | 'shield' | 'waves'
@@ -253,13 +253,13 @@ export function ProductDetailsAccordion({ selectedModel }: { selectedModel: Mode
   const content = productDetailsByModel[selectedModel]
 
   return (
-    <section key={selectedModel} className='w-full bg-overcast pb-24 pt-6 text-background' aria-live='polite'>
+    <article key={selectedModel} className='w-full bg-overcast pb-24 pt-6 text-background' aria-live='polite'>
       <div className='mx-auto max-w-3xl'>
         <h2 className='my-8 max-sm:pl-0 text-center max-sm:text-left text-3xl max-w-[90%] mx-auto md:max-w-4xl font-google-sans text-background sm:text-5xl tracking-normal'>
           {content.heading}
         </h2>
 
-        <Accordion key={`details-${selectedModel}`} type='single' collapsible className='w-full'>
+        <Accordion key={`details-${selectedModel}`} className='w-full'>
           <Section value='materials' title='Materialer'>
             {content.materials.map(row => (
               <DetailBlock key={row.label} title={row.label} text={row.value} />
@@ -310,6 +310,6 @@ export function ProductDetailsAccordion({ selectedModel }: { selectedModel: Mode
           </Section>
         </Accordion>
       </div>
-    </section>
+    </article>
   )
 }

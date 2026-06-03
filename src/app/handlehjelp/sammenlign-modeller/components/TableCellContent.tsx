@@ -11,5 +11,5 @@ export function TableCellContent({ value }: { value: string | boolean }) {
       : <span className='  text-sm text-havdyp/70'>Nei</span>
   }
 
-  return <span className='  text-sm leading-[1.45]   text-havdyp/82'>{value}</span>
+  return <span className='  text-sm leading-text-paragraph   text-havdyp/82'>{value}</span>
 }

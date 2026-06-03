@@ -20,16 +20,10 @@ export function CinematicWord({
   )
 }
 
-export function LuxuryShimmerText({
-  text,
-  className
-}: {
-  text: string
-  className?: string
-}) {
+export function LuxuryShimmerText({ text, className }: { text: string; className?: string }) {
   return (
     <span className={cn('relative inline-block group', className)}>
-      <span className='relative z-10 animate-shimmer-gold bg-gradient-to-br from-amber-100 via-amber-300 to-amber-500 bg-[length:200%_auto] bg-clip-text text-transparent'>
+      <span className='relative z-10 animate-shimmer-gold bg-linear-to-br from-amber-100 via-amber-300 to-amber-500 bg-[length:200%_auto] bg-clip-text text-transparent'>
         {text}
       </span>
 
@@ -38,23 +32,10 @@ export function LuxuryShimmerText({
   )
 }
 
-export function OrganicCircleWord({
-  children,
-  delay = 0
-}: {
-  children: string
-  delay?: number
-}) {
+export function OrganicCircleWord({ children, delay = 0 }: { children: string; delay?: number }) {
   return (
-    <span
-      data-organic-circle-word=''
-      data-gsap-delay={delay}
-      className='relative inline-block px-1'
-    >
-      <CinematicWord
-        delay={delay}
-        className='relative z-10 font-medium text-cloud-dancer'
-      >
+    <span data-organic-circle-word='' data-gsap-delay={delay} className='relative inline-block px-1'>
+      <CinematicWord delay={delay} className='relative z-10 font-medium text-foreground'>
         {children}
       </CinematicWord>
 
@@ -79,20 +60,11 @@ export function OrganicCircleWord({
   )
 }
 
-export function GlowWord({
-  children,
-  delay = 0
-}: {
-  children: string
-  delay?: number
-}) {
+export function GlowWord({ children, delay = 0 }: { children: string; delay?: number }) {
   return (
     <span className='relative mx-1 inline-block'>
       <span className='animate-pulse-slow absolute inset-0 rounded-full bg-cloud-dancer/10 blur-lg' />
-      <CinematicWord
-        delay={delay}
-        className='relative z-10 font-medium italic text-cloud-dancer'
-      >
+      <CinematicWord delay={delay} className='relative z-10 font-medium italic text-foreground'>
         {children}
       </CinematicWord>
     </span>

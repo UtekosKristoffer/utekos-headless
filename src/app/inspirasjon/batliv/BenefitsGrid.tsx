@@ -33,8 +33,8 @@ export function BenefitsGrid() {
     <section className='py-24 bg-havdyp'>
       <div className='container mx-auto px-4'>
         <div className='boat-benefits-header text-center mb-6'>
-          <h2 className='max-w-3xl mx-auto md:max-w-4xl text-cloud-dancer'>Skapt for livet på sjøen</h2>
-          <p className='mt-4 utekos-section-lead text-cloud-dancer max-w-2xl mx-auto'>
+          <h2 className='max-w-3xl mx-auto md:max-w-4xl text-foreground'>Skapt for livet på sjøen</h2>
+          <p className='mt-4 utekos-section-lead text-foreground max-w-2xl mx-auto'>
             Vi vet at været kan snu fort. Derfor er Utekos designet for å gi deg øyeblikkelig og pålitelig
             varme.
           </p>
@@ -52,7 +52,7 @@ export function BenefitsGrid() {
                   <Icon className={`h-8 w-8 ${benefit.color}`} />
                 </div>
                 <h3 className='text-lg font-semibold mb-2'>{benefit.title}</h3>
-                <p className='text-sm text-cloud-dancer'>{benefit.description}</p>
+                <p className='text-sm text-foreground'>{benefit.description}</p>
               </div>
             )
           })}

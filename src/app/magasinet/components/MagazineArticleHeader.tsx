@@ -15,7 +15,7 @@ export function MagazineArticleHeader({ article }: MagazineArticleHeaderProps) {
     article.updatedAt !== article.publishedAt ? formatMagazineArticleDate(article.updatedAt) : null
 
   return (
-    <header className='relative overflow-hidden bg-havdyp text-cloud-dancer'>
+    <header className='relative overflow-hidden bg-havdyp text-foreground'>
       <div
         className='absolute inset-0 bg-[linear-gradient(140deg,color-mix(in_oklch,var(--background)_72%,transparent),transparent_58%)]'
         aria-hidden
@@ -28,10 +28,10 @@ export function MagazineArticleHeader({ article }: MagazineArticleHeaderProps) {
           <h1 className='text-balance font-google-sans text-5xl font-bold leading-[0.9]   sm:text-6xl lg:text-7xl'>
             <MagazineInlineTitle text={article.title} />
           </h1>
-          <p className='mt-6 max-w-3xl   text-xl leading-[1.45]   text-cloud-dancer/86 sm:text-2xl'>
+          <p className='mt-6 max-w-3xl   text-xl leading-text-paragraph   text-foreground/86 sm:text-2xl'>
             {article.excerpt}
           </p>
-          <div className='mt-8 flex flex-wrap items-center gap-x-5 gap-y-3   text-sm leading-[1.4]   text-cloud-dancer/72'>
+          <div className='mt-8 flex flex-wrap items-center gap-x-5 gap-y-3   text-sm leading-4   text-foreground/72'>
             <span className='inline-flex items-center gap-2'>
               <CalendarDays className='size-4' aria-hidden />
               <time dateTime={article.publishedAt}>{publishedDate}</time>

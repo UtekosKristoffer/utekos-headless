@@ -19,19 +19,19 @@ export function ProductCareBody() {
         <TabsList className='grid h-auto w-full grid-cols-1 rounded-2xl border border-background/10 bg-cloud-dancer/72 p-1.5 shadow-[0_18px_46px_-40px_color-mix(in_oklab,var(--background)_72%,transparent)] sm:grid-cols-3'>
           <TabsTrigger
             value='dun'
-            className='min-h-11 rounded-xl text-background data-[state=active]:bg-havdyp data-[state=active]:text-cloud-dancer'
+            className='min-h-11 rounded-xl text-background data-[state=active]:bg-havdyp data-[state=active]:text-foreground'
           >
             Utekos Dun
           </TabsTrigger>
           <TabsTrigger
             value='mikrofiber'
-            className='min-h-11 rounded-xl text-background data-[state=active]:bg-havdyp data-[state=active]:text-cloud-dancer'
+            className='min-h-11 rounded-xl text-background data-[state=active]:bg-havdyp data-[state=active]:text-foreground'
           >
             Utekos Mikrofiber
           </TabsTrigger>
           <TabsTrigger
             value='comfyrobe'
-            className='min-h-11 rounded-xl text-background data-[state=active]:bg-havdyp data-[state=active]:text-cloud-dancer'
+            className='min-h-11 rounded-xl text-background data-[state=active]:bg-havdyp data-[state=active]:text-foreground'
           >
             Comfyrobe™
           </TabsTrigger>

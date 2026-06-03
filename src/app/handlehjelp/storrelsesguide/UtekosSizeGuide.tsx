@@ -49,7 +49,7 @@ export function UtekosSizeGuide() {
             </p>
           </div>
 
-          <div className='mt-12 max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto text-lg leading-[1.45] brand-tracking-normal text-left space-y-6 text-background'>
+          <div className='mt-12 max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto text-lg leading-text-paragraph brand-tracking-normal text-left space-y-6 text-background'>
             <p>
               Vi har designet Utekos Dun og Mikrofiber med en unik filosofi: ultimat komfort gjennom suveren
               tilpasningsevne. Du vil legge merke til at spranget fra Medium til Large er betydelig – dette er
@@ -63,17 +63,17 @@ export function UtekosSizeGuide() {
           </div>
 
           <div className='mt-16 grid grid-cols-1 gap-x-6 gap-y-6 lg:grid-cols-2 max-w-5xl mx-auto'>
-            <div className='rounded-lg border border-cloud-dancer/12 bg-havdyp text-cloud-dancer p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--background)_90%,transparent)] sm:p-8'>
+            <div className='rounded-lg border border-cloud-dancer/12 bg-havdyp text-foreground p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--background)_90%,transparent)] sm:p-8'>
               <h3 className='text-xl font-semibold leading-7'>Velg Medium hvis...</h3>
-              <ul className='mt-4 list-disc list-inside space-y-2 text-cloud-dancer'>
+              <ul className='mt-4 list-disc list-inside space-y-2 text-foreground'>
                 <li>Du er opptil ca. 180 cm høy.</li>
                 <li>Du ønsker en passform som er generøs og romslig, men som følger kroppen din tettere.</li>
                 <li>Du ser for deg å bruke den over lettere klær som en genser eller t-skjorte.</li>
               </ul>
             </div>
-            <div className='rounded-lg border tekst-base border-cloud-dancer/12 bg-havdyp p-6 text-cloud-dancer text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--background)_90%,transparent)] sm:p-8'>
+            <div className='rounded-lg border tekst-base border-cloud-dancer/12 bg-havdyp p-6 text-foreground text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--background)_90%,transparent)] sm:p-8'>
               <h3 className='text-xl font-semibold leading-7'>Velg Large hvis...</h3>
-              <ul className='mt-4 list-disc list-inside space-y-2 text-cloud-dancer'>
+              <ul className='mt-4 list-disc list-inside space-y-2 text-foreground'>
                 <li>Du er over 180 cm høy, eller bevisst ønsker en overdimensjonert følelse.</li>
                 <li>Du vil ha maksimal plass til tykke lag med klær under, som en boblejakke.</li>
                 <li>Du elsker tanken på å kunne trekke den helt ned over beina for en full kokong-effekt.</li>
@@ -103,7 +103,7 @@ export function UtekosSizeGuide() {
               <div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
                 <div className='overflow-hidden rounded-lg border border-cloud-dancer/12 shadow-[0_22px_54px_-42px_color-mix(in_oklab,var(--background)_90%,transparent)]'>
                   <table className='min-w-full divide-y divide-cloud-dancer/12 bg-cloud-dancer'>
-                    <thead className='bg-havdyp text-cloud-dancer'>
+                    <thead className='bg-havdyp text-foreground'>
                       <tr>
                         <th scope='col' className='py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-6'>
                           Måling

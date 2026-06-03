@@ -87,7 +87,7 @@ export function ProblemSolutionSection() {
 
         <div
           ref={warmLayerRef}
-          className='absolute inset-0 bg-gradient-to-br from-slate-800 to-[#0f172a] flex items-center justify-center z-30'
+          className='absolute inset-0 bg-linear-to-br from-slate-800 to-[#0f172a] flex items-center justify-center z-30'
           style={{ clipPath: 'circle(0% at 50% 50%)' }}
         >
           <div className='absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-900/20 via-slate-900/50 to-slate-900 z-0' />
@@ -99,7 +99,7 @@ export function ProblemSolutionSection() {
             </div>
             <h2 className='text-5xl md:text-7xl font-bold text-white mb-6  '>
               Total{' '}
-              <span className='text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-white'>
+              <span className='text-transparent bg-clip-text bg-linear-to-r from-sky-300 to-white'>
                 Isolasjon.
               </span>
             </h2>

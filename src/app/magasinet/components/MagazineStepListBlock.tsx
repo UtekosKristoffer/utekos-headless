@@ -26,7 +26,7 @@ export function MagazineStepListBlock({ block }: MagazineStepListBlockProps) {
             key={step.title}
             className='grid gap-4 rounded-lg border border-background/10 bg-cloud-dancer p-5 sm:grid-cols-[3rem_1fr]'
           >
-            <div className='flex size-11 items-center justify-center rounded-lg bg-background font-google-sans text-lg font-bold leading-none text-cloud-dancer'>
+            <div className='flex size-11 items-center justify-center rounded-lg bg-background font-google-sans text-lg font-bold leading-none text-foreground'>
               {index + 1}
             </div>
             <div>

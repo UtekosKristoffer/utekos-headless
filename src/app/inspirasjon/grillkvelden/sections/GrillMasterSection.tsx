@@ -4,10 +4,10 @@ import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 
 export function GrillMasterSection() {
   return (
-    <section className='bg-mountain-view py-24 text-cloud-dancer'>
+    <section className='bg-mountain-view py-24 text-foreground'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='mb-8 text-cloud-dancer'>
+          <h2 className='mb-8 text-foreground'>
             <span className='inline-flex flex-wrap items-baseline justify-center gap-x-[0.22em] gap-y-2'>
               <span>Grillmestere elsker</span>
               <UtekosWordmark
@@ -19,7 +19,7 @@ export function GrillMasterSection() {
 
           <Card className='border-cloud-dancer/18 bg-background/24 shadow-[0_28px_80px_-54px_color-mix(in_oklch,var(--background)_82%,transparent)]'>
             <CardContent className='p-8 sm:p-12'>
-              <blockquote className='mb-6   text-xl leading-[1.45] tracking-[-0.02em] text-cloud-dancer'>
+              <blockquote className='mb-6   text-xl leading-text-paragraph tracking-[-0.02em] text-foreground'>
                 &quot;Jeg elsker å arrangere grillfester, men hatet at folk dro inn så snart det ble kjølig.
                 Utekos endret alt. Festen fortsetter ute — rundt grillen, der den hører hjemme.&quot;
               </blockquote>
@@ -33,10 +33,8 @@ export function GrillMasterSection() {
                   className='size-12 rounded-full object-cover'
                 />
                 <div className='text-left'>
-                  <p className='font-semibold leading-[1.25] tracking-[-0.01em] text-cloud-dancer'>
-                    Hans Åge
-                  </p>
-                  <p className='  text-sm leading-[1.45] tracking-[-0.02em] text-cloud-dancer/82'>
+                  <p className='font-semibold leading-[1.25] tracking-[-0.01em] text-foreground'>Hans Åge</p>
+                  <p className='  text-sm leading-text-paragraph tracking-[-0.02em] text-foreground/82'>
                     Hobby-grillmester og livsnyter
                   </p>
                 </div>

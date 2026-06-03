@@ -31,7 +31,7 @@ export function IceBathingFAQ() {
           Ofte stilte spørsmål
         </h2>
 
-        <Accordion type='single' collapsible className='w-full'>
+        <Accordion className='w-full'>
           {iceBathingFaqItems.map((item, index) => (
             <AccordionItem key={item.question} value={`item-${index + 1}`} className='border-background/16'>
               <AccordionTrigger className='text-left text-background leading-[1.35] tracking-normal'>

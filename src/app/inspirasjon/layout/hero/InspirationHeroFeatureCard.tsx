@@ -51,7 +51,7 @@ export function InspirationHeroFeatureCard({ feature }: InspirationHeroFeatureCa
   return (
     <li>
       <Card
-        className='group relative flex aspect-[2/1] w-full flex-col overflow-hidden rounded-xl border py-0 text-background transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+        className='group relative flex aspect-[2/1] w-full flex-col overflow-hidden rounded-xl border py-0 text-foreground transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
         style={cardStyle}
       >
         {glow ?
@@ -88,7 +88,7 @@ export function InspirationHeroFeatureCard({ feature }: InspirationHeroFeatureCa
             </span>
 
             <h3
-              className='inspirational-page-hero-card-heading whitespace-nowrap text-background'
+              className='inspirational-page-hero-card-heading whitespace-nowrap text-foreground'
               style={titleColor ? { color: titleColor } : undefined}
             >
               {title}
@@ -96,7 +96,7 @@ export function InspirationHeroFeatureCard({ feature }: InspirationHeroFeatureCa
           </div>
 
           <p
-            className='inspirational-page-hero-card-description pr-2 text-background/90'
+            className='inspirational-page-hero-card-description pr-2 text-foreground/90'
             style={descriptionColor ? { color: descriptionColor } : undefined}
           >
             {description}

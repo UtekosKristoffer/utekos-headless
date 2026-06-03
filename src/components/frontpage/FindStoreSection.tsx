@@ -36,7 +36,7 @@ export function FindInStoreSection() {
               <h2 className='text-balance text-3xl font-bold   text-white sm:text-4xl'>
                 Opplev Utekos i fysisk butikk
               </h2>
-              <p className='mt-4 max-w-lg text-balance text-lg     text-cloud-dancer/85'>
+              <p className='mt-4 max-w-lg text-balance text-lg     text-foreground/85'>
                 Lyst til å kjenne på kvaliteten og finne den perfekte passformen? Som eneste fysiske
                 forhandler i Bergen finner du et utvalg av våre produkter hos Intersport på Laksevåg Senter.
               </p>

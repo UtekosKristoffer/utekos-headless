@@ -27,7 +27,7 @@ export default function InspirationPage() {
         <h1 className='text-4xl font-bold leading-[0.95] tracking-normal sm:text-5xl lg:text-6xl'>
           Inspirasjon for mer utekos
         </h1>
-        <p className='mx-auto mt-6 max-w-2xl text-lg leading-[1.45] tracking-normal text-havdyp'>
+        <p className='mx-auto mt-6 max-w-2xl text-lg leading-text-paragraph tracking-normal text-havdyp'>
           Utforsk praktiske guider for hytteliv, bobil, båtliv, terrasse, grillkvelder og isbading. Finn
           situasjonen som ligner din, og se hvordan Utekos forlenger de gode øyeblikkene ute.
         </p>
@@ -36,7 +36,7 @@ export default function InspirationPage() {
             asChild
             backgroundColor='var(--primary)'
             textColor='var(--background)'
-            className='border border-primary/24 px-7 py-3 text-base leading-[1.4] font-semibold tracking-normal shadow-[0_18px_38px_-30px_rgba(49,42,18,0.58)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
+            className='border border-primary/24 px-7 py-3 text-base leading-4 font-semibold tracking-normal shadow-[0_18px_38px_-30px_rgba(49,42,18,0.58)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
           >
             <Link href='/produkter'>Se produktene</Link>
           </BrandBadge>
@@ -44,7 +44,7 @@ export default function InspirationPage() {
             asChild
             backgroundColor='var(--background)'
             textColor='var(--cloud-dancer)'
-            className='border border-background/18 px-7 py-3 text-base leading-[1.4] font-semibold tracking-normal shadow-[0_18px_38px_-32px_rgba(14,18,35,0.7)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-110'
+            className='border border-background/18 px-7 py-3 text-base leading-4 font-semibold tracking-normal shadow-[0_18px_38px_-32px_rgba(14,18,35,0.7)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-110'
           >
             <Link href='/handlehjelp/storrelsesguide'>Finn riktig størrelse</Link>
           </BrandBadge>

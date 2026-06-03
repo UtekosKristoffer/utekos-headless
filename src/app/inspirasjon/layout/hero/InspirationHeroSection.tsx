@@ -10,8 +10,8 @@ interface InspirationHeroSectionProps {
   as?: 'section' | 'article'
   /** Horisontal justering av innholdet. Default `left`. */
   align?: InspirationHeroAlign
-  /** Minstehøyde. `standard` = 70vh, `tall` = 85vh. Default `standard`. */
-  minHeight?: 'standard' | 'tall'
+  /** Minstehøyde. `standard` = 100svh, `tall` = 110svh, `content` = kun innholdshøyde. Default `standard`. */
+  minHeight?: 'standard' | 'tall' | 'content'
   /** Bakgrunns-/flate-klasser for seksjonen (eks. `bg-havdyp`). */
   surfaceClassName?: string
   /** Bespoke dekorlag (glød, gradienter, bilde) som ligger bak innholdet. */
@@ -28,7 +28,7 @@ interface InspirationHeroSectionProps {
  * Seksjons-skall for alle inspirasjons-heroer.
  *
  * Ansvar: ytre `<section>`/`<article>`, minstehøyde, sentrering, dekorlag-slot
- * og standard container (`container mx-auto px-4 py-16`) med en innholdskolonne.
+ * og standard container (`container mx-auto px-5 md:px-4 pt-10 pb-20 sm:pt-12 sm:pb-24`) med en innholdskolonne.
  * Ren Server Component – ingen klient-kode.
  */
 export function InspirationHeroSection({
@@ -48,8 +48,10 @@ export function InspirationHeroSection({
       aria-labelledby={labelledBy}
       className={cn(
         'relative isolate flex overflow-hidden',
-        minHeight === 'tall' ? 'min-h-[85vh]' : 'min-h-[70vh]',
-        align === 'center' ? 'flex-col justify-center' : 'items-center',
+        minHeight === 'tall' ? 'min-h-[110svh]'
+        : minHeight === 'content' ? 'min-h-0'
+        : 'min-h-svh',
+        align === 'center' ? 'flex-col justify-center' : 'items-start',
         surfaceClassName,
         className
       )}
@@ -58,13 +60,11 @@ export function InspirationHeroSection({
 
       <div
         className={cn(
-          'container relative z-10 mx-auto px-4 py-16',
+          'container relative z-10 mx-auto px-5 md:px-4 pt-10 pb-20 sm:pt-12 sm:pb-24',
           containerClassName
         )}
       >
-        <div className={cn(maxWidthClassName, align === 'center' && 'mx-auto text-center')}>
-          {children}
-        </div>
+        <div className={cn(maxWidthClassName, align === 'center' && 'mx-auto text-center')}>{children}</div>
       </div>
     </Tag>
   )

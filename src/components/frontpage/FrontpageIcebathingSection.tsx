@@ -85,17 +85,17 @@ export function FrontpageIceBathingSection() {
                 <span className='gsap-badge-pulse absolute inline-flex h-full w-full rounded-full bg-mountain-view opacity-75'></span>
                 <span className='relative inline-flex rounded-full bg-cloud-dancer h-2 w-2'></span>
               </span>
-              <span className='text-cloud-dancer outline-hidden'>Siste sjanse</span>
+              <span className='text-foreground outline-hidden'>Siste sjanse</span>
             </div>
 
-            <h2 className='gsap-content opacity-0 mb-6 text-4xl bg-gradient-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text outline-hiddenfont-bold   text-white sm:text-5xl lg:text-6xl'>
+            <h2 className='gsap-content opacity-0 mb-6 text-4xl bg-linear-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text outline-hiddenfont-bold   text-white sm:text-5xl lg:text-6xl'>
               Vi rydder plass til <br />
-              <span className='text-transparent text-left bg-clip-text bg-gradient-to-r from-dusted-peri via-sweet-lavender to-dusted-peri'>
+              <span className='text-transparent text-left bg-clip-text bg-linear-to-r from-dusted-peri via-sweet-lavender to-dusted-peri'>
                 sesongens nyheter
               </span>
             </h2>
 
-            <p className='gsap-content p-1 text-left text-cloud-dancer rounded-lg opacity-0 text-lg mb-10 leading-relaxed max-w-lg'>
+            <p className='gsap-content p-1 text-left text-foreground rounded-lg opacity-0 text-lg mb-10 leading-relaxed max-w-lg'>
               Begrenset antall og størrelser – førstemann til mølla!
             </p>
 
@@ -119,7 +119,7 @@ export function FrontpageIceBathingSection() {
                   icon: Wind,
                   title: 'Stopper vinden',
                   desc: 'HydroGuard™ skall med 8000mm vannsøyle.',
-                  color: 'text-cloud-dancer',
+                  color: 'text-foreground',
                   bg: 'bg-dusted-peri'
                 }
               ].map((item, idx) => (

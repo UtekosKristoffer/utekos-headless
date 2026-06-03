@@ -18,7 +18,7 @@ export function MagazineImageBlock({ block }: MagazineImageBlockProps) {
         {...(block.priority ? { priority: true } : {})}
       />
       {block.caption && (
-        <figcaption className='px-5 py-4   text-sm leading-[1.45]   text-background/68'>
+        <figcaption className='px-5 py-4   text-sm leading-text-paragraph   text-background/68'>
           {block.caption}
         </figcaption>
       )}

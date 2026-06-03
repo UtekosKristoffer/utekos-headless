@@ -88,8 +88,8 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
     <section id='bruksomrader' className='bg-havdyp py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-3xl lg:max-w-4xl text-center'>
-          <h2 className='text-cloud-dancer'>Hjemmekos, bare ute</h2>
-          <p className='mt-4 mx-auto utekos-section-lead max-w-2xl text-cloud-dancer'>
+          <h2 className='text-foreground'>Hjemmekos, bare ute</h2>
+          <p className='mt-4 mx-auto utekos-section-lead max-w-2xl text-foreground'>
             Fra en stille stund for deg selv, til sosiale lag som varer lenger.
           </p>
         </div>
@@ -127,12 +127,12 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                       >
                         <IconRenderer name={useCase.icon} className={useCase.iconColor} />
                       </div>
-                      <p className='font-medium leading-[1.35]     text-cloud-dancer/78'>{useCase.time}</p>
+                      <p className='font-medium leading-[1.35]     text-foreground/78'>{useCase.time}</p>
                     </div>
-                    <h3 className='mb-2 text-xl font-semibold leading-[1.1]     text-cloud-dancer'>
+                    <h3 className='mb-2 text-xl font-semibold leading-[1.1]     text-foreground'>
                       {useCase.title}
                     </h3>
-                    <p className='leading-[1.45]     text-cloud-dancer/88'>{useCase.description}</p>
+                    <p className='leading-text-paragraph     text-foreground/88'>{useCase.description}</p>
                   </CardContent>
                 </Card>
               </AnimatedBlock>

@@ -17,12 +17,12 @@ const features = [
 
 export function ProductSpotlight() {
   return (
-    <section id='product-spotlight' className='overflow-hidden bg-background py-24 text-cloud-dancer'>
+    <section id='product-spotlight' className='overflow-hidden bg-background py-24 text-foreground'>
       <div className='container mx-auto px-4'>
         <div className='grid items-center gap-12 lg:grid-cols-2'>
-          <AnimatedBlock className='relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border border-cloud-dancer/12 shadow-2xl lg:max-w-none'>
+          <AnimatedBlock className='relative mx-auto aspect-4/5 w-full max-w-md overflow-hidden rounded-2xl border border-cloud-dancer/12 shadow-2xl lg:max-w-none'>
             <Image src={SherpaCoreImg} alt='Utekos Comfyrobe detaljer' fill className='object-cover' />
-            <div className='absolute top-4 right-4 bg-mountain-view text-cloud-dancer font-bold px-4 py-2 rounded-full text-sm'>
+            <div className='absolute top-4 right-4 bg-mountain-view text-foreground font-bold px-4 py-2 rounded-full text-sm'>
               Følgesvenn
             </div>
           </AnimatedBlock>
@@ -31,7 +31,7 @@ export function ProductSpotlight() {
               <h2 className='mb-4 text-4xl font-bold leading-[0.95] tracking-normal md:text-5xl'>
                 Comfyrobe™
               </h2>
-              <p className='text-xl leading-[1.45] tracking-normal text-overcast'>
+              <p className='text-xl leading-text-paragraph tracking-normal text-overcast'>
                 Ikke bare en kåpe, men ditt viktigste sikkerhetsutstyr etter kuldesjokket.
               </p>
             </AnimatedBlock>
@@ -40,9 +40,9 @@ export function ProductSpotlight() {
               {features.map((feature, i) => (
                 <AnimatedBlock key={i} delay={`${0.3 + i * 0.1}s`} className='flex items-center gap-3'>
                   <div className='flex size-6 flex-shrink-0 items-center justify-center rounded-full border border-cloud-dancer/16 bg-mountain-view'>
-                    <Check className='size-4 text-cloud-dancer' />
+                    <Check className='size-4 text-foreground' />
                   </div>
-                  <span className='text-lg leading-[1.45] tracking-normal'>{feature}</span>
+                  <span className='text-lg leading-text-paragraph tracking-normal'>{feature}</span>
                 </AnimatedBlock>
               ))}
             </ul>

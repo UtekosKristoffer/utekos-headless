@@ -22,11 +22,7 @@ export function ItemRow({
       <CommandItem
         value={`${item.title} ${item.path} ${(item.keywords || []).join(' ')}`}
         onSelect={handleSelect}
-        className={cn(
-          'h-9 rounded-md px-3 font-medium',
-          depth > 0 && 'text-cloud-dancer/80',
-          depth > 0 && pad
-        )}
+        className={cn('h-9 rounded-md px-3 font-medium', depth > 0 && 'text-foreground/80', depth > 0 && pad)}
       >
         <TablerArrowRight className='size-4' />
         <span className='truncate'>{item.title}</span>
@@ -37,10 +33,7 @@ export function ItemRow({
             key={child.id}
             value={`${child.title} ${child.path} ${(child.keywords || []).join(' ')}`}
             onSelect={() => handleChildSelect(child.path)}
-            className={cn(
-              'h-9 rounded-md px-3',
-              'pl-8 text-sm text-cloud-dancer/70'
-            )}
+            className={cn('h-9 rounded-md px-3', 'pl-8 text-sm text-foreground/70')}
           >
             <span aria-hidden className='mr-1'>
               ↳

@@ -93,10 +93,10 @@ export function BobilSeasonsTabs() {
 
               <div className='relative flex items-center justify-center gap-2 py-3'>
                 <Icon
-                  className={`size-5 transition-colors ${isActive ? 'text-background' : 'text-cloud-dancer/90'}`}
+                  className={`size-5 transition-colors ${isActive ? 'text-background' : 'text-foreground/90'}`}
                 />
                 <span
-                  className={`font-google-sans font-bold tracking-[-0.01em] transition-colors ${isActive ? 'text-background' : 'text-cloud-dancer/90'}`}
+                  className={`font-google-sans font-bold tracking-[-0.01em] transition-colors ${isActive ? 'text-background' : 'text-foreground/90'}`}
                 >
                   {season.label}
                 </span>
@@ -130,7 +130,7 @@ export function BobilSeasonsTabs() {
                     >
                       <Icon className={`size-6 ${season.iconColor}`} />
                     </div>
-                    <h3 className='font-google-sans text-2xl font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer'>
+                    <h3 className='font-google-sans text-2xl font-bold leading-[0.95] tracking-[-0.01em] text-foreground'>
                       {season.hasBrandTitle ?
                         <span className='inline-flex flex-wrap items-baseline gap-x-2'>
                           <span>{season.title}</span>
@@ -140,7 +140,7 @@ export function BobilSeasonsTabs() {
                     </h3>
                   </div>
 
-                  <p className='  mb-6 text-lg leading-[1.5]   text-cloud-dancer/90'>{season.intro}</p>
+                  <p className='  mb-6 text-lg leading-[1.5]   text-foreground/90'>{season.intro}</p>
 
                   <ul className='space-y-3'>
                     {season.tips.map((tip, index) => (
@@ -152,7 +152,7 @@ export function BobilSeasonsTabs() {
                         <div className='mt-0.5 flex size-6 flex-shrink-0 items-center justify-center rounded-full border border-cloud-dancer/18 bg-background'>
                           <Check className={`size-4 ${season.iconColor}`} />
                         </div>
-                        <span className='  leading-[1.5]   text-cloud-dancer/90'>{tip}</span>
+                        <span className='  leading-[1.5]   text-foreground/90'>{tip}</span>
                       </li>
                     ))}
                   </ul>

@@ -61,7 +61,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
             >
               <Card className='@container group relative h-full overflow-hidden border-cloud-dancer/12 bg-havdyp'>
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${useCase.color} to-transparent opacity-20 transition-opacity duration-300 group-hover:opacity-30`}
+                  className={`absolute inset-0 bg-linear-to-br ${useCase.color} to-transparent opacity-20 transition-opacity duration-300 group-hover:opacity-30`}
                 />
 
                 <CardContent className='relative p-8'>
@@ -72,15 +72,15 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                     >
                       <useCase.icon className={`size-6 ${useCase.iconColor}`} aria-hidden />
                     </div>
-                    <p className='  text-sm font-medium tracking-[-0.02em] text-cloud-dancer/82'>
+                    <p className='  text-sm font-medium tracking-[-0.02em] text-foreground/82'>
                       {useCase.time}
                     </p>
                   </div>
 
-                  <h3 className='mb-2 text-xl font-semibold leading-[1.1] tracking-[-0.01em] text-cloud-dancer'>
+                  <h3 className='mb-2 text-xl font-semibold leading-[1.1] tracking-[-0.01em] text-foreground'>
                     {useCase.title}
                   </h3>
-                  <p className='  text-sm leading-[1.45] tracking-[-0.02em] text-cloud-dancer/88'>
+                  <p className='  text-sm leading-text-paragraph tracking-[-0.02em] text-foreground/88'>
                     {useCase.description}
                   </p>
                 </CardContent>

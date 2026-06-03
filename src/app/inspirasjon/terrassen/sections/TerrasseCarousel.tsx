@@ -17,6 +17,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
+import { CAROUSEL_SSR } from '@/components/ui/carousel-ssr'
 import { cn } from '@/lib/utils/className'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { createGsapDevTools } from '@/lib/gsap/createGsapDevTools'
@@ -39,8 +40,7 @@ export function TerrasseCarousel() {
   const autoplayPlugin = React.useRef(
     Autoplay({
       delay: 4000,
-      stopOnInteraction: false,
-      playOnInit: false
+      defaultInteraction: false
     })
   )
 
@@ -166,10 +166,10 @@ export function TerrasseCarousel() {
       return
     }
 
-    setCurrent(api.selectedScrollSnap() + 1)
+    setCurrent(api.selectedSnap() + 1)
 
     const onSelect = () => {
-      setCurrent(api.selectedScrollSnap() + 1)
+      setCurrent(api.selectedSnap() + 1)
     }
 
     api.on('select', onSelect)
@@ -251,7 +251,7 @@ export function TerrasseCarousel() {
           <BrandBadge
             backgroundColor='var(--ancient-water)'
             textColor='var(--background)'
-            className='gsap-header mb-4 gap-2 border border-ancient-water/52 px-4 py-2 text-sm leading-[1.4] font-base   opacity-0'
+            className='gsap-header mb-4 gap-2 border border-ancient-water/52 px-4 py-2 text-sm leading-4 font-base   opacity-0'
           >
             <Camera className='size-4' aria-hidden='true' />
             <span className='inline-flex items-baseline gap-[0.28em] leading-none'>
@@ -260,7 +260,7 @@ export function TerrasseCarousel() {
             </span>
           </BrandBadge>
 
-          <h2 className='gsap-title mt-4 text-cloud-dancer opacity-0'>Forleng dine beste øyeblikk</h2>
+          <h2 className='gsap-title mt-4 text-foreground opacity-0'>Forleng dine beste øyeblikk</h2>
         </div>
 
         <div className='gsap-carousel relative opacity-0'>
@@ -270,6 +270,8 @@ export function TerrasseCarousel() {
             <Carousel
               setApi={setApi}
               plugins={[autoplayPlugin.current]}
+              slideCount={terrasseImages.length}
+              ssr={CAROUSEL_SSR.responsiveThirds(terrasseImages.length)}
               onMouseEnter={stopAutoplay}
               onMouseLeave={resumeAutoplay}
               className='w-full'
@@ -294,16 +296,16 @@ export function TerrasseCarousel() {
                 ))}
               </CarouselContent>
 
-              <CarouselPrevious className='left-4 border-cloud-dancer/14 bg-background/78 text-cloud-dancer backdrop-blur-md hover:bg-havdyp focus-visible:ring-primary/70' />
-              <CarouselNext className='right-4 border-cloud-dancer/14 bg-background/78 text-cloud-dancer backdrop-blur-md hover:bg-havdyp focus-visible:ring-primary/70' />
+              <CarouselPrevious className='left-4 border-cloud-dancer/14 bg-background/78 text-foreground backdrop-blur-md hover:bg-havdyp focus-visible:ring-primary/70' />
+              <CarouselNext className='right-4 border-cloud-dancer/14 bg-background/78 text-foreground backdrop-blur-md hover:bg-havdyp focus-visible:ring-primary/70' />
             </Carousel>
 
             <div className='mt-8 flex items-center justify-center gap-2'>
-              {api?.scrollSnapList().map((_, index) => (
+              {api?.snapList().map((_, index) => (
                 <button
                   key={index}
                   type='button'
-                  onClick={() => api.scrollTo(index)}
+                  onClick={() => api.goTo(index)}
                   className={cn(
                     'h-1.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',
                     current === index + 1 ? 'w-6 bg-primary' : 'w-1.5 bg-overcast hover:bg-cloud-dancer'

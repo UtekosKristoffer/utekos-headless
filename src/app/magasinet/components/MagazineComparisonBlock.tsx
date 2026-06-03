@@ -22,7 +22,7 @@ export function MagazineComparisonBlock({ block }: MagazineComparisonBlockProps)
             )}
             <ul className='mt-5 space-y-3'>
               {column.items.map(item => (
-                <li key={item} className='flex gap-3   text-sm leading-[1.45]   text-background/80'>
+                <li key={item} className='flex gap-3   text-sm leading-text-paragraph   text-background/80'>
                   <span className='mt-1 size-2 shrink-0 rounded-full bg-[var(--magazine-accent)]' />
                   <span>{item}</span>
                 </li>

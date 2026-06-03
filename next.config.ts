@@ -1,11 +1,5 @@
 import type { NextConfig } from 'next'
-import { createRequire } from 'node:module'
-
-const require = createRequire(import.meta.url)
-
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true'
-})
+import { withBotId } from 'botid/next/config'
 
 const STATIC_ASSET_CACHE_CONTROL = 'public, max-age=31536000, immutable'
 
@@ -18,7 +12,6 @@ const staticAssetHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
-
   typedRoutes: true,
   reactCompiler: true,
   cacheComponents: true,
@@ -49,35 +42,15 @@ const nextConfig: NextConfig = {
   staticPageGenerationTimeout: 180,
 
   experimental: {
+    // Enable filesystem caching for `next dev`
+    turbopackFileSystemCacheForDev: true,
+    // Enable filesystem caching for `next build`
+    turbopackFileSystemCacheForBuild: true,
     cpus: 1,
-
     webVitalsAttribution: ['CLS', 'INP', 'LCP'],
-
     optimizePackageImports: [
       'zod',
       'lucide-react',
-      '@heroicons/react',
-      'gsap',
-
-      '@radix-ui/react-accordion',
-      '@radix-ui/react-alert-dialog',
-      '@radix-ui/react-checkbox',
-      '@radix-ui/react-dialog',
-      '@radix-ui/react-hover-card',
-      '@radix-ui/react-label',
-      '@radix-ui/react-navigation-menu',
-      '@radix-ui/react-popover',
-      '@radix-ui/react-progress',
-      '@radix-ui/react-radio-group',
-      '@radix-ui/react-scroll-area',
-      '@radix-ui/react-select',
-      '@radix-ui/react-separator',
-      '@radix-ui/react-slot',
-      '@radix-ui/react-switch',
-      '@radix-ui/react-tabs',
-      '@radix-ui/react-toast',
-      '@radix-ui/react-tooltip',
-      '@radix-ui/react-visually-hidden',
       '@tanstack/react-query',
       'react-hook-form',
       'xstate',
@@ -86,6 +59,11 @@ const nextConfig: NextConfig = {
       'framer-motion',
       'cmdk',
       'embla-carousel-react',
+      'embla-carousel-accessibility',
+      'embla-carousel-autoplay',
+      'embla-carousel-class-names',
+      'embla-carousel-fade',
+      'embla-carousel-ssr',
       'sonner',
       'vaul'
     ]
@@ -260,4 +238,4 @@ const nextConfig: NextConfig = {
   }
 }
 
-export default withBundleAnalyzer(nextConfig)
+export default withBotId(nextConfig)

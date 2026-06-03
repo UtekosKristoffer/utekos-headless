@@ -60,7 +60,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
             >
               <Card className='@container relative h-full overflow-hidden border-cloud-dancer/12 bg-background group'>
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${useCase.color} to-transparent opacity-20 transition-opacity group-hover:opacity-30`}
+                  className={`absolute inset-0 bg-linear-to-br ${useCase.color} to-transparent opacity-20 transition-opacity group-hover:opacity-30`}
                 />
                 <CardContent className='relative p-8'>
                   <div className='mb-6 flex items-center gap-4'>
@@ -68,7 +68,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                       <useCase.icon className={`size-6 ${useCase.iconColor}`} />
                     </div>
                     <div>
-                      <p className='text-sm text-cloud-dancer'>{useCase.time}</p>
+                      <p className='text-sm text-foreground'>{useCase.time}</p>
                       <p className='text-sm font-medium text-overcast'>{useCase.temperature}</p>
                     </div>
                   </div>

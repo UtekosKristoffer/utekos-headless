@@ -15,7 +15,7 @@ interface InspirasjonLayoutProps {
 
 export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) {
   return (
-    <article className='w-full'>
+    <article className='inspirasjon-route w-full'>
       <section aria-label='Betalingsinformasjon fra Klarna' className='klarna-top-strip'>
         <KlarnaOnSiteMessagingScript />
         <KlarnaTopStripPromotionBadge />
@@ -78,7 +78,7 @@ export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) 
                         {page.label}
                       </h3>
                     </div>
-                    <p className='text-sm leading-[1.45] tracking-[-0.01em] text-[var(--inspiration-card-muted)]'>
+                    <p className='text-sm leading-text-paragraph tracking-[-0.01em] text-[var(--inspiration-card-muted)]'>
                       {page.description}
                     </p>
                   </div>
@@ -87,7 +87,7 @@ export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) 
             ))}
           </div>
           <div className='mt-12 text-center'>
-            <p className='mb-4 text-base leading-[1.45]     text-havdyp'>
+            <p className='mb-4 text-base leading-text-paragraph     text-havdyp'>
               Klar til å oppleve komforten selv?
             </p>
             <div className='flex flex-wrap justify-center gap-4'>
@@ -95,7 +95,7 @@ export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) 
                 asChild
                 backgroundColor='var(--background)'
                 textColor='var(--cloud-dancer)'
-                className='border border-cloud-dancer/14 px-7 py-3 text-base font-medium leading-[1.45] tracking-[-0.01em] shadow-[0_18px_38px_-28px_rgba(14,18,35,0.86)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-havdyp focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dusted-peri/70 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast'
+                className='border border-cloud-dancer/14 px-7 py-3 text-base font-medium leading-text-paragraph tracking-[-0.01em] shadow-[0_18px_38px_-28px_rgba(14,18,35,0.86)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-havdyp focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dusted-peri/70 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast'
               >
                 <Link href='/produkter'>Se alle produkter</Link>
               </BrandBadge>
@@ -103,7 +103,7 @@ export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) 
                 asChild
                 backgroundColor='var(--cloud-dancer)'
                 textColor='var(--background)'
-                className='border border-background/14 px-7 py-3 text-base font-medium leading-[1.45] tracking-[-0.01em] shadow-[0_18px_38px_-30px_rgba(14,18,35,0.42)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-cloud-dancer/88 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-background/55 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast'
+                className='border border-background/14 px-7 py-3 text-base font-medium leading-text-paragraph tracking-[-0.01em] shadow-[0_18px_38px_-30px_rgba(14,18,35,0.42)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-cloud-dancer/88 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-background/55 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast'
               >
                 <Link href='/handlehjelp/storrelsesguide'>Finn din størrelse</Link>
               </BrandBadge>

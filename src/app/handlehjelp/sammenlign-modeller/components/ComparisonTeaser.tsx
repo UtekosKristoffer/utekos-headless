@@ -19,7 +19,7 @@ const models = [
     icon: Feather,
     cardClass: 'border-ancient-water bg-ancient-water hover:bg-ancient-water/90',
     iconShellClass: 'border-havdyp/20 bg-havdyp',
-    iconClass: 'text-cloud-dancer',
+    iconClass: 'text-foreground',
     textClass: 'text-havdyp',
     descriptionClass: 'text-havdyp/75',
     lesmerClass: 'text-havdyp/70 group-hover:text-havdyp'
@@ -44,9 +44,9 @@ const models = [
     cardClass: 'border-havdyp bg-havdyp hover:bg-background',
     iconShellClass: 'border-cloud-dancer/30 bg-cloud-dancer',
     iconClass: 'text-havdyp',
-    textClass: 'text-cloud-dancer',
-    descriptionClass: 'text-cloud-dancer/75',
-    lesmerClass: 'text-cloud-dancer/90 group-hover:text-cloud-dancer'
+    textClass: 'text-foreground',
+    descriptionClass: 'text-foreground/75',
+    lesmerClass: 'text-foreground/90 group-hover:text-foreground'
   }
 ]
 
@@ -168,7 +168,7 @@ export function ComparisonTeaser() {
             <Button
               asChild
               size='lg'
-              className='h-12   rounded-full bg-havdyp px-8 text-cloud-dancer hover:bg-background transition-all'
+              className='h-12   rounded-full bg-havdyp px-8 text-foreground hover:bg-background transition-all'
             >
               <Link
                 href={'/handlehjelp/sammenlign-modeller' as Route}

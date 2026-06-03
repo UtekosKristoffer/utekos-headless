@@ -17,6 +17,7 @@ export function ComfyrobeImageCarousel() {
     <AnimatedBlock className='will-animate-fade-in-left mx-auto size-full'>
       <Carousel
         plugins={[fadePlugin.current]}
+        slideCount={2}
         opts={{ loop: true }}
         className='mx-auto size-full w-full overflow-hidden rounded-[1.35rem] bg-background/60 shadow-[0_24px_70px_-48px_color-mix(in_oklch,var(--background)_90%,transparent)]'
       >

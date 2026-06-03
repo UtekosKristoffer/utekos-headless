@@ -1,5 +1,6 @@
-import { streamText, convertToModelMessages } from 'ai'
+import { streamText, convertToModelMessages, wrapLanguageModel } from 'ai'
 import { openai } from '@ai-sdk/openai'
+import { devToolsMiddleware } from '@ai-sdk/devtools'
 import { normalizeChatMessages } from './utils/normalizeChatMessages'
 
 export async function POST(req: Request) {
@@ -14,9 +15,16 @@ export async function POST(req: Request) {
 
   try {
     const messages = normalizeChatMessages(await req.json())
+    const model =
+      process.env.NODE_ENV === 'development' ?
+        wrapLanguageModel({
+          model: openai('gpt-4o-mini'),
+          middleware: devToolsMiddleware()
+        })
+      : openai('gpt-4o-mini')
 
     const result = streamText({
-      model: openai('gpt-4o-mini'),
+      model,
       temperature: 0.5,
       maxOutputTokens: 200,
       system: `
@@ -321,7 +329,7 @@ gi dem mer utekos. Vær presis, følg de kritiske reglene for formatering og
 lenker, og bruk din kunnskap om målgrupper og konkurransefortrinn for å skape en
 trygg og overbevisende kjøpsopplevelse. </FINAL_INSTRUCTION> </SYSTEM_PROMPT>
 `,
-      messages: convertToModelMessages(messages)
+      messages: await convertToModelMessages(messages)
     })
 
     return result.toUIMessageStreamResponse()

@@ -22,7 +22,7 @@ export const benefitsData: Benefit[] = [
     title: 'Forlenger hyggen',
     description: 'Mer tid til de gode samtalene utendørs, uansett vær.',
     benefitColor: 'bg-dusted-peri',
-    iconColor: 'text-cloud-dancer'
+    iconColor: 'text-foreground'
   },
   {
     icon: MapPinIcon,
@@ -35,11 +35,11 @@ export const benefitsData: Benefit[] = [
 
 export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
   return (
-    <section className='bg-havdyp py-24 text-cloud-dancer'>
+    <section className='bg-havdyp py-24 text-foreground'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-3xl lg:max-w-4xl text-center'>
-          <h2 className='text-cloud-dancer '>Designet for hyttelivet</h2>
-          <p className='mt-4 utekos-section-lead text-cloud-dancer'>
+          <h2 className='text-foreground '>Designet for hyttelivet</h2>
+          <p className='mt-4 utekos-section-lead text-foreground'>
             Komfort, kvalitet og smarte detaljer gjør det lett å bruke hytten mer.
           </p>
         </div>
@@ -56,8 +56,8 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
               >
                 <benefit.icon className={`size-8 ${benefit.iconColor}`} aria-hidden />
               </div>
-              <h3 className='mb-2 text-lg leading-[1] font-semibold tracking-[-0.01em]'>{benefit.title}</h3>
-              <p className='text-sm leading-[1.45] tracking-[-0.01em] text-cloud-dancer'>
+              <h3 className='mb-2 text-lg leading-nonefont-semibold tracking-[-0.01em]'>{benefit.title}</h3>
+              <p className='text-sm leading-text-paragraph tracking-[-0.01em] text-foreground'>
                 {benefit.description}
               </p>
             </AnimatedBlock>

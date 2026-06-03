@@ -45,7 +45,7 @@ export function ProductDetailsAccordionSection({
   return (
     <AccordionItem
       value={id}
-      className='group relative overflow-hidden border-b border-havdyp bg-cloud-dancer transition-all duration-200'
+      className='group relative overflow-hidden border-b border-havdyp bg-background transition-all duration-200'
       style={{
         contain: 'layout style paint'
       }}
@@ -67,16 +67,16 @@ export function ProductDetailsAccordionSection({
 
           sendGAEvent('event', 'buttonClicked', { value: title }) // Oppdaterte value til title her også for konsistens
         }}
-        className='relative z-10 px-6 py-4 text-background transition-colors duration-200 hover:text-havdyp data-[state=open]:text-background hover:no-underline'
+        className='relative z-10 items-center px-6 py-4 text-foreground transition-colors duration-200 hover:text-foreground data-[state=open]:text-foreground hover:no-underline [&>svg]:text-foreground/70'
       >
         <div className='flex items-center gap-4'>
           <div
-            className='flex size-10 items-center justify-center rounded-full border border-havdyp/14 bg-dusted-peri transition-transform duration-200 group-hover:scale-105'
+            className='flex size-10 items-center justify-center rounded-full border border-cloud-dancer/20 bg-cloud-dancer/8 transition-transform duration-200 group-hover:scale-105'
             style={{ transform: 'translateZ(0)' }}
           >
             <Icon className={`size-5 shrink-0 transition-colors duration-200 ${color}`} aria-hidden='true' />
           </div>
-          <span className='text-lg font-semibold'>{title}</span>
+          <span className='text-lg font-semibold leading-[1.2] tracking-[-0.01em]'>{title}</span>
         </div>
       </AccordionTrigger>
 

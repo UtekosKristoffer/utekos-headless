@@ -19,7 +19,7 @@ const LAYER_THEMES = {
   cloud: {
     border: 'border-cloud-dancer/30',
     bg: 'bg-havdyp/80',
-    text: 'text-cloud-dancer/90',
+    text: 'text-foreground/90',
     glow: 'shadow-cloud-dancer/20',
     gradient: 'from-cloud-dancer/10'
   },
@@ -77,7 +77,7 @@ export function ProductLayersVisual({ activeTech }: { activeTech: string }) {
           icon={Thermometer}
           color='cloud'
         >
-          <div className='absolute inset-0 bg-gradient-to-br from-cloud-dancer/10 via-transparent to-transparent' />
+          <div className='absolute inset-0 bg-linear-to-br from-cloud-dancer/10 via-transparent to-transparent' />
         </MaterialCard>
 
         <MaterialCard
@@ -87,7 +87,7 @@ export function ProductLayersVisual({ activeTech }: { activeTech: string }) {
           icon={Sparkles}
           color='peri'
         >
-          <div className='absolute inset-0 bg-gradient-to-r from-transparent via-dusted-peri/10 to-transparent skew-x-12' />
+          <div className='absolute inset-0 bg-linear-to-r from-transparent via-dusted-peri/10 to-transparent skew-x-12' />
         </MaterialCard>
 
         <div
@@ -103,7 +103,7 @@ export function ProductLayersVisual({ activeTech }: { activeTech: string }) {
               <Zap className='h-6 w-6' />
             </div>
             <div className='text-sm font-bold tracking-wider text-ancient-water'>System</div>
-            <div className='h-16 w-0.5 bg-gradient-to-b from-ancient-water/50 to-transparent' />
+            <div className='h-16 w-0.5 bg-linear-to-b from-ancient-water/50 to-transparent' />
           </div>
         </div>
       </div>
@@ -157,9 +157,7 @@ export function MobileProductLayersVisual({ activeTech }: { activeTech: string }
         )}
       >
         {/* Bakgrunns-gradient som pulserer */}
-        <div
-          className={cn('absolute inset-0 bg-gradient-to-r opacity-20', theme.gradient, 'to-transparent')}
-        />
+        <div className={cn('absolute inset-0 bg-linear-to-r opacity-20', theme.gradient, 'to-transparent')} />
 
         {/* Ikon Boks */}
         <div
@@ -235,7 +233,7 @@ function MaterialCard({
           'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border transition-colors duration-300',
           isActive ?
             `${theme.border} bg-white/5 ${theme.text}`
-          : 'border-white/10 bg-havdyp text-cloud-dancer/90'
+          : 'border-white/10 bg-havdyp text-foreground/90'
         )}
       >
         <Icon className='h-6 w-6' />
@@ -245,7 +243,7 @@ function MaterialCard({
         <span
           className={cn(
             'text-xs font-bold uppercase tracking-widest transition-colors',
-            isActive ? theme.text : 'text-cloud-dancer/90'
+            isActive ? theme.text : 'text-foreground/90'
           )}
         >
           {title}
@@ -253,7 +251,7 @@ function MaterialCard({
         <span
           className={cn(
             'text-lg font-semibold transition-colors',
-            isActive ? 'text-white' : 'text-cloud-dancer/90'
+            isActive ? 'text-white' : 'text-foreground/90'
           )}
         >
           {subtitle}

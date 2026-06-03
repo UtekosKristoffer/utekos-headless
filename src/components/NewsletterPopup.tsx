@@ -120,7 +120,7 @@ export function NewsletterPopup() {
       >
         <div className='grid grid-cols-1 md:grid-cols-2'>
           <div className='relative hidden md:flex h-full min-h-[400px] w-full flex-col justify-between bg-neutral-900 p-8'>
-            <div className='absolute inset-0 bg-gradient-to-br from-emerald-900/40 to-neutral-900/40 z-0' />
+            <div className='absolute inset-0 bg-linear-to-br from-emerald-900/40 to-neutral-900/40 z-0' />
 
             <div className='relative z-10'>
               <div className='inline-flex items-center justify-center rounded-full bg-emerald-500/10 p-3 mb-4'>

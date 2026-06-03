@@ -151,7 +151,7 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
             <AmbientBackgroundGlow />
 
             {/* Sceneteppet: hårtynn linje som åpner fra midten */}
-            <div className='launch-stage-line pointer-events-none absolute inset-x-6 top-0 z-[3] h-px bg-gradient-to-r from-transparent via-cloud-dancer/35 to-transparent' />
+            <div className='launch-stage-line pointer-events-none absolute inset-x-6 top-0 z-3 h-px bg-linear-to-r from-transparent via-cloud-dancer/35 to-transparent' />
 
             <div className='container relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-3 sm:gap-12 sm:px-6 lg:px-10 xl:grid-cols-[minmax(0,0.94fr)_minmax(0,1.06fr)] xl:gap-12'>
               <div
@@ -209,7 +209,7 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                 </div>
 
                 {/* Kicker — blekk som setter seg på papir */}
-                <p className='mb-4 text-lg font-bold leading-[1.08]   text-cloud-dancer sm:text-2xl md:text-3xl xl:text-3xl'>
+                <p className='mb-4 text-lg font-bold leading-[1.08] text-foreground sm:text-2xl md:text-3xl xl:text-3xl'>
                   <span className='sr-only'>{kickerText}</span>
 
                   <span aria-hidden='true' className='block overflow-hidden pb-1'>
@@ -224,7 +224,7 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                     ))}
                   </span>
                 </p>
-                <h2 className='mb-7 max-w-3xl pb-2 text-[1.7rem] font-bold leading-[0.94]   text-cloud-dancer min-[360px]:text-[1.8rem] sm:mb-8 sm:text-[2.5rem] md:text-5xl md:leading-[0.96] lg:text-6xl lg:leading-[0.94]'>
+                <h2 className='mb-7 max-w-3xl pb-2 text-[1.7rem] font-bold leading-[0.94] text-foreground min-[360px]:text-[1.8rem] sm:mb-8 sm:text-[2.5rem] md:text-5xl md:leading-[0.96] lg:text-6xl lg:leading-[0.94]'>
                   <span
                     className='launch-motion-item block whitespace-nowrap overflow-visible'
                     style={launchMotionStyle({
@@ -277,7 +277,7 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                   <div className='flex w-full flex-col gap-6 border-t border-cloud-dancer/12 pt-6'>
                     <div className='flex flex-col gap-3'>
                       <div className='flex flex-wrap items-baseline gap-3'>
-                        <p className='text-4xl font-bold leading-none tracking-[-0.01em] text-cloud-dancer sm:text-5xl lg:text-6xl'>
+                        <p className='text-4xl font-bold leading-none tracking-[-0.01em] text-foreground sm:text-5xl lg:text-6xl'>
                           {currentPrice},-
                         </p>
                         <span className='text-sm text-overcast'>inkl. mva</span>
@@ -316,6 +316,8 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                             href={productUrl}
                             onClick={onDiscoverClick}
                             data-track='NewProductLaunchDiscoverClick'
+                            aria-label={`Oppdag ${productModelName}`}
+                            className='font-utekos-text-medium'
                           >
                             Oppdag {productModelName}
                             <ArrowRight className='ml-2 size-5 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0' />

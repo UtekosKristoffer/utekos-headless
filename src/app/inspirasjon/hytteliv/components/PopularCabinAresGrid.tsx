@@ -22,7 +22,7 @@ export const popularAreasData: Destination[] = [
     bgColor: 'bg-dusted-peri',
     iconBgColor: 'bg-dusted-peri-light',
     iconColor: 'text-background',
-    textColor: 'text-cloud-dancer'
+    textColor: 'text-foreground'
   },
   {
     name: 'Hafjell og Geilo',
@@ -46,20 +46,11 @@ export const popularAreasData: Destination[] = [
 
 export function PopularCabinAreasGrid({ destinations }: { destinations: Destination[] }) {
   return (
-    <section className='bg-havdyp py-24 text-cloud-dancer'>
+    <section className='bg-havdyp py-24 text-foreground'>
       <div className='container mx-auto px-4'>
-        <div className='mx-auto mb-16 max-w-3xl lg:max-w-4xl text-center'>
-          <h2 className='text-cloud-dancer'>
-            <span className='block'>Populære hytteområder</span>
-            <span className='inline-flex items-baseline justify-center gap-x-[0.18em] whitespace-nowrap'>
-              <span>med</span>
-              <UtekosWordmark
-                className='h-[0.78em] w-auto shrink-0 translate-y-[0.06em]'
-                style={{ color: 'var(--cloud-dancer)' }}
-              />
-            </span>
-          </h2>
-          <p className='mt-4 utekos-section-lead text-cloud-dancer'>
+        <div className='mx-auto mb-16 max-w-3xl text-center'>
+          <h2 className='text-foreground'>Populære hytteområder med Utekos</h2>
+          <p className='mt-4 utekos-section-lead text-foreground'>
             Fra fjell til fjord får du mer tid ute, også når temperaturen faller.
           </p>
         </div>
@@ -97,11 +88,14 @@ export function PopularCabinAreasGrid({ destinations }: { destinations: Destinat
                     </h3>
                   </div>
                   <p
-                    className={cn('mb-2   text-sm italic leading-[1.45]   opacity-82', destination.textColor)}
+                    className={cn(
+                      'mb-2   text-sm italic leading-text-paragraph   opacity-82',
+                      destination.textColor
+                    )}
                   >
                     {destination.season}
                   </p>
-                  <p className={cn('  text-base leading-[1.45]  ', destination.textColor)}>
+                  <p className={cn('  text-base leading-text-paragraph  ', destination.textColor)}>
                     {destination.highlight}
                   </p>
                 </CardContent>

@@ -14,11 +14,11 @@ export function MagazineArticleHeroImage({ article }: MagazineArticleHeroImagePr
         width={article.heroImage.width}
         height={article.heroImage.height}
         sizes='(max-width: 1024px) calc(100vw - 32px), 44vw'
-        className='aspect-[4/3] h-auto w-full object-cover'
+        className='aspect-4/3h-auto w-full object-cover'
         priority
       />
       {article.heroImage.caption && (
-        <figcaption className='bg-background px-5 py-4   text-sm leading-[1.45]   text-cloud-dancer/72'>
+        <figcaption className='bg-background px-5 py-4   text-sm leading-text-paragraph   text-foreground/72'>
           {article.heroImage.caption}
         </figcaption>
       )}

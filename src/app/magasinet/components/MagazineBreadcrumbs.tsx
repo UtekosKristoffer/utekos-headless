@@ -20,18 +20,14 @@ export function MagazineBreadcrumbs({ article }: Props) {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href='/'>Hjem</Link>
-          </BreadcrumbLink>
+          <BreadcrumbLink render={<Link href='/' />}>Hjem</BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbSeparator />
 
         <BreadcrumbItem>
           {article ?
-            <BreadcrumbLink asChild>
-              <Link href='/magasinet'>Magasinet</Link>
-            </BreadcrumbLink>
+            <BreadcrumbLink render={<Link href='/magasinet' />}>Magasinet</BreadcrumbLink>
           : <BreadcrumbPage>Magasinet</BreadcrumbPage>}
         </BreadcrumbItem>
 

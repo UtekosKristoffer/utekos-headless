@@ -8,7 +8,7 @@ export function MagazineNewsletterSignup() {
       <div className='container mx-auto max-w-5xl px-4 py-16 text-center sm:py-24'>
         <h2 className='text-3xl font-bold   sm:text-4xl'>Likte du det du leste?</h2>
 
-        <p className='mx-auto mt-4 max-w-4xl   text-lg text-cloud-dancer'>
+        <p className='mx-auto mt-4 max-w-4xl   text-lg text-foreground'>
           Bli den første som får vite om nye artikler, tips og produktnyheter. Meld deg på Utekos Magasinet og
           få inspirasjonen rett i innboksen.
         </p>

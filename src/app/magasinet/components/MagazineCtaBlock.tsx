@@ -11,11 +11,11 @@ type MagazineCtaBlockProps = {
 
 export function MagazineCtaBlock({ block }: MagazineCtaBlockProps) {
   return (
-    <section className='my-16 rounded-lg border border-cloud-dancer/12 bg-background p-6 text-cloud-dancer shadow-[0_28px_90px_-62px_color-mix(in_oklch,var(--background)_90%,transparent)] sm:p-8'>
+    <section className='my-16 rounded-lg border border-cloud-dancer/12 bg-background p-6 text-foreground shadow-[0_28px_90px_-62px_color-mix(in_oklch,var(--background)_90%,transparent)] sm:p-8'>
       <h2 className='max-w-2xl text-balance font-google-sans text-3xl font-bold leading-[0.95]   sm:text-4xl'>
         <MagazineInlineTitle text={block.title} />
       </h2>
-      <p className='mt-4 max-w-2xl   text-lg leading-[1.55]   text-cloud-dancer/82'>{block.text}</p>
+      <p className='mt-4 max-w-2xl   text-lg leading-[1.55]   text-foreground/82'>{block.text}</p>
       <div className='mt-7 flex flex-wrap gap-3'>
         <BrandBadge
           asChild

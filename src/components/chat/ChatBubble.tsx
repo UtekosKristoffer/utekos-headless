@@ -7,7 +7,7 @@ export function ChatBubble({ side, children }: { side: 'left' | 'right'; childre
   return (
     <div className={cn('flex', justify)}>
       <div className='max-w-xs rounded-lg bg-havdyp p-3 sm:max-w-sm'>
-        <div className='text-base leading-snug text-cloud-dancer'>{children}</div>
+        <div className='text-base leading-snug text-foreground'>{children}</div>
       </div>
     </div>
   )

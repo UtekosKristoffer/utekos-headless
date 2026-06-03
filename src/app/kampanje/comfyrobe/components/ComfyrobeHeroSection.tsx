@@ -71,9 +71,9 @@ export function ComfyrobeHeroSection({ productImageSrc, backgroundImageSrc }: Co
             <span className='relative whitespace-nowrap inline-block mt-1'>
               <span
                 ref={headlineHighlightBgRef}
-                className='absolute inset-0 bg-gradient-to-r from-sky-900/60 to-cyan-900/60 -skew-x-6 rounded-sm -mx-2'
+                className='absolute inset-0 bg-linear-to-r from-sky-900/60 to-cyan-900/60 -skew-x-6 rounded-sm -mx-2'
               />
-              <span className='relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-sky-200 via-cyan-200 to-slate-300 drop-shadow-sm'>
+              <span className='relative z-10 text-transparent bg-clip-text bg-linear-to-r from-sky-200 via-cyan-200 to-slate-300 drop-shadow-sm'>
                 Erobre været.
               </span>
             </span>
@@ -91,7 +91,7 @@ export function ComfyrobeHeroSection({ productImageSrc, backgroundImageSrc }: Co
               onClick={handleScrollToShop}
               className='w-full sm:w-auto group relative px-8 py-4 bg-white text-[#0a0a0a] font-bold rounded-full text-lg overflow-hidden transition-transform active:scale-95 shadow-lg shadow-sky-900/30'
             >
-              <div className='absolute inset-0 bg-gradient-to-r from-sky-500 to-cyan-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out' />
+              <div className='absolute inset-0 bg-linear-to-r from-sky-500 to-cyan-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out' />
               <span className='relative z-10 flex items-center justify-center gap-2 group-hover:text-white transition-colors'>
                 Kjøp nå - 999,- <ArrowRight className='w-5 h-5' />
               </span>

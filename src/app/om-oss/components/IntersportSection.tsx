@@ -17,7 +17,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 export function IntersportSection() {
-  const sectionRef = useRef<HTMLElement>(null)
+  const articleRef = useRef<HTMLElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
   const logoCardRef = useRef<HTMLDivElement>(null)
 
@@ -66,7 +66,7 @@ export function IntersportSection() {
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: sectionRef.current,
+          trigger: articleRef.current,
           start: 'top 70%',
           end: 'bottom 20%',
           toggleActions: 'play none none none'
@@ -108,12 +108,12 @@ export function IntersportSection() {
         '-=0.8'
       )
     },
-    { scope: sectionRef }
+    { scope: articleRef }
   )
 
   return (
-    <section
-      ref={sectionRef}
+    <article
+      ref={articleRef}
       className='relative isolate w-full overflow-hidden bg-background px-4 py-24 sm:py-32'
     >
       <div className='pointer-events-none absolute inset-0 -z-10'>
@@ -126,7 +126,7 @@ export function IntersportSection() {
           ref={cardRef}
           className='relative overflow-hidden rounded-[1.75rem] border border-cloud-dancer/10 bg-[color-mix(in_oklab,var(--cloud-dancer)_8%,transparent)] p-8 shadow-2xl shadow-black/35 backdrop-blur-sm md:p-12'
         >
-          <div className='absolute inset-0 -z-10 bg-[radial-gradient(circle_at_1px_1px,color-mix(in_oklab,var(--cloud-dancer)_14%,transparent)_1px,transparent_0)] bg-[size:24px_24px] opacity-30' />
+          <div className='absolute inset-0 -z-10 bg-[radial-gradient(circle_at_1px_1px,color-mix(in_oklab,var(--cloud-dancer)_14%,transparent)_1px,transparent_0)] bg-size-[24px_24px] opacity-30' />
 
           <div className='grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20'>
             <div
@@ -136,14 +136,14 @@ export function IntersportSection() {
             >
               <div
                 ref={logoCardRef}
-                className='relative flex h-64 w-full max-w-md items-center justify-center rounded-[1.5rem] border border-cloud-dancer/70 bg-cloud-dancer shadow-2xl shadow-black/20 transition-transform duration-100 ease-out will-change-transform'
+                className='relative flex h-64 w-full max-w-md items-center justify-center rounded-3xl border border-cloud-dancer/70 bg-cloud-dancer shadow-2xl shadow-black/20 transition-transform duration-100 ease-out will-change-transform'
                 style={{
                   transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
                   transformStyle: 'preserve-3d'
                 }}
               >
                 <div
-                  className='pointer-events-none absolute inset-0 z-10 rounded-[1.5rem] mix-blend-soft-light'
+                  className='pointer-events-none absolute inset-0 z-10 rounded-3xl mix-blend-soft-light'
                   style={{
                     background: `radial-gradient(circle at ${glarePosition.x}% ${glarePosition.y}%, color-mix(in oklch, var(--cloud-dancer) 80%, transparent) 0%, transparent 100%)`,
                     opacity: 0.4
@@ -182,7 +182,7 @@ export function IntersportSection() {
                 <span className='  text-base font-medium   text-background'>Fysisk butikk i Bergen</span>
               </BrandBadge>
 
-              <h2 className='gsap-content mb-6 flex flex-col text-balance text-3xl leading-[0.95] font-bold tracking-[-0.01em] text-cloud-dancer md:text-5xl'>
+              <h2 className='gsap-content mb-6 flex flex-col text-balance text-3xl leading-[0.95] font-bold tracking-[-0.01em] text-foreground md:text-5xl'>
                 <span className='inline-flex flex-wrap items-baseline gap-x-[0.18em]'>
                   <span>Opplev</span>
                   <UtekosWordmark className='h-[0.78em] w-auto translate-y-[0.06em]' />
@@ -191,7 +191,7 @@ export function IntersportSection() {
                 <span className='text-overcast'>Intersport Laksevåg</span>
               </h2>
 
-              <p className='gsap-content mb-10 max-w-lg text-lg leading-[1.45]     text-cloud-dancer'>
+              <p className='gsap-content mb-10 max-w-lg text-lg text-foreground'>
                 Lyst til å kjenne på kvaliteten og finne den perfekte passformen? Som eneste fysiske
                 forhandler i Bergen finner du et utvalg av våre produkter hos våre venner på Laksevåg Senter.
               </p>
@@ -216,6 +216,6 @@ export function IntersportSection() {
           </div>
         </div>
       </div>
-    </section>
+    </article>
   )
 }

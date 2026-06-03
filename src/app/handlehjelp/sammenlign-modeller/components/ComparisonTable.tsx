@@ -10,7 +10,7 @@ export function ComparisonTable() {
           Sammenligning av Utekos Dun, Utekos Mikrofiber og Utekos TechDown
         </caption>
         <thead>
-          <tr className='bg-mountain-view text-cloud-dancer'>
+          <tr className='bg-mountain-view text-foreground'>
             <th scope='col' className='w-[20%] p-5 font-google-sans text-base font-bold tracking-[-0.01em]'>
               Egenskap
             </th>

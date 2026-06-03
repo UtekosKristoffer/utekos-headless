@@ -38,7 +38,7 @@ export const nodes = [
       icon: 'moon' as IconName,
       text: 'Forlenget kveldene',
       color: 'var(--ancient-water)',
-      iconColor: 'text-cloud-dancer'
+      iconColor: 'text-foreground'
     }
   },
   {
@@ -51,7 +51,7 @@ export const nodes = [
       icon: 'feather' as IconName,
       text: 'Overraskende lett',
       color: 'var(--overcast)',
-      iconColor: 'text-cloud-dancer'
+      iconColor: 'text-foreground'
     }
   },
   {
@@ -64,7 +64,7 @@ export const nodes = [
       icon: 'heart' as IconName,
       text: 'Gjennomført kvalitet',
       color: 'var(--bleached-mauve)',
-      iconColor: 'text-cloud-dancer'
+      iconColor: 'text-foreground'
     }
   },
   {
@@ -80,7 +80,7 @@ export const nodes = [
       icon: 'check' as IconName,
       text: 'Verdt hver krone',
       color: 'var(--dusted-peri)',
-      iconColor: 'text-cloud-dancer'
+      iconColor: 'text-foreground'
     }
   }
 ]

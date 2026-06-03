@@ -24,7 +24,7 @@ export function NbccHowToUseSection() {
             </p>
             <Button
               asChild
-              className='mt-8 h-12 rounded-md bg-background px-6 text-cloud-dancer hover:bg-overcast'
+              className='mt-8 h-12 rounded-md bg-background px-6 text-foreground hover:bg-overcast'
             >
               <Link
                 href='/produkter'

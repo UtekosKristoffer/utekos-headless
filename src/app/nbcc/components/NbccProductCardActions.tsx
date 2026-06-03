@@ -53,7 +53,7 @@ export function NbccProductCardActions({
     <div className='flex flex-col gap-4'>
       {/* Size selector */}
       <div>
-        <p className='mb-2 text-xs font-medium uppercase tracking-widest text-cloud-dancer'>Størrelse</p>
+        <p className='mb-2 text-xs font-medium uppercase tracking-widest text-foreground'>Størrelse</p>
         <div className='flex flex-wrap gap-2'>
           {variants.map(v => (
             <button
@@ -65,8 +65,8 @@ export function NbccProductCardActions({
                 'rounded-md border px-3 py-1.5 text-sm font-medium transition-all',
                 v.label === selectedLabel ? 'border-primary bg-cloud-dancer text-background'
                 : !v.availableForSale ?
-                  'cursor-not-allowed border-cloud-dancer/10 text-cloud-dancer/25 line-through'
-                : 'border-cloud-dancer/20 text-cloud-dancer/70 hover:border-cloud-dancer/40 hover:text-cloud-dancer'
+                  'cursor-not-allowed border-cloud-dancer/10 text-foreground/25 line-through'
+                : 'border-cloud-dancer/20 text-foreground/70 hover:border-cloud-dancer/40 hover:text-foreground'
               ].join(' ')}
             >
               {v.label}
@@ -77,7 +77,7 @@ export function NbccProductCardActions({
 
       {/* Price */}
       <div className='flex items-center justify-between'>
-        <span className='text-xl font-semibold text-cloud-dancer'>{price}</span>
+        <span className='text-xl font-semibold text-foreground'>{price}</span>
         <span className='rounded-full border   border-primary/30 bg-cloud-dancer px-2 py-0.5 text-xs text-background'>
           NBCC-rabatt i kassen
         </span>

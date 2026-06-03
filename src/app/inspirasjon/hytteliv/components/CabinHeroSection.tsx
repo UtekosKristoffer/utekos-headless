@@ -1,8 +1,6 @@
 import { Mountain } from 'lucide-react'
-import { InspirationHeroActions } from '../../layout/InspirationHeroActions'
 import { InspirationHeroBreadcrumb } from '../../layout/InspirationHeroBreadcrumb'
 import { InspirationHero } from '../../layout/hero/InspirationHero'
-import { HeroHighlight } from '../../layout/hero/HeroHighlight'
 import { cabinHeroFeatures } from '../utils/cabinHeroFeatures'
 
 const CabinHeroBackground = (
@@ -28,7 +26,7 @@ const CabinHeroBackground = (
     </div>
 
     <div
-      className='absolute inset-0 bg-gradient-to-b from-background/10 via-transparent to-havdyp/20'
+      className='absolute inset-0 bg-linear-to-b from-background/10 via-transparent to-havdyp/20'
       aria-hidden='true'
     />
   </>
@@ -38,23 +36,20 @@ export function CabinHeroSection() {
   return (
     <InspirationHero
       labelledById='hytteliv-hero-title'
-      surfaceClassName='bg-havdyp'
+      minHeight='content'
+      surfaceClassName='bg-background'
+      containerClassName='pt-16 pb-14 sm:pt-20 sm:pb-16'
       background={CabinHeroBackground}
       breadcrumb={
         <InspirationHeroBreadcrumb
           label='Hytteliv'
-          color='var(--ancient-water)'
-          textColor='var(--background)'
+          color='var(--header-secondary)'
+          textColor='var(--foreground)'
           icon={Mountain}
         />
       }
-      title={
-        <>
-          Hyttekos, <HeroHighlight color='var(--ancient-water)'>perfeksjonert</HeroHighlight>
-        </>
-      }
+      title={<>Hyttelivet med Utekos</>}
       lead='Fra morgenkaffen på terrassen til kveldene under stjernene. Gjør hytten til et varmt fristed, uansett årstid.'
-      actions={<InspirationHeroActions primaryLabel='Finn din Utekos' secondaryLabel='Se bruksområdene' />}
       features={cabinHeroFeatures}
       featuresHeading='Høydepunkter for hytteliv med Utekos'
       featuresHeadingId='hytteliv-hero-highlights-title'

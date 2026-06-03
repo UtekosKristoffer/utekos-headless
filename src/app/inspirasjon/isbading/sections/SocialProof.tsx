@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
+import { CAROUSEL_SSR } from '@/components/ui/carousel-ssr'
 
 const galleryImages = [
   {
@@ -55,6 +56,8 @@ export function SocialProof() {
         </div>
 
         <Carousel
+          slideCount={galleryImages.length}
+          ssr={CAROUSEL_SSR.responsiveThirds(galleryImages.length)}
           opts={{
             loop: true,
             align: 'start'

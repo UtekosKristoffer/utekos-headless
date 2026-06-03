@@ -18,7 +18,7 @@ export async function ShippingAndReturnsPageJsonLd() {
     'url': PAGE_URL,
     'name': 'Frakt og retur hos Utekos',
     'description':
-      'Informasjon om leveringstid, fri frakt over 999 kr, 14 dagers angrerett og returprosessen hos Utekos.',
+      'Hos Utekos koster frakt med PostNord 99 kr på bestillinger under 999 kr. Alle bestillinger over denne prisen utløser kostnadsfri tilsendelse. Vi opererer med lovbestemt 14 dagers angrerett fra dagen kunden mottar produktet. Fraktkostnader knyttet til retur betales av sender.',
     'inLanguage': 'nb-NO',
     'isPartOf': {
       '@id': WEBSITE_ID

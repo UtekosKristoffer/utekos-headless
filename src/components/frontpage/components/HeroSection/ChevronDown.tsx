@@ -165,15 +165,15 @@ export function ChevronDownSection() {
       <div className='relative flex items-center gap-3'>
         <span
           ref={textRef}
-          className='block text-sm font-medium leading-none tracking-[-0.01em] text-cloud-dancer transition-colors'
+          className='block text-sm font-medium leading-none tracking-[-0.01em] text-foreground transition-colors'
         >
           Les mer
         </span>
 
-        <ArrowRight ref={arrowRef} className='size-4 text-cloud-dancer' />
+        <ArrowRight ref={arrowRef} className='size-4 text-foreground' />
       </div>
 
-      <span className='hover-line absolute bottom-3 left-0 h-px w-full origin-center scale-x-0 bg-gradient-to-r from-transparent via-cloud-dancer to-transparent' />
+      <span className='hover-line absolute bottom-3 left-0 h-px w-full origin-center scale-x-0 bg-linear-to-r from-transparent via-cloud-dancer to-transparent' />
     </Link>
   )
 }

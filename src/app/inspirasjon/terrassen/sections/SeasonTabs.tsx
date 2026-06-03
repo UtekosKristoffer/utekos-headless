@@ -77,7 +77,7 @@ export function SeasonsTabs() {
             <TabsTrigger
               key={season.value}
               value={season.value}
-              className='seasons-tab-trigger relative h-auto min-h-14 overflow-hidden rounded-full border border-cloud-dancer/14 bg-background/72 px-5 py-4 text-sm font-semibold leading-[1.35]     text-cloud-dancer transition-[background-color,border-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:bg-background data-[state=active]:border-transparent data-[state=active]:text-background data-[state=active]:shadow-[0_18px_42px_-30px_color-mix(in_oklch,var(--background)_88%,transparent)] focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-havdyp motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+              className='seasons-tab-trigger relative h-auto min-h-14 overflow-hidden rounded-full border border-cloud-dancer/14 bg-background/72 px-5 py-4 text-sm font-semibold leading-[1.35]     text-foreground transition-[background-color,border-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:bg-background data-[state=active]:border-transparent data-[state=active]:text-background data-[state=active]:shadow-[0_18px_42px_-30px_color-mix(in_oklch,var(--background)_88%,transparent)] focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-havdyp motion-reduce:transition-none motion-reduce:hover:translate-y-0'
               style={{
                 backgroundColor: isActive ? season.activeBackground : undefined,
                 color: isActive ? season.activeText : undefined
@@ -130,12 +130,14 @@ export function SeasonsTabs() {
                     >
                       <Icon className={`size-6 ${season.iconColor}`} aria-hidden='true' />
                     </div>
-                    <h3 className='text-2xl font-semibold leading-[1.1]     text-cloud-dancer'>
+                    <h3 className='text-2xl font-semibold leading-[1.1]     text-foreground'>
                       {season.title}
                     </h3>
                   </div>
 
-                  <p className='text-lg leading-[1.45]     text-cloud-dancer/88'>{season.description}</p>
+                  <p className='text-lg leading-text-paragraph     text-foreground/88'>
+                    {season.description}
+                  </p>
                 </CardContent>
               </Card>
             </div>

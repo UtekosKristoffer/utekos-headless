@@ -94,7 +94,7 @@ export function ComfyrobeQuickBuy({ product }: Props) {
 
                 return (
                   <CarouselItem key={img.id}>
-                    <div className='relative aspect-[4/5] w-full overflow-hidden rounded-xl border border-cloud-dancer/12 bg-background'>
+                    <div className='relative aspect-4/5 w-full overflow-hidden rounded-xl border border-cloud-dancer/12 bg-background'>
                       <Image
                         src={imageUrl}
                         alt={altText}
@@ -109,40 +109,44 @@ export function ComfyrobeQuickBuy({ product }: Props) {
             )}
           </CarouselContent>
           <div className='block'>
-            <CarouselPrevious className='left-4 border border-cloud-dancer/12 bg-background/70 text-cloud-dancer backdrop-blur-md hover:bg-havdyp' />
-            <CarouselNext className='right-4 border border-cloud-dancer/12 bg-background/70 text-cloud-dancer backdrop-blur-md hover:bg-havdyp' />
+            <CarouselPrevious className='left-4 border border-cloud-dancer/12 bg-background/70 text-foreground backdrop-blur-md hover:bg-havdyp' />
+            <CarouselNext className='right-4 border border-cloud-dancer/12 bg-background/70 text-foreground backdrop-blur-md hover:bg-havdyp' />
           </div>
         </Carousel>
       </div>
 
       <div className='flex flex-col gap-6 text-left'>
         <div>
-          <h2 className='mb-2 text-3xl font-bold leading-[0.95] tracking-normal text-cloud-dancer md:text-4xl'>
+          <h2 className='mb-2 text-3xl font-bold leading-[0.95] tracking-normal text-foreground md:text-4xl'>
             {product.title}
           </h2>
           <div className='flex items-center gap-4'>
-            <span className='text-2xl font-semibold leading-[1.15] tracking-normal text-cloud-dancer'>
+            <span className='text-2xl font-semibold leading-[1.15] tracking-normal text-foreground'>
               {price},-
             </span>
             <BrandBadge
               label='På lager'
               backgroundColor='var(--ancient-water)'
               textColor='var(--background)'
-              className='border border-cloud-dancer/14 px-3 py-1.5 text-xs leading-[1.4] font-semibold tracking-normal'
+              className='border border-cloud-dancer/14 px-3 py-1.5 text-xs leading-4 font-semibold tracking-normal'
             />
           </div>
         </div>
 
         <div className='flex gap-4'>
           <div className='flex-1 space-y-2'>
-            <label className='text-sm font-medium leading-[1.45] tracking-normal text-overcast'>Farge</label>
-            <div className='flex h-10 cursor-default items-center justify-center rounded-md border border-havdyp/35 bg-ancient-water text-sm font-medium leading-[1.4] tracking-normal text-background ring-1 ring-havdyp/20'>
+            <label className='text-sm font-medium leading-text-paragraph tracking-normal text-overcast'>
+              Farge
+            </label>
+            <div className='flex h-10 cursor-default items-center justify-center rounded-md border border-havdyp/35 bg-ancient-water text-sm font-medium leading-4 tracking-normal text-background ring-1 ring-havdyp/20'>
               Fjellnatt
             </div>
           </div>
           <div className='flex-1 space-y-2'>
-            <label className='text-sm font-medium leading-[1.45] tracking-normal text-overcast'>Modell</label>
-            <div className='flex h-10 cursor-default items-center justify-center rounded-md border border-havdyp/35 bg-ancient-water text-sm font-medium leading-[1.4] tracking-normal text-background ring-1 ring-havdyp/20'>
+            <label className='text-sm font-medium leading-text-paragraph tracking-normal text-overcast'>
+              Modell
+            </label>
+            <div className='flex h-10 cursor-default items-center justify-center rounded-md border border-havdyp/35 bg-ancient-water text-sm font-medium leading-4 tracking-normal text-background ring-1 ring-havdyp/20'>
               Unisex
             </div>
           </div>
@@ -151,12 +155,12 @@ export function ComfyrobeQuickBuy({ product }: Props) {
         {/* Størrelsevelger */}
         <div className='space-y-3'>
           <div className='flex items-center justify-between'>
-            <label className='text-sm font-medium leading-[1.45] tracking-normal text-overcast'>
+            <label className='text-sm font-medium leading-text-paragraph tracking-normal text-overcast'>
               Velg størrelse
             </label>
             <Link
               href='/handlehjelp/storrelsesguide'
-              className='text-xs leading-[1.45] tracking-normal text-overcast underline decoration-overcast/45 underline-offset-4 hover:text-cloud-dancer'
+              className='text-xs leading-text-paragraph tracking-normal text-overcast underline decoration-overcast/45 underline-offset-4 hover:text-foreground'
             >
               Størrelsesguide
             </Link>
@@ -173,17 +177,17 @@ export function ComfyrobeQuickBuy({ product }: Props) {
                   onClick={() => isAvailable && setSelectedVariantId(variant.id)}
                   disabled={!isAvailable}
                   className={cn(
-                    'relative flex h-12 items-center justify-center rounded-md border text-sm font-medium leading-[1.4] tracking-normal transition-all',
+                    'relative flex h-12 items-center justify-center rounded-md border text-sm font-medium leading-4 tracking-normal transition-all',
                     isSelected ?
                       'border-primary/60 bg-primary text-background ring-1 ring-primary/35'
-                    : 'border-cloud-dancer/14 bg-background/58 text-overcast hover:border-cloud-dancer/28 hover:text-cloud-dancer',
+                    : 'border-cloud-dancer/14 bg-background/58 text-overcast hover:border-cloud-dancer/28 hover:text-foreground',
                     !isAvailable
-                      && 'cursor-not-allowed border-cloud-dancer/10 bg-background/45 text-overcast/55 line-through opacity-60 decoration-slice'
+                      && 'cursor-not-allowed border-cloud-dancer/10 bg-background/45 text-overcast/55 line-through opacity-60 box-decoration-slice'
                   )}
                 >
                   {displayName}
                   {!isAvailable && (
-                    <span className='absolute -right-2 -top-2 rounded-full border border-chocolate-plum/35 bg-[var(--soft-warm)] px-1.5 py-0.5 text-[10px] leading-[1.2] text-chocolate-plum'>
+                    <span className='absolute -right-2 -top-2 rounded-full border border-chocolate-plum/35 bg-(--soft-warm) px-1.5 py-0.5 text-[10px] leading-[1.2] text-chocolate-plum'>
                       Tomt
                     </span>
                   )}
@@ -215,34 +219,27 @@ export function ComfyrobeQuickBuy({ product }: Props) {
               <VippsLogo className='h-5 w-auto text-primary' />
             </div>
             <div className='flex items-center gap-2'>
-              <KlarnaLogo className='h-6 w-auto text-[var(--soft-warm)]' />
-            </div>
-            <div className='flex items-center gap-1.5 text-xs leading-[1.45] tracking-normal text-overcast grayscale'>
-              <Check className='h-3.5 w-3.5' />
-              Rask levering
+              <KlarnaLogo className='h-6 w-auto text-(--bleached-mauve)' />
             </div>
           </div>
         </div>
-
-        <Accordion type='single' collapsible className='mt-4 w-full border-t border-cloud-dancer/12'>
+        <Accordion className='mt-4 w-full border-t border-cloud-dancer/12'>
           <AccordionItem value='materials' className='border-cloud-dancer/12'>
             <AccordionTrigger>Materialer og kvalitet</AccordionTrigger>
-            <AccordionContent className='space-y-4 text-overcast'>
+            <AccordionContent className='space-y-4 text-foreground'>
               <div>
-                <strong className='mb-1 block text-sm text-cloud-dancer'>
+                <strong className='mb-1 block text-sm text-foreground'>
                   Fôrstoff: SherpaCore™ Thermal Lining
                 </strong>
-                <ul className='list-inside list-disc pl-1 text-sm leading-[1.45] tracking-normal'>
+                <ul className='list-inside list-disc pl-1 text-sm leading-text-paragraph tracking-normal'>
                   <li>Mykt og luftig 100% polyester (250 GSM)</li>
                   <li>Antipeeling behandlet</li>
                   <li>Slitesterk hamp i kragen</li>
                 </ul>
               </div>
               <div>
-                <strong className='mb-1 block text-sm text-cloud-dancer'>
-                  Ytterstoff: HydroGuard™ Shell
-                </strong>
-                <ul className='list-inside list-disc pl-1 text-sm leading-[1.45] tracking-normal'>
+                <strong className='mb-1 block text-sm text-foreground'>Ytterstoff: HydroGuard™ Shell</strong>
+                <ul className='list-inside list-disc pl-1 text-sm leading-text-paragraph tracking-normal'>
                   <li>100% Polyester med pustende PU-belegg</li>
                   <li>8000mm vannsøyle (Vanntett)</li>
                   <li>Vindtett og robust (130 GSM)</li>
@@ -254,7 +251,7 @@ export function ComfyrobeQuickBuy({ product }: Props) {
           <AccordionItem value='features' className='border-cloud-dancer/12'>
             <AccordionTrigger>Funksjoner</AccordionTrigger>
             <AccordionContent className='text-overcast'>
-              <ul className='space-y-2 text-sm leading-[1.45] tracking-normal'>
+              <ul className='space-y-2 text-sm leading-text-paragraph tracking-normal'>
                 <li>
                   🌊 <strong>Vanntett og vindtett:</strong> Tapede sømmer og 8000mm vannsøyle holder deg tørr
                   og varm.
@@ -277,7 +274,7 @@ export function ComfyrobeQuickBuy({ product }: Props) {
 
           <AccordionItem value='fit' className='border-cloud-dancer/12'>
             <AccordionTrigger>Passform</AccordionTrigger>
-            <AccordionContent className='text-sm leading-[1.45] tracking-normal text-overcast'>
+            <AccordionContent className='text-sm leading-text-paragraph tracking-normal text-overcast'>
               <p className='mb-2'>
                 Comfyrobe™ har en <strong>oversized unisex-passform</strong>. Den er designet romslig og med
                 praktiske løsninger for å enkelt kle på eller av seg.
@@ -287,7 +284,7 @@ export function ComfyrobeQuickBuy({ product }: Props) {
 
           <AccordionItem value='care' className='border-cloud-dancer/12'>
             <AccordionTrigger>Vask og vedlikehold</AccordionTrigger>
-            <AccordionContent className='text-sm leading-[1.45] tracking-normal text-overcast'>
+            <AccordionContent className='text-sm leading-text-paragraph tracking-normal text-overcast'>
               <ul className='list-inside list-disc space-y-1'>
                 <li>Maskinvask 40°C (skånsomt)</li>
                 <li>Bruk mildt vaskemiddel, unngå tøymykner</li>

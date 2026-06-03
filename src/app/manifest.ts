@@ -9,11 +9,11 @@ export default function manifest(): MetadataRoute.Manifest {
       'Forleng kveldene på hytten, i bobilen eller på terrassen. Utekos lager komfortplagg av høy kvalitet.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#ffffff',
+    background_color: '#0b051d',
     theme_color: '#ffffff',
     icons: [
       {
-        src: '/android-chrome-192x192.png',
+        src: '/icon.png',
         sizes: '192x192',
         type: 'image/png'
       },

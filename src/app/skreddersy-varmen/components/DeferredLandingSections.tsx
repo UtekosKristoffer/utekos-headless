@@ -5,7 +5,7 @@
 import dynamic from 'next/dynamic'
 
 function ThreeInOneFallback() {
-  return <div aria-hidden className='min-h-[900px] w-full bg-mountain-view text-cloud-dancer' />
+  return <div aria-hidden className='min-h-[900px] w-full bg-mountain-view text-foreground' />
 }
 
 function TechDownFallback() {

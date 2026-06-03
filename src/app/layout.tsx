@@ -1,6 +1,7 @@
 import '../globals.css'
-import { utekosText, utekosTextMedium, geist } from '@/app/fonts/font.config'
-import { Suspense, type ReactNode } from 'react'
+import '@fontsource-variable/google-sans/full.css'
+import { utekosText, utekosTextMedium, utekosTitle } from '@/app/fonts/font.config'
+import { Suspense } from 'react'
 import { WebVitalsReporter } from '@/components/analytics/WebVitalsReporter'
 import { mainMenu } from '@/db/config/menu.config'
 import { Analytics } from '@vercel/analytics/react'
@@ -15,13 +16,6 @@ import { MicrosoftUetTag } from '@/components/analytics/MicrosoftUetTag'
 import { GoogleTagManagerLoader } from '@/components/analytics/GoogleTagManagerLoader'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
-import { Google_Sans as GoogleSans } from 'next/font/google'
-
-const googleSans = GoogleSans({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-google-sans'
-})
 
 const GOOGLE_TAG_MANAGER_ID = process.env.NEXT_GOOGLE_GTM_ID || 'GTM-5TWMJQFP'
 
@@ -112,10 +106,10 @@ export const metadata: Metadata = {
   }
 }
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='no' className={`${googleSans.className} ${utekosText.variable} ${utekosTextMedium.variable}`}>
-      <body className='bg-background text-foreground antialiased'>
+    <html lang='no' className={`${utekosText.variable} ${utekosTextMedium.variable} ${utekosTitle.variable}`}>
+      <body className='bg-background text-foreground antialiased scroll-smooth'>
         <WebVitalsReporter />
 
         {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (

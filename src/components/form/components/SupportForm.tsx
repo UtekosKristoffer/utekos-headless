@@ -86,7 +86,7 @@ export function SupportForm() {
           name='email'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='font-medium leading-[1.45] tracking-normal text-cloud-dancer'>
+              <FormLabel className='font-medium leading-text-paragraph tracking-normal text-foreground'>
                 E-post
               </FormLabel>
               <FormControl>
@@ -107,7 +107,7 @@ export function SupportForm() {
             name='name'
             render={({ field }) => (
               <FormItem>
-                <FormLabel className='font-medium leading-[1.45] tracking-normal text-cloud-dancer'>
+                <FormLabel className='font-medium leading-text-paragraph tracking-normal text-foreground'>
                   Fullt navn
                 </FormLabel>
                 <FormControl>
@@ -127,7 +127,7 @@ export function SupportForm() {
             name='phone'
             render={({ field }) => (
               <FormItem>
-                <FormLabel className='font-medium leading-[1.45] tracking-normal text-cloud-dancer'>
+                <FormLabel className='font-medium leading-text-paragraph tracking-normal text-foreground'>
                   Telefon (valgfritt)
                 </FormLabel>
                 <FormControl>
@@ -149,14 +149,14 @@ export function SupportForm() {
           name='country'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='font-medium leading-[1.45] tracking-normal text-cloud-dancer'>
+              <FormLabel className='font-medium leading-text-paragraph tracking-normal text-foreground'>
                 Land
               </FormLabel>
               <Select value={field.value ?? ''} onValueChange={field.onChange}>
                 <FormControl>
                   <div>
                     <input type='hidden' name={field.name} value={field.value ?? ''} />
-                    <SelectTrigger className='h-12 w-full rounded-none border-cloud-dancer/20 bg-ancient-water text-background tracking-normal focus-visible:border-primary focus-visible:ring-primary/35 data-[placeholder]:text-havdyp [&_svg:not([class*=text-])]:text-havdyp'>
+                    <SelectTrigger className='h-12 w-full rounded-none border-cloud-dancer/20 bg-ancient-water text-background tracking-normal focus-visible:border-primary focus-visible:ring-primary/35 data-placeholder:text-havdyp [&_svg:not([class*=text-])]:text-havdyp'>
                       <SelectValue placeholder='Velg ditt land' />
                     </SelectTrigger>
                   </div>
@@ -182,7 +182,7 @@ export function SupportForm() {
           name='orderNumber'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='font-medium leading-[1.45] tracking-normal text-cloud-dancer'>
+              <FormLabel className='font-medium leading-text-paragraph tracking-normal text-foreground'>
                 Ordrenummer (valgfritt)
               </FormLabel>
               <FormControl>
@@ -201,7 +201,7 @@ export function SupportForm() {
 
             return (
               <FormItem>
-                <FormLabel className='font-medium leading-[1.45] tracking-normal text-cloud-dancer'>
+                <FormLabel className='font-medium leading-text-paragraph tracking-normal text-foreground'>
                   Hvordan kan vi hjelpe?
                 </FormLabel>
                 <FormControl>
@@ -217,7 +217,7 @@ export function SupportForm() {
                     className='min-h-[160px] rounded-none border-cloud-dancer/20 bg-ancient-water text-background tracking-normal placeholder:text-havdyp focus-visible:border-primary focus-visible:ring-primary/35'
                   />
                 </FormControl>
-                <div className='mt-1 flex items-center justify-between text-xs leading-[1.45] tracking-normal text-overcast'>
+                <div className='mt-1 flex items-center justify-between text-xs leading-text-paragraph tracking-normal text-overcast'>
                   <span className={showMessageMinimumError ? 'text-destructive' : undefined}>
                     {showMessageMinimumError ?
                       `Må være minst ${messageMin} tegn.`
@@ -238,16 +238,16 @@ export function SupportForm() {
           control={form.control}
           name='privacy'
           render={({ field }) => (
-            <FormItem className='relative flex flex-row items-center justify-between rounded-none border border-cloud-dancer/15 bg-cloud-dancer/[0.03] p-4'>
+            <FormItem className='relative flex flex-row items-center justify-between rounded-none border border-cloud-dancer/15 bg-cloud-dancer/3 p-4'>
               <div className='flex-1 space-y-0.5 pr-4'>
-                <FormLabel className='text-base leading-[1.45] tracking-normal text-cloud-dancer'>
+                <FormLabel className='text-base leading-text-paragraph tracking-normal text-foreground'>
                   Personvern
                 </FormLabel>
-                <FormDescription className='leading-[1.45] tracking-normal text-overcast'>
+                <FormDescription className='leading-text-paragraph tracking-normal text-overcast'>
                   Jeg godtar at Utekos behandler mine data, som beskrevet i{' '}
                   <Link
                     href='/personvern'
-                    className='text-cloud-dancer underline underline-offset-4 hover:text-ancient-water'
+                    className='text-foreground underline underline-offset-4 hover:text-ancient-water'
                   >
                     Personvernerklæringen
                   </Link>
@@ -264,7 +264,7 @@ export function SupportForm() {
                   />
                 </div>
               </FormControl>
-              <FormMessage className='absolute bottom-[-1.25rem] left-0' />
+              <FormMessage className='absolute -bottom-5 left-0' />
             </FormItem>
           )}
         />

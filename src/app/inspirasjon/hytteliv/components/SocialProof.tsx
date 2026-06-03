@@ -8,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
+import { CAROUSEL_SSR } from '@/components/ui/carousel-ssr'
 
 const galleryImages = [
   {
@@ -57,6 +58,8 @@ export function SocialProof() {
         </div>
 
         <Carousel
+          slideCount={galleryImages.length}
+          ssr={CAROUSEL_SSR.responsiveThirds(galleryImages.length)}
           opts={{
             loop: true,
             align: 'start'
@@ -81,7 +84,7 @@ export function SocialProof() {
                     />
                   </AspectRatio>
                   <div className='pt-4 text-left'>
-                    <h3 className='font-semibold font-google-sans leading-[1.45]  '>{image.title}</h3>
+                    <h3 className='font-semibold font-google-sans leading-text-paragraph  '>{image.title}</h3>
                     <p className='text-sm leading-[1.15]     text-background'>{image.description}</p>
                   </div>
                 </div>

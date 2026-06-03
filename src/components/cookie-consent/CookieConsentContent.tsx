@@ -5,12 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useConsent } from './useConsent'
 import { Button } from '@/components/ui/button'
-import {
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle
-} from '@/components/ui/dialog'
+import { DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -33,11 +28,7 @@ function ConsentRadioGroup({
   }
 
   return (
-    <RadioGroup
-      value={stringValue}
-      onValueChange={handleValueChange}
-      className='flex flex-col space-y-2'
-    >
+    <RadioGroup value={stringValue} onValueChange={handleValueChange} className='flex flex-col space-y-2'>
       <div className='flex items-center space-x-2'>
         {/* FIX: Legger til className for å tvinge synlige farger */}
         <RadioGroupItem
@@ -59,18 +50,8 @@ function ConsentRadioGroup({
     </RadioGroup>
   )
 }
-export function CookieConsentContent({
-  setOpen
-}: {
-  setOpen: (open: boolean) => void
-}) {
-  const {
-    consent,
-    updateConsent,
-    acceptAll,
-    rejectNonEssential,
-    savePreferences
-  } = useConsent()
+export function CookieConsentContent({ setOpen }: { setOpen: (open: boolean) => void }) {
+  const { consent, updateConsent, acceptAll, rejectNonEssential, savePreferences } = useConsent()
 
   const [showFullView, setShowFullView] = useState(false)
   const [isDesktop, setIsDesktop] = useState(false)
@@ -87,10 +68,7 @@ export function CookieConsentContent({
   }, [])
 
   const hasChangedSettings =
-    consent.analytics
-    || consent.functional
-    || consent.marketing
-    || consent.profile_marketing
+    consent.analytics || consent.functional || consent.marketing || consent.profile_marketing
 
   const handleAcceptAll = () => {
     acceptAll()
@@ -121,19 +99,15 @@ export function CookieConsentContent({
               alt='Utekos logo'
               width={52}
               height={52}
-              className='rounded-full mb-4 !border !border-white/80'
+              className='rounded-full mb-4 border! border-white/80!'
             />
-            <DialogTitle className='text-left self-start flex ml-0'>
-              Vi forbedrer opplevelsen din
-            </DialogTitle>
+            <DialogTitle className='text-left self-start flex ml-0'>Vi forbedrer opplevelsen din</DialogTitle>
             <DialogDescription>
               <span className='text-sm mt-4 text-foreground-on-dark/60 transition-colors hover:text-foreground-on-dark leading-relaxed block'>
-                Vi bruker informasjonskapsler og andre former for teknologi for
-                å sørge for at nettstedet vårt er sikkert og pålitelig, måle
-                hvordan det presterer, og gi en personlig shoppingopplevelse og
-                brukertilpasset markedsføring. For å gjøre dette samler og
-                analyserer vi informasjon om brukerne, adferden deres og hvilke
-                enheter de bruker.
+                Vi bruker informasjonskapsler og andre former for teknologi for å sørge for at nettstedet vårt
+                er sikkert og pålitelig, måle hvordan det presterer, og gi en personlig shoppingopplevelse og
+                brukertilpasset markedsføring. For å gjøre dette samler og analyserer vi informasjon om
+                brukerne, adferden deres og hvilke enheter de bruker.
               </span>
             </DialogDescription>
           </div>
@@ -146,11 +120,7 @@ export function CookieConsentContent({
             >
               Godta alle
             </Button>
-            <Button
-              variant='default'
-              className='w-full h-10 text-article-white'
-              onClick={handleCustomize}
-            >
+            <Button variant='default' className='w-full h-10 text-article-white' onClick={handleCustomize}>
               Tilpass innstillinger
             </Button>
           </div>
@@ -171,42 +141,30 @@ export function CookieConsentContent({
           className='rounded-full border border-white/80'
         />
       </DialogHeader>
-      <ScrollArea
-        hideScrollbar
-        className={'h-[40vh] w-full overflow-y-auto px-6'}
-      >
-        <DialogTitle className='my-2 mt-4 text-2xl'>
-          Vi forbedrer opplevelsen din
-        </DialogTitle>
-        <DialogDescription asChild>
-          <div className='space-y-2 text-foreground text-lg leading-relaxed pt-2'>
-            <p>
-              Vi bruker informasjonskapsler og andre former for teknologi for å
-              sørge for at nettstedet vårt er sikkert og pålitelig, måle hvordan
-              det presterer, og gi en personlig shoppingopplevelse og
-              brukertilpasset markedsføring. For å gjøre dette samler og
-              analyserer vi informasjon om brukerne, adferden deres og hvilke
-              enheter de bruker.
-            </p>
-            <p>
-              Hvis du vil ha mer informasjon, kan du se våre{' '}
-              <Link href='/personvern' className='underline'>
-                Vilkår for personvern og informasjonskapsler
-              </Link>
-              .
-            </p>
-          </div>
+      <ScrollArea hideScrollbar className={'h-[40vh] w-full overflow-y-auto px-6'}>
+        <DialogTitle className='my-2 mt-4 text-2xl'>Vi forbedrer opplevelsen din</DialogTitle>
+        <DialogDescription className='space-y-2 text-foreground text-lg leading-relaxed pt-2'>
+          <span className='block'>
+            Vi bruker informasjonskapsler og andre former for teknologi for å sørge for at nettstedet vårt er
+            sikkert og pålitelig, måle hvordan det presterer, og gi en personlig shoppingopplevelse og
+            brukertilpasset markedsføring. For å gjøre dette samler og analyserer vi informasjon om brukerne,
+            adferden deres og hvilke enheter de bruker.
+          </span>
+          <span className='block'>
+            Hvis du vil ha mer informasjon, kan du se våre{' '}
+            <Link href='/personvern' className='underline'>
+              Vilkår for personvern og informasjonskapsler
+            </Link>
+            .
+          </span>
         </DialogDescription>
 
         <div className='py-4 space-y-6'>
           <div>
-            <h3 className='font-semibold text-lg mt-2 mb-4 text-foreground'>
-              Strengt nødvendig (alltid på)
-            </h3>
+            <h3 className='font-semibold text-lg mt-2 mb-4 text-foreground'>Strengt nødvendig (alltid på)</h3>
             <p className='text-md text-muted-foreground'>
-              Aktiverer grunnleggende funksjonalitet for å huske språk, sted og
-              handlekurv. Støtter også sikkerhet, nettverksadministrasjon og
-              tilgjengelighet.
+              Aktiverer grunnleggende funksjonalitet for å huske språk, sted og handlekurv. Støtter også
+              sikkerhet, nettverksadministrasjon og tilgjengelighet.
             </p>
           </div>
 
@@ -214,9 +172,8 @@ export function CookieConsentContent({
           <div className='space-y-3'>
             <h3 className='font-medium text-foreground'>Ytelse og analyse</h3>
             <p className='text-sm text-muted-foreground'>
-              Tillater bruk av atferdsdata for å optimalisere ytelsen, se
-              hvordan du samhandler med nettstedene og appene våre og å forbedre
-              opplevelsen.
+              Tillater bruk av atferdsdata for å optimalisere ytelsen, se hvordan du samhandler med
+              nettstedene og appene våre og å forbedre opplevelsen.
             </p>
             <ConsentRadioGroup
               category='analytics'
@@ -229,13 +186,10 @@ export function CookieConsentContent({
 
           {/* 3. Personlig tilpassede opplevelser */}
           <div className='space-y-3'>
-            <h3 className='font-medium text-foreground'>
-              Personlig tilpassede opplevelser
-            </h3>
+            <h3 className='font-medium text-foreground'>Personlig tilpassede opplevelser</h3>
             <p className='text-sm text-muted-foreground'>
-              Tillater deling av atferdsdata, ved bruk av informasjonskapsler og
-              andre teknologier, for å forbedre opplevelsen din og gi relevant
-              innhold på våre plattformer og i vår kommunikasjon.
+              Tillater deling av atferdsdata, ved bruk av informasjonskapsler og andre teknologier, for å
+              forbedre opplevelsen din og gi relevant innhold på våre plattformer og i vår kommunikasjon.
             </p>
             <ConsentRadioGroup
               category='functional'
@@ -248,13 +202,10 @@ export function CookieConsentContent({
 
           {/* 4. Personlig annonsering */}
           <div className='space-y-3'>
-            <h3 className='font-medium text-foreground'>
-              Personlig annonsering
-            </h3>
+            <h3 className='font-medium text-foreground'>Personlig annonsering</h3>
             <p className='text-sm text-muted-foreground'>
-              Tillater deling av atferdsdata med annonsepartnere. Disse dataene
-              brukes til å forbedre og rapportere om opplevelsen av personlig
-              tilpassede annonser på nettstedene til partnere.
+              Tillater deling av atferdsdata med annonsepartnere. Disse dataene brukes til å forbedre og
+              rapportere om opplevelsen av personlig tilpassede annonser på nettstedene til partnere.
             </p>
             <ConsentRadioGroup
               category='marketing'
@@ -266,13 +217,10 @@ export function CookieConsentContent({
 
           {/* 5. Profilbasert personlig tilpasset annonsering */}
           <div className='space-y-3'>
-            <h3 className='font-medium text-foreground'>
-              Profilbasert personlig tilpasset annonsering
-            </h3>
+            <h3 className='font-medium text-foreground'>Profilbasert personlig tilpasset annonsering</h3>
             <p className='text-sm text-muted-foreground'>
-              Tillat deling av e-postadressen og telefonnummeret mitt med
-              annonseringspartnere for å tilpasse annonsering basert på mine
-              interesser og måle effektiviteten av annonsering på
+              Tillat deling av e-postadressen og telefonnummeret mitt med annonseringspartnere for å tilpasse
+              annonsering basert på mine interesser og måle effektiviteten av annonsering på
               partnernettsteder.
             </p>
             <ConsentRadioGroup
@@ -291,7 +239,7 @@ export function CookieConsentContent({
         >
           Avvis alle
         </Button>
-        <div className='sm:flex-grow' />
+        <div className='sm:grow' />
         {hasChangedSettings && (
           <Button
             className='sm:w-auto bg-transparent text-muted-foreground'

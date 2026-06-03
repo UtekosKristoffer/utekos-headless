@@ -57,7 +57,7 @@ export function PopularSpotsGrid({ destinations }: { destinations: Destination[]
                     <MapPinIcon className={`size-5 ${destination.color}`} />
                   </div>
                   <p className='mb-2 text-sm text-overcast'>{destination.season}</p>
-                  <p className='text-sm text-cloud-dancer/80'>{destination.highlight}</p>
+                  <p className='text-sm text-foreground/80'>{destination.highlight}</p>
                 </CardContent>
               </Card>
             </AnimatedBlock>

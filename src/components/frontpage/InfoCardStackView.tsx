@@ -3,6 +3,7 @@ import { Lock, ShoppingBag } from 'lucide-react'
 import Image from 'next/image'
 import UtekosLogo from '@public/icon.png'
 import { cn } from '@/lib/utils/className'
+import Link from 'next/link'
 
 interface InfoCardStackViewProps {
   card1Ref: React.RefObject<HTMLDivElement | null>
@@ -44,10 +45,10 @@ export const InfoCardStackView = forwardRef<HTMLDivElement, InfoCardStackViewPro
         >
           <TrafficLights variant='default' />
           <div className='mt-6 flex items-start gap-3'>
-            <ShoppingBag className='h-4 w-4 flex-shrink-0 text-cloud-dancer sm:h-5 sm:w-5' />
+            <ShoppingBag className='h-4 w-4 flex-shrink-0 text-foreground sm:h-5 sm:w-5' />
             <div>
-              <h3 className='text-sm font-semibold text-cloud-dancer sm:text-base'>En trygg handel</h3>
-              <p className='mt-1 text-xs text-cloud-dancer sm:text-sm'>
+              <h3 className='text-sm font-semibold text-foreground sm:text-base'>En trygg handel</h3>
+              <p className='mt-1 text-xs text-foreground sm:text-sm'>
                 Sikre betalingsløsninger og 14 dagers angrerett.
               </p>
             </div>
@@ -81,13 +82,17 @@ export const InfoCardStackView = forwardRef<HTMLDivElement, InfoCardStackViewPro
               <Lock className='size-4 flex-shrink-0 text-background sm:size-5' />
               <div>
                 <h3 className='text-sm font-semibold text-background sm:text-base'>Ditt personvern</h3>
-                <p className='mt-1 text-xs text-background sm:text-sm'>
-                  Vi tar personvern på alvor. Se hvordan vi behandler dine data.
+                <p className='mt-1  text-sm text-background sm:text-base'>
+                  Vi tar personvern på alvor. Se hvordan vi behandler dine data i vår{' '}
+                  <Link href='/personvern' className='underline'>
+                    personvernserklæring
+                  </Link>
+                  .
                 </p>
               </div>
             </div>
 
-            <div className='mt-auto flex justify-center pb-1 pt-2'>
+            <div className='mt-auto flex justify-center py-3pt-2'>
               <Image src={UtekosLogo} alt='Utekos Logo' width={32} height={32} className='size-7 sm:size-9' />
             </div>
           </div>

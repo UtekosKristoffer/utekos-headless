@@ -22,11 +22,11 @@ export async function ProductDetailsAccordion() {
           Alt du trenger å vite
         </h2>
 
-        <Accordion type='single' collapsible className='w-full'>
+        <Accordion className='w-full'>
           <AccordionItem value='materials' className={itemClassName}>
             <AccordionTrigger className={triggerClassName}>Materialer</AccordionTrigger>
             <AccordionContent>
-              <div className='grid grid-cols-1 gap-x-8 gap-y-4 p-2 text-base leading-[1.45] md:grid-cols-2'>
+              <div className='grid grid-cols-1 gap-x-8 gap-y-4 p-2 text-base leading-text-paragraph md:grid-cols-2'>
                 <SpecRow label='Fôrstoff' value='Taffeta' />
                 <SpecRow label='Skallstoff' value='DuraLite™ Nylon' />
                 <SpecRow label='Belegg' value='DWR (inkl. flammehemming)' />
@@ -134,7 +134,7 @@ export async function ProductDetailsAccordion() {
           <AccordionItem value='fit' className={itemClassName}>
             <AccordionTrigger className={triggerClassName}>Passform</AccordionTrigger>
             <AccordionContent>
-              <div className='space-y-4 p-2 text-base leading-[1.45] text-background/82'>
+              <div className='space-y-4 p-2 text-base leading-text-paragraph text-background/82'>
                 <p>
                   <strong className='mb-1 block text-background'>Rom for bevegelse og ekstra lag</strong>
                   Utekos Mikrofiber™ er designet med sjenerøs passform som gir deg full bevegelsesfrihet og
@@ -147,7 +147,7 @@ export async function ProductDetailsAccordion() {
                   Med smarte snorstramminger justerer du enkelt passformen for optimal varme og komfort. Gå
                   fra en luftig, beskyttende parkas til en tett og varmende kokong.
                 </p>
-                <p className='rounded-2xl border border-cloud-dancer/15 bg-havdyp p-4 text-sm leading-[1.45] text-cloud-dancer'>
+                <p className='rounded-2xl border border-cloud-dancer/15 bg-havdyp p-4 text-sm leading-text-paragraph text-foreground'>
                   <strong>Tips:</strong> Bruk linken ved størrelsevelgeren og i menyen over for å se de
                   nøyaktige målene i tabellen.
                 </p>
@@ -169,9 +169,9 @@ export async function ProductDetailsAccordion() {
                   <li>Unngå stryking og bleking</li>
                 </ul>
 
-                <div className='mt-4 flex gap-3 rounded-2xl border-l-4 border-primary bg-havdyp p-4 text-cloud-dancer'>
+                <div className='mt-4 flex gap-3 rounded-2xl border-l-4 border-primary bg-havdyp p-4 text-foreground'>
                   <Info className='shrink-0 text-primary' />
-                  <div className='text-sm leading-[1.45]'>
+                  <div className='text-sm leading-text-paragraph'>
                     <span className='mb-1 block font-bold'>Viktig om oppbevaring</span>
                     Oppbevares tørt. Materialet vil absorbere fuktighet under normal bruk, så sørg for at den
                     tørkes godt etter bruk i fuktige omgivelser. For lengre lagring anbefales det å oppbevare

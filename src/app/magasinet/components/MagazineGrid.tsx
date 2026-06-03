@@ -35,8 +35,8 @@ function FeaturedArticleCard({ article }: { article: MagazineArticle }) {
             <h2 className='text-balance font-google-sans text-4xl font-bold leading-[0.95]   text-background sm:text-5xl'>
               <MagazineInlineTitle text={article.title} />
             </h2>
-            <p className='mt-5   text-lg leading-[1.45]   text-background/90'>{article.excerpt}</p>
-            <span className='mt-8 inline-flex items-center gap-2   text-base font-semibold leading-[1.4]   text-havdyp'>
+            <p className='mt-5   text-lg leading-text-paragraph   text-background/90'>{article.excerpt}</p>
+            <span className='mt-8 inline-flex items-center gap-2   text-base font-semibold leading-4   text-havdyp'>
               Les hele saken
               <ArrowRight className='size-4 transition-transform group-hover:translate-x-1' aria-hidden />
             </span>
@@ -99,7 +99,7 @@ export function MagazineGrid({ articles }: MagazineGridProps) {
       >
         <div className='container mx-auto px-4'>
           <header className='mb-8 max-w-2xl'>
-            <p className='  text-sm font-semibold leading-[1.4]   text-havdyp'>Siste fra magasinet</p>
+            <p className='  text-sm font-semibold leading-4   text-havdyp'>Siste fra magasinet</p>
             <h2
               id='magazine-latest-heading'
               className='mt-2 font-google-sans text-4xl font-bold leading-[0.95]   sm:text-5xl'

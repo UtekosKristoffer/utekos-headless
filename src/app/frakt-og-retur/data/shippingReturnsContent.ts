@@ -1,12 +1,12 @@
 export const shippingReturnsFaqItems = [
   {
-    id: 'shipping-cost',
+    id: 'Merchant-Center-Shopping-Cost',
     question: 'Hva koster frakten hos Utekos?',
     answer:
-      'Vi tilbyr fri frakt på alle bestillinger over 999 kr i hele Norge. For bestillinger under dette beløpet blir fraktkostnaden spesifisert i kassen.'
+      'Vi tilbyr fri frakt på alle bestillinger over 999 kr i hele Norge. For bestillinger under dette beløpet har vi fraktkostnad på 99 kr.'
   },
   {
-    id: 'delivery-time',
+    id: 'Merchant-C-Delivery-Time',
     question: 'Hvor lang er leveringstiden?',
     answer:
       'Leveringstiden er normalt 2-5 virkedager. Bestillinger som gjøres før klokken 16 sendes samme dag, med unntak av søndag.'
@@ -15,7 +15,7 @@ export const shippingReturnsFaqItems = [
     id: 'return-window',
     question: 'Hvor lang er angreretten?',
     answer:
-      'Som kunde hos Utekos har du 14 dagers angrerett fra dagen du mottar varen. Det gir deg trygghet til å se og føle på produktet hjemme.'
+      'Vi opererer med lovbestemt 14 dagers angrerett fra dagen kunden mottar produktet. Fraktkostnader knyttet til retur betales av sender.'
   },
   {
     id: 'return-process',

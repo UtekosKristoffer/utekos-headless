@@ -95,8 +95,8 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
     <section className='bg-background py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-3xl md:max-w-4xl text-center'>
-          <h2 className='text-cloud-dancer'>En investering i hjemmet</h2>
-          <p className='mt-4 utekos-section-lead text-cloud-dancer/88'>
+          <h2 className='text-foreground'>En investering i hjemmet</h2>
+          <p className='mt-4 utekos-section-lead text-foreground/88'>
             Få mer ut av uteplassen du allerede har. Utekos er designet for å maksimere komforten i hverdagen.
           </p>
         </div>
@@ -127,10 +127,10 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
                   >
                     <IconRenderer name={benefit.icon} className={benefit.color} />
                   </div>
-                  <h3 className='mb-2 text-lg font-semibold leading-[1.15]   text-cloud-dancer'>
+                  <h3 className='mb-2 text-lg font-semibold leading-[1.15]   text-foreground'>
                     {benefit.title}
                   </h3>
-                  <p className='text-sm leading-[1.45]   text-cloud-dancer/88'>{benefit.description}</p>
+                  <p className='text-sm leading-text-paragraph   text-foreground/88'>{benefit.description}</p>
                 </article>
               </AnimatedBlock>
             )

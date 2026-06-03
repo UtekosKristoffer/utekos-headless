@@ -22,20 +22,20 @@ export function TechHero() {
             Skapt for komfort
           </BrandBadge>
 
-          <h1 className='text-5xl font-bold   text-cloud-dancer sm:text-7xl md:text-8xl'>
+          <h1 className='text-5xl font-bold   text-foreground sm:text-7xl md:text-8xl'>
             Ett plagg. <br />
-            <span className='bg-gradient-to-r from-ancient-water via-cloud-dancer to-ancient-water bg-clip-text text-transparent opacity-90'>
+            <span className='bg-linear-to-r from-ancient-water via-cloud-dancer to-ancient-water bg-clip-text text-transparent opacity-90'>
               Tre opplevelser.
             </span>
           </h1>
 
-          <p className='mx-auto max-w-2xl text-lg leading-relaxed text-cloud-dancer/90 md:text-xl'>
+          <p className='mx-auto max-w-2xl text-lg leading-relaxed text-foreground/90 md:text-xl'>
             Det unike med Utekos er friheten til å velge. Fra en isolerende kokong til en elegant parkas på
-            sekunder. Vi kaller det <strong className='text-cloud-dancer'>adaptiv funksjonalitet</strong>.
+            sekunder. Vi kaller det <strong className='text-foreground'>adaptiv funksjonalitet</strong>.
           </p>
         </div>
       </div>
-      <div className='absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce text-cloud-dancer/90'>
+      <div className='absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce text-foreground/90'>
         <ArrowDown className='h-6 w-6' />
       </div>
     </section>

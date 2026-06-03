@@ -11,7 +11,7 @@ export function SocialProofHeaderView({ id, title, description }: SocialProofHea
 
   return (
     <div id={id} className='mb-16 text-center'>
-      <h2 data-social-proof-title='' className='overflow-hidden text-cloud-dancer' aria-label={title}>
+      <h2 data-social-proof-title='' className='overflow-hidden text-foreground' aria-label={title}>
         {words.map((word, wordIndex) => (
           <span key={wordIndex} className='inline-block whitespace-nowrap'>
             {word.split('').map((char, charIndex) => (

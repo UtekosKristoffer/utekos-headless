@@ -11,8 +11,8 @@ export const destinationCardThemes = [
   {
     surface: 'bg-havdyp',
     border: 'border-cloud-dancer/14 hover:border-cloud-dancer/28',
-    text: 'text-cloud-dancer',
-    mutedText: 'text-cloud-dancer/88',
+    text: 'text-foreground',
+    mutedText: 'text-foreground/88',
     glow: 'bg-[radial-gradient(circle_at_20%_0%,color-mix(in_oklch,var(--ancient-water)_24%,transparent),transparent_40%)]',
     badgeBackground: 'var(--color-ancient-water)',
     badgeText: 'var(--color-background)'
@@ -20,8 +20,8 @@ export const destinationCardThemes = [
   {
     surface: 'bg-mountain-view',
     border: 'border-cloud-dancer/14 hover:border-cloud-dancer/28',
-    text: 'text-cloud-dancer',
-    mutedText: 'text-cloud-dancer/90',
+    text: 'text-foreground',
+    mutedText: 'text-foreground/90',
     glow: 'bg-[radial-gradient(circle_at_20%_0%,color-mix(in_oklch,var(--fairest-jade)_18%,transparent),transparent_40%)]',
     badgeBackground: 'var(--color-fairest-jade)',
     badgeText: 'var(--color-background)'
@@ -29,8 +29,8 @@ export const destinationCardThemes = [
   {
     surface: 'bg-demitasse',
     border: 'border-cloud-dancer/14 hover:border-cloud-dancer/28',
-    text: 'text-cloud-dancer',
-    mutedText: 'text-cloud-dancer/88',
+    text: 'text-foreground',
+    mutedText: 'text-foreground/88',
     glow: 'bg-[radial-gradient(circle_at_20%_0%,color-mix(in_oklch,var(--overcast)_18%,transparent),transparent_40%)]',
     badgeBackground: 'var(--color-overcast)',
     badgeText: 'var(--color-background)'

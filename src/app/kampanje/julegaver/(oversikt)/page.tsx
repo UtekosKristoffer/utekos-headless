@@ -39,7 +39,7 @@ export default async function ChristmasCampaign() {
 
   return (
     <div className='bg-background pb-20'>
-      <section className='relative overflow-hidden bg-gradient-to-b from-red-950 via-background to-background pt-24 pb-16 text-center md:pt-32'>
+      <section className='relative overflow-hidden bg-linear-to-b from-red-950 via-background to-background pt-24 pb-16 text-center md:pt-32'>
         <div className='container relative z-10 mx-auto px-4'>
           <div className='inline-flex items-center gap-2 rounded-full border border-red-800/50 bg-red-900/20 px-4 py-1.5 backdrop-blur-sm'>
             <Gift className='h-4 w-4 text-red-200' />
@@ -50,7 +50,7 @@ export default async function ChristmasCampaign() {
               Gi bort
               <SantaHat className='absolute -left-6 -top-8 h-16 w-16 -rotate-12 drop-shadow-xl md:-left-8 md:-top-10 md:h-20 md:w-20' />
             </span>
-            <span className='block bg-gradient-to-r from-red-200 via-white to-red-200 bg-clip-text text-transparent'>
+            <span className='block bg-linear-to-r from-red-200 via-white to-red-200 bg-clip-text text-transparent'>
               funksjonell varme
             </span>
           </h1>
@@ -129,7 +129,7 @@ export default async function ChristmasCampaign() {
               JULERABATT
             </div>
 
-            {/* ENDRING: Bruker 'aspect-square' som er tryggere for 1:1 enn aspect-[1/1] */}
+            {/* ENDRING: Bruker 'aspect-square' som er tryggere for 1:1 enn aspect-square */}
             <div className='relative aspect-square w-full overflow-hidden bg-neutral-900'>
               <Image
                 src='/magasinet/techdown-1080.png'

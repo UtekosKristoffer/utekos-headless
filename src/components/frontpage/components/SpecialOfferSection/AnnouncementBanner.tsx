@@ -1,7 +1,7 @@
 // Path: src/components/banner/AnnouncementBanner.tsx
 'use client'
 
-import { ArrowRightIcon, BadgePercent, XIcon } from 'lucide-react'
+import { ArrowRightIcon, Bird, XIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useSyncExternalStore, useState } from 'react'
 import { cn } from '@/lib/utils/className'
@@ -62,7 +62,7 @@ export default function AnnouncementBanner() {
   return (
     <div
       className={cn(
-        'relative py-2 z-40 hover:bg-header-secondary/80 bg-header-secondary animate-slide-in-do text-foreground text-lg font-medium)',
+        'relative py-2 z-40 hover:bg-header-secondary/80 font-utekos-text-medium bg-header-plum animate-slide-in-do text-foreground text-lg font-medium)',
         isExiting && 'animate-slide-out-up'
       )}
     >
@@ -72,21 +72,19 @@ export default function AnnouncementBanner() {
         aria-label='Se tilbudet på Utekos TechDown til kr 1790'
         className='group block w-full px-10 py-2.5 text-center tracking-wide font-medium  outline-none transition-colors focus-visible:ring-2 focus-visible:ring-havdyp/50 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast sm:px-12'
       >
-        <div className='mx-auto flex max-w-5xl items-center justify-center gap-2.5'>
-          <BadgePercent
+        <div className='mx-auto justify-content flex max-w-5xl items-center justify-center gap-2.5'>
+          <Bird
             aria-hidden='true'
-            className='hidden size-4 shrink-0 text-foreground sm:block'
-            strokeWidth={1.8}
+            className='size-5 sm:size-6 md:size-7 lg:size-8 xl:size-9 shrink-0 text-foreground'
+            strokeWidth={1.5}
           />
 
-          <span className='min-w-0 text-foreground'>
-            <span className='font-semibold text-foreground'>Utekos TechDown™</span>{' '}
-            <span className='text-foreground'>til kr 1790,-</span>
-          </span>
+          <p className='font-utekos-text-medium text-sm md:text-lg text-justify text-foreground'>
+            Utekos TechDown™ til kr 1790,-
+          </p>
 
           <span className='hidden items-center gap-1 font-semibold text-foreground transition-colors group-hover:text-background sm:flex'>
-            Kjøp her
-            <ArrowRightIcon className='size-4 transition-transform group-hover:translate-x-1' />
+            <ArrowRightIcon className='size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none' />
           </span>
           <ArrowRightIcon aria-hidden='true' className='size-4 shrink-0 text-foreground sm:hidden' />
         </div>
@@ -95,7 +93,7 @@ export default function AnnouncementBanner() {
       <button
         onClick={handleDismiss}
         aria-label='Lukk banner'
-        className='absolute right-2 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full text-foreground transition-colors hover:bg-havdyp/8 hover:text-background focus:outline-none focus:ring-2 focus:ring-havdyp/50 focus:ring-offset-2 focus:ring-offset-overcast'
+        className='absolute right-2 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full text-foreground transition-colors hover:bg-foreground/10 hover:text-foreground/80 focus:outline-none focus:ring-2 focus:ring-heading-secondary focus:ring-offset-2 focus:ring-offset-overcast'
       >
         <XIcon className='size-4 cursor-pointer text-foreground' />
       </button>

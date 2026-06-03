@@ -8,12 +8,9 @@ import { MomentsHeaderMotion } from './MomentsHeaderMotion'
 
 export function MomentsHeader() {
   return (
-    <div
-      id='moments-header'
-      className='mb-24 text-center mx-auto max-w-5xl px-4'
-    >
+    <div id='moments-header' className='mb-24 text-center mx-auto max-w-5xl px-4'>
       {/* Overskrift: Strengt bundet til Utekos Title (Sentence case, leading 90%, tracking -1%, primærfarge) */}
-      <h2 className='text-5xl md:text-6xl lg:text-7xl font-bold text-cloud-dancer mb-10 leading-[0.9] tracking-[-0.01em]'>
+      <h2 className='text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-10 leading-[0.9] tracking-[-0.01em]'>
         <div className='flex flex-wrap justify-center gap-x-3 md:gap-x-5 items-baseline'>
           <CinematicWord delay={0.1}>Skapt</CinematicWord>
           <CinematicWord delay={0.15}>for</CinematicWord>
@@ -23,14 +20,14 @@ export function MomentsHeader() {
           <span className='inline-block'>
             <LuxuryShimmerText
               text='øyeblikk'
-              className='font-bold tracking-[-0.01em] text-cloud-dancer [--shimmer-color:rgba(255,255,255,0.4)]'
+              className='font-bold tracking-[-0.01em] text-foreground [--shimmer-color:rgba(255,255,255,0.4)]'
             />
           </span>
         </div>
       </h2>
 
       <div className='max-w-3xl mx-auto'>
-        <p className='text-lg md:text-2xl text-cloud-dancer/90 leading-[1.45] tracking-[-0.02em] flex flex-wrap justify-center gap-x-2 items-center'>
+        <p className='text-lg md:text-2xl text-foreground/90 leading-text-paragraph tracking-[-0.02em] flex flex-wrap justify-center gap-x-2 items-center'>
           <CinematicWord className='font-normal' delay={0.4}>
             Uansett
           </CinematicWord>
@@ -43,7 +40,7 @@ export function MomentsHeader() {
           <CinematicWord className='font-normal' delay={0.55}>
             finner
           </CinematicWord>
-          <span className='text-cloud-dancer font-medium [--circle-stroke:var(--ancient-water)]'>
+          <span className='text-foreground font-medium [--circle-stroke:var(--ancient-water)]'>
             <OrganicCircleWord delay={0.6}>roen,</OrganicCircleWord>
           </span>
 
@@ -67,7 +64,7 @@ export function MomentsHeader() {
           </CinematicWord>
 
           {/* "Opplevelsen" - Gløden er kalibrert til en dempet hvit skyggeeffekt i stedet for mettede farger */}
-          <span className='text-cloud-dancer font-medium [--glow-color:rgba(244,244,247,0.25)]'>
+          <span className='text-foreground font-medium [--glow-color:rgba(244,244,247,0.25)]'>
             <GlowWord delay={1.0}>opplevelsen</GlowWord>
           </span>
 

@@ -6,7 +6,7 @@ import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 
 export function AboutUsHeroSection() {
   return (
-    <hgroup className='relative flex h-[82svh] flex-col items-center justify-center overflow-hidden bg-background text-center text-cloud-dancer md:min-h-[89vh]'>
+    <hgroup className='relative flex h-[82svh] flex-col items-center justify-center overflow-hidden bg-background text-center text-foreground md:min-h-[89vh]'>
       <div className='absolute inset-0 z-0'>
         <Image
           src={AboutUsOG}
@@ -26,7 +26,7 @@ export function AboutUsHeroSection() {
           <span className='sr-only'>Om Utekos</span>
           <UtekosWordmark
             aria-hidden='true'
-            className='h-auto w-[min(76vw,19rem)] text-cloud-dancer md:w-[min(72vw,34rem)] xl:w-[42rem]'
+            className='h-auto w-[min(76vw,19rem)] text-foreground md:w-[min(72vw,34rem)] xl:w-[42rem]'
           />
         </h1>
 
@@ -36,7 +36,7 @@ export function AboutUsHeroSection() {
           textColor='var(--background)'
         />
 
-        <p className='mx-auto   max-w-2xl text-xl leading-[1.45]   text-cloud-dancer/95 drop-shadow-md md:text-3xl'>
+        <p className='mx-auto   max-w-2xl text-xl leading-text-paragraph   text-foreground/95 drop-shadow-md md:text-3xl'>
           Drevet av kalde kvelder og et løfte om å aldri la været stoppe de gode øyeblikkene.
         </p>
       </div>

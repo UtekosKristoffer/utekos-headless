@@ -64,14 +64,14 @@ const TerraceHeroBackground = (
   <>
     <div className='pointer-events-none absolute inset-0 -z-10 opacity-24' aria-hidden='true'>
       <div
-        className='absolute left-[8%] top-[12%] size-[38rem] rounded-full blur-3xl'
+        className='absolute left-[8%] top-[12%] size-152nded-full blur-3xl'
         style={{
           background:
             'radial-gradient(circle, color-mix(in oklch, var(--ancient-water) 58%, transparent) 0%, transparent 68%)'
         }}
       />
       <div
-        className='absolute bottom-[8%] right-[6%] size-[34rem] rounded-full blur-3xl'
+        className='absolute bottom-[8%] right-[6%] size-136 rounded-full blur-3xl'
         style={{
           background:
             'radial-gradient(circle, color-mix(in oklch, var(--primary) 34%, transparent) 0%, transparent 70%)'

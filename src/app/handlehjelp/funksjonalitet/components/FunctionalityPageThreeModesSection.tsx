@@ -11,8 +11,8 @@ export function FunctionalityPageThreeModesSection() {
             <Maximize2 className='h-6 w-6' />
           </div>
           <h3 className='mb-3 text-xl font-bold'>1. Fullengdemodus</h3>
-          <p className='mb-4 text-sm font-medium text-sky-700 dark:text-sky-400'>For maksimal varme og ro</p>
-          <p className='text-muted-foreground'>
+          <p className='mb-4 font-bold text-xl md:text-2xl text-foreground pb-2'>For maksimal varme og ro</p>
+          <p className='text-foreground font-utekos-text! mt-2 tracking-wide  md:text-xl! leading-text-paragraph'>
             Dette er utgangspunktet for selve utekosen. Her henger plagget i sin fulle lengde og fungerer som
             en isolerende kokong. Perfekt når du sitter i solveggen, ligger i hengekøyen eller nyter lange
             kvelder på terrassen. Her er fokuset total avslapning og maksimal varmebevaring.

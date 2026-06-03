@@ -5,7 +5,7 @@ import { Check, Minus } from 'lucide-react'
 export const variantStyles = {
   do: {
     container: 'border-havdyp/16 bg-[color-mix(in_oklab,var(--cloud-dancer)_78%,var(--ancient-water)_22%)]',
-    iconWrap: 'border-havdyp/40 bg-havdyp text-cloud-dancer',
+    iconWrap: 'border-havdyp/40 bg-havdyp text-foreground',
     Icon: Check
   },
   dont: {

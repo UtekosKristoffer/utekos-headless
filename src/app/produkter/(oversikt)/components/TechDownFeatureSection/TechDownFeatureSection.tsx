@@ -98,11 +98,11 @@ export const TechDownFeatureSection = () => {
               </div>
             </div>
 
-            <Carousel className='w-full' opts={{ loop: true }}>
+            <Carousel className='w-full' slideCount={TechDownImages.length} opts={{ loop: true }}>
               <CarouselContent>
                 {TechDownImages.map((image, index) => (
                   <CarouselItem key={image.src.src} className='p-3 sm:p-4'>
-                    <div className='relative aspect-[4/5] w-full overflow-hidden rounded-[1.5rem] bg-cloud-dancer/[0.04] p-3 sm:p-4'>
+                    <div className='relative aspect-4/5 w-full overflow-hidden rounded-[1.5rem] bg-cloud-dancer/[0.04] p-3 sm:p-4'>
                       <div className='relative h-full w-full overflow-hidden rounded-[1.15rem]'>
                         <Image
                           src={image.src}
@@ -117,8 +117,8 @@ export const TechDownFeatureSection = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className='left-4 border-cloud-dancer/12 bg-background/72 text-cloud-dancer backdrop-blur-md hover:bg-background/88 hover:text-overcast' />
-              <CarouselNext className='right-4 border-cloud-dancer/12 bg-background/72 text-cloud-dancer backdrop-blur-md hover:bg-background/88 hover:text-overcast' />
+              <CarouselPrevious className='left-4 border-cloud-dancer/12 bg-background/72 text-foreground backdrop-blur-md hover:bg-background/88 hover:text-overcast' />
+              <CarouselNext className='right-4 border-cloud-dancer/12 bg-background/72 text-foreground backdrop-blur-md hover:bg-background/88 hover:text-overcast' />
             </Carousel>
           </div>
         </div>
@@ -146,12 +146,12 @@ export const TechDownFeatureSection = () => {
 
           <h2 className='gsap-content mb-6 text-4xl font-bold   text-white sm:text-5xl lg:text-6xl'>
             Møt Utekos <br />
-            <span className='bg-gradient-to-r from-ancient-water via-sweet-lavender to-overcast bg-clip-text text-transparent'>
+            <span className='bg-linear-to-r from-ancient-water via-sweet-lavender to-overcast bg-clip-text text-transparent'>
               TechDown™
             </span>
           </h2>
 
-          <p className='gsap-content mb-8 max-w-lg text-lg leading-relaxed     text-cloud-dancer/90'>
+          <p className='gsap-content mb-8 max-w-lg text-lg leading-relaxed     text-foreground/90'>
             Vi har ikke bare kombinert det beste fra dunens letthet og mikrofiberens slitestyrke – vi har
             utviklet en helt ny kategori av personlig komfort.
           </p>
@@ -160,7 +160,7 @@ export const TechDownFeatureSection = () => {
             <div className='flex flex-col'>
               <span className='mb-1 text-sm font-medium text-overcast/58 line-through'>Før 1990,-</span>
               <div className='flex items-baseline gap-2'>
-                <span className='text-3xl font-bold     text-cloud-dancer'>1790,-</span>
+                <span className='text-3xl font-bold     text-foreground'>1790,-</span>
                 <span className='text-sm     text-overcast/62'>inkl. mva</span>
               </div>
             </div>
@@ -177,7 +177,7 @@ export const TechDownFeatureSection = () => {
                 <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-ancient-water/12 text-ancient-water transition-transform group-hover:scale-110'>
                   <feature.icon className='h-5 w-5' />
                 </div>
-                <span className='font-medium     text-cloud-dancer/90 transition-colors group-hover:text-cloud-dancer'>
+                <span className='font-medium     text-foreground/90 transition-colors group-hover:text-foreground'>
                   {feature.text}
                 </span>
               </li>

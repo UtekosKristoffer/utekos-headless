@@ -31,11 +31,11 @@ export const benefitsData: Benefit[] = [
 
 export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
   return (
-    <section className='bg-mountain-view py-24 text-cloud-dancer'>
+    <section className='bg-mountain-view py-24 text-foreground'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-3xl md:max-w-4xl text-center'>
-          <h2 className='text-cloud-dancer'>Fordelene for vertskapet</h2>
-          <p className='mt-4 utekos-section-lead text-cloud-dancer/88'>
+          <h2 className='text-foreground'>Fordelene for vertskapet</h2>
+          <p className='mt-4 utekos-section-lead text-foreground/88'>
             Mindre stress for deg, mer komfort for gjestene — en vinn-vinn for kvelden.
           </p>
         </div>
@@ -54,10 +54,10 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
               >
                 <benefit.icon className='size-8 text-background' aria-hidden />
               </div>
-              <h3 className='mb-2 text-lg font-semibold leading-[1.15] tracking-[-0.01em] text-cloud-dancer'>
+              <h3 className='mb-2 text-lg font-semibold leading-[1.15] tracking-[-0.01em] text-foreground'>
                 {benefit.title}
               </h3>
-              <p className='  text-sm leading-[1.45] tracking-[-0.02em] text-cloud-dancer/82'>
+              <p className='  text-sm leading-text-paragraph tracking-[-0.02em] text-foreground/82'>
                 {benefit.description}
               </p>
             </AnimatedBlock>

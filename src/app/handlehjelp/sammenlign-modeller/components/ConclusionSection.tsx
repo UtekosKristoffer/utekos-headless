@@ -12,12 +12,12 @@ export function ConclusionSection() {
             <BrandBadge
               label='Klar for å velge'
               backgroundColor='var(--havdyp)'
-              className='mb-6 px-6 text-cloud-dancer py-3 text-sm'
+              className='mb-6 px-6 text-foreground py-3 text-sm'
             />
             <h2 className='font-google-sans text-4xl leading-[0.95] font-bold tracking-[-0.01em] text-havdyp sm:text-6xl'>
               Et trygt valg på under ett minutt
             </h2>
-            <p className='mt-6   text-lg leading-[1.45]   text-havdyp/82 sm:text-xl'>
+            <p className='mt-6   text-lg leading-text-paragraph   text-havdyp/82 sm:text-xl'>
               TechDown gir mest ro i skiftende vær. Dun gir mest varme per gram. Mikrofiber er lettest å pakke
               og vaske.
             </p>
@@ -54,7 +54,10 @@ export function ConclusionSection() {
                     </span>
                   </span>
                 </summary>
-                <p data-nosnippet className='mt-4 max-w-2xl   text-base leading-[1.45]   text-havdyp/78'>
+                <p
+                  data-nosnippet
+                  className='mt-4 max-w-2xl   text-base leading-text-paragraph   text-havdyp/78'
+                >
                   {item.answer}
                 </p>
               </details>

@@ -39,7 +39,7 @@ export function BenefitCard({ benefit, delay }: BenefitCardProps) {
 
       <div className='relative z-10 flex items-center gap-3'>
         <div className='flex size-8 flex-shrink-0 items-center justify-center rounded-md border border-havdyp bg-havdyp transition-all duration-300 group-hover:scale-110 group-hover:border-havdyp/80'>
-          <Check className='size-5 text-cloud-dancer' />
+          <Check className='size-5 text-foreground' />
         </div>
         <div className='flex-1 text-sm'>
           <span className='font-semibold text-background'>{benefit.label}</span>

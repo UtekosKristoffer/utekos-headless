@@ -40,7 +40,7 @@ export function HeroHighlight({
   return (
     <span
       className={cn(
-        display === 'block' ? 'block sm:inline' : 'inline',
+        display === 'block' ? 'block md:inline' : 'inline',
         gradient && 'bg-clip-text text-transparent',
         className
       )}

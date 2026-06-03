@@ -79,7 +79,7 @@ export function SeasonsSection() {
                   className={`h-5 w-5 transition-colors ${isActive ? season.iconColor : 'text-overcast'}`}
                 />
                 <span
-                  className={`hidden font-medium sm:inline ${isActive ? 'text-cloud-dancer' : 'text-overcast'}`}
+                  className={`hidden font-medium sm:inline ${isActive ? 'text-foreground' : 'text-overcast'}`}
                 >
                   {season.label}
                 </span>
@@ -113,9 +113,11 @@ export function SeasonsSection() {
                     >
                       <Icon className={`h-6 w-6 ${season.iconColor}`} />
                     </div>
-                    <h3 className='text-2xl font-semibold text-cloud-dancer'>{season.title}</h3>
+                    <h3 className='text-2xl font-semibold text-foreground'>{season.title}</h3>
                   </div>
-                  <p className='text-lg leading-[1.45] tracking-normal text-overcast'>{season.description}</p>
+                  <p className='text-lg leading-text-paragraph tracking-normal text-overcast'>
+                    {season.description}
+                  </p>
                 </CardContent>
               </Card>
             </div>

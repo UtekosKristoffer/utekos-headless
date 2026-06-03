@@ -111,7 +111,7 @@ export function NbccHeroSection() {
           data-nbcc-hero
           data-nbcc-animate
           data-nbcc-hero-content
-          className='text-pretty text-lg md:py-2 leading-8   text-cloud-dancer sm:text-xl lg:col-start-1'
+          className='text-pretty text-lg md:py-2 leading-8   text-foreground sm:text-xl lg:col-start-1'
         >
           Helt siden 1960 har Norsk Bobil og Caravan Club samlet folk rundt de gode opplevelsene og gleden av
           å treffe andre campingelskere. Utekos deler lidenskapen for denne type sosiale og komfortable
@@ -156,7 +156,7 @@ export function NbccHeroSection() {
           data-nbcc-hero
           data-nbcc-animate
           data-nbcc-hero-content
-          className='grid gap-4 border-t border-white/[0.16] pt-6 text-sm text-cloud-dancer sm:grid-cols-3 lg:col-start-1 lg:mt-12'
+          className='grid gap-4 border-t border-white/[0.16] pt-6 text-sm text-foreground sm:grid-cols-3 lg:col-start-1 lg:mt-12'
         >
           <div className='flex items-start gap-3'>
             <BadgeCheckIcon size={22} animate='check' className='mt-0.5 shrink-0 text-primary' aria-hidden />

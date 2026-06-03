@@ -30,13 +30,11 @@ export function OfferGallery({ name, mainImageSrc }: OfferGalleryProps) {
   return (
     <div className='flex flex-col h-full w-full'>
       {/* Main Image Container */}
-      <div className='relative w-full aspect-[4/5] lg:aspect-square overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-b from-slate-800/50 to-slate-900/50 group shadow-2xl shadow-black/20 z-20'>
+      <div className='relative w-full aspect-4/5 lg:aspect-square overflow-hidden rounded-3xl border border-slate-800 bg-linear-to-b from-slate-800/50 to-slate-900/50 group shadow-2xl shadow-black/20 z-20'>
         <div className='absolute top-4 left-4 z-10'>
           <div className='inline-flex items-center gap-2 px-3 py-1.5 bg-sky-900/80 backdrop-blur-md border border-sky-700/50 rounded-full shadow-lg'>
             <ShieldCheck className='w-3.5 h-3.5 text-sky-400' />
-            <span className='text-[10px] font-bold text-white tracking-wider uppercase'>
-              UNISEX
-            </span>
+            <span className='text-[10px] font-bold text-white tracking-wider uppercase'>UNISEX</span>
           </div>
         </div>
 

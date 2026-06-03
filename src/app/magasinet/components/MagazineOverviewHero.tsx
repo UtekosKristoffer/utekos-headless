@@ -7,7 +7,7 @@ type MagazineOverviewHeroProps = {
 
 export function MagazineOverviewHero({ articleCount }: MagazineOverviewHeroProps) {
   return (
-    <section className='bg-havdyp py-16 text-cloud-dancer sm:py-24'>
+    <section className='bg-havdyp py-16 text-foreground sm:py-24'>
       <div className='container mx-auto px-4'>
         <div className='max-w-5xl'>
           <BrandBadge
@@ -21,11 +21,11 @@ export function MagazineOverviewHero({ articleCount }: MagazineOverviewHeroProps
           <h1 className='mt-7 max-w-4xl text-balance font-google-sans text-5xl font-bold leading-[0.9]   sm:text-6xl lg:text-7xl'>
             Inspirasjon for gode stunder ute
           </h1>
-          <p className='mt-6 max-w-3xl   text-xl   text-cloud-dancer/86 sm:text-2xl'>
+          <p className='mt-6 max-w-3xl   text-xl   text-foreground/86 sm:text-2xl'>
             Guider, råd og historier for deg som vil forlenge sesongen på hytten, terrassen, båten eller i
             bobilen med varme, komfort og mer tid ute.
           </p>
-          <p className='mt-8   text-sm leading-[1.45]   text-cloud-dancer/68'>
+          <p className='mt-8   text-sm leading-text-paragraph   text-foreground/68'>
             {articleCount} publiserte artikler
           </p>
         </div>

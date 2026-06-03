@@ -2,11 +2,7 @@ import Image from 'next/image'
 import { Check, Truck, ShieldCheck, ShoppingCart, Loader2 } from 'lucide-react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { productConfig } from '@/app/skreddersy-varmen/utekos-orginal/utils/productConfig'
-import type {
-  MicrofiberLogicProps,
-  MicrofiberColor,
-  MicrofiberSize
-} from 'types/product/'
+import type { MicrofiberLogicProps, MicrofiberColor, MicrofiberSize } from 'types/product/'
 
 export function MicrofiberView({
   color,
@@ -22,7 +18,7 @@ export function MicrofiberView({
     <section className='w-full border-t border-[#2C2420]/5 bg-[#F4F1EA] py-16 text-[#2C2420] md:py-24'>
       <div className='mx-auto max-w-6xl px-6'>
         <div className='grid grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-24'>
-          <AnimatedBlock className='relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-[#2C2420]/5 bg-[#E5E2DB] shadow-lg'>
+          <AnimatedBlock className='relative aspect-4/5 w-full overflow-hidden rounded-2xl border border-[#2C2420]/5 bg-[#E5E2DB] shadow-lg'>
             <Image
               src={activeImage || ''}
               alt={`Utekos Mikrofiber i fargen ${color}`}
@@ -38,20 +34,13 @@ export function MicrofiberView({
 
           <div className='flex h-full flex-col justify-center'>
             <AnimatedBlock delay='0.1s'>
-              <h2 className='mb-4 font-serif text-3xl text-[#2C2420] md:text-5xl'>
-                Sikre deg varmen nå.
-              </h2>
+              <h2 className='mb-4 font-serif text-3xl text-[#2C2420] md:text-5xl'>Sikre deg varmen nå.</h2>
               <p className='mb-8 text-base leading-relaxed text-[#2C2420]/70 md:text-lg'>
-                Invester i kvalitetstid. Utekos Mikrofiber™ er laget for å
-                vare, sesong etter sesong.
+                Invester i kvalitetstid. Utekos Mikrofiber™ er laget for å vare, sesong etter sesong.
               </p>
               <div className='mb-8 flex items-baseline gap-3 border-b border-[#2C2420]/10 pb-6'>
-                <span className='text-3xl font-bold text-[#2C2420]'>
-                  {productConfig.price},-
-                </span>
-                <span className='text-sm text-[#2C2420]/50'>
-                  Inkl. mva og fri frakt
-                </span>
+                <span className='text-3xl font-bold text-[#2C2420]'>{productConfig.price},-</span>
+                <span className='text-sm text-[#2C2420]/50'>Inkl. mva og fri frakt</span>
               </div>
 
               <div className='mb-8'>
@@ -122,9 +111,7 @@ export function MicrofiberView({
                       >
                         {s.name}
                       </span>
-                      <span className='block text-xs leading-tight text-[#2C2420]/60'>
-                        {s.desc}
-                      </span>
+                      <span className='block text-xs leading-tight text-[#2C2420]/60'>{s.desc}</span>
                     </button>
                   ))}
                 </div>
@@ -147,8 +134,7 @@ export function MicrofiberView({
                     <Loader2 className='animate-spin' /> Legger til...
                   </>
                 : <>
-                    <ShoppingCart size={20} /> Legg i handlekurv —{' '}
-                    {productConfig.price},-
+                    <ShoppingCart size={20} /> Legg i handlekurv — {productConfig.price},-
                   </>
                 }
               </button>

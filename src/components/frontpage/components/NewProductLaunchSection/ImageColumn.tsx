@@ -32,6 +32,7 @@ export function ImageColumn() {
     <figure className='relative mx-auto w-full max-w-[440px] sm:max-w-[500px] md:max-w-[560px] lg:max-w-[620px] xl:max-w-none'>
       <div className='relative'>
         <Carousel
+          slideCount={images.length}
           opts={{ loop: true }}
           className='group w-full'
           role='group'

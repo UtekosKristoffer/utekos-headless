@@ -29,6 +29,7 @@
 # misc
 .DS_Store
 *.pem
+.devtools/
 
 # debug
 npm-debug.log*
@@ -183,3 +184,5 @@ project_info_1/
 .env*.local
 *.env.local
 /env.local
+!/.github/
+!/.github/dependabot.yml

@@ -27,15 +27,9 @@ export function RecommendedItem({ product }: { product: ShopifyProduct }) {
 
   return (
     <div className='flex items-center gap-4'>
-      <Link
-        href={`/produkter/${product.handle}`}
-        onClick={() => cartStore.send({ type: 'CLOSE' })}
-      >
+      <Link href={`/produkter/${product.handle}`} onClick={() => cartStore.send({ type: 'CLOSE' })}>
         <div className='w-16 flex-shrink-0'>
-          <AspectRatio
-            ratio={2 / 3}
-            className='overflow-hidden rounded-md border bg-sidebar-foreground'
-          >
+          <AspectRatio ratio={2 / 3} className='overflow-hidden rounded-md border bg-sidebar-foreground'>
             {product.featuredImage && (
               <Image
                 src={product.featuredImage.url}
@@ -48,22 +42,17 @@ export function RecommendedItem({ product }: { product: ShopifyProduct }) {
           </AspectRatio>
         </div>
       </Link>
-      <div className='flex-grow'>
-        <Link
-          href={`/produkter/${product.handle}`}
-          onClick={() => cartStore.send({ type: 'CLOSE' })}
-        >
-          <h4 className='text-sm font-medium hover:underline'>
-            {product.title}
-          </h4>
+      <div className='grow'>
+        <Link href={`/produkter/${product.handle}`} onClick={() => cartStore.send({ type: 'CLOSE' })}>
+          <h4 className='text-sm font-medium hover:underline'>{product.title}</h4>
         </Link>
         <p className='mt-1 text-sm text-muted-foreground'>
           {formatPrice(product.priceRange.minVariantPrice)}
         </p>
       </div>
-      <Button 
-        size='sm' 
-        onClick={handleAddToCart} 
+      <Button
+        size='sm'
+        onClick={handleAddToCart}
         disabled={!selectedVariant}
         className='bg-ancient-water text-maritime-darkest hover:bg-ancient-water/80'
       >

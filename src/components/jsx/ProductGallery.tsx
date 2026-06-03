@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
+import { CAROUSEL_SSR } from '@/components/ui/carousel-ssr'
 import type { ProductGalleryProps } from '@types'
 
 export function ProductGallery({
@@ -18,7 +19,7 @@ export function ProductGallery({
   imageBackgroundClassName = ''
 }: ProductGalleryProps) {
   if (images.length === 0) {
-    return <div className='relative aspect-square w-full rounded-none md:aspect-[4/3] md:rounded-[1.25rem]' />
+    return <div className='relative aspect-square w-full rounded-none md:aspect-4/3md:rounded-[1.25rem]' />
   }
 
   const desktopGalleryImages = desktopImages && desktopImages.length > 0 ? desktopImages : images
@@ -28,6 +29,8 @@ export function ProductGallery({
   return (
     <div className='w-full'>
       <Carousel
+        slideCount={images.length}
+        ssr={CAROUSEL_SSR.fullWidth(images.length)}
         opts={{
           align: 'start',
           loop: images.length > 1
@@ -66,6 +69,8 @@ export function ProductGallery({
       </Carousel>
 
       <Carousel
+        slideCount={desktopGalleryImages.length}
+        ssr={CAROUSEL_SSR.fullWidth(desktopGalleryImages.length)}
         opts={{
           align: 'start',
           loop: desktopGalleryImages.length > 1

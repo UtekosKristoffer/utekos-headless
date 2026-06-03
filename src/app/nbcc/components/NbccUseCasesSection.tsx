@@ -5,7 +5,7 @@ import { useCaseIcons } from '../utils/useCaseIcons'
 export function NbccUseCasesSection() {
   return (
     <section className='relative overflow-hidden bg-[#f5efe4] px-4 py-20 text-[#17130f] sm:px-6 lg:px-8'>
-      <div className='absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#17130f]/20 to-transparent' />
+      <div className='absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#17130f]/20 to-transparent' />
       <div className='mx-auto max-w-7xl'>
         <div
           data-nbcc-reveal
@@ -20,7 +20,7 @@ export function NbccUseCasesSection() {
               Fra morgenkaffe til den siste praten i forteltet.
             </h2>
           </div>
-          <p className='max-w-2xl text-base   text-cloud-dancer lg:justify-self-end'>
+          <p className='max-w-2xl text-base   text-foreground lg:justify-self-end'>
             For noen ligger den største gleden i friheten til å våkne til ny utsikt, for andre er det det
             trygge fellesskapet på fastplassen eller latteren rundt bordet på et regionstreff. Uansett hvor du
             slår leir, eller om du nyter roen på terrassen hjemme, er fellesnevneren den samme: De aller beste

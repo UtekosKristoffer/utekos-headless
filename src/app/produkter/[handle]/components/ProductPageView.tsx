@@ -55,7 +55,7 @@ const ProductGallery = dynamic(
   () => import('@/components/jsx/ProductGallery').then(mod => mod.ProductGallery),
   {
     loading: () => (
-      <div className='relative aspect-square w-full overflow-hidden rounded-none md:aspect-[4/3] md:rounded-lg' />
+      <div className='relative aspect-square w-full overflow-hidden rounded-none md:aspect-4/3md:rounded-lg' />
     ),
     ssr: false
   }

@@ -1,13 +1,15 @@
 'use client'
 
 import * as React from 'react'
-import useEmblaCarousel, {
-  type UseEmblaCarouselType
-} from 'embla-carousel-react'
+import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react'
+import Accessibility from 'embla-carousel-accessibility'
+import ClassNames from 'embla-carousel-class-names'
+import Ssr, { type SsrOptionsType } from 'embla-carousel-ssr'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 import { cn } from '@/lib/utils/className'
 import { Button } from '@/components/ui/button'
+import { resolveCarouselSsrOptions } from '@/components/ui/carousel-ssr'
 
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
@@ -19,11 +21,18 @@ type CarouselProps = {
   plugins?: CarouselPlugin
   orientation?: 'horizontal' | 'vertical'
   setApi?: (api: CarouselApi) => void
+  /** Required for SSR when `loop`, `containScroll: false`, or non-zero `startSnap` is set. */
+  slideCount?: number
+  /** Override default 100% SSR slide sizes (must match slide `basis-*` CSS). */
+  ssr?: SsrOptionsType
 }
 
 type CarouselContextProps = {
   carouselRef: ReturnType<typeof useEmblaCarousel>[0]
   api: ReturnType<typeof useEmblaCarousel>[1]
+  emblaServerApi: ReturnType<typeof useEmblaCarousel>[2]
+  carouselId: string
+  ssrOptions: SsrOptionsType | null
   scrollPrev: () => void
   scrollNext: () => void
   canScrollPrev: boolean
@@ -47,32 +56,56 @@ function Carousel({
   opts,
   setApi,
   plugins,
+  slideCount,
+  ssr,
   className,
   children,
   ...props
 }: React.ComponentProps<'div'> & CarouselProps) {
-  const [carouselRef, api] = useEmblaCarousel(
-    {
+  const carouselId = React.useId().replace(/:/g, '')
+  const mergedOpts = React.useMemo(
+    () => ({
       ...opts,
-      axis: orientation === 'horizontal' ? 'x' : 'y'
-    },
-    plugins
+      axis: orientation === 'horizontal' ? ('x' as const) : ('y' as const)
+    }),
+    [opts, orientation]
   )
+
+  const ssrOptions = React.useMemo(
+    () => resolveCarouselSsrOptions(mergedOpts, slideCount, ssr),
+    [mergedOpts, slideCount, ssr]
+  )
+
+  const accessibilityPlugin = React.useRef(Accessibility())
+  const classNamesPlugin = React.useRef(ClassNames())
+
+  const resolvedPlugins = React.useMemo(() => {
+    const basePlugins = [
+      accessibilityPlugin.current,
+      classNamesPlugin.current,
+      ...(ssrOptions ? [Ssr(ssrOptions)] : []),
+      ...(plugins ?? [])
+    ]
+
+    return basePlugins
+  }, [plugins, ssrOptions])
+
+  const [carouselRef, api, emblaServerApi] = useEmblaCarousel(mergedOpts, resolvedPlugins)
   const [canScrollPrev, setCanScrollPrev] = React.useState(false)
   const [canScrollNext, setCanScrollNext] = React.useState(false)
 
-  const onSelect = React.useCallback((api: CarouselApi) => {
-    if (!api) return
-    setCanScrollPrev(api.canScrollPrev())
-    setCanScrollNext(api.canScrollNext())
+  const onSelect = React.useCallback((carouselApi: CarouselApi) => {
+    if (!carouselApi) return
+    setCanScrollPrev(carouselApi.canGoToPrev())
+    setCanScrollNext(carouselApi.canGoToNext())
   }, [])
 
   const scrollPrev = React.useCallback(() => {
-    api?.scrollPrev()
+    api?.goToPrev()
   }, [api])
 
   const scrollNext = React.useCallback(() => {
-    api?.scrollNext()
+    api?.goToNext()
   }, [api])
 
   const handleKeyDown = React.useCallback(
@@ -96,11 +129,12 @@ function Carousel({
   React.useEffect(() => {
     if (!api) return
     onSelect(api)
-    api.on('reInit', onSelect)
+    api.on('reinit', onSelect)
     api.on('select', onSelect)
 
     return () => {
-      api?.off('select', onSelect)
+      api.off('reinit', onSelect)
+      api.off('select', onSelect)
     }
   }, [api, onSelect])
 
@@ -108,14 +142,20 @@ function Carousel({
     <CarouselContext.Provider
       value={{
         carouselRef,
-        api: api,
+        api,
+        emblaServerApi,
+        carouselId,
+        ssrOptions,
         opts,
-        orientation:
-          orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
+        orientation: orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
         scrollPrev,
         scrollNext,
         canScrollPrev,
-        canScrollNext
+        canScrollNext,
+        ...(plugins ? { plugins } : {}),
+        ...(setApi ? { setApi } : {}),
+        ...(slideCount != null ? { slideCount } : {}),
+        ...(ssr ? { ssr } : {})
       }}
     >
       <div
@@ -133,23 +173,31 @@ function Carousel({
 }
 
 function CarouselContent({ className, ...props }: React.ComponentProps<'div'>) {
-  const { carouselRef, orientation } = useCarousel()
+  const { carouselRef, orientation, carouselId, api, emblaServerApi, ssrOptions } = useCarousel()
+  const renderSsrStyles = !api && ssrOptions
 
   return (
-    <div
-      ref={carouselRef}
-      className='overflow-hidden'
-      data-slot='carousel-content'
-    >
-      <div
-        className={cn(
-          'flex',
-          orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
-          className
-        )}
-        {...props}
-      />
-    </div>
+    <>
+      {renderSsrStyles ?
+        <style
+          dangerouslySetInnerHTML={{
+            __html:
+              emblaServerApi.plugins()?.ssr?.getStyles(`#${carouselId}`, '[data-slot="carousel-item"]') ?? ''
+          }}
+        />
+      : null}
+      <div ref={carouselRef} className='overflow-hidden' data-slot='carousel-content'>
+        <div
+          id={carouselId}
+          className={cn(
+            'flex touch-pan-y pinch-zoom',
+            orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
+            className
+          )}
+          {...props}
+        />
+      </div>
+    </>
   )
 }
 
@@ -187,7 +235,7 @@ function CarouselPrevious({
       className={cn(
         'absolute size-8 rounded-full',
         orientation === 'horizontal' ?
-          'top-1/2 left-4 -translate-y-1/2' // ENDRET: Fra -left-12 til left-4
+          'top-1/2 left-4 -translate-y-1/2'
         : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
         className
       )}
@@ -200,6 +248,7 @@ function CarouselPrevious({
     </Button>
   )
 }
+
 function CarouselNext({
   className,
   variant = 'outline',
@@ -216,7 +265,7 @@ function CarouselNext({
       className={cn(
         'absolute size-8 rounded-full',
         orientation === 'horizontal' ?
-          'top-1/2 right-4 -translate-y-1/2' // ENDRET: Fra -right-12 til right-4
+          'top-1/2 right-4 -translate-y-1/2'
         : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
         className
       )}
@@ -229,8 +278,10 @@ function CarouselNext({
     </Button>
   )
 }
+
 export {
   type CarouselApi,
+  type CarouselOptions,
   Carousel,
   CarouselContent,
   CarouselItem,

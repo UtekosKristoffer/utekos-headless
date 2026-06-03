@@ -35,7 +35,7 @@ export function AnimatedChat() {
       <div className='flex justify-end mt-2'>
         <div className='relative max-w-[80%] rounded-lg border border-background bg-havdyp p-3'>
           <div className='flex items-center gap-2'>
-            <p className='chat-bubble-text flex items-center whitespace-nowrap text-cloud-dancer'>
+            <p className='chat-bubble-text flex items-center whitespace-nowrap text-foreground'>
               <span>Nettopp. Mer plass til vinen 😉</span>
               <span className='ml-1 inline-block h-4 w-0.5 animate-blinking-cursor bg-cloud-dancer' />
             </p>

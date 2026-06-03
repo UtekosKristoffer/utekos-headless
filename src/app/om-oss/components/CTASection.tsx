@@ -15,8 +15,8 @@ export function CTASection() {
 
       <div className='container mx-auto max-w-4xl px-4'>
         <div className='relative overflow-hidden rounded-[1.75rem] border border-cloud-dancer/70 bg-cloud-dancer/72 p-10 text-center shadow-2xl shadow-havdyp/10 backdrop-blur-sm md:p-16'>
-          <div className='absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-dusted-peri/55 to-transparent' />
-          <div className='absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-havdyp/18 to-transparent' />
+          <div className='absolute left-0 right-0 top-0 h-px bg-linear-to-r from-transparent via-dusted-peri/55 to-transparent' />
+          <div className='absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-havdyp/18 to-transparent' />
           <div className='relative z-10'>
             <AnimatedBlock className='mb-8 will-animate-fade-in-scale' delay='0s' threshold={0.2}>
               <BrandBadge
@@ -33,7 +33,7 @@ export function CTASection() {
               </h2>
             </AnimatedBlock>
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.16s' threshold={0.2}>
-              <p className='mx-auto mt-4 max-w-2xl text-lg font-base leading-[1.45]     text-background md:text-xl'>
+              <p className='mx-auto mt-4 max-w-2xl text-lg font-base leading-text-paragraph     text-background md:text-xl'>
                 Opplev hvordan banebrytende innovasjon og tidløs eleganse kan forvandle en kjølig kveld til
                 ditt favorittøyeblikk.
               </p>

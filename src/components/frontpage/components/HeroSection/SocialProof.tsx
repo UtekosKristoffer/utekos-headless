@@ -9,16 +9,14 @@ export function SocialProof() {
         <SocialProofCard
           title='Rask levering'
           Icon={Truck}
-          cardClass='border-havdyp/12 bg-ancient-water text-havdyp transition-colors hover:bg-[var(--country-air)]'
-          titleClass='text-havdyp'
+          cardClass='border-havdyp/12 text-sm bg-ancient-water text-havdyp transition-colors hover:bg-[var(--country-air)]'
+          titleClass='text-background'
           shineClass='via-cloud-dancer/40'
           hoverBorderClass='hover:border-havdyp/30'
           iconWrapperClass='bg-cloud-dancer/65 shadow-[0_0_18px_color-mix(in_oklch,var(--havdyp)_15%,transparent)]'
-          iconColorClass='text-havdyp'
+          iconColorClass='text-background'
         >
-          <p className='mt-1 text-sm font-medium leading-[1.45] tracking-[-0.01em] text-havdyp/78'>
-            2-5 dager
-          </p>
+          <p className='mt-1 font-utekos-text-medium text-sm text-background'>2-5 dager</p>
         </SocialProofCard>
 
         <SocialProofCard
@@ -31,17 +29,17 @@ export function SocialProof() {
           iconWrapperClass='bg-cloud-dancer/60 shadow-[0_0_18px_color-mix(in_oklch,var(--demitasse)_15%,transparent)]'
           iconColorClass='text-demitasse'
         >
-          <p className='mt-1 text-sm font-medium leading-[1.45]   text-background'>Fornøyde kunder</p>
+          <p className='mt-1 font-utekos-text-medium text-sm text-background'>Fornøyde kunder</p>
         </SocialProofCard>
 
         <SocialProofCard
           title='Trygg handel'
           Icon={ShieldCheck}
-          cardClass='border-cloud-dancer/14 bg-mountain-view text-cloud-dancer transition-colors hover:bg-deep-forest'
-          titleClass='text-cloud-dancer'
+          cardClass='border-cloud-dancer/14 bg-mountain-view text-foreground transition-colors hover:bg-deep-forest'
+          titleClass='text-foreground'
           hoverBorderClass='hover:border-cloud-dancer/30'
           iconWrapperClass='bg-cloud-dancer/10 shadow-[0_0_18px_color-mix(in_oklch,var(--cloud-dancer)_15%,transparent)]'
-          iconColorClass='text-cloud-dancer'
+          iconColorClass='text-foreground'
         >
           <PaymentIcons />
         </SocialProofCard>

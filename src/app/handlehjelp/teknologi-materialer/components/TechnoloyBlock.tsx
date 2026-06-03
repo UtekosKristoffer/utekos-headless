@@ -55,7 +55,7 @@ export const TechnologyBlock = ({ tech, isActive }: { tech: Technology; isActive
             'flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border transition-colors',
             isActive ?
               'border-ancient-water/30 bg-ancient-water/10 text-ancient-water'
-            : 'border-havdyp bg-havdyp text-cloud-dancer/90'
+            : 'border-havdyp bg-havdyp text-foreground/90'
           )}
         >
           <IconComponent className='h-6 w-6' />
@@ -63,14 +63,14 @@ export const TechnologyBlock = ({ tech, isActive }: { tech: Technology; isActive
         <h3
           className={cn(
             'text-xl font-bold transition-colors',
-            isActive ? 'text-white' : 'text-cloud-dancer/90'
+            isActive ? 'text-white' : 'text-foreground/90'
           )}
         >
           {tech.title}
         </h3>
       </div>
       <div className='prose prose-invert mt-4 max-w-none'>
-        <p className='text-cloud-dancer/90 leading-relaxed'>{tech.content}</p>
+        <p className='text-foreground/90 leading-relaxed'>{tech.content}</p>
         <div className='mt-4 flex flex-wrap gap-2'>
           {tech.products.map(product => (
             <span
@@ -79,7 +79,7 @@ export const TechnologyBlock = ({ tech, isActive }: { tech: Technology; isActive
                 'rounded-full border px-2.5 py-1 text-sm font-medium transition-colors',
                 isActive ?
                   'border-white/10 bg-white/5 text-white'
-                : 'border-havdyp bg-transparent text-cloud-dancer/90'
+                : 'border-havdyp bg-transparent text-foreground/90'
               )}
             >
               {product}

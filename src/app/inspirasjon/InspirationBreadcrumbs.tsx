@@ -15,15 +15,11 @@ export function InspirationPagesBreadcrumbLink() {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href={'/' as Route}> Forsiden </Link>
-          </BreadcrumbLink>
+          <BreadcrumbLink render={<Link href={'/' as Route} />}> Forsiden </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href={'/inspirasjon' as Route}> Inspirasjon </Link>
-          </BreadcrumbLink>
+          <BreadcrumbLink render={<Link href={'/inspirasjon' as Route} />}> Inspirasjon </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>

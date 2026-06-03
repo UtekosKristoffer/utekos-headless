@@ -5,22 +5,22 @@ import Link from 'next/link'
 import type { Route } from 'next'
 export function BackToShopCta() {
   return (
-    <section className='border-t border-cloud-dancer/12 bg-havdyp text-cloud-dancer'>
+    <section className='border-t border-cloud-dancer/12 bg-havdyp text-foreground'>
       <div className='container mx-auto px-4 py-16 sm:py-20 text-center'>
         <Compass className='mx-auto size-10 text-primary' />
-        <h2 className='mx-auto mt-4 max-w-3xl text-3xl font-bold leading-[1.05]   text-cloud-dancer sm:text-5xl'>
+        <h2 className='mx-auto mt-4 max-w-3xl text-3xl font-bold leading-[1.05]   text-foreground sm:text-5xl'>
           Klar for å finne din
           <span className='inline-flex items-baseline'>
             <UtekosWordmark
               aria-hidden='true'
               focusable='false'
-              className='ml-[0.18em] inline-block h-[0.72em] w-auto translate-y-[0.06em] align-baseline text-cloud-dancer'
+              className='ml-[0.18em] inline-block h-[0.72em] w-auto translate-y-[0.06em] align-baseline text-foreground'
             />
             <span className='sr-only'>Utekos</span>
-            <span className='ml-1 text-cloud-dancer'>?</span>
+            <span className='ml-1 text-foreground'>?</span>
           </span>
         </h2>
-        <p className='mt-5 max-w-2xl mx-auto text-lg leading-relaxed text-cloud-dancer/82'>
+        <p className='mt-5 max-w-2xl mx-auto text-lg leading-relaxed text-foreground/82'>
           Nå som du har full kontroll på størrelsen, er du bare et par klikk unna en helt ny standard for
           komfort.
         </p>
@@ -68,13 +68,13 @@ export function BackToShopCta() {
             <div className='w-full border-t border-cloud-dancer/12' />
           </div>
           <div className='relative flex justify-center'>
-            <span className='bg-havdyp px-3 text-sm font-medium text-cloud-dancer/72'>eller</span>
+            <span className='bg-havdyp px-3 text-sm font-medium text-foreground/72'>eller</span>
           </div>
         </div>
 
         <div className='mt-12 max-w-2xl mx-auto'>
           <h3 className='text-xl font-semibold'>Fortsatt usikker? Få personlig hjelp.</h3>
-          <p className='mt-2 text-cloud-dancer/74'>
+          <p className='mt-2 text-foreground/74'>
             Hvis du ønsker en skreddersydd anbefaling basert på din bruk, høyde, og kroppsfasong, er vi her
             for deg. Send oss en melding, så garanterer vi svar innen én time frem til kl. 22:00.
           </p>

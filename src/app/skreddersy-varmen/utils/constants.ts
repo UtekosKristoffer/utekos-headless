@@ -47,7 +47,7 @@ export const focusRing =
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary focus-visible:ring-2 focus-visible:ring-background'
 
 export const maritimePanelClass =
-  'rounded-3xl border border-cloud-dancer/15 bg-havdyp p-5 text-cloud-dancer shadow-sm'
+  'rounded-3xl border border-cloud-dancer/15 bg-havdyp p-5 text-foreground shadow-sm'
 
 export const maritimePanelHeaderClass = 'mb-3 border-b border-cloud-dancer/15 pb-3'
 

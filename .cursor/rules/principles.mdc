@@ -1,0 +1,30 @@
+---
+alwaysApply: true
+---
+
+## Principles
+
+#### Ensure operational readiness & performance
+
+> Proactively define [performance targets](/) (SLOs), test and validate capacity, and continuously optimize
+> compute engines to ensure workloads meet business expectations.
+
+#### Automate infrastructure & maintenance
+
+> Eliminate manual operational tasks by codifying all infrastructure, configuration, and data pipelines,
+> leveraging Snowflake's built-in automation for scaling and maintenance.
+
+#### Enhance observability & issue resolution
+
+> Gain deep, end-to-end visibility into the platform by capturing and analyzing telemetry, logs, and traces to
+> rapidly diagnose and resolve issues.
+
+#### Manage incidents & problems
+
+> Minimize the impact of incidents using AI-driven diagnostics, immutable backups for rapid recovery, and
+> automated governance controls.
+
+#### Enable collaboration & Secure Sharing
+
+> Foster a collaborative data culture by establishing a secure, governed internal marketplace for sharing
+> data, applications, and models.

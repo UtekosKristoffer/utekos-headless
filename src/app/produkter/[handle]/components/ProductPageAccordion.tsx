@@ -20,42 +20,42 @@ export function ProductPageAccordion({ variantProfile }: ProductPageAccordionPro
       title: 'Materialer',
       ...mapOptionalContent(variantProfile.materials?.value),
       Icon: Layers3,
-      color: 'text-background'
+      color: 'text-foreground'
     },
     {
       id: 'funksjoner',
       title: 'Funksjoner',
       ...mapOptionalContent(variantProfile.functions?.value),
       Icon: Activity,
-      color: 'text-background'
+      color: 'text-foreground'
     },
     {
       id: 'egenskaper',
       title: 'Egenskaper',
       ...mapOptionalContent(variantProfile.properties?.value),
       Icon: TableProperties,
-      color: 'text-background'
+      color: 'text-foreground'
     },
     {
       id: 'bruksomrader',
       title: 'Bruksområder',
       ...mapOptionalContent(variantProfile.usage?.value),
       Icon: Waypoints,
-      color: 'text-background'
+      color: 'text-foreground'
     },
     {
       id: 'passform',
       title: 'Passform',
       ...mapOptionalContent(variantProfile.sizeFit?.value),
       Icon: Ruler,
-      color: 'text-background'
+      color: 'text-foreground'
     },
     {
       id: 'vaskeanvisning',
       title: 'Vaskeanvisning',
       ...mapOptionalContent(variantProfile.storageAndMaintenance?.value),
       Icon: WashingMachine,
-      color: 'text-background'
+      color: 'text-foreground'
     }
   ]
 
@@ -72,24 +72,21 @@ export function ProductPageAccordion({ variantProfile }: ProductPageAccordionPro
       className='relative overflow-hidden rounded-[1.75rem] py-6'
       aria-labelledby='product-details-heading'
     >
-      <div className='pointer-events-none absolute inset-0 -z-10'>
-        <div className='absolute left-1/3 top-0 h-[24rem] w-[24rem] rounded-full' />
-      </div>
-
       <div className='mx-auto text-left'>
         <AnimatedBlock className='mb-6 will-animate-fade-in-scale' delay='0s' threshold={0.3}>
           <BrandBadge
-            backgroundColor='var(--dusted-peri)'
-            textColor='var(--background)'
-            className='gap-2 text-left shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
+            backgroundColor='var(--havdyp)'
+            textColor='var(--foreground)'
+            className='gap-2 text-left'
           >
-            <Info className='size-5 text-left' aria-hidden='true' />
-            <h2 className='text-left text-lg'>Produktdetaljer</h2>
+            <Info className='size-5' aria-hidden='true' />
+            <h2 id='product-details-heading' className='text-lg leading-[1.2] tracking-[-0.01em]'>
+              Produktdetaljer
+            </h2>
           </BrandBadge>
         </AnimatedBlock>
 
-        <AnimatedBlock className='will-animate-fade-in-up' delay='0.08s' threshold={0.3}></AnimatedBlock>
-        <Accordion type='single' collapsible className='w-full'>
+        <Accordion className='w-full'>
           {sectionsWithContent.map(section => (
             <ProductDetailsAccordionSection key={section.id} sectionData={section} />
           ))}

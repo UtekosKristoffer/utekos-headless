@@ -120,20 +120,17 @@ export default function PriceActivityPanel({
       {showSavings && (
         <div className='relative z-20 flex flex-wrap items-center gap-3'>
           <BrandBadge
-            backgroundColor='var(--dusted-peri)'
-            textColor='var(--background)'
-            className='gap-2 border border-dusted-peri/20 px-4 py-2 text-sm font-semibold shadow-[0_12px_28px_-22px_rgba(32,28,54,0.72)] sm:px-5 sm:py-2.5'
+            backgroundColor='var(--havdyp)'
+            textColor='var(--foreground)'
+            className='gap-2 border border-havdyp/40 px-4 py-2 text-ml font-semibold shadow-[0_12px_28px_-22px_rgba(32,28,54,0.72)] sm:px-5 sm:py-2.5'
           >
-            <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-background'>
-              <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-background opacity-30' />
-            </span>
             {currentOffer.label}
           </BrandBadge>
           <BrandBadge
-            label={`Spar totalt kr ${Math.round(savingsAmount)}`}
-            backgroundColor='var(--dusted-peri)'
-            textColor='var(--background)'
-            className='border border-dusted-peri/24 px-4 py-2 text-sm font-semibold shadow-[0_14px_32px_-24px_rgba(32,28,54,0.58)] sm:px-5 sm:py-2.5'
+            label={`Spar kr ${Math.round(savingsAmount)}`}
+            backgroundColor='var(--havdyp)'
+            textColor='var(--foreground)'
+            className='border border-havdyp/24 px-46p y-4 text-ml  font-semibold  sm:px-5 sm:py-2.5'
           />
         </div>
       )}
@@ -163,14 +160,14 @@ export default function PriceActivityPanel({
         )}
 
         {isSpecialEdition && shouldShowLimitedStockNotice && (
-          <div className='relative mt-4 overflow-hidden rounded-[1rem] border border-dusted-peri/24 bg-dusted-peri/12 p-4'>
+          <div className='relative mt-4 overflow-hidden rounded-[1rem] border border-dusted-peri/24 bg-dusted-peri p-4'>
             <div className='relative flex items-center gap-3' style={{ zIndex: 10 }}>
-              <div className='flex h-10 w-10 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-cloud-dancer'>
+              <div className='flex h-10 w-10 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-foreground'>
                 <ShieldAlert className='h-5 w-5' aria-hidden='true' />
               </div>
               <div>
-                <p className='font-semibold text-havdyp'>Kun {limitedStockCount} igjen på lager!</p>
-                <p className='text-sm text-havdyp/68'>Unik utgave - kommer ikke tilbake</p>
+                <p className='font-semibold text-maritme-darkest'>Kun {limitedStockCount} igjen på lager!</p>
+                <p className='text-sm text-havdyp'>Unik utgave - kommer ikke tilbake</p>
               </div>
             </div>
             <div
@@ -187,7 +184,7 @@ export default function PriceActivityPanel({
 
       {reviewSummary && (
         <div
-          className='text-sm text-background'
+          className='text-sm text-maritime-darkest'
           aria-label={`${reviewSummary.formattedAverage} av 5 basert på ${reviewSummary.count} anmeldelser`}
         >
           <div className='flex flex-wrap items-center gap-x-2 gap-y-1'>

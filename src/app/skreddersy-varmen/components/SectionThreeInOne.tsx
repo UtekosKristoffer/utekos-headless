@@ -1,4 +1,3 @@
-// Path: src/app/skreddersy-varmen/utekos-orginal/components/SectionThreeInOne.tsx
 'use client'
 
 import Image from 'next/image'
@@ -14,11 +13,11 @@ export function SectionThreeInOne() {
     <section
       ref={containerRef}
       aria-labelledby='threeinone-heading'
-      className='w-full bg-mountain-view text-cloud-dancer'
+      className='w-full bg-mountain-view text-foreground'
     >
       {/* Intro header */}
       <div className='gsap-three-intro mx-auto max-w-4xl px-6 py-16 text-center md:py-24'>
-        <span className='gsap-three-eyebrow mb-3 block   text-sm font-medium leading-[1.4]   text-overcast'>
+        <span className='gsap-three-eyebrow mb-3 block font-utekos-text-medium tracking-wide text-base leading-4 text-foreground'>
           Adaptiv funksjonalitet
         </span>
         <h2
@@ -27,7 +26,7 @@ export function SectionThreeInOne() {
         >
           Friheten til å velge
         </h2>
-        <p className='gsap-three-subtitle mx-auto max-w-2xl text-balance utekos-section-lead   text-base leading-[1.45]   text-cloud-dancer/95'>
+        <p className='gsap-three-subtitle mx-auto max-w-2xl text-balance font-utekos-text leading-text-paragraph   text-foreground/95'>
           Det unike med Utekos<span className='text-overcast'>®</span> er transformasjonen. Fra en isolerende
           kokong til en elegant parkas på sekunder. Juster, form og nyt.
         </p>
@@ -37,10 +36,7 @@ export function SectionThreeInOne() {
       <div className='flex flex-col pb-20 xl:hidden'>
         {Steps.map(step => (
           <div key={step.id} className='gsap-mobile-step-panel mb-12 flex flex-col last:mb-0'>
-            <div
-              className='relative w-full overflow-hidden border-y border-cloud-dancer/10 bg-mountain-view'
-              style={{ aspectRatio: '1/1' }}
-            >
+            <div className='relative aspect-square w-full overflow-hidden border-y border-cloud-dancer/10 bg-mountain-view'>
               <Image
                 src={step.image}
                 alt={step.title}
@@ -53,29 +49,26 @@ export function SectionThreeInOne() {
                     'object-contain p-12 min-[1536px]:p-16'
                   : 'object-cover'
                 )}
-                style={{
-                  objectPosition: step.desktopObjectPosition || 'center'
-                }}
                 sizes='(max-width: 1279px) 100vw, 0px'
               />
               <BrandBadge
                 backgroundColor='var(--color-background)'
                 textColor='var(--color-cloud-dancer)'
-                className='gsap-step-badge absolute left-4 top-4 h-7 px-3 py-0   text-xs font-medium leading-none   backdrop-blur-md'
+                className='gsap-step-badge absolute left-4 top-4 h-7 px-3 py-0 text-xs font-medium leading-none backdrop-blur-md'
               >
                 {step.stepNumber}
               </BrandBadge>
             </div>
 
-            <div className='mx-auto w-full max-w-[36rem] px-6 pt-6 md:px-8 lg:max-w-[34rem]'>
+            <div className='mx-auto w-full max-w-xl px-6 pt-6 md:px-8]'>
               <div className='gsap-step-eyebrow mb-2 flex items-center gap-2 text-overcast'>
                 <span className='gsap-step-icon inline-flex shrink-0 text-overcast'>{step.icon}</span>
-                <span className='  text-sm font-medium leading-[1.4]  '>{step.modeName}</span>
+                <span className='  text-sm font-medium leading-4'>{step.modeName}</span>
               </div>
-              <h3 className='gsap-step-title mb-3 font-google-sans text-2xl font-bold leading-[0.92] tracking-[-0.01em] text-cloud-dancer'>
+              <h3 className='gsap-step-title mb-3 font-google-sans text-3xl md:text-4xl font-bold leading-[0.92] tracking-[-0.01em] text-foreground'>
                 {step.title}
               </h3>
-              <p className='gsap-step-desc utekos-section-lead   leading-[1.45]   text-cloud-dancer/90'>
+              <p className='gsap-step-desc font-utekos-text mt-2 tracking-wide md:text-2xl! leading-text-paragraph text-foreground'>
                 {step.description}
               </p>
             </div>
@@ -95,7 +88,7 @@ export function SectionThreeInOne() {
                 activeStep === index ? 'z-10 scale-100 opacity-100' : 'z-0 scale-105 opacity-0'
               )}
             >
-              <div className='relative aspect-square w-[min(86%,82vh)] overflow-hidden rounded-[1.5rem] border border-cloud-dancer/10 bg-background/18 shadow-2xl'>
+              <div className='relative aspect-square w-[min(86%,82vh)] overflow-hidden rounded-3xl border border-cloud-dancer/10 bg-background/18 shadow-2xl'>
                 <Image
                   src={step.image}
                   alt={step.title}
@@ -108,12 +101,9 @@ export function SectionThreeInOne() {
                       'object-contain p-12 min-[1536px]:p-16'
                     : 'object-cover'
                   )}
-                  style={{
-                    objectPosition: step.desktopObjectPosition || 'center'
-                  }}
                   sizes='(max-width: 1279px) 0px, min(43vw, 82vh)'
                 />
-                <div className='absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background to-transparent opacity-45' />
+                <div className='absolute inset-x-0 bottom-0 h-28 bg-linear-to-t from-background to-transparent opacity-45' />
               </div>
             </div>
           ))}
@@ -139,18 +129,18 @@ export function SectionThreeInOne() {
               className='gsap-desktop-step-panel flex min-h-screen flex-col justify-center border-b border-cloud-dancer/10 px-20 last:border-0'
             >
               <div className='will-change-transform'>
-                <div className='gsap-step-eyebrow mb-4 flex items-center gap-3   text-sm font-medium leading-[1.4]   text-overcast'>
-                  <span className='gsap-step-icon inline-flex shrink-0 text-overcast'>{step.icon}</span>
-                  <span>
+                <div className='gsap-step-eyebrow mb-4 flex items-center gap-3 text-base md:text-lg font-medium leading-4 text-overcast'>
+                  <span className='gsap-step-icon inline-flex shrink-0 text-foreground'>{step.icon}</span>
+                  <span className='text-base md:text-lg font-utekos-text-medium leading-4 text-foreground'>
                     {step.stepNumber} — {step.modeName}
                   </span>
                 </div>
 
-                <h3 className='gsap-step-title mb-6 font-google-sans text-5xl font-bold leading-[0.92] tracking-[-0.01em] text-cloud-dancer'>
+                <h3 className='gsap-step-title mb-6 font-google-sans text-5xl md:text-6xl font-bold leading-[0.92] tracking-[-0.01em] text-foreground'>
                   {step.title}
                 </h3>
 
-                <p className='gsap-step-desc max-w-lg   text-base leading-[1.45]   text-cloud-dancer/88'>
+                <p className='gsap-step-desc max-w-lg text-base md:text-2xl leading-text-paragraph text-foreground'>
                   {step.description}
                 </p>
               </div>

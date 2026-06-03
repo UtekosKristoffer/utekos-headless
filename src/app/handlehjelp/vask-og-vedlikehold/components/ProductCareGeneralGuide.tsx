@@ -107,7 +107,7 @@ export function ProductCareGeneralGuide() {
             <div className='flex items-start gap-4 sm:gap-5'>
               <span
                 aria-hidden='true'
-                className='flex size-11 shrink-0 items-center justify-center rounded-full border border-havdyp/30 bg-havdyp text-cloud-dancer sm:size-12'
+                className='flex size-11 shrink-0 items-center justify-center rounded-full border border-havdyp/30 bg-havdyp text-foreground sm:size-12'
               >
                 <Icon className='size-5 sm:size-[1.375rem]' />
               </span>

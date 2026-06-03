@@ -10,7 +10,7 @@ export function CTASection() {
       <div className='absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,var(--ancient-water)_0%,transparent_32%),radial-gradient(circle_at_82%_20%,var(--soft-warm)_0%,transparent_28%)] opacity-[0.18]' />
       <div className='container relative mx-auto px-4 text-center'>
         <AnimatedBlock className='will-animate-fade-in-scale'>
-          <h2 className='mb-6 text-3xl font-bold leading-[1.05] tracking-normal text-cloud-dancer sm:text-4xl'>
+          <h2 className='mb-6 text-3xl font-bold leading-[1.05] tracking-normal text-foreground sm:text-4xl'>
             Klar for å kaste loss?
           </h2>
           <p className='mx-auto mb-8 max-w-2xl utekos-section-lead'>
@@ -22,7 +22,7 @@ export function CTASection() {
               asChild
               backgroundColor='var(--primary)'
               textColor='var(--background)'
-              className='group min-h-14 border border-primary/24 px-8 py-4 text-base leading-[1.4] font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
+              className='group min-h-14 border border-primary/24 px-8 py-4 text-base leading-4 font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
             >
               <Link href={'/produkter' as Route} data-track='BatlivShopAllProductsClick'>
                 Se alle produkter
@@ -33,7 +33,7 @@ export function CTASection() {
               asChild
               backgroundColor='var(--cloud-dancer)'
               textColor='var(--background)'
-              className='min-h-14 border border-cloud-dancer/24 px-8 py-4 text-base leading-[1.4] font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
+              className='min-h-14 border border-cloud-dancer/24 px-8 py-4 text-base leading-4 font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
             >
               <Link href={'/handlehjelp/storrelsesguide' as Route} data-track='BatlivFindYourSizeClick'>
                 Finn din størrelse

@@ -50,7 +50,7 @@ export function ProductSpecsView({ technologyGroups }: { technologyGroups: reado
       <div className='space-y-24 pb-24'>
         {technologyGroups.map(group => (
           <section key={group.groupTitle}>
-            <h2 className='mb-8 border-b border-white/10 pb-4 text-sm font-bold tracking-widest text-cloud-dancer/90'>
+            <h2 className='mb-8 border-b border-white/10 pb-4 text-sm font-bold tracking-widest text-foreground/90'>
               {group.groupTitle}
             </h2>
             <div className='space-y-8'>

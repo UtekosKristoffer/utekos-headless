@@ -1,12 +1,4 @@
-'use client'
-import dynamic from 'next/dynamic'
-
-const HytteSeasonsTabs = dynamic(
-  () => import('./HytteSeasonsTabs').then(mod => mod.HytteSeasonsTabs),
-  {
-    ssr: false
-  }
-)
+import { HytteSeasonsTabs } from './HytteSeasonsTabs'
 
 export function Tabs() {
   return (

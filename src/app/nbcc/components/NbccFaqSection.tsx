@@ -7,7 +7,7 @@ export function NbccFaqSection() {
     <section className='bg-background px-4 py-20 sm:px-6 lg:px-8'>
       <div className='mx-auto grid w-full max-w-4xl gap-10'>
         <div data-nbcc-reveal data-nbcc-animate>
-          <p className='text-sm mx-auto md:text-2xl font-semibold uppercase tracking-[0.18em] text-cloud-dancer'>
+          <p className='text-sm mx-auto md:text-2xl font-semibold uppercase tracking-[0.18em] text-foreground'>
             Spørsmål og svar
           </p>
         </div>
@@ -15,8 +15,6 @@ export function NbccFaqSection() {
         <Accordion
           data-nbcc-reveal
           data-nbcc-animate
-          type='single'
-          collapsible
           className='rounded-lg border border-white/50 bg-background px-5'
         >
           {nbccFaqItems.map(item => (

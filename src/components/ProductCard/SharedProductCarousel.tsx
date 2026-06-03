@@ -7,6 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
+import { CAROUSEL_SSR } from '@/components/ui/carousel-ssr'
 import { createColorHexMap } from '@/lib/helpers/shared/createColorHexMap'
 import { initializeCarouselProducts } from './initializeCarouselProducts'
 import { ProductCard } from './ProductCard'
@@ -16,9 +17,7 @@ interface SharedProductCarouselProps {
   products: ShopifyProduct[]
 }
 
-export function SharedProductCarousel({
-  products
-}: SharedProductCarouselProps) {
+export function SharedProductCarousel({ products }: SharedProductCarouselProps) {
   if (products.length === 0) {
     return null
   }
@@ -27,6 +26,8 @@ export function SharedProductCarousel({
 
   return (
     <Carousel
+      slideCount={products.length}
+      ssr={CAROUSEL_SSR.responsiveHalvesAndThirds(products.length)}
       opts={{
         align: 'start',
         loop: products.length > 3
@@ -36,20 +37,11 @@ export function SharedProductCarousel({
       <CarouselContent className='-ml-8'>
         {products.map(product => {
           const colorHexMap = createColorHexMap(product)
-          const initialOptions =
-            productOptionsMap.get(product.handle)
-            ?? ({} as Record<string, string>)
+          const initialOptions = productOptionsMap.get(product.handle) ?? ({} as Record<string, string>)
 
           return (
-            <CarouselItem
-              key={product.id}
-              className='pl-8 sm:basis-1/2 lg:basis-1/3'
-            >
-              <ProductCard
-                product={product}
-                colorHexMap={colorHexMap}
-                initialOptions={initialOptions}
-              />
+            <CarouselItem key={product.id} className='pl-8 sm:basis-1/2 lg:basis-1/3'>
+              <ProductCard product={product} colorHexMap={colorHexMap} initialOptions={initialOptions} />
             </CarouselItem>
           )
         })}

@@ -79,7 +79,7 @@ export function BoatSeasonsTabs() {
                   className={`size-5 transition-colors ${isActive ? season.iconColor : 'text-overcast'}`}
                 />
                 <span
-                  className={`font-medium text-sm transition-colors ${isActive ? 'text-cloud-dancer' : 'text-white'}`}
+                  className={`font-medium text-sm transition-colors ${isActive ? 'text-foreground' : 'text-white'}`}
                 >
                   {season.label}
                 </span>
@@ -113,10 +113,12 @@ export function BoatSeasonsTabs() {
                     >
                       <Icon className={`h-6 w-6 ${season.iconColor}`} />
                     </div>
-                    <h3 className='text-2xl font-semibold text-cloud-dancer'>{season.title}</h3>
+                    <h3 className='text-2xl font-semibold text-foreground'>{season.title}</h3>
                   </div>
 
-                  <p className='text-lg leading-[1.45] tracking-normal text-overcast'>{season.description}</p>
+                  <p className='text-lg leading-text-paragraph tracking-normal text-overcast'>
+                    {season.description}
+                  </p>
                 </CardContent>
               </Card>
             </div>

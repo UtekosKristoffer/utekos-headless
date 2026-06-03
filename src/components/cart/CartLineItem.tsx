@@ -11,7 +11,7 @@ import {
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { useCartLine } from '@/hooks/useCartLine'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import { cartStore } from '@/lib/state/cartStore'
@@ -111,7 +111,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
       })}
     >
       <Link href={productUrl as Route} onClick={() => cartStore.send({ type: 'CLOSE' })}>
-        <div className='w-24 flex-shrink-0'>
+        <div className='w-24 shrink-0'>
           <AspectRatio
             ratio={1 / 1}
             className='overflow-hidden rounded-lg border border-neutral-700 bg-background'
@@ -130,7 +130,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
         <div className='relative'>
           <div className='min-w-0 pr-8'>
             <Link href={productUrl as Route} onClick={() => cartStore.send({ type: 'CLOSE' })}>
-              <h3 className='break-words text-sm font-medium hover:underline'>{productTitle}</h3>
+              <h3 className='wrap-break-word text-sm font-medium hover:underline'>{productTitle}</h3>
             </Link>
             {color && size && (
               <p className='mt-1 text-xs text-muted-foreground'>
@@ -139,42 +139,40 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
             )}
           </div>
           <div className='absolute -right-2 md:right-0 top-0'>
-            
-              <AlertDialog>
-          
-                  <AlertDialogTrigger asChild>
-                    <Button variant='ghost' size='icon' className='size-6 p-0' disabled={isDeleting}>
-                      <Trash2 className='size-4 text-red-500' />
-                    </Button>
-                  </AlertDialogTrigger>
-                
-            
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Er du sikker?</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        Vil du fjerne {productTitle} fra handlekurven din?
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Nei, avbryt</AlertDialogCancel>
-                      <AlertDialogAction
-                        onClick={handleRemoveLine}
-                        data-track='CartRemoveItem'
-                        className='text-background hover:text-havdyp'
-                        data-track-data={JSON.stringify({
-                          product: productTitle,
-                          variant: variantTitle,
-                          price: basePrice,
-                          quantity: localQuantity,
-                          total: displayPrice
-                        })}
-                      >
-                        Ja, fjern produkt
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-              </AlertDialog>
+            <AlertDialog>
+              <AlertDialogTrigger
+                disabled={isDeleting}
+                className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), 'size-6 p-0')}
+              >
+                <Trash2 className='size-4 text-red-500' />
+              </AlertDialogTrigger>
+
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Er du sikker?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    Vil du fjerne {productTitle} fra handlekurven din?
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Nei, avbryt</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={handleRemoveLine}
+                    data-track='CartRemoveItem'
+                    className='text-background hover:text-havdyp'
+                    data-track-data={JSON.stringify({
+                      product: productTitle,
+                      variant: variantTitle,
+                      price: basePrice,
+                      quantity: localQuantity,
+                      total: displayPrice
+                    })}
+                  >
+                    Ja, fjern produkt
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
         <div className='mt-auto flex flex-col items-start gap-2 pt-2 md:flex-row md:items-center md:justify-between md:gap-4'>
@@ -189,7 +187,7 @@ export const CartLineItem = ({ lineId }: CartLineItemProps) => {
                 <Minus className='size-3' />
               </Button>
             </Activity>
-            <span className='min-w-[1.75rem] text-center text-sm font-medium tabular-nums transition-all duration-100'>
+            <span className='min-w-7 text-center text-sm font-medium tabular-nums transition-all duration-100'>
               {localQuantity}
             </span>
             <Activity>

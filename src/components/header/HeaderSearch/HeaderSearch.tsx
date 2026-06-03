@@ -43,8 +43,8 @@ export function HeaderSearch({ className }: { className?: string }) {
     'onTouchStart': handlePrefetch,
     'aria-label': 'Åpne søk (⌘/Ctrl + K)',
     'className': cn(
-      'group relative hidden h-11 w-64 items-center gap-3 rounded-md border border-cloud-dancer/15 bg-cloud-dancer/6 px-3 text-left text-sm text-cloud-dancer/70 outline-none transition md:flex lg:w-52 xl:mr-3 xl:w-56 2xl:w-60',
-      'hover:border-cloud-dancer/30 hover:text-cloud-dancer focus-visible:border-cloud-dancer/35',
+      'group relative hidden h-11 w-64 items-center gap-3 rounded-md border border-cloud-dancer/15 bg-cloud-dancer/6 px-3 text-left text-sm text-foreground/70 outline-none transition md:flex lg:w-52 xl:mr-3 xl:w-56 2xl:w-60',
+      'hover:border-cloud-dancer/30 hover:text-foreground focus-visible:border-cloud-dancer/35',
       className
     )
   }
@@ -63,7 +63,7 @@ export function HeaderSearch({ className }: { className?: string }) {
           showCloseButton={false}
           className={cn(
             'mx-auto! max-w-3xl md:max-w-4xl lg:max-w-5xl rounded-xl p-2 pb-11 h-[50vh] shadow-2xl',
-            'bg-sidebar-foreground text-cloud-dancer',
+            'bg-sidebar-foreground text-foreground',
             'border border-cloud-dancer/12 ring-2 ring-cloud-dancer/8',
             'backdrop-blur-md',
             className
@@ -93,7 +93,7 @@ export function HeaderSearch({ className }: { className?: string }) {
             aria-hidden
             className={cn(
               'pointer-events-none absolute inset-x-0 bottom-0 flex h-10 items-center justify-between border-t border-cloud-dancer/10 px-3 text-xs',
-              'bg-sidebar-foreground text-cloud-dancer/70'
+              'bg-sidebar-foreground text-foreground/70'
             )}
           >
             <HeaderSearchFooter />

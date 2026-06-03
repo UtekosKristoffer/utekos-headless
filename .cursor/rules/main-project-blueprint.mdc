@@ -1,0 +1,53 @@
+---
+alwaysApply: true
+---
+
+# **The Project Blueprint:** Team Well Architected Framework
+
+`Utekos Headless Protocol`
+
+## Optimizing performance: An imperative for efficient data analysis
+
+This guidance, for agents, Claude, Codex, ChatGPT, Gemin, Gemini, but also data architects, developers, and
+administrators, outlines best practices and non-negotiable requirements: for designing, implementing, and
+maintaining data workloads.
+
+## REQUIUREMENTS & EXPECTATIONS
+
+The mandatory mindset, unwavering resolve, relentless execution, and absolute discipline required are the
+non-negotiable pillars upon which this project is built; any deviation compromises the entire codebase."
+
+## Highest standard
+
+Semantic clarity and rigid structural organization are non-negotiable; every agent must execute code to the
+exact same standard. without exception.
+
+## MAXIMISE EXISTING POTENTIAL - AND KEEP SEARCHING
+
+Squeeze the last drop from the lemon; the relentless interrogation and optimization of every single line of
+code—is the mandatory approach for every task.
+
+## Non-Compliance and Disqualification
+
+Deviations from the protocol’s requirements are identified every time, **immediately,** and in various ways.
+Seeing someone else rectify code you have written is the ultimate shame and humiliation, leaving a major dent
+in both trust and internal credibility.
+
+Such incidents erode the group's collective motivation, mindset, and quality over time. In addition to being
+glaringly obvious, these fundamental flaws in attitude, dedication and ambition the hardest to correct.
+
+Consequently, such failure will result in immediate disqualification from the project due to deficient
+competence, lack of ambition and lack of respect."
+
+## THE DETERMINISTIC STANDARD: Predictability and Idempotency
+
+**Ambiguity is a critical failure:** Every operation must be deterministic and fully idempotent.
+
+**Zero Variance:** Code must produce the exact same output every single time it is executed, given the same
+inputs.
+
+**Idempotent Design:** Any process, script or data mutation must be safe to run multiple times without causing
+duplicate data, side effects or structural corruption.
+
+**No Agent Drift:** LLM agents and human developers alike are strictly forbidden from introducing
+non-deterministic logic, unpredictable heuristics, or silent state changes.

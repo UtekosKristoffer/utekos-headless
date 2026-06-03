@@ -39,16 +39,11 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
   return (
     <section id='bruksomrader' className='bg-overcast py-24'>
       <div className='container mx-auto px-4'>
-        <div className='mx-auto mb-16 max-w-4xl text-center'>
-          <h2 className='inline-flex flex-nowrap items-baseline justify-center gap-x-[0.18em] whitespace-nowrap font-google-sans text-fluid-display font-bold leading-[0.95] tracking-[-0.01em] text-background'>
-            <UtekosWordmark
-              className='h-[0.9em] w-auto shrink-0 translate-y-[0.07em]'
-              style={{ color: 'var(--background)' }}
-            />
-            <span>gjennom bobildøgnet</span>
+        <div className='mx-auto mb-4 max-w-4xl text-center'>
+          <h2 className='inline-flex flex-nowrap mb-6 items-baseline justify-center gap-x-[0.18em] whitespace-nowrap font-google-sans font-bold leading-[0.95] tracking-[-0.01em] text-maritime-darkest'>
+            Utekos gjennom bobildøgnet
           </h2>
-
-          <p className='mx-auto mt-4 max-w-2xl utekos-section-lead text-background'>
+          <p className='mx-auto max-w-2xl mt-2 utekos-section-lead text-medium text-maritime-darkest'>
             Fra soloppgang til solnedgang får du varme når turen ber om det.
           </p>
         </div>
@@ -62,7 +57,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
             >
               <Card className='@container relative h-full overflow-hidden border-cloud-dancer/12 bg-havdyp group'>
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${useCase.color} to-transparent opacity-20 transition-opacity group-hover:opacity-30`}
+                  className={`absolute inset-0 bg-linear-to-br ${useCase.color} to-transparent opacity-20 transition-opacity group-hover:opacity-30`}
                 />
                 <CardContent className='relative p-8'>
                   <div className='mb-6 flex items-center gap-4'>
@@ -70,17 +65,17 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                       <useCase.icon className={`size-6 ${useCase.iconColor}`} />
                     </div>
                     <div>
-                      <p className='  text-sm tracking-[-0.02em] text-cloud-dancer'>{useCase.time}</p>
-                      <p className='  text-sm font-medium tracking-[-0.02em] text-cloud-dancer/90'>
+                      <p className='  text-sm tracking-[-0.02em] text-foreground'>{useCase.time}</p>
+                      <p className='  text-sm font-medium tracking-[-0.02em] text-foreground/90'>
                         {useCase.temperature}
                       </p>
                     </div>
                   </div>
 
-                  <h3 className='font-google-sans mb-2 text-xl font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer'>
+                  <h3 className='font-google-sans mb-2 text-xl font-bold leading-[0.95] tracking-[-0.01em] text-foreground'>
                     {useCase.title}
                   </h3>
-                  <p className='  leading-[1.45] tracking-[-0.02em] text-cloud-dancer/90'>
+                  <p className='  leading-text-paragraph tracking-[-0.02em] text-foreground/90'>
                     {useCase.description}
                   </p>
                 </CardContent>

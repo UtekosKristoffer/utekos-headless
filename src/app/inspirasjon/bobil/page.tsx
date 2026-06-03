@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 
 export default function BobilInspirasjonPage() {
   return (
-    <article className='flex flex-col text-cloud-dancer'>
+    <article className='flex flex-col bg-background text-foreground'>
       <BobilHeroSection />
 
       <UseCasesGrid useCases={useCasesData} />

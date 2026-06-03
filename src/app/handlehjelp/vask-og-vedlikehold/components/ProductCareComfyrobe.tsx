@@ -23,7 +23,7 @@ export function ProductCareComfyrobe() {
       className='mt-8 rounded-2xl border border-background/10 bg-cloud-dancer/72 p-6 shadow-[0_20px_54px_-46px_color-mix(in_oklab,var(--background)_72%,transparent)] sm:p-8'
     >
       <h3 className='text-2xl font-semibold   text-background'>Comfyrobe™</h3>
-      <p className='mt-3 max-w-2xl text-base   leading-[1.45] text-background/82'>
+      <p className='mt-3 max-w-2xl text-base   leading-text-paragraph text-background/82'>
         Comfyrobe kombinerer myk komfort med beskyttende DWR-behandling. Riktig pleie bevarer både følelsen
         mot huden og evnen til å holde vann unna.
       </p>
@@ -33,7 +33,7 @@ export function ProductCareComfyrobe() {
         <CareList variant='dont' title='Unngå' items={dontItems} />
       </div>
 
-      <div className='mt-7 rounded-2xl border border-cloud-dancer/12 bg-havdyp p-5 text-cloud-dancer sm:p-6'>
+      <div className='mt-7 rounded-2xl border border-cloud-dancer/12 bg-havdyp p-5 text-foreground sm:p-6'>
         <div className='flex items-start gap-3'>
           <span
             aria-hidden='true'
@@ -42,10 +42,10 @@ export function ProductCareComfyrobe() {
             <Droplets className='size-[1.05rem]' />
           </span>
           <div>
-            <h4 className='text-base font-semibold   text-cloud-dancer sm:text-lg'>
+            <h4 className='text-base font-semibold   text-foreground sm:text-lg'>
               Frisk opp DWR-behandlingen
             </h4>
-            <p className='mt-2 text-sm leading-relaxed    text-cloud-dancer/90 sm:text-base'>
+            <p className='mt-2 text-sm leading-relaxed    text-foreground/90 sm:text-base'>
               Hvis vann ikke lenger preller av ytterstoffet, kan du reaktivere DWR-behandlingen med en
               impregneringsspray. Lav varme i tørketrommel etterpå låser behandlingen. Husk å lufte plagget
               godt etter kontakt med saltvann eller klor.

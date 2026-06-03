@@ -22,7 +22,7 @@ export default function ProductHeader({ productHandle, productTitle, productSubt
         <h1 className='text-4xl font-google-sans font-bold text-foreground'>{productTitle}</h1>
 
         {typeof productSubtitle === 'string' && productSubtitle.trim() !== '' && (
-          <p className='mt-4 max-w-2xl text-lg  leading-[1.45] text-foreground'>{productSubtitle}</p>
+          <p className='mt-4 max-w-2xl text-lg  leading-text-paragraph text-foreground'>{productSubtitle}</p>
         )}
       </AnimatedBlock>
     </hgroup>

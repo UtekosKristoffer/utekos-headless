@@ -97,7 +97,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                         <useCase.icon className='size-6' />
                       </div>
                       <p
-                        className='rounded-full border px-3 py-1 text-sm leading-[1] font-medium tracking-[-0.01em]'
+                        className='rounded-full border px-3 py-1 text-sm leading-nonefont-medium tracking-[-0.01em]'
                         style={{
                           backgroundColor: 'color-mix(in oklch, var(--cloud-dancer) 72%, var(--overcast))',
                           borderColor: theme.border,
@@ -108,13 +108,13 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                       </p>
                     </div>
                     <p
-                      className='mb-3 font-google-sans text-sm leading-[1] tracking-[-0.01em]'
+                      className='mb-3 font-google-sans text-sm leading-nonetracking-[-0.01em]'
                       style={{ color: 'var(--background)' }}
                     >
                       {useCase.time}
                     </p>
                     <h3 className='text-background'>{useCase.title}</h3>
-                    <p className='mt-4 text-base leading-[1.45] tracking-[-0.01em] text-background/78'>
+                    <p className='mt-4 text-base leading-text-paragraph tracking-[-0.01em] text-background/78'>
                       {useCase.description}
                     </p>
                   </CardContent>

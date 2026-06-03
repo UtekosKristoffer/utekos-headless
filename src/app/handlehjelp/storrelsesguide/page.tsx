@@ -67,7 +67,7 @@ export default function SizeGuidePage() {
           </p>
         </div>
       </div>
-      <div className='sticky top-0 z-20 my-10 py-4 text-cloud-dancer sm:my-16'>
+      <div className='sticky top-0 z-20 my-10 py-4 text-foreground sm:my-16'>
         <div className='container mx-auto px-4'>
           <nav
             className='flex flex-wrap items-center justify-center gap-2 sm:gap-3'

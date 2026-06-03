@@ -87,7 +87,7 @@ export function NewProductInStoreNoticeView({
               <Button
                 asChild
                 size='lg'
-                className='group my-4 h-12 text-cloud-dancer bg-havdyp rounded-full px-8 text-base'
+                className='group my-4 h-12 text-foreground bg-havdyp rounded-full px-8 text-base'
               >
                 {/* FIX: Caster string til Route for å tilfredsstille Typed Routes */}
                 <Link href={mapsUrl as Route} target='_blank'>

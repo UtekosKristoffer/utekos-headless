@@ -24,7 +24,7 @@ export function TrustSignals() {
             className='group flex flex-col items-center gap-2.5 text-center'
             aria-label='Les mer om returpolicy'
           >
-            <div className='flex h-10 w-10 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
+            <div className='flex h-10 w-10 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-foreground transition-transform duration-300 group-hover:scale-105'>
               <RotateCcw className='h-5 w-5' />
             </div>
             <span className='text-sm font-medium leading-tight text-havdyp transition-colors group-hover:text-havdyp/76'>
@@ -37,7 +37,7 @@ export function TrustSignals() {
             className='group flex flex-col items-center gap-2.5 text-center'
             aria-label='Les mer om levering'
           >
-            <div className='flex h-10 w-10 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
+            <div className='flex h-10 w-10 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-foreground transition-transform duration-300 group-hover:scale-105'>
               <Truck className='h-5 w-5' />
             </div>
             <span className='text-sm font-medium leading-tight text-havdyp transition-colors group-hover:text-havdyp/76'>
@@ -50,7 +50,7 @@ export function TrustSignals() {
             className='group flex flex-col items-center gap-2.5 text-center'
             aria-label='Les mer om betalingsalternativer'
           >
-            <div className='flex h-10 w-10 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
+            <div className='flex h-10 w-10 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-foreground transition-transform duration-300 group-hover:scale-105'>
               <ShieldCheck className='h-5 w-5' />
             </div>
             <span className='text-sm font-medium leading-tight text-havdyp transition-colors group-hover:text-havdyp/76'>
@@ -82,7 +82,7 @@ export function TrustSignals() {
           className='flex items-center gap-3 border-b border-havdyp/10 px-5 py-3.5 transition-colors hover:bg-cloud-dancer/70'
           aria-label='Les mer om returpolicy'
         >
-          <div className='flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-cloud-dancer'>
+          <div className='flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-foreground'>
             <RotateCcw className='h-4.5 w-4.5' />
           </div>
           <div>
@@ -98,7 +98,7 @@ export function TrustSignals() {
           className='flex items-center gap-3 border-b border-havdyp/10 px-5 py-3.5 transition-colors hover:bg-cloud-dancer/70'
           aria-label='Les mer om levering'
         >
-          <div className='flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-cloud-dancer'>
+          <div className='flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-foreground'>
             <Truck className='h-4.5 w-4.5' />
           </div>
           <div>
@@ -115,7 +115,7 @@ export function TrustSignals() {
           className='flex items-center gap-3 border-b border-havdyp/10 px-5 py-3.5 transition-colors hover:bg-cloud-dancer/70'
           aria-label='Les mer om betalingsalternativer'
         >
-          <div className='flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-cloud-dancer'>
+          <div className='flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-foreground'>
             <ShieldCheck className='h-4.5 w-4.5' />
           </div>
           <div>

@@ -73,7 +73,7 @@ export function ComfyrobeFeatureSection() {
                       textColor='var(--cloud-dancer)'
                       className='mb-5 gap-2 border border-cloud-dancer/18 px-4 py-2   text-sm font-medium   shadow-[0_16px_34px_-28px_color-mix(in_oklch,var(--bleached-mauve)_68%,transparent)]'
                     >
-                      <Wind className='size-4 text-cloud-dancer' aria-hidden='true' />
+                      <Wind className='size-4 text-foreground' aria-hidden='true' />
                       <span>Comfyrobe™</span>
                     </BrandBadge>
                   </AnimatedBlock>
@@ -81,7 +81,7 @@ export function ComfyrobeFeatureSection() {
                   <AnimatedBlock className='will-animate-fade-in-up' delay='0.05s'>
                     <h2
                       id='comfyrobe-feature-heading'
-                      className='max-w-2xl text-balance font-google-sans text-3xl font-bold leading-[0.95]   text-cloud-dancer sm:text-4xl lg:text-5xl'
+                      className='max-w-2xl text-balance font-google-sans text-3xl font-bold leading-[0.95]   text-foreground sm:text-4xl lg:text-5xl'
                     >
                       Forleng utekosen.
                       <br />
@@ -90,7 +90,7 @@ export function ComfyrobeFeatureSection() {
                   </AnimatedBlock>
 
                   <AnimatedBlock className='will-animate-fade-in-up' delay='0.1s'>
-                    <p className='mt-6 max-w-2xl   text-lg leading-[1.45]   text-cloud-dancer/88'>
+                    <p className='mt-6 max-w-2xl   text-lg leading-text-paragraph   text-foreground/88'>
                       Comfyrobe™ er den ultimate allværskåpen for livsnyteren. Den kombinerer den urokkelige
                       beskyttelsen til en teknisk skalljakke med den komfortable omfavnelsen av din mykeste
                       badekåpe.
@@ -142,12 +142,12 @@ export function ComfyrobeFeatureSection() {
                                   />
                                 </div>
 
-                                <h3 className='text-base font-semibold leading-[1.2]   text-cloud-dancer'>
+                                <h3 className='text-base font-semibold leading-[1.2]   text-foreground'>
                                   {feature.title}
                                 </h3>
                               </div>
 
-                              <p className='mt-3 text-sm leading-[1.45]   text-cloud-dancer/78 sm:mt-2'>
+                              <p className='mt-3 text-sm leading-text-paragraph   text-foreground/78 sm:mt-2'>
                                 {feature.description}
                               </p>
                             </div>
@@ -159,7 +159,7 @@ export function ComfyrobeFeatureSection() {
 
                   <AnimatedBlock className='will-animate-fade-in-up' delay='0.5s'>
                     <div className='mt-8 flex w-full flex-col items-start gap-4 sm:flex-row sm:items-center'>
-                      <p className='font-google-sans text-4xl font-bold leading-none   text-cloud-dancer'>
+                      <p className='font-google-sans text-4xl font-bold leading-none   text-foreground'>
                         NOK 990,-
                       </p>
 

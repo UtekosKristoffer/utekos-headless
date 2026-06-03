@@ -58,7 +58,7 @@ export function FindUsSection() {
             <h2 className='mb-6 text-4xl leading-[0.95] font-bold font-google-sans   text-background sm:text-5xl'>
               Der du har møtt oss
             </h2>
-            <p className='mb-10 text-lg leading-[1.45]     text-background'>
+            <p className='mb-10 text-lg leading-text-paragraph     text-background'>
               Vi elsker å prate med folk – derfor er vi jevnlig på messer og stands. Her er noen av stedene du
               kan ha truffet oss, og hvor vi har fått verdifulle innspill fra kunder som faktisk har kjent
               komforten.
@@ -67,13 +67,13 @@ export function FindUsSection() {
             <div className='space-y-6'>
               {pastEvents.map(event => (
                 <div key={`${event.name}-${event.date}`} className='group flex items-start gap-5'>
-                  <div className='flex size-12 shrink-0 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-cloud-dancer transition-transform duration-300 group-hover:scale-105'>
+                  <div className='flex size-12 shrink-0 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-foreground transition-transform duration-300 group-hover:scale-105'>
                     <MapPinIcon className='size-5' strokeWidth={2} />
                   </div>
 
                   <div className='pt-1'>
-                    <h3 className='mb-1 text-xl leading-[1] font-semibold   text-background'>{event.name}</h3>
-                    <p className='text-sm leading-[1.45] font-medium   text-background/80'>
+                    <h3 className='mb-1 text-xl leading-nonefont-semibold   text-background'>{event.name}</h3>
+                    <p className='text-sm leading-text-paragraph font-medium   text-background/80'>
                       {event.location}
                       <span className='mx-2 text-havdyp'>•</span>
                       {event.date}

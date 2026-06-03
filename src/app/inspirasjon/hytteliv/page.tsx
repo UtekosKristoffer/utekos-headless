@@ -6,7 +6,7 @@ import { CabinHeroSection } from './components/CabinHeroSection'
 import { CTASection } from './components/CTASection'
 import { PopularCabinAreasGrid, popularAreasData } from './components/PopularCabinAresGrid'
 import { UseCasesGrid, useCasesData } from './components/UseCasesGrid'
-import { SeasonsSection } from './components/SeasonsSection'
+import { HytteSeasonsSection } from './components/HytteSeasonsSection'
 import { SocialProof } from './components/SocialProof'
 
 export const metadata: Metadata = {
@@ -44,7 +44,7 @@ export default function CabinInspirationPage() {
         <CabinHeroSection />
         <UseCasesGrid useCases={useCasesData} />
         <BenefitsGrid benefits={benefitsData} />
-        <SeasonsSection />
+        <HytteSeasonsSection />
         <PopularCabinAreasGrid destinations={popularAreasData} />
         <SocialProof />
         <CTASection />

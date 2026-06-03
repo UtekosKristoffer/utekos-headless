@@ -43,7 +43,7 @@ export function ProductShowcase() {
               />
             </div>
           </div>
-          <div className='relative aspect-[4/5] bg-[#2C2420]/30 rounded-2xl overflow-hidden shadow-2xl border border-[#F4F1EA]/5'>
+          <div className='relative aspect-4/5 bg-[#2C2420]/30 rounded-2xl overflow-hidden shadow-2xl border border-[#F4F1EA]/5'>
             <Image
               src={ProductMain}
               alt='Utekos Mikrofiber i bruk'

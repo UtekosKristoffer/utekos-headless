@@ -27,7 +27,7 @@ export function EmpathySection() {
         <div className='relative'>
           {/* 1. Eyebrow — slide from LEFT + underline grow */}
           <div className='gsap-empathy-anim relative mb-4 inline-flex items-end overflow-hidden pb-1.5'>
-            <span className='gsap-empathy-eyebrow   text-sm font-medium leading-[1.4]   text-demitasse'>
+            <span className='gsap-empathy-eyebrow   text-sm font-medium leading-4   text-demitasse'>
               Det du kjenner igjen
             </span>
             <span
@@ -46,7 +46,7 @@ export function EmpathySection() {
             </span>
           </h2>
 
-          <div className='max-w-none   text-base leading-[1.45]   text-background'>
+          <div className='max-w-none   text-base leading-text-paragraph   text-background'>
             <p className='gsap-empathy-para1 relative max-w-[34rem]'>
               Du kjenner følelsen. Praten går lett rundt bålpannen, flammene danser, og roen har senket seg.
               Så kommer den snikende trekken som truer med å bryte magien.
@@ -62,8 +62,8 @@ export function EmpathySection() {
               </p>
             </div>
             <p className='gsap-empathy-para2 mt-6 max-w-[34rem] text-background'>
-              Med Utekos® blir svaret enkelt. Fra lett mikrofiber til TechDown™ pakker plagget deg inn i
-              varme slik at du kan bli sittende.
+              Med Utekos® blir svaret enkelt. Fra lett mikrofiber til TechDown™ pakker plagget deg inn i varme
+              slik at du kan bli sittende.
               <br />
               <br />
               <span className='font-medium italic text-background'>Kjenn varmen. Forleng kvelden.</span>
@@ -93,7 +93,7 @@ export function EmpathySection() {
 
         {/* 8. Image column — fade + scale + scroll parallax */}
         <div className='gsap-empathy-image-wrap relative w-full'>
-          <div className='relative aspect-[4/5] w-full md:aspect-square'>
+          <div className='relative aspect-4/5 w-full md:aspect-square'>
             <div className='relative h-full w-full overflow-hidden rounded-sm shadow-2xl shadow-demitasse/20'>
               <div className='gsap-empathy-image absolute -inset-y-14 inset-x-0 will-change-transform'>
                 <Image
@@ -111,8 +111,8 @@ export function EmpathySection() {
                 className='absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background/75 via-background/30 to-transparent'
               />
 
-              <div className='gsap-empathy-image-overlay absolute bottom-5 left-5 right-5 text-cloud-dancer md:bottom-7 md:left-7 md:right-7'>
-                <p className='mb-1.5   text-sm font-medium leading-[1.4] tracking-normal text-cloud-dancer/85'>
+              <div className='gsap-empathy-image-overlay absolute bottom-5 left-5 right-5 text-foreground md:bottom-7 md:left-7 md:right-7'>
+                <p className='mb-1.5   text-sm font-medium leading-4 tracking-normal text-foreground/85'>
                   Stemning
                 </p>
                 <p className='font-google-sans text-lg font-bold italic leading-[0.95] tracking-normal drop-shadow-md md:text-2xl'>

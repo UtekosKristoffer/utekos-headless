@@ -10,17 +10,11 @@ interface SizeSelectorSectionProps {
   onSelect: (key: SizeOptionKey) => void
 }
 
-export function SizeSelectorSection({
-  selectedSize,
-  onSelect
-}: SizeSelectorSectionProps) {
+export function SizeSelectorSection({ selectedSize, onSelect }: SizeSelectorSectionProps) {
   const currentProfile = SIZE_DATA[selectedSize]
 
   return (
-    <section
-      id='size-selector'
-      className='relative bg-[#0a0a0a] py-24 lg:py-32 overflow-hidden'
-    >
+    <section id='size-selector' className='relative bg-[#0a0a0a] py-24 lg:py-32 overflow-hidden'>
       <div className='absolute inset-0 pointer-events-none'>
         <div
           className={`absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-sky-900/20 rounded-full blur-[120px] transition-all duration-1000 ${selectedSize === 'S' ? 'opacity-100 scale-100' : 'opacity-20 scale-50'}`}
@@ -34,13 +28,13 @@ export function SizeSelectorSection({
         <div className='text-center mb-12'>
           <h2 className='text-3xl lg:text-5xl font-bold text-white mb-4'>
             Finn din{' '}
-            <span className='text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-white'>
+            <span className='text-transparent bg-clip-text bg-linear-to-r from-sky-400 to-white'>
               perfekte match
             </span>
           </h2>
           <p className='text-slate-400 max-w-lg mx-auto'>
-            Vi er utsolgt for størrelse Medium, men sjansen er stor for at en av
-            våre spesial-profiler passer deg <i>bedre</i>.
+            Vi er utsolgt for størrelse Medium, men sjansen er stor for at en av våre spesial-profiler passer
+            deg <i>bedre</i>.
           </p>
         </div>
 

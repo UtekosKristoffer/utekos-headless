@@ -103,14 +103,14 @@ export function ProductsPageHeader() {
 
         <div className='absolute left-1/2 top-0 h-[800px] w-[1000px] -translate-x-1/2 opacity-25 mix-blend-screen'>
           <div
-            className='gsap-spotlight h-full w-full bg-gradient-to-b from-ancient-water via-dusted-peri/18 to-transparent blur-[120px] will-change-transform'
+            className='gsap-spotlight h-full w-full bg-linear-to-b from-ancient-water via-dusted-peri/18 to-transparent blur-[120px] will-change-transform'
             style={{
               transform: 'translate(0, 0)'
             }}
           />
         </div>
 
-        <div className='absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-cloud-dancer/30 to-transparent' />
+        <div className='absolute inset-x-10 top-0 h-px bg-linear-to-r from-transparent via-cloud-dancer/30 to-transparent' />
 
         {STAR_POSITIONS.map((position, i) => (
           <div
@@ -133,7 +133,7 @@ export function ProductsPageHeader() {
             className='group relative border border-cloud-dancer/18 px-5 py-2.5 shadow-[0_14px_32px_-24px_rgba(8,10,24,0.62)] sm:px-6 sm:py-3'
           >
             <span className='absolute inset-0 overflow-hidden rounded-full'>
-              <span className='absolute top-0 -left-[100%] h-full w-full bg-gradient-to-r from-transparent via-cloud-dancer/25 to-transparent skew-x-12 transition-all duration-1000 group-hover:left-[100%]' />
+              <span className='absolute top-0 -left-[100%] h-full w-full bg-linear-to-r from-transparent via-cloud-dancer/25 to-transparent skew-x-12 transition-all duration-1000 group-hover:left-[100%]' />
             </span>
             <UtekosWordmark
               className='relative z-10 h-auto w-[98px] sm:w-[112px]'
@@ -142,20 +142,20 @@ export function ProductsPageHeader() {
           </BrandBadge>
         </div>
 
-        <h1 className='perspective-1000 mx-auto max-w-5xl text-3xl font-bold   font-google-sans text-cloud-dancer sm:text-5xl md:text-7xl'>
+        <h1 className='perspective-1000 mx-auto max-w-5xl text-3xl font-bold   font-google-sans text-foreground sm:text-5xl md:text-7xl'>
           <span className='block overflow-hidden'>
             <span className='gsap-title-line block'>Kolleksjonen for</span>
           </span>
           <span className='block overflow-hidden pt-2'>
-            <span className='gsap-title-line block   font-google-sans  bg-gradient-to-r from-ancient-water via-cloud-dancer to-overcast bg-clip-text py-1 leading-tight text-transparent'>
+            <span className='gsap-title-line block   font-google-sans  bg-linear-to-r from-ancient-water via-cloud-dancer to-overcast bg-clip-text py-1 leading-tight text-transparent'>
               kompromissløs komfort
             </span>
           </span>
         </h1>
 
-        <p className='gsap-desc opacity-0 mx-auto     mt-8 max-w-2xl text-lg leading-[1.5] text-cloud-dancer/95 md:text-xl'>
+        <p className='gsap-desc opacity-0 mx-auto     mt-8 max-w-2xl text-lg leading-[1.5] text-foreground/95 md:text-xl'>
           Vi har{' '}
-          <span className='relative inline-block font-medium      text-cloud-dancer'>
+          <span className='relative inline-block font-medium      text-foreground'>
             redefinert
             <span className='gsap-underline absolute bottom-0 left-0 h-[2px] w-full origin-left bg-primary    ' />
           </span>{' '}

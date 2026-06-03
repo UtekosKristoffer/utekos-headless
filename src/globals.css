@@ -1,8 +1,41 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+/* google-sans-latin-full-normal */
+@font-face {
+  font-family: 'Google Sans Variable';
+  font-style: normal;
+  font-display: optional;
+  font-weight: 400 700;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/google-sans:vf@latest/latin-full-normal.woff2)
+    format('woff2-variations');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 @theme {
-  --breakpoint-tablet: 33.75rem;
+  --breakpoint-*: initial;
+  --breakpoint-sm: 40rem; /* 640px */
+  --breakpoint-md: 48rem; /* 768px */
+  --breakpoint-ipad: 51rem; /* 816px */
+  --breakpoint-lg: 64rem; /* 1024px */
+  --breakpoint-thinkpad: 75rem; /* 1200px */
+  --breakpoint-xl: 80rem; /* 1280px */
+  --breakpoint-landscape: 85rem; /* 1360px */
+  --breakpoint-2xl: 96rem; /* 1536px */
+  --breakpoint-laptop: 104rem; /* 1664px */
+  --breakpoint-desktop: 123.625rem; /* 1978px */
+  --breakpoint-huge: 320rem; /* 5120px */
+
+  /*
+  Tailwind's default breakpoints
+
+  --breakpoint-sm: 40rem; 640px
+  --breakpoint-md: 48rem; 768px
+  --breakpoint-lg: 64rem; 1024px
+  --breakpoint-xl: 80rem; 1280px
+  --breakpoint-2xl: 96rem; 1536px
+  */
   --spacer-xxxs: 0.25rem;
   --spacer-xxs: 0.5rem;
   --spacer-xs: 0.75rem;
@@ -36,6 +69,7 @@
   --text-utekos-heading-level-three--font-family: var(--font-google-sans), system-ui, sans-serif;
 
   --font-sans: var(--font-utekos-text), system-ui, sans-serif;
+  --font-google-sans: 'Google Sans Variable', system-ui, sans-serif;
   --font-weight-card-heading: 700;
 
   --text-inspirational-page-hero-card-heading: clamp(1rem, 0.7rem + 1vw, 1.5rem);
@@ -68,6 +102,7 @@
   --tracking-font-utekos-text: -0.025em;
 
   /* The scale runs strictly from neutral to compact */
+  --tracking-0: 0.05em;
   --tracking-1: -0.03em; /* Utekos's max tight limit for body copy/buttons (-3%) */
   --tracking-2: -0.02em; /* Medium-snug body copy (-2%) */
   --tracking-3: -0.015em; /* Light-snug body copy (-1.5%) */
@@ -116,6 +151,13 @@
   --tracking-ml: -0.02em;
 
   /* Utekos TechDown */
+  --color-cognac: #c87d38;
+  --color-fire: #ba5c46;
+  --color-messing: #c29b57;
+  --color-darkberry: oklch(0.58 0.16 18);
+  --color-blackberry: oklch(0.268 0.052 308);
+  --color-cognac-warm: oklch(0.66 0.15 48);
+  --color-messing-200: oklch(0.72 0.12 78);
   --color-vargnatt: oklch(0.2789 0.0091 285.79);
   --color-silhouette: oklch(0.2881 0.0219 262.5);
   --color-havdyp: oklch(0.2884 0.0366 279.42);
@@ -126,6 +168,7 @@
   --color-inking: oklch(0.3048 0.0341 291.48);
   --color-inking-100: oklch(0.3048 0.0341 291.48);
   --color-eclipse: oklch(0.3276 0.0405 291.98);
+  --color-eggplant: oklch(0.28 0.0584 296.86);
   --color-deep-cobalt: oklch(0.3982 0.0575 278.29);
   --color-graytone: oklch(0.4162 0.03 295.25);
   --color-skipper-blue: oklch(0.4252 0.0661 280.99);
@@ -150,6 +193,7 @@
   --color-raisin: oklch(0.3943 0.024 6.35);
   --color-plum-truffle: oklch(0.4729 0.0211 13.65);
   --color-delicioso: oklch(0.3377 0.0177 52.86);
+  --color-shitake: oklch(0.3377 0.0177 52.86);
   --color-antier: oklch(0.6039 0.0343 27.96);
   --color-demitasse: oklch(0.3328 0.0233 53.3);
   --color-chocolate-plum: oklch(0.3159 0.0237 14.31);
@@ -199,10 +243,23 @@
   --color-light-background: var(--color-cloud-dancer);
   --color-button: oklch(0.57 0.23507 260.1068);
   --color-header-secondary: oklch(0.2805 0.0458 357.59);
+  --color-header-plum: oklch(0.2471 0.0352 8.01);
+  --color-ganache: oklch(0.2938 0.0165 11.97);
+  --color-licorice: oklch(0.3356 0.0086 6.11);
+  --color-raisin: oklch(0.3943 0.024 6.35);
+  --color-plum-thruffle: oklch(0.4729 0.0211 13.65);
+  --color-plum-perfect: oklch(0.3517 0.0353 336.04);
+  --color-marsala: oklch(0.5125 0.0956 23.49);
+  --color-coated-100: oklch(0.3736 0.0757 10.53);
+  --color-coted-150: oklch(0.3736 0.0757 10.53);
+  --cololor-coated-200: oklch(0.3708 0.0674 352.96);
 }
 
 @theme inline {
+  --tracking-0: 0.05em;
   --foreground: oklch(0.985 0 0);
+  --eggplant: oklch(0.28 0.0584 296.86);
+  --header-secondary: var(--color-header-secondary);
   --tablet: var(--breakpoint-tablet);
   --tracking-1: var(--tracking-1); /* Utekos's max tight limit for body copy/buttons (-3%) */
   --tracking-2: var(--tracking-2); /* Medium-snug body copy (-2%) */
@@ -211,6 +268,7 @@
   --tracking-5: var(--tracking-normal); /* Completely neutral/standard default */
   --background: oklch(0.1442 0.0511 291.62);
   --border: oklch(0.7034 0.198 45.92);
+  --header-plum: oklch(0.2471 0.0352 8.01);
   --ring: oklch(0.2884 0.0366 279.42);
   --tracking-medium: var(--tracking-medium);
   --tracking-font-utekos-text: var(--tracking-wide);
@@ -238,12 +296,14 @@
   --white-down: oklch(0.9126 0.0125 91.53);
   --deep-forest: oklch(0.3638 0.0178 154.9);
   --mineral-green: oklch(0.6545 0.0641 142.67);
+  --cognac: #c87d38;
+  --fire: #ba5c46;
+  --messing: #c29b57;
   --fairest-jade: oklch(0.9041 0.02 143.03);
   --raindrops-on-roses: oklch(0.8996 0.0227 3.86);
   --plum-truffle: oklch(0.4729 0.0211 13.65);
   --fjellbla: oklch(0.3504 0.0537 281.83);
   --orange-slice: oklch(0.7034 0.198 45.92);
-  --header-secondary: oklch(0.2249 0.0287 8.33);
   --inking-100: oklch(0.3048 0.0341 291.48);
   --dazzling-blue: oklch(0.457 0.1322 268.66);
   --sweet-lavender: oklch(0.7019 0.0553 283.69);
@@ -274,10 +334,9 @@
   --muted-foreground: oklch(0.78 0.006 88.64);
   --foreground: oklch(0.9493 0.007 88.64);
   --muted: oklch(0.2684 0.0366 279.42);
-  --google-sans: var(--font-google-sans);
-  --font-utekos-text: var(--font-utekos-text);
-  --utekos-text: var(--font-utekos-text);
-  --utekos-text-medium: var(--font-utekos-text-medium);
+  --font-utkos-text: var(--font-utekos-text);
+  --font-utekos-text-medium: var(--font-utekos-text-medium);
+  --font-utekos-title: var(--font-utekos-title);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -746,6 +805,21 @@
   font-family: var(--font-google-sans);
 }
 
+/*
+  Google Sans Variable – «GRAD» (Grade) akse.
+  Grade endrer opplevd strektykkelse UTEN å endre glyffenes bredde,
+  så teksten beholder nøyaktig samme layout/linjebrekk.
+  Akse-område: -50 til 200 (default 0). Høyere = tyngre/rikere strek.
+  Finjuster per element med `--gs-grad`, f.eks. `[--gs-grad:60]`.
+  `wght` styres fortsatt av font-weight og `opsz` av font-optical-sizing,
+  så alle aksene i fonten utnyttes samtidig.
+*/
+.font-google-sans-grade {
+  font-family: var(--font-google-sans);
+  font-optical-sizing: auto;
+  font-variation-settings: 'GRAD' var(--gs-grad, 0);
+}
+
 .grill-seasons-glow-pulse {
   animation: grill-seasons-pulse-glow 8s ease-in-out infinite;
 }
@@ -774,6 +848,14 @@
   animation: hytte-seasons-pulse-glow 8s ease-in-out infinite;
 }
 
+.hytte-seasons-glow-bg {
+  background: radial-gradient(circle, var(--mountain-view) 0%, transparent 90%);
+}
+
+.hytte-seasons-glow-delay {
+  animation-delay: 4s;
+}
+
 .hytte-seasons-fade-in-delayed {
   animation: fadeInUp 0.7s ease-out 0.2s both;
 }
@@ -792,6 +874,205 @@
 
 .hytte-seasons-tab-content-enter {
   animation: hytte-seasons-tab-fade-in 0.3s ease-out;
+}
+
+/*
+  Premium sesongkort: dybde-gradient, glass-kant, topp-glans og en
+  varm aksent-glød. Roen i merkevaren beholdes via lange, eased
+  overganger. `isolation: isolate` + pseudo-lag (z-index: -1) holder
+  glansen over kortets bakgrunn, men bak teksten.
+*/
+.hytte-season-card {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--color-havdyp);
+  background-image:
+    radial-gradient(
+      135% 120% at 50% -20%,
+      color-mix(in oklch, var(--color-maritime-darkest) 40%, transparent),
+      transparent 75%
+    ),
+    linear-gradient(
+      165deg,
+      var(--color-havdyp) 0%,
+      var(--color-maritime-darkest) 45%,
+      var(--color-havdyp) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in oklch, var(--foreground) 16%, transparent),
+    inset 0 0 0 1px color-mix(in oklch, var(--foreground) 7%, transparent),
+    0 28px 56px -30px rgba(6, 8, 22, 0.8);
+  transition:
+    box-shadow 600ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Myk topp-venstre spekulær glans (glass-refleks). */
+.hytte-season-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    75% 55% at 20% -5%,
+    color-mix(in oklch, var(--foreground) 12%, transparent),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* Varm aksent-glød forankret lavt/sentrert – løfter teksten. */
+.hytte-season-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    70% 95% at 50% 120%,
+    color-mix(in oklch, var(--darkberry) 32%, transparent),
+    transparent 60%
+  );
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hytte-season-card:hover {
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in oklch, var(--foreground) 24%, transparent),
+    inset 0 0 0 1px color-mix(in oklch, var(--foreground) 11%, transparent),
+    0 38px 72px -28px rgba(6, 8, 22, 0.92);
+  transform: translateY(-3px);
+}
+
+.hytte-season-card:hover::after {
+  opacity: 0.92;
+}
+
+/* Diskret lysglød på aksent-ordet for «glans» uten neon-effekt. */
+.hytte-season-accent {
+  text-shadow: 0 0 32px color-mix(in oklch, var(--darkberry) 42%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hytte-season-card,
+  .hytte-season-card::after {
+    transition: none;
+  }
+  .hytte-season-card:hover {
+    transform: none;
+  }
+}
+
+/*
+  Kontinuerlige sesong-animasjoner. Kun transform/opacity (compositor),
+  og kun aktive mens kortet er i synsfelt (IntersectionObserver legger
+  til `.is-animating` per kort). Sway/drift/breathe ligger på
+  `.hytte-season-motion` for ikke å kollidere med kortets hover-transform.
+*/
+.hytte-season-sheen {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 60%;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 35%,
+    color-mix(in oklch, var(--foreground) 22%, transparent) 50%,
+    transparent 65%
+  );
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hytte-season-motion {
+    will-change: transform;
+  }
+
+  li[data-season='spring'].is-animating .hytte-season-motion {
+    animation: hytte-anim-spring 6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+  li[data-season='summer'].is-animating .hytte-season-motion {
+    animation: hytte-anim-summer 5s ease-in-out infinite;
+  }
+  li[data-season='autumn'].is-animating .hytte-season-motion {
+    animation: hytte-anim-autumn 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+  li[data-season='winter'].is-animating .hytte-season-motion {
+    animation: hytte-anim-winter-drift 9s ease-in-out infinite;
+  }
+  li[data-season='summer'].is-animating .hytte-season-card::after {
+    animation: hytte-anim-summer-glow 5s ease-in-out infinite;
+  }
+  li[data-season='winter'].is-animating .hytte-season-sheen {
+    animation: hytte-anim-winter-sheen 7s ease-in-out infinite;
+  }
+}
+
+@keyframes hytte-anim-spring {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes hytte-anim-summer {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.045);
+  }
+}
+
+@keyframes hytte-anim-autumn {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0);
+  }
+  50% {
+    transform: translateX(12px) rotate(1.5deg);
+  }
+}
+
+@keyframes hytte-anim-winter-drift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+@keyframes hytte-anim-summer-glow {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+@keyframes hytte-anim-winter-sheen {
+  0% {
+    transform: translateX(-130%) skewX(-12deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.5;
+  }
+  60%,
+  100% {
+    transform: translateX(130%) skewX(-12deg);
+    opacity: 0;
+  }
 }
 
 .seasons-glow-pulse {
@@ -975,16 +1256,19 @@
   }
 
   h1 {
-    font-family: var(--font-google-sans);
-    line-height: 0.85;
-    letter-spacing: var(--tracking-heading-level-one);
-    font-weight: 800;
+    font-family: 'Google Sans Variable', sans-serif;
+    line-height: 1;
+    letter-spacing: -0.021em;
+    font-weight: bolder;
     font-size: var(--text-title);
+    text-wrap: balance;
+    text-align: center;
+    margin: 0 auto;
   }
 
   h2 {
     line-height: 0.9;
-    font-family: var(--font-google-sans);
+    font-family: 'Google Sans Variable', sans-serif;
     letter-spacing: var(--tracking-heading-level-two);
     font-weight: 700;
     font-size: var(--text-heading-level-two);
@@ -1040,6 +1324,17 @@
 }
 
 @layer components {
+  /* Ekstra horisontal luft på mobil for alle inspirasjonssider under /inspirasjon */
+  .inspirasjon-route :where(.container) {
+    padding-inline: max(1.25rem, env(safe-area-inset-left, 0px)) max(1.25rem, env(safe-area-inset-right, 0px));
+  }
+
+  @media (width >= 48rem) {
+    .inspirasjon-route :where(.container) {
+      padding-inline: 1rem;
+    }
+  }
+
   .inspirational-page-hero-card-heading {
     font-size: var(--text-inspirational-page-hero-card-heading);
     line-height: var(--text-inspirational-page-hero-card-heading--line-height);
@@ -1130,61 +1425,6 @@
 @utility text-responsive-heading-level-two {
   font-size: clamp(2.25rem, 1.5rem + 3vw, 3.75rem);
 }
-
-@utility card-heading-font-weight {
-  font-weight: var(--font-weight-card-heading);
-}
-
-@utility text-responsive-heading-level-three {
-  font-size: clamp(1.875rem, 1.25rem + 2.25vw, 2.8125rem);
-}
-
-@utility text-responsive-paragraph {
-  font-size: clamp(1.25rem, 0.875rem + 1.25vw, 1.875rem);
-}
-
-@utility font-google-sans {
-  font-family: var(--font-google-sans), system-ui, sans-serif;
-}
-
-@utility font-utekos-text-medium {
-  font-family: var(--font-utekos-text-medium), system-ui, sans-serif;
-}
-
-@utility brand-tracking-normal {
-  letter-spacing: 0;
-}
-
-@utility brand-tracking-wide {
-  letter-spacing: -0.025em;
-}
-
-@utility brand-tracking-tight {
-  letter-spacing: -0.02em;
-}
-
-@utility utekos-heading-level-two {
-  font-size: var(--text-heading-level-two);
-  line-height: var(--leading-utekos-heading-level-two);
-  letter-spacing: var(--text-heading-level-two-letter-spacing);
-  font-weight: var(--font-weight-utekos-heading-level-two);
-  font-family: var(--font-google-sans);
-}
-
-@utility font-utekos-text-regular {
-  font-size: var(--text-paragraph);
-  line-height: var(--leading-font-utekos-text);
-  letter-spacing: var(--text-paragraph-letter-spacing);
-  font-weight: var(--text-paragraph-font-weight);
-  font-family: var(--font-utekos-text);
-}
-
-@utility font-utekos-text-medium {
-  line-height: 1.3;
-  letter-spacing: var(--text-paragraph-letter-spacing);
-  font-family: var(--font-utekos-text-medium);
-}
-
 @utility text-fluid-display {
   font-size: clamp(2.25rem, 1.5rem + 3vw, 3.75rem);
   line-height: 1.1;

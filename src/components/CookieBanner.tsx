@@ -88,7 +88,7 @@ function ConsentPreferenceCard({
   return (
     <section className='rounded-lg border border-cloud-dancer/12 bg-havdyp/55 p-4 shadow-[0_18px_38px_-34px_color-mix(in_oklab,var(--background)_82%,transparent)]'>
       <div className='flex items-center justify-between gap-4'>
-        <h4 className='font-google-sans text-base font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer'>
+        <h4 className='font-google-sans text-base font-bold leading-[0.95] tracking-[-0.01em] text-foreground'>
           {title}
         </h4>
         <Switch
@@ -98,7 +98,7 @@ function ConsentPreferenceCard({
           {...switchProps}
         />
       </div>
-      <p className='mt-3   text-xs leading-[1.45]   text-cloud-dancer/72'>{description}</p>
+      <p className='mt-3   text-xs leading-text-paragraph   text-foreground/72'>{description}</p>
     </section>
   )
 }
@@ -154,26 +154,26 @@ export function CookieConsentBanner() {
       aria-labelledby='cookie-consent-title'
       aria-describedby='cookie-consent-description'
     >
-      <div className='pointer-events-auto mx-auto max-w-7xl rounded-lg border border-cloud-dancer/12 bg-background/96 p-4 text-cloud-dancer shadow-[0_28px_80px_-36px_color-mix(in_oklab,var(--background)_92%,transparent)] backdrop-blur-md animate-in slide-in-from-bottom-6 duration-500 motion-reduce:animate-none md:p-6'>
+      <div className='pointer-events-auto mx-auto max-w-7xl rounded-lg border border-cloud-dancer/12 bg-background/96 p-4 text-foreground shadow-[0_28px_80px_-36px_color-mix(in_oklab,var(--background)_92%,transparent)] backdrop-blur-md animate-in slide-in-from-bottom-6 duration-500 motion-reduce:animate-none md:p-6'>
         <div>
           {!showDetails ?
             <div className='flex flex-col gap-6 md:flex-row md:items-center md:justify-between'>
               <div className='space-y-3 md:max-w-3xl'>
                 <h3
                   id='cookie-consent-title'
-                  className='font-google-sans text-xl font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer md:text-2xl'
+                  className='font-google-sans text-xl font-bold leading-[0.95] tracking-[-0.01em] text-foreground md:text-2xl'
                 >
                   Vi bryr oss om ditt personvern
                 </h3>
                 <p
                   id='cookie-consent-description'
-                  className='max-w-3xl   text-sm leading-[1.45]   text-cloud-dancer/82 md:text-base'
+                  className='max-w-3xl   text-sm leading-text-paragraph   text-foreground/82 md:text-base'
                 >
                   Vi bruker informasjonskapsler for å holde siden trygg, måle hva som fungerer og vise
                   relevant innhold. Du kan godta alt, bruke kun nødvendige eller tilpasse valgene dine. Les{' '}
                   <Link
                     href={'/personvern' as Route}
-                    className='font-medium text-primary underline underline-offset-4 transition-colors hover:text-cloud-dancer'
+                    className='font-medium text-primary underline underline-offset-4 transition-colors hover:text-foreground'
                   >
                     personvernerklæringen
                   </Link>
@@ -195,13 +195,13 @@ export function CookieConsentBanner() {
               <div className='space-y-3'>
                 <h3
                   id='cookie-consent-title'
-                  className='font-google-sans text-xl font-bold leading-[0.95] tracking-[-0.01em] text-cloud-dancer md:text-2xl'
+                  className='font-google-sans text-xl font-bold leading-[0.95] tracking-[-0.01em] text-foreground md:text-2xl'
                 >
                   Tilpass dine valg
                 </h3>
                 <p
                   id='cookie-consent-description'
-                  className='  text-sm leading-[1.45]   text-cloud-dancer/82 md:text-base'
+                  className='  text-sm leading-text-paragraph   text-foreground/82 md:text-base'
                 >
                   Velg hvilke informasjonskapsler du vil bruke. Nødvendige kapsler holder handlekurv,
                   sikkerhet og sidefunksjoner i gang.

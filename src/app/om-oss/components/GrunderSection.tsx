@@ -32,7 +32,7 @@ export function GrunderSection() {
                   background: 'linear-gradient(135deg, var(--dusted-peri) 0%, var(--chocolate-plum) 100%)'
                 }}
               />
-              <div className='relative h-auto aspect-[4/5] w-64 overflow-hidden rounded-sm border border-cloud-dancer/10 shadow-2xl shadow-black/25'>
+              <div className='relative h-auto aspect-4/5 w-64 overflow-hidden rounded-sm border border-cloud-dancer/10 shadow-2xl shadow-black/25'>
                 <Image
                   src={UtekosFounder}
                   alt='Erling Holthe, gründer av Utekos'
@@ -49,10 +49,10 @@ export function GrunderSection() {
               delay='0.15s'
               threshold={0.3}
             >
-              <p className='text-lg leading-[1] font-semibold tracking-[-0.01em] text-cloud-dancer'>
+              <p className='text-lg leading-nonefont-semibold tracking-[-0.01em] text-foreground'>
                 Erling Holthe
               </p>
-              <p className='text-sm leading-[1.45] font-medium tracking-[-0.01em] text-dusted-peri'>
+              <p className='text-sm leading-text-paragraph font-medium tracking-[-0.01em] text-dusted-peri'>
                 Grunnlegger
               </p>
             </AnimatedBlock>
@@ -69,7 +69,7 @@ export function GrunderSection() {
             </AnimatedBlock>
 
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s' threshold={0.3}>
-              <h2 className='mb-8 text-4xl leading-[0.95] font-bold tracking-[-0.01em] text-cloud-dancer md:text-5xl'>
+              <h2 className='mb-8 text-4xl leading-[0.95] font-bold tracking-[-0.01em] text-foreground md:text-5xl'>
                 Fra idé til virkelighet
               </h2>
             </AnimatedBlock>
@@ -87,7 +87,7 @@ export function GrunderSection() {
               </div>
             </AnimatedBlock>
 
-            <div className='space-y-6 text-lg leading-[1.45]   font-medium   text-cloud-dancer/85'>
+            <div className='space-y-6 text-lg leading-text-paragraph   font-medium   text-foreground/85'>
               <AnimatedBlock className='will-animate-fade-in-up' delay='0.4s' threshold={0.3}>
                 <p>
                   Jeg har alltid elsket de små, verdifulle øyeblikkene – den stille kaffekoppen på en kjølig

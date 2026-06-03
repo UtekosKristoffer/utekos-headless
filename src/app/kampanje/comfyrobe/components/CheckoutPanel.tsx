@@ -136,7 +136,7 @@ export function CheckoutPanel({
             <span className='text-slate-500'>Mål: 999,-</span>
           </div>
           <div className='h-2 w-full bg-slate-800 rounded-full overflow-hidden'>
-            <div className='h-full w-full bg-gradient-to-r from-green-500 to-emerald-400 shadow-[0_0_15px_rgba(34,197,94,0.5)]' />
+            <div className='h-full w-full bg-linear-to-r from-green-500 to-emerald-400 shadow-[0_0_15px_rgba(34,197,94,0.5)]' />
           </div>
         </div>
 
@@ -174,7 +174,7 @@ export function CheckoutPanel({
 
         <div className='flex justify-between items-end'>
           <span className='text-slate-400 text-sm uppercase tracking-widest mb-1'>Totalbeløp</span>
-          <div className='text-4xl lg:text-5xl font-bold text-cloud-dancer    '>
+          <div className='text-4xl lg:text-5xl font-bold text-foreground    '>
             <span ref={priceRef}>{totalPrice}</span>,-
           </div>
         </div>
@@ -185,7 +185,7 @@ export function CheckoutPanel({
           data-track='🚨KJØP-NÅ-COMFYROBE-CAMPAIGN🚨'
           className='group relative w-full overflow-hidden rounded-full bg-cloud-dancer py-4 lg:py-5 text-lg font-bold text-black transition-all hover:scale-[1.01] active:scale-[0.98] shadow-[0_0_40px_rgba(255,255,255,0.1)] disabled:opacity-70 disabled:cursor-not-allowed'
         >
-          <div className='absolute inset-0 bg-gradient-to-r from-sky-400 via-white to-sky-400 opacity-0 group-hover:opacity-20 transition-opacity duration-500' />
+          <div className='absolute inset-0 bg-linear-to-r from-sky-400 via-white to-sky-400 opacity-0 group-hover:opacity-20 transition-opacity duration-500' />
           <span className='relative z-10 flex items-center justify-center gap-2'>
             {isPending ?
               <>

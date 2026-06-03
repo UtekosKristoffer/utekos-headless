@@ -61,7 +61,7 @@ export function PurchaseClientViewLanding({
 
   return (
     <>
-      <article className='relative w-full max-w-full overflow-x-clip text-cloud-dancer min-[900px]:grid min-[900px]:grid-cols-2'>
+      <article className='relative w-full max-w-full overflow-x-clip text-foreground min-[900px]:grid min-[900px]:grid-cols-2'>
         <LandingPageProductCarouselPurchaseSection
           selectedModel={selectedModel}
           currentConfig={currentConfig}
@@ -84,11 +84,11 @@ export function PurchaseClientViewLanding({
                 <span className='font-google-sans font-bold tracking-[-0.015em]'>{modelName}</span>
               </h2>
 
-              <p className='mb-8 max-w-[38rem] text-lg leading-[1.45] tracking-normal text-background/88 md:text-xl'>
+              <p className='mb-8 max-w-152 text-lg leading-text-paragraph tracking-normal text-background/88 md:text-xl'>
                 {currentConfig.subtitle}
               </p>
 
-              <div className='grid w-full max-w-none grid-cols-[auto_minmax(0,1fr)] items-center gap-4 sm:gap-5 min-[900px]:max-w-[38rem]'>
+              <div className='grid w-full max-w-none grid-cols-[auto_minmax(0,1fr)] items-center gap-4 sm:gap-5 min-[900px]:max-w-152'>
                 <span className='shrink-0 text-3xl font-medium text-background min-[1280px]:text-4xl'>
                   {currentConfig.price},-
                 </span>
@@ -117,7 +117,7 @@ export function PurchaseClientViewLanding({
                 rootMargin='0px 0px 25% 0px'
                 threshold={0.01}
               >
-                <p className='text-base leading-[1.45] text-background/85 md:text-lg'>
+                <p className='text-base leading-text-paragraph text-background/85 md:text-lg'>
                   {currentConfig.description}
                 </p>
               </AnimatedBlock>
@@ -159,22 +159,22 @@ export function PurchaseClientViewLanding({
               >
                 <div className={cn(maritimePanelClass, 'px-5')}>
                   <div className={maritimePanelHeaderClass}>
-                    <span className='text-xs font-semibold tracking-[0.02em] text-cloud-dancer/82'>
+                    <span className='text-xs font-semibold tracking-[0.02em] text-foreground/82'>
                       Dette gjør {modelName} spesiell
                     </span>
                   </div>
 
-                  <Accordion key={`highlights-${selectedModel}`} type='single' collapsible className='w-full'>
+                  <Accordion key={`highlights-${selectedModel}`} className='w-full'>
                     {currentConfig.highlights.map(highlight => (
                       <AccordionItem
                         key={highlight.title}
                         value={highlight.title}
                         className='border-b border-cloud-dancer/15 last:border-b-0'
                       >
-                        <AccordionTrigger className='py-3 text-left text-sm font-semibold text-cloud-dancer hover:text-primary hover:no-underline'>
+                        <AccordionTrigger className='py-3 text-left text-sm font-semibold text-foreground hover:text-primary hover:no-underline'>
                           {highlight.title}
                         </AccordionTrigger>
-                        <AccordionContent className='pb-3 pt-0 text-sm leading-[1.45] text-cloud-dancer/80'>
+                        <AccordionContent className='pb-3 pt-0 text-sm leading-text-paragraph text-foreground/80'>
                           {highlight.body}
                         </AccordionContent>
                       </AccordionItem>
@@ -214,7 +214,7 @@ export function PurchaseClientViewLanding({
                         className={cn(
                           choicePillClass,
                           isActive ?
-                            'border border-background bg-background text-cloud-dancer shadow-md'
+                            'border border-background bg-background text-foreground shadow-md'
                           : 'border-0 bg-ancient-water text-background hover:brightness-95',
                           focusRing
                         )}
@@ -230,16 +230,16 @@ export function PurchaseClientViewLanding({
                     key={selectedSize}
                     className='mt-3 animate-in fade-in slide-in-from-top-2 duration-300'
                   >
-                    <div className='relative overflow-hidden rounded-2xl border border-cloud-dancer/15 bg-havdyp p-4 text-cloud-dancer shadow-sm'>
+                    <div className='relative overflow-hidden rounded-2xl border border-cloud-dancer/15 bg-havdyp p-4 text-foreground shadow-sm'>
                       <div className='mb-2 flex items-center gap-2 border-b border-cloud-dancer/15 pb-2'>
                         <Ruler className='size-4 text-dusted-peri' />
-                        <span className='text-sm font-bold tracking-normal text-cloud-dancer'>
+                        <span className='text-sm font-bold tracking-normal text-foreground'>
                           Passer best for deg som er {guidance.height}
                         </span>
                       </div>
                       <ul className='space-y-1.5'>
                         {guidance.tips.map((tip, i) => (
-                          <li key={i} className='text-sm leading-[1.45] text-cloud-dancer'>
+                          <li key={i} className='text-sm leading-text-paragraph text-foreground'>
                             <span>{tip}</span>
                           </li>
                         ))}
@@ -330,7 +330,7 @@ export function PurchaseClientViewLanding({
             </div>
           </div>
 
-          <div className='border-t border-cloud-dancer/10 bg-havdyp p-6 text-cloud-dancer md:p-12 min-[900px]:p-8 min-[1280px]:p-12'>
+          <div className='border-t border-cloud-dancer/10 bg-havdyp p-6 text-foreground md:p-12 min-[900px]:p-8 min-[1280px]:p-12'>
             <div className='mb-4 min-[900px]:mb-6 min-[1280px]:mb-8'>
               <BrandBadge
                 asChild

@@ -15,9 +15,7 @@ export function AboutBreadcrumbs() {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link href='/'>Forsiden</Link>
-              </BreadcrumbLink>
+              <BreadcrumbLink render={<Link href='/' />}>Forsiden</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>

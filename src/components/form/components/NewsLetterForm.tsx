@@ -48,15 +48,15 @@ export function NewsletterForm() {
   return (
     <article className='mx-auto w-full text-center'>
       <hgroup className='flex w-full flex-col items-center space-y-3'>
-        <div className='flex items-center justify-center gap-3 text-cloud-dancer'>
+        <div className='flex items-center justify-center gap-3 text-foreground'>
           <Mail data-icon='inline-start' className='size-10 shrink-0' />
 
-          <h2 className='max-w-2xl text-balance text-left text-3xl text-cloud-dancer sm:text-4xl'>
+          <h2 className='max-w-2xl text-balance text-left text-3xl text-foreground sm:text-4xl'>
             Meld deg på Utekos sitt nyhetsbrev!
           </h2>
         </div>
 
-        <h3 className='mx-auto mt-2! w-full max-w-4xl text-center   text-base leading-[1.5]   text-cloud-dancer/80'>
+        <h3 className='mx-auto mt-2! w-full max-w-4xl text-center   text-base leading-[1.5]   text-foreground/80'>
           Som medlem i vår kundeklubb får du personlige tilbud og tilgang til salg og kampanjer først. Du får
           også masse tips og inspirasjon rett inn i innboksen din.
         </h3>

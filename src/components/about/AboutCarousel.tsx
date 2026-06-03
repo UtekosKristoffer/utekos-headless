@@ -15,6 +15,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
+import { CAROUSEL_SSR } from '@/components/ui/carousel-ssr'
 import { cn } from '@/lib/utils/className'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import gsap from 'gsap'
@@ -28,7 +29,7 @@ export function AboutCarousel() {
   const [current, setCurrent] = useState(0)
   const containerRef = useRef<HTMLElement>(null)
 
-  const autoplayPlugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: false }))
+  const autoplayPlugin = useRef(Autoplay({ delay: 4000, defaultInteraction: false }))
 
   useGSAP(
     () => {
@@ -88,10 +89,10 @@ export function AboutCarousel() {
       return
     }
 
-    setCurrent(api.selectedScrollSnap() + 1)
+    setCurrent(api.selectedSnap() + 1)
 
     const onSelect = () => {
-      setCurrent(api.selectedScrollSnap() + 1)
+      setCurrent(api.selectedSnap() + 1)
     }
 
     api.on('select', onSelect)
@@ -104,7 +105,7 @@ export function AboutCarousel() {
   return (
     <section
       ref={containerRef}
-      className='relative isolate mx-auto overflow-hidden bg-background px-4 py-16 text-cloud-dancer sm:py-32'
+      className='relative isolate mx-auto overflow-hidden bg-background px-4 py-16 text-foreground sm:py-32'
     >
       <div className='pointer-events-none absolute inset-0 -z-10'>
         <div className='absolute left-[18%] top-[18%] h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_20%,transparent)_0%,transparent_70%)] blur-[110px]' />
@@ -122,20 +123,22 @@ export function AboutCarousel() {
             <span>Livet med Utekos</span>
           </BrandBadge>
 
-          <h2 className='gsap-title text-cloud-dancer mb-6'>Et glimt av opplevelsen</h2>
+          <h2 className='gsap-title text-foreground mb-6'>Et glimt av opplevelsen</h2>
 
-          <p className='gsap-desc text-cloud-dancer mx-auto utekos-section-lead'>
+          <p className='gsap-desc text-foreground mx-auto utekos-section-lead'>
             Se hvordan kompromissløs komfort gir liv til dine favorittøyeblikk utendørs.
           </p>
         </div>
 
         <div className='gsap-carousel relative'>
           <div className='relative mx-auto max-w-6xl overflow-hidden rounded-[1.75rem] border border-cloud-dancer/10 bg-[color-mix(in_oklab,var(--cloud-dancer)_8%,transparent)] p-3 shadow-2xl shadow-black/35 backdrop-blur-sm md:p-5'>
-            <div className='absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-dusted-peri/55 to-transparent' />
+            <div className='absolute left-0 right-0 top-0 h-px bg-linear-to-r from-transparent via-dusted-peri/55 to-transparent' />
 
             <Carousel
               setApi={setApi}
               plugins={[autoplayPlugin.current]}
+              slideCount={aboutImages.length}
+              ssr={CAROUSEL_SSR.responsiveThirds(aboutImages.length)}
               opts={{ loop: true, align: 'start' }}
               onMouseEnter={autoplayPlugin.current.stop}
               onMouseLeave={autoplayPlugin.current.reset}
@@ -161,16 +164,16 @@ export function AboutCarousel() {
               </CarouselContent>
 
               <div className='hidden md:block'>
-                <CarouselPrevious className='left-8 border-cloud-dancer/12 bg-background/80 text-cloud-dancer backdrop-blur-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-background' />
-                <CarouselNext className='right-8 border-cloud-dancer/12 bg-background/80 text-cloud-dancer backdrop-blur-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-background' />
+                <CarouselPrevious className='left-8 border-cloud-dancer/12 bg-background/80 text-foreground backdrop-blur-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-background' />
+                <CarouselNext className='right-8 border-cloud-dancer/12 bg-background/80 text-foreground backdrop-blur-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-background' />
               </div>
             </Carousel>
 
             <div className='mt-8 flex items-center justify-center gap-2'>
-              {api?.scrollSnapList().map((_, index) => (
+              {api?.snapList().map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => api.scrollTo(index)}
+                  onClick={() => api.goTo(index)}
                   className={cn(
                     'h-1.5 rounded-full transition-all duration-300',
                     current === index + 1 ?

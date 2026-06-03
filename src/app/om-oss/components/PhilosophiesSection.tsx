@@ -15,14 +15,14 @@ const philosophyToneStyles = [
   {
     card: 'border-ancient-water/24 bg-ancient-water',
     glow: 'bg-[radial-gradient(circle,color-mix(in_oklab,var(--cloud-dancer)_58%,transparent)_0%,transparent_72%)]',
-    icon: 'border-havdyp/14 bg-havdyp text-cloud-dancer',
+    icon: 'border-havdyp/14 bg-havdyp text-foreground',
     title: 'text-havdyp',
     text: 'text-havdyp/80'
   },
   {
     card: 'border-dusted-peri/16 bg-[color-mix(in_oklab,var(--bleached-mauve)_74%,var(--cloud-dancer))]',
     glow: 'bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_50%,transparent)_0%,transparent_72%)]',
-    icon: 'border-havdyp/14 bg-havdyp text-cloud-dancer',
+    icon: 'border-havdyp/14 bg-havdyp text-foreground',
     title: 'text-havdyp',
     text: 'text-havdyp/78'
   },
@@ -30,15 +30,15 @@ const philosophyToneStyles = [
     card: 'border-mountain-view/16 bg-mountain-view',
     glow: 'bg-[radial-gradient(circle,color-mix(in_oklab,var(--mountain-view)_36%,transparent)_0%,transparent_72%)]',
     icon: 'border-cloud-dancer/16 bg-cloud-dancer text-mountain-view',
-    title: 'text-cloud-dancer',
-    text: 'text-cloud-dancer/82'
+    title: 'text-foreground',
+    text: 'text-foreground/82'
   },
   {
     card: 'border-chocolate-plum/16 bg-chocolate-plum',
     glow: 'bg-[radial-gradient(circle,color-mix(in_oklab,var(--chocolate-plum)_26%,transparent)_0%,transparent_72%)]',
     icon: 'border-cloud-dancer/16 bg-cloud-dancer text-chocolate-plum',
-    title: 'text-cloud-dancer',
-    text: 'text-cloud-dancer/82'
+    title: 'text-foreground',
+    text: 'text-foreground/82'
   }
 ] as const
 
@@ -116,7 +116,7 @@ export function PhilosophiesSection() {
             <h2 className='mb-6 text-5xl leading-[0.95] font-bold font-google-sans   text-background md:text-6xl lg:text-7xl'>
               Kjernen i alt vi gjør
             </h2>
-            <p className='text-lg leading-[1.45]     text-background'>
+            <p className='text-lg leading-text-paragraph     text-background'>
               Fire ufravikelige prinsipper som sikrer at du alltid får den opplevelsen du fortjener.
             </p>
           </AnimatedBlock>
@@ -146,13 +146,15 @@ export function PhilosophiesSection() {
                     </div>
 
                     <h3
-                      className={`text-2xl leading-[1] font-semibold font-google-sans   ${philosophyToneStyles[i]?.title}`}
+                      className={`text-2xl leading-nonefont-semibold font-google-sans   ${philosophyToneStyles[i]?.title}`}
                     >
                       {item.title}
                     </h3>
                   </div>
 
-                  <p className={`text-lg leading-[1.45] tracking-[-0.01em] ${philosophyToneStyles[i]?.text}`}>
+                  <p
+                    className={`text-lg leading-text-paragraph tracking-[-0.01em] ${philosophyToneStyles[i]?.text}`}
+                  >
                     {item.text}
                   </p>
                 </div>

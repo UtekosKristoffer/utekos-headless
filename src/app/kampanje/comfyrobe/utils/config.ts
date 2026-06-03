@@ -34,7 +34,7 @@ export const ANATOMY_LAYERS: AnatomyLayerData[] = [
       icon: 'text-sky-400',
       border: 'border-sky-400/20',
       shadow: 'rgba(56, 189, 248, 0.2)',
-      bgGradient: 'bg-gradient-to-br from-slate-800 to-slate-950'
+      bgGradient: 'bg-linear-to-br from-slate-800 to-slate-950'
     }
   },
   {

@@ -73,7 +73,7 @@ export function ProductVideoPlayer({ src, poster }: ProductVideoPlayerProps) {
       </video>
 
       {playbackFailed && (
-        <div className='pointer-events-none absolute inset-x-4 bottom-4 rounded-md bg-background/80 px-3 py-2 text-center text-xs font-medium text-cloud-dancer backdrop-blur-sm'>
+        <div className='pointer-events-none absolute inset-x-4 bottom-4 rounded-md bg-background/80 px-3 py-2 text-center text-xs font-medium text-foreground backdrop-blur-sm'>
           Videoen er pauset av nettleseren. Trykk på videoen for å spille av.
         </div>
       )}

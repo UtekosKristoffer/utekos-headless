@@ -64,8 +64,8 @@ export function TerraceIdeasGrid({ ideas }: { ideas: TerraceIdea[] }) {
     <section className='bg-background py-24 md:py-32'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-3xl md:max-w-4xl text-center'>
-          <h2 className=' text-cloud-dancer'>Ideer for din uteplass</h2>
-          <p className='mt-4 utekos-section-lead max-w-2xl text-cloud-dancer'>
+          <h2 className=' text-foreground'>Ideer for din uteplass</h2>
+          <p className='mt-4 utekos-section-lead max-w-2xl text-foreground'>
             Uansett størrelse på uteplassen din, kan den bli en oase for komfort og hygge.
           </p>
         </div>

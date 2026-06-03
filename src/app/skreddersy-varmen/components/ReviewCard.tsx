@@ -20,7 +20,7 @@ export function ReviewCard({ review }: { review: Review }) {
             <Star key={i} fill='currentColor' size={14} strokeWidth={0} />
           ))}
         </div>
-        <span className='inline-flex shrink-0 items-center gap-1 text-[10px] font-semibold leading-[1.45] tracking-[-0.01em] text-mineral-green'>
+        <span className='inline-flex shrink-0 items-center gap-1 text-[10px] font-semibold leading-text-paragraph tracking-[-0.01em] text-mineral-green'>
           <BadgeCheck size={12} aria-hidden />
           Verifisert
         </span>
@@ -32,7 +32,7 @@ export function ReviewCard({ review }: { review: Review }) {
         </h3>
       )}
 
-      <p className='mb-6 text-sm leading-[1.45] tracking-[-0.01em] text-cloud-dancer md:text-base'>
+      <p className='mb-6 text-sm leading-text-paragraph tracking-[-0.01em] text-foreground md:text-base'>
         {review.quote}
       </p>
 
@@ -44,11 +44,11 @@ export function ReviewCard({ review }: { review: Review }) {
           {initialsFrom(review.name)}
         </div>
         <div className='min-w-0'>
-          <p className='truncate text-sm font-semibold leading-[1.45] tracking-[-0.01em] text-cloud-dancer'>
+          <p className='truncate text-sm font-semibold leading-text-paragraph tracking-[-0.01em] text-foreground'>
             {review.name}
           </p>
           {(review.role || review.location) && (
-            <p className='flex items-center gap-1.5 text-xs leading-[1.45] tracking-[-0.01em] text-cloud-dancer/55'>
+            <p className='flex items-center gap-1.5 text-xs leading-text-paragraph tracking-[-0.01em] text-foreground/55'>
               {review.role && (
                 <>
                   <span className='truncate'>{review.role}</span>

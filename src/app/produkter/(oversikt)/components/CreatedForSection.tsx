@@ -130,14 +130,14 @@ export function CreatedForSection() {
           </span>
           <span className='block overflow-hidden pb-2'>
             <span className='gsap-title-line block will-change-transform'>
-              <span className='text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-slate-400 to-slate-900 bg-[length:200%_auto] animate-shine py-1'>
+              <span className='text-transparent bg-clip-text bg-linear-to-r from-slate-900 via-slate-400 to-slate-900 bg-[length:200%_auto] animate-shine py-1'>
                 din Utekos
               </span>
             </span>
           </span>
         </h2>
 
-        <div className='gsap-divider h-[2px] w-32 bg-gradient-to-r from-transparent via-slate-500/30 to-transparent my-10 origin-center will-change-transform' />
+        <div className='gsap-divider h-[2px] w-32 bg-linear-to-r from-transparent via-slate-500/30 to-transparent my-10 origin-center will-change-transform' />
 
         <p className='gsap-text opacity-0 mx-auto max-w-2xl text-lg leading-relaxed text-background/90 md:text-xl font-light'>
           Våre komfortplagg er{' '}

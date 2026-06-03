@@ -47,7 +47,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/skreddersy-varmen/utekos-orginal`,
       lastModified: lastModifiedISO,
       changeFrequency: 'weekly',
-      priority: 0.9
+      priority: 0.2
     }
   ]
 
@@ -59,14 +59,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/inspirasjon/hytteliv',
     '/inspirasjon/terrassen'
   ]
-  const inspirationPages: MetadataRoute.Sitemap = inspirationPaths.map(
-    path => ({
-      url: `${baseUrl}${path}`,
-      lastModified: lastModifiedISO,
-      changeFrequency: 'monthly',
-      priority: 0.7
-    })
-  )
+  const inspirationPages: MetadataRoute.Sitemap = inspirationPaths.map(path => ({
+    url: `${baseUrl}${path}`,
+    lastModified: lastModifiedISO,
+    changeFrequency: 'monthly',
+    priority: 0.7
+  }))
 
   const utilityPages: MetadataRoute.Sitemap = [
     {
@@ -126,9 +124,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       productsResponse.body.map(product => ({
         url: `${baseUrl}/produkter/${product.handle}`,
         lastModified:
-          typeof product.updatedAt === 'string' && product.updatedAt ?
-            product.updatedAt
-          : lastModifiedISO,
+          typeof product.updatedAt === 'string' && product.updatedAt ? product.updatedAt : lastModifiedISO,
         changeFrequency: 'weekly',
         priority: 0.8,
         images: product.featuredImage ? [product.featuredImage.url] : []
@@ -143,16 +139,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: 'monthly',
     priority: 0.8,
     images:
-      article.heroImage.src.startsWith('/') ?
-        [`${baseUrl}${article.heroImage.src}`]
-      : [article.heroImage.src]
+      article.heroImage.src.startsWith('/') ? [`${baseUrl}${article.heroImage.src}`] : [article.heroImage.src]
   }))
 
-  return [
-    ...corePages,
-    ...inspirationPages,
-    ...utilityPages,
-    ...productUrls,
-    ...articleUrls
-  ]
+  return [...corePages, ...inspirationPages, ...utilityPages, ...productUrls, ...articleUrls]
 }

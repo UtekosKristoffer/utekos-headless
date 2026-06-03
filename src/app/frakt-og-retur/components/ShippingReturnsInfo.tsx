@@ -16,20 +16,25 @@ export function ShippingReturnsInfo() {
                 <Truck className='size-7 text-background' />
                 Frakt og levering
               </CardTitle>
-              <CardDescription className='leading-[1.45] text-md mt-2 px-2 font-medium     text-background'>
-                Vi sender alle bestillinger som gjøres før kl 16. samme dag, så du kan starte din utekos så
-                raskt som mulig.
+              <CardDescription className='leading-text-paragraph text-md mt-2 px-2 font-medium text-background'>
+                Gjennom vår distribusjonspartner PostNord bestillingen di . Leveres innen 2-5 arbeidsdager
+                etter at PostNord har hentet pakken fra varehuset. Sporing av tilsendelsen gjøres enkelt med
+                sendingsnummeret du vil få tilsendt. Vi sender alle bestillinger som gjøres før kl 16. samme
+                dag. Hvor lang tid akkurat din bestilling tar er avhengg så du kan starte din utekos så raskt
+                som mulig.
               </CardDescription>
+              "Tiden avhenger av hvor i landet pakken skal sendes, hvor pakken sendes fra, hvilken tid på
+              døgnet og hvilken ukedag pakken sendes "
             </CardHeader>
             <CardContent>
               <ul className='space-y-4 text-background'>
                 <li className='flex items-start gap-3'>
                   <Clock className='mt-1 size-5 shrink-0 text-lg     text-background' />
-                  <span className='leading-[1.45]  '>Leveringstid er normalt 2-5 virkedager.</span>
+                  <span className='leading-text-paragraph  '>Leveringstid er normalt 2-5 virkedager.</span>
                 </li>
                 <li className='flex items-start gap-3'>
                   <Mail className='mt-1 size-5 shrink-0 text-lg     text-background' />
-                  <span className='leading-[1.45]  '>
+                  <span className='leading-text-paragraph  '>
                     Sporing sendes på e-post så snart pakken er på vei.
                   </span>
                 </li>
@@ -45,7 +50,7 @@ export function ShippingReturnsInfo() {
                 <Undo2 className='size-7 text-background' />
                 Retur og angrerett
               </CardTitle>
-              <CardDescription className='leading-[1.45] text-md mt-2 px-2 font-medium     text-background'>
+              <CardDescription className='leading-text-paragraph text-md mt-2 px-2 font-medium     text-background'>
                 Du har 14 dagers angrerett fra dagen du mottar varen.
               </CardDescription>
             </CardHeader>
@@ -53,13 +58,13 @@ export function ShippingReturnsInfo() {
               <ul className='space-y-4 text-background'>
                 <li className='flex items-start gap-3'>
                   <ShieldCheck className='mt-1 size-5 shrink-0 text-background' />
-                  <span className='leading-[1.45]  '>
+                  <span className='leading-text-paragraph  '>
                     Full trygghet for å kjenne på kvaliteten hjemme hos deg selv.
                   </span>
                 </li>
                 <li className='flex items-start gap-3'>
                   <PackageCheck className='mt-1 size-5 shrink-0 text-background' />
-                  <span className='leading-[1.45]  '>
+                  <span className='leading-text-paragraph  '>
                     Varen må være ubrukt, uten lukt og med alle merkelapper intakt for full refusjon.
                   </span>
                 </li>
@@ -73,20 +78,16 @@ export function ShippingReturnsInfo() {
         <h2 className='mb-4 text-2xl font-semibold font-google-sans leading-[1.15]   text-background'>
           Slik fungerer returprosessen
         </h2>
-        <Accordion
-          type='single'
-          collapsible
-          className='w-full [&_[data-slot=accordion-content]]:!animate-none'
-        >
+        <Accordion className='w-full [&_[data-slot=accordion-content]]:!animate-none'>
           {shippingReturnsFaqItems.map(item => (
             <AccordionItem key={item.id} value={item.id} className='border-background/90'>
               <AccordionTrigger
                 data-track={`ShippingReturns-${item.id}-Click`}
-                className='text-[1.1rem] leading-[1.45]     text-background transition-colors hover:text-background/80 hover:no-underline [&>svg]:text-background/90'
+                className='text-[1.1rem] leading-text-paragraph     text-background transition-colors hover:text-background/80 hover:no-underline [&>svg]:text-background/90'
               >
                 {item.question}
               </AccordionTrigger>
-              <AccordionContent className='text-[1rem] leading-[1.45]     text-background'>
+              <AccordionContent className='text-[1rem] leading-text-paragraph     text-background'>
                 {item.id === 'return-process' ?
                   <p>
                     Send en e-post til{' '}

@@ -12,15 +12,15 @@ const iconMap = {
 const toneStyles = {
   water: {
     bg: 'var(--ancient-water)',
-    icon: 'border-havdyp bg-havdyp text-cloud-dancer'
+    icon: 'border-havdyp bg-havdyp text-foreground'
   },
   mauve: {
     bg: 'var(--bleached-mauve)',
-    icon: 'border-havdyp bg-havdyp text-cloud-dancer'
+    icon: 'border-havdyp bg-havdyp text-foreground'
   },
   overcast: {
     bg: 'var(--overcast)',
-    icon: 'border-havdyp bg-havdyp text-cloud-dancer'
+    icon: 'border-havdyp bg-havdyp text-foreground'
   }
 } as const
 
@@ -58,9 +58,9 @@ export function FeatureCard({ feature }: FeatureCardProps) {
         </span>
 
         <div className='min-w-0 flex-1 pt-0.5 sm:pt-1'>
-          <h3 className='mb-1.5 text-base font-semibold leading-snug tracking-[-0.01em]'>{feature.title}</h3>
+          <h3 className='mb-1.5 text-lg font-utekos-text'>{feature.title}</h3>
 
-          <p className='text-sm leading-[1.45] tracking-[-0.01em]'>{feature.description}</p>
+          <p className='text-sm font-utekos-text'>{feature.description}</p>
         </div>
       </div>
     </article>

@@ -29,8 +29,8 @@ interface InspirationHeroProps {
   as?: 'section' | 'article'
   /** Justering. Default `left`. */
   align?: InspirationHeroAlign
-  /** Minstehøyde. Default `standard` (70vh). */
-  minHeight?: 'standard' | 'tall'
+  /** Minstehøyde. Default `standard` (100svh). `content` = ingen tvungen viewport-høyde. */
+  minHeight?: 'standard' | 'tall' | 'content'
   /** Bakgrunns-/flate-klasser (eks. `bg-havdyp`). */
   surfaceClassName?: string
   /** Bespoke dekorlag bak innholdet. */
@@ -59,7 +59,7 @@ interface InspirationHeroProps {
  * @example
  * <InspirationHero
  *   labelledById='bobil-hero-title'
- *   surfaceClassName='bg-havdyp text-cloud-dancer'
+ *   surfaceClassName='bg-havdyp text-foreground'
  *   background={<BobilHeroBackground />}
  *   breadcrumb={<InspirationHeroBreadcrumb label='Bobil og camping' color='var(--bleached-mauve)' textColor='var(--background)' icon={MapPin} />}
  *   title={<>Bobilliv uten <HeroHighlight color='var(--bleached-mauve)'>kompromisser</HeroHighlight></>}
@@ -101,7 +101,7 @@ export function InspirationHero({
       {...(background !== undefined ? { background } : {})}
       {...(containerClassName !== undefined ? { containerClassName } : {})}
     >
-      <header>
+      <header className={cn(breadcrumb && 'flex flex-col gap-10 md:gap-12')}>
         {breadcrumb ?
           <AnimatedBlock
             className={cn('will-animate-fade-in-up', centered && 'flex justify-center')}
@@ -125,7 +125,7 @@ export function InspirationHero({
 
         {actions ?
           <AnimatedBlock
-            className={cn('will-animate-fade-in-up mt-8 flex flex-wrap gap-4', centered && 'justify-center')}
+            className={cn('will-animate-fade-in-up mt-10 flex flex-wrap gap-4', centered && 'justify-center')}
             delay='0.4s'
           >
             {actions}
@@ -133,7 +133,7 @@ export function InspirationHero({
         : null}
       </header>
 
-      <AnimatedBlock className='will-animate-fade-in-up mt-12' delay='0.5s'>
+      <AnimatedBlock className='will-animate-fade-in-up mt-16 sm:mt-20' delay='0.5s'>
         <InspirationHeroFeatureGrid
           features={features}
           heading={featuresHeading}

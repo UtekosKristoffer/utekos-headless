@@ -48,6 +48,7 @@ export function PromiseSection() {
             <Carousel
               plugins={[plugin.current]}
               className='w-full'
+              slideCount={images.length}
               opts={{
                 loop: true
               }}
@@ -88,7 +89,7 @@ export function PromiseSection() {
             <div className='relative z-10 flex h-full flex-col justify-center'>
               <GridCross className='absolute right-0 top-0 size-8 -translate-y-1/2 translate-x-1/2' />
 
-              <h2 className='text-cloud-dancer'>Vårt løfte</h2>
+              <h2 className='text-foreground'>Vårt løfte</h2>
 
               <div className='mt-6 space-y-6'>
                 <div className='flex items-start gap-4'>
@@ -97,7 +98,7 @@ export function PromiseSection() {
                   </div>
                   <div>
                     <h3 className='font-semibold text-xl md:text-3xl'>Umiddelbar varme</h3>
-                    <p className='mt-1 text-lg font-medium text-cloud-dancer/90'>
+                    <p className='mt-1 text-lg font-medium text-foreground/90'>
                       Nøye utvalgte materialer gir en umiddelbar følelse av varme og velvære.
                     </p>
                   </div>
@@ -108,7 +109,7 @@ export function PromiseSection() {
                   </div>
                   <div>
                     <h3 className='font-semibold text-xl md:text-3xl'>Forlengede øyeblikk</h3>
-                    <p className='mt-1 text-lg font-medium text-cloud-dancer/90'>
+                    <p className='mt-1 text-lg font-medium text-foreground/90'>
                       Designet slik at du kan nyte de gode stundene lenger, uten å tenke på kulden.
                     </p>
                   </div>
@@ -119,7 +120,7 @@ export function PromiseSection() {
                   </div>
                   <div>
                     <h3 className='font-semibold text-xl md:text-3xl'>En varig investering</h3>
-                    <p className='mt-1 text-lg font-medium text-cloud-dancer'>
+                    <p className='mt-1 text-lg font-medium text-foreground'>
                       Se på det som en slitesterk og varig investering i din egen hygge.
                     </p>
                   </div>

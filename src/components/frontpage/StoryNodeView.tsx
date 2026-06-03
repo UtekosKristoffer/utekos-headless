@@ -10,16 +10,16 @@ interface StoryNodeViewProps {
 
 const toneStyles = {
   before: {
-    card: 'border-white/10 bg-gradient-to-br from-havdyp/95 to-havdyp/80 shadow-[0_16px_40px_rgba(0,0,0,0.2)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] backdrop-blur-2xl backdrop-saturate-[1.2]',
+    card: 'border-white/10 bg-linear-to-br from-havdyp/95 to-havdyp/80 shadow-[0_16px_40px_rgba(0,0,0,0.2)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] backdrop-blur-2xl backdrop-saturate-[1.2]',
     iconWrap:
-      'border-white/10 bg-gradient-to-br from-white/10 to-transparent text-cloud-dancer shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]',
-    label: 'text-cloud-dancer',
-    description: 'text-cloud-dancer/80'
+      'border-white/10 bg-linear-to-br from-white/10 to-transparent text-foreground shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]',
+    label: 'text-foreground',
+    description: 'text-foreground/80'
   },
   after: {
-    card: 'border-white/60 bg-gradient-to-br from-overcast/95 to-overcast/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)] backdrop-blur-2xl backdrop-saturate-[1.2]',
+    card: 'border-white/60 bg-linear-to-br from-overcast/95 to-overcast/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)] backdrop-blur-2xl backdrop-saturate-[1.2]',
     iconWrap:
-      'border-white/80 bg-gradient-to-br from-ancient-water/90 to-ancient-water/40 text-havdyp shadow-[inset_0_1px_1px_rgba(255,255,255,0.7)]',
+      'border-white/80 bg-linear-to-br from-ancient-water/90 to-ancient-water/40 text-havdyp shadow-[inset_0_1px_1px_rgba(255,255,255,0.7)]',
     label: 'text-havdyp',
     description: 'text-mountain-view'
   }
@@ -37,7 +37,7 @@ export function StoryNodeView({ icon: Icon, label, description, tone }: StoryNod
       )}
     >
       <div
-        className='pointer-events-none absolute inset-0 z-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-full'
+        className='pointer-events-none absolute inset-0 z-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-full'
         aria-hidden='true'
       />
 
@@ -56,7 +56,12 @@ export function StoryNodeView({ icon: Icon, label, description, tone }: StoryNod
             {label}
           </h3>
 
-          <p className={cn('text-[1rem] font-normal leading-[1.45] tracking-[-0.02em]', styles.description)}>
+          <p
+            className={cn(
+              'text-[1rem] font-normal leading-text-paragraph tracking-[-0.02em]',
+              styles.description
+            )}
+          >
             {description}
           </p>
         </div>

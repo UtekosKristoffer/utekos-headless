@@ -24,14 +24,8 @@ interface ExtendedProductCardProps extends ProductCardProps {
   initialOptions?: Record<string, string>
 }
 
-export function ProductGridCard({
-  product,
-  isPriority = false,
-  initialOptions
-}: ExtendedProductCardProps) {
-  const [selectedOptions] = useState(
-    () => initialOptions ?? getInitialOptionsForProduct(product)
-  )
+export function ProductGridCard({ product, isPriority = false, initialOptions }: ExtendedProductCardProps) {
+  const [selectedOptions] = useState(() => initialOptions ?? getInitialOptionsForProduct(product))
 
   const cartActor = CartMutationContext.useActorRef()
 
@@ -42,10 +36,8 @@ export function ProductGridCard({
 
   const price = formatPrice(selectedVariant?.price ?? fallbackPrice)
   const productUrl = `/produkter/${product.handle}` as Route
-  const imageUrl =
-    selectedVariant?.image?.url ?? fallbackImage?.url ?? '/placeholder.svg'
-  const altText =
-    selectedVariant?.image?.altText ?? fallbackImage?.altText ?? product.title
+  const imageUrl = selectedVariant?.image?.url ?? fallbackImage?.url ?? '/placeholder.svg'
+  const altText = selectedVariant?.image?.altText ?? fallbackImage?.altText ?? product.title
   const isAvailable = selectedVariant?.availableForSale ?? false
 
   const handleQuickBuy = (e: React.MouseEvent) => {
@@ -68,9 +60,7 @@ export function ProductGridCard({
     cartStore.send({ type: 'OPEN' })
   }
 
-  const lastError = CartMutationContext.useSelector(
-    state => state.context.error
-  )
+  const lastError = CartMutationContext.useSelector(state => state.context.error)
 
   useEffect(() => {
     if (lastError) {
@@ -115,7 +105,7 @@ export function ProductGridCard({
         <div className='absolute left-3 top-3'></div>
       </div>
 
-      <CardContent className='flex-grow p-0 pt-4'>
+      <CardContent className='grow p-0 pt-4'>
         <Link href={productUrl} aria-label={`Se produkt ${product.title}`}>
           <h3 className='truncate font-medium'>{product.title}</h3>
         </Link>

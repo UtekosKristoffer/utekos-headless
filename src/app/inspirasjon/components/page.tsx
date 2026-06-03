@@ -9,7 +9,7 @@ import {
   popularAreasData
 } from '@/app/inspirasjon/hytteliv/components/PopularCabinAresGrid'
 import { UseCasesGrid, useCasesData } from '@/app/inspirasjon/hytteliv/components//UseCasesGrid'
-import { SeasonsSection } from '@/app/inspirasjon/hytteliv/components/SeasonsSection'
+import { SeasonsSection } from '@/app/inspirasjon/hytteliv/components/HytteSeasonsSection'
 import { SocialProof } from '@/app/inspirasjon/hytteliv/components/SocialProof'
 
 export const metadata: Metadata = {

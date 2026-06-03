@@ -67,7 +67,7 @@ export function HeroActions() {
         type='button'
         onClick={() => smoothScrollTo(SCROLL_TARGETS.solution)}
         aria-label='Bla videre'
-        className='absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-cloud-dancer/75 transition-[opacity,transform] duration-300 hover:translate-y-1 hover:opacity-100 md:flex'
+        className='absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-foreground/75 transition-[opacity,transform] duration-300 hover:translate-y-1 hover:opacity-100 md:flex'
       >
         <span className='text-[10px] font-semibold tracking-normal'>Bla videre</span>
         <ChevronDown size={20} aria-hidden />

@@ -23,7 +23,7 @@ const techDownFeatures = [
 export function TechDownSizeGuide() {
   return (
     <section id='tech-down-size-guide' className='scroll-mt-28'>
-      <div className='bg-havdyp text-cloud-dancer'>
+      <div className='bg-havdyp text-foreground'>
         <div className='container mx-auto px-4 py-16 text-center sm:py-24'>
           <div className='max-w-4xl mx-auto'>
             <BrandBadge
@@ -37,20 +37,20 @@ export function TechDownSizeGuide() {
                 <UtekosWordmark
                   aria-hidden='true'
                   focusable='false'
-                  className='inline-block h-[0.72em] w-auto translate-y-[0.06em] align-baseline text-cloud-dancer'
+                  className='inline-block h-[0.72em] w-auto translate-y-[0.06em] align-baseline text-foreground'
                 />
                 <span className='sr-only'>Utekos</span>
               </span>{' '}
               TechDown™ - presisjon i hver størrelse
             </h2>
-            <p className='mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-cloud-dancer'>
+            <p className='mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-foreground'>
               For livsnyteren som verdsetter både funksjon og form, er TechDown designet med en mer kroppsnær
               passform. Dette gir deg suveren bevegelsesfrihet og effektiv varme, pakket inn i et nettere
               design – perfekt for et aktivt liv på hytten, i bobilen eller på kjølige kvelder på terrassen.
             </p>
           </div>
 
-          <div className='mt-12 max-w-3xl mx-auto text-left space-y-6 text-cloud-dancer'>
+          <div className='mt-12 max-w-3xl mx-auto text-left space-y-6 text-foreground'>
             <p>
               TechDown sine størrelser har en mer tradisjonell progresjon for å sikre at du finner en
               størrelse som passer perfekt til din kroppstype.
@@ -64,7 +64,7 @@ export function TechDownSizeGuide() {
           <div className='mt-16 grid grid-cols-1 gap-x-6 gap-y-6 lg:grid-cols-3 max-w-6xl mx-auto'>
             <div className='rounded-lg border border-cloud-dancer/12 bg-background/58 p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--background)_90%,transparent)] sm:p-8'>
               <h3 className='text-xl font-semibold leading-7'>Velg Liten hvis...</h3>
-              <ul className='mt-4 list-disc list-inside space-y-2 text-cloud-dancer/95'>
+              <ul className='mt-4 list-disc list-inside space-y-2 text-foreground/95'>
                 <li>Er opptil 165-170 cm høy.</li>
                 <li>Eller noe lavere og ønsker ekstra romslig følelse</li>
                 <li>Eller du er noe høyere, men ønsker nettere silhuett uten overflødig volum.</li>
@@ -72,7 +72,7 @@ export function TechDownSizeGuide() {
             </div>
             <div className='rounded-lg border border-cloud-dancer/12 bg-background/58 p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--background)_90%,transparent)] sm:p-8'>
               <h3 className='text-xl font-semibold leading-7'>Velg Medium hvis...</h3>
-              <ul className='mt-4 list-disc list-inside space-y-2 text-cloud-dancer/82'>
+              <ul className='mt-4 list-disc list-inside space-y-2 text-foreground/82'>
                 <li>Du er opptil 175-180 cm høy.</li>
                 <li>Eller noe lavere og ønsker ekstra romslig passform.</li>
                 <li>Eller noe høyere, men ønsker kroppsnær passform.</li>
@@ -80,7 +80,7 @@ export function TechDownSizeGuide() {
             </div>
             <div className='rounded-lg border border-cloud-dancer/12 bg-background/58 p-6 text-left shadow-[0_18px_46px_-38px_color-mix(in_oklab,var(--background)_90%,transparent)] sm:p-8'>
               <h3 className='text-xl font-semibold leading-7'>Velg Large hvis...</h3>
-              <ul className='mt-4 list-disc list-inside space-y-2 text-cloud-dancer/82'>
+              <ul className='mt-4 list-disc list-inside space-y-2 text-foreground/82'>
                 <li>Du er over 180-185 cm høy</li>
                 <li>Eller noe lavere og ønsker ekstra romslig passform.</li>
                 <li>Er du over 195 cm vil størrelsen være for liten.</li>
@@ -98,7 +98,7 @@ export function TechDownSizeGuide() {
                   </div>
                   <div className='text-center'>
                     <p className='font-semibold'>{feature.title}</p>
-                    <p className='mt-1 text-sm text-cloud-dancer/74'>{feature.description}</p>
+                    <p className='mt-1 text-sm text-foreground/74'>{feature.description}</p>
                   </div>
                 </div>
               ))}
@@ -131,13 +131,13 @@ export function TechDownSizeGuide() {
                           <td className='whitespace-nowrap py-4 pl-4 pr-3 text-sm text-left font-medium sm:pl-6'>
                             {item.measurement}
                           </td>
-                          <td className='whitespace-nowrap px-3 py-4 text-sm text-cloud-dancer/82 text-center'>
+                          <td className='whitespace-nowrap px-3 py-4 text-sm text-foreground/82 text-center'>
                             {item.liten}
                           </td>
-                          <td className='whitespace-nowrap px-3 py-4 text-sm text-cloud-dancer/82 text-center'>
+                          <td className='whitespace-nowrap px-3 py-4 text-sm text-foreground/82 text-center'>
                             {item.middels}
                           </td>
-                          <td className='whitespace-nowrap px-3 py-4 text-sm text-cloud-dancer/82 text-center'>
+                          <td className='whitespace-nowrap px-3 py-4 text-sm text-foreground/82 text-center'>
                             {item.stor}
                           </td>
                         </tr>

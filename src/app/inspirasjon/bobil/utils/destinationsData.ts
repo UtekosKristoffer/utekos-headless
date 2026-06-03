@@ -17,7 +17,7 @@ export const destinationsData = [
     name: 'Hardangervidda',
     season: 'Hele året',
     highlight: 'Viddelandskap og stillhet',
-    color: 'text-cloud-dancer',
+    color: 'text-foreground',
     backgroundColor: '--mineral-green'
   },
   {

@@ -12,6 +12,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
+import { CAROUSEL_SSR } from '@/components/ui/carousel-ssr'
 import { focusRing } from '../utils/constants'
 import type { ModelKey, PRODUCT_VARIANTS } from '@/api/constants'
 
@@ -37,13 +38,15 @@ export function LandingPageProductCarouselPurchaseSection({
 
       <Carousel
         key={selectedModel}
+        slideCount={currentConfig.images.length}
+        ssr={CAROUSEL_SSR.fullWidth(currentConfig.images.length)}
         opts={{ loop: currentConfig.images.length > 1, duration: 35 }}
         plugins={currentConfig.images.length > 1 ? [Fade()] : []}
         className='relative w-full min-[900px]:max-w-xl'
       >
         <CarouselContent className='ml-0'>
           {currentConfig.images.map((src, i) => (
-            <CarouselItem key={src} className='relative aspect-[4/5] pl-0'>
+            <CarouselItem key={src} className='relative aspect-4/5 pl-0'>
               <div className='relative h-full w-full overflow-hidden min-[900px]:rounded-2xl min-[900px]:shadow-2xl min-[900px]:ring-1 min-[900px]:ring-background/10'>
                 <Image
                   src={src}

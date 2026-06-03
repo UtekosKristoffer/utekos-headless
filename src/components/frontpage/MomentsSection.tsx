@@ -8,7 +8,7 @@ export function MomentsSection() {
       <div className='absolute inset-0 bg-[color-mix(in_oklab,var(--havdyp)_85%,#050508)] pointer-events-none -z-10' />
 
       {/* Sofistikert, dempet skillelinje tilpasset luksusprofilen */}
-      <div className='absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-60' />
+      <div className='absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-white/10 to-transparent opacity-60' />
 
       <div className='mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl'>
         <MomentsHeader />

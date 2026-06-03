@@ -6,7 +6,7 @@ import Link from 'next/link'
 import CompareHeroImage from '@public/kate-linn-stort-bilde.webp'
 export function CompareModelsPageHero() {
   return (
-    <section className='relative isolate min-h-[calc(100svh-12rem)] overflow-hidden bg-background text-cloud-dancer'>
+    <section className='relative isolate min-h-[calc(100svh-12rem)] overflow-hidden bg-background text-foreground'>
       <Image
         src={CompareHeroImage}
         alt='To personer i Utekos ute i norsk natur'
@@ -25,8 +25,8 @@ export function CompareModelsPageHero() {
             backgroundColor='var(--overcast)'
             className='mb-7 px-6 py-3 text-sm shadow-[0_18px_44px_-30px_color-mix(in_oklab,var(--overcast)_80%,transparent)]'
           />
-          <h1 className='font-google-sans text-5xl text-cloud-dancer'>Hvilken Utekos passer best for deg?</h1>
-          <p className='mt-7 max-w-2xl   text-lg leading-[1.45]   text-cloud-dancer/90 sm:text-2xl'>
+          <h1 className='font-google-sans text-5xl text-foreground'>Hvilken Utekos passer best for deg?</h1>
+          <p className='mt-7 max-w-2xl   text-lg leading-text-paragraph   text-foreground/90 sm:text-2xl'>
             Sammenlign Utekos Dun, Utekos Mikrofiber og Utekos TechDown. Finn riktig modell for hytte, bobil,
             båt og kalde kvelder ute.
           </p>
@@ -40,7 +40,7 @@ export function CompareModelsPageHero() {
             </BrandBadge>
             <Link
               href='#sammenligning'
-              className='  text-base font-medium   text-cloud-dancer underline decoration-cloud-dancer/35 underline-offset-8 transition-colors duration-300 hover:text-overcast'
+              className='  text-base font-medium   text-foreground underline decoration-cloud-dancer/35 underline-offset-8 transition-colors duration-300 hover:text-overcast'
             >
               Se tabellen
             </Link>

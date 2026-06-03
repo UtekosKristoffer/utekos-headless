@@ -12,7 +12,7 @@ export function CopyrightNotice() {
 
   return (
     <div className='mt-8 text-center'>
-      <p className='text-xs text-cloud-dancer font-utekos-'>
+      <p className='text-xs text-foreground font-utekos-'>
         &copy; {currentYear} {copyrightText} Alle rettigheter forbeholdt. Utekos® er et registrert varemerke
         i Norge.
       </p>

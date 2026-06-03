@@ -25,7 +25,7 @@ export function ProductCardFooter({
   return (
     <CardFooter className='mt-auto flex flex-col gap-4 p-6 pt-0'>
       <div className='flex w-full items-center justify-between'>
-        <p className='text-2xl font-bold text-cloud-dancer'>{price}</p>
+        <p className='text-2xl font-bold text-foreground'>{price}</p>
       </div>
       <div className='grid w-full grid-cols-2 gap-3'>
         <BrandBadge

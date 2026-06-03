@@ -48,7 +48,11 @@ export function MikrofiberImageSection() {
       ref={ref}
       className={cn('will-animate-fade-in-scale relative h-full min-h-full', isInView && 'is-in-view')}
     >
-      <Carousel className='w-full overflow-hidden aspect-square' opts={{ align: 'start', loop: true }}>
+      <Carousel
+        className='w-full overflow-hidden aspect-square'
+        slideCount={MICROFIBER_IMAGES.length}
+        opts={{ align: 'start', loop: true }}
+      >
         <CarouselContent className='h-full'>
           {MICROFIBER_IMAGES.map((image, index) => (
             <CarouselItem key={image.src} className='h-full'>

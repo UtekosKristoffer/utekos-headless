@@ -17,7 +17,7 @@ export function MagazineRelatedArticles({ articles }: MagazineRelatedArticlesPro
     <section className='border-t border-background/10 bg-cloud-dancer py-16 text-background'>
       <div className='container mx-auto px-4'>
         <header className='mb-8 max-w-2xl'>
-          <p className='  text-sm font-semibold leading-[1.4]   text-havdyp'>Les videre</p>
+          <p className='  text-sm font-semibold leading-4   text-havdyp'>Les videre</p>
           <h2 className='mt-2 font-google-sans text-4xl font-bold leading-[0.95]  '>
             Flere guider fra magasinet
           </h2>

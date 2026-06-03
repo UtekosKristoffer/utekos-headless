@@ -20,7 +20,7 @@ export function NameCursor({
       <div className='flex animate-chip-pulse items-center gap-1.5'>
         <CursorIcon side={side} style={{ color }} />
         <span
-          className='rounded-md px-2 py-0.5 text-xs font-semibold text-cloud-dancer shadow-sm'
+          className='rounded-md px-2 py-0.5 text-xs font-semibold text-foreground shadow-sm'
           style={{ backgroundColor: color }}
         >
           {name}

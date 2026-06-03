@@ -12,12 +12,12 @@ export function NbccBenefitSection() {
           <Badge className='rounded-md border-primary/30 bg-primary px-3 py-2 text-background'>
             Medlemsfordel for NBCC-medlemmer
           </Badge>
-          <h2 className='mt-6 max-w-2xl text-balance text-3xl font-semibold tracking-normal text-cloud-dancer sm:text-4xl'>
+          <h2 className='mt-6 max-w-2xl text-balance text-3xl font-semibold tracking-normal text-foreground sm:text-4xl'>
             En varm fordel for de lange utekveldene.
           </h2>
         </div>
 
-        <div data-nbcc-reveal data-nbcc-animate className='grid gap-6 text-base   text-cloud-dancer'>
+        <div data-nbcc-reveal data-nbcc-animate className='grid gap-6 text-base   text-foreground'>
           <p>
             Utekos er ikke laget for de bratteste fjelltoppene. Vi designer plagg for kompromissløs komfort.
             For de gangene du ikke skal bestige noe som helst, men bare vil bli sittende ute og nyte

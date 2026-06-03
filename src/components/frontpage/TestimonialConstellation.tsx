@@ -73,8 +73,10 @@ export function TestimonialConstellation() {
   return (
     <article ref={containerRef} className='relative mx-auto overflow-hidden bg-havdyp py-24 md:py-32'>
       <hgroup className='absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] bg-sky-900/10 blur-[120px] rounded-full pointer-events-none'>
-        <h2 className='animate-header-item text-cloud-dancer! text-center'>Hva sier andre livsnytere?</h2>
-        <p className='animate-header-item text-cloud-dancer! text-center'>
+        <h2 className='animate-header-item text-foreground font-utekos-text-medium text-center text-4xl'>
+          Hva sier andre livsnytere?
+        </h2>
+        <p className='animate-header-item text-foreground font-utekos-text text-center text-xl'>
           Ekte tilbakemeldinger fra ekte mennesker, som verdsetter kompromissløs kvalitet og varige
           opplevelser utendørs
         </p>
@@ -94,14 +96,14 @@ export function TestimonialConstellation() {
             <small className='text-background'>/ 5</small>
           </div>
 
-          <h2 className='animate-header-item text-cloud-dancer! mb-6'>
+          <h2 className='animate-header-item font-utekos-text-medium text-foreground mb-6'>
             Hva sier andre{' '}
             <span className='text-transparent bg-cloud-dancer bg-clip-text outline-hidden font-bold'>
               livsnytere?
             </span>
           </h2>
 
-          <p className='animate-header-item mx-auto text-cloud-dancer'>
+          <p className='animate-header-item font-utekos-text text-2xl! leading-relaxed mx-auto text-foreground'>
             Ekte tilbakemeldinger fra ekte mennesker, som verdsetter kompromissløs kvalitet og varige
             opplevelser utendørs
           </p>

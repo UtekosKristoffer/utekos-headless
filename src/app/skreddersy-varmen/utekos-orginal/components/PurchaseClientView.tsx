@@ -28,6 +28,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
+import { CAROUSEL_SSR } from '@/components/ui/carousel-ssr'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
@@ -83,7 +84,7 @@ export function PurchaseClientView({
   const guidance = SIZE_GUIDANCE[selectedSize]
 
   return (
-    <section className='relative left-[calc(-50vw+50%)] w-screen overflow-clip text-cloud-dancer lg:flex lg:min-h-screen'>
+    <section className='relative left-[calc(-50vw+50%)] w-screen overflow-clip text-foreground lg:flex lg:min-h-screen'>
       <div className='relative flex w-full flex-col items-center justify-center bg-background p-8 lg:sticky lg:top-0 lg:h-screen lg:w-1/2'>
         <div
           key={`badge-${selectedModel}`}
@@ -99,6 +100,8 @@ export function PurchaseClientView({
         </div>
         <Carousel
           key={selectedModel}
+          slideCount={currentConfig.images.length}
+          ssr={CAROUSEL_SSR.fullWidth(currentConfig.images.length)}
           opts={{ loop: currentConfig.images.length > 1, duration: 35 }}
           plugins={currentConfig.images.length > 1 ? [Fade()] : []}
           className='relative w-full max-w-2xl'
@@ -106,12 +109,12 @@ export function PurchaseClientView({
           <CarouselContent className='ml-0'>
             {currentConfig.images.map((src, i) => (
               <CarouselItem key={src} className='relative h-[50vh] pl-0 lg:h-[70vh]'>
-                <div className='relative h-full w-full overflow-hidden rounded-3xl bg-gradient-to-b from-white/70 to-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-background/10'>
+                <div className='relative h-full w-full overflow-hidden rounded-3xl bg-linear-to-b from-white/70 to-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-background/10'>
                   <Image
                     src={src}
                     alt={`${currentConfig.title} – bilde ${i + 1}`}
                     fill
-                    className='object-contain drop-shadow-2xl transition-transform duration-[1200ms] ease-out hover:scale-[1.02]'
+                    className='object-contain drop-shadow-2xl transition-transform duration-1200 ease-out hover:scale-[1.02]'
                     priority={i === 0}
                     sizes='(max-width: 1024px) 100vw, 50vw'
                   />
@@ -187,7 +190,7 @@ export function PurchaseClientView({
             </AnimatedBlock>
             {isTechDownOffer && (
               <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s' threshold={0.15}>
-                <div className='mt-8 flex items-center gap-4 rounded-lg border-2 border-mountain-view/20 bg-gradient-to-br from-mountain-view/5 to-transparent p-4 shadow-sm'>
+                <div className='mt-8 flex items-center gap-4 rounded-lg border-2 border-mountain-view/20 bg-linear-to-br from-mountain-view/5 to-transparent p-4 shadow-sm'>
                   <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-mountain-view/10'>
                     <Gift className='h-5 w-5 text-mountain-view' />
                   </div>
@@ -204,7 +207,7 @@ export function PurchaseClientView({
 
           <div key={`details-${selectedModel}`} className='mb-12 space-y-8' aria-label='Produktinformasjon'>
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.05s' threshold={0.15}>
-              <p className='text-base leading-[1.45] text-background/85 md:text-lg'>
+              <p className='text-base leading-text-paragraph text-background/85 md:text-lg'>
                 {currentConfig.description}
               </p>
             </AnimatedBlock>
@@ -228,7 +231,7 @@ export function PurchaseClientView({
                   </span>
                   <Sparkles className='size-4 text-background' aria-hidden />
                 </div>
-                <Accordion key={`highlights-${selectedModel}`} type='single' collapsible className='w-full'>
+                <Accordion key={`highlights-${selectedModel}`} className='w-full'>
                   {currentConfig.highlights.map(highlight => (
                     <AccordionItem
                       key={highlight.title}
@@ -238,7 +241,7 @@ export function PurchaseClientView({
                       <AccordionTrigger className='py-3 text-left text-sm font-semibold text-background hover:no-underline hover:text-ember'>
                         {highlight.title}
                       </AccordionTrigger>
-                      <AccordionContent className='pb-3 pt-0 text-sm leading-[1.45] text-background/70'>
+                      <AccordionContent className='pb-3 pt-0 text-sm leading-text-paragraph text-background/70'>
                         {highlight.body}
                       </AccordionContent>
                     </AccordionItem>
@@ -315,7 +318,7 @@ export function PurchaseClientView({
                         )}
                         style={{ backgroundColor: colorObj.hex }}
                       />
-                      {isActive && <span className='font-medium text-cloud-dancer'>{colorObj.name}</span>}
+                      {isActive && <span className='font-medium text-foreground'>{colorObj.name}</span>}
                     </button>
                   )
                 })}
@@ -326,7 +329,7 @@ export function PurchaseClientView({
                   <div className='relative overflow-hidden rounded-md bg-background p-5'>
                     <div className='mb-3 flex items-center gap-2 border-b border-background pb-3'>
                       <Ruler className='h-4 w-4 text-dusted-peri' />
-                      <span className='text-sm font-bold tracking-wider text-cloud-dancer'>
+                      <span className='text-sm font-bold tracking-wider text-foreground'>
                         Passer best for deg som er {guidance.height}
                       </span>
                     </div>
@@ -334,7 +337,7 @@ export function PurchaseClientView({
                       {guidance.tips.map((tip, i) => (
                         <li
                           key={i}
-                          className='flex items-start gap-2.5 text-sm leading-[1.45] text-cloud-dancer'
+                          className='flex items-start gap-2.5 text-sm leading-text-paragraph text-foreground'
                         >
                           <div className='mt-1.5 size-1 shrink-0 rounded-full bg-dusted-peri' />
                           <span>{tip}</span>
@@ -372,7 +375,7 @@ export function PurchaseClientView({
               data-track='🔔🛒 AddToCartSkreddersyVarmen 🛒🔔'
               disabled={isPending}
               className={cn(
-                'flex h-full flex-1 flex-row items-center justify-center gap-3 rounded-sm bg-primary px-2 text-cloud-dancer shadow-xl transition-all active:scale-[0.98] hover:bg-ember-dark',
+                'flex h-full flex-1 flex-row items-center justify-center gap-3 rounded-sm bg-primary px-2 text-foreground shadow-xl transition-all active:scale-[0.98] hover:bg-ember-dark',
                 isPending && 'cursor-not-allowed opacity-80'
               )}
             >
