@@ -3,7 +3,7 @@
 import { createClient } from 'redis'
 import { NextResponse } from 'next/server'
 
-const redis = await createClient().connect()
+export const redis = await createClient().connect()
 
 export const POST = async () => {
   // Fetch data from Redis
