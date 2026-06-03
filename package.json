@@ -36,7 +36,7 @@
     "@radix-ui/react-switch": "^1.2.6",
     "@radix-ui/react-use-controllable-state": "^1.2.2",
     "@radix-ui/react-visually-hidden": "^1.2.4",
-    "@react-email/components": "^0.5.7",
+    "@react-email/components": "^1.0.12",
     "@react-email/render": "^1.4.0",
     "@shopify/graphql-client": "^1.4.2",
     "@supabase/server": "^1.1.0",
