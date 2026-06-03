@@ -1,3 +1,5 @@
+// src/lib/redis/getRedis.ts
+
 import { createClient } from 'redis'
 import { NextResponse } from 'next/server'
 
