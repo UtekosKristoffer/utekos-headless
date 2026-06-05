@@ -51,10 +51,8 @@ const boatingHeroFeatures: readonly InspirationHeroFeature[] = [
 
 const BoatingHeroBackground = (
   <>
-    {/* Én rolig, kjølig glød ute til høyre – vekk fra den venstrestilte teksten,
-        så kontrasten holder seg høy (WCAG). Ingen varme/gule toner. */}
     <div
-      className='pointer-events-none absolute -right-24 top-1/3 -z-10 size-[460px] rounded-full opacity-25 blur-3xl'
+      className='pointer-events-none absolute -right-24 top-1/3 -z-10 size-115 rounded-full opacity-25 blur-3xl'
       aria-hidden='true'
       style={{
         background:

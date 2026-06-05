@@ -1,3 +1,5 @@
+// src/proxy.ts
+
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { createMiddlewareContext } from '@/lib/middleware/utils/createMiddlewareContext'
@@ -12,8 +14,6 @@ import { buildCookieConfigs } from './lib/tracking/proxy/buildCookieConfigs'
 import { formatCookieHeader } from './lib/tracking/proxy/formatCookieHeader'
 import { hashEmail } from './lib/tracking/hash/hashEmail'
 import { formatFbcCookie } from './lib/tracking/proxy/formatFbcCookie'
-
-const SGTM_PUBLIC_ORIGIN = (process.env.SGTM_PUBLIC_ORIGIN || 'https://sgtm.utekos.no').replace(/\/$/, '')
 
 const allowedReferrers = new Set(['nbocc.no', 'bergenhordaland.nbocc.no'])
 
@@ -46,17 +46,14 @@ export async function proxy(request: NextRequest) {
     return new NextResponse(null, { status: 403, statusText: 'Forbidden' })
   }
 
-  // Redirect visitors from NB OCC domains from the front page to /nbcc
   if (context.pathname === '/' && isAllowedNboccReferrer(request)) {
     const redirectUrl = new URL(NBCC_DESTINATION_PATH, request.url)
 
-    // Optional, but recommended: preserve UTM/query params from the original link
     redirectUrl.search = request.nextUrl.search
 
     return NextResponse.redirect(redirectUrl, 307)
   }
 
-  // Handle magasinet upgrade redirect
   if (MAGASINET_UPGRADE_ENABLED && context.pathname.startsWith('/magasinet')) {
     if (
       context.pathname === MAGASINET_UPGRADE_PATH
@@ -70,11 +67,7 @@ export async function proxy(request: NextRequest) {
   }
 
   if (context.pathname.startsWith('/sporing')) {
-    const pathWithoutPrefix = context.pathname.replace(/^\/sporing/, '') || '/'
-    const redirectUrl = new URL(pathWithoutPrefix, SGTM_PUBLIC_ORIGIN)
-    redirectUrl.search = request.nextUrl.search
-
-    return NextResponse.redirect(redirectUrl, 308)
+    return NextResponse.next()
   }
 
   if (!context.isTargetRoute) {

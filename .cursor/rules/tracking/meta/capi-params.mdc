@@ -1,0 +1,11 @@
+---
+alwaysApply: true
+---
+
+## Facebook/Meta Tracking
+
+Always send `_fbc` and `_fbp` browser cookie values in the `fbc` and `fbp` event parameters, respectively,
+when available. These values can change across browser sessions, so refresh the user's profile with the latest
+value whenever possible.
+
+- Make sure to use the Meta Pixel with both first and third-party cookies

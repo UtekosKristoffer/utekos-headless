@@ -1,14 +1,16 @@
-// src/lib/redis/getRedis.ts
+// Path: src/lib/redis.ts
+import { createClient, type RedisClientType } from 'redis'
 
-import { createClient } from 'redis'
-import { NextResponse } from 'next/server'
+let _client: RedisClientType | null = null
+export async function getRedis(): Promise<RedisClientType> {
+  if (_client && _client.isOpen) return _client
 
-export const redis = await createClient().connect()
+  const url = process.env.REDIS_URL
+  if (!url) throw new Error('Missing REDIS_URL')
 
-export const POST = async () => {
-  // Fetch data from Redis
-  const result = await redis.get('item')
+  _client = createClient({ url })
+  _client.on('error', err => console.error('Redis Client Error', err))
 
-  // Return the result in the response
-  return new NextResponse(JSON.stringify({ result }), { status: 200 })
+  if (!_client.isOpen) await _client.connect()
+  return _client
 }

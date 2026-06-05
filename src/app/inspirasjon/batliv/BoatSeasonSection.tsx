@@ -7,13 +7,13 @@ export function BoatSeasonSection() {
       {/* Ambient background glow */}
       <div className='absolute inset-0 -z-10 opacity-20'>
         <div
-          className='boat-seasons-glow-pulse absolute left-1/4 top-1/4 h-[500px] w-[500px] blur-3xl'
+          className='boat-seasons-glow-pulse absolute left-1/4 top-1/4 h-125 w-125 blur-3xl'
           style={{
             background: 'radial-gradient(circle, var(--ancient-water) 0%, transparent 70%)'
           }}
         />
         <div
-          className='boat-seasons-glow-pulse absolute right-1/4 bottom-1/4 h-[500px] w-[500px] blur-3xl'
+          className='boat-seasons-glow-pulse absolute right-1/4 bottom-1/4 h-125 w-125 blur-3xl'
           style={{
             background: 'radial-gradient(circle, var(--primary) 0%, transparent 70%)',
             animationDelay: '4s'

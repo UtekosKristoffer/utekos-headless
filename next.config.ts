@@ -42,14 +42,13 @@ const nextConfig: NextConfig = {
   staticPageGenerationTimeout: 180,
 
   experimental: {
-    // Enable filesystem caching for `next dev`
     turbopackFileSystemCacheForDev: true,
-    // Enable filesystem caching for `next build`
     turbopackFileSystemCacheForBuild: true,
     cpus: 1,
     webVitalsAttribution: ['CLS', 'INP', 'LCP'],
     optimizePackageImports: [
       'zod',
+      'facebook-nodejs-business-sdk',
       'lucide-react',
       '@tanstack/react-query',
       'react-hook-form',

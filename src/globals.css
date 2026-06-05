@@ -326,6 +326,10 @@
   --secondary-foreground: oklch(0.2884 0.0366 279.42);
   --secondary: oklch(0.82 0.006 88.64);
   --primary-foreground: oklch(0.9493 0.007 88.64);
+  --color-popover: oklch(0.2884 0.0366 279.42);
+  --color-popover-foreground: oklch(0.9493 0.007 88.64);
+  --popover: oklch(0.2884 0.0366 279.42);
+  --popover-foreground: oklch(0.9493 0.007 88.64);
   --maritime-dark: oklch(0.1996 0.0201 279.96);
   --bleached-mauve: oklch(0.7864 0.0487 359.96);
   --bleached-mauve-light: oklch(0.9064 0.0487 359.96);

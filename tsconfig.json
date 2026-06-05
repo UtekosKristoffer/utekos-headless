@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES2024",
-    "lib": ["dom", "dom.iterable", "es2024"],
+    "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": false,
     "skipLibCheck": true,
     "strict": true,
@@ -17,6 +17,7 @@
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
     "noUncheckedSideEffectImports": true,
+    "forceConsistentCasingInFileNames": true,
     "exactOptionalPropertyTypes": true,
     "noUncheckedIndexedAccess": true,
     "plugins": [
@@ -39,7 +40,7 @@
     "**/*.ts",
     "**/*.tsx",
     "eslint.config.mts"
-  ],
+, "src/lib/measurement/core/event-contract"  ],
   "exclude": [
     "node_modules",
     ".github/**/*",

@@ -45,6 +45,7 @@ export const CheckoutButton = ({
 } & Omit<React.ComponentProps<typeof Button>, 'asChild' | 'disabled' | 'aria-label'>): React.JSX.Element => {
   const isDisabled = isPending || disabled
   const buttonText = disabledReason ?? children ?? (isPending ? 'Behandler...' : 'Gå til kassen')
+  const disabledAttrs = isDisabled ? { 'aria-disabled': true, 'tabIndex': -1 } : {}
 
   const trackCheckout = () => {
     if (isDisabled) return
@@ -221,13 +222,7 @@ export const CheckoutButton = ({
       aria-label={disabledReason ?? getCheckoutAriaLabel(subtotal, isPending)}
       {...props}
     >
-      <a
-        href={checkoutUrl}
-        onClick={handleClick}
-        aria-disabled={isDisabled}
-        tabIndex={isDisabled ? -1 : undefined}
-        rel='noopener noreferrer'
-      >
+      <a href={checkoutUrl} onClick={handleClick} rel='noopener noreferrer' {...disabledAttrs}>
         {buttonText}
       </a>
     </Button>
