@@ -35,7 +35,7 @@
     "@next/third-parties": "^16.2.7",
     "@openfeature/server-sdk": "^1.18.0",
     "@opentelemetry/api": "^1.9.1",
-    "@posthog/next": "^0.4.74",
+    "@posthog/next": "^0.4.82",
     "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-radio-group": "^1.3.8",
     "@radix-ui/react-select": "^2.2.6",
