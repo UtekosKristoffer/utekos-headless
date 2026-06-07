@@ -6,6 +6,19 @@ STATUS: PLANNING
 
 [Vendor-agnostic Metrics API setup](https://supabase.com/docs/guides/telemetry/metrics/vendor-agnostic.md)
 
+## Løst hendelse: PostHog-prosjekt uten events
+
+Dato: 2026-06-07
+
+- Produksjonsappen brukte et PostHog project token som tilhørte et annet prosjekt enn det aktive prosjektet
+  `posthog-celeste-mountain`.
+- `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` i Vercel Production er korrigert til tokenet for det aktive prosjektet.
+- Produksjonen er redeployet som `dpl_GA2tz1Y41HFjPivNKCjETmoYQEYE`.
+- EU-relayen på `/relay-MAhe/capture/` er verifisert med HTTP 200.
+- Verifikasjonseventet `utekos_production_relay_verification` er bekreftet mottatt i det aktive PostHog-
+  prosjektet.
+- PostHog fortsetter å respektere analyse-samtykke før vanlige browser-events sendes.
+
 ## Løst hendelse: Meta CAPI-token utløpt
 
 Dato: 2026-06-07
