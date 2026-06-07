@@ -28,7 +28,7 @@ export const useCasesData: UseCase[] = [
     time: 'Sent på kvelden',
     title: 'Når stjernene titter frem',
     description: 'For de som blir igjen — komfort som varer til den siste samtalen.',
-    color: 'from-dusted-peri/20',
+    color: 'from-very-peri/20',
     iconColor: 'text-background',
     iconBackground: '--color-cloud-dancer'
   }

@@ -117,7 +117,7 @@ export function IntersportSection() {
       className='relative isolate w-full overflow-hidden bg-background px-4 py-24 sm:py-32'
     >
       <div className='pointer-events-none absolute inset-0 -z-10'>
-        <div className='absolute left-[8%] top-16 size-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_22%,transparent)_0%,transparent_72%)] blur-3xl' />
+        <div className='absolute left-[8%] top-16 size-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--very-peri)_22%,transparent)_0%,transparent_72%)] blur-3xl' />
         <div className='absolute bottom-12 right-[10%] size-96 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_14%,transparent)_0%,transparent_72%)] blur-3xl' />
       </div>
 
@@ -171,9 +171,9 @@ export function IntersportSection() {
 
             <div className='flex flex-col items-start text-left'>
               <BrandBadge
-                backgroundColor='var(--dusted-peri)'
+                backgroundColor='var(--very-peri)'
                 textColor='var(--background)'
-                className='gsap-content mb-8 gap-3 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
+                className='gsap-content mb-8 gap-3 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--very-peri)_80%,transparent)]'
               >
                 <span className='relative flex size-3'>
                   <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-background opacity-35'></span>

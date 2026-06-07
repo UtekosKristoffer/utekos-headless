@@ -103,7 +103,7 @@ export function ProductsPageHeader() {
 
         <div className='absolute left-1/2 top-0 h-[800px] w-[1000px] -translate-x-1/2 opacity-25 mix-blend-screen'>
           <div
-            className='gsap-spotlight h-full w-full bg-linear-to-b from-ancient-water via-dusted-peri/18 to-transparent blur-[120px] will-change-transform'
+            className='gsap-spotlight h-full w-full bg-linear-to-b from-ancient-water via-very-peri/18 to-transparent blur-[120px] will-change-transform'
             style={{
               transform: 'translate(0, 0)'
             }}
@@ -163,7 +163,7 @@ export function ProductsPageHeader() {
           <br className='hidden md:block' />
           Utforsk vår kolleksjon og{' '}
           <span className='relative inline-block px-1'>
-            <span className='gsap-highlight absolute inset-0 origin-left rounded bg-dusted-peri/24 -skew-x-6' />
+            <span className='gsap-highlight absolute inset-0 origin-left rounded bg-very-peri/24 -skew-x-6' />
             <span className='relative z-10 font-medium text-ancient-water'>skreddersy</span>
           </span>{' '}
           din egen varme.

@@ -31,8 +31,8 @@ export function MobileMenuItem({ item }: { item: MenuItem }) {
 
   return (
     <AccordionItem value={item.title} className='border-none'>
-      <AccordionTrigger className='group relative flex w-full items-center justify-between rounded-2xl border border-cloud-dancer/10 bg-cloud-dancer/[0.055] px-4 py-4 text-foreground transition-[background,border-color] hover:border-cloud-dancer/18 hover:bg-cloud-dancer/[0.075] hover:no-underline focus-visible:ring-2 focus-visible:ring-cloud-dancer/38 data-[state=open]:border-dusted-peri/34 data-[state=open]:bg-cloud-dancer/[0.085]'>
-        <div className='absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-data-[state=open]:opacity-100 [background:radial-gradient(120%_120%_at_50%_0%,color-mix(in_oklab,var(--dusted-peri)_16%,transparent),transparent_70%)]' />
+      <AccordionTrigger className='group relative flex w-full items-center justify-between rounded-2xl border border-cloud-dancer/10 bg-cloud-dancer/[0.055] px-4 py-4 text-foreground transition-[background,border-color] hover:border-cloud-dancer/18 hover:bg-cloud-dancer/[0.075] hover:no-underline focus-visible:ring-2 focus-visible:ring-cloud-dancer/38 data-[state=open]:border-very-peri/34 data-[state=open]:bg-cloud-dancer/[0.085]'>
+        <div className='absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-data-[state=open]:opacity-100 [background:radial-gradient(120%_120%_at_50%_0%,color-mix(in_oklab,var(--very-peri)_16%,transparent),transparent_70%)]' />
         <div className='relative flex min-w-0 items-center gap-3'>
           <span className='truncate text-[15px] leading-[1.2] font-semibold tracking-[-0.01em]'>
             {item.title}

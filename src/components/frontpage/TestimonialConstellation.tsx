@@ -84,7 +84,7 @@ export function TestimonialConstellation() {
 
       <div className='relative z-10 mx-auto px-4 sm:px-6 lg:px-8 md:max-w-7xl'>
         <div ref={headerRef} className='mb-20 text-center max-w-3xl mx-auto'>
-          <div className='animate-header-item mb-8 inline-flex items-center gap-2 rounded-full border border-dusted-peri/40 bg-dusted-peri px-4 py-2 shadow-lg shadow-dusted-peri/12'>
+          <div className='animate-header-item mb-8 inline-flex items-center gap-2 rounded-full border border-very-peri/40 bg-very-peri px-4 py-2 shadow-lg shadow-very-peri/12'>
             <div className='flex gap-0.5'>
               {[...Array(5)].map((_, i) =>
                 i < 4 ?

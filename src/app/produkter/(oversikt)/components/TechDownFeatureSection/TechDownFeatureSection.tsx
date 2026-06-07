@@ -92,7 +92,7 @@ export const TechDownFeatureSection = () => {
         <div className='gsap-visual w-full'>
           <div className='relative rounded-2xl border border-cloud-dancer/10 bg-cloud-dancer/[0.04] p-2 backdrop-blur-sm shadow-[0_32px_80px_-44px_rgba(8,15,24,0.92)]'>
             <div className='absolute top-4 right-4 z-20 rotate-6 md:-top-4 md:-right-4 md:rotate-3'>
-              <div className='flex h-24 w-24 flex-col items-center justify-center rounded-[2rem] bg-dusted-peri p-4 text-background shadow-[0_20px_45px_-24px_rgba(32,28,54,0.58)] ring-1 ring-background/8'>
+              <div className='flex h-24 w-24 flex-col items-center justify-center rounded-[2rem] bg-very-peri p-4 text-background shadow-[0_20px_45px_-24px_rgba(32,28,54,0.58)] ring-1 ring-background/8'>
                 <span className='text-xs font-bold'>Kun</span>
                 <span className='text-xl font-bold  '>1790,-</span>
               </div>
@@ -135,9 +135,9 @@ export const TechDownFeatureSection = () => {
             </BrandBadge>
 
             <BrandBadge
-              backgroundColor='var(--color-dusted-peri)'
+              backgroundColor='var(--color-very-peri)'
               textColor='var(--color-background)'
-              className='gap-2 border border-dusted-peri/24 px-4 py-2 text-xs font-semibold tracking-normal shadow-[0_16px_30px_-24px_rgba(32,28,54,0.48)]'
+              className='gap-2 border border-very-peri/24 px-4 py-2 text-xs font-semibold tracking-normal shadow-[0_16px_30px_-24px_rgba(32,28,54,0.48)]'
             >
               <Gift className='h-3.5 w-3.5 text-background' />
               <span>Spar kr 200,-</span>

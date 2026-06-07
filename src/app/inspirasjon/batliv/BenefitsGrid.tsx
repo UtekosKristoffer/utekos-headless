@@ -6,7 +6,7 @@ const benefitsData = [
     icon: Thermometer,
     title: 'Øyeblikkelig varme',
     description: 'Effektiv beskyttelse når temperaturen plutselig synker.',
-    color: 'text-dusted-peri'
+    color: 'text-very-peri'
   },
   {
     icon: Wind,

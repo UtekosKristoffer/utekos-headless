@@ -47,7 +47,7 @@ export function SmartRealTimeActivity({ baseViewers }: SmartRealTimeActivityProp
 
   return (
     <div aria-live='polite' className='flex items-center   gap-2 text-sm -pb-2! text-background/70'>
-      <EyeIcon className='h-4 w-4 text-dusted-peri' />
+      <EyeIcon className='h-4 w-4 text-very-peri' />
       <span
         // Transition på transform+opacity (GPU-vennlig)
         className={[

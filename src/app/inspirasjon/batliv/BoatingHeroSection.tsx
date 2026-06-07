@@ -6,7 +6,7 @@ import { HeroHighlight } from '../layout/hero/HeroHighlight'
 import type { InspirationHeroFeature } from '../layout/hero/types'
 
 // Felles korttreatment: rolige, solide flater som harmonerer med
-// header-secondary og resten av seksjonen (havdyp + dusted-peri-aksenten).
+// header-secondary og resten av seksjonen (havdyp + very-peri-aksenten).
 // Ingen gradienter, glød eller skinn – kun trygge, autoritære farger.
 const CARD_SHADOW = '0 24px 48px -38px rgba(9, 15, 22, 0.42)'
 const CARD_BORDER = 'color-mix(in oklch, var(--cloud-dancer) 12%, transparent)'
@@ -41,7 +41,7 @@ const boatingHeroFeatures: readonly InspirationHeroFeature[] = [
     description: 'Nyt båten fra tidlig vår til sen høst',
     icon: Anchor,
     iconColor: 'var(--foreground)',
-    surface: 'color-mix(in oklch, var(--dusted-peri) 36%, var(--havdyp) 64%)',
+    surface: 'color-mix(in oklch, var(--very-peri) 36%, var(--havdyp) 64%)',
     border: CARD_BORDER,
     iconSurface: ICON_SURFACE,
     iconBorder: ICON_BORDER,
@@ -56,7 +56,7 @@ const BoatingHeroBackground = (
       aria-hidden='true'
       style={{
         background:
-          'radial-gradient(circle, color-mix(in oklch, var(--dusted-peri) 55%, transparent) 0%, transparent 70%)'
+          'radial-gradient(circle, color-mix(in oklch, var(--very-peri) 55%, transparent) 0%, transparent 70%)'
       }}
     />
     {/* Jevn nedtoning mot bunnen for en samlet, dyp og rolig flate. */}
@@ -76,14 +76,14 @@ export function BoatingHeroSection() {
       breadcrumb={
         <InspirationHeroBreadcrumb
           label='Båtliv'
-          color='var(--dusted-peri)'
+          color='var(--very-peri)'
           textColor='var(--background)'
           icon={Anchor}
         />
       }
       title={
         <>
-          Båtliv uten <HeroHighlight color='var(--dusted-peri-light)'>å fryse</HeroHighlight>
+          Båtliv uten <HeroHighlight color='var(--very-peri-light)'>å fryse</HeroHighlight>
         </>
       }
       titleClassName='max-w-3xl'

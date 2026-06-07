@@ -108,16 +108,16 @@ export function AboutCarousel() {
       className='relative isolate mx-auto overflow-hidden bg-background px-4 py-16 text-foreground sm:py-32'
     >
       <div className='pointer-events-none absolute inset-0 -z-10'>
-        <div className='absolute left-[18%] top-[18%] h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_20%,transparent)_0%,transparent_70%)] blur-[110px]' />
+        <div className='absolute left-[18%] top-[18%] h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--very-peri)_20%,transparent)_0%,transparent_70%)] blur-[110px]' />
         <div className='absolute bottom-[10%] right-[14%] h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_16%,transparent)_0%,transparent_72%)] blur-[110px]' />
       </div>
 
       <div className='container mx-auto max-w-7xl'>
         <div className='mb-16 text-center'>
           <BrandBadge
-            backgroundColor='var(--dusted-peri)'
+            backgroundColor='var(--very-peri)'
             textColor='var(--background)'
-            className='gsap-header mb-6 gap-2 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
+            className='gsap-header mb-6 gap-2 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--very-peri)_80%,transparent)]'
           >
             <Camera className='size-5' strokeWidth={1.6} />
             <span>Livet med Utekos</span>
@@ -132,7 +132,7 @@ export function AboutCarousel() {
 
         <div className='gsap-carousel relative'>
           <div className='relative mx-auto max-w-6xl overflow-hidden rounded-[1.75rem] border border-cloud-dancer/10 bg-[color-mix(in_oklab,var(--cloud-dancer)_8%,transparent)] p-3 shadow-2xl shadow-black/35 backdrop-blur-sm md:p-5'>
-            <div className='absolute left-0 right-0 top-0 h-px bg-linear-to-r from-transparent via-dusted-peri/55 to-transparent' />
+            <div className='absolute left-0 right-0 top-0 h-px bg-linear-to-r from-transparent via-very-peri/55 to-transparent' />
 
             <Carousel
               setApi={setApi}
@@ -164,8 +164,8 @@ export function AboutCarousel() {
               </CarouselContent>
 
               <div className='hidden md:block'>
-                <CarouselPrevious className='left-8 border-cloud-dancer/12 bg-background/80 text-foreground backdrop-blur-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-background' />
-                <CarouselNext className='right-8 border-cloud-dancer/12 bg-background/80 text-foreground backdrop-blur-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-background' />
+                <CarouselPrevious className='left-8 border-cloud-dancer/12 bg-background/80 text-foreground backdrop-blur-md hover:border-very-peri hover:bg-very-peri hover:text-background' />
+                <CarouselNext className='right-8 border-cloud-dancer/12 bg-background/80 text-foreground backdrop-blur-md hover:border-very-peri hover:bg-very-peri hover:text-background' />
               </div>
             </Carousel>
 
@@ -177,7 +177,7 @@ export function AboutCarousel() {
                   className={cn(
                     'h-1.5 rounded-full transition-all duration-300',
                     current === index + 1 ?
-                      'w-8 bg-dusted-peri'
+                      'w-8 bg-very-peri'
                     : 'w-2 bg-cloud-dancer/22 hover:bg-cloud-dancer/45'
                   )}
                   aria-label={`Gå til bilde ${index + 1}`}

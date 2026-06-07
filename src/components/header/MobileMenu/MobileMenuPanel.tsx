@@ -123,7 +123,7 @@ export function MobileMenuPanel({
       >
         <div className='pointer-events-none absolute inset-0 -z-10'>
           <div className='absolute inset-0 bg-[linear-gradient(180deg,color-mix(in_oklab,var(--havdyp)_36%,var(--background))_0%,var(--background)_54%,color-mix(in_oklab,var(--demitasse)_22%,var(--background))_100%)]' />
-          <div className='absolute inset-0 bg-[radial-gradient(105%_78%_at_20%_0%,color-mix(in_oklab,var(--dusted-peri)_18%,transparent)_0%,transparent_64%),radial-gradient(95%_72%_at_88%_34%,color-mix(in_oklab,var(--ancient-water)_12%,transparent)_0%,transparent_66%)]' />
+          <div className='absolute inset-0 bg-[radial-gradient(105%_78%_at_20%_0%,color-mix(in_oklab,var(--very-peri)_18%,transparent)_0%,transparent_64%),radial-gradient(95%_72%_at_88%_34%,color-mix(in_oklab,var(--ancient-water)_12%,transparent)_0%,transparent_66%)]' />
           <div className='absolute inset-0 bg-linear-to-b from-transparent via-background/8 to-background/48' />
         </div>
 

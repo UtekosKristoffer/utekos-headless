@@ -177,9 +177,9 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                     })}
                   >
                     <BrandBadge
-                      backgroundColor='var(--dusted-peri)'
+                      backgroundColor='var(--very-peri)'
                       textColor='var(--background)'
-                      className='max-w-full gap-2.5 border border-dusted-peri/55 px-3 py-2 text-sm font-medium   shadow-[0_10px_30px_-22px_color-mix(in_oklab,var(--cloud-dancer)_45%,transparent)]'
+                      className='max-w-full gap-2.5 border border-very-peri/55 px-3 py-2 text-sm font-medium   shadow-[0_10px_30px_-22px_color-mix(in_oklab,var(--cloud-dancer)_45%,transparent)]'
                     >
                       <span className='relative flex size-2 shrink-0'>
                         <span className='absolute inline-flex size-full animate-ping rounded-full bg-background opacity-75 motion-reduce:animate-none'></span>

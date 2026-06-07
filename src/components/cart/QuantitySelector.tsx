@@ -16,7 +16,7 @@ export function QuantitySelector() {
   }
 
   return (
-    <div className='inline-flex h-10 items-center rounded-lg bg-dusted-peri text-background'>
+    <div className='inline-flex h-10 items-center rounded-lg bg-very-peri text-background'>
       <Button
         type='button'
         variant='ghost'

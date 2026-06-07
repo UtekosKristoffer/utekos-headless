@@ -26,12 +26,12 @@ export function LandingPageProductCarouselPurchaseSection({
   currentConfig
 }: LandingPageProductCarouselPurchaseSectionProps) {
   return (
-    <div className='relative flex w-full flex-col items-center justify-center bg-background min-[900px]:sticky min-[900px]:top-0 min-[900px]:h-svh min-[900px]:self-start min-[900px]:p-8 min-[1280px]:p-12'>
+    <div className='relative flex w-full flex-col items-center justify-center bg-white-sand min-[900px]:sticky min-[900px]:top-0 min-[900px]:h-svh min-[900px]:self-start min-[900px]:p-8 min-[1280px]:p-12'>
       <BrandBadge
         key={`badge-${selectedModel}`}
-        backgroundColor='var(--color-bleached-mauve)'
-        textColor='var(--color-background)'
-        className='absolute left-4 top-4 z-20 animate-in px-4 py-1.5 text-xs font-semibold tracking-normal shadow-md fade-in slide-in-from-left-2 duration-500 min-[900px]:left-8 min-[900px]:top-8 min-[1280px]:left-12 min-[1280px]:top-12'
+        backgroundColor='var(--color-very-peri)'
+        textColor='var(--color-cloud-dancer)'
+        className='absolute left-4 top-4 z-20 animate-in px-4 py-1.5 text-xs font-semibold tracking-normal shadow-lg fade-in slide-in-from-left-2 duration-500 min-[900px]:left-8 min-[900px]:top-8 min-[1280px]:left-12 min-[1280px]:top-12'
       >
         <span className='whitespace-nowrap'>{currentConfig.badge}</span>
       </BrandBadge>
@@ -47,7 +47,7 @@ export function LandingPageProductCarouselPurchaseSection({
         <CarouselContent className='ml-0'>
           {currentConfig.images.map((src, i) => (
             <CarouselItem key={src} className='relative aspect-4/5 pl-0'>
-              <div className='relative h-full w-full overflow-hidden min-[900px]:rounded-2xl min-[900px]:shadow-2xl min-[900px]:ring-1 min-[900px]:ring-background/10'>
+              <div className='relative h-full w-full overflow-hidden min-[900px]:rounded-2xl min-[900px]:shadow-2xl min-[900px]:ring-1 min-[900px]:ring-maritime-darkest/10'>
                 <Image
                   src={src}
                   alt={`${currentConfig.title} – bilde ${i + 1}`}
@@ -66,14 +66,14 @@ export function LandingPageProductCarouselPurchaseSection({
             <CarouselPrevious
               aria-label='Forrige bilde'
               className={cn(
-                'left-2 size-10 border-background/15 bg-cloud-dancer/90 text-background shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-primary md:left-4 md:size-11',
+                'left-2 size-10 border-maritime-darkest/15 bg-cloud-dancer/90 text-maritime-darkest shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-very-peri md:left-4 md:size-11',
                 focusRing
               )}
             />
             <CarouselNext
               aria-label='Neste bilde'
               className={cn(
-                'right-2 size-10 border-background/15 bg-cloud-dancer/90 text-background shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-primary md:right-4 md:size-11',
+                'right-2 size-10 border-maritime-darkest/15 bg-cloud-dancer/90 text-maritime-darkest shadow-md backdrop-blur-md hover:bg-cloud-dancer hover:text-very-peri md:right-4 md:size-11',
                 focusRing
               )}
             />

@@ -43,7 +43,7 @@ export function FindUsSection() {
     <section className='relative isolate overflow-hidden bg-overcast py-24 text-havdyp sm:py-32'>
       <div className='pointer-events-none absolute inset-0 -z-10'>
         <div className='absolute left-[6%] top-20 size-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_58%,transparent)_0%,transparent_72%)] blur-3xl' />
-        <div className='absolute bottom-12 right-[8%] size-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_22%,transparent)_0%,transparent_72%)] blur-3xl' />
+        <div className='absolute bottom-12 right-[8%] size-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--very-peri)_22%,transparent)_0%,transparent_72%)] blur-3xl' />
       </div>
 
       <div className='container mx-auto max-w-7xl px-6 lg:px-8'>
@@ -108,8 +108,8 @@ export function FindUsSection() {
                   ))}
                 </CarouselContent>
 
-                <CarouselPrevious className='left-4 border-cloud-dancer/80 bg-cloud-dancer/92 text-havdyp shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-background' />
-                <CarouselNext className='right-4 border-cloud-dancer/80 bg-cloud-dancer/92 text-havdyp shadow-md hover:border-dusted-peri hover:bg-dusted-peri hover:text-background' />
+                <CarouselPrevious className='left-4 border-cloud-dancer/80 bg-cloud-dancer/92 text-havdyp shadow-md hover:border-very-peri hover:bg-very-peri hover:text-background' />
+                <CarouselNext className='right-4 border-cloud-dancer/80 bg-cloud-dancer/92 text-havdyp shadow-md hover:border-very-peri hover:bg-very-peri hover:text-background' />
               </Carousel>
             </div>
           </AnimatedBlock>

@@ -32,8 +32,8 @@ export default function ProductGalleryCard({
       ].join(' ')
   const defaultBackgroundClassName =
     flushOnMobile ?
-      'group relative -mx-4 w-[calc(100%+2rem)] overflow-hidden rounded-none border-0 bg-cloud-dancer/72 shadow-none transition-all duration-300 hover:border-dusted-peri/45 md:-ml-8 md:mr-0 md:w-[calc(100%+2rem)] md:rounded-[1.5rem] md:border md:border-cloud-dancer/70 md:shadow-2xl md:shadow-havdyp/10'
-    : 'group relative w-full overflow-hidden rounded-[1.5rem] border border-cloud-dancer/70 bg-cloud-dancer/72 shadow-2xl shadow-havdyp/10 transition-all duration-300 hover:border-dusted-peri/45'
+      'group relative -mx-4 w-[calc(100%+2rem)] overflow-hidden rounded-none border-0 bg-cloud-dancer/72 shadow-none transition-all duration-300 hover:border-very-peri/45 md:-ml-8 md:mr-0 md:w-[calc(100%+2rem)] md:rounded-[1.5rem] md:border md:border-cloud-dancer/70 md:shadow-2xl md:shadow-havdyp/10'
+    : 'group relative w-full overflow-hidden rounded-[1.5rem] border border-cloud-dancer/70 bg-cloud-dancer/72 shadow-2xl shadow-havdyp/10 transition-all duration-300 hover:border-very-peri/45'
 
   return (
     <div className={[enableStickyOnDesktop ? `h-fit md:sticky ${stickyTopClassName}` : '', 'z-10'].join(' ')}>

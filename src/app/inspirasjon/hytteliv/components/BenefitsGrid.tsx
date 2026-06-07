@@ -21,7 +21,7 @@ export const benefitsData: Benefit[] = [
     icon: HeartHandshake,
     title: 'Forlenger hyggen',
     description: 'Mer tid til de gode samtalene utendørs, uansett vær.',
-    benefitColor: 'bg-dusted-peri',
+    benefitColor: 'bg-very-peri',
     iconColor: 'text-foreground'
   },
   {

@@ -241,7 +241,7 @@ export function TerrasseCarousel() {
           className='absolute bottom-[10%] right-[8%] size-[31rem] rounded-full blur-3xl'
           style={{
             background:
-              'radial-gradient(circle, color-mix(in oklch, var(--dusted-peri) 42%, transparent) 0%, transparent 70%)'
+              'radial-gradient(circle, color-mix(in oklch, var(--very-peri) 42%, transparent) 0%, transparent 70%)'
           }}
         />
       </div>

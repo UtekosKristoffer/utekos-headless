@@ -10,12 +10,12 @@ export function CTASection() {
     <section className='relative isolate overflow-hidden bg-overcast py-24 sm:py-32'>
       <div className='pointer-events-none absolute inset-0 -z-10'>
         <div className='absolute left-1/2 top-1/2 h-[38rem] w-[38rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_64%,transparent)_0%,transparent_72%)] blur-[110px]' />
-        <div className='absolute bottom-10 right-[12%] size-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_20%,transparent)_0%,transparent_72%)] blur-3xl' />
+        <div className='absolute bottom-10 right-[12%] size-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--very-peri)_20%,transparent)_0%,transparent_72%)] blur-3xl' />
       </div>
 
       <div className='container mx-auto max-w-4xl px-4'>
         <div className='relative overflow-hidden rounded-[1.75rem] border border-cloud-dancer/70 bg-cloud-dancer/72 p-10 text-center shadow-2xl shadow-havdyp/10 backdrop-blur-sm md:p-16'>
-          <div className='absolute left-0 right-0 top-0 h-px bg-linear-to-r from-transparent via-dusted-peri/55 to-transparent' />
+          <div className='absolute left-0 right-0 top-0 h-px bg-linear-to-r from-transparent via-very-peri/55 to-transparent' />
           <div className='absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-havdyp/18 to-transparent' />
           <div className='relative z-10'>
             <AnimatedBlock className='mb-8 will-animate-fade-in-scale' delay='0s' threshold={0.2}>
@@ -23,7 +23,7 @@ export function CTASection() {
                 label='Oppdag kolleksjonen'
                 backgroundColor='var(--background)'
                 textColor='var(--cloud-dancer)'
-                className='shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
+                className='shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--very-peri)_80%,transparent)]'
               />
             </AnimatedBlock>
 

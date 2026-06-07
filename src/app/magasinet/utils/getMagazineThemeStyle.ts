@@ -4,7 +4,7 @@ import type { MagazineArticle } from '../types'
 const accentTokenByName = {
   'ancient-water': 'var(--ancient-water)',
   'bleached-mauve': 'var(--bleached-mauve)',
-  'dusted-peri': 'var(--dusted-peri)',
+  'very-peri': 'var(--very-peri)',
   'mountain-view': 'var(--mountain-view)',
   'overcast': 'var(--overcast)',
   'primary': 'var(--primary)'

@@ -79,15 +79,15 @@ export default function ProductSpecsPage() {
           </div>
 
           {/* MODUS 2 */}
-          <div className='group relative overflow-hidden rounded-3xl border border-white/10 bg-havdyp/80 p-8 backdrop-blur-xl transition-all duration-500 hover:border-dusted-peri/30 hover:bg-havdyp hover:shadow-2xl hover:shadow-dusted-peri/20'>
-            <div className='absolute inset-0 bg-linear-to-br from-dusted-peri/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
+          <div className='group relative overflow-hidden rounded-3xl border border-white/10 bg-havdyp/80 p-8 backdrop-blur-xl transition-all duration-500 hover:border-very-peri/30 hover:bg-havdyp hover:shadow-2xl hover:shadow-very-peri/20'>
+            <div className='absolute inset-0 bg-linear-to-br from-very-peri/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
 
             <div className='relative z-10'>
-              <div className='mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-dusted-peri/10 text-dusted-peri ring-1 ring-white/10 transition-colors group-hover:bg-dusted-peri group-hover:text-background'>
+              <div className='mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-very-peri/10 text-very-peri ring-1 ring-white/10 transition-colors group-hover:bg-very-peri group-hover:text-background'>
                 <Coffee className='h-6 w-6' />
               </div>
               <h3 className='mb-2 text-xl font-google-sans font-bold text-foreground'>2. Oppjustert modus</h3>
-              <p className='mb-4 text-sm font-bold tracking-wider text-dusted-peri  '>Umiddelbar mobilitet</p>
+              <p className='mb-4 text-sm font-bold tracking-wider text-very-peri  '>Umiddelbar mobilitet</p>
               <p className='text-foreground    '>
                 Nyter du total omfavnelse av Utekos, men må plutselig på kjøkkenet eller svare telefonen? Heis
                 opp plagget til ønsket lengde, stram snoren i livet og bli mobil på sekunder. Beveg deg trygt
@@ -152,9 +152,9 @@ export default function ProductSpecsPage() {
             {/* MAGASINET */}
             <Link
               href='/magasinet'
-              className='group relative flex flex-col items-center justify-center rounded-3xl border border-white/10 bg-havdyp p-12 text-center transition-all duration-500 hover:border-dusted-peri/50 hover:bg-background hover:shadow-2xl'
+              className='group relative flex flex-col items-center justify-center rounded-3xl border border-white/10 bg-havdyp p-12 text-center transition-all duration-500 hover:border-very-peri/50 hover:bg-background hover:shadow-2xl'
             >
-              <div className='mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-background text-foreground transition-all group-hover:scale-110 group-hover:bg-dusted-peri group-hover:text-background'>
+              <div className='mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-background text-foreground transition-all group-hover:scale-110 group-hover:bg-very-peri group-hover:text-background'>
                 <BookOpen className='h-8 w-8' />
               </div>
               <h3 className='mb-2 text-2xl font-google-sans font-bold text-foreground'>

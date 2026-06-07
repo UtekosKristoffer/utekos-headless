@@ -21,12 +21,12 @@ const useCaseSurfaces = {
     glow: 'radial-gradient(120% 120% at 50% 0%, transparent 34%, color-mix(in oklch, var(--primary) 40%, transparent) 100%)'
   },
   evening: {
-    borderColor: 'color-mix(in oklch, var(--dusted-peri) 34%, transparent)',
+    borderColor: 'color-mix(in oklch, var(--very-peri) 34%, transparent)',
     background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--background) 82%, var(--dusted-peri) 18%) 0%, color-mix(in oklch, var(--havdyp) 78%, var(--background) 22%) 100%)',
-    iconBackground: 'color-mix(in oklch, var(--dusted-peri) 18%, var(--background) 82%)',
-    iconBorder: 'color-mix(in oklch, var(--dusted-peri) 36%, transparent)',
-    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 34%, color-mix(in oklch, var(--dusted-peri) 42%, transparent) 100%)'
+      'linear-gradient(145deg, color-mix(in oklch, var(--background) 82%, var(--very-peri) 18%) 0%, color-mix(in oklch, var(--havdyp) 78%, var(--background) 22%) 100%)',
+    iconBackground: 'color-mix(in oklch, var(--very-peri) 18%, var(--background) 82%)',
+    iconBorder: 'color-mix(in oklch, var(--very-peri) 36%, transparent)',
+    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 34%, color-mix(in oklch, var(--very-peri) 42%, transparent) 100%)'
   },
   afternoon: {
     borderColor: 'color-mix(in oklch, var(--ancient-water) 34%, transparent)',
@@ -70,7 +70,7 @@ export const useCasesData: UseCase[] = [
     time: 'Kveld',
     title: 'Sene sommerkvelder',
     description: 'Ikke la duggfallet jage deg inn. Forleng de gode samtalene under stjernene.',
-    iconColor: 'text-dusted-peri',
+    iconColor: 'text-very-peri',
     surface: 'evening'
   },
   {

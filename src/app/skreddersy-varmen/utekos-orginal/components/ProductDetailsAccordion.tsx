@@ -105,28 +105,34 @@ export async function ProductDetailsAccordion() {
             <AccordionTrigger className={triggerClassName}>Bruksområder</AccordionTrigger>
             <AccordionContent>
               <div className='grid grid-cols-1 gap-8 p-2 md:grid-cols-2'>
-                <UsageGroup title='Båt- og hytteliv'>
-                  <li>Camping, båt og bobillivet</li>
-                  <li>Perfekt på hytten eller terrassen hjemme</li>
-                </UsageGroup>
+                <UsageGroup
+                  title='Båt- og hytteliv'
+                  items={['Camping, båt og bobillivet', 'Perfekt på hytten eller terrassen hjemme']}
+                />
 
-                <UsageGroup title='Fjellsport og turer'>
-                  <li>Pause og bålkos</li>
-                  <li>Aktiv vandring, toppturer og skiturer</li>
-                  <li>Isklatring og krevende fjellsport</li>
-                </UsageGroup>
+                <UsageGroup
+                  title='Fjellsport og turer'
+                  items={[
+                    'Pause og bålkos',
+                    'Aktiv vandring, toppturer og skiturer',
+                    'Isklatring og krevende fjellsport'
+                  ]}
+                />
 
-                <UsageGroup title='Jakt og fiske'>
-                  <li>Smygjakt og posteringsjakt</li>
-                  <li>Fiske (inkludert isfiske)</li>
-                </UsageGroup>
+                <UsageGroup
+                  title='Jakt og fiske'
+                  items={['Smygjakt og posteringsjakt', 'Fiske (inkludert isfiske)']}
+                />
 
-                <UsageGroup title='Til vanns & Annet'>
-                  <li>Båt- og seiltur</li>
-                  <li>Isbading (før og etter)</li>
-                  <li>På kalde tribuner</li>
-                  <li>Fotooppdrag i kulden</li>
-                </UsageGroup>
+                <UsageGroup
+                  title='Til vanns & Annet'
+                  items={[
+                    'Båt- og seiltur',
+                    'Isbading (før og etter)',
+                    'På kalde tribuner',
+                    'Fotooppdrag i kulden'
+                  ]}
+                />
               </div>
             </AccordionContent>
           </AccordionItem>

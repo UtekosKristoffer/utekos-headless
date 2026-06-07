@@ -21,7 +21,7 @@ const seasons = [
     value: 'summer',
     label: 'Sommer',
     icon: Flame,
-    iconColor: 'text-dusted-peri',
+    iconColor: 'text-very-peri',
     glowColor: 'var(--soft-warm)',
     title: 'De lange sommerkveldene',
     description:

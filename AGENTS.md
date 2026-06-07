@@ -49,7 +49,7 @@ official PANTONE contrast, lightness, shades, complementary colors, monochromic 
 - [Dazzling Blue](.agents/css/dazzling-blue.css)
 - [Demitasse](.agents/css/demitasse.css)
 - [Dusky Orchid](.agents/css/dusky-orchid.css)
-- [Dusted Peri](.agents/css/dusted-peri.css)
+- [Dusted Peri](.agents/css/very-peri.css)
 - [Ganache](.agents/css/ganache.css)
 - [Kombu Green](.agents/css/kombu-green.css)
 - [Magical Forest](.agents/css/magical-forest.css)
@@ -68,13 +68,13 @@ official PANTONE contrast, lightness, shades, complementary colors, monochromic 
 **BACKGROUND:**
 
 ```css
---dusted-peri: oklch(0.5433 0.105 281.67);
+--very-peri: oklch(0.5433 0.105 281.67);
 ```
 
 **TEXT:**
 
 ```css
---dusted-peri: oklch(0.5433 0.105 281.67);
+--very-peri: oklch(0.5433 0.105 281.67);
 --havdyp: oklch(0.2884 0.0366 279.42);
 ```
 
@@ -89,7 +89,7 @@ official PANTONE contrast, lightness, shades, complementary colors, monochromic 
 **TEXT:**
 
 ```css
---dusted-peri: oklch(0.5433 0.105 281.67);
+--very-peri: oklch(0.5433 0.105 281.67);
 --havdyp: oklch(0.2884 0.0366 279.42);
 ```
 

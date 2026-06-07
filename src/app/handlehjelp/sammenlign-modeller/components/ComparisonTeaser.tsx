@@ -29,9 +29,9 @@ const models = [
     handle: 'utekos-techdown',
     description: 'Vår nyeste, varmeste og mest allsidige modell.',
     icon: Droplets,
-    cardClass: 'border-dusted-peri bg-dusted-peri hover:bg-dusted-peri/90',
+    cardClass: 'border-very-peri bg-very-peri hover:bg-very-peri/90',
     iconShellClass: 'border-cloud-dancer/60 bg-cloud-dancer/85',
-    iconClass: 'text-dusted-peri',
+    iconClass: 'text-very-peri',
     textClass: 'text-havdyp',
     descriptionClass: 'text-havdyp/75',
     lesmerClass: 'text-havdyp/70 group-hover:text-havdyp'

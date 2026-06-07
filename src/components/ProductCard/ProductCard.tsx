@@ -91,9 +91,9 @@ export function ProductCard({
         >
           <BrandBadge
             label='UNISEX'
-            backgroundColor='var(--dusted-peri)'
+            backgroundColor='var(--very-peri)'
             textColor='var(--background)'
-            className='absolute left-4 top-4 z-10 border border-dusted-peri/24 px-3 py-1 text-xs font-medium tracking-wide shadow-[0_12px_28px_-22px_rgba(32,28,54,0.58)]'
+            className='absolute left-4 top-4 z-10 border border-very-peri/24 px-3 py-1 text-xs font-medium tracking-wide shadow-[0_12px_28px_-22px_rgba(32,28,54,0.58)]'
           />
 
           {(product.handle === 'utekos-dun' || product.handle === 'comfyrobe') && (

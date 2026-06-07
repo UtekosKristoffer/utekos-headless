@@ -24,11 +24,11 @@ const LAYER_THEMES = {
     gradient: 'from-cloud-dancer/10'
   },
   peri: {
-    border: 'border-dusted-peri/30',
+    border: 'border-very-peri/30',
     bg: 'bg-havdyp/80',
-    text: 'text-dusted-peri',
-    glow: 'shadow-dusted-peri/20',
-    gradient: 'from-dusted-peri/10'
+    text: 'text-very-peri',
+    glow: 'shadow-very-peri/20',
+    gradient: 'from-very-peri/10'
   }
 }
 
@@ -87,7 +87,7 @@ export function ProductLayersVisual({ activeTech }: { activeTech: string }) {
           icon={Sparkles}
           color='peri'
         >
-          <div className='absolute inset-0 bg-linear-to-r from-transparent via-dusted-peri/10 to-transparent skew-x-12' />
+          <div className='absolute inset-0 bg-linear-to-r from-transparent via-very-peri/10 to-transparent skew-x-12' />
         </MaterialCard>
 
         <div

@@ -33,9 +33,9 @@ export const bobilHeroFeatures: readonly InspirationHeroFeature[] = [
     title: 'Lengre turer',
     description: 'Reis tidligere på året og senere på høsten',
     icon: MapPin,
-    surface: 'color-mix(in oklch, var(--cloud-dancer) 10%, var(--dusted-peri))',
+    surface: 'color-mix(in oklch, var(--cloud-dancer) 10%, var(--very-peri))',
     border: 'color-mix(in oklch, var(--havdyp) 48%, var(--background))',
-    marker: 'var(--dusted-peri)',
+    marker: 'var(--very-peri)',
     iconSurface: 'var(--ancient-water)',
     iconColor: 'var(--background)',
     shadow: CARD_SHADOW

@@ -15,7 +15,7 @@ export function ProductPageErrorState({ error, isRetrying, onRetry }: ProductPag
     <section className='relative isolate overflow-hidden bg-overcast px-4 py-24 text-havdyp sm:py-32'>
       <div className='pointer-events-none absolute inset-0 -z-10'>
         <div className='absolute left-[10%] top-16 h-72 w-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_58%,transparent)_0%,transparent_72%)] blur-3xl' />
-        <div className='absolute bottom-12 right-[8%] h-80 w-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_22%,transparent)_0%,transparent_72%)] blur-3xl' />
+        <div className='absolute bottom-12 right-[8%] h-80 w-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--very-peri)_22%,transparent)_0%,transparent_72%)] blur-3xl' />
       </div>
 
       <section

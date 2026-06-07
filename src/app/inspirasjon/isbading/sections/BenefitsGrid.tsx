@@ -9,7 +9,7 @@ export const benefitsData: Benefit[] = [
     icon: Thermometer,
     title: 'Gjenopprett varmen',
     description: 'Absorberende fôr tørker huden og får opp kroppstemperaturen umiddelbart.',
-    color: 'text-dusted-peri'
+    color: 'text-very-peri'
   },
   {
     icon: Shirt,

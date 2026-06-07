@@ -90,7 +90,7 @@ export function FrontpageIceBathingSection() {
 
             <h2 className='gsap-content opacity-0 mb-6 text-4xl bg-linear-to-r from-slate-900 via-slate-500 to-slate-900 bg-clip-text outline-hiddenfont-bold   text-white sm:text-5xl lg:text-6xl'>
               Vi rydder plass til <br />
-              <span className='text-transparent text-left bg-clip-text bg-linear-to-r from-dusted-peri via-sweet-lavender to-dusted-peri'>
+              <span className='text-transparent text-left bg-clip-text bg-linear-to-r from-very-peri via-sweet-lavender to-very-peri'>
                 sesongens nyheter
               </span>
             </h2>
@@ -120,7 +120,7 @@ export function FrontpageIceBathingSection() {
                   title: 'Stopper vinden',
                   desc: 'HydroGuard™ skall med 8000mm vannsøyle.',
                   color: 'text-foreground',
-                  bg: 'bg-dusted-peri'
+                  bg: 'bg-very-peri'
                 }
               ].map((item, idx) => (
                 <div

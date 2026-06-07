@@ -95,7 +95,7 @@ export default function InspirasjonLayout({ children }: InspirasjonLayoutProps) 
                 asChild
                 backgroundColor='var(--background)'
                 textColor='var(--cloud-dancer)'
-                className='border border-cloud-dancer/14 px-7 py-3 text-base font-medium leading-text-paragraph tracking-[-0.01em] shadow-[0_18px_38px_-28px_rgba(14,18,35,0.86)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-havdyp focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dusted-peri/70 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast'
+                className='border border-cloud-dancer/14 px-7 py-3 text-base font-medium leading-text-paragraph tracking-[-0.01em] shadow-[0_18px_38px_-28px_rgba(14,18,35,0.86)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-havdyp focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-very-peri/70 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast'
               >
                 <Link href='/produkter'>Se alle produkter</Link>
               </BrandBadge>

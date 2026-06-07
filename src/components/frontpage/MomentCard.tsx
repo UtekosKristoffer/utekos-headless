@@ -17,7 +17,7 @@ const momentThemeStyles: Record<
   maritime: {
     wrapper:
       'border-white/30 bg-linear-to-br from-bleached-mauve/95 to-bleached-mauve/80 shadow-[0_16px_40px_rgba(49,36,38,0.16)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.45)] backdrop-blur-2xl',
-    glow: 'from-dusted-peri/20 via-dusted-peri/5 to-transparent',
+    glow: 'from-very-peri/20 via-very-peri/5 to-transparent',
     iconWrap:
       'border-chocolate-plum/18 bg-linear-to-br from-cloud-dancer/92 to-overcast/88 text-chocolate-plum shadow-[inset_0_1px_1px_rgba(255,255,255,0.65)]',
     title: 'text-havdyp',

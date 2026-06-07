@@ -153,7 +153,7 @@ export function PurchaseClientView({
             >
               <TabsList
                 aria-label='Velg modell'
-                className='flex h-auto w-full flex-wrap gap-2 rounded-lg bg-dusted-peri p-1.5 md:w-fit'
+                className='flex h-auto w-full flex-wrap gap-2 rounded-lg bg-very-peri p-1.5 md:w-fit'
               >
                 {(Object.keys(PRODUCT_VARIANTS) as ModelKey[]).map(key => (
                   <TabsTrigger
@@ -285,7 +285,7 @@ export function PurchaseClientView({
                   >
                     {size}
                     {selectedSize === size && (
-                      <div className='absolute right-0 top-0 -mr-1.5 -mt-1.5 size-3 rotate-45 bg-dusted-peri' />
+                      <div className='absolute right-0 top-0 -mr-1.5 -mt-1.5 size-3 rotate-45 bg-very-peri' />
                     )}
                   </button>
                 ))}
@@ -313,7 +313,7 @@ export function PurchaseClientView({
                           'size-4 rounded-full border border-black/15',
                           isActive
                             && isInteractive
-                            && 'ring-1 ring-dusted-peri ring-offset-1 ring-offset-white',
+                            && 'ring-1 ring-very-peri ring-offset-1 ring-offset-white',
                           !isActive && isInteractive && 'opacity-60'
                         )}
                         style={{ backgroundColor: colorObj.hex }}
@@ -328,7 +328,7 @@ export function PurchaseClientView({
                 <div key={selectedSize} className='mt-6 animate-in fade-in slide-in-from-top-2 duration-300'>
                   <div className='relative overflow-hidden rounded-md bg-background p-5'>
                     <div className='mb-3 flex items-center gap-2 border-b border-background pb-3'>
-                      <Ruler className='h-4 w-4 text-dusted-peri' />
+                      <Ruler className='h-4 w-4 text-very-peri' />
                       <span className='text-sm font-bold tracking-wider text-foreground'>
                         Passer best for deg som er {guidance.height}
                       </span>
@@ -339,7 +339,7 @@ export function PurchaseClientView({
                           key={i}
                           className='flex items-start gap-2.5 text-sm leading-text-paragraph text-foreground'
                         >
-                          <div className='mt-1.5 size-1 shrink-0 rounded-full bg-dusted-peri' />
+                          <div className='mt-1.5 size-1 shrink-0 rounded-full bg-very-peri' />
                           <span>{tip}</span>
                         </li>
                       ))}

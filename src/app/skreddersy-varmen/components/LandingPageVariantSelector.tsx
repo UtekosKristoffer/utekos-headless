@@ -1,8 +1,10 @@
+// Path: src/app/skreddersy-varmen/components/LandingPageVariantSelector.tsx
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { focusRing } from '../utils/constants'
 import { cn } from '@/lib/utils/className'
 import type { ModelKey } from '@/api/constants'
 import { PRODUCT_VARIANTS } from '@/api/constants'
+
 export type LandingPageVariantSelectorProps = {
   selectedModel: ModelKey
   setSelectedModel: (model: ModelKey) => void
@@ -28,7 +30,7 @@ export function LandingPageVariantSelector({
               key={key}
               value={key}
               className={cn(
-                'h-auto flex-1 whitespace-nowrap rounded-full border border-background/18 bg-transparent px-6 py-3 text-sm font-semibold tracking-normal text-background transition-all duration-300 data-[state=active]:border-background data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-ancient-water/55 md:flex-none md:text-base',
+                'h-auto flex-1 whitespace-nowrap rounded-full border border-maritime-darkest/15 bg-transparent px-6 py-3 text-sm font-semibold tracking-normal text-maritime-darkest transition-all duration-300 data-[state=active]:border-maritime-darkest data-[state=active]:bg-maritime-darkest data-[state=active]:text-cloud-dancer data-[state=active]:shadow-md data-[state=inactive]:hover:bg-maritime-darkest/5 md:flex-none md:text-base',
                 focusRing
               )}
             >

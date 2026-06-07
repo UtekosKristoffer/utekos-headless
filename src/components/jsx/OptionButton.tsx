@@ -11,10 +11,10 @@ export function OptionButton({ isSelected, onClick, children }: OptionButtonProp
       aria-checked={isSelected}
       data-selected={isSelected}
       className='
-        flex w-full items-center justify-between rounded-[1rem] border bg-cloud-dancer/72 p-4 text-left text-havdyp
+        flex w-full items-center justify-between rounded-2xl border bg-cloud-dancer/72 p-4 text-left text-havdyp
         transition-all duration-200 ease-in-out
         data-[selected=true]:border-havdyp data-[selected=true]:ring-1 data-[selected=true]:ring-havdyp
-        data-[selected=false]:border-havdyp/14 data-[selected=false]:hover:border-dusted-peri/50
+        data-[selected=false]:border-havdyp/14 data-[selected=false]:hover:border-very-peri/50
       '
     >
       {children}

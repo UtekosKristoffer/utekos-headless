@@ -32,7 +32,7 @@ export function StoryNodeView({ icon: Icon, label, description, tone }: StoryNod
     <article
       className={cn(
         'group relative z-10 mx-auto w-full overflow-hidden rounded-[1.25rem] p-6 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-xl',
-        'focus-within:outline-none focus-within:ring-2 focus-within:ring-dusted-peri focus-within:ring-offset-2 focus-within:ring-offset-transparent',
+        'focus-within:outline-none focus-within:ring-2 focus-within:ring-very-peri focus-within:ring-offset-2 focus-within:ring-offset-transparent',
         styles.card
       )}
     >

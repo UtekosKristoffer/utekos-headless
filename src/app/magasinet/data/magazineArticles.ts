@@ -134,7 +134,7 @@ export const rawMagazineArticles = [
       description:
         'Møt TechDown™, Utekos-plagget som kombinerer dunlignende letthet med syntetisk isolasjon for norsk utekomfort.'
     },
-    theme: { accent: 'dusted-peri', surface: 'dark' },
+    theme: { accent: 'very-peri', surface: 'dark' },
     relatedSlugs: [
       'hva-er-utekos',
       '5-enkle-tips-for-a-forlenge-terrassesongen',
@@ -833,7 +833,7 @@ export const rawMagazineArticles = [
       height: 630,
       caption: 'Båtpussen går lettere når pauser, vind og skiftende vær er tatt med i planen.'
     },
-    theme: { accent: 'dusted-peri', surface: 'light' },
+    theme: { accent: 'very-peri', surface: 'light' },
     relatedSlugs: [
       'utekos-techdown-lansering',
       'bobil-i-hostferien-de-vakreste-rutene-for-a-oppleve-hostfargene',

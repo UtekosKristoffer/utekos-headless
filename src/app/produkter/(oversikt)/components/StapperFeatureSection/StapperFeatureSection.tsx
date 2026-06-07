@@ -36,7 +36,7 @@ export function StapperFeatureSection() {
         className='absolute inset-0 -z-10'
         style={{
           background:
-            'radial-gradient(circle at 78% 34%, color-mix(in oklab, var(--dusted-peri) 16%, transparent), transparent 42%)'
+            'radial-gradient(circle at 78% 34%, color-mix(in oklab, var(--very-peri) 16%, transparent), transparent 42%)'
         }}
       />
 

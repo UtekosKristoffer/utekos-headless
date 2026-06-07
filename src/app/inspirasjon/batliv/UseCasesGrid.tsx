@@ -30,8 +30,8 @@ export const useCasesData: UseCase[] = [
     title: 'Bryggekos som varer',
     description: 'Bli samlingspunktet i gjestehavna. Forleng de sosiale kveldene uten å fryse.',
     temperature: '10-18°C',
-    color: 'from-dusted-peri/20',
-    iconColor: 'text-dusted-peri'
+    color: 'from-very-peri/20',
+    iconColor: 'text-very-peri'
   },
   {
     icon: Wind,

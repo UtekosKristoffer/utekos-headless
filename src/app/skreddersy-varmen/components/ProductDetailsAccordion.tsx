@@ -6,18 +6,22 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Leaf, ShieldCheck, Waves, Info, type LucideIcon } from 'lucide-react'
 import type { ModelKey } from '@/api/constants'
 
+// Optimalisert med premium fargepalett for "Dark Mode"-følelsen
 const styles = {
-  item: 'border-background/20 px-4',
+  item: 'border-cloud-dancer/10 px-4',
   trigger:
-    'font-google-sans text-left text-lg font-semibold text-background hover:text-havdyp hover:no-underline [&>svg]:text-background md:text-xl',
+    'font-google-sans text-left text-lg font-semibold text-cloud-dancer transition-colors hover:text-very-peri hover:no-underline [&>svg]:text-cloud-dancer hover:[&>svg]:text-very-peri md:text-xl',
   content: 'space-y-6 p-2',
-  blockTitle: 'mb-1 text-base font-semibold text-background',
-  blockText: 'text-sm leading-relaxed tracking-normal text-background/90',
+  blockTitle: 'mb-1 text-base font-semibold text-cloud-dancer',
+  blockText: 'text-sm leading-relaxed tracking-normal text-cloud-dancer/85',
   groupTitle:
-    'mb-3 border-b border-background/60 pb-1   text-base font-semibold leading-relaxed tracking-normal text-background',
-  list: 'list-inside list-disc space-y-1 text-sm   text-background/90',
+    'mb-3 border-b border-cloud-dancer/15 pb-1 text-base font-semibold leading-relaxed tracking-normal text-cloud-dancer',
+  list: 'list-inside list-disc space-y-1 text-sm text-cloud-dancer/85',
   callout:
-    'rounded-2xl border border-cloud-dancer/15 bg-havdyp p-4 text-sm leading-relaxed tracking-normal text-foreground'
+    'mt-4 rounded-2xl border border-very-peri/20 bg-havdyp p-4 text-sm leading-relaxed tracking-normal text-cloud-dancer/95 shadow-sm',
+  // Egen stil for vaskeanvisning for å få inn den gylne chai-tea advarselen
+  careCallout:
+    'mt-6 flex gap-3 rounded-2xl border-l-4 border-chai-tea bg-havdyp p-4 text-sm leading-relaxed tracking-normal text-cloud-dancer/95 shadow-sm'
 } as const
 
 type FeatureIconKey = 'leaf' | 'shield' | 'waves'
@@ -227,7 +231,8 @@ function DetailBlock({ title, text, icon }: { title: string; text: string; icon?
 
   return (
     <div className='flex gap-3'>
-      {Icon && <Icon className='mt-1 shrink-0 text-mountain-view' size={20} />}
+      {/* Ikonet satt til Very Peri for det eksklusive fargepoppet */}
+      {Icon && <Icon className='mt-1 shrink-0 text-very-peri' size={20} />}
       <div>
         <h4 className={styles.blockTitle}>{title}</h4>
         <p className={styles.blockText}>{text}</p>
@@ -253,9 +258,14 @@ export function ProductDetailsAccordion({ selectedModel }: { selectedModel: Mode
   const content = productDetailsByModel[selectedModel]
 
   return (
-    <article key={selectedModel} className='w-full bg-overcast pb-24 pt-6 text-background' aria-live='polite'>
+    // Hele artikkelen ligger i maritime-darkest for maksimal dybde og kontrast mot seksjonen over
+    <article
+      key={selectedModel}
+      className='w-full bg-maritime-darkest pb-24 pt-6 text-cloud-dancer'
+      aria-live='polite'
+    >
       <div className='mx-auto max-w-3xl'>
-        <h2 className='my-8 max-sm:pl-0 text-center max-sm:text-left text-3xl max-w-[90%] mx-auto md:max-w-4xl font-google-sans text-background sm:text-5xl tracking-normal'>
+        <h2 className='my-8 max-sm:pl-0 text-center max-sm:text-left text-3xl max-w-[90%] mx-auto md:max-w-4xl font-google-sans text-cloud-dancer sm:text-5xl tracking-normal'>
           {content.heading}
         </h2>
 
@@ -293,20 +303,26 @@ export function ProductDetailsAccordion({ selectedModel }: { selectedModel: Mode
             {content.fit.map(item => (
               <DetailBlock key={item.title} title={item.title} text={item.text} />
             ))}
-            <p className={styles.callout}>
-              <strong>Tips:</strong> Bruk linken ved størrelsevelgeren og i menyen over for å se de nøyaktige
-              målene i tabellen.
-            </p>
+            <div className={styles.callout}>
+              <strong className='text-cloud-dancer'>Tips:</strong> Bruk linken ved størrelsesvelgeren og i
+              menyen over for å se de nøyaktige målene i tabellen.
+            </div>
           </Section>
 
           <Section value='care' title='Vaskeanvisning'>
-            <p className={styles.blockTitle}>{content.care.noteTitle}</p>
             <ul className={styles.list}>
               {content.care.bullets.map(bullet => (
                 <li key={bullet}>{bullet}</li>
               ))}
             </ul>
-            <p className={styles.callout}>{content.care.note}</p>
+            {/* Bygget "Viktig om oppbevaring"-boksen rett inn med chai-tea stilen for et super-premium preg */}
+            <div className={styles.careCallout}>
+              <Info className='mt-0.5 shrink-0 text-chai-tea' size={20} />
+              <div>
+                <span className='mb-1 block font-semibold text-cloud-dancer'>{content.care.noteTitle}</span>
+                {content.care.note}
+              </div>
+            </div>
           </Section>
         </Accordion>
       </div>

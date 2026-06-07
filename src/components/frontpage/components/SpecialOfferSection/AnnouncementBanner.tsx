@@ -62,7 +62,7 @@ export default function AnnouncementBanner() {
   return (
     <div
       className={cn(
-        'relative py-2 z-40 hover:bg-header-secondary/80 font-utekos-text-medium bg-header-plum animate-slide-in-do text-foreground text-lg font-medium)',
+        'relative py-2 z-40 hover:bg-header-secondary/80 font-utekos-text-medium bg-hawthorne-rose animate-slide-in-do text-foreground text-lg font-medium)',
         isExiting && 'animate-slide-out-up'
       )}
     >

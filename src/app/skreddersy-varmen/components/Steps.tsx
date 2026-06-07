@@ -1,7 +1,9 @@
 import { Maximize2, Move, User } from 'lucide-react'
 import TechHalfImage from '@public/utekos-techdown-halvfigur-forfra-1600x1600.webp'
-import ClassicCoupleImage from '@public/webp/classic-couple-mobile-1080.webp'
 import TechDownKateKikkertImage from '@public/kikkert-kate-2160.webp'
+
+const TechDownKystenImage =
+  'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/utekos-techdown-kysten.png?v=1780811745'
 
 export const Steps = [
   {
@@ -12,7 +14,7 @@ export const Steps = [
     description:
       'Utgangspunktet for selve utekosen. Pakk deg inn i en isolerende kokong for komplett komfort. Perfekt i hytteveggen, utenfor bobilen eller lange kvelder på terrassen hvor roen senker seg.',
     icon: <Maximize2 className='size-5' />,
-    image: ClassicCoupleImage,
+    image: TechDownKystenImage,
     isProduct: false,
     desktopObjectFit: 'cover',
     desktopObjectPosition: 'center center'

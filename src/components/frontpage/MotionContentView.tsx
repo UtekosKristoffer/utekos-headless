@@ -8,8 +8,8 @@ export function MotionContentView() {
   return (
     <div className='relative w-full align-center overflow-hidden mx-auto mb-7 flex flex-col items-center justify-center max-w-[95%] text-center sm:mb-10'>
       <BrandBadge
-        backgroundColor='var(--havdyp)'
-        textColor='text-foreground'
+        backgroundColor='var(--background)'
+        textColor='var(--white-sand)'
         className='text-xs relative mx-auto tracking-tight rounded-2xl mb-5 py-1 md:py-3 gap-1.5 text-foreground! font-utekos-text border border-foreground/60 px-3 sm:gap-2 leading-none  md:text-[1.05rem] lg:text-[1.1rem] xl:text-[1.15]'
       >
         <Award className='size-3 px-0 shrink-0 text-foreground sm:size-4 md:size-5' />
@@ -30,13 +30,13 @@ export function MotionContentView() {
         overlegen allsidighet.
       </p>
       <p className='max-w-4xl px-16 max-sm:mt-2 mx-auto font-utekos-text-medium text-sm lg:text-2xl tracking-normal leading-5'>
-        Juster, form <span className='text-darkberry'> og nyt</span>
+        Juster, form og nyt
       </p>
 
       <div data-nosnippet className='mt-7 flex justify-center sm:mt-9'>
         <BrandBadge
           asChild
-          backgroundColor='var(--primary)'
+          backgroundColor='var(--iced-apricot)'
           textColor='var(--background)'
           className='min-h-11 gap-2 px-5 py-3 font-utekos-text-medium text-sm leading-none transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:px-6 md:px-8 md:py-4 lg:px-10 lg:py-5 lg:text-lg'
         >

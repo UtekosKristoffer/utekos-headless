@@ -8,7 +8,7 @@ interface HeroHighlightProps {
   /**
    * Gradient for clip-text-effekt (CSS `background` på en
    * `bg-clip-text text-transparent`-span). Eks:
-   * `'linear-gradient(90deg, var(--dusted-peri), var(--sweet-lavender))'`.
+   * `'linear-gradient(90deg, var(--very-peri), var(--sweet-lavender))'`.
    */
   gradient?: string
   /** `block` gir linjeskift på små skjermer (eks. isbading). */
@@ -32,8 +32,7 @@ export function HeroHighlight({
   className
 }: HeroHighlightProps) {
   const style: CSSProperties =
-    gradient ?
-      { backgroundImage: gradient }
+    gradient ? { backgroundImage: gradient }
     : color ? { color }
     : {}
 

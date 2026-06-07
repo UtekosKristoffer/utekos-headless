@@ -160,7 +160,7 @@ export default function PriceActivityPanel({
         )}
 
         {isSpecialEdition && shouldShowLimitedStockNotice && (
-          <div className='relative mt-4 overflow-hidden rounded-[1rem] border border-dusted-peri/24 bg-dusted-peri p-4'>
+          <div className='relative mt-4 overflow-hidden rounded-[1rem] border border-very-peri/24 bg-very-peri p-4'>
             <div className='relative flex items-center gap-3' style={{ zIndex: 10 }}>
               <div className='flex h-10 w-10 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-foreground'>
                 <ShieldAlert className='h-5 w-5' aria-hidden='true' />
@@ -174,7 +174,7 @@ export default function PriceActivityPanel({
               className='pointer-events-none absolute -inset-x-2 -inset-y-8 opacity-20 blur-2xl'
               style={{
                 background:
-                  'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklab, var(--dusted-peri) 72%, transparent) 100%)'
+                  'radial-gradient(120% 120% at 50% 0%, transparent 30%, color-mix(in oklab, var(--very-peri) 72%, transparent) 100%)'
               }}
               aria-hidden='true'
             />

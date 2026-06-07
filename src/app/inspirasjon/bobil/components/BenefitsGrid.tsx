@@ -10,7 +10,7 @@ export const benefitsData = [
     icon: ThermometerIcon,
     title: 'Øyeblikkelig varme',
     description: 'Fra kald morgen til koselig stund på sekunder',
-    color: 'text-dusted-peri'
+    color: 'text-very-peri'
   },
   {
     icon: SparklesIcon,

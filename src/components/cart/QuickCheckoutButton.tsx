@@ -14,7 +14,7 @@ export function QuickCheckoutButton({ isPending, isDisabled, onClick }: QuickChe
       asChild
       backgroundColor='var(--background)'
       textColor='var(--cloud-dancer)'
-      className='h-14 w-full min-w-0 gap-2 border border-background/25 px-3 py-4 text-sm font-semibold text-foreground shadow-[0_20px_42px_-28px_rgba(14,18,35,0.62)] ring-1 ring-background/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-cloud-dancer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dusted-peri/70 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast disabled:pointer-events-none disabled:opacity-55 sm:gap-3 sm:px-5 sm:text-base'
+      className='h-14 w-full min-w-0 gap-2 border border-background/25 px-3 py-4 text-sm font-semibold text-foreground shadow-[0_20px_42px_-28px_rgba(14,18,35,0.62)] ring-1 ring-background/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-cloud-dancer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-very-peri/70 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast disabled:pointer-events-none disabled:opacity-55 sm:gap-3 sm:px-5 sm:text-base'
     >
       <Button
         type='button'

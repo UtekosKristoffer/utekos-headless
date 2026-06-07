@@ -7,6 +7,6 @@ export const colorHexByTextClass: Record<string, string> = {
   'text-blue-400': '#60a5fa',
   'text-havdyp': 'oklch(0.2884 0.0366 279.42)',
   'text-mountain-view': 'oklch(0.3424 0.0298 148.54)',
-  'text-dusted-peri': 'oklch(0.5481 0.0822 281.66)',
+  'text-very-peri': 'oklch(0.5481 0.0822 281.66)',
   'text-chocolate-plum': 'oklch(0.3159 0.0237 14.31)'
 }

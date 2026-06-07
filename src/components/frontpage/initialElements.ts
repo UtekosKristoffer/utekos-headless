@@ -79,7 +79,7 @@ export const nodes = [
     data: {
       icon: 'check' as IconName,
       text: 'Verdt hver krone',
-      color: 'var(--dusted-peri)',
+      color: 'var(--very-peri)',
       iconColor: 'text-foreground'
     }
   }
@@ -108,6 +108,6 @@ export const edges = [
     id: 'e-center-4',
     sourceId: 'center',
     targetId: 'benefit-4',
-    data: { color: 'var(--dusted-peri)' }
+    data: { color: 'var(--very-peri)' }
   }
 ]

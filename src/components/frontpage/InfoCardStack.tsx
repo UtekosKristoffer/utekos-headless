@@ -27,7 +27,7 @@ export function InfoCardStack() {
       <div
         className={cn(
           cardBaseClasses,
-          'top-0 left-0 bg-dusted-peri',
+          'top-0 left-0 bg-very-peri',
           'h-40 sm:h-48 max-w-[280px] sm:max-w-sm',
           'p-4 sm:p-6'
         )}
@@ -46,7 +46,7 @@ export function InfoCardStack() {
       <div
         className={cn(
           cardBaseClasses,
-          'bg-dusted-peri overflow-hidden',
+          'bg-very-peri overflow-hidden',
           'h-40 sm:h-48 max-w-[280px] sm:max-w-sm',
           'p-4 sm:p-6',
           'top-28 left-12 sm:top-32 sm:left-1/4'

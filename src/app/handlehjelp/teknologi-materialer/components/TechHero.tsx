@@ -17,7 +17,7 @@ export function TechHero() {
           <BrandBadge
             backgroundColor='rgba(138, 169, 178, 0.1)'
             textColor='oklch(0.8733 0.0246 259.82)'
-            className='border border-ancient-water/30 !text-sm !py-2 !px-4'
+            className='border border-ancient-water/30 text-sm! py-2! px-4!'
           >
             Skapt for komfort
           </BrandBadge>

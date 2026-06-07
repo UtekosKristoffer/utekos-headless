@@ -13,11 +13,11 @@ const iconMap = {
 
 const benefitSurfaces = {
   comfort: {
-    borderColor: 'color-mix(in oklch, var(--dusted-peri) 30%, transparent)',
+    borderColor: 'color-mix(in oklch, var(--very-peri) 30%, transparent)',
     background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--havdyp) 78%, var(--dusted-peri) 22%) 0%, color-mix(in oklch, var(--background) 78%, var(--havdyp) 22%) 100%)',
-    iconBackground: 'color-mix(in oklch, var(--dusted-peri) 18%, var(--background) 82%)',
-    iconBorder: 'color-mix(in oklch, var(--dusted-peri) 34%, transparent)'
+      'linear-gradient(145deg, color-mix(in oklch, var(--havdyp) 78%, var(--very-peri) 22%) 0%, color-mix(in oklch, var(--background) 78%, var(--havdyp) 22%) 100%)',
+    iconBackground: 'color-mix(in oklch, var(--very-peri) 18%, var(--background) 82%)',
+    iconBorder: 'color-mix(in oklch, var(--very-peri) 34%, transparent)'
   },
   home: {
     borderColor: 'color-mix(in oklch, var(--ancient-water) 32%, transparent)',
@@ -64,7 +64,7 @@ export const benefitsData: Benefit[] = [
     icon: 'thermometer',
     title: 'Øyeblikkelig komfort',
     description: 'Fra kjølig trekk til lun hygge på et øyeblikk.',
-    color: 'text-dusted-peri',
+    color: 'text-very-peri',
     surface: 'comfort'
   },
   {

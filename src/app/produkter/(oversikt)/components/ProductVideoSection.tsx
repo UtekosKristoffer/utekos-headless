@@ -79,7 +79,7 @@ export function ProductVideoSection() {
               <Link
                 href={'/produkter/utekos-mikrofiber' as Route}
                 data-track='ProductVideoSectionShopNowClick'
-                className='group/btn inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-[var(--primary)] px-8 py-4 text-[1rem] font-medium text-havdyp transition-all duration-300 hover:bg-white hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(255,255,255,0.2)] focus:outline-none focus:ring-2 focus:ring-dusted-peri focus:ring-offset-2 focus:ring-offset-havdyp'
+                className='group/btn inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-[var(--primary)] px-8 py-4 text-[1rem] font-medium text-havdyp transition-all duration-300 hover:bg-white hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(255,255,255,0.2)] focus:outline-none focus:ring-2 focus:ring-very-peri focus:ring-offset-2 focus:ring-offset-havdyp'
               >
                 Opplev Utekos selv
                 <ArrowRight className='ml-2 size-5 transition-transform duration-300 group-hover/btn:translate-x-1' />

@@ -10,7 +10,7 @@ export const popularSpotsData: Destination[] = [
     name: 'Oslofjorden & Sauna',
     season: 'Hele året',
     highlight: 'Kombinasjon av badstu og fjord',
-    color: 'text-dusted-peri'
+    color: 'text-very-peri'
   },
   {
     name: 'Lofoten & Arktis',

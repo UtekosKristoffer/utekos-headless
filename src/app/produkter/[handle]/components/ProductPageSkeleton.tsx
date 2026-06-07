@@ -8,7 +8,7 @@ export function ProductPageSkeleton() {
     <section className='relative isolate overflow-hidden bg-overcast py-10 md:py-14'>
       <div className='pointer-events-none absolute inset-0 -z-10'>
         <div className='absolute left-[8%] top-12 h-80 w-80 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_62%,transparent)_0%,transparent_72%)] blur-3xl' />
-        <div className='absolute bottom-[18%] right-[8%] h-96 w-96 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_20%,transparent)_0%,transparent_72%)] blur-3xl' />
+        <div className='absolute bottom-[18%] right-[8%] h-96 w-96 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--very-peri)_20%,transparent)_0%,transparent_72%)] blur-3xl' />
       </div>
 
       <div className='container mx-auto px-4 md:px-8'>

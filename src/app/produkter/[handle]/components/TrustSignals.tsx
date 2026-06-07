@@ -105,7 +105,7 @@ export function TrustSignals() {
             <span className='block text-sm font-semibold leading-tight text-havdyp'>Rask levering</span>
             <span className='mt-0.5 block text-xs text-havdyp/62'>2–5 virkedager</span>
             <span className='mt-1 flex items-center gap-1.5 text-[11px] text-havdyp/70'>
-              <Store className='h-3.5 w-3.5 text-dusted-peri' aria-hidden='true' />
+              <Store className='h-3.5 w-3.5 text-very-peri' aria-hidden='true' />
               Kan også hentes i butikk
             </span>
           </div>

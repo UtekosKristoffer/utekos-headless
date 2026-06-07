@@ -31,7 +31,7 @@ const seasons = [
     value: 'autumn',
     label: 'Høst',
     icon: Fish,
-    iconColor: 'text-dusted-peri',
+    iconColor: 'text-very-peri',
     glowColor: 'var(--soft-warm)',
     title: 'Høstfiske i komfort',
     description:

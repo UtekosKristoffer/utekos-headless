@@ -19,8 +19,8 @@ export const popularAreasData: Destination[] = [
     name: 'Sørlandskysten',
     season: 'Sommer',
     highlight: 'Varme på kjølige sommerkvelder',
-    bgColor: 'bg-dusted-peri',
-    iconBgColor: 'bg-dusted-peri-light',
+    bgColor: 'bg-very-peri',
+    iconBgColor: 'bg-very-peri-light',
     iconColor: 'text-background',
     textColor: 'text-foreground'
   },

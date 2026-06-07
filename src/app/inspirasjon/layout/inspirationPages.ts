@@ -24,9 +24,9 @@ export const inspirationPages = [
     label: 'Båtliv',
     description: 'Varme på vannet',
     icon: Sailboat,
-    color: 'var(--dusted-peri)',
+    color: 'var(--very-peri)',
     midColor: 'var(--sweet-lavender)',
-    iconColor: 'text-dusted-peri'
+    iconColor: 'text-very-peri'
   },
   {
     href: '/inspirasjon/terrassen' as const,

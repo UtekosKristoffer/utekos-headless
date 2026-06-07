@@ -13,7 +13,7 @@ export function GrunderSection() {
           className='absolute right-1/3 top-1/4 h-[500px] w-[500px] blur-3xl'
           style={{
             background:
-              'radial-gradient(circle, color-mix(in oklab, var(--dusted-peri) 55%, transparent) 0%, transparent 70%)'
+              'radial-gradient(circle, color-mix(in oklab, var(--very-peri) 55%, transparent) 0%, transparent 70%)'
           }}
         />
       </div>
@@ -29,7 +29,7 @@ export function GrunderSection() {
               <div
                 className='absolute -inset-2 opacity-20 blur-xl transition-opacity duration-500 group-hover:opacity-40'
                 style={{
-                  background: 'linear-gradient(135deg, var(--dusted-peri) 0%, var(--chocolate-plum) 100%)'
+                  background: 'linear-gradient(135deg, var(--very-peri) 0%, var(--chocolate-plum) 100%)'
                 }}
               />
               <div className='relative h-auto aspect-4/5 w-64 overflow-hidden rounded-sm border border-cloud-dancer/10 shadow-2xl shadow-black/25'>
@@ -52,7 +52,7 @@ export function GrunderSection() {
               <p className='text-lg leading-nonefont-semibold tracking-[-0.01em] text-foreground'>
                 Erling Holthe
               </p>
-              <p className='text-sm leading-text-paragraph font-medium tracking-[-0.01em] text-dusted-peri'>
+              <p className='text-sm leading-text-paragraph font-medium tracking-[-0.01em] text-very-peri'>
                 Grunnlegger
               </p>
             </AnimatedBlock>
@@ -62,9 +62,9 @@ export function GrunderSection() {
             <AnimatedBlock className='mb-6 will-animate-fade-in-up' delay='0.1s' threshold={0.3}>
               <BrandBadge
                 label='Vår historie'
-                backgroundColor='var(--dusted-peri)'
+                backgroundColor='var(--very-peri)'
                 textColor='var(--background)'
-                className='w-fit   font-medium   shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--dusted-peri)_80%,transparent)]'
+                className='w-fit   font-medium   shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--very-peri)_80%,transparent)]'
               />
             </AnimatedBlock>
 

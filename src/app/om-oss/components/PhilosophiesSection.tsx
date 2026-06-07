@@ -20,8 +20,8 @@ const philosophyToneStyles = [
     text: 'text-havdyp/80'
   },
   {
-    card: 'border-dusted-peri/16 bg-[color-mix(in_oklab,var(--bleached-mauve)_74%,var(--cloud-dancer))]',
-    glow: 'bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_50%,transparent)_0%,transparent_72%)]',
+    card: 'border-very-peri/16 bg-[color-mix(in_oklab,var(--bleached-mauve)_74%,var(--cloud-dancer))]',
+    glow: 'bg-[radial-gradient(circle,color-mix(in_oklab,var(--very-peri)_50%,transparent)_0%,transparent_72%)]',
     icon: 'border-havdyp/14 bg-havdyp text-foreground',
     title: 'text-havdyp',
     text: 'text-havdyp/78'
@@ -100,7 +100,7 @@ export function PhilosophiesSection() {
     <section ref={sectionRef} className='relative overflow-hidden bg-overcast py-24 sm:py-32'>
       <div className='pointer-events-none absolute inset-0 -z-10'>
         <div className='absolute left-[8%] top-16 size-64 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_70%,transparent)_0%,transparent_72%)] blur-3xl' />
-        <div className='absolute right-[10%] top-24 size-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--dusted-peri)_30%,transparent)_0%,transparent_72%)] blur-3xl' />
+        <div className='absolute right-[10%] top-24 size-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--very-peri)_30%,transparent)_0%,transparent_72%)] blur-3xl' />
         <div className='absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,transparent_0%,color-mix(in_oklab,var(--cloud-dancer)_55%,transparent)_100%)]' />
       </div>
 

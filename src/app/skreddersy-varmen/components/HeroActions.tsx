@@ -25,11 +25,12 @@ export function HeroActions() {
   return (
     <>
       <div className='mt-9 flex w-full max-w-76 flex-col items-stretch gap-3'>
+        {/* Primærknapp: Varm, konverterende kontrast (Iced Apricot) mot den mørke kveldsbakgrunnen */}
         <BrandBadge
           asChild
-          backgroundColor='var(--color-cloud-dancer)'
-          textColor='var(--color-background)'
-          className='h-12 w-full px-5 py-0 text-sm font-semibold leading-none tracking-normal shadow-xl transition-[filter,transform] hover:brightness-95 active:scale-[0.97] md:h-14 md:text-base'
+          backgroundColor='var(--color-iced-apricot)'
+          textColor='var(--color-maritime-darkest)'
+          className='h-12 w-full px-5 py-0 text-sm font-semibold leading-none tracking-normal shadow-xl transition-[filter,transform] hover:brightness-105 active:scale-[0.97] md:h-14 md:text-base'
         >
           <button
             type='button'
@@ -45,11 +46,12 @@ export function HeroActions() {
           </button>
         </BrandBadge>
 
+        {/* Sekundærknapp: Merkevarebygger (Very Peri). Pen å se på, men stjeler ikke klikk fra primær */}
         <BrandBadge
           asChild
-          backgroundColor='var(--color-overcast)'
-          textColor='var(--color-background)'
-          className='h-12 w-full px-5 py-0 text-sm font-semibold leading-none tracking-normal shadow-sm transition-[filter,transform] hover:brightness-95 active:scale-[0.97] md:h-14 md:text-base'
+          backgroundColor='var(--color-very-peri)'
+          textColor='var(--color-cloud-dancer)'
+          className='h-12 w-full px-5 py-0 text-sm font-semibold leading-none tracking-normal shadow-sm transition-[filter,transform] hover:brightness-110 active:scale-[0.97] md:h-14 md:text-base'
         >
           <button
             type='button'
@@ -63,11 +65,12 @@ export function HeroActions() {
         </BrandBadge>
       </div>
 
+      {/* Bla videre pil nederst - justert til off-white for å blende elegant inn i det mørke */}
       <button
         type='button'
         onClick={() => smoothScrollTo(SCROLL_TARGETS.solution)}
         aria-label='Bla videre'
-        className='absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-foreground/75 transition-[opacity,transform] duration-300 hover:translate-y-1 hover:opacity-100 md:flex'
+        className='absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-cloud-dancer/75 transition-[opacity,transform] duration-300 hover:translate-y-1 hover:text-cloud-dancer hover:opacity-100 md:flex'
       >
         <span className='text-[10px] font-semibold tracking-normal'>Bla videre</span>
         <ChevronDown size={20} aria-hidden />
