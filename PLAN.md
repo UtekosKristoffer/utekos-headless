@@ -6,20 +6,20 @@ STATUS: PLANNING
 
 [Vendor-agnostic Metrics API setup](https://supabase.com/docs/guides/telemetry/metrics/vendor-agnostic.md)
 
-## Aktiv hendelse: Meta CAPI-token utløpt
+## Løst hendelse: Meta CAPI-token utløpt
 
 Dato: 2026-06-07
 
-- Produksjonens `META_ACCESS_TOKEN`, `META_SYSTEM_USER_TOKEN` og `CATALOG_ACCESS_TOKEN` er verifisert ugyldige
-  via Meta Graph API v24 `/debug_token` med OAuth-feilkode `190`.
+- Produksjonens `META_ACCESS_TOKEN` og `META_SYSTEM_USER_TOKEN` er verifisert gyldige via Meta Graph API v24
+  `/debug_token`. Begge er uten utløpsdato.
 - Permanente Meta-autentiseringsfeil skal markeres som `failed` uten automatisk retry. Payload beholdes for
   kontrollert re-køing etter tokenrotasjon.
-- `META_CAPI_ENABLED=false` er aktiv produksjons-circuit-breaker mens credentials er ugyldige. Den skal fjernes
-  eller settes til `true` først etter vellykket tokenverifisering.
-- Ny system-user-token må settes i Vercel Production og produksjonen må redeployes før Meta CAPI-levering kan
-  gjenopptas.
-- Etter tokenrotasjon skal tokenet verifiseres med `/debug_token`, en Test Events-hendelse skal bekreftes, og
-  bevarte Meta-hendelser skal re-køes kontrollert.
+- `META_CAPI_ENABLED=true` er aktiv i Production.
+- `META_TEST_EVENT_CODE` og `NEXT_PUBLIC_META_TEST_EVENT_CODE` er fjernet fra Production, slik at live
+  produksjonshendelser ikke sendes som Test Events.
+- Live CAPI-hendelse er verifisert fra `utekos.no`.
+- 64 bevarte Meta-hendelser ble replayet med originale `event_id`; alle 64 lyktes. 60 tilhørende dead-letter-
+  poster er markert løst.
 
 ## Ressursisolering og SLO-policy
 
