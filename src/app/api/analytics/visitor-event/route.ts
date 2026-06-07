@@ -1,4 +1,3 @@
-import { NEXT_PUBLIC_SUPABASE_POSTHOGSUPABASE_URL as SUPABASE_URL } from '@/lib/supabase/constants'
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 const SOURCE_PROJECT = 'utekos-headless'
@@ -21,7 +20,7 @@ function getRequiredEnv(name: string) {
 }
 
 function getSupabaseRestUrl(path: string) {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_VERCEL_SUPABASE_POSTHOGSUPABASE_URL || SUPABASE_URL
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_VERCEL_SUPABASE_POSTHOGSUPABASE_URL
 
   if (!supabaseUrl || supabaseUrl.trim().length === 0) {
     throw new Error('Missing required environment variable: SUPABASE_URL or NEXT_PUBLIC_SUPABASE_URL')

@@ -26,6 +26,7 @@ Sentry.init({
   dsn: SENTRY_DSN,
   enabled: !!SENTRY_DSN,
   environment: process.env.NODE_ENV,
+  integrations: [Sentry.replayIntegration()],
   sendDefaultPii: false,
   enableLogs: true,
   tracesSampleRate: IS_PRODUCTION ? 0.1 : 1
