@@ -285,3 +285,40 @@ export const Card: CardComponent = {
 type CardRootPropsType = React.ComponentProps<typeof Card.Root>
 type CardHeaderPropsType = React.ComponentProps<typeof Card.Header>
 ```
+
+## Cursor Cloud specific instructions
+
+### Product and services
+
+Single **Next.js 16** headless storefront (`utekos.no`) backed by **Shopify Storefront API**. Optional: Supabase/Postgres (`npm run db:start`, requires Docker + Supabase CLI), Redis, Resend, OpenAI, PostHog, and marketing integrations.
+
+### Dev server
+
+```bash
+npm run dev   # http://localhost:3000
+```
+
+Use a **browser User-Agent** when probing pages from the shell. `src/proxy.ts` returns **403** for blocked agents (`curl`, `wget`, `python-requests`, etc.) — see `BLOCKED_USER_AGENTS` in `src/api/constants/monitoring.ts`.
+
+### Required env for core storefront E2E
+
+- `SHOPIFY_STORE_DOMAIN`
+- `SHOPIFY_STOREFRONT_ACCESS_TOKEN`
+
+These are pre-provisioned in the Cloud Agent environment. Pull additional secrets with `vercel env pull .env.local` if the project is linked.
+
+### Production build caveat
+
+`npm run build` fails without `SHOPIFY_ADMIN_API_TOKEN` because cron routes import `src/lib/shopify/admin.ts` at module load. Dev mode (`npm run dev`) works with Storefront credentials only.
+
+### Lint and tests
+
+- Lint: `npm run lint` (ESLint; repo has pre-existing violations)
+- No Jest/Playwright test suite in-repo; smoke-test via browser against `/`, `/produkter`, and `/produkter/[handle]`
+
+### Optional local database
+
+```bash
+npm run db:start   # Supabase local stack
+npm run db:reset   # apply migrations
+```
