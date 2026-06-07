@@ -1,9 +1,6 @@
 import { PostHogProvider } from '@posthog/next'
 
-const POSTHOG_API_KEY =
-  process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN
-  || process.env.NEXT_PUBLIC_POSTHOG_KEY
-  || process.env.NEXT_PUBLIC_mentum_POSTHOG_PROJECT_TOKEN
+const POSTHOG_API_KEY = process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN
 
 export function PostHogClientProvider({ children }: { children: React.ReactNode }) {
   return (

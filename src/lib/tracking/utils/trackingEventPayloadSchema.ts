@@ -12,7 +12,10 @@ const trackingEventNameSchema = z.enum([
   'CompleteRegistration',
   'HeroInteract',
   'InteractWithAccordion',
-  'OpenQuickView'
+  'OpenQuickView',
+  'LandingCTAClick',
+  'LandingSectionView',
+  'LandingScrollDepth'
 ])
 
 export const trackingEventPayloadSchema = z

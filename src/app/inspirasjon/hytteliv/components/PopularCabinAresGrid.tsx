@@ -1,6 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
-import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import { cn } from '@/lib/utils/className'
 import { MapPinIcon } from 'lucide-react'
 import type { Destination } from '../types'

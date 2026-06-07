@@ -1,6 +1,6 @@
+import { NEXT_PUBLIC_SUPABASE_POSTHOGSUPABASE_URL as SUPABASE_URL } from '@/lib/supabase/constants'
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
-
 const SOURCE_PROJECT = 'utekos-headless'
 
 const visitorEventPayloadSchema = z.object({
@@ -21,13 +21,10 @@ function getRequiredEnv(name: string) {
 }
 
 function getSupabaseRestUrl(path: string) {
-  const supabaseUrl =
-    process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_VERCEL_SUPABASE_POSTHOGSUPABASE_URL || SUPABASE_URL
 
   if (!supabaseUrl || supabaseUrl.trim().length === 0) {
-    throw new Error(
-      'Missing required environment variable: SUPABASE_URL or NEXT_PUBLIC_SUPABASE_URL'
-    )
+    throw new Error('Missing required environment variable: SUPABASE_URL or NEXT_PUBLIC_SUPABASE_URL')
   }
 
   return `${supabaseUrl.replace(/\/$/, '')}/rest/v1/${path.replace(/^\//, '')}`
@@ -36,7 +33,7 @@ function getSupabaseRestUrl(path: string) {
 export async function POST(request: Request) {
   try {
     const payload = visitorEventPayloadSchema.parse(await request.json())
-    const serviceRoleKey = getRequiredEnv('SUPABASE_SERVICE_ROLE_KEY')
+    const serviceRoleKey = getRequiredEnv('SUPABASE_VERCEL_SUPABASE_SERVICE_ROLE_KEY')
 
     const response = await fetch(getSupabaseRestUrl('website_visitor_events'), {
       method: 'POST',
@@ -76,10 +73,7 @@ export async function POST(request: Request) {
   } catch (error) {
     return NextResponse.json(
       {
-        error:
-          error instanceof Error ?
-            error.message
-          : 'Unknown visitor event error.'
+        error: error instanceof Error ? error.message : 'Unknown visitor event error.'
       },
       {
         status: 400

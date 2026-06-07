@@ -1,9 +1,12 @@
-import { createClient } from '@/lib/supabase/server'
+import { createSupabaseContext } from '@/lib/supabase/server'
 import { Suspense } from 'react'
 
 async function InstrumentsData() {
-  const supabase = await createClient()
-  const { data: instruments } = await supabase.from('instruments').select()
+  const { data: ctx, error } = await createSupabaseContext({ auth: 'none' })
+  if (error || !ctx) {
+    return <pre>Error loading supabase context: {error?.message}</pre>
+  }
+  const { data: instruments } = await ctx.supabase.from('instruments').select()
 
   return <pre>{JSON.stringify(instruments, null, 2)}</pre>
 }

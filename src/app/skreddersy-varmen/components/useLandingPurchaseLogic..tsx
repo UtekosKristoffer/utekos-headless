@@ -11,7 +11,6 @@ import { useCartMutations } from '@/hooks/useCartMutations'
 import { useOptimisticCartUpdate } from '@/hooks/useOptimisticCartUpdate'
 import { getCartIdFromCookie } from '@/lib/actions/getCartIdFromCookie'
 import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
-import { useAnalytics } from '@/hooks/useAnalytics'
 import { getVariants } from '@/app/skreddersy-varmen/utekos-orginal/utils/getVariants'
 import { getSelectableSizes, PRODUCT_VARIANTS } from '@/api/constants'
 import type { ModelKey } from '@/api/constants'
@@ -38,7 +37,6 @@ export function useLandingPurchaseLogic({ products }: UseLandingPurchaseLogicPro
   const { updateCartCache } = useOptimisticCartUpdate()
   const queryClient = useQueryClient()
   const contextCartId = useContext(CartIdContext)
-  const { trackEvent } = useAnalytics()
 
   const isPendingFromMachine = CartMutationContext.useSelector(state => state.matches('mutating'))
 
@@ -186,12 +184,6 @@ export function useLandingPurchaseLogic({ products }: UseLandingPurchaseLogicPro
           selectedVariant,
           quantity
         }).catch(error => console.error('AddToCart tracking failed', error))
-
-        trackEvent('AddToCart', {
-          content_name: product.title,
-          value: Number(selectedVariant.price.amount) * quantity,
-          currency: selectedVariant.price.currencyCode
-        })
       } catch (error) {
         console.error('Kunne ikke legge til vare:', error)
         toast.error('Kunne ikke legge varen i handlekurven.')

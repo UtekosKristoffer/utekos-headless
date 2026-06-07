@@ -12,3 +12,6 @@ export type MetaEventType =
   | 'InteractWithAccordion'
   | 'OpenQuickView'
   | 'Lead'
+  | 'LandingCTAClick'
+  | 'LandingSectionView'
+  | 'LandingScrollDepth'

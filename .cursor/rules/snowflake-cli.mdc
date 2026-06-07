@@ -1,7 +1,0 @@
----
-alwaysApply: true
----
-
-# WARNING: Treating snowflake-cli as a formula.
-
-For the cask, use `snowflakedb/snowflake-cli/snowflake-cli`` or specify the `--cask` flagWarning:

@@ -61,7 +61,7 @@ const MICROSOFT_UET_CONSENT_SYNC_SCRIPT = `
         && hasConsent
         && !previousMarketingConsent
       ) {
-        window.uetq.push('pageLoad');
+        windowq.push('pageLoad');
       }
 
       previousMarketingConsent = hasConsent;
