@@ -6,6 +6,19 @@ STATUS: PLANNING
 
 [Vendor-agnostic Metrics API setup](https://supabase.com/docs/guides/telemetry/metrics/vendor-agnostic.md)
 
+## Aktiv hendelse: Meta CAPI-token utløpt
+
+Dato: 2026-06-07
+
+- Produksjonens `META_ACCESS_TOKEN`, `META_SYSTEM_USER_TOKEN` og `CATALOG_ACCESS_TOKEN` er verifisert ugyldige
+  via Meta Graph API v24 `/debug_token` med OAuth-feilkode `190`.
+- Permanente Meta-autentiseringsfeil skal markeres som `failed` uten automatisk retry. Payload beholdes for
+  kontrollert re-køing etter tokenrotasjon.
+- Ny system-user-token må settes i Vercel Production og produksjonen må redeployes før Meta CAPI-levering kan
+  gjenopptas.
+- Etter tokenrotasjon skal tokenet verifiseres med `/debug_token`, en Test Events-hendelse skal bekreftes, og
+  bevarte Meta-hendelser skal re-køes kontrollert.
+
 ## Ressursisolering og SLO-policy
 
 Dato: 2026-06-04

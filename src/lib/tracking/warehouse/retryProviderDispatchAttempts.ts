@@ -18,17 +18,19 @@ export async function retryProviderDispatchAttempts() {
         return 'succeeded' as const
       }
 
-      return await failProviderDispatchAttempt(attempt, result.error)
+      return await failProviderDispatchAttempt(attempt, result.error, result.retryable)
     })
   )
 
   let succeeded = 0
   let retryScheduled = 0
+  let failed = 0
   let deadLettered = 0
 
   for (const outcome of outcomes) {
     if (outcome === 'succeeded') succeeded += 1
     if (outcome === 'retry_scheduled') retryScheduled += 1
+    if (outcome === 'failed') failed += 1
     if (outcome === 'dead_lettered') deadLettered += 1
   }
 
@@ -37,6 +39,7 @@ export async function retryProviderDispatchAttempts() {
     claimed: attempts.length,
     succeeded,
     retryScheduled,
+    failed,
     deadLettered
   }
 }

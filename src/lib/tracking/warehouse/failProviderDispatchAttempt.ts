@@ -8,11 +8,15 @@ const MAX_ATTEMPTS = 5
 
 export async function failProviderDispatchAttempt(
   attempt: ProviderDispatchQueueItem,
-  error: string
-): Promise<'retry_scheduled' | 'dead_lettered'> {
+  error: string,
+  retryable = true
+): Promise<'retry_scheduled' | 'failed' | 'dead_lettered'> {
   const sql = getTrackingWarehouse()
   const nextAttemptCount = attempt.attemptCount + 1
-  const status = nextAttemptCount >= MAX_ATTEMPTS ? 'dead_lettered' : 'retry_scheduled'
+  const status =
+    !retryable ? 'failed'
+    : nextAttemptCount >= MAX_ATTEMPTS ? 'dead_lettered'
+    : 'retry_scheduled'
 
   if (!sql) {
     return status
@@ -33,7 +37,7 @@ export async function failProviderDispatchAttempt(
             : null
         },
         last_error = ${normalizedError},
-        processed_at = ${status === 'dead_lettered' ? new Date() : null},
+        processed_at = ${status === 'retry_scheduled' ? null : new Date()},
         updated_at = now()
       where id = ${attempt.id}
         and status = 'processing'

@@ -1,6 +1,7 @@
 import 'server-only'
 
 import { sendGA4BrowserEvent } from '@/lib/tracking/google/sendGA4BrowserEvent'
+import { getMetaApiErrorDetails } from '@/lib/tracking/meta/getMetaApiErrorDetails'
 import { sendMetaBrowserEvent } from '@/lib/tracking/meta/sendMetaBrowserEvent'
 import { prepareEventContext } from '@/lib/tracking/services/prepareEventContext'
 import { trackingEventPayloadSchema } from '@/lib/tracking/utils/trackingEventPayloadSchema'
@@ -29,8 +30,19 @@ export async function dispatchClaimedProviderAttempt(
   try {
     if (attempt.provider === 'meta') {
       const { userData } = prepareEventContext(payload, {}, clientIp, userAgent)
-      await sendMetaBrowserEvent(payload, userData)
-      return { success: true }
+
+      try {
+        await sendMetaBrowserEvent(payload, userData)
+        return { success: true }
+      } catch (error) {
+        const details = getMetaApiErrorDetails(error)
+
+        return {
+          success: false,
+          error: details.message,
+          retryable: details.retryable
+        }
+      }
     }
 
     const result = await sendGA4BrowserEvent(payload, { clientIp, userAgent })

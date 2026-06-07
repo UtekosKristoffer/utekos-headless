@@ -38,6 +38,7 @@ export interface ProviderDispatchAttemptInput {
   provider: 'meta' | 'google'
   success: boolean
   error?: string | undefined
+  retryable?: boolean | undefined
 }
 
 export interface TrackingDependencies {

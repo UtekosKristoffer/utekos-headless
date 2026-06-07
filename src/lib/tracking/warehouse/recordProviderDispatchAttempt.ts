@@ -14,8 +14,11 @@ export async function recordProviderDispatchAttempt(
   }
 
   const idempotencyKey = getTrackingIdempotencyKey(input.eventName, input.eventId)
-  const status = input.success ? 'succeeded' : 'failed'
-  const nextAttemptAt = input.success ? null : new Date(Date.now() + 60_000)
+  const status =
+    input.success ? 'succeeded'
+    : input.retryable === false ? 'failed'
+    : 'retry_scheduled'
+  const nextAttemptAt = status === 'retry_scheduled' ? new Date(Date.now() + 60_000) : null
 
   await sql`
     insert into ops.provider_dispatch_attempts (
@@ -44,12 +47,14 @@ export async function recordProviderDispatchAttempt(
     set
       status = case
         when excluded.status = 'succeeded' then 'succeeded'
+        when excluded.status = 'failed' then 'failed'
         when ops.provider_dispatch_attempts.payload = '{}'::jsonb then 'failed'
         else 'retry_scheduled'
       end,
       attempt_count = ops.provider_dispatch_attempts.attempt_count + 1,
       next_attempt_at = case
         when excluded.status = 'succeeded' then null
+        when excluded.status = 'failed' then null
         when ops.provider_dispatch_attempts.payload = '{}'::jsonb then null
         else ${nextAttemptAt}
       end,

@@ -11,4 +11,4 @@ export type ProviderDispatchQueueItem = {
 
 export type ProviderDispatchResult =
   | { success: true }
-  | { success: false; error: string }
+  | { success: false; error: string; retryable?: boolean | undefined }

@@ -1,4 +1,5 @@
 import { prepareEventContext } from '@/lib/tracking/services/prepareEventContext'
+import { getMetaApiErrorDetails } from '@/lib/tracking/meta/getMetaApiErrorDetails'
 import type { MetaEventPayload } from 'types/tracking/meta'
 import type { EventCookies } from 'types/tracking/event/cookies/EventCookies'
 import type { TrackingDependencies } from 'types/tracking/event'
@@ -47,6 +48,8 @@ export async function processBrowserEvent(
 
   const metaResponse = getSettledValue(metaResult)
   const googleResponse = getSettledValue(googleResult)
+  const metaErrorDetails =
+    metaResult.status === 'rejected' ? getMetaApiErrorDetails(metaResult.reason) : undefined
 
   if (body.eventId && body.eventName && deps.recordAttempt) {
     await Promise.allSettled([
@@ -55,7 +58,8 @@ export async function processBrowserEvent(
         eventName: body.eventName,
         provider: 'meta',
         success: !!metaResponse,
-        error: getSettledError(metaResult)
+        error: metaErrorDetails?.message,
+        retryable: metaErrorDetails?.retryable
       }),
       deps.recordAttempt({
         eventId: body.eventId,
@@ -101,22 +105,7 @@ export async function processBrowserEvent(
     }
   }
 
-  const normalizedError =
-    metaResult.status === 'rejected' && metaResult.reason instanceof Error
-      ? metaResult.reason
-      : new Error(getSettledError(metaResult) ?? 'Unknown Error')
-  const errorWithResponse = normalizedError as Error & {
-    response?: {
-      data?: {
-        error?: {
-          code?: number
-          message?: string
-          type?: string
-        }
-      }
-    }
-  }
-  const errorData = errorWithResponse.response?.data || {}
+  const normalizedError = metaErrorDetails ?? getMetaApiErrorDetails(getSettledError(metaResult))
   const googleError = getSettledError(googleResult)
 
   await deps.logger(
@@ -125,10 +114,11 @@ export async function processBrowserEvent(
     {
       eventId: body.eventId,
       eventTime: body.eventTime,
-      error: normalizedError.message || 'Unknown Error',
-      details: errorData,
-      type: errorData.error?.type,
-      code: errorData.error?.code,
+      error: normalizedError.message,
+      type: normalizedError.type,
+      code: normalizedError.code,
+      errorSubcode: normalizedError.errorSubcode,
+      retryable: normalizedError.retryable,
       googleError
     },
     {
@@ -142,6 +132,6 @@ export async function processBrowserEvent(
   return {
     success: false,
     error: 'Failed to send event to Meta',
-    details: errorData.error?.message || normalizedError.message
+    details: normalizedError.message
   }
 }
