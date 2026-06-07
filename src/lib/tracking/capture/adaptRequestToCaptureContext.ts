@@ -34,7 +34,6 @@ export function adaptRequestToCaptureContext(
       userHash: cookieStore.get('ute_user_hash')?.value,
       scid: cookieStore.get('_scid')?.value,
       click_id: cookieStore.get('ute_sc_cid')?.value,
-      epik: cookieStore.get('_epik')?.value,
       gclid: marketingParams.gclid,
       gbraid: marketingParams.gbraid,
       wbraid: marketingParams.wbraid,

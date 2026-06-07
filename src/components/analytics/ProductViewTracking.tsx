@@ -52,46 +52,6 @@ export function ProductViewTracking({
       eventId
     })
 
-    if (typeof window !== 'undefined' && window.snaptr) {
-      window.snaptr('track', 'VIEW_CONTENT', {
-        item_ids: [contentId],
-        price: price,
-        currency: currency,
-        description: product.title,
-        item_category: category
-      })
-    }
-
-    if (typeof window !== 'undefined' && window.pintrk) {
-      window.pintrk?.('track', 'PageVisit', {
-        line_items: [
-          {
-            product_id: contentId,
-            product_name: product.title,
-            product_price: price,
-            product_category: category,
-            product_quantity: 1
-          }
-        ]
-      })
-    }
-
-    if (typeof window !== 'undefined' && window.ttq) {
-      window.ttq.track(
-        'ViewContent',
-        {
-          content_type: 'product',
-          content_id: contentId,
-          content_name: product.title,
-          content_category: category,
-          value: price,
-          currency: currency,
-          description: product.title,
-          quantity: 1
-        },
-        { event_id: eventId }
-      )
-    }
   }, [
     pathname,
     product.title,

@@ -8,8 +8,8 @@ import Image from 'next/image'
 
 export function ProductCardSoldOut() {
   return (
-    <HoverCard openDelay={200} closeDelay={100}>
-      <HoverCardTrigger className='size-full min-h-12 cursor-not-allowed'>
+    <HoverCard>
+      <HoverCardTrigger delay={200} closeDelay={100} className='size-full min-h-12 cursor-not-allowed'>
         <BrandBadge
           backgroundColor='var(--overcast)'
           textColor='var(--havdyp)'

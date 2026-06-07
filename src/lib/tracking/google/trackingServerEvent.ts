@@ -1,6 +1,7 @@
 import 'server-only'
 import { randomUUID } from 'crypto'
 import { cookies } from 'next/headers'
+import { sendGA4Event } from '@/lib/tracking/server/sendGA4Events'
 import type { CurrencyCode } from 'types/commerce/CurrencyCode'
 import { parseClientIdFromGaCookie } from './parseClientIdFromGaCookie'
 
@@ -48,19 +49,11 @@ export type TrackingOverrides = {
   ipOverride?: string | undefined
   debugMode?: boolean | undefined
   requestId?: string | undefined
-  allowDirectFallback?: boolean | undefined
-  fallbackOnSgtmSuccess?: boolean | undefined
-  skipSgtmDispatch?: boolean | undefined
 }
-
-export type TrackTransport = 'sgtm' | 'direct_ga4'
-
-export type TrackFallbackTrigger = 'sgtm_error' | 'confirmed_sgtm_blocker'
 
 export type TrackPayloadSummary = {
   eventName: string
   measurementId: string
-  sgtmHost: string
   hasClientId: boolean
   hasSessionId: boolean
   hasUserId: boolean
@@ -80,15 +73,8 @@ export type TrackDispatchDiagnostics = {
     status?: number | undefined
     messageCount?: number | undefined
   }
-  sgtm: {
-    attempted: boolean
-    status?: number | undefined
-    ok?: boolean | undefined
-    responseText?: string | undefined
-  }
   directGa4: {
     attempted: boolean
-    trigger?: TrackFallbackTrigger | undefined
     status?: number | undefined
     ok?: boolean | undefined
     responseText?: string | undefined
@@ -100,34 +86,21 @@ export type TrackServerEventResult =
       ok: true
       status: number
       requestId: string
-      transport: TrackTransport
-      fallbackUsed: boolean
+      transport: 'direct_ga4'
       diagnostics: TrackDispatchDiagnostics
     }
   | {
       ok: false
       reason: 'missing_credentials' | 'missing_client_id' | 'ga_error'
       requestId: string
-      fallbackUsed: boolean
       status?: number | undefined
-      transport?: TrackTransport | undefined
+      transport?: 'direct_ga4' | undefined
       details?: unknown
       diagnostics: TrackDispatchDiagnostics
     }
 
 const GA_MEASUREMENT_ID = process.env.GA_MEASUREMENT_ID || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
-
 const GA_API_SECRET = process.env.GA_API_SECRET
-
-const GA_SERVER_CONTAINER_URL = (
-  process.env.GA_SERVER_CONTAINER_URL
-  || process.env.NEXT_PUBLIC_GA_SERVER_CONTAINER_URL
-  || 'https://sgtm.utekos.no'
-).replace(/\/$/, '')
-
-const GA_DIRECT_COLLECT_URL =
-  'https://region1.google-analytics.com/mp/collect'
-  + `?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${GA_API_SECRET}`
 
 function toNumericSessionId(input?: string): number | undefined {
   if (!input) return undefined
@@ -182,10 +155,6 @@ function toGaUserProperties(
   return entries.length ? Object.fromEntries(entries) : undefined
 }
 
-function truncateText(input: string, maxLength = 1200): string {
-  return input.length <= maxLength ? input : `${input.slice(0, maxLength)}...<truncated>`
-}
-
 function buildPayloadSummary(
   event: AnalyticsEvent,
   tracking: {
@@ -214,7 +183,6 @@ function buildPayloadSummary(
   return {
     eventName: event.name,
     measurementId: GA_MEASUREMENT_ID || 'missing',
-    sgtmHost: GA_SERVER_CONTAINER_URL,
     hasClientId: !!tracking.clientId,
     hasSessionId: tracking.sessionId !== undefined,
     hasUserId: !!tracking.userId,
@@ -224,67 +192,6 @@ function buildPayloadSummary(
     ...(value !== undefined ? { value } : {}),
     ...(currency ? { currency } : {}),
     ...(transactionId ? { transactionId } : {})
-  }
-}
-
-function getErrorMessage(error: unknown): string {
-  return error instanceof Error ? error.message : String(error)
-}
-
-function shouldUseDirectFallback(
-  overrides: TrackingOverrides | undefined,
-  sgtmOk: boolean
-): TrackFallbackTrigger | undefined {
-  const fallbackEnabled =
-    overrides?.allowDirectFallback === true && process.env.GA_DIRECT_FALLBACK_ENABLED !== '0'
-
-  if (!fallbackEnabled) {
-    return undefined
-  }
-
-  if (!sgtmOk) {
-    return 'sgtm_error'
-  }
-
-  if (overrides?.fallbackOnSgtmSuccess === true && process.env.GA_DIRECT_FALLBACK_ON_SGTM_SUCCESS === '1') {
-    return 'confirmed_sgtm_blocker'
-  }
-
-  return undefined
-}
-
-async function postMeasurementProtocolRequest(
-  endpoint: string,
-  payload: Record<string, unknown>,
-  userAgent: string
-): Promise<{
-  ok: boolean
-  status?: number | undefined
-  responseText?: string | undefined
-}> {
-  try {
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'User-Agent': userAgent
-      },
-      body: JSON.stringify(payload),
-      cache: 'no-store'
-    })
-
-    const responseText = response.ok ? undefined : truncateText(await response.text().catch(() => ''))
-
-    return {
-      ok: response.ok,
-      status: response.status,
-      ...(responseText ? { responseText } : {})
-    }
-  } catch (error: unknown) {
-    return {
-      ok: false,
-      responseText: truncateText(getErrorMessage(error))
-    }
   }
 }
 
@@ -298,7 +205,6 @@ export async function trackServerEvent(
     payloadSummary: {
       eventName: event.name,
       measurementId: GA_MEASUREMENT_ID || 'missing',
-      sgtmHost: GA_SERVER_CONTAINER_URL,
       hasClientId: false,
       hasSessionId: false,
       hasUserId: false,
@@ -309,268 +215,122 @@ export async function trackServerEvent(
     validation: {
       attempted: process.env.GA_MP_VALIDATE === '1'
     },
-    sgtm: {
-      attempted: false
-    },
     directGa4: {
       attempted: false
     }
   }
 
-  if (!GA_MEASUREMENT_ID || !GA_API_SECRET || !GA_SERVER_CONTAINER_URL) {
+  if (!GA_MEASUREMENT_ID || !GA_API_SECRET) {
     return {
       ok: false,
       reason: 'missing_credentials',
       requestId,
-      fallbackUsed: false,
       diagnostics
     }
   }
 
+  let clientId = overrides?.clientId
+  let sessionId = toNumericSessionId(overrides?.sessionId)
+
   try {
-    let clientId: string | undefined = overrides?.clientId
-    let sessionId: number | undefined = toNumericSessionId(overrides?.sessionId)
-    const userAgent = overrides?.userAgent || 'Next.js Server'
-
-    try {
-      const cookieStore = await cookies()
-
-      if (!clientId) {
-        clientId = parseClientIdFromGaCookie(cookieStore.get('_ga')?.value)
-      }
-
-      if (sessionId === undefined) {
-        const containerId = GA_MEASUREMENT_ID.replace(/^G-/, '')
-        const sessionCookie = cookieStore.get(`_ga_${containerId}`)?.value
-        sessionId = toNumericSessionId(sessionCookie)
-      }
-    } catch {
-      // No request cookie context available in this execution path.
-    }
+    const cookieStore = await cookies()
 
     if (!clientId) {
-      diagnostics.payloadSummary = buildPayloadSummary(event, {
-        clientId,
-        sessionId,
-        userId: overrides?.userId
-      })
-
-      return {
-        ok: false,
-        reason: 'missing_client_id',
-        requestId,
-        fallbackUsed: false,
-        diagnostics
-      }
+      clientId = parseClientIdFromGaCookie(cookieStore.get('_ga')?.value)
     }
 
-    const userId = overrides?.userId
+    if (sessionId === undefined) {
+      const containerId = GA_MEASUREMENT_ID.replace(/^G-/, '')
+      sessionId = toNumericSessionId(cookieStore.get(`_ga_${containerId}`)?.value)
+    }
+  } catch {
+    // Background workers and webhook execution do not have a request cookie context.
+  }
 
-    const shouldSendUserData = !!userId && !!overrides?.userData && Object.keys(overrides.userData).length > 0
+  const userProperties = toGaUserProperties(overrides?.userProperties)
+  diagnostics.payloadSummary = buildPayloadSummary(event, {
+    clientId,
+    sessionId,
+    userId: overrides?.userId,
+    userData: overrides?.userData,
+    userProperties
+  })
 
-    const userProperties = toGaUserProperties(overrides?.userProperties)
-    diagnostics.payloadSummary = buildPayloadSummary(event, {
+  if (!clientId) {
+    return {
+      ok: false,
+      reason: 'missing_client_id',
+      requestId,
+      diagnostics
+    }
+  }
+
+  const result = await sendGA4Event(
+    {
+      name: event.name,
       clientId,
-      sessionId,
-      userId,
-      userData: overrides?.userData,
-      userProperties
-    })
-
-    const payload: Record<string, unknown> = {
-      client_id: clientId,
-      ...(userId ? { user_id: userId } : {}),
-      timestamp_micros: overrides?.timestampMicros ?? Math.floor(Date.now() * 1000),
-      ...(shouldSendUserData ? { user_data: overrides!.userData } : {}),
-      ...(userProperties ? { user_properties: userProperties } : {}),
-      ...(overrides?.ipOverride ? { ip_override: overrides.ipOverride } : {}),
-      events: [
-        {
-          name: event.name,
-          params: {
-            ...(event.params || {}),
-            ...(event.ecommerce || {}),
-            ...(sessionId !== undefined ? { session_id: sessionId } : {}),
-            engagement_time_msec: 1,
-            ...(overrides?.debugMode ? { debug_mode: 1 } : {})
-          }
-        }
-      ]
+      params: {
+        ...(event.params || {}),
+        ...(event.ecommerce || {})
+      },
+      ...(overrides?.userId ? { userId: overrides.userId } : {}),
+      ...(overrides?.userId && overrides.userData && Object.keys(overrides.userData).length > 0 ?
+        { userData: overrides.userData }
+      : {}),
+      ...(userProperties ? { userProperties } : {})
+    },
+    {
+      ...(sessionId !== undefined ? { sessionId } : {}),
+      ...(overrides?.userAgent ? { userAgent: overrides.userAgent } : {}),
+      ...(overrides?.ipOverride ? { ipOverride: overrides.ipOverride } : {}),
+      ...(overrides?.timestampMicros !== undefined ?
+        { timestampMicros: overrides.timestampMicros }
+      : {}),
+      ...(overrides?.debugMode ? { debugMode: true } : {}),
+      validate: process.env.GA_MP_VALIDATE === '1'
     }
+  )
 
-    if (process.env.GA_MP_VALIDATE === '1') {
-      const validationResponse = await fetch(
-        `https://region1.google-analytics.com/debug/mp/collect?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${GA_API_SECRET}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'User-Agent': userAgent
-          },
-          body: JSON.stringify({
-            ...payload,
-            validation_behavior: 'ENFORCE_RECOMMENDATIONS'
-          }),
-          cache: 'no-store'
-        }
-      )
+  diagnostics.directGa4 = {
+    attempted: true,
+    status: result.status,
+    ok: result.ok,
+    ...(!result.ok ? { responseText: result.error } : {})
+  }
 
-      const validationJson: unknown = await validationResponse.json().catch(() => null)
-      const validationMessages =
-        (
-          typeof validationJson === 'object'
-          && validationJson !== null
-          && 'validationMessages' in validationJson
-          && Array.isArray(validationJson.validationMessages)
-        ) ?
-          validationJson.validationMessages
-        : []
-
+  if (result.ok) {
+    if (result.validation) {
       diagnostics.validation = {
         attempted: true,
-        status: validationResponse.status,
-        messageCount: validationMessages.length
-      }
-
-      if (!validationResponse.ok || validationMessages.length > 0) {
-        return {
-          ok: false,
-          reason: 'ga_error',
-          requestId,
-          fallbackUsed: false,
-          status: validationResponse.status,
-          details: validationMessages.length > 0 ? validationMessages : validationJson,
-          diagnostics
-        }
-      }
-    }
-
-    if (overrides?.skipSgtmDispatch === true) {
-      const directFallbackEnabled =
-        overrides.allowDirectFallback === true && process.env.GA_DIRECT_FALLBACK_ENABLED !== '0'
-
-      diagnostics.sgtm = {
-        attempted: false,
-        ok: false,
-        responseText: 'Skipped because GTM-owned fallback is direct-only.'
-      }
-
-      if (!directFallbackEnabled) {
-        return {
-          ok: false,
-          reason: 'ga_error',
-          requestId,
-          fallbackUsed: false,
-          details: {
-            directGa4: 'Direct GA4 fallback is disabled.'
-          },
-          diagnostics
-        }
-      }
-
-      const directGa4Result = await postMeasurementProtocolRequest(GA_DIRECT_COLLECT_URL, payload, userAgent)
-
-      diagnostics.directGa4 = {
-        attempted: true,
-        trigger: 'confirmed_sgtm_blocker',
-        status: directGa4Result.status,
-        ok: directGa4Result.ok,
-        ...(directGa4Result.responseText ? { responseText: directGa4Result.responseText } : {})
-      }
-
-      if (directGa4Result.ok) {
-        return {
-          ok: true,
-          status: directGa4Result.status ?? 200,
-          requestId,
-          transport: 'direct_ga4',
-          fallbackUsed: true,
-          diagnostics
-        }
-      }
-
-      return {
-        ok: false,
-        reason: 'ga_error',
-        requestId,
-        fallbackUsed: false,
-        status: directGa4Result.status,
-        details: {
-          directGa4: diagnostics.directGa4
-        },
-        diagnostics
-      }
-    }
-
-    const endpoint =
-      `${GA_SERVER_CONTAINER_URL}/mp/collect`
-      + `?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${GA_API_SECRET}`
-
-    const sgtmResult = await postMeasurementProtocolRequest(endpoint, payload, userAgent)
-
-    diagnostics.sgtm = {
-      attempted: true,
-      status: sgtmResult.status,
-      ok: sgtmResult.ok,
-      ...(sgtmResult.responseText ? { responseText: sgtmResult.responseText } : {})
-    }
-
-    const directFallbackTrigger = shouldUseDirectFallback(overrides, sgtmResult.ok)
-
-    if (directFallbackTrigger) {
-      const directGa4Result = await postMeasurementProtocolRequest(GA_DIRECT_COLLECT_URL, payload, userAgent)
-
-      diagnostics.directGa4 = {
-        attempted: true,
-        trigger: directFallbackTrigger,
-        status: directGa4Result.status,
-        ok: directGa4Result.ok,
-        ...(directGa4Result.responseText ? { responseText: directGa4Result.responseText } : {})
-      }
-
-      if (directGa4Result.ok) {
-        return {
-          ok: true,
-          status: directGa4Result.status ?? sgtmResult.status ?? 200,
-          requestId,
-          transport: 'direct_ga4',
-          fallbackUsed: true,
-          diagnostics
-        }
-      }
-    }
-
-    if (!sgtmResult.ok) {
-      return {
-        ok: false,
-        reason: 'ga_error',
-        requestId,
-        fallbackUsed: diagnostics.directGa4.ok === true,
-        status: diagnostics.directGa4.status ?? sgtmResult.status,
-        details: {
-          sgtm: diagnostics.sgtm,
-          ...(diagnostics.directGa4.attempted ? { directGa4: diagnostics.directGa4 } : {})
-        },
-        diagnostics
+        status: result.validation.status,
+        messageCount: result.validation.messageCount
       }
     }
 
     return {
       ok: true,
-      status: sgtmResult.status ?? 200,
+      status: result.status,
       requestId,
-      transport: 'sgtm',
-      fallbackUsed: false,
+      transport: 'direct_ga4',
       diagnostics
     }
-  } catch (error: unknown) {
-    return {
-      ok: false,
-      reason: 'ga_error',
-      requestId,
-      fallbackUsed: false,
-      details: getErrorMessage(error),
-      diagnostics
+  }
+
+  if (result.validationStatus !== undefined || result.validationMessages) {
+    diagnostics.validation = {
+      attempted: true,
+      status: result.validationStatus,
+      messageCount: result.validationMessages?.length ?? 0
     }
+  }
+
+  return {
+    ok: false,
+    reason: 'ga_error',
+    requestId,
+    status: result.status,
+    transport: 'direct_ga4',
+    details: result.validationMessages ?? result.error,
+    diagnostics
   }
 }

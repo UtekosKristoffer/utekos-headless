@@ -1,0 +1,96 @@
+{
+  "address": {
+    "type": "object",
+    "properties": {
+      "attention": {
+        "type": "string",
+        "example": "Attn",
+        "description": "‘Attn.’ (if applicable). Only applicable for B2B customers.",
+        "minLength": 0,
+        "maxLength": 99
+      },
+      "city": {
+        "type": "string",
+        "example": "New York",
+        "description": "Customer’s city.",
+        "minLength": 0,
+        "maxLength": 99
+      },
+      "country": {
+        "type": "string",
+        "example": "US",
+        "description": "Customer’s country. This value overrides the purchase country if they are different. Should follow the standard of ISO 3166 alpha-2. E.g. GB, US, DE, SE.",
+        "pattern": "^[A-Za-z]{2,2}$"
+      },
+      "email": {
+        "type": "string",
+        "example": "test.sam@test.com",
+        "description": "Customer’s email address.",
+        "minLength": 0,
+        "maxLength": 99
+      },
+      "family_name": {
+        "type": "string",
+        "example": "Andersson",
+        "description": "Customers family name in UTF-8 encoding.\nCannot be only numbers, must be more than 1 character.\nAllowed special characters: -'’.\nMore information can be found [in this link](https://docs.klarna.com/klarna-payments/in-depth-knowledge/customer-data-requirements/#details-needed-per-market)",
+        "minLength": 0,
+        "maxLength": 99
+      },
+      "given_name": {
+        "type": "string",
+        "example": "Adam",
+        "description": "Customers given name in UTF-8 encoding.\nCannot be only numbers, must be more than 1 character.\nAllowed special characters: -'’.\nMore information can be found [in this link](https://docs.klarna.com/klarna-payments/in-depth-knowledge/customer-data-requirements/#details-needed-per-market)",
+        "minLength": 0,
+        "maxLength": 99
+      },
+      "organization_name": {
+        "type": "string",
+        "description": "Organization name (if applicable). Only applicable for B2B customers.",
+        "minLength": 0,
+        "maxLength": 99
+      },
+      "phone": {
+        "type": "string",
+        "example": "+13106683312",
+        "description": "Phone number. Preferably a mobile phone number.",
+        "minLength": 0,
+        "maxLength": 99
+      },
+      "postal_code": {
+        "type": "string",
+        "example": "10024-3941",
+        "description": "Customer’s postal code. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html).\nE.g. 12345, W1G OPW.",
+        "minLength": 0,
+        "maxLength": 10
+      },
+      "region": {
+        "type": "string",
+        "example": "US-NY",
+        "description": "Customer’s region or state - Mandatory for US and AU market. Validations according to ISO 3166-2 format, e.g. US-OH, AU-ACT, etc.",
+        "minLength": 0,
+        "maxLength": 99
+      },
+      "street_address": {
+        "type": "string",
+        "example": "509 Amsterdam Ave",
+        "description": "Customer’s street address. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html). Regional formatting is required, as follows:\nUK/US/FR: 33 Cavendish Square\nRest of EU: De Ruijterkade 7",
+        "minLength": 0,
+        "maxLength": 99
+      },
+      "street_address2": {
+        "type": "string",
+        "example": "Floor 22 / Flat 2",
+        "description": "Customer’s street address. Second Line. ",
+        "minLength": 0,
+        "maxLength": 99
+      },
+      "title": {
+        "type": "string",
+        "example": "Mr.",
+        "description": "Customer’s Title. Allowed values per country:\nUK - \"Mr\", \"Ms\"\nDE - \"Herr\", \"Frau\"\nAT: \"Herr, \"Frau\"\nCH: de-CH: \"Herr, \"Frau\" it-CH: \"Sig.\", \"Sig.ra\" fr-CH: \"M\", \"Mme\" \nBE: \"Dhr.\", \"Mevr.\"\nNL: \"Dhr.\", \"Mevr.\"",
+        "minLength": 0,
+        "maxLength": 20
+      }
+    }
+  }
+}

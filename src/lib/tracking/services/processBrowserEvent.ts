@@ -13,6 +13,22 @@ function getResultField(result: unknown, fieldName: string): string | boolean | 
   return typeof value === 'string' || typeof value === 'boolean' ? value : undefined
 }
 
+function getSettledValue<T>(result: PromiseSettledResult<T>): T | undefined {
+  return result.status === 'fulfilled' ? result.value : undefined
+}
+
+function getSettledError(result: PromiseSettledResult<unknown>): string | undefined {
+  if (result.status === 'fulfilled') {
+    return undefined
+  }
+
+  if (result.reason instanceof Error) {
+    return result.reason.message
+  }
+
+  return typeof result.reason === 'string' ? result.reason : 'Unknown provider error'
+}
+
 export async function processBrowserEvent(
   body: MetaEventPayload,
   cookies: EventCookies,
@@ -21,14 +37,38 @@ export async function processBrowserEvent(
 ) {
   const { userData, sourceInfo } = prepareEventContext(body, cookies, metadata.clientIp, metadata.userAgent)
 
-  const googlePromise = deps.sendGoogle(body, {
-    clientIp: metadata.clientIp,
-    userAgent: metadata.userAgent
-  })
-  try {
-    const metaResponse = await deps.sendMeta(body, userData)
+  const [metaResult, googleResult] = await Promise.allSettled([
+    deps.sendMeta(body, userData),
+    deps.sendGoogle(body, {
+      clientIp: metadata.clientIp,
+      userAgent: metadata.userAgent
+    })
+  ])
 
-    const [googleResult] = await Promise.all([googlePromise])
+  const metaResponse = getSettledValue(metaResult)
+  const googleResponse = getSettledValue(googleResult)
+
+  if (body.eventId && body.eventName && deps.recordAttempt) {
+    await Promise.allSettled([
+      deps.recordAttempt({
+        eventId: body.eventId,
+        eventName: body.eventName,
+        provider: 'meta',
+        success: !!metaResponse,
+        error: getSettledError(metaResult)
+      }),
+      deps.recordAttempt({
+        eventId: body.eventId,
+        eventName: body.eventName,
+        provider: 'google',
+        success: getResultField(googleResponse, 'success') === true,
+        error: getSettledError(googleResult) ?? getResultField(googleResponse, 'error')?.toString()
+      })
+    ])
+  }
+
+  if (metaResponse) {
+    const googleError = getSettledError(googleResult)
 
     await deps.logger(
       'INFO',
@@ -45,12 +85,12 @@ export async function processBrowserEvent(
         hasFbc: !!userData.fbc,
         hasExtId: !!userData.external_id,
         hasEmail: !!userData.email || !!userData.email_hash,
-        clientIp: userData.client_ip_address,
+        hasClientIp: !!userData.client_ip_address,
         hasGA4: !!body.ga4Data?.client_id,
-        googleSuccess: getResultField(googleResult, 'success'),
-        googleTransport: getResultField(googleResult, 'transport'),
-        googleError: getResultField(googleResult, 'error'),
-        googleReason: getResultField(googleResult, 'reason')
+        googleSuccess: getResultField(googleResponse, 'success'),
+        googleTransport: getResultField(googleResponse, 'transport'),
+        googleError: googleError ?? getResultField(googleResponse, 'error'),
+        googleReason: getResultField(googleResponse, 'reason')
       }
     )
 
@@ -59,45 +99,49 @@ export async function processBrowserEvent(
       events_received: metaResponse.events_received,
       fbtrace_id: metaResponse.fbtrace_id
     }
-  } catch (error: unknown) {
-    const normalizedError =
-      error instanceof Error ? error : new Error(typeof error === 'string' ? error : 'Unknown Error')
-    const errorWithResponse = normalizedError as Error & {
-      response?: {
-        data?: {
-          error?: {
-            code?: number
-            message?: string
-            type?: string
-          }
+  }
+
+  const normalizedError =
+    metaResult.status === 'rejected' && metaResult.reason instanceof Error
+      ? metaResult.reason
+      : new Error(getSettledError(metaResult) ?? 'Unknown Error')
+  const errorWithResponse = normalizedError as Error & {
+    response?: {
+      data?: {
+        error?: {
+          code?: number
+          message?: string
+          type?: string
         }
       }
     }
-    const errorData = errorWithResponse.response?.data || {}
+  }
+  const errorData = errorWithResponse.response?.data || {}
+  const googleError = getSettledError(googleResult)
 
-    await deps.logger(
-      'ERROR',
-      `CAPI Failed: ${body.eventName}`,
-      {
-        eventId: body.eventId,
-        eventTime: body.eventTime,
-        error: normalizedError.message || 'Unknown Error',
-        details: errorData,
-        type: errorData.error?.type,
-        code: errorData.error?.code
-      },
-      {
-        actionSource: body.actionSource || 'website',
-        eventName: body.eventName,
-        eventSourceUrl: body.eventSourceUrl,
-        eventId: body.eventId
-      }
-    )
-
-    return {
-      success: false,
-      error: 'Failed to send event to Meta',
-      details: errorData.error?.message || normalizedError.message
+  await deps.logger(
+    'ERROR',
+    `CAPI Failed: ${body.eventName}`,
+    {
+      eventId: body.eventId,
+      eventTime: body.eventTime,
+      error: normalizedError.message || 'Unknown Error',
+      details: errorData,
+      type: errorData.error?.type,
+      code: errorData.error?.code,
+      googleError
+    },
+    {
+      actionSource: body.actionSource || 'website',
+      eventName: body.eventName,
+      eventSourceUrl: body.eventSourceUrl,
+      eventId: body.eventId
     }
+  )
+
+  return {
+    success: false,
+    error: 'Failed to send event to Meta',
+    details: errorData.error?.message || normalizedError.message
   }
 }

@@ -58,7 +58,8 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
         <div className='mx-auto mb-16 max-w-2xl md:max-w-3xl lg:max-w-4xl text-center'>
           <h2 className='text-background text-shadow-background'>Hyttekos fra morgen til kveld</h2>
           <p className='mt-4 utekos-section-lead text-background'>
-            Fra første kaffekopp til siste vedkubbe får du varme når hyttedagen ber om det.
+            Nyt lun varme akkurat når hyttedagen krever det. Fra morgenkaffen skjenkes til kveldens siste
+            vedkubbe.
           </p>
         </div>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>

@@ -32,3 +32,7 @@ create index if not exists partner_referrals_created_at_idx
 create index if not exists partner_referrals_anonymous_id_idx
   on partner.referrals (anonymous_id)
   where anonymous_id is not null;
+
+create index if not exists partner_referrals_partner_source_id_idx
+  on partner.referrals (partner_source_id)
+  where partner_source_id is not null;

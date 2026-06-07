@@ -1,0 +1,22 @@
+{
+  "billing_address": {
+    "description": "Provide the billing address of the customer, if you have collected already. If not, then Klarna will collect the details inside the iFrame before authorization.",
+    "allOf": [
+      {
+        "$ref": "#/components/schemas/address"
+      }
+    ]
+  },
+  "address": {
+    "type": "object",
+    "properties": {
+      "attention": {
+        "type": "string",
+        "example": "Attn",
+        "description": "‘Attn.’ (if applicable). Only applicable for B2B customers.",
+        "minLength": 0,
+        "maxLength": 99
+      }
+    }
+  }
+}

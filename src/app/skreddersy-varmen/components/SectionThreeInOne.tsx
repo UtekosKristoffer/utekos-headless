@@ -129,7 +129,7 @@ export function SectionThreeInOne() {
               className='gsap-desktop-step-panel flex min-h-screen flex-col justify-center border-b border-cloud-dancer/10 px-20 last:border-0'
             >
               <div className='will-change-transform'>
-                <div className='gsap-step-eyebrow mb-4 flex items-center gap-3 text-base md:text-lg font-medium leading-4 text-overcast'>
+                <div className='gsap-step-eyebrow mb-4 font-utekos-textflex items-center gap-3 text-base md:text-lg font-medium leading-4 text-overcast'>
                   <span className='gsap-step-icon inline-flex shrink-0 text-foreground'>{step.icon}</span>
                   <span className='text-base md:text-lg font-utekos-text-medium leading-4 text-foreground'>
                     {step.stepNumber} — {step.modeName}
@@ -140,7 +140,7 @@ export function SectionThreeInOne() {
                   {step.title}
                 </h3>
 
-                <p className='gsap-step-desc max-w-lg text-base md:text-2xl leading-text-paragraph text-foreground'>
+                <p className='gsap-step-desc max-w-lg text-base font-utekos-text md:text-2xl leading-text-paragraph text-foreground'>
                   {step.description}
                 </p>
               </div>

@@ -3,7 +3,7 @@
 /**
  * Consent-gated marketing pixel root.
  *
- * Mounts Meta, Snap, Pinterest, and TikTok pixels behind the `marketing`
+ * Mounts Meta behind the `marketing`
  * consent category from CookieConsentProvider. This is the equivalent
  * pattern to MicrosoftUetTag.tsx (which gates on the same `marketing`
  * key), and removes four ungated `'use client'` islands from the initial
@@ -15,14 +15,10 @@
 
 import { useConsentFor } from '@/components/cookie-consent/useConsent'
 import { MetaPixelEvents } from '@/components/analytics/Meta/MetaPixelEvents'
-import { SnapPixel } from '@/components/analytics/SnapPixel/SnapPixel'
-import { PinterestTag } from '@/components/analytics/Pinterest/PinterestTag'
-import { TikTokPixel } from '@/components/analytics/TikTokPixel/TikTokPixel'
 
 const SHOULD_LOAD_META_PIXEL =
   !!process.env.NEXT_PUBLIC_META_PIXEL_ID
-  && (process.env.NODE_ENV === 'production'
-    || !!process.env.NEXT_PUBLIC_META_TEST_EVENT_CODE)
+  && (process.env.NODE_ENV === 'production' || !!process.env.NEXT_PUBLIC_META_TEST_EVENT_CODE)
 
 export function MarketingPixels() {
   const hasMarketingConsent = useConsentFor('marketing')
@@ -34,9 +30,6 @@ export function MarketingPixels() {
   return (
     <>
       {SHOULD_LOAD_META_PIXEL && <MetaPixelEvents />}
-      <SnapPixel />
-      <PinterestTag />
-      <TikTokPixel />
     </>
   )
 }

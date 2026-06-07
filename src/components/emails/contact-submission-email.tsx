@@ -1,27 +1,10 @@
-import {
-  Body,
-  Container,
-  Head,
-  Heading,
-  Hr,
-  Html,
-  Img, // Importer Img-komponenten
-  Link,
-  Preview,
-  Section,
-  Text
-} from '@react-email/components'
+import { Body, Container, Head, Heading, Hr, Html, Img, Link, Preview, Section, Text } from 'react-email'
 import * as React from 'react'
 import type { ServerContactFormData } from '@/db/zod/schemas/ServerContactFormSchema'
 
-const UTK_BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?
-    process.env.NEXT_PUBLIC_SITE_URL
-  : 'https://utekos.no'
+const UTK_BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ? process.env.NEXT_PUBLIC_SITE_URL : 'https://utekos.no'
 
-export function ContactSubmissionEmail(
-  props: ServerContactFormData
-): React.JSX.Element {
+export function ContactSubmissionEmail(props: ServerContactFormData): React.JSX.Element {
   const { name, email, phone, country, orderNumber, message } = props
   const previewText = `Ny henvendelse fra ${name} via kontaktskjemaet`
 
@@ -46,8 +29,7 @@ export function ContactSubmissionEmail(
               Ny henvendelse fra kontaktskjema
             </Heading>
             <Text style={paragraph}>
-              En ny henvendelse har blitt sendt inn via kontaktskjemaet på
-              utekos.no.
+              En ny henvendelse har blitt sendt inn via kontaktskjemaet på utekos.no.
             </Text>
           </Section>
 
@@ -89,9 +71,7 @@ export function ContactSubmissionEmail(
           <Hr style={hr} />
 
           <Section style={footer}>
-            <Text style={footerText}>
-              © {new Date().getFullYear()} Utekos. Alle rettigheter forbeholdt.
-            </Text>
+            <Text style={footerText}>© {new Date().getFullYear()} Utekos. Alle rettigheter forbeholdt.</Text>
           </Section>
         </Container>
       </Body>
@@ -101,8 +81,7 @@ export function ContactSubmissionEmail(
 
 const main = {
   backgroundColor: '#f6f9fc',
-  fontFamily:
-    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif'
+  fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif'
 }
 
 const container = {

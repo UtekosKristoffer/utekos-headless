@@ -24,7 +24,7 @@ function smoothScrollTo(id: string) {
 export function HeroActions() {
   return (
     <>
-      <div className='mt-9 flex w-full max-w-[19rem] flex-col items-stretch gap-3'>
+      <div className='mt-9 flex w-full max-w-76 flex-col items-stretch gap-3'>
         <BrandBadge
           asChild
           backgroundColor='var(--color-cloud-dancer)'

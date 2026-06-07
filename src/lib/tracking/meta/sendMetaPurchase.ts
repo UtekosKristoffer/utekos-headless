@@ -11,6 +11,7 @@ import { safeString } from '@/lib/utils/safeString'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 import { resolveMetaPixelId } from '@/lib/tracking/meta/utils/resolveMetaPixelId'
 import { resolveMetaAccessToken } from '@/lib/tracking/meta/utils/resolveMetaAccessToken'
+import { normalizeAndHashMetaUserData } from '@/lib/tracking/meta/normalizeAndHashMetaUserData'
 import type { TrackingContext } from 'types/tracking/user/TrackingContext'
 import type { MetaApiError } from './types'
 
@@ -29,20 +30,36 @@ export async function sendMetaPurchase({ order, customer, redisData, contentIds 
     api.setDebug(true)
   }
 
+  const normalizedUserData = normalizeAndHashMetaUserData({
+    email: customer.email,
+    phone: customer.phone,
+    external_id: customer.externalId,
+    first_name: customer.firstName,
+    last_name: customer.lastName,
+    city: customer.city,
+    state: customer.state,
+    zip: customer.zip,
+    country: customer.countryCode,
+    client_ip_address: customer.clientIp,
+    client_user_agent: customer.userAgent,
+    fbp: customer.fbp,
+    fbc: customer.fbc
+  })
+
   const userData = new UserData()
-  if (customer.email) userData.setEmail(customer.email.toLowerCase())
-  if (customer.phone) userData.setPhone(customer.phone)
-  if (customer.externalId) userData.setExternalId(customer.externalId)
-  if (customer.firstName) userData.setFirstName(customer.firstName)
-  if (customer.lastName) userData.setLastName(customer.lastName)
-  if (customer.city) userData.setCity(customer.city.toLowerCase())
-  if (customer.state) userData.setState(customer.state.toLowerCase())
-  if (customer.zip) userData.setZip(customer.zip)
-  if (customer.countryCode) userData.setCountry(customer.countryCode.toLowerCase())
-  if (customer.clientIp) userData.setClientIpAddress(customer.clientIp)
-  if (customer.userAgent) userData.setClientUserAgent(customer.userAgent)
-  if (customer.fbp) userData.setFbp(customer.fbp)
-  if (customer.fbc) userData.setFbc(customer.fbc)
+  if (normalizedUserData.email) userData.setEmail(normalizedUserData.email)
+  if (normalizedUserData.phone) userData.setPhone(normalizedUserData.phone)
+  if (normalizedUserData.external_id) userData.setExternalId(normalizedUserData.external_id)
+  if (normalizedUserData.first_name) userData.setFirstName(normalizedUserData.first_name)
+  if (normalizedUserData.last_name) userData.setLastName(normalizedUserData.last_name)
+  if (normalizedUserData.city) userData.setCity(normalizedUserData.city)
+  if (normalizedUserData.state) userData.setState(normalizedUserData.state)
+  if (normalizedUserData.zip) userData.setZip(normalizedUserData.zip)
+  if (normalizedUserData.country) userData.setCountry(normalizedUserData.country)
+  if (normalizedUserData.client_ip_address) userData.setClientIpAddress(normalizedUserData.client_ip_address)
+  if (normalizedUserData.client_user_agent) userData.setClientUserAgent(normalizedUserData.client_user_agent)
+  if (normalizedUserData.fbp) userData.setFbp(normalizedUserData.fbp)
+  if (normalizedUserData.fbc) userData.setFbc(normalizedUserData.fbc)
 
   const contentList: Content[] = []
   if (order.line_items) {
@@ -92,8 +109,9 @@ export async function sendMetaPurchase({ order, customer, redisData, contentIds 
         orderId: order.id
       },
       {
-        fbp: userData.fbp,
-        clientIp: userData.client_ip_address,
+        hasFbp: !!userData.fbp,
+        hasFbc: !!userData.fbc,
+        hasClientIp: !!userData.client_ip_address,
         eventTime: serverEvent.event_time
       }
     )

@@ -3,7 +3,6 @@
 
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
-import Balpanne from '@public/empathy-bonfire.webp'
 import { useEmpathySectionAnimations } from '@/hooks/useEmpathySectionAnimations'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { scrollToElement } from '@/lib/gsap/scrollToElement'
@@ -35,8 +34,6 @@ export function EmpathySection() {
               className='gsap-empathy-eyebrow-bar absolute left-0 bottom-0 h-px w-full origin-left scale-x-0 bg-demitasse transition-transform duration-500'
             />
           </div>
-
-          {/* 2. H2 — curtain reveal */}
           <h2
             id='empathy-heading'
             className='mb-5 max-w-[11ch] font-google-sans text-4xl font-bold leading-[0.92] tracking-[-0.01em] text-background sm:text-4xl md:text-5xl'
@@ -47,7 +44,7 @@ export function EmpathySection() {
           </h2>
 
           <div className='max-w-none   text-base leading-text-paragraph   text-background'>
-            <p className='gsap-empathy-para1 relative max-w-[34rem]'>
+            <p className='gsap-empathy-para1 relative max-w-136'>
               Du kjenner følelsen. Praten går lett rundt bålpannen, flammene danser, og roen har senket seg.
               Så kommer den snikende trekken som truer med å bryte magien.
             </p>
@@ -61,7 +58,7 @@ export function EmpathySection() {
                 Skal vi trekke inn?&rdquo;
               </p>
             </div>
-            <p className='gsap-empathy-para2 mt-6 max-w-[34rem] text-background'>
+            <p className='gsap-empathy-para2 mt-6 max-w-136 text-background'>
               Med Utekos® blir svaret enkelt. Fra lett mikrofiber til TechDown™ pakker plagget deg inn i varme
               slik at du kan bli sittende.
               <br />
@@ -91,24 +88,23 @@ export function EmpathySection() {
           </div>
         </div>
 
-        {/* 8. Image column — fade + scale + scroll parallax */}
         <div className='gsap-empathy-image-wrap relative w-full'>
           <div className='relative aspect-4/5 w-full md:aspect-square'>
             <div className='relative h-full w-full overflow-hidden rounded-sm shadow-2xl shadow-demitasse/20'>
               <div className='gsap-empathy-image absolute -inset-y-14 inset-x-0 will-change-transform'>
                 <Image
-                  src={Balpanne}
-                  alt='Stemningsbilde av bålpanne og varme føtter'
+                  src='https://cdn.shopify.com/s/files/1/0634/2154/6744/files/utekos-balpanne.webp?v=1780688488'
+                  alt='Bålpanne med flammer. To stk Utekos i bakgrunnen.'
                   fill
                   className='object-cover'
                   sizes='(max-width: 1024px) 100vw, 50vw'
-                  quality={90}
+                  quality={100}
                 />
               </div>
 
               <div
                 aria-hidden
-                className='absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background/75 via-background/30 to-transparent'
+                className='absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-background/75 via-background/30 to-transparent'
               />
 
               <div className='gsap-empathy-image-overlay absolute bottom-5 left-5 right-5 text-foreground md:bottom-7 md:left-7 md:right-7'>

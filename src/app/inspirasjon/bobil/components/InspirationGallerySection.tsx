@@ -1,7 +1,6 @@
 // Path: src/app/inspirasjon/bobil/sections/InspirationGallerySection.tsx
 
 import Image from 'next/image'
-import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import {
   Carousel,
   CarouselContent,
@@ -18,8 +17,7 @@ export function InspirationGallerySection() {
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl md:max-w-4xl text-center'>
           <h2 className='text-foreground inline-flex items-baseline justify-center gap-x-[0.18em] whitespace-nowrap'>
-            <UtekosWordmark className='h-[0.82em] w-auto shrink-0 translate-y-[0.06em]' />
-            <span>i sitt rette element</span>
+            Utekos i sitt rette element
           </h2>
           <p className='mx-auto my-8 utekos-section-lead max-w-2xl text-foreground'>
             Fra morgenkaffen i soloppgang til sene kvelder under stjernene. La deg inspirere av ekte øyeblikk
@@ -40,12 +38,11 @@ export function InspirationGallerySection() {
             {galleryImages.map(image => (
               <CarouselItem key={image.src} className='pl-4 md:basis-1/2 lg:basis-1/3'>
                 <div className='group flex h-full flex-col p-1'>
-                  <div className='relative aspect-4/5 shrink-0 overflow-hidden rounded-lg border border-cloud-dancer/12 bg-background'>
+                  <div className='relative aspect-square shrink-0 overflow-hidden rounded-lg border border-cloud-dancer/12 bg-background'>
                     <Image
                       src={image.src}
                       alt={image.alt}
-                      width={400}
-                      height={500}
+                      fill
                       className='size-full object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100'
                       sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                     />

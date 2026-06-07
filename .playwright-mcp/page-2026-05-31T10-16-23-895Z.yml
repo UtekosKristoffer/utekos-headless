@@ -1,0 +1,122 @@
+- generic [active] [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e7] [cursor=pointer]:
+    - img [ref=e8]
+  - alert [ref=e11]
+  - generic [ref=e12]:
+    - link "Se tilbudet på Utekos TechDown til kr 1790" [ref=e13] [cursor=pointer]:
+      - /url: /skreddersy-varmen
+      - generic [ref=e14]:
+        - img [ref=e15]
+        - generic [ref=e18]: Utekos TechDown™ til kr 1790,-
+        - generic [ref=e19]:
+          - text: Kjøp her
+          - img [ref=e20]
+    - button "Lukk banner" [ref=e22] [cursor=pointer]:
+      - img [ref=e23]
+  - banner [ref=e26]:
+    - generic [ref=e27]:
+      - link "Utekos - Til forsiden" [ref=e30] [cursor=pointer]:
+        - /url: /
+        - img "Utekos logo" [ref=e31]
+      - generic [ref=e32]:
+        - button "Åpne søk (⌘/Ctrl + K)" [ref=e33] [cursor=pointer]:
+          - img [ref=e34]
+          - generic [ref=e37]: Søk…
+          - generic:
+            - generic: ⌘
+            - text: K
+        - generic [ref=e38]:
+          - heading "Søk på nettsiden..." [level=2] [ref=e39]
+          - paragraph [ref=e40]: Søk etter produkter eller sider..
+        - button "Åpne handlekurven, 0 varer" [ref=e41] [cursor=pointer]:
+          - img
+          - generic [ref=e42]: 0 varer i handlekurven
+  - main [ref=e43]:
+    - main [ref=e44]:
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - paragraph [ref=e47]: Betaling
+          - heading "Betaling med Klarna" [level=1] [ref=e48]
+        - region "Betalingsinformasjon fra Klarna" [ref=e49]
+  - contentinfo [ref=e50]:
+    - generic [ref=e51]:
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - heading "Handlehjelp" [level=3] [ref=e54]
+          - navigation "Handlehjelp navigasjon" [ref=e55]:
+            - list [ref=e56]:
+              - listitem [ref=e57]:
+                - link "Kontakt oss" [ref=e58] [cursor=pointer]:
+                  - /url: /kontaktskjema
+              - listitem [ref=e59]:
+                - link "Teknologi og materialer" [ref=e60] [cursor=pointer]:
+                  - /url: /handlehjelp/teknologi-materialer
+              - listitem [ref=e61]:
+                - link "Vask og vedlikehold" [ref=e62] [cursor=pointer]:
+                  - /url: /handlehjelp/vask-og-vedlikehold
+              - listitem [ref=e63]:
+                - link "Størrelsesguide" [ref=e64] [cursor=pointer]:
+                  - /url: /handlehjelp/storrelsesguide
+        - generic [ref=e65]:
+          - heading "Kundeservice" [level=3] [ref=e66]
+          - navigation "Kundeservice navigasjon" [ref=e67]:
+            - list [ref=e68]:
+              - listitem [ref=e69]:
+                - link "Kundeservice" [ref=e70] [cursor=pointer]:
+                  - /url: /kontaktskjema
+              - listitem [ref=e71]:
+                - 'link "Tlf: +47 40 21 63 43" [ref=e72] [cursor=pointer]':
+                  - /url: tel:+4740216343
+              - listitem [ref=e73]:
+                - 'link "E-post: kundeservice@utekos.no" [ref=e74] [cursor=pointer]':
+                  - /url: mailto:kundeservice@utekos.no
+              - button "Innstillinger for informasjonskapsler" [ref=e75] [cursor=pointer]
+        - generic [ref=e76]:
+          - heading "Informasjon" [level=3] [ref=e77]
+          - navigation "Informasjon navigasjon" [ref=e78]:
+            - list [ref=e79]:
+              - listitem [ref=e80]:
+                - link "Om oss" [ref=e81] [cursor=pointer]:
+                  - /url: /om-oss
+              - listitem [ref=e82]:
+                - link "Fraktinformasjon" [ref=e83] [cursor=pointer]:
+                  - /url: /frakt-og-retur
+              - listitem [ref=e84]:
+                - link "Personvern" [ref=e85] [cursor=pointer]:
+                  - /url: /personvern
+              - listitem [ref=e86]:
+                - link "Vilkår og betingelser" [ref=e87] [cursor=pointer]:
+                  - /url: /vilkar-betingelser
+        - generic [ref=e88]:
+          - heading "Bedriftsinformasjon" [level=3] [ref=e89]
+          - navigation "Bedriftsinformasjon navigasjon" [ref=e90]:
+            - list [ref=e91]:
+              - listitem [ref=e92]:
+                - link "KELC AS" [ref=e93] [cursor=pointer]:
+                  - /url: /
+              - listitem [ref=e94]:
+                - link "Lille Damsgårdsveien 25" [ref=e95] [cursor=pointer]:
+                  - /url: map:Lille Damsgårdsveien 25
+              - listitem [ref=e96]:
+                - link "5162, Laksevåg" [ref=e97] [cursor=pointer]:
+                  - /url: map:Lille Damsgårdsveien 25, 5162, Bergen
+              - listitem [ref=e98]:
+                - link "Org.nr 925 820 393" [ref=e99] [cursor=pointer]:
+                  - /url: /kontaktskjema
+      - article [ref=e102]:
+        - generic [ref=e103]:
+          - generic [ref=e104]:
+            - img [ref=e105]
+            - heading "Meld deg på Utekos sitt nyhetsbrev!" [level=2] [ref=e108]
+          - heading "Som medlem i vår kundeklubb får du personlige tilbud og tilgang til salg og kampanjer først. Du får også masse tips og inspirasjon rett inn i innboksen din." [level=3] [ref=e109]
+          - generic [ref=e110]:
+            - textbox "Din e-postadresse..." [ref=e111]
+            - button "Meld meg inn" [ref=e112] [cursor=pointer]:
+              - text: Meld meg inn
+              - img [ref=e113]
+      - generic [ref=e116]:
+        - img "Klarna betalingsmetode" [ref=e117]
+        - img "Vipps betalingsmetode" [ref=e122]
+        - img "Visa betalingsmetode" [ref=e124]
+        - img "Mastercard betalingsmetode" [ref=e128]
+      - paragraph [ref=e133]: © 2026 Kelc AS. Alle rettigheter forbeholdt. Utekos® er et registrert varemerke i Norge.

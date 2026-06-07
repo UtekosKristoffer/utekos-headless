@@ -1,0 +1,17 @@
+{
+  "asset_urls": {
+    "type": "object",
+    "properties": {
+      "descriptive": {
+        "type": "string",
+        "example": "https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg",
+        "description": "URL of the descriptive asset. Using this dynamic asset will make sure that any copy update of Klarna will automatically be propagated."
+      },
+      "standard": {
+        "type": "string",
+        "example": "https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg",
+        "description": "URL of the standard asset. Using this dynamic asset will make sure that any copy update of Klarna will automatically be propagated."
+      }
+    }
+  }
+}

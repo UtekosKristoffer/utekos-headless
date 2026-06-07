@@ -1,4 +1,3 @@
-import { hashSnapData } from '@/lib/tracking/snapchat/hashSnapData'
 import type { MetaEventPayload, ClientUserData } from 'types/tracking/meta'
 
 const PINTEREST_TOKEN = process.env.PINTEREST_ACCESS_TOKEN
@@ -32,12 +31,11 @@ export async function sendPinterestBrowserEvent(
     const { eventData } = payload
 
     const emailList =
-      userData.email ? [hashSnapData(userData.email)]
+      userData.email ? [userData.email]
       : userData.email_hash ? [userData.email_hash]
       : undefined
 
-    const extIdList =
-      userData.external_id ? [hashSnapData(userData.external_id)] : undefined
+    const extIdList = userData.external_id ? [userData.external_id] : undefined
 
     const pinPayload = {
       event_name: pinEventName,
@@ -65,17 +63,14 @@ export async function sendPinterestBrowserEvent(
       }
     }
 
-    const res = await fetch(
-      `https://api.pinterest.com/v5/ad_accounts/${PINTEREST_AD_ACCOUNT_ID}/events`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${PINTEREST_TOKEN}`
-        },
-        body: JSON.stringify({ data: [pinPayload] })
-      }
-    )
+    const res = await fetch(`https://api.pinterest.com/v5/ad_accounts/${PINTEREST_AD_ACCOUNT_ID}/events`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${PINTEREST_TOKEN}`
+      },
+      body: JSON.stringify({ data: [pinPayload] })
+    })
 
     if (!res.ok) {
       console.error('[Pinterest CAPI] Failed:', await res.text())

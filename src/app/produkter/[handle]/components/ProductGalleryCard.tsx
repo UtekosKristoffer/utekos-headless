@@ -38,10 +38,7 @@ export default function ProductGalleryCard({
   return (
     <div className={[enableStickyOnDesktop ? `h-fit md:sticky ${stickyTopClassName}` : '', 'z-10'].join(' ')}>
       <AnimatedBlock className='will-animate-fade-in-scale' delay='0.12s' threshold={0.2}>
-        <section
-          aria-label={ariaLabel}
-          className='w-full rounded-[1.5rem]'
-        >
+        <section aria-label={ariaLabel} className='w-full rounded-3xl'>
           {hasIntegratedBackground ?
             <div className={integratedBackgroundClassName}>{galleryContent}</div>
           : <div className={defaultBackgroundClassName}>

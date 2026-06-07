@@ -1,6 +1,7 @@
 import { getClientMetaUserData } from '@/lib/tracking/meta/utils/getClientMetaUserData'
 import { getClientGA4Data } from '@/lib/tracking/google/getClientGA4Data'
 import { sendMetaPixelEvent } from '@/lib/tracking/meta/sendMetaPixelEvent'
+import { hasMarketingConsent } from '@/lib/tracking/consent/hasMarketingConsent'
 import type { MetaEventPayload } from 'types/tracking/meta/event'
 import type { DispatchMetaTrackingEventInput } from './types'
 
@@ -14,6 +15,10 @@ export async function dispatchMetaTrackingEvent({
   ga4Data,
   sendBrowserEvent = true
 }: DispatchMetaTrackingEventInput): Promise<void> {
+  if (!hasMarketingConsent()) {
+    return
+  }
+
   const resolvedGa4Data = ga4Data ?? getClientGA4Data()
 
   if (sendBrowserEvent) {

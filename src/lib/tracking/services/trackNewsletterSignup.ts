@@ -1,8 +1,6 @@
 import { headers, cookies } from 'next/headers'
 import { v4 as uuidv4 } from 'uuid'
-import { hashSnapData } from '@/lib/tracking/snapchat/hashSnapData'
 import { trackServerEvent } from '@/lib/tracking/google/trackingServerEvent'
-import { sendPinterestLead } from '@/lib/tracking/pinterest/sendPinterestLead'
 
 export async function trackNewsletterSignup(email: string) {
   const headersList = await headers()
@@ -12,19 +10,13 @@ export async function trackNewsletterSignup(email: string) {
   const userAgent = headersList.get('user-agent') || '' // Default til tom streng
   const referer = headersList.get('referer') || 'https://utekos.no'
   const clientIp = forwardedFor ? forwardedFor.split(',')[0]?.trim() : '0.0.0.0'
-  const clickId = cookieStore.get('_epik')?.value
   const fbp = cookieStore.get('_fbp')?.value
   const fbc = cookieStore.get('_fbc')?.value
   const gaCookie = cookieStore.get('_ga')?.value
   const clientId = gaCookie ? gaCookie.split('.').slice(2).join('.') : uuidv4()
   const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.replace('G-', '')
   const sessionId = measurementId ? cookieStore.get(`_ga_${measurementId}`)?.value?.split('.')[2] : undefined
-
-  const hashedEmail = hashSnapData(email) || ''
-
-  const eventId = `lead_${Date.now()}_${Math.random().toString(36).substring(7)}`
-
-  const googlePromise = trackServerEvent(
+  await trackServerEvent(
     {
       name: 'generate_lead',
       params: {
@@ -42,17 +34,4 @@ export async function trackNewsletterSignup(email: string) {
       ipOverride: clientIp
     }
   )
-
-  const pinterestPromise = sendPinterestLead({
-    eventId,
-    emailHash: hashedEmail,
-    clientIp,
-    userAgent,
-    url: referer,
-    clickId,
-    fbp,
-    fbc
-  })
-
-  await Promise.allSettled([googlePromise, pinterestPromise])
 }

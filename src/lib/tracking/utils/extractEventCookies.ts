@@ -6,7 +6,6 @@ export function extractEventCookies(cookies: Map<string, string>): EventCookies 
     fbc: cookies.get('_fbc'),
     externalId: cookies.get('ute_ext_id'),
     userHash: cookies.get('ute_user_hash'),
-    scCid: cookies.get('ute_sc_cid'),
-    epik: cookies.get('_epik')
+    scCid: cookies.get('ute_sc_cid')
   }
 }

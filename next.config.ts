@@ -1,5 +1,6 @@
 import type { NextConfig } from 'next'
 import { withBotId } from 'botid/next/config'
+import { withSentryConfig } from '@sentry/nextjs'
 
 const STATIC_ASSET_CACHE_CONTROL = 'public, max-age=31536000, immutable'
 
@@ -237,4 +238,19 @@ const nextConfig: NextConfig = {
   }
 }
 
-export default withBotId(nextConfig)
+export default withSentryConfig(withBotId(nextConfig), {
+  ...(process.env.SENTRY_ORG ? { org: process.env.SENTRY_ORG } : {}),
+  ...(process.env.SENTRY_PROJECT ? { project: process.env.SENTRY_PROJECT } : {}),
+  ...(process.env.SENTRY_AUTH_TOKEN ? { authToken: process.env.SENTRY_AUTH_TOKEN } : {}),
+  silent: !process.env.CI,
+  telemetry: false,
+  widenClientFileUpload: true,
+  sourcemaps: {
+    disable: !process.env.CI
+  },
+  webpack: {
+    treeshake: {
+      removeDebugLogging: true
+    }
+  }
+})

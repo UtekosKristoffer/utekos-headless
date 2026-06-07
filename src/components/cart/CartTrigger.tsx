@@ -45,7 +45,7 @@ export function CartTrigger({ className }: { className?: string }): React.JSX.El
       <Button
         type='button'
         aria-label={`Åpne handlekurven, ${itemCount} ${itemCount === 1 ? 'vare' : 'varer'}`}
-        variant='cart'
+        variant='outline'
         className={cn(
           'relative flex h-11 w-11 items-center justify-center rounded-md',
           'border border-cloud-dancer/10 text-foreground transition-colors hover:bg-cloud-dancer/5',

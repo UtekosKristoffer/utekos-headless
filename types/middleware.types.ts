@@ -1,6 +1,6 @@
 import type { NextRequest, NextResponse } from 'next/server'
 export interface AdPlatformConfig {
-  id: 'meta' | 'snapchat' | 'pinterest' | 'tiktok'
+  id: 'meta'
   param: string
   cookieName: string | undefined // exactOptionalPropertyTypes compliance
   logConfig: {
@@ -49,10 +49,7 @@ export interface MiddlewareActionPlan {
 
 export interface ProxyPipelineDependencies {
   detectInteractions: (params: URLSearchParams) => DetectedAdInteraction[]
-  planActions: (
-    interactions: DetectedAdInteraction[],
-    isProduction: boolean
-  ) => MiddlewareActionPlan
+  planActions: (interactions: DetectedAdInteraction[], isProduction: boolean) => MiddlewareActionPlan
 
   applyCookies: (res: NextResponse, cookies: MiddlewareCookieConfig[]) => void
   dispatchLogs: (

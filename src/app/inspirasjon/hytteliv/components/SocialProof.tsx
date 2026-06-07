@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import {
   Carousel,
   CarouselContent,
@@ -12,28 +11,28 @@ import { CAROUSEL_SSR } from '@/components/ui/carousel-ssr'
 
 const galleryImages = [
   {
-    src: '/kate-erling-gress-vann.webp',
+    src: 'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/utekos-techdown-kvinne-bonfire-1600x1600_ecbebf58-c746-45ae-ae83-87356c8ac52e.webp?v=1780686689',
     alt: 'Person i Utekos-plagg nyter morgenkaffen utenfor hytten med utsikt over en fjord.',
     title: 'Første rad til stillheten',
     description:
       'Den beste plassen er ikke alltid på en benk. Finn deres eget sted ved vannkanten og nyt utsikten sammen.'
   },
   {
-    src: '/linn_bonfire.webp',
+    src: 'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/linn-bonfire-1600x1600.jpg?v=1780750136',
     alt: 'Et par sitter ute ved bålpannen en kjølig hyttekveld, begge kledd i Utekos.',
     title: 'Selve definisjonen på utekos',
     description:
       'Noen ganger er de enkleste aktivitetene de beste. Nyt forberedelsene og den knitrende lyden i full komfort.'
   },
   {
-    src: '/caitlinn_smooth16-19.webp',
+    src: 'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/to-kvinner-sitter-pa-en-stein-med-utekos.jpg?v=1780750291',
     alt: 'Person som nyter utsikten fra et hytteområde i et Utekos-plagg.',
     title: 'Gjør naturen til din sitteplass',
     description:
       'Med Utekos kan den beste hvileplassen være den du finner selv. Varm og komfortabel, uansett underlag.'
   },
   {
-    src: '/utekos-kaffe-jente.webp',
+    src: 'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/utekos-techdown-kvinne-terrasseliv-1600x1600.webp?v=1780686689',
     alt: 'Person som slapper av med en bok i en campingstol, godt innpakket i Utekos.',
     title: 'Terrassekos, hele året',
     description:
@@ -45,11 +44,8 @@ export function SocialProof() {
   return (
     <section className='bg-overcast py-24 text-background'>
       <div className='container mx-auto px-4'>
-        <div className='mx-auto max-w-3xl text-center md:max-w-4xl'>
-          <h2 className='mb-4 inline-flex flex-nowrap items-baseline justify-center gap-x-[0.18em] whitespace-nowrap text-background'>
-            <UtekosWordmark className='h-[0.82em] w-auto shrink-0 translate-y-[0.06em]' />
-            <span>i sitt rette element</span>
-          </h2>
+        <div className='mx-auto max-w-2xl text-center md:max-w-4xl'>
+          <h2 className='mb-4 max-w-full text-balance text-background'>Utekos i sitt rette element</h2>
 
           <p className='mx-auto mb-12 utekos-section-lead max-w-2xl text-background'>
             Fra morgenkaffen på en duggfrisk trapp til sene kvelder rundt bålpannen. Se ekte øyeblikk fra

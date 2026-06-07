@@ -6,6 +6,8 @@ export type MetaEventType =
   | 'AddToCart'
   | 'InitiateCheckout'
   | 'Purchase'
+  | 'Search'
+  | 'CompleteRegistration'
   | 'HeroInteract'
   | 'InteractWithAccordion'
   | 'OpenQuickView'

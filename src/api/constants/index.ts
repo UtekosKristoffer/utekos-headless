@@ -42,10 +42,10 @@ export const PRODUCT_VARIANTS = {
     colors: [{ name: 'Havdyp', hex: 'var(--color-havdyp)' }],
     sizes: ['Liten', 'Middels', 'Stor', 'Ekstra stor'],
     images: [
-      '/kvinne-nyter-terrasselivet-med-utekos-techdown.webp',
-      '/utekos-techdown-diagonalt-fullfigur.webp',
-      '/1080/utekos-techdown-bakside.webp',
-      '/utekos-techdown-halvfigur-forfra-1600x1600.webpg'
+      'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/kvinne-nyter-terrasselivet-med-utekos-techdown.webp?v=1780689292',
+      'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/utekos-techdown-diagonalt-fullfigur.webp?v=1780689364',
+      'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/utekos-techdown-bakside.webp?v=1780686868',
+      'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/utekos-techdown-halvfigur-forfra-1600x1600.webp?v=1780686689'
     ]
   },
   'utekos-mikrofiber': {
@@ -78,10 +78,10 @@ export const PRODUCT_VARIANTS = {
     colors: [{ name: 'Fjellblå', hex: 'var(--color-ocean-cavern)' }],
     sizes: ['Medium', 'Large'],
     images: [
-      '/utekos-mikrofiber-helfigur-1600-1600.webp',
-      '/utekos-mikrofiber-parkas-1600-1600.webp',
-      '/utekos-mikrofiber-bakside-full-figur-1600-1600.webp',
-      '/utekos-mikrofiber-halvfigur-forside-1600-1600.webp'
+      'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/utekos-mikrofiber-helfigur-1600-1600.webp?v=1780689474',
+      'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/utekos-mikrofiber-parkas-1600-1600.webp?v=1780689587',
+      'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/utekos-mikrofiber-bakside-full-figur-1600-1600.webp?v=1780689662',
+      'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/utekos-mikrofiber-halvfigur-forside-1600-1600.webp?v=1780689720'
     ]
   }
 }

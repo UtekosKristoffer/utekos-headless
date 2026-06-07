@@ -3,10 +3,10 @@
 import { HytteSeasonsAnimator } from './HytteSeasonsAnimator'
 
 const seasons = [
-  { value: 'spring', label: 'Vår' },
-  { value: 'summer', label: 'Sommer' },
-  { value: 'autumn', label: 'Høst' },
-  { value: 'winter', label: 'Vinter' }
+  { value: 'spring', label: 'Vår', title: 'Kjenn våren komme', description: 'Påskesol og vårfølelse' },
+  { value: 'summer', label: 'Sommer', title: 'Lange, lyse kvelder', description: 'Senk skuldrene helt' },
+  { value: 'autumn', label: 'Høst', title: 'Kaldt og vakkert', description: 'Klar for hyttekos' },
+  { value: 'winter', label: 'Vinter', title: 'Vintervarme etter skituren', description: 'Få varme raskt' }
 ] as const
 
 export function HytteSeasonsTabs() {
@@ -19,13 +19,12 @@ export function HytteSeasonsTabs() {
               <div className='hytte-season-card flex aspect-video items-center justify-center overflow-hidden rounded-2xl px-6 text-center'>
                 {season.value === 'winter' && <span className='hytte-season-sheen' aria-hidden='true' />}
                 <div className='hytte-season-motion'>
-                  <h3 className='font-google-sans-grade [--gs-grad:100] text-balance text-3xl font-bold leading-[1.05] tracking-[-0.02em] text-foreground text-center xl:text-[3.6rem]'>
-                    Juster, form{' '}
-                    <span className='hytte-season-accent font-google-sans-grade [--gs-grad:100] text-darkberry'>
-                      nyt
-                    </span>
+                  <h3 className='font-google-sans-grade [--gs-grad:100] text-balance text-3xl font-bold leading-[1.05] tracking-[-0.02em] text-foreground text-center xl:text-[3.2rem]'>
+                    {season.title}
                     <br />
-                    Skapt for hyttelivet
+                    <span className='hytte-season-accent font-google-sans-grade [--gs-grad:100] text-darkberry'>
+                      {season.description}
+                    </span>
                   </h3>
                 </div>
               </div>

@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs'
 import type { LogPayload } from 'types/tracking/log/LogPayload'
 
 /**
@@ -14,9 +15,21 @@ import type { LogPayload } from 'types/tracking/log/LogPayload'
  *    are marked for SPA-transition diagnostics.
  *
  * Web Vitals are handled separately by `WebVitalsReporter`.
+ * Product analytics is initialized only by the consent-gated
+ * `ConditionalTracking` component.
  */
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production'
+const SENTRY_DSN = process.env.NEXT_PUBLIC_SENTRY_DSN
+
+Sentry.init({
+  dsn: SENTRY_DSN,
+  enabled: !!SENTRY_DSN,
+  environment: process.env.NODE_ENV,
+  sendDefaultPii: false,
+  enableLogs: true,
+  tracesSampleRate: IS_PRODUCTION ? 0.1 : 1
+})
 
 /** Hard cap so a faulty page can never flood the log endpoint. */
 const MAX_REPORTED_ERRORS = 10
@@ -93,6 +106,8 @@ try {
  * and Real User Monitoring, without emitting any runtime console noise.
  */
 export function onRouterTransitionStart(url: string, navigationType: 'push' | 'replace' | 'traverse') {
+  Sentry.captureRouterTransitionStart(url, navigationType)
+
   try {
     performance.mark(`nav-start:${navigationType}:${url}`)
   } catch {

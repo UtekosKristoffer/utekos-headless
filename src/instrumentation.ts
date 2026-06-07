@@ -1,4 +1,5 @@
 import { registerOTel } from '@vercel/otel'
+import * as Sentry from '@sentry/nextjs'
 import type { Instrumentation } from 'next'
 
 /**
@@ -7,9 +8,14 @@ import type { Instrumentation } from 'next'
  * runtime; the Edge runtime is left untouched since `@vercel/otel` targets
  * Node and edge instrumentation would otherwise be a no-op overhead.
  */
-export function register() {
+export async function register() {
   if (process.env.NEXT_RUNTIME === 'nodejs') {
+    await import('../sentry.server.config')
     registerOTel({ serviceName: 'utekos-headless' })
+  }
+
+  if (process.env.NEXT_RUNTIME === 'edge') {
+    await import('../sentry.edge.config')
   }
 }
 
@@ -24,6 +30,8 @@ export function register() {
  * can be correlated with the opaque digest shown to users in production.
  */
 export const onRequestError: Instrumentation.onRequestError = (error, request, context) => {
+  Sentry.captureRequestError(error, request, context)
+
   const err =
     error instanceof Error ?
       (error as Error & { digest?: string })

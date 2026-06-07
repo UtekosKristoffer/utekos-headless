@@ -8,6 +8,8 @@ export type ClientUserData = {
   phone?: string | undefined
   first_name?: string | undefined
   last_name?: string | undefined
+  date_of_birth?: string | undefined
+  gender?: string | undefined
   city?: string | undefined
   state?: string | undefined
   zip?: string | undefined

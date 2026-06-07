@@ -1,12 +1,10 @@
 // Path: src/lib/utils/logToAppLogs.ts
-import { redisPush } from '@/lib/redis/redisPush'
-import { redisTrim } from '@/lib/redis/redisList'
+import { writeAppLogToRedis } from '@/lib/observability/logging/writeAppLogToRedis'
 import crypto from 'crypto'
-
-type LogLevel = 'INFO' | 'WARN' | 'ERROR' | 'DEBUG'
+import type { AppLogLevel } from 'types/tracking/log/AppLogEntry'
 
 export async function logToAppLogs(
-  level: LogLevel,
+  level: AppLogLevel,
   event: string,
   data?: Record<string, unknown>,
   context?: Record<string, unknown>
@@ -29,10 +27,7 @@ export async function logToAppLogs(
     console.log(JSON.stringify(logEntry))
   }
 
-  try {
-    await redisPush('app_logs', logEntry)
-    await redisTrim('app_logs', 0, 999)
-  } catch (err) {
-    console.error('Failed to push log to Redis:', err)
-  }
+  void writeAppLogToRedis(logEntry).catch(error => {
+    console.error('Failed to push log to Redis:', error)
+  })
 }

@@ -22,17 +22,6 @@ export function dispatchAddToCartPixels({
 
   if (typeof window === 'undefined') return
 
-  if (window.snaptr) {
-    window.snaptr('track', 'ADD_CART', {
-      item_ids: contentIds,
-      price: value,
-      currency: currency,
-      number_items: totalQty,
-      description: contentName,
-      item_category: product.productType || 'Apparel'
-    })
-  }
-
   if (window.dataLayer) {
     const ga4Items = [
       {
@@ -86,49 +75,5 @@ export function dispatchAddToCartPixels({
       },
       { eventID }
     )
-  }
-
-  if (window.ttq) {
-    window.ttq.track(
-      'AddToCart',
-      {
-        content_type: 'product',
-        content_id: mainVariantId,
-        content_name: contentName,
-        value,
-        currency,
-        quantity: totalQty
-      },
-      { event_id: eventID }
-    )
-  }
-
-  if (window.pintrk) {
-    const pinItems = [
-      {
-        product_name: product.title,
-        product_id: mainVariantId,
-        product_category: product.productType || 'Apparel',
-        product_price: eventData.contents[0]?.item_price ?? 0,
-        product_quantity: eventData.contents[0]?.quantity
-      }
-    ]
-
-    if (contents.length > 1 && contents[1]) {
-      pinItems.push({
-        product_name: 'Utekos Buff™',
-        product_id: contents[1]?.id,
-        product_category: 'Apparel',
-        product_price: 0,
-        product_quantity: contents[1]?.quantity
-      })
-    }
-
-    window.pintrk('track', 'AddToCart', {
-      value,
-      order_quantity: totalQty,
-      currency,
-      line_items: pinItems
-    })
   }
 }

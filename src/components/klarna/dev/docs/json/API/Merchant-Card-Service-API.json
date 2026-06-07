@@ -1,0 +1,648 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Merchant Card Service API",
+    "description": "The Merchant Card Service (MCS) API is used to settle orders with virtual credit cards.\n\nRead more on [Merchant card service](https://docs.klarna.com/merchant-card-service/).",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/merchantcard/v3/promises": {
+      "post": {
+        "summary": "Create a card promise",
+        "description": "To create a card promise, provide a purchase currency and the cards to be created. The old promise is automatically invalidated if a new promise is created for an order.",
+        "operationId": "createPromise",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/promise_request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/promise_created_response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "503": {
+            "description": "Service unavailable"
+          }
+        }
+      }
+    },
+    "/merchantcard/v3/promises/{promise_id}": {
+      "get": {
+        "summary": "Get details of a card promise",
+        "description": "To get the promise resource, simply provide a promise identifier.",
+        "operationId": "readPromise",
+        "parameters": [
+          {
+            "name": "promise_id",
+            "in": "path",
+            "required": true,
+            "example": "ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/promise_response"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/merchantcard/v3/settlements": {
+      "post": {
+        "summary": "Create a card settlement",
+        "description": "To create a settlement resource, provide a completed order identifier and (optionally) a promise identifier.",
+        "operationId": "settlePromise",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/settlement_request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/settlement_response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "503": {
+            "description": "Service unavailable"
+          }
+        }
+      }
+    },
+    "/merchantcard/v3/settlements/{settlement_id}": {
+      "get": {
+        "summary": "Get details of card  settlement",
+        "description": "To get the settlement resource, provide the settlement identifier.",
+        "operationId": "readSettlement",
+        "parameters": [
+          {
+            "name": "settlement_id",
+            "in": "path",
+            "description": "Unique settlement identifier.",
+            "required": true,
+            "example": "b0ec0bbd-534c-4b1c-b28a-628bf33c3324",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "KeyId",
+            "in": "header",
+            "description": "Unique identifier for the public key used for encryption of the card data.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/settlement_response"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/merchantcard/v3/settlements/order/{order_id}": {
+      "get": {
+        "summary": "Get card settlement details for an order",
+        "description": "To get the order's settlement resource, provide the order identifier.",
+        "operationId": "readSettlementByOrderId",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "description": "Unique identifier for the order associated to the settlement.",
+            "required": true,
+            "example": "f3392f8b-6116-4073-ab96-e330819e2c07",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "KeyId",
+            "in": "header",
+            "description": "Unique identifier for the public key used for encryption of the card data.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/settlement_response"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/merchantcard/v3/orders/{order_id}/cancel-request": {
+      "post": {
+        "summary": "Request order cancellation",
+        "description": "Request cancellation for an order. If the order is already cancelled, a `200` status is returned.\n\nOtherwise, the order will be queued for cancellation with a `202` status. Actual order cancellation will happen asynchronously at a later time. You can call the corresponding GET endpoint to view the status of the request.\n\nThis cancellation endpoint is limited to the scope of the Virtual Credit Cards product. Therefore the order provided must have an associated Virtual Card Settlement, otherwise the call will fail.",
+        "operationId": "postcancelorder",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "description": "Order id you wish to cancel. This order must have an associated Virtual Credit Card Settlement.",
+            "required": true,
+            "example": "f3392f8b-6116-4073-ab96-e330819e2c07",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order is already cancelled.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cancel_order_request_status_cancelled"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Order was successfully queued for cancellation.\n\nThe `check_after` field indicates when you should expect a decision to be made regarding cancellation. You can call the corresponding GET endpoint after this timestamp to see the resulting status.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cancel_order_request_status_pending"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "You do not have permission to execute this operation."
+          },
+          "404": {
+            "description": "Order does not exist or does not have an associated Virtual Credit Card Settlement."
+          },
+          "503": {
+            "description": "Service unavailable"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get order cancellation status",
+        "description": "Get the status of an order cancellation request. The order must have an associated Virtual Credit Card Settlement.",
+        "operationId": "getcancelorder",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "description": "Order id for which to view its cancellation status. This order must have an associated Virtual Credit Card Settlement.",
+            "required": true,
+            "example": "f3392f8b-6116-4073-ab96-e330819e2c07",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the status of the cancellation request for this order.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cancel_order_request_status"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request, or the order was not previously requested for cancellation by calling the POST endpoint.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cancel_order_request_status_no_request_found"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "You do not have permission to execute this operation."
+          },
+          "404": {
+            "description": "Order does not exist or does not have an associated Virtual Credit Card Settlement."
+          },
+          "503": {
+            "description": "Service unavailable"
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.klarna.com"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "card_specification": {
+        "type": "object",
+        "required": [
+          "amount",
+          "currency",
+          "reference"
+        ],
+        "properties": {
+          "amount": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10000,
+            "description": "The total purchase amount on a card",
+            "minimum": 1
+          },
+          "currency": {
+            "type": "string",
+            "example": "USD",
+            "description": "The amount currency"
+          },
+          "fund_amount": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10000,
+            "description": "The funded amount that will be on a card"
+          },
+          "reference": {
+            "type": "string",
+            "example": "yPGw6i4lR0GTcyxGpS3Q6Q==",
+            "description": "Your reference on the card",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        }
+      },
+      "promise_response": {
+        "type": "object",
+        "properties": {
+          "promise_id": {
+            "type": "string",
+            "example": "ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c",
+            "description": "The unique promise ID",
+            "readOnly": true
+          },
+          "order_id": {
+            "type": "string",
+            "example": "f3392f8b-6116-4073-ab96-e330819e2c07",
+            "description": "The order id of the promise",
+            "readOnly": true
+          },
+          "cards": {
+            "type": "array",
+            "description": "The list of card specifications ",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/card_specification"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2018-12-03T10:26:06.000Z",
+            "description": "The time when the promise was created",
+            "readOnly": true
+          },
+          "expire_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2018-12-04T10:26:06.000Z",
+            "description": "The time when the promise expires",
+            "readOnly": true
+          }
+        }
+      },
+      "promise_created_response": {
+        "type": "object",
+        "properties": {
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "promise_id": {
+            "type": "string",
+            "example": "ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c",
+            "description": "The unique promise id",
+            "readOnly": true
+          }
+        }
+      },
+      "promise_request": {
+        "type": "object",
+        "required": [
+          "cards",
+          "order_id"
+        ],
+        "properties": {
+          "order_id": {
+            "type": "string",
+            "example": "f3392f8b-6116-4073-ab96-e330819e2c07",
+            "description": "A valid order id"
+          },
+          "cards": {
+            "type": "array",
+            "description": "The cards you would like to issue (max 1000)",
+            "items": {
+              "$ref": "#/components/schemas/card_specification"
+            },
+            "maxItems": 1000,
+            "minItems": 1
+          }
+        }
+      },
+      "card": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string",
+            "example": "yPGw6i4lR0GTcyxGpS3Q6Q==",
+            "description": "Identifier to reference order line."
+          },
+          "card_id": {
+            "type": "string",
+            "example": "b846430c-3656-43a1-812e-2ccff4531b7d",
+            "description": "Unique card identifier."
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10000,
+            "description": "The total amount available on the card. In minor units. The number of decimals are controlled by the currency."
+          },
+          "currency": {
+            "type": "string",
+            "example": "USD",
+            "description": "The ISO 4217 code states which currency it is and how many decimals the amount has."
+          },
+          "pci_data": {
+            "type": "string",
+            "description": "Encrypted, PCI compliant card data."
+          },
+          "iv": {
+            "type": "string",
+            "description": "Initialization vector for symmetric decryption with the AES key."
+          },
+          "aes_key": {
+            "type": "string",
+            "description": "The symmetric key complying the Advanced Encryption Standard."
+          },
+          "brand": {
+            "type": "string",
+            "example": "VISA",
+            "description": "The brand of the card."
+          },
+          "holder": {
+            "type": "string",
+            "example": "Jane Doe",
+            "description": "Card holder name on the card."
+          }
+        }
+      },
+      "settlement_response": {
+        "type": "object",
+        "properties": {
+          "settlement_id": {
+            "type": "string",
+            "example": "b0ec0bbd-534c-4b1c-b28a-628bf33c3324",
+            "description": "Unique settlement identifier."
+          },
+          "promise_id": {
+            "type": "string",
+            "example": "ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c",
+            "description": "Unique identifier for the promise associated to the settlement."
+          },
+          "order_id": {
+            "type": "string",
+            "example": "f3392f8b-6116-4073-ab96-e330819e2c07",
+            "description": "Unique identifier for the order associated to the settlement."
+          },
+          "cards": {
+            "type": "array",
+            "description": "An array of Card objects.",
+            "items": {
+              "$ref": "#/components/schemas/card"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2018-12-03T10:26:06.000Z",
+            "description": "Settlement creation datetime (ISO 8601)."
+          },
+          "expires_at": {
+            "type": "string",
+            "example": "2018-12-04T10:26:06.000Z",
+            "description": "Settlement expiration datetime (ISO 8601)."
+          }
+        }
+      },
+      "settlement_request": {
+        "type": "object",
+        "required": [
+          "key_id",
+          "order_id"
+        ],
+        "properties": {
+          "promise_id": {
+            "type": "string",
+            "example": "ee4a8e3a-9dfd-49e0-9ac8-ea2b6c76408c",
+            "description": "Unique identifier for the promise associated to the settlement."
+          },
+          "order_id": {
+            "type": "string",
+            "example": "f3392f8b-6116-4073-ab96-e330819e2c07",
+            "description": "Unique identifier for the order associated to the settlement."
+          },
+          "key_id": {
+            "type": "string",
+            "example": "16e4b85e-899b-4427-a39f-07a496e9515b",
+            "description": "Unique identifier for the public key to be used for encryption of the card data."
+          }
+        }
+      },
+      "cancel_order_request_status": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "PENDING",
+            "enum": [
+              "PENDING",
+              "CANCELLED",
+              "REJECTED"
+            ],
+            "description": "The status of the order cancellation request."
+          },
+          "check_after": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2018-12-04T10:26:06.000Z",
+            "description": "Timestamp for when we expect a decision to be made on order cancellation. (ISO 8601)\n\nThis field is only populated if status is `PENDING`."
+          },
+          "reason_code": {
+            "type": "string",
+            "example": "CARD_IN_USE",
+            "enum": [
+              "CARD_IN_USE",
+              "OTHER"
+            ],
+            "description": "Reason code for why the order cancellation was rejected.\n\nThis field is only populated if status is `REJECTED`."
+          },
+          "reason_message": {
+            "type": "string",
+            "example": "Cancellation request was rejected because the virtual credit card linked to this order is in use.",
+            "description": "Human-readable message for why the order cancellation was rejected.\n\nThis field is only populated if status is `REJECTED`."
+          }
+        }
+      },
+      "cancel_order_request_status_pending": {
+        "type": "object",
+        "required": [
+          "status",
+          "check_after"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "PENDING",
+            "enum": [
+              "PENDING"
+            ],
+            "description": "The status of the order cancellation request."
+          },
+          "check_after": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2018-12-04T10:26:06.000Z",
+            "description": "Timestamp for when we expect a decision to be made on order cancellation. (ISO 8601)"
+          }
+        }
+      },
+      "cancel_order_request_status_cancelled": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "CANCELLED",
+            "enum": [
+              "CANCELLED"
+            ],
+            "description": "The status of the order cancellation request."
+          }
+        }
+      },
+      "cancel_order_request_status_no_request_found": {
+        "type": "object",
+        "required": [
+          "status",
+          "reason_code",
+          "reason_message"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "NO_REQUEST_FOUND",
+            "enum": [
+              "NO_REQUEST_FOUND"
+            ],
+            "description": "The status of the order cancellation request."
+          },
+          "reason_code": {
+            "type": "string",
+            "example": "NO_REQUEST_FOUND",
+            "enum": [
+              "NO_REQUEST_FOUND"
+            ],
+            "description": "Reason code for the bad request."
+          },
+          "reason_message": {
+            "type": "string",
+            "example": "No cancellation request found for this order.",
+            "description": "Human-readable message for the bad request."
+          }
+        }
+      }
+    }
+  }
+}

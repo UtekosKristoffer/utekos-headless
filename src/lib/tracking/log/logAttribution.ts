@@ -1,13 +1,9 @@
 import { getCookie } from '@/components/analytics/Meta/getCookie'
 export function logAttribution(productName: string, price: number) {
   try {
-    const snapId = getCookie('ute_sc_cid')
     const metaId = getCookie('_fbc')
-    const pinID = getCookie('_epik')
     const sources = []
-    if (snapId) sources.push('Snapchat 👻')
     if (metaId) sources.push('Meta 💙')
-    if (pinID) sources.push('Pinterest 📌')
 
     if (sources.length > 0) {
       const sourceLabel = sources.join(' + ')
@@ -21,9 +17,7 @@ export function logAttribution(productName: string, price: number) {
             source: sourceLabel,
             product: productName,
             value: price,
-            snapId: snapId || undefined,
-            metaId: metaId || undefined,
-            pinID: pinID || undefined
+            hasMetaId: !!metaId
           }
         })
       })

@@ -6,13 +6,13 @@ export function SeasonsSection() {
     <section className='relative isolate overflow-hidden bg-havdyp py-24 text-foreground'>
       <div className='absolute inset-0 -z-10 opacity-20'>
         <div
-          className='bobil-seasons-glow-pulse absolute left-1/4 top-1/4 size-[500px] blur-3xl'
+          className='bobil-seasons-glow-pulse absolute left-0 top-1/4 h-[500px] w-full max-w-[500px] blur-3xl md:left-1/4'
           style={{
             background: 'radial-gradient(circle, var(--mountain-view) 0%, transparent 70%)'
           }}
         />
         <div
-          className='bobil-seasons-glow-pulse absolute right-1/4 bottom-1/4 size-[500px] blur-3xl'
+          className='bobil-seasons-glow-pulse absolute right-0 bottom-1/4 h-[500px] w-full max-w-[500px] blur-3xl md:right-1/4'
           style={{
             background: 'radial-gradient(circle, var(--demitasse) 0%, transparent 70%)',
             animationDelay: '4s'

@@ -1,0 +1,2376 @@
+{
+  "components": {
+    "schemas": {
+      "Addon": {
+        "description": "Array consisting of add-ons selected by the consumer, may be empty",
+        "properties": {
+          "external_id": {
+            "description": "The ID provided by the TMS",
+            "type": "string"
+          },
+          "price": {
+            "description": "The price of the add-on",
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "type": {
+            "description": "The type of the add-on, e.g. sms or entry-code",
+            "type": "string"
+          },
+          "user_input": {
+            "description": "The text provided by the user",
+            "type": "string"
+          }
+        },
+        "required": [
+          "price",
+          "type"
+        ],
+        "type": "object"
+      },
+      "AddressLocation": {
+        "description": "The address of the location",
+        "properties": {
+          "city": {
+            "description": "City",
+            "type": "string"
+          },
+          "country": {
+            "description": "Country",
+            "type": "string"
+          },
+          "postal_code": {
+            "description": "Postal code. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html).",
+            "type": "string"
+          },
+          "region": {
+            "description": "Region",
+            "type": "string"
+          },
+          "street_address": {
+            "description": "The street address. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html)",
+            "type": "string"
+          },
+          "street_address__2": {
+            "description": "Additional street address",
+            "type": "string"
+          }
+        },
+        "required": [
+          "country",
+          "street_address"
+        ],
+        "type": "object"
+      },
+      "CancelNotAllowedErrorMessage": {
+        "properties": {
+          "correlation_id": {
+            "description": "Correlation id. For searching logs.",
+            "example": "66782175-ae05-44fc-9eb3-eeceadbad271",
+            "type": "string"
+          },
+          "error_code": {
+            "description": "Error code",
+            "example": "CANCEL_NOT_ALLOWED",
+            "type": "string"
+          },
+          "error_messages": {
+            "description": "Error messages",
+            "items": {
+              "description": "Error messages",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Capture": {
+        "properties": {
+          "billing_address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "capture_id": {
+            "description": "The capture id. Generated when the capture is created.",
+            "example": "4ba29b50-be7b-44f5-a492-113e6a865e22",
+            "type": "string"
+          },
+          "captured_amount": {
+            "description": "The captured amount in minor units.",
+            "format": "int64",
+            "minimum": 1,
+            "type": "integer"
+          },
+          "captured_at": {
+            "description": "The time of the capture. Specified in ISO 8601.",
+            "example": "2015-11-19T01:51:17Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the capture shown to the customer.",
+            "example": "Order has been shipped",
+            "type": "string"
+          },
+          "klarna_reference": {
+            "description": "Customer friendly reference id, used as a reference when communicating with the customer.",
+            "example": "K4MADNY-1",
+            "type": "string"
+          },
+          "order_lines": {
+            "description": "List of order lines for the capture shown to the customer.",
+            "items": {
+              "$ref": "#/components/schemas/order_line"
+            },
+            "type": "array"
+          },
+          "reference": {
+            "description": "Internal reference to the capture which will be included in the settlement files. Max length is 255 characters.",
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "refunded_amount": {
+            "description": "Refunded amount for this capture in minor units.",
+            "example": 0,
+            "format": "int64",
+            "type": "integer"
+          },
+          "shipping_address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "shipping_info": {
+            "description": "Shipping information for this capture.",
+            "items": {
+              "$ref": "#/components/schemas/shipping_info"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "CaptureNotAllowedErrorMessage": {
+        "properties": {
+          "correlation_id": {
+            "description": "Correlation id. For searching logs.",
+            "example": "66782175-ae05-44fc-9eb3-eeceadbad271",
+            "type": "string"
+          },
+          "error_code": {
+            "description": "Error code",
+            "example": "CAPTURE_NOT_ALLOWED",
+            "type": "string"
+          },
+          "error_messages": {
+            "description": "Error messages",
+            "items": {
+              "description": "Error messages",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "CaptureObject": {
+        "description": "Capture request data",
+        "properties": {
+          "captured_amount": {
+            "description": "The captured amount in minor units.",
+            "format": "int64",
+            "maximum": 200000000,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "description": {
+            "description": "Description of the capture shown to the customer. Maximum 255 characters.",
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "order_lines": {
+            "description": "Order lines for this capture. Maximum 1000 items.",
+            "items": {
+              "$ref": "#/components/schemas/order_line"
+            },
+            "maxItems": 1000,
+            "minItems": 0,
+            "type": "array"
+          },
+          "reference": {
+            "description": "Internal reference to the capture. This will be included in the settlement files. Max length is 255 characters.",
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "shipping_delay": {
+            "description": "Delay before the order will be shipped. Use for improving the customer experience regarding payments. This field is currently not returned when reading the order. Minimum: 0. Please note: to be able to submit values larger than 0, this has to be enabled in your merchant account. Please contact Klarna for further information.",
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "shipping_info": {
+            "description": "Shipping information for this capture. Maximum 500 items.",
+            "items": {
+              "$ref": "#/components/schemas/shipping_info"
+            },
+            "maxItems": 500,
+            "minItems": 0,
+            "type": "array"
+          }
+        },
+        "required": [
+          "captured_amount"
+        ],
+        "type": "object"
+      },
+      "CarrierProduct": {
+        "description": "The chosen timeslot of the selected shipping option",
+        "properties": {
+          "identifier": {
+            "description": "Id of carrier product",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of carrier product",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ErrorMessageDto": {
+        "properties": {
+          "correlation_id": {
+            "type": "string"
+          },
+          "error_code": {
+            "type": "string"
+          },
+          "error_messages": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ExtendDueDateOptions": {
+        "properties": {
+          "currency": {
+            "description": "The currency for the fees. Specified in ISO 4217 format.",
+            "example": "usd",
+            "type": "string"
+          },
+          "options": {
+            "description": "The available options and corresponding fees for extending the due date",
+            "items": {
+              "$ref": "#/components/schemas/OptionDto"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ExtendDueDateRequest": {
+        "properties": {
+          "number_of_days": {
+            "description": "Number of days to extend the due date.",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "number_of_days"
+        ],
+        "type": "object"
+      },
+      "InitialPaymentMethodDto": {
+        "description": "Initial payment method for this order",
+        "properties": {
+          "description": {
+            "description": "The description of the initial payment method.",
+            "example": "Slice it (Fixed Payments)",
+            "type": "string"
+          },
+          "number_of_installments": {
+            "description": "The number of installments (if applicable).",
+            "example": 3,
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": {
+            "description": "The type of the initial payment method. One of ACCOUNT, ALTERNATIVE_PAYMENT_METHOD, BANK_TRANSFER, CARD, DEFERRED_INTEREST, DIRECT_DEBIT, FIXED_AMOUNT_BY_CARD, FIXED_AMOUNT, FIXED_SUM_CREDIT, INVOICE_BUSINESS, INVOICE, MOBILEPAY, PAY_BY_CARD, PAY_IN_X, PAY_LATER_BY_CARD, PAY_LATER_IN_PARTS, SWISH, OTHER",
+            "example": "FIXED_AMOUNT",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Location": {
+        "description": "The location of the selected shipping option",
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/AddressLocation"
+          },
+          "id": {
+            "description": "The location id",
+            "type": "string"
+          },
+          "name": {
+            "description": "The display name of the location",
+            "type": "string"
+          },
+          "price": {
+            "description": "The price for this location",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "MerchantOrderDto": {
+        "description": "Order",
+        "properties": {
+          "billing_address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "captured_amount": {
+            "description": "The total amount of all captures. In minor units.",
+            "example": 0,
+            "format": "int64",
+            "type": "integer"
+          },
+          "captures": {
+            "description": "List of captures for this order.",
+            "items": {
+              "$ref": "#/components/schemas/Capture"
+            },
+            "type": "array"
+          },
+          "created_at": {
+            "description": "The time for the purchase. Formatted according to ISO 8601.",
+            "example": "2015-11-29T10:25:40Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/customer"
+          },
+          "expires_at": {
+            "description": "Order expiration time. The order can only be captured until this time. Formatted according to ISO 8601.",
+            "example": "2015-12-04T10:26:06Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "fraud_status": {
+            "description": "Fraud status for the order. Either ACCEPTED, PENDING or REJECTED.",
+            "example": "ACCEPTED",
+            "type": "string"
+          },
+          "initial_payment_method": {
+            "$ref": "#/components/schemas/InitialPaymentMethodDto"
+          },
+          "klarna_reference": {
+            "description": "A Klarna generated reference that is shorter than the Klarna Order Id and is used as a customer friendly reference. It is most often used as a reference when Klarna is communicating with the customer with regard to payment statuses.",
+            "example": "K4MADNY",
+            "type": "string"
+          },
+          "locale": {
+            "description": "The customers locale. Specified according to RFC 1766.",
+            "example": "en-US",
+            "type": "string"
+          },
+          "merchant_data": {
+            "description": "Text field for storing data about the order. Set at order creation.",
+            "example": "Order metadata",
+            "type": "string"
+          },
+          "merchant_reference1": {
+            "description": "The order number that the merchant should assign to the order. This is how a customer would reference the purchase they made. If supplied, it is labeled as the Order Number within post purchase communications as well as the Klarna App.",
+            "example": "10001",
+            "type": "string"
+          },
+          "merchant_reference2": {
+            "description": "Can be used to store your internal reference to the order. This is generally an internal reference number that merchants use as alternate identifier that matches their internal ERP or Order Management system.",
+            "example": "501",
+            "type": "string"
+          },
+          "order_amount": {
+            "description": "The order amount in minor units. That is the smallest currency unit available such as cent or penny.",
+            "format": "int64",
+            "type": "integer"
+          },
+          "order_id": {
+            "description": "The unique order ID. Cannot be longer than 255 characters.",
+            "example": "f3392f8b-6116-4073-ab96-e330819e2c07",
+            "type": "string"
+          },
+          "order_lines": {
+            "description": "An array of order_line objects. Each line represents one item in the cart.",
+            "items": {
+              "$ref": "#/components/schemas/order_line"
+            },
+            "type": "array"
+          },
+          "original_order_amount": {
+            "description": "The original order amount. In minor units.",
+            "format": "int64",
+            "type": "integer"
+          },
+          "purchase_country": {
+            "description": "The purchase country. Formatted according to ISO 3166-1 alpha-2.",
+            "example": "US",
+            "type": "string"
+          },
+          "purchase_currency": {
+            "description": "The currency for this order. Specified in ISO 4217 format.",
+            "example": "USD",
+            "type": "string"
+          },
+          "refunded_amount": {
+            "description": "The total amount of refunded for this order. In minor units.",
+            "example": 0,
+            "format": "int64",
+            "type": "integer"
+          },
+          "refunds": {
+            "description": "List of refunds for this order.",
+            "items": {
+              "$ref": "#/components/schemas/Refund"
+            },
+            "type": "array"
+          },
+          "remaining_authorized_amount": {
+            "description": "The remaining authorized amount for this order. To increase the `remaining_authorized_amount` the `order_amount` needs to be increased.",
+            "example": 0,
+            "format": "int64",
+            "type": "integer"
+          },
+          "selected_shipping_option": {
+            "$ref": "#/components/schemas/SelectedShippingOptionDto"
+          },
+          "shipping_address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "shipping_info": {
+            "description": "Shipping information for this order.",
+            "items": {
+              "$ref": "#/components/schemas/shipping_info"
+            },
+            "type": "array"
+          },
+          "status": {
+            "description": "The order status.",
+            "enum": [
+              "AUTHORIZED",
+              "PART_CAPTURED",
+              "CAPTURED",
+              "CANCELLED",
+              "EXPIRED",
+              "CLOSED"
+            ],
+            "example": "AUTHORIZED",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "NoSuchCaptureErrorMessage": {
+        "properties": {
+          "correlation_id": {
+            "description": "Correlation id. For searching logs.",
+            "example": "66782175-ae05-44fc-9eb3-eeceadbad271",
+            "type": "string"
+          },
+          "error_code": {
+            "description": "Error code",
+            "example": "NO_SUCH_CAPTURE",
+            "type": "string"
+          },
+          "error_messages": {
+            "description": "Error messages",
+            "items": {
+              "description": "Error messages",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "NoSuchOrderErrorMessage": {
+        "properties": {
+          "correlation_id": {
+            "description": "Correlation id. For searching logs.",
+            "example": "66782175-ae05-44fc-9eb3-eeceadbad271",
+            "type": "string"
+          },
+          "error_code": {
+            "description": "Error code",
+            "example": "NO_SUCH_ORDER",
+            "type": "string"
+          },
+          "error_messages": {
+            "description": "Error messages",
+            "items": {
+              "description": "Error messages",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "NotAllowedErrorMessage": {
+        "properties": {
+          "correlation_id": {
+            "description": "Correlation id. For searching logs.",
+            "example": "66782175-ae05-44fc-9eb3-eeceadbad271",
+            "type": "string"
+          },
+          "error_code": {
+            "description": "Error code",
+            "example": "NOT_ALLOWED",
+            "type": "string"
+          },
+          "error_messages": {
+            "description": "Error messages",
+            "items": {
+              "description": "Error messages",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "NotFoundErrorMessage": {
+        "properties": {
+          "correlation_id": {
+            "description": "Correlation id. For searching logs.",
+            "example": "66782175-ae05-44fc-9eb3-eeceadbad271",
+            "type": "string"
+          },
+          "error_code": {
+            "description": "Error code",
+            "example": "NOT_FOUND",
+            "type": "string"
+          },
+          "error_messages": {
+            "description": "Error messages",
+            "items": {
+              "description": "Error messages",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "OptionDto": {
+        "description": "The available options and corresponding fees for extending the due date",
+        "properties": {
+          "amount": {
+            "description": "The fee for extending the due date this many days. In minor units.",
+            "format": "int64",
+            "type": "integer"
+          },
+          "number_of_days": {
+            "description": "How many days to extend the due date with",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ProductIdentifiers": {
+        "description": "product_identifiers",
+        "properties": {
+          "brand": {
+            "description": "The product's brand name as generally recognized by consumers. If no brand is available for a product, do not supply any value. Maximum 70 characters. Example: Intel",
+            "example": "Intel",
+            "maxLength": 70,
+            "minLength": 0,
+            "type": "string"
+          },
+          "category_path": {
+            "description": "The product's category path as used in the merchant's webshop. Include the full and most detailed category and separate the segments with ' > '. Maximum 750 characters. Example: Electronics Store > Computers & Tablets > Desktops",
+            "example": "Electronics Store > Computers & Tablets > Desktops",
+            "maxLength": 750,
+            "minLength": 0,
+            "type": "string"
+          },
+          "color": {
+            "description": "Color to be shown to the end customer (max 64 characters). Example: Denim blue",
+            "example": "Denim blue",
+            "maxLength": 64,
+            "minLength": 0,
+            "type": "string"
+          },
+          "global_trade_item_number": {
+            "description": "The product's Global Trade Item Number (GTIN). Common types of GTIN are EAN, ISBN or UPC. Exclude dashes and spaces, where possible. Maximum 50 characters. Example: 735858293167",
+            "example": "735858293167",
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "manufacturer_part_number": {
+            "description": "The product's Manufacturer Part Number (MPN), which - together with the brand - uniquely identifies a product. Only submit MPNs assigned by a manufacturer and use the most specific MPN possible. Maximum 70 characters. Example: BOXNUC5CPYH",
+            "example": "BOXNUC5CPYH",
+            "maxLength": 70,
+            "minLength": 0,
+            "type": "string"
+          },
+          "size": {
+            "description": "Size to be shown to the end customer (max 64 characters). Example: 4",
+            "example": "4",
+            "maxLength": 64,
+            "minLength": 0,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Refund": {
+        "properties": {
+          "credit_invoice": {
+            "description": "Only relevant for B2B Orders. If the flag is set to true for an order with B2B_invoice as payment method, the customer will receive the refund as a credit invoice.",
+            "type": "boolean"
+          },
+          "description": {
+            "description": "Description of the refund shown to the customer. Max length is 255 characters.",
+            "example": "The item was returned and the order refunded.",
+            "type": "string"
+          },
+          "order_lines": {
+            "description": "Order lines for the refund shown to the customer. Optional but increases the customer experience. Maximum 1000 order lines.",
+            "items": {
+              "$ref": "#/components/schemas/order_line"
+            },
+            "type": "array"
+          },
+          "reference": {
+            "description": "Internal reference to the refund that is also included in the settlement files. Max length is 255 characters.",
+            "type": "string"
+          },
+          "refund_id": {
+            "description": "The refund id. Generated when the refund is created.",
+            "example": "b2cb4f2e-2781-4359-80ad-555735ebb8d8",
+            "type": "string"
+          },
+          "refunded_amount": {
+            "description": "Refunded amount in minor units.",
+            "format": "int64",
+            "type": "integer"
+          },
+          "refunded_at": {
+            "description": "The time of the refund. ISO 8601.",
+            "example": "2015-12-04T15:17:40Z",
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "RefundNotAllowedErrorMessage": {
+        "properties": {
+          "correlation_id": {
+            "description": "Correlation id. For searching logs.",
+            "example": "66782175-ae05-44fc-9eb3-eeceadbad271",
+            "type": "string"
+          },
+          "error_code": {
+            "description": "Error code",
+            "example": "REFUND_NOT_ALLOWED",
+            "type": "string"
+          },
+          "error_messages": {
+            "description": "Error messages",
+            "items": {
+              "description": "Error messages",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "RefundObject": {
+        "properties": {
+          "description": {
+            "description": "Description of the refund shown to the customer. Max length is 255 characters.",
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "order_lines": {
+            "description": "Order lines for the refund shown to the customer. Optional but increases the customer experience. Maximum 1000 order lines.",
+            "items": {
+              "$ref": "#/components/schemas/order_line"
+            },
+            "maxItems": 1000,
+            "minItems": 0,
+            "type": "array"
+          },
+          "reference": {
+            "description": "Internal reference to the refund. This will be included in the settlement files. Max length is 255 characters.",
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "refunded_amount": {
+            "description": "Refunded amount in minor units.",
+            "format": "int64",
+            "maximum": 200000000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "refunded_amount"
+        ],
+        "type": "object"
+      },
+      "SelectedShippingOptionDto": {
+        "description": "The shipping option selected by the user.",
+        "properties": {
+          "carrier": {
+            "description": "The carrier for the selected shipping option",
+            "type": "string"
+          },
+          "carrier_product": {
+            "$ref": "#/components/schemas/CarrierProduct"
+          },
+          "class": {
+            "description": "The class of the selected shipping option",
+            "type": "string"
+          },
+          "id": {
+            "description": "The id of the selected shipping option as provided by the TMS",
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "method": {
+            "description": "The method of the selected shipping option",
+            "type": "string"
+          },
+          "name": {
+            "description": "The display name of the selected shipping option",
+            "type": "string"
+          },
+          "price": {
+            "description": "The price of the selected shipping option",
+            "example": 0,
+            "format": "int64",
+            "type": "integer"
+          },
+          "selected_addons": {
+            "description": "Array consisting of add-ons selected by the consumer, may be empty",
+            "items": {
+              "$ref": "#/components/schemas/Addon"
+            },
+            "type": "array"
+          },
+          "tax_amount": {
+            "description": "The tax amount of the selected shipping option",
+            "example": 0,
+            "format": "int64",
+            "type": "integer"
+          },
+          "tax_rate": {
+            "description": "The tax rate of the selected shipping option",
+            "example": 0,
+            "format": "int64",
+            "type": "integer"
+          },
+          "timeslot": {
+            "$ref": "#/components/schemas/Timeslot"
+          },
+          "tms_reference": {
+            "description": "The shipment_id provided by the TMS",
+            "type": "string"
+          },
+          "type": {
+            "description": "The type of the selected shipping option",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Timeslot": {
+        "description": "The chosen timeslot of the selected shipping option",
+        "properties": {
+          "cutoff": {
+            "description": "Cutoff time for delivery",
+            "type": "string"
+          },
+          "end": {
+            "description": "End of the timeslot",
+            "type": "string"
+          },
+          "id": {
+            "description": "The timeslot id",
+            "type": "string"
+          },
+          "price": {
+            "description": "Price",
+            "format": "int64",
+            "type": "integer"
+          },
+          "start": {
+            "description": "Start of the timeslot",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "UpdateAuthorization": {
+        "properties": {
+          "description": {
+            "description": "Description of the change.",
+            "example": "Added charger",
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "order_amount": {
+            "description": "The new total order amount. Minor units.",
+            "format": "int64",
+            "maximum": 200000000,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "order_lines": {
+            "description": "New set of order lines for the order.",
+            "items": {
+              "$ref": "#/components/schemas/order_line"
+            },
+            "maxItems": 1000,
+            "minItems": 0,
+            "type": "array"
+          }
+        },
+        "required": [
+          "order_amount"
+        ],
+        "type": "object"
+      },
+      "UpdateMerchantReferences": {
+        "properties": {
+          "merchant_reference1": {
+            "description": "New merchant reference 1. Old reference will be overwritten if this field is present.",
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "merchant_reference2": {
+            "description": "New merchant reference 2. Old reference will be overwritten if this field is present.",
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "UpdateConsumer": {
+        "properties": {
+          "shipping_address": {
+            "$ref": "#/components/schemas/Address"
+          }
+        },
+        "type": "object"
+      },
+      "UpdateShippingInfo": {
+        "properties": {
+          "shipping_info": {
+            "description": "New shipping info. Maximum: 500 items.",
+            "items": {
+              "$ref": "#/components/schemas/shipping_info"
+            },
+            "maxItems": 500,
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "shipping_info"
+        ],
+        "type": "object"
+      },
+      "Address": {
+        "description": "Shipping address for the capture.",
+        "properties": {
+          "attention": {
+            "description": "'Attn.' - optional parameter.",
+            "example": "John Smith",
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "city": {
+            "description": "City.",
+            "example": "New York",
+            "maxLength": 200,
+            "minLength": 0,
+            "type": "string"
+          },
+          "country": {
+            "description": "Country. ISO 3166 alpha-2.",
+            "example": "US",
+            "type": "string"
+          },
+          "email": {
+            "description": "E-mail address.",
+            "example": "test.sam@test.com",
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "family_name": {
+            "description": "Family name.",
+            "example": "Andersson",
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "given_name": {
+            "description": "Given name.",
+            "example": "Adam",
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "organization_name": {
+            "description": "Organization name (if applicable). Only applicable for B2B customers.",
+            "example": "Klarna",
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "phone": {
+            "description": "Phone number.",
+            "example": "1-555-555-5555",
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "postal_code": {
+            "description": "Postcode. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html).",
+            "example": "10024-3941",
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "region": {
+            "description": "State/Region. Required for US.",
+            "example": "US-NY",
+            "maxLength": 200,
+            "minLength": 0,
+            "type": "string"
+          },
+          "street_address": {
+            "description": "First line of street address. Validation according to [Universal Postal Union addressing system](https://www.upu.int/en/activities/addressing/postal-addressing-systems-in-member-countries.html)",
+            "example": "509 Amsterdam Ave",
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "street_address2": {
+            "description": "Second line of street address.",
+            "example": "Floor 22 / Flat 2",
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "title": {
+            "description": "Title.",
+            "example": "Mr.",
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "customer": {
+        "description": "Information about the customer placing the order.",
+        "properties": {
+          "date_of_birth": {
+            "description": "The customer date of birth. ISO 8601. ",
+            "example": "1981-09-06",
+            "format": "date",
+            "type": "string"
+          },
+          "national_identification_number": {
+            "description": "The customer national identification number",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "order_line": {
+        "description": "List of order lines for the capture shown to the customer.",
+        "properties": {
+          "image_url": {
+            "description": "URL to an image that can be embedded in communications between Klarna and the customer.",
+            "example": "https://yourstore.example/product/headphones.png",
+            "maxLength": 1024,
+            "minLength": 0,
+            "type": "string"
+          },
+          "merchant_data": {
+            "description": "Data about the order line.",
+            "example": "Some metadata",
+            "maxLength": 1024,
+            "minLength": 0,
+            "type": "string"
+          },
+          "name": {
+            "description": "Descriptive item name.",
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "product_identifiers": {
+            "$ref": "#/components/schemas/ProductIdentifiers"
+          },
+          "product_url": {
+            "description": "URL to the product that can be used in communications between Klarna and the customer.",
+            "example": "https://yourstore.example/product/headphones",
+            "maxLength": 1024,
+            "minLength": 0,
+            "type": "string"
+          },
+          "quantity": {
+            "description": "Item quantity.",
+            "example": 1,
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "quantity_unit": {
+            "description": "Unit used to describe the quantity.",
+            "example": "pcs.",
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "reference": {
+            "description": "Article number, SKU, or similar identifier on the product variant level.",
+            "example": "75001",
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "subscription": {
+            "$ref": "#/components/schemas/subscription"
+          },
+          "tax_rate": {
+            "description": "The tax rate in percent with two implicit decimals.",
+            "format": "int32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "total_amount": {
+            "description": "Total amount including tax and discounts (`quantity * unit_price - total_discount_amount`).",
+            "format": "int64",
+            "maximum": 200000000,
+            "type": "integer"
+          },
+          "total_discount_amount": {
+            "description": "The discount amount in minor units. Includes tax. Example: 1200 = $12. Max value: 200000000",
+            "example": 0,
+            "format": "int64",
+            "maximum": 200000000,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "total_tax_amount": {
+            "description": "The total tax amount in minor units.",
+            "format": "int64",
+            "maximum": 200000000,
+            "type": "integer"
+          },
+          "type": {
+            "description": "Order line type.",
+            "enum": [
+              "physical",
+              "discount",
+              "shipping_fee",
+              "sales_tax",
+              "store_credit",
+              "gift_card",
+              "digital",
+              "surcharge",
+              "return_fee"
+            ],
+            "example": "physical",
+            "pattern": "physical|discount|shipping_fee|sales_tax|store_credit|gift_card|digital|surcharge|return_fee",
+            "type": "string"
+          },
+          "unit_price": {
+            "description": "Unit price including tax without applying discounts in minor units.",
+            "format": "int64",
+            "maximum": 200000000,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "name",
+          "quantity",
+          "total_amount",
+          "unit_price"
+        ],
+        "type": "object"
+      },
+      "shipping_info": {
+        "description": "Shipping information for this capture.",
+        "properties": {
+          "return_shipping_company": {
+            "description": "Identifier of the shipping company for the return shipment. The value should be a valid SHIPPING_COMPANY from the [Carrier list](https://docs.klarna.com/payments/after-payments/order-management/more-actions/klarna-carrier-partner-list/).",
+            "example": "dhl-express",
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "return_tracking_number": {
+            "description": "Tracking number for the return shipment. Maximum 100 characters.",
+            "example": "93456415674545679888",
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "return_tracking_uri": {
+            "description": "URL where the customer can track the return shipment. Maximum 1024 characters.",
+            "example": "http://shipping.example/findmypackage?93456415674545679888",
+            "maxLength": 1024,
+            "minLength": 0,
+            "type": "string"
+          },
+          "shipping_company": {
+            "description": "Identifier of the shipping company. The value should be a valid SHIPPING_COMPANY from the [Carrier list](https://docs.klarna.com/payments/after-payments/order-management/more-actions/klarna-carrier-partner-list/).",
+            "example": "dhl-express",
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "shipping_method": {
+            "description": "Shipping method. Allowed values matches (PickUpStore|Home|BoxReg|BoxUnreg|PickUpPoint|Own|Postal|DHLPackstation|Digital|Undefined|PickUpWarehouse|ClickCollect|PalletDelivery)",
+            "example": "Home",
+            "pattern": "(PickUpStore|Home|BoxReg|BoxUnreg|PickUpPoint|Own|Postal|DHLPackstation|Digital|Undefined|PickUpWarehouse|ClickCollect|PalletDelivery)",
+            "type": "string"
+          },
+          "tracking_number": {
+            "description": "Tracking number for the shipment. Maximum 100 characters.",
+            "example": "63456415674545679874",
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "tracking_uri": {
+            "description": "URI where the customer can track their shipment. Maximum 1024 characters.",
+            "example": "http://shipping.example/findmypackage?63456415674545679874",
+            "maxLength": 1024,
+            "minLength": 0,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "subscription": {
+        "description": "Subscription information, such as the cadence and product name of the subscription that an order line item belongs to.",
+        "properties": {
+          "interval": {
+            "description": "The cadence unit. Matches: DAY|WEEK|MONTH|YEAR",
+            "example": "MONTH",
+            "pattern": "DAY|WEEK|MONTH|YEAR",
+            "type": "string"
+          },
+          "interval_count": {
+            "description": "The number of intervals.",
+            "format": "int32",
+            "minimum": 1,
+            "type": "integer"
+          },
+          "name": {
+            "description": "The name of the subscription product. Maximum 255 characters.",
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          }
+        },
+        "required": [
+          "interval",
+          "interval_count",
+          "name"
+        ],
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "scheme": "basic",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "description": "The Order Management API is used for handling an order after the customer has completed the purchase. It is used for all actions you need to manage your orders. Examples being: updating, capturing, reading and refunding an order.\n\nRead more on the [Order management](https://docs.klarna.com/order-management/) process.",
+    "title": "Klarna Order Management API",
+    "version": "1.0"
+  },
+  "openapi": "3.0.1",
+  "paths": {
+    "/ordermanagement/v1/orders/{order_id}": {
+      "get": {
+        "description": "An order that has the given order id. Read more on [Retrieving order details](https://docs.klarna.com/order-management/pre-delivery/order-details/)",
+        "operationId": "getOrder",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Klarna-Integrator",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MerchantOrderDto"
+                }
+              }
+            },
+            "description": "Order found"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoSuchOrderErrorMessage"
+                }
+              }
+            },
+            "description": "Order not found"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Get order details",
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/ordermanagement/v1/orders/{order_id}/acknowledge": {
+      "post": {
+        "description": "Acknowledge order. Read more on [Acknowledging orders](https://docs.klarna.com/order-management/pre-delivery/acknowledge-kco-order/)",
+        "operationId": "acknowledgeOrder",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+            "in": "header",
+            "name": "Klarna-Idempotency-Key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Order was acknowledged."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAllowedErrorMessage"
+                }
+              }
+            },
+            "description": "Update not allowed."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoSuchOrderErrorMessage"
+                }
+              }
+            },
+            "description": "Order not found."
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Acknowledge a Kustom checkout order",
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/ordermanagement/v1/orders/{order_id}/authorization": {
+      "patch": {
+        "description": "Set new order amount and order lines. Read more on [Updating orders](https://docs.klarna.com/order-management/pre-delivery/update-order-amount/)",
+        "operationId": "updateAuthorization",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+            "in": "header",
+            "name": "Klarna-Idempotency-Key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAuthorization"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Authorization was updated."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAllowedErrorMessage"
+                }
+              }
+            },
+            "description": "Update authorization not allowed. Decision is based on order state and outcome of risk assessment."
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Update the order amount and order lines",
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/ordermanagement/v1/orders/{order_id}/captures": {
+      "post": {
+        "description": "Create capture. Read more on [Capturing an order](https://docs.klarna.com/order-management/delivery/full-capture/)",
+        "operationId": "captureOrder",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+            "in": "header",
+            "name": "Klarna-Idempotency-Key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CaptureObject"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Capture created",
+            "headers": {
+              "Capture-Id": {
+                "description": "The id of the created capture",
+                "schema": {
+                  "type": "string"
+                },
+                "style": "simple"
+              },
+              "Location": {
+                "description": "The URI at which the created capture can be found.",
+                "schema": {
+                  "format": "uri",
+                  "type": "string"
+                },
+                "style": "simple"
+              }
+            }
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CaptureNotAllowedErrorMessage"
+                }
+              }
+            },
+            "description": "Capture not allowed."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoSuchOrderErrorMessage"
+                }
+              }
+            },
+            "description": "Order not found."
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Capture an order",
+        "tags": [
+          "Captures"
+        ]
+      },
+      "get": {
+        "description": "List all order captures",
+        "operationId": "getCaptures",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Capture"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Captures found."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoSuchOrderErrorMessage"
+                }
+              }
+            },
+            "description": "Order not found."
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "List all order captures",
+        "tags": [
+          "Captures"
+        ]
+      }
+    },
+    "/ordermanagement/v1/orders/{order_id}/captures/{capture_id}": {
+      "get": {
+        "description": "Retrieve the details of a capture. To learn more, refer to the [Retrieving capture details](https://docs.klarna.com/order-management/post-delivery/capture-details/) article.",
+        "operationId": "getCapture",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Capture id",
+            "in": "path",
+            "name": "capture_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Capture"
+                }
+              }
+            },
+            "description": "Capture found."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoSuchOrderErrorMessage"
+                }
+              }
+            },
+            "description": "Order or capture not found."
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Get capture details",
+        "tags": [
+          "Captures"
+        ]
+      }
+    },
+    "/ordermanagement/v1/orders/{order_id}/captures/{capture_id}/extend-due-date": {
+      "patch": {
+        "description": "Extend the customer's payment due date. Read more on [Extending customer due dates](https://docs.klarna.com/payments/after-payments/order-management/manage-orders-with-the-api/refund-orders-and-manage-authorizations/#extend-payment-date)",
+        "operationId": "extendDueDate",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Capture id",
+            "in": "path",
+            "name": "capture_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+            "in": "header",
+            "name": "Klarna-Idempotency-Key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExtendDueDateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Due date was extended."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessageDto"
+                }
+              }
+            },
+            "description": "Extension of due date is not possible."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessageDto"
+                }
+              }
+            },
+            "description": "Order or capture not found."
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Extend payment due date",
+        "tags": [
+          "Captures"
+        ]
+      }
+    },
+    "/ordermanagement/v1/orders/{order_id}/captures/{capture_id}/extend-due-date-options": {
+      "get": {
+        "description": "Get merchant fees for extension of due date due date",
+        "operationId": "getOptionsForExtendDueDate",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Capture id",
+            "in": "path",
+            "name": "capture_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtendDueDateOptions"
+                }
+              }
+            },
+            "description": "Available options found for capture."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessageDto"
+                }
+              }
+            },
+            "description": "Order or capture not found."
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "List options for extension of payment due date",
+        "tags": [
+          "Captures"
+        ]
+      }
+    },
+    "/ordermanagement/v1/orders/{order_id}/captures/{capture_id}/shipping-info": {
+      "post": {
+        "description": "Add shipping info to a capture. Read more on [Adding shipping info](https://docs.klarna.com/order-management/post-delivery/add-capture-shipping-details/)",
+        "operationId": "appendShippingInfo",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Capture id",
+            "in": "path",
+            "name": "capture_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+            "in": "header",
+            "name": "Klarna-Idempotency-Key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateShippingInfo"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Shipping information was appended."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAllowedErrorMessage"
+                }
+              }
+            },
+            "description": "Order has no captures."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoSuchOrderErrorMessage"
+                }
+              }
+            },
+            "description": "Order or capture not found."
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Add shipping information",
+        "tags": [
+          "Captures"
+        ]
+      }
+    },
+    "/ordermanagement/v1/orders/{order_id}/captures/{capture_id}/trigger-send-out": {
+      "post": {
+        "description": "Trigger resend of customer communication. Read more on [Resending customer communication](https://docs.klarna.com/order-management/post-delivery/trigger-customer-send-out/)",
+        "operationId": "triggerSendOut",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Capture id",
+            "in": "path",
+            "name": "capture_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+            "in": "header",
+            "name": "Klarna-Idempotency-Key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Send out was triggered"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAllowedErrorMessage"
+                }
+              }
+            },
+            "description": "Order has no captures."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoSuchCaptureErrorMessage"
+                }
+              }
+            },
+            "description": "Order or capture not found."
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Send customer communication",
+        "tags": [
+          "Captures"
+        ]
+      }
+    },
+    "/ordermanagement/v1/orders/{order_id}/customer-details": {
+      "patch": {
+        "description": "Update shipping address. Read more on [Updating customer addresses](https://docs.klarna.com/order-management/pre-delivery/update-customer-address/)",
+        "operationId": "updateConsumerDetails",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+            "in": "header",
+            "name": "Klarna-Idempotency-Key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateConsumer"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Order consumer details were updated."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAllowedErrorMessage"
+                }
+              }
+            },
+            "description": "Update customer details not allowed. Decision is based on order state and outcome of risk assessment. Billing address cannot be updated."
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Update customer addresses",
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/ordermanagement/v1/orders/{order_id}/extend-authorization-time": {
+      "post": {
+        "description": "Extend authorization time endpoints provide flexibility when unexpected delays occur, however if long fulfillment periods are standard business model, then the extension of authorizations should be defined as part of the onboarding. Read more on [Extending order authorization time](https://docs.klarna.com/payments/web-payments/additional-resources/use-cases/extended-authorization-expiration/)",
+        "operationId": "extendAuthorizationTime",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+            "in": "header",
+            "name": "Klarna-Idempotency-Key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Authorization time was extended."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAllowedErrorMessage"
+                }
+              }
+            },
+            "description": "Extension of authorization time not allowed. The order being expired or cancelled are among the possible causes."
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Extend the authorization time",
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/ordermanagement/v1/orders/{order_id}/merchant-references": {
+      "patch": {
+        "description": "Update merchant references. Read more on [Updating merchant references](https://docs.klarna.com/order-management/pre-delivery/update-merchant-references/)",
+        "operationId": "updateMerchantReferences",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+            "in": "header",
+            "name": "Klarna-Idempotency-Key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMerchantReferences"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Order merchant references were updated."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAllowedErrorMessage"
+                }
+              }
+            },
+            "description": "Can not update a cancelled order."
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Update merchant references",
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/ordermanagement/v1/orders/{order_id}/refunds": {
+      "post": {
+        "description": "Create a refund. Read more on [Refunds](https://docs.klarna.com/payments/after-payments/order-management/manage-orders-with-the-api/refund-orders-and-manage-authorizations/)",
+        "operationId": "refundOrder",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+            "in": "header",
+            "name": "Klarna-Idempotency-Key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefundObject"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Refund created",
+            "headers": {
+              "Location": {
+                "description": "The URI at which the created refund can be found",
+                "schema": {
+                  "format": "uri",
+                  "type": "string"
+                },
+                "style": "simple"
+              },
+              "Refund-Id": {
+                "description": "The id of the created refund",
+                "schema": {
+                  "type": "string"
+                },
+                "style": "simple"
+              }
+            }
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RefundNotAllowedErrorMessage"
+                }
+              }
+            },
+            "description": "Refund not allowed"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundErrorMessage"
+                }
+              }
+            },
+            "description": "Order not found."
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Refund an order",
+        "tags": [
+          "Refunds"
+        ]
+      }
+    },
+    "/ordermanagement/v1/orders/{order_id}/refunds/{refund_id}": {
+      "get": {
+        "description": "Get refund. ",
+        "operationId": "get",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Refund id",
+            "in": "path",
+            "name": "refund_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refund"
+                }
+              }
+            },
+            "description": "Refund found."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundErrorMessage"
+                }
+              }
+            },
+            "description": "Order or refund not found."
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Get refund details",
+        "tags": [
+          "Refunds"
+        ]
+      }
+    },
+    "/ordermanagement/v1/orders/{order_id}/release-remaining-authorization": {
+      "post": {
+        "description": "Release remaining authorization. Read more on [Releasing remaining authorization](https://docs.klarna.com/payments/after-payments/order-management/manage-orders-with-the-api/refund-orders-and-manage-authorizations/#release-order-authorization)",
+        "operationId": "releaseRemainingAuthorization",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+            "in": "header",
+            "name": "Klarna-Idempotency-Key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Remaining authorization was released."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAllowedErrorMessage"
+                }
+              }
+            },
+            "description": "Can not release when order is cancelled or has no captures."
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Release an authorization",
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/ordermanagement/v1/orders/{order_id}/shipping-info": {
+      "post": {
+        "description": "Add shipping info to an order. Read more on [Adding shipping info](https://docs.klarna.com/order-management/manage-orders-with-the-api/view-and-change-orders/add-shipping-information/)",
+        "operationId": "appendOrderShippingInfo",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+            "in": "header",
+            "name": "Klarna-Idempotency-Key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateShippingInfo"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Shipping information was appended."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoSuchOrderErrorMessage"
+                }
+              }
+            },
+            "description": "Order not found."
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Add shipping information",
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/ordermanagement/v1/orders/{order_id}/cancel": {
+      "post": {
+        "description": "Cancel order. Read more on [Cancelling an order](https://docs.klarna.com/order-management/pre-delivery/cancel-order/)",
+        "operationId": "cancelOrder",
+        "parameters": [
+          {
+            "description": "Order id",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "This header will guarantee the idempotency of the operation. The key should be unique and is recommended to be a UUID version 4. Retries of requests are safe to be applied in case of errors such as network errors, socket errors and timeouts. Input values of the operation are disregarded when evaluating the idempotency of the operation, only the key matters.",
+            "in": "header",
+            "name": "Klarna-Idempotency-Key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Order was cancelled."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelNotAllowedErrorMessage"
+                }
+              }
+            },
+            "description": "Cancel not allowed (e.g. order has captures or is closed)"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Cancel an order",
+        "tags": [
+          "Orders"
+        ]
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.klarna.com"
+    }
+  ]
+}

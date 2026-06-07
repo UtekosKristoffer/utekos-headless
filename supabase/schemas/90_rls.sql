@@ -11,8 +11,15 @@
 
 alter table marketing.leads enable row level security;
 alter table marketing.attribution_events enable row level security;
+alter table marketing.consent_snapshots enable row level security;
+alter table marketing.event_ledger enable row level security;
+alter table marketing.meta_quality_snapshots enable row level security;
 
 alter table partner.sources enable row level security;
 alter table partner.referrals enable row level security;
 
 alter table ops.integration_events enable row level security;
+alter table ops.provider_dispatch_attempts enable row level security;
+alter table ops.slo_incidents enable row level security;
+alter table ops.dead_letter_events enable row level security;
+alter table ops.web_vitals enable row level security;

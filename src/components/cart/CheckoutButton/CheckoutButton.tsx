@@ -63,17 +63,11 @@ export const CheckoutButton = ({
       const value = Number.parseFloat(subtotalAmount || '0') || 0
       const userData: MetaUserData = getClientMetaUserData()
 
-      const snapId = getCookie('ute_sc_cid')
       const metaId = userData.fbc
-      const pinId = getCookie('_epik')
-      const tiktokId = getCookie('ute_ttclid')
 
       const sources = []
 
-      if (snapId) sources.push('Snapchat 👻')
       if (metaId) sources.push('Meta 💙')
-      if (pinId) sources.push('Pinterest 📌')
-      if (tiktokId) sources.push('TikTok 🎵')
 
       if (sources.length > 0) {
         const sourceLabel = sources.join(' + ')
@@ -88,45 +82,10 @@ export const CheckoutButton = ({
               source: sourceLabel,
               value,
               cartId,
-              snapId: snapId || undefined,
-              metaId: metaId || undefined,
-              pinId: pinId || undefined,
-              tiktokId: tiktokId || undefined
+              hasMetaId: !!metaId
             }
           })
         }).catch(() => {})
-      }
-
-      if (typeof window !== 'undefined' && window.snaptr) {
-        window.snaptr('track', 'START_CHECKOUT', {
-          price: value,
-          currency,
-          number_items: num_items,
-          item_ids: cleanItemIds
-        })
-      }
-
-      if (typeof window !== 'undefined' && window.pintrk) {
-        window.pintrk?.('track', 'InitiateCheckout', {
-          value,
-          currency,
-          order_quantity: num_items,
-          product_ids: cleanItemIds
-        })
-      }
-
-      if (typeof window !== 'undefined' && window.ttq) {
-        window.ttq.track(
-          'InitiateCheckout',
-          {
-            content_id: cleanItemIds[0],
-            content_type: 'product',
-            value,
-            currency,
-            quantity: num_items
-          },
-          { event_id: eventID }
-        )
       }
 
       trackMicrosoftUetEvent({

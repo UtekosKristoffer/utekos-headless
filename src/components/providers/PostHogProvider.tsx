@@ -1,24 +1,21 @@
-/**
- * PostHog provider for Next.js App Router.
- *
- * By default this component is **static-safe** — it does not call any
- * dynamic APIs (`cookies()`, `headers()`) and is compatible with static
- * generation, ISR, and Partial Prerendering (PPR).
- *
- * When `bootstrapFlags` is enabled, the provider evaluates feature flags
- * on the server and bootstraps the client SDK, which opts the route into
- * dynamic rendering.
- *
- * All PostHog hooks (`usePostHog`, `useFeatureFlagEnabled`, etc.)
- * require this provider as an ancestor.
- */
+import { PostHogProvider } from '@posthog/next'
 
-import { PostHogProvider, PostHogPageView } from '@posthog/next'
+const POSTHOG_API_KEY =
+  process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN
+  || process.env.NEXT_PUBLIC_POSTHOG_KEY
+  || process.env.NEXT_PUBLIC_mentum_POSTHOG_PROJECT_TOKEN
 
 export function PostHogClientProvider({ children }: { children: React.ReactNode }) {
   return (
-    <PostHogProvider clientOptions={{ api_host: '/ingest' }} bootstrapFlags>
-      <PostHogPageView />
+    <PostHogProvider
+      {...(POSTHOG_API_KEY ? { apiKey: POSTHOG_API_KEY } : {})}
+      clientOptions={{
+        api_host: '/relay-MAhe',
+        opt_out_capturing_by_default: true,
+        opt_out_persistence_by_default: true,
+        person_profiles: 'identified_only'
+      }}
+    >
       {children}
     </PostHogProvider>
   )

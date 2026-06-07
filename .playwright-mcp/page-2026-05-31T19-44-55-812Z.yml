@@ -1,0 +1,392 @@
+- generic [active] [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e7] [cursor=pointer]:
+    - img [ref=e8]
+  - alert [ref=e11]
+  - generic [ref=e12]:
+    - link "Se tilbudet på Utekos TechDown til kr 1790" [ref=e13] [cursor=pointer]:
+      - /url: /skreddersy-varmen
+      - generic [ref=e14]:
+        - img [ref=e15]
+        - generic [ref=e18]: Utekos TechDown™ til kr 1790,-
+        - generic [ref=e19]:
+          - text: Kjøp her
+          - img [ref=e20]
+    - button "Lukk banner" [ref=e22] [cursor=pointer]:
+      - img [ref=e23]
+  - banner [ref=e26]:
+    - generic [ref=e27]:
+      - link "Utekos - Til forsiden" [ref=e30] [cursor=pointer]:
+        - /url: /
+        - img "Utekos logo" [ref=e31]
+      - generic [ref=e32]:
+        - button "Åpne søk (⌘/Ctrl + K)" [ref=e33] [cursor=pointer]:
+          - img [ref=e34]
+          - generic [ref=e37]: Søk…
+          - generic:
+            - generic: ⌘
+            - text: K
+        - generic [ref=e38]:
+          - heading "Søk på nettsiden..." [level=2] [ref=e39]
+          - paragraph [ref=e40]: Søk etter produkter eller sider..
+        - button "Åpne handlekurven, 0 varer" [ref=e41] [cursor=pointer]:
+          - img
+          - generic [ref=e42]: 0 varer i handlekurven
+  - main [ref=e43]:
+    - article [ref=e44]:
+      - region "Betalingsinformasjon fra Klarna"
+      - article [ref=e45]:
+        - article "Bobilliv uten kompromisser" [ref=e46]:
+          - generic [ref=e48]:
+            - generic [ref=e49]:
+              - navigation "Brødsmulesti" [ref=e51]:
+                - link "Forsiden" [ref=e52] [cursor=pointer]:
+                  - /url: /
+                - generic [ref=e53]: /
+                - link "Inspirasjon" [ref=e54] [cursor=pointer]:
+                  - /url: /inspirasjon
+                - generic [ref=e55]: /
+                - generic [ref=e56]:
+                  - img [ref=e57]
+                  - text: Bobil og camping
+              - generic [ref=e61]:
+                - heading "Bobilliv uten kompromisser" [level=1] [ref=e62]
+                - paragraph [ref=e63]: Fra den første morgenkaffen til de sene kveldene rundt bordet. Ta med Utekos og gjør hvert stopp til et øyeblikk du vil huske.
+              - generic [ref=e64]:
+                - link "Se produktene" [ref=e65] [cursor=pointer]:
+                  - /url: /produkter
+                  - text: Se produktene
+                  - img [ref=e66]
+                - link "Utforsk mulighetene" [ref=e68] [cursor=pointer]:
+                  - /url: "#bruksomrader"
+            - generic [ref=e69]:
+              - heading "Høydepunkter for bobil og camping med Utekos" [level=2] [ref=e70]
+              - list "Høydepunkter for bobil og camping med Utekos" [ref=e71]:
+                - listitem [ref=e72]:
+                  - generic [ref=e75]:
+                    - generic [ref=e76]:
+                      - img [ref=e78]
+                      - heading "Morgenkaffe" [level=3] [ref=e83]
+                    - paragraph [ref=e84]: Start dagen i varme utenfor bobilen
+                - listitem [ref=e85]:
+                  - generic [ref=e88]:
+                    - generic [ref=e89]:
+                      - img [ref=e91]
+                      - heading "Alle stopp" [level=3] [ref=e93]
+                    - paragraph [ref=e94]: Nyt utsikten i komfort, hvor som helst
+                - listitem [ref=e95]:
+                  - generic [ref=e98]:
+                    - generic [ref=e99]:
+                      - img [ref=e101]
+                      - heading "Lengre turer" [level=3] [ref=e104]
+                    - paragraph [ref=e105]: Reis tidligere på året og senere på høsten
+        - generic [ref=e107]:
+          - generic [ref=e108]:
+            - heading "Utekos gjennom bobildøgnet" [level=2] [ref=e109]
+            - paragraph [ref=e110]: Fra soloppgang til solnedgang får du varme når turen ber om det.
+          - generic [ref=e111]:
+            - generic [ref=e115]:
+              - generic [ref=e116]:
+                - img [ref=e118]
+                - generic [ref=e123]:
+                  - paragraph [ref=e124]: Morgen
+                  - paragraph [ref=e125]: 5-12°C
+              - heading "Den kjølige morgenkaffen" [level=3] [ref=e126]
+              - paragraph [ref=e127]: Start dagen med kaffe utenfor bobilen, innhyllet i varme mens naturen våkner.
+            - generic [ref=e131]:
+              - generic [ref=e132]:
+                - img [ref=e134]
+                - generic [ref=e136]:
+                  - paragraph [ref=e137]: Kveld
+                  - paragraph [ref=e138]: 8-15°C
+              - heading "Sosiale kvelder under stjernene" [level=3] [ref=e139]
+              - paragraph [ref=e140]: Forleng kvelden med venner og familie uten å la kulden drive dere inn.
+            - generic [ref=e144]:
+              - generic [ref=e145]:
+                - img [ref=e147]
+                - generic [ref=e151]:
+                  - paragraph [ref=e152]: Overgang
+                  - paragraph [ref=e153]: 3-10°C
+              - heading "Vår og høst-camping" [level=3] [ref=e154]
+              - paragraph [ref=e155]: Utvid sesongen og opplev Norge når det er på sitt vakreste.
+        - generic [ref=e157]:
+          - generic [ref=e158]:
+            - heading "Skapt for bobilisten" [level=2] [ref=e159]
+            - paragraph [ref=e160]: Komfort som følger bobilen — fra tidlig vår til sen høst.
+          - generic [ref=e161]:
+            - generic [ref=e162]:
+              - img [ref=e164]
+              - heading "Øyeblikkelig varme" [level=3] [ref=e166]
+              - paragraph [ref=e167]: Fra kald morgen til koselig stund på sekunder
+            - generic [ref=e168]:
+              - img [ref=e170]
+              - heading "Kompakt og praktisk" [level=3] [ref=e172]
+              - paragraph [ref=e173]: Tar minimal plass i bobilen, maksimal komfort på turen
+            - generic [ref=e174]:
+              - img [ref=e176]
+              - heading "Forleng sesongen" [level=3] [ref=e178]
+              - paragraph [ref=e179]: Bruk bobilen fra tidlig vår til sen høst i komfort
+            - generic [ref=e180]:
+              - img [ref=e182]
+              - heading "Sosial magnet" [level=3] [ref=e184]
+              - paragraph [ref=e185]: Bli samlingspunktet på campingplassen
+        - generic [ref=e190]:
+          - generic [ref=e191]:
+            - heading "Tips for alle sesonger" [level=2] [ref=e192]
+            - paragraph [ref=e193]: Utekos følger deg på eventyr hele året
+          - generic [ref=e196]:
+            - tablist [ref=e197]:
+              - tab "Vår" [selected] [ref=e198] [cursor=pointer]:
+                - generic [ref=e200]:
+                  - img
+                  - generic [ref=e201]: Vår
+              - tab "Sommer" [ref=e202] [cursor=pointer]:
+                - generic [ref=e203]:
+                  - img
+                  - generic [ref=e204]: Sommer
+              - tab "Høst" [ref=e205] [cursor=pointer]:
+                - generic [ref=e206]:
+                  - img
+                  - generic [ref=e207]: Høst
+              - tab "Vinter" [ref=e208] [cursor=pointer]:
+                - generic [ref=e209]:
+                  - img
+                  - generic [ref=e210]: Vinter
+            - tabpanel "Vår" [ref=e211]:
+              - generic [ref=e215]:
+                - generic [ref=e216]:
+                  - img [ref=e218]
+                  - heading "Vårcamping med Utekos" [level=3] [ref=e223]:
+                    - generic [ref=e224]:
+                      - generic [ref=e225]: Vårcamping med
+                      - img "Utekos" [ref=e226]
+                - paragraph [ref=e233]: Våren byr på fantastiske muligheter for bobilisten, men temperaturene kan være uforutsigbare.
+                - list [ref=e234]:
+                  - listitem [ref=e235]:
+                    - img [ref=e237]
+                    - generic [ref=e239]: Start dagen tidlig med Utekos og kaffe for å se naturen våkne
+                  - listitem [ref=e240]:
+                    - img [ref=e242]
+                    - generic [ref=e244]: Perfekt for påskecamping i fjellet når kveldene fortsatt er kjølige
+                  - listitem [ref=e245]:
+                    - img [ref=e247]
+                    - generic [ref=e249]: Nyt de første varme solstrålene uten å fryse i skyggen
+        - generic [ref=e251]:
+          - generic [ref=e252]:
+            - heading "Populære destinasjoner med Utekos" [level=2] [ref=e253]:
+              - generic [ref=e254]: Populære destinasjoner
+              - generic [ref=e255]:
+                - generic [ref=e256]: med
+                - img "Utekos" [ref=e257]
+            - paragraph [ref=e264]: Norges vakreste bobildestinasjoner venter — nyt dem i komfort hele sesongen
+          - generic [ref=e265]:
+            - generic [ref=e268]:
+              - generic [ref=e269]:
+                - img [ref=e271]
+                - heading "Lofoten" [level=3] [ref=e274]
+              - paragraph [ref=e275]: Midnattssol og nordlys
+              - generic [ref=e277]: Sommer/Høst
+            - generic [ref=e280]:
+              - generic [ref=e281]:
+                - img [ref=e283]
+                - heading "Geirangerfjorden" [level=3] [ref=e286]
+              - paragraph [ref=e287]: Spektakulære fjorder
+              - generic [ref=e289]: Vår/Sommer
+            - generic [ref=e292]:
+              - generic [ref=e293]:
+                - img [ref=e295]
+                - heading "Hardangervidda" [level=3] [ref=e298]
+              - paragraph [ref=e299]: Viddelandskap og stillhet
+              - generic [ref=e301]: Hele året
+            - generic [ref=e304]:
+              - generic [ref=e305]:
+                - img [ref=e307]
+                - heading "Atlanterhavsveien" [level=3] [ref=e310]
+              - paragraph [ref=e311]: Dramatisk kystlinje
+              - generic [ref=e313]: Sommer/Høst
+        - generic [ref=e315]:
+          - generic [ref=e316]:
+            - heading "Utekos i sitt rette element" [level=2] [ref=e317]:
+              - img "Utekos" [ref=e318]
+              - generic [ref=e325]: i sitt rette element
+            - paragraph [ref=e326]: Fra morgenkaffen i soloppgang til sene kvelder under stjernene. La deg inspirere av ekte øyeblikk fra bobillivet.
+          - region [ref=e327]:
+            - generic [ref=e329]:
+              - group [ref=e330]:
+                - generic [ref=e331]:
+                  - img "Person i Utekos-plagg nyter morgenkaffen utenfor bobilen med utsikt over en fjord." [ref=e333]
+                  - generic [ref=e334]:
+                    - heading "Morgenkaffe med utsikt" [level=3] [ref=e335]
+                    - paragraph [ref=e336]: Start dagen i ditt eget tempo, omgitt av natur og komfort.
+              - group [ref=e337]:
+                - generic [ref=e338]:
+                  - img "Et par sitter i campingstoler utenfor bobilen en kjølig kveld, begge kledd i Utekos." [ref=e340]
+                  - generic [ref=e341]:
+                    - heading "Friheten til å stoppe opp" [level=3] [ref=e342]
+                    - paragraph [ref=e343]: Et raskt stopp blir en minneverdig pause når komforten er med på turen.
+              - group [ref=e344]:
+                - generic [ref=e345]:
+                  - img "Person som har stoppet bobilen langs en nasjonal turistvei og nyter utsikten i et Utekos-plagg." [ref=e347]
+                  - generic [ref=e348]:
+                    - heading "Din personlige varmesone" [level=3] [ref=e349]
+                    - paragraph [ref=e350]: Skap din egen sone av komfort og nyt en rolig stund, uansett hvor du befinner deg.
+              - group [ref=e351]:
+                - generic [ref=e352]:
+                  - img "Person som slapper av med en bok i en campingstol, godt innpakket i Utekos." [ref=e354]
+                  - generic [ref=e355]:
+                    - heading "Din egen avslapningssone" [level=3] [ref=e356]
+                    - paragraph [ref=e357]: Finn roen og nyt øyeblikket, uansett hvor du parkerer.
+            - button "Forrige bilde" [disabled]:
+              - img
+              - generic: Previous slide
+            - button "Neste bilde" [disabled]:
+              - img
+              - generic: Next slide
+        - generic [ref=e361]:
+          - heading "Klar for ditt neste bobil-eventyr?" [level=2] [ref=e362]
+          - paragraph [ref=e363]: Bli med tusenvis av bobilister som har oppdaget varme som gjør hvert stopp verdt å huske.
+          - generic [ref=e364]:
+            - link "Se alle produkter" [ref=e365] [cursor=pointer]:
+              - /url: /produkter
+              - text: Se alle produkter
+              - img [ref=e366]
+            - link "Finn din størrelse" [ref=e368] [cursor=pointer]:
+              - /url: /handlehjelp/storrelsesguide
+      - generic [ref=e370]:
+        - generic [ref=e371]:
+          - heading "Mer inspirasjon for dine øyeblikk" [level=2] [ref=e372]
+          - paragraph [ref=e373]: Finn ideer til situasjoner der komfort møter norsk natur. Se hvordan små grep gjør uteøyeblikkene varmere.
+        - generic [ref=e374]:
+          - link "Hytteliv Komfort på hytten året rundt" [ref=e375] [cursor=pointer]:
+            - /url: /inspirasjon/hytteliv
+            - generic [ref=e377]:
+              - generic [ref=e378]:
+                - img [ref=e380]
+                - heading "Hytteliv" [level=3] [ref=e383]
+              - paragraph [ref=e384]: Komfort på hytten året rundt
+          - link "Bobil og camping Forleng campingsesongen" [ref=e385] [cursor=pointer]:
+            - /url: /inspirasjon/bobil
+            - generic [ref=e387]:
+              - generic [ref=e388]:
+                - img [ref=e390]
+                - heading "Bobil og camping" [level=3] [ref=e395]
+              - paragraph [ref=e396]: Forleng campingsesongen
+          - link "Båtliv Varme på vannet" [ref=e397] [cursor=pointer]:
+            - /url: /inspirasjon/batliv
+            - generic [ref=e399]:
+              - generic [ref=e400]:
+                - img [ref=e402]
+                - heading "Båtliv" [level=3] [ref=e405]
+              - paragraph [ref=e406]: Varme på vannet
+          - link "Terrassen Hjemme best" [ref=e407] [cursor=pointer]:
+            - /url: /inspirasjon/terrassen
+            - generic [ref=e409]:
+              - generic [ref=e410]:
+                - img [ref=e412]
+                - heading "Terrassen" [level=3] [ref=e415]
+              - paragraph [ref=e416]: Hjemme best
+          - link "Grillkvelden Sosiale stunder" [ref=e417] [cursor=pointer]:
+            - /url: /inspirasjon/grillkvelden
+            - generic [ref=e419]:
+              - generic [ref=e420]:
+                - img [ref=e422]
+                - heading "Grillkvelden" [level=3] [ref=e424]
+              - paragraph [ref=e425]: Sosiale stunder
+        - generic [ref=e426]:
+          - paragraph [ref=e427]: Klar til å oppleve komforten selv?
+          - generic [ref=e428]:
+            - link "Se alle produkter" [ref=e429] [cursor=pointer]:
+              - /url: /produkter
+            - link "Finn din størrelse" [ref=e430] [cursor=pointer]:
+              - /url: /handlehjelp/storrelsesguide
+      - generic [ref=e433]:
+        - generic [ref=e434]:
+          - img [ref=e435]
+          - generic [ref=e437]: Rask levering
+        - generic [ref=e438]:
+          - img [ref=e439]
+          - generic [ref=e441]: Fri frakt over 999 kr
+        - generic [ref=e442]:
+          - img [ref=e443]
+          - generic [ref=e445]: Enkel retur
+  - contentinfo [ref=e446]:
+    - generic [ref=e447]:
+      - generic [ref=e448]:
+        - generic [ref=e449]:
+          - heading "Handlehjelp" [level=3] [ref=e450]
+          - navigation "Handlehjelp navigasjon" [ref=e451]:
+            - list [ref=e452]:
+              - listitem [ref=e453]:
+                - link "Kontakt oss" [ref=e454] [cursor=pointer]:
+                  - /url: /kontaktskjema
+              - listitem [ref=e455]:
+                - link "Teknologi og materialer" [ref=e456] [cursor=pointer]:
+                  - /url: /handlehjelp/teknologi-materialer
+              - listitem [ref=e457]:
+                - link "Vask og vedlikehold" [ref=e458] [cursor=pointer]:
+                  - /url: /handlehjelp/vask-og-vedlikehold
+              - listitem [ref=e459]:
+                - link "Størrelsesguide" [ref=e460] [cursor=pointer]:
+                  - /url: /handlehjelp/storrelsesguide
+        - generic [ref=e461]:
+          - heading "Kundeservice" [level=3] [ref=e462]
+          - navigation "Kundeservice navigasjon" [ref=e463]:
+            - list [ref=e464]:
+              - listitem [ref=e465]:
+                - link "Kundeservice" [ref=e466] [cursor=pointer]:
+                  - /url: /kontaktskjema
+              - listitem [ref=e467]:
+                - 'link "Tlf: +47 40 21 63 43" [ref=e468] [cursor=pointer]':
+                  - /url: tel:+4740216343
+              - listitem [ref=e469]:
+                - 'link "E-post: kundeservice@utekos.no" [ref=e470] [cursor=pointer]':
+                  - /url: mailto:kundeservice@utekos.no
+              - button "Innstillinger for informasjonskapsler" [ref=e471] [cursor=pointer]
+        - generic [ref=e472]:
+          - heading "Informasjon" [level=3] [ref=e473]
+          - navigation "Informasjon navigasjon" [ref=e474]:
+            - list [ref=e475]:
+              - listitem [ref=e476]:
+                - link "Om oss" [ref=e477] [cursor=pointer]:
+                  - /url: /om-oss
+              - listitem [ref=e478]:
+                - link "Fraktinformasjon" [ref=e479] [cursor=pointer]:
+                  - /url: /frakt-og-retur
+              - listitem [ref=e480]:
+                - link "Personvern" [ref=e481] [cursor=pointer]:
+                  - /url: /personvern
+              - listitem [ref=e482]:
+                - link "Vilkår og betingelser" [ref=e483] [cursor=pointer]:
+                  - /url: /vilkar-betingelser
+        - generic [ref=e484]:
+          - heading "Bedriftsinformasjon" [level=3] [ref=e485]
+          - navigation "Bedriftsinformasjon navigasjon" [ref=e486]:
+            - list [ref=e487]:
+              - listitem [ref=e488]:
+                - link "KELC AS" [ref=e489] [cursor=pointer]:
+                  - /url: /
+              - listitem [ref=e490]:
+                - link "Lille Damsgårdsveien 25" [ref=e491] [cursor=pointer]:
+                  - /url: map:Lille Damsgårdsveien 25
+              - listitem [ref=e492]:
+                - link "5162, Laksevåg" [ref=e493] [cursor=pointer]:
+                  - /url: map:Lille Damsgårdsveien 25, 5162, Bergen
+              - listitem [ref=e494]:
+                - link "Org.nr 925 820 393" [ref=e495] [cursor=pointer]:
+                  - /url: /kontaktskjema
+      - article [ref=e498]:
+        - generic [ref=e499]:
+          - generic [ref=e500]:
+            - img [ref=e501]
+            - heading "Meld deg på Utekos sitt nyhetsbrev!" [level=2] [ref=e504]
+          - heading "Som medlem i vår kundeklubb får du personlige tilbud og tilgang til salg og kampanjer først. Du får også masse tips og inspirasjon rett inn i innboksen din." [level=3] [ref=e505]
+          - generic [ref=e506]:
+            - textbox "Din e-postadresse..." [ref=e507]
+            - button "Meld meg inn" [ref=e508] [cursor=pointer]:
+              - text: Meld meg inn
+              - img [ref=e509]
+      - generic [ref=e512]:
+        - img "Klarna betalingsmetode" [ref=e513]
+        - img "Vipps betalingsmetode" [ref=e518]
+        - img "Visa betalingsmetode" [ref=e520]
+        - img "Mastercard betalingsmetode" [ref=e524]
+      - paragraph [ref=e529]: © 2026 Kelc AS. Alle rettigheter forbeholdt. Utekos® er et registrert varemerke i Norge.

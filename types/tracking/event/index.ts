@@ -12,18 +12,13 @@ export type MetaSender = (
   userData: ClientUserData
 ) => Promise<MetaEventRequestResult>
 
-export type GoogleBrowserEventTransport = 'gtm_web_to_sgtm' | 'sgtm' | 'direct_ga4'
-
-export type GoogleBrowserEventSkipReason = 'handled_by_google_tag' | 'handled_by_healthy_google_tag'
+export type GoogleBrowserEventTransport = 'direct_ga4'
 
 export type GoogleBrowserEventResult =
   | {
       success: true
       provider: 'google'
       transport: GoogleBrowserEventTransport
-      skipped?: boolean | undefined
-      reason?: GoogleBrowserEventSkipReason | undefined
-      fallbackUsed?: boolean | undefined
     }
   | {
       success: false
@@ -37,8 +32,17 @@ export type GoogleSender = (
   context: { clientIp?: string | undefined; userAgent?: string | undefined }
 ) => Promise<GoogleBrowserEventResult>
 
+export interface ProviderDispatchAttemptInput {
+  eventId: string
+  eventName: string
+  provider: 'meta' | 'google'
+  success: boolean
+  error?: string | undefined
+}
+
 export interface TrackingDependencies {
   sendMeta: MetaSender
   sendGoogle: GoogleSender
   logger: LogFunction
+  recordAttempt?: ((input: ProviderDispatchAttemptInput) => Promise<void>) | undefined
 }

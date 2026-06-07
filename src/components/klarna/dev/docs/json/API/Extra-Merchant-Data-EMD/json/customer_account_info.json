@@ -1,0 +1,106 @@
+{
+  "customer_account_info": {
+    "type": "array",
+    "description": "Information about customers purchasing goods in marketplaces and registered in merchant stores.",
+    "items": {
+      "type": "object",
+      "properties": {
+        "unique_account_identifier": {
+          "type": "string",
+          "maxLength": 255,
+          "example": "1234567890qwertyuiopasdfg",
+          "description": "The unique identifier of the specific customer account."
+        },
+        "app_id": {
+          "type": "string",
+          "maxLength": 255,
+          "description": "The unique identifier of the user if the same unique_account_identifier is used across multiple systems."
+        },
+        "loyalty_level": {
+          "type": "string",
+          "enum": ["low", "intermediate", "high"],
+          "description": "The customer's loyalty level with the merchant. Mapped tiers: low — Silver, intermediate — Gold, high — Platinum."
+        },
+        "customer_email": {
+          "type": "string",
+          "description": "The primary email associated with the merchant account."
+        },
+        "customer_phone": {
+          "type": "string",
+          "description": "The primary phone number associated with the merchant account."
+        },
+        "customer_ranking": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The customer's ranking reflecting the behavior in previous transactions."
+        },
+        "customer_reviews": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of reviews registered for the customer."
+        },
+        "last_login_time": {
+          "type": "string",
+          "description": "The date and time of the customer's last login to the platform. Accepted ISO 8601 formats: YYYY-MM-DDThh:mm:ssZ, YYYY-MM-DDThh:mm:ss, YYYY-MM-DDThh:mmZ, YYYY-MM-DDThh:mm.",
+          "example": "2023-11-24T15:00"
+        },
+        "account_security": {
+          "type": "object",
+          "description": "The security settings of the customer's account.",
+          "properties": {
+            "last_verification_method": {
+              "type": "string",
+              "example": "OTP",
+              "description": "The type of verification method active for the account."
+            },
+            "last_verification_time": {
+              "type": "string",
+              "description": "The customer account's last verification time. Accepted ISO 8601 formats: YYYY-MM-DDThh:mm:ssZ, YYYY-MM-DDThh:mm:ss, YYYY-MM-DDThh:mmZ, YYYY-MM-DDThh:mm.",
+              "example": "2023-11-24T15:00"
+            },
+            "device_id": {
+              "type": "string",
+              "description": "The device ID or fingerprint as tracked by the merchant on their web platform or the app used by the customer."
+            },
+            "fraud_behavior": {
+              "type": "boolean",
+              "description": "Set to true if the merchant has seen any fraudulent behavior in the customer's account."
+            },
+            "devices_linked": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The number of unique devices on which the account has been used."
+            },
+            "phone_verified": {
+              "type": "boolean",
+              "description": "Set to true if the customer's phone number has been verified."
+            },
+            "email_verified": {
+              "type": "boolean",
+              "description": "Set to true if the customer's email has been verified."
+            },
+            "failed_transactions_attempts": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The number of failed transaction attempts by the customer in the last 6 months."
+            }
+          }
+        },
+        "account_registration_date": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]T[0-2][0-9]:[0-5][0-9](:[0-5][0-9]){0,1}Z{0,1}$",
+          "description": "The customer account's registration date. Accepted ISO 8601 formats: YYYY-MM-DDThh:mm:ssZ, YYYY-MM-DDThh:mm:ss, YYYY-MM-DDThh:mmZ, YYYY-MM-DDThh:mm.",
+          "example": "2023-11-24T15:00"
+        },
+        "account_last_modified": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]T[0-2][0-9]:[0-5][0-9](:[0-5][0-9]){0,1}Z{0,1}$",
+          "description": "The date of the last modification of the customer account. Accepted ISO 8601 formats: YYYY-MM-DDThh:mm:ssZ, YYYY-MM-DDThh:mm:ss, YYYY-MM-DDThh:mmZ, YYYY-MM-DDThh:mm.",
+          "example": "2023-11-24T15:00"
+        }
+      }
+    }
+  }
+}

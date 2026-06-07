@@ -12,6 +12,7 @@ import AnnouncementBanner from '@/components/frontpage/components/SpecialOfferSe
 import { ChatBotAgent } from '@/components/chat/ChatBotAgent/source-code'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { CartProviderLoader } from '@/components/providers/CartProviderLoader'
+import { PostHogClientProvider } from '@/components/providers/PostHogProvider'
 import { MicrosoftUetTag } from '@/components/analytics/MicrosoftUetTag'
 import { GoogleTagManagerLoader } from '@/components/analytics/GoogleTagManagerLoader'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -19,10 +20,11 @@ import type { Metadata } from 'next'
 
 const GOOGLE_TAG_MANAGER_ID = process.env.NEXT_GOOGLE_GTM_ID || 'GTM-5TWMJQFP'
 
-const GTM_SCRIPT_ORIGIN = (process.env.NEXT_PUBLIC_SGTM_ENDPOINT || 'https://sgtm.utekos.no').replace(
-  /\/$/,
-  ''
-)
+const GTM_SCRIPT_ORIGIN = (
+  process.env.NEXT_PUBLIC_GTM_SCRIPT_ORIGIN
+  || process.env.NEXT_PUBLIC_GTM_FALLBACK_ORIGIN
+  || 'https://www.googletagmanager.com'
+).replace(/\/$/, '')
 
 const GTM_FALLBACK_SCRIPT_ORIGIN = (
   process.env.NEXT_PUBLIC_GTM_FALLBACK_ORIGIN || 'https://www.googletagmanager.com'
@@ -140,17 +142,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Suspense>
 
         <Suspense fallback={null}>
-          <CartProviderLoader>
-            <AnnouncementBanner />
-            <Header menu={mainMenu} />
-            <main>
-              {children}
-              {SHOULD_LOAD_VERCEL_ANALYTICS && <Analytics mode='production' />}
-              <SpeedInsights />
-              <ChatBotAgent />
-            </main>
-            <Footer />
-          </CartProviderLoader>
+          <PostHogClientProvider>
+            <CartProviderLoader>
+              <AnnouncementBanner />
+              <Header menu={mainMenu} />
+              <main>
+                {children}
+                {SHOULD_LOAD_VERCEL_ANALYTICS && <Analytics mode='production' />}
+                <SpeedInsights />
+                <ChatBotAgent />
+              </main>
+              <Footer />
+            </CartProviderLoader>
+          </PostHogClientProvider>
         </Suspense>
       </body>
     </html>

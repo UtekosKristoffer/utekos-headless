@@ -19,8 +19,7 @@ export type GooglePurchaseDispatchResult =
       value: number
       currency: string
       itemCount: number
-      transport: 'sgtm' | 'direct_ga4'
-      fallbackUsed: boolean
+      transport: 'direct_ga4'
     }
   | {
       success: false
@@ -80,12 +79,9 @@ export async function sendGooglePurchase(
         currency: res.payload.currency,
         itemCount: res.payload.itemCount,
         transport: res.payload.transport,
-        fallbackUsed: res.payload.fallbackUsed,
         validationStatus: res.payload.diagnostics?.validation?.status,
         validationMessageCount: res.payload.diagnostics?.validation?.messageCount,
-        sgtmStatus: res.payload.diagnostics?.sgtm?.status,
         directGa4Status: res.payload.diagnostics?.directGa4?.status,
-        directGa4Trigger: res.payload.diagnostics?.directGa4?.trigger,
         hasRedisClientId: !!clientId,
         hasRedisSessionId: !!sessionId
       },
@@ -100,8 +96,7 @@ export async function sendGooglePurchase(
       value: res.payload.value,
       currency: res.payload.currency,
       itemCount: res.payload.itemCount,
-      transport: res.payload.transport,
-      fallbackUsed: res.payload.fallbackUsed
+      transport: res.payload.transport
     }
   } catch (err: unknown) {
     const errorMessage = err instanceof Error ? err.message : String(err)

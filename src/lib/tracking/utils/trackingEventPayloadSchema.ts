@@ -1,10 +1,23 @@
 import { z } from 'zod'
 
 const flexibleObjectSchema = z.record(z.string(), z.unknown())
+const trackingEventNameSchema = z.enum([
+  'PageView',
+  'ViewContent',
+  'AddToCart',
+  'InitiateCheckout',
+  'Purchase',
+  'Lead',
+  'Search',
+  'CompleteRegistration',
+  'HeroInteract',
+  'InteractWithAccordion',
+  'OpenQuickView'
+])
 
 export const trackingEventPayloadSchema = z
   .object({
-    eventName: z.string().min(1),
+    eventName: trackingEventNameSchema,
     eventId: z.string().min(1),
     eventSourceUrl: z.string().optional(),
     eventTime: z.number().int().positive().optional(),

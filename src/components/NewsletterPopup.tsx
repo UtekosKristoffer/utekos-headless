@@ -79,19 +79,6 @@ export function NewsletterPopup() {
         pageType: 'other'
       })
 
-      if (typeof window !== 'undefined' && window.pintrk) {
-        window.pintrk?.('track', 'Lead', {
-          lead_type: 'Newsletter',
-          event_source: 'popup'
-        })
-      }
-
-      if (typeof window !== 'undefined' && window.ttq) {
-        window.ttq.track('CompleteRegistration', {
-          content_name: 'Newsletter'
-        })
-      }
-
       setIsOpen(false)
       localStorage.setItem('utekos_newsletter_v5', 'true')
       toast.success(result.message)

@@ -3,7 +3,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 
 export function SoldOutButton() {
   return (
-    <TooltipProvider delayDuration={100}>
+    <TooltipProvider delay={100}>
       <Tooltip>
         <TooltipTrigger render={<Button size='lg' disabled className='h-12 w-full' />}>
           Utsolgt

@@ -54,12 +54,12 @@ export function VariantSelectors({ product, selectedVariant, onUpdateVariant }: 
                   return (
                     <Button
                       key={value}
-                      variant={isActive ? 'control' : 'secondary'}
+                      variant={isActive ? 'outline' : 'default'}
                       onClick={() => onUpdateVariant(option.name, value)}
                       className={cn(
-                        'rounded-lg px-6 py-2.5 bg-ancient-water hover:bg-cloud-dancer text-sm   text-background transition-all duration-200',
+                        'rounded-lg px-6 py-2.5 hover:bg-cloud-dancer text-sm   text-background transition-all duration-200',
                         'hover:scale-105 active:scale-95',
-                        isActive ? 'shadow-md' : 'hover:border-neutral-800'
+                        isActive ? 'shadow-md' : 'hover:border-cloud-dancer/40'
                       )}
                       aria-pressed={isActive}
                       aria-label={`Velg ${option.name} ${value}`}

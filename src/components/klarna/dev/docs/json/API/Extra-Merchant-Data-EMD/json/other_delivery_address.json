@@ -1,0 +1,15 @@
+{
+  "other_delivery_address": [
+    {
+      "shipping_method": "store pick-up",
+      "shipping_type": "normal",
+      "first_name": "John",
+      "last_name": "Doe",
+      "street_address": "Rue la fayette",
+      "street_number": "40",
+      "postal_code": "75009",
+      "city": "Paris",
+      "country": "FR"
+    }
+  ]
+}

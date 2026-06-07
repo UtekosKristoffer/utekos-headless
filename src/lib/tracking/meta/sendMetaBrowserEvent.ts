@@ -7,6 +7,7 @@ import {
   Content
 } from 'facebook-nodejs-business-sdk'
 import type { MetaEventPayload, ClientUserData, MetaContentItem } from 'types/tracking/meta'
+import { normalizeAndHashMetaUserData } from '@/lib/tracking/meta/normalizeAndHashMetaUserData'
 import { resolveMetaPixelId } from '@/lib/tracking/meta/utils/resolveMetaPixelId'
 import { resolveMetaAccessToken } from '@/lib/tracking/meta/utils/resolveMetaAccessToken'
 
@@ -20,22 +21,25 @@ export async function sendMetaBrowserEvent(payload: MetaEventPayload, userData: 
 
   FacebookAdsApi.init(accessToken)
 
+  const normalizedUserData = normalizeAndHashMetaUserData(userData)
   const user = new UserData()
-  if (userData.client_ip_address) user.setClientIpAddress(userData.client_ip_address)
-  if (userData.client_user_agent) user.setClientUserAgent(userData.client_user_agent)
-  if (userData.fbp) user.setFbp(userData.fbp)
-  if (userData.fbc) user.setFbc(userData.fbc)
-  if (userData.external_id) user.setExternalId(userData.external_id)
-  if (userData.email) user.setEmail(userData.email)
-  else if (userData.email_hash) user.setEmails([userData.email_hash])
+  if (normalizedUserData.client_ip_address) user.setClientIpAddress(normalizedUserData.client_ip_address)
+  if (normalizedUserData.client_user_agent) user.setClientUserAgent(normalizedUserData.client_user_agent)
+  if (normalizedUserData.fbp) user.setFbp(normalizedUserData.fbp)
+  if (normalizedUserData.fbc) user.setFbc(normalizedUserData.fbc)
+  if (normalizedUserData.external_id) user.setExternalId(normalizedUserData.external_id)
+  if (normalizedUserData.email) user.setEmail(normalizedUserData.email)
+  else if (normalizedUserData.email_hash) user.setEmails([normalizedUserData.email_hash])
 
-  if (userData.phone) user.setPhone(userData.phone)
-  if (userData.first_name) user.setFirstName(userData.first_name)
-  if (userData.last_name) user.setLastName(userData.last_name)
-  if (userData.city) user.setCity(userData.city)
-  if (userData.state) user.setState(userData.state)
-  if (userData.zip) user.setZip(userData.zip)
-  if (userData.country) user.setCountry(userData.country)
+  if (normalizedUserData.phone) user.setPhone(normalizedUserData.phone)
+  if (normalizedUserData.first_name) user.setFirstName(normalizedUserData.first_name)
+  if (normalizedUserData.last_name) user.setLastName(normalizedUserData.last_name)
+  if (normalizedUserData.date_of_birth) user.setDateOfBirth(normalizedUserData.date_of_birth)
+  if (normalizedUserData.gender) user.setGender(normalizedUserData.gender)
+  if (normalizedUserData.city) user.setCity(normalizedUserData.city)
+  if (normalizedUserData.state) user.setState(normalizedUserData.state)
+  if (normalizedUserData.zip) user.setZip(normalizedUserData.zip)
+  if (normalizedUserData.country) user.setCountry(normalizedUserData.country)
 
   const custom = new CustomData()
   const { eventData } = payload

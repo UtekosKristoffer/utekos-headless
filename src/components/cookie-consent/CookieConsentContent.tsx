@@ -141,7 +141,7 @@ export function CookieConsentContent({ setOpen }: { setOpen: (open: boolean) => 
           className='rounded-full border border-white/80'
         />
       </DialogHeader>
-      <ScrollArea hideScrollbar className={'h-[40vh] w-full overflow-y-auto px-6'}>
+      <ScrollArea className={'h-[40vh] w-full overflow-y-auto px-6'}>
         <DialogTitle className='my-2 mt-4 text-2xl'>Vi forbedrer opplevelsen din</DialogTitle>
         <DialogDescription className='space-y-2 text-foreground text-lg leading-relaxed pt-2'>
           <span className='block'>

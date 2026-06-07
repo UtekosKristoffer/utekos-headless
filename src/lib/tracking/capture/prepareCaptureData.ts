@@ -1,4 +1,4 @@
-import { normalize } from '@/lib/tracking/meta/normalization'
+import { normalizeAndHashMetaUserData } from '@/lib/tracking/meta/normalizeAndHashMetaUserData'
 import type { CaptureBody } from 'types/tracking/meta'
 import type { CaptureContext } from 'types/tracking/capture/CaptureContext'
 import type { ExtendedUserData } from 'types/tracking/user/ExtendedUserData'
@@ -6,31 +6,26 @@ import type { CheckoutAttribution } from 'types/tracking/user/CheckoutAttributio
 
 export function prepareCaptureData(body: CaptureBody, context: CaptureContext): CheckoutAttribution {
   const { cookies, clientIp, userAgent } = context
-  const userData: ExtendedUserData = {
+  const normalizedUserData = normalizeAndHashMetaUserData({
+    ...body.userData,
     fbp: body.userData?.fbp || cookies.fbp || undefined,
     fbc: body.userData?.fbc || cookies.fbc || undefined,
     external_id: body.userData?.external_id || cookies.externalId || undefined,
-    email_hash: cookies.userHash || undefined, // Vi antar denne kun kommer fra cookie (ferdig hashet)
+    email_hash: body.userData?.email_hash || cookies.userHash || undefined,
+    client_user_agent: body.userData?.client_user_agent || userAgent || undefined,
+    client_ip_address: body.userData?.client_ip_address ?? clientIp
+  })
+
+  const userData: ExtendedUserData = {
+    ...normalizedUserData,
     scid: cookies.scid || undefined,
     click_id: cookies.click_id || undefined,
     gclid: cookies.gclid || undefined,
     gbraid: cookies.gbraid || undefined,
     wbraid: cookies.wbraid || undefined,
     msclkid: cookies.msclkid || undefined,
-    dclid: cookies.dclid || undefined,
-    client_user_agent: body.userData?.client_user_agent || userAgent || undefined,
-
-    client_ip_address: body.userData?.client_ip_address ?? clientIp
+    dclid: cookies.dclid || undefined
   }
-
-  if (userData.email) userData.email = normalize.email(userData.email)
-  if (userData.phone) userData.phone = normalize.phone(userData.phone)
-  if (userData.first_name) userData.first_name = normalize.name(userData.first_name)
-  if (userData.last_name) userData.last_name = normalize.name(userData.last_name)
-  if (userData.city) userData.city = normalize.city(userData.city)
-  if (userData.state) userData.city = normalize.state(userData.state)
-  if (userData.zip) userData.zip = normalize.zip(userData.zip)
-  if (userData.country) userData.country = normalize.country(userData.country)
 
   return {
     cartId: body.cartId ?? null,

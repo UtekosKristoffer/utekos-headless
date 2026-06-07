@@ -30,15 +30,13 @@ import { TrustSignals } from './TrustSignals'
 import {
   resolveProductGalleryImages,
   type ProductGalleryImageOverrideValue
-} from '../utils/productPageImages'
-import {
-  TECHDOWN_MOBILE_GALLERY_IMAGES,
-  TECHDOWN_DESKTOP_GALLERY_IMAGES,
-  MICROFIBER_DESKTOP_GALLERY_IMAGES,
-  STAPPER_MOBILE_GALLERY_IMAGES,
-  STAPPER_DESKTOP_GALLERY_IMAGES
-} from '../utils/productPageImages'
-import { STOCK_THRESHOLD } from '../utils/productPageImages'
+} from '../utils/resolveProductGalleryImages'
+import { TECHDOWN_MOBILE_GALLERY_IMAGES } from '../utils/gallery-images/techdown/mobileGalleryImages'
+import { TECHDOWN_DESKTOP_GALLERY_IMAGES } from '../utils/gallery-images/techdown/desktopGalleryImages'
+import { MICROFIBER_DESKTOP_GALLERY_IMAGES } from '../utils/gallery-images/mikrofiber/mikrofiberDesktopImages'
+import { STAPPER_MOBILE_GALLERY_IMAGES } from '../utils/gallery-images/stapper/stapperMobileImages'
+import { STAPPER_DESKTOP_GALLERY_IMAGES } from '../utils/gallery-images/stapper/stapperDesktopImages'
+import { STOCK_THRESHOLD } from '../utils/resolveProductGalleryImages'
 import type { ProductPageViewProps } from 'types/product/PageProps'
 import type { ShopifyProduct } from 'types/product'
 import type { Image } from 'types/media'
@@ -196,7 +194,7 @@ export function ProductPageView({
             <Activity>
               <ProductGalleryCard
                 galleryContent={
-                  <div className='relative isolate overflow-hidden rounded-none md:rounded-[1.5rem]'>
+                  <div className='relative isolate overflow-hidden rounded-none md:rounded-3xl'>
                     <ProductGallery
                       title={title}
                       images={galleryImages}

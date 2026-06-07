@@ -17,6 +17,10 @@
     {
       "path": "/api/cron/sync-google-merchant",
       "schedule": "0 */6 * * *"
+    },
+    {
+      "path": "/api/cron/retry-dispatch",
+      "schedule": "*/2 * * * *"
     }
   ],
   "regions": ["arn1"]

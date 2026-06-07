@@ -33,8 +33,7 @@ export type PurchaseTrackResult =
         value: number
         currency: string
         itemCount: number
-        transport: 'sgtm' | 'direct_ga4'
-        fallbackUsed: boolean
+        transport: 'direct_ga4'
         clientIdPresent: boolean
         sessionIdPresent: boolean
         diagnostics: TrackDispatchDiagnostics
@@ -186,9 +185,7 @@ export async function handlePurchaseEvent(
       },
       userAgent,
       ipOverride: order.browser_ip ?? undefined,
-      debugMode: process.env.GA_MP_DEBUG === '1',
-      allowDirectFallback: true,
-      fallbackOnSgtmSuccess: process.env.GA_DIRECT_FALLBACK_ON_SGTM_SUCCESS === '1'
+      debugMode: process.env.GA_MP_DEBUG === '1'
     }
   )
 
@@ -222,7 +219,6 @@ export async function handlePurchaseEvent(
         requestId: res.requestId,
         status: res.status,
         transport: res.transport,
-        fallbackUsed: res.fallbackUsed,
         diagnostics: res.diagnostics,
         errorDetails: res.details
       }
@@ -238,7 +234,6 @@ export async function handlePurchaseEvent(
       currency,
       itemCount: items.length,
       transport: res.transport,
-      fallbackUsed: res.fallbackUsed,
       clientIdPresent: !!clientId,
       sessionIdPresent: !!sessionId,
       diagnostics: res.diagnostics

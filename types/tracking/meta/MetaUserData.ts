@@ -15,12 +15,10 @@ export type MetaUserData = {
   phone?: string | undefined
   first_name?: string | undefined
   last_name?: string | undefined
+  date_of_birth?: string | undefined
+  gender?: string | undefined
   city?: string | undefined
   state?: string | undefined
   zip?: string | undefined
   country?: string | undefined
-
-  // Snapchat click/session identifiers
-  scid?: string | undefined
-  click_id?: string | undefined
 }

@@ -1,0 +1,1087 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/payouts/summary": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "start_date",
+            "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. For example 2020-01-23 -> 2020-01-23T00:00:00Z. For this reason we recommend too use the full datetime like 2020-01-23T00:00:00Z.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "name": "end_date",
+            "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. This might lead to unwanted side effects like when the start date and end date might be the same because it would request payouts between 2020-01-23T00:00:00Z and 2020-01-23T00:00:00Z. Instead we advise to use a full datetime like 2020-01-23T23:59:59Z.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "name": "currency_code",
+            "description": "An optional currency code to filter the result for different currencies. If not provided the result returned in the response might include multiple results grouped by the currency. The currency should be provided by an ISO 4217 Currency Code like USD, EUR, AUD or GBP.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payout summaries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PayoutSummary"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getPayoutSummary",
+        "summary": "Payout summary",
+        "description": "Returns a summary of payouts for each currency code in a date range."
+      }
+    },
+    "/payouts/{payment_reference}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "payment_reference",
+            "description": "The reference id of the payout. Normally this reference can be found on your payment slip statement of your bank.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A payout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payout"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getPayout",
+        "summary": "Payout details",
+        "description": "Returns a specific payout based on a given payment reference."
+      }
+    },
+    "/payouts": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "start_date",
+            "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. For example 2020-01-23 -> 2020-01-23T00:00:00Z. For this reason we recommend too use the full datetime like 2020-01-23T00:00:00Z.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "name": "end_date",
+            "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. This might lead to unwanted side effects like when the start date and end date might be the same because it would request payouts between 2020-01-23T00:00:00Z and 2020-01-23T00:00:00Z. Instead we advise to use a full date time like 2020-01-23T23:59:59Z.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "name": "currency_code",
+            "description": "An optional currency code to filter the result for different currencies. If not provided the result returned in the response might include multiple results grouped by the currency. The currency should be provided by an ISO 4217 Currency Code like USD, EUR, AUD or GBP.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "description": "How many elements to include in the result. If no value for size is provided, a default of 20 will be used. A maximum of 500 can be set",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "maximum": 500,
+              "default": 20
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "The current offset. Describes \"where\" in a collection the current starts.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A collection of payouts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayoutCollection"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getPayouts",
+        "summary": "List all payouts",
+        "description": "Returns a collection of payouts."
+      }
+    },
+    "/reports/payout-with-transactions": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "payment_reference",
+            "description": "The reference id of the payout",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A payout"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getPayoutReportWithTransactions",
+        "summary": "Get a payouts summary (CSV)",
+        "description": "More information about this CSV format is available at:\n                                     https://docs.klarna.com/settlement-reports"
+      }
+    },
+    "/reports/payout": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "payment_reference",
+            "description": "The reference id of the payout",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A payout"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "payout",
+        "summary": "Get a payouts summary (PDF)",
+        "description": "A single settlement summed up in pdf format"
+      }
+    },
+    "/transactions": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "payment_reference",
+            "description": "The reference id of the payout",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order_id",
+            "description": "The Klarna assigned order id reference",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "description": "How many elements to include in the result. If no value for size is provided, a default of 20 will be used. A maximum of 500 can be set.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "maximum": 500,
+              "default": 20
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "The current offset. Describes \"where\" in a collection the current starts.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A collection of payouts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionCollection"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getTransactions",
+        "summary": "List transactions in a payout",
+        "description": "Returns a collection of transactions."
+      }
+    },
+    "/reports/payouts-summary-with-transactions": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "start_date",
+            "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. For example 2020-01-23 -> 2020-01-23T00:00:00Z. For this reason we recommend too use the full datetime like 2020-01-23T00:00:00Z.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "name": "end_date",
+            "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. This might lead to unwanted side effects like when the start date and end date might be the same because it would request payouts between 2020-01-23T00:00:00Z and 2020-01-23T00:00:00Z. Instead we advise to use a full date time like 2020-01-23T23:59:59Z.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A summary of payouts"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getPayoutsSummaryReportWithTransactions",
+        "summary": "Get a payouts summary with transactions (CSV)",
+        "description": "More information about this CSV format is available at:\n                                     https://docs.klarna.com/settlement-reports"
+      }
+    },
+    "/reports/payouts-summary": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "start_date",
+            "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. For example 2020-01-23 -> 2020-01-23T00:00:00Z. For this reason we recommend too use the full datetime like 2020-01-23T00:00:00Z.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "name": "end_date",
+            "description": "ISO 8601 date time format. This is a filter for the payout date. If no time is given then it defaults to the start of the day, ie 00:00:00. This might lead to unwanted side effects like when the start date and end date might be the same because it would request payouts between 2020-01-23T00:00:00Z and 2020-01-23T00:00:00Z. Instead we advise to use a full date time like 2020-01-23T23:59:59Z.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A summary of payouts"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "payoutsSummary",
+        "summary": "Get a payouts summary with transactions (PDF)",
+        "description": "Returns a summary for all payouts between the given dates"
+      }
+    }
+  },
+  "info": {
+    "title": "Klarna Settlements API",
+    "description": "The Settlements API helps you with the reconciliation of payments, made by Klarna to your bank account. Every payment has a unique payment_reference that can be found in the settlement reports and on your bank statement.\n\nRead more on [Settlement reports](https://docs.klarna.com/settlement-reports/).",
+    "version": "1.0.0-rc2"
+  },
+  "servers": [
+    {
+      "url": "https://api.klarna.com/settlements/v1"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "basic_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    },
+    "schemas": {
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error_code": {
+            "description": "ERROR_CODE",
+            "type": "string"
+          },
+          "error_messages": {
+            "description": "Array of error messages",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "correlation_id": {
+            "description": "Unique id for this request used for troubleshooting.",
+            "example": "2fe0311b-adc5-45e5-ac2b-963dac83c88b",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "error_code",
+          "error_messages",
+          "correlation_id"
+        ]
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "description": "The amount of elements in the current result",
+            "example": 10,
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "description": "The total amount of elements that are available",
+            "example": 42,
+            "type": "integer",
+            "format": "int64"
+          },
+          "next": {
+            "description": "The URI to the next \"page\" of results.",
+            "example": "http://example.com/collection?offset=21&size=10",
+            "type": "string"
+          },
+          "prev": {
+            "description": "The URI to the previous \"page\" of results.",
+            "example": "http://example.com/collection?offset=0&size=10",
+            "type": "string"
+          },
+          "offset": {
+            "description": "The current offset. Describes \"where\" in a collection the current starts.",
+            "example": 10,
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "count"
+        ]
+      },
+      "Payout": {
+        "type": "object",
+        "properties": {
+          "totals": {
+            "$ref": "#/components/schemas/Totals"
+          },
+          "payment_reference": {
+            "description": "The reference id of the payout",
+            "example": "XISA93DJ",
+            "type": "string"
+          },
+          "payout_date": {
+            "description": "ISO 8601 formatted date-time string",
+            "example": "2016-12-14T07:52:26Z",
+            "type": "string",
+            "format": "date-time"
+          },
+          "currency_code": {
+            "description": "ISO 4217 Currency Code. Like USD, EUR, AUD or GBP.",
+            "example": "USD",
+            "type": "string"
+          },
+          "currency_code_of_registration_country": {
+            "type": "string",
+            "description": "ISO 4217 Currency Code of the country you are registered in.",
+            "example": "EUR"
+          },
+          "merchant_settlement_type": {
+            "description": "Whether the amounts are net or gross",
+            "example": "NET",
+            "type": "string",
+            "enum": [
+              "GROSS",
+              "NET",
+              "GROSS_FEE"
+            ]
+          },
+          "merchant_id": {
+            "description": "The merchant id",
+            "type": "string"
+          },
+          "transactions": {
+            "description": "Link to the transactions that are part of this payout",
+            "example": "https://{settlements_api}/transactions?payment_reference=XISA93DJ",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "totals",
+          "payment_reference",
+          "payout_date",
+          "currency_code",
+          "merchant_settlement_type",
+          "merchant_id"
+        ]
+      },
+      "PayoutCollection": {
+        "type": "object",
+        "properties": {
+          "payouts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Payout"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "payouts",
+          "pagination"
+        ]
+      },
+      "PayoutSummary": {
+        "type": "object",
+        "properties": {
+          "summary_total_fee_correction_amount": {
+            "description": "The total amount of fee correction, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "summary_payout_date_start": {
+            "description": "ISO 8601 formatted date-time string",
+            "example": "2016-12-14T07:52:26Z",
+            "type": "string",
+            "format": "date-time"
+          },
+          "summary_total_release_amount": {
+            "description": "The total amount of money released from holdback by Klarna, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "summary_settlement_currency": {
+            "description": "ISO 4217 Currency Code. Like USD, EUR, AUD or GBP.",
+            "example": "USD",
+            "type": "string"
+          },
+          "summary_payout_date_end": {
+            "description": "ISO 8601 formatted date-time string",
+            "example": "2016-12-14T07:52:26Z",
+            "type": "string",
+            "format": "date-time"
+          },
+          "summary_total_tax_amount": {
+            "description": "The total amount of tax, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "summary_total_settlement_amount": {
+            "description": "The total amount of the settlement in question, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "summary_total_holdback_amount": {
+            "description": "The total amount of money withheld by Klarna, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "summary_total_reversal_amount": {
+            "description": "The total amount of reversals, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "summary_total_return_amount": {
+            "description": "The total amount of returns, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "summary_total_fee_amount": {
+            "description": "The total amount of fees, in minor units",
+            "example": 500,
+            "type": "integer",
+            "format": "int64"
+          },
+          "summary_total_commission_amount": {
+            "description": "The total amount of commissions, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "summary_total_commission_reversal_amount": {
+            "description": "The total amount of commission reversals, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "summary_total_sale_amount": {
+            "description": "The total amount of sales, in minor units",
+            "example": 500,
+            "type": "integer",
+            "format": "int64"
+          },
+          "summary_total_repay_amount": {
+            "description": "The total amount of money that has been repaid by the merchant from the debt to Klarna, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "summary_total_fee_correction_amount",
+          "summary_payout_date_start",
+          "summary_total_release_amount",
+          "summary_settlement_currency",
+          "summary_payout_date_end",
+          "summary_total_tax_amount",
+          "summary_total_settlement_amount",
+          "summary_total_holdback_amount",
+          "summary_total_reversal_amount",
+          "summary_total_return_amount",
+          "summary_total_fee_amount",
+          "summary_total_commission_amount",
+          "summary_total_sale_amount",
+          "summary_total_repay_amount"
+        ]
+      },
+      "Totals": {
+        "type": "object",
+        "properties": {
+          "commission_amount": {
+            "description": "The total amount of commissions, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "commission_reversal_amount": {
+            "description": "The total amount of commission reversals, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "repay_amount": {
+            "description": "The total amount of money that has been repaid by the merchant from the debt to Klarna, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "sale_amount": {
+            "description": "The total amount of sales, in minor units",
+            "example": 500,
+            "type": "integer",
+            "format": "int64"
+          },
+          "holdback_amount": {
+            "description": "The total amount of money withheld by Klarna, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "tax_amount": {
+            "description": "The total amount of tax, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "settlement_amount": {
+            "description": "The total amount of the settlement in question, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "fee_correction_amount": {
+            "description": "The total amount of fee correction, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "reversal_amount": {
+            "description": "The total amount of reversals, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "release_amount": {
+            "description": "The total amount of money released from holdback by Klarna, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "return_amount": {
+            "description": "The total amount of returns, in minor units",
+            "example": 550,
+            "type": "integer",
+            "format": "int64"
+          },
+          "fee_amount": {
+            "description": "The total amount of fees, in minor units",
+            "example": 500,
+            "type": "integer",
+            "format": "int64"
+          },
+          "charge_amount": {
+            "description": "The total amount of charges, in minor units. The additional field detailed_type contains the purpose of the charge",
+            "example": 500,
+            "type": "integer",
+            "format": "int64"
+          },
+          "credit_amount": {
+            "description": "The total amount of credits, in minor units. The additional field detailed_type contains the purpose of the credit",
+            "example": 500,
+            "type": "integer",
+            "format": "int64"
+          },
+          "fee_refund_amount": {
+            "description": "The total amount of refunded fees in a given settlement, in minor units.",
+            "example": 500,
+            "type": "integer",
+            "format": "int64"
+          },
+          "tax_refund_amount": {
+            "description": "The total amount of refunded tax in a given settlement, in minor units.",
+            "example": 500,
+            "type": "integer",
+            "format": "int64"
+          },
+          "deposit_amount": {
+            "description": "The increase of your debt balance with Klarna if your returns, fees, and other charges exceed your sales within this settlement period. This debt will be deducted from your next settlements and describes the amount that is increasing your debt balance, to be seen in the closing_debt_balance. In minor units.",
+            "example": 500,
+            "type": "integer",
+            "format": "int64"
+          },
+          "opening_debt_balance_amount": {
+            "description": "Your negative balance with Klarna from previous settlements, if your returns, fees, and other charges exceeded your sales. This amount equals the closing_debt_balance of your last settlement unless Klarna has invoiced you separately for the amount. In minor units.",
+            "example": 500,
+            "type": "integer",
+            "format": "int64"
+          },
+          "closing_debt_balance_amount": {
+            "description": "Your debt balance after the settlement. This amount will be the opening debt balance of your next settlement and helps you understand which amounts will be deducted from your next settlements. In minor units.",
+            "example": 500,
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "commission_amount",
+          "repay_amount",
+          "sale_amount",
+          "holdback_amount",
+          "settlement_amount",
+          "reversal_amount",
+          "release_amount",
+          "return_amount",
+          "fee_amount",
+          "charge_amount",
+          "credit_amount",
+          "fee_refund_amount",
+          "tax_refund_amount",
+          "deposit_amount",
+          "opening_debt_balance_amount",
+          "closing_debt_balance_amount"
+        ]
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "description": "Total amount of the specific transaction, in minor units",
+            "example": 2000,
+            "type": "integer",
+            "format": "int64"
+          },
+          "capture_id": {
+            "description": "Each capture on an order is assigned a unique identifier, referred to as the capture_id, which is provided exclusively for sale and fee transactions. In instances of partial shipments, an order may undergo multiple captures, each of which is reflected as a separate transaction with its own unique capture_id. It's important to note that for certain transaction types such as RETURNS and REVERSALS, where captures do not exist, the API will return empty strings for the capture_ID field.",
+            "example": "33db6f16-9f43-43fa-a587-cc51411c98e4",
+            "type": "string"
+          },
+          "merchant_reference1": {
+            "description": "Merchant assigned reference, typically a reference to an order management system id",
+            "type": "string"
+          },
+          "sale_date": {
+            "description": "ISO 8601 formatted date-time string",
+            "example": "2016-12-14T07:52:26Z",
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "description": "The type of transaction.",
+            "example": "SALE",
+            "type": "string",
+            "enum": [
+              "COMMISSION",
+              "SALE",
+              "REVERSAL",
+              "RETURN",
+              "TAX",
+              "FEE",
+              "FEE_REFUND",
+              "CORRECTION",
+              "REVERSAL_MERCHANT_PROTECTION",
+              "CHARGE",
+              "CREDIT",
+              "HOLDBACK",
+              "RELEASE"
+            ]
+          },
+          "capture_date": {
+            "description": "ISO 8601 formatted date-time string",
+            "example": "2016-12-14T07:52:26Z",
+            "type": "string",
+            "format": "date-time"
+          },
+          "payment_reference": {
+            "description": "Reference to the specific payout the transaction is part of, if available.",
+            "example": "XISA93DJ",
+            "type": "string"
+          },
+          "order_id": {
+            "description": "The Klarna assigned order id reference",
+            "example": "ce17b4cb-147f-48b7-b8e6-dde2fa397f04",
+            "type": "string",
+            "format": "uuid"
+          },
+          "payout": {
+            "description": "Link to the payout that this transaction is part of",
+            "example": "https://{settlements_api}/payouts/XISA93DJ",
+            "type": "string"
+          },
+          "refund_id": {
+            "description": "The Klarna assigned id reference of a specific refund",
+            "example": "ef1baa1f-b42e-44be-b9e4-4b94510b53e5",
+            "type": "string"
+          },
+          "short_order_id": {
+            "description": "The Klarna assigned short order id reference",
+            "example": "shortrid",
+            "type": "string"
+          },
+          "merchant_reference2": {
+            "description": "Merchant assigned reference, typically a reference to an order management system id",
+            "type": "string"
+          },
+          "currency_code": {
+            "description": "ISO 4217 Currency Code. Like USD, EUR, AUD or GBP.",
+            "example": "USD",
+            "type": "string"
+          },
+          "purchase_country": {
+            "type": "string",
+            "description": "ISO Alpha-2 Country Code",
+            "example": "PL"
+          },
+          "vat_rate": {
+            "type": "integer",
+            "description": "VAT (Value added tax) rate on Klarna fees",
+            "example": 2000
+          },
+          "vat_amount": {
+            "type": "integer",
+            "description": "VAT (Value added tax) amount on Klarna fees, in minor units",
+            "example": 1000
+          },
+          "shipping_country": {
+            "type": "string",
+            "description": "ISO Alpha-2 Country Code",
+            "example": "PL"
+          },
+          "initial_payment_method_type": {
+            "type": "string",
+            "description": "Payment method the consumer chose during checkout",
+            "example": "direct_debit"
+          },
+          "initial_number_of_installments": {
+            "type": "integer",
+            "description": "Number of installments the consumer chose during checkout in case of installment payments",
+            "example": 3
+          },
+          "initial_payment_method_monthly_downpayments": {
+            "type": "integer",
+            "description": "Number of monthly downpayments that were chosen during the checkout in case of installment payments.",
+            "example": 12
+          },
+          "merchant_capture_reference": {
+            "type": "string",
+            "description": "Your internal reference to the capture, that has been submitted during capturing an order via API"
+          },
+          "merchant_refund_reference": {
+            "type": "string",
+            "description": "Your internal reference to the refund, that has been submitted during refunding an order via API"
+          },
+          "detailed_type": {
+            "type": "string",
+            "description": "Detailed description of the transaction type",
+            "example": "PURCHASE",
+            "enum": [
+              "COMMISSION",
+              "CREDITED_CORRECTION",
+              "PURCHASE_FEE_PERCENTAGE",
+              "PURCHASE_FEE_PERCENTAGE_REFUND",
+              "LATE_RETURN_FEE",
+              "PURCHASE_FEE_FIXED",
+              "EXPIRY_FEE_GROSS",
+              "EXPIRY_FEE",
+              "SERVICING_FEE",
+              "RETURN_FEE",
+              "EXTRA_INVOICE_FEE",
+              "PURCHASE_RETURN",
+              "COMMISSION_RETURN",
+              "REVERSAL",
+              "FRAUD_POLICY_CHARGE",
+              "COMMISSION_RETURN_GROSS",
+              "FRAUD_POLICY_CREDIT_NET",
+              "PURCHASE",
+              "MANUAL_ENTRY",
+              "LOAN_PAYOUT",
+              "LOAN_AMORTISATION",
+              "LOAN_FEE",
+              "FEE_REFUND",
+              "PURCHASE_COMMISSION_PERCENTAGE",
+              "REVENUE_SHARE",
+              "REVENUE_SHARE_REVERSAL",
+              "EXTEND_DUE_DATE_FEE",
+              "TRANSFER_FROM_LEGACY_INTEGRATION",
+              "FIXED_FEE_CORRECTION_UK",
+              "PERCENTAGE_FEE_CORRECTION_UK",
+              "VAT_ON_FEE_CORRECTION_UK",
+              "FIXED_FEE_CORRECTION_SE",
+              "PERCENTAGE_FEE_CORRECTION_SE",
+              "PERCENTAGE_FEE_CORRECTION",
+              "FIXED_FEE_CORRECTION",
+              "ROLLING_RESERVE",
+              "PERCENTAGE_FEES",
+              "PAYMENT_REMINDER",
+              "CORRECTION",
+              "UNDER_REVIEW",
+              "INSUFFICIENT_BANK_ACCOUNT_DETAILS",
+              "DISPUTE_FEE",
+              "DISPUTE_FEE_REFUND",
+              "CORRECTION_DISPUTE",
+              "PAYMENT_DEFAULT"
+            ]
+          },
+          "tax_in_currency_of_registration_country": {
+            "type": "integer",
+            "description": "The tax amount on the respective fee, converted into the currency of your registration country. In case you are a German merchant selling in another currency then EUR or a Swedish merchant selling in another currency then SEK, we convert the VAT amount on the Klarna fees into the currency of the country you are registered in, based on the exchange rate of the capture date.",
+            "example": 1000
+          },
+          "currency_code_of_registration_country": {
+            "type": "string",
+            "description": "ISO 4217 Currency Code of the country you are registered in.",
+            "example": "EUR"
+          },
+          "klarna_comment": {
+            "type": "string",
+            "description": "Any additional information necessary to provide more context about the transaction.",
+            "example": "Loan Amortisation 2022-12-01"
+          },
+          "reversal_reference": {
+            "type": "string",
+            "description": "Unique internal identifier, known as DisputeKRN, assigned to each dispute by Klarna. This identifier includes a dispute category and a numeric code, enabling efficient tracking and management of the dispute's status.",
+            "example": "krn:klarna:eu1:dispute:goods_not_received:263099944398666"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "amount",
+          "sale_date",
+          "type",
+          "capture_date",
+          "order_id",
+          "currency_code",
+          "purchase_country"
+        ]
+      },
+      "TransactionCollection": {
+        "type": "object",
+        "properties": {
+          "transactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Transaction"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "transactions",
+          "pagination"
+        ]
+      }
+    }
+  }
+}

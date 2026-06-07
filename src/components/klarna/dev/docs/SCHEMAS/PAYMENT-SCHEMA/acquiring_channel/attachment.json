@@ -1,0 +1,21 @@
+{
+  "attachment": {
+    "type": "object",
+    "required": [
+      "body",
+      "content_type"
+    ],
+    "properties": {
+      "body": {
+        "type": "string",
+        "example": "{\"customer_account_info\":[{\"unique_account_identifier\":\"test@gmail.com\",\"account_registration_date\":\"2017-02-13T10:49:20Z\",\"account_last_modified\":\"2019-03-13T11:45:27Z\"}]}",
+        "description": "The content of the extra merchant data should be presented as a string inside this property. The body should be an object containing any of the keys and sub-objects described below serialized to JSON. More information on that object can be found [here](https://docs.klarna.com/api/extra-merchant-data)."
+      },
+      "content_type": {
+        "type": "string",
+        "example": "application/vnd.klarna.internal.emd-v2+json",
+        "description": "The content type of the body. It is usually represented as \"application/vnd.klarna.internal.emd-v2+json\""
+      }
+    }
+  }
+}

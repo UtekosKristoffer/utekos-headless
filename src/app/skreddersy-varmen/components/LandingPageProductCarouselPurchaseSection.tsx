@@ -26,7 +26,7 @@ export function LandingPageProductCarouselPurchaseSection({
   currentConfig
 }: LandingPageProductCarouselPurchaseSectionProps) {
   return (
-    <div className='relative flex w-full flex-col items-center justify-center bg-background min-[900px]:sticky min-[900px]:top-0 min-[900px]:h-[100svh] min-[900px]:self-start min-[900px]:p-8 min-[1280px]:p-12'>
+    <div className='relative flex w-full flex-col items-center justify-center bg-background min-[900px]:sticky min-[900px]:top-0 min-[900px]:h-svh min-[900px]:self-start min-[900px]:p-8 min-[1280px]:p-12'>
       <BrandBadge
         key={`badge-${selectedModel}`}
         backgroundColor='var(--color-bleached-mauve)'

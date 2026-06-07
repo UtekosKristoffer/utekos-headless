@@ -56,3 +56,72 @@ create index if not exists attribution_events_created_at_idx
 create index if not exists attribution_events_anonymous_id_idx
   on marketing.attribution_events (anonymous_id)
   where anonymous_id is not null;
+
+create index if not exists attribution_events_lead_id_idx
+  on marketing.attribution_events (lead_id)
+  where lead_id is not null;
+
+create table if not exists marketing.consent_snapshots (
+  id uuid primary key default gen_random_uuid(),
+
+  anonymous_id text,
+  external_id text,
+  categories jsonb not null default '{}'::jsonb,
+  source text not null default 'website',
+  occurred_at timestamptz not null default now(),
+
+  created_at timestamptz not null default now()
+);
+
+create index if not exists consent_snapshots_anonymous_id_idx
+  on marketing.consent_snapshots (anonymous_id, occurred_at desc)
+  where anonymous_id is not null;
+
+create index if not exists consent_snapshots_external_id_idx
+  on marketing.consent_snapshots (external_id, occurred_at desc)
+  where external_id is not null;
+
+create table if not exists marketing.event_ledger (
+  id uuid primary key default gen_random_uuid(),
+
+  event_id text not null,
+  event_name text not null,
+  idempotency_key text not null unique,
+
+  anonymous_id text,
+  external_id text,
+  source_url text,
+  consent jsonb not null default '{}'::jsonb,
+  user_data_quality jsonb not null default '{}'::jsonb,
+  payload jsonb not null default '{}'::jsonb,
+
+  occurred_at timestamptz not null,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists event_ledger_event_id_idx
+  on marketing.event_ledger (event_id);
+
+create index if not exists event_ledger_event_name_idx
+  on marketing.event_ledger (event_name, occurred_at desc);
+
+create index if not exists event_ledger_created_at_idx
+  on marketing.event_ledger (created_at desc);
+
+create table if not exists marketing.meta_quality_snapshots (
+  id uuid primary key default gen_random_uuid(),
+
+  dataset_id text not null,
+  event_name text,
+  event_match_quality numeric,
+  event_coverage numeric,
+  dedup_key_feedback jsonb not null default '{}'::jsonb,
+  data_freshness jsonb not null default '{}'::jsonb,
+  raw_payload jsonb not null default '{}'::jsonb,
+
+  measured_at timestamptz not null default now(),
+  created_at timestamptz not null default now()
+);
+
+create index if not exists meta_quality_snapshots_dataset_idx
+  on marketing.meta_quality_snapshots (dataset_id, measured_at desc);

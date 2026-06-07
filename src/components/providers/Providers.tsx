@@ -9,8 +9,8 @@ import { serverActions } from '@/constants/serverActions'
 import { CartIdProvider } from '@/components/providers/CartIdProvider'
 import type { DehydratedState } from '@tanstack/react-query'
 import { CookieConsentProvider } from '@/components/cookie-consent/CookieConsentProvider'
-import { ConditionalTracking } from '../analytics/ConditionalTracking'
 import { MarketingPixels } from '@/components/analytics/MarketingPixels'
+import { PostHogConsentGate } from '@/components/analytics/PostHogConsentGate'
 import { CookieConsentBanner } from '@/components/CookieBanner'
 
 const ReactQueryDevtools =
@@ -46,14 +46,7 @@ export default function Providers({ children, cartId: initialCartId, dehydratedS
       </QueryClientProvider>
       <CookieConsentBanner />
       <MarketingPixels />
-      <ConditionalTracking
-        {...(process.env.NEXT_PUBLIC_POSTHOG_KEY && {
-          postHogApiKey: process.env.NEXT_PUBLIC_POSTHOG_KEY
-        })}
-        {...(process.env.NEXT_PUBLIC_POSTHOG_HOST && {
-          postHogHost: process.env.NEXT_PUBLIC_POSTHOG_HOST
-        })}
-      />
+      <PostHogConsentGate />
     </CookieConsentProvider>
   )
 }

@@ -1,0 +1,1097 @@
+[     352ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[     374ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[     438ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341302745-1854100015648, name: FCP, value: 396, delta: 396} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[     464ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341302745-6206899228054, name: TTFB, value: 228.10000038146973, delta: 228.10000038146973} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[     658ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   11596ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   11619ms] [LOG] [Fast Refresh] done in 123ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   11637ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   11638ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341302745-7627647197533, name: LCP, value: 580, delta: 580} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   11639ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341302752-9748735466710, name: CLS, value: 0, delta: 0} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   11639ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   11702ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   11713ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   11768ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341314047-8600854799391, name: TTFB, value: 158.7999997138977, delta: 158.7999997138977} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   11846ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   11859ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341314047-1829925081463, name: FCP, value: 292, delta: 292} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   41354ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   42282ms] [LOG] [Fast Refresh] done in 912ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   62677ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   62736ms] [LOG] [Fast Refresh] done in 161ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   62775ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   62777ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341314047-7176397701665, name: LCP, value: 3440, delta: 3440} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   62778ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341314174-9850862655041, name: CLS, value: 0.020517968465718957, delta: 0.020517968465718957} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   62778ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   62865ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   62876ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   62919ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341365233-1744714006446, name: FCP, value: 364, delta: 364} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   62958ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341365233-3660913489752, name: TTFB, value: 220.2999997138977, delta: 220.2999997138977} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   63080ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   63298ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   63298ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341365233-1915536948798, name: LCP, value: 516, delta: 516} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   63298ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341365233-8574418650886, name: CLS, value: 0, delta: 0} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   63298ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   63299ms] [ERROR] [Meta CAPI] Network error: TypeError: Failed to fetch
+    at sendPageViewToCAPI (http://localhost:3000/_next/static/chunks/src_0nxuydu._.js:12410:32)
+    at http://localhost:3000/_next/static/chunks/src_0nxuydu._.js:12505:203 @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:3766
+[   63356ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   63366ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   63403ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341365699-4919670387001, name: FCP, value: 408, delta: 408} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   63412ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341365699-7997342941009, name: TTFB, value: 302.2000002861023, delta: 302.2000002861023} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   63482ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   80674ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   80684ms] [LOG] [Fast Refresh] done in 111ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   80700ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   80700ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341365699-5359084702459, name: LCP, value: 508, delta: 508} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   80700ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341365717-6856301036336, name: CLS, value: 0, delta: 0} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   80700ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   80753ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   80763ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   80803ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341383089-2616479096573, name: FCP, value: 236, delta: 236} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   80816ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341383089-5063188279822, name: TTFB, value: 131.7999997138977, delta: 131.7999997138977} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   80933ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   81034ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   81061ms] [LOG] [Fast Refresh] done in 129ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   81093ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   81094ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341383089-7153255428135, name: LCP, value: 352, delta: 352} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   81094ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341383118-4681084192339, name: CLS, value: 0, delta: 0} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   81094ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   81095ms] [ERROR] [Meta CAPI] Network error: TypeError: Failed to fetch
+    at sendPageViewToCAPI (http://localhost:3000/_next/static/chunks/src_0nxuydu._.js:12410:32)
+    at http://localhost:3000/_next/static/chunks/src_0nxuydu._.js:12505:203 @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:3766
+[   81130ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   81136ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   81175ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341383468-1833965049449, name: TTFB, value: 156.59999990463257, delta: 156.59999990463257} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   81240ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   81248ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341383468-3040327425457, name: FCP, value: 264, delta: 264} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   81299ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341383468-5972820805876, name: LCP, value: 348, delta: 348} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   81310ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341383468-8718339654701, name: FID, value: 3.4000000953674316, delta: 3.4000000953674316} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82219ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82219ms] [LOG] [Fast Refresh] done in 102ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82245ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(5), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82246ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341383468-7976838793766, name: INP, value: 56, delta: 56} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82246ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341383562-4110979405593, name: CLS, value: 0.061259259259259256, delta: 0.061259259259259256} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82246ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82304ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82312ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82353ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341384647-8253193015178, name: FCP, value: 240, delta: 240} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82363ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341384647-2337668736116, name: TTFB, value: 131.40000009536743, delta: 131.40000009536743} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82457ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82679ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82716ms] [LOG] [Fast Refresh] done in 138ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82749ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82749ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341384647-8708851813131, name: LCP, value: 356, delta: 356} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82749ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341384668-1426172736589, name: CLS, value: 0, delta: 0} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82750ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82750ms] [ERROR] [Meta CAPI] Network error: TypeError: Failed to fetch
+    at sendPageViewToCAPI (http://localhost:3000/_next/static/chunks/src_0nxuydu._.js:12410:32)
+    at http://localhost:3000/_next/static/chunks/src_0nxuydu._.js:12505:203 @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:3766
+[   82809ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82820ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82862ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341385156-1833223355621, name: TTFB, value: 248.40000009536743, delta: 248.40000009536743} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82927ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   82937ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341385156-2885752167049, name: FCP, value: 368, delta: 368} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   83061ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341385156-1444529560577, name: LCP, value: 452, delta: 452} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   83077ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341385156-9968908126118, name: FID, value: 1, delta: 1} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   83557ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(4), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   83603ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   83854ms] [LOG] [Fast Refresh] done in 357ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   97474ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   97611ms] [LOG] [Fast Refresh] done in 238ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   97643ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   97644ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341385156-6365858317919, name: INP, value: 64, delta: 64} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   97644ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341385252-9480641487883, name: CLS, value: 0, delta: 0} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   97644ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   97749ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   97768ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   97832ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341400105-2294341862140, name: TTFB, value: 318, delta: 318} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   97935ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341400105-2071991192478, name: FCP, value: 516, delta: 516} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   97974ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   98134ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   98152ms] [LOG] [Fast Refresh] done in 119ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   98235ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   98236ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341400105-1112549460234, name: LCP, value: 648, delta: 648} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   98236ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341400249-7295472667119, name: CLS, value: 0, delta: 0} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   98236ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   98237ms] [ERROR] [Meta CAPI] Network error: TypeError: Failed to fetch
+    at sendPageViewToCAPI (http://localhost:3000/_next/static/chunks/src_0nxuydu._.js:12410:32)
+    at http://localhost:3000/_next/static/chunks/src_0nxuydu._.js:12505:203 @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:3766
+[   98308ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   98319ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   98370ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341400662-2892012940282, name: FCP, value: 368, delta: 368} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   98391ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341400662-7171539034788, name: TTFB, value: 233.5, delta: 233.5} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   98466ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   98560ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341400662-4623980277016, name: FID, value: 2.200000286102295, delta: 2.200000286102295} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   98569ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341400662-7625881564413, name: LCP, value: 500, delta: 500} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   99509ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   99713ms] [LOG] [Fast Refresh] done in 304ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   99739ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(5), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   99739ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341400662-1689992660590, name: INP, value: 56, delta: 56} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   99740ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341400684-2296985742699, name: CLS, value: 0.061259259259259256, delta: 0.061259259259259256} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   99740ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   99846ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   99861ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   99921ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341402209-2615260679724, name: FCP, value: 528, delta: 528} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[   99934ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341402209-8876318293655, name: TTFB, value: 345.59999990463257, delta: 345.59999990463257} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  100103ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  100310ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  100433ms] [LOG] [Fast Refresh] done in 224ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  100567ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  100569ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341402209-7613177999731, name: LCP, value: 660, delta: 660} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  100569ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341402235-2371275650028, name: CLS, value: 0, delta: 0} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  100569ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  100571ms] [ERROR] [Meta CAPI] Network error: TypeError: Failed to fetch
+    at sendPageViewToCAPI (http://localhost:3000/_next/static/chunks/src_0nxuydu._.js:12410:32)
+    at http://localhost:3000/_next/static/chunks/src_0nxuydu._.js:12505:203 @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:3766
+[  100699ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  100709ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  101031ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341403345-5829302922082, name: FCP, value: 616, delta: 616} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  101063ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341403345-5547707204023, name: TTFB, value: 428.30000019073486, delta: 428.30000019073486} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  101118ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  101401ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341403345-3511716803929, name: FID, value: 0.9000000953674316, delta: 0.9000000953674316} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  101402ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341403345-7717008858809, name: LCP, value: 1016, delta: 1016} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  101533ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(4), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  114052ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  114557ms] [LOG] [Fast Refresh] done in 525ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  130889ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  130957ms] [LOG] [Fast Refresh] done in 170ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  130977ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  130978ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341403345-6562726974698, name: INP, value: 72, delta: 72} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  130978ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341403345-3628642827290, name: CLS, value: 0, delta: 0} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  130979ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131046ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131070ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131135ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341433421-9880562754493, name: FCP, value: 364, delta: 364} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131152ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341433421-2332538678652, name: TTFB, value: 206.90000009536743, delta: 206.90000009536743} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131293ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131370ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131440ms] [LOG] [Fast Refresh] done in 171ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131491ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131491ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341433421-8748855357159, name: LCP, value: 500, delta: 500} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131491ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341433449-3822875978866, name: CLS, value: 0, delta: 0} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131491ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131492ms] [ERROR] [Meta CAPI] Network error: TypeError: Failed to fetch
+    at sendPageViewToCAPI (http://localhost:3000/_next/static/chunks/src_0nxuydu._.js:12410:32)
+    at http://localhost:3000/_next/static/chunks/src_0nxuydu._.js:12505:203 @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:3766
+[  131550ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131558ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131602ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341433895-2770063845054, name: FCP, value: 324, delta: 324} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131603ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341433895-5267404380654, name: TTFB, value: 213.2999997138977, delta: 213.2999997138977} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131671ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131763ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341433895-8570368892186, name: FID, value: 1.3000001907348633, delta: 1.3000001907348633} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  131779ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341433895-8286616461307, name: LCP, value: 424, delta: 424} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  140965ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  141537ms] [LOG] [Fast Refresh] done in 490ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156235ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156355ms] [LOG] [Fast Refresh] done in 221ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156424ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(5), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156425ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341433895-9306849253762, name: INP, value: 56, delta: 56} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156425ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341433917-5244452210555, name: CLS, value: 0, delta: 0} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156425ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156512ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156526ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156584ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341458875-5180130997715, name: FCP, value: 516, delta: 516} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156611ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341458875-5878532178738, name: TTFB, value: 354.90000009536743, delta: 354.90000009536743} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156729ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156805ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156874ms] [LOG] [Fast Refresh] done in 171ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156898ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156898ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341458875-3333365793471, name: LCP, value: 668, delta: 668} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156898ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341458898-3336682748344, name: CLS, value: 0, delta: 0} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156898ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156899ms] [ERROR] [Meta CAPI] Network error: TypeError: Failed to fetch
+    at sendPageViewToCAPI (http://localhost:3000/_next/static/chunks/src_0nxuydu._.js:12410:32)
+    at http://localhost:3000/_next/static/chunks/src_0nxuydu._.js:12505:203 @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:3766
+[  156947ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  156957ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  157056ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341459367-2902805979543, name: FCP, value: 384, delta: 384} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  157124ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341459367-7385918753019, name: TTFB, value: 247.39999961853027, delta: 247.39999961853027} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  157200ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  157411ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341459367-7897595034854, name: LCP, value: 584, delta: 584} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  157426ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341459367-6812928390538, name: FID, value: 0.19999980926513672, delta: 0.19999980926513672} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  169955ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[  170374ms] [LOG] [Fast Refresh] done in 376ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 1485010ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 1486198ms] [LOG] [Fast Refresh] done in 1254ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 1510310ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 1510835ms] [LOG] [Fast Refresh] done in 626ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 1530843ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 1531302ms] [LOG] [Fast Refresh] done in 560ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 1609682ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 1610253ms] [LOG] [Fast Refresh] done in 673ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 1618065ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 1618466ms] [LOG] [Fast Refresh] done in 502ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 1690922ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 1691460ms] [LOG] [Fast Refresh] done in 640ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 1709924ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 1710394ms] [LOG] [Fast Refresh] done in 573ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 1739822ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 1740306ms] [LOG] [Fast Refresh] done in 586ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2438084ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2439266ms] [LOG] [Fast Refresh] done in 1241ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2448525ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2449210ms] [LOG] [Fast Refresh] done in 720ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2478950ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2479761ms] [LOG] [Fast Refresh] done in 912ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2511516ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2511761ms] [LOG] [Fast Refresh] done in 220ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2512199ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2512622ms] [LOG] [Fast Refresh] done in 524ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2513646ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2513732ms] [LOG] [Fast Refresh] done in 187ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2513948ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2514052ms] [LOG] [Fast Refresh] done in 204ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2514446ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2514554ms] [LOG] [Fast Refresh] done in 209ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2515197ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2515249ms] [LOG] [Fast Refresh] done in 153ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2525578ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2526169ms] [LOG] [Fast Refresh] done in 555ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2527594ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2527637ms] [LOG] [Fast Refresh] done in 143ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2528064ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2528089ms] [LOG] [Fast Refresh] done in 125ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2528512ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2528591ms] [LOG] [Fast Refresh] done in 180ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2528692ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2528701ms] [LOG] [Fast Refresh] done in 111ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2534572ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2537175ms] [LOG] [Fast Refresh] done in 2673ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2537516ms] [WARNING] Image with src "/utekos-techdown-diagonalt-fullfigur.webp" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2537516ms] [WARNING] Image with src "/utekos-techdown-diagonalt-fullfigur.webp" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2537523ms] [WARNING] Image with src "/kvinne-nyter-terrasselivet-med-utekos-techdown.webp" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2537523ms] [WARNING] Image with src "/kvinne-nyter-terrasselivet-med-utekos-techdown.webp" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2537534ms] [WARNING] Image with src "/utekos-techdown-bakside-fullmodus-1600-1793.webp" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2537534ms] [WARNING] Image with src "/utekos-techdown-bakside-fullmodus-1600-1793.webp" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2537534ms] [WARNING] Image with src "/_next/static/media/icon.0zf7u7-fd1~r_.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2537552ms] [WARNING] Image with src "/_next/static/media/classic-couple-mobile-1080.003iij5jezl72.webp" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2537552ms] [WARNING] Image with src "/_next/static/media/classic-couple-mobile-1080.003iij5jezl72.webp" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2538774ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2539276ms] [LOG] [Fast Refresh] done in 603ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2540624ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2540668ms] [LOG] [Fast Refresh] done in 146ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2542102ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2542153ms] [LOG] [Fast Refresh] done in 152ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2542617ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2542698ms] [LOG] [Fast Refresh] done in 182ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2542818ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2542836ms] [LOG] [Fast Refresh] done in 119ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2543506ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(5), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2543508ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341459367-2761742423312, name: INP, value: 56, delta: 56} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2543508ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780341459370-3631707158381, name: CLS, value: 0.38, delta: 0.38} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2543509ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2543652ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2543678ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2543841ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2543855ms] [LOG] [Fast Refresh] done in 115ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2543884ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780343846196-6798762512404, name: FCP, value: 6580, delta: 6580} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2543972ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780343846196-3914010334410, name: TTFB, value: 6343.400000095367, delta: 6343.400000095367} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2544074ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2544178ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2544565ms] [LOG] [Fast Refresh] done in 487ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2544672ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2544733ms] [LOG] [Fast Refresh] done in 165ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2558189ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2558845ms] [LOG] [Fast Refresh] done in 658ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2559778ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2559899ms] [LOG] [Fast Refresh] done in 222ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2560001ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2560136ms] [LOG] [Fast Refresh] done in 237ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2560640ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2560720ms] [LOG] [Fast Refresh] done in 183ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2561092ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2561170ms] [LOG] [Fast Refresh] done in 178ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2584322ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2585868ms] [WARNING] Image with src "/utekos-techdown-diagonalt-fullfigur.webp" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2585868ms] [WARNING] Image with src "/utekos-techdown-diagonalt-fullfigur.webp" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2585877ms] [WARNING] Image with src "/kvinne-nyter-terrasselivet-med-utekos-techdown.webp" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2585877ms] [WARNING] Image with src "/kvinne-nyter-terrasselivet-med-utekos-techdown.webp" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2585880ms] [WARNING] Image with src "/utekos-techdown-bakside-fullmodus-1600-1793.webp" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2585880ms] [WARNING] Image with src "/utekos-techdown-bakside-fullmodus-1600-1793.webp" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2585880ms] [WARNING] Image with src "/_next/static/media/icon.0zf7u7-fd1~r_.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2585890ms] [WARNING] Image with src "/_next/static/media/classic-couple-mobile-1080.003iij5jezl72.webp" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2585890ms] [WARNING] Image with src "/_next/static/media/classic-couple-mobile-1080.003iij5jezl72.webp" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2586341ms] [LOG] [Fast Refresh] done in 1443ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2593585ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2593670ms] [LOG] [Fast Refresh] done in 185ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2594622ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2594622ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780343846196-9834966865332, name: LCP, value: 6948, delta: 6948} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2594622ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780343846197-9876156427041, name: CLS, value: 0.38, delta: 0.38} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2594622ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2594880ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2594902ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2595054ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780343897368-4174565757018, name: FCP, value: 9300, delta: 9300} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2595309ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780343897368-3061379444434, name: TTFB, value: 8953.299999713898, delta: 8953.299999713898} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2595405ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2595414ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2595421ms] [LOG] [Fast Refresh] done in 159ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2595551ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2595782ms] [LOG] [Fast Refresh] done in 332ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2595944ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2596075ms] [LOG] [Fast Refresh] done in 233ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2599354ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2600887ms] [LOG] [Fast Refresh] done in 1582ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2605352ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2605449ms] [LOG] [Fast Refresh] done in 203ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2606289ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2606327ms] [LOG] [Fast Refresh] done in 138ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2607978ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2607978ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780343897368-3966120202641, name: LCP, value: 9784, delta: 9784} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2607978ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780343897368-5260667415211, name: CLS, value: 1, delta: 1} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2607978ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2608229ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2608253ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2608806ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780343911120-9872038251051, name: FCP, value: 7840, delta: 7840} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2608933ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780343911120-9963006195859, name: TTFB, value: 7128.699999809265, delta: 7128.699999809265} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2609022ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2609027ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2609079ms] [LOG] [Fast Refresh] done in 169ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2609183ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2609491ms] [LOG] [Fast Refresh] done in 409ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2651479ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2652859ms] [LOG] [Fast Refresh] done in 1443ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2653179ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2653602ms] [LOG] [Fast Refresh] done in 523ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2657821ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2657870ms] [LOG] [Fast Refresh] done in 152ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2658407ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2658409ms] [LOG] [Fast Refresh] done in 103ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2659489ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2659490ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780343911120-7607712430161, name: LCP, value: 8220, delta: 8220} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2659490ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780343911120-9609966097585, name: CLS, value: 1, delta: 1} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2659490ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2659695ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2659718ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2659863ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780343962176-9256395179174, name: FCP, value: 6960, delta: 6960} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2659876ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2659932ms] [LOG] [Fast Refresh] done in 161ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2660020ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780343962176-4470760084230, name: TTFB, value: 6665.400000095367, delta: 6665.400000095367} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2660101ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2660300ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2660489ms] [LOG] [Fast Refresh] done in 290ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2660615ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2660626ms] [LOG] [Fast Refresh] done in 110ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2716857ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2717575ms] [LOG] [Fast Refresh] done in 796ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2721874ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2722634ms] [LOG] [Fast Refresh] done in 754ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2734465ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2735193ms] [LOG] [Fast Refresh] done in 793ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2737783ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2738581ms] [LOG] [Fast Refresh] done in 867ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2743813ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2744363ms] [LOG] [Fast Refresh] done in 609ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2803106ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2803766ms] [LOG] [Fast Refresh] done in 707ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2806973ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2807497ms] [LOG] [Fast Refresh] done in 624ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2813706ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2814212ms] [LOG] [Fast Refresh] done in 558ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2948695ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 2948837ms] [LOG] [Fast Refresh] done in 243ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 3068951ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 3069274ms] [LOG] [Fast Refresh] done in 424ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 3144412ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 3146557ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/?_rsc=1e9xa:0
+[ 3146709ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/?_rsc=1e9xa:0
+[ 3146993ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 3146999ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780343962176-5706262963575, name: LCP, value: 7344, delta: 7344} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 3146999ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780343962177-2847601320989, name: CLS, value: 0.0003441586538461538, delta: 0.0003441586538461538} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 3147000ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 3147007ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[ 3147163ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0bruynb._.js:15305
+[ 3147260ms] Error: ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx
+
+
+    at Object.getCompilationErrors (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/base-server.js:1745:26)
+[ 3147255ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1226
+[ 3147314ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3147314ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3147314ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3147314ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3158004ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[ 3158057ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0bruynb._.js:15305
+[ 3158087ms] Error: ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx
+
+
+    at Object.getCompilationErrors (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/base-server.js:1745:26)
+[ 3158115ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1226
+[ 3158117ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3158117ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3158117ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3158118ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3158118ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3158118ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3158118ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3158118ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3175386ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[ 3175437ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0bruynb._.js:15305
+[ 3175449ms] Error: ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx
+
+
+    at Object.getCompilationErrors (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/base-server.js:1745:26)
+[ 3175444ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1226
+[ 3175447ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3175447ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3175447ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3175447ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3211187ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[ 3211237ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0bruynb._.js:15305
+[ 3211245ms] Error: ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx
+
+
+    at Object.getCompilationErrors (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/base-server.js:1745:26)
+[ 3211256ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1226
+[ 3211270ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3211270ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3211270ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3211270ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3235026ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[ 3235135ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0bruynb._.js:15305
+[ 3235146ms] Error: ./src/app/layout.tsx:3:1
+Export utekosText doesn't exist in target module
+  1 | import '../globals.css'
+  2 | import '@fontsource-variable/google-sans/full.css'
+> 3 | import { utekosText, utekosTextMedium } from '@/app/fonts/font.config'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Suspense } from 'react'
+  5 | import { WebVitalsReporter } from '@/components/analytics/WebVitalsReporter'
+  6 | import { mainMenu } from '@/db/config/menu.config'
+
+The export utekosText was not found in module [project]/src/app/fonts/font.config.ts [app-rsc] (ecmascript).
+Did you mean to import utekosTextMedium?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+
+    at <unknown> (Error: ./src/app/layout.tsx:3:1)
+    at Object.getCompilationErrors (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/base-server.js:1745:26)
+[ 3235161ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1226
+[ 3235206ms] [ERROR] ./src/app/layout.tsx:3:1
+Export utekosText doesn't exist in target module
+  1 | import '../globals.css'
+  2 | import '@fontsource-variable/google-sans/full.css'
+> 3 | import { utekosText, utekosTextMedium } from '@/app/fonts/font.config'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Suspense } from 'react'
+  5 | import { WebVitalsReporter } from '@/components/analytics/WebVitalsReporter'
+  6 | import { mainMenu } from '@/db/config/menu.config'
+
+The export utekosText was not found in module [project]/src/app/fonts/font.config.ts [app-rsc] (ecmascript).
+Did you mean to import utekosTextMedium?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3235206ms] [ERROR] ./src/app/layout.tsx:3:1
+Export utekosText doesn't exist in target module
+  1 | import '../globals.css'
+  2 | import '@fontsource-variable/google-sans/full.css'
+> 3 | import { utekosText, utekosTextMedium } from '@/app/fonts/font.config'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Suspense } from 'react'
+  5 | import { WebVitalsReporter } from '@/components/analytics/WebVitalsReporter'
+  6 | import { mainMenu } from '@/db/config/menu.config'
+
+The export utekosText was not found in module [project]/src/app/fonts/font.config.ts [app-rsc] (ecmascript).
+Did you mean to import utekosTextMedium?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3235206ms] [ERROR] ./src/app/layout.tsx:3:1
+Export utekosText doesn't exist in target module
+  1 | import '../globals.css'
+  2 | import '@fontsource-variable/google-sans/full.css'
+> 3 | import { utekosText, utekosTextMedium } from '@/app/fonts/font.config'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Suspense } from 'react'
+  5 | import { WebVitalsReporter } from '@/components/analytics/WebVitalsReporter'
+  6 | import { mainMenu } from '@/db/config/menu.config'
+
+The export utekosText was not found in module [project]/src/app/fonts/font.config.ts [app-rsc] (ecmascript).
+Did you mean to import utekosTextMedium?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3235206ms] [ERROR] ./src/app/layout.tsx:3:1
+Export utekosText doesn't exist in target module
+  1 | import '../globals.css'
+  2 | import '@fontsource-variable/google-sans/full.css'
+> 3 | import { utekosText, utekosTextMedium } from '@/app/fonts/font.config'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Suspense } from 'react'
+  5 | import { WebVitalsReporter } from '@/components/analytics/WebVitalsReporter'
+  6 | import { mainMenu } from '@/db/config/menu.config'
+
+The export utekosText was not found in module [project]/src/app/fonts/font.config.ts [app-rsc] (ecmascript).
+Did you mean to import utekosTextMedium?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3242428ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[ 3242465ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0bruynb._.js:15305
+[ 3242477ms] Error: ./src/app/layout.tsx:3:1
+Export utekosText doesn't exist in target module
+  1 | import '../globals.css'
+  2 | import '@fontsource-variable/google-sans/full.css'
+> 3 | import { utekosText, utekosTextMedium } from '@/app/fonts/font.config'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Suspense } from 'react'
+  5 | import { WebVitalsReporter } from '@/components/analytics/WebVitalsReporter'
+  6 | import { mainMenu } from '@/db/config/menu.config'
+
+The export utekosText was not found in module [project]/src/app/fonts/font.config.ts [app-rsc] (ecmascript).
+Did you mean to import utekosTextMedium?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+
+    at <unknown> (Error: ./src/app/layout.tsx:3:1)
+    at Object.getCompilationErrors (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/base-server.js:1745:26)
+[ 3242479ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1226
+[ 3242482ms] [ERROR] ./src/app/layout.tsx:3:1
+Export utekosText doesn't exist in target module
+  1 | import '../globals.css'
+  2 | import '@fontsource-variable/google-sans/full.css'
+> 3 | import { utekosText, utekosTextMedium } from '@/app/fonts/font.config'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Suspense } from 'react'
+  5 | import { WebVitalsReporter } from '@/components/analytics/WebVitalsReporter'
+  6 | import { mainMenu } from '@/db/config/menu.config'
+
+The export utekosText was not found in module [project]/src/app/fonts/font.config.ts [app-rsc] (ecmascript).
+Did you mean to import utekosTextMedium?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3242482ms] [ERROR] ./src/app/layout.tsx:3:1
+Export utekosText doesn't exist in target module
+  1 | import '../globals.css'
+  2 | import '@fontsource-variable/google-sans/full.css'
+> 3 | import { utekosText, utekosTextMedium } from '@/app/fonts/font.config'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Suspense } from 'react'
+  5 | import { WebVitalsReporter } from '@/components/analytics/WebVitalsReporter'
+  6 | import { mainMenu } from '@/db/config/menu.config'
+
+The export utekosText was not found in module [project]/src/app/fonts/font.config.ts [app-rsc] (ecmascript).
+Did you mean to import utekosTextMedium?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3242482ms] [ERROR] ./src/app/layout.tsx:3:1
+Export utekosText doesn't exist in target module
+  1 | import '../globals.css'
+  2 | import '@fontsource-variable/google-sans/full.css'
+> 3 | import { utekosText, utekosTextMedium } from '@/app/fonts/font.config'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Suspense } from 'react'
+  5 | import { WebVitalsReporter } from '@/components/analytics/WebVitalsReporter'
+  6 | import { mainMenu } from '@/db/config/menu.config'
+
+The export utekosText was not found in module [project]/src/app/fonts/font.config.ts [app-rsc] (ecmascript).
+Did you mean to import utekosTextMedium?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3242482ms] [ERROR] ./src/app/layout.tsx:3:1
+Export utekosText doesn't exist in target module
+  1 | import '../globals.css'
+  2 | import '@fontsource-variable/google-sans/full.css'
+> 3 | import { utekosText, utekosTextMedium } from '@/app/fonts/font.config'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Suspense } from 'react'
+  5 | import { WebVitalsReporter } from '@/components/analytics/WebVitalsReporter'
+  6 | import { mainMenu } from '@/db/config/menu.config'
+
+The export utekosText was not found in module [project]/src/app/fonts/font.config.ts [app-rsc] (ecmascript).
+Did you mean to import utekosTextMedium?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3250403ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[ 3250541ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0bruynb._.js:15305
+[ 3250558ms] Error: ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx
+
+
+    at Object.getCompilationErrors (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/base-server.js:1745:26)
+[ 3250603ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1226
+[ 3251006ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3251006ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3251006ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3251006ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 3288915ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 3288993ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 3289163ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780344591476-8034904395240, name: FCP, value: 7636, delta: 7636} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 3289655ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780344591476-4405540827100, name: TTFB, value: 6938.599999904633, delta: 6938.599999904633} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 3289910ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4869777ms] [WARNING] Image with src "/utekos-techdown-diagonalt-fullfigur.webp" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4869778ms] [WARNING] Image with src "/utekos-techdown-diagonalt-fullfigur.webp" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4869779ms] [WARNING] Image with src "/kvinne-nyter-terrasselivet-med-utekos-techdown.webp" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4869779ms] [WARNING] Image with src "/kvinne-nyter-terrasselivet-med-utekos-techdown.webp" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4869791ms] [WARNING] Image with src "/utekos-techdown-bakside-fullmodus-1600-1793.webp" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4869792ms] [WARNING] Image with src "/utekos-techdown-bakside-fullmodus-1600-1793.webp" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4869792ms] [WARNING] Image with src "/_next/static/media/icon.0zf7u7-fd1~r_.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4869801ms] [WARNING] Image with src "/_next/static/media/classic-couple-mobile-1080.003iij5jezl72.webp" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4869802ms] [WARNING] Image with src "/_next/static/media/classic-couple-mobile-1080.003iij5jezl72.webp" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4879832ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4879838ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780344591476-4569540908176, name: LCP, value: 1594060, delta: 1594060} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4879838ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780344591477-3121056675775, name: CLS, value: 1, delta: 1} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4879839ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4881089ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4881134ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4881267ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780346183570-3426443884600, name: FCP, value: 11800, delta: 11800} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4881825ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780346183570-2175496715376, name: TTFB, value: 10366.900000095367, delta: 10366.900000095367} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 4882077ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5057607ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5057610ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780346183568-4031855462726, name: LCP, value: 12664, delta: 12664} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5057610ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780346183580-9823864843216, name: CLS, value: 1, delta: 1} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5057611ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5058368ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5058445ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5058554ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780346360867-7543032961644, name: FCP, value: 14292, delta: 14292} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5058735ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780346360867-9243100297612, name: TTFB, value: 13388.099999904633, delta: 13388.099999904633} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5058883ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5111872ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5111872ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780346360866-4965345823517, name: LCP, value: 14712, delta: 14712} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5111873ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780346360868-7216981250849, name: CLS, value: 1, delta: 1} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5111873ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5111882ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[ 5113524ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0bruynb._.js:15305
+[ 5113583ms] Error: ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx
+
+
+    at Object.getCompilationErrors (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/base-server.js:1745:26)
+[ 5114838ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1226
+[ 5114870ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5114870ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5114870ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5114870ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5135675ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[ 5135721ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0bruynb._.js:15305
+[ 5135737ms] Error: ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx
+
+
+    at Object.getCompilationErrors (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/base-server.js:1745:26)
+[ 5135736ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1226
+[ 5135741ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5135741ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5135741ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5135741ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5135741ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5135741ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5135742ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5135742ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5143224ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[ 5143285ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0bruynb._.js:15305
+[ 5143297ms] Error: ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx
+
+
+    at Object.getCompilationErrors (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/base-server.js:1745:26)
+[ 5143297ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1226
+[ 5143305ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5143305ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5143305ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5143305ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5143305ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5143305ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5143305ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5143305ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5143305ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5143305ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5143305ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5143305ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Regular.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5149101ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[ 5149163ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0bruynb._.js:15305
+[ 5149181ms] Error: ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx
+
+
+    at Object.getCompilationErrors (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kristofferohnstadhjelmeland/utekos-headless/node_modules/next/dist/server/base-server.js:1745:26)
+[ 5149182ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1226
+[ 5149187ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5149187ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5149187ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5149187ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5149187ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5149187ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5149187ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Mediu.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5149187ms] [ERROR] ./src/app/fonts/font.config.ts
+Font file not found: Can't resolve '../../app/fonts/UtekosText-Medium.woff2'
+Import trace:
+  Server Component:
+    ./src/app/fonts/font.config.ts
+    ./src/app/layout.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[ 5164073ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5164112ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5164277ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780346466590-8077883784102, name: FCP, value: 9132, delta: 9132} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5164796ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780346466590-3769292528143, name: TTFB, value: 8348.39999961853, delta: 8348.39999961853} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 5164977ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 6315775ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8196729ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8196734ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780346466590-1549138560854, name: LCP, value: 9964, delta: 9964} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8196734ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780346466591-6107494406915, name: CLS, value: 0.028232364672364674, delta: 0.028232364672364674} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8196735ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8197404ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8197462ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8197662ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780349499972-5167008059092, name: FCP, value: 19216, delta: 19216} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8198351ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780349499972-9322293094776, name: TTFB, value: 18385.599999904633, delta: 18385.599999904633} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8198804ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8468239ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(3), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8468247ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780349499971-7528171586968, name: LCP, value: 20532, delta: 20532} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8468247ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780349499974-8171941459304, name: CLS, value: 0.04977707042378917, delta: 0.04977707042378917} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8468248ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(1), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8470015ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8470224ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8471069ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780349773378-6445567560341, name: FCP, value: 13904, delta: 13904} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8471766ms] [INFO] [web-vitals] {type: web-vital, id: v4-1780349773378-6884829311983, name: TTFB, value: 11556.599999904633, delta: 11556.599999904633} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8471966ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0ifwd0~._.js:2925
+[ 8610193ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=L64kquzWMJPAOIaTVIJbA' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13339
+[ 8611196ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=L64kquzWMJPAOIaTVIJbA' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13339
+[ 8612198ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=L64kquzWMJPAOIaTVIJbA' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13339
+[ 8613202ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=L64kquzWMJPAOIaTVIJbA' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13339
+[ 8614204ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=L64kquzWMJPAOIaTVIJbA' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13339

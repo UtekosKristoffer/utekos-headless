@@ -1,4 +1,3 @@
-import { hashSnapData } from '@/lib/tracking/snapchat/hashSnapData'
 import { safeString } from '@/lib/utils/safeString'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 import type { TrackingContext } from 'types/tracking/user/TrackingContext'
@@ -6,23 +5,17 @@ import type { TrackingContext } from 'types/tracking/user/TrackingContext'
 const PINTEREST_TOKEN = process.env.PINTEREST_ACCESS_TOKEN
 const PINTEREST_AD_ACCOUNT_ID = process.env.PINTEREST_AD_ACCOUNT_ID
 
-export async function sendPinterestPurchase({
-  order,
-  customer,
-  redisData,
-  contentIds
-}: TrackingContext) {
+export async function sendPinterestPurchase({ order, customer, redisData, contentIds }: TrackingContext) {
   if (!PINTEREST_TOKEN || !PINTEREST_AD_ACCOUNT_ID) return
 
   try {
     let emailList: string[] | undefined
 
     if (customer.email) {
-      emailList = [hashSnapData(customer.email)].filter(Boolean) as string[]
+      emailList = [customer.email].filter(Boolean) as string[]
     } else {
       const redisEmail = (redisData?.userData as any)?.em
       if (redisEmail) {
-        // Sikre at vi har en array av strenger
         const rawList = Array.isArray(redisEmail) ? redisEmail : [redisEmail]
         emailList = rawList.filter(Boolean) as string[]
       }
@@ -30,38 +23,24 @@ export async function sendPinterestPurchase({
 
     const rawValue = order.total_price || 0
     const formattedValue = Number(rawValue).toFixed(2)
-    const cleanParam = (val: string | undefined | null) =>
-      val ? ([val] as string[]) : undefined
 
     const pinPayload = {
       event_name: 'checkout',
       action_source: 'web',
       event_time: Math.floor(Date.now() / 1000),
       event_id: `shopify_order_${order.id}`,
-      event_source_url:
-        safeString(order.order_status_url) || 'https://utekos.no',
+      event_source_url: safeString(order.order_status_url) || 'https://utekos.no',
       user_data: {
         em: emailList,
-        ph: cleanParam(hashSnapData(customer.phone)),
         client_ip_address: customer.clientIp,
         client_user_agent: customer.userAgent,
-        click_id: (redisData?.userData as any)?.epik || undefined,
-        external_id: cleanParam(hashSnapData(customer.externalId)),
-        fn: cleanParam(hashSnapData(customer.firstName)),
-        ln: cleanParam(hashSnapData(customer.lastName)),
-        ct: cleanParam(hashSnapData(customer.city)),
-        st: cleanParam(hashSnapData(customer.state)),
-        zp: cleanParam(hashSnapData(customer.zip)),
-        country: cleanParam(hashSnapData(customer.countryCode))
+        click_id: (redisData?.userData as any)?.epik || undefined
       },
       custom_data: {
         currency: safeString(order.currency) || 'NOK',
         value: formattedValue,
         order_id: safeString(order.id),
-        num_items: order.line_items?.reduce(
-          (acc, item) => acc + (item.quantity || 0),
-          0
-        ),
+        num_items: order.line_items?.reduce((acc, item) => acc + (item.quantity || 0), 0),
         content_ids: contentIds,
         contents: order.line_items?.map(item => ({
           item_price: String(item.price || '0'),
@@ -70,17 +49,14 @@ export async function sendPinterestPurchase({
       }
     }
 
-    const res = await fetch(
-      `https://api.pinterest.com/v5/ad_accounts/${PINTEREST_AD_ACCOUNT_ID}/events`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${PINTEREST_TOKEN}`
-        },
-        body: JSON.stringify({ data: [pinPayload] })
-      }
-    )
+    const res = await fetch(`https://api.pinterest.com/v5/ad_accounts/${PINTEREST_AD_ACCOUNT_ID}/events`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${PINTEREST_TOKEN}`
+      },
+      body: JSON.stringify({ data: [pinPayload] })
+    })
 
     if (!res.ok) {
       const errText = await res.text()
