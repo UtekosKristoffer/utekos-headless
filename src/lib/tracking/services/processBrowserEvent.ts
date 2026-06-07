@@ -108,26 +108,28 @@ export async function processBrowserEvent(
   const normalizedError = metaErrorDetails ?? getMetaApiErrorDetails(getSettledError(metaResult))
   const googleError = getSettledError(googleResult)
 
-  await deps.logger(
-    'ERROR',
-    `CAPI Failed: ${body.eventName}`,
-    {
-      eventId: body.eventId,
-      eventTime: body.eventTime,
-      error: normalizedError.message,
-      type: normalizedError.type,
-      code: normalizedError.code,
-      errorSubcode: normalizedError.errorSubcode,
-      retryable: normalizedError.retryable,
-      googleError
-    },
-    {
-      actionSource: body.actionSource || 'website',
-      eventName: body.eventName,
-      eventSourceUrl: body.eventSourceUrl,
-      eventId: body.eventId
-    }
-  )
+  if (normalizedError.retryable) {
+    await deps.logger(
+      'ERROR',
+      `CAPI Failed: ${body.eventName}`,
+      {
+        eventId: body.eventId,
+        eventTime: body.eventTime,
+        error: normalizedError.message,
+        type: normalizedError.type,
+        code: normalizedError.code,
+        errorSubcode: normalizedError.errorSubcode,
+        retryable: normalizedError.retryable,
+        googleError
+      },
+      {
+        actionSource: body.actionSource || 'website',
+        eventName: body.eventName,
+        eventSourceUrl: body.eventSourceUrl,
+        eventId: body.eventId
+      }
+    )
+  }
 
   return {
     success: false,

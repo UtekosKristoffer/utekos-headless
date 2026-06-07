@@ -72,12 +72,13 @@ export function getMetaApiErrorDetails(error: unknown): MetaApiErrorDetails {
   const isExpiredTokenMessage =
     normalizedMessage.toLowerCase().includes('token has expired')
     || normalizedMessage.toLowerCase().includes('invalid oauth')
+  const isDispatchDisabled = normalizedMessage.toLowerCase().includes('meta capi dispatch disabled')
 
   return {
     code: apiError?.code,
     errorSubcode: apiError?.error_subcode,
     message: normalizedMessage,
-    retryable: apiError?.code !== 190 && !isExpiredTokenMessage,
+    retryable: apiError?.code !== 190 && !isExpiredTokenMessage && !isDispatchDisabled,
     status: envelopeResult.success ? envelopeResult.data.status : undefined,
     type: apiError?.type
   }

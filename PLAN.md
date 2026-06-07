@@ -14,6 +14,8 @@ Dato: 2026-06-07
   via Meta Graph API v24 `/debug_token` med OAuth-feilkode `190`.
 - Permanente Meta-autentiseringsfeil skal markeres som `failed` uten automatisk retry. Payload beholdes for
   kontrollert re-køing etter tokenrotasjon.
+- `META_CAPI_ENABLED=false` er aktiv produksjons-circuit-breaker mens credentials er ugyldige. Den skal fjernes
+  eller settes til `true` først etter vellykket tokenverifisering.
 - Ny system-user-token må settes i Vercel Production og produksjonen må redeployes før Meta CAPI-levering kan
   gjenopptas.
 - Etter tokenrotasjon skal tokenet verifiseres med `/debug_token`, en Test Events-hendelse skal bekreftes, og

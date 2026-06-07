@@ -12,6 +12,10 @@ import { resolveMetaPixelId } from '@/lib/tracking/meta/utils/resolveMetaPixelId
 import { resolveMetaAccessToken } from '@/lib/tracking/meta/utils/resolveMetaAccessToken'
 
 export async function sendMetaBrowserEvent(payload: MetaEventPayload, userData: ClientUserData) {
+  if (process.env.META_CAPI_ENABLED === 'false') {
+    throw new Error('Meta CAPI dispatch disabled while credentials are unavailable')
+  }
+
   const accessToken = resolveMetaAccessToken()
   const pixelId = resolveMetaPixelId()
   const testEventCode = process.env.META_TEST_EVENT_CODE
