@@ -7,13 +7,15 @@ import { Quote } from 'lucide-react'
 
 export function GrunderSection() {
   return (
-    <section className='relative overflow-hidden bg-background py-24 sm:py-32'>
+    // Lys og lun bakgrunn (white-sand) gjør storytellingen behagelig å lese
+    <section className='relative overflow-hidden bg-white-sand py-24 sm:py-32'>
       <div className='absolute inset-0 -z-10 opacity-40'>
         <div
-          className='absolute right-1/3 top-1/4 h-[500px] w-[500px] blur-3xl'
+          className='absolute right-1/3 top-1/4 size-125 blur-3xl'
           style={{
+            // Veldig subtil very-peri glow i bakgrunnen
             background:
-              'radial-gradient(circle, color-mix(in oklab, var(--very-peri) 55%, transparent) 0%, transparent 70%)'
+              'radial-gradient(circle, color-mix(in oklab, var(--color-very-peri) 15%, transparent) 0%, transparent 70%)'
           }}
         />
       </div>
@@ -29,10 +31,12 @@ export function GrunderSection() {
               <div
                 className='absolute -inset-2 opacity-20 blur-xl transition-opacity duration-500 group-hover:opacity-40'
                 style={{
-                  background: 'linear-gradient(135deg, var(--very-peri) 0%, var(--chocolate-plum) 100%)'
+                  // Solnedgang/kveld-effekt bak bildet som reagerer på hover
+                  background:
+                    'linear-gradient(135deg, var(--color-very-peri) 0%, var(--color-iced-apricot) 100%)'
                 }}
               />
-              <div className='relative h-auto aspect-4/5 w-64 overflow-hidden rounded-sm border border-cloud-dancer/10 shadow-2xl shadow-black/25'>
+              <div className='relative h-auto aspect-4/5 w-64 overflow-hidden rounded-lg border border-maritime-darkest/10 shadow-2xl shadow-maritime-darkest/20'>
                 <Image
                   src={UtekosFounder}
                   alt='Erling Holthe, gründer av Utekos'
@@ -49,7 +53,7 @@ export function GrunderSection() {
               delay='0.15s'
               threshold={0.3}
             >
-              <p className='text-lg leading-nonefont-semibold tracking-[-0.01em] text-foreground'>
+              <p className='text-lg leading-none font-semibold tracking-[-0.01em] text-maritime-darkest'>
                 Erling Holthe
               </p>
               <p className='text-sm leading-text-paragraph font-medium tracking-[-0.01em] text-very-peri'>
@@ -62,32 +66,34 @@ export function GrunderSection() {
             <AnimatedBlock className='mb-6 will-animate-fade-in-up' delay='0.1s' threshold={0.3}>
               <BrandBadge
                 label='Vår historie'
-                backgroundColor='var(--very-peri)'
-                textColor='var(--background)'
-                className='w-fit   font-medium   shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--very-peri)_80%,transparent)]'
+                backgroundColor='var(--color-very-peri)'
+                textColor='var(--color-cloud-dancer)'
+                className='w-fit font-medium shadow-[0_10px_30px_-15px_var(--color-very-peri)]'
               />
             </AnimatedBlock>
 
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.2s' threshold={0.3}>
-              <h2 className='mb-8 text-4xl leading-[0.95] font-bold tracking-[-0.01em] text-foreground md:text-5xl'>
+              <h2 className='mb-8 text-4xl leading-[0.95] font-bold tracking-[-0.01em] text-maritime-darkest md:text-5xl'>
                 Fra idé til virkelighet
               </h2>
             </AnimatedBlock>
+
+            {/* Sitatboksen oppdatert til en eksklusiv "Apple-stil" boks med Cloud Dancer og Very Peri ramme */}
             <AnimatedBlock
-              className='relative mb-10 overflow-hidden rounded-sm border-l-4 border-havdyp/20 bg-overcast p-8 shadow-sm will-animate-fade-in-up'
+              className='relative mb-10 overflow-hidden rounded-2xl border border-very-peri/20 bg-cloud-dancer p-8 shadow-sm will-animate-fade-in-up'
               delay='0.3s'
               threshold={0.3}
             >
-              <div className='relative flex flex-col items-start gap-4 rounded-sm bg-overcast md:flex-row'>
-                <Quote aria-hidden='true' className='size-8 shrink-0 rotate-180 text-havdyp md:rotate-0' />
-                <p className='text-xl leading-[1.35] font-medium tracking-[-0.01em] text-havdyp/90 md:text-2xl'>
+              <div className='relative flex flex-col items-start gap-4 md:flex-row'>
+                <Quote aria-hidden='true' className='size-8 shrink-0 rotate-180 text-very-peri md:rotate-0' />
+                <p className='text-xl leading-[1.35] font-medium tracking-[-0.01em] text-maritime-darkest/90 md:text-2xl'>
                   &ldquo;Jeg var lei av stive pledd og gode øyeblikk som ble kuttet kort av kulden. Det måtte
                   finnes en bedre måte å holde varmen på.&rdquo;
                 </p>
               </div>
             </AnimatedBlock>
 
-            <div className='space-y-6 text-lg leading-text-paragraph   font-medium   text-foreground/85'>
+            <div className='space-y-6 text-lg leading-text-paragraph font-medium text-maritime-darkest/85'>
               <AnimatedBlock className='will-animate-fade-in-up' delay='0.4s' threshold={0.3}>
                 <p>
                   Jeg har alltid elsket de små, verdifulle øyeblikkene – den stille kaffekoppen på en kjølig
