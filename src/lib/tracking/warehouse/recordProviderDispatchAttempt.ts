@@ -39,7 +39,7 @@ export async function recordProviderDispatchAttempt(
       ${input.eventName},
       ${status},
       1,
-      ${null},
+      ${nextAttemptAt},
       ${input.error ?? null},
       ${input.success ? new Date() : null}
     )
@@ -56,7 +56,7 @@ export async function recordProviderDispatchAttempt(
         when excluded.status = 'succeeded' then null
         when excluded.status = 'failed' then null
         when ops.provider_dispatch_attempts.payload = '{}'::jsonb then null
-        else ${nextAttemptAt}
+        else excluded.next_attempt_at
       end,
       last_error = excluded.last_error,
       processed_at = excluded.processed_at,
