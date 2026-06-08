@@ -3,6 +3,15 @@ import { withBotId } from 'botid/next/config'
 import { withSentryConfig } from '@sentry/nextjs'
 
 const STATIC_ASSET_CACHE_CONTROL = 'public, max-age=31536000, immutable'
+const SENTRY_AUTH_TOKEN =
+  process.env.PERFORMANCE_SENTRY_AUTH_TOKEN
+  || process.env.SENTRY_AUTH_TOKEN
+const SENTRY_ORG =
+  process.env.PERFORMANCE_SENTRY_ORG
+  || process.env.SENTRY_ORG
+const SENTRY_PROJECT =
+  process.env.PERFORMANCE_SENTRY_PROJECT
+  || process.env.SENTRY_PROJECT
 
 const staticAssetHeaders = [
   {
@@ -16,6 +25,7 @@ const nextConfig: NextConfig = {
   typedRoutes: true,
   reactCompiler: true,
   cacheComponents: true,
+  serverExternalPackages: ['@sentry/profiling-node'],
 
   cacheLife: {
     products: {
@@ -101,6 +111,15 @@ const nextConfig: NextConfig = {
 
   async headers() {
     return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Document-Policy',
+            value: 'js-profiling'
+          }
+        ]
+      },
       {
         source: '/:path*.:extension(png|jpg|jpeg|webp|avif|gif|svg|ico|otf|woff2)',
         headers: staticAssetHeaders
@@ -239,9 +258,9 @@ const nextConfig: NextConfig = {
 }
 
 export default withSentryConfig(withBotId(nextConfig), {
-  ...(process.env.SENTRY_ORG ? { org: process.env.SENTRY_ORG } : {}),
-  ...(process.env.SENTRY_PROJECT ? { project: process.env.SENTRY_PROJECT } : {}),
-  ...(process.env.SENTRY_AUTH_TOKEN ? { authToken: process.env.SENTRY_AUTH_TOKEN } : {}),
+  ...(SENTRY_ORG ? { org: SENTRY_ORG } : {}),
+  ...(SENTRY_PROJECT ? { project: SENTRY_PROJECT } : {}),
+  ...(SENTRY_AUTH_TOKEN ? { authToken: SENTRY_AUTH_TOKEN } : {}),
   silent: !process.env.CI,
   telemetry: false,
   widenClientFileUpload: true,

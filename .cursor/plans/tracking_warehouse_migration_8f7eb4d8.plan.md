@@ -27,7 +27,7 @@ todos:
     content: Add /api/cron/meta-quality route populating marketing.meta_quality_snapshots from the Meta Dataset Quality API; register cron.
     status: pending
   - id: posthog-consolidate
-    content: Consolidate PostHog to a single consent-gated init via /relay-MAhe proxy; delete dead PostHogProvider.tsx and the portal/ingest host variants.
+    content: Consolidate PostHog to a single consent-gated init via the managed portal.utekos.no proxy; delete competing relay and ingest host variants.
     status: completed
   - id: iceberg-fdw
     content: Verify Iceberg catalog, then create wrappers analytics_bucket_fdw foreign server + analytics foreign tables (vault creds); optional pg_cron ETL from event_ledger; add to declarative SQL.
@@ -55,7 +55,7 @@ isProject: false
 - Deploy: MCP `apply_migration` to `hkoawfbomhnzupcsdggb` AND commit identical SQL under `supabase/migrations/` to keep the declarative repo in sync.
 - Retry worker: Vercel Cron (matches existing [vercel.json](vercel.json) + [src/app/api/cron/sync-catalog/route.ts](src/app/api/cron/sync-catalog/route.ts) convention, co-located in `arn1`), reusing the TS dispatch logic. `pgmq`/`pg_cron+pg_net` rejected: `ops.provider_dispatch_attempts` already has queue semantics, and a second execution plane would force reimplementing Meta SDK hashing in SQL (violates DRY/determinism).
 - Sentry: full `@sentry/nextjs` (env already provisions DSN/auth/OTLP), kept alongside the first-party `/api/log` beacon.
-- PostHog: consolidate to a single consent-gated init using the existing `/relay-MAhe` proxy from [vercel.json](vercel.json); delete the dead provider and the duplicate host strategies.
+- PostHog: consolidate to a single consent-gated init using the managed `portal.utekos.no` proxy; delete competing Vercel relay and ingest host strategies.
 
 ## Phase 1 - CRITICAL: deploy warehouse schema (unblocks everything)
 
@@ -84,7 +84,7 @@ isProject: false
 
 ## Phase 5 - PostHog consolidation
 
-- Pick one path: adopt `@posthog/next` ([PostHogProvider.tsx](src/components/providers/PostHogProvider.tsx)) without `bootstrapFlags` (static/PPR-safe), consent-gated, `api_host` = `/relay-MAhe` (already proxied in [vercel.json](vercel.json)); delete the inline snippet branch in [ConditionalTracking.tsx](src/components/analytics/ConditionalTracking.tsx) and the `portal.utekos.no`/`/ingest` host variants in [Providers.tsx](src/components/providers/Providers.tsx). Keep `@flags-sdk/posthog` in [src/flags/flag.ts](src/flags/flag.ts) untouched.
+- Use `@posthog/next` ([PostHogProvider.tsx](src/components/providers/PostHogProvider.tsx)) without `bootstrapFlags` (static/PPR-safe), consent-gated, with `api_host` = `https://portal.utekos.no`; remove competing Vercel relay and inline snippet strategies. Keep `@flags-sdk/posthog` in [src/flags/flag.ts](src/flags/flag.ts) untouched.
 
 ## Phase 6 - Iceberg / S3-Tables analytics FDW (verification-first)
 

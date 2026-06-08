@@ -7,9 +7,9 @@ import { LandingPurchaseFallback } from './components/LandingPurchaseFallback'
 import { LandingPurchaseSection } from './components/LandingPurchaseSection'
 import { StickyMobileAction } from './components/StickyMobileAction'
 import { PreFooterNavigation } from './components/PreFooterNavigation'
-import type { Metadata } from 'next'
 import { SkreddersyVarmenBreadcrumbs } from './components/SkreddersyVarmenBreadcrumbs'
 import { LandingTracking } from './components/LandingTracking'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Skreddersy varmen med banebrytende yttertøy fra Utekos',

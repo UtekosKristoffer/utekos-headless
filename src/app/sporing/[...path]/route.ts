@@ -15,6 +15,4 @@ export function GET() {
   return noContent()
 }
 
-export function POST() {
-  return noContent()
-}
+export const POST = GET

@@ -9,7 +9,6 @@ function getTrackingWarehouseUrl(): string | undefined {
     process.env.SUPABASE_VERCEL_POSTGRES_URL_NON_POOLING
     || process.env.SUPABASE_VERCEL_POSTGRES_URL_NON_POOLING_MAYBE
     || process.env.SUPABASE_VERCEL_POSTGRES_URL
-    || process.env.POSTGRES_URL
   )
 }
 

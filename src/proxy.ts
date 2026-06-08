@@ -66,10 +66,6 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(upgradeUrl)
   }
 
-  if (context.pathname.startsWith('/sporing')) {
-    return NextResponse.next()
-  }
-
   if (!context.isTargetRoute) {
     return NextResponse.next()
   }
@@ -85,7 +81,7 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|videos|apple-icon|icon|manifest).*)'
+    '/((?!api|sporing|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|videos|apple-icon|icon|manifest).*)'
   ]
 }
 

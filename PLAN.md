@@ -6,6 +6,50 @@ STATUS: PLANNING
 
 [Vendor-agnostic Metrics API setup](https://supabase.com/docs/guides/telemetry/metrics/vendor-agnostic.md)
 
+## Tracking-domener og event collector
+
+Dato: 2026-06-08
+
+- `/api/tracking-events` på `utekos.no` er den Utekos-kontrollerte event collectoren for marketing-events.
+- `portal.utekos.no` er kanonisk PostHog-ingest. Utekos eier DNS-navnet hos One.com, mens PostHog driver
+  mottakstjenesten bak CNAME-en.
+- Den parallelle Vercel-relayen på `/relay-MAhe` er fjernet.
+- Meta, Google og andre annonseplattformer skal integreres som provider-adaptere bak
+  `/api/tracking-events`, ikke via PostHog-proxien.
+- `/sporing` er kun en deaktivert `204`-sink for den tidligere server-side GTM-løsningen.
+
+## Sentry metrics og profiling
+
+Dato: 2026-06-08
+
+- `@sentry/nextjs`, `@sentry/browser` og `@sentry/profiling-node` er låst til versjon `10.56.0`.
+- Node-profilering bruker `nodeProfilingIntegration()` og browser-profilering bruker
+  `browserProfilingIntegration()`.
+- Profilering følger aktive traces med 10 % sampling i produksjon og 100 % lokalt.
+- `Document-Policy: js-profiling` sendes på dokumentresponser for å aktivere browser-profilering.
+- Sentry-konfigurasjonen bruker Vercels eksisterende `PERFORMANCE_SENTRY_*`-variabler med fallback til
+  standard `SENTRY_*`-navn.
+- En kontrollert metric `sentry_setup_verification` og profiling-trace `sentry-profiling-verification` er
+  sendt med vellykket SDK-flush.
+- Sentry sourcemaps er verifisert lastet opp til organisasjonen `utekos` og prosjektet
+  `sentry-utekos-headless`.
+- Produksjonsdeployment `dpl_CCVsFjDshb51GG2D4VQRmLjqmYrg` er aliasert til `utekos.no`.
+
+## Løst hendelse: Supabase pooler brukte utdatert databasepassord
+
+Dato: 2026-06-08
+
+- Tracking-lageret er Supabase-prosjektet `supabase-pink-lens` med prosjektref `hkoawfbomhnzupcsdggb`, ikke
+  Utekos Atlas-prosjektet.
+- Supavisor-feilen kom fra den aktive produksjonsdeploymenten, som fortsatt brukte miljøvariabler fra før
+  Supabase-databasepassordet ble korrigert i Vercel.
+- Vercel Production-verdiene for både session pooler og transaction pooler er verifisert mot
+  `hkoawfbomhnzupcsdggb`.
+- Sist kjente fungerende deployment er redeployet med de oppdaterte miljøvariablene som
+  `dpl_2X5JkmYPGLZBf3RYc5aEdaTvUzyu` og aliasert til `utekos.no`.
+- En kontrollert Web Vital ble skrevet til `ops.web_vitals` i `supabase-pink-lens` og deretter slettet.
+- Ingen nye Vercel runtime-feil ble registrert etter verifikasjonen.
+
 ## Løst hendelse: PostHog-prosjekt uten events
 
 Dato: 2026-06-07

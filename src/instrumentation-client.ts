@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
+import { browserProfilingIntegration } from '@sentry/browser'
 import type { LogPayload } from 'types/tracking/log/LogPayload'
 
 /**
@@ -20,15 +21,22 @@ import type { LogPayload } from 'types/tracking/log/LogPayload'
  */
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production'
-const SENTRY_DSN = process.env.NEXT_PUBLIC_SENTRY_DSN
+const SENTRY_DSN =
+  process.env.NEXT_PUBLIC_PERFORMANCE_SENTRY_DSN
+  ?? process.env.NEXT_PUBLIC_SENTRY_DSN
 
 Sentry.init({
   dsn: SENTRY_DSN,
   enabled: !!SENTRY_DSN,
   environment: process.env.NODE_ENV,
-  integrations: [Sentry.replayIntegration()],
+  integrations: [
+    Sentry.replayIntegration(),
+    browserProfilingIntegration()
+  ],
   sendDefaultPii: false,
   enableLogs: true,
+  profileSessionSampleRate: IS_PRODUCTION ? 0.1 : 1,
+  profileLifecycle: 'trace',
   tracesSampleRate: IS_PRODUCTION ? 0.1 : 1
 })
 
