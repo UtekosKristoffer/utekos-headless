@@ -1,3 +1,6 @@
+import { hasServiceConsent } from '@/lib/tracking/consent/hasServiceConsent'
+import { USERCENTRICS_MICROSOFT_SERVICE_NAME } from '@/components/cookie-consent/usercentricsConfig'
+
 type MicrosoftUetPayloadValue =
   | string
   | number
@@ -67,6 +70,7 @@ export function setMicrosoftUetUserData({
   phone
 }: MicrosoftUetUserData): void {
   if (typeof window === 'undefined') return
+  if (!hasServiceConsent(USERCENTRICS_MICROSOFT_SERVICE_NAME)) return
   if (!email && !phone) return
 
   getMicrosoftUetQueue().push('set', {
@@ -90,6 +94,7 @@ export function trackMicrosoftUetEvent({
   eventId
 }: TrackMicrosoftUetEventOptions): void {
   if (typeof window === 'undefined') return
+  if (!hasServiceConsent(USERCENTRICS_MICROSOFT_SERVICE_NAME)) return
 
   const eventAction = eventName ?? action
   if (!eventAction) return

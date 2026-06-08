@@ -12,7 +12,10 @@ import { useAnalytics } from '@/hooks/useAnalytics'
 import { dispatchMetaTrackingEvent } from '@/lib/tracking/meta/dispatchMetaTrackingEvent'
 import { getClientMetaUserData } from '@/lib/tracking/meta/utils/getClientMetaUserData'
 import { trackMicrosoftUetEvent } from '@/lib/tracking/microsoft-uet/trackMicrosoftUetEvent'
+import { hasCategoryConsent } from '@/lib/tracking/consent/hasCategoryConsent'
+import { hasServiceConsent } from '@/lib/tracking/consent/hasServiceConsent'
 import { generateEventID } from '@/components/analytics/Meta/generateEventID'
+import { USERCENTRICS_META_SERVICE_NAME } from '@/components/cookie-consent/usercentricsConfig'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { getVariants } from '@/app/skreddersy-varmen/utekos-orginal/utils/getVariants'
 import { getSelectableSizes, PRODUCT_VARIANTS } from '@/api/constants'
@@ -244,7 +247,8 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
       const productId = cleanShopifyId(selectedVariant.id) || selectedVariant.id
       const value = (Number.parseFloat(selectedVariant.price.amount) || 0) * quantity
       const currency = selectedVariant.price.currencyCode
-      const userData: MetaUserData = getClientMetaUserData()
+      const userData: MetaUserData | undefined =
+        hasServiceConsent(USERCENTRICS_META_SERVICE_NAME) ? getClientMetaUserData() : undefined
 
       trackMicrosoftUetEvent({
         category: 'ecommerce',
@@ -258,19 +262,21 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
         eventId: eventID
       })
 
-      const captureBody: CaptureBody = {
-        cartId,
-        checkoutUrl,
-        eventId: eventID,
-        userData
-      }
+      if (hasCategoryConsent('marketing')) {
+        const captureBody: CaptureBody = {
+          cartId,
+          checkoutUrl,
+          eventId: eventID,
+          ...(userData ? { userData } : {})
+        }
 
-      fetch('/api/checkout/capture-identifiers', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(captureBody),
-        keepalive: true
-      }).catch(error => console.error('Capture identifiers failed', error))
+        fetch('/api/checkout/capture-identifiers', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(captureBody),
+          keepalive: true
+        }).catch(error => console.error('Capture identifiers failed', error))
+      }
 
       void dispatchMetaTrackingEvent({
         eventName: 'InitiateCheckout',
@@ -282,7 +288,7 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
           content_type: 'product',
           num_items: quantity
         },
-        userData
+        ...(userData ? { userData } : {})
       })
     } catch (error) {
       console.error('Feil under sending av checkout-events:', error)

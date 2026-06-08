@@ -1,5 +1,4 @@
 import * as Sentry from '@sentry/nextjs'
-import { browserProfilingIntegration } from '@sentry/browser'
 import type { LogPayload } from 'types/tracking/log/LogPayload'
 
 /**
@@ -16,31 +15,23 @@ import type { LogPayload } from 'types/tracking/log/LogPayload'
  *    are marked for SPA-transition diagnostics.
  *
  * Web Vitals are handled separately by `WebVitalsReporter`.
- * Product analytics is initialized only by the consent-gated
- * `ConditionalTracking` component.
+ * Optional analytics, replay and browser profiling are initialized elsewhere
+ * only after Usercentrics consent.
  */
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production'
-const SENTRY_DSN =
-  process.env.NEXT_PUBLIC_PERFORMANCE_SENTRY_DSN
-  ?? process.env.NEXT_PUBLIC_SENTRY_DSN
+const SENTRY_DSN = process.env.NEXT_PUBLIC_PERFORMANCE_SENTRY_DSN ?? process.env.NEXT_PUBLIC_SENTRY_DSN
 
 Sentry.init({
   dsn: SENTRY_DSN,
   enabled: !!SENTRY_DSN,
   environment: process.env.NODE_ENV,
-  integrations: [
-    Sentry.replayIntegration(),
-    browserProfilingIntegration()
-  ],
+  integrations: [],
   sendDefaultPii: false,
   enableLogs: true,
-  profileSessionSampleRate: IS_PRODUCTION ? 0.1 : 1,
-  profileLifecycle: 'trace',
-  tracesSampleRate: IS_PRODUCTION ? 0.1 : 1
+  tracesSampleRate: 0
 })
 
-/** Hard cap so a faulty page can never flood the log endpoint. */
 const MAX_REPORTED_ERRORS = 10
 const reportedSignatures = new Set<string>()
 

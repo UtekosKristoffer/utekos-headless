@@ -2,8 +2,9 @@ import type { ConsentState } from './CookieConsentProvider'
 
 export const defaultConsentState: ConsentState = {
   necessary: true,
-  analytics: false,
-  functional: false,
+  preferences: false,
+  statistics: false,
   marketing: false,
-  profile_marketing: false
+  services: {},
+  source: 'usercentrics'
 }

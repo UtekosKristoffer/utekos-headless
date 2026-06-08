@@ -6,8 +6,13 @@ import { createCaptureResponse } from '@/lib/tracking/capture/createCaptureRespo
 import { redisSet } from '@/lib/redis/redisSet'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 import { processCapture } from '@/lib/tracking/capture/processCapture'
+import { hasRequestMarketingConsent } from '@/lib/tracking/consent/hasRequestMarketingConsent'
 
 export async function POST(req: NextRequest) {
+  if (!hasRequestMarketingConsent(req)) {
+    return new Response(null, { status: 204 })
+  }
+
   const validation = await parseAndValidateCaptureRequest(req)
 
   if (!validation.success) {

@@ -16,6 +16,20 @@ Dato: 2026-06-08
 - Den parallelle Vercel-relayen på `/relay-MAhe` er fjernet.
 - Meta, Google og andre annonseplattformer skal integreres som provider-adaptere bak
   `/api/tracking-events`, ikke via PostHog-proxien.
+- `cloud.server.utekos.no` er produksjonsdomene for Usercentrics-administrert server-side GTM.
+- Usercentrics CMP v3 med ruleset-ID `9suQr3rGddL3Tb` er autoritativ samtykkekilde. Utekos sin event collector
+  leser Usercentrics sin offisielle førsteparts-cookie `ucConsentAllowedDps` server-side og lagrer normalisert
+  status i event-ledgeret.
+- Google-nettleserevents skal eies av sGTM når `GOOGLE_BROWSER_EVENT_TRANSPORT=sgtm` aktiveres. Direkte GA4
+  Measurement Protocol beholdes for Shopify-, offline- og server-only-events.
+- `GOOGLE_BROWSER_EVENT_TRANSPORT=sgtm` skal ikke aktiveres før Usercentrics-containeren, custom domain,
+  consent-signaler og GTM-containerne er verifisert.
+- Usercentrics Server-Side Tracking med **sGTM Container** er valgt som administrert hosting. Cloud Run og
+  Meta Signals Gateway skal ikke brukes fordi Meta allerede har direkte Pixel + CAPI.
+- Usercentrics sin offisielle `ucConsentAllowedDps` brukes som server-side samtykkesignal. Provider-dispatch
+  og retry-kø opprettes bare for tjenester som hadde dokumentert DPS-samtykke da eventet ble mottatt.
+- Usercentrics må publisere window-eventet `ucEvent` med `consent_status` og tjenestenavn. Uten eventet
+  forblir alle valgfrie provider-events fail-closed.
 - `/sporing` er kun en deaktivert `204`-sink for den tidligere server-side GTM-løsningen.
 
 ## Sentry metrics og profiling
@@ -23,9 +37,8 @@ Dato: 2026-06-08
 Dato: 2026-06-08
 
 - `@sentry/nextjs`, `@sentry/browser` og `@sentry/profiling-node` er låst til versjon `10.56.0`.
-- Node-profilering bruker `nodeProfilingIntegration()` og browser-profilering bruker
-  `browserProfilingIntegration()`.
-- Profilering følger aktive traces med 10 % sampling i produksjon og 100 % lokalt.
+- Node-profilering bruker `nodeProfilingIntegration()`. Browser replay, tracing og profilering er deaktivert
+  inntil de kan initialiseres eksplisitt bak Usercentrics-tjenesten `Sentry Replay`.
 - `Document-Policy: js-profiling` sendes på dokumentresponser for å aktivere browser-profilering.
 - Sentry-konfigurasjonen bruker Vercels eksisterende `PERFORMANCE_SENTRY_*`-variabler med fallback til
   standard `SENTRY_*`-navn.

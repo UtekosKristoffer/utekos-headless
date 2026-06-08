@@ -154,7 +154,7 @@ const getShippingDetails = (): OfferShippingDetails => ({
     'transitTime': {
       '@type': 'QuantitativeValue',
       'minValue': 1,
-      'maxValue': 4,
+      'maxValue': 5,
       'unitCode': 'DAY'
     }
   }

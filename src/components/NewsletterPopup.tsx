@@ -12,12 +12,14 @@ import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils/className'
 import { trackNewsletterConversion } from '@/components/analytics/Meta/trackNewsletterConversion'
 import { trackMicrosoftUetEvent } from '@/lib/tracking/microsoft-uet/trackMicrosoftUetEvent'
+import { useConsent } from '@/components/cookie-consent/useConsent'
 
 export function NewsletterPopup() {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const pathname = usePathname()
   const soundPlayedRef = useRef(false)
+  const { hasInteracted } = useConsent()
 
   useEffect(() => {
     if (isOpen && !soundPlayedRef.current) {
@@ -41,20 +43,10 @@ export function NewsletterPopup() {
       return () => clearTimeout(timer)
     }
 
-    const hasConsent = localStorage.getItem('utekos_cookie_consent')
+    if (!hasInteracted) return
 
-    if (hasConsent) {
-      return startCountdown()
-    } else {
-      const handleConsentSaved = () => {
-        startCountdown()
-        window.removeEventListener('cookie_consent_saved', handleConsentSaved)
-      }
-
-      window.addEventListener('cookie_consent_saved', handleConsentSaved)
-      return () => window.removeEventListener('cookie_consent_saved', handleConsentSaved)
-    }
-  }, [pathname])
+    return startCountdown()
+  }, [hasInteracted, pathname])
 
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open)

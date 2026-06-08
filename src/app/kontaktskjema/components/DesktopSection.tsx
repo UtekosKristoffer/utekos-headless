@@ -84,7 +84,7 @@ export function DesktopSection() {
       </div>
 
       <div className='border-l border-cloud-dancer/12 bg-background/72 p-8 lg:p-12'>
-        <SupportForm />
+        <SupportForm idPrefix='desktop-contact' />
       </div>
     </div>
   )

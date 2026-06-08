@@ -3,122 +3,77 @@
 import { createContext, useEffect, useState, type ReactNode } from 'react'
 import { broadcastConsentState } from './broadcastConsentState'
 import { defaultConsentState } from './defaultConsentState'
-import { persistConsentState } from './persistConsentState'
+import { createUsercentricsConsentState } from './createUsercentricsConsentState'
 import { readStoredConsentState } from './readStoredConsentState'
+import { USERCENTRICS_CONSENT_EVENT_NAME } from './usercentricsConfig'
 
-// ENDRET: Nye kategorier som matcher Nike
-export type ConsentCategory =
-  | 'necessary'
-  | 'analytics' // Ytelse og analyse
-  | 'functional' // Personlig tilpassede opplevelser
-  | 'marketing' // Personlig annonsering
-  | 'profile_marketing' // Profilbasert personlig tilpasset annonsering
+export type ConsentCategory = 'necessary' | 'preferences' | 'statistics' | 'marketing'
 
 export interface ConsentState {
   necessary: boolean
-  analytics: boolean
-  functional: boolean
+  preferences: boolean
+  statistics: boolean
   marketing: boolean
-  profile_marketing: boolean // ENDRET: Lagt til
+  services: Record<string, boolean>
+  source: 'usercentrics'
 }
 
 interface ConsentContextType {
   consent: ConsentState
   hasInteracted: boolean
-  updateConsent: (category: ConsentCategory, value: boolean) => void
-  acceptAll: () => void
-  rejectNonEssential: () => void
-  savePreferences: (nextConsent?: ConsentState) => void
+  openSettings: () => void
+  hasServiceConsent: (serviceName: string) => boolean
 }
 
-export const ConsentContext = createContext<ConsentContextType>({
-  consent: defaultConsentState,
-  hasInteracted: false,
-  updateConsent: () => {},
-  acceptAll: () => {},
-  rejectNonEssential: () => {},
-  savePreferences: () => {}
-})
+export const ConsentContext = createContext<ConsentContextType | undefined>(undefined)
 
 export function CookieConsentProvider({ children }: { children: ReactNode }) {
   const [consent, setConsent] = useState<ConsentState>(defaultConsentState)
-  const [hasInteracted, setHasInteracted] = useState<boolean>(false)
-  const [isLoaded, setIsLoaded] = useState<boolean>(false)
+  const [hasInteracted, setHasInteracted] = useState(false)
 
   useEffect(() => {
-    const timer = window.setTimeout(() => {
-      const savedConsent = readStoredConsentState()
+    const initialSyncTimer = window.setTimeout(() => {
+      const storedConsent = readStoredConsentState()
 
-      if (savedConsent) {
-        setConsent(savedConsent)
-        persistConsentState(savedConsent)
-        broadcastConsentState(savedConsent)
+      if (storedConsent) {
+        setConsent(storedConsent)
         setHasInteracted(true)
+        broadcastConsentState(storedConsent)
       }
-
-      setIsLoaded(true)
     }, 0)
 
-    return () => window.clearTimeout(timer)
+    const syncUsercentricsConsent = (event: Event) => {
+      const detail = (event as CustomEvent<Record<string, unknown>>).detail
+
+      if (!detail || detail.event !== 'consent_status') {
+        return
+      }
+
+      const services = Object.fromEntries(
+        Object.entries(detail).filter(([, value]) => typeof value === 'boolean')
+      ) as Record<string, boolean>
+      const nextConsent = createUsercentricsConsentState(services)
+
+      setConsent(nextConsent)
+      setHasInteracted(true)
+      broadcastConsentState(nextConsent)
+    }
+
+    window.addEventListener(USERCENTRICS_CONSENT_EVENT_NAME, syncUsercentricsConsent)
+    return () => {
+      window.clearTimeout(initialSyncTimer)
+      window.removeEventListener(USERCENTRICS_CONSENT_EVENT_NAME, syncUsercentricsConsent)
+    }
   }, [])
 
-  const commitConsent = (nextConsent: ConsentState) => {
-    const finalConsent = { ...nextConsent, necessary: true }
-    setConsent(finalConsent)
-    persistConsentState(finalConsent)
-    broadcastConsentState(finalConsent)
-    setHasInteracted(true)
+  const openSettings = () => {
+    window.UC_UI?.showSecondLayer()
   }
 
-  const updateConsent = (category: ConsentCategory, value: boolean) => {
-    if (category === 'necessary') return // Kan ikke endre 'necessary'
-    setConsent(prev => ({
-      ...prev,
-      [category]: value
-    }))
-  }
-
-  const acceptAll = () => {
-    const allAccepted: ConsentState = {
-      necessary: true,
-      functional: true,
-      analytics: true,
-      marketing: true,
-      profile_marketing: true // ENDRET: Lagt til
-    }
-    commitConsent(allAccepted)
-  }
-
-  const rejectNonEssential = () => {
-    const essentialOnly: ConsentState = {
-      necessary: true,
-      functional: false,
-      analytics: false,
-      marketing: false,
-      profile_marketing: false // ENDRET: Lagt til
-    }
-    commitConsent(essentialOnly)
-  }
-
-  const savePreferences = (nextConsent?: ConsentState) => {
-    commitConsent(nextConsent ?? consent)
-  }
-
-  if (!isLoaded) {
-    return null
-  }
+  const hasServiceConsent = (serviceName: string) => consent.services[serviceName] === true
 
   return (
-    <ConsentContext.Provider
-      value={{
-        consent,
-        hasInteracted,
-        updateConsent,
-        acceptAll,
-        rejectNonEssential,
-        savePreferences
-      }}
-    >
+    <ConsentContext.Provider value={{ consent, hasInteracted, openSettings, hasServiceConsent }}>
       {children}
     </ConsentContext.Provider>
   )

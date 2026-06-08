@@ -185,7 +185,7 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                         <span className='absolute inline-flex size-full animate-ping rounded-full bg-background opacity-75 motion-reduce:animate-none'></span>
                         <span className='relative inline-flex size-2 rounded-full bg-background'></span>
                       </span>
-                      <span className='whitespace-nowrap'>Vårtilbud</span>
+                      <span className='whitespace-nowrap text-background'>Vårtilbud</span>
                     </BrandBadge>
                   </div>
 
@@ -208,7 +208,6 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                   </div>
                 </div>
 
-                {/* Kicker — blekk som setter seg på papir */}
                 <p className='mb-4 text-lg font-bold leading-[1.08] text-foreground sm:text-2xl md:text-3xl xl:text-3xl'>
                   <span className='sr-only'>{kickerText}</span>
 

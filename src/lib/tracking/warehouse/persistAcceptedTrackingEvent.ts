@@ -6,9 +6,22 @@ import { getTrackingWarehouse } from '@/lib/tracking/warehouse/getTrackingWareho
 import type { MetaEventPayload } from 'types/tracking/meta'
 import type postgres from 'postgres'
 
-const PROVIDERS = ['meta', 'google'] as const
+type TrackingProvider = 'meta' | 'google'
 
-export async function persistAcceptedTrackingEvent(payload: MetaEventPayload): Promise<void> {
+type TrackingConsent = {
+  necessary: boolean
+  preferences: boolean
+  statistics: boolean
+  marketing: boolean
+  services: Record<string, boolean>
+  source: 'usercentrics' | 'shopify'
+}
+
+export async function persistAcceptedTrackingEvent(
+  payload: MetaEventPayload,
+  consent?: TrackingConsent,
+  providers: readonly TrackingProvider[] = []
+): Promise<void> {
   const sql = getTrackingWarehouse()
   const eventId = payload.eventId
   const eventName = payload.eventName
@@ -36,6 +49,7 @@ export async function persistAcceptedTrackingEvent(payload: MetaEventPayload): P
         idempotency_key,
         external_id,
         source_url,
+        consent,
         user_data_quality,
         payload,
         occurred_at
@@ -46,6 +60,7 @@ export async function persistAcceptedTrackingEvent(payload: MetaEventPayload): P
         ${idempotencyKey},
         ${payload.userData?.external_id ?? null},
         ${payload.eventSourceUrl ?? null},
+        ${transaction.json((consent ?? {}) as postgres.JSONValue)},
         ${transaction.json(userDataQuality)},
         ${transaction.json(getTrackingLedgerPayload(payload) as postgres.JSONValue)},
         ${occurredAt}
@@ -53,7 +68,7 @@ export async function persistAcceptedTrackingEvent(payload: MetaEventPayload): P
       on conflict (idempotency_key) do nothing
     `
 
-    for (const provider of PROVIDERS) {
+    for (const provider of providers) {
       await transaction`
         insert into ops.provider_dispatch_attempts (
           idempotency_key,

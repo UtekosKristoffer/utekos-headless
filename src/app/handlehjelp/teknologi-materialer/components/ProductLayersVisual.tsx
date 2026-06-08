@@ -64,7 +64,7 @@ export function ProductLayersVisual({ activeTech }: { activeTech: string }) {
           icon={ShieldCheck}
           color='ancient'
         >
-          <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+          <div className="absolute inset-0 opacity-20 bg-[url('/textures/carbon-fibre.png')]" />
           <div className='absolute right-4 top-4 animate-pulse text-ancient-water opacity-50'>
             <Droplet className='h-5 w-5' />
           </div>

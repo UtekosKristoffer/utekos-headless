@@ -2,38 +2,24 @@ import '../globals.css'
 import '@fontsource-variable/google-sans/full.css'
 import { utekosText, utekosTextMedium, utekosTitle } from '@/app/fonts/font.config'
 import { Suspense } from 'react'
-import { WebVitalsReporter } from '@/components/analytics/WebVitalsReporter'
 import { mainMenu } from '@/db/config/menu.config'
-import { Analytics } from '@vercel/analytics/react'
 import Footer from '@/components/footer/components/Footer'
-import { TrackingRoot } from '@/components/analytics/TrackingRoot'
 import Header from '@/components/header/Header'
 import AnnouncementBanner from '@/components/frontpage/components/SpecialOfferSection/AnnouncementBanner'
-import { ChatBotAgent } from '@/components/chat/ChatBotAgent/source-code'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { CartProviderLoader } from '@/components/providers/CartProviderLoader'
-import { PostHogClientProvider } from '@/components/providers/PostHogProvider'
-import { MicrosoftUetTag } from '@/components/analytics/MicrosoftUetTag'
 import { GoogleTagManagerLoader } from '@/components/analytics/GoogleTagManagerLoader'
-import { SpeedInsights } from '@vercel/speed-insights/next'
+import { UsercentricsScript } from '@/components/cookie-consent/UsercentricsScript'
 import type { Metadata } from 'next'
 
 const GOOGLE_TAG_MANAGER_ID = process.env.NEXT_GOOGLE_GTM_ID || 'GTM-5TWMJQFP'
 
-const GTM_SCRIPT_ORIGIN = (
-  process.env.NEXT_PUBLIC_GTM_SCRIPT_ORIGIN
-  || process.env.NEXT_PUBLIC_GTM_FALLBACK_ORIGIN
-  || 'https://www.googletagmanager.com'
-).replace(/\/$/, '')
-
-const GTM_FALLBACK_SCRIPT_ORIGIN = (
-  process.env.NEXT_PUBLIC_GTM_FALLBACK_ORIGIN || 'https://www.googletagmanager.com'
-).replace(/\/$/, '')
+const GTM_SCRIPT_URL =
+  process.env.NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL
+  || `https://cloud.server.utekos.no/gtm.js?id=${encodeURIComponent(GOOGLE_TAG_MANAGER_ID)}`
 
 const SHOULD_LOAD_GOOGLE_TAG_MANAGER =
   process.env.NODE_ENV === 'production' && process.env.VERCEL_ENV !== 'preview'
-
-const SHOULD_LOAD_VERCEL_ANALYTICS = process.env.NODE_ENV === 'production' && process.env.VERCEL === '1'
 
 export const metadata: Metadata = {
   icons: {
@@ -112,22 +98,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='no' className={`${utekosText.variable} ${utekosTextMedium.variable} ${utekosTitle.variable}`}>
       <body className='bg-background text-foreground antialiased scroll-smooth'>
-        <WebVitalsReporter />
+        <UsercentricsScript />
 
         {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (
           <GoogleTagManagerLoader
             gtmId={GOOGLE_TAG_MANAGER_ID}
-            scriptOrigin={GTM_SCRIPT_ORIGIN}
-            fallbackOrigin={GTM_FALLBACK_SCRIPT_ORIGIN}
+            scriptUrl={GTM_SCRIPT_URL}
           />
         )}
-
-        <MicrosoftUetTag />
 
         {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (
           <noscript>
             <iframe
-              src={`https://www.googletagmanager.com/ns.html?id=${GOOGLE_TAG_MANAGER_ID}`}
+              src={`https://cloud.server.utekos.no/ns.html?id=${GOOGLE_TAG_MANAGER_ID}`}
               height='0'
               width='0'
               style={{ display: 'none', visibility: 'hidden' }}
@@ -138,23 +121,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <OnlineStoreJsonLd />
 
         <Suspense fallback={null}>
-          <TrackingRoot />
-        </Suspense>
-
-        <Suspense fallback={null}>
-          <PostHogClientProvider>
-            <CartProviderLoader>
-              <AnnouncementBanner />
-              <Header menu={mainMenu} />
-              <main>
-                {children}
-                {SHOULD_LOAD_VERCEL_ANALYTICS && <Analytics mode='production' />}
-                <SpeedInsights />
-                <ChatBotAgent />
-              </main>
-              <Footer />
-            </CartProviderLoader>
-          </PostHogClientProvider>
+          <CartProviderLoader>
+            <AnnouncementBanner />
+            <Header menu={mainMenu} />
+            <main>
+              {children}
+            </main>
+            <Footer />
+          </CartProviderLoader>
         </Suspense>
       </body>
     </html>

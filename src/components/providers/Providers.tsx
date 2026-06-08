@@ -11,7 +11,9 @@ import type { DehydratedState } from '@tanstack/react-query'
 import { CookieConsentProvider } from '@/components/cookie-consent/CookieConsentProvider'
 import { MarketingPixels } from '@/components/analytics/MarketingPixels'
 import { PostHogConsentGate } from '@/components/analytics/PostHogConsentGate'
-import { CookieConsentBanner } from '@/components/CookieBanner'
+import { MicrosoftUetTag } from '@/components/analytics/MicrosoftUetTag'
+import { ConsentGatedServices } from '@/components/analytics/ConsentGatedServices'
+import { PostHogClientProvider } from '@/components/providers/PostHogProvider'
 
 const ReactQueryDevtools =
   process.env.NODE_ENV === 'development' ?
@@ -44,9 +46,12 @@ export default function Providers({ children, cartId: initialCartId, dehydratedS
           <ReactQueryDevtools initialIsOpen={false} />
         : null}
       </QueryClientProvider>
-      <CookieConsentBanner />
       <MarketingPixels />
-      <PostHogConsentGate />
+      <MicrosoftUetTag />
+      <PostHogClientProvider>
+        <PostHogConsentGate />
+      </PostHogClientProvider>
+      <ConsentGatedServices />
     </CookieConsentProvider>
   )
 }

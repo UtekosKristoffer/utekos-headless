@@ -1,4 +1,9 @@
+'use client'
+
 import Script from 'next/script'
+import { useEffect } from 'react'
+import { useConsentForService } from '@/components/cookie-consent/useConsent'
+import { USERCENTRICS_MICROSOFT_SERVICE_NAME } from '@/components/cookie-consent/usercentricsConfig'
 
 const DEFAULT_MICROSOFT_UET_TAG_ID = '97247724'
 
@@ -12,82 +17,8 @@ type MicrosoftUetTagProps = {
   tagId?: string
 }
 
-const MICROSOFT_UET_CONSENT_SYNC_SCRIPT = `
-  (function() {
-    var hasCompletedInitialConsentSync = false;
-    var previousMarketingConsent = false;
-
-    function parseStoredConsent(value) {
-      if (!value) return false;
-      try {
-        var parsed = JSON.parse(value);
-        return !!parsed && parsed.marketing === true;
-      } catch (error) {
-        return false;
-      }
-    }
-
-    function readCookie(name) {
-      var prefix = name + '=';
-      var parts = document.cookie ? document.cookie.split('; ') : [];
-      for (var index = 0; index < parts.length; index += 1) {
-        var part = parts[index];
-        if (part.indexOf(prefix) === 0) {
-          return decodeURIComponent(part.slice(prefix.length));
-        }
-      }
-      return null;
-    }
-
-    function hasMarketingConsent() {
-      try {
-        if (parseStoredConsent(window.localStorage.getItem('utekos_cookie_consent'))) {
-          return true;
-        }
-      } catch (error) {}
-
-      return parseStoredConsent(readCookie('cookie-consent'));
-    }
-
-    function updateMicrosoftUetConsent() {
-      var hasConsent = hasMarketingConsent();
-      window.uetq = window.uetq || [];
-      window.uetq.push('consent', 'update', {
-        ad_storage: hasConsent ? 'granted' : 'denied'
-      });
-
-      if (
-        hasCompletedInitialConsentSync
-        && hasConsent
-        && !previousMarketingConsent
-      ) {
-        windowq.push('pageLoad');
-      }
-
-      previousMarketingConsent = hasConsent;
-      hasCompletedInitialConsentSync = true;
-    }
-
-    updateMicrosoftUetConsent();
-    window.addEventListener('cookie_consent_saved', updateMicrosoftUetConsent);
-    window.addEventListener('storage', function(event) {
-      if (event.key === 'utekos_cookie_consent') updateMicrosoftUetConsent();
-    });
-  })();
-`
-
 const MICROSOFT_UET_ENHANCED_CONVERSIONS_SCRIPT = `
   (function() {
-    function parseStoredConsent(value) {
-      if (!value) return false;
-      try {
-        var parsed = JSON.parse(value);
-        return !!parsed && parsed.marketing === true;
-      } catch (error) {
-        return false;
-      }
-    }
-
     function readCookie(name) {
       var prefix = name + '=';
       var parts = document.cookie ? document.cookie.split('; ') : [];
@@ -100,19 +31,7 @@ const MICROSOFT_UET_ENHANCED_CONVERSIONS_SCRIPT = `
       return '';
     }
 
-    function hasMarketingConsent() {
-      try {
-        if (parseStoredConsent(window.localStorage.getItem('utekos_cookie_consent'))) {
-          return true;
-        }
-      } catch (error) {}
-
-      return parseStoredConsent(readCookie('cookie-consent'));
-    }
-
     function setMicrosoftUetPid() {
-      if (!hasMarketingConsent()) return;
-
       var email = readCookie('ute_user_hash') || readCookie('email_hash');
       var phone = readCookie('ute_phone_hash');
       if (!email && !phone) return;
@@ -138,10 +57,6 @@ const MICROSOFT_UET_ENHANCED_CONVERSIONS_SCRIPT = `
     };
 
     setMicrosoftUetPid();
-    window.addEventListener('cookie_consent_saved', setMicrosoftUetPid);
-    window.addEventListener('storage', function(event) {
-      if (event.key === 'utekos_cookie_consent') setMicrosoftUetPid();
-    });
   })();
 `
 
@@ -149,7 +64,7 @@ function createMicrosoftUetBootstrapScript(tagId: string): string {
   return `
     (function(w,d,t,u,o) {
       w[u] = w[u] || [];
-      w[u].push('consent', 'default', { ad_storage: 'denied' });
+      w[u].push('consent', 'default', { ad_storage: 'granted' });
       o = {
         ti: ${JSON.stringify(tagId)},
         enableAutoSpaTracking: true,
@@ -175,7 +90,16 @@ function createMicrosoftUetBootstrapScript(tagId: string): string {
 }
 
 export function MicrosoftUetTag({ tagId = MICROSOFT_UET_TAG_ID }: MicrosoftUetTagProps) {
-  if (!SHOULD_LOAD_MICROSOFT_UET || !tagId) return null
+  const hasMarketingConsent = useConsentForService(USERCENTRICS_MICROSOFT_SERVICE_NAME)
+
+  useEffect(() => {
+    window.uetq = window.uetq || []
+    window.uetq.push('consent', 'update', {
+      ad_storage: hasMarketingConsent ? 'granted' : 'denied'
+    })
+  }, [hasMarketingConsent])
+
+  if (!SHOULD_LOAD_MICROSOFT_UET || !tagId || !hasMarketingConsent) return null
 
   return (
     <>
@@ -184,9 +108,6 @@ export function MicrosoftUetTag({ tagId = MICROSOFT_UET_TAG_ID }: MicrosoftUetTa
       </Script>
       <Script id='microsoft-uet-enhanced-conversions' strategy='afterInteractive'>
         {MICROSOFT_UET_ENHANCED_CONVERSIONS_SCRIPT}
-      </Script>
-      <Script id='microsoft-uet-consent-sync' strategy='afterInteractive'>
-        {MICROSOFT_UET_CONSENT_SYNC_SCRIPT}
       </Script>
     </>
   )

@@ -63,6 +63,14 @@ export async function sendGA4BrowserEvent(
 ): Promise<GoogleBrowserEventResult> {
   const { eventName, eventData, ga4Data } = payload
 
+  if (process.env.GOOGLE_BROWSER_EVENT_TRANSPORT === 'sgtm') {
+    return {
+      success: true,
+      provider: 'google',
+      transport: 'sgtm'
+    }
+  }
+
   if (!eventName) {
     return {
       success: false,

@@ -1,7 +1,6 @@
-import { CompareModelsJsonLd } from '@/app/handlehjelp/sammenlign-modeller/components/CompareModelsJsonLd'
-import type { ReactNode } from 'react'
+import { CompareModelsJsonLd } from './components/CompareModelsJsonLd'
 
-export default function CompareModelsLayout({ children }: { children: ReactNode }) {
+export default function CompareModelsLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <CompareModelsJsonLd />

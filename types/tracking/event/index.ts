@@ -12,7 +12,7 @@ export type MetaSender = (
   userData: ClientUserData
 ) => Promise<MetaEventRequestResult>
 
-export type GoogleBrowserEventTransport = 'direct_ga4'
+export type GoogleBrowserEventTransport = 'direct_ga4' | 'sgtm'
 
 export type GoogleBrowserEventResult =
   | {

@@ -8,6 +8,8 @@ import { AccordionContentRenderer } from './AccordionContentRenderer'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { track } from '@vercel/analytics/react'
 import { generateEventID } from '@/components/analytics/Meta/generateEventID'
+import { hasServiceConsent } from '@/lib/tracking/consent/hasServiceConsent'
+import { USERCENTRICS_VERCEL_ANALYTICS_SERVICE_NAME } from '@/components/cookie-consent/usercentricsConfig'
 import type { AccordionSectionData } from '@types'
 
 export function ProductDetailsAccordionSection({
@@ -60,10 +62,12 @@ export function ProductDetailsAccordionSection({
       <AccordionTrigger
         onClick={() => {
           handleInteraction()
-          track('ProductPageAccordionInteraction', {
-            section: title,
-            sectionId: id
-          })
+          if (hasServiceConsent(USERCENTRICS_VERCEL_ANALYTICS_SERVICE_NAME)) {
+            track('ProductPageAccordionInteraction', {
+              section: title,
+              sectionId: id
+            })
+          }
 
           sendGAEvent('event', 'buttonClicked', { value: title }) // Oppdaterte value til title her også for konsistens
         }}

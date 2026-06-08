@@ -1,11 +1,11 @@
 import { logAttribution } from '@/lib/tracking/log/logAttribution'
 import { trackMicrosoftUetEvent } from '@/lib/tracking/microsoft-uet/trackMicrosoftUetEvent'
+import { hasServiceConsent } from '@/lib/tracking/consent/hasServiceConsent'
+import { USERCENTRICS_META_SERVICE_NAME } from '@/components/cookie-consent/usercentricsConfig'
 import type { DispatchPixelsOptions } from 'types/cart'
 
 export function dispatchAddToCartPixels({
-  eventData,
-  product,
-  selectedVariant
+  eventData
 }: DispatchPixelsOptions): void {
   const {
     eventID,
@@ -14,39 +14,12 @@ export function dispatchAddToCartPixels({
     contents,
     value,
     currency,
-    totalQty,
-    mainVariantId
+    totalQty
   } = eventData
 
   logAttribution(contentName, value)
 
   if (typeof window === 'undefined') return
-
-  if (window.dataLayer) {
-    const ga4Items = [
-      {
-        item_id: mainVariantId,
-        item_name: product.title,
-        item_variant: selectedVariant.title,
-        price: eventData.contents[0]?.item_price ?? 0,
-        quantity: eventData.contents[0]?.quantity
-      }
-    ]
-    if (contents.length > 1 && contents[1]) {
-      ga4Items.push({
-        item_id: contents[1].id,
-        item_name: product.title,
-        item_variant: 'Utekos Buff™',
-        price: 0,
-        quantity: contents[1].quantity
-      })
-    }
-
-    window.dataLayer.push({
-      event: 'add_to_cart',
-      ecommerce: { currency, value, items: ga4Items }
-    })
-  }
 
   trackMicrosoftUetEvent({
     category: 'ecommerce',
@@ -60,7 +33,7 @@ export function dispatchAddToCartPixels({
     eventId: eventID
   })
 
-  if (window.fbq) {
+  if (hasServiceConsent(USERCENTRICS_META_SERVICE_NAME) && window.fbq) {
     window.fbq(
       'track',
       'AddToCart',

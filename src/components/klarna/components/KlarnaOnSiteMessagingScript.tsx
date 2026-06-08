@@ -1,6 +1,8 @@
 'use client'
 
 import Script from 'next/script'
+import { useConsentForService } from '@/components/cookie-consent/useConsent'
+import { USERCENTRICS_KLARNA_OSM_SERVICE_NAME } from '@/components/cookie-consent/usercentricsConfig'
 
 const KLARNA_ON_SITE_MESSAGING_SCRIPT_ID = 'klarna-on-site-messaging-websdk'
 const KLARNA_ON_SITE_MESSAGING_SCRIPT_URL = 'https://js.klarna.com/web-sdk/v1/klarna.js'
@@ -8,6 +10,12 @@ const KLARNA_CLIENT_ID = process.env.NEXT_PUBLIC_KLARNA_CLIENT_ID
 const KLARNA_ENVIRONMENT = process.env.NEXT_PUBLIC_KLARNA_ENVIRONMENT ?? 'production'
 
 export function KlarnaOnSiteMessagingScript() {
+  const hasMarketingConsent = useConsentForService(USERCENTRICS_KLARNA_OSM_SERVICE_NAME)
+
+  if (!hasMarketingConsent) {
+    return null
+  }
+
   if (!KLARNA_CLIENT_ID) {
     if (process.env.NODE_ENV !== 'production') {
       console.warn('Missing NEXT_PUBLIC_KLARNA_CLIENT_ID. Klarna On-site Messaging will not load.')

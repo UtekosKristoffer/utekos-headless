@@ -14,6 +14,7 @@ import { buildCookieConfigs } from './lib/tracking/proxy/buildCookieConfigs'
 import { formatCookieHeader } from './lib/tracking/proxy/formatCookieHeader'
 import { hashEmail } from './lib/tracking/hash/hashEmail'
 import { formatFbcCookie } from './lib/tracking/proxy/formatFbcCookie'
+import { hasRequestMarketingConsent } from '@/lib/tracking/consent/hasRequestMarketingConsent'
 
 const allowedReferrers = new Set(['nbocc.no', 'bergenhordaland.nbocc.no'])
 
@@ -67,6 +68,10 @@ export async function proxy(request: NextRequest) {
   }
 
   if (!context.isTargetRoute) {
+    return NextResponse.next()
+  }
+
+  if (!hasRequestMarketingConsent(request)) {
     return NextResponse.next()
   }
 

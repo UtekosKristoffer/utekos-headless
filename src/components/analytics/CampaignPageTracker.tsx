@@ -2,11 +2,11 @@
 
 import { useEffect, useRef } from 'react'
 import { generateEventID } from '@/components/analytics/Meta/generateEventID'
-import { getCookie } from '@/components/analytics/Meta/getCookie'
-import { getOrSetExternalId } from '@/components/analytics/Meta/getOrSetExternalId'
-import type { MetaEventPayload } from 'types/tracking/meta/event'
+import { dispatchMetaTrackingEvent } from '@/lib/tracking/meta/dispatchMetaTrackingEvent'
+
 export function CampaignPageTracker() {
   const hasFired = useRef(false)
+
   useEffect(() => {
     if (hasFired.current) return
     hasFired.current = true
@@ -23,52 +23,10 @@ export function CampaignPageTracker() {
       currency: 'NOK'
     }
 
-    const firePixel = () => {
-      if (typeof window !== 'undefined' && window.fbq) {
-        window.fbq('track', eventName, customData, { eventID: eventId })
-        return true
-      }
-      return false
-    }
-    if (!firePixel()) {
-      const intervalId = setInterval(() => {
-        if (firePixel()) {
-          clearInterval(intervalId)
-        }
-      }, 500)
-
-      setTimeout(() => clearInterval(intervalId), 5000)
-    }
-
-    requestAnimationFrame(() => {
-      const externalId = getOrSetExternalId()
-      const fbc = getCookie('_fbc')
-      const fbp = getCookie('_fbp')
-      const userHash = getCookie('ute_user_hash')
-      const sourceUrl = window.location.href
-      const timestamp = Math.floor(Date.now() / 1000)
-      const payload: MetaEventPayload = {
-        eventName,
-        eventId,
-        eventSourceUrl: sourceUrl,
-        eventTime: timestamp,
-        actionSource: 'website',
-        userData: {
-          external_id: externalId || undefined,
-          fbc: fbc || undefined,
-          fbp: fbp || undefined,
-          email_hash: userHash || undefined,
-          client_user_agent: navigator.userAgent
-        },
-        eventData: customData
-      }
-
-      fetch('/api/tracking-events', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-        keepalive: true
-      }).catch(err => console.error('[Campaign Tracker] CAPI failed:', err))
+    void dispatchMetaTrackingEvent({
+      eventName,
+      eventId,
+      eventData: customData
     })
   }, [])
 

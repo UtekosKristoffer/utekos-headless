@@ -2,6 +2,12 @@ import type { KlarnaPaymentsButtons } from 'klarna-payments-sdk'
 
 declare global {
   interface Window {
+    UC_UI?: {
+      showSecondLayer: () => void
+    }
+
+    ucConsentAllowedDpsString?: string
+
     fbq: {
       (method: 'init', pixelId: string, userData?: Record<string, unknown>): void
       (method: 'track', event: string, params?: Record<string, unknown>, options?: { eventID?: string }): void

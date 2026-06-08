@@ -17,3 +17,8 @@ export function useConsentFor(category: ConsentCategory): boolean {
   const { consent } = useConsent()
   return consent[category]
 }
+
+export function useConsentForService(serviceName: string): boolean {
+  const { hasServiceConsent } = useConsent()
+  return hasServiceConsent(serviceName)
+}

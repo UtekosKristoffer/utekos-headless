@@ -2,11 +2,9 @@
 
 import { useEffect } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
-import { usePostHog } from '@posthog/next'
-import { useConsent } from '@/components/cookie-consent/useConsent'
+import { usePostHog } from '@posthog/react'
 
 export function PostHogConsentGate() {
-  const { consent } = useConsent()
   const postHog = usePostHog()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -14,16 +12,10 @@ export function PostHogConsentGate() {
   useEffect(() => {
     if (!postHog) return
 
-    if (consent.analytics) {
-      postHog.opt_in_capturing({ captureEventName: false })
-      postHog.capture('$pageview', {
-        $current_url: window.location.href
-      })
-      return
-    }
-
-    postHog.opt_out_capturing()
-  }, [consent.analytics, pathname, postHog, searchParams])
+    postHog.capture('$pageview', {
+      $current_url: window.location.href
+    })
+  }, [pathname, postHog, searchParams])
 
   return null
 }

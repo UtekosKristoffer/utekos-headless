@@ -1,0 +1,14 @@
+import { z } from 'zod'
+
+export const usercentricsConsentSchema = z
+  .object({
+    necessary: z.literal(true),
+    preferences: z.boolean(),
+    statistics: z.boolean(),
+    marketing: z.boolean(),
+    services: z.record(z.string(), z.boolean()),
+    source: z.literal('usercentrics')
+  })
+  .strict()
+
+export type UsercentricsConsentState = z.infer<typeof usercentricsConsentSchema>

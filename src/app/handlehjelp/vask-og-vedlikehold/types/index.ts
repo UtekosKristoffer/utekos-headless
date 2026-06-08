@@ -1,7 +1,6 @@
 // Path: src/app/handlehjelp/vask-og-vedlikehold/types/index.ts
 
 import type { LucideIcon } from 'lucide-react'
-import type { ReactNode } from 'react'
 
 export type FAQ = {
   question: string
@@ -19,5 +18,5 @@ export type CareStep = {
   step: string
   title: string
   icon: LucideIcon
-  content: ReactNode
+  content: React.ReactNode
 }

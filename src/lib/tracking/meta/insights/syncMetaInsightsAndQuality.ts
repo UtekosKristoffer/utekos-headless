@@ -124,7 +124,7 @@ export async function syncMetaInsightsAndQuality() {
   // 2. Hent Dataset Quality via raw fetch til Graph API
   // (Fordi facebook-nodejs-business-sdk ofte henger etter på nye quality-endepunkter)
   try {
-    const url = new URL('https://graph.facebook.com/v20.0/dataset_quality')
+    const url = new URL('https://graph.facebook.com/v25.0/dataset_quality')
     url.searchParams.set('dataset_id', pixelId)
 
     url.searchParams.set('access_token', token)

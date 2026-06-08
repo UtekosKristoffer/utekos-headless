@@ -1,9 +1,9 @@
 import { readStoredConsentState } from '@/components/cookie-consent/readStoredConsentState'
 
-export function hasMarketingConsent(): boolean {
+export function hasServiceConsent(serviceName: string): boolean {
   if (typeof window === 'undefined') {
     return false
   }
 
-  return readStoredConsentState()?.marketing === true
+  return readStoredConsentState()?.services[serviceName] === true
 }

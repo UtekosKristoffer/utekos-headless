@@ -14,7 +14,7 @@ function PolicyItem({
     </li>
   )
 }
-export const lastUpdated = '11. juni 2025'
+export const lastUpdated = '8. juni 2026'
 export const privacySections: Section[] = [
   {
     id: 'introduksjon',
@@ -201,6 +201,30 @@ export const privacySections: Section[] = [
             privacy.shopify.com/en
           </a>
           .
+        </p>
+      </>
+    )
+  },
+  {
+    id: 'informasjonskapsler',
+    title: 'Informasjonskapsler og samtykke',
+    content: (
+      <>
+        <p>
+          Usercentrics CMP er vår samtykkeplattform. Den registrerer og dokumenterer
+          valgene dine for nødvendige, funksjonelle, statistiske og
+          markedsføringsrelaterte informasjonskapsler.
+        </p>
+        <p>
+          Statistikksamtykke brukes blant annet til produktanalyse.
+          Markedsføringssamtykke kan brukes til konverteringsmåling,
+          kundematching og deling av hash’et e-postadresse eller telefonnummer
+          med annonsepartnere. Slike data sendes ikke uten gyldig
+          markedsføringssamtykke.
+        </p>
+        <p>
+          Du kan når som helst endre eller trekke tilbake samtykket via
+          «Innstillinger for informasjonskapsler» nederst på nettstedet.
         </p>
       </>
     )

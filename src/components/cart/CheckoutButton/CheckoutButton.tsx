@@ -14,6 +14,12 @@ import { getCookie } from '@/components/analytics/Meta/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { trackMicrosoftUetEvent } from '@/lib/tracking/microsoft-uet/trackMicrosoftUetEvent'
 import { sendGTMEvent } from '@next/third-parties/google'
+import { hasCategoryConsent } from '@/lib/tracking/consent/hasCategoryConsent'
+import { hasServiceConsent } from '@/lib/tracking/consent/hasServiceConsent'
+import {
+  USERCENTRICS_META_SERVICE_NAME,
+  USERCENTRICS_VERCEL_ANALYTICS_SERVICE_NAME
+} from '@/components/cookie-consent/usercentricsConfig'
 
 export const CheckoutButton = ({
   checkoutUrl,
@@ -61,9 +67,10 @@ export const CheckoutButton = ({
       const rawEventID = generateEventID()
       const eventID = rawEventID.replace('evt_', 'ic_')
       const value = Number.parseFloat(subtotalAmount || '0') || 0
-      const userData: MetaUserData = getClientMetaUserData()
+      const userData: MetaUserData | undefined =
+        hasServiceConsent(USERCENTRICS_META_SERVICE_NAME) ? getClientMetaUserData() : undefined
 
-      const metaId = userData.fbc
+      const metaId = userData?.fbc
 
       const sources = []
 
@@ -100,19 +107,21 @@ export const CheckoutButton = ({
         eventId: eventID
       })
 
-      const captureBody: CaptureBody = {
-        cartId,
-        checkoutUrl,
-        eventId: eventID,
-        userData
-      }
+      if (hasCategoryConsent('marketing')) {
+        const captureBody: CaptureBody = {
+          cartId,
+          checkoutUrl,
+          eventId: eventID,
+          ...(userData ? { userData } : {})
+        }
 
-      fetch('/api/checkout/capture-identifiers', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(captureBody),
-        keepalive: true
-      }).catch(err => console.error('Capture identifiers failed', err))
+        fetch('/api/checkout/capture-identifiers', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(captureBody),
+          keepalive: true
+        }).catch(err => console.error('Capture identifiers failed', err))
+      }
 
       void dispatchMetaTrackingEvent({
         eventName: 'InitiateCheckout',
@@ -124,7 +133,7 @@ export const CheckoutButton = ({
           content_type: 'product',
           num_items
         },
-        userData
+        ...(userData ? { userData } : {})
       })
     } catch (error) {
       console.error('Feil under sending av checkout-events:', error)
@@ -137,17 +146,19 @@ export const CheckoutButton = ({
     const valueNum = Number.parseFloat(subtotalAmount || '0') || 0
     const cleanItemIds = item_ids.map(id => cleanShopifyId(id) || id)
 
-    track('Vercel Analytics', {
-      event: 'CheckoutButtonClick',
-      quantity: num_items || 1,
-      value: subtotalAmount,
-      currency,
-      cart_id: cartId || 'unknown',
-      _fpc: getCookie('_fpc'),
-      external_id: getCookie('ute_ext_id') || 'unknown',
-      event_name: 'CheckoutButtonClick',
-      event_id: generateEventID()
-    })
+    if (hasServiceConsent(USERCENTRICS_VERCEL_ANALYTICS_SERVICE_NAME)) {
+      track('Vercel Analytics', {
+        event: 'CheckoutButtonClick',
+        quantity: num_items || 1,
+        value: subtotalAmount,
+        currency,
+        cart_id: cartId || 'unknown',
+        _fpc: getCookie('_fpc'),
+        external_id: getCookie('ute_ext_id') || 'unknown',
+        event_name: 'CheckoutButtonClick',
+        event_id: generateEventID()
+      })
+    }
 
     sendGTMEvent({
       event: 'begin_checkout',

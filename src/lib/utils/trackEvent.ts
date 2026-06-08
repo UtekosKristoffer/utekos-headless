@@ -1,5 +1,7 @@
 // Path: src/lib/utils/trackEvent.ts
 import { track } from '@vercel/analytics'
+import { hasServiceConsent } from '@/lib/tracking/consent/hasServiceConsent'
+import { USERCENTRICS_VERCEL_ANALYTICS_SERVICE_NAME } from '@/components/cookie-consent/usercentricsConfig'
 import type { LogPayload } from 'types/tracking/log/LogPayload'
 
 type AnalyticsProperty = string | number | boolean | null
@@ -8,7 +10,9 @@ export function trackEvent(
   eventName: string,
   data?: Record<string, AnalyticsProperty>
 ) {
-  track(eventName, data)
+  if (hasServiceConsent(USERCENTRICS_VERCEL_ANALYTICS_SERVICE_NAME)) {
+    track(eventName, data)
+  }
 
   const payload: LogPayload = {
     event: eventName,

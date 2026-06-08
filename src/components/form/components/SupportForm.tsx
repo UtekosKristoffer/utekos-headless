@@ -30,7 +30,7 @@ const initialState: ContactFormState = { message: '' }
 const contactFieldClassName =
   'h-12 rounded-none border-cloud-dancer/20 bg-ancient-water text-background tracking-normal placeholder:text-havdyp focus-visible:border-primary focus-visible:ring-primary/35'
 
-export function SupportForm() {
+export function SupportForm({ idPrefix = 'contact' }: { idPrefix?: string }) {
   const [state, formAction, isPending] = useActionState(submitContactForm, initialState)
 
   const form = useForm<ContactFormData>({
@@ -80,7 +80,7 @@ export function SupportForm() {
 
   return (
     <Form {...form}>
-      <form action={formAction} className='space-y-6'>
+      <form id={`${idPrefix}-form`} action={formAction} className='space-y-6'>
         <FormField
           control={form.control}
           name='email'
@@ -91,6 +91,7 @@ export function SupportForm() {
               </FormLabel>
               <FormControl>
                 <Input
+                  id='_r_u_-form-item'
                   placeholder='din@epost.no'
                   autoComplete='email'
                   {...field}
@@ -258,6 +259,7 @@ export function SupportForm() {
                 <div>
                   <input type='hidden' name={field.name} value={field.value ? 'on' : ''} />
                   <Switch
+                    id={`${idPrefix}-consent`}
                     checked={!!field.value}
                     onCheckedChange={field.onChange}
                     className='border border-cloud-dancer/15 data-[state=checked]:bg-primary data-[state=unchecked]:bg-havdyp focus-visible:ring-primary/35'

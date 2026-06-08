@@ -1,4 +1,3 @@
-import { getGoogleConsentFields } from './getGoogleConsentFields'
 import type { ConsentState } from './CookieConsentProvider'
 
 export function broadcastConsentState(consentState: ConsentState): void {
@@ -6,17 +5,11 @@ export function broadcastConsentState(consentState: ConsentState): void {
     return
   }
 
-  const googleConsent = getGoogleConsentFields(consentState)
-
   window.dataLayer = window.dataLayer || []
   window.dataLayer.push({
-    event: 'consent_update',
-    consent: googleConsent
+    event: 'utekos_consent_update',
+    consent: consentState
   })
-
-  if (typeof window.gtag === 'function') {
-    window.gtag('consent', 'update', googleConsent)
-  }
 
   window.dispatchEvent(
     new CustomEvent('cookie_consent_saved', {

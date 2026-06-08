@@ -34,16 +34,19 @@ export async function processBrowserEvent(
   body: MetaEventPayload,
   cookies: EventCookies,
   metadata: { clientIp: string; userAgent: string },
-  deps: TrackingDependencies
+  deps: TrackingDependencies,
+  providerConsent: { meta: boolean; google: boolean }
 ) {
   const { userData, sourceInfo } = prepareEventContext(body, cookies, metadata.clientIp, metadata.userAgent)
 
   const [metaResult, googleResult] = await Promise.allSettled([
-    deps.sendMeta(body, userData),
-    deps.sendGoogle(body, {
-      clientIp: metadata.clientIp,
-      userAgent: metadata.userAgent
-    })
+    providerConsent.meta ? deps.sendMeta(body, userData) : Promise.resolve(undefined),
+    providerConsent.google ?
+      deps.sendGoogle(body, {
+        clientIp: metadata.clientIp,
+        userAgent: metadata.userAgent
+      })
+    : Promise.resolve(undefined)
   ])
 
   const metaResponse = getSettledValue(metaResult)
@@ -52,23 +55,30 @@ export async function processBrowserEvent(
     metaResult.status === 'rejected' ? getMetaApiErrorDetails(metaResult.reason) : undefined
 
   if (body.eventId && body.eventName && deps.recordAttempt) {
-    await Promise.allSettled([
-      deps.recordAttempt({
+    const attempts: Array<Promise<void>> = []
+
+    if (providerConsent.meta) {
+      attempts.push(deps.recordAttempt({
         eventId: body.eventId,
         eventName: body.eventName,
         provider: 'meta',
         success: !!metaResponse,
         error: metaErrorDetails?.message,
         retryable: metaErrorDetails?.retryable
-      }),
-      deps.recordAttempt({
+      }))
+    }
+
+    if (providerConsent.google) {
+      attempts.push(deps.recordAttempt({
         eventId: body.eventId,
         eventName: body.eventName,
         provider: 'google',
         success: getResultField(googleResponse, 'success') === true,
         error: getSettledError(googleResult) ?? getResultField(googleResponse, 'error')?.toString()
-      })
-    ])
+      }))
+    }
+
+    await Promise.allSettled(attempts)
   }
 
   if (metaResponse) {
@@ -102,6 +112,12 @@ export async function processBrowserEvent(
       success: true,
       events_received: metaResponse.events_received,
       fbtrace_id: metaResponse.fbtrace_id
+    }
+  }
+
+  if (!providerConsent.meta) {
+    return {
+      success: getResultField(googleResponse, 'success') === true || !providerConsent.google
     }
   }
 
