@@ -39,9 +39,9 @@ const SectionWrapper = ({
   children: React.ReactNode
 }) => (
   <section id={id} className='relative py-12 scroll-mt-24'>
-    <GridCross className='left-[-16px] top-[60px] hidden lg:block' />
-    <GridCross className='right-[-16px] top-[60px] hidden lg:block' />
-    <div className='absolute inset-x-0 top-[75px] h-px border-t border-dashed border-white/10 hidden lg:block' />
+    <GridCross className='-left-4 top-15 hidden lg:block' />
+    <GridCross className='-right-4 top-15 hidden lg:block' />
+    <div className='absolute inset-x-0 top-18.75 h-px border-t border-dashed border-white/10 hidden lg:block' />
     <h2 className='text-2xl font-semibold sm:text-3xl'>{title}</h2>
     <div className='prose prose-invert mt-6 max-w-none text-foreground/80'>{children}</div>
   </section>

@@ -12,7 +12,9 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    return NextResponse.json(await retryProviderDispatchAttempts())
+    const result = await retryProviderDispatchAttempts()
+
+    return NextResponse.json(result, { status: result.success ? 200 : 503 })
   } catch (error) {
     return NextResponse.json(
       {
