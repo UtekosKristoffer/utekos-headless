@@ -8,18 +8,8 @@ import Header from '@/components/header/Header'
 import AnnouncementBanner from '@/components/frontpage/components/SpecialOfferSection/AnnouncementBanner'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { CartProviderLoader } from '@/components/providers/CartProviderLoader'
-import { GoogleTagManagerLoader } from '@/components/analytics/GoogleTagManagerLoader'
 import { UsercentricsScript } from '@/components/cookie-consent/UsercentricsScript'
 import type { Metadata } from 'next'
-
-const GOOGLE_TAG_MANAGER_ID = process.env.NEXT_GOOGLE_GTM_ID || 'GTM-5TWMJQFP'
-
-const GTM_SCRIPT_URL =
-  process.env.NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL
-  || `https://cloud.server.utekos.no/gtm.js?id=${encodeURIComponent(GOOGLE_TAG_MANAGER_ID)}`
-
-const SHOULD_LOAD_GOOGLE_TAG_MANAGER =
-  process.env.NODE_ENV === 'production' && process.env.VERCEL_ENV !== 'preview'
 
 export const metadata: Metadata = {
   icons: {
@@ -97,36 +87,17 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='no' className={`${utekosText.variable} ${utekosTextMedium.variable} ${utekosTitle.variable}`}>
-      <body className='bg-background text-foreground antialiased scroll-smooth'>
+      <head>
         <UsercentricsScript />
-
-        {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (
-          <GoogleTagManagerLoader
-            gtmId={GOOGLE_TAG_MANAGER_ID}
-            scriptUrl={GTM_SCRIPT_URL}
-          />
-        )}
-
-        {SHOULD_LOAD_GOOGLE_TAG_MANAGER && GOOGLE_TAG_MANAGER_ID && (
-          <noscript>
-            <iframe
-              src={`https://cloud.server.utekos.no/ns.html?id=${GOOGLE_TAG_MANAGER_ID}`}
-              height='0'
-              width='0'
-              style={{ display: 'none', visibility: 'hidden' }}
-            />
-          </noscript>
-        )}
-
+      </head>
+      <body className='bg-background text-foreground antialiased scroll-smooth'>
         <OnlineStoreJsonLd />
 
         <Suspense fallback={null}>
           <CartProviderLoader>
             <AnnouncementBanner />
             <Header menu={mainMenu} />
-            <main>
-              {children}
-            </main>
+            <main>{children}</main>
             <Footer />
           </CartProviderLoader>
         </Suspense>

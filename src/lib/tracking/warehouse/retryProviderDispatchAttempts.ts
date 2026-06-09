@@ -11,14 +11,16 @@ export async function retryProviderDispatchAttempts() {
   const attempts = await claimProviderDispatchAttempts(BATCH_SIZE)
   const outcomes = await Promise.all(
     attempts.map(async attempt => {
+      const startedAt = Date.now()
       const result = await dispatchClaimedProviderAttempt(attempt)
+      const latencyMs = Date.now() - startedAt
 
       if (result.success) {
-        await completeProviderDispatchAttempt(attempt.id)
+        await completeProviderDispatchAttempt(attempt.id, latencyMs)
         return 'succeeded' as const
       }
 
-      return await failProviderDispatchAttempt(attempt, result.error, result.retryable)
+      return await failProviderDispatchAttempt(attempt, result.error, result.retryable, latencyMs)
     })
   )
 

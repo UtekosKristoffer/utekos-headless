@@ -6,6 +6,21 @@ import type { MetaUserData } from '../MetaUserData'
 import type { MetaEventType } from './MetaEventType'
 
 export type MetaEventPayload = {
+  schemaVersion?: 1
+  classification?: 'essential' | 'statistics' | 'marketing'
+  source?: 'browser' | 'shopify' | 'server'
+  occurredAt?: string
+  canonicalEventName?:
+    | 'page_view'
+    | 'view_item_list'
+    | 'select_item'
+    | 'view_item'
+    | 'add_to_cart'
+    | 'begin_checkout'
+    | 'purchase'
+    | 'search'
+    | 'generate_lead'
+    | 'custom'
   eventName: MetaEventType | undefined
   eventId: string | undefined
   eventSourceUrl: string | undefined

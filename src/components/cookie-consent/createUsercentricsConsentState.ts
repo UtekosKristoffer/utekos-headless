@@ -3,7 +3,10 @@ import {
   USERCENTRICS_PREFERENCES_SERVICE_NAMES,
   USERCENTRICS_STATISTICS_SERVICE_NAMES
 } from './usercentricsConfig'
-import type { UsercentricsConsentState } from './usercentricsConsentSchema'
+import {
+  usercentricsConsentSchema,
+  type UsercentricsConsentState
+} from './usercentricsConsentSchema'
 
 function hasAnyServiceConsent(
   services: Record<string, boolean>,
@@ -15,12 +18,12 @@ function hasAnyServiceConsent(
 export function createUsercentricsConsentState(
   services: Record<string, boolean> = {}
 ): UsercentricsConsentState {
-  return {
+  return usercentricsConsentSchema.parse({
     necessary: true,
     preferences: hasAnyServiceConsent(services, USERCENTRICS_PREFERENCES_SERVICE_NAMES),
     statistics: hasAnyServiceConsent(services, USERCENTRICS_STATISTICS_SERVICE_NAMES),
     marketing: hasAnyServiceConsent(services, USERCENTRICS_MARKETING_SERVICE_NAMES),
     services,
     source: 'usercentrics'
-  }
+  })
 }

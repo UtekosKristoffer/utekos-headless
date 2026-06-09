@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 export default function SupportPage() {
   return (
     <>
-      <section className='container mx-auto my-24 max-w-[76rem] px-4 text-foreground tracking-normal sm:my-32'>
+      <section className='container mx-auto my-24 max-w-304 px-4 text-foreground tracking-normal sm:my-32'>
         <div>
           <Activity>
             <TopGrid />

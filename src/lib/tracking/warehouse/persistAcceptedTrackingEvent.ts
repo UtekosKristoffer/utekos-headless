@@ -47,6 +47,7 @@ export async function persistAcceptedTrackingEvent(
         event_id,
         event_name,
         idempotency_key,
+        anonymous_id,
         external_id,
         source_url,
         consent,
@@ -58,6 +59,7 @@ export async function persistAcceptedTrackingEvent(
         ${eventId},
         ${eventName},
         ${idempotencyKey},
+        ${payload.ga4Data?.client_id ?? null},
         ${payload.userData?.external_id ?? null},
         ${payload.eventSourceUrl ?? null},
         ${transaction.json((consent ?? {}) as postgres.JSONValue)},
@@ -76,6 +78,8 @@ export async function persistAcceptedTrackingEvent(
           event_id,
           event_name,
           payload,
+          consent_basis,
+          data_quality,
           status,
           next_attempt_at
         )
@@ -85,6 +89,8 @@ export async function persistAcceptedTrackingEvent(
           ${eventId},
           ${eventName},
           ${transaction.json(payload as postgres.JSONValue)},
+          ${transaction.json((consent ?? {}) as postgres.JSONValue)},
+          ${transaction.json(userDataQuality)},
           'pending',
           now() + interval '2 minutes'
         )

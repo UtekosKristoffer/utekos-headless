@@ -23,9 +23,9 @@ export function DesktopSection() {
 
           <ul className='mt-8 space-y-8'>
             <li className='flex items-start gap-4'>
-              <HelpCircle className='h-6 w-6 flex-shrink-0 text-ancient-water' />
+              <HelpCircle className='h-6 w-6 shrink-0-ancient-water' />
               <div>
-                <h3 className='font-semibold leading-[1.25] tracking-normal text-foreground'>
+                <h3 className='font-semibold leading-tighttracking-normal text-foreground'>
                   Få personlig veiledning
                 </h3>
                 <p className='mt-1 text-base leading-text-paragraph tracking-normal text-foreground/90'>
@@ -34,9 +34,9 @@ export function DesktopSection() {
               </div>
             </li>
             <li className='flex items-start gap-4'>
-              <Package className='h-6 w-6 flex-shrink-0 text-ancient-water' />
+              <Package className='h-6 w-6 shrink-0-ancient-water' />
               <div>
-                <h3 className='font-semibold leading-[1.25] tracking-normal text-foreground'>
+                <h3 className='font-semibold leading-tight tracking-normal text-foreground'>
                   Hjelp med din bestilling
                 </h3>
                 <p className='mt-1 text-base leading-text-paragraph tracking-normal text-foreground/90'>
@@ -50,7 +50,7 @@ export function DesktopSection() {
         <div className='border-y border-cloud-dancer/12'>
           <div className='grid grid-cols-1 sm:grid-cols-2'>
             <div className='border-r border-cloud-dancer/12 p-6 sm:p-8 lg:px-8 lg:py-12'>
-              <h4 className='flex items-center gap-2 font-semibold leading-[1.25] tracking-normal text-foreground'>
+              <h4 className='flex items-center gap-2 font-semibold leading-tight tracking-normal text-foreground'>
                 <Leaf className='h-5 w-5 text-soft-warm' />
                 En investering i komfort
               </h4>
@@ -61,7 +61,7 @@ export function DesktopSection() {
             </div>
 
             <div className='p-6 sm:p-8 lg:px-8 lg:py-12'>
-              <h4 className='flex items-center gap-2 font-semibold leading-[1.25] tracking-normal text-foreground'>
+              <h4 className='flex items-center gap-2 font-semibold leading-tighttracking-normal text-foreground'>
                 <span aria-hidden>🇳🇴</span>
                 <span className='sr-only'>Norsk</span>
                 Skapt for norske forhold
@@ -79,7 +79,7 @@ export function DesktopSection() {
             &ldquo;Vårt løfte til deg er enkelt: å levere komfortplagg av ypperste kvalitet som lar deg
             forlenge de gode stundene utendørs, uansett vær.&rdquo;
           </blockquote>
-          <p className='mt-4 font-semibold leading-[1.25] tracking-normal text-foreground'>- Utekos</p>
+          <p className='mt-4 font-semibold leading-tight tracking-normal text-foreground'>- Utekos</p>
         </div>
       </div>
 

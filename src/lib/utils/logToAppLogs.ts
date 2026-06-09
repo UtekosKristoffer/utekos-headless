@@ -28,6 +28,8 @@ export async function logToAppLogs(
   }
 
   void writeAppLogToRedis(logEntry).catch(error => {
-    console.error('Failed to push log to Redis:', error)
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn('Failed to push log to Redis:', error)
+    }
   })
 }

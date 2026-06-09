@@ -51,7 +51,7 @@ export function Hero() {
         className='absolute inset-y-0 left-0 z-1 hidden w-1/2 bg-linear-to-r from-maritime-darkest/80 via-maritime-darkest/20 to-transparent md:block'
       />
       {/* Main content */}
-      <div className='relative z-10 mx-auto flex min-h-[calc(100svh-70px)] w-full max-w-[1400px] flex-col items-start justify-center px-6 pb-16 pt-20 md:px-12 md:pt-24 lg:px-20 xl:min-h-[calc(100svh-86px)]'>
+      <div className='relative z-10 mx-auto flex min-h-[calc(100svh-70px)] w-full max-w-350 flex-col items-start justify-center px-6 pb-16 pt-20 md:px-12 md:pt-24 lg:px-20 xl:min-h-[calc(100svh-86px)]'>
         <div className='max-w-2xl'>
           <div
             className='mb-5 aspect-1281/312 h-11 text-cloud-dancer drop-shadow-lg sm:h-14 md:mb-6 md:h-16 lg:h-20'

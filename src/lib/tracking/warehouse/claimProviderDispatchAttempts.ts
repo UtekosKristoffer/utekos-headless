@@ -31,6 +31,7 @@ export async function claimProviderDispatchAttempts(
     update ops.provider_dispatch_attempts as attempts
     set
       status = 'processing',
+      last_attempt_started_at = now(),
       updated_at = now()
     from candidates
     where attempts.id = candidates.id

@@ -3,11 +3,7 @@
 /**
  * Consent-gated marketing pixel root.
  *
- * Mounts Meta behind the `marketing`
- * consent category from CookieConsentProvider. This is the equivalent
- * pattern to MicrosoftUetTag.tsx (which gates on the same `marketing`
- * key), and removes four ungated `'use client'` islands from the initial
- * hydration tree.
+ * Mounts Meta only when the Usercentrics Meta Pixel DPS has consent.
  *
  * Env gating remains in each child (NEXT_PUBLIC_*_PIXEL_ID); the
  * consent check is the outer gate.

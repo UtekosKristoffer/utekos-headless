@@ -3,6 +3,11 @@ import type { MetaEventPayload } from 'types/tracking/meta'
 export function getTrackingLedgerPayload(payload: MetaEventPayload): Record<string, unknown> {
   return {
     eventName: payload.eventName,
+    canonicalEventName: payload.canonicalEventName,
+    schemaVersion: payload.schemaVersion,
+    classification: payload.classification,
+    source: payload.source,
+    occurredAt: payload.occurredAt,
     eventId: payload.eventId,
     eventSourceUrl: payload.eventSourceUrl,
     eventTime: payload.eventTime,

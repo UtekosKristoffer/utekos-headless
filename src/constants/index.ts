@@ -88,19 +88,19 @@ export const PRODUCT_VARIANTS = {
     price: 1590,
     badge: 'Reisefavoritt',
     description:
-      'Vårt letteste plagg — pakker seg ned, men gir overraskende lun varme. Perfekt for bobil, båt, hytte og reise. Hurtigtørkende mikrofiber-isolasjon og samme premium ytre som flaggskipet, bare lettere.',
+      'Vårt letteste plagg (800g). Perfekt for bobil, båt, hytte og reise. Hurtigtørkende isolasjon og samme premium ytre som flaggskipet, bare lettere.',
     highlights: [
       {
         title: 'Pakker seg lett',
-        body: 'Lavest vekt i kolleksjonen — ferdig sammenpakket tar den minimal plass i bagasjen.'
+        body: 'Lavest vekt i kolleksjonen. Ferdig sammenpakket tar den minimal plass i bagasjen.'
       },
       {
         title: 'Hurtigtørkende',
-        body: 'Mikrofiber-isolasjonen tørker raskt etter regnbyger eller fuktig morgenduft på campingstolen.'
+        body: 'Isolasjonen tørker raskt etter regnbyger eller fuktig morgenduft på campingstolen.'
       },
       {
         title: 'Allergivennlig',
-        body: '100 % syntetisk — ingen animalske produkter. Trygt valg for deg med dunallergi.'
+        body: 'Ingen animalske produkter. Trygt valg for deg med dunallergi.'
       },
       {
         title: 'YKK® Dual V-Zip™',

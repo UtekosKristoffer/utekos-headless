@@ -12,3 +12,7 @@ export const usercentricsConsentSchema = z
   .strict()
 
 export type UsercentricsConsentState = z.infer<typeof usercentricsConsentSchema>
+export type ConsentCategory = keyof Pick<
+  UsercentricsConsentState,
+  'necessary' | 'preferences' | 'statistics' | 'marketing'
+>

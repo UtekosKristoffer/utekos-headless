@@ -1,10 +1,6 @@
-import Script from 'next/script'
-import {
-  USERCENTRICS_RULESET_ID,
-  USERCENTRICS_SGTM_ORIGIN
-} from './usercentricsConfig'
+import { USERCENTRICS_SETTINGS_ID } from './usercentricsConfig'
 
-const GOOGLE_CONSENT_DEFAULT_SCRIPT = `
+export const GOOGLE_CONSENT_DEFAULT_SCRIPT = `
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function(){window.dataLayer.push(arguments);};
   window.gtag('consent', 'default', {
@@ -21,27 +17,32 @@ const GOOGLE_CONSENT_DEFAULT_SCRIPT = `
   window.gtag('set', 'url_passthrough', false);
 `
 
+export function GoogleConsentDefaultScript() {
+  return (
+    <script id='google-consent-default' dangerouslySetInnerHTML={{ __html: GOOGLE_CONSENT_DEFAULT_SCRIPT }} />
+  )
+}
+
+export function UsercentricsCmpScript() {
+  return (
+    <>
+      {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+      <script src='https://web.cmp.usercentrics.eu/modules/autoblocker.js'></script>
+      <script
+        id='usercentrics-cmp'
+        src='https://web.cmp.usercentrics.eu/ui/loader.js'
+        data-settings-id={USERCENTRICS_SETTINGS_ID}
+        async
+      />
+    </>
+  )
+}
+
 export function UsercentricsScript() {
   return (
     <>
-      {/* Next.js injects beforeInteractive scripts from the root layout into <head>. */}
-      {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
-      <Script id='google-consent-default' strategy='beforeInteractive'>
-        {GOOGLE_CONSENT_DEFAULT_SCRIPT}
-      </Script>
-      {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
-      <Script
-        id='usercentrics-consent-signals'
-        src={`${USERCENTRICS_SGTM_ORIGIN}/uc-consent-signals.js`}
-        strategy='beforeInteractive'
-      />
-      {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
-      <Script
-        id='usercentrics-cmp'
-        src='https://web.cmp.usercentrics.eu/ui/loader.js'
-        strategy='beforeInteractive'
-        data-ruleset-id={USERCENTRICS_RULESET_ID}
-      />
+      <GoogleConsentDefaultScript />
+      <UsercentricsCmpScript />
     </>
   )
 }

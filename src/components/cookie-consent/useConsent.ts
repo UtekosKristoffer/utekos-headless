@@ -1,13 +1,14 @@
 'use client'
 
 import { useContext } from 'react'
-import { ConsentContext, type ConsentCategory } from './CookieConsentProvider'
+import { ConsentContext } from './UsercentricsConsentProvider'
+import type { ConsentCategory } from './usercentricsConsentSchema'
 
 export function useConsent() {
   const context = useContext(ConsentContext)
 
   if (context === undefined) {
-    throw new Error('useConsent must be used within a CookieConsentProvider')
+    throw new Error('useConsent must be used within a UsercentricsConsentProvider')
   }
 
   return context
@@ -19,6 +20,6 @@ export function useConsentFor(category: ConsentCategory): boolean {
 }
 
 export function useConsentForService(serviceName: string): boolean {
-  const { hasServiceConsent } = useConsent()
-  return hasServiceConsent(serviceName)
+  const { consent } = useConsent()
+  return consent.services[serviceName] === true
 }

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState, useTransition } from 'react'
+import { useContext, useEffect, useState, useTransition } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
@@ -8,10 +8,8 @@ import { useCartMutations } from '@/hooks/useCartMutations'
 import { useOptimisticCartUpdate } from '@/hooks/useOptimisticCartUpdate'
 import { getCartIdFromCookie } from '@/lib/actions/getCartIdFromCookie'
 import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
-import { useAnalytics } from '@/hooks/useAnalytics'
 import { dispatchMetaTrackingEvent } from '@/lib/tracking/meta/dispatchMetaTrackingEvent'
 import { getClientMetaUserData } from '@/lib/tracking/meta/utils/getClientMetaUserData'
-import { trackMicrosoftUetEvent } from '@/lib/tracking/microsoft-uet/trackMicrosoftUetEvent'
 import { hasCategoryConsent } from '@/lib/tracking/consent/hasCategoryConsent'
 import { hasServiceConsent } from '@/lib/tracking/consent/hasServiceConsent'
 import { generateEventID } from '@/components/analytics/Meta/generateEventID'
@@ -49,7 +47,6 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
   const { addLines } = useCartMutations()
   const { updateCartCache } = useOptimisticCartUpdate()
   const queryClient = useQueryClient()
-  const { trackEvent } = useAnalytics()
   const contextCartId = useContext(CartIdContext)
 
   const isPendingFromMachine = CartMutationContext.useSelector(state => state.matches('mutating'))
@@ -57,10 +54,7 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
   const currentConfig = PRODUCT_VARIANTS[selectedModel]
   const currentShopifyProduct = products[currentConfig.id]
 
-  const selectableSizes = useMemo(
-    () => getSelectableSizes(selectedModel, currentConfig),
-    [currentConfig, selectedModel]
-  )
+  const selectableSizes = getSelectableSizes(selectedModel, currentConfig)
 
   const effectiveSelectedSize = normalizeSelectedSize(selectedSize, selectableSizes)
 
@@ -199,12 +193,6 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
         quantity
       }).catch(error => console.error('AddToCart tracking failed', error))
 
-      trackEvent('AddToCart', {
-        content_name: product.title,
-        value: Number(selectedVariant.price.amount),
-        currency: selectedVariant.price.currencyCode
-      })
-
       return {
         cart,
         cartId: currentCartId ?? null,
@@ -249,18 +237,6 @@ export function usePurchaseLogic({ products }: UsePurchaseLogicProps) {
       const currency = selectedVariant.price.currencyCode
       const userData: MetaUserData | undefined =
         hasServiceConsent(USERCENTRICS_META_SERVICE_NAME) ? getClientMetaUserData() : undefined
-
-      trackMicrosoftUetEvent({
-        category: 'ecommerce',
-        action: 'begin_checkout',
-        label: cartId ?? product.title,
-        value: quantity,
-        revenueValue: value,
-        currency,
-        productId,
-        pageType: 'cart',
-        eventId: eventID
-      })
 
       if (hasCategoryConsent('marketing')) {
         const captureBody: CaptureBody = {

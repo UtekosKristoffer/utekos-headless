@@ -4,9 +4,10 @@
 import { useEffect, useRef } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { generateEventID } from '@/components/analytics/Meta/generateEventID'
-import { sendPageViewToCAPI } from '@/components/analytics/Meta/sendPageViewToCAPI'
 import { getCookie } from '@/components/analytics/Meta/getCookie'
 import { getOrSetExternalId } from '@/components/analytics/Meta/getOrSetExternalId'
+import { getPageViewParams } from '@/components/analytics/Meta/getPageViewParams'
+import { dispatchMetaTrackingEvent } from '@/lib/tracking/meta/dispatchMetaTrackingEvent'
 
 let hasInitializedMetaPixel = false
 let lastDevelopmentPixelPageViewPath: string | null = null
@@ -57,7 +58,19 @@ export function PixelLogic() {
         window.fbq('track', 'PageView', {}, { eventID: eventId })
       }
 
-      sendPageViewToCAPI(pathname, eventId, searchParams, externalId, fbc, fbp)
+      void dispatchMetaTrackingEvent({
+        eventName: 'PageView',
+        eventId,
+        sendBrowserEvent: false,
+        eventData: getPageViewParams(pathname, searchParams),
+        userData: {
+          external_id: externalId || undefined,
+          fbc: fbc || undefined,
+          fbp: fbp || undefined,
+          email_hash: userHash || undefined,
+          client_user_agent: navigator.userAgent
+        }
+      })
     })
   }, [pathname, searchParams, pixelId])
 

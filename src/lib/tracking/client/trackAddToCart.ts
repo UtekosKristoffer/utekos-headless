@@ -1,6 +1,6 @@
 import { prepareAddToCartEvent } from '@/lib/tracking/logic/prepareAddToCartEvent'
 import { dispatchAddToCartPixels } from '@/lib/tracking/pixels/dispatchAddToCartPixels'
-import { sendAddToCartCapi } from '@/lib/tracking/capi/sendAddToCartCapi'
+import { dispatchMetaTrackingEvent } from '@/lib/tracking/meta/dispatchMetaTrackingEvent'
 import type { TrackAddToCartOptions } from 'types/cart'
 
 export async function trackAddToCart(
@@ -14,5 +14,18 @@ export async function trackAddToCart(
     selectedVariant: input.selectedVariant
   })
 
-  await sendAddToCartCapi(eventData)
+  await dispatchMetaTrackingEvent({
+    eventName: 'AddToCart',
+    eventId: eventData.eventID,
+    sendBrowserEvent: false,
+    eventData: {
+      value: eventData.value,
+      currency: eventData.currency,
+      content_name: eventData.contentName,
+      content_ids: eventData.contentIds,
+      content_type: 'product',
+      contents: eventData.contents,
+      num_items: eventData.totalQty
+    }
+  })
 }

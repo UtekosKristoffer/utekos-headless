@@ -8,12 +8,12 @@ import { CartMutationProvider } from '@/clients/CartMutationProvider'
 import { serverActions } from '@/constants/serverActions'
 import { CartIdProvider } from '@/components/providers/CartIdProvider'
 import type { DehydratedState } from '@tanstack/react-query'
-import { CookieConsentProvider } from '@/components/cookie-consent/CookieConsentProvider'
+import { UsercentricsConsentProvider } from '@/components/cookie-consent/UsercentricsConsentProvider'
 import { MarketingPixels } from '@/components/analytics/MarketingPixels'
 import { PostHogConsentGate } from '@/components/analytics/PostHogConsentGate'
-import { MicrosoftUetTag } from '@/components/analytics/MicrosoftUetTag'
 import { ConsentGatedServices } from '@/components/analytics/ConsentGatedServices'
 import { PostHogClientProvider } from '@/components/providers/PostHogProvider'
+import { GoogleTagManagerConsentGate } from '@/components/analytics/GoogleTagManagerConsentGate'
 
 const ReactQueryDevtools =
   process.env.NODE_ENV === 'development' ?
@@ -33,7 +33,7 @@ export default function Providers({ children, cartId: initialCartId, dehydratedS
   const [cartId, setCartId] = useState<string | null>(initialCartId)
 
   return (
-    <CookieConsentProvider>
+    <UsercentricsConsentProvider>
       <QueryClientProvider client={queryClient}>
         <HydrationBoundary state={dehydratedState}>
           <CartIdProvider value={cartId}>
@@ -46,12 +46,12 @@ export default function Providers({ children, cartId: initialCartId, dehydratedS
           <ReactQueryDevtools initialIsOpen={false} />
         : null}
       </QueryClientProvider>
+      <GoogleTagManagerConsentGate />
       <MarketingPixels />
-      <MicrosoftUetTag />
       <PostHogClientProvider>
         <PostHogConsentGate />
       </PostHogClientProvider>
       <ConsentGatedServices />
-    </CookieConsentProvider>
+    </UsercentricsConsentProvider>
   )
 }

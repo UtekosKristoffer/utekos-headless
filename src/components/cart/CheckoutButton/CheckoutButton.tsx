@@ -12,8 +12,6 @@ import { getCheckoutAriaLabel } from './getCheckoutAriaLabel'
 import { generateEventID } from '@/components/analytics/Meta/generateEventID'
 import { getCookie } from '@/components/analytics/Meta/getCookie'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
-import { trackMicrosoftUetEvent } from '@/lib/tracking/microsoft-uet/trackMicrosoftUetEvent'
-import { sendGTMEvent } from '@next/third-parties/google'
 import { hasCategoryConsent } from '@/lib/tracking/consent/hasCategoryConsent'
 import { hasServiceConsent } from '@/lib/tracking/consent/hasServiceConsent'
 import {
@@ -95,18 +93,6 @@ export const CheckoutButton = ({
         }).catch(() => {})
       }
 
-      trackMicrosoftUetEvent({
-        category: 'ecommerce',
-        action: 'begin_checkout',
-        label: cartId,
-        value: num_items,
-        revenueValue: value,
-        currency,
-        productId: cleanItemIds,
-        pageType: 'cart',
-        eventId: eventID
-      })
-
       if (hasCategoryConsent('marketing')) {
         const captureBody: CaptureBody = {
           cartId,
@@ -143,9 +129,6 @@ export const CheckoutButton = ({
   const trackAnalytics = () => {
     if (isDisabled) return
 
-    const valueNum = Number.parseFloat(subtotalAmount || '0') || 0
-    const cleanItemIds = item_ids.map(id => cleanShopifyId(id) || id)
-
     if (hasServiceConsent(USERCENTRICS_VERCEL_ANALYTICS_SERVICE_NAME)) {
       track('Vercel Analytics', {
         event: 'CheckoutButtonClick',
@@ -160,16 +143,6 @@ export const CheckoutButton = ({
       })
     }
 
-    sendGTMEvent({
-      event: 'begin_checkout',
-      ecommerce: {
-        currency,
-        value: valueNum,
-        items: cleanItemIds.map(id => ({
-          item_id: id
-        }))
-      }
-    })
   }
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {

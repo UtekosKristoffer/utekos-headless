@@ -1,6 +1,6 @@
-import type { ConsentState } from './CookieConsentProvider'
+import type { UsercentricsConsentState } from './usercentricsConsentSchema'
 
-export const defaultConsentState: ConsentState = {
+export const defaultConsentState: UsercentricsConsentState = {
   necessary: true,
   preferences: false,
   statistics: false,

@@ -2,8 +2,10 @@ import type { KlarnaPaymentsButtons } from 'klarna-payments-sdk'
 
 declare global {
   interface Window {
-    UC_UI?: {
-      showSecondLayer: () => void
+    __ucCmp?: {
+      isInitialized: () => Promise<boolean>
+      showFirstLayer: () => Promise<void>
+      showSecondLayer: () => Promise<void>
     }
 
     ucConsentAllowedDpsString?: string

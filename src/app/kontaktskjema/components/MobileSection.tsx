@@ -22,7 +22,7 @@ export function MobileSection() {
 
         <ul className='mt-6 space-y-6'>
           <li className='flex items-start gap-3'>
-            <HelpCircle className='h-5 w-5 flex-shrink-0 text-ancient-water' />
+            <HelpCircle className='h-5 w-5 shrink-0 text-ancient-water' />
             <div>
               <h3 className='text-sm font-semibold leading-[1.3] tracking-normal text-foreground'>
                 Få personlig veiledning
@@ -33,7 +33,7 @@ export function MobileSection() {
             </div>
           </li>
           <li className='flex items-start gap-3'>
-            <Package className='h-5 w-5 flex-shrink-0 text-ancient-water' />
+            <Package className='h-5 w-5 shrink-0 text-ancient-water' />
             <div>
               <h3 className='text-sm font-semibold leading-[1.3] tracking-normal text-foreground'>
                 Hjelp med din bestilling

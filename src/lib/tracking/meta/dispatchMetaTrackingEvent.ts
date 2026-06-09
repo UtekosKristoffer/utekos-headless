@@ -7,6 +7,7 @@ import {
   USERCENTRICS_GOOGLE_ANALYTICS_SERVICE_NAME,
   USERCENTRICS_META_SERVICE_NAME
 } from '@/components/cookie-consent/usercentricsConfig'
+import { mapToCanonicalEventName } from '@/lib/tracking/events/mapToCanonicalEventName'
 import type { MetaEventPayload } from 'types/tracking/meta/event'
 import type { DispatchMetaTrackingEventInput } from './types'
 
@@ -20,17 +21,24 @@ export async function dispatchMetaTrackingEvent({
   ga4Data,
   sendBrowserEvent = true
 }: DispatchMetaTrackingEventInput): Promise<void> {
-  pushGoogleDataLayerEvent(eventName, eventId, eventData)
-
   const hasMetaConsent = hasServiceConsent(USERCENTRICS_META_SERVICE_NAME)
   const hasGoogleAnalyticsConsent = hasServiceConsent(USERCENTRICS_GOOGLE_ANALYTICS_SERVICE_NAME)
   const resolvedGa4Data = hasGoogleAnalyticsConsent ? ga4Data ?? getClientGA4Data() : undefined
+
+  if (hasGoogleAnalyticsConsent) {
+    pushGoogleDataLayerEvent(eventName, eventId, eventData)
+  }
 
   if (hasMetaConsent && sendBrowserEvent) {
     sendMetaPixelEvent(eventName, eventData, eventId)
   }
 
   const payload: MetaEventPayload = {
+    schemaVersion: 1,
+    classification: hasMetaConsent ? 'marketing' : 'statistics',
+    source: 'browser',
+    occurredAt: new Date((eventTime || Math.floor(Date.now() / 1000)) * 1000).toISOString(),
+    canonicalEventName: mapToCanonicalEventName(eventName),
     eventName,
     eventId,
     eventSourceUrl: eventSourceUrl || (typeof window !== 'undefined' ? window.location.href : undefined),

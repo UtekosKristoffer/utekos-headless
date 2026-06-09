@@ -20,6 +20,22 @@ const trackingEventNameSchema = z.enum([
 
 export const trackingEventPayloadSchema = z
   .object({
+    schemaVersion: z.literal(1),
+    classification: z.enum(['essential', 'statistics', 'marketing']),
+    source: z.enum(['browser', 'shopify', 'server']),
+    occurredAt: z.string().datetime(),
+    canonicalEventName: z.enum([
+      'page_view',
+      'view_item_list',
+      'select_item',
+      'view_item',
+      'add_to_cart',
+      'begin_checkout',
+      'purchase',
+      'search',
+      'generate_lead',
+      'custom'
+    ]),
     eventName: trackingEventNameSchema,
     eventId: z.string().min(1),
     eventSourceUrl: z.string().optional(),
@@ -37,4 +53,4 @@ export const trackingEventPayloadSchema = z
       })
       .optional()
   })
-  .passthrough()
+  .strict()

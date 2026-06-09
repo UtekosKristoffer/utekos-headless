@@ -9,7 +9,8 @@ const MAX_ATTEMPTS = 5
 export async function failProviderDispatchAttempt(
   attempt: ProviderDispatchQueueItem,
   error: string,
-  retryable = true
+  retryable = true,
+  latencyMs?: number
 ): Promise<'retry_scheduled' | 'failed' | 'dead_lettered'> {
   const sql = getTrackingWarehouse()
   const nextAttemptCount = attempt.attemptCount + 1
@@ -37,6 +38,12 @@ export async function failProviderDispatchAttempt(
             : null
         },
         last_error = ${normalizedError},
+        latency_ms = ${latencyMs === undefined ? null : Math.max(0, Math.round(latencyMs))},
+        response = ${transaction.json({
+          success: false,
+          retryable,
+          error: normalizedError
+        })},
         processed_at = ${status === 'retry_scheduled' ? null : new Date()},
         updated_at = now()
       where id = ${attempt.id}

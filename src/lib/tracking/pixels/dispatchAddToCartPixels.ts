@@ -1,5 +1,4 @@
 import { logAttribution } from '@/lib/tracking/log/logAttribution'
-import { trackMicrosoftUetEvent } from '@/lib/tracking/microsoft-uet/trackMicrosoftUetEvent'
 import { hasServiceConsent } from '@/lib/tracking/consent/hasServiceConsent'
 import { USERCENTRICS_META_SERVICE_NAME } from '@/components/cookie-consent/usercentricsConfig'
 import type { DispatchPixelsOptions } from 'types/cart'
@@ -20,18 +19,6 @@ export function dispatchAddToCartPixels({
   logAttribution(contentName, value)
 
   if (typeof window === 'undefined') return
-
-  trackMicrosoftUetEvent({
-    category: 'ecommerce',
-    action: 'add_to_cart',
-    label: contentName,
-    value: totalQty,
-    revenueValue: value,
-    currency,
-    productId: contentIds,
-    pageType: 'cart',
-    eventId: eventID
-  })
 
   if (hasServiceConsent(USERCENTRICS_META_SERVICE_NAME) && window.fbq) {
     window.fbq(

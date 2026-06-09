@@ -4,15 +4,11 @@ import { after, type NextRequest } from 'next/server'
 import { adaptRequestToEventContext } from '@/lib/tracking/utils/adaptRequestToEventContext'
 import { parseAndValidateEventPayload } from '@/lib/tracking/utils/parseAndValidateEventPayload'
 import { createAcceptedTrackingResponse } from '@/lib/tracking/utils/createAcceptedTrackingResponse'
-import { processBrowserEvent } from '@/lib/tracking/services/processBrowserEvent'
-import { sendMetaBrowserEvent } from '@/lib/tracking/meta/sendMetaBrowserEvent'
-import { sendGA4BrowserEvent } from '@/lib/tracking/google/sendGA4BrowserEvent'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 import { mergeMetaParamBuilderUserData } from '@/lib/tracking/meta/param-builder/mergeMetaParamBuilderUserData'
 import { processMetaParamBuilderRequest } from '@/lib/tracking/meta/param-builder/processMetaParamBuilderRequest'
 import { setMetaParamBuilderCookies } from '@/lib/tracking/meta/param-builder/setMetaParamBuilderCookies'
 import { persistAcceptedTrackingEvent } from '@/lib/tracking/warehouse/persistAcceptedTrackingEvent'
-import { recordProviderDispatchAttempt } from '@/lib/tracking/warehouse/recordProviderDispatchAttempt'
 import { getRequestConsentState } from '@/lib/tracking/consent/getRequestConsentState'
 import {
   USERCENTRICS_GOOGLE_ANALYTICS_SERVICE_NAME,
@@ -32,6 +28,10 @@ export async function POST(request: NextRequest) {
     return validation.errorResponse
   }
 
+  if (!providerConsent.meta && !providerConsent.google) {
+    return createAcceptedTrackingResponse(validation.payload)
+  }
+
   const context = adaptRequestToEventContext(request)
   const processedRequest =
     providerConsent.meta ?
@@ -49,47 +49,28 @@ export async function POST(request: NextRequest) {
         ...validation.payload,
         userData: undefined
       }
-  const clientIp = processedRequest.clientIp ?? context.clientIp
-
   after(async () => {
-    const [ledgerResult] = await Promise.allSettled([
-      persistAcceptedTrackingEvent(payload, {
+    try {
+      await persistAcceptedTrackingEvent(payload, {
         ...consent,
         source: 'usercentrics'
       }, [
         ...(providerConsent.meta ? ['meta'] as const : []),
-        ...(providerConsent.google ? ['google'] as const : [])
+        ...(providerConsent.google && process.env.GOOGLE_BROWSER_EVENT_TRANSPORT !== 'sgtm'
+          ? ['google'] as const
+          : [])
       ])
-    ])
-
-    if (ledgerResult.status === 'rejected') {
+    } catch (error) {
       await logToAppLogs(
         'ERROR',
         'Tracking event ledger persistence failed',
         {
           eventId: payload.eventId,
           eventName: payload.eventName,
-          error: ledgerResult.reason instanceof Error ? ledgerResult.reason.message : 'Unknown database error'
+          error: error instanceof Error ? error.message : 'Unknown database error'
         }
       )
     }
-
-    await processBrowserEvent(
-      payload,
-      {
-        ...context.cookies,
-        fbc: processedRequest.fbc ?? context.cookies.fbc,
-        fbp: processedRequest.fbp ?? context.cookies.fbp
-      },
-      { clientIp, userAgent: context.userAgent },
-      {
-        sendMeta: sendMetaBrowserEvent,
-        sendGoogle: sendGA4BrowserEvent,
-        logger: logToAppLogs,
-        recordAttempt: recordProviderDispatchAttempt
-      },
-      providerConsent
-    )
   })
 
   const response = createAcceptedTrackingResponse(payload)

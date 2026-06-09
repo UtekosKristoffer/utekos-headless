@@ -1,11 +1,8 @@
 import { createUsercentricsConsentState } from './createUsercentricsConsentState'
-import {
-  parseUsercentricsAllowedDps,
-  parseUsercentricsAllowedDpsValue
-} from './parseUsercentricsAllowedDps'
-import type { ConsentState } from './CookieConsentProvider'
+import { parseUsercentricsAllowedDps, parseUsercentricsAllowedDpsValue } from './parseUsercentricsAllowedDps'
+import type { UsercentricsConsentState } from './usercentricsConsentSchema'
 
-export function readStoredConsentState(): ConsentState | null {
+export function readStoredConsentState(): UsercentricsConsentState | null {
   if (typeof window === 'undefined') {
     return null
   }

@@ -215,7 +215,7 @@ export function SupportForm({ idPrefix = 'contact' }: { idPrefix?: string }) {
                         form.clearErrors('message')
                       }
                     }}
-                    className='min-h-[160px] rounded-none border-cloud-dancer/20 bg-ancient-water text-background tracking-normal placeholder:text-havdyp focus-visible:border-primary focus-visible:ring-primary/35'
+                    className='min-h-40 rounded-none border-cloud-dancer/20 bg-ancient-water text-background tracking-normal placeholder:text-havdyp focus-visible:border-primary focus-visible:ring-primary/35'
                   />
                 </FormControl>
                 <div className='mt-1 flex items-center justify-between text-xs leading-text-paragraph tracking-normal text-overcast'>

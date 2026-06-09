@@ -2,7 +2,72 @@
 
 ## Status
 
-STATUS: PLANNING
+STATUS: IMPLEMENTERT LOKALT, EKSTERN KONFIGURASJON OG PRODUKSJONSVERIFIKASJON GJENSTÅR
+
+## Produksjonsklar dataflyt, sporing og analyse
+
+Dato: 2026-06-09
+
+### Implementert lokalt
+
+- Usercentrics CMP v3-loaderen kjøres i dokumenthodet. Den defekte, udokumenterte
+  `cloud.server.utekos.no/uc-consent-signals.js`-lastingen er fjernet.
+- Google Consent Mode settes fail-closed før CMP. GTM, Meta, PostHog, Chatbase, Vercel Analytics og Speed
+  Insights monteres bare etter tjeneste- eller kategorisamtykke.
+- GTM-noscript, direkte Microsoft UET-loader og direkte Microsoft browser-events er fjernet fra aktiv flyt.
+- Usercentrics `ucEvent` oppdaterer React-gates og Google Consent Mode uten reload. Endringer lagres i
+  `marketing.consent_snapshots` med faktiske tilgjengelige identifikatorer.
+- `/api/tracking-events` validerer en streng, versjonert Zod-kontrakt og avviser valgfri lagring fail-closed
+  når verken Meta- eller Google-samtykke kan dokumenteres.
+- Browser-events bruker én sentral dispatcher. Google går til samtykkegatet dataLayer/sGTM. Meta Pixel og
+  ledger/CAPI deler samme `event_id`.
+- Server-side provider-dispatch skjer bare via `marketing.event_ledger` og
+  `ops.provider_dispatch_attempts`; umiddelbar parallell provider-dispatch er fjernet.
+- Providerkøen har provider-idempotency, lease med `skip locked`, visibility-timeout, eksponentiell retry,
+  permanent failure og dead letters. Køposter lagrer nå samtykkegrunnlag, datakvalitet, providerrespons og
+  latency.
+- Redis-app-logging er best-effort og lager ikke lenger produksjonsfeil ved utilgjengelig Redis.
+
+### Kanonisk eventmatrise
+
+| Kanonisk event | Midlertidig Meta-navn | Klassifisering | Browsertransport |
+| --- | --- | --- | --- |
+| `page_view` | `PageView` | statistics/marketing etter samtykke | Google dataLayer/sGTM + Meta Pixel/CAPI |
+| `view_item` | `ViewContent` | statistics/marketing etter samtykke | Google dataLayer/sGTM + Meta Pixel/CAPI |
+| `add_to_cart` | `AddToCart` | statistics/marketing etter samtykke | Google dataLayer/sGTM + Meta Pixel/CAPI |
+| `begin_checkout` | `InitiateCheckout` | statistics/marketing etter samtykke | Google dataLayer/sGTM + Meta Pixel/CAPI |
+| `purchase` | `Purchase` | nødvendig ledger; provider kun med dokumentert samtykke | Provideravhengig |
+| `search` | `Search` | statistics/marketing etter samtykke | Google dataLayer/sGTM + Meta Pixel/CAPI |
+| `generate_lead` | `Lead` | marketing | Google dataLayer/sGTM + Meta Pixel/CAPI |
+
+### Verifisert lokalt
+
+- `npx tsc --noEmit --pretty false`: grønn.
+- Målrettet ESLint for alle endrede tracking-, consent- og køfiler: grønn.
+- Repoet har foreløpig ingen etablert Playwright- eller enhetstest-runner. Browser-smoke og produksjonsbuild
+  må fullføres før produksjonsalias flyttes.
+
+### Gjenstående ekstern konfigurasjon
+
+- Re-autentiser Context7 før nye tredjeparts-API-implementasjoner. OAuth er utløpt per 2026-06-09.
+- Usercentrics ruleset-endepunktet for `9suQr3rGddL3Tb` svarer `403 Forbidden` også med produksjons-origin
+  `https://utekos.no`. Rulesetet må publiseres eller tilgang må repareres før banneret kan initialiseres.
+- Publiser og verifiser Usercentrics-ruleset, DPS-navn, `ucEvent`, domene-scan og consent-signaler.
+- Verifiser GTM Web og sGTM: consent-exceptions, GA4-client, transformations, Google Ads og Microsoft Ads.
+- Sett `GOOGLE_BROWSER_EVENT_TRANSPORT=sgtm` i Vercel Production først etter vellykket GTM/sGTM-preview.
+- Kjør Supabase-migrasjon `20260609090000_harden_provider_dispatch_observability.sql`.
+- Gjennomfør preview, samtykke-smoke, provider-testverktøy og kontrollert produksjonsdeploy.
+
+### Drift og rollback
+
+- Varsle på manglende CMP/banner, `/api/tracking-events` feil/latency, eldste køpost, retry-rate, dead letters,
+  eventdekning, manglende Meta-identifikatorer og avvik mellom Shopify- og provider-purchases.
+- Ved providerfeil: behold ledger og kø, stans aktuell provider-dispatch og replay dead letters med original
+  `event_id` etter retting.
+- Ved CMP- eller samtykkefeil: rollback deployment umiddelbart. Fail-closed-gates skal gjøre at valgfrie
+  tjenester forblir av mens feilen undersøkes.
+- Ved sGTM-feil: sett `GOOGLE_BROWSER_EVENT_TRANSPORT` tilbake til direkte, dokumentert server-only transport
+  bare for eksplisitte server-events. Ikke aktiver direkte browser Measurement Protocol som nødløsning.
 
 [Vendor-agnostic Metrics API setup](https://supabase.com/docs/guides/telemetry/metrics/vendor-agnostic.md)
 
