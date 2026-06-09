@@ -19,13 +19,17 @@ export function MobileMenuClient({ menu }: { menu: MenuItem[] }) {
   }, [pathname])
 
   useEffect(() => {
-    if (state.status === 'OPEN') {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
+    if (state.status !== 'OPEN') return
+
+    const previousBodyOverflow = document.body.style.overflow
+    const previousDocumentOverflow = document.documentElement.style.overflow
+
+    document.body.style.overflow = 'hidden'
+    document.documentElement.style.overflow = 'hidden'
+
     return () => {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = previousBodyOverflow
+      document.documentElement.style.overflow = previousDocumentOverflow
     }
   }, [state.status])
 

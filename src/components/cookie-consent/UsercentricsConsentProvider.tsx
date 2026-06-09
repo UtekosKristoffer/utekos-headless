@@ -45,6 +45,30 @@ function persistConsent(consent: UsercentricsConsentState) {
   })
 }
 
+function hasOpenApplicationOverlay() {
+  return Boolean(
+    document.querySelector(
+      '[data-slot="dialog-content"], [data-slot="drawer-content"], [data-slot="sheet-content"]'
+    )
+  )
+}
+
+function releaseStaleConsentScrollLock() {
+  window.setTimeout(() => {
+    if (hasOpenApplicationOverlay()) {
+      return
+    }
+
+    if (document.body.style.overflow === 'hidden') {
+      document.body.style.overflow = ''
+    }
+
+    if (document.documentElement.style.overflow === 'hidden') {
+      document.documentElement.style.overflow = ''
+    }
+  }, 250)
+}
+
 export function UsercentricsConsentProvider({ children }: { children: ReactNode }) {
   const [consent, setConsent] = useState<UsercentricsConsentState>(defaultConsentState)
 
@@ -73,6 +97,7 @@ export function UsercentricsConsentProvider({ children }: { children: ReactNode 
       setConsent(nextConsent)
       updateGoogleConsentMode(nextConsent)
       persistConsent(nextConsent)
+      releaseStaleConsentScrollLock()
     }
 
     window.addEventListener(USERCENTRICS_CONSENT_EVENT_NAME, syncUsercentricsConsent)

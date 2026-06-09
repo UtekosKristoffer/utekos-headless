@@ -1,4 +1,7 @@
-import { USERCENTRICS_SETTINGS_ID } from './usercentricsConfig'
+import {
+  USERCENTRICS_CONSENT_EVENT_NAME,
+  USERCENTRICS_SETTINGS_ID
+} from './usercentricsConfig'
 
 export const GOOGLE_CONSENT_DEFAULT_SCRIPT = `
   window.dataLayer = window.dataLayer || [];
@@ -15,6 +18,27 @@ export const GOOGLE_CONSENT_DEFAULT_SCRIPT = `
   });
   window.gtag('set', 'ads_data_redaction', true);
   window.gtag('set', 'url_passthrough', false);
+  window.addEventListener('${USERCENTRICS_CONSENT_EVENT_NAME}', function(event) {
+    if (!event.detail || event.detail.event !== 'consent_status') {
+      return;
+    }
+
+    window.setTimeout(function() {
+      var hasApplicationOverlay = document.querySelector('[data-slot="dialog-content"], [data-slot="drawer-content"], [data-slot="sheet-content"]');
+
+      if (hasApplicationOverlay) {
+        return;
+      }
+
+      if (document.body && document.body.style.overflow === 'hidden') {
+        document.body.style.overflow = '';
+      }
+
+      if (document.documentElement.style.overflow === 'hidden') {
+        document.documentElement.style.overflow = '';
+      }
+    }, 250);
+  });
 `
 
 export function GoogleConsentDefaultScript() {
