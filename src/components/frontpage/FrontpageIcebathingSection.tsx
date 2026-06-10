@@ -125,7 +125,7 @@ export function FrontpageIceBathingSection() {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className='gsap-feature-card opacity-0 group flex items-center gap-5 p-4 rounded-xl border border-cloud-dancer/70 bg-white/[0.02] transition-all duration-300 hover:bg-white/[0.05] hover:border-cloud-dancer/40 hover:translate-x-1'
+                  className='gsap-feature-card opacity-0 group flex items-center gap-5 p-4 rounded-xl border border-cloud-dancer/70 bg-white/2sition-all duration-300 hover:bg-white/5r:border-cloud-dancer/40 hover:translate-x-1'
                 >
                   <div
                     className={`flex size-12 shrink-0 items-center justify-center rounded-lg border border-white/5 ${item.bg} transition-transform group-hover:scale-110`}
@@ -152,7 +152,7 @@ export function FrontpageIceBathingSection() {
                 className='group h-14 w-full justify-center px-8 text-base font-medium shadow-[0_18px_42px_-26px_rgba(27,53,74,0.42)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-95 sm:w-auto'
               >
                 <Link
-                  href={'/kampanje/comfyrobe' as Route}
+                  href={'/produkter/comfyrobe' as Route}
                   data-track='FrontpageIceBathingSectionShopNowClick'
                 >
                   Sikre deg din nå
@@ -166,7 +166,7 @@ export function FrontpageIceBathingSection() {
                 className='group h-14 w-full justify-center px-8 text-base font-medium ring-1 ring-background/10 transition-all duration-300 hover:-translate-y-0.5 hover:brightness-95 sm:w-auto md:w-[162px] lg:w-[182px]'
               >
                 <Link
-                  href={'/kampanje/comfyrobe' as Route}
+                  href={'/inspirasjon/isbading' as Route}
                   data-track='FrontpageIceBathingSectionGetInspoClick'
                 >
                   Les mer
@@ -182,8 +182,8 @@ export function FrontpageIceBathingSection() {
           </div>
 
           <div className='relative order-1 w-full lg:order-2 lg:flex lg:justify-end'>
-            <div className='w-full max-w-[30rem] mx-auto lg:mx-0'>
-              <div className='gsap-mask-image relative aspect-[2/3] overflow-hidden rounded-3xl border border-white/10 bg-transparent shadow-2xl'>
+            <div className='w-full max-w-120 mx-auto lg:mx-0'>
+              <div className='gsap-mask-image relative aspect-2/3verflow-hidden rounded-3xl border border-white/10 bg-transparent shadow-2xl'>
                 <Image
                   src={ComfyrobeOriginal}
                   alt='En isbader står ved en iskant og ser utover vannet, pakket inn i en varm Comfyrobe etter badet.'
@@ -191,7 +191,7 @@ export function FrontpageIceBathingSection() {
                   className='object-cover object-bottom transition-transform duration-[2s] hover:scale-105'
                   sizes='(max-width: 1024px) 100vw, 50vw'
                 />
-                <div className='absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-transparent pointer-events-none' />
+                <div className='absolute inset-0 bg-linear-to-t from-neutral-950/60 via-transparent to-transparent pointer-events-none' />
 
                 <BrandBadge
                   backgroundColor='var(--color-ancient-water)'

@@ -5,7 +5,7 @@ import { Suspense } from 'react'
 import { mainMenu } from '@/db/config/menu.config'
 import Footer from '@/components/footer/components/Footer'
 import Header from '@/components/header/Header'
-import AnnouncementBanner from '@/components/frontpage/components/SpecialOfferSection/AnnouncementBanner'
+import { AnnouncementBanner } from '@/components/frontpage/components/SpecialOfferSection/AnnouncementBanner'
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { CartProviderLoader } from '@/components/providers/CartProviderLoader'
 import { UsercentricsScript } from '@/components/cookie-consent/UsercentricsScript'
@@ -92,7 +92,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className='bg-background text-foreground antialiased scroll-smooth'>
         <OnlineStoreJsonLd />
-
         <Suspense fallback={null}>
           <CartProviderLoader>
             <AnnouncementBanner />

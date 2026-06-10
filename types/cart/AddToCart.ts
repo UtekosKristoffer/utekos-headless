@@ -1,7 +1,7 @@
 import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
 import type { MetaContentItem } from 'types/tracking/meta'
 import type { UseFormReturn } from 'react-hook-form'
-import type { SizeOptionKey } from '@/app/kampanje/comfyrobe/utils/sizeSelectorData'
+import type { SizeOptionKey } from '@/app/inspirasjon/isbading/sizeSelectorData'
 import type { LucideIcon } from 'lucide-react'
 import type { AddToCartSchema } from '@/db/zod/schemas/AddToCartSchema'
 import { z } from '@/db/zod/zodClient'

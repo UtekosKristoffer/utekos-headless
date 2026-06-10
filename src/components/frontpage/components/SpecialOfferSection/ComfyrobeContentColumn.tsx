@@ -108,13 +108,13 @@ export function ComfyrobeContentColumn({ variantId }: ComfyrobeContentColumnProp
         style={{ '--transition-delay': '0.9s' } as React.CSSProperties}
       >
         <Link
-          href={'/kampanje/comfyrobe' as Route}
+          href={'/produkter/comfyrobe' as Route}
           onClick={handleCtaClick}
           data-track='ComfyrobeMonicaArneFrontPageClick'
           className={buttonVariants({
             size: 'lg',
             className:
-              'group mt-8 w-full sm:w-auto text-semibold! !bg-cloud-dancer !text-background hover:!bg-overcast shadow-lg shadow-cloud-dancer/20 transition-all duration-300'
+              'group mt-8 w-full sm:w-auto text-semibold! bg-cloud-dancer! text-background! hover:bg-overcast! shadow-lg shadow-cloud-dancer/20 transition-all duration-300'
           })}
         >
           Utforsk Comfyrobe™

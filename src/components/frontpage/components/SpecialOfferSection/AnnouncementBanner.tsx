@@ -34,7 +34,7 @@ function subscribeToAnnouncementBanner(onStoreChange: () => void) {
   }
 }
 
-export default function AnnouncementBanner() {
+export function AnnouncementBanner() {
   const [isExiting, setIsExiting] = useState(false)
   const showBanner = useSyncExternalStore(
     subscribeToAnnouncementBanner,
