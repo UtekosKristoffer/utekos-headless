@@ -1,14 +1,5 @@
 'use client'
 
-/**
- * Consent-gated marketing pixel root.
- *
- * Mounts Meta only when the Usercentrics Meta Pixel DPS has consent.
- *
- * Env gating remains in each child (NEXT_PUBLIC_*_PIXEL_ID); the
- * consent check is the outer gate.
- */
-
 import { useConsentForService } from '@/components/cookie-consent/useConsent'
 import { MetaPixelEvents } from '@/components/analytics/Meta/MetaPixelEvents'
 import { USERCENTRICS_META_SERVICE_NAME } from '@/components/cookie-consent/usercentricsConfig'
@@ -24,9 +15,5 @@ export function MarketingPixels() {
     return null
   }
 
-  return (
-    <>
-      {SHOULD_LOAD_META_PIXEL && <MetaPixelEvents />}
-    </>
-  )
+  return <>{SHOULD_LOAD_META_PIXEL && <MetaPixelEvents />}</>
 }

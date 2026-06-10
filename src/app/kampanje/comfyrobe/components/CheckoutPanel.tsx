@@ -25,9 +25,9 @@ const AVAILABLE_SIZES: {
   label: string
   soldOut: boolean
 }[] = [
-  { key: 'S', label: 'S', soldOut: false },
+  { key: 'XS', label: 'XS', soldOut: false },
   { key: 'M', label: 'M (Utsolgt)', soldOut: true },
-  { key: 'L', label: 'L', soldOut: false }
+  { key: 'XL', label: 'XL', soldOut: false }
 ]
 
 export function CheckoutPanel({
