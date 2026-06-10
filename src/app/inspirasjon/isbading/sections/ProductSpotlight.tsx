@@ -31,7 +31,7 @@ export function ProductSpotlight() {
               <h2 className='mb-4 text-4xl font-bold leading-[0.95] tracking-normal md:text-5xl'>
                 Comfyrobe™
               </h2>
-              <p className='text-xl leading-text-paragraph tracking-normal text-overcast'>
+              <p className='text-xl leading-text-paragraph tracking-normal text-foreground'>
                 Ikke bare en kåpe, men ditt viktigste sikkerhetsutstyr etter kuldesjokket.
               </p>
             </AnimatedBlock>
@@ -39,7 +39,7 @@ export function ProductSpotlight() {
             <ul className='space-y-4'>
               {features.map((feature, i) => (
                 <AnimatedBlock key={i} delay={`${0.3 + i * 0.1}s`} className='flex items-center gap-3'>
-                  <div className='flex size-6 flex-shrink-0 items-center justify-center rounded-full border border-cloud-dancer/16 bg-mountain-view'>
+                  <div className='flex size-6 shrink-0 items-center justify-center rounded-full border border-cloud-dancer/16 bg-mountain-view'>
                     <Check className='size-4 text-foreground' />
                   </div>
                   <span className='text-lg leading-text-paragraph tracking-normal'>{feature}</span>
@@ -56,9 +56,9 @@ export function ProductSpotlight() {
                 className='min-h-14 w-full px-8 py-4 text-lg leading-[1.35] font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 sm:w-auto'
               >
                 <Link
-                  href='/kampanje/comfyrobe'
+                  href='/produkter/comfyrobe'
                   prefetch={false}
-                  data-track='comfyrobe-icebath-campaign-buy-now'
+                  data-track='ComfyrobeIceBathingCampaignBuyNowClick'
                 >
                   Kjøp nå
                   <ArrowRight className='ml-2 size-5' />

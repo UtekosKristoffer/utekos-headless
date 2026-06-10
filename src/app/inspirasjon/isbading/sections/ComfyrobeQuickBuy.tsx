@@ -5,7 +5,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { ComfyrobeAccordion } from './ComfyrobeAccordion'
 import {
   Carousel,
   CarouselContent,
@@ -94,7 +94,7 @@ export function ComfyrobeQuickBuy({ product }: Props) {
 
                 return (
                   <CarouselItem key={img.id}>
-                    <div className='relative aspect-4/5 w-full overflow-hidden rounded-xl border border-cloud-dancer/12 bg-background'>
+                    <div className='relative aspect-square w-full overflow-hidden rounded-xl border border-cloud-dancer/12 bg-background'>
                       <Image
                         src={imageUrl}
                         alt={altText}
@@ -223,77 +223,7 @@ export function ComfyrobeQuickBuy({ product }: Props) {
             </div>
           </div>
         </div>
-        <Accordion className='mt-4 w-full border-t border-cloud-dancer/12'>
-          <AccordionItem value='materials' className='border-cloud-dancer/12'>
-            <AccordionTrigger>Materialer og kvalitet</AccordionTrigger>
-            <AccordionContent className='space-y-4 text-foreground'>
-              <div>
-                <strong className='mb-1 block text-sm text-foreground'>
-                  Fôrstoff: SherpaCore™ Thermal Lining
-                </strong>
-                <ul className='list-inside list-disc pl-1 text-sm leading-text-paragraph tracking-normal'>
-                  <li>Mykt og luftig 100% polyester (250 GSM)</li>
-                  <li>Antipeeling behandlet</li>
-                  <li>Slitesterk hamp i kragen</li>
-                </ul>
-              </div>
-              <div>
-                <strong className='mb-1 block text-sm text-foreground'>Ytterstoff: HydroGuard™ Shell</strong>
-                <ul className='list-inside list-disc pl-1 text-sm leading-text-paragraph tracking-normal'>
-                  <li>100% Polyester med pustende PU-belegg</li>
-                  <li>8000mm vannsøyle (Vanntett)</li>
-                  <li>Vindtett og robust (130 GSM)</li>
-                </ul>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value='features' className='border-cloud-dancer/12'>
-            <AccordionTrigger>Funksjoner</AccordionTrigger>
-            <AccordionContent className='text-overcast'>
-              <ul className='space-y-2 text-sm leading-text-paragraph tracking-normal'>
-                <li>
-                  🌊 <strong>Vanntett og vindtett:</strong> Tapede sømmer og 8000mm vannsøyle holder deg tørr
-                  og varm.
-                </li>
-                <li>
-                  🔥 <strong>Hurtigtørkende varme:</strong> SherpaCore™ plysj absorberer restfuktighet og
-                  isolerer umiddelbart.
-                </li>
-                <li>
-                  🧥 <strong>Smart design:</strong> Romslig hette, toveis YKK-glidelås for enkel skifting, og
-                  refleksdetaljer.
-                </li>
-                <li>
-                  🧤 <strong>Praktiske lommer:</strong> Fôrede sidelommer til kalde hender og innerlomme til
-                  mobil/nøkler.
-                </li>
-              </ul>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value='fit' className='border-cloud-dancer/12'>
-            <AccordionTrigger>Passform</AccordionTrigger>
-            <AccordionContent className='text-sm leading-text-paragraph tracking-normal text-overcast'>
-              <p className='mb-2'>
-                Comfyrobe™ har en <strong>oversized unisex-passform</strong>. Den er designet romslig og med
-                praktiske løsninger for å enkelt kle på eller av seg.
-              </p>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value='care' className='border-cloud-dancer/12'>
-            <AccordionTrigger>Vask og vedlikehold</AccordionTrigger>
-            <AccordionContent className='text-sm leading-text-paragraph tracking-normal text-overcast'>
-              <ul className='list-inside list-disc space-y-1'>
-                <li>Maskinvask 40°C (skånsomt)</li>
-                <li>Bruk mildt vaskemiddel, unngå tøymykner</li>
-                <li>Unngå tørketrommel for å bevare vanntettheten</li>
-                <li>Tørkes best hengende</li>
-              </ul>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
+        <ComfyrobeAccordion />
         <div className='mt-8 rounded-xl border border-cloud-dancer/12 bg-cloud-dancer/[0.035] p-6'>
           <NewsletterForm />
         </div>

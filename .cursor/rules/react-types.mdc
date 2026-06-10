@@ -1,0 +1,20 @@
+---
+description: React type references without redundant imports
+globs: **/*.{ts,tsx}
+alwaysApply: true
+---
+
+# React types
+
+Do not import `ReactNode` (or similar) from `'react'` only for type annotations.
+
+Use the namespace form instead:
+
+```tsx
+// Prefer
+content: React.ReactNode
+
+// Avoid
+import type { ReactNode } from 'react'
+content: ReactNode
+```

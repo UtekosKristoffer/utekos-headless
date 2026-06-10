@@ -1,7 +1,7 @@
 // Path: src/app/inspirasjon/isbading/page.tsx
 
 import type { Metadata } from 'next'
-import { Activity } from 'react'
+
 import { IceBathingHeroSection } from './sections/IceBathingHeroSection'
 import { BenefitsGrid, benefitsData } from './sections/BenefitsGrid'
 import { UseCasesGrid, useCasesData } from './sections/UseCasesGrid'
@@ -13,6 +13,7 @@ import Link from 'next/link'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { ProductSpotlight } from './sections/ProductSpotlight'
 import { IceBathingFAQ, iceBathingFaqItems } from './sections/IceBathingFAQ'
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
   title: 'Isbading og Utekos | Varmen du trenger etter kuldesjokket',
@@ -42,54 +43,25 @@ export const metadata: Metadata = {
 }
 
 export default function IceBathingInspirationPage() {
-  const faqJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    'mainEntity': iceBathingFaqItems.map(item => ({
-      '@type': 'Question',
-      'name': item.question,
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text': item.answer
-      }
-    }))
-  }
-
   return (
-    <div className='flex flex-col gap-12 pb-20'>
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c')
-        }}
-      />
-      <Activity>
-        <IceBathingHeroSection />
-      </Activity>
-      <Activity>
-        <ProductSpotlight />
-      </Activity>
-      <Activity>
-        <UseCasesGrid useCases={useCasesData} />
-      </Activity>
-      <Activity>
-        <BenefitsGrid benefits={benefitsData} />
-      </Activity>
-      <Activity>
-        <SeasonsSection />
-      </Activity>
-      <Activity>
-        <IceBathingFAQ />
-      </Activity>
-      <Activity>
-        <PopularSpotsGrid destinations={popularSpotsData} />
-      </Activity>
-      <Activity>
-        <SocialProof />
-      </Activity>
-      <Activity>
-        <CTASection />
-      </Activity>
+    <article className='flex flex-col gap-12 pb-20'>
+      <IceBathingHeroSection />
+      <ProductSpotlight />
+
+      <UseCasesGrid useCases={useCasesData} />
+
+      <BenefitsGrid benefits={benefitsData} />
+
+      <SeasonsSection />
+
+      <IceBathingFAQ />
+
+      <PopularSpotsGrid destinations={popularSpotsData} />
+
+      <SocialProof />
+
+      <CTASection />
+
       <div className='fixed bottom-4 left-4 right-4 z-50 md:hidden animate-in slide-in-from-bottom-10 fade-in duration-700'>
         <BrandBadge
           asChild
@@ -100,6 +72,6 @@ export default function IceBathingInspirationPage() {
           <Link href='/produkter/comfyrobe'>Kjøp Comfyrobe™</Link>
         </BrandBadge>
       </div>
-    </div>
+    </article>
   )
 }

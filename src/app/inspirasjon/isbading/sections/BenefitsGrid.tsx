@@ -37,7 +37,7 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl text-center'>
           <h2 className='text-fluid-display font-bold tracking-normal'>Spesiallaget for det ekstreme</h2>
-          <p className='mt-4 text-lg text-overcast'>
+          <p className='mt-4 text-lg text-foreground'>
             Isbading krever utstyr du kan stole på. Vi har fjernet barrierene slik at du kan fokusere på
             opplevelsen.
           </p>
@@ -54,7 +54,7 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
                 <benefit.icon className={`size-8 ${benefit.color}`} />
               </div>
               <h3 className='mb-2 text-lg font-semibold'>{benefit.title}</h3>
-              <p className='text-sm text-overcast'>{benefit.description}</p>
+              <p className='text-sm text-foreground'>{benefit.description}</p>
             </AnimatedBlock>
           ))}
         </div>

@@ -38,7 +38,7 @@ export function PopularSpotsGrid({ destinations }: { destinations: Destination[]
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl text-center'>
           <h2 className='text-fluid-display font-bold tracking-normal'>Hvor tar du ditt neste dykk?</h2>
-          <p className='mt-4 text-lg text-overcast'>
+          <p className='mt-4 text-lg text-foreground'>
             Fra urbane badstuer til øde fjellvann – Utekos er med deg der vannet er kaldt.
           </p>
         </div>

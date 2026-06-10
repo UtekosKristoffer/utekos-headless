@@ -26,7 +26,7 @@ export async function CTASection() {
           <h2 className='mb-4 text-fluid-display font-bold leading-[0.95] tracking-normal text-foreground'>
             Sikre deg varmen nå
           </h2>
-          <p className='mx-auto max-w-2xl text-xl leading-text-paragraph tracking-normal text-overcast'>
+          <p className='mx-auto max-w-2xl text-xl leading-text-paragraph tracking-normal text-foreground'>
             Gjør som hundrevis av andre isbadere. Bestill din Comfyrobe i dag og kjenn forskjellen.
           </p>
         </AnimatedBlock>
