@@ -1,4 +1,3 @@
-import { iceBathingFaqItems } from './sections/IceBathingFAQ'
 import { cacheLife } from 'next/cache'
 import Script from 'next/script'
 import type { QAPage } from 'schema-dts'

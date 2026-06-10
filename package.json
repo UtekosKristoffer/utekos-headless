@@ -18,7 +18,11 @@
     "clean": "rm -rf .next",
     "sync": "f() { git add . && git commit -m \"$1\" && git push; }; f",
     "knip": "knip",
-    "usercentrics:css": "node scripts/print-usercentrics-custom-css.mjs"
+    "usercentrics:css": "node scripts/print-usercentrics-custom-css.mjs",
+    "validate:usercentrics-docs": "node scripts/usercentrics-docs/validate.mjs",
+    "build:google-docs-sources": "node scripts/google-docs/build-sources.mjs",
+    "normalize:google-docs": "node scripts/google-docs/normalize.mjs --write",
+    "validate:google-docs": "node scripts/google-docs/validate.mjs"
   },
   "dependencies": {
     "@ai-sdk/devtools": "^0.0.18",
