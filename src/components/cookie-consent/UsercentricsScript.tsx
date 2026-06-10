@@ -1,7 +1,8 @@
-import {
-  USERCENTRICS_CONSENT_EVENT_NAME,
-  USERCENTRICS_SETTINGS_ID
-} from './usercentricsConfig'
+import { USERCENTRICS_CONSENT_EVENT_NAME, USERCENTRICS_SETTINGS_ID } from './usercentricsConfig'
+
+// Custom CMP styling: Usercentrics Admin → Appearance → Styling → Custom CSS.
+// Source: src/components/cookie-consent/usercentrics.custom.css
+// Print for paste: npm run usercentrics:css
 
 export const GOOGLE_CONSENT_DEFAULT_SCRIPT = `
   window.dataLayer = window.dataLayer || [];

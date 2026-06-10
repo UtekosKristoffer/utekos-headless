@@ -1,5 +1,8 @@
 export const USERCENTRICS_SETTINGS_ID = process.env.NEXT_PUBLIC_USERCENTRICS_SETTINGS_ID || '9suQr3rGddL3Tb'
 
+/** Usercentrics Admin → Appearance → Styling → Custom CSS (V3 Shadow DOM selectors). */
+export const USERCENTRICS_CUSTOM_CSS_RELATIVE_PATH = 'src/components/cookie-consent/usercentrics.custom.css'
+
 export const USERCENTRICS_SGTM_ORIGIN = (
   process.env.NEXT_PUBLIC_USERCENTRICS_SGTM_ORIGIN || 'https://cloud.server.utekos.no'
 ).replace(/\/$/, '')

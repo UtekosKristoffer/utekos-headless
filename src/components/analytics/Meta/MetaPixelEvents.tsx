@@ -27,10 +27,10 @@ export function MetaPixelEvents() {
   return (
     <>
       <Script
-        id='meta-pixel-base'
+        type='text/plain'
+        data-usercentrics='Meta Pixel'
         strategy='afterInteractive'
         dangerouslySetInnerHTML={{ __html: metaPixelBaseCode }}
-        onReady={() => setIsPixelQueueReady(true)}
       />
       {isPixelQueueReady && (
         <Suspense fallback={null}>

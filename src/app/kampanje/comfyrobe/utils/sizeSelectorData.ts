@@ -1,13 +1,13 @@
 import { Move, Maximize, ScanFace } from 'lucide-react'
 import type { SizeProfile } from 'types/cart'
 
-export type SizeOptionKey = 'S' | 'M' | 'L'
+export type SizeOptionKey = 'XS' | 'M' | 'XL'
 
 export const SIZE_DATA: Record<SizeOptionKey, SizeProfile> = {
-  S: {
-    id: 'S',
-    fullName: 'Small',
-    label: 'Small',
+  XS: {
+    id: 'XS',
+    fullName: 'XS',
+    label: 'XS',
     tagline: 'Frihet i bevegelse',
     heightRange: '160 - 170 cm',
     idealFor: ['Høyde opp til 170cm', 'Aktive livsstiler', 'Lettvekts-pakking'],
@@ -27,8 +27,8 @@ export const SIZE_DATA: Record<SizeOptionKey, SizeProfile> = {
   },
   M: {
     id: 'M',
-    fullName: 'Medium',
-    label: 'Medium',
+    fullName: 'M',
+    label: 'M',
     tagline: 'Den perfekte balansen',
     heightRange: '170 - 180 cm',
     idealFor: ['Høyde 170-180cm', 'Allsidig bruk', 'Komfort og funksjon'],
@@ -45,10 +45,10 @@ export const SIZE_DATA: Record<SizeOptionKey, SizeProfile> = {
       }
     ]
   },
-  L: {
-    id: 'L',
-    fullName: 'Large',
-    label: 'Large',
+  XL: {
+    id: 'XL',
+    fullName: 'XL',
+    label: 'XL',
     tagline: 'Ditt private fristed',
     heightRange: '180 - 190 cm+',
     idealFor: ['Alle over 180cm', 'Isbadere som skifter', 'Maksimal hygge'],

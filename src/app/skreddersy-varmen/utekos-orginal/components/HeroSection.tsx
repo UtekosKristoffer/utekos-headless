@@ -6,7 +6,7 @@ import { ScrollToButton } from './ScrollToButton' // Importer den lille klient-k
 
 export function HeroSection() {
   return (
-    <section className='relative w-full h-[100dvh] flex flex-col items-center justify-center overflow-hidden bg-[#2C2420]'>
+    <section className='relative w-full h-dvh flex flex-col items-center justify-center overflow-hidden bg-[#2C2420]'>
       <div className='hidden md:block absolute inset-0 z-0'>
         <Image
           src={CinemaOne}
