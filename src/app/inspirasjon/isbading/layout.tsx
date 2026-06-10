@@ -2,7 +2,8 @@ import { iceBathingFaqItems } from './sections/IceBathingFAQ'
 import { cacheLife } from 'next/cache'
 import Script from 'next/script'
 import type { QAPage } from 'schema-dts'
-export async function IceBathingPageJsonLd() {
+
+export default async function IceBathingPageJsonLd() {
   'use cache'
   cacheLife('max')
 
