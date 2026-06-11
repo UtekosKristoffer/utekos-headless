@@ -134,6 +134,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: 'https://kasse.utekos.no/pages/gtin/07090062980030',
+        destination: '/pages/gtin/07090062980030',
+        permanent: true
+      },
+      {
         source: '/policies/refund-policy',
         destination: '/frakt-og-retur',
         permanent: true

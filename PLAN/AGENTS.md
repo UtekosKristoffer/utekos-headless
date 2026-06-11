@@ -182,3 +182,14 @@ git diff --check: bestått
 
 Full npm run lint og npm run knip feiler fortsatt på store eksisterende backlogs utenfor migrasjonen. Sentry, Vault og en faktisk Cron-basert retry-worker er ikke aktivert ennå; feil markeres derfor ærlig som failed, ikke som planlagte retries.
 ```
+
+## Utkast
+
+```js
+<script
+  id='usercentrics-cmp'
+  src='https://web.cmp.usercentrics.eu/ui/loader.js'
+  data-settings-id='9suQr3rGddL3Tb'
+  async=''
+></script>
+```
