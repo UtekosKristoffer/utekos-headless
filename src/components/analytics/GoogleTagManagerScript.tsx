@@ -29,6 +29,7 @@ export function GoogleTagManagerScript() {
   return (
     <script
       id={`gtm-bootstrap-${GOOGLE_TAG_MANAGER_ID}`}
+      suppressHydrationWarning
       dangerouslySetInnerHTML={{ __html: createGoogleTagManagerBootstrapScript(scriptUrl) }}
     />
   )

@@ -11,6 +11,6 @@ export function UsercentricsAutoblockerScript() {
 
   return (
     // eslint-disable-next-line @next/next/no-sync-scripts
-    <script src={USERCENTRICS_AUTOBLOCKER_SRC} />
+    <script suppressHydrationWarning src={USERCENTRICS_AUTOBLOCKER_SRC} />
   )
 }

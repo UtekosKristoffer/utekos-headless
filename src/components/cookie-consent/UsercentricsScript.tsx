@@ -49,14 +49,18 @@ export const GOOGLE_CONSENT_DEFAULT_SCRIPT = `
 
 export function GoogleConsentDefaultScript() {
   return (
-    <script id='google-consent-default' dangerouslySetInnerHTML={{ __html: GOOGLE_CONSENT_DEFAULT_SCRIPT }} />
+    <script
+      id='google-consent-default'
+      suppressHydrationWarning
+      dangerouslySetInnerHTML={{ __html: GOOGLE_CONSENT_DEFAULT_SCRIPT }}
+    />
   )
 }
 
 export function UsercentricsConsentSignalsScript() {
   return (
     // eslint-disable-next-line @next/next/no-sync-scripts
-    <script src={`${USERCENTRICS_SGTM_ORIGIN}/uc-consent-signals.js`} />
+    <script suppressHydrationWarning src={`${USERCENTRICS_SGTM_ORIGIN}/uc-consent-signals.js`} />
   )
 }
 
@@ -64,6 +68,7 @@ export function UsercentricsCmpScript() {
   return (
     <script
       id='usercentrics-cmp'
+      suppressHydrationWarning
       src='https://web.cmp.usercentrics.eu/ui/loader.js'
       data-settings-id={USERCENTRICS_SETTINGS_ID}
       async
