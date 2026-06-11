@@ -20,7 +20,7 @@ import {
  * Sentral, ikke-blokkerende sporing for annonse-landingssiden.
  *
  * - Fyrer `ViewContent` gjennom den eksisterende pipelinen (`useAnalytics`),
- *   som sender BÅDE Meta Pixel (browser) og CAPI (server) med samme `eventId`
+ *   som sender BÅDE Facebook Pixel (browser) og CAPI (server) med samme `eventId`
  *   for korrekt deduplisering.
  * - Persisterer kampanje-attribusjon (utm/fbclid/ad-id) til
  *   `marketing.attribution_events` via `/api/analytics/landing-attribution`.

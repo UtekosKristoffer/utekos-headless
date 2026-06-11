@@ -135,7 +135,7 @@ prinsipper og ekstrne docs. Deretter utfør.
   generation.
 - Integration: `/api/tracking-events`, checkout capture, Shopify orders-paid webhook, PostHog initialization,
   web-vitals endpoint.
-- Regression: Meta Pixel + CAPI sender samme `eventID/event_id` for
+- Regression: Facebook Pixel + CAPI sender samme `eventID/event_id` for
   PageView/AddToCart/InitiateCheckout/Purchase.
 - Security: ingen PII i logs, ingen raw secrets i repo, no-store headers på tracking endpoints.
 - Build checks: `npm run lint`, `npm run build`, `npm run knip`, og Supabase schema lint/test når lokal

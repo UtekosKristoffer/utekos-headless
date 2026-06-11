@@ -20,6 +20,7 @@
     "knip": "knip",
     "usercentrics:css": "node scripts/print-usercentrics-custom-css.mjs",
     "validate:usercentrics-docs": "node scripts/usercentrics-docs/validate.mjs",
+    "tracking:smoke": "bash scripts/tracking/verify-production-tracking.sh",
     "build:google-docs-sources": "node scripts/google-docs/build-sources.mjs",
     "normalize:google-docs": "node scripts/google-docs/normalize.mjs --write",
     "validate:google-docs": "node scripts/google-docs/validate.mjs"

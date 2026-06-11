@@ -3,7 +3,9 @@
 import { createContext, useEffect, useState, type ReactNode } from 'react'
 import { defaultConsentState } from './defaultConsentState'
 import { createUsercentricsConsentState } from './createUsercentricsConsentState'
+import { parseUsercentricsConsentEventServices } from './parseUsercentricsConsentEventServices'
 import { readStoredConsentState } from './readStoredConsentState'
+import { reportMissingRequiredUsercentricsServices } from './reportMissingRequiredUsercentricsServices'
 import {
   USERCENTRICS_CONSENT_EVENT_NAME,
   USERCENTRICS_GOOGLE_ADS_SERVICE_NAME,
@@ -84,21 +86,19 @@ export function UsercentricsConsentProvider({ children }: { children: ReactNode 
     }, 0)
 
     const syncUsercentricsConsent = (event: Event) => {
-      const detail = (event as CustomEvent<Record<string, unknown>>).detail
+      const services = parseUsercentricsConsentEventServices((event as CustomEvent<unknown>).detail)
 
-      if (!detail || detail.event !== 'consent_status') {
+      if (!services) {
         return
       }
 
-      const services = Object.fromEntries(
-        Object.entries(detail).filter(([, value]) => typeof value === 'boolean')
-      ) as Record<string, boolean>
       const nextConsent = createUsercentricsConsentState(services)
 
       setConsent(nextConsent)
       setLatestConsentServices(nextConsent.services)
       updateGoogleConsentMode(nextConsent)
       persistConsent(nextConsent)
+      reportMissingRequiredUsercentricsServices(services)
       releaseStaleConsentScrollLock()
     }
 

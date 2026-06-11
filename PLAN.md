@@ -2,11 +2,34 @@
 
 ## Status
 
-STATUS: IMPLEMENTERT LOKALT, EKSTERN KONFIGURASJON OG PRODUKSJONSVERIFIKASJON GJENSTÅR
+STATUS: USERCENTRICS OG GTM PUBLISERT, DIREKTE SGTM-LOADER KLAR FOR PRODUKSJONSDEPLOY OG VERIFIKASJON
 
 ## Produksjonsklar dataflyt, sporing og analyse
 
 Dato: 2026-06-09
+
+### Tracking-gjenoppretting 2026-06-11
+
+- Usercentrics ruleset `9suQr3rGddL3Tb` er publisert med Google Analytics (`Statistikk`), Google Ads
+  (`Markedsføring`) og Facebook Pixel (`Markedsføring`).
+- Microsoft Clarity er flyttet til `Statistikk`. `PostHog.com` og én duplisert egendefinert PostHog er
+  fjernet; én `PostHog` som `Statistikk` er beholdt.
+- Usercentrics sitt faktiske DPS-navn for Meta-kanalen er `Facebook Pixel`; applikasjon, diagnostikk,
+  smoke-test og Vercel-miljø skal bruke dette eksakte navnet.
+- GTM web-versjon `99` og server-versjon `17` er publisert. Rollback-versjoner er web `98` og server `15`.
+- Servicekontonøkkelen er rotert. GA4 property `489598217`, Admin API, Data API og Realtime API returnerer
+  HTTP 200.
+- GTM OAuth-tokenet har nå nødvendige scopes for workspace-redigering, Quick Preview, container-versjoner og
+  publisering.
+- Google Ads har seks aktive conversion actions. `purchase` og `begin_checkout` er primære GA4-importer;
+  native sGTM Ads conversion-tags er derfor ikke opprettet, fordi de ville duplisert de importerte
+  konverteringene.
+- `GT-MKRLF5WK` er den kanoniske Google-tag-destinasjonen. Den serverte taggen inkluderer både
+  `G-FCES3L0M9M` og `AW-18180376403`. Direkte `/gtag/js?id=G-FCES3L0M9M` returnerer fortsatt 400, men er
+  ikke den kanoniske loaderen.
+- Produksjonsappen brukte fortsatt en gammel Usercentrics resilient-loader som serverte web-versjon `98`.
+  Appen er endret til direkte `/gtm.js?id=GTM-5TWMJQFP` som standard; stale Vercel-override skal fjernes før
+  produksjonsdeploy.
 
 ### Implementert lokalt
 
@@ -44,24 +67,24 @@ Dato: 2026-06-09
 
 ### Verifisert lokalt
 
-- `npx tsc --noEmit --pretty false`: grønn.
-- Målrettet ESLint for alle endrede tracking-, consent- og køfiler: grønn.
-- Repoet har foreløpig ingen etablert Playwright- eller enhetstest-runner. Browser-smoke og produksjonsbuild
-  må fullføres før produksjonsalias flyttes.
+- `npx tsx --test src/components/cookie-consent/usercentricsConsentDiagnostics.test.ts`: grønn.
+- Målrettet ESLint for endrede tracking- og consentfiler: grønn.
+- `npm run tracking:smoke` er lagt til som deterministisk produksjonssmoke. Den verifiserer én CMP-loader,
+  direkte sGTM web-loader, publiserte DPS-navn, fravær av valgfrie leverandører før samtykke,
+  samtykketilbaketrekking og kanonisk Google-tag-destinasjon.
+- `npx tsc --noEmit --pretty false` er blokkert av en eksisterende, uvedkommende feil i
+  `src/app/api/analytics/visitor-event/route.test.ts`.
 
 ### Gjenstående ekstern konfigurasjon
 
-- Usercentrics ruleset/settings `9suQr3rGddL3Tb`: verifiser at 403 er løst og banner initialiseres på
-  `utekos.no`.
+- Fjern stale `NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL` fra Vercel Production og Preview, deploy appen og
+  verifiser at `utekos.no` laster `/gtm.js?id=GTM-5TWMJQFP`.
 - sGTM-endepunkter verifisert 2026-06-11 (`/healthz`, `/uc-consent-signals.js`, `/gtm.js`, `/ns.html` → 200).
-- Publiser DPS-scan, synkroniser DPS-navn med `NEXT_PUBLIC_USERCENTRICS_*`, generer Resilient Script Loader
-  URL.
-- Verifiser og publiser GTM Web + sGTM (consent signals client, GA4 client, `server_container_url`,
-  consent-triggere).
-- Sett `NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL` og `GOOGLE_BROWSER_EVENT_TRANSPORT=sgtm` i Vercel Production
-  først etter vellykket GTM/sGTM-preview på `utekos.no`.
+- Verifiser banner, godta alle, avvis alle og tilbaketrekking på `utekos.no` etter deploy.
+- Verifiser GA4 Realtime, Meta Pixel/CAPI-deduplisering og Google Ads GA4-importerte konverteringer med reelle
+  produksjonshendelser.
 - Kjør Supabase-migrasjon `20260609090000_harden_provider_dispatch_observability.sql`.
-- Gjennomfør preview, samtykke-smoke, provider-testverktøy og kontrollert produksjonsdeploy.
+- Overvåk GA4, Meta og Ads i minst 48 timer etter vellykket produksjonssmoke.
 
 ### Drift og rollback
 

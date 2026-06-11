@@ -166,6 +166,7 @@
   --color-evening-blue: oklch(0.2918 0.038 285.97);
   --color-peacoat: oklch(0.308 0.038 277.64);
   --color-inking: oklch(0.3048 0.0341 291.48);
+  --color-spring-purple: oklch(0.5944 0.0478 4.25);
   --color-inking-100: oklch(0.3048 0.0341 291.48);
   --color-eclipse: oklch(0.3276 0.0405 291.98);
   --color-eggplant: oklch(0.28 0.0584 296.86);
@@ -303,6 +304,7 @@
   --very-peri: oklch(0.5433 0.105 281.67);
   --granita: oklch(0.5219 0.1299 11.48);
   --hawthorne-rose: oklch(0.493 0.0837 1.36);
+  --spring-purple: oklch(0.5944 0.0478 4.25);
   --granite-green: oklch(0.6068 0.0431 92.87);
   --elderberry: oklch(0.3758 0.0374 319.08);
   --calery-green: oklch(0.7853 0.0932 119.23);

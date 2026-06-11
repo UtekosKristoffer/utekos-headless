@@ -2,6 +2,7 @@
 'use client'
 
 import { PixelLogic } from '@/components/analytics/Meta/PixelLogic'
+import { USERCENTRICS_META_SERVICE_NAME } from '@/components/cookie-consent/usercentricsConfig'
 import Script from 'next/script'
 import { Suspense } from 'react'
 
@@ -27,8 +28,9 @@ export function MetaPixelEvents() {
   return (
     <>
       <Script
+        id='meta-pixel-base'
         type='text/plain'
-        data-usercentrics='Meta Pixel'
+        data-usercentrics={USERCENTRICS_META_SERVICE_NAME}
         strategy='afterInteractive'
         dangerouslySetInnerHTML={{ __html: metaPixelBaseCode }}
       />

@@ -11,6 +11,12 @@ export const usercentricsConsentSchema = z
   })
   .strict()
 
+export const usercentricsConsentEventDetailSchema = z
+  .object({
+    event: z.literal('consent_status')
+  })
+  .catchall(z.unknown())
+
 export type UsercentricsConsentState = z.infer<typeof usercentricsConsentSchema>
 export type ConsentCategory = keyof Pick<
   UsercentricsConsentState,

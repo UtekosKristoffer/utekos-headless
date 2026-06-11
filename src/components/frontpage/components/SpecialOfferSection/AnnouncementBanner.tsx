@@ -62,7 +62,7 @@ export function AnnouncementBanner() {
   return (
     <div
       className={cn(
-        'relative py-2 z-40 hover:bg-header-secondary/80 font-utekos-text-medium bg-hawthorne-rose animate-slide-in-do text-foreground text-lg font-medium)',
+        'relative py-2 z-40 hover:bg-header-secondary/80 font-utekos-text-medium bg-spring-purple animate-slide-in-do text-foreground text-lg font-medium)',
         isExiting && 'animate-slide-out-up'
       )}
     >
@@ -93,7 +93,7 @@ export function AnnouncementBanner() {
       <button
         onClick={handleDismiss}
         aria-label='Lukk banner'
-        className='absolute right-2 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full text-foreground transition-colors hover:bg-foreground/10 hover:text-foreground/80 focus:outline-none focus:ring-2 focus:ring-heading-secondary focus:ring-offset-2 focus:ring-offset-overcast'
+        className='absolute right-2 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full text-foreground transition-colors hover:text-foreground/80 focus:outline-none focus:ring-2 focus:ring-heading-secondary focus:ring-offset-2 focus:ring-offset-overcast'
       >
         <XIcon className='size-4 cursor-pointer text-foreground' />
       </button>

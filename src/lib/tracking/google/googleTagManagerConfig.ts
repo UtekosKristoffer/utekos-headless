@@ -2,17 +2,15 @@ import { USERCENTRICS_SGTM_ORIGIN } from '@/components/cookie-consent/usercentri
 
 export const GOOGLE_TAG_MANAGER_ID = process.env.NEXT_PUBLIC_GOOGLE_GTM_ID || 'GTM-5TWMJQFP'
 
-/** Usercentrics Resilient Script Loader URL for GTM-5TWMJQFP (stable per Admin). */
-export const GTM_RESILIENT_SCRIPT_URL_DEFAULT = `${USERCENTRICS_SGTM_ORIGIN}/u2/f-5mpq2htvp2n7gt?xci2k=R1RNLTVUV01KUUZQ`
+export const GTM_SGTM_SCRIPT_URL = `${USERCENTRICS_SGTM_ORIGIN}/gtm.js?id=${encodeURIComponent(GOOGLE_TAG_MANAGER_ID)}`
 
+/** Optional override. Only set this after regenerating and verifying the resilient loader in Usercentrics. */
 export const GTM_RESILIENT_SCRIPT_URL =
-  process.env.NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL?.trim() || GTM_RESILIENT_SCRIPT_URL_DEFAULT
+  process.env.NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL?.trim() || ''
 
 export const GTM_RESILIENT_NOSCRIPT_URL =
   process.env.NEXT_PUBLIC_GTM_RESILIENT_NOSCRIPT_URL?.trim()
   || `${USERCENTRICS_SGTM_ORIGIN}/ns.html?id=${encodeURIComponent(GOOGLE_TAG_MANAGER_ID)}`
-
-export const GTM_SGTM_SCRIPT_URL = `${USERCENTRICS_SGTM_ORIGIN}/gtm.js?id=${encodeURIComponent(GOOGLE_TAG_MANAGER_ID)}`
 
 export const SHOULD_LOAD_GOOGLE_TAG_MANAGER =
   (process.env.NODE_ENV === 'production' && process.env.VERCEL_ENV !== 'preview')

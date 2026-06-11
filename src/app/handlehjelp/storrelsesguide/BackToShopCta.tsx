@@ -75,8 +75,7 @@ export function BackToShopCta() {
         <div className='mt-12 max-w-2xl mx-auto'>
           <h3 className='text-xl font-semibold'>Fortsatt usikker? Få personlig hjelp.</h3>
           <p className='mt-2 text-foreground/74'>
-            Hvis du ønsker en skreddersydd anbefaling basert på din bruk, høyde, og kroppsfasong, er vi her
-            for deg. Send oss en melding, så garanterer vi svar innen én time frem til kl. 22:00.
+            Få en skreddersydd anbefaling basert på din bruk, høyde og kroppsfasong. Send oss en melding.
           </p>
           <BrandBadge
             asChild

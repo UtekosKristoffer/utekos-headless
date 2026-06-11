@@ -11,6 +11,7 @@ import type { DehydratedState } from '@tanstack/react-query'
 import { UsercentricsConsentProvider } from '@/components/cookie-consent/UsercentricsConsentProvider'
 import { GoogleAnalyticsTracking } from '@/components/analytics/GoogleAnalyticsTracking'
 import { MarketingPixels } from '@/components/analytics/MarketingPixels'
+import { MicrosoftUetTag } from '@/components/analytics/MicrosoftUetTag'
 import { PostHogConsentGate } from '@/components/analytics/PostHogConsentGate'
 import { ConsentGatedServices } from '@/components/analytics/ConsentGatedServices'
 import { PostHogClientProvider } from '@/components/providers/PostHogProvider'
@@ -48,6 +49,7 @@ export default function Providers({ children, cartId: initialCartId, dehydratedS
       </QueryClientProvider>
       <GoogleAnalyticsTracking />
       <MarketingPixels />
+      <MicrosoftUetTag />
       <PostHogClientProvider>
         <PostHogConsentGate />
       </PostHogClientProvider>
