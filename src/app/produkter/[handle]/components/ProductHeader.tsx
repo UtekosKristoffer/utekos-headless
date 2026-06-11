@@ -19,7 +19,7 @@ export default function ProductHeader({ productHandle, productTitle, productSubt
           </BrandBadge>
         )}
 
-        <h1 className='text-4xl font-google-sans font-bold text-foreground'>{productTitle}</h1>
+        <h1 className='mx-0 text-left text-4xl font-google-sans font-bold text-foreground'>{productTitle}</h1>
 
         {typeof productSubtitle === 'string' && productSubtitle.trim() !== '' && (
           <p className='mt-4 max-w-2xl text-lg  leading-text-paragraph text-foreground'>{productSubtitle}</p>
