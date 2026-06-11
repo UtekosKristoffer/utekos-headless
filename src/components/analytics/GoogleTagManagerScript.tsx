@@ -26,7 +26,6 @@ export function GoogleTagManagerScript() {
   }
 
   const scriptUrl = GTM_RESILIENT_SCRIPT_URL || GTM_SGTM_SCRIPT_URL
-
   return (
     <script
       id={`gtm-bootstrap-${GOOGLE_TAG_MANAGER_ID}`}

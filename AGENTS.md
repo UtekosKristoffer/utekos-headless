@@ -32,6 +32,6 @@ See [src/lib/tracking/server-side-tagging.md](src/lib/tracking/server-side-taggi
 
 - `NEXT_PUBLIC_USERCENTRICS_SGTM_ORIGIN=https://cloud.server.utekos.no`
 - `NEXT_PUBLIC_GOOGLE_GTM_ID=GTM-5TWMJQFP`
-- `NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL` (from Usercentrics Admin when available)
+- Resilient GTM script URL is defaulted in `googleTagManagerConfig.ts`; override with `NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL` only if regenerated in Usercentrics Admin
 - `GOOGLE_BROWSER_EVENT_TRANSPORT=sgtm` (only after GTM/sGTM preview passes on utekos.no)
 - `NEXT_PUBLIC_ENABLE_GTM_IN_DEV=1` for local GTM smoke only

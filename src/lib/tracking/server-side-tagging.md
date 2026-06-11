@@ -11,12 +11,13 @@
 
 ## Verifiserte endepunkter (2026-06-11)
 
-| Endepunkt                                                | Forventet | Status |
-| -------------------------------------------------------- | --------- | ------ |
-| `https://cloud.server.utekos.no/healthz`                 | `ok`      | 200    |
-| `https://cloud.server.utekos.no/uc-consent-signals.js`   | script    | 200    |
-| `https://cloud.server.utekos.no/gtm.js?id=GTM-5TWMJQFP`  | script    | 200    |
-| `https://cloud.server.utekos.no/ns.html?id=GTM-5TWMJQFP` | iframe    | 200    |
+| Endepunkt                                                                   | Forventet     | Status |
+| --------------------------------------------------------------------------- | ------------- | ------ |
+| `https://cloud.server.utekos.no/healthz`                                    | `ok`          | 200    |
+| `https://cloud.server.utekos.no/uc-consent-signals.js`                      | script        | 200    |
+| `https://cloud.server.utekos.no/gtm.js?id=GTM-5TWMJQFP`                     | script        | 200    |
+| `https://cloud.server.utekos.no/u2/f-5mpq2htvp2n7gt?xci2k=R1RNLTVUV01KUUZQ` | resilient GTM | 200    |
+| `https://cloud.server.utekos.no/ns.html?id=GTM-5TWMJQFP`                    | iframe        | 200    |
 
 ## Samtykkeflyt
 
@@ -60,13 +61,14 @@ NEXT_PUBLIC_USERCENTRICS_VERCEL_ANALYTICS_SERVICE_NAME=Vercel Analytics
 NEXT_PUBLIC_USERCENTRICS_CHATBASE_SERVICE_NAME=Chatbase
 NEXT_PUBLIC_USERCENTRICS_KLARNA_OSM_SERVICE_NAME=Klarna On-site Messaging
 NEXT_PUBLIC_GOOGLE_GTM_ID=GTM-5TWMJQFP
-NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL=<optional; exact URL from Usercentrics Resilient Script Loader>
-NEXT_PUBLIC_GTM_RESILIENT_NOSCRIPT_URL=<optional; from Resilient Script Loader noscript snippet>
+NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL=<optional override; default is Usercentrics Resilient Script Loader URL in code>
+NEXT_PUBLIC_GTM_RESILIENT_NOSCRIPT_URL=<optional; default ns.html?id=GTM-5TWMJQFP>
 NEXT_PUBLIC_ENABLE_GTM_IN_DEV=1
 GOOGLE_BROWSER_EVENT_TRANSPORT=sgtm
 ```
 
-Uten `NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL` brukes fallback
+Standard GTM-script er Usercentrics Resilient Script Loader (`…/u2/f-5mpq2htvp2n7gt?xci2k=R1RNLTVUV01KUUZQ`).
+Sett `NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL` kun ved regenerering i Admin. Fallback uten resilient URL:
 `https://cloud.server.utekos.no/gtm.js?id=GTM-5TWMJQFP`.
 
 Aktiver `GOOGLE_BROWSER_EVENT_TRANSPORT=sgtm` først etter vellykket GTM Web + sGTM Preview på `utekos.no`.
@@ -81,7 +83,7 @@ Lokal smoke: sett `NEXT_PUBLIC_ENABLE_GTM_IN_DEV=1` (ikke i produksjon uten beho
 - [ ] Verifiser `utekos.no` i Domain Management
 - [ ] Kjør DPS-scan; klassifiser PostHog, Chatbase, Klarna OSM, GTM, GA, Google Ads, Meta, Microsoft
 - [ ] Synkroniser DPS-navn med `NEXT_PUBLIC_USERCENTRICS_*_SERVICE_NAME`
-- [ ] Aktiver Resilient Script Loader; kopier URL til `NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL`
+- [x] Aktiver Resilient Script Loader (URL i `googleTagManagerConfig.ts`; env override valgfri)
 
 ### GTM Server container
 
