@@ -1,0 +1,247 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - img [ref=e10]
+          - generic [ref=e13]: "Enjoy all the premium features:"
+          - generic [ref=e14]:
+            - text: Premium trial ends in
+            - strong [ref=e15]: 11 days
+        - button "Get Full Access" [ref=e16] [cursor=pointer]:
+          - generic [ref=e17]: Get Full Access
+      - banner [ref=e20]:
+        - generic [ref=e21]:
+          - button "Usercentrics Web CMP" [ref=e22] [cursor=pointer]:
+            - img [ref=e23]
+            - text: Usercentrics Web CMP
+          - generic [ref=e29]:
+            - generic:
+              - generic [ref=e32]:
+                - link "Overview" [ref=e33] [cursor=pointer]:
+                  - /url: https://account.usercentrics.eu/companies
+                - img [ref=e35]
+                - link "Utekos" [ref=e38] [cursor=pointer]:
+                  - /url: https://account.usercentrics.eu/company/hPUkm02GSRi6-h/configurations
+                - img [ref=e40]
+                - generic [ref=e43]: utekos-ruleset[9suQr3rGddL3Tb]
+                - generic [ref=e45]: GDPR
+              - generic [ref=e49]:
+                - img [ref=e52]
+                - generic [ref=e54]: Free Web
+              - generic [ref=e60] [cursor=pointer]: V3
+          - generic [ref=e61]:
+            - button "Products" [ref=e62] [cursor=pointer]:
+              - generic [ref=e66]:
+                - img [ref=e67]
+                - generic [ref=e77]: Products
+            - button [ref=e78] [cursor=pointer]:
+              - img [ref=e80]
+            - button [ref=e83] [cursor=pointer]:
+              - img [ref=e84]
+            - button "KH" [ref=e87]:
+              - generic [ref=e88] [cursor=pointer]: KH
+    - generic [ref=e89]:
+      - generic [ref=e92]:
+        - generic [ref=e94]:
+          - link "Overview" [ref=e95] [cursor=pointer]:
+            - /url: "#/v3/overview?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e96]:
+              - img [ref=e440]
+              - generic [ref=e104]: Overview
+          - link "Analytics" [ref=e105] [cursor=pointer]:
+            - /url: "#/v3/analytics?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e106]:
+              - img [ref=e109]
+              - generic [ref=e115]: Analytics
+            - img [ref=e120]
+          - link "Configuration" [ref=e122] [cursor=pointer]:
+            - /url: "#/v3/configuration?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e123]:
+              - img [ref=e126]
+              - generic [ref=e132]: Configuration
+            - img [ref=e137]
+          - link "Service Settings" [active] [ref=e139] [cursor=pointer]:
+            - /url: "#/v3/service-settings?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e140]:
+              - img [ref=e446]
+              - generic [ref=e149]: Service Settings
+          - link "Appearance" [ref=e150] [cursor=pointer]:
+            - /url: "#/v3/appearance?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e151]:
+              - img [ref=e154]
+              - generic [ref=e160]: Appearance
+            - img [ref=e165]
+          - link "Content" [ref=e167] [cursor=pointer]:
+            - /url: "#/v3/content?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e168]:
+              - img [ref=e171]
+              - generic [ref=e174]: Content
+            - img [ref=e179]
+          - link "Integrations" [ref=e181] [cursor=pointer]:
+            - /url: "#/v3/integrations?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e182]:
+              - img [ref=e185]
+              - generic [ref=e188]: Integrations
+          - link "Implementation" [ref=e189] [cursor=pointer]:
+            - /url: "#/v3/implementation?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e190]:
+              - img [ref=e193]
+              - generic [ref=e195]: Implementation
+            - img [ref=e200]
+          - link "Server-Side Tagging" [ref=e202] [cursor=pointer]:
+            - /url: "#/v3/server-side-tagging?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e203]:
+              - img [ref=e206]
+              - generic [ref=e208]: Server-Side Tagging
+        - generic [ref=e210]:
+          - button "Preview" [ref=e211] [cursor=pointer]:
+            - generic [ref=e212]: Preview
+            - img [ref=e214]
+          - generic [ref=e216]:
+            - button "Save Draft" [disabled] [ref=e217]:
+              - generic: Save Draft
+            - button "Publish" [disabled] [ref=e218]:
+              - generic: Publish
+      - generic [ref=e221]:
+        - generic [ref=e454]:
+          - text: Service Settings
+          - img [ref=e456]
+        - generic [ref=e458]:
+          - tablist [ref=e462]:
+            - tab "DPS Scanner" [selected] [ref=e464] [cursor=pointer]:
+              - link "DPS Scanner" [ref=e465]:
+                - /url: "#/v3/service-settings/dps-scanner?settingsId=9suQr3rGddL3Tb"
+            - tab "Data Processing Services" [ref=e467] [cursor=pointer]:
+              - link "Data Processing Services" [ref=e468]:
+                - /url: "#/v3/service-settings/data-processing-services?settingsId=9suQr3rGddL3Tb"
+            - tab "Categories" [ref=e470] [cursor=pointer]:
+              - link "Categories" [ref=e471]:
+                - /url: "#/v3/service-settings/categories?settingsId=9suQr3rGddL3Tb"
+          - generic [ref=e476]:
+            - generic [ref=e480]:
+              - generic [ref=e481]:
+                - generic [ref=e482]:
+                  - generic [ref=e483]:
+                    - heading "DPS Scanner" [level=3] [ref=e484]
+                    - paragraph [ref=e485]: Here you can get an overview of third-party services that were identified on your domains. We recommend including all legally relevant results in your consent banner to obtain user consent.
+                  - generic [ref=e486]:
+                    - button "Scan Settings" [ref=e487] [cursor=pointer]:
+                      - generic [ref=e488]: Scan Settings
+                    - button "Start Scan" [ref=e489] [cursor=pointer]:
+                      - generic [ref=e490]: Start Scan
+                - generic [ref=e491]:
+                  - generic [ref=e493]:
+                    - heading "Domains 1" [level=5] [ref=e494]:
+                      - text: Domains
+                      - generic [ref=e496]: "1"
+                    - paragraph [ref=e497]: utekos.no
+                  - generic [ref=e499]:
+                    - heading "Last Scan" [level=5] [ref=e500]
+                    - paragraph [ref=e501]: 09.06.2026, 13:57
+                  - generic [ref=e503]:
+                    - heading "Scan Frequency" [level=5] [ref=e504]
+                    - paragraph [ref=e505]: Monthly
+              - generic [ref=e506]:
+                - generic [ref=e508]:
+                  - generic [ref=e510] [cursor=pointer]:
+                    - generic [ref=e511]:
+                      - textbox [ref=e513]
+                      - generic "Services" [ref=e514]
+                    - img [ref=e516]
+                  - generic [ref=e519] [cursor=pointer]:
+                    - generic [ref=e520]:
+                      - textbox [ref=e522]
+                      - generic "All" [ref=e523]:
+                        - text: All
+                        - generic [ref=e525]: "0"
+                    - img [ref=e527]
+                  - generic [ref=e531]:
+                    - textbox "Search" [ref=e532]
+                    - img [ref=e534]
+                - generic [ref=e539]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - table:
+                            - rowgroup:
+                              - row "Status Service Category Domain Source Date Actions":
+                                - columnheader "Status":
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic: Status
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                        - generic:
+                                          - img
+                                - columnheader "Service":
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic: Service
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                        - generic:
+                                          - img
+                                - columnheader "Category":
+                                  - generic:
+                                    - generic:
+                                      - text: Category
+                                      - generic:
+                                        - img
+                                - columnheader "Domain":
+                                  - generic:
+                                    - generic: Domain
+                                - columnheader "Source":
+                                  - generic:
+                                    - generic: Source
+                                - columnheader "Date":
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic: Date
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                        - generic:
+                                          - img
+                                - columnheader "Actions":
+                                  - generic:
+                                    - generic: Actions
+                            - rowgroup:
+                              - row "No Data":
+                                - cell "No Data":
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                      - paragraph: No Data
+            - generic [ref=e548]:
+              - generic [ref=e549]: © Copyright 2026 Usercentrics GmbH
+              - generic [ref=e550]:
+                - generic [ref=e551] [cursor=pointer]: Privacy Settings
+                - link "Privacy Policy" [ref=e553] [cursor=pointer]:
+                  - /url: https://usercentrics.com/privacy-policy-cmp/
+                - link "Legal Notice" [ref=e555] [cursor=pointer]:
+                  - /url: https://usercentrics.com/legal-notice/
+                - link "System Status" [ref=e557] [cursor=pointer]:
+                  - /url: https://usercentricsgmbh.statuspage.io/
+  - iframe [ref=e398]:
+    - generic [ref=f1e2]:
+      - img [ref=f1e4]
+      - generic [ref=f1e11]:
+        - heading "Status embed installed correctly" [level=1] [ref=f1e12]:
+          - paragraph [ref=f1e13]: Status embed installed correctly
+        - generic [ref=f1e14]: This will be shown if an incident or maintenance is posted on your status page.
+        - link "View latest updates" [ref=f1e16] [cursor=pointer]:
+          - /url: https://usercentricsgmbh.statuspage.io?utm_source=embed
+      - button [ref=f1e18] [cursor=pointer]:
+        - img [ref=f1e19]

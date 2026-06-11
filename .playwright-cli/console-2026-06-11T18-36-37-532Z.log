@@ -1,0 +1,5 @@
+[    7296ms] [ERROR] [Meta Tracking] PageView network failure TypeError: Failed to fetch
+    at https://utekos.no/_next/static/chunks/41hmehis1lrxl.js?dpl=dpl_FockBBYuZUxQgss3EJu91yoqXysH:10:1958
+    at l (https://utekos.no/_next/static/chunks/3swit3m830-ve.js?dpl=dpl_FockBBYuZUxQgss3EJu91yoqXysH:2:9803)
+    at https://utekos.no/_next/static/chunks/0kws2tyqgehta.js?dpl=dpl_FockBBYuZUxQgss3EJu91yoqXysH:222:124246
+    at n (https://utekos.no/_next/static/chunks/41hmehis1lrxl.js?dpl=dpl_FockBBYuZUxQgss3EJu91yoqXysH:7:5281) @ https://utekos.no/_next/static/chunks/41hmehis1lrxl.js?dpl=dpl_FockBBYuZUxQgss3EJu91yoqXysH:9

@@ -1,0 +1,27 @@
+[     745ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://cloud.server.utekos.no/gtag/js?id=G-FCES3L0M9M&cx=c&gtm=4e66a0:0
+[    4043ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://cloud.server.utekos.no/gtag/js?id=G-FCES3L0M9M&cx=c&gtm=4e66a0:0
+[    4255ms] [ERROR] Failed to persist Usercentrics consent: TypeError: Failed to fetch
+    at https://utekos.no/_next/static/chunks/41hmehis1lrxl.js?dpl=dpl_G7cL3eALcYgKJaoH71qhwCSqpXsH:10:1958
+    at t (https://utekos.no/_next/static/chunks/2-ds-dufdcqdc.js?dpl=dpl_G7cL3eALcYgKJaoH71qhwCSqpXsH:2:25628)
+    at n (https://utekos.no/_next/static/chunks/41hmehis1lrxl.js?dpl=dpl_G7cL3eALcYgKJaoH71qhwCSqpXsH:7:5281)
+    at i.dispatch (https://web.cmp.usercentrics.eu/ui/v/3.122.0/WebSdk.lib.44b003b5.js:1:19820)
+    at https://web.cmp.usercentrics.eu/ui/v/3.122.0/WebSdk.lib.44b003b5.js:1:19415
+    at Array.forEach (<anonymous>)
+    at i.dispatchConsentDetails (https://web.cmp.usercentrics.eu/ui/v/3.122.0/WebSdk.lib.44b003b5.js:1:19398)
+    at a.<anonymous> (https://web.cmp.usercentrics.eu/ui/v/3.122.0/GdprCmpController.389852c2.js:1:14051)
+    at Object.<anonymous> (https://web.cmp.usercentrics.eu/ui/loader.js:1:2291)
+    at r (https://web.cmp.usercentrics.eu/ui/loader.js:1:849)
+    at c (https://web.cmp.usercentrics.eu/ui/loader.js:1:1046) @ https://utekos.no/_next/static/chunks/41hmehis1lrxl.js?dpl=dpl_G7cL3eALcYgKJaoH71qhwCSqpXsH:9
+[    4255ms] [ERROR] Failed to persist Usercentrics consent: TypeError: Failed to fetch
+    at https://utekos.no/_next/static/chunks/41hmehis1lrxl.js?dpl=dpl_G7cL3eALcYgKJaoH71qhwCSqpXsH:10:1958
+    at t (https://utekos.no/_next/static/chunks/2-ds-dufdcqdc.js?dpl=dpl_G7cL3eALcYgKJaoH71qhwCSqpXsH:2:25628)
+    at n (https://utekos.no/_next/static/chunks/41hmehis1lrxl.js?dpl=dpl_G7cL3eALcYgKJaoH71qhwCSqpXsH:7:5281)
+    at i.dispatch (https://web.cmp.usercentrics.eu/ui/v/3.122.0/WebSdk.lib.44b003b5.js:1:19820)
+    at https://web.cmp.usercentrics.eu/ui/v/3.122.0/WebSdk.lib.44b003b5.js:1:19415
+    at Array.forEach (<anonymous>)
+    at i.dispatchConsentDetails (https://web.cmp.usercentrics.eu/ui/v/3.122.0/WebSdk.lib.44b003b5.js:1:19398)
+    at a.<anonymous> (https://web.cmp.usercentrics.eu/ui/v/3.122.0/GdprCmpController.389852c2.js:1:14051)
+    at Object.<anonymous> (https://web.cmp.usercentrics.eu/ui/loader.js:1:2291)
+    at r (https://web.cmp.usercentrics.eu/ui/loader.js:1:849)
+    at c (https://web.cmp.usercentrics.eu/ui/loader.js:1:1046) @ https://utekos.no/_next/static/chunks/41hmehis1lrxl.js?dpl=dpl_G7cL3eALcYgKJaoH71qhwCSqpXsH:9
+[    4489ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://cloud.server.utekos.no/gtag/js?id=G-FCES3L0M9M&cx=c&gtm=4e66a0:0

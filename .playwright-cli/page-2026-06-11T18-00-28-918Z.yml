@@ -1,0 +1,41 @@
+- generic [ref=e1]:
+  - iframe [ref=e6]:
+    - generic [ref=f8e2]:
+      - img [ref=f8e4]
+      - generic [ref=f8e11]:
+        - heading "Status embed installed correctly" [level=1] [ref=f8e12]:
+          - paragraph [ref=f8e13]: Status embed installed correctly
+        - generic [ref=f8e14]: This will be shown if an incident or maintenance is posted on your status page.
+        - link "View latest updates" [ref=f8e16] [cursor=pointer]:
+          - /url: https://usercentricsgmbh.statuspage.io?utm_source=embed
+      - button [ref=f8e18] [cursor=pointer]:
+        - img [ref=f8e19]
+  - generic [active]:
+    - generic:
+      - generic:
+        - button "Open Privacy Settings" [ref=e7] [cursor=pointer]:
+          - img [ref=e9]
+        - dialog "We value your privacy! 🍪" [ref=e13]:
+          - generic [ref=e14]:
+            - generic [ref=e20]:
+              - generic [ref=e21]:
+                - img [ref=e23]
+                - button "Select language" [ref=e26] [cursor=pointer]:
+                  - img [ref=e27]
+              - heading "We value your privacy! 🍪" [level=1] [ref=e33]
+              - generic [ref=e36]: This site uses third-party website technologies to provide and continually improve our services. Because we value your privacy, we are transparent about the technologies we use. You can always get more information about the Data Processing by clicking on the Privacy Link on the right lower corner of the page.
+            - generic [ref=e39]:
+              - generic [ref=e40]:
+                - generic [ref=e41]:
+                  - generic [ref=e42]:
+                    - link "Privacy Policy" [ref=e43] [cursor=pointer]:
+                      - /url: https://usercentrics.com/privacy-policy-cmp/
+                    - link "Legal Notice" [ref=e44] [cursor=pointer]:
+                      - /url: https://usercentrics.com/legal-notice/
+                  - button "More Information" [ref=e46] [cursor=pointer]:
+                    - generic [ref=e47]: More Information
+                - link "Powered by Usercentrics Consent Management" [ref=e49] [cursor=pointer]:
+                  - /url: https://usercentrics.com/consent-management-platform-powered-by-usercentrics/?utm_source=banner_uc&utm_medium=referral&utm_content=v2
+              - generic [ref=e51]:
+                - button "Deny" [ref=e52] [cursor=pointer]
+                - button "Accept All" [ref=e53] [cursor=pointer]

@@ -1,0 +1,167 @@
+- generic [ref=e1]:
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e191]:
+        - generic [ref=e192]:
+          - img [ref=e193]:
+            - img [ref=e194]
+          - generic [ref=e197]: "Enjoy all the premium features:"
+          - generic [ref=e198]:
+            - text: Premium trial ends in
+            - strong [ref=e199]: 11 days
+        - button "Get Full Access" [ref=e200] [cursor=pointer]:
+          - generic [ref=e201]: Get Full Access
+      - banner [ref=e8]:
+        - generic [ref=e9]:
+          - button "Usercentrics" [ref=e10] [cursor=pointer]:
+            - img [ref=e11]
+            - text: Usercentrics
+          - generic [ref=e19]:
+            - separator [ref=e20]
+            - generic [ref=e21]:
+              - link "Overview" [ref=e22] [cursor=pointer]:
+                - /url: /companies
+              - img [ref=e202]:
+                - img [ref=e203]
+              - generic [ref=e206]:
+                - generic [ref=e207]: Utekos
+                - generic [ref=e208]: Admin
+          - generic [ref=e23]:
+            - button "Products" [ref=e24] [cursor=pointer]:
+              - generic [ref=e28]:
+                - img [ref=e29]
+                - generic [ref=e39]: Products
+            - button [ref=e40] [cursor=pointer]:
+              - img [ref=e42]
+            - button "KH" [ref=e45]:
+              - generic [ref=e46] [cursor=pointer]: KH
+    - generic [ref=e47]:
+      - complementary [ref=e48]:
+        - generic [ref=e49]:
+          - link "Configurations" [ref=e209] [cursor=pointer]:
+            - /url: /company/hPUkm02GSRi6-h/configurations
+            - generic [ref=e210]:
+              - img [ref=e211]:
+                - img [ref=e212]
+              - generic [ref=e218]: Configurations
+          - link "Geolocation Rulesets" [ref=e219] [cursor=pointer]:
+            - /url: /company/hPUkm02GSRi6-h/geo-rulesets
+            - generic [ref=e220]:
+              - img [ref=e221]:
+                - img [ref=e222]
+              - generic [ref=e228]: Geolocation Rulesets
+          - link "User Management" [ref=e229] [cursor=pointer]:
+            - /url: /company/hPUkm02GSRi6-h/user-management
+            - generic [ref=e230]:
+              - img [ref=e231]:
+                - img [ref=e232]
+              - generic [ref=e238]: User Management
+          - link "Company Details" [ref=e239] [cursor=pointer]:
+            - /url: /company/hPUkm02GSRi6-h/details
+            - generic [ref=e240]:
+              - img [ref=e241]:
+                - img [ref=e242]
+              - generic [ref=e245]: Company Details
+      - main [ref=e57]:
+        - generic [ref=e246]:
+          - generic [ref=e247]:
+            - generic [ref=e248]:
+              - heading "Configurations" [level=1] [ref=e249]
+              - generic [ref=e250]: Below you will find an overview of all configurations which are assigned to this company.
+            - button "Add Configuration" [ref=e254] [cursor=pointer]:
+              - generic [ref=e255]: Add Configuration
+          - generic [ref=e258]:
+            - searchbox "Search for configuration by All parameter" [ref=e260]
+            - button "search" [ref=e263]:
+              - img "search" [ref=e265]:
+                - img [ref=e266]
+          - generic [ref=e270]:
+            - table [ref=e274]:
+              - rowgroup [ref=e281]:
+                - row "Configuration Name [ID] Domain / App-ID Data Controller Framework" [ref=e282]:
+                  - columnheader "Configuration Name [ID]" [ref=e283] [cursor=pointer]:
+                    - generic [ref=e284]:
+                      - generic [ref=e285]: Configuration Name [ID]
+                      - generic [ref=e287]:
+                        - img [ref=e288]:
+                          - img [ref=e289]
+                        - img [ref=e291]:
+                          - img [ref=e292]
+                  - columnheader "Domain / App-ID" [ref=e294] [cursor=pointer]:
+                    - generic [ref=e295]:
+                      - generic [ref=e296]: Domain / App-ID
+                      - generic [ref=e298]:
+                        - img [ref=e299]:
+                          - img [ref=e300]
+                        - img [ref=e302]:
+                          - img [ref=e303]
+                  - columnheader "Data Controller" [ref=e305] [cursor=pointer]:
+                    - generic [ref=e306]:
+                      - generic [ref=e307]: Data Controller
+                      - generic [ref=e309]:
+                        - img [ref=e310]:
+                          - img [ref=e311]
+                        - img [ref=e313]:
+                          - img [ref=e314]
+                  - columnheader "Framework" [ref=e316] [cursor=pointer]:
+                    - generic [ref=e317]:
+                      - generic [ref=e318]: Framework
+                      - generic [ref=e320]:
+                        - img [ref=e321]:
+                          - img [ref=e322]
+                        - img [ref=e324]:
+                          - img [ref=e325]
+                  - columnheader [ref=e327]
+              - rowgroup [ref=e328]:
+                - row "utekos-ruleset [9suQr3rGddL3Tb] utekos.no utekos-data-controller GDPR Edit" [ref=e329] [cursor=pointer]:
+                  - cell "utekos-ruleset [9suQr3rGddL3Tb]" [ref=e330]:
+                    - generic [ref=e331]:
+                      - img [ref=e334]:
+                        - img "Platform Indicator" [ref=e378]
+                      - generic [ref=e346]: utekos-ruleset [9suQr3rGddL3Tb]
+                  - cell "utekos.no" [ref=e348]
+                  - cell "utekos-data-controller" [ref=e349]
+                  - cell "GDPR" [ref=e350]:
+                    - generic [ref=e351]: GDPR
+                  - cell "Edit" [ref=e352]:
+                    - generic [ref=e353]:
+                      - button [ref=e354]:
+                        - img [ref=e355]:
+                          - img [ref=e356]
+                      - button "Edit" [active] [ref=e359]:
+                        - generic [ref=e360]:
+                          - img [ref=e361]:
+                            - img [ref=e362]
+                          - text: Edit
+            - list [ref=e365]:
+              - listitem "Previous Page" [ref=e366]:
+                - button "left" [disabled] [ref=e367]:
+                  - img "left" [ref=e368]:
+                    - img [ref=e369]
+              - listitem "1" [ref=e371] [cursor=pointer]:
+                - generic [ref=e372]: "1"
+              - listitem "Next Page" [ref=e373]:
+                - button "right" [disabled] [ref=e374]:
+                  - img "right" [ref=e375]:
+                    - img [ref=e376]
+        - generic [ref=e109]:
+          - generic [ref=e110]: © Copyright 2026 Usercentrics GmbH
+          - generic [ref=e111]:
+            - button "Privacy Settings" [ref=e112] [cursor=pointer]
+            - link "Privacy Policy" [ref=e115] [cursor=pointer]:
+              - /url: https://usercentrics.com/privacy-policy-cmp/?deviceId=72495df0-28e3-4fa9-a11b-ac9a180812c6
+            - link "Legal Notice" [ref=e118] [cursor=pointer]:
+              - /url: https://usercentrics.com/legal-notice/?deviceId=72495df0-28e3-4fa9-a11b-ac9a180812c6
+            - link "System Status" [ref=e121] [cursor=pointer]:
+              - /url: https://usercentricsgmbh.statuspage.io/
+  - iframe [ref=e169]:
+    - generic [ref=f11e2]:
+      - img [ref=f11e4]
+      - generic [ref=f11e11]:
+        - heading "Status embed installed correctly" [level=1] [ref=f11e12]:
+          - paragraph [ref=f11e13]: Status embed installed correctly
+        - generic [ref=f11e14]: This will be shown if an incident or maintenance is posted on your status page.
+        - link "View latest updates" [ref=f11e16] [cursor=pointer]:
+          - /url: https://usercentricsgmbh.statuspage.io?utm_source=embed
+      - button [ref=f11e18] [cursor=pointer]:
+        - img [ref=f11e19]

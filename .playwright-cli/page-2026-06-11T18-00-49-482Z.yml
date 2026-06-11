@@ -1,0 +1,91 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e5]:
+    - banner [ref=e8]:
+      - generic [ref=e9]:
+        - button "Usercentrics" [ref=e10] [cursor=pointer]:
+          - img [ref=e11]
+          - text: Usercentrics
+        - generic [ref=e19]:
+          - separator [ref=e20]
+          - link "Overview" [ref=e22] [cursor=pointer]:
+            - /url: /companies
+        - generic [ref=e23]:
+          - button "Products" [ref=e24] [cursor=pointer]:
+            - generic [ref=e28]:
+              - img [ref=e29]
+              - generic [ref=e39]: Products
+          - button [ref=e40] [cursor=pointer]:
+            - img [ref=e42]
+          - button "KH" [ref=e45]:
+            - generic [ref=e46] [cursor=pointer]: KH
+    - generic [ref=e47]:
+      - complementary [ref=e48]:
+        - link "Companies" [ref=e50] [cursor=pointer]:
+          - /url: /companies
+          - generic [ref=e51]:
+            - img [ref=e52]:
+              - img [ref=e53]
+            - generic [ref=e56]: Companies
+      - main [ref=e57]:
+        - generic [ref=e58]:
+          - generic [ref=e59]:
+            - generic [ref=e60]:
+              - heading "Companies" [level=1] [ref=e61]
+              - generic [ref=e62]: Below you will find an overview of all companies to which you have access.
+            - button "Add Company" [ref=e63] [cursor=pointer]:
+              - generic [ref=e64]: Add Company
+          - generic [ref=e66]:
+            - searchbox "Search for Company Name or Configuration ID" [ref=e68]
+            - button "search" [ref=e71]:
+              - img "search" [ref=e73]:
+                - img [ref=e74]
+          - generic [ref=e77] [cursor=pointer]:
+            - generic [ref=e78]:
+              - generic [ref=e80]: Utekos
+              - generic [ref=e81]:
+                - button "Account & Billing" [ref=e82]:
+                  - img [ref=e84]:
+                    - img [ref=e85]
+                  - generic [ref=e88]: Account & Billing
+                - generic [ref=e90]:
+                  - text: Configurations
+                  - superscript [ref=e92]:
+                    - generic [ref=e94]: "1"
+            - generic [ref=e96]:
+              - generic [ref=e97]: Admin
+              - separator [ref=e98]
+              - img [ref=e99]:
+                - img [ref=e100]
+        - generic [ref=e109]:
+          - generic [ref=e110]: © Copyright 2026 Usercentrics GmbH
+          - generic [ref=e111]:
+            - button "Privacy Settings" [ref=e112] [cursor=pointer]
+            - link "Privacy Policy" [ref=e115] [cursor=pointer]:
+              - /url: https://usercentrics.com/privacy-policy-cmp/?deviceId=72495df0-28e3-4fa9-a11b-ac9a180812c6
+            - link "Legal Notice" [ref=e118] [cursor=pointer]:
+              - /url: https://usercentrics.com/legal-notice/?deviceId=72495df0-28e3-4fa9-a11b-ac9a180812c6
+            - link "System Status" [ref=e121] [cursor=pointer]:
+              - /url: https://usercentricsgmbh.statuspage.io/
+  - iframe [ref=e169]:
+    - generic [ref=f11e2]:
+      - img [ref=f11e4]
+      - generic [ref=f11e11]:
+        - heading "Status embed installed correctly" [level=1] [ref=f11e12]:
+          - paragraph [ref=f11e13]: Status embed installed correctly
+        - generic [ref=f11e14]: This will be shown if an incident or maintenance is posted on your status page.
+        - link "View latest updates" [ref=f11e16] [cursor=pointer]:
+          - /url: https://usercentricsgmbh.statuspage.io?utm_source=embed
+      - button [ref=f11e18] [cursor=pointer]:
+        - img [ref=f11e19]
+  - generic [ref=e171]:
+    - alert [ref=e173]:
+      - generic [ref=e175]:
+        - img [ref=e176]:
+          - img [ref=e177]
+        - heading "Accessibility note" [level=3] [ref=e182]
+      - generic [ref=e184]:
+        - text: We’re continuously improving this platform, though some accessibility limitations may remain.
+        - generic [ref=e185] [cursor=pointer]: Show more
+    - generic "Close" [ref=e186] [cursor=pointer]:
+      - img "close" [ref=e187]:
+        - img [ref=e188]

@@ -154,3 +154,11 @@ summary
 /env.local
 !/.github/
 !/.github/dependabot.yml
+.playwright-report/
+playwright-report/
+/playwright
+*/playwright-report/
+.playwright-mcp/
+playwright-mcp/
+/playwright-mcp
+*/playwright-mcp

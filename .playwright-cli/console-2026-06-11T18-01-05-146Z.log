@@ -1,0 +1,18 @@
+[       7ms] [LOG]  Initializing Smart Data Protector @ https://privacy-proxy.usercentrics.eu/latest/uc-block.bundle.js:0
+[      62ms] [LOG] Using UC bridge data @ https://itp.usercentrics.eu/?settingsId=2xkns35zK:0
+[     370ms] [INFO] %cUsercentrics Admin Interface v3.404.0 color:#1d60b3;font-size:14px;font-weight:bold @ https://admin.usercentrics.eu/main-QT3ML4JY.js:3668
+[     373ms] [WARNING] An error occurred! For more details, see the full error text at https://go.apollo.dev/c/err#%7B%22version%22%3A%223.14.0%22%2C%22message%22%3A104%2C%22args%22%3A%5B%22InMemoryCache%22%2C%22addTypename%22%2C%22Please%20remove%20the%20%60addTypename%60%20option%20when%20initializing%20%60InMemoryCache%60.%22%5D%7D @ https://admin.usercentrics.eu/main-QT3ML4JY.js:107
+[    3425ms] [WARNING] An error occurred! For more details, see the full error text at https://go.apollo.dev/c/err#%7B%22version%22%3A%223.14.0%22%2C%22message%22%3A23%2C%22args%22%3A%5B%5D%7D @ https://admin.usercentrics.eu/main-QT3ML4JY.js:107
+[    4455ms] [LOG] Initializing Beamer. [Update and engage users effortlessly - https://getbeamer.com] @ https://app.getbeamer.com/js/beamer-embed.js:14
+[   18418ms] [WARNING] An error occurred! For more details, see the full error text at https://go.apollo.dev/c/err#%7B%22version%22%3A%223.14.0%22%2C%22message%22%3A23%2C%22args%22%3A%5B%5D%7D @ https://admin.usercentrics.eu/main-QT3ML4JY.js:107
+[   78095ms] [ERROR] ERROR ApolloError: ScanResult service failure
+    at new n (https://admin.usercentrics.eu/main-QT3ML4JY.js:164:152)
+    at https://admin.usercentrics.eu/main-QT3ML4JY.js:168:80179
+    at m (https://admin.usercentrics.eu/main-QT3ML4JY.js:163:8596)
+    at https://admin.usercentrics.eu/main-QT3ML4JY.js:163:8511
+    at new J (https://admin.usercentrics.eu/polyfills-CU2YUZFZ.js:7:2252)
+    at Object.then (https://admin.usercentrics.eu/main-QT3ML4JY.js:163:8478)
+    at Object.next (https://admin.usercentrics.eu/main-QT3ML4JY.js:163:8606)
+    at Gje (https://admin.usercentrics.eu/main-QT3ML4JY.js:163:1936)
+    at Bve (https://admin.usercentrics.eu/main-QT3ML4JY.js:163:2351)
+    at n.next (https://admin.usercentrics.eu/main-QT3ML4JY.js:163:2875) @ https://admin.usercentrics.eu/chunk-K7SRDGT7.js:6

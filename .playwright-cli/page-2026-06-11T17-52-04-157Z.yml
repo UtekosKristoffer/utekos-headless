@@ -1,0 +1,35 @@
+- generic [ref=e2]:
+  - img "Logo" [ref=e4]
+  - main [ref=e6]:
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - heading "Welcome back" [level=1] [ref=e11]
+        - paragraph [ref=e13]: Log in to your account
+      - generic [ref=e14]:
+        - generic [ref=e17]:
+          - button: Continue
+          - generic [ref=e22]:
+            - generic [ref=e23]: Email address *
+            - textbox "Email address" [ref=e24]
+          - button "Continue" [ref=e26] [cursor=pointer]
+        - paragraph [ref=e28]:
+          - text: Don't have an account?
+          - link "Sign up" [ref=e29] [cursor=pointer]:
+            - /url: /u/signup/identifier?state=hKFo2SBEakYwWmhtakdmYzlqVm1OaHY0S2JEMnpfWlVPTnpxeaFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIE56c3U2Q2IzNGt0dUZHelQ4Y0diXzFZcWJFZEpZUlVzo2NpZNkgTGFIc2J3YlJFd29qd2Y2dDNqR09vZm9uSEpMb3RGUnI
+        - generic [ref=e31]: Or
+        - generic [ref=e32]:
+          - button "Continue with Google" [ref=e34] [cursor=pointer]:
+            - generic [ref=e36]: Continue with Google
+          - button "Continue with Microsoft Account" [ref=e38] [cursor=pointer]:
+            - generic [ref=e40]: Continue with Microsoft Account
+  - generic [ref=e42]:
+    - text: By submitting the form, I hereby confirm that I have read and accept the
+    - link "Terms and Conditions" [ref=e43] [cursor=pointer]:
+      - /url: https://usercentrics.com/terms-and-conditions/
+    - text: /
+    - link "Terms and Conditions (USA)" [ref=e44] [cursor=pointer]:
+      - /url: https://usercentrics.com/terms-and-conditions-usa/
+    - text: as well as the
+    - link "DPA" [ref=e45] [cursor=pointer]:
+      - /url: https://usercentrics.com/data-processing-agreement/
+    - text: of Usercentrics

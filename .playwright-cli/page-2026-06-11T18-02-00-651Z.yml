@@ -1,0 +1,293 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - img [ref=e10]
+          - generic [ref=e13]: "Enjoy all the premium features:"
+          - generic [ref=e14]:
+            - text: Premium trial ends in
+            - strong [ref=e15]: 11 days
+        - button "Get Full Access" [ref=e16] [cursor=pointer]:
+          - generic [ref=e17]: Get Full Access
+      - banner [ref=e20]:
+        - generic [ref=e21]:
+          - button "Usercentrics Web CMP" [ref=e22] [cursor=pointer]:
+            - img [ref=e23]
+            - text: Usercentrics Web CMP
+          - generic [ref=e29]:
+            - generic:
+              - generic [ref=e32]:
+                - link "Overview" [ref=e33] [cursor=pointer]:
+                  - /url: https://account.usercentrics.eu/companies
+                - img [ref=e35]
+                - link "Utekos" [ref=e38] [cursor=pointer]:
+                  - /url: https://account.usercentrics.eu/company/hPUkm02GSRi6-h/configurations
+                - img [ref=e40]
+                - generic [ref=e43]: utekos-ruleset[9suQr3rGddL3Tb]
+                - generic [ref=e45]: GDPR
+              - generic [ref=e49]:
+                - img [ref=e52]
+                - generic [ref=e54]: Free Web
+              - generic [ref=e60] [cursor=pointer]: V3
+          - generic [ref=e61]:
+            - button "Products" [ref=e62] [cursor=pointer]:
+              - generic [ref=e66]:
+                - img [ref=e67]
+                - generic [ref=e77]: Products
+            - button [ref=e78] [cursor=pointer]:
+              - img [ref=e80]
+            - button [ref=e83] [cursor=pointer]:
+              - img [ref=e84]
+            - button "KH" [ref=e87]:
+              - generic [ref=e88] [cursor=pointer]: KH
+    - generic [ref=e89]:
+      - generic [ref=e92]:
+        - generic [ref=e94]:
+          - link "Overview" [ref=e95] [cursor=pointer]:
+            - /url: "#/v3/overview?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e96]:
+              - img [ref=e440]
+              - generic [ref=e104]: Overview
+          - link "Analytics" [ref=e105] [cursor=pointer]:
+            - /url: "#/v3/analytics?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e106]:
+              - img [ref=e109]
+              - generic [ref=e115]: Analytics
+            - img [ref=e120]
+          - link "Configuration" [ref=e122] [cursor=pointer]:
+            - /url: "#/v3/configuration?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e123]:
+              - img [ref=e126]
+              - generic [ref=e132]: Configuration
+            - img [ref=e137]
+          - link "Service Settings" [ref=e139] [cursor=pointer]:
+            - /url: "#/v3/service-settings?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e140]:
+              - img [ref=e446]
+              - generic [ref=e149]: Service Settings
+          - link "Appearance" [ref=e150] [cursor=pointer]:
+            - /url: "#/v3/appearance?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e151]:
+              - img [ref=e154]
+              - generic [ref=e160]: Appearance
+            - img [ref=e165]
+          - link "Content" [ref=e167] [cursor=pointer]:
+            - /url: "#/v3/content?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e168]:
+              - img [ref=e171]
+              - generic [ref=e174]: Content
+            - img [ref=e179]
+          - link "Integrations" [ref=e181] [cursor=pointer]:
+            - /url: "#/v3/integrations?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e182]:
+              - img [ref=e185]
+              - generic [ref=e188]: Integrations
+          - link "Implementation" [ref=e189] [cursor=pointer]:
+            - /url: "#/v3/implementation?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e190]:
+              - img [ref=e193]
+              - generic [ref=e195]: Implementation
+            - img [ref=e200]
+          - link "Server-Side Tagging" [ref=e202] [cursor=pointer]:
+            - /url: "#/v3/server-side-tagging?settingsId=9suQr3rGddL3Tb"
+            - generic [ref=e203]:
+              - img [ref=e206]
+              - generic [ref=e208]: Server-Side Tagging
+        - generic [ref=e210]:
+          - button "Preview" [ref=e211] [cursor=pointer]:
+            - generic [ref=e212]: Preview
+            - img [ref=e214]
+          - generic [ref=e216]:
+            - button "Save Draft" [disabled] [ref=e217]:
+              - generic: Save Draft
+            - button "Publish" [disabled] [ref=e218]:
+              - generic: Publish
+      - generic [ref=e221]:
+        - generic [ref=e454]:
+          - text: Service Settings
+          - img [ref=e456]
+        - generic [ref=e458]:
+          - tablist [ref=e462]:
+            - tab "DPS Scanner" [ref=e464] [cursor=pointer]:
+              - link "DPS Scanner" [ref=e465]:
+                - /url: "#/v3/service-settings/dps-scanner?settingsId=9suQr3rGddL3Tb"
+            - tab "Data Processing Services" [selected] [ref=e467] [cursor=pointer]:
+              - link "Data Processing Services" [ref=e468]:
+                - /url: "#/v3/service-settings/data-processing-services?settingsId=9suQr3rGddL3Tb"
+            - tab "Categories" [ref=e470] [cursor=pointer]:
+              - link "Categories" [ref=e471]:
+                - /url: "#/v3/service-settings/categories?settingsId=9suQr3rGddL3Tb"
+          - generic [ref=e476]:
+            - generic [ref=e559]:
+              - generic "Data Processing Services" [ref=e560]:
+                - generic [ref=e561]:
+                  - text: Data Processing Services
+                  - img [ref=e563]
+              - list [ref=e566]:
+                - listitem [ref=e567]:
+                  - generic [ref=e569]:
+                    - generic [ref=e570]:
+                      - paragraph [ref=e571]: Usercentrics Consent Management Platform
+                      - paragraph [ref=e572]: Essensielt
+                    - generic [ref=e573]:
+                      - generic [ref=e576]: Live
+                      - img [ref=e578]
+                - listitem [ref=e580]:
+                  - generic [ref=e582]:
+                    - generic [ref=e583]:
+                      - paragraph [ref=e584]: Google Tag Manager
+                      - paragraph [ref=e585]: Funksjonelt
+                    - generic [ref=e586]:
+                      - img [ref=e590]
+                      - generic [ref=e595]: Live
+                      - img [ref=e597]
+                - listitem [ref=e599]:
+                  - generic [ref=e601]:
+                    - generic [ref=e602]:
+                      - paragraph [ref=e603]: Sentry
+                      - paragraph [ref=e604]: Funksjonelt
+                    - generic [ref=e605]:
+                      - img [ref=e609]
+                      - generic [ref=e614]: Live
+                      - img [ref=e616]
+                - listitem [ref=e618]:
+                  - generic [ref=e620]:
+                    - generic [ref=e621]:
+                      - paragraph [ref=e622]: Microsoft Advertising Remarketing
+                      - paragraph [ref=e623]: Markedsføring
+                    - generic [ref=e624]:
+                      - img [ref=e628]
+                      - generic [ref=e633]: Live
+                      - img [ref=e635]
+                - listitem [ref=e637]:
+                  - generic [ref=e639]:
+                    - generic [ref=e640]:
+                      - paragraph [ref=e641]: Microsoft Clarity
+                      - paragraph [ref=e642]: Markedsføring
+                    - generic [ref=e643]:
+                      - img [ref=e647]
+                      - generic [ref=e652]: Live
+                      - img [ref=e654]
+                - listitem [ref=e656]:
+                  - generic [ref=e658]:
+                    - generic [ref=e659]:
+                      - paragraph [ref=e660]: Klarna
+                      - paragraph [ref=e661]: Funksjonelt
+                    - generic [ref=e662]:
+                      - img [ref=e666]
+                      - generic [ref=e671]: Live
+                      - img [ref=e673]
+                - listitem [ref=e675]:
+                  - generic [ref=e677]:
+                    - generic [ref=e678]:
+                      - paragraph [ref=e679]: Klarna On-site messaging
+                      - paragraph [ref=e680]: Funksjonelt
+                    - generic [ref=e681]:
+                      - img [ref=e685]
+                      - generic [ref=e690]: Live
+                      - img [ref=e692]
+                - listitem [ref=e694]:
+                  - generic [ref=e696]:
+                    - generic [ref=e697]:
+                      - paragraph [ref=e698]: Shopify CDN
+                      - paragraph [ref=e699]: Funksjonelt
+                    - generic [ref=e700]:
+                      - img [ref=e704]
+                      - generic [ref=e709]: Live
+                      - img [ref=e711]
+                - listitem [ref=e713]:
+                  - generic [ref=e715]:
+                    - generic [ref=e716]:
+                      - paragraph [ref=e717]: PostHog.com
+                      - paragraph [ref=e718]: Markedsføring
+                    - generic [ref=e719]:
+                      - img [ref=e723]
+                      - generic [ref=e728]: Live
+                      - img [ref=e730]
+              - generic [ref=e733] [cursor=pointer]:
+                - img [ref=e735]
+                - generic [ref=e738]: Add DPS via Database
+              - generic [ref=e739]:
+                - generic "Custom Data Processing Services" [ref=e740]:
+                  - generic [ref=e741]:
+                    - text: Custom Data Processing Services
+                    - img [ref=e743]
+                - list [ref=e746]:
+                  - listitem [ref=e747]:
+                    - generic [ref=e749]:
+                      - generic [ref=e750]:
+                        - paragraph [ref=e751]: PostHog
+                        - paragraph [ref=e752]: Statistikk
+                      - generic [ref=e753]:
+                        - generic [ref=e756]: Live
+                        - img [ref=e758]
+                  - listitem [ref=e760]:
+                    - generic [ref=e762]:
+                      - generic [ref=e763]:
+                        - paragraph [ref=e764]: PostHog
+                        - paragraph [ref=e765]: Statistikk
+                      - generic [ref=e766]:
+                        - generic [ref=e769]: Live
+                        - img [ref=e771]
+                - generic [ref=e773]:
+                  - generic [ref=e774] [cursor=pointer]:
+                    - img [ref=e776]
+                    - generic [ref=e779]: Create Custom DPS
+                  - generic [ref=e780] [cursor=pointer]:
+                    - img [ref=e782]
+                    - generic [ref=e785]: Customize Predefined DPS
+            - generic [ref=e548]:
+              - generic [ref=e549]: © Copyright 2026 Usercentrics GmbH
+              - generic [ref=e550]:
+                - generic [ref=e551] [cursor=pointer]: Privacy Settings
+                - link "Privacy Policy" [ref=e553] [cursor=pointer]:
+                  - /url: https://usercentrics.com/privacy-policy-cmp/
+                - link "Legal Notice" [ref=e555] [cursor=pointer]:
+                  - /url: https://usercentrics.com/legal-notice/
+                - link "System Status" [ref=e557] [cursor=pointer]:
+                  - /url: https://usercentricsgmbh.statuspage.io/
+  - iframe [ref=e398]:
+    - generic [ref=f1e2]:
+      - img [ref=f1e4]
+      - generic [ref=f1e11]:
+        - heading "Status embed installed correctly" [level=1] [ref=f1e12]:
+          - paragraph [ref=f1e13]: Status embed installed correctly
+        - generic [ref=f1e14]: This will be shown if an incident or maintenance is posted on your status page.
+        - link "View latest updates" [ref=f1e16] [cursor=pointer]:
+          - /url: https://usercentricsgmbh.statuspage.io?utm_source=embed
+      - button [ref=f1e18] [cursor=pointer]:
+        - img [ref=f1e19]
+  - dialog [ref=e788]:
+    - document:
+      - generic [ref=e789]:
+        - button "Close" [active] [ref=e790] [cursor=pointer]:
+          - img [ref=e793]
+        - generic [ref=e797]: Add Data Processing Service
+        - generic [ref=e799]:
+          - generic [ref=e800]:
+            - heading "Data Processing Service" [level=5] [ref=e801]
+            - generic [ref=e803] [cursor=pointer]:
+              - generic [ref=e804]:
+                - textbox [ref=e806]
+                - generic: Select DPS from database
+              - img [ref=e808]
+          - generic [ref=e810]:
+            - heading "Category" [level=5] [ref=e811]
+            - generic [ref=e813] [cursor=pointer]:
+              - generic [ref=e814]:
+                - textbox [ref=e816]
+                - generic: Select category
+              - img [ref=e818]
+          - generic [ref=e820]:
+            - heading "Version (DPS Details)" [level=5] [ref=e821]
+            - generic [ref=e823] [cursor=pointer]:
+              - generic [ref=e824]:
+                - textbox [ref=e826]
+                - generic "Keep Service automatically updated to latest version" [ref=e827]
+              - img [ref=e829]
+        - generic [ref=e832]:
+          - button "Cancel" [ref=e833] [cursor=pointer]:
+            - generic [ref=e834]: Cancel
+          - button "Add DPS" [disabled] [ref=e835]:
+            - generic: Add DPS
