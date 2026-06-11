@@ -9,6 +9,7 @@ import {
   USERCENTRICS_GOOGLE_ADS_SERVICE_NAME,
   USERCENTRICS_GOOGLE_ANALYTICS_SERVICE_NAME
 } from './usercentricsConfig'
+import { setLatestConsentServices } from '@/lib/tracking/consent/latestConsentServices'
 import type { UsercentricsConsentState } from './usercentricsConsentSchema'
 
 interface ConsentContextType {
@@ -19,8 +20,7 @@ interface ConsentContextType {
 export const ConsentContext = createContext<ConsentContextType | undefined>(undefined)
 
 function updateGoogleConsentMode(consent: UsercentricsConsentState) {
-  const hasGoogleAnalyticsConsent =
-    consent.services[USERCENTRICS_GOOGLE_ANALYTICS_SERVICE_NAME] === true
+  const hasGoogleAnalyticsConsent = consent.services[USERCENTRICS_GOOGLE_ANALYTICS_SERVICE_NAME] === true
   const hasGoogleAdsConsent = consent.services[USERCENTRICS_GOOGLE_ADS_SERVICE_NAME] === true
 
   window.gtag?.('consent', 'update', {
@@ -78,6 +78,7 @@ export function UsercentricsConsentProvider({ children }: { children: ReactNode 
 
       if (storedConsent) {
         setConsent(storedConsent)
+        setLatestConsentServices(storedConsent.services)
         updateGoogleConsentMode(storedConsent)
       }
     }, 0)
@@ -95,6 +96,7 @@ export function UsercentricsConsentProvider({ children }: { children: ReactNode 
       const nextConsent = createUsercentricsConsentState(services)
 
       setConsent(nextConsent)
+      setLatestConsentServices(nextConsent.services)
       updateGoogleConsentMode(nextConsent)
       persistConsent(nextConsent)
       releaseStaleConsentScrollLock()
@@ -111,9 +113,5 @@ export function UsercentricsConsentProvider({ children }: { children: ReactNode 
     void window.__ucCmp?.showSecondLayer()
   }
 
-  return (
-    <ConsentContext.Provider value={{ consent, openSettings }}>
-      {children}
-    </ConsentContext.Provider>
-  )
+  return <ConsentContext.Provider value={{ consent, openSettings }}>{children}</ConsentContext.Provider>
 }

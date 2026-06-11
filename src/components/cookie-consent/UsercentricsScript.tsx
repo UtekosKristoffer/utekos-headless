@@ -19,10 +19,10 @@ export const GOOGLE_CONSENT_DEFAULT_SCRIPT = `
     functionality_storage: 'denied',
     personalization_storage: 'denied',
     security_storage: 'granted',
-    wait_for_update: 500
+    wait_for_update: 2000
   });
   window.gtag('set', 'ads_data_redaction', true);
-  window.gtag('set', 'url_passthrough', false);
+  window.gtag('set', 'url_passthrough', true);
   window.addEventListener('${USERCENTRICS_CONSENT_EVENT_NAME}', function(event) {
     if (!event.detail || event.detail.event !== 'consent_status') {
       return;

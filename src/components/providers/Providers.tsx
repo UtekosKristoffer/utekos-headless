@@ -9,6 +9,7 @@ import { serverActions } from '@/constants/serverActions'
 import { CartIdProvider } from '@/components/providers/CartIdProvider'
 import type { DehydratedState } from '@tanstack/react-query'
 import { UsercentricsConsentProvider } from '@/components/cookie-consent/UsercentricsConsentProvider'
+import { GoogleAnalyticsTracking } from '@/components/analytics/GoogleAnalyticsTracking'
 import { MarketingPixels } from '@/components/analytics/MarketingPixels'
 import { PostHogConsentGate } from '@/components/analytics/PostHogConsentGate'
 import { ConsentGatedServices } from '@/components/analytics/ConsentGatedServices'
@@ -45,6 +46,7 @@ export default function Providers({ children, cartId: initialCartId, dehydratedS
           <ReactQueryDevtools initialIsOpen={false} />
         : null}
       </QueryClientProvider>
+      <GoogleAnalyticsTracking />
       <MarketingPixels />
       <PostHogClientProvider>
         <PostHogConsentGate />

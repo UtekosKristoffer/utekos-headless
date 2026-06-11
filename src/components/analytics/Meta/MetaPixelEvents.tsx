@@ -3,10 +3,10 @@
 
 import { PixelLogic } from '@/components/analytics/Meta/PixelLogic'
 import Script from 'next/script'
-import { Suspense, useState } from 'react'
+import { Suspense } from 'react'
+
 export function MetaPixelEvents() {
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID
-  const [isPixelQueueReady, setIsPixelQueueReady] = useState(false)
 
   if (!pixelId) return null
 
@@ -32,11 +32,9 @@ export function MetaPixelEvents() {
         strategy='afterInteractive'
         dangerouslySetInnerHTML={{ __html: metaPixelBaseCode }}
       />
-      {isPixelQueueReady && (
-        <Suspense fallback={null}>
-          <PixelLogic />
-        </Suspense>
-      )}
+      <Suspense fallback={null}>
+        <PixelLogic />
+      </Suspense>
     </>
   )
 }
