@@ -3,6 +3,7 @@ import {
   USERCENTRICS_SETTINGS_ID,
   USERCENTRICS_SGTM_ORIGIN
 } from './usercentricsConfig'
+import { UsercentricsAutoblockerScript } from './UsercentricsAutoblockerScript'
 
 // Custom CMP styling: Usercentrics Admin → Appearance → Styling → Custom CSS.
 // Source: src/components/cookie-consent/usercentrics.custom.css
@@ -61,22 +62,19 @@ export function UsercentricsConsentSignalsScript() {
 
 export function UsercentricsCmpScript() {
   return (
-    <>
-      {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-      <script src='https://web.cmp.usercentrics.eu/modules/autoblocker.js'></script>
-      <script
-        id='usercentrics-cmp'
-        src='https://web.cmp.usercentrics.eu/ui/loader.js'
-        data-settings-id={USERCENTRICS_SETTINGS_ID}
-        async
-      />
-    </>
+    <script
+      id='usercentrics-cmp'
+      src='https://web.cmp.usercentrics.eu/ui/loader.js'
+      data-settings-id={USERCENTRICS_SETTINGS_ID}
+      async
+    />
   )
 }
 
 export function UsercentricsScript() {
   return (
     <>
+      <UsercentricsAutoblockerScript />
       <GoogleConsentDefaultScript />
       <UsercentricsConsentSignalsScript />
       <UsercentricsCmpScript />

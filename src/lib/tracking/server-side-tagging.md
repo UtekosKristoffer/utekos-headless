@@ -21,12 +21,17 @@
 
 ## Samtykkeflyt
 
+Autoblocker må være **første script i `<head>`**. Next.js 16 legger `/_next/static/chunks/*` foran
+layout-scripts, så autoblocker prependes via `HTMLRewriter` i [`src/proxy.ts`](../../proxy.ts) (Next 16
+erstatter `middleware.ts`). Lokalt (uten Vercel Edge) faller vi tilbake til
+[`UsercentricsAutoblockerScript.tsx`](../../components/cookie-consent/UsercentricsAutoblockerScript.tsx).
+
 `<head>`-rekkefølge i [`UsercentricsScript.tsx`](../../components/cookie-consent/UsercentricsScript.tsx) og
 [`layout.tsx`](../../app/layout.tsx):
 
-1. Google Consent Mode defaults (`denied` fail-closed)
-2. `https://cloud.server.utekos.no/uc-consent-signals.js` (sync, **før** CMP)
-3. `autoblocker.js` (sync)
+1. `autoblocker.js` (sync, først — via proxy på Vercel)
+2. Google Consent Mode defaults (`denied` fail-closed)
+3. `https://cloud.server.utekos.no/uc-consent-signals.js` (sync, **før** CMP)
 4. `loader.js` (async, `data-settings-id`)
 5. GTM via [`GoogleTagManagerScript.tsx`](../../components/analytics/GoogleTagManagerScript.tsx) — lastes
    tidlig; Consent Mode styrer tag-firing, ikke script-montering
