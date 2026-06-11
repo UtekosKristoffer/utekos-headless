@@ -10,19 +10,21 @@ Dato: 2026-06-09
 
 ### Implementert lokalt
 
-- Usercentrics CMP v3-loaderen kjøres i dokumenthodet. Den defekte, udokumenterte
-  `cloud.server.utekos.no/uc-consent-signals.js`-lastingen er fjernet.
-- Google Consent Mode settes fail-closed før CMP. GTM, Meta, PostHog, Chatbase, Vercel Analytics og Speed
-  Insights monteres bare etter tjeneste- eller kategorisamtykke.
-- GTM-noscript, direkte Microsoft UET-loader og direkte Microsoft browser-events er fjernet fra aktiv flyt.
+- Usercentrics CMP v3-loaderen kjøres i dokumenthodet med kanonisk rekkefølge: Consent Mode defaults →
+  `uc-consent-signals.js` → autoblocker → loader.
+- GTM (`GTM-5TWMJQFP`) lastes tidlig i `<head>` via synkron bootstrap og sGTM-endepunkt
+  `cloud.server.utekos.no`; Consent Mode styrer tag-firing. dataLayer-pushes og Meta/PostHog/Chatbase m.fl.
+  monteres fortsatt etter tjeneste- eller kategorisamtykke.
+- GTM-noscript iframe peker på sGTM `ns.html`. Direkte Microsoft UET-loader og direkte Microsoft
+  browser-events er fjernet fra aktiv flyt.
 - Usercentrics `ucEvent` oppdaterer React-gates og Google Consent Mode uten reload. Endringer lagres i
   `marketing.consent_snapshots` med faktiske tilgjengelige identifikatorer.
 - `/api/tracking-events` validerer en streng, versjonert Zod-kontrakt og avviser valgfri lagring fail-closed
   når verken Meta- eller Google-samtykke kan dokumenteres.
 - Browser-events bruker én sentral dispatcher. Google går til samtykkegatet dataLayer/sGTM. Meta Pixel og
   ledger/CAPI deler samme `event_id`.
-- Server-side provider-dispatch skjer bare via `marketing.event_ledger` og
-  `ops.provider_dispatch_attempts`; umiddelbar parallell provider-dispatch er fjernet.
+- Server-side provider-dispatch skjer bare via `marketing.event_ledger` og `ops.provider_dispatch_attempts`;
+  umiddelbar parallell provider-dispatch er fjernet.
 - Providerkøen har provider-idempotency, lease med `skip locked`, visibility-timeout, eksponentiell retry,
   permanent failure og dead letters. Køposter lagrer nå samtykkegrunnlag, datakvalitet, providerrespons og
   latency.
@@ -30,15 +32,15 @@ Dato: 2026-06-09
 
 ### Kanonisk eventmatrise
 
-| Kanonisk event | Midlertidig Meta-navn | Klassifisering | Browsertransport |
-| --- | --- | --- | --- |
-| `page_view` | `PageView` | statistics/marketing etter samtykke | Google dataLayer/sGTM + Meta Pixel/CAPI |
-| `view_item` | `ViewContent` | statistics/marketing etter samtykke | Google dataLayer/sGTM + Meta Pixel/CAPI |
-| `add_to_cart` | `AddToCart` | statistics/marketing etter samtykke | Google dataLayer/sGTM + Meta Pixel/CAPI |
-| `begin_checkout` | `InitiateCheckout` | statistics/marketing etter samtykke | Google dataLayer/sGTM + Meta Pixel/CAPI |
-| `purchase` | `Purchase` | nødvendig ledger; provider kun med dokumentert samtykke | Provideravhengig |
-| `search` | `Search` | statistics/marketing etter samtykke | Google dataLayer/sGTM + Meta Pixel/CAPI |
-| `generate_lead` | `Lead` | marketing | Google dataLayer/sGTM + Meta Pixel/CAPI |
+| Kanonisk event   | Midlertidig Meta-navn | Klassifisering                                          | Browsertransport                        |
+| ---------------- | --------------------- | ------------------------------------------------------- | --------------------------------------- |
+| `page_view`      | `PageView`            | statistics/marketing etter samtykke                     | Google dataLayer/sGTM + Meta Pixel/CAPI |
+| `view_item`      | `ViewContent`         | statistics/marketing etter samtykke                     | Google dataLayer/sGTM + Meta Pixel/CAPI |
+| `add_to_cart`    | `AddToCart`           | statistics/marketing etter samtykke                     | Google dataLayer/sGTM + Meta Pixel/CAPI |
+| `begin_checkout` | `InitiateCheckout`    | statistics/marketing etter samtykke                     | Google dataLayer/sGTM + Meta Pixel/CAPI |
+| `purchase`       | `Purchase`            | nødvendig ledger; provider kun med dokumentert samtykke | Provideravhengig                        |
+| `search`         | `Search`              | statistics/marketing etter samtykke                     | Google dataLayer/sGTM + Meta Pixel/CAPI |
+| `generate_lead`  | `Lead`                | marketing                                               | Google dataLayer/sGTM + Meta Pixel/CAPI |
 
 ### Verifisert lokalt
 
@@ -49,19 +51,22 @@ Dato: 2026-06-09
 
 ### Gjenstående ekstern konfigurasjon
 
-- Re-autentiser Context7 før nye tredjeparts-API-implementasjoner. OAuth er utløpt per 2026-06-09.
-- Usercentrics ruleset-endepunktet for `9suQr3rGddL3Tb` svarer `403 Forbidden` også med produksjons-origin
-  `https://utekos.no`. Rulesetet må publiseres eller tilgang må repareres før banneret kan initialiseres.
-- Publiser og verifiser Usercentrics-ruleset, DPS-navn, `ucEvent`, domene-scan og consent-signaler.
-- Verifiser GTM Web og sGTM: consent-exceptions, GA4-client, transformations, Google Ads og Microsoft Ads.
-- Sett `GOOGLE_BROWSER_EVENT_TRANSPORT=sgtm` i Vercel Production først etter vellykket GTM/sGTM-preview.
+- Usercentrics ruleset/settings `9suQr3rGddL3Tb`: verifiser at 403 er løst og banner initialiseres på
+  `utekos.no`.
+- sGTM-endepunkter verifisert 2026-06-11 (`/healthz`, `/uc-consent-signals.js`, `/gtm.js`, `/ns.html` → 200).
+- Publiser DPS-scan, synkroniser DPS-navn med `NEXT_PUBLIC_USERCENTRICS_*`, generer Resilient Script Loader
+  URL.
+- Verifiser og publiser GTM Web + sGTM (consent signals client, GA4 client, `server_container_url`,
+  consent-triggere).
+- Sett `NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL` og `GOOGLE_BROWSER_EVENT_TRANSPORT=sgtm` i Vercel Production
+  først etter vellykket GTM/sGTM-preview på `utekos.no`.
 - Kjør Supabase-migrasjon `20260609090000_harden_provider_dispatch_observability.sql`.
 - Gjennomfør preview, samtykke-smoke, provider-testverktøy og kontrollert produksjonsdeploy.
 
 ### Drift og rollback
 
-- Varsle på manglende CMP/banner, `/api/tracking-events` feil/latency, eldste køpost, retry-rate, dead letters,
-  eventdekning, manglende Meta-identifikatorer og avvik mellom Shopify- og provider-purchases.
+- Varsle på manglende CMP/banner, `/api/tracking-events` feil/latency, eldste køpost, retry-rate, dead
+  letters, eventdekning, manglende Meta-identifikatorer og avvik mellom Shopify- og provider-purchases.
 - Ved providerfeil: behold ledger og kø, stans aktuell provider-dispatch og replay dead letters med original
   `event_id` etter retting.
 - Ved CMP- eller samtykkefeil: rollback deployment umiddelbart. Fail-closed-gates skal gjøre at valgfrie
@@ -79,8 +84,8 @@ Dato: 2026-06-08
 - `portal.utekos.no` er kanonisk PostHog-ingest. Utekos eier DNS-navnet hos One.com, mens PostHog driver
   mottakstjenesten bak CNAME-en.
 - Den parallelle Vercel-relayen på `/relay-MAhe` er fjernet.
-- Meta, Google og andre annonseplattformer skal integreres som provider-adaptere bak
-  `/api/tracking-events`, ikke via PostHog-proxien.
+- Meta, Google og andre annonseplattformer skal integreres som provider-adaptere bak `/api/tracking-events`,
+  ikke via PostHog-proxien.
 - `cloud.server.utekos.no` er produksjonsdomene for Usercentrics-administrert server-side GTM.
 - Usercentrics CMP v3 med ruleset-ID `9suQr3rGddL3Tb` er autoritativ samtykkekilde. Utekos sin event collector
   leser Usercentrics sin offisielle førsteparts-cookie `ucConsentAllowedDps` server-side og lagrer normalisert

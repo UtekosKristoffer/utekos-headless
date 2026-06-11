@@ -1,0 +1,230 @@
+ <class code="67010800" text="Upper Body Wear/Tops" definition="" active="true">
+        <brick code="10001350" text="Jackets/Blazers/Cardigans/Waistcoats" definition="Includes any products that may be described/observed as clothing that covers the upper part of the body, with or without sleeves, which fastens at the front and is usually worn over other clothing.  Includes all products (e.g. military, emergency service, industrial or other special specifications) which fit the product definition." active="true" definitionExcludes="Excludes products such as Coats worn as outer garments to provide protection from rain, wind and cold, as well as Jackets worn during Sporting activity.">
+          <attType code="20000045" text="Consumer Lifestage" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify the period or stage in the consumer's life during which the product is considered to be suitable." active="true">
+            <attValue code="30000147" text="ADULT" definition="" active="true" />
+            <attValue code="30000164" text="ALL AGES" definition="" active="true" />
+            <attValue code="30006665" text="BABY/INFANT" definition="" active="true" />
+            <attValue code="30000628" text="CHILD" definition="" active="true" />
+            <attValue code="30006666" text="CHILD 1-2 YEARS" definition="" active="true" />
+            <attValue code="30006667" text="CHILD 2 YEARS ONWARDS" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+          </attType>
+          <attType code="20001131" text="Gender" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify which gender the product is specified for." active="true">
+            <attValue code="30003891" text="FEMALE" definition="" active="true" />
+            <attValue code="30004039" text="MALE" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+            <attValue code="30004340" text="UNISEX" definition="" active="true" />
+          </attType>
+          <attType code="20001137" text="If Maternity" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify if the product is intended as maternity wear." active="true">
+            <attValue code="30002960" text="NO" definition="" active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+            <attValue code="30002654" text="YES" definition="" active="true" />
+          </attType>
+          <attType code="20001941" text="Length of Sleeve of Garment" definition="Indicates with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify the length of the sleeve of the garment." active="true">
+            <attValue code="30010303" text="FULL SLEEVE" definition="" active="true" />
+            <attValue code="30010304" text="HALF SLEEVE" definition="" active="true" />
+            <attValue code="30010302" text="SLEEVELESS" definition="" active="true" />
+            <attValue code="30010305" text="THREE QUARTER SLEEVE" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+          </attType>
+          <attType code="20001938" text="Type of Jacket/Blazer/Cardigan/Waistcoat" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify the type of jacket, blazer, cardigan or waistcoat." active="true">
+            <attValue code="30010289" text="BLAZER" definition="" active="true" />
+            <attValue code="30017159" text="BOMBER JACKET" definition="" active="true" />
+            <attValue code="30010290" text="CARDIGAN" definition="" active="true" />
+            <attValue code="30008168" text="COAT" definition="" active="true" />
+            <attValue code="30010288" text="JACKET" definition="" active="true" />
+            <attValue code="30017160" text="PARKA" definition="" active="true" />
+            <attValue code="30017161" text="PONCHO" definition="" active="true" />
+            <attValue code="30017162" text="SPORTS JACKET/COAT" definition="" active="true" />
+            <attValue code="30017164" text="SWEAT JACKET/HOODIE" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+            <attValue code="30010291" text="WAISTCOAT" definition="" active="true" />
+          </attType>
+          <attType code="20000794" text="Type of Material" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify the type of material from which the product is made." active="true">
+            <attValue code="30000720" text="COMBINATION" definition="" active="true" />
+            <attValue code="30003750" text="COTTON FIBRE" definition="" active="true" />
+            <attValue code="30017101" text="DENIM" definition="" active="true" />
+            <attValue code="30007839" text="FUR" definition="" active="true" />
+            <attValue code="30004006" text="LEATHER" definition="Leather is a durable and flexible material created by tanning animal rawhide and skin, often cattle hide." active="true" />
+            <attValue code="30007840" text="LINEN" definition="" active="true" />
+            <attValue code="30006990" text="NYLON" definition="" active="true" />
+            <attValue code="30017202" text="POLYESTER" definition="" active="true" />
+            <attValue code="30009998" text="SILK" definition="" active="true" />
+            <attValue code="30010509" text="SYNTHETIC TEXTILE" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+            <attValue code="30005044" text="WOOL" definition="" active="true" />
+          </attType>
+          <attType code="20001753" text="Type of Filling" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify the type of filling." active="true">
+            <attValue code="30009864" text="COTTON WOOL" definition="" active="true" />
+            <attValue code="30009865" text="DOWN/FEATHER" definition="" active="true" />
+            <attValue code="30004291" text="SYNTHETIC FIBRE" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+          </attType>
+        </brick>
+        <brick code="10001352" text="Shirts/Blouses/Polo Shirts/T-shirts" definition="Includes any products that may be described/observed as clothing worn over the upper body and normally made of a light cloth such as cotton or silk. They may or may not fasten at the front, may or may not have sleeves and come with a variety of necklines including collars, turtlenecks, v-necks and round necks. Includes all products (e.g. military, emergency service, industrial or other special specifications) which fit the product definition." active="true" definitionExcludes="Excludes products such as Cardigans, Pullovers and Sweaters, as well as Tops worn for specific Sports.">
+          <attType code="20003160" text="Clothing Fit" definition="Indicates with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify the fit of the product." active="true">
+            <attValue code="30018898" text="ACTIVE FIT" definition="" active="true" />
+            <attValue code="30018899" text="BAGGY FIT" definition="" active="true" />
+            <attValue code="30018900" text="LOOSE FIT" definition="" active="true" />
+            <attValue code="30018901" text="MODERN FIT" definition="" active="true" />
+            <attValue code="30018902" text="REGULAR FIT" definition="" active="true" />
+            <attValue code="30018903" text="RELAXED FIT" definition="" active="true" />
+            <attValue code="30018904" text="SLIM FIT" definition="" active="true" />
+            <attValue code="30018905" text="TAILORED FIT" definition="" active="true" />
+            <attValue code="30018906" text="TIGHT FIT" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+          </attType>
+          <attType code="20000045" text="Consumer Lifestage" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify the period or stage in the consumer's life during which the product is considered to be suitable." active="true">
+            <attValue code="30000147" text="ADULT" definition="" active="true" />
+            <attValue code="30000164" text="ALL AGES" definition="" active="true" />
+            <attValue code="30006665" text="BABY/INFANT" definition="" active="true" />
+            <attValue code="30000628" text="CHILD" definition="" active="true" />
+            <attValue code="30006666" text="CHILD 1-2 YEARS" definition="" active="true" />
+            <attValue code="30006667" text="CHILD 2 YEARS ONWARDS" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+          </attType>
+          <attType code="20001131" text="Gender" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify which gender the product is specified for." active="true">
+            <attValue code="30003891" text="FEMALE" definition="" active="true" />
+            <attValue code="30004039" text="MALE" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+            <attValue code="30004340" text="UNISEX" definition="" active="true" />
+          </attType>
+          <attType code="20003171" text="If Breast Pocket" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify if the product has a breast pocket." active="true">
+            <attValue code="30002960" text="NO" definition="" active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+            <attValue code="30002654" text="YES" definition="" active="true" />
+          </attType>
+          <attType code="20003161" text="If Corrective" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify if the product is intended to be corrective." active="true">
+            <attValue code="30002960" text="NO" definition="" active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+            <attValue code="30002654" text="YES" definition="" active="true" />
+          </attType>
+          <attType code="20001137" text="If Maternity" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify if the product is intended as maternity wear." active="true">
+            <attValue code="30002960" text="NO" definition="" active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+            <attValue code="30002654" text="YES" definition="" active="true" />
+          </attType>
+          <attType code="20003168" text="If No Iron" definition="Indicates, with reference to the product branding, labeling or packaging, the descriptive term that is used by the product manufacturer to identify if the product is not needed to be ironed after washing." active="true">
+            <attValue code="30002960" text="NO" definition="" active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+            <attValue code="30002654" text="YES" definition="" active="true" />
+          </attType>
+          <attType code="20003061" text="If Seamless" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify if the product is seamless." active="true">
+            <attValue code="30002960" text="NO" definition="" active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+            <attValue code="30002654" text="YES" definition="" active="true" />
+          </attType>
+          <attType code="20003162" text="If Stretch" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify if the product is made of stretch material." active="true">
+            <attValue code="30002960" text="NO" definition="" active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+            <attValue code="30002654" text="YES" definition="" active="true" />
+          </attType>
+          <attType code="20003167" text="If Wide" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify if the product is intended to be wide." active="true">
+            <attValue code="30002960" text="NO" definition="" active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+            <attValue code="30002654" text="YES" definition="" active="true" />
+          </attType>
+          <attType code="20001941" text="Length of Sleeve of Garment" definition="Indicates with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify the length of the sleeve of the garment." active="true">
+            <attValue code="30010303" text="FULL SLEEVE" definition="" active="true" />
+            <attValue code="30010304" text="HALF SLEEVE" definition="" active="true" />
+            <attValue code="30010302" text="SLEEVELESS" definition="" active="true" />
+            <attValue code="30010305" text="THREE QUARTER SLEEVE" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+          </attType>
+          <attType code="20003172" text="Type of Cuff" definition="Indicates with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify the type of cuff." active="true">
+            <attValue code="30018923" text="DOUBLE CUFF" definition="" active="true" />
+            <attValue code="30018924" text="SINGLE CUFF" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+          </attType>
+          <attType code="20000794" text="Type of Material" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify the type of material from which the product is made." active="true">
+            <attValue code="30000720" text="COMBINATION" definition="" active="true" />
+            <attValue code="30003750" text="COTTON FIBRE" definition="" active="true" />
+            <attValue code="30017101" text="DENIM" definition="" active="true" />
+            <attValue code="30007839" text="FUR" definition="" active="true" />
+            <attValue code="30004006" text="LEATHER" definition="Leather is a durable and flexible material created by tanning animal rawhide and skin, often cattle hide." active="true" />
+            <attValue code="30007840" text="LINEN" definition="" active="true" />
+            <attValue code="30009998" text="SILK" definition="" active="true" />
+            <attValue code="30010509" text="SYNTHETIC TEXTILE" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+            <attValue code="30005044" text="WOOL" definition="" active="true" />
+          </attType>
+          <attType code="20001940" text="Type of Shirt/Blouse/Polo Shirt/T-shirt" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify the type of shirt, blouse, polo shirt or t-shirt." active="true">
+            <attValue code="30010299" text="BLOUSE" definition="" active="true" />
+            <attValue code="30010300" text="POLO SHIRT" definition="" active="true" />
+            <attValue code="30010298" text="SHIRT" definition="" active="true" />
+            <attValue code="30010301" text="T-SHIRT" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+          </attType>
+        </brick>
+        <brick code="10001351" text="Sweaters/Pullovers" definition="Includes any products that may be described/observed as clothing worn over the upper part of the body, that do not fasten at the front and are put on by pulling over the over the head. Normally they are made of a warm material such as wool.  Includes all products (e.g. military, emergency service, industrial or other special specifications) which fit the product definition." active="true" definitionExcludes="Excludes products such as Cardigans, T-Shirts, Shirts and Blouses, as well as Sports Sweaters.">
+          <attType code="20000045" text="Consumer Lifestage" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify the period or stage in the consumer's life during which the product is considered to be suitable." active="true">
+            <attValue code="30000147" text="ADULT" definition="" active="true" />
+            <attValue code="30000164" text="ALL AGES" definition="" active="true" />
+            <attValue code="30006665" text="BABY/INFANT" definition="" active="true" />
+            <attValue code="30000628" text="CHILD" definition="" active="true" />
+            <attValue code="30006666" text="CHILD 1-2 YEARS" definition="" active="true" />
+            <attValue code="30006667" text="CHILD 2 YEARS ONWARDS" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+          </attType>
+          <attType code="20001131" text="Gender" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify which gender the product is specified for." active="true">
+            <attValue code="30003891" text="FEMALE" definition="" active="true" />
+            <attValue code="30004039" text="MALE" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+            <attValue code="30004340" text="UNISEX" definition="" active="true" />
+          </attType>
+          <attType code="20003164" text="If Hooded" definition="Indicates with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify whether the product is hooded." active="true">
+            <attValue code="30002960" text="NO" definition="" active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+            <attValue code="30002654" text="YES" definition="" active="true" />
+          </attType>
+          <attType code="20001141" text="If Thermal" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify whether the product is thermal." active="true">
+            <attValue code="30002960" text="NO" definition="" active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+            <attValue code="30002654" text="YES" definition="" active="true" />
+          </attType>
+          <attType code="20001941" text="Length of Sleeve of Garment" definition="Indicates with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify the length of the sleeve of the garment." active="true">
+            <attValue code="30010303" text="FULL SLEEVE" definition="" active="true" />
+            <attValue code="30010304" text="HALF SLEEVE" definition="" active="true" />
+            <attValue code="30010302" text="SLEEVELESS" definition="" active="true" />
+            <attValue code="30010305" text="THREE QUARTER SLEEVE" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+          </attType>
+          <attType code="20000794" text="Type of Material" definition="Indicates, with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify the type of material from which the product is made." active="true">
+            <attValue code="30000720" text="COMBINATION" definition="" active="true" />
+            <attValue code="30003750" text="COTTON FIBRE" definition="" active="true" />
+            <attValue code="30007839" text="FUR" definition="" active="true" />
+            <attValue code="30004006" text="LEATHER" definition="Leather is a durable and flexible material created by tanning animal rawhide and skin, often cattle hide." active="true" />
+            <attValue code="30007840" text="LINEN" definition="" active="true" />
+            <attValue code="30009998" text="SILK" definition="" active="true" />
+            <attValue code="30010509" text="SYNTHETIC TEXTILE" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+            <attValue code="30005044" text="WOOL" definition="" active="true" />
+          </attType>
+          <attType code="20001942" text="Type of Sweater/Pullover" definition="Indicates with reference to the product branding, labelling or packaging, the descriptive term that is used by the product manufacturer to identify the type of sweater or pullover." active="true">
+            <attValue code="30010308" text="JUMPER" definition="" active="true" />
+            <attValue code="30010307" text="PULLOVER" definition="" active="true" />
+            <attValue code="30010306" text="SWEATER" definition="" active="true" />
+            <attValue code="30002515" text="UNCLASSIFIED" definition="This term refers to attributes that belong to a defined category, but whose specific value is not currently included in the list of available values." active="true" />
+            <attValue code="30002518" text="UNIDENTIFIED" definition="This term is used to describe those product attributes that are unidentifiable given existing or available product information." active="true" />
+          </attType>
+        </brick>
+        <brick code="10001361" text="Upper Body Wear/Tops Variety Packs" definition="Includes any products than can be described/observed as two or more distinct Upper Body Wear items or Tops sold together, which exist within the schema belonging to different bricks but to the same class, that is two or more products contained within the same pack which cross bricks within the Upper Body Wear/Tops class.  Includes all products (e.g. military, emergency service, industrial or other special specifications) which fit the product definition.Includes products such as Shirts and Waistcoats sold together. Items that are received free with purchases should be removed from the classification decision-making process." active="true" definitionExcludes="Excludes products such as Shirt and Tie variety packs or Jacket and Trouser variety packs." />
+      </class>
+  

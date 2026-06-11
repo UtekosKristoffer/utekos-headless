@@ -13,7 +13,6 @@ import { MarketingPixels } from '@/components/analytics/MarketingPixels'
 import { PostHogConsentGate } from '@/components/analytics/PostHogConsentGate'
 import { ConsentGatedServices } from '@/components/analytics/ConsentGatedServices'
 import { PostHogClientProvider } from '@/components/providers/PostHogProvider'
-import { GoogleTagManagerConsentGate } from '@/components/analytics/GoogleTagManagerConsentGate'
 
 const ReactQueryDevtools =
   process.env.NODE_ENV === 'development' ?
@@ -46,7 +45,6 @@ export default function Providers({ children, cartId: initialCartId, dehydratedS
           <ReactQueryDevtools initialIsOpen={false} />
         : null}
       </QueryClientProvider>
-      <GoogleTagManagerConsentGate />
       <MarketingPixels />
       <PostHogClientProvider>
         <PostHogConsentGate />

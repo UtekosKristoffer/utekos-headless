@@ -1,4 +1,8 @@
-import { USERCENTRICS_CONSENT_EVENT_NAME, USERCENTRICS_SETTINGS_ID } from './usercentricsConfig'
+import {
+  USERCENTRICS_CONSENT_EVENT_NAME,
+  USERCENTRICS_SETTINGS_ID,
+  USERCENTRICS_SGTM_ORIGIN
+} from './usercentricsConfig'
 
 // Custom CMP styling: Usercentrics Admin → Appearance → Styling → Custom CSS.
 // Source: src/components/cookie-consent/usercentrics.custom.css
@@ -48,6 +52,13 @@ export function GoogleConsentDefaultScript() {
   )
 }
 
+export function UsercentricsConsentSignalsScript() {
+  return (
+    // eslint-disable-next-line @next/next/no-sync-scripts
+    <script src={`${USERCENTRICS_SGTM_ORIGIN}/uc-consent-signals.js`} />
+  )
+}
+
 export function UsercentricsCmpScript() {
   return (
     <>
@@ -67,6 +78,7 @@ export function UsercentricsScript() {
   return (
     <>
       <GoogleConsentDefaultScript />
+      <UsercentricsConsentSignalsScript />
       <UsercentricsCmpScript />
     </>
   )

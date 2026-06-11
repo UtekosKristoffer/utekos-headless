@@ -15,6 +15,8 @@ export const USERCENTRICS_CONSENT_COOKIE_NAME = 'ucConsentAllowedDps'
 export const USERCENTRICS_GOOGLE_ANALYTICS_SERVICE_NAME =
   process.env.NEXT_PUBLIC_USERCENTRICS_GOOGLE_ANALYTICS_SERVICE_NAME || 'Google Analytics'
 
+/** Must match the exact DPS label in Usercentrics Admin and GTM Data Layer Variable names. */
+
 export const USERCENTRICS_GOOGLE_ADS_SERVICE_NAME =
   process.env.NEXT_PUBLIC_USERCENTRICS_GOOGLE_ADS_SERVICE_NAME || 'Google Ads'
 

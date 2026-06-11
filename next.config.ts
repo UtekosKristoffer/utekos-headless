@@ -3,15 +3,9 @@ import { withBotId } from 'botid/next/config'
 import { withSentryConfig } from '@sentry/nextjs'
 
 const STATIC_ASSET_CACHE_CONTROL = 'public, max-age=31536000, immutable'
-const SENTRY_AUTH_TOKEN =
-  process.env.PERFORMANCE_SENTRY_AUTH_TOKEN
-  || process.env.SENTRY_AUTH_TOKEN
-const SENTRY_ORG =
-  process.env.PERFORMANCE_SENTRY_ORG
-  || process.env.SENTRY_ORG
-const SENTRY_PROJECT =
-  process.env.PERFORMANCE_SENTRY_PROJECT
-  || process.env.SENTRY_PROJECT
+const SENTRY_AUTH_TOKEN = process.env.PERFORMANCE_SENTRY_AUTH_TOKEN || process.env.SENTRY_AUTH_TOKEN
+const SENTRY_ORG = process.env.PERFORMANCE_SENTRY_ORG || process.env.SENTRY_ORG
+const SENTRY_PROJECT = process.env.PERFORMANCE_SENTRY_PROJECT || process.env.SENTRY_PROJECT
 
 const staticAssetHeaders = [
   {
@@ -133,11 +127,6 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
-      {
-        source: 'https://kasse.utekos.no/pages/gtin/07090062980030',
-        destination: '/pages/gtin/07090062980030',
-        permanent: true
-      },
       {
         source: '/policies/refund-policy',
         destination: '/frakt-og-retur',

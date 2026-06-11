@@ -1,11 +1,9 @@
-'use client'
-
-import Script from 'next/script'
-
-type GoogleTagManagerLoaderProps = {
-  gtmId: string
-  scriptUrl: string
-}
+import {
+  GOOGLE_TAG_MANAGER_ID,
+  GTM_RESILIENT_SCRIPT_URL,
+  GTM_SGTM_SCRIPT_URL,
+  SHOULD_LOAD_GOOGLE_TAG_MANAGER
+} from '@/lib/tracking/google/googleTagManagerConfig'
 
 function createGoogleTagManagerBootstrapScript(scriptUrl: string): string {
   return `
@@ -22,10 +20,17 @@ function createGoogleTagManagerBootstrapScript(scriptUrl: string): string {
   `
 }
 
-export function GoogleTagManagerLoader({ gtmId, scriptUrl }: GoogleTagManagerLoaderProps) {
+export function GoogleTagManagerScript() {
+  if (!SHOULD_LOAD_GOOGLE_TAG_MANAGER) {
+    return null
+  }
+
+  const scriptUrl = GTM_RESILIENT_SCRIPT_URL || GTM_SGTM_SCRIPT_URL
+
   return (
-    <Script id={`gtm-loader-${gtmId}`} strategy='afterInteractive'>
-      {createGoogleTagManagerBootstrapScript(scriptUrl)}
-    </Script>
+    <script
+      id={`gtm-bootstrap-${GOOGLE_TAG_MANAGER_ID}`}
+      dangerouslySetInnerHTML={{ __html: createGoogleTagManagerBootstrapScript(scriptUrl) }}
+    />
   )
 }

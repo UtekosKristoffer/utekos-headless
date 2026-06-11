@@ -25,3 +25,13 @@ at module load. Dev mode (`npm run dev`) works with Storefront credentials only.
 npm run db:start   # Supabase local stack
 npm run db:reset   # apply migrations
 ```
+
+### Usercentrics sGTM env (production)
+
+See [src/lib/tracking/server-side-tagging.md](src/lib/tracking/server-side-tagging.md). Minimum:
+
+- `NEXT_PUBLIC_USERCENTRICS_SGTM_ORIGIN=https://cloud.server.utekos.no`
+- `NEXT_PUBLIC_GOOGLE_GTM_ID=GTM-5TWMJQFP`
+- `NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL` (from Usercentrics Admin when available)
+- `GOOGLE_BROWSER_EVENT_TRANSPORT=sgtm` (only after GTM/sGTM preview passes on utekos.no)
+- `NEXT_PUBLIC_ENABLE_GTM_IN_DEV=1` for local GTM smoke only
