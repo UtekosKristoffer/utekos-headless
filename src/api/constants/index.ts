@@ -99,7 +99,7 @@ export function getSelectableSizes(
   return config.sizes.filter(size => !hiddenSizes.includes(size))
 }
 
-export const VIDEO_URL = 'https://utekos.no/videos/TensorPix2.mp4'
+export const VIDEO_URL = 'https://cdn.shopify.com/videos/c/o/v/cb8d03ce94c540dd96d2a5d1af745d97.mp4'
 export const VIDEO_THUMBNAIL_URL = 'https://utekos.no/video-poster-bg.webp'
 export const VIDEO_POSTER_URL = 'https://utekos.no/video-poster-bg.webp'
 export const VIDEO_EMBED_URL = 'https://utekos.no/video/tensorpix'

@@ -10,16 +10,19 @@ export function ProductCardHeader({
   colorHexMap,
   selectedOptions,
   onOptionChange,
-  productUrl
+  productUrl,
+  onViewProduct
 }: ProductCardHeaderProps) {
   const colorOption = options.find(option => option.name.toLowerCase() === 'farge')
   const optionsWithoutColor = options.filter(option => option.name.toLowerCase() !== 'farge')
+  const productViewClickProps = onViewProduct ? { onClick: onViewProduct } : {}
 
   return (
     <CardHeader className='grow border-t border-cloud-dancer/10 p-6 pb-4'>
       <div className='mb-4 flex items-start justify-between gap-4'>
         <Link
           href={productUrl}
+          {...productViewClickProps}
           className='min-w-0 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
         >
           <CardTitle className='line-clamp-2 text-balance text-xl font-semibold text-foreground'>

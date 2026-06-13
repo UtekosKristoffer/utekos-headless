@@ -36,7 +36,7 @@ export function FunctionalityPageVideoSection() {
                   <video 
                     src="/videos/utekos-funksjonalitet.mp4" 
                     controls 
-                    className="h-full w-full object-cover"
+                    className="size-full object-cover"
                     poster="/images/video-poster.jpg"
                   />
                 */}

@@ -1,11 +1,12 @@
-import { VIDEO_POSTER_URL, VIDEO_URL } from '@/api/constants'
+import { Suspense } from 'react'
+import { TensorPixVideoCacheWrapper } from '@/app/produkter/(oversikt)/components/TensorPixVideoCacheWrapper'
 
 export default function TensorPixVideoPage() {
   return (
     <main>
-      <video controls playsInline preload='none' poster={VIDEO_POSTER_URL}>
-        <source src={VIDEO_URL} type='video/mp4' />
-      </video>
+      <Suspense fallback={null}>
+        <TensorPixVideoCacheWrapper variant='embed' />
+      </Suspense>
     </main>
   )
 }

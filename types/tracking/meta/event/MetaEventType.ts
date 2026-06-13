@@ -3,6 +3,9 @@
 export type MetaEventType =
   | 'PageView'
   | 'ViewContent'
+  | 'ViewCategory'
+  | 'ViewItemList'
+  | 'SelectItem'
   | 'AddToCart'
   | 'InitiateCheckout'
   | 'Purchase'

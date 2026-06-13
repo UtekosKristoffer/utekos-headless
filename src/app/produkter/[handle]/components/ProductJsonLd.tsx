@@ -2,6 +2,7 @@ import { getProduct } from '@/api/lib/products/getProduct'
 import { reshapeProductWithMetafields } from '@/hooks/useProductWithMetafields'
 import { computeVariantImages } from '@/lib/utils/computeVariantImages'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
+import { getSchemaOrgGtinData } from '@/lib/gtin/getSchemaOrgGtinData'
 import { productReviewBundles } from '@/db/data/reviews/productReviews'
 import { cacheLife, cacheTag } from 'next/cache'
 import type {
@@ -183,6 +184,7 @@ export async function ProductJsonLd({ handle }: Props) {
         const variantPrice = variant.price?.amount ? String(variant.price.amount) : null
         const cleanVariantId = cleanShopifyId(variant.id)
         const originalPrice = variant.compareAtPrice?.amount ? String(variant.compareAtPrice.amount) : null
+        const gtinData = getSchemaOrgGtinData(variant.barcode)
 
         const variantDescription =
           variant.title && variant.title !== 'Default Title' ?
@@ -225,6 +227,7 @@ export async function ProductJsonLd({ handle }: Props) {
             : product.title,
           'brand': commonData.brand,
           'description': variantDescription,
+          ...gtinData,
           ...(variant.sku ? { sku: variant.sku } : {}),
           ...(variantImage ? { image: variantImage } : {}),
           'offers': offer
@@ -237,6 +240,7 @@ export async function ProductJsonLd({ handle }: Props) {
     const cleanVariantId = firstVariant?.id ? cleanShopifyId(firstVariant.id) : undefined
     const originalPrice =
       firstVariant?.compareAtPrice?.amount ? String(firstVariant.compareAtPrice.amount) : null
+    const gtinData = getSchemaOrgGtinData(firstVariant?.barcode)
 
     const shippingDetails = getShippingDetails()
 
@@ -270,6 +274,7 @@ export async function ProductJsonLd({ handle }: Props) {
       '@id': `${productUrl}#product`,
       ...commonData,
       ...reviewMarkup,
+      ...gtinData,
       ...(cleanVariantId ? { productID: cleanVariantId } : {}),
       ...(firstVariant?.sku ? { sku: firstVariant.sku } : {}),
       'url': productUrl,

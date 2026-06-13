@@ -15,20 +15,7 @@ export interface PriceActivityPanelProps {
   limitedStockCount?: number
 }
 
-// Konfigurasjon
 const OFFERS = {
-  'utekos-techdown': {
-    label: 'Vårtilbud',
-    fixedSavings: 200, // Fast sparebeløp
-    originalPrice: null, // null = Ikke vis førpris
-    description: null
-  },
-  'utekos-dun': {
-    label: 'Tilbud',
-    fixedSavings: null, // null = Regn ut basert på originalPrice
-    originalPrice: 3290, // Vis denne førprisen
-    description: null
-  },
   'utekos-mikrofiber': {
     label: 'Tilbud',
     fixedSavings: null,
@@ -91,14 +78,10 @@ export default function PriceActivityPanel({
   let originalPriceToDisplay = 0
 
   if (hasOffer) {
-    // 1. Hvis det er fast sparebeløp (Techdown)
     if (currentOffer.fixedSavings) {
       savingsAmount = currentOffer.fixedSavings
       showBeforePrice = false // Skjuler førpris for techdown
-    }
-    // 2. Hvis det er basert på førpris (Dun, Mikrofiber, Comfyrobe)
-    else if (currentOffer.originalPrice) {
-      // Gjør om nåpris fra tekst til tall
+    } else if (currentOffer.originalPrice) {
       const currentPriceNumber = parseFloat(
         String(priceAmount)
           .replace(/[^0-9,.]/g, '')
@@ -108,7 +91,7 @@ export default function PriceActivityPanel({
       if (!isNaN(currentPriceNumber)) {
         savingsAmount = currentOffer.originalPrice - currentPriceNumber
         originalPriceToDisplay = currentOffer.originalPrice
-        showBeforePrice = true // Viser førpris for disse
+        showBeforePrice = true
       }
     }
   }
@@ -116,21 +99,19 @@ export default function PriceActivityPanel({
   const showSavings = hasOffer && savingsAmount > 0
 
   return (
-    <section aria-label='Pris og tilgjengelighet' className='relative space-y-2 md:space-y-3'>
+    <section aria-label='Pris og tilgjengelighet' className='relative'>
       {showSavings && (
-        <div className='relative z-20 flex flex-wrap items-center gap-3'>
+        <div className='relative z-20 mb-4 flex flex-wrap items-center gap-3'>
           <BrandBadge
-            backgroundColor='var(--havdyp)'
-            textColor='var(--foreground)'
-            className='gap-2 border border-havdyp/40 px-4 py-2 text-ml font-semibold shadow-[0_12px_28px_-22px_rgba(32,28,54,0.72)] sm:px-5 sm:py-2.5'
+            backgroundColor='var(--spring-apricot)'
+            className='gap-2 border border-havdyp/40 px-6 py-2 text-ml text-background font-utekos-text-medium shadow-[0_12px_28px_-22px_rgba(32,28,54,0.72)] sm:px-5 sm:py-2'
           >
             {currentOffer.label}
           </BrandBadge>
           <BrandBadge
-            label={`Spar kr ${Math.round(savingsAmount)}`}
-            backgroundColor='var(--havdyp)'
-            textColor='var(--foreground)'
-            className='border border-havdyp/24 px-46p y-4 text-ml  font-semibold  sm:px-5 sm:py-2.5'
+            label={`Spar ${Math.round(savingsAmount)},-`}
+            backgroundColor='var(--spring-apricot)'
+            className='border border-havdyp/40 px-4 py-2 text-ml text-background font-utekos-text-medium sm:px-5 sm:py-2.5'
           />
         </div>
       )}
@@ -139,35 +120,39 @@ export default function PriceActivityPanel({
         <div className='flex items-baseline gap-3'>
           {showSavings ?
             <>
-              <div className='text-foreground'>
+              <div className='text-yellow-white'>
                 <Price amount={priceAmount} currencyCode={currencyCode} />
               </div>
 
               {showBeforePrice && (
-                <div className='text-lg text-foreground/55 line-through'>
+                <div className='text-lg text-whispy-clouds line-through font-utekos-text-medium'>
                   <Price amount={String(originalPriceToDisplay)} currencyCode={currencyCode} />
                 </div>
               )}
             </>
-          : <div className='text-foreground'>
+          : <div className='text-yellow-white'>
               <Price amount={priceAmount} currencyCode={currencyCode} />
             </div>
           }
         </div>
 
         {showSavings && currentOffer.description && (
-          <p className='mt-3 text-sm text-havdyp/64'>{currentOffer.description}</p>
+          <p className='mt-3 text-sm text-background'>{currentOffer.description}</p>
         )}
 
         {isSpecialEdition && shouldShowLimitedStockNotice && (
-          <div className='relative mt-4 overflow-hidden rounded-[1rem] border border-very-peri/24 bg-very-peri p-4'>
+          <div className='relative mt-4 overflow-hidden rounded-2xl border border-very-peri/24 bg-very-peri p-4'>
             <div className='relative flex items-center gap-3' style={{ zIndex: 10 }}>
               <div className='flex h-10 w-10 items-center justify-center rounded-full border border-havdyp/14 bg-havdyp text-foreground'>
                 <ShieldAlert className='h-5 w-5' aria-hidden='true' />
               </div>
               <div>
-                <p className='font-semibold text-maritme-darkest'>Kun {limitedStockCount} igjen på lager!</p>
-                <p className='text-sm text-havdyp'>Unik utgave - kommer ikke tilbake</p>
+                <p className='font-utekos-text-medium text-background'>
+                  Kun {limitedStockCount} igjen på lager!
+                </p>
+                <p className='text-sm font-utekos-text-medium text-whispy-clouds'>
+                  Unik utgave - kommer ikke tilbake
+                </p>
               </div>
             </div>
             <div
@@ -184,7 +169,7 @@ export default function PriceActivityPanel({
 
       {reviewSummary && (
         <div
-          className='text-sm text-maritime-darkest'
+          className='mt-2 text-sm text-maritime-darkest'
           aria-label={`${reviewSummary.formattedAverage} av 5 basert på ${reviewSummary.count} anmeldelser`}
         >
           <div className='flex flex-wrap items-center gap-x-2 gap-y-1'>
@@ -207,7 +192,7 @@ export default function PriceActivityPanel({
       )}
 
       {activityNode && (
-        <div className='rounded-[1.15rem] border border-havdyp/10 bg-ancient-water/68 px-4 pb-2.5 pt-1.5 shadow-lg shadow-havdyp/8 backdrop-blur-sm'>
+        <div className='mt-5 rounded-[1.15rem] border border-havdyp/10 bg-foreground px-4 pb-2.5 pt-1.5 text-background md:mt-6'>
           {activityNode}
         </div>
       )}

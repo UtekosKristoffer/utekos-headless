@@ -4,6 +4,9 @@ const flexibleObjectSchema = z.record(z.string(), z.unknown())
 const trackingEventNameSchema = z.enum([
   'PageView',
   'ViewContent',
+  'ViewCategory',
+  'ViewItemList',
+  'SelectItem',
   'AddToCart',
   'InitiateCheckout',
   'Purchase',

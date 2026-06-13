@@ -91,7 +91,7 @@ export function EmpathySection() {
 
         <div className='gsap-empathy-image-wrap relative w-full'>
           <div className='relative aspect-4/5 w-full md:aspect-square'>
-            <div className='relative h-full w-full overflow-hidden rounded-sm shadow-2xl shadow-maritime-darkest/20'>
+            <div className='relative size-full overflow-hidden rounded-sm shadow-2xl shadow-maritime-darkest/20'>
               <div className='gsap-empathy-image absolute -inset-y-14 inset-x-0 will-change-transform'>
                 <Image
                   src='https://cdn.shopify.com/s/files/1/0634/2154/6744/files/skreddersdy-varmen-balpanne.jpg?v=1780812470'
@@ -123,7 +123,7 @@ export function EmpathySection() {
             <div
               aria-hidden
               // Rammen bak bildet oppdatert til paletten
-              className='absolute -bottom-6 -right-6 -z-10 hidden h-full w-full rounded-sm border-2 border-maritime-darkest/10 md:block'
+              className='absolute -bottom-6 -right-6 -z-10 hidden size-full rounded-sm border-2 border-maritime-darkest/10 md:block'
             />
           </div>
         </div>

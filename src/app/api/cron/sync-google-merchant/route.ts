@@ -15,7 +15,10 @@ export async function GET(request: NextRequest) {
     const result = await syncCatalogToMerchantCenter({ dryRun: false })
 
     return NextResponse.json(result, {
-      status: result.success ? 200 : 500
+      status:
+        result.status === 'already_running' ? 202
+        : result.success ? 200
+        : 500
     })
   } catch (error) {
     const diagnostic = getMerchantApiDiagnostic(error)

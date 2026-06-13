@@ -6,7 +6,7 @@ import {
 } from '@/components/frontpage/lazy/LazyHeavyClients'
 import { ProductVideoSection } from '@/app/produkter/(oversikt)/components/ProductVideoSection'
 import { HeroSection } from '@/components/frontpage/components/HeroSection/HeroSection'
-import { MomentsSection } from '@/components/frontpage/MomentsSection'
+import { MomentsSection } from '@/components/frontpage/MomentSection/MomentsSection'
 import { CachedPromiseSection } from '@/components/frontpage/components/CachedPromiseSection'
 import { QualitySection } from '@/components/frontpage/QualitySection'
 import { SocialProofSection } from '@/components/frontpage/SocialProofSection'

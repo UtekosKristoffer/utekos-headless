@@ -209,13 +209,6 @@ gjør Utekos unikt:
   over 50%. Perfekt for reise i bobil, båt eller tursekk. Selges separat.
 - **FARGE:** Vargnatt
 
-- **PRODUKT:** Utekos Buff™ (Tilbehør)
-- **HANDLE:** utekos-buff
-- **PRIS:** 249 kr
-- **NØKKELORD:** Mykt og kløfritt tilbehør i akryl. Kan brukes som hals,
-  pannebånd eller lue for ekstra varme.
-- **FARGER:** Fjellblå, Vargnatt
-
 # Størrelsesguide (Filosofi og anbefaling)
 
 - **TechDown™ (Liten, Middels, Stor):** Designet for en mer kroppsnær,

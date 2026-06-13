@@ -20,15 +20,10 @@
 
 import dynamic from 'next/dynamic'
 
-const sectionPlaceholder = (className: string) => (
-  <div className={className} aria-hidden='true' />
-)
+const sectionPlaceholder = (className: string) => <div className={className} aria-hidden='true' />
 
 export const LazyNewProductInStoreNotice = dynamic(
-  () =>
-    import('@/components/frontpage/NewProductInStoreNotice').then(
-      m => m.NewProductInStoreNotice
-    ),
+  () => import('@/components/frontpage/NewProductInStoreNotice').then(m => m.NewProductInStoreNotice),
   {
     ssr: false,
     loading: () => sectionPlaceholder('min-h-[200px]')
@@ -36,8 +31,7 @@ export const LazyNewProductInStoreNotice = dynamic(
 )
 
 export const LazyPromiseSection = dynamic(
-  () =>
-    import('@/components/frontpage/PromiseSection').then(m => m.PromiseSection),
+  () => import('@/components/frontpage/PromiseSection').then(m => m.PromiseSection),
   {
     ssr: false,
     loading: () => sectionPlaceholder('min-h-[600px] md:min-h-[700px]')
@@ -45,10 +39,7 @@ export const LazyPromiseSection = dynamic(
 )
 
 export const LazyNewStandardSection = dynamic(
-  () =>
-    import('@/components/frontpage/NewStandardSection').then(
-      m => m.NewStandardSection
-    ),
+  () => import('@/components/frontpage/NewStandardSection').then(m => m.NewStandardSection),
   {
     ssr: false,
     loading: () => sectionPlaceholder('min-h-[500px]')
@@ -57,7 +48,7 @@ export const LazyNewStandardSection = dynamic(
 
 export const LazyTestimonialConstellation = dynamic(
   () =>
-    import('@/components/frontpage/TestimonialConstellation').then(
+    import('@/components/frontpage/Testimonial/TestimonialConstellation').then(
       m => m.TestimonialConstellation
     ),
   {

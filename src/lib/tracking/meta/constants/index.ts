@@ -8,7 +8,6 @@ export const DOUBLE_QUOTE = String.fromCharCode(34)
 export const SINGLE_QUOTE = String.fromCharCode(39)
 
 export const EXCLUDED_PRODUCT_IDS = [
-  '9227603149048', // Utekos Buff
   '7710325899512' // Utekos Stapper
 ]
 

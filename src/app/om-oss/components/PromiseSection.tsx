@@ -7,7 +7,7 @@ export function PromiseSection() {
   return (
     <section className='relative isolate overflow-hidden bg-background py-24 sm:py-32'>
       <div className='pointer-events-none absolute inset-0 -z-10'>
-        <div className='absolute left-1/2 top-1/2 h-[44rem] w-[44rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--very-peri)_24%,transparent)_0%,transparent_70%)] blur-[120px]' />
+        <div className='absolute left-1/2 top-1/2 h-176 w-176 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--very-peri)_24%,transparent)_0%,transparent_70%)] blur-[120px]' />
         <div className='absolute bottom-0 left-[12%] size-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_18%,transparent)_0%,transparent_72%)] blur-3xl' />
       </div>
 

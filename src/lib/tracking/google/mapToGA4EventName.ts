@@ -6,6 +6,9 @@ export function mapToGA4EventName(metaName: string): string {
     AddToCart: 'add_to_cart',
     InitiateCheckout: 'begin_checkout',
     ViewContent: 'view_item',
+    ViewCategory: 'view_item_list',
+    ViewItemList: 'view_item_list',
+    SelectItem: 'select_item',
     PageView: 'page_view',
     Lead: 'generate_lead'
   }

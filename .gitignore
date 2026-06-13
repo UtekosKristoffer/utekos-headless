@@ -65,10 +65,37 @@ components.json
 .vscode/settings.json
 /vscode/settings.json
 vscode/settings.json
-
+PLAN.md
+PLAN/AGENTS.md
+PLAN/SUMMARY.md
+PLAN/TESTING.md
+/agents.md
+agents.md
+/agents.md/
+/agents.md/skills/
+/agents.md/skills/SKILL.md
+/agents.md/skills/SKILL.md
+*/mcp.json
+.playwright/*
+.playwright-report/
+playwright-report/
+.playwright-mcp/
+playwright-mcp/
+.cursor/*
+docs/*
+.claude/*
+.vscode/*
+.vscode/settings.json
+.vscode/settings.json
+.cursorignore
+CLAUDE.md
+devproxyrc.json
+.devproxyrc.json
 # mcp config (may contain local secrets/tokens)
 mcp.json
 */mcp.json
+knip.json
+tsconfig.tsbuildinfo/
 
 # vscode settings (may contain MCP secrets/tokens)
 .vscode/settings.json
@@ -107,6 +134,8 @@ src/api/lib/cloud-credentials/
 # misc
 .DS_Store
 *.pem
+.hintrc
+
 
 # debug
 npm-debug.log*

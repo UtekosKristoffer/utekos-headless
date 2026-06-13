@@ -46,18 +46,22 @@ export function SmartRealTimeActivity({ baseViewers }: SmartRealTimeActivityProp
   }, [currentViewerCount])
 
   return (
-    <div aria-live='polite' className='flex items-center   gap-2 text-sm -pb-2! text-background/70'>
-      <EyeIcon className='h-4 w-4 text-very-peri' />
+    <div
+      aria-live='polite'
+      className='flex items-center gap-2 text-sm -pb-2! font-utekos-text-medium text-background'
+    >
+      <EyeIcon className='size-4 md:size-6 bg-blue-900 p-1 rounded-full text-foreground' />
       <span
-        // Transition på transform+opacity (GPU-vennlig)
         className={[
-          'font-semibold transform transition-opacity duration-400 ease-out',
+          'font-utekos-text-medium transform transition-opacity duration-400 ease-out',
           isEntering ? 'translate-y-2 opacity-0' : 'translate-y-0 opacity-100'
         ].join(' ')}
       >
         {currentViewerCount}
       </span>
-      <span className='text-sm text-background/90'>andre ser på dette produktet akkurat nå</span>
+      <span className='text-sm font-utekos-text-medium text-background'>
+        andre ser på dette produktet akkurat nå
+      </span>
     </div>
   )
 }

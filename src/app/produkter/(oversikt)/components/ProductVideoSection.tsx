@@ -1,8 +1,8 @@
 import Link from 'next/link'
+import { Suspense } from 'react'
 import { ArrowRight, Sun, Layers } from 'lucide-react'
 import type { Route } from 'next'
-import { VIDEO_URL, VIDEO_POSTER_URL } from '@/api/constants'
-import { ProductVideoPlayer } from './ProductVideoPlayer'
+import { TensorPixVideoCacheWrapper } from './TensorPixVideoCacheWrapper'
 
 export function ProductVideoSection() {
   return (
@@ -13,18 +13,24 @@ export function ProductVideoSection() {
       <div className='container mx-auto px-4 max-w-7xl'>
         <div className='grid grid-cols-1 items-center gap-x-16 gap-y-16 lg:grid-cols-2'>
           <div className='relative mx-auto max-w-sm w-full'>
-            <div className='absolute -inset-4 bg-gradient-to-tr from-ancient-water/10 to-havdyp/30 blur-3xl -z-10 rounded-[2.5rem]' />
+            <div className='absolute -inset-4 bg-linear-to-tr from-ancient-water/10 to-havdyp/30 blur-3xl -z-10 rounded-[2.5rem]' />
 
-            <div className='relative overflow-hidden rounded-[2rem] border border-white/10 bg-havdyp/50 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-xl'>
-              <div className='absolute inset-0 z-10 pointer-events-none rounded-[2rem] shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]' />
-              <ProductVideoPlayer src={VIDEO_URL} poster={VIDEO_POSTER_URL} />
+            <div className='relative overflow-hidden rounded-4xlrder border-white/10 bg-havdyp/50 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-xl'>
+              <div className='absolute inset-0 z-10 pointer-events-none rounded-4xladow-[inset_0_1px_1px_rgba(255,255,255,0.15)]' />
+              <Suspense
+                fallback={
+                  <div className='aspect-9/16 w-full animate-pulse rounded-4xl bg-havdyp/30' aria-hidden />
+                }
+              >
+                <TensorPixVideoCacheWrapper />
+              </Suspense>
             </div>
           </div>
 
           <div className='text-center lg:text-left'>
-            <h2 className='animate-header-item text-[2.5rem] sm:text-[3.5rem] font-medium leading-[0.9] tracking-[-0.01em] text-foreground'>
+            <h2 className='animate-header-item text-[2.5rem] sm:text-[3.5rem] font-medium leading-heading-level-twong-level-two tracking-[-0.01em] text-foreground'>
               <span className='inline-block'>Slutt</span> <span className='inline-block'>å</span>{' '}
-              <span className='relative z-[1] inline-flex items-center justify-center px-2 ml-1 whitespace-nowrap'>
+              <span className='relative z-1nline-flex items-center justify-center px-2 ml-1 whitespace-nowrap'>
                 <span className='absolute inset-0 -z-10 -skew-x-6 rounded-md bg-linear-to-r from-overcast via-havdyp to-overcast opacity-50 blur-[2px]' />
 
                 <span className='absolute inset-0 -z-10 -rotate-1 rounded-lg border border-overcast bg-linear-to-br from-overcast/80 via-overcast to-overcast/80 opacity-40' />
@@ -32,7 +38,7 @@ export function ProductVideoSection() {
               </span>
               <br />
               <span className='inline-block mt-2'>Begynn</span> <span className='inline-block'>å</span>{' '}
-              <span className='relative z-[1] inline-flex items-center justify-center px-2 ml-1 whitespace-nowrap'>
+              <span className='relative z-1nline-flex items-center justify-center px-2 ml-1 whitespace-nowrap'>
                 <span className='absolute inset-0 -z-10 -skew-x-6 rounded-md bg-linear-to-r from-soft-warm via-chocolate-plum to-soft-warm opacity-50 blur-[2px]' />
                 <span className='absolute inset-0 -z-10 -rotate-1 rounded-lg border border-soft-warm/50 bg-linear-to-br from-soft-warm via-chocolate-plum to-soft-warm opacity-40' />
                 <span className='relative z-10 text-soft-warm'>nyte.</span>
@@ -45,30 +51,30 @@ export function ProductVideoSection() {
             </p>
             <div className='animate-header-item'>
               <div className='mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start'>
-                <div className='group flex items-center gap-4 rounded-[1rem] border border-white/10 bg-mountain-view p-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] backdrop-blur-md transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5'>
-                  <div className='flex size-12 shrink-0 items-center justify-center rounded-xl border border-soft-warm/20 bg-linear-to-br from-white/10 to-transparent text-soft-warm shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] transition-transform duration-500 group-hover:scale-110'>
+                <div className='group flex items-center rounded-lg gap-4 text-nowrap border-white/10 bg-mountain-view p-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] backdrop-blur-md transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5'>
+                  <div className='flex size-12 shrink-0 items-center justify-center rounded-xl border border-foreground bg-linear-to-br from-white/10 to-transparent text-foreground shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] transition-transform duration-500 group-hover:scale-110'>
                     <Sun className='h-5 stroke-[1.5]' />
                   </div>
                   <div className='text-left'>
-                    <p className='text-[1rem] font-medium leading-[1.1] tracking-[-0.01em]  text-foreground'>
+                    <p className='text-[1rem] font-utekos-text-medium leading-[1.1] tracking-[-0.01em]  text-foreground'>
                       Garantert varm
                     </p>
-                    <p className='mt-1 text-[0.875rem] font-normal text-foreground tracking-[-0.01em]'>
+                    <p className='mt-1 text-[0.875rem] font-utekos-text-medium text-foreground tracking-[-0.01em]'>
                       Regisser din egen komfort
                     </p>
                   </div>
                 </div>
 
-                <div className='group flex items-center gap-4 rounded-[1rem] border border-havdyp/20 bg-overcast p-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] backdrop-blur-md transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5'>
-                  <div className='flex size-12 shrink-0 items-center justify-center rounded-xl border border-havdyp/20 bg-linear-to-br from-white/50 to-transparent text-havdyp shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)] transition-transform duration-500 group-hover:scale-110'>
+                <div className='group flex items-center gap-4 rounded-lg border-havdyp/20 bg-overcast p-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] backdrop-blur-md transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5'>
+                  <div className='flex size-12 rounded-lgshrink-0 items-center justify-center rounded-xl border border-havdyp/20 bg-linear-to-br from-white/50 to-transparent text-havdyp shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)] transition-transform duration-500 group-hover:scale-110'>
                     <Layers className='size-5 text-havdyp stroke-[1.5]' />
                   </div>
                   <div className='text-left'>
-                    <p className='text-[1rem] font-medium leading-[1.1] tracking-[-0.01em] text-havdyp'>
+                    <p className='text-[1rem] rounded-lg font-utekos-text-medium leading-[1.1] tracking-[-0.01em] text-havdyp'>
                       3-i-1 funksjonalitet
                     </p>
-                    <p className='mt-1 text-[0.875rem] font-normal text-havdyp tracking-[-0.01em]'>
-                      Veksle enkelt mellom ulike moduser
+                    <p className='mt-1 text-[0.875rem] font-utekos-text-medium text-havdyp tracking-[-0.01em]'>
+                      Veksle mellom moduser
                     </p>
                   </div>
                 </div>
@@ -79,7 +85,7 @@ export function ProductVideoSection() {
               <Link
                 href={'/produkter/utekos-mikrofiber' as Route}
                 data-track='ProductVideoSectionShopNowClick'
-                className='group/btn inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-[var(--primary)] px-8 py-4 text-[1rem] font-medium text-havdyp transition-all duration-300 hover:bg-white hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(255,255,255,0.2)] focus:outline-none focus:ring-2 focus:ring-very-peri focus:ring-offset-2 focus:ring-offset-havdyp'
+                className='group/btn px-4 inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-(--primary) py-4 text-[1rem] font-utekos-text-medium text-havdyp transition-all duration-300 hover:bg-white hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(255,255,255,0.2)] focus:outline-none focus:ring-2 focus:ring-very-peri focus:ring-offset-2 focus:ring-offset-havdyp'
               >
                 Opplev Utekos selv
                 <ArrowRight className='ml-2 size-5 transition-transform duration-300 group-hover/btn:translate-x-1' />

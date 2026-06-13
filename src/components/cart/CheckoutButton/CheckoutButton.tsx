@@ -142,7 +142,6 @@ export const CheckoutButton = ({
         event_id: generateEventID()
       })
     }
-
   }
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {

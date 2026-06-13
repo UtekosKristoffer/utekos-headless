@@ -40,7 +40,12 @@ const ProductsPage = async () => {
         <section className='mb-24'>
           <HydrationBoundary state={dehydrate(queryClient)}>
             <Suspense fallback={<ProductGridSkeleton />}>
-              <ProductCarousel />
+              <ProductCarousel
+                trackingEventName='ViewCategory'
+                itemListId='produkter-kolleksjon'
+                itemListName='Utekos produktkolleksjon'
+                contentCategory='Utekos produktkategori'
+              />
             </Suspense>
           </HydrationBoundary>
         </section>

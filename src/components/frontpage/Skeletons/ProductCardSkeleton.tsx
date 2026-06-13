@@ -7,7 +7,7 @@ export function ProductCardSkeleton() {
     <Card className='flex h-full flex-col bg-sidebar-foreground'>
       <CardContent className='relative p-0'>
         <AspectRatio ratio={2 / 3}>
-          <Skeleton className='h-full w-full rounded-t-lg' />
+          <Skeleton className='size-full rounded-t-lg' />
         </AspectRatio>
       </CardContent>
 

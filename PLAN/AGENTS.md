@@ -22,9 +22,9 @@ capi-param-builder-nodejs pakken skal benyttes der den kan, les docs/meta/capi-n
 ---
 
 portal.utekos.no er opprettet som reverse-proxy i posthog - sgtm.utekos.no er historie og skal eliminieres fra
-prosjektet.
-
-Ingen avhengihet til google cloud platform
+prosjektet. Kobler AI direkte til offisiell Google-dokumentasjon, gir oppdaterte og pålitelige kodesvar.
+Google Cloud, Android, Maps og Firebase. Tools: `search_documents`, `get_documents`, og `answer_query` Ingen
+avhengihet til google cloud platform
 
 Ekstra: Etabler datavarehusstrategi: Utform en multi-datavarehusstrategi som isolerer arbeidsbelastninger for
 å forhindre ressurskonflikter. Site Reliability Engineering: Identifiser kritiske scenarioer: Definer hva som

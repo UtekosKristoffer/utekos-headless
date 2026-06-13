@@ -82,7 +82,7 @@ export function FrontpageIceBathingSection() {
           <div className='flex flex-col justify-center order-2 lg:order-1'>
             <div className='gsap-content opacity-0 inline-flex items-center self-start rounded-full bg-mountain-view px-4 py-1.5 mb-8 backdrop-blur-md'>
               <span className='relative flex h-2 w-2 mr-3'>
-                <span className='gsap-badge-pulse absolute inline-flex h-full w-full rounded-full bg-mountain-view opacity-75'></span>
+                <span className='gsap-badge-pulse absolute inline-flex size-full rounded-full bg-mountain-view opacity-75'></span>
                 <span className='relative inline-flex rounded-full bg-cloud-dancer h-2 w-2'></span>
               </span>
               <span className='text-foreground outline-hidden'>Siste sjanse</span>

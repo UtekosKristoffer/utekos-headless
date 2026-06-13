@@ -36,8 +36,8 @@ const {
 export function HeroImage() {
   return (
     <div className='group relative mx-auto mb-7 max-w-6xl overflow-hidden rounded-2xl border border-cloud-dancer/12 bg-havdyp shadow-[0_28px_70px_-44px_color-mix(in_oklab,var(--havdyp)_80%,transparent)] sm:mb-10'>
-      <div className='pointer-events-none absolute inset-0 z-10 bg-linear-to-trom-background/38 via-background/4 to-transparent' />
-      <div className='relative aspect-4/3transition-transform duration-300 motion-safe:group-hover:scale-[1.01] sm:aspect-16/10 lg:aspect-video'>
+      <div className='pointer-events-none absolute inset-0 z-10 bg-linear-to-t from-background/38 via-background/4 to-transparent' />
+      <div className='relative aspect-4/3 transition-transform duration-300 motion-safe:group-hover:scale-[1.01] sm:aspect-16/10 lg:aspect-video'>
         <picture className='block size-full'>
           <source media='(min-width: 1024px)' srcSet={heroSixteenNineSrcSet} />
           <source media='(min-width: 640px)' srcSet={heroSixteenTenSrcSet} />

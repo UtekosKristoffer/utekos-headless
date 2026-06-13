@@ -19,25 +19,18 @@ export function ColorSelector({
     <div className='space-y-3'>
       {values.map(colorValue => {
         const variantForProperties = variants.find(variant => {
-          const hasColor = variant.selectedOptions.some(
-            opt => opt.value === colorValue
-          )
-          const hasSize =
-            !selectedSize
-            || variant.selectedOptions.some(opt => opt.value === selectedSize)
+          const hasColor = variant.selectedOptions.some(opt => opt.value === colorValue)
+          const hasSize = !selectedSize || variant.selectedOptions.some(opt => opt.value === selectedSize)
           return hasColor && hasSize
         })
 
-        const variantProfileRef =
-          variantForProperties?.variantProfile?.reference
+        const variantProfileRef = variantForProperties?.variantProfile?.reference
 
         const colorLabel = variantProfileRef?.colorLabel?.value || colorValue
         const backgroundColor = variantProfileRef?.backgroundColor?.value
         const swatchDotColor = colorHexMap.get(colorValue)
 
-        const isSelected = selectedVariant.selectedOptions.some(
-          opt => opt.value === colorValue
-        )
+        const isSelected = selectedVariant.selectedOptions.some(opt => opt.value === colorValue)
 
         return (
           <OptionButton
@@ -45,9 +38,9 @@ export function ColorSelector({
             isSelected={isSelected}
             onClick={() => onSelect(optionName, colorValue)}
           >
-            <span className='font-semibold'>{colorLabel}</span>
+            <span className='font-utekos-text-medium text-background'>{colorLabel}</span>
             <div
-              className='color-swatch-container'
+              className='color-swatch-container text-background'
               style={{ '--swatch-bg': backgroundColor } as React.CSSProperties}
             >
               <div

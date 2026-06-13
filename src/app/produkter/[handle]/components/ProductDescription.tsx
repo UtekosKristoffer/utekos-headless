@@ -42,7 +42,7 @@ export function ProductDescription({ descriptionHtml: descriptionJson }: Product
         {!isDescriptionExpanded && (
           <div
             aria-hidden='true'
-            className='pointer-events-none text-foreground  font-normal inset-x-0 bottom-0 h-16 w-full bg-gradient-to-t from-background /50to-transparent'
+            className='pointer-events-none text-foreground  font-normal inset-x-0 bottom-0 h-16 w-full bg-linear-to-t from-background /50to-transparent'
           />
         )}
       </div>

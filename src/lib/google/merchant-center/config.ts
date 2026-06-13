@@ -4,9 +4,9 @@ import path from 'node:path'
 import { z } from 'zod'
 
 const EXPECTED_SERVICE_ACCOUNT_EMAIL =
-  'tag-manager-service-account@nifty-structure-490519-u6.iam.gserviceaccount.com'
+  'merchant-center-service@nifty-structure-490519-u6.iam.gserviceaccount.com'
 const LOCAL_DEV_MERCHANT_SERVICE_ACCOUNT_PATH =
-  'src/api/lib/cloud-credentials/tag-manager-credentials.json'
+  'src/api/lib/cloud-credentials/merchant-center-credentials.json'
 
 const merchantEnvSchema = z.object({
   GOOGLE_MERCHANT_ACCOUNT_ID: z.string().regex(/^\d+$/),

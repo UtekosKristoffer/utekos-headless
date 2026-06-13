@@ -86,7 +86,7 @@ export function SectionThreeInOne() {
             <div
               key={step.id}
               className={cn(
-                'absolute inset-0 flex h-full w-full items-center justify-center p-6 transition-all duration-1000 ease-in-out min-[1536px]:p-10',
+                'absolute inset-0 flex size-full items-center justify-center p-6 transition-all duration-1000 ease-in-out min-[1536px]:p-10',
                 activeStep === index ? 'z-10 scale-100 opacity-100' : 'z-0 scale-105 opacity-0'
               )}
             >

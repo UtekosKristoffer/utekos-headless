@@ -18,7 +18,6 @@ export const mainMenu: MenuItem[] = [
         url: '/produkter/utekos-techdown',
         items: []
       },
-      { title: 'Utekos Buff™', url: '/produkter/utekos-buff', items: [] },
       {
         title: 'Utekos Stapper™',
         url: '/produkter/utekos-stapper',

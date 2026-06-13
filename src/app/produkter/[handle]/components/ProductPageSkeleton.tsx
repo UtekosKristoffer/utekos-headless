@@ -22,18 +22,19 @@ export function ProductPageSkeleton() {
 
         <ProductPageGrid>
           <GalleryColumn>
-            <div className='mb-8 text-left'>
-              <Skeleton className='h-10 w-3/4 bg-cloud-dancer/70' />
-              <Skeleton className='mt-3 h-6 w-1/2 bg-cloud-dancer/70' />
-            </div>
             <div className='mx-auto h-fit w-full max-w-lg md:sticky md:top-8'>
               <Skeleton className='aspect-[2/3] w-full rounded-[1.5rem] bg-cloud-dancer/70' />
             </div>
           </GalleryColumn>
 
           <OptionsColumn>
-            <div className='rounded-[1.5rem] border border-cloud-dancer/70 bg-cloud-dancer/72 p-6'>
-              <Skeleton className='h-8 w-28 bg-overcast/80' />
+            <div className='hidden md:block'>
+              <Skeleton className='h-10 w-full bg-cloud-dancer/70' />
+              <Skeleton className='mt-3 h-6 w-2/3 bg-cloud-dancer/70' />
+            </div>
+            <Skeleton className='mt-6 hidden h-8 w-28 bg-cloud-dancer/70 md:block' />
+
+            <div className='rounded-[1.5rem] border border-cloud-dancer/70 bg-cloud-dancer/72 p-6 md:mt-6'>
               <div className='mt-10 space-y-8'>
                 <div className='space-y-2'>
                   <Skeleton className='h-4 w-20 bg-overcast/80' />

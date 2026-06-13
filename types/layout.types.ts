@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 import type { LucideIcon } from 'lucide-react'
 import type { MetaobjectReference } from 'types/product/MetaobjectReference'
 import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
+import type { ProductListTrackingContext } from 'types/tracking/ProductListTrackingContext'
 import type { Image } from 'types/media/Image'
 import type { RootNode } from '@types'
 export type OptionButtonProps = {
@@ -49,7 +50,6 @@ export type AccordionSectionData = {
 export type ProductGalleryProps = {
   title: string
   images: Image[]
-  desktopImages?: Image[]
   imageBackgroundClassName?: string
 }
 export type QuantitySelectorProps = {
@@ -104,6 +104,7 @@ export type ProductCardProps = {
   product: ShopifyProduct
   preferredColor?: string
   colorHexMap: Map<string, string>
+  listTrackingContext?: ProductListTrackingContext
 }
 export type RichTextRendererProps = {
   content: RootNode | null
@@ -122,6 +123,7 @@ export type ProductCardFooterProps = {
   isAvailable: boolean
   isPending: boolean
   onQuickBuy: (e: React.MouseEvent) => void
+  onViewProduct?: () => void
 }
 
 export type ProductCardHeaderProps = {
@@ -131,6 +133,7 @@ export type ProductCardHeaderProps = {
   selectedOptions: Record<string, string>
   onOptionChange: React.Dispatch<React.SetStateAction<Record<string, string>>>
   productUrl: Route
+  onViewProduct?: () => void
 }
 
 export type SpecialOfferCrossSellProps = {

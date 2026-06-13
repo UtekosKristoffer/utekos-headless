@@ -186,11 +186,11 @@ function CarouselContent({ className, ...props }: React.ComponentProps<'div'>) {
           }}
         />
       : null}
-      <div ref={carouselRef} className='overflow-hidden' data-slot='carousel-content'>
+      <div ref={carouselRef} className='h-full overflow-hidden' data-slot='carousel-content'>
         <div
           id={carouselId}
           className={cn(
-            'flex touch-pan-y pinch-zoom',
+            'flex h-full touch-pan-y pinch-zoom',
             orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
             className
           )}

@@ -16,6 +16,10 @@ export type CatalogMetafieldValue = {
   value: string
 }
 
+export type CatalogSyncImage = {
+  url: string
+}
+
 export type CatalogSyncVariant = {
   id: string
   title: string
@@ -45,12 +49,14 @@ export type CatalogSyncProduct = {
   id: string
   title: string
   handle: string
+  productType: string | null
   descriptionHtml: string
   vendor: string | null
   status: string
   featuredImage: {
     url: string
   } | null
+  images: CatalogSyncImage[]
   variants: {
     edges: Array<{
       node: CatalogSyncVariant

@@ -91,7 +91,7 @@ export function PurchaseClientView({
           className='absolute left-4 top-4 z-20 flex animate-in items-center gap-1.5 rounded-sm border border-background/10 bg-cloud-dancer/90 px-2.5 py-1 shadow-sm backdrop-blur-md fade-in slide-in-from-left-2 duration-500'
         >
           <span className='relative flex h-1.5 w-1.5'>
-            <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-slice *:opacity-60' />
+            <span className='absolute inline-flex size-full animate-ping rounded-full bg-orange-slice *:opacity-60' />
             <span className='relative inline-flex h-1.5 w-1.5 rounded-full bg-orange-slice' />
           </span>
           <span className='text-[10px] font-bold uppercase tracking-wider text-background'>
@@ -109,7 +109,7 @@ export function PurchaseClientView({
           <CarouselContent className='ml-0'>
             {currentConfig.images.map((src, i) => (
               <CarouselItem key={src} className='relative h-[50vh] pl-0 lg:h-[70vh]'>
-                <div className='relative h-full w-full overflow-hidden rounded-3xl bg-linear-to-b from-white/70 to-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-background/10'>
+                <div className='relative size-full overflow-hidden rounded-3xl bg-linear-to-b from-white/70 to-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-background/10'>
                   <Image
                     src={src}
                     alt={`${currentConfig.title} – bilde ${i + 1}`}

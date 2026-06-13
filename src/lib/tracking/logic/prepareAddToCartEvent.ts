@@ -23,16 +23,15 @@ export function prepareAddToCartEvent(input: PrepareAddToCartInput): AddToCartEv
   let contentName = product.title
 
   if (additionalLine) {
-    const buffId = cleanShopifyId(additionalLine.variantId) || additionalLine.variantId
+    const additionalVariantId = cleanShopifyId(additionalLine.variantId) || additionalLine.variantId
 
     contents.push({
-      id: buffId,
+      id: additionalVariantId,
       quantity: additionalLine.quantity,
       item_price: 0
     })
-    contentIds.push(buffId)
+    contentIds.push(additionalVariantId)
     totalQty += additionalLine.quantity
-    contentName += ' + Utekos Buff™'
   }
 
   const value = basePrice * quantity

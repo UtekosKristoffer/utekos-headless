@@ -1,27 +1,5 @@
 import { mapToGA4EventName } from './mapToGA4EventName'
-
-function buildItems(eventData: Record<string, unknown>): Array<Record<string, unknown>> | undefined {
-  if (Array.isArray(eventData.contents)) {
-    return eventData.contents.map(content => {
-      const item = content as Record<string, unknown>
-
-      return {
-        item_id: item.id,
-        quantity: item.quantity,
-        price: item.item_price
-      }
-    })
-  }
-
-  if (Array.isArray(eventData.content_ids)) {
-    return eventData.content_ids.map(id => ({
-      item_id: String(id),
-      ...(eventData.content_name ? { item_name: eventData.content_name } : {})
-    }))
-  }
-
-  return undefined
-}
+import { buildGA4EventParams } from './buildGA4EventParams'
 
 export function pushGoogleDataLayerEvent(
   eventName: string,
@@ -32,19 +10,25 @@ export function pushGoogleDataLayerEvent(
     return
   }
 
-  const items = buildItems(eventData)
-  const ecommerce = {
-    ...(eventData.currency ? { currency: eventData.currency } : {}),
-    ...(eventData.value !== undefined ? { value: eventData.value } : {}),
-    ...(eventData.coupon ? { coupon: eventData.coupon } : {}),
-    ...(items ? { items } : {})
-  }
+  const eventParams = buildGA4EventParams(eventData)
+  const hasEcommerceParams =
+    eventParams.items
+    || eventParams.value !== undefined
+    || eventParams.currency
+    || eventParams.coupon
+    || eventParams.item_list_id
+    || eventParams.item_list_name
 
   window.dataLayer = window.dataLayer || []
+  if (hasEcommerceParams) {
+    window.dataLayer.push({ ecommerce: null })
+  }
+
   window.dataLayer.push({
     event: mapToGA4EventName(eventName),
     event_id: eventId,
-    ...(Object.keys(ecommerce).length > 0 ? { ecommerce } : {}),
+    ...eventParams,
+    ...(hasEcommerceParams ? { ecommerce: eventParams } : {}),
     event_data: eventData
   })
 }

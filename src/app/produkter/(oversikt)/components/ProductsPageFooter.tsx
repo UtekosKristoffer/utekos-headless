@@ -7,27 +7,23 @@ export function ProductsPageFooter() {
   return (
     <section>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 md:mt-2'>
-        <Card className='border-neutral-800 bg-overcast'>
+        <Card className='border-neutral-800 bg-foreground'>
           <CardContent className='p-8'>
-            <h3 className='text-xl font-google-sans text-background   font-semibold'>
-              Usikker på størrelsen?
-            </h3>
-            <p className='mt-2     text-background'>
+            <h3 className='text-xl text-background font-utekos-text-medium'>Usikker på størrelsen?</h3>
+            <p className='mt-2 text-background font-utekos-text-medium'>
               Se vår størrelsesguide og finn den perfekte passformen for deg.
             </p>
             <Button asChild className='mt-4'>
               <Link href='/handlehjelp/storrelsesguide' data-track='ProductsPageFooterSizeGuideClick'>
-                Til størrelsesguiden
+                Les størrelsesguiden
               </Link>
             </Button>
           </CardContent>
         </Card>
-        <Card className='border-neutral-800 bg-overcast'>
+        <Card className='border-neutral-800 bg-foreground'>
           <CardContent className='p-8'>
-            <h3 className='text-xl font-google-sans text-background   font-semibold'>
-              Nysgjerrig på teknologien?
-            </h3>
-            <p className='mt-2     text-background'>
+            <h3 className='text-xl text-background font-utekos-text-medium'>Nysgjerrig på teknologien?</h3>
+            <p className='mt-2 text-background font-utekos-text-medium'>
               Les om materialene og designfilosofien som holder deg varm.
             </p>
             <Button asChild className='mt-4'>

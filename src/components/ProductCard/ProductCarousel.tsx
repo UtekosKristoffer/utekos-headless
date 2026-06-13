@@ -7,8 +7,21 @@ import { handles as featuredProductHandles } from '@/db/data/products/product-in
 import { SharedProductCarousel } from './SharedProductCarousel'
 import { getProductWithoutSmallSize } from '@/components/products/getProductWithoutSmallSize'
 import type { ShopifyProduct } from 'types/product'
+import type { MetaEventType } from 'types/tracking/meta/event'
 
-export function ProductCarousel() {
+type ProductCarouselProps = {
+  trackingEventName?: Extract<MetaEventType, 'ViewCategory' | 'ViewItemList'>
+  itemListId?: string
+  itemListName?: string
+  contentCategory?: string
+}
+
+export function ProductCarousel({
+  trackingEventName,
+  itemListId,
+  itemListName,
+  contentCategory
+}: ProductCarouselProps) {
   const { data: products } = useQuery({
     queryKey: ['products', 'featured'],
     queryFn: getFeaturedProducts
@@ -28,5 +41,17 @@ export function ProductCarousel() {
     return null
   }
 
-  return <SharedProductCarousel products={featuredProducts} />
+  const trackingProps = {
+    ...(trackingEventName ? { trackingEventName } : {}),
+    ...(itemListId ? { itemListId } : {}),
+    ...(itemListName ? { itemListName } : {}),
+    ...(contentCategory ? { contentCategory } : {})
+  }
+
+  return (
+    <SharedProductCarousel
+      products={featuredProducts}
+      {...trackingProps}
+    />
+  )
 }

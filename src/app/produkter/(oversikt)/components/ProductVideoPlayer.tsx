@@ -66,7 +66,7 @@ export function ProductVideoPlayer({ src, poster }: ProductVideoPlayerProps) {
         playsInline
         poster={poster}
         preload='auto'
-        className='block h-full w-full object-cover'
+        className='block size-full object-cover'
         aria-label='Produktvideo som viser Utekos i bruk'
       >
         <source src={src} type='video/mp4' />

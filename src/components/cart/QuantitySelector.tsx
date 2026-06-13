@@ -16,17 +16,17 @@ export function QuantitySelector() {
   }
 
   return (
-    <div className='inline-flex h-10 items-center rounded-lg bg-very-peri text-background'>
+    <div className='inline-flex h-10 items-center md:mb-3 rounded-lg bg-havdyp text-foreground'>
       <Button
         type='button'
         variant='ghost'
         size='icon'
-        className='h-full text-background hover:bg-cloud-dancer/35 hover:text-egg-white disabled:text-destructive'
+        className='h-full'
         onClick={() => updateQuantity(quantity - 1)}
         disabled={quantity <= 1}
       >
-        <MinusIcon className='size-4 text-background' />
-        <span className='sr-only'>Reduser antall</span>
+        <MinusIcon className='size-4' />
+        <span className='sr-only font-utekos-text-medium'>Reduser antall</span>
       </Button>
 
       <Input
@@ -35,17 +35,17 @@ export function QuantitySelector() {
         pattern='[0-9]*'
         value={quantity}
         onChange={e => updateQuantity(parseInt(e.target.value, 10))}
-        className='h-full w-10 bg-transparent text-center text-base text-background focus-visible:ring-0'
+        className='h-full w-10 bg-transparent text-center text-base focus-visible:ring-0'
       />
 
       <Button
         type='button'
         variant='ghost'
         size='icon'
-        className='h-full text-background hover:bg-havdyp/35 hover:text-egg-white'
+        className='h-full hover:bg-havdyp/35 hover:text-egg-white'
         onClick={() => updateQuantity(quantity + 1)}
       >
-        <PlusIcon className='size-4 text-background' />
+        <PlusIcon className='size-4' />
         <span className='sr-only'>Øk antall</span>
       </Button>
     </div>

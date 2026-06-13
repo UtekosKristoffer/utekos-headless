@@ -159,10 +159,10 @@ export function HelpChooseCard({ product, index, glowColor }: HelpChooseCardProp
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
-      className='group relative h-full w-full'
+      className='group relative size-full'
       onMouseLeave={() => setIsSelectingSize(false)}
     >
-      <Link href={`/produkter/${product.handle}` as Route} className='block h-full w-full'>
+      <Link href={`/produkter/${product.handle}` as Route} className='block size-full'>
         <div className='relative flex aspect-[2/3] h-full flex-col overflow-hidden rounded-3xl border border-white/5 bg-neutral-900 shadow-2xl transition-transform duration-300 md:hover:-translate-y-1'>
           <div className='absolute inset-0 z-0 bg-neutral-800'>
             <AnimatePresence mode='wait'>

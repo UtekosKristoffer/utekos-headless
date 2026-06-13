@@ -92,6 +92,7 @@ const product = /* GraphQL */ `
           }
           quantityAvailable
           sku
+          barcode
           weight
           metafield(namespace: "bridgeFor", key: "VariantHandler") {
             value

@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import type { CSSProperties } from 'react'
 import UtekosLogo from '@public/icon.png'
 import { iconMap, type IconName } from './initialElements'
 import type { CustomerNetworkViewProps } from 'types/flow.types'
@@ -11,7 +10,7 @@ function IconRenderer({
 }: {
   name: IconName
   className?: string
-  style?: CSSProperties
+  style?: React.CSSProperties
 }) {
   const Icon = iconMap[name]
 
@@ -67,7 +66,7 @@ export function CustomerNetworkView({ nodes, edges, centerNode }: CustomerNetwor
             '--network-accent': accentColor,
             'borderColor': `color-mix(in oklch, ${accentColor} 72%, var(--background) 28%)`,
             'background': `color-mix(in oklch, ${accentColor} 86%, var(--cloud-dancer) 14%)`
-          } as CSSProperties
+          } as React.CSSProperties
 
           return (
             <foreignObject
@@ -105,7 +104,7 @@ export function CustomerNetworkView({ nodes, edges, centerNode }: CustomerNetwor
 
       {centerNode ?
         <div className='pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2'>
-          <div className='relative flex h-28 w-28 items-center justify-center rounded-full border border-ancient-water/40 bg-[var(--background)] shadow-[0_0_0_8px_rgba(255,255,255,0.025),0_24px_54px_-32px_rgba(0,0,0,0.9)]'>
+          <div className='relative flex h-28 w-28 items-center justify-center rounded-full border border-ancient-water/40 bg-(--background) shadow-[0_0_0_8px_rgba(255,255,255,0.025),0_24px_54px_-32px_rgba(0,0,0,0.9)]'>
             <div className='relative h-24 w-24 overflow-hidden rounded-full border-2 border-cloud-dancer/55 bg-cloud-dancer'>
               <Image
                 src={UtekosLogo}

@@ -47,7 +47,7 @@ export function LandingPageProductCarouselPurchaseSection({
         <CarouselContent className='ml-0'>
           {currentConfig.images.map((src, i) => (
             <CarouselItem key={src} className='relative aspect-4/5 pl-0'>
-              <div className='relative h-full w-full overflow-hidden min-[900px]:rounded-2xl min-[900px]:shadow-2xl min-[900px]:ring-1 min-[900px]:ring-maritime-darkest/10'>
+              <div className='relative size-full overflow-hidden min-[900px]:rounded-2xl min-[900px]:shadow-2xl min-[900px]:ring-1 min-[900px]:ring-maritime-darkest/10'>
                 <Image
                   src={src}
                   alt={`${currentConfig.title} – bilde ${i + 1}`}

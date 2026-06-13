@@ -5,10 +5,7 @@ const magazineArticlesValidation = validateMagazineArticles(rawMagazineArticles)
 const magazineArticleLines =
   magazineArticlesValidation.success ?
     magazineArticlesValidation.articles
-      .map(
-        article =>
-          `- [${article.title}](https://utekos.no/magasinet/${article.slug}): ${article.excerpt}`
-      )
+      .map(article => `- [${article.title}](https://utekos.no/magasinet/${article.slug}): ${article.excerpt}`)
       .join('\n')
   : ''
 
@@ -33,7 +30,6 @@ Utekos bygger produkter for utendørs komfort i nordiske forhold. Kjerneidéen e
 - [Utekos Mikrofiber™](https://utekos.no/produkter/utekos-mikrofiber)
 - [Utekos Dun™](https://utekos.no/produkter/utekos-dun)
 - [Comfyrobe™](https://utekos.no/produkter/comfyrobe)
-- [Utekos Buff™](https://utekos.no/produkter/utekos-buff)
 - [Utekos Stapper™](https://utekos.no/produkter/utekos-stapper)
 
 ## Variant matrix
@@ -54,8 +50,6 @@ Utekos bygger produkter for utendørs komfort i nordiske forhold. Kjerneidéen e
 | Comfyrobe™ | comfyrobe | COMFYROBE-FJELLNATT-S | NOK 999 | NOK 1690 | Fjellnatt | S | Unisex | Skalljakke |
 | Comfyrobe™ | comfyrobe | COMFYROBE-FJELLNATT-M | NOK 999 | NOK 1690 | Fjellnatt | M | Unisex | Skalljakke |
 | Comfyrobe™ | comfyrobe | COMFYROBE-FJELLNATT-L | NOK 999 | NOK 1690 | Fjellnatt | L | Unisex | Skalljakke |
-| Utekos Buff™ | utekos-buff | UTEKOS-BUFF-VARGNATT | NOK 249 |  | Vargnatt | OneSize | Unisex | Buff |
-| Utekos Buff™ | utekos-buff | UTEKOS-BUFF-BLUE | NOK 249 |  | Fjellblå | OneSize | Unisex | Buff |
 | Utekos Stapper™ | utekos-stapper | UTEKOS-STAPPER-UNISEX-SVART | NOK 150 |  | Vargnatt | OneSize | Unisex | Kompresjonsbag |
 
 ## Feature, material, and care matrix
@@ -66,7 +60,6 @@ Utekos bygger produkter for utendørs komfort i nordiske forhold. Kjerneidéen e
 | Utekos Mikrofiber™ | Lett og robust modell med enkelt vedlikehold og rask tørk | Ja | YKK® Dual V-Zip™ | DuraLite™ Nylon 20D/380T, hurtigtørkende fiber, DWR Performance Nylon, Taffeta innerfôr | Allsidig bruk, fuktige forhold, reise, enkel pakking | Skånsom vask 30°C, mild såpe, unngå blekemiddel, tøymykner og tørketrommel |
 | Utekos Dun™ | Maksimal varme i forhold til vekt med klassisk dunfølelse | Ja | YKK® Dual V-Zip™ | 650 fillpower dun, DWR Performance Nylon, Taffeta innerfôr | Kalde og tørre kvelder, maksimal varmefølelse, stasjonær hygge | Skånsom vask 30°C, dunsåpe, lukk glidelåser, lav tørketrommel med 2-3 baller til plagget er helt tørt |
 | Comfyrobe™ | Værbeskyttende robe for før og etter aktivitet | Nei | YKK® to-veisglidelås | HydroGuard™ Shell 8000 mm, pustende PU-membran ~3000 g/m²/24 t, SherpaCore™ Thermal Lining 250 GSM, tapede sømmer | Isbading, bading, surfing, svømming, kald ankomst til hytte eller båt | Skånsom vask 40°C, mildt vaskemiddel, unngå blekemiddel, kjemisk rens, stryking og høy tørketrommelvarme; re-impregner ved behov |
-| Utekos Buff™ | Enkelt tilbehør for ekstra varme rundt hals og hode |  |  | Akryl; myk, kløfri og multifunksjonell | Hals, pannebånd eller lue i kaldt vær | Ingen egen vedlikeholdsguide publisert i repoet |
 | Utekos Stapper™ | Kompresjonsbag for mer effektiv pakking |  |  | Slitesterkt kompresjonsstoff, fire justerbare strammestropper, ultralett konstruksjon | Bobil, båt, tursekk, lagring og transport | Ingen egen vedlikeholdsguide publisert i repoet |
 
 ## Product profiles
@@ -94,10 +87,6 @@ Dun™ selges i Vargnatt og Fjellblå, i størrelsene Medium og Large. Vedlikeho
 Comfyrobe™ skiller seg fra de tre Utekos-modellene ved å være en værbeskyttende robe i stedet for et 3-i-1-plagg. Den kombinerer HydroGuard™ Shell med 8000 mm vannsøyle, pustende membran på omtrent 3000 g/m²/24 t, SherpaCore™-fôr og tapede sømmer. Produktet er laget for overgangssoner: før og etter isbad, bading, surfing, svømming og ved ankomst til kalde omgivelser.
 
 Storefronten viser Comfyrobe™ i fargen Fjellnatt og størrelsene S, M og L. Hjelpetekstene beskriver passformen som oversized og laget for å trekkes over andre klær.
-
-### Utekos Buff™
-
-Utekos Buff™ er et enkelt varme-tilbehør i akryl. Publisert produktkunnskap beskriver den som myk, kløfri og multifunksjonell, og relevant som hals, pannebånd eller lue. Storefronten har Vargnatt og Fjellblå i OneSize.
 
 ### Utekos Stapper™
 

@@ -4,8 +4,8 @@ import { SocialProofHeader } from '@/components/frontpage/SocialProofHeader'
 
 export async function SocialProofSection() {
   return (
-    <article className='mx-auto mt-16 sm:mt-24'>
-      <div className='mx-auto max-w-[95%]'>
+    <article className='mx-auto max-w-[90%] mt-16 sm:mt-24'>
+      <div className='mx-auto '>
         <SocialProofHeader />
 
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-2'>

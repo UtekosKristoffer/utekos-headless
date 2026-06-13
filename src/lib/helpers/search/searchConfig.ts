@@ -24,14 +24,7 @@ export const SEARCH_CONFIG: SearchConfigItem[] = [
     id: 'page-produkter',
     title: 'Produkter',
     path: '/produkter',
-    keywords: [
-      'produktside',
-      'produkter',
-      'utekos',
-      'kolleksjoner',
-      'produkt',
-      'utekos'
-    ],
+    keywords: ['produktside', 'produkter', 'utekos', 'kolleksjoner', 'produkt', 'utekos'],
     group: 'pages'
   },
   {
@@ -45,31 +38,14 @@ export const SEARCH_CONFIG: SearchConfigItem[] = [
     id: 'page-gaveguide',
     title: 'Gaveguide',
     path: '/gaveguide',
-    keywords: [
-      'gave',
-      'gaver',
-      'presang',
-      'jul',
-      'bursdag',
-      'gaveguide',
-      'tips',
-      'ideer'
-    ],
+    keywords: ['gave', 'gaver', 'presang', 'jul', 'bursdag', 'gaveguide', 'tips', 'ideer'],
     group: 'pages'
   },
   {
     id: 'page-personvern',
     title: 'Personvern',
     path: '/personvern',
-    keywords: [
-      'personvern',
-      'privacy',
-      'gdpr',
-      'cookies',
-      'data',
-      'policy',
-      'persondata'
-    ],
+    keywords: ['personvern', 'privacy', 'gdpr', 'cookies', 'data', 'policy', 'persondata'],
     group: 'pages'
   },
   {
@@ -83,32 +59,14 @@ export const SEARCH_CONFIG: SearchConfigItem[] = [
     id: 'page-kontakt',
     title: 'Kontaktskjema',
     path: '/kontaktskjema',
-    keywords: [
-      'kontakt',
-      'support',
-      'hjelp',
-      'kundeservice',
-      'spørsmål',
-      'melding',
-      'epost',
-      'mail'
-    ],
+    keywords: ['kontakt', 'support', 'hjelp', 'kundeservice', 'spørsmål', 'melding', 'epost', 'mail'],
     group: 'pages'
   },
   {
     id: 'page-frakt',
     title: 'Frakt og retur',
     path: '/frakt-og-retur',
-    keywords: [
-      'frakt',
-      'retur',
-      'levering',
-      'sending',
-      'returnering',
-      'bytte',
-      'leveringstid',
-      'shipping'
-    ],
+    keywords: ['frakt', 'retur', 'levering', 'sending', 'returnering', 'bytte', 'leveringstid', 'shipping'],
     group: 'pages'
   },
   // ========== PRODUKTER ==========
@@ -134,31 +92,14 @@ export const SEARCH_CONFIG: SearchConfigItem[] = [
     id: 'product-utekos-mikrofiber',
     title: 'Utekos Mikrofiber™',
     path: '/produkter/utekos-mikrofiber',
-    keywords: [
-      'mikrofiber',
-      'syntetisk',
-      'jakke',
-      'lett',
-      'pustende',
-      'isolasjon',
-      'tynn',
-      'kompakt'
-    ],
+    keywords: ['mikrofiber', 'syntetisk', 'jakke', 'lett', 'pustende', 'isolasjon', 'tynn', 'kompakt'],
     group: 'products'
   },
   {
     id: 'product-utekos-techdown',
     title: 'Utekos TechDown™',
     path: '/produkter/utekos-techdown',
-    keywords: [
-      'techdown',
-      'hybrid',
-      'syntetisk dun',
-      'varm',
-      'jakke',
-      'isolert',
-      'mellomting'
-    ],
+    keywords: ['techdown', 'hybrid', 'syntetisk dun', 'varm', 'jakke', 'isolert', 'mellomting'],
     group: 'products'
   },
   {
@@ -169,36 +110,10 @@ export const SEARCH_CONFIG: SearchConfigItem[] = [
     group: 'products'
   },
   {
-    id: 'product-utekos-buff',
-    title: 'Utekos Buff™',
-    path: '/produkter/utekos-buff',
-    keywords: [
-      'buff',
-      'hals',
-      'halsvarmer',
-      'tørklede',
-      'tubeskjerf',
-      'skjerf',
-      'multifunksjonell',
-      'varm'
-    ],
-    group: 'products'
-  },
-  {
     id: 'product-comfyrobe',
     title: 'Comfyrobe™',
     path: '/produkter/comfyrobe',
-    keywords: [
-      'comfyrobe',
-      'morgenkåpe',
-      'kåpe',
-      'badekåpe',
-      'robe',
-      'innendørs',
-      'komfort',
-      'myk',
-      'varm'
-    ],
+    keywords: ['comfyrobe', 'morgenkåpe', 'kåpe', 'badekåpe', 'robe', 'innendørs', 'komfort', 'myk', 'varm'],
     group: 'products'
   },
 
@@ -239,48 +154,21 @@ export const SEARCH_CONFIG: SearchConfigItem[] = [
     id: 'inspiration-batliv',
     title: 'Båtliv',
     path: '/inspirasjon/batliv',
-    keywords: [
-      'båt',
-      'båtliv',
-      'seilbåt',
-      'motorbåt',
-      'sjø',
-      'båttur',
-      'marin',
-      'seiling'
-    ],
+    keywords: ['båt', 'båtliv', 'seilbåt', 'motorbåt', 'sjø', 'båttur', 'marin', 'seiling'],
     group: 'inspiration'
   },
   {
     id: 'inspiration-terrassen',
     title: 'Terrasseliv',
     path: '/inspirasjon/terrassen',
-    keywords: [
-      'terrasse',
-      'uteplass',
-      'balkong',
-      'uterom',
-      'terrasseliv',
-      'hage',
-      'utendørs',
-      'altan'
-    ],
+    keywords: ['terrasse', 'uteplass', 'balkong', 'uterom', 'terrasseliv', 'hage', 'utendørs', 'altan'],
     group: 'inspiration'
   },
   {
     id: 'inspiration-grillkvelden',
     title: 'Grillkvelden',
     path: '/inspirasjon/grillkvelden',
-    keywords: [
-      'grill',
-      'grilling',
-      'barbeque',
-      'bbq',
-      'grillkveld',
-      'utegrill',
-      'sommer',
-      'mat'
-    ],
+    keywords: ['grill', 'grilling', 'barbeque', 'bbq', 'grillkveld', 'utegrill', 'sommer', 'mat'],
     group: 'inspiration'
   },
 

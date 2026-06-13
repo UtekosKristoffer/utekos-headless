@@ -1,12 +1,12 @@
-import type { ReactNode } from 'react'
-
-interface SocialProofHeaderViewProps {
+export function SocialProofHeaderView({
+  id,
+  title,
+  description
+}: {
   id: string
   title: string
-  description: ReactNode
-}
-
-export function SocialProofHeaderView({ id, title, description }: SocialProofHeaderViewProps) {
+  description: React.ReactNode
+}) {
   const words = title.split(' ')
 
   return (

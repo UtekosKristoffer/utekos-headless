@@ -10,6 +10,9 @@ export type MetaEventData = {
   content_category?: string | undefined
   content_ids?: string[] | undefined
   contents?: MetaContentItem[] | undefined
+  item_brand?: string | undefined
+  item_list_id?: string | undefined
+  item_list_name?: string | undefined
   num_items?: number | undefined
   order_id?: string | undefined
   search_string?: string | undefined

@@ -68,7 +68,7 @@ export function HeaderSearch({ className }: { className?: string }) {
             'backdrop-blur-md',
             className
           )}
-          title='Søk på nettsiden...'
+          title='Skreddersy varmen'
           description='Søk etter produkter eller sider..'
         >
           <CommandInput placeholder='Søk på nettsiden..' autoFocus />

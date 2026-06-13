@@ -23,7 +23,7 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
       <article
         id='featured-product'
         ref={ref}
-        className='relative mt-0 w-full mx-auto scroll-mt-32 md:scroll-mt-36'
+        className='relative mt-0 w-full mx-auto scroll-mt-32 md:w-[90%] md:scroll-mt-36'
       >
         <style>
           {`

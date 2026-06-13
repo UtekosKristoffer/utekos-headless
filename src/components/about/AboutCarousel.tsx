@@ -117,7 +117,7 @@ export function AboutCarousel() {
           <BrandBadge
             backgroundColor='var(--very-peri)'
             textColor='var(--background)'
-            className='gsap-header mb-6 gap-2 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--very-peri)_80%,transparent)]'
+            className='gsap-header mb-6 font-utekos-text-medium gap-2 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--very-peri)_80%,transparent)]'
           >
             <Camera className='size-5' strokeWidth={1.6} />
             <span>Livet med Utekos</span>
@@ -125,7 +125,7 @@ export function AboutCarousel() {
 
           <h2 className='gsap-title text-foreground mb-6'>Et glimt av opplevelsen</h2>
 
-          <p className='gsap-desc text-foreground mx-auto utekos-section-lead'>
+          <p className='gsap-desc text-foreground mx-auto utekos-section-lead font-utekos-text-medium'>
             Se hvordan kompromissløs komfort gir liv til dine favorittøyeblikk utendørs.
           </p>
         </div>

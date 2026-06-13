@@ -10,16 +10,14 @@ export default function TechTeaserSection() {
     <section id='tech-teaser' className='mt-12 w-full py-12 md:py-24 overflow-hidden'>
       <div className='container mx-auto max-w-7xl px-4'>
         <div className='relative overflow-hidden rounded-3xl border border-cloud-dancer bg-mountain-view p-8 shadow-2xl md:p-12 lg:p-20'>
-          <div className='pointer-events-none absolute -left-[10%] top-0 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-mountain-view blur-[120px]' />
+          <div className='pointer-events-none absolute left-[-10%] top-0 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-mountain-view blur-[120px]' />
           <div className='pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] translate-y-1/3 rounded-full bg-overcast blur-[100px]' />
 
           <div className='relative grid items-center gap-12 lg:grid-cols-2 lg:gap-20'>
             <div className='space-y-4'>
               <div className='gsap-content inline-flex items-center gap-2 rounded-full border border-mountain-view/20 px-4 py-1.5 backdrop-blur-sm'>
                 <div className='relative flex h-2 w-2'>
-                  {/* Ping-effekt i varmt gull */}
-                  <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-mountain-view opacity-75' />
-                  {/* Statisk punkt i dypere rav/gull */}
+                  <span className='absolute inline-flex size-full animate-pulse rounded-full bg-mountain-view opacity-75' />
                   <span className='relative inline-flex h-2 w-2 rounded-full bg-mountain-view' />
                 </div>
               </div>
@@ -97,9 +95,9 @@ export default function TechTeaserSection() {
               className='gsap-card-visual relative mx-auto w-full max-w-md perspective-1000 lg:h-auto'
             >
               <div data-tilt-layer className='relative w-full aspect-4/5 preserve-3d'>
-                <div className='absolute -right-4 -top-4 h-full w-full rounded-2xl border border-white/5 bg-neutral-900/50 backdrop-blur-sm -z-10 transform translate-z-[-20px]' />
+                <div className='absolute -right-4 -top-4 size-full rounded-2xl border border-white/5 bg-neutral-900/50 backdrop-blur-sm -z-10 transform translate-z-[-20px]' />
 
-                <div className='relative h-full w-full overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-2xl'>
+                <div className='relative size-full overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-2xl'>
                   <Image
                     src={SherpaCoraImg}
                     alt='SherpaCore Technology Layer'
@@ -107,7 +105,7 @@ export default function TechTeaserSection() {
                     className='object-cover opacity-80'
                     sizes='(max-width: 768px) 100vw, 33vw'
                   />
-                  <div className='absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent' />
+                  <div className='absolute inset-0 bg-linear-to-t from-neutral-950 via-neutral-950/20 to-transparent' />
 
                   <div
                     data-inner-parallax
@@ -120,7 +118,7 @@ export default function TechTeaserSection() {
                           Core Tech
                         </span>
                       </div>
-                      <Shield className='h-5 w-5 text-foreground' />
+                      <Shield className='size-5 text-foreground' />
                     </div>
 
                     <div>

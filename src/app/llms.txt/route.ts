@@ -5,10 +5,7 @@ const magazineArticlesValidation = validateMagazineArticles(rawMagazineArticles)
 const magazineArticleLines =
   magazineArticlesValidation.success ?
     magazineArticlesValidation.articles
-      .map(
-        article =>
-          `- [${article.title}](https://utekos.no/magasinet/${article.slug}): ${article.excerpt}`
-      )
+      .map(article => `- [${article.title}](https://utekos.no/magasinet/${article.slug}): ${article.excerpt}`)
       .join('\n')
   : ''
 
@@ -36,7 +33,6 @@ intuitive ventilasjonsytemer, YKK® Dual V-Zip™ og en lengre liste med ytterli
 - [Utekos Mikrofiber™](https://utekos.no/produkter/utekos-mikrofiber): Lett, robust og hurtigtørkende modell for allsidig bruk.
 - [Utekos Dun™](https://utekos.no/produkter/utekos-dun): Dunisolert modell med høy varme i forhold til vekt.
 - [Comfyrobe™](https://utekos.no/produkter/comfyrobe): Værbeskyttende robe for før og etter aktivitet.
-- [Utekos Buff™](https://utekos.no/produkter/utekos-buff): Multifunksjonelt tilbehør for ekstra varme rundt hals og hode.
 - [Utekos Stapper™](https://utekos.no/produkter/utekos-stapper): Kompresjonsbag som reduserer pakkevolumet til Utekos-plagg.
 
 ## Veiviser på nettsiden

@@ -34,7 +34,19 @@ export function ProductViewTracking({
         content_ids: [contentId],
         content_type: 'product',
         content_name: product.title,
-        content_category: category
+        content_category: category,
+        contents: [
+          {
+            id: contentId,
+            quantity: 1,
+            item_price: price,
+            item_name: product.title,
+            item_brand: product.vendor || 'Utekos',
+            item_category: category,
+            item_variant: selectedVariant.title
+          }
+        ],
+        num_items: 1
       },
       { eventID: eventId }
     )
@@ -43,8 +55,10 @@ export function ProductViewTracking({
     pathname,
     product.title,
     product.productType,
+    product.vendor,
     selectedVariant.id,
     selectedVariant.price,
+    selectedVariant.title,
     trackEvent
   ])
 

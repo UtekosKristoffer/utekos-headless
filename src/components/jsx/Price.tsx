@@ -11,7 +11,7 @@ type PriceProps = {
 
 export function Price({ amount, currencyCode }: PriceProps) {
   return (
-    <p className='text-2xl font-semibold'>
+    <p className='text-2xl font-utekos-text-medium'>
       <span className='sr-only'>Pris:</span>
       {formatPrice({ amount, currencyCode })}
     </p>

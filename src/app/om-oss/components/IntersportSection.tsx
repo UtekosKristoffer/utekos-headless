@@ -176,7 +176,7 @@ export function IntersportSection() {
                 className='gsap-content mb-8 gap-3 shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--very-peri)_80%,transparent)]'
               >
                 <span className='relative flex size-3'>
-                  <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-background opacity-35'></span>
+                  <span className='absolute inline-flex size-full animate-ping rounded-full bg-background opacity-35'></span>
                   <span className='relative inline-flex size-3 rounded-full bg-background'></span>
                 </span>
                 <span className='  text-base font-medium   text-background'>Fysisk butikk i Bergen</span>

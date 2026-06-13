@@ -24,3 +24,4 @@ alter table ops.provider_dispatch_attempts enable row level security;
 alter table ops.slo_incidents enable row level security;
 alter table ops.dead_letter_events enable row level security;
 alter table ops.web_vitals enable row level security;
+alter table ops.integration_job_leases enable row level security;

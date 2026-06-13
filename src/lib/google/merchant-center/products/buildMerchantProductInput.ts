@@ -1,4 +1,6 @@
 import type { CatalogSyncProduct, CatalogSyncVariant, CatalogSyncWeightUnit } from '@/lib/catalog-sync/types'
+import { isValidGtin } from '@/lib/gtin/isValidGtin'
+import { normalizeGtin } from '@/lib/gtin/normalizeGtin'
 import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 
 import { getMerchantCenterConfig } from '../config'
@@ -12,7 +14,7 @@ function stripHtml(value: string) {
     .replace(/<[^>]+>/g, ' ')
     .replace(/&nbsp;/gi, ' ')
     .replace(/&amp;/gi, '&')
-    .replace(/&#39;/gi, "'")
+    .replace(/&#39;/gi, '\'')
     .replace(/&quot;/gi, '"')
     .replace(/\s+/g, ' ')
     .trim()
@@ -33,8 +35,8 @@ function buildMerchantProductTitle(product: CatalogSyncProduct, variant: Catalog
     : `${product.title.trim()} - ${variant.title.trim()}`
 }
 
-function buildMerchantProductLink(handle: string) {
-  return `https://utekos.no/produkter/${handle}`
+function buildMerchantProductLink(handle: string, variantId: string) {
+  return `https://utekos.no/produkter/${handle}?variant=${encodeURIComponent(variantId)}`
 }
 
 function buildMerchantBrand(product: CatalogSyncProduct) {
@@ -47,33 +49,6 @@ function buildMerchantBrand(product: CatalogSyncProduct) {
   const ownBrandSignals = [product.title, product.handle].some(signal => /^utekos\b/i.test(signal.trim()))
 
   return ownBrandSignals ? 'Utekos' : undefined
-}
-
-function isValidMerchantGtin(value: string | null | undefined) {
-  const normalizedValue = value?.trim()
-
-  if (!normalizedValue || !/^\d{8}(\d{4})?(\d{1,2})?$/.test(normalizedValue)) {
-    return false
-  }
-
-  if (![8, 12, 13, 14].includes(normalizedValue.length)) {
-    return false
-  }
-
-  const digits = normalizedValue.split('').map(Number)
-  const checkDigit = digits.pop()
-
-  if (checkDigit === undefined) {
-    return false
-  }
-
-  const weightedSum = digits
-    .reverse()
-    .reduce((sum, digit, index) => sum + digit * (index % 2 === 0 ? 3 : 1), 0)
-
-  const expectedCheckDigit = (10 - (weightedSum % 10)) % 10
-
-  return expectedCheckDigit === checkDigit
 }
 
 function shouldUseSkuAsMerchantMpn(sku: string | null | undefined) {
@@ -157,6 +132,36 @@ function buildMerchantShippingWeight(weight: number | null, weightUnit: CatalogS
   }
 }
 
+function getSelectedOptionValue(variant: CatalogSyncVariant, names: string[]) {
+  const normalizedNames = names.map(name => name.toLowerCase())
+  const option = variant.selectedOptions.find(item =>
+    normalizedNames.includes(item.name.trim().toLowerCase())
+  )
+  const value = option?.value.trim()
+
+  return value ? value : undefined
+}
+
+function buildMerchantAdditionalImageLinks(
+  product: CatalogSyncProduct,
+  imageLink: string
+) {
+  const seenUrls = new Set([imageLink])
+  const additionalImageLinks = product.images
+    .map(image => image.url.trim())
+    .filter(url => {
+      if (!url || seenUrls.has(url)) {
+        return false
+      }
+
+      seenUrls.add(url)
+      return true
+    })
+    .slice(0, 10)
+
+  return additionalImageLinks.length > 0 ? additionalImageLinks : undefined
+}
+
 export function buildMerchantProductInput(
   product: CatalogSyncProduct,
   variant: CatalogSyncVariant
@@ -194,20 +199,30 @@ export function buildMerchantProductInput(
     }
   }
 
-  const gtin = isValidMerchantGtin(variant.barcode) ? variant.barcode?.trim() : undefined
+  const normalizedGtin = normalizeGtin(variant.barcode)
+  const gtin = normalizedGtin && isValidGtin(normalizedGtin) ? normalizedGtin : undefined
   const mpn = !gtin && shouldUseSkuAsMerchantMpn(variant.sku) ? variant.sku?.trim() : undefined
   const brand = buildMerchantBrand(product)
   const salePrice = buildMerchantSalePrice(variant, config.defaults.currencyCode)
-  const productLink = buildMerchantProductLink(product.handle)
+  const productLink = buildMerchantProductLink(product.handle, variant.id)
+  const additionalImageLinks = buildMerchantAdditionalImageLinks(product, imageLink)
+  const productType = product.productType?.trim()
+  const color = getSelectedOptionValue(variant, ['color', 'farge'])
+  const size = getSelectedOptionValue(variant, ['size', 'størrelse'])
   const productAttributes: Record<string, unknown> = {
     title: buildMerchantProductTitle(product, variant),
     description: stripHtml(product.descriptionHtml),
     link: productLink,
-    canonicalLink: productLink,
+    canonicalLink: `https://utekos.no/produkter/${product.handle}`,
     imageLink,
+    additionalImageLinks,
     availability: buildMerchantAvailability(variant),
+    condition: 'NEW',
     googleProductCategory: '203',
     itemGroupId,
+    productTypes: productType ? [productType] : undefined,
+    color,
+    size,
     customLabel0: variant.customLabel0?.value?.trim() || undefined,
     customLabel1: variant.customLabel1?.value?.trim() || undefined,
     customLabel2: variant.customLabel2?.value?.trim() || undefined,

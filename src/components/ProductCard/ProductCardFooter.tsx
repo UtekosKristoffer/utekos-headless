@@ -13,14 +13,16 @@ export function ProductCardFooter({
   productUrl,
   isAvailable,
   isPending,
-  onQuickBuy
+  onQuickBuy,
+  onViewProduct
 }: ProductCardFooterProps) {
   const handleQuickBuyClick = (e: React.MouseEvent) => {
     onQuickBuy(e)
   }
 
   const actionBadgeClassName =
-    'size-full min-h-12 min-w-0 border px-3 py-3 text-center text-[clamp(0.75rem,3.3vw,0.875rem)] font-medium leading-[1.12] tracking-normal whitespace-normal transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2'
+    'size-full min-h-12 min-w-0 border px-3 py-3 text-center text-[clamp(0.75rem,3.3vw,0.875rem)] font-utekos-text-medium whitespace-normal transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2'
+  const productViewClickProps = onViewProduct ? { onClick: onViewProduct } : {}
 
   return (
     <CardFooter className='mt-auto flex flex-col gap-4 p-6 pt-0'>
@@ -32,11 +34,12 @@ export function ProductCardFooter({
           asChild
           backgroundColor='var(--cloud-dancer)'
           textColor='var(--background)'
-          className={`${actionBadgeClassName} border-cloud-dancer/20 hover:brightness-95 focus-visible:outline-cloud-dancer`}
+          className={`${actionBadgeClassName} border-cloud-dancer/20 font-utekos-text-medium hover:brightness-95 focus-visible:outline-cloud-dancer`}
         >
           <Link
             href={productUrl}
             data-track='ProductCardFooterViewMoreClick'
+            {...productViewClickProps}
             aria-label='Se produkt'
             className='flex-1 min-w-0'
           >
@@ -48,7 +51,7 @@ export function ProductCardFooter({
             asChild
             backgroundColor='var(--primary)'
             textColor='var(--background)'
-            className={`${actionBadgeClassName} border-primary/35 hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-primary`}
+            className={`${actionBadgeClassName} border-primary/35 font-utekos-text-medium hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-primary`}
           >
             <button
               type='button'

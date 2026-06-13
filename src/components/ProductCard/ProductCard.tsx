@@ -7,6 +7,9 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { CartMutationContext } from '@/lib/context/CartMutationContext'
 import { cartStore } from '@/lib/state/cartStore'
+import { generateEventID } from '@/components/analytics/Meta/generateEventID'
+import { dispatchMetaTrackingEvent } from '@/lib/tracking/meta/dispatchMetaTrackingEvent'
+import { cleanShopifyId } from '@/lib/utils/cleanShopifyId'
 import { formatPrice } from '@/lib/utils/formatPrice'
 import type { ProductCardProps } from '@types'
 import type { Route } from 'next'
@@ -29,7 +32,8 @@ export function ProductCard({
   product,
   colorHexMap,
   isPriority = false,
-  initialOptions
+  initialOptions,
+  listTrackingContext
 }: ExtendedProductCardProps) {
   const [selectedOptions, setSelectedOptions] = useState(
     () => initialOptions ?? getInitialOptionsForProduct(product)
@@ -51,6 +55,45 @@ export function ProductCard({
   const imageUrl = selectedVariant?.image?.url ?? fallbackImage?.url ?? '/placeholder.svg'
   const altText = selectedVariant?.image?.altText ?? fallbackImage?.altText ?? product.title
   const isAvailable = selectedVariant?.availableForSale ?? false
+
+  const trackProductSelect = () => {
+    if (!selectedVariant || !listTrackingContext) {
+      return
+    }
+
+    const contentId = cleanShopifyId(selectedVariant.id) || selectedVariant.id
+    const price = Number(selectedVariant.price.amount)
+
+    void dispatchMetaTrackingEvent({
+      eventName: 'SelectItem',
+      eventId: generateEventID(),
+      eventData: {
+        value: Number.isFinite(price) ? price : undefined,
+        currency: selectedVariant.price.currencyCode,
+        content_name: product.title,
+        content_type: 'product',
+        content_category: product.productType || 'Utekos products',
+        content_ids: [contentId],
+        contents: [
+          {
+            id: contentId,
+            quantity: 1,
+            item_price: Number.isFinite(price) ? price : undefined,
+            item_name: product.title,
+            item_brand: product.vendor || 'Utekos',
+            item_category: product.productType || 'Utekos products',
+            item_variant: selectedVariant.title,
+            item_list_id: listTrackingContext.itemListId,
+            item_list_name: listTrackingContext.itemListName,
+            index: listTrackingContext.index
+          }
+        ],
+        item_list_id: listTrackingContext.itemListId,
+        item_list_name: listTrackingContext.itemListName,
+        num_items: 1
+      }
+    })
+  }
 
   const handleQuickBuy = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -86,6 +129,7 @@ export function ProductCard({
         <Link
           href={productUrl}
           data-track='ProductCardViewMoreClick'
+          onClick={trackProductSelect}
           aria-label={`Se produkt ${product.title}`}
           className='block w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
         >
@@ -127,6 +171,7 @@ export function ProductCard({
         selectedOptions={selectedOptions}
         onOptionChange={setSelectedOptions}
         productUrl={productUrl}
+        onViewProduct={trackProductSelect}
       />
 
       <ProductCardFooter
@@ -135,6 +180,7 @@ export function ProductCard({
         isAvailable={isAvailable}
         isPending={isPending}
         onQuickBuy={handleQuickBuy}
+        onViewProduct={trackProductSelect}
       />
     </Card>
   )

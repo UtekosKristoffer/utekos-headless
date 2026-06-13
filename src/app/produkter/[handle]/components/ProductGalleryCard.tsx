@@ -36,11 +36,16 @@ export default function ProductGalleryCard({
     : 'group relative w-full overflow-hidden rounded-[1.5rem] border border-cloud-dancer/70 bg-cloud-dancer/72 shadow-2xl shadow-havdyp/10 transition-all duration-300 hover:border-very-peri/45'
 
   return (
-    <div className={[enableStickyOnDesktop ? `h-fit md:sticky ${stickyTopClassName}` : '', 'z-10'].join(' ')}>
-      <AnimatedBlock className='will-animate-fade-in-scale' delay='0.12s' threshold={0.2}>
-        <section aria-label={ariaLabel} className='w-full rounded-3xl'>
+    <div
+      className={[
+        enableStickyOnDesktop ? `size-full md:sticky ${stickyTopClassName}` : 'size-full',
+        'z-10'
+      ].join(' ')}
+    >
+      <AnimatedBlock className='size-full will-animate-fade-in-scale' delay='0.12s' threshold={0.2}>
+        <section aria-label={ariaLabel} className='size-full rounded-3xl'>
           {hasIntegratedBackground ?
-            <div className={integratedBackgroundClassName}>{galleryContent}</div>
+            <div className={`${integratedBackgroundClassName} size-full`}>{galleryContent}</div>
           : <div className={defaultBackgroundClassName}>
               <div className='relative'>{galleryContent}</div>
             </div>

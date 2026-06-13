@@ -10,7 +10,7 @@ export interface ProductHeaderProps {
 
 export default function ProductHeader({ productHandle, productTitle, productSubtitle }: ProductHeaderProps) {
   return (
-    <hgroup className='text-foreground text-left md:-mt-4'>
+    <hgroup className='text-foreground text-left md:mb-6'>
       <AnimatedBlock className='will-animate-fade-in-up' delay='0.06s' threshold={0.2}>
         {productHandle === 'utekos-special-edition' && (
           <BrandBadge backgroundColor='bg-havdyp' textColor='text-foreground' className='mb-5 gap-2'>

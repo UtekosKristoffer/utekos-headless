@@ -30,5 +30,12 @@ export function AllProductsCarousel() {
     return null
   }
 
-  return <SharedProductCarousel products={sortedProducts} />
+  return (
+    <SharedProductCarousel
+      products={sortedProducts}
+      itemListId='all-products'
+      itemListName='Alle produkter'
+      contentCategory='Utekos produkter'
+    />
+  )
 }

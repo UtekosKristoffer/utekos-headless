@@ -44,9 +44,9 @@ export function SizeSelector({
               role='radio'
               aria-checked={isSelected}
               data-selected={isSelected}
-              className='flex min-h-12 items-center justify-center rounded-2xl border bg-cloud-dancer/72 px-3 py-3 text-center text-sm text-muted transition-all duration-200 ease-in-out data-[selected=true]:border-havdyp data-[selected=true]:ring-1 data-[selected=true]:ring-havdyp data-[selected=false]:border-havdyp/14 data-[selected=false]:hover:border-very-peri/50 md:w-full md:justify-between md:p-4 md:text-left md:text-base'
+              className='flex min-h-12 items-center justify-center rounded-2xl border bg-foreground px-3 py-3 text-center text-sm text-muted transition-all duration-200 ease-in-out data-[selected=true]:border-havdyp data-[selected=true]:ring-1 data-[selected=true]:ring-havdyp data-[selected=false]:border-havdyp/14 data-[selected=false]:hover:border-very-peri/50 md:w-full md:justify-between md:p-4 md:text-left md:text-base'
             >
-              <span className='font-semibold'>{sizeValue}</span>
+              <span className='font-utekos-text-medium'>{sizeValue}</span>
               <div className='hidden text-right text-xs text-havdyp/62 md:block'>
                 {length && <div>Lengde til hals: {`${length.value} cm`}</div>}
                 {centerToWrist && <div>Senter til ermetupp: {`${centerToWrist.value} cm`}</div>}
@@ -58,14 +58,14 @@ export function SizeSelector({
       </div>
 
       {!handlesToHideGuide.includes(productHandle) && (
-        <div className='flex w-full flex-col rounded-2xl border border-havdyp/14 bg-cloud-dancer/72 p-4 text-left transition-colors'>
+        <div className='flex w-full flex-col rounded-2xl border border-havdyp/14 bg-foreground p-4 text-left transition-colors'>
           <button
             onClick={() => setIsDetailsOpen(!isDetailsOpen)}
-            className='flex w-full justify-between bg-transparent p-0 font-semibold text-background transition-colors hover:text-havdyp'
+            className='flex w-full justify-between  p-0 font-utekos-text-medium text-background transition-colors hover:text-havdyp'
             aria-expanded={isDetailsOpen}
             aria-controls='size-details'
           >
-            <span className='font-semibold'>Usikker på størrelsen?</span>
+            <span className='font-utekos-text-medium'>Usikker på størrelsen?</span>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='16'
@@ -88,11 +88,11 @@ export function SizeSelector({
             ${isDetailsOpen ? 'max-h-40 pt-3 opacity-100' : 'max-h-0 opacity-0'}
           `}
           >
-            <p className='text-xs text-havdyp'>
+            <p className='text-xs text-background'>
               Se dimensjonene på Utekos-modellene{' '}
               <Link
                 href='/handlehjelp/storrelsesguide'
-                className='text-havdyp underline hover:text-havdyp/76'
+                className='text-background underline hover:text-background/76'
               >
                 her
               </Link>
