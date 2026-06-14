@@ -25,7 +25,7 @@ export const MICROFIBER_PRODUCT_GALLERY_IMAGES: Image[] = [
   ),
   productImage(
     'utekos-mikrofiber-kvinne-skogholt-product',
-    'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/Utekos-Mikrofiber-Kvinne-Mann-Skogholt-1080-1350.png',
+    'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/Utekos-Mikrofiber-Front-Kvinne-1600x-1600_2.png',
     'To kvinner med Utekos Mikrofiber på skogholt.',
     1080,
     1350
