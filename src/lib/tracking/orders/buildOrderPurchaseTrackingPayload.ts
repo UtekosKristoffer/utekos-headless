@@ -61,47 +61,58 @@ function getLineItemName(item: OrderPaid['line_items'][number]): string | undefi
 }
 
 function buildMetaContents(order: OrderPaid): MetaContentItem[] {
-  return (order.line_items ?? [])
-    .map(item => {
-      const id = getLineItemId(item)
+  const contents: MetaContentItem[] = []
 
-      if (!id) {
-        return null
-      }
+  for (const item of order.line_items ?? []) {
+    const id = getLineItemId(item)
 
-      return {
-        id,
-        quantity: toFiniteNumber(item.quantity) ?? 1,
-        item_price: toFiniteNumber(item.price),
-        title: getLineItemName(item)
-      }
+    if (!id) {
+      continue
+    }
+
+    const itemPrice = toFiniteNumber(item.price)
+    const title = getLineItemName(item)
+
+    contents.push({
+      id,
+      quantity: toFiniteNumber(item.quantity) ?? 1,
+      ...(itemPrice !== undefined ? { item_price: itemPrice } : {}),
+      ...(title ? { title } : {})
     })
-    .filter((item): item is MetaContentItem => Boolean(item))
+  }
+
+  return contents
 }
 
 function buildGA4Items(order: OrderPaid): GA4OrderItem[] {
-  return (order.line_items ?? [])
-    .map(item => {
-      const itemId =
-        toNonEmptyString(item.sku)
-        ?? toNonEmptyString(item.variant_id)
-        ?? toNonEmptyString(item.product_id)
-      const itemName = getLineItemName(item)
+  const items: GA4OrderItem[] = []
 
-      if (!itemId && !itemName) {
-        return null
-      }
+  for (const item of order.line_items ?? []) {
+    const itemId =
+      toNonEmptyString(item.sku)
+      ?? toNonEmptyString(item.variant_id)
+      ?? toNonEmptyString(item.product_id)
+    const itemName = getLineItemName(item)
 
-      return {
-        ...(itemId ? { item_id: itemId } : {}),
-        ...(itemName ? { item_name: itemName } : {}),
-        ...(toNonEmptyString(item.vendor) ? { item_brand: toNonEmptyString(item.vendor) } : {}),
-        ...(toNonEmptyString(item.variant_title) ? { item_variant: toNonEmptyString(item.variant_title) } : {}),
-        ...(toFiniteNumber(item.price) !== undefined ? { price: toFiniteNumber(item.price) } : {}),
-        quantity: toFiniteNumber(item.quantity) ?? 1
-      }
+    if (!itemId && !itemName) {
+      continue
+    }
+
+    const itemBrand = toNonEmptyString(item.vendor)
+    const itemVariant = toNonEmptyString(item.variant_title)
+    const price = toFiniteNumber(item.price)
+
+    items.push({
+      ...(itemId ? { item_id: itemId } : {}),
+      ...(itemName ? { item_name: itemName } : {}),
+      ...(itemBrand ? { item_brand: itemBrand } : {}),
+      ...(itemVariant ? { item_variant: itemVariant } : {}),
+      ...(price !== undefined ? { price } : {}),
+      quantity: toFiniteNumber(item.quantity) ?? 1
     })
-    .filter((item): item is GA4OrderItem => Boolean(item))
+  }
+
+  return items
 }
 
 function getOrderValue(order: OrderPaid, items: GA4OrderItem[]): number {

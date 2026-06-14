@@ -113,7 +113,11 @@ test('persists purchase payload and logs skip when GA client id is missing', asy
       throw new Error('Google dispatch should not run without GA client id')
     },
     logger: async (level, message, meta) => {
-      logs.push({ level, message, meta })
+      logs.push({
+        level,
+        message,
+        ...(meta ? { meta } : {})
+      })
     }
   })
 
