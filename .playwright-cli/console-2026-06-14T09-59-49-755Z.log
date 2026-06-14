@@ -1,0 +1,4 @@
+[     351ms] [WARNING] WARNING: The Autoblocker script tag must be the first to load for auto-blocking to work correctly. JSHandle@node @ https://web.cmp.usercentrics.eu/modules/autoblocker.js:0
+[     614ms] [ERROR] Usercentrics [WebSdk - initBySetting]: The domain "localhost" has not been added to the allow list for this Usercentrics account. @ https://web.cmp.usercentrics.eu/ui/loader.js:0
+[     705ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://v1.api.service.cmp.usercentrics.eu/latest/autoblocker/9suQr3rGddL3Tb?domain=localhost&language=no:0
+[     705ms] [WARNING] Autoblocker - SETTING_ID_RESOLVED - The response returned an error: "". @ https://web.cmp.usercentrics.eu/modules/autoblocker.js:0

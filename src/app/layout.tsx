@@ -1,6 +1,5 @@
 import '../globals.css'
-import '@fontsource-variable/google-sans/full.css'
-import { utekosText, utekosTextMedium, utekosTitle } from '@/app/fonts/font.config'
+import { googleSans, utekosText, utekosTextMedium, utekosTitle } from '@/app/fonts/font.config'
 import { Suspense } from 'react'
 import { mainMenu } from '@/db/config/menu.config'
 import Footer from '@/components/footer/components/Footer'
@@ -88,7 +87,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='no' className={`${utekosText.variable} ${utekosTextMedium.variable} ${utekosTitle.variable}`}>
+    <html
+      lang='no'
+      className={`${googleSans.variable} ${utekosText.variable} ${utekosTextMedium.variable} ${utekosTitle.variable}`}
+    >
       <head>
         <UsercentricsScript />
         <GoogleTagManagerScript />
