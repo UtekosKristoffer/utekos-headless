@@ -94,6 +94,8 @@ devproxyrc.json
 # mcp config (may contain local secrets/tokens)
 mcp.json
 */mcp.json
+.env.mcp.local
+.vscode/mcp.json
 knip.json
 tsconfig.tsbuildinfo/
 
@@ -113,6 +115,7 @@ tsconfig.tsbuildinfo
 
 # local credentials and service accounts
 src/api/lib/cloud-credentials/
+supabase/md.md
 *.service-account.json
 *oauth-credentials*.json
 *tag-manager-credentials*.json

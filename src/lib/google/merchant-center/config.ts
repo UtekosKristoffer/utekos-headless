@@ -59,7 +59,8 @@ export type MerchantCenterConfig = {
 let cachedConfig: MerchantCenterConfig | null = null
 
 function normalizeOptionalEnvValue(value: string | undefined) {
-  const trimmedValue = value?.trim()
+  const trimmedValue = value?.trim().replace(/^['"]|['"]$/g, '')
+
   return trimmedValue ? trimmedValue : undefined
 }
 
@@ -77,15 +78,35 @@ function readLocalMerchantServiceAccount() {
   return readFileSync(credentialsPath, 'utf8')
 }
 
+function readCredentialFileIfPath(value: string) {
+  const normalizedValue = value.trim()
+
+  if (normalizedValue.startsWith('{')) {
+    return normalizedValue
+  }
+
+  const credentialPath =
+    path.isAbsolute(normalizedValue) ?
+      normalizedValue
+    : path.join(process.cwd(), normalizedValue)
+
+  if (!existsSync(credentialPath)) {
+    return normalizedValue
+  }
+
+  return readFileSync(credentialPath, 'utf8')
+}
+
 function parseMerchantServiceAccount(rawValue?: string) {
-  const candidateValues = [normalizeOptionalEnvValue(rawValue), readLocalMerchantServiceAccount()].filter(
-    (value): value is string => Boolean(value)
-  )
+  const candidateValues = [
+    normalizeOptionalEnvValue(rawValue),
+    readLocalMerchantServiceAccount()
+  ].filter((value): value is string => Boolean(value))
   let lastError: unknown = null
 
   for (const candidateValue of candidateValues) {
     try {
-      const parsedJson = JSON.parse(candidateValue) as unknown
+      const parsedJson = JSON.parse(readCredentialFileIfPath(candidateValue)) as unknown
       const serviceAccount = merchantServiceAccountSchema.parse(parsedJson)
 
       return {

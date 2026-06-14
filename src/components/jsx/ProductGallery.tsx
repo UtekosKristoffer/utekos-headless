@@ -13,7 +13,12 @@ import { CAROUSEL_SSR } from '@/components/ui/carousel-ssr'
 import { cn } from '@/lib/utils/className'
 import type { ProductGalleryProps } from '@types'
 
-export function ProductGallery({ title, images, imageBackgroundClassName = '' }: ProductGalleryProps) {
+export function ProductGallery({
+  title,
+  images,
+  imageBackgroundClassName = '',
+  imageClassName
+}: ProductGalleryProps) {
   if (images.length === 0) {
     return null
   }
@@ -41,7 +46,7 @@ export function ProductGallery({ title, images, imageBackgroundClassName = '' }:
               fill
               sizes='(min-width: 1280px) 58vw, (min-width: 1024px) 54vw, 100vw'
               quality={100}
-              className='pointer-events-none select-none object-cover object-top'
+              className={cn('pointer-events-none select-none object-cover object-top', imageClassName)}
               draggable={false}
               fetchPriority={index === 0 ? 'high' : 'auto'}
               loading={index === 0 ? 'eager' : 'lazy'}

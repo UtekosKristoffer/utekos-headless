@@ -51,6 +51,7 @@ export type ProductGalleryProps = {
   title: string
   images: Image[]
   imageBackgroundClassName?: string
+  imageClassName?: string
 }
 export type QuantitySelectorProps = {
   value: number

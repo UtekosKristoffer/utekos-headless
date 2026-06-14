@@ -23,7 +23,7 @@ export default function ProductGalleryCard({
 }: ProductGalleryCardProps) {
   const integratedBackgroundClassName =
     integratedBackgroundSize === 'compact' ?
-      'group relative mx-auto aspect-square w-full max-w-lg overflow-hidden rounded-[1.5rem] border border-cloud-dancer/22 bg-transparent shadow-2xl shadow-havdyp/18 transition-all duration-300 hover:border-cloud-dancer/42 lg:max-w-xl xl:max-w-2xl'
+      'group relative mx-auto aspect-square w-full max-w-lg overflow-hidden rounded-[1.5rem] bg-transparent transition-all duration-300 lg:max-w-xl xl:max-w-2xl'
     : [
         'group relative overflow-hidden bg-transparent transition-all duration-300 hover:border-cloud-dancer/42',
         flushOnMobile ?

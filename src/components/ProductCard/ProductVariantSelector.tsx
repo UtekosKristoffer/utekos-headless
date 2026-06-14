@@ -17,7 +17,7 @@ export function ProductVariantSelector({
           <div key={option.name}>
             {option.name.toLowerCase() === 'størrelse' ?
               <SizeLabel />
-            : <span className='mb-2 text-sm font-medium uppercase tracking-wide text-white'>
+            : <span className='mb-2 text-sm font-medium uppercase tracking-wide text-foreground!'>
                 {option.name}
               </span>
             }

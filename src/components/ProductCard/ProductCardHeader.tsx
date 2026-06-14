@@ -23,7 +23,7 @@ export function ProductCardHeader({
         <Link
           href={productUrl}
           {...productViewClickProps}
-          className='min-w-0 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+          className='min-w-0 rounded-sm font-utekos-text-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
         >
           <CardTitle className='line-clamp-2 text-balance text-xl font-semibold text-foreground'>
             {title}

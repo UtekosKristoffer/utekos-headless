@@ -4,9 +4,9 @@ import type { Image } from 'types/media'
 export const STAPPER_PRODUCT_GALLERY_IMAGES: Image[] = [
   productImage(
     'utekos-stapper-product',
-    '/utekos-stapper-1600-1600.webp',
+    '/stapper-hvit.png',
     'Utekos Stapper kompresjonsbag.',
-    1600,
-    1600
+    1080,
+    1086
   )
 ]

@@ -43,15 +43,8 @@ const seasons = [
 
 export function HytteSeasonsTabs() {
   return (
-    // Pakker komponenten inn i en section med white-sand for å bryte mot den mørke seksjonen over
-    <section className='w-full bg-white-sand py-24'>
+    <section className='w-full bg-overcast pb-12'>
       <div className='container mx-auto px-4'>
-        {/* Overskrift for seksjonen for å lede kunden inn */}
-        <div className='mx-auto mb-16 max-w-3xl text-center'>
-          <h2 className='font-google-sans text-4xl font-bold tracking-tight text-maritime-darkest md:text-5xl'>
-            En venn gjennom hele året
-          </h2>
-        </div>
 
         <HytteSeasonsAnimator>
           <ul className='mx-auto grid max-w-lg grid-cols-1 gap-6 sm:max-w-xl md:max-w-2xl sm:grid-cols-2 lg:max-w-4xl xl:max-w-6xl'>

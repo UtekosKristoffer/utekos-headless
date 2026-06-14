@@ -87,6 +87,13 @@ export function ProductPageView({
   }))
   const galleryImages = resolveProductGalleryImages(overrideImages, fallbackGalleryImages)
   const useDesktopGrid = galleryImages.length >= 6
+  const useCompactGallery = galleryImages.length === 1
+  const galleryAspectRatio = useCompactGallery ? 1 : 9 / 16
+  const galleryFrameClassName = useCompactGallery ?
+    'mx-auto w-full max-w-lg sm:max-w-xl md:max-w-lg lg:max-w-xl'
+  : 'w-full'
+  const galleryStickyClassName = `${galleryFrameClassName} md:sticky md:top-24 lg:top-20`
+  const galleryImageClassName = useCompactGallery ? 'object-contain object-center p-6 sm:p-8 md:p-10' : undefined
 
   const klarnaPurchaseAmount =
     getKlarnaMinorUnitAmount({
@@ -123,30 +130,40 @@ export function ProductPageView({
 
         <ProductPageGrid>
           <GalleryColumn>
-            <AspectRatio ratio={9 / 16} className='w-full'>
-              <ProductGalleryCard
-                galleryContent={
-                  <div className='relative isolate size-full overflow-hidden rounded-none md:rounded-3xl'>
-                    {useDesktopGrid ?
-                      <>
-                        <div className='hidden size-full md:block'>
-                          <ProductGalleryGrid title={title} images={galleryImages} />
-                        </div>
-                        <div className='size-full md:hidden'>
-                          <ProductGallery title={title} images={galleryImages} />
-                        </div>
-                      </>
-                    : <ProductGallery title={title} images={galleryImages} />}
-                  </div>
-                }
-                hasIntegratedBackground
-                integratedBackgroundSize='wide'
-                flushOnMobile
-                enableStickyOnDesktop
-                stickyTopClassName='md:top-32 md:mt-4 lg:top-28 lg:mt-6'
-                ariaLabel='Produktgalleri'
-              />
-            </AspectRatio>
+            <div className={galleryStickyClassName}>
+              <AspectRatio ratio={galleryAspectRatio} className='w-full'>
+                <ProductGalleryCard
+                  galleryContent={
+                    <div className='relative isolate size-full overflow-hidden rounded-none md:rounded-3xl'>
+                      {useDesktopGrid ?
+                        <>
+                          <div className='hidden size-full md:block'>
+                            <ProductGalleryGrid title={title} images={galleryImages} />
+                          </div>
+                          <div className='size-full md:hidden'>
+                            <ProductGallery title={title} images={galleryImages} />
+                          </div>
+                        </>
+                      : <ProductGallery
+                          title={title}
+                          images={galleryImages}
+                          {...(useCompactGallery
+                            ? {
+                                imageBackgroundClassName: 'bg-transparent',
+                                imageClassName: galleryImageClassName as string
+                              }
+                            : {})}
+                        />}
+                    </div>
+                  }
+                  hasIntegratedBackground
+                  integratedBackgroundSize={useCompactGallery ? 'compact' : 'wide'}
+                  flushOnMobile={!useCompactGallery}
+                  enableStickyOnDesktop={false}
+                  ariaLabel='Produktgalleri'
+                />
+              </AspectRatio>
+            </div>
             <AnimatedBlock className='will-animate-fade-in-up mt-6 md:hidden' delay='0s' threshold={0.2}>
               <ProductHeader
                 productHandle={productData.handle}

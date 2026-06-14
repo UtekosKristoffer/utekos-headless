@@ -7,6 +7,8 @@ const MERCHANT_REGISTER_GCP_METHOD_URL =
   'https://developers.google.com/merchant/api/reference/rest/accounts_v1/accounts.developerRegistration/registerGcp'
 const MERCHANT_VERIFY_API_ACCESS_URL =
   'https://developers.google.com/merchant/api/guides/accounts/verify-api-access'
+const GOOGLE_SERVICE_USAGE_CONSUMER_ROLE =
+  'roles/serviceusage.serviceUsageConsumer'
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null
@@ -76,6 +78,27 @@ export function getMerchantApiDiagnostic(error: unknown) {
           'Run the registration call with a human Google account that has Admin access in Merchant Center.',
           'Use a human developer email in the registerGcp request body, not a service account email.',
           'Keep the service account added as a Merchant Center user for runtime API access after registration.'
+        ]
+      }
+    }
+  }
+
+  if (code === 'USER_PROJECT_DENIED') {
+    return {
+      code,
+      message: error.message,
+      status: error.status,
+      responseBody: error.responseBody,
+      remediation: {
+        kind: 'quota_project_permission_required',
+        merchantAccountId: config.accountId,
+        quotaProject: config.quotaProject,
+        serviceAccountEmail: config.serviceAccount.clientEmail,
+        requiredRole: GOOGLE_SERVICE_USAGE_CONSUMER_ROLE,
+        steps: [
+          `Grant ${GOOGLE_SERVICE_USAGE_CONSUMER_ROLE} on ${config.quotaProject} to ${config.serviceAccount.clientEmail}.`,
+          'Retry the Merchant API request after IAM propagation.',
+          'If the next error is GCP_NOT_REGISTERED, register the Google Cloud project in Merchant Center developer registration.'
         ]
       }
     }

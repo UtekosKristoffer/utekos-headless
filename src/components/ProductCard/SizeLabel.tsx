@@ -12,10 +12,10 @@ export function SizeLabel({ className = '' }: SizeLabelProps) {
         href='/handlehjelp/storrelsesguide'
         target='_blank'
         rel='noopener noreferrer'
-        className={`inline-flex items-center gap-1 text-sm uppercase tracking-wide font-utekos-text-medium text-background hover:text-button transition-colors ${className}`}
+        className={`inline-flex items-center gap-1 text-sm text-foreground uppercase tracking-wide font-utekos-text-medium hover:transition-colors ${className}`}
       >
         STØRRELSE
-        <ExternalLink className='h-3 w-3 text-button' />
+        <ExternalLink className='size-3 font-utekos-text-medium text-button' />
       </HoverCardTrigger>
       <HoverCardContent className='w-60 bg-foreground border border-background' side='top' align='start'>
         <div className='flex items-start space-x-3'>

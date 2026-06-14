@@ -32,6 +32,20 @@ See [src/lib/tracking/server-side-tagging.md](src/lib/tracking/server-side-taggi
 
 - `NEXT_PUBLIC_USERCENTRICS_SGTM_ORIGIN=https://cloud.server.utekos.no`
 - `NEXT_PUBLIC_GOOGLE_GTM_ID=GTM-5TWMJQFP`
-- Resilient GTM script URL is defaulted in `googleTagManagerConfig.ts`; override with `NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL` only if regenerated in Usercentrics Admin
+- Resilient GTM script URL is defaulted in `googleTagManagerConfig.ts`; override with
+  `NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL` only if regenerated in Usercentrics Admin
 - `GOOGLE_BROWSER_EVENT_TRANSPORT=sgtm` (only after GTM/sGTM preview passes on utekos.no)
 - `NEXT_PUBLIC_ENABLE_GTM_IN_DEV=1` for local GTM smoke only
+
+### Local MCP and secrets
+
+MCP servers are generated from committed templates — not hand-edited in `mcp.json` or `.vscode/settings.json`.
+
+```bash
+cp .env.mcp.example .env.mcp.local   # first-time setup
+npm run mcp:build                    # writes mcp.json + .vscode/mcp.json
+npm run mcp:doctor                   # validate env + credential files
+```
+
+See [docs/local-secrets.md](docs/local-secrets.md) for the full layering (`.env.local` vs `.env.mcp.local` vs
+`src/api/lib/cloud-credentials/`).

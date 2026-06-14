@@ -134,7 +134,7 @@ export function ProductCard({
           className='block w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
         >
           <BrandBadge
-            label='UNISEX'
+            label='Unisex'
             backgroundColor='var(--very-peri)'
             textColor='var(--background)'
             className='absolute left-4 top-4 z-10 border border-very-peri/24 px-3 py-1 text-xs font-medium tracking-wide shadow-[0_12px_28px_-22px_rgba(32,28,54,0.58)]'

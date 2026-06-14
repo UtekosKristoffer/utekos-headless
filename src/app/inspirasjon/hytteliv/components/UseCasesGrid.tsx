@@ -59,7 +59,7 @@ const useCaseCardThemes = [
 export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
   return (
     // Byttet fra grå/overcast til den lyse, naturlige white-sand.
-    <section id='bruksomrader' className='bg-white-sand py-24'>
+    <section id='bruksomrader' className='bg-overcast py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl text-center md:max-w-3xl lg:max-w-4xl'>
           <h2 className='text-4xl font-bold tracking-tight text-maritime-darkest md:text-6xl'>

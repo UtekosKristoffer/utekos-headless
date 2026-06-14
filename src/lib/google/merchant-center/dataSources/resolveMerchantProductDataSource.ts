@@ -40,12 +40,36 @@ function matchesDefaultTargeting(dataSource: MerchantDataSource) {
 export async function resolveMerchantProductDataSource() {
   const config = getMerchantCenterConfig()
   const dataSources = await listMerchantDataSources()
+  const matchedDataSource = dataSources.find(
+    dataSource =>
+      isEligiblePrimaryApiDataSource(dataSource) &&
+      dataSource.displayName === config.primaryDataSourceDisplayName &&
+      matchesDefaultTargeting(dataSource)
+  )
 
   if (config.dataSourceId) {
     const explicitName = `${config.accountName}/dataSources/${config.dataSourceId}`
     const explicitDataSource = dataSources.find(
       dataSource => dataSource.name === explicitName
     )
+    const explicitDataSourceIsCanonical = Boolean(
+      explicitDataSource &&
+        isEligiblePrimaryApiDataSource(explicitDataSource) &&
+        explicitDataSource.displayName === config.primaryDataSourceDisplayName &&
+        matchesDefaultTargeting(explicitDataSource)
+    )
+
+    if (explicitDataSourceIsCanonical && explicitDataSource) {
+      return explicitDataSource
+    }
+
+    if (matchedDataSource) {
+      console.warn(
+        `[Merchant Center] Configured data source ${explicitName} is not the canonical API primary source for account ${config.accountId}; using discovered source ${matchedDataSource.name}.`
+      )
+
+      return matchedDataSource
+    }
 
     if (!explicitDataSource) {
       throw new Error(
@@ -59,15 +83,16 @@ export async function resolveMerchantProductDataSource() {
       )
     }
 
-    return explicitDataSource
-  }
+    if (!matchesDefaultTargeting(explicitDataSource)) {
+      throw new Error(
+        `Configured Merchant data source ${explicitName} does not match ${MERCHANT_CENTER_DEFAULTS.contentLanguage}/${MERCHANT_CENTER_DEFAULTS.feedLabel}/${MERCHANT_CENTER_DEFAULTS.countryCode}.`
+      )
+    }
 
-  const matchedDataSource = dataSources.find(
-    dataSource =>
-      isEligiblePrimaryApiDataSource(dataSource) &&
-      dataSource.displayName === config.primaryDataSourceDisplayName &&
-      matchesDefaultTargeting(dataSource)
-  )
+    throw new Error(
+      `Configured Merchant data source ${explicitName} is not named "${config.primaryDataSourceDisplayName}".`
+    )
+  }
 
   if (!matchedDataSource) {
     throw new Error(
