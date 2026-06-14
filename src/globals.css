@@ -387,7 +387,7 @@
   --muted-foreground: oklch(0.78 0.006 88.64);
   --foreground: oklch(0.9493 0.007 88.64);
   --muted: oklch(0.2684 0.0366 279.42);
-  --font-utkos-text: var(--font-utekos-text);
+  --font-utekos-text: var(--font-utekos-text);
   --font-utekos-text-medium: var(--font-utekos-text-medium);
   --font-utekos-title: var(--font-utekos-title);
   --radius-sm: calc(var(--radius) - 4px);
