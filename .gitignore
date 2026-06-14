@@ -92,6 +92,15 @@ CLAUDE.md
 devproxyrc.json
 .devproxyrc.json
 # mcp config (may contain local secrets/tokens)
+.codex/
+.devcontainer/
+.dockerignore
+.env.mcp.example
+.env.tunnel.example
+config/mcp/
+public-scan-result.md
+scripts/mcp/
+scripts/public/scan-unused-assets.ts
 mcp.json
 */mcp.json
 .env.mcp.local

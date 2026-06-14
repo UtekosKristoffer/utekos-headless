@@ -5,8 +5,6 @@ import { z } from 'zod'
 
 const EXPECTED_SERVICE_ACCOUNT_EMAIL =
   'merchant-center-service@nifty-structure-490519-u6.iam.gserviceaccount.com'
-const LOCAL_DEV_MERCHANT_SERVICE_ACCOUNT_PATH =
-  'src/api/lib/cloud-credentials/merchant-center-credentials.json'
 
 const merchantEnvSchema = z.object({
   GOOGLE_MERCHANT_ACCOUNT_ID: z.string().regex(/^\d+$/),
@@ -69,7 +67,14 @@ function readLocalMerchantServiceAccount() {
     return undefined
   }
 
-  const credentialsPath = path.join(process.cwd(), LOCAL_DEV_MERCHANT_SERVICE_ACCOUNT_PATH)
+  const credentialsPath = path.join(
+    process.cwd(),
+    'src',
+    'api',
+    'lib',
+    'cloud-credentials',
+    'merchant-center-credentials.json'
+  )
 
   if (!existsSync(credentialsPath)) {
     return undefined
@@ -81,7 +86,7 @@ function readLocalMerchantServiceAccount() {
 function readCredentialFileIfPath(value: string) {
   const normalizedValue = value.trim()
 
-  if (normalizedValue.startsWith('{')) {
+  if (normalizedValue.startsWith('{') || process.env.NODE_ENV === 'production') {
     return normalizedValue
   }
 

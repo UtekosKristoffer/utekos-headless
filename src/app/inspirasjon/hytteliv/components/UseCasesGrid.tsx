@@ -113,8 +113,6 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                       >
                         <useCase.icon className='size-6' />
                       </div>
-
-                      {/* Temperatur-badgen (Eksklusiv mørk stil) */}
                       <p
                         className='rounded-full px-3 py-1 text-xs font-semibold tracking-wide shadow-sm'
                         style={{
