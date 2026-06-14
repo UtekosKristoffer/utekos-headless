@@ -1510,18 +1510,7 @@
   @apply data-[selected=true]:border-border data-[selected=true]:bg-primary/10 data-[selected=true]:font-medium data-[selected=true]:text-white;
 }
 
-/*
- * Klarna On-site Messaging top-strip.
- *
- * `<klarna-placement>` is a custom element and therefore defaults to
- * `display: inline`. Inline boxes inherit the parent's line-height "strut"
- * and sit on the text baseline, which leaves whitespace above and below the
- * rendered strip that negative margins can never reliably cancel across
- * breakpoints. Forcing a flex/block layout with `line-height: 0` removes the
- * inline strut entirely, so the strip hugs the header edge-to-edge on every
- * screen without margin hacks. Scoped to `.klarna-top-strip` so the other
- * Klarna placements (sidebar, footer, homepage box, …) are unaffected.
- */
+
 .klarna-top-strip {
   display: flex;
   width: 100%;

@@ -51,7 +51,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
         <div className='mb-16 text-center'>
           <h2 className='mx-auto text-background max-w-3xl'>Utekos gjennom båtdøgnet</h2>
           <p className='mx-auto mt-4 max-w-2xl utekos-section-lead text-background'>
-            Fra soloppgang i uthavn til sene kvelder ved brygga – Utekos holder deg varm.
+            Fra soloppgang i uthavn til sene kvelder ved bryggen – Utekos holder deg varm.
           </p>
         </div>
 

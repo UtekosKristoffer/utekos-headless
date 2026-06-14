@@ -80,7 +80,7 @@ export function ProductDetailsAccordionSection({
           >
             <Icon className={`size-5 shrink-0 transition-colors duration-200 ${color}`} aria-hidden='true' />
           </div>
-          <span className='text-lg font-semibold leading-[1.2] tracking-[-0.01em]'>{title}</span>
+          <span className='text-md font-semibold leading-[1.2] tracking-[-0.01em]'>{title}</span>
         </div>
       </AccordionTrigger>
 

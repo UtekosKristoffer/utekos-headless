@@ -68,3 +68,43 @@ test('builds GA4 event params with list metadata and items', () => {
     ]
   })
 })
+
+test('keeps purchase transaction fields and explicit GA4 items', () => {
+  const params = buildGA4EventParams({
+    transaction_id: '123456789',
+    value: 5980,
+    currency: 'NOK',
+    tax: 1196,
+    shipping: 99,
+    coupon: 'SOMMER',
+    items: [
+      {
+        item_id: 'SKU-UTEKOS-DUN-L',
+        item_name: 'Utekos dun',
+        item_brand: 'Utekos',
+        item_variant: 'Large',
+        price: 2990,
+        quantity: 2
+      }
+    ]
+  })
+
+  assert.deepEqual(params, {
+    transaction_id: '123456789',
+    value: 5980,
+    currency: 'NOK',
+    tax: 1196,
+    shipping: 99,
+    coupon: 'SOMMER',
+    items: [
+      {
+        item_id: 'SKU-UTEKOS-DUN-L',
+        item_name: 'Utekos dun',
+        item_brand: 'Utekos',
+        item_variant: 'Large',
+        price: 2990,
+        quantity: 2
+      }
+    ]
+  })
+})

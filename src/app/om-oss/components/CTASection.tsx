@@ -9,7 +9,7 @@ export function CTASection() {
   return (
     <section className='relative isolate overflow-hidden bg-overcast py-24 sm:py-32'>
       <div className='pointer-events-none absolute inset-0 -z-10'>
-        <div className='absolute left-1/2 top-1/2 h-[38rem] w-[38rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_64%,transparent)_0%,transparent_72%)] blur-[110px]' />
+        <div className='absolute left-1/2 top-1/2 h-152 w-152 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_64%,transparent)_0%,transparent_72%)] blur-[110px]' />
         <div className='absolute bottom-10 right-[12%] size-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--very-peri)_20%,transparent)_0%,transparent_72%)] blur-3xl' />
       </div>
 
@@ -33,7 +33,7 @@ export function CTASection() {
               </h2>
             </AnimatedBlock>
             <AnimatedBlock className='will-animate-fade-in-up' delay='0.16s' threshold={0.2}>
-              <p className='mx-auto mt-4 max-w-2xl text-lg font-base leading-text-paragraph     text-background md:text-xl'>
+              <p className='mx-auto mt-4 max-w-2xl text-lg font-utekos-text leading-text-paragraph     text-background md:text-xl'>
                 Opplev hvordan banebrytende innovasjon og tidløs eleganse kan forvandle en kjølig kveld til
                 ditt favorittøyeblikk.
               </p>
@@ -71,8 +71,8 @@ export function CTASection() {
               <div className='flex text-md items-center gap-2'>
                 <span>Trygg handel med</span>
                 <div className='ml-1 flex items-center gap-3 opacity-80 transition-opacity hover:opacity-100'>
-                  <VippsLogo className='h-[16px] w-auto' />
-                  <KlarnaLogo className='h-[14px] w-auto' />
+                  <VippsLogo className='h-4 w-auto' />
+                  <KlarnaLogo className='h-3.5 w-auto' />
                 </div>
               </div>
             </AnimatedBlock>

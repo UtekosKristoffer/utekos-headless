@@ -231,14 +231,14 @@ export function TerrasseCarousel() {
     >
       <div className='pointer-events-none absolute inset-0 -z-10 opacity-22'>
         <div
-          className='absolute left-[8%] top-[16%] size-[31rem] rounded-full blur-3xl'
+          className='absolute left-[8%] top-[16%] size-124 rounded-full blur-3xl'
           style={{
             background:
               'radial-gradient(circle, color-mix(in oklch, var(--ancient-water) 58%, transparent) 0%, transparent 70%)'
           }}
         />
         <div
-          className='absolute bottom-[10%] right-[8%] size-[31rem] rounded-full blur-3xl'
+          className='absolute bottom-[10%] right-[8%] size-124 rounded-full blur-3xl'
           style={{
             background:
               'radial-gradient(circle, color-mix(in oklch, var(--very-peri) 42%, transparent) 0%, transparent 70%)'
@@ -251,7 +251,7 @@ export function TerrasseCarousel() {
           <BrandBadge
             backgroundColor='var(--ancient-water)'
             textColor='var(--background)'
-            className='gsap-header mb-4 gap-2 border border-ancient-water/52 px-4 py-2 text-sm leading-4 font-base   opacity-0'
+            className='gsap-header mb-4 gap-2 border border-ancient-water/52 px-4 py-2 text-sm leading-4 font-utekos-text   opacity-0'
           >
             <Camera className='size-4' aria-hidden='true' />
             <span className='inline-flex items-baseline gap-[0.28em] leading-none'>
@@ -289,7 +289,7 @@ export function TerrasseCarousel() {
                           className='object-cover transition-transform duration-700 will-change-transform group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100'
                           sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
                         />
-                        <div className='absolute inset-0 bg-gradient-to-t from-background/72 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 motion-reduce:transition-none' />
+                        <div className='absolute inset-0 bg-linear-to-t from-background/72 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 motion-reduce:transition-none' />
                       </AspectRatio>
                     </div>
                   </CarouselItem>
