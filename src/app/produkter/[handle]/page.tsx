@@ -12,6 +12,7 @@ import { generateProductStaticParams } from './utils/generateProductStaticParams
 import { getQueryClient } from '@/api/lib/getQueryClient'
 import { dehydrate } from '@tanstack/react-query'
 import Hydrate from '@/components/Hydrate'
+import { connection } from 'next/server'
 
 import type { GenerateMetadataProps, ProductPageProps } from './types'
 import { getFeaturedProducts } from '@/api/lib/products/getFeaturedProducts'
@@ -27,6 +28,7 @@ export async function generateMetadata({ params }: GenerateMetadataProps): Promi
 }
 
 export default async function ProductPage({ params, searchParams }: ProductPageProps) {
+  await connection()
   const { handle } = await params
   const queryClient = getQueryClient()
   await queryClient.prefetchQuery({
