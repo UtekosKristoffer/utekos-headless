@@ -8,6 +8,7 @@ import { getCookie } from '@/components/analytics/Meta/getCookie'
 import { getOrSetExternalId } from '@/components/analytics/Meta/getOrSetExternalId'
 import { getPageViewParams } from '@/components/analytics/Meta/getPageViewParams'
 import { dispatchMetaTrackingEvent } from '@/lib/tracking/meta/dispatchMetaTrackingEvent'
+import { runAfterPageSettles } from '@/lib/browser/runAfterPageSettles'
 
 let hasInitializedMetaPixel = false
 let lastDevelopmentPixelPageViewPath: string | null = null
@@ -37,39 +38,41 @@ export function PixelLogic() {
     lastTrackedPath.current = currentPathString
     lastDevelopmentPixelPageViewPath = currentPathString
 
-    requestAnimationFrame(() => {
-      const externalId = getOrSetExternalId()
-      const fbc = getCookie('_fbc')
-      const fbp = getCookie('_fbp')
-      const userHash = getCookie('ute_user_hash')
-      const eventId = generateEventID()
+    return runAfterPageSettles(() => {
+      requestAnimationFrame(() => {
+        const externalId = getOrSetExternalId()
+        const fbc = getCookie('_fbc')
+        const fbp = getCookie('_fbp')
+        const userHash = getCookie('ute_user_hash')
+        const eventId = generateEventID()
 
-      if (!hasInitializedMetaPixel && window.fbq) {
-        window.fbq('init', pixelId, {
-          external_id: externalId || undefined,
-          fbc: fbc || undefined,
-          fbp: fbp || undefined,
-          em: userHash || undefined
-        })
-        hasInitializedMetaPixel = true
-      }
-
-      if (window.fbq) {
-        window.fbq('track', 'PageView', {}, { eventID: eventId })
-      }
-
-      void dispatchMetaTrackingEvent({
-        eventName: 'PageView',
-        eventId,
-        sendBrowserEvent: false,
-        eventData: getPageViewParams(pathname, searchParams),
-        userData: {
-          external_id: externalId || undefined,
-          fbc: fbc || undefined,
-          fbp: fbp || undefined,
-          email_hash: userHash || undefined,
-          client_user_agent: navigator.userAgent
+        if (!hasInitializedMetaPixel && window.fbq) {
+          window.fbq('init', pixelId, {
+            external_id: externalId || undefined,
+            fbc: fbc || undefined,
+            fbp: fbp || undefined,
+            em: userHash || undefined
+          })
+          hasInitializedMetaPixel = true
         }
+
+        if (window.fbq) {
+          window.fbq('track', 'PageView', {}, { eventID: eventId })
+        }
+
+        void dispatchMetaTrackingEvent({
+          eventName: 'PageView',
+          eventId,
+          sendBrowserEvent: false,
+          eventData: getPageViewParams(pathname, searchParams),
+          userData: {
+            external_id: externalId || undefined,
+            fbc: fbc || undefined,
+            fbp: fbp || undefined,
+            email_hash: userHash || undefined,
+            client_user_agent: navigator.userAgent
+          }
+        })
       })
     })
   }, [pathname, searchParams, pixelId])

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { generateEventID } from '@/components/analytics/Meta/generateEventID'
 import { dispatchMetaTrackingEvent } from '@/lib/tracking/meta/dispatchMetaTrackingEvent'
+import { runAfterPageSettles } from '@/lib/browser/runAfterPageSettles'
 
 export function CampaignPageTracker() {
   const hasFired = useRef(false)
@@ -23,10 +24,12 @@ export function CampaignPageTracker() {
       currency: 'NOK'
     }
 
-    void dispatchMetaTrackingEvent({
-      eventName,
-      eventId,
-      eventData: customData
+    return runAfterPageSettles(() => {
+      void dispatchMetaTrackingEvent({
+        eventName,
+        eventId,
+        eventData: customData
+      })
     })
   }, [])
 

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import type { CSSProperties } from 'react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
-import { ComfyrobeImageCarousel } from '@/app/produkter/(oversikt)/components/ComfyrobeImageCarousel'
+import { LazyComfyrobeImageCarousel } from '@/app/produkter/(oversikt)/components/LazyComfyrobeImageCarousel'
 import { Wind } from 'lucide-react'
 import { comfyrobeFeatures } from '@/app/produkter/(oversikt)/utils/comfyrobeFeatures'
 
@@ -62,7 +62,7 @@ export function ComfyrobeFeatureSection() {
           </div>
 
           <div className='relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-stretch lg:gap-12'>
-            <ComfyrobeImageCarousel />
+            <LazyComfyrobeImageCarousel />
 
             <AnimatedBlock className='will-animate-fade-in-right h-full min-h-full'>
               <div className='flex h-full min-h-full flex-col justify-center lg:min-h-[38rem]'>

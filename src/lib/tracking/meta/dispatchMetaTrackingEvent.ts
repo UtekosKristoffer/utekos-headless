@@ -61,11 +61,21 @@ export async function dispatchMetaTrackingEvent({
     ga4Data: resolvedGa4Data
   }
 
+  const body = JSON.stringify(payload)
+
+  if (typeof navigator !== 'undefined' && 'sendBeacon' in navigator) {
+    const sent = navigator.sendBeacon('/api/tracking-events', new Blob([body], { type: 'application/json' }))
+
+    if (sent) {
+      return
+    }
+  }
+
   try {
     const response = await fetch('/api/tracking-events', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
+      body,
       keepalive: true
     })
 

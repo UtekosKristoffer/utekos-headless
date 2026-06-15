@@ -1,6 +1,6 @@
 // Path: src/app/produkter/(oversikt)/components/MicrofiberSection/MikrofiberSection.tsx
 
-import { MikrofiberImageSection } from './MikrofiberImageSection'
+import { LazyMikrofiberImageSection } from './LazyMikrofiberImageSection'
 import { MikrofiberContentColumn } from './MikrofiberContentColumn'
 
 export async function MikrofiberSection() {
@@ -33,7 +33,7 @@ export async function MikrofiberSection() {
           </div>
 
           <div className='relative z-10 grid grid-cols-1 gap-8 rounded-2xl lg:grid-cols-2 lg:items-stretch lg:gap-12'>
-            <MikrofiberImageSection />
+            <LazyMikrofiberImageSection />
             <MikrofiberContentColumn />
           </div>
         </div>

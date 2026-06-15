@@ -18,7 +18,6 @@ import { Root as VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import * as React from 'react'
 import { useTransition } from 'react'
 import { createDrawerStateHandler } from './utils/createDrawerStateHandler'
-import { CartTrigger } from '@/components/cart/CartTrigger'
 import { Activity } from 'react'
 
 export function CartDrawer(): React.JSX.Element {
@@ -47,10 +46,6 @@ export function CartDrawer(): React.JSX.Element {
       onOpenChange={handleStateChangeWithTransition}
       direction='right'
     >
-      <Activity>
-        <CartTrigger />
-      </Activity>
-
       <Activity>
         <DrawerContent className='size-full overflow-hidden'>
           <VisuallyHidden>

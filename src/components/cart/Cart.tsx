@@ -1,8 +1,17 @@
 // Path: src/components/cart/Cart.tsx
 'use client'
 
+import dynamic from 'next/dynamic'
 import { useSyncExternalStore } from 'react'
-import { CartDrawer } from './CartDrawer/CartDrawer'
+import { CartTrigger } from '@/components/cart/CartTrigger'
+import { useCartOpen } from '@/hooks/useCartOpen'
+
+const CartDrawer = dynamic(
+  () => import('./CartDrawer/CartDrawer').then(module => module.CartDrawer),
+  {
+    ssr: false
+  }
+)
 
 const subscribeToClientSnapshot = () => () => {}
 const getClientSnapshot = () => true
@@ -14,10 +23,16 @@ export function Cart() {
     getClientSnapshot,
     getServerSnapshot
   )
+  const open = useCartOpen()
 
   if (!isMounted) {
     return <div aria-hidden className='size-11 shrink-0' />
   }
 
-  return <CartDrawer />
+  return (
+    <>
+      <CartTrigger />
+      {open ? <CartDrawer /> : null}
+    </>
+  )
 }

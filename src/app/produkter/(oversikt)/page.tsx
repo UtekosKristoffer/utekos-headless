@@ -9,7 +9,7 @@ import { VideoSkeleton } from './components/VideoSkeleton'
 import { Suspense } from 'react'
 import { StapperFeatureSection } from './components/StapperFeatureSection/StapperFeatureSection'
 import { ProductVideoSection } from './components/ProductVideoSection'
-import { TechDownFeatureSection } from './components/TechDownFeatureSection/TechDownFeatureSection'
+import { LazyTechDownFeatureSection } from './components/LazyTechDownFeatureSection'
 import { MikrofiberSection } from './components/MicrofiberSection/MikrofiberSection'
 
 const ProductsPage = async () => {
@@ -21,8 +21,9 @@ const ProductsPage = async () => {
 
         <Suspense fallback={<VideoSkeleton />}>
           <ProductVideoSection />
-          <TechDownFeatureSection />
         </Suspense>
+
+        <LazyTechDownFeatureSection />
 
         <ComparisonTeaser />
 

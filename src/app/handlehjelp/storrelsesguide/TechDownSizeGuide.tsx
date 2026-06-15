@@ -1,7 +1,6 @@
 import { tecDownData } from './data'
 import { Scale, StretchHorizontal, GitCommitVertical } from 'lucide-react'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
-import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 
 const techDownFeatures = [
   {

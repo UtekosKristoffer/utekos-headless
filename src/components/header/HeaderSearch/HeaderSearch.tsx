@@ -1,25 +1,22 @@
 'use client'
 
-import { CommandDialog, CommandEmpty, CommandInput, CommandList } from '@/components/ui/command'
 import { cn } from '@/lib/utils/className'
 import { useQueryClient } from '@tanstack/react-query'
-import type { Route } from 'next'
-import { useRouter } from 'next/navigation'
-import { Suspense, startTransition, useState, useSyncExternalStore } from 'react'
-import { HeaderSearchFooter } from './HeaderSearchFooter'
+import dynamic from 'next/dynamic'
+import { useState } from 'react'
 import { HeaderSearchInputField } from './HeaderSearchInputField'
 import { useCommandK } from './useCommandK'
 import { searchIndexQueryOptions } from './searchIndexQueryOption'
-import { SearchResults } from './SearchResults'
 
-const subscribeToClientSnapshot = () => () => {}
-const getClientSnapshot = () => true
-const getServerSnapshot = () => false
+const HeaderSearchDialog = dynamic(
+  () => import('./HeaderSearchDialog').then(module => module.HeaderSearchDialog),
+  {
+    ssr: false
+  }
+)
 
 export function HeaderSearch({ className }: { className?: string }) {
   const [open, setOpen] = useState(false)
-  const isMounted = useSyncExternalStore(subscribeToClientSnapshot, getClientSnapshot, getServerSnapshot)
-  const router = useRouter()
   const queryClient = useQueryClient()
 
   useCommandK(open, setOpen)
@@ -28,16 +25,14 @@ export function HeaderSearch({ className }: { className?: string }) {
     queryClient.prefetchQuery(searchIndexQueryOptions)
   }
 
-  const handleNavigate = (path: string) => {
-    setOpen(false)
-    startTransition(() => {
-      router.push(path as Route)
-    })
+  const handleOpen = () => {
+    handlePrefetch()
+    setOpen(true)
   }
 
   const buttonProps = {
     'type': 'button' as const,
-    'onClick': () => setOpen(true),
+    'onClick': handleOpen,
     'onMouseEnter': handlePrefetch,
     'onFocus': handlePrefetch,
     'onTouchStart': handlePrefetch,
@@ -55,51 +50,7 @@ export function HeaderSearch({ className }: { className?: string }) {
         <HeaderSearchInputField />
       </button>
 
-      {isMounted && (
-        <CommandDialog
-          data-nosnippet
-          open={open}
-          onOpenChange={setOpen}
-          showCloseButton={false}
-          className={cn(
-            'mx-auto! max-w-3xl md:max-w-4xl lg:max-w-5xl rounded-xl p-2 pb-11 h-[50vh] shadow-2xl',
-            'bg-sidebar-foreground text-foreground',
-            'border border-cloud-dancer/12 ring-2 ring-cloud-dancer/8',
-            'backdrop-blur-md',
-            className
-          )}
-          title='Skreddersy varmen'
-          description='Søk etter produkter eller sider..'
-        >
-          <CommandInput placeholder='Søk på nettsiden..' autoFocus />
-          <CommandList className='no-scrollbar min-h-80 scroll-pt-2 scroll-pb-1.5'>
-            <Suspense
-              fallback={
-                <div className='p-2'>
-                  <div className='mb-4 h-5 w-1/4 animate-pulse rounded-md bg-muted' />
-                  <div className='space-y-2'>
-                    <div className='h-8 w-full animate-pulse rounded-md bg-muted' />
-                    <div className='h-8 w-full animate-pulse rounded-md bg-muted' />
-                    <div className='h-8 w-full animate-pulse rounded-md bg-muted' />
-                  </div>
-                </div>
-              }
-            >
-              <SearchResults onSelect={handleNavigate} />
-            </Suspense>
-            <CommandEmpty>Ingen treff.</CommandEmpty>
-          </CommandList>
-          <div
-            aria-hidden
-            className={cn(
-              'pointer-events-none absolute inset-x-0 bottom-0 flex h-10 items-center justify-between border-t border-cloud-dancer/10 px-3 text-xs',
-              'bg-sidebar-foreground text-foreground/70'
-            )}
-          >
-            <HeaderSearchFooter />
-          </div>
-        </CommandDialog>
-      )}
+      {open ? <HeaderSearchDialog open={open} setOpen={setOpen} className={className} /> : null}
     </>
   )
 }

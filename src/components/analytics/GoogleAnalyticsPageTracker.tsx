@@ -7,6 +7,7 @@ import { getPageViewParams } from '@/components/analytics/Meta/getPageViewParams
 import { useConsentForService } from '@/components/cookie-consent/useConsent'
 import { USERCENTRICS_GOOGLE_ANALYTICS_SERVICE_NAME } from '@/components/cookie-consent/usercentricsConfig'
 import { pushGoogleDataLayerEvent } from '@/lib/tracking/google/pushGoogleDataLayerEvent'
+import { runAfterPageSettles } from '@/lib/browser/runAfterPageSettles'
 
 export function GoogleAnalyticsPageTracker() {
   const pathname = usePathname()
@@ -28,11 +29,13 @@ export function GoogleAnalyticsPageTracker() {
 
     lastTrackedPath.current = currentPathString
 
-    pushGoogleDataLayerEvent(
-      'PageView',
-      generateEventID().replace('evt_', 'ga_'),
-      getPageViewParams(pathname, searchParams)
-    )
+    return runAfterPageSettles(() => {
+      pushGoogleDataLayerEvent(
+        'PageView',
+        generateEventID().replace('evt_', 'ga_'),
+        getPageViewParams(pathname, searchParams)
+      )
+    })
   }, [hasGoogleAnalyticsConsent, pathname, searchParams])
 
   return null
