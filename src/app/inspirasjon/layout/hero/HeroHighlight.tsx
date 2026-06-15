@@ -20,7 +20,7 @@ interface HeroHighlightProps {
  * Inline fremhevings-`<span>` for bruk inne i en hero-`<h1>`.
  *
  * Tre moduser, alle dekket av dagens hero-sider:
- * - Solid farge: `<HeroHighlight color="var(--bleached-mauve)">…</HeroHighlight>`
+ * - Solid farge: `<HeroHighlight color="var(--fair-orchid)">…</HeroHighlight>`
  * - Gradient clip-text: `<HeroHighlight gradient="linear-gradient(…)">…</HeroHighlight>`
  * - Block (linjeskift): `<HeroHighlight color="…" display="block">…</HeroHighlight>`
  */

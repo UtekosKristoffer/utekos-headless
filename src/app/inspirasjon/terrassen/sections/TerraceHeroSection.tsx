@@ -1,88 +1,33 @@
-// Path: src/app/inspirasjon/terrassen/sections/TerraceHeroSection.tsx
-
-import { Coffee, Leaf, Sparkles } from 'lucide-react'
+import { Sparkles } from 'lucide-react'
 import { InspirationHeroActions } from '../../layout/InspirationHeroActions'
 import { InspirationHeroBreadcrumb } from '../../layout/InspirationHeroBreadcrumb'
 import { InspirationHero } from '../../layout/hero/InspirationHero'
 import { HeroHighlight } from '../../layout/hero/HeroHighlight'
 import type { InspirationHeroFeature } from '../../layout/hero/types'
+import { terraceHeroFeatures } from '../utils/terraceHeroFeatures'
 
-const ICON_SURFACE = 'color-mix(in oklch, var(--cloud-dancer) 38%, transparent)'
-const ICON_BORDER = 'color-mix(in oklch, var(--background) 12%, transparent)'
-const CARD_SHADOW = '0 24px 48px -38px color-mix(in oklch, var(--background) 72%, transparent)'
-const DESCRIPTION_COLOR = 'color-mix(in oklch, var(--background) 88%, transparent)'
-
-const terraceHeroFeatures: readonly InspirationHeroFeature[] = [
-  {
-    title: 'Tidlig vår',
-    description: 'Nyt morgenkaffen uker tidligere',
-    icon: Coffee,
-    iconColor: 'color-mix(in oklch, var(--background) 78%, var(--ancient-water))',
-    border: 'color-mix(in oklch, var(--ancient-water) 42%, transparent)',
-    surface:
-      'linear-gradient(180deg, color-mix(in oklch, var(--ancient-water) 82%, var(--cloud-dancer) 18%) 0%, color-mix(in oklch, var(--ancient-water) 58%, var(--background) 42%) 100%)',
-    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 32%, color-mix(in oklch, var(--ancient-water) 74%, transparent) 100%)',
-    sheen: true,
-    iconSurface: ICON_SURFACE,
-    iconBorder: ICON_BORDER,
-    shadow: CARD_SHADOW,
-    descriptionColor: DESCRIPTION_COLOR
-  },
-  {
-    title: 'Sen høst',
-    description: 'Forleng sesongen',
-    icon: Leaf,
-    iconColor: 'color-mix(in oklch, var(--mountain-view) 68%, var(--background) 32%)',
-    border: 'color-mix(in oklch, var(--mountain-view) 38%, transparent)',
-    surface:
-      'linear-gradient(180deg, color-mix(in oklch, var(--overcast) 86%, var(--cloud-dancer) 14%) 0%, color-mix(in oklch, var(--mountain-view) 28%, var(--overcast) 72%) 100%)',
-    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 34%, color-mix(in oklch, var(--mountain-view) 54%, transparent) 100%)',
-    sheen: true,
-    iconSurface: ICON_SURFACE,
-    iconBorder: ICON_BORDER,
-    shadow: CARD_SHADOW,
-    descriptionColor: DESCRIPTION_COLOR
-  },
-  {
-    title: 'Hver kveld',
-    description: 'Nyt uteplassen når det kjølner',
-    icon: Sparkles,
-    iconColor: 'color-mix(in oklch, var(--background) 78%, var(--overcast))',
-    border: 'color-mix(in oklch, var(--overcast) 42%, transparent)',
-    surface:
-      'linear-gradient(180deg, color-mix(in oklch, var(--overcast) 86%, var(--cloud-dancer) 14%) 0%, color-mix(in oklch, var(--overcast) 52%, var(--background) 48%) 100%)',
-    glow: 'radial-gradient(120% 120% at 50% 0%, transparent 32%, color-mix(in oklch, var(--overcast) 78%, transparent) 100%)',
-    sheen: true,
-    iconSurface: ICON_SURFACE,
-    iconBorder: ICON_BORDER,
-    shadow: CARD_SHADOW,
-    descriptionColor: DESCRIPTION_COLOR
-  }
-] as const
+const terraceHeroFeatureCards: readonly InspirationHeroFeature[] = terraceHeroFeatures.map(feature => ({
+  ...feature,
+  cardClassName: 'border-brandied-apricot bg-brandied-apricot',
+  iconClassName: 'border-background/16 bg-cloud-dancer text-background',
+  titleClassName: 'text-background',
+  descriptionClassName: 'text-background'
+}))
 
 const TerraceHeroBackground = (
   <>
     <div className='pointer-events-none absolute inset-0 -z-10 opacity-24' aria-hidden='true'>
       <div
-        className='absolute left-[8%] top-[12%] size-152nded-full blur-3xl'
+        className='absolute left-[8%] top-[12%] size-152 rounded-full blur-3xl'
         style={{
           background:
             'radial-gradient(circle, color-mix(in oklch, var(--ancient-water) 58%, transparent) 0%, transparent 68%)'
         }}
       />
-      <div
-        className='absolute bottom-[8%] right-[6%] size-136 rounded-full blur-3xl'
-        style={{
-          background:
-            'radial-gradient(circle, color-mix(in oklch, var(--primary) 34%, transparent) 0%, transparent 70%)'
-        }}
-      />
+      <div className='absolute bottom-[8%] right-[6%] size-136 rounded-full bg-peach-fuzz blur-3xl' />
     </div>
 
-    <div
-      className='absolute inset-0 -z-10 bg-[linear-gradient(180deg,transparent_0%,color-mix(in_oklch,var(--background)_92%,transparent)_100%)]'
-      aria-hidden='true'
-    />
+    <div className='absolute inset-0 -z-10 bg-marsala' aria-hidden='true' />
   </>
 )
 
@@ -90,26 +35,42 @@ export function TerraceHeroSection() {
   return (
     <InspirationHero
       labelledById='terrassen-hero-title'
-      surfaceClassName='bg-background'
-      containerClassName='sm:py-24'
+      surfaceClassName='bg-marsala'
       background={TerraceHeroBackground}
       breadcrumb={
         <InspirationHeroBreadcrumb
           label='Terrassen'
-          color='var(--mountain-view)'
-          textColor='var(--cloud-dancer)'
+          color='var(--brandied-apricot)'
+          textColor='var(--background)'
           icon={Sparkles}
         />
       }
       title={
         <>
-          Din terrasse, <HeroHighlight color='var(--primary)'>hele året</HeroHighlight>
+          Din terrasse, <HeroHighlight color='var(--foreground)'>hele året</HeroHighlight>
         </>
       }
       titleClassName='max-w-3xl'
       lead='Gjør uteplassen til husets beste rom. Fra den første kaffen i vårsolen til de sene sommerkveldene, nyt øyeblikkene lenger.'
-      actions={<InspirationHeroActions primaryLabel='Oppdag din Utekos' secondaryLabel='Se bruksområdene' />}
-      features={terraceHeroFeatures}
+      actions={
+        <InspirationHeroActions
+          primaryLabel='Oppdag din Utekos'
+          secondaryLabel='Se bruksområdene'
+          primaryStyle={{
+            backgroundColor: 'var(--peach-fuzz)',
+            textColor: 'var(--background)',
+            className:
+              'border-peach-fuzz/70 shadow-[0_18px_38px_-28px_color-mix(in_oklch,var(--background)_58%,transparent)] hover:brightness-105 focus-visible:ring-2 focus-visible:ring-peach-fuzz/70 focus-visible:ring-offset-2 focus-visible:ring-offset-marsala'
+          }}
+          secondaryStyle={{
+            backgroundColor: 'var(--cloud-dancer)',
+            textColor: 'var(--background)',
+            className:
+              'border-cloud-dancer/45 shadow-[0_18px_38px_-30px_color-mix(in_oklch,var(--background)_46%,transparent)] hover:bg-brandied-apricot hover:text-background focus-visible:ring-2 focus-visible:ring-brandied-apricot/70 focus-visible:ring-offset-2 focus-visible:ring-offset-marsala'
+          }}
+        />
+      }
+      features={terraceHeroFeatureCards}
       featuresHeading='Høydepunkter for terrasseliv med Utekos'
       featuresHeadingId='terrassen-hero-highlights-title'
     />

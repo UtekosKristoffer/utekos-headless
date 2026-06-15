@@ -1,4 +1,3 @@
-// Path: src/app/inspirasjon/hytteliv/UseCasesGrid.tsx
 import { Card, CardContent } from '@/components/ui/card'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
 import { Coffee, HeartHandshake, Moon } from 'lucide-react'
@@ -28,119 +27,75 @@ export const useCasesData: UseCase[] = [
   }
 ]
 
-// Super-premium kort-design basert på paletten
-const useCaseCardThemes = [
-  {
-    // Morgen (Lys, varm aksent)
-    surface: 'var(--color-cloud-dancer)',
-    border: 'color-mix(in oklch, var(--color-maritime-darkest) 8%, transparent)',
-    accent: 'var(--color-iced-apricot)',
-    iconSurface: 'var(--color-iced-apricot)',
-    icon: 'var(--color-maritime-darkest)'
-  },
-  {
-    // Kveld (Kjølig, nattlig aksent)
-    surface: 'var(--color-cloud-dancer)',
-    border: 'color-mix(in oklch, var(--color-maritime-darkest) 8%, transparent)',
-    accent: 'var(--color-very-peri)',
-    iconSurface: 'var(--color-very-peri)',
-    icon: 'var(--color-cloud-dancer)'
-  },
-  {
-    // Ankomst / Peiskos (Gyllen, lun aksent)
-    surface: 'var(--color-cloud-dancer)',
-    border: 'color-mix(in oklch, var(--color-maritime-darkest) 8%, transparent)',
-    accent: 'var(--color-chai-tea)',
-    iconSurface: 'var(--color-chai-tea)',
-    icon: 'var(--color-maritime-darkest)'
-  }
+const useCaseTokens = [
+  'var(--amber-light)', // Morgen
+  'var(--woodrose)', // Kveld
+  'var(--coral-haze)' // Ankomst
 ] as const
 
 export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
   return (
-    // Byttet fra grå/overcast til den lyse, naturlige white-sand.
-    <section id='bruksomrader' className='bg-overcast py-24'>
+    <section id='bruksomrader' className='bg-overcast py-24' aria-labelledby='use-cases-heading'>
       <div className='container mx-auto px-4'>
-        <div className='mx-auto mb-16 max-w-2xl text-center md:max-w-3xl lg:max-w-4xl'>
-          <h2 className='text-4xl font-bold tracking-tight text-maritime-darkest md:text-6xl'>
+        <header className='mx-auto text-center mb-16 max-w-4xl'>
+          <h2
+            id='use-cases-heading'
+            className='text-subtitle pb-6 md:text-6xl xl:text-7xl tracking-tighter font-bold text-foreground'
+          >
             Hyttekos fra morgen til kveld
           </h2>
-          <p className='mt-4 text-lg leading-relaxed text-maritime-darkest/90'>
+          <p className='mt-4 text-lg leading-relaxed tracking-tight font-utekos-text-medium text-foreground'>
             Nyt lun varme akkurat når hyttedagen krever det. Fra morgenkaffen skjenkes til kveldens siste
             vedkubbe.
           </p>
-        </div>
+        </header>
 
         <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
-          {useCases.map((useCase, useCaseIndex) => {
-            const theme = useCaseCardThemes[useCaseIndex % useCaseCardThemes.length] ?? useCaseCardThemes[0]
+          {useCases.map((useCase, index) => {
+            const cardTheme = {
+              '--card-surface': 'var(--havdyp)',
+              '--card-accent': 'var(--fair-orchid)',
+              '--card-text-primary': 'var(--foreground)',
+              '--card-text-secondary': 'var(--ancient-water)'
+            } as React.CSSProperties
 
             return (
               <AnimatedBlock
                 key={useCase.title}
-                className='will-animate-fade-in-up'
-                delay={`${useCaseIndex * 0.1}s`}
+                className='will-animate-fade-in-up group'
+                delay={`${index * 0.1}s`}
                 threshold={0.2}
               >
                 <Card
-                  className='group/card relative isolate h-full overflow-hidden rounded-xl border-none transition-all duration-400 hover:-translate-y-2'
-                  style={{
-                    backgroundColor: theme.surface,
-                    boxShadow:
-                      '0 20px 40px -15px color-mix(in oklch, var(--color-maritime-darkest) 15%, transparent)'
-                  }}
+                  className='relative isolate h-full overflow-hidden rounded-xl bg-(--card-surface) transition-transform duration-300 hover:-translate-y-2'
+                  style={cardTheme}
                 >
-                  {/* Farget stripe på toppen av kortet som binder kortet til sin tid på døgnet */}
-                  <div
-                    className='absolute inset-x-0 top-0 h-1.5 transition-opacity duration-300 group-hover/card:opacity-90'
-                    style={{ backgroundColor: theme.accent }}
-                  />
-
-                  {/* Subtil border som ikke bryter kanten over */}
-                  <div
-                    className='absolute inset-0 border border-t-0 rounded-b-xl pointer-events-none'
-                    style={{ borderColor: theme.border }}
-                  />
-
                   <CardContent className='relative flex h-full flex-col p-7 sm:p-8'>
-                    <div className='mb-6 flex items-start justify-between gap-4'>
+                    <header className='mb-6 flex items-start justify-between gap-4'>
                       <div
-                        className='flex size-12 items-center justify-center rounded-xl shadow-sm'
-                        style={{
-                          backgroundColor: theme.iconSurface,
-                          color: theme.icon
-                        }}
+                        className='flex size-12 shrink-0 items-center justify-center rounded-xl bg-(--card-accent) shadow-sm'
+                        aria-hidden='true'
                       >
-                        <useCase.icon className='size-6' />
+                        <useCase.icon className='size-6 text-background' />
                       </div>
-                      <p
-                        className='rounded-full px-3 py-1 text-xs font-semibold tracking-wide shadow-sm'
-                        style={{
-                          backgroundColor: 'var(--color-maritime-darkest)',
-                          color: 'var(--color-cloud-dancer)'
-                        }}
+
+                      <span
+                        className='rounded-full bg-comfrey px-3 py-1 text-xs font-semibold tracking-wide text-background shadow-sm'
+                        aria-label={`Ideell temperatur: ${useCase.temperature}`}
                       >
                         {useCase.temperature}
-                      </p>
-                    </div>
+                      </span>
+                    </header>
 
-                    <p
-                      className='mb-3 font-google-sans text-xs font-bold uppercase tracking-widest'
-                      style={{
-                        color:
-                          theme.accent === 'var(--color-very-peri)' ?
-                            'var(--color-very-peri)'
-                          : 'var(--color-maritime-darkest)'
-                      }}
-                    >
-                      {useCase.time}
-                    </p>
-                    <h3 className='text-2xl font-bold leading-tight text-maritime-darkest mb-3'>
-                      {useCase.title}
-                    </h3>
-                    <p className='text-base leading-relaxed text-maritime-darkest/75'>
-                      {useCase.description}
-                    </p>
+                    <div className='flex flex-col grow'>
+                      <p className='mb-3 font-google-sans text-xs font-bold uppercase tracking-widest text-foreground'>
+                        {useCase.time}
+                      </p>
+                      <h3 className='mb-3 text-2xl font-bold leading-tight text-foreground'>
+                        {useCase.title}
+                      </h3>
+                      <p className='text-base leading-relaxed text-foreground'>{useCase.description}</p>
+                    </div>
                   </CardContent>
                 </Card>
               </AnimatedBlock>

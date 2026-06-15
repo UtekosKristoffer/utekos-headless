@@ -146,7 +146,7 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
         <div data-launch-stage className='w-full'>
           <div
             data-launch-card
-            className='relative isolate mx-2 overflow-hidden rounded-[1.25rem] border border-cloud-dancer/12 bg-[radial-gradient(circle_at_12%_10%,color-mix(in_oklch,var(--ancient-water)_16%,transparent)_0%,transparent_55%),radial-gradient(circle_at_88%_92%,color-mix(in_oklch,var(--bleached-mauve)_12%,transparent)_0%,transparent_60%),var(--background)] p-4 sm:mx-4 sm:p-8 lg:p-12'
+            className='relative isolate mx-2 overflow-hidden rounded-[1.25rem] border border-cloud-dancer/12 bg-[radial-gradient(circle_at_12%_10%,color-mix(in_oklch,var(--quiet-tide)_16%,transparent)_0%,transparent_55%),radial-gradient(circle_at_88%_92%,color-mix(in_oklch,var(--fair-orchid)_12%,transparent)_0%,transparent_60%),var(--background)] p-4 sm:mx-4 sm:p-8 lg:p-12'
           >
             <AmbientBackgroundGlow />
 
@@ -177,13 +177,13 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                     })}
                   >
                     <BrandBadge
-                      backgroundColor='var(--very-peri)'
-                      textColor='var(--background)'
-                      className='max-w-full gap-2.5 border border-very-peri/55 px-3 py-2 text-sm font-medium   shadow-[0_10px_30px_-22px_color-mix(in_oklab,var(--cloud-dancer)_45%,transparent)]'
+                      backgroundColor='var(--quet-tide-secondary-monochromatic)'
+                      textColor='var(--quet-tide-primary-monochromatic)'
+                      className='max-w-full gap-2.5 border border-quet-tide-secondary-monochromatic/55 px-3 py-2 text-sm font-medium shadow-[0_10px_30px_-22px_color-mix(in_oklab,var(--quet-tide-secondary-monochromatic)_45%,transparent)]'
                     >
                       <span className='relative flex size-2 shrink-0'>
-                        <span className='absolute inline-flex size-full animate-ping rounded-full bg-background opacity-75 motion-reduce:animate-none'></span>
-                        <span className='relative inline-flex size-2 rounded-full bg-background'></span>
+                        <span className='absolute inline-flex size-full animate-ping rounded-full bg-quet-tide-primary-monochromatic opacity-75 motion-reduce:animate-none'></span>
+                        <span className='relative inline-flex size-2 rounded-full bg-quet-tide-primary-monochromatic'></span>
                       </span>
                       <span className='whitespace-nowrap text-background'>Vårtilbud</span>
                     </BrandBadge>
@@ -198,9 +198,9 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                     })}
                   >
                     <BrandBadge
-                      backgroundColor='var(--bleached-mauve)'
+                      backgroundColor='var(--quet-tide-secondary-monochromatic)'
                       textColor='var(--background)'
-                      className='max-w-full gap-2 border border-bleached-mauve/35 px-3 py-2 text-sm font-medium   shadow-[0_14px_32px_-24px_color-mix(in_oklab,var(--bleached-mauve)_60%,transparent)]'
+                      className='max-w-full gap-2 border border-quet-tide-secondary-monochromatic/35 px-3 py-2 text-sm font-medium shadow-[0_14px_32px_-24px_color-mix(in_oklab,var(--quet-tide-secondary-monochromatic)_60%,transparent)]'
                     >
                       <BadgePercent className='size-4 shrink-0' />
                       <span className='whitespace-nowrap'>Spar {savingsAmount} kr</span>
@@ -290,9 +290,9 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                       <div className='launch-motion-primary-cta w-full lg:flex-[1.05]'>
                         <BrandBadge
                           asChild
-                          backgroundColor='var(--primary)'
+                          backgroundColor='var(--checkout-button)'
                           textColor='var(--background)'
-                          className='group min-h-12 w-full justify-center px-6 py-3 text-base font-semibold tracking-[-0.01em] shadow-[0_18px_38px_-28px_color-mix(in_oklab,var(--primary)_78%,transparent)]'
+                          className='group min-h-12 w-full justify-center px-6 py-3 text-base font-semibold tracking-[-0.01em] shadow-[0_18px_38px_-28px_color-mix(in_oklab,var(--checkout-button)_78%,transparent)]'
                         >
                           <button
                             type='button'
@@ -307,9 +307,9 @@ export const NewProductLaunchSectionView = forwardRef<HTMLElement, NewProductLau
                       <div className='w-full lg:flex-1'>
                         <BrandBadge
                           asChild
-                          backgroundColor='var(--cloud-dancer)'
+                          backgroundColor='var(--checkout-secondary)'
                           textColor='var(--background)'
-                          className='group min-h-12 w-full justify-center border border-cloud-dancer/45 px-6 py-3 text-base tracking-[-0.01em]'
+                          className='group min-h-12 w-full justify-center border border-checkout-secondary/45 px-6 py-3 text-base tracking-[-0.01em]'
                         >
                           <Link
                             href={productUrl}

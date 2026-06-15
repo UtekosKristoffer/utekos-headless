@@ -9,9 +9,9 @@ import type { LucideIcon } from 'lucide-react'
  * - "gradient"-stil (gradient-flate + glød + skinn): sett `surface` (gradient),
  *   `border`, `glow`, `sheen: true`, `iconColor`.
  *
- * Alle visuelle felter er valgfrie. Verdier er rå CSS (brand-tokens via
- * `var(--…)`, `color-mix(…)` eller gradienter) fordi de ikke kan uttrykkes
- * som Tailwind-klasser. Utelatte felter faller tilbake til brand-defaults.
+ * Alle visuelle felter er valgfrie. Bruk Tailwind-klassefeltene for vanlige
+ * theme tokens, og rå CSS-feltene for gradienter eller `color-mix(…)`.
+ * Utelatte felter faller tilbake til brand-defaults.
  */
 export interface InspirationHeroFeature {
   /** Kort-tittel (rendres som `<h3>`). */
@@ -42,6 +42,14 @@ export interface InspirationHeroFeature {
   titleColor?: string
   /** Beskrivelsesfarge på kortet. Overstyrer default brand-token. */
   descriptionColor?: string
+  /** Ekstra Tailwind-klasser på kortet. */
+  cardClassName?: string
+  /** Ekstra Tailwind-klasser på ikonboksen. */
+  iconClassName?: string
+  /** Ekstra Tailwind-klasser på tittelen. */
+  titleClassName?: string
+  /** Ekstra Tailwind-klasser på beskrivelsen. */
+  descriptionClassName?: string
 }
 
 /** Horisontal justering for hero-innhold. */

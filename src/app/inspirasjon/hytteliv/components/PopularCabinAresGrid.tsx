@@ -9,47 +9,47 @@ export const popularAreasData: Destination[] = [
     name: 'Trysil og Hemsedal',
     season: 'Vinter og vår',
     highlight: 'Varme etter skituren',
-    bgColor: 'bg-ancient-water',
-    iconBgColor: 'bg-ancient-water-light',
-    iconColor: 'text-background',
-    textColor: 'text-background'
+    bgColor: 'bg-mountain-view',
+    iconBgColor: 'bg-mineral-green',
+    iconColor: 'text-fairest-jade',
+    textColor: 'text-cloud-dancer'
   },
   {
     name: 'Sørlandskysten',
     season: 'Sommer',
     highlight: 'Varme på kjølige sommerkvelder',
-    bgColor: 'bg-very-peri',
-    iconBgColor: 'bg-very-peri-light',
-    iconColor: 'text-background',
-    textColor: 'text-foreground'
+    bgColor: 'bg-mountain-view',
+    iconBgColor: 'bg-mineral-green',
+    iconColor: 'text-fairest-jade',
+    textColor: 'text-cloud-dancer'
   },
   {
     name: 'Hafjell og Geilo',
     season: 'Hele året',
     highlight: 'Komfort i fjellet, hele året',
-    bgColor: 'bg-overcast',
-    iconBgColor: 'bg-overcast-light',
-    iconColor: 'text-background',
-    textColor: 'text-background'
+    bgColor: 'bg-mountain-view',
+    iconBgColor: 'bg-mineral-green',
+    iconColor: 'text-fairest-jade',
+    textColor: 'text-cloud-dancer'
   },
   {
     name: 'Hardanger',
     season: 'Vår og høst',
     highlight: 'Nyt fjordutsikten lenger',
-    bgColor: 'bg-bleached-mauve',
-    iconBgColor: 'bg-bleached-mauve-light',
-    iconColor: 'text-background',
-    textColor: 'text-background'
+    bgColor: 'bg-mountain-view',
+    iconBgColor: 'bg-mineral-green',
+    iconColor: 'text-fairest-jade',
+    textColor: 'text-cloud-dancer'
   }
 ]
 
 export function PopularCabinAreasGrid({ destinations }: { destinations: Destination[] }) {
   return (
-    <section className='bg-havdyp py-24 text-foreground'>
+    <section className='bg-background py-24 text-cloud-dancer'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-3xl text-center'>
-          <h2 className='text-foreground'>Populære hytteområder med Utekos</h2>
-          <p className='mt-4 utekos-section-lead text-foreground'>
+          <h2 className='text-cloud-dancer'>Populære hytteområder med Utekos</h2>
+          <p className='mt-4 utekos-section-lead text-ancient-water'>
             Fra fjell til fjord får du mer tid ute, også når temperaturen faller.
           </p>
         </div>
@@ -79,22 +79,17 @@ export function PopularCabinAreasGrid({ destinations }: { destinations: Destinat
                     </div>
                     <h3
                       className={cn(
-                        'min-w-0 flex-1 text-lg font-semibold leading-[1.15]  ',
+                        'min-w-0 flex-1 text-lg font-semibold leading-[1.15]',
                         destination.textColor
                       )}
                     >
                       {destination.name}
                     </h3>
                   </div>
-                  <p
-                    className={cn(
-                      'mb-2   text-sm italic leading-text-paragraph   opacity-82',
-                      destination.textColor
-                    )}
-                  >
+                  <p className={cn('mb-2 text-sm italic leading-text-paragraph', destination.textColor)}>
                     {destination.season}
                   </p>
-                  <p className={cn('  text-base leading-text-paragraph  ', destination.textColor)}>
+                  <p className={cn('text-base leading-text-paragraph', destination.textColor)}>
                     {destination.highlight}
                   </p>
                 </CardContent>

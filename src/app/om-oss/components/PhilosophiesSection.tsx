@@ -20,7 +20,7 @@ const philosophyToneStyles = [
     text: 'text-havdyp/80'
   },
   {
-    card: 'border-very-peri/16 bg-[color-mix(in_oklab,var(--bleached-mauve)_74%,var(--cloud-dancer))]',
+    card: 'border-very-peri/16 bg-[color-mix(in_oklab,var(--fair-orchid)_74%,var(--cloud-dancer))]',
     glow: 'bg-[radial-gradient(circle,color-mix(in_oklab,var(--very-peri)_50%,transparent)_0%,transparent_72%)]',
     icon: 'border-havdyp/14 bg-havdyp text-foreground',
     title: 'text-havdyp',
@@ -109,9 +109,9 @@ export function PhilosophiesSection() {
           <AnimatedBlock className='will-animate-fade-in-up' delay='0s' threshold={0.2}>
             <BrandBadge
               label='Vårt DNA'
-              backgroundColor='var(--bleached-mauve)'
+              backgroundColor='var(--fair-orchid)'
               textColor='var(--background)'
-              className='mb-6 font-utekos-text-medium shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--bleached-mauve)_80%,transparent)]'
+              className='mb-6 font-utekos-text-medium shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--fair-orchid)_80%,transparent)]'
             />
             <h2 className='mb-6 text-5xl leading-[0.95] font-bold font-google-sans   text-background md:text-6xl lg:text-7xl'>
               Kjernen i alt vi gjør

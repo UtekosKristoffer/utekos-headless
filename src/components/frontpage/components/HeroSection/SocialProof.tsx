@@ -4,8 +4,8 @@ import { PaymentIcons } from './PaymentIcons'
 
 export function SocialProof() {
   return (
-    <details className='mx-auto mt-6 max-w-5xl sm:mt-10' aria-label='Fordeler med å handle hos oss'>
-      <summary className='grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3 md:gap-5'>
+    <section className='mx-auto mt-6 max-w-5xl sm:mt-10' aria-label='Fordeler med å handle hos oss'>
+      <div className='grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3 md:gap-5'>
         <SocialProofCard
           title='Rask levering'
           Icon={Truck}
@@ -43,7 +43,7 @@ export function SocialProof() {
         >
           <PaymentIcons />
         </SocialProofCard>
-      </summary>
-    </details>
+      </div>
+    </section>
   )
 }

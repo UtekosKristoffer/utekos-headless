@@ -40,7 +40,7 @@ export const popularDestinationsData: Destination[] = [
 
 export function PopularDestinations({ destinations }: { destinations: Destination[] }) {
   return (
-    <section className='pb-24 bg-havdyp' id='populære-destinasjoner'>
+    <section className='pb-24 bg-background text-cloud-dancer' id='populære-destinasjoner'>
       <div className='container mx-auto px-4'>
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
           {destinations.map((destination, destinationIndex) => (
@@ -57,7 +57,7 @@ export function PopularDestinations({ destinations }: { destinations: Destinatio
                     <MapPinIcon className={`h-5 w-5 ${destination.color}`} />
                   </div>
                   <p className='mb-2 text-sm text-overcast'>{destination.season}</p>
-                  <p className='text-sm text-foreground/80'>{destination.highlight}</p>
+                  <p className='text-sm text-ancient-water'>{destination.highlight}</p>
                 </CardContent>
               </Card>
             </AnimatedBlock>

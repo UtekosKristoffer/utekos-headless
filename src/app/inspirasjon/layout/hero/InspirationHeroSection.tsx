@@ -10,7 +10,7 @@ interface InspirationHeroSectionProps {
   as?: 'section' | 'article'
   /** Horisontal justering av innholdet. Default `left`. */
   align?: InspirationHeroAlign
-  /** Minstehøyde. `standard` = 100svh, `tall` = 110svh, `content` = kun innholdshøyde. Default `standard`. */
+  /** Minstehøyde. `standard`/`content` = kun innholdshøyde, `tall` = 110svh. Default `content`. */
   minHeight?: 'standard' | 'tall' | 'content'
   /** Bakgrunns-/flate-klasser for seksjonen (eks. `bg-havdyp`). */
   surfaceClassName?: string
@@ -28,7 +28,7 @@ interface InspirationHeroSectionProps {
  * Seksjons-skall for alle inspirasjons-heroer.
  *
  * Ansvar: ytre `<section>`/`<article>`, minstehøyde, sentrering, dekorlag-slot
- * og standard container (`container mx-auto px-5 md:px-4 pt-10 pb-20 sm:pt-12 sm:pb-24`) med en innholdskolonne.
+ * og standard container (`container mx-auto px-5 md:px-4 pt-16 pb-16 sm:pt-20 sm:pb-14`) med en innholdskolonne.
  * Ren Server Component – ingen klient-kode.
  */
 export function InspirationHeroSection({
@@ -36,7 +36,7 @@ export function InspirationHeroSection({
   labelledBy,
   as: Tag = 'section',
   align = 'left',
-  minHeight = 'standard',
+  minHeight = 'content',
   surfaceClassName,
   background,
   className,
@@ -48,9 +48,7 @@ export function InspirationHeroSection({
       aria-labelledby={labelledBy}
       className={cn(
         'relative isolate flex overflow-hidden',
-        minHeight === 'tall' ? 'min-h-[110svh]'
-        : minHeight === 'content' ? 'min-h-0'
-        : 'min-h-svh',
+        minHeight === 'tall' ? 'min-h-[110svh]' : 'min-h-0',
         align === 'center' ? 'flex-col justify-center' : 'items-start',
         surfaceClassName,
         className
@@ -60,7 +58,7 @@ export function InspirationHeroSection({
 
       <div
         className={cn(
-          'container relative z-10 mx-auto px-5 md:px-4 pt-10 pb-20 sm:pt-12 sm:pb-24',
+          'container relative z-10 mx-auto px-5 md:px-4 pt-16 pb-16 sm:pt-20 sm:pb-14',
           containerClassName
         )}
       >

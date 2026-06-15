@@ -29,7 +29,7 @@ interface InspirationHeroProps {
   as?: 'section' | 'article'
   /** Justering. Default `left`. */
   align?: InspirationHeroAlign
-  /** Minstehøyde. Default `standard` (100svh). `content` = ingen tvungen viewport-høyde. */
+  /** Minstehøyde. Default `content`. `tall` = eksplisitt viewport-høyde. */
   minHeight?: 'standard' | 'tall' | 'content'
   /** Bakgrunns-/flate-klasser (eks. `bg-havdyp`). */
   surfaceClassName?: string
@@ -61,10 +61,25 @@ interface InspirationHeroProps {
  *   labelledById='bobil-hero-title'
  *   surfaceClassName='bg-havdyp text-foreground'
  *   background={<BobilHeroBackground />}
- *   breadcrumb={<InspirationHeroBreadcrumb label='Bobil og camping' color='var(--bleached-mauve)' textColor='var(--background)' icon={MapPin} />}
- *   title={<>Bobilliv uten <HeroHighlight color='var(--bleached-mauve)'>kompromisser</HeroHighlight></>}
+ *   breadcrumb={<InspirationHeroBreadcrumb label='Bobil og camping' color='var(--fair-orchid)' textColor='var(--background)' icon={MapPin} />}
+ *   title={<>Bobilliv uten <HeroHighlight color='var(--fair-orchid)'>kompromisser</HeroHighlight></>}
  *   lead='Fra den første morgenkaffen …'
- *   actions={<InspirationHeroActions primaryLabel='Se produktene' secondaryLabel='Utforsk mulighetene' />}
+ *   actions={
+ *     <InspirationHeroActions
+ *       primaryLabel='Se produktene'
+ *       secondaryLabel='Utforsk mulighetene'
+ *       primaryStyle={{
+ *         backgroundColor: 'var(--primary)',
+ *         textColor: 'var(--background)',
+ *         className: 'border-primary/35 focus-visible:ring-2 focus-visible:ring-primary/70'
+ *       }}
+ *       secondaryStyle={{
+ *         backgroundColor: 'var(--cloud-dancer)',
+ *         textColor: 'var(--background)',
+ *         className: 'border-cloud-dancer/35 focus-visible:ring-2 focus-visible:ring-cloud-dancer/70'
+ *       }}
+ *     />
+ *   }
  *   features={bobilHeroFeatures}
  *   featuresHeading='Høydepunkter for bobil og camping med Utekos'
  *   featuresHeadingId='bobil-hero-highlights-title'

@@ -63,7 +63,7 @@ export const nodes = [
     data: {
       icon: 'heart' as IconName,
       text: 'Gjennomført kvalitet',
-      color: 'var(--bleached-mauve)',
+      color: 'var(--fair-orchid)',
       iconColor: 'text-foreground'
     }
   },
@@ -102,7 +102,7 @@ export const edges = [
     id: 'e-center-3',
     sourceId: 'center',
     targetId: 'benefit-3',
-    data: { color: 'var(--bleached-mauve)' }
+    data: { color: 'var(--fair-orchid)' }
   },
   {
     id: 'e-center-4',

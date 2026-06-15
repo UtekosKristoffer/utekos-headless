@@ -3,17 +3,17 @@ import { SocialProofHeaderMotion } from './SocialProofHeaderMotion'
 
 export function SocialProofHeader() {
   const descriptionContent = (
-    <p className='utekos-section-lead text-foreground pt-2'>
+    <p className='utekos-section-lead font-utekos-text text-foreground pt-2 md:'>
       Våre beste produktutviklere er{' '}
       <span className='relative inline-flex items-center justify-center px-1'>
         <span className='gsap-highlight-bg absolute inset-0 -z-10 -skew-x-6 scale-x-0 rounded-md bg-linear-to-r from-mountain-view via-comfrey to-mountain-view blur-[1px] will-change-transform' />
         <span className='gsap-highlight-bg absolute inset-0 -z-10 -rotate-1 scale-x-0 rounded-lg border border-comfrey/45 bg-linear-to-r from-mountain-view via-comfrey to-mountain-view opacity-65 will-change-transform' />
-        <strong className='relative z-10 font-semibold     text-foreground'>kundene våre.</strong>
+        <strong className='relative z-10 font-semibold font-utekos-text text-foreground'>kundene våre.</strong>
       </span>
       {''} Vi lytter, lærer og designer for å løse reelle behov – slik at du kan skape flere og bedre{' '}
-      <span className='relative inline-block     font-medium text-foreground/90'>
+      <span className='relative inline-block font-utekos-text text-foreground/90'>
         minner utendørs
-        <span className='gsap-underline absolute bottom-0 left-0 h-[2px] w-full origin-left scale-x-0 bg-linear-to-r from-mountain-view via-comfrey to-mountain-view opacity-80 will-change-transform' />
+        <span className='gsap-underline absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-linear-to-r from-mountain-view via-comfrey to-mountain-view opacity-80 will-change-transform' />
       </span>
       .
     </p>

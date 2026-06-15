@@ -62,7 +62,7 @@ export function AnnouncementBanner() {
   return (
     <div
       className={cn(
-        'relative py-2 z-40 hover:bg-plum-hover font-utekos-text-medium bg-plum animate-slide-in-do text-foreground text-lg font-medium)',
+        'relative py-2 z-40 hover:bg-plum-hover font-utekos-text-medium bg-[#492A34] animate-slide-in-do text-foreground text-lg font-medium)',
         isExiting && 'animate-slide-out-up'
       )}
     >
@@ -70,7 +70,7 @@ export function AnnouncementBanner() {
         href='/skreddersy-varmen'
         data-track='AnnouncementBannerClick'
         aria-label='Se tilbudet på Utekos TechDown til kr 1790'
-        className='group block w-full px-10 py-2.5 text-center tracking-wide font-medium  outline-none transition-colors focus-visible:ring-2 focus-visible:ring-havdyp/50 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast sm:px-12'
+        className='group block w-full px-10 py-1 text-center tracking-wide font-medium  outline-none transition-colors focus-visible:ring-2 focus-visible:ring-kombu-green/50 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast sm:px-12'
       >
         <div className='mx-auto justify-content flex max-w-5xl items-center justify-center gap-2.5'>
           <Bird
@@ -79,7 +79,7 @@ export function AnnouncementBanner() {
             strokeWidth={1.5}
           />
 
-          <p className='font-utekos-text-medium text-sm md:text-lg text-justify text-foreground'>
+          <p className='font-utekos-text-medium text-sm md:text-base text-justify text-foreground'>
             Utekos TechDown™ til kr 1790,-
           </p>
 

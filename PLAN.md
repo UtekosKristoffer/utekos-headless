@@ -4,6 +4,19 @@
 
 STATUS: USERCENTRICS OG GTM PUBLISERT, DIREKTE SGTM-LOADER KLAR FOR PRODUKSJONSDEPLOY OG VERIFIKASJON
 
+## Lokal Docker- og utviklingsmiljø
+
+Dato: 2026-06-15
+
+- Node-baseline er låst til `24.14.0` via `.nvmrc`, `.node-version` og Docker ARG default.
+- Docker dev bruker Next.js dev-server på `0.0.0.0:3000`, bind mount av repoet, navngitte volum for
+  `node_modules`, `.next` og npm-cache, og polling-basert file watching i container.
+- `scripts/docker/dev-entrypoint.sh` kjører `npm ci` bare når `package.json` eller `package-lock.json` endres.
+- Produksjonscontainer-smoke bruker Next.js standalone-output kun når `NEXT_OUTPUT_STANDALONE=1` settes i
+  Docker build. `.env.local` gis inn som BuildKit-secret og kopieres ikke inn i imaget.
+- Supabase lokal stack forblir CLI-styrt via `npm run db:start` og `npm run db:reset`, slik at app-containeren
+  ikke dupliserer Supabase sin Docker-orkestrering.
+
 ## Produksjonsklar dataflyt, sporing og analyse
 
 Dato: 2026-06-09

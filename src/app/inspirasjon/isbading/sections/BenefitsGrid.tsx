@@ -33,11 +33,11 @@ export const benefitsData: Benefit[] = [
 
 export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
   return (
-    <section className='py-24'>
+    <section className='bg-background py-24 text-cloud-dancer'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-2xl text-center'>
           <h2 className='text-fluid-display font-bold tracking-normal'>Spesiallaget for det ekstreme</h2>
-          <p className='mt-4 text-lg text-foreground'>
+          <p className='mt-4 text-lg text-ancient-water'>
             Isbading krever utstyr du kan stole på. Vi har fjernet barrierene slik at du kan fokusere på
             opplevelsen.
           </p>
@@ -50,11 +50,11 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
               delay={`${benefitIndex * 0.05}s`}
               threshold={0.2}
             >
-              <div className='mx-auto mb-4 flex size-16 items-center justify-center rounded-full border border-cloud-dancer/12 bg-havdyp/24'>
+              <div className='mx-auto mb-4 flex size-16 items-center justify-center rounded-full border border-cloud-dancer/12 bg-background/58'>
                 <benefit.icon className={`size-8 ${benefit.color}`} />
               </div>
               <h3 className='mb-2 text-lg font-semibold'>{benefit.title}</h3>
-              <p className='text-sm text-foreground'>{benefit.description}</p>
+              <p className='text-sm text-ancient-water'>{benefit.description}</p>
             </AnimatedBlock>
           ))}
         </div>

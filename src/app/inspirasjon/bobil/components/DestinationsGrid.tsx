@@ -4,7 +4,7 @@ import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import { MapPinIcon } from '@heroicons/react/24/outline'
 import type { Destination } from '../types'
-import { destinationCardThemes } from '../utils/destinationCardThemes'
+import { bobilDestinationCardTheme } from '../utils/destinationCardThemes'
 
 export function DestinationsGrid({ destinations }: { destinations: Destination[] }) {
   return (
@@ -29,9 +29,7 @@ export function DestinationsGrid({ destinations }: { destinations: Destination[]
 
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
           {destinations.map((destination, destinationIndex) => {
-            const theme =
-              destinationCardThemes[destinationIndex % destinationCardThemes.length]
-              ?? destinationCardThemes[0]
+            const theme = bobilDestinationCardTheme
 
             return (
               <AnimatedBlock

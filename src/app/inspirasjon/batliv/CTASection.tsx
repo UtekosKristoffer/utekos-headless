@@ -1,47 +1,13 @@
-import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
-import { ArrowRight } from 'lucide-react'
-import Link from 'next/link'
-import { AnimatedBlock } from '@/components/AnimatedBlock'
-import type { Route } from 'next'
+import { InspirationCTASection } from '../components/InspirationCTASection'
 
 export function CTASection() {
   return (
-    <section className='relative overflow-hidden border-t border-cloud-dancer/12 bg-background py-24'>
-      <div className='absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,var(--ancient-water)_0%,transparent_32%),radial-gradient(circle_at_82%_20%,var(--soft-warm)_0%,transparent_28%)] opacity-[0.18]' />
-      <div className='container relative mx-auto px-4 text-center'>
-        <AnimatedBlock className='will-animate-fade-in-scale'>
-          <h2 className='mb-6 text-3xl font-bold leading-[1.05] tracking-normal text-foreground sm:text-4xl'>
-            Klar for å kaste loss?
-          </h2>
-          <p className='mx-auto mb-8 max-w-2xl utekos-section-lead'>
-            Bli en av de mange båteierne som har oppdaget hemmeligheten bak en varmere og lengre sesong på
-            sjøen.
-          </p>
-          <div className='flex flex-wrap justify-center gap-4'>
-            <BrandBadge
-              asChild
-              backgroundColor='var(--primary)'
-              textColor='var(--background)'
-              className='group min-h-14 border border-primary/24 px-8 py-4 text-base leading-4 font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
-            >
-              <Link href={'/produkter' as Route} data-track='BatlivShopAllProductsClick'>
-                Se alle produkter
-                <ArrowRight className='size-4 transition-transform group-hover:translate-x-1' />
-              </Link>
-            </BrandBadge>
-            <BrandBadge
-              asChild
-              backgroundColor='var(--cloud-dancer)'
-              textColor='var(--background)'
-              className='min-h-14 border border-cloud-dancer/24 px-8 py-4 text-base leading-4 font-bold tracking-normal shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105'
-            >
-              <Link href={'/handlehjelp/storrelsesguide' as Route} data-track='BatlivFindYourSizeClick'>
-                Finn din størrelse
-              </Link>
-            </BrandBadge>
-          </div>
-        </AnimatedBlock>
-      </div>
-    </section>
+    <InspirationCTASection
+      title='Klar for lengre dager på vannet?'
+      lead='Opplev varme som varer fra soloppgang til kveldsbris — hele sesongen.'
+      primaryTrackId='BatlivShopAllProductsClick'
+      secondaryTrackId='BatlivFindYourSizeClick'
+      accentGlow='var(--very-peri)'
+    />
   )
 }

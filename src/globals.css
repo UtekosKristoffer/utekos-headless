@@ -100,12 +100,14 @@
   --tracking-card-heading: -0.005em;
   --tracking-text-paragraph: -0.02em;
   --tracking-medium: -0.0125em;
-
+  --text-subtitle: clamp(3.875rem, 10.0694444444vw, 9.0625rem);
+  --font-size-subtitle: clamp(3.875rem, 10.0694444444vw, 9.0625rem);
   --text-section-lead: clamp(1.125rem, 1.0357rem + 0.4464vw, 1.375rem);
   --text-section-lead--line-height: 1.4;
   --text-section-lead--letter-spacing: var(--tracking-font-utekos-text);
   --text-section-lead--font-weight: 400;
-
+  --text-lead: clamp(1.5rem, 2.5rem + 0.5vw, 2rem);
+  --font-size-lead: clamp(2rem, 3.3333333333vw, 3rem);
   --text-card: clamp(1.125rem, 1.0357rem + 0.4464vw, 1.375rem);
   --text-card--line-height: var(--leading-font-utekos-text);
   --text-card--letter-spacing: var(--tracking-3);
@@ -132,11 +134,29 @@
   --radius: 0.625rem;
   --radius-full: 9999px;
   --color-foreground: oklch(0.985 0 0);
-
+  --color-tint-progression: linear-gradient(90deg, #27293d, #494c68, #6e718f);
   --tracking-heading-level-one: -0.01em;
   --tracking-heading-level-two: -0.01em;
   --tracking-heading-level-three: 0.005em;
   --tracking-ml: -0.02em;
+  --color-comp-olive: oklch(0.3484 0.0326 103.11);
+  --color-flame-orange: oklch(0.7446 0.1709 56.41);
+  --color-flame: oklch(0.6568 0.2001 35.25);
+  --color-gold-flame: oklch(0.5582 0.1392 44.95);
+  --color-flame-scarlett: oklch(0.547 0.2043 25.36);
+  --color-feedback-green: oklch(0.65 0.13 145);
+  --background-image-maritime-aurora: linear-gradient(
+    135deg,
+    oklch(0.3191 0.022 259.38) 0%,
+    /* Blueberry */ oklch(0.2884 0.0366 279.42) 50%,
+    /* Maritime Blue */ oklch(0.3048 0.0341 291.48) 100% /* Inking */
+  );
+  --background-image-ocean-flow: linear-gradient(
+    90deg,
+    oklch(0.2351 0.0378 261.65) 0%,
+    oklch(0.346 0.0543 252.39) 100%
+  );
+  --background-image-maritime-diagonal: linear-gradient(45deg, #27343d 0%, #27293d 50%, #30273d 100%);
 
   /* Utekos TechDown */
   --color-cognac: #c87d38;
@@ -153,11 +173,9 @@
   --color-fjellbla: oklch(0.3504 0.0537 281.83);
   --color-evening-blue: oklch(0.2918 0.038 285.97);
   --color-peacoat: oklch(0.308 0.038 277.64);
-  --color-inking: oklch(0.3048 0.0341 291.48);
   --color-spring-purple: oklch(0.5944 0.0478 4.25);
   --color-plum: oklch(0.2471 0.0352 8.01);
   --color-plum-hover: oklch(0.2771 0.0252 8.01);
-  --color-inking-100: oklch(0.3048 0.0341 291.48);
   --color-eclipse: oklch(0.3276 0.0405 291.98);
   --color-eggplant: oklch(0.28 0.0584 296.86);
   --color-deep-cobalt: oklch(0.3982 0.0575 278.29);
@@ -173,10 +191,10 @@
   --color-very-peri: oklch(0.5433 0.105 281.67);
   --color-border: oklch(0.2884 0.0366 279.42);
   --color-calery-green: oklch(0.7853 0.0932 119.23);
+  --color-stretch-limbo: oklch(0.2937 0.0074 274.72);
   --color-ring: oklch(0.2884 0.0366 279.42);
   --color-cloud-dancer: oklch(0.9493 0.007 88.64);
   --color-cool-gray: oklch(0.8892 0.0108 106.62);
-  --color-ancient-water: oklch(0.8733 0.0246 259.82);
   --color-ancient-water-light: oklch(0.8033 0.0246 259.82);
   --color-bright-white: oklch(0.9801 0.0096 252.81);
   --color-secondary: oklch(0.82 0.006 88.64);
@@ -184,15 +202,13 @@
   --color-secondary-foreground: oklch(0.2884 0.0366 279.42);
   --color-destructive: oklch(0.5774 0.2057 27.33);
   --color-input: oklch(0.2884 0.0366 279.42);
+  --color-peach-fuzz: oklch(0.8521 0.0907 51.44);
   --color-espresso: oklch(0.3159 0.0088 6.16);
   --color-raisin: oklch(0.3943 0.024 6.35);
   --color-plum-truffle: oklch(0.4729 0.0211 13.65);
   --color-delicioso: oklch(0.3377 0.0177 52.86);
   --color-shitake: oklch(0.3377 0.0177 52.86);
   --color-antier: oklch(0.6039 0.0343 27.96);
-  --color-demitasse: oklch(0.3328 0.0233 53.3);
-  --color-chocolate-plum: oklch(0.3159 0.0237 14.31);
-  --color-dusted-peri: oklch(0.5433 0.105 281.67);
   --color-dusted-peri-light: oklch(0.7081 0.0822 281.66);
   --color-dusted-purple: oklch(0.7794 0.0538 285.08);
   --color-persian-violet: oklch(0.6579 0.0534 282.33);
@@ -206,22 +222,25 @@
   --color-raindrops-on-roses: oklch(0.8996 0.0227 3.86);
   --color-sweet-lavender: oklch(0.7019 0.0553 283.69);
   --color-primary: oklch(0.8104 0.1858 101.08);
-  --color-mountain-view: oklch(0.3424 0.0298 148.54);
   --color-deep-forest: oklch(0.3638 0.0178 154.9);
   --color-dark-green: oklch(0.3997 0.0433 161.05);
   --color-greener-pastures: oklch(0.4048 0.0441 151.51);
+  --color-blue-yonder: oklch(0.5675 0.0835 260.58);
   --color-black-forrest: oklch(0.4103 0.0351 135.85);
   --color-camping-green: oklch(0.4257 0.0261 153.39);
   --color-comfrey: oklch(0.5054 0.0686 150.31);
   --color-mineral-green: oklch(0.6545 0.0641 142.67);
   --color-maritime-darkest: oklch(0.1996 0.0201 279.96);
+  --color-brandied-apricot: oklch(0.6867 0.0867 13.98);
   --color-dried-moss: oklch(0.6255 0.0566 109.13);
   --color-granita: oklch(0.5219 0.1299 11.48);
   --color-hawthorne-rose: oklch(0.493 0.0837 1.36);
+  --color-fairy-tale: oklch(0.8586 0.0595 356.93);
   --color-fairest-jade: oklch(0.9041 0.02 143.03);
   --color-celery: oklch(0.7853 0.0932 119.23);
   --color-chai-tea: oklch(0.6599 0.099 77.28);
   --color-overcast: oklch(0.7983 0.0257 91.66);
+  --color-pickled-beet: oklch(0.3259 0.071 344.3);
   --color-martitime-dark-shade: oklch(0.2355 0.0271 277.81);
   --color-white-sand: oklch(0.8767 0.0086 56.3);
   --color-overcast-medium: #e7e1ce;
@@ -236,41 +255,169 @@
   --color-lucent-white: oklch(0.9762 0.0111 269.55);
   --color-barely-blue: oklch(0.9041 0.0035 174.47);
   --color-almost-mauve: oklch(0.9024 0.0128 35.73);
+  --color-mocha-mousse: oklch(0.6114 0.0628 45.48);
   --color-background: oklch(0.1996 0.0201 279.96);
   --color-petrified-oak: oklch(0.588 0.0439 73);
   --color-muted: oklch(0.2684 0.0366 279.42);
   --color-iced-apricot: oklch(0.7865 0.1058 43.19);
   --color-tawny-gold: oklch(0.7258 0.1226 76.21);
   --color-foreground: oklch(0.985 0 0);
+  --color-patriot-blue: oklch(0.3504 0.0537 281.83);
+  --color-havdyp-darker: oklch(0.1996 0.0201 279.96);
   --utekos-title-letter-spacing: -0.02em;
   --font-utekos-text-line-height: 1.45;
+  --color-black-iris: oklch(0.3125 0.0331 272.35);
+
+  /* The Seasonless Shades */
+  /*Angora is a soft beige whose message of tactility embraces a silky, fluffy feel.*/
+  --color-angora: oklch(0.8662 0.0335 79.25);
+  /*Grounded and rooted, Palm cultivates an oasis of flourishing greenery.*/
+  --color-palm: oklch(0.7363 0.1041 108.71);
+  /*White Onyx is a light transmitting off-white with a soft ethereal glow.*/
+  --color-white-onyx: oklch(0.8746 0.0109 100.84);
+  /*A deliciously rich brown, Chocolate Truffle tempts our desire for luscious treats.*/
+  --color-chocolate-truffle: oklch(0.3715 0.0741 12.72);
+  /*Ether is an ethereal blue gray with an illusory presence.*/
+  --color-ether: oklch(0.7587 0.0265 202.75);
+  /*Evening Blue is an open and expansive darkened blue.*/
+  --color-evening-blue: oklch(0.2918 0.038 285.97);
+
+  /* MARITIME BLUE PALETTE */
+
+  --color-maritime-blue: var(--havdyp);
+  /* Analogous */
+  --color-inking: oklch(0.3048 0.0341 291.48);
+  --color-blueberry: oklch(0.3191 0.022 259.38);
+  /* Complementary */
+  --color-comp-olive: oklch(0.3484 0.0326 103.11);
+  --color-demitasse: oklch(0.3328 0.0233 53.3);
+  /* Monochromatic */
+  --color-dusted-peri: oklch(0.5433 0.105 281.67);
+  --color-ancient-water: oklch(0.8733 0.0246 259.82);
+  /* Triadic */
+  --color-chocolate-plum: oklch(0.3159 0.0237 14.31);
+  --color-mountain-view: oklch(0.3424 0.0298 148.54);
+  /* Tetradic */
+  --color-demitasse: oklch(0.3328 0.0233 53.3);
+  --color-chocolate-plum: oklch(0.3159 0.0237 14.31);
   --color-muted-foreground: oklch(0.78 0.006 88.64);
+
+  /* Maritime Blue Lightness */
+  --color-skipper-blue: oklch(0.4252 0.0661 280.99);
+  --color-deep-cobalt: oklch(0.3982 0.0575 278.29);
+  --color-patriot-blue: oklch(0.3504 0.0537 281.83);
+  --color-peacoat: oklch(0.308 0.038 277.64);
+  --color-maritime-blue: oklch(0.2884 0.0366 279.42);
+  --color-evening-blue: oklch(0.2918 0.038 285.97);
+  --color-ocean-cavern: oklch(0.2957 0.0549 275.35);
+  --color-baritone-blue: oklch(0.2821 0.0257 281.42);
+
+  /* Maritime Blue Saturation */
+  --color-black-cat: oklch(0.3158 0.016 280.42);
+  --color-baritone-blue: oklch(0.2821 0.0257 281.42);
+  --color-maritime-blue: oklch(0.2884 0.0366 279.42);
+  --color-ocean-cavern: oklch(0.2957 0.0549 275.35);
+  --color-beacon-blue: oklch(0.3011 0.0686 275.83);
+
+  /* Maritime Blue Analogous */
+  --color-blueberry: oklch(0.3191 0.022 259.38);
+  --color-inking: oklch(0.3048 0.0341 291.48);
+
+  /* Maritime Blue Square */
+  --color-kombu-green: oklch(0.364 0.0267 128.05);
+  --color-chocolate-plum: oklch(0.3159 0.0237 14.31);
+
+  --color-muted-moss: #3d3e29;
+
   --color-country-air: oklch(0.909 0.0246 248.11);
   --color-elderberry: oklch(0.3758 0.0374 319.08);
   --color-orange-slice: oklch(0.7034 0.198 45.92);
+  --color-amphora: oklch(0.6377 0.0421 60.6);
   --color-soft-warm: oklch(0.7864 0.0487 359.96);
+  --color-pageant-blue: oklch(0.2929 0.0459 261.37);
   --color-light-background: var(--color-cloud-dancer);
   --color-button: oklch(0.57 0.23507 260.1068);
   --color-header-secondary: oklch(0.2805 0.0458 357.59);
   --color-header-plum: oklch(0.2471 0.0352 8.01);
   --color-ganache: oklch(0.2938 0.0165 11.97);
   --color-licorice: oklch(0.3356 0.0086 6.11);
+  --color-icelandic: oklch(0.752 0.0302 279.19);
   --color-raisin: oklch(0.3943 0.024 6.35);
   --color-plum-thruffle: oklch(0.4729 0.0211 13.65);
   --color-plum-perfect: oklch(0.3517 0.0353 336.04);
   --color-marsala: oklch(0.5125 0.0956 23.49);
   --color-coated-100: oklch(0.3736 0.0757 10.53);
+  --color-rose-brown: oklch(0.5002 0.0563 11.45);
   --color-coted-150: oklch(0.3736 0.0757 10.53);
   --cololor-coated-200: oklch(0.3708 0.0674 352.96);
   --color-spring-apricot: oklch(0.813 0.1079 40.43);
   --color-spring-peach: oklch(0.7739 0.1028 58.19);
   --color-yellow-white: oklch(0.9455 0.0469 88.29);
+  --color-black-beauty: oklch(0.2739 0.0055 286.03);
+  --color-caviar: oklch(0.2862 0.0054 286.05);
+  --color-shifting-sand: oklch(0.823 0.0378 60.62);
+  --color-coral-haze: oklch(0.732 0.1053 27.17);
+  --color-mountain-trail: oklch(0.5777 0.0309 52.84);
+  --color-swim-cap: oklch(0.6767 0.1152 229.49);
+  --color-amber-light: oklch(0.8256 0.0561 59.77);
+  --color-ashes-of-roses: oklch(0.7516 0.0105 25.11);
+  --color-woodrose: oklch(0.6723 0.0414 14.26);
+  --color-vulcan: oklch(0.2888 0.0039 264.5);
+  --color-blueberry: oklch(0.3191 0.022 259.38);
+  --color-secondary: oklch(0.3484 0.0326 103.11);
+  --color-quiet-tide: oklch(0.8947 0.0408 222.3);
+  --color-quet-tide-primary-monochromatic: oklch(0.3299 0.0601 240.02);
+  --color-quet-tide-secondary-monochromatic: oklch(0.6767 0.1152 229.49);
+
+  /* Colors for Hytte Seasons Section */
+  --color-cloud-dancer: oklch(0.9493 0.007 88.64);
+  --color-mountain-trail: oklch(0.5777 0.0309 52.84);
+  --color-amber-light: oklch(0.8256 0.0561 59.77);
+  --color-ashes-of-roses: oklch(0.7516 0.0105 25.11);
+  --color-woodrose: oklch(0.6723 0.0414 14.26);
+  --color-vulcan: oklch(0.2888 0.0039 264.5);
+  --color-harbor-gray: oklch(0.7882 0.0271 181.65);
+  /* A palette of colour that elevates the everyday */
+
+  /*Burnished Lilac is a tinged and smoky lavender tone with a perfumed vintage feel */
+  --color-burnished-lilac: oklch(0.7714 0.0269 8.79);
+  /* A vibrant reddish rose, Teaberry injects drama and theatrical fun */
+  --color-teaberry: oklch(0.5969 0.1991 16.07);
+  /* Pale Banana is a soft yellow pastel with a light ambiance whose message of cheer enhances human connection */
+  --color-pale-banana: oklch(0.9141 0.0945 91.09);
+  /*Mandarin Orange is a fruity bright orange whose gregarious spirit sparks smiles and lifts the mood */
+  --color-mandarin-orange: oklch(0.6753 0.1735 40.6);
+  /* A cosmopolitan purple hue, Amaranth displays an aura of mystery and spiritual resonance */
+  --color-amaranth: oklch(0.4279 0.0794 349.09);
+  /* Blending soft sweetness with strength, Tickled Pink displays a playful attitude that is hard to resist */
+  --colo-tickled-pink: oklch(0.8448 0.0726 9.06);
+  /* Amethyst Orchid is a magnetic hue emerging as a symbol of visionary luxe */
+  --color-amethyst-orchid: oklch(0.5875 0.0997 313.96);
+  /* Candied brown Caramel delivers a pleasurable indulgence */
+  --color-caramel: oklch(0.6524 0.1043 49.57);
+  /* Dutch Canal is an airy blue with a breezy appeal */
+  --color-dutch-canal: oklch(0.7759 0.0671 250.08);
+  /* Shale Green is a muted earthy green with a dry mineralized appearance */
+  --color-shale-green: oklch(0.6224 0.0553 144.03);
 }
 
 @theme inline {
+  --amethyst-orchid: var(--color-amethyst-orchid);
+  --flame-orange: var(--color-flame-orange);
+  --flame: var(--color-flame);
+  --gold-flame: var(--color-gold-flame);
   --tracking-0: 0.05em;
   --foreground: oklch(0.985 0 0);
+  --icelandic: oklch(0.752 0.0302 279.19);
+  --maritime-darker: oklch(0.1996 0.0201 279.96);
+  --baritone-blue: oklch(0.2821 0.0257 281.42);
   --eggplant: oklch(0.28 0.0584 296.86);
+  --quet-tide-muted: var(--color-fairy-tale);
+  --pageant-blue: var(--color-pageant-blue);
+  --pickled-beet: var(--color-pickled-beet);
+  --quiet-tide: var(--color-quiet-tide);
+  --quet-tide-primary-monochromatic: var(--color-quet-tide-primary-monochromatic);
+  --quet-tide-secondary-monochromatic: var(--color-quet-tide-secondary-monochromatic);
   --header-secondary: var(--color-header-secondary);
   --tablet: var(--breakpoint-tablet);
   --tracking-1: var(--tracking-1); /* Utekos's max tight limit for body copy/buttons (-3%) */
@@ -282,6 +429,26 @@
   --border: oklch(0.7034 0.198 45.92);
   --header-plum: oklch(0.2471 0.0352 8.01);
   --ring: oklch(0.2884 0.0366 279.42);
+  --black-beauty: oklch(0.2739 0.0055 286.03);
+  --caviar: oklch(0.2862 0.0054 286.05);
+  --checkout-button: var(--color-flame-orange);
+  --checkout-secondary: var(--color-swim-cap);
+  --rose-brown: var(--color-rose-brown);
+  --peach-fuzz: var(--color-peach-fuzz);
+  --secondary: var(--color-secondary);
+  --blueberry: var(--color-blueberry);
+  --shifting-sand: var(--color-shifting-sand);
+  --stretch-limbo: var(--color-stretch-limbo);
+  --coral-haze: var(--color-coral-haze);
+  --vulcan: var(--color-vulcan);
+  --mountain-trail: var(--color-mountain-trail);
+  --amber-light: var(--color-amber-light);
+  --ashes-of-roses: var(--color-ashes-of-roses);
+  --woodrose: var(--color-woodrose);
+  --font-utekos-text: var(--font-utekos-text);
+  --font-utekos-text-medium: var(--font-utekos-text-medium);
+  --font-utekos-title: var(--font-utekos-title);
+  --font-google-sans: var(--font-google-sans);
   --tracking-medium: var(--tracking-medium);
   --tracking-font-utekos-text: var(--tracking-wide);
   --tracking-text-paragraph: var(--tracking-ml);
@@ -293,6 +460,7 @@
   --bright-white: oklch(0.9801 0.0096 252.81);
   --klarna-pink: oklch(0.8271 0.1114 352.7);
   --silhouette: oklch(0.2881 0.0219 262.5);
+  --patriot-blue: oklch(0.3504 0.0537 281.83);
   --havdyp: var(--color-havdyp);
   --yellow-white: oklch(0.9455 0.0469 88.29);
   --spring-peach: var(--color-spring-peach);
@@ -301,12 +469,15 @@
   --martitime-dark-shade: oklch(0.2355 0.0271 277.81);
   --very-white: oklch(0.9801 0.0096 252.81);
   --very-peri: oklch(0.5433 0.105 281.67);
+  --inking: oklch(0.3048 0.0341 291.48);
   --granita: oklch(0.5219 0.1299 11.48);
   --hawthorne-rose: oklch(0.493 0.0837 1.36);
   --spring-purple: var(--color-spring-purple);
   --spring-apricot: var(--color-spring-apricot);
   --plum: var(--color-plum);
   --plum-hover: var(--color-plum-hover);
+  --amphora: var(--color-amphora);
+  --mocha-mousse: var(--color-mocha-mousse);
   --granite-green: oklch(0.6068 0.0431 92.87);
   --elderberry: oklch(0.3758 0.0374 319.08);
   --calery-green: oklch(0.7853 0.0932 119.23);
@@ -316,7 +487,7 @@
   --country-air: oklch(0.909 0.0246 248.11);
   --fairest-jade: oklch(0.9041 0.02 143.03);
   --iced-apricot: oklch(0.7865 0.1058 43.19);
-  --cloud-dancer: oklch(0.9493 0.007 88.64);
+  --cloud-dancer: var(--color-cloud-dancer);
   --ancient-water: oklch(0.8733 0.0246 259.82);
   --ancient-water-light: oklch(0.8033 0.0246 259.82);
   --barely-blue: oklch(0.9041 0.0035 174.47);
@@ -333,6 +504,7 @@
   --deep-forest: oklch(0.3638 0.0178 154.9);
   --mineral-green: oklch(0.6545 0.0641 142.67);
   --cognac: #c87d38;
+  --blue-yonder: oklch(0.5675 0.0835 260.58);
   --fire: #ba5c46;
   --messing: #c29b57;
   --fairest-jade: oklch(0.9041 0.02 143.03);
@@ -358,18 +530,20 @@
   --input: oklch(0.2884 0.0366 279.42);
   --persian-violet: oklch(0.6579 0.0534 282.33);
   --destructive: oklch(0.5774 0.2057 27.33);
+  --harbor-gray: oklch(0.7882 0.0271 181.65);
   --raisin: oklch(0.3943 0.024 6.35);
   --fair-orchid: oklch(0.7637 0.0395 325.96);
   --secondary-foreground: oklch(0.2884 0.0366 279.42);
-  --secondary: oklch(0.82 0.006 88.64);
   --primary-foreground: oklch(0.9493 0.007 88.64);
   --color-popover: oklch(0.2884 0.0366 279.42);
   --color-popover-foreground: oklch(0.9493 0.007 88.64);
   --popover: oklch(0.2884 0.0366 279.42);
   --popover-foreground: oklch(0.9493 0.007 88.64);
+  --marsala: var(--color-marsala);
   --maritime-dark: oklch(0.1996 0.0201 279.96);
-  --bleached-mauve: oklch(0.7864 0.0487 359.96);
-  --bleached-mauve-light: oklch(0.9064 0.0487 359.96);
+  --fair-orchid: oklch(0.7864 0.0487 359.96);
+  --fair-orchid-light: oklch(0.9064 0.0487 359.96);
+  --brandied-apricot: var(--color-brandied-apricot);
   --foreground: oklch(0.9493 0.007 88.64);
   --primary: oklch(0.8104 0.1858 101.08);
   --muted-foreground: oklch(0.78 0.006 88.64);
@@ -378,6 +552,7 @@
   --font-utekos-text: var(--font-utekos-text);
   --font-utekos-text-medium: var(--font-utekos-text-medium);
   --font-utekos-title: var(--font-utekos-title);
+  --font-google-sans: var(--font-google-sans);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -883,6 +1058,35 @@
 
 .grill-seasons-tab-content-enter {
   animation: grill-seasons-tab-fade-in 0.3s ease-out;
+}
+
+.inspiration-seasons-glow-pulse {
+  animation: grill-seasons-pulse-glow 8s ease-in-out infinite;
+}
+
+.inspiration-seasons-fade-in-delayed {
+  animation: fadeInUp 0.7s ease-out 0.2s both;
+}
+
+.inspiration-seasons-tab-trigger {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.inspiration-seasons-active-glow {
+  pointer-events: none;
+  position: absolute;
+  inset: -0.5rem -0.5rem -2rem;
+  opacity: 0.25;
+  filter: blur(2rem);
+  transition: opacity 0.3s ease;
+}
+
+.inspiration-seasons-tab-content-enter {
+  animation: grill-seasons-tab-fade-in 0.3s ease-out;
+}
+
+.inspiration-seasons-tip-enter {
+  animation: fadeInUp 0.5s ease-out both;
 }
 
 .hytte-seasons-glow-pulse {
@@ -1510,7 +1714,6 @@
   @apply data-[selected=true]:border-border data-[selected=true]:bg-primary/10 data-[selected=true]:font-medium data-[selected=true]:text-white;
 }
 
-
 .klarna-top-strip {
   display: flex;
   width: 100%;
@@ -1556,5 +1759,28 @@
   ::view-transition-group(*) {
     animation-duration: 0s important;
     animation-delay: 0s important;
+  }
+
+  @layer utilities {
+    .bg-maritime-aurora {
+      background-color: var(--color-maritime-blue);
+      background-image:
+        radial-gradient(
+          circle at 100% 100%,
+          color-mix(in oklch, var(--color-dusted-peri) 15%, transparent) 0%,
+          transparent 50%
+        ),
+        radial-gradient(
+          circle at 0% 100%,
+          color-mix(in oklch, var(--color-demitasse) 10%, transparent) 0%,
+          transparent 40%
+        ),
+        linear-gradient(
+          135deg,
+          var(--color-blueberry) 0%,
+          var(--color-maritime-blue) 50%,
+          var(--color-inking) 100%
+        );
+    }
   }
 }

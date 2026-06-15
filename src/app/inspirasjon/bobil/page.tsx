@@ -6,8 +6,7 @@ import { CTASection } from './components/CTASection'
 import { DestinationsGrid } from './components/DestinationsGrid'
 import { UseCasesGrid, useCasesData } from './components/UseCasesGrid'
 import { destinationsData } from './utils/destinationsData'
-import { SeasonsSection } from './components/SeasonsSection'
-import { InspirationGallerySection } from './components/InspirationGallerySection'
+import { AboutCarousel } from '@/components/about/AboutCarousel'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://utekos.no'),
@@ -45,11 +44,9 @@ export default function BobilInspirasjonPage() {
 
       <BenefitsGrid benefits={benefitsData} />
 
-      <SeasonsSection />
-
       <DestinationsGrid destinations={destinationsData} />
 
-      <InspirationGallerySection />
+      <AboutCarousel />
 
       <CTASection />
     </article>

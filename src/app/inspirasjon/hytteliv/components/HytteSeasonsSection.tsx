@@ -11,8 +11,7 @@ export function HytteSeasonsSection() {
 
       <div className='container mx-auto px-4'>
         <div className='animate-fade-in-up mb-16 text-center'>
-          <h2 className='text-background'>Hytteglede i alle sesonger</h2>
-        
+          <h2 className='text-background md:text-6xl xl:text-7xl'>Hytteglede i alle sesonger</h2>
         </div>
         <Tabs />
       </div>

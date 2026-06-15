@@ -3,6 +3,9 @@ import { AnimatedBlock } from '@/components/AnimatedBlock'
 import type { HostTip } from '../types'
 import { Music, Thermometer, Lightbulb, UtensilsCrossed } from 'lucide-react'
 import { grillCardThemes } from '../data/grillCardThemes'
+import { grillSectionSurfaces } from '../theme/sectionSurfaces'
+
+const { dark } = grillSectionSurfaces
 
 export const hostTipsData: HostTip[] = [
   {
@@ -29,11 +32,11 @@ export const hostTipsData: HostTip[] = [
 
 export function HostTipsGrid({ tips }: { tips: HostTip[] }) {
   return (
-    <section className='bg-overcast py-24'>
+    <section className={dark.section}>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-3xl md:max-w-4xl text-center'>
-          <h2 className='text-fluid-display-bold text-background'>Vertens sjekkliste</h2>
-          <p className='mx-auto mt-4 max-w-2xl utekos-section-lead text-background/82'>
+          <h2 className={`text-fluid-display-bold ${dark.heading}`}>Vertens sjekkliste</h2>
+          <p className={`mx-auto mt-4 max-w-2xl utekos-section-lead ${dark.lead}`}>
             Fire enkle tips for en uforglemmelig og komfortabel grillkveld.
           </p>
         </div>

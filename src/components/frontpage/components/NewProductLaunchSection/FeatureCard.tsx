@@ -11,16 +11,16 @@ const iconMap = {
 
 const toneStyles = {
   water: {
-    bg: 'var(--ancient-water)',
-    icon: 'border-havdyp bg-havdyp text-foreground'
+    bg: 'var(--quiet-tide)',
+    icon: 'border-quet-tide-secondary-monochromatic bg-quet-tide-secondary-monochromatic text-(--quet-tide-primary-monochromatic)'
   },
   mauve: {
-    bg: 'var(--bleached-mauve)',
-    icon: 'border-havdyp bg-havdyp text-foreground'
+    bg: 'var(--quiet-tide)',
+    icon: 'border-quet-tide-secondary-monochromatic bg-quet-tide-secondary-monochromatic text-(--quet-tide-primary-monochromatic)'
   },
   overcast: {
-    bg: 'var(--overcast)',
-    icon: 'border-havdyp bg-havdyp text-foreground'
+    bg: 'var(--quiet-tide)',
+    icon: 'border-quet-tide-secondary-monochromatic bg-quet-tide-secondary-monochromatic text-(--quet-tide-primary-monochromatic)'
   }
 } as const
 
@@ -44,7 +44,7 @@ export function FeatureCard({ feature }: FeatureCardProps) {
 
   return (
     <article
-      className='w-full rounded-2xl border border-havdyp/32 bg-[var(--feature-card-bg)] p-4 pr-5 text-havdyp shadow-[0_1px_0_color-mix(in_oklab,var(--cloud-dancer)_18%,transparent)] sm:p-5 sm:pr-8'
+      className='w-full rounded-2xl border border-havdyp/32 bg-(--feature-card-bg) p-4 pr-5 text-havdyp shadow-[0_1px_0_color-mix(in_oklab,var(--cloud-dancer)_18%,transparent)] sm:p-5 sm:pr-8'
       style={cardStyle}
     >
       <div className='flex items-start gap-3 sm:gap-4'>

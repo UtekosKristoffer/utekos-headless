@@ -1,11 +1,5 @@
-// Path: src/app/inspirasjon/terrassen/sections/Tabs.tsx
-
-import { SeasonsTabs } from './SeasonTabs'
+import { SeasonsSection } from './SeasonsSection'
 
 export function Tabs() {
-  return (
-    <div className='hytte-seasons-fade-in-delayed'>
-      <SeasonsTabs />
-    </div>
-  )
+  return <SeasonsSection />
 }

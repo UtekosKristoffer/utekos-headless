@@ -12,8 +12,8 @@ export const useCasesData: UseCase[] = [
     title: 'Den kjølige morgenkaffen',
     description: 'Start dagen med kaffe utenfor bobilen, innhyllet i varme mens naturen våkner.',
     temperature: '5-12°C',
-    color: 'from-primary/20',
-    iconColor: 'text-primary'
+    color: 'bg-demitasse',
+    iconColor: 'text-almost-mauve'
   },
   {
     icon: MoonIcon,
@@ -21,8 +21,8 @@ export const useCasesData: UseCase[] = [
     title: 'Sosiale kvelder under stjernene',
     description: 'Forleng kvelden med venner og familie uten å la kulden drive dere inn.',
     temperature: '8-15°C',
-    color: 'from-ancient-water/20',
-    iconColor: 'text-ancient-water'
+    color: 'bg-demitasse',
+    iconColor: 'text-almost-mauve'
   },
   {
     icon: Wind,
@@ -30,8 +30,8 @@ export const useCasesData: UseCase[] = [
     title: 'Vår og høst-camping',
     description: 'Utvid sesongen og opplev Norge når det er på sitt vakreste.',
     temperature: '3-10°C',
-    color: 'from-bleached-mauve/20',
-    iconColor: 'text-bleached-mauve'
+    color: 'bg-demitasse',
+    iconColor: 'text-almost-mauve'
   }
 ]
 
@@ -55,27 +55,26 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
               delay={`${useCaseIndex * 0.1}s`}
               threshold={0.2}
             >
-              <Card className='@container relative h-full overflow-hidden border-cloud-dancer/12 bg-havdyp group'>
-                <div
-                  className={`absolute inset-0 bg-linear-to-br ${useCase.color} to-transparent opacity-20 transition-opacity group-hover:opacity-30`}
-                />
+              <Card
+                className={`@container relative h-full overflow-hidden border-cloud-dancer/12 ${useCase.color} group`}
+              >
                 <CardContent className='relative p-8'>
                   <div className='mb-6 flex items-center gap-4'>
                     <div className='flex size-12 items-center justify-center rounded-lg border border-cloud-dancer/18 bg-havdyp/24'>
                       <useCase.icon className={`size-6 ${useCase.iconColor}`} />
                     </div>
                     <div>
-                      <p className='  text-sm tracking-[-0.02em] text-foreground'>{useCase.time}</p>
-                      <p className='  text-sm font-medium tracking-[-0.02em] text-foreground/90'>
+                      <p className='text-sm tracking-[-0.02em] text-almost-mauve'>{useCase.time}</p>
+                      <p className='  text-sm font-medium tracking-[-0.02em] text-almost-mauve'>
                         {useCase.temperature}
                       </p>
                     </div>
                   </div>
 
-                  <h3 className='font-google-sans mb-2 text-xl font-bold leading-[0.95] tracking-[-0.01em] text-foreground'>
+                  <h3 className='font-google-sans mb-2 text-xl font-bold leading-[0.95] tracking-[-0.01em] text-almost-mauve'>
                     {useCase.title}
                   </h3>
-                  <p className='  leading-text-paragraph tracking-[-0.02em] text-foreground/90'>
+                  <p className='  leading-text-paragraph tracking-[-0.02em] text-almost-mauve'>
                     {useCase.description}
                   </p>
                 </CardContent>

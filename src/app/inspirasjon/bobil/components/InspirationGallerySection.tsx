@@ -13,13 +13,13 @@ import { galleryImages } from '../utils/galleryImages'
 
 export function InspirationGallerySection() {
   return (
-    <section className='bg-havdyp py-24 text-foreground'>
+    <section className='bg-background py-24 text-cloud-dancer'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl md:max-w-4xl text-center'>
-          <h2 className='text-foreground inline-flex items-baseline justify-center gap-x-[0.18em] whitespace-nowrap'>
+          <h2 className='text-cloud-dancer inline-flex items-baseline justify-center gap-x-[0.18em] whitespace-nowrap'>
             Utekos i sitt rette element
           </h2>
-          <p className='mx-auto my-8 utekos-section-lead max-w-2xl text-foreground'>
+          <p className='mx-auto my-8 utekos-section-lead max-w-2xl text-cloud-dancer'>
             Fra morgenkaffen i soloppgang til sene kvelder under stjernene. La deg inspirere av ekte øyeblikk
             fra bobillivet.
           </p>
@@ -48,10 +48,10 @@ export function InspirationGallerySection() {
                     />
                   </div>
                   <div className='flex-1 pt-4 text-left'>
-                    <h3 className='font-google-sans font-bold leading-[0.95]   text-foreground'>
+                    <h3 className='font-google-sans font-bold leading-[0.95]   text-cloud-dancer'>
                       {image.title}
                     </h3>
-                    <p className='mt-2   text-sm leading-text-paragraph   text-foreground/90'>
+                    <p className='mt-2   text-sm leading-text-paragraph   text-ancient-water'>
                       {image.description}
                     </p>
                   </div>
@@ -61,11 +61,11 @@ export function InspirationGallerySection() {
           </CarouselContent>
           <CarouselPrevious
             aria-label='Forrige bilde'
-            className='left-2 hidden border-cloud-dancer/20 bg-background/90 text-foreground hover:bg-background focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-havdyp md:inline-flex'
+            className='left-2 hidden border-cloud-dancer/20 bg-background/90 text-cloud-dancer hover:bg-background focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-havdyp md:inline-flex'
           />
           <CarouselNext
             aria-label='Neste bilde'
-            className='right-2 hidden border-cloud-dancer/20 bg-background/90 text-foreground hover:bg-background focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-havdyp md:inline-flex'
+            className='right-2 hidden border-cloud-dancer/20 bg-background/90 text-cloud-dancer hover:bg-background focus-visible:ring-2 focus-visible:ring-cloud-dancer/70 focus-visible:ring-offset-2 focus-visible:ring-offset-havdyp md:inline-flex'
           />
         </Carousel>
       </div>

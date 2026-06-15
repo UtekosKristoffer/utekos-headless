@@ -11,19 +11,7 @@ export function MomentsHeader() {
     <div id='moments-header' className='mb-24 text-center mx-auto max-w-5xl px-4'>
       {/* Overskrift: Strengt bundet til Utekos Title (Sentence case, leading 90%, tracking -1%, primærfarge) */}
       <h2 className='text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-10 leading-heading-level-two tracking-[-0.01em]'>
-        <div className='flex flex-wrap justify-center gap-x-3 md:gap-x-5 items-baseline'>
-          <CinematicWord delay={0.1}>Skapt</CinematicWord>
-          <CinematicWord delay={0.15}>for</CinematicWord>
-          <CinematicWord delay={0.2}>dine</CinematicWord>
-
-          {/* THE HERO WORD: Holdes i primærfargen cloud-dancer med subtilt luksus-shimmer i hvit/lys oklch spekter */}
-          <span className='inline-block'>
-            <LuxuryShimmerText
-              text='øyeblikk'
-              className='font-bold tracking-[-0.01em] text-foreground [--shimmer-color:rgba(255,255,255,0.4)]'
-            />
-          </span>
-        </div>
+        Skapt for dine øyeblikk
       </h2>
 
       <div className='max-w-3xl mx-auto'>

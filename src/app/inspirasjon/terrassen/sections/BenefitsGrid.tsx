@@ -1,109 +1,52 @@
 // Path: src/app/inspirasjon/terrassen/sections/BenefitsGrid.tsx
 
-import { Thermometer, Home, Sparkles, Users } from 'lucide-react'
+import { Home, Sparkles, Thermometer, Users } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import { AnimatedBlock } from '@/components/AnimatedBlock'
-import { cn } from '@/lib/utils/className'
-
-const iconMap = {
-  thermometer: Thermometer,
-  home: Home,
-  sparkles: Sparkles,
-  users: Users
-}
-
-const benefitSurfaces = {
-  comfort: {
-    borderColor: 'color-mix(in oklch, var(--very-peri) 30%, transparent)',
-    background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--havdyp) 78%, var(--very-peri) 22%) 0%, color-mix(in oklch, var(--background) 78%, var(--havdyp) 22%) 100%)',
-    iconBackground: 'color-mix(in oklch, var(--very-peri) 18%, var(--background) 82%)',
-    iconBorder: 'color-mix(in oklch, var(--very-peri) 34%, transparent)'
-  },
-  home: {
-    borderColor: 'color-mix(in oklch, var(--ancient-water) 32%, transparent)',
-    background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--havdyp) 76%, var(--ancient-water) 24%) 0%, color-mix(in oklch, var(--background) 78%, var(--havdyp) 22%) 100%)',
-    iconBackground: 'color-mix(in oklch, var(--ancient-water) 16%, var(--background) 84%)',
-    iconBorder: 'color-mix(in oklch, var(--ancient-water) 34%, transparent)'
-  },
-  simple: {
-    borderColor: 'color-mix(in oklch, var(--primary) 30%, transparent)',
-    background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--havdyp) 76%, var(--primary) 24%) 0%, color-mix(in oklch, var(--background) 80%, var(--havdyp) 20%) 100%)',
-    iconBackground: 'color-mix(in oklch, var(--primary) 18%, var(--background) 82%)',
-    iconBorder: 'color-mix(in oklch, var(--primary) 34%, transparent)'
-  },
-  together: {
-    borderColor: 'color-mix(in oklch, var(--bleached-mauve) 34%, transparent)',
-    background:
-      'linear-gradient(145deg, color-mix(in oklch, var(--havdyp) 78%, var(--bleached-mauve) 22%) 0%, color-mix(in oklch, var(--mountain-view) 26%, var(--background) 74%) 100%)',
-    iconBackground: 'color-mix(in oklch, var(--bleached-mauve) 18%, var(--background) 82%)',
-    iconBorder: 'color-mix(in oklch, var(--bleached-mauve) 36%, transparent)'
-  }
-} as const
-
-type IconName = keyof typeof iconMap
-type BenefitSurface = keyof typeof benefitSurfaces
-
-function IconRenderer({ name, className }: { name: IconName; className?: string }) {
-  const Icon = iconMap[name]
-
-  return Icon ? <Icon className={cn('size-8', className)} /> : null
-}
 
 type Benefit = {
-  icon: IconName
+  icon: LucideIcon
   title: string
   description: string
-  color: string
-  surface: BenefitSurface
 }
 
 export const benefitsData: Benefit[] = [
   {
-    icon: 'thermometer',
+    icon: Thermometer,
     title: 'Øyeblikkelig komfort',
-    description: 'Fra kjølig trekk til lun hygge på et øyeblikk.',
-    color: 'text-very-peri',
-    surface: 'comfort'
+    description: 'Fra kjølig trekk til lun hygge på et øyeblikk.'
   },
   {
-    icon: 'home',
+    icon: Home,
     title: 'Utvider hjemmet ditt',
-    description: 'Gjør uteplassen til en funksjonell del av huset, oftere.',
-    color: 'text-ancient-water',
-    surface: 'home'
+    description: 'Gjør uteplassen til en funksjonell del av huset, oftere.'
   },
   {
-    icon: 'sparkles',
+    icon: Sparkles,
     title: 'Enkel i bruk',
-    description: 'Lett å ta frem, lett å rydde vekk. Alltid klar for en kosestund.',
-    color: 'text-primary',
-    surface: 'simple'
+    description: 'Lett å ta frem, lett å rydde vekk. Alltid klar for en kosestund.'
   },
   {
-    icon: 'users',
+    icon: Users,
     title: 'Inviterer til samvær',
-    description: 'Skap en innbydende atmosfære som gjestene dine vil elske.',
-    color: 'text-bleached-mauve',
-    surface: 'together'
+    description: 'Skap en innbydende atmosfære som gjestene dine vil elske.'
   }
 ]
 
 export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
   return (
-    <section className='bg-background py-24'>
+    <section className='bg-marsala py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-16 max-w-3xl md:max-w-4xl text-center'>
-          <h2 className='text-foreground'>En investering i hjemmet</h2>
-          <p className='mt-4 utekos-section-lead text-foreground/88'>
+          <h2 className='text-cloud-dancer'>En investering i hjemmet</h2>
+          <p className='mt-4 utekos-section-lead text-foreground'>
             Få mer ut av uteplassen du allerede har. Utekos er designet for å maksimere komforten i hverdagen.
           </p>
         </div>
 
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
           {benefits.map((benefit, index) => {
-            const surface = benefitSurfaces[benefit.surface]
+            const Icon = benefit.icon
 
             return (
               <AnimatedBlock
@@ -111,26 +54,14 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
                 className='will-animate-fade-in-scale h-full'
                 delay={`${index * 0.05}s`}
               >
-                <article
-                  className='h-full rounded-[1.35rem] border p-6 text-center shadow-[0_24px_60px_-46px_color-mix(in_oklch,var(--background)_90%,transparent)]'
-                  style={{
-                    borderColor: surface.borderColor,
-                    background: surface.background
-                  }}
-                >
-                  <div
-                    className='mx-auto mb-4 flex size-16 items-center justify-center rounded-full border'
-                    style={{
-                      borderColor: surface.iconBorder,
-                      background: surface.iconBackground
-                    }}
-                  >
-                    <IconRenderer name={benefit.icon} className={benefit.color} />
+                <article className='h-full rounded-[1.35rem] border border-brandied-apricot bg-brandied-apricot p-6 text-center shadow-[0_24px_60px_-46px_color-mix(in_oklch,var(--background)_90%,transparent)]'>
+                  <div className='mx-auto mb-4 flex size-16 items-center justify-center rounded-full border border-background/16 bg-cloud-dancer text-background'>
+                    <Icon className='size-8' aria-hidden='true' />
                   </div>
-                  <h3 className='mb-2 text-lg font-semibold leading-[1.15]   text-foreground'>
+                  <h3 className='mb-2 text-lg font-semibold leading-[1.15] text-background'>
                     {benefit.title}
                   </h3>
-                  <p className='text-sm leading-text-paragraph   text-foreground/88'>{benefit.description}</p>
+                  <p className='text-sm leading-text-paragraph text-background'>{benefit.description}</p>
                 </article>
               </AnimatedBlock>
             )

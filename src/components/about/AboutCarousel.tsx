@@ -108,8 +108,8 @@ export function AboutCarousel() {
       className='relative isolate mx-auto overflow-hidden bg-background px-4 py-16 text-foreground sm:py-32'
     >
       <div className='pointer-events-none absolute inset-0 -z-10'>
-        <div className='absolute left-[18%] top-[18%] h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--very-peri)_20%,transparent)_0%,transparent_70%)] blur-[110px]' />
-        <div className='absolute bottom-[10%] right-[14%] h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_16%,transparent)_0%,transparent_72%)] blur-[110px]' />
+        <div className='absolute left-[18%] top-[18%] h-136 w-136 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--very-peri)_20%,transparent)_0%,transparent_70%)] blur-[110px]' />
+        <div className='absolute bottom-[10%] right-[14%] h-120 w-120 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--ancient-water)_16%,transparent)_0%,transparent_72%)] blur-[110px]' />
       </div>
 
       <div className='container mx-auto max-w-7xl'>
@@ -156,7 +156,7 @@ export function AboutCarousel() {
                           className='object-cover transition-transform duration-1000 ease-out group-hover:scale-105'
                           sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
                         />
-                        <div className='absolute inset-0 bg-gradient-to-t from-background/62 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
+                        <div className='absolute inset-0 bg-linear-to-t from-background/62 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
                       </AspectRatio>
                     </div>
                   </CarouselItem>

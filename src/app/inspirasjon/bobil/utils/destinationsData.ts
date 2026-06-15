@@ -3,22 +3,22 @@ export const destinationsData = [
     name: 'Lofoten',
     season: 'Sommer/Høst',
     highlight: 'Midnattssol og nordlys',
-    color: 'text-background',
-    backgroundColor: '--bleached-mauve-light'
+    color: 'text-demitasse',
+    backgroundColor: '--overcast'
   },
   {
     name: 'Geirangerfjorden',
     season: 'Vår/Sommer',
     highlight: 'Spektakulære fjorder',
-    color: 'text-background',
-    backgroundColor: '--ancient-water-light'
+    color: 'text-demitasse',
+    backgroundColor: '--overcast'
   },
   {
     name: 'Hardangervidda',
     season: 'Hele året',
     highlight: 'Viddelandskap og stillhet',
-    color: 'text-foreground',
-    backgroundColor: '--mineral-green'
+    color: 'text-demitasse',
+    backgroundColor: '--overcast'
   },
   {
     name: 'Atlanterhavsveien',

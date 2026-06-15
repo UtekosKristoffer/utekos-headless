@@ -1,49 +1,72 @@
-import { Caravan, Flame, Home, Sailboat, Sofa } from 'lucide-react'
+import { Caravan, Flame, Home, Sailboat, Snowflake, Sofa } from 'lucide-react'
+import type { TextOnAccent } from '../theme/pageAccents'
 
-export const inspirationPages = [
+export interface InspirationPageLink {
+  href:
+    | '/inspirasjon/hytteliv'
+    | '/inspirasjon/bobil'
+    | '/inspirasjon/batliv'
+    | '/inspirasjon/terrassen'
+    | '/inspirasjon/grillkvelden'
+  label: string
+  description: string
+  icon: typeof Home
+  color: string
+  midColor: string
+  iconColor: string
+  /** Tekst på cross-link-kort — erstatter pageIndex-heuristikk */
+  textOnAccent: TextOnAccent
+}
+
+export const inspirationPages: InspirationPageLink[] = [
   {
-    href: '/inspirasjon/hytteliv' as const,
+    href: '/inspirasjon/hytteliv',
     label: 'Hytteliv',
     description: 'Komfort på hytten året rundt',
     icon: Home,
     color: 'var(--ancient-water)',
-    midColor: 'var(--country-air)',
-    iconColor: 'text-ancient-water'
+    midColor: 'var(--mountain-view)',
+    iconColor: 'text-(--ancient-water)',
+    textOnAccent: 'background'
   },
   {
-    href: '/inspirasjon/bobil' as const,
-    label: 'Bobil og camping',
+    href: '/inspirasjon/bobil',
+    label: 'Bobil',
     description: 'Forleng campingsesongen',
     icon: Caravan,
-    color: 'var(--bleached-mauve)',
-    midColor: 'var(--raindrops-on-roses)',
-    iconColor: 'text-bleached-mauve'
+    color: 'var(--fair-orchid)',
+    midColor: 'var(--mountain-view)',
+    iconColor: 'text-(--fair-orchid)',
+    textOnAccent: 'background'
   },
   {
-    href: '/inspirasjon/batliv' as const,
+    href: '/inspirasjon/batliv',
     label: 'Båtliv',
     description: 'Varme på vannet',
     icon: Sailboat,
-    color: 'var(--very-peri)',
-    midColor: 'var(--sweet-lavender)',
-    iconColor: 'text-very-peri'
+    color: 'var(--skipper-blue)', // Sikrer skarp kontrast mot 'cloud-dancer'
+    midColor: 'var(--ancient-water)',
+    iconColor: 'text-(--skipper-blue)',
+    textOnAccent: 'cloud-dancer'
   },
   {
-    href: '/inspirasjon/terrassen' as const,
+    href: '/inspirasjon/terrassen',
     label: 'Terrassen',
     description: 'Hjemme best',
     icon: Sofa,
     color: 'var(--mountain-view)',
-    midColor: 'var(--camping-green)',
-    iconColor: 'text-mountain-view'
+    midColor: 'var(--primary)',
+    iconColor: 'text-(--mountain-view)',
+    textOnAccent: 'cloud-dancer'
   },
   {
-    href: '/inspirasjon/grillkvelden' as const,
+    href: '/inspirasjon/grillkvelden',
     label: 'Grillkvelden',
     description: 'Sosiale stunder',
     icon: Flame,
-    color: 'var(--havdyp)',
+    color: 'var(--primary)',
     midColor: 'var(--skipper-blue)',
-    iconColor: 'text-havdyp'
+    iconColor: 'text-(--primary)',
+    textOnAccent: 'background' // Kritisk WCAG-fiks: --primary krever mørk tekst
   }
 ]

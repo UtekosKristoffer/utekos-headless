@@ -1,43 +1,28 @@
 import { Car, Shirt, Thermometer } from 'lucide-react'
 import type { InspirationHeroFeature } from '../../layout/hero/types'
+import { heroFeatureSurface } from '../../theme/surfaces'
 
-const CARD_SHADOW = '0 22px 44px -34px color-mix(in oklch, var(--background) 52%, transparent)'
+const ancientWaterCard = heroFeatureSurface('var(--ancient-water)')
+const veryPeriCard = heroFeatureSurface('var(--very-peri)')
+const overcastCard = heroFeatureSurface('var(--overcast)')
 
-/**
- * Høydepunkt-kort for isbading-heroen (theme-stil: solid flate + topp-hairline).
- */
 export const iceBathingHeroFeatures: readonly InspirationHeroFeature[] = [
   {
     title: 'Skift varmt',
     description: 'Trekk armene inn og skift skjermet etter badet',
     icon: Shirt,
-    surface: 'color-mix(in oklch, var(--cloud-dancer) 82%, var(--ancient-water))',
-    border: 'color-mix(in oklch, var(--ancient-water) 48%, var(--background))',
-    marker: 'var(--ancient-water)',
-    iconSurface: 'var(--ancient-water)',
-    iconColor: 'var(--background)',
-    shadow: CARD_SHADOW
+    ...ancientWaterCard
   },
   {
     title: 'Varmen tilbake',
     description: 'Tørk huden raskt og hold kulden ute',
     icon: Thermometer,
-    surface: 'color-mix(in oklch, var(--cloud-dancer) 80%, var(--very-peri))',
-    border: 'color-mix(in oklch, var(--very-peri) 46%, var(--background))',
-    marker: 'var(--very-peri)',
-    iconSurface: 'var(--very-peri)',
-    iconColor: 'var(--background)',
-    shadow: CARD_SHADOW
+    ...veryPeriCard
   },
   {
     title: 'Turen hjem',
     description: 'Behold roen og varmen helt tilbake til bilen',
     icon: Car,
-    surface: 'color-mix(in oklch, var(--cloud-dancer) 84%, var(--overcast))',
-    border: 'color-mix(in oklch, var(--overcast) 54%, var(--background))',
-    marker: 'var(--overcast)',
-    iconSurface: 'var(--overcast)',
-    iconColor: 'var(--background)',
-    shadow: CARD_SHADOW
+    ...overcastCard
   }
 ] as const

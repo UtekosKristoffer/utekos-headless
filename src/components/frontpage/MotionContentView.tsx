@@ -36,8 +36,8 @@ export function MotionContentView() {
       <div data-nosnippet className='mt-7 flex justify-center sm:mt-9'>
         <BrandBadge
           asChild
-          backgroundColor='var(--iced-apricot)'
-          textColor='var(--background)'
+          backgroundColor='var(--checkout-button)'
+          textColor='var(--quet-tide-primary-monochromatic)'
           className='min-h-11 gap-2 px-5 py-3 font-utekos-text-medium text-sm leading-none transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:px-6 md:px-8 md:py-4 lg:px-10 lg:py-5 lg:text-lg'
         >
           <Link
@@ -45,10 +45,7 @@ export function MotionContentView() {
             aria-label='Gå til skreddersy varmen'
             data-track='ReadMoreHeroClick'
           >
-            <label htmlFor='read-more-hero'>
-              Se mer
-              <input type='button' />
-            </label>
+            <span>Se mer</span>
             <ArrowRight className='size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none' />
           </Link>
         </BrandBadge>

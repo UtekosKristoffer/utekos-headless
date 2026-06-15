@@ -6,19 +6,19 @@ import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
 
 export function SocialProof() {
   return (
-    <section className='bg-overcast py-24'>
+    <section className='bg-marsala py-24'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='mb-8 text-background'>
+          <h2 className='mb-8 text-cloud-dancer'>
             <span className='inline-flex flex-wrap items-baseline justify-center gap-x-[0.22em] gap-y-2'>
               <span>Huseiere elsker</span>
-              <UtekosWordmark className='inline-block -mb-2 h-[0.8em] w-auto -translate-y-[0.035em] text-background' />
+              <UtekosWordmark className='inline-block -mb-2 h-[0.8em] w-auto translate-y-[-0.035em] text-cloud-dancer' />
             </span>
           </h2>
 
-          <Card className='border-cloud-dancer/24 bg-mountain-view shadow-[0_28px_80px_-54px_color-mix(in_oklch,var(--background)_82%,transparent)]'>
+          <Card className='border-brandied-apricot bg-peach-fuzz shadow-[0_28px_80px_-54px_color-mix(in_oklch,var(--background)_82%,transparent)]'>
             <CardContent className='p-8 sm:p-12'>
-              <blockquote className='mb-6 text-xl leading-text-paragraph     text-foreground'>
+              <blockquote className='mb-6 text-xl leading-text-paragraph text-background'>
                 &quot;Vi har doblet bruken av terrassen etter at vi fikk Utekos i hus. Den brukes av hele
                 familien, fra tenåringen som vil sitte ute med venner, til oss voksne som endelig kan nyte
                 kveldene ute uten å pakke oss inn i ti tepper.&quot;
@@ -33,8 +33,8 @@ export function SocialProof() {
                   className='size-12 rounded-full object-cover'
                 />
                 <div className='text-left'>
-                  <p className='font-semibold leading-[1.25] tracking-[-0.01em] text-foreground'>Kristin</p>
-                  <p className='text-sm leading-text-paragraph tracking-[-0.01em] text-foreground/88'>
+                  <p className='font-semibold leading-tight tracking-[-0.01em] text-background'>Kristin</p>
+                  <p className='text-sm leading-text-paragraph tracking-[-0.01em] text-background'>
                     Eneboligeier fra Ulvik
                   </p>
                 </div>

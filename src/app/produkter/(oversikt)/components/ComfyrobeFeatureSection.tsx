@@ -71,7 +71,7 @@ export function ComfyrobeFeatureSection() {
                     <BrandBadge
                       backgroundColor='var(--fjellnatt)'
                       textColor='var(--cloud-dancer)'
-                      className='mb-5 gap-2 border border-cloud-dancer/18 px-4 py-2   text-sm font-medium   shadow-[0_16px_34px_-28px_color-mix(in_oklch,var(--bleached-mauve)_68%,transparent)]'
+                      className='mb-5 gap-2 border border-cloud-dancer/18 px-4 py-2   text-sm font-medium   shadow-[0_16px_34px_-28px_color-mix(in_oklch,var(--fair-orchid)_68%,transparent)]'
                     >
                       <Wind className='size-4 text-foreground' aria-hidden='true' />
                       <span>Comfyrobe™</span>

@@ -1,4 +1,4 @@
-'use cache' // <--- MÅ VÆRE PÅ TOPPEN (File Level Directive)
+'use cache'
 import 'server-only'
 
 import { handles } from '@/db/data/products/product-info'
@@ -16,9 +16,7 @@ export async function getFeaturedProducts() {
     return []
   }
 
-  const productsByHandle = new Map(
-    response.body.map(product => [product.handle, product])
-  )
+  const productsByHandle = new Map(response.body.map(product => [product.handle, product]))
 
   const featuredProducts = handles
     .map(handle => productsByHandle.get(handle))

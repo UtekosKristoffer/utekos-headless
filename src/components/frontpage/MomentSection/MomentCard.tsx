@@ -21,7 +21,7 @@ const momentThemeStyles: Record<
     iconWrap:
       'border-chocolate-plum/18 bg-linear-to-br from-cloud-dancer/92 to-overcast/88 text-chocolate-plum shadow-[inset_0_1px_1px_rgba(255,255,255,0.65)]',
     title: 'text-havdyp',
-    desc: 'text-havdyp/80'
+    desc: 'text-background'
   },
   plum: {
     wrapper:
@@ -30,7 +30,7 @@ const momentThemeStyles: Record<
     iconWrap:
       'border-white/10 bg-linear-to-br from-white/10 to-transparent text-soft-warm shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]',
     title: 'text-foreground',
-    desc: 'text-foreground/80'
+    desc: 'text-foreground'
   },
   overcast: {
     wrapper:
@@ -39,7 +39,7 @@ const momentThemeStyles: Record<
     iconWrap:
       'border-white/80 bg-linear-to-br from-ancient-water/90 to-ancient-water/40 text-havdyp shadow-[inset_0_1px_1px_rgba(255,255,255,0.7)]',
     title: 'text-havdyp',
-    desc: 'text-havdyp/80'
+    desc: 'text-background'
   }
 }
 
@@ -60,7 +60,7 @@ export function MomentCard({ moment, index }: { moment: Moment; index: number })
     >
       <div
         className={cn(
-          'absolute inset-x-0 top-0 h-[250px] opacity-30 blur-3xl transition-opacity duration-700 group-hover:opacity-50 bg-linear-to-b',
+          'absolute inset-x-0 font-utekos-text top-0 h-62.5 opacity-30 blur-3xl transition-opacity duration-700 group-hover:opacity-50 bg-linear-to-b',
           styles.glow
         )}
         aria-hidden='true'
@@ -85,7 +85,7 @@ export function MomentCard({ moment, index }: { moment: Moment; index: number })
           <h3 className={cn('animate-header-item', styles.title)}>{moment.title}</h3>
         </div>
 
-        <p className={cn('animate-header-item text-background', styles.desc)}>{moment.description}</p>
+        <p className={cn('animate-header-item font-utekos-text text-base text-background', styles.desc)}>{moment.description}</p>
       </div>
     </div>
   )

@@ -8,39 +8,39 @@ export const benefitsData: Benefit[] = [
     icon: Thermometer,
     title: 'Øyeblikkelig varme',
     description: 'Fra kjølig ankomst til peiskos-følelse på sekunder.',
-    benefitColor: 'bg-iced-apricot',
-    iconColor: 'text-maritime-darkest'
+    benefitColor: 'bg-flame',
+    iconColor: 'text-cloud-dancer'
   },
   {
     icon: Settings2,
     title: 'Praktisk design',
     description: 'Tar minimalt med plass og er enkel å ta med seg.',
-    benefitColor: 'bg-very-peri',
-    iconColor: 'text-cloud-dancer'
+    benefitColor: 'bg-mountain-view',
+    iconColor: 'text-fairest-jade'
   },
   {
     icon: HeartHandshake,
     title: 'Forlenger hyggen',
     description: 'Mer tid til de gode samtalene utendørs, uansett vær.',
-    benefitColor: 'bg-chai-tea',
-    iconColor: 'text-maritime-darkest'
+    benefitColor: 'bg-brandied-apricot',
+    iconColor: 'text-cloud-dancer'
   },
   {
     icon: MapPinIcon,
     title: 'En del av hytten',
     description: 'Blir like selvsagt å ta på seg som tøflene inne.',
-    benefitColor: 'bg-cloud-dancer',
-    iconColor: 'text-maritime-darkest'
+    benefitColor: 'bg-demitasse',
+    iconColor: 'text-almost-mauve'
   }
 ]
 
 export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
   return (
     // Havdyp gir en fantastisk kontrast til seksjonen over. Vi legger på en tynn linje på toppen.
-    <section className='border-t border-cloud-dancer/5 bg-havdyp py-24 text-cloud-dancer'>
+    <section className='border-t border-cloud-dancer/5 bg-background py-24 text-cloud-dancer'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto mb-20 max-w-3xl text-center lg:max-w-4xl'>
-          <h2 className='font-google-sans text-5xl md:6xl font-bold tracking-tight text-cloud-dancer md:text-5xl'>
+          <h2 className='font-google-sans md:text-6xl xl:text-7xl font-bold tracking-tight text-cloud-dancer'>
             Designet for hyttelivet
           </h2>
           <p className='mt-5 text-lg leading-relaxed text-cloud-dancer/80'>

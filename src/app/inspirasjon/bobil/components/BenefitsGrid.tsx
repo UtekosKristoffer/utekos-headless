@@ -54,7 +54,7 @@ export function BenefitsGrid({ benefits }: { benefits: Benefit[] }) {
                 <benefit.icon className={`size-8 ${benefit.color}`} aria-hidden />
               </div>
               <h3 className='mb-2 font-google-sans text-foreground'>{benefit.title}</h3>
-              <p className='  text-sm leading-text-paragraph tracking-[-0.02em] text-foreground/82'>
+              <p className='  text-sm leading-text-paragraph tracking-[-0.02em] text-ancient-water'>
                 {benefit.description}
               </p>
             </AnimatedBlock>

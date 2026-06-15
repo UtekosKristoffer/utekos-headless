@@ -1,4 +1,5 @@
 // Path: src/app/inspirasjon/grillkvelden/page.tsx
+// Seksjonsrekkefølge og annenhver bakgrunn: theme/sectionSurfaces.ts
 import type { Metadata } from 'next'
 import { HostTipsGrid, hostTipsData } from './sections/HostTipsGrid'
 import { BenefitsGrid, benefitsData } from './sections/BenefitsGrid'

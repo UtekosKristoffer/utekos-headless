@@ -34,9 +34,9 @@ export function AboutUsHeroSection() {
 
         <BrandBadge
           label='Skreddersy varmen'
-          backgroundColor='var(--color-very-peri)'
-          textColor='var(--color-cloud-dancer)'
-          className='shadow-lg'
+          backgroundColor='var(--checkout-button)'
+          textColor='var(--background)'
+          className='shadow-lg font-utekos-text-medium'
         />
 
         <p className='mx-auto max-w-2xl text-xl leading-text-paragraph text-cloud-dancer/95 drop-shadow-md md:text-3xl'>

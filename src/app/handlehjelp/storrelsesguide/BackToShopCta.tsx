@@ -79,7 +79,7 @@ export function BackToShopCta() {
           </p>
           <BrandBadge
             asChild
-            backgroundColor='var(--bleached-mauve)'
+            backgroundColor='var(--fair-orchid)'
             textColor='var(--background)'
             className='mt-6 px-6 py-3 text-base transition-[filter,transform] duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/45 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
           >

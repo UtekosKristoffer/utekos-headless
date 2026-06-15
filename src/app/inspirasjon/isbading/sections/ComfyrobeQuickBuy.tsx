@@ -109,8 +109,8 @@ export function ComfyrobeQuickBuy({ product }: Props) {
             )}
           </CarouselContent>
           <div className='block'>
-            <CarouselPrevious className='left-4 border border-cloud-dancer/12 bg-background/70 text-foreground backdrop-blur-md hover:bg-havdyp' />
-            <CarouselNext className='right-4 border border-cloud-dancer/12 bg-background/70 text-foreground backdrop-blur-md hover:bg-havdyp' />
+            <CarouselPrevious className='left-4 border border-cloud-dancer/12 bg-background/70 text-cloud-dancer backdrop-blur-md hover:bg-background' />
+            <CarouselNext className='right-4 border border-cloud-dancer/12 bg-background/70 text-cloud-dancer backdrop-blur-md hover:bg-background' />
           </div>
         </Carousel>
       </div>
@@ -219,7 +219,7 @@ export function ComfyrobeQuickBuy({ product }: Props) {
               <VippsLogo className='h-5 w-auto text-primary' />
             </div>
             <div className='flex items-center gap-2'>
-              <KlarnaLogo className='h-6 w-auto text-(--bleached-mauve)' />
+              <KlarnaLogo className='h-6 w-auto text-(--fair-orchid)' />
             </div>
           </div>
         </div>

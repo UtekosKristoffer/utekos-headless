@@ -21,13 +21,13 @@ export function InspirationHeroBreadcrumb({
       aria-label='Brødsmulesti'
       className='flex items-center gap-3 text-[0.95rem] leading-text-paragraph tracking-wide text-foreground'
     >
-      <Link href={'/' as Route} className='transition-colors hover:text-foreground/80 text-foreground'>
+      <Link href={'/' as Route} className='transition-colors hover:text-ancient-water text-foreground'>
         Forsiden
       </Link>
       <span aria-hidden='true'>/</span>
       <Link
         href={'/inspirasjon' as Route}
-        className='transition-colors hover:text-foreground/80 text-foreground'
+        className='transition-colors hover:text-ancient-water text-foreground'
       >
         Inspirasjon
       </Link>

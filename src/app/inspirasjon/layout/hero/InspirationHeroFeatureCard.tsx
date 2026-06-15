@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
+import { cn } from '@/lib/utils/className'
 import type { InspirationHeroFeature } from './types'
 
 interface InspirationHeroFeatureCardProps {
@@ -14,8 +15,8 @@ interface InspirationHeroFeatureCardProps {
  * - `glow` -> radial hover-glød (gradient-stil).
  * - `sheen` -> hvitt topp-skinn (gradient-stil).
  *
- * Alle farger settes via `style` (rå CSS/tokens). Tekstfarger har brand-token
- * defaults i klassenavn og overstyres kun når en eksplisitt farge er gitt.
+ * Vanlige theme tokens kan settes med Tailwind-klasser. Rå CSS/tokens brukes
+ * fortsatt for gradienter, `color-mix(…)` og andre bespoke flater.
  * Ren Server Component.
  */
 export function InspirationHeroFeatureCard({ feature }: InspirationHeroFeatureCardProps) {
@@ -33,7 +34,11 @@ export function InspirationHeroFeatureCard({ feature }: InspirationHeroFeatureCa
     iconColor,
     iconBorder,
     titleColor,
-    descriptionColor
+    descriptionColor,
+    cardClassName,
+    iconClassName,
+    titleClassName,
+    descriptionClassName
   } = feature
 
   const cardStyle: CSSProperties = {
@@ -51,7 +56,10 @@ export function InspirationHeroFeatureCard({ feature }: InspirationHeroFeatureCa
   return (
     <li>
       <Card
-        className='group relative flex aspect-[2/1] w-full flex-col overflow-hidden rounded-xl border py-0 text-foreground transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+        className={cn(
+          'group relative flex w-full flex-col overflow-hidden rounded-xl border py-0 text-foreground transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:aspect-2/1',
+          cardClassName
+        )}
         style={cardStyle}
       >
         {glow ?
@@ -64,7 +72,7 @@ export function InspirationHeroFeatureCard({ feature }: InspirationHeroFeatureCa
 
         {sheen ?
           <div
-            className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.24)_0%,rgba(255,255,255,0.08)_34%,transparent_100%)]'
+            className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,color-mix(in_oklch,var(--cloud-dancer)_24%,transparent)_0%,color-mix(in_oklch,var(--cloud-dancer)_8%,transparent)_34%,transparent_100%)]'
             aria-hidden='true'
           />
         : null}
@@ -80,7 +88,10 @@ export function InspirationHeroFeatureCard({ feature }: InspirationHeroFeatureCa
         <CardContent className='relative flex h-full flex-col gap-3 p-5'>
           <div className='flex items-center gap-3'>
             <span
-              className='flex size-10 shrink-0 items-center justify-center rounded-lg border'
+              className={cn(
+                'flex size-10 shrink-0 items-center justify-center rounded-lg border',
+                iconClassName
+              )}
               style={iconBoxStyle}
               aria-hidden='true'
             >
@@ -88,7 +99,10 @@ export function InspirationHeroFeatureCard({ feature }: InspirationHeroFeatureCa
             </span>
 
             <h3
-              className='inspirational-page-hero-card-heading whitespace-nowrap text-foreground'
+              className={cn(
+                'inspirational-page-hero-card-heading whitespace-nowrap text-cloud-dancer',
+                titleClassName
+              )}
               style={titleColor ? { color: titleColor } : undefined}
             >
               {title}
@@ -96,7 +110,10 @@ export function InspirationHeroFeatureCard({ feature }: InspirationHeroFeatureCa
           </div>
 
           <p
-            className='inspirational-page-hero-card-description pr-2 text-foreground/90'
+            className={cn(
+              'inspirational-page-hero-card-description pr-2 text-ancient-water',
+              descriptionClassName
+            )}
             style={descriptionColor ? { color: descriptionColor } : undefined}
           >
             {description}

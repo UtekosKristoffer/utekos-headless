@@ -9,8 +9,7 @@ export const variantStyles = {
     Icon: Check
   },
   dont: {
-    container:
-      'border-demitasse/16 bg-[color-mix(in_oklab,var(--cloud-dancer)_82%,var(--bleached-mauve)_18%)]',
+    container: 'border-demitasse/16 bg-[color-mix(in_oklab,var(--cloud-dancer)_82%,var(--fair-orchid)_18%)]',
     iconWrap: 'border-background/18 bg-overcast text-background',
     Icon: Minus
   }

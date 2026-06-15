@@ -21,8 +21,7 @@ const galleryImages = [
     src: 'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/linn-bonfire-1600x1600.jpg?v=1780750136',
     alt: 'Et par sitter ute ved bålpannen en kjølig hyttekveld, begge kledd i Utekos.',
     title: 'Selve definisjonen på utekos',
-    description:
-      'Noen ganger er de enkleste aktivitetene de beste. Nyt forberedelsene og den knitrende lyden i full komfort.'
+    description: 'Noen ganger er de enkleste aktivitetene de beste. Nyt den knitrende lyden i full komfort.'
   },
   {
     src: 'https://cdn.shopify.com/s/files/1/0634/2154/6744/files/to-kvinner-sitter-pa-en-stein-med-utekos.jpg?v=1780750291',
@@ -47,7 +46,7 @@ export function SocialProof() {
         <div className='mx-auto max-w-2xl text-center md:max-w-4xl'>
           <h2 className='mb-4 max-w-full text-balance text-background'>Utekos i sitt rette element</h2>
 
-          <p className='mx-auto mb-12 utekos-section-lead max-w-2xl text-background'>
+          <p className='mx-auto mb-12 font-utekost-text text-lg tracking-tight max-w-xl text-background'>
             Fra morgenkaffen på en duggfrisk trapp til sene kvelder rundt bålpannen. Se ekte øyeblikk fra
             hyttelivet.
           </p>
@@ -68,7 +67,7 @@ export function SocialProof() {
                 <div className='group p-1'>
                   <AspectRatio
                     ratio={1 / 1}
-                    className='relative overflow-hidden rounded-lg border border-background/18 bg-havdyp shadow-[0_24px_56px_-42px_rgba(14,18,35,0.62)]'
+                    className='relative overflow-hidden rounded-lg border border-background/18 bg-background shadow-[0_24px_56px_-42px_color-mix(in_oklch,var(--background)_62%,transparent)]'
                   >
                     <Image
                       src={image.src}
@@ -80,15 +79,17 @@ export function SocialProof() {
                     />
                   </AspectRatio>
                   <div className='pt-4 text-left'>
-                    <h3 className='font-semibold font-google-sans leading-text-paragraph  '>{image.title}</h3>
-                    <p className='text-sm leading-[1.15]     text-background'>{image.description}</p>
+                    <h3 className='font-semibold font-utekos-text-medium text-2xl leading-text-paragraph'>
+                      {image.title}
+                    </h3>
+                    <p className='text-sm leading-[1.15]text-background'>{image.description}</p>
                   </div>
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className='left-[-50px] hidden xl:inline-flex' />
-          <CarouselNext className='right-[-50px] hidden xl:inline-flex' />
+          <CarouselPrevious className='-left-12.5 hidden text-foreground xl:inline-flex' />
+          <CarouselNext className='-right-12.5 hidden text-foreground xl:inline-flex' />
         </Carousel>
       </div>
     </section>

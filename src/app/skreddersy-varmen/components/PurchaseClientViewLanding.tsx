@@ -364,8 +364,8 @@ export function PurchaseClientViewLanding({
             <div className='mb-4 min-[900px]:mb-6 min-[1280px]:mb-8'>
               <BrandBadge
                 asChild
-                backgroundColor='var(--color-iced-apricot)'
-                textColor='var(--color-maritime-darkest)'
+                backgroundColor='var(--checkout-button)'
+                textColor='var(--quet-tide-primary-monochromatic)'
                 className={cn(
                   'h-14 w-full min-w-0 px-4 py-0 text-sm font-bold tracking-normal shadow-[0_4px_20px_rgba(255,180,120,0.15)] transition-[transform,filter,box-shadow] hover:brightness-105 hover:shadow-[0_4px_25px_rgba(255,180,120,0.3)] active:scale-[0.985] sm:text-base md:h-16 md:px-6 md:text-lg',
                   isPending && 'cursor-not-allowed opacity-80'

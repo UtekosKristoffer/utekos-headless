@@ -46,7 +46,7 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
           <h2 className='text-fluid-display text-background font-bold tracking-normal'>
             Fra forberedelse til varmen
           </h2>
-          <p className='mt-4 text-lg text-background/90'>
+          <p className='mt-4 text-lg text-ancient-water'>
             Isbading handler om ritualer. Utekos gjør hvert steg i prosessen mer behagelig.
           </p>
         </div>
@@ -64,16 +64,16 @@ export function UseCasesGrid({ useCases }: { useCases: UseCase[] }) {
                 />
                 <CardContent className='relative p-8'>
                   <div className='mb-6 flex items-center gap-4'>
-                    <div className='flex size-12 items-center justify-center rounded-lg border border-cloud-dancer/18 bg-havdyp/24'>
+                    <div className='flex size-12 items-center justify-center rounded-lg border border-cloud-dancer/18 bg-background/58'>
                       <useCase.icon className={`size-6 ${useCase.iconColor}`} />
                     </div>
                     <div>
-                      <p className='text-sm text-foreground'>{useCase.time}</p>
-                      <p className='text-sm font-medium text-overcast'>{useCase.temperature}</p>
+                      <p className='text-sm text-ancient-water'>{useCase.time}</p>
+                      <p className='text-sm font-medium text-cloud-dancer'>{useCase.temperature}</p>
                     </div>
                   </div>
-                  <h3 className='mb-2 text-xl font-semibold'>{useCase.title}</h3>
-                  <p className='text-overcast'>{useCase.description}</p>
+                  <h3 className='mb-2 text-xl font-semibold text-cloud-dancer'>{useCase.title}</h3>
+                  <p className='text-ancient-water'>{useCase.description}</p>
                 </CardContent>
               </Card>
             </AnimatedBlock>

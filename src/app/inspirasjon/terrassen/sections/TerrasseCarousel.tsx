@@ -227,7 +227,7 @@ export function TerrasseCarousel() {
   return (
     <section
       ref={containerRef}
-      className='relative isolate mx-auto overflow-hidden bg-background px-4 py-16 sm:py-32'
+      className='relative isolate mx-auto overflow-hidden bg-havdyp px-4 py-16 sm:py-32'
     >
       <div className='pointer-events-none absolute inset-0 -z-10 opacity-22'>
         <div
@@ -249,7 +249,7 @@ export function TerrasseCarousel() {
       <div className='container mx-auto max-w-7xl'>
         <div className='mb-12 text-center'>
           <BrandBadge
-            backgroundColor='var(--ancient-water)'
+            backgroundColor='var(--peach-fuzz)'
             textColor='var(--background)'
             className='gsap-header mb-4 gap-2 border border-ancient-water/52 px-4 py-2 text-sm leading-4 font-utekos-text   opacity-0'
           >
@@ -260,12 +260,12 @@ export function TerrasseCarousel() {
             </span>
           </BrandBadge>
 
-          <h2 className='gsap-title mt-4 text-foreground opacity-0'>Forleng dine beste øyeblikk</h2>
+          <h2 className='gsap-title mt-4 text-cloud-dancer opacity-0'>Forleng dine beste øyeblikk</h2>
         </div>
 
         <div className='gsap-carousel relative opacity-0'>
-          <div className='relative mx-auto max-w-6xl overflow-hidden rounded-[1.75rem] border border-cloud-dancer/10 bg-havdyp/40 p-4 shadow-[0_32px_90px_-56px_color-mix(in_oklch,var(--background)_96%,transparent)] backdrop-blur-sm sm:p-6'>
-            <div className='absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,color-mix(in_oklch,var(--ancient-water)_38%,transparent),transparent)]' />
+          <div className='relative mx-auto max-w-6xl overflow-hidden rounded-[1.75rem] border border-brandied-apricot bg-peach-fuzz p-4 shadow-[0_32px_90px_-56px_color-mix(in_oklch,var(--background)_96%,transparent)] backdrop-blur-sm sm:p-6'>
+            <div className='absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,color-mix(in_oklch,var(--peach-fuzz)_38%,transparent),transparent)]' />
 
             <Carousel
               setApi={setApi}
@@ -280,7 +280,7 @@ export function TerrasseCarousel() {
               <CarouselContent className='-ml-4'>
                 {terrasseImages.map(image => (
                   <CarouselItem key={image.src} className='pl-4 md:basis-1/2 lg:basis-1/3'>
-                    <div className='group relative overflow-hidden rounded-[1.25rem] border border-cloud-dancer/12 bg-background'>
+                    <div className='group relative overflow-hidden rounded-[1.25rem] border border-brandied-apricot bg-transparent'>
                       <AspectRatio ratio={1 / 1}>
                         <Image
                           src={image.src}
@@ -289,15 +289,15 @@ export function TerrasseCarousel() {
                           className='object-cover transition-transform duration-700 will-change-transform group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100'
                           sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
                         />
-                        <div className='absolute inset-0 bg-linear-to-t from-background/72 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 motion-reduce:transition-none' />
+                        <div className='absolute inset-0 bg-linear-to-t from-peach-fuzz/72 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 motion-reduce:transition-none' />
                       </AspectRatio>
                     </div>
                   </CarouselItem>
                 ))}
               </CarouselContent>
 
-              <CarouselPrevious className='left-4 border-cloud-dancer/14 bg-background/78 text-foreground backdrop-blur-md hover:bg-havdyp focus-visible:ring-primary/70' />
-              <CarouselNext className='right-4 border-cloud-dancer/14 bg-background/78 text-foreground backdrop-blur-md hover:bg-havdyp focus-visible:ring-primary/70' />
+              <CarouselPrevious className='left-4 border-cloud-dancer/14 bg-background/78 text-cloud-dancer backdrop-blur-md hover:bg-background focus-visible:ring-primary/70' />
+              <CarouselNext className='right-4 border-cloud-dancer/14 bg-background/78 text-cloud-dancer backdrop-blur-md hover:bg-background focus-visible:ring-primary/70' />
             </Carousel>
 
             <div className='mt-8 flex items-center justify-center gap-2'>

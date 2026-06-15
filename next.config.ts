@@ -6,6 +6,8 @@ const STATIC_ASSET_CACHE_CONTROL = 'public, max-age=31536000, immutable'
 const SENTRY_AUTH_TOKEN = process.env.PERFORMANCE_SENTRY_AUTH_TOKEN || process.env.SENTRY_AUTH_TOKEN
 const SENTRY_ORG = process.env.PERFORMANCE_SENTRY_ORG || process.env.SENTRY_ORG
 const SENTRY_PROJECT = process.env.PERFORMANCE_SENTRY_PROJECT || process.env.SENTRY_PROJECT
+const ENABLE_DOCKER_STANDALONE_OUTPUT = process.env.NEXT_OUTPUT_STANDALONE === '1'
+const ENABLE_DOCKER_POLLING = process.env.NEXT_DEV_POLLING === '1'
 
 const staticAssetHeaders = [
   {
@@ -20,6 +22,8 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   cacheComponents: true,
   serverExternalPackages: ['@sentry/profiling-node'],
+  ...(ENABLE_DOCKER_STANDALONE_OUTPUT ? { output: 'standalone' } : {}),
+  ...(ENABLE_DOCKER_POLLING ? { watchOptions: { pollIntervalMs: 1000 } } : {}),
 
   cacheLife: {
     products: {

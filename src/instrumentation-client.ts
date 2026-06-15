@@ -80,6 +80,30 @@ try {
   performance.mark('app-init')
 
   window.addEventListener('error', event => {
+    // #region agent log
+    if (
+      event.message.includes('cannot be a descendant') ||
+      event.message.includes('Hydration failed')
+    ) {
+      fetch('http://127.0.0.1:7626/ingest/3d726327-2da6-4157-aa0a-bb33dbbbefd1', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '4c1e91' },
+        body: JSON.stringify({
+          sessionId: '4c1e91',
+          location: 'instrumentation-client.ts:error',
+          message: 'hydration_or_nesting_error',
+          data: {
+            pathname: window.location.pathname,
+            errorMessage: event.message,
+            line: event.lineno
+          },
+          timestamp: Date.now(),
+          hypothesisId: 'A'
+        })
+      }).catch(() => {})
+    }
+    // #endregion
+
     beaconError('client_error', {
       message: event.message,
       source: event.filename,

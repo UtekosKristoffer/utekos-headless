@@ -1,4 +1,5 @@
 'use server'
+
 import { getProducts } from '@/api/lib/products/getProducts'
 import type { ShopifyProduct } from 'types/product'
 import { cacheTag, cacheLife } from 'next/cache'

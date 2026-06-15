@@ -41,14 +41,14 @@ export function CTASection() {
             <AnimatedBlock className='mt-10 will-animate-fade-in-up' delay='0.24s' threshold={0.2}>
               <BrandBadge
                 asChild
-                backgroundColor='var(--primary)'
-                textColor='var(--background)'
+                backgroundColor='var(--checkout-button)'
+                textColor='var(--quet-tide-primary-monochromatic)'
                 className='group gap-2 px-8 py-4 text-base font-semibold tracking-[-0.01em] shadow-[0_18px_44px_-28px_color-mix(in_oklab,var(--primary)_90%,transparent)] transition-transform duration-300 hover:scale-[1.02]'
               >
                 <Link
                   href='/produkter'
                   data-track='AboutUsShopAllProductsClick'
-                  className='  text-base font-medium   text-background'
+                  className='  text-base font-medium text-quet-tide-primary-monochromatic'
                 >
                   Se alle produkter
                   <ArrowRight className='size-5 transition-transform duration-300 group-hover:translate-x-1' />

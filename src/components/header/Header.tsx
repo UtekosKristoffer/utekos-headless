@@ -13,7 +13,7 @@ import { ClientMobileMenu } from './ClientMobileMenu'
 
 export default function Header({ menu }: { menu: MenuItem[] }) {
   return (
-    <header className='sticky! top-0! z-50 w-full border-b border-cloud-dancer/12 bg-havdyp text-foreground'>
+    <header className='sticky! top-0! z-50 w-full border-b border-cloud-dancer/12 bg-[#2A3244] text-foreground'>
       <div className='relative mx-auto grid min-h-18 w-full max-w-360 grid-cols-[auto_1fr_auto] items-center gap-3 px-4 py-2.5 sm:px-6 lg:min-h-20 lg:pl-10 lg:pr-4 xl:min-h-22.5 xl:pr-5'>
         <div className='flex min-w-0 items-center justify-start'>
           <Link

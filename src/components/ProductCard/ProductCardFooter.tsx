@@ -49,9 +49,9 @@ export function ProductCardFooter({
         {isAvailable ?
           <BrandBadge
             asChild
-            backgroundColor='var(--primary)'
+            backgroundColor='var(--checkout-button)'
             textColor='var(--background)'
-            className={`${actionBadgeClassName} border-primary/35 font-utekos-text-medium hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-primary`}
+            className={`${actionBadgeClassName} border-checkout-button/35 font-utekos-text-medium hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-checkout-button`}
           >
             <button
               type='button'

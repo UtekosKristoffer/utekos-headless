@@ -1,8 +1,50 @@
-// Path: src/app/inspirasjon/hytteliv/CabinHeroSection.tsx
-import { Mountain } from 'lucide-react'
+import { Coffee, Mountain, Star } from 'lucide-react'
 import { InspirationHeroBreadcrumb } from '../../layout/InspirationHeroBreadcrumb'
 import { InspirationHero } from '../../layout/hero/InspirationHero'
-import { cabinHeroFeatures } from '../utils/cabinHeroFeatures'
+import type { InspirationHeroFeature } from '../../layout/hero/types'
+
+const CABIN_HERO_CARD_SHADOW = '0 22px 44px -20px rgba(0,0,0,0.5)'
+const CABIN_HERO_ICON_SURFACE = 'var(--mineral-green)'
+const CABIN_HERO_ICON_BORDER = 'var(--mineral-green)'
+
+const cabinHeroFeatures: readonly InspirationHeroFeature[] = [
+  {
+    title: 'Morgenstund',
+    description: 'Nyt morgenkaffen ute i frisk fjellluft.',
+    icon: Coffee,
+    surface: 'var(--mountain-view)',
+    iconSurface: CABIN_HERO_ICON_SURFACE,
+    iconBorder: CABIN_HERO_ICON_BORDER,
+    iconColor: 'var(--fairest-jade)',
+    titleColor: 'var(--cloud-dancer)',
+    descriptionColor: 'var(--cloud-dancer)',
+    shadow: CABIN_HERO_CARD_SHADOW
+  },
+  {
+    title: 'Utsikten',
+    description: 'Nyt panoramaet i komfort, hele dagen.',
+    icon: Mountain,
+    surface: 'var(--mountain-view)',
+    iconSurface: CABIN_HERO_ICON_SURFACE,
+    iconBorder: CABIN_HERO_ICON_BORDER,
+    iconColor: 'var(--fairest-jade)',
+    titleColor: 'var(--cloud-dancer)',
+    descriptionColor: 'var(--cloud-dancer)',
+    shadow: CABIN_HERO_CARD_SHADOW
+  },
+  {
+    title: 'Stjerneklar kveld',
+    description: 'Forleng kveldene under natthimmelen.',
+    icon: Star,
+    surface: 'var(--mountain-view)',
+    iconSurface: CABIN_HERO_ICON_SURFACE,
+    iconBorder: CABIN_HERO_ICON_BORDER,
+    iconColor: 'var(--fairest-jade)',
+    titleColor: 'var(--cloud-dancer)',
+    descriptionColor: 'var(--cloud-dancer)',
+    shadow: CABIN_HERO_CARD_SHADOW
+  }
+] as const
 
 const CabinHeroBackground = (
   <>
@@ -22,7 +64,7 @@ const CabinHeroBackground = (
         style={{
           // Kaldere Very Peri-glød (simulerer skumring/snø)
           background:
-            'radial-gradient(circle, color-mix(in oklch, var(--color-very-peri) 20%, transparent) 0%, transparent 70%)',
+            'radial-gradient(circle, color-mix(in oklch, var(--very-peri) 20%, transparent) 0%, transparent 70%)',
           animationDuration: '11s',
           animationDelay: '3s'
         }}
@@ -42,14 +84,14 @@ export function CabinHeroSection() {
     <InspirationHero
       labelledById='hytteliv-hero-title'
       minHeight='content'
-      surfaceClassName='bg-maritime-darkest text-cloud-dancer'
+      surfaceClassName='bg-maritime-blue text-cloud-dancer'
       containerClassName='pt-16 pb-14 sm:pt-20 sm:pb-16'
       background={CabinHeroBackground}
       breadcrumb={
         <InspirationHeroBreadcrumb
           label='Hytteliv'
-          color='var(--color-very-peri)'
-          textColor='var(--color-cloud-dancer)'
+          color='var(--mountain-view)'
+          textColor='var(--foreground)'
           icon={Mountain}
         />
       }

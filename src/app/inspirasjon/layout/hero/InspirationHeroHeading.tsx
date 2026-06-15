@@ -7,7 +7,7 @@ interface InspirationHeroHeadingProps {
   id: string
   /**
    * Tittel-innhold. Send gjerne `<HeroHighlight>` inni for fremheving, eks:
-   * `Bobilliv uten <HeroHighlight color="var(--bleached-mauve)">kompromisser</HeroHighlight>`.
+   * `Bobilliv uten <HeroHighlight color="var(--fair-orchid)">kompromisser</HeroHighlight>`.
    */
   title: ReactNode
   /** Lead-tekst under tittelen. */
@@ -46,7 +46,7 @@ export function InspirationHeroHeading({
       <h1
         id={id}
         className={cn(
-          'text-title text-foreground max-md:text-balance md:text-nowrap',
+          'text-foreground max-md:text-balance md:text-nowrap',
           align === 'center' ? 'mx-auto text-center' : 'mx-0 text-left',
           titleClassName
         )}
@@ -57,7 +57,7 @@ export function InspirationHeroHeading({
 
       <p
         className={cn(
-          'mt-10 max-w-2xl utekos-section-lead text-foreground sm:mt-12',
+          'mt-10 max-w-4xl font-utekos-text-medium text-3xl text-foreground tracking-wide leading-10 sm:mt-12',
           align === 'center' ? 'mx-auto text-center' : 'text-left',
           leadClassName
         )}

@@ -1,40 +1,24 @@
-// Path: src/app/inspirasjon/terrassen/sections/SeasonsSection.tsx
-
-import { Tabs } from './Tabs'
+import { InspirationSeasonsSection } from '../../components/InspirationSeasonsSection'
+import { terraceSeasons } from '../utils/terraceSeasons'
 
 export function SeasonsSection() {
   return (
-    <section className='relative isolate overflow-hidden bg-havdyp py-24'>
-      <div className='pointer-events-none absolute inset-0 -z-10 opacity-20'>
-        <div
-          className='seasons-glow-pulse absolute left-[8%] top-[14%] size-[31rem] rounded-full blur-3xl'
-          style={{
-            background:
-              'radial-gradient(circle, color-mix(in oklch, var(--primary) 44%, transparent) 0%, transparent 70%)'
-          }}
-        />
-        <div
-          className='seasons-glow-pulse absolute bottom-[8%] right-[8%] size-[31rem] rounded-full blur-3xl'
-          style={{
-            background:
-              'radial-gradient(circle, color-mix(in oklch, var(--ancient-water) 54%, transparent) 0%, transparent 70%)',
-            animationDelay: '4s'
-          }}
-        />
-      </div>
-
-      <div className='container mx-auto px-4'>
-        <div className='animate-fade-in-up mb-16 text-center'>
-          <h2 className='text-foreground brightness-200'>Din uteplass gjennom året</h2>
-          <p className='mx-auto mt-4 utekos-section-lead max-w-2xl text-foreground'>
-            Forleng sesongen på terrassen
-          </p>
-        </div>
-
-        <div className='seasons-fade-in-delayed'>
-          <Tabs />
-        </div>
-      </div>
-    </section>
+    <InspirationSeasonsSection
+      title='Terrassen i alle årstider'
+      lead='Små grep som forlenger utesesongen — uansett vær.'
+      seasons={terraceSeasons}
+      defaultValue='summer'
+      glowTokens={['var(--peach-fuzz)', 'var(--brandied-apricot)']}
+      sectionClassName='bg-marsala'
+      leadClassName='text-cloud-dancer'
+      tabTriggerClassName='border-brandied-apricot bg-peach-fuzz text-background hover:bg-peach-fuzz data-active:bg-brandied-apricot data-active:text-background'
+      tabActiveClassName='text-background'
+      tabInactiveClassName='text-background'
+      contentCardClassName='border-brandied-apricot bg-peach-fuzz'
+      contentIconClassName='border-background/16 bg-cloud-dancer text-background'
+      contentIconGlyphClassName='text-background'
+      contentTitleClassName='text-background'
+      contentTextClassName='text-background'
+    />
   )
 }

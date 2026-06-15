@@ -60,8 +60,6 @@ export function HytteSeasonsTabs() {
                       className={`absolute inset-0 -z-10 mix-blend-overlay ${season.cardBg}`}
                       aria-hidden='true'
                     />
-
-                    {/* Vinter-sheen effekten beholdes, men justert subtilt */}
                     {season.value === 'winter' && (
                       <span
                         className='hytte-season-sheen absolute inset-0 bg-linear-to-tr from-transparent via-cloud-dancer/40 to-transparent opacity-0 transition-opacity duration-1000 group-hover:opacity-100'
@@ -70,11 +68,11 @@ export function HytteSeasonsTabs() {
                     )}
 
                     <div className='hytte-season-motion'>
-                      <h3 className='font-google-sans-grade [--gs-grad:100] text-balance text-3xl font-bold leading-[1.1] tracking-[-0.02em] text-cloud-dancer md:text-4xl xl:text-[2.8rem]'>
+                      <h3 className='font-google-sans-grade [--gs-grad:100] text-balance text-3xl font-bold leading-[1.1] tracking-tight text-foreground md:text-4xl xl:text-[2.8rem]'>
                         {season.title}
                         <br />
                         <span
-                          className={`hytte-season-accent mt-3 block text-xl font-medium tracking-normal ${season.accentColor}`}
+                          className={`hytte-season-accent mt-3 block text-3xl font-bold leading-[1.1] tracking-tight text-foreground md:text-4xl xl:text-[2.8rem] ${season.accentColor}`}
                         >
                           {season.description}
                         </span>
