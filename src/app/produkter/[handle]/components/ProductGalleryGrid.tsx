@@ -20,23 +20,27 @@ export function ProductGalleryGrid({ title, images }: ProductGalleryProps) {
         role='group'
         aria-label={`Produktbilder for ${title}`}
       >
-        {gridImages.map((image, index) => (
-          <div key={image.url} className='flex min-h-0 overflow-hidden rounded-lg bg-very-peri p-3'>
-            <AspectRatio ratio={4 / 5} className='w-full'>
-              <Image
-                src={image.url}
-                alt={image.altText || `Bilde av ${title}`}
-                fill
-                sizes='(min-width: 1024px) 27vw, 30vw'
-                quality={95}
-                className='pointer-events-none select-none rounded-lg object-cover object-top'
-                draggable={false}
-                fetchPriority={index === 0 ? 'high' : 'auto'}
-                loading={index === 0 ? 'eager' : 'lazy'}
-              />
-            </AspectRatio>
-          </div>
-        ))}
+        {gridImages.map((image, index) => {
+          const isAboveFoldGridImage = index < 2
+
+          return (
+            <div key={image.url} className='flex min-h-0 overflow-hidden rounded-lg bg-very-peri p-3'>
+              <AspectRatio ratio={4 / 5} className='w-full'>
+                <Image
+                  src={image.url}
+                  alt={image.altText || `Bilde av ${title}`}
+                  fill
+                  sizes='(min-width: 1024px) 27vw, 30vw'
+                  quality={95}
+                  className='pointer-events-none select-none rounded-lg object-cover object-top'
+                  draggable={false}
+                  fetchPriority={isAboveFoldGridImage ? 'high' : 'auto'}
+                  loading={isAboveFoldGridImage ? 'eager' : 'lazy'}
+                />
+              </AspectRatio>
+            </div>
+          )
+        })}
       </div>
     </div>
   )

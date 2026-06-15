@@ -8,7 +8,6 @@ import { useCartStoreSnapshot } from '@/hooks/useCartStoreSnapshot'
 import { cn } from '@/lib/utils/className'
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
 import { useQueryClient } from '@tanstack/react-query'
-import { useCallback } from 'react'
 import { getRecommendedProducts } from '@/api/lib/products/getRecommendedProducts'
 import { getAccessoryProducts } from '@/api/lib/products/getAccessoryProducts'
 
@@ -29,7 +28,7 @@ export function CartTrigger({ className }: { className?: string }): React.JSX.El
   const serverCount = cart?.totalQuantity ?? 0
   const itemCount = optimisticCount > 0 ? optimisticCount : serverCount
 
-  const handlePrefetch = useCallback(() => {
+  const handlePrefetch = () => {
     queryClient.prefetchQuery({
       queryKey: ['products', 'recommended'],
       queryFn: getRecommendedProducts
@@ -38,7 +37,7 @@ export function CartTrigger({ className }: { className?: string }): React.JSX.El
       queryKey: ['products', 'accessory'],
       queryFn: getAccessoryProducts
     })
-  }, [queryClient])
+  }
 
   return (
     <DrawerTrigger asChild>

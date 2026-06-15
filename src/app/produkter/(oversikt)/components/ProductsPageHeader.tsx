@@ -1,12 +1,5 @@
-'use client'
-
 import BrandBadge from '@/components/BrandComponents/utils/BrandBadge'
 import UtekosWordmark from '@/components/BrandComponents/utils/UtekosWordmark'
-import { useRef } from 'react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-
-gsap.registerPlugin(useGSAP)
 
 const STAR_POSITIONS = [
   { top: 8, left: 12 },
@@ -18,84 +11,8 @@ const STAR_POSITIONS = [
 ] as const
 
 export function ProductsPageHeader() {
-  const container = useRef<HTMLElement>(null)
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!container.current) return
-    const rect = container.current.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-
-    gsap.to('.gsap-spotlight', {
-      x: x - rect.width / 2,
-      y: y - rect.height / 2,
-      duration: 1.5,
-      ease: 'power3.out'
-    })
-  }
-
-  useGSAP(
-    () => {
-      const tl = gsap.timeline()
-
-      tl.fromTo(
-        '.gsap-grid',
-        { opacity: 0, scale: 1.1 },
-        { opacity: 1, scale: 1, duration: 2, ease: 'power3.out' }
-      )
-
-      tl.fromTo(
-        '.gsap-badge',
-        { y: -20, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 0.8, ease: 'back.out(1.7)' },
-        '-=1.5'
-      )
-
-      tl.fromTo(
-        '.gsap-title-line',
-        { y: '100%', rotateX: -20, opacity: 0 },
-        {
-          y: '0%',
-          rotateX: 0,
-          opacity: 1,
-          duration: 1.2,
-          stagger: 0.15,
-          ease: 'power4.out'
-        },
-        '-=0.6'
-      )
-
-      tl.fromTo(
-        '.gsap-desc',
-        { y: 20, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 1, ease: 'power2.out' },
-        '-=0.8'
-      )
-
-      tl.fromTo('.gsap-underline', { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: 'expo.out' }, '-=0.6')
-
-      tl.fromTo('.gsap-highlight', { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: 'circ.out' }, '-=0.6')
-
-      gsap.to('.gsap-star', {
-        y: -20,
-        opacity: 0.4,
-        duration: 'random(3, 6)',
-        repeat: -1,
-        yoyo: true,
-        stagger: {
-          amount: 2,
-          from: 'random'
-        },
-        ease: 'sine.inOut'
-      })
-    },
-    { scope: container }
-  )
-
   return (
     <header
-      ref={container}
-      onMouseMove={handleMouseMove}
       className='relative mb-12 w-full rounded-3xl overflow-hidden bg-[radial-gradient(circle_at_top,color-mix(in_oklab,var(--ancient-water)_16%,transparent),transparent_42%),linear-gradient(180deg,color-mix(in_oklab,var(--havdyp)_90%,black)_0%,color-mix(in_oklab,var(--background)_94%,black)_100%)] pt-12 pb-16'
     >
       <div className='absolute inset-0 -z-10 overflow-hidden pointer-events-none'>
@@ -115,7 +32,7 @@ export function ProductsPageHeader() {
         {STAR_POSITIONS.map((position, i) => (
           <div
             key={i}
-            className='gsap-star absolute h-1 w-1 rounded-full bg-cloud-dancer opacity-16'
+            className='gsap-star absolute h-1 w-1 animate-pulse rounded-full bg-cloud-dancer opacity-16'
             style={{
               top: `${position.top}%`,
               left: `${position.left}%`,
@@ -126,7 +43,7 @@ export function ProductsPageHeader() {
       </div>
 
       <div className='container mx-auto px-4 text-center relative z-10'>
-        <div className='gsap-badge opacity-0 mb-8 inline-flex items-center justify-center'>
+        <div className='gsap-badge mb-8 inline-flex items-center justify-center'>
           <BrandBadge
             backgroundColor='var(--havdyp)'
             textColor='var(--cloud-dancer)'
@@ -153,7 +70,7 @@ export function ProductsPageHeader() {
           </span>
         </h1>
 
-        <p className='gsap-desc opacity-0 mx-auto     mt-8 max-w-2xl text-lg leading-[1.5] text-foreground/95 md:text-xl'>
+        <p className='gsap-desc mx-auto     mt-8 max-w-2xl text-lg leading-[1.5] text-foreground/95 md:text-xl'>
           Vi har{' '}
           <span className='relative inline-block font-medium      text-foreground'>
             redefinert

@@ -12,14 +12,16 @@ import { persistAcceptedTrackingEvent } from '@/lib/tracking/warehouse/persistAc
 import { getRequestConsentState } from '@/lib/tracking/consent/getRequestConsentState'
 import {
   USERCENTRICS_GOOGLE_ANALYTICS_SERVICE_NAME,
-  USERCENTRICS_META_SERVICE_NAME
+  USERCENTRICS_META_SERVICE_NAME,
+  USERCENTRICS_MICROSOFT_SERVICE_NAME
 } from '@/components/cookie-consent/usercentricsConfig'
 
 export async function POST(request: NextRequest) {
   const consent = getRequestConsentState(request)
   const providerConsent = {
     meta: consent.services[USERCENTRICS_META_SERVICE_NAME] === true,
-    google: consent.services[USERCENTRICS_GOOGLE_ANALYTICS_SERVICE_NAME] === true
+    google: consent.services[USERCENTRICS_GOOGLE_ANALYTICS_SERVICE_NAME] === true,
+    microsoft: consent.services[USERCENTRICS_MICROSOFT_SERVICE_NAME] === true
   }
 
   const validation = await parseAndValidateEventPayload(request)
@@ -28,7 +30,7 @@ export async function POST(request: NextRequest) {
     return validation.errorResponse
   }
 
-  if (!providerConsent.meta && !providerConsent.google) {
+  if (!providerConsent.meta && !providerConsent.google && !providerConsent.microsoft) {
     return createAcceptedTrackingResponse(validation.payload)
   }
 

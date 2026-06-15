@@ -57,10 +57,12 @@ test('persists a full purchase payload and dispatches Google when GA client id e
     userData: {},
     ga_client_id: '1234567890.987654321',
     ga_session_id: '1749895200',
+    msclkid: 'dd4afcccb1c9a4cad9544dd7e5006',
     ts: Date.now()
   }
   const persisted: Array<{ payload: unknown; providers: readonly string[] }> = []
   const googleDispatches: unknown[] = []
+  const microsoftDispatches: unknown[] = []
 
   const result = await processOrderTrackingWithDependencies(createOrder(), {
     getRedisAttribution: async () => attribution,
@@ -80,18 +82,34 @@ test('persists a full purchase payload and dispatches Google when GA client id e
         transport: 'direct_ga4'
       }
     },
+    sendMicrosoftUetPurchase: async (payload, checkoutAttribution) => {
+      microsoftDispatches.push({ payload, checkoutAttribution })
+      return {
+        success: true,
+        tagId: '97247724',
+        status: 200,
+        eventId: payload.eventId ?? 'missing',
+        eventName: 'purchase',
+        itemCount: 1,
+        value: 5980,
+        currency: 'NOK'
+      }
+    },
     logger: async () => {}
   })
 
   assert.equal(result.success, true)
   assert.equal(persisted.length, 1)
   assert.equal(googleDispatches.length, 1)
+  assert.equal(microsoftDispatches.length, 1)
   assert.deepEqual(persisted[0]?.providers, [])
   assert.equal((persisted[0]?.payload as { eventData?: { transaction_id?: string } }).eventData?.transaction_id, '123456789')
   assert.deepEqual(result.details, {
     orderId: 123456789,
     googleOk: true,
     googleSkippedReason: undefined,
+    microsoftOk: true,
+    microsoftSkippedReason: undefined,
     ledgerOk: true,
     attributionFound: true,
     hasGoogleClientId: true,
@@ -128,6 +146,8 @@ test('persists purchase payload and logs skip when GA client id is missing', asy
     orderId: 123456789,
     googleOk: false,
     googleSkippedReason: 'missing_client_id',
+    microsoftOk: false,
+    microsoftSkippedReason: 'not_configured',
     ledgerOk: true,
     attributionFound: false,
     hasGoogleClientId: false,

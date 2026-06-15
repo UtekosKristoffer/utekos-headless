@@ -3,7 +3,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { HydrationBoundary } from '@tanstack/react-query'
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
-import { getQueryClient } from '@/api/lib/getQueryClient'
+import { makeQueryClient } from '@/api/lib/makeQueryClient'
 import { CartMutationProvider } from '@/clients/CartMutationProvider'
 import { serverActions } from '@/constants/serverActions'
 import { CartIdProvider } from '@/components/providers/CartIdProvider'
@@ -30,7 +30,7 @@ interface ProvidersProps {
 }
 
 export default function Providers({ children, cartId: initialCartId, dehydratedState }: ProvidersProps) {
-  const queryClient = getQueryClient()
+  const [queryClient] = useState(makeQueryClient)
   const [cartId, setCartId] = useState<string | null>(initialCartId)
 
   return (

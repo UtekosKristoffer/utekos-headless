@@ -75,9 +75,6 @@ export function ComparisonTeaser() {
         '-=0.4'
       )
 
-      tl.to('.gsap-underline', { scaleX: 1, duration: 0.8, ease: 'expo.out' }, '-=0.2')
-      tl.to('.gsap-highlight', { scaleX: 1, duration: 0.6, ease: 'circ.out' }, '-=0.6')
-
       tl.fromTo(
         '.gsap-card',
         { y: 30, autoAlpha: 0 },

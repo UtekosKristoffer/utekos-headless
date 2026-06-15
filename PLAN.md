@@ -56,9 +56,16 @@ Dato: 2026-06-09
 - Usercentrics `ucEvent` oppdaterer React-gates og Google Consent Mode uten reload. Endringer lagres i
   `marketing.consent_snapshots` med faktiske tilgjengelige identifikatorer.
 - `/api/tracking-events` validerer en streng, versjonert Zod-kontrakt og avviser valgfri lagring fail-closed
-  når verken Meta- eller Google-samtykke kan dokumenteres.
+  når verken Meta-, Google- eller Microsoft-samtykke kan dokumenteres.
 - Browser-events bruker én sentral dispatcher. Google går til samtykkegatet dataLayer/sGTM. Meta Pixel og
-  ledger/CAPI deler samme `event_id`.
+  ledger/CAPI deler samme `event_id`. Microsoft UET er consent-gatet i samme dispatcher og sender
+  dokumenterte lowercase actions (`add_to_cart`, `begin_checkout`, `purchase`) med `event_id`,
+  `revenue_value`, `currency`, `ecomm_prodid` og lowercase `ecomm_pagetype`.
+- Shopify `orders-paid` kan sende Microsoft purchase via UET Conversions API når
+  `MICROSOFT_UET_CAPI_TOKEN`/`UTEKOS_MICROSOFT_UET_CAPI_TOKEN` finnes og checkout-attribusjonen inneholder
+  `msclkid`. `MICROSOFT_ADS_DEVELOPER_TOKEN` er ikke brukt som CAPI-token.
+- Shopify product create/update/delete webhooks invalidierer `products`, `product-{handle}` og
+  `related-products-{handle}` med `revalidateTag(tag, { expire: 0 })`.
 - Server-side provider-dispatch skjer bare via `marketing.event_ledger` og `ops.provider_dispatch_attempts`;
   umiddelbar parallell provider-dispatch er fjernet.
 - Providerkøen har provider-idempotency, lease med `skip locked`, visibility-timeout, eksponentiell retry,
@@ -72,9 +79,9 @@ Dato: 2026-06-09
 | ---------------- | --------------------- | ------------------------------------------------------- | --------------------------------------- |
 | `page_view`      | `PageView`            | statistics/marketing etter samtykke                     | Google dataLayer/sGTM + Meta Pixel/CAPI |
 | `view_item`      | `ViewContent`         | statistics/marketing etter samtykke                     | Google dataLayer/sGTM + Meta Pixel/CAPI |
-| `add_to_cart`    | `AddToCart`           | statistics/marketing etter samtykke                     | Google dataLayer/sGTM + Meta Pixel/CAPI |
-| `begin_checkout` | `InitiateCheckout`    | statistics/marketing etter samtykke                     | Google dataLayer/sGTM + Meta Pixel/CAPI |
-| `purchase`       | `Purchase`            | nødvendig ledger; provider kun med dokumentert samtykke | Provideravhengig                        |
+| `add_to_cart`    | `AddToCart`           | statistics/marketing etter samtykke                     | Google dataLayer/sGTM + Meta Pixel/CAPI + Microsoft UET |
+| `begin_checkout` | `InitiateCheckout`    | statistics/marketing etter samtykke                     | Google dataLayer/sGTM + Meta Pixel/CAPI + Microsoft UET |
+| `purchase`       | `Purchase`            | nødvendig ledger; provider kun med dokumentert samtykke | Google MP + Microsoft UET CAPI når token/msclkid finnes |
 | `search`         | `Search`              | statistics/marketing etter samtykke                     | Google dataLayer/sGTM + Meta Pixel/CAPI |
 | `generate_lead`  | `Lead`                | marketing                                               | Google dataLayer/sGTM + Meta Pixel/CAPI |
 

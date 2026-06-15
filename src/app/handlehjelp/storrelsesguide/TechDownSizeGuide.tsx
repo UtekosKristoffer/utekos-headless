@@ -33,15 +33,8 @@ export function TechDownSizeGuide() {
               className='mb-5 px-4 py-2 text-sm'
             />
             <h2 className='text-3xl font-bold leading-[1.05]   sm:text-5xl'>
-              <span className='inline-flex items-baseline'>
-                <UtekosWordmark
-                  aria-hidden='true'
-                  focusable='false'
-                  className='inline-block h-[0.72em] w-auto translate-y-[0.06em] align-baseline text-foreground'
-                />
-                <span className='sr-only'>Utekos</span>
-              </span>{' '}
-              TechDown™ - presisjon i hver størrelse
+          
+              Utekos TechDown™ - presisjon i hver størrelse
             </h2>
             <p className='mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-foreground'>
               For livsnyteren som verdsetter både funksjon og form, er TechDown designet med en mer kroppsnær

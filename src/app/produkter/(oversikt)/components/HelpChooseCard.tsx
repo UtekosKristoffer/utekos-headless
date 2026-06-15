@@ -6,7 +6,7 @@ import { ArrowUpRight, Loader2, MousePointer2, ShoppingBag, X } from 'lucide-rea
 import type { Route } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
 
 interface HelpChooseCardProps {
@@ -14,6 +14,13 @@ interface HelpChooseCardProps {
   index: number
   glowColor: string
 }
+
+type ProductVariantsShape =
+  | ShopifyProductVariant[]
+  | {
+      nodes?: ShopifyProductVariant[]
+      edges?: Array<{ node: ShopifyProductVariant }>
+    }
 
 function mapColorToHex(colorName: string): string {
   const c = colorName.toLowerCase().trim()
@@ -29,15 +36,15 @@ function mapColorToHex(colorName: string): string {
 }
 
 function normalizeVariants(product: ShopifyProduct): ShopifyProductVariant[] {
-  const v = product.variants as any
+  const v = product.variants as ProductVariantsShape
   if (Array.isArray(v)) return v
   if (v?.nodes) return v.nodes
-  if (v?.edges) return v.edges.map((e: any) => e.node)
+  if (v?.edges) return v.edges.map(edge => edge.node)
   return []
 }
 
 export function HelpChooseCard({ product, index, glowColor }: HelpChooseCardProps) {
-  const variants = useMemo(() => normalizeVariants(product), [product])
+  const variants = normalizeVariants(product)
 
   const [selectedColor, setSelectedColor] = useState<string | null>(null)
   const [isSelectingSize, setIsSelectingSize] = useState(false)
@@ -52,30 +59,28 @@ export function HelpChooseCard({ product, index, glowColor }: HelpChooseCardProp
 
   const [pendingAdd, setPendingAdd] = useState(false)
 
-  const colorOptions = useMemo(() => {
-    const map = new Map<string, string>()
-    variants.forEach(variant => {
-      const color = variant.selectedOptions.find(o => o.name === 'Color' || o.name === 'Farge')?.value
-      if (color && !map.has(color)) {
-        map.set(color, variant.image?.url || product.featuredImage?.url || '')
-      }
-    })
-    return Array.from(map.entries())
-  }, [variants, product.featuredImage])
+  const colorMap = new Map<string, string>()
+  variants.forEach(variant => {
+    const color = variant.selectedOptions.find(o => o.name === 'Color' || o.name === 'Farge')?.value
+    if (color && !colorMap.has(color)) {
+      colorMap.set(color, variant.image?.url || product.featuredImage?.url || '')
+    }
+  })
+  const colorOptions = Array.from(colorMap.entries())
 
-  const availableSizes = useMemo(() => {
-    if (!selectedColor) return []
-    return variants
-      .filter(v => {
-        const vColor = v.selectedOptions.find(o => o.name === 'Color' || o.name === 'Farge')?.value
-        return vColor === selectedColor && v.availableForSale
-      })
-      .map(v => ({
-        id: v.id,
-        title: v.selectedOptions.find(o => o.name === 'Size' || o.name === 'Størrelse')?.value || 'One Size',
-        variant: v
-      }))
-  }, [variants, selectedColor])
+  const availableSizes =
+    selectedColor ?
+      variants
+        .filter(v => {
+          const vColor = v.selectedOptions.find(o => o.name === 'Color' || o.name === 'Farge')?.value
+          return vColor === selectedColor && v.availableForSale
+        })
+        .map(v => ({
+          id: v.id,
+          title: v.selectedOptions.find(o => o.name === 'Size' || o.name === 'Størrelse')?.value || 'One Size',
+          variant: v
+        }))
+    : []
 
   const { performAddToCart, isPending } = useAddToCartAction({
     product,
@@ -85,8 +90,13 @@ export function HelpChooseCard({ product, index, glowColor }: HelpChooseCardProp
   useEffect(() => {
     if (!pendingAdd) return
     if (!selectedVariant) return
-    performAddToCart(1)
-    setPendingAdd(false)
+
+    const pendingTimer = window.setTimeout(() => {
+      performAddToCart(1)
+      setPendingAdd(false)
+    }, 0)
+
+    return () => window.clearTimeout(pendingTimer)
   }, [pendingAdd, selectedVariant, performAddToCart])
 
   useEffect(() => {
@@ -203,7 +213,7 @@ export function HelpChooseCard({ product, index, glowColor }: HelpChooseCardProp
                     colorGateFlash ? 'scale-[1.04]' : ''
                   }`}
                 >
-                  {colorOptions.map(([color, _]) => (
+                  {colorOptions.map(([color]) => (
                     <button
                       key={color}
                       onClick={e => handleColorSelect(e, color)}

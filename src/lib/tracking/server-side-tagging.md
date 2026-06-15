@@ -53,10 +53,12 @@ Provider-dispatch opprettes bare når eventet har nødvendig DPS-samtykke:
 
 - `Google Analytics` for dataLayer/sGTM (browser).
 - `Facebook Pixel` for Meta Pixel og direkte Meta CAPI.
-- `Microsoft Advertising Remarketing` for UET.
+- `Microsoft Advertising Remarketing` for Microsoft UET browser-events. Shopify purchase kan i tillegg
+  sendes via Microsoft UET CAPI når `MICROSOFT_UET_CAPI_TOKEN` er satt og checkout-attribusjonen inneholder
+  `msclkid`.
 
 Shopify-webhooks lagres alltid i ledgeret, men sendes ikke til annonseplattformer uten dokumenterbart
-samtykke.
+samtykke. Microsoft CAPI bruker bare checkout-attribusjon som ble fanget ved markedsføringssamtykke.
 
 ## Vercel-miljøvariabler
 
@@ -77,7 +79,10 @@ NEXT_PUBLIC_GOOGLE_GTM_ID=GTM-5TWMJQFP
 NEXT_PUBLIC_GTM_RESILIENT_SCRIPT_URL=<optional override; only after a newly generated loader is verified>
 NEXT_PUBLIC_GTM_RESILIENT_NOSCRIPT_URL=<optional; default ns.html?id=GTM-5TWMJQFP>
 NEXT_PUBLIC_ENABLE_GTM_IN_DEV=1
+NEXT_PUBLIC_MICROSOFT_UET_TAG_ID=97247724
+NEXT_PUBLIC_ENABLE_MICROSOFT_UET_IN_DEV=1
 GOOGLE_BROWSER_EVENT_TRANSPORT=sgtm
+MICROSOFT_UET_CAPI_TOKEN=<token from Microsoft Advertising UET tag setup; optional but required for server-side purchase>
 ```
 
 Standard GTM-script er direkte sGTM-loader:

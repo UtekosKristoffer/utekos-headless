@@ -4,16 +4,12 @@
 import { useQuery } from '@tanstack/react-query'
 import { useCartId } from '@/hooks/useCartId'
 import { fetchCart } from '@/lib/helpers/cart/fetchCart'
-import { useCallback } from 'react'
 import type { Cart, CartLine } from 'types/cart'
 
 export const useCartLine = (lineId: string): CartLine | undefined => {
   const cartId = useCartId()
-  const selectLineById = useCallback(
-    (cart: Cart | null): CartLine | undefined =>
-      cart?.lines?.find(line => line.id === lineId),
-    [lineId]
-  )
+  const selectLineById = (cart: Cart | null): CartLine | undefined =>
+    cart?.lines?.find(line => line.id === lineId)
 
   const { data: line } = useQuery({
     queryKey: ['cart', cartId],

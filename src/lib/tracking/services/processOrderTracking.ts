@@ -3,6 +3,7 @@ import type { TrackingServiceResult } from 'types/tracking/webhook/TrackingServi
 import { getRedisAttribution } from '@/lib/tracking/utils/getRedisAttribution'
 import { persistAcceptedTrackingEvent } from '@/lib/tracking/warehouse/persistAcceptedTrackingEvent'
 import { sendGooglePurchase } from '@/lib/tracking/google/sendGooglePurchase'
+import { sendMicrosoftUetPurchase } from '@/lib/tracking/microsoft-uet/sendMicrosoftUetPurchase'
 import { logToAppLogs } from '@/lib/utils/logToAppLogs'
 import { processOrderTrackingWithDependencies } from '@/lib/tracking/services/processOrderTrackingWithDependencies'
 
@@ -13,6 +14,7 @@ export async function processOrderTracking(
     getRedisAttribution,
     persistAcceptedTrackingEvent,
     sendGooglePurchase,
+    sendMicrosoftUetPurchase,
     logger: logToAppLogs
   })
 }

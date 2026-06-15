@@ -1,7 +1,7 @@
 // Path: src/app/skreddersy-varmen/components/useLandingPurchaseLogic.ts
 'use client'
 
-import { useContext, useMemo, useState, useTransition } from 'react'
+import { useContext, useState, useTransition } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import { CartIdContext } from '@/lib/context/CartIdContext'
@@ -43,10 +43,7 @@ export function useLandingPurchaseLogic({ products }: UseLandingPurchaseLogicPro
   const currentConfig = PRODUCT_VARIANTS[selectedModel]
   const currentShopifyProduct = products[currentConfig.id]
 
-  const selectableSizes = useMemo(
-    () => getSelectableSizes(selectedModel, currentConfig),
-    [currentConfig, selectedModel]
-  )
+  const selectableSizes = getSelectableSizes(selectedModel, currentConfig)
 
   const safeSelectedSize = normalizeSelectedSize(selectedSize, selectableSizes)
 

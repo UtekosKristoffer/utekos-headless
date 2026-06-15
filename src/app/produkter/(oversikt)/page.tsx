@@ -1,6 +1,3 @@
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
-import { getFeaturedProducts } from '@/api/lib/products/getFeaturedProducts'
-import { QueryClient } from '@tanstack/react-query'
 import { ComparisonTeaser } from '@/app/handlehjelp/sammenlign-modeller/components/ComparisonTeaser'
 import { HelpChooseSection } from './components/HelpChooseSection'
 import { ProductsPageFooter } from '@/app/produkter/(oversikt)/components/ProductsPageFooter'
@@ -13,17 +10,9 @@ import { Suspense } from 'react'
 import { StapperFeatureSection } from './components/StapperFeatureSection/StapperFeatureSection'
 import { ProductVideoSection } from './components/ProductVideoSection'
 import { TechDownFeatureSection } from './components/TechDownFeatureSection/TechDownFeatureSection'
-import { connection } from 'next/server'
 import { MikrofiberSection } from './components/MicrofiberSection/MikrofiberSection'
 
 const ProductsPage = async () => {
-  await connection()
-  const queryClient = new QueryClient()
-  await queryClient.prefetchQuery({
-    queryKey: ['products', 'featured'],
-    queryFn: getFeaturedProducts
-  })
-
   return (
     <>
       <article className='container mx-auto px-4 py-16 sm:py-24'>
@@ -38,16 +27,14 @@ const ProductsPage = async () => {
         <ComparisonTeaser />
 
         <section className='mb-24'>
-          <HydrationBoundary state={dehydrate(queryClient)}>
-            <Suspense fallback={<ProductGridSkeleton />}>
-              <ProductCarousel
-                trackingEventName='ViewCategory'
-                itemListId='produkter-kolleksjon'
-                itemListName='Utekos produktkolleksjon'
-                contentCategory='Utekos produktkategori'
-              />
-            </Suspense>
-          </HydrationBoundary>
+          <Suspense fallback={<ProductGridSkeleton />}>
+            <ProductCarousel
+              trackingEventName='ViewCategory'
+              itemListId='produkter-kolleksjon'
+              itemListName='Utekos produktkolleksjon'
+              contentCategory='Utekos produktkategori'
+            />
+          </Suspense>
         </section>
 
         <ComfyrobeFeatureSection />

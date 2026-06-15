@@ -14,7 +14,6 @@ import {
 } from '@/hooks/useOptimisticCartUpdate'
 import { handlePostAddToCartCampaigns } from '@/lib/campaigns/cart/handlePostAddToCartCampaigns'
 import { trackAddToCart } from '@/lib/tracking/client/trackAddToCart'
-import { useAnalytics } from '@/hooks/useAnalytics'
 import type { UseAddToCartActionProps, Cart } from 'types/cart'
 import type { ShopifyProduct, ShopifyProductVariant } from 'types/product'
 
@@ -37,7 +36,6 @@ export function useAddToCartAction({
   const { addLines } = useCartMutations()
   const { updateCartCache } = useOptimisticCartUpdate()
   const queryClient = useQueryClient()
-  const { trackEvent } = useAnalytics()
   const contextCartId = useContext(CartIdContext)
 
   const isPendingFromMachine = CartMutationContext.useSelector(state =>
@@ -155,12 +153,6 @@ export function useAddToCartAction({
         selectedVariant,
         quantity,
         additionalLine
-      })
-
-      trackEvent('AddToCart', {
-        content_name: product.title,
-        value: Number(selectedVariant.price.amount),
-        currency: selectedVariant.price.currencyCode
       })
 
       return {

@@ -11,7 +11,9 @@ export const MICROSOFT_UET_TAG_ID =
   process.env.NEXT_PUBLIC_MICROSOFT_UET_TAG_ID || DEFAULT_MICROSOFT_UET_TAG_ID
 
 export const SHOULD_LOAD_MICROSOFT_UET =
-  !!MICROSOFT_UET_TAG_ID && process.env.NODE_ENV === 'production' && process.env.VERCEL_ENV !== 'preview'
+  !!MICROSOFT_UET_TAG_ID
+  && (process.env.NODE_ENV === 'production' || process.env.NEXT_PUBLIC_ENABLE_MICROSOFT_UET_IN_DEV === '1')
+  && process.env.VERCEL_ENV !== 'preview'
 
 type MicrosoftUetTagProps = {
   tagId?: string
@@ -45,15 +47,19 @@ const MICROSOFT_UET_ENHANCED_CONVERSIONS_SCRIPT = `
       });
     }
 
-    window.uet_report_conversion = function(productId, revenueValue, currency) {
+    window.uet_report_conversion = function(productId, revenueValue, currency, eventId) {
       window.uetq = window.uetq || [];
       setMicrosoftUetPid();
-      window.uetq.push('event', 'PRODUCT_PURCHASE', {
+      var payload = {
         ecomm_prodid: productId,
-        ecomm_pagetype: 'PURCHASE',
+        ecomm_pagetype: 'purchase',
         revenue_value: Number(revenueValue) || 0,
         currency: currency || 'NOK'
-      });
+      };
+      if (eventId) {
+        payload.event_id = eventId;
+      }
+      window.uetq.push('event', 'purchase', payload);
     };
 
     setMicrosoftUetPid();
@@ -72,7 +78,7 @@ function createMicrosoftUetBootstrapScript(tagId: string): string {
       };
       o.ts = (new Date()).getTime();
       var script = d.createElement(t);
-      script.src = 'https://bat.bing.net/bat.js?ti=' + o.ti + (u !== 'uetq' ? '&q=' + u : '');
+      script.src = 'https://bat.bing.com/bat.js';
       script.async = 1;
       script.onload = script.onreadystatechange = function() {
         var state = this.readyState;

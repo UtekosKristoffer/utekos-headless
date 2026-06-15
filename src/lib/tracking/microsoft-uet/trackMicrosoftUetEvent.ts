@@ -1,17 +1,27 @@
 import { hasServiceConsent } from '@/lib/tracking/consent/hasServiceConsent'
 import { USERCENTRICS_MICROSOFT_SERVICE_NAME } from '@/components/cookie-consent/usercentricsConfig'
+import { mapToCanonicalEventName } from '@/lib/tracking/events/mapToCanonicalEventName'
+import type { MetaEventData, MetaEventType } from 'types/tracking/meta/event'
 
 type MicrosoftUetPayloadValue =
   | string
   | number
   | string[]
-  | Record<string, string>
+  | Record<string, string | number>
 
 type MicrosoftUetPayload = Record<string, MicrosoftUetPayloadValue>
 type MicrosoftUetQueueItem = string | MicrosoftUetPayload
 type MicrosoftUetQueue = {
   push: (...items: MicrosoftUetQueueItem[]) => number | void
 }
+type MicrosoftUetPageType =
+  | 'cart'
+  | 'category'
+  | 'home'
+  | 'other'
+  | 'product'
+  | 'purchase'
+  | 'searchresults'
 
 type MicrosoftUetUserData = {
   email?: string
@@ -19,16 +29,22 @@ type MicrosoftUetUserData = {
 }
 
 export type TrackMicrosoftUetEventOptions = {
-  eventName?: string
-  category?: string
-  action?: string
-  label?: string
-  value?: number
-  revenueValue?: number
-  currency?: string
-  productId?: string | string[]
-  pageType?: string
-  eventId?: string
+  eventName?: string | undefined
+  category?: string | undefined
+  action?: string | undefined
+  label?: string | undefined
+  value?: number | undefined
+  revenueValue?: number | undefined
+  currency?: string | undefined
+  productId?: string | string[] | undefined
+  pageType?: MicrosoftUetPageType | undefined
+  eventId?: string | undefined
+}
+
+export type DispatchMicrosoftUetBrowserEventInput = {
+  eventName: MetaEventType | string
+  eventId?: string | undefined
+  eventData?: MetaEventData | undefined
 }
 
 function addDefinedValue(
@@ -51,6 +67,63 @@ function normalizeProductIds(
   const productIds = productId.filter(Boolean)
   if (productIds.length === 0) return undefined
   return productIds.length === 1 ? productIds[0] : productIds
+}
+
+function getEventDataProductIds(eventData: MetaEventData | undefined): string[] | undefined {
+  if (!eventData) return undefined
+
+  const contentIds = eventData.content_ids?.filter(Boolean)
+
+  if (contentIds && contentIds.length > 0) {
+    return contentIds
+  }
+
+  const contentItemIds = eventData.contents
+    ?.map(item => item.id)
+    .filter((itemId): itemId is string => Boolean(itemId))
+
+  if (contentItemIds && contentItemIds.length > 0) {
+    return contentItemIds
+  }
+
+  const ga4ItemIds = eventData.items
+    ?.map(item => item.item_id)
+    .filter((itemId): itemId is string => typeof itemId === 'string' && itemId.length > 0)
+
+  return ga4ItemIds && ga4ItemIds.length > 0 ? ga4ItemIds : undefined
+}
+
+function getMicrosoftUetPageType(eventName: string): MicrosoftUetPageType {
+  const canonicalEventName = mapToCanonicalEventName(eventName)
+
+  switch (canonicalEventName) {
+    case 'add_to_cart':
+    case 'begin_checkout':
+      return 'cart'
+    case 'purchase':
+      return 'purchase'
+    case 'view_item':
+      return 'product'
+    case 'view_item_list':
+      return 'category'
+    case 'search':
+      return 'searchresults'
+    case 'page_view':
+    case 'select_item':
+    case 'generate_lead':
+    case 'custom':
+      return 'other'
+  }
+}
+
+function getMicrosoftUetEventAction(eventName: string): string {
+  const canonicalEventName = mapToCanonicalEventName(eventName)
+
+  return canonicalEventName === 'custom' ? eventName : canonicalEventName
+}
+
+function getMicrosoftUetEventLabel(eventData: MetaEventData | undefined): string | undefined {
+  return eventData?.content_name ?? eventData?.transaction_id ?? eventData?.order_id ?? eventData?.content_category
 }
 
 function getMicrosoftUetQueue(): MicrosoftUetQueue {
@@ -105,8 +178,6 @@ export function trackMicrosoftUetEvent({
   addDefinedValue(payload, 'event_label', label)
   addDefinedValue(payload, 'event_value', value)
   addDefinedValue(payload, 'event_id', eventId)
-  addDefinedValue(payload, 'gv', revenueValue)
-  addDefinedValue(payload, 'gc', currency)
   addDefinedValue(payload, 'revenue_value', revenueValue)
   addDefinedValue(payload, 'currency', currency)
   addDefinedValue(payload, 'ecomm_prodid', normalizeProductIds(productId))
@@ -115,6 +186,28 @@ export function trackMicrosoftUetEvent({
   if (Object.keys(payload).length === 0) return
 
   getMicrosoftUetQueue().push('event', eventAction, payload)
+}
+
+export function dispatchMicrosoftUetBrowserEvent({
+  eventName,
+  eventId,
+  eventData
+}: DispatchMicrosoftUetBrowserEventInput): void {
+  const value = eventData?.value
+  const productIds = getEventDataProductIds(eventData)
+  const currency = eventData?.currency
+
+  trackMicrosoftUetEvent({
+    eventName: getMicrosoftUetEventAction(eventName),
+    category: eventData?.content_category ?? 'ecommerce',
+    label: getMicrosoftUetEventLabel(eventData),
+    value,
+    revenueValue: value,
+    currency,
+    productId: productIds,
+    pageType: getMicrosoftUetPageType(eventName),
+    ...(eventId ? { eventId } : {})
+  })
 }
 
 export function trackMicrosoftUetProductPurchase({
@@ -135,9 +228,9 @@ export function trackMicrosoftUetProductPurchase({
   }
 
   trackMicrosoftUetEvent({
-    eventName: 'PRODUCT_PURCHASE',
+    eventName: 'purchase',
     productId,
-    pageType: 'PURCHASE',
+    pageType: 'purchase',
     revenueValue,
     currency,
     ...(eventId ? { eventId } : {})

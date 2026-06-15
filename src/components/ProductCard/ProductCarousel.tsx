@@ -1,7 +1,3 @@
-// Path: src/components/ProductCard/ProductCarousel.tsx
-'use client'
-
-import { useQuery } from '@tanstack/react-query'
 import { getFeaturedProducts } from '@/api/lib/products/getFeaturedProducts'
 import { handles as featuredProductHandles } from '@/db/data/products/product-info'
 import { SharedProductCarousel } from './SharedProductCarousel'
@@ -16,16 +12,13 @@ type ProductCarouselProps = {
   contentCategory?: string
 }
 
-export function ProductCarousel({
+export async function ProductCarousel({
   trackingEventName,
   itemListId,
   itemListName,
   contentCategory
 }: ProductCarouselProps) {
-  const { data: products } = useQuery({
-    queryKey: ['products', 'featured'],
-    queryFn: getFeaturedProducts
-  })
+  const products = await getFeaturedProducts()
 
   if (!products || products.length === 0) {
     return null

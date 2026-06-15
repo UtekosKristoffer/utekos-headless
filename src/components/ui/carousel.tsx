@@ -63,63 +63,42 @@ function Carousel({
   ...props
 }: React.ComponentProps<'div'> & CarouselProps) {
   const carouselId = React.useId().replace(/:/g, '')
-  const mergedOpts = React.useMemo(
-    () => ({
-      ...opts,
-      axis: orientation === 'horizontal' ? ('x' as const) : ('y' as const)
-    }),
-    [opts, orientation]
-  )
-
-  const ssrOptions = React.useMemo(
-    () => resolveCarouselSsrOptions(mergedOpts, slideCount, ssr),
-    [mergedOpts, slideCount, ssr]
-  )
+  const mergedOpts = {
+    ...opts,
+    axis: orientation === 'horizontal' ? ('x' as const) : ('y' as const)
+  }
+  const ssrOptions = resolveCarouselSsrOptions(mergedOpts, slideCount, ssr)
 
   const accessibilityPlugin = React.useRef(Accessibility())
   const classNamesPlugin = React.useRef(ClassNames())
-
-  const resolvedPlugins = React.useMemo(() => {
-    const basePlugins = [
-      accessibilityPlugin.current,
-      classNamesPlugin.current,
-      ...(ssrOptions ? [Ssr(ssrOptions)] : []),
-      ...(plugins ?? [])
-    ]
-
-    return basePlugins
-  }, [plugins, ssrOptions])
+  const resolvedPlugins = [
+    accessibilityPlugin.current,
+    classNamesPlugin.current,
+    ...(ssrOptions ? [Ssr(ssrOptions)] : []),
+    ...(plugins ?? [])
+  ]
 
   const [carouselRef, api, emblaServerApi] = useEmblaCarousel(mergedOpts, resolvedPlugins)
   const [canScrollPrev, setCanScrollPrev] = React.useState(false)
   const [canScrollNext, setCanScrollNext] = React.useState(false)
 
-  const onSelect = React.useCallback((carouselApi: CarouselApi) => {
-    if (!carouselApi) return
-    setCanScrollPrev(carouselApi.canGoToPrev())
-    setCanScrollNext(carouselApi.canGoToNext())
-  }, [])
-
-  const scrollPrev = React.useCallback(() => {
+  const scrollPrev = () => {
     api?.goToPrev()
-  }, [api])
+  }
 
-  const scrollNext = React.useCallback(() => {
+  const scrollNext = () => {
     api?.goToNext()
-  }, [api])
+  }
 
-  const handleKeyDown = React.useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
-      if (event.key === 'ArrowLeft') {
-        event.preventDefault()
-        scrollPrev()
-      } else if (event.key === 'ArrowRight') {
-        event.preventDefault()
-        scrollNext()
-      }
-    },
-    [scrollPrev, scrollNext]
-  )
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault()
+      scrollPrev()
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault()
+      scrollNext()
+    }
+  }
 
   React.useEffect(() => {
     if (!api || !setApi) return
@@ -128,6 +107,12 @@ function Carousel({
 
   React.useEffect(() => {
     if (!api) return
+    const onSelect = (carouselApi: CarouselApi) => {
+      if (!carouselApi) return
+      setCanScrollPrev(carouselApi.canGoToPrev())
+      setCanScrollNext(carouselApi.canGoToNext())
+    }
+
     onSelect(api)
     api.on('reinit', onSelect)
     api.on('select', onSelect)
@@ -136,7 +121,7 @@ function Carousel({
       api.off('reinit', onSelect)
       api.off('select', onSelect)
     }
-  }, [api, onSelect])
+  }, [api])
 
   return (
     <CarouselContext.Provider

@@ -27,22 +27,19 @@ export function CartDrawer(): React.JSX.Element {
   const [, startTransition] = useTransition()
   const baseHandleStateChange = createDrawerStateHandler(cartStore)
 
-  const handleStateChangeWithTransition = React.useCallback(
-    (isOpen: boolean) => {
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => {
-          startTransition(() => {
-            baseHandleStateChange(isOpen)
-          })
-        })
-      } else {
+  const handleStateChangeWithTransition = (isOpen: boolean) => {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => {
         startTransition(() => {
           baseHandleStateChange(isOpen)
         })
-      }
-    },
-    [baseHandleStateChange]
-  )
+      })
+    } else {
+      startTransition(() => {
+        baseHandleStateChange(isOpen)
+      })
+    }
+  }
 
   return (
     <Drawer

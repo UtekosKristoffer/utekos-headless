@@ -2,7 +2,6 @@
 
 import { cn } from '@/lib/utils/className'
 import { Droplet, Thermometer, Sparkles, ShieldCheck, Zap, type LucideIcon } from 'lucide-react'
-import { useMemo } from 'react'
 
 // Definerer lagene
 type LayerType = 'outer' | 'insulation' | 'inner' | 'function'
@@ -50,7 +49,7 @@ const getLayerType = (title: string): LayerType => {
 
 // --- DESKTOP KOMPONENT (STACK) ---
 export function ProductLayersVisual({ activeTech }: { activeTech: string }) {
-  const activeLayer = useMemo(() => getLayerType(activeTech), [activeTech])
+  const activeLayer = getLayerType(activeTech)
 
   return (
     <div className='relative flex h-[60vh] w-full items-center justify-center p-8'>
@@ -113,7 +112,7 @@ export function ProductLayersVisual({ activeTech }: { activeTech: string }) {
 
 // --- MOBIL KOMPONENT (FLOATING HUD) ---
 export function MobileProductLayersVisual({ activeTech }: { activeTech: string }) {
-  const activeLayer = useMemo(() => getLayerType(activeTech), [activeTech])
+  const activeLayer = getLayerType(activeTech)
 
   // Data mapping for mobilvisningen
   const layerData = {
