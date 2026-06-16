@@ -1,0 +1,75 @@
+{
+  "version": 2,
+  "name": "utekos-context-bundle",
+  "generated": false,
+  "readFirst": [
+    "AGENTS.md",
+    "docs/agent-operating-contract.md",
+    "docs/agent-context-map.md",
+    "PLAN.md",
+    "docs/sitemap.md",
+    "docs/llms.txt"
+  ],
+  "profiles": {
+    "default": "utekos_chatgpt_insight",
+    "browser": "utekos_chatgpt_browser",
+    "write": "utekos_chatgpt_live_ops",
+    "commerceTracking": "utekos_chatgpt_commerce_tracking"
+  },
+  "canonicalTools": {
+    "utekos_chatgpt_insight": [
+      "insight_bootstrap",
+      "read_context_bundle",
+      "tool_inventory",
+      "safe_git_overview",
+      "project_locate",
+      "read_project_files"
+    ],
+    "utekos_chatgpt_browser": [
+      "browser_bootstrap",
+      "browser_open",
+      "browser_resize",
+      "browser_snapshot",
+      "browser_console_messages",
+      "browser_network_requests",
+      "browser_network_request",
+      "browser_take_screenshot",
+      "browser_accessibility_audit",
+      "browser_performance_audit",
+      "browser_devtools_metrics",
+      "browser_close"
+    ],
+    "utekos_chatgpt_commerce_tracking": [
+      "commerce_tracking_bootstrap",
+      "provider_env_readiness",
+      "provider_access_remediation_report",
+      "shopify_admin_catalog_probe",
+      "shopify_storefront_product_probe",
+      "ga4_event_status_probe",
+      "merchant_center_status_probe",
+      "posthog_event_status_probe",
+      "sentry_issue_status_probe",
+      "vercel_deployment_status_probe",
+      "gtm_sgtm_endpoint_status_probe",
+      "meta_dataset_quality_probe",
+      "microsoft_uet_endpoint_status_probe",
+      "gtm_api_workspace_probe",
+      "tracking_architecture_inventory",
+      "tracking_event_contract",
+      "commerce_tracking_docs_map"
+    ]
+  },
+  "forbiddenDefaultToolNames": [
+    "mcp-find",
+    "mcp-add",
+    "mcp-activate-profile",
+    "mcp-exec"
+  ],
+  "criticalGates": [
+    "documentation",
+    "git-diff",
+    "runtime",
+    "browser",
+    "provider"
+  ]
+}

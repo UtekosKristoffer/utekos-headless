@@ -1,5 +1,39 @@
 # PROJECT UTEKOS MAIN TEAM FILE
 
+## Operating Contract
+
+This file is the authoritative operating contract for all agents working in this repository. Read this file first, then read `PLAN.md`, `docs/agents.txt`, `docs/sitemap.md`, `docs/llms.txt`, and the relevant local documentation before changing code or giving architectural recommendations.
+
+Every user-facing response must include `Dokumentasjonsstatus:` and explicitly say whether the current work has enough updated documentation and runtime context to proceed. If the answer is no, stop, identify the missing source, and fetch or request it before implementation.
+
+Zero-Assumption Protocol:
+
+- Do not assume current APIs, framework behavior, provider requirements, tracking semantics, or deployment state.
+- Use local docs, Context7, official docs, runtime tools, or provider tools before implementing or concluding.
+- If a needed tool or MCP fails and is relevant to the task, fix the tool path first or mark the task blocked. Do not silently continue with a weaker context surface.
+- Final delivery must list verification performed and any blocked verification. Uverified UI, tracking, provider, deployment, or data-flow changes are not acceptable deliverables.
+
+Code and architecture rules:
+
+- Never use `useMemo` or `useCallback`; React Compiler is enabled.
+- Prefer domain-oriented files and one function/component per file when touching related code.
+- Keep code clean and self-explanatory. Do not add internal narration comments unless they prevent real misunderstanding.
+- Validate all external data, tool inputs, route inputs, and agent schemas with Zod or an existing stricter local contract.
+- Do not hand-edit generated MCP files such as `mcp.json`, `.vscode/mcp.json`, or `.cursor/mcp.json`.
+
+Verification gates:
+
+- UI work requires browser/runtime verification: console, network, DOM/snapshot, screenshot, responsive viewport, and contrast/WCAG when visual or brand-critical.
+- Tracking work requires real provider-oriented verification paths: consent state, dataLayer/browser event, server ledger/queue, provider response, and external dashboard/API status where credentials permit.
+- Next.js, React, Vercel AI SDK, OpenAI, Shopify, Supabase, analytics, consent, and ad-platform changes require current local or official documentation.
+- Production deploy, GTM publish, PR merge, provider-resource mutation, ad campaign creation, Shopify catalog mutation, and Supabase schema mutation require explicit user confirmation and must not be hidden behind a default agent profile.
+
+Brand and business-critical posture:
+
+- Utekos brand elements, tracking fidelity, product data, consent handling, and paid-media events are business-critical surfaces.
+- Prefer fail-closed behavior over silent degradation when legal, tracking, revenue, or brand correctness is uncertain.
+- Distinctive brand assets, colors, type, tone of voice, and category entry points must be checked against project sources before implementation.
+
 ### Required env for core storefront E2E
 
 - `SHOPIFY_STORE_DOMAIN`

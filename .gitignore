@@ -39,6 +39,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.agent-artifacts/
 
 # vercel
 .vercel
@@ -203,3 +204,34 @@ playwright-report/
 playwright-mcp/
 /playwright-mcp
 */playwright-mcp
+
+# safe agent-insight fabric sources
+!/AGENTS.md
+!/docs/
+!/docs/agent-operating-contract.md
+!/docs/agent-context-map.md
+!/docs/context-bundle/
+!/docs/context-bundle/index.md
+!/docs/context-bundle/manifest.json
+!/config/
+!/config/mcp/
+config/mcp/*
+!/config/mcp/README.md
+!/config/mcp/chatgpt-profiles.json
+!/scripts/
+!/scripts/mcp/
+scripts/mcp/*
+!/scripts/mcp/openai-tunnel.mjs
+!/scripts/mcp/apply-chatgpt-profiles.mjs
+!/scripts/mcp/doctor-chatgpt-profiles.mjs
+!/.env.tunnel.example
+
+# keep generated MCP outputs and local secrets ignored after safe unignore rules
+mcp.json
+*/mcp.json
+.vscode/mcp.json
+.cursor/mcp.json
+.env*.local
+*.env.local
+src/api/lib/cloud-credentials/
+supabase/md.md

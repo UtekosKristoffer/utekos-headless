@@ -1,11 +1,19 @@
 // Path: src/lib/redis.ts
-import { createClient, type RedisClientType } from 'redis'
+import { createClient } from 'redis'
+import { logRedisClientError } from '@/lib/redis/logRedisClientError'
+import {
+  REDIS_COMMAND_TIMEOUT_MS,
+  REDIS_CONNECT_TIMEOUT_MS
+} from '@/lib/redis/redisConnectionConfig'
+import { shouldStopRedisReconnect } from '@/lib/redis/shouldStopRedisReconnect'
 
-let _client: RedisClientType | null = null
-let _connectPromise: Promise<RedisClientType> | null = null
+type UtekosRedisClient = ReturnType<typeof createClient>
 
-export async function getRedis(): Promise<RedisClientType> {
-  if (_client && _client.isOpen) return _client
+let _client: UtekosRedisClient | null = null
+let _connectPromise: Promise<UtekosRedisClient> | null = null
+
+export async function getRedis(): Promise<UtekosRedisClient> {
+  if (_client?.isReady) return _client
 
   // Prevent multiple simultaneous connection attempts
   if (_connectPromise) return _connectPromise
@@ -14,24 +22,42 @@ export async function getRedis(): Promise<RedisClientType> {
     const url = process.env.REDIS_URL
     if (!url) throw new Error('Missing REDIS_URL')
 
-    _client = createClient({
+    const client = createClient({
       url,
+      commandOptions: {
+        timeout: REDIS_COMMAND_TIMEOUT_MS
+      },
       socket: {
-        reconnectStrategy: retries => Math.min(retries * 50, 500),
-        connectTimeout: 5000,
+        reconnectStrategy: (retries, cause) => {
+          if (shouldStopRedisReconnect(retries, cause)) return false
+
+          return Math.min(retries * 50, 500)
+        },
+        connectTimeout: REDIS_CONNECT_TIMEOUT_MS,
         keepAlive: true
       }
     })
 
-    _client.on('error', err => console.error('Redis Client Error', err))
-    _client.on('reconnecting', () => console.warn('Redis Client Reconnecting'))
-    _client.on('ready', () => console.info('Redis Client Ready'))
+    _client = client
 
-    if (!_client.isOpen) {
-      await _client.connect()
+    client.on('error', logRedisClientError)
+    client.on('reconnecting', () => console.warn('Redis Client Reconnecting'))
+    client.on('ready', () => console.info('Redis Client Ready'))
+
+    try {
+      if (!client.isOpen) {
+        await client.connect()
+      }
+
+      return client
+    } catch (error) {
+      if (_client === client) {
+        _client = null
+      }
+
+      client.destroy()
+      throw error
     }
-
-    return _client
   })()
 
   try {

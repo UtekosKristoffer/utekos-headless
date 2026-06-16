@@ -72,6 +72,8 @@ Dato: 2026-06-09
   permanent failure og dead letters. Køposter lagrer nå samtykkegrunnlag, datakvalitet, providerrespons og
   latency.
 - Redis-app-logging er best-effort og lager ikke lenger produksjonsfeil ved utilgjengelig Redis.
+- Redis-klienten feiler raskt ved tilkoblingstimeout, stopper reconnect på timeout og demper production-stack
+  for Redis-timeouts slik best-effort logging ikke forurenser Vercel error logs.
 
 ### Kanonisk eventmatrise
 
