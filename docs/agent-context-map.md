@@ -72,12 +72,14 @@
 
 - Docker MCP catalog currently covers core docs/search/browser/repo tools.
 - Browser Workbench covers local performance timing, axe/WCAG diagnostics, and Chrome DevTools Protocol metrics through canonical schema-bound tools.
-- Commerce/Tracking has a canonical read-only bridge for provider credential readiness, local architecture inventory, event contracts, and docs/source routing.
+- Commerce/Tracking has 22 canonical read-only tools for provider credential readiness, local architecture inventory, event contracts, docs/source routing, and provider probes.
 - Commerce/Tracking has `provider_access_remediation_report` for provider-by-provider remediation of missing credentials, IAM scopes, project ids, malformed tokens, and partial API access. It returns presence/status only and never secret values.
 - Shopify Admin catalog probes are implemented and currently verify live Admin API reads for shop/product/variant/inventory signals.
 - Shopify Storefront product/variant/SKU probes are implemented and currently verify live Storefront API reads.
 - GA4 Data API event-status probes are available when service account access permits it.
 - Merchant API status probes are available when Merchant account, quota project, and service account access permit it.
+- Google Ads REST/GAQL probes are implemented for accessible customer resources, campaign performance, conversion actions, and search terms when `GOOGLE_ADS_CUSTOMER_ID`, `GOOGLE_ADS_DEVELOPER_TOKEN`, and read-capable OAuth/service-account credentials permit it.
+- PostHog Projects API discovery probes are implemented for read-only project lookup when `POSTHOG_ORGANIZATION_ID` and a personal/query API key are present.
 - PostHog Query API event-status probes are implemented but require `POSTHOG_PROJECT_ID` and a personal/query API key.
 - Sentry Issues API probes are implemented but require a token with sufficient issue read scope for the configured org/project.
 - Vercel Deployments API probes are implemented but require `VERCEL_TOKEN` and `VERCEL_PROJECT_ID`.

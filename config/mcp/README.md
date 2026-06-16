@@ -130,9 +130,9 @@ npm run mcp:tunnel:run:commerce-tracking
 npm run mcp:tunnel:stop:commerce-tracking
 ```
 
-It exposes schema-bound, read-only tools for provider credential readiness, provider access remediation, Shopify Admin catalog probes, Shopify Storefront product/variant/SKU probes, GA4 event-status reads, Merchant Center status reads, PostHog HogQL event reads, Sentry issue reads, Vercel deployment reads, public sGTM/GTM endpoint reads, authenticated GTM API workspace reads, Meta Dataset Quality reads, public Microsoft UET endpoint reads, tracking architecture inventory, canonical event contracts, and local docs/source routing. It never returns secret values and does not mutate Shopify, GTM, ads platforms, Vercel, Supabase, PostHog, or Sentry.
+It exposes 22 canonical read-only tools, including schema-bound provider probes for provider credential readiness, provider access remediation, Shopify Admin catalog reads, Shopify Storefront product/variant/SKU reads, GA4 event-status reads, Merchant Center status reads, Google Ads account access, Google Ads campaign performance, Google Ads conversion action, Google Ads search-term reads, PostHog project discovery reads, PostHog HogQL event reads, Sentry issue reads, Vercel deployment reads, public sGTM/GTM endpoint reads, authenticated GTM API workspace reads, Meta Dataset Quality reads, public Microsoft UET endpoint reads, tracking architecture inventory, canonical event contracts, and local docs/source routing. It never returns secret values and does not mutate Shopify, GTM, ads platforms, Vercel, Supabase, PostHog, or Sentry.
 
-Current verified provider status:
+Provider status is env-dependent. Treat the current workspace doctor output as authoritative. The status below is the last full local-provider baseline from the configured main environment; isolated worktrees can fail closed until the same ignored env and credential paths are available:
 
 - Shopify Admin catalog probe: live query OK.
 - Shopify Storefront probe: live query OK.
@@ -141,11 +141,15 @@ Current verified provider status:
 - Provider access remediation report: implemented and read-only; use it after `provider_env_readiness` for exact provider-by-provider fix steps.
 - GA4 probe: implemented, currently fails closed with service-account/property permission error.
 - Merchant Center probe: implemented, currently returns structured partial API/access failure.
-- PostHog probe: implemented, currently requires `POSTHOG_PROJECT_ID` plus `POSTHOG_PERSONAL_API_KEY` or `POSTHOG_CUSTOM_API_KEY`.
+- Google Ads probes: implemented for accessible customer resources, campaign performance, conversion actions, and search terms; currently require `GOOGLE_ADS_CUSTOMER_ID`, `GOOGLE_ADS_DEVELOPER_TOKEN`, optional `GOOGLE_ADS_LOGIN_CUSTOMER_ID`, and `GOOGLE_ADS_ACCESS_TOKEN`, `GOOGLE_ADS_OAUTH_ACCESS_TOKEN`, or read-capable Google Ads service-account credentials.
+- PostHog project discovery probe: implemented, currently requires `POSTHOG_ORGANIZATION_ID` plus `POSTHOG_PERSONAL_API_KEY` or `POSTHOG_CUSTOM_API_KEY`.
+- PostHog event-status probe: implemented, currently requires `POSTHOG_PROJECT_ID` plus `POSTHOG_PERSONAL_API_KEY` or `POSTHOG_CUSTOM_API_KEY`.
 - Sentry probe: implemented, currently returns permission/scope failure for the configured token.
 - Vercel probe: implemented, currently requires `VERCEL_TOKEN` and `VERCEL_PROJECT_ID`.
 - Meta Dataset Quality probe: implemented, currently returns `Malformed access token` for the configured token.
 - Authenticated GTM API workspace probe: implemented, currently requires `GTM_ACCESS_TOKEN` or `GOOGLE_TAG_MANAGER_ACCESS_TOKEN` plus numeric `GTM_ACCOUNT_ID` and `GTM_CONTAINER_ID`.
+
+Operational note: `scripts/mcp/*` and `docs/CODEX.md` are intentionally local operational files ignored by git. If a recovery worktree updates them, sync those ignored files back to the local operating workspace before relying on the local MCP surface.
 
 Local setup:
 

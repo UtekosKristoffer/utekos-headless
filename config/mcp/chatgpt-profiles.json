@@ -259,6 +259,11 @@
         "shopify_storefront_product_probe",
         "ga4_event_status_probe",
         "merchant_center_status_probe",
+        "google_ads_account_access_probe",
+        "google_ads_campaign_performance_probe",
+        "google_ads_conversion_action_probe",
+        "google_ads_search_terms_probe",
+        "posthog_project_discovery_probe",
         "posthog_event_status_probe",
         "sentry_issue_status_probe",
         "vercel_deployment_status_probe",
@@ -302,7 +307,7 @@
         "code-mode"
       ],
       "knownGaps": [
-        "Live provider reads are available as schema-bound read-only probes for Shopify Admin, Shopify Storefront, GA4 Data API, Merchant API, PostHog Query API, Sentry Issues API, Vercel Deployments API, public sGTM/GTM endpoints, Meta Dataset Quality API, public Microsoft UET endpoints, and authenticated GTM API workspaces. provider_access_remediation_report gives ChatGPT an explicit provider-by-provider fix list without secret values. Current provider success still depends on credentials, IAM scopes, project ids, and provider API access. Shopify Admin, Shopify Storefront, public sGTM/GTM endpoints, and public Microsoft UET endpoints are verified live; GA4, Merchant, PostHog, Sentry, Vercel, Meta, and authenticated GTM API currently fail closed with structured credential/scope/config errors until external access is corrected."
+        "Live provider reads are available through 22 canonical read-only tools, including schema-bound provider probes for Shopify Admin, Shopify Storefront, GA4 Data API, Merchant API, Google Ads REST/GAQL account access, campaign performance, conversion actions, search terms, PostHog Projects API, PostHog Query API, Sentry Issues API, Vercel Deployments API, public sGTM/GTM endpoints, Meta Dataset Quality API, public Microsoft UET endpoints, and authenticated GTM API workspaces. provider_access_remediation_report gives ChatGPT an explicit provider-by-provider fix list without secret values. Current provider success still depends on credentials, IAM scopes, developer tokens, project ids, provider API access, and the active local env. Public sGTM/GTM endpoints and public Microsoft UET endpoints verify live in isolated worktrees; Shopify, Google Ads, GA4, Merchant, PostHog, Sentry, Vercel, Meta, and authenticated GTM API may fail closed with structured credential/scope/config errors until the same env and credential paths are present."
       ]
     }
   ]
