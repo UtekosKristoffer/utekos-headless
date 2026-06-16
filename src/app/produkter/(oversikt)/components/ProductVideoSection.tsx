@@ -84,6 +84,7 @@ export function ProductVideoSection() {
             <div className='animate-header-item mt-12'>
               <Link
                 href={'/produkter/utekos-mikrofiber' as Route}
+                prefetch={false}
                 data-track='ProductVideoSectionShopNowClick'
                 className='group/btn px-4 inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-(--primary) py-4 text-[1rem] font-utekos-text-medium text-havdyp transition-all duration-300 hover:bg-white hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(255,255,255,0.2)] focus:outline-none focus:ring-2 focus:ring-very-peri focus:ring-offset-2 focus:ring-offset-havdyp'
               >

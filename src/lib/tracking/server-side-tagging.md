@@ -9,7 +9,7 @@
 - Meta Pixel og direkte Meta CAPI er de eneste Meta-kanalene.
 - Meta Signals Gateway og Cloud Run brukes ikke.
 
-## Verifiserte endepunkter (2026-06-11)
+## Verifiserte endepunkter (2026-06-15)
 
 | Endepunkt                                                                   | Forventet     | Status |
 | --------------------------------------------------------------------------- | ------------- | ------ |
@@ -21,6 +21,8 @@
 | `https://cloud.server.utekos.no/gtag/js?id=GT-P3JGLNDZ`                    | Google tag    | 200    |
 | `https://cloud.server.utekos.no/gtag/js?id=AW-18180376403`                 | Google Ads    | 200    |
 | `https://cloud.server.utekos.no/gtag/js?id=G-FCES3L0M9M`                   | measurement ID, ikke loader | 400 |
+| `https://bat.bing.com/bat.js`                                              | Microsoft UET browser tag | 200 |
+| `https://bat.bing.com/p/action/97247724.js`                                | Microsoft UET action loader | 200 |
 
 `GT-MKRLF5WK` er kanonisk Google-tag. Den serverte konfigurasjonen inkluderer destination IDs
 `G-FCES3L0M9M` og `AW-18180376403`. Direkte `G-FCES3L0M9M`-script er derfor ikke et
@@ -33,15 +35,17 @@ layout-scripts, så autoblocker prependes via `HTMLRewriter` i [`src/proxy.ts`](
 erstatter `middleware.ts`). Lokalt (uten Vercel Edge) faller vi tilbake til
 [`UsercentricsAutoblockerScript.tsx`](../../components/cookie-consent/UsercentricsAutoblockerScript.tsx).
 
-`<head>`-rekkefølge i [`UsercentricsScript.tsx`](../../components/cookie-consent/UsercentricsScript.tsx) og
-[`layout.tsx`](../../app/layout.tsx):
+`<head>`-rekkefølge i [`UsercentricsScript.tsx`](../../components/cookie-consent/UsercentricsScript.tsx):
 
 1. `autoblocker.js` (sync, først — via proxy på Vercel)
 2. Google Consent Mode defaults (`denied` fail-closed)
 3. `https://cloud.server.utekos.no/uc-consent-signals.js` (sync, **før** CMP)
 4. `loader.js` (async, `data-settings-id`)
-5. GTM via [`GoogleTagManagerScript.tsx`](../../components/analytics/GoogleTagManagerScript.tsx) — lastes
-   tidlig; Consent Mode styrer tag-firing, ikke script-montering
+
+GTM lastes ikke lenger globalt i `<head>`. [`ConsentGatedGoogleTagManager.tsx`](../../components/analytics/ConsentGatedGoogleTagManager.tsx)
+monterer [`GoogleTagManagerScript.tsx`](../../components/analytics/GoogleTagManagerScript.tsx) først etter
+`Google Analytics` eller `Google Ads`-samtykke og etter page-settle/idle. DataLayer og Consent Mode defaults
+opprettes fortsatt tidlig, slik at events kan pushes før containeren lastes.
 
 Nettleseren bruker `ucEvent`; serverrutene leser `ucConsentAllowedDps` fra requesten.
 
@@ -84,6 +88,13 @@ NEXT_PUBLIC_ENABLE_MICROSOFT_UET_IN_DEV=1
 GOOGLE_BROWSER_EVENT_TRANSPORT=sgtm
 MICROSOFT_UET_CAPI_TOKEN=<token from Microsoft Advertising UET tag setup; optional but required for server-side purchase>
 ```
+
+Microsoft CAPI-tokenet er ikke det samme som developer token. Offisiell Microsoft-dokumentasjon sier at
+tokenet kan hentes i Microsoft Advertising UI ved å velge `Use Conversions API` på UET-tagen, eller via
+Campaign Management-operasjonen
+[`GetUetTagAuthKey`](https://learn.microsoft.com/en-us/advertising/campaign-management-service/getuettagauthkey?view=bingads-13).
+API-operasjonen krever OAuth `Authorization: Bearer <access token>`, `DeveloperToken`, `CustomerAccountId`
+og `CustomerId`; `MICROSOFT_DEVELOPER_TOKEN` alene er derfor ikke nok.
 
 Standard GTM-script er direkte sGTM-loader:
 `https://cloud.server.utekos.no/gtm.js?id=GTM-5TWMJQFP`.
@@ -135,6 +146,10 @@ Rollback-versjoner er web `98` og server `15`.
 - Verifiser på **https://utekos.no** (ikke googletagmanager.com): Tag Assistant Connected + GTM Preview
 - Standardstatus, godta, avslå og tilbaketrekking i Tag Assistant
 - `ucEvent`, `ucConsentAllowedDps` og sGTM Preview
+- Microsoft UET browser: `add_to_cart` og `purchase` skal gi 204-respons mot `ti=97247724` med `event_id`,
+  `gv`, `gc`, `prodid`, `pagetype` og `msclkid` når Microsoft-samtykke foreligger.
+- Microsoft UET CAPI: `sendMicrosoftUetPurchase` skal ikke lenger returnere `missing_capi_token` etter at
+  `MICROSOFT_UET_CAPI_TOKEN` er lagt inn i Vercel Production.
 - Meta Pixel og direkte CAPI deler `event_id`
 - Meta sendes aldri via sGTM
 - Browser-GA4 dupliseres ikke via Measurement Protocol når `GOOGLE_BROWSER_EVENT_TRANSPORT=sgtm`

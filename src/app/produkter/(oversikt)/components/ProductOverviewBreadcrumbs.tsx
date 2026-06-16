@@ -15,7 +15,7 @@ export function ProductOverviewBreadcrumbs() {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink render={<Link href='/' />}>Forsiden</BreadcrumbLink>
+              <BreadcrumbLink render={<Link href='/' prefetch={false} />}>Forsiden</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>

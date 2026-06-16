@@ -20,6 +20,7 @@ export function ActiveLink({ href, className, children, ...props }: ActiveLinkPr
   return (
     <Link
       href={href}
+      prefetch={false}
       className={cn(
         navigationMenuTriggerStyle(),
         'text-foreground hover:bg-cloud-dancer/10 hover:text-foreground focus-visible:ring-cloud-dancer/45 data-[state=open]:bg-cloud-dancer/10',

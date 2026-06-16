@@ -1,7 +1,7 @@
 // Path: src/app/produkter/(oversikt)/components/HelpChooseSection.tsx
 
-import { getProducts } from '@/api/lib/products/getProducts'
 import { HelpChooseCard } from '@/app/produkter/(oversikt)/components/HelpChooseCard'
+import { getHelpChooseProducts } from '@/app/produkter/(oversikt)/utils/getHelpChooseProducts'
 
 const PRODUCT_CONFIG = [
   {
@@ -31,9 +31,7 @@ const PRODUCT_CONFIG = [
 ]
 
 export async function HelpChooseSection() {
-  const { body: products } = await getProducts({ first: 100 })
-
-  if (!products) return null
+  const products = await getHelpChooseProducts()
 
   return (
     <section className='relative mb-24 w-full px-4 md:px-6'>

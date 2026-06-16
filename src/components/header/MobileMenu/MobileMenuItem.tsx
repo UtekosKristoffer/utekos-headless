@@ -15,6 +15,7 @@ export function MobileMenuItem({ item }: { item: MenuItem }) {
     return (
       <Link
         href={normalizeShopifyUrl(item.url) as Route}
+        prefetch={false}
         className='group relative flex w-full items-center justify-between rounded-2xl border border-cloud-dancer/10 bg-cloud-dancer/[0.055] px-4 py-4 text-foreground transition-[background,border-color,transform] hover:border-cloud-dancer/18 hover:bg-cloud-dancer/[0.075] focus-visible:ring-2 focus-visible:ring-cloud-dancer/38 active:scale-[0.99]'
       >
         <div className='absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-active:opacity-100 [background:radial-gradient(120%_120%_at_50%_0%,color-mix(in_oklab,var(--cloud-dancer)_12%,transparent),transparent_65%)]' />

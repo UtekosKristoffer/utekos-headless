@@ -16,7 +16,7 @@ export const utekosTextMedium = localFont({
   display: 'swap',
   style: 'normal',
   variable: '--font-utekos-text-medium',
-  preload: true,
+  preload: false,
   fallback: ['sans-serif', 'system-ui', 'Helvetica']
 })
 
@@ -26,7 +26,7 @@ export const utekosTitle = localFont({
   display: 'swap',
   style: 'normal',
   variable: '--font-utekos-title',
-  preload: true,
+  preload: false,
   fallback: ['sans-serif', 'system-ui', 'Helvetica']
 })
 

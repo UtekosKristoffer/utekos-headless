@@ -18,6 +18,7 @@ export default function Header({ menu }: { menu: MenuItem[] }) {
         <div className='flex min-w-0 items-center justify-start'>
           <Link
             href='/'
+            prefetch={false}
             aria-label='Utekos - Til forsiden'
             data-track='HeaderLogoClick'
             className='pl-2 sm:pl-3 lg:hidden'

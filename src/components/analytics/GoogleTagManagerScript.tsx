@@ -1,3 +1,6 @@
+'use client'
+
+import Script from 'next/script'
 import {
   GOOGLE_TAG_MANAGER_ID,
   GTM_RESILIENT_SCRIPT_URL,
@@ -27,10 +30,11 @@ export function GoogleTagManagerScript() {
 
   const scriptUrl = GTM_RESILIENT_SCRIPT_URL || GTM_SGTM_SCRIPT_URL
   return (
-    <script
+    <Script
       id={`gtm-bootstrap-${GOOGLE_TAG_MANAGER_ID}`}
-      suppressHydrationWarning
-      dangerouslySetInnerHTML={{ __html: createGoogleTagManagerBootstrapScript(scriptUrl) }}
-    />
+      strategy='afterInteractive'
+    >
+      {createGoogleTagManagerBootstrapScript(scriptUrl)}
+    </Script>
   )
 }

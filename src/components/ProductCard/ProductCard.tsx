@@ -128,6 +128,7 @@ export function ProductCard({
       <CardContent className='relative p-0'>
         <Link
           href={productUrl}
+          prefetch={false}
           data-track='ProductCardViewMoreClick'
           onClick={trackProductSelect}
           aria-label={`Se produkt ${product.title}`}
@@ -157,7 +158,7 @@ export function ProductCard({
               quality={100}
               sizes='(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw'
               className='object-cover transition-transform duration-300 group-hover:scale-[1.03]'
-              fetchPriority={isPriority ? 'high' : 'auto'}
+              fetchPriority={isPriority ? 'high' : 'low'}
               loading={isPriority ? 'eager' : 'lazy'}
             />
           </AspectRatio>

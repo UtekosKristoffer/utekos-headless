@@ -1,8 +1,9 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import { LoadWhenVisible } from '@/components/utils/LoadWhenVisible'
 
-export const LazyComfyrobeImageCarousel = dynamic(
+const ComfyrobeImageCarousel = dynamic(
   () => import('./ComfyrobeImageCarousel').then(module => module.ComfyrobeImageCarousel),
   {
     ssr: false,
@@ -14,3 +15,18 @@ export const LazyComfyrobeImageCarousel = dynamic(
     )
   }
 )
+
+const fallback = (
+  <div
+    className='mx-auto aspect-square size-full rounded-[1.35rem] bg-background/45'
+    aria-hidden='true'
+  />
+)
+
+export function LazyComfyrobeImageCarousel() {
+  return (
+    <LoadWhenVisible fallback={fallback}>
+      <ComfyrobeImageCarousel />
+    </LoadWhenVisible>
+  )
+}

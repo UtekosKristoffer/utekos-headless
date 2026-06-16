@@ -8,6 +8,7 @@ export function HeaderLogo() {
     <div className='flex items-center'>
       <Link
         href='/'
+        prefetch={false}
         aria-label='Utekos - Til forsiden'
         data-track='HeaderLogoClick'
       >

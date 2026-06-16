@@ -172,7 +172,7 @@ export function HelpChooseCard({ product, index, glowColor }: HelpChooseCardProp
       className='group relative size-full'
       onMouseLeave={() => setIsSelectingSize(false)}
     >
-      <Link href={`/produkter/${product.handle}` as Route} className='block size-full'>
+      <Link href={`/produkter/${product.handle}` as Route} prefetch={false} className='block size-full'>
         <div className='relative flex aspect-[2/3] h-full flex-col overflow-hidden rounded-3xl border border-white/5 bg-neutral-900 shadow-2xl transition-transform duration-300 md:hover:-translate-y-1'>
           <div className='absolute inset-0 z-0 bg-neutral-800'>
             <AnimatePresence mode='wait'>
@@ -190,6 +190,8 @@ export function HelpChooseCard({ product, index, glowColor }: HelpChooseCardProp
                   fill
                   quality={95}
                   sizes='(max-width: 640px) 50vw, 25vw'
+                  loading='lazy'
+                  fetchPriority='low'
                   className={`object-cover transition-transform duration-700 will-change-transform ${
                     isSelectingSize ? 'scale-105 blur-[2px]' : 'group-hover:scale-105'
                   }`}

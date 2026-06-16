@@ -8,8 +8,6 @@ import { AnnouncementBanner } from '@/components/frontpage/components/SpecialOff
 import { OnlineStoreJsonLd } from './OnlineStoreJsonLd'
 import { CartProviderLoader } from '@/components/providers/CartProviderLoader'
 import { UsercentricsScript } from '@/components/cookie-consent/UsercentricsScript'
-import { GoogleTagManagerScript } from '@/components/analytics/GoogleTagManagerScript'
-import { GoogleTagManagerNoscript } from '@/components/analytics/GoogleTagManagerNoscript'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -93,10 +91,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <UsercentricsScript />
-        <GoogleTagManagerScript />
       </head>
       <body className='bg-background text-foreground antialiased scroll-smooth'>
-        <GoogleTagManagerNoscript />
         <OnlineStoreJsonLd />
         <Suspense fallback={null}>
           <CartProviderLoader>

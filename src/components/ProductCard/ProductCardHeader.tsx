@@ -22,6 +22,7 @@ export function ProductCardHeader({
       <div className='mb-4 flex items-start justify-between gap-4'>
         <Link
           href={productUrl}
+          prefetch={false}
           {...productViewClickProps}
           className='min-w-0 rounded-sm font-utekos-text-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
         >

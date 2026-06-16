@@ -38,6 +38,7 @@ export function ProductCardFooter({
         >
           <Link
             href={productUrl}
+            prefetch={false}
             data-track='ProductCardFooterViewMoreClick'
             {...productViewClickProps}
             aria-label='Se produkt'

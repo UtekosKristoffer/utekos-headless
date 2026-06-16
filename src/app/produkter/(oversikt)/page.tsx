@@ -2,9 +2,8 @@ import { ComparisonTeaser } from '@/app/handlehjelp/sammenlign-modeller/componen
 import { HelpChooseSection } from './components/HelpChooseSection'
 import { ProductsPageFooter } from '@/app/produkter/(oversikt)/components/ProductsPageFooter'
 import { ProductsPageHeader } from '@/app/produkter/(oversikt)/components/ProductsPageHeader'
-import { ProductCarousel } from '@/components/ProductCard/ProductCarousel'
+import { LazyFeaturedProductCarousel } from '@/components/ProductCard/LazyFeaturedProductCarousel'
 import { ComfyrobeFeatureSection } from './components/ComfyrobeFeatureSection'
-import { ProductGridSkeleton } from '@/components/frontpage/Skeletons/ProductGridSkeleton'
 import { VideoSkeleton } from './components/VideoSkeleton'
 import { Suspense } from 'react'
 import { StapperFeatureSection } from './components/StapperFeatureSection/StapperFeatureSection'
@@ -28,14 +27,12 @@ const ProductsPage = async () => {
         <ComparisonTeaser />
 
         <section className='mb-24'>
-          <Suspense fallback={<ProductGridSkeleton />}>
-            <ProductCarousel
-              trackingEventName='ViewCategory'
-              itemListId='produkter-kolleksjon'
-              itemListName='Utekos produktkolleksjon'
-              contentCategory='Utekos produktkategori'
-            />
-          </Suspense>
+          <LazyFeaturedProductCarousel
+            trackingEventName='ViewCategory'
+            itemListId='produkter-kolleksjon'
+            itemListName='Utekos produktkolleksjon'
+            contentCategory='Utekos produktkategori'
+          />
         </section>
 
         <ComfyrobeFeatureSection />

@@ -9,12 +9,21 @@ import { serverActions } from '@/constants/serverActions'
 import { CartIdProvider } from '@/components/providers/CartIdProvider'
 import type { DehydratedState } from '@tanstack/react-query'
 import { UsercentricsConsentProvider } from '@/components/cookie-consent/UsercentricsConsentProvider'
-import { GoogleAnalyticsTracking } from '@/components/analytics/GoogleAnalyticsTracking'
-import { MarketingPixels } from '@/components/analytics/MarketingPixels'
-import { MicrosoftUetTag } from '@/components/analytics/MicrosoftUetTag'
-import { PostHogConsentGate } from '@/components/analytics/PostHogConsentGate'
-import { ConsentGatedServices } from '@/components/analytics/ConsentGatedServices'
-import { PostHogClientProvider } from '@/components/providers/PostHogProvider'
+
+const EssentialTrackingServices = dynamic(
+  () =>
+    import('@/components/analytics/EssentialTrackingServices').then(module => module.EssentialTrackingServices),
+  {
+    ssr: false
+  }
+)
+
+const DeferredTrackingServices = dynamic(
+  () => import('@/components/analytics/DeferredTrackingServices').then(module => module.DeferredTrackingServices),
+  {
+    ssr: false
+  }
+)
 
 const ReactQueryDevtools =
   process.env.NODE_ENV === 'development' ?
@@ -47,13 +56,8 @@ export default function Providers({ children, cartId: initialCartId, dehydratedS
           <ReactQueryDevtools initialIsOpen={false} />
         : null}
       </QueryClientProvider>
-      <GoogleAnalyticsTracking />
-      <MarketingPixels />
-      <MicrosoftUetTag />
-      <PostHogClientProvider>
-        <PostHogConsentGate />
-      </PostHogClientProvider>
-      <ConsentGatedServices />
+      <EssentialTrackingServices />
+      <DeferredTrackingServices />
     </UsercentricsConsentProvider>
   )
 }

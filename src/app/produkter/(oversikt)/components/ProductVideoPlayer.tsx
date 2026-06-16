@@ -13,6 +13,7 @@ type ProductVideoPlayerProps = {
 
 export function ProductVideoPlayer({ src, poster }: ProductVideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false)
   const [playbackFailed, setPlaybackFailed] = useState(false)
 
   useEffect(() => {
@@ -23,22 +24,12 @@ export function ProductVideoPlayer({ src, poster }: ProductVideoPlayerProps) {
     video.defaultMuted = true
     video.playsInline = true
 
-    const tryPlay = () => {
-      const playPromise = video.play()
-
-      if (playPromise) {
-        playPromise.catch(() => {
-          setPlaybackFailed(true)
-        })
-      }
-    }
-
     const observer = new IntersectionObserver(
       entries => {
         const isVisible = entries.some(entry => entry.isIntersecting)
 
         if (isVisible) {
-          tryPlay()
+          setShouldLoadVideo(true)
           return
         }
 
@@ -56,20 +47,34 @@ export function ProductVideoPlayer({ src, poster }: ProductVideoPlayerProps) {
     }
   }, [])
 
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video || !shouldLoadVideo) return
+
+    video.load()
+
+    const playPromise = video.play()
+
+    if (playPromise) {
+      playPromise.catch(() => {
+        setPlaybackFailed(true)
+      })
+    }
+  }, [shouldLoadVideo])
+
   return (
     <div className='relative'>
       <video
         ref={videoRef}
-        autoPlay
         muted
         loop
         playsInline
         poster={poster}
-        preload='auto'
+        preload='none'
         className='block size-full object-cover'
         aria-label='Produktvideo som viser Utekos i bruk'
       >
-        <source src={src} type='video/mp4' />
+        {shouldLoadVideo && <source src={src} type='video/mp4' />}
       </video>
 
       {playbackFailed && (

@@ -68,6 +68,7 @@ export function AnnouncementBanner() {
     >
       <Link
         href='/skreddersy-varmen'
+        prefetch={false}
         data-track='AnnouncementBannerClick'
         aria-label='Se tilbudet på Utekos TechDown til kr 1790'
         className='group block w-full px-10 py-1 text-center tracking-wide font-medium  outline-none transition-colors focus-visible:ring-2 focus-visible:ring-kombu-green/50 focus-visible:ring-offset-2 focus-visible:ring-offset-overcast sm:px-12'

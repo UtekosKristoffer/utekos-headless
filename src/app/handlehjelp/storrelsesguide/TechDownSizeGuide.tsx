@@ -31,8 +31,7 @@ export function TechDownSizeGuide() {
               textColor='var(--background)'
               className='mb-5 px-4 py-2 text-sm'
             />
-            <h2 className='text-3xl font-bold leading-[1.05]   sm:text-5xl'>
-          
+            <h2 className='text-3xl font-bold leading-[1.05] sm:text-5xl'>
               Utekos TechDown™ - presisjon i hver størrelse
             </h2>
             <p className='mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-foreground'>
