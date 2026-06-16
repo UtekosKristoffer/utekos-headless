@@ -49,6 +49,49 @@ function profileServerNames(profile) {
   return new Set((profile?.servers ?? []).map(server => server?.snapshot?.server?.name).filter(Boolean))
 }
 
+function checkCanonicalSurface(checks, profile) {
+  check(
+    checks,
+    `profile:${profile.id}:surface-authority`,
+    'ok',
+    `${profile.mcpSurface ?? 'canonical stdio'} via ${profile.mcpCommand}`
+  )
+
+  if (profile.tunnelTarget === 'insight') {
+    const canonical = run('npm', ['run', 'mcp:insight:doctor'], { timeout: 120000 })
+    check(
+      checks,
+      `profile:${profile.id}:canonical-surface`,
+      canonical.status === 0 ? 'ok' : 'error',
+      canonical.status === 0 ? 'schema-bound Utekos tools OK' : firstLine(canonical.stderr) || firstLine(canonical.stdout) || 'canonical doctor failed'
+    )
+  }
+
+  if (profile.tunnelTarget === 'browser') {
+    const canonical = run('npm', ['run', 'mcp:browser:doctor'], { timeout: 120000 })
+    check(
+      checks,
+      `profile:${profile.id}:canonical-surface`,
+      canonical.status === 0 ? 'ok' : 'error',
+      canonical.status === 0 ? 'schema-bound browser tools OK' : firstLine(canonical.stderr) || firstLine(canonical.stdout) || 'browser doctor failed'
+    )
+  }
+
+  if (profile.tunnelTarget === 'commerce-tracking') {
+    const canonical = run('npm', ['run', 'mcp:commerce-tracking:doctor'], { timeout: 120000 })
+    check(
+      checks,
+      `profile:${profile.id}:canonical-surface`,
+      canonical.status === 0 ? 'ok' : 'error',
+      canonical.status === 0 ? 'schema-bound commerce/tracking tools OK' : firstLine(canonical.stderr) || firstLine(canonical.stdout) || 'commerce/tracking doctor failed'
+    )
+  }
+
+  for (const gap of profile.knownGaps ?? []) {
+    check(checks, `profile:${profile.id}:gap`, 'warn', gap)
+  }
+}
+
 function hasDynamicToolsEnabled() {
   const result = run('docker', ['mcp', 'feature', 'ls'])
   if (result.status !== 0) return null
@@ -56,6 +99,11 @@ function hasDynamicToolsEnabled() {
 }
 
 function checkProfile(checks, profile) {
+  if (profile.mcpCommand) {
+    checkCanonicalSurface(checks, profile)
+    return
+  }
+
   const show = run('docker', ['mcp', 'profile', 'show', profile.id, '--format', 'json'])
   if (show.status !== 0) {
     check(checks, `profile:${profile.id}`, 'error', firstLine(show.stderr) || 'missing')
@@ -115,36 +163,6 @@ function checkProfile(checks, profile) {
 
   for (const gap of profile.knownGaps ?? []) {
     check(checks, `profile:${profile.id}:gap`, 'warn', gap)
-  }
-
-  if (profile.mcpCommand && profile.tunnelTarget === 'insight') {
-    const canonical = run('npm', ['run', 'mcp:insight:doctor'], { timeout: 120000 })
-    check(
-      checks,
-      `profile:${profile.id}:canonical-surface`,
-      canonical.status === 0 ? 'ok' : 'error',
-      canonical.status === 0 ? 'schema-bound Utekos tools OK' : firstLine(canonical.stderr) || firstLine(canonical.stdout) || 'canonical doctor failed'
-    )
-  }
-
-  if (profile.mcpCommand && profile.tunnelTarget === 'browser') {
-    const canonical = run('npm', ['run', 'mcp:browser:doctor'], { timeout: 120000 })
-    check(
-      checks,
-      `profile:${profile.id}:canonical-surface`,
-      canonical.status === 0 ? 'ok' : 'error',
-      canonical.status === 0 ? 'schema-bound browser tools OK' : firstLine(canonical.stderr) || firstLine(canonical.stdout) || 'browser doctor failed'
-    )
-  }
-
-  if (profile.mcpCommand && profile.tunnelTarget === 'commerce-tracking') {
-    const canonical = run('npm', ['run', 'mcp:commerce-tracking:doctor'], { timeout: 120000 })
-    check(
-      checks,
-      `profile:${profile.id}:canonical-surface`,
-      canonical.status === 0 ? 'ok' : 'error',
-      canonical.status === 0 ? 'schema-bound commerce/tracking tools OK' : firstLine(canonical.stderr) || firstLine(canonical.stdout) || 'commerce/tracking doctor failed'
-    )
   }
 }
 

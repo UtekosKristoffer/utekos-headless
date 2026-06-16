@@ -13,8 +13,9 @@
 Do not write, deploy, mutate provider resources, or conclude runtime state from memory. Use the appropriate profile:
 
 - `utekos_chatgpt_insight`: default read/verify.
-- `utekos_chatgpt_insight` canonical tools: `insight_bootstrap`, `read_context_bundle`, `tool_inventory`, `safe_git_overview`, `project_locate`, `read_project_files`.
+- `utekos_chatgpt_insight` canonical tools: `insight_bootstrap`, `read_context_bundle`, `tool_inventory`, `connector_surface_audit`, `safe_git_overview`, `project_locate`, `read_project_files`.
 - Default ChatGPT Insight must not use `mcp-find`, `mcp-add`, `mcp-activate-profile`, or `mcp-exec`; Docker dynamic tools are intentionally disabled.
+- If ChatGPT sees Docker catalog tools or `OutputSchema anbefales` warnings in the default Insight app, call `connector_surface_audit`; this indicates stale connector metadata or a non-canonical app surface.
 - `utekos_chatgpt_browser`: runtime/browser verification.
 - `utekos_chatgpt_browser` canonical tools: `browser_bootstrap`, `browser_open`, `browser_resize`, `browser_snapshot`, `browser_console_messages`, `browser_network_requests`, `browser_network_request`, `browser_take_screenshot`, `browser_accessibility_audit`, `browser_performance_audit`, `browser_devtools_metrics`, `browser_close`.
 - `utekos_chatgpt_live_ops`: explicit write mode.

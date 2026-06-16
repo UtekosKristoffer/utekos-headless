@@ -21,6 +21,7 @@
         "insight_bootstrap",
         "read_context_bundle",
         "tool_inventory",
+        "connector_surface_audit",
         "safe_git_overview",
         "project_locate",
         "read_project_files"

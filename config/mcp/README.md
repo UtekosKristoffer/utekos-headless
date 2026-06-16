@@ -92,16 +92,17 @@ Other targets: `browser`, `live-ops`, `commerce-tracking`.
 node scripts/mcp/utekos-insight-server.mjs
 ```
 
-This is intentional. ChatGPT should see six schema-bound read-only tools:
+This is intentional. ChatGPT should see seven schema-bound read-only tools:
 
 - `insight_bootstrap`
 - `read_context_bundle`
 - `tool_inventory`
+- `connector_surface_audit`
 - `safe_git_overview`
 - `project_locate`
 - `read_project_files`
 
-It should not call Docker MCP admin tools such as `mcp-find`, `mcp-add`, `mcp-activate-profile`, or `mcp-exec` in the default insight app. If ChatGPT still sees those tools after this change, recreate or reconnect the ChatGPT app while `npm run mcp:tunnel:run:insight` is running so the connector discovers the new tool surface.
+It should not call Docker MCP admin tools such as `mcp-find`, `mcp-add`, `mcp-activate-profile`, or `mcp-exec` in the default insight app. If ChatGPT still sees those tools, Docker catalog tools, or "OutputSchema anbefales" warnings in default Insight, call `connector_surface_audit`, then recreate or reconnect the ChatGPT app while `npm run mcp:tunnel:run:insight` is running so the connector discovers the canonical Utekos tool surface.
 
 Do not ask ChatGPT to activate `utekos_chatgpt_insight` with `mcp-activate-profile`. The profile is already selected by the tunnel-client command. If ChatGPT tries `mcp-activate-profile` or `mcp-find`, it is using stale connector metadata from an older Docker MCP surface. Restarting `tunnel-client` is not enough by itself; refresh or recreate the ChatGPT app so tool discovery runs against `node scripts/mcp/utekos-insight-server.mjs`.
 

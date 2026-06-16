@@ -66,6 +66,7 @@
 - Docker MCP ChatGPT profiles are declared in `config/mcp/chatgpt-profiles.json`.
 - OpenAI tunnel target runner is `scripts/mcp/openai-tunnel.mjs`.
 - Default ChatGPT profile is read/verify; write mode is separate.
+- Default ChatGPT Insight uses `connector_surface_audit` to detect stale connector metadata, Docker catalog tool leakage, missing OutputSchema warnings, and forbidden `mcp-*` admin tool exposure.
 
 ## Known V1 Gaps
 
