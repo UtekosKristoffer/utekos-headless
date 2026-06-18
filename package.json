@@ -117,7 +117,7 @@
     "@vercel/speed-insights": "^2.0.0",
     "@xstate/react": "^6.1.0",
     "@xstate/store": "^3.17.5",
-    "ai": "^6.0.194",
+    "ai": "^6.0.206",
     "axe-core": "^4.12.1",
     "botid": "^1.5.11",
     "capi-param-builder-nodejs": "^1.3.1",
